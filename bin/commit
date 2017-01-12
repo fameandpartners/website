@@ -1,114 +1,118 @@
 #!/usr/bin/env ruby
 
-STATUSES = {
-  '1'=> '#in progress',
-  '2'=> '#start-review',
-  '3'=> '#ready'
-}
+class Commit
+  attr_accessor :status,
+                :message,
+                :issue_type,
+                :github_issue,
+                :jira_issue
 
-def get_input()
-  input = gets.chomp.downcase
-  puts ''
-  input
-end
+  STATUSES = {
+    '1'=> '#in progress',
+    '2'=> '#start-review',
+    '3'=> '#ready'
+  }
 
-def malformed_branch?()
-  branch = %x( git branch | grep '*' ).tr('* ', '')
-  $issue_type, $github_issue, $jira_issue = branch.split(/\//)
-  if $issue_type.nil? || $github_issue.nil? || $jira_issue.nil?
-    malformed_branch_text(branch)
-    return true
+  def get_input()
+    input = gets.chomp.downcase
+    puts ''
+    input
   end
-end
 
-def malformed_branch_text(branch)
-  puts '*' * 80
-  puts "*WARNING* [POLICY] Your branch, '#{branch.strip}', is a malformed branch name."
-  puts "To avoid annoying additional questions in the future, please follow the branch convention:"
-  puts "<TYPE>/<Github Issue Number>/<Jira Issue Number>/<branch-name>"
-  puts ""
-  puts "For example: 'feature/123/WEBSITE-1230/landing-page'"
-  puts '*' * 80
-  puts ""
-  puts ""
-end
+  def malformed_branch?()
+    branch = %x( git branch | grep '*' ).tr('* ', '')
+    self.issue_type, self.github_issue, self.jira_issue = branch.split(/\//)
+    if self.issue_type.nil? || self.github_issue.nil? || self.jira_issue.nil?
+      malformed_branch_text(branch)
+      return true
+    end
+  end
 
-def unrecognized
-  puts 'Unrecognized Input, Try Again...'
-  puts ''
-end
+  def malformed_branch_text(branch)
+    puts '*' * 80
+    puts "*WARNING* [POLICY] Your branch, '#{branch.strip}', is a malformed branch name."
+    puts "To avoid annoying additional questions in the future, please follow the branch convention:"
+    puts "<TYPE>/<Github Issue Number>/<Jira Issue Number>/<branch-name>"
+    puts ""
+    puts "For example: 'feature/123/WEBSITE-1230/landing-page'"
+    puts '*' * 80
+    puts ""
+    puts ""
+  end
 
-def commit_message_prompt
-  puts "Commit message:"
-  $message = get_input
-end
+  def unrecognized
+    puts 'Unrecognized Input, Try Again...'
+    puts ''
+  end
 
-def status_change_prompt
-  puts "Does this require a Jira status change? (y/n):"
-  input = get_input
-  case input
+  def commit_message_prompt
+    puts "Commit message:"
+    self.message = get_input
+  end
+
+  def status_change_prompt
+    puts "Does this require a Jira status change? (y/n):"
+    input = get_input
+    case input
     when 'y'
       select_status_prompt
-  end
-end
-
-def select_status_prompt
-  puts "Status Codes"
-  puts "*" * 15
-  puts "[1] In Progress"
-  puts "[2] Needs Review"
-  puts "[3] Ready for Testing"
-  puts "[c] or cancel"
-  puts "-" * 15
-
-  input = get_input
-  case input
-  when '1', '2', '3'
-    $status = STATUSES[input]
-  when 'c'
-    return
-  else
-    unrecognized
-    select_status_prompt
-  end
-end
-
-def additional_questions_prompt
-  github_issue_prompt
-  jira_issue_prompt
-end
-
-def github_issue_prompt
-  puts "What is the GITHUB issue number for this branch?:"
-  input = get_input.to_i
-  $github_issue = input == 0 ? '' : input
-end
-
-def jira_issue_prompt
-  puts "What is the JIRA issue for this branch?:"
-  input = get_input.upcase
-  $jira_issue = input if input.include? 'WEBSITE-'
-end
-
-def main
-  $status = ''
-  $message = ''
-  $issue_type = ''
-  $github_issue = ''
-  $jira_issue = ''
-
-  commit_message_prompt
-  status_change_prompt
-  if malformed_branch?
-    additional_questions_prompt
+    end
   end
 
-  final_message = "[#{$jira_issue.strip}] ##{$github_issue.strip} #{$message.strip} #{$status.strip}".strip
-  %x( git commit -m '#{final_message}')
+  def select_status_prompt
+    puts "Status Codes"
+    puts "*" * 15
+    puts "[1] In Progress"
+    puts "[2] Needs Review"
+    puts "[3] Ready for Testing"
+    puts "[c] or cancel"
+    puts "-" * 15
 
-  puts 'COMMIT SUCCESS!'
-  puts '*' * 80
-  puts final_message
+    input = get_input
+    case input
+    when '1', '2', '3'
+      self.status = STATUSES[input]
+    when 'c'
+      return
+    else
+      unrecognized
+      select_status_prompt
+    end
+  end
+
+  def additional_questions_prompt
+    github_issue_prompt
+    jira_issue_prompt
+  end
+
+  def github_issue_prompt
+    puts "What is the GITHUB issue number for this branch?:"
+    input = get_input.to_i
+    self.github_issue = input == 0 ? '' : input
+  end
+
+  def jira_issue_prompt
+    puts "What is the JIRA issue for this branch?:"
+    input = get_input.upcase
+    self.jira_issue = input if input.include? 'WEBSITE-'
+  end
+
+  def main
+    commit_message_prompt
+    status_change_prompt
+    if malformed_branch?
+      additional_questions_prompt
+    end
+
+    final_message = "[#{self.jira_issue.strip}] ##{self.github_issue.strip} #{self.message.strip} #{self.status.strip}".strip
+    %x( git commit -m '#{final_message}')
+
+    puts 'COMMIT SUCCESS!'
+    puts '*' * 80
+    puts final_message
+  end
+
 end
 
-main
+
+commit = Commit.new.main
