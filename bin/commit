@@ -20,7 +20,7 @@ class Commit
   end
 
   def malformed_branch?()
-    branch = %x( git branch | grep '*' ).tr('* ', '')
+    branch = %x( git rev-parse --abbrev-ref HEAD )
     self.issue_type, self.github_issue, self.jira_issue = branch.split(/\//)
     if self.issue_type.nil? || self.github_issue.nil? || self.jira_issue.nil?
       malformed_branch_text(branch)
