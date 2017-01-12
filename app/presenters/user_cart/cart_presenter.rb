@@ -17,7 +17,8 @@ class UserCart::CartPresenter < OpenStruct
       display_total: display_total.to_s,
       taxes: taxes,
       masterpass_available: masterpass_available?,
-      masterpass_is_production: masterpass_is_production?
+      masterpass_is_production: masterpass_is_production?,
+      delivery_delay: Features.active?(:cny_delivery_delays)
     }
   end
 
