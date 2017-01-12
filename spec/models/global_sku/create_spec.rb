@@ -18,7 +18,7 @@ describe GlobalSku::Create do
       before(:each) { GlobalSku.create(sku: creator.generate_sku) }
 
       it do
-        creator.valid?
+        expect(creator).not_to be_valid
         expect(creator.errors.messages).to include(style_number: ['has already been taken'])
       end
     end
@@ -35,7 +35,7 @@ describe GlobalSku::Create do
       }
 
       it do
-        creator.valid?
+        expect(creator).not_to be_valid
         expect(creator.errors.messages).to include({
           height:     ['is not included in the list'],
           color_name: ['is not included in the list'],

@@ -91,7 +91,7 @@ class GlobalSku
     end
 
     def color
-      Spree::OptionValue.find_by_name(color_name)
+      Spree::OptionValue.where(name: color_name).first
     end
 
     def customization_value_ids

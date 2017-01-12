@@ -53,7 +53,7 @@ module Skus
 
     # Height is also considered a customization
     private def has_personalization?
-      !@height.blank? || !@customization_value_ids.blank?
+      @height.present? || @customization_value_ids.present?
     end
   end
 end
