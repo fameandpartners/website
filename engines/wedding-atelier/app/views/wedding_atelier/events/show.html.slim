@@ -1,5 +1,365 @@
-h1 events
+#events__moodboard
+  #chat.left-content--desktop.col-sm-6
+    .chat-general-info.center-block
+      .chat-header-left-side.pull-left
+        | <strong>Who's online</strong>:
+        | Janine, Tania, <s class="text-muted">Nyreee</s>, <s class="text-muted">Kate</s>
+      .chat-header-right-side.pull-right
+        | <strong>Fame stylist online: </strong>
+        | <span class="stylist-name">Amber: </span>
+        | <img src="http://localhost:3000/assets/profile-placeholder.jpg" class="stylist-photo">
+    .chat-log
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Hey lovely, welcome to your amazing new weddings board. Here
+          | you're going to be able to chat with me, your bridesmadis and
+          | create some stunning bridal looks.
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Why don't you start by creating your first dress, just select
+          | "<strong>ADD YOUR FIRST DRESS</strong>" to the right.
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | This is what it looks like..
+      .msg-image
+        .msg-data
+          .profile
+            img.photo  src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .attachment <img src="uploadedimagsource">
+    .chat-actions
+      = link_to '#'
+        button.btn.upload-image
+      .message-input
+        | <input type="text" value="">
+      .btn-send-container
+        | <button class="btn btn-black btn-send-to-chat">send</button>
 
-name
+  #atelier.right-content--desktop.col-sm-6
+    .right-container
+      h1.moodboard-title.text-center Janine's wedding - in 150 days
 
-= @event.name
+      .moodboard-tabs.center-block
+        /! Nav tabs
+        ul.nav.nav-tabs.center-block role="tablist"
+          li.active role="presentation"
+            a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab"  Bridesmaid dresses
+          li role="presentation"
+            a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"  Wedding details
+          li role="presentation"
+            a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"  Manage bridal party
+          li role="presentation"
+            a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"  Bridal Gowns
+        /! Tab panes
+        .tab-content
+          #bridesmaid-dresses.tab-pane.active role="tabpanel"
+            /! IF there's not dresses ...
+            .add-dress-box.hidden
+              | <button class="add">Add your first dress</button>
+
+            /! IF there are dresses ...
+            .dresses-actions.text-center
+              = link_to '#', class: 'btn-transparent btn-create-a-dress'
+                em Create
+                |  a dress
+
+            .dresses-list
+              .dress-boxes
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+
+          #wedding-details.tab-pane role="tabpanel"
+              form.center-block
+                .form-group
+                  label for="input_wedding_board_name"  Name the wedding board
+                  input#input_wedding_board_name.form-control placeholder="" type="text" /
+                .form-group
+                  | <label for="input_wedding_board_name">What is your role in the wedding?</label>
+                  | <select value="option3" id="input_event_role">
+                  |   <option>option1</option><option value="option3">option2</option><option value="option3">option3</option>
+                  | </select>
+
+                .form-group
+                  | <label for="input_number_of_assistants">How many bridesmaids at the wedding</label>
+                  | <input type="number" class="form-control number-field js-number-field" min="0" id="input_number_of_assistants"/>
+
+                .form-group
+                  | <label for="input_date">What is the date of the wedding?</label>
+                  .input-group.date.date-picker
+                    | <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="input_date" />
+                    | <span class="input-group-addon">
+                    | <i class="calendar-icon"></i>
+                    | </span>
+
+                .form-group
+                  button.btn-black.center-block type="submit"  Update
+
+          #manage-bridal-party.tab-pane.center-block role="tabpanel"
+            h1.text-center <em>Janine</em>, intive the bridal party.
+
+            = fancy_facebook_button 'invite with'
+
+            form
+              .form-group
+                | <label for="input_email_address">Email address</label>
+                | <input type="number" class="form-control" placeholder="mail@mail.com" id="input_email_addres" />
+
+              .text-center
+                button.btn-black type="submit"  Send invite
+
+            .invited-people
+              .person
+                .person-name Candy May
+                .person-role Bride
+              .person
+                .person-name Michelle Jones
+                .person-role
+                  | Bridesmaid <span>| </span>
+                  = link_to '#'
+                    | Remove from board
+              .person
+                .person-name Janinecprib@gmail.com
+                .person-role Pending
+              .person
+                .person-name Janinecprib@gmail.com
+                .person-role Pending
+              .person
+                .person-name Janinecprib@gmail.com
+                .person-role Pending
+
+          #bridal-gowns.tab-pane role="tabpanel"  ...
+
+javascript:
+  $(document).ready(function() {
+
+    $('.js-number-field').incrementButton();
+
+    $('#input_event_role').select2({
+      minimumResultsForSearch: Infinity
+    });
+
+    $('.input-group.date').datepicker({
+      format: "dd/mm/yyyy",
+      todayBtn: "linked",
+      autoclose: true,
+      showOnFocus: true
+    }).on('show', function(e){
+      $(this).addClass('active');
+    }).on('hide', function(e){
+      $(this).removeClass('active');
+    });
+  });
+

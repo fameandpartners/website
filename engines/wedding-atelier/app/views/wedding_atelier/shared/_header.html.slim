@@ -1,1 +1,47 @@
-= link_to 'Sign out', spree.destroy_user_session_path if current_spree_user
+.shared__header
+  .header-2-col
+    .left-nav.col-xs-1.col-sm-6.col-md-6.text-left
+        = link_to '', '#', class: 'arrow'
+        = link_to '#', class: 'text-link'
+         | Back to wedding board
+
+    .center-nav.col-xs-11.col-sm-6.col-md-6.center-block
+      span.title You are designing The Wonderland
+
+      .right-floating-icons
+        ul.links-list
+          li
+            = link_to "#"
+              i.help
+          li
+            = link_to "#"
+              i.cart
+
+  .header-3-col
+    .left-nav.hidden-xs.col-md-4.text-left
+      ul.links-list
+        li
+          = profile_image_url
+        - if defined? @event
+          li
+            = @event.name
+        li BRIDE
+        li
+          = link_to 'MY ACCOUNT'
+
+    .left-nav.col-xs-4.hidden-sm.hidden-md.hidden-lg.text-left
+      = link_to '#'
+        i.hamburguer
+
+
+    .center-nav.col-xs-4.col-md-4.center-block
+      span class="logo"
+
+    .right-nav.col-xs-4.col-md-4.text-right
+      ul.links-list
+        li
+          = link_to "#"
+            i.help
+        li
+          = link_to "#"
+            i.cart
