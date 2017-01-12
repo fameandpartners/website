@@ -50,7 +50,7 @@ var AccountDetails = React.createClass({
   render: function () {
     return (
       <div className="account-details">
-        <form>
+        <form autoComplete={'off'}>
           <div className="account-details-left col-xs-12 col-sm-6">
             <h1>Account details</h1>
             <div className="form-group">
