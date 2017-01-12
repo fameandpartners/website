@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WeddingAtelier::EventDress do
-  subject(:dress) { create(:wedding_atelier_event_dress) }
+  subject(:dress) { create(:wedding_atelier_event_dress, fit: nil, style: nil) }
   let(:user) { create(:spree_user) }
 
   describe '#liked_by?' do
@@ -29,6 +29,26 @@ describe WeddingAtelier::EventDress do
     it 'dislikes the dress by the given user' do
       dress.like_by(user)
       expect{dress.dislike_by(user)}.to change{dress.reload.likes_count}.by(-1)
+    end
+  end
+
+  describe '#images' do
+    let(:custom_dress) do
+      create(:wedding_atelier_event_dress,
+      product: create(:spree_product, sku: '1234'),
+      fabric: create(:option_value, name: 'HG'),
+      color: create(:option_value, name: 'black'),
+      style: create(:customisation_value,presentation: 'style', position: 0, name: 'S5'),
+      fit: create(:customisation_value,presentation: 'fit', position: 1, name: 'F4'),
+      length: create(:option_value, name: 'AK'))
+    end
+
+    it 'returns the file names of images related to this dress' do
+      images = custom_dress.images
+      expect(images[0][:thumbnail]).to eq '/assets/wedding-atelier/dresses/180x260/1234-HG-BLACK-S5-F4-AK-FRONT.jpg'
+      expect(images[0][:moodboard]).to eq '/assets/wedding-atelier/dresses/280x404/1234-HG-BLACK-S5-F4-AK-FRONT.jpg'
+      expect(images[1][:normal]).to eq '/assets/wedding-atelier/dresses/900x1300/1234-HG-BLACK-S5-F4-AK-BACK.jpg'
+      expect(images[1][:large]).to eq '/assets/wedding-atelier/dresses/1800x2600/1234-HG-BLACK-S5-F4-AK-BACK.jpg'
     end
   end
 

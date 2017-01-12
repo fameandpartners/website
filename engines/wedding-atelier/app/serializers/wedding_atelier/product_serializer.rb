@@ -6,7 +6,8 @@ module WeddingAtelier
                :image,
                :presentation,
                :price,
-               :variant_id
+               :variant_id,
+               :sku
 
     has_many :styles, serializer: WeddingAtelier::CustomisationValueSerializer
     has_many :fits, serializer: WeddingAtelier::CustomisationValueSerializer

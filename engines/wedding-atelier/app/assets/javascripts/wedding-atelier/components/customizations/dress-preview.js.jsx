@@ -30,28 +30,6 @@ var DressPreview = React.createClass({
     });
   },
 
-  getImage: function () {
-    var lengthMap = { ankle: 'AK', petti: 'PT', midi: 'MD', mini: 'MN', maxi: 'MX', knee: 'KN'};
-    var customizations = this.props.selectedOptions;
-    var silhouette = customizations.silhouette ? customizations.silhouette.description : '';
-    var fabric = customizations.fabric ? customizations.fabric.name.split('-').map(function(word){return word[0];}).join('') : 'HG';
-    var colour = customizations.colour ? customizations.colour.name : 'BLACK';
-    var style = 'S' + (customizations.style ? customizations.style.id : 0);
-    var fit = 'F' + (customizations.fit ? customizations.fit.id : 0);
-    var length = customizations.length && lengthMap[customizations.length.name] ? lengthMap[customizations.length.name] : 'AK';
-
-    var basePath = '/assets/wedding-atelier/dresses/';
-    var imageName = [silhouette, fabric, colour, style, fit, length].join('-').toUpperCase() + '-';
-    return ['FRONT', 'BACK'].map(function (type) {
-      return {
-        thumbnail: basePath + '180x260/' + imageName + type + '.png',
-        moodboard: basePath + '280x404/' + imageName + type + '.png',
-        normal: basePath + '900x1300/' + imageName + type + '.jpg',
-        large: basePath + '1800x2600/' + imageName + type + '.jpg'
-      };
-    });
-  },
-
   thumbnailSelectedHandle: function (index) {
     this.isLoading();
     this.setState({selectedImageIndex: index, loading: true});
@@ -105,8 +83,7 @@ var DressPreview = React.createClass({
   },
 
   render: function() {
-    var images = this.getImage();
-
+    var images = new DressImageBuilder(this.props.selectedOptions).styles();
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
