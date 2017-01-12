@@ -189,20 +189,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     margin-top:10px
   }
 
-  .category--item {
-    position: relative;
-    min-height: 420px;
-
-    &:hover .media-wrap {
-      opacity: 0.8;
-    }
-
-    @media(max-width: 415px){
-      min-height: 380px;
-    }
-
-  }
-
 }
 
 .on-sale * {
