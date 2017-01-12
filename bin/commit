@@ -19,10 +19,21 @@ class Commit
     input
   end
 
+  def check_staged_for_commit()
+    staged_count = %x(git diff --cached --numstat | wc -l).to_i
+    if staged_count == 0
+      puts 'Please stage files for a commit!'
+      puts ''
+      exit 1
+    end
+  end
+
   def malformed_branch?()
     branch = %x( git rev-parse --abbrev-ref HEAD )
-    self.issue_type, self.github_issue, self.jira_issue = branch.split(/\//)
-    if self.issue_type.nil? || self.github_issue.nil? || self.jira_issue.nil?
+    self.github_issue = /#\d+/.match(branch).to_s
+    self.jira_issue = /WEBSITE-\d+/i.match(branch).to_s
+
+    if self.jira_issue.empty?
       malformed_branch_text(branch)
       return true
     end
@@ -32,7 +43,7 @@ class Commit
     puts '*' * 80
     puts "*WARNING* [POLICY] Your branch, '#{branch.strip}', is a malformed branch name."
     puts "To avoid annoying additional questions in the future, please follow the branch convention:"
-    puts "<TYPE>/<Github Issue Number>/<Jira Issue Number>/<branch-name>"
+    puts "<TYPE>/<Jira Issue Number>/<branch-name>#<Optional-Github-Issue>"
     puts ""
     puts "For example: 'feature/123/WEBSITE-1230/landing-page'"
     puts '*' * 80
@@ -87,24 +98,30 @@ class Commit
 
   def github_issue_prompt
     puts "What is the GITHUB issue number for this branch?:"
+    puts "(c): Cancel"
+    puts '*' * 80
+    puts ''
     input = get_input.to_i
     self.github_issue = input == 0 ? '' : input
   end
 
   def jira_issue_prompt
     puts "What is the JIRA issue for this branch?:"
+    puts '*' * 80
+    puts ''
     input = get_input.upcase
     self.jira_issue = input if input.include? 'WEBSITE-'
   end
 
   def main
+    check_staged_for_commit
     commit_message_prompt
     status_change_prompt
     if malformed_branch?
       additional_questions_prompt
     end
 
-    final_message = "[#{self.jira_issue.strip}] ##{self.github_issue.strip} #{self.message.strip} #{self.status.strip}".strip
+    final_message = "[#{self.jira_issue.to_s.strip}] #{self.github_issue.to_s.strip} #{self.message.to_s.strip} #{self.status.to_s.strip}".strip
     %x( git commit -m '#{final_message}')
 
     puts 'COMMIT SUCCESS!'
