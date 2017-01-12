@@ -32,10 +32,13 @@ var MyAccount = React.createClass({
         </ul>
         <div className="tab-content">
           <div id="my-orders" className="tab-pane fade"></div>
-          <div id="account-details" className="tab-pane fade"></div>
+          <div id="account-details" className="tab-pane fade">
+            <AccountDetails
+              user={this.props.user.user}/>
+          </div>
           <div id="size-profile" className="tab-pane fade in active">
             <SizeProfile
-              user={this.props.user}
+              user={this.props.user.user}
               siteVersion={this.props.siteVersion}
               {...this.props.sizeProfile}/>
           </div>
