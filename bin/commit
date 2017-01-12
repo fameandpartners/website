@@ -127,7 +127,7 @@ def main
   end
 
   commit_message = "[#{$jira_issue.strip}] ##{$github_issue.strip} #{$message.strip} #{$status.strip}"
-  %x( git commit -m #{commit_message})
+  %x( git commit -m #{commit_message.strip})
   exit 1
 end
 
