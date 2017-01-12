@@ -9,7 +9,11 @@ var AccountDetails = React.createClass({
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
-      dateOfBirth: user.dob
+      dateOfBirth: user.dob,
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      newsletter: user.newsletter || false
     };
   },
 
@@ -29,20 +33,18 @@ var AccountDetails = React.createClass({
     }).on('changeDate', this.dobChangedHandle);
   },
 
-  firstNameChangedHandle: function (e) {
-    this.setState({firstName: e.target.value});
-  },
-
-  lastNameChangedHandle: function (e) {
-    this.setState({lastName: e.target.value});
-  },
-
-  emailChangedHandle: function (e) {
-    this.setState({email: e.target.value});
-  },
-
   dobChangedHandle: function (e) {
     this.setState({dateOfBirth: e.date.toLocaleDateString()});
+  },
+
+  fieldChangedUpdate: function (field, e) {
+    var newState = {};
+    newState[field] = e.target.value;
+    this.setState(newState);
+  },
+
+  newsletterChangedHandle: function (e) {
+    this.setState({newsletter: !this.state.newsletter});
   },
 
   render: function () {
@@ -51,15 +53,15 @@ var AccountDetails = React.createClass({
         <form>
           <div className="form-group">
             <label htmlFor="first-name">First name</label>
-            <input type="text" id="first-name" name="first_name" className="form-control" value={this.state.firstName} onChange={this.firstNameChangedHandle}/>
+            <input type="text" id="first-name" name="first_name" className="form-control" value={this.state.firstName} onChange={this.fieldChangedUpdate.bind(null, 'firstName')}/>
           </div>
           <div className="form-group">
             <label htmlFor="last-name">Last name</label>
-            <input type="text" id="last-name" name="last_name" className="form-control" value={this.state.lastName} onChange={this.lastNameChangedHandle}/>
+            <input type="text" id="last-name" name="last_name" className="form-control" value={this.state.lastName} onChange={this.fieldChangedUpdate.bind(null, 'lastName')}/>
           </div>
           <div className="form-group">
             <label htmlFor="email-address">Email address</label>
-            <input type="email" id="email-address" name="email" className="form-control" value={this.state.email} onChange={this.emailChangedHandle}/>
+            <input type="email" id="email-address" name="email" className="form-control" value={this.state.email} onChange={this.fieldChangedUpdate.bind(null, 'email')}/>
           </div>
           <div className="form-group">
             <label htmlFor="date-of-birth">Date of birth</label>
@@ -69,6 +71,28 @@ var AccountDetails = React.createClass({
                   <i className="calendar-icon"></i>
                 </div>
             </div>
+          </div>
+
+          <h1><em>Change,</em> Password</h1>
+          <div className="form-group">
+            <label htmlFor="current-password">Current password</label>
+            <input type="password" id="current-password" name="current_password" className="form-control" value={this.state.currentPassword} onChange={this.fieldChangedUpdate.bind(null, 'currentPassword')}/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="new-password">New password</label>
+            <input type="password" id="new-password" name="new_password" className="form-control" value={this.state.newPassword} onChange={this.fieldChangedUpdate.bind(null, 'newPassword')}/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirm-password">Confirm new password</label>
+            <input type="password" id="confirm-password" name="confirm_password" className="form-control" value={this.state.confirmPassword} onChange={this.fieldChangedUpdate.bind(null, 'confirmPassword')}/>
+          </div>
+
+          <div className="checkbox">
+            <input refs="newsletter" type="checkbox" checked={this.state.newsletter}/>
+            <label onClick={this.newsletterChangedHandle}>
+              <span></span>
+              <p className="text">Sign up to get the latest trend updates</p>
+            </label>
           </div>
         </form>
       </div>

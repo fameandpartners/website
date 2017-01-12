@@ -7,7 +7,7 @@ var MyAccount = React.createClass({
 
   getInitialState: function () {
     return {
-      activeTab: 0
+      activeTab: 1
     };
   },
 
@@ -32,11 +32,11 @@ var MyAccount = React.createClass({
         </ul>
         <div className="tab-content">
           <div id="my-orders" className="tab-pane fade"></div>
-          <div id="account-details" className="tab-pane fade">
+          <div id="account-details" className="tab-pane fade in active">
             <AccountDetails
               user={this.props.user.user}/>
           </div>
-          <div id="size-profile" className="tab-pane fade in active">
+          <div id="size-profile" className="tab-pane fade">
             <SizeProfile
               user={this.props.user.user}
               siteVersion={this.props.siteVersion}
