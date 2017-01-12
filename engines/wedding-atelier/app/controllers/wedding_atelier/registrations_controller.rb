@@ -102,7 +102,7 @@ module WeddingAtelier
       @heights = WeddingAtelier::Height.definitions
 
       @site_version = env['site_version_code'] || 'us'
-      @dress_sizes = Spree::OptionType.find_by_name('dress-size').option_values
+      @dress_sizes = Spree::OptionType.size.option_values
     end
 
     def spree_user_params
