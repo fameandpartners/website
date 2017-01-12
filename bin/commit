@@ -2,7 +2,7 @@
 
 STATUSES = {
   '1'=> '#in progress',
-  '2'=> '#review',
+  '2'=> '#start-review',
   '3'=> '#ready'
 }
 
