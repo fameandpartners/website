@@ -63,12 +63,11 @@ describe GlobalSku::Create do
     end
 
     describe 'create a Global SKU given product attributes' do
-      let(:global_sku) { creator.call }
       let(:generated_sku) { creator.generate_sku }
 
       context 'without customizations' do
         it do
-          expect(global_sku).to have_attributes(
+          expect(creator.call).to have_attributes(
             sku:                generated_sku,
             style_number:       'ABC123',
             product_name:       'Bianca Dress',
@@ -99,7 +98,7 @@ describe GlobalSku::Create do
         }
 
         it do
-          expect(global_sku).to have_attributes(
+          expect(creator.call).to have_attributes(
             sku:                generated_sku,
             style_number:       'ABC123',
             product_name:       'Bianca Dress',
