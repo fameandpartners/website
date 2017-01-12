@@ -78,14 +78,14 @@ var FabricAndColourSelector = React.createClass({
       'customization-selector': true,
       'animated': true,
       'slideInLeft': this.props.showContainers.showSelector,
-      'active': this.props.currentCustomization === 'fabric-colour'
+      'active': this.props.currentCustomization === 'fabric-color'
     });
 
     return (
       <div ref="container" className={customizationSelectorClasses}>
         <div className="customization">
           <div className="customization-title">
-            <h1><em>Create</em> the look and feel</h1>
+            <h1><em>Create</em> the look and feel.</h1>
             <div className="row">{this.renderFabrics()}</div>
             <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           </div>

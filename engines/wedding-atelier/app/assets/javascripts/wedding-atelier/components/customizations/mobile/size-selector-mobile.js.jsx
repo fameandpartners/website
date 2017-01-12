@@ -143,10 +143,10 @@ var SizeSelectorMobile = React.createClass({
         </div>
         <div className="customization-selector-mobile-size-body">
           <div className="customization-title">
-            <h1><em>Tailor</em> to your body</h1>
+            <h1><em>Tailor</em> to your body.</h1>
           </div>
           <div className="form-group">
-            <label htmlFor="heightSelect" className="text-left">Whats your height</label>
+            <label htmlFor="heightSelect" className="text-left">Tell us your height:</label>
             <div>
               <select id="heightSelect" ref="heightSelect" className="form-control">
                 {optionsForHeights}
@@ -154,7 +154,7 @@ var SizeSelectorMobile = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
+            <label>And your dress size. &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
             <div className="dress-sizes ungrouped centered">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}
@@ -162,7 +162,7 @@ var SizeSelectorMobile = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>use a size profile</label>
+            <label>Or use one of the bridal party size profiles.</label>
             <div className="dress-sizes ungrouped large-labels">
               <ul className="customization-dress-sizes-ul people">
                 {assistantsSizes}

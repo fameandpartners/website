@@ -90,8 +90,8 @@ var CustomizationsContainerMobile = React.createClass({
           selectedOption={this.props.selectedOptions.style}
           currentCustomization={this.props.currentCustomization}
           ref="style"
-          keyword="Add"
-          title="on extra trimmings."
+          keyword="Design"
+          title="the details."
           description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
         <CustomizationSelectorMobile
           type="fit"
@@ -101,8 +101,8 @@ var CustomizationsContainerMobile = React.createClass({
           selectedOption={this.props.selectedOptions.fit}
           currentCustomization={this.props.currentCustomization}
           ref="fit"
-          keyword="Finesse"
-          title="the way it fits."
+          keyword="Tailor"
+          title="to your body."
           description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
 
         <div className="customizations-selector-mobile-actions-double">

@@ -40,7 +40,7 @@ var CustomizationsContainer = React.createClass({
             selectedOption={this.props.selectedOptions.silhouette}
             currentCustomization={this.props.currentCustomization}
             keyword="Choose"
-            title="your perfect shape"
+            title="your perfect shape."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             showContainers={this.props.showContainers}/>
           <FabricAndColourSelector
@@ -68,8 +68,8 @@ var CustomizationsContainer = React.createClass({
             options={this.props.customizations.styles}
             selectedOption={this.props.selectedOptions.style}
             currentCustomization={this.props.currentCustomization}
-            keyword="Add"
-            title="on extra trimmings."
+            keyword="Design"
+            title="the details."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             showContainers={this.props.showContainers}/>
           <CustomizationSelector
@@ -79,8 +79,8 @@ var CustomizationsContainer = React.createClass({
             options={this.props.customizations.fits}
             selectedOption={this.props.selectedOptions.fit}
             currentCustomization={this.props.currentCustomization}
-            keyword="Finesse"
-            title="the way it fits."
+            keyword="Tailor"
+            title="to your body."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             showContainers={this.props.showContainers}/>
           <SizeSelector
