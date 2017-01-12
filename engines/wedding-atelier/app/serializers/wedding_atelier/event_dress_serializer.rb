@@ -1,6 +1,7 @@
 module WeddingAtelier
   class EventDressSerializer < ActiveModel::Serializer
-    attributes :id, :title, :likes_count, :author, :price, :liked
+    include ActionView::Helpers::NumberHelper
+    attributes :id, :title, :likes_count, :author, :price, :liked, :images
     has_one :product
     has_one :color, serializer: OptionValueSerializer
 
@@ -13,16 +14,11 @@ module WeddingAtelier
     end
 
     def price
-      100
+      number_to_currency(object.product.price)
     end
 
     def liked
       object.liked_by?(scope.current_spree_user)
-    end
-
-    def image
-      image = object.product.images.first
-      image.present? ? image.attachment(:small) : '/assets/wedding-atelier/customization_experience/default_dress.png'
     end
   end
 end
