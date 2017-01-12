@@ -16,7 +16,7 @@ var CustomizationsMenuMobile = React.createClass({
   },
 
   renderMenuList: function () {
-    var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit'];
+    var customizationItems = ['silhouette', 'fabric-color', 'length', 'style', 'fit'];
 
     var menuItems = customizationItems.map(function (customizationItem, index) {
       var selectedOptions = this.props.selectedOptions,
@@ -27,7 +27,7 @@ var CustomizationsMenuMobile = React.createClass({
         selectedValue = selectedOptions[customizationItem].presentation;
       }
 
-      if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+      if(customizationItem === 'fabric-color' && selectedOptions.fabric && selectedOptions.colour) {
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
       }
 

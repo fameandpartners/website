@@ -81,7 +81,7 @@ var FabricAndColourSelectorMobile = React.createClass({
 
     var containerClasses = classNames({
       'customizations-selector-mobile': true,
-      'active': this.props.currentCustomization === 'fabric-colour'
+      'active': this.props.currentCustomization === 'fabric-color'
     });
 
     return (

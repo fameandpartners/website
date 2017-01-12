@@ -22,7 +22,7 @@ var CustomizationsMenu = React.createClass({
       className += ' selected';
     }
 
-    if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+    if(customizationItem == 'fabric-color' && selectedOptions.fabric && selectedOptions.colour) {
       className += ' selected';
     }
 
@@ -46,7 +46,7 @@ var CustomizationsMenu = React.createClass({
   },
 
   render: function() {
-    var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit', 'size'],
+    var customizationItems = ['silhouette', 'fabric-color', 'length', 'style', 'fit', 'size'],
         menuEntries = customizationItems.map(function(entry, index) {
           var img = "/assets/wedding-atelier/icons/" + entry + ".png";
           return (
@@ -79,7 +79,7 @@ var CustomizationsMenu = React.createClass({
 
         <div className="title row">
           <div className="col-sm-6 col-xs-12 title-text">
-            <h1><em>Customize</em> it how you want.</h1>
+            <h1><em>Customize</em> and make it yours.</h1>
           </div>
           <div className="col-sm-6 start-over hidden-xs">
             <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>

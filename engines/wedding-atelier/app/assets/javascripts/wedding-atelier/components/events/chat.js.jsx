@@ -352,13 +352,13 @@ var Chat = React.createClass({
           <div className="row">
             <div className="col-xs-7">
               <div className="chat-header-left-side">
-                <strong>Who's online</strong>:
+                <strong>Online</strong>:
                 {chatMembers}
               </div>
             </div>
             <div className="col-xs-5">
               <div className="chat-header-right-side pull-right">
-                <strong>Fame stylist online: </strong><span className="stylist-name">Amber: </span><img src="/assets/profile-placeholder.jpg" className="stylist-photo" />
+                <strong>Fame stylist: </strong><span className="stylist-name">Amber: </span><img src="/assets/profile-placeholder.jpg" className="stylist-photo" />
               </div>
             </div>
           </div>

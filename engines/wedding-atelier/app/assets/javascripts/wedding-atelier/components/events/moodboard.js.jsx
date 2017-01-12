@@ -192,7 +192,7 @@ var MoodBoardEvent = React.createClass({
         <div className="right-content col-sm-6">
           <div className='right-container'>
             <h1 className="moodboard-title text-center">
-              {this.state.event.name} - in {this.state.event.remaining_days} days
+              {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
 
             <div className="moodboard-tabs center-block">
@@ -206,12 +206,12 @@ var MoodBoardEvent = React.createClass({
                     Bridesmaid dresses</a>
                 </li>
                 <li role="presentation">
-                  <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"> Wedding
-                    details</a>
+                  <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
+                  Wedding details</a>
                 </li>
                 <li role="presentation">
-                  <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"> Manage
-                    bridal party</a>
+                  <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">
+                  Bridal party</a>
                 </li>
                 <li role="presentation" className="bridal-gowns">
                   <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
