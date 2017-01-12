@@ -34,7 +34,7 @@ var CustomizationSelector = React.createClass({
           <div className={optionItemClasses}>
             <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
             <img src={option.image} />
-            <p>{option.name}</p>
+            <p>{option.presentation}</p>
           </div>
         </div>
       );

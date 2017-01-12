@@ -38,10 +38,16 @@ var CustomizationExperience = React.createClass({
   componentWillMount: function(){
     $.get(this.props.customizationsUrl, function(data){
       var newState = $.extend({}, this.state),
-          silhouette = data.customization.silhouettes[0];
-      newState.selectedOptions.silhouette = silhouette
-      newState.selectedOptions.size = this.props.currentUser.user;
+          silhouette = data.customization.silhouettes[0],
+          fabric = _.findWhere(data.customization.fabrics, { name: 'HG'}),
+          colour = _.findWhere(data.customization.colours, { name: 'berry' }),
+          length = _.findWhere(data.customization.lengths, { name: 'AK' });
       newState.customizations = data.customization;
+      newState.selectedOptions.silhouette = silhouette
+      newState.selectedOptions.fabric = fabric;
+      newState.selectedOptions.colour = colour;
+      newState.selectedOptions.length = length;
+      newState.selectedOptions.size = this.props.currentUser.user;
       newState.customizations.fits = silhouette.fits;
       newState.customizations.styles = silhouette.styles;
       newState.subTotal = parseInt(silhouette.price);

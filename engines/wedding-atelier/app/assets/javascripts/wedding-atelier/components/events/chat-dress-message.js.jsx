@@ -8,9 +8,10 @@ var ChatDressMessage = React.createClass({
         color: React.PropTypes.object,
         id: React.PropTypes.number,
         likes_count: React.PropTypes.number,
-        price: React.PropTypes.number,
+        price: React.PropTypes.string,
         value: React.PropTypes.string,
-        liked: React.PropTypes.bool
+        liked: React.PropTypes.bool,
+        images: React.PropTypes.array
       }),
       profilePhoto: React.PropTypes.string,
       time: React.PropTypes.number,
@@ -94,7 +95,7 @@ var ChatDressMessage = React.createClass({
               <div className="col-xs-9">
                 <div className="dress-box" key={dress.id}>
                   <div className="dress-box-body text-center">
-                    <img className="center-block" src={dress.image}/>
+                    <img className="center-block" src={dress.images[0].moodboard}/>
                     <div className="dress-info center-block">
                       <strong>{dress.author}</strong>
                       <span>|</span>

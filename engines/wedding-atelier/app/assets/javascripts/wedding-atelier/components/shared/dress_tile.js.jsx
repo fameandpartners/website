@@ -9,9 +9,10 @@ var DressTile = React.createClass({
       title: React.PropTypes.string,
       image: React.PropTypes.string,
       author: React.PropTypes.string,
-      price: React.PropTypes.number,
+      price: React.PropTypes.string,
       likes_count: React.PropTypes.number,
-      liked: React.PropTypes.bool
+      liked: React.PropTypes.bool,
+      images: React.PropTypes.array
     })
   },
 
@@ -42,7 +43,7 @@ var DressTile = React.createClass({
             <a href="#" className="icon-close pull-right"></a>
           </div>
           <div className="dress-box-body text-center">
-            <img className="center-block" src={this.props.dress.image}/>
+            <img className="center-block" src={this.props.dress.images[0].moodboard}/>
 
             <div className="dress-info center-block">
               <strong>{this.props.dress.author}</strong>

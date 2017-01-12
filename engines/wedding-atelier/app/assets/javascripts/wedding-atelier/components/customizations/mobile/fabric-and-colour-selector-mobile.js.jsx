@@ -15,6 +15,17 @@ var FabricAndColourSelectorMobile = React.createClass({
     };
   },
 
+  componentWillReceiveProps: function(nextProps){
+    if(!this.state.selectedFabric && !this.state.selectedColour){
+      var newState = {
+        selectedFabric: _.findWhere(nextProps.fabrics, { name: 'HG'}),
+        selectedColour: _.findWhere(nextProps.colours, { name: 'berry'})
+      }
+      this.setState(newState);
+    }
+  },
+
+
   fabricSelectedHandle: function (fabric) {
     this.setState({selectedFabric: fabric});
     this.props.selectOptionCallback('fabric', fabric);
@@ -33,11 +44,12 @@ var FabricAndColourSelectorMobile = React.createClass({
   renderFabrics: function () {
     var that = this;
     return this.props.fabrics.map(function(fabric, index) {
-      var inputId = fabric.id + "-" + 'mobile';
+      var inputId = fabric.id + "-" + 'mobile',
+          isChecked = fabric === that.state.selectedFabric;
 
       return (
         <div key={inputId} onClick={that.fabricSelectedHandle.bind(null, fabric)} className="fabric-radio-container">
-          <input id={inputId} type="radio" value={fabric} name="fabric" className="customization-radio"/>
+          <input id={inputId} type="radio" defaultChecked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
             <span className="real-label">{fabric.presentation}</span>
