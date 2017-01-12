@@ -19,13 +19,6 @@
 #
 # The third example adds a Signed-off-by line to the message, that can
 # still be edited.  This is rarely a good idea.
-$status = ''
-$message = ''
-$issue_type = ''
-$github_issue = ''
-$jira_issue = ''
-
-
 STATUSES = {
   '1'=> '#in progress',
   '2'=> '#review',
@@ -41,9 +34,6 @@ end
 def malformed_branch?()
   branch = %x( git branch | grep '*' ).tr('* ', '')
   $issue_type, $github_issue, $jira_issue = branch.split(/\//)
-  puts $issue_type
-  puts $github_issue
-  puts $jira_issue
   if $issue_type.nil? || $github_issue.nil? || $jira_issue.nil?
     malformed_branch_text(branch)
     return true
@@ -120,15 +110,20 @@ def jira_issue_prompt
 end
 
 def main
+  $status = ''
+  $message = ''
+  $issue_type = ''
+  $github_issue = ''
+  $jira_issue = ''
+
   commit_message_prompt
   status_change_prompt
   if malformed_branch?
     additional_questions_prompt
   end
 
-  commit_message = "[#{$jira_issue.strip}] ##{$github_issue.strip} #{$message.strip} #{$status.strip}"
-  %x( git commit -m #{commit_message.strip})
-  exit 1
+  final_message = "[#{$jira_issue.strip}] #{$github_issue.strip} #{$message.strip} #{$status.strip}".strip
+  %x( git commit -m '#{final_message}')
 end
 
 main
