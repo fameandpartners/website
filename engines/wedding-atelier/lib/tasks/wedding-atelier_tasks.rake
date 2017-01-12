@@ -248,15 +248,16 @@ namespace :wedding_atelier do
   end
 
   def find_or_create_option_type(name, presentation, option_values)
-    Spree::OptionType.find_or_create_by_name(name) do |ot|
+    ot = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
-      option_values.each do |ov_name|
-        ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
-          o.presentation = ov_name
-        end
-        ot.option_values << ov unless ot.option_values.include? ov
-      end
     end
+    option_values.each do |ov_name|
+      ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
+        o.presentation = ov_name
+      end
+      ot.option_values << ov unless ot.option_values.include? ov
+    end
+    ot
   end
 
   def find_or_create_product(attrs, option_types, taxon)

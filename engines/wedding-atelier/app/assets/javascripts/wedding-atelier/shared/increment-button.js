@@ -43,22 +43,3 @@ $.fn.incrementButton = function(){
   });
 
 };
-
-$(document).ready(function() {
-  $('.js-number-field').incrementButton();
-
-  $('#spree_user_event_role').select2({
-    minimumResultsForSearch: Infinity
-  });
-
-  $('.input-group.date').datepicker({
-    format: "dd/mm/yyyy",
-    todayBtn: "linked",
-    autoclose: true,
-    showOnFocus: true
-  }).on('show', function(e){
-    $(this).addClass('active');
-  }).on('hide', function(e){
-    $(this).removeClass('active');
-  });
-});
