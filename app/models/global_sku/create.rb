@@ -13,8 +13,8 @@ class GlobalSku
                 :customizations
 
     validates_inclusion_of :height, in: LineItemPersonalization::HEIGHTS
-    validates_inclusion_of :color_name, in: Spree::OptionValue.colors.pluck(:name)
-    validates_inclusion_of :size, in: Spree::OptionValue.sizes.pluck(:name)
+    validates_inclusion_of :color_name, in: lambda { |creator| Spree::OptionValue.colors.pluck(:name) }
+    validates_inclusion_of :size, in: lambda { |creator| Spree::OptionValue.sizes.pluck(:name) }
     validate :global_sku_uniqueness
 
     # @param [String] style_number. Example: "USP1016"
@@ -61,7 +61,7 @@ class GlobalSku
       Skus::Generator.new(
         style_number:            style_number,
         size:                    size,
-        color_id:                color.id,
+        color_id:                color&.id,
         height:                  height,
         customization_value_ids: customization_value_ids
       ).call
@@ -71,7 +71,7 @@ class GlobalSku
 
     def global_sku_uniqueness
       if GlobalSku.exists?(sku: generate_sku)
-        errors.add(:sku, 'SKU already exists')
+        errors.add(:style_number, I18n.t('activerecord.errors.messages.taken'))
       end
     end
 
