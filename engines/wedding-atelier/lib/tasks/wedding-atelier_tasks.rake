@@ -5,17 +5,50 @@ namespace :wedding_atelier do
 
     sizes = Spree::OptionType.where(name: 'dress-size').first
 
-    colour_names = %w(Navy Black Champagne Berry Burgundy Red Watermelon Coral Peach
-                      Bright\ Blush Pale\ Pink Lavender Plum Royal\ Blue Cobalt\ Blue Pale\ Blue
-                      Aqua Bright\ Turquoise Mint Pale\ Gray)
+    colour_attrs = [
+      { presentation: 'Champagne', name: 'champagne' },
+      { presentation: 'Navy', name: 'navy' },
+      { presentation: 'Black', name: 'black' },
+      { presentation: 'Berry', name: 'berry' },
+      { presentation: 'Burgundy', name: 'burgundy' },
+      { presentation: 'Red', name: 'red' },
+      { presentation: 'Watermelon', name: 'watermelon' },
+      { presentation: 'Coral', name: 'coral' },
+      { presentation: 'Peach', name: 'peach' },
+      { presentation: 'Bright Blush', name: 'bright-blush' },
+      { presentation: 'Pale Pink', name: 'pale-pink' },
+      { presentation: 'Lavender', name: 'lavender' },
+      { presentation: 'Plum', name: 'plum' },
+      { presentation: 'Royal Blue', name: 'royal-blue' },
+      { presentation: 'Cobalt Blue', name: 'cobalt-blue'},
+      { presentation: 'Pale Blue', name: 'pale-blue'},
+      { presentation: 'Aqua', name: 'aqua'},
+      { presentation: 'Bright Turquoise', name: 'bright-turquoise'},
+      { presentation: 'Mint', name: 'mint'},
+      { presentation: 'Pale Grey', name: 'pale-grey'},
+    ]
 
-    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_names)
+    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_attrs)
+
+    fabric_attrs = [
+      { presentation: 'Heavy Georgette', name: 'HG' },
+      { presentation: 'Matt Satin', name: 'MS' },
+    ]
 
     # Common option types
     fabrics = find_or_create_option_type('wedding-atelier-fabrics',
-                                         'Fabric', %w(Heavy\ Georgette Matt\ Satin))
+                                         'Fabric',fabric_attrs)
+
+    length_attrs = [
+      { presentation: 'Mini', name: 'MN'},
+      { presentation: 'Knee', name: 'KN'},
+      { presentation: 'Petti', name: 'PT'},
+      { presentation: 'Midi', name: 'MD'},
+      { presentation: 'Ankle', name: 'AK'},
+      { presentation: 'Maxi', name: 'MX'}
+    ]
     lengths = find_or_create_option_type('wedding-atelier-lengths',
-                                         'Length', %w(Mini Knee Petti Midi Ankle Floor))
+                                         'Length', length_attrs)
 
     base_option_types = [sizes, fabrics, lengths, colours]
 
@@ -39,7 +72,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     strapless_attrs = {
       name: 'Strapless Column Dress',
-      description: 'FP2212',
+      sku: 'FP2212',
       price: 200,
       hidden: true
     }
@@ -66,7 +99,7 @@ namespace :wedding_atelier do
 
     fit_and_flare_attrs = {
       name: 'Fit and flare dress',
-      description: 'FP2213',
+      sku: 'FP2213',
       price: 200,
       hidden: true
     }
@@ -94,7 +127,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     shift_attrs = {
       name: 'Shift dress',
-      description: 'FP2214',
+      sku: 'FP2214',
       price: 200,
       hidden: true
     }
@@ -122,7 +155,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     slip_attrs = {
       name: 'Slip dress',
-      description: 'FP2215',
+      sku: 'FP2215',
       price: 200,
       hidden: true
     }
@@ -150,7 +183,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     wrap_attrs = {
       name: 'Wrap dress',
-      description: 'FP2216',
+      sku: 'FP2216',
       price: 200,
       hidden: true
     }
@@ -178,7 +211,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     tri_cup_attrs = {
       name: 'Tri-cup dress',
-      description: 'FP2220',
+      sku: 'FP2220',
       price: 200,
       hidden: true
     }
@@ -206,7 +239,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     two_piece_attrs = {
       name: 'Two piece dress',
-      description: 'FP2218',
+      sku: 'FP2218',
       price: 200,
       hidden: true
     }
@@ -232,7 +265,7 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     multi_way_attrs = {
       name: 'Multi way dress',
-      description: 'FP2219',
+      sku: 'FP2219',
       price: 200,
       hidden: true
     }
@@ -245,9 +278,9 @@ namespace :wedding_atelier do
     option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
     end
-    option_values.each do |ov_name|
-      ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
-        o.presentation = ov_name
+    option_values.each do |attrs|
+      ov = Spree::OptionValue.find_or_create_by_name(attrs[:name]) do |o|
+        o.presentation = attrs[:presentation]
       end
       option_type.option_values << ov unless option_type.option_values.include? ov
     end
@@ -255,12 +288,15 @@ namespace :wedding_atelier do
   end
 
   def create_customizations(product, customizations, customization_type)
-    customizations.each do |c|
-      product.customisation_values.create(name: c.parameterize,
+    initial = customization_type[0].upcase
+    customizations.each_with_index do |c, index|
+      product.customisation_values.create(name: "#{initial}#{index + 1}",
                                           presentation: c,
                                           customisation_type: customization_type,
-                                          price: 10)
+                                          price: 10
+                                          )
     end
+    binding.pry
   end
 
   def find_or_create_product(attrs, styles, fits, taxon, option_types, options)
@@ -278,7 +314,7 @@ namespace :wedding_atelier do
     end
 
     options[:sizes].option_values.each do |size|
-      sku = p.description + size.name.gsub('/', '')
+      sku = p.sku + size.name.gsub('/', '')
       v = p.variants.find_or_create_by_sku(sku) do |variant|
         variant.on_demand = true
         variant.cost_currency = 'USD'
