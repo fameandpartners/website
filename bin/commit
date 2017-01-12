@@ -31,7 +31,7 @@ class Commit
   def malformed_branch?()
     branch = %x( git rev-parse --abbrev-ref HEAD )
     self.github_issue = /#\d+/.match(branch).to_s
-    self.jira_issue = /WEBSITE-\d+/i.match(branch).to_s
+    self.jira_issue = /WEBSITE-\d+/i.match(branch).to_s.upcase
 
     if self.jira_issue.empty?
       malformed_branch_text(branch)
@@ -88,8 +88,10 @@ class Commit
   end
 
   def additional_questions_prompt
-    github_issue_prompt
-    jira_issue_prompt
+    puts self.github_issue
+    puts self.jira_issue
+    github_issue_prompt if self.github_issue.empty?
+    jira_issue_prompt if self.jira_issue.empty?
   end
 
   def github_issue_prompt
@@ -98,15 +100,20 @@ class Commit
     puts '*' * 80
     puts ''
     input = get_input.to_i
-    self.github_issue = input == 0 ? '' : input
+    self.github_issue = input == 0 ? '' : '#'+input.to_s
   end
 
   def jira_issue_prompt
-    puts "What is the JIRA issue for this branch?:"
+    puts "What is the JIRA issue for this branch? (starts with WEBSITE-):"
     puts '*' * 80
     puts ''
-    input = get_input.upcase
-    self.jira_issue = input if input.include? 'WEBSITE-'
+    matched_input = /WEBSITE-\d+/i.match(get_input).to_s.upcase
+    if matched_input.empty?
+      unrecognized
+      jira_issue_prompt
+    else
+      self.jira_issue = matched_input
+    end
   end
 
   def main
@@ -117,7 +124,7 @@ class Commit
       additional_questions_prompt
     end
 
-    final_message = "[#{self.jira_issue.to_s.strip}] #{self.github_issue.to_s.strip} #{self.message.to_s.strip} #{self.status.to_s.strip}".strip
+    final_message = "[#{self.jira_issue.to_s.strip}]#{self.github_issue.to_s.strip} #{self.message.to_s.strip} #{self.status.to_s.strip}".strip
     %x( git commit -m '#{final_message}')
 
     puts 'COMMIT SUCCESS!'
