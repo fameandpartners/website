@@ -2,7 +2,9 @@
 
 .pageBespokeBridalCollection
 
+  / ==================================================
   / Hero tile
+  / ==================================================
   .contentBox.heroIntro
     .main-hero-wrap.hero-wrap.copy-left
 
@@ -19,23 +21,27 @@
       .content-wrap
         .container-fluid
           .row
-            .col-lg-4.col-lg-offset-6
+            .col-md-6.col-md-offset-6.col-lg-4
               .copy-wrap.text-center.contentBox__extraPadding.contentBox__bg--white
                 h2.heading
-                  span.heroIntro__title <em>Bridal</em> <br class="visible-lg">like never before.
+                  span.heroIntro__title Bridal like <br class="visible-lg"><em>never before.</em>
                   span.heroIntro__copy.sub-heading
                     | Introducing the Bespoke Bridal Collection. Customizable, exclusive designs made for the modern bride: elevated and elegant, with just a touch of irreverence.
-
+  / ==================================================
   / Section tag
+  / ==================================================
   .container
     .row
       .sectionIntroTag
         .col-md-12.heading-overlay-wrapper
           h1.heading-overlay Bridal gets bespoke
 
+    / ==================================================
+    / Image with caption overlayed at bottom-right
+    / ==================================================
     .row
       .col-md-6
-        .contentBox.contentBox__imgWithCaption--verticalBottom.contentBox__ictaHighlight--horictaPriceht
+        .contentBox.contentBox__imgWithCaption
 
           .row
             .col-md-12
@@ -43,32 +49,575 @@
                 img src="http://fakeimg.pl/1447x1930/"
 
           .row
-            .col-md-9
+            .col-md-8.col-md-offset-4
               .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
                 .itemInfo
-                  h3.itemInfo__title Dress name
-                  p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia pariatur, laudantium eius provident.
-                  a.itemInfo__ctaWrap.itemInfo__ctaWrap--ctaWithSeparator
+                  h3.itemInfo__title The Bessette
+                  p.itemInfo__copy Close your eyes and picture your dream weddingdress. Now, create it.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
                     .itemInfo__cta.itemInfo__ctaCopy
                       .link-underline Shop & Customize
                     .itemInfo__cta.itemInfo__ctaPrice $1.200
 
+      / ==================================================
+      / Box with marble background
+      / ==================================================
       .col-md-6
-        .contentBox.contentBox__bg--marble
+        .contentBox.contentBox__marbleBox
           .copyWrapper
             .itemInfo
-              h3.title Wedding Atelier App
-              p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium optio soluta animi sint vel totam delectus.
-              a.itemInfo_ctaWrap.link-underline Enter the App now
+              h2.itemInfo__title.itemInfo__title--extraMargin Wedding Atelier App
+              p.itemInfo__copy Custom-created, tailor-made looks for thewhole bridal party. Because your bridesmaidsdeserve bespoke, too.
 
+              = link_to "#", class: "itemInfo_ctaWrap"
+                span.cta-link-arrow-right
+                  span.cta-link-alt
+                    span.copy-highlight Enter the App now
+                  i.icon.icon-arrow-right
+
+          .imgWrapper
+            img src="http://fakeimg.pl/1338x1455/"
+
+    / ==================================================
+    / 3-column & 1 row box with Image + Copy + Image
+    / ==================================================
     .row
-      .contentBox.contentBox__imgCopyImg.contentBox__imgWithCaption--verticalMiddle
-        .imgWrapper
-        .copyWrapper.contentBox__bg--white
-          .itemInfo
-            h4.itemInfo__title Dress name
-            p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia pariatur, laudantium eius provident.
-            a.itemInfo__ctaWrap
-              .itemInfo__shopCustomize Shop & Customize
-              .itemInfo__itemPrice $1.200
-        .imgWrapper
+      .contentBox.contentBox__imgCopyImg.contentBox__verticalMiddle
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+        .col-md-4.vertical-align
+          .copyWrapper.contentBox__bg--white
+            .itemInfo
+              h4.itemInfo__title Not for the faint of heart.
+              p.itemInfo__copy Allow us to be brash: The Coralie is a badass bridal gown designed for those who break tradition (and hearts). Here’s to the rebels of romance.
+              = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                .itemInfo__cta.itemInfo__ctaCopy
+                  .link-underline The Coralie
+                .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with caption overlayed at bottom-left
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Josephine
+                  p.itemInfo__copy For the bride inspired by the winking, rebellious spiritof the 1920s.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Katharine
+                  p.itemInfo__copy "Something borrowed,” you say? Borrow from the boys in a wide-legged jumpsuit.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / Mosaic #1
+    / ==================================================
+    .row
+      .contentBox.contentBox__imgCopyImg
+        / ==================================================
+        / Image on left side + caption on right side
+        / ==================================================
+        .col-md-4
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/957x2174/"
+
+          .row
+            .col-md-12
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title The Victoria
+                  p.itemInfo__copy Simple? Yes. Stunning? Also yes. <br class="visible-lg">Designed for the brides who keep it real.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+        / ==================================================
+        / Image on left side + caption on right side
+        / ==================================================
+        .col-md-8
+          .row
+            .col-md-6
+              .imgWrapper
+                img src="http://fakeimg.pl/957x1599/"
+
+            .col-md-6
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title.itemInfo__title--extraMargin The Zelda
+                  p.itemInfo__copy Louche lines and vintage glamour, cut on the bias. <br class="visible-lg">Meet Zelda.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+          / ==================================================
+          / Box with marble background
+          / ==================================================
+          .row
+            .col-md-12
+              .contentBox.contentBox__marbleBox.contentBox__marbleBox--safeMarginTop
+                .row.contentBox__verticalMiddle
+                  .col-md-5.vertical-align
+                    .copyWrapper
+                      .itemInfo
+                        h2.itemInfo__title Bohemian, rebellious, modern, or classic? Find <em>your</em> bridal style.
+
+                        = link_to "#", class: "itemInfo_ctaWrap"
+                          span.cta-link-arrow-right
+                            span.cta-link-alt
+                              span.copy-highlight Get the look
+                            i.icon.icon-arrow-right
+
+                  .col-md-7.vertical-align
+                    .imgWrapper
+                      img src="http://fakeimg.pl/1163x926/"
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with caption overlayed at bottom-left
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Joni
+                  p.itemInfo__copy The bohemian bride is free-spirited and wild at heart(or just wants to look like it).
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Aurore
+                  p.itemInfo__copy Behold, your "little girl dreaming of her wedding day" vision come to life.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / 3-column & 1 row box with Image + Copy + Image
+    / ==================================================
+    .row
+      .contentBox.contentBox__imgCopyImg.contentBox__verticalMiddle
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+        .col-md-4.vertical-align
+          .copyWrapper.contentBox__bg--white
+            .itemInfo
+              h4.itemInfo__title It’s all in the details.
+              p.itemInfo__copy All brides deserve the atelier experience. Our gownsare hand-crafted from exquisite fabrics, tailored to your body, and made-to-order, just for you.
+              = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                .itemInfo__cta.itemInfo__ctaCopy
+                  .link-underline The Deneuve
+                .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with no caption
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Sylvie
+                  p.itemInfo__copy You and your partner, crop tops and full skirts... just a couple of things that are even better together.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / Mosaic #2
+    / ==================================================
+    .row
+      .contentBox.contentBox__imgCopyImg
+        .col-md-8
+          / ==================================================
+          / Image on left side + caption on right side
+          / ==================================================
+          .row
+            .col-md-6
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title.itemInfo__title--extraMargin The Nicks
+                  p.itemInfo__copy The Nicks is a wrap gown that understandsthe beauty inherent in contrast.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+            .col-md-6
+              .imgWrapper
+                img src="http://fakeimg.pl/957x1599/"
+
+          / ==================================================
+          / Box with marble background
+          / ==================================================
+          .row
+            .col-md-12
+              .contentBox.contentBox__marbleBox.contentBox__marbleBox--safeMarginTop
+                .row.contentBox__verticalMiddle
+                  .col-md-5.vertical-align
+                    .copyWrapper
+                      .itemInfo
+                        h2.itemInfo__title But <eM>what about</em> <br class="visible-lg">the hair, makeup, accessories, shoes?
+
+                        = link_to "#", class: "itemInfo_ctaWrap"
+                          span.cta-link-arrow-right
+                            span.cta-link-alt
+                              span.copy-highlight Full look tutorials
+                            i.icon.icon-arrow-right
+
+                  .col-md-7.vertical-align
+                    .imgWrapper
+                      img src="http://fakeimg.pl/1163x926/"
+
+        / ==================================================
+        / Image at top + caption at bottom
+        / ==================================================
+        .col-md-4
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/957x2089/"
+
+          .row
+            .col-md-12
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title The Charlotte
+                  p.itemInfo__copy Like you, The Charlotte is more than meets the eye. Look closely and you’ll notice three distinct laces–because why settle for just one?
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with caption overlayed at bottom-left
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Clara
+                  p.itemInfo__copy Love the back, but wish the skirt was fitted? We can make that happen.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Kensie
+                  p.itemInfo__copy All the must-have elements are in place: a lace bodice, a whittled waistline, and a full tulle skirt.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / 3-column & 1 row box with Image + Copy + Image
+    / ==================================================
+    .row
+      .contentBox.contentBox__imgCopyImg.contentBox__verticalMiddle
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+        .col-md-4.vertical-align
+          .copyWrapper.contentBox__bg--white
+            .itemInfo
+              h4.itemInfo__title Elevated, elegant, eff-ing gorgeous.
+              p.itemInfo__copy It’s the most important, special day of your life–so why get a wedding dress off-the-rack? Customize with Fame and design the look you really want.
+              = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                .itemInfo__cta.itemInfo__ctaCopy
+                  .link-underline The Fitzgerald
+                .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+        .col-md-4.vertical-align
+          .imgWrapper
+            img src="http://fakeimg.pl/956x1100/"
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with caption overlayed at bottom-left
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Fleur
+                  p.itemInfo__copy Love blooms eternal. The Fleur is all fresh femininity and classic romance.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Sirène
+                  p.itemInfo__copy You love a good wedding–but you could do withoutthe drama.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / Mosaic #2
+    / ==================================================
+    .row
+      .contentBox.contentBox__imgCopyImg
+        .col-md-8
+          / ==================================================
+          / Image on left side + caption on right side
+          / ==================================================
+          .row
+            .col-md-6
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title.itemInfo__title--extraMargin The Alexandrina
+                  p.itemInfo__copy We added a cheeky little detail to this simple stunner: an open, corset-laced back to show off your wild side.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+            .col-md-6
+              .imgWrapper
+                img src="http://fakeimg.pl/957x1599/"
+
+          / ==================================================
+          / Box with marble background
+          / ==================================================
+          .row
+            .col-md-12
+              .contentBox.contentBox__marbleBox.contentBox__marbleBox--safeMarginTop
+                .row.contentBox__verticalMiddle
+                  .col-md-5.vertical-align
+                    .copyWrapper
+                      .itemInfo
+                        h2.itemInfo__title We’ll style your wedding <em>–for free.</em>
+
+                        = link_to "#", class: "itemInfo_ctaWrap"
+                          span.cta-link-arrow-right
+                            span.cta-link-alt
+                              span.copy-highlight Book now
+                            i.icon.icon-arrow-right
+
+                  .col-md-7.vertical-align
+                    .imgWrapper
+                      img src="http://fakeimg.pl/1163x926/"
+
+        / ==================================================
+        / Image at top + caption at bottom
+        / ==================================================
+        .col-md-4
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/957x2089/"
+
+          .row
+            .col-md-12
+              .copyWrapper.contentBox__bg--white
+                .itemInfo
+                  h3.itemInfo__title The Keaton
+                  p.itemInfo__copy You never really thought you’d get married–but, hey, it happens.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+    / ==================================================
+    / Side by side images + captions
+    / ==================================================
+    .row
+      / ==================================================
+      / Image with caption overlayed at bottom-left
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Esme
+                  p.itemInfo__copy Make it your way. Raise the backline, or make the skirt A line. It’s all up to you.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      / ==================================================
+      / Image with caption overlayed at bottom-right
+      / ==================================================
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-8.col-md-offset-4
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title The Jagger
+                  p.itemInfo__copy Exquisite lace embellished with delicate crystals.This is for the bride who wants (and deserves) it all.
+                  = link_to "#", class: "itemInfo__ctaWrap itemInfo__ctaWrap--ctaWithSeparator"
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
