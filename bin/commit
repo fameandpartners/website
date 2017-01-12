@@ -63,11 +63,7 @@ class Commit
 
   def status_change_prompt
     puts "Does this require a Jira status change? (y/n):"
-    input = get_input
-    case input
-    when 'y'
-      select_status_prompt
-    end
+    (get_input == 'y') && select_status_prompt
   end
 
   def select_status_prompt
