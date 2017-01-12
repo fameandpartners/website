@@ -122,8 +122,12 @@ def main
     additional_questions_prompt
   end
 
-  final_message = "[#{$jira_issue.strip}] #{$github_issue.strip} #{$message.strip} #{$status.strip}".strip
+  final_message = "[#{$jira_issue.strip}] ##{$github_issue.strip} #{$message.strip} #{$status.strip}".strip
   %x( git commit -m '#{final_message}')
+
+  puts 'COMMIT SUCCESS!'
+  puts '*' * 80
+  puts final_message
 end
 
 main
