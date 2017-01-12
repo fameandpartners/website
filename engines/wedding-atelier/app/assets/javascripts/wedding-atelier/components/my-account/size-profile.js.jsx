@@ -1,9 +1,9 @@
 var SizeProfile = React.createClass({
   propTypes: {
-    user: React.PropTypes.object,
-    sizes: React.PropTypes.array,
-    heights: React.PropTypes.object,
-    siteVersion: React.PropTypes.string
+    user: React.PropTypes.object.isRequired,
+    sizes: React.PropTypes.array.isRequired,
+    heights: React.PropTypes.object.isRequired,
+    siteVersion: React.PropTypes.string.isRequired
   },
 
   getInitialState: function () {
