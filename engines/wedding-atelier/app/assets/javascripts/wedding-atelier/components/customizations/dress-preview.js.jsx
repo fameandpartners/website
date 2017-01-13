@@ -18,9 +18,11 @@ var DressPreview = React.createClass({
     this.isLoading();
   },
 
-  componentWillReceiveProps: function (nextProps) {
-    this.setState({loading: true});
-    this.isLoading();
+  componentWillUpdate: function (nextProps, nextState) {
+    if(!_.isEqual(this.props, nextProps)) {
+      this.setState({loading: true});
+      this.isLoading();
+    }
   },
 
   isLoading: function () {

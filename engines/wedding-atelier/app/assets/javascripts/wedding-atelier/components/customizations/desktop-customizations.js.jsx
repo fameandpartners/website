@@ -88,7 +88,7 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel col-sm-6">
-          <DressPreview selectedOptions={this.props.selectedOptions} />
+          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
