@@ -4,7 +4,8 @@ var AccountDetails = React.createClass({
   },
 
   getInitialState: function () {
-    var user = $.extend({}, this.props.user);
+    var user = $.extend({}, this.props.user.user);
+
     return {
       firstName: user.first_name,
       lastName: user.last_name,
@@ -34,7 +35,7 @@ var AccountDetails = React.createClass({
   },
 
   dobChangedHandle: function (e) {
-    this.setState({dateOfBirth: e.date.toLocaleDateString()});
+    this.setState({dateOfBirth: e.date.toString()});
   },
 
   fieldChangedUpdate: function (field, e) {
@@ -45,6 +46,48 @@ var AccountDetails = React.createClass({
 
   newsletterChangedHandle: function (e) {
     this.setState({newsletter: !this.state.newsletter});
+  },
+
+  handleSave: function(e) {
+    e.preventDefault();
+    var state = $.extend({}, this.state);
+    var payload = {
+      account: {
+        first_name: state.firstName,
+        last_name: state.lastName,
+        email: state.email,
+        dob: state.dateOfBirth
+      },
+      newsletter: state.newsletter
+    };
+    if (this.allowedChangePassword()) {
+      var password = {
+        current_password: state.currentPassord,
+        password: state.newPassword,
+        password_confirmation: state.confirmPassword
+      };
+      payload.password = password;
+    }
+
+    $.ajax({
+      url: this.props.account_path,
+      type: 'PUT',
+      dataType: 'json',
+      data: payload,
+      success: function (response) {
+        // show alert
+        alert('saved!');
+      },
+      error: function (data) {
+        //var parsed = JSON.parse(data.responseText);
+        alert('something went wrong');
+      }
+    });
+  },
+
+  allowedChangePassword: function() {
+    var state = $.extend({}, this.state);
+    return state.currentPassword !== '' && state.newPassword !== '' && state.newPassword === state.confirmPassword;
   },
 
   render: function () {
@@ -98,6 +141,12 @@ var AccountDetails = React.createClass({
               <span></span>
               <p className="text">Sign up to get the latest trend updates</p>
             </label>
+          </div>
+
+          <div className="checkbox col-sm-12">
+            <button className="btn-black" onClick={this.handleSave}>
+              Save
+            </button>
           </div>
         </form>
       </div>

@@ -3,13 +3,14 @@ var SizeProfile = React.createClass({
     user: React.PropTypes.object.isRequired,
     sizes: React.PropTypes.array.isRequired,
     heights: React.PropTypes.object.isRequired,
-    siteVersion: React.PropTypes.string.isRequired
+    siteVersion: React.PropTypes.string.isRequired,
+    account_profile_path: React.PropTypes.string.isRequired
   },
 
   getInitialState: function () {
     return {
-      size: {},
-      height: {}
+      size: 0,
+      height: ''
     };
   },
 
@@ -35,7 +36,7 @@ var SizeProfile = React.createClass({
   renderHeightOptions: function () {
     return Object.keys(this.props.heights).map(function (group, index) {
       var heights = this.props.heights[group].map(function (height, index) {
-        return <option key={index} value={height}>{height}</option>;
+        return <option key={index} value={group[0]}>{height}</option>;
       });
 
       return <optgroup key={group} label={group}>{heights}</optgroup>;
@@ -58,6 +59,31 @@ var SizeProfile = React.createClass({
     }.bind(this));
   },
 
+  handleSave: function(e){
+    e.preventDefault();
+    var state = $.extend({}, this.state);
+    var payload = {
+      account: {
+        height: state.height,
+        dress_size: state.size
+      }
+    };
+    $.ajax({
+      url: this.props.account_profile_path,
+      type: 'PUT',
+      dataType: 'json',
+      data: payload,
+      success: function (response) {
+        // show alert
+        alert('saved!');
+      },
+      error: function (data) {
+        //var parsed = JSON.parse(data.responseText);
+        alert('something went wrong');
+      }
+    });
+
+  },
   render: function () {
     return (
       <div className="size-profile">
@@ -79,6 +105,11 @@ var SizeProfile = React.createClass({
               {this.renderDressSizes()}
             </ul>
           </div>
+        </div>
+        <div className="checkbox col-sm-12">
+          <button className="btn-black" onClick={this.handleSave}>
+            Save
+          </button>
         </div>
       </div>
     );

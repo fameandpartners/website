@@ -28,5 +28,9 @@ WeddingAtelier::Engine.routes.draw do
     resources :assistants, only: [:destroy]
   end
 
-  get '/my_account', to: 'accounts#show', :as => :my_account
+  resources :accounts, path: 'my-account', only: [:index, :update, :show] do
+    collection do
+      put 'size_profile'
+    end
+  end
 end

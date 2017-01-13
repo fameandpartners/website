@@ -1,9 +1,26 @@
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+
+//--------------
+// Bootstrap JS
+//--------------
+//= require bootstrap/transition
+//= require bootstrap/alert
+//= require bootstrap/collapse
+//= require bootstrap/dropdown
+//= require bootstrap/modal
+//= require bootstrap/tab
+//= require bootstrap/affix
+//= require bootstrap/scrollspy
+
+//-------
+// React
+//-------
+
 //= require react
 //= require react_ujs
 //= require components
+
 //= require select2-4.0.3
 //= require bootstrap-datepicker-1.6.4
 //= require classnames
