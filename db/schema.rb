@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20170110220500) do
 
   create_table "activities", :force => true do |t|
@@ -385,8 +384,6 @@ ActiveRecord::Schema.define(:version => 20170110220500) do
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
     t.string   "height",                                                :default => "standard"
-    t.integer  "fabric_id"
-    t.integer  "length_id"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
