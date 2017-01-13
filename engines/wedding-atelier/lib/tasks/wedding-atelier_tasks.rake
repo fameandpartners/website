@@ -28,7 +28,7 @@ namespace :wedding_atelier do
       { presentation: 'Pale Grey', name: 'pale-grey'},
     ]
 
-    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_attrs)
+    colours = find_or_create_option_type('dress-color', 'Color', colour_attrs)
 
     fabric_attrs = [
       { presentation: 'Heavy Georgette', name: 'HG' },
