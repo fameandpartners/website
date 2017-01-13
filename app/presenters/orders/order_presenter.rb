@@ -17,6 +17,8 @@ module Orders
                    :name,
                    :first_name,
                    :shipments,
+                   # TODO: replace addresses with the related decorators where needed.
+                   # Nickolay, 03 Jan 2017
                    :billing_address,
                    :shipping_address,
                    :site_version,
@@ -36,8 +38,38 @@ module Orders
 
     alias_method :customer_notes?, :customer_notes
 
+    # TODO: this should be just billing_address
+    def decorated_billing_address
+      @decorated_billing_address ||= Orders::AddressPresenter.new(spree_order.billing_address)
+    end
+
+    # TODO: this should be just shipping_address
+    def decorated_shipping_address
+      @decorated_shipping_address ||= Orders::AddressPresenter.new(spree_order.shipping_address)
+    end
+
     def line_items
-      items.collect { |i| LineItemPresenter.new(i, self) }
+      items.map(&decorate)
+    end
+
+    def fast_making_line_items
+      fast_making_items.map(&decorate)
+    end
+
+    def standard_making_line_items
+      standard_making_items.map(&decorate)
+    end
+
+    private def decorate
+      -> (line_item) { LineItemPresenter.new(line_item, self) }
+    end
+
+    def fast_making_items
+      @fast_making_items ||= items.fast_making
+    end
+
+    def standard_making_items
+      @standard_making_items ||= items.standard_making
     end
 
     def one_item?

@@ -5,20 +5,24 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-.page-content
+.page-lookbook.container-fluid.no-padding.no-scroll
 
-  ul.rslides
+  .hero-tile-carousel.js-hero-tile-carousel
     - (1..7).each do |tile_index|
-      li
-        = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/inside-out-collection/#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive portrait-img'
-
-  .page-content.products-collections.category
-    = render :partial => 'filters_sort', :locals => { :hidden => true }
-
-    .container.relative.products-collection
-      = render partial: 'products_without_content'
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/inside-out-collection/#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive'
 
   .row
+    .container
+      .page-content.products-collections.category
+        .col-xs-12
+          = render :partial => 'products/collections/filters_sort', :locals => { :hidden => true }
+
+        .relative.products-collection
+          = render partial: 'products_without_content'
+
+  .row.section-last
     .container
       .col-md-12
         = render partial: 'shared/redesign/more_dresses'

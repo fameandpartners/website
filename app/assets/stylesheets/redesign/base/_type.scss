@@ -161,6 +161,10 @@ h1 .sub-heading {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
+}
+
+.cta-link + .copy-highlight,
+.btn-featured .copy-highlight {
   padding-left: 3px;
 }
 

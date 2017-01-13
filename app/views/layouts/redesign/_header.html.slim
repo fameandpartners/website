@@ -152,11 +152,8 @@ ruby:
               .arrow
                 i.fa.fa-chevron-left
                 .back BACK
-            li.manu-content
-              = link_to inside_out_collection_landing_page_path
-                .panel-highlight.media-wrap
-                  = image_tag 'lookbook/insideout-collection.jpg', alt: ""
-                  .copy-wrap The INSIDE\OUT Collection <em><span>View this collection</span></em>
+            li.menu-content
+              = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'
 
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 

@@ -9,6 +9,11 @@
 
   .panel-highlight {
     margin: 0;
+
+    .copy-wrap .copyTitle {
+      font-weight: 300;
+    }
+
   }
 
   @media (max-width: 1400px) {
