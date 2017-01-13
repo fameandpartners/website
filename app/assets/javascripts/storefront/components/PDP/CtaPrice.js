@@ -114,7 +114,7 @@ class CtaPrice extends React.Component {
           <li>Free Shipping</li>
           <li>Estimated delivery, {this.props.product.delivery_period} business days</li>
           {(() => {
-            if (this.props.product.delivery_delay) {
+            if (this.props.product.cny_delivery_delays) {
               return(
                 <li>We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</li>
               );
