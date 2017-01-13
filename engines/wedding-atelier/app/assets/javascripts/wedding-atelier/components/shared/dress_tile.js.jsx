@@ -46,7 +46,7 @@ var DressTile = React.createClass({
             <img className="center-block" src={this.props.dress.images[0].moodboard}/>
 
             <div className="dress-info center-block">
-              <strong>{this.props.dress.author}</strong>
+              <strong>The {this.props.dress.author}</strong>
               <span>|</span>
               <span>{this.props.dress.price}</span>
             </div>
@@ -54,7 +54,7 @@ var DressTile = React.createClass({
 
           <div className="dress-box-footer center-block text-center">
             <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
-              Send to chat
+              Send to the group
             </button>
             <button className="btn-add-to-cart">
               Add to cart

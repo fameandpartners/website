@@ -4,6 +4,11 @@
 
   .right-container {
     height: 100%;
+    min-width: 800px;
+
+    @include screen-xs-and-sm {
+      min-width: 100%;
+    }
   }
 
   h1.moodboard-title {

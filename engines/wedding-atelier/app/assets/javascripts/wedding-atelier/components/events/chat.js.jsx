@@ -161,9 +161,9 @@ var Chat = React.createClass({
       className = member.online ? '' : 'text-muted';
 
       if (index === this.state.channelMembers.length - 1) {
-        return(<span className={className} key={'chat-member-' + index}>{member.identity}.</span>);
+        return(<span className={className} key={'chat-member-' + index}>{member.initials}.</span>);
       } else {
-        return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
+        return(<span className={className} key={'chat-member-' + index}>{member.initials}, </span>);
       }
     }.bind(this));
 
@@ -173,9 +173,12 @@ var Chat = React.createClass({
   loadChannelMembers: function(channel) {
     channel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
+        var nameInitials = member.identity.match(/\b\w/g).join("").toUpperCase();
+
         return {
           id: member.sid,
           identity: member.identity,
+          initials: nameInitials,
           online: true
         };
       }.bind(this));
@@ -347,13 +350,12 @@ var Chat = React.createClass({
     var chatMembers = this.getChatMembers();
 
     return(
-      <div className="chat">
+      <div className="chat row">
         <div className="chat-general-info center-block">
           <div className="row">
             <div className="col-xs-7">
               <div className="chat-header-left-side">
-                <strong>Online</strong>:
-                {chatMembers}
+                <strong>Online</strong>: {chatMembers}
               </div>
             </div>
             <div className="col-xs-5">

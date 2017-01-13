@@ -185,12 +185,12 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     return (
-      <div id="events__moodboard">
-        <div className="chat left-content col-sm-6">
+      <div id="events__moodboard" className="row">
+        <div className="left-content col-sm-6 hidden-xs">
           {this.state.left_chat}
         </div>
         <div className="right-content col-sm-6">
-          <div className='right-container'>
+          <div className='right-container row'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
@@ -226,10 +226,10 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   <div className="add-dress-box hidden">
-                    <button className="add">Add your first dress</button>
+                    <button className="add">Design a new dress</button>
                   </div>
                   <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
-                    <em>Create</em> a dress</a>
+                    <em>Design</em> a new dress</a>
                   </div>
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
