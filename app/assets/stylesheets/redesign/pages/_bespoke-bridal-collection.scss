@@ -6,36 +6,85 @@
     @extend .img-responsive;
   }
 
-  .heroIntro {
-
-    .contentBox__extraPadding {
-      padding: 60px 45px;
-    }
-
+  .heroIntro .copy-wrap {
+    padding: 60px 45px;
   }
 
   .heroIntro__title {
     margin: 0 0 20px 0;
-    font-size: 1.8em;
+    font-size: 3.5em;
     line-height: 100%;
   }
 
   .heroIntro__copy {
-    font-style: normal;
+    @extend .font-serif;
+    font-size: 2rem;
+    font-weight: 300;
     line-height: 2.5rem;
   }
 
   .sectionIntroTag {
-    margin-top: -50px;
-    margin-bottom: 100px;
+    margin-top: -45px;
+    margin-bottom: 90px;
   }
 
   .content__appInfo {
-    padding-left: 50px;
-    padding-right: 50px;
 
-    .itemInfo__title {
+    .contentBoxItem__ctaWrap {
+      display: block;
+      padding-top: 30px;
+    }
+
+    .contentBoxItem__title {
       font-size: 2.4em;
+    }
+
+    .contentBoxItem__copy {
+      font-size: 2rem;
+    }
+
+  }
+
+  @include min-tablet {
+
+    .content__appInfo {
+      padding-left: 50px;
+      padding-right: 50px;
+
+      .contentBoxItem__title {
+        margin-top: 40px;
+      }
+
+    }
+
+    .content__imgMaxHeight1 {
+      max-height: 782px;
+    }
+
+    .content__imgMaxHeight2 {
+      max-height: 300px;
+    }
+
+  }
+
+  @include mobile {
+
+    .heroIntro .copy-wrap {
+      padding: 20px 0 50px;
+    }
+
+    .content__appInfo {
+      padding: 15px 50px;
+
+      .contentBoxItem__title {
+        margin-top: 0;
+        font-size: 3em;
+      }
+
+    }
+
+    .content__lessMarginImg {
+      margin-bottom: 25px;
     }
 
   }
