@@ -97,15 +97,15 @@ class GlobalSku
     def customization_value_ids
       Array
         .wrap(customizations)
-        .map { |customization| customization&.id }
         .compact
+        .map(&:id)
     end
 
     def customization_value_names
       Array
         .wrap(customizations)
-        .map { |customization| customization&.name }
         .compact
+        .map(&:name)
     end
   end
 end
