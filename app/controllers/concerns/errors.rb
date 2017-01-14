@@ -6,8 +6,8 @@ module Concerns
       rescue_from ActiveRecord::RecordInvalid,         with: -> { render_error(code: 422) }
       rescue_from ActiveRecord::RecordNotFound,        with: -> { render_error(code: 404) }
       rescue_from ActionController::UnknownController, with: -> { render_error(code: 404) }
-      rescue_from ActionController::UnknownAction,     with: -> { render_error(code: 404) }
       rescue_from ActionController::RoutingError,      with: -> { render_error(code: 404) }
+      rescue_from AbstractController::ActionNotFound,  with: -> { render_error(code: 404) }
     end
 
     # NOTE: Alexey Bobyrev 14 Jan 2017
