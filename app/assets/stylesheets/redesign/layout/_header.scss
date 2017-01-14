@@ -130,12 +130,12 @@ header.main {
       .nav-main-menu span {
         border-bottom: 2px solid transparent;
         display: inline-block;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: $c-neutral-black;
         cursor: pointer;
         position: relative;
-        letter-spacing: 1px;
+        letter-spacing: 1.2px;
 
         &:not(.logo) {
           margin: 0 12px;
