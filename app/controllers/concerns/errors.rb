@@ -10,6 +10,13 @@ module Concerns
       rescue_from ActionController::RoutingError,      with: -> { render_error(code: 404) }
     end
 
+    # NOTE: Alexey Bobyrev 14 Jan 2017
+    # Raise error here to make it visible for application#rescue_from
+    # Ref: https://github.com/rails/rails/issues/671
+    def raise_routing_error
+      raise ActionController::RoutingError.new(params[:path])
+    end
+
     protected
 
     def render_error(code:)

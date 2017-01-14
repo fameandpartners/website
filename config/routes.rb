@@ -626,4 +626,7 @@ FameAndPartners::Application.routes.draw do
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
   match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
+  # NOTE: Alexey Bobyrev 14 Jan 2017 
+  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action)
+  match '*path', to: 'application#raise_routing_error'
 end
