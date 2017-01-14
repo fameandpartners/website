@@ -8,36 +8,40 @@ var CustomizationSelector = React.createClass({
     description: React.PropTypes.string,
     selectCallback: React.PropTypes.func.isRequired,
     currentCustomization: React.PropTypes.string,
-    showContainers: React.PropTypes.object
+    showContainers: React.PropTypes.object,
+    selectedOptions: React.PropTypes.object
   },
 
-  isOptionSelected: function(option){
-    var selectedOption = this.props.selectedOption;
-    return selectedOption && selectedOption.id == option.id;
-  },
+  isOptionDisabled: function(option){
+    if(this.props.type === 'silhouette'){ return false; }
+    var customizations = this.props.selectedOptions;
+    var optionsKeys = {
+      silhouette: customizations.silhouette ? customizations.silhouette.sku : 'FP2212',
+      fit: customizations.fit ? customizations.fit.name : 'F0',
+      style: customizations.style ? customizations.style.name : 'S0',
+      length: customizations.length ? customizations.length.name : 'AK'
+    }
 
-  removeCustomization: function(e){
-    e.stopPropagation();
-    this.props.selectCallback(this.props.type, null);
+    if(customizations[this.props.type]){
+      optionsKeys[this.props.type] = option.name;
+    }
+
+    return CombinationsMap.isDisabled(optionsKeys, option, this.props.type);
   },
 
   render: function() {
-    var options = this.props.options.map(function(option, index) {
-      var optionItemClasses = classNames({
-        'customization-options-item': true,
-        active: this.isOptionSelected(option)
-      });
+    var itemProps = {
+      type: this.props.type,
+      selectedOption: this.props.selectedOption,
+      selectCallback: this.props.selectCallback
+    }
 
-      var customizationClass = 'customization-options-item';
-      return (
-        <div key={index} onClick={this.props.selectCallback.bind(null, this.props.type, option)} className="col-sm-6 col-md-6 col-lg-4">
-          <div className={optionItemClasses}>
-            <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
-            <img src={option.image} />
-            <p>{option.presentation}</p>
-          </div>
-        </div>
-      );
+    var options = this.props.options.map(function(option, index) {
+      itemProps.option = $.extend({}, option);
+      if(!this.isOptionDisabled(itemProps.option)){
+        return(<CustomizationItem key={index} {...itemProps} />);
+      }
+
     }.bind(this));
 
     var customizationSelectorClasses = classNames({
