@@ -32,7 +32,7 @@ namespace :wedding_atelier do
 
     fabric_attrs = [
       { presentation: 'Heavy Georgette', name: 'HG' },
-      { presentation: 'Matt Satin', name: 'MS' },
+      { presentation: 'Matte Satin', name: 'MS' },
     ]
 
     # Common option types

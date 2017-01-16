@@ -41,7 +41,7 @@ var CustomizationsContainer = React.createClass({
             currentCustomization={this.props.currentCustomization}
             keyword="Choose"
             title="your perfect shape."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            description="The silhouette is the foundation of your dress."
             showContainers={this.props.showContainers}/>
           <FabricAndColourSelector
             colours={this.props.customizations.colours}
@@ -59,7 +59,7 @@ var CustomizationsContainer = React.createClass({
             currentCustomization={this.props.currentCustomization}
             keyword="Choose"
             title="your length."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            description="One skirt does not fit all. Find the length that suits you best."
             showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="style"
@@ -70,7 +70,7 @@ var CustomizationsContainer = React.createClass({
             currentCustomization={this.props.currentCustomization}
             keyword="Design"
             title="the details."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            description="Close your eyes and picture your dream dress. Now, create it."
             showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="fit"
@@ -79,9 +79,9 @@ var CustomizationsContainer = React.createClass({
             options={this.props.customizations.fits}
             selectedOption={this.props.selectedOptions.fit}
             currentCustomization={this.props.currentCustomization}
-            keyword="Tailor"
-            title="to your body."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            keyword="Finesse"
+            title="the way it fits."
+            description="Almost done: change the neckline, backline, straps, or skirt."
             showContainers={this.props.showContainers}/>
           <SizeSelector
             sizes={this.props.customizations.sizes}
