@@ -1,292 +1,311 @@
 namespace :wedding_atelier do
-  task populate_products: :environment do
-    taxonomy = Spree::Taxonomy.find_or_create_by_name('Wedding Atelier')
-    taxon = taxonomy.taxons.find_or_create_by_name('Base Silhouette')
-
-    sizes = Spree::OptionType.where(name: 'dress-size').first
-
-    colour_attrs = [
-      { presentation: 'Champagne', name: 'champagne' },
-      { presentation: 'Navy', name: 'navy' },
-      { presentation: 'Black', name: 'black' },
-      { presentation: 'Berry', name: 'berry' },
-      { presentation: 'Burgundy', name: 'burgundy' },
-      { presentation: 'Red', name: 'red' },
-      { presentation: 'Watermelon', name: 'watermelon' },
-      { presentation: 'Coral', name: 'coral' },
-      { presentation: 'Peach', name: 'peach' },
-      { presentation: 'Bright Blush', name: 'bright-blush' },
-      { presentation: 'Pale Pink', name: 'pale-pink' },
-      { presentation: 'Lavender', name: 'lavender' },
-      { presentation: 'Plum', name: 'plum' },
-      { presentation: 'Royal Blue', name: 'royal-blue' },
-      { presentation: 'Cobalt Blue', name: 'cobalt-blue'},
-      { presentation: 'Pale Blue', name: 'pale-blue'},
-      { presentation: 'Aqua', name: 'aqua'},
-      { presentation: 'Bright Turquoise', name: 'bright-turquoise'},
-      { presentation: 'Mint', name: 'mint'},
-      { presentation: 'Pale Grey', name: 'pale-grey'},
-    ]
-
-    colours = find_or_create_option_type('dress-color', 'Color', colour_attrs)
-
-    fabric_attrs = [
-      { presentation: 'Heavy Georgette', name: 'HG' },
-      { presentation: 'Matte Satin', name: 'MS' },
-    ]
-
-    # Common option types
-    fabrics = find_or_create_option_type('wedding-atelier-fabrics',
-                                         'Fabric',fabric_attrs)
-
-    length_attrs = [
-      { presentation: 'Mini', name: 'MN'},
-      { presentation: 'Knee', name: 'KN'},
-      { presentation: 'Petti', name: 'PT'},
-      { presentation: 'Midi', name: 'MD'},
-      { presentation: 'Ankle', name: 'AK'},
-      { presentation: 'Maxi', name: 'MX'}
-    ]
-    lengths = find_or_create_option_type('wedding-atelier-lengths',
-                                         'Length', length_attrs)
-
-    base_option_types = [sizes, fabrics, lengths, colours]
-
-    # Strapless ----------------------------------------------------------------------------------
-    strapless_styles = [
-      { presentation: 'Add sheer draped panel to bodice', price: 14.99 },
-      { presentation: 'Add wide off shoulder panel', price: 19.99 },
-      { presentation: 'Add separate cape', price: 24.99 },
-      { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
-    ]
-
-    strapless_fits = [
-      { presentation: 'Add wide bow tie straps', price: 9.99 },
-      { presentation: 'Change to curved neckline', price: 9.99 },
-      { presentation: 'Add flared hem ruffle', price: 24.99 },
-      { presentation: 'Add narrow adjusatble straps', price: 9.99 },
-      { presentation: 'Change to Hi-low hem', price: 29.99 }
-    ]
-
-    # TODO: Ask for the base price
-    strapless_attrs = {
-      name: 'Strapless Column Dress',
-      sku: 'FP2212',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(strapless_attrs, strapless_styles,
-                          strapless_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Fit and Flare  -----------------------------------------------------------------------------
-    fit_and_flare_styles = [
-      { presentation: 'Add 2-layer ruffle cape (attached)', price: 24.99 },
-      { presentation: 'Add single sleeve with cuff', price: 14.99 },
-      { presentation: 'Add bow to shoulder', price: 9.99 },
-      { presentation: 'Add flared arm bands', price: 19.99 },
-      { presentation: 'Add separate wide tie belt', price: 19.99 }
-    ]
-
-    fit_and_flare_fits = [
-      { presentation: 'Change to spaghetti straps', price: 9.99 },
-      { presentation: 'Change to halter neckline', price: 9.99 },
-      { presentation: 'Change to strapless neckline', price: 9.99 },
-      { presentation: 'Change to scoop neck', price: 9.99 },
-      { presentation: 'Change to hi-low hem', price: 9.99 }
-    ]
-
-    fit_and_flare_attrs = {
-      name: 'Fit and flare dress',
-      sku: 'FP2213',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
-                          fit_and_flare_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Shift --------------------------------------------------------------------------------------
-    shift_styles = [
-      { presentation: 'Add long fitted sleeves with shoulder cut-outs', price: 19.99 },
-      { presentation: 'Add draped side arm panels (attached to side seam)', price: 19.99 },
-      { presentation: 'Add wide off shoulder panel', price: 19.99 },
-      { presentation: 'Add long flared sleeve', price: 19.99 },
-      { presentation: 'Add separate wide tie belt', price: 19.99 }
-    ]
-
-    shift_fits = [
-      { presentation: 'Change to plunging v-back neckline', price: 9.99 },
-      { presentation: 'Change to plunging v-front neckline', price: 9.99 },
-      { presentation: 'Change to one shoulder neckline', price: 9.99 },
-      { presentation: 'Change to classic neckline', price: 9.99 },
-      { presentation: 'Change to a-line silhouette', price: 14.99 }
-    ]
-
-    # TODO: Ask for the base price
-    shift_attrs = {
-      name: 'Shift dress',
-      sku: 'FP2214',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(shift_attrs, shift_styles,
-                          shift_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Slip ---------------------------------------------------------------------------------------
-    slip_styles = [
-      { presentation: 'Add hem ruffle', price: 24.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
-      { presentation: 'Add long flared sleeve', price: 19.99 },
-      { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
-    ]
-
-    slip_fits = [
-      { presentation: 'Change to multi back straps', price: 14.99 },
-      { presentation: 'Change to rouleau straps', price: 9.99 },
-      { presentation: 'Change to round back neckline', price: 9.99 },
-      { presentation: 'Change to v-front neckline', price: 9.99 },
-      { presentation: 'Add side split', price: 9.99 }
-    ]
-
-    # TODO: Ask for the base price
-    slip_attrs = {
-      name: 'Slip dress',
-      sku: 'FP2215',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(slip_attrs, slip_styles,
-                          slip_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Wrap ---------------------------------------------------------------------------------------
-    wrap_styles = [
-      { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
-      { presentation: 'Add long flared sleeve', price: 19.99 },
-      { presentation: 'Add wide arm ties', price: 14.99 },
-      { presentation: 'Add voluminous half sleeve', price: 19.99 }
-    ]
-
-    wrap_fits = [
-      { presentation: 'Change to rouleau straps', price: 9.99 },
-      { presentation: 'Add hem ruffle', price: 24.99 },
-      { presentation: 'Change to v-wrap back neckline', price: 14.99 },
-      { presentation: 'Change to a-line skirt silhouette', price: 14.99 },
-      { presentation: 'Add double hem ruffle', price: 29.99 }
-    ]
-
-    # TODO: Ask for the base price
-    wrap_attrs = {
-      name: 'Wrap dress',
-      sku: 'FP2216',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(wrap_attrs, wrap_styles,
-                          wrap_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Tri-cup ------------------------------------------------------------------------------------
-    tri_cup_styles = [
-      { presentation: 'Add separate cape', price: 24.99 },
-      { presentation: 'Change to tie straps (remove ring & slide)', price: 9.99 },
-      { presentation: 'Add ruffles to cups', price: 14.99 },
-      { presentation: 'Add ruffles to steams', price: 24.99 },
-      { presentation: 'Add detachable bow', price: 19.99 }
-    ]
-
-    tri_cup_fits = [
-      { presentation: 'Change to column skirt', price: 14.99 },
-      { presentation: 'Change to wide straps', price: 9.99 },
-      { presentation: 'Change cross back straps with bow', price: 9.99 },
-      { presentation: 'Change to babydoll silhouette', price: 14.99 },
-      { presentation: 'Add double hem ruffle', price: 29.99 }
-    ]
-
-    # TODO: Ask for the base price
-    tri_cup_attrs = {
-      name: 'Tri-cup dress',
-      sku: 'FP2220',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(tri_cup_attrs, tri_cup_styles,
-                          tri_cup_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Two piece ----------------------------------------------------------------------------------
-    two_piece_styles = [
-      { presentation: 'Add ruffle to bodice edge', price: 14.99 },
-      { presentation: 'Add back neck bow tie', price: 14.99 },
-      { presentation: 'Add side ties (bow at back)', price: 19.99 },
-      { presentation: 'Add wide drapped arm bow ties', price: 14.99 },
-      { presentation: 'Add draped cold shoulder sleeve', price: 19.99 }
-    ]
-
-    two_piece_fits = [
-      { presentation: 'Add hem ruffle', price: 24.99 },
-      { presentation: 'Change to strapless bodice', price: 14.99 },
-      { presentation: 'ADd front keyhole', price: 9.99 },
-      { presentation: 'Change to column skirt', price: 14.99 },
-      { presentation: 'Change to classic bodice with short sleeve', price: 19.99 }
-    ]
-
-    # TODO: Ask for the base price
-    two_piece_attrs = {
-      name: 'Two piece dress',
-      sku: 'FP2218',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(two_piece_attrs, two_piece_styles,
-                          two_piece_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
-
-    # Multi way ----------------------------------------------------------------------------------
-    multi_way_styles = [
-      { presentation: 'Add ruffle down skirt edge', price: 14.99 },
-      { presentation: 'Add rufle at front neckline', price: 14.99 },
-      { presentation: 'Add separete arm bands', price: 14.99 },
-      { presentation: 'Add gathered hem ruffle', price: 24.99 },
-      { presentation: 'Add small train', price: 14.99 }
-    ]
-
-    multi_way_fits = [
-      { presentation: 'Change to full volume skirt', price: 24.99 },
-      { presentation: 'Remove overlapping skirt panel (split)', price: 9.99 },
-      { presentation: 'Change to hi-low hem', price: 24.99 },
-      { presentation: 'Raise front and back neckline (with added under bodice)', price: 14.99 },
-      { presentation: 'Change to column skirt', price: 14.99 }
-    ]
-
-    # TODO: Ask for the base price
-    multi_way_attrs = {
-      name: 'Multi way dress',
-      sku: 'FP2219',
-      price: 200,
-      hidden: true
-    }
-
-    find_or_create_product(multi_way_attrs, multi_way_styles,
-                          multi_way_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+  desc 'Create new wedding atelier option types'
+  task create_option_types: :environment do
+    Spree::OptionType.where(name: 'dress-fabric', presentation: 'Fabric').first_or_create
+    Spree::OptionType.where(name: 'dress-length', presentation: 'Length').first_or_create
   end
 
-  def find_or_create_option_type(name, presentation, option_values)
-    option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
-      ot.presentation = presentation
+  namespace :dev do
+    desc 'Run setup for the wedding atelier app dev environment, creating basic option types and sample values'
+    task populate_products: :environment do
+      # Guarantee Wedding Atelier Option Types
+      Rake::Task['wedding_atelier:create_option_types'].execute
+
+      # Create Taxonomy
+      taxonomy = Spree::Taxonomy.find_or_create_by_name('Wedding Atelier')
+      taxon = taxonomy.taxons.find_or_create_by_name('Base Silhouette')
+
+      # Option Types and Option Values
+      ## Sizes
+      sizes = Spree::OptionType.size
+
+      ## Colours
+      colours = Spree::OptionType.color
+      colour_attrs = [
+        { presentation: 'Champagne', name: 'champagne' },
+        { presentation: 'Navy', name: 'navy' },
+        { presentation: 'Black', name: 'black' },
+        { presentation: 'Berry', name: 'berry' },
+        { presentation: 'Burgundy', name: 'burgundy' },
+        { presentation: 'Red', name: 'red' },
+        { presentation: 'Watermelon', name: 'watermelon' },
+        { presentation: 'Coral', name: 'coral' },
+        { presentation: 'Peach', name: 'peach' },
+        { presentation: 'Bright Blush', name: 'bright-blush' },
+        { presentation: 'Pale Pink', name: 'pale-pink' },
+        { presentation: 'Lavender', name: 'lavender' },
+        { presentation: 'Plum', name: 'plum' },
+        { presentation: 'Royal Blue', name: 'royal-blue' },
+        { presentation: 'Cobalt Blue', name: 'cobalt-blue'},
+        { presentation: 'Pale Blue', name: 'pale-blue'},
+        { presentation: 'Aqua', name: 'aqua'},
+        { presentation: 'Bright Turquoise', name: 'bright-turquoise'},
+        { presentation: 'Mint', name: 'mint'},
+        { presentation: 'Pale Grey', name: 'pale-grey'},
+      ]
+
+      create_option_values_for(option_type: colours, option_values: colour_attrs)
+
+      ## Fabrics
+      fabrics = Spree::OptionType.fabric
+      fabric_attrs = [
+        { presentation: 'Heavy Georgette', name: 'HG' },
+        { presentation: 'Matte Satin', name: 'MS' },
+      ]
+
+      create_option_values_for(option_type: fabrics, option_values: fabric_attrs)
+
+      ## Lenghts
+      lengths = Spree::OptionType.length
+      length_attrs = [
+        { presentation: 'Mini', name: 'MN'},
+        { presentation: 'Knee', name: 'KN'},
+        { presentation: 'Petti', name: 'PT'},
+        { presentation: 'Midi', name: 'MD'},
+        { presentation: 'Ankle', name: 'AK'},
+        { presentation: 'Maxi', name: 'MX'}
+      ]
+
+      create_option_values_for(option_type: lengths, option_values: length_attrs)
+
+      base_option_types = [sizes, fabrics, lengths, colours]
+
+      # Strapless ----------------------------------------------------------------------------------
+      strapless_styles = [
+        { presentation: 'Add sheer draped panel to bodice', price: 14.99 },
+        { presentation: 'Add wide off shoulder panel', price: 19.99 },
+        { presentation: 'Add separate cape', price: 24.99 },
+        { presentation: 'Add separate wide tie belt', price: 19.99 },
+        { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      ]
+
+      strapless_fits = [
+        { presentation: 'Add wide bow tie straps', price: 9.99 },
+        { presentation: 'Change to curved neckline', price: 9.99 },
+        { presentation: 'Add flared hem ruffle', price: 24.99 },
+        { presentation: 'Add narrow adjusatble straps', price: 9.99 },
+        { presentation: 'Change to Hi-low hem', price: 29.99 }
+      ]
+
+      # TODO: Ask for the base price
+      strapless_attrs = {
+        name: 'Strapless Column Dress',
+        sku: 'FP2212',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(strapless_attrs, strapless_styles,
+                             strapless_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Fit and Flare  -----------------------------------------------------------------------------
+      fit_and_flare_styles = [
+        { presentation: 'Add 2-layer ruffle cape (attached)', price: 24.99 },
+        { presentation: 'Add single sleeve with cuff', price: 14.99 },
+        { presentation: 'Add bow to shoulder', price: 9.99 },
+        { presentation: 'Add flared arm bands', price: 19.99 },
+        { presentation: 'Add separate wide tie belt', price: 19.99 }
+      ]
+
+      fit_and_flare_fits = [
+        { presentation: 'Change to spaghetti straps', price: 9.99 },
+        { presentation: 'Change to halter neckline', price: 9.99 },
+        { presentation: 'Change to strapless neckline', price: 9.99 },
+        { presentation: 'Change to scoop neck', price: 9.99 },
+        { presentation: 'Change to hi-low hem', price: 9.99 }
+      ]
+
+      fit_and_flare_attrs = {
+        name: 'Fit and flare dress',
+        sku: 'FP2213',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
+                             fit_and_flare_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Shift --------------------------------------------------------------------------------------
+      shift_styles = [
+        { presentation: 'Add long fitted sleeves with shoulder cut-outs', price: 19.99 },
+        { presentation: 'Add draped side arm panels (attached to side seam)', price: 19.99 },
+        { presentation: 'Add wide off shoulder panel', price: 19.99 },
+        { presentation: 'Add long flared sleeve', price: 19.99 },
+        { presentation: 'Add separate wide tie belt', price: 19.99 }
+      ]
+
+      shift_fits = [
+        { presentation: 'Change to plunging v-back neckline', price: 9.99 },
+        { presentation: 'Change to plunging v-front neckline', price: 9.99 },
+        { presentation: 'Change to one shoulder neckline', price: 9.99 },
+        { presentation: 'Change to classic neckline', price: 9.99 },
+        { presentation: 'Change to a-line silhouette', price: 14.99 }
+      ]
+
+      # TODO: Ask for the base price
+      shift_attrs = {
+        name: 'Shift dress',
+        sku: 'FP2214',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(shift_attrs, shift_styles,
+                             shift_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Slip ---------------------------------------------------------------------------------------
+      slip_styles = [
+        { presentation: 'Add hem ruffle', price: 24.99 },
+        { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+        { presentation: 'Add long flared sleeve', price: 19.99 },
+        { presentation: 'Add separate wide tie belt', price: 19.99 },
+        { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      ]
+
+      slip_fits = [
+        { presentation: 'Change to multi back straps', price: 14.99 },
+        { presentation: 'Change to rouleau straps', price: 9.99 },
+        { presentation: 'Change to round back neckline', price: 9.99 },
+        { presentation: 'Change to v-front neckline', price: 9.99 },
+        { presentation: 'Add side split', price: 9.99 }
+      ]
+
+      # TODO: Ask for the base price
+      slip_attrs = {
+        name: 'Slip dress',
+        sku: 'FP2215',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(slip_attrs, slip_styles,
+                             slip_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Wrap ---------------------------------------------------------------------------------------
+      wrap_styles = [
+        { presentation: 'Add separate wide tie belt', price: 19.99 },
+        { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+        { presentation: 'Add long flared sleeve', price: 19.99 },
+        { presentation: 'Add wide arm ties', price: 14.99 },
+        { presentation: 'Add voluminous half sleeve', price: 19.99 }
+      ]
+
+      wrap_fits = [
+        { presentation: 'Change to rouleau straps', price: 9.99 },
+        { presentation: 'Add hem ruffle', price: 24.99 },
+        { presentation: 'Change to v-wrap back neckline', price: 14.99 },
+        { presentation: 'Change to a-line skirt silhouette', price: 14.99 },
+        { presentation: 'Add double hem ruffle', price: 29.99 }
+      ]
+
+      # TODO: Ask for the base price
+      wrap_attrs = {
+        name: 'Wrap dress',
+        sku: 'FP2216',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(wrap_attrs, wrap_styles,
+                             wrap_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Tri-cup ------------------------------------------------------------------------------------
+      tri_cup_styles = [
+        { presentation: 'Add separate cape', price: 24.99 },
+        { presentation: 'Change to tie straps (remove ring & slide)', price: 9.99 },
+        { presentation: 'Add ruffles to cups', price: 14.99 },
+        { presentation: 'Add ruffles to steams', price: 24.99 },
+        { presentation: 'Add detachable bow', price: 19.99 }
+      ]
+
+      tri_cup_fits = [
+        { presentation: 'Change to column skirt', price: 14.99 },
+        { presentation: 'Change to wide straps', price: 9.99 },
+        { presentation: 'Change cross back straps with bow', price: 9.99 },
+        { presentation: 'Change to babydoll silhouette', price: 14.99 },
+        { presentation: 'Add double hem ruffle', price: 29.99 }
+      ]
+
+      # TODO: Ask for the base price
+      tri_cup_attrs = {
+        name: 'Tri-cup dress',
+        sku: 'FP2220',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(tri_cup_attrs, tri_cup_styles,
+                             tri_cup_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Two piece ----------------------------------------------------------------------------------
+      two_piece_styles = [
+        { presentation: 'Add ruffle to bodice edge', price: 14.99 },
+        { presentation: 'Add back neck bow tie', price: 14.99 },
+        { presentation: 'Add side ties (bow at back)', price: 19.99 },
+        { presentation: 'Add wide drapped arm bow ties', price: 14.99 },
+        { presentation: 'Add draped cold shoulder sleeve', price: 19.99 }
+      ]
+
+      two_piece_fits = [
+        { presentation: 'Add hem ruffle', price: 24.99 },
+        { presentation: 'Change to strapless bodice', price: 14.99 },
+        { presentation: 'ADd front keyhole', price: 9.99 },
+        { presentation: 'Change to column skirt', price: 14.99 },
+        { presentation: 'Change to classic bodice with short sleeve', price: 19.99 }
+      ]
+
+      # TODO: Ask for the base price
+      two_piece_attrs = {
+        name: 'Two piece dress',
+        sku: 'FP2218',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(two_piece_attrs, two_piece_styles,
+                             two_piece_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+
+      # Multi way ----------------------------------------------------------------------------------
+      multi_way_styles = [
+        { presentation: 'Add ruffle down skirt edge', price: 14.99 },
+        { presentation: 'Add rufle at front neckline', price: 14.99 },
+        { presentation: 'Add separete arm bands', price: 14.99 },
+        { presentation: 'Add gathered hem ruffle', price: 24.99 },
+        { presentation: 'Add small train', price: 14.99 }
+      ]
+
+      multi_way_fits = [
+        { presentation: 'Change to full volume skirt', price: 24.99 },
+        { presentation: 'Remove overlapping skirt panel (split)', price: 9.99 },
+        { presentation: 'Change to hi-low hem', price: 24.99 },
+        { presentation: 'Raise front and back neckline (with added under bodice)', price: 14.99 },
+        { presentation: 'Change to column skirt', price: 14.99 }
+      ]
+
+      # TODO: Ask for the base price
+      multi_way_attrs = {
+        name: 'Multi way dress',
+        sku: 'FP2219',
+        price: 200,
+        hidden: true
+      }
+
+      find_or_create_product(multi_way_attrs, multi_way_styles,
+                             multi_way_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
     end
+  end
+
+
+  # @param [Spree::OptionType] option_type
+  # @param [Array<Hash{Symbol => String}>] option_values
+  def create_option_values_for(option_type:, option_values: [])
     option_values.each do |attrs|
-      ov = Spree::OptionValue.find_or_create_by_name(attrs[:name]) do |o|
-        o.presentation = attrs[:presentation]
+      ov = Spree::OptionValue.where(name: attrs[:name], presentation: attrs[:presentation]).first_or_create
+
+      unless option_type.option_values.include? ov
+        option_type.option_values << ov
       end
-      option_type.option_values << ov unless option_type.option_values.include? ov
     end
-    option_type
   end
 
   def create_customizations(product, customizations, customization_type)
