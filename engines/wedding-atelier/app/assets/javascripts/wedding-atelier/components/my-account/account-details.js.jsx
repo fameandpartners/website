@@ -1,6 +1,7 @@
 var AccountDetails = React.createClass({
   propTypes: {
-    user: React.PropTypes.object.isRequired
+    user: React.PropTypes.object.isRequired,
+    account_path: React.PropTypes.string.isRequired
   },
 
   getInitialState: function () {
@@ -50,7 +51,7 @@ var AccountDetails = React.createClass({
 
   handleSave: function(e) {
     e.preventDefault();
-    var state = $.extend({}, this.state);
+    var state = this.state;
     var payload = {
       account: {
         first_name: state.firstName,
@@ -61,12 +62,11 @@ var AccountDetails = React.createClass({
       newsletter: state.newsletter
     };
     if (this.allowedChangePassword()) {
-      var password = {
+      payload.password = {
         current_password: state.currentPassord,
         password: state.newPassword,
         password_confirmation: state.confirmPassword
       };
-      payload.password = password;
     }
 
     $.ajax({
