@@ -25,7 +25,7 @@
     = f.password_field :password, class: 'form-control'
 
     .checkbox
-      = f.fields_for :user_profile, @user.build_user_profile(skip_validation: true) do |ff|
+      = f.fields_for :user_profile, @user.user_profile do |ff|
         = ff.hidden_field :skip_validation
         = ff.check_box :trend_updates
         = ff.label :trend_updates
