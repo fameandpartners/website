@@ -49,7 +49,7 @@ var AccountDetails = React.createClass({
     this.setState({newsletter: !this.state.newsletter});
   },
 
-  handleSave: function(e) {
+  changesSavedHandle: function(e) {
     e.preventDefault();
     var state = this.state;
     var payload = {
@@ -145,9 +145,7 @@ var AccountDetails = React.createClass({
           </div>
 
           <div className="checkbox col-sm-12">
-            <button className="btn-black" onClick={this.handleSave}>
-              Save
-            </button>
+            <button className="btn-black" onClick={this.changesSavedHandle}>Update</button>
           </div>
         </form>
       </div>
