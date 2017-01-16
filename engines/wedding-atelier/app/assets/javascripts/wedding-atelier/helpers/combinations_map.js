@@ -1,4 +1,26 @@
 var CombinationsMap = (function(){
+  // This map is just a representation of the spreadsheet given with the
+  // forbidden combinations of customizations.
+
+  // This is a function called every time a user selects a customization
+  // logic is pretty simple, a big map with true values for options that have to
+  // be disabled.
+
+  // The first level of this JSON, are the skus of the 8 base silhouettes
+  // from wedding atelier, inside that key, there's another object with
+  // 3 more keys (disabledFits, disabledStyles and disabledLengths).
+
+  // disabledFits holds a set of objects for different style keys and each
+  // of those has a set of fits that should be disabled if that syle has been
+  // selected.
+
+  // disabledStyles works the same as disabledFits, but has fits as keys and
+  // styles as the disabled values
+
+  // disabledLengths its a mix of both it needs the fit key and the syle keys
+  // to get a list of disabled lenghts using they're coded names.
+
+
   var disabledMap = {
     FP2212: {
       disabledFits: {
@@ -291,23 +313,26 @@ var CombinationsMap = (function(){
 
 
   return {
-    isDisabled: function(optionsKeys, option, type){
+    /**
+      * returns true if the customization should be disabled
+      * @param { object } optionsKeys
+      * @param { object } customization
+      * @param { string } type
+    **/
+    isDisabled: function(optionsKeys, customization, type){
       var silhouette = disabledMap[optionsKeys.silhouette];
       if(type === 'fit'){
         var fit = silhouette.disabledFits[optionsKeys.style];
-        return fit ? !!fit[option.name] : false;
+        return fit ? !!fit[customization.name] : false;
       }
 
       if(type === 'style'){
         var style = silhouette.disabledStyles[optionsKeys.fit];
-        return style ? !!style[option.name] : false;
+        return style ? !!style[customization.name] : false;
       }
 
 
       if(type === 'length'){
-        if(optionsKeys.silhouette === 'FP2213'){
-          debugger;
-        }
         var fit = silhouette.disabledLengths[optionsKeys.fit],
             length = fit ? fit[optionsKeys.style] : false;
         return length ? !!length[optionsKeys.length] : false;
