@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
+
 RSpec.describe VariantSku do
   let(:style_number)     { 'OmGWtFBBq' }
   let(:dress)            { create :dress, sku: style_number }
@@ -39,12 +41,6 @@ RSpec.describe VariantSku do
       let(:dress)   { create :dress_with_magenta_size_10, sku: style_number }
       let(:variant) { dress.variants.first }
       let(:colour_id) { Spree::OptionValue.where(:name => 'magenta').first.id.to_s }
-
-      before :each do
-        # I am so sick of these class variables causing stupid test failures.
-        Spree::Variant.instance_variable_set(:@size_option_type, nil)
-        Spree::Variant.instance_variable_set(:@color_option_type, nil)
-      end
 
       it 'contains a complete SKU' do
         expect(sku).to eq "OMGWTFBBQUS10AU14C#{colour_id}"
