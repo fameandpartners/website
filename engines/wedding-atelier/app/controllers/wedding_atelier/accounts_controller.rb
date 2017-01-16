@@ -13,7 +13,7 @@ module WeddingAtelier
       if current_spree_user.update_attributes(params[:account])
         render json: {status: :ok}
       else
-        render json: {errors: current_spree_users.errors}, status: :unprocessable_entity
+        render json: {errors: current_spree_user.errors}, status: :unprocessable_entity
       end
     end
 
@@ -21,7 +21,7 @@ module WeddingAtelier
       if current_spree_user.update_attributes(params[:account])
         render json: {status: :ok}
       else
-        render json: {errors: current_spree_users.errors}, status: :unprocessable_entity
+        render json: {errors: current_spree_user.errors}, status: :unprocessable_entity
       end
     end
   end

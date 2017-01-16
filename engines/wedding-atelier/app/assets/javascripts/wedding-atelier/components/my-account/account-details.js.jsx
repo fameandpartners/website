@@ -61,6 +61,7 @@ var AccountDetails = React.createClass({
       },
       newsletter: state.newsletter
     };
+    var notificationNode = document.getElementById('notification');
     if (this.allowedChangePassword()) {
       payload.password = {
         current_password: state.currentPassord,
@@ -68,19 +69,19 @@ var AccountDetails = React.createClass({
         password_confirmation: state.confirmPassword
       };
     }
-
     $.ajax({
       url: this.props.account_path,
       type: 'PUT',
       dataType: 'json',
       data: payload,
       success: function (response) {
-        // show alert
-        alert('saved!');
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={['Changes successfully saved']} />, notificationNode);
       },
       error: function (data) {
-        //var parsed = JSON.parse(data.responseText);
-        alert('something went wrong');
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors
+} />, notificationNode);
       }
     });
   },
