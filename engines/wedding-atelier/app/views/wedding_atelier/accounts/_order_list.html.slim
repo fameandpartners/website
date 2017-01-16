@@ -37,9 +37,9 @@
               - if order.returnable?
                 = link_to 'Return or exchange', new_user_returns_path(:order_number => order.number), :class => 'order-details-cta'
 
-.container.additional-info
+.container-fluid.additional-info
   .row.faqs-section
-    .col-md-8
+    .col-xs-12.col-md-8
       h2 FAQs about Orders
       .faq.faq-wrap
         .panel-group.content-collapse-expand role='tablist' aria-multiselectable='true'
@@ -48,7 +48,6 @@
           = render 'shared/redesign/faqs/delivery_POBOX'
           = render 'shared/redesign/faqs/cancel_order'
           = render 'shared/redesign/faqs/returns_policy'
-
-    .col-md-4
+    .col-xs-12.col-md-4
       aside
         = render 'shared/redesign/faqs/aside_panel_faq'
