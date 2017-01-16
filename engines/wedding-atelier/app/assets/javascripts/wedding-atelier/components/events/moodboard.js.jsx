@@ -190,7 +190,7 @@ var MoodBoardEvent = React.createClass({
           {this.state.left_chat}
         </div>
         <div className="right-content col-sm-6">
-          <div className='right-container row'>
+          <div className='right-container'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
@@ -221,7 +221,7 @@ var MoodBoardEvent = React.createClass({
                 </li>
               </ul>
               <div className="tab-content">
-                <div id="chat-mobile" className="tab-pane" role="tabpanel">
+                <div id="chat-mobile" className="tab-pane col-xs-12" role="tabpanel">
                   {this.state.right_chat}
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
