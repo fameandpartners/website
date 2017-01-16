@@ -245,7 +245,7 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
                   <h1 className="text-center">
-                    <em>Janine</em>, intive the bridal party.
+                    <em>Now</em>, let's invite the bridal party.
                   </h1>
                   <EventInvitations invitations={this.state.event.invitations}
                                     assistants={this.state.event.assistants}

@@ -379,7 +379,8 @@ var Chat = React.createClass({
                    value={this.message}
                    id='chat-message'
                    onChange={this.startTyping}
-                   ref="chatMessage" />
+                   ref="chatMessage"
+                   placeholder="Start typing..." />
           </div>
           <div className="btn-send-container">
             <input value="send" className="btn btn-black btn-send-msg-to-chat" type="submit"/>
