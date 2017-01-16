@@ -8,7 +8,8 @@ var CustomizationsContainerMobile = React.createClass({
     siteVersion: React.PropTypes.string,
     startOverCallback: React.PropTypes.func,
     goToSlide: React.PropTypes.func,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    selectedOptions: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -59,6 +60,8 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.silhouettes}
           selectedOption={this.props.selectedOptions.silhouette}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="silhouette"
           keyword="Create"
           title="it how you want"
@@ -78,6 +81,8 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.lengths}
           selectedOption={this.props.selectedOptions.length}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="length"
           keyword="Choose"
           title="your length."
@@ -89,6 +94,8 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.styles}
           selectedOption={this.props.selectedOptions.style}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="style"
           keyword="Design"
           title="the details."
@@ -100,6 +107,8 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.fits}
           selectedOption={this.props.selectedOptions.fit}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="fit"
           keyword="Tailor"
           title="to your body."

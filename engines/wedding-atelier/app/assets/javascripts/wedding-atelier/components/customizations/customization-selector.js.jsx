@@ -12,6 +12,10 @@ var CustomizationSelector = React.createClass({
     selectedOptions: React.PropTypes.object
   },
 
+  selectCustomization: function(type, option){
+    this.props.selectCallback(type, option);
+  },
+
   isOptionDisabled: function(option){
     if(this.props.type === 'silhouette'){ return false; }
     var customizations = this.props.selectedOptions;
@@ -33,11 +37,14 @@ var CustomizationSelector = React.createClass({
     var itemProps = {
       type: this.props.type,
       selectedOption: this.props.selectedOption,
-      selectCallback: this.props.selectCallback
+      selectCallback: this.props.selectCallback,
+      clickCustomizationCallback: this.selectCustomization,
+      clickedOptions: {}
     }
 
     var options = this.props.options.map(function(option, index) {
       itemProps.option = $.extend({}, option);
+      itemProps.mobile = false;
       if(!this.isOptionDisabled(itemProps.option)){
         return(<CustomizationItem key={index} {...itemProps} />);
       }

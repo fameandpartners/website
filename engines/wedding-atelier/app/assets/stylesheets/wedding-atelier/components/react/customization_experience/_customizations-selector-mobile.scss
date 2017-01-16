@@ -47,7 +47,7 @@
   }
 
   &:hover,
-  &.active {
+  &.active, &.clicked {
     border: 1px solid $black;
   }
 

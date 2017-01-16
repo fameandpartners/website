@@ -52,7 +52,8 @@ var MobileCustomizations = React.createClass({
     });
 
     var customizationsContainerMobileProps = $.extend(defaultProps, {
-      startOverCallback: this.props.startOverCallback
+      startOverCallback: this.props.startOverCallback,
+      selectedOptions: this.props.selectedOptions
     });
 
     return (
