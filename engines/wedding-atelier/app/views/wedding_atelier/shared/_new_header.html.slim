@@ -1,11 +1,10 @@
 .shared-header
-  = link_to '', 'javascript:history.back()', class: ['shared-header-back-arrow', 'hidden-sm', 'hidden-md', 'hidden-lg']
-  .shared-header-options
+  = link_to '', 'javascript:history.back()', class: ['shared-header-back-arrow', 'hidden-md', 'hidden-lg']
+  .shared-header-options.hidden-xs.hidden-sm
     ul
       li.shared-header-profile-image = profile_image_tag
-      - if defined? @event
-        li.shared-header-event-name
-          .border-wrapper = @event.name
+      li.shared-header-user-name
+        .border-wrapper = current_spree_user.first_name
       li.shared-header-user-role
         .border-wrapper = 'bride'
       li.shared-header-account
