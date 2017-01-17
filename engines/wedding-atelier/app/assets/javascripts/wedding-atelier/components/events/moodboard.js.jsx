@@ -3,6 +3,7 @@ var MoodBoardEvent = React.createClass({
   propTypes: {
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
+    dresses_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
@@ -65,6 +66,27 @@ var MoodBoardEvent = React.createClass({
 
   getDresses: function() {
     return this.state.event.dresses;
+  },
+
+  removeDress: function(dress){
+    var that = this,
+        url = this.props.dresses_path + '/' + dress.id
+    $.ajax({
+      url: url ,
+      type: 'DELETE',
+      dataType: 'json',
+      success: function(data) {
+        var _newState = $.extend({}, that.state);
+        _newState.event.dresses = _.reject(_newState.event.dresses, function(eventDress){
+          return eventDress.id === data.event_dress.id;
+        })
+        that.setState(_newState);
+      }.bind(this),
+      error: function(error) {
+        ReactDOM.render(<Notification errors={[error.statusText]} />,
+                    $('#notification')[0]);
+      }
+    })
   },
 
   setDresses: function(dresses) {
@@ -232,6 +254,7 @@ var MoodBoardEvent = React.createClass({
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
+                      removeDress={this.removeDress}
                       handleLikeDress={this.handleLikeDress} />
                   </div>
                 </div>

@@ -5,6 +5,7 @@
                     remove_assistant_path: event_assistant_path(event_id: @event, id: 'id'),
                     twilio_token_path: token_path,
                     event_id: @event.id,
+                    dresses_path: event_dresses_path(@event),
                     wedding_name: @event.name,
                     profile_photo: profile_image_path,
                     username: spree_current_user.full_name,
