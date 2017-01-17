@@ -5,10 +5,14 @@ class VariantSku
     @variant = variant
   end
 
-  # Note that this is somewhat duplicated with CustomItemSku
   def call
     return variant.sku.to_s.upcase if variant.is_master
-    "#{style_number}#{size}#{color}#{custom}"
+
+    Skus::Generator.new(
+      style_number: style_number,
+      size:         size,
+      color_id:     color_id
+    ).call
   rescue StandardError => e
     Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, variant_id: variant.id)
@@ -17,22 +21,14 @@ class VariantSku
   end
 
   def style_number
-    variant.product.master.sku.to_s.upcase
+    variant.product.master.sku
   end
 
   def size
-    if variant.dress_size
-      variant.dress_size.name.to_s.gsub('/', '')
-    end
+    variant.dress_size&.name
   end
 
-  def color
-    if variant.dress_color
-      "C#{variant.dress_color.id}"
-    end
-  end
-
-  def custom
-    ''
+  def color_id
+    variant.dress_color&.id
   end
 end

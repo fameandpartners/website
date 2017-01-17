@@ -82,11 +82,15 @@ class Repositories::Taxonomy
       @taxons_loaded_at = Time.now
       all_taxons = []
 
+      # NOTE: Alexey Bobyrev 13 Jan 2017
+      # We should avoid calling relations here as they could be `nil`
+      # Temporary solution is to add safe navigator
+      # Which is obviously need to be handled properly
       Spree::Taxon.includes(:taxonomy, :banner).each do |taxon|
         result = OpenStruct.new(
           {
             id: taxon.id,
-            taxonomy: taxon.taxonomy.name,
+            taxonomy: taxon.taxonomy&.name,
             name: taxon.name,
             permalink: taxon.base_permalink,
             position: taxon.position,
