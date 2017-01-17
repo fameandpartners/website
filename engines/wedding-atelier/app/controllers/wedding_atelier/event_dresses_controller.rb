@@ -2,20 +2,22 @@ require_dependency "wedding_atelier/application_controller"
 module WeddingAtelier
   class EventDressesController < ApplicationController
 
+    before_filter :find_event
+
     def new
-      @event = Event.find_by_slug(params[:event_id])
     end
 
     def edit
+      @dress = @event.dresses.find(params[:id])
     end
 
     def create
-      dress = event.dresses.create(event_dress_params)
+      dress = @event.dresses.create(event_dress_params)
       render json: dress
     end
 
     def update
-      dress = event.dresses.find(params[:id])
+      dress = @event.dresses.find(params[:id])
       if dress.update_attributes(event_dress_params)
         render json: dress
       else
@@ -24,7 +26,7 @@ module WeddingAtelier
     end
 
     def destroy
-      dress = event.dresses.find(params[:id])
+      dress = @event.dresses.find(params[:id])
       if dress.destroy
         render json: dress
       else
@@ -34,8 +36,8 @@ module WeddingAtelier
 
     private
 
-    def event
-      @event ||= WeddingAtelier::Event.find_by_slug(params[:event_id])
+    def find_event
+      @event = WeddingAtelier::Event.find_by_slug(params[:event_id])
     end
 
     def event_dress_params

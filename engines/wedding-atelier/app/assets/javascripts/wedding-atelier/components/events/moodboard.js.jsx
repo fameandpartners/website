@@ -255,6 +255,7 @@ var MoodBoardEvent = React.createClass({
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
                       removeDress={this.removeDress}
+                      dressesPath={this.props.dresses_path}
                       handleLikeDress={this.handleLikeDress} />
                   </div>
                 </div>

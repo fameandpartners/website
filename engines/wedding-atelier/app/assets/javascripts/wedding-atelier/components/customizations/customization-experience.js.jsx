@@ -5,7 +5,8 @@ var CustomizationExperience = React.createClass({
     eventSlug: React.PropTypes.string,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string
+    event_path: React.PropTypes.string,
+    initialDress: React.PropTypes.object
   },
 
   getInitialState: function() {
@@ -39,23 +40,46 @@ var CustomizationExperience = React.createClass({
 
   componentWillMount: function(){
     $.get(this.props.customizationsUrl, function(data){
-      var newState = $.extend({}, this.state),
-          silhouette = data.customization.silhouettes[0],
-          fabric = _.findWhere(data.customization.fabrics, { name: 'HG'}),
-          colour = _.findWhere(data.customization.colours, { name: 'berry' }),
-          length = _.findWhere(data.customization.lengths, { name: 'AK' });
-      newState.customizations = data.customization;
-      newState.selectedOptions.silhouette = silhouette
-      newState.selectedOptions.fabric = fabric;
-      newState.selectedOptions.colour = colour;
-      newState.selectedOptions.length = length;
-      newState.selectedOptions.size = this.props.currentUser.user;
-      newState.customizations.fits = silhouette.fits;
-      newState.customizations.styles = silhouette.styles;
-      newState.subTotal = parseInt(silhouette.price);
-      newState.customizationsCost = this.customizationsCost();
-      this.setState(newState);
+      if(this.props.initialDress.event_dress){
+        this.prepareEditDress(data.customization, this.props.initialDress.event_dress)
+      }else{
+        this.prepareNewDress(data.customization);
+      }
     }.bind(this));
+  },
+
+  prepareEditDress: function(customization, dress){
+    var newState = $.extend({}, this.state)
+    newState.customizations = customization;
+    newState.selectedOptions.silhouette = dress.product;
+    newState.selectedOptions.fabric = dress.fabric;
+    newState.selectedOptions.colour = dress.color;
+    newState.selectedOptions.length = dress.length;
+    newState.selectedOptions.size = dress.size;
+    newState.customizations.fits = dress.product.fits;
+    newState.customizations.styles = dress.product.styles;
+    newState.subTotal = parseInt(dress.product.price);
+    newState.customizationsCost = this.customizationsCost();
+    this.setState(newState);
+  },
+
+  prepareNewDress: function(customization){
+    var newState = $.extend({}, this.state),
+        silhouette = customization.silhouettes[0],
+        fabric = _.findWhere(customization.fabrics, { name: 'HG'}),
+        colour = _.findWhere(customization.colours, { name: 'berry' }),
+        length = _.findWhere(customization.lengths, { name: 'AK' });
+    newState.customizations = customization;
+    newState.selectedOptions.silhouette = silhouette
+    newState.selectedOptions.fabric = fabric;
+    newState.selectedOptions.colour = colour;
+    newState.selectedOptions.length = length;
+    newState.selectedOptions.size = this.props.currentUser.user;
+    newState.customizations.fits = silhouette.fits;
+    newState.customizations.styles = silhouette.styles;
+    newState.subTotal = parseInt(silhouette.price);
+    newState.customizationsCost = this.customizationsCost();
+    this.setState(newState);
   },
 
   customizationsCost: function(){
