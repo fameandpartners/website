@@ -1,5 +1,5 @@
 .moodboard-tabs {
-  height: calc(100% - 43px);
+  height: 100%;
 
   .nav-tabs {
     min-width: 680px;
@@ -8,8 +8,9 @@
 
   .tab-content {
     overflow: auto;
-    height: calc(100% - 34px);
+    height: 100%;
   }
+
   .nav-tabs > li > a::after {
     content: "";
     background: $black;
@@ -58,14 +59,9 @@
   }
 
   .moodboard-tabs {
-    min-width: 100% !important;
-    height: 100% !important;
   }
 
   .nav.nav-tabs {
-    min-width: 100% !important;
-    width: 100% !important;
-
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;

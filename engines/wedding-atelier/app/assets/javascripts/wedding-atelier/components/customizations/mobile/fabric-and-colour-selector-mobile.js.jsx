@@ -91,7 +91,7 @@ var FabricAndColourSelectorMobile = React.createClass({
           <div className="row">
             {this.renderFabrics()}
           </div>
-          <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className="description">Heavy georgette has a flat, matte finish. Matte satin has a little more shine. Which do you prefer?</p>
         </div>
         <div className="customizations-selector-mobile-grid row">
           {this.renderColours()}
