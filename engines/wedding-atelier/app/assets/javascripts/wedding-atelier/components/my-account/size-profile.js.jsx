@@ -12,7 +12,7 @@ var SizeProfile = React.createClass({
     return {
       size: 0,
       height: '',
-      user_profile: $.extend({}, this.props.user_profile.user_profile)
+      userProfile: this.props.user_profile.user_profile
     };
   },
 
@@ -22,7 +22,7 @@ var SizeProfile = React.createClass({
       minimumResultsForSearch: Infinity
     }).on('change', function (e) {
       that.changeHeightHandler(e.target.value);
-    }).val(this.state.user_profile.height);
+    }).val(this.props.user_profile.user_profile.height);
   },
 
   parsePresentation: function (size) {
@@ -31,7 +31,10 @@ var SizeProfile = React.createClass({
   },
 
   changeSizeHandler: function (size) {
-    this.setState({size: size.option_value.id});
+    this.setState({
+      size: size.option_value.id,
+      userProfile: null
+    });
   },
 
   changeHeightHandler: function (height) {
@@ -49,22 +52,31 @@ var SizeProfile = React.createClass({
   },
 
   renderDressSizes: function () {
+    var that = this;
     return this.props.sizes.map(function (size, index) {
-      var id = 'size-profile-option' + index;
+      var id = 'size-profile-option-' + index,
+          inputProps = {
+            id: id,
+            type: 'radio',
+            name: 'size',
+            value: size.name,
+            onChange: that.changeSizeHandler.bind(null, size)
+          };
+
+      if (size.option_value.id === that.state.size || (that.state.userProfile && size.option_value.id === that.state.userProfile.dress_size_id)) {
+        inputProps.checked = true;
+      }
+
       return (
         <li key={index}>
-          <input id={id}
-            type="radio"
-            name="size"
-            value={size.option_value.name}
-            onClick={this.changeSizeHandler.bind(null, size)}/>
+          <input {...inputProps}/>
           <label htmlFor={id}>{this.parsePresentation(size)}</label>
         </li>
       );
     }.bind(this));
   },
 
-  handleSave: function(e){
+  sizeProfileSavedHandle: function(e){
     e.preventDefault();
     var state = $.extend({}, this.state);
     var payload = {
@@ -75,18 +87,19 @@ var SizeProfile = React.createClass({
           dress_size_id: state.size}
       }
     };
+    var notificationNode = document.getElementById('notification');
     $.ajax({
       url: this.props.account_profile_path,
       type: 'PUT',
       dataType: 'json',
       data: payload,
       success: function (response) {
-        // show alert
-        alert('saved!');
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={['Changes successfully saved']} />, notificationNode);
       },
       error: function (data) {
-        //var parsed = JSON.parse(data.responseText);
-        alert('something went wrong');
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors} />, notificationNode);
       }
     });
 
@@ -114,9 +127,7 @@ var SizeProfile = React.createClass({
           </div>
         </div>
         <div className="checkbox col-sm-12">
-          <button className="btn-black" onClick={this.handleSave}>
-            Save
-          </button>
+          <button className="btn-black" onClick={this.sizeProfileSavedHandle}>Save</button>
         </div>
       </div>
     );

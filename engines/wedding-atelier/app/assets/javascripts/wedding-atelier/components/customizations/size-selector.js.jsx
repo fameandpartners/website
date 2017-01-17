@@ -48,7 +48,7 @@ var SizeSelector = React.createClass({
   sizeSelectedHandle: function(size) {
     this.setState({
       assistant: null,
-      size: size
+      size: size.option_value
     });
     if(this.state.height && this.state.height !== this.props.currentUser.user.user_profile.height) {
       this.props.selectCallback('height', this.state.height);
