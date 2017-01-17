@@ -57,17 +57,15 @@ var AccountDetails = React.createClass({
         first_name: state.firstName,
         last_name: state.lastName,
         email: state.email,
-        dob: state.dateOfBirth
+        dob: state.dateOfBirth,
+        newsletter: state.newsletter
       },
-      newsletter: state.newsletter
     };
     var notificationNode = document.getElementById('notification');
     if (this.allowedChangePassword()) {
-      payload.password = {
-        current_password: state.currentPassord,
-        password: state.newPassword,
-        password_confirmation: state.confirmPassword
-      };
+      payload.account.current_password = state.currentPassword;
+      payload.account.password = state.newPassword;
+      payload.account.password_confirmation =  state.confirmPassword;
     }
     $.ajax({
       url: this.props.account_path,
@@ -80,15 +78,14 @@ var AccountDetails = React.createClass({
       },
       error: function (data) {
         ReactDOM.unmountComponentAtNode(notificationNode);
-        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors
-} />, notificationNode);
+        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors} />, notificationNode);
       }
     });
   },
 
   allowedChangePassword: function() {
     var state = $.extend({}, this.state);
-    return state.currentPassword !== '' && state.newPassword !== '' && state.newPassword === state.confirmPassword;
+    return state.currentPassword !== '';
   },
 
   render: function () {

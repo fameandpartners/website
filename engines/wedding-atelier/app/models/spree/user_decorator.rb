@@ -1,13 +1,12 @@
 Spree::User.class_eval do
   attr_accessor :event_role
 
-  attr_accessible :height,
-                  :dress_size,
-                  :wedding_atelier_signup_step,
+  attr_accessible :wedding_atelier_signup_step,
                   :events_attributes,
                   :event_role,
                   :trend_updates,
-                  :user_profile_attributes
+                  :user_profile_attributes,
+                  :user_profile
 
   has_one :user_profile, class_name: 'WeddingAtelier::UserProfile', foreign_key: :spree_user_id, dependent: :destroy
   has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'

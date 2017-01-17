@@ -4,19 +4,25 @@ var SizeProfile = React.createClass({
     sizes: React.PropTypes.array.isRequired,
     heights: React.PropTypes.object.isRequired,
     siteVersion: React.PropTypes.string.isRequired,
-    account_profile_path: React.PropTypes.string.isRequired
+    account_profile_path: React.PropTypes.string.isRequired,
+    user_profile: React.PropTypes.object.isRequired
   },
 
   getInitialState: function () {
     return {
       size: 0,
-      height: ''
+      height: '',
+      user_profile: $.extend({}, this.props.user_profile.user_profile)
     };
   },
 
   componentDidMount: function () {
-    $(this.refs.heightSelect)
-      .select2({ minimumResultsForSearch: Infinity });
+    var that = this;
+    $(this.refs.heightSelect).select2({
+      minimumResultsForSearch: Infinity
+    }).on('change', function (e) {
+      that.changeHeightHandler(e.target.value);
+    }).val(this.state.user_profile.height);
   },
 
   parsePresentation: function (size) {
@@ -28,15 +34,14 @@ var SizeProfile = React.createClass({
     this.setState({size: size.option_value.id});
   },
 
-  changeHeightHandler: function (evt) {
-    var height = evt.target.selectedOptions[0].value;
+  changeHeightHandler: function (height) {
     this.setState({height: height});
   },
 
   renderHeightOptions: function () {
     return Object.keys(this.props.heights).map(function (group, index) {
       var heights = this.props.heights[group].map(function (height, index) {
-        return <option key={index} value={group[0]}>{height}</option>;
+        return <option key={index} value={group}>{height}</option>;
       });
 
       return <optgroup key={group} label={group}>{heights}</optgroup>;
@@ -64,8 +69,10 @@ var SizeProfile = React.createClass({
     var state = $.extend({}, this.state);
     var payload = {
       account: {
-        height: state.height,
-        dress_size: state.size
+        user_profile_attributes: {
+          id: this.props.user_profile.id,
+          height: state.height,
+          dress_size_id: state.size}
       }
     };
     $.ajax({
