@@ -3,6 +3,7 @@ var DressTile = React.createClass({
   propTypes: {
     sendDressToChatFn: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
+    removeDress: React.PropTypes.func,
     index: React.PropTypes.number,
     dress: React.PropTypes.shape({
       id: React.PropTypes.number,
@@ -24,6 +25,10 @@ var DressTile = React.createClass({
     this.props.handleLikeDress(this.props.dress);
   },
 
+  removeDress: function(){
+    this.props.removeDress(this.props.dress)
+  },
+
   sendToChatHandler: function() {
     this.props.sendDressToChatFn(this.props.dress);
   },
@@ -41,7 +46,7 @@ var DressTile = React.createClass({
             <div className="likes">
               <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.likes_count}
             </div>
-            <a href="#" className="icon-close pull-right"></a>
+            <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
           <div className="dress-box-body text-center">
             <img className="center-block" src={this.props.dress.images[0].moodboard}/>
