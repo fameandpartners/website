@@ -29,12 +29,13 @@ var DressTile = React.createClass({
   },
 
   render: function () {
-    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked';
+    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked',
+        addedBy = 'Added by ' + this.props.dress.author;
 
     return (
         <div className="dress-box" key={this.props.dress.id}>
           <div className="top-info">
-            <span>{this.props.dress.title}</span>
+            <span>{addedBy}</span>
           </div>
           <div className="dress-box-header">
             <div className="likes">
@@ -46,7 +47,7 @@ var DressTile = React.createClass({
             <img className="center-block" src={this.props.dress.images[0].moodboard}/>
 
             <div className="dress-info center-block">
-              <strong>The {this.props.dress.author}</strong>
+              <strong>The {this.props.dress.title}</strong>
               <span>|</span>
               <span>{this.props.dress.price}</span>
             </div>

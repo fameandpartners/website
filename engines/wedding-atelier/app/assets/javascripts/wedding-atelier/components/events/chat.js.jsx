@@ -10,7 +10,9 @@ var Chat = React.createClass({
     filestack_key: React.PropTypes.string,
     getDresses: React.PropTypes.func,
     setDresses: React.PropTypes.func,
-    handleLikeDress: React.PropTypes.func
+    handleLikeDress: React.PropTypes.func,
+    twilioManager: React.PropTypes.object,
+    twilioClient: React.PropTypes.object
   },
 
   getInitialState: function(){
@@ -18,18 +20,19 @@ var Chat = React.createClass({
       messages: [],
       message: '',
       typing: [],
-      channelMembers: []
+      channelMembers: [],
+      twilioClient: null,
+      twilioManager: null
     }
   },
 
-  componentWillMount: function(){
-    var that = this;
-
-    $.post(that.props.twilio_token_path, function(data) {
-      var accessManager = new Twilio.AccessManager(data.token);
-      var messagingClient = new Twilio.IPMessaging.Client(accessManager);
-      var channelName = 'wedding-atelier-channel-' + that.props.event_id;
-      var notificationsChannelName = 'wedding-atelier-notifications-' + that.props.event_id;
+  componentWillReceiveProps: function(nextProps){
+    if(this.props.twilioManager != nextProps.twilioManager){
+      var that = this;
+      var accessManager = nextProps.twilioManager;
+      var messagingClient = nextProps.twilioClient;
+      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
+      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
 
       // notifications channel
       messagingClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
@@ -44,7 +47,6 @@ var Chat = React.createClass({
           });
         }
       });
-
       // normal messaging client
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
@@ -60,7 +62,8 @@ var Chat = React.createClass({
           });
         }
       });
-    });
+
+    }
   },
 
   componentDidUpdate: function() {
