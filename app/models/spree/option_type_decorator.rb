@@ -21,14 +21,5 @@ Spree::OptionType.class_eval do
     def size
       @size ||= size_scope.first
     end
-
-    # January 2017: New Option Types. DO NOT MEMOIZE IT
-    def fabric
-      where(name: 'dress-fabric').first
-    end
-
-    def length
-      where(name: 'dress-length').first
-    end
   end
 end

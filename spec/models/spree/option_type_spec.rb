@@ -15,19 +15,5 @@ describe Spree::OptionType, type: :model do
 
       it { is_expected.to eq(option_type) }
     end
-
-    describe '.fabric' do
-      let!(:option_type) { FactoryGirl.create(:option_type, name: 'dress-fabric') }
-      subject { described_class.fabric }
-
-      it { is_expected.to eq(option_type) }
-    end
-
-    describe '.length' do
-      let!(:option_type) { FactoryGirl.create(:option_type, name: 'dress-length') }
-      subject { described_class.length }
-
-      it { is_expected.to eq(option_type) }
-    end
   end
 end
