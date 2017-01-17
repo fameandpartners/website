@@ -1,7 +1,20 @@
 .shared-header
-  = link_to '', 'javascript:history.back()', class: 'shared-header-back-arrow'
+  = link_to '', 'javascript:history.back()', class: ['shared-header-back-arrow', 'hidden-sm', 'hidden-md', 'hidden-lg']
+  .shared-header-options
+    ul
+      li.shared-header-profile-image = profile_image_tag
+      - if defined? @event
+        li.shared-header-event-name
+          .border-wrapper = @event.name
+      li.shared-header-user-role
+        .border-wrapper = 'bride'
+      li.shared-header-account
+          = link_to 'my account', wedding_atelier.accounts_path, class: 'border-wrapper'
+      li.shared-header-logout
+          = link_to 'logout', destroy_spree_user_session_path
+
   = link_to '', wedding_atelier.root_path, class: 'shared-header-logo'
   .shared-header-commands
     .commands-help.hidden-xs
-    .commands-menu.hidden-sm.hidden-md.hidden-lg
+    .commands-menu
     .commands-shopping-bag

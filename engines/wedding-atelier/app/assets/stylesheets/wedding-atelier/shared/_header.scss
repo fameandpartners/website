@@ -8,6 +8,7 @@
 }
 
 .shared-header-back-arrow,
+.shared-header-options,
 .shared-header-logo,
 .shared-header-commands {
   display: inline-block;
@@ -19,6 +20,35 @@
   background-size: 20px 35px;
   margin-left: 10px;
   width: 30px;
+}
+
+.shared-header-options {
+  margin-left: 10px;
+
+  ul {
+    display: table;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  li,
+  a {
+    display: table-cell;
+    font-size: .8rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .border-wrapper {
+    border-right: 1px solid $black;
+    padding: 5px;
+  }
+}
+
+.shared-header-logout > a {
+  padding: 5px;
 }
 
 .shared-header-logo {
@@ -60,4 +90,14 @@
 
 .commands-shopping-bag {
   background-image: image-url('wedding-atelier/icons/shopping-bag.png');
+}
+
+@include screen-sm {
+  .shared-header-logo {
+    width: 260px;
+  }
+
+  .shared-header-commands {
+    width: 110px;
+  }
 }
