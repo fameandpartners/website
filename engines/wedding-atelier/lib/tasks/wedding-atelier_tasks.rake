@@ -296,7 +296,6 @@ namespace :wedding_atelier do
                                           price: 10
                                           )
     end
-    binding.pry
   end
 
   def find_or_create_product(attrs, styles, fits, taxon, option_types, options)

@@ -51,7 +51,7 @@ PresentationHelper.customization = function(customization){
 
 PresentationHelper.presentation = function(options, customizationItem, siteVersion){
   var presentation = '';
-  if(customizationItem === 'fabric-colour'){
+  if(customizationItem === 'fabric-color'){
     presentation = PresentationHelper.fabricColour(options.fabric, options.colour);
     var additionalCost = PresentationHelper.additionalCost(options, customizationItem);
     return presentation + additionalCost;
