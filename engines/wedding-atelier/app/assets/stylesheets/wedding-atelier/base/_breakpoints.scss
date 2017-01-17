@@ -2,6 +2,10 @@
   @media (max-width: $screen-xs-max) { @content; }
 }
 
+@mixin tablet-max {
+  @media (min-width: 769px) { @content; }
+}
+
 @mixin screen-sm {
   @media (min-width: $screen-sm-min) { @content; }
 }

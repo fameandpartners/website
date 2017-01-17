@@ -1,4 +1,7 @@
 #events__moodboard {
+  #chat-mobile {
+    @include tablet-max { display: none !important; };
+  }
  .chat {
     padding: 0;
     height: 100%;
