@@ -7,6 +7,11 @@ html {
   font-size: 14px;
 }
 
+#wrap,
+#content {
+  height: 100%;
+}
+
 body {
   @include screen-sm{
     overflow: hidden;
