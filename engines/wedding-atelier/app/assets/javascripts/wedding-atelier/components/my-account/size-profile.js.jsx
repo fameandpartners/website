@@ -9,10 +9,11 @@ var SizeProfile = React.createClass({
   },
 
   getInitialState: function () {
+    var userProfile = $.extend({}, this.props.user_profile.user_profile);
     return {
-      size: 0,
-      height: '',
-      userProfile: this.props.user_profile.user_profile
+      size: userProfile.dress_size_id,
+      height: userProfile.height,
+      userProfile:  userProfile
     };
   },
 
@@ -20,9 +21,10 @@ var SizeProfile = React.createClass({
     var that = this;
     $(this.refs.heightSelect).select2({
       minimumResultsForSearch: Infinity
-    }).on('change', function (e) {
+    }).val(this.state.userProfile.height)
+    .on('change', function (e) {
       that.changeHeightHandler(e.target.value);
-    }).val(this.props.user_profile.user_profile.height);
+    }).trigger('change');
   },
 
   parsePresentation: function (size) {
@@ -44,10 +46,10 @@ var SizeProfile = React.createClass({
   renderHeightOptions: function () {
     return Object.keys(this.props.heights).map(function (group, index) {
       var heights = this.props.heights[group].map(function (height, index) {
-        return <option key={index} value={group}>{height}</option>;
+        return <option key={height + index} value={group}>{height}</option>;
       });
 
-      return <optgroup key={group} label={group}>{heights}</optgroup>;
+      return <optgroup key={group + index} label={group}>{heights}</optgroup>;
     }.bind(this));
   },
 
@@ -113,7 +115,7 @@ var SizeProfile = React.createClass({
         <div className="form-group">
           <label htmlFor="heightSelect" className="text-left">Whats your height</label>
           <div>
-            <select id="heightSelect" ref="heightSelect" className="form-control" onChange={this.changeHeightHandler}>
+            <select id="heightSelect" ref="heightSelect" className="form-control">
               {this.renderHeightOptions()}
             </select>
           </div>
