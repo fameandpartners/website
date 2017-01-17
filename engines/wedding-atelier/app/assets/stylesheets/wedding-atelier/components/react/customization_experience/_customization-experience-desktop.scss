@@ -1,6 +1,10 @@
 .customization-experience--desktop {
   height: 100%;
 
+  .customizations-menu {
+    border-right: 2px solid $concrete;
+  }
+
   .customization-panel {
     padding-top: 45px;
     height: calc(100% - 122px);
@@ -19,11 +23,11 @@
   }
 
   .title-text {
-    max-width: 240px;
     text-align: left;
 
     h1 {
-      font-size: 2.5rem;
+      max-width: 300px;
+      font-size: 42px;
     }
   }
 
@@ -57,7 +61,7 @@
 
     a {
       letter-spacing: 2px;
-      font-size: .85rem;
+      font-size: 14px;
       font-weight: 700;
     }
 
@@ -121,7 +125,6 @@
 
     .left-result {
       text-align: left;
-      padding-left: 50px;
       width: 70%;
     }
 
@@ -133,8 +136,15 @@
   }
 
   .actions {
+    button {
+      width: 170px;
+      height: 44px;
+    }
     .btn-transparent {
       margin-right: 10px;
+      &:hover {
+        background: $white-two;
+      }
     }
   }
 

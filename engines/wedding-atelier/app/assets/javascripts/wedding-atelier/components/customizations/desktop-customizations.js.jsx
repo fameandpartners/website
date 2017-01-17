@@ -85,17 +85,16 @@ var DesktopCustomizations = React.createClass({
     return (
       <div className="customization-experience--desktop hidden-xs">
         <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette} event_name={this.props.event_name} event_path={this.props.event_path}/>
-        <div className="customization-panel col-sm-6">
+        <div className="customization-panel customizations-menu col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
-        <div className="customization-panel col-sm-6">
+        <div className="customization-panel customizations-preview col-sm-6">
           <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
-            <img src="/assets/wedding-atelier/heart.svg"/>
-            <span> 3</span>
+
           </div>
 
           <div className="results col-md-2 col-lg-3">
@@ -118,7 +117,7 @@ var DesktopCustomizations = React.createClass({
             </div>
           </div>
 
-          <div className="actions col-md-4 col-lg-3">
+          <div className="actions text-right col-md-4 col-lg-3">
             <SaveDressButton
               eventSlug={this.props.eventSlug}
               selectedOptions={this.props.selectedOptions}
