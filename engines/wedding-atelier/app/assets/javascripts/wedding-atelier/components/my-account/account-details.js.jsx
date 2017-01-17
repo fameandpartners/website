@@ -1,10 +1,12 @@
 var AccountDetails = React.createClass({
   propTypes: {
-    user: React.PropTypes.object.isRequired
+    user: React.PropTypes.object.isRequired,
+    account_path: React.PropTypes.string.isRequired
   },
 
   getInitialState: function () {
-    var user = $.extend({}, this.props.user);
+    var user = $.extend({}, this.props.user.user);
+
     return {
       firstName: user.first_name,
       lastName: user.last_name,
@@ -34,7 +36,7 @@ var AccountDetails = React.createClass({
   },
 
   dobChangedHandle: function (e) {
-    this.setState({dateOfBirth: e.date.toLocaleDateString()});
+    this.setState({dateOfBirth: e.date.toString()});
   },
 
   fieldChangedUpdate: function (field, e) {
@@ -45,6 +47,45 @@ var AccountDetails = React.createClass({
 
   newsletterChangedHandle: function (e) {
     this.setState({newsletter: !this.state.newsletter});
+  },
+
+  changesSavedHandle: function(e) {
+    e.preventDefault();
+    var state = this.state;
+    var payload = {
+      account: {
+        first_name: state.firstName,
+        last_name: state.lastName,
+        email: state.email,
+        dob: state.dateOfBirth,
+        newsletter: state.newsletter
+      },
+    };
+    var notificationNode = document.getElementById('notification');
+    if (this.allowedChangePassword()) {
+      payload.account.current_password = state.currentPassword;
+      payload.account.password = state.newPassword;
+      payload.account.password_confirmation =  state.confirmPassword;
+    }
+    $.ajax({
+      url: this.props.account_path,
+      type: 'PUT',
+      dataType: 'json',
+      data: payload,
+      success: function (response) {
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={['Changes successfully saved']} />, notificationNode);
+      },
+      error: function (data) {
+        ReactDOM.unmountComponentAtNode(notificationNode);
+        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors} />, notificationNode);
+      }
+    });
+  },
+
+  allowedChangePassword: function() {
+    var state = $.extend({}, this.state);
+    return state.currentPassword !== '';
   },
 
   render: function () {
@@ -98,6 +139,10 @@ var AccountDetails = React.createClass({
               <span></span>
               <p className="text">Sign up to get the latest from Fame</p>
             </label>
+          </div>
+
+          <div className="checkbox col-sm-12">
+            <button className="btn-black" onClick={this.changesSavedHandle}>Update</button>
           </div>
         </form>
       </div>

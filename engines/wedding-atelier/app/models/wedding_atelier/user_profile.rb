@@ -10,8 +10,6 @@ module WeddingAtelier
                     :dress_size_id,
                     :skip_validation
 
-
-
     belongs_to :spree_user, class_name: Spree.user_class.name
     validates_presence_of :height, :dress_size_id, unless: lambda { self.skip_validation }
   end

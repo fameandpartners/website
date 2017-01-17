@@ -34,7 +34,7 @@ doctype html
     = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
-    - if !flash.empty?
+    - if flash.key?(:error) && !flash[:error].empty?
       = react_component 'Notification', errors: [flash[:error]]
     #notification
     #wrap
