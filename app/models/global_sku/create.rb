@@ -47,15 +47,19 @@ class GlobalSku
           height_value:       height,
           customisation_id:   customization_value_ids,
           customisation_name: customization_value_names,
-          product_id:         product_id
+          product_id:         product_id,
+          data:               { 'extended-style-number' => extended_style_number }
         )
       end
     end
 
-    # TODO: Extended Style number is a concept yet to be defined
-    # # Extended Style Number: FP2212-HG-S0-F0-AK (Style Number-Fabric Type-Style Customization-Fit Customization-Skirt Length)
-    # def extended_style_number
-    # end
+    # Extended Style Number is the style number + customisation values with their IDs separated by dashes
+    # More at `https://fameandpartners.atlassian.net/browse/WEBSITE-1299?focusedCommentId=22330&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22330`
+    # Example: FP2212-HG-S0-F0-AK
+    def extended_style_number
+      customizations_map = customizations.map { |c| "#{c.name}#{c.id}" }
+      [style_number].concat(customizations_map).join('-')
+    end
 
     def generate_sku
       Skus::Generator.new(
