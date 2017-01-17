@@ -140,11 +140,11 @@ var SizeSelector = React.createClass({
       <div ref="container" className={customizationSelectorClasses}>
         <div className="customization customization-size">
           <div className="customization-title">
-            <h1><em>Tailor</em> to your body.</h1>
-            <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h1><em>Tailor</em> it to your body.</h1>
+            <p className="description">All we need is your height and dress size to custom-make a dress that fits you perfectly.</p>
           </div>
           <div className="form-group">
-            <label htmlFor="heightSelect" className="text-left">Tell us your height:</label>
+            <label htmlFor="heightSelect" className="text-left">Height:</label>
             <div>
               <select id="heightSelect" ref="heightSelect" className="form-control">
                 {optionsForHeights}
@@ -152,7 +152,7 @@ var SizeSelector = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>And your dress size. &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
+            <label>Dress Size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
             <div className="dress-sizes ungrouped">
               <ul className="customization-dress-sizes-ul">
                 <div>
@@ -162,7 +162,7 @@ var SizeSelector = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Or use one of the bridal party size profiles.</label>
+            <label>Or, use one of the bridal party's size profiles.</label>
             <div className="dress-sizes ungrouped large-labels">
               <ul className="customization-dress-sizes-ul people">
                 <div>

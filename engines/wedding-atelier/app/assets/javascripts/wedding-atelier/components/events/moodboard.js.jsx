@@ -3,6 +3,7 @@ var MoodBoardEvent = React.createClass({
   propTypes: {
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
+    dresses_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
@@ -13,8 +14,79 @@ var MoodBoardEvent = React.createClass({
     filestack_key: React.PropTypes.string
   },
 
+  getInitialState: function () {
+    return {
+      twilioManager: null,
+      twilioClient: null,
+      event: {
+        dresses: [],
+        invitations: [],
+        assistants: [],
+        send_invite_path: '',
+        current_user_id: '',
+        name: 'Loading...',
+        hasError: {}
+      },
+      event_backup: {
+        dresses: [],
+        invitations: [],
+        assistants: [],
+        send_invite_path: '',
+        current_user_id: '',
+        name: 'Loading...',
+        hasError: {}
+      }
+    }
+  },
+
+  componentWillMount: function(){
+    $.ajax({
+      url: this.props.event_path,
+      type: "GET",
+      dataType: 'json',
+      success: function (data) {
+        var event = $.extend(event, data.moodboard_event);
+        var event_backup = $.extend(event_backup, data.moodboard_event);
+        this.setState({event: event});
+        this.setState({event_backup: event_backup});
+        this.setDefaultTabWhenResize();
+      }.bind(this)
+    });
+
+    $.post(this.props.twilio_token_path, function(data) {
+      var _state = $.extend({}, this.state);
+      var manager = new Twilio.AccessManager(data.token);
+      _state.twilioManager = manager;
+      _state.twilioClient = new Twilio.IPMessaging.Client(manager);
+
+      this.setState(_state);
+    }.bind(this));
+  },
+
+
   getDresses: function() {
     return this.state.event.dresses;
+  },
+
+  removeDress: function(dress){
+    var that = this,
+        url = this.props.dresses_path + '/' + dress.id
+    $.ajax({
+      url: url ,
+      type: 'DELETE',
+      dataType: 'json',
+      success: function(data) {
+        var _newState = $.extend({}, that.state);
+        _newState.event.dresses = _.reject(_newState.event.dresses, function(eventDress){
+          return eventDress.id === data.event_dress.id;
+        })
+        that.setState(_newState);
+      }.bind(this),
+      error: function(error) {
+        ReactDOM.render(<Notification errors={[error.statusText]} />,
+                    $('#notification')[0]);
+      }
+    })
   },
 
   setDresses: function(dresses) {
@@ -54,85 +126,6 @@ var MoodBoardEvent = React.createClass({
         // TODO add notification after is merged.
       }
     })
-  },
-
-  getInitialState: function () {
-    return {
-        chat: React.createElement(Chat, {
-        twilio_token_path: this.props.twilio_token_path,
-        event_id: this.props.event_id,
-        wedding_name: this.props.wedding_name,
-        profile_photo: this.props.profile_photo,
-        username: this.props.username,
-        user_id: this.props.user_id,
-        filestack_key: this.props.filestack_key,
-        getDresses: this.getDresses,
-        setDresses: this.setDresses,
-        handleLikeDress: this.handleLikeDress,
-        ref: 'Chat'
-      }),
-      event: {
-        dresses: [],
-        invitations: [],
-        assistants: [],
-        send_invite_path: '',
-        current_user_id: '',
-        name: 'Loading...',
-        hasError: {}
-      },
-      event_backup: {
-        dresses: [],
-        invitations: [],
-        assistants: [],
-        send_invite_path: '',
-        current_user_id: '',
-        name: 'Loading...',
-        hasError: {}
-      }
-    }
-  },
-
-  componentWillMount: function(){
-    $.ajax({
-      url: this.props.event_path,
-      type: "GET",
-      dataType: 'json',
-      success: function (data) {
-        var event = $.extend(event, data.moodboard_event);
-        var event_backup = $.extend(event_backup, data.moodboard_event);
-
-        this.setState({event: event});
-        this.setState({event_backup: event_backup});
-        this.renderChat();
-        this.handleBrowserResizing();
-      }.bind(this)
-    });
-  },
-
-  renderChat: function(where) {
-    if (!where) {
-      if (window.innerWidth <= 768) {
-        $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
-        this.renderChat('right-side');
-      } else {
-        this.renderChat('left-side');
-      }
-    } else {
-      this.setState({'left_chat': where === 'left-side' ? this.state.chat : null});
-      this.setState({'right_chat': where === 'right-side' ? this.state.chat : null});
-    }
-  },
-
-  handleBrowserResizing: function(){
-    $(window).resize(function(e) {
-      if (e.target.innerWidth > 768 ) {
-        $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
-        this.renderChat('left-side');
-      } else {
-        $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
-        this.renderChat('right-side');
-      }
-    }.bind(this));
   },
 
   handleEventDetailUpdate: function(data){
@@ -183,11 +176,38 @@ var MoodBoardEvent = React.createClass({
     this.refs.Chat.sendMessageTile(dress);
   },
 
+  setDefaultTabWhenResize: function(){
+    $(window).resize(function(e) {
+      if (e.target.innerWidth > 768 ) {
+        var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active');
+        if(activeMobileChat){
+          $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        }
+      }
+    }.bind(this));
+  },
+
   render: function () {
+    var chatProps = {
+      twilio_token_path: this.props.twilio_token_path,
+      event_id: this.props.event_id,
+      wedding_name: this.props.wedding_name,
+      profile_photo: this.props.profile_photo,
+      username: this.props.username,
+      user_id: this.props.user_id,
+      filestack_key: this.props.filestack_key,
+      getDresses: this.getDresses,
+      setDresses: this.setDresses,
+      handleLikeDress: this.handleLikeDress,
+      twilioManager: this.state.twilioManager,
+      twilioClient: this.state.twilioClient
+    }
+
+
     return (
-      <div id="events__moodboard">
-        <div className="chat left-content col-sm-6">
-          {this.state.left_chat}
+      <div id="events__moodboard" className="row">
+        <div className="left-content col-sm-6 hidden-xs">
+          <Chat ref="Chat" {...chatProps}/>
         </div>
         <div className="right-content col-sm-6">
           <div className='right-container'>
@@ -221,19 +241,20 @@ var MoodBoardEvent = React.createClass({
                 </li>
               </ul>
               <div className="tab-content">
-                <div id="chat-mobile" className="tab-pane" role="tabpanel">
-                  {this.state.right_chat}
+                <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
+                  <Chat ref="Chat" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   <div className="add-dress-box hidden">
-                    <button className="add">Add your first dress</button>
+                    <button className="add">Design a new dress</button>
                   </div>
                   <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
-                    <em>Create</em> a dress</a>
+                    <em>Design</em> a new dress</a>
                   </div>
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
+                      removeDress={this.removeDress}
                       handleLikeDress={this.handleLikeDress} />
                   </div>
                 </div>
@@ -245,7 +266,7 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
                   <h1 className="text-center">
-                    <em>Janine</em>, intive the bridal party.
+                    <em>Now</em>, let's invite the bridal party.
                   </h1>
                   <EventInvitations invitations={this.state.event.invitations}
                                     assistants={this.state.event.assistants}

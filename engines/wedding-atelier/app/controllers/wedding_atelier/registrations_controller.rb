@@ -19,6 +19,7 @@ module WeddingAtelier
       end
 
       @user = Spree::User.new(email: invitation.try(:user_email))
+      @user.build_user_profile(skip_validation: true)
     end
 
     def create
@@ -89,6 +90,7 @@ module WeddingAtelier
 
     def prepare_form_default_values
       @user = current_spree_user
+      @user.build_user_profile unless @user.user_profile
 
       @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
       # if current_spree_user.wedding_atelier_signup_step != 'size'

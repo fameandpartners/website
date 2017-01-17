@@ -10,7 +10,9 @@ var CustomizationsReviewMobile = React.createClass({
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
     eventSlug: React.PropTypes.string,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    event_name: React.PropTypes.string,
+    event_path: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -33,15 +35,15 @@ var CustomizationsReviewMobile = React.createClass({
 
     return (
       <div className="customizations-review-mobile">
-        <CustomizationsHeader {...this.props.selectedOptions.silhouette}/>
+        <CustomizationsHeader {...this.props.selectedOptions.silhouette} event_name={this.props.event_name} event_path={this.props.event_path} />
         <div className="customizations-review-mobile-body">
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
-          <DressPreview selectedOptions={this.props.selectedOptions} />
-          <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>
+          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
+          <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize</button>
           <button className="btn-transparent" onClick={this.showSizing.bind(null, true)}>{selectedValue || 'Select Size'}</button>
           <div className="customizations-review-mobile-results">
             <p>
-              <span className="view-customizations" onClick={this.viewCustomizations}>View customizations</span>
+              <span className="view-customizations" onClick={this.viewCustomizations}>Customizations</span>
               <span className="view-customizations-total">${this.props.customizationsCost}</span>
             </p>
             <p>
@@ -49,7 +51,7 @@ var CustomizationsReviewMobile = React.createClass({
               <span className="sub-total-value">${this.props.subTotal}</span>
             </p>
             <p className="estimated-delivery">
-              Estimated delivery {7} days
+              Estimated delivery 3-4 weeks
             </p>
           </div>
         </div>

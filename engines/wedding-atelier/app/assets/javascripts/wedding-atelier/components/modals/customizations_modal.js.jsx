@@ -19,8 +19,8 @@ var CustomizationsModal = React.createClass({
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
                 <div className="modal-body-container text-center">
                   <h1>
-                    <em>Your </em>
-                    customizations.
+                    <em>What </em>
+                    you customized.
                   </h1>
                   <div className="customization-list">
                     <ul>
@@ -37,11 +37,11 @@ var CustomizationsModal = React.createClass({
                         <p className="customization-list-value">{this.presentationFor('length')}</p>
                       </li>
                       <li>
-                        <p className="customization-list-label">style additions</p>
+                        <p className="customization-list-label">style</p>
                         <p className="customization-list-value">{this.presentationFor('style')}</p>
                       </li>
                       <li>
-                        <p className="customization-list-label">fit adjustments</p>
+                        <p className="customization-list-label">fit</p>
                         <p className="customization-list-value">{this.presentationFor('fit')}</p>
                       </li>
                       <li>

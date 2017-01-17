@@ -4,7 +4,7 @@ module WeddingAtelier
     protect_from_forgery except: :update
 
     def index
-      @events = current_spree_user.events
+      redirect_to event_path(current_spree_user.events.last)
     end
 
     def show
