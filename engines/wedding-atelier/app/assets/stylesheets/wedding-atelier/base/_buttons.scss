@@ -64,12 +64,6 @@
   @extend .btn;
   background-color: transparent;
   font-weight: 700;
-
-  &:hover,
-  &:focus {
-    border-color: $greyish;
-    color: $greyish;
-  }
 }
 
 .btn-transparent-inverse {
