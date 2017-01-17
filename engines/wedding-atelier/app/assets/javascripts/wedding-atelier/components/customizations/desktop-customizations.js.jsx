@@ -137,7 +137,7 @@ var AddToCartButton = React.createClass({
   },
   handleAddToCart: function () {
     customizations = this.props.customizations;
-    size_id = customizations.size.id || customizations.size.user_profile.dress_size_id;
+    size_id = customizations.size.id || customizations.size.user_profile.dress_size.id;
     var attrs = {
       size_id: size_id,
       color_id: customizations.colour.id,

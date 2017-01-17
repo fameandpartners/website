@@ -1,7 +1,7 @@
 module WeddingAtelier
   class EventDressSerializer < ActiveModel::Serializer
     include ActionView::Helpers::NumberHelper
-    attributes :id, :title, :likes_count, :author, :price, :liked, :images
+    attributes :id, :title, :likes_count, :author, :price, :liked, :images, :height
     has_one :product, serializer: ProductSerializer
     has_one :color, serializer: OptionValueSerializer
     has_one :fabric, serializer: OptionValueSerializer
@@ -9,13 +9,14 @@ module WeddingAtelier
     has_one :style, serializer: CustomisationValueSerializer
     has_one :size, serializer: OptionValueSerializer
     has_one :length, serializer: OptionValueSerializer
+    has_one :user, serializer: UserSerializer
 
     def title
       object.product.name
     end
 
     def author
-      object.user
+      object.user.first_name
     end
 
     def price

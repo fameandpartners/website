@@ -15,7 +15,7 @@ var SizeSelectorMobile = React.createClass({
     return {
       assistant: user,
       height: user.user_profile.height,
-      size: {id: user.user_profile.dress_size_id}
+      size: {id: user.user_profile.dress_size.id}
     };
   },
 
@@ -59,7 +59,7 @@ var SizeSelectorMobile = React.createClass({
 
   assistantSelectedHandle: function(assistant) {
     var size = this.props.sizes.filter(function (size) {
-      return size.id === assistant.user_profile.dress_size_id;
+      return size.id === assistant.user_profile.dress_size.id;
     });
     $(this.refs.heightSelect).val(assistant.user_profile.height).trigger('change');
     this.setState({
@@ -98,7 +98,7 @@ var SizeSelectorMobile = React.createClass({
             name: "mobile-size",
             value: size.name,
             onChange: that.sizeSelectedHandle.bind(null, size),
-            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)
+            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)
           };
 
       return (

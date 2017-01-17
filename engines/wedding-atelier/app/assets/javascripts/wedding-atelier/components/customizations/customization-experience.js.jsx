@@ -6,6 +6,7 @@ var CustomizationExperience = React.createClass({
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
+    edit: React.PropTypes.bool,
     initialDress: React.PropTypes.object
   },
 
@@ -33,14 +34,14 @@ var CustomizationExperience = React.createClass({
         style: null,
         fit: null,
         size: null,
-        height: ''
+        height: null
       }
     };
   },
 
   componentWillMount: function(){
     $.get(this.props.customizationsUrl, function(data){
-      if(this.props.initialDress.event_dress){
+      if(this.props.edit){
         this.prepareEditDress(data.customization, this.props.initialDress.event_dress)
       }else{
         this.prepareNewDress(data.customization);
@@ -56,6 +57,7 @@ var CustomizationExperience = React.createClass({
     newState.selectedOptions.colour = dress.color;
     newState.selectedOptions.length = dress.length;
     newState.selectedOptions.size = dress.size;
+    newState.selectedOptions.height = dress.height;
     newState.customizations.fits = dress.product.fits;
     newState.customizations.styles = dress.product.styles;
     newState.subTotal = parseInt(dress.product.price);
@@ -75,6 +77,7 @@ var CustomizationExperience = React.createClass({
     newState.selectedOptions.colour = colour;
     newState.selectedOptions.length = length;
     newState.selectedOptions.size = this.props.currentUser.user;
+    newState.selectedOptions.height = this.props.currentUser.user.user_profile.height;
     newState.customizations.fits = silhouette.fits;
     newState.customizations.styles = silhouette.styles;
     newState.subTotal = parseInt(silhouette.price);

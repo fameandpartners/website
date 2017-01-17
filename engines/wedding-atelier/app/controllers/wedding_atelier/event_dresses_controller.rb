@@ -12,8 +12,12 @@ module WeddingAtelier
     end
 
     def create
-      dress = @event.dresses.create(event_dress_params)
-      render json: dress
+      dress = @event.dresses.build(event_dress_params)
+      if dress.save
+        render json: dress
+      else
+        render json: { errors: dress.errors.full_messages }, status: :unprocessable_entity
+      end
     end
 
     def update

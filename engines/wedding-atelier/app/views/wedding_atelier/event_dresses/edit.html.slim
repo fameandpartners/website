@@ -3,6 +3,7 @@
                   eventSlug: params[:event_id],
                   customizationsUrl: event_customizations_url(params[:event_id]),
                   initialDress: WeddingAtelier::EventDressSerializer.new(@dress, scope: self),
+                  edit: true,
                   event_name: @event.name,
                   event_path: event_path(@event),
                   currentUser: WeddingAtelier::UserSerializer.new(spree_current_user)

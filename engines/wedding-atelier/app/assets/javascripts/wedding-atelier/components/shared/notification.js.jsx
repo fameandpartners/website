@@ -46,6 +46,9 @@ var Notification = React.createClass({
 
   close: function () {
     this.setState({show: false});
+    window.setTimeout(function(){
+      ReactDOM.unmountComponentAtNode($('#notification')[0]);
+    }, 600)
   },
 
   renderErrors: function () {

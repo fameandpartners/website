@@ -25,7 +25,11 @@ var SaveDressButton = React.createClass({
   sizeId: function(){
     var size = this.props.selectedOptions.size;
     if(!size){ return null; }
-    return size.id || size.user_profile.dress_size_id;
+    if(size.user_profile){
+      return size.user_profile.dress_size.id;
+    }else{
+      return size.id;
+    }
   },
 
   dressParams: function(){
@@ -48,7 +52,8 @@ var SaveDressButton = React.createClass({
   },
 
   errorCallback: function(data){
-
+    jsonData = JSON.parse(data.responseText)
+    ReactDOM.render(<Notification errors={jsonData.errors} />, $('#notification')[0]);
   },
 
   render: function() {

@@ -5,12 +5,12 @@ function PresentationHelper(){}
 // Janine's Profile
 PresentationHelper.size = function(userOrSize, height, siteVersion){
   if(!userOrSize && !height){ return null; }
-  if(userOrSize.name) {
+  if(userOrSize.user_profile) {
+    return userOrSize.first_name + "'s size profile";
+  } else {
     // Build a regexp to get the matching size number depeding on the site version: US|AU
     var regexp = new RegExp(siteVersion + '/?(\\d+)', 'i');
     return height + ' | ' + userOrSize.name.match(regexp)[1];
-  } else {
-    return userOrSize.first_name + "'s size profile";
   }
 };
 
