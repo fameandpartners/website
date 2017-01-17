@@ -45,8 +45,8 @@ class GlobalSku
           color_id:           color.id,
           color_name:         color.name,
           height_value:       height,
-          customisation_id:   customization_value_ids.join(';').presence,
-          customisation_name: customization_value_names.join(';').presence,
+          customisation_id:   customization_value_ids,
+          customisation_name: customization_value_names,
           product_id:         product_id
         )
       end
@@ -76,8 +76,9 @@ class GlobalSku
     end
 
     def normalize_parameters
-      @color_name = @color_name.to_s.parameterize
-      @height     = @height.to_s.downcase
+      @color_name     = @color_name.to_s.parameterize
+      @height         = @height.to_s.downcase
+      @customizations = Array.wrap(@customizations).compact
     end
 
     def product_id
@@ -95,17 +96,11 @@ class GlobalSku
     end
 
     def customization_value_ids
-      Array
-        .wrap(customizations)
-        .compact
-        .map(&:id)
+      customizations.map(&:id).join(';').presence
     end
 
     def customization_value_names
-      Array
-        .wrap(customizations)
-        .compact
-        .map(&:name)
+      customizations.map(&:name).join(';').presence
     end
   end
 end
