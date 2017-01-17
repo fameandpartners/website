@@ -1,4 +1,7 @@
 #events__moodboard {
+  #chat-mobile {
+    @include tablet-max { display: none !important; };
+  }
  .chat {
     padding: 0;
     height: 100%;
@@ -7,6 +10,7 @@
     flex-direction: column;
 
     box-shadow: 1px 2px 5px #888888;
+    border-right: 4px solid #f8f8f8;
 
     /* chat header */
 
@@ -97,7 +101,7 @@
       background-image: image-url('wedding-atelier/icons/upload-image.svg');
       width: 33px;
       height: 29px;
-      margin: 13px 7px 0 26px;
+      margin: 13px 7px 0 10px;
       background-size: cover;
       background-color: transparent;
       border: 0;

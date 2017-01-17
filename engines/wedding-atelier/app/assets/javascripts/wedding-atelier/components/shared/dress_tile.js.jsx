@@ -3,6 +3,7 @@ var DressTile = React.createClass({
   propTypes: {
     sendDressToChatFn: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
+    removeDress: React.PropTypes.func,
     index: React.PropTypes.number,
     dress: React.PropTypes.shape({
       id: React.PropTypes.number,
@@ -24,29 +25,34 @@ var DressTile = React.createClass({
     this.props.handleLikeDress(this.props.dress);
   },
 
+  removeDress: function(){
+    this.props.removeDress(this.props.dress)
+  },
+
   sendToChatHandler: function() {
     this.props.sendDressToChatFn(this.props.dress);
   },
 
   render: function () {
-    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked';
+    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked',
+        addedBy = 'Added by ' + this.props.dress.author;
 
     return (
         <div className="dress-box" key={this.props.dress.id}>
           <div className="top-info">
-            <span>{this.props.dress.title}</span>
+            <span>{addedBy}</span>
           </div>
           <div className="dress-box-header">
             <div className="likes">
               <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.likes_count}
             </div>
-            <a href="#" className="icon-close pull-right"></a>
+            <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
           <div className="dress-box-body text-center">
             <img className="center-block" src={this.props.dress.images[0].moodboard}/>
 
             <div className="dress-info center-block">
-              <strong>{this.props.dress.author}</strong>
+              <strong>The {this.props.dress.title}</strong>
               <span>|</span>
               <span>{this.props.dress.price}</span>
             </div>
@@ -54,7 +60,7 @@ var DressTile = React.createClass({
 
           <div className="dress-box-footer center-block text-center">
             <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
-              Send to chat
+              Send to the group
             </button>
             <button className="btn-add-to-cart">
               Add to cart

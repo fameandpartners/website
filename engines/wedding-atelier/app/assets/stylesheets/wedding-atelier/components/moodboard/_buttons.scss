@@ -45,25 +45,25 @@
     }
   }
 
-  .btn-transparent.btn-create-a-dress {
+  .btn-create-a-dress {
     height: 44px;
     width: 176px;
-    background-color: $wild-sand;
+    background-color: $white-two;
     color: $black;
     border: 1px solid $black;
     font-family: $secondary-font;
     font-weight: 400;
-    font-size: 1.4em;
+    font-size: 1.1em;
 
     em {
       text-transform: none;
       text-decoration: underline;
       font-family: $primary-font;
     }
-  }
 
-  .btn-create-a-dress:hover {
-    background-color: transparent;
+    &:hover {
+      background-color: $wild-sand;
+    }
   }
 
   #wedding-details {

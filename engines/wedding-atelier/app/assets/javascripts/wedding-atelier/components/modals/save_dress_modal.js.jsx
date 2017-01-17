@@ -17,11 +17,10 @@ var SaveDressModal = React.createClass({
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
                 <div className="modal-body-container text-center">
                   <h1>
-                    <em>Your dress </em>
-                    has been saved to the weddings moodboard.
+                    Saved!
                   </h1>
                   <div className="action-buttons">
-                    <a href={moodboardUrl} className="btn-white" type='button'> go to moodboard </a>
+                    <a href={moodboardUrl} className="btn-white" type='button'> Back to moodboard </a>
                     <a href="#" onClick={this.newDress} className="btn-black" type='button'> create another dress </a>
                   </div>
                 </div>

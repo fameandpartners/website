@@ -5,13 +5,14 @@
                     remove_assistant_path: event_assistant_path(event_id: @event, id: 'id'),
                     twilio_token_path: token_path,
                     event_id: @event.id,
+                    dresses_path: event_dresses_path(@event),
                     wedding_name: @event.name,
                     profile_photo: profile_image_path,
                     username: spree_current_user.full_name,
                     user_id: spree_current_user.id,
                     roles_path: '',
                     filestack_key: ENV['FILESTACK_KEY'] },
-                  { class: 'moodboard-react-container' }
+                  { class: 'moodboard-react-container container-fluid' }
 
 - content_for :javascript do
   script src="//media.twiliocdn.com/sdk/rtc/js/ip-messaging/v0.9/twilio-ip-messaging.min.js"

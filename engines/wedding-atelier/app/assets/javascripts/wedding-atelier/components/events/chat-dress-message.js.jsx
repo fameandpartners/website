@@ -97,7 +97,7 @@ var ChatDressMessage = React.createClass({
                   <div className="dress-box-body text-center">
                     <img className="center-block" src={dress.images[0].moodboard}/>
                     <div className="dress-info center-block">
-                      <strong>{dress.author}</strong>
+                      <strong>{dress.title}</strong>
                       <span>|</span>
                       <span>{dress.price}</span>
                     </div>

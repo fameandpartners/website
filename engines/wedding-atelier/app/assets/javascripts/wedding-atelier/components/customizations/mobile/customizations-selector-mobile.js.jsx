@@ -8,37 +8,43 @@ var CustomizationSelectorMobile = React.createClass({
     description: React.PropTypes.string,
     selectCallback: React.PropTypes.func.isRequired,
     selectOptionCallback: React.PropTypes.func.isRequired,
-    currentCustomization: React.PropTypes.string
+    currentCustomization: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    clickedOptions: React.PropTypes.object
   },
 
-  isOptionSelected: function(option) {
-    var selectedOption = this.props.selectedOption;
-    return selectedOption && selectedOption.id == option.id;
-  },
+  isOptionDisabled: function(option){
+    if(this.props.type === 'silhouette'){ return false; }
+    var customizations = this.props.selectedOptions;
+    var optionsKeys = {
+      silhouette: customizations.silhouette ? customizations.silhouette.sku : 'FP2212',
+      fit: customizations.fit ? customizations.fit.name : 'F0',
+      style: customizations.style ? customizations.style.name : 'S0',
+      length: customizations.length ? customizations.length.name : 'AK'
+    }
 
-  removeCustomization: function(e) {
-    e.stopPropagation();
-    this.props.selectCallback(this.props.type, null);
+    if(customizations[this.props.type]){
+      optionsKeys[this.props.type] = option.name;
+    }
+
+    return CombinationsMap.isDisabled(optionsKeys, option, this.props.type);
   },
 
   render: function () {
+    var itemProps = {
+      type: this.props.type,
+      selectedOption: this.props.selectedOption,
+      selectCallback: this.props.selectCallback,
+      clickCustomizationCallback: this.props.selectOptionCallback,
+      clickedOptions: this.props.clickedOptions
+    }
 
-    var options = this.props.options.map(function (option, index) {
-      var optionClasses = classNames({
-        'customizations-selector-mobile-options-item': true,
-        active: this.isOptionSelected(option)
-      });
-
-      var customizationClass = 'customizations-selector-mobile-options-item';
-      return (
-        <div key={index} onClick={this.props.selectOptionCallback.bind(null, this.props.type, option)} className="col-xs-6">
-          <div className={optionClasses}>
-            <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
-            <img src={option.image} />
-            <p>{option.presentation}</p>
-          </div>
-        </div>
-      );
+    var options = this.props.options.map(function(option, index) {
+      itemProps.option = $.extend({}, option);
+      itemProps.mobile = true;
+      if(!this.isOptionDisabled(itemProps.option)){
+        return(<CustomizationItem key={index} {...itemProps} />);
+      }
 
     }.bind(this));
 

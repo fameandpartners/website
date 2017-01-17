@@ -8,7 +8,8 @@ var CustomizationsContainerMobile = React.createClass({
     siteVersion: React.PropTypes.string,
     startOverCallback: React.PropTypes.func,
     goToSlide: React.PropTypes.func,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    selectedOptions: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -59,10 +60,12 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.silhouettes}
           selectedOption={this.props.selectedOptions.silhouette}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="silhouette"
-          keyword="Create"
-          title="it how you want"
-          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          keyword="Choose"
+          title="your perfect shape."
+          description="The silhouette is the foundation of your dress."/>
         <FabricAndColourSelectorMobile
           colours={this.props.customizations.colours}
           fabrics={this.props.customizations.fabrics}
@@ -78,10 +81,12 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.lengths}
           selectedOption={this.props.selectedOptions.length}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="length"
           keyword="Choose"
           title="your length."
-          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          description="One skirt does not fit all. Find the length that suits you best."/>
         <CustomizationSelectorMobile
           type="style"
           selectCallback={this.props.selectCallback}
@@ -89,10 +94,12 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.styles}
           selectedOption={this.props.selectedOptions.style}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="style"
           keyword="Design"
           title="the details."
-          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          description="Close your eyes and picture your dream dress. Now, create it."/>
         <CustomizationSelectorMobile
           type="fit"
           selectCallback={this.props.selectCallback}
@@ -100,14 +107,16 @@ var CustomizationsContainerMobile = React.createClass({
           options={this.props.customizations.fits}
           selectedOption={this.props.selectedOptions.fit}
           currentCustomization={this.props.currentCustomization}
+          selectedOptions={this.props.selectedOptions}
+          clickedOptions={this.state}
           ref="fit"
-          keyword="Tailor"
-          title="to your body."
-          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          keyword="Finesse"
+          title="the way it fits."
+          description="Almost done: change the neckline, backline, straps, or skirt."/>
 
         <div className="customizations-selector-mobile-actions-double">
           <button className="btn-gray" onClick={this.close}>cancel</button>
-          <button className="btn-black" onClick={this.applyChanges}>apply</button>
+          <button className="btn-black" onClick={this.applyChanges}>select</button>
         </div>
       </div>
     );

@@ -10,7 +10,9 @@ var Chat = React.createClass({
     filestack_key: React.PropTypes.string,
     getDresses: React.PropTypes.func,
     setDresses: React.PropTypes.func,
-    handleLikeDress: React.PropTypes.func
+    handleLikeDress: React.PropTypes.func,
+    twilioManager: React.PropTypes.object,
+    twilioClient: React.PropTypes.object
   },
 
   getInitialState: function(){
@@ -18,18 +20,19 @@ var Chat = React.createClass({
       messages: [],
       message: '',
       typing: [],
-      channelMembers: []
+      channelMembers: [],
+      twilioClient: null,
+      twilioManager: null
     }
   },
 
-  componentWillMount: function(){
-    var that = this;
-
-    $.post(that.props.twilio_token_path, function(data) {
-      var accessManager = new Twilio.AccessManager(data.token);
-      var messagingClient = new Twilio.IPMessaging.Client(accessManager);
-      var channelName = 'wedding-atelier-channel-' + that.props.event_id;
-      var notificationsChannelName = 'wedding-atelier-notifications-' + that.props.event_id;
+  componentWillReceiveProps: function(nextProps){
+    if(this.props.twilioManager != nextProps.twilioManager){
+      var that = this;
+      var accessManager = nextProps.twilioManager;
+      var messagingClient = nextProps.twilioClient;
+      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
+      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
 
       // notifications channel
       messagingClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
@@ -44,7 +47,6 @@ var Chat = React.createClass({
           });
         }
       });
-
       // normal messaging client
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
@@ -60,7 +62,8 @@ var Chat = React.createClass({
           });
         }
       });
-    });
+
+    }
   },
 
   componentDidUpdate: function() {
@@ -161,9 +164,9 @@ var Chat = React.createClass({
       className = member.online ? '' : 'text-muted';
 
       if (index === this.state.channelMembers.length - 1) {
-        return(<span className={className} key={'chat-member-' + index}>{member.identity}.</span>);
+        return(<span className={className} key={'chat-member-' + index}>{member.initials}.</span>);
       } else {
-        return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
+        return(<span className={className} key={'chat-member-' + index}>{member.initials}, </span>);
       }
     }.bind(this));
 
@@ -173,9 +176,12 @@ var Chat = React.createClass({
   loadChannelMembers: function(channel) {
     channel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
+        var nameInitials = member.identity.match(/\b\w/g).join("").toUpperCase();
+
         return {
           id: member.sid,
           identity: member.identity,
+          initials: nameInitials,
           online: true
         };
       }.bind(this));
@@ -347,13 +353,12 @@ var Chat = React.createClass({
     var chatMembers = this.getChatMembers();
 
     return(
-      <div className="chat">
+      <div className="chat row">
         <div className="chat-general-info center-block">
           <div className="row">
             <div className="col-xs-7">
               <div className="chat-header-left-side">
-                <strong>Online</strong>:
-                {chatMembers}
+                <strong>Online</strong>: {chatMembers}
               </div>
             </div>
             <div className="col-xs-5">
@@ -377,7 +382,8 @@ var Chat = React.createClass({
                    value={this.message}
                    id='chat-message'
                    onChange={this.startTyping}
-                   ref="chatMessage" />
+                   ref="chatMessage"
+                   placeholder="Start typing..." />
           </div>
           <div className="btn-send-container">
             <input value="send" className="btn btn-black btn-send-msg-to-chat" type="submit"/>

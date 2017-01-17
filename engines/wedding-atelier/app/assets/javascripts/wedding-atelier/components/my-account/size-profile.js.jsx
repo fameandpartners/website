@@ -110,10 +110,10 @@ var SizeProfile = React.createClass({
     return (
       <div className="size-profile">
         <div className="customization-title">
-          <h1><em>Update,</em> your size profile</h1>
+          <h1><em>Update,</em> your size profile.</h1>
         </div>
         <div className="form-group">
-          <label htmlFor="heightSelect" className="text-left">Whats your height</label>
+          <label htmlFor="heightSelect" className="text-left">Height</label>
           <div>
             <select id="heightSelect" ref="heightSelect" className="form-control">
               {this.renderHeightOptions()}
@@ -121,7 +121,7 @@ var SizeProfile = React.createClass({
           </div>
         </div>
         <div className="form-group">
-          <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
+          <label>Dress size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
           <div className="dress-sizes centered">
             <ul className="customization-dress-sizes-ul">
               {this.renderDressSizes()}
