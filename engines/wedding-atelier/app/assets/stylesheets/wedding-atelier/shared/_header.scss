@@ -5,11 +5,13 @@
   position: fixed;
   top: 0;
   width: 100%;
+}
 
-  > div {
-    display: inline-block;
-    height: 100%;
-  }
+.shared-header-back-arrow,
+.shared-header-logo,
+.shared-header-commands {
+  display: inline-block;
+  height: 100%;
 }
 
 .shared-header-back-arrow {
@@ -54,7 +56,6 @@
 
 .commands-menu {
   background-image: image-url('wedding-atelier/icons/hamburger.png');
-
 }
 
 .commands-shopping-bag {

@@ -1,6 +1,6 @@
 .shared-header
-  .shared-header-back-arrow
-  .shared-header-logo
+  = link_to '', 'javascript:history.back()', class: 'shared-header-back-arrow'
+  = link_to '', wedding_atelier.root_path, class: 'shared-header-logo'
   .shared-header-commands
     .commands-help.hidden-xs
     .commands-menu
