@@ -58,5 +58,16 @@ RSpec.describe VariantSku do
         expect(sku).to include('US10AU14')
       end
     end
+
+    # Regression for https://fameandpartners.atlassian.net/browse/WEBSITE-1314
+    context 'without a size' do
+      let(:color_magenta) { create(:product_colour, name: 'magenta', presentation: 'Magenta') }
+      let(:variant) { create(:dress_variant, product: dress, option_values: [color_magenta]) }
+
+      it do
+        expect(sku).not_to be_empty
+        expect(sku).to include('OMGWTFBBQ')
+      end
+    end
   end
 end

@@ -25,7 +25,7 @@ class VariantSku
   end
 
   def size
-    variant.dress_size.name
+    variant.dress_size&.name
   end
 
   def color_id
