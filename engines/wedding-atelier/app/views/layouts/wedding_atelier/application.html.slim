@@ -38,7 +38,7 @@ doctype html
       = react_component 'Notification', errors: [flash[:error]]
     #notification
     #wrap
-      = render('wedding_atelier/shared/header') if include_header?
+      = render('wedding_atelier/shared/new_header') if include_header?
       #content
           = yield
       #push

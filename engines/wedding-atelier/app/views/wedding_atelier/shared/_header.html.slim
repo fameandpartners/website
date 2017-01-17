@@ -10,12 +10,10 @@
 
       .right-floating-icons
         ul.links-list
-          li
-            = link_to "#"
-              i.help
-          li
-            = link_to "#"
-              i.cart
+          li = link_to "#"
+            i.help
+          li = link_to "#"
+            i.cart
 
   .header-3-col
     .left-nav.hidden-xs.col-md-4.text-left
@@ -23,13 +21,10 @@
         li
           = profile_image_tag
         - if defined? @event
-          li
-            = @event.name
+          li = @event.name
         li BRIDE
-        li
-          = link_to 'MY ACCOUNT', wedding_atelier.accounts_path
-        li
-          = link_to 'LOGOUT', destroy_spree_user_session_path
+        li = link_to 'MY ACCOUNT', wedding_atelier.accounts_path
+        li = link_to 'LOGOUT', destroy_spree_user_session_path
 
     .left-nav.col-xs-4.hidden-sm.hidden-md.hidden-lg.text-left
       = link_to '#'
@@ -43,7 +38,7 @@
       ul.links-list
         li
           = link_to "#"
-            i.help
+          i.help
         li
           = link_to "#"
             i.cart
