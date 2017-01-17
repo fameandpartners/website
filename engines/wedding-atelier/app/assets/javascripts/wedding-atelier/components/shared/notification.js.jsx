@@ -62,7 +62,7 @@ var Notification = React.createClass({
     } else if (Object.keys(that.props.errors).length > 0) {
       errorList = [];
       Object.keys(that.props.errors).forEach(function (field) {
-        var normalized = field.split('_').map(function (word, index) {
+        var normalized = field.split(/_|\./).map(function (word, index) {
           return index === 0 ? word[0].toUpperCase() + word.slice(1) : word;
         }).join(' ');
 
