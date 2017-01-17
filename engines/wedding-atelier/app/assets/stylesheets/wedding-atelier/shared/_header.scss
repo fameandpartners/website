@@ -1,6 +1,6 @@
 .shared-header {
   background: transparent image-url('wedding-atelier/marbel.png');
-  height: 68px;
+  height: 69px;
   left: 0;
   position: fixed;
   top: 0;
@@ -30,13 +30,14 @@
 }
 
 .shared-header-commands {
-  margin-right: 5px;
+  margin-right: 10px;
   position: absolute;
   right: 0;
   text-align: right;
   width: 70px;
 
   > div {
+    cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
