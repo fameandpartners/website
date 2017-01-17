@@ -51,7 +51,7 @@ Spree::Order.class_eval do
   end
 
   def shipped?
-    shipment_state.present? && shipment_state == 'shipped'
+    shipment_state == 'shipped'
   end
 
   def fabrication_status

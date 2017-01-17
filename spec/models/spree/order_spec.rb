@@ -65,11 +65,19 @@ describe Spree::Order, :type => :model do
       end
       it{ expect(order).to be_shipped }
     end
+
     context 'not shipped' do
-      before do
+      it 'when shipment status is other than shipped' do
         allow(order).to receive(:shipment_state).and_return('pending')
+
+        expect(order).to_not be_shipped
       end
-      it{ expect(order).to_not be_shipped }
+
+      it 'when shipment status is blank' do
+        allow(order).to receive(:shipment_state).and_return(nil)
+
+        expect(order).to_not be_shipped
+      end
     end
   end
 
