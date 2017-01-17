@@ -64,10 +64,7 @@ RSpec.describe VariantSku do
       let(:color_magenta) { create(:product_colour, name: 'magenta', presentation: 'Magenta') }
       let(:variant) { create(:dress_variant, product: dress, option_values: [color_magenta]) }
 
-      it do
-        expect(sku).not_to be_empty
-        expect(sku).to include('OMGWTFBBQ')
-      end
+      it { expect(sku).to include('OMGWTFBBQ') }
     end
   end
 end
