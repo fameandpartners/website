@@ -12,14 +12,22 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = link_to inside_out_collection_landing_page_path
+              = link_to '/bespoke-bridal-collection'
                 = image_tag "lookbook/insideout-collection.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light The INSIDE\OUT Collection
-              = link_to 'View this collection', inside_out_collection_landing_page_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-light Bespoke Bridal Collection
+              = link_to 'View this collection', '/bespoke-bridal-collection', class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to pre_season_evening_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/pre-season-evening-collection.jpg"
+        .copy-wrap The Pre-Season Evening Collection <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to inside_out_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/insideout-collection.jpg"
+        .copy-wrap The INSIDE\OUT Collection <em><span>View this collection</span></em>
     .col-md-6
       = link_to evening_hours_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/evening-hours-collection.jpg"
@@ -36,14 +44,6 @@
       = link_to dress_for_wedding_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/weddings-collection.jpg"
         .copy-wrap Weddings Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to dress_for_parties_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/parties-collection.jpg"
-        .copy-wrap Parties Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to it_girl_landing_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/it-girl-collection.jpg"
-        .copy-wrap It Girl Collection <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
