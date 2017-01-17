@@ -45,7 +45,7 @@
 
   }
 
-  @include min-tablet {
+  @media (min-width: $bootstrap-md-width) {
 
     .content__appInfo {
       padding-left: 50px;
@@ -67,7 +67,7 @@
 
   }
 
-  @include mobile {
+  @media (max-width: $bootstrap-md-width - 1px) {
 
     .heroIntro .copy-wrap {
       padding: 20px 0 50px;

@@ -502,7 +502,7 @@ $top-overlay-margin-top: 37px;
 }
 
 
-@include min-tablet {
+@media (min-width: $bootstrap-md-width) {
 
   .contentBox .contentBoxItem {
     padding-bottom: 20px;
@@ -541,7 +541,7 @@ $top-overlay-margin-top: 37px;
 
 }
 
-@include mobile {
+@media (max-width: $bootstrap-md-width - 1px) {
 
   .contentBoxItem {
     text-align: center;
