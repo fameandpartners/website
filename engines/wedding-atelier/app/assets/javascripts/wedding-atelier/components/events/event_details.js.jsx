@@ -57,7 +57,7 @@ var EventDetails = React.createClass({
         <form className="center-block">
           <div className={this.props.hasError && this.props.hasError.name ? 'form-group has-error' : 'form-group'}>
             <label htmlFor="input_wedding_board_name">
-              Name the wedding board
+              What should we call your wedding board?
             </label>
             <input id="input_wedding_board_name"
                    className="form-control"
@@ -79,7 +79,7 @@ var EventDetails = React.createClass({
           </div>
           <div className="form-group">
             <label htmlFor="input_number_of_assistants">
-              How many bridesmaids at the wedding
+              How many bridesmaids will be in the wedding?
             </label>
             <input type="number"
                    className="form-control number-field js-number-field"

@@ -10,7 +10,9 @@ var DesktopCustomizations = React.createClass({
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
     eventSlug: React.PropTypes.string,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    event_name: React.PropTypes.string,
+    event_path: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -82,7 +84,7 @@ var DesktopCustomizations = React.createClass({
 
     return (
       <div className="customization-experience--desktop hidden-xs">
-        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette}/>
+        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette} event_name={this.props.event_name} event_path={this.props.event_path}/>
         <div className="customization-panel col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />

@@ -60,7 +60,7 @@ var CustomizationsMenuMobile = React.createClass({
             onZoomInCallback={this.props.goToSlide.bind(null, 0)}
             onZoomOutCallback={this.props.goToSlide.bind(null, 1)}/>
           <h1>
-            <em>Customize</em> it how you want
+            <em>Customize</em> and make it yours.
           </h1>
           {this.renderMenuList()}
         </div>

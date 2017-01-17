@@ -77,7 +77,7 @@ var AccountDetails = React.createClass({
           </div>
 
           <div className="account-details-right col-xs-12 col-sm-6">
-            <h1><em>Change,</em> Password</h1>
+            <h1><em>Update</em> Password</h1>
             <div className="form-group">
               <label htmlFor="current-password">Current password</label>
               <input type="password" id="current-password" name="current_password" className="form-control" value={this.state.currentPassword} onChange={this.fieldChangedUpdate.bind(null, 'currentPassword')}/>
@@ -96,7 +96,7 @@ var AccountDetails = React.createClass({
             <input refs="newsletter" type="checkbox" checked={this.state.newsletter}/>
             <label onClick={this.newsletterChangedHandle}>
               <span></span>
-              <p className="text">Sign up to get the latest trend updates</p>
+              <p className="text">Sign up to get the latest from Fame</p>
             </label>
           </div>
         </form>

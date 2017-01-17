@@ -3,7 +3,9 @@ var CustomizationExperience = React.createClass({
     customizationsUrl: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
     eventSlug: React.PropTypes.string,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    event_name: React.PropTypes.string,
+    event_path: React.PropTypes.string
   },
 
   getInitialState: function() {
@@ -114,7 +116,9 @@ var CustomizationExperience = React.createClass({
       subTotal: this.state.subTotal,
       customizationsCost: this.state.customizationsCost,
       eventSlug: this.props.eventSlug,
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      event_name: this.props.event_name,
+      event_path: this.props.event_path
     };
 
     return (

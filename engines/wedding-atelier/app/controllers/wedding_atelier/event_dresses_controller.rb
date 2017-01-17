@@ -3,6 +3,7 @@ module WeddingAtelier
   class EventDressesController < ApplicationController
 
     def new
+      @event = Event.find_by_slug(params[:event_id])
     end
 
     def edit
