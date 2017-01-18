@@ -29,10 +29,11 @@
   }
 
   .content__appInfo {
+    margin-bottom: 0;
 
     .contentBoxItem__ctaWrap {
       display: block;
-      padding-top: 30px;
+      padding-top: 20px;
     }
 
     .contentBoxItem__title {
@@ -50,11 +51,6 @@
     .content__appInfo {
       padding-left: 50px;
       padding-right: 50px;
-
-      .contentBoxItem__title {
-        margin-top: 40px;
-      }
-
     }
 
     .content__imgMaxHeight1 {

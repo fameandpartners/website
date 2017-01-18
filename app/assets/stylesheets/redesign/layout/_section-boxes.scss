@@ -479,7 +479,7 @@ $top-overlay-margin-top: 37px;
 
   .contentBoxItem__ctaWrap {
     display: block;
-    margin-top: 40px;
+    margin-top: 0;
   }
 
 }
@@ -563,10 +563,6 @@ $top-overlay-margin-top: 37px;
   }
 
   .contentBox__marbleBox .copyWrapper {
-    margin-bottom: 0;
-  }
-
-  .contentBox__marbleBox .content__lessMarginImg {
     margin-bottom: 20px;
   }
 
