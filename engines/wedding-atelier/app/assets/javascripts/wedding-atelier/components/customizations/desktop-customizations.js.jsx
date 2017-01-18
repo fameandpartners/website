@@ -126,6 +126,7 @@ var DesktopCustomizations = React.createClass({
               mobile={false}
               edit={this.props.edit}
               initialDress={this.props.initialDress}
+              currentUser={this.props.currentUser}
               />
             <AddToCartButton customizations={this.props.selectedOptions} />
           </div>

@@ -5,15 +5,20 @@ var SaveDressButton = React.createClass({
     selectedOptions: React.PropTypes.object,
     mobile: React.PropTypes.bool,
     edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    initialDress: React.PropTypes.object,
+    currentUser: React.PropTypes.object
   },
 
   saveDress: function(){
-    if(this.props.edit){
+    if(this.props.edit && this.isSameUser()){
       this.updateDress();
     }else{
       this.createDress();
     }
+  },
+
+  isSameUser: function(){
+    return this.props.currentUser.user.id === this.props.initialDress.user.id;
   },
 
   eventPath: function(){

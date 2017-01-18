@@ -64,6 +64,7 @@ var CustomizationsReviewMobile = React.createClass({
             mobile={true}
             edit={this.props.edit}
             initialDress={this.props.initialDress}
+            currentUser={this.props.currentUser}
             />
           <button className="btn-black">add to cart</button>
         </div>
