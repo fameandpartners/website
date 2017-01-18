@@ -28,7 +28,7 @@ module WeddingAtelier
                     :product_id,
                     :height
 
-  validates_presence_of :product
+  validates_presence_of :product, :fabric, :color, :length, :size, :height
 
   def images
     base_path = '/assets/wedding-atelier/dresses';

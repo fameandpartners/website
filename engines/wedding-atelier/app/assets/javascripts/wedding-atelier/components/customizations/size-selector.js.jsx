@@ -15,7 +15,7 @@ var SizeSelector = React.createClass({
     return {
       assistant: user,
       height: user.user_profile.height,
-      size: {}
+      size: user.user_profile.dress_size
     };
   },
 
@@ -35,37 +35,33 @@ var SizeSelector = React.createClass({
   },
 
   heightSelectedHandle: function (height) {
-    this.setState({
-      assistant: null,
-      height: height
-    });
-    if(this.state.size) {
-      this.props.selectCallback('height', height);
-      this.props.selectCallback('size', this.state.size);
+    // it's important to change size here to reset presentation as 4'10" / 147cm | 6
+    // if previous size came from an user profile
+    var _newState = $.extend({}, this.state);
+    _newState.height = height;
+    _newState.assistant = null;
+    if(this.state.assistant){
+      var size = this.state.assistant.user_profile.dress_size;
+      this.props.selectCallback('size', size);
+      _newState.size = size;
     }
+    this.props.selectCallback('height', height);
+    this.setState(_newState);
   },
 
   sizeSelectedHandle: function(size) {
     this.setState({
       assistant: null,
-      size: size.option_value
+      size: size
     });
-    if(this.state.height && this.state.height !== this.props.currentUser.user.user_profile.height) {
-      this.props.selectCallback('height', this.state.height);
-    } else {
-      $(this.refs.heightSelect).trigger('change');
-    }
     this.props.selectCallback('size', size);
   },
 
   assistantSelectedHandle: function(assistant) {
-    var size = this.props.sizes.filter(function (size) {
-      return size.id === assistant.user_profile.dress_size_id;
-    });
     $(this.refs.heightSelect).val(assistant.user_profile.height).trigger('change');
     this.setState({
       assistant: assistant,
-      size: size[0],
+      size: assistant.user_profile.dress_size,
       height: assistant.user_profile.height
     });
     this.props.selectCallback('size', assistant);
@@ -75,7 +71,7 @@ var SizeSelector = React.createClass({
     var that = this;
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={group[0]}>{height}</option>);
+        return(<option key={index} value={height}>{height}</option>);
       });
 
       return (
@@ -95,7 +91,7 @@ var SizeSelector = React.createClass({
             onChange: that.sizeSelectedHandle.bind(null, size)
           };
 
-      if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)) {
+      if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)) {
         inputProps.checked = true;
       }
 

@@ -30,7 +30,7 @@ var CustomizationsModal = React.createClass({
                       </li>
                       <li>
                         <p className="customization-list-label">fabric and colour</p>
-                        <p className="customization-list-value">{this.presentationFor('fabric-colour')}</p>
+                        <p className="customization-list-value">{this.presentationFor('fabric-color')}</p>
                       </li>
                       <li>
                         <p className="customization-list-label">length</p>

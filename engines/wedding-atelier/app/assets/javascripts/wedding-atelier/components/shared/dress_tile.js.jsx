@@ -5,6 +5,7 @@ var DressTile = React.createClass({
     handleLikeDress: React.PropTypes.func,
     removeDress: React.PropTypes.func,
     index: React.PropTypes.number,
+    dressesPath: React.PropTypes.string,
     dress: React.PropTypes.shape({
       id: React.PropTypes.number,
       title: React.PropTypes.string,
@@ -33,6 +34,10 @@ var DressTile = React.createClass({
     this.props.sendDressToChatFn(this.props.dress);
   },
 
+  editDressUrl: function(){
+    return this.props.dressesPath + '/' + this.props.dress.id + '/edit';
+  },
+
   render: function () {
     var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked',
         addedBy = 'Added by ' + this.props.dress.author;
@@ -48,7 +53,7 @@ var DressTile = React.createClass({
             </div>
             <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
-          <div className="dress-box-body text-center">
+          <a href={this.editDressUrl()} className="dress-box-body text-center">
             <img className="center-block" src={this.props.dress.images[0].moodboard}/>
 
             <div className="dress-info center-block">
@@ -56,7 +61,7 @@ var DressTile = React.createClass({
               <span>|</span>
               <span>{this.props.dress.price}</span>
             </div>
-          </div>
+          </a>
 
           <div className="dress-box-footer center-block text-center">
             <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>

@@ -15,7 +15,7 @@ var SizeSelectorMobile = React.createClass({
     return {
       assistant: user,
       height: user.user_profile.height,
-      size: {id: user.user_profile.dress_size_id}
+      size: user.user_profile.dress_size
     };
   },
 
@@ -43,28 +43,28 @@ var SizeSelectorMobile = React.createClass({
   },
 
   heightSelectedHandle: function (height) {
-    this.setState({
+    var newState = {
       assistant: null,
       height: height
-    });
+    }
+    if(this.state.assistant){
+      newState.size = this.state.assistant.dress_size
+    }
+    this.setState(newState);
   },
 
   sizeSelectedHandle: function(size) {
-    $(this.refs.heightSelect).trigger('change');
-    this.setState({
-      assistant: null,
-      size: size
-    });
+    var _newState = $.extend({}, this.state)
+    _newState.assistant = null;
+    _newState.size = size;
+    this.setState(_newState);
   },
 
   assistantSelectedHandle: function(assistant) {
-    var size = this.props.sizes.filter(function (size) {
-      return size.id === assistant.user_profile.dress_size_id;
-    });
     $(this.refs.heightSelect).val(assistant.user_profile.height).trigger('change');
     this.setState({
       assistant: assistant,
-      size: size[0],
+      size: assistant.user_profile.dress_size,
       height: assistant.user_profile.height
     });
   },
@@ -80,7 +80,7 @@ var SizeSelectorMobile = React.createClass({
 
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={group[0]}>{height}</option>);
+        return(<option key={index} value={height}>{height}</option>);
       });
 
       return (
@@ -98,7 +98,7 @@ var SizeSelectorMobile = React.createClass({
             name: "mobile-size",
             value: size.name,
             onChange: that.sizeSelectedHandle.bind(null, size),
-            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)
+            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)
           };
 
       return (

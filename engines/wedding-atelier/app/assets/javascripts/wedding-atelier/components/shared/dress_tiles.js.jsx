@@ -4,7 +4,8 @@ var DressTiles = React.createClass({
     sendDressToChatFn: React.PropTypes.func,
     dresses: React.PropTypes.array,
     handleLikeDress: React.PropTypes.func,
-    removeDress: React.PropTypes.func
+    removeDress: React.PropTypes.func,
+    dressesPath: React.PropTypes.string
   },
 
   render: function() {
@@ -13,6 +14,7 @@ var DressTiles = React.createClass({
         sendDressToChatFn={this.props.sendDressToChatFn}
         handleLikeDress={this.props.handleLikeDress}
         removeDress={this.props.removeDress}
+        dressesPath={this.props.dressesPath}
         index={i} />)
     }.bind(this));
     return(<div className='dress-boxes'> {content} </div>)

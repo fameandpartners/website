@@ -17,7 +17,7 @@ var SaveDressModal = React.createClass({
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
                 <div className="modal-body-container text-center">
                   <h1>
-                    Saved!
+                    Your dress has been saved!
                   </h1>
                   <div className="action-buttons">
                     <a href={moodboardUrl} className="btn-white" type='button'> Back to moodboard </a>
