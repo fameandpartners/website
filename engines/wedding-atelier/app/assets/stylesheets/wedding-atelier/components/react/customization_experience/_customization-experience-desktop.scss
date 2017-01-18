@@ -136,12 +136,15 @@
   }
 
   .actions {
+
     button {
-      width: 170px;
+      width: 145px;
       height: 44px;
     }
+
     .btn-transparent {
       margin-right: 10px;
+
       &:hover {
         background: $white-two;
       }
@@ -156,6 +159,22 @@
     .results {
       .left-result {
         padding-left: 0;
+      }
+    }
+  }
+
+  @include screen-lg {
+    .actions {
+      button {
+        width: 130px;
+      }
+    }
+  }
+
+  @include screen-xl {
+    .actions {
+      button {
+        width: 150px;
       }
     }
   }

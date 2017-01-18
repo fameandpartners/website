@@ -7,19 +7,24 @@ var CustomizationsHeader = React.createClass({
 
   render: function() {
     var designName = '';
-    if(this.props.silhouette){
+    if(this.props.silhouette) {
       designName = 'You are designing the ' + this.props.silhouette.name + '.';
     }
+
     return(
       <div className="customization-experience-header">
-        <div className="col-sm-6 col-xs-12 arrow">
-          <a href={this.props.event_path} className="back-to-moodboard hidden-xs">
-            Back to {this.props.event_name} board
-          </a>
-          <img src="/assets/fp-logo.svg" className="logo hidden-sm hidden-md hidden-lg"/>
-        </div>
-        <div className="col-sm-6" hidden-xs>
-          <span className="design-name">{designName}</span>
+        <a href={this.props.event_path} className="customization-experience-header-back-arrow">
+          <div className="going-back-wrapper">
+            <img src="/assets/lessthan.svg" />
+            <span className="hidden-xs">{'Back to ' + this.props.event_name}</span>
+          </div>
+        </a>
+        <div className="customization-experience-header-logo hidden-sm hidden-md hidden-lg"></div>
+        <div className="customization-experience-header-actions">
+          <div className="customization-experience-header-dress-name hidden-xs hiden-sm">{designName}</div>
+          <div className="customization-experience-header-help hidden-xs"></div>
+          <div className="customization-experience-header-menu"></div>
+          <div className="customization-experience-header-shopping-bag"></div>
         </div>
       </div>
     );
