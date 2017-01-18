@@ -12,6 +12,8 @@
 //= require bootstrap/tab
 //= require bootstrap/affix
 //= require bootstrap/scrollspy
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 
 //-------
 // React
