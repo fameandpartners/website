@@ -56,6 +56,12 @@ var DesktopCustomizations = React.createClass({
     this.setState({showLateralMenu: false});
   },
 
+  zoomClickedHandle: function () {
+    if(this.state.showLateralMenu) {
+      this.close();
+    }
+  },
+
   viewCustomizations: function(){
     $('.modal-customizations').modal();
   },
@@ -92,13 +98,11 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel customizations-preview col-sm-6">
-          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
+          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} onZoomInCallback={this.zoomClickedHandle}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
-
           </div>
-
           <div className="results col-md-2 col-lg-3">
             <div className="view-customizations">
               <span className="left-result">
