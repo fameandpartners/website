@@ -93,8 +93,9 @@ var CustomizationExperience = React.createClass({
 
     for(var key in selectedOptions) {
       var option = selectedOptions[key];
-      if(key !== 'size' && key !== 'silhouette' && key !== 'height' && option) {
-        cost += parseInt(option.price);
+      var hasCustomPrice = ['fit', 'style'].indexOf(key) >= 0;
+      if(hasCustomPrice && option) {
+        cost += parseFloat(option.price);
       }
     }
     return cost;

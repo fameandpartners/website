@@ -25,9 +25,9 @@ PresentationHelper.fabricColour = function(fabric, colour){
 PresentationHelper.costFor = function(options, customizationItem){
   if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
   if(customizationItem === 'fabric-color' && options.fabric && options.colour){
-    return parseFloat(options.fabric.price) + parseFloat(options.colour.price);
+    return options.fabric.price + options.colour.price;
   }else if(options[customizationItem]){
-    return parseFloat(options[customizationItem].price);
+    return options[customizationItem].price;
   }
   return '';
 };
@@ -52,9 +52,7 @@ PresentationHelper.customization = function(customization){
 PresentationHelper.presentation = function(options, customizationItem, siteVersion){
   var presentation = '';
   if(customizationItem === 'fabric-color'){
-    presentation = PresentationHelper.fabricColour(options.fabric, options.colour);
-    var additionalCost = PresentationHelper.additionalCost(options, customizationItem);
-    return presentation + additionalCost;
+    return PresentationHelper.fabricColour(options.fabric, options.colour);
   }else if(customizationItem === 'size'){
     return PresentationHelper.size(options.size, options.height, siteVersion);
   }else{
