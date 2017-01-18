@@ -8,8 +8,7 @@ var CustomizationsContainerMobile = React.createClass({
     siteVersion: React.PropTypes.string,
     startOverCallback: React.PropTypes.func,
     goToSlide: React.PropTypes.func,
-    currentUser: React.PropTypes.object,
-    selectedOptions: React.PropTypes.object
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -71,7 +70,7 @@ var CustomizationsContainerMobile = React.createClass({
           fabrics={this.props.customizations.fabrics}
           selectOptionCallback={this.selectOption}
           selectCallback={this.props.selectCallback}
-          selectedOption={this.props.selectedOptions.colour}
+          selectedOptions={this.props.selectedOptions}
           currentCustomization={this.props.currentCustomization}
           ref="fabric-colour"/>
         <CustomizationSelectorMobile

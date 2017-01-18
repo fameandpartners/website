@@ -147,7 +147,9 @@ var CustomizationExperience = React.createClass({
       eventSlug: this.props.eventSlug,
       currentUser: this.props.currentUser,
       event_name: this.props.event_name,
-      event_path: this.props.event_path
+      event_path: this.props.event_path,
+      edit: this.props.edit,
+      initialDress: this.props.initialDress.event_dress
     };
 
     return (

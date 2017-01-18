@@ -3,13 +3,38 @@ var SaveDressButton = React.createClass({
   propTypes: {
     eventSlug: React.PropTypes.string,
     selectedOptions: React.PropTypes.object,
-    mobile: React.PropTypes.bool
+    mobile: React.PropTypes.bool,
+    edit: React.PropTypes.bool,
+    initialDress: React.PropTypes.object
   },
 
   saveDress: function(){
-    var url = '/wedding-atelier/events/:event_id/dresses'.replace(':event_id', this.props.eventSlug);
+    if(this.props.edit){
+      this.updateDress();
+    }else{
+      this.createDress();
+    }
+  },
+
+  eventPath: function(){
+    return '/wedding-atelier/events/:event_id/dresses'.replace(':event_id', this.props.eventSlug);
+  },
+
+  createDress: function(){
     $.ajax({
       type: 'POST',
+      url: this.eventPath(),
+      dataType: 'json',
+      data: this.dressParams(),
+      success: this.successCallback,
+      error: this.errorCallback
+    });
+  },
+
+  updateDress: function(){
+    var url = this.eventPath() + '/' + this.props.initialDress.id;
+    $.ajax({
+      type: 'PUT',
       url: url,
       dataType: 'json',
       data: this.dressParams(),
@@ -58,7 +83,6 @@ var SaveDressButton = React.createClass({
 
   render: function() {
     var buttonClass = this.props.mobile ? 'btn-gray':'btn-transparent';
-
     return (
       <button className={buttonClass} onClick={this.saveDress}>
        save this dress

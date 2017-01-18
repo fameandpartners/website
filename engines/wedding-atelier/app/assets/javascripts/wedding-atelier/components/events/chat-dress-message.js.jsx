@@ -4,7 +4,7 @@ var ChatDressMessage = React.createClass({
     message: React.PropTypes.shape({
       author: React.PropTypes.string,
       content: React.PropTypes.shape({
-        author: React.PropTypes.string,
+        author: React.PropTypes.object,
         color: React.PropTypes.object,
         id: React.PropTypes.number,
         likes_count: React.PropTypes.number,

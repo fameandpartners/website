@@ -2,29 +2,28 @@ var FabricAndColourSelectorMobile = React.createClass({
   propTypes: {
     colours: React.PropTypes.array,
     fabrics: React.PropTypes.array,
-    selectedOption: React.PropTypes.object,
+    selectedOptions: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
-    selectOptionCallback: React.PropTypes.func.isRequired,
-    currentCustomization: React.PropTypes.string
+    currentCustomization: React.PropTypes.string,
+    selectOptionCallback: React.PropTypes.func.isRequired
   },
 
   getInitialState: function () {
     return {
       selectedFabric: null,
       selectedColour: null
-    };
+    }
   },
 
   componentWillReceiveProps: function(nextProps){
     if(!this.state.selectedFabric && !this.state.selectedColour){
       var newState = {
-        selectedFabric: _.findWhere(nextProps.fabrics, { name: 'HG'}),
-        selectedColour: _.findWhere(nextProps.colours, { name: 'berry'})
+        selectedFabric: nextProps.selectedOptions.fabric,
+        selectedColour: nextProps.selectedOptions.colour
       }
       this.setState(newState);
     }
   },
-
 
   fabricSelectedHandle: function (fabric) {
     this.setState({selectedFabric: fabric});
@@ -45,11 +44,10 @@ var FabricAndColourSelectorMobile = React.createClass({
     var that = this;
     return this.props.fabrics.map(function(fabric, index) {
       var inputId = fabric.id + "-" + 'mobile',
-          isChecked = fabric === that.state.selectedFabric;
-
+          isChecked = fabric.id === that.state.selectedFabric.id;
       return (
         <div key={inputId} onClick={that.fabricSelectedHandle.bind(null, fabric)} className="fabric-radio-container">
-          <input id={inputId} type="radio" defaultChecked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
+          <input id={inputId} type="radio" checked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
             <span className="real-label">{fabric.presentation}</span>

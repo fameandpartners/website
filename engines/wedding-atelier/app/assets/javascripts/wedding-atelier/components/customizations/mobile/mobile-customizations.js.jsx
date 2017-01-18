@@ -12,7 +12,9 @@ var MobileCustomizations = React.createClass({
     eventSlug: React.PropTypes.string,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string
+    event_path: React.PropTypes.string,
+    edit: React.PropTypes.bool,
+    initialDress: React.PropTypes.object
   },
 
   componentDidMount: function() {
@@ -48,7 +50,9 @@ var MobileCustomizations = React.createClass({
       eventSlug: this.props.eventSlug,
       currentUser: this.props.currentUser,
       event_path: this.props.event_name,
-      event_name: this.props.event_name
+      event_name: this.props.event_name,
+      edit: this.props.edit,
+      initialDress: this.props.initialDress
     });
 
     var customizationsMenuProps = $.extend(defaultProps, {

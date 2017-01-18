@@ -12,7 +12,9 @@ var CustomizationsReviewMobile = React.createClass({
     eventSlug: React.PropTypes.string,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string
+    event_path: React.PropTypes.string,
+    edit: React.PropTypes.bool,
+    initialDress: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -59,7 +61,9 @@ var CustomizationsReviewMobile = React.createClass({
           <SaveDressButton
             eventSlug={this.props.eventSlug}
             selectedOptions={this.props.selectedOptions}
-            mobile
+            mobile={true}
+            edit={this.props.edit}
+            initialDress={this.props.initialDress}
             />
           <button className="btn-black">add to cart</button>
         </div>

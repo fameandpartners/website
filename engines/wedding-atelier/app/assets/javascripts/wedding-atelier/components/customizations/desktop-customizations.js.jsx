@@ -12,7 +12,9 @@ var DesktopCustomizations = React.createClass({
     eventSlug: React.PropTypes.string,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string
+    event_path: React.PropTypes.string,
+    edit: React.PropTypes.bool,
+    initialDress: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -122,6 +124,8 @@ var DesktopCustomizations = React.createClass({
               eventSlug={this.props.eventSlug}
               selectedOptions={this.props.selectedOptions}
               mobile={false}
+              edit={this.props.edit}
+              initialDress={this.props.initialDress}
               />
             <AddToCartButton customizations={this.props.selectedOptions} />
           </div>
