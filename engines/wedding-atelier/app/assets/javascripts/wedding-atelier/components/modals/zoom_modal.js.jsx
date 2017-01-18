@@ -21,6 +21,13 @@ var ZoomModal = React.createClass({
     });
   },
 
+  componentDidUpdate: function(prevProps, prevState){
+    if (prevProps.visible === false && this.props.visible === true) {
+      this.refs.activeZoom.scrollLeft = $(window).width() - $(this.refs.activeZoom).find('img').width() / 2;
+      this.refs.activeZoom.scrollTop = 0;
+    }
+  },
+
   renderThumbnails: function () {
     var that = this;
     var thumbnails = this.props.images.map(function (image, index) {
@@ -50,7 +57,7 @@ var ZoomModal = React.createClass({
     return (
       <div ref="zoomModal" className="zoom-modal" style={{display: this.props.visible? 'block':'none'}}>
         <div className="close-zoom" onClick={this.props.zoomClosedHandle}></div>
-        <div className="zoom-modal-image">
+        <div className="zoom-modal-image" ref="activeZoom">
           <img src={image.large} style={{visibility: this.state.loading? 'hidden':'visible'}} onError={this.props.imageNotFoundHandle}/>
           <ImageLoader loading={this.state.loading} />
         </div>
