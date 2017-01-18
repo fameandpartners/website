@@ -11,7 +11,7 @@ var SizeProfile = React.createClass({
   getInitialState: function () {
     var userProfile = $.extend({}, this.props.user_profile.user_profile);
     return {
-      size: userProfile.dress_size.id,
+      size: userProfile.dress_size_id,
       height: userProfile.height,
       userProfile:  userProfile
     };
@@ -65,7 +65,7 @@ var SizeProfile = React.createClass({
             onChange: that.changeSizeHandler.bind(null, size)
           };
 
-      if (size.option_value.id === that.state.size || (that.state.userProfile && size.option_value.id === that.state.userProfile.dress_size.id)) {
+      if (size.option_value.id === that.state.size || (that.state.userProfile && size.option_value.id === that.state.userProfile.dress_size_id)) {
         inputProps.checked = true;
       }
 
