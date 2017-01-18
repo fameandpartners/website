@@ -25,9 +25,9 @@ PresentationHelper.fabricColour = function(fabric, colour){
 PresentationHelper.costFor = function(options, customizationItem){
   if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
   if(customizationItem === 'fabric-color' && options.fabric && options.colour){
-    return parseInt(options.fabric.price) + parseInt(options.colour.price);
+    return parseFloat(options.fabric.price) + parseFloat(options.colour.price);
   }else if(options[customizationItem]){
-    return parseInt(options[customizationItem].price);
+    return parseFloat(options[customizationItem].price);
   }
   return '';
 };
