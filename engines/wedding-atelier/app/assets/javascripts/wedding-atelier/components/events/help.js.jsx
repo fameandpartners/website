@@ -5,7 +5,7 @@ var Help = React.createClass({
   },
 
   hidePopovers: function() {
-    $('.walkthrough-messages').popover('hide');
+    $('.walkthrough-messages').popover('destroy');
   },
 
   handleClose: function(e) {
