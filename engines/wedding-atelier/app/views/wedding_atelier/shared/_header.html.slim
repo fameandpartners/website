@@ -13,4 +13,7 @@
           = link_to 'logout', destroy_spree_user_session_path
 
   = link_to '', wedding_atelier.root_path, class: 'shared-header-logo'
-  = react_component 'Commands', {}, { class: 'shared-header-commands-container' }
+  .shared-header-commands
+    .commands-help.hidden-xs
+    .commands-menu
+    .commands-shopping-bag

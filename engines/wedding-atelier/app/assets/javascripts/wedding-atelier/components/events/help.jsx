@@ -1,13 +1,7 @@
-var Commands = React.createClass({
-
+var Help = React.createClass({
   componentDidMount: function () {
     this.handleBrowserResizing();
-  },
-
-  getInitialState: function () {
-    return {
-      showing: false
-    }
+    $(document).ready(this.showPopovers);
   },
 
   handleBrowserResizing: function () {
@@ -25,8 +19,6 @@ var Commands = React.createClass({
     $('#bridesmaid-dresses-tab').popover('show');
     $('#wedding-details-tab').popover('show');
     $('#manage-bridal-party-tab').popover('show');
-
-    this.setState({showing: true});
   },
 
   hidePopovers: function () {
@@ -36,29 +28,19 @@ var Commands = React.createClass({
     $('#bridesmaid-dresses-tab').popover('hide');
     $('#wedding-details-tab').popover('hide');
     $('#manage-bridal-party-tab').popover('hide');
-
-    this.setState({showing: false});
   },
 
   handleClose: function () {
-    $(this.refs.fadeMe).hide();
     this.hidePopovers();
-  },
-
-  handleOpen: function() {
-    $(this.refs.fadeMe).show();
-    this.showPopovers();
+    ReactDOM.unmountComponentAtNode(document.getElementById('notification'));
   },
 
   render: function () {
     return (
-      <div className="shared-header-commands">
-        <div className="fadeMe" ref="fadeMe"></div>
-        { this.state.showing ? <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a> : ''}
-        <div className="commands-help hidden-xs" onClick={this.handleOpen}></div>
-        <div className="commands-menu"></div>
-        <div className="commands-shopping-bag"></div>
+      <div className="help-container">
+         <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a>
+         <div className="fade-me" ref="fadeMe"></div>
       </div>
-    )
+    );
   }
 });
