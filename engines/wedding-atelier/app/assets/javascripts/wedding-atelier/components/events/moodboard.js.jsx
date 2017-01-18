@@ -222,15 +222,15 @@ var MoodBoardEvent = React.createClass({
                     Chat  <span className="badge">12</span></a>
                 </li>
                 <li className="active" role="presentation">
-                  <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
+                  <a className="walkthrough-messages" aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab" title="View your dresses" data-content="Create new looks and vote on your favorites" data-placement="bottom">
                     Bridesmaid dresses</a>
                 </li>
                 <li role="presentation">
-                  <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
+                  <a className="walkthrough-messages" aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab" title="Update the details" data-content="Input everything you need to know about the big day" data-placement="bottom">
                   Wedding details</a>
                 </li>
                 <li role="presentation">
-                  <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">
+                  <a className="walkthrough-messages" aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab" title="Manage the group" data-content="Add, view, and remove members of the bridal party" data-placement="bottom">
                   Bridal party</a>
                 </li>
                 <li role="presentation" className="bridal-gowns">
