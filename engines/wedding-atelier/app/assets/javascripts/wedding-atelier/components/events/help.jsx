@@ -1,4 +1,5 @@
 var Help = React.createClass({
+
   componentDidMount: function () {
     this.handleBrowserResizing();
     $(document).ready(this.showPopovers);
@@ -6,8 +7,10 @@ var Help = React.createClass({
 
   handleBrowserResizing: function () {
     $(window).resize(function(e) {
-      if (this.state.showing) {
+      if (document.body.clientWidth >= 768) {
         this.showPopovers();
+      } else {
+        this.handleClose();
       }
     }.bind(this));
   },
@@ -19,6 +22,8 @@ var Help = React.createClass({
     $('#bridesmaid-dresses-tab').popover('show');
     $('#wedding-details-tab').popover('show');
     $('#manage-bridal-party-tab').popover('show');
+
+    $(this.refs.fadeMe).show();
   },
 
   hidePopovers: function () {
@@ -28,6 +33,8 @@ var Help = React.createClass({
     $('#bridesmaid-dresses-tab').popover('hide');
     $('#wedding-details-tab').popover('hide');
     $('#manage-bridal-party-tab').popover('hide');
+
+    $(this.refs.fadeMe).hide();
   },
 
   handleClose: function () {
