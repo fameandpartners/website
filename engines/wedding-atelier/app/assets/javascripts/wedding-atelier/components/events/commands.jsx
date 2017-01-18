@@ -1,4 +1,4 @@
-var Help = React.createClass({
+var Commands = React.createClass({
 
   componentDidMount: function () {
     this.handleBrowserResizing();
@@ -52,23 +52,13 @@ var Help = React.createClass({
 
   render: function () {
     return (
-      <div className="help-link">
-        { this.state.showing ? <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a> : ''}
+      <div className="shared-header-commands">
         <div className="fadeMe" ref="fadeMe"></div>
-        <a href="#" onClick={this.handleOpen}>
-          <i className="help"></i>
-        </a>
+        { this.state.showing ? <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a> : ''}
+        <div className="commands-help hidden-xs" onClick={this.handleOpen}></div>
+        <div className="commands-menu"></div>
+        <div className="commands-shopping-bag"></div>
       </div>
     )
   }
 });
-
-
-
-  // componentDidMount: function () {
-  //   window.test = $('#account_link');
-  //   test.popover({
-  //     template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-  //   });
-  //   test.popover('show');
-  // },

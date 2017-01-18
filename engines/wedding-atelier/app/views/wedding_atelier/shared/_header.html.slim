@@ -1,48 +1,16 @@
-.shared__header
-  .header-2-col
-    .left-nav.col-xs-1.col-sm-6.col-md-6.text-left
-        = link_to '', '#', class: 'arrow'
-        = link_to '#', class: 'text-link'
-         | Back to wedding board
+.shared-header
+  = link_to '', 'javascript:history.back()', class: ['shared-header-back-arrow', 'hidden-md', 'hidden-lg']
+  .shared-header-options.hidden-xs.hidden-sm
+    ul
+      li.shared-header-profile-image = profile_image_tag
+      li.shared-header-user-name
+        .border-wrapper = current_spree_user.first_name
+      li.shared-header-user-role
+        .border-wrapper = 'bride'
+      li.shared-header-account
+          = link_to 'my account', wedding_atelier.accounts_path, class: 'border-wrapper'
+      li.shared-header-logout
+          = link_to 'logout', destroy_spree_user_session_path
 
-    .center-nav.col-xs-11.col-sm-6.col-md-6.center-block
-      span.title You are designing The Wonderland
-
-      .right-floating-icons
-        ul.links-list
-          li
-            = link_to "#"
-              i.help
-          li
-            = link_to "#"
-              i.cart
-
-  .header-3-col
-    .left-nav.hidden-xs.col-md-4.text-left
-      ul.links-list
-        li
-          = profile_image_tag
-        - if defined? @event
-          li
-            = @event.name
-        li BRIDE
-        li
-          = link_to 'MY ACCOUNT', wedding_atelier.accounts_path, { 'id': 'account-btn', title: 'Manage your account', 'data-content': 'Edit your personal details, check order status, and update your size profile', 'data-placement': 'right' }
-        li
-          = link_to 'LOGOUT', destroy_spree_user_session_path
-
-    .left-nav.col-xs-4.hidden-sm.hidden-md.hidden-lg.text-left
-      = link_to '#'
-        i.hamburguer
-
-
-    .center-nav.col-xs-4.col-md-4.center-block
-      span class="logo"
-
-    .right-nav.col-xs-4.col-md-4.text-right
-      ul.links-list
-        li
-          = react_component 'Help'
-        li
-          = link_to "#"
-            i.cart
+  = link_to '', wedding_atelier.root_path, class: 'shared-header-logo'
+  = react_component 'Commands', {}, { class: 'shared-header-commands-container' }
