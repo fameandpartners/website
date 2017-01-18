@@ -1,52 +1,31 @@
 var Help = React.createClass({
 
-  componentDidMount: function () {
-    this.handleBrowserResizing();
-    $(document).ready(this.showPopovers);
+  showPopovers: function() {
+    $('.walkthrough-messages').popover('show');
   },
 
-  handleBrowserResizing: function () {
-    $(window).resize(function(e) {
-      if (document.body.clientWidth >= 768) {
-        this.showPopovers();
-      } else {
-        this.handleClose();
-      }
-    }.bind(this));
+  hidePopovers: function() {
+    $('.walkthrough-messages').popover('hide');
   },
 
-  showPopovers: function () {
-    $('#account-btn').popover('show');
-    $('#online-members-btn').popover('show');
-    $('#post-image-btn').popover('show');
-    $('#bridesmaid-dresses-tab').popover('show');
-    $('#wedding-details-tab').popover('show');
-    $('#manage-bridal-party-tab').popover('show');
-
-    $(this.refs.fadeMe).show();
-  },
-
-  hidePopovers: function () {
-    $('#account-btn').popover('hide');
-    $('#online-members-btn').popover('hide');
-    $('#post-image-btn').popover('hide');
-    $('#bridesmaid-dresses-tab').popover('hide');
-    $('#wedding-details-tab').popover('hide');
-    $('#manage-bridal-party-tab').popover('hide');
-
+  handleClose: function(e) {
+    this.hidePopovers();
+    $(this.refs.btnClose).hide();
     $(this.refs.fadeMe).hide();
   },
 
-  handleClose: function () {
-    this.hidePopovers();
-    ReactDOM.unmountComponentAtNode(document.getElementById('notification'));
+  handleOpen: function() {
+    this.showPopovers();
+    $(this.refs.btnClose).show();
+    $(this.refs.fadeMe).show();
   },
 
   render: function () {
     return (
-      <div className="help-container">
-         <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a>
-         <div className="fade-me" ref="fadeMe"></div>
+      <div className="help-container hidden-xs">
+        <div className="fade-me" ref="fadeMe"></div>
+        <div className="commands-help" onClick={this.handleOpen}></div>
+        <a className="btnClose icon-close-white" ref="btnClose" href="#" onClick={this.handleClose}></a>
       </div>
     );
   }

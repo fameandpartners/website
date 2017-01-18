@@ -1,6 +1,9 @@
 .help-container {
+  display: inline-block;
+  height: 100%;
 
   .fade-me {
+    display: none;
     opacity: .76;
     background: $black;
     width: 100%;
@@ -12,6 +15,7 @@
   }
 
   .btnClose {
+    display: none;
     z-index: 101;
     height: 14px;
     width: 14px;

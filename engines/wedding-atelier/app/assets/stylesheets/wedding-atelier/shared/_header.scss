@@ -5,6 +5,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 }
 
 .shared-header-back-arrow,
@@ -65,20 +66,11 @@
   width: 160px;
 }
 
-.shared-header-commands-container {
-  margin-right: 10px;
-  position: absolute;
-  right: 0;
-  text-align: right;
-  width: 70px;
-}
-
 .shared-header-commands {
   margin-right: 10px;
   position: absolute;
   right: 0;
   text-align: right;
-  width: 70px;
 }
 
 .commands-help,

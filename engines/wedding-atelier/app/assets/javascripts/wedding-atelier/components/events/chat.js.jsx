@@ -358,7 +358,7 @@ var Chat = React.createClass({
           <div className="row">
             <div className="col-xs-7">
               <div className="chat-header-left-side">
-                <strong id="online-members-btn" title="See who's online" data-content="See which of your bridal party is online then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
+                <strong className="walkthrough-messages" title="See who's online" data-content="See which of your bridal party is online then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
               </div>
             </div>
             <div className="col-xs-5">
@@ -376,7 +376,7 @@ var Chat = React.createClass({
           </div>
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
-          <input className="btn upload-image" onClick={this.uploadImage} value="" id="post-image-btn" data-content="Send pics to the group" data-placement="right" />
+          <input className="btn upload-image walkthrough-messages" onClick={this.uploadImage} value="" data-content="Send pics to the group" data-placement="right" />
           <div className="message-input">
             <input type="text"
                    value={this.message}
