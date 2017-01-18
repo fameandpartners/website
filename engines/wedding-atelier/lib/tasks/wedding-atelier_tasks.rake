@@ -54,19 +54,19 @@ namespace :wedding_atelier do
 
     # Strapless ----------------------------------------------------------------------------------
     strapless_styles = [
-      'Add sheer draped panel to bodice',
-      'Add wide off shoulder panel',
-      'Add separate cape',
-      'Add separate wide tie belt',
-      'Add draped arm bows'
+      { presentation: 'Add sheer draped panel to bodice', price: 14.99 },
+      { presentation: 'Add wide off shoulder panel', price: 19.99 },
+      { presentation: 'Add separate cape', price: 24.99 },
+      { presentation: 'Add separate wide tie belt', price: 19.99 },
+      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
     ]
 
     strapless_fits = [
-      'Add wide bow straps',
-      'Change to one shoulder neckline',
-      'Add flred hem ruffle',
-      'Add narrow adjusatble straps',
-      'Change to Hi-low hem skirt with full volume silhouette'
+      { presentation: 'Add wide bow tie straps', price: 9.99 },
+      { presentation: 'Change to curved neckline', price: 9.99 },
+      { presentation: 'Add flared hem ruffle', price: 24.99 },
+      { presentation: 'Add narrow adjusatble straps', price: 9.99 },
+      { presentation: 'Change to Hi-low hem', price: 29.99 }
     ]
 
     # TODO: Ask for the base price
@@ -82,19 +82,19 @@ namespace :wedding_atelier do
 
     # Fit and Flare  -----------------------------------------------------------------------------
     fit_and_flare_styles = [
-      'Add 2-layer cape (attached)',
-      'Add single sleeve with cuff',
-      'Add bow to shoulder',
-      'Add flared arm bands',
-      'Add separate wide tie belt'
+      { presentation: 'Add 2-layer ruffle cape (attached)', price: 24.99 },
+      { presentation: 'Add single sleeve with cuff', price: 14.99 },
+      { presentation: 'Add bow to shoulder', price: 9.99 },
+      { presentation: 'Add flared arm bands', price: 19.99 },
+      { presentation: 'Add separate wide tie belt', price: 19.99 }
     ]
 
     fit_and_flare_fits = [
-      'Change to spaghetti straps',
-      'Change to halter neckline',
-      'Change to strapless neckline',
-      'Change to scoop neck',
-      'Change to hi-low hem'
+      { presentation: 'Change to spaghetti straps', price: 9.99 },
+      { presentation: 'Change to halter neckline', price: 9.99 },
+      { presentation: 'Change to strapless neckline', price: 9.99 },
+      { presentation: 'Change to scoop neck', price: 9.99 },
+      { presentation: 'Change to hi-low hem', price: 9.99 }
     ]
 
     fit_and_flare_attrs = {
@@ -109,19 +109,19 @@ namespace :wedding_atelier do
 
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
-      'Add long fitted sleeves with shoulder cut-outs',
-      'Add draped side arm panels (attached to side seam)',
-      'Add wide off shoulder panel',
-      'Add long flared sleeve',
-      'Add separate wide tie belt'
+      { presentation: 'Add long fitted sleeves with shoulder cut-outs', price: 19.99 },
+      { presentation: 'Add draped side arm panels (attached to side seam)', price: 19.99 },
+      { presentation: 'Add wide off shoulder panel', price: 19.99 },
+      { presentation: 'Add long flared sleeve', price: 19.99 },
+      { presentation: 'Add separate wide tie belt', price: 19.99 }
     ]
 
     shift_fits = [
-      'Change to plunging back neckline',
-      'Change to plunging neckline',
-      'Change to one shoulder neckline',
-      'Change to classic neckline',
-      'Change to a-line silhouette'
+      { presentation: 'Change to plunging v-back neckline', price: 9.99 },
+      { presentation: 'Change to plunging v-front neckline', price: 9.99 },
+      { presentation: 'Change to one shoulder neckline', price: 9.99 },
+      { presentation: 'Change to classic neckline', price: 9.99 },
+      { presentation: 'Change to a-line silhouette', price: 14.99 }
     ]
 
     # TODO: Ask for the base price
@@ -137,19 +137,19 @@ namespace :wedding_atelier do
 
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
-      'Add hem ruffle',
-      'Add cape (longer with arm splits)',
-      'Add long flared sleeve',
-      'Add separate wide tie belt',
-      'Add draped arm bows'
+      { presentation: 'Add hem ruffle', price: 24.99 },
+      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long flared sleeve', price: 19.99 },
+      { presentation: 'Add separate wide tie belt', price: 19.99 },
+      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
     ]
 
     slip_fits = [
-      'Change to multi back straps',
-      'Change to rouleau straps',
-      'Change to round back neck',
-      'Change to v neck',
-      'Change to side split'
+      { presentation: 'Change to multi back straps', price: 14.99 },
+      { presentation: 'Change to rouleau straps', price: 9.99 },
+      { presentation: 'Change to round back neckline', price: 9.99 },
+      { presentation: 'Change to v-front neckline', price: 9.99 },
+      { presentation: 'Add side split', price: 9.99 }
     ]
 
     # TODO: Ask for the base price
@@ -165,19 +165,19 @@ namespace :wedding_atelier do
 
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
-      'Add separate wide tie belt',
-      'Add cape (longer with arm splits)',
-      'Add long flared sleeve',
-      'Add wide arm ties',
-      'Add voluminous half sleeve'
+      { presentation: 'Add separate wide tie belt', price: 19.99 },
+      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long flared sleeve', price: 19.99 },
+      { presentation: 'Add wide arm ties', price: 14.99 },
+      { presentation: 'Add voluminous half sleeve', price: 19.99 }
     ]
 
     wrap_fits = [
-      'Change to rouleau straps',
-      'Add hem ruffle',
-      'Change to v wrap back neckline',
-      'Change to a-line skirt',
-      'Add double hem ruffle'
+      { presentation: 'Change to rouleau straps', price: 9.99 },
+      { presentation: 'Add hem ruffle', price: 24.99 },
+      { presentation: 'Change to v-wrap back neckline', price: 14.99 },
+      { presentation: 'Change to a-line skirt silhouette', price: 14.99 },
+      { presentation: 'Add double hem ruffle', price: 29.99 }
     ]
 
     # TODO: Ask for the base price
@@ -193,19 +193,19 @@ namespace :wedding_atelier do
 
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
-      'Add separate cape',
-      'Change to tie straps (remove ring + slide)',
-      'Add ruffles to cups',
-      'Add ruffles to steams',
-      'Add detachable bow'
+      { presentation: 'Add separate cape', price: 24.99 },
+      { presentation: 'Change to tie straps (remove ring & slide)', price: 9.99 },
+      { presentation: 'Add ruffles to cups', price: 14.99 },
+      { presentation: 'Add ruffles to steams', price: 24.99 },
+      { presentation: 'Add detachable bow', price: 19.99 }
     ]
 
     tri_cup_fits = [
-      'Change to column skirt',
-      'Change to wide straps',
-      'Change cross back straps with bow',
-      'Change to babydoll silhouette',
-      'Add double hem ruffle'
+      { presentation: 'Change to column skirt', price: 14.99 },
+      { presentation: 'Change to wide straps', price: 9.99 },
+      { presentation: 'Change cross back straps with bow', price: 9.99 },
+      { presentation: 'Change to babydoll silhouette', price: 14.99 },
+      { presentation: 'Add double hem ruffle', price: 29.99 }
     ]
 
     # TODO: Ask for the base price
@@ -221,19 +221,19 @@ namespace :wedding_atelier do
 
     # Two piece ----------------------------------------------------------------------------------
     two_piece_styles = [
-      'Add ruffle to bodice edge',
-      'Add back neck bow tie',
-      'Add side ties (bow at back)',
-      'Add wide arm ties',
-      'Add draped cold shoulder sleeve'
+      { presentation: 'Add ruffle to bodice edge', price: 14.99 },
+      { presentation: 'Add back neck bow tie', price: 14.99 },
+      { presentation: 'Add side ties (bow at back)', price: 19.99 },
+      { presentation: 'Add wide drapped arm bow ties', price: 14.99 },
+      { presentation: 'Add draped cold shoulder sleeve', price: 19.99 }
     ]
 
     two_piece_fits = [
-      'Add hem ruffle',
-      'Change to strapless bodice',
-      'ADd front keyhole',
-      'Change to column skirt',
-      'Change to classic bodice with short sleeve'
+      { presentation: 'Add hem ruffle', price: 24.99 },
+      { presentation: 'Change to strapless bodice', price: 14.99 },
+      { presentation: 'ADd front keyhole', price: 9.99 },
+      { presentation: 'Change to column skirt', price: 14.99 },
+      { presentation: 'Change to classic bodice with short sleeve', price: 19.99 }
     ]
 
     # TODO: Ask for the base price
@@ -249,17 +249,19 @@ namespace :wedding_atelier do
 
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
-      'Add ruffle down skirt edge',
-      'Add rufle down front neckline',
-      'Add arm ties (not wide)'
+      { presentation: 'Add ruffle down skirt edge', price: 14.99 },
+      { presentation: 'Add rufle at front neckline', price: 14.99 },
+      { presentation: 'Add separete arm bands', price: 14.99 },
+      { presentation: 'Add gathered hem ruffle', price: 24.99 },
+      { presentation: 'Add small train', price: 14.99 }
     ]
 
     multi_way_fits = [
-      'Change to full volume skirt',
-      'Remove overlapping skirt panel',
-      'Change to hi-low hem',
-      'Raise front and back neckline',
-      'Change to column skirt'
+      { presentation: 'Change to full volume skirt', price: 24.99 },
+      { presentation: 'Remove overlapping skirt panel (split)', price: 9.99 },
+      { presentation: 'Change to hi-low hem', price: 24.99 },
+      { presentation: 'Raise front and back neckline (with added under bodice)', price: 14.99 },
+      { presentation: 'Change to column skirt', price: 14.99 }
     ]
 
     # TODO: Ask for the base price
@@ -291,9 +293,9 @@ namespace :wedding_atelier do
     initial = customization_type[0].upcase
     customizations.each_with_index do |c, index|
       product.customisation_values.create(name: "#{initial}#{index + 1}",
-                                          presentation: c,
+                                          presentation: c[:presentation],
                                           customisation_type: customization_type,
-                                          price: 10
+                                          price: c[:price]
                                           )
     end
   end
