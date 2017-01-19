@@ -8,6 +8,7 @@
   @include slide-in-up();
 
   background-color: $white-two;
+  border-left: 1px solid $white;
   right: 0;
   height: 100%;
   position: fixed;
@@ -54,7 +55,9 @@
 }
 
 .shopping-bag-content {
-  padding: 20px;
+  height: calc(100% - 117px); /* 100% - (header + button height) */
+  padding: 20px 20px 0;
+  position: relative;
   text-align: center;
 
   .free-shipping {
@@ -63,6 +66,35 @@
 
   &-statement {
     font-family: $primary-font;
+    margin-bottom: 20px;
+  }
+
+  &-list {
+
+  }
+
+  &-totals {
+    border-top: 1px solid $white;
+    bottom: 0;
+    font-size: 1rem;
+    height: 90px;
+    left: 0;
+    letter-spacing: 2px;
+    padding: 20px 10px;
+    position: absolute;
+    width: 100%;
+
+    &-labels {
+      float: left;
+      font-weight: 700;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    &-amounts {
+      float: right;
+      text-align: right;
+    }
   }
 }
 
