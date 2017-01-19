@@ -3,7 +3,7 @@ require_dependency 'spree/taxonomy_decorator'
 Spree::Taxon.class_eval do
   include Concerns::Publishable
 
-  DELIVERY_PERIODS = ['7 - 10', '8 - 12', '10 - 14', '14 - 28'].freeze
+  DELIVERY_PERIODS = ['7 - 10', '8 - 12', '10 - 14', '14 - 28'].map{ |period| "#{period} business days" }.freeze
 
   attr_accessible :delivery_period
 
