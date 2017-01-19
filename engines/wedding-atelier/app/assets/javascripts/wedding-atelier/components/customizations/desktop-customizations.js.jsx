@@ -147,14 +147,23 @@ var AddToCartButton = React.createClass({
       size_id: size_id,
       color_id: customizations.colour.id,
       variant_id: customizations.silhouette.variant_id,
-      height: customizations.height,
-      length_id: customizations.length.id,
-      fabric_id: customizations.fabric.id,
-      customizations_ids: [customizations.fit.id, customizations.style.id]
-    }
-    shoppingCart = new helpers.ShoppingCart({});
-    shoppingCart.addProduct(attrs);
+      height: customizations.heightGroup,
+      customizations_ids: [customizations.fit.id, customizations.style.id, customizations.length.id, customizations.fabric.id]
+    };
+    $.ajax({
+      url: "/user_cart/products",
+      type: "POST",
+      dataType: "json",
+      data: attrs,
+      success: function (data) {
+        //TODO: Show alert that the product has been added to the cart
+      },
+      error: function (response) {
+        //TODO: Show errors
+      }
+    })
   },
+
   render: function(){
     return(
         <button className="btn-black" onClick={this.handleAddToCart}> add to cart </button>
