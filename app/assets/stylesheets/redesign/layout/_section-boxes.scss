@@ -388,3 +388,246 @@ $top-overlay-margin-top: 37px;
   }
 
 }
+
+// An alternative styling for section boxes
+// Sample usage: landing_pages/bespoke_bridal_collection.html.slim
+
+.contentBox {
+  margin-bottom: 65px;
+
+  .copyWrapper {
+    width: 100%;
+  }
+
+}
+
+.contentBoxItem__title,
+.contentBoxItem__copy,
+.contentBoxItem__ctaWrap {
+  padding: 0 20px 15px 10px;
+  margin: 0;
+}
+
+.contentBoxItem__title {
+  padding-top: 20px;
+}
+
+.contentBoxItem__ctaCopy {
+  @extend .font-serif;
+  font-style: italic;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.contentBoxItem__ctaCopy--dressName {
+  font-style: normal;
+}
+
+.contentBoxItem__ctaWrap {
+  font-size: 1.5rem;
+  color: $c-neutral-11;
+}
+
+.contentBoxItem__ctaWrap--ctaWithSeparator {
+
+  .contentBoxItem__cta {
+    display: inline-block;
+  }
+
+  .contentBoxItem__cta:first-child,
+  .contentBoxItem__cta:last-child::before {
+    padding-right: 20px;
+  }
+
+  .contentBoxItem__cta:last-child::before {
+    content: "|";
+  }
+
+}
+
+.contentBox__extraPadding {
+  padding: 20px;
+}
+
+.contentBox__imgWithCaption {
+
+  .copyWrapper {
+    padding: 0 15px;
+  }
+
+}
+
+.contentBox__marbleBox {
+  text-align: center;
+  @extend .contentBox__extraPadding, .contentBox__bg--marble;
+
+  .contentBoxItem {
+    border: 0;
+  }
+
+  .contentBoxItem__copy {
+    padding: 10px 20px 0;
+  }
+
+}
+
+.contentBox__marbleBox .contentBox__verticalMiddle {
+
+  .contentBoxItem {
+    padding: 0;
+  }
+
+  .contentBoxItem__ctaWrap {
+    display: block;
+    margin-top: 0;
+  }
+
+}
+
+.contentBox__bg--white {
+  background: $c-neutral-white;
+}
+
+.contentBox__bg--marble {
+  background: url('_backgrounds/marble-texture-bg.jpg');
+  background-size: 300%;
+}
+
+
+@media (min-width: $bootstrap-md-width) {
+
+  .contentBox .contentBoxItem {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $c-neutral-6;
+  }
+
+  .contentBoxItem__title--extraMarginDesktop {
+    margin-top: 40px;
+  }
+
+  .contentBox__marbleBox--safeMarginTop {
+    margin-top: 30px;
+  }
+
+  .contentBox__marbleBox .contentBoxItem {
+    border-bottom: 0;
+  }
+
+  .copyWrapper--altPadding,
+  .contentBox__imgWithCaption .row > .noPadding > .copyWrapper {
+    padding: 0 10px;
+  }
+
+  .contentBox__imgWithCaption .row > .noPadding > .copyWrapper--altPadding {
+    padding-left: 20px;
+  }
+
+  .contentBox__imgWithCaption--overlay {
+    margin-top: -50px;
+
+    .contentBoxItem__title {
+      margin-top: 0;
+    }
+
+  }
+
+  .contentBox__verticalMiddle {
+    @include column-vertical-align();
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .contentBoxItem {
+    text-align: center;
+  }
+
+  .contentBoxItem__title,
+  .contentBoxItem__copy,
+  .contentBoxItem__ctaWrap {
+    padding: 0 40px 15px 40px;
+  }
+
+  .contentBoxItem__title {
+    padding-top: 50px;
+  }
+
+  .contentBox__extraPadding--mobile {
+    padding-bottom: 60px;
+  }
+
+  .contentBox__imgCopyImg .copyWrapper,
+  .overlapColumnMobile {
+    margin-bottom: 65px;
+  }
+
+  .contentBox__marbleBox .copyWrapper {
+    margin-bottom: 20px;
+  }
+
+  .contentBox__marbleBox .contentBoxItem__ctaWrap {
+    margin-top: 20px;
+  }
+
+  .overlapColumnMobile {
+    @include column-vertical-align();
+  }
+
+  .overlapColumnMobile__item {
+
+    .copyWrapper {
+      padding: 20px;
+    }
+
+    .contentBoxItem {
+      text-align: left;
+    }
+
+    .contentBoxItem__copy {
+      margin: 0;
+      padding-bottom: 10px;
+    }
+
+    .contentBoxItem__cta {
+      display: block;
+    }
+
+    .contentBoxItem__cta:first-child,
+    .contentBoxItem__cta:last-child::before {
+      padding-right: 0;
+    }
+
+    .contentBoxItem__cta:last-child::before {
+      content: "";
+    }
+
+    .contentBoxItem__title {
+      padding-top: 20px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .contentBoxItem__ctaPrice {
+      padding-top: 5px;
+    }
+
+    .contentBoxItem__title,
+    .contentBoxItem__copy,
+    .contentBoxItem__ctaWrap {
+      padding-left: 0;
+    }
+
+  }
+
+  .overlapColumnMobile__horizontalRight {
+    margin-left: -10%;
+    z-index: 1;
+  }
+
+  .overlapColumnMobile__horizontalLeft {
+    margin-right: -10%;
+    z-index: 1;
+  }
+
+}
