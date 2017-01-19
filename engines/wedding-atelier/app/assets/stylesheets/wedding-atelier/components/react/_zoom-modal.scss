@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 2;
+  z-index: 3;
 
   .close-zoom {
     background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
@@ -24,7 +24,7 @@
     img {
       display: block;
       margin: 0 auto;
-      padding: 10px auto;
+      padding: 10px;
     }
   }
 
