@@ -1,6 +1,12 @@
 /* [Bridal Guide]
 -------------------------------------------------------*/
-.bridal-guide {
+.get-the-look-modal {
+  z-index: 9999;
+  position: relative;
+  margin: 0px auto;
+}
+
+.get-the-look {
   h2 {
     font-size: 4rem;
     margin: 40px 0;
