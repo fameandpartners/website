@@ -3,13 +3,12 @@ var Chat = React.createClass({
   propTypes: {
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
-    wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
+    bot_profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
     getDresses: React.PropTypes.func,
-    setDresses: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
     twilioManager: React.PropTypes.object,
     twilioClient: React.PropTypes.object
@@ -22,47 +21,8 @@ var Chat = React.createClass({
       typing: [],
       channelMembers: [],
       twilioClient: null,
-      twilioManager: null
-    }
-  },
-
-  componentWillReceiveProps: function(nextProps){
-    if(this.props.twilioManager != nextProps.twilioManager){
-      var that = this;
-      var accessManager = nextProps.twilioManager;
-      var messagingClient = nextProps.twilioClient;
-      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
-      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
-
-      // notifications channel
-      messagingClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
-        if (notificationChannel) {
-          that.setupNotificationsChannel(notificationChannel);
-        } else {
-          messagingClient.createChannel({
-            uniqueName: notificationsChannelName,
-            friendlyName: 'Notifications for: ' + that.props.wedding_name
-          }).then(function(notificationChannel) {
-              that.setupNotificationsChannel(notificationChannel);
-          });
-        }
-      });
-      // normal messaging client
-      messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
-        if (channel) {
-          that.setupChannel(channel);
-          that.loadChannelHistory(channel);
-          that.loadChannelMembers(channel);
-        } else {
-          messagingClient.createChannel({
-            uniqueName: channelName,
-            friendlyName: that.props.wedding_name
-          }).then(function(channel) {
-              that.setupChannel(channel);
-          });
-        }
-      });
-
+      twilioManager: null,
+      channel: null
     }
   },
 
@@ -70,42 +30,13 @@ var Chat = React.createClass({
     this.scrollToBottom();
   },
 
-  setupNotificationsChannel: function(notificationsChannel) {
+  setUpMessagingEvents: function(channel) {
     var that = this;
 
-    notificationsChannel.join().then(function(channel) {
-      console.log('Joined notifications channel as ' + that.props.username);
-    });
+    that.setState({channel: channel});
 
     // Listen for new messages sent to the channel
-    notificationsChannel.on('messageAdded', function (message) {
-      // var messages = that.state.messages.slice();
-      var parsedMsg = JSON.parse(message.body);
-
-      if (parsedMsg.type === "dress-like") {
-        dresses = that.props.getDresses();
-
-        var index = dresses.findIndex(function(dress) {
-          return dress.id === parsedMsg.dress.id;
-        });
-
-        dresses[index] = parsedMsg.dress;
-        that.props.setDresses(dresses);
-      }
-    });
-
-    this.notificationsChannel = notificationsChannel;
-  },
-
-  setupChannel: function (generalChannel){
-    var that = this;
-
-    generalChannel.join().then(function(channel) {
-      console.log('Joined channel as ' + that.props.username);
-    });
-
-    // Listen for new messages sent to the channel
-    generalChannel.on('messageAdded', function (message) {
+    channel.on('messageAdded', function (message) {
       var messages = that.state.messages.slice();
       var parsedMsg = JSON.parse(message.body);
 
@@ -117,23 +48,21 @@ var Chat = React.createClass({
       that.setState({messages: messages});
     });
 
-    generalChannel.on('memberJoined', function(member) {
+    channel.on('memberJoined', function(member) {
       that.handleMember(member, true);
     });
 
-    generalChannel.on('memberLeft', function(member) {
+    channel.on('memberLeft', function(member) {
       that.handleMember(member, false);
     });
 
-    generalChannel.on('typingStarted', function(member){
+    channel.on('typingStarted', function(member){
       that.setTypingIndicator(member, true);
     });
 
-    generalChannel.on('typingEnded', function(member){
+    channel.on('typingEnded', function(member){
       that.setTypingIndicator(member, false);
     });
-
-    this.generalChannel = generalChannel;
   },
 
   loadChannelHistory: function(channel) {
@@ -219,6 +148,22 @@ var Chat = React.createClass({
     this.sendMessage(image, "image");
   },
 
+  sendMessageBot: function(message, type) {
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.bot_profile_photo,
+      author: "Famebot",
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.state.channel.sendMessage(JSON.stringify(message));
+  },
+
   sendMessage: function (message, type){
     if (type === undefined) {
       type = "simple";
@@ -233,11 +178,15 @@ var Chat = React.createClass({
       content: message
     };
 
-    this.generalChannel.sendMessage(JSON.stringify(message));
+    return this.state.channel.sendMessage(JSON.stringify(message));
+  },
+
+  setNotificationsChannel: function(notificationsChannel) {
+    this.setState({notificationsChannel: notificationsChannel});
   },
 
   sendNotification: function(message) {
-    this.notificationsChannel.sendMessage(JSON.stringify(message));
+    this.state.notificationsChannel.sendMessage(JSON.stringify(message));
   },
 
   getRenderedMessages() {
@@ -289,7 +238,7 @@ var Chat = React.createClass({
   },
 
   startTyping: function() {
-    this.generalChannel.typing();
+    this.state.channel.typing();
   },
 
   getWhoisTyping: function() {
