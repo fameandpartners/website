@@ -45,6 +45,12 @@ var MoodBoardEvent = React.createClass({
   },
 
   componentWillMount: function(){
+    this.setUpData();
+    thiss.setDefaultTabWhenResize();
+    this.setupChatChannels()
+  },
+
+  setUpData: function(){
     var that = this;
     var eventPromise = $.getJSON(that.props.event_path);
     var sizingPromise = $.getJSON(this.props.sizing_path);
@@ -66,57 +72,55 @@ var MoodBoardEvent = React.createClass({
       _state.twilioManager = twilioManager;
       _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
       that.setState(_state);
-    })
-    that.setDefaultTabWhenResize();
-      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
-      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
+    });
+  },
 
-      // notifications channel
-      _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
-        if (notificationChannel) {
-          that.setupNotificationsChannel(notificationChannel);
-        } else {
-          _state.twilioClient.createChannel({
-            uniqueName: notificationsChannelName,
-            friendlyName: 'Notifications for: ' + that.props.wedding_name
-          }).then(function(notificationChannel) {
-              that.setupNotificationsChannel(notificationChannel);
-          });
-        }
-      });
+  setupChatChannels: function(){
+    var channelName = 'wedding-atelier-channel-' + this.props.event_id;
+    var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
 
-      // normal messaging client
-      _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
-        if (channel) {
-          channel.join().then(function() {
-            console.log('Joined channel as ' + that.props.username);
-            that.refs.ChatDesktop.setUpMessagingEvents(channel);
-            that.refs.ChatMobileComp.setUpMessagingEvents(channel);
-            that.refs.ChatDesktop.loadChannelHistory(channel);
-            that.refs.ChatMobileComp.loadChannelHistory(channel);
-            that.refs.ChatDesktop.loadChannelMembers(channel);
-            that.refs.ChatMobileComp.loadChannelMembers(channel);
-          });
-        } else {
-          _state.twilioClient.createChannel({
-            uniqueName: channelName,
-            friendlyName: that.props.wedding_name
-          }).then(function(channel) {
-              channel.join().then(function() {
-                console.log('Joined channel as ' + that.props.username);
+    // notifications channel
+    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
+      if (notificationChannel) {
+        that.setupNotificationsChannel(notificationChannel);
+      } else {
+        _state.twilioClient.createChannel({
+          uniqueName: notificationsChannelName,
+          friendlyName: 'Notifications for: ' + that.props.wedding_name
+        }).then(function(notificationChannel) {
+            that.setupNotificationsChannel(notificationChannel);
+        });
+      }
+    });
 
-                that.refs.ChatDesktop.setUpMessagingEvents(channel);
-                that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
-                .then(function() {
-                  return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
-                  });
+    // normal messaging client
+    _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
+      if (channel) {
+        channel.join().then(function() {
+          console.log('Joined channel as ' + that.props.username);
+          that.refs.ChatDesktop.setUpMessagingEvents(channel);
+          that.refs.ChatMobileComp.setUpMessagingEvents(channel);
+          that.refs.ChatDesktop.loadChannelHistory(channel);
+          that.refs.ChatMobileComp.loadChannelHistory(channel);
+          that.refs.ChatDesktop.loadChannelMembers(channel);
+          that.refs.ChatMobileComp.loadChannelMembers(channel);
+        });
+      } else {
+        _state.twilioClient.createChannel({
+          uniqueName: channelName,
+          friendlyName: that.props.wedding_name
+        }).then(function(channel) {
+            channel.join().then(function() {
+              console.log('Joined channel as ' + that.props.username);
+              that.refs.ChatDesktop.setUpMessagingEvents(channel);
+              that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
+              .then(function() {
+                return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
               });
+            });
           });
-        }
-      });
-
-      this.setState(_state);
-    }.bind(this));
+      }
+    });
   },
 
   setupNotificationsChannel: function(notificationsChannel) {
