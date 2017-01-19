@@ -14,6 +14,6 @@
 
   = link_to '', wedding_atelier.root_path, class: 'shared-header-logo'
   .shared-header-commands
-    = react_component 'Help', {}, { class: 'help-container' }
+    = react_component 'Help', {}, { class: 'walkthrough' }
     .commands-menu
-    .commands-shopping-bag
+    = react_component 'ShoppingBag', {}, { class: 'shopping-bag' }

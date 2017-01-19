@@ -92,13 +92,11 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel customizations-preview col-sm-6">
-          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
+          <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
-
           </div>
-
           <div className="results col-md-2 col-lg-3">
             <div className="view-customizations">
               <span className="left-result">

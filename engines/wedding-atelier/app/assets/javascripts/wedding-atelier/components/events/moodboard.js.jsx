@@ -9,6 +9,7 @@ var MoodBoardEvent = React.createClass({
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
+    bot_profile_photo: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
@@ -67,8 +68,83 @@ var MoodBoardEvent = React.createClass({
       that.setState(_state);
     })
     that.setDefaultTabWhenResize();
+      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
+      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
+
+      // notifications channel
+      _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
+        if (notificationChannel) {
+          that.setupNotificationsChannel(notificationChannel);
+        } else {
+          _state.twilioClient.createChannel({
+            uniqueName: notificationsChannelName,
+            friendlyName: 'Notifications for: ' + that.props.wedding_name
+          }).then(function(notificationChannel) {
+              that.setupNotificationsChannel(notificationChannel);
+          });
+        }
+      });
+
+      // normal messaging client
+      _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
+        if (channel) {
+          channel.join().then(function() {
+            console.log('Joined channel as ' + that.props.username);
+            that.refs.ChatDesktop.setUpMessagingEvents(channel);
+            that.refs.ChatMobileComp.setUpMessagingEvents(channel);
+            that.refs.ChatDesktop.loadChannelHistory(channel);
+            that.refs.ChatMobileComp.loadChannelHistory(channel);
+            that.refs.ChatDesktop.loadChannelMembers(channel);
+            that.refs.ChatMobileComp.loadChannelMembers(channel);
+          });
+        } else {
+          _state.twilioClient.createChannel({
+            uniqueName: channelName,
+            friendlyName: that.props.wedding_name
+          }).then(function(channel) {
+              channel.join().then(function() {
+                console.log('Joined channel as ' + that.props.username);
+
+                that.refs.ChatDesktop.setUpMessagingEvents(channel);
+                that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
+                .then(function() {
+                  return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
+                  });
+              });
+          });
+        }
+      });
+
+      this.setState(_state);
+    }.bind(this));
   },
 
+  setupNotificationsChannel: function(notificationsChannel) {
+    var that = this;
+    this.refs.ChatDesktop.setNotificationsChannel(notificationsChannel);
+    this.refs.ChatMobileComp.setNotificationsChannel(notificationsChannel);
+
+    notificationsChannel.join().then(function(channel) {
+      console.log('Joined notifications channel as ' + that.props.username);
+    });
+
+    // Listen for new messages sent to the channel
+    notificationsChannel.on('messageAdded', function (message) {
+      var parsedMsg = JSON.parse(message.body);
+
+      if (parsedMsg.type === "dress-like") {
+
+        var dresses = [...that.state.event.dresses];
+
+        var index = dresses.findIndex(function(dress) {
+          return dress.id === parsedMsg.dress.id;
+        });
+
+        dresses[index] = parsedMsg.dress;
+        that.setDresses(dresses);
+      }
+    });
+  },
 
   getDresses: function() {
     return this.state.event.dresses;
@@ -99,7 +175,8 @@ var MoodBoardEvent = React.createClass({
     var event = $.extend({}, this.state.event);
     event.dresses = dresses;
     this.setState({event: event});
-    this.refs.Chat.forceUpdate();
+    this.refs.ChatMobileComp.forceUpdate();
+    this.refs.ChatDesktop.forceUpdate();
   },
 
   handleLikeDress: function(dress) {
@@ -121,7 +198,7 @@ var MoodBoardEvent = React.createClass({
           dress.likes_count--;
           dress.liked = false;
         }
-        that.refs.Chat.sendNotification({
+        that.refs.ChatDesktop.sendNotification({
           type: "dress-like",
           dress: dress
         });
@@ -179,7 +256,7 @@ var MoodBoardEvent = React.createClass({
   },
 
   sendDressToChatFn: function(dress) {
-    this.refs.Chat.sendMessageTile(dress);
+    this.refs.ChatDesktop.sendMessageTile(dress);
   },
 
   setDefaultTabWhenResize: function(){
@@ -202,7 +279,7 @@ var MoodBoardEvent = React.createClass({
     var chatProps = {
       twilio_token_path: this.props.twilio_token_path,
       event_id: this.props.event_id,
-      wedding_name: this.props.wedding_name,
+      bot_profile_photo: this.props.bot_profile_photo,
       profile_photo: this.props.profile_photo,
       username: this.props.username,
       user_id: this.props.user_id,
@@ -229,7 +306,7 @@ var MoodBoardEvent = React.createClass({
         </div>
         <div className="left-content col-sm-6 hidden-xs">
           <SelectSizeModal {...selectSizeProps} position="left" />
-          <Chat ref="Chat" {...chatProps}/>
+          <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
         <div className="right-content col-sm-6">
           <SelectSizeModal {...selectSizeProps} position="right" />
@@ -265,15 +342,15 @@ var MoodBoardEvent = React.createClass({
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat ref="Chat" {...chatProps}/>
+                  <Chat ref="ChatMobileComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  <div className="add-dress-box hidden">
-                    <button className="add">Design a new dress</button>
-                  </div>
-                  <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
+                  {this.state.event.dresses.length === 0 ? <div className="add-dress-box">
+                    <a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a>
+                  </div> : ''}
+                  {this.state.event.dresses > 0 ? <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
                     <em>Design</em> a new dress</a>
-                  </div>
+                  </div> : ''}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}

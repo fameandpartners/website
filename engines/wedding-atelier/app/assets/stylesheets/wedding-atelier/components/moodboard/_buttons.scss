@@ -33,8 +33,9 @@
   }
 
   .add-dress-box {
-    button {
+    a {
       border: 2px dashed $white-four;
+      display: block;
       height: 307px;
       width: 242px;
       background-image: image-url('wedding-atelier/add-dress.png');
