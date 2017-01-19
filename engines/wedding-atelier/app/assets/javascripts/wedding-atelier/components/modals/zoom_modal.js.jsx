@@ -22,7 +22,11 @@ var ZoomModal = React.createClass({
   },
 
   componentDidUpdate: function(prevProps, prevState){
-    if (prevProps.visible === false && this.props.visible === true) {
+    this.scrollToCenter(prevProps.visible, this.props.visible);
+  },
+
+  scrollToCenter: function (wasVisible, nowVisible) {
+    if (wasVisible === false && nowVisible === true) {
       this.refs.activeZoom.scrollLeft = Math.abs(($(window).width() - $(this.refs.activeZoom).find('img').width())/ 2)
       this.refs.activeZoom.scrollTop = 0;
     }
