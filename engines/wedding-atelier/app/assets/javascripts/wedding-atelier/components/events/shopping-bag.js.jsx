@@ -43,15 +43,16 @@ var ShoppingBag = React.createClass({
               <span className="free-shipping">Free shipping</span> to the US, Canada, and the UK within 3-4 weeks. Easy exchanges within 30 days.
             </p>
             <div className="shopping-bag-content-list"></div>
-            <div className="shopping-bag-content-totals">
-              <div className="shopping-bag-content-totals-labels">
-                <p>shipping</p>
-                <p>order total</p>
-              </div>
-              <div className="shopping-bag-content-totals-amounts">
-                <p>Free shipping</p>
-                <p>$598</p>
-              </div>
+
+          </div>
+          <div className="shopping-bag-totals">
+            <div className="shopping-bag-totals-labels">
+              <p>shipping</p>
+              <p>order total</p>
+            </div>
+            <div className="shopping-bag-totals-amounts">
+              <p>Free shipping</p>
+              <p>$598</p>
             </div>
           </div>
           <button className="shopping-bag-continue-payment btn-black">
