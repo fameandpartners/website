@@ -1,0 +1,82 @@
+.select-size-modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1;
+  display: none;
+
+  @include screen-xs {
+    position: fixed;
+    top: 0;
+  }
+
+  .btnClose {
+    display: none;
+    z-index: 101;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    top: 25px;
+    right: 107px;
+  }
+
+  .profiles-container, .sizes-container {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+  .body {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    background: $white-two;
+    padding: 25px 20px;
+
+    .title {
+      font-family: $primary-font;
+      font-size: 34px;
+    }
+
+    .instructions {
+      font-family: $primary-font;
+      font-size: 14px;
+    }
+
+    .select-different-size {
+      margin: 42px 0 72px;
+      display: inline-block;
+    }
+
+    .size-selector-container {
+
+    }
+
+    .actions {
+      max-width: 340px;
+      margin: 0 auto;
+      button {
+        font-size: 10px;
+        width: 100%;
+        font-weight: normal;
+      }
+    }
+
+    .dress-sizes {
+      ul.profiles {
+        max-width: 340px;
+        margin: 0 auto;
+        li {
+          width: 100%;
+          margin: 0;
+          label{
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
