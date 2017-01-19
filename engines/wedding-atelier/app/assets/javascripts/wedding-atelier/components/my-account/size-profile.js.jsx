@@ -1,6 +1,7 @@
 var SizeProfile = React.createClass({
   propTypes: {
     user: React.PropTypes.object.isRequired,
+    user1: React.PropTypes.object,
     sizes: React.PropTypes.array.isRequired,
     heights: React.PropTypes.object.isRequired,
     siteVersion: React.PropTypes.string.isRequired,
@@ -11,7 +12,7 @@ var SizeProfile = React.createClass({
   getInitialState: function () {
     var userProfile = $.extend({}, this.props.user_profile.user_profile);
     return {
-      size: userProfile.dress_size.id,
+      size_id: userProfile.dress_size.id,
       height: userProfile.height,
       userProfile:  userProfile
     };
@@ -34,7 +35,7 @@ var SizeProfile = React.createClass({
 
   changeSizeHandler: function (size) {
     this.setState({
-      size: size.option_value.id,
+      size_id: size.option_value.id,
       userProfile: null
     });
   },
@@ -65,7 +66,7 @@ var SizeProfile = React.createClass({
             onChange: that.changeSizeHandler.bind(null, size)
           };
 
-      if (size.option_value.id === that.state.size || (that.state.userProfile && size.option_value.id === that.state.userProfile.dress_size.id)) {
+      if (size.option_value.id === that.state.size_id || (that.state.userProfile && size.option_value.id === that.state.userProfile.dress_size.id)) {
         inputProps.checked = true;
       }
 
@@ -86,7 +87,7 @@ var SizeProfile = React.createClass({
         user_profile_attributes: {
           id: this.props.user_profile.id,
           height: state.height,
-          dress_size_id: state.size.id}
+          dress_size_id: state.size_id}
       }
     };
     var notificationNode = document.getElementById('notification');
