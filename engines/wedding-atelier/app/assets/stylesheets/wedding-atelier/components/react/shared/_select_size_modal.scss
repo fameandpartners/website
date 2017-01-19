@@ -34,7 +34,16 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     background: $white-two;
-    padding: 25px 20px;
+    padding: 25px 0;
+    width: 320px;
+
+    @include screen-sm {
+      width: 360px;
+    }
+
+    @include screen-md {
+      width: 480px;
+    };
 
     .title {
       font-family: $primary-font;
@@ -51,21 +60,39 @@
       display: inline-block;
     }
 
-    .size-selector-container {
+    .content-container {
+      margin: 0 auto;
+      width: 280px;
+      @include screen-sm {
+        width: 340px;
+      };
 
+      @include screen-md {
+        width: 390px;
+      };
     }
 
     .actions {
-      max-width: 340px;
-      margin: 0 auto;
       button {
         font-size: 10px;
         width: 100%;
         font-weight: normal;
+
+        @include screen-sm {
+          margin: 5px 0;
+        };
       }
     }
 
     .dress-sizes {
+      ul.customization-dress-sizes-ul {
+        @include screen-sm {
+          width: 280px;
+        }
+        @include screen-md {
+          width: 350px;
+        };
+      }
       ul.profiles {
         max-width: 340px;
         margin: 0 auto;

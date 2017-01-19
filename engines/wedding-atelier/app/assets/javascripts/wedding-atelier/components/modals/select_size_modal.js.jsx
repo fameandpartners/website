@@ -218,8 +218,10 @@ var SelectSizeModal = React.createClass({
           <div className="close">
             <a className="btnClose icon-close-white"/>
           </div>
-          {this.renderProfiles()}
-          {this.renderSizes()}
+          <div className="content-container">
+            {this.renderProfiles()}
+            {this.renderSizes()}
+          </div>
         </div>
       </div>
     )
