@@ -356,7 +356,7 @@ Spree::Product.class_eval do
   private
 
   def major_value_from_period(period)
-    period.match(/\d+$/).to_s.to_i
+    period.match(/(?<=\s)\d+/).to_s.to_i
   end
 
   def build_variants_from_option_values_hash
