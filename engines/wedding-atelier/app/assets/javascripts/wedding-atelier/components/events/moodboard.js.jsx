@@ -46,8 +46,7 @@ var MoodBoardEvent = React.createClass({
 
   componentWillMount: function(){
     this.setUpData();
-    thiss.setDefaultTabWhenResize();
-    this.setupChatChannels()
+    this.setDefaultTabWhenResize();
   },
 
   setUpData: function(){
@@ -72,10 +71,13 @@ var MoodBoardEvent = React.createClass({
       _state.twilioManager = twilioManager;
       _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
       that.setState(_state);
+      that.setupChatChannels();
     });
   },
 
   setupChatChannels: function(){
+    var _state = $.extend({}, this.state);
+    var that = this;
     var channelName = 'wedding-atelier-channel-' + this.props.event_id;
     var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
 

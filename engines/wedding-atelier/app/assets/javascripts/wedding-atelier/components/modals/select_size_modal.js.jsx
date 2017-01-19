@@ -38,7 +38,6 @@ var SelectSizeModal = React.createClass({
     _newState.selectedSize = null,
     _newState.selectedHeight = null,
     this.setState(_newState);
-    console.log(_newState);
   },
 
   sizeSelectedHandle: function(size){
@@ -46,7 +45,6 @@ var SelectSizeModal = React.createClass({
     _newState.selectedSize = size.id;
     _newState.selectedProfiles = [];
     this.setState(_newState);
-    console.log(_newState);
   },
 
   heightSelectedHandle: function(height){
@@ -54,7 +52,6 @@ var SelectSizeModal = React.createClass({
     _newState.selectedHeight = this.getHeightGroup(height);
     _newState.selectedProfiles = [];
     this.setState(_newState);
-    console.log(_newState);
   },
 
   getHeightGroup: function(height){
