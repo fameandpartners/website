@@ -84,7 +84,7 @@
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
             <dd>Skirt Length: <span><%= product.height %></span></dd>
-            <dd>Estimated delivery, <span><%= product.delivery_period %></span> business days</dd>
+            <dd>Estimated delivery, <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>
             <dd><%= customization.name %> <%= customization.display_price %></dd>
             <% end %>

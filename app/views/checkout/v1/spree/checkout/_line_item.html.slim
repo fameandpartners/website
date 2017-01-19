@@ -25,7 +25,6 @@
         dd
           | Estimated delivery, 
           = product.delivery_period
-          |  business days
         - if product.customizations.present?
           - product.customizations.each do |customization|
             dd #{ customization.name } #{ customization.display_price }

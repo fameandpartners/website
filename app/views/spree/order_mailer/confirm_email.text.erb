@@ -7,7 +7,7 @@ You will receive another email with your tracking number once your order has bee
 You ordered [<%= @order.number %>]:
 ============================================================
 <% @order.line_items.each do |item| %>
-<%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= item.making_options_text %> <%= raw(item.options_text) -%> (<%=item.quantity%>) @ <%= item.variant.display_amount %> = <%= item.display_amount %> Estimated delivery, <%= item.delivery_period %> business days
+<%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= item.making_options_text %> <%= raw(item.options_text) -%> (<%=item.quantity%>) @ <%= item.variant.display_amount %> = <%= item.display_amount %> Estimated delivery, <%= item.delivery_period %>
 <% end %>
 ============================================================
 <%= t('order_mailer.confirm_email.subtotal', :subtotal => @order.display_item_total) %>
