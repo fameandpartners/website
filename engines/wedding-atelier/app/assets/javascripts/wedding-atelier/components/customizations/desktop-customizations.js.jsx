@@ -128,7 +128,7 @@ var DesktopCustomizations = React.createClass({
               initialDress={this.props.initialDress}
               currentUser={this.props.currentUser}
               />
-            <AddToCartButton customizations={this.props.selectedOptions} />
+            <AddToCartButton customizations={this.props.selectedOptions} dress={this.props.initialDress} />
           </div>
         </div>
       </div>
@@ -136,37 +136,3 @@ var DesktopCustomizations = React.createClass({
   }
 });
 
-var AddToCartButton = React.createClass({
-  propTypes: {
-    customizations: React.PropTypes.object
-  },
-  handleAddToCart: function () {
-    customizations = this.props.customizations;
-    size_id = customizations.size.id || customizations.size.user_profile.dress_size.id;
-    var attrs = {
-      size_id: size_id,
-      color_id: customizations.colour.id,
-      variant_id: customizations.silhouette.variant_id,
-      height: customizations.heightGroup,
-      customizations_ids: [customizations.fit.id, customizations.style.id, customizations.length.id, customizations.fabric.id]
-    };
-    $.ajax({
-      url: "/user_cart/products",
-      type: "POST",
-      dataType: "json",
-      data: attrs,
-      success: function (data) {
-        //TODO: Show alert that the product has been added to the cart
-      },
-      error: function (response) {
-        //TODO: Show errors
-      }
-    })
-  },
-
-  render: function(){
-    return(
-        <button className="btn-black" onClick={this.handleAddToCart}> add to cart </button>
-    )
-  }
-})

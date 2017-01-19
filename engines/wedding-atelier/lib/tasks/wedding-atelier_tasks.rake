@@ -312,7 +312,6 @@ namespace :wedding_atelier do
           presentation: value[:presentation],
           price: 0.0
         }
-        binding.pry if type == 'fabric'
         product.customisation_values.create(attrs)
       else
         cv.update_attributes presentation: value[:presentation]
