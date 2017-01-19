@@ -8,6 +8,10 @@ module WeddingAtelier
       !['registrations', 'sessions', 'event_dresses'].include?(controller_name)
     end
 
+    def bot_profile_photo_path
+      image_path 'bot-profile.svg'
+    end
+
     def profile_image_path
       if current_spree_user.profile_image.present?
         image_path current_spree_user.profile_image.attachment.url(:mini)
