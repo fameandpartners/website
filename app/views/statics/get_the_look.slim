@@ -1,10 +1,26 @@
 = render partial: 'pages/robots'
 
-.bridal-guide.landing-page-v2.js-smooth-scroll
+.js-modal.get-the-look-modal role='dialog' tabindex="-1"
+  .modal-dialog role='document'
+    .modal-content
+      .modal-header
+        button.close type='button' data-dismiss='modal' aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title Modal title
+      .modal-body
+        .iframe-middle-wrapper
+          .woobox-offer data-offer="5fbtad"
+      .modal-footer
+        button.btn.btn-default data-dismiss='modal' Close
+        button.btn.btn-primary data-dismiss='modal' Save Changes
 
+.get-the-look.landing-page-v2.js-smooth-scroll
   .introWrapper.bridal-section
     h1 Here comes <br>the <em>guide</em>
-    p Four wedding vibes, for comprehensive guides to finding the perfect dress, hair, makeup, accessories, floral arrangements, and more-for your and your bridesmaids.<br>Consider these your bridal bibles.
+    p
+      | Four wedding vibes, for comprehensive guides to
+      | finding the perfect dress, hair, makeup, accessories, floral arrangements,
+      | and more-for your and your bridesmaids.<br>Consider these your bridal bibles.
   
   .bridal-section
     div.bridal-image
@@ -52,6 +68,8 @@
     div.image-section
     div.button-options-wrapper
       span.btn-xs.btn-featured Get Started
+      
+  
   
   // PREVIOUS FORM FUNCTIONALITY
   / .preRegisterSweepstakes__formWrapperBg
@@ -137,6 +155,9 @@
 
 
 javascript:
+  $(function() {
+    $('.js-modal.get-the-look-modal').modal('show')  
+  });
   (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
