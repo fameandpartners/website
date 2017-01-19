@@ -15,7 +15,7 @@
           = react_component 'AccountDetails', user: @user, account_path: wedding_atelier.account_path(@user)
         #size-profile.tab-pane.fade
           = react_component 'SizeProfile', user: @user,
-                            user_profile: @user.user_profile,
+                            user_profile: WeddingAtelier::UserProfileSerializer.new(@user.user_profile),
                             account_profile_path: wedding_atelier.account_path(@user),
                             siteVersion: current_site_version.permalink,
                             sizes: @size_profile[:sizes],
