@@ -1,16 +1,7 @@
 namespace :wedding_atelier do
-  desc 'Create new wedding atelier option types'
-  task create_option_types: :environment do
-    Spree::OptionType.where(name: 'dress-fabric', presentation: 'Fabric').first_or_create
-    Spree::OptionType.where(name: 'dress-length', presentation: 'Length').first_or_create
-  end
-
   namespace :dev do
     desc 'Run setup for the wedding atelier app dev environment, creating basic option types and sample values'
     task populate_products: :environment do
-      # Guarantee Wedding Atelier Option Types
-      Rake::Task['wedding_atelier:create_option_types'].execute
-
       # Create Taxonomy
       taxonomy = Spree::Taxonomy.find_or_create_by_name('Wedding Atelier')
       taxon = taxonomy.taxons.find_or_create_by_name('Base Silhouette')
