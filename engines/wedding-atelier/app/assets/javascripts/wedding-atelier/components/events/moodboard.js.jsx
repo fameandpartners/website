@@ -3,6 +3,7 @@ var MoodBoardEvent = React.createClass({
   propTypes: {
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
+    current_user_id: React.PropTypes.number,
     dresses_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
@@ -12,13 +13,16 @@ var MoodBoardEvent = React.createClass({
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
-    filestack_key: React.PropTypes.string
+    filestack_key: React.PropTypes.string,
+    siteVersion: React.PropTypes.string
   },
 
   getInitialState: function () {
     return {
       twilioManager: null,
       twilioClient: null,
+      sizes: [],
+      heights: [],
       event: {
         dresses: [],
         invitations: [],
@@ -41,75 +45,84 @@ var MoodBoardEvent = React.createClass({
   },
 
   componentWillMount: function(){
-    $.ajax({
-      url: this.props.event_path,
-      type: "GET",
-      dataType: 'json',
-      success: function (data) {
-        var event = $.extend(event, data.moodboard_event);
-        var event_backup = $.extend(event_backup, data.moodboard_event);
-        this.setState({event: event});
-        this.setState({event_backup: event_backup});
-        this.setDefaultTabWhenResize();
-      }.bind(this)
+    this.setUpData();
+    this.setDefaultTabWhenResize();
+  },
+
+  setUpData: function(){
+    var that = this;
+    var eventPromise = $.getJSON(that.props.event_path);
+    var sizingPromise = $.getJSON(this.props.sizing_path);
+    var twilioPromise = $.post(this.props.twilio_token_path);
+
+    Promise.all([eventPromise, sizingPromise, twilioPromise]).then(function(values){
+      var event = values[0].moodboard_event,
+          sizes = values[1].sizing.sizes,
+          heights = values[1].sizing.heights,
+          token = values[2].token,
+          twilioManager = new Twilio.AccessManager(token);
+
+
+      var _state = $.extend({}, that.state);
+      _state.event = event;
+      _state.event_backup = event;
+      _state.sizes = sizes;
+      _state.heights = heights;
+      _state.twilioManager = twilioManager;
+      _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
+      that.setState(_state);
+      that.setupChatChannels();
+    });
+  },
+
+  setupChatChannels: function(){
+    var _state = $.extend({}, this.state);
+    var that = this;
+    var channelName = 'wedding-atelier-channel-' + this.props.event_id;
+    var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
+
+    // notifications channel
+    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
+      if (notificationChannel) {
+        that.setupNotificationsChannel(notificationChannel);
+      } else {
+        _state.twilioClient.createChannel({
+          uniqueName: notificationsChannelName,
+          friendlyName: 'Notifications for: ' + that.props.wedding_name
+        }).then(function(notificationChannel) {
+            that.setupNotificationsChannel(notificationChannel);
+        });
+      }
     });
 
-    $.post(this.props.twilio_token_path, function(data) {
-      var that = this;
-      var _state = $.extend({}, this.state);
-      var manager = new Twilio.AccessManager(data.token);
-      _state.twilioManager = manager;
-      _state.twilioClient = new Twilio.IPMessaging.Client(manager);
-
-      var channelName = 'wedding-atelier-channel-' + this.props.event_id;
-      var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
-
-      // notifications channel
-      _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
-        if (notificationChannel) {
-          that.setupNotificationsChannel(notificationChannel);
-        } else {
-          _state.twilioClient.createChannel({
-            uniqueName: notificationsChannelName,
-            friendlyName: 'Notifications for: ' + that.props.wedding_name
-          }).then(function(notificationChannel) {
-              that.setupNotificationsChannel(notificationChannel);
-          });
-        }
-      });
-
-      // normal messaging client
-      _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
-        if (channel) {
-          channel.join().then(function() {
-            console.log('Joined channel as ' + that.props.username);
-            that.refs.ChatDesktop.setUpMessagingEvents(channel);
-            that.refs.ChatMobileComp.setUpMessagingEvents(channel);
-            that.refs.ChatDesktop.loadChannelHistory(channel);
-            that.refs.ChatMobileComp.loadChannelHistory(channel);
-            that.refs.ChatDesktop.loadChannelMembers(channel);
-            that.refs.ChatMobileComp.loadChannelMembers(channel);
-          });
-        } else {
-          _state.twilioClient.createChannel({
-            uniqueName: channelName,
-            friendlyName: that.props.wedding_name
-          }).then(function(channel) {
-              channel.join().then(function() {
-                console.log('Joined channel as ' + that.props.username);
-
-                that.refs.ChatDesktop.setUpMessagingEvents(channel);
-                that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
-                .then(function() {
-                  return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
-                  });
+    // normal messaging client
+    _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
+      if (channel) {
+        channel.join().then(function() {
+          console.log('Joined channel as ' + that.props.username);
+          that.refs.ChatDesktop.setUpMessagingEvents(channel);
+          that.refs.ChatMobileComp.setUpMessagingEvents(channel);
+          that.refs.ChatDesktop.loadChannelHistory(channel);
+          that.refs.ChatMobileComp.loadChannelHistory(channel);
+          that.refs.ChatDesktop.loadChannelMembers(channel);
+          that.refs.ChatMobileComp.loadChannelMembers(channel);
+        });
+      } else {
+        _state.twilioClient.createChannel({
+          uniqueName: channelName,
+          friendlyName: that.props.wedding_name
+        }).then(function(channel) {
+            channel.join().then(function() {
+              console.log('Joined channel as ' + that.props.username);
+              that.refs.ChatDesktop.setUpMessagingEvents(channel);
+              that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
+              .then(function() {
+                return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
               });
+            });
           });
-        }
-      });
-
-      this.setState(_state);
-    }.bind(this));
+      }
+    });
   },
 
   setupNotificationsChannel: function(notificationsChannel) {
@@ -255,9 +268,14 @@ var MoodBoardEvent = React.createClass({
   setDefaultTabWhenResize: function(){
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
-        var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active');
+        var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active'),
+            mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
+            activeMobileSizeModal = mobileSizeModal.is(':visible')
         if(activeMobileChat){
           $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        }
+        if(activeMobileSizeModal){
+          mobileSizeModal.hide();
         }
       }
     }.bind(this));
@@ -279,13 +297,25 @@ var MoodBoardEvent = React.createClass({
       twilioClient: this.state.twilioClient
     }
 
+    var selectSizeProps = {
+      current_user_id: this.props.current_user_id,
+      profiles: this.state.event.assistants,
+      sizes: this.state.sizes,
+      heights: this.state.heights,
+      siteVersion: this.props.siteVersion
+    }
 
     return (
       <div id="events__moodboard" className="row">
+        <div className="mobile-select-size-modal">
+          <SelectSizeModal {...selectSizeProps} ref="mobileSizeModal" position="center" />
+        </div>
         <div className="left-content col-sm-6 hidden-xs">
+          <SelectSizeModal {...selectSizeProps} position="left" />
           <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
         <div className="right-content col-sm-6">
+          <SelectSizeModal {...selectSizeProps} position="right" />
           <div className='right-container'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
