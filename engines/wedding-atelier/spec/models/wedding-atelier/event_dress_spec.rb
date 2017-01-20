@@ -34,13 +34,15 @@ describe WeddingAtelier::EventDress do
 
   describe '#images' do
     let(:custom_dress) do
-      create(:wedding_atelier_event_dress,
-      product: create(:spree_product, sku: '1234'),
-      fabric: create(:option_value, name: 'HG'),
-      color: create(:option_value, name: 'black'),
-      style: create(:customisation_value,presentation: 'style', position: 0, name: 'S5'),
-      fit: create(:customisation_value,presentation: 'fit', position: 1, name: 'F4'),
-      length: create(:option_value, name: 'AK'))
+      create(
+        :wedding_atelier_event_dress,
+        product: create(:spree_product, sku: '1234'),
+        color:   create(:option_value, name: 'black'),
+        fabric:  create(:customisation_value, name: 'HG'),
+        style:   create(:customisation_value, presentation: 'style', position: 0, name: 'S5'),
+        fit:     create(:customisation_value, presentation: 'fit', position: 1, name: 'F4'),
+        length:  create(:customisation_value, name: 'AK')
+      )
     end
 
     it 'returns the file names of images related to this dress' do

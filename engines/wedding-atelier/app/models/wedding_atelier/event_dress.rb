@@ -31,7 +31,7 @@ module WeddingAtelier
   validates_presence_of :product, :fabric, :color, :length, :size, :height
 
   def images
-    base_path = '/assets/wedding-atelier/dresses';
+    base_path = '/assets/wedding-atelier/dresses'
     style_name = style.try(:name) || 'S0'
     fit_name = fit.try(:name) || 'F0'
     fabric_name = fabric.try(:name) || 'HG'
