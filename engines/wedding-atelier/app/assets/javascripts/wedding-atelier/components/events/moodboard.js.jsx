@@ -277,8 +277,10 @@ var MoodBoardEvent = React.createClass({
       handleLikeDress: this.handleLikeDress,
       twilioManager: this.state.twilioManager,
       twilioClient: this.state.twilioClient
-    }
+    };
 
+    var addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
+    var addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
 
     return (
       <div id="events__moodboard" className="row">
@@ -321,12 +323,8 @@ var MoodBoardEvent = React.createClass({
                   <Chat ref="ChatMobileComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  {this.state.event.dresses.length === 0 ? <div className="add-dress-box">
-                    <a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a>
-                  </div> : ''}
-                  {this.state.event.dresses.length > 0 ? <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
-                    <em>Design</em> a new dress</a>
-                  </div> : ''}
+                  {this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
+                  {this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
