@@ -45,13 +45,29 @@ var CustomizationsMenu = React.createClass({
     );
   },
 
+  isOptionSet: function(entry){
+    var options = this.props.selectedOptions
+    if(entry == 'fabric-color'){
+      return options['colour'] && options['size'] ? 'selected' : '';
+    }else{
+      return options[entry] ? 'selected' : '';
+    }
+  },
+
   render: function() {
     var customizationItems = ['silhouette', 'fabric-color', 'length', 'style', 'fit', 'size'],
         menuEntries = customizationItems.map(function(entry, index) {
-          var img = "/assets/wedding-atelier/icons/" + entry + ".png";
+          // var img = "/assets/wedding-atelier/icons/" + entry + ".svg";
+          var selected = this.isOptionSet(entry),
+              iconClasses = 'icon icon-' + entry + ' ' + selected,
+              menuOptionClasses = classNames({
+                'menu-option': true,
+                current: this.props.currentCustomization == entry
+              })
+
           return (
-            <div className="menu-option" key={index} onClick={this.props.changeCurrentCustomizationCallback.bind(null, entry)}>
-              <img src={img} />
+            <div className={menuOptionClasses} key={index} onClick={this.props.changeCurrentCustomizationCallback.bind(null, entry)}>
+              <i className={iconClasses} />
               <p>{entry.split('-').join(' and ')}</p>
             </div>
           );
