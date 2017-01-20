@@ -286,7 +286,7 @@ var MoodBoardEvent = React.createClass({
           <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
         <div className="right-content col-sm-6">
-          <div className='right-container'>
+          <div className='right-container center-block'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>

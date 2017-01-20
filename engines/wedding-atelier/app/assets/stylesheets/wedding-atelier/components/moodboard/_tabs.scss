@@ -1,10 +1,15 @@
 .moodboard-tabs {
-  height: 100%;
-
-  .nav-tabs {
-    min-width: 680px;
-    width: 680px;
+  .bridal-gowns span {
+    color: #acacac;
+    &.coming-soon {
+      font-size: 9px;
+      left: 25%;
+      position: absolute;
+      top: 0;
+    }
   }
+
+  .nav-tabs {}
 
   .tab-content {
     overflow: auto;
