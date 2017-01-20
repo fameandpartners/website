@@ -12,6 +12,7 @@ var AddToCartButton = React.createClass({
     } else {
       dress = this.props.dress;
     }
+
     var size_id = this.props.sizeId || dress.size.id;
     var customization_ids = [dress.length.id, dress.fabric.id]
     if(dress.fit) {
@@ -48,9 +49,6 @@ var AddToCartButton = React.createClass({
       className: 'btn-black',
       onClick: this.handleAddToCart
     };
-    if(!this.props.dress){
-      props.disabled = true;
-    }
     return(
         <button {...props}>add to cart </button>
     )
