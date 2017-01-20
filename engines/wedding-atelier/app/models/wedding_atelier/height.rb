@@ -2,6 +2,9 @@ module WeddingAtelier
   class Height
     class << self
       def definitions
+        # NOTE:
+        # Modify this validation when adding more keys
+        # app/models/line_item_personalization.rb:23
         {
           petite: [
             "4'10\"/147cm",

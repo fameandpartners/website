@@ -1,6 +1,6 @@
-var FabricAndColourSelector = React.createClass({
+var FabricAndColorSelector = React.createClass({
   propTypes: {
-    colours: React.PropTypes.array,
+    colors: React.PropTypes.array,
     fabrics: React.PropTypes.array,
     selectedOptions: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
@@ -10,15 +10,15 @@ var FabricAndColourSelector = React.createClass({
   getInitialState: function() {
     return {
       selectedFabric: null,
-      selectedColour: null
+      selectedColor: null
     }
   },
 
   componentWillReceiveProps: function(nextProps){
-    if(!this.state.selectedFabric && !this.state.selectedColour){
+    if(!this.state.selectedFabric && !this.state.selectedColor){
       var newState = {
         selectedFabric: nextProps.selectedOptions.fabric,
-        selectedColour: nextProps.selectedOptions.colour
+        selectedColor: nextProps.selectedOptions.color
       }
       this.setState(newState);
     }
@@ -29,19 +29,19 @@ var FabricAndColourSelector = React.createClass({
     newState.selectedFabric = fabric;
     this.setState(newState, function(){
       this.props.selectCallback('fabric', fabric);
-      if(!this.state.selectedColour){
-        this.colourSelectedHandle(this.props.colours[0]);
+      if(!this.state.selectedColor){
+        this.colorSelectedHandle(this.props.colors[0]);
       }
     }.bind(this));
   },
 
-  colourSelectedHandle: function(colour) {
+  colorSelectedHandle: function(color) {
     if(this.state.selectedFabric) {
       var newState = $.extend({}, this.state);
-      newState.selectedColour = colour;
+      newState.selectedColor = color;
       this.setState(newState, function(){
         if(this.state.selectedFabric){
-          this.props.selectCallback('colour', colour);
+          this.props.selectCallback('color', color);
         }
       }.bind(this));
     }
@@ -65,20 +65,20 @@ var FabricAndColourSelector = React.createClass({
     });
   },
 
-  renderColours: function () {
+  renderColors: function () {
     var that = this;
-    return this.props.colours.map(function(colour, index) {
+    return this.props.colors.map(function(color, index) {
       var classes = classNames({
         'customization-options-item-small': true,
-        'active': that.state.selectedColour && that.state.selectedColour.id == colour.id,
+        'active': that.state.selectedColor && that.state.selectedColor.id == color.id,
         'disabled': !that.state.selectedFabric
       });
 
-      var inputId = colour.id + "-" + 'desktop';
+      var inputId = color.id + "-" + 'desktop';
       return (
-        <div key={inputId} onClick={that.colourSelectedHandle.bind(null, colour)} className="col-sm-4 col-md-3">
-          <div className={classes} style={{backgroundColor: colour.value}}></div>
-          <p className="customization-options-item-label">{colour.presentation}</p>
+        <div key={inputId} onClick={that.colorSelectedHandle.bind(null, color)} className="col-sm-4 col-md-3">
+          <div className={classes} style={{backgroundColor: color.value}}></div>
+          <p className="customization-options-item-label">{color.presentation}</p>
         </div>
       );
     });
@@ -102,7 +102,7 @@ var FabricAndColourSelector = React.createClass({
             <p className="description">Heavy georgette has a flat, matte finish. Matte satin has a little more shine. Which do you prefer?</p>
           </div>
           <div className="customization-options-grid row">
-            {this.renderColours()}
+            {this.renderColors()}
           </div>
          </div>
       </div>
