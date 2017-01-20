@@ -32,10 +32,10 @@ describe WeddingAtelier::OrdersController, type: :controller do
     let(:height2) { WeddingAtelier::Height.definitions[:tall].first }
     context 'when sending an array of profiles with size and height' do
       let(:profiles) do
-        [
-          {dress_size_id: 99, height: height1},
-          {dress_size_id: 100, height: height2}
-        ]
+        {
+          '0': {dress_size_id: 99, height: height1},
+          '1': {dress_size_id: 100, height: height2}
+        }
       end
       it 'adds a new line item to the cart' do
         xhr :post, :create, {dress_id: dress.id, profiles: profiles}
@@ -44,11 +44,11 @@ describe WeddingAtelier::OrdersController, type: :controller do
       end
     end
     context 'when sending an array of profiles ' do
-      let(:profile) { user.create_user_profile(dress_size_id: 100, height: "4'11\"/150cm") }
+      let!(:profile) { user.create_user_profile(dress_size_id: 100, height: "4'11\"/150cm") }
       let(:profiles) do
-        [
-          {id: profile.id}
-        ]
+        {
+          '0': {id: user.id}
+        }
       end
       it 'adds a new line item to the cart' do
         xhr :post, :create, {dress_id: dress.id, profiles: profiles}

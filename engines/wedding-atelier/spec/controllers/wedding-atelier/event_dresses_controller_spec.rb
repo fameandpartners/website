@@ -25,7 +25,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   end
 
   describe '#create' do
-    it 'creates an event dress with a base silhoutte' do
+    it 'creates an event dress with a base silhouette' do
       params = {
         event_id: event.slug,
         event_dress: {
