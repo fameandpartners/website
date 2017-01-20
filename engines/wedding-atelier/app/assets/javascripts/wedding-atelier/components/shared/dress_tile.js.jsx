@@ -64,7 +64,7 @@ var DressTile = React.createClass({
             <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
           <a href={this.editDressUrl()} className="dress-box-body text-center">
-            <img className="center-block" src={this.props.dress.images[0].moodboard}/>
+            <img className="center-block" src={this.props.dress.images[0].thumbnail.grey}/>
 
             <div className="dress-info center-block">
               <strong>The {this.props.dress.title}</strong>

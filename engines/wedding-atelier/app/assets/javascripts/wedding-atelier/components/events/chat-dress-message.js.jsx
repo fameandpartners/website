@@ -85,7 +85,7 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = dress.liked ? 'icon-liked' : 'icon-unliked';
-    var dressImage = dress.images && dress.images[0].moodboard
+    var dressImage = dress.images && dress.images[0].thumbnail.grey
     var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (
