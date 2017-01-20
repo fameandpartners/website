@@ -15,8 +15,25 @@ var ShoppingBag = React.createClass({
     var cart = shoppingCart.load();
   },
 
+  componentWillUpdate: function (nextProps, nextState) {
+    this.animateBackdrop(nextState.show);
+  },
+
+  animateBackdrop: function (fadeIn) {
+    var $backdrop = $(this.refs.backdrop);
+    if(fadeIn) {
+      $backdrop.show(0, function () {
+        $backdrop.addClass('animate');
+      });
+    } else {
+      $backdrop.one('transitionend', function() {
+        $(this).hide();
+      });
+      $backdrop.removeClass('animate');
+    }
+  },
+
   bagOpenHandle: function () {
-    $(this.refs.backdrop).show();
     this.setState({show: true});
   },
 
@@ -43,8 +60,7 @@ var ShoppingBag = React.createClass({
 
     var backdropClasses = classNames({
       'shopping-bag-backdrop': true,
-      'hidden-xs': true,
-      'animate': this.state.show
+      'hidden-xs': true
     });
 
     return (
