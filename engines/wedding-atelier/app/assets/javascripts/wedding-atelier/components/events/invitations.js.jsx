@@ -30,7 +30,10 @@ var EventInvitations = React.createClass({
 
   render: function() {
     var assistants = this.props.assistants.map(function(assistant, index){
-      var removeFromBoard = assistant.id == this.props.current_user_id ? '' : <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>
+      var removeFromBoard;
+      if(assistant.id == this.props.current_user_id){
+        removeFromBoard = <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>;
+      }
       return (
         <div className="person" key={assistant.id}>
           <div className="person-name">
