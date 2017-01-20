@@ -31,12 +31,14 @@ var CustomizationsMenuMobile = React.createClass({
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.color.presentation;
       }
 
+      var iconClasses = 'icon icon-' + customizationItem;
+
       return (
         <li key={index} className="customizations-menu-mobile-list-item" onClick={this.show.bind(null, customizationItem)}>
           <div className="customizations-menu-mobile-list-wrapper">
             <div className="customizations-menu-mobile-list-box">
-              <img src={"/assets/wedding-atelier/icons/" + customizationItem + ".png"} />
-                <p>{customizationItem.split('-').join(' and ')}</p>
+              <i className={iconClasses} />
+              <p>{customizationItem.split('-').join(' and ')}</p>
             </div>
           </div>
           <p className="customizations-menu-mobile-list-label">{selectedValue}</p>

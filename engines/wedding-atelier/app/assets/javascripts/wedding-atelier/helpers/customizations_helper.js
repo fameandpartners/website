@@ -23,7 +23,7 @@ PresentationHelper.fabricColor = function(fabric, color){
 };
 
 PresentationHelper.costFor = function(options, customizationItem){
-  if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
+  if(['size', 'silhouette', 'length'].indexOf(customizationItem) > -1 ){ return null; }
   if(customizationItem === 'fabric-color' && options.fabric && options.color){
     return options.fabric.price + options.color.price;
   }else if(options[customizationItem]){

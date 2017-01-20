@@ -55,7 +55,7 @@ var FabricAndColorSelector = React.createClass({
 
       return (
         <div key={inputId} onClick={that.fabricSelectedHandle.bind(null, fabric)} className="fabric-radio-container">
-          <input id={inputId} type="radio" checked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
+          <input id={inputId} type="radio" defaultChecked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
             <span className="real-label">{fabric.presentation}</span>

@@ -70,7 +70,7 @@ var SizeSelector = React.createClass({
       height: assistant.user_profile.height,
       heightGroup: assistant.user_profile.height_group
     });
-    this.props.selectCallback('size', assistant.user_profile.dress_size);
+    this.props.selectCallback('size', assistant);
     this.props.selectCallback('height', assistant.user_profile.height);
     this.props.selectCallback('heightGroup', assistant.user_profile.heigh_group);
   },
@@ -100,7 +100,7 @@ var SizeSelector = React.createClass({
           };
 
       if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)) {
-        inputProps.checked = true;
+        inputProps.defaultChecked = true;
       }
 
       return (
@@ -122,7 +122,7 @@ var SizeSelector = React.createClass({
           };
 
       if (that.state.assistant) {
-        inputProps.checked = assistant.id === that.state.assistant.id;
+        inputProps.defaultChecked = assistant.id === that.state.assistant.id;
       }
 
       return (
