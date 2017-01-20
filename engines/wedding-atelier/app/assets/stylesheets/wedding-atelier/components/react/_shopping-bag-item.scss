@@ -12,6 +12,7 @@
     vertical-align: top;
   }
 
+
   &-summary {
     padding-left: 10px;
     width: 75%;
@@ -59,6 +60,22 @@
       letter-spacing: 1.7px;
     }
   }
+}
 
+@include screen-sm {
+  .shopping-bag-item {
 
+    &-image {
+      width: 35%;
+    }
+
+    &-summary {
+      padding-left: 20px;
+      width: 65%;
+    }
+
+    &-summary-list {
+      font-size: 1rem;
+    }
+  }
 }
