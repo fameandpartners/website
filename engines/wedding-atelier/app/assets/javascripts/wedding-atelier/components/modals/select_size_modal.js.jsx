@@ -1,11 +1,14 @@
 var SelectSizeModal = React.createClass({
   propTypes: {
+    dress: React.PropTypes.object,
     profiles: React.PropTypes.array,
     position: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
     heights: React.PropTypes.array,
     sizes: React.PropTypes.array,
-    siteVersion: React.PropTypes.string
+    siteVersion: React.PropTypes.string,
+    dressToAddToCart: React.PropTypes.number,
+    updateUserCartCallback: React.PropTypes.func
   },
 
   componentDidMount: function(){
@@ -82,6 +85,35 @@ var SelectSizeModal = React.createClass({
     return size.name.match(regexp)[1];
   },
 
+  handleAddToCart: function(profile) {
+    var that = this;
+    var attrs = {
+      dress_id: this.props.dressToAddToCart,
+      profiles: []
+    }
+    if(this.state.selectedProfiles.length) {
+      attrs.profiles = this.state.selectedProfiles.map(function(id) {
+        return {id: id}
+      })
+    } else {
+      attrs.profiles = [{dress_size_id: this.state.selectedSize, height: this.state.selectedHeight}]
+    }
+    $.ajax({
+      url: "/wedding-atelier/orders",
+      type: "POST",
+      dataType: "json",
+      data: attrs,
+      success: function (data) {
+        that.props.updateUserCartCallback(data.order);
+        ReactDOM.render(<Notification errors={['Dress added to your shopping cart.']} />,
+            document.getElementById('notification'));
+      },
+      error: function (response) {
+        ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
+            document.getElementById('notification'));
+      }
+    })
+  },
   renderProfiles: function(){
     var that = this;
     var profiles = this.props.profiles.map(function(profile, index) {
@@ -128,7 +160,7 @@ var SelectSizeModal = React.createClass({
             <button className='btn btn-gray' onClick={this.cancel}> Cancel </button>
           </div>
           <div className='col-xs-12 col-sm-6'>
-            <button className='btn btn-black' onClick={this.addToCart}> Add to cart </button>
+            <button className='btn btn-black' onClick={this.handleAddToCart}> Add to cart </button>
           </div>
         </div>
       </div>
@@ -199,7 +231,7 @@ var SelectSizeModal = React.createClass({
               <button className='btn btn-gray' onClick={this.toggleSizes}>Return to bridal party</button>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-6'>
-              <button className='btn btn-black' onClick={this.addToCart}>Add to cart</button>
+              <button className='btn btn-black' onClick={this.handleAddToCart}>Add to cart</button>
             </div>
           </div>
         </div>

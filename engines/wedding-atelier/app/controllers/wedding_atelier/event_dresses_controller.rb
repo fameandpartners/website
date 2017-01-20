@@ -32,7 +32,7 @@ module WeddingAtelier
     def destroy
       dress = @event.dresses.find(params[:id])
       if dress.destroy
-        render json: dress
+        render json: {status: :ok}
       else
         render json: dress, status: :unprocessable_entity
       end

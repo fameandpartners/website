@@ -13,6 +13,7 @@ describe WeddingAtelier::CustomizationsController, type: :controller do
     Rake::Task.define_task(:environment)
     Rake::Task['wedding_atelier:populate_products'].invoke
     custom_sign_in user
+    user.add_role('bridesmaid', event)
   end
 
   describe 'GET#index' do
@@ -21,10 +22,8 @@ describe WeddingAtelier::CustomizationsController, type: :controller do
 
       customization = JSON.parse(response.body)["customization"]
       expect(customization["silhouettes"]).not_to be_empty
-      expect(customization["colours"]).not_to be_empty
-      expect(customization["fabrics"]).not_to be_empty
+      expect(customization["colors"]).not_to be_empty
       expect(customization["sizes"]).not_to be_empty
-      expect(customization["lengths"]).not_to be_empty
       expect(customization["heights"]).not_to be_empty
       expect(customization["assistants"]).not_to be_empty
       expect(customization["silhouettes"][0]["fits"]).not_to be_empty

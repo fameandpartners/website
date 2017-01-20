@@ -40,7 +40,9 @@ var MoodBoardEvent = React.createClass({
         current_user_id: '',
         name: 'Loading...',
         hasError: {}
-      }
+      },
+      dressToAddToCart: null,
+      userCart: null
     }
   },
 
@@ -281,6 +283,18 @@ var MoodBoardEvent = React.createClass({
     }.bind(this));
   },
 
+  changeDressToAddToCartCallback: function(dressId){
+    var _state = _extends({}, this.state);
+    _state.dressToAddToCart = dressId;
+    this.setState(_state);
+  },
+
+  updateUserCartCallback: function(cart) {
+    var _state = _extends({}, this.state);
+    _state.userCart = cart;
+    this.setState(_state);
+  },
+
   render: function () {
     var chatProps = {
       twilio_token_path: this.props.twilio_token_path,
@@ -294,15 +308,19 @@ var MoodBoardEvent = React.createClass({
       setDresses: this.setDresses,
       handleLikeDress: this.handleLikeDress,
       twilioManager: this.state.twilioManager,
-      twilioClient: this.state.twilioClient
+      twilioClient: this.state.twilioClient,
+      changeDressToAddToCartCallback: this.changeDressToAddToCartCallback
     };
 
     var selectSizeProps = {
+      dress: this.props.dress,
       current_user_id: this.props.current_user_id,
       profiles: this.state.event.assistants,
       sizes: this.state.sizes,
       heights: this.state.heights,
-      siteVersion: this.props.siteVersion
+      siteVersion: this.props.siteVersion,
+      dressToAddToCart: this.state.dressToAddToCart,
+      updateUserCartCallback: this.updateUserCartCallback
     };
 
     var addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
@@ -361,7 +379,8 @@ var MoodBoardEvent = React.createClass({
                       sendDressToChatFn={this.sendDressToChatFn}
                       removeDress={this.removeDress}
                       dressesPath={this.props.dresses_path}
-                      handleLikeDress={this.handleLikeDress} />
+                      handleLikeDress={this.handleLikeDress}
+                      changeDressToAddToCartCallback={this.changeDressToAddToCartCallback}/>
                   </div>
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">

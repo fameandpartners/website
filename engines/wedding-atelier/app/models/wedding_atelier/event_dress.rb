@@ -6,13 +6,13 @@ module WeddingAtelier
     belongs_to :color,
                class_name: 'Spree::OptionValue'
     belongs_to :fit,
-              class_name: 'CustomisationValue'
+               class_name: 'CustomisationValue'
     belongs_to :style,
                class_name: 'CustomisationValue'
     belongs_to :fabric,
                class_name: 'CustomisationValue'
     belongs_to :size,
-              class_name: 'Spree::OptionValue'
+               class_name: 'Spree::OptionValue'
     belongs_to :length,
                class_name: 'CustomisationValue'
 
@@ -28,7 +28,7 @@ module WeddingAtelier
                     :product_id,
                     :height
 
-  validates_presence_of :product, :fabric, :color, :length, :size, :height
+    validates_presence_of :product, :fabric, :color, :length, :size, :height
 
   def images
     base_path = 'https://d1msb7dh8kb0o9.cloudfront.net/wedding-atelier/dresses';
@@ -51,17 +51,20 @@ module WeddingAtelier
     end
   end
 
-  def liked_by?(user)
-    likes.find_by_user_id(user.id).present?
-  end
+    def liked_by?(user)
+      likes.find_by_user_id(user.id).present?
+    end
 
-  def like_by(user)
-    likes.create(user_id: user.id)
-  end
+    def like_by(user)
+      likes.create(user_id: user.id)
+    end
 
-  def dislike_by(user)
-    likes.find_by_user_id(user.id).destroy
-  end
+    def dislike_by(user)
+      likes.find_by_user_id(user.id).destroy
+    end
 
+    def customizations_ids
+      [length_id, fabric_id, fit_id, style_id].compact
+    end
   end
 end
