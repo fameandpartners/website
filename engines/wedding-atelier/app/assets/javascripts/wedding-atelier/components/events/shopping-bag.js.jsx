@@ -27,7 +27,9 @@ var ShoppingBag = React.createClass({
       });
     } else {
       $backdrop.one('transitionend', function() {
-        $(this).hide();
+        if(!$backdrop.hasClass('animate')) {
+          $(this).hide();
+        }
       });
       $backdrop.removeClass('animate');
     }
