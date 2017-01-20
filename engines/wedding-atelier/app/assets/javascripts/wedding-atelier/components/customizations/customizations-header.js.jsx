@@ -8,7 +8,7 @@ var CustomizationsHeader = React.createClass({
   render: function() {
     var designName = '';
     if(this.props.silhouette) {
-      designName = 'You are designing the ' + this.props.silhouette.name + '.';
+      designName = 'You are designing The ' + this.props.silhouette.name + '.';
     }
 
     return(

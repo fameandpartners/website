@@ -44,10 +44,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     strapless_attrs = {
-      name: 'Strapless Column Dress',
+      name: 'Column',
       sku: 'FP2212',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'If your bride’s buzzwords are “sophisticated,” “elevated,” and “elegant,” The Column is the dress for you. Internal boning and a defined waistline craft a classic silhouette, while clean lines make this dress an architectural dream.\nThe Column features an invisible zipper at the back and is fully customizable.'
     }
 
     find_or_create_product(strapless_attrs, strapless_styles,
@@ -71,10 +72,11 @@ namespace :wedding_atelier do
     ]
 
     fit_and_flare_attrs = {
-      name: 'Fit and flare dress',
+      name: 'Fit and flare',
       sku: 'FP2213',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'The Fit and Flare is the universally flattering bridesmaid gown you and your ladies have been looking for. The fitted bodice and full, flared skirt evoke the sweeping romance of an Old Hollywood film (minus the sexism).\nThe Fit and Flare features an invisible zipper at the side and is fully customizable.'
     }
 
     find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
@@ -99,10 +101,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     shift_attrs = {
-      name: 'Shift dress',
+      name: 'Shift',
       sku: 'FP2214',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'Those who favor minimalism will fall hard for The Shift. Form-fitting but not showy, modern but not basic, the foundation of The Shift can be transformed from high fashion to classically romantic with just a few tweaks.\nThe Shift features an invisible zipper at the back and is fully customizable.'
     }
 
     find_or_create_product(shift_attrs, shift_styles,
@@ -127,10 +130,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     slip_attrs = {
-      name: 'Slip dress',
+      name: 'Slip',
       sku: 'FP2215',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'The Slip was designed to make your heart flutter. Its body-skimming silhouette falls just-so, ending in a subtle cascade of flowing fabric–basically, The it’s the epitome of easy, effortless elegance.\nThe Slip features an invisible zipper at the side and is fully customizable.'
     }
 
     find_or_create_product(slip_attrs, slip_styles,
@@ -155,10 +159,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     wrap_attrs = {
-      name: 'Wrap dress',
+      name: 'Wrap',
       sku: 'FP2216',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'Trust us: everyone looks good in The Wrap. An adjustable tie closure at the waist (no need for pre-wedding diets!) makes this a timeless look that celebrates any body type.'
     }
 
     find_or_create_product(wrap_attrs, wrap_styles,
@@ -183,10 +188,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     tri_cup_attrs = {
-      name: 'Tri-cup dress',
+      name: 'Tri-cup',
       sku: 'FP2220',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'The Tri-Cup is a statement-making bridesmaid look that gets its sexy, structured feel from wide under-bust panelling. Its curve-hugging (or curve-creating, depending on your natural shape) femininity makes it worthy of a walk down the aisle.\nThe Tri-Cup an invisible zipper at the back and is fully customizable.'
     }
 
     find_or_create_product(tri_cup_attrs, tri_cup_styles,
@@ -211,10 +217,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     two_piece_attrs = {
-      name: 'Two piece dress',
+      name: 'Set',
       sku: 'FP2218',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'An on-trend, fashion-forward option for the wedding day, The Set features a fitted crop top and a high waisted, full skirt; breathtaking together and beautiful apart.\nThe Set features covered buttons with loops and an invisible zipper on the skirt, and is fully customizable.'
     }
 
     find_or_create_product(two_piece_attrs, two_piece_styles,
@@ -239,10 +246,11 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     multi_way_attrs = {
-      name: 'Multi way dress',
+      name: 'Multi way',
       sku: 'FP2219',
       price: 200,
-      hidden: true
+      hidden: true,
+      description: 'You can stop Googling “versatile bridesmaid dress” now–The Multiway is here. Flowing strips of soft fabric and open loops at the back waistline mean you can twist, cross, and tie the straps any way your heart (or–let’s be honest–your bride’s heart) desires.\nThe Multiway features an invisible zipper at the back and is fully customizable.'
     }
 
     find_or_create_product(multi_way_attrs, multi_way_styles,
