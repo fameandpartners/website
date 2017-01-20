@@ -24,6 +24,17 @@ Spree::User.class_eval do
     roles.where(resource_id: event.id).first.try :name
   end
 
+  def update_role_in_event(role, event)
+    current_role = role_in_event(event)
+    unless current_role.eql?(role)
+      begin
+        remove_role current_role, event if current_role
+      rescue NoMethodError
+      end
+      add_role role, event
+    end
+  end
+
   def wedding_atelier_signup_complete?
     ['completed', 'invite'].include? wedding_atelier_signup_step
   end

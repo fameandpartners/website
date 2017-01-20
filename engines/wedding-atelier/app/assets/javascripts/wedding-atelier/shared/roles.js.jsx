@@ -18,7 +18,6 @@ var Roles = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log(this.props.current_user.role)
     $(this.refs.select2).select2({
       minimumResultsForSearch: Infinity
     }).on('select2:select', function (evt) {

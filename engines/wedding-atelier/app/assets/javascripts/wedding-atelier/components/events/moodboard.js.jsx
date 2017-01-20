@@ -30,7 +30,7 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...',
+        name: '',
         hasError: {}
       },
       event_backup: {
@@ -39,7 +39,7 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...',
+        name: '',
         hasError: {}
       },
       dressToAddToCart: null,
