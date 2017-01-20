@@ -27,11 +27,10 @@
   .dress-preview-details {
     background-color: $white-two-transparent;
     border: 1px solid $pinkish-grey;
-    height: 360px;
     position: absolute;
     right: 0;
     text-align: center;
-    width: 225px;
+    width: 355px;
 
     &-close {
       background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
@@ -44,13 +43,35 @@
     }
 
     &-container {
-      max-width: 150px;
-      margin: 70px auto 35px;
+      padding: 45px 50px 0
+    }
+
+    &-title {
+    	font-family: $secondary-font;
+    	font-size: 14px;
+    	line-height: 1.36;
+    	letter-spacing: 0.9px;
+    	color: $black;
+      font-weight: bold;
+    }
+
+    &-disclaimer {
+      font-family: $secondary-font;
+      font-size: 12px;
+      line-height: 1.17;
+      color: $boulder-two;
     }
 
     &-text-long {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: $black;
       font-family: $primary-font;
-      font-size: 1.3rem;
+
+      p {
+        margin-bottom: 30px;
+      }
     }
 
     &-text-short {
