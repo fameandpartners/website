@@ -37,6 +37,10 @@ module Orders
                    :currency,
                    :quantity
 
+    def delivery_period
+      @item.product.delivery_period
+    end
+
     def shipment
       @shipment ||= order.shipments.detect { |ship| ship.line_items.include?(@item) } || NoShipment.new
     end
