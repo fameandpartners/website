@@ -26,7 +26,7 @@ module WeddingAtelier
     def update
       @event = Event.find_by_slug(params[:id])
       if @event.update_attributes(params_event)
-        render json: @event
+        render json: @event, serializer: MoodboardEventSerializer
       else
         render json: {errors: @event.errors}, status: 422
       end

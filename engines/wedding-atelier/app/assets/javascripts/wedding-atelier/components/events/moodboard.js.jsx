@@ -4,6 +4,7 @@ var MoodBoardEvent = React.createClass({
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
+    current_user: React.PropTypes.object,
     dresses_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
@@ -227,7 +228,7 @@ var MoodBoardEvent = React.createClass({
       data: data,
 
       success: function(collection) {
-        this.setState({event: collection.event});
+        this.setState({event: collection.moodboard_event});
         var event = $.extend(event, this.state.event);
         event.hasError = {};
         this.setState({event: event});
@@ -372,8 +373,8 @@ var MoodBoardEvent = React.createClass({
                   <Chat ref="ChatMobileComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  {this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
-                  {this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
+                  {this.state.event.dresses && this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
+                  {this.state.event.dresses && this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
@@ -387,6 +388,7 @@ var MoodBoardEvent = React.createClass({
                   <EventDetails event={this.state.event}
                                 updater={this.handleEventDetailUpdate}
                                 roles_path={this.props.roles_path}
+                                current_user={this.props.current_user.user}
                                 hasError={this.state.event.hasError} />
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
