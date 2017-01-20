@@ -44,8 +44,8 @@ var CustomizationsContainer = React.createClass({
             title="your perfect shape."
             description="The silhouette is the foundation of your dress."
             showContainers={this.props.showContainers}/>
-          <FabricAndColourSelector
-            colours={this.props.customizations.colours}
+          <FabricAndColorSelector
+            colors={this.props.customizations.colors}
             fabrics={this.props.customizations.fabrics}
             selectCallback={this.props.selectCallback}
             selectedOptions={this.props.selectedOptions}

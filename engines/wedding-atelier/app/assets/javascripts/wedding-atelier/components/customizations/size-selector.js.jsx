@@ -15,6 +15,7 @@ var SizeSelector = React.createClass({
     return {
       assistant: user,
       height: user.user_profile.height,
+      heightGroup: user.user_profile.height_group,
       size: user.user_profile.dress_size
     };
   },
@@ -25,7 +26,7 @@ var SizeSelector = React.createClass({
       placeholder: this.props.currentUser.user.user_profile.height,
       minimumResultsForSearch: Infinity
     }).on('change', function (e) {
-      that.heightSelectedHandle(e.target.value);
+      that.heightSelectedHandle(e.target);
     }).val(this.state.assistant.user_profile.height);
   },
 
@@ -34,11 +35,14 @@ var SizeSelector = React.createClass({
     return size.name.match(regexp)[1];
   },
 
-  heightSelectedHandle: function (height) {
+  heightSelectedHandle: function (target) {
     // it's important to change size here to reset presentation as 4'10" / 147cm | 6
     // if previous size came from an user profile
+    var height = target.value;
+    var heightGroup = target.selectedOptions[0].parentElement.label;
     var _newState = $.extend({}, this.state);
     _newState.height = height;
+    _newState.heightGroup = heightGroup;
     _newState.assistant = null;
     if(this.state.assistant){
       var size = this.state.assistant.user_profile.dress_size;
@@ -46,6 +50,7 @@ var SizeSelector = React.createClass({
       _newState.size = size;
     }
     this.props.selectCallback('height', height);
+    this.props.selectCallback('heightGroup', heightGroup);
     this.setState(_newState);
   },
 
@@ -62,9 +67,12 @@ var SizeSelector = React.createClass({
     this.setState({
       assistant: assistant,
       size: assistant.user_profile.dress_size,
-      height: assistant.user_profile.height
+      height: assistant.user_profile.height,
+      heightGroup: assistant.user_profile.height_group
     });
     this.props.selectCallback('size', assistant);
+    this.props.selectCallback('height', assistant.user_profile.height);
+    this.props.selectCallback('heightGroup', assistant.user_profile.heigh_group);
   },
 
   render: function() {
@@ -92,7 +100,7 @@ var SizeSelector = React.createClass({
           };
 
       if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)) {
-        inputProps.checked = true;
+        inputProps.defaultChecked = true;
       }
 
       return (
@@ -114,7 +122,7 @@ var SizeSelector = React.createClass({
           };
 
       if (that.state.assistant) {
-        inputProps.checked = assistant.id === that.state.assistant.id;
+        inputProps.defaultChecked = assistant.id === that.state.assistant.id;
       }
 
       return (

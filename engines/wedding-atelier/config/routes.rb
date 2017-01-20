@@ -15,6 +15,8 @@ WeddingAtelier::Engine.routes.draw do
 
   post '/token', to: 'twilio#token'
 
+  resources :sizing, only: :index
+
   resources :events do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'

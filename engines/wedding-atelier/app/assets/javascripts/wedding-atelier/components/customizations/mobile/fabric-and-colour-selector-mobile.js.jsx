@@ -1,6 +1,6 @@
-var FabricAndColourSelectorMobile = React.createClass({
+var FabricAndColorSelectorMobile = React.createClass({
   propTypes: {
-    colours: React.PropTypes.array,
+    colors: React.PropTypes.array,
     fabrics: React.PropTypes.array,
     selectedOptions: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
@@ -11,15 +11,15 @@ var FabricAndColourSelectorMobile = React.createClass({
   getInitialState: function () {
     return {
       selectedFabric: null,
-      selectedColour: null
+      selectedColor: null
     }
   },
 
   componentWillReceiveProps: function(nextProps){
-    if(!this.state.selectedFabric && !this.state.selectedColour){
+    if(!this.state.selectedFabric && !this.state.selectedColor){
       var newState = {
         selectedFabric: nextProps.selectedOptions.fabric,
-        selectedColour: nextProps.selectedOptions.colour
+        selectedColor: nextProps.selectedOptions.color
       }
       this.setState(newState);
     }
@@ -28,15 +28,15 @@ var FabricAndColourSelectorMobile = React.createClass({
   fabricSelectedHandle: function (fabric) {
     this.setState({selectedFabric: fabric});
     this.props.selectOptionCallback('fabric', fabric);
-    if(this.props.colours[0] && !this.state.selectedColour) {
-      this.setState({selectedColour: this.props.colours[0]});
+    if(this.props.colors[0] && !this.state.selectedColor) {
+      this.setState({selectedColor: this.props.colors[0]});
     }
   },
 
-  colourSelectedHandle: function (colour) {
+  colorSelectedHandle: function (color) {
     if(this.state.selectedFabric) {
-      this.setState({selectedColour: colour});
-      this.props.selectOptionCallback('colour', colour);
+      this.setState({selectedColor: color});
+      this.props.selectOptionCallback('color', color);
     }
   },
 
@@ -47,7 +47,7 @@ var FabricAndColourSelectorMobile = React.createClass({
           isChecked = fabric.id === that.state.selectedFabric.id;
       return (
         <div key={inputId} onClick={that.fabricSelectedHandle.bind(null, fabric)} className="fabric-radio-container">
-          <input id={inputId} type="radio" checked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
+          <input id={inputId} type="radio" defaultChecked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
             <span className="real-label">{fabric.presentation}</span>
@@ -57,19 +57,19 @@ var FabricAndColourSelectorMobile = React.createClass({
     });
   },
 
-  renderColours: function () {
+  renderColors: function () {
     var that = this;
-    return this.props.colours.map(function(colour, index) {
-      var inputId = colour.id + "-" + 'mobile';
+    return this.props.colors.map(function(color, index) {
+      var inputId = color.id + "-" + 'mobile';
       var classes = classNames({
         'customizations-selector-mobile-options-item-small': true,
-        'active': that.state.selectedColour && that.state.selectedColour.id === colour.id
+        'active': that.state.selectedColor && that.state.selectedColor.id === color.id
       });
 
       return (
-        <div key={inputId} onClick={that.colourSelectedHandle.bind(null, colour)} className="col-xs-6">
-          <div className={classes} style={{backgroundColor: colour.value}}></div>
-          <p className="customizations-selector-mobile-options-item-label">{colour.presentation}</p>
+        <div key={inputId} onClick={that.colorSelectedHandle.bind(null, color)} className="col-xs-6">
+          <div className={classes} style={{backgroundColor: color.value}}></div>
+          <p className="customizations-selector-mobile-options-item-label">{color.presentation}</p>
         </div>
       );
     });
@@ -92,7 +92,7 @@ var FabricAndColourSelectorMobile = React.createClass({
           <p className="description">Heavy georgette has a flat, matte finish. Matte satin has a little more shine. Which do you prefer?</p>
         </div>
         <div className="customizations-selector-mobile-grid row">
-          {this.renderColours()}
+          {this.renderColors()}
         </div>
       </div>
     );

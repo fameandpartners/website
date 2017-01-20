@@ -11,6 +11,8 @@ module WeddingAtelier
 
     has_many :styles, serializer: WeddingAtelier::CustomisationValueSerializer
     has_many :fits, serializer: WeddingAtelier::CustomisationValueSerializer
+    has_many :lengths, serializer: WeddingAtelier::CustomisationValueSerializer
+    has_many :fabrics, serializer: WeddingAtelier::CustomisationValueSerializer
 
     def presentation
       object.name
@@ -22,6 +24,14 @@ module WeddingAtelier
 
     def fits
       object.customisation_values.where(customisation_type: 'fit')
+    end
+
+    def lengths
+      object.customisation_values.where(customisation_type: 'length')
+    end
+
+    def fabrics
+      object.customisation_values.where(customisation_type: 'fabric')
     end
 
     def image

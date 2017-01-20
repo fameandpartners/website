@@ -30,14 +30,17 @@ var EventInvitations = React.createClass({
 
   render: function() {
     var assistants = this.props.assistants.map(function(assistant, index){
-      var removeFromBoard = assistant.user.id == this.props.current_user_id ? '' : <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.user.id, index)}>Remove from board</a></span>
+      var removeFromBoard;
+      if(assistant.id == this.props.current_user_id){
+        removeFromBoard = <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>;
+      }
       return (
-        <div className="person" key={assistant.user.id}>
+        <div className="person" key={assistant.id}>
           <div className="person-name">
-            { assistant.user.name }
+            { assistant.name }
           </div>
           <div className="person-role">
-            Bridesmaid
+            {assistant.role}
             {removeFromBoard}
           </div>
         </div>
@@ -48,10 +51,10 @@ var EventInvitations = React.createClass({
       return (
         <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
-            { invitation.invitation.user_email }
+            { invitation.user_email }
           </div>
           <div className="person-role">
-            { invitation.invitation.state }
+            { invitation.state }
           </div>
         </div>
       )

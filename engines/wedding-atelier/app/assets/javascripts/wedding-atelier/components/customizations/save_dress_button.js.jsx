@@ -67,7 +67,7 @@ var SaveDressButton = React.createClass({
         params = {
           product_id: this.tryIdFor(options.silhouette),
           fabric_id: this.tryIdFor(options.fabric),
-          color_id: this.tryIdFor(options.colour),
+          color_id: this.tryIdFor(options.color),
           length_id: this.tryIdFor(options.length),
           style_id: this.tryIdFor(options.style),
           fit_id: this.tryIdFor(options.fit),

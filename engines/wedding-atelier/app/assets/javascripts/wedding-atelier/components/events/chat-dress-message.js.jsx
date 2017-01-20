@@ -50,6 +50,14 @@ var ChatDressMessage = React.createClass({
     return this.props.message.time ? this.formatDate(this.props.message.time) : '';
   },
 
+  addToCart: function(){
+    if($(window).width() < 768){
+      $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
+    }else{
+      $('#events__moodboard .right-content .js-select-size-modal').show();
+    }
+  },
+
   getMessageData: function() {
     var formattedDate = this.getTime();
 
@@ -75,6 +83,7 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = dress.liked ? 'icon-liked' : 'icon-unliked';
+    var dressImage = dress.images && dress.images[0].moodboard
     var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (
@@ -95,7 +104,7 @@ var ChatDressMessage = React.createClass({
               <div className="col-xs-9">
                 <div className="dress-box" key={dress.id}>
                   <div className="dress-box-body text-center">
-                    <img className="center-block" src={dress.images[0].moodboard}/>
+                    <img className="center-block" src={dressImage}/>
                     <div className="dress-info center-block">
                       <strong>{dress.title}</strong>
                       <span>|</span>
@@ -104,7 +113,7 @@ var ChatDressMessage = React.createClass({
                   </div>
                   <div className="dress-box-footer">
                     <div className="center-block">
-                      <button className="btn-add-to-cart">
+                      <button className="btn-add-to-cart" onClick={this.addToCart}>
                         Add to cart
                       </button>
                     </div>

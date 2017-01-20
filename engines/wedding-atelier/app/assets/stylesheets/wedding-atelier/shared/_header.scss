@@ -83,18 +83,27 @@
   display: inline-block;
   height: 100%;
   margin-left: 5px;
-  width: 25px;
+  width: 35px;
 }
 
 .commands-help {
-  background-image: image-url('wedding-atelier/icons/help.png');
+  background-image: image-url('wedding-atelier/icons/help.svg');
+
+  &:hover {
+    background-image: image-url('wedding-atelier/icons/help-hover.svg');
+  }
 }
+
 .commands-menu {
   background-image: image-url('wedding-atelier/icons/hamburger.png');
 }
 
 .commands-shopping-bag {
-  background-image: image-url('wedding-atelier/icons/shopping-bag.png');
+  background-image: image-url('wedding-atelier/icons/cart.svg');
+
+  &:hover {
+    background-image: image-url('wedding-atelier/icons/cart-hover.svg');
+  }
 }
 
 @include screen-sm {
