@@ -6,17 +6,17 @@ var ShoppingBagItem = React.createClass({
 
   prepareSummary: function () {
     var props = $.extend({}, this.props.item);
-    return {
+    var customizations = {};
+    props.personalization.customization_values.forEach(function (customization) {
+      customizations[customization.type] = customization.presentation + (customization.price > 0 ? '- $' + customization.price : '');
+    });
+    return $.extend(customizations, {
       imageUrl: props.image_small,
       dressName: props.product_name,
       dressCost: props.money,
       silouette: 'The Slip',
-      fabric: 'Turtles',
-      color: 'Turtles',
-      length: 'Turtles',
-      style: 'Turtles',
       size: props.personalization.size.option_value.presentation
-    };
+    });
   },
 
   renderListOfCustomizations: function (item) {

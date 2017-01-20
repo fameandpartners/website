@@ -113,8 +113,8 @@ var ShoppingBag = React.createClass({
               <p>order total</p>
             </div>
             <div className="shopping-bag-totals-amounts">
-              <p>Free shipping</p>
-              <p>$598</p>
+              <p>{this.state.userCart.display_shipment_total}</p>
+              <p>{this.state.userCart.display_total}</p>
             </div>
           </div>
           <button className="shopping-bag-continue-payment btn-black">
