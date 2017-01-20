@@ -117,7 +117,7 @@ class CtaPrice extends React.Component {
         {(() => {
           if (this.props.product.cny_delivery_delays) {
             return(
-              <div className="deliveryNote">Due to high order volume, it's taking us a bit longer to handcraft each garment. Our delivery timeline of 7-10 days should resume soon.</div>
+              <div className="deliveryNote">We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon</div>
             );
           }
         })()}
