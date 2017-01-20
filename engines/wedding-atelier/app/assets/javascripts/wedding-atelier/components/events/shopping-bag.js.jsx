@@ -6,13 +6,9 @@ var ShoppingBag = React.createClass({
 
   getInitialState: function () {
     return {
+      userCart: {},
       show: false
     };
-  },
-
-  componentWillMount: function () {
-    var shoppingCart = new helpers.ShoppingCart({});
-    var cart = shoppingCart.load();
   },
 
   componentWillUpdate: function (nextProps, nextState) {
@@ -35,23 +31,45 @@ var ShoppingBag = React.createClass({
     }
   },
 
-  bagOpenHandle: function () {
-    this.setState({show: true});
+  fetchUserCart: function () {
+    var that = this;
+    $.ajax({
+      url: '/wedding-atelier/orders',
+      type: 'get',
+      dataType: "json",
+      success: function (data) {
+        that.setState({
+          userCart: data.order,
+          show: true
+        });
+      },
+      error: function (response) {
+        ReactDOM.render(<Notification errors={['Oops! There was an error trying to load your shopping cart.']} />,
+            document.getElementById('notification'));
+      }
+    });
   },
 
-  bagClosedHandle: function () {
+  bagOpenHandler: function () {
+    this.fetchUserCart();
+  },
+
+  bagClosedHandler: function () {
     $(this.refs.backdrop).one('transitionend', function() {
       $(this).hide();
     });
     this.setState({show: false});
   },
 
-  renderCartItems: function () {
-    //TODO: Replace hard-coded array for cartItems prop
+  itemRemovedHandler: function (id) {
+    // TODO: Remove from DB and refresh UI
+  },
 
-    return (this.props.cartItems || [1,2]).map(function (item, index) {
-      return <ShoppingBagItem key={index} item={item} />
-    });
+  renderCartItems: function () {
+    return (this.state.userCart.line_items || []).map(function (item, index) {
+      var bagItemKey = 'shopping-bag-item-' + index;
+      return <ShoppingBagItem key={bagItemKey} item={item.line_item} itemRemovedHandler={this.itemRemovedHandler}/>
+    }.bind(this));
   },
 
   render: function () {
@@ -67,12 +85,12 @@ var ShoppingBag = React.createClass({
 
     return (
       <div className="shopping-bag-container">
-        <div className="commands-shopping-bag" onClick={this.bagOpenHandle}></div>
+        <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
         <div className={backdropClasses} ref="backdrop"></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">
-              <img src="/assets/wedding-atelier/close.svg" onClick={this.bagClosedHandle}></img>
+              <img src="/assets/wedding-atelier/close.svg" onClick={this.bagClosedHandler}></img>
             </div>
             <div className="shopping-bag-header-title">
               <em>Your</em> cart

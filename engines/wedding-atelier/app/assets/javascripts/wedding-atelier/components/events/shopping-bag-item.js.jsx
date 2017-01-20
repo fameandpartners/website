@@ -1,47 +1,51 @@
 var ShoppingBagItem = React.createClass({
   propTypes: {
-    item: React.PropTypes.number //TODO: Change to object
+    item: React.PropTypes.object.isRequired,
+    itemRemovedHandler: React.PropTypes.func.isRequired
   },
 
-  itemRemovedHandle: function (item) {
-    //TODO: Call to endpoint to remove item from cart, check DOM to replace empty object
+  prepareSummary: function () {
+    var props = $.extend({}, this.props.item);
+    return {
+      imageUrl: props.image_small,
+      dressName: props.product_name,
+      dressCost: props.money,
+      silouette: 'The Slip',
+      fabric: 'Turtles',
+      color: 'Turtles',
+      length: 'Turtles',
+      style: 'Turtles',
+      size: props.personalization.size.option_value.presentation
+    };
+  },
+
+  renderListOfCustomizations: function (item) {
+    return ['silhouette', 'fabric', 'color', 'length', 'style', 'size'].map(function (customization, index) {
+      var label = customization.slice(0,1).toUpperCase() + customization.slice(1) + ': ';
+      var key = item.id + '-' + customization;
+      return (
+        <li key={key} className="shopping-bag-item-summary-list-item">
+          <span className="customization-name">{label}</span>
+          <span className="customization-value">{item[customization]}</span>
+        </li>
+      );
+    });
   },
 
   render: function () {
+    var item = this.prepareSummary();
+
     return (
       <li className="shopping-bag-item">
-        <img className="shopping-bag-item-image" src="/assets/wedding-atelier/dresses/280x404/FP2212-HG-BERRY-S0-F0-AK-FRONT.jpg" />
+        <img className="shopping-bag-item-image" src={item.imageUrl} />
         <div className="shopping-bag-item-summary">
           <div className="shopping-bag-item-summary-header">
-            <div className="shopping-bag-item-summary-header-delete" onClick={this.itemRemovedHandle.bind(null, {})}></div>
-            <p className="dress-name">Sienna Dress</p>
-            <p className="dress-cost">$299</p>
+            <div className="shopping-bag-item-summary-header-delete" onClick={this.props.itemRemovedHandler.bind(null, this.props.item.id)}></div>
+            <p className="dress-name">{item.dressName}</p>
+            <p className="dress-cost">{item.dressCost}</p>
           </div>
           <ul className="shopping-bag-item-summary-list">
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Silhouette: </span>
-              <span className="customization-value">The Slip</span>
-            </li>
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Fabric: </span>
-              <span className="customization-value">Heavy Georgette</span>
-            </li>
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Color: </span>
-              <span className="customization-value">Navy</span>
-            </li>
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Length: </span>
-              <span className="customization-value">Something</span>
-            </li>
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Style Addons: </span>
-              <span className="customization-value">Something - $10</span>
-            </li>
-            <li className="shopping-bag-item-summary-list-item">
-              <span className="customization-name">Size: </span>
-              <span className="customization-value">Janine's Profile</span>
-            </li>
+            {this.renderListOfCustomizations(item)}
           </ul>
         </div>
       </li>
