@@ -22,9 +22,7 @@
         dd Size: #{product.size.presentation},
         dd Color: #{product.color.name}
         dd Skirt Length: #{product.height}
-        dd
-          | Estimated delivery, 
-          = product.delivery_period
+        dd Estimated delivery: #{product.delivery_period}
         - if product.customizations.present?
           - product.customizations.each do |customization|
             dd #{ customization.name } #{ customization.display_price }
