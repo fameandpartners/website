@@ -36,10 +36,13 @@ var AddToCartButton = React.createClass({
       dataType: "json",
       data: attrs,
       success: function (data) {
-        //TODO: Show alert that the product has been added to the cart
+        var dressTitle = dress.title || dress.silhouette.name;
+        ReactDOM.render(<Notification errors={[dressTitle + ' was added to your shopping cart!']} />,
+                      document.getElementById('notification'));
       },
       error: function (response) {
-        //TODO: Show errors
+        ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
+            document.getElementById('notification'));
       }
     })
   },
