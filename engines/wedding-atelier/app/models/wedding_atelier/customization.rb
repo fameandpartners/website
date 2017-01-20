@@ -12,17 +12,13 @@ module WeddingAtelier
                   :heights
 
     def initialize(event)
-      @silhouettes = Spree::Taxon.where(permalink: 'base-silhouette').first.products
-
+      available_colors = WeddingAtelier::Defaults.available_colors.map{ |c| c[:name] }
+      @silhouettes = Spree::Taxon.find_by_permalink('base-silhouette').products
       # TODO: colors should be captures from products
-      @colours     = Spree::OptionType.color.option_values
-      # TODO: Lengths, sizes and fabrics heights, should be captured from customization values of the base-sillhouete products
-      @fabrics     = Spree::OptionType.fabric.option_values
-      @lengths     = Spree::OptionType.length.option_values
-      @sizes       = Spree::OptionType.size.option_values
-      @heights     = WeddingAtelier::Height.definitions
-
+      @colours = Spree::OptionValue.where(name: available_colors)
+      @sizes = Spree::OptionType.find_by_name('dress-size').option_values
       @assistants = event.assistants
+      @heights = WeddingAtelier::Height.definitions
     end
   end
 end

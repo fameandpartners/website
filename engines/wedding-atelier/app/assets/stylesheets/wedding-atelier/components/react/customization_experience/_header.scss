@@ -66,11 +66,15 @@
     display: inline-block;
     height: 100%;
     margin-left: 5px;
-    width: 25px;
+    width: 35px;
   }
 
   &-help {
-    background-image: image-url('wedding-atelier/icons/help.png');
+    background-image: image-url('wedding-atelier/icons/help.svg');
+
+    &:hover {
+      background-image: image-url('wedding-atelier/icons/help-hover.svg');
+    }
   }
 
   &-menu {
@@ -78,7 +82,11 @@
   }
 
   &-shopping-bag {
-    background-image: image-url('wedding-atelier/icons/shopping-bag.png');
+    background-image: image-url('wedding-atelier/icons/cart.svg');
+
+    &:hover {
+      background-image: image-url('wedding-atelier/icons/cart-hover.svg');
+    }
   }
 
   .going-back-wrapper {
@@ -114,6 +122,7 @@
   .customization-experience-header {
     &-dress-name {
       font-size: 1.4rem;
+      max-width: 600px;
     }
   }
 }

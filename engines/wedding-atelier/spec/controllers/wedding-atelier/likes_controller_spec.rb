@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'spec_helper'
 
 describe WeddingAtelier::LikesController, type: :controller do
   routes { WeddingAtelier::Engine.routes }

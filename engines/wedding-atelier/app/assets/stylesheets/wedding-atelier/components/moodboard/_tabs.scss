@@ -1,9 +1,12 @@
 .moodboard-tabs {
-  height: 100%;
-
-  .nav-tabs {
-    min-width: 680px;
-    width: 680px;
+  .bridal-gowns span {
+    color: #acacac;
+    &.coming-soon {
+      font-size: 9px;
+      left: 25%;
+      position: absolute;
+      top: 0;
+    }
   }
 
   .tab-content {
@@ -59,14 +62,15 @@
   }
 
   .moodboard-tabs {
+    height: calc(100% - 23px);
   }
 
   .nav.nav-tabs {
+    background-color: $white-three;
+    height: 66px;
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-
-    background-color: $white-three;
 
     &::-webkit-scrollbar {
       display: none;
@@ -80,6 +84,8 @@
   }
 
   .nav-tabs > li > a {
+    line-height: 43px;
+    height: 67px;
     color: $greyish !important;
   }
 

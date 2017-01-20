@@ -50,7 +50,7 @@ var ZoomModal = React.createClass({
     return (
       <div ref="zoomModal" className="zoom-modal" style={{display: this.props.visible? 'block':'none'}}>
         <div className="close-zoom" onClick={this.props.zoomClosedHandle}></div>
-        <div className="zoom-modal-image">
+        <div className="zoom-modal-image" ref="activeZoom">
           <img src={image.large} style={{visibility: this.state.loading? 'hidden':'visible'}} onError={this.props.imageNotFoundHandle}/>
           <ImageLoader loading={this.state.loading} />
         </div>

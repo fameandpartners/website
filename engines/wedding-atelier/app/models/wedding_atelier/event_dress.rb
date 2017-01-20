@@ -10,11 +10,11 @@ module WeddingAtelier
     belongs_to :style,
                class_name: 'CustomisationValue'
     belongs_to :fabric,
-               class_name: 'Spree::OptionValue'
+               class_name: 'CustomisationValue'
     belongs_to :size,
               class_name: 'Spree::OptionValue'
     belongs_to :length,
-               class_name: 'Spree::OptionValue'
+               class_name: 'CustomisationValue'
 
     has_many :likes, class_name: 'WeddingAtelier::Like'
 
