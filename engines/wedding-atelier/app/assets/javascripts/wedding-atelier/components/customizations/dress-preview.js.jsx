@@ -85,7 +85,7 @@ var DressPreview = React.createClass({
   },
 
   render: function() {
-    var images = new DressImageBuilder(this.props.selectedOptions).styles();
+    var images = new DressImageBuilder(this.props.selectedOptions).dressCombos();
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">

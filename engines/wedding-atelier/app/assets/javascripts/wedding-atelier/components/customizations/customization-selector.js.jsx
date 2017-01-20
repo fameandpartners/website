@@ -37,6 +37,7 @@ var CustomizationSelector = React.createClass({
     var itemProps = {
       type: this.props.type,
       selectedOption: this.props.selectedOption,
+      selectedOptions: this.props.selectedOptions,
       selectCallback: this.props.selectCallback,
       clickCustomizationCallback: this.selectCustomization,
       clickedOptions: {}

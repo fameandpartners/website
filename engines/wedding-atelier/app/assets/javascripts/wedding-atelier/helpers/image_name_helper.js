@@ -10,7 +10,25 @@ function DressImageBuilder(customizations){
   this.customizationNames = [this.silhouette, this.fabric, this.color, this.style, this.fit, this.length];
 }
 
-DressImageBuilder.prototype.styles = function(){
+DressImageBuilder.prototype.dressLengths = function(){
+
+}
+
+DressImageBuilder.prototype.dressFits = function(pov){
+  var fileName = [this.silhouette, this.fabric, this.color, 'S0', this.fit, this.length, pov].join('-')
+  return {
+    thumbnail: this.basePath + '180x260/' + fileName + '.jpg',
+    moodboard: this.basePath + '280x404/' + fileName + '.jpg',
+    normal: this.basePath + '900x1300/' + fileName + '.jpg',
+    large: this.basePath + '1800x2600/' + fileName + '.jpg'
+  }
+}
+
+DressImageBuilder.prototype.dressStyles = function(){
+
+}
+
+DressImageBuilder.prototype.dressCombos = function(){
   var imageName = this.customizationNames.join('-').toUpperCase() + '-';
   return ['FRONT', 'BACK'].map(function (type) {
     return {

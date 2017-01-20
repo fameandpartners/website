@@ -2,6 +2,7 @@ var CustomizationItem = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
     selectedOption: React.PropTypes.object,
+    selectedOptions: React.PropTypes.array,
     option: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
     clickCustomizationCallback: React.PropTypes.func.isRequired,
@@ -28,7 +29,12 @@ var CustomizationItem = React.createClass({
     return selectedOption && selectedOption.id == this.props.option.id;
   },
 
+  imagePath: function(){
+    var basePath = ''
+  },
+
   render: function(){
+    console.log(this.props.type)
     var active = this.isOptionSelected(),
         clicked = this.isOptionClicked(),
         optionItemClasses = classNames({
@@ -42,7 +48,7 @@ var CustomizationItem = React.createClass({
       <div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           <RemoveButton clickCallback={this.removeCustomization} active={active}/>
-          <img src={this.props.option.image} />
+          <img src={this.imagePath()} />
           <p>{this.props.option.presentation}</p>
         </div>
       </div>
