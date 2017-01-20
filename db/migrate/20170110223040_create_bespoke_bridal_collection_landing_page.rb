@@ -5,7 +5,7 @@ class CreateBespokeBridalCollectionLandingPage < ActiveRecord::Migration
       path:             '/bespoke-bridal-collection',
       template_path:    '/landing_pages/bespoke_bridal_collection',
       heading:          'The Bespoke Bridal Collection',
-      title:            'The Bespoke Bridal Collection',
+      title:            'Evening Party Dresses',
       meta_description: 'Exclusive designs, exquisite laces, soft silks, and the perfect fit. Introducing our bespoke, made-to-order collection bridal dresses and wedding gowns.',
     }
   end
