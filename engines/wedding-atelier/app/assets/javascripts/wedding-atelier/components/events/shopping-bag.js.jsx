@@ -66,7 +66,7 @@ var ShoppingBag = React.createClass({
     return (
       <div className="shopping-bag-container">
         <div className="commands-shopping-bag" onClick={this.bagOpenHandle}></div>
-        <div className={backdropClasses} ref="backdrop" style={{display: 'none'}}></div>
+        <div className={backdropClasses} ref="backdrop"></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">
