@@ -123,6 +123,8 @@ var CustomizationExperience = React.createClass({
 
       newState.selectedOptions.fabric = fabric;
       newState.selectedOptions.length = length;
+      newState.selectedOptions.fit = null;
+      newState.selectedOptions.style = null;
       newState.customizations.styles = value.styles;
       newState.customizations.fits = value.fits;
       newState.customizations.fabrics = value.fabrics;
