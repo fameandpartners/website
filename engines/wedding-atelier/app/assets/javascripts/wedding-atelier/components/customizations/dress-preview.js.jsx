@@ -72,7 +72,7 @@ var DressPreview = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnail} onError={that.imageNotFoundHandle}/>
+          <img src={image.thumbnail.white} onError={that.imageNotFoundHandle}/>
         </li>
       );
     });

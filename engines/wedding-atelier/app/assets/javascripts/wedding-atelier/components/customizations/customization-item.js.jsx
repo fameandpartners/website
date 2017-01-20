@@ -30,11 +30,13 @@ var CustomizationItem = React.createClass({
   },
 
   imagePath: function(){
-    var basePath = ''
+    if(this.props.selectedOptions){
+      var images = new DressImageBuilder(this.props.selectedOptions)[this.props.type](this.props.option)
+      return images.thumbnail.grey;
+    }
   },
 
   render: function(){
-    console.log(this.props.type)
     var active = this.isOptionSelected(),
         clicked = this.isOptionClicked(),
         optionItemClasses = classNames({
