@@ -9,6 +9,8 @@ module WeddingAtelier
 
     def show
       @event = Event.find_by_slug(params[:id])
+      @sizes = Spree::OptionType.find_by_name('dress-size').option_values
+      @heights = WeddingAtelier::Height.definitions
 
       if @event.nil? || !@event.assistant_permitted?(current_spree_user)
         flash[:notice] = "You don't have permission to access this wedding board"

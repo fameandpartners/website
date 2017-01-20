@@ -3,11 +3,11 @@ function DressImageBuilder(customizations){
   this.basePath = '/assets/wedding-atelier/dresses/';
   this.silhouette = customizations.silhouette ? customizations.silhouette.sku : 'FP2212';
   this.fabric = customizations.fabric ? customizations.fabric.name : 'HG';
-  this.colour = customizations.colour ? customizations.colour.name : 'CHAMPAGNE';
+  this.color = customizations.color ? customizations.color.name : 'CHAMPAGNE';
   this.style = customizations.style ? customizations.style.name : 'S0';
   this.fit = customizations.fit ? customizations.fit.name : 'F0';
   this.length = customizations.length ? customizations.length.name : 'AK';
-  this.customizationNames = [this.silhouette, this.fabric, this.colour, this.style, this.fit, this.length];
+  this.customizationNames = [this.silhouette, this.fabric, this.color, this.style, this.fit, this.length];
 }
 
 DressImageBuilder.prototype.styles = function(){

@@ -5,41 +5,16 @@ namespace :wedding_atelier do
 
     sizes = Spree::OptionType.where(name: 'dress-size').first
 
-    colour_attrs = [
-      { presentation: 'Champagne', name: 'champagne' },
-      { presentation: 'Navy', name: 'navy' },
-      { presentation: 'Black', name: 'black' },
-      { presentation: 'Berry', name: 'berry' },
-      { presentation: 'Burgundy', name: 'burgundy' },
-      { presentation: 'Red', name: 'red' },
-      { presentation: 'Watermelon', name: 'watermelon' },
-      { presentation: 'Coral', name: 'coral' },
-      { presentation: 'Peach', name: 'peach' },
-      { presentation: 'Bright Blush', name: 'bright-blush' },
-      { presentation: 'Pale Pink', name: 'pale-pink' },
-      { presentation: 'Lavender', name: 'lavender' },
-      { presentation: 'Plum', name: 'plum' },
-      { presentation: 'Royal Blue', name: 'royal-blue' },
-      { presentation: 'Cobalt Blue', name: 'cobalt-blue'},
-      { presentation: 'Pale Blue', name: 'pale-blue'},
-      { presentation: 'Aqua', name: 'aqua'},
-      { presentation: 'Bright Turquoise', name: 'bright-turquoise'},
-      { presentation: 'Mint', name: 'mint'},
-      { presentation: 'Pale Grey', name: 'pale-grey'},
-    ]
+    colour_attrs = WeddingAtelier::Defaults.available_colors
 
-    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_attrs)
+    colours = find_or_create_option_type('dress-color', 'Color', colour_attrs)
 
-    fabric_attrs = [
+    @fabric_attrs = [
       { presentation: 'Heavy Georgette', name: 'HG' },
       { presentation: 'Matte Satin', name: 'MS' },
     ]
 
-    # Common option types
-    fabrics = find_or_create_option_type('wedding-atelier-fabrics',
-                                         'Fabric',fabric_attrs)
-
-    length_attrs = [
+    @length_attrs = [
       { presentation: 'Mini', name: 'MN'},
       { presentation: 'Knee', name: 'KN'},
       { presentation: 'Petti', name: 'PT'},
@@ -47,10 +22,8 @@ namespace :wedding_atelier do
       { presentation: 'Ankle', name: 'AK'},
       { presentation: 'Maxi', name: 'MX'}
     ]
-    lengths = find_or_create_option_type('wedding-atelier-lengths',
-                                         'Length', length_attrs)
 
-    base_option_types = [sizes, fabrics, lengths, colours]
+    base_option_types = [sizes, colours[:option_type]]
 
     # Strapless ----------------------------------------------------------------------------------
     strapless_styles = [
@@ -78,7 +51,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(strapless_attrs, strapless_styles,
-                          strapless_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          strapless_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Fit and Flare  -----------------------------------------------------------------------------
     fit_and_flare_styles = [
@@ -105,7 +78,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
-                          fit_and_flare_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          fit_and_flare_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
@@ -133,7 +106,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(shift_attrs, shift_styles,
-                          shift_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          shift_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
@@ -161,7 +134,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(slip_attrs, slip_styles,
-                          slip_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          slip_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
@@ -189,7 +162,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(wrap_attrs, wrap_styles,
-                          wrap_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          wrap_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
@@ -217,7 +190,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(tri_cup_attrs, tri_cup_styles,
-                          tri_cup_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          tri_cup_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Two piece ----------------------------------------------------------------------------------
     two_piece_styles = [
@@ -245,7 +218,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(two_piece_attrs, two_piece_styles,
-                          two_piece_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          two_piece_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
 
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
@@ -273,20 +246,20 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(multi_way_attrs, multi_way_styles,
-                          multi_way_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          multi_way_fits, taxon, base_option_types, {colours: colours[:option_values], sizes: sizes})
   end
 
   def find_or_create_option_type(name, presentation, option_values)
     option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
     end
-    option_values.each do |attrs|
-      ov = Spree::OptionValue.find_or_create_by_name(attrs[:name]) do |o|
-        o.presentation = attrs[:presentation]
-      end
+    option_values = option_values.collect do |attrs|
+      ov = Spree::OptionValue.find_or_create_by_name(attrs[:name])
+      ov.update_attributes(presentation: attrs[:presentation], value: attrs[:value])
       option_type.option_values << ov unless option_type.option_values.include? ov
+      ov
     end
-    option_type
+    {option_type: option_type, option_values: option_values}
   end
 
   def create_customizations(product, customizations, customization_type)
@@ -305,11 +278,14 @@ namespace :wedding_atelier do
     p.update_attributes attrs
     create_customizations(p, styles, 'style')
     create_customizations(p, fits, 'fit')
+
     p.taxons << taxon unless p.taxons.include?(taxon)
+
     option_types.each do |ot|
       p.option_types << ot unless p.option_types.include?(ot)
     end
-    options[:colours].option_values.each do |colour|
+
+    options[:colours].each do |colour|
       next if p.product_color_values.exists?(option_value_id: colour.id)
       p.product_color_values.create(option_value: colour, active: true, custom: false)
     end
@@ -322,5 +298,25 @@ namespace :wedding_atelier do
       end
       v.option_values << size unless v.option_values.include?(size)
     end
+    find_or_create_customisation_values('length', p, @length_attrs)
+    find_or_create_customisation_values('fabric', p, @fabric_attrs)
   end
+
+  def find_or_create_customisation_values(type, product, options)
+    options.each do |value|
+      cv = product.customisation_values.where(customisation_type: type, name: value[:name]).first
+      if cv.nil?
+        attrs = {
+          name: value[:name],
+          customisation_type: type,
+          presentation: value[:presentation],
+          price: 0.0
+        }
+        product.customisation_values.create(attrs)
+      else
+        cv.update_attributes presentation: value[:presentation]
+      end
+    end
+  end
+
 end

@@ -6,7 +6,7 @@
     clear: both;
   }
 
-  [type=radio]:checked ~ label {
+  [type=radio]:checked ~ label, [type=checkbox]:checked ~ label  {
     outline: 2px solid $black;
   }
 
@@ -55,7 +55,7 @@
       margin: 4px 4px;
     };
 
-    [type=radio] {
+    [type=radio], [type=checkbox] {
       position: absolute;
       visibility: hidden;
     }
@@ -85,7 +85,7 @@
 
     @include screen-md {
       label {
-        width: 150px;
+        width: 140px;
       }
     }
 

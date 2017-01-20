@@ -38,6 +38,14 @@ var DressTile = React.createClass({
     return this.props.dressesPath + '/' + this.props.dress.id + '/edit';
   },
 
+  addToCart: function(){
+    if($(window).width() < 768){
+      $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
+    }else{
+      $('#events__moodboard .left-content .js-select-size-modal').show();
+    }
+  },
+
   render: function () {
     var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked',
         addedBy = 'Added by ' + this.props.dress.author;
@@ -67,7 +75,7 @@ var DressTile = React.createClass({
             <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
               Send to the group
             </button>
-            <button className="btn-add-to-cart">
+            <button className="btn-add-to-cart" onClick={this.addToCart}>
               Add to cart
             </button>
           </div>

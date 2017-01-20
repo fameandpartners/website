@@ -15,7 +15,7 @@ var CustomizationsContainerMobile = React.createClass({
     return {
       silhouette: null,
       fabric: null,
-      colour: null,
+      color: null,
       length: null,
       style: null,
       fit: null
@@ -65,14 +65,14 @@ var CustomizationsContainerMobile = React.createClass({
           keyword="Choose"
           title="your perfect shape."
           description="The silhouette is the foundation of your dress."/>
-        <FabricAndColourSelectorMobile
-          colours={this.props.customizations.colours}
+        <FabricAndColorSelectorMobile
+          colors={this.props.customizations.colors}
           fabrics={this.props.customizations.fabrics}
           selectOptionCallback={this.selectOption}
           selectCallback={this.props.selectCallback}
           selectedOptions={this.props.selectedOptions}
           currentCustomization={this.props.currentCustomization}
-          ref="fabric-colour"/>
+          ref="fabric-color"/>
         <CustomizationSelectorMobile
           type="length"
           selectCallback={this.props.selectCallback}
