@@ -23,7 +23,7 @@ var CustomizationsHeader = React.createClass({
         <div className="customization-experience-header-actions">
           <div className="customization-experience-header-dress-name hidden-xs hiden-sm">{designName}</div>
           <div className="customization-experience-header-help hidden-xs"></div>
-          <div className="customization-experience-header-shopping-bag"></div>
+          <ShoppingBag className="shopping-bag"/>
         </div>
       </div>
     );
