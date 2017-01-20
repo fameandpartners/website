@@ -5,7 +5,8 @@ var ZoomModal = React.createClass({
       visible: React.PropTypes.bool.isRequired,
       zoomClosedHandle: React.PropTypes.func.isRequired,
       thumbnailSelectedHandle: React.PropTypes.func.isRequired,
-      imageNotFoundHandle: React.PropTypes.func.isRequired
+      imageNotFoundHandle: React.PropTypes.func.isRequired,
+      isCustomDress: React.PropTypes.bool
   },
 
   getInitialState: function () {
@@ -57,12 +58,17 @@ var ZoomModal = React.createClass({
 
   render: function() {
     var image = this.props.images[this.props.selectedImageIndex];
+    if(this.props.isCustomDress){
+      image = image.large;
+    }else{
+      image = image.real.large;
+    }
 
     return (
       <div ref="zoomModal" className="zoom-modal" style={{display: this.props.visible? 'block':'none'}}>
         <div className="close-zoom" onClick={this.props.zoomClosedHandle}></div>
         <div className="zoom-modal-image" ref="activeZoom">
-          <img src={image.large} style={{visibility: this.state.loading? 'hidden':'visible'}} onError={this.props.imageNotFoundHandle}/>
+          <img src={image} style={{visibility: this.state.loading? 'hidden':'visible'}} onError={this.props.imageNotFoundHandle}/>
           <ImageLoader loading={this.state.loading} />
         </div>
         <div className="zoom-modal-pagination">

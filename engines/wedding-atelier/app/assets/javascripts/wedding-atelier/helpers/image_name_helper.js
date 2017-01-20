@@ -45,7 +45,7 @@ DressImageBuilder.prototype.fit = function(fit){
     },
     moodboard: this.basePath + '280x404/' + fileName + '.jpg',
     normal: this.basePath + '900x1300/' + fileName + '.jpg',
-    large: this.basePath + '1800x2600/' + fileName + '.jpg'
+    large: this.basePath + '1800x2600/' + fileName + '.jpg',
   }
 }
 
@@ -64,6 +64,8 @@ DressImageBuilder.prototype.style = function(style){
 
 DressImageBuilder.prototype.dressCombos = function(){
   var fileName = [this.silhouetteName, this.fabricName, this.colorName, this.styleName, this.fitName, this.lengthName];
+  var realImageFile = [this.silhouetteName, this.fabricName, this.colorName, 'S0', 'F0', 'AK', 'FRONT'];
+  var realImage = realImageFile.join('-').toUpperCase();
   var imageName = fileName.join('-').toUpperCase() + '-';
   return ['FRONT', 'BACK'].map(function (type) {
     return {
@@ -73,7 +75,11 @@ DressImageBuilder.prototype.dressCombos = function(){
       },
       moodboard: this.basePath + '280x404/' + imageName + type + '.jpg',
       normal: this.basePath + '900x1300/' + imageName + type + '.jpg',
-      large: this.basePath + '1800x2600/' + imageName + type + '.jpg'
+      large: this.basePath + '1800x2600/' + imageName + type + '.jpg',
+      real: {
+        small: this.basePath + '350x500/' + realImage + '.jpg',
+        large: this.basePath + '1440x1310/' + realImage + '.jpg'
+      }
     };
   }.bind(this));
 }
