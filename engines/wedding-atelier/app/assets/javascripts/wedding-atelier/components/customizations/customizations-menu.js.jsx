@@ -22,7 +22,7 @@ var CustomizationsMenu = React.createClass({
       className += ' selected';
     }
 
-    if(customizationItem == 'fabric-color' && selectedOptions.fabric && selectedOptions.colour) {
+    if(customizationItem == 'fabric-color' && selectedOptions.fabric && selectedOptions.color) {
       className += ' selected';
     }
 

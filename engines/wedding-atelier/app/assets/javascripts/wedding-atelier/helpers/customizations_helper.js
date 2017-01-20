@@ -14,9 +14,9 @@ PresentationHelper.size = function(userOrSize, height, siteVersion){
   }
 };
 
-PresentationHelper.fabricColour = function(fabric, colour){
-  if(fabric && colour){
-    return fabric.presentation + ' | ' + colour.presentation;
+PresentationHelper.fabricColor = function(fabric, color){
+  if(fabric && color){
+    return fabric.presentation + ' | ' + color.presentation;
   }else{
     return '';
   }
@@ -24,8 +24,8 @@ PresentationHelper.fabricColour = function(fabric, colour){
 
 PresentationHelper.costFor = function(options, customizationItem){
   if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
-  if(customizationItem === 'fabric-color' && options.fabric && options.colour){
-    return options.fabric.price + options.colour.price;
+  if(customizationItem === 'fabric-color' && options.fabric && options.color){
+    return options.fabric.price + options.color.price;
   }else if(options[customizationItem]){
     return options[customizationItem].price;
   }
@@ -52,7 +52,7 @@ PresentationHelper.customization = function(customization){
 PresentationHelper.presentation = function(options, customizationItem, siteVersion){
   var presentation = '';
   if(customizationItem === 'fabric-color'){
-    return PresentationHelper.fabricColour(options.fabric, options.colour);
+    return PresentationHelper.fabricColor(options.fabric, options.color);
   }else if(customizationItem === 'size'){
     return PresentationHelper.size(options.size, options.height, siteVersion);
   }else{

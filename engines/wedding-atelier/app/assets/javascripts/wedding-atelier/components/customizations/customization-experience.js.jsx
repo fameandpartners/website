@@ -18,7 +18,7 @@ var CustomizationExperience = React.createClass({
       customizations: {
         silhouettes: [],
         fabrics: [],
-        colours: [],
+        colors: [],
         lengths: [],
         styles: [],
         fits: [],
@@ -29,13 +29,14 @@ var CustomizationExperience = React.createClass({
       selectedOptions: {
         silhouette: null,
         fabric: null,
-        colour: null,
+        color: null,
         length: null,
         style: null,
         fit: null,
         size: null,
         height: null,
-        heightGroup: null
+        heightGroup: null,
+        customized: false
       }
     };
   },
@@ -55,7 +56,7 @@ var CustomizationExperience = React.createClass({
     newState.customizations = customization;
     newState.selectedOptions.silhouette = dress.product;
     newState.selectedOptions.fabric = dress.fabric;
-    newState.selectedOptions.colour = dress.color;
+    newState.selectedOptions.color = dress.color;
     newState.selectedOptions.length = dress.length;
     newState.selectedOptions.size = dress.size;
     newState.selectedOptions.height = dress.height;
@@ -74,12 +75,12 @@ var CustomizationExperience = React.createClass({
     var newState = $.extend({}, this.state),
         silhouette = customization.silhouettes[0],
         fabric = _.findWhere(silhouette.fabrics, { name: 'HG'}),
-        colour = _.findWhere(customization.colours, { name: 'berry' }),
+        color = _.findWhere(customization.colors, { name: 'berry' }),
         length = _.findWhere(silhouette.lengths, { name: 'AK' });
     newState.customizations = customization;
     newState.selectedOptions.silhouette = silhouette;
     newState.selectedOptions.fabric = fabric;
-    newState.selectedOptions.colour = colour;
+    newState.selectedOptions.color = color;
     newState.selectedOptions.length = length;
     newState.selectedOptions.size = this.props.currentUser.user.user_profile.dress_size;
     newState.selectedOptions.height = this.props.currentUser.user.user_profile.height;
@@ -127,6 +128,9 @@ var CustomizationExperience = React.createClass({
       newState.customizations.fabrics = value.fabrics;
       newState.customizations.lengths = value.lengths;
     }
+
+    //Flag needed to whether add the previously saved dress or customized params
+    newState.selectedOptions.customized = true;
     this.setState(newState);
   },
 
@@ -134,7 +138,7 @@ var CustomizationExperience = React.createClass({
     this.setState({selectedOptions: {
       silhouette: null,
       fabric: null,
-      colour: null,
+      color: null,
       length: null,
       style: null,
       fit: null,
