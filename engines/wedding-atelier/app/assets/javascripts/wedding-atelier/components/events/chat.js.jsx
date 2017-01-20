@@ -76,16 +76,16 @@ var Chat = React.createClass({
   },
 
   handleMember: function(member, joined) {
-    var currentState = this.state;
-    var user = {
+    var _newState = $.extend({}, this.state);
+    var _newUser = {
       id: member.sid,
       identity: member.identity,
+      initials: member.identity.match(/\b\w/g).join("").toUpperCase(),
       online: joined
     };
-    var members = currentState.channelMembers.filter(function(onlineMember) { onlineMember.id == user.id});
-    members.push(user);
 
-    this.setState({channelMembers: members});
+    _newState.channelMembers.push(_newUser);
+    this.setState(_newState);
   },
 
   getChatMembers: function() {
