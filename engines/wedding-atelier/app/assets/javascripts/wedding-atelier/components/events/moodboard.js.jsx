@@ -139,14 +139,13 @@ var MoodBoardEvent = React.createClass({
       var parsedMsg = JSON.parse(message.body);
 
       if (parsedMsg.type === "dress-like") {
-
         var dresses = [...that.state.event.dresses];
 
         var index = dresses.findIndex(function(dress) {
           return dress.id === parsedMsg.dress.id;
         });
 
-        dresses[index] = parsedMsg.dress;
+        dresses[index].likes_count = parsedMsg.dress.likes_count;
         that.setDresses(dresses);
       }
     });
@@ -204,8 +203,9 @@ var MoodBoardEvent = React.createClass({
           dress.likes_count--;
           dress.liked = false;
         }
+
         that.refs.ChatDesktop.sendNotification({
-          type: "dress-like",
+          type: 'dress-like',
           dress: dress
         });
 

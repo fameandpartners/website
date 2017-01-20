@@ -21,7 +21,7 @@ Spree::User.class_eval do
   end
 
   def role_in_event(event)
-    roles.where(resource_id: event.id).first.name
+    roles.where(resource_id: event.id).first.try :name
   end
 
   def wedding_atelier_signup_complete?
