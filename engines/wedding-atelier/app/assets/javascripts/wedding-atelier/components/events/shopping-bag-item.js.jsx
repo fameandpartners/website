@@ -14,7 +14,7 @@ var ShoppingBagItem = React.createClass({
       imageUrl: props.image_small,
       dressName: props.product_name,
       dressCost: props.money,
-      silouette: 'The Slip',
+      silouette: props.product_name,
       size: props.personalization.size.option_value.presentation
     });
   },
