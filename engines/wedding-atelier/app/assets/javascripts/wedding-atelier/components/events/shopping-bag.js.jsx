@@ -16,10 +16,14 @@ var ShoppingBag = React.createClass({
   },
 
   bagOpenHandle: function () {
+    $(this.refs.backdrop).show();
     this.setState({show: true});
   },
 
   bagClosedHandle: function () {
+    $(this.refs.backdrop).one('transitionend', function() {
+      $(this).hide();
+    });
     this.setState({show: false});
   },
 
@@ -37,9 +41,16 @@ var ShoppingBag = React.createClass({
       'animate': this.state.show
     });
 
+    var backdropClasses = classNames({
+      'shopping-bag-backdrop': true,
+      'hidden-xs': true,
+      'animate': this.state.show
+    });
+
     return (
       <div className="shopping-bag-container">
         <div className="commands-shopping-bag" onClick={this.bagOpenHandle}></div>
+        <div className={backdropClasses} ref="backdrop" style={{display: 'none'}}></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">

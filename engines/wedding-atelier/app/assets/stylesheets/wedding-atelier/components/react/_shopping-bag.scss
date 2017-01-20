@@ -4,6 +4,23 @@
   height: 100%;
 }
 
+.shopping-bag-backdrop {
+  background-color: $backdrop;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  opacity: 0;
+  transition: opacity 400ms;
+  transition-timing-function: $cubic-bezier;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+
+  &.animate {
+    opacity: 1;
+  }
+}
+
 .shopping-bag-window {
   @include slide-in-up();
 
