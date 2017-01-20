@@ -324,7 +324,7 @@ var MoodBoardEvent = React.createClass({
                   {this.state.event.dresses.length === 0 ? <div className="add-dress-box">
                     <a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a>
                   </div> : ''}
-                  {this.state.event.dresses > 0 ? <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
+                  {this.state.event.dresses.length > 0 ? <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
                     <em>Design</em> a new dress</a>
                   </div> : ''}
                   <div className="dresses-list center-block">
