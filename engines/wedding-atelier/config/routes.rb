@@ -31,4 +31,6 @@ WeddingAtelier::Engine.routes.draw do
   end
 
   resources :accounts, path: 'my-account', only: [:index, :update, :show]
+
+  resource :orders, only: [:create, :show]
 end
