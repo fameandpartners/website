@@ -160,4 +160,21 @@ describe Spree::Product, :type => :model do
       expect(subject.size_chart).to eq(SizeChart::CHARTS.keys.last)
     end
   end
+
+  describe '#minimum_delivery_period' do
+    it "returns minimal delivery period if product has no taxons" do
+      expect(subject.minimum_delivery_period).to eq('7 - 10')
+    end
+
+    it "returns minimum delivery period from taxons" do
+      subject.taxons << FactoryGirl.create(:taxon, delivery_period: '14 - 28')
+      expect(subject.minimum_delivery_period).to eq('14 - 28')
+
+      subject.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14')
+      expect(subject.minimum_delivery_period).to eq('10 - 14')
+
+      subject.taxons << FactoryGirl.create(:taxon, delivery_period: '14 - 28')
+      expect(subject.minimum_delivery_period).to eq('10 - 14')
+    end
+  end
 end

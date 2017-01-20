@@ -72,7 +72,7 @@ describe 'show order', type: :feature do
       end
 
       within('.standard-making-items') do
-        expect(page).to have_content('Free shipping to USA, Canada and the UK within 7 – 10 days')
+        expect(page).to have_content('Free shipping to USA, Canada and the UK')
         expect(page).to have_content(product_name(order.line_items.first))
       end
     end
