@@ -9,6 +9,21 @@
 
     .moodboard-title { display: none; }
 
+    .right-content {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .right-container {
+      height: 100%;
+      width: auto;
+    }
+
+    .tab-content {
+      overflow: auto;
+      height: calc(100% - 43px);
+    }
 
     /* this is just the container when on the tab */
     #chat-mobile {
@@ -23,21 +38,21 @@
       width: 100% !important;
     }
 
-    .right-content {
+    .dresses-actions {
+      position: fixed;
+      bottom: 0;
       width: 100%;
-      padding-right: 0;
-      padding-left: 0;
     }
 
-    .right-container {
-      width: auto;
+    .btn-create-a-dress {
+      width: 100%;
+      background: transparent image-url('wedding-atelier/marbel.png');
+      border: 0;
+      margin: 0;
+      height: 67px;
+      font-size: 1.8em;
+      line-height: 55px;
     }
-
-    .tab-content {
-      overflow: auto;
-      height: calc(100% - 43px);
-    }
-
   }
 
   @include screen-md {
