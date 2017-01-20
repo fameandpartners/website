@@ -49,7 +49,7 @@ module WeddingAtelier
   end
 
   def liked_by?(user)
-    likes.find_by_user_id(user.id).present?
+    likes.exists?(user_id: user&.id)
   end
 
   def like_by(user)

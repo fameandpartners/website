@@ -17,6 +17,14 @@ describe WeddingAtelier::EventDress do
         expect(dress.liked_by?(user)).to be_falsey
       end
     end
+
+    context 'given a nil user' do
+      let(:user) { nil }
+
+      it do
+        expect(dress.liked_by?(user)).to be_falsey
+      end
+    end
   end
 
   describe 'like_by' do
