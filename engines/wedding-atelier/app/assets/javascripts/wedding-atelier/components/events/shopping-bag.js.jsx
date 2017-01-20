@@ -1,6 +1,7 @@
 var ShoppingBag = React.createClass({
   propTypes: {
-    checkoutUrl: React.PropTypes.string
+    checkoutUrl: React.PropTypes.string,
+    cartItems: React.PropTypes.array
   },
 
   getInitialState: function () {
@@ -9,12 +10,25 @@ var ShoppingBag = React.createClass({
     };
   },
 
+  componentWillMount: function () {
+    var shoppingCart = new helpers.ShoppingCart({});
+    var cart = shoppingCart.load();
+  },
+
   bagOpenHandle: function () {
     this.setState({show: true});
   },
 
   bagClosedHandle: function () {
     this.setState({show: false});
+  },
+
+  renderCartItems: function () {
+    //TODO: Replace hard-coded array for cartItems prop
+
+    return (this.props.cartItems || [1,2]).map(function (item, index) {
+      return <ShoppingBagItem key={index} item={item} />
+    });
   },
 
   render: function () {
@@ -42,8 +56,9 @@ var ShoppingBag = React.createClass({
             <p className="shopping-bag-content-statement">
               <span className="free-shipping">Free shipping</span> to the US, Canada, and the UK within 3-4 weeks. Easy exchanges within 30 days.
             </p>
-            <div className="shopping-bag-content-list"></div>
-
+            <ul className="shopping-bag-content-list">
+              {this.renderCartItems()}
+            </ul>
           </div>
           <div className="shopping-bag-totals">
             <div className="shopping-bag-totals-labels">
