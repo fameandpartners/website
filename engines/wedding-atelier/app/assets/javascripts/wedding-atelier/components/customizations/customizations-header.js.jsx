@@ -8,7 +8,7 @@ var CustomizationsHeader = React.createClass({
   render: function() {
     var designName = '';
     if(this.props.silhouette) {
-      designName = 'You are designing the ' + this.props.silhouette.name + '.';
+      designName = 'You are designing The ' + this.props.silhouette.name + '.';
     }
 
     return(
@@ -23,7 +23,7 @@ var CustomizationsHeader = React.createClass({
         <div className="customization-experience-header-actions">
           <div className="customization-experience-header-dress-name hidden-xs hiden-sm">{designName}</div>
           <div className="customization-experience-header-help hidden-xs"></div>
-          <div className="customization-experience-header-shopping-bag"></div>
+          <ShoppingBag className="shopping-bag"/>
         </div>
       </div>
     );

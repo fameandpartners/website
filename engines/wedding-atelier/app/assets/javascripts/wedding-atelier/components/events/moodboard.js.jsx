@@ -139,14 +139,13 @@ var MoodBoardEvent = React.createClass({
       var parsedMsg = JSON.parse(message.body);
 
       if (parsedMsg.type === "dress-like") {
-
         var dresses = [...that.state.event.dresses];
 
         var index = dresses.findIndex(function(dress) {
           return dress.id === parsedMsg.dress.id;
         });
 
-        dresses[index] = parsedMsg.dress;
+        dresses[index].likes_count = parsedMsg.dress.likes_count;
         that.setDresses(dresses);
       }
     });
@@ -204,8 +203,9 @@ var MoodBoardEvent = React.createClass({
           dress.likes_count--;
           dress.liked = false;
         }
+
         that.refs.ChatDesktop.sendNotification({
-          type: "dress-like",
+          type: 'dress-like',
           dress: dress
         });
 
@@ -295,7 +295,7 @@ var MoodBoardEvent = React.createClass({
       handleLikeDress: this.handleLikeDress,
       twilioManager: this.state.twilioManager,
       twilioClient: this.state.twilioClient
-    }
+    };
 
     var selectSizeProps = {
       current_user_id: this.props.current_user_id,
@@ -303,7 +303,10 @@ var MoodBoardEvent = React.createClass({
       sizes: this.state.sizes,
       heights: this.state.heights,
       siteVersion: this.props.siteVersion
-    }
+    };
+
+    var addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
+    var addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
 
     return (
       <div id="events__moodboard" className="row">
@@ -316,7 +319,7 @@ var MoodBoardEvent = React.createClass({
         </div>
         <div className="right-content col-sm-6">
           <SelectSizeModal {...selectSizeProps} position="right" />
-          <div className='right-container'>
+          <div className='right-container center-block'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
@@ -351,12 +354,8 @@ var MoodBoardEvent = React.createClass({
                   <Chat ref="ChatMobileComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  {this.state.event.dresses.length === 0 ? <div className="add-dress-box">
-                    <a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a>
-                  </div> : ''}
-                  {this.state.event.dresses > 0 ? <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
-                    <em>Design</em> a new dress</a>
-                  </div> : ''}
+                  {this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
+                  {this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}

@@ -51,9 +51,9 @@ var CustomizationExperience = React.createClass({
     }.bind(this));
   },
 
-  prepareEditDress: function(customization, dress){
+  prepareEditDress: function(customizations, dress){
     var newState = $.extend({}, this.state);
-    newState.customizations = customization;
+    newState.customizations = customizations;
     newState.selectedOptions.silhouette = dress.product;
     newState.selectedOptions.fabric = dress.fabric;
     newState.selectedOptions.color = dress.color;
@@ -71,13 +71,13 @@ var CustomizationExperience = React.createClass({
     this.setState(newState);
   },
 
-  prepareNewDress: function(customization){
+  prepareNewDress: function(customizations){
     var newState = $.extend({}, this.state),
-        silhouette = customization.silhouettes[0],
+        silhouette = customizations.silhouettes[0],
         fabric = _.findWhere(silhouette.fabrics, { name: 'HG'}),
         color = _.findWhere(customization.colors, { name: 'champagne' }),
         length = _.findWhere(silhouette.lengths, { name: 'AK' });
-    newState.customizations = customization;
+    newState.customizations = customizations;
     newState.selectedOptions.silhouette = silhouette;
     newState.selectedOptions.fabric = fabric;
     newState.selectedOptions.color = color;
@@ -137,17 +137,11 @@ var CustomizationExperience = React.createClass({
   },
 
   startOverCallback: function () {
-    this.setState({selectedOptions: {
-      silhouette: null,
-      fabric: null,
-      color: null,
-      length: null,
-      style: null,
-      fit: null,
-      size: null,
-      height: '',
-      heightGroup: ''
-    }});
+    if(this.props.edit){
+      this.prepareEditDress(this.state.customizations, this.props.initialDress.event_dress)
+    }else{
+      this.prepareNewDress(this.state.customizations);
+    }
   },
 
   editDesignCallback: function () {

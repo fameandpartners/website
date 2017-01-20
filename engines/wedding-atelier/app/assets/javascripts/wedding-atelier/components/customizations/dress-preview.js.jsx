@@ -61,6 +61,13 @@ var DressPreview = React.createClass({
     return true;
   },
 
+  dressDescription: function(){
+    var silhouette = this.props.selectedOptions.silhouette;
+    if(silhouette){
+      return silhouette.description.split("\\n").map(function(text){return(<p>{text}</p>)})
+    }
+  },
+
   renderThumbnails: function (images) {
     var that = this;
     var thumbnails = images.map(function (image, index) {
@@ -97,7 +104,8 @@ var DressPreview = React.createClass({
   },
 
   render: function() {
-    var images = new DressImageBuilder(this.props.selectedOptions).dressCombos();
+    var images = new DressImageBuilder(this.props.selectedOptions).dressCombos(),
+        silhouette = this.props.selectedOptions.silhouette;
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
@@ -122,8 +130,9 @@ var DressPreview = React.createClass({
                 className="dress-preview-details-close" onClick={this.detailsClosedHandle}>
               </div>
               <div className="dress-preview-details-container">
-                <p className="dress-preview-details-text-long">"The hand-draped, corseted bodice prefectly hugs curtves, acres of silk chiffon make a divinely floaty skirt"</p>
-                <p className="dress-preview-details-text-short">For the girl with the free spirit</p>
+                <p className="dress-preview-details-title">{silhouette ? 'The ' + silhouette.name : ''}</p>
+                <div className="dress-preview-details-text-long">{this.dressDescription()}</div>
+                <p className="dress-preview-details-disclaimer">Please note: These images act as a guide, and there may be slight variations in your final product.</p>
               </div>
             </div>
           </div>
