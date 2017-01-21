@@ -5,28 +5,29 @@ var ShoppingBagItem = React.createClass({
   },
 
   prepareSummary: function () {
-    var props = $.extend({}, this.props.item);
-    var customizations = {};
-    props.personalization.customization_values.forEach(function (customization) {
-      customizations[customization.type] = customization.presentation + (customization.price > 0 ? '- $' + customization.price : '');
-    });
-    return $.extend(customizations, {
-      imageUrl: props.image_small,
-      dressName: props.product_name,
-      dressCost: props.money,
-      silouette: props.product_name,
-      size: props.personalization.size.option_value.presentation
+    var item = $.extend({}, this.props.item);
+    var images = new DressImageBuilder(item.personalization).dressCombos();
+    var personalization = $.extend({}, this.props.item.personalization);
+    personalization.silhouette = {presentation: item.product_name, price: 0};
+    return $.extend(item, {
+      personalization: personalization,
+      imageUrl: images[0].thumbnail.grey
     });
   },
 
   renderListOfCustomizations: function (item) {
-    return ['silhouette', 'fabric', 'color', 'length', 'style', 'size'].map(function (customization, index) {
-      var label = customization.slice(0,1).toUpperCase() + customization.slice(1) + ': ';
-      var key = item.id + '-' + customization;
+    return ['silhouette', 'fabric', 'color', 'length', 'style', 'size'].map(function (propertyName, index) {
+      var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
+      var key = item.id + '-' + index;
+      var personalization = item.personalization[propertyName];
+      var presentationLabel = '';
+      if(personalization) {
+        presentationLabel = item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
+      }
       return (
         <li key={key} className="shopping-bag-item-summary-list-item">
           <span className="customization-name">{label}</span>
-          <span className="customization-value">{item[customization]}</span>
+          <span className="customization-value">{presentationLabel}</span>
         </li>
       );
     });
@@ -41,8 +42,8 @@ var ShoppingBagItem = React.createClass({
         <div className="shopping-bag-item-summary">
           <div className="shopping-bag-item-summary-header">
             <div className="shopping-bag-item-summary-header-delete" onClick={this.props.itemRemovedHandler.bind(null, this.props.item.id)}></div>
-            <p className="dress-name">{item.dressName}</p>
-            <p className="dress-cost">{item.dressCost}</p>
+            <p className="dress-name">{item.product_name}</p>
+            <p className="dress-cost">{item.money}</p>
           </div>
           <ul className="shopping-bag-item-summary-list">
             {this.renderListOfCustomizations(item)}
