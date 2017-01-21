@@ -130,7 +130,8 @@ class Populator
     end
 
     def line_item
-      @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).first
+      # Sorted by created at to ensure it is the last created line item
+      @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).order('created_at desc').first
     end
 
     def product_options
