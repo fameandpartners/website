@@ -160,7 +160,7 @@ var MoodBoardEvent = React.createClass({
   removeDress: function(dress){
     var that = this,
         dressId = dress.id,
-        url = this.props.dresses_path + '/' + dressId,
+        url = this.props.dresses_path + '/' + dressId;
     $.ajax({
       url: url ,
       type: 'DELETE',
