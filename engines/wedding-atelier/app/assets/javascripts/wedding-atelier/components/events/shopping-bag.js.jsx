@@ -6,7 +6,9 @@ var ShoppingBag = React.createClass({
 
   getInitialState: function () {
     return {
-      userCart: {},
+      userCart: {
+        line_items: []
+      },
       show: false
     };
   },
@@ -71,7 +73,7 @@ var ShoppingBag = React.createClass({
   },
 
   renderCartItems: function () {
-    return (this.state.userCart.line_items || []).map(function (item, index) {
+    return this.state.userCart.line_items.map(function (item, index) {
       var bagItemKey = 'shopping-bag-item-' + index;
       return (
         <ShoppingBagItem
@@ -94,6 +96,11 @@ var ShoppingBag = React.createClass({
       'hidden-xs': true
     });
 
+    var itemListRender = <p className="shopping-bag-content-empty">Your shopping cart is empty.</p>
+    if (this.state.userCart.line_items.length > 0) {
+      itemListRender =  <ul className="shopping-bag-content-list">{this.renderCartItems()}</ul>;
+    }
+
     return (
       <div className="shopping-bag-container">
         <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
@@ -114,9 +121,7 @@ var ShoppingBag = React.createClass({
             <p className="shopping-bag-content-statement">
               <span className="free-shipping">Free shipping</span> to the US, Canada, and the UK within 3-4 weeks. Easy exchanges within 30 days.
             </p>
-            <ul className="shopping-bag-content-list">
-              {this.renderCartItems()}
-            </ul>
+            {itemListRender}
           </div>
           <div className="shopping-bag-totals">
             <div className="shopping-bag-totals-labels">
