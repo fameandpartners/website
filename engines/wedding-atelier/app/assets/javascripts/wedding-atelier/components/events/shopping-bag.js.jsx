@@ -1,6 +1,5 @@
 var ShoppingBag = React.createClass({
   propTypes: {
-    checkoutUrl: React.PropTypes.string,
     cartItems: React.PropTypes.array
   },
 
@@ -114,7 +113,7 @@ var ShoppingBag = React.createClass({
               <em>Your</em> cart
             </div>
             <div className="shopping-bag-header-checkout-link">
-              <a href={this.props.checkoutUrl || '#'}>check out</a>
+              <a href="/checkout">check out</a>
             </div>
           </div>
           <div className="shopping-bag-content">
@@ -133,9 +132,9 @@ var ShoppingBag = React.createClass({
               <p>{this.state.userCart.display_total}</p>
             </div>
           </div>
-          <button className="shopping-bag-continue-payment btn-black">
+          <a href="/checkout" className="shopping-bag-continue-payment btn-black">
             continue to payment
-          </button>
+          </a>
         </div>
       </div>
     );
