@@ -61,14 +61,25 @@ var ShoppingBag = React.createClass({
     this.setState({show: false});
   },
 
-  itemRemovedHandler: function (id) {
-    // TODO: Remove from DB and refresh UI
+  itemRemovedSuccessHandler: function (data, item) {
+    this.fetchUserCart();
+  },
+
+  itemRemovedErrorHandler: function (response) {
+    ReactDOM.render(<Notification errors={['Oops! There was an error trying to remove the item from the shopping cart.']} />,
+        document.getElementById('notification'));
   },
 
   renderCartItems: function () {
     return (this.state.userCart.line_items || []).map(function (item, index) {
       var bagItemKey = 'shopping-bag-item-' + index;
-      return <ShoppingBagItem key={bagItemKey} item={item.line_item} itemRemovedHandler={this.itemRemovedHandler}/>
+      return (
+        <ShoppingBagItem
+          key={bagItemKey}
+          item={item.line_item}
+          itemRemovedSuccessHandler={this.itemRemovedSuccessHandler}
+          itemRemovedErrorHandler={this.itemRemovedErrorHandler}/>
+      );
     }.bind(this));
   },
 

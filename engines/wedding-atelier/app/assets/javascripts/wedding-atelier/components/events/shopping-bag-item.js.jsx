@@ -1,7 +1,23 @@
 var ShoppingBagItem = React.createClass({
   propTypes: {
     item: React.PropTypes.object.isRequired,
-    itemRemovedHandler: React.PropTypes.func.isRequired
+    itemRemovedSuccessHandler: React.PropTypes.func,
+    itemRemovedErrorHandler: React.PropTypes.func
+  },
+
+  removeItemHandler: function () {
+    var that = this;
+    $.ajax({
+      url: '/user_cart/products/' + this.props.item.id,
+      type: 'DELETE',
+      dataType: 'json'
+    })
+    .success(function (data) {
+      if(that.props.itemRemovedSuccessHandler) { that.props.itemRemovedSuccessHandler(data, this.item); }
+    })
+    .error(function (response) {
+      if(that.props.itemRemovedErrorHandler) { that.props.itemRemovedErrorHandler(response); }
+    });
   },
 
   prepareSummary: function () {
@@ -41,7 +57,7 @@ var ShoppingBagItem = React.createClass({
         <img className="shopping-bag-item-image" src={item.imageUrl} />
         <div className="shopping-bag-item-summary">
           <div className="shopping-bag-item-summary-header">
-            <div className="shopping-bag-item-summary-header-delete" onClick={this.props.itemRemovedHandler.bind(null, this.props.item.id)}></div>
+            <div className="shopping-bag-item-summary-header-delete" onClick={this.removeItemHandler}></div>
             <p className="dress-name">{item.product_name}</p>
             <p className="dress-cost">{item.money}</p>
           </div>
