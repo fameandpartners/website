@@ -3,12 +3,20 @@
   position: relative;
 
   .preview {
-    height: 90%;
+    height: 100%;
     margin: 0 auto;
     max-width: 100%;
+    position: relative;
+    overflow: hidden;
 
     img {
       cursor: zoom-in;
+      @include screen-sm {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      };
     }
   }
 
@@ -19,8 +27,8 @@
 
   .dress-preview-controls {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 45px;
+    top: 45px;
     width: 45px;
   }
 
@@ -102,6 +110,7 @@
     list-style: none;
     max-width: 45px;
     padding-left: 0;
+    margin-right: 45px;
   }
 
   .dress-preview-thumbnails-item {
@@ -121,7 +130,7 @@
   }
 
   @include screen-sm {
-    height: calc(100% - 20px);
+    height: 100%;
   }
 
 }

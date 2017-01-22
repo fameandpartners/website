@@ -15,17 +15,33 @@
     position: absolute;
     top: 25px;
     width: 50px;
+    z-index: 1;
   }
 
   .zoom-modal-image {
     max-height: 100vh;
     overflow-y: auto;
 
+    @include screen-sm {
+      position: relative;
+      overflow-x: hidden;
+      height: 100vh;
+    };
+
     img {
       display: block;
       margin: 0 auto;
       width: 100%;
-      padding: 10px;
+
+      @include screen-sm {
+        min-width: 100%;
+        width: auto;
+        position: absolute;
+        left: 50%;
+        height: auto;
+        z-index: 0;
+        transform: translateX(-50%);
+      }
     }
   }
 
@@ -54,12 +70,6 @@
     img {
       height: 65px;
       width: 45px;
-    }
-  }
-
-  @include screen-sm {
-    .zoom-modal-image {
-      max-height: 100%;
     }
   }
 }
