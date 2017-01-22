@@ -21,27 +21,20 @@
   .zoom-modal-image {
     max-height: 100vh;
     overflow-y: auto;
-
-    @include screen-sm {
-      position: relative;
-      overflow-x: hidden;
-      height: 100vh;
-    };
+    position: relative;
+    overflow-x: hidden;
+    height: 100vh;
 
     img {
       display: block;
       margin: 0 auto;
-      width: 100%;
-
-      @include screen-sm {
-        min-width: 100%;
-        width: auto;
-        position: absolute;
-        left: 50%;
-        height: auto;
-        z-index: 0;
-        transform: translateX(-50%);
-      }
+      min-width: 100%;
+      width: auto;
+      position: absolute;
+      left: 50%;
+      height: auto;
+      z-index: 0;
+      transform: translateX(-50%);
     }
   }
 
@@ -49,12 +42,21 @@
     bottom: 40px;
     position: absolute;
     right: 30px;
+    @include screen-xs {
+      width: 100%;
+      right: 0;
+      bottom: 20px;
+    }
   }
 
   .zoom-modal-thumbnails {
     list-style: none;
     max-width: 45px;
     padding-left: 0;
+    @include screen-xs {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   .zoom-modal-thumbnails-item {
@@ -63,6 +65,10 @@
     margin-bottom: 25px;
     padding-left: 0;
 
+    @include screen-xs {
+      margin: 0 8px;
+    };
+
     &.selected {
       outline: 1px solid $black;
     }
@@ -70,6 +76,10 @@
     img {
       height: 65px;
       width: 45px;
+      @include screen-xs {
+        height: 55px;
+        width: 35px;
+      }
     }
   }
 }

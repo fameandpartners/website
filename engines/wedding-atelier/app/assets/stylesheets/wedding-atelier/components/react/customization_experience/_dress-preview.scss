@@ -11,12 +11,13 @@
 
     img {
       cursor: zoom-in;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       @include screen-sm {
-        position: absolute;
         top: 50%;
-        left: 50%;
         transform: translateX(-50%) translateY(-50%);
-      };
+      }
     }
   }
 
@@ -30,6 +31,10 @@
     right: 45px;
     top: 45px;
     width: 45px;
+    @include screen-xs {
+      right: 20px;
+      top: 20px;
+    };
   }
 
   .dress-preview-details {
@@ -104,6 +109,9 @@
     bottom: 0;
     position: absolute;
     right: 0;
+    @include screen-xs {
+      width: 100%;
+    }
   }
 
   .dress-preview-thumbnails {
@@ -111,22 +119,35 @@
     max-width: 45px;
     padding-left: 0;
     margin-right: 45px;
+    @include screen-xs {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   .dress-preview-thumbnails-item {
     cursor: pointer;
     display: inline-block;
     margin-bottom: 5px;
-    padding-left: 7px;
 
     &.selected {
       outline: 1px solid $black;
     }
 
+    @include screen-xs {
+      margin: 0 2px;
+    };
+
     img {
       height: 65px;
       width: 45px;
+      @include screen-xs {
+        height: 55px;
+        width: 35px;
+      };
     }
+
+
   }
 
   @include screen-sm {
