@@ -161,7 +161,8 @@ var MoodBoardEvent = React.createClass({
 
   removeDress: function(dress){
     var that = this,
-        url = this.props.dresses_path + '/' + dress.id
+        dressId = dress.id,
+        url = this.props.dresses_path + '/' + dressId;
     $.ajax({
       url: url ,
       type: 'DELETE',
@@ -169,7 +170,7 @@ var MoodBoardEvent = React.createClass({
       success: function(data) {
         var _newState = $.extend({}, that.state);
         _newState.event.dresses = _.reject(_newState.event.dresses, function(eventDress){
-          return eventDress.id === data.event_dress.id;
+          return eventDress.id === dressId;
         })
         that.setState(_newState);
       }.bind(this),
