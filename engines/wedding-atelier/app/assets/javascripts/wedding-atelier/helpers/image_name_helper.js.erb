@@ -17,32 +17,32 @@ DressImageBuilder.prototype.buildImagesStyles = function(fileName){
     },
     moodboard: this.basePath + '280x404/' + fileName + '.jpg',
     normal: this.basePath + '900x1300/' + fileName + '.jpg',
-    large: this.basePath + '1800x2600/' + fileName + '.jpg',
+    large: this.basePath + '1800x2600/' + fileName + '.jpg'
   }
 }
 
 DressImageBuilder.prototype.silhouette = function(silhouette, pov){
-  var fileName = [silhouette.sku, this.fabricName, this.colorName, 'S0', 'F0', this.lengthName, 'FRONT'].join('-').toUpperCase()
+  var fileName = [silhouette.sku, 'HG', this.colorName, 'S0', 'F0', this.lengthName, 'FRONT'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
 DressImageBuilder.prototype.length = function(length, pov){
-  var fileName = [this.silhouetteName, this.fabricName, this.colorName, 'S0', 'F0', length.name, 'FRONT'].join('-').toUpperCase()
+  var fileName = [this.silhouetteName, 'HG', this.colorName, 'S0', 'F0', length.name, 'FRONT'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
 DressImageBuilder.prototype.fit = function(fit, pov){
-  var fileName = [this.silhouetteName, this.fabricName, this.colorName, 'S0', fit.name, this.lengthName, 'front'].join('-').toUpperCase()
+  var fileName = [this.silhouetteName, 'HG', this.colorName, 'S0', fit.name, this.lengthName, 'front'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
 DressImageBuilder.prototype.style = function(style, pov){
-  var fileName = [this.silhouetteName, this.fabricName, this.colorName, style.name, 'F0', this.lengthName, 'FRONT'].join('-').toUpperCase()
+  var fileName = [this.silhouetteName, 'HG', this.colorName, style.name, 'F0', this.lengthName, 'FRONT'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
 DressImageBuilder.prototype.dressCombos = function(){
-  var renderImageKeys = [this.silhouetteName, this.fabricName, this.colorName, this.styleName, this.fitName, this.lengthName];
+  var renderImageKeys = [this.silhouetteName, 'HG', this.colorName, this.styleName, this.fitName, this.lengthName];
   var realImageKeys = [this.silhouetteName, this.fabricName, this.colorName, 'S0', 'F0', 'AK'];
   var realImageName = realImageKeys.join('-').toUpperCase() + '-';
   var renderImageName = renderImageKeys.join('-').toUpperCase() + '-';

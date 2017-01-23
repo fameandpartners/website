@@ -44,12 +44,17 @@ var CustomizationItem = React.createClass({
           'customizations-selector-mobile-options-item': this.props.mobile,
           active: active,
           clicked: clicked
-        });
+        }),
+        removeButton;
+
+    if(['silhouette', 'length'].indexOf(this.props.type) == -1){
+      removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
+    }
 
     return(
       <div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
-          <RemoveButton clickCallback={this.removeCustomization} active={active}/>
+          {removeButton}
           <img src={this.imagePath()} />
           <p>{this.props.option.presentation}</p>
         </div>
