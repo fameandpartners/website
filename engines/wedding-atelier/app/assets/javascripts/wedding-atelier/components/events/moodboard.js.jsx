@@ -334,11 +334,11 @@ var MoodBoardEvent = React.createClass({
         <div className="mobile-select-size-modal">
           <SelectSizeModal {...selectSizeProps} ref="mobileSizeModal" position="center" />
         </div>
-        <div className="left-content col-sm-6 hidden-xs">
+        <div className="left-content col-sm-5 hidden-xs">
           <SelectSizeModal {...selectSizeProps} position="left" />
           <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
-        <div className="right-content col-sm-6">
+        <div className="right-content col-sm-7">
           <SelectSizeModal {...selectSizeProps} position="right" />
           <div className='right-container center-block'>
             <h1 className="moodboard-title text-center">
