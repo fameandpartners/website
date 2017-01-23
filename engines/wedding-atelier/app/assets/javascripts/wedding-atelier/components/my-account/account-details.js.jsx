@@ -6,12 +6,11 @@ var AccountDetails = React.createClass({
 
   getInitialState: function () {
     var user = $.extend({}, this.props.user.user);
-
     return {
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
-      dateOfBirth: user.dob,
+      dateOfBirth: moment(user.dob).format('DD/MM/YYYY'),
       currentPassword: '',
       newPassword: '',
       confirmPassword: '',
@@ -36,7 +35,7 @@ var AccountDetails = React.createClass({
   },
 
   dobChangedHandle: function (e) {
-    this.setState({dateOfBirth: e.date.toString()});
+    this.setState({dateOfBirth: moment(e.date).format('DD/MM/YYYY')});
   },
 
   fieldChangedUpdate: function (field, e) {
