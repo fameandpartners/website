@@ -1,6 +1,6 @@
 function DressImageBuilder(customizations){
   var lengthMap = { ankle: 'AK', petti: 'PT', midi: 'MD', mini: 'MN', maxi: 'MX', knee: 'KN'};
-  this.basePath = 'https://d1msb7dh8kb0o9.cloudfront.net/wedding-atelier/dresses/';
+  this.basePath = '<%= "#{ENV['RAILS_ASSET_HOST']}/wedding-atelier/dresses/" %>';
   this.silhouetteName = customizations.silhouette ? customizations.silhouette.sku : 'FP2212';
   this.colorName = customizations.color ? customizations.color.name : 'CHAMPAGNE';
   this.fabricName = customizations.fabric ? customizations.fabric.name : 'HG';
