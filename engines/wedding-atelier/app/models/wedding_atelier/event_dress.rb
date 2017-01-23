@@ -30,26 +30,26 @@ module WeddingAtelier
 
     validates_presence_of :product, :fabric, :color, :length, :size, :height
 
-  def images
-    base_path = 'https://d1msb7dh8kb0o9.cloudfront.net/wedding-atelier/dresses';
-    style_name = style.try(:name) || 'S0'
-    fit_name = fit.try(:name) || 'F0'
-    fabric_name = fabric.try(:name) || 'HG'
-    color_name = color.try(:name) || 'Champagne'
-    length_name = length.try(:name) || 'AK'
-    file_name = [product.sku, 'HG', color_name, style_name, fit_name, length_name].join('-').upcase
-    %w(FRONT BACK).map do |pov|
-      {
-        thumbnail: {
-          white: "#{base_path}/180x260/white/#{file_name}-#{pov}.jpg",
-          grey: "#{base_path}/180x260/grey/#{file_name}-#{pov}.jpg",
-        },
-        moodboard: "#{base_path}/280x404/#{file_name}-#{pov}.jpg",
-        normal: "#{base_path}/900x1300/#{file_name}-#{pov}.jpg",
-        large: "#{base_path}/1800x2600/#{file_name}-#{pov}.jpg"
-      }
+    def images
+      base_path = 'https://d1msb7dh8kb0o9.cloudfront.net/wedding-atelier/dresses';
+      style_name = style.try(:name) || 'S0'
+      fit_name = fit.try(:name) || 'F0'
+      fabric_name = fabric.try(:name) || 'HG'
+      color_name = color.try(:name) || 'Champagne'
+      length_name = length.try(:name) || 'AK'
+      file_name = [product.sku, 'HG', color_name, style_name, fit_name, length_name].join('-').upcase
+      %w(FRONT BACK).map do |pov|
+        {
+          thumbnail: {
+            white: "#{base_path}/180x260/white/#{file_name}-#{pov}.jpg",
+            grey: "#{base_path}/180x260/grey/#{file_name}-#{pov}.jpg",
+          },
+          moodboard: "#{base_path}/280x404/#{file_name}-#{pov}.jpg",
+          normal: "#{base_path}/900x1300/#{file_name}-#{pov}.jpg",
+          large: "#{base_path}/1800x2600/#{file_name}-#{pov}.jpg"
+        }
+      end
     end
-  end
 
     def liked_by?(user)
       likes.find_by_user_id(user.id).present?

@@ -1,18 +1,15 @@
 var ShoppingBag = React.createClass({
   propTypes: {
-    checkoutUrl: React.PropTypes.string,
     cartItems: React.PropTypes.array
   },
 
   getInitialState: function () {
     return {
+      userCart: {
+        line_items: []
+      },
       show: false
     };
-  },
-
-  componentWillMount: function () {
-    var shoppingCart = new helpers.ShoppingCart({});
-    var cart = shoppingCart.load();
   },
 
   componentWillUpdate: function (nextProps, nextState) {
@@ -35,23 +32,56 @@ var ShoppingBag = React.createClass({
     }
   },
 
-  bagOpenHandle: function () {
-    this.setState({show: true});
+  fetchUserCart: function () {
+    var that = this;
+    $.ajax({
+      url: '/wedding-atelier/orders',
+      type: 'get',
+      dataType: "json",
+      success: function (data) {
+        that.setState({
+          userCart: data.order,
+          show: true
+        });
+      },
+      error: function (response) {
+        ReactDOM.render(<Notification errors={['Oops! There was an error trying to load your shopping cart.']} />,
+            document.getElementById('notification'));
+      }
+    });
   },
 
-  bagClosedHandle: function () {
+  bagOpenHandler: function () {
+    this.fetchUserCart();
+  },
+
+  bagClosedHandler: function () {
     $(this.refs.backdrop).one('transitionend', function() {
       $(this).hide();
     });
     this.setState({show: false});
   },
 
-  renderCartItems: function () {
-    //TODO: Replace hard-coded array for cartItems prop
+  itemRemovedSuccessHandler: function (data, item) {
+    this.fetchUserCart();
+  },
 
-    return (this.props.cartItems || [1,2]).map(function (item, index) {
-      return <ShoppingBagItem key={index} item={item} />
-    });
+  itemRemovedErrorHandler: function (response) {
+    ReactDOM.render(<Notification errors={['Oops! There was an error trying to remove the item from the shopping cart.']} />,
+        document.getElementById('notification'));
+  },
+
+  renderCartItems: function () {
+    return this.state.userCart.line_items.map(function (item, index) {
+      var bagItemKey = 'shopping-bag-item-' + index;
+      return (
+        <ShoppingBagItem
+          key={bagItemKey}
+          item={item.line_item}
+          itemRemovedSuccessHandler={this.itemRemovedSuccessHandler}
+          itemRemovedErrorHandler={this.itemRemovedErrorHandler}/>
+      );
+    }.bind(this));
   },
 
   render: function () {
@@ -65,29 +95,32 @@ var ShoppingBag = React.createClass({
       'hidden-xs': true
     });
 
+    var itemListRender = <p className="shopping-bag-content-empty">Your shopping cart is empty.</p>
+    if (this.state.userCart.line_items.length > 0) {
+      itemListRender =  <ul className="shopping-bag-content-list">{this.renderCartItems()}</ul>;
+    }
+
     return (
       <div className="shopping-bag-container">
-        <div className="commands-shopping-bag" onClick={this.bagOpenHandle}></div>
+        <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
         <div className={backdropClasses} ref="backdrop"></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">
-              <img src="/assets/wedding-atelier/close.svg" onClick={this.bagClosedHandle}></img>
+              <img src="/assets/wedding-atelier/close.svg" onClick={this.bagClosedHandler}></img>
             </div>
             <div className="shopping-bag-header-title">
               <em>Your</em> cart
             </div>
             <div className="shopping-bag-header-checkout-link">
-              <a href={this.props.checkoutUrl || '#'}>check out</a>
+              <a href="/checkout" target="_blank">check out</a>
             </div>
           </div>
           <div className="shopping-bag-content">
             <p className="shopping-bag-content-statement">
               <span className="free-shipping">Free shipping</span> to the US, Canada, and the UK within 3-4 weeks. Easy exchanges within 30 days.
             </p>
-            <ul className="shopping-bag-content-list">
-              {this.renderCartItems()}
-            </ul>
+            {itemListRender}
           </div>
           <div className="shopping-bag-totals">
             <div className="shopping-bag-totals-labels">
@@ -95,13 +128,13 @@ var ShoppingBag = React.createClass({
               <p>order total</p>
             </div>
             <div className="shopping-bag-totals-amounts">
-              <p>Free shipping</p>
-              <p>$598</p>
+              <p>{this.state.userCart.display_shipment_total}</p>
+              <p>{this.state.userCart.display_total}</p>
             </div>
           </div>
-          <button className="shopping-bag-continue-payment btn-black">
+          <a href="/checkout" target="_blank" className="shopping-bag-continue-payment btn-black">
             continue to payment
-          </button>
+          </a>
         </div>
       </div>
     );
