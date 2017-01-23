@@ -22,6 +22,7 @@ var ShoppingBagItem = React.createClass({
 
   prepareSummary: function () {
     var item = $.extend({}, this.props.item);
+    // TODO: Refactor image fetch since it's changing in other PR
     var images = new DressImageBuilder(item.personalization).dressCombos();
     var personalization = $.extend({}, this.props.item.personalization);
     personalization.silhouette = {presentation: item.product_name, price: 0};
