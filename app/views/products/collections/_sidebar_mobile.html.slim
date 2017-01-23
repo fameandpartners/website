@@ -1,0 +1,7 @@
+- cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
+  - prerender = true
+
+  .FilterSort
+
+    .ExpandablePanel.ExpandablePanel--mobile
+      #CollectionFilterSortMobileApp

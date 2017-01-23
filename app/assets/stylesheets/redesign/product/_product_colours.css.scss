@@ -392,10 +392,12 @@ $product-color-winter-grey:     #dadadc;
 .color-wine                    { background-color: $product-color-wine; }
 .color-winter-grey             { background-color: $product-color-winter-grey; }
 
-.color-white, .color-optic-white {
+.color-white,
+.color-optic-white {
   background-color: $product-color-white;
-  border: 1px dashed #eeeeee;
+  border: 1px solid $product-color-pale-grey;
 }
 .color-white-and-black {
   @include split-color-selector(#FCF8F7, $product-color-black);
-  border: 1px dashed #eeeeee; }
+  border: 1px solid $product-color-pale-grey;
+}

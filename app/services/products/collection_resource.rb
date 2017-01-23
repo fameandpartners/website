@@ -67,7 +67,7 @@ class Products::CollectionResource
     color     = color.first if color.is_a? Array
     style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
-    
+
     Products::CollectionPresenter.from_hash(
       products:       products,
       total_products: total_products,
@@ -138,8 +138,8 @@ class Products::CollectionResource
         result[:color_ids] += color_group.color_ids
       elsif color.present?
         Array.wrap(color).compact.each do |c|
-          result[:color_ids] << c.id
-          result[:color_ids] += Repositories::ProductColors.get_similar(c.id, Similarity::Range::DEFAULT)
+          result[:color_ids] << c[:id]
+          result[:color_ids] += Repositories::ProductColors.get_similar(c[:id], Similarity::Range::DEFAULT)
         end
       end
 

@@ -15,7 +15,9 @@
  *= require_self
  *= require_tree .
 
- * Loaded from the main application styles
+ * TODO: Alexey Bobyrev 20/12/16 !!!!
+ * We need to remove below included stylesheets from main app because this breaks engine's styleseet 
+ * stack. And now we can break fame_admin by changes at redesign/product/_product_colours.
  *= require 'redesign/product/_product_colours'
  *
  * Manual Orders

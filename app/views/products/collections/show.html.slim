@@ -16,14 +16,25 @@
           span.js-heading = raw(params[:lpt] || page.heading)
 
 .page-content.products-collections
+  .FilterSort__mobilePanelContent.hidden-md.hidden-lg
+    = render :partial => 'sidebar_mobile'
+
   .container
+    .FilterSort__mobileTrigger.hidden-md.hidden-lg
+      .row
+        .col-xs-12
+          div.js-trigger-filter-mobile.FilterSort__mobileTriggerBtn href="javacsript:;"
+            | Add filters & sort by
+            .arrow ▸
+
+          // If query has filters:
+          .js-product-collection-results-meta
+            .FilterSort__summary
+
     .row
-      .col-md-12
-        = render :partial => 'filters_sort'
-      .col-lg-3.col-md-4.side-panel.side-panel-left.js-side-panel-filters
-        a.btn-close.js-trigger-toggle-filters href='javascript:;'
-          .hide-visually Close filters
-        = render :partial => 'filters_color_shape_style'
+      .col-lg-3.col-md-4.side-panel.hidden-sm.hidden-xs
+        = render :partial => 'breadcrumb'
+        = render :partial => 'sidebar'
 
       .col-lg-9.col-md-8.products-collection
         .row.products-set.js-products-collection-wrap

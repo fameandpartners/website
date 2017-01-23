@@ -19,7 +19,7 @@ ruby:
         span.link-underline Moodboard
       .dropdown-menu
         - user_moodboards.moodboards.each do |m|
-          a href='javascript:;' data-moodboard-id="#{m.id}" data-product-id="#{product.id}" data-color-id="#{product.color.id}" onclick="clickAddMoodboard(this, event);"
+          a href='javascript:;' data-moodboard-id="#{m.id}" data-product-id="#{product.id}" data-color-id="#{product.color.id}" onclick="window.clickAddMoodboard(this, event);"
             - if m.items.any?{|i| i.product_id == product.id && i.active?}
               i.fa.fa-check
             - else
