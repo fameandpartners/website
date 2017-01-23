@@ -1,4 +1,6 @@
 class CustomisationValue < ActiveRecord::Base
+  AVAILABLE_TYPES = %w(cut fabric length fit style)
+
   belongs_to :product,
              class_name: 'Spree::Product'
   has_many :incompatibilities,
@@ -42,6 +44,10 @@ class CustomisationValue < ActiveRecord::Base
             uniqueness: {
               scope: :product_id
             }
+
+  validates :customisation_type,
+            presence: true,
+            inclusion: { in: AVAILABLE_TYPES }
 
   scope :ordered, order('position ASC')
 

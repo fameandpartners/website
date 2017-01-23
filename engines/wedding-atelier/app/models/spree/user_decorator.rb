@@ -1,3 +1,6 @@
+# TODO: 13th January 2017 - Tiago Amaro: wedding-atelier engine SHOULD NOT add more properties/associations to the user model
+# TODO: This `Spree::User` eval should be a `WeddingAtelier::User`
+
 Spree::User.class_eval do
   attr_accessor :event_role
 
