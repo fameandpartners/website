@@ -17,6 +17,14 @@ describe WeddingAtelier::EventDress do
         expect(dress.liked_by?(user)).to be_falsey
       end
     end
+
+    context 'given a nil user' do
+      let(:user) { nil }
+
+      it do
+        expect(dress.liked_by?(user)).to be_falsey
+      end
+    end
   end
 
   describe 'like_by' do
@@ -34,23 +42,37 @@ describe WeddingAtelier::EventDress do
 
   describe '#images' do
     let(:custom_dress) do
-      create(:wedding_atelier_event_dress,
-      product: create(:spree_product, sku: '1234'),
-      fabric: create(:customisation_value, name: 'HG'),
-      color: create(:option_value, name: 'black'),
-      size: create(:option_value, name: 'S'),
-      style: create(:customisation_value, presentation: 'style', position: 0, name: 'S5'),
-      fit: create(:customisation_value, presentation: 'fit', position: 1, name: 'F4'),
-      length: create(:customisation_value, name: 'AK'),
-      height: 'petite')
+      create(
+        :wedding_atelier_event_dress,
+        product: create(:spree_product, sku: '1234'),
+        fabric: create(:customisation_value, name: 'HG'),
+        color:   create(:option_value, name: 'black'),
+        size: create(:option_value, name: 'S'),
+        style: create(:customisation_value, presentation: 'style', position: 0, name: 'S5'),
+        fit: create(:customisation_value, presentation: 'fit', position: 1, name: 'F4'),
+        length: create(:customisation_value, name: 'AK'),
+        height: 'petite')
     end
 
     it 'returns the file names of images related to this dress' do
-      images = custom_dress.images
-      expect(images[0][:thumbnail]).to eq '/assets/wedding-atelier/dresses/180x260/1234-HG-BLACK-S5-F4-AK-FRONT.jpg'
-      expect(images[0][:moodboard]).to eq '/assets/wedding-atelier/dresses/280x404/1234-HG-BLACK-S5-F4-AK-FRONT.jpg'
-      expect(images[1][:normal]).to eq '/assets/wedding-atelier/dresses/900x1300/1234-HG-BLACK-S5-F4-AK-BACK.jpg'
-      expect(images[1][:large]).to eq '/assets/wedding-atelier/dresses/1800x2600/1234-HG-BLACK-S5-F4-AK-BACK.jpg'
+      expect(custom_dress.images).to eq([
+        {
+          thumbnail: {
+            white: 'http://localhost/wedding-atelier/dresses/180x260/white/1234-HG-BLACK-S5-F4-AK-FRONT.jpg',
+            grey:  'http://localhost/wedding-atelier/dresses/180x260/grey/1234-HG-BLACK-S5-F4-AK-FRONT.jpg'
+          },
+          moodboard: 'http://localhost/wedding-atelier/dresses/280x404/1234-HG-BLACK-S5-F4-AK-FRONT.jpg',
+          normal:    'http://localhost/wedding-atelier/dresses/900x1300/1234-HG-BLACK-S5-F4-AK-FRONT.jpg',
+          large:     'http://localhost/wedding-atelier/dresses/1800x2600/1234-HG-BLACK-S5-F4-AK-FRONT.jpg' },
+        {
+          thumbnail: {
+            white: 'http://localhost/wedding-atelier/dresses/180x260/white/1234-HG-BLACK-S5-F4-AK-BACK.jpg',
+            grey:  'http://localhost/wedding-atelier/dresses/180x260/grey/1234-HG-BLACK-S5-F4-AK-BACK.jpg' },
+          moodboard: 'http://localhost/wedding-atelier/dresses/280x404/1234-HG-BLACK-S5-F4-AK-BACK.jpg',
+          normal:    'http://localhost/wedding-atelier/dresses/900x1300/1234-HG-BLACK-S5-F4-AK-BACK.jpg',
+          large:     'http://localhost/wedding-atelier/dresses/1800x2600/1234-HG-BLACK-S5-F4-AK-BACK.jpg'
+        }
+      ])
     end
   end
 

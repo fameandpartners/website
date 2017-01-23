@@ -3,12 +3,15 @@ FactoryGirl.define do
     association :product, factory: :spree_product
     association :user, factory: :spree_user
     association :event, factory: :wedding_atelier_event
+
     association :color, factory: :option_value
-    association :fit, factory: :customisation_value
-    association :style, factory: :customisation_value
-    association :fabric, factory: :customisation_value
     association :size, factory: :option_value
-    association :length, factory: :customisation_value
-    height { 'petite' }
+
+    height { "5'1\"/155cm" }
+
+    fit { FactoryGirl.build(:customisation_value, :fit) }
+    style { FactoryGirl.build(:customisation_value, :style) }
+    fabric { FactoryGirl.build(:customisation_value, :fabric) }
+    length { FactoryGirl.build(:customisation_value, :length) }
   end
 end

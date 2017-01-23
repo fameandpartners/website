@@ -31,7 +31,7 @@ module WeddingAtelier
     validates_presence_of :product, :fabric, :color, :length, :size, :height
 
     def images
-      base_path = 'https://d1msb7dh8kb0o9.cloudfront.net/wedding-atelier/dresses';
+      base_path = URI.join(ENV['RAILS_ASSET_HOST'], '/wedding-atelier/dresses')
       style_name = style.try(:name) || 'S0'
       fit_name = fit.try(:name) || 'F0'
       fabric_name = fabric.try(:name) || 'HG'
@@ -52,7 +52,7 @@ module WeddingAtelier
     end
 
     def liked_by?(user)
-      likes.find_by_user_id(user.id).present?
+      likes.exists?(user_id: user&.id)
     end
 
     def like_by(user)

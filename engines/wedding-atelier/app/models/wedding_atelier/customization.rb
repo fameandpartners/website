@@ -12,8 +12,9 @@ module WeddingAtelier
                   :heights
 
     def initialize(event)
-      available_colors = WeddingAtelier::Defaults.available_colors.map{|c| c[:name] }
+      available_colors = WeddingAtelier::Defaults.available_colors.map{ |c| c[:name] }
       @silhouettes = Spree::Taxon.find_by_permalink('base-silhouette').products
+      # TODO: colors should be captures from products
       @colours = Spree::OptionValue.where(name: available_colors)
       @sizes = Spree::OptionType.find_by_name('dress-size').option_values
       @assistants = event.assistants
