@@ -1,6 +1,7 @@
 module Policies
   class ProductDeliveryPeriodPolicy
     CNY_DELIVERY_PERIOD = '3 - 4 weeks'
+    FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
 
     def initialize(product)
       @product = product
@@ -9,6 +10,8 @@ module Policies
     def delivery_period
       if Features.active?(:cny_delivery_delays)
         CNY_DELIVERY_PERIOD
+      elsif @product.fast_making?
+        FAST_MAKING_DELIVERY_PERIOD
       else
         minimum_delivery_period
       end

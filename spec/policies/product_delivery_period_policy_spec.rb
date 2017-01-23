@@ -26,8 +26,15 @@ describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
       expect(subject.delivery_period).to eq('7 - 10 business days')
     end
 
+    it "returns fast making delivery period if product is fast making" do
+      expect(product).to receive(:fast_making?).and_return(true)
+
+      expect(subject.delivery_period).to eq('4 - 6 business days')
+    end
+
     it "returns cny delivery period if cny flag enabled" do
       Features.activate(:cny_delivery_delays)
+      allow(product).to receive(:fast_making?).and_return(true)
 
       expect(subject.delivery_period).to eq('3 - 4 weeks')
     end
