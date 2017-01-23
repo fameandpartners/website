@@ -28,7 +28,7 @@ var ShoppingBagItem = React.createClass({
     personalization.silhouette = {presentation: item.product_name, price: 0};
     return $.extend(item, {
       personalization: personalization,
-      imageUrl: images[0].thumbnail.grey
+      imageUrl: images.front.thumbnail.grey
     });
   },
 
