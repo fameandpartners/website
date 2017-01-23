@@ -53,11 +53,11 @@ class GlobalSku
       end
     end
 
-    # Extended Style Number is the style number + customisation values with their IDs separated by dashes
+    # Extended Style Number: an easier way for humans to read what's behind customizations
     # More at `https://fameandpartners.atlassian.net/browse/WEBSITE-1299?focusedCommentId=22330&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22330`
     # Example: FP2212-HG-S0-F0-AK
     def extended_style_number
-      customizations_map = customizations.map { |c| "#{c.name}#{c.id}" }
+      customizations_map = customizations.map(&:name)
       [style_number].concat(customizations_map).join('-')
     end
 
