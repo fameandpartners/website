@@ -68,27 +68,27 @@ var DressPreview = React.createClass({
     }
   },
 
-  renderThumbnails: function (images) {
+  renderThumbnails: function (thumbs, selectedIndex) {
     var that = this;
-    var thumbnails = images.map(function (image, index) {
-      var classes = classNames({
-        'dress-preview-thumbnails-item': true,
-        'selected': index === that.state.selectedImageIndex
-      });
-      var key = 'dress-preview-thumb' + index;
-
-      return (
-        <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnail.white} onError={that.imageNotFoundHandle}/>
-        </li>
-      );
+    var thumbnails = thumbs.map(function (image, index) {
+    var classes = classNames({
+      'dress-preview-thumbnails-item': true,
+      'selected': index === selectedIndex
     });
+    var key = 'dress-preview-thumb' + index;
 
     return (
-      <ul className="dress-preview-thumbnails">
-        {thumbnails}
-      </ul>
+      <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
+        <img src={image} onError={that.imageNotFoundHandle}/>
+      </li>
     );
+  });
+
+  return (
+    <ul className="dress-preview-thumbnails">
+      {thumbnails}
+    </ul>
+  );
   },
 
   isCustomDress: function(){
@@ -98,18 +98,48 @@ var DressPreview = React.createClass({
     return options.style || options.fit || lengthSet;
   },
 
+  getImages: function(imagesStyles){
+    var images;
+    if(this.isCustomDress()){
+      images = [
+        imagesStyles.front.large,
+        imagesStyles.back.large,
+      ]
+    }else{
+      images = imagesStyles.real.large
+    }
+    return images;
+  },
+
+  getThumbnails: function(imagesStyles){
+    var thumbnails;
+    if(this.isCustomDress()){
+      thumbnails = [
+        imagesStyles.front.thumbnail.white,
+        imagesStyles.back.thumbnail.white,
+      ]
+    }else{
+      thumbnails = imagesStyles.real.thumbnails;
+    }
+    return thumbnails;
+  },
+
   getImage: function(images){
-    var image = images[this.state.selectedImageIndex];
-    return this.isCustomDress() ? image.normal : image.real.large;
+    return this.isCustomDress() ? images.front.normal : images.real.large[0];
   },
 
   render: function() {
-    var images = new DressImageBuilder(this.props.selectedOptions).dressCombos(),
-        silhouette = this.props.selectedOptions.silhouette;
+    var imageStyles = new DressImageBuilder(this.props.selectedOptions).dressCombos(),
+        images = this.getImages(imageStyles),
+        thumbnails = this.getThumbnails(imageStyles),
+        silhouette = this.props.selectedOptions.silhouette,
+        index = this.state.selectedImageIndex;
+
+    if(this.state.selectedImageIndex > images.length){ index = 0; }
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={this.getImage(images)}
+          <img src={images[index]}
             style={{visibility: this.state.loading? 'hidden' : 'visible'}}
             onClick={this.zoomClickedHandle}
             onError={this.imageNotFoundHandle}/>
@@ -140,16 +170,17 @@ var DressPreview = React.createClass({
         <div
           className="dress-preview-pagination"
           style={{display: this.state.showDetails? 'none':'block'}}>
-          {this.renderThumbnails(images)}
+          {this.renderThumbnails(thumbnails, index)}
         </div>
         <ZoomModal
-          images={images}
-          selectedImageIndex={this.state.selectedImageIndex}
-          visible={this.state.zoom}
-          zoomClosedHandle={this.zoomClosedHandle}
-          thumbnailSelectedHandle={this.thumbnailSelectedHandle}
-          isCustomDress={this.isCustomDress()}
-          imageNotFoundHandle={this.imageNotFoundHandle}/>
+                  images={images}
+                  thumbnails={thumbnails}
+                  selectedImageIndex={this.state.selectedImageIndex}
+                  visible={this.state.zoom}
+                  zoomClosedHandle={this.zoomClosedHandle}
+                  thumbnailSelectedHandle={this.thumbnailSelectedHandle}
+                  isCustomDress={this.isCustomDress()}
+                  imageNotFoundHandle={this.imageNotFoundHandle}/>
       </div>
     );
   }
