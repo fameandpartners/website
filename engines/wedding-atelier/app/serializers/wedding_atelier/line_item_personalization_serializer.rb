@@ -6,6 +6,7 @@ module WeddingAtelier
     has_one :length
     has_one :style
     has_one :fit
+    has_many :customization_values, serializer: CustomisationValueSerializer
 
     def style
       object.customization_values.where(customisation_type: 'style').first
