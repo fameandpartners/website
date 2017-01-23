@@ -3,6 +3,7 @@ var EventDetails = React.createClass({
   propTypes: {
     roles_path: React.PropTypes.string,
     updater: React.PropTypes.func,
+    current_user: React.PropTypes.object,
     event: React.PropTypes.shape({
       name: React.PropTypes.string,
       number_of_assistants: React.PropTypes.number,
@@ -75,6 +76,7 @@ var EventDetails = React.createClass({
             <Roles id="input_event_role"
                 ref="role"
                 onChange={this._onChangeInput}
+                current_user={this.props.current_user}
                 roles_path={this.props.roles_path} />
           </div>
           <div className="form-group">

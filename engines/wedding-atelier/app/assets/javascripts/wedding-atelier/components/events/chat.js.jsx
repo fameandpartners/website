@@ -11,7 +11,8 @@ var Chat = React.createClass({
     getDresses: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
     twilioManager: React.PropTypes.object,
-    twilioClient: React.PropTypes.object
+    twilioClient: React.PropTypes.object,
+    changeDressToAddToCartCallback: React.PropTypes.func
   },
 
   getInitialState: function(){
@@ -76,16 +77,16 @@ var Chat = React.createClass({
   },
 
   handleMember: function(member, joined) {
-    var currentState = this.state;
-    var user = {
+    var _newState = $.extend({}, this.state);
+    var _newUser = {
       id: member.sid,
       identity: member.identity,
+      initials: member.identity.match(/\b\w/g).join("").toUpperCase(),
       online: joined
     };
-    var members = currentState.channelMembers.filter(function(onlineMember) { onlineMember.id == user.id});
-    members.push(user);
 
-    this.setState({channelMembers: members});
+    _newState.channelMembers.push(_newUser);
+    this.setState(_newState);
   },
 
   getChatMembers: function() {
@@ -225,7 +226,12 @@ var Chat = React.createClass({
           message.content = dress;
         }
         // Forming the mssage with the component...
-        msgComp = (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index} handleLikeDress={this.props.handleLikeDress} />);
+        msgComp = (<ChatDressMessage showAuthor={showAuthor}
+                                     isOwnerMessage={isOwnerMessage}
+                                     message={message}
+                                     key={"dress-message" + index}
+                                     handleLikeDress={this.props.handleLikeDress}
+                                     changeDressToAddToCartCallback={this.props.changeDressToAddToCartCallback}/>);
       } else if (message.type === 'image') {
         msgComp = (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
       }

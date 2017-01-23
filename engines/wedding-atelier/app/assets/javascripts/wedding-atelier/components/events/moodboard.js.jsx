@@ -4,6 +4,7 @@ var MoodBoardEvent = React.createClass({
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
+    current_user: React.PropTypes.object,
     dresses_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
@@ -14,7 +15,8 @@ var MoodBoardEvent = React.createClass({
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
-    siteVersion: React.PropTypes.string
+    siteVersion: React.PropTypes.string,
+    channelPrefix: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -29,7 +31,7 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...',
+        name: '',
         hasError: {}
       },
       event_backup: {
@@ -38,9 +40,11 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...',
+        name: '',
         hasError: {}
-      }
+      },
+      dressToAddToCart: null,
+      userCart: null
     }
   },
 
@@ -79,7 +83,7 @@ var MoodBoardEvent = React.createClass({
     var _state = $.extend({}, this.state);
     var that = this;
     var channelName = 'wedding-atelier-channel-' + this.props.event_id;
-    var notificationsChannelName = 'wedding-atelier-notifications-' + this.props.event_id;
+    var notificationsChannelName = channelPrefix + '-wedding-atelier-notifications-' + this.props.event_id;
 
     // notifications channel
     _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
@@ -139,14 +143,13 @@ var MoodBoardEvent = React.createClass({
       var parsedMsg = JSON.parse(message.body);
 
       if (parsedMsg.type === "dress-like") {
-
         var dresses = [...that.state.event.dresses];
 
         var index = dresses.findIndex(function(dress) {
           return dress.id === parsedMsg.dress.id;
         });
 
-        dresses[index] = parsedMsg.dress;
+        dresses[index].likes_count = parsedMsg.dress.likes_count;
         that.setDresses(dresses);
       }
     });
@@ -158,7 +161,8 @@ var MoodBoardEvent = React.createClass({
 
   removeDress: function(dress){
     var that = this,
-        url = this.props.dresses_path + '/' + dress.id
+        dressId = dress.id,
+        url = this.props.dresses_path + '/' + dressId;
     $.ajax({
       url: url ,
       type: 'DELETE',
@@ -166,7 +170,7 @@ var MoodBoardEvent = React.createClass({
       success: function(data) {
         var _newState = $.extend({}, that.state);
         _newState.event.dresses = _.reject(_newState.event.dresses, function(eventDress){
-          return eventDress.id === data.event_dress.id;
+          return eventDress.id === dressId;
         })
         that.setState(_newState);
       }.bind(this),
@@ -204,8 +208,9 @@ var MoodBoardEvent = React.createClass({
           dress.likes_count--;
           dress.liked = false;
         }
+
         that.refs.ChatDesktop.sendNotification({
-          type: "dress-like",
+          type: 'dress-like',
           dress: dress
         });
 
@@ -225,7 +230,7 @@ var MoodBoardEvent = React.createClass({
       data: data,
 
       success: function(collection) {
-        this.setState({event: collection.event});
+        this.setState({event: collection.moodboard_event});
         var event = $.extend(event, this.state.event);
         event.hasError = {};
         this.setState({event: event});
@@ -281,6 +286,18 @@ var MoodBoardEvent = React.createClass({
     }.bind(this));
   },
 
+  changeDressToAddToCartCallback: function(dressId){
+    var _state = _extends({}, this.state);
+    _state.dressToAddToCart = dressId;
+    this.setState(_state);
+  },
+
+  updateUserCartCallback: function(cart) {
+    var _state = _extends({}, this.state);
+    _state.userCart = cart;
+    this.setState(_state);
+  },
+
   render: function () {
     var chatProps = {
       twilio_token_path: this.props.twilio_token_path,
@@ -294,15 +311,19 @@ var MoodBoardEvent = React.createClass({
       setDresses: this.setDresses,
       handleLikeDress: this.handleLikeDress,
       twilioManager: this.state.twilioManager,
-      twilioClient: this.state.twilioClient
+      twilioClient: this.state.twilioClient,
+      changeDressToAddToCartCallback: this.changeDressToAddToCartCallback
     };
 
     var selectSizeProps = {
+      dress: this.props.dress,
       current_user_id: this.props.current_user_id,
       profiles: this.state.event.assistants,
       sizes: this.state.sizes,
       heights: this.state.heights,
-      siteVersion: this.props.siteVersion
+      siteVersion: this.props.siteVersion,
+      dressToAddToCart: this.state.dressToAddToCart,
+      updateUserCartCallback: this.updateUserCartCallback
     };
 
     var addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
@@ -354,20 +375,22 @@ var MoodBoardEvent = React.createClass({
                   <Chat ref="ChatMobileComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  {this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
-                  {this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
+                  {this.state.event.dresses && this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
+                  {this.state.event.dresses && this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn}
                       removeDress={this.removeDress}
                       dressesPath={this.props.dresses_path}
-                      handleLikeDress={this.handleLikeDress} />
+                      handleLikeDress={this.handleLikeDress}
+                      changeDressToAddToCartCallback={this.changeDressToAddToCartCallback}/>
                   </div>
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
                   <EventDetails event={this.state.event}
                                 updater={this.handleEventDetailUpdate}
                                 roles_path={this.props.roles_path}
+                                current_user={this.props.current_user.user}
                                 hasError={this.state.event.hasError} />
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">

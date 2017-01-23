@@ -20,7 +20,8 @@ var ChatDressMessage = React.createClass({
     }),
     showAuthor: React.PropTypes.bool,
     isOwnerMessage: React.PropTypes.bool,
-    handleLikeDress: React.PropTypes.func
+    handleLikeDress: React.PropTypes.func,
+    changeDressToAddToCartCallback: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -51,6 +52,7 @@ var ChatDressMessage = React.createClass({
   },
 
   addToCart: function(){
+    this.props.changeDressToAddToCartCallback(this.props.message.content.id);
     if($(window).width() < 768){
       $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
     }else{
@@ -83,7 +85,7 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = dress.liked ? 'icon-liked' : 'icon-unliked';
-    var dressImage = dress.images && dress.images[0].moodboard
+    var dressImage = dress.images && dress.images[0].thumbnail.grey
     var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (

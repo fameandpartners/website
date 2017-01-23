@@ -79,7 +79,7 @@ var DressPreview = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnail} onError={that.imageNotFoundHandle}/>
+          <img src={image.thumbnail.white} onError={that.imageNotFoundHandle}/>
         </li>
       );
     });
@@ -91,13 +91,25 @@ var DressPreview = React.createClass({
     );
   },
 
+  isCustomDress: function(){
+    var options = this.props.selectedOptions,
+        lengthName = options.length && options.length.name,
+        lengthSet = !(lengthName == undefined) && lengthName!='AK'
+    return options.style || options.fit || lengthSet;
+  },
+
+  getImage: function(images){
+    var image = images[this.state.selectedImageIndex];
+    return this.isCustomDress() ? image.normal : image.real.large;
+  },
+
   render: function() {
-    var images = new DressImageBuilder(this.props.selectedOptions).styles(),
+    var images = new DressImageBuilder(this.props.selectedOptions).dressCombos(),
         silhouette = this.props.selectedOptions.silhouette;
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={images[this.state.selectedImageIndex].normal}
+          <img src={this.getImage(images)}
             style={{visibility: this.state.loading? 'hidden' : 'visible'}}
             onClick={this.zoomClickedHandle}
             onError={this.imageNotFoundHandle}/>
@@ -136,6 +148,7 @@ var DressPreview = React.createClass({
           visible={this.state.zoom}
           zoomClosedHandle={this.zoomClosedHandle}
           thumbnailSelectedHandle={this.thumbnailSelectedHandle}
+          isCustomDress={this.isCustomDress()}
           imageNotFoundHandle={this.imageNotFoundHandle}/>
       </div>
     );

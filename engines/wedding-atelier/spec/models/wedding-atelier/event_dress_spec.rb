@@ -45,12 +45,13 @@ describe WeddingAtelier::EventDress do
       create(
         :wedding_atelier_event_dress,
         product: create(:spree_product, sku: '1234'),
+        fabric: create(:customisation_value, name: 'HG'),
         color:   create(:option_value, name: 'black'),
-        fabric:  create(:customisation_value, name: 'HG'),
-        style:   create(:customisation_value, presentation: 'style', position: 0, name: 'S5'),
-        fit:     create(:customisation_value, presentation: 'fit', position: 1, name: 'F4'),
-        length:  create(:customisation_value, name: 'AK')
-      )
+        size: create(:option_value, name: 'S'),
+        style: create(:customisation_value, presentation: 'style', position: 0, name: 'S5'),
+        fit: create(:customisation_value, presentation: 'fit', position: 1, name: 'F4'),
+        length: create(:customisation_value, name: 'AK'),
+        height: 'petite')
     end
 
     it 'returns the file names of images related to this dress' do

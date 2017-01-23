@@ -2,8 +2,7 @@ var AddToCartButton = React.createClass({
   // We need sizeId separate since we can add to the cart this dress with custom dress size
   propTypes: {
     customizations: React.PropTypes.object,
-    dress: React.PropTypes.object,
-    sizeId: React.PropTypes.number
+    dress: React.PropTypes.object
   },
   handleAddToCart: function () {
     var dress = null;
@@ -12,7 +11,7 @@ var AddToCartButton = React.createClass({
     } else {
       dress = this.props.dress;
     }
-    var size_id = this.props.sizeId || dress.size.id;
+
     var customization_ids = [dress.length.id, dress.fabric.id]
     if(dress.fit) {
       customization_ids.push(dress.fit.id)
@@ -21,12 +20,13 @@ var AddToCartButton = React.createClass({
       customization_ids.push(dress.style.id)
     }
 
-    var variant_id = dress.product ? dress.product.variant_id : dress.silhouette.variant_id;
+    var variantId = dress.product ? dress.product.variant_id : dress.silhouette.variant_id;
+    var sizeId = dress.size.user_profile ? dress.size.user_profile.dress_size.id : dress.size.id;
     var attrs = {
-      size_id: size_id,
+      size_id: sizeId,
       color_id: dress.color.id,
-      variant_id: variant_id,
-      height: dress.height_group,
+      variant_id: variantId,
+      height: dress.height_group || dress.heightGroup,
       customizations_ids: customization_ids
     };
     $.ajax({
@@ -35,10 +35,13 @@ var AddToCartButton = React.createClass({
       dataType: "json",
       data: attrs,
       success: function (data) {
-        //TODO: Show alert that the product has been added to the cart
+        var dressTitle = dress.title || dress.silhouette.name;
+        ReactDOM.render(<Notification errors={[dressTitle + ' was added to your shopping cart!']} />,
+                      document.getElementById('notification'));
       },
       error: function (response) {
-        //TODO: Show errors
+        ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
+            document.getElementById('notification'));
       }
     })
   },
@@ -48,9 +51,6 @@ var AddToCartButton = React.createClass({
       className: 'btn-black',
       onClick: this.handleAddToCart
     };
-    if(!this.props.dress){
-      props.disabled = true;
-    }
     return(
         <button {...props}>add to cart </button>
     )

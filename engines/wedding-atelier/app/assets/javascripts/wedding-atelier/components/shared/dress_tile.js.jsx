@@ -15,7 +15,8 @@ var DressTile = React.createClass({
       likes_count: React.PropTypes.number,
       liked: React.PropTypes.bool,
       images: React.PropTypes.array
-    })
+    }),
+    changeDressToAddToCartCallback: React.PropTypes.func
   },
 
   getInitialState: function(){
@@ -39,6 +40,7 @@ var DressTile = React.createClass({
   },
 
   addToCart: function(){
+    this.props.changeDressToAddToCartCallback(this.props.dress.id);
     if($(window).width() < 768){
       $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
     }else{
@@ -62,7 +64,7 @@ var DressTile = React.createClass({
             <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
           <a href={this.editDressUrl()} className="dress-box-body text-center">
-            <img className="center-block" src={this.props.dress.images[0].moodboard}/>
+            <img className="center-block" src={this.props.dress.images[0].thumbnail.grey}/>
 
             <div className="dress-info center-block">
               <strong>The {this.props.dress.title}</strong>

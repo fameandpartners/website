@@ -18,15 +18,15 @@ module WeddingAtelier
       else
         respond_to do |format|
           format.html
-          format.json { render json: @event, serializer: MoodboardEventSerializer}
+          format.json { render json: @event, serializer: MoodboardEventSerializer }
         end
       end
     end
 
     def update
       @event = Event.find_by_slug(params[:id])
-      if @event.update_attributes(params_event)
-        render json: @event
+      if @event.update_attributes(params_event) && spree_current_user.update_role_in_event(params[:event][:role], @event)
+        render json: @event, serializer: MoodboardEventSerializer
       else
         render json: {errors: @event.errors}, status: 422
       end
