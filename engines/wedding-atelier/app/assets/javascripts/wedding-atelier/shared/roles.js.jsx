@@ -3,27 +3,21 @@ var Roles = React.createClass({
   propTypes: {
     roles: React.PropTypes.array,
     roles_path: React.PropTypes.string,
+    current_user: React.PropTypes.object,
     onChange: React.PropTypes.func
   },
 
   getInitialState: function() {
     return {
-      roles: [
-        { id: 1, name: 'role 1'},
-        { id: 2, name: 'role 2'},
-        { id: 3, name: 'role 2'}
-      ]
+      roles: ['bridesmaid', 'maid of honor', 'mother of bride', 'bride']
     }
   },
 
   componentWillMount: function() {
-    // this.getRoles().then(function() {
-      this.generateRolesInput();
-    // });
+    this.generateRolesInput();
   },
 
   componentDidMount: function() {
-
     $(this.refs.select2).select2({
       minimumResultsForSearch: Infinity
     }).on('select2:select', function (evt) {
@@ -32,18 +26,17 @@ var Roles = React.createClass({
 
   },
 
-  getRoles: function() {
-    return $.ajax({
-      url: "",
-      success: function(roles){
-        this.setState({roles: roles});
-      }
-    });
-  },
-
   generateRolesInput: function(roles) {
+    var that = this;
     var options = this.state.roles.map(function(role, index){
-      return (<option key={index} value={role.id}>{role.name}</option>);
+      var props = {
+        key: index,
+        value: role
+      }
+      if(role == that.props.current_user.role){
+        props.selected = true;
+      }
+      return (<option {...props}>{role}</option>);
     });
 
     this.setState({roles: options});

@@ -65,17 +65,29 @@
 @include screen-sm {
   .shopping-bag-item {
 
+    &-summary {
+      padding-left: 20px;
+    }
+
+    &-summary-list {
+      font-size: 1rem;
+    }
+
+    &-summary-list-item {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@include screen-xl {
+  .shopping-bag-item {
+
     &-image {
       width: 35%;
     }
 
     &-summary {
-      padding-left: 20px;
       width: 65%;
-    }
-
-    &-summary-list {
-      font-size: 1rem;
     }
   }
 }

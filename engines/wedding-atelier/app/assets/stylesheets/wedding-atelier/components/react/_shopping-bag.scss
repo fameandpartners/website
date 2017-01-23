@@ -95,6 +95,11 @@
     text-align: left;
     padding-left: 0;
   }
+
+  &-empty {
+    font-family: $primary-font;
+    font-style: italic;
+  }
 }
 
 .shopping-bag-totals {

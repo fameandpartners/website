@@ -21,11 +21,12 @@ var AddToCartButton = React.createClass({
     }
 
     var variantId = dress.product ? dress.product.variant_id : dress.silhouette.variant_id;
+    var sizeId = dress.size.user_profile ? dress.size.user_profile.dress_size.id : dress.size.id;
     var attrs = {
-      size_id: dress.size.id,
+      size_id: sizeId,
       color_id: dress.color.id,
       variant_id: variantId,
-      height: dress.height_group,
+      height: dress.height_group || dress.heightGroup,
       customizations_ids: customization_ids
     };
     $.ajax({

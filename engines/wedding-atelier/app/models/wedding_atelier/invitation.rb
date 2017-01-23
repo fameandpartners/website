@@ -13,6 +13,7 @@ module WeddingAtelier
       if user && event
         event.assistants << user
         update_attribute(:state, 'accepted')
+        user.add_role 'bridesmaid', event
         event.save!
       end
     end
