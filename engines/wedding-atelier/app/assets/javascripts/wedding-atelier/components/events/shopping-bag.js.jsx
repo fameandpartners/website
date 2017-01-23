@@ -113,7 +113,7 @@ var ShoppingBag = React.createClass({
               <em>Your</em> cart
             </div>
             <div className="shopping-bag-header-checkout-link">
-              <a href="/checkout">check out</a>
+              <a href="/checkout" target="_blank">check out</a>
             </div>
           </div>
           <div className="shopping-bag-content">
@@ -132,7 +132,7 @@ var ShoppingBag = React.createClass({
               <p>{this.state.userCart.display_total}</p>
             </div>
           </div>
-          <a href="/checkout" className="shopping-bag-continue-payment btn-black">
+          <a href="/checkout" target="_blank" className="shopping-bag-continue-payment btn-black">
             continue to payment
           </a>
         </div>
