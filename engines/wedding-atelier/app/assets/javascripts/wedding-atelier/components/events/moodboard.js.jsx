@@ -16,7 +16,7 @@ var MoodBoardEvent = React.createClass({
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
-    channelPrefix: React.PropTypes.string
+    channel_prefix: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -82,8 +82,8 @@ var MoodBoardEvent = React.createClass({
   setupChatChannels: function(){
     var _state = $.extend({}, this.state);
     var that = this;
-    var channelName = 'wedding-atelier-channel-' + this.props.event_id;
-    var notificationsChannelName = channelPrefix + '-wedding-atelier-notifications-' + this.props.event_id;
+    var channelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
+    var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
 
     // notifications channel
     _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
