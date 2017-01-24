@@ -18,11 +18,15 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
     end
 
     context 'order is for standard delivery' do
-      let(:order) { double(Spree::Order, completed_at: completed_at, has_fast_making_items?: false) }
+      let(:order) { FactoryGirl.create(:complete_order_with_items) }
 
       it 'calculates 10 business days' do
-        expected_date = DateTime.parse('Friday April 15 2015')
-        expect(policy.delivery_date).to eq expected_date
+        expected_date = DateTime.parse('Tue April 28 2015')
+        Time.zone do
+          Timecop.freeze('April 15 2015') do
+            expect(policy.delivery_date).to eql expected_date
+          end
+        end
       end
     end
 
