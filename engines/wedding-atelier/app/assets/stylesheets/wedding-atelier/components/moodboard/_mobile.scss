@@ -1,12 +1,10 @@
 #events__moodboard {
-  @include screen-xs-and-sm {
 
+  @include screen-xs {
     /* left side : hidden */
-
     .chat.left-content { display: none; }
 
     /* right side - Becoming full layout */
-
     .moodboard-title { display: none; }
 
     .right-content {
@@ -22,7 +20,7 @@
 
     .tab-content {
       overflow: auto;
-      height: calc(100% - 43px);
+      height: calc(100% - 44px);
     }
 
     /* this is just the container when on the tab */
@@ -34,16 +32,6 @@
       display: none;
     }
 
-    .msg-simple {
-      width: 100% !important;
-    }
-
-    .dresses-actions {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
     .btn-create-a-dress {
       width: 100%;
       background: transparent image-url('wedding-atelier/marbel.png');
@@ -52,6 +40,12 @@
       height: 67px;
       font-size: 1.8em;
       line-height: 55px;
+    }
+
+    .dresses-actions {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
   }
 
