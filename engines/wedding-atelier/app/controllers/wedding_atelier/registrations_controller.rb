@@ -53,6 +53,7 @@ module WeddingAtelier
 
     def update
       prepare_form_default_values
+      parse_date! params
       if @user.update_attributes(spree_user_params)
         @user.add_role(@user.event_role, @user.events.last) if @user.event_role
         if @user.wedding_atelier_signup_step == 'completed'
@@ -123,6 +124,13 @@ module WeddingAtelier
 
     def redirect_if_completed
       redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?) && action_name != 'invite'
+    end
+
+    def parse_date!(params)
+      event_attributes = spree_user_params[:events_attributes].first.last
+      if date = event_attributes[:date]
+        event_attributes[:date] = Date.strptime(date, "%m%d%Y")
+      end
     end
   end
 end
