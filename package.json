@@ -43,7 +43,7 @@
     "yargs": "^6.3.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development gulp build --watch true",
+    "start": "gulp build --watch true",
     "prod": "NODE_ENV=production gulp build --prod true",
     "production": "NODE_ENV=production gulp build --prod true"
   },

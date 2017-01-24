@@ -2,7 +2,7 @@ module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
-    before_filter :redirect_if_completed, except: :new
+    # before_filter :redirect_if_completed, except: :new
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -105,10 +105,7 @@ module WeddingAtelier
       ]
 
       @site_version = env['site_version_code'] || 'us'
-      @dress_sizes = {
-        us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
-        au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-      }[@site_version.to_sym]
+      @dress_sizes = Spree::OptionType.find_by_name('dress-size').option_values
     end
 
     def spree_user_params
