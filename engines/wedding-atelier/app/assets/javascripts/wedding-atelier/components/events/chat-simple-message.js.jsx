@@ -49,12 +49,14 @@ var ChatSimpleMessage = React.createClass({
   render: function() {
     return(
       <div className="msg msg-simple">
-        <div className="row">
-          <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
-            {this.props.showAuthor ? this.getMessageData() : ''}
+        <div className="container-fluid">
+          <div className="row">
+            <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
+              {this.props.showAuthor ? this.getMessageData() : ''}
 
-            <div className="msg-text">
-              {this.props.message.content}
+              <div className="msg-text">
+                {this.props.message.content}
+              </div>
             </div>
           </div>
         </div>

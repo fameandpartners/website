@@ -5,7 +5,7 @@
   .right-container {
     width: 700px;
 
-    @include screen-xs-and-sm {
+    @include screen-xs {
       min-width: 100%;
     }
   }

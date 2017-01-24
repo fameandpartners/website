@@ -9,4 +9,10 @@
   .right-content {
     position: relative;
   }
+
+  @include screen-xs {
+    #bridesmaid-dresses {
+      padding-bottom: 80px;
+    }
+  }
 }

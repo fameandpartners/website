@@ -5,8 +5,17 @@
     .msg-dress {
       margin-top: 15px;
       text-align: right;
+
+      @include screen-xxs {
+        padding-right: 5px;
+      }
+
       .chat-dress-container {
         max-width: 350px;
+      }
+      .chat-dress-right-col {
+        width: 20%;
+        display: inline-block;
       }
       .chat-likes-container {
         height: 362px;
@@ -18,7 +27,7 @@
         vertical-align: middle;;
       }
       .dress-box {
-        width: auto;
+        width: 80%;
         min-width: 0;
         margin: 0;
       }
