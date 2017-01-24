@@ -41,7 +41,7 @@
   border: 0;
 }
 
-@include screen-xs-and-sm {
+@include screen-xs {
   .tab-chat {
     display: inline-block !important;
   }
