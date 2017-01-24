@@ -11,7 +11,7 @@ module WeddingAtelier
     attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days
 
     def date
-      object.date.strftime("%d/%m/%Y")
+      object.date.strftime("%m/%d/%Y")
     end
 
     def remaining_days

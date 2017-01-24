@@ -16,7 +16,6 @@ module WeddingAtelier
 
     validates_uniqueness_of :name
     validates_presence_of :name, :date, :number_of_assistants
-    validates_format_of :date, with: /^(0?[1-9]|1[0-2])\/(0?[1-9]|1\d|2\d|3[01])\/\d{4}$/
 
     def to_param
       slug
