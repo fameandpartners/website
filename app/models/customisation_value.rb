@@ -1,5 +1,5 @@
 class CustomisationValue < ActiveRecord::Base
-  AVAILABLE_TYPES = %w(cut fabric length fit style)
+  AVAILABLE_CUSTOMISATION_TYPES = %w(cut fabric length fit style)
 
   belongs_to :product,
              class_name: 'Spree::Product'
@@ -44,13 +44,14 @@ class CustomisationValue < ActiveRecord::Base
             uniqueness: {
               scope: :product_id
             }
-
   validates :customisation_type,
             presence: true,
-            inclusion: { in: AVAILABLE_TYPES }
+            inclusion: { in: AVAILABLE_CUSTOMISATION_TYPES }
 
   scope :ordered, order('position ASC')
-
+  AVAILABLE_CUSTOMISATION_TYPES.each do |customisation_type|
+    scope customisation_type, -> { where(customisation_type: customisation_type) }
+  end
 
   has_attached_file :image, styles: {
     mini: '48x48>', small: '100x100>', product: '240x240>'#, large: '600x600>'

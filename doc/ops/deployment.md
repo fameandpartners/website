@@ -21,24 +21,32 @@ To deploy to any environment, you must have a valid Reinteractive's Sentinel tok
 
 After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.example` file, renaming it to `OpsCare.yml`, and configure it with the desired values.
 
-## Staging
+## Staging, QA1 and QA2 environments
 
-PRs can be merged on staging branch and deployed to Staging enviroment prior to being merged on master. This is helpful to speed up the approvals/QA process.
+We have 3 environments for preview/feedback: Staging, QA1 and QA2.
 
-### Example flow:
+- **Staging** is dedicated to PRs that are merged onto the `staging` branch. This is the place for in-progress/under-review PRs that need previews and approvals (from the Design & Marketing teams, for example).
 
-> - Working on my branch `feat/super-branch`
-> - `git checkout staging`
-> - `git merge feat/super-branch`
-> - `git push origin staging`
+- **QA1** is currently dedicated to Magma Labs, where they can play exclusively with their branches for the new App.
 
-**Doing faster deployments:**
+- **QA2** is dedicated to deploying single PRs for final QA reviews.
+
+**Important:** be sure to have QA1 / QA2 info in your `OpsCare.yml` file. See [`OpsCare.yml.example`](https://github.com/fameandpartners/website/blob/master/OpsCare.yml.example) for references.
+
+## Example flow for STAGING env:
+
+> - Pushed my branch `feature/WEBSITE-123/super-branch`
+> - Then `git checkout staging`
+> - Then `git merge feature/WEBSITE-123/super-branch`
+> - Then `git push origin staging`
+
+**Faster deployment:**
 
 > - SSH into the staging machine: `sentinel ssh staging --role web`
 > - Go to the app folder: `cdapp`
 > - Use the deploy command: `deploy --branch=staging`
 
-**Doing slower deployments (zero downtime, snapshots etc.):**
+**Slower deployments (zero downtime, snapshots etc.):**
 
 > Just run `sentinel deploy staging --branch-name staging`
 
@@ -46,6 +54,19 @@ PRs can be merged on staging branch and deployed to Staging enviroment prior to 
 
 - `staging` branch *will* become polluted. At the end of sprints, we'll simply revert it and force push on it to current stable/master or whatever. It'll act as an *ephemeral* branch.
 - Git history will become uglier. It's never pretty with more than 2 people working on the same codebase. Diffs matter, visual history, not so much.
+
+## Example flow for QA2 env:
+
+**Faster deployment:**
+
+> - SSH into the QA2 machine: `sentinel ssh qa2 --role web`
+> - Go to the app folder: `cdapp`
+> - Use the deploy command: `deploy --branch=feature/WEBSITE-123/super-branch`
+
+**Slower deployments (zero downtime, snapshots etc.):**
+
+> Just run `sentinel deploy qa2 --branch-name feature/WEBSITE-123/super-branch`
+
 
 ## Production
 
