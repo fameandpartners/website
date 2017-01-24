@@ -42,6 +42,14 @@
 }
 
 @include screen-xs-and-sm {
+  .tab-chat {
+    display: inline-block !important;
+  }
+
+  .moodboard-tabs {
+    height: calc(100% - 23px);
+  }
+
   .nav.nav-tabs {
     width: 100%;
 
@@ -63,6 +71,8 @@
   }
 
   .nav-tabs > li > a {
+    line-height: 43px;
+    height: 67px;
     color: $greyish;
   }
 
