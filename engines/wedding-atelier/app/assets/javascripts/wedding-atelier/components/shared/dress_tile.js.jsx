@@ -14,7 +14,7 @@ var DressTile = React.createClass({
       price: React.PropTypes.string,
       likes_count: React.PropTypes.number,
       liked: React.PropTypes.bool,
-      images: React.PropTypes.array
+      images: React.PropTypes.object
     }),
     changeDressToAddToCartCallback: React.PropTypes.func
   },
@@ -64,7 +64,7 @@ var DressTile = React.createClass({
             <a href="#" onClick={this.removeDress} className="icon-close pull-right"></a>
           </div>
           <a href={this.editDressUrl()} className="dress-box-body text-center">
-            <img className="center-block" src={this.props.dress.images[0].thumbnail.grey}/>
+            <img className="center-block" src={this.props.dress.images.front.thumbnail.grey}/>
 
             <div className="dress-info center-block">
               <strong>The {this.props.dress.title}</strong>

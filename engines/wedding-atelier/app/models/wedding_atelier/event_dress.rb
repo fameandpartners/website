@@ -38,17 +38,38 @@ module WeddingAtelier
       color_name = color.try(:name) || 'Champagne'
       length_name = length.try(:name) || 'AK'
       file_name = [product.sku, 'HG', color_name, style_name, fit_name, length_name].join('-').upcase
-      %w(FRONT BACK).map do |pov|
-        {
+      real_image_name = [product.sku, fabric_name, color_name, 'S0', 'F0', 'AK'].join('-').upcase
+      images = {
+        real: {
+          thumbnails: [
+            "#{base_path}/350x500/#{real_image_name}-FRONT.jpg",
+            "#{base_path}/350x500/#{real_image_name}-1.jpg",
+            "#{base_path}/350x500/#{real_image_name}-2.jpg",
+            "#{base_path}/350x500/#{real_image_name}-3.jpg",
+            "#{base_path}/350x500/#{real_image_name}-4.jpg"
+          ],
+          large: [
+            "#{base_path}/1440x1310/#{real_image_name}-FRONT.jpg",
+            "#{base_path}/1440x1310/#{real_image_name}-1.jpg",
+            "#{base_path}/1440x1310/#{real_image_name}-2.jpg",
+            "#{base_path}/1440x1310/#{real_image_name}-3.jpg",
+            "#{base_path}/1440x1310/#{real_image_name}-4.jpg"
+          ]
+        }
+      }
+      %w(FRONT BACK).each do |pov|
+        images[pov.downcase.to_sym] = {
           thumbnail: {
             white: "#{base_path}/180x260/white/#{file_name}-#{pov}.jpg",
             grey: "#{base_path}/180x260/grey/#{file_name}-#{pov}.jpg",
+
           },
           moodboard: "#{base_path}/280x404/#{file_name}-#{pov}.jpg",
           normal: "#{base_path}/900x1300/#{file_name}-#{pov}.jpg",
           large: "#{base_path}/1800x2600/#{file_name}-#{pov}.jpg"
         }
       end
+      images
     end
 
     def liked_by?(user)
