@@ -19,19 +19,19 @@ module WeddingAtelier
     end
 
     def styles
-      object.customisation_values.where(customisation_type: 'style')
+      object.customisation_values.style
     end
 
     def fits
-      object.customisation_values.where(customisation_type: 'fit')
+      object.customisation_values.fit
     end
 
     def lengths
-      object.customisation_values.where(customisation_type: 'length')
+      object.customisation_values.length
     end
 
     def fabrics
-      object.customisation_values.where(customisation_type: 'fabric')
+      object.customisation_values.fabric
     end
 
     def image

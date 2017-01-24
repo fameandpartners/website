@@ -10,19 +10,19 @@ module WeddingAtelier
     has_many :customization_values, serializer: CustomisationValueSerializer
 
     def style
-      object.customization_values.where(customisation_type: 'style').first
+      object.customization_values.style.first
     end
 
     def fit
-      object.customization_values.where(customisation_type: 'fit').first
+      object.customization_values.fit.first
     end
 
     def fabric
-      object.customization_values.where(customisation_type: 'fabric').first
+      object.customization_values.fabric.first
     end
 
     def length
-      object.customization_values.where(customisation_type: 'length').first
+      object.customization_values.length.first
     end
 
   end
