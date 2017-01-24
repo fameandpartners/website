@@ -95,7 +95,8 @@ var DressPreview = React.createClass({
     var options = this.props.selectedOptions,
         lengthName = options.length && options.length.name,
         lengthSet = !(lengthName == undefined) && lengthName!='AK'
-    return options.style || options.fit || lengthSet;
+        customColor =  options.color && options.color.name != 'champagne'
+    return options.style || options.fit || lengthSet || customColor;
   },
 
   getImages: function(imagesStyles){

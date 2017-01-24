@@ -11,7 +11,7 @@ var ChatDressMessage = React.createClass({
         price: React.PropTypes.string,
         value: React.PropTypes.string,
         liked: React.PropTypes.bool,
-        images: React.PropTypes.array
+        images: React.PropTypes.object
       }),
       profilePhoto: React.PropTypes.string,
       time: React.PropTypes.number,
@@ -85,7 +85,7 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = dress.liked ? 'icon-liked' : 'icon-unliked';
-    var dressImage = dress.images && dress.images[0].thumbnail.grey
+    var dressImage = dress.images && dress.images.front.thumbnail.grey;
     var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (
@@ -109,7 +109,7 @@ var ChatDressMessage = React.createClass({
                 <div className="dress-box-body text-center">
                   <img className="center-block" src={dressImage}/>
                   <div className="dress-info center-block">
-                    <strong>{dress.title}</strong>
+                    <strong>The {dress.title}</strong>
                     <span>|</span>
                     <span>{dress.price}</span>
                   </div>

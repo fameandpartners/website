@@ -48,7 +48,6 @@ var ZoomModal = React.createClass({
 
   render: function() {
     var index = this.props.selectedImageIndex;
-
     if(this.props.selectedImageIndex > this.props.images.length){ index = 0; }
 
     return (
