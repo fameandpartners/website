@@ -30,7 +30,7 @@ describe WeddingAtelier::Event do
         }
         event = WeddingAtelier::Event.new(attrs)
         expect(event.save).to be_falsey
-        expect(event.errors[:date]).to match_array ["can't be blank", "is invalid"]
+        expect(event.errors[:date]).to match_array ["can't be blank"]
         expect(event.date).to be_nil
       end
     end
