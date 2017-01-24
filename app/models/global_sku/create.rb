@@ -45,17 +45,21 @@ class GlobalSku
           color_id:           color.id,
           color_name:         color.name,
           height_value:       height,
-          customisation_id:   customization_value_ids.join(';').presence,
-          customisation_name: customization_value_names.join(';').presence,
-          product_id:         product_id
+          customisation_id:   customization_value_ids,
+          customisation_name: customization_value_names,
+          product_id:         product_id,
+          data:               { 'extended-style-number' => extended_style_number }
         )
       end
     end
 
-    # TODO: Extended Style number is a concept yet to be defined
-    # # Extended Style Number: FP2212-HG-S0-F0-AK (Style Number-Fabric Type-Style Customization-Fit Customization-Skirt Length)
-    # def extended_style_number
-    # end
+    # Extended Style Number: an easier way for humans to read what's behind customizations
+    # More at `https://fameandpartners.atlassian.net/browse/WEBSITE-1299?focusedCommentId=22330&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22330`
+    # Example: FP2212-HG-S0-F0-AK
+    def extended_style_number
+      customizations_map = customizations.map(&:name)
+      [style_number].concat(customizations_map).join('-')
+    end
 
     def generate_sku
       Skus::Generator.new(
@@ -76,8 +80,9 @@ class GlobalSku
     end
 
     def normalize_parameters
-      @color_name = @color_name.to_s.parameterize
-      @height     = @height.to_s.downcase
+      @color_name     = @color_name.to_s.parameterize
+      @height         = @height.to_s.downcase
+      @customizations = Array.wrap(@customizations).compact
     end
 
     def product_id
@@ -95,17 +100,11 @@ class GlobalSku
     end
 
     def customization_value_ids
-      Array
-        .wrap(customizations)
-        .compact
-        .map(&:id)
+      customizations.map(&:id).join(';').presence
     end
 
     def customization_value_names
-      Array
-        .wrap(customizations)
-        .compact
-        .map(&:name)
+      customizations.map(&:name).join(';').presence
     end
   end
 end
