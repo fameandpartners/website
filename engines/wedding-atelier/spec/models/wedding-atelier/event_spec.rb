@@ -28,10 +28,11 @@ describe WeddingAtelier::Event do
           date: '23/10/1989',
           event_type: 'wedding'
         }
-        event = WeddingAtelier::Event.new(attrs)
-        expect(event.save).to be_falsey
-        expect(event.errors[:date]).to match_array ["can't be blank"]
-        expect(event.date).to be_nil
+        event = WeddingAtelier::Event.create(attrs)
+        expect(event).to be_truthy
+        expect(event.date.day).to eq 23
+        expect(event.date.month).to eq 10
+        expect(event.date.year).to eq 1989
       end
     end
 

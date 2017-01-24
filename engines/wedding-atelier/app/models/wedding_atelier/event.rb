@@ -30,12 +30,12 @@ module WeddingAtelier
     end
 
     def date=(val)
-      begin
-        date = Date.strptime(val, '%m/%d/%Y') if val.present?
+      date = begin
+        Date.strptime(val, '%m/%d/%Y') if val.present?
       rescue
-        # keep date as nil
+        val
       end
-      write_attribute(:date, date)
+      write_attribute(:date, date || val)
     end
 
     private
