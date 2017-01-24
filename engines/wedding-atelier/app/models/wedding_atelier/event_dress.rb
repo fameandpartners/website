@@ -39,6 +39,9 @@ module WeddingAtelier
       length_name = length.try(:name) || 'AK'
       file_name = [product.sku, 'HG', color_name, style_name, fit_name, length_name].join('-').upcase
       real_image_name = [product.sku, fabric_name, color_name, 'S0', 'F0', 'AK'].join('-').upcase
+      # File name is wrong for all bright Turquoise colors,
+      # have to do this instead of changing every single file.
+      color_name = 'bright-turquise' if color_name === 'bright-turquoise'
       images = {
         real: {
           thumbnails: [

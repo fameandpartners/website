@@ -2,7 +2,7 @@ var CustomizationItem = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
     selectedOption: React.PropTypes.object,
-    selectedOptions: React.PropTypes.array,
+    selectedOptions: React.PropTypes.object,
     option: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
     clickCustomizationCallback: React.PropTypes.func.isRequired,

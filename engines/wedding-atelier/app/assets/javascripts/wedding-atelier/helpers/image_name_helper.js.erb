@@ -7,6 +7,11 @@ function DressImageBuilder(customizations){
   this.styleName = customizations.style ? customizations.style.name : 'S0';
   this.fitName = customizations.fit ? customizations.fit.name : 'F0';
   this.lengthName = customizations.length ? customizations.length.name : 'AK';
+  // File name is wrong for all bright Turquoise colors,
+  // have to do this instead of changing every single file.
+  if(this.colorName == 'bright-turquoise') {
+    this.colorName = 'bright-turquise'
+  }
 }
 
 DressImageBuilder.prototype.buildImagesStyles = function(fileName){
