@@ -29,10 +29,20 @@ module WeddingAtelier
       Invitation.pending.where(event_slug: slug)
     end
 
+    def date=(val)
+      date = begin
+        Date.strptime(val, '%m/%d/%Y') if val.present?
+      rescue
+        val
+      end
+      write_attribute(:date, date || val)
+    end
+
     private
 
     def sluggify
       update_attribute(:slug, name.parameterize)
     end
+
   end
 end

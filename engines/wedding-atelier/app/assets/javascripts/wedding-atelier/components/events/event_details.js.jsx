@@ -26,7 +26,7 @@ var EventDetails = React.createClass({
 
     $(this.refs.datepicker)
     .datepicker({
-      format: "dd/mm/yyyy",
+      format: "mm/dd/yyyy",
       todayBtn: "linked",
       autoclose: true,
       showOnFocus: true
@@ -98,7 +98,7 @@ var EventDetails = React.createClass({
               <input
                   type="text"
                   className="form-control"
-                  placeholder="dd/mm/yyyy"
+                  placeholder="mm/dd/yyyy"
                   name="date"
                   ref="datepicker"
                   id="input_date"

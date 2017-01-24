@@ -51,7 +51,7 @@ $(document).ready(function() {
   });
 
   $('.registrations__details-form .input-group').datepicker({
-    format: "dd/mm/yyyy",
+    format: "mm/dd/yyyy",
     todayBtn: "linked",
     autoclose: true,
     showOnFocus: true
