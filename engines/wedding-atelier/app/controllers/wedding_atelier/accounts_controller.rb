@@ -6,6 +6,7 @@ module WeddingAtelier
       @user = Spree::User.find(try_spree_current_user.id, select: 'id, first_name, last_name, email, dob, newsletter')
       @orders = @user.orders.complete
       @size_profile = {sizes: Spree::OptionType.size.option_values, heights: WeddingAtelier::Height.definitions}
+      @event = @user.events.last
       render :show
     end
 
