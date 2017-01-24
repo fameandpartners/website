@@ -10,7 +10,7 @@ var AccountDetails = React.createClass({
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
-      dateOfBirth: moment(user.dob).format('DD/MM/YYYY'),
+      dateOfBirth: user.dob? moment(user.dob).format('MM/DD/YYYY') : null,
       currentPassword: '',
       newPassword: '',
       confirmPassword: '',
@@ -20,7 +20,7 @@ var AccountDetails = React.createClass({
 
   componentDidMount: function () {
     var options = {
-      format: "dd/mm/yyyy",
+      format: "mm/dd/yyyy",
       todayBtn: "linked",
       autoclose: true,
       showOnFocus: true,
@@ -35,7 +35,7 @@ var AccountDetails = React.createClass({
   },
 
   dobChangedHandle: function (e) {
-    this.setState({dateOfBirth: moment(e.date).format('DD/MM/YYYY')});
+    this.setState({dateOfBirth: moment(e.date).format('MM/DD/YYYY')});
   },
 
   fieldChangedUpdate: function (field, e) {
@@ -56,7 +56,7 @@ var AccountDetails = React.createClass({
         first_name: state.firstName,
         last_name: state.lastName,
         email: state.email,
-        dob: state.dateOfBirth,
+        dob: state.dateOfBirth? moment(state.dateOfBirth).format('DD/MM/YYYY') : null,
         newsletter: state.newsletter
       },
     };
