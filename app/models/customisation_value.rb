@@ -49,9 +49,7 @@ class CustomisationValue < ActiveRecord::Base
             inclusion: { in: AVAILABLE_CUSTOMISATION_TYPES }
 
   scope :ordered, order('position ASC')
-  AVAILABLE_CUSTOMISATION_TYPES.each do |customisation_type|
-    scope customisation_type, -> { where(customisation_type: customisation_type) }
-  end
+  scope :by_type, lambda { |customisation_type| where(customisation_type: customisation_type) }
 
   has_attached_file :image, styles: {
     mini: '48x48>', small: '100x100>', product: '240x240>'#, large: '600x600>'

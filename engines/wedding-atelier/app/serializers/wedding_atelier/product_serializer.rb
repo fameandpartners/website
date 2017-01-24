@@ -19,19 +19,19 @@ module WeddingAtelier
     end
 
     def styles
-      object.customisation_values.style
+      object.customisation_values.by_type(:style)
     end
 
     def fits
-      object.customisation_values.fit
+      object.customisation_values.by_type(:fit)
     end
 
     def lengths
-      object.customisation_values.length
+      object.customisation_values.by_type(:length)
     end
 
     def fabrics
-      object.customisation_values.fabric
+      object.customisation_values.by_type(:fabric)
     end
 
     def image
