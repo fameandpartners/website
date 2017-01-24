@@ -53,6 +53,11 @@
         padding-left: 5px;
         padding-right: 0;
       }
+
+      @include screen-sm {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
 
     .msg {
