@@ -94,7 +94,7 @@ class SelectionOptions
     end
 
     private def defined_custom_colors
-      product.product_color_values.active.custom.map(&:option_value).sort_by(&:presentation)
+      product.product_color_values.active.custom.map(&:option_value).compact.sort_by(&:presentation)
     end
 
     private def legacy_fallback_custom_colors

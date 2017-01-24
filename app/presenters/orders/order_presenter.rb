@@ -27,7 +27,13 @@ module Orders
                    :has_fast_making_items?,
                    :display_promotion_total,
                    :shipment,
-                   :completed?
+                   :completed?,
+                   :updated_at,
+                   :payment_state,
+                   :fabrication_status,
+                   :shipped?,
+                   :order_return_requested?,
+                   :returnable?
 
     attr_reader :spree_order, :items
 
