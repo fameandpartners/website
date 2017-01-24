@@ -47,7 +47,7 @@ var SizeProfile = React.createClass({
   renderHeightOptions: function () {
     return Object.keys(this.props.heights).map(function (group, index) {
       var heights = this.props.heights[group].map(function (height, index) {
-        return <option key={height + index} value={group}>{height}</option>;
+        return <option key={height + index} value={height}>{height}</option>;
       });
 
       return <optgroup key={group + index} label={group}>{heights}</optgroup>;
