@@ -56,7 +56,6 @@ describe WeddingAtelier::EventDress do
 
     it 'returns the file names of images related to this dress' do
       images = custom_dress.images
-      # binding.pry
       expect(images[:front][:thumbnail][:white]).to match /^.*\/180x260\/white\/1234-HG-BLACK-S5-F4-AK-FRONT.jpg$/
       expect(images[:front][:thumbnail][:grey]).to match /^.*\/180x260\/grey\/1234-HG-BLACK-S5-F4-AK-FRONT.jpg$/
       expect(images[:front][:moodboard]).to match /^.*\/280x404\/1234-HG-BLACK-S5-F4-AK-FRONT.jpg$/
