@@ -90,40 +90,40 @@ var ChatDressMessage = React.createClass({
 
     return (
       <div className="msg msg-dress clearfix">
-        <div className="row">
-          <div className={'chat-dress-container col-xs-12' + dressPositionStyle}>
+        <div className="container-fluid">
+          <div className="row">
+            <div className={'chat-dress-container col-xs-12' + dressPositionStyle}>
 
-            {this.props.showAuthor ? this.getMessageData() : ''}
+              {this.props.showAuthor ? this.getMessageData() : ''}
 
-            <div className="row">
-              <div className="col-xs-3 chat-likes-container">
-                <div className="likes">
-                  <span className={loveClass} onClick={this.handleLoveIt}></span>
-                  <span>({dress.likes_count})</span>
-                </div>
-              </div>
-
-              <div className="col-xs-9">
-                <div className="dress-box" key={dress.id}>
-                  <div className="dress-box-body text-center">
-                    <img className="center-block" src={dressImage}/>
-                    <div className="dress-info center-block">
-                      <strong>{dress.title}</strong>
-                      <span>|</span>
-                      <span>{dress.price}</span>
-                    </div>
-                  </div>
-                  <div className="dress-box-footer">
-                    <div className="center-block">
-                      <button className="btn-add-to-cart" onClick={this.addToCart}>
-                        Add to cart
-                      </button>
-                    </div>
+              <div className="chat-dress-right-col">
+                <div className="chat-likes-container">
+                  <div className="likes">
+                    <span className={loveClass} onClick={this.handleLoveIt}></span>
+                    <span>({dress.likes_count})</span>
                   </div>
                 </div>
               </div>
+
+              <div className="dress-box" key={dress.id}>
+                <div className="dress-box-body text-center">
+                  <img className="center-block" src={dressImage}/>
+                  <div className="dress-info center-block">
+                    <strong>{dress.title}</strong>
+                    <span>|</span>
+                    <span>{dress.price}</span>
+                  </div>
+                </div>
+                <div className="dress-box-footer">
+                  <div className="center-block">
+                    <button className="btn-add-to-cart" onClick={this.addToCart}>
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+
             </div>
-
           </div>
         </div>
       </div>

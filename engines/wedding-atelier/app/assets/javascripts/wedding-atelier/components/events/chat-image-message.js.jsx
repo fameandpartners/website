@@ -51,12 +51,14 @@ var ChatImageMessage = React.createClass({
   render: function() {
     return (
       <div className="msg msg-image">
-        <div className="row">
-          <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
-            {this.props.showAuthor ? this.getMessageData() : ''}
+        <div className="container-fluid">
+          <div className="row">
+            <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
+              {this.props.showAuthor ? this.getMessageData() : ''}
 
-            <div className="attachment">
-              <img src={this.state.src} />
+              <div className="attachment">
+                <img src={this.state.src} />
+              </div>
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@
 
     .tab-content {
       overflow: auto;
-      height: calc(100% - 43px);
+      height: calc(100% - 44px);
     }
 
     /* this is just the container when on the tab */
@@ -32,10 +32,6 @@
 
     .chat-general-info {
       display: none;
-    }
-
-    .msg-simple {
-      width: 100% !important;
     }
 
     .dresses-actions {
