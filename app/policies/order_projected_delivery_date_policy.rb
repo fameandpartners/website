@@ -14,15 +14,30 @@ module Policies
       @order = order
     end
 
-    # note - possible, this should be order.line_items.map(&:projected_delivery_date).min
     def delivery_date
       if Features.active?(:cny_delivery_delays)
         order.completed_at + DELAY_DELIVERY_DAYS.days
       elsif order.has_fast_making_items?
         FAST_DELIVERY_DAYS.business_days.after(order.completed_at)
       else
-        DELIVERY_DAYS.business_days.after(order.completed_at)
+        # get minimum from line items delivery periods
+        minimal_delivery_period.business_days.after(order.completed_at)
       end
+    end
+
+    private
+
+    def minimal_delivery_period
+      order.line_items.
+        map(&:product).map(&:delivery_period).
+        map { |period| major_value_from_period(period) }.
+        min
+    end
+
+    private
+
+    def major_value_from_period(period)
+      period.match(/(?<=\s)\d+/).to_s.to_i
     end
   end
 end
