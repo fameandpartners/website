@@ -272,7 +272,7 @@ var MoodBoardEvent = React.createClass({
 
   setDefaultTabWhenResize: function(){
     $(window).resize(function(e) {
-      if (e.target.innerWidth > 768 ) {
+      if (e.target.innerWidth >= 768 ) {
         var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active'),
             mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
             activeMobileSizeModal = mobileSizeModal.is(':visible')
