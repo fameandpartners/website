@@ -12,6 +12,15 @@ var ShoppingBag = React.createClass({
     };
   },
 
+  componentDidMount: function () {
+    var $backdrop = $(this.refs.backdrop);
+    $backdrop.on('transitionend', function() {
+      if(!$backdrop.hasClass('animate')) {
+        $backdrop.hide();
+      }
+    });
+  },
+
   componentWillUpdate: function (nextProps, nextState) {
     this.animateBackdrop(nextState.show);
   },
@@ -23,11 +32,6 @@ var ShoppingBag = React.createClass({
         $backdrop.addClass('animate');
       });
     } else {
-      $backdrop.one('transitionend', function() {
-        if(!$backdrop.hasClass('animate')) {
-          $(this).hide();
-        }
-      });
       $backdrop.removeClass('animate');
     }
   },
@@ -56,9 +60,6 @@ var ShoppingBag = React.createClass({
   },
 
   bagClosedHandler: function () {
-    $(this.refs.backdrop).one('transitionend', function() {
-      $(this).hide();
-    });
     this.setState({show: false});
   },
 
@@ -91,8 +92,7 @@ var ShoppingBag = React.createClass({
     });
 
     var backdropClasses = classNames({
-      'shopping-bag-backdrop': true,
-      'hidden-xs': true
+      'shopping-bag-backdrop': true
     });
 
     var itemListRender = <p className="shopping-bag-content-empty">Your shopping cart is empty.</p>
