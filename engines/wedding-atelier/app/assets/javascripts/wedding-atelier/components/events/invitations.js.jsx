@@ -1,7 +1,7 @@
 var EventInvitations = React.createClass({
   propTypes: {
     assistants: React.PropTypes.array,
-    invitations: React.PropTypes.array,
+    initialInvitations: React.PropTypes.array,
     send_invite_path: React.PropTypes.string.isRequired,
     handleRemoveAssistant: React.PropTypes.func,
     current_user_id: React.PropTypes.number
@@ -14,8 +14,8 @@ var EventInvitations = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.invitations.length === 0 && nextProps.invitations.length > 0) {
-      this.setState({invitations: nextProps.invitations.slice()});
+    if (this.state.invitations.length === 0 && nextProps.initialInvitations.length > 0) {
+      this.setState({invitations: nextProps.initialInvitations.slice()});
     }
   },
 

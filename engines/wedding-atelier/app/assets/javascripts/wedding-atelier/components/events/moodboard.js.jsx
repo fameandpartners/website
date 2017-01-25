@@ -399,7 +399,7 @@ var MoodBoardEvent = React.createClass({
                   <h1 className="text-center">
                     <em>Now</em>, let's invite the bridal party.
                   </h1>
-                  <EventInvitations invitations={this.state.event.invitations}
+                  <EventInvitations initialInvitations={this.state.event.invitations}
                                     assistants={this.state.event.assistants}
                                     handleRemoveAssistant={this.handleRemoveAssistant}
                                     send_invite_path={this.props.send_invite_path}
