@@ -13,6 +13,10 @@
     margin: 40px 0;
   }
 
+  p {
+    font-size: 2.15rem;
+  }
+
   .text-grey {
     color:  $c-neutral-10;
     font-style: italic;
@@ -26,17 +30,26 @@
 
   }
 
+  .introWrapper {
+    margin-top: 105px;
+
+    h1 {
+      font-size: 3.5em;
+    }
+
+  }
+
   .subheading {
     margin-top: 23px;
   }
 
-  .sectionGuideInfo {
-    text-align: center;
+  .sectionGuideInfo .copyContent {
+    padding: 0 45px;
   }
 
   .sectionGuideInfo,
   .sectionFooterInfo {
-    margin-top: 60px;
+    margin-top: 85px;
   }
 
   .sectionFooterInfo {
@@ -48,53 +61,28 @@
     background: url('landingpages/wedding-sweepstakes/marble-texture-bg.jpg');
   }
 
+  .button-options-wrapper {
+
+    .btnGetTheGuide {
+      margin-right: 10px;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
+  }
 
-    .section-price {
-      padding: 10px 0 60px;
+  @media (min-width: $bootstrap-lg-width) {
 
-      .heading-overlay-wrapper {
-        text-align: center;
-        margin-top: -55px;
-      }
+    .introWrapper {
 
-    }
-
-    .cta-mobile-featured {
-      margin-bottom: 15px;
-      display: block;
-
-      span {
-        font-size: 2rem;
+      p {
+        padding-right: 280px;
       }
 
     }
 
   }
 
-  // START - desktop
-  @media (min-width: $bootstrap-md-width) {
-
-    .heading-thin-line-top {
-
-      .title {
-        font-size: 2.6rem;
-      }
-
-    }
-
-    .section-price {
-
-      .heading-overlay-wrapper {
-        text-align: left;
-      }
-
-    }
-
-    .section-extra-margin {
-      margin-top: 85px;
-    }
-
-  }
 }
