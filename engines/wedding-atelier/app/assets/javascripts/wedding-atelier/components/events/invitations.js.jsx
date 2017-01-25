@@ -1,6 +1,14 @@
 var EventInvitations = React.createClass({
+  propTypes: {
+    assistants: React.PropTypes.array,
+    invitations: React.PropTypes.array,
+    send_invite_path: React.PropTypes.string.isRequired,
+    handleRemoveAssistant: React.PropTypes.func,
+    current_user_id: React.PropTypes.number
+  },
+
   getInitialState: function() {
-    return {}
+    return {};
   },
 
   handleSendInvite: function(e){
@@ -14,12 +22,12 @@ var EventInvitations = React.createClass({
         data.invitations.map(function(invite) {
           this.props.invitations.push(invite);
           this.setState({invitations: this.props.invitations});
-        }.bind(this))
+        }.bind(this));
       }.bind(this),
       error: function(error) {
 
       }
-    })
+    });
     e.preventDefault();
   },
 
@@ -37,28 +45,28 @@ var EventInvitations = React.createClass({
       return (
         <div className="person" key={assistant.id}>
           <div className="person-name">
-            { assistant.name }
+            {assistant.name}
           </div>
           <div className="person-role">
             {assistant.role}
             {removeFromBoard}
           </div>
         </div>
-      )
-    }.bind(this))
+      );
+    }.bind(this));
 
     var invitations = this.props.invitations.map(function(invitation, index){
       return (
         <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
-            { invitation.user_email }
+            {invitation.user_email}
           </div>
           <div className="person-role">
-            { invitation.state }
+            {invitation.state}
           </div>
         </div>
-      )
-    }.bind(this))
+      );
+    }.bind(this));
 
     return(
       <form>
@@ -70,10 +78,10 @@ var EventInvitations = React.createClass({
           <button className="btn-black" onClick={this.handleSendInvite}> Send invite</button>
         </div>
         <div className="invited-people">
-          { assistants }
-          { invitations }
+          {assistants}
+          {invitations}
         </div>
       </form>
-    )
+    );
   }
 });
