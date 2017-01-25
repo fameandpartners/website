@@ -54,7 +54,7 @@ var CustomizationsModal = React.createClass({
               </div>
               <div className="modal-footer">
                 <div className="action-buttons">
-                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Edit Design</button>
+                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Make Changes</button>
                 </div>
               </div>
             </div>
