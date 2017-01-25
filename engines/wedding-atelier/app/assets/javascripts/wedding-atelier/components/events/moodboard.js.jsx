@@ -55,9 +55,9 @@ var MoodBoardEvent = React.createClass({
 
   setUpData: function(){
     var that = this;
-    var eventPromise = $.getJSON(that.props.event_path);
-    var sizingPromise = $.getJSON(this.props.sizing_path);
-    var twilioPromise = $.post(this.props.twilio_token_path);
+    var eventPromise = $.getJSON(that.props.event_path + '.json');
+    var sizingPromise = $.getJSON(this.props.sizing_path + '.json');
+    var twilioPromise = $.post(this.props.twilio_token_path + '.json');
 
     Promise.all([eventPromise, sizingPromise, twilioPromise]).then(function(values){
       var event = values[0].moodboard_event,
@@ -164,7 +164,7 @@ var MoodBoardEvent = React.createClass({
         dressId = dress.id,
         url = this.props.dresses_path + '/' + dressId;
     $.ajax({
-      url: url ,
+      url: url,
       type: 'DELETE',
       dataType: 'json',
       success: function(data) {
