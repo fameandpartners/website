@@ -255,7 +255,7 @@ var MoodBoardEvent = React.createClass({
 
   handleRemoveAssistant: function(id, index){
     $.ajax({
-      url: this.props.remove_assistant_path.replace('id', id),
+      url: this.props.remove_assistant_path.replace(':id', id),
       type: 'DELETE',
       dataType: 'json',
       success: function(_data) {
