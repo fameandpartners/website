@@ -18,7 +18,7 @@
         .form-group
           = ff.label :date, "What is the date of the wedding?"
           .input-group.date.date-picker
-            = ff.text_field :date, { class: 'form-control', placeholder: 'mm/dd/yyyy', data: { outside_error: true } }
+            = ff.text_field :date, { class: 'form-control', placeholder: 'mm/dd/yyyy', data: { outside_error: true }, onkeydown: 'return false' }
             span.input-group-addon
               i.calendar-icon
           = ff.hidden_field :event_type, value: 'wedding'
