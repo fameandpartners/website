@@ -4,12 +4,13 @@
 #   Products::SelectionOptions.new(product: product).read
 module Products
 class SelectionOptions
-  attr_reader :site_version, :product, :policy
+  attr_reader :site_version, :product, :policy, :include_all
 
   def initialize(options = {})
     @product      = options[:product]
     @policy       = Policy::Product.new(product)
     @site_version = options[:site_version] || SiteVersion.default
+    @include_all  = options[:include_all] || false
   end
 
   def read
@@ -108,8 +109,10 @@ class SelectionOptions
 
     # customizations
     def product_customisation_values
-      if customisations_available?
-        @product_customisation_values ||= product.customisation_values.cut.includes(:incompatibilities)
+      @product_customisation_values ||= if customisations_available?
+        scope = product.customisation_values
+        scope = scope.cut unless @include_all
+        scope.includes(:incompatibilities)
       else
         []
       end

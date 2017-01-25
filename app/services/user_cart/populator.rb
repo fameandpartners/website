@@ -135,7 +135,7 @@ class Populator
     end
 
     def product_options
-      @product_options = Products::SelectionOptions.new(site_version: site_version, product: product).read
+      @product_options = Products::SelectionOptions.new(site_version: site_version, product: product, include_all: true).read
     end
 
     def product_size
