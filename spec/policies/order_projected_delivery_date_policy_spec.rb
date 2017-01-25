@@ -19,9 +19,9 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
 
     context 'order is for standard delivery' do
       let(:order) { FactoryGirl.create(:complete_order_with_items) }
+      let(:expected_date) { DateTime.parse('Tue April 28 2015') }
 
       it 'calculates 10 business days' do
-        expected_date = DateTime.parse('Tue April 28 2015')
         Time.zone do
           Timecop.freeze('April 15 2015') do
             expect(policy.delivery_date).to eql expected_date
