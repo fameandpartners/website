@@ -1,26 +1,47 @@
 var EventInvitations = React.createClass({
+  propTypes: {
+    assistants: React.PropTypes.array,
+    initialInvitations: React.PropTypes.array,
+    send_invite_path: React.PropTypes.string.isRequired,
+    handleRemoveAssistant: React.PropTypes.func,
+    current_user_id: React.PropTypes.number
+  },
+
   getInitialState: function() {
-    return {}
+    return {
+      invitations: []
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.invitations.length === 0 && nextProps.initialInvitations.length > 0) {
+      this.setState({invitations: nextProps.initialInvitations.slice()});
+    }
   },
 
   handleSendInvite: function(e){
-    var email = this.refs.email_address.value;
+    var that = this;
+    var email = that.refs.email_address.value;
+    e.preventDefault();
+
     $.ajax({
-      url: this.props.send_invite_path,
+      url: that.props.send_invite_path,
       type: 'POST',
       dataType: 'json',
       data: {email_addresses: [email]},
       success: function(data) {
-        data.invitations.map(function(invite) {
-          this.props.invitations.push(invite);
-          this.setState({invitations: this.props.invitations});
-        }.bind(this))
-      }.bind(this),
+        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
+            document.getElementById('notification'));
+        var invitations = that.state.invitations.slice().concat(data.invitations.map(function (inviteWrapper) {
+          return inviteWrapper.invitation;
+        }));
+        that.setState({invitations: invitations});
+      },
       error: function(error) {
-
+        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
+            document.getElementById('notification'));
       }
-    })
-    e.preventDefault();
+    });
   },
 
   handleRemoveBridesMaid: function(id, index, e){
@@ -28,37 +49,44 @@ var EventInvitations = React.createClass({
     e.preventDefault();
   },
 
-  render: function() {
-    var assistants = this.props.assistants.map(function(assistant, index){
+  renderAssistants: function () {
+    var that = this;
+    return this.props.assistants.map(function(assistant, index) {
       var removeFromBoard;
-      if(assistant.id == this.props.current_user_id){
-        removeFromBoard = <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>;
+      if(assistant.id == that.props.current_user_id){
+        removeFromBoard = <span> | <a href="#" onClick={that.handleRemoveBridesMaid.bind(that, assistant.id, index)}>Remove from board</a></span>;
       }
+
       return (
         <div className="person" key={assistant.id}>
           <div className="person-name">
-            { assistant.name }
+            {assistant.name}
           </div>
           <div className="person-role">
             {assistant.role}
             {removeFromBoard}
           </div>
         </div>
-      )
-    }.bind(this))
+      );
+    });
+  },
 
-    var invitations = this.props.invitations.map(function(invitation, index){
+  renderInvitations: function () {
+    return this.state.invitations.map(function(invitation, index){
       return (
         <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
-            { invitation.user_email }
+            {invitation.user_email}
           </div>
           <div className="person-role">
-            { invitation.state }
+            {invitation.state}
           </div>
         </div>
-      )
-    }.bind(this))
+      );
+    });
+  },
+
+  render: function() {
 
     return(
       <form>
@@ -70,10 +98,10 @@ var EventInvitations = React.createClass({
           <button className="btn-black" onClick={this.handleSendInvite}> Send invite</button>
         </div>
         <div className="invited-people">
-          { assistants }
-          { invitations }
+          {this.renderAssistants()}
+          {this.renderInvitations()}
         </div>
       </form>
-    )
+    );
   }
 });
