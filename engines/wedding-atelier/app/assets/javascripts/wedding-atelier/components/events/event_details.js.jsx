@@ -102,6 +102,7 @@ var EventDetails = React.createClass({
                   name="date"
                   ref="datepicker"
                   id="input_date"
+                  readOnly="readonly"
                   value={this.props.event.date}
                   onChange={this._onChangeInput}/>
               <span className="input-group-addon">
