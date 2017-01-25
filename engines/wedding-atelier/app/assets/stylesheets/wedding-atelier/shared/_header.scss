@@ -64,6 +64,21 @@
   position: absolute;
   right: 0;
   width: 160px;
+
+  &:after {
+    content: 'beta';
+    display: block;
+    background-color: $black;
+    border-radius: 15px;
+    color: white;
+    width: 38px;
+    text-align: center;
+    text-transform: capitalize;
+    position: absolute;
+    right: -44px;
+    top: 10px;
+    font-size: 10px;
+  }
 }
 
 .shared-header-commands {

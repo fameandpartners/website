@@ -11,6 +11,11 @@
     min-width: 308px;
     display: inline-block;
     margin: 20px;
+
+    @include screen-xs {
+      min-width: 283px;
+      width: 283px;
+    };
   }
 
   .top-info {

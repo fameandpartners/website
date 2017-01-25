@@ -10,8 +10,10 @@
     position: relative;
   }
 
-  @include screen-xs {
-    #bridesmaid-dresses {
+  #bridesmaid-dresses {
+    max-width: 700px;
+
+    @include screen-xs {
       padding-bottom: 80px;
     }
   }

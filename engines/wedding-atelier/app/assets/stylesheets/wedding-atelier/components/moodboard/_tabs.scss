@@ -1,6 +1,16 @@
 .moodboard-tabs {
+  text-align: center;
+
+  .tabs-container {
+    overflow-x: auto;
+  }
+
+  .nav {
+    display: inline-block;
+    min-width: 615px;
+  }
   .bridal-gowns span {
-    color: #acacac;
+    color: $greyish;
     &.coming-soon {
       font-size: 9px;
       left: 25%;
