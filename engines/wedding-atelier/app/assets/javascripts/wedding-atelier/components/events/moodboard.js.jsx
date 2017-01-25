@@ -346,30 +346,32 @@ var MoodBoardEvent = React.createClass({
             </h1>
 
             <div className="moodboard-tabs center-block">
-              <ul className="nav nav-tabs center-block" role="tablist">
-                <li role="presentation" className="tab-chat hidden">
-                  <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
-                    Chat  <span className="badge">12</span></a>
-                </li>
-                <li className="active" role="presentation">
-                  <a className="walkthrough-messages" aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab" title="View your dresses" data-content="Create new looks and vote on your favorites" data-placement="bottom">
-                    Bridesmaid dresses</a>
-                </li>
-                <li role="presentation">
-                  <a className="walkthrough-messages" aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab" title="Update the details" data-content="Input everything you need to know about the big day" data-placement="bottom">
-                  Wedding details</a>
-                </li>
-                <li role="presentation">
-                  <a className="walkthrough-messages" aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab" title="Manage the group" data-content="Add, view, and remove members of the bridal party" data-placement="bottom">
-                  Bridal party</a>
-                </li>
-                <li role="presentation" className="bridal-gowns">
-                  <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
-                    <span className="coming-soon">Coming Soon</span>
-                    <span>Bridal Gowns</span>
-                  </a>
-                </li>
-              </ul>
+              <div className="tabs-container">
+                <ul className="nav nav-tabs center-block" role="tablist">
+                  <li role="presentation" className="tab-chat hidden">
+                    <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
+                      Chat  <span className="badge">12</span></a>
+                  </li>
+                  <li className="active" role="presentation">
+                    <a className="walkthrough-messages" aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab" title="View your dresses" data-content="Create new looks and vote on your favorites" data-placement="bottom">
+                      Bridesmaid dresses</a>
+                  </li>
+                  <li role="presentation">
+                    <a className="walkthrough-messages" aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab" title="Update the details" data-content="Input everything you need to know about the big day" data-placement="bottom">
+                    Wedding details</a>
+                  </li>
+                  <li role="presentation">
+                    <a className="walkthrough-messages" aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab" title="Manage the group" data-content="Add, view, and remove members of the bridal party" data-placement="bottom">
+                    Bridal party</a>
+                  </li>
+                  <li role="presentation" className="bridal-gowns">
+                    <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
+                      <span className="coming-soon">Coming Soon</span>
+                      <span>Bridal Gowns</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
                   <Chat ref="ChatMobileComp" {...chatProps}/>
