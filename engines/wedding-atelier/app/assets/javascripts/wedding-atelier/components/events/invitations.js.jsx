@@ -8,7 +8,15 @@ var EventInvitations = React.createClass({
   },
 
   getInitialState: function() {
-    return {};
+    return {
+      invitations: []
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.invitations.length === 0 && nextProps.invitations.length > 0) {
+      this.setState({invitations: nextProps.invitations.slice()});
+    }
   },
 
   handleSendInvite: function(e){
@@ -22,13 +30,16 @@ var EventInvitations = React.createClass({
       dataType: 'json',
       data: {email_addresses: [email]},
       success: function(data) {
-        data.invitations.map(function(invite) {
-          that.props.invitations.push(invite);
-          that.setState({invitations: that.props.invitations});
-        });
+        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
+            document.getElementById('notification'));
+        var invitations = that.state.invitations.slice().concat(data.invitations.map(function (inviteWrapper) {
+          return inviteWrapper.invitation;
+        }));
+        that.setState({invitations: invitations});
       },
       error: function(error) {
-
+        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
+            document.getElementById('notification'));
       }
     });
   },
@@ -42,8 +53,8 @@ var EventInvitations = React.createClass({
     var that = this;
     return this.props.assistants.map(function(assistant, index) {
       var removeFromBoard;
-      if(assistant.id == this.props.current_user_id){
-        removeFromBoard = <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>;
+      if(assistant.id == that.props.current_user_id){
+        removeFromBoard = <span> | <a href="#" onClick={that.handleRemoveBridesMaid.bind(that, assistant.id, index)}>Remove from board</a></span>;
       }
 
       return (
@@ -61,7 +72,7 @@ var EventInvitations = React.createClass({
   },
 
   renderInvitations: function () {
-    return this.props.invitations.map(function(invitation, index){
+    return this.state.invitations.map(function(invitation, index){
       return (
         <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
