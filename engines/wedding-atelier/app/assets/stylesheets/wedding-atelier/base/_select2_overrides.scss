@@ -1,9 +1,7 @@
 .select2-container--default {
   width: 100% !important;
-  border: 1px solid transparent;
-  // @include screen-md {
-  //   width: 100% !important;
-  // };
+  border: 0;
+
   .select2-selection__placeholder {
     color: $black;
   }
@@ -46,7 +44,7 @@
 }
 
 .select2-dropdown {
-  border: 1px solid $pinkish-grey-two;
+  border: 0;
   border-radius: 0;
 }
 
