@@ -12,23 +12,25 @@ var EventInvitations = React.createClass({
   },
 
   handleSendInvite: function(e){
-    var email = this.refs.email_address.value;
+    var that = this;
+    var email = that.refs.email_address.value;
+    e.preventDefault();
+
     $.ajax({
-      url: this.props.send_invite_path,
+      url: that.props.send_invite_path,
       type: 'POST',
       dataType: 'json',
       data: {email_addresses: [email]},
       success: function(data) {
         data.invitations.map(function(invite) {
-          this.props.invitations.push(invite);
-          this.setState({invitations: this.props.invitations});
-        }.bind(this));
-      }.bind(this),
+          that.props.invitations.push(invite);
+          that.setState({invitations: that.props.invitations});
+        });
+      },
       error: function(error) {
 
       }
     });
-    e.preventDefault();
   },
 
   handleRemoveBridesMaid: function(id, index, e){
@@ -36,12 +38,14 @@ var EventInvitations = React.createClass({
     e.preventDefault();
   },
 
-  render: function() {
-    var assistants = this.props.assistants.map(function(assistant, index){
+  renderAssistants: function () {
+    var that = this;
+    return this.props.assistants.map(function(assistant, index) {
       var removeFromBoard;
       if(assistant.id == this.props.current_user_id){
         removeFromBoard = <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.id, index)}>Remove from board</a></span>;
       }
+
       return (
         <div className="person" key={assistant.id}>
           <div className="person-name">
@@ -53,9 +57,11 @@ var EventInvitations = React.createClass({
           </div>
         </div>
       );
-    }.bind(this));
+    });
+  },
 
-    var invitations = this.props.invitations.map(function(invitation, index){
+  renderInvitations: function () {
+    return this.props.invitations.map(function(invitation, index){
       return (
         <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
@@ -66,7 +72,10 @@ var EventInvitations = React.createClass({
           </div>
         </div>
       );
-    }.bind(this));
+    });
+  },
+
+  render: function() {
 
     return(
       <form>
@@ -78,8 +87,8 @@ var EventInvitations = React.createClass({
           <button className="btn-black" onClick={this.handleSendInvite}> Send invite</button>
         </div>
         <div className="invited-people">
-          {assistants}
-          {invitations}
+          {this.renderAssistants()}
+          {this.renderInvitations()}
         </div>
       </form>
     );
