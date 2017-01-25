@@ -36,7 +36,7 @@ var CustomizationItem = React.createClass({
     }
   },
 
-  render: function(){
+  renderItem: function(){
     var active = this.isOptionSelected(),
         clicked = this.isOptionClicked(),
         optionItemClasses = classNames({
@@ -47,18 +47,25 @@ var CustomizationItem = React.createClass({
         }),
         removeButton;
 
+
     if(['silhouette', 'length'].indexOf(this.props.type) == -1){
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
     }
 
-    return(
-      <div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+    if(this.props.type === 'silhouette' && ['FP2219', 'FP2214'].indexOf(this.props.option.sku) > -1 ){
+      return null;
+    }
+
+    return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />
           <p>{this.props.option.presentation}</p>
         </div>
-      </div>
-    );
+      </div>)
+  },
+
+  render: function(){
+    return(this.renderItem());
   }
 })
