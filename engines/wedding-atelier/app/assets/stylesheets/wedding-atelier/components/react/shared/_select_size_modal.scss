@@ -84,7 +84,17 @@
       }
     }
 
-    ul.customization-dress-sizes-ul {
+  [type=radio]:checked ~ label,
+  [type=checkbox]:checked ~ label  {
+    outline: 2px solid $black;
+  }
+
+  [type=radio]:not(:checked) ~ label,
+  [type=checkbox]:not(:checked) ~ label  {
+    outline: 0;
+  }
+
+  ul.customization-dress-sizes-ul {
       @include screen-sm {
         width: 280px;
       }
