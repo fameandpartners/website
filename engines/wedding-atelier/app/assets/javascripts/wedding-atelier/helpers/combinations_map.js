@@ -10,10 +10,11 @@ var CombinationsMap = (function(){
   // where we'll place the name of that customization on the big map,
   // this customization value comes in the option argument of the function.
 
-  // position 0 is for silhouettes
-  // position 1 is fits
-  // position 2 is for styles
-  // position 4 is for lengths
+  // the map(json object) is 4 levels deep
+  // level 1 is for silhouettes accessed using product sky
+  // level 2 is fits accessed using customisation value name
+  // level 3 is for styles accessed using customisation value name
+  // level 4 is for lengths accessed using customisation value name
 
 
   var disabledMap = {
