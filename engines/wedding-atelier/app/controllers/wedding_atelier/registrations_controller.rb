@@ -19,6 +19,7 @@ module WeddingAtelier
       end
 
       @user = Spree::User.new(email: invitation.try(:user_email))
+      @user.build_user_profile(skip_validation: true)
     end
 
     def create
@@ -89,6 +90,7 @@ module WeddingAtelier
 
     def prepare_form_default_values
       @user = current_spree_user
+      @user.build_user_profile unless @user.user_profile
 
       @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
       # if current_spree_user.wedding_atelier_signup_step != 'size'
@@ -97,18 +99,10 @@ module WeddingAtelier
 
       @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
 
-      @heights = [
-          "5'19 / 177cm ",
-          "5'19 / 180cm ",
-          "5'19 / 190cm ",
-          "5'19 / 200cm "
-      ]
+      @heights = WeddingAtelier::Height.definitions
 
       @site_version = env['site_version_code'] || 'us'
-      @dress_sizes = {
-        us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
-        au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-      }[@site_version.to_sym]
+      @dress_sizes = Spree::OptionType.size.option_values
     end
 
     def spree_user_params

@@ -1,3 +1,4 @@
+# NOTE: this WILL conflict with PR https://github.com/fameandpartners/website/pull/2354
 FactoryGirl.define do
   factory :customisation_value, class: CustomisationValue do
     price { 10 + rand(100) / 10.0 } # rails will convert to big decimal

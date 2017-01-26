@@ -1,0 +1,7 @@
+= react_component 'CustomizationExperience',
+                  siteVersion: current_site_version.permalink,
+                  eventSlug: params[:event_id],
+                  customizationsUrl: event_customizations_url(params[:event_id]),
+                  event_name: @event.name,
+                  event_path: event_path(@event),
+                  currentUser: WeddingAtelier::UserSerializer.new(spree_current_user, scope: self)

@@ -1,9 +1,10 @@
 .select2-container--default {
-  width: 340px !important;
-  border: 1px solid transparent;
-  @include screen-xs {
-    width: 260px !important;
-  };
+  width: 100% !important;
+  border: 0;
+
+  .select2-selection__placeholder {
+    color: $black;
+  }
 
   &.select2-container--focus {
     border: 1px solid $black;
@@ -43,7 +44,7 @@
 }
 
 .select2-dropdown {
-  border: 1px solid $pinkish-grey-two;
+  border: 0;
   border-radius: 0;
 }
 

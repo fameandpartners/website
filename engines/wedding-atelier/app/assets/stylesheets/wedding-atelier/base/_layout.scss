@@ -1,6 +1,15 @@
 
+html, body {
+  height: 100%;
+}
+
 html {
   font-size: 14px;
+}
+
+#wrap,
+#content {
+  height: 100%;
 }
 
 body {

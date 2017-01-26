@@ -1,16 +1,17 @@
 .registrations__size-form.left-side-centered-container
-  h1 <em>#{current_spree_user.first_name}</em>, let's start with your size profile
+  h1 <em>#{current_spree_user.first_name}</em>, let's start by finding your size profile.
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
       = hidden_field_tag :skip_event_validation, true
       = f.fields_for :user_profile, current_spree_user.user_profile do |ff|
         .form-group
-          = ff.label :height, "What's your height?"
+          = ff.label :height, "Height"
           div
-            = ff.select :height, options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
+            = ff.select :height, grouped_options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
         .form-group
-          = ff.label :dress_size, "What's your dress size? &nbsp;".html_safe
-          = link_to 'view size guide', '#', class: 'guide-link hover-link'
+          = ff.label :dress_size, "Dress size".html_safe
+          = ' '
+          = link_to '(view size guide)', '#', class: 'guide-link hover-link'
           = dress_size_grid ff, @dress_sizes
           - if @user.errors["user_profile.dress_size"].any?
             p Dress size can't be blank

@@ -1,0 +1,26 @@
+.moodboard-tabs {
+  text-align: center;
+
+  .tabs-container {
+    overflow-x: auto;
+  }
+
+  .nav {
+    display: inline-block;
+    min-width: 615px;
+  }
+  .bridal-gowns span {
+    color: $greyish;
+    &.coming-soon {
+      font-size: 9px;
+      left: 25%;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  .tab-content {
+    overflow: auto;
+    height: 100%;
+  }
+}

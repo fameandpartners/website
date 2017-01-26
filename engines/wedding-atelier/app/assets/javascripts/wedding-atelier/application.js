@@ -1,8 +1,44 @@
 //= require jquery
-//= require bootstrap
+//= require jquery_ujs
+
+//--------------
+// Bootstrap JS
+//--------------
+//= require bootstrap/transition
+//= require bootstrap/alert
+//= require bootstrap/collapse
+//= require bootstrap/dropdown
+//= require bootstrap/modal
+//= require bootstrap/tab
+//= require bootstrap/affix
+//= require bootstrap/scrollspy
+//= require bootstrap/tooltip
+//= require bootstrap/popover
+
+//-------
+// React
+//-------
+
 //= require react
 //= require react_ujs
 //= require components
+
 //= require select2-4.0.3
 //= require bootstrap-datepicker-1.6.4
+//= require classnames
+//= require moment-2.17.1.min
+//= require imagesloaded.min
+//= require libs/underscore-min
+
+//--------------------------
+// Helpers
+//--------------------------
+//= require helpers
+
+//--------------------------------
+// Shopping cart & bag & moodboard
+//--------------------------------
+//= require partials/helpers/shopping_cart
+//= require helpers
+
 //= require_tree
