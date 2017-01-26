@@ -1,5 +1,7 @@
 module WeddingAtelier
   class Event < ActiveRecord::Base
+    belongs_to :owner, class_name: 'Spree::User'
+
     has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
     has_many :assistants, through: :event_assistants, source: :user
     has_many :dresses, class_name: 'WeddingAtelier::EventDress'
@@ -10,7 +12,8 @@ module WeddingAtelier
                     :number_of_assistants,
                     :date,
                     :events_attributes,
-                    :name
+                    :name,
+                    :owner_id
 
     after_create :sluggify
 
