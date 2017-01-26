@@ -57,7 +57,6 @@ var CustomizationsMenu = React.createClass({
   render: function() {
     var customizationItems = ['silhouette', 'fabric-color', 'length', 'style', 'fit', 'size'],
         menuEntries = customizationItems.map(function(entry, index) {
-          // var img = "/assets/wedding-atelier/icons/" + entry + ".svg";
           var selected = this.isOptionSet(entry),
               iconClasses = 'icon icon-' + entry + ' ' + selected,
               menuOptionClasses = classNames({
