@@ -109,7 +109,7 @@ var EventDetails = React.createClass({
               </span>
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-group text-center">
             <button className="btn-black center-block" onClick={this.handleUpdate}>Update</button>
           </div>
         </form>
