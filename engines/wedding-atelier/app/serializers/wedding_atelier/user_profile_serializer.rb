@@ -5,7 +5,7 @@ module WeddingAtelier
     has_one :dress_size, serializer: OptionValueSerializer
 
     def height_group
-      WeddingAtelier::Height.definitions.detect {|_, h| h.include?(object.height) }.first
+      WeddingAtelier::Height.height_group(object.height)
     end
   end
 end

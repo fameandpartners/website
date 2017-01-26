@@ -9,7 +9,7 @@ module WeddingAtelier
 
     def show
       @event = Event.find_by_slug(params[:id])
-      @sizes = Spree::OptionType.find_by_name('dress-size').option_values
+      @sizes = Spree::OptionType.size.option_values
       @heights = WeddingAtelier::Height.definitions
 
       if @event.nil? || !@event.assistant_permitted?(current_spree_user)
