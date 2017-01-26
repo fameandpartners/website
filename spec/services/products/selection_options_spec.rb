@@ -48,11 +48,20 @@ module Products
         let!(:fabric_customization) { FactoryGirl.create(:customisation_value, :fabric, product: product) }
         let!(:cut_customization) { FactoryGirl.create(:customisation_value, :cut, product: product) }
 
-        let!(:customizations) { selection_options.read.customizations }
+        let!(:customization_ids) { selection_options.read.customizations.all.map(&:id) }
 
-        it 'only returns the cut type customizations' do
-          customization_ids = customizations.all.map(&:id)
-          expect(customization_ids).to contain_exactly(cut_customization.id)
+        context 'when calling it with no extra params' do
+          it 'only returns the cut type customizations' do
+            expect(customization_ids).to contain_exactly(cut_customization.id)
+          end
+        end
+
+        context 'when calling it with extra params to return all customizations' do
+          subject(:selection_options) { described_class.new(product: product, include_all: true) }
+
+          it 'returns all type customizations needed by order populator' do
+            expect(customization_ids).to contain_exactly(fabric_customization.id, cut_customization.id)
+          end
         end
       end
     end
