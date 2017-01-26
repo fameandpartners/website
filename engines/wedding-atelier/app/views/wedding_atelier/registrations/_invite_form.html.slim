@@ -5,7 +5,7 @@
       = label_tag 'email', "email address"
       - @event.number_of_assistants.times do
         .invitation.js-invitation
-          = text_field_tag 'email_addresses[]', '', class: 'form-control'
+          = email_field_tag 'email_addresses[]', '', class: 'form-control'
     .add-another.js-add-another
       a(href="#") Add another
     .row
