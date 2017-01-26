@@ -94,13 +94,12 @@ var EventDetails = React.createClass({
           </div>
           <div className="form-group">
             <label htmlFor="input_date">What is the date of the wedding?</label>
-            <div className="input-group date date-picker">
+            <div className="input-group date date-picker" ref="datepicker">
               <input
                   type="text"
                   className="form-control"
                   placeholder="mm/dd/yyyy"
                   name="date"
-                  ref="datepicker"
                   id="input_date"
                   readOnly="readonly"
                   value={this.props.event.date}
