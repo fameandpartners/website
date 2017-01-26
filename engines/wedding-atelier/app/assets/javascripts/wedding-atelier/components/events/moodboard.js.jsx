@@ -401,9 +401,10 @@ var MoodBoardEvent = React.createClass({
                   </h1>
                   <EventInvitations initialInvitations={this.state.event.invitations}
                                     assistants={this.state.event.assistants}
+                                    eventOwnerId={this.state.event.owner_id}
                                     handleRemoveAssistant={this.handleRemoveAssistant}
                                     send_invite_path={this.props.send_invite_path}
-                                    curret_user_id={this.props.current_user_id} />
+                                    current_user_id={this.props.current_user_id} />
                 </div>
                 <div id="bridal-gowns" className="tab-pane" role="tabpanel">
 
