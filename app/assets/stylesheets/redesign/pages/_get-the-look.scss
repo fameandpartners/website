@@ -1,5 +1,7 @@
 /* [Bridal Guide]
 -------------------------------------------------------*/
+
+// TODO: finish styles for the modal window
 .get-the-look-modal {
   z-index: 9999;
   position: relative;
@@ -17,21 +19,13 @@
     font-size: 2.15rem;
   }
 
-  .text-grey {
-    color:  $c-neutral-10;
-    font-style: italic;
-    font-family: $font-heading;
-    font-size:  1.6rem;
-
-    a {
-      color:  $c-neutral-10;
-      text-decoration: underline;
-    }
-
+  img {
+    @extend .img-responsive;
   }
 
   .introWrapper {
     margin-top: 105px;
+    padding-bottom: 15px;
 
     h1 {
       font-size: 3.5em;
@@ -49,7 +43,7 @@
 
   .sectionGuideInfo,
   .sectionFooterInfo {
-    margin-top: 85px;
+    margin-top: 65px;
   }
 
   .sectionFooterInfo {
@@ -57,30 +51,92 @@
     padding-bottom: 60px;
   }
 
-  .marble-background {
-    background: url('landingpages/wedding-sweepstakes/marble-texture-bg.jpg');
+  .button-options-wrapper .btnGetTheGuide {
+    margin-right: 10px;
   }
 
-  .button-options-wrapper {
+  @media (min-width: $bootstrap-md-width) {
 
-    .btnGetTheGuide {
-      margin-right: 10px;
+    .introWrapper p {
+      padding-right: 60px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-lg-width) {
+
+    .introWrapper p {
+      padding-right: 280px;
     }
 
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
-  }
 
-  @media (min-width: $bootstrap-lg-width) {
+    p {
+      font-size: 2rem;
+    }
 
-    .introWrapper {
+    h2 {
+      margin-bottom: 15px;
+    }
 
-      p {
-        padding-right: 280px;
+    .sectionGuideInfo,
+    .sectionFooterInfo {
+      margin-top: 35px;
+      overflow: hidden;
+    }
+
+    .sectionFooterInfo {
+      margin-top: 60px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      background-position: 75% 75%;
+
+      h2 {
+        font-size: 2.2em;
       }
 
+      .heading-overlay-wrapper {
+        text-align: center;
+      }
+
+      .image-section {
+        margin-top: 40px;
+      }
+
+    }
+
+    .introWrapper {
+      margin: 25px 10px;
+
+      h1 {
+        margin-bottom: 25px;
+      }
+
+      .spacerThinLine {
+        display: none;
+      }
+
+    }
+
+    .headingOverlayWeddingVibes {
+      margin-top: 25px;
+      margin-bottom: 0;
+    }
+
+    .sectionGuideInfo .copyContent {
+      padding: 0 5px;
+    }
+
+    .containerHalfScreenHero .image-section,
+    .copyContent .image-section {
+      margin: 30px -20px;
+    }
+
+    .containerHalfScreenHero .image-section {
+      margin-bottom: 0;
     }
 
   }
