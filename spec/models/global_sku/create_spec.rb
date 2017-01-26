@@ -77,8 +77,8 @@ describe GlobalSku::Create do
             customisation_id:   nil,
             customisation_name: nil,
             height_value:       'petite',
-            data:               nil,
-            product_id:         dress.id
+            product_id:         dress.id,
+            data:               { 'extended-style-number' => 'ABC123' },
           )
         end
       end
@@ -108,8 +108,8 @@ describe GlobalSku::Create do
             customisation_id:   '123;456',
             customisation_name: 'fabric;fit',
             height_value:       'petite',
-            data:               nil,
-            product_id:         dress.id
+            product_id:         dress.id,
+            data:               { 'extended-style-number' => 'ABC123-fabric-fit' }
           )
         end
       end
