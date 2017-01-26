@@ -1,18 +1,14 @@
 .onboarding-container {
-  @extend .container-fluid;
   background-color: $white-two;
   height: 100vh;
   margin-top: 55px;
   padding-top: 15px;
 
   .button-area {
-    @extend .col-xs-12;
-    @extend .col-sm-6;
     margin-top: 10px;
   }
 
   h1 {
-    @extend .text-center;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 30px;
@@ -24,22 +20,6 @@
     @include screen-lg {
       font-size: 42px;
     };
-  }
-
-  .left-side {
-    @extend .col-xs-12;
-    @extend .col-sm-12;
-    @extend .col-md-6;
-  }
-
-  .right-side {
-    @extend .col-sm-12;
-    @extend .col-md-6;
-  }
-
-  .right-side,
-  .steps {
-    @extend .hidden-xs;
   }
 
   .left-side-centered-container {
