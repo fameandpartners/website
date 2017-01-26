@@ -183,4 +183,14 @@
       }
     }
   }
+
+  @media screen and (max-height: 710px) {
+    .customization-panel {
+      padding-top: 25px;
+    }
+
+    .customization-type {
+      margin: 20px auto;
+    }
+  }
 }
