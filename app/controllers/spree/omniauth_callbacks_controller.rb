@@ -89,7 +89,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         user.sign_up_reason = session[:sign_up_reason]
       end
 
-      if user.save!
+      if user.save
         flash[:notice] = "Signed in successfully."
 
         FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
