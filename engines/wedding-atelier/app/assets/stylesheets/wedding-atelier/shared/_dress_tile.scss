@@ -1,0 +1,77 @@
+#events__moodboard {
+
+  .dress-boxes {
+    text-align: center;
+  }
+
+  /* a dress into the list */
+
+  .dress-box {
+    width: 308px;
+    min-width: 308px;
+    display: inline-block;
+    margin: 20px;
+
+    @include screen-xs {
+      min-width: 283px;
+      width: 283px;
+    };
+  }
+
+  .top-info {
+    background-color: $white-two;
+    text-align: left;
+
+    span {
+      color: $greyish;
+      font-family: NeuzeGro;
+      font-size: 0.8em;
+      margin-left: 8px;
+      line-height: 1.92em;
+    }
+  }
+
+  .dress-box-header {
+    background-color: $white-three;
+
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+
+    .likes {
+      display: flex;
+    }
+
+  }
+
+  .dress-box-body {
+    display: block;
+    flex-grow: 1;
+    background-color: $white-three;
+    img {
+      width: 223px;
+      height: 316px;
+    }
+  }
+
+  .dress-info {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    padding: 14px 0;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+
+  .dress-box-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: $white-two;
+    width: 90%;
+    height: 40px;
+    align-items: center;
+  }
+
+}

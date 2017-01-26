@@ -1,0 +1,22 @@
+/* [Customization Selector Size Mobile]
+-------------------------------------------------------*/
+.customization-selector-mobile-size {
+  @include slide-in-up();
+
+  background-color: $white-two;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  width: 100vw;
+}
+
+.customization-selector-mobile-size-body {
+  padding: 82px 15px 8vh;
+  text-align: left;
+  z-index: 0;
+
+  [name="mobile-assistant"] + label {
+    margin-top: 5px;
+  }
+}

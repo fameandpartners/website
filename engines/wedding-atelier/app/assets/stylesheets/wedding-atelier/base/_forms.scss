@@ -1,6 +1,6 @@
 label {
   @extend .text-uppercase;
-  margin: 10px 0 0;
+  margin: 15px 0 0;
   font-size: .85rem;
   font-weight: 700;
 }
@@ -29,12 +29,15 @@ label {
 /* [Checkbox]
 -------------------------------------------------------*/
 .checkbox {
+  text-align: center;
 
   label {
     color: $pinkish-grey-two;
     font-weight: 300;
-    font-size: .7rem;
+    font-size: .85rem;
     text-transform: none;
+    margin-bottom: 15px;
+    padding-left: 0;
   }
 
   [type="checkbox"] {
@@ -50,8 +53,20 @@ label {
       cursor: pointer;
     }
 
+    ~ label .text {
+      display: inline;
+    }
+
     &:checked + label span {
       background: image-url('wedding-atelier/sprite_check.png') -12px -9px no-repeat;
+    }
+  }
+
+  @include screen-sm {
+    text-align: left;
+
+    label {
+      margin-left: 44px;
     }
   }
 }

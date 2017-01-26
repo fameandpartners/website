@@ -4,6 +4,8 @@ require_dependency "wedding_atelier/application_controller"
 module WeddingAtelier
   class TwilioController < ApplicationController
 
+    protect_from_forgery except: :token
+
     def token
       token = get_token
       grant = get_grant

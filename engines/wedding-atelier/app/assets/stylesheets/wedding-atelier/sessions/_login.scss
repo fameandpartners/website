@@ -26,12 +26,12 @@
   .already-member {
     @extend .text-center;
     color: $boulder;
-    font-size: .8rem;
+    font-size: .85rem;
     margin-top: 20px;
     @include screen-sm {
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: 15px;
       width: 100%;
     }
   }

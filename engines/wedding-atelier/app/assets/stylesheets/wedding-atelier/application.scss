@@ -1,6 +1,7 @@
 /* ...
 *= require select2-4.0.3
-*= require 'select2-4.0.3-bootstrap'
+*= require select2-4.0.3-bootstrap
+*= require animate
 *= require bootstrap-datepicker3-1.6.4
 */
 
@@ -14,10 +15,13 @@
 .wedding-atelier {
   @import 'base/typography';
   @import 'base/common';
+  @import 'base/icons';
   @import 'base/forms';
   @import 'base/buttons';
   @import 'base/select2_overrides';
-  @import 'components/**';
+  @import 'accounts/**/*';
+  @import 'components/**/*';
+  @import 'events/**';
   @import 'registrations/**';
   @import 'sessions/**';
   @import 'shared/**';
