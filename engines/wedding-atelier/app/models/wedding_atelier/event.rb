@@ -29,10 +29,6 @@ module WeddingAtelier
       assistants.include? user
     end
 
-    def invitations
-      Invitation.pending.where(event_slug: slug)
-    end
-
     def date=(val)
       date = begin
         Date.strptime(val, '%m/%d/%Y') if val.present?
