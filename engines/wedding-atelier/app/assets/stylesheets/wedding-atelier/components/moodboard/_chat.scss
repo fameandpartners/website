@@ -26,10 +26,25 @@
 
     .chat-header-right-side {
       display: inline-block;
-
+      text-decoration: none;
+      background: $white-three;
       .stylist-photo {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
+      }
+
+      span {
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        font-family: $secondary-font;
+        font-weight: bold;
+        font-size: 9px;
+        padding: 0 9px;
+        @include screen-md {
+          font-size: 12px;
+        }
+
       }
     }
 
