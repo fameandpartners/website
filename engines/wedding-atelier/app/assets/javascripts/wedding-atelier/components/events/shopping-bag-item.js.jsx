@@ -33,7 +33,7 @@ var ShoppingBagItem = React.createClass({
   },
 
   renderListOfCustomizations: function (item) {
-    return ['silhouette', 'fabric', 'color', 'length', 'style', 'size'].map(function (propertyName, index) {
+    return ['silhouette', 'fabric', 'color', 'length', 'style', 'fit', 'size'].map(function (propertyName, index) {
       var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
       var key = item.id + '-' + index;
       var personalization = item.personalization[propertyName];
