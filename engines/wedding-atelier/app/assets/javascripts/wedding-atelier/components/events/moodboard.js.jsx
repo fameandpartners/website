@@ -341,8 +341,8 @@ var MoodBoardEvent = React.createClass({
           <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
         <div className="right-content col-sm-7">
-          <SelectSizeModal {...selectSizeProps} position="right" />
           <div className="right-container center-block">
+            <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
