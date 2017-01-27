@@ -5,7 +5,7 @@ module WeddingAtelier
     end
 
     def include_header?
-      !['registrations', 'sessions', 'event_dresses'].include?(controller_name)
+      !['registrations', 'sessions', 'event_dresses', 'home'].include?(controller_name)
     end
 
     def profile_image_path
