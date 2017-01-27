@@ -43,17 +43,23 @@ var FabricAndColorSelectorMobile = React.createClass({
   renderFabrics: function () {
     var that = this;
     return this.props.fabrics.map(function(fabric, index) {
-      var inputId = fabric.id + "-" + 'mobile',
-          isChecked = fabric.id === that.state.selectedFabric.id;
+      var inputId = fabric.id + "-" + 'mobile';
+
+      var buttonClasses = classNames({
+        'btn': true,
+        'customizations-selector-mobile-fabric': true,
+        'selected': that.state.selectedFabric.id === fabric.id
+      });
+
       return (
-        <div key={inputId} onClick={that.fabricSelectedHandle.bind(null, fabric)} className="fabric-radio-container">
-          <input id={inputId} type="radio" defaultChecked={isChecked} value={fabric} name="fabric" className="customization-radio"/>
-          <label htmlFor={inputId} className="customization-radio-label">
-            <span className="box"></span>
-            <span className="real-label">{fabric.presentation}</span>
-          </label>
+        <div
+          key={inputId}
+          className={buttonClasses}
+          onClick={that.fabricSelectedHandle.bind(null, fabric)}>
+          {fabric.presentation}
         </div>
       );
+
     });
   },
 
@@ -86,7 +92,7 @@ var FabricAndColorSelectorMobile = React.createClass({
       <div ref="container" className={containerClasses}>
         <div className="customizations-selector-mobile-title">
           <h1><em>Create</em> it how you want</h1>
-          <div className="row">
+          <div className="row text-center">
             {this.renderFabrics()}
           </div>
           <p className="description">Heavy georgette has a flat, matte finish. Matte satin has a little more shine. Which do you prefer?</p>

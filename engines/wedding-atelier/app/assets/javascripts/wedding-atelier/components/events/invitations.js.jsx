@@ -4,7 +4,8 @@ var EventInvitations = React.createClass({
     initialInvitations: React.PropTypes.array,
     send_invite_path: React.PropTypes.string.isRequired,
     handleRemoveAssistant: React.PropTypes.func,
-    current_user_id: React.PropTypes.number
+    current_user_id: React.PropTypes.number,
+    event_owner_id: React.PropTypes.number.isRequired,
   },
 
   getInitialState: function() {
@@ -14,9 +15,15 @@ var EventInvitations = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    var nextState = $.extend({}, this.state);
+
+    nextState.current_owner_id = nextProps.current_user_id;
+
     if (this.state.invitations.length === 0 && nextProps.initialInvitations.length > 0) {
-      this.setState({invitations: nextProps.initialInvitations.slice()});
+      nextState.invitations = nextProps.initialInvitations.slice();
     }
+
+    this.setState(nextState);
   },
 
   handleSendInvite: function(e){
@@ -53,7 +60,7 @@ var EventInvitations = React.createClass({
     var that = this;
     return this.props.assistants.map(function(assistant, index) {
       var removeFromBoard;
-      if(assistant.id == that.props.current_user_id){
+      if(assistant.id != that.state.event_owner_id){
         removeFromBoard = <span> | <a href="#" onClick={that.handleRemoveBridesMaid.bind(that, assistant.id, index)}>Remove from board</a></span>;
       }
 

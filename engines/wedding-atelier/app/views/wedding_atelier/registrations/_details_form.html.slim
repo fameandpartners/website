@@ -5,6 +5,7 @@
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
       = f.fields_for :events, @event do |ff|
+        = ff.hidden_field :owner_id, value: current_spree_user.id
         .form-group
           = ff.label :name, 'What should we call your wedding board?'
           = ff.text_field :name, class: 'form-control'
