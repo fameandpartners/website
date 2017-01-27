@@ -211,8 +211,7 @@ namespace :wedding_atelier do
       { presentation: 'Add hem ruffle', price: 24.99 },
       { presentation: 'Change to strapless bodice', price: 14.99 },
       { presentation: 'ADd front keyhole', price: 9.99 },
-      { presentation: 'Change to column skirt', price: 14.99 },
-      { presentation: 'Change to classic bodice with short sleeve', price: 19.99 }
+      { presentation: 'Change to column skirt', price: 14.99 }
     ]
 
     # TODO: Ask for the base price
