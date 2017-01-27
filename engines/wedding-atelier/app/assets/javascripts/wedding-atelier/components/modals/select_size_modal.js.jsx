@@ -11,15 +11,6 @@ var SelectSizeModal = React.createClass({
     updateUserCartCallback: React.PropTypes.func
   },
 
-  componentDidMount: function(){
-    var that = this;
-    $(this.refs.heightSelect).select2({
-      minimumResultsForSearch: Infinity
-    }).on('change', function (e) {
-      that.heightSelectedHandle(e.target.value);
-    });
-  },
-
   getInitialState: function(){
     return {
       useProfiles: true,
@@ -27,6 +18,15 @@ var SelectSizeModal = React.createClass({
       selectedSize: null,
       selectedHeight: null
      }
+  },
+
+  componentDidMount: function(){
+    var that = this;
+    $(this.refs.heightSelect).select2({
+      minimumResultsForSearch: Infinity
+    }).on('change', function (e) {
+      that.heightSelectedHandle(e.target.value);
+    });
   },
 
   profileSelectedHandle: function(profile){
