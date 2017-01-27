@@ -1,12 +1,5 @@
 module WeddingAtelier
   module ApplicationHelper
-    def registration_background_image_class
-      if ['size', 'details', 'invite'].include? action_name
-        action_name
-      else
-        'signup'
-      end
-    end
 
     def include_header?
       !['registrations', 'sessions', 'event_dresses'].include?(controller_name)
