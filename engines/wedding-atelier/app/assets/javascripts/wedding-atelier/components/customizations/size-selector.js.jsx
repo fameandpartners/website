@@ -156,7 +156,7 @@ var SizeSelector = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Dress Size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+            <label>Dress Size &nbsp;</label>(<SizeGuideModalLauncher />)
             <div className="dress-sizes ungrouped">
               <ul className="customization-dress-sizes-ul">
                 <div>

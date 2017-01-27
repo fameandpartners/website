@@ -332,6 +332,7 @@ var MoodBoardEvent = React.createClass({
 
     return (
       <div id="events__moodboard" className="row">
+        <SizeGuideModal />
         <div className="mobile-select-size-modal">
           <SelectSizeModal {...selectSizeProps} ref="mobileSizeModal" position="center" />
         </div>
