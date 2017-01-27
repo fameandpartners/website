@@ -243,7 +243,7 @@ var SelectSizeModal = React.createClass({
   render: function(){
     var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
     return(
-      <div className="js-select-size-modal select-size-modal row" ref="modal">
+      <div className="js-select-size-modal select-size-modal" ref="modal">
         <div className="body">
           <div className="close">
             <a className="btnClose icon-close-white"/>
