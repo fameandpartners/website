@@ -1,22 +1,23 @@
 var MoodBoardEvent = React.createClass({
 
   propTypes: {
-    event_path: React.PropTypes.string,
-    remove_assistant_path: React.PropTypes.string,
+    bot_profile_photo: React.PropTypes.string,
+    channel_prefix: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
     current_user: React.PropTypes.object,
+    dress: React.PropTypes.object,
     dresses_path: React.PropTypes.string,
-    roles_path: React.PropTypes.string,
-    twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
-    wedding_name: React.PropTypes.string,
-    bot_profile_photo: React.PropTypes.string,
-    profile_photo: React.PropTypes.string,
-    username: React.PropTypes.string,
-    user_id: React.PropTypes.number,
+    event_path: React.PropTypes.string,
     filestack_key: React.PropTypes.string,
+    profile_photo: React.PropTypes.string,
+    remove_assistant_path: React.PropTypes.string,
+    roles_path: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
-    channel_prefix: React.PropTypes.string
+    twilio_token_path: React.PropTypes.string,
+    user_id: React.PropTypes.number,
+    username: React.PropTypes.string,
+    wedding_name: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -192,7 +193,7 @@ var MoodBoardEvent = React.createClass({
 
   handleLikeDress: function(dress) {
     var that = this,
-        event = _extends({}, that.state.event),
+        event = $.extend({}, that.state.event),
         method = dress.liked ? 'DELETE' : 'POST',
         url = this.props.event_path + '/dresses/' + dress.id + '/likes',
         dress = _.findWhere(event.dresses, {id: dress.id});
@@ -288,13 +289,13 @@ var MoodBoardEvent = React.createClass({
   },
 
   changeDressToAddToCartCallback: function(dressId){
-    var _state = _extends({}, this.state);
+    var _state = $.extend({}, this.state);
     _state.dressToAddToCart = dressId;
     this.setState(_state);
   },
 
   updateUserCartCallback: function(cart) {
-    var _state = _extends({}, this.state);
+    var _state = $.extend({}, this.state);
     _state.userCart = cart;
     this.setState(_state);
   },
@@ -340,8 +341,8 @@ var MoodBoardEvent = React.createClass({
           <Chat ref="ChatDesktop" {...chatProps}/>
         </div>
         <div className="right-content col-sm-7">
-          <SelectSizeModal {...selectSizeProps} position="right" />
-          <div className='right-container center-block'>
+          <div className="right-container center-block">
+            <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - {this.state.event.remaining_days} days
             </h1>
