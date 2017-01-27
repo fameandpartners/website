@@ -40,13 +40,13 @@ var ShoppingBagItem = React.createClass({
       var presentationLabel = '';
       if(personalization) {
         presentationLabel = item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
+        return (
+          <li key={key} className="shopping-bag-item-summary-list-item">
+            <span className="customization-name">{label}</span>
+            <span className="customization-value">{presentationLabel}</span>
+          </li>
+        );
       }
-      return (
-        <li key={key} className="shopping-bag-item-summary-list-item">
-          <span className="customization-name">{label}</span>
-          <span className="customization-value">{presentationLabel}</span>
-        </li>
-      );
     });
   },
 
