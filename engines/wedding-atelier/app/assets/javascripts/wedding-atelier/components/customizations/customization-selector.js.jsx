@@ -19,18 +19,11 @@ var CustomizationSelector = React.createClass({
   isOptionDisabled: function(option){
     if(this.props.type === 'silhouette'){ return false; }
     var customizations = this.props.selectedOptions;
-    var optionsKeys = {
-      silhouette: customizations.silhouette ? customizations.silhouette.sku : 'FP2212',
-      fit: customizations.fit ? customizations.fit.name : 'F0',
-      style: customizations.style ? customizations.style.name : 'S0',
-      length: customizations.length ? customizations.length.name : 'AK'
-    }
-
-    if(customizations[this.props.type]){
-      optionsKeys[this.props.type] = option.name;
-    }
-
-    return CombinationsMap.isDisabled(optionsKeys, option, this.props.type);
+    var silhouette = customizations.silhouette ? customizations.silhouette.sku : 'FP2212';
+    var fit = customizations.fit ? customizations.fit.name : 'F0';
+    var style = customizations.style ? customizations.style.name : 'S0';
+    var length = customizations.length ? customizations.length.name : 'AK';
+    return CombinationsMap.isDisabled(this.props.type, option, silhouette, fit, style, length);
   },
 
   render: function() {

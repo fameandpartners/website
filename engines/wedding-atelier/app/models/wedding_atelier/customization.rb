@@ -16,7 +16,7 @@ module WeddingAtelier
       @silhouettes = Spree::Taxon.find_by_permalink('base-silhouette').products
       # TODO: colors should be captures from products
       @colours = Spree::OptionValue.where(name: available_colors)
-      @sizes = Spree::OptionType.find_by_name('dress-size').option_values
+      @sizes = Spree::OptionType.size.option_values
       @assistants = event.assistants
       @heights = WeddingAtelier::Height.definitions
     end

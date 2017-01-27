@@ -8,7 +8,7 @@ module WeddingAtelier
     has_many :dresses
     has_many :assistants, serializer: WeddingAtelier::UserSerializer
 
-    attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days
+    attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days, :owner_id
 
     def date
       object.date.strftime("%m/%d/%Y")

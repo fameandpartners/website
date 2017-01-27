@@ -35,6 +35,10 @@
       height: auto;
       z-index: 0;
       transform: translateX(-50%);
+
+      @include screen-xs{
+        height: 100%;
+      };
     }
   }
 

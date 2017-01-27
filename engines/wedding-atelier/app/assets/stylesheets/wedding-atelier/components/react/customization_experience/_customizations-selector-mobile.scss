@@ -24,6 +24,17 @@
   }
 }
 
+.customizations-selector-mobile-fabric {
+  background-color: $white-three;
+  border: none;
+  margin: 0 10px;
+  width: 140px;
+
+  &.selected {
+    outline: 2px solid $black;
+  }
+}
+
 .customizations-selector-mobile-options-item {
   background-color: $white-three;
   cursor: pointer;

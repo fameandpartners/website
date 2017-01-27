@@ -11,9 +11,9 @@ var CustomizationsModal = React.createClass({
 
   render: function(){
     return (
-      <div className="js-save-dress-modal modal modal-customizations fade" ref="modal" id="modal-customizations" tabIndex='-1' role='dialog'>
+      <div className="modal modal-customizations fade" ref="modal" id="modal-customizations" tabIndex="-1" role="dialog">
         <div className="modal-vertical-align-helper">
-          <div className="modal-dialog modal-vertical-align" role='document'>
+          <div className="modal-dialog modal-vertical-align" role="document">
             <div className="modal-content">
               <div className="modal-body">
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
@@ -54,13 +54,13 @@ var CustomizationsModal = React.createClass({
               </div>
               <div className="modal-footer">
                 <div className="action-buttons">
-                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Edit Design</button>
+                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Make Changes</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});
