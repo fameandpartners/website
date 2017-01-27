@@ -76,7 +76,7 @@ class Repositories::CartProduct
     end
 
     def product_image
-      Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: true)
+      Repositories::LineItemImages.new(line_item: line_item).read(color_id: color_id, cropped: true)
     end
 
     def product_customizations
