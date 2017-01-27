@@ -11,7 +11,7 @@ var CustomizationsModal = React.createClass({
 
   render: function(){
     return (
-      <div className="js-save-dress-modal modal modal-customizations fade" ref="modal" id="modal-customizations" tabIndex="-1" role="dialog">
+      <div className="modal modal-customizations fade" ref="modal" id="modal-customizations" tabIndex="-1" role="dialog">
         <div className="modal-vertical-align-helper">
           <div className="modal-dialog modal-vertical-align" role="document">
             <div className="modal-content">

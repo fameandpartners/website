@@ -78,7 +78,7 @@ var SaveDressButton = React.createClass({
   },
 
   successCallback: function(data){
-    $('.modal-confirm').modal();
+    $('.js-save-dress-modal').modal();
   },
 
   errorCallback: function(data){
