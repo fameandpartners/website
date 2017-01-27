@@ -31,9 +31,15 @@ doctype html
       = stylesheet_link_tag 'ie'
 
     = yield :head
-    = render 'marketing/trackers/google_analytics'
+
+    / Trackers
+    - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
+      = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
+    - if Features.active?(:google_tag_manager)
+      = render 'google_tag_manager/base'
+
     - if flash.key?(:error) && !flash[:error].empty?
       = react_component 'Notification', errors: [flash[:error]]
     #notification
