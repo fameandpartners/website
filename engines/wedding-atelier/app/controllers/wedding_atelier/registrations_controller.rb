@@ -34,6 +34,9 @@ module WeddingAtelier
                                                       utm_params:   session[:utm_params],
                                                       site_version: current_site_version.name,
                                                       form_name:    'Register')
+
+        event_tracker = Marketing::CustomerIOEventTracker.new
+        event_tracker.track(resource, 'wedding_atelier_welcome', user_name: resource.first_name)
         session.delete(:sign_up_reason)
         sign_in :spree_user, resource
         set_flash_message(:notice, :signed_up)
