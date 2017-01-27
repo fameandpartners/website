@@ -9,7 +9,7 @@ var SaveDressModal = React.createClass({
   render: function(){
     var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
     return(
-      <div className="js-save-dress-modal modal modal-confirm fade" id="modal-confirm" tabIndex='-1' role='dialog'>
+      <div className="js-save-dress-modal modal save-dress-modal fade" id="modal-confirm" tabIndex='-1' role='dialog'>
         <div className="modal-vertical-align-helper">
           <div className="modal-dialog modal-vertical-align" role='document'>
             <div className="modal-content">
