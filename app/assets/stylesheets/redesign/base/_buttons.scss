@@ -330,13 +330,17 @@
 }
 
 // Uppercased CTA buttons
-.btnCtaBlackBgUppercase {
-  @extend .btn, .btn-black;
+.btnCtaBlackBgUppercase,
+.btnCtaOutlineBorderUppercase {
+  @extend .btn;
   padding: 10px 20px;
+  border: 1px solid $c-neutral-black;
+}
+
+.btnCtaBlackBgUppercase {
+  @extend .btn-black;
 }
 
 .btnCtaOutlineBorderUppercase {
-  @extend .btn, .btn-transparent;
-  padding: 10px 20px;
-  border: 1px solid $c-neutral-black;
+  @extend .btn-transparent;
 }
