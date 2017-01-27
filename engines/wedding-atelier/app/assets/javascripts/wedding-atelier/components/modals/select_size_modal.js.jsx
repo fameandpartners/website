@@ -106,8 +106,7 @@ var SelectSizeModal = React.createClass({
       data: attrs,
       success: function (data) {
         that.props.updateUserCartCallback(data.order);
-        ReactDOM.render(<Notification errors={['Dress added to your shopping cart.']} />,
-            document.getElementById('notification'));
+        $('.shopping-bag-container').trigger('shoppingBag:open');
       },
       error: function (response) {
         ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
