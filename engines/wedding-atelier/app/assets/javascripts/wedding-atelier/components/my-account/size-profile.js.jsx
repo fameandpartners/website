@@ -107,6 +107,11 @@ var SizeProfile = React.createClass({
     });
 
   },
+
+  handleShowSizeGuide: function() {
+    $('.js-size-guide-modal').modal();
+  },
+
   render: function () {
     return (
       <div className="size-profile">
@@ -122,7 +127,8 @@ var SizeProfile = React.createClass({
           </div>
         </div>
         <div className="form-group">
-          <label>Dress size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+          <SizeGuideModal />
+          <label>Dress size &nbsp;</label>(<a onClick={this.handleShowSizeGuide} href="#" className="guide-link hover-link">view size guide</a>)
           <div className="dress-sizes centered">
             <ul className="customization-dress-sizes-ul">
               {this.renderDressSizes()}
