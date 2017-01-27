@@ -17,7 +17,7 @@ module WeddingAtelier
 
     after_create :sluggify
 
-    validates_uniqueness_of :name
+    validates_uniqueness_of :name, case_sensitive: false
     validates_presence_of :name, :date, :number_of_assistants
 
     def to_param
