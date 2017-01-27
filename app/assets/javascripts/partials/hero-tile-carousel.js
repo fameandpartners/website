@@ -64,4 +64,23 @@
     ]
   });
 
+  // Carousel controlled by external triggers (previous | next)
+  var selectorCarouselControlledByNavTrigger = $('.js-carouselControledByNavTrigger');
+  selectorCarouselControlledByNavTrigger.slick({
+    autoplay: false,
+    arrows: false,
+    dots: false,
+    mobileFirst: true,
+    focusOnSelect: true,
+    infinite: true
+  });
+
+  $('.js-carouselControledByNavTrigger__previous').click(function(){
+    selectorCarouselControlledByNavTrigger.slick('slickPrev');
+  });
+
+  $('.js-carouselControledByNavTrigger__next').click(function(){
+    selectorCarouselControlledByNavTrigger.slick('slickNext');
+  });
+
 })(jQuery);
