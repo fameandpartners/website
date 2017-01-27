@@ -5,7 +5,7 @@ class CreateWeddingAtelierLandingPage < ActiveRecord::Migration
       path:             '/wedding-atelier',
       template_path:    '/landing_pages/wedding_atelier_app',
       heading:          'The Wedding Atelier App Beta',
-      title:            'Evening Party Dresses',
+      title:            'The Wedding Atelier App Beta',
       meta_description: 'Discover bridesmaid dresses that are customizable to fit and flatter each individual, starting at $200. Dress your bridal party in a look that\'s custom, convenient, and actually cool.',
     }
   end
