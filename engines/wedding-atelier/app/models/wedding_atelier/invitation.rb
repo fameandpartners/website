@@ -1,6 +1,5 @@
 module WeddingAtelier
   class Invitation < ActiveRecord::Base
-    after_create :send_invitation_email, unless: Proc.new { Rails.env.test? }
     attr_accessible :user_email, :event_id, :inviter_id
 
     validates :user_email, presence: true, uniqueness: { scope: :event_id, allow_blank: false }
@@ -18,8 +17,6 @@ module WeddingAtelier
         event.save!
       end
     end
-
-    private
 
     def send_invitation_email
       routes = WeddingAtelier::Engine.routes.url_helpers
