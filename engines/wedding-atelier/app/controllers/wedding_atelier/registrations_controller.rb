@@ -54,11 +54,6 @@ module WeddingAtelier
 
     def update
       prepare_form_default_values
-      if @user.wedding_atelier_signup_complete?
-        event_tracker = Marketing::CustomerIOEventTracker.new
-        event_tracker.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
-      end
-
       if @user.update_attributes(spree_user_params)
         @user.add_role(@user.event_role, @user.events.last) if @user.event_role
         if @user.wedding_atelier_signup_step == 'completed'
@@ -72,6 +67,12 @@ module WeddingAtelier
         @event = @user.events.last
         render @user.reload.wedding_atelier_signup_step
       end
+
+      if @user.reload.wedding_atelier_signup_complete?
+        event_tracker = Marketing::CustomerIOEventTracker.new
+        event_tracker.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
+      end
+
     end
 
     def size

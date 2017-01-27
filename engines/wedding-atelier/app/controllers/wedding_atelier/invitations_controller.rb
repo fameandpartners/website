@@ -11,7 +11,7 @@ module WeddingAtelier
       addresses = params[:email_addresses].reject(&:empty?)
       @event = WeddingAtelier::Event.where(slug: params[:event_id]).first
       addresses.each do |email|
-        @event.invitations.create(inviter: current_spree_user, user_email: email)
+        @event.invitations.create(inviter_id: current_spree_user.id, user_email: email)
       end
       current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
       respond_to do |format|
