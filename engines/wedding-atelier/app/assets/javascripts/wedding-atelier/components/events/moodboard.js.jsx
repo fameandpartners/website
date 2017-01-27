@@ -30,7 +30,8 @@ var MoodBoardEvent = React.createClass({
         invitations: [],
         assistants: [],
         send_invite_path: '',
-        current_user_id: '',
+        current_user_id: -1,
+        owner_id: -1,
         name: '',
         hasError: {}
       },
@@ -39,7 +40,8 @@ var MoodBoardEvent = React.createClass({
         invitations: [],
         assistants: [],
         send_invite_path: '',
-        current_user_id: '',
+        current_user_id: -1,
+        owner_id: -1,
         name: '',
         hasError: {}
       },
@@ -65,7 +67,6 @@ var MoodBoardEvent = React.createClass({
           heights = values[1].sizing.heights,
           token = values[2].token,
           twilioManager = new Twilio.AccessManager(token);
-
 
       var _state = $.extend({}, that.state);
       _state.event = event;
@@ -399,12 +400,14 @@ var MoodBoardEvent = React.createClass({
                   <h1 className="text-center">
                     <em>Now</em>, let's invite the bridal party.
                   </h1>
-                  <EventInvitations initialInvitations={this.state.event.invitations}
-                                    assistants={this.state.event.assistants}
-                                    eventOwnerId={this.state.event.owner_id}
-                                    handleRemoveAssistant={this.handleRemoveAssistant}
-                                    send_invite_path={this.props.send_invite_path}
-                                    current_user_id={this.props.current_user_id} />
+                  <EventInvitations
+                    initialInvitations={this.state.event.invitations}
+                    assistants={this.state.event.assistants}
+                    event_owner_id={this.state.event.owner_id}
+                    handleRemoveAssistant={this.handleRemoveAssistant}
+                    send_invite_path={this.props.send_invite_path}
+                    current_user_id={this.props.current_user_id}
+                  />
                 </div>
                 <div id="bridal-gowns" className="tab-pane" role="tabpanel">
 
