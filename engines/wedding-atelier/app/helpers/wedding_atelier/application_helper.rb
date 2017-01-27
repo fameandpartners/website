@@ -1,7 +1,11 @@
 module WeddingAtelier
   module ApplicationHelper
     def registration_background_image_class
-      current_spree_user.try(:wedding_atelier_signup_step) || 'signup'
+      if ['size', 'details', 'invite'].include? action_name
+        action_name
+      else
+        'signup'
+      end
     end
 
     def include_header?
