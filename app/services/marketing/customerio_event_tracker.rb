@@ -25,7 +25,7 @@ module Marketing
       Rails.logger.info("[customer.io] #{user_id}, #{attrs}")
     end
 
-    def anonymus_track(event_type, attrs)
+    def anonymous_track(event_type, attrs)
       client.anonymous_track(event_type, attrs)
     end
 

@@ -23,7 +23,6 @@ module WeddingAtelier
 
     def send_invitation_email
       routes = WeddingAtelier::Engine.routes.url_helpers
-      event_tracker = Marketing::CustomerIOEventTracker.new
       invitation_attrs = {
         recipient: user_email,
         invited_by_email: inviter.email,
@@ -34,7 +33,7 @@ module WeddingAtelier
         moodboard_path: routes.event_invitation_accept_path(self.event, self),
         moodboard_url: routes.event_invitation_accept_url(self.event, self, host: 'fameandpartners.com', protocol: 'https')
       }
-      event_tracker.anonymus_track('invited_to_moodboard', invitation_attrs)
+      Marketing::CustomerIOEventTracker.new.anonymous_track('invited_to_moodboard', invitation_attrs)
     end
   end
 end

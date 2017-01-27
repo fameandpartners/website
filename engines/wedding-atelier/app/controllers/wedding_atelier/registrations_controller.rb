@@ -69,8 +69,7 @@ module WeddingAtelier
       end
 
       if @user.reload.wedding_atelier_signup_complete?
-        event_tracker = Marketing::CustomerIOEventTracker.new
-        event_tracker.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
+        Marketing::CustomerIOEventTracker.new.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
       end
 
     end
