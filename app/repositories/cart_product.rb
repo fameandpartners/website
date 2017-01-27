@@ -36,7 +36,8 @@ class Repositories::CartProduct
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: product.delivery_period
+        delivery_period: product.delivery_period,
+        is_wedding_atelier_product: product.is_wedding_atelier_product?
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       result.color  = Repositories::ProductColors.read(color_id)
@@ -76,7 +77,11 @@ class Repositories::CartProduct
     end
 
     def product_image
-      Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: true)
+      if product.is_wedding_atelier_product?
+        WeddingAtelier::EventDress.images_for_line_item(line_item)
+      else
+        Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: true)
+      end
     end
 
     def product_customizations

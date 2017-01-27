@@ -51,6 +51,9 @@ class CustomisationValue < ActiveRecord::Base
   scope :ordered, order('position ASC')
   scope :by_type, lambda { |customisation_type| where(customisation_type: customisation_type) }
 
+  # .length of Array object has more precedence :(
+  scope :by_length, -> { where(customisation_type: 'length') }
+
   has_attached_file :image, styles: {
     mini: '48x48>', small: '100x100>', product: '240x240>'#, large: '600x600>'
   }

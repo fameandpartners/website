@@ -1,0 +1,25 @@
+.row.cart-item data-id=(product.line_item_id)
+  .cart-item-image-holder.col-xs-5
+    = image_tag product.image[:front][:thumbnail][:white], class: 'cart-item-image img-responsive', alt: product.name
+
+  .cart-item-info.col-xs-7
+    a.pull-right.remove-product[href="javascript:;"]
+      span.icon.btn-close
+    .heading.txt-truncate-1
+      = content_tag :span, product.name, class: 'cart-item-title'
+    .cart-item-price
+      = product.price.display_price
+    dl.cart-item-description
+      dd
+        b Silhouette:
+        = product.name
+      = presentation_of(product.customizations, 'fabric')
+      dd
+        b Color:
+        = product.color.name
+      = presentation_of(product.customizations, 'length')
+      = presentation_of(product.customizations, 'style')
+      = presentation_of(product.customizations, 'fit')
+      dd
+        b Size Profile:
+        = product.size.presentation
