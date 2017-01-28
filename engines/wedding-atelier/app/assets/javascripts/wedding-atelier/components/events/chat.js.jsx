@@ -319,9 +319,10 @@ var Chat = React.createClass({
               </div>
             </div>
             <div className="col-xs-5">
-              <div className="chat-header-right-side pull-right">
-                <strong>Fame stylist: </strong><span className="stylist-name">Amber: </span><img src="/assets/profile-placeholder.jpg" className="stylist-photo" />
-              </div>
+              <a href="https://www.fameandpartners.com/wedding-consultation" target="_blank" className="chat-header-right-side pull-right">
+                <img className="stylist-photo" src="/assets/wedding-atelier/amber.png" />
+                <span> INVITE A STYLIST </span>
+              </a>
             </div>
           </div>
         </div>

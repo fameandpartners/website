@@ -3,6 +3,7 @@ module WeddingAtelier
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
     before_filter :redirect_if_completed, except: :new
+    before_filter :sign_in_if_exists, only: :create
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -87,6 +88,18 @@ module WeddingAtelier
 
 
     private
+
+    def sign_in_if_exists
+      user = Spree::User.where(email: spree_user_params[:email]).first
+      if user
+        sign_in :spree_user, user
+        if user.wedding_atelier_signup_complete?
+          redirect_to wedding_atelier.event_path(user.events.last)
+        else
+          redirect_to action: user.wedding_atelier_signup_step
+        end
+      end
+    end
 
     def prepare_form_default_values
       @user = current_spree_user
