@@ -173,6 +173,7 @@ var CustomizationExperience = React.createClass({
     return (
       <div className="customization-experience container-fluid">
         <SizeGuideModal />
+        <LengthGuideModal />
         <MobileCustomizations {...props} />
         <DesktopCustomizations {...props} />
         <CustomizationsModal

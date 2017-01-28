@@ -52,12 +52,14 @@ var CustomizationSelector = React.createClass({
       'active': this.props.currentCustomization === this.props.type
     });
 
+    var lenghtGuideModalLauncherComp = itemProps.type === "length" ? <LenghtGuideModalLauncher /> : '';
+
     return (
       <div ref="container" className={customizationSelectorClasses}>
         <div className="customization">
           <div className="customization-title">
             <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
-            <p className="description">{this.props.description}</p>
+            <p className="description">{this.props.description} {lenghtGuideModalLauncherComp}</p>
           </div>
           <div className="customization-options-grid row">
             {options}
