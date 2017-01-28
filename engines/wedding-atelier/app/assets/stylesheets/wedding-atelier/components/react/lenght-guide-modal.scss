@@ -8,9 +8,9 @@
   }
 
   h1 {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $black;
     font-size: 20px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 10px;
     width: 260px;
   }
 
@@ -49,7 +49,7 @@
     }
     tbody {
       tr {
-        background-color: #fbfbfb; /* TODO: Use the color _variables.scss that is in the other branch */
+        background-color: $white-five;
       }
     }
   }
