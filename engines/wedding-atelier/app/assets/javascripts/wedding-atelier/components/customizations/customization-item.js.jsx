@@ -52,11 +52,13 @@ var CustomizationItem = React.createClass({
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
     }
 
+    var presentation = (this.props.type === 'silhouette' ? 'The ' : '') + this.props.option.presentation;
+
     return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />
-          <p>{this.props.option.presentation}</p>
+          <p>{presentation}</p>
         </div>
       </div>)
   },
