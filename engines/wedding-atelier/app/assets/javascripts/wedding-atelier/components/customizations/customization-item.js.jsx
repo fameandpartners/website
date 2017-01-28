@@ -45,11 +45,15 @@ var CustomizationItem = React.createClass({
           active: active,
           clicked: clicked
         }),
-        removeButton;
+        removeButton, customizationPrice;
 
 
     if(['silhouette', 'length'].indexOf(this.props.type) == -1){
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
+    }
+
+    if(['fit', 'style'].indexOf(this.props.type) > -1){
+      customizationPrice = <span className="customization-price">{' + $' + parseFloat(this.props.option.price)}</span>
     }
 
     var presentation = (this.props.type === 'silhouette' ? 'The ' : '') + this.props.option.presentation;
@@ -58,7 +62,7 @@ var CustomizationItem = React.createClass({
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />
-          <p>{presentation}</p>
+          <p>{presentation}{customizationPrice}</p>
         </div>
       </div>)
   },
