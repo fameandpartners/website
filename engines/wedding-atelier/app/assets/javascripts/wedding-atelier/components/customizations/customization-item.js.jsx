@@ -52,10 +52,6 @@ var CustomizationItem = React.createClass({
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
     }
 
-    if(this.props.type === 'silhouette' && ['FP2219', 'FP2214'].indexOf(this.props.option.sku) > -1 ){
-      return null;
-    }
-
     if(['fit', 'style'].indexOf(this.props.type) > -1){
       customizationPrice = <span className="customization-price">{' + $' + parseFloat(this.props.option.price)}</span>
     }

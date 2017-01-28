@@ -66,7 +66,7 @@ var CustomizationExperience = React.createClass({
     newState.customizations.styles = dress.product.styles;
     newState.customizations.fabrics = dress.product.fabrics;
     newState.customizations.lengths = dress.product.lengths;
-    newState.subTotal = parseInt(dress.product.price);
+    newState.subTotal = parseFloat(dress.product.price);
     newState.customizationsCost = this.customizationsCost();
     this.setState(newState);
   },
@@ -92,7 +92,7 @@ var CustomizationExperience = React.createClass({
     newState.customizations.styles = silhouette.styles;
     newState.customizations.fabrics = silhouette.fabrics;
     newState.customizations.lengths = silhouette.lengths;
-    newState.subTotal = parseInt(silhouette.price);
+    newState.subTotal = parseFloat(silhouette.price);
     newState.customizationsCost = this.customizationsCost();
     this.setState(newState);
   },
@@ -108,7 +108,7 @@ var CustomizationExperience = React.createClass({
         cost += parseFloat(option.price);
       }
     }
-    return cost;
+    return cost.toFixed(2)/1;
   },
 
   changeCurrentCustomizationCallback: function(currentCustomization){
@@ -116,9 +116,11 @@ var CustomizationExperience = React.createClass({
   },
 
   selectCallback: function(customization, value){
-    var newState = $.extend({}, this.state);
+    var newState = $.extend({}, this.state),
+        basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
     newState.selectedOptions[customization] = value;
     newState.customizationsCost = this.customizationsCost();
+    newState.subTotal = basePrice + newState.customizationsCost;
 
     if(customization === 'silhouette' && value) {
       var fabric = _.findWhere(value.fabrics, { name: newState.selectedOptions.fabric.name }),
@@ -172,6 +174,7 @@ var CustomizationExperience = React.createClass({
 
     return (
       <div className="customization-experience container-fluid">
+        <SizeGuideModal />
         <MobileCustomizations {...props} />
         <DesktopCustomizations {...props} />
         <CustomizationsModal
