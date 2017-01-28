@@ -82,6 +82,7 @@ class ProductImages
   end
 
   # we can optimize it, if needed
+  # @return [OpenStruct]
   def read(options = {})
     filter(options).first || read_all(options).first || default_image
   end

@@ -9,25 +9,15 @@ module Repositories
       @line_item = line_item
     end
 
+    # @return [Repositories::Images::Template]
     def read(color_id: nil, cropped: true)
       if product_from_wedding_atelier?
-        default_image
+        Images::Template.default
       else
-        Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: cropped)
+        image_ostruct = Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: cropped)
+        Images::Template.new(image_ostruct)
       end
     end
-
-    def default_image(url = 'noimage/product.png')
-      OpenStruct.new({
-        id:       nil,
-        position: 0,
-        original: url,
-        large:    url,
-        xlarge:   url,
-        small:    url
-      })
-    end
-
 
     private
 
