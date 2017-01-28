@@ -354,17 +354,31 @@ var MoodBoardEvent = React.createClass({
                     <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
                       Chat  <span className="badge">12</span></a>
                   </li>
-                  <li className="active" role="presentation">
-                    <a className="walkthrough-messages" aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab" title="View your dresses" data-content="Create new looks and vote on your favorites" data-placement="bottom">
+                  <li
+                    className="active walkthrough-messages"
+                    role="presentation"
+                    title="View your dresses"
+                    data-content="Create new looks and vote on your favorites"
+                    data-placement="bottom">
+                    <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                       Bridesmaid dresses</a>
                   </li>
-                  <li role="presentation">
-                    <a className="walkthrough-messages" aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab" title="Update the details" data-content="Input everything you need to know about the big day" data-placement="bottom">
+                  <li
+                    role="presentation"
+                    className="walkthrough-messages"
+                    title="Update the details"
+                    data-content="Input everything you need to know about the big day"
+                    data-placement="top">
+                    <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
                     Wedding details</a>
                   </li>
-                  <li role="presentation">
-                    <a className="walkthrough-messages" aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab" title="Manage the group" data-content="Add, view, and remove members of the bridal party" data-placement="bottom">
-                    Bridal party</a>
+                  <li
+                    role="presentation"
+                    className="walkthrough-messages"
+                    title="Manage the group"
+                    data-content="Add, view, and remove members of the bridal party"
+                    data-placement="bottom">
+                    <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">Bridal party</a>
                   </li>
                   <li role="presentation" className="bridal-gowns">
                     <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
