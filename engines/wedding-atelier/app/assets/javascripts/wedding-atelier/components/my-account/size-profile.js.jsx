@@ -29,8 +29,10 @@ var SizeProfile = React.createClass({
   },
 
   parsePresentation: function (size) {
-    var dressSizeZoneRegexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.option_value.name.match(dressSizeZoneRegexp)[1];
+    // TODO: Change this to parse for both, instead of US
+    // var dressSizeZoneRegexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
+    var dressSizeZoneRegexp = new RegExp('US(\\d+)', 'i');
+    return 'US ' + size.option_value.name.match(dressSizeZoneRegexp)[1];
   },
 
   changeSizeHandler: function (size) {
@@ -129,7 +131,7 @@ var SizeProfile = React.createClass({
             </ul>
           </div>
         </div>
-        <div className="checkbox col-sm-12">
+        <div className="col-sm-12 text-center">
           <button className="btn-black" onClick={this.sizeProfileSavedHandle}>Save</button>
         </div>
       </div>
