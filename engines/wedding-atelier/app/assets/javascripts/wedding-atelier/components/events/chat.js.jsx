@@ -156,7 +156,7 @@ var Chat = React.createClass({
 
     message = {
       profilePhoto: this.props.bot_profile_photo,
-      author: "Famebot",
+      author: "BridalBot",
       time: Date.now(),
       type: type,
       content: message

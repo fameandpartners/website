@@ -121,9 +121,9 @@ var MoodBoardEvent = React.createClass({
             channel.join().then(function() {
               console.log('Joined channel as ' + that.props.username);
               that.refs.ChatDesktop.setUpMessagingEvents(channel);
-              that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
+              that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
               .then(function() {
-                return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
+                return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?"+ '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.')
               });
             });
           });
