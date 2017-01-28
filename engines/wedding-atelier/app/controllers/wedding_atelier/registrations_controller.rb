@@ -105,7 +105,12 @@ module WeddingAtelier
       @user = current_spree_user
       @user.build_user_profile unless @user.user_profile
 
-      @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
+      @roles = {
+        'Bride' => 'bride',
+        'Bridesmaid' => 'bridesmaid',
+        'Maid of Honor' => 'maid of honor',
+        'Mother of Bride' => 'mother of bride'
+      }
       # if current_spree_user.wedding_atelier_signup_step != 'size'
       #   @event = current_spree_user.events.last || current_spree_user.events.new
       # end
