@@ -75,4 +75,17 @@ module CheckoutHelper
     end
 
   end
+
+  def presentation_of customizations, type
+    customization = customizations.detect {|customization| customization.customisation_type == type }
+    if customization
+      content_tag :dd do
+        title = content_tag :b do
+          "#{type.titleize}:"
+        end
+        presentation = "#{customization.presentation} #{ customization.price > 0 ? '+' + customization.display_price.to_s : ''}"
+        [title, presentation].join(' ').html_safe
+      end
+    end
+  end
 end

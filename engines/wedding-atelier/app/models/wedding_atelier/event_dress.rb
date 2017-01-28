@@ -90,5 +90,19 @@ module WeddingAtelier
     def customizations_ids
       [length_id, fabric_id, fit_id, style_id].compact
     end
+
+    # Not sure where to put this method, in a service object maybe?
+    def self.images_for_line_item(line_item)
+      customization_values = line_item.personalization.customization_values
+      attrs = {
+        product_id: line_item.variant.product_id,
+        color_id: line_item.personalization.color_id,
+        fit_id: customization_values.fit.first&.id,
+        style_id: customization_values.style.first&.id,
+        fabric_id: customization_values.fabric.first&.id,
+        length_id: customization_values.by_length.first&.id
+      }
+      OpenStruct.new(new(attrs).images)
+    end
   end
 end
