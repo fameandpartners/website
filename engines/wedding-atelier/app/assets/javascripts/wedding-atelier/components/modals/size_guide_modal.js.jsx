@@ -7,6 +7,8 @@ var SizeGuideModal = React.createClass({
   },
 
   componentDidMount: function() {
+    // TODO : Refactor all this $(this.refs.etc) to use state and classNames instead of jQuery
+
     $(this.refs.tips).hide();
     $(this.refs.table).find('.cm').hide();
   },
