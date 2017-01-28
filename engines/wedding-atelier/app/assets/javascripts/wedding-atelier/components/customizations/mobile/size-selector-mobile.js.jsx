@@ -154,7 +154,7 @@ var SizeSelectorMobile = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Dress size. &nbsp;</label>(<SizeGuideModalLauncher />)
+            <label>Dress size. &nbsp;</label><SizeGuideModalLauncher />
             <div className="dress-sizes ungrouped centered">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}

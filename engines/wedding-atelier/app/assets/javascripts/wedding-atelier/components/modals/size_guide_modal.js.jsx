@@ -2,8 +2,7 @@ var SizeGuideModal = React.createClass({
 
   getInitialState: function() {
     return {
-      metric: 'inches',
-      showing: 'measure'
+      metric: 'inches'
     }
   },
 
@@ -18,10 +17,6 @@ var SizeGuideModal = React.createClass({
 
     $(this.refs.actions).find('.show-tips').removeClass('selected');
     $(this.refs.actions).find('.show-measure').addClass('selected');
-
-    var nextState = $.extend({}, this.state);
-    nextState.showing = 'measure';
-    this.setState(nextState);
   },
 
   handleShowTips: function() {
@@ -30,10 +25,6 @@ var SizeGuideModal = React.createClass({
 
     $(this.refs.actions).find('.show-tips').addClass('selected');
     $(this.refs.actions).find('.show-measure').removeClass('selected');
-
-    var nextState = $.extend({}, this.state);
-    nextState.showing = 'tips';
-    this.setState(nextState);
   },
 
   handleShowCm: function() {

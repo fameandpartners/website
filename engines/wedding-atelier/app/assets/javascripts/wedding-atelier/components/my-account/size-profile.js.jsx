@@ -124,7 +124,7 @@ var SizeProfile = React.createClass({
         </div>
         <div className="form-group">
           <SizeGuideModal />
-          <label>Dress size &nbsp;</label>(<SizeGuideModalLauncher />)
+          <label>Dress size &nbsp;</label><SizeGuideModalLauncher />
           <div className="dress-sizes centered">
             <ul className="customization-dress-sizes-ul">
               {this.renderDressSizes()}
