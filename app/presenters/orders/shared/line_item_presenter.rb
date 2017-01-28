@@ -64,9 +64,10 @@ module Orders
         image.large
       end
 
+      # Note: a line item personalization can be nil
       # @return [Repositories::Images::Template]
       def image
-        Repositories::LineItemImages.new(line_item: item).read(color_id: personalization.color_id)
+        Repositories::LineItemImages.new(line_item: item).read(color_id: personalization&.color_id)
       end
 
       def personalizations?

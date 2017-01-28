@@ -150,6 +150,7 @@ class ProductImages
       }
     end
 
+    # TODO: should be a `Repositories::Images::Template`
     def default_image(url = 'noimage/product.png')
       OpenStruct.new({
         id: nil,
