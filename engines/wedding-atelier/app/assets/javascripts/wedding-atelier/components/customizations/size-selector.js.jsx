@@ -31,8 +31,10 @@ var SizeSelector = React.createClass({
   },
 
   parsePresentation: function(size) {
-    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.name.match(regexp)[1];
+    // TODO: Change this for parsing both US and AU
+    // var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
+    var regexp = new RegExp('US(\\d+)', 'i');
+    return 'US ' + size.name.match(regexp)[1];
   },
 
   heightSelectedHandle: function (target) {

@@ -37,9 +37,10 @@ var SizeSelectorMobile = React.createClass({
   },
 
   parsePresentation: function(size) {
-    // Finds the matching dress size depending the region US/AU, extracts the number
-    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.name.match(regexp)[1];
+    // TODO: Change this for parsing both US and AU
+    // var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
+    var regexp = new RegExp('US(\\d+)', 'i');
+    return 'US ' + size.name.match(regexp)[1];
   },
 
   heightSelectedHandle: function (height) {
