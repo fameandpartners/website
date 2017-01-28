@@ -58,7 +58,7 @@
     };
 
     @include screen-xs {
-      margin: 4px 4px;
+      margin: 4px 3px;
     };
 
     [type=radio], [type=checkbox] {
@@ -72,8 +72,8 @@
       display: block;
       font-weight: 400;
       line-height: 1.5em;
-      min-width: 40px;
-      padding: 9px 12px;
+      width: 55px;
+      padding: 9px 9px;
       position: relative;
       text-align: center;
       z-index: 9;
