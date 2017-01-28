@@ -4,6 +4,11 @@
 
   .length-guide-container {
     width: 50%;
+
+    @include screen-xs {
+      width: 100%;
+    }
+
     margin: 0 auto;
   }
 
