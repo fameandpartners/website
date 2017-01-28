@@ -35,6 +35,7 @@ module WeddingAtelier
                                                       utm_params:   session[:utm_params],
                                                       site_version: current_site_version.name,
                                                       form_name:    'Register')
+
         session.delete(:sign_up_reason)
         sign_in :spree_user, resource
         set_flash_message(:notice, :signed_up)
@@ -67,6 +68,11 @@ module WeddingAtelier
         @event = @user.events.last
         render @user.reload.wedding_atelier_signup_step
       end
+
+      if @user.reload.wedding_atelier_signup_complete?
+        Marketing::CustomerIOEventTracker.new.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
+      end
+
     end
 
     def size

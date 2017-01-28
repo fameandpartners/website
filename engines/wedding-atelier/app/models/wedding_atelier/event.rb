@@ -5,6 +5,7 @@ module WeddingAtelier
     has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
     has_many :assistants, through: :event_assistants, source: :user
     has_many :dresses, class_name: 'WeddingAtelier::EventDress'
+    has_many :invitations
 
     resourcify :event_roles, role_cname: 'WeddingAtelier::EventRole'
 
@@ -26,10 +27,6 @@ module WeddingAtelier
 
     def assistant_permitted?(user)
       assistants.include? user
-    end
-
-    def invitations
-      Invitation.pending.where(event_slug: slug)
     end
 
     def date=(val)
