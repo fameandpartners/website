@@ -31,7 +31,7 @@ namespace :wedding_atelier do
       { presentation: 'Add wide off shoulder panel', price: 19.99 },
       { presentation: 'Add separate cape', price: 24.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      { presentation: 'Add wide armed ties', price: 14.99 }
     ]
 
     strapless_fits = [
@@ -117,7 +117,7 @@ namespace :wedding_atelier do
       { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      { presentation: 'Add wide armed ties', price: 14.99 }
     ]
 
     slip_fits = [
