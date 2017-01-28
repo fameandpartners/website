@@ -55,10 +55,10 @@
       background-size: cover;
       background-repeat: no-repeat;
       display: table;
+    }
 
-      &.signup {
-        background-image: image-url('wedding-atelier/onboarding/signup.jpg');
-      }
+    .signup-background {
+      background-image: image-url('wedding-atelier/onboarding/signup.jpg');
 
       &.size {
         background-image: image-url('wedding-atelier/onboarding/size.jpg');
