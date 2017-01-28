@@ -344,7 +344,7 @@ var MoodBoardEvent = React.createClass({
           <div className="right-container center-block">
             <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
-              {this.state.event.name} - {this.state.event.remaining_days} days
+               The Countdown: {this.state.event.remaining_days} days
             </h1>
 
             <div className="moodboard-tabs center-block">
