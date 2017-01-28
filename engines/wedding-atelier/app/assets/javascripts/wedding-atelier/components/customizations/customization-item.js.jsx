@@ -52,10 +52,6 @@ var CustomizationItem = React.createClass({
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
     }
 
-    if(this.props.type === 'silhouette' && ['FP2219', 'FP2214'].indexOf(this.props.option.sku) > -1 ){
-      return null;
-    }
-
     var presentation = (this.props.type === 'silhouette' ? 'The ' : '') + this.props.option.presentation;
 
     return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">

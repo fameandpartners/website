@@ -219,7 +219,7 @@ var SelectSizeModal = React.createClass({
             </div>
           </div>
           <div className="form-group text-left">
-            <label>Dress size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+            <label>Dress size &nbsp;</label><SizeGuideModalLauncher />
             <div className="dress-sizes ungrouped centered">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}
