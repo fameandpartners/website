@@ -155,15 +155,24 @@
       padding: 0 15px;
     }
 
-    .main-hero-wrap .copyContent {
-      padding: 70px 15px;
-      font-size: 1.3rem;
+    .main-hero-wrap {
+
+      p {
+        padding: 0 35px;
+        font-size: 2.1rem;
+      }
+
+      .copyContent {
+        padding-top: 55px;
+        padding-bottom: 70px;
+      }
+
     }
 
     .introCopyRow {
       background: url('_backgrounds/marble-texture-bg.jpg');
       background-size: 280%;
-      background-position: 75% 75%;
+      background-position: 65% 100%;
     }
 
     .sectionWelcome {
