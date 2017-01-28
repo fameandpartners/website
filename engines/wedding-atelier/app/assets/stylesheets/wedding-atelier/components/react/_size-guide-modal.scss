@@ -5,7 +5,11 @@
     width: 900px;
 
     @include screen-xs {
-      width: inherit;
+      width: 100%;
+    }
+
+    @include screen-sm {
+      width: 100%;
     }
 
   }
