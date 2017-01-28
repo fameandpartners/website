@@ -10,6 +10,13 @@ module Repositories
                   :xlarge,
                   :small
 
+      # @param [Hash{Symbol => Object}] options
+      # @option options [Integer] :id. ID of the `Spree::Image` if it's persisted on the database
+      # @option options [Integer] :position. Default: 0
+      # @option options [String] :original. URL for the "original" image size version
+      # @option options [String] :large. URL for the "large" image size version
+      # @option options [String] :xlarge. URL for the "xlarge" image size version
+      # @option options [String] :small. URL for the "small" image size version
       def initialize(options = {})
         @id       = options[:id]
         @position = options[:position] || 0

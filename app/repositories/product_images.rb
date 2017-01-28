@@ -81,6 +81,7 @@ class ProductImages
     scope
   end
 
+  # TODO: this should return a Repositories::Images::Template
   # we can optimize it, if needed
   # @return [OpenStruct]
   def read(options = {})
