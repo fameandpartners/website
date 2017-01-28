@@ -119,8 +119,6 @@ var CustomizationExperience = React.createClass({
     var newState = $.extend({}, this.state),
         basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
     newState.selectedOptions[customization] = value;
-    newState.customizationsCost = this.customizationsCost();
-    newState.subTotal = basePrice + newState.customizationsCost;
 
     if(customization === 'silhouette' && value) {
       var fabric = _.findWhere(value.fabrics, { name: newState.selectedOptions.fabric.name }),
@@ -138,6 +136,8 @@ var CustomizationExperience = React.createClass({
 
     //Flag needed to whether add the previously saved dress or customized params
     newState.selectedOptions.customized = true;
+    newState.customizationsCost = this.customizationsCost();
+    newState.subTotal = basePrice + newState.customizationsCost;
     this.setState(newState);
   },
 
