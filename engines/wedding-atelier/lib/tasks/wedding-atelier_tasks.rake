@@ -72,7 +72,7 @@ namespace :wedding_atelier do
     ]
 
     fit_and_flare_attrs = {
-      name: 'Fit and flare',
+      name: 'Fit and Flare',
       sku: 'FP2213',
       price: 200,
       hidden: true,
@@ -188,7 +188,7 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     tri_cup_attrs = {
-      name: 'Tri-cup',
+      name: 'Tri-Cup',
       sku: 'FP2220',
       price: 200,
       hidden: true,
@@ -246,7 +246,7 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     multi_way_attrs = {
-      name: 'Multi way',
+      name: 'Multi Way',
       sku: 'FP2219',
       price: 200,
       hidden: true,
