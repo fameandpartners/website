@@ -172,7 +172,7 @@ namespace :wedding_atelier do
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
       { presentation: 'Add separate cape', price: 24.99 },
-      { presentation: 'Change to tie straps (remove ring & slide)', price: 9.99 },
+      { presentation: 'Change to tie straps', price: 9.99 },
       { presentation: 'Add ruffles to cups', price: 14.99 },
       { presentation: 'Add ruffles to steams', price: 24.99 },
       { presentation: 'Add detachable bow', price: 19.99 }
