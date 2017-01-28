@@ -30,13 +30,6 @@ var SizeSelector = React.createClass({
     }).val(this.state.assistant.user_profile.height);
   },
 
-  parsePresentation: function(size) {
-    // TODO: Change this for parsing both US and AU
-    // var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    var regexp = new RegExp('US(\\d+)', 'i');
-    return 'US ' + size.name.match(regexp)[1];
-  },
-
   heightSelectedHandle: function (target) {
     // it's important to change size here to reset presentation as 4'10" / 147cm | 6
     // if previous size came from an user profile
@@ -108,7 +101,7 @@ var SizeSelector = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps} />
-          <label htmlFor={id}>{that.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     });

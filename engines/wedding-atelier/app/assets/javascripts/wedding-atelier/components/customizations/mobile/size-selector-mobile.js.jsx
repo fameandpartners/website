@@ -36,13 +36,6 @@ var SizeSelectorMobile = React.createClass({
     this.props.showSizingCallback(false);
   },
 
-  parsePresentation: function(size) {
-    // TODO: Change this for parsing both US and AU
-    // var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    var regexp = new RegExp('US(\\d+)', 'i');
-    return 'US ' + size.name.match(regexp)[1];
-  },
-
   heightSelectedHandle: function (height) {
     var newState = {
       assistant: null,
@@ -105,7 +98,7 @@ var SizeSelectorMobile = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{that.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     });

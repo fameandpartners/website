@@ -28,13 +28,6 @@ var SizeProfile = React.createClass({
     }).trigger('change');
   },
 
-  parsePresentation: function (size) {
-    // TODO: Change this to parse for both, instead of US
-    // var dressSizeZoneRegexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    var dressSizeZoneRegexp = new RegExp('US(\\d+)', 'i');
-    return 'US ' + size.option_value.name.match(dressSizeZoneRegexp)[1];
-  },
-
   changeSizeHandler: function (size) {
     this.setState({
       size_id: size.option_value.id,
@@ -75,7 +68,7 @@ var SizeProfile = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{this.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     }.bind(this));
