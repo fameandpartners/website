@@ -120,7 +120,7 @@ var ShoppingBag = React.createClass({
       <div className="shopping-bag-container" ref="shoppingBag">
         <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
         {count}
-        <div className={backdropClasses} ref="backdrop"></div>
+        <div className={backdropClasses} ref="backdrop" onClick={this.bagClosedHandler}></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">
