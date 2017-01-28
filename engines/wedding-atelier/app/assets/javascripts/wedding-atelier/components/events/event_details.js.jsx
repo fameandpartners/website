@@ -27,7 +27,6 @@ var EventDetails = React.createClass({
     $(this.refs.datepicker)
     .datepicker({
       format: "mm/dd/yyyy",
-      todayBtn: "linked",
       autoclose: true,
       showOnFocus: true
     }).on('show', function(e){
