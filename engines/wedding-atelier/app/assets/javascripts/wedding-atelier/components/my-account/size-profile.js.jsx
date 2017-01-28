@@ -28,11 +28,6 @@ var SizeProfile = React.createClass({
     }).trigger('change');
   },
 
-  parsePresentation: function (size) {
-    var dressSizeZoneRegexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.option_value.name.match(dressSizeZoneRegexp)[1];
-  },
-
   changeSizeHandler: function (size) {
     this.setState({
       size_id: size.option_value.id,
@@ -73,7 +68,7 @@ var SizeProfile = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{this.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     }.bind(this));
@@ -131,7 +126,7 @@ var SizeProfile = React.createClass({
             </ul>
           </div>
         </div>
-        <div className="checkbox col-sm-12">
+        <div className="col-sm-12 text-center">
           <button className="btn-black" onClick={this.sizeProfileSavedHandle}>Save</button>
         </div>
       </div>

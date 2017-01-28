@@ -140,7 +140,7 @@ var AccountDetails = React.createClass({
             </label>
           </div>
 
-          <div className="checkbox col-sm-12">
+          <div className="col-sm-12 text-center">
             <button className="btn-black" onClick={this.changesSavedHandle}>Update</button>
           </div>
         </form>
