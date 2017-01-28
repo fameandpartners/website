@@ -45,7 +45,7 @@ var CustomizationItem = React.createClass({
           active: active,
           clicked: clicked
         }),
-        removeButton;
+        removeButton, customizationPrice;
 
 
     if(['silhouette', 'length'].indexOf(this.props.type) == -1){
@@ -56,11 +56,15 @@ var CustomizationItem = React.createClass({
       return null;
     }
 
+    if(['fit', 'style'].indexOf(this.props.type) > -1){
+      customizationPrice = <span className="customization-price">{' + $' + parseFloat(this.props.option.price)}</span>
+    }
+
     return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />
-          <p>{this.props.option.presentation}</p>
+          <p>{this.props.option.presentation}{customizationPrice}</p>
         </div>
       </div>)
   },

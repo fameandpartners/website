@@ -109,7 +109,12 @@
       font-family: $secondary-font;
       font-weight: bold;
       text-transform: capitalize;
-      max-width: 60%;
+      max-width: 89%;
+    }
+
+    .customization-price {
+      font-weight: normal;
+      font-size: 12px;
     }
 
     img {
