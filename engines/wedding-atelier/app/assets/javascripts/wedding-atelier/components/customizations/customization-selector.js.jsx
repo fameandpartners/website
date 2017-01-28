@@ -34,16 +34,16 @@ var CustomizationSelector = React.createClass({
       selectCallback: this.props.selectCallback,
       clickCustomizationCallback: this.selectCustomization,
       clickedOptions: {}
-    }
+    }, options = [];
 
-    var options = this.props.options.map(function(option, index) {
+    this.props.options.forEach(function(option, index) {
       itemProps.option = $.extend({}, option);
       itemProps.mobile = false;
       if(!this.isOptionDisabled(itemProps.option)){
-        return(<CustomizationItem key={index} {...itemProps} />);
+        options.push(<CustomizationItem key={index} {...itemProps} />);
       }
-
     }.bind(this));
+
 
     var customizationSelectorClasses = classNames({
       'customization-selector': true,
@@ -51,6 +51,10 @@ var CustomizationSelector = React.createClass({
       'slideInLeft': this.props.showContainers.showSelector,
       'active': this.props.currentCustomization === this.props.type
     });
+
+    if(options.length == 0){
+      options = <p className="no-customizations">No customization options are available for this combination</p>
+    }
 
     return (
       <div ref="container" className={customizationSelectorClasses}>

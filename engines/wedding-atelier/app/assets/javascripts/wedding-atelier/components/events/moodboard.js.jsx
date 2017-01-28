@@ -121,9 +121,9 @@ var MoodBoardEvent = React.createClass({
             channel.join().then(function() {
               console.log('Joined channel as ' + that.props.username);
               that.refs.ChatDesktop.setUpMessagingEvents(channel);
-              that.refs.ChatDesktop.sendMessageBot("Hey lovely, welcome to your amazing new weddings board. Here you're going to be able to chat with me, your bridesmaids and create some stunning bridal looks.")
+              that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
               .then(function() {
-                return that.refs.ChatDesktop.sendMessageBot("Why don't you start by creating your first dress, just select 'Design a new dress' to the right.")
+                return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?"+ '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.')
               });
             });
           });
@@ -345,7 +345,7 @@ var MoodBoardEvent = React.createClass({
           <div className="right-container center-block">
             <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
-              {this.state.event.name} - {this.state.event.remaining_days} days
+               The Countdown: {this.state.event.remaining_days} days
             </h1>
 
             <div className="moodboard-tabs center-block">
@@ -355,17 +355,31 @@ var MoodBoardEvent = React.createClass({
                     <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
                       Chat  <span className="badge">12</span></a>
                   </li>
-                  <li className="active" role="presentation">
-                    <a className="walkthrough-messages" aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab" title="View your dresses" data-content="Create new looks and vote on your favorites" data-placement="bottom">
+                  <li
+                    className="active walkthrough-messages"
+                    role="presentation"
+                    title="View your dresses"
+                    data-content="Create new looks and vote on your favorites"
+                    data-placement="bottom">
+                    <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                       Bridesmaid dresses</a>
                   </li>
-                  <li role="presentation">
-                    <a className="walkthrough-messages" aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab" title="Update the details" data-content="Input everything you need to know about the big day" data-placement="bottom">
+                  <li
+                    role="presentation"
+                    className="walkthrough-messages"
+                    title="Update the details"
+                    data-content="Input everything you need to know about the big day"
+                    data-placement="top">
+                    <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
                     Wedding details</a>
                   </li>
-                  <li role="presentation">
-                    <a className="walkthrough-messages" aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab" title="Manage the group" data-content="Add, view, and remove members of the bridal party" data-placement="bottom">
-                    Bridal party</a>
+                  <li
+                    role="presentation"
+                    className="walkthrough-messages"
+                    title="Manage the group"
+                    data-content="Add, view, and remove members of the bridal party"
+                    data-placement="bottom">
+                    <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">Bridal party</a>
                   </li>
                   <li role="presentation" className="bridal-gowns">
                     <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">

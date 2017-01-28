@@ -31,7 +31,7 @@ namespace :wedding_atelier do
       { presentation: 'Add wide off shoulder panel', price: 19.99 },
       { presentation: 'Add separate cape', price: 24.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      { presentation: 'Add wide armed ties', price: 14.99 }
     ]
 
     strapless_fits = [
@@ -72,7 +72,7 @@ namespace :wedding_atelier do
     ]
 
     fit_and_flare_attrs = {
-      name: 'Fit and flare',
+      name: 'Fit and Flare',
       sku: 'FP2213',
       price: 199,
       hidden: true,
@@ -117,7 +117,7 @@ namespace :wedding_atelier do
       { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add wide draped arm bow ties', price: 14.99 }
+      { presentation: 'Add wide armed ties', price: 14.99 }
     ]
 
     slip_fits = [
@@ -172,7 +172,7 @@ namespace :wedding_atelier do
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
       { presentation: 'Add separate cape', price: 24.99 },
-      { presentation: 'Change to tie straps (remove ring & slide)', price: 9.99 },
+      { presentation: 'Change to tie straps', price: 9.99 },
       { presentation: 'Add ruffles to cups', price: 14.99 },
       { presentation: 'Add ruffles to steams', price: 24.99 },
       { presentation: 'Add detachable bow', price: 19.99 }
@@ -188,7 +188,7 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     tri_cup_attrs = {
-      name: 'Tri-cup',
+      name: 'Tri-Cup',
       sku: 'FP2220',
       price: 199,
       hidden: true,
@@ -245,7 +245,7 @@ namespace :wedding_atelier do
 
     # TODO: Ask for the base price
     multi_way_attrs = {
-      name: 'Multi way',
+      name: 'Multi Way',
       sku: 'FP2219',
       price: 219,
       hidden: true,
