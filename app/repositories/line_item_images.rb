@@ -1,4 +1,3 @@
-# usage
 module Repositories
   class LineItemImages
     WEDDING_ATELIER_TAXONOMY_NAME = 'Wedding Atelier'.freeze
