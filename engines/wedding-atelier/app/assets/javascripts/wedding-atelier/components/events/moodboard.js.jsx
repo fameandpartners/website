@@ -120,6 +120,7 @@ var MoodBoardEvent = React.createClass({
         }).then(function(channel) {
           channel.join().then(function() {
             that.refs.ChatDesktop.setUpMessagingEvents(channel);
+            // TODO: Find a proper way to fix this issue rather than using a timeout.
             //It needs a bit time to setup event listeners properly
             setTimeout(function() {
               that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
