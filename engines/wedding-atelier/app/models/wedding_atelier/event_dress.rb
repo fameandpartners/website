@@ -30,6 +30,7 @@ module WeddingAtelier
 
     validates_presence_of :product, :fabric, :color, :length, :size, :height
 
+    # TODO: this is a "primitive obsession" code smell. Since images for "Event Dresses" are dynamically calculated, they should have their own class
     def images
       base_path = "#{ENV['RAILS_ASSET_HOST']}/wedding-atelier/dresses"
       style_name = style.try(:name) || 'S0'

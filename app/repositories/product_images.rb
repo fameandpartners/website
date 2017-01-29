@@ -17,7 +17,7 @@ class ProductImages
   def read_all(options = {})
     @product_images ||= begin
       Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
-        (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
+        images_from_product_color_values.flatten.compact.sort_by {|image| image.position.to_i }
       end
     end
 
@@ -81,7 +81,9 @@ class ProductImages
     scope
   end
 
+  # TODO: this should return a Repositories::Images::Template
   # we can optimize it, if needed
+  # @return [OpenStruct]
   def read(options = {})
     filter(options).first || read_all(options).first || default_image
   end
@@ -97,23 +99,6 @@ class ProductImages
       return configatron.cache.expire.quickly if Rails.env.development?
       return configatron.cache.expire.quickly if Rails.env.staging?
       return configatron.cache.expire.long
-    end
-
-    def images_from_variants
-      results = []
-      product.variants_including_master.includes(:images, :option_values).each do |variant|
-        variant.images.each do |image|
-          result = OpenStruct.new(
-            image_data(image).merge({
-              color: variant.dress_color.try(:name),
-              color_id: variant.dress_color.try(:id),
-              size: variant.dress_size.try(:name),
-              size_id: variant.dress_size.try(:id)
-            })
-          )
-        end
-      end
-      results
     end
 
     def images_from_product_color_values
@@ -148,6 +133,7 @@ class ProductImages
       }
     end
 
+    # TODO: should be a `Repositories::Images::Template`
     def default_image(url = 'noimage/product.png')
       OpenStruct.new({
         id: nil,
