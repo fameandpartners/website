@@ -106,6 +106,7 @@ var SelectSizeModal = React.createClass({
       data: attrs,
       success: function (data) {
         that.props.updateUserCartCallback(data.order);
+        $('#events__moodboard .js-select-size-modal').hide();
         $('.shopping-bag-container').trigger('shoppingBag:open');
       },
       error: function (response) {
