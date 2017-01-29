@@ -95,42 +95,42 @@ var DesktopCustomizations = React.createClass({
           <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)}/>
         </div>
         <div className="footer">
-          <div className="favorites col-md-6">
-          </div>
-          <div className="results col-md-2 col-lg-3">
-            <div className="view-customizations">
-              <span className="left-result">
-                <a href="#" onClick={this.viewCustomizations}>View customizations</a>
-              </span>
-              <span className="right-result">
-                ${this.props.customizationsCost}
-              </span>
-            </div>
+          <div className="col-sm-12 col-lg-offset-6 col-md-offset-6 col-md-6 col-lg-6">
+            <div className="row">
+            <div className="results">
+              <div className="view-customizations">
+                <span className="left-result">
+                  <a href="#" onClick={this.viewCustomizations}>View customizations</a>
+                </span>
+                <span className="right-result">
+                  ${this.props.customizationsCost}
+                </span>
+              </div>
 
-            <div className="sub-total">
-              <span className="left-result">
-                Sub-Total
-              </span>
-              <span className="right-result">
-                ${this.props.subTotal}
-              </span>
+              <div className="sub-total">
+                <span className="left-result">
+                  Sub-Total
+                </span>
+                <span className="right-result">
+                  ${this.props.subTotal}
+                </span>
+              </div>
             </div>
-          </div>
-
-          <div className="actions text-right col-md-4 col-lg-3">
-            <SaveDressButton
-              eventSlug={this.props.eventSlug}
-              selectedOptions={this.props.selectedOptions}
-              mobile={false}
-              edit={this.props.edit}
-              initialDress={this.props.initialDress}
-              currentUser={this.props.currentUser}
-              />
-            <AddToCartButton customizations={this.props.selectedOptions} dress={this.props.initialDress} />
+            <div className="actions text-right">
+              <SaveDressButton
+                eventSlug={this.props.eventSlug}
+                selectedOptions={this.props.selectedOptions}
+                mobile={false}
+                edit={this.props.edit}
+                initialDress={this.props.initialDress}
+                currentUser={this.props.currentUser}
+                />
+              <AddToCartButton customizations={this.props.selectedOptions} dress={this.props.initialDress} />
+            </div>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 });
-

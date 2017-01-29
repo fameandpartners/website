@@ -119,6 +119,8 @@
   }
 
   .results {
+    width: 45%;
+    float: left;
 
     span {
       display: inline-block;
@@ -141,6 +143,8 @@
   }
 
   .actions {
+    width: 55%;
+    float: left;
 
     button {
       width: 145px;
@@ -168,10 +172,18 @@
     }
   }
 
+  @include screen-md {
+    .actions {
+      button {
+        width: 125px;
+      }
+    }
+  };
+
   @include screen-lg {
     .actions {
       button {
-        width: 130px;
+        width: 128px;
       }
     }
   }
