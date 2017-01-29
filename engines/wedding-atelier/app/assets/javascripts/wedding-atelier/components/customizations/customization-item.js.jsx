@@ -45,22 +45,24 @@ var CustomizationItem = React.createClass({
           active: active,
           clicked: clicked
         }),
-        removeButton;
+        removeButton, customizationPrice;
 
 
     if(['silhouette', 'length'].indexOf(this.props.type) == -1){
       removeButton = <RemoveButton clickCallback={this.removeCustomization} active={active}/>;
     }
 
-    if(this.props.type === 'silhouette' && ['FP2219', 'FP2214'].indexOf(this.props.option.sku) > -1 ){
-      return null;
+    if(['fit', 'style'].indexOf(this.props.type) > -1){
+      customizationPrice = <span className="customization-price">{' + $' + parseFloat(this.props.option.price)}</span>
     }
+
+    var presentation = (this.props.type === 'silhouette' ? 'The ' : '') + this.props.option.presentation;
 
     return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />
-          <p>{this.props.option.presentation}</p>
+          <p>{presentation}{customizationPrice}</p>
         </div>
       </div>)
   },

@@ -156,7 +156,7 @@ var Chat = React.createClass({
 
     message = {
       profilePhoto: this.props.bot_profile_photo,
-      author: "Famebot",
+      author: "BridalBot",
       time: Date.now(),
       type: type,
       content: message
@@ -315,20 +315,26 @@ var Chat = React.createClass({
           <div className="row">
             <div className="col-xs-7">
               <div className="chat-header-left-side">
-                <strong className="walkthrough-messages" title="See who's online" data-content="See which of your bridal party is online then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
+                <strong className="walkthrough-messages" title="See who's online" data-content="Then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
               </div>
             </div>
             <div className="col-xs-5">
-              <div className="chat-header-right-side pull-right">
-                <strong>Fame stylist: </strong><span className="stylist-name">Amber: </span><img src="/assets/profile-placeholder.jpg" className="stylist-photo" />
-              </div>
+              <a href="https://www.fameandpartners.com/wedding-consultation" target="_blank" className="chat-header-right-side pull-right">
+                <img className="stylist-photo" src="/assets/wedding-atelier/amber.png" />
+                <span className="walkthrough-messages" title="Invite a stylist to join" data-content="Here's how to request a stylist to help the entire bridal party decide on the dress. She'll even offer advice on styling, accessories, hair, makeup, and more." data-placement="bottom"> INVITE A STYLIST </span>
+              </a>
             </div>
           </div>
         </div>
-        <div className="chat-log" ref="chatLog">
+        <div
+          className="chat-log walkthrough-messages"
+          ref="chatLog"
+          title="Chat with your bridal party and stylists"
+          data-content="Share your designs and discuss each look."
+          data-placement="right">
           {messages}
 
-          <div className='chat-typing'>
+          <div className="chat-typing">
             {typing}
           </div>
         </div>
@@ -337,7 +343,7 @@ var Chat = React.createClass({
           <div className="message-input">
             <input type="text"
                    value={this.message}
-                   id='chat-message'
+                   id="chat-message"
                    onChange={this.startTyping}
                    ref="chatMessage"
                    placeholder="Start typing..." />
@@ -347,6 +353,6 @@ var Chat = React.createClass({
           </div>
         </form>
       </div>
-    )
+    );
   }
 });

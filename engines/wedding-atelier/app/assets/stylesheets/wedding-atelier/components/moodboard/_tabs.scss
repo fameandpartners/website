@@ -2,6 +2,9 @@
   .tabs-container {
     overflow-x: auto;
     text-align: center;
+    &.show-popovers {
+      overflow-x: inherit;
+    }
   }
 
   .nav {

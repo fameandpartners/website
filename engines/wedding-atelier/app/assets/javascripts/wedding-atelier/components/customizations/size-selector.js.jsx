@@ -30,11 +30,6 @@ var SizeSelector = React.createClass({
     }).val(this.state.assistant.user_profile.height);
   },
 
-  parsePresentation: function(size) {
-    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.name.match(regexp)[1];
-  },
-
   heightSelectedHandle: function (target) {
     // it's important to change size here to reset presentation as 4'10" / 147cm | 6
     // if previous size came from an user profile
@@ -106,7 +101,7 @@ var SizeSelector = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps} />
-          <label htmlFor={id}>{that.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     });
@@ -156,7 +151,7 @@ var SizeSelector = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Dress Size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+            <label>Dress Size &nbsp;</label><SizeGuideModalLauncher />
             <div className="dress-sizes ungrouped">
               <ul className="customization-dress-sizes-ul">
                 <div>
