@@ -118,15 +118,17 @@ var MoodBoardEvent = React.createClass({
           uniqueName: channelName,
           friendlyName: that.props.wedding_name
         }).then(function(channel) {
-            channel.join().then(function() {
-              console.log('Joined channel as ' + that.props.username);
-              that.refs.ChatDesktop.setUpMessagingEvents(channel);
+          channel.join().then(function() {
+            that.refs.ChatDesktop.setUpMessagingEvents(channel);
+            //It needs a bit time to setup event listeners properly
+            setTimeout(function() {
               that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
-              .then(function() {
-                return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?"+ '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.')
-              });
-            });
+                  .then(function() {
+                    return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.')
+                  });
+            }, 3000);
           });
+        });
       }
     });
   },
