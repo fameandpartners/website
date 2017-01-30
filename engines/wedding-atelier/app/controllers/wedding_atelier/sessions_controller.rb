@@ -5,14 +5,20 @@ module WeddingAtelier
     layout 'wedding_atelier/application'
     helper WeddingAtelier::Engine.helpers
 
+    skip_before_filter :require_no_authentication
+
     def new
       @user = Spree::User.new
+
       if params[:invitation_id]
         invitation = Invitation.find(params[:invitation_id])
         @signup_params = { invitation_id: params[:invitation_id] }
         @user.email = invitation.user_email if invitation
       end
-      super
+
+      if current_spree_user
+        redirect_to wedding_atelier.events_path
+      end
     end
 
     def create
@@ -22,7 +28,8 @@ module WeddingAtelier
           invitation.accept
         end
       end
-      super
+
+      redirect_to wedding_atelier.events_path
     end
   end
 end
