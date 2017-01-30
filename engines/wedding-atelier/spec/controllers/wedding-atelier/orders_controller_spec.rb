@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe WeddingAtelier::OrdersController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:order) { create(:spree_order) }
   let(:product) { create(:dress) }

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe WeddingAtelier::LikesController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
   let(:dress) { create(:wedding_atelier_event_dress, event: event) }

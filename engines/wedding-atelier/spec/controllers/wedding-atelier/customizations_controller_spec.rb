@@ -3,6 +3,8 @@ require 'rake'
 load File.expand_path("../../../../lib/tasks/wedding-atelier_tasks.rake", __FILE__)
 
 describe WeddingAtelier::CustomizationsController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
   let(:event) { create(:wedding_atelier_event) }

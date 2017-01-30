@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe WeddingAtelier::AccountsController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:previous_password) { 'spree123' }
   let(:new_password) { '123spree123' }

@@ -1,5 +1,7 @@
 require 'spec_helper'
 describe WeddingAtelier::SizingController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
   before do
