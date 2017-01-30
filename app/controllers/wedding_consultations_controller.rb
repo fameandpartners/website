@@ -11,6 +11,7 @@ class WeddingConsultationsController < ApplicationController
   def create
     @wedding_consultation = Forms::WeddingConsultation.new(WeddingConsultation.new)
     if @wedding_consultation.validate(params[:forms_wedding_consultation])
+      WeddingConsultation.create(params[:forms_wedding_consultation])
       WeddingConsultationMailer.email(@wedding_consultation).deliver
       render json: { success: true }
     else

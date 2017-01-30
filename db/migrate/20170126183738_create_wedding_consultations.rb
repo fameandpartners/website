@@ -1,11 +1,13 @@
 class CreateWeddingConsultations < ActiveRecord::Migration
   def change
     create_table :wedding_consultations do |t|
-      t.string :first_name
-      t.string :last_name
+      t.string :full_name
       t.string :email
-      t.string :contact_method
+      t.string :phone
+      t.string :preferred_time
+      t.string :session_type
       t.boolean :should_contact
+      t.string :timezone
       t.date :wedding_date
 
       t.timestamps

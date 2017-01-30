@@ -1,16 +1,17 @@
 class WeddingConsultation < ActiveRecord::Base
   include ActiveModel::Validations
-  attr_accessible :contact_method,
+  attr_accessible :full_name,
                   :email,
-                  :first_name,
-                  :last_name,
+                  :phone,
+                  :preferred_time,
+                  :session_type,
                   :should_contact,
+                  :timezone
                   :wedding_date
 
-  validates :contact_method, presence: true, inclusion: { in: [ 'email', 'phone', 'video_chat', 'phone', 'at_home' ] }
+  validates :full_name, presence: true
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :session_type, presence: true, inclusion: { in: [ 'Email', 'Text', 'Video Chat', 'Phone', 'At Home' ] }
   validates :should_contact, inclusion: { in: [ true, false ] }
   validates :wedding_date, presence: true
   validate :wedding_date_cannot_be_in_the_past
