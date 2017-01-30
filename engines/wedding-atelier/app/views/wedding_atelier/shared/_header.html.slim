@@ -1,5 +1,8 @@
 .shared-header
-  = link_to '', wedding_atelier.events_path(@event), class: ['shared-header-back-arrow', controller_name == 'events' ? 'hidden-md hidden-lg': '']
+  - if controller_name != 'events'
+    = link_to '', wedding_atelier.events_path(@event), class: ['shared-header-back-arrow', controller_name == 'events' ? 'hidden-md hidden-lg': '']
+  - if controller_name == 'events'
+    = link_to '', wedding_atelier.accounts_path, class: ['shared-header-account-icon', 'hidden-sm', 'hidden-md', 'hidden-lg']
   .shared-header-options.hidden-xs.hidden-sm
     ul
       - if controller_name != 'events'
