@@ -35,17 +35,27 @@ module WeddingAtelier
     def dress_size_grid(form, dress_sizes)
       content_tag :div, class: 'dress-sizes' do
         content_tag :ul do
-          items = dress_sizes.map do |size|
-            content_tag :li do
-              [
-                form.radio_button(:dress_size, "#{@site_version}/#{size}"),
-                form.label(:dress_size, size, value: "#{@site_version}/#{size}")
-              ].join("\n").html_safe
-            end
+          grouped_sizes = dress_sizes.each_slice(4).to_a
+          groups = grouped_sizes.map do |group|
+             content_tag :div, class: 'sizing-row' do
+               items = group.map do |size|
+                 # TODO: Eventually parse both site versions
+                 #  parsedSize = size.name.match(/#{@site_version}(\d+)/i)[1]
+                 parsedSize = size.name.match(/US(\d+)/i)[1]
+                 content_tag :li do
+                   [
+                     form.radio_button(:dress_size_id, size.id),
+                     form.label(:dress_size_id, "US #{parsedSize}", value: size.id)
+                   ].join("\n").html_safe
+                 end
+               end
+               items.join("\n").html_safe
+             end
           end
-          items.join("\n").html_safe
+          groups.join("\n").html_safe
         end
       end
     end
+
   end
 end

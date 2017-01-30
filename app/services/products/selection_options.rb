@@ -109,7 +109,7 @@ class SelectionOptions
     # customizations
     def product_customisation_values
       if customisations_available?
-        @product_customisation_values ||= product.customisation_values.cut.includes(:incompatibilities)
+        @product_customisation_values ||= product.customisation_values.by_type(:cut).includes(:incompatibilities)
       else
         []
       end

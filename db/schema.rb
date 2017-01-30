@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170126183738) do
+ActiveRecord::Schema.define(:version => 20170127005811) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1739,8 +1739,11 @@ ActiveRecord::Schema.define(:version => 20170126183738) do
     t.integer  "fabric_id"
     t.integer  "size_id"
     t.integer  "length_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "fit_id"
+    t.string   "height"
+    t.integer  "likes_count", :default => 0
   end
 
   create_table "wedding_atelier_event_roles", :force => true do |t|
@@ -1759,19 +1762,31 @@ ActiveRecord::Schema.define(:version => 20170126183738) do
     t.string   "slug"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "owner_id"
   end
 
   create_table "wedding_atelier_invitations", :force => true do |t|
-    t.string "user_email"
-    t.string "event_slug"
-    t.string "state",      :default => "pending"
+    t.string  "user_email"
+    t.string  "event_slug"
+    t.string  "state",      :default => "pending"
+    t.integer "event_id"
+    t.integer "inviter_id"
   end
+
+  create_table "wedding_atelier_likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_dress_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "wedding_atelier_likes", ["user_id", "event_dress_id"], :name => "index_wedding_atelier_likes_on_user_id_and_event_dress_id", :unique => true
 
   create_table "wedding_atelier_user_profiles", :force => true do |t|
     t.integer "spree_user_id"
     t.string  "height"
-    t.string  "dress_size"
     t.boolean "trend_updates"
+    t.integer "dress_size_id"
   end
 
   create_table "wedding_atelier_users_event_roles", :id => false, :force => true do |t|

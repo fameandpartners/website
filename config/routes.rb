@@ -227,6 +227,9 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
+    # Wedding Atelier App - Landing page
+    get '/wedding-atelier' => 'products/collections#show', :permalink => 'wedding-atelier-app', :as => :wedding_atelier_app_landing_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
