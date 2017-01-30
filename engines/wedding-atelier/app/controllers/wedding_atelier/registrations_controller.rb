@@ -13,7 +13,7 @@ module WeddingAtelier
         if current_spree_user.wedding_atelier_signup_complete?
           redirect_to wedding_atelier.events_path
         else
-          redirect_to current_spree_user.wedding_atelier_signup_step
+          redirect_to action: current_spree_user.wedding_atelier_signup_step
         end
       end
       if params[:invitation_id]
