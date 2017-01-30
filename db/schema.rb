@@ -1794,7 +1794,7 @@ ActiveRecord::Schema.define(:version => 20170127005811) do
     t.integer "event_role_id"
   end
 
-  create_table "wedding_consultations", :force => true do |t|
+  create_table "wedding_planning", :force => true do |t|
     t.string   "full_name"
     t.string   "email"
     t.string   "phone"

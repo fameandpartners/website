@@ -1,6 +1,6 @@
-class CreateWeddingConsultations < ActiveRecord::Migration
+class CreateWeddingPlanning < ActiveRecord::Migration
   def change
-    create_table :wedding_consultations do |t|
+    create_table :wedding_planning do |t|
       t.string :full_name
       t.string :email
       t.string :phone

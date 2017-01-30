@@ -1,19 +1,22 @@
 = render partial: 'pages/robots'
 
-/ Note: modal content is hidden to make it easier to see the HTML content.
-/ .js-modal.get-the-look-modal role='dialog' tabindex="-1"
-/   .modal-dialog role='document'
-/     .modal-content
-/       .modal-header
-/         button.close type='button' data-dismiss='modal' aria-label="Close"
-/           span aria-hidden="true" &times;
-/         h4.modal-title Modal title
-/       .modal-body
-/         .iframe-middle-wrapper
-/           .woobox-offer data-offer="5fbtad"
-/       .modal-footer
-/         button.btn.btn-default data-dismiss='modal' Close
-/         button.btn.btn-primary data-dismiss='modal' Save Changes
+.js-modal.get-the-look-modal role='dialog' tabindex="-1"
+  .modal-dialog role='document'
+    .modal-content
+      .modal-header
+        button.close type='button' data-dismiss='modal' aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title Modal title
+      .modal-body
+        form#wedding_consultation_form
+          input name="first_name" placeholder="Jacqueline"
+          input name="last_name" placeholder="Bouvier"
+          input name="sessing_type" value="Email" hidden="true"
+          input name="email"
+          input name="wedding_date"
+          input type="checkbox" name="should_contact"
+          label name="should_contact" for="should_contact" I want trend updates from Fame and Partners
+          button.btn-xs.btnCtaOutlineBorderUppercase type="submit" Download Now
 
 .get-the-look
 
@@ -180,4 +183,25 @@
 javascript:
   $(function() {
     $('.js-modal.get-the-look-modal').modal('show')
+    
+    var $form = $('#wedding_consultation_form');
+    $form.on('submit', function(evt){
+      evt.preventDefault();
+      var values = {};
+      $.each($form.serializeArray(), function(i, field) {
+          values[field.name] = field.value;
+      });
+      
+      // TODO: Do validations here
+      
+    });
+    
+    function submitFormValues(formVals){
+      $.ajax({
+        type: 'POST',
+        url: '/wedding_consultations',
+        
+      })
+    }
+    
   });

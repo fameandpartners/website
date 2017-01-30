@@ -10,16 +10,9 @@ class WeddingConsultationsController < ApplicationController
 
   def create
     @wedding_consultation = Forms::WeddingConsultation.new(WeddingConsultation.new)
-    form_params = params[:forms_wedding_consultation]
-    if @wedding_consultation.validate(form_params)
-      if form_params[:first_name] & form_params[:last_name]
-        form_params[:full_name] = form_params[:first_name] + wedding_consultation_params[:last_name]
-      end
-
-      if WeddingConsultation.create!(form_params)
-        WeddingConsultationMailer.email(@wedding_consultation).deliver
-        render json: { success: true }
-      end
+    if @wedding_consultation.validate(params[:forms_wedding_consultation])
+      WeddingConsultationMailer.email(@wedding_consultation).deliver
+      render json: { success: true }
     else
       render json: { errors: @wedding_consultation.errors }
     end
