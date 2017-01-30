@@ -229,7 +229,7 @@ namespace :wedding_atelier do
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
       { presentation: 'Add ruffle down skirt edge', price: 14.99 },
-      { presentation: 'Add rufle at front neckline', price: 14.99 },
+      { presentation: 'Add ruffle at front neckline', price: 14.99 },
       { presentation: 'Add separete arm bands', price: 14.99 },
       { presentation: 'Add gathered hem ruffle', price: 24.99 },
       { presentation: 'Add small train', price: 14.99 }
