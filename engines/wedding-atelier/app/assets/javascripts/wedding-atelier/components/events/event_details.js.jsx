@@ -34,7 +34,7 @@ var EventDetails = React.createClass({
     }).on('hide', function(e){
       $(this).removeClass('active');
     }).on('changeDate', function(e){
-      var date = $(e.target).val();
+      var date = $(e.target).find('input').val();
       var _event = this.props.event;
       _event.date = date;
       this.setState({event: _event})
