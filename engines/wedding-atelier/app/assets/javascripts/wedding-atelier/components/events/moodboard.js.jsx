@@ -79,16 +79,16 @@ var MoodBoardEvent = React.createClass({
   },
 
   loadChatToken: function() {
-    var twilioPromise = $.post(this.props.twilio_token_path + '.json');
-    Promise.all([twilioPromise]).then(function(values){
-      var token = values[2].token,
+    that = this;
+    $.post(this.props.twilio_token_path + '.json', function(response){
+      var token = response.token,
           twilioManager = new Twilio.AccessManager(token);
       var _state = $.extend({}, that.state);
       _state.twilioManager = twilioManager;
       _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
       that.setState(_state);
       that.setupChatChannels();
-    }).catch(function(e) {
+    }).fail(function(e) {
       console.log('Something went wrong setting up chat');
     });
   },
