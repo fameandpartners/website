@@ -10,7 +10,7 @@ describe WeddingAtelier::OrdersController, type: :controller do
   let(:line_item_personalization) { LineItemPersonalization.new }
 
   before do
-    custom_sign_in user
+    wedding_sign_in user
     allow(controller).to receive(:current_order).and_return(order)
     allow_any_instance_of(Spree::Order).to receive(:update!).and_return(true)
 

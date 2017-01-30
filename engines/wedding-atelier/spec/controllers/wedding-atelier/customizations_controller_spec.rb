@@ -12,7 +12,7 @@ describe WeddingAtelier::CustomizationsController, type: :controller do
     ot.option_values << create(:option_value, name: 'US0/AU4')
     Rake::Task.define_task(:environment)
     Rake::Task['wedding_atelier:populate_products'].invoke
-    custom_sign_in user
+    wedding_sign_in user
     user.add_role('bridesmaid', event)
   end
 

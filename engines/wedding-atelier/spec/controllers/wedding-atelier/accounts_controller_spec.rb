@@ -10,7 +10,7 @@ describe WeddingAtelier::AccountsController, type: :controller do
                       password: previous_password,
                       password_confirmation: previous_password) }
   before do
-    custom_sign_in user
+    wedding_sign_in user
   end
 
   describe '#update' do

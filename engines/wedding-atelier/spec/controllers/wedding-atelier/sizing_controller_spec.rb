@@ -3,7 +3,7 @@ describe WeddingAtelier::SizingController, type: :controller do
   routes { WeddingAtelier::Engine.routes }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
   before do
-    custom_sign_in user
+    wedding_sign_in user
   end
 
   describe '#index' do
