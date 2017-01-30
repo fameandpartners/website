@@ -595,9 +595,7 @@ FameAndPartners::Application.routes.draw do
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
 
-  if Features.active?(:wedding_atelier)
-    mount WeddingAtelier::Engine, at: '/wedding-atelier'
-  end
+  mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
   match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end
