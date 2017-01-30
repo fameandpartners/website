@@ -13,7 +13,9 @@ var MoodBoardEvent = React.createClass({
     profile_photo: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
     roles_path: React.PropTypes.string,
+    send_invite_path: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
+    sizing_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     user_id: React.PropTypes.number,
     username: React.PropTypes.string,
@@ -48,7 +50,7 @@ var MoodBoardEvent = React.createClass({
       },
       dressToAddToCart: null,
       userCart: null
-    }
+    };
   },
 
   componentWillMount: function(){
@@ -124,7 +126,7 @@ var MoodBoardEvent = React.createClass({
             setTimeout(function() {
               that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
                   .then(function() {
-                    return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.')
+                    return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
                   });
             }, 3000);
           });
@@ -175,14 +177,14 @@ var MoodBoardEvent = React.createClass({
         var _newState = $.extend({}, that.state);
         _newState.event.dresses = _.reject(_newState.event.dresses, function(eventDress){
           return eventDress.id === dressId;
-        })
+        });
         that.setState(_newState);
       }.bind(this),
       error: function(error) {
         ReactDOM.render(<Notification errors={[error.statusText]} />,
                     $('#notification')[0]);
       }
-    })
+    });
   },
 
   setDresses: function(dresses) {
@@ -223,7 +225,7 @@ var MoodBoardEvent = React.createClass({
       error: function(data){
         // TODO add notification after is merged.
       }
-    })
+    });
   },
 
   handleEventDetailUpdate: function(data){
@@ -242,14 +244,14 @@ var MoodBoardEvent = React.createClass({
       }.bind(this),
 
       error: function(data) {
-        parsed = JSON.parse(data.responseText)
+        var parsed = JSON.parse(data.responseText);
         var newEventState = $.extend(event, this.state.event_backup);
         var hasError = {};
 
         for(var key in parsed.errors) {
           hasError[key] = true;
           newEventState[key] = this.state.event_backup[key];
-        };
+        }
 
         newEventState.hasError = hasError;
         this.setState({event: event});
@@ -267,7 +269,7 @@ var MoodBoardEvent = React.createClass({
         event.assistants.splice(index, 1);
         this.setState({event: event});
       }.bind(this)
-    })
+    });
   },
 
   sendDressToChatFn: function(dress) {
@@ -279,7 +281,7 @@ var MoodBoardEvent = React.createClass({
       if (e.target.innerWidth >= 768 ) {
         var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active'),
             mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
-            activeMobileSizeModal = mobileSizeModal.is(':visible')
+            activeMobileSizeModal = mobileSizeModal.is(':visible');
         if(activeMobileChat){
           $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
         }
@@ -435,6 +437,6 @@ var MoodBoardEvent = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
 });
