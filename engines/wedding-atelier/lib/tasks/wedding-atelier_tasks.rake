@@ -114,7 +114,7 @@ namespace :wedding_atelier do
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
       { presentation: 'Add hem ruffle', price: 24.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long cape with arm splits', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
       { presentation: 'Add wide armed ties', price: 14.99 }
@@ -143,7 +143,7 @@ namespace :wedding_atelier do
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long cape with arm splits', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add wide arm ties', price: 14.99 },
       { presentation: 'Add voluminous half sleeve', price: 19.99 }
