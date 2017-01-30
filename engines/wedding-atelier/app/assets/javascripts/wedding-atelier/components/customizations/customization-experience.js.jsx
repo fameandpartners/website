@@ -41,17 +41,17 @@ var CustomizationExperience = React.createClass({
     };
   },
 
-  componentWillMount: function(){
-    $.get(this.props.customizationsUrl, function(data){
-      if(this.props.edit){
+  componentWillMount: function() {
+    $.get(this.props.customizationsUrl, function(data) {
+      if(this.props.edit) {
         this.prepareEditDress(data.customization, this.props.initialDress.event_dress)
-      }else{
+      } else {
         this.prepareNewDress(data.customization);
       }
     }.bind(this));
   },
 
-  prepareEditDress: function(customizations, dress){
+  prepareEditDress: function(customizations, dress) {
     var newState = $.extend({}, this.state);
     newState.customizations = customizations;
     newState.selectedOptions.silhouette = dress.product;
@@ -71,7 +71,7 @@ var CustomizationExperience = React.createClass({
     this.setState(newState);
   },
 
-  prepareNewDress: function(customizations){
+  prepareNewDress: function(customizations) {
     var newState = $.extend({}, this.state),
         silhouette = customizations.silhouettes[0],
         fabric = _.findWhere(silhouette.fabrics, { name: 'HG'}),
@@ -97,7 +97,7 @@ var CustomizationExperience = React.createClass({
     this.setState(newState);
   },
 
-  customizationsCost: function(){
+  customizationsCost: function() {
     var selectedOptions = this.state.selectedOptions,
         cost = 0;
 
@@ -133,7 +133,7 @@ var CustomizationExperience = React.createClass({
       newState.customizations.lengths = value.lengths;
     }
 
-    basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
+    var basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
 
     //Flag needed to whether add the previously saved dress or customized params
     newState.selectedOptions.customized = true;
@@ -143,9 +143,9 @@ var CustomizationExperience = React.createClass({
   },
 
   startOverCallback: function () {
-    if(this.props.edit){
-      this.prepareEditDress(this.state.customizations, this.props.initialDress.event_dress)
-    }else{
+    if(this.props.edit) {
+      this.prepareEditDress(this.state.customizations, this.props.initialDress.event_dress);
+    } else {
       this.prepareNewDress(this.state.customizations);
     }
   },
@@ -154,7 +154,7 @@ var CustomizationExperience = React.createClass({
     $('.customization-experience--mobile .js-slick-hook').slick('slickGoTo', 1);
   },
 
-  render: function(){
+  render: function() {
     var props = {
       selectedOptions: this.state.selectedOptions,
       currentCustomization: this.state.currentCustomization,
