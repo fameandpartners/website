@@ -248,9 +248,10 @@ var Chat = React.createClass({
   },
 
   getWhoisTyping: function() {
-    var members = this.state.typing.map(function(member) {
+    var members = this.state.typing.map(function(member, index) {
+      var typingId = 'whos-typing-' + index;
       return (
-        <div>
+        <div key={typingId}>
           <div className="typing">
             <img src="/assets/wedding-atelier/typing.svg" />
           </div>
