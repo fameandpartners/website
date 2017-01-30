@@ -316,57 +316,57 @@ var CombinationsMap = (function(){
         S3: {},
         S4: { MN: true, KN: true, PT: true, MD: true },
         S5: { MN: true, KN: true, PT: true, MD: true }
-      },
+      }
     },
     FP2219: {
       F0: {
-        S0: { MX: true },
-        S1: { MX: true },
-        S2: { MX: true },
-        S3: { MX: true },
-        S4: { MX: true },
-        S5: { MX: true }
+        S0: {},
+        S1: {},
+        S2: {},
+        S3: {},
+        S4: { MN: true, KN: true, PT: true },
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true }
       },
       F1: {
-        S0: { MX: true },
-        S1: { MX: true },
-        S2: { MX: true },
-        S3: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
-        S4: { MX: true },
-        S5: { MX: true }
+        S0: {},
+        S1: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
+        S2: {},
+        S3: {},
+        S4: { MN: true, KN: true, PT: true },
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true }
       },
       F2: {
-        S0: { MX: true },
-        S1: { MX: true },
-        S2: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
-        S3: { MX: true },
-        S4: { MX: true },
-        S5: { MX: true }
+        S0: {},
+        S1: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
+        S2: {},
+        S3: {},
+        S4: { MN: true, KN: true, PT: true },
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true }
       },
       F3: {
-        S0: { MN: true, KN: true, PT: true },
-        S1: { MN: true, KN: true, PT: true },
-        S2: { MN: true, KN: true, PT: true },
-        S3: { MN: true, KN: true, PT: true },
-        S4: { MN: true, KN: true, PT: true },
-        S5: { MN: true, KN: true, PT: true }
-      },
-      F4: {
-        S0: { MX: true },
-        S1: { MX: true },
-        S2: { MX: true },
-        S3: { MX: true },
-        S4: { MX: true },
-        S5: { MX: true }
-      },
-      F5: {
         S0: { MN: true, KN: true, PT: true, MD: true },
-        S1: { MN: true, KN: true, PT: true, MD: true },
+        S1: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
         S2: { MN: true, KN: true, PT: true, MD: true },
         S3: { MN: true, KN: true, PT: true, MD: true },
         S4: { MN: true, KN: true, PT: true, MD: true },
-        S5: { MN: true, KN: true, PT: true, MD: true }
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true }
       },
+      F4: {
+        S0: {},
+        S1: {},
+        S2: {},
+        S3: {},
+        S4: { MN: true, KN: true, PT: true },
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true }
+      },
+      F5: {
+        S0: { MX: true },
+        S1: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
+        S2: { MX: true },
+        S3: { MX: true },
+        S4: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true },
+        S5: { MN: true, KN: true, PT: true, MD: true, AK: true, MX: true }
+      }
     },
     FP2220: {
       F0: {
