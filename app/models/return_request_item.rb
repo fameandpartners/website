@@ -109,6 +109,9 @@ class ReturnRequestItem < ActiveRecord::Base
 
   def push_return_event
     ReturnRequestItemMapping.new(return_request_item: self).call
+  # Note: I had troubles with debug because of this rescue
+  # Probably we need to handle this exception another way
+  # Nickolay 2017-01-30
   rescue StandardError => e
     NewRelic::Agent.notice_error e
   end

@@ -6,7 +6,6 @@ class ItemReturn < ActiveRecord::Base
 
   belongs_to :line_item, class_name: 'Spree::LineItem', inverse_of: :item_return
   belongs_to :return_request, foreign_key: :request_id, class_name: 'ReturnRequestItem'
-  validates_presence_of :order_paid_currency
 
   STATES = %i( requested received in_negotiation in_dispute rejected approved refunded credit_note_issued unknown )
 
@@ -14,5 +13,14 @@ class ItemReturn < ActiveRecord::Base
 
   attr_accessible :uuid
   validates :uuid, uniqueness: true
+  validates_presence_of :order_paid_currency
+
+  before_validation :set_currency_from_line_item
+
+  private
+
+  def set_currency_from_line_item
+    self.order_paid_currency ||= line_item.currency
+  end
 end
 
