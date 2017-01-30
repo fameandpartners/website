@@ -62,24 +62,34 @@ var MoodBoardEvent = React.createClass({
     var that = this;
     var eventPromise = $.getJSON(that.props.event_path + '.json');
     var sizingPromise = $.getJSON(this.props.sizing_path + '.json');
-    var twilioPromise = $.post(this.props.twilio_token_path + '.json');
 
-    Promise.all([eventPromise, sizingPromise, twilioPromise]).then(function(values){
+    Promise.all([eventPromise, sizingPromise]).then(function(values){
       var event = values[0].moodboard_event,
           sizes = values[1].sizing.sizes,
-          heights = values[1].sizing.heights,
-          token = values[2].token,
-          twilioManager = new Twilio.AccessManager(token);
+          heights = values[1].sizing.heights;
 
       var _state = $.extend({}, that.state);
       _state.event = event;
       _state.event_backup = event;
       _state.sizes = sizes;
       _state.heights = heights;
+      that.setState(_state);
+      that.loadChatToken();
+    });
+  },
+
+  loadChatToken: function() {
+    var twilioPromise = $.post(this.props.twilio_token_path + '.json');
+    Promise.all([twilioPromise]).then(function(values){
+      var token = values[2].token,
+          twilioManager = new Twilio.AccessManager(token);
+      var _state = $.extend({}, that.state);
       _state.twilioManager = twilioManager;
       _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
       that.setState(_state);
       that.setupChatChannels();
+    }).catch(function(e) {
+      console.log('Something went wrong setting up chat');
     });
   },
 
