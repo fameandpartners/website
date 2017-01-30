@@ -213,6 +213,10 @@ FameAndPartners::Application.routes.draw do
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
 
+    # Bespoke Bridal Sweepstakes - Landing page
+    get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
+
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -338,7 +342,6 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal'   => 'statics#pre_register_bridal_sweepstakes', :permalink => 'pre_register_bridal', :as => :pre_register_bridal
     get '/pre-register-bridesmaid'   => 'statics#pre_register_bridesmaid_sweepstakes', :permalink => 'pre_register_bridesmaid_sweepstakes', :as => :pre_register_bridesmaid_sweepstakes
-    get '/bespoke-bridal-sweepstakes'   => 'statics#bespoke_bridal_sweepstakes', :permalink => 'bespoke_bridal_sweepstakes', :as => :bespoke_bridal_sweepstakes
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info

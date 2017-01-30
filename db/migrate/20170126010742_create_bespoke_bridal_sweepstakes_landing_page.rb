@@ -3,7 +3,9 @@ class CreateBespokeBridalSweepstakesLandingPage < ActiveRecord::Migration
   private def landing_page_properties
     {
       path:             '/bespoke-bridal-sweepstakes',
-      template_path:    '/statics/bespoke_bridal_sweepstakes',
+      template_path:    '/landing_pages/bespoke_bridal_sweepstakes',
+      pids:             %w().join(','),
+      limit:            '5',
       heading:          'Win A Full Wedding Wardrobe',
       title:            'Win A Full Wedding Wardrobe',
       meta_description: 'Enter to win $5000 of bespoke, custom-made wedding dresses for the bride and her bridesmaids.',
@@ -15,6 +17,7 @@ class CreateBespokeBridalSweepstakesLandingPage < ActiveRecord::Migration
       page = Revolution::Page.create!(
         path:          landing_page_properties[:path],
         template_path: landing_page_properties[:template_path],
+        variables:     { lookbook: true, limit: landing_page_properties[:limit], pids: landing_page_properties[:pids] },
         publish_from:  1.day.ago
       )
       page.translations.create!(locale: 'en-US', title: landing_page_properties[:title], heading: landing_page_properties[:heading], meta_description: landing_page_properties[:meta_description])
