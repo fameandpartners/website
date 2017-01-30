@@ -6,14 +6,14 @@ class WeddingConsultation < ActiveRecord::Base
                   :preferred_time,
                   :session_type,
                   :should_contact,
-                  :timezone
+                  :timezone,
                   :wedding_date
 
   validates :full_name, presence: true
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
   validates :session_type, presence: true, inclusion: { in: [ 'Email', 'Text', 'Video Chat', 'Phone', 'At Home' ] }
-  validates :should_contact, inclusion: { in: [ true, false ] }
-  validates :wedding_date, presence: true
+  validates :preferred_time, inclusion: { in: [ '', 'morning', 'midday', 'afternoon', 'evening' ] }, allow_nil: true
+  validates :should_contact, inclusion: { in: [ true, false ] }, allow_nil: true
   validate :wedding_date_cannot_be_in_the_past
 
   def to_key
