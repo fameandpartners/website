@@ -85,7 +85,7 @@ namespace :wedding_atelier do
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
       { presentation: 'Add long fitted sleeves with shoulder cut-outs', price: 19.99 },
-      { presentation: 'Add draped side arm panels (attached to side seam)', price: 19.99 },
+      { presentation: 'Add draped side arm panels', price: 19.99 },
       { presentation: 'Add wide off shoulder panel', price: 19.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 }
