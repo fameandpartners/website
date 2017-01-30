@@ -210,7 +210,7 @@ namespace :wedding_atelier do
     two_piece_fits = [
       { presentation: 'Add hem ruffle', price: 24.99 },
       { presentation: 'Change to strapless bodice', price: 14.99 },
-      { presentation: 'ADd front keyhole', price: 9.99 },
+      { presentation: 'Add front keyhole', price: 9.99 },
       { presentation: 'Change to column skirt', price: 14.99 }
     ]
 
