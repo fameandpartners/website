@@ -5,5 +5,5 @@
                   initialDress: WeddingAtelier::EventDressSerializer.new(@dress, scope: self),
                   edit: true,
                   event_name: @event.name,
-                  event_path: event_path(@event),
+                  event_path: wedding_atelier.events_path(@event),
                   currentUser: WeddingAtelier::UserSerializer.new(spree_current_user)
