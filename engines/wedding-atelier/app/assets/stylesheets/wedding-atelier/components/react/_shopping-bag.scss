@@ -4,6 +4,21 @@
   height: 100%;
 }
 
+.shopping-bag-counter {
+  background-color: $white-two;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  min-width: 15px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 40%;
+  transform: translateY(-40%);
+}
+
 .shopping-bag-backdrop {
   background-color: $backdrop;
   display: none;

@@ -2,10 +2,12 @@ var Help = React.createClass({
 
   showPopovers: function() {
     $('.walkthrough-messages').popover('show');
+    $('.moodboard-tabs .tabs-container').addClass('show-popovers');
   },
 
   hidePopovers: function() {
     $('.walkthrough-messages').popover('destroy');
+    $('.moodboard-tabs .tabs-container').removeClass('show-popovers');
   },
 
   handleClose: function(e) {

@@ -33,20 +33,20 @@ var ShoppingBagItem = React.createClass({
   },
 
   renderListOfCustomizations: function (item) {
-    return ['silhouette', 'fabric', 'color', 'length', 'style', 'size'].map(function (propertyName, index) {
+    return ['silhouette', 'fabric', 'color', 'length', 'style', 'fit', 'size'].map(function (propertyName, index) {
       var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
       var key = item.id + '-' + index;
       var personalization = item.personalization[propertyName];
       var presentationLabel = '';
       if(personalization) {
         presentationLabel = item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
+        return (
+          <li key={key} className="shopping-bag-item-summary-list-item">
+            <span className="customization-name">{label}</span>
+            <span className="customization-value">{presentationLabel}</span>
+          </li>
+        );
       }
-      return (
-        <li key={key} className="shopping-bag-item-summary-list-item">
-          <span className="customization-name">{label}</span>
-          <span className="customization-value">{presentationLabel}</span>
-        </li>
-      );
     });
   },
 

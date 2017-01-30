@@ -1,14 +1,24 @@
 var SelectSizeModal = React.createClass({
   propTypes: {
-    dress: React.PropTypes.object,
-    profiles: React.PropTypes.array,
-    position: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
-    heights: React.PropTypes.array,
-    sizes: React.PropTypes.array,
-    siteVersion: React.PropTypes.string,
+    dress: React.PropTypes.object,
     dressToAddToCart: React.PropTypes.number,
+    eventSlug: React.PropTypes.number,
+    heights: React.PropTypes.array,
+    position: React.PropTypes.string,
+    profiles: React.PropTypes.array,
+    siteVersion: React.PropTypes.string,
+    sizes: React.PropTypes.array,
     updateUserCartCallback: React.PropTypes.func
+  },
+
+  getInitialState: function(){
+    return {
+      useProfiles: true,
+      selectedProfiles: [this.props.current_user_id],
+      selectedSize: null,
+      selectedHeight: null
+     };
   },
 
   componentDidMount: function(){
@@ -20,23 +30,14 @@ var SelectSizeModal = React.createClass({
     });
   },
 
-  getInitialState: function(){
-    return {
-      useProfiles: true,
-      selectedProfiles: [this.props.current_user_id],
-      selectedSize: null,
-      selectedHeight: null
-     }
-  },
-
   profileSelectedHandle: function(profile){
     var _newState = $.extend({}, this.state),
         index = _newState.selectedProfiles.indexOf(profile.id);
 
-    if(index > -1){
+    if(index > -1) {
       _newState.selectedProfiles.splice(index, 1);
-    }else{
-      _newState.selectedProfiles.push(profile.id)
+    } else {
+      _newState.selectedProfiles.push(profile.id);
     }
     _newState.selectedSize = null,
     _newState.selectedHeight = null,
@@ -65,7 +66,7 @@ var SelectSizeModal = React.createClass({
         heightGroup = group[0];
         return false;
       }
-    })
+    });
     return heightGroup;
   },
 
@@ -90,13 +91,13 @@ var SelectSizeModal = React.createClass({
     var attrs = {
       dress_id: this.props.dressToAddToCart,
       profiles: []
-    }
+    };
     if(this.state.selectedProfiles.length) {
       attrs.profiles = this.state.selectedProfiles.map(function(id) {
-        return {id: id}
-      })
+        return {id: id};
+      });
     } else {
-      attrs.profiles = [{dress_size_id: this.state.selectedSize, height: this.state.selectedHeight}]
+      attrs.profiles = [{dress_size_id: this.state.selectedSize, height: this.state.selectedHeight}];
     }
     $.ajax({
       url: "/wedding-atelier/orders",
@@ -105,14 +106,14 @@ var SelectSizeModal = React.createClass({
       data: attrs,
       success: function (data) {
         that.props.updateUserCartCallback(data.order);
-        ReactDOM.render(<Notification errors={['Dress added to your shopping cart.']} />,
-            document.getElementById('notification'));
+        $('#events__moodboard .js-select-size-modal').hide();
+        $('.shopping-bag-container').trigger('shoppingBag:open');
       },
       error: function (response) {
         ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
             document.getElementById('notification'));
       }
-    })
+    });
   },
   renderProfiles: function(){
     var that = this;
@@ -129,8 +130,8 @@ var SelectSizeModal = React.createClass({
       };
 
       return (
-        <div className="col-xs-12 col-sm-6 col-md-6 text-center">
-          <li key={index}>
+        <div key={index} className="col-xs-12 col-sm-6 col-md-6 text-center">
+          <li>
             <input {...inputProps}/>
             <label htmlFor={id}>{profile.first_name}</label>
           </li>
@@ -145,7 +146,7 @@ var SelectSizeModal = React.createClass({
       'large-labels': true,
       'no-margins': true,
       active: this.state.useProfiles
-    })
+    });
 
     return(
       <div className={containerClasses}>
@@ -156,15 +157,15 @@ var SelectSizeModal = React.createClass({
         </ul>
         <a href="#" className="select-different-size" onClick={this.toggleSizes}> or select different size </a>
         <div className="actions row">
-          <div className='col-xs-12 col-sm-6'>
-            <button className='btn btn-gray' onClick={this.cancel}> Cancel </button>
+          <div className="col-xs-12 col-sm-6">
+            <button className="btn btn-gray" onClick={this.cancel}> Cancel </button>
           </div>
-          <div className='col-xs-12 col-sm-6'>
-            <button className='btn btn-black' onClick={this.handleAddToCart}> Add to cart </button>
+          <div className="col-xs-12 col-sm-6">
+            <button className="btn btn-black" onClick={this.handleAddToCart}> Add to cart </button>
           </div>
         </div>
       </div>
-    )
+    );
   },
 
   renderSizes: function(){
@@ -205,7 +206,7 @@ var SelectSizeModal = React.createClass({
       'sizes-container': true,
       'text-center': true,
       active: !this.state.useProfiles
-    })
+    });
     return(
       <div className={containerClasses}>
         <h1>Tailor it to your body.</h1>
@@ -219,7 +220,7 @@ var SelectSizeModal = React.createClass({
             </div>
           </div>
           <div className="form-group text-left">
-            <label>Dress size &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+            <label>Dress size &nbsp;</label><SizeGuideModalLauncher />
             <div className="dress-sizes ungrouped centered">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}
@@ -227,22 +228,22 @@ var SelectSizeModal = React.createClass({
             </div>
           </div>
           <div className="actions row">
-            <div className='col-xs-12 col-sm-12 col-md-6'>
-              <button className='btn btn-gray' onClick={this.toggleSizes}>Return to bridal party</button>
+            <div className="col-xs-12 col-sm-12 col-md-6">
+              <button className="btn btn-gray" onClick={this.toggleSizes}>Return to bridal party</button>
             </div>
-            <div className='col-xs-12 col-sm-12 col-md-6'>
-              <button className='btn btn-black' onClick={this.handleAddToCart}>Add to cart</button>
+            <div className="col-xs-12 col-sm-12 col-md-6">
+              <button className="btn btn-black" onClick={this.handleAddToCart}>Add to cart</button>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   },
 
   render: function(){
     var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
     return(
-      <div className="js-select-size-modal select-size-modal row" ref="modal">
+      <div className="js-select-size-modal select-size-modal" ref="modal">
         <div className="body">
           <div className="close">
             <a className="btnClose icon-close-white"/>
@@ -253,6 +254,6 @@ var SelectSizeModal = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});

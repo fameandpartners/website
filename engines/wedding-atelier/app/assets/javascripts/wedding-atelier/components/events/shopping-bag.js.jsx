@@ -12,12 +12,22 @@ var ShoppingBag = React.createClass({
     };
   },
 
+  componentWillMount: function () {
+    var that = this;
+    this.fetchUserCart(false);
+  },
+
   componentDidMount: function () {
+    var that = this;
     var $backdrop = $(this.refs.backdrop);
     $backdrop.on('transitionend', function() {
       if(!$backdrop.hasClass('animate')) {
         $backdrop.hide();
       }
+    });
+
+    $(that.refs.shoppingBag).on('shoppingBag:open', function () {
+      that.bagOpenHandler();
     });
   },
 
@@ -36,7 +46,8 @@ var ShoppingBag = React.createClass({
     }
   },
 
-  fetchUserCart: function () {
+  fetchUserCart: function (show) {
+    var modalShow = show !== undefined ? show : true;
     var that = this;
     $.ajax({
       url: '/wedding-atelier/orders',
@@ -45,7 +56,7 @@ var ShoppingBag = React.createClass({
       success: function (data) {
         that.setState({
           userCart: data.order,
-          show: true
+          show: modalShow
         });
       },
       error: function (response) {
@@ -56,7 +67,7 @@ var ShoppingBag = React.createClass({
   },
 
   bagOpenHandler: function () {
-    this.fetchUserCart();
+    this.fetchUserCart(true);
   },
 
   bagClosedHandler: function () {
@@ -64,7 +75,7 @@ var ShoppingBag = React.createClass({
   },
 
   itemRemovedSuccessHandler: function (data, item) {
-    this.fetchUserCart();
+    this.fetchUserCart(true);
   },
 
   itemRemovedErrorHandler: function (response) {
@@ -100,10 +111,16 @@ var ShoppingBag = React.createClass({
       itemListRender =  <ul className="shopping-bag-content-list">{this.renderCartItems()}</ul>;
     }
 
+
+    if (this.state.userCart.line_items.length > 0) {
+      var count = <div className="shopping-bag-counter" onClick={this.bagOpenHandler}>{this.state.userCart.line_items.length}</div>
+    }
+
     return (
-      <div className="shopping-bag-container">
+      <div className="shopping-bag-container" ref="shoppingBag">
         <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
-        <div className={backdropClasses} ref="backdrop"></div>
+        {count}
+        <div className={backdropClasses} ref="backdrop" onClick={this.bagClosedHandler}></div>
         <div className={windowClasses}>
           <div className="shopping-bag-header">
             <div className="shopping-bag-header-close">

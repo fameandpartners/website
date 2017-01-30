@@ -36,12 +36,6 @@ var SizeSelectorMobile = React.createClass({
     this.props.showSizingCallback(false);
   },
 
-  parsePresentation: function(size) {
-    // Finds the matching dress size depending the region US/AU, extracts the number
-    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.name.match(regexp)[1];
-  },
-
   heightSelectedHandle: function (height) {
     var newState = {
       assistant: null,
@@ -104,7 +98,7 @@ var SizeSelectorMobile = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{that.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     });
@@ -154,7 +148,7 @@ var SizeSelectorMobile = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>Dress size. &nbsp;</label>(<a href="#" className="guide-link hover-link">view size guide</a>)
+            <label>Dress size. &nbsp;</label><SizeGuideModalLauncher />
             <div className="dress-sizes ungrouped centered">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}

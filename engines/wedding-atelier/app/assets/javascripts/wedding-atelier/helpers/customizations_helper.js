@@ -61,3 +61,8 @@ PresentationHelper.presentation = function(options, customizationItem, siteVersi
     return presentation + additionalCost;
   }
 };
+
+PresentationHelper.sizePresentation = function (size) {
+  var regexp = new RegExp('US(\\d+)', 'i');
+  return 'US ' + size.name.match(regexp)[1];
+};

@@ -9,15 +9,15 @@ module WeddingAtelier
 
     def create
       addresses = params[:email_addresses].reject(&:empty?)
-      invitations = []
+      @event = WeddingAtelier::Event.where(slug: params[:event_id]).first
       addresses.each do |email|
-        invite = Invitation.create(event_slug: params[:event_id], user_email: email)
-        invitations << invite if invite.valid?
+        invitation = @event.invitations.create(inviter_id: current_spree_user.id, user_email: email)
+        invitation.send_invitation_email if invitation
       end
       current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
       respond_to do |format|
         format.html { redirect_to wedding_atelier.event_path(params[:event_id]) }
-        format.js { render json: {status: :ok, invitations: invitations} }
+        format.js { render json: { status: :ok, invitations: @event.invitations } }
       end
     end
 
@@ -28,7 +28,7 @@ module WeddingAtelier
         redirect_to wedding_atelier.signup_path
       else
         if spree_user_signed_in? && @invitation.accept
-          redirect_to wedding_atelier.event_path(@invitation.event_slug)
+          redirect_to wedding_atelier.event_path(@invitation.event)
         elsif Spree::User.find_by_email(@invitation.user_email)
           @invitation.accept
           redirect_to wedding_atelier.sign_in_path({invitation_id: @invitation.id})
