@@ -30,7 +30,7 @@ describe 'Registration Process (Sign Up)', type: :request do
           end
 
           it 'redirects the user to her signup step' do
-            get 'wedding-atelier/signup'
+            get '/wedding-atelier/signup'
 
             expect(response).to redirect_to(action: signup_step)
           end
