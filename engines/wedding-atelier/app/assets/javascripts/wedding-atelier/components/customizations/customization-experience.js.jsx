@@ -116,8 +116,7 @@ var CustomizationExperience = React.createClass({
   },
 
   selectCallback: function(customization, value){
-    var newState = $.extend({}, this.state),
-        basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
+    var newState = $.extend({}, this.state);
     newState.selectedOptions[customization] = value;
 
     if(customization === 'silhouette' && value) {
@@ -133,6 +132,8 @@ var CustomizationExperience = React.createClass({
       newState.customizations.fabrics = value.fabrics;
       newState.customizations.lengths = value.lengths;
     }
+
+    basePrice = parseFloat(this.state.selectedOptions.silhouette.price);
 
     //Flag needed to whether add the previously saved dress or customized params
     newState.selectedOptions.customized = true;
