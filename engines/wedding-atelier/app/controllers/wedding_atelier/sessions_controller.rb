@@ -1,5 +1,7 @@
 module WeddingAtelier
   class SessionsController < Spree::UserSessionsController
+    include WeddingAtelier::Concerns::FeatureFlaggable
+
     layout 'wedding_atelier/application'
     helper WeddingAtelier::Engine.helpers
 
