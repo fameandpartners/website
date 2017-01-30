@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe WeddingAtelier::LikesController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
   let(:dress) { create(:wedding_atelier_event_dress, event: event) }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
   before do
-    custom_sign_in user
+    wedding_sign_in user
   end
 
   describe 'POST#create' do
