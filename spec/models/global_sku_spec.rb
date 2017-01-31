@@ -27,27 +27,29 @@ RSpec.describe GlobalSku, type: :model do
     end
 
     context 'creates a new sku' do
-      let(:fresh_sku) { Faker.bothify("???####US##AU##C#X#H?").upcase }
+      let!(:size_option_value) { FactoryGirl.create(:product_size, name: 'US0/AU4', presentation: 'US 0/AU 4') }
+      let!(:color_option_value) { FactoryGirl.create(:product_colour, name: 'charpinkle') }
 
-      let(:line_item) { instance_spy('Orders::LineItemPresenter',
-                                     sku:                 fresh_sku,
-                                     style_number:        'BAE12345',
-                                     style_name:          'Cool Bae',
-                                     size:                'USUSAUAU',
-                                     colour_id:           89,
-                                     colour_name:         'Charpinkle',
-                                     height:              'X',
-                                     product_id:          44,
-                                     variant_id:          999,
-                                     customisation_ids:   [4],
-                                     customisation_names: %w(IncreaseMagic))
+      let!(:cut_customisation_value) { FactoryGirl.create(:customisation_value, :cut) }
+      let!(:fit_customisation_value) { FactoryGirl.create(:customisation_value, :fit) }
+
+      let(:line_item) {
+        instance_spy('Orders::LineItemPresenter',
+                     sku:               'I Do Not Exist',
+                     style_number:      'BAE12345',
+                     style_name:        'Cool Bae',
+                     size:              'US0/AU4',
+                     colour_name:       'Charpinkle',
+                     height:            'Petite',
+                     customisation_ids: [cut_customisation_value.id, fit_customisation_value.id]
+        )
       }
 
       it do
         created = GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item)
 
-        expect(created.sku).to eq fresh_sku
-        expect(created.style_number).to eq 'BAE12345'
+        expect(created).to be_an_instance_of(GlobalSku)
+        expect(created.persisted?).to eq(true)
       end
     end
   end
