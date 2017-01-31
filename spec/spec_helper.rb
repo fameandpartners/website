@@ -40,7 +40,6 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
-  config.include ControllerHelpers, :type => :controller
 end
 
 # TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912

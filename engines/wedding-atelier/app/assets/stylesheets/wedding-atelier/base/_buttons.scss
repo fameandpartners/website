@@ -1,6 +1,12 @@
 .btn {
   @extend .btn;
   @extend .text-uppercase;
+
+  @include screen-xs {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
   border: solid 1px $black;
   border-radius: 0;
   color: $black;
@@ -13,10 +19,14 @@
     width: 100%;
   }
 
-  @include screen-xs {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+}
+
+.btn-italic {
+  font-family: $primary-font;
+  font-style: italic;
+  letter-spacing: 1px;
+  text-decoration: underline;
+  text-transform: none;
 }
 
 .btn-black {
@@ -32,11 +42,18 @@
   }
 }
 
+.btn-gray {
+  @extend .btn-black;
+  background-color: $pumice;
+  border-color: $pumice;
+}
+
 .btn-white {
   @extend .btn;
   background-color: $white-three;
   border-color: $white-three;
   font-weight: 700;
+
   &:hover,
   &:focus {
     background-color: $white-four;
@@ -44,8 +61,16 @@
 }
 
 .btn-transparent {
-  @extend .btn-white;
+  @extend .btn;
   background-color: transparent;
+  font-weight: 700;
+}
+
+.btn-transparent-inverse {
+  background-color: transparent;
+  border-color: $white-two;
+  color: $white-two;
+  font-weight: 700;
 }
 
 .btn-facebook-blue {
@@ -91,13 +116,13 @@
   }
 
   &:hover {
-    &:after {
+    &::after {
       display: block;
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: rgba(255,255,255,0.3);
+      background-color: rgba(255, 255, 255, .3);
       top: 0;
       left: 0;
     }

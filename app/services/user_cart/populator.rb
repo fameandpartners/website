@@ -130,7 +130,8 @@ class Populator
     end
 
     def line_item
-      @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).first
+      # Sorted by created at to ensure it is the last created line item
+      @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).order('created_at desc').first
     end
 
     def product_options
@@ -179,12 +180,13 @@ class Populator
       end
     end
 
+    # Validates if a product has the customization IDs being added
     def product_customizations
       @product_customizations ||= begin
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = product_options.customizations.all.detect{|item| item.id == id.to_i}
+          customization = product.customisation_values.detect { |customisation_value| customisation_value.id == id.to_i }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else

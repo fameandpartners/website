@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = 'Wedding Atelier to customize experience'
   s.homepage    = ''
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 3.2.22.5'
@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'active_model_serializers'
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'factory_girl_rails'
-  # s.add_dependency "jquery-rails"
 end
