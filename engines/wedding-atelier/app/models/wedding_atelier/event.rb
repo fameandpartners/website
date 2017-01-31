@@ -19,7 +19,8 @@ module WeddingAtelier
     after_create :sluggify
 
     validates_uniqueness_of :name, case_sensitive: false
-    validates_presence_of :name, :date, :number_of_assistants
+    validates_presence_of :name, :date
+    validates :number_of_assistants, numericality: true
 
     def to_param
       slug
