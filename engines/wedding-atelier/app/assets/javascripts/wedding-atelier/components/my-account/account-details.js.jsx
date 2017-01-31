@@ -90,7 +90,7 @@ var AccountDetails = React.createClass({
   render: function () {
     return (
       <div className="account-details">
-        <form autoComplete={'off'}>
+        <form autoComplete={'off'} className="registrations__details-form">
           <div className="account-details-left col-xs-12 col-sm-6">
             <h1>Account details</h1>
             <div className="form-group">
@@ -108,7 +108,7 @@ var AccountDetails = React.createClass({
             <div className="form-group">
               <label htmlFor="date-of-birth">Date of birth</label>
               <div ref="dateOfBirth" className="input-group date date-picker">
-                <input type="text" id="date-of-birth" name="date_of_birth" className="form-control" value={this.state.dateOfBirth}/>
+                <input type="text" id="date-of-birth" name="date_of_birth" className="form-control wedding-date" value={this.state.dateOfBirth}/>
                   <div className="input-group-addon">
                     <i className="calendar-icon"></i>
                   </div>
