@@ -1,50 +1,68 @@
 var DressTile = React.createClass({
 
   propTypes: {
-    sendDressToChatFn: React.PropTypes.func,
-    handleLikeDress: React.PropTypes.func,
-    removeDress: React.PropTypes.func,
-    index: React.PropTypes.number,
-    dressesPath: React.PropTypes.string,
+    changeDressToAddToCartCallback: React.PropTypes.func,
     dress: React.PropTypes.shape({
-      id: React.PropTypes.number,
-      title: React.PropTypes.string,
-      image: React.PropTypes.string,
       author: React.PropTypes.string,
-      price: React.PropTypes.string,
-      likes_count: React.PropTypes.number,
+      id: React.PropTypes.number,
+      image: React.PropTypes.string,
+      images: React.PropTypes.object,
       liked: React.PropTypes.bool,
-      images: React.PropTypes.object
+      likes_count: React.PropTypes.number,
+      price: React.PropTypes.string,
+      title: React.PropTypes.string
     }),
-    changeDressToAddToCartCallback: React.PropTypes.func
+    dressesPath: React.PropTypes.string,
+    handleLikeDress: React.PropTypes.func,
+    index: React.PropTypes.number,
+    removeDress: React.PropTypes.func,
+    sendDressToChatFn: React.PropTypes.func
   },
 
   getInitialState: function(){
-    return {loveClass: 'icon-unliked'}
+    return {
+      loveClass: 'icon-unliked',
+      sent: false
+    };
   },
 
   handleLoveIt: function() {
     this.props.handleLikeDress(this.props.dress);
   },
 
-  removeDress: function(){
-    this.props.removeDress(this.props.dress)
+  removeDress: function() {
+    this.props.removeDress(this.props.dress);
   },
 
   sendToChatHandler: function() {
     this.props.sendDressToChatFn(this.props.dress);
+    this.setState({sent: true});
   },
 
-  editDressUrl: function(){
+  editDressUrl: function() {
     return this.props.dressesPath + '/' + this.props.dress.id + '/edit';
   },
 
-  addToCart: function(){
+  addToCart: function() {
     this.props.changeDressToAddToCartCallback(this.props.dress.id);
-    if($(window).width() < 768){
+    if($(window).width() < 768) {
       $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
-    }else{
+    } else {
       $('#events__moodboard .right-content .js-select-size-modal').show();
+    }
+  },
+
+  renderSend: function () {
+    if (this.state.sent) {
+      return (
+        <span className="sent-to-chat"><i className="icon-tick"></i> Added to the group</span>
+      );
+    } else {
+      return (
+        <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
+          Send to the group
+        </button>
+      );
     }
   },
 
@@ -74,9 +92,7 @@ var DressTile = React.createClass({
           </a>
 
           <div className="dress-box-footer center-block text-center">
-            <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
-              Send to the group
-            </button>
+            {this.renderSend()}
             <button className="btn-add-to-cart" onClick={this.addToCart}>
               Add to cart
             </button>
