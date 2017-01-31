@@ -20,7 +20,7 @@ module WeddingAtelier
 
     validates_uniqueness_of :name, case_sensitive: false
     validates_presence_of :name, :date
-    validates :number_of_assistants, numericality: true
+    validates_numericality_of :number_of_assistants, greater_than_or_equal_to: 0
 
     def to_param
       slug
