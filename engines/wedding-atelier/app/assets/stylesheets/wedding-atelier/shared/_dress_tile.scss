@@ -74,4 +74,13 @@
     width: 90%;
   }
 
+  .sent-to-chat {
+    color: $pinkish-grey;
+    letter-spacing: normal;
+
+    i {
+      vertical-align: bottom;
+    }
+  }
+
 }
