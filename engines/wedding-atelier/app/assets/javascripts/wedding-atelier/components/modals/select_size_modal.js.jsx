@@ -80,8 +80,12 @@ var SelectSizeModal = React.createClass({
     $(this.refs.modal).hide();
   },
 
-  addToCartEnabled: function () {
-    return this.state.selectedProfiles.length > 0 || this.state.selectedSize !== null && this.state.selectedHeight !== null;
+  addToCartAttrs: function () {
+    return {
+      className: 'btn btn-black',
+      onClick: this.handleAddToCart,
+      disabled: !(this.state.selectedProfiles.length > 0 || this.state.selectedSize !== null && this.state.selectedHeight !== null)
+    };
   },
 
   handleAddToCart: function(profile) {
@@ -159,7 +163,7 @@ var SelectSizeModal = React.createClass({
             <button className="btn btn-gray" onClick={this.cancel}> Cancel </button>
           </div>
           <div className="col-xs-12 col-sm-6">
-            <button className="btn btn-black" onClick={this.handleAddToCart} disabled={!this.addToCartEnabled()}> Add to cart </button>
+            <button {...this.addToCartAttrs()}> Add to cart </button>
           </div>
         </div>
       </div>
@@ -231,7 +235,7 @@ var SelectSizeModal = React.createClass({
               <button className="btn btn-gray" onClick={this.toggleSizes}>Return to bridal party</button>
             </div>
             <div className="col-xs-12 col-sm-12 col-md-6">
-              <button className="btn btn-black" onClick={this.handleAddToCart} disabled={!this.addToCartEnabled()}>Add to cart</button>
+              <button {...this.addToCartAttrs()}>Add to cart</button>
             </div>
           </div>
         </div>
