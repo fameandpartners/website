@@ -35,3 +35,100 @@
   }
 
 }
+
+// An initial approach to fit the new modal Design
+.modalV2 {
+
+  .modal-dialog {
+    text-align: center;
+  }
+
+  .modal-content {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: inline-block;
+  }
+
+  .btn-close {
+    display: block;
+    position: absolute;
+    top: -4px;
+    right: -50px;
+  }
+
+  .btn-close:before,
+  .btn-close:after {
+    background: $c-neutral-white;
+    height: 30px;
+    width: 2px;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  iframe.video {
+    display: block;
+    margin: 0 auto;
+    width: 100vw;
+    height: 56.25vw;
+    max-width: 640px;
+    max-height: 360px;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .modal-content {
+      margin-top: 8%;
+    }
+
+    .btn-close {
+      top: -20%;
+      right: 0;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-sm-width) {
+
+    iframe.video {
+      max-width: 580px;
+      max-height: 250px;
+    }
+
+    .modal-content {
+      margin-top: 15%;
+    }
+
+  }
+
+  @media (min-width: $iphone6p-width) and (max-width: $bootstrap-sm-width - 1px) {
+
+    iframe.video {
+      max-width: 360px;
+    }
+
+    .modal-content {
+      margin-top: 7%;
+    }
+
+    .btn-close {
+      top: -15%;
+    }
+
+  }
+
+  @media (max-width: $iphone6p-width - 1px) {
+
+    iframe.video {
+      max-width: 250px;
+    }
+
+    .modal-content {
+      margin-top: 15%;
+    }
+
+  }
+
+}
