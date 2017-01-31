@@ -89,7 +89,8 @@ var MoodBoardEvent = React.createClass({
       that.setState(_state);
       that.setupChatChannels();
     }).fail(function(e) {
-      console.log('Something went wrong setting up chat');
+      ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
+          document.getElementById('notification'));
     });
   },
 
