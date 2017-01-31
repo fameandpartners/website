@@ -339,8 +339,8 @@ FameAndPartners::Application.routes.draw do
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan', to: redirect("/about")
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
-    get '/pre-register-bridal'   => 'statics#pre_register_bridal_sweepstakes', :permalink => 'pre_register_bridal', :as => :pre_register_bridal
-    get '/pre-register-bridesmaid'   => 'statics#pre_register_bridesmaid_sweepstakes', :permalink => 'pre_register_bridesmaid_sweepstakes', :as => :pre_register_bridesmaid_sweepstakes
+    get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection')
+    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier')
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
