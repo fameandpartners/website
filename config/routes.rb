@@ -183,6 +183,9 @@ FameAndPartners::Application.routes.draw do
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
 
+    # Best of Fame Collection
+    get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
