@@ -85,7 +85,7 @@ namespace :wedding_atelier do
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
       { presentation: 'Add long fitted sleeves with shoulder cut-outs', price: 19.99 },
-      { presentation: 'Add draped side arm panels (attached to side seam)', price: 19.99 },
+      { presentation: 'Add draped side arm panels', price: 19.99 },
       { presentation: 'Add wide off shoulder panel', price: 19.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 }
@@ -114,7 +114,7 @@ namespace :wedding_atelier do
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
       { presentation: 'Add hem ruffle', price: 24.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long cape with arm splits', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add separate wide tie belt', price: 19.99 },
       { presentation: 'Add wide armed ties', price: 14.99 }
@@ -143,7 +143,7 @@ namespace :wedding_atelier do
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
       { presentation: 'Add separate wide tie belt', price: 19.99 },
-      { presentation: 'Add cape (longer with arm splits)', price: 29.99 },
+      { presentation: 'Add long cape with arm splits', price: 29.99 },
       { presentation: 'Add long flared sleeve', price: 19.99 },
       { presentation: 'Add wide arm ties', price: 14.99 },
       { presentation: 'Add voluminous half sleeve', price: 19.99 }
@@ -210,7 +210,7 @@ namespace :wedding_atelier do
     two_piece_fits = [
       { presentation: 'Add hem ruffle', price: 24.99 },
       { presentation: 'Change to strapless bodice', price: 14.99 },
-      { presentation: 'ADd front keyhole', price: 9.99 },
+      { presentation: 'Add front keyhole', price: 9.99 },
       { presentation: 'Change to column skirt', price: 14.99 }
     ]
 
@@ -229,8 +229,8 @@ namespace :wedding_atelier do
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
       { presentation: 'Add ruffle down skirt edge', price: 14.99 },
-      { presentation: 'Add rufle at front neckline', price: 14.99 },
-      { presentation: 'Add separete arm bands', price: 14.99 },
+      { presentation: 'Add ruffle at front neckline', price: 14.99 },
+      { presentation: 'Add separate arm bands', price: 14.99 },
       { presentation: 'Add gathered hem ruffle', price: 24.99 },
       { presentation: 'Add small train', price: 14.99 }
     ]
