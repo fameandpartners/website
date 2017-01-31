@@ -61,6 +61,10 @@ module Orders
       @global_sku ||= GlobalSku.find_or_create_by_line_item(line_item_presenter: self)
     end
 
+    def extended_style_number
+      global_sku.data.try(:[], 'extended-style-number')
+    end
+
     def product_number
       global_sku.id
     end
