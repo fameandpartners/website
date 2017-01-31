@@ -32,14 +32,14 @@ class GlobalSku < ActiveRecord::Base
   end
 
   def self.create_by_line_item(line_item_presenter:)
-    customization_values = CustomisationValue.where(id: line_item_presenter.customisation_ids)
+    customizations = Array.wrap(line_item_presenter.personalization&.customization_values)
     GlobalSku::Create.new(
       style_number:   line_item_presenter.style_number,
       product_name:   line_item_presenter.style_name,
       size:           line_item_presenter.size,
       color_name:     line_item_presenter.colour_name,
       height:         line_item_presenter.height,
-      customizations: customization_values
+      customizations: customizations
     ).call
   end
 

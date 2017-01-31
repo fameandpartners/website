@@ -33,15 +33,21 @@ RSpec.describe GlobalSku, type: :model do
       let!(:cut_customisation_value) { FactoryGirl.create(:customisation_value, :cut) }
       let!(:fit_customisation_value) { FactoryGirl.create(:customisation_value, :fit) }
 
+      let!(:line_item_personalization) { FactoryGirl.build(:personalization,
+                                                            color:                   color_option_value,
+                                                            size:                    size_option_value,
+                                                            customization_value_ids: [cut_customisation_value.id, fit_customisation_value.id]
+      ) }
+
       let(:line_item) {
         instance_spy('Orders::LineItemPresenter',
-                     sku:               'I Do Not Exist',
-                     style_number:      'BAE12345',
-                     style_name:        'Cool Bae',
-                     size:              'US0/AU4',
-                     colour_name:       'Charpinkle',
-                     height:            'Petite',
-                     customisation_ids: [cut_customisation_value.id, fit_customisation_value.id]
+                     sku:             'I Do Not Exist',
+                     style_number:    'BAE12345',
+                     style_name:      'Cool Bae',
+                     size:            'US0/AU4',
+                     colour_name:     'Charpinkle',
+                     height:          'Petite',
+                     personalization: line_item_personalization
         )
       }
 
