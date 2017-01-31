@@ -1794,6 +1794,19 @@ ActiveRecord::Schema.define(:version => 20170127005811) do
     t.integer "event_role_id"
   end
 
+  create_table "wedding_planning", :force => true do |t|
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "preferred_time"
+    t.string   "session_type"
+    t.boolean  "should_contact"
+    t.string   "timezone"
+    t.date     "wedding_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "wishlist_items", :force => true do |t|
     t.integer  "spree_user_id"
     t.integer  "spree_variant_id"
