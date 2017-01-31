@@ -1,8 +1,33 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/jan-19-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-19-featured-1-mob.jpg"
+- current_tile_image = "homepage/hero-featured/jan-31-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-1-mob.jpg"
+= link_to '/wedding-atelier', class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Wedding Atelier App Beta" }
+  picture.media-wrap
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
+
+  .content-wrap
+    .container-fluid
+      .row
+        .col-md-6.col-md-offset-6.col-lg-6
+          .copy-wrap.extra-padding-left.text-center
+            h2.heading.no-margin-md
+              span The Wedding <br class="visible-lg"> Atelier App <br class="visible-lg"> Beta.
+              span.sub-heading
+                .text-uppercase.visible-xs.visible-sm The Wedding Atelier App Beta.
+                | Custom, convenient, *actually* cool <br class="visible-lg"> bridesmaids dresses customizable in <br class="visible-lg"> over 40,000 ways.
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Enter <span class="copy-highlight">THE APP</span>
+
+// Carousel Item 2
+- current_tile_image = "homepage/hero-featured/jan-31-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-2-mob.jpg"
 = link_to bespoke_bridal_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
@@ -24,10 +49,10 @@
               span.btn-md.btn-featured
                 | Find <span class="copy-highlight">The One</span>
 
-// Carousel Item 2
-- current_tile_image = "homepage/hero-featured/jan-19-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-19-featured-2-mob.jpg"
-= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Inside Out Collection" }
+// Carousel Item 3
+- current_tile_image = "homepage/hero-featured/jan-31-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-3-mob.jpg"
+= link_to pre_season_evening_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Inside Out Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -48,28 +73,3 @@
             .cta-wrapper
               span.btn-md.btn-featured
                 | Shop <span class="copy-highlight">Custom</span>
-
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/jan-19-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-19-featured-3-mob.jpg"
-= link_to skirts_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Skirts Collection" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
-
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-4.col-md-offset-8.col-lg-3
-          .copy-wrap.extra-padding-left
-            h2.heading.no-margin-md
-              span Find <em>your</em><br class="visible-lg"> perfect skirt.
-              span.sub-heading
-                .text-uppercase.visible-xs.visible-sm Find <em>your</em> perfect skirt.
-                | ...because it's not "socially acceptable" to go bottomless.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Customize <span class="copy-highlight">yours now</span>
