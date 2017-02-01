@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe WeddingAtelier::InvitationsController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
@@ -11,7 +13,7 @@ describe WeddingAtelier::InvitationsController, type: :controller do
 
   describe '#create' do
     before do
-      custom_sign_in user
+      wedding_sign_in user
       allow(controller).to receive(:current_spree_user).and_return(user)
     end
 
