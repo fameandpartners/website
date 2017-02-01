@@ -1,13 +1,13 @@
 .shared-header
   - if controller_name != 'events'
-    = link_to '', wedding_atelier.events_path(@event), class: ['shared-header-back-arrow', controller_name == 'events' ? 'hidden-md hidden-lg': '']
+    = link_to '', wedding_atelier.event_path(id: @event, slug: @event.slug), class: ['shared-header-back-arrow', controller_name == 'events' ? 'hidden-md hidden-lg': '']
   - if controller_name == 'events'
     = link_to '', wedding_atelier.accounts_path, class: ['shared-header-account-icon', 'hidden-sm', 'hidden-md', 'hidden-lg']
   .shared-header-options.hidden-xs.hidden-sm
     ul
       - if controller_name != 'events'
         li.shared-header-back-to
-          = link_to wedding_atelier.events_path(@event) do
+          = link_to wedding_atelier.event_path(id: @event, slug: @event.slug) do
             = "Back to #{@event.name} moodboard"
 
       - if controller_name == 'events'
@@ -22,7 +22,7 @@
         li.shared-header-logout
             = link_to 'logout', destroy_spree_user_session_path
 
-  = link_to '', wedding_atelier.events_path(@event), class: 'shared-header-logo'
+  = link_to '', wedding_atelier.event_path(id: @event, slug: @event.slug), class: 'shared-header-logo'
   .shared-header-commands
     = react_component 'Help', {}, { class: 'walkthrough' }
     = react_component 'ShoppingBag', {}, { class: 'shopping-bag' }
