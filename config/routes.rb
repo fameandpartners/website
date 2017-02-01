@@ -233,6 +233,8 @@ FameAndPartners::Application.routes.draw do
 
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'products/collections#show', :permalink => 'wedding-atelier-app', :as => :wedding_atelier_app_landing_page
+    # Redirection in case of misspelling
+    get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
