@@ -200,7 +200,6 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-// TODO: look into setDresses actions and use setState for moodboard instead
   setupNotificationsChannel: function() {
     var that = this;
 
@@ -258,19 +257,12 @@ var MoodBoardEvent = React.createClass({
     }
   },
 
-// TODO: channel must be taken from state
   setUpMessagingEvents: function() {
     var that = this;
 
-    // Listen for new messages sent to the channel
     this.state.chatChannel.on('messageAdded', function (message) {
       var _messages = [...that.state.chat.messages];
       var parsedMsg = JSON.parse(message.body);
-
-      if (parsedMsg.type === "simple") {
-        // TODO: Trigger an action into CHAT that Cleans value of the chat after having a new message
-        // that.refs.chatMessage.value = "";
-      }
 
       _messages.push(parsedMsg);
 
@@ -289,18 +281,13 @@ var MoodBoardEvent = React.createClass({
     });
 
     this.state.chatChannel.on('typingStarted', function(member){
-      // TODO: Set typing indicator...
+      // TODO: Set typing indicator.
       that.setTypingIndicator(member, true);
     });
 
     this.state.chatChannel.on('typingEnded', function(member){
       that.setTypingIndicator(member, false);
     });
-  },
-
-  // TODO: Make sure this is really neccesarry...
-  getDresses: function() {
-    return this.state.event.dresses;
   },
 
   removeDress: function(dress){
@@ -324,15 +311,6 @@ var MoodBoardEvent = React.createClass({
       }
     });
   },
-
-  // TODO: Make sure this is really neccesary...
-  // setDresses: function(dresses) {
-  //   var event = $.extend({}, this.state.event);
-  //   event.dresses = dresses;
-  //   this.setState({event: event});
-  //   this.refs.ChatMobileComp.forceUpdate();
-  //   this.refs.ChatDesktop.forceUpdate();
-  // },
 
   handleLikeDress: function(dress) {
     var that = this,
@@ -412,7 +390,7 @@ var MoodBoardEvent = React.createClass({
   },
 
   sendDressToChatFn: function(dress) {
-    // TODO: Make sure there is the better way......
+    // TODO: Make sure if this is the best way or not......
     this.refs.ChatComp.sendMessageTile(dress);
   },
 
@@ -446,29 +424,15 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     var chatProps = {
-      // TODO: Check which of the variables below are still needed and which ones don't.
-
-      twilio_token_path: this.props.twilio_token_path,
-      event_id: this.props.event_id,
       bot_profile_photo: this.props.bot_profile_photo,
       profile_photo: this.props.profile_photo,
       username: this.props.username,
       user_id: this.props.user_id,
       filestack_key: this.props.filestack_key,
-      // getDresses: this.getDresses,
-      // setDresses: this.setDresses,
       handleLikeDress: this.handleLikeDress,
-      // twilioManager: this.state.twilioManager,
-      // twilioClient: this.state.twilioClient,
       changeDressToAddToCartCallback: this.changeDressToAddToCartCallback,
-
       startTypingFn: this.startTyping,
       sendMessageFn: this.sendMessage,
-      // sendNotificationFn: this.sendNotification,
-
-      // TODO: probably will have to remove channel and channelNotifications from HERE
-      // channel: this.state.channelChat,
-      // channelNotifications: this.state.channelNotifications,
       messages: this.state.chat.messages,
       members: this.state.chat.members,
       typing: this.state.chat.typing,

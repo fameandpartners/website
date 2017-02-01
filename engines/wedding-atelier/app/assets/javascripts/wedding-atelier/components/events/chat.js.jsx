@@ -1,27 +1,16 @@
 var Chat = React.createClass({
 
   propTypes: {
-    twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
     profile_photo: React.PropTypes.string,
     bot_profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
-    // getDresses: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
-    // twilioManager: React.PropTypes.object,
-    // twilioClient: React.PropTypes.object,
     changeDressToAddToCartCallback: React.PropTypes.func,
-
-// TODO: At the end of refactorizing check if channel is still needed or even channelNotifications
-
     startTypingFn: React.PropTypes.func,
     sendMessageFn: React.PropTypes.func,
-    // sendNotificationFn: React.PropTypes.func,
-
-    // channel: React.PropTypes.object,
-    // channelNotifications: React.PropTypes.object,
     messages: React.PropTypes.array,
     members: React.PropTypes.array,
     typing: React.PropTypes.array,
@@ -52,26 +41,18 @@ var Chat = React.createClass({
       stateChanged = true;
     }
 
-// TODO: if channel and channelNotifications are not removed from props they need to be updated as welL here.
-
-
     if (stateChanged) {
       this.setState(_state);
     }
   },
 
   getInitialState: function(){
-    // TODO: Make sure this is the best way to add the props with the members...
-    // TODO2: Make sure props will update work on this...
     return {
-      messages: this.props.messages,
-      message: '',
-      typing: this.props.typing,
-      members: this.props.members,
       dresses: this.props.dresses,
-      // twilioClient: null,
-      // twilioManager: null,
-      // channel: null
+      message: '',
+      messages: this.props.messages,
+      members: this.props.members,
+      typing: this.props.typing
     }
   },
 
@@ -80,15 +61,17 @@ var Chat = React.createClass({
   },
 
   getChatMembers: function() {
+    var that = this;
+
     var chatMembers = this.state.members.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
 
-      if (index === this.state.members.length - 1) {
+      if (index === that.state.members.length - 1) {
         return(<span className={className} key={'chat-member-' + index}>{member.initials}.</span>);
       } else {
         return(<span className={className} key={'chat-member-' + index}>{member.initials}, </span>);
       }
-    }.bind(this));
+    });
 
     return chatMembers;
   },
@@ -117,11 +100,11 @@ var Chat = React.createClass({
   },
 
   sendMessageTile: function(dress) {
-    this.sendMessage(dress, "dress");
+    return this.sendMessage(dress, "dress");
   },
 
   sendMessageImage: function(image) {
-    this.sendMessage(image, "image");
+    return this.sendMessage(image, "image");
   },
 
   sendMessageBot: function(message, type) {
@@ -157,10 +140,6 @@ var Chat = React.createClass({
     return this.props.sendMessageFn(message);
   },
 
-  // sendNotification: function(message) {
-  //   return this.props.sendNotificationFn(message);
-  // },
-
   getRenderedMessages() {
     var msgs = this.state.messages.slice();
     var tempAuthor = null;
@@ -189,11 +168,9 @@ var Chat = React.createClass({
       } else if (message.type === 'dress') {
 
         var dresses = [...this.state.dresses];
-        var dress = dresses.find(function(dress) {
-          return dress.id === message.content.id ? dress : null ;
-        });
+        var dress = _.findWhere(dresses, {id: message.content.id});
+
         if (dress) {
-          // referencing directly the dress
           message.content = dress;
         }
         // Forming the mssage with the component...
