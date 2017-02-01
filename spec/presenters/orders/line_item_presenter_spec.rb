@@ -137,5 +137,21 @@ module Orders
         expect(subject.image).to be_an_instance_of(Repositories::Images::Template)
       end
     end
+
+    describe '#extended_style_number' do
+      before(:each) { expect(presenter).to receive(:global_sku).and_return(global_sku) }
+
+      context 'given a global SKU with an extended style number' do
+        let(:global_sku) { GlobalSku.new(data: { 'extended-style-number' => 'SUPER-STYLE-NUMBER' }) }
+
+        it { expect(presenter.extended_style_number).to eq('SUPER-STYLE-NUMBER') }
+      end
+
+      context 'given a global SKU without an extended style number' do
+        let(:global_sku) { GlobalSku.new(data: nil) }
+
+        it { expect(presenter.extended_style_number).to eq(nil) }
+      end
+    end
   end
 end
