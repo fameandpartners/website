@@ -87,8 +87,45 @@ var Chat = React.createClass({
     }
   },
 
+  sendMessageTile: function(dress) {
+    return this.sendMessage(dress, "dress");
+  },
+
   sendMessageImage: function(image) {
-    return this.props.sendMessageFn(image, "image");
+    return this.sendMessage(image, "image");
+  },
+
+  sendMessageBot: function(message, type) {
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.bot_profile_photo,
+      author: "BridalBot",
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.props.sendMessageFn(message);
+  },
+
+  sendMessage: function (message, type){
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.profile_photo,
+      author: this.props.username,
+      user_id: this.props.user_id,
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.props.sendMessageFn(message);
   },
 
   getRenderedMessages() {
