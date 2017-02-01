@@ -17,7 +17,7 @@ WeddingAtelier::Engine.routes.draw do
 
   resources :sizing, only: :index
 
-  resources :events do
+  resources :events, except: :show do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'
     end
@@ -29,6 +29,7 @@ WeddingAtelier::Engine.routes.draw do
     end
     resources :assistants, only: [:destroy]
   end
+  get '/events/:id(/:slug)', to: 'events#show', as: 'event'
 
   resources :accounts, path: 'my-account', only: [:index, :update, :show]
 
