@@ -22,7 +22,7 @@ describe CustomisationValue, :type => :model do
     describe 'for its available customisation types' do
       shared_examples 'has a customisation type scope for' do |customisation_type_symbol|
         let!(:customisation_type) { FactoryGirl.create(:customisation_value, customisation_type_symbol) }
-        subject { described_class.public_send(customisation_type_symbol) }
+        subject { described_class.by_type(customisation_type_symbol) }
 
         it { is_expected.to contain_exactly(customisation_type) }
       end

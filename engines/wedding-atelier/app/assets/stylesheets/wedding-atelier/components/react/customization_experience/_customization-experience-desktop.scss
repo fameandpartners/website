@@ -1,0 +1,208 @@
+.customization-experience--desktop {
+  height: 100%;
+
+  .customizations-menu {
+    border-right: 2px solid $concrete;
+  }
+
+  .customization-panel {
+    padding-top: 45px;
+    height: calc(100% - 122px);
+
+    &.customizations-preview {
+      padding: 0;
+    }
+
+
+    &-container {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    align-items: center;
+    display: flex;
+    margin-bottom: 25px;
+
+  }
+
+  .title-text {
+    text-align: left;
+
+    h1 {
+      max-width: 300px;
+      font-size: 42px;
+    }
+  }
+
+  .start-over {
+    text-align: right;
+
+    > button {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 2;
+      margin-right: 30px;
+    }
+  }
+
+  .customization-type {
+    height: 48px;
+    margin: 25px auto;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: $white-three;
+    }
+  }
+
+  .customization-column {
+    display: table;
+    height: 100%;
+
+    a {
+      letter-spacing: 2px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    span {
+      padding-left: 8px;
+    }
+
+    i,
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      color: $boulder-two;
+      font-size: .85rem;
+      text-align: right;
+    }
+
+    &:hover,
+    &:focus,
+    &.selected {
+      background-color: $white-three;
+    }
+  }
+
+  .footer {
+    background-image: image-url('wedding-atelier/marbel.png');
+
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    left: 0;
+    height: 61px;
+    padding: 8px;
+    position: absolute;
+    width: 100%;
+  }
+
+  .favorites {
+
+    img {
+      width: 20px;
+      margin-right: 10px;
+    }
+  }
+
+  .results {
+    width: 45%;
+    float: left;
+
+    span {
+      display: inline-block;
+    }
+
+    .sub-total {
+      font-weight: 700;
+    }
+
+    .left-result {
+      text-align: left;
+      width: 70%;
+    }
+
+    .right-result {
+      text-align: right;
+      width: 30%;
+    }
+
+  }
+
+  .actions {
+    width: 55%;
+    float: left;
+
+    button {
+      width: 145px;
+      height: 44px;
+    }
+
+    .btn-transparent {
+      margin-right: 10px;
+
+      &:hover {
+        background: $white-two;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+    .footer {
+      justify-content: center;
+    }
+
+    .results {
+      .left-result {
+        padding-left: 0;
+      }
+    }
+  }
+
+  @include screen-md {
+    .actions {
+      button {
+        width: 125px;
+      }
+    }
+  };
+
+  @include screen-lg {
+    .actions {
+      button {
+        width: 128px;
+      }
+    }
+  }
+
+  @include screen-xl {
+    .actions {
+      button {
+        width: 150px;
+      }
+    }
+  }
+
+  @media screen and (max-height: 710px) {
+    .customization-panel {
+      padding-top: 25px;
+    }
+
+    .customization-type {
+      margin: 20px auto;
+    }
+  }
+}
