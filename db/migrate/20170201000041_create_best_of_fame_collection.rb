@@ -11,6 +11,8 @@ class CreateBestOfFameCollection < ActiveRecord::Migration
       meta_description:       'Need it now? We\'ll handcraft and deliver these made-to-order evening styles in under five days.',
       show_info_box:          true,
       section_box_class_name: 'category-text-box--black-bg',
+      banner_image_url:       'https://d1msb7dh8kb0o9.cloudfront.net/pages/best-of-fame/banner.jpg'
+
     }
   end
 
@@ -19,7 +21,7 @@ class CreateBestOfFameCollection < ActiveRecord::Migration
       page = Revolution::Page.create!(
         path:          landing_page_properties[:path],
         template_path: landing_page_properties[:template_path],
-        variables:     { lookbook: true, limit: landing_page_properties[:limit], pids: landing_page_properties[:pids], 'show-collection-info-box': landing_page_properties[:show_info_box], 'section-box-class-name': landing_page_properties[:section_box_class_name] },
+        variables:     { lookbook: true, limit: landing_page_properties[:limit], pids: landing_page_properties[:pids], 'show-collection-info-box': landing_page_properties[:show_info_box], 'section-box-class-name': landing_page_properties[:section_box_class_name], banner_image_url: landing_page_properties[:banner_image_url] },
         publish_from:  1.day.ago
       )
       page.translations.create!(locale: 'en-US', title: landing_page_properties[:title], heading: landing_page_properties[:heading], sub_heading: landing_page_properties[:subheading], meta_description: landing_page_properties[:meta_description])
