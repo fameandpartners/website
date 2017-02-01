@@ -28,6 +28,11 @@ var MoodBoardEvent = React.createClass({
       twilioClient: null,
       sizes: [],
       heights: [],
+      chat: {
+        members: [],
+        messages: [],
+        typing: []
+      },
       event: {
         dresses: [],
         invitations: [],
@@ -101,44 +106,45 @@ var MoodBoardEvent = React.createClass({
     var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
 
     // notifications channel
-    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
-      if (notificationChannel) {
-        that.setupNotificationsChannel(notificationChannel);
+    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(channelNotifications) {
+      if (channelNotifications) {
+        that.setState({channelNotifications: channelNotifications});
+        that.setupNotificationsChannel();
       } else {
         _state.twilioClient.createChannel({
           uniqueName: notificationsChannelName,
           friendlyName: 'Notifications for: ' + that.props.wedding_name
-        }).then(function(notificationChannel) {
-            that.setupNotificationsChannel(notificationChannel);
+        }).then(function(channelNotifications) {
+            that.setState({channelNotifications: channelNotifications});
+            that.setupNotificationsChannel();
         });
       }
     });
 
     // normal messaging client
-    _state.twilioClient.getChannelByUniqueName(channelName).then(function(channel) {
-      if (channel) {
-        channel.join().then(function() {
+    _state.twilioClient.getChannelByUniqueName(channelName).then(function(chatChannel) {
+      if (chatChannel) {
+        that.setState({chatChannel: chatChannel});
+        chatChannel.join().then(function() {
           console.log('Joined channel as ' + that.props.username);
-          that.refs.ChatDesktop.setUpMessagingEvents(channel);
-          that.refs.ChatMobileComp.setUpMessagingEvents(channel);
-          that.refs.ChatDesktop.loadChannelHistory(channel);
-          that.refs.ChatMobileComp.loadChannelHistory(channel);
-          that.refs.ChatDesktop.loadChannelMembers(channel);
-          that.refs.ChatMobileComp.loadChannelMembers(channel);
+          that.setUpMessagingEvents();
+          that.loadChannelHistory();
+          that.loadChannelMembers();
         });
       } else {
         _state.twilioClient.createChannel({
           uniqueName: channelName,
           friendlyName: that.props.wedding_name
-        }).then(function(channel) {
-          channel.join().then(function() {
-            that.refs.ChatDesktop.setUpMessagingEvents(channel);
+        }).then(function(chatChannel) {
+          that.setState({chatChannel: chatChannel});
+          chatChannel.join().then(function() {
+            that.setUpMessagingEvents();
             //It needs a bit time to setup event listeners properly
             setTimeout(function() {
-              that.refs.ChatDesktop.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.")
-                  .then(function() {
-                    return that.refs.ChatDesktop.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
-                  });
+              // TODO: After refactor remove this setTimeout...
+              that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function() {
+                return that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
+              });
             }, 3000);
           });
         });
@@ -146,19 +152,82 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  setupNotificationsChannel: function(notificationsChannel) {
-    var that = this;
-    this.refs.ChatDesktop.setNotificationsChannel(notificationsChannel);
-    this.refs.ChatMobileComp.setNotificationsChannel(notificationsChannel);
+  startTyping: function() {
+    this.state.chatChannel.typing();
+  },
 
-    notificationsChannel.join().then(function(channel) {
+  setTypingIndicator: function(member, typing){
+    var _whoIsTyping = [...this.state.chat.typing];
+    var _isAlreadyTyping = whoIsTyping.indexOf(member.identity) > -1;
+
+    if (typing && !_isAlreadyTyping) {
+      _whoIsTyping.push(member.identity);
+    } else {
+      var index = _whoIsTyping.indexOf(member.identity);
+      _whoIsTyping.splice(index, 1);
+    }
+
+    var _chat = $.extend({}, this.state.chat);
+    _chat.typing = _whoIsTyping;
+    this.setState({chat: _chat});
+  },
+
+  sendMessageBot: function(message, type) {
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.bot_profile_photo,
+      author: "BridalBot",
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.sendMessageToTwillio(message);
+  },
+
+  sendMessageToTwillio: function(message) {
+    return this.state.chatChannel.sendMessage(JSON.stringify(message));
+  },
+
+  sendNotificationToTwillio: function(message) {
+    return this.state.channelNotifications.sendMessage(JSON.stringify(message));
+  },
+
+  loadChannelMembers: function() {
+    var that = this;
+    this.state.chatChannel.getMembers().then(function(members) {
+      var chatMembers = members.map(function(member) {
+        var nameInitials = member.identity.match(/\b\w/g).join("").toUpperCase();
+
+        return {
+          id: member.sid,
+          identity: member.identity,
+          initials: nameInitials,
+          online: true
+        };
+      });
+
+      var _state = $.extend({}, that.state);
+      _state.chat.members = chatMembers.slice(1);
+      that.setState(_state);
+    });
+  },
+
+  setupNotificationsChannel: function() {
+    var that = this;
+
+    this.state.channelNotifications.join().then(function(channel) {
       console.log('Joined notifications channel as ' + that.props.username);
     });
 
-    // Listen for new messages sent to the channel
-    notificationsChannel.on('messageAdded', function (message) {
+    // Listening for notifications...
+    this.state.channelNotifications.on('messageAdded', function (message) {
       var parsedMsg = JSON.parse(message.body);
 
+      // Notification dress-like: A like to a dress was given by someone.
       if (parsedMsg.type === "dress-like") {
         var dresses = [...that.state.event.dresses];
 
@@ -167,13 +236,74 @@ var MoodBoardEvent = React.createClass({
         });
 
         dresses[index].likes_count = parsedMsg.dress.likes_count;
-        that.setDresses(dresses);
+
+        var _event = $.extend({}, that.state.event);
+        _event.dresses = dresses;
+        that.setState({event: _event});
       }
     });
   },
 
-  getDresses: function() {
-    return this.state.event.dresses;
+  loadChannelHistory: function() {
+    this.state.chatChannel.getMessages(20).then(function(messages) {
+      var _messages = messages.map(function(message) {
+        return JSON.parse(message.body)
+      });
+
+      var _chat = $.extend({}, this.state.chat);
+      _chat.messages = _messages;
+      this.setState({chat: _chat});
+    }.bind(this));
+  },
+
+  handleMember: function(member, joined) {
+    if (joined) {
+      var newMember = {
+        id: member.sid,
+        identity: member.identity,
+        initials: member.identity.match(/\b\w/g).join("").toUpperCase(),
+        online: joined
+      };
+
+      var _newState = $.extend({}, this.state);
+      _newState.channelMembers.push(_newUser);
+      this.setState(_newState);
+    } else {
+      // TODO: handle remove
+    }
+  },
+
+  setUpMessagingEvents: function() {
+    var that = this;
+
+    this.state.chatChannel.on('messageAdded', function (message) {
+      var _messages = [...that.state.chat.messages];
+      var parsedMsg = JSON.parse(message.body);
+
+      _messages.push(parsedMsg);
+
+      var _chat = $.extend({}, that.state.chat);
+      _chat.messages = _messages;
+      that.setState({chat: _chat});
+    });
+
+    this.state.chatChannel.on('memberJoined', function(member) {
+      that.handleMember(member, true);
+    });
+
+    this.state.chatChannel.on('memberLeft', function(member) {
+      // TODO: make sure this works.
+      that.handleMember(member, false);
+    });
+
+    this.state.chatChannel.on('typingStarted', function(member){
+      // TODO: Set typing indicator.
+      that.setTypingIndicator(member, true);
+    });
+
+    this.state.chatChannel.on('typingEnded', function(member){
+      that.setTypingIndicator(member, false);
+    });
   },
 
   removeDress: function(dress){
@@ -198,20 +328,12 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  setDresses: function(dresses) {
-    var event = $.extend({}, this.state.event);
-    event.dresses = dresses;
-    this.setState({event: event});
-    this.refs.ChatMobileComp.forceUpdate();
-    this.refs.ChatDesktop.forceUpdate();
-  },
-
   handleLikeDress: function(dress) {
     var that = this,
-        event = $.extend({}, that.state.event),
+        _event = $.extend({}, that.state.event),
         method = dress.liked ? 'DELETE' : 'POST',
         url = this.props.event_path + '/dresses/' + dress.id + '/likes',
-        dress = _.findWhere(event.dresses, {id: dress.id});
+        dress = _.findWhere(_event.dresses, {id: dress.id});
 
     $.ajax({
       url: url,
@@ -226,12 +348,12 @@ var MoodBoardEvent = React.createClass({
           dress.liked = false;
         }
 
-        that.refs.ChatDesktop.sendNotification({
+        that.sendNotificationToTwillio({
           type: 'dress-like',
           dress: dress
         });
 
-        that.setDresses(event.dresses);
+        that.setState({event: _event});
       },
       error: function(data){
         // TODO add notification after is merged.
@@ -283,14 +405,31 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  sendDressToChatFn: function(dress) {
-    this.refs.ChatDesktop.sendMessageTile(dress);
+  sendMessageTile: function(dress) {
+    return this.sendMessage(dress, "dress");
+  },
+
+  sendMessage: function (message, type){
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.profile_photo,
+      author: this.props.username,
+      user_id: this.props.user_id,
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.sendMessageToTwillio(message);
   },
 
   setDefaultTabWhenResize: function(){
     $(window).resize(function(e) {
       if (e.target.innerWidth >= 768 ) {
-        var activeMobileChat = $(ReactDOM.findDOMNode(this.refs.chatMobile)).hasClass('active'),
+        var activeMobileChat = $(this.refs.ChatComp).hasClass('active'),
             mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
             activeMobileSizeModal = mobileSizeModal.is(':visible');
         if(activeMobileChat){
@@ -317,19 +456,19 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     var chatProps = {
-      twilio_token_path: this.props.twilio_token_path,
-      event_id: this.props.event_id,
       bot_profile_photo: this.props.bot_profile_photo,
       profile_photo: this.props.profile_photo,
       username: this.props.username,
       user_id: this.props.user_id,
       filestack_key: this.props.filestack_key,
-      getDresses: this.getDresses,
-      setDresses: this.setDresses,
       handleLikeDress: this.handleLikeDress,
-      twilioManager: this.state.twilioManager,
-      twilioClient: this.state.twilioClient,
-      changeDressToAddToCartCallback: this.changeDressToAddToCartCallback
+      changeDressToAddToCartCallback: this.changeDressToAddToCartCallback,
+      startTypingFn: this.startTyping,
+      sendMessageFn: this.sendMessage,
+      messages: this.state.chat.messages,
+      members: this.state.chat.members,
+      typing: this.state.chat.typing,
+      dresses: this.state.event.dresses
     };
 
     var selectSizeProps = {
@@ -343,8 +482,14 @@ var MoodBoardEvent = React.createClass({
       updateUserCartCallback: this.updateUserCartCallback
     };
 
-    var addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
-    var addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
+    var addNewDressBigButton = '';
+    var addNewDressSmallButton = '';
+
+    if (this.state.event.dresses && this.state.event.dresses.length === 0) {
+      addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>
+    } else if (this.state.event.dresses && this.state.event.dresses.length > 0 ) {
+      addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
+    }
 
     return (
       <div id="events__moodboard" className="row">
@@ -354,7 +499,7 @@ var MoodBoardEvent = React.createClass({
         </div>
         <div className="left-content col-sm-5 hidden-xs">
           <SelectSizeModal {...selectSizeProps} position="left" />
-          <Chat ref="ChatDesktop" {...chatProps}/>
+          <Chat ref="ChatComp" {...chatProps}/>
         </div>
         <div className="right-content col-sm-7">
           <div className="right-container center-block">
@@ -406,14 +551,14 @@ var MoodBoardEvent = React.createClass({
               </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat ref="ChatMobileComp" {...chatProps}/>
+                  <Chat {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
-                  {this.state.event.dresses && this.state.event.dresses.length === 0 ? addNewDressBigButton: ''}
-                  {this.state.event.dresses && this.state.event.dresses.length > 0 ? addNewDressSmallButton : ''}
+                  {addNewDressBigButton}
+                  {addNewDressSmallButton}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
-                      sendDressToChatFn={this.sendDressToChatFn}
+                      sendDressToChatFn={this.sendMessageTile}
                       removeDress={this.removeDress}
                       dressesPath={this.props.dresses_path}
                       handleLikeDress={this.handleLikeDress}
