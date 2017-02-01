@@ -101,6 +101,11 @@
     padding: 40px 15px 30px;
   }
 
+  p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .category-text-box-content {
