@@ -104,12 +104,12 @@
     border: 1px solid transparent;
 
     p {
+      font-size: .85rem;
+      font-weight: 700;
       margin: 14px auto 0;
-      text-align: center;
-      font-family: $secondary-font;
-      font-weight: bold;
-      text-transform: capitalize;
       max-width: 89%;
+      text-align: center;
+      text-transform: uppercase;
     }
 
     .customization-price {

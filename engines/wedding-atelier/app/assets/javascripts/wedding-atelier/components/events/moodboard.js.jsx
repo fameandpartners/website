@@ -368,7 +368,7 @@ var MoodBoardEvent = React.createClass({
                 <ul className="nav nav-tabs center-block" role="tablist">
                   <li role="presentation" className="tab-chat hidden">
                     <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
-                      Chat  <span className="badge">12</span></a>
+                      Chat</a>
                   </li>
                   <li
                     className="active walkthrough-messages"
