@@ -14,8 +14,6 @@ RSpec.describe ItemReturn, type: :model do
   end
 
   describe 'validations' do
-    before { allow_any_instance_of(ItemReturn).to receive(:set_currency_from_line_item) }
-
     it { is_expected.to validate_uniqueness_of(:uuid) }
   end
 end

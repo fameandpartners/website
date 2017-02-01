@@ -14,13 +14,5 @@ class ItemReturn < ActiveRecord::Base
   attr_accessible :uuid
   validates :uuid, uniqueness: true
   validates_presence_of :order_paid_currency
-
-  before_validation :set_currency_from_line_item
-
-  private
-
-  def set_currency_from_line_item
-    self.order_paid_currency ||= line_item.currency
-  end
 end
 
