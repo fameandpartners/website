@@ -80,10 +80,12 @@ var SelectSizeModal = React.createClass({
     $(this.refs.modal).hide();
   },
 
-  parsePresentation: function(size) {
-    // Finds the matching dress size depending the region US/AU, extracts the number
-    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
-    return size.name.match(regexp)[1];
+  addToCartAttrs: function () {
+    return {
+      className: 'btn btn-black',
+      onClick: this.handleAddToCart,
+      disabled: !(this.state.selectedProfiles.length > 0 || this.state.selectedSize !== null && this.state.selectedHeight !== null)
+    };
   },
 
   handleAddToCart: function(profile) {
@@ -161,7 +163,7 @@ var SelectSizeModal = React.createClass({
             <button className="btn btn-gray" onClick={this.cancel}> Cancel </button>
           </div>
           <div className="col-xs-12 col-sm-6">
-            <button className="btn btn-black" onClick={this.handleAddToCart}> Add to cart </button>
+            <button {...this.addToCartAttrs()}> Add to cart </button>
           </div>
         </div>
       </div>
@@ -197,7 +199,7 @@ var SelectSizeModal = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{that.parsePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
         </li>
       );
     });
@@ -207,6 +209,7 @@ var SelectSizeModal = React.createClass({
       'text-center': true,
       active: !this.state.useProfiles
     });
+
     return(
       <div className={containerClasses}>
         <h1>Tailor it to your body.</h1>
@@ -232,7 +235,7 @@ var SelectSizeModal = React.createClass({
               <button className="btn btn-gray" onClick={this.toggleSizes}>Return to bridal party</button>
             </div>
             <div className="col-xs-12 col-sm-12 col-md-6">
-              <button className="btn btn-black" onClick={this.handleAddToCart}>Add to cart</button>
+              <button {...this.addToCartAttrs()}>Add to cart</button>
             </div>
           </div>
         </div>

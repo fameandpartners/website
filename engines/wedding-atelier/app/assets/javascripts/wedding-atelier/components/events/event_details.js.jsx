@@ -54,7 +54,7 @@ var EventDetails = React.createClass({
 
   render: function() {
     return(
-        <form className="center-block">
+        <form className="center-block registrations__details-form">
           <div className={this.props.hasError && this.props.hasError.name ? 'form-group has-error' : 'form-group'}>
             <label htmlFor="input_wedding_board_name">
               What should we call your wedding board?
@@ -96,7 +96,7 @@ var EventDetails = React.createClass({
             <div className="input-group date date-picker" ref="datepicker">
               <input
                   type="text"
-                  className="form-control"
+                  className="form-control wedding-date"
                   placeholder="mm/dd/yyyy"
                   name="date"
                   id="input_date"

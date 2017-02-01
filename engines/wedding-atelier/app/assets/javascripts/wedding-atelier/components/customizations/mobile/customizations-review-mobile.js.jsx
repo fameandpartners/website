@@ -2,19 +2,19 @@ var CustomizationsReviewMobile = React.createClass({
   propTypes: {
     changeCurrentCustomizationCallback: React.PropTypes.func,
     currentCustomization: React.PropTypes.string,
+    currentUser: React.PropTypes.object,
     customizations: React.PropTypes.object,
+    customizationsCost: React.PropTypes.number,
+    edit: React.PropTypes.bool,
+    event_name: React.PropTypes.string,
+    event_path: React.PropTypes.string,
+    eventSlug: React.PropTypes.string,
+    goToSlide: React.PropTypes.func,
+    initialDress: React.PropTypes.object,
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    goToSlide: React.PropTypes.func,
-    subTotal: React.PropTypes.number,
-    customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string,
-    currentUser: React.PropTypes.object,
-    event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string,
-    edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    subTotal: React.PropTypes.number
   },
 
   getInitialState: function () {
@@ -66,7 +66,9 @@ var CustomizationsReviewMobile = React.createClass({
             initialDress={this.props.initialDress}
             currentUser={this.props.currentUser}
             />
-          <button className="btn-black">add to cart</button>
+          <AddToCartButton
+            customizations={this.props.selectedOptions}
+            dress={this.props.initialDress} />
         </div>
         <SizeSelectorMobile
           sizes={this.props.customizations.sizes}

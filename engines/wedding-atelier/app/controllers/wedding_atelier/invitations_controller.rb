@@ -12,7 +12,7 @@ module WeddingAtelier
       @event = WeddingAtelier::Event.where(slug: params[:event_id]).first
       addresses.each do |email|
         invitation = @event.invitations.create(inviter_id: current_spree_user.id, user_email: email)
-        invitation.send_invitation_email if invitation
+        invitation.send_invitation_email if invitation.valid?
       end
       current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
       respond_to do |format|

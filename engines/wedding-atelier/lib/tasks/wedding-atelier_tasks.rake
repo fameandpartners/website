@@ -38,7 +38,7 @@ namespace :wedding_atelier do
       { presentation: 'Add wide bow tie straps', price: 9.99 },
       { presentation: 'Change to curved neckline', price: 9.99 },
       { presentation: 'Add flared hem ruffle', price: 24.99 },
-      { presentation: 'Add narrow adjusatble straps', price: 9.99 },
+      { presentation: 'Add narrow adjustable straps', price: 9.99 },
       { presentation: 'Change to Hi-low hem', price: 29.99 }
     ]
 
