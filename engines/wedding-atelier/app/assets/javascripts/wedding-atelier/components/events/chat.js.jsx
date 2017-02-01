@@ -1,7 +1,6 @@
 var Chat = React.createClass({
 
   propTypes: {
-    event_id: React.PropTypes.number,
     profile_photo: React.PropTypes.string,
     bot_profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
@@ -17,35 +16,6 @@ var Chat = React.createClass({
     dresses: React.PropTypes.array
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    var _state = $.extend({}, this.state),
-        stateChanged = false;
-
-    if (nextProps.messages.length !== this.state.messages.length) {
-      _state.messages = nextProps.messages;
-      stateChanged = true;
-    }
-
-    if (nextProps.members.length !== this.state.members.length) {
-      _state.members = nextProps.members;
-      stateChanged = true;
-    }
-
-    if (nextProps.typing.length !== this.state.typing.length) {
-      _state.typing = nextProps.typing;
-      stateChanged = true;
-    }
-
-    if (nextProps.dresses.length !== this.state.dresses.length) {
-      _state.dresses = nextProps.dresses;
-      stateChanged = true;
-    }
-
-    if (stateChanged) {
-      this.setState(_state);
-    }
-  },
-
   getInitialState: function(){
     return {
       dresses: this.props.dresses,
@@ -53,6 +23,23 @@ var Chat = React.createClass({
       messages: this.props.messages,
       members: this.props.members,
       typing: this.props.typing
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var _state = $.extend({}, this.state),
+        stateChanged = false,
+        that = this;
+
+    ['messages', 'members', 'typing', 'dresses'].forEach(function(propName) {
+      if (nextProps[propName].length !== that.state[propName].length) {
+        _state[propName] = nextProps[propName];
+        stateChanged = true;
+      }
+    });
+
+    if (stateChanged) {
+      this.setState(_state);
     }
   },
 
@@ -66,11 +53,12 @@ var Chat = React.createClass({
     var chatMembers = this.state.members.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
 
+      var separator = ', ';
       if (index === that.state.members.length - 1) {
-        return(<span className={className} key={'chat-member-' + index}>{member.initials}.</span>);
-      } else {
-        return(<span className={className} key={'chat-member-' + index}>{member.initials}, </span>);
+        separator == '.';
       }
+
+      return <span className={className} key={'chat-member-' + index}>{member.initials}{separator}</span>;
     });
 
     return chatMembers;
