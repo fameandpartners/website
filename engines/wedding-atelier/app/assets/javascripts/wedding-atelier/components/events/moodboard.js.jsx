@@ -102,7 +102,7 @@ var MoodBoardEvent = React.createClass({
   setupChatChannels: function(){
     var _state = $.extend({}, this.state);
     var that = this;
-    var channelName = this.props.channel_prefix + 'wwwwwwedding-atelier-channel-' + this.props.event_id;
+    var channelName = this.props.channel_prefix + 'alskdjflaksjdfalksdjfwedding-atelier-channel-' + this.props.event_id;
     var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
 
     // notifications channel
@@ -142,8 +142,8 @@ var MoodBoardEvent = React.createClass({
             //It needs a bit time to setup event listeners properly
             setTimeout(function() {
               // TODO: After refactor remove this setTimeout...
-              that.refs.ChatComp.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function() {
-                return that.refs.ChatComp.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
+              that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function() {
+                return that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
               });
             }, 3000);
           });
@@ -172,11 +172,27 @@ var MoodBoardEvent = React.createClass({
     this.setState({chat: _chat});
   },
 
-  sendMessage: function(message) {
+  sendMessageBot: function(message, type) {
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.bot_profile_photo,
+      author: "BridalBot",
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.sendMessageToTwillio(message);
+  },
+
+  sendMessageToTwillio: function(message) {
     return this.state.chatChannel.sendMessage(JSON.stringify(message));
   },
 
-  sendNotification: function(message) {
+  sendNotificationToTwillio: function(message) {
     return this.state.channelNotifications.sendMessage(JSON.stringify(message));
   },
 
@@ -332,7 +348,7 @@ var MoodBoardEvent = React.createClass({
           dress.liked = false;
         }
 
-        that.sendNotification({
+        that.sendNotificationToTwillio({
           type: 'dress-like',
           dress: dress
         });
@@ -389,9 +405,25 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  sendDressToChatFn: function(dress) {
-    // TODO: Make sure if this is the best way or not......
-    this.refs.ChatComp.sendMessageTile(dress);
+  sendMessageTile: function(dress) {
+    return this.sendMessage(dress, "dress");
+  },
+
+  sendMessage: function (message, type){
+    if (type === undefined) {
+      type = "simple";
+    }
+
+    message = {
+      profilePhoto: this.props.profile_photo,
+      author: this.props.username,
+      user_id: this.props.user_id,
+      time: Date.now(),
+      type: type,
+      content: message
+    };
+
+    return this.sendMessageToTwillio(message);
   },
 
   setDefaultTabWhenResize: function(){
@@ -526,7 +558,7 @@ var MoodBoardEvent = React.createClass({
                   {addNewDressSmallButton}
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
-                      sendDressToChatFn={this.sendDressToChatFn}
+                      sendDressToChatFn={this.sendMessageTile}
                       removeDress={this.removeDress}
                       dressesPath={this.props.dresses_path}
                       handleLikeDress={this.handleLikeDress}
