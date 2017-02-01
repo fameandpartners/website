@@ -17,7 +17,7 @@ module WeddingAtelier
                     :owner_id
 
     before_save :sluggify
-
+    validates_presence_of :date
     validates_numericality_of :number_of_assistants, greater_than_or_equal_to: 0
 
     def assistant_permitted?(user)
@@ -36,7 +36,7 @@ module WeddingAtelier
     private
 
     def sluggify
-      update_column(:slug, name.parameterize)
+      self.slug = name.parameterize
     end
 
   end
