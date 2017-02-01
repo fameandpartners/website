@@ -15,12 +15,12 @@
       .button-area.col-xs-12.col-sm-6
         = link_to 'forgot password?', new_spree_user_password_path, class: 'forgot-password hover-link'
 
-  p.or - or -
+    p.or - or -
+    .col-xs-12
+      = link_to fb_auth_path({ return_to: wedding_atelier.events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
+       | Sign in with Facebook
 
-  = link_to fb_auth_path({ return_to: wedding_atelier.events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
-     | Sign in with Facebook
-
-  = fancy_facebook_button 'Sign in with'
+    = fancy_facebook_button 'Sign in with'
 
   p.already-member
     | Don't have an account?&nbsp;
