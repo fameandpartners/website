@@ -51,7 +51,7 @@
     "yargs": "^6.3.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development gulp build --watch true --lrbundle ${BUNDLE}",
+    "start": "NODE_ENV=development gulp build --watch true --livereload --lrbundle ${BUNDLE}",
     "prod": "NODE_ENV=production gulp build --prod true",
     "production": "NODE_ENV=production gulp build --prod true"
   },

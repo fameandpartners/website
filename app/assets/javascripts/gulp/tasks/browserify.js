@@ -24,7 +24,7 @@ const bundle = function(args) {
   const isProd = options.prod; // Will be useful for separation from pipeline
   const isDevelopment = process.env.NODE_ENV !== 'production';
   const isWatch = options.watch;
-  const isLiveReloadActive = !isProd && isWatch;
+  const isLiveReloadActive = !isProd && isWatch && options.livereload;
 
   // Status Check
   gutil.log('Is build using watchify?', isWatch ? _true : _false );
@@ -38,18 +38,23 @@ const bundle = function(args) {
     if (isLiveReloadActive) {
       gutil.log(new inquirer.Separator().line);
 
-      return inquirer
-        .prompt({
-          type: 'list',
-          name: 'bundle',
-          message: 'Which bundle to use for LiveReload?',
-          choices: bundleList
-        })
-        .then(function(answer) {
-          gutil.log(new inquirer.Separator().line);
-          gutil.log('LIVE RELOADING: ', answer.bundle);
-          return [answer.bundle,];
-        });
+      if (~options.lrbundle && config.paths.mainJS[options.lrbundle]) {
+        gutil.log('LIVE RELOADING: ', config.paths.mainJS[options.lrbundle]);
+        return Promise.resolve([ config.paths.mainJS[options.lrbundle], ]);
+      } else {
+        return inquirer
+          .prompt({
+            type: 'list',
+            name: 'bundle',
+            message: 'Which bundle to use for LiveReload?',
+            choices: bundleList
+          })
+          .then(function(answer) {
+            gutil.log(new inquirer.Separator().line);
+            gutil.log('LIVE RELOADING: ', answer.bundle);
+            return [answer.bundle,];
+          });
+      }
     } else {
       return Promise.resolve(bundleList);
     }
