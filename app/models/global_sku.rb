@@ -32,19 +32,15 @@ class GlobalSku < ActiveRecord::Base
   end
 
   def self.create_by_line_item(line_item_presenter:)
-    self.create!(
-      sku: line_item_presenter.sku,
-      style_number: line_item_presenter.style_number,
-      product_name: line_item_presenter.style_name,
-      size: line_item_presenter.size,
-      color_id: line_item_presenter.colour_id,
-      color_name: line_item_presenter.colour_name,
-      height_value: line_item_presenter.height,
-      customisation_id: line_item_presenter.customisation_ids.join(';').presence,
-      customisation_name: line_item_presenter.customisation_names.join(';').presence,
-      product_id: line_item_presenter.product_id,
-      variant_id: line_item_presenter.variant_id
-    )
+    customizations = Array.wrap(line_item_presenter.personalization&.customization_values)
+    GlobalSku::Create.new(
+      style_number:   line_item_presenter.style_number,
+      product_name:   line_item_presenter.style_name,
+      size:           line_item_presenter.size,
+      color_name:     line_item_presenter.colour_name,
+      height:         line_item_presenter.height,
+      customizations: customizations
+    ).call
   end
 
   def self.find_or_create_by_spree_variant(variant:)

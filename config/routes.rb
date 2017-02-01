@@ -213,6 +213,10 @@ FameAndPartners::Application.routes.draw do
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
 
+    # Bespoke Bridal Sweepstakes - Landing page
+    get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
+
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -229,6 +233,8 @@ FameAndPartners::Application.routes.draw do
 
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'products/collections#show', :permalink => 'wedding-atelier-app', :as => :wedding_atelier_app_landing_page
+    # Redirection in case of misspelling
+    get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -330,7 +336,7 @@ FameAndPartners::Application.routes.draw do
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
     get '/terms'   => 'statics#ecom_terms'
-    get '/privacy' => 'statics#ecom_privacy'
+    get '/privacy' => 'statics#ecom_privacy', :as => :privacy
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
