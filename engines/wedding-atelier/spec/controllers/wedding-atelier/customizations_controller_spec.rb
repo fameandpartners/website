@@ -18,7 +18,7 @@ describe WeddingAtelier::CustomizationsController, type: :controller do
 
   describe 'GET#index' do
     it 'gets all resources needed for a customization' do
-      get :index, { event_id: event.slug }
+      get :index, { event_id: event.id }
 
       customization = JSON.parse(response.body)["customization"]
       expect(customization["silhouettes"]).not_to be_empty
