@@ -21,7 +21,7 @@ module WeddingAtelier
 
     private
     def event
-      @event ||= WeddingAtelier::Event.find_by_slug(params[:event_id])
+      @event ||= WeddingAtelier::Event.find(params[:event_id])
     end
   end
 end

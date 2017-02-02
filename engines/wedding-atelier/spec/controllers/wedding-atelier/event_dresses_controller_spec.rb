@@ -15,7 +15,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
 
   describe '#new' do
     it 'is successful' do
-      get :new, { event_id: event.slug }
+      get :new, { event_id: event.id }
       expect(response.status).to be 200
     end
   end
@@ -23,7 +23,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   describe '#edit' do
     let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
     it 'is successful' do
-      get :edit, { event_id: event.slug, id: dress.id }
+      get :edit, { event_id: event.id, id: dress.id }
       expect(response.status).to be 200
     end
   end
@@ -36,7 +36,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     let(:height) { "5'6\"/167cm" }
     it 'creates an event dress with a base silhouette' do
       params = {
-        event_id: event.slug,
+        event_id: event.id,
         event_dress: {
           product_id: product.id,
           fabric_id: fabric.id,
@@ -57,7 +57,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
     it 'destroy the dress' do
       params = {
-        event_id: event.slug,
+        event_id: event.id,
         id: dress.id
       }
       delete :destroy, params
@@ -77,7 +77,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     context 'it assigns or replaces any customization' do
       it 'updates the base silhouette' do
         params = {
-          event_id: event.slug,
+          event_id: event.id,
           id: dress.id,
           event_dress: {
             product_id: other_product.id,
@@ -99,7 +99,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     context 'with errors' do
       it 'it fails due to errors' do
         params = {
-          event_id: event.slug,
+          event_id: event.id,
           id: dress.id,
           event_dress: {
             product_id: 123123,

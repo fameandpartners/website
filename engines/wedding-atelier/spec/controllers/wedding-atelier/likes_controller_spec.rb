@@ -14,7 +14,7 @@ describe WeddingAtelier::LikesController, type: :controller do
   describe 'POST#create' do
     context 'new like' do
       it 'likes the dress' do
-        post :create, { event_id: event.slug, dress_id: dress.id }
+        post :create, { event_id: event.id, dress_id: dress.id }
         json = JSON.parse(response.body)
         expect(json["like"]["event_dress_id"]).to eq dress.id
         expect(json["like"]["user_id"]).to eq user.id
@@ -24,7 +24,7 @@ describe WeddingAtelier::LikesController, type: :controller do
     context 'already liked by user' do
       it 'fails liking the dress' do
         WeddingAtelier::Like.create(event_dress_id: dress.id, user_id: user.id)
-        post :create, { event_id: event.slug, dress_id: dress.id }
+        post :create, { event_id: event.id, dress_id: dress.id }
         json = JSON.parse(response.body)
         expect(json["errors"][0]).to eq "Event dress has already been taken"
       end
@@ -34,7 +34,7 @@ describe WeddingAtelier::LikesController, type: :controller do
   describe 'DELETE#destroy' do
     it 'dislikes the dress' do
       WeddingAtelier::Like.create(event_dress_id: dress.id, user_id: user.id)
-      delete :destroy, { event_id: event.slug, dress_id: dress.id }
+      delete :destroy, { event_id: event.id, dress_id: dress.id }
       json = JSON.parse(response.body)
       expect(json["like"]["event_dress_id"]).to eq dress.id
       expect(json["like"]["user_id"]).to eq user.id
