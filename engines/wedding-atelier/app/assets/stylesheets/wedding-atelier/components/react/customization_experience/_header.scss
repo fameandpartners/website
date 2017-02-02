@@ -27,27 +27,27 @@
   }
 
   &-logo {
-    background: transparent image-url('wedding-atelier/logo-black.svg') center center no-repeat ;
     background-size: contain;
+    background: transparent image-url('wedding-atelier/logo-black.svg') center center no-repeat;
     left: 0;
     margin: 0 auto;
     position: absolute;
     right: 0;
     width: 160px;
 
-    &:after {
-      content: 'beta';
-      display: block;
+    &::after {
       background-color: $black;
       border-radius: 15px;
-      color: white;
-      width: 38px;
-      text-align: center;
-      text-transform: capitalize;
+      color: $white-two;
+      content: 'beta';
+      display: block;
+      font-size: 10px;
       position: absolute;
       right: -44px;
+      text-align: center;
+      text-transform: capitalize;
       top: 10px;
-      font-size: 10px;
+      width: 38px;
     }
   }
 
@@ -63,9 +63,9 @@
     display: block;
     font-family: $primary-font;
     font-size: 1rem;
-    margin: 0 auto;
     left: 0;
     line-height: 62px;
+    margin: 0 auto;
     max-width: 250px;
     position: absolute;
     right: 0;
@@ -75,10 +75,10 @@
   &-help,
   &-menu,
   &-shopping-bag {
-    cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    cursor: pointer;
     display: inline-block;
     height: 100%;
     margin-left: 5px;
