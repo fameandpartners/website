@@ -38,7 +38,7 @@ const bundle = function(args) {
     if (isLiveReloadActive) {
       gutil.log(new inquirer.Separator().line);
 
-      if (~options.lrbundle && config.paths.mainJS[options.lrbundle]) {
+      if (_.has(options, 'lrbundle') && config.paths.mainJS[options.lrbundle]) {
         gutil.log('LIVE RELOADING: ', config.paths.mainJS[options.lrbundle]);
         return Promise.resolve([ config.paths.mainJS[options.lrbundle], ]);
       } else {
