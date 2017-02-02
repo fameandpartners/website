@@ -2,7 +2,8 @@ var CustomizationsHeader = React.createClass({
   propTypes: {
     silhouette: React.PropTypes.object,
     event_path: React.PropTypes.string,
-    event_name: React.PropTypes.string
+    event_name: React.PropTypes.string,
+    bagOpenedCallback: React.PropTypes.func
   },
 
   render: function() {
@@ -23,7 +24,7 @@ var CustomizationsHeader = React.createClass({
         <div className="customization-experience-header-actions">
           <div className="customization-experience-header-dress-name hidden-xs hiden-sm">{designName}</div>
           <div className="customization-experience-header-help hidden-xs"></div>
-          <ShoppingBag className="shopping-bag"/>
+          <ShoppingBag className="shopping-bag" openedCallback={this.props.bagOpenedCallback}/>
         </div>
       </div>
     );
