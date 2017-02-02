@@ -4,7 +4,6 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   def advance_creation(event)
     @item_return.comments = ""
     @item_return.line_item_id = event.line_item_id
-    @item_return.order_paid_currency = event.order_paid_currency
   end
 
   def advance_return_requested(event)

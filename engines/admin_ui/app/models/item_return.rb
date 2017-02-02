@@ -13,6 +13,5 @@ class ItemReturn < ActiveRecord::Base
 
   attr_accessible :uuid
   validates :uuid, uniqueness: true
-  validates_presence_of :order_paid_currency
 end
 
