@@ -32,13 +32,13 @@ var ShoppingBagItem = React.createClass({
   },
 
   renderListOfCustomizations: function (item) {
-    var renderRow = function(propertyName, index) {
+    var renderRow = function(propertyName) {
       var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
-      var key = item.id + '-' + index;
       var personalization = item.personalization[propertyName];
-      var presentationLabel = '';
+      var presentationLabel = propertyName === 'silhouette'? 'The ' : '';
       if(personalization) {
-        presentationLabel = item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
+        var key = item.id + '-' + personalization.id;
+        presentationLabel += item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
         return (
           <li key={key} className="shopping-bag-item-summary-list-item">
             <span className="customization-name">{label}</span>
@@ -48,8 +48,21 @@ var ShoppingBagItem = React.createClass({
       }
     }
 
-    var withoutCost = ['silhouette', 'fabric', 'color', 'size', 'length'].map(renderRow);
-    return withoutCost.concat([]);
+    var render = ['silhouette', 'fabric', 'color', 'size', 'length'].map(renderRow);
+
+    if (item.personalization['style'] || item.personalization['fit']) {
+      var key = 'base-price-' + item.id;
+      var basePrice = (
+        <li key="base-price" className="shopping-bag-item-summary-list-item">
+          <span className="customization-name">Base Price: </span>
+          <span className="customization-value">${item.personalization['silhouette'].price}</span>
+        </li>
+      );
+      var withCost = ['style', 'fit'].map(renderRow);
+      render = render.concat(basePrice).concat(withCost);
+    }
+
+    return render;
   },
 
   render: function () {
