@@ -27,7 +27,8 @@ var ShoppingBagItem = React.createClass({
     personalization.silhouette = {presentation: item.product_name, price: 0};
     return $.extend(item, {
       personalization: personalization,
-      imageUrl: images.front.thumbnail.grey
+      imageUrl: images.front.thumbnail.grey,
+      price: item.personalization['silhouette'].price
     });
   },
 
@@ -55,7 +56,7 @@ var ShoppingBagItem = React.createClass({
       var basePrice = (
         <li key="base-price" className="shopping-bag-item-summary-list-item">
           <span className="customization-name">Base Price: </span>
-          <span className="customization-value">${item.personalization['silhouette'].price}</span>
+          <span className="customization-value">${item.price}</span>
         </li>
       );
       var withCost = ['style', 'fit'].map(renderRow);
