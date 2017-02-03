@@ -1,6 +1,7 @@
 /* [Modals]
 -------------------------------------------------------*/
 .modal {
+  z-index: 99999;
 
   .modal-content {
     box-shadow: none;
@@ -37,35 +38,30 @@
 }
 
 // An initial approach to fit the new modal Design
-.modalV2 {
-
-  .modal-dialog {
-    text-align: center;
-  }
+.modal-v2 {
 
   .modal-content {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    display: inline-block;
+    padding: 30px 20px 20px;
   }
 
   .btn-close {
     display: block;
     position: absolute;
-    top: -4px;
-    right: -50px;
+    top: 15px;
+    right: 15px;
   }
 
   .btn-close:before,
   .btn-close:after {
-    background: $c-neutral-white;
     height: 30px;
-    width: 2px;
   }
 
   .modal-body {
-    padding: 10px;
+    padding: 25px 10px 10px;
+    position: initial;
   }
 
   iframe.video {
@@ -79,13 +75,9 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .modal-content {
-      margin-top: 8%;
-    }
-
-    .btn-close {
-      top: -20%;
-      right: 0;
+    .modal-dialog {
+      width: 100%;
+      margin: 1% auto;
     }
 
   }
@@ -98,7 +90,7 @@
     }
 
     .modal-content {
-      margin-top: 15%;
+      padding: 30px 0 0;
     }
 
   }
@@ -109,24 +101,12 @@
       max-width: 360px;
     }
 
-    .modal-content {
-      margin-top: 7%;
-    }
-
-    .btn-close {
-      top: -15%;
-    }
-
   }
 
   @media (max-width: $iphone6p-width - 1px) {
 
     iframe.video {
       max-width: 250px;
-    }
-
-    .modal-content {
-      margin-top: 15%;
     }
 
   }
