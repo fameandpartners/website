@@ -161,7 +161,7 @@
   .shopping-bag-window {
     @include slide-in-right();
     left: auto;
-    max-width: 600px;
+    max-width: 40%;
     right: 0;
   }
 
@@ -202,5 +202,11 @@
     margin: 0 auto;
     max-width: 230px;
     position: static;
+  }
+}
+
+@include screen-xl {
+  .shopping-bag-window {
+    max-width: 600px;
   }
 }
