@@ -62,6 +62,12 @@ var DesktopCustomizations = React.createClass({
     $('#modal-customizations').modal();
   },
 
+  bagOpenedHandler: function () {
+    if(this.state.showSelector && this.state.showContainer) {
+      this.close();
+    }
+  },
+
   render: function() {
     var defaultProps = {
       selectedOptions:                    this.props.selectedOptions,
@@ -88,7 +94,12 @@ var DesktopCustomizations = React.createClass({
 
     return (
       <div className="customization-experience--desktop hidden-xs">
-        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette} savedDress={this.props.savedDress} event_name={this.props.event_name} event_path={this.props.event_path}/>
+        <CustomizationsHeader
+          silhouette={this.props.selectedOptions.silhouette} 
+          event_name={this.props.event_name}
+          event_path={this.props.event_path}
+          savedDress={this.props.savedDress}
+          bagOpenedCallback={this.bagOpenedHandler}/>
         <div className="customization-panel customizations-menu col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />

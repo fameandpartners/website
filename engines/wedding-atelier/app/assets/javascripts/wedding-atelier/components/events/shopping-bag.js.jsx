@@ -1,6 +1,7 @@
 var ShoppingBag = React.createClass({
   propTypes: {
-    cartItems: React.PropTypes.array
+    cartItems: React.PropTypes.array,
+    openedCallback: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -33,6 +34,9 @@ var ShoppingBag = React.createClass({
 
   componentWillUpdate: function (nextProps, nextState) {
     this.animateBackdrop(nextState.show);
+    if(!this.state.show && nextState.show && this.props.openedCallback) {
+      this.props.openedCallback();
+    }
   },
 
   animateBackdrop: function (fadeIn) {

@@ -43,7 +43,11 @@
     position: absolute;
     right: 0;
     text-align: center;
-    width: 355px;
+    width: 240px;
+
+    @include screen-md {
+      width: 355px;
+    };
 
     &-close {
       background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
@@ -56,7 +60,7 @@
     }
 
     &-container {
-      padding: 45px 50px 0
+      padding: 45px 25px 0;
     }
 
     &-title {
