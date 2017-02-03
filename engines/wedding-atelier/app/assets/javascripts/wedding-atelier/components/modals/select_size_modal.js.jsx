@@ -77,9 +77,9 @@ var SelectSizeModal = React.createClass({
   addToCartAttrs: function () {
     var disabled = true;
     if(this.state.useProfiles){
-      disabled = this.state.selectedProfiles.length <= 0
+      disabled = this.state.selectedProfiles.length === 0
     }else{
-      disabled = this.state.selectedSize == null || this.state.selectedHeight == null
+      disabled = this.state.selectedSize === null || this.state.selectedHeight === null
     }
     return {
       className: 'btn btn-black',
