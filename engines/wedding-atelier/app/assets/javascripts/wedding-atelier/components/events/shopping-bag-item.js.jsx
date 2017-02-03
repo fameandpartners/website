@@ -22,7 +22,6 @@ var ShoppingBagItem = React.createClass({
 
   prepareSummary: function () {
     var item = $.extend({}, this.props.item);
-    // TODO: Refactor image fetch since it's changing in other PR
     var images = new DressImageBuilder(item.personalization).dressCombos();
     var personalization = $.extend({}, this.props.item.personalization);
     personalization.silhouette = {presentation: item.product_name, price: 0};
@@ -33,7 +32,7 @@ var ShoppingBagItem = React.createClass({
   },
 
   renderListOfCustomizations: function (item) {
-    return ['silhouette', 'fabric', 'color', 'length', 'style', 'fit', 'size'].map(function (propertyName, index) {
+    var renderRow = function(propertyName, index) {
       var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
       var key = item.id + '-' + index;
       var personalization = item.personalization[propertyName];
@@ -47,7 +46,10 @@ var ShoppingBagItem = React.createClass({
           </li>
         );
       }
-    });
+    }
+
+    var withoutCost = ['silhouette', 'fabric', 'color', 'size', 'length'].map(renderRow);
+    return withoutCost.concat([]);
   },
 
   render: function () {
