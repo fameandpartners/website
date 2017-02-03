@@ -26,7 +26,7 @@ var CustomizationsHeader = React.createClass({
         <a href={this.props.event_path} onClick={this.backToMoodboard} className="customization-experience-header-back-arrow">
           <div className="going-back-wrapper">
             <img src="/assets/lessthan.svg" />
-            <span className="hidden-xs">{'Back to ' + this.props.event_name}</span>
+            <span className="hidden-xs">{'Back to ' + this.props.event_name + ' board'}</span>
           </div>
         </a>
         <div className="customization-experience-header-logo hidden-sm hidden-md hidden-lg"></div>
