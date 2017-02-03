@@ -38,11 +38,11 @@ class Products::CollectionsController < Products::BaseController
                 :canonicalize_sales,
                 :load_page,
                 :set_collection_resource,
-                :set_collection_seo_meta_data
+                :set_collection_seo_meta_data,
+                :redirect_to_wedding_atelier
 
   def show
     @filter = Products::CollectionFilter.read
-
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
 
     respond_to do |format|
@@ -54,6 +54,12 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+  def redirect_to_wedding_atelier
+    if params[:permalink] == 'wedding-atelier-app' && current_spree_user
+      redirect_to wedding_atelier.events_path
+    end
+  end
 
   def redirect_undefined
     if params[:permalink] =~ /undefined\Z/
