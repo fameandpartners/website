@@ -73,6 +73,7 @@
 
       .save-dress-button {
         @include screen-sm {
+          margin-left: 25px;
           float: none;
           width: auto;
         };

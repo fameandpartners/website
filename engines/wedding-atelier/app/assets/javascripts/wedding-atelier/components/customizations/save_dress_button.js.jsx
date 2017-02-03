@@ -95,7 +95,7 @@ var SaveDressButton = React.createClass({
 
   render: function() {
     return (
-      <a className={this.props.buttonClass} onClick={this.saveDress}>{this.props.caption}</a>
+      <button className={this.props.buttonClass} onClick={this.saveDress}>{this.props.caption}</button>
      );
   }
 });
