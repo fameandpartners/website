@@ -1,31 +1,80 @@
 = render partial: 'pages/robots'
 
-.js-modal.get-the-look-preview-modal.modal.modalV2 role='dialog' tabindex="-1" aria-hidden="true"
-  .modal-dialog role='document'
-    .modal-content
-      a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
-      .modal-body
-        iframe.video(webkitallowfullscreen mozallowfullscreen allowfullscreen src="" frameborder="0")
-
-.js-modal.get-the-look-modal role='dialog' tabindex="-1"
-  .modal-dialog role='document'
-    .modal-content
-      .modal-header
-        button.close type='button' data-dismiss='modal' aria-label="Close"
-          span aria-hidden="true" &times;
-        h4.modal-title Modal title
-      .modal-body
-        form#wedding_consultation_form
-          input name="first_name" placeholder="Jacqueline"
-          input name="last_name" placeholder="Bouvier"
-          input name="sessing_type" value="Email" hidden="true"
-          input name="email"
-          input name="wedding_date"
-          input type="checkbox" name="should_contact"
-          label name="should_contact" for="should_contact" I want trend updates from Fame and Partners
-          button.btn-xs.btnCtaOutlineBorderUppercase type="submit" Download Now
-
 .get-the-look
+
+  .js-modal.get-the-look-preview-modal.modal.modal-v2 role='dialog' tabindex="-1" aria-hidden="true"
+    .modal-dialog role='document'
+      .modal-content
+        a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
+        .modal-body.text-center
+          iframe.video(webkitallowfullscreen mozallowfullscreen allowfullscreen src="" frameborder="0")
+
+  .js-modal.get-the-look-modal.modal.modal-v2 role='dialog' tabindex="-1" aria-hidden="true"
+    .modal-dialog role='document'
+      .container-fluid
+        .row
+          .col-xs-12
+            .modal-content
+              a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
+              .modal-body
+                .js-form-pending.hidden
+                  .row
+                    .col-md-6.hidden-xs.hidden-sm
+                      img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-07.jpg")
+
+                    .col-xs-10.col-xs-offset-1.col-md-offset-0.col-md-6
+                      .row
+                        .col-xs-12
+                          h2.h1.no-margin <em>Unveil</em> the guide
+                          p Enter your information to download your guide to bridal bliss.
+
+                      .row
+                        form#wedding_consultation_form.form
+                          input name="sessing_type" value="Email" hidden="true"
+                            .col-xs-12
+                              label.text-uppercase Name
+                            .col-xs-12.col-md-6
+                              input name="first_name" placeholder="Jacqueline"
+                            .col-xs-12.col-md-6
+                              input name="last_name" placeholder="Bouvier"
+                            .col-xs-12
+                              label.text-uppercase E-mail
+                              input name="email"
+                            .col-xs-12
+                              label.text-uppercase Wedding Date
+                              / TODO: add datepicker component
+                              input name="wedding_date"
+                            .col-xs-12
+                              label
+                                input type="checkbox" name="should_contact"
+                                span I want trend updates from Fame and Partners
+                              button.btn-xs.btnCtaBlackBgUppercase type="submit" Download Now
+
+                .js-form-submitted
+                  .row
+                    .col-md-6.hidden-xs.hidden-sm
+                      img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-01.jpg")
+
+                    .col-xs-10.col-xs-offset-1.col-md-offset-0.col-md-6
+                      h2.h1.no-margin Download <em>ready</em>
+                      p You can download our themed lookbooks below:
+                      ul.download-list
+                        li
+                          a
+                            span.link-underline Download
+                            span  The Bohemian Wedding Guide
+                        li
+                          a
+                            span.link-underline Download
+                            span  The Classic Wedding Guide
+                        li
+                          a
+                            span.link-underline Download
+                            span  The Modern Wedding Guide
+                        li
+                          a
+                            span.link-underline Download
+                            span  The Rebellious Wedding Guide
 
   .container-fluid.containerHalfScreenHero.no-scroll
     .row
@@ -37,8 +86,7 @@
             p Four wedding vibes, four <br class="visible-lg">comprehensive guides to finding the perfect dress, hair, makeup, accessories, floral arrangements, and more–for you and your bridesmaids. <br class="visible-xs">Consider these your bridal bibles.
 
             .button-options-wrapper
-              / TODO: add real link
-              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide href="javascript:;"
+              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
                 | Download
 
       .col-md-6.no-padding
@@ -80,10 +128,8 @@
               img src="#{current_tile_image_mob_path}"
 
             .button-options-wrapper
-              / TODO: add real link
-              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide href="javascript:;"
+              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
                 | Get the guide
-              / TODO: add real link
               a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger data-video-id="199885156" href="javascript:;"
                 | Preview
 
@@ -100,10 +146,8 @@
               img src="#{current_tile_image_mob_path}"
 
             .button-options-wrapper
-              / TODO: add real link
-              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide href="javascript:;"
+              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
                 | Get the guide
-              / TODO: add real link
               a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger data-video-id="199885173" href="javascript:;"
                 | Preview
 
@@ -128,10 +172,8 @@
               img src="#{current_tile_image_mob_path}"
 
             .button-options-wrapper
-              / TODO: add real link
-              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide href="javascript:;"
+              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
                 | Get the guide
-              / TODO: add real link
               a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger data-video-id="199885199" href="javascript:;"
                 | Preview
 
@@ -148,10 +190,8 @@
               img src="#{current_tile_image_mob_path}"
 
             .button-options-wrapper
-              / TODO: add real link
-              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide href="javascript:;"
+              a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
                 | Get the guide
-              / TODO: add real link
               a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger data-video-id="199885218" href="javascript:;"
                 | Preview
 
@@ -169,8 +209,7 @@
           h2 The Wedding Atelier App
           p Bridesmaids dresses that are custom, convenient, and *actually* cool.
           .button-options-wrapper
-            / TODO: add real link
-            a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger data-video-id="" href="javascript:;"
+            a.btn-xs.btnCtaOutlineBorderUppercase.js-previewModalTrigger href=wedding_atelier_app_landing_page_path
               | Get Started
 
         .col-md-6
@@ -180,9 +219,10 @@
             picture
               source media="(max-width: 991px)" srcset="#{current_tile_image_mob_path}"
               source media="(min-width: 992px)" srcset="#{current_tile_image_path}"
-              img src="#{current_tile_image_path}" srcset="
-                #{current_tile_image_mob_path} 991w,
-                #{current_tile_image_path} 992w"
+              a href=wedding_atelier_app_landing_page_path
+                img src="#{current_tile_image_path}" srcset="
+                  #{current_tile_image_mob_path} 991w,
+                  #{current_tile_image_path} 992w"
 
 javascript:
 
@@ -199,7 +239,9 @@ javascript:
       $(this).find('iframe').attr('src', '');
     });
 
-    $('.js-modal.get-the-look-modal').modal('show')
+    $('.js-get-guide-modal-trigger').click(function(){
+      $('.js-modal.get-the-look-modal').modal('show');
+    });
 
     var $form = $('#wedding_consultation_form');
     $form.on('submit', function(evt){
