@@ -13,13 +13,16 @@
   }
 
   .btnClose {
-    display: none;
-    height: 14px;
+    height: 35px;
+    width: 35px;
+    right: -35px;
+    top: -41px;
     position: absolute;
-    right: 107px;
-    top: 25px;
-    width: 14px;
-    z-index: 101;
+
+    @include screen-xs {
+      top: 0;
+      right: 0;
+    };
   }
 
   .profiles-container, .sizes-container {
@@ -33,18 +36,26 @@
   .body {
     background: $white-two;
     left: 50%;
-    padding: 25px 0;
+    padding: 60px 25px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
     width: 320px;
 
+    @include screen-xs {
+      width: 100%;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      transform: none;
+    }
+
     @include screen-sm {
-      width: 360px;
+      width: 90%;
     }
 
     @include screen-md {
-      width: 480px;
+      width: 800px;
     };
 
     .title {
@@ -62,20 +73,22 @@
       display: inline-block;
     }
 
+    .thumbnail-container {
+      display: inline-block;
+      background: $white-three;
+      text-align: center;
+      padding: 20px 20px 0;
+    }
+
     .content-container {
-      margin: 0 auto;
-      width: 280px;
 
-      @include screen-sm {
-        width: 340px;
-      };
-
-      @include screen-md {
-        width: 390px;
-      };
     }
 
     .actions {
+
+      .back-to-size {
+        line-height: 49px;
+      }
 
       button {
         font-size: 10px;

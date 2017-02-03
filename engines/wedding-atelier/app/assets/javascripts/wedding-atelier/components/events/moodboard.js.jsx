@@ -429,22 +429,17 @@ var MoodBoardEvent = React.createClass({
   setDefaultTabWhenResize: function(){
     $(window).resize(function(e) {
       if (e.target.innerWidth >= 768 ) {
-        var activeMobileChat = $(this.refs.ChatComp).hasClass('active'),
-            mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
-            activeMobileSizeModal = mobileSizeModal.is(':visible');
+        var activeMobileChat = $(this.refs.ChatComp).hasClass('active');
         if(activeMobileChat){
           $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
-        }
-        if(activeMobileSizeModal){
-          mobileSizeModal.hide();
         }
       }
     }.bind(this));
   },
 
-  changeDressToAddToCartCallback: function(dressId){
+  changeDressToAddToCartCallback: function(dress){
     var _state = $.extend({}, this.state);
-    _state.dressToAddToCart = dressId;
+    _state.dressToAddToCart = dress;
     this.setState(_state);
   },
 
@@ -493,17 +488,13 @@ var MoodBoardEvent = React.createClass({
 
     return (
       <div id="events__moodboard" className="row">
+        <SelectSizeModal {...selectSizeProps}/>
         <SizeGuideModal />
-        <div className="mobile-select-size-modal">
-          <SelectSizeModal {...selectSizeProps} ref="mobileSizeModal" position="center" />
-        </div>
         <div className="left-content col-sm-5 hidden-xs">
-          <SelectSizeModal {...selectSizeProps} position="left" />
           <Chat ref="ChatComp" {...chatProps}/>
         </div>
         <div className="right-content col-sm-7">
           <div className="right-container center-block">
-            <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
                The Countdown: {this.state.event.remaining_days} days
             </h1>
