@@ -61,7 +61,8 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
       "ts": "$(date +%s)"
     }]
   }
-  EOJ)
+EOJ
+)
 
   curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
     -X POST \
