@@ -1,6 +1,6 @@
 = react_component 'CustomizationExperience',
                   siteVersion: current_site_version.permalink,
-                  eventSlug: params[:event_id],
+                  eventSlug: @event.id,
                   customizationsUrl: event_customizations_url(@event, format: :json),
                   event_name: @event.name,
                   event_path: wedding_atelier.event_path(id: @event.id, slug: @event.slug),

@@ -3,7 +3,16 @@ var CustomizationsHeader = React.createClass({
     silhouette: React.PropTypes.object,
     event_path: React.PropTypes.string,
     event_name: React.PropTypes.string,
-    bagOpenedCallback: React.PropTypes.func
+    bagOpenedCallback: React.PropTypes.func,
+    event_name: React.PropTypes.string,
+    savedDress: React.PropTypes.bool
+  },
+
+  backToMoodboard: function(e){
+    if(!this.props.savedDress){
+      e.preventDefault();
+      $('.js-save-dress-before-leave-modal').modal();
+    }
   },
 
   render: function() {
@@ -14,7 +23,7 @@ var CustomizationsHeader = React.createClass({
 
     return(
       <div className="customization-experience-header">
-        <a href={this.props.event_path} className="customization-experience-header-back-arrow">
+        <a href={this.props.event_path} onClick={this.backToMoodboard} className="customization-experience-header-back-arrow">
           <div className="going-back-wrapper">
             <img src="/assets/lessthan.svg" />
             <span className="hidden-xs">{'Back to ' + this.props.event_name}</span>

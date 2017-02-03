@@ -14,7 +14,9 @@ var DesktopCustomizations = React.createClass({
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
     edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    initialDress: React.PropTypes.object,
+    savedDress: React.PropTypes.bool,
+    savedDressCallback: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -93,8 +95,10 @@ var DesktopCustomizations = React.createClass({
     return (
       <div className="customization-experience--desktop hidden-xs">
         <CustomizationsHeader
-          silhouette={this.props.selectedOptions.silhouette} event_name={this.props.event_name}
+          silhouette={this.props.selectedOptions.silhouette} 
+          event_name={this.props.event_name}
           event_path={this.props.event_path}
+          savedDress={this.props.savedDress}
           bagOpenedCallback={this.bagOpenedHandler}/>
         <div className="customization-panel customizations-menu col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
@@ -129,10 +133,13 @@ var DesktopCustomizations = React.createClass({
               <SaveDressButton
                 eventSlug={this.props.eventSlug}
                 selectedOptions={this.props.selectedOptions}
-                mobile={false}
+                buttonClass='btn-transparent'
                 edit={this.props.edit}
                 initialDress={this.props.initialDress}
                 currentUser={this.props.currentUser}
+                savedDressCallback={this.props.savedDressCallback}
+                caption="Save this dress"
+                showSavedModal={true}
                 />
               <AddToCartButton customizations={this.props.selectedOptions} dress={this.props.initialDress} />
             </div>
