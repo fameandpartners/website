@@ -144,6 +144,7 @@ class ReturnRequestItem < ActiveRecord::Base
         line_item_id:           rri.line_item.id,
         item_price:             item_price_adjuster.item_price_in_cents,
         item_price_adjusted:    item_price_adjuster.item_price_adjusted_in_cents,
+        order_paid_currency:    rri.line_item.currency,
         qty:                    rri.quantity,
         requested_action:       rri.action,
         requested_at:           rri.created_at,
