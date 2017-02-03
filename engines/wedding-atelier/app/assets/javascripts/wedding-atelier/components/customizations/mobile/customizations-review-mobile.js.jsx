@@ -8,7 +8,7 @@ var CustomizationsReviewMobile = React.createClass({
     edit: React.PropTypes.bool,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     goToSlide: React.PropTypes.func,
     initialDress: React.PropTypes.object,
     selectCallback: React.PropTypes.func,
@@ -61,7 +61,7 @@ var CustomizationsReviewMobile = React.createClass({
         </div>
         <div className="customizations-selector-mobile-actions-double">
           <SaveDressButton
-            eventSlug={this.props.eventSlug}
+            eventId={this.props.eventId}
             selectedOptions={this.props.selectedOptions}
             buttonClass='btn-gray'
             edit={this.props.edit}

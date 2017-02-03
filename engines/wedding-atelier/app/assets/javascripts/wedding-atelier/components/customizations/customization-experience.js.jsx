@@ -2,7 +2,7 @@ var CustomizationExperience = React.createClass({
   propTypes: {
     customizationsUrl: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
@@ -174,7 +174,7 @@ var CustomizationExperience = React.createClass({
       siteVersion: this.props.siteVersion,
       subTotal: this.state.subTotal,
       customizationsCost: this.state.customizationsCost,
-      eventSlug: this.props.eventSlug,
+      eventId: this.props.eventId,
       currentUser: this.props.currentUser,
       event_name: this.props.event_name,
       event_path: this.props.event_path,
@@ -196,7 +196,7 @@ var CustomizationExperience = React.createClass({
           editDesignCallback={this.editDesignCallback}/>
         <SaveDressModal eventPath={this.props.event_path} />
         <SaveDressBeforeLeaveModal
-          eventSlug={this.props.eventSlug}
+          eventId={this.props.eventId}
           eventPath={this.props.event_path}
           selectedOptions={this.state.selectedOptions}
           edit={this.props.edit}

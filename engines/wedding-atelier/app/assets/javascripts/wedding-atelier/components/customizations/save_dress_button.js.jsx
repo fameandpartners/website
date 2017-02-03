@@ -1,7 +1,7 @@
 var SaveDressButton = React.createClass({
 
   propTypes: {
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     selectedOptions: React.PropTypes.object,
     mobile: React.PropTypes.bool,
     edit: React.PropTypes.bool,
@@ -26,7 +26,7 @@ var SaveDressButton = React.createClass({
   },
 
   eventPath: function(){
-    return '/wedding-atelier/events/:event_id/dresses'.replace(':event_id', this.props.eventSlug);
+    return '/wedding-atelier/events/:event_id/dresses'.replace(':event_id', this.props.eventId);
   },
 
   createDress: function(){
