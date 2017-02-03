@@ -15,6 +15,7 @@ var CustomizationExperience = React.createClass({
       currentCustomization: null,
       subTotal: 0,
       customizationsCost: 0,
+      savedDress: false,
       customizations: {
         silhouettes: [],
         fabrics: [],
@@ -68,6 +69,7 @@ var CustomizationExperience = React.createClass({
     newState.customizations.lengths = dress.product.lengths;
     newState.subTotal = parseFloat(dress.product.price);
     newState.customizationsCost = this.customizationsCost();
+    newState.savedDress = true;
     this.setState(newState);
   },
 
@@ -118,6 +120,7 @@ var CustomizationExperience = React.createClass({
   selectCallback: function(customization, value){
     var newState = $.extend({}, this.state);
     newState.selectedOptions[customization] = value;
+    newState.savedDress = false;
 
     if(customization === 'silhouette' && value) {
       var fabric = _.findWhere(value.fabrics, { name: newState.selectedOptions.fabric.name }),
@@ -154,6 +157,12 @@ var CustomizationExperience = React.createClass({
     $('.customization-experience--mobile .js-slick-hook').slick('slickGoTo', 1);
   },
 
+  savedDressCallback: function() {
+    var newState = $.extend({}, this.state);
+    newState.savedDress = true;
+    this.setState(newState);
+  },
+
   render: function() {
     var props = {
       selectedOptions: this.state.selectedOptions,
@@ -170,7 +179,9 @@ var CustomizationExperience = React.createClass({
       event_name: this.props.event_name,
       event_path: this.props.event_path,
       edit: this.props.edit,
-      initialDress: this.props.initialDress && this.props.initialDress.event_dress
+      initialDress: this.props.initialDress && this.props.initialDress.event_dress,
+      savedDress: this.state.savedDress,
+      savedDressCallback: this.savedDressCallback
     };
 
     return (
@@ -183,8 +194,15 @@ var CustomizationExperience = React.createClass({
           siteVersion={this.props.siteVersion}
           selectedOptions={this.state.selectedOptions}
           editDesignCallback={this.editDesignCallback}/>
-        <SaveDressModal
+        <SaveDressModal eventPath={this.props.event_path} />
+        <SaveDressBeforeLeaveModal
           eventSlug={this.props.eventSlug}
+          eventPath={this.props.event_path}
+          selectedOptions={this.state.selectedOptions}
+          edit={this.props.edit}
+          initialDress={this.props.initialDress && this.props.initialDress.event_dress}
+          currentUser={this.props.currentUser}
+          savedDressCallback={this.savedDressCallback}
         />
       </div>
     );

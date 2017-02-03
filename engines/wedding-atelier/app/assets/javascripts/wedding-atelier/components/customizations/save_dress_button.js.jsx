@@ -6,7 +6,11 @@ var SaveDressButton = React.createClass({
     mobile: React.PropTypes.bool,
     edit: React.PropTypes.bool,
     initialDress: React.PropTypes.object,
-    currentUser: React.PropTypes.object
+    currentUser: React.PropTypes.object,
+    savedDressCallback: React.PropTypes.func,
+    caption: React.PropTypes.string,
+    buttonClass: React.PropTypes.string,
+    showSavedModal: React.PropTypes.bool
   },
 
   saveDress: function(){
@@ -78,7 +82,10 @@ var SaveDressButton = React.createClass({
   },
 
   successCallback: function(data){
-    $('.js-save-dress-modal').modal();
+    this.props.savedDressCallback();
+    if(this.props.showSavedModal){
+      $('.js-save-dress-modal').modal();
+    }
   },
 
   errorCallback: function(data){
@@ -87,11 +94,8 @@ var SaveDressButton = React.createClass({
   },
 
   render: function() {
-    var buttonClass = this.props.mobile ? 'btn-gray':'btn-transparent';
     return (
-      <button className={buttonClass} onClick={this.saveDress}>
-       save this dress
-       </button>
+      <a className={this.props.buttonClass} onClick={this.saveDress}>{this.props.caption}</a>
      );
   }
 });
