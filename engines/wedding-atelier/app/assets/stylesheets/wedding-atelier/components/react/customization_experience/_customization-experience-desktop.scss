@@ -6,8 +6,8 @@
   }
 
   .customization-panel {
-    padding-top: 45px;
     height: calc(100% - 122px);
+    padding-top: 45px;
 
     &.customizations-preview {
       padding: 0;
@@ -24,7 +24,6 @@
     align-items: center;
     display: flex;
     margin-bottom: 25px;
-
   }
 
   .title-text {
@@ -40,11 +39,11 @@
     text-align: right;
 
     > button {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
       margin-right: 30px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
@@ -62,11 +61,12 @@
   .customization-column {
     display: table;
     height: 100%;
+    padding-left: 0;
 
     a {
-      letter-spacing: 2px;
       font-size: 14px;
       font-weight: 700;
+      letter-spacing: 2px;
     }
 
     span {
@@ -97,13 +97,12 @@
   }
 
   .footer {
-    background-image: image-url('wedding-atelier/marbel.png');
-
     align-items: center;
+    background-image: image-url('wedding-atelier/marbel.png');
     bottom: 0;
     display: flex;
-    left: 0;
     height: 61px;
+    left: 0;
     padding: 8px;
     position: absolute;
     width: 100%;
@@ -142,18 +141,18 @@
   }
 
   .actions {
-    width: 55%;
     float: left;
+    width: 55%;
 
     button {
-      width: 145px;
       height: 44px;
+      width: 145px;
     }
 
     .btn-transparent {
       margin-right: 10px;
 
-      &:hover {
+      &::hover {
         background: $white-two;
       }
     }
@@ -192,6 +191,19 @@
       button {
         width: 150px;
       }
+    }
+
+    .customization-panel-container {
+      left: 0;
+      max-width: 75%;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .title-row {
+      margin-bottom: 100px;
     }
   }
 
