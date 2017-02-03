@@ -26,12 +26,12 @@ var SaveDressBeforeLeaveModal = React.createClass({
                   <h1>
                     <em>Would you</em> like to save this dress customization to the wedding moodboard?
                   </h1>
-                  <div className="action-buttons">
-                    <a href={this.props.eventPath} className="btn-white" type='button'> Don't save </a>
+                  <div className="action-buttons row">
+                    <a href={this.props.eventPath} className="btn-white hidden-xs" type='button'> Don't save </a>
                     <SaveDressButton
                       eventSlug={this.props.eventSlug}
                       selectedOptions={this.props.selectedOptions}
-                      buttonClass='btn-black'
+                      buttonClass='btn-black save-dress-button col-xs-offset-1 col-xs-10'
                       edit={this.props.edit}
                       initialDress={this.props.initialDress}
                       currentUser={this.props.currentUser}
@@ -39,6 +39,7 @@ var SaveDressBeforeLeaveModal = React.createClass({
                       caption="Save the dress"
                       showSavedModal={false}
                       />
+                      <a href={this.props.eventPath} className="btn-white visible-xs col-xs-offset-1 col-xs-10" type='button'> Don't save </a>
                   </div>
                 </div>
               </div>
