@@ -9,7 +9,7 @@ var DesktopCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
@@ -95,7 +95,7 @@ var DesktopCustomizations = React.createClass({
     return (
       <div className="customization-experience--desktop hidden-xs">
         <CustomizationsHeader
-          silhouette={this.props.selectedOptions.silhouette} 
+          silhouette={this.props.selectedOptions.silhouette}
           event_name={this.props.event_name}
           event_path={this.props.event_path}
           savedDress={this.props.savedDress}
@@ -131,7 +131,7 @@ var DesktopCustomizations = React.createClass({
             </div>
             <div className="actions text-right">
               <SaveDressButton
-                eventSlug={this.props.eventSlug}
+                eventId={this.props.eventId}
                 selectedOptions={this.props.selectedOptions}
                 buttonClass='btn-transparent'
                 edit={this.props.edit}

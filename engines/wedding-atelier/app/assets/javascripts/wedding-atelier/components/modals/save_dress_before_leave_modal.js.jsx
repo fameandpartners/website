@@ -1,6 +1,6 @@
 var SaveDressBeforeLeaveModal = React.createClass({
   propTypes: {
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     selectedOptions: React.PropTypes.object,
     edit: React.PropTypes.bool,
     initialDress: React.PropTypes.object,
@@ -29,7 +29,7 @@ var SaveDressBeforeLeaveModal = React.createClass({
                   <div className="action-buttons row">
                     <a href={this.props.eventPath} className="btn-white hidden-xs" type='button'> Don't save </a>
                     <SaveDressButton
-                      eventSlug={this.props.eventSlug}
+                      eventId={this.props.eventId}
                       selectedOptions={this.props.selectedOptions}
                       buttonClass='btn-black save-dress-button col-xs-offset-1 col-xs-10'
                       edit={this.props.edit}
