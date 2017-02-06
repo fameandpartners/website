@@ -78,6 +78,7 @@
   }
 
   .modal form {
+    padding-top: 15px;
 
     label {
       font-weight: 600;
@@ -90,6 +91,20 @@
     input[type=email],
     input[type=date] {
       width: 100%;
+      padding: 0 5px;
+    }
+
+    .checkbox-area label {
+      margin: 20px 0;
+
+      span {
+        font-style: italic;
+        font-size: 1.15em;
+        font-weight: 400;
+        line-height: 1.5em;
+        @extend .font-serif;
+      }
+
     }
 
   }
