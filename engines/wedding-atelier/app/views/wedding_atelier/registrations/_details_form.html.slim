@@ -1,4 +1,4 @@
-.registrations__details-form.left-side-centered-container
+.registrations__details-form.signup.left-side-centered-container
   h1
     em = current_spree_user.first_name
     | , we want to know more.
@@ -19,13 +19,13 @@
         .form-group
           = ff.label :date, "What is the date of the wedding?"
           .input-group.date.date-picker
-            = ff.text_field :date, { class: 'form-control', placeholder: 'mm/dd/yyyy', data: { outside_error: true }, onkeydown: 'return false' }
+            = ff.text_field :date, { class: 'form-control wedding-date', placeholder: 'mm/dd/yyyy', data: { outside_error: true }, onkeydown: 'return false' }
             span.input-group-addon
               i.calendar-icon
           = ff.hidden_field :event_type, value: 'wedding'
         br
         .row
           .col-xs-12.col-sm-6
-            = link_to 'back', :back, class: 'btn btn-white full-width'
+            = link_to 'back', wedding_atelier.size_signup_path, class: 'btn btn-white full-width'
           .col-xs-12.col-sm-6
             = f.submit 'next', class: 'btn btn-black full-width'

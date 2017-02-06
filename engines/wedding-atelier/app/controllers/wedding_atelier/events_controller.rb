@@ -4,11 +4,12 @@ module WeddingAtelier
     protect_from_forgery except: :update
 
     def index
-      redirect_to event_path(current_spree_user.events.last)
+      event = current_spree_user.events.last
+      redirect_to event_path(id: event.id, slug: event.slug)
     end
 
     def show
-      @event = Event.find_by_slug(params[:id])
+      @event = current_spree_user.events.find(params[:id])
       @sizes = Spree::OptionType.size.option_values
       @heights = WeddingAtelier::Height.definitions
 
@@ -24,7 +25,7 @@ module WeddingAtelier
     end
 
     def update
-      @event = Event.find_by_slug(params[:id])
+      @event = current_spree_user.events.find(params[:id])
       if @event.update_attributes(params_event) && spree_current_user.update_role_in_event(params[:event][:role], @event)
         render json: @event, serializer: MoodboardEventSerializer
       else

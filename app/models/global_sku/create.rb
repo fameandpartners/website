@@ -67,7 +67,7 @@ class GlobalSku
         size:                    size,
         color_id:                color&.id,
         height:                  height,
-        customization_value_ids: customization_value_ids
+        customization_value_ids: customizations.map(&:id)
       ).call
     end
 

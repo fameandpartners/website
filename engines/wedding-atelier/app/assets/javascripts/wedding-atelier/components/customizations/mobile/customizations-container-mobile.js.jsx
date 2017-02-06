@@ -39,6 +39,7 @@ var CustomizationsContainerMobile = React.createClass({
         this.props.selectCallback(property, this.state[property]);
       }
     }
+    this.close();
   },
 
   render: function() {

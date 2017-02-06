@@ -27,8 +27,8 @@ module WeddingAtelier
         invited_by_name: inviter.full_name,
         invitee_name: user_email,
         moodboard_name: event.name,
-        moodboard_path: routes.event_invitation_accept_path(self.event, self),
-        moodboard_url: routes.event_invitation_accept_url(self.event, self, host: 'fameandpartners.com', protocol: 'https')
+        moodboard_path: routes.event_invitation_accept_path(event_id: self.event_id, invitation_id: self.id),
+        moodboard_url: routes.event_invitation_accept_url(event_id: self.event_id, invitation_id: self.id, host: 'fameandpartners.com', protocol: 'https')
       }
       Marketing::CustomerIOEventTracker.new.anonymous_track('invited_to_moodboard', invitation_attrs)
     end

@@ -1,29 +1,45 @@
 var Chat = React.createClass({
 
   propTypes: {
-    twilio_token_path: React.PropTypes.string,
-    event_id: React.PropTypes.number,
     profile_photo: React.PropTypes.string,
     bot_profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
-    getDresses: React.PropTypes.func,
     handleLikeDress: React.PropTypes.func,
-    twilioManager: React.PropTypes.object,
-    twilioClient: React.PropTypes.object,
-    changeDressToAddToCartCallback: React.PropTypes.func
+    changeDressToAddToCartCallback: React.PropTypes.func,
+    startTypingFn: React.PropTypes.func,
+    sendMessageFn: React.PropTypes.func,
+    messages: React.PropTypes.array,
+    members: React.PropTypes.array,
+    typing: React.PropTypes.array,
+    dresses: React.PropTypes.array
   },
 
   getInitialState: function(){
     return {
-      messages: [],
+      dresses: this.props.dresses,
       message: '',
-      typing: [],
-      channelMembers: [],
-      twilioClient: null,
-      twilioManager: null,
-      channel: null
+      messages: this.props.messages,
+      members: this.props.members,
+      typing: this.props.typing
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var _state = $.extend({}, this.state),
+        stateChanged = false,
+        that = this;
+
+    ['messages', 'members', 'typing', 'dresses'].forEach(function(propName) {
+      if (nextProps[propName].length !== that.state[propName].length) {
+        _state[propName] = nextProps[propName];
+        stateChanged = true;
+      }
+    });
+
+    if (stateChanged) {
+      this.setState(_state);
     }
   },
 
@@ -31,93 +47,21 @@ var Chat = React.createClass({
     this.scrollToBottom();
   },
 
-  setUpMessagingEvents: function(channel) {
+  getChatMembers: function() {
     var that = this;
 
-    that.setState({channel: channel});
-
-    // Listen for new messages sent to the channel
-    channel.on('messageAdded', function (message) {
-      var messages = that.state.messages.slice();
-      var parsedMsg = JSON.parse(message.body);
-
-      if (parsedMsg.type === "simple") {
-        that.refs.chatMessage.value = "";
-      }
-
-      messages.push(parsedMsg);
-      that.setState({messages: messages});
-    });
-
-    channel.on('memberJoined', function(member) {
-      that.handleMember(member, true);
-    });
-
-    channel.on('memberLeft', function(member) {
-      that.handleMember(member, false);
-    });
-
-    channel.on('typingStarted', function(member){
-      that.setTypingIndicator(member, true);
-    });
-
-    channel.on('typingEnded', function(member){
-      that.setTypingIndicator(member, false);
-    });
-  },
-
-  loadChannelHistory: function(channel) {
-    channel.getMessages(20).then(function(messages) {
-      var _messages = messages.map(function(message) {
-        return JSON.parse(message.body)
-      });
-
-      this.setState({messages: _messages});
-    }.bind(this));
-  },
-
-  handleMember: function(member, joined) {
-    var _newState = $.extend({}, this.state);
-    var _newUser = {
-      id: member.sid,
-      identity: member.identity,
-      initials: member.identity.match(/\b\w/g).join("").toUpperCase(),
-      online: joined
-    };
-
-    _newState.channelMembers.push(_newUser);
-    this.setState(_newState);
-  },
-
-  getChatMembers: function() {
-    var chatMembers = this.state.channelMembers.map(function(member, index) {
+    var chatMembers = this.state.members.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
 
-      if (index === this.state.channelMembers.length - 1) {
-        return(<span className={className} key={'chat-member-' + index}>{member.initials}.</span>);
-      } else {
-        return(<span className={className} key={'chat-member-' + index}>{member.initials}, </span>);
+      var separator = ', ';
+      if (index === that.state.members.length - 1) {
+        separator == '.';
       }
-    }.bind(this));
+
+      return <span className={className} key={'chat-member-' + index}>{member.initials}{separator}</span>;
+    });
 
     return chatMembers;
-  },
-
-  loadChannelMembers: function(channel) {
-    channel.getMembers().then(function(members) {
-      var chatMembers = members.map(function(member) {
-        var nameInitials = member.identity.match(/\b\w/g).join("").toUpperCase();
-
-        return {
-          id: member.sid,
-          identity: member.identity,
-          initials: nameInitials,
-          online: true
-        };
-      }.bind(this));
-
-      this.setState({channelMembers: chatMembers.slice(1)});
-    }.bind(this));
   },
 
   uploadImage: function() {
@@ -137,16 +81,18 @@ var Chat = React.createClass({
     var message = this.refs.chatMessage.value;
 
     if (message) {
-      this.sendMessage(message);
+      this.props.sendMessageFn(message).then(function() {
+        this.refs.chatMessage.value = '';
+      }.bind(this));
     }
   },
 
   sendMessageTile: function(dress) {
-    this.sendMessage(dress, "dress");
+    return this.sendMessage(dress, "dress");
   },
 
   sendMessageImage: function(image) {
-    this.sendMessage(image, "image");
+    return this.sendMessage(image, "image");
   },
 
   sendMessageBot: function(message, type) {
@@ -162,7 +108,7 @@ var Chat = React.createClass({
       content: message
     };
 
-    return this.state.channel.sendMessage(JSON.stringify(message));
+    return this.props.sendMessageFn(message);
   },
 
   sendMessage: function (message, type){
@@ -179,15 +125,7 @@ var Chat = React.createClass({
       content: message
     };
 
-    return this.state.channel.sendMessage(JSON.stringify(message));
-  },
-
-  setNotificationsChannel: function(notificationsChannel) {
-    this.setState({notificationsChannel: notificationsChannel});
-  },
-
-  sendNotification: function(message) {
-    this.state.notificationsChannel.sendMessage(JSON.stringify(message));
+    return this.props.sendMessageFn(message);
   },
 
   getRenderedMessages() {
@@ -217,12 +155,10 @@ var Chat = React.createClass({
         msgComp = (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
 
-        dresses = this.props.getDresses();
-        var dress = dresses.find(function(dress) {
-          return dress.id === message.content.id ? dress : null ;
-        });
+        var dresses = [...this.state.dresses];
+        var dress = _.findWhere(dresses, {id: message.content.id});
+
         if (dress) {
-          // referencing directly the dress
           message.content = dress;
         }
         // Forming the mssage with the component...
@@ -244,13 +180,14 @@ var Chat = React.createClass({
   },
 
   startTyping: function() {
-    this.state.channel.typing();
+    this.props.startTypingFn();
   },
 
   getWhoisTyping: function() {
-    var members = this.state.typing.map(function(member) {
+    var members = this.state.typing.map(function(member, index) {
+      var typingId = 'whos-typing-' + index;
       return (
-        <div>
+        <div key={typingId}>
           <div className="typing">
             <img src="/assets/wedding-atelier/typing.svg" />
           </div>
@@ -273,20 +210,6 @@ var Chat = React.createClass({
         </div>
       </div>
     );
-  },
-
-  setTypingIndicator: function(member, typing){
-    var whoIsTyping = this.state.typing.slice();
-    var isAlreadyTyping = whoIsTyping.indexOf(member.identity) > -1;
-
-    if (typing && !isAlreadyTyping) {
-      whoIsTyping.push(member.identity);
-    } else {
-      var index = whoIsTyping.indexOf(member.identity);
-      whoIsTyping.splice(index, 1);
-    }
-
-    this.setState({typing: whoIsTyping});
   },
 
   scrollToBottom: function(){
@@ -342,7 +265,6 @@ var Chat = React.createClass({
           <input className="btn upload-image walkthrough-messages" onClick={this.uploadImage} value="" data-content="Send pics to the group" data-placement="right" />
           <div className="message-input">
             <input type="text"
-                   value={this.message}
                    id="chat-message"
                    onChange={this.startTyping}
                    ref="chatMessage"

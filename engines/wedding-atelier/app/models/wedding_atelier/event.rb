@@ -16,14 +16,9 @@ module WeddingAtelier
                     :name,
                     :owner_id
 
-    after_create :sluggify
-
-    validates_uniqueness_of :name, case_sensitive: false
-    validates_presence_of :name, :date, :number_of_assistants
-
-    def to_param
-      slug
-    end
+    before_save :sluggify
+    validates_presence_of :date
+    validates_numericality_of :number_of_assistants, greater_than_or_equal_to: 0
 
     def assistant_permitted?(user)
       assistants.include? user
@@ -41,7 +36,7 @@ module WeddingAtelier
     private
 
     def sluggify
-      update_attribute(:slug, name.parameterize)
+      self.slug = name.parameterize
     end
 
   end

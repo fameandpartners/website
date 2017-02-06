@@ -34,7 +34,7 @@ var EventDetails = React.createClass({
     }).on('hide', function(e){
       $(this).removeClass('active');
     }).on('changeDate', function(e){
-      var date = $(e.target).val();
+      var date = $(e.target).find('input').val();
       var _event = this.props.event;
       _event.date = date;
       this.setState({event: _event})
@@ -54,7 +54,7 @@ var EventDetails = React.createClass({
 
   render: function() {
     return(
-        <form className="center-block">
+        <form className="center-block registrations__details-form">
           <div className={this.props.hasError && this.props.hasError.name ? 'form-group has-error' : 'form-group'}>
             <label htmlFor="input_wedding_board_name">
               What should we call your wedding board?
@@ -96,7 +96,7 @@ var EventDetails = React.createClass({
             <div className="input-group date date-picker" ref="datepicker">
               <input
                   type="text"
-                  className="form-control"
+                  className="form-control wedding-date"
                   placeholder="mm/dd/yyyy"
                   name="date"
                   id="input_date"
