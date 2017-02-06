@@ -16,7 +16,7 @@ module Bergen
                      :product_colour
 
       def initialize(item_return:)
-        @item_return = item_return.reload
+        @item_return = item_return
       end
 
       def rejected?

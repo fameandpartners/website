@@ -31,11 +31,6 @@ module Bergen
         let(:damaged_item_presenter) { described_class.new(item_return: damaged_item) }
         let(:accepted_item_presenter) { described_class.new(item_return: accepted_item) }
 
-        before do
-          allow(damaged_item).to receive(:reload).and_return(damaged_item)
-          allow(accepted_item).to receive(:reload).and_return(accepted_item)
-        end
-
         describe '#rejected?' do
           it 'returns if a parcel received any damaged quantity' do
             expect(damaged_item_presenter.rejected?).to be_truthy
@@ -55,8 +50,6 @@ module Bergen
         describe '#admin_ui_mail_url' do
           let(:item_return) { build_stubbed(:item_return, id: 101) }
           let(:presenter) { described_class.new(item_return: item_return) }
-
-          before { allow(item_return).to receive(:reload).and_return(item_return) }
 
           it 'returns the admin UI url for the given item return' do
             expect(presenter.admin_ui_mail_url).to eq('http://fameandpartners.test/fame_admin/item_returns/101')
