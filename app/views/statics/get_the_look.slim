@@ -13,11 +13,11 @@
     .modal-dialog role='document'
       .container-fluid
         .row
-          .col-xs-12
+          .col-xs-12.col-sm-10.col-sm-offset-1
             .modal-content
               a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
               .modal-body
-                .js-form-pending.hidden
+                .js-form-pending
                   .row
                     .col-md-6.hidden-xs.hidden-sm
                       img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-07.jpg")
@@ -26,7 +26,7 @@
                       .row
                         .col-xs-12
                           h2.h1.no-margin <em>Unveil</em> the guide
-                          p Enter your information to download your guide to bridal bliss.
+                          p.no-margin Enter your information to download your <br class="visible-lg">guide to bridal bliss.
 
                       .row
                         form#wedding_planning_form.form
@@ -44,12 +44,14 @@
                               label.text-uppercase Wedding Date
                               input.datepicker type="text" name="wedding_date"
                             .col-xs-12
-                              label
-                                input type="checkbox" name="should_contact"
-                                span I want trend updates from Fame and Partners
+                              .checkbox-area
+                                .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
+                                  input#should_contact type="checkbox" name="should_contact" checked="checked"
+                                  label for="should_contact"
+                                    span I want trend updates from Fame and Partners
                               button.btn-xs.btnCtaBlackBgUppercase type="submit" Download Now
 
-                .js-form-submitted
+                .js-form-submitted.hidden
                   .row
                     .col-md-6.hidden-xs.hidden-sm
                       img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-01.jpg")
