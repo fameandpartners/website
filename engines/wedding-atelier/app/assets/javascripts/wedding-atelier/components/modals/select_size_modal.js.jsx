@@ -1,8 +1,9 @@
 var SelectSizeModal = React.createClass({
   propTypes: {
     current_user_id: React.PropTypes.number,
+    dress: React.PropTypes.object,
     dressToAddToCart: React.PropTypes.object,
-    eventSlug: React.PropTypes.number,
+    eventId: React.PropTypes.number,
     heights: React.PropTypes.array,
     profiles: React.PropTypes.array,
     siteVersion: React.PropTypes.string,
@@ -260,7 +261,7 @@ var SelectSizeModal = React.createClass({
   },
 
   render: function(){
-    var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
+    var moodboardUrl = '/wedding-atelier/events/' + this.props.eventId;
     return(
       <div className="js-select-size-modal select-size-modal" ref="modal">
         <div className="body">

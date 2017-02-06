@@ -9,12 +9,14 @@ var DesktopCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     currentUser: React.PropTypes.object,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
     edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    initialDress: React.PropTypes.object,
+    savedDress: React.PropTypes.bool,
+    savedDressCallback: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -60,6 +62,12 @@ var DesktopCustomizations = React.createClass({
     $('#modal-customizations').modal();
   },
 
+  bagOpenedHandler: function () {
+    if(this.state.showSelector && this.state.showContainer) {
+      this.close();
+    }
+  },
+
   render: function() {
     var defaultProps = {
       selectedOptions:                    this.props.selectedOptions,
@@ -86,7 +94,12 @@ var DesktopCustomizations = React.createClass({
 
     return (
       <div className="customization-experience--desktop hidden-xs">
-        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette} event_name={this.props.event_name} event_path={this.props.event_path}/>
+        <CustomizationsHeader
+          silhouette={this.props.selectedOptions.silhouette}
+          event_name={this.props.event_name}
+          event_path={this.props.event_path}
+          savedDress={this.props.savedDress}
+          bagOpenedCallback={this.bagOpenedHandler}/>
         <div className="customization-panel customizations-menu col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />
@@ -118,12 +131,15 @@ var DesktopCustomizations = React.createClass({
             </div>
             <div className="actions text-right">
               <SaveDressButton
-                eventSlug={this.props.eventSlug}
+                eventId={this.props.eventId}
                 selectedOptions={this.props.selectedOptions}
-                mobile={false}
+                buttonClass='btn-transparent'
                 edit={this.props.edit}
                 initialDress={this.props.initialDress}
                 currentUser={this.props.currentUser}
+                savedDressCallback={this.props.savedDressCallback}
+                caption="Save this dress"
+                showSavedModal={true}
                 />
               <AddToCartButton customizations={this.props.selectedOptions} dress={this.props.initialDress} />
             </div>
