@@ -6,7 +6,7 @@ module WeddingAtelier
       event_assistant = event.event_assistants.where(user_id: params[:id]).first
       if event_assistant
         event_assistant.destroy
-        render json: event_assistant
+        head :ok
       else
         render json: { errors: "Couldn't find board member" }, status: :not_found
       end
