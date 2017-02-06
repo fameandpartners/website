@@ -77,6 +77,23 @@
 
   }
 
+  .modal form {
+
+    label {
+      font-weight: 600;
+      font-size: 0.7em;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=date] {
+      width: 100%;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .introWrapper p {
