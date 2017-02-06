@@ -129,9 +129,9 @@ class ReturnRequestItem < ActiveRecord::Base
     def call
       return :no_action_required if rri.action == "keep"
 
-      rri.item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create(line_item_id: rri.line_item_id).item_return
+      requested_item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create(line_item_id: rri.line_item_id).item_return
 
-      existing_event = rri.item_return.events.return_requested.detect { |re| re.request_id == rri.id }
+      existing_event = requested_item_return.events.return_requested.detect { |re| re.request_id == rri.id }
       if existing_event.present?
         logger.warn "SKIPPING return_requested - #{rri.line_item_id}, Event Exists"
         return
@@ -173,7 +173,7 @@ class ReturnRequestItem < ActiveRecord::Base
         )
       end
 
-      rri.item_return.events.return_requested.create(attrs)
+      requested_item_return.events.return_requested.create(attrs)
     end
   end
 end
