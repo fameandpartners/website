@@ -28,7 +28,7 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
   channel='#dev'
   author='DeployBot'
 
-  json_message=$(cat <<EOJ
+json_message=$(cat <<EOJ
   {
     "channel": "$channel",
     "username": "FameBot",
@@ -61,8 +61,7 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
       "ts": "$(date +%s)"
     }]
   }
-EOJ
-)
+EOJ)
 
   curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
     -X POST \
