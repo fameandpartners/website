@@ -69,7 +69,7 @@ var DressPreview = React.createClass({
   },
 
   renderThumbnails: function (thumbs, selectedIndex) {
-    var that = this;
+    var that = this, baseSilohuette;
     var thumbnails = thumbs.map(function (image, index) {
     var classes = classNames({
       'dress-preview-thumbnails-item': true,
@@ -84,9 +84,14 @@ var DressPreview = React.createClass({
     );
   });
 
+  if(this.isCustomDress()){
+    baseSilohuette = <p className="base-silhouette hidden-xs">Base silhouette</p>
+  }
+
   return (
     <ul className="dress-preview-thumbnails">
       {thumbnails}
+      {baseSilohuette}
     </ul>
   );
   },
@@ -96,15 +101,15 @@ var DressPreview = React.createClass({
         lengthName = options.length && options.length.name,
         lengthSet = !(lengthName == undefined) && lengthName!='AK'
         customColor =  options.color && options.color.name != 'champagne'
-    return options.style || options.fit || lengthSet || customColor;
+    return !!(options.style || options.fit || lengthSet || customColor);
   },
 
   getImages: function(imagesStyles){
     if(this.isCustomDress()){
       if(this.isBackPov()){
-        return [imagesStyles.back.large, imagesStyles.front.large];
+        return [imagesStyles.back.large, imagesStyles.front.large, imagesStyles.real.large[0]];
       }else{
-        return [imagesStyles.front.large, imagesStyles.back.large];
+        return [imagesStyles.front.large, imagesStyles.back.large, imagesStyles.real.large[0]];
       }
     }else{
       return imagesStyles.real.large;
@@ -114,9 +119,9 @@ var DressPreview = React.createClass({
   getThumbnails: function(imagesStyles){
     if(this.isCustomDress()){
       if(this.isBackPov()){
-        return [imagesStyles.back.thumbnail.white, imagesStyles.front.thumbnail.white];
+        return [imagesStyles.back.thumbnail.white, imagesStyles.front.thumbnail.white, imagesStyles.real.thumbnails[0]];
       }else{
-        return [imagesStyles.front.thumbnail.white, imagesStyles.back.thumbnail.white];
+        return [imagesStyles.front.thumbnail.white, imagesStyles.back.thumbnail.white, imagesStyles.real.thumbnails[0]];
       }
     }else{
       return imagesStyles.real.thumbnails;
