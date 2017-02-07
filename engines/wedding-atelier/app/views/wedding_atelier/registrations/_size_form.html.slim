@@ -9,8 +9,6 @@
           = ff.label :height, "Height"
           div
             = ff.select :height, grouped_options_for_select(@heights, @user.user_profile.height), { include_blank: true }, class: 'form-control'
-            - if @user.errors["user_profile.height"].any?
-              span.help-inline Height can't be blank
         .form-group
           = ff.label :dress_size, "Dress size".html_safe
           = ' '
