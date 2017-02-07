@@ -20,7 +20,7 @@ describe WeddingAtelier::InvitationsController, type: :controller do
     context 'When sending new invitations' do
       let(:params) do
         {
-          event_id: event.slug,
+          event_id: event.id,
           email_addresses: ['yo@example.com', 'yoyo@example.com']
         }
       end
