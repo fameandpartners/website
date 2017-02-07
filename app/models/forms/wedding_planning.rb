@@ -1,11 +1,12 @@
 module Forms
   class WeddingPlanning < Reform::Form
-    property :fist_name, virtual: true
+    property :first_name, virtual: true
     property :last_name, virtual: true
     property :should_receive_trend_updates, virtual: true
     property :should_contact, virtual: true
     property :wedding_date, virtual: true
     property :email, virtual: true
+
     validate do
       wedding_date_cannot_be_in_the_past
     end
@@ -28,7 +29,7 @@ module Forms
 
 
     def wedding_date_cannot_be_in_the_past
-      if wedding_date.present? && wedding_date < Date.today
+      if wedding_date.present? && Date.parse(wedding_date) < Date.today
         errors.add(:wedding_date, "Wedding date can't be in the past")
       end
     end
