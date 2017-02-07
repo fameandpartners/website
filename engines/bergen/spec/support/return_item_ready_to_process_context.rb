@@ -28,8 +28,6 @@ RSpec.shared_context 'return item ready to process' do
     # Because of ActiveRecord ReeturnRequetItem#after_create callback #push_return_event, `ItemReturn`s are created on the fly
     item_return.bergen_asn_number   = 'WHRTN1044588'
 
-    # Payment amounts are too coupled with completed Spree Payments, which won't work with current factories
-    item_return.order_paid_currency = 'AUD'
     item_return.save
   end
 end
