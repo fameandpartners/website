@@ -7,6 +7,13 @@
   "plugins": [
     "react"
   ],
+  "globals":{
+    "_": true,
+    "React": true,
+    "ReactDOM": true,
+    "Twilio": true,
+    "Promise": true
+  },
   "parserOptions": {
     "ecmaVersion": 5,
     "sourceType": "module",
