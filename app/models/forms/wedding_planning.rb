@@ -6,6 +6,9 @@ module Forms
     property :should_contact, virtual: true
     property :wedding_date, virtual: true
     property :email, virtual: true
+    validate do
+      wedding_date_cannot_be_in_the_past
+    end
 
     validates :first_name,
               presence: true
@@ -21,9 +24,8 @@ module Forms
               inclusion: { in: [ true, false ] }
 
     validates :email,
-              format: { with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i },
+              format: { with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i }
 
-    validates :wedding_date_cannot_be_in_the_past,
 
     def wedding_date_cannot_be_in_the_past
       if wedding_date.present? && wedding_date < Date.today

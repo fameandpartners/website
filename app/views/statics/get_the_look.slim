@@ -228,6 +228,13 @@
 javascript:
 
   $(function() {
+    function submitFormValues(formVals){
+      return $.ajax({
+        type: 'POST',
+        url: '/wedding-planning',
+        data: formVals
+      });
+    }
 
     $('.js-previewModalTrigger').click(function(){
       var dataVideoId = $(this).data('video-id');
@@ -248,22 +255,19 @@ javascript:
     $form.find('.datepicker').datepicker();
     $form.on('submit', function(evt){
       evt.preventDefault();
-      var values = {};
+      var formVals = {};
       $.each($form.serializeArray(), function(i, field) {
-          values[field.name] = field.value;
+        formVals[field.name] = field.value;
       });
 
-      // TODO: Do validations here
-
-    });
-
-    // TODO: rewrite this part
-    function submitFormValues(formVals){
-      $.ajax({
-        type: 'POST',
-        url: '/wedding_consultations',
-
+      console.log('formVals', formVals);
+      submitFormValues(formVals)
+      .done(function(){
+        console.log('success!!!!!');
       })
-    }
+      .error(function(){
+        console.log('OH NO!');
+      })
+    });
 
   });
