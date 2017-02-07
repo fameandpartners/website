@@ -10,6 +10,10 @@ module WeddingAtelier
 
     attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days, :owner_id
 
+    def invitations
+      object.invitations.pending
+    end
+
     def date
       object.date.strftime("%m/%d/%Y")
     end

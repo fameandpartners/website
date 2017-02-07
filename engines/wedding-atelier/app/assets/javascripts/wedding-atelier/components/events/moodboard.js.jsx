@@ -401,7 +401,12 @@ var MoodBoardEvent = React.createClass({
         var event = this.state.event;
         event.assistants.splice(index, 1);
         this.setState({event: event});
-      }.bind(this)
+      }.bind(this),
+      error: function(_data) {
+        var errors = JSON.parse(_data.responseText).errors
+        ReactDOM.render(<Notification errors={[errors[0]]} />,
+                    $('#notification')[0]);
+      }
     });
   },
 
