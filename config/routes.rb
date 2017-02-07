@@ -213,6 +213,9 @@ FameAndPartners::Application.routes.draw do
     # Pre-Prom/Pre-Season Evening Collection - Landing page
     get '/pre-season-evening-collection' => 'products/collections#show', :permalink => 'pre-season-evening-collection', :as => :pre_season_evening_collection_landing_page
 
+    # Modern Evening Collection - Landing page
+    get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
+
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
 
