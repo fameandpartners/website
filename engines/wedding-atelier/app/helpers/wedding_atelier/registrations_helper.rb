@@ -44,8 +44,8 @@ module WeddingAtelier
                  parsedSize = size.name.match(/US(\d+)/i)[1]
                  content_tag :li do
                    [
-                     form.radio_button(:dress_size_id, size.id),
-                     form.label(:dress_size_id, "US #{parsedSize}", value: size.id)
+                     form.radio_button(:dress_size_id, size.id, 'data-no-error' => true),
+                     form.label(:dress_size_id, "US #{parsedSize}", value: size.id, 'data-no-error' => true)
                    ].join("\n").html_safe
                  end
                end
