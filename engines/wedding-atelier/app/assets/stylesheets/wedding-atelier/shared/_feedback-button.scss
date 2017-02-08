@@ -1,11 +1,11 @@
 .feedback-button {
   min-width: 140px;
 
-  &-1 {
+  &-normal {
     @extend .btn-black;
   }
 
-  &-2 {
+  &-loading {
     @extend .btn-gray;
 
     img {
@@ -13,7 +13,7 @@
     }
   }
 
-  &-3 {
+  &-completed {
     @extend .btn-white;
   }
 }

@@ -12,15 +12,15 @@ var FeedbackButton = React.createClass({
   getInitialState: function () {
     var props = $.extend({}, this.props);
     return {
-      state: 1 // 1.Before load 2.Loading 3.Load finished
+      state: 'normal' // 1.Before load 2.Loading 3.Load finished
     };
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    if (this.state.state === 3) {
+    if (this.state.state === 'completed') {
       var that = this;
       window.setTimeout(function () {
-        that.changeState(1);
+        that.changeState('normal');
       }, 3000);
     }
   },
@@ -28,14 +28,14 @@ var FeedbackButton = React.createClass({
   clickHandlerWrapper: function (e) {
     var that = this;
     e.preventDefault();
-    that.changeState(2);
+    that.changeState('loading');
     var promise = Promise.resolve($.ajax(this.props.options));
     promise.then(function(response) {
       that.props.successHandler(response);
-      that.changeState(3);
+      that.changeState('completed');
     }, function(xhrObj) {
       that.props.failureHandler(xhrObj);
-      that.changeState(1);
+      that.changeState('normal');
     });
   },
 
@@ -45,17 +45,17 @@ var FeedbackButton = React.createClass({
 
   renderLabel: function () {
     switch (this.state.state) {
-      case 1:
+      case 'normal':
         return this.props.label;
-      case 2:
+      case 'loading':
         return <img src="/assets/wedding-atelier/loading.svg"/>;
-      case 3:
+      case 'completed':
         return this.props.labelCompleted;
     }
   },
 
   render: function () {
-    var style = 'feedback-button-' + this.state.state;
+    var style = 'feedback-button feedback-button-' + this.state.state;
     var classes = this.props.className + ' ' + style;
     return (
       <button
