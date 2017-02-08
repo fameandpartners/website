@@ -11,8 +11,11 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   elements = Nokogiri::HTML::DocumentFragment.parse(html_tag).css "label, " + form_fields.join(', ')
 
   elements.each do |e|
+    # TODO: Clean up all this logic two more conditions based on data attributes
+    # were added to make wedding_atelier work because all the structural changes (HTML)
+    # that this adds to the tags with errors.
     if e.get_attribute('data-no-error')
-      html = html_tag 
+      html = html_tag
       next
     end
     if e.node_name.eql? 'label'

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe WeddingAtelier::AssistantsController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
   let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar', wedding_atelier_signup_step: 'completed') }
 
   before do
-    custom_sign_in user
-    allow(controller).to receive(:current_spree_user).and_return(user)
+    wedding_sign_in user
     user.add_role('bridesmaid', event)
   end
 
