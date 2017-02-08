@@ -1,15 +1,16 @@
 .select-size-modal {
   background: $black-transparent;
   display: none;
-  height: 100%;
+  min-height: 100vh;
   left: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
 
   @include screen-xs {
     position: fixed;
+    overflow-y: auto;
   }
 
   .btnClose {
@@ -43,11 +44,12 @@
     width: 320px;
 
     @include screen-xs {
-      height: 100vh;
+      min-height: 100vh;
       left: 0;
       transform: none;
       top: 0;
-      width: 100%;
+      width: 100vw;
+      padding: 60px 10px;
     }
 
     @include screen-sm {
