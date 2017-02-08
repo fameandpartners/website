@@ -2,8 +2,42 @@ var SizeGuideModal = React.createClass({
 
   getInitialState: function() {
     return {
-      metric: 'inches'
-    }
+      metric: 'inches',
+      measures: {
+        inches: [
+          ['0', '4', '32', '27', '25', '35'],
+          ['2', '6', '33', '28', '26', '36'],
+          ['4', '8', '34', '29', '27', '37'],
+          ['6', '10', '35', '30', '28', '38'],
+          ['8', '12', '36 ½', '31 ½', '29 ½', '39 ½'],
+          ['10', '14', '38', '33', '31', '41'],
+          ['12', '16', '39 ½', '34 ½', '32 ½', '42 ½'],
+          ['14', '18', '41 ½', '36 ½', '34 ¾', '44 ¾'],
+          ['16', '20', '43 ½', '38 ½', '37', '47'],
+          ['18', '22', '45 ½', '40 ½', '39 ¼', '49 ¼'],
+          ['20', '24', '47 ½', '42 ½', '41 ½', '51 ½'],
+          ['22', '26', '49 ½', '44 ½', '43 ¾', '53 ¾'],
+          ['24', '28', '51 ½', '46 ½', '46', '56'],
+          ['26', '30', '53 ½', '48 ½', '48 ¼', '58 ¼']
+        ],
+        cm: [
+          ['0','4','81','69','64','89'],
+          ['2','6','84','71','66','92'],
+          ['4','8','86','74','69','94'],
+          ['6','10','89','76','71','97'],
+          ['8','12','93','80','75','100'],
+          ['10','14','97','84','79','104'],
+          ['12','16','100','88','83','108'],
+          ['14','18','105','93','88','114'],
+          ['16','20','111','98','94','119'],
+          ['18','22','116','103','100','125'],
+          ['20','24','121','108','103','131'],
+          ['22','26','126','113','111','137'],
+          ['24','28','131','118','117','142'],
+          ['26','30','136','124','123','148']
+        ]
+      }
+    };
   },
 
   componentDidMount: function() {
@@ -47,11 +81,29 @@ var SizeGuideModal = React.createClass({
     this.setState(nextState);
   },
 
+  renderMeasures: function (type) {
+    if(this.state.measures[type]) {
+      return this.state.measures[type].map(function (measure, row) {
+        var rowKey = type + '-measure-' + row;
+        return (
+          <tr key={rowKey} className={type}>
+            {
+              measure.map(function (value, column) {
+                var columnKey = type + '-measure-' + row + '-' + column;
+                return <td key={columnKey}>{value}</td>;
+              })
+            }
+          </tr>
+        );
+      });
+    }
+  },
+
   render: function(){
     return(
-      <div className="js-size-guide-modal modal size-guide-modal fade" id="modal-confirm" tabIndex='-1' role='dialog'>
+      <div className="js-size-guide-modal modal size-guide-modal fade" id="modal-confirm" tabIndex="-1" role="dialog">
         <div className="modal-vertical-align-helper">
-          <div className="modal-dialog modal-vertical-align" role='document'>
+          <div className="modal-dialog modal-vertical-align" role="document">
             <div className="modal-content">
               <div className="modal-body">
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
@@ -98,7 +150,7 @@ var SizeGuideModal = React.createClass({
                             <tr>
                               <th colSpan="2">Sizing</th>
                               <th colSpan="3" className="text-center">Measurements</th>
-                              <th className="measurementSystem">
+                              <th className="measurement-system">
 
                               <form>
                                 <input type="radio" name="radio_system" onClick={this.handleShowInches} id="radio_show_inches" defaultChecked={this.state.metric === 'inches'}  />
@@ -120,34 +172,8 @@ var SizeGuideModal = React.createClass({
                               <td>Waist</td>
                               <td>Hip</td>
                             </tr>
-                            <tr className="inches"><td>0</td><td>4</td><td>32</td><td>27</td><td>25</td><td>35</td></tr>
-                            <tr className="inches"><td>2</td><td>6</td><td>33</td><td>28</td><td>26</td><td>36</td></tr>
-                            <tr className="inches"><td>4</td><td>8</td><td>34</td><td>29</td><td>27</td><td>37</td></tr>
-                            <tr className="inches"><td>6</td><td>10</td><td>35</td><td>30</td><td>28</td><td>38</td></tr>
-                            <tr className="inches"><td>8</td><td>12</td><td>36 ½</td><td>31 ½</td><td>29 ½</td><td>39 ½</td></tr>
-                            <tr className="inches"><td>10</td><td>14</td><td>38</td><td>33</td><td>31</td><td>41</td></tr>
-                            <tr className="inches"><td>12</td><td>16</td><td>39 ½</td><td>34 ½</td><td>32 ½</td><td>42 ½</td></tr>
-                            <tr className="inches"><td>14</td><td>18</td><td>41 ½</td><td>36 ½</td><td>34 ¾</td><td>44 ¾</td></tr>
-                            <tr className="inches"><td>16</td><td>20</td><td>43 ½</td><td>38 ½</td><td>37</td><td>47</td></tr>
-                            <tr className="inches"><td>18</td><td>22</td><td>45 ½</td><td>40 ½</td><td>39 ¼</td><td>49 ¼</td></tr>
-                            <tr className="inches"><td>20</td><td>24</td><td>47 ½</td><td>42 ½</td><td>41 ½</td><td>51 ½</td></tr>
-                            <tr className="inches"><td>22</td><td>26</td><td>49 ½</td><td>44 ½</td><td>43 ¾</td><td>53 ¾</td></tr>
-                            <tr className="inches"><td>24</td><td>28</td><td>51 ½</td><td>46 ½</td><td>46</td><td>56</td></tr>
-                            <tr className="inches"><td>26</td><td>30</td><td>53 ½</td><td>48 ½</td><td>48 ¼</td><td>58 ¼</td></tr>
-                            <tr className="cm"><td>0</td><td>4</td><td>81</td><td>69</td><td>64</td><td>89</td></tr>
-                            <tr className="cm"><td>2</td><td>6</td><td>84</td><td>71</td><td>66</td><td>92</td></tr>
-                            <tr className="cm"><td>4</td><td>8</td><td>86</td><td>74</td><td>69</td><td>94</td></tr>
-                            <tr className="cm"><td>6</td><td>10</td><td>89</td><td>76</td><td>71</td><td>97</td></tr>
-                            <tr className="cm"><td>8</td><td>12</td><td>93</td><td>80</td><td>75</td><td>100</td></tr>
-                            <tr className="cm"><td>10</td><td>14</td><td>97</td><td>84</td><td>79</td><td>104</td></tr>
-                            <tr className="cm"><td>12</td><td>16</td><td>100</td><td>88</td><td>83</td><td>108</td></tr>
-                            <tr className="cm"><td>14</td><td>18</td><td>105</td><td>93</td><td>88</td><td>114</td></tr>
-                            <tr className="cm"><td>16</td><td>20</td><td>111</td><td>98</td><td>94</td><td>119</td></tr>
-                            <tr className="cm"><td>18</td><td>22</td><td>116</td><td>103</td><td>100</td><td>125</td></tr>
-                            <tr className="cm"><td>20</td><td>24</td><td>121</td><td>108</td><td>103</td><td>131</td></tr>
-                            <tr className="cm"><td>22</td><td>26</td><td>126</td><td>113</td><td>111</td><td>137</td></tr>
-                            <tr className="cm"><td>24</td><td>28</td><td>131</td><td>118</td><td>117</td><td>142</td></tr>
-                            <tr className="cm"><td>26</td><td>30</td><td>136</td><td>124</td><td>123</td><td>148</td></tr>
+                            {this.renderMeasures('inches')}
+                            {this.renderMeasures('cm')}
                           </tbody>
                         </table>
                       </div>
@@ -159,6 +185,6 @@ var SizeGuideModal = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});
