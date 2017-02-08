@@ -147,6 +147,7 @@ group :test do
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
   gem 'rspec_junit_formatter', '0.2.2'
+  gem 'rspec-shell-expectations'
 end
 
 group :production do
