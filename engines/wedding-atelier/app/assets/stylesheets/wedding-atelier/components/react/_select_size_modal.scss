@@ -3,14 +3,14 @@
   display: none;
   min-height: 100vh;
   left: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
 
   @include screen-xs {
     position: fixed;
-    overflow: auto;
+    overflow-y: auto;
   }
 
   .btnClose {
@@ -48,7 +48,7 @@
       left: 0;
       transform: none;
       top: 0;
-      width: 100%;
+      width: 100vw;
       padding: 60px 10px;
     }
 
