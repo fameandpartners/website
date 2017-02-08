@@ -54,7 +54,7 @@ $(document).ready(function() {
     format: "mm/dd/yyyy",
     autoclose: true,
     showOnFocus: true,
-    startDate: moment().format('mm/dd/YYYY')
+    startDate: moment().format('M/D/YYYY')
   }).on('show', function(e){
     $(this).addClass('active');
   }).on('hide', function(e){
