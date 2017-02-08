@@ -110,6 +110,7 @@ var DressPreview = React.createClass({
       images = [
         imagesStyles.front.large,
         imagesStyles.back.large,
+        imagesStyles.real.large[0]
       ]
     }else{
       images = imagesStyles.real.large
