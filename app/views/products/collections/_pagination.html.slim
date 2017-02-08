@@ -1,3 +1,5 @@
+- hide_pagination_link   = page.try(:get, 'hide-pagination-link')
+
 - if @collection.total_products > @collection.products.size
   .relative.more-products
     .status.active
@@ -7,6 +9,6 @@
     .status.inactive style="display: none;"
     // nothing
 
-- if !current_page?(dresses_path)
+- if !current_page?(dresses_path) && !hide_pagination_link
   .relative.more-products
     = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'
