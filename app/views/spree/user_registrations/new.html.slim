@@ -14,6 +14,7 @@
             = form_for :spree_user, url: spree.spree_user_registration_path(@spree_user, signup_params) do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
               = render partial: 'spree/shared/user_form', locals: { f: f }
+        .row
           .col-md-12
             p.footnote
               span By registering above you acknowledge and accept our
