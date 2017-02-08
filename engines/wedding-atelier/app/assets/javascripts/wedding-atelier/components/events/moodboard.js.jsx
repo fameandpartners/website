@@ -31,7 +31,8 @@ var MoodBoardEvent = React.createClass({
       chat: {
         members: [],
         messages: [],
-        typing: []
+        typing: [],
+        unreadCount: 0
       },
       event: {
         dresses: [],
@@ -158,7 +159,7 @@ var MoodBoardEvent = React.createClass({
 
   setTypingIndicator: function(member, typing){
     var _whoIsTyping = [...this.state.chat.typing];
-    var _isAlreadyTyping = whoIsTyping.indexOf(member.identity) > -1;
+    var _isAlreadyTyping = _whoIsTyping.indexOf(member.identity) > -1;
 
     if (typing && !_isAlreadyTyping) {
       _whoIsTyping.push(member.identity);
@@ -284,6 +285,9 @@ var MoodBoardEvent = React.createClass({
 
       var _chat = $.extend({}, that.state.chat);
       _chat.messages = _messages;
+      if(!$('.tab-chat').hasClass('active')) {
+        _chat.unreadCount++;
+      }
       that.setState({chat: _chat});
     });
 
@@ -454,6 +458,12 @@ var MoodBoardEvent = React.createClass({
     this.setState(_state);
   },
 
+  resetUnreadCount: function(){
+    var _chat = $.extend({}, this.state.chat);
+    _chat.unreadCount = 0;
+    this.setState({chat: _chat});
+  },
+
   render: function () {
     var chatProps = {
       bot_profile_photo: this.props.bot_profile_photo,
@@ -482,13 +492,18 @@ var MoodBoardEvent = React.createClass({
       updateUserCartCallback: this.updateUserCartCallback
     };
 
-    var addNewDressBigButton = '';
-    var addNewDressSmallButton = '';
+    var addNewDressBigButton = '', 
+        addNewDressSmallButton = '',
+        chatCounter;
 
     if (this.state.event.dresses && this.state.event.dresses.length === 0) {
       addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
     } else if (this.state.event.dresses && this.state.event.dresses.length > 0 ) {
       addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
+    }
+
+    if(this.state.chat.unreadCount > 0){
+      chatCounter = <span className="badge">{this.state.chat.unreadCount}</span>;
     }
 
     return (
@@ -507,9 +522,10 @@ var MoodBoardEvent = React.createClass({
             <div className="moodboard-tabs center-block">
               <div className="tabs-container">
                 <ul className="nav nav-tabs center-block" role="tablist">
-                  <li role="presentation" className="tab-chat hidden">
+                  <li role="presentation" className="tab-chat hidden" onClick={this.resetUnreadCount}>
                     <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
-                      Chat</a>
+                      Chat{chatCounter}
+                    </a>
                   </li>
                   <li
                     className="active walkthrough-messages"
