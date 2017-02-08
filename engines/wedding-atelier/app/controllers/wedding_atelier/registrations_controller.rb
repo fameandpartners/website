@@ -1,5 +1,7 @@
 module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
+    include WeddingAtelier::Concerns::FeatureFlaggable
+
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
     before_filter :redirect_if_completed, except: :new
@@ -11,7 +13,7 @@ module WeddingAtelier
         if current_spree_user.wedding_atelier_signup_complete?
           redirect_to wedding_atelier.events_path
         else
-          redirect_to current_spree_user.wedding_atelier_signup_step
+          redirect_to action: current_spree_user.wedding_atelier_signup_step
         end
       end
       if params[:invitation_id]

@@ -115,4 +115,51 @@ describe GlobalSku::Create do
       end
     end
   end
+
+  describe '#generate_sku' do
+    include_context 'dress with colors and sizes'
+
+    describe 'calls SKU generator with proper arguments' do
+      context 'without customizations' do
+        it do
+          expect(Skus::Generator).to receive(:new).with(
+            style_number:            'ABC123',
+            size:                    'US0/AU4',
+            color_id:                color_red.id,
+            height:                  'petite',
+            customization_value_ids: []
+          ).and_call_original
+
+          creator.generate_sku
+        end
+      end
+
+      context 'with customizations' do
+        let(:customization_fabric) { FactoryGirl.build(:customisation_value, id: 123, name: 'fabric') }
+        let(:customization_fit) { FactoryGirl.build(:customisation_value, id: 456, name: 'fit') }
+        let(:creator) {
+          described_class.new(
+            style_number: 'ABC123',
+            product_name: 'Bianca Dress',
+            size:         'US0/AU4',
+            color_name:   'Magma Red',
+            height:       'Petite',
+            customizations: [customization_fabric, customization_fit]
+          )
+        }
+
+        it do
+          expect(Skus::Generator).to receive(:new).with(
+            style_number:            'ABC123',
+            size:                    'US0/AU4',
+            color_id:                color_red.id,
+            height:                  'petite',
+            customization_value_ids: [customization_fabric.id, customization_fit.id]
+          ).and_call_original
+
+          creator.generate_sku
+        end
+      end
+    end
+  end
 end

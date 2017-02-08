@@ -1,13 +1,13 @@
 = render partial: 'pages/robots'
 
-.wedding-sweepstakes.landing-page-v2.js-smooth-scroll
+.wedding-sweepstakes.landing-page-v2
 
   .preRegisterSweepstakes__introWrapper
     .container-fluid.containerHalfScreenHero
 
       .row.hidden-md.hidden-lg
         .col-md-12.containerHalfScreenHero__heroImg
-          = image_tag 'landingpages/wedding-sweepstakes/bride-hero-mob.jpg', class: "img-responsive"
+          = image_tag 'landingpages/wedding-sweepstakes/bride-hero-sweep-mob.jpg', class: "img-responsive"
 
       .row
         .col-md-6.hidden-md.hidden-lg
@@ -17,20 +17,18 @@
 
       .row.vertical-align-row
         .col-md-6.no-padding.hidden-xs.hidden-sm.vertical-align
-          .preRegisterSweepstakes__heroBg style='background-image: url("#{image_path('landingpages/wedding-sweepstakes/bride-hero.jpg')}")'
+          .preRegisterSweepstakes__heroBg style='background-image: url("#{image_path('landingpages/wedding-sweepstakes/bride-hero-sweep.jpg')}")'
 
         .col-md-offset-1.col-md-4.vertical-align
-          .preRegisterSweepstakes__copy
+          .preRegisterSweepstakes__copy.heading-thin-line-top
             .row
               .col-xs-12
-                h3.subheading.title.no-margin Launching January 2017.
-                h1.line-mobile-center Bridal gets bespoke.
-                h3.subheading Exclusive designs. Limited-edition fabrics. Elevated, elegant, and eff-ing gorgeous.
-                h3.subheading Coming soon...
+                h1.title Custom, convenient,<br class="visible-lg"> and actually cool.
+                h3.subheading Exclusive designs. Elevated, elegant, and eff-ing gorgeous. Welcome to The Wedding Atelier.
 
-                = link_to "#formRegister", class: 'cta-mobile-featured'
+                = link_to '/wedding-atelier', class: 'cta-mobile-featured'
                   span.btn-xs.btn-featured
-                    span.copy-highlight PRE - REGISTER
+                    span.copy-highlight LEARN MORE
 
   .preRegisterSweepstakes__formWrapperBg
     .container
@@ -48,14 +46,14 @@
                   | <em>Win</em> $5,000 of custom gowns <br> for the whole wedding party.
 
                 p
-                  | Pre-register to enter and get early access to the collection.
+                  | Get the bespoke bridal treatment, on us.
 
               .iframe-middle-wrapper
                 .woobox-offer data-offer="5fbtad"
 
               .preRegisterSweepstakes__copyPadding.text-center
                 span.text-grey
-                  | <em>By clicking PRE-REGISTER, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
+                  | <em>By clicking ENTER NOW, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
 
   .container
     section.section-box.section-price.section-extra-margin
@@ -73,11 +71,11 @@
             h2.no-margin
               | Win custom dresses for the <em>entire</em> bridal party.
             p
-              | When you pre-register, you'll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+              | We're giving away $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
 
         .col-md-6.col-md-offset-1
-          - current_tile_image = "landingpages/wedding-sweepstakes/bride-testimonial.jpg"
-          - current_tile_image_mob = "landingpages/wedding-sweepstakes/bride-testimonial-mob.jpg"
+          - current_tile_image = "landingpages/wedding-sweepstakes/bride-testimonial-sweep.jpg"
+          - current_tile_image_mob = "landingpages/wedding-sweepstakes/bride-testimonial-sweep-mob.jpg"
           picture.media-wrap
             source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
             source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -103,18 +101,43 @@
         .col-md-4.vertical-align
           .copyWrapper
             h2.no-margin
-              | Give your bridesmaids <br class="visible-lg"> what they want.
+              | Give your bridesmaids <br class="visible-lg"> what they <em>want</em>.
             p
-              | In the soon-to-be-launched Wedding Atelier App, you can customize nearly everything about your bridesmaid dresses: fabric, color, fit, and design details. There are thousands of combinations. Invite the bridal party to group chat, share designs, and vote on the winning looks. Your dresses will be made-to-order to fit and flatter each individual–and they all clock in at under $200.
-            = link_to "#formRegister"
+              | In the new Wedding Atelier App Beta, you can customize nearly everything about your bridesmaid dresses: fabric, color, fit, and design details. (There are over 40,000 combinations!) Invite the bridal party to group chat, share designs, and vote on the winning looks. Your dresses will be made-to-order to fit and flatter each individual– and they start at just $200.
+
+            = link_to '/wedding-atelier'
               span.cta-link-arrow-right
                 span.cta-link-alt
-                  span Pre-Register
-                  span.copy-highlight Now
+                  span Explore
+                  span.copy-highlight  The Atelier
                 i.icon.icon-arrow-right
 
   .container
-    = render 'shared/redesign/wedding_app'
+    section.section-box.section-border-grey.section-stylist.section-extra-margin
+      .row.vertical-align-row
+        .col-md-6.hidden-xs.hidden-sm.vertical-align
+          = image_tag 'landingpages/wedding-sweepstakes/stylist.jpg', class: "img-responsive"
+
+        .col-md-5.col-md-offset-1.vertical-align
+          .copyWrapper
+            h2.no-margin
+              | Can't <em>wait</em> <br class="hidden-md hidden-lg">to get started?
+            p
+              | Our wedding concierge, Amber, is here to help plan your look for the big day for free.
+
+            = image_tag 'landingpages/wedding-sweepstakes/stylist-mob.jpg', class: "img-responsive hidden-md hidden-lg"
+            = link_to wedding_consultation_path, class: 'cta-mobile-featured'
+              span.btn-xs.btn-featured
+                span.copy-highlight BOOK NOW
+
+    section.text-center.section-last.section-app-cta
+      .row
+        h2
+          | Welcome to the Wedding Atelier App Beta–the new way to wedding.
+
+      = link_to "/wedding-atelier", class: 'cta-mobile-featured'
+        span.btn.btn-black
+          | Start Customizing
 
 javascript:
   (function (d, s, id) {
