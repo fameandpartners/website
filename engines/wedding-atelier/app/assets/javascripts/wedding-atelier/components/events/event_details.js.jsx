@@ -43,7 +43,7 @@ var EventDetails = React.createClass({
     }.bind(this))
   },
 
-  buildAjax: function(e) {
+  getEventDetailsUpdatePromise: function(e) {
     return $.ajax({
       data: {event: this.state.event},
       dataType: 'json',
@@ -119,7 +119,7 @@ var EventDetails = React.createClass({
               failureHandler={this.props.eventDetailsUpdateFailed}
               label={'Save'}
               labelCompleted={'Saved'}
-              promise={this.buildAjax()}
+              promise={this.getEventDetailsUpdatePromise()}
               successHandler={this.props.eventDetailsUpdated}></FeedbackButton>
           </div>
         </form>
