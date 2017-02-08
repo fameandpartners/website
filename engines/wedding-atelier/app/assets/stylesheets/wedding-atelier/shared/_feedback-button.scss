@@ -1,0 +1,19 @@
+.feedback-button {
+  min-width: 140px;
+
+  &-1 {
+    @extend .btn-black;
+  }
+
+  &-2 {
+    @extend .btn-gray;
+
+    img {
+      width: 25px;
+    }
+  }
+
+  &-3 {
+    @extend .btn-white;
+  }
+}

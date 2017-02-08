@@ -115,11 +115,12 @@ var EventDetails = React.createClass({
           </div>
           <div className="form-group text-center">
             <FeedbackButton
-              className="btn-black center-block"
+              className="center-block"
               failureHandler={this.props.eventDetailsUpdateFailed}
-              label={'Update'}
+              label={'Save'}
+              labelCompleted={'Saved'}
               options={this.buildEventDetailsUpdateOptions()}
-              successHandler={this.props.eventDetailsUpdated} />
+              successHandler={this.props.eventDetailsUpdated}></FeedbackButton>
           </div>
         </form>
     );
