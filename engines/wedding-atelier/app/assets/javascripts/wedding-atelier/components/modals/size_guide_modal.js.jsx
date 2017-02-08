@@ -41,32 +41,12 @@ var SizeGuideModal = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    // TODO : Refactor all this $(this.refs.etc) to use state and classNames instead of jQuery
-
-    $(this.refs.tips).hide();
-    $(this.refs.table).find('.cm').hide();
+  changeMetric: function (metric) {
+    this.setState({metric: metric});
   },
 
-  handleShowCm: function() {
-    $(this.refs.table).find('.cm').show();
-    $(this.refs.table).find('.inches').hide();
-
-    var nextState = $.extend({}, this.state);
-    nextState.metric = 'cm';
-    this.setState(nextState);
-  },
-
-  handleShowInches: function() {
-    $(this.refs.table).find('.cm').hide();
-    $(this.refs.table).find('.inches').show();
-
-    var nextState = $.extend({}, this.state);
-    nextState.metric = 'inches';
-    this.setState(nextState);
-  },
-
-  renderMeasures: function (type) {
+  renderMeasures: function () {
+    var type = this.state.metric;
     if(this.state.measures[type]) {
       return this.state.measures[type].map(function (measure, row) {
         var rowKey = type + '-measure-' + row;
@@ -89,24 +69,26 @@ var SizeGuideModal = React.createClass({
   },
 
   render: function() {
+    var isMeasure = this.state.selectedTab === 'measure';
+    var isTips = this.state.selectedTab === 'tips';
     var measuresTabClasses = classNames({
       'show-measure col-xs-6 text-center': true,
-      'selected': this.state.selectedTab === 'measure'
+      'selected': isMeasure
     });
 
     var tipsTabClasses = classNames({
       'show-tips col-xs-6 text-center': true,
-      'selected': this.state.selectedTab === 'tips'
+      'selected': isTips
     });
 
     var measureContainerClasses = classNames({
       'measure': true,
-      'selected': this.state.selectedTab === 'measure'
+      'selected': isMeasure
     });
 
     var tipsContainerClasses = classNames({
       'tips': true,
-      'selected': this.state.selectedTab === 'tips'
+      'selected': isTips
     });
 
 
@@ -163,10 +145,10 @@ var SizeGuideModal = React.createClass({
                               <th className="measurement-system">
 
                               <form>
-                                <input type="radio" name="radio_system" onClick={this.handleShowInches} id="radio_show_inches" defaultChecked={this.state.metric === 'inches'}  />
+                                <input type="radio" name="radio_system" onClick={this.changeMetric.bind(null, 'inches')} id="radio_show_inches" defaultChecked={this.state.metric === 'inches'}  />
                                 <label htmlFor="radio_show_inches"><span className="radio"></span> inches </label>
 
-                                <input type="radio" name="radio_system" onClick={this.handleShowCm} id="radio_show_cm" defaultChecked={this.state.metric === 'cn'} />
+                                <input type="radio" name="radio_system" onClick={this.changeMetric.bind(null, 'cm')} id="radio_show_cm" defaultChecked={this.state.metric === 'cn'} />
                                 <label htmlFor="radio_show_cm"><span className="radio"></span> cm</label>
                               </form>
 
@@ -182,8 +164,7 @@ var SizeGuideModal = React.createClass({
                               <td>Waist</td>
                               <td>Hip</td>
                             </tr>
-                            {this.renderMeasures('inches')}
-                            {this.renderMeasures('cm')}
+                            {this.renderMeasures()}
                           </tbody>
                         </table>
                       </div>
