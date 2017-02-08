@@ -71,8 +71,12 @@ var SelectSizeModal = React.createClass({
     this.setState(_newState);
   },
 
-  cancel: function(){
-    $(this.refs.modal).hide();
+  cancel: function(e){
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    if($(e.target).hasClass('cancelable')){
+      $(this.refs.modal).hide();  
+    }
   },
 
   addToCartAttrs: function () {
@@ -161,7 +165,7 @@ var SelectSizeModal = React.createClass({
         <a href="#" className="select-different-size" onClick={this.toggleSizes}> or select different size </a>
         <div className="actions row">
           <div className="col-xs-12 col-sm-6">
-            <button className="btn btn-gray" onClick={this.cancel}> Cancel </button>
+            <button className="btn btn-gray cancelable" onClick={this.cancel}> Cancel </button>
           </div>
           <div className="col-xs-12 col-sm-6">
             <button {...this.addToCartAttrs()}> Add to cart </button>
@@ -263,10 +267,10 @@ var SelectSizeModal = React.createClass({
   render: function(){
     var moodboardUrl = '/wedding-atelier/events/' + this.props.eventId;
     return(
-      <div className="js-select-size-modal select-size-modal" ref="modal">
+      <div className="js-select-size-modal select-size-modal cancelable" ref="modal" onClick={this.cancel}>
         <div className="body">
-          <a className="btnClose icon-close-white hidden-xs" onClick={this.cancel}/>
-          <a className="btnClose icon-close hidden-sm hidden-md hidden-lg" onClick={this.cancel}/>
+          <a className="btnClose icon-close-white hidden-xs cancelable" onClick={this.cancel}/>
+          <a className="btnClose icon-close hidden-sm hidden-md hidden-lg cancelable" onClick={this.cancel}/>
           <div className="content-container">
             <div className="col-sm-6 dress-preview text-center hidden-xs">
               {this.renderPreview()}
