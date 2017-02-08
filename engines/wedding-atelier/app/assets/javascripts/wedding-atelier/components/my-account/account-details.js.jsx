@@ -25,7 +25,7 @@ var AccountDetails = React.createClass({
       autoclose: true,
       showOnFocus: true,
       startView: 'years',
-      endDate: moment().subtract(18, 'years').calendar()
+      endDate: moment().subtract(10, 'years').calendar()
     };
 
     $(this.refs.dateOfBirth).datepicker(options).on('show', function(e){
