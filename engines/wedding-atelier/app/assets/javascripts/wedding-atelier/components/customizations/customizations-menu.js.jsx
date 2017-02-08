@@ -13,7 +13,6 @@ var CustomizationsMenu = React.createClass({
   },
 
   renderRow: function (customizationItem, index) {
-    // TODO: pending refactor after mobile customizations merge
     var selectedOptions = this.props.selectedOptions,
         className = "icon icon-" + customizationItem,
         presentation = PresentationHelper.presentation(selectedOptions, customizationItem, this.props.siteVersion);
@@ -62,7 +61,7 @@ var CustomizationsMenu = React.createClass({
               menuOptionClasses = classNames({
                 'menu-option': true,
                 current: this.props.currentCustomization == entry
-              })
+              });
 
           return (
             <div className={menuOptionClasses} key={index} onClick={this.props.changeCurrentCustomizationCallback.bind(null, entry)}>

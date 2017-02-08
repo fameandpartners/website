@@ -4,7 +4,7 @@ function PresentationHelper(){}
 // 4'10" / 147cm | 6
 // Janine's Profile
 PresentationHelper.size = function(userOrSize, height, siteVersion){
-  if(!userOrSize && !height){ return null; }
+  if(!userOrSize && !height) { return null; }
   if(userOrSize.user_profile) {
     return userOrSize.first_name + "'s size profile";
   } else {
@@ -15,18 +15,18 @@ PresentationHelper.size = function(userOrSize, height, siteVersion){
 };
 
 PresentationHelper.fabricColor = function(fabric, color){
-  if(fabric && color){
+  if(fabric && color) {
     return fabric.presentation + ' | ' + color.presentation;
-  }else{
+  } else {
     return '';
   }
 };
 
 PresentationHelper.costFor = function(options, customizationItem){
-  if(['size', 'silhouette', 'length'].indexOf(customizationItem) > -1 ){ return null; }
-  if(customizationItem === 'fabric-color' && options.fabric && options.color){
+  if(['size', 'silhouette', 'length'].indexOf(customizationItem) > -1 ) { return null; }
+  if(customizationItem === 'fabric-color' && options.fabric && options.color) {
     return options.fabric.price + options.color.price;
-  }else if(options[customizationItem]){
+  } else if(options[customizationItem]) {
     return options[customizationItem].price;
   }
   return '';
@@ -34,30 +34,30 @@ PresentationHelper.costFor = function(options, customizationItem){
 
 PresentationHelper.additionalCost = function(options, customizationItem){
   var cost = this.costFor(options, customizationItem);
-  if(cost){
+  if(cost) {
     return ' + $' + cost;
-  }else{
+  } else {
     return '';
   }
 };
 
 PresentationHelper.customization = function(customization){
-  if(customization){
+  if(customization) {
     return customization.presentation;
-  }else{
+  } else {
     return '';
   }
 };
 
 PresentationHelper.presentation = function(options, customizationItem, siteVersion){
-  var presentation = '';
-  if(customizationItem === 'fabric-color'){
+  var presentation = customizationItem === 'silhouette' && options[customizationItem] ? 'The ' : '';
+  if(customizationItem === 'fabric-color') {
     return PresentationHelper.fabricColor(options.fabric, options.color);
-  }else if(customizationItem === 'size'){
+  } else if(customizationItem === 'size') {
     return PresentationHelper.size(options.size, options.height, siteVersion);
-  }else{
-    presentation = PresentationHelper.customization(options[customizationItem]);
-    additionalCost = PresentationHelper.additionalCost(options, customizationItem);
+  } else {
+    presentation += PresentationHelper.customization(options[customizationItem]);
+    var additionalCost = PresentationHelper.additionalCost(options, customizationItem);
     return presentation + additionalCost;
   }
 };

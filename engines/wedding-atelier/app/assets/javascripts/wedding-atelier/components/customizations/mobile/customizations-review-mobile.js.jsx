@@ -8,13 +8,15 @@ var CustomizationsReviewMobile = React.createClass({
     edit: React.PropTypes.bool,
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
-    eventSlug: React.PropTypes.string,
+    eventId: React.PropTypes.number,
     goToSlide: React.PropTypes.func,
     initialDress: React.PropTypes.object,
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    subTotal: React.PropTypes.number
+    subTotal: React.PropTypes.number,
+    savedDress: React.PropTypes.bool,
+    savedDressCallback: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -37,7 +39,7 @@ var CustomizationsReviewMobile = React.createClass({
 
     return (
       <div className="customizations-review-mobile">
-        <CustomizationsHeader {...this.props.selectedOptions.silhouette} event_name={this.props.event_name} event_path={this.props.event_path} />
+        <CustomizationsHeader {...this.props.selectedOptions.silhouette} savedDress={this.props.savedDress} event_name={this.props.event_name} event_path={this.props.event_path} />
         <div className="customizations-review-mobile-body">
           <h1>You are designing The {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)} />
@@ -59,12 +61,15 @@ var CustomizationsReviewMobile = React.createClass({
         </div>
         <div className="customizations-selector-mobile-actions-double">
           <SaveDressButton
-            eventSlug={this.props.eventSlug}
+            eventId={this.props.eventId}
             selectedOptions={this.props.selectedOptions}
-            mobile={true}
+            buttonClass='btn-gray'
             edit={this.props.edit}
             initialDress={this.props.initialDress}
             currentUser={this.props.currentUser}
+            savedDressCallback={this.props.savedDressCallback}
+            caption="Save this dress"
+            showSavedModal={true}
             />
           <AddToCartButton
             customizations={this.props.selectedOptions}
