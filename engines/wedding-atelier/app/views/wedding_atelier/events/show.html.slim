@@ -16,7 +16,7 @@
                     roles_path: '',
                     siteVersion: current_site_version.permalink,
                     filestack_key: ENV['FILESTACK_KEY'],
-                    channel_prefix: 'pendejada'},
+                    channel_prefix: ENV['RAILS_ENV']},
                   { class: 'moodboard-react-container container-fluid' }
 
 - content_for :javascript do
