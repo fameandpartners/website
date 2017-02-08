@@ -28,6 +28,19 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
 
+  def advance_refund(event)
+    # TODO: implement refund process
+    reference = "stubbed_refund_reference"
+    refunded_at = Time.now
+
+    @item_return.refund_status = 'Complete'
+    @item_return.refund_method = event.refund_method
+    @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
+
+    @item_return.refund_ref    = reference
+    @item_return.refunded_at   = refunded_at
+  end
+
   def advance_record_refund(event)
     @item_return.refund_status = 'Complete'
     @item_return.refund_method = event.refund_method
