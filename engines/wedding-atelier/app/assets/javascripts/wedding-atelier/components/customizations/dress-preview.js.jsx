@@ -123,6 +123,7 @@ var DressPreview = React.createClass({
       thumbnails = [
         imagesStyles.front.thumbnail.white,
         imagesStyles.back.thumbnail.white,
+        imagesStyles.real.thumbnails[0]
       ]
     }else{
       thumbnails = imagesStyles.real.thumbnails;
