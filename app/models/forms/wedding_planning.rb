@@ -29,7 +29,7 @@ module Forms
 
 
     def wedding_date_cannot_be_in_the_past
-      if wedding_date.present? && Date.parse(wedding_date) < Date.today
+      if wedding_date.present? && Date.strptime(wedding_date, '%m/%d/%Y') < Date.today
         errors.add(:wedding_date, "Wedding date can't be in the past")
       end
     end

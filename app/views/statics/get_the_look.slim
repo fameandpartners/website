@@ -46,9 +46,12 @@
                             .col-xs-12
                               .checkbox-area
                                 .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
+                                  input#should_receive_trend_updates type="checkbox" name="should_receive_trend_updates" checked="checked"
+                                  label for="should_receive_trend_updates"
+                                    span I want trend updates from Fame and Partners
                                   input#should_contact type="checkbox" name="should_contact" checked="checked"
                                   label for="should_contact"
-                                    span I want trend updates from Fame and Partners
+                                    span I'm interested in a free styling session
                               button.btn-xs.btnCtaBlackBgUppercase type="submit" Download Now
 
                 .js-form-submitted.hidden
@@ -253,14 +256,19 @@ javascript:
 
     var $form = $('#wedding_planning_form');
     $form.find('.datepicker').datepicker();
+    
+    // Form Submission Event Handler
     $form.on('submit', function(evt){
       evt.preventDefault();
       var formVals = {};
+
       $.each($form.serializeArray(), function(i, field) {
-        formVals[field.name] = field.value;
+        formVals[field.name] = field.value; // Regular Inputs
+      });
+      $.each($('input:checkbox'), function(i, field) {
+        formVals[field.name] = field.checked ? true : false; // Checkboxes
       });
 
-      console.log('formVals', formVals);
       submitFormValues(formVals)
       .done(function(){
         console.log('success!!!!!');
@@ -268,6 +276,9 @@ javascript:
       .error(function(){
         console.log('OH NO!');
       })
+      
+
+      console.log('formVals', formVals);
     });
 
   });
