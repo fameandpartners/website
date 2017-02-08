@@ -361,35 +361,28 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  handleEventDetailUpdate: function(data){
-    $.ajax({
-      url: this.props.event_path,
-      type: 'PUT',
-      dataType: 'json',
-      data: data,
-
-      success: function(collection) {
-        this.setState({event: collection.moodboard_event});
-        var event = $.extend(event, this.state.event);
-        event.hasError = {};
-        this.setState({event: event});
-        this.setState({event_backup: event});
-      }.bind(this),
-
-      error: function(data) {
-        var parsed = JSON.parse(data.responseText);
-        var newEventState = $.extend(event, this.state.event_backup);
-        var hasError = {};
-
-        for(var key in parsed.errors) {
-          hasError[key] = true;
-          newEventState[key] = this.state.event_backup[key];
-        }
-
-        newEventState.hasError = hasError;
-        this.setState({event: event});
-      }.bind(this)
+  eventDetailsUpdated: function (collection) {
+    this.setState({event: collection.moodboard_event});
+    var event = $.extend(event, this.state.event);
+    event.hasError = {};
+    this.setState({
+      event: event,
+      event_backup: event
     });
+  },
+
+  eventDetailsUpdateFailed: function (data) {
+    var parsed = JSON.parse(data.responseText);
+    var newEventState = $.extend(event, this.state.event_backup);
+    var hasError = {};
+
+    for(var key in parsed.errors) {
+      hasError[key] = true;
+      newEventState[key] = this.state.event_backup[key];
+    }
+
+    newEventState.hasError = hasError;
+    this.setState({event: event});
   },
 
   handleRemoveAssistant: function(id, index){
@@ -563,10 +556,12 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
                   <EventDetails event={this.state.event}
-                                updater={this.handleEventDetailUpdate}
-                                roles_path={this.props.roles_path}
                                 current_user={this.props.current_user.user}
-                                hasError={this.state.event.hasError} />
+                                eventDetailsUpdated={this.eventDetailsUpdated}
+                                eventDetailsUpdateFailed={this.eventDetailsUpdateFailed}
+                                eventDetailsUpdatePath={this.props.event_path}
+                                hasError={this.state.event.hasError}
+                                roles_path={this.props.roles_path} />
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
                   <h1 className="text-center">

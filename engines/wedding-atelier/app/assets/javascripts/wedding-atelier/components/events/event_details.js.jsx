@@ -2,7 +2,9 @@ var EventDetails = React.createClass({
 
   propTypes: {
     roles_path: React.PropTypes.string,
-    updater: React.PropTypes.func,
+    eventDetailsUpdatePath: React.PropTypes.string,
+    eventDetailsUpdated: React.PropTypes.func,
+    eventDetailsUpdateFailed: React.PropTypes.func,
     current_user: React.PropTypes.object,
     event: React.PropTypes.shape({
       name: React.PropTypes.string,
@@ -41,10 +43,13 @@ var EventDetails = React.createClass({
     }.bind(this))
   },
 
-  handleUpdate: function(e) {
-    data = {event: this.state.event};
-    this.props.updater(data);
-    e.preventDefault();
+  buildEventDetailsUpdateOptions: function(e) {
+    return {
+      data: {event: this.state.event},
+      dataType: 'json',
+      type: 'PUT',
+      url: this.props.eventDetailsUpdatePath
+    };
   },
 
   _onChangeInput: function(e) {
@@ -109,9 +114,14 @@ var EventDetails = React.createClass({
             </div>
           </div>
           <div className="form-group text-center">
-            <button className="btn-black center-block" onClick={this.handleUpdate}>Update</button>
+            <FeedbackButton
+              className="btn-black center-block"
+              failureHandler={this.props.eventDetailsUpdateFailed}
+              label={'Update'}
+              options={this.buildEventDetailsUpdateOptions()}
+              successHandler={this.props.eventDetailsUpdated} />
           </div>
         </form>
-    )
+    );
   }
 });
