@@ -30,7 +30,7 @@
 
                       .row
                         form#wedding_planning_form.form
-                          input name="sessing_type" value="Email" hidden="true"
+                          input name="session_type" value="Email" hidden="true"
                             .col-xs-12
                               label.text-uppercase Name
                             .col-xs-12.col-md-6.no-margin.no-padding-right
@@ -229,13 +229,15 @@
                   #{current_tile_image_path} 992w"
 
 javascript:
-
   $(function() {
+    $weddingPlanningForm = $('#wedding_planning_form');
     function submitFormValues(formVals){
       return $.ajax({
         type: 'POST',
         url: '/wedding-planning',
-        data: formVals
+        contentType:'application/json',
+        dataType:'json',
+        data: JSON.stringify(formVals)
       });
     }
 
@@ -254,15 +256,19 @@ javascript:
       $('.js-modal.get-the-look-modal').modal('show');
     });
 
-    var $form = $('#wedding_planning_form');
-    $form.find('.datepicker').datepicker();
+    $weddingPlanningForm.find('.datepicker').datepicker();
     
     // Form Submission Event Handler
-    $form.on('submit', function(evt){
+    $weddingPlanningForm.on('focus', function(evt){
+      console.log('field', evt);
+    });
+    
+    // Form Submission Event Handler
+    $weddingPlanningForm.on('submit', function(evt){
       evt.preventDefault();
       var formVals = {};
 
-      $.each($form.serializeArray(), function(i, field) {
+      $.each($weddingPlanningForm.serializeArray(), function(i, field) {
         formVals[field.name] = field.value; // Regular Inputs
       });
       $.each($('input:checkbox'), function(i, field) {
@@ -273,9 +279,18 @@ javascript:
       .done(function(){
         console.log('success!!!!!');
       })
-      .error(function(){
-        console.log('OH NO!');
-      })
+      .error(function(xhr){
+        var errors = JSON.parse(xhr.responseText).errors;
+        var keys = Object.keys(errors);
+        console.log('keys', keys);
+        keys.forEach(function(key){
+          var $inputEl = $weddingPlanningForm.find('input[name="' + key + '"]').first;
+          window.wed = $weddingPlanningForm;
+          console.log('$inputEl', $inputEl);
+          
+          // $inputEl && $inputEl.classList.add('has-error');
+        });
+      });
       
 
       console.log('formVals', formVals);
