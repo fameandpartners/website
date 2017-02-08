@@ -179,6 +179,29 @@ describe Revolution::Page do
       it { expect(page.heading).to eq heading }
       it { expect(page.sub_heading).to eq sub_heading }
     end
+
+  end
+
+  describe '#banner_image' do
+    let(:collection) { double('Collection') }
+
+    before(:each) do
+      allow(page).to receive(:collection).and_return(collection)
+      allow(collection).to receive_message_chain(:details, :banner, image: 'without.image/does-not-exist.jpg')
+    end
+
+    context 'page has the :banner_image_url variable set' do
+      before(:each) do
+        page.variables[:banner_image_url] = 'with.com/variable.jpg'
+        page.save!
+      end
+
+      it { expect(page.banner_image).to eq('with.com/variable.jpg') }
+    end
+
+    context 'page does not have the :banner_image_url variable' do
+      it { expect(page.banner_image).to eq('without.image/does-not-exist.jpg') }
+    end
   end
 
   describe 'translations' do

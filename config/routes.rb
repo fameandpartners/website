@@ -183,6 +183,9 @@ FameAndPartners::Application.routes.draw do
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
 
+    # Best of Fame Collection
+    get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
@@ -210,6 +213,13 @@ FameAndPartners::Application.routes.draw do
     # Pre-Prom/Pre-Season Evening Collection - Landing page
     get '/pre-season-evening-collection' => 'products/collections#show', :permalink => 'pre-season-evening-collection', :as => :pre_season_evening_collection_landing_page
 
+    # Bespoke Bridal Collection - Landing page
+    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
+
+    # Bespoke Bridal Sweepstakes - Landing page
+    get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
+
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -223,6 +233,11 @@ FameAndPartners::Application.routes.draw do
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
+
+    # Wedding Atelier App - Landing page
+    get '/wedding-atelier' => 'products/collections#show', :permalink => 'wedding-atelier-app', :as => :wedding_atelier_app_landing_page
+    # Redirection in case of misspelling
+    get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -324,17 +339,17 @@ FameAndPartners::Application.routes.draw do
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
     get '/terms'   => 'statics#ecom_terms'
-    get '/privacy' => 'statics#ecom_privacy'
+    get '/privacy' => 'statics#ecom_privacy', :as => :privacy
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
     get '/from-our-ceo' => 'statics#from_our_ceo', :as => :from_our_ceo
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
-    get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
+    get '/growth-plan', to: redirect("/about")
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
-    get '/pre-register-bridal'   => 'statics#pre_register_bridal_sweepstakes', :permalink => 'pre_register_bridal', :as => :pre_register_bridal
-    get '/pre-register-bridesmaid'   => 'statics#pre_register_bridesmaid_sweepstakes', :permalink => 'pre_register_bridesmaid_sweepstakes', :as => :pre_register_bridesmaid_sweepstakes
+    get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
+    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
@@ -589,9 +604,7 @@ FameAndPartners::Application.routes.draw do
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
 
-  if Features.active?(:wedding_atelier)
-    mount WeddingAtelier::Engine, at: '/wedding-atelier'
-  end
+  mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
   match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end

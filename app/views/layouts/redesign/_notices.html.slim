@@ -1,4 +1,3 @@
-
 #sale-banner.alert-sale role="alert"
   .outer-wrap
     - if display_sale_notice?
@@ -7,15 +6,6 @@
           .title
             = current_sale.try(:sitewide_message)
             = link_to 'Shop now!', sale_path
-  .clock.text-center
-    .heading
-    span.hh
-    span.colon
-      | :
-    span.mm
-    span.colon
-      | :
-    span.ss
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)
@@ -24,17 +14,3 @@
       .text-center
         p WANT TO SHOP LATER?
         = link_to 'Email your promo code', fb_auth_path(email_reminder_promo: automatic_discount_code), class: 'btn btn-facebook btn-md'
-
-coffee:
-  $(document).ready ->
-    if $.cookie("auto_apply_promo_code_started_at")?
-      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_promo_code_started_at"), $.cookie('promo_end_time'),null, "modal")
-      promoTime.start()
-      $("#sale-banner .clock .heading").text($.cookie('promo_heading')?.replace("<br>","").replace(/\s+/g, " "))
-      $("#sale-banner .clock").show()
-
-    if $.cookie("auto_apply_coupon_start_time")?
-      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_coupon_start_time"), $.cookie('auto_apply_coupon_duration'),null,"faadc")
-      promoTime.start()
-      $("#sale-banner .clock .heading").text("Limited time to use your discount '" + $.cookie("auto_applied_promo_code") + "'")
-      $("#sale-banner .clock").show()

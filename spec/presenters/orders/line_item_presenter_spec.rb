@@ -129,27 +129,28 @@ module Orders
       end
     end
 
-    describe '#image_url' do
-      context 'presenter has an image' do
-        let(:attachment) { double('attachment') }
-        let(:image)      { double('image', attachment: attachment) }
+    describe '#image' do
+      let!(:product) { FactoryGirl.create(:spree_product) }
+      let!(:item) { FactoryGirl.build(:line_item, variant: product.master) }
 
-        before(:each) do
-          allow(presenter).to receive_messages(image?: true, image: image)
-          allow(attachment).to receive(:url).with(:large).and_return('http://example.com/image_url.jpg')
-        end
+      it do
+        expect(subject.image).to be_an_instance_of(Repositories::Images::Template)
+      end
+    end
 
-        it 'returns image url' do
-          expect(subject.image_url).to eq('http://example.com/image_url.jpg')
-        end
+    describe '#extended_style_number' do
+      before(:each) { expect(presenter).to receive(:global_sku).and_return(global_sku) }
+
+      context 'given a global SKU with an extended style number' do
+        let(:global_sku) { GlobalSku.new(data: { 'extended-style-number' => 'SUPER-STYLE-NUMBER' }) }
+
+        it { expect(presenter.extended_style_number).to eq('SUPER-STYLE-NUMBER') }
       end
 
-      context 'presenter does not have an image' do
-        before(:each) { allow(presenter).to receive(:image?).and_return(false) }
+      context 'given a global SKU without an extended style number' do
+        let(:global_sku) { GlobalSku.new(data: nil) }
 
-        it 'returns nil' do
-          expect(subject.image_url).to be_nil
-        end
+        it { expect(presenter.extended_style_number).to eq(nil) }
       end
     end
   end

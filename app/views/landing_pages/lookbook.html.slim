@@ -12,43 +12,55 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = link_to inside_out_collection_landing_page_path
-                = image_tag "lookbook/insideout-collection.jpg"
+              = link_to bespoke_bridal_collection_landing_page_path
+                = image_tag "lookbook/bridal-collection.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light The INSIDE\OUT Collection
-              = link_to 'View this collection', inside_out_collection_landing_page_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-light Bespoke Bridal
+              = link_to 'View this collection', bespoke_bridal_collection_landing_page_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to pre_season_evening_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/pre-season-evening-collection.jpg"
+        .copy-wrap Pre-Season Evening <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to inside_out_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/insideout-collection.jpg"
+        .copy-wrap INSIDE\OUT <em><span>View this collection</span></em>
     .col-md-6
       = link_to evening_hours_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/evening-hours-collection.jpg"
-        .copy-wrap Evening Hours Collection <em><span>View this collection</span></em>
+        .copy-wrap Evening Hours <em><span>View this collection</span></em>
     .col-md-6
       = link_to skirts_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/skirts-collection.jpg"
-        .copy-wrap The Skirts Collection <em><span>View this collection</span></em>
+        .copy-wrap Skirts <em><span>View this collection</span></em>
     .col-md-6
       = link_to gown_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/gown-collection.jpg"
-        .copy-wrap Gowns Collection <em><span>View this collection</span></em>
+        .copy-wrap Gowns <em><span>View this collection</span></em>
     .col-md-6
       = link_to dress_for_wedding_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/weddings-collection.jpg"
-        .copy-wrap Weddings Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to dress_for_parties_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/parties-collection.jpg"
-        .copy-wrap Parties Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to it_girl_landing_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/it-girl-collection.jpg"
-        .copy-wrap It Girl Collection <em><span>View this collection</span></em>
+        .copy-wrap Weddings <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
         .inner-wrap PREVIOUS LOOKBOOKS
 
+    .col-md-3.col-xs-6
+      = link_to dress_for_parties_page_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/previous-collections/parties-collection.jpg"
+        .copy-wrap Parties Collection
+    .col-md-3.col-xs-6
+      = link_to it_girl_landing_page_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/previous-collections/itgirl-collection.jpg"
+        .copy-wrap It Girl Collection
     .col-md-3.col-xs-6
       = link_to the_freshly_picked_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio
@@ -61,15 +73,4 @@
           .inner-wrap
             = image_tag "lookbook/previous-collections/ruffled-collection.jpg"
         .copy-wrap The Ruffled Up Collection
-    .col-md-3.col-xs-6
-      = link_to "#{dresses_path}/slip-dress", class: 'panel-compact'
-        .media-wrap.keep-ratio
-          .inner-wrap
-            = image_tag "lookbook/previous-collections/slip-dress.jpg"
-        .copy-wrap The Slip Dress Collection
-    .col-md-3.col-xs-6
-      = link_to partners_in_crime_collection_path, class: 'panel-compact'
-        .media-wrap.keep-ratio
-          .inner-wrap
-            = image_tag "lookbook/previous-collections/partnersincrime-pc.jpg"
-        .copy-wrap Partners In Crime Collection
+

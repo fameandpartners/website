@@ -124,13 +124,32 @@
 
 //////// CSS3 Flex Box ////////////
 
-@mixin column-vertical-align($v-align: center) {
-  display: flex;
+@mixin column-vertical-align($v-align: center, $min-md-screen: false) {
 
-  .vertical-align {
+  @if $min-md-screen == true {
+
+    @include min-tablet {
+
+      display: flex;
+
+      .vertical-align {
+        display: flex;
+        align-items: $v-align;
+      }
+
+    }
+
+  } @else {
+
     display: flex;
-    align-items: $v-align;
+
+    .vertical-align {
+      display: flex;
+      align-items: $v-align;
+    }
+
   }
+
 }
 
 @mixin display-flex($display: flex) {

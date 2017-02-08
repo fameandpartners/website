@@ -27,7 +27,7 @@ section.order-details
                         = render 'spree/orders/show/order_item', line_item: line_item
                   - if order.standard_making_items.any?
                     .standard-making-items
-                      .shipping-title.item Free shipping to USA, Canada and the UK within 7 – 10 days
+                      .shipping-title.item Free shipping to USA, Canada and the UK
                       - order.standard_making_line_items.each do |line_item|
                         = render 'spree/orders/show/order_item', line_item: line_item
               .row

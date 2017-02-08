@@ -29,12 +29,16 @@
       <div class="row">
         <div class="col-xs-12">
           <p>
+            <span class="link-underline-lighter">Free shipping</span>
             <% if getSiteVersionPrefix() == '/au': %>
-              <span class="link-underline-lighter">Free shipping</span> to Australia within 7 - 10 days
+              to Australia
             <% else: %>
-              <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 business days
+              to USA, Canada and the UK
             <% end %>
           </p>
+          <% if @cart.delivery_delay: %>
+            <p>We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</p>
+          <% end %>
           <p>
             <span class="link-underline-lighter">Easy returns</span> within 30 days
           </p>
@@ -80,6 +84,7 @@
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
             <dd>Skirt Length: <span><%= product.height %></span></dd>
+            <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>
             <dd><%= customization.name %> <%= customization.display_price %></dd>
             <% end %>

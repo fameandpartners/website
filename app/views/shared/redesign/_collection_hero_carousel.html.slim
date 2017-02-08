@@ -1,9 +1,9 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/jan-11-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-1-mob.jpg"
-= link_to "/pre-season-evening-collection", class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Pre-Season Evening Collection" }
+- current_tile_image = "homepage/hero-featured/jan-31-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-1-mob.jpg"
+= link_to '/wedding-atelier', class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Wedding Atelier App Beta" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -14,28 +14,21 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-md-offset-4
-          .copy-wrap.extra-padding-left
+        .col-md-6.col-md-offset-6.col-lg-6
+          .copy-wrap.text-center
             h2.heading.no-margin-md
-              span The <em>pre-</em><br class="visible-lg">season evening collection.
+              span The Wedding <br class="visible-lg"> Atelier App Beta.
               span.sub-heading
-                .text-uppercase.visible-xs.visible-sm The <em>pre-</em>season evening collection.
-                | See it now. Get it first. <span class="visible-lg visibile-md">Customize it the way you want.</span>
+                .text-uppercase.visible-xs.visible-sm The Wedding Atelier App Beta.
+                | Custom, convenient, *actually* cool <br class="visible-lg"> bridesmaids dresses, customizable in <br class="visible-lg"> over 40,000 ways.
             .cta-wrapper
               span.btn-md.btn-featured
-                | View the <span class="copy-highlight">Collection</span>
+                | Enter <span class="copy-highlight">THE APP</span>
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/jan-11-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-2-mob.jpg"
-
-- if current_site_version.is_australia?
-  - item_price = "$250"
-- else
-  - item_price = "$200"
-
-// TODO: add real URL
-= link_to dresses_path + "/dress-backless-starlet-dress-1285?color=black", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Back magic" }
+- current_tile_image = "homepage/hero-featured/jan-31-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-2-mob.jpg"
+= link_to bespoke_bridal_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -46,20 +39,20 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-lg-4.col-md-offset-5
+        .col-md-4.col-md-offset-1
           .copy-wrap
             h2.heading.no-margin-md
-              span Back Magic.
+              span <em>Introducing</em> the <br class="visible-lg">Bespoke Bridal collection.
               span.sub-heading
-                | Introducing the Backless Starlet. <br class="visible-lg">Understated elegance for under #{item_price}.
+                | Made for the modern bride: elevated,<br class="visible-lg"> elegant, and just a touch irreverent.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Now</span>
+                | Find <span class="copy-highlight">The One</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/jan-11-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-3-mob.jpg"
-= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Relax, already" }
+- current_tile_image = "homepage/hero-featured/jan-31-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-3-mob.jpg"
+= link_to pre_season_evening_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Inside Out Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -70,12 +63,13 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-1
+        .col-md-4.col-md-offset-1
           .copy-wrap
             h2.heading.no-margin-md
-              span Relax, already.
+              span Pro-fashion.<br> Anti-waste.
               span.sub-heading
-                | Custom and comfortable. <br class="visible-lg">Because when the fit is right, <br class="visible-lg">it's gonna be a good night.
+                .text-uppercase.visible-xs.visible-sm Pro-fashion. Anti-waste.
+                | Custom clothing, made-to-order. <br class="visible-lg">No mass production. Less waste.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Now</span>
+                | Shop <span class="copy-highlight">Custom</span>

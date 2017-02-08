@@ -80,8 +80,21 @@
 
 }
 
+// TODO: remove this in favor of .noPadding
 .no-padding {
+  @extend .noPadding;
+}
+
+.noPadding {
   padding: 0 !important;
+}
+
+.noPadding--mobile {
+
+  @include mobile {
+    padding: 0 !important;
+  }
+
 }
 
 .no-padding-top {

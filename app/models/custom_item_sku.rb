@@ -2,21 +2,25 @@
 class CustomItemSku
   attr_reader :line_item
 
-  CUSTOM_MARKER = "X".freeze
-
   def initialize(line_item)
     @line_item = line_item
   end
 
-  # Note that this is somewhat duplicated with VariantSku
   def call
     return line_item.variant.sku unless line_item.personalization.present?
-    "#{style_number}#{size}#{colour}#{custom}"
+
+    Skus::Generator.new(
+      style_number:            style_number,
+      size:                    size,
+      color_id:                color_id,
+      height:                  height,
+      customization_value_ids: customization_value_ids
+    ).call
   rescue StandardError => e
     Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
 
-    "#{line_item.variant.sku}#{CUSTOM_MARKER}"
+    "#{line_item.variant.sku}#{Skus::Generator::CUSTOM_MARKER}"
   end
 
   def style_number
@@ -24,30 +28,22 @@ class CustomItemSku
       line_item.variant.sku
     else
       line_item.variant.product.master.sku
-    end.to_s.upcase
+    end
   end
 
-  def colour
-    "C#{line_item.personalization.color.id}"
+  def color_id
+    line_item.personalization.color.id
   end
 
   def size
-    line_item.personalization.size.name.to_s.gsub('/', '')
+    line_item.personalization.size.name
   end
 
-  def custom
-    "#{customisations}#{height}"
+  def customization_value_ids
+    line_item.personalization.customization_value_ids
   end
 
-  private def customisations
-    line_item
-      .personalization
-      .customization_value_ids
-      .map {|vid| "#{CUSTOM_MARKER}#{vid}"}.join('').presence || CUSTOM_MARKER
-  end
-
-  private def height
-    initial = line_item.personalization.height.to_s.upcase.first
-    "H#{initial}"
+  def height
+    line_item.personalization.height
   end
 end

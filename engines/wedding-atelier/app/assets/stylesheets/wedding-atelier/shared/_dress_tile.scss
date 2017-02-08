@@ -1,0 +1,87 @@
+#events__moodboard {
+
+  .dress-boxes {
+    text-align: center;
+  }
+
+  /* a dress into the list */
+
+  .dress-box {
+    display: inline-block;
+    margin: 20px;
+    min-width: 308px;
+    width: 308px;
+
+    @include screen-xs {
+      min-width: 283px;
+      width: 283px;
+    };
+  }
+
+  .top-info {
+    background-color: $white-two;
+    text-align: left;
+
+    span {
+      color: $greyish;
+      font-family: $secondary-font;
+      font-size: .8em;
+      line-height: 1.92em;
+      margin-left: 8px;
+    }
+  }
+
+  .dress-box-header {
+    background-color: $white-three;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+
+    .likes {
+      display: flex;
+    }
+
+  }
+
+  .dress-box-body {
+    background-color: $white-three;
+    display: block;
+    flex-grow: 1;
+
+    img {
+      width: 223px;
+      height: 316px;
+    }
+  }
+
+  .dress-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    width: 200px;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+
+  .dress-box-footer {
+    align-items: center;
+    background-color: $white-two;
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  .sent-to-chat {
+    color: $pinkish-grey;
+    letter-spacing: normal;
+
+    i {
+      background-size: contain;
+      vertical-align: bottom;
+    }
+  }
+
+}

@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe WeddingAtelier::TwilioController, type: :controller do
+  before(:each) { enable_wedding_atelier_feature_flag }
+
   routes { WeddingAtelier::Engine.routes }
   before do
-    custom_sign_in create(:spree_user, first_name: 'foo', last_name: 'bar')
+    wedding_sign_in create(:spree_user, first_name: 'foo', last_name: 'bar')
   end
 
   describe '#token' do

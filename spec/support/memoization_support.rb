@@ -14,6 +14,7 @@ RSpec.configure do |config|
 
     # Spree
     MemoizationSupport.rememoize(Spree::Variant, :@size_option_type)
+    MemoizationSupport.rememoize(Spree::Variant, :@color_option_type)
     MemoizationSupport.rememoize(Spree::OptionType, :@color)
     MemoizationSupport.rememoize(Spree::OptionType, :@size)
 

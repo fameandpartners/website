@@ -5,13 +5,20 @@ module WeddingAtelier
     skip_before_filter :check_signup_completeness
     skip_before_filter :authenticate_spree_user!, only: :accept
 
+    protect_from_forgery except: :create
+
     def create
       addresses = params[:email_addresses].reject(&:empty?)
+      @event = WeddingAtelier::Event.find(params[:event_id])
       addresses.each do |email|
-        Invitation.create(event_slug: params[:event_id], user_email: email)
+        invitation = @event.invitations.create(inviter_id: current_spree_user.id, user_email: email)
+        invitation.send_invitation_email if invitation.valid?
       end
       current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
-      redirect_to wedding_atelier.event_path(params[:event_id])
+      respond_to do |format|
+        format.html { redirect_to wedding_atelier.event_path(@event) }
+        format.js { render json: { status: :ok, invitations: @event.invitations } }
+      end
     end
 
     def accept
@@ -21,7 +28,7 @@ module WeddingAtelier
         redirect_to wedding_atelier.signup_path
       else
         if spree_user_signed_in? && @invitation.accept
-          redirect_to wedding_atelier.event_path(@invitation.event_slug)
+          redirect_to wedding_atelier.event_path(@invitation.event)
         elsif Spree::User.find_by_email(@invitation.user_email)
           @invitation.accept
           redirect_to wedding_atelier.sign_in_path({invitation_id: @invitation.id})

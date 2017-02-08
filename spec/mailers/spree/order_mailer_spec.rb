@@ -35,7 +35,8 @@ module Spree
         billing_address_attributes:  presenter.billing_address_attributes.to_h,
         shipping_address_attributes: presenter.shipping_address_attributes.to_h,
         billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
-        shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo'
+        shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
+        cny_delivery_delay:          false
       }
     }
 

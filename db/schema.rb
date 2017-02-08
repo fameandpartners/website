@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170106163718) do
+ActiveRecord::Schema.define(:version => 20170201000041) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -145,13 +145,14 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
+    t.string   "customisation_type",                               :default => "cut"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -1546,7 +1547,7 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                             :null => false
+    t.string   "name",                                                  :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -1556,13 +1557,14 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
+    t.string   "delivery_period",   :default => "7 - 10 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
@@ -1737,8 +1739,11 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
     t.integer  "fabric_id"
     t.integer  "size_id"
     t.integer  "length_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "fit_id"
+    t.string   "height"
+    t.integer  "likes_count", :default => 0
   end
 
   create_table "wedding_atelier_event_roles", :force => true do |t|
@@ -1757,19 +1762,31 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
     t.string   "slug"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "owner_id"
   end
 
   create_table "wedding_atelier_invitations", :force => true do |t|
-    t.string "user_email"
-    t.string "event_slug"
-    t.string "state",      :default => "pending"
+    t.string  "user_email"
+    t.string  "event_slug"
+    t.string  "state",      :default => "pending"
+    t.integer "event_id"
+    t.integer "inviter_id"
   end
+
+  create_table "wedding_atelier_likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_dress_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "wedding_atelier_likes", ["user_id", "event_dress_id"], :name => "index_wedding_atelier_likes_on_user_id_and_event_dress_id", :unique => true
 
   create_table "wedding_atelier_user_profiles", :force => true do |t|
     t.integer "spree_user_id"
     t.string  "height"
-    t.string  "dress_size"
     t.boolean "trend_updates"
+    t.integer "dress_size_id"
   end
 
   create_table "wedding_atelier_users_event_roles", :id => false, :force => true do |t|

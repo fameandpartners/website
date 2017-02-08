@@ -6,6 +6,7 @@ module Features
     afterpay:                      'Enables AfterPay payment method and its notifications on PDP',
     bergen_usa_returns:            '[DEPRECATED] Enable Bergen 3PL return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
+    cny_delivery_delays:           "Delivery delays on China New Year's period",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
     express_making:                '[DEPRECATED] same as the "getitquick_unavailable" flag. Not used anywhere.',

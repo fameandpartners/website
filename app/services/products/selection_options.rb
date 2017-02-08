@@ -78,7 +78,7 @@ class SelectionOptions
     end
 
     def extra_product_sizes
-      return []
+      []
     end
 
     def default_product_colors
@@ -94,7 +94,7 @@ class SelectionOptions
     end
 
     private def defined_custom_colors
-      product.product_color_values.active.custom.map(&:option_value).sort_by(&:presentation)
+      product.product_color_values.active.custom.map(&:option_value).compact.sort_by(&:presentation)
     end
 
     private def legacy_fallback_custom_colors
@@ -109,7 +109,7 @@ class SelectionOptions
     # customizations
     def product_customisation_values
       if customisations_available?
-        @product_customisation_values ||= product.customisation_values.includes(:incompatibilities)
+        @product_customisation_values ||= product.customisation_values.by_type(:cut).includes(:incompatibilities)
       else
         []
       end
