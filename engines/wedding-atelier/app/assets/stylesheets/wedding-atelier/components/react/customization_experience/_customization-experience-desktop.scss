@@ -195,11 +195,12 @@
 
     .customization-panel-container {
       left: 0;
+      // Half the containers height
+      margin-top: -320px;
       max-width: 75%;
       position: absolute;
       right: 0;
       top: 50%;
-      transform: translateY(-50%);
     }
 
     .title {
