@@ -21,6 +21,15 @@
     }
   }
 
+  .measure,
+  .tips {
+    display: none;
+
+    &.selected {
+      display: block;
+    }
+  }
+
   .measure {
     img {
       width: 100%;

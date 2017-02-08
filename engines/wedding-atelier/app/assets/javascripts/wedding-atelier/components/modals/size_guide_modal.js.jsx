@@ -36,7 +36,8 @@ var SizeGuideModal = React.createClass({
           ['24','28','131','118','117','142'],
           ['26','30','136','124','123','148']
         ]
-      }
+      },
+      selectedTab: 'measure'
     };
   },
 
@@ -45,22 +46,6 @@ var SizeGuideModal = React.createClass({
 
     $(this.refs.tips).hide();
     $(this.refs.table).find('.cm').hide();
-  },
-
-  handleShowMeasure: function() {
-    $(this.refs.tips).hide();
-    $(this.refs.measure).show();
-
-    $(this.refs.actions).find('.show-tips').removeClass('selected');
-    $(this.refs.actions).find('.show-measure').addClass('selected');
-  },
-
-  handleShowTips: function() {
-    $(this.refs.tips).show();
-    $(this.refs.measure).hide();
-
-    $(this.refs.actions).find('.show-tips').addClass('selected');
-    $(this.refs.actions).find('.show-measure').removeClass('selected');
   },
 
   handleShowCm: function() {
@@ -99,7 +84,32 @@ var SizeGuideModal = React.createClass({
     }
   },
 
-  render: function(){
+  changeTab: function (to) {
+    this.setState({selectedTab: to});
+  },
+
+  render: function() {
+    var measuresTabClasses = classNames({
+      'show-measure col-xs-6 text-center': true,
+      'selected': this.state.selectedTab === 'measure'
+    });
+
+    var tipsTabClasses = classNames({
+      'show-tips col-xs-6 text-center': true,
+      'selected': this.state.selectedTab === 'tips'
+    });
+
+    var measureContainerClasses = classNames({
+      'measure': true,
+      'selected': this.state.selectedTab === 'measure'
+    });
+
+    var tipsContainerClasses = classNames({
+      'tips': true,
+      'selected': this.state.selectedTab === 'tips'
+    });
+
+
     return(
       <div className="js-size-guide-modal modal size-guide-modal fade" id="modal-confirm" tabIndex="-1" role="dialog">
         <div className="modal-vertical-align-helper">
@@ -116,18 +126,18 @@ var SizeGuideModal = React.createClass({
                     <div className="row">
                       <div className="col-xs-12 col-sm-6">
                         <div className="measure-actions" ref="actions">
-                          <div className="show-measure col-xs-6 text-center selected">
-                            <a href="#" onClick={this.handleShowMeasure}>Where to measure</a>
+                          <div className={measuresTabClasses}>
+                            <a href="#" onClick={this.changeTab.bind(null, 'measure')}>Where to measure</a>
                           </div>
-                          <div className="show-tips col-xs-6 text-center">
-                            <a href="#" onClick={this.handleShowTips}>Measuring tips</a>
+                          <div className={tipsTabClasses}>
+                            <a href="#" onClick={this.changeTab.bind(null, 'tips')}>Measuring tips</a>
                           </div>
                         </div>
 
-                        <div className="measure" ref="measure">
+                        <div className={measureContainerClasses}>
                           <img src="/assets/wedding-atelier/tile-how-to-measure.jpg" />
                         </div>
-                        <div className="tips" ref="tips">
+                        <div className={tipsContainerClasses}>
                           <p>FYI - Your results will be the most accurate if someone else helps you measure!</p>
                           <p>Fame Tips</p>
                           <ul>
