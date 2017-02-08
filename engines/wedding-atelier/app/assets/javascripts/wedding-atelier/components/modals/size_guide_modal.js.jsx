@@ -63,7 +63,7 @@ var SizeGuideModal = React.createClass({
                   <div className="container-fluid">
                     <div className="row">
                       <div className="col-xs-12 col-sm-6">
-                        <div className="measureActions" ref="actions">
+                        <div className="measure-actions" ref="actions">
                           <div className="show-measure col-xs-6 text-center selected">
                             <a href="#" onClick={this.handleShowMeasure}>Where to measure</a>
                           </div>
