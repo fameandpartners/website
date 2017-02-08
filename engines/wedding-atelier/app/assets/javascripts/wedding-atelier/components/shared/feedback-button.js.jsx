@@ -5,7 +5,7 @@ var FeedbackButton = React.createClass({
     failureHandler: React.PropTypes.func,
     label: React.PropTypes.string,
     labelCompleted: React.PropTypes.string,
-    options: React.PropTypes.object,
+    promise: React.PropTypes.object,
     successHandler: React.PropTypes.func
   },
 
@@ -29,8 +29,7 @@ var FeedbackButton = React.createClass({
     var that = this;
     e.preventDefault();
     that.changeState('loading');
-    var promise = Promise.resolve($.ajax(this.props.options));
-    promise.then(function(response) {
+    this.props.promise.then(function(response) {
       that.props.successHandler(response);
       that.changeState('completed');
     }, function(xhrObj) {
@@ -48,7 +47,7 @@ var FeedbackButton = React.createClass({
       case 'normal':
         return this.props.label;
       case 'loading':
-        return <img src="/assets/wedding-atelier/loading.svg"/>;
+        return <img src="/assets/wedding-atelier/loading.svg" />;
       case 'completed':
         return this.props.labelCompleted;
     }
