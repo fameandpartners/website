@@ -29,7 +29,7 @@ var FeedbackButton = React.createClass({
     var that = this;
     e.preventDefault();
     that.changeState('loading');
-    this.props.promise.then(function(response) {
+    this.props.promise().then(function(response) {
       that.props.successHandler(response);
       that.changeState('completed');
     }, function(xhrObj) {

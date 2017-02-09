@@ -12,7 +12,7 @@ var EventDetails = React.createClass({
       date: React.PropTypes.string,
       role: React.PropTypes.string,
       hasError: React.PropTypes.object
-    }),
+    })
   },
 
   getInitialState: function() {
@@ -120,7 +120,7 @@ var EventDetails = React.createClass({
               failureHandler={this.props.eventDetailsUpdateFailed}
               label={'Save'}
               labelCompleted={'Saved'}
-              promise={this.getEventDetailsUpdatePromise()}
+              promise={this.getEventDetailsUpdatePromise}
               successHandler={this.props.eventDetailsUpdated}></FeedbackButton>
           </div>
         </form>
