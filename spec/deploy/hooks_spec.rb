@@ -12,14 +12,16 @@ describe 'should have valid bash syntax for:' do
       stubbed_env.stub_command('curl')
       stubbed_env.stub_command('zdd_unicorn')
       stubbed_env.stub_command('wheneverize_worker')
-      stubbed_env.stub_command('.')
       stubbed_env.stub_command('mkdir')
       stubbed_env.stub_command('ln')
-      stubbed_env.stub_command('yarn')
+
+      yarn_stub = stubbed_env.stub_command('yarn')
+      yarn_stub.with_args('install')
+      yarn_stub.with_args('run', 'prod')
 
       stdout, stderr, status = stubbed_env.execute(
         "/bin/bash #{hook_path}",
-        { 'SERVER_ROLE' => 'not-exist', 'FRAMEWORK_ENV' => 'not-exist' }
+        { 'SERVER_ROLE' => 'not-exist', 'FRAMEWORK_ENV' => 'not-exist', 'current_app_path' => Rails.root.to_s, 'this_release_dir' => Rails.root.to_s }
       )
 
       expect(stderr).to be_empty
