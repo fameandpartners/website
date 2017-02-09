@@ -44,12 +44,8 @@ var DressTile = React.createClass({
   },
 
   addToCart: function() {
-    this.props.changeDressToAddToCartCallback(this.props.dress.id);
-    if($(window).width() < 768) {
-      $('#events__moodboard .mobile-select-size-modal .js-select-size-modal').show();
-    } else {
-      $('#events__moodboard .right-content .js-select-size-modal').show();
-    }
+    this.props.changeDressToAddToCartCallback(this.props.dress);
+    $('#events__moodboard .js-select-size-modal').show();
   },
 
   renderSend: function () {

@@ -86,8 +86,9 @@ class StaticsController < ApplicationController
   end
 
   def iequalchange
-    title('Fame and Partners x i=Change')
-    description('Join Fame and Partners in empowering women through fashion. $5 of every sale helps support initiatives from UN Women, Akilah, and Plan. Dress up and give back!')
+    if Features.inactive?(:i_equal_change)
+      redirect_to about_us_path, status: 302
+    end
   end
 
   # Monday March 23 2015 TTL: 6 months
@@ -101,6 +102,12 @@ class StaticsController < ApplicationController
     title('Get it Quick', default_seo_title)
 
     render 'getitquick_unavailable', status: :not_found
+  end
+
+  def wedding_atelier_app
+    if spree_current_user
+      redirect_to wedding_atelier.events_path
+    end
   end
 
 # =======================================================================
@@ -225,12 +232,6 @@ class StaticsController < ApplicationController
   def fame2015
     @title = "Hashtag #fame2015 to win" + default_seo_title
     @description = "Hashtag #fame2015 to win"
-  end
-
-  def iequalchange
-    if Features.inactive?(:i_equal_change)
-      redirect_to about_us_path, status: 302
-    end
   end
 
   private
