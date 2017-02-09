@@ -85,72 +85,66 @@ var MoodBoardEvent = React.createClass({
   },
 
   loadChatToken: function() {
-    that = this;
+    var that = this;
     $.post(this.props.twilio_token_path + '.json', function(response){
       var token = response.token,
-          twilioManager = new Twilio.AccessManager(token);
+          twilioClient = new Twilio.Chat.Client(token);
       var _state = $.extend({}, that.state);
-      _state.twilioManager = twilioManager;
-      _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
+      _state.twilioClient = twilioClient;
       that.setState(_state);
-      that.setupChatChannels();
+      twilioClient.initialize().then(function(){
+        _state.twilioClient.getUserChannels().then(that.setupChatChannels);
+      });
     }).fail(function(e) {
       ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
           document.getElementById('notification'));
     });
   },
 
-  setupChatChannels: function(){
+  setupChatChannels: function(channels){
     var _state = $.extend({}, this.state);
     var that = this;
-    var channelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
+    var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
     var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
+    var chatChannel = _.findWhere(channels.items, { uniqueName: chatChannelName });
+    var channelNotifications = _.findWhere(channels.items, { uniqueName: notificationsChannelName });
 
     // notifications channel
-    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(channelNotifications) {
-      if (channelNotifications) {
-        that.setState({channelNotifications: channelNotifications});
-        that.setupNotificationsChannel();
-      } else {
-        _state.twilioClient.createChannel({
-          uniqueName: notificationsChannelName,
-          friendlyName: 'Notifications for: ' + that.props.wedding_name
-        }).then(function(channelNotifications) {
-            that.setState({channelNotifications: channelNotifications});
-            that.setupNotificationsChannel();
-        });
-      }
-    });
+    if (channelNotifications) {
+      that.setState({channelNotifications: channelNotifications});
+      that.setupNotificationsChannel();
+    } else {
+      _state.twilioClient.createChannel({
+        uniqueName: notificationsChannelName,
+        friendlyName: 'Notifications for: ' + that.props.wedding_name
+      }).then(function(channelNotifications) {
+          that.setState({channelNotifications: channelNotifications});
+          that.setupNotificationsChannel();
+      });
+    }
 
     // normal messaging client
-    _state.twilioClient.getChannelByUniqueName(channelName).then(function(chatChannel) {
-      if (chatChannel) {
+    if (chatChannel) {
+      that.setState({chatChannel: chatChannel});
+      chatChannel.join().then(function() {
+        console.log('Joined channel as ' + that.props.username);
+        that.setUpMessagingEvents();
+        that.loadChannelHistory();
+        that.loadChannelMembers();
+      });
+    } else {
+      _state.twilioClient.createChannel({
+        uniqueName: chatChannelName,
+        friendlyName: that.props.wedding_name
+      }).then(function(chatChannel) {
         that.setState({chatChannel: chatChannel});
         chatChannel.join().then(function() {
-          console.log('Joined channel as ' + that.props.username);
           that.setUpMessagingEvents();
-          that.loadChannelHistory();
-          that.loadChannelMembers();
+          that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.");
+          that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
         });
-      } else {
-        _state.twilioClient.createChannel({
-          uniqueName: channelName,
-          friendlyName: that.props.wedding_name
-        }).then(function(chatChannel) {
-          that.setState({chatChannel: chatChannel});
-          chatChannel.join().then(function() {
-            that.setUpMessagingEvents();
-            //It needs a bit time to setup event listeners properly
-            setTimeout(function() {
-              // TODO: After refactor remove this setTimeout...
-              that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function() {
-                return that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
-              });
-            }, 3000);
-          });
-        });
-      }
-    });
+      });
+    }
   },
 
   startTyping: function() {
@@ -247,7 +241,7 @@ var MoodBoardEvent = React.createClass({
 
   loadChannelHistory: function() {
     this.state.chatChannel.getMessages(20).then(function(messages) {
-      var _messages = messages.map(function(message) {
+      var _messages = messages.items.map(function(message) {
         return JSON.parse(message.body);
       });
 
