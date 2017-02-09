@@ -5,7 +5,7 @@ var SizeGuideModalLauncher = React.createClass({
   },
 
   render: function() {
-    return (<a onClick={this.handleShowSizeGuide} href="#" className="guide-link hover-link">(view size guide)</a>);
+    return <a onClick={this.handleShowSizeGuide} href="#" className="guide-link hover-link">(view size guide)</a>;
   }
 
 });
