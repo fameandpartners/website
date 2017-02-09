@@ -278,6 +278,11 @@ z-index levels
   }
 }
 
+.input-error {
+  outline: $c-light-red auto 2px;
+  outline-offset: -2px;
+}
+
 .has-warning {
   .help-inline {
     color: $c-brand-red;

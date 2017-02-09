@@ -33,5 +33,9 @@ module Forms
       end
     end
 
+    def transform_name
+      @blabla = 3
+    end
+
   end
 end

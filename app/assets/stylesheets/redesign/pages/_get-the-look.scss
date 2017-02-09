@@ -86,7 +86,9 @@
       display: block;
       margin-top: 10px;
     }
-
+    input {
+      font-size: 1.4rem;
+    }
     input[type=text],
     input[type=email],
     input[type=date] {
@@ -95,7 +97,7 @@
     }
 
     .checkbox-area label {
-      margin: 20px 0;
+      margin: 15px 0;
 
       span {
         font-style: italic;

@@ -34,7 +34,7 @@
                             .col-xs-12
                               label.text-uppercase Name
                             .col-xs-12.col-md-6.no-margin.no-padding-right
-                              input required="true" type="text" name="first_name" placeholder="First name"
+                              input data-auto-focus= required="true" type="text" name="first_name" placeholder="First name"
                             .col-xs-12.col-md-6.no-margin
                               input required="true" type="text" name="last_name" placeholder="Last name"
                             .col-xs-12
@@ -230,6 +230,7 @@
 
 javascript:
   $(function() {
+    var INPUT_ERROR_CLASS = 'input-error';
     $weddingPlanningForm = $('#wedding_planning_form');
     function submitFormValues(formVals){
       return $.ajax({
@@ -254,16 +255,17 @@ javascript:
 
     $('.js-get-guide-modal-trigger').click(function(){
       $('.js-modal.get-the-look-modal').modal('show');
+      $weddingPlanningForm.find('input[data-auto-focus]').focus();
     });
 
     $weddingPlanningForm.find('.datepicker').datepicker();
     
-    // Form Submission Event Handler
-    $weddingPlanningForm.on('focus', function(evt){
-      console.log('field', evt);
+    // FOCUS Event handler
+    $weddingPlanningForm.on('focusin', 'input', function(event){
+      $(event.target).removeClass(INPUT_ERROR_CLASS);
     });
     
-    // Form Submission Event Handler
+    // SUBMIT Event Handler
     $weddingPlanningForm.on('submit', function(evt){
       evt.preventDefault();
       var formVals = {};
@@ -282,13 +284,9 @@ javascript:
       .error(function(xhr){
         var errors = JSON.parse(xhr.responseText).errors;
         var keys = Object.keys(errors);
-        console.log('keys', keys);
         keys.forEach(function(key){
-          var $inputEl = $weddingPlanningForm.find('input[name="' + key + '"]').first;
-          window.wed = $weddingPlanningForm;
-          console.log('$inputEl', $inputEl);
-          
-          // $inputEl && $inputEl.classList.add('has-error');
+          var $inputEl = $weddingPlanningForm.find('input[name="' + key + '"]').first();
+          $inputEl && $inputEl.toggleClass(INPUT_ERROR_CLASS);
         });
       });
       
