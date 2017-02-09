@@ -8,8 +8,8 @@
 if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; then
   slack_endpoint='https://hooks.slack.com/services'
 
-  git_folder="$APP_LOCATION/cached-copy/$APP_NAME/.git"
-  log_folder="$APP_LOCATION/shared/log/deploys"
+  git_folder="$git_cached_copy/.git"
+  log_folder="/var/log/$app_full_name/deploys"
   log_file="$log_folder/latest_changes.log"
 
   previous_tag="$(git -C $git_folder describe --tags --abbrev=0 HEAD^)"
