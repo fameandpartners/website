@@ -1,13 +1,12 @@
 var SaveDressModal = React.createClass({
   propTypes: {
-    eventSlug: React.PropTypes.string
+    eventPath: React.PropTypes.string
   },
   newDress: function(){
     location.reload()
   },
 
   render: function(){
-    var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
     return(
       <div className="js-save-dress-modal modal save-dress-modal fade" id="modal-confirm" tabIndex='-1' role='dialog'>
         <div className="modal-vertical-align-helper">
@@ -20,7 +19,7 @@ var SaveDressModal = React.createClass({
                     Your dress has been saved!
                   </h1>
                   <div className="action-buttons">
-                    <a href={moodboardUrl} className="btn-white" type='button'> Back to moodboard </a>
+                    <a href={this.props.eventPath} className="btn-white" type='button'> Back to moodboard </a>
                     <a href="#" onClick={this.newDress} className="btn-black" type='button'> create another dress </a>
                   </div>
                 </div>

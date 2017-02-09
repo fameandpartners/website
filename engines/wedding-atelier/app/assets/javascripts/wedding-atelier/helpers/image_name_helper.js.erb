@@ -48,7 +48,7 @@ DressImageBuilder.prototype.style = function(style, pov){
 
 DressImageBuilder.prototype.dressCombos = function(){
   var renderImageKeys = [this.silhouetteName, 'HG', this.colorName, this.styleName, this.fitName, this.lengthName];
-  var realImageKeys = [this.silhouetteName, this.fabricName, this.colorName, 'S0', 'F0', 'AK'];
+  var realImageKeys = [this.silhouetteName, this.fabricName, 'CHAMPAGNE', 'S0', 'F0', 'AK'];
   var realImageName = realImageKeys.join('-').toUpperCase() + '-';
   var renderImageName = renderImageKeys.join('-').toUpperCase() + '-';
   return {

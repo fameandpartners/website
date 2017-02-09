@@ -69,7 +69,7 @@ var DressPreview = React.createClass({
   },
 
   renderThumbnails: function (thumbs, selectedIndex) {
-    var that = this;
+    var that = this, baseSilohuette;
     var thumbnails = thumbs.map(function (image, index) {
     var classes = classNames({
       'dress-preview-thumbnails-item': true,
@@ -84,9 +84,14 @@ var DressPreview = React.createClass({
     );
   });
 
+  if(this.isCustomDress()){
+    baseSilohuette = <p className="base-silhouette hidden-xs">Base silhouette</p>
+  }
+
   return (
     <ul className="dress-preview-thumbnails">
       {thumbnails}
+      {baseSilohuette}
     </ul>
   );
   },
@@ -96,7 +101,7 @@ var DressPreview = React.createClass({
         lengthName = options.length && options.length.name,
         lengthSet = !(lengthName == undefined) && lengthName!='AK'
         customColor =  options.color && options.color.name != 'champagne'
-    return options.style || options.fit || lengthSet || customColor;
+    return !!(options.style || options.fit || lengthSet || customColor);
   },
 
   getImages: function(imagesStyles){
@@ -105,6 +110,7 @@ var DressPreview = React.createClass({
       images = [
         imagesStyles.front.large,
         imagesStyles.back.large,
+        imagesStyles.real.large[0]
       ]
     }else{
       images = imagesStyles.real.large
@@ -118,6 +124,7 @@ var DressPreview = React.createClass({
       thumbnails = [
         imagesStyles.front.thumbnail.white,
         imagesStyles.back.thumbnail.white,
+        imagesStyles.real.thumbnails[0]
       ]
     }else{
       thumbnails = imagesStyles.real.thumbnails;

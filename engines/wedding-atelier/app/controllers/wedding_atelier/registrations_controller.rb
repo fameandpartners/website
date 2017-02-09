@@ -64,11 +64,9 @@ module WeddingAtelier
         else
           redirect_to action: @user.wedding_atelier_signup_step
         end
-
       else
-        # reload user to update step if validation fails
         @event = @user.events.last
-        render @user.reload.wedding_atelier_signup_step
+        render @user.wedding_atelier_signup_step_was
       end
 
       if @user.reload.wedding_atelier_signup_complete?
@@ -90,7 +88,7 @@ module WeddingAtelier
       @event = current_spree_user.events.last
       if @event.number_of_assistants == 0
         current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
-        redirect_to wedding_atelier.event_path(current_spree_user.events.last)
+        redirect_to wedding_atelier.event_path(id: @event.id, slug: @event.slug)
       end
     end
 
