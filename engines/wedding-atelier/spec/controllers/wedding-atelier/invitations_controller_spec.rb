@@ -45,5 +45,15 @@ describe WeddingAtelier::InvitationsController, type: :controller do
         end.to change { invitation.reload.state }.to('accepted')
       end
     end
+
+    context 'with mixed case email address' do
+      let!(:invited) { create(:spree_user, email: 'mIxEed@Email.com', first_name: 'invite', last_name: 'me')}
+      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: 'mIxEed@Email.com') }
+      it 'marks the invitation as accepted' do
+        expect do
+          get :accept, event_id: event.id, invitation_id: invitation.id
+        end.to change { invitation.reload.state }.to('accepted')
+      end
+    end
   end
 end
