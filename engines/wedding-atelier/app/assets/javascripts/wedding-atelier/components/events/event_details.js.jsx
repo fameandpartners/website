@@ -28,7 +28,8 @@ var EventDetails = React.createClass({
     .datepicker({
       format: "mm/dd/yyyy",
       autoclose: true,
-      showOnFocus: true
+      showOnFocus: true,
+      startDate: moment().format('M/D/YYYY')
     }).on('show', function(e){
       $(this).addClass('active');
     }).on('hide', function(e){
