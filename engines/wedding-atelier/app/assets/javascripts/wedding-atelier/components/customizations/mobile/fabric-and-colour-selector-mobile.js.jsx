@@ -16,11 +16,15 @@ var FabricAndColorSelectorMobile = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps){
-    if(!this.state.selectedFabric && !this.state.selectedColor){
+    if(this.props.selectedOptions.silhouette) {
+      var silhouetteChanged = this.props.selectedOptions.silhouette.id !== nextProps.selectedOptions.silhouette.id;
+    }
+
+    if(!this.state.selectedFabric && !this.state.selectedColor || silhouetteChanged) {
       var newState = {
         selectedFabric: nextProps.selectedOptions.fabric,
         selectedColor: nextProps.selectedOptions.color
-      }
+      };
       this.setState(newState);
     }
   },
