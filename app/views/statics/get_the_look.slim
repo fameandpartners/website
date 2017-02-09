@@ -54,7 +54,7 @@
                                     span I'm interested in a free styling session
                               button.btn-xs.btnCtaBlackBgUppercase type="submit" Download Now
 
-                .js-form-submitted.hidden
+                .js-form-submitted-success.hidden
                   .row
                     .col-md-6.hidden-xs.hidden-sm
                       img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-01.jpg")
@@ -230,8 +230,13 @@
 
 javascript:
   $(function() {
+    'use strict';
     var INPUT_ERROR_CLASS = 'input-error';
-    $weddingPlanningForm = $('#wedding_planning_form');
+    var $weddingPlanningForm = $('#wedding_planning_form');
+    var $previewModal = $('.js-modal.get-the-look-preview-modal');
+    var $previewModalTrigger = $('.js-previewModalTrigger');
+    var $guideModalTrigger = $('.js-get-guide-modal-trigger');
+    
     function submitFormValues(formVals){
       return $.ajax({
         type: 'POST',
@@ -242,18 +247,18 @@ javascript:
       });
     }
 
-    $('.js-previewModalTrigger').click(function(){
+    $previewModalTrigger.click(function(){
       var dataVideoId = $(this).data('video-id');
       var videoUrl = 'https://player.vimeo.com/video/'+dataVideoId+'?autoplay=1';
-      $('.js-modal.get-the-look-preview-modal').modal('show');
-      $('.js-modal.get-the-look-preview-modal iframe').attr('src', videoUrl);
+      $previewModal.modal('show');
+      $previewModal.find('iframe').attr('src', videoUrl);
     });
 
-    $('.js-modal.get-the-look-preview-modal').on('hidden.bs.modal', function () {
+    $previewModal.on('hidden.bs.modal', function () {
       $(this).find('iframe').attr('src', '');
     });
 
-    $('.js-get-guide-modal-trigger').click(function(){
+    $guideModalTrigger.click(function(){
       $('.js-modal.get-the-look-modal').modal('show');
       $weddingPlanningForm.find('input[data-auto-focus]').focus();
     });
@@ -279,19 +284,18 @@ javascript:
 
       submitFormValues(formVals)
       .done(function(){
-        console.log('success!!!!!');
+        $('.js-form-pending').addClass('hidden');
+        $('.js-form-submitted-success').removeClass('hidden');
       })
       .error(function(xhr){
         var errors = JSON.parse(xhr.responseText).errors;
         var keys = Object.keys(errors);
         keys.forEach(function(key){
           var $inputEl = $weddingPlanningForm.find('input[name="' + key + '"]').first();
-          $inputEl && $inputEl.toggleClass(INPUT_ERROR_CLASS);
+          $inputEl && $inputEl.addClass(INPUT_ERROR_CLASS);
         });
       });
 
-
-      console.log('formVals', formVals);
     });
 
   });
