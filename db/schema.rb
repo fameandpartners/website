@@ -1802,10 +1802,11 @@ ActiveRecord::Schema.define(:version => 20170201000041) do
     t.string   "preferred_time"
     t.string   "session_type"
     t.boolean  "should_contact"
+    t.boolean  "should_receive_trend_updates"
     t.string   "timezone"
     t.date     "wedding_date"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "wishlist_items", :force => true do |t|

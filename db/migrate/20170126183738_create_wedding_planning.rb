@@ -8,6 +8,7 @@ class CreateWeddingPlanning < ActiveRecord::Migration
       t.string :preferred_time
       t.string :session_type
       t.boolean :should_contact
+      t.boolean :should_receive_trend_updates
       t.string :timezone
       t.date :wedding_date
 
