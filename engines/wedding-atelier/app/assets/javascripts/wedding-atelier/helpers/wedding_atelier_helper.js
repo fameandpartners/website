@@ -5,8 +5,8 @@ WeddingAtelierHelper.chatTimestamp = function(time){
       return '';
     }
     return moment(new Date(time)).calendar(null, {
-      sameDay: '[Today], hh:mm:a',
-      lastDay: '[Yesterday], hh:mm:a',
-      sameElse: 'MM/DD/YYYY, hh:mm:a'
+      sameDay: '[Today], hh:mmA',
+      lastDay: '[Yesterday], hh:mmA',
+      sameElse: 'MM/DD/YYYY, hh:mmA'
     });
 };
