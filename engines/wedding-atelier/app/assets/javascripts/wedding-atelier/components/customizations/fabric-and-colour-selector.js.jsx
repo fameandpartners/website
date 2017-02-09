@@ -11,18 +11,24 @@ var FabricAndColorSelector = React.createClass({
     return {
       selectedFabric: null,
       selectedColor: null
-    }
+    };
   },
 
-  componentWillReceiveProps: function(nextProps){
-    if(!this.state.selectedFabric && !this.state.selectedColor){
+  componentWillReceiveProps: function(nextProps) {
+    if(this.props.selectedOptions.silhouette) {
+      var silhouetteChanged = this.props.selectedOptions.silhouette.id !== nextProps.selectedOptions.silhouette.id;
+    }
+
+    if(!this.state.selectedFabric && !this.state.selectedColor || silhouetteChanged) {
       var newState = {
         selectedFabric: nextProps.selectedOptions.fabric,
         selectedColor: nextProps.selectedOptions.color
-      }
+      };
       this.setState(newState);
     }
   },
+
+
 
   fabricSelectedHandle: function(fabric) {
     var newState = $.extend({}, this.state);
