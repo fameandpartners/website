@@ -1,6 +1,7 @@
 /* [Modals]
 -------------------------------------------------------*/
 .modal {
+  z-index: 99999;
 
   .modal-content {
     box-shadow: none;
@@ -30,6 +31,82 @@
 
     .outer-wrap {
       padding: 30px;
+    }
+
+  }
+
+}
+
+// An initial approach to fit the new modal Design
+.modal-v2 {
+
+  .modal-content {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 30px 20px 20px;
+  }
+
+  .btn-close {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .btn-close:before,
+  .btn-close:after {
+    height: 30px;
+  }
+
+  .modal-body {
+    padding: 25px 10px 10px;
+    position: initial;
+  }
+
+  iframe.video {
+    display: block;
+    margin: 0 auto;
+    width: 100vw;
+    height: 56.25vw;
+    max-width: 640px;
+    max-height: 360px;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .modal-dialog {
+      width: 100%;
+      margin: 1% auto;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-sm-width) {
+
+    iframe.video {
+      max-width: 580px;
+      max-height: 250px;
+    }
+
+    .modal-content {
+      padding: 30px 0 0;
+    }
+
+  }
+
+  @media (min-width: $iphone6p-width) and (max-width: $bootstrap-sm-width - 1px) {
+
+    iframe.video {
+      max-width: 360px;
+    }
+
+  }
+
+  @media (max-width: $iphone6p-width - 1px) {
+
+    iframe.video {
+      max-width: 250px;
     }
 
   }

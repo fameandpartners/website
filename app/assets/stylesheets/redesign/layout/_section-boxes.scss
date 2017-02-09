@@ -299,6 +299,10 @@ $top-overlay-margin-top: 37px;
   text-align: center;
   z-index: 1;
 
+  &--alignLeft {
+    text-align: left;
+  }
+
   .heading-overlay {
     display: inline-block;
     position: relative;

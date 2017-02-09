@@ -248,6 +248,7 @@ z-index levels
 @import 'redesign/pages/wedding-sweepstakes';
 @import 'redesign/pages/bespoke-bridal-collection';
 @import 'redesign/pages/wedding-atelier-app';
+@import 'redesign/pages/get-the-look';
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';
@@ -276,6 +277,11 @@ z-index levels
   .help-inline {
     color: $c-brand-red;
   }
+}
+
+.input-error {
+  outline: $c-light-red auto 2px;
+  outline-offset: -2px;
 }
 
 .has-warning {

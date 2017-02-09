@@ -219,3 +219,12 @@ h1 .sub-heading {
   }
 
 }
+
+// Another variant for a thin line to split content, like in the "Get The Look" page
+.spacerThinLine::before {
+  content: "";
+  margin: 30px 0;
+  border-top: 1px solid $c-neutral-black;
+  width: 12px;
+  display: block;
+}

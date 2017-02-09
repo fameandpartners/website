@@ -323,6 +323,12 @@ input {
   line-height: normal;
 }
 
+// Normalizes focus on inputs cross-browser
+input:focus {
+  outline: #777777 auto 2px;
+  outline-offset: -2px;
+}
+
 //
 // It's recommended that you don't attempt to style these elements.
 // Firefox's implementation doesn't respect box-sizing, padding, or width.
