@@ -2,30 +2,38 @@ require 'spec_helper'
 require 'rspec/shell/expectations'
 
 
-describe 'should have valid bash syntax for:' do
+describe 'deploy hook script:' do
   include Rspec::Shell::Expectations
 
-  Dir.glob(File.join(Rails.root.join('config/deploy/hooks'), '**', '*.sh')).each do |hook_path|
-    it hook_path do
-      stubbed_env = create_stubbed_env
+  let!(:stubbed_env) { create_stubbed_env }
+  let(:env_vars) do
+    { 'SERVER_ROLE' => 'not-exist', 'FRAMEWORK_ENV' => 'not-exist', 'current_app_path' => Rails.root.to_s, 'this_release_dir' => Rails.root.to_s }
+  end
 
-      stubbed_env.stub_command('curl')
-      stubbed_env.stub_command('zdd_unicorn')
-      stubbed_env.stub_command('wheneverize_worker')
-      stubbed_env.stub_command('mkdir')
-      stubbed_env.stub_command('ln')
+  before(:each) do
+    stubbed_env.stub_command('curl')
+    stubbed_env.stub_command('zdd_unicorn')
+    stubbed_env.stub_command('wheneverize_worker')
+    stubbed_env.stub_command('mkdir')
+    stubbed_env.stub_command('ln')
 
-      yarn_stub = stubbed_env.stub_command('yarn')
-      yarn_stub.with_args('install')
-      yarn_stub.with_args('run', 'prod')
+    yarn_stub = stubbed_env.stub_command('yarn')
+    yarn_stub.with_args('install')
+    yarn_stub.with_args('run', 'prod')
+  end
 
-      stdout, stderr, status = stubbed_env.execute(
-        "/bin/bash #{hook_path}",
-        { 'SERVER_ROLE' => 'not-exist', 'FRAMEWORK_ENV' => 'not-exist', 'current_app_path' => Rails.root.to_s, 'this_release_dir' => Rails.root.to_s }
-      )
+  hooks_pattern = File.join(Rails.root.join('config/deploy/hooks'), '**', '*.sh')
+  Dir.glob(hooks_pattern).each do |hook_path|
+    describe "'#{hook_path}'" do
+      it 'should not fail' do
+        stdout, stderr, status = stubbed_env.execute(
+          "/bin/bash #{hook_path}",
+          env_vars
+        )
 
-      expect(stderr).to be_empty
-      expect(status.exitstatus).to be_zero
+        expect(stderr).to be_empty
+        expect(status.exitstatus).to be_zero
+      end
     end
   end
 
