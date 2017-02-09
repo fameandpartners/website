@@ -2,29 +2,23 @@
 section.section-box.container.section-style-icon
   .row
     .col-md-12.heading-overlay-wrapper
-      h2.heading-overlay Fame Hashtag
+      h2.heading-overlay The Wedding Atelier App Beta
 
-  .tag-info-section
-    .tag-info-wrapper.visible-lg-block
-      .tag-info
-        .section-name.vertical-text Fame Hashtag
-        .diagonal-line
+  .row
+    .col-md-12.cta-item-huge
+      - current_edit_image = "homepage/fp-style-icon/feb-09-tile-1.jpg"
+      - current_edit_mob_image = "homepage/fp-style-icon/feb-09-tile-1-mob.jpg"
+      - current_edit_link = wedding_atelier_app_landing_page_path
 
-    .row
-      .col-md-12.cta-item-huge
-        - current_edit_image = "homepage/fp-style-icon/jan-11-tile-1.jpg"
-        - current_edit_mob_image = "homepage/fp-style-icon/jan-11-tile-1-mob.jpg"
-        - current_edit_link = slay_it_forward_path
-
-        = link_to current_edit_link
-          .section-img-wrap.copy-center
-            picture
-              .img-wrap
-                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
-                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
-                img src="#{image_path(current_edit_image)}" srcset="
-                  #{image_path(current_edit_mob_image)} 991w,
-                  #{image_path(current_edit_image)} 992w"
+      = link_to current_edit_link
+        .section-img-wrap.copy-center
+          picture
+            .img-wrap
+              source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+              source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+              img src="#{image_path(current_edit_image)}" srcset="
+                #{image_path(current_edit_mob_image)} 991w,
+                #{image_path(current_edit_image)} 992w"
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
@@ -34,10 +28,10 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/little-black-dress'
+        = link_to dresses_path + '/ruffle'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/jan-11-tile-2.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-2.jpg")}'
 
             .content-wrap
               .container-cta
@@ -46,13 +40,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight LBD
+                        span.copy-highlight Ruffles
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/wrap'
+        = link_to dresses_path + '/off-shoulder'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/jan-11-tile-3.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-3.jpg")}'
 
             .content-wrap
               .container-cta
@@ -61,14 +55,14 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Wraps
+                        span.copy-highlight Cold Shoulder
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/sequin'
+        = link_to dresses_path + '/backless'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/jan-11-tile-4.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-4.jpg")}'
 
             .content-wrap
               .container-cta
@@ -77,13 +71,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Sequins
+                        span.copy-highlight Backless
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/velvet'
+        = link_to dresses_path + '/daytime'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/jan-11-tile-5.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-5.jpg")}'
 
             .content-wrap
               .container-cta
@@ -92,4 +86,4 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Velvet
+                        span.copy-highlight Daywear
