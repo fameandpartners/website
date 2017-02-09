@@ -1,7 +1,8 @@
 class CreateWeddingPlanning < ActiveRecord::Migration
   def change
-    create_table :wedding_planning do |t|
-      t.string :full_name
+    create_table :wedding_plannings do |t|
+      t.string :first_name
+      t.string :last_name
       t.string :email
       t.string :phone
       t.string :preferred_time

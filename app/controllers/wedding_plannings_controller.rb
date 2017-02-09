@@ -2,7 +2,7 @@ class WeddingPlanningsController < ApplicationController
   layout 'redesign/application'
 
   def create
-    @wedding_planning = Forms::WeddingPlanning.new(WeddingConsultation.new)
+    @wedding_planning = Forms::WeddingPlanning.new(WeddingPlanning.new)
     if @wedding_planning.validate(params)
       @wedding_planning.save
       # WeddingConsultationMailer.email(@wedding_planning).deliver
