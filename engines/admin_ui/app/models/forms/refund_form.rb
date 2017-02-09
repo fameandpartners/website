@@ -3,7 +3,7 @@ require 'reform'
 module Forms
   class RefundForm < ::Reform::Form
     property :user
-    property :refund_method
+    property :refund_method, writeable: false
     property :refund_amount
     property :comment
     property :event_type, writeable: false
