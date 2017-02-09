@@ -29,7 +29,7 @@ module WeddingAtelier
       else
         if spree_user_signed_in? && @invitation.accept
           redirect_to wedding_atelier.event_path(@invitation.event)
-        elsif Spree::User.where(email: @invitation.user_email.downcase).first
+        elsif Spree::User.where("LOWER(email) = ?", @invitation.user_email.downcase).first
           @invitation.accept
           redirect_to wedding_atelier.sign_in_path({invitation_id: @invitation.id})
         else

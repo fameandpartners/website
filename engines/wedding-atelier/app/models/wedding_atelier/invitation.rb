@@ -9,7 +9,7 @@ module WeddingAtelier
     scope :pending, -> { where(state: 'pending') }
 
     def accept
-      user = Spree::User.where(email: user_email.downcase).first
+      user = Spree::User.where("LOWER(email) = ?", user_email.downcase).first
       if user
         event.assistants << user
         update_attribute(:state, 'accepted')
