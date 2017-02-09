@@ -39,11 +39,11 @@
 
 .shopping-bag-window {
   @include slide-in-up();
-
   background-color: $white-two;
   border-left: 1px solid $white;
   left: 0;
   height: 100%;
+  opacity: 0;
   position: fixed;
   top: 0;
   width: 100vw;
