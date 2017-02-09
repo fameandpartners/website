@@ -12,7 +12,9 @@
     "React": true,
     "ReactDOM": true,
     "Twilio": true,
-    "Promise": true
+    "Promise": true,
+    "WeddingAtelierHelper": true,
+    "moment": true
   },
   "parserOptions": {
     "ecmaVersion": 5,
