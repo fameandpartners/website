@@ -22,24 +22,24 @@ var ShoppingBagItem = React.createClass({
 
   prepareSummary: function () {
     var item = $.extend({}, this.props.item);
-    // TODO: Refactor image fetch since it's changing in other PR
     var images = new DressImageBuilder(item.personalization).dressCombos();
     var personalization = $.extend({}, this.props.item.personalization);
     personalization.silhouette = {presentation: item.product_name, price: 0};
     return $.extend(item, {
       personalization: personalization,
-      imageUrl: images.front.thumbnail.grey
+      imageUrl: images.front.thumbnail.grey,
+      price: item.personalization['silhouette'].price
     });
   },
 
   renderListOfCustomizations: function (item) {
-    return ['silhouette', 'fabric', 'color', 'length', 'style', 'fit', 'size'].map(function (propertyName, index) {
+    var renderRow = function(propertyName) {
       var label = propertyName.slice(0,1).toUpperCase() + propertyName.slice(1) + ': ';
-      var key = item.id + '-' + index;
       var personalization = item.personalization[propertyName];
-      var presentationLabel = '';
+      var presentationLabel = propertyName === 'silhouette'? 'The ' : '';
       if(personalization) {
-        presentationLabel = item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
+        var key = item.id + '-' + personalization.id;
+        presentationLabel += item.personalization[propertyName].presentation + (personalization.price > 0 ? ' - $' + personalization.price : '');
         return (
           <li key={key} className="shopping-bag-item-summary-list-item">
             <span className="customization-name">{label}</span>
@@ -47,7 +47,23 @@ var ShoppingBagItem = React.createClass({
           </li>
         );
       }
-    });
+    }
+
+    var render = ['silhouette', 'fabric', 'color', 'size', 'length'].map(renderRow);
+
+    if (item.personalization['style'] || item.personalization['fit']) {
+      var key = 'base-price-' + item.id;
+      var basePrice = (
+        <li key="base-price" className="shopping-bag-item-summary-list-item">
+          <span className="customization-name">Base Price: </span>
+          <span className="customization-value">${item.price}</span>
+        </li>
+      );
+      var withCost = ['style', 'fit'].map(renderRow);
+      render = render.concat(basePrice).concat(withCost);
+    }
+
+    return render;
   },
 
   render: function () {

@@ -246,6 +246,7 @@ var Chat = React.createClass({
                 <img className="stylist-photo" src="/assets/wedding-atelier/amber.png" />
                 <span className="walkthrough-messages" title="Invite a stylist to join" data-content="Here's how to request a stylist to help the entire bridal party decide on the dress. She'll even offer advice on styling, accessories, hair, makeup, and more." data-placement="bottom"> INVITE A STYLIST </span>
               </a>
+
             </div>
           </div>
         </div>

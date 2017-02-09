@@ -120,12 +120,18 @@
 
   .dress-preview-thumbnails {
     list-style: none;
-    max-width: 45px;
+    max-width: 60px;
     padding-left: 0;
     margin-right: 45px;
     @include screen-xs {
       max-width: 100%;
       width: 100%;
+    }
+
+    .base-silhouette {
+      font-family: $primary-font;
+      font-size: 11px;
+      font-style: italic;
     }
   }
 

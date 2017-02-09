@@ -1,8 +1,8 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/jan-31-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-1-mob.jpg"
+- current_tile_image = "homepage/hero-featured/feb-09-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-1-mob.jpg"
 = link_to '/wedding-atelier', class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Wedding Atelier App Beta" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
@@ -13,21 +13,19 @@
 
   .content-wrap
     .container-fluid
-      .row
-        .col-md-6.col-md-offset-6.col-lg-6
-          .copy-wrap.text-center
+      .row.v-align-top.extra-padding-top
+        .col-md-6.col-md-offset-1.col-lg-6
+          .copy-wrap
             h2.heading.no-margin-md
-              span The Wedding <br class="visible-lg"> Atelier App Beta.
+              span The Modern <br>Evening Collection.
               span.sub-heading
-                .text-uppercase.visible-xs.visible-sm The Wedding Atelier App Beta.
-                | Custom, convenient, *actually* cool <br class="visible-lg"> bridesmaids dresses, customizable in <br class="visible-lg"> over 40,000 ways.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Enter <span class="copy-highlight">THE APP</span>
+                | Less "high society," more high fashion.
+              span.sub-heading
+                | <span class="link-underline-lighter"><em>Shop</em></span> custom gowns.
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/jan-31-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-2-mob.jpg"
+- current_tile_image = "homepage/hero-featured/feb-09-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-2-mob.jpg"
 = link_to bespoke_bridal_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
@@ -39,20 +37,20 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-md-offset-1
+        .col-md-5.col-md-offset-1.col-lg-4
           .copy-wrap
             h2.heading.no-margin-md
-              span <em>Introducing</em> the <br class="visible-lg">Bespoke Bridal collection.
+              span Say goodbye <br>to off-the-rack.
               span.sub-heading
-                | Made for the modern bride: elevated,<br class="visible-lg"> elegant, and just a touch irreverent.
+                | And hello to the Bespoke Bridal Collection.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Find <span class="copy-highlight">The One</span>
+                | Create <span class="copy-highlight">Your Look</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/jan-31-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/jan-31-featured-3-mob.jpg"
-= link_to pre_season_evening_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Inside Out Collection" }
+- current_tile_image = "homepage/hero-featured/feb-09-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-3-mob.jpg"
+= link_to best_of_fame_collection_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Best of Fame" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -63,13 +61,12 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-md-offset-1
+        .col-md-5.col-md-offset-1.col-lg-4
           .copy-wrap
             h2.heading.no-margin-md
-              span Pro-fashion.<br> Anti-waste.
+              span Your favorite <br>Fame styles…
               span.sub-heading
-                .text-uppercase.visible-xs.visible-sm Pro-fashion. Anti-waste.
-                | Custom clothing, made-to-order. <br class="visible-lg">No mass production. Less waste.
+                | …made-to-order, just for you, in 5 days or less
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Custom</span>
+                | Get it <span class="copy-highlight">Express</span>

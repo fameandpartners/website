@@ -247,7 +247,7 @@ var MoodBoardEvent = React.createClass({
   loadChannelHistory: function() {
     this.state.chatChannel.getMessages(20).then(function(messages) {
       var _messages = messages.map(function(message) {
-        return JSON.parse(message.body)
+        return JSON.parse(message.body);
       });
 
       var _chat = $.extend({}, this.state.chat);
@@ -266,7 +266,7 @@ var MoodBoardEvent = React.createClass({
       };
 
       var _newState = $.extend({}, this.state);
-      _newState.channelMembers.push(_newUser);
+      _newState.channelMembers.push(newMember);
       this.setState(_newState);
     } else {
       // TODO: handle remove
@@ -401,7 +401,12 @@ var MoodBoardEvent = React.createClass({
         var event = this.state.event;
         event.assistants.splice(index, 1);
         this.setState({event: event});
-      }.bind(this)
+      }.bind(this),
+      error: function(_data) {
+        var errors = JSON.parse(_data.responseText).errors;
+        ReactDOM.render(<Notification errors={[errors[0]]} />,
+                    $('#notification')[0]);
+      }
     });
   },
 
@@ -429,22 +434,17 @@ var MoodBoardEvent = React.createClass({
   setDefaultTabWhenResize: function(){
     $(window).resize(function(e) {
       if (e.target.innerWidth >= 768 ) {
-        var activeMobileChat = $(this.refs.ChatComp).hasClass('active'),
-            mobileSizeModal = $(this.refs.mobileSizeModal.refs.modal),
-            activeMobileSizeModal = mobileSizeModal.is(':visible');
+        var activeMobileChat = $(this.refs.ChatComp).hasClass('active');
         if(activeMobileChat){
           $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
-        }
-        if(activeMobileSizeModal){
-          mobileSizeModal.hide();
         }
       }
     }.bind(this));
   },
 
-  changeDressToAddToCartCallback: function(dressId){
+  changeDressToAddToCartCallback: function(dress){
     var _state = $.extend({}, this.state);
-    _state.dressToAddToCart = dressId;
+    _state.dressToAddToCart = dress;
     this.setState(_state);
   },
 
@@ -486,24 +486,20 @@ var MoodBoardEvent = React.createClass({
     var addNewDressSmallButton = '';
 
     if (this.state.event.dresses && this.state.event.dresses.length === 0) {
-      addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>
+      addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
     } else if (this.state.event.dresses && this.state.event.dresses.length > 0 ) {
       addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
     }
 
     return (
       <div id="events__moodboard" className="row">
+        <SelectSizeModal {...selectSizeProps}/>
         <SizeGuideModal />
-        <div className="mobile-select-size-modal">
-          <SelectSizeModal {...selectSizeProps} ref="mobileSizeModal" position="center" />
-        </div>
         <div className="left-content col-sm-5 hidden-xs">
-          <SelectSizeModal {...selectSizeProps} position="left" />
           <Chat ref="ChatComp" {...chatProps}/>
         </div>
         <div className="right-content col-sm-7">
           <div className="right-container center-block">
-            <SelectSizeModal {...selectSizeProps} position="right" />
             <h1 className="moodboard-title text-center">
                The Countdown: {this.state.event.remaining_days} days
             </h1>

@@ -238,7 +238,7 @@ FameAndPartners::Application.routes.draw do
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
     # Wedding Atelier App - Landing page
-    get '/wedding-atelier' => 'products/collections#show', :permalink => 'wedding-atelier-app', :as => :wedding_atelier_app_landing_page
+    get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 

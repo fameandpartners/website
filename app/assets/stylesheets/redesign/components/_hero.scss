@@ -37,6 +37,15 @@
   }
 
   // START - desktop
+  @media (min-width: $bootstrap-lg-width) {
+
+    // NOTE: this is just a workaround for a Design request.
+    .extra-padding-top {
+      padding-top: 50px;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     h1 > span:first-child {
@@ -71,6 +80,10 @@
           > .row {
             display: table-cell;
             vertical-align: middle;
+          }
+
+          > .row.v-align-top {
+            vertical-align: top;
           }
 
         }

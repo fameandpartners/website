@@ -2,10 +2,9 @@ var SelectSizeModal = React.createClass({
   propTypes: {
     current_user_id: React.PropTypes.number,
     dress: React.PropTypes.object,
-    dressToAddToCart: React.PropTypes.number,
-    eventSlug: React.PropTypes.number,
+    dressToAddToCart: React.PropTypes.object,
+    eventId: React.PropTypes.number,
     heights: React.PropTypes.array,
-    position: React.PropTypes.string,
     profiles: React.PropTypes.array,
     siteVersion: React.PropTypes.string,
     sizes: React.PropTypes.array,
@@ -39,22 +38,18 @@ var SelectSizeModal = React.createClass({
     } else {
       _newState.selectedProfiles.push(profile.id);
     }
-    _newState.selectedSize = null,
-    _newState.selectedHeight = null,
     this.setState(_newState);
   },
 
   sizeSelectedHandle: function(size){
     var _newState = $.extend({}, this.state);
     _newState.selectedSize = size.id;
-    _newState.selectedProfiles = [];
     this.setState(_newState);
   },
 
   heightSelectedHandle: function(height){
     var _newState = $.extend({}, this.state);
     _newState.selectedHeight = this.getHeightGroup(height);
-    _newState.selectedProfiles = [];
     this.setState(_newState);
   },
 
@@ -76,25 +71,35 @@ var SelectSizeModal = React.createClass({
     this.setState(_newState);
   },
 
-  cancel: function(){
-    $(this.refs.modal).hide();
+  cancel: function(e){
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    if($(e.target).hasClass('cancelable')){
+      $(this.refs.modal).hide();  
+    }
   },
 
   addToCartAttrs: function () {
+    var disabled = true;
+    if(this.state.useProfiles){
+      disabled = this.state.selectedProfiles.length === 0
+    }else{
+      disabled = this.state.selectedSize === null || this.state.selectedHeight === null
+    }
     return {
       className: 'btn btn-black',
       onClick: this.handleAddToCart,
-      disabled: !(this.state.selectedProfiles.length > 0 || this.state.selectedSize !== null && this.state.selectedHeight !== null)
+      disabled: disabled
     };
   },
 
   handleAddToCart: function(profile) {
     var that = this;
     var attrs = {
-      dress_id: this.props.dressToAddToCart,
+      dress_id: this.props.dressToAddToCart.id,
       profiles: []
     };
-    if(this.state.selectedProfiles.length) {
+    if(this.state.useProfiles && this.state.selectedProfiles.length) {
       attrs.profiles = this.state.selectedProfiles.map(function(id) {
         return {id: id};
       });
@@ -120,7 +125,7 @@ var SelectSizeModal = React.createClass({
   renderProfiles: function(){
     var that = this;
     var profiles = this.props.profiles.map(function(profile, index) {
-      var name = 'cart-' + that.props.position +  '-profile-';
+      var name = 'cart-profile';
       var id = name + index;
       var inputProps = {
         id: id,
@@ -128,7 +133,7 @@ var SelectSizeModal = React.createClass({
         name: name,
         value: profile,
         onChange: that.profileSelectedHandle.bind(null, profile),
-        defaultChecked: that.props.current_user_id === profile.id
+        defaultChecked: that.state.selectedProfiles.indexOf(profile.id) > -1
       };
 
       return (
@@ -160,7 +165,7 @@ var SelectSizeModal = React.createClass({
         <a href="#" className="select-different-size" onClick={this.toggleSizes}> or select different size </a>
         <div className="actions row">
           <div className="col-xs-12 col-sm-6">
-            <button className="btn btn-gray" onClick={this.cancel}> Cancel </button>
+            <button className="btn btn-gray cancelable" onClick={this.cancel}> Cancel </button>
           </div>
           <div className="col-xs-12 col-sm-6">
             <button {...this.addToCartAttrs()}> Add to cart </button>
@@ -186,7 +191,7 @@ var SelectSizeModal = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var name = that.props.position + '-size-',
+      var name = 'cart-size',
           id = name + index,
           inputProps = {
             id: id,
@@ -232,7 +237,7 @@ var SelectSizeModal = React.createClass({
           </div>
           <div className="actions row">
             <div className="col-xs-12 col-sm-12 col-md-6">
-              <button className="btn btn-gray" onClick={this.toggleSizes}>Return to bridal party</button>
+              <a href="#" className="back-to-size" onClick={this.toggleSizes}>Back to size profiles</a>
             </div>
             <div className="col-xs-12 col-sm-12 col-md-6">
               <button {...this.addToCartAttrs()}>Add to cart</button>
@@ -243,17 +248,37 @@ var SelectSizeModal = React.createClass({
     );
   },
 
-  render: function(){
-    var moodboardUrl = '/wedding-atelier/events/' + this.props.eventSlug;
-    return(
-      <div className="js-select-size-modal select-size-modal" ref="modal">
-        <div className="body">
-          <div className="close">
-            <a className="btnClose icon-close-white"/>
+  renderPreview: function(){
+    var dress = this.props.dressToAddToCart;
+    if(dress){
+      return(
+        <div className="thumbnail-container">
+          <img src={dress.images.front.thumbnail.grey}/>
+          <div className="dress-info center-block">
+            <strong>The {dress.title}</strong>
+            <span>|</span>
+            <span>{dress.price}</span>
           </div>
+        </div>
+      )
+    }
+  },
+
+  render: function(){
+    var moodboardUrl = '/wedding-atelier/events/' + this.props.eventId;
+    return(
+      <div className="js-select-size-modal select-size-modal cancelable" ref="modal" onClick={this.cancel}>
+        <div className="body">
+          <a className="btnClose icon-close-white hidden-xs cancelable" onClick={this.cancel}/>
+          <a className="btnClose icon-close hidden-sm hidden-md hidden-lg cancelable" onClick={this.cancel}/>
           <div className="content-container">
-            {this.renderProfiles()}
-            {this.renderSizes()}
+            <div className="col-sm-6 dress-preview text-center hidden-xs">
+              {this.renderPreview()}
+            </div>
+            <div className="col-sm-6 size-options">
+              {this.renderProfiles()}
+              {this.renderSizes()}
+            </div>
           </div>
         </div>
       </div>

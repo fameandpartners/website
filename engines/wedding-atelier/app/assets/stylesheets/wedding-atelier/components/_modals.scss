@@ -71,6 +71,14 @@
         font-weight: 400;
       }
 
+      .save-dress-button {
+        @include screen-sm {
+          margin-left: 25px;
+          float: none;
+          width: auto;
+        };
+      }
+
       button + button, a + a {
         margin-left: 20px;
       }
