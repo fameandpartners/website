@@ -13,12 +13,12 @@ var CustomizationsContainerMobile = React.createClass({
 
   getInitialState: function () {
     return {
-      silhouette: null,
-      fabric: null,
       color: null,
+      fabric: null,
+      fit: null,
       length: null,
-      style: null,
-      fit: null
+      silhouette: null,
+      style: null
     };
   },
 

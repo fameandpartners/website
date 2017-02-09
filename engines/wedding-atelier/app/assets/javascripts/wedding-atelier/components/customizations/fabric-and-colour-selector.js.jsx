@@ -28,8 +28,6 @@ var FabricAndColorSelector = React.createClass({
     }
   },
 
-
-
   fabricSelectedHandle: function(fabric) {
     var newState = $.extend({}, this.state);
     newState.selectedFabric = fabric;
