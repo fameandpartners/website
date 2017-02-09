@@ -18,19 +18,9 @@ var ChatImageMessage = React.createClass({
     this.setState({src: src});
   },
 
-  formatDate: function(time) {
-    var m = moment(new Date(time)),
-      fromNow = m.fromNow(),
-      o = fromNow + ', ' + m.format('hh:mm a');
-
-    return o;
-  },
-
-  getTime: function() {
-    return this.props.message.time ? this.formatDate(this.props.message.time) : '';
-  },
-
   getMessageData: function() {
+    var formattedDate = WeddingAtelierHelper.chatTimestamp(this.props.message.time);
+
     return (
       <div className="msg-data">
         <div className="profile">
@@ -39,8 +29,8 @@ var ChatImageMessage = React.createClass({
               <img className="photo" src={this.props.message.profilePhoto} />
               <span className="name">{this.props.message.author}</span>
             </div>
-            <div className="col-xs-6">
-              <span className="created pull-right">{this.getTime()}</span>
+            <div className="col-xs-6 text-right">
+              <span className="created">{formattedDate}</span>
             </div>
           </div>
         </div>
