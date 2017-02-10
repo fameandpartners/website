@@ -108,6 +108,7 @@ Spree::CheckoutController.class_eval do
         flash[:commerce_tracking] = 'nothing special'
 
         session[:successfully_ordered] = true
+        flash[:trigger_my_things_end_of_transaction] = true
 
         # clear masterpass data
         if !session[:masterpass_data].blank?
