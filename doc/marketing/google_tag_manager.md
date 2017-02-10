@@ -35,14 +35,73 @@ Keep in mind: the `dataLayer` object is loaded on page load time and variables a
 
 If you want to trigger several tags on page load time, you should render the `dataLayer` populated with the desired JSON from the server side.
 
-### Fame's dataLayer
+## Fame's dataLayer
 
 Fame & Partners has a rich `dataLayer` setup, populating GTM with page, product and order information.
 
-`Marketing::Gtm::Presenter`
- 
- module Marketing::Gtm::Presenter::Container
-   module Gtm
-     module Presenter
-       class Container
+> If you wish to have a deeper background on how the `dataLayer` idea was developed,
+> its initial setup and configuration started on [PR #694](https://github.com/fameandpartners/website/pull/694)
 
+Fame's `dataLayer` consists on a "container", where it can be appended any "contained GTM presenter", safely rendering them as JSON.
+More information about the GTM container, refer to the `Marketing::Gtm::Presenter::Container` and `Marketing::Gtm::Controller::Container` objects.
+
+The container allows any template rendering a JSON with ease (e.g.: `dataLayer.push(<%= @gtm_container.to_json %>);`).
+It is safe to assume the container will never raise errors, since it always rescues exceptions into its container, making it possible to be present
+on all website pages without raising 500 errors.
+
+## The GTM Container Presenter 
+ 
+A GTM container acts as an array, making it possible having multiple presenters configured at its initialization or appended afterwards
+ 
+- Initialization
+
+```ruby
+Marketing::Gtm::Presenter::Container.new(presenters: [user_presenter, device_presenter])
+```
+
+- Appending
+
+```ruby
+@gtm_container = Marketing::Gtm::Presenter::Container.new
+@gtm_container.append(user_presenter)
+@gtm_container.append(device_presenter)
+```
+
+## Creating a GTM Presenter
+
+As a base premise, a GTM presenter object will need to:
+
+- Inherit from `Marketing::Gtm::Presenter::Base`
+- Implement the `#key` and `#body` instance methods
+    - `#key` method: it will render the JSON object key
+    - `#body` method: will render the JSON object body
+    
+Example:
+
+```ruby
+module Marketing
+  module Gtm
+    module Presenter
+      class Foo < Base
+        def key
+          'foo'
+        end
+
+        def body
+          'bar'
+        end
+      end
+    end
+  end
+end
+```
+
+When appended to (or initialized with) the GTM container instance, the `gtm_container.to_json` method will produce the following HTML safe output:
+
+```json
+  {"foo": "bar"}
+```
+
+## Special Case: GTM Page Presenter
+
+TODO
