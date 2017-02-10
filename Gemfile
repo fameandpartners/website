@@ -53,7 +53,8 @@ gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'react-rails', '~> 1.6'
-gem 'asset_sync', '~> 1.1.0'
+gem 'asset_sync', '~> 2.0'
+gem 'fog-aws', '~> 1.2.0'
 
 # Data
 gem 'event_sourced_record'
@@ -70,7 +71,7 @@ gem 'koala'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
-gem 'fog'
+gem 'fog', '~> 1.38.0'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
