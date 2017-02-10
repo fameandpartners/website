@@ -6,9 +6,9 @@ class CreateModernEveningCollectionPage < ActiveRecord::Migration
       template_path:    '/landing_pages/modern_evening_collection',
       pids:             '',
       heading:          'The Modern Evening Collection',
-      title:            'Evening Party Dresses',
+      title:            'The Modern Evening Collection',
       limit:            '99',
-      meta_description: 'Evening gowns and party dresses for dances, formals, galas, and proms. All completely customizable and ethically made-to-order.',
+      meta_description: 'Evening gowns, slip dresses, and fashion-forward formal wear; all customizable and ethically made-to-order.',
     }
   end
 
