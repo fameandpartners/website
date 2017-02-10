@@ -51,7 +51,7 @@ on all website pages without raising 500 errors.
 
 ## The GTM Container Presenter 
  
-A GTM container acts as an array, making it possible having multiple presenters configured at its initialization or appended afterwards
+A GTM container acts as an array, making it possible having multiple presenters configured at its initialization or appended afterwards.
  
 - Initialization
 
@@ -102,6 +102,10 @@ When appended to (or initialized with) the GTM container instance, the `gtm_cont
   {"foo": "bar"}
 ```
 
-## Special Case: GTM Page Presenter
+## GTM Presenters at the view
 
-TODO
+GTM Presenters are rendered at the view through controller concerns and a `ApplicationController` instance variable called `@gtm_container`
+(More information at the `Marketing::Gtm::Controller::Container` concern and its inclusion at the `ApplicationController`).
+
+After the GTM container is made available to the view and its presenters properly initialized/appended, you are free to render
+its JSON format (`@gtm_container.to_json`) at the view. In this project, this is being rendered at the `views/google_tag_manager/_base.html.erb` partial.
