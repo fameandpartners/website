@@ -140,8 +140,9 @@ var MoodBoardEvent = React.createClass({
         that.setState({chatChannel: chatChannel});
         chatChannel.join().then(function() {
           that.setUpMessagingEvents();
-          that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.");
-          that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
+          that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function(){
+            that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
+          });
         });
       });
     }
@@ -479,7 +480,7 @@ var MoodBoardEvent = React.createClass({
       updateUserCartCallback: this.updateUserCartCallback
     };
 
-    var addNewDressBigButton = '', 
+    var addNewDressBigButton = '',
         addNewDressSmallButton = '',
         chatCounter;
 
