@@ -29,6 +29,10 @@ class Spree::Gateway::Pin < Spree::Gateway
     provider.refund(nil, response_code)
   end
 
+  def refund(amount, payment_code, gateway_options = {})
+    provider.refund(amount, payment_code, gateway_options)
+  end
+
   def provider_class
     ActiveMerchant::Billing::PinGateway
   end
