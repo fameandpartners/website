@@ -168,7 +168,8 @@ h1 .sub-heading {
   font-style: normal;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
 }
 
 .cta-link + .copy-highlight,
@@ -217,4 +218,13 @@ h1 .sub-heading {
 
   }
 
+}
+
+// Another variant for a thin line to split content, like in the "Get The Look" page
+.spacerThinLine::before {
+  content: "";
+  margin: 30px 0;
+  border-top: 1px solid $c-neutral-black;
+  width: 12px;
+  display: block;
 }

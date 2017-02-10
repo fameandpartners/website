@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   include Concerns::UserCampaignable
   include Concerns::AutomaticDiscount
   include Concerns::Moodboards
+  include Concerns::Errors
 
   # Marketing related concerns
   include Marketing::Gtm::Controller::Container

@@ -187,6 +187,22 @@
 
 }
 
+.thin-line {
+
+  &--bottom::after {
+    content: "";
+    padding-bottom: 50px;
+    border-bottom: 1px solid $c-neutral-black;
+    width: 90px;
+    display: block;
+  }
+
+  &--alignCenter::after {
+    margin: 0 auto;
+  }
+
+}
+
 @media (min-width: $bootstrap-md-width) {
 
   .no-margin-md {
