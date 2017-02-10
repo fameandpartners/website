@@ -23,9 +23,12 @@ module WeddingAtelier
     def create
       authenticate_spree_user!
       if spree_user_signed_in?
-        user_email = params.dig(:spree_user, :email)
-        invitation = Invitation.where(id: params[:invitation_id], user_email: user_email).first
-        invitation.accept if invitation
+        if params[:invitation_id]
+          invitation = Invitation.find(params[:invitation_id])
+          if invitation.user_email == params[:spree_user][:email]
+            invitation.accept
+          end
+        end
         redirect_to wedding_atelier.events_path
       else
         flash.now[:error] = t('devise.failure.invalid')
