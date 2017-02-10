@@ -2,6 +2,7 @@ table.table
   thead : tr
     th Action
     th SKU
+    th UPC
     th Style Name
     th Order Size
     th Colour
@@ -18,6 +19,7 @@ table.table
               i class=action_icon_class(item.action)
               = item.action
           td = line_item.style_number
+          td = line_item.global_sku.upc
           td = line_item.style_name
           td = line_item.country_size
           td = line_item.colour_name

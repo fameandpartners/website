@@ -32,23 +32,11 @@ var ChatDressMessage = React.createClass({
   },
 
   getInitialState: function(){
-    return {loveClass: 'icon-unliked'}
+    return {loveClass: 'icon-unliked'};
   },
 
   handleLoveIt: function() {
     this.props.handleLikeDress(this.props.message.content);
-  },
-
-  formatDate: function(time) {
-    var m = moment(new Date(time)),
-      fromNow = m.fromNow(),
-      o = fromNow + ', ' + m.format('hh:mm a');
-
-    return o;
-  },
-
-  getTime: function() {
-    return this.props.message.time ? this.formatDate(this.props.message.time) : '';
   },
 
   addToCart: function(){
@@ -57,7 +45,7 @@ var ChatDressMessage = React.createClass({
   },
 
   getMessageData: function() {
-    var formattedDate = this.getTime();
+    var formattedDate = WeddingAtelierHelper.chatTimestamp(this.props.message.time);
 
     return (
       <div className="msg-data">
@@ -69,8 +57,8 @@ var ChatDressMessage = React.createClass({
                 <span className="name">{this.props.message.author}</span>
               </div>
             </div>
-            <div className="col-xs-6">
-              <span className="created text-right">{formattedDate}</span>
+            <div className="col-xs-6 text-right">
+              <span className="created">{formattedDate}</span>
             </div>
           </div>
         </div>

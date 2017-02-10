@@ -31,7 +31,8 @@ var MoodBoardEvent = React.createClass({
       chat: {
         members: [],
         messages: [],
-        typing: []
+        typing: [],
+        unreadCount: 0
       },
       event: {
         dresses: [],
@@ -84,72 +85,67 @@ var MoodBoardEvent = React.createClass({
   },
 
   loadChatToken: function() {
-    that = this;
+    var that = this;
     $.post(this.props.twilio_token_path + '.json', function(response){
       var token = response.token,
-          twilioManager = new Twilio.AccessManager(token);
+          twilioClient = new Twilio.Chat.Client(token);
       var _state = $.extend({}, that.state);
-      _state.twilioManager = twilioManager;
-      _state.twilioClient = new Twilio.IPMessaging.Client(twilioManager);
+      _state.twilioClient = twilioClient;
       that.setState(_state);
-      that.setupChatChannels();
+      twilioClient.initialize().then(function(){
+        _state.twilioClient.getUserChannels().then(that.setupChatChannels);
+      });
     }).fail(function(e) {
       ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
           document.getElementById('notification'));
     });
   },
 
-  setupChatChannels: function(){
+  setupChatChannels: function(channels){
     var _state = $.extend({}, this.state);
     var that = this;
-    var channelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
+    var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
     var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
+    var chatChannel = _.findWhere(channels.items, { uniqueName: chatChannelName });
+    var channelNotifications = _.findWhere(channels.items, { uniqueName: notificationsChannelName });
 
     // notifications channel
-    _state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(channelNotifications) {
-      if (channelNotifications) {
-        that.setState({channelNotifications: channelNotifications});
-        that.setupNotificationsChannel();
-      } else {
-        _state.twilioClient.createChannel({
-          uniqueName: notificationsChannelName,
-          friendlyName: 'Notifications for: ' + that.props.wedding_name
-        }).then(function(channelNotifications) {
-            that.setState({channelNotifications: channelNotifications});
-            that.setupNotificationsChannel();
-        });
-      }
-    });
+    if (channelNotifications) {
+      that.setState({channelNotifications: channelNotifications});
+      that.setupNotificationsChannel();
+    } else {
+      _state.twilioClient.createChannel({
+        uniqueName: notificationsChannelName,
+        friendlyName: 'Notifications for: ' + that.props.wedding_name
+      }).then(function(channelNotifications) {
+          that.setState({channelNotifications: channelNotifications});
+          that.setupNotificationsChannel();
+      });
+    }
 
     // normal messaging client
-    _state.twilioClient.getChannelByUniqueName(channelName).then(function(chatChannel) {
-      if (chatChannel) {
+    if (chatChannel) {
+      that.setState({chatChannel: chatChannel});
+      chatChannel.join().then(function() {
+        console.log('Joined channel as ' + that.props.username);
+        that.setUpMessagingEvents();
+        that.loadChannelHistory();
+        that.loadChannelMembers();
+      });
+    } else {
+      _state.twilioClient.createChannel({
+        uniqueName: chatChannelName,
+        friendlyName: that.props.wedding_name
+      }).then(function(chatChannel) {
         that.setState({chatChannel: chatChannel});
         chatChannel.join().then(function() {
-          console.log('Joined channel as ' + that.props.username);
           that.setUpMessagingEvents();
-          that.loadChannelHistory();
-          that.loadChannelMembers();
-        });
-      } else {
-        _state.twilioClient.createChannel({
-          uniqueName: channelName,
-          friendlyName: that.props.wedding_name
-        }).then(function(chatChannel) {
-          that.setState({chatChannel: chatChannel});
-          chatChannel.join().then(function() {
-            that.setUpMessagingEvents();
-            //It needs a bit time to setup event listeners properly
-            setTimeout(function() {
-              // TODO: After refactor remove this setTimeout...
-              that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function() {
-                return that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
-              });
-            }, 3000);
+          that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function(){
+            that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
           });
         });
-      }
-    });
+      });
+    }
   },
 
   startTyping: function() {
@@ -158,7 +154,7 @@ var MoodBoardEvent = React.createClass({
 
   setTypingIndicator: function(member, typing){
     var _whoIsTyping = [...this.state.chat.typing];
-    var _isAlreadyTyping = whoIsTyping.indexOf(member.identity) > -1;
+    var _isAlreadyTyping = _whoIsTyping.indexOf(member.identity) > -1;
 
     if (typing && !_isAlreadyTyping) {
       _whoIsTyping.push(member.identity);
@@ -246,7 +242,7 @@ var MoodBoardEvent = React.createClass({
 
   loadChannelHistory: function() {
     this.state.chatChannel.getMessages(20).then(function(messages) {
-      var _messages = messages.map(function(message) {
+      var _messages = messages.items.map(function(message) {
         return JSON.parse(message.body);
       });
 
@@ -284,6 +280,9 @@ var MoodBoardEvent = React.createClass({
 
       var _chat = $.extend({}, that.state.chat);
       _chat.messages = _messages;
+      if(!$('.tab-chat').hasClass('active')) {
+        _chat.unreadCount++;
+      }
       that.setState({chat: _chat});
     });
 
@@ -361,35 +360,28 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  handleEventDetailUpdate: function(data){
-    $.ajax({
-      url: this.props.event_path,
-      type: 'PUT',
-      dataType: 'json',
-      data: data,
-
-      success: function(collection) {
-        this.setState({event: collection.moodboard_event});
-        var event = $.extend(event, this.state.event);
-        event.hasError = {};
-        this.setState({event: event});
-        this.setState({event_backup: event});
-      }.bind(this),
-
-      error: function(data) {
-        var parsed = JSON.parse(data.responseText);
-        var newEventState = $.extend(event, this.state.event_backup);
-        var hasError = {};
-
-        for(var key in parsed.errors) {
-          hasError[key] = true;
-          newEventState[key] = this.state.event_backup[key];
-        }
-
-        newEventState.hasError = hasError;
-        this.setState({event: event});
-      }.bind(this)
+  eventDetailsUpdated: function (collection) {
+    this.setState({event: collection.moodboard_event});
+    var event = $.extend(event, this.state.event);
+    event.hasError = {};
+    this.setState({
+      event: event,
+      event_backup: event
     });
+  },
+
+  eventDetailsUpdateFailed: function (data) {
+    var parsed = JSON.parse(data.responseText);
+    var newEventState = $.extend(event, this.state.event_backup);
+    var hasError = {};
+
+    for(var key in parsed.errors) {
+      hasError[key] = true;
+      newEventState[key] = this.state.event_backup[key];
+    }
+
+    newEventState.hasError = hasError;
+    this.setState({event: event});
   },
 
   handleRemoveAssistant: function(id, index){
@@ -454,6 +446,12 @@ var MoodBoardEvent = React.createClass({
     this.setState(_state);
   },
 
+  resetUnreadCount: function(){
+    var _chat = $.extend({}, this.state.chat);
+    _chat.unreadCount = 0;
+    this.setState({chat: _chat});
+  },
+
   render: function () {
     var chatProps = {
       bot_profile_photo: this.props.bot_profile_photo,
@@ -482,13 +480,18 @@ var MoodBoardEvent = React.createClass({
       updateUserCartCallback: this.updateUserCartCallback
     };
 
-    var addNewDressBigButton = '';
-    var addNewDressSmallButton = '';
+    var addNewDressBigButton = '',
+        addNewDressSmallButton = '',
+        chatCounter;
 
     if (this.state.event.dresses && this.state.event.dresses.length === 0) {
       addNewDressBigButton = <div className="add-dress-box"><a href={this.props.event_path + '/dresses/new'} className="add">Design a new dress</a></div>;
     } else if (this.state.event.dresses && this.state.event.dresses.length > 0 ) {
       addNewDressSmallButton = <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress"><em>Design</em> a new dress</a></div>;
+    }
+
+    if(this.state.chat.unreadCount > 0){
+      chatCounter = <span className="badge">{this.state.chat.unreadCount}</span>;
     }
 
     return (
@@ -507,9 +510,10 @@ var MoodBoardEvent = React.createClass({
             <div className="moodboard-tabs center-block">
               <div className="tabs-container">
                 <ul className="nav nav-tabs center-block" role="tablist">
-                  <li role="presentation" className="tab-chat hidden">
+                  <li role="presentation" className="tab-chat hidden" onClick={this.resetUnreadCount}>
                     <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
-                      Chat</a>
+                      Chat{chatCounter}
+                    </a>
                   </li>
                   <li
                     className="active walkthrough-messages"
@@ -563,10 +567,12 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
                   <EventDetails event={this.state.event}
-                                updater={this.handleEventDetailUpdate}
-                                roles_path={this.props.roles_path}
                                 current_user={this.props.current_user.user}
-                                hasError={this.state.event.hasError} />
+                                eventDetailsUpdated={this.eventDetailsUpdated}
+                                eventDetailsUpdateFailed={this.eventDetailsUpdateFailed}
+                                eventDetailsUpdatePath={this.props.event_path}
+                                hasError={this.state.event.hasError}
+                                roles_path={this.props.roles_path} />
                 </div>
                 <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
                   <h1 className="text-center">
