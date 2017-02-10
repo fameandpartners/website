@@ -24,6 +24,8 @@ var CustomizationsContainer = React.createClass({
       'animate': this.props.showContainers.showContainer
     });
 
+    var selectedOptions = $.extend({}, this.props.selectedOptions);
+
     return (
       <div ref="customizationsContainer" className={customizationsContainerClasses} onTransitionEnd={this.props.showLateralMenuCallback.bind(null, true)}>
         <div className="selector-header">
@@ -37,9 +39,9 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.silhouettes}
-            selectedOption={this.props.selectedOptions.silhouette}
+            selectedOption={selectedOptions.silhouette}
             currentCustomization={this.props.currentCustomization}
-            selectedOptions={this.props.selectedOptions}
+            selectedOptions={selectedOptions}
             keyword="Choose"
             title="your perfect shape."
             description="The silhouette is the foundation of your dress."
@@ -48,7 +50,7 @@ var CustomizationsContainer = React.createClass({
             colors={this.props.customizations.colors}
             fabrics={this.props.customizations.fabrics}
             selectCallback={this.props.selectCallback}
-            selectedOptions={this.props.selectedOptions}
+            selectedOptions={selectedOptions}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             currentCustomization={this.props.currentCustomization}
             showContainers={this.props.showContainers}/>
@@ -57,9 +59,9 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.lengths}
-            selectedOption={this.props.selectedOptions.length}
+            selectedOption={selectedOptions.length}
             currentCustomization={this.props.currentCustomization}
-            selectedOptions={this.props.selectedOptions}
+            selectedOptions={selectedOptions}
             keyword="Choose"
             title="your length."
             description="One skirt does not fit all. Find the length that suits you best."
@@ -69,9 +71,9 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.styles}
-            selectedOption={this.props.selectedOptions.style}
+            selectedOption={selectedOptions.style}
             currentCustomization={this.props.currentCustomization}
-            selectedOptions={this.props.selectedOptions}
+            selectedOptions={selectedOptions}
             keyword="Design"
             title="the details."
             description="Close your eyes and picture your dream dress. Now, create it."
@@ -81,7 +83,7 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.fits}
-            selectedOption={this.props.selectedOptions.fit}
+            selectedOption={selectedOptions.fit}
             currentCustomization={this.props.currentCustomization}
             selectedOptions={this.props.selectedOptions}
             keyword="Finesse"
