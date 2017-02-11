@@ -96,6 +96,9 @@ FameAndPartners::Application.routes.draw do
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
+    # The Evening Shop landing page
+    get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
+
     ###########
     # Lookbooks
     ###########
