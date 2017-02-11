@@ -1,0 +1,259 @@
+= render partial: 'pages/robots'
+
+.page-evening-shop.mobile-text-center
+
+  .container
+    // Intro copy
+    .row
+      .intro.text-center
+        .col-xs-12
+          h1.intro__title The Evening Shop.
+
+          // Vertical text tag
+          .tag-info-section
+            .tag-info-wrapper.visible-lg-block
+              .tag-info
+                .section-name.vertical-text.text-uppercase Boutiques
+                .diagonal-line
+
+          .row
+            .col-xs-10.col-xs-offset-1.col-md-8.col-md-offset-2
+              p.intro__copy No one has ever worn an evening gown with the hope of blending in. Evening is a time to go all-out, an excuse to create drama (the stylish kind, of course). This is your chance to custom-create an evening look that’s yours–and yours alone.
+
+    // Section tag
+    .row
+      .col-xs-12.heading-overlay-wrapper
+        .heading-overlay.heading-no-overlay Explore The Boutique
+
+    //Side-by-Side content
+    .same-height-cols
+      .row
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-01.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-01-mob.jpg")
+          - current_item_link = dresses_path + "/ball-gowns"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>NEW</em> <br class="visible-lg visible-md">Ball Gown
+              .col-md-6
+                .item-content-box__copy
+                  p.summary The new ball gown is less “high society” <br class="visible-xs">and more high fashion.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Gowns
+                      i.icon.icon-arrow-right
+
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-02.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-02-mob.jpg")
+          // TODO: add real link here
+          - current_item_link = "javascript:;"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Show-<br class="visible-lg visible-md">Off</em>
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Accentuating your form is a form of art. <br class="visible-xs">Here are the tools.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Fitted
+                      i.icon.icon-arrow-right
+
+    //Side-by-Side content
+    .same-height-cols
+      .row
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-03.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-03-mob.jpg")
+          - current_item_link = dresses_path + "/slip-dress"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Simple</em> <br class="visible-lg visible-md">Slip
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Give traditional evening gowns the slip. <br class="visible-xs">Minimalists, click here.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Slips
+                      i.icon.icon-arrow-right
+
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-04.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-04-mob.jpg")
+          - current_item_link = dresses_path + "/lace"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Lace</em> <br class="visible-lg visible-md">Look
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Lace is a (mysterious, sexy) look that never gets old.
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Lace
+                      i.icon.icon-arrow-right
+
+    //Side-by-Side content
+    .same-height-cols
+      .row
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-05.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-05-mob.jpg")
+          - current_item_link = dresses_path + "/wrap"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Ultra-</em> <br class="visible-lg visible-md">Flattering
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Wrap dresses and draped details that <br class="visible-xs">hug & hold every curve.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Wraps
+                      i.icon.icon-arrow-right
+
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-06.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-06-mob.jpg")
+          - current_item_link = dresses_path + "/off-shoulder"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Cold</em><br class="visible-lg visible-md"> Shoulder
+              .col-md-6
+                .item-content-box__copy
+                  p.summary You know a woman’s shoulders are her sexiest feature, right?
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Cold Shoulder
+                      i.icon.icon-arrow-right
+
+    //Side-by-Side content
+    .same-height-cols
+      .row
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-07.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-07-mob.jpg")
+          - current_item_link = dresses_path + "/embellishment"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Something</em> <br class="visible-lg visible-md">Extra
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Embroidery, prints, sequins, ruffles...sometimes you need a little something special.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Embellished
+                      i.icon.icon-arrow-right
+
+        .col-md-6
+          - current_item_image = image_path("landingpages/evening-shop/dress-08.jpg")
+          - current_item_mob_image = image_path("landingpages/evening-shop/dress-08-mob.jpg")
+          - current_item_link = dresses_path + "/backless"
+
+          .item-content-box.item-content-box--bottom-border
+            = link_to current_item_link
+              img src="#{image_path(current_item_image)}" srcset="
+                #{image_path(current_item_mob_image)} 991w,
+                #{image_path(current_item_image)} 992w"
+
+            .row
+              .col-md-6
+                .item-content-box__title
+                  h3 The <em>Barely</em><br class="visible-lg visible-md"> There
+              .col-md-6
+                .item-content-box__copy
+                  p.summary Plunging in the front or open in the back? <br class="visible-xs">Take your pick.
+
+                  = link_to current_item_link
+                    span.cta-link-arrow-right.link-underline
+                      span.copy-highlight Shop Plunging
+                      i.icon.icon-arrow-right
+
+    //Full-width content
+    .row
+      .col-xs-12
+        - current_item_image = image_path("landingpages/evening-shop/dress-09.jpg")
+        - current_item_mob_image = image_path("landingpages/evening-shop/dress-09-mob.jpg")
+        // TODO: add real link here
+        - current_item_link = "javascript:;"
+
+        .item-content-box.item-content-box--bottom-border
+          = link_to current_item_link
+            img src="#{image_path(current_item_image)}" srcset="
+              #{image_path(current_item_mob_image)} 991w,
+              #{image_path(current_item_image)} 992w"
+
+          .row
+            .col-md-6.col-md-offset-6
+              .row
+                .col-md-6
+                  .item-content-box__title
+                    h3 The Style <br class="visible-lg visible-md"><em>Steal</em>
+                .col-md-6
+                  .item-content-box__copy
+                    p.summary Made-to-order and under $200. <br class="visible-xs">Because true style is priceless.
+
+                    = link_to current_item_link
+                      span.cta-link-arrow-right.link-underline
+                          span.copy-highlight Shop Under $200
+                          i.icon.icon-arrow-right
