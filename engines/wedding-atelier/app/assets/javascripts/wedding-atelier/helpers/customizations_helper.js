@@ -49,7 +49,7 @@ PresentationHelper.customization = function(customization){
   }
 };
 
-PresentationHelper.presentation = function(options, customizationItem, siteVersion){
+PresentationHelper.presentation = function(options, customizationItem, siteVersion) {
   var presentation = customizationItem === 'silhouette' && options[customizationItem] ? 'The ' : '';
   if(customizationItem === 'fabric-color') {
     return PresentationHelper.fabricColor(options.fabric, options.color);
