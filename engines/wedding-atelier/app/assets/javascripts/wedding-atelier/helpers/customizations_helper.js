@@ -62,7 +62,9 @@ PresentationHelper.presentation = function(options, customizationItem, siteVersi
   }
 };
 
-PresentationHelper.sizePresentation = function (size) {
-  var regexp = new RegExp('US(\\d+)', 'i');
-  return 'US ' + size.name.match(regexp)[1];
+PresentationHelper.sizePresentation = function (size, siteVersion) {
+  var upcasedSiteVersion = siteVersion.toUpperCase();
+  var regexp = new RegExp(upcasedSiteVersion + '(\\d+)', 'i');
+  var match = size.name.match(regexp);
+  return upcasedSiteVersion + ' ' + match[1];
 };
