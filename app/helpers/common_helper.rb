@@ -9,6 +9,10 @@ module CommonHelper
     @description
   end
 
+  def get_og_image
+    @og_image
+  end
+
   def get_hreflang(lang)
     site_version = SiteVersion.by_permalink_or_default(lang)
     detector.site_version_url(request.url, site_version)

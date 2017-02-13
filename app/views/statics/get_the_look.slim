@@ -1,4 +1,15 @@
+javascript:
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=270093683183864";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
 = render partial: 'pages/robots'
+ruby:
+  @og_image = asset_url "landingpages/bespoke-bridal-collection/dresses/dress-07.jpg"
 
 .get-the-look
 
@@ -61,7 +72,7 @@
                       img.img-responsive src=image_path("landingpages/bespoke-bridal-collection/dresses/dress-01.jpg")
 
                     .col-xs-10.col-xs-offset-1.col-md-offset-0.col-md-6.full-height
-                      h2.h1.no-margin Download <em>ready</em>
+                      h2.h1.no-margin-top Download <em>ready</em>
                       p You can download our themed lookbooks below:
                       ul.download-list
                         li
@@ -80,6 +91,9 @@
                           a target="_blank" href="https://d1msb7dh8kb0o9.cloudfront.net/pages/get-the-look/GetTheLook-FP-RebelliousWedding.pdf"
                             span.link-underline Download
                             span  The Rebellious Wedding Guide
+                            
+                      div.fb-share-button data-href="https://www.fameandpartners.com/get-the-look" data-layout="button" data-size="small" data-mobile-iframe="false">
+                        a.fb-xfbml-parse-ignore target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.fameandpartners.com%2Fget-the-look&amp;src=sdkpreparse" Share the wedding guides
 
   .container-fluid.containerHalfScreenHero.no-scroll
     .row
@@ -88,7 +102,7 @@
           .introWrapper.copyContent
             h1 Here comes <br class="hidden-lg">the <em>guide</em>.
             span.spacerThinLine
-            p Four wedding vibes, four <br class="visible-lg">comprehensive guides to finding the perfect dress, hair, makeup, accessories, floral arrangements, and more–for you and your bridesmaids. <br class="visible-xs">Consider these your bridal bibles.
+            p Four wedding vibes, four <br class="visible-lg">comprehensive guides to finding the perfect dress, hair, makeup, accessories, floral arrangements, and more–for you and your bridesmaids. <br class="visible-xs">Consider these your bridal&nbsp;bibles.
 
             .button-options-wrapper
               a.btn-xs.btnCtaBlackBgUppercase.btnGetTheGuide.js-get-guide-modal-trigger href="javascript:;"
@@ -264,6 +278,7 @@ javascript:
       $weddingPlanningForm.find('input[data-auto-focus]').focus();
     });
 
+    
     $weddingPlanningForm.find('.datepicker').datepicker();
     
     // FOCUS Event handler
