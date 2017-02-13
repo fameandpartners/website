@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20170217005814) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
+    t.string   "pov"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
