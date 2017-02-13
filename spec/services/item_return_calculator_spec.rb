@@ -1,10 +1,20 @@
 require 'spec_helper'
 
 RSpec.describe ItemReturnCalculator do
-  let(:line_item_id)   { rand 1_000_000 }
+  before(:each) do
+    @user  = FactoryGirl.create(:spree_user)
+    @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)
 
-  let(:creation_event) { ItemReturnEvent.creation.create!( line_item_id: line_item_id ) }
-  subject(:created_item_return) { ItemReturn.find_by_line_item_id line_item_id }
+    shipment = FactoryGirl.build(:simple_shipment, order: @order)
+    FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
+  end
+
+  let(:line_item) do
+    @order.line_items.first
+  end
+
+  let(:creation_event) { ItemReturnEvent.creation.create!( line_item_id: line_item.id ) }
+  subject(:created_item_return) { ItemReturn.find_by_line_item_id line_item.id }
 
   describe 'creation' do
     before do
@@ -12,7 +22,7 @@ RSpec.describe ItemReturnCalculator do
       described_class.new(created_item_return).run.save!
     end
 
-    it { expect(created_item_return.line_item_id).to eq line_item_id }
+    it { expect(created_item_return.line_item_id).to eq line_item.id }
     it { expect(created_item_return.comments).to eq "" }
   end
 

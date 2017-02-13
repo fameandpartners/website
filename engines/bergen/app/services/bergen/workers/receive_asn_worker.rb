@@ -23,7 +23,7 @@ module Bergen
         @return_item_process.touch
       rescue StandardError => e
         sentry_error = Raven.capture_exception(e)
-        @return_item_process.update_column(:sentry_id, sentry_error.id)
+        @return_item_process.update_column(:sentry_id, sentry_error.id) if sentry_error
         @return_item_process.update_column(:failed, true)
       end
 
