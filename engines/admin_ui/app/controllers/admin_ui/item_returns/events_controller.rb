@@ -48,9 +48,10 @@ module AdminUi
           @event = event_for(item_return_id: params[:item_return_id])
           @form  = form_class(event_type).new(@event)
 
-          if @form.validate(form_data)
-            @form.save
+          if @form.validate(form_data) && @form.save
             redirect_to @event.item_return
+          else
+            redirect_to item_return, alert: "Can't create Event"
           end
         else
           redirect_to item_return, alert: "No Event Type #{event_type}"

@@ -29,16 +29,18 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   end
 
   def advance_refund(event)
-    # TODO: implement refund process
-    reference = "stubbed_refund_reference"
-    refunded_at = Time.now
+    refund_method_class = "Spree::Gateway::#{event['data']['refund_method']}".constantize
+    refund_method = refund_method_class.where(active: true).first
 
-    @item_return.refund_status = 'Complete'
-    @item_return.refund_method = event.refund_method
-    @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
+    response = refund_method.refund(event.refund_amount.to_i, @item_return.order_payment_ref)
 
-    @item_return.refund_ref    = reference
-    @item_return.refunded_at   = refunded_at
+    if response.success?
+      @item_return.refund_status = 'Complete'
+      @item_return.refund_method = event.refund_method
+      @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
+      @item_return.refund_ref    = response.params['response']['token']
+      @item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
+    end
   end
 
   def advance_record_refund(event)
