@@ -37,25 +37,22 @@ module WeddingAtelier
         content_tag :ul do
           grouped_sizes = dress_sizes.each_slice(4).to_a
           groups = grouped_sizes.map do |group|
-             content_tag :div, class: 'sizing-row' do
-               items = group.map do |size|
-                 # TODO: Eventually parse both site versions
-                 #  parsedSize = size.name.match(/#{@site_version}(\d+)/i)[1]
-                 parsedSize = size.name.match(/US(\d+)/i)[1]
-                 content_tag :li do
-                   [
-                     form.radio_button(:dress_size_id, size.id, 'data-no-error' => true),
-                     form.label(:dress_size_id, "US #{parsedSize}", value: size.id, 'data-no-error' => true)
-                   ].join("\n").html_safe
-                 end
-               end
-               items.join("\n").html_safe
-             end
+            content_tag :div, class: 'sizing-row' do
+              items = group.map do |size|
+                parsed_size = size.name.match(/#{@site_version}(\d+)/i)[1]
+                content_tag :li do
+                  [
+                    form.radio_button(:dress_size_id, size.id, 'data-no-error' => true),
+                    form.label(:dress_size_id, "#{@site_version.upcase} #{parsed_size}", value: size.id, 'data-no-error': true)
+                  ].join("\n").html_safe
+                end
+              end
+              items.join("\n").html_safe
+            end
           end
           groups.join("\n").html_safe
         end
       end
     end
-
   end
 end
