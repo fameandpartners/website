@@ -4,20 +4,20 @@ describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
   let(:product) { FactoryGirl.build(:dress) }
   subject { described_class.new(product) }
 
-  describe '#minimum_delivery_period' do
+  describe '#maximum_delivery_period' do
     it "returns minimal delivery period if product has no taxons" do
-      expect(subject.minimum_delivery_period).to eq('7 - 10 business days')
+      expect(subject.maximum_delivery_period).to eq('7 - 10 business days')
     end
 
-    it "returns minimum delivery period from taxons" do
+    it "returns maximum delivery period from taxons" do
+      product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
+      expect(subject.maximum_delivery_period).to eq('10 - 14 business days')
+
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '14 - 28 business days')
-      expect(subject.minimum_delivery_period).to eq('14 - 28 business days')
+      expect(subject.maximum_delivery_period).to eq('14 - 28 business days')
 
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
-      expect(subject.minimum_delivery_period).to eq('10 - 14 business days')
-
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '14 - 28 business days')
-      expect(subject.minimum_delivery_period).to eq('10 - 14 business days')
+      expect(subject.maximum_delivery_period).to eq('14 - 28 business days')
     end
   end
 
