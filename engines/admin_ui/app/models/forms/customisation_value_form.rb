@@ -8,6 +8,7 @@ module Forms
     property :customisation_type
     property :pov
     property :product_id
+    property :image
 
     validates :presentation, presence: true
     validates :price, numericality: { greater_than_or_equal_to: 0 }

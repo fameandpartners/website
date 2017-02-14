@@ -5,7 +5,7 @@
         h5
           => @customisation_value.presentation
       .ibox-content
-        = form_for(@form, url: customisation_customisation_value_path(@customisation_value)) do |f|
+        = form_for(@form, url: customisation_customisation_value_path(@customisation_value),  html: { multipart: true }) do |f|
           .form-group
             = f.label :name
             = f.text_field :name, class: 'form-control'
@@ -27,6 +27,7 @@
           .form-group
             = f.label :image
             = f.file_field :image
+            = image_tag(@form.model.image.url, width: 150, height: 150)
           .form-group
             = f.submit local_assigns[:submit_text], class: 'btn btn-primary'
         alert.alert-warning
