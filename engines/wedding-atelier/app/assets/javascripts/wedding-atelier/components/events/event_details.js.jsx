@@ -18,7 +18,7 @@ var EventDetails = React.createClass({
 
   getInitialState: function() {
     return {
-      event: {}
+      event: this.props.event
     };
   },
 
