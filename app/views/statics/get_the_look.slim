@@ -308,8 +308,9 @@ javascript:
         var errors = JSON.parse(xhr.responseText).errors;
         var keys = Object.keys(errors);
         keys.forEach(function(key){
-          var $inputEl = $weddingPlanningForm.find('input[name="' + key + '"]').first();
-          $inputEl && $inputEl.addClass(INPUT_ERROR_CLASS);
+          $weddingPlanningForm.find('input[name="' + key + '"]')
+          .first()
+          .addClass(INPUT_ERROR_CLASS);
         });
       });
 
