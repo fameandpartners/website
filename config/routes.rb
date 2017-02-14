@@ -605,8 +605,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
+  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
-
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
   match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }

@@ -60,6 +60,7 @@ gem 'fog-aws', '~> 1.2.0'
 gem 'event_sourced_record'
 gem 'coercible'
 gem 'reform', '~> 2.0.5'
+gem 'split', require: 'split/dashboard'
 
 gem 'ipaddress'
 gem 'geoip', require: false
