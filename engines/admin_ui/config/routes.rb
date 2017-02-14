@@ -1,5 +1,5 @@
 AdminUi::Engine.routes.draw do
-  resources :item_returns do 
+  resources :item_returns do
     get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
@@ -69,6 +69,7 @@ AdminUi::Engine.routes.draw do
   end
 
   namespace :customisation do
+    resources :customisation_values
     resources :variants
     resources :render3d_images do
       collection do
