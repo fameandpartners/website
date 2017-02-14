@@ -325,7 +325,7 @@ input {
 
 // Normalizes focus on inputs cross-browser
 input:focus {
-  outline: #777777 auto 2px;
+  outline: $gray-light auto 2px;
   outline-offset: -2px;
 }
 
