@@ -17,13 +17,13 @@ module WeddingAtelier
       end
     end
 
-    def signup_progress_marker
-      signup_steps = ['new', 'size', 'details', 'invite']
-      list = content_tag :ul, class: 'steps' do
+    def signup_progress_marker(current_step)
+      signup_steps = %w(new size details invite)
+      content_tag :ul, class: 'steps' do
         highlight_class = 'current'
         signup_steps.map.with_index do |step, index|
           step_mark = [content_tag(:li, "0#{index + 1}", class: highlight_class)]
-          if current_page?(action: step)
+          if current_step == step
             step_mark << content_tag(:span, '', class: 'dash')
             highlight_class = ''
           end
