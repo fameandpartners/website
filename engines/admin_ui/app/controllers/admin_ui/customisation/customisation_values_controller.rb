@@ -8,7 +8,7 @@ module AdminUi
         @collection = CustomisationValuesGrid.new
         respond_to do |f|
           f.html do
-            @collection.scope { |scope| scope.page(params[:page]).per(100) }
+            @collection.scope { |scope| scope.page(params[:page]) }
           end
           f.csv do
             send_data @collection.to_csv,
@@ -20,8 +20,7 @@ module AdminUi
       end
 
       def new
-        @customisation_value = CustomisationValue.new
-        @form = Forms::CustomisationValueForm.new(@customisation_value)
+        @form = Forms::CustomisationValueForm.new(CustomisationValue.new)
         @customisation_types = CustomisationValue::AVAILABLE_CUSTOMISATION_TYPES
         @products = Spree::Product.active
       end
