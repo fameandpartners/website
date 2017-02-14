@@ -1,16 +1,15 @@
 var Roles = React.createClass({
-
   propTypes: {
-    roles: React.PropTypes.array,
-    roles_path: React.PropTypes.string,
     current_user: React.PropTypes.object,
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    roles_path: React.PropTypes.string,
+    roles: React.PropTypes.array
   },
 
   getInitialState: function() {
     return {
       roles: ['bridesmaid', 'maid of honor', 'mother of bride', 'bride']
-    }
+    };
   },
 
   componentWillMount: function() {
@@ -21,34 +20,36 @@ var Roles = React.createClass({
     $(this.refs.select2).select2({
       minimumResultsForSearch: Infinity
     }).on('select2:select', function (evt) {
-      this.props.onChange({ target: this.refs.select2 })
+      this.props.onChange({ target: this.refs.select2 });
     }.bind(this));
 
   },
 
   generateRolesInput: function(roles) {
     var that = this;
-    var options = this.state.roles.map(function(role, index){
+    var options = this.state.roles.map(function(role, index) {
       var props = {
-        key: index,
+        key: 'wedding-roles-' + index,
         value: role
-      }
-      if(role == that.props.current_user.role){
-        props.selected = true;
-      }
-      return (<option {...props}>{role}</option>);
+      };
+
+      return (
+        <option {...props}>{role}</option>
+      );
     });
 
     this.setState({roles: options});
   },
 
   render: function() {
-    return (<select
-      ref="select2"
-      name="role"
-      onChange={this.props.onChange}>
-      {this.state.roles}
-      </select>);
+    return (
+      <select
+        ref="select2"
+        name="role"
+        onChange={this.props.onChange}
+        defaultValue={this.props.current_user.role}>
+        {this.state.roles}
+      </select>
+    );
   }
-
 });
