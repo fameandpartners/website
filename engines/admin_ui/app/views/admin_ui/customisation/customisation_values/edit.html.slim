@@ -1,9 +1,6 @@
 .row
   .col-lg-6
     .ibox
-      .ibox-title
-        h5
-          => @customisation_value.presentation
       .ibox-content
         = form_for(@form, url: customisation_customisation_value_path(@customisation_value),  html: { multipart: true }) do |f|
           .form-group
