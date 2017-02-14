@@ -18,7 +18,7 @@ var EventDetails = React.createClass({
 
   getInitialState: function() {
     return {
-      event: this.props.event
+      event: {}
     };
   },
 
@@ -43,6 +43,12 @@ var EventDetails = React.createClass({
       _event.date = date;
       this.setState({event: _event})
     }.bind(this));
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    if(Object.keys(this.state.event).length === 0) {
+      this.setState({event: $.extend({}, nextProps.event)});
+    }
   },
 
   getEventDetailsUpdatePromise: function(e) {
