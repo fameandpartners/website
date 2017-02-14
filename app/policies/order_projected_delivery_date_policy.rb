@@ -20,18 +20,18 @@ module Policies
       elsif order.has_fast_making_items?
         FAST_DELIVERY_DAYS.business_days.after(order.completed_at)
       else
-        # get minimum from line items delivery periods
-        minimal_delivery_period.business_days.after(order.completed_at)
+        # get maximum from line items delivery periods
+        maximal_delivery_period.business_days.after(order.completed_at)
       end
     end
 
     private
 
-    def minimal_delivery_period
+    def maximal_delivery_period
       order.line_items.
         map(&:product).map(&:delivery_period).
         map { |period| major_value_from_period(period) }.
-        min
+        max
     end
 
     private
