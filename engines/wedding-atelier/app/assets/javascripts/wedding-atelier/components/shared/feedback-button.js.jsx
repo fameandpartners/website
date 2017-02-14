@@ -5,7 +5,7 @@ var FeedbackButton = React.createClass({
     failureHandler: React.PropTypes.func,
     label: React.PropTypes.string,
     labelCompleted: React.PropTypes.string,
-    promise: React.PropTypes.object,
+    promise: React.PropTypes.func,
     successHandler: React.PropTypes.func
   },
 

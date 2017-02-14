@@ -2,19 +2,20 @@ var MobileCustomizations = React.createClass({
   propTypes: {
     changeCurrentCustomizationCallback: React.PropTypes.func,
     currentCustomization: React.PropTypes.string,
+    currentUser: React.PropTypes.object,
     customizations: React.PropTypes.object,
+    customizationsCost: React.PropTypes.number,
+    edit: React.PropTypes.bool,
+    event_name: React.PropTypes.string,
+    event_path: React.PropTypes.string,
+    eventId: React.PropTypes.number,
+    initialDress: React.PropTypes.object,
+    savedDressCallback: React.PropTypes.func.isRequired,
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
     startOverCallback: React.PropTypes.func,
-    subTotal: React.PropTypes.number,
-    customizationsCost: React.PropTypes.number,
-    eventId: React.PropTypes.number,
-    currentUser: React.PropTypes.object,
-    event_name: React.PropTypes.string,
-    event_path: React.PropTypes.string,
-    edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    subTotal: React.PropTypes.number
   },
 
   componentDidMount: function() {
@@ -35,24 +36,25 @@ var MobileCustomizations = React.createClass({
 
   render: function() {
     var defaultProps = {
-      customizations: this.props.customizations,
-      currentCustomization: this.props.currentCustomization,
-      selectedOptions: this.props.selectedOptions,
       changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
+      currentCustomization: this.props.currentCustomization,
+      customizations: this.props.customizations,
+      goToSlide:  this.goToSlide,
       selectCallback: this.props.selectCallback,
-      goToSlide:  this.goToSlide
+      selectedOptions: this.props.selectedOptions
     };
 
     var customizationsReviewProps = $.extend(defaultProps, {
-      siteVersion:  this.props.siteVersion,
-      subTotal: this.props.subTotal,
-      customizationsCost: this.props.customizationsCost,
-      eventId: this.props.eventId,
       currentUser: this.props.currentUser,
-      event_path: this.props.event_path,
-      event_name: this.props.event_name,
+      customizationsCost: this.props.customizationsCost,
       edit: this.props.edit,
-      initialDress: this.props.initialDress
+      event_name: this.props.event_name,
+      event_path: this.props.event_path,
+      eventId: this.props.eventId,
+      initialDress: this.props.initialDress,
+      savedDressCallback: this.props.savedDressCallback,
+      siteVersion:  this.props.siteVersion,
+      subTotal: this.props.subTotal
     });
 
     var customizationsMenuProps = $.extend(defaultProps, {
@@ -60,8 +62,8 @@ var MobileCustomizations = React.createClass({
     });
 
     var customizationsContainerMobileProps = $.extend(defaultProps, {
-      startOverCallback: this.props.startOverCallback,
-      selectedOptions: this.props.selectedOptions
+      selectedOptions: this.props.selectedOptions,
+      startOverCallback: this.props.startOverCallback
     });
 
     return (
