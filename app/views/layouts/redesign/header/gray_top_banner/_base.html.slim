@@ -22,5 +22,9 @@ ruby:
                 li = link_to 'My Details', profile_path
                 li = link_to 'Logout', '/logout'
 
-  .row
-    = render 'layouts/redesign/header/simplified_nav'
+.container-fluid.nav-menu-container
+  - ab_test(:main_nav, {'Mega' => 9}, 'SimplifiedVar1' ) do |variation|
+    - if variation === 'Mega'
+      = render 'layouts/redesign/header/mega'
+    - else 
+      | This is the second variation
