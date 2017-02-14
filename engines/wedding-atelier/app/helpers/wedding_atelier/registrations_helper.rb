@@ -23,7 +23,7 @@ module WeddingAtelier
         highlight_class = 'current'
         signup_steps.map.with_index do |step, index|
           step_mark = [content_tag(:li, "0#{index + 1}", class: highlight_class)]
-          if current_step == step
+          if current_step - 1 == index
             step_mark << content_tag(:span, '', class: 'dash')
             highlight_class = ''
           end
