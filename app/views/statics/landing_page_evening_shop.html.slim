@@ -1,6 +1,6 @@
 = render partial: 'pages/robots'
 
-.page-evening-shop.mobile-text-center
+.page-evening-shop.mobile-text-center.js-smooth-scroll
 
   .container
     // Intro copy
@@ -16,7 +16,8 @@
     // Section tag
     .row
       .col-xs-12.heading-overlay-wrapper
-        .heading-overlay.heading-no-overlay Explore The Boutique
+        a href="#the-new-ball-gown"
+          .heading-overlay.heading-no-overlay Explore The Boutique
 
     //Side-by-Side content
     .same-height-cols
@@ -28,7 +29,7 @@
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
-              picture
+              picture#the-new-ball-gown
                 source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
                 source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
                 img src="#{image_path(current_item_image)}" srcset="
