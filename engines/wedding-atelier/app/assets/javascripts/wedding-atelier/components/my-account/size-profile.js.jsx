@@ -68,7 +68,7 @@ var SizeProfile = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{PresentationHelper.sizePresentation(size.option_value)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size.option_value, that.props.siteVersion)}</label>
         </li>
       );
     }.bind(this));
