@@ -1,0 +1,34 @@
+.row
+  .col-lg-6
+    .ibox
+      .ibox-title
+        h5
+          => @customisation_value.presentation
+      .ibox-content
+        = form_for(@form, url: customisation_customisation_value_path(@customisation_value)) do |f|
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :presentation
+            = f.text_field :presentation, class: 'form-control'
+          .form-group
+            = f.label :price
+            = f.number_field :price, class: 'form-control'
+          .form-group
+            = f.label :product_id, 'Product'
+            = f.select :product_id, options_from_collection_for_select(@products, 'id', 'name'), { include_blank: true }, class: 'form-control'
+          .form-group
+            = f.label :customisation_type
+            = f.select :customisation_type, @customisation_types, {}, class: 'form-control'
+          .form-group
+            = f.label :pov
+            = f.select :pov, ['front', 'back'], { include_blank: true }, class: 'form-control'
+          .form-group
+            = f.label :image
+            = f.file_field :image
+          .form-group
+            = f.submit local_assigns[:submit_text], class: 'btn btn-primary'
+        alert.alert-warning
+          | Warning: updating colors custom/active attributes require product reindexing. To do it, proceed to the &nbsp;
+          = link_to 'Update', backend_product_indexes_path
