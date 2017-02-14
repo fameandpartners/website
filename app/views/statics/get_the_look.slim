@@ -296,7 +296,7 @@ javascript:
         formVals[field.name] = field.value; // Regular Inputs
       });
       $.each($('input:checkbox'), function(i, field) {
-        formVals[field.name] = field.checked ? true : false; // Checkboxes
+        formVals[field.name] = field.checked; // Checkboxes
       });
 
       submitFormValues(formVals)
