@@ -10,13 +10,7 @@
     display: inline-block;
     font-size: 12px;
     margin: 20px;
-    min-width: 308px;
-    width: 308px;
-
-    @include screen-xs {
-      min-width: 283px;
-      width: 283px;
-    };
+    width: 283px;
   }
 
   .top-info {
@@ -84,5 +78,12 @@
       vertical-align: bottom;
     }
   }
+
+  @include screen-sm {
+    .dress-box {
+      font-size: 1rem;
+      width: 308px;
+    }
+  };
 
 }
