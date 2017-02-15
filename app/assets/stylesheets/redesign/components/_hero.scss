@@ -376,8 +376,12 @@
 }
 
 .containerHalfScreenHero {
-  @extend .container-no-padding;
-  overflow-x: hidden;
+  padding: 0;
+  margin: 0 15px;
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    overflow-x: hidden;
+  }
 
   &__heroImg {
     @extend .no-spacing-cols-mobile;

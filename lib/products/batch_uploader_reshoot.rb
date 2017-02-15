@@ -407,7 +407,7 @@ module Products
 
     private
 
-    def section_heading(product = nil, sku: product.sku, name: product.name)
+    def get_section_heading(sku:, name:)
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
 
@@ -426,7 +426,7 @@ module Products
     end
 
     def add_product_properties(product, args)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       allowed    = [:fit]
       properties = args.slice(*allowed).select { |_, value| value.present? }
       properties.each do |name, value|
@@ -435,7 +435,7 @@ module Products
     end
 
     def update_product_color_options(spree_product, available_colors:)
-      debug "#{section_heading(spree_product)} #{__method__}"
+      debug "#{get_section_heading(sku: spree_product.sku, name: spree_product.name)} #{__method__}"
 
       # [x] deactivate product color values that exists
       # [x] create product color values that aren't related to the product yet

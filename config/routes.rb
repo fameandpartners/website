@@ -353,6 +353,7 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
     get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
+    get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
@@ -378,6 +379,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
+    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
