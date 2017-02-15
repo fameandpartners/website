@@ -5,7 +5,7 @@ module WeddingAtelier
     end
 
     def step_image(current_step)
-      %w(new size details invite).slice(current_step - 1)
+      "background-#{%w(new size details invite).slice(current_step - 1)}"
     end
 
     def fancy_facebook_button(pre_text = 'Log in')
