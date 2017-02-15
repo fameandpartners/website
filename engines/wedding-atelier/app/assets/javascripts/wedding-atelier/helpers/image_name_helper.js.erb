@@ -26,23 +26,23 @@ DressImageBuilder.prototype.buildImagesStyles = function(fileName){
   }
 }
 
-DressImageBuilder.prototype.silhouette = function(silhouette, pov){
+DressImageBuilder.prototype.silhouette = function(silhouette, pointOfView){
   var fileName = [silhouette.sku, 'HG', this.colorName, 'S0', 'F0', 'AK', 'FRONT'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
-DressImageBuilder.prototype.length = function(length, pov){
+DressImageBuilder.prototype.length = function(length, pointOfView){
   var fileName = [this.silhouetteName, 'HG', this.colorName, this.styleName, this.fitName, length.name, 'FRONT'].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
-DressImageBuilder.prototype.fit = function(fit, pov){
-  var fileName = [this.silhouetteName, 'HG', this.colorName, this.styleName, fit.name, this.lengthName, fit.pov].join('-').toUpperCase()
+DressImageBuilder.prototype.fit = function(fit, pointOfView){
+  var fileName = [this.silhouetteName, 'HG', this.colorName, this.styleName, fit.name, this.lengthName, fit.pointOfView].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
-DressImageBuilder.prototype.style = function(style, pov){
-  var fileName = [this.silhouetteName, 'HG', this.colorName, style.name, this.fitName, this.lengthName, style.pov].join('-').toUpperCase()
+DressImageBuilder.prototype.style = function(style, pointOfView){
+  var fileName = [this.silhouetteName, 'HG', this.colorName, style.name, this.fitName, this.lengthName, style.pointOfView].join('-').toUpperCase()
   return this.buildImagesStyles(fileName);
 }
 
