@@ -61,16 +61,16 @@ module WeddingAtelier
           ]
         }
       }
-      %w(FRONT BACK).each do |pov|
-        images[pov.downcase.to_sym] = {
+      %w(FRONT BACK).each do |point_of_view|
+        images[point_of_view.downcase.to_sym] = {
           thumbnail: {
-            white: "#{base_path}/180x260/white/#{file_name}-#{pov}.jpg",
-            grey: "#{base_path}/180x260/grey/#{file_name}-#{pov}.jpg",
+            white: "#{base_path}/180x260/white/#{file_name}-#{point_of_view}.jpg",
+            grey: "#{base_path}/180x260/grey/#{file_name}-#{point_of_view}.jpg",
 
           },
-          moodboard: "#{base_path}/280x404/#{file_name}-#{pov}.jpg",
-          normal: "#{base_path}/900x1300/#{file_name}-#{pov}.jpg",
-          large: "#{base_path}/1800x2600/#{file_name}-#{pov}.jpg"
+          moodboard: "#{base_path}/280x404/#{file_name}-#{point_of_view}.jpg",
+          normal: "#{base_path}/900x1300/#{file_name}-#{point_of_view}.jpg",
+          large: "#{base_path}/1800x2600/#{file_name}-#{point_of_view}.jpg"
         }
       end
       images
