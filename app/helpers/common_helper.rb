@@ -1,4 +1,8 @@
 module CommonHelper
+  def get_facebook_app_id
+    ENV.fetch('FACEBOOK_APP_ID', '591959187490267')
+  end
+
   # override spree method
   # title method
   def get_title
@@ -7,10 +11,6 @@ module CommonHelper
 
   def get_meta_description
     @description
-  end
-
-  def get_og_image
-    @og_image
   end
 
   def get_hreflang(lang)
