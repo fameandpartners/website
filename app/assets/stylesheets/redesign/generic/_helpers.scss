@@ -80,6 +80,10 @@
 
 }
 
+.full-height {
+  height: 100%;
+}
+
 // TODO: remove this in favor of .noPadding
 .no-padding {
   @extend .noPadding;
@@ -119,6 +123,9 @@
 
 .no-margin-bottom {
   margin-bottom: 0 !important;
+}
+.no-margin-top {
+  margin-top: 0 !important;
 }
 
 // Fix for IE
