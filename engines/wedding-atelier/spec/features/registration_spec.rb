@@ -1,8 +1,12 @@
 require 'spec_helper'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 
 describe 'registrations', type: :feature do
 
   describe 'registration' do
+    let(:customerio) { double(Marketing::CustomerIOEventTracker) }
+
     before(:each) do
       enable_wedding_atelier_feature_flag
       ds = create(:option_type, name: 'dress-size')
@@ -29,6 +33,10 @@ describe 'registrations', type: :feature do
 
     context 'user already exists with incomplete profile' do
       let(:user){ create(:spree_user) }
+      before do
+        allow(Marketing::CustomerIOEventTracker).to receive(:new).and_return(customerio)
+        expect(customerio).to receive(:track)
+      end
 
       it 'completes onboarding process' do
         visit '/wedding-atelier/signup'
@@ -59,6 +67,11 @@ describe 'registrations', type: :feature do
     end
 
     context 'new user' do
+      before do
+        allow(Marketing::CustomerIOEventTracker).to receive(:new).and_return(customerio)
+        expect(customerio).to receive(:track)
+      end
+
       it 'completes onboarding process' do
         visit '/wedding-atelier/signup'
         within('.new_spree_user') do
