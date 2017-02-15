@@ -60,15 +60,15 @@
     .signup-background {
       background-image: image-url('wedding-atelier/onboarding/signup.jpg');
 
-      &.size {
+      &.background-size {
         background-image: image-url('wedding-atelier/onboarding/size.jpg');
       }
 
-      &.details {
+      &.background-details {
         background-image: image-url('wedding-atelier/onboarding/details.jpg');
       }
 
-      &.invite {
+      &.background-invite {
         background-image: image-url('wedding-atelier/onboarding/invite.jpg');
       }
     }
