@@ -19,8 +19,8 @@
             = f.label :customisation_type
             = f.select :customisation_type, @customisation_types, {}, class: 'form-control'
           .form-group
-            = f.label :pov
-            = f.select :pov, ['front', 'back'], { include_blank: true }, class: 'form-control'
+            = f.label :point_of_view
+            = f.select :point_of_view, ['front', 'back'], { include_blank: true }, class: 'form-control'
           .form-group
             = f.label :image
             = f.file_field :image
