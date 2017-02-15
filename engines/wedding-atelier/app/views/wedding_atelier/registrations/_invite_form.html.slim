@@ -10,6 +10,6 @@
       a(href="#") Add another
     .row
       .col-xs-12.col-sm-6
-        = link_to 'do this later', wedding_atelier.event_path(@event), class: 'btn btn-white full-width'
+        = link_to 'do this later', wedding_atelier.event_path(id: @event.id, slug: @event.slug), class: 'btn btn-white full-width'
       .col-xs-12.col-sm-6
         = submit_tag 'send invite', class: 'btn btn-black full-width'

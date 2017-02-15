@@ -42,7 +42,7 @@ module WeddingAtelier
                  # TODO: Eventually parse both site versions
                  #  parsedSize = size.name.match(/#{@site_version}(\d+)/i)[1]
                  parsedSize = size.name.match(/US(\d+)/i)[1]
-                 content_tag :li do
+                 content_tag :li, class: 'dress-size' do
                    [
                      form.radio_button(:dress_size_id, size.id, 'data-no-error' => true),
                      form.label(:dress_size_id, "US #{parsedSize}", value: size.id, 'data-no-error' => true)

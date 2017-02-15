@@ -100,7 +100,8 @@ module WeddingAtelier
       if user
         sign_in :spree_user, user
         if user.wedding_atelier_signup_complete?
-          redirect_to wedding_atelier.event_path(user.events.last)
+          event = user.events.last
+          redirect_to wedding_atelier.event_path(id: event.id, slug: event.slug)
         else
           redirect_to action: user.wedding_atelier_signup_step
         end
