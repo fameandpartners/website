@@ -5,6 +5,7 @@ describe 'invitations', type: :feature do
     let(:event){ create(:wedding_atelier_event) }
     let(:user){ create(:spree_user) }
     let(:invited_user){ create(:spree_user, wedding_atelier_signup_step: 'completed') }
+    let(:customerio) { double(Marketing::CustomerIOEventTracker) }
 
     before(:each) do
       enable_wedding_atelier_feature_flag
@@ -60,7 +61,11 @@ describe 'invitations', type: :feature do
       end
     end
 
-    context 'when user doesn\'t exist' do
+    context 'when user doesnt exist' do
+      before do
+        allow_any_instance_of(Spree::User).to receive(:send_welcome_email)
+      end
+
       it 'takes the user to signup and accepts invitation' do
         invitation = event.invitations.create(inviter_id: user.id, user_email: 'new@user.com')
         visit "wedding-atelier/events/#{event.id}/invitations/#{invitation.id}/accept"
