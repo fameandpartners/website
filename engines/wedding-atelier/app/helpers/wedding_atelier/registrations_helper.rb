@@ -44,7 +44,7 @@ module WeddingAtelier
             content_tag :div, class: 'sizing-row' do
               items = group.map do |size|
                 parsed_size = size.name.match(/#{@site_version}(\d+)/i)[1]
-                content_tag :li do
+                content_tag :li, class: 'dress-size' do
                   [
                     form.radio_button(:dress_size_id, size.id, 'data-no-error' => true),
                     form.label(:dress_size_id, "#{@site_version.upcase} #{parsed_size}", value: size.id, 'data-no-error': true)
