@@ -1,19 +1,24 @@
-= content_for :head do
-  javascript:
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
 = render partial: 'pages/robots'
-ruby:
-  @og_image = asset_url "landingpages/bespoke-bridal-collection/dresses/dress-07.jpg"
+
+/ FB JS for share button rendering
+#fb-root
+javascript:
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js     = d.createElement(s);
+    js.id  = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+= content_for :head
+  - image_url = "#{request.protocol}#{request.host_with_port}#{asset_path('landingpages/bespoke-bridal-collection/dresses/dress-07.jpg')}"
+  meta property="og:image" content=image_url
+  meta property="og:image:width" content="2093"
+  meta property="og:image:height" content="2791"
 
 .get-the-look
-
   .js-modal.get-the-look-preview-modal.modal.modal-v2 role='dialog' tabindex="-1" aria-hidden="true"
     .modal-dialog role='document'
       .modal-content
@@ -92,9 +97,10 @@ ruby:
                           a target="_blank" href="https://d1msb7dh8kb0o9.cloudfront.net/pages/get-the-look/GetTheLook-FP-RebelliousWedding.pdf"
                             span.link-underline Download
                             span  The Rebellious Wedding Guide
-                            
+
                       div.fb-share-button data-href="https://www.fameandpartners.com/get-the-look" data-layout="button" data-size="small" data-mobile-iframe="false"
-                        a.fb-xfbml-parse-ignore target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.fameandpartners.com%2Fget-the-look&amp;src=sdkpreparse" Share the wedding guides
+                        a.fb-xfbml-parse-ignore target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.fameandpartners.com%2Fget-the-look&amp;src=sdkpreparse"
+                          | Share the wedding guides
 
   .container-fluid.containerHalfScreenHero.no-scroll
     .row
@@ -252,7 +258,7 @@ javascript:
     var $previewModal = $('.js-modal.get-the-look-preview-modal');
     var $previewModalTrigger = $('.js-previewModalTrigger');
     var $guideModalTrigger = $('.js-get-guide-modal-trigger');
-    
+
     function submitFormValues(formVals){
       return $.ajax({
         type: 'POST',
@@ -279,14 +285,14 @@ javascript:
       $weddingPlanningForm.find('input[data-auto-focus]').focus();
     });
 
-    
+
     $weddingPlanningForm.find('.datepicker').datepicker();
-    
+
     // FOCUS Event handler
     $weddingPlanningForm.on('focusin', 'input', function(event){
       $(event.target).removeClass(INPUT_ERROR_CLASS);
     });
-    
+
     // SUBMIT Event Handler
     $weddingPlanningForm.on('submit', function(evt){
       evt.preventDefault();

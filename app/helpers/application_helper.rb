@@ -26,10 +26,6 @@ module ApplicationHelper
     hreflang_link
   end
 
-  def asset_url(asset)
-    "#{request.protocol}#{request.host_with_port}#{asset_path(asset)}"
-  end
-
   def restfull_action_name
     case controller.action_name.to_sym
     when :create
