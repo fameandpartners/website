@@ -23,8 +23,8 @@ ruby:
                 li = link_to 'Logout', '/logout'
 
 .container-fluid.nav-menu-container
-  - ab_test(:main_nav, {'Mega' => 9}, 'SimplifiedVar1' ) do |variation|
-    - if variation === 'Mega'
+  - ab_test(:main_nav, {'mega' => 9}, 'simplified_var_1' ) do |variation|
+    - if variation === 'mega'
       = render 'layouts/redesign/header/mega'
     - else 
       | This is the second variation
