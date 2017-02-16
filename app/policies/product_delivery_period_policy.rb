@@ -1,6 +1,6 @@
 module Policies
   class ProductDeliveryPeriodPolicy
-    CNY_DELIVERY_PERIOD = '3 - 4 weeks'
+    CNY_DELIVERY_PERIOD = '2 - 3 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
 
     def initialize(product)
