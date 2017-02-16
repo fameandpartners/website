@@ -21,8 +21,6 @@ module AdminUi
 
       def new
         @form = Forms::CustomisationValueForm.new(CustomisationValue.new)
-        @customisation_types = CustomisationValue::AVAILABLE_CUSTOMISATION_TYPES
-        @products = Spree::Product.active
       end
 
       def create
@@ -32,17 +30,12 @@ module AdminUi
           message = { success: "Customisation Value '#{@form.model.name}' successfully created" }
           redirect_to edit_customisation_customisation_value_path(@form.model), flash: message
         else
-          @products = Spree::Product.active
-          @customisation_types = CustomisationValue::AVAILABLE_CUSTOMISATION_TYPES
           render :new
         end
       end
 
       def edit
-        @customisation_value = CustomisationValue.find(params[:id])
-        @form = Forms::CustomisationValueForm.new(@customisation_value)
-        @customisation_types = CustomisationValue::AVAILABLE_CUSTOMISATION_TYPES
-        @products = Spree::Product.active
+        @form = Forms::CustomisationValueForm.new(CustomisationValue.find(params[:id]))
       end
 
       def update
@@ -58,8 +51,7 @@ module AdminUi
       end
 
       def destroy
-        @customisation_value = CustomisationValue.find(params[:id])
-        @customisation_value.destroy
+        CustomisationValue.find(params[:id]).destroy
         redirect_to customisation_customisation_values_path, flash: { success: 'Customisation value successfully removed' }
       end
     end
