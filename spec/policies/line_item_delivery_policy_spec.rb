@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
-  let(:product) { FactoryGirl.build(:dress) }
-  subject { described_class.new(product) }
+describe Policies::LineItemDeliveryPolicy, type: :policy do
+  let(:line_item) { FactoryGirl.build(:dress_item) }
+  let(:product) { line_item.product }
+  subject { described_class.new(line_item) }
 
   describe '#maximum_delivery_period' do
-    it "returns minimal delivery period if product has no taxons" do
+    it "returns minimal delivery period if line_item has no taxons" do
       expect(subject.maximum_delivery_period).to eq('7 - 10 business days')
     end
 
@@ -26,9 +27,15 @@ describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
       expect(subject.delivery_period).to eq('7 - 10 business days')
     end
 
+    it "returns fast making delivery period if line_item is fast making" do
+      expect(line_item).to receive(:fast_making?).and_return(true)
+
+      expect(subject.delivery_period).to eq('4 - 6 business days')
+    end
+
     it "returns cny delivery period if cny flag enabled" do
       Features.activate(:cny_delivery_delays)
-      allow(product).to receive(:fast_making?).and_return(true)
+      allow(line_item).to receive(:fast_making?).and_return(true)
 
       expect(subject.delivery_period).to eq('2 - 3 weeks')
     end

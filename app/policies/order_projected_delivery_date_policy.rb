@@ -29,7 +29,7 @@ module Policies
 
     def maximal_delivery_period
       order.line_items.
-        map(&:product).map(&:delivery_period).
+        map(&:delivery_period).
         map { |period| major_value_from_period(period) }.
         max
     end
