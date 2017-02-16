@@ -12,7 +12,7 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
       it 'calculates 28 calendar days on china new year period' do
         Features.activate(:cny_delivery_delays)
 
-        expected_date = DateTime.parse('Wed 29 Apr 2015')
+        expected_date = DateTime.parse('Wed 22 Apr 2015')
         expect(policy.delivery_date).to eq expected_date
       end
     end

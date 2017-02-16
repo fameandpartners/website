@@ -6,7 +6,7 @@ module Policies
 
     DELIVERY_DAYS = 10
     FAST_DELIVERY_DAYS = 4
-    DELAY_DELIVERY_DAYS = 28
+    DELAY_DELIVERY_DAYS = 21
 
     attr_reader :order
 
