@@ -23,7 +23,8 @@ var SelectSizeModal = React.createClass({
   componentDidMount: function(){
     var that = this;
     $(this.refs.heightSelect).select2({
-      minimumResultsForSearch: Infinity
+      minimumResultsForSearch: Infinity,
+      placeholder: 'Please select your height'
     }).on('change', function (e) {
       that.heightSelectedHandle(e.target.value);
     });
