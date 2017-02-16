@@ -11,12 +11,12 @@ var CustomizationsReviewMobile = React.createClass({
     eventId: React.PropTypes.number,
     goToSlide: React.PropTypes.func,
     initialDress: React.PropTypes.object,
+    savedDress: React.PropTypes.bool,
+    savedDressCallback: React.PropTypes.func.isRequired,
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    subTotal: React.PropTypes.number,
-    savedDress: React.PropTypes.bool,
-    savedDressCallback: React.PropTypes.func
+    subTotal: React.PropTypes.number
   },
 
   getInitialState: function () {
@@ -63,13 +63,13 @@ var CustomizationsReviewMobile = React.createClass({
           <SaveDressButton
             eventId={this.props.eventId}
             selectedOptions={this.props.selectedOptions}
-            buttonClass='btn-gray'
+            buttonClass="btn-gray"
             edit={this.props.edit}
             initialDress={this.props.initialDress}
             currentUser={this.props.currentUser}
             savedDressCallback={this.props.savedDressCallback}
             caption="Save this dress"
-            showSavedModal={true}
+            showSavedModal
             />
           <AddToCartButton
             customizations={this.props.selectedOptions}

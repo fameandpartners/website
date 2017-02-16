@@ -75,7 +75,7 @@ var SelectSizeModal = React.createClass({
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     if($(e.target).hasClass('cancelable')){
-      $(this.refs.modal).hide();  
+      $(this.refs.modal).hide();
     }
   },
 
@@ -204,7 +204,7 @@ var SelectSizeModal = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps}/>
-          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size, that.props.siteVersion)}</label>
         </li>
       );
     });

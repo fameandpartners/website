@@ -72,15 +72,23 @@
     }
   }
 
-  td {
-    border-top: 1px solid $greyish;
+  .modal-content {
+    width: 100vw;
   }
 
-  td:nth-child(1) {
-    border-right: 1px solid $greyish;
+  .measurements-table {
+    font-size: 10px;
+
+    td {
+      border-top: 1px solid $greyish;
+    }
+
+    td:nth-child(1) {
+      border-right: 1px solid $greyish;
+    }
   }
 
-  tbody {
+  .measurement-table-body {
     tr {
       background-color: $white-five;
     }
@@ -91,15 +99,31 @@
     }
   }
 
-  @include screen-xs {
-    .modal-content {
-      width: 100%;
-    }
+  .size-guide-right,
+  .show-measure {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   @include screen-sm {
     .modal-content {
       width: 100%;
+    }
+
+    .measurements-table {
+      font-size: 12px;
+    }
+
+    .size-guide-right,
+    .show-measure {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  @include screen-md {
+    .modal-content {
+      width: auto;
     }
   }
 }
