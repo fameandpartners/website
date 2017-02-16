@@ -20,14 +20,28 @@ describe 'registrations', type: :feature do
 
       before { user.events << event }
 
-      it 'signs the user in instead of sign up' do
-        visit '/wedding-atelier/signup'
-        within('.new_spree_user') do
-          fill_in 'spree_user_email', with: user.email
-          fill_in 'spree_user_password', with: user.password
+      context 'and fills in only email field' do
+        it 'redirects the user to sign in with a flash message' do
+          visit '/wedding-atelier/signup'
+          within('.new_spree_user') do
+            fill_in 'spree_user_email', with: user.email
+          end
+          click_button 'Next'
+          expect(page.current_path).to eq "/wedding-atelier/sign_in"
+          expect(react_flash_errors[0]).to eq 'Invalid email or password.'
         end
-        click_button 'Next'
-        expect(page.current_path).to eq "/wedding-atelier/events/#{event.id}/#{event.slug}"
+      end
+
+      context 'and fills in both email and password' do
+        it 'signs the user in instead of sign up' do
+          visit '/wedding-atelier/signup'
+          within('.new_spree_user') do
+            fill_in 'spree_user_email', with: user.email
+            fill_in 'spree_user_password', with: user.password
+          end
+          click_button 'Next'
+          expect(page.current_path).to eq "/wedding-atelier/events/#{event.id}/#{event.slug}"
+        end
       end
     end
 
