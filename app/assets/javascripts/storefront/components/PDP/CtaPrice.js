@@ -70,6 +70,11 @@ class CtaPrice extends React.Component {
       + parseFloat(this.props.customize.makingOption.price)
       - parseFloat(this.props.discount);
 
+    let deliveryPeriod = this.props.product.delivery_period;
+    if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
+      deliveryPeriod = this.props.product.fast_making_delivery_period;
+    }
+
     let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
     let isAddToBagAvailable = (
       this.props.customize.size.id
@@ -112,7 +117,7 @@ class CtaPrice extends React.Component {
           })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
-          <li>Estimated delivery, {this.props.product.delivery_period}</li>
+          <li>Estimated delivery, {deliveryPeriod}</li>
         </ul>
         {(() => {
           if (this.props.product.cny_delivery_delays) {

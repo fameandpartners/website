@@ -10,8 +10,6 @@ module Policies
     def delivery_period
       if Features.active?(:cny_delivery_delays)
         CNY_DELIVERY_PERIOD
-      elsif @product.fast_making?
-        FAST_MAKING_DELIVERY_PERIOD
       else
         maximum_delivery_period
       end
