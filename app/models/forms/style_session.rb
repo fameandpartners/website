@@ -60,5 +60,3 @@ module Forms
     end
   end
 end
-
-

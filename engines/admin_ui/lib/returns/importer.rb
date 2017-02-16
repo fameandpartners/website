@@ -188,13 +188,15 @@ module Returns
             calculated_attributes[:email]     = matched_line_item.order.email
             if (completed_payment = matched_line_item.order.payments.completed.last)
               payment = ::Reports::Payments::PaymentReportPresenter.from_payment(completed_payment)
-              calculated_attributes.merge!(
+              attributes_to_merge = {
                 payment_method: payment.payment_type,
                 order_payment_date:   payment.payment_date,
                 order_paid_amount:    payment.amount_in_cents,
                 order_paid_currency:  payment.currency,
-                order_payment_ref:    payment.transaction_id,
-              )
+                order_payment_ref:    payment.transaction_id
+              }.compact
+
+              calculated_attributes.merge!(attributes_to_merge)
             end
 
             whitelisted_attributes = mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)

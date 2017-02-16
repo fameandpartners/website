@@ -64,6 +64,7 @@ class ItemReturnEvent < ActiveRecord::Base
           :requested_at,
           :customer_name
 
+    validates :order_paid_currency, :item_price_adjusted, presence: true
   end
 
   attr_accessible :user, :received_on, :location
