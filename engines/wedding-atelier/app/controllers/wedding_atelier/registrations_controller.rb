@@ -98,12 +98,14 @@ module WeddingAtelier
     def sign_in_if_exists
       user = Spree::User.where(email: spree_user_params[:email]).first
       if user
-        sign_in :spree_user, user
-        if user.wedding_atelier_signup_complete?
-          event = user.events.last
-          redirect_to wedding_atelier.event_path(id: event.id, slug: event.slug)
-        else
+        allow_params_authentication!
+        authenticate_spree_user!
+        if spree_user_signed_in? && user.wedding_atelier_signup_complete?
+          redirect_to wedding_atelier.event_path(user.events.last)
+        elsif spree_user_signed_in?
           redirect_to action: user.wedding_atelier_signup_step
+        else
+          redirect_to sign_in_path, flash: { error:  t('devise.failure.invalid') }
         end
       end
     end

@@ -24,5 +24,6 @@
 
   = link_to '', wedding_atelier.event_path(id: @event, slug: @event.slug), class: 'shared-header-logo'
   .shared-header-commands
-    = react_component 'Help', {}, { class: 'walkthrough' }
+    - if controller_name == 'events'
+      = react_component 'Help', {}, { class: 'walkthrough' }
     = react_component 'ShoppingBag', {}, { class: 'shopping-bag' }
