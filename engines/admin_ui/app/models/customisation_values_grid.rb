@@ -4,7 +4,7 @@ class CustomisationValuesGrid
   include ::Datagrid
 
   scope do
-    CustomisationValue.scoped
+    CustomisationValue
   end
 
   column :id do |cv|
@@ -18,9 +18,7 @@ class CustomisationValuesGrid
   column :price
   column :customisation_type
 
-  column :remove? do |cv|
-    format(cv.id) do
-      button_to('Remove', customisation_customisation_value_path(cv), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
-    end
+  column :remove?, html: true do |cv|
+    button_to('Remove', admin_ui.customisation_customisation_value_path(cv), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
   end
 end
