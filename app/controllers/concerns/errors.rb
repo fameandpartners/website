@@ -2,6 +2,8 @@ module Concerns
   module Errors
     extend ActiveSupport::Concern
 
+    MYSTERIOUS_ROUTES = [ 'undefined', '/au/undefined', '1000668' ].freeze
+
     included do
       rescue_from ActiveRecord::RecordInvalid,         with: -> { render_error(code: 422) }
       rescue_from ActiveRecord::RecordNotFound,        with: -> { render_error(code: 404) }
@@ -10,11 +12,24 @@ module Concerns
       rescue_from AbstractController::ActionNotFound,  with: -> { render_error(code: 404) }
     end
 
-    # NOTE: Alexey Bobyrev 14 Jan 2017
-    # Raise error here to make it visible for application#rescue_from
-    # Ref: https://github.com/rails/rails/issues/671
-    def raise_routing_error
-      raise ActionController::RoutingError.new(params[:path])
+    def non_matching_request
+      path   = params.fetch(:path, '')
+      format = params.fetch(:format, '')
+
+      if path.match(/\.php$/) || format.eql?('php')
+        head :not_acceptable, layout: false
+
+      elsif MYSTERIOUS_ROUTES.any? { |v| v.match(path) }
+        data = request.env.select {|key,_| key.upcase == key }
+        NewRelic::Agent.record_custom_event('UndefinedURL', data)
+        render text: 'Not Found', status: :not_found
+
+      else
+        # NOTE: Alexey Bobyrev 14 Jan 2017
+        # Raise error here to make it visible for application#rescue_from
+        # Ref: https://github.com/rails/rails/issues/671
+        raise ActionController::RoutingError.new(path)
+      end
     end
 
     protected
