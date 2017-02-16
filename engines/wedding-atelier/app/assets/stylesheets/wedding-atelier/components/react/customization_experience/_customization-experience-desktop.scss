@@ -208,7 +208,17 @@
     }
   }
 
-  @media screen and (max-height: 710px) {
+  @media screen and (max-height: 668px) {
+    .customization-panel {
+      padding-top: 15px;
+    }
+
+    .customization-type {
+      margin: 15px auto;
+    }
+  }
+
+  @media screen and (min-height: 669px) and (max-height: 710px) {
     .customization-panel {
       padding-top: 25px;
     }
