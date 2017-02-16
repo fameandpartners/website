@@ -72,7 +72,7 @@ Spree::Product.class_eval do
   attr_accessible :master_attributes
 
   SIZE_CHARTS = SizeChart::CHARTS.keys
-  CNY_DELIVERY_PERIOD = '3 - 4 weeks'
+  CNY_DELIVERY_PERIOD = '2 - 3 weeks'
   validates_inclusion_of :size_chart, in: SIZE_CHARTS
 
   def name_with_sku
