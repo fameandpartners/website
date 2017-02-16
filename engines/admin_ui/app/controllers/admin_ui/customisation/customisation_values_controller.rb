@@ -5,7 +5,7 @@ module AdminUi
     class CustomisationValuesController < AdminUi::ApplicationController
 
       def index
-        @collection = CustomisationValuesGrid.new
+        @collection = CustomisationValuesGrid.new(params[:customisation_values_grid])
         respond_to do |f|
           f.html do
             @collection.scope { |scope| scope.page(params[:page]) }
