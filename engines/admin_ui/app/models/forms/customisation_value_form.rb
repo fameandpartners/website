@@ -13,8 +13,6 @@ module Forms
     validates :presentation, presence: true
     validates :price, numericality: { greater_than_or_equal_to: 0 }
     validates :point_of_view, inclusion: %w(front back), allow_nil: true, allow_blank: true
-    validates_uniqueness_of :presentation
-    validates_uniqueness_of :name
 
     def products
       Spree::Product.active
