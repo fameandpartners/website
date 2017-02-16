@@ -1,6 +1,4 @@
 class WeddingConsultation
-  include ActiveModel::Validations
-
   def to_key
     nil
   end

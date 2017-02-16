@@ -36,6 +36,15 @@
   }
 
   // START - desktop
+  @media (min-width: $bootstrap-lg-width) {
+
+    // NOTE: this is just a workaround for a Design request.
+    .extra-padding-top {
+      padding-top: 50px;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     h1 > span:first-child {
@@ -70,6 +79,10 @@
           > .row {
             display: table-cell;
             vertical-align: middle;
+          }
+
+          > .row.v-align-top {
+            vertical-align: top;
           }
 
         }
@@ -363,8 +376,12 @@
 }
 
 .containerHalfScreenHero {
-  @extend .container-no-padding;
-  overflow-x: hidden;
+  padding: 0;
+  margin: 0 15px;
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    overflow-x: hidden;
+  }
 
   &__heroImg {
     @extend .no-spacing-cols-mobile;

@@ -393,6 +393,9 @@ var MoodBoardEvent = React.createClass({
         var event = this.state.event;
         event.assistants.splice(index, 1);
         this.setState({event: event});
+        var errors = ['Board member removed.'];
+        ReactDOM.render(<Notification errors={errors} />,
+                    $('#notification')[0]);
       }.bind(this),
       error: function(_data) {
         var errors = JSON.parse(_data.responseText).errors;
