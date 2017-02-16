@@ -237,6 +237,17 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
+    get '/the-evening-shop/gowns' => 'products/collections#show', :permalink => 'evening shop-gown'
+    get '/the-evening-shop/slips' => 'products/collections#show', :permalink => 'evening shop-slips'
+    get '/the-evening-shop/fitted' => 'products/collections#show', :permalink => 'evening shop-fitted'
+    get '/the-evening-shop/lace' => 'products/collections#show', :permalink => 'evening shop-lace'
+    get '/the-evening-shop/wraps' => 'products/collections#show', :permalink => 'evening shop-wraps'
+    get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening shop-cold shoulder'
+    get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening shop-plunging'
+    get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening shop-embellished'
+    get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening shop-200'
+    get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening shop-249'
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
