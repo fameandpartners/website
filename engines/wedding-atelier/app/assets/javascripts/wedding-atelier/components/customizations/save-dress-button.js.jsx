@@ -1,35 +1,34 @@
 var SaveDressButton = React.createClass({
-
   propTypes: {
-    eventId: React.PropTypes.number,
-    selectedOptions: React.PropTypes.object,
-    mobile: React.PropTypes.bool,
-    edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object,
-    currentUser: React.PropTypes.object,
-    savedDressCallback: React.PropTypes.func,
-    caption: React.PropTypes.string,
     buttonClass: React.PropTypes.string,
+    caption: React.PropTypes.string,
+    currentUser: React.PropTypes.object,
+    edit: React.PropTypes.bool,
+    eventId: React.PropTypes.number,
+    initialDress: React.PropTypes.object,
+    mobile: React.PropTypes.bool,
+    savedDressCallback: React.PropTypes.func.isRequired,
+    selectedOptions: React.PropTypes.object,
     showSavedModal: React.PropTypes.bool
   },
 
-  saveDress: function(){
-    if(this.props.edit && this.isSameUser()){
+  saveDress: function() {
+    if(this.props.edit && this.isSameUser()) {
       this.updateDress();
-    }else{
+    } else {
       this.createDress();
     }
   },
 
-  isSameUser: function(){
+  isSameUser: function() {
     return this.props.currentUser.user.id === this.props.initialDress.user.id;
   },
 
-  eventPath: function(){
+  eventPath: function() {
     return '/wedding-atelier/events/:event_id/dresses'.replace(':event_id', this.props.eventId);
   },
 
-  createDress: function(){
+  createDress: function() {
     $.ajax({
       type: 'POST',
       url: this.eventPath(),
@@ -40,7 +39,7 @@ var SaveDressButton = React.createClass({
     });
   },
 
-  updateDress: function(){
+  updateDress: function() {
     var url = this.eventPath() + '/' + this.props.initialDress.id;
     $.ajax({
       type: 'PUT',
@@ -52,16 +51,16 @@ var SaveDressButton = React.createClass({
     });
   },
 
-  tryIdFor: function(customization){
+  tryIdFor: function(customization) {
     return customization ? customization.id : null;
   },
 
-  sizeId: function(){
+  sizeId: function() {
     var size = this.props.selectedOptions.size;
-    if(!size){ return null; }
-    if(size.user_profile){
+    if(!size) { return null; }
+    if(size.user_profile) {
       return size.user_profile.dress_size.id;
-    }else{
+    } else {
       return size.id;
     }
   },
@@ -83,13 +82,13 @@ var SaveDressButton = React.createClass({
 
   successCallback: function(data){
     this.props.savedDressCallback();
-    if(this.props.showSavedModal){
+    if(this.props.showSavedModal) {
       $('.js-save-dress-modal').modal();
     }
   },
 
-  errorCallback: function(data){
-    jsonData = JSON.parse(data.responseText)
+  errorCallback: function(data) {
+    var jsonData = JSON.parse(data.responseText);
     ReactDOM.render(<Notification errors={jsonData.errors} />, $('#notification')[0]);
   },
 

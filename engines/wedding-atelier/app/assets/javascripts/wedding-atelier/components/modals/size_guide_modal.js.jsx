@@ -134,10 +134,9 @@ var SizeGuideModal = React.createClass({
                           <p>Skirt Length - Stand with your heels together and measure from your natural waistline to the floor, keeping the tape straight and perpendicular to the floor.</p>
                         </div>
                       </div>
-                      <div className="col-xs-12 col-sm-6">
+                      <div className="size-guide-right col-xs-12 col-sm-6">
                         <p>Fame & Partners sizes are designed to fit the following measurements.</p>
-
-                        <table className="table table-condensed" ref="table">
+                        <table className="measurements-table table table-condensed" ref="table">
                           <thead>
                             <tr>
                               <th colSpan="2">Sizing</th>
@@ -155,7 +154,7 @@ var SizeGuideModal = React.createClass({
                               </th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="measurement-table-body">
                             <tr>
                               <td>US</td>
                               <td>Aus/UK</td>

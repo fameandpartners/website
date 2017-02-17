@@ -84,7 +84,7 @@
               h2.contentBoxItem__title Wedding Atelier<br> App Beta.
               p.contentBoxItem__copy Custom-created, tailor-made looks for the whole bridal party. <br class="visible-sm visible-md">Because your bridesmaids deserve bespoke, too.
 
-              a.contentBoxItem__ctaWrap href=tile_marble_url_1
+              a.contentBoxItem__ctaWrap.ctaWrap__morePaddingTop href=tile_marble_url_1
                 span.cta-link-arrow-right
                   span.cta-link-alt
                     span.copy-highlight ENTER THE APP NOW
@@ -286,6 +286,7 @@
           / ==================================================
           - tile_image_path = image_path("landingpages/bespoke-bridal-collection/marble-box-content-01.jpg")
           - tile_image_mob_path = image_path("landingpages/bespoke-bridal-collection/marble-box-content-01-mob.jpg")
+          - tile_get_the_look = get_the_look_path
           .row
             .col-xs-12.noPadding--mobile
               .contentBox.contentBox__marbleBox.contentBox__marbleBox--safeMarginTop
@@ -294,16 +295,23 @@
                     .copyWrapper.content__lessMarginImg
                       .contentBoxItem
                         h2.contentBoxItem__title Here comes <br><em>the guide.</em>
-                        p.contentBoxItem__copy We're about to unveil 4 step-by-step guides to <br class="visible-sm">nailing your bridal style–including hair, makeup,<br class="visible-sm"> accessories, and more. Stay tuned.
+                        p.contentBoxItem__copy Click to unveil 4 step-by-step guides <br class="visible-sm">to nailing your bridal style–including <br class="visible-sm"> hair, makeup, accessories, the perfect bouquet, and more.
+
+                        a.contentBoxItem__ctaWrap.ctaWrap__morePaddingTop href=tile_get_the_look
+                          span.cta-link-arrow-right
+                            span.cta-link-alt
+                              span.copy-highlight FIND YOUR STYLE
+                            i.icon.icon-arrow-right
 
                   .col-xs-12.col-md-7.vertical-align
                     .imgWrapper
-                      picture
-                        source media="(max-width: 991px)" srcset="#{tile_image_mob_path}"
-                        source media="(min-width: 992px)" srcset="#{tile_image_path}"
-                        img src="#{tile_image_path}" srcset="
-                          #{tile_image_mob_path} 991w,
-                          #{tile_image_path} 992w"
+                      a href=tile_get_the_look
+                        picture
+                          source media="(max-width: 991px)" srcset="#{tile_image_mob_path}"
+                          source media="(min-width: 992px)" srcset="#{tile_image_path}"
+                          img src="#{tile_image_path}" srcset="
+                            #{tile_image_mob_path} 991w,
+                            #{tile_image_path} 992w"
 
     / ==================================================
     / Side by side images + captions
