@@ -245,7 +245,7 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/fitted' => 'products/collections#show', :permalink => 'evening-shop-fitted', :as => :evening_shop_fitted_page
     get '/the-evening-shop/lace' => 'products/collections#show', :permalink => 'evening-shop-lace', :as => :evening_shop_lace_page
     get '/the-evening-shop/wraps' => 'products/collections#show', :permalink => 'evening-shop-wraps', :as => :evening_shop_wraps_page
-    get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening-shop-cold shoulder', :as => :evening_shop_cold_shoulder_page
+    get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening-shop-cold-shoulder', :as => :evening_shop_cold_shoulder_page
     get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening-shop-plunging', :as => :evening_shop_plunging_page
     get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
     get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page
