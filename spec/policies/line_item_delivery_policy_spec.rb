@@ -14,11 +14,11 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
       expect(subject.maximum_delivery_period).to eq('10 - 14 business days')
 
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '14 - 28 business days')
-      expect(subject.maximum_delivery_period).to eq('14 - 28 business days')
+      product.taxons << FactoryGirl.create(:taxon, delivery_period: '2 - 4 weeks')
+      expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
 
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
-      expect(subject.maximum_delivery_period).to eq('14 - 28 business days')
+      expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
     end
   end
 

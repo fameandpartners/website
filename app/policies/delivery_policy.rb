@@ -8,8 +8,8 @@ module Policies
       return Spree::Taxon::DELIVERY_PERIODS.first unless @product.taxons.any?
 
       @product.taxons.inject(@product.taxons.first.delivery_period) do |max_period, taxon|
-        current_major_value = major_value_from_period(taxon.delivery_period)
-        max_major_value = major_value_from_period(max_period)
+        current_major_value = period_in_business_days(taxon.delivery_period)
+        max_major_value = period_in_business_days(max_period)
 
         current_major_value > max_major_value ? taxon.delivery_period : max_period
       end
@@ -24,6 +24,15 @@ module Policies
     end
 
     private
+
+    def period_in_business_days(period)
+      value = major_value_from_period(period)
+      period_units(period) == 'weeks' ? value * 5 : value
+    end
+
+    def period_units(period)
+      period.match(/(?<=\d\s)[\w\s]+$/).to_s
+    end
 
     def major_value_from_period(period)
       period.match(/(?<=\s)\d+/).to_s.to_i

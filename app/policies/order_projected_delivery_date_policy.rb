@@ -1,8 +1,8 @@
 require 'business_time'
 
 module Policies
-
   class OrderProjectedDeliveryDatePolicy
+    include DeliveryPolicy
 
     attr_reader :order
 
@@ -45,19 +45,6 @@ module Policies
       order.line_items.
         map(&:delivery_period).
         max { |period1, period2| period_in_business_days(period1) <=> period_in_business_days(period2) }
-    end
-
-    def period_in_business_days(period)
-      value = major_value_from_period(period)
-      period_units(period) == 'weeks' ? value * 5 : value
-    end
-
-    def period_units(period)
-      period.match(/(?<=\d\s)[\w\s]+$/).to_s
-    end
-
-    def major_value_from_period(period)
-      period.match(/(?<=\s)\d+/).to_s.to_i
     end
   end
 end
