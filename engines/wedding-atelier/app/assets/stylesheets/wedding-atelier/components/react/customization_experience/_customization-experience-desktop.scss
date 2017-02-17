@@ -13,10 +13,19 @@
       padding: 0;
     }
 
-
     &-container {
-      max-width: 90%;
+      height: 100%;
       margin: 0 auto;
+      max-width: 90%;
+      position: relative;
+    }
+
+    &-content {
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translatey(-50%);
     }
   }
 
@@ -204,13 +213,6 @@
     }
 
     .customization-panel-container {
-      bottom: 0;
-      left: 0;
-      height: 100%;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
       width: 75%;
     }
   }
