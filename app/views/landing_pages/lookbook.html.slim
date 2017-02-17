@@ -10,16 +10,20 @@
     .col-md-12
       .panel-hero
         .media-wrap-outer
-          .media-wrap.keep-ratio
+          .media-wrap.keep-ratio.img-as-block
             .inner-wrap
-              = link_to bespoke_bridal_collection_landing_page_path
-                = image_tag "lookbook/bridal-collection.jpg"
+              = link_to modern_collection_landing_page_path
+                = image_tag "lookbook/modern-evening-collection.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light Bespoke Bridal
+              h1.heading.skin-light Modern Evening
               = link_to 'View this collection', bespoke_bridal_collection_landing_page_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to bespoke_bridal_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/bridal-collection.jpg"
+        .copy-wrap Bespoke Bridal <em><span>View this collection</span></em>
     .col-md-6
       = link_to pre_season_evening_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/pre-season-evening-collection.jpg"
@@ -40,10 +44,6 @@
       = link_to gown_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/gown-collection.jpg"
         .copy-wrap Gowns <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to dress_for_wedding_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/weddings-collection.jpg"
-        .copy-wrap Weddings <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
