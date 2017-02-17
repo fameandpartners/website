@@ -7,14 +7,11 @@
 
   .col-md-6.nav-main-menu.text-center
 
-    span.dresses.js-open-nav-menu Shop
+    span.dresses.js-open-nav-menu Shop all
 
     - if Features.active?(:fameweddings)
-      span.wedding.js-open-nav-menu FAME WEDDINGS
-    span.lookbook.js-open-nav-menu LOOKBOOKS
-
-    span.blog
-      a href='http://blog.fameandpartners.com' target='_blank' BLOG
+      span.wedding.js-open-nav-menu The Wedding Shop
+    span.lookbook.js-open-nav-menu The Evening Shop
 
   .col-md-3.nav-icons.text-right
     span.search-wrapper#search
@@ -40,23 +37,23 @@
 
         .col-md-2.dresses-shop-by
           ul
-            li.title Shop by
-            = render partial: 'layouts/redesign/mega_menu/shop_by'
+            li.title Featured
+            = render partial: 'layouts/redesign/header/simplified_nav/featured'
 
         .col-md-2.dresses-style
           ul
-            li.title Style
-            = render partial: 'layouts/redesign/mega_menu/style'
+            li.title Dresses
+            = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
         .col-md-2.dresses-color
           ul
-            li.title Color
-            = render partial: 'layouts/redesign/mega_menu/color'
+            li.title Separates
+            = render partial: 'layouts/redesign/header/simplified_nav/separates'
 
         .col-md-3.dresses-events
           .two-cols
-            .title Dress Code
-            = render partial: 'layouts/redesign/mega_menu/dress_code'
+            .title Collections
+            = render partial: 'layouts/redesign/header/simplified_nav/collections'
 
         .col-md-3
           - if !Features.active?(:getitquick_unavailable)
@@ -72,7 +69,7 @@
                     .row-cta
                       .cta-wrap
                         span.cta-copy.cta-link-white-bg
-                          span.cta-link The Best of Fame
+                          span.cta-link The Best of Fame*
 
     .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
