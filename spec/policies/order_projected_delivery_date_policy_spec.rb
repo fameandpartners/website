@@ -34,7 +34,7 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
       let(:order) { double(Spree::Order, completed_at: completed_at, has_fast_making_items?: true) }
 
       it 'calculates 4 business days' do
-        expected_date = DateTime.parse('Friday April 7 2015')
+        expected_date = DateTime.parse('Friday April 9 2015')
         expect(policy.delivery_date).to eq expected_date
       end
     end

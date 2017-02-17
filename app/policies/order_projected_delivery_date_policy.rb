@@ -4,10 +4,6 @@ module Policies
 
   class OrderProjectedDeliveryDatePolicy
 
-    DELIVERY_DAYS = 10
-    FAST_DELIVERY_DAYS = 4
-    DELAY_DELIVERY_DAYS = 21
-
     attr_reader :order
 
     def initialize(order)
@@ -15,26 +11,50 @@ module Policies
     end
 
     def delivery_date
+      period = delivery_period
+      value = major_value_from_period(period)
+      units = period_units(period)
+
+      case units
+      when 'weeks'
+        order.completed_at + value.weeks
+      when 'days'
+        order.completed_at + value.days
+      when 'business days'
+        value.business_days.after(order.completed_at)
+      end
+    end
+
+    # returns period with 2 numbers and a unit
+    # eq 3 - 4 weeks, 12 - 14 business days etc
+    def delivery_period
       if Features.active?(:cny_delivery_delays)
-        order.completed_at + DELAY_DELIVERY_DAYS.days
+        Policies::DeliveryPolicy::CNY_DELIVERY_PERIOD
       elsif order.has_fast_making_items?
-        FAST_DELIVERY_DAYS.business_days.after(order.completed_at)
+        Policies::DeliveryPolicy::FAST_MAKING_DELIVERY_PERIOD
       else
-        # get maximum from line items delivery periods
-        maximal_delivery_period.business_days.after(order.completed_at)
+        maximal_delivery_period
       end
     end
 
     private
 
+    # returns period with 2 numbers and a unit
+    # eq 3 - 4 weeks, 12 - 14 business days etc
     def maximal_delivery_period
       order.line_items.
         map(&:delivery_period).
-        map { |period| major_value_from_period(period) }.
-        max
+        max { |period1, period2| period_in_business_days(period1) <=> period_in_business_days(period2) }
     end
 
-    private
+    def period_in_business_days(period)
+      value = major_value_from_period(period)
+      period_units(period) == 'weeks' ? value * 5 : value
+    end
+
+    def period_units(period)
+      period.match(/(?<=\d\s)[\w\s]+$/).to_s
+    end
 
     def major_value_from_period(period)
       period.match(/(?<=\s)\d+/).to_s.to_i
