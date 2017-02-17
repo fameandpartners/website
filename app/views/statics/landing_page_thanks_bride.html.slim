@@ -1,0 +1,96 @@
+= render partial: 'pages/robots'
+
+.gratitudePage.mobile-text-center
+
+  .container
+    .row.hidden-md.hidden-lg
+      .col-md-12
+        = image_tag 'http://placehold.it/550x550', class: "img-responsive"
+
+    .row.vertical-align-row
+      .col-md-5.hidden-xs.hidden-sm
+        = image_tag 'http://placehold.it/550x550', class: "img-responsive"
+
+      .col-md-6.vertical-align
+        .gratitudePage__copy
+          .row
+            .col-xs-12
+              h1.title.hidden-xs.hidden-sm Congratulations-
+              h1.title.hidden-md.hidden-lg Congrats-
+              p we’re honored you chose to wear Fame and Partners on your wedding day.
+              p By supporting Fame, you’re supporting women’s empowerment initiatives the world over–we donate $5 of every single sale to UN Women, Plan International, and Akilah. Find out more about your donation.
+              p You’re also helping us reduce fashion’s impact on the environment, since our all of our clothing is made-to-order and never mass produced. Learn more about how our ethical production methods eliminate fashion waste.
+
+  .container
+    section.section-box
+      .row
+        .col-md-6
+          .item.bordered.mobile-change-order
+            .item-copy.position-2
+              h3 Book a <em>free</em> styling session.
+              p Book a free session with our stylist, Amber, for advice on incorporating your new Fame piece into your wardrobe, accessorizing it for day or night, and so much more.
+              = link_to '/dresses/new-this-week'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline Book Now
+                  i.icon.icon-arrow-right
+            = link_to '/dresses/new-this-week', class: 'position-1'
+              = image_tag 'http://placehold.it/300x150', class: 'img-responsive imgSpaceTop', alt: 'Your personal atelier'
+
+        .col-md-6
+          .item.bordered.mobile-change-order
+            .item-copy.position-2
+              h3 Nothing <em>but</em> the FAQs.
+              p Check out Fame’s frequently asked questions to get the answers to any and all questions you may have–including how to return or exchange your item.
+              = link_to '/dresses/new-this-week'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline Find out More
+                  i.icon.icon-arrow-right
+            = link_to '/dresses/new-this-week', class: 'position-1'
+              = image_tag 'http://placehold.it/300x150', class: 'img-responsive imgSpaceTop', alt: 'Your personal atelier'
+
+  .container
+    section.section-box
+      .row
+        .col-md-offset-1.col-md-5
+          .item
+            .item-copy
+              p Scroll through never-ending outfit inspiration from #famefatales and get the first look at new collections, campaigns, and contests.
+              = link_to '/dresses/new-this-week'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline FOLLOW ON INSTAGRAM
+                  i.icon.icon-arrow-right
+            = image_tag 'http://placehold.it/300x250', class: 'img-responsive imgSpaceTop', alt: 'Your personal atelier'
+
+        .col-md-5
+          .item
+            = image_tag 'http://placehold.it/300x250', class: 'img-responsive', alt: 'Your personal atelier'
+            .item-copy
+              p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
+              = link_to '/dresses/new-this-week'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline FIND OUT MORE
+                  i.icon.icon-arrow-right
+
+  .gratitudePage__AppPromoWrapperBg
+    .container
+      .gratitudePage__AppPromoWrapperContent
+        section.padding-container.gratitudePage__formWrapper
+          .row
+            .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
+              h2.heading-overlay For Bridesmaids
+
+          .row.vertical-align-row
+            .col-md-5.col-md-offset-1.col-xs-12.vertical-align
+              .copyWrapper.col-xs-12
+                h2.no-margin
+                  | The Wedding Atelier App
+                p
+                  | Review your orders group chat, update your personal details, and more.
+
+                = image_tag 'http://placehold.it/300x150', class: "img-responsive hidden-md hidden-lg"
+                = link_to wedding_consultation_path, class: 'cta-mobile-featured'
+                  span.btn-xs.btn-featured
+                    span.copy-highlight LOG IN
+
+            .col-md-6.hidden-xs.hidden-sm.vertical-align
+              = image_tag 'http://placehold.it/300x150', class: "img-responsive"
