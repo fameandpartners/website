@@ -7,7 +7,7 @@ module WeddingAtelier
       if event_assistant.try(:destroy)
         head :ok
       else
-        render json: { errors: "Couldn't find board member" }, status: :not_found
+        render json: { errors: ["Couldn't find board member"] }, status: :not_found
       end
     end
   end

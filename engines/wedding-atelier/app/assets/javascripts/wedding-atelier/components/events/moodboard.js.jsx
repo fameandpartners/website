@@ -140,8 +140,8 @@ var MoodBoardEvent = React.createClass({
         that.setState({chatChannel: chatChannel});
         chatChannel.join().then(function() {
           that.setUpMessagingEvents();
-          that.sendMessageBot("Welcome to your wedding board! Here's where you can chat with me (the BridalBot), your wedding party, and your Fame stylist to create your custom wedding looks.").then(function(){
-            that.sendMessageBot("Why don't you begin by creating your first dress?" + '(Just click "ADD YOUR FIRST DRESS" over to the right.) Or, invite a stylist to join your chat to help you get started.');
+          that.sendMessageBot("Welcome to your wedding board. Here's where you can chat with your bridal party, discuss different wedding looks and invite a Fame stylist.").then(function(){
+            that.sendMessageBot("Why don't you begin by creating your first dress? Just select 'ADD YOUR FIRST DRESS' to start customizing.");
           });
         });
       });
@@ -393,6 +393,9 @@ var MoodBoardEvent = React.createClass({
         var event = this.state.event;
         event.assistants.splice(index, 1);
         this.setState({event: event});
+        var errors = ['Board member removed.'];
+        ReactDOM.render(<Notification errors={errors} />,
+                    $('#notification')[0]);
       }.bind(this),
       error: function(_data) {
         var errors = JSON.parse(_data.responseText).errors;

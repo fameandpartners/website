@@ -15,21 +15,22 @@ module WeddingAtelier
         @signup_params = { invitation_id: params[:invitation_id] }
         @user.email = invitation.user_email if invitation
       end
-
       if current_spree_user
         redirect_to wedding_atelier.events_path
       end
     end
 
     def create
-      if params[:invitation_id]
-        invitation = Invitation.find(params[:invitation_id])
-        if invitation.user_email == params[:spree_user][:email]
-          invitation.accept
-        end
+      authenticate_spree_user!
+      if spree_user_signed_in?
+        user_email = params.dig(:spree_user, :email)
+        invitation = Invitation.where(id: params[:invitation_id], user_email: user_email).first
+        invitation.accept if invitation
+        redirect_to wedding_atelier.events_path
+      else
+        flash.now[:error] = t('devise.failure.invalid')
+        render :new
       end
-
-      redirect_to wedding_atelier.events_path
     end
   end
 end
