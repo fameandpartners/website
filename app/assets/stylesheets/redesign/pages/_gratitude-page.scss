@@ -1,0 +1,24 @@
+// Gratitude Page Template
+
+.gratitudePage {
+  margin-bottom: 60px;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+
+  .imgSpaceTop {
+    margin-top: 20px;
+  }
+
+  &__AppPromoWrapperBg {
+    background: url('_backgrounds/marble-texture-bg.jpg');
+    background-size: 150%;
+    padding: 20px 0;
+  }
+
+}
