@@ -1,0 +1,2840 @@
+---
+spree_option_values_0:
+  id: '32'
+  position: '1'
+  name: Fuscia
+  presentation: Fuscia
+  option_type_id: '11'
+  created_at: '2013-08-07 03:05:40.462107'
+  updated_at: '2013-08-07 03:05:40.462107'
+  use_in_customisation: f
+spree_option_values_1:
+  id: '33'
+  position: '2'
+  name: Emerald Green
+  presentation: Emerald Green
+  option_type_id: '11'
+  created_at: '2013-08-07 03:06:36.046484'
+  updated_at: '2013-08-07 03:06:36.046484'
+  use_in_customisation: f
+spree_option_values_2:
+  id: '27'
+  position: '2'
+  name: green
+  presentation: Green
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.533243'
+  updated_at: '2013-12-17 12:24:48.492418'
+  value: "#269C36"
+  use_in_customisation: f
+spree_option_values_3:
+  id: '28'
+  position: '3'
+  name: blue
+  presentation: Blue
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.539857'
+  updated_at: '2013-12-17 12:24:48.502962'
+  value: "#15558B"
+  use_in_customisation: f
+spree_option_values_4:
+  id: '25'
+  position: '0'
+  name: black
+  presentation: Black
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.519322'
+  updated_at: '2015-03-26 01:32:56.780395'
+  value: "#000000"
+  use_in_customisation: t
+spree_option_values_5:
+  id: '46'
+  position: '15'
+  name: ice-blue
+  presentation: Ice Blue
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.939973'
+  updated_at: '2015-03-26 02:10:02.038835'
+  value: "#abfdff"
+  use_in_customisation: t
+spree_option_values_6:
+  id: '229'
+  position: '117'
+  name: ice-grey
+  presentation: Ice Grey
+  option_type_id: '8'
+  created_at: '2015-05-10 02:26:06.201965'
+  updated_at: '2015-05-15 07:54:11.803034'
+  value: ''
+  use_in_customisation: f
+spree_option_values_7:
+  id: '230'
+  position: '118'
+  name: black-and-gold
+  presentation: Black and Gold
+  option_type_id: '8'
+  created_at: '2015-05-15 06:24:03.461277'
+  updated_at: '2015-05-15 07:54:11.80437'
+  value: ''
+  use_in_customisation: f
+spree_option_values_8:
+  id: '231'
+  position: '119'
+  name: ivory-and-pink
+  presentation: Ivory and Pink
+  option_type_id: '8'
+  created_at: '2015-05-15 06:24:03.499373'
+  updated_at: '2015-05-15 07:54:11.805708'
+  value: ''
+  use_in_customisation: f
+spree_option_values_9:
+  id: '232'
+  position: '120'
+  name: light-pink-and-charcoal
+  presentation: Light Pink and Charcoal
+  option_type_id: '8'
+  created_at: '2015-05-15 06:24:03.50739'
+  updated_at: '2015-05-15 07:54:11.807061'
+  value: ''
+  use_in_customisation: f
+spree_option_values_10:
+  id: '233'
+  position: '121'
+  name: ivory-and-navy
+  presentation: Ivory and Navy
+  option_type_id: '8'
+  created_at: '2015-05-15 06:24:03.51541'
+  updated_at: '2015-05-15 07:54:11.808373'
+  value: ''
+  use_in_customisation: f
+spree_option_values_11:
+  id: '228'
+  position: '116'
+  name: sage-green
+  presentation: Sage Green
+  option_type_id: '8'
+  created_at: '2015-05-10 02:26:06.081432'
+  updated_at: '2015-05-15 07:55:08.454738'
+  value: "#95c7bc"
+  use_in_customisation: f
+spree_option_values_12:
+  id: '234'
+  position: '122'
+  name: vibrant-purple
+  presentation: Vibrant Purple
+  option_type_id: '8'
+  created_at: '2015-05-15 06:24:03.556223'
+  updated_at: '2015-05-15 07:55:08.45777'
+  value: "#9f6ba9"
+  use_in_customisation: f
+spree_option_values_13:
+  id: '29'
+  position: '4'
+  name: pink
+  presentation: Pink
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.546672'
+  updated_at: '2014-03-24 14:16:07.417957'
+  value: "#FF95CB"
+  use_in_customisation: f
+spree_option_values_14:
+  id: '346'
+  position: '228'
+  name: black-and-purple
+  presentation: Black And Purple
+  option_type_id: '8'
+  created_at: '2016-05-10 17:32:41.462647'
+  updated_at: '2016-05-10 17:32:41.462647'
+  value: ''
+spree_option_values_15:
+  id: '343'
+  position: '225'
+  name: cobalt-crush-floral
+  presentation: Cobalt Crush Floral
+  option_type_id: '8'
+  created_at: '2016-04-19 03:11:42.189123'
+  updated_at: '2016-05-10 17:32:41.537836'
+  value: ''
+  use_in_customisation: f
+spree_option_values_16:
+  id: '344'
+  position: '226'
+  name: watercolour-camo
+  presentation: Watercolour Camo
+  option_type_id: '8'
+  created_at: '2016-04-19 03:11:42.448604'
+  updated_at: '2016-05-10 17:32:41.539281'
+  value: ''
+  use_in_customisation: f
+spree_option_values_17:
+  id: '345'
+  position: '227'
+  name: renta-watercolour
+  presentation: Renta Watercolour
+  option_type_id: '8'
+  created_at: '2016-04-19 03:11:42.809242'
+  updated_at: '2016-05-10 17:32:41.540696'
+  value: ''
+  use_in_customisation: f
+spree_option_values_18:
+  id: '90'
+  position: '48'
+  name: blush
+  presentation: Blush
+  option_type_id: '8'
+  created_at: '2014-02-17 12:32:27.60061'
+  updated_at: '2015-03-26 01:57:08.12469'
+  value: "#F9DAD8"
+  use_in_customisation: t
+spree_option_values_19:
+  id: '169'
+  position: '70'
+  name: mustard
+  presentation: Mustard
+  option_type_id: '8'
+  created_at: '2014-08-06 12:36:01.811228'
+  updated_at: '2014-08-08 06:36:52.026169'
+  value: "#E9B600"
+  use_in_customisation: f
+spree_option_values_20:
+  id: '74'
+  position: '38'
+  name: fuchsia
+  presentation: Fuchsia
+  option_type_id: '8'
+  created_at: '2013-08-08 11:50:40.71863'
+  updated_at: '2013-12-17 12:25:00.004247'
+  value: "#C74375"
+  use_in_customisation: f
+spree_option_values_21:
+  id: '83'
+  position: '43'
+  name: gold
+  presentation: Gold
+  option_type_id: '8'
+  created_at: '2013-08-09 10:37:57.894135'
+  updated_at: '2013-12-17 12:25:00.073605'
+  value: "#D6AE28"
+  use_in_customisation: f
+spree_option_values_22:
+  id: '209'
+  position: '103'
+  name: lemon-sorbet
+  presentation: Lemon Sorbet
+  option_type_id: '8'
+  created_at: '2015-03-25 09:51:30.687801'
+  updated_at: '2015-03-26 02:18:37.693558'
+  value: "#ffff99"
+  use_in_customisation: f
+spree_option_values_23:
+  id: '45'
+  position: '14'
+  name: lemon
+  presentation: Lemon
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.937914'
+  updated_at: '2014-03-04 20:40:15.482815'
+  value: "#F3D623"
+  use_in_customisation: t
+spree_option_values_24:
+  id: '212'
+  position: '103'
+  name: candy-pink
+  presentation: Candy Pink
+  option_type_id: '8'
+  created_at: '2015-03-25 09:51:30.862652'
+  updated_at: '2015-03-26 02:18:37.696182'
+  value: "#ff99ff"
+  use_in_customisation: f
+spree_option_values_25:
+  id: '213'
+  position: '103'
+  name: wine
+  presentation: Wine
+  option_type_id: '8'
+  created_at: '2015-03-25 09:51:30.870898'
+  updated_at: '2015-03-26 01:28:32.819704'
+  value: ''
+  use_in_customisation: f
+spree_option_values_26:
+  id: '84'
+  position: '44'
+  name: nude
+  presentation: Nude
+  option_type_id: '8'
+  created_at: '2013-08-10 12:24:35.180554'
+  updated_at: '2013-12-17 12:25:00.084288'
+  value: "#E7D0A6"
+  use_in_customisation: f
+spree_option_values_27:
+  id: '347'
+  position: '229'
+  name: light-khaki
+  presentation: Light Khaki
+  option_type_id: '8'
+  created_at: '2016-05-23 20:23:24.912242'
+  updated_at: '2016-05-23 20:23:24.912242'
+  use_in_customisation: f
+spree_option_values_28:
+  id: '348'
+  position: '230'
+  name: pastel-pink
+  presentation: Pastel Pink
+  option_type_id: '8'
+  created_at: '2016-05-23 20:23:24.939963'
+  updated_at: '2016-05-23 20:23:24.939963'
+  use_in_customisation: f
+spree_option_values_29:
+  id: '349'
+  position: '231'
+  name: pale-pink-and-pale-grey
+  presentation: Pale Pink and Pale Grey
+  option_type_id: '8'
+  created_at: '2016-05-23 20:23:25.095967'
+  updated_at: '2016-05-23 20:23:25.095967'
+  use_in_customisation: f
+spree_option_values_30:
+  id: '350'
+  position: '232'
+  name: olive-and-navy
+  presentation: Olive and Navy
+  option_type_id: '8'
+  created_at: '2016-05-23 20:23:25.341092'
+  updated_at: '2016-05-23 20:23:25.341092'
+  use_in_customisation: f
+spree_option_values_31:
+  id: '351'
+  position: '233'
+  name: warm-grey
+  presentation: Warm Grey
+  option_type_id: '8'
+  created_at: '2016-05-23 20:23:25.879735'
+  updated_at: '2016-05-23 20:23:25.879735'
+  use_in_customisation: f
+spree_option_values_32:
+  id: '352'
+  position: '234'
+  name: looking-glass
+  presentation: Looking Glass
+  option_type_id: '8'
+  created_at: '2016-06-03 22:26:12.403128'
+  updated_at: '2016-06-03 22:26:12.403128'
+  use_in_customisation: f
+spree_option_values_33:
+  id: '353'
+  position: '235'
+  name: crosswalk
+  presentation: Crosswalk
+  option_type_id: '8'
+  created_at: '2016-06-03 22:26:12.563678'
+  updated_at: '2016-06-03 22:26:12.563678'
+  use_in_customisation: f
+spree_option_values_34:
+  id: '354'
+  position: '236'
+  name: azure
+  presentation: Azure
+  option_type_id: '8'
+  created_at: '2016-06-03 22:26:12.645581'
+  updated_at: '2016-06-03 22:26:12.645581'
+  use_in_customisation: f
+spree_option_values_35:
+  id: '277'
+  position: '1'
+  name: casablanca
+  presentation: Casablanca
+  option_type_id: '8'
+  created_at: '2015-10-22 09:03:25.798926'
+  updated_at: '2015-10-22 09:03:25.804543'
+  value: "#7c3340"
+  use_in_customisation: f
+spree_option_values_36:
+  id: '278'
+  position: '1'
+  name: socialite
+  presentation: Socialite
+  option_type_id: '8'
+  created_at: '2015-10-22 09:03:25.808699'
+  updated_at: '2015-10-22 09:03:25.810364'
+  value: "#c13c38"
+  use_in_customisation: f
+spree_option_values_37:
+  id: '279'
+  position: '1'
+  name: morocco
+  presentation: Morocco
+  option_type_id: '8'
+  created_at: '2015-10-22 09:03:25.813191'
+  updated_at: '2015-10-22 09:03:25.815002'
+  value: "#98524d"
+  use_in_customisation: f
+spree_option_values_38:
+  id: '280'
+  position: '1'
+  name: firered
+  presentation: FireRed
+  option_type_id: '8'
+  created_at: '2015-10-22 09:03:25.817981'
+  updated_at: '2015-10-22 09:03:25.819492'
+  value: "#942529"
+  use_in_customisation: f
+spree_option_values_39:
+  id: '86'
+  position: '0'
+  name: US0/AU4
+  presentation: US 0/AU 4
+  option_type_id: '7'
+  created_at: '2013-11-30 10:45:36.737418'
+  updated_at: '2015-11-02 05:32:48.7378'
+  use_in_customisation: f
+spree_option_values_40:
+  id: '34'
+  position: '1'
+  name: US2/AU6
+  presentation: US 2/AU 6
+  option_type_id: '7'
+  created_at: '2013-08-07 04:15:30.24272'
+  updated_at: '2015-11-02 05:32:48.739693'
+  use_in_customisation: f
+spree_option_values_41:
+  id: '20'
+  position: '2'
+  name: US4/AU8
+  presentation: US 4/AU 8
+  option_type_id: '7'
+  created_at: '2013-08-07 02:15:45.475206'
+  updated_at: '2015-11-02 05:32:48.741475'
+  use_in_customisation: f
+spree_option_values_42:
+  id: '21'
+  position: '3'
+  name: US6/AU10
+  presentation: US 6/AU 10
+  option_type_id: '7'
+  created_at: '2013-08-07 02:15:45.485791'
+  updated_at: '2015-11-02 05:32:48.74297'
+  use_in_customisation: f
+spree_option_values_43:
+  id: '22'
+  position: '4'
+  name: US8/AU12
+  presentation: US 8/AU 12
+  option_type_id: '7'
+  created_at: '2013-08-07 02:15:45.493767'
+  updated_at: '2015-11-02 05:32:48.744373'
+  use_in_customisation: f
+spree_option_values_44:
+  id: '23'
+  position: '5'
+  name: US10/AU14
+  presentation: US 10/AU 14
+  option_type_id: '7'
+  created_at: '2013-08-07 02:15:45.500665'
+  updated_at: '2015-11-02 05:32:48.745781'
+  use_in_customisation: f
+spree_option_values_45:
+  id: '24'
+  position: '6'
+  name: US12/AU16
+  presentation: US 12/AU 16
+  option_type_id: '7'
+  created_at: '2013-08-07 02:15:45.507937'
+  updated_at: '2015-11-02 05:32:48.747198'
+  use_in_customisation: f
+spree_option_values_46:
+  id: '254'
+  position: '141'
+  name: rose-gold
+  presentation: Rose Gold
+  option_type_id: '8'
+  created_at: '2015-06-24 06:01:10.144954'
+  updated_at: '2015-07-20 05:27:54.879001'
+  value: "#d6aa85"
+  use_in_customisation: f
+spree_option_values_47:
+  id: '240'
+  position: '127'
+  name: merlot
+  presentation: Merlot
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.532717'
+  updated_at: '2015-06-24 06:01:10.159626'
+  value: ''
+  use_in_customisation: f
+spree_option_values_48:
+  id: '241'
+  position: '128'
+  name: tan
+  presentation: Tan
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.55106'
+  updated_at: '2015-06-24 06:01:10.161603'
+  value: ''
+  use_in_customisation: f
+spree_option_values_49:
+  id: '242'
+  position: '129'
+  name: surreal-floral-white
+  presentation: Surreal Floral White
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.591437'
+  updated_at: '2015-06-24 06:01:10.163502'
+  value: ''
+  use_in_customisation: f
+spree_option_values_50:
+  id: '243'
+  position: '130'
+  name: surreal-floral-black
+  presentation: Surreal Floral Black
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.70754'
+  updated_at: '2015-06-24 06:01:10.165255'
+  value: ''
+  use_in_customisation: f
+spree_option_values_51:
+  id: '244'
+  position: '131'
+  name: aqua
+  presentation: Aqua
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.906464'
+  updated_at: '2015-06-24 06:01:10.166921'
+  value: ''
+  use_in_customisation: f
+spree_option_values_52:
+  id: '245'
+  position: '132'
+  name: olive
+  presentation: Olive
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:57.980634'
+  updated_at: '2015-06-24 06:01:10.168695'
+  value: ''
+  use_in_customisation: f
+spree_option_values_53:
+  id: '246'
+  position: '133'
+  name: black-and-vintage-gold
+  presentation: Black and Vintage Gold
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.167732'
+  updated_at: '2015-06-24 06:01:10.170685'
+  value: ''
+  use_in_customisation: f
+spree_option_values_54:
+  id: '247'
+  position: '134'
+  name: ivory-and-ice-blue
+  presentation: Ivory and Ice Blue
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.179593'
+  updated_at: '2015-06-24 06:01:10.172887'
+  value: ''
+  use_in_customisation: f
+spree_option_values_55:
+  id: '248'
+  position: '135'
+  name: garden-floral
+  presentation: Garden Floral
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.218871'
+  updated_at: '2015-06-24 06:01:10.175037'
+  value: ''
+  use_in_customisation: f
+spree_option_values_56:
+  id: '250'
+  position: '137'
+  name: geo-sage
+  presentation: Geo Sage
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.473036'
+  updated_at: '2015-06-24 06:01:10.178711'
+  value: ''
+  use_in_customisation: f
+spree_option_values_57:
+  id: '235'
+  position: '123'
+  name: royal-purple
+  presentation: Royal Purple
+  option_type_id: '8'
+  created_at: '2015-05-15 07:54:11.797605'
+  updated_at: '2015-05-15 07:55:41.472912'
+  value: "#784689"
+  use_in_customisation: t
+spree_option_values_58:
+  id: '256'
+  position: '143'
+  name: bright-lavender
+  presentation: Bright Lavender
+  option_type_id: '8'
+  created_at: '2015-07-20 05:33:09.625422'
+  updated_at: '2015-07-21 06:46:53.374963'
+  value: "#ddb6f9"
+  use_in_customisation: f
+spree_option_values_59:
+  id: '72'
+  position: '36'
+  name: sky-blue
+  presentation: Sky Blue
+  option_type_id: '8'
+  created_at: '2013-08-08 11:26:58.205874'
+  updated_at: '2013-12-17 12:24:59.981129'
+  value: "#96C0E6"
+  use_in_customisation: f
+spree_option_values_60:
+  id: '203'
+  position: '98'
+  name: indigo
+  presentation: Indigo
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.386757'
+  updated_at: '2015-03-26 02:18:37.68302'
+  value: "#3366cc"
+  use_in_customisation: f
+spree_option_values_61:
+  id: '204'
+  position: '99'
+  name: lavender-grey
+  presentation: Lavender Grey
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.398235'
+  updated_at: '2015-03-26 02:18:37.685644'
+  value: "#9999cc"
+  use_in_customisation: f
+spree_option_values_62:
+  id: '206'
+  position: '101'
+  name: pale-green
+  presentation: Pale Green
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.734003'
+  updated_at: '2015-03-26 02:18:37.688262'
+  value: "#d1f6d7"
+  use_in_customisation: t
+spree_option_values_63:
+  id: '205'
+  position: '100'
+  name: light-blue
+  presentation: Light Blue
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.577708'
+  updated_at: '2015-03-30 00:53:54.000583'
+  value: "#66ccff"
+  use_in_customisation: t
+spree_option_values_64:
+  id: '220'
+  position: '108'
+  name: pale-yellow
+  presentation: Pale Yellow
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:42.943232'
+  updated_at: '2015-03-30 00:53:54.005762'
+  value: "#FFFACD"
+  use_in_customisation: f
+spree_option_values_65:
+  id: '221'
+  position: '109'
+  name: sea-foam
+  presentation: Sea Foam
+  option_type_id: '8'
+  created_at: '2015-03-25 10:10:14.721788'
+  updated_at: '2015-03-30 00:53:54.007312'
+  value: "#41cbb5"
+  use_in_customisation: f
+spree_option_values_66:
+  id: '260'
+  position: '147'
+  name: light-lavender
+  presentation: Light Lavender
+  option_type_id: '8'
+  created_at: '2015-09-19 11:06:36.486185'
+  updated_at: '2015-10-19 23:37:05.479195'
+  value: ''
+  use_in_customisation: f
+spree_option_values_67:
+  id: '262'
+  position: '149'
+  name: cheetah
+  presentation: Cheetah
+  option_type_id: '8'
+  created_at: '2015-09-30 00:27:36.465898'
+  updated_at: '2015-10-19 23:37:05.48349'
+  value: ''
+  use_in_customisation: f
+spree_option_values_68:
+  id: '263'
+  position: '150'
+  name: rosebud
+  presentation: Rosebud
+  option_type_id: '8'
+  created_at: '2015-09-30 00:27:36.526217'
+  updated_at: '2015-10-19 23:37:05.485683'
+  value: ''
+  use_in_customisation: f
+spree_option_values_69:
+  id: '264'
+  position: '151'
+  name: polka-dot
+  presentation: Polka-dot
+  option_type_id: '8'
+  created_at: '2015-09-30 00:27:36.571523'
+  updated_at: '2015-10-19 23:37:05.487625'
+  value: ''
+  use_in_customisation: f
+spree_option_values_70:
+  id: '265'
+  position: '152'
+  name: apricot
+  presentation: Apricot
+  option_type_id: '8'
+  created_at: '2015-09-30 00:27:36.767826'
+  updated_at: '2015-10-19 23:37:05.489321'
+  value: ''
+  use_in_customisation: f
+spree_option_values_71:
+  id: '276'
+  position: '163'
+  name: dark-forest
+  presentation: Dark Forest
+  option_type_id: '8'
+  created_at: '2015-10-19 23:37:05.466903'
+  updated_at: '2015-10-23 04:58:24.109374'
+  value: "#173a22"
+  use_in_customisation: f
+spree_option_values_72:
+  id: '281'
+  position: '164'
+  name: dark-nude
+  presentation: Dark Nude
+  option_type_id: '8'
+  created_at: '2015-10-23 04:59:02.208287'
+  updated_at: '2015-10-23 05:10:18.559505'
+  value: "#d2af99"
+  use_in_customisation: f
+spree_option_values_73:
+  id: '292'
+  position: '175'
+  name: blue-fallen-leaves
+  presentation: Blue Fallen Leaves
+  option_type_id: '8'
+  created_at: '2015-12-01 06:25:54.805393'
+  updated_at: '2016-01-04 23:06:00.797978'
+  value: ''
+  use_in_customisation: f
+spree_option_values_74:
+  id: '293'
+  position: '176'
+  name: bright-yellow
+  presentation: Bright Yellow
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.624649'
+  updated_at: '2016-05-10 17:32:41.467772'
+  value: ''
+  use_in_customisation: f
+spree_option_values_75:
+  id: '294'
+  position: '177'
+  name: mid-grey
+  presentation: Mid Grey
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.686107'
+  updated_at: '2016-05-10 17:32:41.469387'
+  value: ''
+  use_in_customisation: f
+spree_option_values_76:
+  id: '89'
+  position: '48'
+  name: burgundy
+  presentation: Burgundy
+  option_type_id: '8'
+  created_at: '2014-02-17 11:58:14.777491'
+  updated_at: '2017-02-13 16:42:32.37125'
+  value: "#77202F"
+  use_in_customisation: t
+spree_option_values_77:
+  id: '26'
+  position: '1'
+  name: red
+  presentation: Red
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.526534'
+  updated_at: '2017-02-13 16:42:32.375557'
+  value: "#E01B1B"
+  use_in_customisation: t
+spree_option_values_78:
+  id: '49'
+  position: '18'
+  name: coral
+  presentation: Coral
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.946108'
+  updated_at: '2017-02-13 16:42:32.380137'
+  value: "#F7C6B0"
+  use_in_customisation: t
+spree_option_values_79:
+  id: '79'
+  position: '41'
+  name: pale-blue
+  presentation: Pale Blue
+  option_type_id: '8'
+  created_at: '2013-08-09 06:58:38.640111'
+  updated_at: '2017-02-13 16:42:32.411817'
+  value: "#BBD0ED"
+  use_in_customisation: t
+spree_option_values_80:
+  id: '43'
+  position: '12'
+  name: hunter-green
+  presentation: Hunter Green
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.933725'
+  updated_at: '2013-12-17 12:24:48.622672'
+  value: "#003200"
+  use_in_customisation: f
+spree_option_values_81:
+  id: '44'
+  position: '13'
+  name: lime-green
+  presentation: Lime Green
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.935844'
+  updated_at: '2013-12-17 12:24:48.632457'
+  value: "#ADD418"
+  use_in_customisation: f
+spree_option_values_82:
+  id: '47'
+  position: '16'
+  name: bright-orange
+  presentation: Bright Orange
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.942003'
+  updated_at: '2013-12-17 12:24:48.661509'
+  value: "#FF7800"
+  use_in_customisation: f
+spree_option_values_83:
+  id: '48'
+  position: '17'
+  name: bright-blue
+  presentation: Bright Blue
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.944053'
+  updated_at: '2013-12-17 12:24:48.670522'
+  value: "#01A7F6"
+  use_in_customisation: f
+spree_option_values_84:
+  id: '295'
+  position: '178'
+  name: sunset-orange
+  presentation: Sunset Orange
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.697537'
+  updated_at: '2016-05-10 17:32:41.470876'
+  value: ''
+  use_in_customisation: f
+spree_option_values_85:
+  id: '296'
+  position: '179'
+  name: cornflower-blue
+  presentation: Cornflower Blue
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.706364'
+  updated_at: '2016-05-10 17:32:41.472304'
+  value: ''
+  use_in_customisation: f
+spree_option_values_86:
+  id: '297'
+  position: '180'
+  name: dark-chocolate
+  presentation: Dark Chocolate
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.713418'
+  updated_at: '2016-05-10 17:32:41.473739'
+  value: ''
+  use_in_customisation: f
+spree_option_values_87:
+  id: '298'
+  position: '181'
+  name: coffe
+  presentation: Coffe
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.72098'
+  updated_at: '2016-05-10 17:32:41.475189'
+  value: ''
+  use_in_customisation: f
+spree_option_values_88:
+  id: '299'
+  position: '182'
+  name: army-green
+  presentation: Army green
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.730814'
+  updated_at: '2016-05-10 17:32:41.476611'
+  value: ''
+  use_in_customisation: f
+spree_option_values_89:
+  id: '319'
+  position: '202'
+  name: feather-love
+  presentation: Feather Love
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:18.242513'
+  updated_at: '2016-05-10 17:32:41.50499'
+  value: ''
+  use_in_customisation: f
+spree_option_values_90:
+  id: '320'
+  position: '203'
+  name: palermo-floral
+  presentation: Palermo Floral
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:18.608241'
+  updated_at: '2016-05-10 17:32:41.506414'
+  value: ''
+  use_in_customisation: f
+spree_option_values_91:
+  id: '149'
+  position: '7'
+  name: US14/AU18
+  presentation: US 14/AU 18
+  option_type_id: '7'
+  created_at: '2014-03-15 13:25:35.497894'
+  updated_at: '2015-11-02 05:32:48.748564'
+  use_in_customisation: f
+spree_option_values_92:
+  id: '148'
+  position: '8'
+  name: US16/AU20
+  presentation: US 16/AU 20
+  option_type_id: '7'
+  created_at: '2014-03-15 13:25:35.494581'
+  updated_at: '2015-11-02 05:32:48.749972'
+  use_in_customisation: f
+spree_option_values_93:
+  id: '147'
+  position: '9'
+  name: US18/AU22
+  presentation: US 18/AU 22
+  option_type_id: '7'
+  created_at: '2014-03-15 13:25:35.49139'
+  updated_at: '2015-11-02 05:32:48.751386'
+  use_in_customisation: f
+spree_option_values_94:
+  id: '146'
+  position: '10'
+  name: US20/AU24
+  presentation: US 20/AU 24
+  option_type_id: '7'
+  created_at: '2014-03-15 13:25:35.488048'
+  updated_at: '2015-11-02 05:32:48.752837'
+  use_in_customisation: f
+spree_option_values_95:
+  id: '145'
+  position: '11'
+  name: US22/AU26
+  presentation: US 22/AU 26
+  option_type_id: '7'
+  created_at: '2014-03-15 13:25:35.483394'
+  updated_at: '2015-11-02 05:32:48.754224'
+  use_in_customisation: f
+spree_option_values_96:
+  id: '59'
+  position: '25'
+  name: taupe
+  presentation: Taupe
+  option_type_id: '8'
+  created_at: '2013-08-08 11:18:51.346474'
+  updated_at: '2015-03-26 02:13:25.203291'
+  value: "#c9bba4"
+  use_in_customisation: t
+spree_option_values_97:
+  id: '65'
+  position: '30'
+  name: ivory
+  presentation: Ivory
+  option_type_id: '8'
+  created_at: '2013-08-08 11:25:45.588799'
+  updated_at: '2015-03-26 02:03:30.046458'
+  value: "#FFFFF0"
+  use_in_customisation: t
+spree_option_values_98:
+  id: '139'
+  position: '58'
+  name: creme
+  presentation: Creme
+  option_type_id: '8'
+  created_at: '2014-02-18 21:59:54.402872'
+  updated_at: '2014-02-26 09:05:12.106904'
+  value: "#EBE5CD"
+  use_in_customisation: f
+spree_option_values_99:
+  id: '137'
+  position: '56'
+  name: monochrome
+  presentation: Monochrome
+  option_type_id: '8'
+  created_at: '2014-02-18 21:59:54.394978'
+  updated_at: '2014-02-26 09:12:43.499847'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_100:
+  id: '87'
+  position: '46'
+  name: lavender
+  presentation: Lavender
+  option_type_id: '8'
+  created_at: '2014-02-16 21:21:01.832535'
+  updated_at: '2015-03-26 02:10:02.052405'
+  value: "#d9c0e7"
+  use_in_customisation: t
+spree_option_values_101:
+  id: '69'
+  position: '33'
+  name: pale-lavender
+  presentation: Pale Lavender
+  option_type_id: '8'
+  created_at: '2013-08-08 11:26:58.19943'
+  updated_at: '2013-12-17 12:24:59.943907'
+  value: "#D5C5E9"
+  use_in_customisation: f
+spree_option_values_102:
+  id: '71'
+  position: '35'
+  name: bronze
+  presentation: Bronze
+  option_type_id: '8'
+  created_at: '2013-08-08 11:26:58.203703'
+  updated_at: '2013-12-17 12:24:59.968052'
+  value: "#9D6A4B"
+  use_in_customisation: f
+spree_option_values_103:
+  id: '219'
+  position: '107'
+  name: white-and-black
+  presentation: White and Black
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:42.509557'
+  updated_at: '2015-03-26 01:28:32.834798'
+  value: ''
+  use_in_customisation: f
+spree_option_values_104:
+  id: '60'
+  position: '26'
+  name: grey
+  presentation: Grey
+  option_type_id: '8'
+  created_at: '2013-08-08 11:18:51.348554'
+  updated_at: '2013-12-17 12:24:59.820843'
+  value: "#A3A7A8"
+  use_in_customisation: f
+spree_option_values_105:
+  id: '62'
+  position: '28'
+  name: mauve
+  presentation: Mauve
+  option_type_id: '8'
+  created_at: '2013-08-08 11:23:55.825469'
+  updated_at: '2013-12-17 12:24:59.85272'
+  value: "#A68F97"
+  use_in_customisation: f
+spree_option_values_106:
+  id: '53'
+  position: '20'
+  name: fluoro-yellow
+  presentation: Fluoro Yellow
+  option_type_id: '8'
+  created_at: '2013-08-08 11:04:53.837892'
+  updated_at: '2013-12-17 12:24:59.731162'
+  value: "#F4FF02"
+  use_in_customisation: f
+spree_option_values_107:
+  id: '40'
+  position: '10'
+  name: silver
+  presentation: Silver
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.927556'
+  updated_at: '2013-12-17 12:24:48.593427'
+  value: "#D0D1CC"
+  use_in_customisation: f
+spree_option_values_108:
+  id: '52'
+  position: '19'
+  name: fluoro-orange
+  presentation: Fluoro Orange
+  option_type_id: '8'
+  created_at: '2013-08-08 11:04:53.835819'
+  updated_at: '2014-03-04 20:40:15.487769'
+  value: "#FF6903"
+  use_in_customisation: t
+spree_option_values_109:
+  id: '31'
+  position: '5'
+  name: yellow
+  presentation: Yellow
+  option_type_id: '8'
+  created_at: '2013-08-07 02:15:45.560507'
+  updated_at: '2013-12-17 12:24:48.531933'
+  value: "#FFE100"
+  use_in_customisation: f
+spree_option_values_110:
+  id: '36'
+  position: '8'
+  name: blood-red
+  presentation: Blood Red
+  option_type_id: '8'
+  created_at: '2013-08-08 10:50:31.357726'
+  updated_at: '2013-12-17 12:24:48.563361'
+  value: "#C00D1D"
+  use_in_customisation: f
+spree_option_values_111:
+  id: '257'
+  position: '144'
+  name: gypsy-scarf
+  presentation: Gypsy Scarf
+  option_type_id: '8'
+  created_at: '2015-07-21 06:46:53.368415'
+  updated_at: '2015-10-19 23:37:05.471191'
+  value: ''
+  use_in_customisation: f
+spree_option_values_112:
+  id: '258'
+  position: '145'
+  name: gypsy-queen
+  presentation: Gypsy Queen
+  option_type_id: '8'
+  created_at: '2015-07-21 06:46:53.373108'
+  updated_at: '2015-10-19 23:37:05.47478'
+  value: ''
+  use_in_customisation: f
+spree_option_values_113:
+  id: '266'
+  position: '153'
+  name: forest-green
+  presentation: Forest Green
+  option_type_id: '8'
+  created_at: '2015-10-05 05:56:15.755347'
+  updated_at: '2015-10-19 23:37:05.490964'
+  value: ''
+  use_in_customisation: f
+spree_option_values_114:
+  id: '267'
+  position: '154'
+  name: gunmetal
+  presentation: Gunmetal
+  option_type_id: '8'
+  created_at: '2015-10-05 05:56:15.819382'
+  updated_at: '2015-10-19 23:37:05.492542'
+  value: ''
+  use_in_customisation: f
+spree_option_values_115:
+  id: '268'
+  position: '155'
+  name: apple-green
+  presentation: Apple Green
+  option_type_id: '8'
+  created_at: '2015-10-05 05:56:16.089439'
+  updated_at: '2015-10-19 23:37:05.49415'
+  value: ''
+  use_in_customisation: f
+spree_option_values_116:
+  id: '269'
+  position: '156'
+  name: horoscope
+  presentation: Horoscope
+  option_type_id: '8'
+  created_at: '2015-10-05 05:56:16.191244'
+  updated_at: '2015-10-19 23:37:05.495737'
+  value: ''
+  use_in_customisation: f
+spree_option_values_117:
+  id: '326'
+  position: '208'
+  name: dark-mint
+  presentation: Dark Mint
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:30.373964'
+  updated_at: '2016-05-10 17:32:41.513557'
+  value: ''
+  use_in_customisation: f
+spree_option_values_118:
+  id: '327'
+  position: '209'
+  name: pink-and-rose
+  presentation: Pink and Rose
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:32.712269'
+  updated_at: '2016-05-10 17:32:41.515019'
+  value: ''
+  use_in_customisation: f
+spree_option_values_119:
+  id: '328'
+  position: '210'
+  name: light-teal
+  presentation: Light Teal
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:34.426994'
+  updated_at: '2016-05-10 17:32:41.516437'
+  value: ''
+  use_in_customisation: f
+spree_option_values_120:
+  id: '35'
+  position: '6'
+  name: orange
+  presentation: Orange
+  option_type_id: '8'
+  created_at: '2013-08-08 06:47:57.223222'
+  updated_at: '2014-03-04 20:40:15.473166'
+  value: "#FF8434"
+  use_in_customisation: t
+spree_option_values_121:
+  id: '329'
+  position: '211'
+  name: ruby
+  presentation: Ruby
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:36.911827'
+  updated_at: '2016-05-10 17:32:41.517877'
+  value: ''
+  use_in_customisation: f
+spree_option_values_122:
+  id: '198'
+  position: '93'
+  name: blue-azalea-floral
+  presentation: Blue Azalea Floral
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:21.821865'
+  updated_at: '2015-03-26 01:28:32.782153'
+  value: ''
+  use_in_customisation: f
+spree_option_values_123:
+  id: '199'
+  position: '94'
+  name: pink-azalea-floral
+  presentation: Pink Azalea Floral
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:21.852483'
+  updated_at: '2015-03-26 01:28:32.784622'
+  value: ''
+  use_in_customisation: f
+spree_option_values_124:
+  id: '200'
+  position: '95'
+  name: midnight-floral
+  presentation: Midnight Floral
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:21.969539'
+  updated_at: '2015-03-26 01:28:32.787202'
+  value: ''
+  use_in_customisation: f
+spree_option_values_125:
+  id: '201'
+  position: '96'
+  name: deep-purple
+  presentation: Deep Purple
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.113679'
+  updated_at: '2015-03-26 01:28:32.789936'
+  value: ''
+  use_in_customisation: f
+spree_option_values_126:
+  id: '202'
+  position: '97'
+  name: bright-red
+  presentation: Bright Red
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.233286'
+  updated_at: '2015-03-26 02:18:37.680384'
+  value: "#ff3333"
+  use_in_customisation: f
+spree_option_values_127:
+  id: '237'
+  position: '124'
+  name: pink-and-blush
+  presentation: Pink and Blush
+  option_type_id: '8'
+  created_at: '2015-05-17 10:25:24.034929'
+  updated_at: '2015-06-24 06:01:10.153295'
+  value: ''
+  use_in_customisation: f
+spree_option_values_128:
+  id: '238'
+  position: '125'
+  name: ivory-and-tan
+  presentation: Ivory and Tan
+  option_type_id: '8'
+  created_at: '2015-05-17 10:25:24.046796'
+  updated_at: '2015-06-24 06:01:10.155498'
+  value: ''
+  use_in_customisation: f
+spree_option_values_129:
+  id: '239'
+  position: '126'
+  name: pastel-peach
+  presentation: Pastel Peach
+  option_type_id: '8'
+  created_at: '2015-05-17 10:25:24.089924'
+  updated_at: '2015-06-24 06:01:10.157684'
+  value: ''
+  use_in_customisation: f
+spree_option_values_130:
+  id: '270'
+  position: '157'
+  name: navy-and-black
+  presentation: Navy and Black
+  option_type_id: '8'
+  created_at: '2015-10-07 04:39:13.08163'
+  updated_at: '2015-10-19 23:37:05.497375'
+  value: ''
+  use_in_customisation: f
+spree_option_values_131:
+  id: '330'
+  position: '212'
+  name: bright-candy-pink
+  presentation: Bright Candy Pink
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:37.730233'
+  updated_at: '2016-05-10 17:32:41.519269'
+  value: ''
+  use_in_customisation: f
+spree_option_values_132:
+  id: '331'
+  position: '213'
+  name: lipstick-red
+  presentation: Lipstick Red
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:38.726795'
+  updated_at: '2016-05-10 17:32:41.520682'
+  value: ''
+  use_in_customisation: f
+spree_option_values_133:
+  id: '332'
+  position: '214'
+  name: mid-blue
+  presentation: Mid Blue
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:38.78157'
+  updated_at: '2016-05-10 17:32:41.522111'
+  value: ''
+  use_in_customisation: f
+spree_option_values_134:
+  id: '333'
+  position: '215'
+  name: metallic-peach
+  presentation: Metallic Peach
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:40.684013'
+  updated_at: '2016-05-10 17:32:41.523542'
+  value: ''
+  use_in_customisation: f
+spree_option_values_135:
+  id: '334'
+  position: '216'
+  name: dusty-peach
+  presentation: Dusty Peach
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:41.423321'
+  updated_at: '2016-05-10 17:32:41.525099'
+  value: ''
+  use_in_customisation: f
+spree_option_values_136:
+  id: '335'
+  position: '217'
+  name: silver-and-pale-pink
+  presentation: Silver and Pale Pink
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:41.506338'
+  updated_at: '2016-05-10 17:32:41.526499'
+  value: ''
+  use_in_customisation: f
+spree_option_values_137:
+  id: '38'
+  position: '7'
+  name: white
+  presentation: White
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.921939'
+  updated_at: '2014-03-04 20:40:15.476026'
+  value: "#FFFFFF"
+  use_in_customisation: t
+spree_option_values_138:
+  id: '336'
+  position: '218'
+  name: ivory-and-pale-pink
+  presentation: Ivory and Pale Pink
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:47.406321'
+  updated_at: '2016-05-10 17:32:41.527936'
+  value: ''
+  use_in_customisation: f
+spree_option_values_139:
+  id: '337'
+  position: '219'
+  name: ivory-and-black
+  presentation: Ivory and Black
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:49.368702'
+  updated_at: '2016-05-10 17:32:41.52933'
+  value: ''
+  use_in_customisation: f
+spree_option_values_140:
+  id: '338'
+  position: '220'
+  name: polka-dot
+  presentation: Polka Dot
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:50.680464'
+  updated_at: '2016-05-10 17:32:41.530748'
+  value: ''
+  use_in_customisation: f
+spree_option_values_141:
+  id: '300'
+  position: '183'
+  name: light-nude
+  presentation: Light Nude
+  option_type_id: '8'
+  created_at: '2016-01-29 06:14:22.809765'
+  updated_at: '2016-05-10 17:32:41.478094'
+  value: ''
+  use_in_customisation: f
+spree_option_values_142:
+  id: '301'
+  position: '184'
+  name: coffee
+  presentation: Coffee
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:23.78342'
+  updated_at: '2016-05-10 17:32:41.479535'
+  value: ''
+  use_in_customisation: f
+spree_option_values_143:
+  id: '196'
+  position: '91'
+  name: light-pink
+  presentation: Light Pink
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:21.268547'
+  updated_at: '2015-03-26 01:28:32.776126'
+  value: "#ffecef"
+  use_in_customisation: t
+spree_option_values_144:
+  id: '207'
+  position: '102'
+  name: brick
+  presentation: Brick
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:22.830619'
+  updated_at: '2015-03-26 02:18:37.690959'
+  value: "#993333"
+  use_in_customisation: f
+spree_option_values_145:
+  id: '302'
+  position: '185'
+  name: grand-lily
+  presentation: Grand Lily
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:23.94608'
+  updated_at: '2016-05-10 17:32:41.480975'
+  value: ''
+  use_in_customisation: f
+spree_option_values_146:
+  id: '303'
+  position: '186'
+  name: midnight-reptile
+  presentation: Midnight Reptile
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:23.995033'
+  updated_at: '2016-05-10 17:32:41.482363'
+  value: ''
+  use_in_customisation: f
+spree_option_values_147:
+  id: '304'
+  position: '187'
+  name: coffeee
+  presentation: Coffeee
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:24.339537'
+  updated_at: '2016-05-10 17:32:41.483773'
+  value: ''
+  use_in_customisation: f
+spree_option_values_148:
+  id: '249'
+  position: '136'
+  name: tribal-love
+  presentation: Tribal Love
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.375665'
+  updated_at: '2015-06-24 06:01:10.176967'
+  value: ''
+  use_in_customisation: f
+spree_option_values_149:
+  id: '251'
+  position: '138'
+  name: zebra
+  presentation: Zebra
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.51492'
+  updated_at: '2015-06-24 06:01:10.180437'
+  value: ''
+  use_in_customisation: f
+spree_option_values_150:
+  id: '252'
+  position: '139'
+  name: watercolour
+  presentation: Watercolour
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.584537'
+  updated_at: '2015-06-24 06:01:10.182261'
+  value: ''
+  use_in_customisation: f
+spree_option_values_151:
+  id: '253'
+  position: '140'
+  name: tropical-floral
+  presentation: Tropical Floral
+  option_type_id: '8'
+  created_at: '2015-06-05 05:37:58.654266'
+  updated_at: '2015-06-24 06:01:10.184151'
+  value: ''
+  use_in_customisation: f
+spree_option_values_152:
+  id: '255'
+  position: '142'
+  name: purple-metal
+  presentation: Purple Metal
+  option_type_id: '8'
+  created_at: '2015-07-20 05:27:54.873277'
+  updated_at: '2015-07-20 05:33:09.6285'
+  value: "#776385"
+  use_in_customisation: f
+spree_option_values_153:
+  id: '259'
+  position: '146'
+  name: forrest-green
+  presentation: Forrest Green
+  option_type_id: '8'
+  created_at: '2015-09-19 11:04:58.860919'
+  updated_at: '2015-10-19 23:37:05.476973'
+  value: ''
+  use_in_customisation: f
+spree_option_values_154:
+  id: '261'
+  position: '148'
+  name: pink-azelea-floral
+  presentation: Pink Azelea Floral
+  option_type_id: '8'
+  created_at: '2015-09-25 06:09:14.532631'
+  updated_at: '2015-10-19 23:37:05.481351'
+  value: ''
+  use_in_customisation: f
+spree_option_values_155:
+  id: '275'
+  position: '162'
+  name: peacock
+  presentation: Peacock
+  option_type_id: '8'
+  created_at: '2015-10-16 21:57:05.894464'
+  updated_at: '2015-10-19 23:37:05.505444'
+  value: ''
+  use_in_customisation: f
+spree_option_values_156:
+  id: '282'
+  position: '165'
+  name: dark-lavender
+  presentation: Dark Lavender
+  option_type_id: '8'
+  created_at: '2015-11-11 06:16:34.372426'
+  updated_at: '2015-11-12 00:14:47.158573'
+  value: "#aa8ee1"
+  use_in_customisation: f
+spree_option_values_157:
+  id: '283'
+  position: '166'
+  name: dark-tan
+  presentation: Dark Tan
+  option_type_id: '8'
+  created_at: '2015-11-18 05:02:01.024315'
+  updated_at: '2016-01-04 23:06:00.767855'
+  value: ''
+  use_in_customisation: f
+spree_option_values_158:
+  id: '284'
+  position: '167'
+  name: art-soul
+  presentation: Art Soul
+  option_type_id: '8'
+  created_at: '2015-11-18 05:02:01.071006'
+  updated_at: '2016-01-04 23:06:00.771995'
+  value: ''
+  use_in_customisation: f
+spree_option_values_159:
+  id: '285'
+  position: '168'
+  name: micro-spot
+  presentation: Micro Spot
+  option_type_id: '8'
+  created_at: '2015-11-18 05:02:01.145953'
+  updated_at: '2016-01-04 23:06:00.77584'
+  value: ''
+  use_in_customisation: f
+spree_option_values_160:
+  id: '286'
+  position: '169'
+  name: monochrome-coda
+  presentation: Monochrome Coda
+  option_type_id: '8'
+  created_at: '2015-11-18 05:02:01.296497'
+  updated_at: '2016-01-04 23:06:00.779591'
+  value: ''
+  use_in_customisation: f
+spree_option_values_161:
+  id: '287'
+  position: '170'
+  name: dark-burgundy
+  presentation: Dark Burgundy
+  option_type_id: '8'
+  created_at: '2015-11-18 05:02:02.185532'
+  updated_at: '2016-01-04 23:06:00.783085'
+  value: ''
+  use_in_customisation: f
+spree_option_values_162:
+  id: '288'
+  position: '171'
+  name: nautical-stripe
+  presentation: Nautical Stripe
+  option_type_id: '8'
+  created_at: '2015-12-01 06:25:54.218908'
+  updated_at: '2016-01-04 23:06:00.786077'
+  value: ''
+  use_in_customisation: f
+spree_option_values_163:
+  id: '289'
+  position: '172'
+  name: black-and-chartreuse
+  presentation: Black and Chartreuse
+  option_type_id: '8'
+  created_at: '2015-12-01 06:25:54.554081'
+  updated_at: '2016-01-04 23:06:00.789024'
+  value: ''
+  use_in_customisation: f
+spree_option_values_164:
+  id: '290'
+  position: '173'
+  name: nude-and-black
+  presentation: Nude and Black
+  option_type_id: '8'
+  created_at: '2015-12-01 06:25:54.561077'
+  updated_at: '2016-01-04 23:06:00.791964'
+  value: ''
+  use_in_customisation: f
+spree_option_values_165:
+  id: '291'
+  position: '174'
+  name: sage-fallen-leaves
+  presentation: Sage Fallen Leaves
+  option_type_id: '8'
+  created_at: '2015-12-01 06:25:54.738543'
+  updated_at: '2016-01-04 23:06:00.795037'
+  value: ''
+  use_in_customisation: f
+spree_option_values_166:
+  id: '271'
+  position: '158'
+  name: tribal
+  presentation: Tribal
+  option_type_id: '8'
+  created_at: '2015-10-09 05:36:57.946492'
+  updated_at: '2015-10-19 23:37:05.499069'
+  value: ''
+  use_in_customisation: f
+spree_option_values_167:
+  id: '272'
+  position: '159'
+  name: chocolate
+  presentation: Chocolate
+  option_type_id: '8'
+  created_at: '2015-10-09 05:36:58.01856'
+  updated_at: '2015-10-19 23:37:05.500644'
+  value: ''
+  use_in_customisation: f
+spree_option_values_168:
+  id: '273'
+  position: '160'
+  name: chartreuse
+  presentation: Chartreuse
+  option_type_id: '8'
+  created_at: '2015-10-09 05:36:58.259618'
+  updated_at: '2015-10-19 23:37:05.502257'
+  value: ''
+  use_in_customisation: f
+spree_option_values_169:
+  id: '274'
+  position: '161'
+  name: tribal
+  presentation: Tribal
+  option_type_id: '8'
+  created_at: '2015-10-09 05:36:58.348697'
+  updated_at: '2015-10-29 07:06:27.816001'
+  value: ''
+  use_in_customisation: f
+spree_option_values_170:
+  id: '305'
+  position: '188'
+  name: ocean
+  presentation: Ocean
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:24.492923'
+  updated_at: '2016-05-10 17:32:41.485169'
+  value: ''
+  use_in_customisation: f
+spree_option_values_171:
+  id: '306'
+  position: '189'
+  name: aqua-lily
+  presentation: Aqua Lily
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:24.615102'
+  updated_at: '2016-05-10 17:32:41.48655'
+  value: ''
+  use_in_customisation: f
+spree_option_values_172:
+  id: '307'
+  position: '190'
+  name: bird-of-paradise
+  presentation: Bird of Paradise
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:24.754746'
+  updated_at: '2016-05-10 17:32:41.48801'
+  value: ''
+  use_in_customisation: f
+spree_option_values_173:
+  id: '308'
+  position: '191'
+  name: icing-pink-and-red
+  presentation: Icing Pink and Red
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:24.866308'
+  updated_at: '2016-05-10 17:32:41.489412'
+  value: ''
+  use_in_customisation: f
+spree_option_values_174:
+  id: '309'
+  position: '192'
+  name: dark-teal
+  presentation: Dark Teal
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:25.191764'
+  updated_at: '2016-05-10 17:32:41.490843'
+  value: ''
+  use_in_customisation: f
+spree_option_values_175:
+  id: '310'
+  position: '193'
+  name: silver-shimmer
+  presentation: Silver Shimmer
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:26.05887'
+  updated_at: '2016-05-10 17:32:41.492233'
+  value: ''
+  use_in_customisation: f
+spree_option_values_176:
+  id: '311'
+  position: '194'
+  name: pink-shimmer
+  presentation: Pink Shimmer
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:26.067535'
+  updated_at: '2016-05-10 17:32:41.493625'
+  value: ''
+  use_in_customisation: f
+spree_option_values_177:
+  id: '312'
+  position: '195'
+  name: gold-shimmer
+  presentation: Gold Shimmer
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:26.073908'
+  updated_at: '2016-05-10 17:32:41.49507'
+  value: ''
+  use_in_customisation: f
+spree_option_values_178:
+  id: '313'
+  position: '196'
+  name: green-shimmer
+  presentation: Green Shimmer
+  option_type_id: '8'
+  created_at: '2016-02-05 07:44:26.080384'
+  updated_at: '2016-05-10 17:32:41.496466'
+  value: ''
+  use_in_customisation: f
+spree_option_values_179:
+  id: '314'
+  position: '197'
+  name: white-and-mint
+  presentation: White and Mint
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:17.062098'
+  updated_at: '2016-05-10 17:32:41.497889'
+  value: ''
+  use_in_customisation: f
+spree_option_values_180:
+  id: '315'
+  position: '198'
+  name: light-gold
+  presentation: Light Gold
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:17.28961'
+  updated_at: '2016-05-10 17:32:41.499277'
+  value: ''
+  use_in_customisation: f
+spree_option_values_181:
+  id: '316'
+  position: '199'
+  name: silver-and-ivory
+  presentation: Silver and Ivory
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:17.490581'
+  updated_at: '2016-05-10 17:32:41.500688'
+  value: ''
+  use_in_customisation: f
+spree_option_values_182:
+  id: '317'
+  position: '200'
+  name: ivory-and-light-pink
+  presentation: Ivory and Light Pink
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:17.718025'
+  updated_at: '2016-05-10 17:32:41.502122'
+  value: ''
+  use_in_customisation: f
+spree_option_values_183:
+  id: '318'
+  position: '201'
+  name: rococo-floral
+  presentation: Rococo Floral
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:17.826552'
+  updated_at: '2016-05-10 17:32:41.503546'
+  value: ''
+  use_in_customisation: f
+spree_option_values_184:
+  id: '321'
+  position: '204'
+  name: olive-shimmer
+  presentation: Olive Shimmer
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:19.497576'
+  updated_at: '2016-05-10 17:32:41.507886'
+  value: ''
+  use_in_customisation: f
+spree_option_values_185:
+  id: '322'
+  position: '205'
+  name: black-and-hot-pink
+  presentation: Black and Hot Pink
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:19.709154'
+  updated_at: '2016-05-10 17:32:41.509284'
+  value: ''
+  use_in_customisation: f
+spree_option_values_186:
+  id: '323'
+  position: '206'
+  name: orange-and-red
+  presentation: Orange and Red
+  option_type_id: '8'
+  created_at: '2016-03-14 03:30:19.717781'
+  updated_at: '2016-05-10 17:32:41.510714'
+  value: ''
+  use_in_customisation: f
+spree_option_values_187:
+  id: '325'
+  position: '207'
+  name: flamingo-pink
+  presentation: Flamingo Pink
+  option_type_id: '8'
+  created_at: '2016-03-18 14:44:29.855985'
+  updated_at: '2016-05-10 17:32:41.512136'
+  value: ''
+  use_in_customisation: f
+spree_option_values_188:
+  id: '339'
+  position: '221'
+  name: petal-pink
+  presentation: Petal Pink
+  option_type_id: '8'
+  created_at: '2016-04-08 07:08:45.089658'
+  updated_at: '2016-05-10 17:32:41.532153'
+  value: ''
+  use_in_customisation: f
+spree_option_values_189:
+  id: '340'
+  position: '222'
+  name: ballerina
+  presentation: Ballerina
+  option_type_id: '8'
+  created_at: '2016-04-08 07:08:45.330812'
+  updated_at: '2016-05-10 17:32:41.533565'
+  value: ''
+  use_in_customisation: f
+spree_option_values_190:
+  id: '341'
+  position: '223'
+  name: orange-and-hot-pink
+  presentation: Orange and Hot Pink
+  option_type_id: '8'
+  created_at: '2016-04-11 01:20:03.49672'
+  updated_at: '2016-05-10 17:32:41.534999'
+  value: ''
+  use_in_customisation: f
+spree_option_values_191:
+  id: '342'
+  position: '224'
+  name: black-and-red
+  presentation: Black and Red
+  option_type_id: '8'
+  created_at: '2016-04-11 01:20:03.510788'
+  updated_at: '2016-05-10 17:32:41.536408'
+  value: ''
+  use_in_customisation: f
+spree_option_values_192:
+  id: '218'
+  position: '106'
+  name: persian-green
+  presentation: Persian Green
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:42.487109'
+  updated_at: '2015-03-26 02:18:37.709522'
+  value: "#00A693"
+  use_in_customisation: f
+spree_option_values_193:
+  id: '42'
+  position: '12'
+  name: cherry-red
+  presentation: Cherry Red
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.931669'
+  updated_at: '2014-03-04 20:40:15.481168'
+  value: "#B91B29"
+  use_in_customisation: t
+spree_option_values_194:
+  id: '214'
+  position: '104'
+  name: sand
+  presentation: Sand
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:40.802706'
+  updated_at: '2015-03-26 02:18:37.698851'
+  value: "#efeadd"
+  use_in_customisation: f
+spree_option_values_195:
+  id: '215'
+  position: '104'
+  name: cotton-candy
+  presentation: Cotton Candy
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:41.744551'
+  updated_at: '2015-03-26 02:18:37.701632'
+  value: "#fbbfe9"
+  use_in_customisation: f
+spree_option_values_196:
+  id: '216'
+  position: '105'
+  name: sage
+  presentation: Sage
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:42.234099'
+  updated_at: '2015-03-26 02:18:37.704195'
+  value: "#826a77"
+  use_in_customisation: f
+spree_option_values_197:
+  id: '217'
+  position: '105'
+  name: neon-mint
+  presentation: Neon Mint
+  option_type_id: '8'
+  created_at: '2015-03-25 09:53:42.263643'
+  updated_at: '2015-03-26 02:18:37.706874'
+  value: "#33ffc6"
+  use_in_customisation: f
+spree_option_values_198:
+  id: '54'
+  position: '21'
+  name: turquoise
+  presentation: Turquoise
+  option_type_id: '8'
+  created_at: '2013-08-08 11:04:53.839937'
+  updated_at: '2014-03-04 20:40:15.489437'
+  value: "#41B5A8"
+  use_in_customisation: t
+spree_option_values_199:
+  id: '61'
+  position: '27'
+  name: lilac
+  presentation: Lilac
+  option_type_id: '8'
+  created_at: '2013-08-08 11:22:41.139482'
+  updated_at: '2015-03-26 02:10:02.046598'
+  value: "#ecddf4"
+  use_in_customisation: t
+spree_option_values_200:
+  id: '63'
+  position: '29'
+  name: purple
+  presentation: Purple
+  option_type_id: '8'
+  created_at: '2013-08-08 11:23:55.829341'
+  updated_at: '2015-03-26 02:10:02.048586'
+  value: "#8e54cc"
+  use_in_customisation: t
+spree_option_values_201:
+  id: '66'
+  position: '31'
+  name: charcoal
+  presentation: Charcoal
+  option_type_id: '8'
+  created_at: '2013-08-08 11:25:45.592625'
+  updated_at: '2015-03-26 02:07:29.939206'
+  value: "#3c3c3c"
+  use_in_customisation: t
+spree_option_values_202:
+  id: '73'
+  position: '37'
+  name: cobalt-blue
+  presentation: Cobalt Blue
+  option_type_id: '8'
+  created_at: '2013-08-08 11:50:04.396973'
+  updated_at: '2014-03-04 20:40:15.506088'
+  value: "#012D60"
+  use_in_customisation: t
+spree_option_values_203:
+  id: '85'
+  position: '45'
+  name: cream
+  presentation: Cream
+  option_type_id: '8'
+  created_at: '2013-08-10 12:43:19.814231'
+  updated_at: '2014-03-04 20:40:15.51418'
+  value: "#EBE5CD"
+  use_in_customisation: t
+spree_option_values_204:
+  id: '76'
+  position: '39'
+  name: watermelon
+  presentation: Watermelon
+  option_type_id: '8'
+  created_at: '2013-08-08 11:52:00.970161'
+  updated_at: '2014-03-04 20:40:15.509261'
+  value: "#E9658A"
+  use_in_customisation: t
+spree_option_values_205:
+  id: '77'
+  position: '40'
+  name: emerald-green
+  presentation: Emerald Green
+  option_type_id: '8'
+  created_at: '2013-08-08 11:54:03.616687'
+  updated_at: '2014-03-04 20:40:15.510936'
+  value: "#009875"
+  use_in_customisation: t
+spree_option_values_206:
+  id: '58'
+  position: '24'
+  name: hot-pink
+  presentation: Hot Pink
+  option_type_id: '8'
+  created_at: '2013-08-08 11:18:51.344329'
+  updated_at: '2014-03-04 20:40:15.496099'
+  value: "#F14873"
+  use_in_customisation: t
+spree_option_values_207:
+  id: '143'
+  position: '59'
+  name: dark-blue
+  presentation: Dark Blue
+  option_type_id: '8'
+  created_at: '2014-03-02 20:01:01.183125'
+  updated_at: '2014-03-24 11:44:17.693253'
+  value: "#0F0063"
+  use_in_customisation: f
+spree_option_values_208:
+  id: '96'
+  position: '50'
+  name: emerald
+  presentation: Emerald
+  option_type_id: '8'
+  created_at: '2014-02-17 12:40:19.235857'
+  updated_at: '2014-02-21 01:00:54.989411'
+  value: "#009875"
+  use_in_customisation: f
+spree_option_values_209:
+  id: '97'
+  position: '50'
+  name: midnight-blue
+  presentation: Midnight blue
+  option_type_id: '8'
+  created_at: '2014-02-17 12:52:03.85273'
+  updated_at: '2014-02-26 08:17:00.999106'
+  value: "#151834"
+  use_in_customisation: f
+spree_option_values_210:
+  id: '98'
+  position: '51'
+  name: champaign
+  presentation: Champagne
+  option_type_id: '8'
+  created_at: '2014-02-17 12:52:04.07973'
+  updated_at: '2014-02-26 09:12:43.470065'
+  value: "#D6C7B4"
+  use_in_customisation: f
+spree_option_values_211:
+  id: '125'
+  position: '53'
+  name: dark-purple
+  presentation: Dark purple
+  option_type_id: '8'
+  created_at: '2014-02-17 13:00:01.115369'
+  updated_at: '2014-02-26 09:42:39.745516'
+  value: "#45335D"
+  use_in_customisation: f
+spree_option_values_212:
+  id: '126'
+  position: '54'
+  name: rose
+  presentation: Rose
+  option_type_id: '8'
+  created_at: '2014-02-17 13:00:01.129609'
+  updated_at: '2014-02-26 09:42:39.747121'
+  value: "#9B171F"
+  use_in_customisation: f
+spree_option_values_213:
+  id: '127'
+  position: '55'
+  name: salmon
+  presentation: Salmon
+  option_type_id: '8'
+  created_at: '2014-02-17 13:01:49.309577'
+  updated_at: '2014-02-26 09:42:39.748733'
+  value: "#E08E7A"
+  use_in_customisation: f
+spree_option_values_214:
+  id: '142'
+  position: '59'
+  name: magenta
+  presentation: Magenta
+  option_type_id: '8'
+  created_at: '2014-03-02 20:01:01.17785'
+  updated_at: '2015-03-26 02:10:02.054366'
+  value: "#e137b7"
+  use_in_customisation: t
+spree_option_values_215:
+  id: '184'
+  position: '82'
+  name: optic-white
+  presentation: Optic White
+  option_type_id: '8'
+  created_at: '2014-08-27 05:42:55.081626'
+  updated_at: '2014-09-16 01:08:14.265006'
+  value: "#ffffff"
+  use_in_customisation: f
+spree_option_values_216:
+  id: '182'
+  position: '80'
+  name: dark-grey
+  presentation: Dark Grey
+  option_type_id: '8'
+  created_at: '2014-08-26 12:09:34.90943'
+  updated_at: '2014-09-16 01:38:17.356918'
+  value: "#666666"
+  use_in_customisation: f
+spree_option_values_217:
+  id: '183'
+  position: '81'
+  name: mushroom
+  presentation: Mushroom
+  option_type_id: '8'
+  created_at: '2014-08-26 12:09:34.923428'
+  updated_at: '2014-09-16 01:38:17.359112'
+  value: "#837478"
+  use_in_customisation: f
+spree_option_values_218:
+  id: '190'
+  position: '86'
+  name: pink-red
+  presentation: Hot Pink and Red
+  option_type_id: '8'
+  created_at: '2014-09-25 08:44:42.050332'
+  updated_at: '2014-12-12 02:41:05.737585'
+  value: "#FF0033"
+  use_in_customisation: f
+spree_option_values_219:
+  id: '192'
+  position: '87'
+  name: Black-no-train
+  presentation: Black (no train)
+  option_type_id: '8'
+  created_at: '2014-11-07 05:54:43.355689'
+  updated_at: '2014-12-12 02:41:05.739632'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_220:
+  id: '175'
+  position: '76'
+  name: black-on-cream
+  presentation: Black on cream
+  option_type_id: '8'
+  created_at: '2014-08-07 07:01:31.163264'
+  updated_at: '2014-08-08 05:45:21.3238'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_221:
+  id: '176'
+  position: '77'
+  name: silver-and-black
+  presentation: Silver and black
+  option_type_id: '8'
+  created_at: '2014-08-07 07:01:33.681088'
+  updated_at: '2014-08-08 05:45:21.327281'
+  value: "#D0D1CC"
+  use_in_customisation: f
+spree_option_values_222:
+  id: '177'
+  position: '78'
+  name: silver-and-nude
+  presentation: Silver and nude
+  option_type_id: '8'
+  created_at: '2014-08-07 07:01:33.694299'
+  updated_at: '2014-08-08 05:45:21.329048'
+  value: "#D0D1CC"
+  use_in_customisation: f
+spree_option_values_223:
+  id: '173'
+  position: '74'
+  name: dusty-pink
+  presentation: Dusty Pink
+  option_type_id: '8'
+  created_at: '2014-08-07 04:55:32.566034'
+  updated_at: '2014-08-08 05:49:56.34307'
+  value: "#FAB6B7"
+  use_in_customisation: f
+spree_option_values_224:
+  id: '174'
+  position: '75'
+  name: neon-orange
+  presentation: Neon Orange
+  option_type_id: '8'
+  created_at: '2014-08-07 04:55:32.724154'
+  updated_at: '2014-08-08 05:49:56.346061'
+  value: "#FF7F01"
+  use_in_customisation: f
+spree_option_values_225:
+  id: '170'
+  position: '71'
+  name: electric-blue
+  presentation: Electric Blue
+  option_type_id: '8'
+  created_at: '2014-08-06 12:36:02.18481'
+  updated_at: '2014-08-08 06:02:52.608382'
+  value: "#0891CF"
+  use_in_customisation: f
+spree_option_values_226:
+  id: '171'
+  position: '72'
+  name: black-and-white
+  presentation: Black And White
+  option_type_id: '8'
+  created_at: '2014-08-07 04:55:29.626251'
+  updated_at: '2014-08-08 06:02:52.611469'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_227:
+  id: '172'
+  position: '73'
+  name: baby-pink
+  presentation: Baby Pink
+  option_type_id: '8'
+  created_at: '2014-08-07 04:55:31.066852'
+  updated_at: '2014-08-08 06:02:52.614069'
+  value: "#FDD4DD"
+  use_in_customisation: f
+spree_option_values_228:
+  id: '157'
+  position: '62'
+  name: baby-blue
+  presentation: Baby Blue
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:56.023813'
+  updated_at: '2014-08-08 06:26:38.041561'
+  value: "#CFDEE1"
+  use_in_customisation: f
+spree_option_values_229:
+  id: '163'
+  position: '64'
+  name: stone
+  presentation: Stone
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:58.586692'
+  updated_at: '2014-08-08 06:14:33.627848'
+  value: "#B9B4B1"
+  use_in_customisation: f
+spree_option_values_230:
+  id: '165'
+  position: '66'
+  name: silver-metallic-w/black-lining
+  presentation: Silver metallic w/black lining
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:59.264336'
+  updated_at: '2014-08-08 06:14:33.633047'
+  value: "#D0D1CC"
+  use_in_customisation: f
+spree_option_values_231:
+  id: '70'
+  position: '34'
+  name: navy
+  presentation: Navy
+  option_type_id: '8'
+  created_at: '2013-08-08 11:26:58.201562'
+  updated_at: '2017-02-13 16:42:32.35878'
+  value: "#0E0E47"
+  use_in_customisation: t
+spree_option_values_232:
+  id: '164'
+  position: '65'
+  name: berry
+  presentation: Berry
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:58.755302'
+  updated_at: '2017-02-13 16:42:32.367351'
+  value: "#84216D"
+  use_in_customisation: f
+spree_option_values_233:
+  id: '39'
+  position: '9'
+  name: peach
+  presentation: Peach
+  option_type_id: '8'
+  created_at: '2013-08-08 11:02:47.925443'
+  updated_at: '2017-02-13 16:42:32.384116'
+  value: "#FD9A92"
+  use_in_customisation: t
+spree_option_values_234:
+  id: '57'
+  position: '23'
+  name: pale-pink
+  presentation: Pale Pink
+  option_type_id: '8'
+  created_at: '2013-08-08 11:18:51.342233'
+  updated_at: '2017-02-13 16:42:32.399209'
+  value: "#F5E5EC"
+  use_in_customisation: t
+spree_option_values_235:
+  id: '158'
+  position: '62'
+  name: plum
+  presentation: Plum
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:56.149394'
+  updated_at: '2017-02-13 16:42:32.403177'
+  value: "#37105B"
+  use_in_customisation: t
+spree_option_values_236:
+  id: '55'
+  position: '22'
+  name: mint
+  presentation: Mint
+  option_type_id: '8'
+  created_at: '2013-08-08 11:04:53.841988'
+  updated_at: '2017-02-13 16:42:32.426122'
+  value: "#BBECEB"
+  use_in_customisation: t
+spree_option_values_237:
+  id: '166'
+  position: '67'
+  name: silver-metallic-w/nude-lining
+  presentation: Silver metallic w/nude lining
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:59.300966'
+  updated_at: '2014-08-08 06:14:33.634783'
+  value: "#D0D1CC"
+  use_in_customisation: f
+spree_option_values_238:
+  id: '103'
+  position: '53'
+  name: fuschia
+  presentation: Fuschia
+  option_type_id: '8'
+  created_at: '2014-02-17 12:52:05.283702'
+  updated_at: '2014-02-26 09:12:43.484427'
+  value: "#AD225E"
+  use_in_customisation: f
+spree_option_values_239:
+  id: '167'
+  position: '68'
+  name: burnt-orange
+  presentation: Burnt Orange
+  option_type_id: '8'
+  created_at: '2014-08-06 12:36:01.787897'
+  updated_at: '2015-03-26 02:07:29.947088'
+  value: "#f07532"
+  use_in_customisation: t
+spree_option_values_240:
+  id: '160'
+  position: '62'
+  name: shell
+  presentation: Shell
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:56.660103'
+  updated_at: '2014-08-08 06:18:48.085679'
+  value: "#ECE6D3"
+  use_in_customisation: f
+spree_option_values_241:
+  id: '168'
+  position: '69'
+  name: moonstone
+  presentation: Moonstone
+  option_type_id: '8'
+  created_at: '2014-08-06 12:36:01.801012'
+  updated_at: '2014-08-08 06:14:33.638079'
+  value: "#DFD1AE"
+  use_in_customisation: f
+spree_option_values_242:
+  id: '162'
+  position: '63'
+  name: cream-and-blue
+  presentation: Cream and Blue
+  option_type_id: '8'
+  created_at: '2014-08-06 12:35:58.249119'
+  updated_at: '2014-08-08 06:18:48.090357'
+  value: "#EBE5CD"
+  use_in_customisation: f
+spree_option_values_243:
+  id: '186'
+  position: '83'
+  name: taffeta-monochrome
+  presentation: Taffeta Monochrome
+  option_type_id: '8'
+  created_at: '2014-08-27 05:42:58.513815'
+  updated_at: '2014-09-16 01:08:14.267415'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_244:
+  id: '195'
+  position: '90'
+  name: no-lining
+  presentation: No lining
+  option_type_id: '8'
+  created_at: '2015-01-12 00:58:45.241324'
+  updated_at: '2015-01-14 04:24:44.029034'
+  value: "#FFFFFF"
+  use_in_customisation: f
+spree_option_values_245:
+  id: '193'
+  position: '88'
+  name: black-and-peacock
+  presentation: Black and Peacock
+  option_type_id: '8'
+  created_at: '2014-11-25 06:49:10.304583'
+  updated_at: '2015-01-14 04:27:27.680297'
+  value: "#000000"
+  use_in_customisation: f
+spree_option_values_246:
+  id: '194'
+  position: '89'
+  name: steel
+  presentation: Steel
+  option_type_id: '8'
+  created_at: '2014-11-27 06:55:29.232785'
+  updated_at: '2015-01-14 04:27:27.68216'
+  value: "#b2b2b2"
+  use_in_customisation: f
+spree_option_values_247:
+  id: '187'
+  position: '84'
+  name: ivory-and-hot-pink
+  presentation: Ivory and Hot Pink
+  option_type_id: '8'
+  created_at: '2014-09-25 05:08:38.862856'
+  updated_at: '2014-10-08 08:33:09.554649'
+  value: "#F1E4D3"
+  use_in_customisation: f
+spree_option_values_248:
+  id: '188'
+  position: '85'
+  name: black-and-navy
+  presentation: Black and Navy
+  option_type_id: '8'
+  created_at: '2014-09-25 05:08:39.10937'
+  updated_at: '2014-10-08 08:33:09.556656'
+  value: "#012D60"
+  use_in_customisation: f
+spree_option_values_249:
+  id: '197'
+  position: '92'
+  name: beige
+  presentation: Beige
+  option_type_id: '8'
+  created_at: '2015-03-25 09:46:21.580409'
+  updated_at: '2015-03-26 02:18:37.676826'
+  value: "#efdecd"
+  use_in_customisation: f
+spree_option_values_250:
+  id: '222'
+  position: '110'
+  name: teal
+  presentation: Teal
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.745153'
+  updated_at: '2015-03-26 01:32:56.786465'
+  value: "#41a9ab"
+  use_in_customisation: t
+spree_option_values_251:
+  id: '223'
+  position: '111'
+  name: off-white
+  presentation: Off White
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.752596'
+  updated_at: '2015-03-26 01:32:56.789009'
+  value: "#fffef6"
+  use_in_customisation: t
+spree_option_values_252:
+  id: '224'
+  position: '112'
+  name: moss-green
+  presentation: Moss Green
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.757701'
+  updated_at: '2015-03-26 01:32:56.791545'
+  value: "#8ea578"
+  use_in_customisation: t
+spree_option_values_253:
+  id: '225'
+  position: '113'
+  name: pine
+  presentation: Pine
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.762852'
+  updated_at: '2015-03-26 01:32:56.794032'
+  value: "#128755"
+  use_in_customisation: t
+spree_option_values_254:
+  id: '226'
+  position: '114'
+  name: pale-yellow
+  presentation: Pale Yellow
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.768033'
+  updated_at: '2015-03-26 01:32:56.796569'
+  value: "#e3e7ba"
+  use_in_customisation: t
+spree_option_values_255:
+  id: '227'
+  position: '115'
+  name: marine-blue
+  presentation: Marine Blue
+  option_type_id: '8'
+  created_at: '2015-03-26 01:28:32.773064'
+  updated_at: '2015-03-26 01:32:56.799091'
+  value: "#055281"
+  use_in_customisation: t
+spree_option_values_256:
+  id: '355'
+  position: '237'
+  name: pale-blue-cotton-stripe
+  presentation: Pale Blue Cotton Stripe
+  option_type_id: '8'
+  created_at: '2016-06-30 21:10:52.847749'
+  updated_at: '2016-06-30 21:10:52.847749'
+  use_in_customisation: f
+spree_option_values_257:
+  id: '356'
+  position: '238'
+  name: indigo-cotton-stripe
+  presentation: Indigo Cotton Stripe
+  option_type_id: '8'
+  created_at: '2016-06-30 21:10:53.00138'
+  updated_at: '2016-06-30 21:10:53.00138'
+  use_in_customisation: f
+spree_option_values_258:
+  id: '357'
+  position: '239'
+  name: oliver-shimmer
+  presentation: Oliver Shimmer
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:44.898168'
+  updated_at: '2016-07-21 14:09:44.898168'
+  use_in_customisation: f
+spree_option_values_259:
+  id: '358'
+  position: '240'
+  name: colbalt-crush-floral
+  presentation: Colbalt Crush Floral
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:45.031917'
+  updated_at: '2016-07-21 14:09:45.031917'
+  use_in_customisation: f
+spree_option_values_260:
+  id: '359'
+  position: '241'
+  name: lavendar
+  presentation: Lavendar
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:45.185497'
+  updated_at: '2016-07-21 14:09:45.185497'
+  use_in_customisation: f
+spree_option_values_261:
+  id: '360'
+  position: '242'
+  name: pale-blue-stripe
+  presentation: Pale Blue Stripe
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:45.458231'
+  updated_at: '2016-07-21 14:09:45.458231'
+  use_in_customisation: f
+spree_option_values_262:
+  id: '361'
+  position: '243'
+  name: indigo-stripe
+  presentation: Indigo Stripe
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:46.328719'
+  updated_at: '2016-07-21 14:09:46.328719'
+  use_in_customisation: f
+spree_option_values_263:
+  id: '362'
+  position: '244'
+  name: back
+  presentation: Back
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:48.906735'
+  updated_at: '2016-07-21 14:09:48.906735'
+  use_in_customisation: f
+spree_option_values_264:
+  id: '363'
+  position: '245'
+  name: feather-lover
+  presentation: Feather Lover
+  option_type_id: '8'
+  created_at: '2016-07-21 14:09:49.076591'
+  updated_at: '2016-07-21 14:09:49.076591'
+  use_in_customisation: f
+spree_option_values_265:
+  id: '364'
+  position: '246'
+  name: ornate-midnight-floral
+  presentation: Ornate Midnight Floral
+  option_type_id: '8'
+  created_at: '2016-07-22 15:55:16.221362'
+  updated_at: '2016-07-22 15:55:16.221362'
+  use_in_customisation: f
+spree_option_values_266:
+  id: '365'
+  position: '247'
+  name: spot
+  presentation: Spot
+  option_type_id: '8'
+  created_at: '2016-07-22 15:55:16.586127'
+  updated_at: '2016-07-22 15:55:16.586127'
+  use_in_customisation: f
+spree_option_values_267:
+  id: '366'
+  position: '248'
+  name: water-grey
+  presentation: Water Grey
+  option_type_id: '8'
+  created_at: '2016-07-22 15:55:16.62423'
+  updated_at: '2016-07-22 15:55:16.62423'
+  use_in_customisation: f
+spree_option_values_268:
+  id: '367'
+  position: '249'
+  name: pink-nouveau
+  presentation: Pink Nouveau
+  option_type_id: '8'
+  created_at: '2016-07-22 15:55:16.634386'
+  updated_at: '2016-07-22 15:55:16.634386'
+  use_in_customisation: f
+spree_option_values_269:
+  id: '368'
+  position: '250'
+  name: rosewater-floral
+  presentation: Rosewater Floral
+  option_type_id: '8'
+  created_at: '2016-08-15 20:06:52.601046'
+  updated_at: '2016-08-15 20:06:52.601046'
+  use_in_customisation: f
+spree_option_values_270:
+  id: '369'
+  position: '251'
+  name: dusk
+  presentation: Dusk
+  option_type_id: '8'
+  created_at: '2016-08-15 20:06:53.112019'
+  updated_at: '2016-08-15 20:06:53.112019'
+  use_in_customisation: f
+spree_option_values_271:
+  id: '370'
+  position: '252'
+  name: winter-grey
+  presentation: Winter Grey
+  option_type_id: '8'
+  created_at: '2016-08-15 20:06:53.829503'
+  updated_at: '2016-08-15 20:06:53.829503'
+  use_in_customisation: f
+spree_option_values_272:
+  id: '371'
+  position: '253'
+  name: dusty-mushroom
+  presentation: Dusty Mushroom
+  option_type_id: '8'
+  created_at: '2016-08-15 20:06:54.022468'
+  updated_at: '2016-08-15 20:06:54.022468'
+  use_in_customisation: f
+spree_option_values_273:
+  id: '372'
+  position: '254'
+  name: vibrant-pink
+  presentation: Vibrant Pink
+  option_type_id: '8'
+  created_at: '2016-08-15 20:23:27.923666'
+  updated_at: '2016-08-15 20:23:27.923666'
+  use_in_customisation: f
+spree_option_values_274:
+  id: '373'
+  position: '255'
+  name: dark-gold
+  presentation: Dark Gold
+  option_type_id: '8'
+  created_at: '2016-08-17 18:21:18.399286'
+  updated_at: '2016-08-17 18:21:18.399286'
+  use_in_customisation: f
+spree_option_values_275:
+  id: '374'
+  position: '256'
+  name: pale-silver
+  presentation: Pale Silver
+  option_type_id: '8'
+  created_at: '2016-08-17 18:21:18.538244'
+  updated_at: '2016-08-17 18:21:18.538244'
+  use_in_customisation: f
+spree_option_values_276:
+  id: '375'
+  position: '257'
+  name: ''
+  presentation: ''
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:31.454813'
+  updated_at: '2016-09-28 21:12:31.454813'
+  use_in_customisation: f
+spree_option_values_277:
+  id: '376'
+  position: '258'
+  name: ochre
+  presentation: Ochre
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:31.645193'
+  updated_at: '2016-09-28 21:12:31.645193'
+  use_in_customisation: f
+spree_option_values_278:
+  id: '377'
+  position: '259'
+  name: grey-marle
+  presentation: Grey Marle
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:32.159179'
+  updated_at: '2016-09-28 21:12:32.159179'
+  use_in_customisation: f
+spree_option_values_279:
+  id: '378'
+  position: '260'
+  name: pale-nude
+  presentation: Pale Nude
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:32.170185'
+  updated_at: '2016-09-28 21:12:32.170185'
+  use_in_customisation: f
+spree_option_values_280:
+  id: '379'
+  position: '261'
+  name: warm-olive
+  presentation: warm olive
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:32.800041'
+  updated_at: '2016-09-28 21:12:32.800041'
+  use_in_customisation: f
+spree_option_values_281:
+  id: '380'
+  position: '262'
+  name: chambray
+  presentation: Chambray
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:32.950012'
+  updated_at: '2016-09-28 21:12:32.950012'
+  use_in_customisation: f
+spree_option_values_282:
+  id: '381'
+  position: '263'
+  name: charteuse
+  presentation: Charteuse
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:33.746747'
+  updated_at: '2016-09-28 21:12:33.746747'
+  use_in_customisation: f
+spree_option_values_283:
+  id: '382'
+  position: '264'
+  name: pale-blush
+  presentation: pale blush
+  option_type_id: '8'
+  created_at: '2016-09-28 21:12:33.874234'
+  updated_at: '2016-09-28 21:12:33.874234'
+  use_in_customisation: f
+spree_option_values_284:
+  id: '82'
+  position: '42'
+  name: champagne
+  presentation: Champagne
+  option_type_id: '8'
+  created_at: '2013-08-09 10:04:09.649737'
+  updated_at: '2017-02-13 16:42:32.350418'
+  value: "#EFE4DC"
+  use_in_customisation: t
+spree_option_values_285:
+  id: '383'
+  position: '1'
+  name: bright-blush
+  presentation: Bright Blush
+  option_type_id: '8'
+  created_at: '2017-02-13 16:42:32.38968'
+  updated_at: '2017-02-13 16:42:32.396143'
+  value: "#F9AAB2"
+  use_in_customisation: f
+spree_option_values_286:
+  id: '67'
+  position: '32'
+  name: royal-blue
+  presentation: Royal Blue
+  option_type_id: '8'
+  created_at: '2013-08-08 11:25:45.594802'
+  updated_at: '2017-02-13 16:42:32.407384'
+  value: "#2E2E8E"
+  use_in_customisation: f
+spree_option_values_287:
+  id: '384'
+  position: '1'
+  name: bright-turquoise
+  presentation: Bright Turquoise
+  option_type_id: '8'
+  created_at: '2017-02-13 16:42:32.41751'
+  updated_at: '2017-02-13 16:42:32.423274'
+  value: "#0FBAA9"
+  use_in_customisation: f
+spree_option_values_288:
+  id: '179'
+  position: '79'
+  name: pale-grey
+  presentation: Pale Grey
+  option_type_id: '8'
+  created_at: '2014-08-21 08:23:47.58927'
+  updated_at: '2017-02-13 16:42:32.430946'
+  value: "#D8D6DD"
+  use_in_customisation: t

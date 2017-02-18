@@ -1,0 +1,22 @@
+---
+spree_option_types_0:
+  id: '7'
+  name: dress-size
+  presentation: Size
+  position: '0'
+  created_at: '2013-08-07 02:15:45.076002'
+  updated_at: '2013-08-07 02:15:45.076002'
+spree_option_types_1:
+  id: '8'
+  name: dress-color
+  presentation: Color
+  position: '0'
+  created_at: '2013-08-07 02:15:45.512842'
+  updated_at: '2013-08-07 02:15:45.512842'
+spree_option_types_2:
+  id: '11'
+  name: dress-custom-color
+  presentation: Custom Colours
+  position: '0'
+  created_at: '2013-08-07 03:05:20.303829'
+  updated_at: '2013-08-07 04:15:51.879395'

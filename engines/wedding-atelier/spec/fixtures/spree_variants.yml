@@ -1,0 +1,1193 @@
+---
+spree_variants_0:
+  id: '32109'
+  sku: 4B453
+  is_master: t
+  product_id: '681'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_1:
+  id: '32110'
+  sku: 4B453US0AU4C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_2:
+  id: '32111'
+  sku: 4B453US2AU6C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_3:
+  id: '32112'
+  sku: 4B453US4AU8C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_4:
+  id: '32113'
+  sku: 4B453US6AU10C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_5:
+  id: '32114'
+  sku: 4B453US8AU12C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_6:
+  id: '32115'
+  sku: 4B453US10AU14C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_7:
+  id: '32116'
+  sku: 4B453US12AU16C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_8:
+  id: '32117'
+  sku: 4B453US14AU18C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_9:
+  id: '32122'
+  sku: 4B453C25
+  deleted_at: '2016-03-18 14:54:44.822847'
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '13'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_10:
+  id: '32123'
+  sku: 4B453C25
+  deleted_at: '2016-03-18 14:54:44.822847'
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '14'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_11:
+  id: '32119'
+  sku: 4B453US18AU22C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_12:
+  id: '32120'
+  sku: 4B453US20AU24C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_13:
+  id: '32118'
+  sku: 4B453US16AU20C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_14:
+  id: '32121'
+  sku: 4B453US22AU26C25
+  is_master: f
+  product_id: '681'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_15:
+  id: '32124'
+  sku: FP2212
+  is_master: t
+  product_id: '682'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_16:
+  id: '32125'
+  sku: FP2212US0AU4
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_17:
+  id: '32126'
+  sku: FP2212US2AU6
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_18:
+  id: '32127'
+  sku: FP2212US4AU8
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_19:
+  id: '32128'
+  sku: FP2212US6AU10
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_20:
+  id: '32129'
+  sku: FP2212US8AU12
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_21:
+  id: '32130'
+  sku: FP2212US10AU14
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_22:
+  id: '32131'
+  sku: FP2212US12AU16
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_23:
+  id: '32132'
+  sku: FP2212US14AU18
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_24:
+  id: '32133'
+  sku: FP2212US16AU20
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_25:
+  id: '32134'
+  sku: FP2212US18AU22
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_26:
+  id: '32135'
+  sku: FP2212US20AU24
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_27:
+  id: '32136'
+  sku: FP2212US22AU26
+  is_master: f
+  product_id: '682'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_28:
+  id: '32161'
+  sku: FP2214US20AU24
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_29:
+  id: '32137'
+  sku: FP2213
+  is_master: t
+  product_id: '683'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_30:
+  id: '32138'
+  sku: FP2213US0AU4
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_31:
+  id: '32139'
+  sku: FP2213US2AU6
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_32:
+  id: '32140'
+  sku: FP2213US4AU8
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_33:
+  id: '32141'
+  sku: FP2213US6AU10
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_34:
+  id: '32142'
+  sku: FP2213US8AU12
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_35:
+  id: '32143'
+  sku: FP2213US10AU14
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_36:
+  id: '32144'
+  sku: FP2213US12AU16
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_37:
+  id: '32145'
+  sku: FP2213US14AU18
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_38:
+  id: '32146'
+  sku: FP2213US16AU20
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_39:
+  id: '32147'
+  sku: FP2213US18AU22
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_40:
+  id: '32148'
+  sku: FP2213US20AU24
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_41:
+  id: '32149'
+  sku: FP2213US22AU26
+  is_master: f
+  product_id: '683'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_42:
+  id: '32150'
+  sku: FP2214
+  is_master: t
+  product_id: '684'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_43:
+  id: '32151'
+  sku: FP2214US0AU4
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_44:
+  id: '32152'
+  sku: FP2214US2AU6
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_45:
+  id: '32153'
+  sku: FP2214US4AU8
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_46:
+  id: '32154'
+  sku: FP2214US6AU10
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_47:
+  id: '32155'
+  sku: FP2214US8AU12
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_48:
+  id: '32156'
+  sku: FP2214US10AU14
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_49:
+  id: '32157'
+  sku: FP2214US12AU16
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_50:
+  id: '32158'
+  sku: FP2214US14AU18
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_51:
+  id: '32159'
+  sku: FP2214US16AU20
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_52:
+  id: '32160'
+  sku: FP2214US18AU22
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_53:
+  id: '32162'
+  sku: FP2214US22AU26
+  is_master: f
+  product_id: '684'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_54:
+  id: '32163'
+  sku: FP2215
+  is_master: t
+  product_id: '685'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_55:
+  id: '32164'
+  sku: FP2215US0AU4
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_56:
+  id: '32165'
+  sku: FP2215US2AU6
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_57:
+  id: '32166'
+  sku: FP2215US4AU8
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_58:
+  id: '32167'
+  sku: FP2215US6AU10
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_59:
+  id: '32168'
+  sku: FP2215US8AU12
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_60:
+  id: '32169'
+  sku: FP2215US10AU14
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_61:
+  id: '32170'
+  sku: FP2215US12AU16
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_62:
+  id: '32171'
+  sku: FP2215US14AU18
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_63:
+  id: '32172'
+  sku: FP2215US16AU20
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_64:
+  id: '32173'
+  sku: FP2215US18AU22
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_65:
+  id: '32174'
+  sku: FP2215US20AU24
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_66:
+  id: '32175'
+  sku: FP2215US22AU26
+  is_master: f
+  product_id: '685'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_67:
+  id: '32178'
+  sku: FP2216US2AU6
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_68:
+  id: '32176'
+  sku: FP2216
+  is_master: t
+  product_id: '686'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_69:
+  id: '32177'
+  sku: FP2216US0AU4
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_70:
+  id: '32179'
+  sku: FP2216US4AU8
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_71:
+  id: '32180'
+  sku: FP2216US6AU10
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_72:
+  id: '32181'
+  sku: FP2216US8AU12
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_73:
+  id: '32182'
+  sku: FP2216US10AU14
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_74:
+  id: '32183'
+  sku: FP2216US12AU16
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_75:
+  id: '32184'
+  sku: FP2216US14AU18
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_76:
+  id: '32185'
+  sku: FP2216US16AU20
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_77:
+  id: '32186'
+  sku: FP2216US18AU22
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_78:
+  id: '32187'
+  sku: FP2216US20AU24
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_79:
+  id: '32188'
+  sku: FP2216US22AU26
+  is_master: f
+  product_id: '686'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_80:
+  id: '32191'
+  sku: FP2220US2AU6
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_81:
+  id: '32189'
+  sku: FP2220
+  is_master: t
+  product_id: '687'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_82:
+  id: '32190'
+  sku: FP2220US0AU4
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_83:
+  id: '32192'
+  sku: FP2220US4AU8
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_84:
+  id: '32193'
+  sku: FP2220US6AU10
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_85:
+  id: '32194'
+  sku: FP2220US8AU12
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_86:
+  id: '32195'
+  sku: FP2220US10AU14
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_87:
+  id: '32196'
+  sku: FP2220US12AU16
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_88:
+  id: '32197'
+  sku: FP2220US14AU18
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_89:
+  id: '32198'
+  sku: FP2220US16AU20
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_90:
+  id: '32199'
+  sku: FP2220US18AU22
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_91:
+  id: '32200'
+  sku: FP2220US20AU24
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_92:
+  id: '32201'
+  sku: FP2220US22AU26
+  is_master: f
+  product_id: '687'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_93:
+  id: '32202'
+  sku: FP2218
+  is_master: t
+  product_id: '688'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_94:
+  id: '32203'
+  sku: FP2218US0AU4
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_95:
+  id: '32204'
+  sku: FP2218US2AU6
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_96:
+  id: '32205'
+  sku: FP2218US4AU8
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_97:
+  id: '32206'
+  sku: FP2218US6AU10
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_98:
+  id: '32207'
+  sku: FP2218US8AU12
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_99:
+  id: '32208'
+  sku: FP2218US10AU14
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_100:
+  id: '32209'
+  sku: FP2218US12AU16
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_101:
+  id: '32210'
+  sku: FP2218US14AU18
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_102:
+  id: '32211'
+  sku: FP2218US16AU20
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_103:
+  id: '32212'
+  sku: FP2218US18AU22
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_104:
+  id: '32213'
+  sku: FP2218US20AU24
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_105:
+  id: '32214'
+  sku: FP2218US22AU26
+  is_master: f
+  product_id: '688'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_106:
+  id: '32215'
+  sku: FP2219
+  is_master: t
+  product_id: '689'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '1'
+  on_demand: t
+  cost_currency: AUD
+spree_variants_107:
+  id: '32216'
+  sku: FP2219US0AU4
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '1'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_108:
+  id: '32217'
+  sku: FP2219US2AU6
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '2'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_109:
+  id: '32218'
+  sku: FP2219US4AU8
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '3'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_110:
+  id: '32219'
+  sku: FP2219US6AU10
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '4'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_111:
+  id: '32220'
+  sku: FP2219US8AU12
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '5'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_112:
+  id: '32221'
+  sku: FP2219US10AU14
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '6'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_113:
+  id: '32222'
+  sku: FP2219US12AU16
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '7'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_114:
+  id: '32223'
+  sku: FP2219US14AU18
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '8'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_115:
+  id: '32224'
+  sku: FP2219US16AU20
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '9'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_116:
+  id: '32225'
+  sku: FP2219US18AU22
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '10'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_117:
+  id: '32226'
+  sku: FP2219US20AU24
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '11'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD
+spree_variants_118:
+  id: '32227'
+  sku: FP2219US22AU26
+  is_master: f
+  product_id: '689'
+  count_on_hand: '10'
+  position: '12'
+  lock_version: '0'
+  on_demand: t
+  cost_currency: USD

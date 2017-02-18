@@ -1,0 +1,2899 @@
+---
+spree_taxons_0:
+  id: '360'
+  parent_id: '23'
+  position: '88'
+  name: Cotton
+  permalink: style/cotton
+  taxonomy_id: '7'
+  lft: '218'
+  rgt: '219'
+  created_at: '2016-09-28 18:43:48.435453'
+  updated_at: '2016-09-28 18:43:48.435453'
+  delivery_period: 7 - 10 business days
+spree_taxons_1:
+  id: '67'
+  parent_id: '23'
+  position: '10'
+  name: Monochrome
+  permalink: style/monochrome
+  taxonomy_id: '7'
+  lft: '88'
+  rgt: '89'
+  created_at: '2014-02-16 21:37:50.591661'
+  updated_at: '2014-11-10 20:17:53.767632'
+  delivery_period: 7 - 10 business days
+spree_taxons_2:
+  id: '17'
+  position: '0'
+  name: Range
+  permalink: collection
+  taxonomy_id: '6'
+  lft: '1'
+  rgt: '40'
+  description: ''
+  created_at: '2013-08-07 02:14:34.170909'
+  updated_at: '2015-08-26 23:08:36.251739'
+  meta_title: Shop Dresses Online
+  meta_description: Shop Fame & Partner's online boutique for designer-influenced
+    dresses without the designer dress prices, perfect for every occasion. Crafted
+    just for You.
+  delivery_period: 7 - 10 business days
+spree_taxons_3:
+  id: '228'
+  parent_id: '23'
+  position: '32'
+  name: Maxi
+  permalink: style/maxi
+  taxonomy_id: '7'
+  lft: '102'
+  rgt: '103'
+  description: ''
+  created_at: '2015-03-31 23:47:20.991173'
+  updated_at: '2015-10-30 03:37:53.810343'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-01 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_4:
+  id: '285'
+  parent_id: '23'
+  position: '37'
+  name: Slip Dress
+  permalink: style/slip-dress
+  taxonomy_id: '7'
+  lft: '112'
+  rgt: '113'
+  description: ''
+  created_at: '2016-05-23 18:27:13.713635'
+  updated_at: '2016-05-23 23:15:27.418034'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-05-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_5:
+  id: '289'
+  parent_id: '23'
+  position: '40'
+  name: Playsuit
+  permalink: style/playsuit
+  taxonomy_id: '7'
+  lft: '116'
+  rgt: '117'
+  description: ''
+  created_at: '2016-06-03 05:17:52.788873'
+  updated_at: '2016-06-03 05:18:02.750961'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-06-02 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_6:
+  id: '298'
+  parent_id: '23'
+  position: '42'
+  name: Fit and Flare
+  permalink: style/fit-and-flare
+  taxonomy_id: '7'
+  lft: '120'
+  rgt: '121'
+  description: ''
+  created_at: '2016-07-22 15:54:47.126884'
+  updated_at: '2016-07-22 15:54:55.216693'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-21 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_7:
+  id: '312'
+  parent_id: '23'
+  position: '45'
+  name: relaxed
+  permalink: style/new-node
+  taxonomy_id: '7'
+  lft: '130'
+  rgt: '131'
+  created_at: '2016-09-16 18:00:15.507191'
+  updated_at: '2016-09-16 18:00:43.163028'
+  delivery_period: 7 - 10 business days
+spree_taxons_8:
+  id: '313'
+  parent_id: '23'
+  position: '46'
+  name: tulip
+  permalink: style/tulip
+  taxonomy_id: '7'
+  lft: '132'
+  rgt: '133'
+  created_at: '2016-09-16 18:01:19.01451'
+  updated_at: '2016-09-16 18:01:19.01451'
+  delivery_period: 7 - 10 business days
+spree_taxons_9:
+  id: '26'
+  parent_id: '23'
+  position: '0'
+  name: One shoulder
+  permalink: style/one-shoulder
+  taxonomy_id: '7'
+  lft: '42'
+  rgt: '43'
+  created_at: '2013-08-07 02:14:34.396506'
+  updated_at: '2015-06-24 04:04:42.645761'
+  published_at: '2015-06-24 04:04:42.645369'
+  delivery_period: 7 - 10 business days
+spree_taxons_10:
+  id: '321'
+  parent_id: '23'
+  position: '54'
+  name: high neck
+  permalink: style/high-neck
+  taxonomy_id: '7'
+  lft: '144'
+  rgt: '145'
+  created_at: '2016-09-16 18:07:09.73971'
+  updated_at: '2016-09-16 18:07:09.73971'
+  delivery_period: 7 - 10 business days
+spree_taxons_11:
+  id: '322'
+  parent_id: '23'
+  position: '55'
+  name: cowl
+  permalink: style/cowl
+  taxonomy_id: '7'
+  lft: '146'
+  rgt: '147'
+  created_at: '2016-09-16 18:07:14.754823'
+  updated_at: '2016-09-16 18:07:14.754823'
+  delivery_period: 7 - 10 business days
+spree_taxons_12:
+  id: '324'
+  parent_id: '23'
+  position: '57'
+  name: sleeveless
+  permalink: style/sleeveless
+  taxonomy_id: '7'
+  lft: '150'
+  rgt: '151'
+  created_at: '2016-09-16 18:08:22.71839'
+  updated_at: '2016-09-16 18:08:22.71839'
+  delivery_period: 7 - 10 business days
+spree_taxons_13:
+  id: '329'
+  parent_id: '23'
+  position: '62'
+  name: embroidery
+  permalink: style/embroidery
+  taxonomy_id: '7'
+  lft: '160'
+  rgt: '161'
+  created_at: '2016-09-16 18:10:51.855023'
+  updated_at: '2016-09-16 18:10:51.855023'
+  delivery_period: 7 - 10 business days
+spree_taxons_14:
+  id: '331'
+  parent_id: '23'
+  position: '64'
+  name: hardware
+  permalink: style/hardware
+  taxonomy_id: '7'
+  lft: '164'
+  rgt: '165'
+  created_at: '2016-09-16 18:11:16.372268'
+  updated_at: '2016-09-16 18:11:16.372268'
+  delivery_period: 7 - 10 business days
+spree_taxons_15:
+  id: '333'
+  parent_id: '23'
+  position: '66'
+  name: bow
+  permalink: style/bow
+  taxonomy_id: '7'
+  lft: '168'
+  rgt: '169'
+  created_at: '2016-09-16 18:12:39.770999'
+  updated_at: '2016-09-16 18:12:39.770999'
+  delivery_period: 7 - 10 business days
+spree_taxons_16:
+  id: '335'
+  parent_id: '23'
+  position: '68'
+  name: train
+  permalink: style/train
+  taxonomy_id: '7'
+  lft: '172'
+  rgt: '173'
+  created_at: '2016-09-16 18:15:36.173115'
+  updated_at: '2016-09-16 18:15:36.173115'
+  delivery_period: 7 - 10 business days
+spree_taxons_17:
+  id: '340'
+  parent_id: '23'
+  position: '70'
+  name: ankle
+  permalink: style/ankle
+  taxonomy_id: '7'
+  lft: '176'
+  rgt: '177'
+  created_at: '2016-09-16 18:17:31.245391'
+  updated_at: '2016-09-16 18:17:31.245391'
+  delivery_period: 7 - 10 business days
+spree_taxons_18:
+  id: '158'
+  parent_id: '184'
+  position: '0'
+  name: formal
+  permalink: event/formal
+  taxonomy_id: '10'
+  lft: '344'
+  rgt: '345'
+  description: Find your perfect formal dress.
+  created_at: '2014-08-06 12:35:57.830629'
+  updated_at: '2015-10-04 06:34:46.064429'
+  meta_title: Bespoke formal dresses
+  meta_description: ''
+  published_at: '2015-06-24 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_19:
+  id: '36'
+  position: '0'
+  name: SeoCollection
+  permalink: seocollection
+  taxonomy_id: '9'
+  lft: '333'
+  rgt: '338'
+  description: ''
+  created_at: '2013-09-16 21:25:47.701166'
+  updated_at: '2014-03-24 14:39:20.475278'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_20:
+  id: '279'
+  parent_id: '32'
+  position: '45'
+  name: LOVE LACE
+  permalink: edits/love-lace
+  taxonomy_id: '8'
+  lft: '314'
+  rgt: '315'
+  description: ''
+  created_at: '2016-01-28 01:43:19.88654'
+  updated_at: '2016-01-28 01:43:40.71704'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-01-27 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_21:
+  id: '46'
+  parent_id: '32'
+  position: '8'
+  name: Sheer
+  permalink: edits/sheer
+  taxonomy_id: '8'
+  lft: '236'
+  rgt: '237'
+  created_at: '2014-01-15 05:00:47.202826'
+  updated_at: '2015-09-18 04:09:29.021438'
+  delivery_period: 7 - 10 business days
+spree_taxons_22:
+  id: '196'
+  parent_id: '32'
+  position: '27'
+  name: Facebook5
+  permalink: edits/new-node
+  taxonomy_id: '8'
+  lft: '272'
+  rgt: '273'
+  created_at: '2014-11-27 04:44:04.853941'
+  updated_at: '2015-09-18 04:09:29.157512'
+  delivery_period: 7 - 10 business days
+spree_taxons_23:
+  id: '176'
+  parent_id: '32'
+  position: '20'
+  name: girlfriend
+  permalink: edits/girlfriend
+  taxonomy_id: '8'
+  lft: '250'
+  rgt: '251'
+  created_at: '2014-09-25 07:05:14.340363'
+  updated_at: '2015-09-18 04:09:29.078429'
+  delivery_period: 7 - 10 business days
+spree_taxons_24:
+  id: '271'
+  parent_id: '32'
+  position: '42'
+  name: Bring On The Night
+  permalink: edits/bring-on-the-night
+  taxonomy_id: '8'
+  lft: '308'
+  rgt: '309'
+  description: ''
+  created_at: '2015-11-18 07:00:52.412345'
+  updated_at: '2015-11-18 07:01:06.502057'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-11-16 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_25:
+  id: '236'
+  parent_id: '32'
+  position: '33'
+  name: Bohemian Summer
+  permalink: edits/bohemian-summer
+  taxonomy_id: '8'
+  lft: '288'
+  rgt: '289'
+  description: ''
+  created_at: '2015-06-04 09:39:58.027866'
+  updated_at: '2015-09-18 04:09:29.214337'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_26:
+  id: '221'
+  parent_id: '184'
+  position: '10'
+  name: Bridesmaid
+  permalink: event/bridesmaid
+  taxonomy_id: '10'
+  lft: '360'
+  rgt: '361'
+  icon_file_name: bridesmaids-dark-bg.jpg
+  icon_content_type: image/jpeg
+  icon_file_size: '752975'
+  icon_updated_at: '2015-05-18 12:42:54.432099'
+  description: ''
+  created_at: '2015-03-31 23:31:35.313389'
+  updated_at: '2016-02-23 14:36:39.415651'
+  meta_title: Bridesmaid dresses
+  meta_description: ''
+  published_at: '2016-02-23 14:36:39.414633'
+  delivery_period: 7 - 10 business days
+spree_taxons_27:
+  id: '347'
+  parent_id: '23'
+  position: '77'
+  name: georgette
+  permalink: style/georgette
+  taxonomy_id: '7'
+  lft: '188'
+  rgt: '189'
+  created_at: '2016-09-16 18:19:57.180472'
+  updated_at: '2016-09-16 18:19:57.180472'
+  delivery_period: 7 - 10 business days
+spree_taxons_28:
+  id: '348'
+  parent_id: '23'
+  position: '78'
+  name: chiffon
+  permalink: style/chiffon
+  taxonomy_id: '7'
+  lft: '190'
+  rgt: '191'
+  created_at: '2016-09-16 18:20:05.638329'
+  updated_at: '2016-09-16 18:20:05.638329'
+  delivery_period: 7 - 10 business days
+spree_taxons_29:
+  id: '350'
+  parent_id: '23'
+  position: '80'
+  name: stretch woven
+  permalink: style/stretch-woven
+  taxonomy_id: '7'
+  lft: '194'
+  rgt: '195'
+  created_at: '2016-09-16 18:20:35.425871'
+  updated_at: '2016-09-16 18:20:35.425871'
+  delivery_period: 7 - 10 business days
+spree_taxons_30:
+  id: '352'
+  parent_id: '23'
+  position: '82'
+  name: tencel
+  permalink: style/tencel
+  taxonomy_id: '7'
+  lft: '198'
+  rgt: '199'
+  created_at: '2016-09-16 18:21:10.47997'
+  updated_at: '2016-09-16 18:21:10.47997'
+  delivery_period: 7 - 10 business days
+spree_taxons_31:
+  id: '361'
+  parent_id: '23'
+  position: '89'
+  name: Tulle
+  permalink: style/tulle
+  taxonomy_id: '7'
+  lft: '220'
+  rgt: '221'
+  description: ''
+  created_at: '2016-10-03 19:59:52.044367'
+  updated_at: '2016-10-03 20:00:23.730402'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_32:
+  id: '357'
+  parent_id: '23'
+  position: '87'
+  name: abstract
+  permalink: style/abstract
+  taxonomy_id: '7'
+  lft: '208'
+  rgt: '209'
+  created_at: '2016-09-16 18:22:51.481243'
+  updated_at: '2016-09-16 18:22:51.481243'
+  delivery_period: 7 - 10 business days
+spree_taxons_33:
+  id: '172'
+  parent_id: '32'
+  position: '19'
+  name: FACEBOOK
+  permalink: edits/facebook
+  taxonomy_id: '8'
+  lft: '248'
+  rgt: '249'
+  created_at: '2014-09-24 04:44:45.784857'
+  updated_at: '2015-09-18 04:09:29.071648'
+  delivery_period: 7 - 10 business days
+spree_taxons_34:
+  id: '157'
+  parent_id: '23'
+  position: '0'
+  name: Off Shoulder
+  permalink: style/off-shoulder
+  taxonomy_id: '7'
+  lft: '64'
+  rgt: '65'
+  description: ''
+  created_at: '2014-08-06 12:35:57.637541'
+  updated_at: '2015-09-30 09:33:59.936933'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_35:
+  id: '160'
+  parent_id: '23'
+  position: '0'
+  name: Mini
+  permalink: style/mini
+  taxonomy_id: '7'
+  lft: '72'
+  rgt: '73'
+  description: ''
+  created_at: '2014-08-06 12:35:59.547375'
+  updated_at: '2016-08-05 11:59:39.625528'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-11-23 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_36:
+  id: '246'
+  position: '0'
+  name: Outerwear
+  permalink: outerwear
+  taxonomy_id: '13'
+  lft: '397'
+  rgt: '398'
+  created_at: '2015-08-18 01:31:30.119549'
+  updated_at: '2015-09-01 06:20:30.886'
+  published_at: '2015-09-01 06:20:30.885187'
+  delivery_period: 7 - 10 business days
+spree_taxons_37:
+  id: '301'
+  parent_id: '32'
+  position: '52'
+  name: IT GIRL
+  permalink: edits/it-girl
+  taxonomy_id: '8'
+  lft: '328'
+  rgt: '329'
+  description: ''
+  created_at: '2016-08-16 23:24:53.200843'
+  updated_at: '2016-08-16 23:25:11.222151'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-08-15 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_38:
+  id: '346'
+  parent_id: '23'
+  position: '76'
+  name: silk
+  permalink: style/silk
+  taxonomy_id: '7'
+  lft: '186'
+  rgt: '187'
+  created_at: '2016-09-16 18:18:59.079414'
+  updated_at: '2016-09-16 18:18:59.079414'
+  delivery_period: 7 - 10 business days
+spree_taxons_39:
+  id: '183'
+  parent_id: '32'
+  position: '26'
+  name: CUSTOMISATION
+  permalink: edits/customisation
+  taxonomy_id: '8'
+  lft: '262'
+  rgt: '263'
+  created_at: '2014-10-19 22:28:28.638487'
+  updated_at: '2015-09-18 04:09:29.12095'
+  delivery_period: 7 - 10 business days
+spree_taxons_40:
+  id: '276'
+  parent_id: '32'
+  position: '44'
+  name: Alfalfa
+  permalink: edits/alfalfa
+  taxonomy_id: '8'
+  lft: '312'
+  rgt: '313'
+  created_at: '2016-01-05 03:02:30.504122'
+  updated_at: '2016-01-05 03:02:30.504122'
+  delivery_period: 7 - 10 business days
+spree_taxons_41:
+  id: '182'
+  parent_id: '32'
+  position: '25'
+  name: RACE DAY
+  permalink: edits/race-day
+  taxonomy_id: '8'
+  lft: '260'
+  rgt: '261'
+  created_at: '2014-10-19 22:27:51.921346'
+  updated_at: '2015-09-18 04:09:29.113412'
+  delivery_period: 7 - 10 business days
+spree_taxons_42:
+  id: '254'
+  parent_id: '184'
+  position: '16'
+  name: BLACK TIE
+  permalink: event/black-tie
+  taxonomy_id: '10'
+  lft: '372'
+  rgt: '373'
+  description: ''
+  created_at: '2015-09-30 04:30:01.993169'
+  updated_at: '2015-10-23 14:58:22.724157'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_43:
+  id: '219'
+  parent_id: '32'
+  position: '31'
+  name: PROM2015
+  permalink: edits/prom2015
+  taxonomy_id: '8'
+  lft: '280'
+  rgt: '281'
+  description: ''
+  created_at: '2015-03-25 16:02:55.480865'
+  updated_at: '2015-09-18 04:09:29.186948'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_44:
+  id: '305'
+  parent_id: '23'
+  position: '43'
+  name: Ruffle
+  permalink: style/ruffle
+  taxonomy_id: '7'
+  lft: '122'
+  rgt: '123'
+  description: ''
+  created_at: '2016-09-15 02:28:43.455999'
+  updated_at: '2016-09-15 02:28:55.428042'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-09-13 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_45:
+  id: '309'
+  parent_id: '23'
+  position: '45'
+  name: Shift
+  permalink: style/shift
+  taxonomy_id: '7'
+  lft: '124'
+  rgt: '125'
+  description: ''
+  created_at: '2016-09-16 17:57:41.584848'
+  updated_at: '2016-09-16 17:58:13.687525'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_46:
+  id: '320'
+  parent_id: '23'
+  position: '53'
+  name: scoop
+  permalink: style/scoop
+  taxonomy_id: '7'
+  lft: '142'
+  rgt: '143'
+  created_at: '2016-09-16 18:06:34.600409'
+  updated_at: '2016-09-16 18:06:34.600409'
+  delivery_period: 7 - 10 business days
+spree_taxons_47:
+  id: '323'
+  parent_id: '23'
+  position: '56'
+  name: collar
+  permalink: style/collar
+  taxonomy_id: '7'
+  lft: '148'
+  rgt: '149'
+  created_at: '2016-09-16 18:07:21.473666'
+  updated_at: '2016-09-16 18:07:21.473666'
+  delivery_period: 7 - 10 business days
+spree_taxons_48:
+  id: '325'
+  parent_id: '23'
+  position: '58'
+  name: cap sleeves
+  permalink: style/cap-sleeves
+  taxonomy_id: '7'
+  lft: '152'
+  rgt: '153'
+  created_at: '2016-09-16 18:08:48.277288'
+  updated_at: '2016-09-16 18:08:48.277288'
+  delivery_period: 7 - 10 business days
+spree_taxons_49:
+  id: '229'
+  parent_id: '23'
+  position: '33'
+  name: Wrap
+  permalink: style/wrap
+  taxonomy_id: '7'
+  lft: '104'
+  rgt: '105'
+  description: ''
+  created_at: '2015-04-01 00:00:09.927536'
+  updated_at: '2015-09-30 09:30:40.700302'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_50:
+  id: '262'
+  parent_id: '184'
+  position: '17'
+  name: Spring Racing
+  permalink: event/spring-racing
+  taxonomy_id: '10'
+  lft: '374'
+  rgt: '375'
+  description: ''
+  created_at: '2015-10-23 02:28:42.690381'
+  updated_at: '2015-10-23 14:56:29.193696'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_51:
+  id: '263'
+  parent_id: '184'
+  position: '18'
+  name: New Years Eve
+  permalink: event/new-years-eve
+  taxonomy_id: '10'
+  lft: '376'
+  rgt: '377'
+  description: ''
+  created_at: '2015-10-23 02:30:03.837703'
+  updated_at: '2015-10-23 14:57:31.29129'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_52:
+  id: '144'
+  parent_id: '184'
+  position: '0'
+  name: Homecoming
+  permalink: event/homecoming
+  taxonomy_id: '10'
+  lft: '346'
+  rgt: '347'
+  description: ''
+  created_at: '2014-08-06 12:35:55.882894'
+  updated_at: '2015-06-24 04:04:42.630624'
+  meta_title: Homecoming dresses
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.63024'
+  delivery_period: 7 - 10 business days
+spree_taxons_53:
+  id: '145'
+  parent_id: '184'
+  position: '0'
+  name: Sweet 16
+  permalink: event/sweet-16
+  taxonomy_id: '10'
+  lft: '350'
+  rgt: '351'
+  description: ''
+  created_at: '2014-08-06 12:35:55.940252'
+  updated_at: '2015-06-24 04:04:42.633606'
+  meta_title: Sweet 16 dresses and gowns
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.633214'
+  delivery_period: 7 - 10 business days
+spree_taxons_54:
+  id: '154'
+  parent_id: '184'
+  position: '0'
+  name: Debutante
+  permalink: event/debutante
+  taxonomy_id: '10'
+  lft: '354'
+  rgt: '355'
+  description: ''
+  created_at: '2014-08-06 12:35:57.084025'
+  updated_at: '2015-06-24 04:04:42.6367'
+  meta_title: 'Debutante dresses '
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.636317'
+  delivery_period: 7 - 10 business days
+spree_taxons_55:
+  id: '33'
+  parent_id: '32'
+  position: '0'
+  name: Neon
+  permalink: edits/neon
+  taxonomy_id: '8'
+  lft: '224'
+  rgt: '225'
+  description: ''
+  created_at: '2013-08-11 11:52:59.677509'
+  updated_at: '2015-09-18 04:09:28.976135'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_56:
+  id: '38'
+  parent_id: '36'
+  position: '0'
+  name: Plus Size Dresses
+  permalink: seocollection/Plus-Size-Dresses
+  taxonomy_id: '9'
+  lft: '336'
+  rgt: '337'
+  created_at: '2013-09-16 21:25:47.962426'
+  updated_at: '2014-03-24 14:39:20.525237'
+  meta_title: Plus Size Dresses - Fame & Partners
+  meta_description: Fame & Partners stock a wide range of plus size dresses online,
+    visit our store today.
+  delivery_period: 7 - 10 business days
+spree_taxons_57:
+  id: '205'
+  parent_id: '32'
+  position: '33'
+  name: FB2015OTHER
+  permalink: edits/fb2015other
+  taxonomy_id: '8'
+  lft: '278'
+  rgt: '279'
+  created_at: '2015-02-15 22:45:21.415234'
+  updated_at: '2015-09-18 04:09:29.180278'
+  delivery_period: 7 - 10 business days
+spree_taxons_58:
+  id: '159'
+  parent_id: '184'
+  position: '0'
+  name: Birthday
+  permalink: event/birthday
+  taxonomy_id: '10'
+  lft: '352'
+  rgt: '353'
+  description: ''
+  created_at: '2014-08-06 12:35:58.062997'
+  updated_at: '2015-06-24 04:04:42.615251'
+  meta_title: Birthday dresses online
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.614857'
+  delivery_period: 7 - 10 business days
+spree_taxons_59:
+  id: '181'
+  parent_id: '32'
+  position: '24'
+  name: facebook4
+  permalink: edits/facebook4
+  taxonomy_id: '8'
+  lft: '258'
+  rgt: '259'
+  created_at: '2014-10-16 03:41:22.783328'
+  updated_at: '2015-09-18 04:09:29.106262'
+  delivery_period: 7 - 10 business days
+spree_taxons_60:
+  id: '121'
+  parent_id: '23'
+  position: '0'
+  name: Pleated
+  permalink: style/pleated
+  taxonomy_id: '7'
+  lft: '68'
+  rgt: '69'
+  description: ''
+  created_at: '2014-02-19 13:12:59.736123'
+  updated_at: '2015-09-30 09:34:35.42352'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_61:
+  id: '239'
+  parent_id: '184'
+  position: '14'
+  name: Dinner Party
+  permalink: event/dinner-party
+  taxonomy_id: '10'
+  lft: '368'
+  rgt: '369'
+  description: ''
+  created_at: '2015-06-19 01:31:06.789114'
+  updated_at: '2016-08-18 18:37:32.995627'
+  meta_title: Dinner Party
+  meta_description: ''
+  published_at: '2016-08-17 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_62:
+  id: '98'
+  parent_id: '23'
+  position: '0'
+  name: Halter
+  permalink: style/halter
+  taxonomy_id: '7'
+  lft: '50'
+  rgt: '51'
+  description: ''
+  created_at: '2014-02-17 11:58:14.54387'
+  updated_at: '2015-09-30 09:31:04.701412'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_63:
+  id: '44'
+  parent_id: '36'
+  position: '0'
+  name: Gothic
+  permalink: seocollection/gothic
+  taxonomy_id: '9'
+  lft: '334'
+  rgt: '335'
+  description: ''
+  created_at: '2014-01-07 04:29:14.269289'
+  updated_at: '2015-07-02 22:09:56.99656'
+  meta_title: Gothic Prom and Formal Dresses, perfect for your special event - Fame
+    & Partners
+  meta_description: Gothic inspired dresses, dark and moody.  Absolutely unique styles
+    from Fame & Partners.
+  delivery_period: 7 - 10 business days
+spree_taxons_64:
+  id: '23'
+  position: '0'
+  name: Style
+  permalink: style
+  taxonomy_id: '7'
+  lft: '41'
+  rgt: '222'
+  created_at: '2013-08-07 02:14:34.337988'
+  updated_at: '2013-08-07 02:14:34.337988'
+  delivery_period: 7 - 10 business days
+spree_taxons_65:
+  id: '250'
+  parent_id: '17'
+  position: '0'
+  name: Jumpsuit
+  permalink: collection/jumpsuit
+  taxonomy_id: '6'
+  lft: '34'
+  rgt: '35'
+  description: ''
+  created_at: '2015-09-19 11:04:59.065698'
+  updated_at: '2016-08-05 16:51:55.149657'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-08-04 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_66:
+  id: '200'
+  parent_id: '17'
+  position: '0'
+  name: Party
+  permalink: collection/party
+  taxonomy_id: '6'
+  lft: '4'
+  rgt: '5'
+  created_at: '2014-12-27 04:20:26.960605'
+  updated_at: '2014-12-27 04:20:26.960605'
+  delivery_period: 7 - 10 business days
+spree_taxons_67:
+  id: '242'
+  parent_id: '17'
+  position: '0'
+  name: Print
+  permalink: collection/print
+  taxonomy_id: '6'
+  lft: '26'
+  rgt: '27'
+  description: ''
+  created_at: '2015-07-22 09:18:05.404408'
+  updated_at: '2015-10-08 02:42:12.545064'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_68:
+  id: '191'
+  parent_id: '17'
+  position: '0'
+  name: Pastel
+  permalink: collection/pastel
+  taxonomy_id: '6'
+  lft: '2'
+  rgt: '3'
+  description: ''
+  created_at: '2014-11-25 06:49:10.835744'
+  updated_at: '2015-09-30 09:29:46.720482'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_69:
+  id: '283'
+  parent_id: '32'
+  position: '49'
+  name: Slip Collection
+  permalink: edits/slip-collection
+  taxonomy_id: '8'
+  lft: '322'
+  rgt: '323'
+  description: ''
+  created_at: '2016-05-20 22:09:48.494699'
+  updated_at: '2016-05-20 22:10:59.365286'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-05-19 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_70:
+  id: '237'
+  parent_id: '184'
+  position: '12'
+  name: Ladies Lunch
+  permalink: event/ladies-who-lunch
+  taxonomy_id: '10'
+  lft: '364'
+  rgt: '365'
+  description: ''
+  created_at: '2015-06-19 01:29:19.438711'
+  updated_at: '2016-08-18 18:37:44.910589'
+  meta_title: Ladies Who Lunch
+  meta_description: ''
+  published_at: '2016-08-17 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_71:
+  id: '264'
+  parent_id: '32'
+  position: '40'
+  name: Formal Night
+  permalink: edits/formal-night
+  taxonomy_id: '8'
+  lft: '302'
+  rgt: '303'
+  description: ''
+  created_at: '2015-10-26 05:14:42.034189'
+  updated_at: '2015-10-26 10:35:32.198124'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-01 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_72:
+  id: '168'
+  parent_id: '184'
+  position: '0'
+  name: Graduation
+  permalink: event/graduation
+  taxonomy_id: '10'
+  lft: '356'
+  rgt: '357'
+  description: ''
+  created_at: '2014-08-18 03:10:05.243388'
+  updated_at: '2015-06-24 04:04:42.624546'
+  meta_title: Stunning graduation dresses
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.624156'
+  delivery_period: 7 - 10 business days
+spree_taxons_73:
+  id: '147'
+  parent_id: '184'
+  position: '0'
+  name: Bridal
+  permalink: event/bridal
+  taxonomy_id: '10'
+  lft: '342'
+  rgt: '343'
+  description: Special wedding dresses.
+  created_at: '2014-08-06 12:35:56.207633'
+  updated_at: '2016-08-05 11:59:39.576827'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.611659'
+  delivery_period: 7 - 10 business days
+spree_taxons_74:
+  id: '131'
+  parent_id: '23'
+  position: '25'
+  name: Mesh
+  permalink: style/mesh
+  taxonomy_id: '7'
+  lft: '60'
+  rgt: '61'
+  description: ''
+  created_at: '2014-03-14 03:18:29.362232'
+  updated_at: '2015-09-30 09:33:27.00465'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_75:
+  id: '125'
+  parent_id: '23'
+  position: '0'
+  name: A-Line
+  permalink: style/a-line
+  taxonomy_id: '7'
+  lft: '44'
+  rgt: '45'
+  description: ''
+  created_at: '2014-02-19 14:27:32.278887'
+  updated_at: '2015-09-30 09:30:53.567121'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_76:
+  id: '326'
+  parent_id: '23'
+  position: '59'
+  name: short sleeves
+  permalink: style/short-sleeves
+  taxonomy_id: '7'
+  lft: '154'
+  rgt: '155'
+  created_at: '2016-09-16 18:08:56.724586'
+  updated_at: '2016-09-16 18:08:56.724586'
+  delivery_period: 7 - 10 business days
+spree_taxons_77:
+  id: '327'
+  parent_id: '23'
+  position: '60'
+  name: half sleeves
+  permalink: style/half-sleeved
+  taxonomy_id: '7'
+  lft: '156'
+  rgt: '157'
+  created_at: '2016-09-16 18:09:34.774859'
+  updated_at: '2016-09-16 18:09:50.509169'
+  delivery_period: 7 - 10 business days
+spree_taxons_78:
+  id: '153'
+  parent_id: '23'
+  position: '0'
+  name: Celebrity
+  permalink: style/celebrity
+  taxonomy_id: '7'
+  lft: '46'
+  rgt: '47'
+  created_at: '2014-08-06 12:35:56.874948'
+  updated_at: '2014-10-31 20:03:29.490057'
+  delivery_period: 7 - 10 business days
+spree_taxons_79:
+  id: '163'
+  parent_id: '23'
+  position: '50'
+  name: Lace
+  permalink: style/lace
+  taxonomy_id: '7'
+  lft: '54'
+  rgt: '55'
+  created_at: '2014-08-11 06:19:32.056384'
+  updated_at: '2015-06-24 04:04:42.660843'
+  published_at: '2015-06-24 04:04:42.660441'
+  delivery_period: 7 - 10 business days
+spree_taxons_80:
+  id: '328'
+  parent_id: '23'
+  position: '61'
+  name: flared sleeves
+  permalink: style/flared-sleeves
+  taxonomy_id: '7'
+  lft: '158'
+  rgt: '159'
+  created_at: '2016-09-16 18:09:59.332669'
+  updated_at: '2016-09-16 18:09:59.332669'
+  delivery_period: 7 - 10 business days
+spree_taxons_81:
+  id: '330'
+  parent_id: '23'
+  position: '63'
+  name: beading
+  permalink: style/beading
+  taxonomy_id: '7'
+  lft: '162'
+  rgt: '163'
+  created_at: '2016-09-16 18:11:09.32548'
+  updated_at: '2016-09-16 18:11:09.32548'
+  delivery_period: 7 - 10 business days
+spree_taxons_82:
+  id: '118'
+  parent_id: '23'
+  position: '21'
+  name: Backless
+  permalink: style/backless
+  taxonomy_id: '7'
+  lft: '66'
+  rgt: '67'
+  description: ''
+  created_at: '2014-02-19 05:13:01.655512'
+  updated_at: '2015-06-24 04:04:42.657867'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.657457'
+  delivery_period: 7 - 10 business days
+spree_taxons_83:
+  id: '293'
+  parent_id: '184'
+  position: '23'
+  name: Work Function
+  permalink: event/work-function
+  taxonomy_id: '10'
+  lft: '386'
+  rgt: '387'
+  description: ''
+  created_at: '2016-07-20 18:02:53.367272'
+  updated_at: '2016-07-20 18:20:52.766297'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_84:
+  id: '290'
+  parent_id: '32'
+  position: '50'
+  name: Cotton Collection
+  permalink: edits/cotton-collection
+  taxonomy_id: '8'
+  lft: '324'
+  rgt: '325'
+  description: ''
+  created_at: '2016-06-10 07:41:57.618483'
+  updated_at: '2016-06-30 18:56:41.951608'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-06-29 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_85:
+  id: '184'
+  position: '0'
+  name: Event
+  permalink: event
+  taxonomy_id: '10'
+  lft: '339'
+  rgt: '396'
+  created_at: '2014-10-31 20:02:52.46941'
+  updated_at: '2014-10-31 20:02:52.46941'
+  delivery_period: 7 - 10 business days
+spree_taxons_86:
+  id: '240'
+  parent_id: '32'
+  position: '34'
+  name: GARDEN PARTY
+  permalink: edits/garden-party
+  taxonomy_id: '8'
+  lft: '290'
+  rgt: '291'
+  description: ''
+  created_at: '2015-07-15 02:06:54.263045'
+  updated_at: '2015-09-18 04:09:29.221167'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_87:
+  id: '274'
+  parent_id: '17'
+  position: '0'
+  name: Bridal
+  permalink: collection/bridal
+  taxonomy_id: '6'
+  lft: '38'
+  rgt: '39'
+  created_at: '2015-12-02 02:06:46.578134'
+  updated_at: '2015-12-02 02:06:46.578134'
+  delivery_period: 7 - 10 business days
+spree_taxons_88:
+  id: '304'
+  parent_id: '184'
+  position: '27'
+  name: Night Out
+  permalink: event/night-out
+  taxonomy_id: '10'
+  lft: '394'
+  rgt: '395'
+  description: ''
+  created_at: '2016-08-25 19:25:08.336939'
+  updated_at: '2016-08-25 19:25:19.017286'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-08-24 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_89:
+  id: '303'
+  parent_id: '184'
+  position: '26'
+  name: Day Night
+  permalink: event/day-night
+  taxonomy_id: '10'
+  lft: '392'
+  rgt: '393'
+  description: ''
+  created_at: '2016-08-25 19:12:09.784155'
+  updated_at: '2016-08-29 23:21:17.650477'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-08-28 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_90:
+  id: '132'
+  parent_id: '23'
+  position: '26'
+  name: Metallic
+  permalink: style/metallic
+  taxonomy_id: '7'
+  lft: '62'
+  rgt: '63'
+  description: ''
+  created_at: '2014-03-14 03:18:40.494246'
+  updated_at: '2015-09-30 09:33:49.0619'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_91:
+  id: '102'
+  parent_id: '23'
+  position: '0'
+  name: Long Sleeve
+  permalink: style/long-sleeve
+  taxonomy_id: '7'
+  lft: '74'
+  rgt: '75'
+  description: ''
+  created_at: '2014-02-17 12:32:26.905054'
+  updated_at: '2016-07-26 23:55:12.239043'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-25 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_92:
+  id: '152'
+  parent_id: '23'
+  position: '0'
+  name: Cut out
+  permalink: style/cut-out
+  taxonomy_id: '7'
+  lft: '84'
+  rgt: '85'
+  description: ''
+  created_at: '2014-08-06 12:35:56.832913'
+  updated_at: '2016-09-08 20:37:28.785961'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-09-07 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_93:
+  id: '186'
+  parent_id: '23'
+  position: '0'
+  name: Split
+  permalink: style/split
+  taxonomy_id: '7'
+  lft: '90'
+  rgt: '91'
+  created_at: '2014-11-10 20:17:53.795225'
+  updated_at: '2015-06-24 04:04:42.654865'
+  published_at: '2015-06-24 04:04:42.654452'
+  delivery_period: 7 - 10 business days
+spree_taxons_94:
+  id: '226'
+  parent_id: '23'
+  position: '30'
+  name: Vintage
+  permalink: style/vintage
+  taxonomy_id: '7'
+  lft: '98'
+  rgt: '99'
+  created_at: '2015-03-31 23:46:35.626317'
+  updated_at: '2015-03-31 23:46:35.626317'
+  delivery_period: 7 - 10 business days
+spree_taxons_95:
+  id: '227'
+  parent_id: '23'
+  position: '31'
+  name: Midi
+  permalink: style/midi
+  taxonomy_id: '7'
+  lft: '100'
+  rgt: '101'
+  created_at: '2015-03-31 23:46:57.578962'
+  updated_at: '2015-03-31 23:46:57.578962'
+  delivery_period: 7 - 10 business days
+spree_taxons_96:
+  id: '261'
+  parent_id: '23'
+  position: '35'
+  name: Skirt
+  permalink: style/skirt
+  taxonomy_id: '7'
+  lft: '108'
+  rgt: '109'
+  icon_file_name: category-alldresses-dark-bg.jpg
+  icon_content_type: image/jpeg
+  icon_file_size: '159372'
+  icon_updated_at: '2015-10-17 00:50:08.020123'
+  description: Find your perfect skirt.
+  created_at: '2015-10-16 21:33:28.610875'
+  updated_at: '2015-10-23 05:30:45.287685'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-01 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_97:
+  id: '317'
+  parent_id: '23'
+  position: '50'
+  name: round
+  permalink: style/round
+  taxonomy_id: '7'
+  lft: '136'
+  rgt: '137'
+  created_at: '2016-09-16 18:05:21.499674'
+  updated_at: '2016-09-16 18:05:21.499674'
+  delivery_period: 7 - 10 business days
+spree_taxons_98:
+  id: '319'
+  parent_id: '23'
+  position: '52'
+  name: keyhole
+  permalink: style/keyhole
+  taxonomy_id: '7'
+  lft: '140'
+  rgt: '141'
+  created_at: '2016-09-16 18:06:22.018223'
+  updated_at: '2016-09-16 18:06:22.018223'
+  delivery_period: 7 - 10 business days
+spree_taxons_99:
+  id: '225'
+  parent_id: '23'
+  position: '29'
+  name: Bodycon
+  permalink: style/bodycon
+  taxonomy_id: '7'
+  lft: '96'
+  rgt: '97'
+  description: ''
+  created_at: '2015-03-31 23:46:23.7778'
+  updated_at: '2016-07-26 23:55:52.335786'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-25 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_100:
+  id: '119'
+  parent_id: '23'
+  position: '22'
+  name: Strapless
+  permalink: style/strapless
+  taxonomy_id: '7'
+  lft: '76'
+  rgt: '77'
+  created_at: '2014-02-19 05:20:10.975945'
+  updated_at: '2015-06-24 04:04:42.64874'
+  published_at: '2015-06-24 04:04:42.648361'
+  delivery_period: 7 - 10 business days
+spree_taxons_101:
+  id: '256'
+  parent_id: '17'
+  position: '0'
+  name: Train
+  permalink: collection/train
+  taxonomy_id: '6'
+  lft: '36'
+  rgt: '37'
+  created_at: '2015-10-09 05:36:58.42806'
+  updated_at: '2015-10-09 05:36:58.42806'
+  delivery_period: 7 - 10 business days
+spree_taxons_102:
+  id: '248'
+  parent_id: '17'
+  position: '0'
+  name: Ruffle
+  permalink: collection/ruffle
+  taxonomy_id: '6'
+  lft: '30'
+  rgt: '31'
+  icon_file_name: 1920-CategoryBanner-RuffleDress.jpg
+  icon_content_type: image/jpeg
+  icon_file_size: '146641'
+  icon_updated_at: '2016-06-20 09:23:04.30127'
+  description: ''
+  created_at: '2015-09-19 11:04:58.70869'
+  updated_at: '2016-06-20 09:23:04.432236'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-28 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_103:
+  id: '249'
+  parent_id: '17'
+  position: '0'
+  name: 'Long '
+  permalink: collection/long
+  taxonomy_id: '6'
+  lft: '32'
+  rgt: '33'
+  created_at: '2015-09-19 11:04:58.904148'
+  updated_at: '2015-09-19 11:04:58.904148'
+  delivery_period: 7 - 10 business days
+spree_taxons_104:
+  id: '210'
+  parent_id: '17'
+  position: '0'
+  name: Cut Out
+  permalink: collection/cut-out
+  taxonomy_id: '6'
+  lft: '8'
+  rgt: '9'
+  created_at: '2015-03-25 09:49:34.524575'
+  updated_at: '2015-03-25 09:49:34.524575'
+  delivery_period: 7 - 10 business days
+spree_taxons_105:
+  id: '216'
+  parent_id: '17'
+  position: '0'
+  name: Hi Low
+  permalink: collection/hi-low
+  taxonomy_id: '6'
+  lft: '20'
+  rgt: '21'
+  description: ''
+  created_at: '2015-03-25 10:10:14.637339'
+  updated_at: '2015-09-30 09:29:39.313931'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_106:
+  id: '212'
+  parent_id: '17'
+  position: '0'
+  name: Midi
+  permalink: collection/midi
+  taxonomy_id: '6'
+  lft: '12'
+  rgt: '13'
+  description: ''
+  created_at: '2015-03-25 09:53:40.509942'
+  updated_at: '2015-09-30 09:30:27.521068'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_107:
+  id: '209'
+  parent_id: '17'
+  position: '0'
+  name: Balls
+  permalink: collection/balls
+  taxonomy_id: '6'
+  lft: '6'
+  rgt: '7'
+  created_at: '2015-03-25 09:46:21.413949'
+  updated_at: '2015-03-25 09:46:21.413949'
+  delivery_period: 7 - 10 business days
+spree_taxons_108:
+  id: '215'
+  parent_id: '17'
+  position: '0'
+  name: Evening
+  permalink: collection/evening
+  taxonomy_id: '6'
+  lft: '18'
+  rgt: '19'
+  created_at: '2015-03-25 09:53:43.95696'
+  updated_at: '2015-03-25 09:53:43.95696'
+  delivery_period: 7 - 10 business days
+spree_taxons_109:
+  id: '214'
+  parent_id: '17'
+  position: '0'
+  name: Wrap
+  permalink: collection/wrap
+  taxonomy_id: '6'
+  lft: '16'
+  rgt: '17'
+  description: ''
+  created_at: '2015-03-25 09:53:41.853901'
+  updated_at: '2016-08-16 05:01:36.612185'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_110:
+  id: '316'
+  parent_id: '23'
+  position: '49'
+  name: plunging
+  permalink: style/plunging
+  taxonomy_id: '7'
+  lft: '134'
+  rgt: '135'
+  created_at: '2016-09-16 18:03:58.197693'
+  updated_at: '2016-09-16 18:03:58.197693'
+  delivery_period: 7 - 10 business days
+spree_taxons_111:
+  id: '251'
+  parent_id: '32'
+  position: '36'
+  name: MAKE A STATEMENT
+  permalink: edits/make-a-statement
+  taxonomy_id: '8'
+  lft: '294'
+  rgt: '295'
+  description: ''
+  created_at: '2015-09-21 11:16:50.665193'
+  updated_at: '2015-10-11 23:53:47.768464'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-20 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_112:
+  id: '41'
+  parent_id: '32'
+  position: '5'
+  name: Cut-Outs
+  permalink: edits/cutout
+  taxonomy_id: '8'
+  lft: '232'
+  rgt: '233'
+  description: ''
+  created_at: '2013-12-02 06:26:13.018622'
+  updated_at: '2015-09-18 04:09:29.006055'
+  meta_title: Cut-Outs
+  meta_description: 'Keep it cool this summer in these killer cut-out minis, maxis
+    and twin sets. '
+  delivery_period: 7 - 10 business days
+spree_taxons_113:
+  id: '127'
+  parent_id: '32'
+  position: '10'
+  name: New Collection
+  permalink: edits/new-collection
+  taxonomy_id: '8'
+  lft: '238'
+  rgt: '239'
+  description: ''
+  created_at: '2014-03-04 12:33:45.211584'
+  updated_at: '2015-09-18 04:09:29.02844'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_114:
+  id: '299'
+  parent_id: '32'
+  position: '51'
+  name: High Summer
+  permalink: edits/high-summer
+  taxonomy_id: '8'
+  lft: '326'
+  rgt: '327'
+  description: ''
+  created_at: '2016-07-22 16:47:38.987701'
+  updated_at: '2016-07-22 16:48:15.565287'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-21 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_115:
+  id: '294'
+  parent_id: '184'
+  position: '24'
+  name: Vacation
+  permalink: event/vacation
+  taxonomy_id: '10'
+  lft: '388'
+  rgt: '389'
+  description: ''
+  created_at: '2016-07-20 18:03:07.380209'
+  updated_at: '2016-07-20 18:20:44.044033'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_116:
+  id: '140'
+  parent_id: '32'
+  position: '14'
+  name: FLORAL
+  permalink: edits/floral
+  taxonomy_id: '8'
+  lft: '244'
+  rgt: '245'
+  created_at: '2014-06-06 07:56:50.985137'
+  updated_at: '2015-09-18 04:09:29.058466'
+  delivery_period: 7 - 10 business days
+spree_taxons_117:
+  id: '220'
+  parent_id: '32'
+  position: '32'
+  name: SALE
+  permalink: edits/sale
+  taxonomy_id: '8'
+  lft: '282'
+  rgt: '283'
+  created_at: '2015-03-25 22:51:24.064314'
+  updated_at: '2015-09-18 04:09:29.194045'
+  delivery_period: 7 - 10 business days
+spree_taxons_118:
+  id: '194'
+  parent_id: '32'
+  position: '25'
+  name: BRIDESMAID14
+  permalink: edits/bridesmaid14
+  taxonomy_id: '8'
+  lft: '268'
+  rgt: '269'
+  description: ''
+  created_at: '2014-11-26 11:23:41.381186'
+  updated_at: '2015-09-18 04:09:29.143124'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_119:
+  id: '143'
+  parent_id: '32'
+  position: '15'
+  name: fashionista
+  permalink: edits/fashionista
+  taxonomy_id: '8'
+  lft: '246'
+  rgt: '247'
+  created_at: '2014-07-07 06:22:16.071511'
+  updated_at: '2015-09-18 04:09:29.065054'
+  delivery_period: 7 - 10 business days
+spree_taxons_120:
+  id: '277'
+  parent_id: '184'
+  position: '21'
+  name: Fame Bridesmaids
+  permalink: event/fame-bridesmaids
+  taxonomy_id: '10'
+  lft: '382'
+  rgt: '383'
+  description: ''
+  created_at: '2016-01-21 22:41:48.278873'
+  updated_at: '2016-01-21 22:42:08.929098'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-01-23 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_121:
+  id: '273'
+  parent_id: '184'
+  position: '20'
+  name: Bride
+  permalink: event/bride
+  taxonomy_id: '10'
+  lft: '380'
+  rgt: '381'
+  description: ''
+  created_at: '2015-12-01 01:34:53.967559'
+  updated_at: '2015-12-01 01:37:27.256022'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_122:
+  id: '268'
+  parent_id: '184'
+  position: '19'
+  name: Wedding Guests
+  permalink: event/wedding-guests
+  taxonomy_id: '10'
+  lft: '378'
+  rgt: '379'
+  description: ''
+  created_at: '2015-11-04 01:16:55.293212'
+  updated_at: '2015-12-02 00:35:46.831126'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-12-01 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_123:
+  id: '267'
+  parent_id: '32'
+  position: '42'
+  name: Winter Ball
+  permalink: edits/winter-ball
+  taxonomy_id: '8'
+  lft: '306'
+  rgt: '307'
+  created_at: '2015-10-30 01:08:39.13638'
+  updated_at: '2015-10-30 01:08:39.13638'
+  delivery_period: 7 - 10 business days
+spree_taxons_124:
+  id: '178'
+  parent_id: '32'
+  position: '21'
+  name: facebook1
+  permalink: edits/facebook1
+  taxonomy_id: '8'
+  lft: '252'
+  rgt: '253'
+  created_at: '2014-10-16 03:40:16.571169'
+  updated_at: '2015-09-18 04:09:29.085308'
+  delivery_period: 7 - 10 business days
+spree_taxons_125:
+  id: '201'
+  parent_id: '32'
+  position: '30'
+  name: AMFAM
+  permalink: edits/amfam
+  taxonomy_id: '8'
+  lft: '274'
+  rgt: '275'
+  created_at: '2014-12-27 07:54:57.984102'
+  updated_at: '2015-09-18 04:09:29.166038'
+  delivery_period: 7 - 10 business days
+spree_taxons_126:
+  id: '187'
+  parent_id: '32'
+  position: '23'
+  name: Break Hearts
+  permalink: edits/breakhearts
+  taxonomy_id: '8'
+  lft: '264'
+  rgt: '265'
+  description: ''
+  created_at: '2014-11-25 06:44:41.776637'
+  updated_at: '2015-09-18 04:09:29.127467'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_127:
+  id: '345'
+  parent_id: '23'
+  position: '75'
+  name: satin
+  permalink: style/satin
+  taxonomy_id: '7'
+  lft: '184'
+  rgt: '185'
+  created_at: '2016-09-16 18:18:53.512664'
+  updated_at: '2016-09-16 18:18:53.512664'
+  delivery_period: 7 - 10 business days
+spree_taxons_128:
+  id: '260'
+  parent_id: '259'
+  position: '0'
+  name: not-a-dress
+  permalink: meta/not-a-dress
+  taxonomy_id: '14'
+  lft: '400'
+  rgt: '401'
+  description: ''
+  created_at: '2015-10-16 03:50:12.488369'
+  updated_at: '2015-10-16 03:50:25.300507'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_129:
+  id: '120'
+  parent_id: '23'
+  position: '90'
+  name: V-Neck
+  permalink: style/v-neck
+  taxonomy_id: '7'
+  lft: '214'
+  rgt: '215'
+  description: ''
+  created_at: '2014-02-19 13:12:59.486559'
+  updated_at: '2016-09-20 17:15:37.035131'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.651467'
+  delivery_period: 7 - 10 business days
+spree_taxons_130:
+  id: '243'
+  parent_id: '17'
+  position: '0'
+  name: Mother of the Bride
+  permalink: collection/mother-of-the-bride
+  taxonomy_id: '6'
+  lft: '28'
+  rgt: '29'
+  created_at: '2015-07-22 09:18:06.106898'
+  updated_at: '2015-07-22 09:18:06.106898'
+  delivery_period: 7 - 10 business days
+spree_taxons_131:
+  id: '233'
+  parent_id: '17'
+  position: '0'
+  name: Quinceanera
+  permalink: collection/quinceanera
+  taxonomy_id: '6'
+  lft: '24'
+  rgt: '25'
+  created_at: '2015-05-15 06:24:03.838859'
+  updated_at: '2015-05-15 06:24:03.838859'
+  delivery_period: 7 - 10 business days
+spree_taxons_132:
+  id: '211'
+  parent_id: '17'
+  position: '0'
+  name: Sequin
+  permalink: collection/sequin
+  taxonomy_id: '6'
+  lft: '10'
+  rgt: '11'
+  created_at: '2015-03-25 09:51:31.069554'
+  updated_at: '2015-03-25 09:51:31.069554'
+  delivery_period: 7 - 10 business days
+spree_taxons_133:
+  id: '138'
+  parent_id: '32'
+  position: '12'
+  name: Collaborations
+  permalink: edits/collaborations
+  taxonomy_id: '8'
+  lft: '242'
+  rgt: '243'
+  description: 'Beautiful collaborations between Fame & Partners and our favourite
+    designers, bloggers, stylists and other creatives that inspire us. '
+  created_at: '2014-04-10 01:21:23.378786'
+  updated_at: '2015-09-18 04:09:29.043613'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_134:
+  id: '137'
+  parent_id: '32'
+  position: '11'
+  name: Off The Shoulder
+  permalink: edits/new-node
+  taxonomy_id: '8'
+  lft: '240'
+  rgt: '241'
+  description: Dare to Bare
+  created_at: '2014-03-21 06:11:53.039277'
+  updated_at: '2015-09-18 04:09:29.035914'
+  meta_title: ''
+  meta_description: Dare to Bare
+  delivery_period: 7 - 10 business days
+spree_taxons_135:
+  id: '34'
+  parent_id: '32'
+  position: '1'
+  name: Dark
+  permalink: edits/dark
+  taxonomy_id: '8'
+  lft: '226'
+  rgt: '227'
+  description: ''
+  created_at: '2013-08-11 23:43:18.599666'
+  updated_at: '2015-09-18 04:09:28.9829'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_136:
+  id: '35'
+  parent_id: '32'
+  position: '2'
+  name: volume
+  permalink: edits/volume
+  taxonomy_id: '8'
+  lft: '228'
+  rgt: '229'
+  description: ''
+  created_at: '2013-08-11 23:43:28.684144'
+  updated_at: '2015-09-18 04:09:28.990058'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_137:
+  id: '295'
+  parent_id: '184'
+  position: '25'
+  name: Engagement
+  permalink: event/engagement
+  taxonomy_id: '10'
+  lft: '390'
+  rgt: '391'
+  description: ''
+  created_at: '2016-07-20 18:03:23.843394'
+  updated_at: '2016-07-20 18:20:35.267621'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_138:
+  id: '32'
+  position: '0'
+  name: Edits
+  permalink: edits
+  taxonomy_id: '8'
+  lft: '223'
+  rgt: '332'
+  description: ''
+  created_at: '2013-08-11 11:52:49.151397'
+  updated_at: '2015-09-18 04:09:28.960778'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-18 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_139:
+  id: '252'
+  parent_id: '32'
+  position: '37'
+  name: PHOTO FINISH
+  permalink: edits/photo-finish
+  taxonomy_id: '8'
+  lft: '296'
+  rgt: '297'
+  description: ''
+  created_at: '2015-09-29 10:15:20.821986'
+  updated_at: '2015-09-29 10:15:36.874365'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_140:
+  id: '280'
+  parent_id: '32'
+  position: '46'
+  name: Just The Girls
+  permalink: edits/just-the-girls
+  taxonomy_id: '8'
+  lft: '316'
+  rgt: '317'
+  description: ''
+  created_at: '2016-02-05 06:38:56.426544'
+  updated_at: '2016-03-08 19:40:10.803678'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-02-04 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_141:
+  id: '213'
+  parent_id: '17'
+  position: '0'
+  name: Vintage
+  permalink: collection/vintage
+  taxonomy_id: '6'
+  lft: '14'
+  rgt: '15'
+  created_at: '2015-03-25 09:53:40.535028'
+  updated_at: '2015-03-25 09:53:40.535028'
+  delivery_period: 7 - 10 business days
+spree_taxons_142:
+  id: '230'
+  parent_id: '17'
+  position: '0'
+  name: Debuntate
+  permalink: collection/debuntate
+  taxonomy_id: '6'
+  lft: '22'
+  rgt: '23'
+  created_at: '2015-05-10 02:26:06.162727'
+  updated_at: '2015-05-10 02:26:06.162727'
+  delivery_period: 7 - 10 business days
+spree_taxons_143:
+  id: '185'
+  parent_id: '23'
+  position: '0'
+  name: Two Piece
+  permalink: style/two-piece
+  taxonomy_id: '7'
+  lft: '80'
+  rgt: '81'
+  description: 'Take your look to a whole new level. The two piece trend is here to
+    stay & in one click will be delivered straight to your wardrobe. '
+  created_at: '2014-10-31 20:02:52.818681'
+  updated_at: '2015-06-24 04:04:42.642764'
+  meta_title: Two pieces dresses online
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.642352'
+  delivery_period: 7 - 10 business days
+spree_taxons_144:
+  id: '174'
+  parent_id: '23'
+  position: '0'
+  name: Embellishment
+  permalink: style/embellishment
+  taxonomy_id: '7'
+  lft: '86'
+  rgt: '87'
+  description: ''
+  created_at: '2014-09-25 05:08:39.31904'
+  updated_at: '2015-09-30 09:35:01.909388'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_145:
+  id: '224'
+  parent_id: '23'
+  position: '29'
+  name: Little Black Dress
+  permalink: style/little-black-dress
+  taxonomy_id: '7'
+  lft: '94'
+  rgt: '95'
+  description: ''
+  created_at: '2015-03-31 23:36:30.92043'
+  updated_at: '2016-06-07 04:46:51.596143'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-06-06 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_146:
+  id: '232'
+  parent_id: '23'
+  position: '34'
+  name: Plus Size
+  permalink: style/plus-size
+  taxonomy_id: '7'
+  lft: '106'
+  rgt: '107'
+  icon_file_name: plus-bg.jpg
+  icon_content_type: image/jpeg
+  icon_file_size: '400375'
+  icon_updated_at: '2015-05-13 07:12:10.032732'
+  description: ''
+  created_at: '2015-05-12 07:18:52.616987'
+  updated_at: '2015-06-25 22:16:20.539251'
+  meta_title: Plus size dresses and gowns
+  meta_description: ''
+  published_at: '2015-06-24 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_147:
+  id: '278'
+  parent_id: '259'
+  position: '1'
+  name: excluded-from-site
+  permalink: meta/excluded-from-site
+  taxonomy_id: '14'
+  lft: '402'
+  rgt: '403'
+  description: ''
+  created_at: '2016-01-27 00:54:59.174059'
+  updated_at: '2016-01-27 00:55:12.40416'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_148:
+  id: '291'
+  parent_id: '184'
+  position: '22'
+  name: Daytime
+  permalink: event/daytime
+  taxonomy_id: '10'
+  lft: '384'
+  rgt: '385'
+  description: ''
+  created_at: '2016-07-20 18:02:30.444099'
+  updated_at: '2016-07-20 18:03:43.558194'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_149:
+  id: '259'
+  position: '0'
+  name: Meta
+  permalink: meta
+  taxonomy_id: '14'
+  lft: '399'
+  rgt: '404'
+  created_at: '2015-10-16 03:49:56.734814'
+  updated_at: '2015-10-16 03:49:56.734814'
+  delivery_period: 7 - 10 business days
+spree_taxons_150:
+  id: '297'
+  parent_id: '23'
+  position: '89'
+  name: Cotton Dresses
+  permalink: style/cotton-dresses
+  taxonomy_id: '7'
+  lft: '216'
+  rgt: '217'
+  description: ''
+  created_at: '2016-07-21 19:03:15.071474'
+  updated_at: '2016-09-21 19:11:04.39306'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_151:
+  id: '296'
+  parent_id: '23'
+  position: '40'
+  name: Jumpsuit
+  permalink: style/jumpsuit
+  taxonomy_id: '7'
+  lft: '118'
+  rgt: '119'
+  description: ''
+  created_at: '2016-07-20 18:24:01.978238'
+  updated_at: '2016-07-20 18:24:37.533912'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-07-20 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_152:
+  id: '349'
+  parent_id: '23'
+  position: '79'
+  name: crepe
+  permalink: style/crepe
+  taxonomy_id: '7'
+  lft: '192'
+  rgt: '193'
+  created_at: '2016-09-16 18:20:28.27136'
+  updated_at: '2016-09-16 18:20:28.27136'
+  delivery_period: 7 - 10 business days
+spree_taxons_153:
+  id: '231'
+  parent_id: '32'
+  position: '33'
+  name: HERE COMES THE SUN
+  permalink: edits/here-comes-the-sun
+  taxonomy_id: '8'
+  lft: '284'
+  rgt: '285'
+  description: ''
+  created_at: '2015-05-10 05:59:59.852416'
+  updated_at: '2015-09-18 04:09:29.200662'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_154:
+  id: '223'
+  parent_id: '184'
+  position: '12'
+  name: Party
+  permalink: event/party
+  taxonomy_id: '10'
+  lft: '362'
+  rgt: '363'
+  description: ''
+  created_at: '2015-03-31 23:36:02.385123'
+  updated_at: '2015-10-23 14:56:59.782457'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_155:
+  id: '195'
+  parent_id: '32'
+  position: '26'
+  name: BRIDESMAIDOTHER
+  permalink: edits/bridesmaidother
+  taxonomy_id: '8'
+  lft: '270'
+  rgt: '271'
+  description: ''
+  created_at: '2014-11-26 11:23:51.326572'
+  updated_at: '2015-09-18 04:09:29.149924'
+  meta_title: Bridesmaid dresses
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_156:
+  id: '179'
+  parent_id: '32'
+  position: '22'
+  name: facebook2
+  permalink: edits/facebook2
+  taxonomy_id: '8'
+  lft: '254'
+  rgt: '255'
+  created_at: '2014-10-16 03:40:44.574916'
+  updated_at: '2015-09-18 04:09:29.092073'
+  delivery_period: 7 - 10 business days
+spree_taxons_157:
+  id: '238'
+  parent_id: '184'
+  position: '13'
+  name: Date Night
+  permalink: event/date-night
+  taxonomy_id: '10'
+  lft: '366'
+  rgt: '367'
+  description: ''
+  created_at: '2015-06-19 01:30:52.323429'
+  updated_at: '2015-10-23 14:58:43.100413'
+  meta_title: Date Night
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_158:
+  id: '265'
+  parent_id: '32'
+  position: '41'
+  name: Race Day
+  permalink: edits/race-day
+  taxonomy_id: '8'
+  lft: '304'
+  rgt: '305'
+  description: ''
+  created_at: '2015-10-27 03:07:03.521166'
+  updated_at: '2015-10-27 11:21:18.547287'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-01 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_159:
+  id: '258'
+  parent_id: '32'
+  position: '39'
+  name: New This Week
+  permalink: edits/new-this-week
+  taxonomy_id: '8'
+  lft: '300'
+  rgt: '301'
+  description: ''
+  created_at: '2015-10-13 23:07:29.716127'
+  updated_at: '2015-10-13 23:08:27.195583'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-13 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_160:
+  id: '204'
+  parent_id: '32'
+  position: '32'
+  name: FB2015
+  permalink: edits/fb2015
+  taxonomy_id: '8'
+  lft: '276'
+  rgt: '277'
+  description: ''
+  created_at: '2015-02-15 22:43:32.184898'
+  updated_at: '2015-09-18 04:09:29.173488'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_161:
+  id: '149'
+  parent_id: '184'
+  position: '0'
+  name: Special Event
+  permalink: event/special-event
+  taxonomy_id: '10'
+  lft: '358'
+  rgt: '359'
+  description: ''
+  created_at: '2014-08-06 12:35:56.412849'
+  updated_at: '2015-06-24 04:04:42.61833'
+  meta_title: Special Event Dresses
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.617931'
+  delivery_period: 7 - 10 business days
+spree_taxons_162:
+  id: '234'
+  parent_id: '32'
+  position: '32'
+  name: all-size
+  permalink: edits/all-size
+  taxonomy_id: '8'
+  lft: '286'
+  rgt: '287'
+  description: ''
+  created_at: '2015-05-19 08:46:37.518846'
+  updated_at: '2015-09-18 04:09:29.207351'
+  meta_title: Plus size dresses
+  meta_description: ''
+  published_at: '2015-07-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_163:
+  id: '281'
+  parent_id: '32'
+  position: '47'
+  name: Partners In Crime
+  permalink: edits/partners-in-crime
+  taxonomy_id: '8'
+  lft: '318'
+  rgt: '319'
+  description: ''
+  created_at: '2016-03-16 22:48:35.20416'
+  updated_at: '2016-03-21 07:02:37.181909'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-03-21 07:02:37.180263'
+  delivery_period: 7 - 10 business days
+spree_taxons_164:
+  id: '257'
+  parent_id: '32'
+  position: '38'
+  name: DANCE HALL
+  permalink: edits/dance-hall
+  taxonomy_id: '8'
+  lft: '298'
+  rgt: '299'
+  description: ''
+  created_at: '2015-10-12 23:22:07.055645'
+  updated_at: '2015-10-13 10:54:16.830684'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-13 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_165:
+  id: '146'
+  parent_id: '184'
+  position: '0'
+  name: Ball Gowns
+  permalink: event/ball-gowns
+  taxonomy_id: '10'
+  lft: '348'
+  rgt: '349'
+  description: ''
+  created_at: '2014-08-06 12:35:55.962987'
+  updated_at: '2015-06-24 04:04:42.621457'
+  meta_title: Beautiful ball gowns
+  meta_description: ''
+  published_at: '2015-06-24 04:04:42.621062'
+  delivery_period: 7 - 10 business days
+spree_taxons_166:
+  id: '359'
+  parent_id: '23'
+  position: '89'
+  name: stripes
+  permalink: style/stripes
+  taxonomy_id: '7'
+  lft: '212'
+  rgt: '213'
+  created_at: '2016-09-16 18:23:06.267361'
+  updated_at: '2016-09-16 18:23:06.267361'
+  delivery_period: 7 - 10 business days
+spree_taxons_167:
+  id: '253'
+  parent_id: '184'
+  position: '15'
+  name: RED CARPET
+  permalink: event/red-carpet
+  taxonomy_id: '10'
+  lft: '370'
+  rgt: '371'
+  description: ''
+  created_at: '2015-09-30 04:29:49.556371'
+  updated_at: '2015-10-23 14:57:48.313118'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-10-22 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_168:
+  id: '353'
+  parent_id: '23'
+  position: '83'
+  name: scuba
+  permalink: style/scuba
+  taxonomy_id: '7'
+  lft: '200'
+  rgt: '201'
+  created_at: '2016-09-16 18:21:29.56798'
+  updated_at: '2016-09-16 18:21:29.56798'
+  delivery_period: 7 - 10 business days
+spree_taxons_169:
+  id: '148'
+  parent_id: '184'
+  position: '0'
+  name: Prom
+  permalink: event/prom
+  taxonomy_id: '10'
+  lft: '340'
+  rgt: '341'
+  description: ''
+  created_at: '2014-08-06 12:35:56.388149'
+  updated_at: '2015-08-19 07:15:44.694179'
+  meta_title: Long & Short Prom Dresses
+  meta_description: ''
+  published_at: '2015-06-24 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_170:
+  id: '344'
+  parent_id: '23'
+  position: '74'
+  name: velvet
+  permalink: style/velvet
+  taxonomy_id: '7'
+  lft: '182'
+  rgt: '183'
+  created_at: '2016-09-16 18:18:48.535217'
+  updated_at: '2016-09-16 18:18:48.535217'
+  delivery_period: 7 - 10 business days
+spree_taxons_171:
+  id: '45'
+  parent_id: '32'
+  position: '7'
+  name: gothic
+  permalink: edits/gothic
+  taxonomy_id: '8'
+  lft: '234'
+  rgt: '235'
+  description: ''
+  created_at: '2014-01-07 07:33:44.074768'
+  updated_at: '2015-09-18 04:09:29.014256'
+  meta_title: Gothic Prom and Formal Dresses, perfect for your special event - Fame
+    & Partners
+  meta_description: Gothic inspired dresses, dark and moody.  Absolutely unique styles
+    from Fame & Partners.
+  delivery_period: 7 - 10 business days
+spree_taxons_172:
+  id: '104'
+  parent_id: '23'
+  position: '0'
+  name: Cocktail
+  permalink: style/cocktail
+  taxonomy_id: '7'
+  lft: '48'
+  rgt: '49'
+  description: ''
+  created_at: '2014-02-17 12:32:27.145453'
+  updated_at: '2015-06-30 01:15:38.175108'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-06-28 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_173:
+  id: '155'
+  parent_id: '23'
+  position: '0'
+  name: Long
+  permalink: style/long
+  taxonomy_id: '7'
+  lft: '56'
+  rgt: '57'
+  description: ''
+  created_at: '2014-08-06 12:35:57.27121'
+  updated_at: '2015-09-30 09:32:06.538777'
+  meta_title: Long Dresses, long formal dresses, high quality formal dresses.
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_174:
+  id: '136'
+  parent_id: '23'
+  position: '30'
+  name: Mermaid
+  permalink: style/mermaid
+  taxonomy_id: '7'
+  lft: '58'
+  rgt: '59'
+  description: ''
+  created_at: '2014-03-14 03:21:33.37418'
+  updated_at: '2015-09-30 09:32:32.009223'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_175:
+  id: '302'
+  parent_id: '32'
+  position: '53'
+  name: Weddings & Parties
+  permalink: edits/weddings-and-parties
+  taxonomy_id: '8'
+  lft: '330'
+  rgt: '331'
+  description: ''
+  created_at: '2016-08-16 23:55:04.472766'
+  updated_at: '2016-08-16 23:55:25.835168'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-08-15 07:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_176:
+  id: '311'
+  parent_id: '23'
+  position: '44'
+  name: full skirt
+  permalink: style/full-skirt
+  taxonomy_id: '7'
+  lft: '128'
+  rgt: '129'
+  created_at: '2016-09-16 17:59:43.257642'
+  updated_at: '2016-09-16 17:59:43.257642'
+  delivery_period: 7 - 10 business days
+spree_taxons_177:
+  id: '241'
+  parent_id: '32'
+  position: '35'
+  name: LUXE
+  permalink: edits/luxe
+  taxonomy_id: '8'
+  lft: '292'
+  rgt: '293'
+  description: ''
+  created_at: '2015-07-17 06:45:24.605478'
+  updated_at: '2015-09-18 04:09:29.228206'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-07-21 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_178:
+  id: '318'
+  parent_id: '23'
+  position: '51'
+  name: boat neck
+  permalink: style/boat-neck
+  taxonomy_id: '7'
+  lft: '138'
+  rgt: '139'
+  created_at: '2016-09-16 18:06:02.52981'
+  updated_at: '2016-09-16 18:06:02.52981'
+  delivery_period: 7 - 10 business days
+spree_taxons_179:
+  id: '180'
+  parent_id: '32'
+  position: '23'
+  name: facebook3
+  permalink: edits/facebook3
+  taxonomy_id: '8'
+  lft: '256'
+  rgt: '257'
+  created_at: '2014-10-16 03:41:01.429672'
+  updated_at: '2015-09-18 04:09:29.099274'
+  delivery_period: 7 - 10 business days
+spree_taxons_180:
+  id: '188'
+  parent_id: '32'
+  position: '24'
+  name: Break Hearts Other
+  permalink: edits/breakheartsother
+  taxonomy_id: '8'
+  lft: '266'
+  rgt: '267'
+  description: ''
+  created_at: '2014-11-25 06:45:14.736419'
+  updated_at: '2015-09-18 04:09:29.134664'
+  meta_title: ''
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_181:
+  id: '341'
+  parent_id: '23'
+  position: '71'
+  name: petti
+  permalink: style/petti
+  taxonomy_id: '7'
+  lft: '178'
+  rgt: '179'
+  created_at: '2016-09-16 18:17:37.98293'
+  updated_at: '2016-09-16 18:17:37.98293'
+  delivery_period: 7 - 10 business days
+spree_taxons_182:
+  id: '342'
+  parent_id: '23'
+  position: '72'
+  name: knee
+  permalink: style/knee
+  taxonomy_id: '7'
+  lft: '180'
+  rgt: '181'
+  created_at: '2016-09-16 18:17:42.59325'
+  updated_at: '2016-09-16 18:17:42.59325'
+  delivery_period: 7 - 10 business days
+spree_taxons_183:
+  id: '269'
+  parent_id: '23'
+  position: '36'
+  name: Velvet
+  permalink: style/velvet
+  taxonomy_id: '7'
+  lft: '110'
+  rgt: '111'
+  description: ''
+  created_at: '2015-11-16 05:26:21.983522'
+  updated_at: '2016-02-02 13:32:09.276946'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-11-15 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_184:
+  id: '287'
+  parent_id: '23'
+  position: '38'
+  name: LBD LWD
+  permalink: style/lbd-lwd
+  taxonomy_id: '7'
+  lft: '114'
+  rgt: '115'
+  description: ''
+  created_at: '2016-05-27 23:14:19.775579'
+  updated_at: '2016-05-27 23:14:28.151625'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-05-26 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_185:
+  id: '175'
+  parent_id: '23'
+  position: '0'
+  name: Hi Low
+  permalink: style/hi-low
+  taxonomy_id: '7'
+  lft: '52'
+  rgt: '53'
+  description: ''
+  created_at: '2014-09-25 05:08:39.479378'
+  updated_at: '2015-09-30 09:31:51.107668'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_186:
+  id: '355'
+  parent_id: '23'
+  position: '85'
+  name: animal
+  permalink: style/animal
+  taxonomy_id: '7'
+  lft: '204'
+  rgt: '205'
+  created_at: '2016-09-16 18:22:25.707314'
+  updated_at: '2016-09-16 18:22:25.707314'
+  delivery_period: 7 - 10 business days
+spree_taxons_187:
+  id: '282'
+  parent_id: '32'
+  position: '48'
+  name: La Belle Epoque
+  permalink: edits/la-belle-epoque
+  taxonomy_id: '8'
+  lft: '320'
+  rgt: '321'
+  description: ''
+  created_at: '2016-04-08 05:15:51.30072'
+  updated_at: '2016-04-28 01:51:29.450246'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2016-04-07 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_188:
+  id: '116'
+  parent_id: '23'
+  position: '19'
+  name: Sequin
+  permalink: style/sequin
+  taxonomy_id: '7'
+  lft: '70'
+  rgt: '71'
+  description: ''
+  created_at: '2014-02-19 05:02:13.922405'
+  updated_at: '2015-09-30 09:34:46.827644'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-09-29 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_189:
+  id: '351'
+  parent_id: '23'
+  position: '81'
+  name: ponti
+  permalink: style/ponti
+  taxonomy_id: '7'
+  lft: '196'
+  rgt: '197'
+  created_at: '2016-09-16 18:20:41.368002'
+  updated_at: '2016-09-16 18:20:41.368002'
+  delivery_period: 7 - 10 business days
+spree_taxons_190:
+  id: '40'
+  parent_id: '32'
+  position: '4'
+  name: NYE
+  permalink: edits/nye
+  taxonomy_id: '8'
+  lft: '230'
+  rgt: '231'
+  description: ''
+  created_at: '2013-12-02 00:47:00.605247'
+  updated_at: '2015-09-18 04:09:28.998222'
+  meta_title: New Years Eve Party Dresses
+  meta_description: ''
+  delivery_period: 7 - 10 business days
+spree_taxons_191:
+  id: '354'
+  parent_id: '23'
+  position: '84'
+  name: taffeta
+  permalink: style/taffeta
+  taxonomy_id: '7'
+  lft: '202'
+  rgt: '203'
+  created_at: '2016-09-16 18:21:38.599319'
+  updated_at: '2016-09-16 18:21:38.599319'
+  delivery_period: 7 - 10 business days
+spree_taxons_192:
+  id: '332'
+  parent_id: '23'
+  position: '65'
+  name: buttons
+  permalink: style/buttons
+  taxonomy_id: '7'
+  lft: '166'
+  rgt: '167'
+  created_at: '2016-09-16 18:11:35.027202'
+  updated_at: '2016-09-16 18:11:35.027202'
+  delivery_period: 7 - 10 business days
+spree_taxons_193:
+  id: '356'
+  parent_id: '23'
+  position: '86'
+  name: floral
+  permalink: style/floral
+  taxonomy_id: '7'
+  lft: '206'
+  rgt: '207'
+  created_at: '2016-09-16 18:22:33.869741'
+  updated_at: '2016-09-16 18:22:33.869741'
+  delivery_period: 7 - 10 business days
+spree_taxons_194:
+  id: '358'
+  parent_id: '23'
+  position: '88'
+  name: geometric
+  permalink: style/geometric
+  taxonomy_id: '7'
+  lft: '210'
+  rgt: '211'
+  created_at: '2016-09-16 18:22:57.901734'
+  updated_at: '2016-09-16 18:22:57.901734'
+  delivery_period: 7 - 10 business days
+spree_taxons_195:
+  id: '272'
+  parent_id: '32'
+  position: '43'
+  name: This Modern Romance
+  permalink: edits/this-modern-romance
+  taxonomy_id: '8'
+  lft: '310'
+  rgt: '311'
+  description: ''
+  created_at: '2015-11-26 04:21:48.911048'
+  updated_at: '2015-11-26 04:22:03.45781'
+  meta_title: ''
+  meta_description: ''
+  published_at: '2015-11-30 00:00:00'
+  delivery_period: 7 - 10 business days
+spree_taxons_196:
+  id: '334'
+  parent_id: '23'
+  position: '67'
+  name: asymmetrical
+  permalink: style/new-node
+  taxonomy_id: '7'
+  lft: '170'
+  rgt: '171'
+  created_at: '2016-09-16 18:13:06.654568'
+  updated_at: '2016-09-16 18:13:19.58384'
+  delivery_period: 7 - 10 business days
+spree_taxons_197:
+  id: '336'
+  parent_id: '23'
+  position: '69'
+  name: lace-up
+  permalink: style/lace-up
+  taxonomy_id: '7'
+  lft: '174'
+  rgt: '175'
+  created_at: '2016-09-16 18:15:46.949978'
+  updated_at: '2016-09-16 18:15:46.949978'
+  delivery_period: 7 - 10 business days
+spree_taxons_198:
+  id: '99'
+  parent_id: '23'
+  position: '0'
+  name: Sweetheart
+  permalink: style/sweetheart
+  taxonomy_id: '7'
+  lft: '78'
+  rgt: '79'
+  created_at: '2014-02-17 11:58:14.746131'
+  updated_at: '2014-10-31 20:03:29.538235'
+  delivery_period: 7 - 10 business days
+spree_taxons_199:
+  id: '173'
+  parent_id: '23'
+  position: '0'
+  name: Two Tone
+  permalink: style/two-tone
+  taxonomy_id: '7'
+  lft: '92'
+  rgt: '93'
+  created_at: '2014-09-25 05:08:39.085755'
+  updated_at: '2014-11-10 20:17:53.807706'
+  delivery_period: 7 - 10 business days
+spree_taxons_200:
+  id: '310'
+  parent_id: '23'
+  position: '43'
+  name: Column
+  permalink: style/column
+  taxonomy_id: '7'
+  lft: '126'
+  rgt: '127'
+  created_at: '2016-09-16 17:59:06.035943'
+  updated_at: '2016-09-16 17:59:06.035943'
+  delivery_period: 7 - 10 business days
+spree_taxons_201:
+  id: '156'
+  parent_id: '23'
+  position: '0'
+  name: Cape
+  permalink: style/cape
+  taxonomy_id: '7'
+  lft: '82'
+  rgt: '83'
+  created_at: '2014-08-06 12:35:57.294648'
+  updated_at: '2014-11-10 20:17:53.728015'
+  delivery_period: 7 - 10 business days
+spree_taxons_202:
+  id: '362'
+  position: '0'
+  name: Wedding Atelier
+  permalink: wedding-atelier
+  taxonomy_id: '15'
+  lft: '405'
+  rgt: '406'
+  created_at: '2017-02-13 16:42:32.31311'
+  updated_at: '2017-02-13 16:42:32.31311'
+  delivery_period: 7 - 10 business days
+spree_taxons_203:
+  id: '363'
+  position: '0'
+  name: Base Silhouette
+  permalink: base-silhouette
+  taxonomy_id: '15'
+  lft: '407'
+  rgt: '408'
+  created_at: '2017-02-13 16:42:32.324284'
+  updated_at: '2017-02-13 16:42:32.324284'
+  delivery_period: 7 - 10 business days

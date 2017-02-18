@@ -1,0 +1,49 @@
+---
+spree_taxonomies_0:
+  id: '13'
+  name: Outerwear
+  created_at: '2015-08-18 01:31:30.073689'
+  updated_at: '2015-09-01 06:20:30.850711'
+  position: '0'
+spree_taxonomies_1:
+  id: '14'
+  name: Meta
+  created_at: '2015-10-16 03:49:56.717704'
+  updated_at: '2015-10-16 03:49:56.717704'
+  position: '0'
+spree_taxonomies_2:
+  id: '6'
+  name: Range
+  created_at: '2013-08-07 02:14:34.009135'
+  updated_at: '2013-08-07 02:14:34.009135'
+  position: '0'
+spree_taxonomies_3:
+  id: '7'
+  name: Style
+  created_at: '2013-08-07 02:14:34.331124'
+  updated_at: '2013-08-07 02:14:34.331124'
+  position: '0'
+spree_taxonomies_4:
+  id: '8'
+  name: Edits
+  created_at: '2013-08-11 11:52:49.140069'
+  updated_at: '2013-08-11 13:08:44.283615'
+  position: '0'
+spree_taxonomies_5:
+  id: '9'
+  name: SeoCollection
+  created_at: '2013-09-16 21:25:47.283819'
+  updated_at: '2013-09-16 21:25:47.283819'
+  position: '4'
+spree_taxonomies_6:
+  id: '10'
+  name: Event
+  created_at: '2014-10-31 20:02:52.191385'
+  updated_at: '2014-10-31 20:02:52.191385'
+  position: '0'
+spree_taxonomies_7:
+  id: '15'
+  name: Wedding Atelier
+  created_at: '2017-02-13 16:42:32.175249'
+  updated_at: '2017-02-13 16:42:32.175249'
+  position: '0'
