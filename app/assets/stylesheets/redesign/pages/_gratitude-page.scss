@@ -1,6 +1,6 @@
 // Gratitude Page Template
 
-.gratitudePage {
+.gratitude-page {
   margin-bottom: 60px;
 
   h1 {
@@ -11,14 +11,60 @@
     font-size: 2rem;
   }
 
-  .imgSpaceTop {
+  .title-highlight {
+    font-family: $font-family-secondary;
+    font-weight: bold;
+  }
+
+  .diagonal-line {
+    @include transform (rotate(45deg));
+    border-top: 1px solid $c-neutral-8;
+    width: 30px;
+    margin: 0 auto;
+  }
+
+  .img-space-top {
     margin-top: 20px;
   }
 
-  &__AppPromoWrapperBg {
+  .gratitude-promo-app {
+    margin-top: 40px;
     background: url('_backgrounds/marble-texture-bg.jpg');
     background-size: 150%;
     padding: 20px 0;
+
+    .heading-overlay {
+      bottom: -40px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .img-right {
+      float: right;
+    }
+
+    .img-width-80 {
+      width: 80%;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .img-wedding-atelier {
+      margin-top: 20px;
+    }
+
+    .gratitude-promo-app {
+
+      .heading-overlay {
+        bottom: 32px;
+      }
+
+    }
+
   }
 
 }
