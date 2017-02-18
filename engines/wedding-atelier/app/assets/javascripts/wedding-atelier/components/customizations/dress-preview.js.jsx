@@ -62,9 +62,11 @@ var DressPreview = React.createClass({
   },
 
   dressDescription: function(){
-    var silhouette = this.props.selectedOptions.silhouette;
+    var silhouette = this.props.selectedOptions.silhouette, index = 0;
     if(silhouette){
-      return silhouette.description.split("\\n").map(function(text){return(<p>{text}</p>)})
+      return silhouette.description.split("\\n").map(function(text){
+        return(<p key={index++}>{text}</p>);
+      });
     }
   },
 
@@ -85,7 +87,7 @@ var DressPreview = React.createClass({
   });
 
   if(this.isCustomDress()){
-    baseSilohuette = <p className="base-silhouette hidden-xs">Base silhouette</p>
+    baseSilohuette = <p className="base-silhouette hidden-xs">Base silhouette</p>;
   }
 
   return (
@@ -99,8 +101,8 @@ var DressPreview = React.createClass({
   isCustomDress: function(){
     var options = this.props.selectedOptions,
         lengthName = options.length && options.length.name,
-        lengthSet = !(lengthName == undefined) && lengthName!='AK'
-        customColor =  options.color && options.color.name != 'champagne'
+        lengthSet = !(lengthName == undefined) && lengthName!='AK',
+        customColor =  options.color && options.color.name != 'champagne';
     return !!(options.style || options.fit || lengthSet || customColor);
   },
 
@@ -111,9 +113,9 @@ var DressPreview = React.createClass({
         imagesStyles.front.large,
         imagesStyles.back.large,
         imagesStyles.real.large[0]
-      ]
+      ];
     }else{
-      images = imagesStyles.real.large
+      images = imagesStyles.real.large;
     }
     return images;
   },
@@ -125,7 +127,7 @@ var DressPreview = React.createClass({
         imagesStyles.front.thumbnail.white,
         imagesStyles.back.thumbnail.white,
         imagesStyles.real.thumbnails[0]
-      ]
+      ];
     }else{
       thumbnails = imagesStyles.real.thumbnails;
     }
