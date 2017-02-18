@@ -342,14 +342,6 @@
 }
 
 // Uppercased CTA buttons
-.btnCtaBlackBgUppercase {
-  @extend .btn, .btn-black;
-  padding: 10px 20px;
-}
-
-.btnCtaOutlineBorderUppercase {
-  @extend .btn, .btn-transparent;
-}
 .btnCtaBlackBgUppercase,
 .btnCtaOutlineBorderUppercase {
   padding: 10px 20px;
