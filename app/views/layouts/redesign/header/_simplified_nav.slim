@@ -1,4 +1,4 @@
-.row#home-menu.hidden-xs.hidden-sm
+.row#home-menu.simplified-nav.hidden-xs.hidden-sm
 
   .col-md-3
     = link_to root_path, class: 'logo-wrap' do
@@ -38,7 +38,7 @@
         .col-md-2.dresses-shop-by
           ul
             li.title Featured
-            = render partial: 'layouts/redesign/header/simplified_nav/featured'
+            = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
 
         .col-md-2.dresses-style
           ul
@@ -73,7 +73,7 @@
 
     .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
-        = render partial: 'layouts/redesign/mega_menu/fame_weddings'
+        = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
 
     .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
       .row
