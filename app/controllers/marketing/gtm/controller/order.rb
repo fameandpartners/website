@@ -10,8 +10,8 @@ module Marketing
           'order'
         end
 
-        def append_gtm_order(spree_order:)
-          gtm_order = Marketing::Gtm::Presenter::Order.new(spree_order: spree_order)
+        def append_gtm_order(spree_order:, action_dispatch_request: nil)
+          gtm_order = Marketing::Gtm::Presenter::Order.new(spree_order: spree_order, action_dispatch_request: action_dispatch_request)
           @gtm_container.append(gtm_order)
         end
       end

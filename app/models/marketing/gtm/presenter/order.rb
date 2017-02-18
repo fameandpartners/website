@@ -6,15 +6,18 @@ module Marketing
 
         extend Forwardable
 
-        attr_reader :order
+        attr_reader :order, :request
         def_delegators :order, :currency, :number, :email
 
-        def initialize(spree_order:)
-          @order = spree_order
+        # @param [Spree::Order] spree_order
+        # @param [Rack::Request] action_dispatch_request. Only passed if URL options needs full host information. Otherwise, host will be considered null.
+        def initialize(spree_order:, action_dispatch_request: nil)
+          @order   = spree_order
+          @request = action_dispatch_request
         end
 
         def line_items
-          order.line_items.map { |item| LineItem.new(spree_line_item: item).body }
+          order.line_items.map { |item| LineItem.new(spree_line_item: item, action_dispatch_request: request).body }
         end
 
         def line_items_summary

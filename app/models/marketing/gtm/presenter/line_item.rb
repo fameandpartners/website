@@ -7,11 +7,12 @@ module Marketing
         include Rails.application.routes.url_helpers
         include PathBuildersHelper
 
-        attr_reader :line_item
+        attr_reader :line_item, :request
         def_delegators :@line_item, :quantity
 
-        def initialize(spree_line_item:)
+        def initialize(spree_line_item:, action_dispatch_request: nil)
           @line_item = spree_line_item
+          @request   = action_dispatch_request
         end
 
         def key
@@ -52,7 +53,11 @@ module Marketing
         end
 
         def product_url
-          collection_product_path(product)
+          if request
+            collection_product_url(product)
+          else
+            collection_product_path(product)
+          end
         end
 
         def body
@@ -70,12 +75,18 @@ module Marketing
           }
         end
 
-        private def variant
+        private
+
+        def variant
           line_item.variant
         end
 
-        private def product
+        def product
           variant.product
+        end
+
+        def default_url_options
+          { protocol: request&.protocol, host: request&.host }
         end
       end
     end

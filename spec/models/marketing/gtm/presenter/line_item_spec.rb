@@ -35,6 +35,16 @@ module Marketing
                                          })
             end
           end
+
+          context 'given a rack request' do
+            let(:rack_env) { Rack::MockRequest.env_for('https://example.com') }
+            let(:request) { ActionDispatch::Request.new(rack_env) }
+            subject(:presenter) { described_class.new(spree_line_item: line_item, action_dispatch_request: request) }
+
+            it 'renders full product URL' do
+              expect(subject.body).to include({ product_url: 'https://example.com/dresses/dress-super-dress-123' })
+            end
+          end
         end
       end
     end

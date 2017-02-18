@@ -2,6 +2,8 @@ class Users::OrdersController < Users::BaseController
   attr_reader :order
   helper_method :order
 
+  include Marketing::Gtm::Controller::Order
+
   def index
     @title = 'My Orders'
 
@@ -20,6 +22,8 @@ class Users::OrdersController < Users::BaseController
     user = try_spree_current_user
     order = user.orders.find_by_number(params[:id])
     @order = Orders::OrderPresenter.new(order)
+
+    append_gtm_order(spree_order: order, action_dispatch_request: request)
 
     @title = "Order ##{ @order.number }"
 
