@@ -11,14 +11,15 @@
       .panel-hero
         .media-wrap-outer
           .media-wrap.keep-ratio.img-as-block
+            - featured_tile_link_path = modern_collection_landing_page_path
             .inner-wrap
-              = link_to modern_collection_landing_page_path
+              = link_to featured_tile_link_path
                 = image_tag "lookbook/modern-evening-collection.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
               h1.heading.skin-light Modern Evening
-              = link_to 'View this collection', bespoke_bridal_collection_landing_page_path, class: 'btn btn-md btn-black'
+              = link_to 'View this collection', featured_tile_link_path, class: 'btn btn-md btn-black'
 
     .col-md-6
       = link_to bespoke_bridal_collection_landing_page_path, class: 'panel-highlight media-wrap'
