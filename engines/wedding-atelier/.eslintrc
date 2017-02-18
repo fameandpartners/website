@@ -14,7 +14,9 @@
     "Twilio": true,
     "Promise": true,
     "WeddingAtelierHelper": true,
-    "moment": true
+    "moment": true,
+    "classNames": true,
+    "DressImageBuilder": true
   },
   "parserOptions": {
     "ecmaVersion": 5,
