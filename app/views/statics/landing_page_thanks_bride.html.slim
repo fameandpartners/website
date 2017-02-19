@@ -80,14 +80,14 @@
           .item
             .item-copy.hidden-md.hidden-lg
               p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
-              = link_to 'mailto:mystylist@fameandpartners.com'
+              = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
                 span.cta-link-arrow-right
                   span.copy-highlight.link-underline FIND OUT MORE
                   i.icon.icon-arrow-right
             = image_tag 'landingpages/thanks-bride/sendphotos.jpg', class: 'img-responsive img-width-80 img-wedding-atelier', alt: 'Your personal atelier'
             .item-copy.hidden-xs.hidden-sm
               p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
-              = link_to 'mailto:mystylist@fameandpartners.com'
+              = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
                 span.cta-link-arrow-right
                   span.copy-highlight.link-underline FIND OUT MORE
                   i.icon.icon-arrow-right
@@ -107,9 +107,20 @@
                 | Review your orders group chat, update your personal details, and more.
 
               = image_tag 'landingpages/thanks-bride/wedding-app-mob.jpg', class: "img-responsive hidden-md hidden-lg"
-              = link_to wedding_consultation_path, class: 'cta-mobile-featured'
+              = link_to '/wedding-atelier/events', class: 'cta-mobile-featured'
                 span.btn-xs.btn-featured
                   span.copy-highlight LOG IN
 
           .col-md-6.hidden-xs.hidden-sm.vertical-align
             = image_tag 'landingpages/thanks-bride/wedding-app.jpg', class: "img-responsive"
+
+  .container.hidden-md.hidden-lg
+    section.section-box
+      .row
+        h2.no-margin
+          | Go to your account.
+        p View your past orders, return or exchange your item, update your personal details, and more.
+
+        = link_to '/profile', class: 'cta-mobile-featured'
+          span.btn.btn-black
+            span.copy-highlight LOG IN
