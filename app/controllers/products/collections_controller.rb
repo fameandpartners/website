@@ -168,6 +168,7 @@ class Products::CollectionsController < Products::BaseController
       price_min:                       params[:price_min],
       price_max:                       params[:price_max],
       query_string:                    params[:q],
+      # TODO: delete this bad named variable: "remove_excluded_from_site_logic".
       remove_excluded_from_site_logic: page.get(:remove_excluded_from_site_logic)
     }
   end

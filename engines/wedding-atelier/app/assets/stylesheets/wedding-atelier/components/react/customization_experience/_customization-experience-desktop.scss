@@ -13,10 +13,19 @@
       padding: 0;
     }
 
-
     &-container {
-      max-width: 90%;
+      height: 100%;
       margin: 0 auto;
+      max-width: 90%;
+      position: relative;
+    }
+
+    &-content {
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translatey(-50%);
     }
   }
 
@@ -158,6 +167,16 @@
     }
   }
 
+  @media screen and (max-height: 767px) {
+    .customization-panel {
+      padding-top: 15px;
+    }
+
+    .customization-type {
+      margin: 15px auto;
+    }
+  }
+
   @media screen and (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
     .footer {
       justify-content: center;
@@ -194,27 +213,13 @@
     }
 
     .customization-panel-container {
-      left: 0;
-      // Half the containers height
-      margin-top: -320px;
-      max-width: 75%;
-      position: absolute;
-      right: 0;
-      top: 50%;
-    }
-
-    .title {
-      margin-bottom: 100px;
+      width: 75%;
     }
   }
 
-  @media screen and (max-height: 710px) {
-    .customization-panel {
-      padding-top: 25px;
-    }
-
-    .customization-type {
-      margin: 20px auto;
+  @media screen and (min-width: $screen-xl-min) and (min-height: 768px) {
+    .title {
+      margin-bottom: 100px;
     }
   }
 }

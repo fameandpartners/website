@@ -91,22 +91,25 @@ var CustomizationsMenu = React.createClass({
           {menuEntries}
         </div>
 
-        <div className="title row">
-          <div className="col-sm-6 col-xs-12 title-text">
-            <h1><em>Customize</em> and make it yours.</h1>
+        <div className="customization-panel-content">
+          <div className="title row">
+            <div className="col-sm-6 col-xs-12 title-text">
+              <h1><em>Customize</em> and make it yours.</h1>
+            </div>
+            <div className="col-sm-6 start-over hidden-xs">
+              <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>
+            </div>
           </div>
-          <div className="col-sm-6 start-over hidden-xs">
-            <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>
+
+          <div className="customizations">
+            <div className="menu">
+              <ul>
+                {customizationItems.map(this.renderRow)}
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="customizations">
-          <div className="menu">
-            <ul>
-              {customizationItems.map(this.renderRow)}
-            </ul>
-          </div>
-        </div>
       </div>
     );
   }

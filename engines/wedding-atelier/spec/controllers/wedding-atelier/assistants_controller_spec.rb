@@ -25,7 +25,7 @@ describe WeddingAtelier::AssistantsController, type: :controller do
         delete :destroy, params
         json_response = JSON.parse(response.body)
         expect(response.status).to eq 404
-        expect(json_response["errors"]).to eq "Couldn't find board member"
+        expect(json_response["errors"]).to eq ["Couldn't find board member"]
       end
     end
   end
