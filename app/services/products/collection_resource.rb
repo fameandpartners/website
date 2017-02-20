@@ -59,6 +59,8 @@ class Products::CollectionResource
     @offset                          = options[:offset]
     @price_min                       = options[:price_min]
     @price_max                       = options[:price_max]
+
+    # TODO: delete this bad named variable: "remove_excluded_from_site_logic".
     @remove_excluded_from_site_logic = options[:remove_excluded_from_site_logic]
   end
 
@@ -67,7 +69,7 @@ class Products::CollectionResource
     color     = color.first if color.is_a? Array
     style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
-    
+
     Products::CollectionPresenter.from_hash(
       products:       products,
       total_products: total_products,
@@ -143,6 +145,7 @@ class Products::CollectionResource
         end
       end
 
+      # TODO: delete this bad named variable: "remove_excluded_from_site_logic".
       result[:exclude_taxon_ids] = remove_excluded_from_site_logic ? nil : black_hole_taxon_ids - result[:taxon_ids]
 
       result[:discount]     = discount if discount.present?
