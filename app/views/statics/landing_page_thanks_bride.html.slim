@@ -93,34 +93,4 @@
                   i.icon.icon-arrow-right
 
   .gratitude-promo-app
-    .container
-      section
-        .row
-          .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
-            h2.heading-overlay For Bridesmaids
-        .row.vertical-align-row
-          .col-md-5.col-md-offset-1.col-xs-12.vertical-align
-            .copyWrapper.col-xs-12
-              h2.no-margin
-                | The Wedding Atelier App
-              p
-                | Review your orders group chat, update your personal details, and more.
-
-              = image_tag 'landingpages/thanks-bride/wedding-app-mob.jpg', class: "img-responsive hidden-md hidden-lg"
-              = link_to '/wedding-atelier/events', class: 'cta-mobile-featured'
-                span.btn-xs.btn-featured
-                  span.copy-highlight LOG IN
-
-          .col-md-6.hidden-xs.hidden-sm.vertical-align
-            = image_tag 'landingpages/thanks-bride/wedding-app.jpg', class: "img-responsive"
-
-  .container.hidden-md.hidden-lg
-    section.section-box
-      .row
-        h2.no-margin
-          | Go to your account.
-        p View your past orders, return or exchange your item, update your personal details, and more.
-
-        = link_to '/profile', class: 'cta-mobile-featured'
-          span.btn.btn-black
-            span.copy-highlight LOG IN
+    = render partial: '/shared/redesign/info_box_wedding_app'
