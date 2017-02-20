@@ -47,7 +47,8 @@ $(document).ready(function() {
   $('.registrations__details-form.signup .js-number-field').incrementButton();
 
   $('.registrations__details-form #wedding_role').select2({
-    minimumResultsForSearch: Infinity
+    minimumResultsForSearch: Infinity,
+    placeholder: 'Please select your height'
   });
 
   $('.registrations__details-form .input-group').datepicker({
