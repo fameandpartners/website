@@ -17,7 +17,7 @@ module WeddingAtelier
       current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
       respond_to do |format|
         format.html { redirect_to wedding_atelier.event_path(@event) }
-        format.js { render json: { status: :ok, invitations: @event.invitations } }
+        format.js { render json: @event.invitations }
       end
     end
 
