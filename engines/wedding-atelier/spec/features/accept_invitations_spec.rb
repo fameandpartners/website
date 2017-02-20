@@ -59,6 +59,7 @@ describe 'invitations', type: :feature do
     context 'when user doesnt exist' do
       before do
         allow_any_instance_of(Spree::User).to receive(:send_welcome_email)
+        allow_any_instance_of(EmailCaptureWorker).to receive(:perform_async)
       end
 
       it 'takes the user to signup and accepts invitation' do
