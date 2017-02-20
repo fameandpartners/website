@@ -59,6 +59,10 @@
       width: 80%;
     }
 
+    .intro-wrapper .gratitudePage__copy {
+      padding-left: 25px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -75,6 +79,18 @@
 
     }
 
+  }
+
+}
+
+.section-info-box-wedding-app-for-bridesmaids {
+
+  .content-wrapper {
+    padding: 60px 0;
+  }
+
+  .title {
+    margin-top: 25px;
   }
 
 }
