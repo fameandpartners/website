@@ -7,6 +7,7 @@
 
   .measure-actions {
     border-bottom: 1px solid $black;
+    cursor: pointer;
     height: 37px;
     line-height: 25px;
     margin-bottom: 25px;
@@ -45,6 +46,7 @@
 
   .measurement-system {
     label {
+      cursor: pointer;
       text-transform: lowercase;
       margin-left: 10px;
     }
