@@ -1,0 +1,33 @@
+.section-info-box-wedding-app-for-bridesmaids
+  .container
+    .row
+      .col-md-12
+        .heading-overlay-wrapper.heading-overlay-on-previous-section
+          h2.heading-overlay For Bridesmaids
+
+    .row.vertical-align-row
+      .content-wrapper
+        .col-md-5.col-xs-12.vertical-align
+          .copyWrapper.col-xs-12
+            h2.title.no-margin
+              | The Wedding Atelier App
+            p
+              | Review your orders group chat, update your personal details, and more.
+
+            = image_tag 'landingpages/get-the-look/tile-wedding-app-mob.jpg', class: "img-responsive hidden-md hidden-lg"
+            = link_to '/wedding-atelier/events', class: 'cta-mobile-featured'
+              span.btn-xs.btn-featured
+                span.copy-highlight LOG IN
+
+        .col-md-6.col-md-offset-1.hidden-xs.hidden-sm.vertical-align
+          = image_tag 'landingpages/get-the-look/tile-wedding-app.jpg', class: "img-responsive"
+
+    section.section-box.hidden-md.hidden-lg
+      .row
+        h2.no-margin
+          | Go to your account.
+        p View your past orders, return or exchange your item, update your personal details, and more.
+
+        = link_to '/profile', class: 'cta-mobile-featured'
+          span.btn.btn-black
+            span.copy-highlight LOG IN
