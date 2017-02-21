@@ -69,30 +69,30 @@
     section.section-box.section-social
       .row
         .col-md-offset-1.col-md-5
-          .item
-            .item-copy
-              p Scroll through never-ending outfit inspiration from #famefatales and get the first look at new collections, campaigns, and contests.
-              = link_to 'https://www.instagram.com/FameandPartners/'
-                span.cta-link-arrow-right
-                  span.copy-highlight.link-underline FOLLOW ON INSTAGRAM
-                  i.icon.icon-arrow-right
+          .item-copy.social-content-left.mobile-safe-padding
+            p Scroll through never-ending outfit inspiration from #famefatales and get the first look at new collections, campaigns, and contests.
+            = link_to 'https://www.instagram.com/FameandPartners/', target: "_blank"
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline FOLLOW ON INSTAGRAM
+                i.icon.icon-arrow-right
+          = link_to 'https://www.instagram.com/FameandPartners/', target: "_blank"
             = image_tag 'landingpages/thanks-bride/instagram.jpg', class: 'img-responsive img-space-top img-right img-width-80', alt: 'Your personal atelier'
 
         .col-md-5
-          .item
-            .item-copy.hidden-md.hidden-lg
-              p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
-              = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
-                span.cta-link-arrow-right
-                  span.copy-highlight.link-underline FIND OUT MORE
-                  i.icon.icon-arrow-right
+          .item-copy.hidden-md.hidden-lg.mobile-safe-padding
+            p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
+            = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline FIND OUT MORE
+                i.icon.icon-arrow-right
+          = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
             = image_tag 'landingpages/thanks-bride/sendphotos.jpg', class: 'img-responsive img-width-80 img-wedding-atelier', alt: 'Your personal atelier'
-            .item-copy.hidden-xs.hidden-sm
-              p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
-              = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
-                span.cta-link-arrow-right
-                  span.copy-highlight.link-underline FIND OUT MORE
-                  i.icon.icon-arrow-right
+          .item-copy.social-content-right.hidden-xs.hidden-sm
+            p Send us your favorite pictures from the wedding day to be featured on The Wedding Atelier App! We can’t wait to see.
+            = link_to 'mailto:mystylist@fameandpartners.com?subject=My Fame Wedding Pics!'
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline FIND OUT MORE
+                i.icon.icon-arrow-right
 
   .gratitude-promo-app
     = render partial: '/shared/redesign/info_box_wedding_app'
