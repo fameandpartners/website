@@ -28,7 +28,7 @@
 
   .diagonal-line {
     @include transform (rotate(45deg));
-    border-top: 1px solid $c-neutral-8;
+    border-top: 2px solid $c-neutral-8;
     width: 30px;
     margin: 0 auto;
   }
