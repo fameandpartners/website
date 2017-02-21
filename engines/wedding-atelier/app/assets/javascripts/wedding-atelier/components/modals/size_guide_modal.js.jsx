@@ -98,7 +98,11 @@ var SizeGuideModal = React.createClass({
           <div className="modal-dialog modal-vertical-align" role="document">
             <div className="modal-content">
               <div className="modal-body">
-                <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
+                <div className="row">
+                  <div className="col-xs-12">
+                    <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close" />
+                  </div>
+                </div>
                 <div className="modal-body-container text-center">
                   <h1>
                     Size Guide
