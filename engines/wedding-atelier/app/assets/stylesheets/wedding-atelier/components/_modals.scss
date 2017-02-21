@@ -20,7 +20,6 @@
   padding: 13px;
   @include screen-xs {
     min-height: 100vh;
-
     padding: 0;
   }
 }
@@ -158,7 +157,6 @@
   .modal-content {
     background-color: transparent;
     max-width: 85vw;
-
     @include screen-xs{
       max-width: none;
     };
@@ -170,7 +168,7 @@
     max-width: 270px;
     overflow-y: auto;
     padding: 40px 0;
-    @include screen-xs{
+    @include screen-xs {
       max-width: none;
     };
   }
