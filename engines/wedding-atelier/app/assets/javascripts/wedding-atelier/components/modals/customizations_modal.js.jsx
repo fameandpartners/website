@@ -17,7 +17,7 @@ var CustomizationsModal = React.createClass({
             <div className="modal-content">
               <div className="modal-body">
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
-                <div className="modal-body-container text-center">
+                <div className="modal-body-container center-vertical text-center">
                   <h1>
                     <em>What </em>
                     you customized.
@@ -50,11 +50,9 @@ var CustomizationsModal = React.createClass({
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <div className="action-buttons">
-                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Make Changes</button>
+                  <div className="action-buttons">
+                    <button className="btn btn-black" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Make Changes</button>
+                  </div>
                 </div>
               </div>
             </div>
