@@ -1,5 +1,4 @@
 FameAndPartners::Application.routes.draw do
-
   ############################
   # Devise Omniauth Workaround
   ############################
@@ -503,14 +502,6 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  #################
-  # Mysterious URLs
-  #################
-
-  get '/undefined',    to: 'errors/mysterious_route#undefined'
-  get '/au/undefined', to: 'errors/mysterious_route#undefined'
-  get '/1000668',      to: 'errors/mysterious_route#undefined'
-
   #########
   # Widgets
   #########
@@ -624,6 +615,12 @@ FameAndPartners::Application.routes.draw do
   mount Revolution::Engine => '/'
 
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+end
 
-  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
+# NOTE: Alexey Bobyrev 14 Feb 2017
+# Method append used here to handle all request directly right after defined ones (including engines)
+FameAndPartners::Application.routes.append do
+  # NOTE: Alexey Bobyrev 14 Jan 2017
+  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
+  match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
