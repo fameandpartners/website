@@ -25,7 +25,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-01.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-01-mob.jpg")
-          - current_item_link = dresses_path + "/ball-gowns"
+          - current_item_link = evening_shop_gown_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -52,8 +52,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-02.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-02-mob.jpg")
-          // TODO: add real link here
-          - current_item_link = "javascript:;"
+          - current_item_link = evening_shop_slips_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -83,7 +82,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-03.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-03-mob.jpg")
-          - current_item_link = dresses_path + "/slip-dress"
+          - current_item_link = evening_shop_fitted_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -110,7 +109,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-04.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-04-mob.jpg")
-          - current_item_link = dresses_path + "/lace"
+          - current_item_link = evening_shop_lace_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -139,7 +138,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-05.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-05-mob.jpg")
-          - current_item_link = dresses_path + "/wrap"
+          - current_item_link = evening_shop_wraps_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -166,7 +165,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-06.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-06-mob.jpg")
-          - current_item_link = dresses_path + "/off-shoulder"
+          - current_item_link = evening_shop_cold_shoulder_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -196,7 +195,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-07.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-07-mob.jpg")
-          - current_item_link = dresses_path + "/embellishment"
+          - current_item_link = evening_shop_plunging_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -223,7 +222,7 @@
         .col-md-6
           - current_item_image = image_path("landingpages/evening-shop/dress-08.jpg")
           - current_item_mob_image = image_path("landingpages/evening-shop/dress-08-mob.jpg")
-          - current_item_link = dresses_path + "/backless"
+          - current_item_link = evening_shop_embellished_page_path
 
           .item-content-box.item-content-box--bottom-border
             = link_to current_item_link
@@ -252,8 +251,14 @@
       .col-xs-12
         - current_item_image = image_path("landingpages/evening-shop/dress-09.jpg")
         - current_item_mob_image = image_path("landingpages/evening-shop/dress-09-mob.jpg")
-        // TODO: add real link here
-        - current_item_link = "javascript:;"
+        // Australia version
+        - if current_site_version.is_australia?
+          - current_item_link = evening_shop_under_249_page_path
+          - current_item_price_info = '$249'
+        // USA version
+        - else
+          - current_item_link = evening_shop_under_200_page_path
+          - current_item_price_info = '$200'
 
         .item-content-box.item-content-box--bottom-border
           = link_to current_item_link
@@ -272,9 +277,9 @@
                     h3 The Style <br class="visible-lg visible-md"><em>Steal</em>
                 .col-md-6
                   .item-content-box__copy
-                    p.summary Made-to-order and under $200. <br class="visible-xs">Because true style is priceless.
+                    p.summary Made-to-order and under #{current_item_price_info}. <br class="visible-xs">Because true style is priceless.
 
                     = link_to current_item_link
                       span.cta-link-arrow-right.link-underline
-                          span.copy-highlight Shop Under $200
+                          span.copy-highlight Shop Under #{current_item_price_info}
                           i.icon.icon-arrow-right
