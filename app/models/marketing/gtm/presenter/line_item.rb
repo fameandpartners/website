@@ -7,12 +7,14 @@ module Marketing
         include Rails.application.routes.url_helpers
         include PathBuildersHelper
 
-        attr_reader :line_item, :request
+        attr_reader :line_item, :base_url
         def_delegators :@line_item, :quantity
 
-        def initialize(spree_line_item:, action_dispatch_request: nil)
+        # @param [Spree::LineItem] spree_line_item
+        # @param [String] base_url. An absolute URL to the application's root.
+        def initialize(spree_line_item:, base_url: nil)
           @line_item = spree_line_item
-          @request   = action_dispatch_request
+          @base_url  = base_url
         end
 
         def key
@@ -53,8 +55,8 @@ module Marketing
         end
 
         def product_url
-          if request
-            collection_product_url(product)
+          if base_url.present?
+            URI.join(base_url, collection_product_path(product)).to_s
           else
             collection_product_path(product)
           end
@@ -83,10 +85,6 @@ module Marketing
 
         def product
           variant.product
-        end
-
-        def default_url_options
-          { protocol: request&.protocol, host: request&.host }
         end
       end
     end

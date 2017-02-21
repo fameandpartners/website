@@ -22,24 +22,22 @@ module Marketing
           context 'given a spree line item' do
             it 'returns hash line item details' do
               expect(subject.body).to eq({
-                                           category:     'Jeans',
-                                           name:         'Super Dress',
-                                           quantity:     3,
-                                           total_amount: 33.33,
-                                           sku:          'LineItemSKU',
-                                           variant_sku:  'VariantSKU',
-                                           product_sku:  'ProductSKU',
-                                           description:  'Super Product Description',
-                                           image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.
-                                           product_url:  '/dresses/dress-super-dress-123'
-                                         })
+                category:     'Jeans',
+                name:         'Super Dress',
+                quantity:     3,
+                total_amount: 33.33,
+                sku:          'LineItemSKU',
+                variant_sku:  'VariantSKU',
+                product_sku:  'ProductSKU',
+                description:  'Super Product Description',
+                image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.
+                product_url:  '/dresses/dress-super-dress-123'
+              })
             end
           end
 
           context 'given a rack request' do
-            let(:rack_env) { Rack::MockRequest.env_for('https://example.com') }
-            let(:request) { ActionDispatch::Request.new(rack_env) }
-            subject(:presenter) { described_class.new(spree_line_item: line_item, action_dispatch_request: request) }
+            subject(:presenter) { described_class.new(spree_line_item: line_item, base_url: 'https://example.com') }
 
             it 'renders full product URL' do
               expect(subject.body).to include({ product_url: 'https://example.com/dresses/dress-super-dress-123' })
