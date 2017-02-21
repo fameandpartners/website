@@ -134,6 +134,13 @@
     text-align: center;
   }
 
+  // This is mostly used when copy is centered on mobile and needs a safe padding from edges.
+  // That's a common request from the Design team.
+  .mobile-safe-padding {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
 }
 
 // Fix for IE
