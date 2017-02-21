@@ -400,7 +400,12 @@ var MoodBoardEvent = React.createClass({
                     $('#notification')[0]);
       }.bind(this),
       error: function(_data) {
-        var errors = JSON.parse(_data.responseText).errors;
+        var errors;
+        try{
+          errors = JSON.parse(_data.responseText).errors;
+        }catch(e){
+          errors = ["We're sorry something went wrong."];
+        }
         ReactDOM.render(<Notification errors={[errors[0]]} />,
                     $('#notification')[0]);
       }
