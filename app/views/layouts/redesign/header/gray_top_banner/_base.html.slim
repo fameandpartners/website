@@ -38,7 +38,8 @@ ruby:
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu WEDDING SHOP
-      span.lookbook.js-open-nav-menu EVENING SHOP
+      span.lookbook = link_to 'THE EVENING SHOP', the_evening_shop_landing_page_path
+      span.lookbook.js-open-nav-menu LOOKBOOKS
 
       span.blog
         a href='http://blog.fameandpartners.com' target='_blank' BLOG
