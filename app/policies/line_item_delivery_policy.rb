@@ -1,3 +1,5 @@
+require_relative 'delivery_policy'
+
 module Policies
   class LineItemDeliveryPolicy
     include DeliveryPolicy

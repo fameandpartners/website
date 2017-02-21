@@ -1,4 +1,5 @@
 require 'business_time'
+require_relative 'delivery_policy'
 
 module Policies
   class OrderProjectedDeliveryDatePolicy
