@@ -1,3 +1,118 @@
 = render partial: 'pages/robots'
 
 .gratitude-page.mobile-text-center
+
+  .intro-wrapper
+    .container-fluid
+      .row.hidden-md.hidden-lg
+        .col-md-12
+          = image_tag 'landingpages/the-fame-experience/the-fame-experience-hero-mob.jpg', class: "img-responsive"
+
+      .row.vertical-align-row
+        .col-md-5.hidden-xs.hidden-sm
+          = image_tag 'landingpages/the-fame-experience/the-fame-experience-hero.jpg', class: "img-responsive"
+
+        .col-md-6.vertical-align
+          .gratitudePage__copy
+            .row
+              .col-xs-12
+                h1.title Thanks for checking <br class="visible-md visible-lg">out Fame and Partners.
+
+  .container
+    section.section-box.section-next-steps.text-center
+      .row
+        .col-xs-12
+          .mobile-safe-padding
+            .diagonal-line.hidden-md.hidden-lg
+            h4.title-highlight.no-margin THE NEXT STEPS
+            p Now that you’ve received your custom-made, planet-saving, <br class="visible-md visible-lg"> women-empowering garment, what’s next?
+            .diagonal-line.hidden-sm.hidden-xs
+
+    section.section-box
+      .row
+        .col-md-4
+          .row
+            .col-md-12.heading-overlay-wrapper
+              h2.heading-overlay STYLING
+
+          .item.bordered
+            .item-copy
+              = link_to '/styling-session'
+                = image_tag 'landingpages/the-fame-experience/styling.jpg', class: 'img-responsive img-space-top', alt: 'Styling'
+              h3 Book a <em>free</em> styling session to style your new piece.
+              p Our wardrobe stylist, Amber, is here to style you via phone, chat, text, email, or video (or even in-person if you live in the LA area). Book a free session for expert advice on incorporating your new Fame piece into your existing wardrobe, accessorizing for day or night, and planning your future purchases.
+              = link_to '/styling-session'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline Book Now
+                  i.icon.icon-arrow-right
+
+        .col-md-4
+          .row
+            .col-md-12.heading-overlay-wrapper
+              h2.heading-overlay THE NETWORK
+
+          .item.bordered
+            .item-copy
+              //@TODO 
+              = link_to '/faqs'
+                = image_tag 'landingpages/the-fame-experience/network.jpg', class: 'img-responsive img-space-top', alt: 'The Network'
+              h3 Join our network of influencers, The Fame Society.
+              p The Society is where trend authority meets bespoke tailoring. It’s a network of connected, confident, and inspired influencers who embody the Fame and Partners woman: strong, empowered, and unapologetically herself. The perks?
+              = link_to '/faqs'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline Learn More
+                  i.icon.icon-arrow-right
+
+        .col-md-4
+          .row
+            .col-md-12.heading-overlay-wrapper
+              h2.heading-overlay THE MOVEMENT
+
+          .item.bordered
+            .item-copy
+              = link_to '/slayitforward'
+                = image_tag 'landingpages/the-fame-experience/movement.jpg', class: 'img-responsive img-space-top', alt: 'The Movement'
+              h3 Create a chain of women empowering women.
+              p Our #SLAYITFORWARD movement has created an unstoppable chain of women empowering women. Use the hashtag to shout out an inspirational woman in your life and tell her how she slays–now it’s her turn. For every hashtag used, we donate $1 to causes like Planned Parenthood and RAINN.
+              = link_to '/slayitforward'
+                span.cta-link-arrow-right
+                  span.copy-highlight.link-underline Join the movement
+                  i.icon.icon-arrow-right
+
+    section.section-box.section-social
+      .row
+        .col-md-offset-1.col-md-5
+          .item-copy.social-content-left.mobile-safe-padding
+            p Scroll through never-ending outfit inspiration from #famefatales and get the first look at new collections, campaigns, and contests.
+            = link_to 'https://www.instagram.com/FameandPartners/', target: "_blank"
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline FOLLOW ON INSTAGRAM
+                i.icon.icon-arrow-right
+          = link_to 'https://www.instagram.com/FameandPartners/', target: "_blank"
+            = image_tag 'landingpages/the-fame-experience/instagram.jpg', class: 'img-responsive img-space-top img-right img-width-80', alt: 'Instagram'
+
+        .col-md-5
+          .item-copy.hidden-md.hidden-lg.mobile-safe-padding
+            p Read up on Fame’s FAQs for answers to any and all questions you may have–including how to return or exchange your item.
+            = link_to '/faqs'
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline FIND OUT MORE
+                i.icon.icon-arrow-right
+          = link_to '/faqs'
+            = image_tag 'landingpages/the-fame-experience/sendphotos.jpg', class: 'img-responsive img-width-80 img-wedding-atelier', alt: 'FAQS'
+          .item-copy.social-content-right.hidden-xs.hidden-sm
+            p Read up on Fame’s FAQs for answers to any and all questions you may have–including how to return or exchange your item.
+            = link_to '/faqs'
+              span.cta-link-arrow-right
+                span.copy-highlight.link-underline GET THE FAQS
+                i.icon.icon-arrow-right
+
+    section.section-box.section-go-to-account.text-center
+      .container
+        .row
+          .col-xs-12
+            p Explore the latest from Fame and Partners.
+
+            = link_to '/dresses/new-this-week', class: 'cta-mobile-featured'
+              span.btn.btn-black
+                span.copy-highlight SHOP
