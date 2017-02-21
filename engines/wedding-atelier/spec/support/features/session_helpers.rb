@@ -6,7 +6,7 @@ module Features
         fill_in 'spree_user_email', with: email
         fill_in 'spree_user_password', with: password
       end
-      click_button 'Sign in'
+      click_button 'Log in'
     end
   end
 end
