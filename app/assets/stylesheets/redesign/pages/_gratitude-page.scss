@@ -26,6 +26,10 @@
     font-weight: bold;
   }
 
+  .explore-latest {
+    font-size: 3rem;
+  }
+
   .diagonal-line {
     @include transform (rotate(45deg));
     border-top: 2px solid $c-neutral-black;
@@ -75,6 +79,18 @@
       padding: 15px 42px;
     }
 
+    .btn-featured-black {
+      padding: 15px 82px;
+    }
+
+    .cta-items {
+
+      .cta-link-arrow-right {
+        margin-bottom: 20px;
+      }
+
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -91,7 +107,8 @@
       font-size: 2rem;
     }
 
-    .btn-featured {
+    .btn-featured,
+    .btn-featured-black {
       margin-top: 40px;
       padding: 20px 80px;
     }
