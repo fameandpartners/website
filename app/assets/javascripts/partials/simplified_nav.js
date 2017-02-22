@@ -1,23 +1,27 @@
 'use strict';
 (function ($) {
+  var $simplifiedNav = $('.js-simplified-nav');
+  var $search = $('.js-search');
+
   function close_menu() {
-    $('#home-menu .nav-main-menu span, .rect').removeClass('active');
+    $simplifiedNav.find('.nav-main-menu span, .rect').removeClass('active');
   }
 
+  // ****** SEARCH FUNCTIONALITY ******
+  // TODO: Does not belong in simplified_nav
   function close_search() {
-    $('#search').removeClass('active');
+    $search.removeClass('active');
     $('.nav-main-menu').fadeTo( 100, 1 );
   }
 
+  // TODO: Does not belong in simplified_nav
   //Search input trigger
-  $("#search").on('click', function() {
+  $search.on('click', function() {
     close_menu();
     $('.nav-main-menu').fadeTo( 300, 0 );
     $(this).addClass('active');
     $('#searchValue').focus();
   });
-
-
   $('.js-search-trigger').on('click', function(e) {
     if ($(this).parent().hasClass('active')) {
       if ($("#searchForm #searchValue").val() !== '') {
