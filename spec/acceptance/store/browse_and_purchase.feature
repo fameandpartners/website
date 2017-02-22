@@ -18,13 +18,13 @@ Feature: Browse and Purchase
   Scenario: List All Lookbooks
     When I visit the "/lookbook" path
     # Current Lookbooks
+    Then I should see "Modern Evening"
     Then I should see "Bespoke Bridal"
     Then I should see "Pre-Season Evening"
     Then I should see "INSIDE\OUT"
     Then I should see "Evening Hours"
     Then I should see "Skirts"
     Then I should see "Gowns"
-    Then I should see "Weddings"
     # Previous Lookbooks
     Then I should see "Parties Collection"
     Then I should see "It Girl Collection"

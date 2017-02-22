@@ -30,20 +30,24 @@ ruby:
         span.logo
           = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
 
-    .col-md-6.nav-main-menu.text-center
+    .col-md-7.nav-main-menu.text-center
 
       span.new-this-week.featured-nav.js-open-nav-menu New this week
 
       span.dresses.js-open-nav-menu Shop
 
       - if Features.active?(:fameweddings)
-        span.wedding.js-open-nav-menu FAME WEDDINGS
+        span.wedding.js-open-nav-menu WEDDING SHOP
+      span.lookbook = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.lookbook.js-open-nav-menu LOOKBOOKS
 
       span.blog
         a href='http://blog.fameandpartners.com' target='_blank' BLOG
 
-    .col-md-3.nav-icons.text-right
+    / TODO Tiago (21-02-2017) Matt, sorry about this 3-7-2 column design. One more item at the menu was requested, as I tried to:
+    / - Do a 2-8-2 column design, but logo was too small
+    / - Squeeze menu items together, but they were too close
+    .col-md-2.nav-icons.text-right
       span.search-wrapper#search
         a.icon.icon-search.js-search-trigger href="javascript:;"
         .search-input#search-area
@@ -108,12 +112,13 @@ ruby:
                     .row-cta
                       .cta-wrap
                         span.cta-copy.cta-link-white-bg
-                          span.cta-link The Best of Fame
+                          span.cta-link Shop The Best of Fame
 
     .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
         = render partial: 'layouts/redesign/mega_menu/fame_weddings'
 
+    .rect#rect-evening-shop.nav-menu-wrap.menu-evening-shop
     .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
       .row
 
