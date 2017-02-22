@@ -42,11 +42,6 @@
     background: url('_backgrounds/marble-texture-bg-60.png');
     background-size: 150%;
     padding: 20px 0;
-
-    .heading-overlay {
-      bottom: -40px;
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -75,6 +70,14 @@
       padding: 15px 42px;
     }
 
+    .gratitude-promo-app {
+
+      .heading-overlay {
+        bottom: -34px;
+      }
+
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -99,7 +102,7 @@
     .gratitude-promo-app {
 
       .heading-overlay {
-        bottom: 32px;
+        bottom: 41px;
       }
 
     }
