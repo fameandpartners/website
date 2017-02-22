@@ -12,7 +12,7 @@
         .col-md-5.hidden-xs.hidden-sm
           = image_tag 'landingpages/thanks-bride/thanks-bride-hero.jpg', class: "img-responsive"
 
-        .col-md-6.vertical-align
+        .col-md-7.vertical-align
           .gratitudePage__copy
             .row
               .col-xs-12
@@ -33,38 +33,50 @@
             .diagonal-line.hidden-sm.hidden-xs
 
     section.section-box
-      .row
+      .row.hidden-xs.hidden-sm
         .col-md-6
           .row
             .col-md-12.heading-overlay-wrapper
               h2.heading-overlay STYLING
-
-          .item.bordered
-            .item-copy
-              h3 Book a <em>free</em> styling session.
-              p Book a free session with our stylist, Amber, for advice on incorporating your new Fame piece into your wardrobe, accessorizing it for day or night, and so much more.
-              = link_to '/styling-session'
-                span.cta-link-arrow-right
-                  span.copy-highlight.link-underline Book Now
-                  i.icon.icon-arrow-right
-            = link_to '/styling-session'
-              = image_tag 'landingpages/thanks-bride/styling.jpg', class: 'img-responsive img-space-top', alt: 'Styling'
 
         .col-md-6
           .row
             .col-md-12.heading-overlay-wrapper
               h2.heading-overlay FAQS
 
-          .item.bordered
-            .item-copy
-              h3 Nothing <em>but</em> the FAQs.
-              p Check out Fame’s frequently asked questions to get the answers to any and all questions you may have–including how to return or exchange your item.
+      .same-height-cols
+        .row
+          .col-md-6
+            .row.hidden-md.hidden-lg
+              .col-md-12.heading-overlay-wrapper
+                h2.heading-overlay STYLING
+
+            .item.bordered
+              .item-copy
+                h3 Book a <em>free</em> styling session.
+                p Book a free session with our stylist, Amber, for advice on incorporating your new Fame piece into your wardrobe, accessorizing it for day or night, and so much more.
+                = link_to '/styling-session'
+                  span.cta-link-arrow-right
+                    span.copy-highlight.link-underline Book Now
+                    i.icon.icon-arrow-right
+              = link_to '/styling-session'
+                = image_tag 'landingpages/thanks-bride/styling.jpg', class: 'img-responsive img-space-top', alt: 'Styling'
+
+          .col-md-6
+            .row.hidden-md.hidden-lg
+              .col-md-12.heading-overlay-wrapper
+                h2.heading-overlay FAQS
+
+            .item.bordered
+              .item-copy
+                h3 Nothing <em>but</em> the FAQs.
+                p Check out Fame’s frequently asked questions to get the answers to any and all questions you may have–including how to return or exchange your item.
+                = link_to '/faqs'
+                  span.cta-link-arrow-right
+                    span.copy-highlight.link-underline Find out More
+                    i.icon.icon-arrow-right
               = link_to '/faqs'
-                span.cta-link-arrow-right
-                  span.copy-highlight.link-underline Find out More
-                  i.icon.icon-arrow-right
-            = link_to '/faqs'
-              = image_tag 'landingpages/thanks-bride/faqs.jpg', class: 'img-responsive img-space-top', alt: 'Faqs'
+                = image_tag 'landingpages/thanks-bride/faqs.jpg', class: 'img-responsive img-space-top', alt: 'Faqs'
 
     section.section-box.section-social
       .row
