@@ -31,16 +31,27 @@ module Marketing
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',
                 image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.
-                product_url:  '/dresses/dress-super-dress-123'
+                product_path:  '/dresses/dress-super-dress-123',
+                product_url:  'http://localhost/dresses/dress-super-dress-123'
               })
             end
           end
+        end
 
+        describe '#product_url' do
           context 'given a base URL' do
-            subject(:presenter) { described_class.new(spree_line_item: line_item, base_url: 'https://example.com') }
+            let(:presenter) { described_class.new(spree_line_item: line_item, base_url: 'https://example.com') }
 
-            it 'renders full product URL' do
-              expect(subject.body).to include({ product_url: 'https://example.com/dresses/dress-super-dress-123' })
+            it do
+              expect(presenter.body).to include({ product_url: 'https://example.com/dresses/dress-super-dress-123' })
+            end
+          end
+
+          context 'given the APP_HOST env var' do
+            let(:app_host) { ENV.fetch('APP_HOST', 'https://example.com') }
+
+            it do
+              expect(presenter.body).to include({ product_url: "#{app_host}/dresses/dress-super-dress-123" })
             end
           end
         end

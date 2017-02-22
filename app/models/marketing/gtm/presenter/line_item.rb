@@ -54,12 +54,12 @@ module Marketing
           repository_image_template.original
         end
 
+        def product_path
+          collection_product_path(product)
+        end
+
         def product_url
-          if base_url.present?
-            URI.join(base_url, collection_product_path(product)).to_s
-          else
-            collection_product_path(product)
-          end
+          URI.join(base_url || ENV['APP_HOST'], product_path).to_s
         end
 
         def body
@@ -73,7 +73,8 @@ module Marketing
             product_sku:  product_sku,
             description:  product_description,
             image_url:    image_url,
-            product_url:  product_url,
+            product_path: product_path,
+            product_url:  product_url
           }
         end
 
