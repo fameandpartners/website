@@ -215,7 +215,10 @@
   &--alignCenter::after {
     margin: 0 auto;
   }
+}
 
+.background--black {
+  background-color: $c-neutral-black;
 }
 
 @media (min-width: $bootstrap-md-width) {
@@ -316,5 +319,4 @@ keyframes
   100% {
     opacity: 1;
   }
-
 }
