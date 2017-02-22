@@ -36,7 +36,7 @@ module Marketing
             end
           end
 
-          context 'given a rack request' do
+          context 'given a base URL' do
             subject(:presenter) { described_class.new(spree_line_item: line_item, base_url: 'https://example.com') }
 
             it 'renders full product URL' do
