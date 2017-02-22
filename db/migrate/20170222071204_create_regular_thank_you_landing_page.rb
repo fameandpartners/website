@@ -2,8 +2,8 @@ class CreateRegularThankYouLandingPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/thank-you',
-      template_path:    '/statics/landing_page_regular_thank_you',
+      path:             '/thanks-for-shopping',
+      template_path:    '/statics/landing_page_thank_you',
       heading:          '[TODO]',
       title:            '[TODO]',
       meta_description: '[TODO]',
