@@ -9,7 +9,8 @@ module Marketing
                    :email,
                    :number,
                    :site_version,
-                   :required_to
+                   :required_to,
+                   :delivery_period
 
     attr_reader :order, :items
 
