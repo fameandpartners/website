@@ -160,6 +160,14 @@
 .section-go-to-account {
   margin-top: 50px;
 
+  @media (min-width: $bootstrap-md-width) {
+
+    .btn-black {
+      padding: 15px 42px;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .btn-black {
