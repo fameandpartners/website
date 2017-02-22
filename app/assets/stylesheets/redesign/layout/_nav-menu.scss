@@ -3,9 +3,8 @@
 /* [Nav Menu]
 -------------------------------------------------------*/
 .nav-menu-container {
-
-  #home-menu {
-    margin-top: 30px;
+  .home-menu {
+    padding-top: 30px;
     background-color: $c-neutral-white;
 
     a {
@@ -130,7 +129,49 @@
 
   }
 
-}
+  .rect-wrapper {
+    background: $c-neutral-white;
+    position: absolute;
+    width: 100%;
+    z-index: 101;
+  }
+
+  .rect {
+    background-color: $c-neutral-white;
+    z-index: 101;
+    display: none;
+    margin-top: -1px;
+
+    .btn-close {
+      z-index: 101;
+      cursor: pointer;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+    .rect-wrapper {
+      border-bottom: 1px solid $c-neutral-5;
+    }
+
+    .rect.active,  {
+      display: block;
+    }
+
+    .nav-main-menu span.active {
+      border-color: $c-neutral-black;
+    }
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    .rect-wrapper {
+      margin-top: 45px;
+    }
+  }
+
+} // End nav-menu container
 
 .nav-menu-wrap {
   text-transform: none;
