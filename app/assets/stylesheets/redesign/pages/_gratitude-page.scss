@@ -92,6 +92,20 @@
 
     }
 
+    .same-height-cols {
+
+      .link-align-bottom {
+        bottom: 30px;
+        position: absolute;
+        left: 36%;
+      }
+
+      .item {
+        padding-bottom: 40px;
+      }
+
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
