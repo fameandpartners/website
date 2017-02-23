@@ -42,7 +42,7 @@ Spree::OrderMailer.class_eval do
         billing_address:             order_presenter.billing_address,
         shipping_address:            order_presenter.shipping_address,
         cny_delivery_delay:          Features.active?(:cny_delivery_delays),
-        order_delivery_period:       Features.active?(:cny_delivery_delays) ? '2 weeks' : '7 - 10 business days. If you have ordered a customized dress you will receive this within 10 - 14 business days.'
+        order_delivery_period:       order_presenter.delivery_period
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
