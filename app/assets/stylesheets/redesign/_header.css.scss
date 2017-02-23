@@ -546,7 +546,6 @@ ul.secondary.pull-right {
     }
   }
   nav{
-    height:3500px;
     ul{
       width:100%;
       li{
@@ -620,8 +619,7 @@ ul.secondary.pull-right {
   }
 
   a:not(.btn) {
-    color:black;
-    font-weight: 500;
+    color: $c-neutral-12;
   }
 
   .arrow{
@@ -912,6 +910,10 @@ ul.secondary.pull-right {
     .images-content{
       margin-left: 0;
     }
+  }
+  #dresses-menu {
+    height: auto;
+    overflow-y: hidden;
   }
   #dresses-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
     height: 100%;
