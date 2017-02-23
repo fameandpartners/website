@@ -59,7 +59,8 @@ javascript:
                               input required="true" type="email" name="email"
                             .col-xs-12
                               label.text-uppercase Wedding Date
-                              input.datepicker type="text" name="wedding_date"
+                              input.datepicker.wedding-date-visual readonly="" type="text" name="wedding_date_visual"
+                              input.wedding-date.hidden type="hidden" name="wedding_date"
                             .col-xs-12
                               .checkbox-area
                                 .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
@@ -258,6 +259,7 @@ javascript:
     var $previewModal = $('.js-modal.get-the-look-preview-modal');
     var $previewModalTrigger = $('.js-previewModalTrigger');
     var $guideModalTrigger = $('.js-get-guide-modal-trigger');
+    var isUSSite = window.app.current_site_version.permalink === 'us';
 
     function submitFormValues(formVals){
       return $.ajax({
@@ -286,7 +288,11 @@ javascript:
     });
 
 
-    $weddingPlanningForm.find('.datepicker').datepicker();
+    $weddingPlanningForm.find('.datepicker').datepicker({
+      dateFormat: isUSSite ? 'mm/dd/yy' : 'dd/mm/yy',
+      altField: '.wedding-date',
+      altFormat: 'mm/dd/yy'
+    });
 
     // FOCUS Event handler
     $weddingPlanningForm.on('focusin', 'input', function(event){
