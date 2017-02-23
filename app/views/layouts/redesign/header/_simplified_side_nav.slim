@@ -83,9 +83,8 @@ nav.navbar.navbar-default.visible-xs.visible-sm
           .arrow
             i.fa.fa-chevron-right
       li.normal-item#lookbook-menu-open
-        .text THE EVENING SHOP
-        .arrow
-          i.fa.fa-chevron-right
+        .text
+          = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       li.normal-item
         .text
           = link_to 'ACCOUNT LOGIN', profile_path
