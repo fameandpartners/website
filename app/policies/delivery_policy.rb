@@ -1,6 +1,6 @@
 module Policies
   module DeliveryPolicy
-    CNY_DELIVERY_PERIOD = '2 - 3 weeks'
+    CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
 
     # Max delivery period got from taxons

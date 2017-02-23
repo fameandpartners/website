@@ -37,7 +37,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
       Features.activate(:cny_delivery_delays)
       allow(line_item).to receive(:fast_making?).and_return(true)
 
-      expect(subject.delivery_period).to eq('2 - 3 weeks')
+      expect(subject.delivery_period).to eq('2 weeks')
     end
   end
 end
