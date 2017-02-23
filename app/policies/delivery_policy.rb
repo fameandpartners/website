@@ -35,7 +35,7 @@ module Policies
     end
 
     def major_value_from_period(period)
-      period.match(/(?<=\s)\d+/).to_s.to_i
+      period.match(/\d+(?=\s+\w+|$)/).to_s.to_i
     end
   end
 end
