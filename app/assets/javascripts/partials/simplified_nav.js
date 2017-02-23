@@ -3,7 +3,7 @@
   var $simplifiedNav = $('.js-simplified-nav');
   var $search = $('.js-search');
 
-  function close_menu() {
+  function closeMenu() {
     $simplifiedNav.find('.nav-main-menu span, .rect').removeClass('active');
   }
 
@@ -16,22 +16,22 @@
 
   // TODO: Does not belong in simplified_nav
   //Search input trigger
-  $search.on('click', function() {
-    close_menu();
-    $('.nav-main-menu').fadeTo( 300, 0 );
-    $(this).addClass('active');
-    $('#searchValue').focus();
-  });
-  $('.js-search-trigger').on('click', function(e) {
-    if ($(this).parent().hasClass('active')) {
-      if ($("#searchForm #searchValue").val() !== '') {
-        $("#searchForm").submit();
-      } else {
-        e.stopPropagation();
-        close_search();
-      }
-    }
-  });
+  // $search.on('click', function() {
+  //   closeMenu();
+  //   $('.nav-main-menu').fadeTo( 300, 0 );
+  //   $(this).addClass('active');
+  //   $('#searchValue').focus();
+  // });
+  // $('.js-search-trigger').on('click', function(e) {
+  //   if ($(this).parent().hasClass('active')) {
+  //     if ($("#searchForm #searchValue").val() !== '') {
+  //       $("#searchForm").submit();
+  //     } else {
+  //       e.stopPropagation();
+  //       close_search();
+  //     }
+  //   }
+  // });
 
   //Close search input triggers
   if ($('html').find('#search.active')) {
@@ -42,17 +42,30 @@
     });
   }
 
-  //Mega menu trigger
-  $(".nav-main-menu .js-open-nav-menu").on('click', function() {
-    var menu_index;
-    menu_index = $(this).index();
-
-    // Toggle when clicked
+  function removeActive(menuIndex){
+    $('simplified-nav');
     if ($('html').find('.rect.active')) {
-      $(".nav-main-menu span:not(':eq(" + menu_index + ")'), .rect-wrapper .rect:not(':eq(" + menu_index + ")')").removeClass('active');
+      $(".nav-main-menu span:not(':eq(" + menuIndex + ")'), .rect-wrapper .rect:not(':eq(" + menuIndex + ")')").removeClass('active');
     }
-    $(".nav-main-menu span:eq(" + menu_index + "), .rect-wrapper .rect:eq(" + menu_index + ")").toggleClass('active');
+    $(".nav-main-menu span:eq(" + menuIndex + "), .rect-wrapper .rect:eq(" + menuIndex + ")").removeClass('active');
+  }
 
+  function toggleActive(menuIndex){
+    if ($('html').find('.rect.active')) {
+      $(".nav-main-menu span:not(':eq(" + menuIndex + ")'), .rect-wrapper .rect:not(':eq(" + menuIndex + ")')").removeClass('active');
+    }
+    $(".nav-main-menu span:eq(" + menuIndex + "), .rect-wrapper .rect:eq(" + menuIndex + ")").toggleClass('active');
+  }
+
+  //Mega menu trigger
+  $(".nav-main-menu .js-open-nav-menu").on('mouseover', function() {
+    var menuIndex = $(this).index();
+    toggleActive(menuIndex);
+  });
+
+  $('.nav-menu-contents').on('mouseout', function() {
+    console.log('moving out');
+    closeMenu();
   });
 
   //Check if any mega menu is open
@@ -61,42 +74,42 @@
     //Close mega menu when clicked beneath it
     $('html').click(function(event) {
       if ($(event.target).closest('#fixed-header').length === 0) {
-        close_menu();
+        closeMenu();
       }
     });
 
   }
 
   //My account area trigger
-  $("#account-area .my-account").mouseenter(function() {
-    $("#account-area .account-menu").show();
-  });
-  $("#account-area .account-menu").mouseleave(function() {
-    $("#account-area .account-menu").hide();
-  });
+  // $("#account-area .my-account").mouseenter(function() {
+  //   $("#account-area .account-menu").show();
+  // });
+  // $("#account-area .account-menu").mouseleave(function() {
+  //   $("#account-area .account-menu").hide();
+  // });
 
   //Lookbook slide
-  var lookbook_slide;
-  lookbook_slide = $(".lookbook-slide");
-  if (lookbook_slide.length) {
-    return lookbook_slide.responsiveSlides({
-      auto: false,
-      nav: true
-    });
-  }
+  // var lookbook_slide;
+  // lookbook_slide = $(".lookbook-slide");
+  // if (lookbook_slide.length) {
+  //   return lookbook_slide.responsiveSlides({
+  //     auto: false,
+  //     nav: true
+  //   });
+  // }
 
-  if ($('#locale-warn-bar:visible').length) {
-    $( 'header.main' ).addClass('locale-warn-active');
-  }
+  // if ($('#locale-warn-bar:visible').length) {
+  //   $( 'header.main' ).addClass('locale-warn-active');
+  // }
+  //
+  // $('#locale-selector-mobile-container, #locale-selector-current').on('click', function() {
+  //   $(this).toggleClass('show-options');
+  // });
 
-  $('#locale-selector-mobile-container, #locale-selector-current').on('click', function() {
-    $(this).toggleClass('show-options');
-  });
-
-  $("#side-search-area #side-search-icon").on('click', function() {
-    if ($("#side-search-area #searchForm input").val() !== "") {
-      $("#side-search-area #searchForm").submit();
-    }
-  });
+  // $("#side-search-area #side-search-icon").on('click', function() {
+  //   if ($("#side-search-area #searchForm input").val() !== "") {
+  //     $("#side-search-area #searchForm").submit();
+  //   }
+  // });
 
 })(jQuery);
