@@ -259,7 +259,7 @@ javascript:
     var $previewModal = $('.js-modal.get-the-look-preview-modal');
     var $previewModalTrigger = $('.js-previewModalTrigger');
     var $guideModalTrigger = $('.js-get-guide-modal-trigger');
-    var isUSSite = "#{current_site_version.code}".toLowerCase() === 'us';
+    var isUSSite = window.app.current_site_version.permalink === 'us';
 
     function submitFormValues(formVals){
       return $.ajax({
