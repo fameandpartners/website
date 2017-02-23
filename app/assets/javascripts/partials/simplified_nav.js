@@ -8,13 +8,13 @@
   }
 
   // ****** SEARCH FUNCTIONALITY ******
-  // TODO: Does not belong in simplified_nav
-  function close_search() {
-    $search.removeClass('active');
-    $('.nav-main-menu').fadeTo( 100, 1 );
-  }
+  // // TODO: Does not belong in simplified_nav
+  // function close_search() {
+  //   $search.removeClass('active');
+  //   $('.nav-main-menu').fadeTo( 100, 1 );
+  // }
 
-  // TODO: Does not belong in simplified_nav
+  // // TODO: Does not belong in simplified_nav
   //Search input trigger
   // $search.on('click', function() {
   //   closeMenu();
@@ -33,14 +33,14 @@
   //   }
   // });
 
-  //Close search input triggers
-  if ($('html').find('#search.active')) {
-    $('html').click(function(event) {
-      if ($(event.target).closest('#search').length === 0 || $(event.target).is('span.close-search.btn-close')) {
-        close_search();
-      }
-    });
-  }
+  // //Close search input triggers
+  // if ($('html').find('#search.active')) {
+  //   $('html').click(function(event) {
+  //     if ($(event.target).closest('#search').length === 0 || $(event.target).is('span.close-search.btn-close')) {
+  //       close_search();
+  //     }
+  //   });
+  // }
 
   function removeActive(menuIndex){
     $('simplified-nav');
@@ -57,15 +57,22 @@
     $(".nav-main-menu span:eq(" + menuIndex + "), .rect-wrapper .rect:eq(" + menuIndex + ")").toggleClass('active');
   }
 
+  function addActive(menuIndex){
+    if ($('html').find('.rect.active')) {
+      $(".nav-main-menu span:not(':eq(" + menuIndex + ")'), .rect-wrapper .rect:not(':eq(" + menuIndex + ")')").removeClass('active');
+    }
+    $(".nav-main-menu span:eq(" + menuIndex + "), .rect-wrapper .rect:eq(" + menuIndex + ")").addClass('active');
+  }
+
   //Mega menu trigger
   $(".nav-main-menu .js-open-nav-menu").on('mouseover', function() {
     var menuIndex = $(this).index();
-    toggleActive(menuIndex);
+    addActive(menuIndex);
   });
 
-  $('.nav-menu-contents').on('mouseout', function() {
-    console.log('moving out');
-    closeMenu();
+  // Mouse leaves hit area zone
+  $('.simplified-nav-container').on('mouseleave', function() {
+    $('.nav-menu-contents').closest('.active').removeClass('active');
   });
 
   //Check if any mega menu is open
