@@ -30,57 +30,58 @@
           span.icon.icon-bag
           span.count.js-cart-item-count 0
 
-  .rect-wrapper
-    .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav
-      .row
+  .rect-wrapper.margin--center
+    .center-wrapper.margin--center
+      .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav.background--white.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white
 
-        .col-md-2.dresses-shop-by
-          ul
-            li.title Featured
-            = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
+          .col-md-2.dresses-shop-by
+            ul
+              li.title Featured
+              = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
 
-        .col-md-2.dresses-style
-          ul
-            li.title Dresses
-            = render partial: 'layouts/redesign/header/simplified_nav/dresses'
+          .col-md-2.dresses-style
+            ul
+              li.title Dresses
+              = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
-        .col-md-2.dresses-color
-          ul
-            li.title Separates
-            = render partial: 'layouts/redesign/header/simplified_nav/separates'
+          .col-md-2.dresses-color
+            ul
+              li.title Separates
+              = render partial: 'layouts/redesign/header/simplified_nav/separates'
 
-        .col-md-3.dresses-events
-          .two-cols
-            .title Collections
-            = render partial: 'layouts/redesign/header/simplified_nav/collections'
+          .col-md-3.dresses-events
+            .two-cols
+              .title Collections
+              = render partial: 'layouts/redesign/header/simplified_nav/collections'
 
-        .col-md-3
-          - if !Features.active?(:getitquick_unavailable)
-            .express-making.nav-item
-              = link_to fast_making_dresses_path
-                = image_tag 'mega-menu/shop-by/express-making.jpg', class: 'img-responsive', alt: ''
-          - else
-            .featuredCollection.nav-item
-              = link_to best_of_fame_collection_path
-                = image_tag 'mega-menu/shop-by/best-of-fame.jpg', class: 'img-responsive', alt: ''
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      .cta-wrap
-                        span.cta-copy.cta-link-white-bg
-                          span.cta-link The Best of Fame*
+          .col-md-3
+            - if !Features.active?(:getitquick_unavailable)
+              .express-making.nav-item
+                = link_to fast_making_dresses_path
+                  = image_tag 'mega-menu/shop-by/express-making.jpg', class: 'img-responsive', alt: ''
+            - else
+              .featuredCollection.nav-item
+                = link_to best_of_fame_collection_path
+                  = image_tag 'mega-menu/shop-by/best-of-fame.jpg', class: 'img-responsive', alt: ''
+                  .content-wrap
+                    .container-cta
+                      .row-cta
+                        .cta-wrap
+                          span.cta-copy.cta-link-white-bg
+                            span.cta-link The Best of Fame*
 
-    .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
-      .row
-        = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
+      .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
+          = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
 
-    .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
-      .row
+      .rect#rect-lookbook.nav-menu-wrap.menu-lookbook.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.background--white.margin--center
 
-        .col-md-5.lookbook
-          ul
-            li.title lookbooks
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
+          .col-md-5.lookbook
+            ul
+              li.title lookbooks
+              = render partial: 'layouts/redesign/mega_menu/lookbook'
 
-        .col-md-7.lookbook-banner
-          = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'
+          .col-md-7.lookbook-banner
+            = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'

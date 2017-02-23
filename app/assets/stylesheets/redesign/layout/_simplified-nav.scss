@@ -1,10 +1,49 @@
 /* [Simplified Nav Menu] Partial styles
 -------------------------------------------------------*/
 .simplified-nav-container {
+
   .rect-wrapper {
-    background: transparent;
+    background: inherit;
     margin: 0 auto;
     position: relative;
+    border: none;
+    z-index: inherit;
+  }
+
+  .nav-menu-buffer {
+    padding: 30px 60px;
+  }
+
+  .center-wrapper {
+    position: relative;
+  }
+
+  .nav-menu-wrap {
+    background: transparent;
+    display: none;
+    z-index: 0;
+    position: relative;
+    padding: 0px;
+  }
+
+  .nav-menu-wrap.active {
+    z-index: 101;
+  }
+
+  .nav-menu-contents {
+    opacity: 0;
+    @include transition(0.15s opacity);
+  }
+
+  .nav-menu-wrap.active .nav-menu-contents{
+    opacity: 1;
+  }
+
+  .menu-wedding {
+    width: 770px;
+  }
+  .menu-wrap {
+    width: 990px;
   }
 }
 
