@@ -12,7 +12,7 @@
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu The Wedding Shop
-      span.lookbook The Evening Shop
+      span.lookbook = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
 
     .col-md-3.nav-icons.text-right
       span.search-wrapper.js-search
