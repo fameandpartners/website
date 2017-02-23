@@ -33,6 +33,7 @@
   .nav-menu-contents {
     opacity: 0;
     @include transition(0.15s opacity);
+    border-bottom: 1px solid $c-neutral-5;
   }
 
   .nav-menu-wrap.active .nav-menu-contents{
