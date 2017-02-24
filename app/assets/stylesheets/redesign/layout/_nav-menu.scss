@@ -134,6 +134,10 @@
     position: absolute;
     z-index: 101;
   }
+  .mega-rect-wrapper.rect-wrapper {
+    width: 100%;
+    left: 0;
+  }
 
   .rect {
     background-color: $c-neutral-white;

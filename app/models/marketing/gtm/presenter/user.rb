@@ -2,11 +2,22 @@ module Marketing
   module Gtm
     module Presenter
       class User < Base
-        attr_reader :user, :request_ip
+        include Split::Helper # Split testing
+        attr_reader :user, :request_ip, :session
 
-        def initialize(spree_user:, request_ip: nil)
+        def initialize(spree_user:, request_ip: nil, session:)
           @request_ip = request_ip
           @user       = spree_user
+          @session    = session
+        end
+
+        # Active experiments for a/b testing
+        def active_experiments
+          experiments = []
+          ab_user.active_experiments.each do |key, experiment|
+            experiments.push experiment
+          end
+          experiments.join(" ")
         end
 
         def name
@@ -43,6 +54,7 @@ module Marketing
 
         def body
           {
+            active_experiments: active_experiments,
             country:  country,
             email:    email,
             facebook: from_facebook?,

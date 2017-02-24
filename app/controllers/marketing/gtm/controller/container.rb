@@ -20,7 +20,7 @@ module Marketing
         end
 
         def include_gtm_container
-          user_presenter   = Presenter::User.new(spree_user: spree_current_user, request_ip: request.ip)
+          user_presenter   = Presenter::User.new(spree_user: spree_current_user, request_ip: request.ip, session: session)
           device_presenter = Presenter::Device.new(user_agent: request.user_agent)
           site_presenter   = Presenter::Site.new(current_site_version: current_site_version)
 
