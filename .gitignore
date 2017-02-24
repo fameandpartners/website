@@ -84,3 +84,6 @@ OpsCare.yml
 
 # Ignore JS bundle
 app/assets/javascripts/application_bundle.js
+
+# Ignore all helper Procfile
+Procfile.*

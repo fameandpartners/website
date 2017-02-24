@@ -186,7 +186,7 @@ describe Spree::Product, :type => :model do
     it "returns cny delivery period if cny flag enabled" do
       Features.activate(:cny_delivery_delays)
 
-      expect(subject.delivery_period).to eq('3 - 4 weeks')
+      expect(subject.delivery_period).to eq('2 weeks')
     end
   end
 end

@@ -1,24 +1,25 @@
 var EventDetails = React.createClass({
 
   propTypes: {
-    roles_path: React.PropTypes.string,
-    eventDetailsUpdatePath: React.PropTypes.string,
-    eventDetailsUpdated: React.PropTypes.func,
-    eventDetailsUpdateFailed: React.PropTypes.func,
     current_user: React.PropTypes.object,
     event: React.PropTypes.shape({
+      date: React.PropTypes.string,
+      hasError: React.PropTypes.object,
       name: React.PropTypes.string,
       number_of_assistants: React.PropTypes.number,
-      date: React.PropTypes.string,
-      role: React.PropTypes.string,
-      hasError: React.PropTypes.object
-    })
+      role: React.PropTypes.string
+    }),
+    eventDetailsUpdated: React.PropTypes.func,
+    eventDetailsUpdateFailed: React.PropTypes.func,
+    eventDetailsUpdatePath: React.PropTypes.string,
+    hasError: React.PropTypes.object,
+    roles_path: React.PropTypes.string
   },
 
   getInitialState: function() {
     return {
-      event: this.props.event
-    }
+      event: {}
+    };
   },
 
   componentDidMount: function() {
@@ -41,7 +42,13 @@ var EventDetails = React.createClass({
       var _event = this.props.event;
       _event.date = date;
       this.setState({event: _event})
-    }.bind(this))
+    }.bind(this));
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    if(Object.keys(this.state.event).length === 0) {
+      this.setState({event: $.extend({}, nextProps.event)});
+    }
   },
 
   getEventDetailsUpdatePromise: function(e) {
@@ -59,7 +66,7 @@ var EventDetails = React.createClass({
   },
 
   render: function() {
-    return(
+    return (
         <form className="center-block registrations__details-form">
           <div className={this.props.hasError && this.props.hasError.name ? 'form-group has-error' : 'form-group'}>
             <label htmlFor="input_wedding_board_name">
@@ -121,7 +128,7 @@ var EventDetails = React.createClass({
               label={'Save'}
               labelCompleted={'Saved'}
               promise={this.getEventDetailsUpdatePromise}
-              successHandler={this.props.eventDetailsUpdated}></FeedbackButton>
+              successHandler={this.props.eventDetailsUpdated} />
           </div>
         </form>
     );

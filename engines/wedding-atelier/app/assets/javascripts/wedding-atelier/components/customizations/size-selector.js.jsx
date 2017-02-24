@@ -101,7 +101,7 @@ var SizeSelector = React.createClass({
       return (
         <li key={index}>
           <input {...inputProps} />
-          <label htmlFor={id}>{PresentationHelper.sizePresentation(size)}</label>
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size, that.props.siteVersion)}</label>
         </li>
       );
     });

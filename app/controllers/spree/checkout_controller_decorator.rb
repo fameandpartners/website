@@ -344,7 +344,7 @@ Spree::CheckoutController.class_eval do
       append_gtm_event(event_name: 'addToCart')
       append_gtm_product(product_presenter: product_presenter)
       append_gtm_variant(spree_variant: variant)
-      append_gtm_order(spree_order: current_order)
+      append_gtm_order(spree_order: current_order, base_url: root_url)
     end
   end
 
