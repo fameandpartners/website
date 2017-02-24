@@ -8,7 +8,7 @@ nav.navbar.navbar-default.visible-xs.visible-sm
       - cache ['views/layouts/redesign/mega_menu/_dress_code', 'dresses-menu'] do
         ul.nav.navbar-nav
           li.normal-item
-            .text.text-back SHOP
+            .text.text-back.text-uppercase Shop All
             .arrow
               i.fa.fa-chevron-left
               .back BACK
@@ -33,7 +33,7 @@ nav.navbar.navbar-default.visible-xs.visible-sm
       div#wedding-menu.grid-img-cta-nav
         ul.nav.navbar-nav
           li.normal-item
-            .text.text-back FAMEWEDDINGS
+            .text.text-back.text-uppercase The Wedding Shop
             .arrow
               i.fa.fa-chevron-left
               .back BACK
@@ -43,18 +43,6 @@ nav.navbar.navbar-default.visible-xs.visible-sm
               .container-cta
                 .row-cta
                   = render partial: 'layouts/redesign/mega_menu/fame_weddings'
-
-    div#lookbook-menu
-      ul.nav.navbar-nav
-        li.normal-item
-          .text.text-back LOOKBOOKS
-          .arrow
-            i.fa.fa-chevron-left
-            .back BACK
-        li.menu-content
-          = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'
-
-        = render partial: 'layouts/redesign/mega_menu/lookbook'
 
     div#moodboards-menu
       ul.nav.navbar-nav
@@ -82,7 +70,7 @@ nav.navbar.navbar-default.visible-xs.visible-sm
           .text THE WEDDING SHOP
           .arrow
             i.fa.fa-chevron-right
-      li.normal-item#lookbook-menu-open
+      li.normal-item
         .text
           = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       li.normal-item

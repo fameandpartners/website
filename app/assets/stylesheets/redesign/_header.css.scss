@@ -460,7 +460,7 @@ ul.secondary.pull-right {
 #sideMenu {
   overflow-x: hidden;
   display: block;
-  height: 100%;
+  height: inherit;
   overflow: auto;
   position: fixed;
   font-size: 15px;
@@ -1003,6 +1003,9 @@ ul.secondary.pull-right {
 
   }
 
+  #dresses-menu {
+    height: auto;
+  }
 }
 
 .mobileAnimation{
@@ -1057,10 +1060,5 @@ ul.secondary.pull-right {
       display: block;
     }
 
-  }
-
-  #dresses-menu {
-    height: auto;
-    overflow-y: hidden;
   }
 }
