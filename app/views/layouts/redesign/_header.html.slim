@@ -86,4 +86,8 @@ ruby:
   = render 'layouts/redesign/new_this_week'
 
   #sideMenu
-    = render 'layouts/redesign/header/simplified_side_nav'
+    - ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
+      - if variation === 'mega'
+        = render 'layouts/redesign/header/mega_side_nav'
+      - else 
+        = render 'layouts/redesign/header/simplified_side_nav'
