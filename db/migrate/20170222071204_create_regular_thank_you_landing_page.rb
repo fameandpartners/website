@@ -4,9 +4,9 @@ class CreateRegularThankYouLandingPage < ActiveRecord::Migration
     {
       path:             '/thanks-for-shopping',
       template_path:    '/statics/landing_page_thank_you',
-      heading:          '[TODO]',
-      title:            '[TODO]',
-      meta_description: '[TODO]',
+      heading:          'Thanks for shopping',
+      title:            'Thanks for shopping',
+      meta_description: 'Now that you have your women-empowering, planet-saving, custom-made garment, what\'s next?',
     }
   end
 
