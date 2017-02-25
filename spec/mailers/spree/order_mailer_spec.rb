@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Spree
   RSpec.describe OrderMailer, type: :mailer do
-    let(:today_date) { Date.parse('05/05/2016') }
-    let(:delivery_date) { Date.parse('10/10/2016') }
+    let(:today_date) { DateTime.parse('05/05/2016 9:00:00 +0800') }
+    let(:delivery_date) { DateTime.parse('10/10/2016 9:00:00 +0800') }
 
     let(:user) { build(:spree_user, email: 'loroteiro@silvestre.com') }
     let(:address) { build(:address, address1: 'Street Macarena', address2: 'Around the Corner',
@@ -12,11 +12,7 @@ module Spree
                          user: user, bill_address: address, ship_address: address) }
     let(:presenter) { Marketing::OrderPresenter.new(order) }
 
-    before(:each) do
-      Spree::Config[:site_name] = 'My Super eCommerce'
-      allow(Date).to receive(:today).and_return(today_date)
-      # allow_any_instance_of(Marketing::OrderPresenter).to receive_messages(billing_address: {}, shipping_address: {})
-    end
+    before(:each) { Spree::Config[:site_name] = 'My Super eCommerce' }
 
     let(:expected_attributes) {
       {
@@ -41,8 +37,10 @@ module Spree
     }
 
     it 'sends data to customerio correctly' do
-      expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(order.user, 'order_confirmation_email', expected_attributes)
-      described_class.confirm_email(order)
+      Timecop.freeze(today_date) do
+        expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(order.user, 'order_confirmation_email', expected_attributes)
+        described_class.confirm_email(order)
+      end
     end
   end
 end
