@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Spree
   RSpec.describe OrderMailer, type: :mailer do
-    let(:today_date) { DateTime.parse('05/05/2016 9:00:00 +0800') }
-    let(:delivery_date) { DateTime.parse('10/10/2016 9:00:00 +0800') }
+    let(:today_date) { Time.zone.parse('05/05/2016') }
+    let(:delivery_date) { Time.zone.parse('10/10/2016') }
 
     let(:user) { build(:spree_user, email: 'loroteiro@silvestre.com') }
     let(:address) { build(:address, address1: 'Street Macarena', address2: 'Around the Corner',
@@ -27,7 +27,7 @@ module Spree
         auto_account:                false,
         today:                       '05.05.16',
         phone:                       '1234-5678',
-        delivery_date:               'Sun, 09 Oct 2016',
+        delivery_date:               'Mon, 10 Oct 2016',
         billing_address_attributes:  presenter.billing_address_attributes.to_h,
         shipping_address_attributes: presenter.shipping_address_attributes.to_h,
         billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
