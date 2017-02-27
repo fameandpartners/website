@@ -89,28 +89,6 @@ header.main {
 
   }
 
-  .rect-wrapper {
-    background: $c-neutral-white;
-    position: absolute;
-    width: 100%;
-    z-index: 101;
-  }
-
-  .rect {
-    background-color: $c-neutral-white;
-    z-index: 101;
-    display: none;
-    margin-top: -1px;
-
-    .btn-close {
-      z-index: 101;
-      cursor: pointer;
-      margin-bottom: 15px;
-      display: block;
-    }
-
-  }
-
   .nav-menu-container {
 
     #home-menu {
