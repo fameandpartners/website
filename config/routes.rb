@@ -98,6 +98,9 @@ FameAndPartners::Application.routes.draw do
     # The Evening Shop landing page
     get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
 
+    # Fame SOciety Invitation
+    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -617,10 +620,10 @@ FameAndPartners::Application.routes.draw do
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 end
 
-# NOTE: Alexey Bobyrev 14 Feb 2017 
+# NOTE: Alexey Bobyrev 14 Feb 2017
 # Method append used here to handle all request directly right after defined ones (including engines)
 FameAndPartners::Application.routes.append do
-  # NOTE: Alexey Bobyrev 14 Jan 2017 
+  # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
   match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
