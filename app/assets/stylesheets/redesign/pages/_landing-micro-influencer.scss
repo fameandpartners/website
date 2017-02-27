@@ -46,6 +46,19 @@
     margin-bottom: 60px;
   }
 
+  .items-grid {
+
+    h3 {
+      margin-top:60px;
+    }
+
+  }
+
+  .tagging {
+    font-family: $font-family-secondary;
+    font-weight: bold;
+  }
+
   .section-instagram {
     padding-bottom: 40px;
 
@@ -126,6 +139,23 @@
 
       }
 
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .heading-thin-line-bottom {
+
+      .no-margin-thin-line::after {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+    }
+
+    .section-no-margin-top {
+      margin-top: 0px;
     }
 
   }
