@@ -1,3 +1,79 @@
 = render partial: 'pages/robots'
 
 .micro-influencer.mobile-text-center
+
+  .intro-wrapper
+    .container-fluid
+      .row.hidden-md.hidden-lg
+        .col-md-12
+          = image_tag 'landingpages/outreach-micro-influencer/micro-hero-mob.jpg', class: "img-responsive"
+
+      .row.vertical-align-row
+        .col-md-6.hidden-xs.hidden-sm
+          = image_tag 'landingpages/outreach-micro-influencer/micro-hero.jpg', class: "img-responsive"
+
+        .col-md-5.vertical-align
+          .gratitudePage__copy
+            .row
+              .col-xs-12
+                .heading-thin-line-bottom
+                  h3 <em>Welcome to</em>
+                  h1.title.no-margin.no-margin-thin-line The Fame Society
+                  p You are here because our brand is <em>inspired</em> by you–and we believe that you embody all of the style and strength that women in the world are inspired by, too.
+                  p And so, to say thanks for being an inspirational woman, we want to remind you just how special you are. We invite you to experience the <em>The Fame Society</em>, on us.
+                  = link_to '/dresses/new-this-week', class: 'cta-mobile-featured'
+                    span.btn.btn-black.btn-featured-black
+                      span.copy-highlight JOIN NOW
+
+  .container.items-grid
+    section.section-box
+      .row
+        .col-md-6.hidden-md.hidden-lg.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/what-is.jpg', class: "img-responsive"
+
+        .col-md-5.col-md-offset-1
+          h3 What <em>is</em> The Fame Society?
+          p The Society is where trend authority meets bespoke tailoring. It’s a network of connected, confident, and inspired influencers who embody the Fame and Partners woman: strong, empowered, and unapologetically herself.
+
+        .col-md-5.hidden-sm.hidden-xs.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/what-is.jpg', class: "img-responsive"
+
+    section.section-box.section-no-margin-top
+      .row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive"
+
+        .col-md-5.col-md-offset-1
+          h3 What's in it for <em>you:</em>
+          p Once a month, Fame and Partners will create a bespoke, made-to-order garment of your choosing just for you, for free.
+
+    section.section-box.section-no-margin-top
+      .row
+        .col-md-6.hidden-md.hidden-lg.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-us.jpg', class: "img-responsive"
+
+        .col-md-5.col-md-offset-1
+          h3 What's in it for <em>us</em>:
+          p You’ll post pictures and videos of your custom look to Instagram and anywhere else you get social, tagging <span class="tagging">@fameandpartners</span>.
+
+        .col-md-5.hidden-sm.hidden-xs.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-us.jpg', class: "img-responsive"
+
+    section.section-box.section-no-margin-top
+      .row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/why.jpg', class: "img-responsive"
+
+        .col-md-5.col-md-offset-1
+          h3 <em>Why</em> do we do it?
+          p We want to create an unstoppable chain of women empowering women.
+          p The Fame Society is a network of likeminded ladies from all areas of the fashion industry–bloggers, stylists, photographers, designers, editors, and more–working together to support each other. Society members are encouraged to collaborate and post one another’s content, in effect growing your social followings exponentially. Through a group chats, local meetups, and influencer mentorships, The Fame Society offers a platform for creative collaboration and heightened exposure.
+
+    section.section-box.section-apply-now.text-center
+      .row
+        .col-xs-12
+          .mobile-safe-padding
+            p.explore-latest <em>Inspire</em> and create with The Fame Society
+            = link_to '/dresses/new-this-week', class: 'cta-mobile-featured'
+              span.btn.btn-black.btn-featured-black
+                span.copy-highlight Join NOW
