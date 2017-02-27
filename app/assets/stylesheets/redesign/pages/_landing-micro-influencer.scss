@@ -131,11 +131,49 @@
 
   }
 
+  .modal-content {
+
+    h2 {
+      font-size: 4rem;
+    }
+
+    p {
+      font-size: 1em;
+    }
+
+  }
+
+  form {
+    margin: 0 80px;
+
+    label {
+      font-weight: 800;
+      display: block;
+      margin-top: 10px;
+      font-size: 1.4rem;
+    }
+
+    .btnCtaBlackBgUppercase {
+      margin: 10px 0;
+      padding: 10px 80px;
+      font-size: 1.8rem;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .section-apply-now {
       border-top: 1px solid $c-neutral-black;
       padding-top: 30px;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    form {
+      margin: 0 30px;
     }
 
   }
