@@ -136,9 +136,7 @@ var DressPreview = React.createClass({
     var fitPov = this.props.selectedOptions.fit && this.props.selectedOptions.fit.point_of_view,
         stylePov = this.props.selectedOptions.style && this.props.selectedOptions.style.point_of_view;
 
-    if(fitPov === 'back' || stylePov === 'back'){
-      return true
-    }
+    return (fitPov === 'back' || stylePov === 'back')
   },
 
   render: function() {
