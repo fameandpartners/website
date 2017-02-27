@@ -40,7 +40,7 @@ doctype html
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
 
-    - if flash.key?(:error) && !flash[:error].empty?
+    - if flash.key?(:error) && flash[:error].present?
       = react_component 'Notification', { errors: [flash[:error]] }, { class: 'error-notification' }
     #notification
     #wrap
