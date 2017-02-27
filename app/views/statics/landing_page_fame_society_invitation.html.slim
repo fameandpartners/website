@@ -2,6 +2,63 @@
 
 .micro-influencer.mobile-text-center
 
+  .js-modal.get-the-look-modal.modal.modal-v2 role='dialog' tabindex="-1" aria-hidden="true"
+    .modal-dialog role='document'
+      .container-fluid
+        .row
+          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12
+            .modal-content
+              a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
+              .modal-body
+                .js-form-pending
+                  .row
+                    .col-md-12
+                      .row
+                        .col-xs-12
+                          h2.text-center We just need to know <br class=" visible-md visible-lg">a <em>little</em> bit more about you:
+
+                      .row
+                        form#microinfluencer_form.form.clearfix
+                          input name="session_type" value="Email" hidden="true"
+                            .row
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase FULL Name<span class="required">*</span>
+                                input data-auto-focus= required="true" type="text" name="name" class="form-control form-control-md" placeholder="Full Name"
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase Email<span class="required">*</span>
+                                input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
+                            .row
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase About You (25 words or less)
+                                textarea name="about" rows=5 cols=10  class="form-control form-control-md"
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase Blog Url
+                                input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
+                                label.text-uppercase Mailing Address
+                                input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
+                            .row
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase Social Handles<span class="required">*</span> (at least one)
+                                input data-auto-focus= required="true" type="text" name="social_handles" placeholder="Social Handles" class="form-control form-control-md"
+                              .col-md-6.col-xs-12.form-group
+                                label.text-uppercase Dress Size
+                                input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
+                            .row
+                              .col-md-6.col-xs-12
+                                p + Add another Handle
+                              .col-md-6.col-xs-12.text-center
+                                button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
+
+                .js-form-submitted-success.hidden
+                  .row
+                    .col-md-12.text-center
+                      h2 Welcome to The Fame Society.
+                      p We're thrilled to have you as our newest member. We'll email you soon with details on how to get started; in the meantime, browse our latest collection to pick out your first look.
+                      p We can't wait to see you in Fame and Partners.
+                      = link_to 'javascript:;', class: 'cta-mobile-featured'
+                        span.btn.btn-black.btn-featured-black
+                          span.copy-highlight EXPLORE FAME
+
   .intro-wrapper
     .container-fluid
       .row.hidden-md.hidden-lg
@@ -21,7 +78,7 @@
                   h1.title.no-margin.no-margin-thin-line The Fame Society
                   p You are here because our brand is <em>inspired</em> by you–and we believe that you embody all of the style and strength that women in the world are inspired by, too.
                   p And so, to say thanks for being an inspirational woman, we want to remind you just how special you are. We invite you to experience the <em>The Fame Society</em>, on us.
-                  = link_to '/dresses/new-this-week', class: 'cta-mobile-featured'
+                  = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
                     span.btn.btn-black.btn-featured-black
                       span.copy-highlight JOIN NOW
 
@@ -74,6 +131,61 @@
         .col-xs-12
           .mobile-safe-padding
             p.explore-latest <em>Inspire</em> and create with The Fame Society
-            = link_to '/dresses/new-this-week', class: 'cta-mobile-featured'
+            = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
               span.btn.btn-black.btn-featured-black
                 span.copy-highlight Join NOW
+
+javascript:
+  $(function() {
+    'use strict';
+    var INPUT_ERROR_CLASS = 'input-error';
+    var $microInfluencerForm = $('#microinfluencer_form');
+    var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
+
+    function submitFormValues(formVals){
+      return $.ajax({
+        type: 'POST',
+        url: '/wedding-planning',
+        contentType:'application/json',
+        dataType:'json',
+        data: JSON.stringify(formVals)
+      });
+    }
+
+    $microInfluencerModalTrigger.click(function(){
+      $('.js-modal.get-the-look-modal').modal('show');
+      $microInfluencerForm.find('input[data-auto-focus]').focus();
+    });
+
+    // FOCUS Event handler
+    $microInfluencerForm.on('focusin', 'input', function(event){
+      $(event.target).removeClass(INPUT_ERROR_CLASS);
+    });
+
+    // SUBMIT Event Handler
+    $microInfluencerForm.on('submit', function(evt){
+      evt.preventDefault();
+      var formVals = {};
+
+      $.each($microInfluencerForm.serializeArray(), function(i, field) {
+        formVals[field.name] = field.value; // Regular Inputs
+      });
+
+      submitFormValues(formVals)
+              .done(function(){
+                $('.js-form-pending').addClass('hidden');
+                $('.js-form-submitted-success').removeClass('hidden');
+              })
+              .error(function(xhr){
+                var errors = JSON.parse(xhr.responseText).errors;
+                var keys = Object.keys(errors);
+                keys.forEach(function(key){
+                  $microInfluencerForm.find('input[name="' + key + '"]')
+                          .first()
+                          .addClass(INPUT_ERROR_CLASS);
+                });
+              });
+
+    });
+
+  });
