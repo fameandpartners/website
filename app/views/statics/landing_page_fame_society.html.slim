@@ -267,7 +267,7 @@ javascript:
                 var errors = JSON.parse(xhr.responseText).errors;
                 var keys = Object.keys(errors);
                 keys.forEach(function(key){
-                  $weddingPlanningForm.find('input[name="' + key + '"]')
+                  $microInfluencerForm.find('input[name="' + key + '"]')
                           .first()
                           .addClass(INPUT_ERROR_CLASS);
                 });
