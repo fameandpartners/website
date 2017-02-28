@@ -20,36 +20,35 @@
 
                       .row
                         form#microinfluencer_form.form.clearfix
-                          input name="session_type" value="Email" hidden="true"
-                            .row
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase FULL Name<span class="required">*</span>
-                                input data-auto-focus= required="true" type="text" name="name" class="form-control form-control-md" placeholder="Full Name"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Email<span class="required">*</span>
-                                input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
-                            .row
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase About You <span class="note">(25 words or less)</span>
-                                textarea name="about" rows=5 cols=10  class="form-control form-control-md"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Blog Url
-                                input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
-                                label.text-uppercase Mailing Address
-                                input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
-                            .row
-                              .col-md-6.col-xs-12.form-group.form-social-group
-                                label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
-                                input data-auto-focus= required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Dress Size
-                                input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
-                            .row
-                              .col-md-6.col-xs-12
-                                a class="js-add-social-handler"
-                                  | + Add another Handle
-                              .col-md-6.col-xs-12.text-center
-                                button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
+                          .row
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase FULL Name<span class="required">*</span>
+                              input data-auto-focus= required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Email<span class="required">*</span>
+                              input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
+                          .row
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase About You <span class="note">(25 words or less)</span>
+                              textarea name="about" rows=5 cols=10  class="form-control form-control-md"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Blog Url
+                              input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
+                              label.text-uppercase Mailing Address
+                              input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
+                          .row
+                            .col-md-6.col-xs-12.form-group.form-social-group
+                              label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
+                              input data-auto-focus= required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Dress Size
+                              input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
+                          .row
+                            .col-md-6.col-xs-12
+                              a class="js-add-social-handler"
+                                | + Add another Handle
+                            .col-md-6.col-xs-12.text-center
+                              button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
 
                 .js-form-submitted-success.hidden
                   .row
@@ -233,7 +232,7 @@ javascript:
     function submitFormValues(formVals){
       return $.ajax({
         type: 'POST',
-        url: '/wedding-planning',
+        url: '/micro-influencer',
         contentType:'application/json',
         dataType:'json',
         data: JSON.stringify(formVals)
