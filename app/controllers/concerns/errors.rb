@@ -19,7 +19,7 @@ module Concerns
       if path.match(/\.php$/) || format.eql?('php')
         head :not_acceptable, layout: false
 
-      elsif MYSTERIOUS_ROUTES.any? { |v| v.match(path) }
+      elsif MYSTERIOUS_ROUTES.any? { |v| v.match(Regexp.escape(path)) }
         data = request.env.select {|key,_| key.upcase == key }
         NewRelic::Agent.record_custom_event('UndefinedURL', data)
         render text: 'Not Found', status: :not_found
