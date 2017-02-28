@@ -83,88 +83,89 @@
           = image_tag 'landingpages/fame-society/micro-hero-2.jpg', class: "img-responsive"
 
 
-  section.section-box.text-center
-    .row
-      .col-xs-12
-        .mobile-safe-padding
-          p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg">and score some gorgeous dresses in the process. Here’s how it works.
+  .container-fluid
+    section.section-box.text-center
+      .row
+        .col-xs-12
+          .mobile-safe-padding
+            p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg">and score some gorgeous dresses in the process. Here’s how it works.
 
-  - current_item_image = image_path("landingpages/fame-society/clothes.jpg")
-  - current_item_mob_image = image_path("landingpages/fame-society/clothes-mob.jpg")
-  section.section-box.container-fluid
-    .row.vertical-align-copy
-      .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-        h1.heading-overlay CLOTHES
+    - current_item_image = image_path("landingpages/fame-society/clothes.jpg")
+    - current_item_mob_image = image_path("landingpages/fame-society/clothes-mob.jpg")
+    section.section-box
+      .row.vertical-align-copy
+        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
+          h1.heading-overlay CLOTHES
 
-      .col-md-7.content-img
-        picture
-          source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
-          source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
-          img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
-            #{image_path(current_item_mob_image)} 991w,
-            #{image_path(current_item_image)} 992w"
+        .col-md-7.content-img
+          picture
+            source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
+            source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
+            img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
+              #{image_path(current_item_mob_image)} 991w,
+              #{image_path(current_item_image)} 992w"
 
-      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
-        .copy-wrap
-          .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-            .heading-overlay CLOTHES
+        .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
+              .heading-overlay CLOTHES
 
-          h3 Free clothes <em>every</em> month.
-          p Every month, Fame Society members choose one free piece from the latest Fame and Partners collection. In return, we ask that you take a picture or video of yourself in Fame and post it to Instagram. As long as you keep posting, we’ll keep gifting–and as your following grows, so will the amount of clothing we send you.
+            h3 Free clothes <em>every</em> month.
+            p Every month, Fame Society members choose one free piece from the latest Fame and Partners collection. In return, we ask that you take a picture or video of yourself in Fame and post it to Instagram. As long as you keep posting, we’ll keep gifting–and as your following grows, so will the amount of clothing we send you.
 
-  - current_item_image = image_path("landingpages/fame-society/growth.jpg")
-  - current_item_mob_image = image_path("landingpages/fame-society/growth-mob.jpg")
-  section.section-box.container-fluid
-    .row.vertical-align-copy
-      .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-        h1.heading-overlay GROWTH
+    - current_item_image = image_path("landingpages/fame-society/growth.jpg")
+    - current_item_mob_image = image_path("landingpages/fame-society/growth-mob.jpg")
+    section.section-box
+      .row.vertical-align-copy
+        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
+          h1.heading-overlay GROWTH
 
-      .col-lg-3.col-md-5.content-copy.vertical-align.hidden-xs.hidden-sm
-        .copy-wrap
-          .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-            .heading-overlay GROWTH
+        .col-lg-3.col-md-5.content-copy.vertical-align.hidden-xs.hidden-sm
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
+              .heading-overlay GROWTH
 
-          h3 A network to <em>help</em> you grow your following.
-          p We’re all about women helping women. That’s why every member of The Fame Society is encouraged to repost other members’ Fame content: when her following grows, so does yours. Just starting out as an influencer? We’ll set you up with a next-level mentor to help you get to where you want to go.
+            h3 A network to <em>help</em> you grow your following.
+            p We’re all about women helping women. That’s why every member of The Fame Society is encouraged to repost other members’ Fame content: when her following grows, so does yours. Just starting out as an influencer? We’ll set you up with a next-level mentor to help you get to where you want to go.
 
-      .col-md-7.col-lg-offset-1.content-img
-        picture
-          source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
-          source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
-          img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
-            #{image_path(current_item_mob_image)} 991w,
-            #{image_path(current_item_image)} 992w"
+        .col-md-7.col-lg-offset-1.content-img
+          picture
+            source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
+            source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
+            img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
+              #{image_path(current_item_mob_image)} 991w,
+              #{image_path(current_item_image)} 992w"
 
-      .col-xs-12.hidden-md.hidden-lg
-        .copy-wrap
-          .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-            .heading-overlay GROWTH
+        .col-xs-12.hidden-md.hidden-lg
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
+              .heading-overlay GROWTH
 
-          h3 A network to <em>help</em> you grow your following.
-          p We’re all about women helping women. That’s why every member of The Fame Society is encouraged to repost other members’ Fame content: when her following grows, so does yours. Just starting out as an influencer? We’ll set you up with a next-level mentor to help you get to where you want to go.
+            h3 A network to <em>help</em> you grow your following.
+            p We’re all about women helping women. That’s why every member of The Fame Society is encouraged to repost other members’ Fame content: when her following grows, so does yours. Just starting out as an influencer? We’ll set you up with a next-level mentor to help you get to where you want to go.
 
-  - current_item_image = image_path("landingpages/fame-society/goals.jpg")
-  - current_item_mob_image = image_path("landingpages/fame-society/goals-mob.jpg")
-  section.section-box.container-fluid
-    .row.vertical-align-copy
-      .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-        h1.heading-overlay #GOALS
+    - current_item_image = image_path("landingpages/fame-society/goals.jpg")
+    - current_item_mob_image = image_path("landingpages/fame-society/goals-mob.jpg")
+    section.section-box
+      .row.vertical-align-copy
+        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
+          h1.heading-overlay #GOALS
 
-      .col-md-7.content-img
-        picture
-          source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
-          source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
-          img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
-            #{image_path(current_item_mob_image)} 991w,
-            #{image_path(current_item_image)} 992w"
+        .col-md-7.content-img
+          picture
+            source media="(max-width: 991px)" srcset="#{image_path(current_item_mob_image)}"
+            source media="(min-width: 992px)" srcset="#{image_path(current_item_image)}"
+            img src="#{image_path(current_item_image)}" class="img-responsive" srcset="
+              #{image_path(current_item_mob_image)} 991w,
+              #{image_path(current_item_image)} 992w"
 
-      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
-        .copy-wrap
-          .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-            .heading-overlay #GOALS
+        .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
+              .heading-overlay #GOALS
 
-          h3 Local meetups and <em>group</em> chats.
-          p Join The Fame Society group chat, where you’ll be connected to thousands of other influencers. Fame and Partners will set you up with Society members in your area, so you can collaborate to create amazing content together. We’ll also hook you up with online classes from pros in the know to help you reach your goals.
+            h3 Local meetups and <em>group</em> chats.
+            p Join The Fame Society group chat, where you’ll be connected to thousands of other influencers. Fame and Partners will set you up with Society members in your area, so you can collaborate to create amazing content together. We’ll also hook you up with online classes from pros in the know to help you reach your goals.
 
   .container
     section.section-box.section-apply-now.text-center
