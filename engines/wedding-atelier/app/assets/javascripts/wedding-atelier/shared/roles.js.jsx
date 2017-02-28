@@ -8,7 +8,7 @@ var Roles = React.createClass({
 
   getInitialState: function() {
     return {
-      roles: ['bridesmaid', 'maid of honor', 'mother of bride', 'bride']
+      roles: ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
     };
   },
 
@@ -33,8 +33,11 @@ var Roles = React.createClass({
         value: role
       };
 
+      var label = role[0].toUpperCase() + role.slice(1);
+
+
       return (
-        <option {...props}>{role}</option>
+        <option {...props}>{label}</option>
       );
     });
 
