@@ -26,11 +26,6 @@
     font-weight: bold;
   }
 
-  .mobile-safe-padding {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
   .diagonal-line {
     @include transform (rotate(45deg));
     border-top: 2px solid $c-neutral-black;
@@ -120,6 +115,11 @@
 
     .diagonal-line {
       margin-bottom: 55px;
+    }
+
+    .mobile-safe-padding {
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
   }
