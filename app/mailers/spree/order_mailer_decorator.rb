@@ -34,7 +34,7 @@ Spree::OrderMailer.class_eval do
         adjustments:                 order_presenter.build_adjustments,
         display_total:               order_presenter.display_total,
         auto_account:                user && user.automagically_registered?,
-        today:                       Date.today.strftime('%d.%m.%y'),
+        today:                       Time.zone.today.strftime('%d.%m.%y'),
         phone:                       order_presenter.phone,
         delivery_date:               order_presenter.projected_delivery_date,
         billing_address_attributes:  order_presenter.billing_address_attributes.to_h,

@@ -1,5 +1,4 @@
 FameAndPartners::Application.routes.draw do
-
   ############################
   # Devise Omniauth Workaround
   ############################
@@ -101,6 +100,9 @@ FameAndPartners::Application.routes.draw do
 
     # VIP landing page
     get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
+
+    # Thanks Bride landing page
+    get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
 
     ###########
     # Lookbooks
@@ -251,8 +253,8 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening-shop-cold-shoulder', :as => :evening_shop_cold_shoulder_page
     get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening-shop-plunging', :as => :evening_shop_plunging_page
     get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
-    get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page
-    get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page
+    get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
+    get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
 
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
@@ -506,14 +508,6 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  #################
-  # Mysterious URLs
-  #################
-
-  get '/undefined',    to: 'errors/mysterious_route#undefined'
-  get '/au/undefined', to: 'errors/mysterious_route#undefined'
-  get '/1000668',      to: 'errors/mysterious_route#undefined'
-
   #########
   # Widgets
   #########
@@ -627,6 +621,12 @@ FameAndPartners::Application.routes.draw do
   mount Revolution::Engine => '/'
 
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+end
 
-  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
+# NOTE: Alexey Bobyrev 14 Feb 2017
+# Method append used here to handle all request directly right after defined ones (including engines)
+FameAndPartners::Application.routes.append do
+  # NOTE: Alexey Bobyrev 14 Jan 2017
+  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
+  match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
