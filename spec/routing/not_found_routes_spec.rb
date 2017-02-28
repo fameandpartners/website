@@ -29,6 +29,12 @@ describe 'Not found requests', type: :request do
       expect(response.body).to match('Not Found')
       expect(response).to have_http_status(404)
     end
+
+    it 'with unescaped characters in path' do
+      get '/g)%7Dfunction'
+
+      expect(response).to have_http_status(404)
+    end
   end
 
 end

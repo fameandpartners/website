@@ -87,7 +87,7 @@ class SelectionOptions
 
     def extra_product_colors
       if extra_colors_available?
-        @extra_product_colors ||= (defined_custom_colors.presence || legacy_fallback_custom_colors)
+        @extra_product_colors ||= defined_custom_colors
       else
         []
       end
@@ -97,6 +97,8 @@ class SelectionOptions
       product.product_color_values.active.custom.map(&:option_value).compact.sort_by(&:presentation)
     end
 
+    # TODO Alexey Bobyrev 27 Feb 2017
+    # Remove this method as it's not used anymore
     private def legacy_fallback_custom_colors
       basic_product_color_ids = product_variants.map(&:color_id).uniq
 
