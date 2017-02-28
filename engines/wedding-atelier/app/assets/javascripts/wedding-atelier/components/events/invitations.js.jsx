@@ -46,6 +46,9 @@ var EventInvitations = React.createClass({
               document.getElementById('notification'));
         }
       });
+    }else{
+      ReactDOM.render(<Notification errors={["Email field can\'t be blank"]} />,
+          document.getElementById('notification'));
     }
   },
 
