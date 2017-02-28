@@ -397,6 +397,9 @@ FameAndPartners::Application.routes.draw do
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
     resource 'wedding-planning', as: 'wedding_planning', only: [:create]
 
+    get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
+    resource 'micro-influencer', as: 'micro_influencer', only: [:create]
+
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
       get 'success'
