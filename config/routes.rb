@@ -98,6 +98,9 @@ FameAndPartners::Application.routes.draw do
     # The Evening Shop landing page
     get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
 
+    # Thanks Bride landing page
+    get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
+
     ###########
     # Lookbooks
     ###########
