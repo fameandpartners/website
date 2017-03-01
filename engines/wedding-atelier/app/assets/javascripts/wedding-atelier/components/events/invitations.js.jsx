@@ -5,7 +5,7 @@ var EventInvitations = React.createClass({
     send_invite_path: React.PropTypes.string.isRequired,
     handleRemoveAssistant: React.PropTypes.func,
     current_user_id: React.PropTypes.number,
-    event_owner_id: React.PropTypes.number.isRequired,
+    event_owner_id: React.PropTypes.number.isRequired
   },
 
   getInitialState: function() {
@@ -30,22 +30,26 @@ var EventInvitations = React.createClass({
     var that = this;
     var email = that.refs.email_address.value;
     e.preventDefault();
-
-    $.ajax({
-      url: that.props.send_invite_path,
-      type: 'POST',
-      dataType: 'json',
-      data: {email_addresses: [email]},
-      success: function(data) {
-        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
-            document.getElementById('notification'));
-        that.setState({invitations: data.invitations});
-      },
-      error: function(error) {
-        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
-            document.getElementById('notification'));
-      }
-    });
+    if(email){
+      $.ajax({
+        url: that.props.send_invite_path,
+        type: 'POST',
+        dataType: 'json',
+        data: {email_addresses: [email]},
+        success: function(data) {
+          ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
+              document.getElementById('notification'));
+          that.setState({invitations: data.invitations});
+        },
+        error: function(error) {
+          ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
+              document.getElementById('notification'));
+        }
+      });
+    }else{
+      ReactDOM.render(<Notification errors={["Email field can\'t be blank"]} />,
+          document.getElementById('notification'));
+    }
   },
 
   handleRemoveBridesMaid: function(id, index, e){
