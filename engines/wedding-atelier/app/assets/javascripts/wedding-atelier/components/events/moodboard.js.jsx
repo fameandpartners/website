@@ -105,7 +105,7 @@ var MoodBoardEvent = React.createClass({
   setupChatChannel: function(){
     var that = this;
     var chatChannelName = that.props.channel_prefix + 'wedding-atelier-channel-' + that.props.event_id;
-    this.state.twilioClient.getChannelBySid(chatChannelName).then(function(channel){
+    this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(channel){
       that.setState({chatChannel: channel});
       channel.join().then(function() {
         console.log('Joined channel as ' + that.props.username);
@@ -135,7 +135,7 @@ var MoodBoardEvent = React.createClass({
   setupNotificationsChannel: function(){
     var that = this;
     var notificationsChannelName = this.props.channel_prefix + '-wedding-atelier-notifications-' + this.props.event_id;
-    this.state.twilioClient.getChannelBySid(notificationsChannelName).then(function(channelNotifications){
+    this.state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(channelNotifications){
       that.setState({channelNotifications: channelNotifications});
       that.state.channelNotifications.join().then(function(channel) {
         console.log('Joined notifications channel as ' + that.props.username);
