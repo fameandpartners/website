@@ -22,6 +22,10 @@ var MoodBoardEvent = React.createClass({
     wedding_name: React.PropTypes.string
   },
 
+  twilioCodes: {
+    CHANNEL_NOT_FOUND: 50300
+  },
+
   getInitialState: function () {
     return {
       twilioManager: null,
@@ -115,7 +119,7 @@ var MoodBoardEvent = React.createClass({
       });
 
     }, function(e){
-      if(e.body.code == 50300){
+      if(e.body.code == that.twilioCodes.CHANNEL_NOT_FOUND){
         that.state.twilioClient.createChannel({
           uniqueName: chatChannelName,
           friendlyName: that.props.wedding_name
