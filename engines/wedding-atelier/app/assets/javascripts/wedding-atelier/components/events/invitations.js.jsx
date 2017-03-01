@@ -5,7 +5,7 @@ var EventInvitations = React.createClass({
     send_invite_path: React.PropTypes.string.isRequired,
     handleRemoveAssistant: React.PropTypes.func,
     current_user_id: React.PropTypes.number,
-    event_owner_id: React.PropTypes.number.isRequired,
+    event_owner_id: React.PropTypes.number.isRequired
   },
 
   getInitialState: function() {
@@ -27,9 +27,19 @@ var EventInvitations = React.createClass({
   },
 
   handleSendInvite: function(e){
-    var that = this;
-    var email = that.refs.email_address.value;
+    var that = this,
+        emailField = that.refs.email_address,
+        email = emailField.value;
     e.preventDefault();
+    if(!emailField.checkValidity()) {
+      WeddingAtelierHelper.notify(["Invalid email format."]);
+      return false;
+    }
+
+    if(!email){
+      WeddingAtelierHelper.notify(["Email field can\'t be blank"]);
+      return false;
+    }
 
     $.ajax({
       url: that.props.send_invite_path,

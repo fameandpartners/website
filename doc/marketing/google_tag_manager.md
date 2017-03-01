@@ -2,8 +2,8 @@
 
 GTM is "a tool to manage marketing trackers and analytics without rebuilding your application".
 In Fame's case, without the need of redeploying the application.
-
-To help you better understand what is GTM and its internal workings, please refer to:
+ 
+To help you better understand what is GTM and its internal workings, please refer to:  
 
 - Original Docs: https://developers.google.com/tag-manager
 - Simo Ahava's Blog (GTM and dataLayer tips): https://www.simoahava.com/category/gtm-tips/
@@ -30,7 +30,7 @@ dataLayer.push({ 'event': 'event_name', 'user': { name: 'John Doe', email: 'john
 ```
 
 Keep in mind: the `dataLayer` object is loaded on page load time and variables are passed through further events (as DOM ready, window load, etc), as seem below:
-
+ 
 ![GTM Debug](gtm-debug.png)
 
 If you want to trigger several tags on page load time, you should render the `dataLayer` populated with the desired JSON from the server side.
@@ -49,10 +49,10 @@ The container allows any template rendering a JSON with ease (e.g.: `dataLayer.p
 It is safe to assume the container will never raise errors, since it always rescues exceptions into its container, making it possible to be present
 on all website pages without raising 500 errors.
 
-## The GTM Container Presenter
-
+## The GTM Container Presenter 
+ 
 A GTM container acts as an array, making it possible having multiple presenters configured at its initialization or appended afterwards.
-
+ 
 - Initialization
 
 ```ruby
@@ -75,7 +75,7 @@ As a base premise, a GTM presenter object will need to:
 - Implement the `#key` and `#body` instance methods
     - `#key` method: it will render the JSON object key
     - `#body` method: will render the JSON object body
-
+    
 Example:
 
 ```ruby

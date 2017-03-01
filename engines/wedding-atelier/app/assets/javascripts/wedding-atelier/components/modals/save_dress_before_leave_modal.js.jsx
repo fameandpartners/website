@@ -22,7 +22,7 @@ var SaveDressBeforeLeaveModal = React.createClass({
             <div className="modal-content">
               <div className="modal-body">
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
-                <div className="modal-body-container text-center">
+                <div className="modal-body-container center-vertical text-center">
                   <h1>
                     <em>Would you</em> like to save this dress customization to the wedding moodboard?
                   </h1>
