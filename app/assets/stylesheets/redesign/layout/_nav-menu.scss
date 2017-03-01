@@ -233,16 +233,15 @@
     list-style: none;
   }
 
-  .title, .view-all {
-    text-transform: uppercase;
-    font-weight: 600;
-  }
   .title {
+    text-transform: uppercase;
     padding-bottom: 5px;
     font-size: 1.4rem;
     color: $c-neutral-12;
+    font-weight: 600;
   }
   .view-all {
+    font-family: $font-heading;
     font-size: 1.3rem;
   }
 

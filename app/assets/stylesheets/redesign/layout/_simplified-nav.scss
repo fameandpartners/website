@@ -11,7 +11,7 @@
   }
 
   .nav-menu-buffer {
-    padding: 30px 60px;
+    padding: 0px 60px 30px;
   }
 
   .center-wrapper {
@@ -40,6 +40,11 @@
     opacity: 1;
   }
 
+  .menu-dresses {
+    .nav-menu-contents {
+      max-width: 1200px;
+    }
+  }
   .menu-wedding {
     width: 770px;
   }
@@ -49,8 +54,14 @@
 
   .normal-item a {
     cursor: pointer;
+    display: inline;
   }
-}
 
-.simplified-nav {
+  // Overwrites
+  &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+    margin: 0 26px;
+  }
+  .col .cta-link {
+    border-bottom: 1px solid $c-neutral-6;
+  }
 }
