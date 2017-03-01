@@ -13,9 +13,13 @@ module Forms
     property :social_handles_4, virtual: true
 
     validates :full_name,
-              :email,
               :social_handles_0,
               presence: true
+
+    validates :email,
+              presence: true,
+              format:   { with: /\w+\@\w+\.\w+/ },
+              length:   { minimum: 5, maximum: 100 }
 
   end
 end
