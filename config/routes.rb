@@ -253,6 +253,12 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
     get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
 
+    # Evening Category Page
+    get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
+
+    # Casual Category Page
+    get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
