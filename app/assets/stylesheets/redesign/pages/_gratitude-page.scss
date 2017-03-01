@@ -55,9 +55,17 @@
       width: 80%;
     }
 
-    .intro-wrapper .gratitudePage__copy {
-      padding-left: 55px;
-      padding-right: 55px;
+    .intro-wrapper {
+
+      .container-fluid {
+        padding-left: 85px;
+      }
+
+      .gratitudePage__copy {
+        padding-left: 25px;
+        padding-right: 55px;
+      }
+
     }
 
     .social-content-left {
