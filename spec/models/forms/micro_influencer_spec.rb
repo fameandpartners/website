@@ -9,7 +9,7 @@ RSpec.describe Forms::MicroInfluencer, type: :form do
     describe 'name presence' do
       it do
         form.validate({})
-        expect(errors).to include({ name: ["can't be blank"] })
+        expect(errors).to include({ full_name: ["can't be blank"] })
       end
     end
 
