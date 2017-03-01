@@ -19,35 +19,35 @@
 
                       .row
                         form#microinfluencer_form.form.clearfix
-                          input name="session_type" value="Email" hidden="true"
-                            .row
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase FULL Name<span class="required">*</span>
-                                input data-auto-focus= required="true" type="text" name="name" class="form-control form-control-md" placeholder="Full Name"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Email<span class="required">*</span>
-                                input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
-                            .row
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase About You (25 words or less)
-                                textarea name="about" rows=5 cols=10  class="form-control form-control-md"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Blog Url
-                                input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
-                                label.text-uppercase Mailing Address
-                                input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
-                            .row
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Social Handles<span class="required">*</span> (at least one)
-                                input data-auto-focus= required="true" type="text" name="social_handles" placeholder="Social Handles" class="form-control form-control-md"
-                              .col-md-6.col-xs-12.form-group
-                                label.text-uppercase Dress Size
-                                input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
-                            .row
-                              .col-md-6.col-xs-12
-                                p + Add another Handle
-                              .col-md-6.col-xs-12.text-center
-                                button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
+                          .row
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase FULL Name<span class="required">*</span>
+                              input data-auto-focus= required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Email<span class="required">*</span>
+                              input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
+                          .row
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase About You <span class="note">(25 words or less)</span>
+                              textarea name="about" rows=5 cols=10  class="form-control form-control-md"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Blog Url
+                              input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
+                              label.text-uppercase Mailing Address
+                              input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
+                          .row
+                            .col-md-6.col-xs-12.form-group.form-social-group
+                              label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
+                              input data-auto-focus= required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                            .col-md-6.col-xs-12.form-group
+                              label.text-uppercase Dress Size
+                              input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
+                          .row
+                            .col-md-6.col-xs-12
+                              a class="js-add-social-handler"
+                                | + Add another Handle
+                            .col-md-6.col-xs-12.text-center
+                              button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
 
                 .js-form-submitted-success.hidden
                   .row
@@ -136,50 +136,65 @@
                 span.copy-highlight Join NOW
 
 javascript:
-  $(function() {
+  $(function () {
     'use strict';
     var INPUT_ERROR_CLASS = 'input-error';
     var $microInfluencerForm = $('#microinfluencer_form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
+    var $addSocialHandlers = $('.js-add-social-handler');
 
-    function submitFormValues(formVals){
+    function submitFormValues(formVals) {
       return $.ajax({
         type: 'POST',
-        url: '/wedding-planning',
-        contentType:'application/json',
-        dataType:'json',
+        url: '/micro-influencer',
+        contentType: 'application/json',
+        dataType: 'json',
         data: JSON.stringify(formVals)
       });
     }
 
-    $microInfluencerModalTrigger.click(function(){
+    $microInfluencerModalTrigger.click(function () {
       $('.js-modal.get-the-look-modal').modal('show');
       $microInfluencerForm.find('input[data-auto-focus]').focus();
     });
 
+    $addSocialHandlers.click(function () {
+      var countSocialInputs = $('.social_handler_inputs').size();
+      if (countSocialInputs < 5) {
+        $('<input>').attr({
+          required: 'true',
+          type: 'text',
+          placeholder: 'Social Handles',
+          class: 'form-control form-control-md social_handler_inputs',
+          name: 'social_handles_' + countSocialInputs
+        }).appendTo('.form-social-group');
+      }
+      return false;
+    });
+
     // FOCUS Event handler
-    $microInfluencerForm.on('focusin', 'input', function(event){
+    $microInfluencerForm.on('focusin', 'input', function (event) {
       $(event.target).removeClass(INPUT_ERROR_CLASS);
     });
 
     // SUBMIT Event Handler
-    $microInfluencerForm.on('submit', function(evt){
+    $microInfluencerForm.on('submit', function (evt) {
       evt.preventDefault();
       var formVals = {};
 
-      $.each($microInfluencerForm.serializeArray(), function(i, field) {
+      $.each($microInfluencerForm.serializeArray(), function (i, field) {
         formVals[field.name] = field.value; // Regular Inputs
       });
 
       submitFormValues(formVals)
-              .done(function(){
+              .done(function () {
                 $('.js-form-pending').addClass('hidden');
                 $('.js-form-submitted-success').removeClass('hidden');
               })
-              .error(function(xhr){
+              .error(function (xhr) {
                 var errors = JSON.parse(xhr.responseText).errors;
                 var keys = Object.keys(errors);
-                keys.forEach(function(key){
+                keys.forEach(function (key) {
                   $microInfluencerForm.find('input[name="' + key + '"]')
                           .first()
                           .addClass(INPUT_ERROR_CLASS);
