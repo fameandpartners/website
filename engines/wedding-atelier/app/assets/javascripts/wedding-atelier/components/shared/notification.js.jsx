@@ -45,15 +45,19 @@ var Notification = React.createClass({
     var show = Array.isArray(this.props.errors) && this.props.errors.length > 0 || Object.keys(this.props.errors).length > 0;
     if(this.state.show && show) {
       window.setTimeout(function () {
-        this.setState({ show: false });
-        this.delayedUnmount();
+        if(this.isMounted()){
+          this.setState({ show: false });
+          this.delayedUnmount();
+        }
       }.bind(this), this.state.timeOut);
     }
   },
 
   close: function () {
-    this.setState({show: false});
-    this.delayedUnmount();
+    if(this.isMounted()){
+      this.setState({ show: false });
+      this.delayedUnmount();
+    }
   },
 
   renderErrors: function () {

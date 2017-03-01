@@ -11,3 +11,8 @@ WeddingAtelierHelper.chatTimestamp = function(time){
       sameElse: 'MM/DD/YYYY, hh:mmA'
     });
 };
+
+WeddingAtelierHelper.notify = function(errors){
+  var component = React.createElement(Notification, { errors: errors });
+  ReactDOM.render(component, document.getElementById('notification'));
+};

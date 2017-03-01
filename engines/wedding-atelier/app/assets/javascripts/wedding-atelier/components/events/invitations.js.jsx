@@ -27,29 +27,35 @@ var EventInvitations = React.createClass({
   },
 
   handleSendInvite: function(e){
-    var that = this;
-    var email = that.refs.email_address.value;
+    var that = this,
+        emailField = that.refs.email_address,
+        email = emailField.value;
     e.preventDefault();
-    if(email){
-      $.ajax({
-        url: that.props.send_invite_path,
-        type: 'POST',
-        dataType: 'json',
-        data: {email_addresses: [email]},
-        success: function(data) {
-          ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
-              document.getElementById('notification'));
-          that.setState({invitations: data.invitations});
-        },
-        error: function(error) {
-          ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
-              document.getElementById('notification'));
-        }
-      });
-    }else{
-      ReactDOM.render(<Notification errors={["Email field can\'t be blank"]} />,
-          document.getElementById('notification'));
+    if(!emailField.checkValidity()) {
+      WeddingAtelierHelper.notify(["Invalid email format."]);
+      return false;
     }
+
+    if(!email){
+      WeddingAtelierHelper.notify(["Email field can\'t be blank"]);
+      return false;
+    }
+
+    $.ajax({
+      url: that.props.send_invite_path,
+      type: 'POST',
+      dataType: 'json',
+      data: {email_addresses: [email]},
+      success: function(data) {
+        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
+            document.getElementById('notification'));
+        that.setState({invitations: data.invitations});
+      },
+      error: function(error) {
+        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
+            document.getElementById('notification'));
+      }
+    });
   },
 
   handleRemoveBridesMaid: function(id, index, e){
