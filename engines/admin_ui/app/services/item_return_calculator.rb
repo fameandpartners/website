@@ -28,6 +28,21 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
 
+  def advance_refund(event)
+    refund_method_class = Spree::Gateway.const_get(event['data']['refund_method'], false)
+    refund_method = refund_method_class.where(active: true).first
+
+    response = refund_method.refund(event.refund_amount.to_i, @item_return.order_payment_ref)
+
+    if response.success?
+      @item_return.refund_status = 'Complete'
+      @item_return.refund_method = event.refund_method
+      @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
+      @item_return.refund_ref    = response.params['response']['token']
+      @item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
+    end
+  end
+
   def advance_record_refund(event)
     @item_return.refund_status = 'Complete'
     @item_return.refund_method = event.refund_method
