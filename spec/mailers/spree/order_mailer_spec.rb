@@ -32,7 +32,8 @@ module Spree
         shipping_address_attributes: presenter.shipping_address_attributes.to_h,
         billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
         shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
-        cny_delivery_delay:          false
+        cny_delivery_delay:          false,
+        order_delivery_period:       '7 - 10 business days. If you have ordered a customized dress you will receive this within 10 - 14 business days.'
       }
     }
 
