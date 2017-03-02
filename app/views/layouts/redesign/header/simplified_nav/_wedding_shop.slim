@@ -1,0 +1,24 @@
+- cache ['views/layouts/redesign/header/simplified_nav/_wedding_shop'] do
+
+  .col-md-3.dresses-shop-by
+    ul
+      li.title Featured
+      = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
+
+  .col-md-3.dresses-shop-by
+    ul
+      li.title Services
+      = render partial: 'layouts/redesign/header/simplified_nav/wedding_services'
+
+  .col-md-6
+    .wedding-planner.nav-item
+      = link_to '/wedding-atelier'
+        = image_tag 'mega-menu/fame-weddings/wedding-atelier.jpg', class: 'img-responsive', alt: ''
+
+        .content-wrap
+          .container-cta
+            .row-cta
+              .cta-wrap
+                span.cta-copy.cta-link-white-bg
+                  span.cta-link Custom
+                  span.copy-highlight  BRIDESMAID DRESSES

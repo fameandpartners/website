@@ -202,6 +202,18 @@
 
 }
 
+.background--black {
+  background-color: $c-neutral-black;
+}
+
+.background--white {
+  background-color: $c-neutral-white;
+}
+
+.margin--center {
+  margin: 0 auto;
+}
+
 .thin-line {
 
   &--bottom::after {
@@ -316,5 +328,4 @@ keyframes
   100% {
     opacity: 1;
   }
-
 }

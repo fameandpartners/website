@@ -13,11 +13,8 @@
 
 header {
 
-  .nav-menu:first-child{
+  .fixed-header{
     border: none;
-    .nav-menu-container{
-      background-color: white;
-    }
   }
 
   .navbar {
@@ -463,7 +460,7 @@ ul.secondary.pull-right {
 #sideMenu {
   overflow-x: hidden;
   display: block;
-  height: 100%;
+  height: inherit;
   overflow: auto;
   position: fixed;
   font-size: 15px;
@@ -549,7 +546,6 @@ ul.secondary.pull-right {
     }
   }
   nav{
-    height:3500px;
     ul{
       width:100%;
       li{
@@ -623,8 +619,7 @@ ul.secondary.pull-right {
   }
 
   a:not(.btn) {
-    color:black;
-    font-weight: 500;
+    color: $c-neutral-12;
   }
 
   .arrow{
@@ -1008,6 +1003,9 @@ ul.secondary.pull-right {
 
   }
 
+  #dresses-menu {
+    height: auto;
+  }
 }
 
 .mobileAnimation{
@@ -1063,5 +1061,4 @@ ul.secondary.pull-right {
     }
 
   }
-
 }
