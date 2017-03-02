@@ -118,9 +118,8 @@ var SizeSelector = React.createClass({
             value: size.name,
             onChange: that.sizeSelectedHandle.bind(null, size)
           };
-
       if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)) {
-        inputProps.defaultChecked = true;
+        inputProps.checked = true;
       }
 
       return (
