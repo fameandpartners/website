@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Spree::Order, :type => :model do
-  subject(:order)     { Spree::Order.new }
+  subject(:order)     { FactoryGirl.create(:complete_order_with_items) }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
 
 

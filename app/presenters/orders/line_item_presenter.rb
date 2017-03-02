@@ -38,7 +38,7 @@ module Orders
                    :quantity
 
     def delivery_period
-      @item.product.delivery_period
+      @item.delivery_period
     end
 
     def shipment
