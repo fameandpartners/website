@@ -20,6 +20,7 @@
       color: $c-neutral-black;
       cursor: pointer;
       position: relative;
+      letter-spacing: 0.05rem;
 
       &:not(.logo) {
         margin: 0 12px;

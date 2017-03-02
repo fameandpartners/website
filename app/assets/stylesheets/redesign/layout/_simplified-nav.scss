@@ -12,8 +12,13 @@
     .flex1 { flex: 1 }
   }
 
+  .copy-highlight {
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+  }
+
   .picture-col {
-    width: 350px;
+    width: 310px;
     margin-left: 15px;
   }
 
@@ -44,8 +49,13 @@
     position: relative;
     padding: 0px;
 
+    .title {
+      font-size: 1.2rem;
+      letter-spacing: 0.05rem;
+    }
     .normal-item {
       font-size: 1.3rem;
+      line-spacing: 2.6rem;
     }
   }
 
@@ -64,10 +74,10 @@
   }
 
   .menu-dresses .nav-menu-contents {
-    max-width: 1280px;
+    max-width: 1040px;
   }
   .menu-wedding .nav-menu-contents{
-    max-width: 830px;
+    max-width: 740px;
   }
   .menu-wrap {
     width: 990px;
