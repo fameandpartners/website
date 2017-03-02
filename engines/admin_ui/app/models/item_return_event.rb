@@ -94,6 +94,14 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :comment, presence: true
   end
 
+  event_type :refund do
+    attributes :user, :refund_method, :refund_amount, :comment
+
+    validates :user, presence: true
+    validates :refund_method, presence: true
+    validates :refund_amount, presence: true
+  end
+
   event_type :record_refund do
     attributes :user, :refund_method, :refund_amount,
                :refund_reference, :refunded_at, :comment
