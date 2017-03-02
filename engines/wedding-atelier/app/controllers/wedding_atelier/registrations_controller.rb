@@ -117,8 +117,8 @@ module WeddingAtelier
       @roles = {
         'Bride' => 'bride',
         'Bridesmaid' => 'bridesmaid',
-        'Maid of Honor' => 'maid of honor',
-        'Mother of Bride' => 'mother of bride'
+        'Maid of honor' => 'maid of honor',
+        'Mother of bride' => 'mother of bride'
       }
       # if current_spree_user.wedding_atelier_signup_step != 'size'
       #   @event = current_spree_user.events.last || current_spree_user.events.new
