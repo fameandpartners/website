@@ -30,7 +30,7 @@ var CustomizationsMenu = React.createClass({
     }
 
     return (
-      <li key={index} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
+      <li key={index} id={customizationItem} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
         <div className="col-sm-6 customization-column customization-box">
           <a href="#" className="customization-label">
             <i className={className}></i>

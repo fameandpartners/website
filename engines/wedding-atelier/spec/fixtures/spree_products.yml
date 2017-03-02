@@ -1,0 +1,148 @@
+---
+spree_products_0:
+  id: '681'
+  name: Connie
+  description: "<p>See you at the dance hall.</p>\r\n\r\n<p>Connie is a heavyweight
+    georgette dress with a sequinned neck band, cross-over waistband and back straps.
+    Fitted from bodice through to waist, the dress features several cut-out details
+    and has princess panelling at the skirt for more leg room.</p>"
+  available_on: '2016-03-21 07:00:00'
+  permalink: connie
+  meta_description: ''
+  count_on_hand: '120'
+  created_at: '2015-10-05 05:56:20.17717'
+  updated_at: '2016-11-16 15:14:14.45811'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: f
+  factory_id: '2'
+  size_chart: '2016'
+spree_products_1:
+  id: '687'
+  name: Tri-Cup
+  description: The Tri-Cup is a statement-making bridesmaid look that gets its sexy,
+    structured feel from wide under-bust panelling. Its curve-hugging (or curve-creating,
+    depending on your natural shape) femininity makes it worthy of a walk down the
+    aisle.\nThe Tri-Cup an invisible zipper at the back and is fully customizable.
+  permalink: tri-cup
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:10.965587'
+  updated_at: '2017-02-17 22:50:11.918515'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_2:
+  id: '688'
+  name: Set
+  description: An on-trend, fashion-forward option for the wedding day, The Set features
+    a fitted crop top and a high waisted, full skirt; breathtaking together and beautiful
+    apart.\nThe Set features covered buttons with loops and an invisible zipper on
+    the skirt, and is fully customizable.
+  permalink: set
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:12.057218'
+  updated_at: '2017-02-17 22:50:13.010002'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_3:
+  id: '689'
+  name: Multi Way
+  description: You can stop Googling “versatile bridesmaid dress” now–The Multiway
+    is here. Flowing strips of soft fabric and open loops at the back waistline mean
+    you can twist, cross, and tie the straps any way your heart (or–let’s be honest–your
+    bride’s heart) desires.\nThe Multiway features an invisible zipper at the back
+    and is fully customizable.
+  permalink: multi-way
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:13.147868'
+  updated_at: '2017-02-17 22:50:14.11442'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_4:
+  id: '682'
+  name: Column
+  description: If your bride’s buzzwords are “sophisticated,” “elevated,” and “elegant,”
+    The Column is the dress for you. Internal boning and a defined waistline craft
+    a classic silhouette, while clean lines make this dress an architectural dream.\nThe
+    Column features an invisible zipper at the back and is fully customizable.
+  permalink: column
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:04.778121'
+  updated_at: '2017-02-17 22:50:06.231429'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_5:
+  id: '683'
+  name: Fit and Flare
+  description: The Fit and Flare is the universally flattering bridesmaid gown you
+    and your ladies have been looking for. The fitted bodice and full, flared skirt
+    evoke the sweeping romance of an Old Hollywood film (minus the sexism).\nThe Fit
+    and Flare features an invisible zipper at the side and is fully customizable.
+  permalink: fit-and-flare
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:06.368788'
+  updated_at: '2017-02-17 22:50:07.367962'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_6:
+  id: '684'
+  name: Shift
+  description: Those who favor minimalism will fall hard for The Shift. Form-fitting
+    but not showy, modern but not basic, the foundation of The Shift can be transformed
+    from high fashion to classically romantic with just a few tweaks.\nThe Shift features
+    an invisible zipper at the back and is fully customizable.
+  permalink: shift
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:07.505062'
+  updated_at: '2017-02-17 22:50:08.483008'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_7:
+  id: '685'
+  name: Slip
+  description: The Slip was designed to make your heart flutter. Its body-skimming
+    silhouette falls just-so, ending in a subtle cascade of flowing fabric–basically,
+    The it’s the epitome of easy, effortless elegance.\nThe Slip features an invisible
+    zipper at the side and is fully customizable.
+  permalink: slip
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:08.620325'
+  updated_at: '2017-02-17 22:50:09.710787'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2
+spree_products_8:
+  id: '686'
+  name: Wrap
+  description: 'Trust us: everyone looks good in The Wrap. An adjustable tie closure
+    at the waist (no need for pre-wedding diets!) makes this a timeless look that
+    celebrates any body type.'
+  permalink: wrap
+  count_on_hand: '10'
+  created_at: '2017-02-17 22:50:09.851943'
+  updated_at: '2017-02-17 22:50:10.824569'
+  on_demand: t
+  featured: f
+  position: '0'
+  hidden: t
+  size_chart: 2016_v2

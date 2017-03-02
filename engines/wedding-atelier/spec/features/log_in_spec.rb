@@ -10,12 +10,7 @@ describe 'auth process', type: :feature, js: true do
       context 'when profile is completed' do
         let!(:completed_user) { create(:spree_user, wedding_atelier_signup_step: 'completed', skip_welcome_email: true) }
         it 'authenticates to wedding atelier' do
-          visit '/wedding-atelier/sign_in'
-          within('.email-signup') do
-            fill_in 'spree_user_email', with: completed_user.email
-            fill_in 'spree_user_password', with: completed_user.password
-          end
-          click_button 'Log in'
+          sign_in_with(completed_user.email, completed_user.password)
           expect(page).not_to have_content 'Invalid email or password.'
           expect(page.current_path).to eq '/wedding-atelier/events'
         end
@@ -23,12 +18,7 @@ describe 'auth process', type: :feature, js: true do
 
       context 'when profile is not completed' do
         it 'authenticates to wedding atelier' do
-          visit '/wedding-atelier/sign_in'
-          within('.email-signup') do
-            fill_in 'spree_user_email', with: user.email
-            fill_in 'spree_user_password', with: user.password
-          end
-          click_button 'Log in'
+          sign_in_with(user.email, user.password)
           expect(page).not_to have_content 'Invalid email or password.'
           expect(page.current_path).to eq '/wedding-atelier/signup/size'
         end
@@ -37,12 +27,7 @@ describe 'auth process', type: :feature, js: true do
 
     context 'with invalid credentials' do
       it 'renders error' do
-        visit '/wedding-atelier/sign_in'
-        within('.email-signup') do
-          fill_in 'spree_user_email', with: user.email
-          fill_in 'spree_user_password', with: 'invalid_password'
-        end
-        click_button 'Log in'
+        sign_in_with(user.email, 'invalid_password')
         expect(page).to have_content 'Invalid email or password.'
       end
     end

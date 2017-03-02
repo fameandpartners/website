@@ -1,0 +1,841 @@
+---
+product_color_values_0:
+  id: '1197'
+  product_id: '681'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_1:
+  id: '10313'
+  product_id: '681'
+  option_value_id: '89'
+  active: t
+  custom: t
+product_color_values_2:
+  id: '10314'
+  product_id: '681'
+  option_value_id: '26'
+  active: t
+  custom: t
+product_color_values_3:
+  id: '10315'
+  product_id: '681'
+  option_value_id: '73'
+  active: t
+  custom: t
+product_color_values_4:
+  id: '10316'
+  product_id: '681'
+  option_value_id: '65'
+  active: t
+  custom: t
+product_color_values_5:
+  id: '10317'
+  product_id: '681'
+  option_value_id: '203'
+  active: t
+  custom: t
+product_color_values_6:
+  id: '10318'
+  product_id: '681'
+  option_value_id: '70'
+  active: t
+  custom: t
+product_color_values_7:
+  id: '10319'
+  product_id: '681'
+  option_value_id: '79'
+  active: t
+  custom: t
+product_color_values_8:
+  id: '10320'
+  product_id: '681'
+  option_value_id: '179'
+  active: t
+  custom: t
+product_color_values_9:
+  id: '10321'
+  product_id: '681'
+  option_value_id: '158'
+  active: t
+  custom: t
+product_color_values_10:
+  id: '10322'
+  product_id: '681'
+  option_value_id: '42'
+  active: t
+  custom: t
+product_color_values_11:
+  id: '10323'
+  product_id: '681'
+  option_value_id: '38'
+  active: t
+  custom: t
+product_color_values_12:
+  id: '10324'
+  product_id: '682'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_13:
+  id: '10325'
+  product_id: '682'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_14:
+  id: '10326'
+  product_id: '682'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_15:
+  id: '10327'
+  product_id: '682'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_16:
+  id: '10328'
+  product_id: '682'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_17:
+  id: '10329'
+  product_id: '682'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_18:
+  id: '10330'
+  product_id: '682'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_19:
+  id: '10331'
+  product_id: '682'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_20:
+  id: '10332'
+  product_id: '682'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_21:
+  id: '10333'
+  product_id: '682'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_22:
+  id: '10334'
+  product_id: '682'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_23:
+  id: '10335'
+  product_id: '682'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_24:
+  id: '10336'
+  product_id: '682'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_25:
+  id: '10337'
+  product_id: '682'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_26:
+  id: '10338'
+  product_id: '682'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_27:
+  id: '10339'
+  product_id: '682'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_28:
+  id: '10340'
+  product_id: '683'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_29:
+  id: '10341'
+  product_id: '683'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_30:
+  id: '10342'
+  product_id: '683'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_31:
+  id: '10343'
+  product_id: '683'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_32:
+  id: '10344'
+  product_id: '683'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_33:
+  id: '10345'
+  product_id: '683'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_34:
+  id: '10346'
+  product_id: '683'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_35:
+  id: '10347'
+  product_id: '683'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_36:
+  id: '10348'
+  product_id: '683'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_37:
+  id: '10349'
+  product_id: '683'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_38:
+  id: '10350'
+  product_id: '683'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_39:
+  id: '10351'
+  product_id: '683'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_40:
+  id: '10352'
+  product_id: '683'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_41:
+  id: '10353'
+  product_id: '683'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_42:
+  id: '10354'
+  product_id: '683'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_43:
+  id: '10355'
+  product_id: '683'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_44:
+  id: '10356'
+  product_id: '684'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_45:
+  id: '10357'
+  product_id: '684'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_46:
+  id: '10358'
+  product_id: '684'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_47:
+  id: '10359'
+  product_id: '684'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_48:
+  id: '10360'
+  product_id: '684'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_49:
+  id: '10361'
+  product_id: '684'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_50:
+  id: '10362'
+  product_id: '684'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_51:
+  id: '10363'
+  product_id: '684'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_52:
+  id: '10364'
+  product_id: '684'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_53:
+  id: '10365'
+  product_id: '684'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_54:
+  id: '10366'
+  product_id: '684'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_55:
+  id: '10367'
+  product_id: '684'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_56:
+  id: '10368'
+  product_id: '684'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_57:
+  id: '10369'
+  product_id: '684'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_58:
+  id: '10370'
+  product_id: '684'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_59:
+  id: '10371'
+  product_id: '684'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_60:
+  id: '10372'
+  product_id: '685'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_61:
+  id: '10373'
+  product_id: '685'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_62:
+  id: '10374'
+  product_id: '685'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_63:
+  id: '10375'
+  product_id: '685'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_64:
+  id: '10376'
+  product_id: '685'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_65:
+  id: '10377'
+  product_id: '685'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_66:
+  id: '10378'
+  product_id: '685'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_67:
+  id: '10379'
+  product_id: '685'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_68:
+  id: '10380'
+  product_id: '685'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_69:
+  id: '10381'
+  product_id: '685'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_70:
+  id: '10382'
+  product_id: '685'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_71:
+  id: '10383'
+  product_id: '685'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_72:
+  id: '10384'
+  product_id: '685'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_73:
+  id: '10385'
+  product_id: '685'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_74:
+  id: '10386'
+  product_id: '685'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_75:
+  id: '10387'
+  product_id: '685'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_76:
+  id: '10388'
+  product_id: '686'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_77:
+  id: '10389'
+  product_id: '686'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_78:
+  id: '10390'
+  product_id: '686'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_79:
+  id: '10391'
+  product_id: '686'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_80:
+  id: '10392'
+  product_id: '686'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_81:
+  id: '10393'
+  product_id: '686'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_82:
+  id: '10394'
+  product_id: '686'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_83:
+  id: '10395'
+  product_id: '686'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_84:
+  id: '10396'
+  product_id: '686'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_85:
+  id: '10397'
+  product_id: '686'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_86:
+  id: '10398'
+  product_id: '686'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_87:
+  id: '10399'
+  product_id: '686'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_88:
+  id: '10400'
+  product_id: '686'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_89:
+  id: '10401'
+  product_id: '686'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_90:
+  id: '10402'
+  product_id: '686'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_91:
+  id: '10403'
+  product_id: '686'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_92:
+  id: '10404'
+  product_id: '687'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_93:
+  id: '10405'
+  product_id: '687'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_94:
+  id: '10406'
+  product_id: '687'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_95:
+  id: '10407'
+  product_id: '687'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_96:
+  id: '10408'
+  product_id: '687'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_97:
+  id: '10409'
+  product_id: '687'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_98:
+  id: '10410'
+  product_id: '687'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_99:
+  id: '10411'
+  product_id: '687'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_100:
+  id: '10412'
+  product_id: '687'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_101:
+  id: '10413'
+  product_id: '687'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_102:
+  id: '10414'
+  product_id: '687'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_103:
+  id: '10415'
+  product_id: '687'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_104:
+  id: '10416'
+  product_id: '687'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_105:
+  id: '10417'
+  product_id: '687'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_106:
+  id: '10418'
+  product_id: '687'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_107:
+  id: '10419'
+  product_id: '687'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_108:
+  id: '10420'
+  product_id: '688'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_109:
+  id: '10421'
+  product_id: '688'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_110:
+  id: '10422'
+  product_id: '688'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_111:
+  id: '10423'
+  product_id: '688'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_112:
+  id: '10424'
+  product_id: '688'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_113:
+  id: '10425'
+  product_id: '688'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_114:
+  id: '10426'
+  product_id: '688'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_115:
+  id: '10427'
+  product_id: '688'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_116:
+  id: '10428'
+  product_id: '688'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_117:
+  id: '10429'
+  product_id: '688'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_118:
+  id: '10430'
+  product_id: '688'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_119:
+  id: '10431'
+  product_id: '688'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_120:
+  id: '10432'
+  product_id: '688'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_121:
+  id: '10433'
+  product_id: '688'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_122:
+  id: '10434'
+  product_id: '688'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_123:
+  id: '10435'
+  product_id: '688'
+  option_value_id: '179'
+  active: t
+  custom: f
+product_color_values_124:
+  id: '10436'
+  product_id: '689'
+  option_value_id: '82'
+  active: t
+  custom: f
+product_color_values_125:
+  id: '10437'
+  product_id: '689'
+  option_value_id: '70'
+  active: t
+  custom: f
+product_color_values_126:
+  id: '10438'
+  product_id: '689'
+  option_value_id: '25'
+  active: t
+  custom: f
+product_color_values_127:
+  id: '10439'
+  product_id: '689'
+  option_value_id: '164'
+  active: t
+  custom: f
+product_color_values_128:
+  id: '10440'
+  product_id: '689'
+  option_value_id: '89'
+  active: t
+  custom: f
+product_color_values_129:
+  id: '10441'
+  product_id: '689'
+  option_value_id: '26'
+  active: t
+  custom: f
+product_color_values_130:
+  id: '10442'
+  product_id: '689'
+  option_value_id: '49'
+  active: t
+  custom: f
+product_color_values_131:
+  id: '10443'
+  product_id: '689'
+  option_value_id: '39'
+  active: t
+  custom: f
+product_color_values_132:
+  id: '10444'
+  product_id: '689'
+  option_value_id: '383'
+  active: t
+  custom: f
+product_color_values_133:
+  id: '10445'
+  product_id: '689'
+  option_value_id: '57'
+  active: t
+  custom: f
+product_color_values_134:
+  id: '10446'
+  product_id: '689'
+  option_value_id: '158'
+  active: t
+  custom: f
+product_color_values_135:
+  id: '10447'
+  product_id: '689'
+  option_value_id: '67'
+  active: t
+  custom: f
+product_color_values_136:
+  id: '10448'
+  product_id: '689'
+  option_value_id: '79'
+  active: t
+  custom: f
+product_color_values_137:
+  id: '10449'
+  product_id: '689'
+  option_value_id: '384'
+  active: t
+  custom: f
+product_color_values_138:
+  id: '10450'
+  product_id: '689'
+  option_value_id: '55'
+  active: t
+  custom: f
+product_color_values_139:
+  id: '10451'
+  product_id: '689'
+  option_value_id: '179'
+  active: t
+  custom: f

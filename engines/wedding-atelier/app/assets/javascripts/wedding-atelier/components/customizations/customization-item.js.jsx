@@ -58,7 +58,7 @@ var CustomizationItem = React.createClass({
 
     var presentation = (this.props.type === 'silhouette' ? 'The ' : '') + this.props.option.presentation;
 
-    return (<div onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+    return (<div id={this.props.option.name} onClick={this.clickCustomizationHandle} className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
         <div className={optionItemClasses}>
           {removeButton}
           <img src={this.imagePath()} />

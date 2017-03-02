@@ -85,20 +85,22 @@ var MoodBoardEvent = React.createClass({
   },
 
   loadChatToken: function() {
-    var that = this;
-    $.post(this.props.twilio_token_path + '.json', function(response){
-      var token = response.token,
-          twilioClient = new Twilio.Chat.Client(token);
-      var _state = $.extend({}, that.state);
-      _state.twilioClient = twilioClient;
-      that.setState(_state);
-      twilioClient.initialize().then(function(){
-        _state.twilioClient.getUserChannels().then(that.setupChatChannels);
+    if(this.props.channel_prefix != 'test'){
+      var that = this;
+      $.post(this.props.twilio_token_path + '.json', function(response){
+        var token = response.token,
+            twilioClient = new Twilio.Chat.Client(token);
+        var _state = $.extend({}, that.state);
+        _state.twilioClient = twilioClient;
+        that.setState(_state);
+        twilioClient.initialize().then(function(){
+          _state.twilioClient.getUserChannels().then(that.setupChatChannels);
+        });
+      }).fail(function(e) {
+        ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
+            document.getElementById('notification'));
       });
-    }).fail(function(e) {
-      ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
-          document.getElementById('notification'));
-    });
+    }
   },
 
   setupChatChannels: function(channels){
