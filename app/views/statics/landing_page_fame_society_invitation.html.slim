@@ -32,16 +32,16 @@
                               textarea name="about" rows=5 cols=10  class="form-control form-control-md"
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Blog Url
-                              input data-auto-focus= type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
+                              input type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
                               label.text-uppercase Mailing Address
-                              input data-auto-focus= type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
+                              input type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
                           .row
                             .col-md-6.col-xs-12.form-group.form-social-group
                               label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
-                              input data-auto-focus= required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                              input required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Dress Size
-                              input data-auto-focus= type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
+                              input type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
                           .row
                             .col-md-6.col-xs-12
                               a class="js-add-social-handler"
@@ -55,76 +55,77 @@
                       h2 Welcome to The Fame Society.
                       p We're thrilled to have you as our newest member. We'll email you soon with details on how to get started; in the meantime, browse our latest collection to pick out your first look.
                       p We can't wait to see you in Fame and Partners.
-                      = link_to 'javascript:;', class: 'cta-mobile-featured'
-                        span.btn.btn-black.btn-featured-black
+                      = link_to '/dresses', class: 'cta-mobile-featured'
+                        span.btn.btn-black.btn-featured-black.spacing-cta
                           span.copy-highlight EXPLORE FAME
 
-  .intro-wrapper
-    .container-fluid
-      .row.hidden-md.hidden-lg
-        .col-md-12
-          = image_tag 'landingpages/outreach-micro-influencer/micro-hero-mob.jpg', class: "img-responsive"
+  .container-fluid.no-padding
+    .row.hidden-md.hidden-lg
+      .col-md-12
+        = image_tag 'landingpages/outreach-micro-influencer/micro-hero-mob.jpg', class: "img-responsive"
 
-      .row.vertical-align-row
-        .col-md-6.hidden-xs.hidden-sm
-          = image_tag 'landingpages/outreach-micro-influencer/micro-hero.jpg', class: "img-responsive"
+    .row.vertical-align-row
+      .col-md-6.hidden-xs.hidden-sm
+        = image_tag 'landingpages/outreach-micro-influencer/micro-hero.jpg', class: "img-responsive"
 
-        .col-md-5.vertical-align
-          .gratitudePage__copy
-            .row
-              .col-xs-12
-                .heading-thin-line-bottom
-                  h3 <em>Welcome to</em>
-                  h1.title.no-margin.no-margin-thin-line The Fame Society
-                  p You are here because our brand is <em>inspired</em> by you–and we believe that you embody all of the style and strength that women in the world are inspired by, too.
-                  p And so, to say thanks for being an inspirational woman, we want to remind you just how special you are. We invite you to experience the <em>The Fame Society</em>, on us.
-                  = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
-                    span.btn.btn-black.btn-featured-black
-                      span.copy-highlight JOIN NOW
+      .col-md-6.vertical-align.copy-header
+        .col-xs-12
+          .heading-thin-line-bottom
+            h3 <em>Welcome to</em>
+            h1.title.no-margin.no-margin-thin-line The Fame Society
+            p You are here because our brand is <em>inspired</em> by you–and we believe that you embody all of the style and strength that women in the world are inspired by, too.
+            p And so, to say thanks for being an inspirational woman, we want to remind you just how special you are. We invite you to experience the <em>The Fame Society</em>, on us.
+            = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
+              span.btn.btn-black.btn-featured-black
+                span.copy-highlight JOIN NOW
 
-  .container.items-grid
+  .container-fluid.items-grid
     section.section-box
-      .row
+      .row.vertical-align-row
         .col-md-6.hidden-md.hidden-lg.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/what-is.jpg', class: "img-responsive"
 
-        .col-md-5.col-md-offset-1
-          h3 What <em>is</em> The Fame Society?
-          p The Society is where trend authority meets bespoke tailoring. It’s a network of connected, confident, and inspired influencers who embody the Fame and Partners woman: strong, empowered, and unapologetically herself.
+        .col-md-6.copy-padding-item.vertical-align
+          .col-xs-12
+            h3 What <em>is</em> The Fame Society?
+            p The Society is where trend authority meets bespoke tailoring. It’s a network of connected, confident, and inspired influencers who embody the Fame and Partners woman: strong, empowered, and unapologetically herself.
 
         .col-md-5.hidden-sm.hidden-xs.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/what-is.jpg', class: "img-responsive"
 
     section.section-box.section-no-margin-top
-      .row
+      .row.vertical-align-row
         .col-md-5.col-md-offset-1.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive"
 
-        .col-md-5.col-md-offset-1
-          h3 What's in it for <em>you:</em>
-          p Once a month, Fame and Partners will create a bespoke, made-to-order garment of your choosing just for you, for free.
+        .col-md-6.copy-padding-item.vertical-align
+          .col-xs-12
+            h3 What's in it for <em>you:</em>
+            p Once a month, Fame and Partners will create a bespoke, made-to-order garment of your choosing just for you, for free.
 
     section.section-box.section-no-margin-top
-      .row
+      .row.vertical-align-row
         .col-md-6.hidden-md.hidden-lg.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/init-for-us.jpg', class: "img-responsive"
 
-        .col-md-5.col-md-offset-1
-          h3 What's in it for <em>us</em>:
-          p You’ll post pictures and videos of your custom look to Instagram and anywhere else you get social, tagging <span class="tagging">@fameandpartners</span>.
+        .col-md-6.copy-padding-item.vertical-align
+          .col-xs-12
+            h3 What's in it for <em>us</em>:
+            p You’ll post pictures and videos of your custom look to Instagram and anywhere else you get social, tagging <span class="tagging">@fameandpartners</span>.
 
         .col-md-5.hidden-sm.hidden-xs.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/init-for-us.jpg', class: "img-responsive"
 
     section.section-box.section-no-margin-top
-      .row
+      .row.vertical-align-row
         .col-md-5.col-md-offset-1.no-padding
           = image_tag 'landingpages/outreach-micro-influencer/why.jpg', class: "img-responsive"
 
-        .col-md-5.col-md-offset-1
-          h3 <em>Why</em> do we do it?
-          p We want to create an unstoppable chain of women empowering women.
-          p The Fame Society is a network of likeminded ladies from all areas of the fashion industry–bloggers, stylists, photographers, designers, editors, and more–working together to support each other. Society members are encouraged to collaborate and post one another’s content, in effect growing your social followings exponentially. Through a group chats, local meetups, and influencer mentorships, The Fame Society offers a platform for creative collaboration and heightened exposure.
+        .col-md-6.copy-padding-item.vertical-align
+          .col-xs-12
+            h3 <em>Why</em> do we do it?
+            p We want to create an unstoppable chain of women empowering women.
+            p The Fame Society is a network of likeminded ladies from all areas of the fashion industry–bloggers, stylists, photographers, designers, editors, and more–working together to support each other. Society members are encouraged to collaborate and post one another’s content, in effect growing your social followings exponentially. Through a group chats, local meetups, and influencer mentorships, The Fame Society offers a platform for creative collaboration and heightened exposure.
 
     section.section-box.section-apply-now.text-center
       .row
