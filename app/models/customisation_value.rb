@@ -1,5 +1,6 @@
 class CustomisationValue < ActiveRecord::Base
   AVAILABLE_CUSTOMISATION_TYPES = %w(cut fabric length fit style)
+  AVAILABLE_POINTS_OF_VIEW = %w(front back)
 
   belongs_to :product,
              class_name: 'Spree::Product'
