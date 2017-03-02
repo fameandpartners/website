@@ -17,16 +17,15 @@
   }
 
   .section-box {
-    margin-top: 60px;
-  }
-
-  .mobile-safe-padding {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-top: 80px;
   }
 
   .heading-overlay-wrapper--alignLeft {
     margin: 30px 0 40px;
+  }
+
+  .link-underline-thick {
+    border-bottom: 2px solid $c-neutral-black;
   }
 
   .heading-thin-line-bottom {
@@ -46,17 +45,8 @@
     margin-bottom: 60px;
   }
 
-  .items-grid {
-
-    h3 {
-      margin-top:60px;
-    }
-
-  }
-
-  .tagging {
-    font-family: $font-family-secondary;
-    font-weight: bold;
+  .content-copy {
+    padding: 0 55px;
   }
 
   .section-instagram {
@@ -78,7 +68,7 @@
       }
 
       .copy-wrap {
-       padding: 20px 30px;
+        padding: 20px 30px;
       }
 
       .item {
@@ -153,6 +143,10 @@
       font-size: 1em;
     }
 
+    .spacing-cta {
+      margin-bottom: 20px;
+    }
+
   }
 
   form {
@@ -168,6 +162,16 @@
         font-weight: normal;
         font-style: italic;
         font-size: 1.1rem;
+        font-family: $font-heading;
+        text-transform: none;
+      }
+
+    }
+
+    .form-social-group {
+
+      input {
+        margin-bottom: 5px;
       }
 
     }
@@ -183,16 +187,7 @@
   @media (min-width: $bootstrap-md-width) {
 
     .heading-thin-line-bottom {
-
-      .no-margin-thin-line::after {
-        margin-right: 0;
-        margin-left: 0;
-      }
-
-    }
-
-    .section-no-margin-top {
-      margin-top: 0px;
+      width: 100%;
     }
 
   }
@@ -208,8 +203,22 @@
       text-align: left;
     }
 
+    .mobile-safe-padding {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
     form {
       margin: 0 30px;
+    }
+
+    .vertical-align-row {
+      display: block;
+
+      .vertical-copy {
+        display: block;
+      }
+
     }
 
   }
