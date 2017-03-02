@@ -10,7 +10,7 @@ section.section-box.container.section-style-icon
       - current_edit_mob_image = "homepage/fp-style-icon/feb-09-tile-1-mob.jpg"
       - current_edit_link = wedding_atelier_app_landing_page_path
 
-      = link_to current_edit_link
+      = link_to current_edit_link + "?hp"
         .section-img-wrap.copy-center
           picture
             .img-wrap
@@ -28,7 +28,7 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/two-piece'
+        = link_to dresses_path + '/two-piece?hp'
           .section-img-wrap.copy-center
             .img-wrap
               img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-2.jpg")}'
@@ -43,7 +43,7 @@ section.section-box.container.section-style-icon
                         span.copy-highlight Two Piece Sets
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/backless'
+        = link_to dresses_path + '/backless?hp'
           .section-img-wrap.copy-center
             .img-wrap
               img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-3.jpg")}'
@@ -59,7 +59,7 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/lace'
+        = link_to dresses_path + '/lace?hp'
           .section-img-wrap.copy-center
             .img-wrap
               img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-4.jpg")}'
@@ -74,7 +74,7 @@ section.section-box.container.section-style-icon
                         span.copy-highlight Lace Looks
 
       .col-md-6.cta-item
-        = link_to evening_shop_cold_shoulder_page_path
+        = link_to evening_shop_cold_shoulder_page_path + "?hp"
           .section-img-wrap.copy-center
             .img-wrap
               img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-5.jpg")}'

@@ -19,7 +19,7 @@ section.container
 
           // Instagram Item
           .item.col-md-5ths.col-xs-6
-            = link_to dresses_path + "/dress-midnight-dust-dress-1291?color=black", class: "item-wrap"
+            = link_to dresses_path + "/dress-midnight-dust-dress-1291?color=black&hp", class: "item-wrap"
               .media-wrap
                 = image_tag "homepage/get-social/Instagram-1.jpg", class: "img-responsive", alt: ""
                 .overlay
@@ -31,7 +31,7 @@ section.container
 
           // Instagram Item
           .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-murphy-dress-1091?color=pale-pink", class: "item-wrap"
+            = link_to  dresses_path + "/dress-murphy-dress-1091?color=pale-pink&hp", class: "item-wrap"
               .media-wrap
                 = image_tag "homepage/get-social/Instagram-2.jpg", class: "img-responsive", alt: ""
                 .overlay
@@ -43,7 +43,7 @@ section.container
 
           // Instagram Item
           .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-backless-dreamer-539?color=red", class: "item-wrap"
+            = link_to  dresses_path + "/dress-backless-dreamer-539?color=red&hp", class: "item-wrap"
               .media-wrap
                 = image_tag "homepage/get-social/Instagram-3.jpg", class: "img-responsive", alt: ""
                 .overlay
@@ -55,7 +55,7 @@ section.container
 
           // Instagram Item
           .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-kiki-corset-1263?color=white", class: "item-wrap"
+            = link_to  dresses_path + "/dress-kiki-corset-1263?color=white&hp", class: "item-wrap"
               .media-wrap
                 = image_tag "homepage/get-social/Instagram-4.jpg", class: "img-responsive", alt: ""
                 .overlay
@@ -67,7 +67,7 @@ section.container
 
           // Instagram Item
           .item.col-md-5ths.hidden-sm.hidden-xs
-            = link_to  dresses_path + "/dress-ziv-1037?color=taupe", class: "item-wrap"
+            = link_to  dresses_path + "/dress-ziv-1037?color=taupe&hp", class: "item-wrap"
               .media-wrap
                 = image_tag "homepage/get-social/Instagram-5.jpg", class: "img-responsive", alt: ""
                 .overlay
@@ -79,6 +79,6 @@ section.container
 
       .row
         .col-md-12.text-center
-          = link_to shop_social_path
+          = link_to shop_social_path + "?hp"
               span.btn-xs.btn-featured
                 | Shop <span class="copy-highlight">Instagram</span>
