@@ -17,6 +17,10 @@ $.fn.incrementButton = function(config){
     });
   }
 
+  $input.on("keypress", function(e){
+    e.preventDefault();
+  });
+
   $input
     .wrap( "<div class='number-field'></div>" )
     .before('<span class="number-field-button dec">-</span>')
@@ -44,9 +48,14 @@ $.fn.incrementButton = function(config){
   $incButton.on("click", function() {
     var oldValue = parseInt($input.val(), 10);
     var newVal = ++oldValue;
+    var max = parseInt($input.attr('max'));
 
     if (isNaN(newVal)) {
       $input.val(0);
+      return;
+    }
+    if(newVal >= max){
+      $input.val(oldValue = max);
       return;
     }
 
