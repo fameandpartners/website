@@ -98,6 +98,7 @@ var EventDetails = React.createClass({
             <input type="number"
                    className="form-control number-field js-number-field"
                    min="0"
+                   max="100"
                    id="input_number_of_assistants"
                    name="number_of_assistants"
                    ref="numberfield"
