@@ -33,55 +33,45 @@
   .rect-wrapper.margin--center
     .center-wrapper.margin--center
       .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav.background--white.margin--center
-        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.flex-container
 
-          .col.col-md-2.dresses-shop-by
+          .flex1.col.dresses-shop-by
             ul
               li.title Featured
               = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
 
-          .col.col-md-2.dresses-style
+          .flex1.col.dresses-style
             ul
               li.title Dresses
               = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
-          .col.col-md-2.dresses-color
+          .flex1.col.dresses-color
             ul
               li.title Separates
               = render partial: 'layouts/redesign/header/simplified_nav/separates'
 
-          .col.col-md-3.dresses-events
+          .flex1.col.dresses-events
             .two-cols
               li.title Collections
               = render partial: 'layouts/redesign/header/simplified_nav/collections'
 
-          .col.col-md-3
+          .col.picture-col
             - if !Features.active?(:getitquick_unavailable)
               .express-making.nav-item
                 = link_to fast_making_dresses_path
                   = image_tag 'mega-menu/shop-by/express-making.jpg', class: 'img-responsive', alt: ''
             - else
               .featuredCollection.nav-item
-                = link_to best_of_fame_collection_path
-                  = image_tag 'mega-menu/shop-by/best-of-fame.jpg', class: 'img-responsive', alt: ''
+                = link_to evening_hours_collection_landing_page_path
+                  = image_tag 'simplified-nav/modernevening.jpg', class: 'img-responsive nav-img', alt: ''
                   .content-wrap
                     .container-cta
                       .row-cta
                         .cta-wrap
                           span.cta-copy.cta-link-white-bg
-                            span.cta-link The Best of Fame*
+                            span.cta-link Shop
+                            span.copy-highlight &nbsp;EVENING HOURS COLLECTION
 
       .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
-
-      .rect#rect-lookbook.nav-menu-wrap.menu-lookbook.margin--center
-        .row.nav-menu-buffer.nav-menu-contents.background--white.margin--center
-
-          .col.col-md-5.lookbook
-            ul
-              li.title lookbooks
-              = render partial: 'layouts/redesign/mega_menu/lookbook'
-
-          .col.col-md-7.lookbook-banner
-            = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'

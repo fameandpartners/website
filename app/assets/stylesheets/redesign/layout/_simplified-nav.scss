@@ -1,6 +1,25 @@
 /* [Simplified Nav Menu] Partial styles
 -------------------------------------------------------*/
 .simplified-nav-container {
+  .flex-container {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-flex-direction: row; /* Safari */
+    flex-direction:         row;
+    -webkit-align-items: stretch; /* Safari */
+    align-items:         stretch;
+
+    .flex1 { flex: 1 }
+  }
+
+  .picture-col {
+    width: 350px;
+    margin-left: 15px;
+  }
+
+  .nav-img {
+    margin-bottom: 15px;
+  }
 
   .rect-wrapper {
     background: inherit;
@@ -11,7 +30,7 @@
   }
 
   .nav-menu-buffer {
-    padding: 0px 60px 30px;
+    padding: 0px 60px 10px;
   }
 
   .center-wrapper {
@@ -40,13 +59,11 @@
     opacity: 1;
   }
 
-  .menu-dresses {
-    .nav-menu-contents {
-      max-width: 1200px;
-    }
+  .menu-dresses .nav-menu-contents {
+    max-width: 1280px;
   }
-  .menu-wedding {
-    width: 770px;
+  .menu-wedding .nav-menu-contents{
+    max-width: 830px;
   }
   .menu-wrap {
     width: 990px;

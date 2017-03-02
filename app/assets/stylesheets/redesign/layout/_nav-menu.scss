@@ -13,8 +13,8 @@
     }
 
     .nav-main-menu span {
-      border-bottom: 2px solid transparent;
-      display: inline-block;
+      border-bottom: 1px solid transparent;
+      display: inline;
       font-size: 1.2rem;
       font-weight: 700;
       color: $c-neutral-black;
@@ -141,7 +141,6 @@
     background-color: $c-neutral-white;
     z-index: 101;
     display: none;
-    margin-top: -1px;
 
     .btn-close {
       z-index: 101;
