@@ -23,7 +23,11 @@
       letter-spacing: 0.05rem;
 
       &:not(.logo) {
-        margin: 0 12px;
+        margin: 0 10px;
+        display: inline-block;
+      }
+      .blog {
+        margin-right: 0;
       }
 
       em,
