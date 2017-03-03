@@ -20,13 +20,12 @@
       color: $c-neutral-black;
       cursor: pointer;
       position: relative;
-      letter-spacing: 0.05rem;
 
       &:not(.logo) {
         margin: 0 10px;
         display: inline-block;
       }
-      .blog {
+      &.blog {
         margin-right: 0;
       }
 

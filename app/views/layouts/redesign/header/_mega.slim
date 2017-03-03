@@ -6,14 +6,15 @@
         span.logo
           = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
 
-    .col-md-6.nav-main-menu.text-center
+    .col-md-7.nav-main-menu.text-center
 
       span.new-this-week.featured-nav.js-open-nav-menu New this week
 
       span.dresses.js-open-nav-menu Shop
 
       - if Features.active?(:fameweddings)
-        span.wedding.js-open-nav-menu FAME WEDDINGS
+        span.wedding.js-open-nav-menu WEDDING SHOP
+      span.lookbook = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.lookbook.js-open-nav-menu LOOKBOOKS
 
       span.blog

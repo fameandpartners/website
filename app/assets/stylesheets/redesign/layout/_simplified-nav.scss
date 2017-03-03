@@ -50,11 +50,11 @@
     padding: 0px;
 
     .title {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       letter-spacing: 0.05rem;
     }
     .normal-item {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       line-spacing: 2.6rem;
     }
   }
@@ -74,7 +74,7 @@
   }
 
   .menu-dresses .nav-menu-contents {
-    max-width: 1040px;
+    max-width: 1060px;
   }
   .menu-wedding .nav-menu-contents{
     max-width: 740px;
@@ -90,8 +90,13 @@
 
   // Overwrites
   &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-    margin: 0 23px;
+    margin: 0 20px;
     display: inline;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+  }
+  &.nav-menu-container .home-menu .nav-main-menu span.lookbook {
+    margin-right: 0px;
   }
   .col .cta-link {
     font-weight: 300;
