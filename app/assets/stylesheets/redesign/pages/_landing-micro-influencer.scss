@@ -45,8 +45,14 @@
     margin-bottom: 60px;
   }
 
-  .content-copy {
-    padding: 0 55px;
+  .content-copy-right {
+    padding-left: 55px;
+    padding-right: 70px;
+  }
+
+  .content-copy-left {
+    padding-left: 70px;
+    padding-right: 55px;
   }
 
   .section-instagram {
