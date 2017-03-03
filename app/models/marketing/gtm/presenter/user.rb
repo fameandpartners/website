@@ -13,11 +13,9 @@ module Marketing
 
         # Active experiments for a/b testing
         def active_experiments
-          experiments = []
-          ab_user.active_experiments.each do |key, experiment|
-            experiments.push experiment
-          end unless ab_user.nil?
-          experiments.join(" ")
+          if @session.present?
+            ab_user.active_experiments.values.join(' ')
+          end
         end
  
         def name
