@@ -53,9 +53,26 @@
       font-size: 1.3rem;
       letter-spacing: 0.05rem;
     }
+
     .normal-item {
       font-size: 1.4rem;
       line-height: 2.6rem;
+    }
+
+
+    .normal-item a {
+      cursor: pointer;
+      display: inline;
+    }
+
+    .bottom-border-mark::after {
+      content: '';
+      display: block;
+      height: 1px;
+      bottom: -14px;
+      position: relative;
+      width: 30px;
+      color: $c-neutral-black;
     }
   }
 
@@ -81,11 +98,6 @@
   }
   .menu-wrap {
     width: 990px;
-  }
-
-  .normal-item a {
-    cursor: pointer;
-    display: inline;
   }
 
   // Overwrites

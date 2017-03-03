@@ -240,12 +240,10 @@
     text-transform: uppercase;
     padding-bottom: 5px;
     font-size: 1.3rem;
-    color: $c-neutral-12;
     font-weight: 600;
   }
   .view-all {
-    font-family: $font-heading;
-    font-size: 1.3rem;
+    padding-top: 20px;
   }
 
   @media (min-width: $bootstrap-md-width) {
