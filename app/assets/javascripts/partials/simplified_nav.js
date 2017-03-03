@@ -23,11 +23,11 @@
 
   // Event triggers
   //Mega menu trigger
-  $(".simplified-nav .js-open-nav-menu").on('mouseover', function() {
+  $simplifiedNavContainer.find('.js-open-nav-menu').on('mouseover', function() {
     openMenu($(this).index());
   });
 
   // Mouse leaves hit area zone
-  $('.simplified-nav-container').on('mouseleave', removeActive);
+  $simplifiedNavContainer.on('mouseleave', removeActive);
 
 })(jQuery);
