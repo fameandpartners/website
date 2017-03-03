@@ -61,12 +61,12 @@
                           span.copy-highlight EXPLORE FAME
 
   .container-fluid.no-padding
-    .row.hidden-md.hidden-lg
+    .row.hidden-sm.hidden-md.hidden-lg
       .col-md-12
         = image_tag 'landingpages/fame-society/micro-hero-mob.jpg', class: "img-responsive"
 
     .row.vertical-align-row
-      .col-md-4.hidden-xs.hidden-sm
+      .col-md-4.hidden-xs
         = image_tag 'landingpages/fame-society/micro-hero-1.jpg', class: "img-responsive"
 
       .col-md-4.text-center.vertical-align
@@ -78,7 +78,7 @@
               span.btn.btn-black.btn-featured-black
                 span.copy-highlight APPLY NOW
 
-      .col-md-4.hidden-xs.hidden-sm
+      .col-md-4.hidden-xs
         = image_tag 'landingpages/fame-society/micro-hero-2.jpg', class: "img-responsive"
 
   .container-fluid.no-padding
@@ -103,7 +103,7 @@
               #{image_path(current_item_mob_image)} 991w,
               #{image_path(current_item_image)} 992w"
 
-        .col-md-5.col-xs-12.vertical-align.content-copy
+        .col-md-5.col-xs-12.vertical-align.content-copy-right
           .copy-wrap
             .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay CLOTHES
@@ -118,7 +118,7 @@
         .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
           h1.heading-overlay GROWTH
 
-        .col-md-5.col-xs-12.vertical-align.content-copy.hidden-xs.hidden-sm
+        .col-md-5.col-xs-12.vertical-align.content-copy-left.hidden-xs.hidden-sm
           .copy-wrap
             .heading-overlay-wrapper.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay GROWTH
@@ -157,7 +157,7 @@
               #{image_path(current_item_mob_image)} 991w,
               #{image_path(current_item_image)} 992w"
 
-        .col-md-5.col-xs-12.vertical-align.content-copy
+        .col-md-5.col-xs-12.vertical-align.content-copy-right
           .copy-wrap
             .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay #GOALS
@@ -183,14 +183,14 @@
           .instagram-widget
             // Instagram Item
             .item.col-md-3.col-xs-6
-              = link_to dresses_path + "/dress-agata-dress-1186?color=cobalt-blue", class: "item-wrap"
+              = link_to dresses_path + "/dresses/dress-heart-of-glass-skirt-1148?color=black", class: "item-wrap"
                 .media-wrap
                   = image_tag "landingpages/fame-society/irl-01.jpg", class: "img-responsive", alt: ""
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @mindyplaz
+                          span.user @littleblackboots
                           span.cta-link shop
             // Instagram Item
             .item.col-md-3.col-xs-6
@@ -217,8 +217,7 @@
             // Instagram Item
             .item.col-md-3.col-xs-6
               .copy-wrap
-                h3 For ladies of style <br>and substance.
-                h3 #{link_to "Join", 'javascript:;', class:'js-get-micro-modal-trigger link-underline-thick'} The Society.
+                h3 For ladies of style <br>and substance. #{link_to "Join", 'javascript:;', class:'js-get-micro-modal-trigger link-underline-thick'} The Society.
 
 javascript:
   $(function() {
