@@ -40,6 +40,8 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
       @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
       @item_return.refund_ref    = response.params['response']['token']
       @item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
+
+      RefundMailer.notify_user(event).deliver
     end
   end
 
