@@ -10,7 +10,7 @@
     $('.js-open-nav-menu').removeClass('active');
   }
 
-  function removeActive(menuIndex){
+  function removeActive(){
     removeHighlighting();
     $('.nav-menu-contents').closest('.active').removeClass('active');
   }
@@ -28,8 +28,6 @@
   });
 
   // Mouse leaves hit area zone
-  $('.simplified-nav-container').on('mouseleave', function() {
-    removeActive();
-  });
+  $('.simplified-nav-container').on('mouseleave', removeActive);
 
 })(jQuery);
