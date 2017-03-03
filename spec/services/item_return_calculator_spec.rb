@@ -148,6 +148,15 @@ RSpec.describe ItemReturnCalculator do
         expect(created_item_return.refunded_at).to eq(Time.parse('2016-04-30 14:00:00'))
       end
     end
+
+    it "notifies user with customer.io" do
+      promise = double(:promise)
+      expect(RefundMailer).to receive(:notify_user).and_return(promise)
+      expect(promise).to receive(:deliver)
+      allow(pin_payment).to receive(:refund).and_return(refund_response)
+
+      created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
+    end
   end
 end
 
