@@ -5,7 +5,7 @@ module Marketing
         include Split::Helper # Split testing
         attr_reader :user, :request_ip, :session
 
-        def initialize(spree_user:, request_ip: nil, session:)
+        def initialize(spree_user:, request_ip: nil, session: {})
           @request_ip = request_ip
           @user       = spree_user
           @session    = session
@@ -16,10 +16,10 @@ module Marketing
           experiments = []
           ab_user.active_experiments.each do |key, experiment|
             experiments.push experiment
-          end
+          end unless ab_user.nil?
           experiments.join(" ")
         end
-
+ 
         def name
           logged_in? ? "#{user.first_name} #{user.last_name}" : UNKNOWN_STRING
         end

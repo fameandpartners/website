@@ -4,7 +4,11 @@ module Marketing
   module Gtm
     module Presenter
       describe User, type: :presenter do
-        let(:user) { build_stubbed(:spree_user, first_name: 'Loroteiro', last_name: 'Silvestre', email: 'loroteiro@silvestre.com') }
+        let(:user) { build_stubbed(:spree_user,
+                                   first_name: 'Loroteiro',
+                                   last_name: 'Silvestre',
+                                   email: 'loroteiro@silvestre.com') }
+        
         let(:request_ip) { '179.218.87.233' }
 
         subject(:presenter) { described_class.new(spree_user: user, request_ip: request_ip) }
@@ -18,6 +22,7 @@ module Marketing
 
               it 'returns hash with unknown user info' do
                 expect(subject.body).to eq({
+                                               active_experiments: '',
                                                name:     'unknown',
                                                email:    'unknown',
                                                facebook: false,
@@ -32,6 +37,7 @@ module Marketing
             context 'user is logged in' do
               it 'returns hash with user info' do
                 expect(subject.body).to eq({
+                                               active_experiments: '',
                                                name:     'Loroteiro Silvestre',
                                                email:    'loroteiro@silvestre.com',
                                                facebook: false,
@@ -40,13 +46,14 @@ module Marketing
                                                country:  'Brazil',
                                                ip: '179.218.87.233'
                                            })
-              end
-
+              end 
+ 
               context 'user comes from facebook' do
                 before(:each) { user.facebook_data_value[:gender] = 'male' }
 
                 it 'returns hash with user gender and a truthy facebook key' do
                   expect(subject.body).to eq({
+                                                 active_experiments: '',
                                                  name:     'Loroteiro Silvestre',
                                                  gender:   'male',
                                                  email:    'loroteiro@silvestre.com',
