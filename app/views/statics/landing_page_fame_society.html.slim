@@ -45,7 +45,7 @@
                               input type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
                           .row
                             .col-md-6.col-xs-12
-                              a class="js-add-social-handler"
+                              a.js-add-social-handler.add-social-handler-trigger
                                 | + Add another Handle
                             .col-md-6.col-xs-12.text-center
                               button.btn-xs.btnCtaBlackBgUppercase type="submit" SUBMIT
@@ -60,32 +60,32 @@
                         span.btn.btn-black.btn-featured-black.spacing-cta
                           span.copy-highlight EXPLORE FAME
 
-  .container-fluid.no-padding.no-scroll
-    .row.hidden-md.hidden-lg
-      .col-md-12
+  .container.hidden-md.hidden-lg
+    .row
+      .col-xs-12
         = image_tag 'landingpages/fame-society/micro-hero-mob.jpg', class: "img-responsive"
 
-    .row.vertical-align-row
-      .col-md-4.col-md-4.hidden-xs.hidden-sm
-        = image_tag 'landingpages/fame-society/micro-hero-1.jpg', class: "img-responsive"
+  .container-fluid.no-padding.no-scroll
+    .intro-wrapper
+      .row.vertical-align-row
+        .col-md-4.col-md-4.hidden-xs.hidden-sm
+          = image_tag 'landingpages/fame-society/micro-hero-1.jpg', class: "img-responsive"
 
-      .col-md-4.text-center.vertical-align
-        .col-xs-12
+        .col-md-4.col-xs-10.col-xs-offset-1.text-center.vertical-align
           .heading-thin-line-bottom
-            h1.title.title-extra-space The <em>Fame</em> <br class=" visible-md visible-lg"> Society.
-            p Get free clothes. Take some selfies. <br> Have your content shared by thousands <br> of likeminded ladies. Build your empire.
+            h1.title.title-extra-space The <em>Fame</em> <br class="visible-md visible-lg"> Society.
+            p Get free clothes. Take some selfies. <br> Have your content shared by thousands <br class="hidden-xs"> of likeminded ladies. Build your empire.
             = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
               span.btn.btn-black.btn-featured-black
                 span.copy-highlight APPLY NOW
 
-      .col-md-4.hidden-xs.hidden-sm
-        = image_tag 'landingpages/fame-society/micro-hero-2.jpg', class: "img-responsive"
+        .col-md-4.hidden-xs.hidden-sm
+          = image_tag 'landingpages/fame-society/micro-hero-2.jpg', class: "img-responsive"
 
-    section.section-box.text-center
+    section.section-box.section-goals.text-center
       .row
-        .col-xs-12
-          .mobile-safe-padding
-            p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg">and score some gorgeous dresses in the process. Here’s how it works.
+        .col-md-12.col-xs-10.col-xs-offset-1
+          p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg">and score some gorgeous dresses in the process. Here’s how it works.
 
     - current_item_image = image_path("landingpages/fame-society/clothes.jpg")
     - current_item_mob_image = image_path("landingpages/fame-society/clothes-mob.jpg")
@@ -102,12 +102,12 @@
               #{image_path(current_item_mob_image)} 991w,
               #{image_path(current_item_image)} 992w"
 
-        .col-md-5.col-xs-12.vertical-align.content-copy-right
+        .col-md-5.col-xs-10.col-xs-offset-1.vertical-align.content-copy-right
           .copy-wrap
             .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay CLOTHES
 
-            h3 Free clothes <em>every</em> month.
+            h3.heading-free-clothes-mobile Free clothes <em>every</em> month.
             p Every month, Fame Society members choose one free piece from the latest Fame and Partners collection. In return, we ask that you take a picture or video of yourself in Fame and post it to Instagram. As long as you keep posting, we’ll keep gifting–and as your following grows, so will the amount of clothing we send you.
 
     - current_item_image = image_path("landingpages/fame-society/growth.jpg")
@@ -133,7 +133,7 @@
               #{image_path(current_item_mob_image)} 991w,
               #{image_path(current_item_image)} 992w"
 
-        .col-xs-12.hidden-md.hidden-lg
+        .col-xs-10.col-xs-offset-1.col-md-12.hidden-md.hidden-lg
           .copy-wrap
             .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay GROWTH
@@ -156,7 +156,7 @@
               #{image_path(current_item_mob_image)} 991w,
               #{image_path(current_item_image)} 992w"
 
-        .col-md-5.col-xs-12.vertical-align.content-copy-right
+        .col-md-5.col-xs-10.col-xs-offset-1.vertical-align.content-copy-right
           .copy-wrap
             .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
               .heading-overlay #GOALS
@@ -166,8 +166,8 @@
 
     section.section-box.section-apply-now.text-center
       .row
-        .col-xs-12
-          .mobile-safe-padding
+        .col-xs-10.col-xs-offset-1.col-md-12
+          .copy-wrap
             p.explore-latest Join The Fame Society to grow your network–and your wardrobe–exponentially.
 
             = link_to 'javascript:;', class: 'js-get-micro-modal-trigger cta-mobile-featured'
@@ -177,7 +177,7 @@
   .section-wrapper
     .section-box.section-instagram.sectionBox--with-bg
       .container
-        .tag-info-section
+        .row
           .instagram-widget
             // Instagram Item
             .item.col-md-3.col-xs-6
@@ -189,7 +189,7 @@
                       .overlay-inner-wrap
                         span.cta-instagram
                           span.user @littleblackboots
-                          span.cta-link shop
+                          span.cta-link.hidden-xs shop
             // Instagram Item
             .item.col-md-3.col-xs-6
               = link_to  dresses_path + "/dress-darlo-dress-1139?color=silver", class: "item-wrap"
@@ -200,7 +200,7 @@
                       .overlay-inner-wrap
                         span.cta-instagram
                           span.user @theverastyle
-                          span.cta-link shop
+                          span.cta-link.hidden-xs shop
             // Instagram Item
             .item.col-md-3.col-xs-6
               = link_to  dresses_path + "/dresses/dress-sahara-skirt-1181?color=dark-tan", class: "item-wrap"
@@ -211,11 +211,11 @@
                       .overlay-inner-wrap
                         span.cta-instagram
                           span.user @angelachoe
-                          span.cta-link shop
+                          span.cta-link.hidden-xs shop
             // Instagram Item
             .item.col-md-3.col-xs-6
               .copy-wrap
-                h3 For ladies of style <br>and substance. #{link_to "Join", 'javascript:;', class:'js-get-micro-modal-trigger link-underline-thick'} The Society.
+                h3 For ladies of style <br>and substance. <br> #{link_to "Join", 'javascript:;', class:'js-get-micro-modal-trigger link-underline-thick'} The Society.
 
 javascript:
   $(function() {
