@@ -46,7 +46,8 @@ namespace :wedding_atelier do
     strapless_attrs = {
       name: 'Column',
       sku: 'FP2212',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'If your bride’s buzzwords are “sophisticated,” “elevated,” and “elegant,” The Column is the dress for you. Internal boning and a defined waistline craft a classic silhouette, while clean lines make this dress an architectural dream.\nThe Column features an invisible zipper at the back and is fully customizable.'
     }
@@ -74,7 +75,8 @@ namespace :wedding_atelier do
     fit_and_flare_attrs = {
       name: 'Fit and Flare',
       sku: 'FP2213',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'The Fit and Flare is the universally flattering bridesmaid gown you and your ladies have been looking for. The fitted bodice and full, flared skirt evoke the sweeping romance of an Old Hollywood film (minus the sexism).\nThe Fit and Flare features an invisible zipper at the side and is fully customizable.'
     }
@@ -102,8 +104,8 @@ namespace :wedding_atelier do
     # TODO: Ask for the base price
     shift_attrs = {
       name: 'Shift',
-      sku: 'FP2214',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'Those who favor minimalism will fall hard for The Shift. Form-fitting but not showy, modern but not basic, the foundation of The Shift can be transformed from high fashion to classically romantic with just a few tweaks.\nThe Shift features an invisible zipper at the back and is fully customizable.'
     }
@@ -132,7 +134,8 @@ namespace :wedding_atelier do
     slip_attrs = {
       name: 'Slip',
       sku: 'FP2215',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'The Slip was designed to make your heart flutter. Its body-skimming silhouette falls just-so, ending in a subtle cascade of flowing fabric–basically, The it’s the epitome of easy, effortless elegance.\nThe Slip features an invisible zipper at the side and is fully customizable.'
     }
@@ -161,7 +164,8 @@ namespace :wedding_atelier do
     wrap_attrs = {
       name: 'Wrap',
       sku: 'FP2216',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'Trust us: everyone looks good in The Wrap. An adjustable tie closure at the waist (no need for pre-wedding diets!) makes this a timeless look that celebrates any body type.'
     }
@@ -190,7 +194,8 @@ namespace :wedding_atelier do
     tri_cup_attrs = {
       name: 'Tri-Cup',
       sku: 'FP2220',
-      price: 199,
+      usd_amount: 199,
+      aud_amount: 249,
       hidden: true,
       description: 'The Tri-Cup is a statement-making bridesmaid look that gets its sexy, structured feel from wide under-bust panelling. Its curve-hugging (or curve-creating, depending on your natural shape) femininity makes it worthy of a walk down the aisle.\nThe Tri-Cup an invisible zipper at the back and is fully customizable.'
     }
@@ -218,7 +223,8 @@ namespace :wedding_atelier do
     two_piece_attrs = {
       name: 'Set',
       sku: 'FP2218',
-      price: 219,
+      usd_amount: 219,
+      aud_amount: 279,
       hidden: true,
       description: 'An on-trend, fashion-forward option for the wedding day, The Set features a fitted crop top and a high waisted, full skirt; breathtaking together and beautiful apart.\nThe Set features covered buttons with loops and an invisible zipper on the skirt, and is fully customizable.'
     }
@@ -247,7 +253,8 @@ namespace :wedding_atelier do
     multi_way_attrs = {
       name: 'Multi Way',
       sku: 'FP2219',
-      price: 219,
+      usd_amount: 219,
+      aud_amount: 279,
       hidden: true,
       description: 'You can stop Googling “versatile bridesmaid dress” now–The Multiway is here. Flowing strips of soft fabric and open loops at the back waistline mean you can twist, cross, and tie the straps any way your heart (or–let’s be honest–your bride’s heart) desires.\nThe Multiway features an invisible zipper at the back and is fully customizable.'
     }
@@ -282,7 +289,18 @@ namespace :wedding_atelier do
 
   def find_or_create_product(attrs, styles, fits, taxon, option_types, options)
     p = Spree::Product.find_or_initialize_by_name(attrs[:name])
+    aud_amount = attrs.delete(:aud_amount)
+    usd_amount = attrs.delete(:usd_amount)
+    aud_currency = Spree::Config["currency"] == 'AUD'
+    default_price = aud_currency ? aud_amount : usd_amount
+    missing_price = {
+      amount: aud_currency ? usd_amount : aud_amount,
+      currency: aud_currency ? 'USD': 'AUD'
+    }
+    p.price = default_price
     p.update_attributes attrs
+    p.master.prices.create(missing_price)
+
     create_customizations(p, styles, 'style')
     create_customizations(p, fits, 'fit')
 
@@ -303,8 +321,11 @@ namespace :wedding_atelier do
         variant.on_demand = true
         variant.cost_currency = 'USD'
       end
+      v.prices.create(missing_price)
       v.option_values << size unless v.option_values.include?(size)
     end
+
+
     find_or_create_customisation_values('length', p, @length_attrs)
     find_or_create_customisation_values('fabric', p, @fabric_attrs)
   end
