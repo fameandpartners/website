@@ -101,18 +101,18 @@ var MoodBoardEvent = React.createClass({
         that.setupNotificationsChannel();
       });
     }).fail(function(e) {
-      ReactDOM.render(<Notification errors={["Sorry, there was a problem starting your chat session. We'll have it back up and running soon."]} />,
+      ReactDOM.render(<Notification errors={['Sorry, there was a problem starting your chat session. We\'ll have it back up and running soon.']} />,
           document.getElementById('notification'));
     });
   },
 
   setupChatChannel: function(){
     var that = this;
-    var chatChannelName = that.props.channel_prefix + 'wedding-atelier-channel-' + that.props.event_id;
+    var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
     this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(channel){
-      that.setState({chatChannel: channel});
       channel.join().then(function() {
         console.log('Joined channel as ' + that.props.username);
+        that.setState({chatChannel: channel});
         that.setUpMessagingEvents();
         that.loadChannelHistory();
         that.loadChannelMembers();
@@ -124,11 +124,11 @@ var MoodBoardEvent = React.createClass({
           uniqueName: chatChannelName,
           friendlyName: that.props.wedding_name
         }).then(function(chatChannel) {
-          that.setState({chatChannel: chatChannel});
           chatChannel.join().then(function() {
+            that.setState({chatChannel: chatChannel});
             that.setUpMessagingEvents();
-            that.sendMessageBot("Welcome to your wedding board. Here's where you can chat with your bridal party, discuss different wedding looks and invite a Fame stylist.").then(function(){
-              that.sendMessageBot("Why don't you begin by creating your first dress? Just select 'ADD YOUR FIRST DRESS' to start customizing.");
+            that.sendMessageBot('Welcome to your wedding board. Here\'s where you can chat with your bridal party, discuss different wedding looks and invite a Fame stylist.').then(function(){
+              that.sendMessageBot('Why don\'t you begin by creating your first dress? Just select \'ADD YOUR FIRST DRESS\' to start customizing.');
             });
           });
         });
