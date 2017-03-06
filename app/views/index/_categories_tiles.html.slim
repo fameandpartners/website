@@ -10,7 +10,7 @@ section.section-box.container.section-style-icon
       - current_edit_mob_image = "homepage/fp-style-icon/feb-09-tile-1-mob.jpg"
       - current_edit_link = wedding_atelier_app_landing_page_path
 
-      = link_to current_edit_link
+      = link_to current_edit_link + "?hp"
         .section-img-wrap.copy-center
           picture
             .img-wrap
@@ -28,10 +28,10 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/ruffle'
+        = link_to dresses_path + '/two-piece?hp'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-2.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-2.jpg")}'
 
             .content-wrap
               .container-cta
@@ -40,13 +40,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Ruffles
+                        span.copy-highlight Two Piece Sets
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/backless'
+        = link_to dresses_path + '/backless?hp'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-3.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-3.jpg")}'
 
             .content-wrap
               .container-cta
@@ -55,14 +55,14 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Backless
+                        span.copy-highlight All things Backless
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/off-shoulder'
+        = link_to evening_shop_lace_page_path + '?hp'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-4.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-4.jpg")}'
 
             .content-wrap
               .container-cta
@@ -71,13 +71,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Cold Shoulder
+                        span.copy-highlight Lace Looks
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/daytime'
+        = link_to evening_shop_cold_shoulder_page_path + "?hp"
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/feb-09-tile-5.jpg")}'
+              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-5.jpg")}'
 
             .content-wrap
               .container-cta
@@ -86,4 +86,4 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Daywear
+                        span.copy-highlight Shoulder-baring styles
