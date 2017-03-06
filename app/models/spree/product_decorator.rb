@@ -72,7 +72,6 @@ Spree::Product.class_eval do
   attr_accessible :master_attributes
 
   SIZE_CHARTS = SizeChart::CHARTS.keys
-  CNY_DELIVERY_PERIOD = '2 weeks'
   validates_inclusion_of :size_chart, in: SIZE_CHARTS
 
   def name_with_sku
@@ -333,31 +332,14 @@ Spree::Product.class_eval do
   end
 
   def delivery_period
-    # TODO: probably should be at Policy
-    if Features.active?(:cny_delivery_delays)
-      CNY_DELIVERY_PERIOD
-    else
-      minimum_delivery_period
-    end
+    delivery_period_policy.delivery_period
   end
 
-  # Min delivery period got from taxons
-  def minimum_delivery_period
-    return Spree::Taxon::DELIVERY_PERIODS.first unless taxons.any?
-
-    taxons.inject(taxons.first.delivery_period) do |min_period, taxon|
-      current_major_value = major_value_from_period(taxon.delivery_period)
-      min_major_value = major_value_from_period(min_period)
-
-      current_major_value < min_major_value ? taxon.delivery_period : min_period
-    end
+  def delivery_period_policy
+    @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
   end
 
   private
-
-  def major_value_from_period(period)
-    period.match(/(?<=\s)\d+/).to_s.to_i
-  end
 
   def build_variants_from_option_values_hash
     ensure_option_types_exist_for_values_hash
