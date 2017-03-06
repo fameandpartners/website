@@ -31,105 +31,13 @@
 
   .heading-thin-line-bottom {
 
-    .title::after{
+    .title::after {
       content: "";
       padding-bottom: 30px;
       border-bottom: 1px solid $c-neutral-black;
       width: 30px;
       display: block;
       margin: 0 auto 30px;
-    }
-
-  }
-
-  .section-apply-now {
-    margin-bottom: 60px;
-  }
-
-  .content-copy {
-    padding: 0 55px;
-  }
-
-  .section-instagram {
-    padding-bottom: 40px;
-
-    &.section-box {
-      margin-top: 0;
-    }
-
-    .instagram-widget {
-      padding: $box-padding-top 0;
-      display: inline-block;
-
-      h3 {
-        font-family: $font-family-secondary;
-        font-weight: bold;
-        font-size: 2.2rem;
-        line-height: 5.2rem;
-      }
-
-      .copy-wrap {
-        padding: 20px 30px;
-      }
-
-      .item {
-        padding: 5px;
-      }
-
-      .overlay {
-        position: absolute;
-        text-align: center;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        color: $c-neutral-white;
-        opacity: 0;
-        @include transition(opacity 0.2s linear);
-
-        .overlay-outer-wrap {
-          display: table;
-          width: 100%;
-          height: 100%;
-        }
-
-        .overlay-inner-wrap {
-          position: relative;
-          display: table-cell;
-          vertical-align: middle;
-        }
-
-        .cta-instagram {
-          background: $c-neutral-white;
-          padding: 0 20px 3px;
-          color: $c-neutral-black;
-
-          .user {
-            font-size: 1.4rem;
-            font-family: $font-family-secondary;
-            font-weight: 500;
-            margin-right: 5px;
-          }
-
-          .cta-link {
-            font-size: 1.2rem;
-            font-style: italic;
-            text-decoration: underline;
-            border: 0;
-          }
-
-        }
-
-      }
-
-      .item-wrap:hover {
-
-        .overlay {
-          opacity: 1;
-        }
-
-      }
-
     }
 
   }
@@ -185,32 +93,79 @@
 
   }
 
+  .add-social-handler-trigger {
+    cursor: pointer;
+  }
+
+  .section-instagram {
+    padding-bottom: 10px;
+
+    &.section-box {
+      margin-top: 0;
+    }
+
+    .instagram-widget {
+      padding: 0;
+    }
+
+    h3 {
+      @extend .font-sans-serif;
+      font-weight: 500;
+      font-size: 2.2rem;
+      line-height: 5.2rem;
+    }
+
+  }
+
+  .intro-wrapper .copy-wrap {
+    width: 100%;
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
-    .heading-thin-line-bottom {
+    .section-box {
+      margin-top: 80px;
+    }
 
-      .no-margin-thin-line::after {
-        margin-right: 0;
-        margin-left: 0;
-      }
+    .section-apply-now {
+      margin-top: 60px;
+      margin-bottom: 100px;
+    }
 
+    .section-no-margin-top {
+      margin-top: 0;
+    }
+
+    .content-copy-right {
+      padding-left: 55px;
+      padding-right: 70px;
+    }
+
+    .content-copy-left {
+      padding-left: 70px;
+      padding-right: 55px;
     }
 
     .copy-header {
       padding-left: 60px;
       padding-right: 60px;
+
+      .heading-thin-line-bottom {
+
+        .title::after {
+          margin-left: 0;
+        }
+
+      }
+
     }
 
     .copy-padding-item {
       padding: 0 75px;
     }
 
-    .section-box {
-      margin-top: 80px;
-    }
-
-    .section-no-margin-top {
-      margin-top: 0;
+    .section-instagram .copy-wrap {
+      padding: 20px 40px;
     }
 
     .items-grid {
@@ -228,6 +183,10 @@
         float: right;
       }
 
+      .section-box {
+
+      }
+
     }
 
   }
@@ -238,10 +197,48 @@
       margin-top: 30px;
     }
 
-    .copy-header {
+    .section-box {
+      margin-top: 40px;
+    }
 
-      .btn-featured-black {
-        margin-bottom: 20px;
+    .intro-wrapper .cta-mobile-featured {
+      display: block;
+      margin-top: 50px;
+    }
+
+    .section-goals {
+      margin-top: 20px;
+    }
+
+    .section-apply-now .copy-wrap {
+      border-top: 1px solid $c-neutral-black;
+      padding: 30px 0 60px;
+    }
+
+    .section-instagram .copy-wrap {
+      text-align: left;
+      font-size: 1rem;
+      padding: 10px;
+
+      h3 {
+        font-weight: 500;
+        font-size: 1.8rem;
+        line-height: 4.2rem;
+        margin-top: 0;
+      }
+
+    }
+
+    .heading-free-clothes-mobile {
+      margin-left: -15px;
+      margin-right: -15px;
+      font-size: 3.1rem;
+    }
+
+    .items-grid {
+
+      .section-no-margin-top {
+        margin-top: 10px;
       }
 
     }
@@ -249,10 +246,6 @@
     .section-apply-now {
       border-top: 1px solid $c-neutral-black;
       padding-top: 10px;
-    }
-
-    .section-box {
-      margin-top: 10px;
     }
 
     .form-group {
