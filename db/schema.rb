@@ -145,15 +145,15 @@ ActiveRecord::Schema.define(:version => 20170217005814) do
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
-    t.string   "point_of_view"
+    t.string   "point_of_view",                                    :default => "front"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
