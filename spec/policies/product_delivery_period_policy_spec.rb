@@ -10,13 +10,13 @@ describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
     end
 
     it "returns maximum delivery period from taxons" do
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
-      expect(subject.maximum_delivery_period).to eq('10 - 14 business days')
+      product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
+      expect(subject.maximum_delivery_period).to eq('12 - 15 business days')
 
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '2 - 4 weeks')
       expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
 
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '10 - 14 business days')
+      product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
       expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
     end
   end
