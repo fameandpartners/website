@@ -10,9 +10,13 @@ module Forms
     property :product_id
     property :image
 
+    validates :name, presence: true
     validates :presentation, presence: true
-    validates :price, numericality: { greater_than_or_equal_to: 0 }
+    validates :customisation_type,  presence: true
+    validates :product_id,  presence: true
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
     validates :point_of_view,
+              presence: true,
               inclusion: CustomisationValue::AVAILABLE_POINTS_OF_VIEW,
               allow_nil: true,
               allow_blank: true
