@@ -1,0 +1,119 @@
+/* [Simplified Nav Menu] Partial styles
+-------------------------------------------------------*/
+.simplified-nav-container {
+  .flex-container {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-flex-direction: row; /* Safari */
+    flex-direction:         row;
+    -webkit-align-items: stretch; /* Safari */
+    align-items:         stretch;
+
+    .flex1 { flex: 1 }
+  }
+
+  .copy-highlight {
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+  }
+
+  .picture-col {
+    width: 310px;
+    margin-left: 15px;
+  }
+
+  .nav-img {
+    margin-bottom: 15px;
+  }
+
+  .rect-wrapper {
+    background: inherit;
+    margin: 0 auto;
+    position: relative;
+    border: none;
+    z-index: inherit;
+  }
+
+  .nav-menu-buffer {
+    padding: 0px 60px 10px;
+  }
+
+  .center-wrapper {
+    position: relative;
+  }
+
+  .nav-menu-wrap {
+    background: transparent;
+    display: none;
+    z-index: 0;
+    position: relative;
+    padding: 0px;
+
+    .title {
+      font-size: 1.3rem;
+      letter-spacing: 0.05rem;
+    }
+
+    .normal-item {
+      font-size: 1.4rem;
+      line-height: 2.6rem;
+    }
+
+
+    .normal-item a {
+      cursor: pointer;
+      display: inline;
+    }
+
+    .bottom-border-mark::after {
+      content: '';
+      display: block;
+      height: 1px;
+      bottom: -14px;
+      position: relative;
+      width: 30px;
+      background: $c-neutral-black;
+    }
+  }
+
+  .nav-menu-wrap.active {
+    z-index: 101;
+  }
+
+  .nav-menu-contents {
+    opacity: 0;
+    @include transition(0.15s opacity);
+    border-bottom: 1px solid $c-neutral-5;
+  }
+
+  .nav-menu-wrap.active .nav-menu-contents{
+    opacity: 1;
+  }
+
+  .menu-dresses .nav-menu-contents {
+    max-width: 1060px;
+  }
+  .menu-wedding .nav-menu-contents{
+    max-width: 740px;
+  }
+  .menu-wrap {
+    width: 990px;
+  }
+
+  // Overwrites
+  &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+    margin: 0 20px;
+    display: inline;
+    font-size: 1.3rem;
+    letter-spacing: 0.05rem;
+  }
+  &.nav-menu-container .home-menu .nav-main-menu span.lookbook {
+    margin-right: 0px;
+  }
+  .col .cta-link {
+    font-weight: 300;
+    font-family: $font-heading;
+    font-style: italic;
+    border-bottom: 1px solid $c-neutral-6;
+  }
+}
