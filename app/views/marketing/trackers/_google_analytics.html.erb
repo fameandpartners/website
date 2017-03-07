@@ -19,6 +19,10 @@
     // Notice that we NEED to remove this plugin when working with enhanced ecommerce: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#overview
     ga('require', 'ecommerce');
 
+    // a/b tests for custom dimension2
+    var gtm_container = <%=@gtm_container.to_json %>
+    ga('set', 'dimension2', gtm_container.user.activeExperiments);
+
     ga('send', 'pageview');
 
     <% if flash[:signed_up_just_now] %>
