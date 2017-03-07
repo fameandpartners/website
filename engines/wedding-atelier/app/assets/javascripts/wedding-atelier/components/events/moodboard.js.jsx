@@ -1,7 +1,6 @@
 var MoodBoardEvent = React.createClass({
 
   propTypes: {
-    bot_profile_photo: React.PropTypes.string,
     channel_prefix: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
     current_user: React.PropTypes.object,
@@ -177,22 +176,6 @@ var MoodBoardEvent = React.createClass({
     var _chat = $.extend({}, this.state.chat);
     _chat.typing = _whoIsTyping;
     this.setState({chat: _chat});
-  },
-
-  sendMessageBot: function(message, type) {
-    if (type === undefined) {
-      type = "simple";
-    }
-
-    message = {
-      profilePhoto: this.props.bot_profile_photo,
-      author: "BridalBot",
-      time: Date.now(),
-      type: type,
-      content: message
-    };
-
-    return this.sendMessageToTwillio(message);
   },
 
   sendMessageToTwillio: function(message) {
@@ -468,7 +451,6 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     var chatProps = {
-      bot_profile_photo: this.props.bot_profile_photo,
       profile_photo: this.props.profile_photo,
       username: this.props.username,
       user_id: this.props.user_id,

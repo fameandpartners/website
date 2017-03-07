@@ -9,14 +9,13 @@
                     event_id: @event.id,
                     dresses_path: event_dresses_path(@event),
                     wedding_name: @event.name,
-                    bot_profile_photo: image_path('bridal-bot.png'),
                     profile_photo: profile_image_path,
                     username: spree_current_user.full_name,
                     user_id: spree_current_user.id,
                     roles_path: '',
                     siteVersion: current_site_version.permalink,
                     filestack_key: ENV['FILESTACK_KEY'],
-                    channel_prefix: ENV['RAILS_ENV']},
+                    channel_prefix: 'no-bot'},
                   { class: 'moodboard-react-container container-fluid' }
 
 - content_for :javascript do

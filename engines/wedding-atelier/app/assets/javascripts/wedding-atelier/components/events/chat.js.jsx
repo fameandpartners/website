@@ -2,7 +2,6 @@ var Chat = React.createClass({
 
   propTypes: {
     profile_photo: React.PropTypes.string,
-    bot_profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
@@ -93,22 +92,6 @@ var Chat = React.createClass({
 
   sendMessageImage: function(image) {
     return this.sendMessage(image, "image");
-  },
-
-  sendMessageBot: function(message, type) {
-    if (type === undefined) {
-      type = "simple";
-    }
-
-    message = {
-      profilePhoto: this.props.bot_profile_photo,
-      author: "BridalBot",
-      time: Date.now(),
-      type: type,
-      content: message
-    };
-
-    return this.props.sendMessageFn(message);
   },
 
   sendMessage: function (message, type){
