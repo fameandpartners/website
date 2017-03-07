@@ -110,7 +110,7 @@ header.main {
         position: relative;
 
         &:not(.logo) {
-          margin: 0 12px;
+          margin: 0 10px;
         }
 
         em,
@@ -124,8 +124,10 @@ header.main {
       }
 
       .nav-main-menu {
-        padding-bottom: 28px;
-        margin-top: -2px;
+        padding-bottom: 20px;
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: -1px;
 
         span:hover {
           border-color: $c-neutral-black;
@@ -133,10 +135,8 @@ header.main {
 
       }
 
-      #search{
-        .nav-mobile-logo{
-          height: 15px;
-        }
+      #search .nav-mobile-logo {
+        height: 15px;
       }
 
     }
