@@ -128,6 +128,14 @@
   margin-top: 0 !important;
 }
 
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .mobile-text-center {
+    text-align: center;
+  }
+
+}
+
 // Fix for IE
 .img-responsive {
   width: 100%;
@@ -190,6 +198,22 @@
   .step-title::before {
     content: counter(step-counter)'.';
     padding-right: 5px;
+  }
+
+}
+
+.thin-line {
+
+  &--bottom::after {
+    content: "";
+    padding-bottom: 50px;
+    border-bottom: 1px solid $c-neutral-black;
+    width: 90px;
+    display: block;
+  }
+
+  &--alignCenter::after {
+    margin: 0 auto;
   }
 
 }

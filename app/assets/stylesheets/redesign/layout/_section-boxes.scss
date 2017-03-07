@@ -341,6 +341,10 @@ $top-overlay-margin-top: 37px;
   }
 }
 
+.heading-no-overlay.heading-overlay {
+  margin-bottom: 65px;
+  bottom: 0;
+}
 
 
 // When we need a 100%-wide section container with background

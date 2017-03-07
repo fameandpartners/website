@@ -43,11 +43,12 @@ describe Products::CollectionsController, type: :controller do
     describe 'returns a 404 status' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return(nil)
+        allow(Rails.application.config).to receive(:consider_all_requests_local).and_return(false)
       end
 
       it 'when querying a inexistent permalink' do
         get :show, permalink: 'nothing'
-        expect(response).to render_template(file: 'public/404', layout: false)
+        expect(response).to render_template(file: 'errors/404', layout: 'redesign/application')
         expect(response).to have_http_status(:not_found)
       end
     end

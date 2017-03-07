@@ -35,6 +35,7 @@ class Products::CollectionsController < Products::BaseController
   helper_method :page, :banner
 
   before_filter :redirect_undefined,
+                :redirect_site_version,
                 :canonicalize_sales,
                 :load_page,
                 :set_collection_resource,
@@ -53,6 +54,15 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+  def redirect_site_version
+    redirect_path = params.dig(:redirect, current_site_version.permalink.to_sym)
+    if redirect_path.present?
+      redirect_to url_for(redirect_path)
+    end
+  rescue NoMethodError => e
+    # :noop:
+  end
 
   def redirect_undefined
     if params[:permalink] =~ /undefined\Z/
@@ -114,7 +124,7 @@ class Products::CollectionsController < Products::BaseController
     if page.page_is_lookbook? || @collection_options
       page.template_path
     else
-      {file: 'public/404', layout: false, status: :not_found}
+      raise ActiveRecord::RecordNotFound
     end
   end
 
@@ -168,6 +178,7 @@ class Products::CollectionsController < Products::BaseController
       price_min:                       params[:price_min],
       price_max:                       params[:price_max],
       query_string:                    params[:q],
+      # TODO: delete this bad named variable: "remove_excluded_from_site_logic".
       remove_excluded_from_site_logic: page.get(:remove_excluded_from_site_logic)
     }
   end
