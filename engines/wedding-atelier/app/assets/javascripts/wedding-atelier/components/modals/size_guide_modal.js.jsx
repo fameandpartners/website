@@ -109,10 +109,10 @@ var SizeGuideModal = React.createClass({
                       <div className="col-xs-12 col-sm-6">
                         <div className="measure-actions" ref="actions">
                           <div className={measuresTabClasses} onClick={this.changeTab.bind(null, 'measure')}>
-                            <a href="#">Where to measure</a>
+                            <a href="javascript:;">Where to measure</a>
                           </div>
                           <div className={tipsTabClasses} onClick={this.changeTab.bind(null, 'tips')}>
-                            <a href="#">Measuring tips</a>
+                            <a href="javascript:;">Measuring tips</a>
                           </div>
                         </div>
 
