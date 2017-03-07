@@ -135,8 +135,7 @@ RSpec.describe ItemReturnCalculator do
     end
 
     it "calls Pins refund entry point" do
-      Time.zone do
-        expect(pin_payment).to receive(:refund).with(40, 'order_payment_ref').and_return(refund_response)
+        expect(pin_payment).to receive(:refund).with(4000, 'order_payment_ref').and_return(refund_response)
 
         created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
         created_item_return.reload
@@ -145,8 +144,7 @@ RSpec.describe ItemReturnCalculator do
         expect(created_item_return.refund_method).to eq('Pin')
         expect(created_item_return.refund_amount).to eq(4000)
         expect(created_item_return.refund_ref).to eq('response_token')
-        expect(created_item_return.refunded_at).to eq(Time.parse('2016-04-30 14:00:00'))
-      end
+        expect(created_item_return.refunded_at.strftime('%Y-%m-%d %H:%M:%S')).to eq('2016-04-30 14:00:00')
     end
   end
 end
