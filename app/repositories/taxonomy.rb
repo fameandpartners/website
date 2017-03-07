@@ -13,13 +13,7 @@ class Repositories::Taxonomy
   class << self
     def get_taxon_by_name(taxon_name)
       result = Array.wrap(taxon_name).compact.map do |tn|
-        tn = tn.downcase
-          taxon = taxons.find{|t| t.name.downcase == tn }
-          if taxon.nil? && tn.match(/-/)
-            tn = tn.gsub('-', ' ')
-            taxon = taxons.find{|t| t.name.downcase == tn }
-          end
-        taxon
+        taxons.find { |t| t.name.parameterize == tn.parameterize }
       end
       result.size < 2 ? result.first : result
     end

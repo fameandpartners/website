@@ -36,9 +36,17 @@ Spree::Order.class_eval do
 
   def project_delivery_date
     if complete?
-      delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
+      delivery_date = delivery_policy.delivery_date
       update_attribute(:projected_delivery_date, delivery_date)
     end
+  end
+
+  def delivery_period
+    delivery_policy.delivery_period
+  end
+
+  def delivery_policy
+    @delivery_policy ||= Policies::OrderProjectedDeliveryDatePolicy.new(self)
   end
 
   def returnable?

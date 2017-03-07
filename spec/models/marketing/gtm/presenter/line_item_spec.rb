@@ -4,9 +4,9 @@ module Marketing
   module Gtm
     module Presenter
       describe LineItem, type: :presenter do
-        let(:taxon)     { create(:taxon, name: 'Jeans') }
-        let(:product)   { create(:dress, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon]) }
-        let(:variant)   { create(:dress_variant, product: product) }
+        let(:taxon) { create(:taxon, name: 'Jeans') }
+        let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
+        let(:variant) { create(:dress_variant, product: product) }
         let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11) }
 
         subject(:presenter) { described_class.new(spree_line_item: line_item) }
@@ -22,14 +22,36 @@ module Marketing
           context 'given a spree line item' do
             it 'returns hash line item details' do
               expect(subject.body).to eq({
-                                             category:     'Jeans',
-                                             name:         'Super Dress',
-                                             quantity:     3,
-                                             sku:          'LineItemSKU',
-                                             variant_sku:  'VariantSKU',
-                                             product_sku:  'ProductSKU',
-                                             total_amount: 33.33
-                                         })
+                category:     'Jeans',
+                name:         'Super Dress',
+                quantity:     3,
+                total_amount: 33.33,
+                sku:          'LineItemSKU',
+                variant_sku:  'VariantSKU',
+                product_sku:  'ProductSKU',
+                description:  'Super Product Description',
+                image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.
+                product_path:  '/dresses/dress-super-dress-123',
+                product_url:  'http://localhost/dresses/dress-super-dress-123'
+              })
+            end
+          end
+        end
+
+        describe '#product_url' do
+          context 'given a base URL' do
+            let(:presenter) { described_class.new(spree_line_item: line_item, base_url: 'https://example.com') }
+
+            it do
+              expect(presenter.body).to include({ product_url: 'https://example.com/dresses/dress-super-dress-123' })
+            end
+          end
+
+          context 'given the APP_HOST env var' do
+            let(:app_host) { ENV.fetch('APP_HOST', 'https://example.com') }
+
+            it do
+              expect(presenter.body).to include({ product_url: "#{app_host}/dresses/dress-super-dress-123" })
             end
           end
         end

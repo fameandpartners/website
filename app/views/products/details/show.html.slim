@@ -211,7 +211,7 @@ javascript:
       // AddThis async call
       addthis.init()
     } catch(e) {
-      Raven && Raven.captureException(e)
+      // NOOP
     }
 
     // controls for details container, mobile only
