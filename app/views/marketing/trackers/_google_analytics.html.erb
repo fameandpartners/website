@@ -21,7 +21,7 @@
 
     // a/b tests for custom dimension2
     var gtm_container = <%=@gtm_container.to_json %>
-    ga('set', 'dimension2', gtm_container.user.activeExperiments);
+    ga('set', 'dimension2', gtm_container.user.active_experiments);
 
     ga('send', 'pageview');
 
