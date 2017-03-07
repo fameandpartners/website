@@ -126,7 +126,8 @@ RSpec.describe ItemReturnCalculator do
 
   describe '#advance_refund' do
     let(:pin_payment) { double(:pin_payment) }
-    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => '2016-05-01' } }) }
+    let(:created_at) { Time.parse('2016-05-01').utc.to_s }
+    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => created_at } }) }
 
     before do
       allow(Spree::Gateway::Pin).to receive(:where).and_return([pin_payment])
@@ -144,7 +145,7 @@ RSpec.describe ItemReturnCalculator do
         expect(created_item_return.refund_method).to eq('Pin')
         expect(created_item_return.refund_amount).to eq(4039)
         expect(created_item_return.refund_ref).to eq('response_token')
-        expect(created_item_return.refunded_at.strftime('%Y-%m-%d %H:%M:%S')).to eq('2016-04-30 14:00:00')
+        expect(created_item_return.refunded_at.utc.strftime('%Y-%m-%d %H:%M:%S UTC')).to eq(created_at)
     end
   end
 end
