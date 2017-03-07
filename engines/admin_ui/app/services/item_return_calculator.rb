@@ -31,7 +31,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   def advance_refund(event)
     refund_method_class = Spree::Gateway.const_get(event['data']['refund_method'], false)
     refund_method = refund_method_class.where(active: true).first
-    refund_amount = event.refund_amount.to_i * 100
+    refund_amount = event.refund_amount.to_f * 100
 
     response = refund_method.refund(refund_amount, @item_return.order_payment_ref)
 
