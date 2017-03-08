@@ -52,7 +52,7 @@
 
     .chat-log {
       width: 100%;
-      padding: 50px;
+      padding-top: 50px;
       overflow: auto;
       position: relative;
       flex-grow: 1;
@@ -65,21 +65,42 @@
       }
 
       .chat-welcome-message {
-        width: 100%;
         padding: 15px;
         top: 30%;
         position: absolute;
-        font-size: 18px;
+        font-size: 16px;
         font-family: $primary-font;
+
+        @include screen-xs {
+          top: 50%;
+          padding: 30px;
+          transform: translateY(-55%);
+        };
+
+        @include screen-sm { top: 20%; };
 
         .welcome-message-title {
           font-weight: 300;
+          text-align: center;
+
+          @include screen-xs {
+            margin-top: 0;
+            margin-bottom: 30px;
+          };
+
+          @include screen-xl {
+            text-align: left;
+          };
         }
 
         .welcome-message-content {
           background: $white-three;
-          margin: 0 10%;
-          padding: 12px 32px;;
+          padding: 40px 28px;
+
+          @include screen-sm {
+            margin: 0 10%;
+            padding: 12px 28px;
+          };
         }
 
         .stylist-tag {

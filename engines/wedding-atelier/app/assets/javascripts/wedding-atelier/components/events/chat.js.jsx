@@ -196,7 +196,7 @@ var Chat = React.createClass({
   },
 
   getWelcomeMessage: function(){
-    if(!this.state.messages.length || true){
+    if(!this.state.messages.length){
       return(
         <div className="chat-welcome-message">
           <div className="welcome-message-content">
