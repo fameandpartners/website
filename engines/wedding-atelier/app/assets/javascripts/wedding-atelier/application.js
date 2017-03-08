@@ -35,7 +35,7 @@
 // -------
 
 //= require twilio-common-0.1.5.min
-//= require twilio-chat-0.12.0.min
+//= require twilio-chat-0.12.0
 
 //--------------------------
 // Helpers
