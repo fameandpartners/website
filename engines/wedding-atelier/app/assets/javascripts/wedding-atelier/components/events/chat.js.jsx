@@ -195,6 +195,22 @@ var Chat = React.createClass({
     );
   },
 
+  getWelcomeMessage: function(){
+    if(!this.state.messages.length){
+      return(
+        <div className="chat-welcome-message">
+          <h2> Welcome to your wedding board </h2>
+          <p> You can get started by either: </p>
+          <ol>
+            <li> Talking to a fame stylist by tagging <b>@Stylist></b> in chat </li>
+            <li> Invite and chat with your bridal party </li>
+            <li> Add dresses to your dress board then vote and share </li>
+          </ol>
+        </div>
+      );
+    }
+  },
+
   scrollToBottom: function(){
     var scroll = function() {
       var elem = this.refs.chatLog;
@@ -211,9 +227,10 @@ var Chat = React.createClass({
   },
 
   render: function(){
-    var messages = this.getRenderedMessages();
-    var typing = this.getWhoisTyping();
-    var chatMembers = this.getChatMembers();
+    var messages = this.getRenderedMessages(),
+        typing = this.getWhoisTyping(),
+        chatMembers = this.getChatMembers(),
+        chatWelcomeMessage = this.getWelcomeMessage();
 
     return(
       <div className="chat row">
@@ -239,6 +256,7 @@ var Chat = React.createClass({
           title="Chat with your bridal party and stylists"
           data-content="Share your designs and discuss each look."
           data-placement="right">
+          {chatWelcomeMessage}
           {messages}
 
           <div className="chat-typing">
