@@ -1,0 +1,24 @@
+- cache ['views/layouts/redesign/header/simplified_nav/_wedding_shop'] do
+  .flex-container
+    .col.flex1.dresses-shop-by
+      ul
+        li.title Featured
+        = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
+
+    .col.flex1.dresses-shop-by
+      ul
+        li.title Services
+        = render partial: 'layouts/redesign/header/simplified_nav/wedding_services'
+
+    .col.picture-col
+      .wedding-planner.nav-item
+        = link_to '/wedding-atelier'
+          = image_tag 'simplified-nav/bridesmaids.jpg', class: 'img-responsive nav-img', alt: 'wedding-atelier'
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .cta-wrap
+                  span.cta-copy.cta-link-white-bg
+                    span.cta-link Custom
+                    span.copy-highlight  BRIDESMAID DRESSES
