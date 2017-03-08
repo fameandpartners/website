@@ -5,10 +5,18 @@
   .hero-wrap {
     margin-bottom: 0;
 
-    .heading > span:first-child {
-      font-size: 5.5rem;
-      line-height: 100%;
-      padding-bottom: 10px;
+    .heading {
+
+      .title {
+        font-size: 5.5rem;
+        line-height: 100%;
+        padding-bottom: 10px;
+      }
+
+      .title--large {
+        font-size: 7rem;
+      }
+
     }
 
     .sub-heading {

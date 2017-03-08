@@ -36,7 +36,7 @@ class Repositories::CartProduct
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: product.delivery_period
+        delivery_period: line_item.delivery_period
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       result.color  = Repositories::ProductColors.read(color_id)

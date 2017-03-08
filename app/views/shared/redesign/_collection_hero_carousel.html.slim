@@ -1,9 +1,9 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/feb-09-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-1-mob.jpg"
-= link_to modern_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Wedding Atelier App Beta" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-1-mob.jpg"
+= link_to the_evening_shop_landing_page_path + "?hp", class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Evening Shop" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -13,21 +13,20 @@
 
   .content-wrap
     .container-fluid
-      .row.v-align-top.extra-padding-top
-        .col-md-6.col-md-offset-1
-          // Note: Ugly inline style here as it's a very particular Design request.
-          .copy-wrap style="margin-left: -60px;"
+      .row
+        .col-md-6.col-md-offset-5
+          .copy-wrap.extra-padding-left
             h2.heading.no-margin-md
-              span The Modern <br>Evening Collection.
+              span.title.title--large The Evening <em>Shop</em>.
               span.sub-heading
-                | Less "high society," more high fashion.
+                | Custom evening wear, made-to-order. <br>Because ball gowns are not meant to blend in.
               span.sub-heading
-                | <span class="link-underline-lighter"><em>Shop</em></span> custom gowns.
+                | <em class="link-underline">Explore</em> evening.
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/feb-09-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-2-mob.jpg"
-= link_to bespoke_bridal_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-2-mob.jpg"
+= link_to bespoke_bridal_collection_landing_page_path + "?hp", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -38,20 +37,25 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-5.col-md-offset-1.col-lg-4
+        .col-md-5.col-md-offset-6
           .copy-wrap
             h2.heading.no-margin-md
-              span Say goodbye <br>to off-the-rack.
+              span.title.title--large The <em>new</em> way <br>to wedding.
               span.sub-heading
-                | And hello to the Bespoke Bridal Collection.
+                - if current_site_version.is_australia?
+                  - price_start_from = "$379"
+                - else
+                  - price_start_from = "$299"
+
+                | Exclusive designs, exquisite fabrics, made-to-order<br class="visible-lg">…and starting at just #{price_start_from}.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Create <span class="copy-highlight">Your Look</span>
+                | Shop <span class="copy-highlight">BESPOKE BRIDAL</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/feb-09-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/feb-09-featured-3-mob.jpg"
-= link_to best_of_fame_collection_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Best of Fame" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-3-mob.jpg"
+= link_to best_of_fame_collection_path + "?hp", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Best of Fame" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -62,12 +66,12 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-5.col-md-offset-1.col-lg-4
-          .copy-wrap
+        .col-md-5.col-md-offset-4.col-lg-4
+          .copy-wrap.text-center
             h2.heading.no-margin-md
-              span Your favorite <br>Fame styles…
+              span.title.title--large Quick <em>and</em> <br>custom.
               span.sub-heading
-                | …made-to-order, just for you, in 5 days or less
+                | Made-to-order in just five days. <em>(Seriously.)</em>
             .cta-wrapper
               span.btn-md.btn-featured
                 | Get it <span class="copy-highlight">Express</span>

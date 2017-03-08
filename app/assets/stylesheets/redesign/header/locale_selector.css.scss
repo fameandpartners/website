@@ -23,14 +23,11 @@
 
 // Desktop
 #gray-top-banner {
-  background-color: $c-neutral-black;
-  height: 25px;
-  padding-top: 4px;
-  font-weight: 500;
-
-  div{
-    padding-top: 0;
-    color: white;
+  .free-shipping {
+    color: $c-neutral-white;
+    height: 25px;
+    padding-top: 4px;
+    font-weight: 500;
   }
 
   .free-shipping {
@@ -38,7 +35,7 @@
   }
 
   #account-area {
-
+    padding-top: 4px;
     a span {
       color: $c-neutral-white;
     }
@@ -84,6 +81,7 @@
 }
 
 #locale-selector-container {
+  color: $c-neutral-white;
   position: relative;
   text-transform: initial;
   text-align: left;
