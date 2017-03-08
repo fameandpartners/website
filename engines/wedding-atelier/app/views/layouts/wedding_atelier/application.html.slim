@@ -40,8 +40,8 @@ doctype html
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
 
-    - if flash.key?(:error) && !flash[:error].empty?
-      = react_component 'Notification', errors: [flash[:error]]
+    - if flash.key?(:error) && flash[:error].present?
+      = react_component 'Notification', { errors: [flash[:error]] }, { class: 'error-notification' }
     #notification
     #wrap
       = render('wedding_atelier/shared/header') if include_header?
