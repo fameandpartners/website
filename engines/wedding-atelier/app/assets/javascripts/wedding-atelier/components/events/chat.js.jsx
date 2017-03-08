@@ -196,16 +196,18 @@ var Chat = React.createClass({
   },
 
   getWelcomeMessage: function(){
-    if(!this.state.messages.length){
+    if(!this.state.messages.length || true){
       return(
         <div className="chat-welcome-message">
-          <h2> Welcome to your wedding board </h2>
-          <p> You can get started by either: </p>
-          <ol>
-            <li> Talking to a fame stylist by tagging <b>@Stylist></b> in chat </li>
-            <li> Invite and chat with your bridal party </li>
-            <li> Add dresses to your dress board then vote and share </li>
-          </ol>
+          <div className="welcome-message-content">
+            <h2 className="welcome-message-title"> Welcome to your Wedding Board </h2>
+            <p> You can get started by either: </p>
+            <ol>
+              <li><p>Talking to a fame stylist by tagging <span className="stylist-tag">@Stylist</span> in chat</p></li>
+              <li><p> Invite and chat with your bridal party</p></li>
+              <li><p> Start adding dresses to your dress board to vote and share with your bridal party</p></li>
+            </ol>
+          </div>
         </div>
       );
     }
@@ -236,17 +238,10 @@ var Chat = React.createClass({
       <div className="chat row">
         <div className="chat-general-info center-block">
           <div className="row">
-            <div className="col-xs-7">
+            <div className="col-xs-12">
               <div className="chat-header-left-side">
                 <strong className="walkthrough-messages" title="See who's online" data-content="Then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
               </div>
-            </div>
-            <div className="col-xs-5">
-              <a href="https://www.fameandpartners.com/wedding-consultation" target="_blank" className="chat-header-right-side pull-right">
-                <img className="stylist-photo" src="/assets/wedding-atelier/amber.png" />
-                <span className="walkthrough-messages" title="Invite a stylist to join" data-content="Here's how to request a stylist to help the entire bridal party decide on the dress. She'll even offer advice on styling, accessories, hair, makeup, and more." data-placement="bottom"> INVITE A STYLIST </span>
-              </a>
-
             </div>
           </div>
         </div>

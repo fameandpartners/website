@@ -65,16 +65,32 @@
       }
 
       .chat-welcome-message {
-        background: $white-three;
+        width: 100%;
         padding: 15px;
-        margin: 15px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 30%;
         position: absolute;
+        font-size: 18px;
+        font-family: $primary-font;
+
+        .welcome-message-title {
+          font-weight: 300;
+        }
+
+        .welcome-message-content {
+          background: $white-three;
+          margin: 0 10%;
+          padding: 12px 32px;;
+        }
+
+        .stylist-tag {
+          font-size: 18px;
+          font-weight: 500;
+          font-family: $secondary-font;
+        }
 
         ol {
-          padding: 0;
-          list-style-position: inside;
+          padding-left: 32px;
+          p { margin: 0 0 0 10px; }
         }
       }
 
