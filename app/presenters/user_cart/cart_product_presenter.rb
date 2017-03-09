@@ -16,13 +16,12 @@ module UserCart
           "#{t.name} #{display_price} "
         end
 
-        attrs = {
+        {
           id: t.id,
           name: t.name,
           display_price: t.display_price,
           cart_summary: cart_summary
         }
-        attrs
       end
 
       result[:making_options] = (making_options || []).map do |option|
