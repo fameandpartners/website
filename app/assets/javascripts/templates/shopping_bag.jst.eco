@@ -83,8 +83,7 @@
             <dd>Size: <span><%= product.size.presentation %>, </span></dd>
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
-            - height_title = product.from_wedding_atelier ? 'Height' : 'Skirt Length'
-            <dd><%= height_title %>: <span><%= product.height %></span></dd>
+            <dd><%= product.height_title %>: <span><%= product.height %></span></dd>
             <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>
             <dd><%= customization.cart_summary %></dd>

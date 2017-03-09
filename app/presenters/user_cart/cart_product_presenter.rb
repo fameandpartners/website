@@ -8,6 +8,7 @@ module UserCart
       result[:size] = size.marshal_dump if size.present?
       result[:color] = color.marshal_dump if color.present?
       result[:from_wedding_atelier] = from_wedding_atelier
+      result[:height_title] = height_title
       result[:customizations] = (customizations || []).map do |t|
         display_price = t.price > 0 ? t.display_price : ''
         cart_summary = if from_wedding_atelier
