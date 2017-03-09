@@ -35,7 +35,8 @@ var MoodBoardEvent = React.createClass({
         members: [],
         messages: [],
         typing: [],
-        unreadCount: 0
+        unreadCount: 0,
+        loading: true
       },
       event: {
         dresses: [],
@@ -111,7 +112,7 @@ var MoodBoardEvent = React.createClass({
     this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(channel){
       channel.join().then(function() {
         console.log('Joined channel as ' + that.props.username);
-        that.setState({chatChannel: channel});
+        that.setState({ chatChannel: chatChannel });
         that.setUpMessagingEvents();
         that.loadChannelHistory();
         that.loadChannelMembers();
@@ -237,6 +238,7 @@ var MoodBoardEvent = React.createClass({
 
       var _chat = $.extend({}, this.state.chat);
       _chat.messages = _messages;
+      _chat.loading = false;
       this.setState({chat: _chat});
     }.bind(this));
   },
@@ -462,7 +464,8 @@ var MoodBoardEvent = React.createClass({
       messages: this.state.chat.messages,
       members: this.state.chat.members,
       typing: this.state.chat.typing,
-      dresses: this.state.event.dresses
+      dresses: this.state.event.dresses,
+      loading: this.state.chat.loading
     };
 
     var selectSizeProps = {

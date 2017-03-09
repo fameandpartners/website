@@ -12,7 +12,8 @@ var Chat = React.createClass({
     messages: React.PropTypes.array,
     members: React.PropTypes.array,
     typing: React.PropTypes.array,
-    dresses: React.PropTypes.array
+    dresses: React.PropTypes.array,
+    loading: React.PropTypes.bool
   },
 
   getInitialState: function(){
@@ -228,6 +229,16 @@ var Chat = React.createClass({
     $('img', this.refs.chatLog).on('load', scroll);
   },
 
+  chatContent: function(){
+    if(this.props.loading){
+      return (<ImageLoader loading={this.props.loading}/>);
+    }else if(this.state.messages.length){
+      return this.getRenderedMessages();
+    }else{
+      return this.getWelcomeMessage();
+    }
+  },
+
   render: function(){
     var messages = this.getRenderedMessages(),
         typing = this.getWhoisTyping(),
@@ -251,9 +262,7 @@ var Chat = React.createClass({
           title="Chat with your bridal party and stylists"
           data-content="Share your designs and discuss each look."
           data-placement="right">
-          {chatWelcomeMessage}
-          {messages}
-
+          {this.chatContent()}
           <div className="chat-typing">
             {typing}
           </div>
