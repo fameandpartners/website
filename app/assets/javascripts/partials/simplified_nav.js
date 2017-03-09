@@ -16,7 +16,7 @@
   }
 
   function openMenu(menuIndex){
-    removeActive(menuIndex);
+    removeActive();
     addHighlightingToMenuIndex(menuIndex);
     $simplifiedNavContainer.find('.nav-menu-wrap:eq(' + menuIndex + ')').addClass('active');
   }
@@ -25,6 +25,9 @@
   //Mega menu trigger
   $simplifiedNavContainer.find('.js-open-nav-menu').on('mouseover', function() {
     openMenu($(this).index());
+  });
+  $simplifiedNavContainer.find('.js-close-nav-menu').on('mouseover', function() {
+    removeActive();
   });
 
   // Mouse leaves hit area zone
