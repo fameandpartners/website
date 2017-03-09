@@ -8,8 +8,7 @@ module WeddingAtelier
     private
 
     def destroy_invitation
-      invitation = event.invitations.where(user_email: user.email).first
-      invitation.destroy if invitation
+      event.invitations.where(user_email: user.email).destroy_all
     end
   end
 end
