@@ -16,6 +16,10 @@ module Marketing
           @base_url = base_url
         end
 
+        def coupon_code
+          order.coupon_code
+        end
+
         def line_items
           order.line_items.map { |item| LineItem.new(spree_line_item: item, base_url: base_url).body }
         end
@@ -55,6 +59,7 @@ module Marketing
 
         def body
           {
+              coupon_code:            coupon_code,
               number:                 number,
               email:                  email,
               currency:               currency,

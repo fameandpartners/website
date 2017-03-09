@@ -22,14 +22,6 @@ module Marketing
           logged_in? ? "#{user.first_name} #{user.last_name}" : UNKNOWN_STRING
         end
 
-        def first_name
-          logged_in? ? "#{user.first_name}" : UNKNOWN_STRING
-        end
-
-        def last_name
-          logged_in? ? "#{user.last_name}" : UNKNOWN_STRING
-        end
-
         def email
           logged_in? ? user.email : UNKNOWN_STRING
         end
@@ -67,9 +59,7 @@ module Marketing
             gender:   gender,
             ip:       request_ip,
             loggedIn: logged_in?,
-            name:     name,
-            first_name: first_name,
-            last_name: last_name
+            name:     name
           }
         end
       end
