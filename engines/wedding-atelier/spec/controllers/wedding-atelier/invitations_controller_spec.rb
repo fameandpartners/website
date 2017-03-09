@@ -36,23 +36,31 @@ describe WeddingAtelier::InvitationsController, type: :controller do
   end
 
   describe '#accept' do
-    context 'when accepting an invitation' do
-      let(:invited) { create(:spree_user, first_name: 'invite', last_name: 'me')}
-      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: invited.email) }
-      it 'marks the invitation as accepted' do
+    context 'when user is logged in' do
+      let(:invited_user) { create(:spree_user, first_name: 'invite', last_name: 'me', email: 'logged@user.com')}
+      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: invited_user.email) }
+      it 'accepts the invitation and redirects to event' do
+        allow(controller).to receive(:spree_user_signed_in?).and_return true
         expect do
           get :accept, event_id: event.id, invitation_id: invitation.id
-        end.to change { invitation.reload.state }.to('accepted')
+        end.to change{invitation.reload.state}.from('pending').to('accepted')
       end
     end
 
-    context 'with mixed case email address' do
-      let!(:invited) { create(:spree_user, email: 'mIxEed@Email.com', first_name: 'invite', last_name: 'me')}
-      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: 'mIxEed@Email.com') }
-      it 'marks the invitation as accepted' do
-        expect do
-          get :accept, event_id: event.id, invitation_id: invitation.id
-        end.to change { invitation.reload.state }.to('accepted')
+    context 'when user is not logged in but exists' do
+      let!(:invited) { create(:spree_user, first_name: 'invite', last_name: 'me', email: 'invited@user.com')}
+      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: 'INVited@uSer.com') }
+      it 'finds the user no matter caps and redirects to login' do
+        get :accept, event_id: event.id, invitation_id: invitation.id
+        expect(response).to redirect_to("/wedding-atelier/sign_in?invitation_id=#{invitation.id}")
+      end
+    end
+
+    context 'when user does not exist' do
+      let(:invitation) { event.invitations.create(inviter_id: user.id, user_email: 'neW@uSer.com') }
+      it 'finds the user no matter caps and redirects to login' do
+        get :accept, event_id: event.id, invitation_id: invitation.id
+        expect(response).to redirect_to("/wedding-atelier/signup?invitation_id=#{invitation.id}")
       end
     end
   end

@@ -26,6 +26,13 @@
     }
   }
 
+  .checkbox {
+    text-align: center;
+    label {
+      margin-left: 0;
+    }
+  }
+
   @media screen and (min-width: $screen-sm-min) {
     .btn-black {
       @include block-center(10px);

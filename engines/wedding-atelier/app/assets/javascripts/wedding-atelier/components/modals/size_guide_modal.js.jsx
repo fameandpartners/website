@@ -98,7 +98,7 @@ var SizeGuideModal = React.createClass({
           <div className="modal-dialog modal-vertical-align" role="document">
             <div className="modal-content">
               <div className="modal-body">
-                <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
+                <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close" />
                 <div className="modal-body-container text-center">
                   <h1>
                     Size Guide
@@ -108,11 +108,11 @@ var SizeGuideModal = React.createClass({
                     <div className="row">
                       <div className="col-xs-12 col-sm-6">
                         <div className="measure-actions" ref="actions">
-                          <div className={measuresTabClasses}>
-                            <a href="#" onClick={this.changeTab.bind(null, 'measure')}>Where to measure</a>
+                          <div className={measuresTabClasses} onClick={this.changeTab.bind(null, 'measure')}>
+                            <a href="#">Where to measure</a>
                           </div>
-                          <div className={tipsTabClasses}>
-                            <a href="#" onClick={this.changeTab.bind(null, 'tips')}>Measuring tips</a>
+                          <div className={tipsTabClasses} onClick={this.changeTab.bind(null, 'tips')}>
+                            <a href="#">Measuring tips</a>
                           </div>
                         </div>
 

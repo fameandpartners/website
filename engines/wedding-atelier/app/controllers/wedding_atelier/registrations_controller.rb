@@ -101,7 +101,8 @@ module WeddingAtelier
         allow_params_authentication!
         authenticate_spree_user!
         if spree_user_signed_in? && user.wedding_atelier_signup_complete?
-          redirect_to wedding_atelier.event_path(user.events.last)
+          event = user.events.last
+          redirect_to wedding_atelier.event_path(id: event.id, slug: event.slug)
         elsif spree_user_signed_in?
           redirect_to action: user.wedding_atelier_signup_step
         else

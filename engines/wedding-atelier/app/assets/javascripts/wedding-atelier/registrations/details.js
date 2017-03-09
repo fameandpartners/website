@@ -46,8 +46,9 @@ $.fn.incrementButton = function(){
 $(document).ready(function() {
   $('.registrations__details-form.signup .js-number-field').incrementButton();
 
-  $('.registrations__details-form #spree_user_event_role').select2({
-    minimumResultsForSearch: Infinity
+  $('.registrations__details-form #wedding_role').select2({
+    minimumResultsForSearch: Infinity,
+    placeholder: 'Please select your height'
   });
 
   $('.registrations__details-form .input-group').datepicker({

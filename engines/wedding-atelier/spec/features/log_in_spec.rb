@@ -15,7 +15,7 @@ describe 'auth process', type: :feature, js: true do
             fill_in 'spree_user_email', with: completed_user.email
             fill_in 'spree_user_password', with: completed_user.password
           end
-          click_button 'Sign in'
+          click_button 'Log in'
           expect(page).not_to have_content 'Invalid email or password.'
           expect(page.current_path).to eq '/wedding-atelier/events'
         end
@@ -28,7 +28,7 @@ describe 'auth process', type: :feature, js: true do
             fill_in 'spree_user_email', with: user.email
             fill_in 'spree_user_password', with: user.password
           end
-          click_button 'Sign in'
+          click_button 'Log in'
           expect(page).not_to have_content 'Invalid email or password.'
           expect(page.current_path).to eq '/wedding-atelier/signup/size'
         end
@@ -42,7 +42,7 @@ describe 'auth process', type: :feature, js: true do
           fill_in 'spree_user_email', with: user.email
           fill_in 'spree_user_password', with: 'invalid_password'
         end
-        click_button 'Sign in'
+        click_button 'Log in'
         expect(page).to have_content 'Invalid email or password.'
       end
     end
