@@ -11,12 +11,12 @@
 
 }
 
-// Creating extra buffer between container and browser window
 .container-fluid {
-  padding-left: 30px;
+  padding-left: 30px;	
   padding-right: 30px;
 }
 
+// Creating extra buffer between container and browser window
 .container-fluid.no-padding.no-margin {
   padding: 0;
 

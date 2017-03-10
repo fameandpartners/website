@@ -20,6 +20,9 @@ describe 'deploy hook script:' do
     yarn_stub = stubbed_env.stub_command('yarn')
     yarn_stub.with_args('install')
     yarn_stub.with_args('run', 'prod')
+
+    bundler_stub = stubbed_env.stub_command('bundle')
+    bundler_stub.with_args('exec', 'rake', 'cache:clear')
   end
 
   hooks_pattern = File.join(Rails.root.join('config/deploy/hooks'), '**', '*.sh')

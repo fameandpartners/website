@@ -33,12 +33,8 @@
   }
 
   .heading-thin-line-bottom::after {
-    content: "";
-    padding-bottom: 40px;
+    @extend .thin-line--bottom;
     margin-bottom: 40px;
-    border-bottom: 1px solid $c-neutral-black;
-    width: 90px;
-    display: block;
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -63,7 +59,7 @@
       }
 
     }
-    
+
   }
 
 }

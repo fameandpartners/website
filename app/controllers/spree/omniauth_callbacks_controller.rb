@@ -140,7 +140,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def passthru
-    render :file => "#{Rails.root}/public/404", :formats => [:html], :status => 404, :layout => false
+    raise ActiveRecord::RecordNotFound
   end
 
   def auth_hash
