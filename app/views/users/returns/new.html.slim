@@ -20,13 +20,14 @@ ruby:
                 .item-img.col-md-5
                   = image_tag item_form.object.image_url, class: 'img-responsive ordered-item-image'
                 .item-details.col-md-6
+                  - line_item = line_item_presenter(item_form.object.line_item)
                   .item-name
-                    span.quantity
-                      ="#{item_form.object.order_quantity} x "
                     span.style
                       ="#{item_form.object.style_name}"
-                  .size Size: <em>#{item_form.object.country_size.to_i}</em>
+                  .size Size: <em>#{line_item.size_name}</em>
                   .color Color: <em>#{item_form.object.colour_name}</em>
+                  .height.size Height: <em>#{line_item.height}</em>
+                  .customization.size Customization: <em>#{line_item.customization_text}</em>
                   .price
                     = item_form.object.display_price
               .inner-wrapper
