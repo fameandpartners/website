@@ -12,7 +12,7 @@ module Orders
                      :variant,
                      :personalization
 
-      def initialize(item, wrapped_order)
+      def initialize(item, wrapped_order = item.order)
         @item = item
         @wrapped_order = wrapped_order
       end
@@ -52,7 +52,7 @@ module Orders
           personalization.customization_values.collect(&:presentation).join(' / ')
         end
       end
-
+      alias_method :customization_text, :customisation_text
 
       # @deprecated #image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance
       def image?
