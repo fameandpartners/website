@@ -11,6 +11,10 @@ footer.main {
     font-weight: 300;
   }
 
+  .form-control {
+    font-size: 1.4rem;
+  }
+
   ul {
     margin: 0;
     padding: 0;
@@ -48,8 +52,8 @@ footer.main {
 
   .title {
     font-family: $font-family-secondary;
-    font-size: 0.875em;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 
   nav {
@@ -60,6 +64,12 @@ footer.main {
       margin-bottom: 8px;
     }
 
+    .footer-link {
+      font-family: $font-family-secondary;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
   }
 
   .newsletter-wrap {
@@ -68,7 +78,7 @@ footer.main {
 
   .social-wrap {
     margin-top: 30px;
-    font-size: 24px;
+    font-size: 21px;
 
     li {
       display: inline-block;
@@ -86,6 +96,8 @@ footer.main {
   .copyright-wrap {
     margin-top: 30px;
     text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 1.2rem;
   }
 
   .form-control {
@@ -163,7 +175,20 @@ footer.main {
     }
 
     .newsletter-wrap {
-      padding-top: 96px;
+      padding-top: 66px;
+
+      .title {
+        margin-bottom: 11px;
+      }
+
+      .callout {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .input-group {
+        padding-top: 3px;
+      }
     }
 
   }

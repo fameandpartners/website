@@ -316,6 +316,8 @@ $top-overlay-margin-top: 37px;
     background: $c-neutral-black;
     color: $c-neutral-white;
     z-index: 1;
+    margin-top: 11px;
+    letter-spacing: 1px;
   }
 
   &.is-bordered .heading-overlay {
@@ -366,7 +368,7 @@ $top-overlay-margin-top: 37px;
     display: block;
     margin-left: -70px;
     letter-spacing: 0.1rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 
     .tag-info {
       position: absolute;

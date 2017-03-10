@@ -48,7 +48,7 @@ header.main {
   }
 
   .nav-icons {
-    margin-top: -4px;
+    margin-top: -6px;
     padding-right: 5px;
 
     .icon {
@@ -79,7 +79,7 @@ header.main {
       font-size: 1rem;
       font-weight: 600;
       text-align: center;
-      line-height: 1.1rem;
+      line-height: 1.3rem;
       right: 0;
       top: -10px;
       width: 15px;
@@ -103,11 +103,12 @@ header.main {
       .nav-main-menu span {
         border-bottom: 2px solid transparent;
         display: inline-block;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: $c-neutral-black;
         cursor: pointer;
         position: relative;
+        letter-spacing: 1px;
 
         &:not(.logo) {
           margin: 0 10px;
@@ -115,10 +116,12 @@ header.main {
 
         em,
         &.featured-nav {
-          font-size: 1.4rem;
+          font-size: 1.3rem;
+          letter-spacing: 0.4px;
           font-style: italic;
           text-transform: none;
           font-weight: 500;
+          font-family: $font-heading;
         }
 
       }
