@@ -36,7 +36,7 @@ var AutocompleteInput = React.createClass({
     }
 
     if(hideKeys && this.state.showOptions){
-      this.setState({ showOptions: false, captureTyping: false });
+      this.resetState();
     }
   },
 
