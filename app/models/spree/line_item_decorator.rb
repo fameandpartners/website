@@ -29,6 +29,15 @@ Spree::LineItem.class_eval do
     order.clean_cache!
   end
 
+  # Note: it seems we need to store this value in DB.
+  def delivery_period
+    delivery_period_policy.delivery_period
+  end
+
+  def delivery_period_policy
+    @delivery_period_policy ||= Policies::LineItemDeliveryPolicy.new(self)
+  end
+
   def price
     total_price = super
 

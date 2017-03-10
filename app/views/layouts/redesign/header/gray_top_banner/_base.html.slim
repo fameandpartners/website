@@ -1,10 +1,13 @@
 ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
+- ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
+  - @variation = variation
+  
 
-.container-fluid#gray-top-banner.visible-md-block.visible-lg-block
-  .row
+#gray-top-banner.visible-md-block.visible-lg-block
+  .row.container-fluid.background--black
 
-    #free-shipping.col-md-4.col-md-offset-4.text-center
+    #free-shipping.free-shipping.col-md-4.col-md-offset-4.text-center
       = banner.center_text.to_s.html_safe
 
     #account-area.col-md-4.text-right
@@ -22,105 +25,8 @@ ruby:
                 li = link_to 'My Details', profile_path
                 li = link_to 'Logout', '/logout'
 
-.container-fluid.nav-menu-container
-  .row#home-menu.hidden-xs.hidden-sm
-
-    .col-md-3
-      = link_to root_path, class: 'logo-wrap' do
-        span.logo
-          = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
-
-    .col-md-6.nav-main-menu.text-center
-
-      span.new-this-week.featured-nav.js-open-nav-menu New this week
-
-      span.dresses.js-open-nav-menu Shop
-
-      - if Features.active?(:fameweddings)
-        span.wedding.js-open-nav-menu FAME WEDDINGS
-      span.lookbook.js-open-nav-menu LOOKBOOKS
-
-      span.blog
-        a href='http://blog.fameandpartners.com' target='_blank' BLOG
-
-    .col-md-3.nav-icons.text-right
-      span.search-wrapper#search
-        a.icon.icon-search.js-search-trigger href="javascript:;"
-        .search-input#search-area
-          span.close-search.btn-close
-          = form_tag search_path, method: :get, id: 'searchForm'
-            input type="text" id="searchValue" placeholder="Search here" name="q"
-
-      = link_to moodboards_path do
-        span.icon.icon-heart-o
-
-      span.shopping-bag-wrapper.js-header-toolbar
-        a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-          span.icon.icon-bag
-          span.count.js-cart-item-count 0
-
-.rect-wrapper
-  .container
-
-    .rect#rect-new-this-week.nav-menu-wrap.menu-new-this-week
-      .row
-
-        .col-md-12
-          .inner-wrap
-            = react_component('NewThisWeekProducts', {show: 5})
-          .btn-wrap
-            = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
-
-    .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav
-      .row
-
-        .col-md-2.dresses-shop-by
-          ul
-            li.title Shop by
-            = render partial: 'layouts/redesign/mega_menu/shop_by'
-
-        .col-md-2.dresses-style
-          ul
-            li.title Style
-            = render partial: 'layouts/redesign/mega_menu/style'
-
-        .col-md-2.dresses-color
-          ul
-            li.title Color
-            = render partial: 'layouts/redesign/mega_menu/color'
-
-        .col-md-3.dresses-events
-          .two-cols
-            .title Dress Code
-            = render partial: 'layouts/redesign/mega_menu/dress_code'
-
-        .col-md-3
-          - if !Features.active?(:getitquick_unavailable)
-            .express-making.nav-item
-              = link_to fast_making_dresses_path
-                = image_tag 'mega-menu/shop-by/express-making.jpg', class: 'img-responsive', alt: ''
-          - else
-            .featuredCollection.nav-item
-              = link_to best_of_fame_collection_path
-                = image_tag 'mega-menu/shop-by/best-of-fame.jpg', class: 'img-responsive', alt: ''
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      .cta-wrap
-                        span.cta-copy.cta-link-white-bg
-                          span.cta-link The Best of Fame
-
-    .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
-      .row
-        = render partial: 'layouts/redesign/mega_menu/fame_weddings'
-
-    .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
-      .row
-
-        .col-md-5.lookbook
-          ul
-            li.title lookbooks
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
-
-        .col-md-7.lookbook-banner
-          = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'
+.nav-menu-container
+  - if @variation === 'mega'
+    = render 'layouts/redesign/header/mega'
+  - else 
+    = render 'layouts/redesign/header/simplified_nav'

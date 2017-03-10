@@ -43,6 +43,14 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :refunded_at }
   end
 
+  describe 'refund' do
+    subject(:event) { ItemReturnEvent.refund.new }
+
+    it { is_expected.to validate_presence_of :user }
+    it { is_expected.to validate_presence_of :refund_method }
+    it { is_expected.to validate_presence_of :refund_amount }
+  end
+
   describe 'factory fault' do
 
     subject(:event) { ItemReturnEvent.factory_fault.new }

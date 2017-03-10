@@ -36,7 +36,7 @@ module Products
         context 'colors are not defined' do
           let(:defined_custom_colors) { [] }
           it 'falls back to using the full list of custom colors' do
-            is_expected.to eq fallback_custom_colors
+            is_expected.to eq []
           end
         end
       end

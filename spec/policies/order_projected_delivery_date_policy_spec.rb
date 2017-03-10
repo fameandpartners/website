@@ -12,17 +12,21 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
       it 'calculates 28 calendar days on china new year period' do
         Features.activate(:cny_delivery_delays)
 
-        expected_date = DateTime.parse('Wed 29 Apr 2015')
+        expected_date = DateTime.parse('Wed 15 Apr 2015')
         expect(policy.delivery_date).to eq expected_date
       end
     end
 
     context 'order is for standard delivery' do
-      let(:order) { double(Spree::Order, completed_at: completed_at, has_fast_making_items?: false) }
+      let(:order) { FactoryGirl.create(:complete_order_with_items) }
+      let(:expected_date) { DateTime.parse('Tue April 28 2015') }
 
       it 'calculates 10 business days' do
-        expected_date = DateTime.parse('Friday April 15 2015')
-        expect(policy.delivery_date).to eq expected_date
+        Time.zone do
+          Timecop.freeze('April 15 2015') do
+            expect(policy.delivery_date).to eql expected_date
+          end
+        end
       end
     end
 
@@ -30,7 +34,7 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
       let(:order) { double(Spree::Order, completed_at: completed_at, has_fast_making_items?: true) }
 
       it 'calculates 4 business days' do
-        expected_date = DateTime.parse('Friday April 7 2015')
+        expected_date = DateTime.parse('Friday April 9 2015')
         expect(policy.delivery_date).to eq expected_date
       end
     end

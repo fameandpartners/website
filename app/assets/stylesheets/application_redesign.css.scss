@@ -168,6 +168,7 @@ z-index levels
 @import 'redesign/style_session';
 @import 'redesign/tables';
 @import 'redesign/pages';
+@import 'redesign/error';
 
 // Checkout
 @import 'redesign/pages/page-checkout';
@@ -187,6 +188,7 @@ z-index levels
 @import 'redesign/layout/header';
 @import 'redesign/layout/footer';
 @import 'redesign/layout/nav-menu';
+@import 'redesign/layout/simplified-nav';
 @import 'redesign/layout/menu-new-this-week';
 @import 'redesign/layout/section-boxes';
 
@@ -249,6 +251,7 @@ z-index levels
 @import 'redesign/pages/wedding-atelier-app';
 @import 'redesign/pages/get-the-look';
 @import 'redesign/pages/evening-shop';
+@import 'redesign/pages/gratitude-page';
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';

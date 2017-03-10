@@ -20,4 +20,12 @@ describe Spree::Gateway::Pin do
       end
     end
   end
+
+  describe '#refund' do
+    it "delegates refund to Pin provider" do
+      expect(subject.provider).to receive(:refund).with(10, "code", {key: :value})
+
+      subject.refund(10, "code", {key: :value})
+    end
+  end
 end

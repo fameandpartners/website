@@ -9,10 +9,8 @@ RSpec.describe ItemReturnCalculator do
     FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
   end
 
-  let(:line_item) do
-    @order.line_items.first
-  end
-
+  let(:user) { Faker::Internet.email }
+  let(:line_item) { @order.line_items.first }
   let(:creation_event) { ItemReturnEvent.creation.create!( line_item_id: line_item.id ) }
   subject(:created_item_return) { ItemReturn.find_by_line_item_id line_item.id }
 
@@ -28,7 +26,6 @@ RSpec.describe ItemReturnCalculator do
 
   describe '#advance_receive_item' do
 
-    let(:user)          { Faker::Internet.email }
     let(:received_date) { rand(14).days.ago.to_date }
 
     before do
@@ -51,7 +48,6 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_approve' do
-    let(:user)          { Faker::Internet.email }
 
     before do
       creation_event
@@ -70,7 +66,6 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_rejection' do
-    let(:user)          { Faker::Internet.email }
 
     before do
       creation_event
@@ -125,6 +120,32 @@ RSpec.describe ItemReturnCalculator do
       it 'accept items' do
         expect(created_item_return.bergen_actual_quantity).to eq(1)
         expect(created_item_return.bergen_damaged_quantity).to eq(0)
+      end
+    end
+  end
+
+  describe '#advance_refund' do
+    let(:pin_payment) { double(:pin_payment) }
+    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => '2016-05-01' } }) }
+
+    before do
+      allow(Spree::Gateway::Pin).to receive(:where).and_return([pin_payment])
+      creation_event
+      allow_any_instance_of(ItemReturn).to receive(:order_payment_ref).and_return('order_payment_ref')
+    end
+
+    it "calls Pins refund entry point" do
+      Time.zone do
+        expect(pin_payment).to receive(:refund).with(40, 'order_payment_ref').and_return(refund_response)
+
+        created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
+        created_item_return.reload
+
+        expect(created_item_return.refund_status).to eq('Complete')
+        expect(created_item_return.refund_method).to eq('Pin')
+        expect(created_item_return.refund_amount).to eq(4000)
+        expect(created_item_return.refund_ref).to eq('response_token')
+        expect(created_item_return.refunded_at).to eq(Time.parse('2016-04-30 14:00:00'))
       end
     end
   end
