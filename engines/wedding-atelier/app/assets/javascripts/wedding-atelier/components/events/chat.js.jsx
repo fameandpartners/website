@@ -22,7 +22,8 @@ var Chat = React.createClass({
       message: '',
       messages: this.props.messages,
       members: this.props.members,
-      typing: this.props.typing
+      typing: this.props.typing,
+      showTags: false
     }
   },
 
@@ -78,11 +79,11 @@ var Chat = React.createClass({
 
   attemptToSendMessage: function(e){
     e.preventDefault();
-    var message = this.refs.chatMessage.value;
+    var message = this.refs.autocompleteInput.refs.input.value;
 
     if (message) {
       this.props.sendMessageFn(message).then(function() {
-        this.refs.chatMessage.value = '';
+        this.refs.autocompleteInput.refs.input.value = '';
       }.bind(this));
     }
   },
@@ -161,10 +162,6 @@ var Chat = React.createClass({
     }.bind(this));
 
     return messages;
-  },
-
-  startTyping: function() {
-    this.props.startTypingFn();
   },
 
   getWhoisTyping: function() {
@@ -269,13 +266,11 @@ var Chat = React.createClass({
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
           <input className="btn upload-image walkthrough-messages" onClick={this.uploadImage} value="" data-content="Send pics to the group" data-placement="right" />
-          <div className="message-input">
-            <input type="text"
-                   id="chat-message"
-                   onChange={this.startTyping}
-                   ref="chatMessage"
-                   placeholder="Start typing..." />
-          </div>
+          <AutocompleteInput
+            ref="autocompleteInput"
+            changeHandler={this.props.startTypingFn}
+            initialItems={['stylist', 'gusano', 'style', 'stylies']}
+          />
           <div className="btn-send-container">
             <input value="send" className="btn btn-black btn-send-msg-to-chat" type="submit"/>
           </div>
