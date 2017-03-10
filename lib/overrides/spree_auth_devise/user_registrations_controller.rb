@@ -1,5 +1,7 @@
 Spree::UserRegistrationsController.class_eval do
 
+  ssl_required :create
+
   layout 'redesign/application'
 
   ssl_required
