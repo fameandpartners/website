@@ -21,7 +21,7 @@ var AutocompleteInput = React.createClass({
         key = e.which || e.keyCode,
         charBeforeCursor = inputText[input.selectionStart - 1],
         deleteKey = key == 8,
-        hideKeys = [32, 37,39].indexOf(key) > -1;
+        hideKeys = [32, 37, 39].indexOf(key) > -1;
 
     if(deleteKey && this.state.captureTyping){
       var currentTyping = this.state.currentTyping.slice(0, -1),
@@ -32,12 +32,7 @@ var AutocompleteInput = React.createClass({
     }
 
     if(deleteKey && charBeforeCursor == '@'){
-      this.setState({
-        showOptions: false,
-        captureTyping: false,
-        currentTyping: '',
-        items: this.props.initialItems
-       });
+      this.resetState();
     }
 
     if(hideKeys && this.state.showOptions){
@@ -46,7 +41,6 @@ var AutocompleteInput = React.createClass({
   },
 
   keyUpHandler: function(){
-    debugger;
     if(this.state.currentTyping.length){
       var regexp = new RegExp('^' + this.state.currentTyping, 'i');
       var newItems = _.filter(this.state.items, function(item){
@@ -58,13 +52,12 @@ var AutocompleteInput = React.createClass({
         if(!this.state.showOptions && newItems.length){
           this.setState({ showOptions: true });
         }
-        if(newItems.length < 1){ this.setState({ showOptions: false }); }
+        if(newItems.length < 1){ this.setState({ items: this.props.initialItems, showOptions: false }); }
       }
     }
   },
 
   keyPressHandler: function(e){
-    debugger;
     var input = this.refs.input,
         inputText = input.value,
         charBeforeAt = inputText[input.selectionStart - 1],
