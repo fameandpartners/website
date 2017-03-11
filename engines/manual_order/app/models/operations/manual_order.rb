@@ -134,23 +134,28 @@ module Operations
     end
 
     def variant
-      size_variants = params[:size].to_i > 0 ? get_variant_ids(params[:size]) : nil
+      size_variants  = get_variant_ids(params[:size])
       color_variants = get_variant_ids(params[:color])
-      variant_ids = if size_variants.present? && color_variants.present?
-                      size_variants & color_variants
-                    elsif color_variants.present?
-                      color_variants
-                    else
-                      size_variants
-                    end
-      Spree::Variant.where(id: variant_ids).first
+
+      variant_ids = \
+        if size_variants.present? && color_variants.present?
+          size_variants & color_variants
+        elsif color_variants.present?
+          color_variants
+        else
+          size_variants
+        end
+
+      Spree::Variant.where(id: variant_ids).first!
     end
 
     def get_variant_ids(option_value_id)
-      Spree::OptionValue.find(option_value_id).variants
-        .where(product_id: params[:style_name], is_master: false)
+      Spree::Variant
+        .joins('INNER JOIN spree_option_values_variants ON spree_variants.id = spree_option_values_variants.variant_id')
         .joins(:prices)
-        .where("spree_prices.currency = '#{params[:currency] || 'USD'}' and spree_prices.amount IS NOT NULL")
+        .where('spree_option_values_variants.option_value_id = ?', option_value_id)
+        .where(product_id: params[:style_name], is_master: false)
+        .where('spree_prices.currency = ? AND spree_prices.amount IS NOT NULL', params[:currency] || 'USD')
         .pluck(:id)
     end
 
