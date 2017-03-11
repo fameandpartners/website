@@ -9,7 +9,7 @@
   }
 
   p {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .cta-link {
@@ -80,6 +80,26 @@
       padding: 15px 42px;
     }
 
+    .btn-featured-black {
+      padding: 15px 62px;
+    }
+
+    .cta-items {
+
+      .cta-link-arrow-right {
+        margin-bottom: 20px;
+      }
+
+    }
+
+    .same-height-cols {
+
+      .item {
+        padding-bottom: 40px;
+      }
+
+    }
+
     .gratitude-promo-app {
 
       .heading-overlay {
@@ -104,7 +124,8 @@
       font-size: 2rem;
     }
 
-    .btn-featured {
+    .btn-featured,
+    .btn-featured-black {
       margin-top: 40px;
       padding: 20px 80px;
     }
