@@ -39,7 +39,7 @@ module Concerns
         raise
       else
         respond_to do |format|
-          format.html { render "errors/#{code}", status: code }
+          format.html { render "errors/#{code}", status: code, layout: 'redesign/application' }
           format.all  { render nothing: true, status: code }
         end
       end
