@@ -46,6 +46,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ cd ./website`
 * `$ cp config/database.yml.example config/database.yml`
 * `$ bundle install`
+* `$ bundle exec rails r 'Features.deactivate(:force_sitewide_ssl)`
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
