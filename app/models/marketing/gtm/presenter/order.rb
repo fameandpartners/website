@@ -17,7 +17,7 @@ module Marketing
         end
 
         def coupon_code
-          order.coupon_code
+          order.promocode
         end
 
         def line_items
