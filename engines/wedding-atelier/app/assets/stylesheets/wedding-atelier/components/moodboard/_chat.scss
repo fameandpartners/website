@@ -115,6 +115,22 @@
         }
       }
 
+      .chat-tagging-help {
+        font-family: $secondary-font;
+        color: $gray;
+        font-size: 14px;
+        margin-left: 40px;
+        position: absolute;
+        bottom: 0px;
+
+        b { color: $mine-shaft;}
+
+        @include screen-xs {
+          margin-left: 10px;
+        };
+      }
+
+
       @include screen-xxs {
         padding-left: 5px;
         padding-right: 0;

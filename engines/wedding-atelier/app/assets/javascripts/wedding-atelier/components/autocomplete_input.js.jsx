@@ -78,7 +78,7 @@ var AutocompleteInput = React.createClass({
       e.preventDefault();
       var selectedItem = this.state.items[this.state.selectedItemIndex],
           regExp = new RegExp('@' + this.state.currentTyping),
-          completeItem = selectedItem.replace(this.state.currentTyping, '');
+          completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
 
       this.refs.input.value += completeItem;
       this.resetState();

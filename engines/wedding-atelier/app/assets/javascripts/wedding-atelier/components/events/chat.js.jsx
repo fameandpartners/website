@@ -263,13 +263,16 @@ var Chat = React.createClass({
           <div className="chat-typing">
             {typing}
           </div>
+          <div className="chat-tagging-help">
+            <p> Type <b>@Stylist</b> to message a fame stylist </p>
+          </div>
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
           <input className="btn upload-image walkthrough-messages" onClick={this.uploadImage} value="" data-content="Send pics to the group" data-placement="right" />
           <AutocompleteInput
             ref="autocompleteInput"
             changeHandler={this.props.startTypingFn}
-            initialItems={['stylist', 'gusano', 'style', 'stylies']}
+            initialItems={['stylist']}
           />
           <div className="btn-send-container">
             <input value="send" className="btn btn-black btn-send-msg-to-chat" type="submit"/>
