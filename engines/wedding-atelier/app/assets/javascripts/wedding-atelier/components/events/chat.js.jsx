@@ -120,9 +120,7 @@ var Chat = React.createClass({
     var isOwnerMessage = true;
     var userId = this.props.user_id;
 
-    if (msgs[0]) {
-      tempAuthor = msgs[0].author;
-    }
+    if (msgs[0]) { tempAuthor = msgs[0].author; }
 
     var messages = msgs.map(function(message, index) {
       if (tempAuthor === message.author && index !== 0) {
@@ -133,35 +131,45 @@ var Chat = React.createClass({
       }
 
       isOwnerMessage = userId === message.user_id;
-
-      var msgComp = null;
-
-      if(message.type === 'simple') {
-        msgComp = (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
-      } else if (message.type === 'dress') {
-
-        var dresses = [...this.state.dresses];
-        var dress = _.findWhere(dresses, {id: message.content.id});
-
-        if (dress) {
-          message.content = dress;
-        }
-        // Forming the mssage with the component...
-        msgComp = (<ChatDressMessage showAuthor={showAuthor}
-                                     isOwnerMessage={isOwnerMessage}
-                                     message={message}
-                                     key={"dress-message" + index}
-                                     handleLikeDress={this.props.handleLikeDress}
-                                     changeDressToAddToCartCallback={this.props.changeDressToAddToCartCallback}/>);
-      } else if (message.type === 'image') {
-        msgComp = (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
-      }
       tempAuthor = message.author;
 
-      return msgComp;
+      return {
+        simple: this.simpleMessageComponent,
+        notification: this.notificationMessageComponent,
+        dress: this.dressMessageComponent,
+        image: this.imageMessageComponent
+      }[message.type](message, showAuthor, isOwnerMessage, index);
     }.bind(this));
 
     return messages;
+  },
+
+  simpleMessageComponent: function(message, showAuthor, isOwnerMessage, key) {
+    return(<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + key}/>);
+  },
+
+  notificationMessageComponent: function(message, showAuthor, isOwnerMessage, key){
+    return(<ChatSimpleMessage showAuthor={false} isOwnerMessage={false} message={message} key={"simple-message" + key}/>);
+  },
+
+  dressMessageComponent: function(message, showAuthor, isOwnerMessage, key) {
+    var dresses = [...this.state.dresses];
+    var dress = _.findWhere(dresses, {id: message.content.id});
+
+    if (dress) {
+      message.content = dress;
+    }
+    // Forming the mssage with the component...
+    return (<ChatDressMessage showAuthor={showAuthor}
+                                 isOwnerMessage={isOwnerMessage}
+                                 message={message}
+                                 key={"dress-message" + key}
+                                 handleLikeDress={this.props.handleLikeDress}
+                                 changeDressToAddToCartCallback={this.props.changeDressToAddToCartCallback}/>);
+  },
+
+  imageMessageComponent: function(message, showAuthor, isOwnerMessage, key){
+    return(<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + key}/>);
   },
 
   getWhoisTyping: function() {
