@@ -109,8 +109,8 @@ var MoodBoardEvent = React.createClass({
   setupChatChannel: function(){
     var that = this;
     var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
-    this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(channel){
-      channel.join().then(function() {
+    this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(chatChannel){
+      chatChannel.join().then(function() {
         console.log('Joined channel as ' + that.props.username);
         that.setState({ chatChannel: chatChannel });
         that.setUpMessagingEvents();
@@ -125,11 +125,8 @@ var MoodBoardEvent = React.createClass({
           friendlyName: that.props.wedding_name
         }).then(function(chatChannel) {
           chatChannel.join().then(function() {
-            that.setState({chatChannel: chatChannel});
+            that.setState({ chatChannel: chatChannel });
             that.setUpMessagingEvents();
-            that.sendMessageBot('Welcome to your wedding board. Here\'s where you can chat with your bridal party, discuss different wedding looks and invite a Fame stylist.').then(function(){
-              that.sendMessageBot('Why don\'t you begin by creating your first dress? Just select \'ADD YOUR FIRST DRESS\' to start customizing.');
-            });
           });
         });
       }
@@ -156,7 +153,7 @@ var MoodBoardEvent = React.createClass({
           that.setUpNotificationListeners();
         });
       });
-    })
+    });
   },
 
   startTyping: function() {
