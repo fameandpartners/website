@@ -24,9 +24,14 @@
     border-bottom: 2px solid $c-neutral-black;
   }
 
+  .tagging {
+    font-family: $font-family-secondary;
+    font-weight: bold;
+  }
+
   .heading-thin-line-bottom {
 
-    .title::after{
+    .title::after {
       content: "";
       padding-bottom: 30px;
       border-bottom: 1px solid $c-neutral-black;
@@ -120,11 +125,20 @@
 
     .section-box {
       margin-top: 80px;
+
+      img {
+        padding: 0 5px;
+      }
+
     }
 
     .section-apply-now {
       margin-top: 60px;
       margin-bottom: 100px;
+    }
+
+    .section-no-margin-top {
+      margin-top: 0;
     }
 
     .content-copy-right {
@@ -137,13 +151,52 @@
       padding-right: 55px;
     }
 
+    .copy-header {
+      padding-left: 60px;
+      padding-right: 60px;
+
+      .heading-thin-line-bottom {
+
+        .title::after {
+          margin-left: 0;
+        }
+
+      }
+
+    }
+
+    .copy-padding-item {
+      padding: 0 75px;
+    }
+
     .section-instagram .copy-wrap {
       padding: 20px 40px;
+    }
+
+    .items-grid {
+
+      p {
+        line-height: 170%;
+      }
+
+      img {
+        max-width: 450px;
+        float: left;
+      }
+
+      .img-align-right {
+        float: right;
+      }
+
     }
 
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    h3 {
+      margin-top: 30px;
+    }
 
     .section-box {
       margin-top: 40px;
@@ -181,6 +234,19 @@
       margin-left: -15px;
       margin-right: -15px;
       font-size: 3.1rem;
+    }
+
+    .items-grid {
+
+      .section-no-margin-top {
+        margin-top: 10px;
+      }
+
+    }
+
+    .section-apply-now {
+      border-top: 1px solid $c-neutral-black;
+      padding-top: 10px;
     }
 
     .form-group {
