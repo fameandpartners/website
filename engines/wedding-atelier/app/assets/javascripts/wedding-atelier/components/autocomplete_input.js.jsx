@@ -16,7 +16,8 @@ var AutocompleteInput = React.createClass({
   },
 
   keyDownHandler: function(e){
-    var input = this.refs.input,
+    var _newState = this.state,
+        input = this.refs.input,
         inputText = input.value,
         key = e.which || e.keyCode,
         charBeforeCursor = inputText[input.selectionStart - 1],
@@ -24,41 +25,42 @@ var AutocompleteInput = React.createClass({
         hideKeys = [32, 37, 39].indexOf(key) > -1;
 
     if(deleteKey && this.state.captureTyping){
-      var currentTyping = this.state.currentTyping.slice(0, -1),
-          state = { currentTyping: currentTyping };
-
-      if(!currentTyping.length) { state.items = this.props.initialItems; }
-      this.setState(state);
+      var currentTyping = this.state.currentTyping.slice(0, -1);
+      _newState.currentTyping = currentTyping;
+      if(!currentTyping.length) { _newState.items = this.props.initialItems; }
     }
 
-    if(deleteKey && charBeforeCursor == '@'){
-      this.resetState();
+    if((deleteKey && charBeforeCursor == '@') || (hideKeys && this.state.showOptions)){
+      _newState = this.getInitialState();
     }
 
-    if(hideKeys && this.state.showOptions){
-      this.resetState();
-    }
+    this.setState(_newState);
   },
 
   keyUpHandler: function(){
     if(this.state.currentTyping.length){
-      var regexp = new RegExp('^' + this.state.currentTyping, 'i');
+      var _newState = $.extend({}, this.state),
+          regexp = new RegExp('^' + this.state.currentTyping, 'i');
+
       var newItems = _.filter(this.state.items, function(item){
         return regexp.test(item);
       }.bind(this));
 
-      if(newItems.length != this.state.items.length){
-        this.setState({ items: newItems });
-        if(!this.state.showOptions && newItems.length){
-          this.setState({ showOptions: true });
-        }
-        if(newItems.length < 1){ this.setState({ items: this.props.initialItems, showOptions: false }); }
+      if(newItems.length){
+        _newState.items = newItems;
+        _newState.showOptions = true;
+      } else {
+        _newState.items = this.props.initialItems;
+        _newState.showOptions = false;
       }
+
+      this.setState(_newState);
     }
   },
 
   keyPressHandler: function(e){
-    var input = this.refs.input,
+    var _newState = $.extend({}, this.state),
+        input = this.refs.input,
         inputText = input.value,
         charBeforeAt = inputText[input.selectionStart - 1],
         //check anything before @ is a whitespace
@@ -66,12 +68,12 @@ var AutocompleteInput = React.createClass({
         enterPressed = (e.which == 13 || e.keyCode == 13);
 
     if(this.state.captureTyping){
-      var currentTyping = this.state.currentTyping + e.key;
-      this.setState({currentTyping: currentTyping});
+      _newState.currentTyping = this.state.currentTyping + e.key
     }
 
     if(e.key === '@' && showTags){
-      this.setState({ showOptions: true, captureTyping: true });
+      _newState.showOptions = true;
+      _newState.captureTyping = true;
     }
 
     if(this.state.showOptions && enterPressed){
@@ -81,8 +83,9 @@ var AutocompleteInput = React.createClass({
           completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
 
       this.refs.input.value += completeItem;
-      this.resetState();
+      _newState = this.getInitialState();
     }
+    this.setState(_newState);
   },
 
   resetState: function(){
@@ -99,10 +102,6 @@ var AutocompleteInput = React.createClass({
     if(!this.refs.input.value.length){
       this.setState({ showOptions: false });
     }
-  },
-
-  hideOptions: function(){
-    this.resetState();
   },
 
   renderItems: function(){
@@ -140,7 +139,7 @@ var AutocompleteInput = React.createClass({
                onKeyPress={this.keyPressHandler}
                onKeyDown={this.keyDownHandler}
                onKeyUp={this.keyUpHandler}
-               onBlur={this.hideOptions}
+               onBlur={this.resetState}
                ref="input"
                placeholder="Start typing..." />
       </div>
