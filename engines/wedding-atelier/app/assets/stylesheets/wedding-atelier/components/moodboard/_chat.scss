@@ -53,6 +53,7 @@
     .chat-log {
       width: 100%;
       padding-top: 50px;
+      margin-bottom: 35px;
       overflow: auto;
       position: relative;
       flex-grow: 1;
@@ -120,8 +121,8 @@
         color: $gray;
         font-size: 14px;
         margin-left: 40px;
-        position: absolute;
-        bottom: 0px;
+        position: fixed;
+        bottom: 65px;
 
         b { color: $mine-shaft;}
 
