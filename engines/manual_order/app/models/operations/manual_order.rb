@@ -151,9 +151,9 @@ module Operations
 
     def get_variant_ids(option_value_id)
       Spree::Variant
-        .joins('INNER JOIN spree_option_values_variants ON spree_variants.id = spree_option_values_variants.variant_id')
+        .joins(:option_values)
         .joins(:prices)
-        .where('spree_option_values_variants.option_value_id = ?', option_value_id)
+        .where('spree_option_values.id = ?', option_value_id)
         .where(product_id: params[:style_name], is_master: false)
         .where('spree_prices.currency = ? AND spree_prices.amount IS NOT NULL', params[:currency] || 'USD')
         .pluck(:id)
