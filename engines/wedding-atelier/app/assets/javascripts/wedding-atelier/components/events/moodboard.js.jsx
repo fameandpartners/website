@@ -176,8 +176,23 @@ var MoodBoardEvent = React.createClass({
     this.setState({chat: _chat});
   },
 
+  tagStylistCallback: function(message){
+    var regExp = new RegExp('@stylist', 'i')
+    if(regExp.test(message.content) && !localStorage.getItem('stylistTagged')){
+      var autoRespondMessage = {
+        author: '',
+        time: Date.now(),
+        type: 'notification',
+        content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email or facebook when she replies.'
+      };
+      localStorage.setItem('stylistTagged', true);
+
+      return this.sendMessageToTwillio(autoRespondMessage);
+    }
+  },
+
   sendMessageToTwillio: function(message) {
-    return this.state.chatChannel.sendMessage(JSON.stringify(message));
+    return this.state.chatChannel.sendMessage(JSON.stringify(message)).then(this.tagStylistCallback.bind(this, message));
   },
 
   sendNotificationToTwillio: function(message) {
