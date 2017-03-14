@@ -39,10 +39,7 @@ var EventInvitations = React.createClass({
       success: function(data) {
         ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
             document.getElementById('notification'));
-        var invitations = that.state.invitations.slice().concat(data.invitations.map(function (inviteWrapper) {
-          return inviteWrapper.invitation;
-        }));
-        that.setState({invitations: invitations});
+        that.setState({invitations: data.invitations});
       },
       error: function(error) {
         ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
@@ -81,7 +78,7 @@ var EventInvitations = React.createClass({
   renderInvitations: function () {
     return this.state.invitations.map(function(invitation, index){
       return (
-        <div className="person" key={index + '-' + invitation.user_email}>
+        <div className="person" key={invitation.id}>
           <div className="person-name">
             {invitation.user_email}
           </div>
