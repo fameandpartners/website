@@ -53,7 +53,10 @@ var EventDetails = React.createClass({
 
   getEventDetailsUpdatePromise: function(e) {
     var event = $.extend({}, this.state.event);
-    if(event.number_of_assistants == ''){ event.number_of_assistants = 0; }
+    if(event.number_of_assistants == ''){
+      event.number_of_assistants = 0;
+      this.setState({ event: event });
+     }
     return $.ajax({
       data: { event: event },
       dataType: 'json',
