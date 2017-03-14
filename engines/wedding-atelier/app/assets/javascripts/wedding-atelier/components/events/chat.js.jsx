@@ -136,12 +136,18 @@ var Chat = React.createClass({
       return {
         simple: this.simpleMessageComponent,
         notification: this.notificationMessageComponent,
+        sms: this.smsMessageComponent,
         dress: this.dressMessageComponent,
         image: this.imageMessageComponent
       }[message.type](message, showAuthor, isOwnerMessage, index);
     }.bind(this));
 
     return messages;
+  },
+
+  smsMessageComponent: function(message, showAuthor, isOwnerMessage, key) {
+    return(<ChatSMSMessage key={"sms-message" + key}/>);
+
   },
 
   simpleMessageComponent: function(message, showAuthor, isOwnerMessage, key) {
