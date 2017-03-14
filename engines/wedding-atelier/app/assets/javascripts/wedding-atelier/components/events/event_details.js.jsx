@@ -39,8 +39,9 @@ var EventDetails = React.createClass({
       $(this).removeClass('active');
     }).on('changeDate', function(e){
       var date = $(e.target).find('input').val();
-      var _newState = $.extend({}, this.state);
-      _newState.event.date = date;
+      var _newEvent = $.extend({}, this.state.event);
+      _newEvent.date = date;
+      this.setState({ event: _newEvent });
     }.bind(this));
   },
 
