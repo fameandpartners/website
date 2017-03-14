@@ -39,9 +39,9 @@ var EventDetails = React.createClass({
       $(this).removeClass('active');
     }).on('changeDate', function(e){
       var date = $(e.target).find('input').val();
-      var _event = this.props.event;
-      _event.date = date;
-      this.setState({event: _event})
+      var _newState = $.extend({}, this.state);
+      _newState.event.date = date;
+      this.setState(_newState);
     }.bind(this));
   },
 
@@ -52,8 +52,10 @@ var EventDetails = React.createClass({
   },
 
   getEventDetailsUpdatePromise: function(e) {
+    var event = $.extend({}, this.state.event);
+    if(event.number_of_assistants == ''){ event.number_of_assistants = 0; }
     return $.ajax({
-      data: {event: this.state.event},
+      data: { event: event },
       dataType: 'json',
       type: 'PUT',
       url: this.props.eventDetailsUpdatePath
@@ -61,8 +63,9 @@ var EventDetails = React.createClass({
   },
 
   _onChangeInput: function(e) {
-    this.props.event[e.target.name] = e.target.value;
-    this.setState({event: this.props.event});
+    var _newState = $.extend({}, this.state);
+    _newState.event[e.target.name] = e.target.value;
+    this.setState(_newState);
   },
 
   render: function() {
@@ -77,7 +80,7 @@ var EventDetails = React.createClass({
                    placeholder=""
                    type="text"
                    name="name"
-                   value={this.props.event.name}
+                   value={this.state.event.name}
                    onChange={this._onChangeInput} />
           </div>
           <div className="form-group">
@@ -102,7 +105,7 @@ var EventDetails = React.createClass({
                    id="input_number_of_assistants"
                    name="number_of_assistants"
                    ref="numberfield"
-                   value={this.props.event.number_of_assistants}
+                   value={this.state.event.number_of_assistants}
                    onChange={this._onChangeInput} />
           </div>
           <div className="form-group">
@@ -115,7 +118,7 @@ var EventDetails = React.createClass({
                   name="date"
                   id="input_date"
                   readOnly="readonly"
-                  value={this.props.event.date}
+                  value={this.state.event.date}
                   onChange={this._onChangeInput}/>
               <span className="input-group-addon">
                 <i className="calendar-icon"></i>
