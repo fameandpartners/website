@@ -111,7 +111,6 @@ var MoodBoardEvent = React.createClass({
     var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.event_id;
     this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(chatChannel){
       chatChannel.join().then(function() {
-        console.log('Joined channel as ' + that.props.username);
         that.setState({ chatChannel: chatChannel });
         that.setUpMessagingEvents();
         that.loadChannelHistory();
@@ -125,7 +124,9 @@ var MoodBoardEvent = React.createClass({
           friendlyName: that.props.wedding_name
         }).then(function(chatChannel) {
           chatChannel.join().then(function() {
-            that.setState({ chatChannel: chatChannel });
+            var _chat = $.extend({}, that.state.chat);
+            _chat.loading = false;
+            that.setState({ chatChannel: chatChannel, chat: _chat });
             that.setUpMessagingEvents();
           });
         });
@@ -139,7 +140,6 @@ var MoodBoardEvent = React.createClass({
     this.state.twilioClient.getChannelByUniqueName(notificationsChannelName).then(function(channelNotifications){
       that.setState({channelNotifications: channelNotifications});
       that.state.channelNotifications.join().then(function(channel) {
-        console.log('Joined notifications channel as ' + that.props.username);
         that.setUpNotificationListeners();
       });
     }, function(e){
@@ -149,7 +149,6 @@ var MoodBoardEvent = React.createClass({
       }).then(function(channelNotifications) {
         that.setState({channelNotifications: channelNotifications});
         that.state.channelNotifications.join().then(function(channel) {
-          console.log('Joined notifications channel as ' + that.props.username);
           that.setUpNotificationListeners();
         });
       });
@@ -180,19 +179,28 @@ var MoodBoardEvent = React.createClass({
     var regExp = new RegExp('@stylist', 'i')
     if(regExp.test(message.content) && !localStorage.getItem('stylistTagged')){
       var autoRespondMessage = {
-        author: '',
+        author: null,
         time: Date.now(),
         type: 'notification',
         content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email or facebook when she replies.'
+      },
+      smsMessage = {
+        author: null,
+        time: Date.now(),
+        type: 'sms',
+        content: null
       };
       localStorage.setItem('stylistTagged', true);
 
-      return this.sendMessageToTwillio(autoRespondMessage);
+      this.sendMessageToTwillio(autoRespondMessage);
+      this.sendMessageToTwillio(smsMessage);
     }
   },
 
   sendMessageToTwillio: function(message) {
-    return this.state.chatChannel.sendMessage(JSON.stringify(message)).then(this.tagStylistCallback.bind(this, message));
+    var promise = this.state.chatChannel.sendMessage(JSON.stringify(message));
+    promise.then(this.tagStylistCallback.bind(this, message));
+    return promise;
   },
 
   sendNotificationToTwillio: function(message) {
