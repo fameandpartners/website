@@ -13,6 +13,7 @@ $.fn.incrementButton = function(config){
 
   if (config && config.onChange) {
     $input.on("change", function() {
+      if(!this.value.length){ this.value = 0; }
       config.onChange({target: this});
     });
   }
