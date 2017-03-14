@@ -176,8 +176,8 @@ var MoodBoardEvent = React.createClass({
   },
 
   tagStylistCallback: function(message){
-    var regExp = new RegExp('@stylist', 'i')
-    if(regExp.test(message.content) && !localStorage.getItem('stylistTagged')){
+    var regExp = new RegExp('@stylist', 'i');
+    if(regExp.test(message.content)){
       var autoRespondMessage = {
         author: null,
         time: Date.now(),
@@ -190,8 +190,6 @@ var MoodBoardEvent = React.createClass({
         type: 'sms',
         content: null
       };
-      localStorage.setItem('stylistTagged', true);
-
       this.sendMessageToTwillio(autoRespondMessage);
       this.sendMessageToTwillio(smsMessage);
     }
