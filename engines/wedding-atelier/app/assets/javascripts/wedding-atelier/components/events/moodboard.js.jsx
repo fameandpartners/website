@@ -182,7 +182,7 @@ var MoodBoardEvent = React.createClass({
         author: null,
         time: Date.now(),
         type: 'notification',
-        content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email or facebook when she replies.'
+        content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email when she replies.'
       },
       smsMessage = {
         author: null,
@@ -191,7 +191,9 @@ var MoodBoardEvent = React.createClass({
         content: null
       };
       this.sendMessageToTwillio(autoRespondMessage);
-      this.sendMessageToTwillio(smsMessage);
+      // TODO: Complete SMS feature
+      // This SMS message would be completed in a different ticket
+      // this.sendMessageToTwillio(smsMessage);
     }
   },
 
