@@ -45,16 +45,6 @@
           .col-md-12
             = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2016_v2 , size_col_span: 2}
 
-    .row
-      .col-md-12
-        h2 Legacy size guide
-        p Look for a note on each product page to find out if the piece you've been eyeing follows the new or legacy size guide.
-
-      .container
-        .row.size-guide-row
-          .col-md-12
-            = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2016 , size_col_span: 2}
-
     .row.advice-fit
       .col-md-12
         h2.h3.text-center Want advice on fit and style ?
