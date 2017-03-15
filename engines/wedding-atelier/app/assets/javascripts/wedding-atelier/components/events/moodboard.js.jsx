@@ -178,21 +178,33 @@ var MoodBoardEvent = React.createClass({
   tagStylistCallback: function(message){
     var regExp = new RegExp('@stylist', 'i');
     if(regExp.test(message.content)){
-      var autoRespondMessage = {
+
+      this.sendMessageToTwillio({
         author: null,
         time: Date.now(),
         type: 'notification',
         content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email when she replies.'
-      },
-      smsMessage = {
-        author: null,
-        time: Date.now(),
-        type: 'sms',
-        content: null
-      };
-      this.sendMessageToTwillio(autoRespondMessage);
+      });
+
+      if(!localStorage.getItem('stylistTagged')){
+        this.sendMessageToTwillio({
+          author: null,
+          time: Date.now(),
+          type: 'notification',
+          content: 'In the meantime why don\'t you invite your birdal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
+        }).then(function(){
+          localStorage.setItem('stylistTagged', true)
+        });
+      }
+
       // TODO: Complete SMS feature
       // This SMS message would be completed in a different ticket
+      // var smsMessage = {
+      //   author: null,
+      //   time: Date.now(),
+      //   type: 'sms',
+      //   content: ''
+      // }
       // this.sendMessageToTwillio(smsMessage);
     }
   },
