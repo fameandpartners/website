@@ -41,4 +41,7 @@ class RefundGrid
   column :refunded_date do |item_return|
     item_return.refunded_at&.strftime('%Y-%m-%d')
   end
+  column :actions, html: true do |item_return|
+    link_to 'Add to weekly refund processing', "#"
+  end
 end
