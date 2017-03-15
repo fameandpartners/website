@@ -13,5 +13,7 @@ class ItemReturn < ActiveRecord::Base
 
   attr_accessible :uuid
   validates :uuid, uniqueness: true
+
+  scope :refund_queue, where(bulk_refund: true)
 end
 

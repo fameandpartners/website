@@ -343,8 +343,8 @@ ActiveRecord::Schema.define(:version => 20170518161536) do
     t.integer  "refund_amount"
     t.datetime "refunded_at"
     t.string   "uuid"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
@@ -354,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20170518161536) do
     t.integer  "bergen_damaged_quantity"
     t.string   "shippo_tracking_number"
     t.string   "shippo_label_url"
+    t.boolean  "bulk_refund",             :default => false, :null => false
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
