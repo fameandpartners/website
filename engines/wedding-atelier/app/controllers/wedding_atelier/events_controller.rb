@@ -9,7 +9,7 @@ module WeddingAtelier
     end
 
     def show
-      @event = current_spree_user.events.find(params[:id])
+      @event = WeddingAtelier::Event.find(params[:id])
       @sizes = Spree::OptionType.size.option_values
       @heights = WeddingAtelier::Height.definitions
 

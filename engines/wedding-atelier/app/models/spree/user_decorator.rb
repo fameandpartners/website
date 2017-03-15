@@ -25,7 +25,9 @@ Spree::User.class_eval do
   end
 
   def role_in_event(event)
-    roles.where(resource_id: event.id).first.name if event
+    if event
+      roles.where(resource_id: event.id).first.try(:name) || ''
+    end
   end
 
   def update_role_in_event(role, event)

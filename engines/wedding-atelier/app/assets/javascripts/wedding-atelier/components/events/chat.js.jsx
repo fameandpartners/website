@@ -143,13 +143,14 @@ var Chat = React.createClass({
       ]
 
     }
-
-    $.ajax({
-      url: hook,
-      type: 'POST',
-      data: 'payload=' + JSON.stringify(slackMessage),
-      dataType: 'json'
-    })
+    if(!user.fame_staff) {
+      $.ajax({
+        url: hook,
+        type: 'POST',
+        data: 'payload=' + JSON.stringify(slackMessage),
+        dataType: 'json'
+      });
+    }
   },
 
   sendMessageTile: function(dress) {

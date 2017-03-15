@@ -2,7 +2,7 @@ module WeddingAtelier
   class UserSerializer < ActiveModel::Serializer
 
     has_one :user_profile
-    attributes :first_name, :id, :name, :role, :joined_at, :email
+    attributes :first_name, :id, :name, :role, :joined_at, :email, :fame_staff
 
     def name
       object.full_name
@@ -10,6 +10,10 @@ module WeddingAtelier
 
     def joined_at
       object.created_at.strftime("%m/%d/%Y")
+    end
+
+    def fame_staff
+      !!(object.email =~ /^.*@fameandpartners.com$/)
     end
 
     def role
