@@ -17,7 +17,7 @@ module Logistics
             personalization: [:color, :size]
           ]
         ])
-        .order('created_at DESC')
+        .order('bergen_return_item_processes.created_at DESC')
     end
 
     # Filters

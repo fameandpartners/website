@@ -447,13 +447,13 @@ module Products
 
     private
 
-    def section_heading(product = nil, sku: product.sku, name: product.name)
+    def get_section_heading(sku:, name:)
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
 
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
-      section_heading = section_heading(sku: args[:sku], name: args[:name])
+      section_heading = get_section_heading(sku: args[:sku], name: args[:name])
       info "#{section_heading} Building"
 
       raise 'SKU should be present!' unless sku.present?
@@ -515,7 +515,7 @@ module Products
     end
 
     def add_product_properties(product, args)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
@@ -552,7 +552,7 @@ module Products
     end
 
     def add_product_color_options(product, recommended_colors:, available_colors:)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       custom_colors = available_colors - recommended_colors
 
       custom_colors.map do |custom|
@@ -569,7 +569,7 @@ module Products
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -625,7 +625,7 @@ module Products
     end
 
     def add_product_customizations(product, array_of_attributes)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       customizations = []
 
       allowed = [:name,
@@ -656,7 +656,7 @@ module Products
     end
 
     def add_product_style_profile(product, args)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       attributes = args.slice(:glam,
                               :girly,
                               :classic,
@@ -701,7 +701,7 @@ module Products
     end
 
     def add_product_song(product, raw_attrs)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       if raw_attrs[:link].present?
         song = product.inspirations.song.first || product.inspirations.song.build
 
@@ -710,7 +710,7 @@ module Products
     end
 
     def add_product_prices(product, price, us_price = nil)
-      debug "#{section_heading(product)} #{__method__}"
+      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       product.price = price
       product.save
 

@@ -80,8 +80,25 @@
 
 }
 
+.full-height {
+  height: 100%;
+}
+
+// TODO: remove this in favor of .noPadding
 .no-padding {
+  @extend .noPadding;
+}
+
+.noPadding {
   padding: 0 !important;
+}
+
+.noPadding--mobile {
+
+  @include mobile {
+    padding: 0 !important;
+  }
+
 }
 
 .no-padding-top {
@@ -106,6 +123,17 @@
 
 .no-margin-bottom {
   margin-bottom: 0 !important;
+}
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .mobile-text-center {
+    text-align: center;
+  }
+
 }
 
 // Fix for IE
@@ -172,6 +200,31 @@
     padding-right: 5px;
   }
 
+}
+
+.thin-line {
+
+  &--bottom::after {
+    content: "";
+    padding-bottom: 50px;
+    border-bottom: 1px solid $c-neutral-black;
+    width: 90px;
+    display: block;
+  }
+
+  &--alignCenter::after {
+    margin: 0 auto;
+  }
+}
+
+.background--black {
+  background-color: $c-neutral-black;
+}
+.background--white {
+  background-color: $c-neutral-white;
+}
+.margin--center {
+  margin: 0 auto;
 }
 
 @media (min-width: $bootstrap-md-width) {
@@ -272,5 +325,4 @@ keyframes
   100% {
     opacity: 1;
   }
-
 }

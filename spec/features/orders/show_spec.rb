@@ -59,12 +59,11 @@ describe 'show order', type: :feature do
   describe "line items" do
     let(:order) do
       FactoryGirl.create(:complete_order_with_items).tap do |o|
-        o.line_items << FactoryGirl.create(:dress_item, :fast_making)
+        o.line_items << FactoryGirl.create(:dress_item, :fast_making, :with_personalization)
       end
     end
 
     it "splits line items by delivery" do
-
       visit spree.order_path(order)
 
       within('.fast-making-items') do
@@ -73,8 +72,44 @@ describe 'show order', type: :feature do
       end
 
       within('.standard-making-items') do
-        expect(page).to have_content('Free shipping to USA, Canada and the UK within 7 – 10 days')
+        expect(page).to have_content('Free shipping to USA, Canada and the UK')
         expect(page).to have_content(product_name(order.line_items.first))
+      end
+    end
+
+    describe "color" do
+      it "displays customized color" do
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content("Customized color:red")
+        end
+      end
+
+      it "displays default color" do
+        # Add line item color as basic for product
+        line_item = order.line_items.last
+        product = line_item.product
+        product.product_color_values.create(option_value: line_item.personalization.color)
+
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content("Color:red")
+        end
+      end
+    end
+
+    describe 'attributes' do
+      it 'displays line item attributes' do
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content('Skirt Length: standard')
+          expect(page).to have_content('Customized color:red')
+          expect(page).to have_content('Size: Unknown Size')
+          expect(page).to have_content('Quantity: 1')
+        end
       end
     end
 

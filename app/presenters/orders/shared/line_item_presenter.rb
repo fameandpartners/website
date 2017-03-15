@@ -12,7 +12,7 @@ module Orders
                      :variant,
                      :personalization
 
-      def initialize(item, wrapped_order)
+      def initialize(item, wrapped_order = item.order)
         @item = item
         @wrapped_order = wrapped_order
       end
@@ -52,35 +52,22 @@ module Orders
           personalization.customization_values.collect(&:presentation).join(' / ')
         end
       end
+      alias_method :customization_text, :customisation_text
 
+      # @deprecated #image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance
       def image?
-        image.present?
+        true
       end
+      deprecate image?: '#image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance'
 
       def image_url
-        image? ? image.attachment.url(:large) : nil
+        image.large
       end
 
+      # Note: a line item personalization can be nil
+      # @return [Repositories::Images::Template]
       def image
-        @image ||= begin
-          image = variant_image(variant)
-
-          # Customised dresses use the master variant, find the closest
-          # matching standard variant, use those images
-          if personalizations? && !image.present? && standard_variant_for_custom_color
-            image = variant_image(standard_variant_for_custom_color)
-          end
-
-          # We won't find a colour variant for custom colours, so
-          # fallback to whatever product image.
-          unless image.present?
-            image = cropped_images_for(variant.product.images)
-          end
-
-          image
-        rescue NoMethodError
-          Rails.logger.warn("Failed to find image for order email. #{wrapped_order.to_s}")
-        end
+        Repositories::LineItemImages.new(line_item: item).read(color_id: personalization&.color_id)
       end
 
       def personalizations?
@@ -96,15 +83,6 @@ module Orders
           v.option_values.include?(personalization.color)
         }
       end
-
-      def variant_image(variant)
-        cropped_images_for(variant.product.images_for_variant(variant))
-      end
-
-      def cropped_images_for(image_set)
-        image_set.select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first
-      end
-
     end
   end
 end

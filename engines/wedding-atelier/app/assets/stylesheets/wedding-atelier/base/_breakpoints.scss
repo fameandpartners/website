@@ -1,5 +1,13 @@
+@mixin screen-xxs {
+  @media (max-width: 380px) { @content; }
+}
+
 @mixin screen-xs {
   @media (max-width: $screen-xs-max) { @content; }
+}
+
+@mixin tablet-max {
+  @media (min-width: 769px) { @content; }
 }
 
 @mixin screen-sm {
@@ -12,4 +20,12 @@
 
 @mixin screen-lg {
   @media (min-width: $screen-lg-min) { @content; }
+}
+
+@mixin screen-xl {
+  @media (min-width: $screen-xl-min) { @content; }
+}
+
+@mixin screen-xs-and-sm {
+  @media (max-width: $screen-sm-min) { @content; }
 }

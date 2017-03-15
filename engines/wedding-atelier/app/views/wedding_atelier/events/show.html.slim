@@ -1,5 +1,23 @@
-h1 events
+= react_component 'MoodBoardEvent',
+                  { event_path: event_path(@event),
+                    current_user: WeddingAtelier::UserSerializer.new(spree_current_user, scope: self),
+                    current_user_id: spree_current_user.id,
+                    send_invite_path: event_invitations_path(@event),
+                    sizing_path: sizing_index_path,
+                    remove_assistant_path: event_assistant_path(event_id: @event, id: ':id'),
+                    twilio_token_path: token_path,
+                    event_id: @event.id,
+                    dresses_path: event_dresses_path(@event),
+                    wedding_name: @event.name,
+                    bot_profile_photo: image_path('bridal-bot.png'),
+                    profile_photo: profile_image_path,
+                    username: spree_current_user.full_name,
+                    user_id: spree_current_user.id,
+                    roles_path: '',
+                    siteVersion: current_site_version.permalink,
+                    filestack_key: ENV['FILESTACK_KEY'],
+                    channel_prefix: ENV['RAILS_ENV']},
+                  { class: 'moodboard-react-container container-fluid' }
 
-name
-
-= @event.name
+- content_for :javascript do
+  script src="//api.filestackapi.com/filestack.js"

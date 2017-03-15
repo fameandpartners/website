@@ -2,24 +2,30 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-.page-content
+.page-lookbook.container-fluid.no-padding.no-scroll
 
   - if banner.display?
-    - if banner.custom?
-      = image_tag "#{banner.image}", alt: "#{page.heading}", class: 'img-responsive portrait-img'
-    - else
-      ul.rslides
+    .hero-tile-carousel.js-hero-tile-carousel
+      - if banner.custom?
+        .main-hero-wrap.hero-wrap
+          picture.media-wrap
+            = image_tag "#{banner.image}", alt: "#{page.heading}", class: 'img-responsive portrait-img'
+      - else
         - (1..page.get(:image_count).to_i).each do |n|
-          li
-            = image_tag "#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.heading} #{n}", class: 'img-responsive portrait-img'
-
-  .page-content.products-collections.category
-    = render :partial => 'filters_sort', :locals => { :hidden => true }
-
-    .container.relative.products-collection
-      = render partial: 'products_without_content'
+          .main-hero-wrap.hero-wrap
+            picture.media-wrap
+              = image_tag "#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.heading} #{n}", class: 'img-responsive'
 
   .row
+    .container
+      .page-content.products-collections.category
+        .col-xs-12
+          = render :partial => 'products/collections/filters_sort', :locals => { :hidden => true }
+
+        .relative.products-collection
+          = render partial: 'products_without_content'
+
+  .row.section-last
     .container
       .col-md-12
         = render partial: 'shared/redesign/more_dresses'

@@ -54,7 +54,7 @@ module Logistics
               ]
             ]
         ])
-        .order('created_at DESC')
+        .order('next_logistics_return_request_processes.created_at DESC')
     end
 
     decorate do

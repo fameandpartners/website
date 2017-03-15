@@ -1,38 +1,38 @@
 // Section: Social media
 section.section-box.container.section-social.same-height-cols
   .row
-    - current_social_network_link = "http://blog.fameandpartners.com"
+    - current_social_network_link = "http://blog.fameandpartners.com?hp"
     .col-md-6.copy-img-side-by-side
       .item.bordered.item-alt.section-facebook
         .row
           .col-sm-5.copy-side
             .content-wrapper
-              p Interviews with the strong, powerful, and creative women who inspire us + styling tips from those in the know. Get your daily dose of style & substance from #{link_to "The Fame Files", current_social_network_link, target: "_blank"}.
+              p  Get your daily dose of style & substance from #{link_to "The Fame Files", current_social_network_link, target: "_blank"}.
 
               .link-align-bottom
                 = link_to current_social_network_link, target: "_blank"
                   span.cta-link-arrow-right
-                    span.cta-link Explore
-                    span.copy-highlight Blog
+                    span.cta-link View
+                    span.copy-highlight the Blog
                     i.icon.icon-arrow-right
 
           .col-sm-7.img-side
             = link_to current_social_network_link, target: "_blank"
               = image_tag "homepage/social-media/social-media-1.jpg", class: "img-responsive"
 
-    - current_social_network_link = slay_it_forward_path
+    - current_social_network_link = "https://instagram.com/FameandPartners"
     .col-md-6.copy-img-side-by-side
       .item.bordered.item-alt.section-blog
         .row
           .col-sm-5.copy-side
             .content-wrapper
-              p We'll donate $1 to Planned Parenthood, RAINN, the ACLU & more every time you #{link_to "#slayitforward", current_social_network_link}.
+              p Scroll through never-ending outfit ideas from our #{link_to "#famefatales", current_social_network_link}.
 
               .link-align-bottom
                 = link_to current_social_network_link, target: "_blank"
                   span.cta-link-arrow-right
-                    span.cta-link More
-                    span.copy-highlight Details
+                    span.cta-link Explore
+                    span.copy-highlight Insta-Inspo
                     i.icon.icon-arrow-right
 
           .col-sm-7.img-side

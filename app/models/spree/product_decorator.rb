@@ -331,6 +331,14 @@ Spree::Product.class_eval do
     ).read
   end
 
+  def delivery_period
+    delivery_period_policy.delivery_period
+  end
+
+  def delivery_period_policy
+    @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
+  end
+
   private
 
   def build_variants_from_option_values_hash

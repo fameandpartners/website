@@ -52,7 +52,7 @@ module Revolution
 
     # TODO: `collection.details.banner.image` should be removed and URLs controlled over the CMS
     def banner_image
-      collection.details.banner.image
+      get(:banner_image_url).presence || collection.details.banner.image
     end
 
     def translation

@@ -1,9 +1,9 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/dec-09-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-1-mob.jpg"
-= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The INSIDE/OUT Collection" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-1-mob.jpg"
+= link_to the_evening_shop_landing_page_path + "?hp", class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Evening Shop" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -14,20 +14,19 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-md-offset-7.col-lg-3.col-lg-offset-9
-          .copy-wrap
+        .col-md-6.col-md-offset-5
+          .copy-wrap.extra-padding-left
             h2.heading.no-margin-md
-              span Laid back <br class="visible-lg">is the new <br class="visible-lg">black.
+              span.title.title--large The Evening <em>Shop</em>.
               span.sub-heading
-                | Look fancy, feel fabulous in the INSIDE/OUT Collection.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Shop and <span class="copy-highlight">Customize</span>
+                | Custom evening wear, made-to-order. <br>Because ball gowns are not meant to blend in.
+              span.sub-heading
+                | <em class="link-underline">Explore</em> evening.
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/dec-09-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-2-mob.jpg"
-= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Style meets substance" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-2-mob.jpg"
+= link_to bespoke_bridal_collection_landing_page_path + "?hp", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -38,21 +37,25 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-2
+        .col-md-5.col-md-offset-6
           .copy-wrap
             h2.heading.no-margin-md
-              span Style meets <br class="visible-lg">substance.
+              span.title.title--large The <em>new</em> way <br>to wedding.
               span.sub-heading
-                | $5 of every sale goes to women's empowerment charities.
+                - if current_site_version.is_australia?
+                  - price_start_from = "$379"
+                - else
+                  - price_start_from = "$299"
+
+                | Exclusive designs, exquisite fabrics, made-to-order<br class="visible-lg">…and starting at just #{price_start_from}.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Dress Up, <span class="copy-highlight">Give Back</span>
+                | Shop <span class="copy-highlight">BESPOKE BRIDAL</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/dec-09-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-3-mob.jpg"
-
-= link_to evening_hours_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Time to (cocktail) party" }
+- current_tile_image = "homepage/hero-featured/march-02-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/march-02-featured-3-mob.jpg"
+= link_to best_of_fame_collection_path + "?hp", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Best of Fame" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -63,12 +66,12 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-3.extra-padding-left
-          .copy-wrap
+        .col-md-5.col-md-offset-4.col-lg-4
+          .copy-wrap.text-center
             h2.heading.no-margin-md
-              span Cocktail <br class="visible-lg">hour goes custom.
+              span.title.title--large Quick <em>and</em> <br>custom.
               span.sub-heading
-                | Find your new go-to party <br class="visible-lg">dress and make it your own.
+                | Made-to-order in just five days. <em>(Seriously.)</em>
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">party looks</span>
+                | Get it <span class="copy-highlight">Express</span>

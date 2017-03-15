@@ -66,6 +66,18 @@
     font-family: $font-heading;
     font-weight: 300;
     font-style: italic;
+    font-size: 1.25em;
+    margin-bottom: 10px;
+  }
+
+  .deliveryNote {
+    color: $c-neutral-10;
+    padding: 0 30px;
+    font-family: $font-heading;
+    font-size: 0.8em;
+    font-weight: 100;
+    line-height: 1.4;
+    text-align: center;
   }
 
   .main-content-area {
@@ -312,6 +324,17 @@
 
     a {
       text-decoration: underline;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) and (max-width: 1399px) {
+
+    .est-delivery li {
+      line-height: 1.4;
+      border-left: 0;
+      padding-left: 0;
+      display: block;
     }
 
   }

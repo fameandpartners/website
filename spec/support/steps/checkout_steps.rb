@@ -32,6 +32,10 @@ module Acceptance
       find("label[for='international_shipping_fee']").click
     end
 
+    step 'I agree with shipping fees if required' do
+      all("label[for='international_shipping_fee']").first.try(:click)
+    end
+
     step 'I should see my order placed, with :dress_name dress, :size_number size and :dress_price price' do |dress_name, dress_size, dress_price|
       dress_size_without_spaces = dress_size.delete(' ') # e.g. US10
 

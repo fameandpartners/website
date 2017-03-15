@@ -64,6 +64,7 @@ class ItemReturnEvent < ActiveRecord::Base
           :requested_at,
           :customer_name
 
+    validates :order_paid_currency, :item_price_adjusted, presence: true
   end
 
   attr_accessible :user, :received_on, :location
@@ -91,6 +92,14 @@ class ItemReturnEvent < ActiveRecord::Base
 
     validates :user, presence: true
     validates :comment, presence: true
+  end
+
+  event_type :refund do
+    attributes :user, :refund_method, :refund_amount, :comment
+
+    validates :user, presence: true
+    validates :refund_method, presence: true
+    validates :refund_amount, presence: true
   end
 
   event_type :record_refund do

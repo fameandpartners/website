@@ -20,6 +20,14 @@ module Afterpay
       def initialize(spree_order:)
         @spree_order = spree_order
       end
+
+      def billing_state
+        bill_address.state&.abbr || bill_address.state_name
+      end
+
+      def shipping_state
+        ship_address.state&.abbr || ship_address.state_name
+      end
     end
   end
 end

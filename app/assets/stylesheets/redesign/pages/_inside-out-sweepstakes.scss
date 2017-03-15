@@ -97,6 +97,8 @@
 
     .weekly-winners {
       @extend .link-underline;
+      padding-top: 25px;
+      display: inline-block;
     }
 
   }

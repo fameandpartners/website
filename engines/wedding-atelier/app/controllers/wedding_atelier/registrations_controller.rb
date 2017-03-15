@@ -1,8 +1,11 @@
 module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
+    include WeddingAtelier::Concerns::FeatureFlaggable
+
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
     before_filter :redirect_if_completed, except: :new
+    before_filter :sign_in_if_exists, only: :create
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -10,7 +13,7 @@ module WeddingAtelier
         if current_spree_user.wedding_atelier_signup_complete?
           redirect_to wedding_atelier.events_path
         else
-          redirect_to current_spree_user.wedding_atelier_signup_step
+          redirect_to action: current_spree_user.wedding_atelier_signup_step
         end
       end
       if params[:invitation_id]
@@ -19,6 +22,7 @@ module WeddingAtelier
       end
 
       @user = Spree::User.new(email: invitation.try(:user_email))
+      @user.build_user_profile(skip_validation: true)
     end
 
     def create
@@ -33,6 +37,7 @@ module WeddingAtelier
                                                       utm_params:   session[:utm_params],
                                                       site_version: current_site_version.name,
                                                       form_name:    'Register')
+
         session.delete(:sign_up_reason)
         sign_in :spree_user, resource
         set_flash_message(:notice, :signed_up)
@@ -59,12 +64,15 @@ module WeddingAtelier
         else
           redirect_to action: @user.wedding_atelier_signup_step
         end
-
       else
-        # reload user to update step if validation fails
         @event = @user.events.last
-        render @user.reload.wedding_atelier_signup_step
+        render @user.wedding_atelier_signup_step_was
       end
+
+      if @user.reload.wedding_atelier_signup_complete?
+        Marketing::CustomerIOEventTracker.new.track(@user, 'wedding_atelier_welcome', user_name: @user.first_name)
+      end
+
     end
 
     def size
@@ -80,35 +88,49 @@ module WeddingAtelier
       @event = current_spree_user.events.last
       if @event.number_of_assistants == 0
         current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
-        redirect_to wedding_atelier.event_path(current_spree_user.events.last)
+        redirect_to wedding_atelier.event_path(id: @event.id, slug: @event.slug)
       end
     end
 
 
     private
 
+    def sign_in_if_exists
+      user = Spree::User.where(email: spree_user_params[:email]).first
+      if user
+        allow_params_authentication!
+        authenticate_spree_user!
+        if spree_user_signed_in? && user.wedding_atelier_signup_complete?
+          event = user.events.last
+          redirect_to wedding_atelier.event_path(id: event.id, slug: event.slug)
+        elsif spree_user_signed_in?
+          redirect_to action: user.wedding_atelier_signup_step
+        else
+          redirect_to sign_in_path, flash: { error:  t('devise.failure.invalid') }
+        end
+      end
+    end
+
     def prepare_form_default_values
       @user = current_spree_user
+      @user.build_user_profile unless @user.user_profile
 
-      @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
+      @roles = {
+        'Bride' => 'bride',
+        'Bridesmaid' => 'bridesmaid',
+        'Maid of Honor' => 'maid of honor',
+        'Mother of Bride' => 'mother of bride'
+      }
       # if current_spree_user.wedding_atelier_signup_step != 'size'
       #   @event = current_spree_user.events.last || current_spree_user.events.new
       # end
 
       @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
 
-      @heights = [
-          "5'19 / 177cm ",
-          "5'19 / 180cm ",
-          "5'19 / 190cm ",
-          "5'19 / 200cm "
-      ]
+      @heights = WeddingAtelier::Height.definitions
 
       @site_version = env['site_version_code'] || 'us'
-      @dress_sizes = {
-        us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
-        au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-      }[@site_version.to_sym]
+      @dress_sizes = Spree::OptionType.size.option_values
     end
 
     def spree_user_params

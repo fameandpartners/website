@@ -42,7 +42,7 @@ describe LineItemPersonalization, type: :model do
       end
 
       it "works if no data" do
-        expect(personalization.color_cost).to eql(BigDecimal.new(0))
+        expect(subject.color_cost).to eql(BigDecimal.new(0))
       end
 
       it "returns 0 for basic color" do

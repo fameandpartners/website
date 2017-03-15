@@ -204,8 +204,15 @@ javascript:
     addthis_share = {
       url: window.location.href
     };
-    // AddThis async call
-    addthis.init();
+
+    // NOTE: Alexey Bobyrev 02 Feb 2017
+    // Catch addthis errors and log on sentry (if possible)
+    try {
+      // AddThis async call
+      addthis.init()
+    } catch(e) {
+      // NOOP
+    }
 
     // controls for details container, mobile only
     $('.js-panel-side-left-toggle').on('click', function() {

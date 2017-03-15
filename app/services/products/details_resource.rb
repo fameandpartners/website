@@ -44,7 +44,10 @@ class Products::DetailsResource
         customised_days_for_making:         product.customised_days_for_making,
         default_standard_days_for_making:   product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        product_type:                       product.property('product_type')
+        product_type:                       product.property('product_type'),
+        delivery_period:                    product.delivery_period,
+        fast_making_delivery_period:        Policies::ProductDeliveryPeriodPolicy::FAST_MAKING_DELIVERY_PERIOD,
+        cny_delivery_delays:                Features.active?(:cny_delivery_delays)
       }
     end
 

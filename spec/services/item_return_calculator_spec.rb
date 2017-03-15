@@ -1,10 +1,18 @@
 require 'spec_helper'
 
 RSpec.describe ItemReturnCalculator do
-  let(:line_item_id)   { rand 1_000_000 }
+  before(:each) do
+    @user  = FactoryGirl.create(:spree_user)
+    @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)
 
-  let(:creation_event) { ItemReturnEvent.creation.create!( line_item_id: line_item_id ) }
-  subject(:created_item_return) { ItemReturn.find_by_line_item_id line_item_id }
+    shipment = FactoryGirl.build(:simple_shipment, order: @order)
+    FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
+  end
+
+  let(:user) { Faker::Internet.email }
+  let(:line_item) { @order.line_items.first }
+  let(:creation_event) { ItemReturnEvent.creation.create!( line_item_id: line_item.id ) }
+  subject(:created_item_return) { ItemReturn.find_by_line_item_id line_item.id }
 
   describe 'creation' do
     before do
@@ -12,13 +20,12 @@ RSpec.describe ItemReturnCalculator do
       described_class.new(created_item_return).run.save!
     end
 
-    it { expect(created_item_return.line_item_id).to eq line_item_id }
+    it { expect(created_item_return.line_item_id).to eq line_item.id }
     it { expect(created_item_return.comments).to eq "" }
   end
 
   describe '#advance_receive_item' do
 
-    let(:user)          { Faker::Internet.email }
     let(:received_date) { rand(14).days.ago.to_date }
 
     before do
@@ -41,7 +48,6 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_approve' do
-    let(:user)          { Faker::Internet.email }
 
     before do
       creation_event
@@ -60,7 +66,6 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_rejection' do
-    let(:user)          { Faker::Internet.email }
 
     before do
       creation_event
@@ -116,6 +121,40 @@ RSpec.describe ItemReturnCalculator do
         expect(created_item_return.bergen_actual_quantity).to eq(1)
         expect(created_item_return.bergen_damaged_quantity).to eq(0)
       end
+    end
+  end
+
+  describe '#advance_refund' do
+    let(:pin_payment) { double(:pin_payment) }
+    let(:created_at) { Time.parse('2016-05-01').utc.to_s }
+    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => created_at } }) }
+
+    before do
+      allow(Spree::Gateway::Pin).to receive(:where).and_return([pin_payment])
+      creation_event
+      allow_any_instance_of(ItemReturn).to receive(:order_payment_ref).and_return('order_payment_ref')
+    end
+
+    it "calls Pins refund entry point" do
+        expect(pin_payment).to receive(:refund).with(4039, 'order_payment_ref').and_return(refund_response)
+
+        created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40.39, user: user})
+        created_item_return.reload
+
+        expect(created_item_return.refund_status).to eq('Complete')
+        expect(created_item_return.refund_method).to eq('Pin')
+        expect(created_item_return.refund_amount).to eq(4039)
+        expect(created_item_return.refund_ref).to eq('response_token')
+        expect(created_item_return.refunded_at.utc.strftime('%Y-%m-%d %H:%M:%S UTC')).to eq(created_at)
+    end
+
+    it "notifies user with customer.io" do
+      promise = double(:promise)
+      expect(RefundMailer).to receive(:notify_user).and_return(promise)
+      expect(promise).to receive(:deliver)
+      allow(pin_payment).to receive(:refund).and_return(refund_response)
+
+      created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
     end
   end
 end

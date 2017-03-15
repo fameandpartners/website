@@ -1,7 +1,9 @@
 /* [Buttons]
 -------------------------------------------------------*/
 // TODO: use mixing for these, rename variations and create disabled state
-.btn {
+.btn,
+.btnCtaBlackBgUppercase,
+.btnCtaOutlineBorderUppercase {
   padding: 10px 40px;
   font-size: 1.6rem;
   line-height: 1.6;
@@ -9,6 +11,14 @@
   font-weight: 600;
   letter-spacing: 1px;
   border-radius: 0;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    box-shadow: none;
+  }
+
 }
 
 .btn-default {
@@ -75,7 +85,8 @@
 
 }
 
-.btn-transparent {
+.btn-transparent,
+.btnCtaOutlineBorderUppercase {
   color: $c-neutral-black;
   background: transparent;
   border-color: $c-neutral-black;
@@ -91,7 +102,8 @@
 
 }
 
-.btn-black {
+.btn-black,
+.btnCtaBlackBgUppercase {
   background: $c-neutral-black;
   color: $c-neutral-white;
 
@@ -327,4 +339,11 @@
     display: inline-block;
   }
 
+}
+
+// Uppercased CTA buttons
+.btnCtaBlackBgUppercase,
+.btnCtaOutlineBorderUppercase {
+  padding: 10px 20px;
+  border: 1px solid $c-neutral-black;
 }

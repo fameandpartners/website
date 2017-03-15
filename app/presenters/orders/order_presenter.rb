@@ -27,7 +27,13 @@ module Orders
                    :has_fast_making_items?,
                    :display_promotion_total,
                    :shipment,
-                   :completed?
+                   :completed?,
+                   :updated_at,
+                   :payment_state,
+                   :fabrication_status,
+                   :shipped?,
+                   :order_return_requested?,
+                   :returnable?
 
     attr_reader :spree_order, :items
 
@@ -137,22 +143,23 @@ module Orders
     def extract_line_items
       self.line_items.collect do |item|
         {
-          style_name:       item.style_name,
-          style_num:        item.style_number,
-          sku:              item.sku,
-          line_item_id:     item.id,
-          product_number:   item.product_number,
-          size:             item.size,
-          adjusted_size:    item.country_size,
-          color:            item.colour_name,
-          height:           item.height,
-          quantity:         item.quantity,
-          factory:          item.factory.name,
-          deliver_date:     item.projected_delivery_date.to_s,
-          express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
-          image_url:        item.image? ? item.image_url : '',
-          total_price:      item.price.to_s,
-          discount:         item.item.product.discount.to_s
+          style_name:            item.style_name,
+          style_num:             item.style_number,
+          sku:                   item.sku,
+          extended_style_number: item.extended_style_number,
+          line_item_id:          item.id,
+          product_number:        item.product_number,
+          size:                  item.size,
+          adjusted_size:         item.country_size,
+          color:                 item.colour_name,
+          height:                item.height,
+          quantity:              item.quantity,
+          factory:               item.factory.name,
+          deliver_date:          item.projected_delivery_date.to_s,
+          express_making:        item.making_options.present? ? item.making_options.map { |option| option.name.upcase }.join(', ') : "",
+          image_url:             item.image? ? item.image_url : '',
+          total_price:           item.price.to_s,
+          discount:              item.item.product.discount.to_s
         }.merge(
            # Convert each element of the customisations array
            # to an explicit hash key and child hash.

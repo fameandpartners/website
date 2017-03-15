@@ -11,7 +11,7 @@ gem 'configatron'
 gem 'paperclip'
 gem 'sidekiq', '4.2.2'
 gem 'whenever'
-gem 'psych', '~> 2.0.13'
+gem 'psych', '~> 2.1.0'
 gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'business_time'
@@ -53,12 +53,14 @@ gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'react-rails', '~> 1.6'
-gem 'asset_sync', '~> 1.1.0'
+gem 'asset_sync', '~> 2.0'
+gem 'fog-aws', '~> 1.2.0'
 
 # Data
 gem 'event_sourced_record'
 gem 'coercible'
 gem 'reform', '~> 2.0.5'
+gem 'split', require: 'split/dashboard'
 
 gem 'ipaddress'
 gem 'geoip', require: false
@@ -70,7 +72,7 @@ gem 'koala'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
-gem 'fog'
+gem 'fog', '~> 1.38.0'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
@@ -147,6 +149,7 @@ group :test do
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
   gem 'rspec_junit_formatter', '0.2.2'
+  gem 'rspec-shell-expectations'
 end
 
 group :production do

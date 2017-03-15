@@ -6,7 +6,7 @@ RSpec.shared_context 'manual order context' do
   let!(:size_option_type) { create(:option_type, :size) }
   let!(:color_option_type) { create(:option_type, :color) }
   let!(:dress_size) { create(:product_size, name: 'US10/AU14', option_type: size_option_type) }
-  let!(:dress_color) { create(:product_colour, name: 'Blue', option_type: color_option_type) }
+  let!(:dress_color) { create(:product_colour, name: 'blue', option_type: color_option_type) }
 
   let!(:product) { create(:dress, name: 'Stylight', sku: 'product-sku') }
   let!(:variant) { create(:dress_variant, sku: 'SKU-VERIFY', product: product, option_values: [dress_size, dress_color], is_master: false) }

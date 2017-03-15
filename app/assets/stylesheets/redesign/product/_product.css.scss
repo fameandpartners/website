@@ -294,10 +294,6 @@
   }
 }
 
-.no-scroll {
-	overflow: hidden !important;
-}
-
 #product-overlay {
 	&.is-visible {
     animation: 0.3s ease 0s normal none 1 running cd-fade-in;

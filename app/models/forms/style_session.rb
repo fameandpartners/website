@@ -1,11 +1,11 @@
 module Forms
   class StyleSession < Reform::Form
     AVAILABLE_TIMES               = %w(morning midday afternoon evening)
-    SESSION_TYPES                 = ['Email', 'Text', 'Video Chat', 'Phone', 'At Home']
-    TYPES_REQUIRES_EMAIL          = ['At Home', 'Email', 'Video Chat']
-    TYPES_REQUIRES_PHONE          = ['At Home', 'Phone', 'Text']
-    TYPES_REQUIRES_TIMEZONE       = ['At Home', 'Phone', 'Video Chat']
-    TYPES_REQUIRES_PREFERRED_TIME = ['At Home', 'Phone', 'Video Chat']
+    SESSION_TYPES                 = ['Email', 'Video Chat', 'Phone']
+    TYPES_REQUIRES_EMAIL          = ['Email', 'Video Chat']
+    TYPES_REQUIRES_PHONE          = ['Phone']
+    TYPES_REQUIRES_TIMEZONE       = ['Phone', 'Video Chat']
+    TYPES_REQUIRES_PREFERRED_TIME = ['Phone', 'Video Chat']
 
     property :full_name, virtual: true
     property :session_type, virtual: true
@@ -60,5 +60,3 @@ module Forms
     end
   end
 end
-
-

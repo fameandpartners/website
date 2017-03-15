@@ -5,10 +5,18 @@
   .hero-wrap {
     margin-bottom: 0;
 
-    .heading > span:first-child {
-      font-size: 5.5rem;
-      line-height: 100%;
-      padding-bottom: 10px;
+    .heading {
+
+      .title {
+        font-size: 5.5rem;
+        line-height: 100%;
+        padding-bottom: 10px;
+      }
+
+      .title--large {
+        font-size: 7rem;
+      }
+
     }
 
     .sub-heading {
@@ -46,77 +54,8 @@
 
     }
 
-  }
-
-  .section-instagram {
-    padding-bottom: 40px;
-
-    &.section-box {
-      margin-top: 0;
-    }
-
-    .instagram-widget {
-      padding: $box-padding-top 0;
-      display: inline-block;
-
-      .item {
-        padding: 5px;
-      }
-
-      .overlay {
-        position: absolute;
-        text-align: center;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        color: $c-neutral-white;
-        opacity: 0;
-        @include transition(opacity 0.2s linear);
-
-        .overlay-outer-wrap {
-          display: table;
-          width: 100%;
-          height: 100%;
-        }
-
-        .overlay-inner-wrap {
-          position: relative;
-          display: table-cell;
-          vertical-align: middle;
-        }
-
-        .cta-instagram {
-          background: $c-neutral-white;
-          padding: 0 20px 3px;
-          color: $c-neutral-black;
-
-          .user {
-            font-size: 1.4rem;
-            font-family: $font-family-secondary;
-            font-weight: 500;
-            margin-right: 5px;
-          }
-
-          .cta-link {
-            font-size: 1.2rem;
-            font-style: italic;
-            text-decoration: underline;
-            border: 0;
-          }
-
-        }
-
-      }
-
-      .item-wrap:hover {
-
-        .overlay {
-          opacity: 1;
-        }
-
-      }
-
+    .itemCopy {
+      margin: 20px 0;
     }
 
   }

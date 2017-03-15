@@ -25,6 +25,10 @@ module Marketing
       Rails.logger.info("[customer.io] #{user_id}, #{attrs}")
     end
 
+    def anonymous_track(event_type, attrs)
+      client.anonymous_track(event_type, attrs)
+    end
+
     # @api internal
     def client
       @client ||= Customerio::Client.new(site_id, api_key, json: true)

@@ -70,6 +70,11 @@ class CtaPrice extends React.Component {
       + parseFloat(this.props.customize.makingOption.price)
       - parseFloat(this.props.discount);
 
+    let deliveryPeriod = this.props.product.delivery_period;
+    if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
+      deliveryPeriod = this.props.product.fast_making_delivery_period;
+    }
+
     let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
     let isAddToBagAvailable = (
       this.props.customize.size.id
@@ -112,8 +117,15 @@ class CtaPrice extends React.Component {
           })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
-          <li>Estimated delivery, 7 - 10 business days</li>
+          <li>Estimated delivery, {deliveryPeriod}</li>
         </ul>
+        {(() => {
+          if (this.props.product.cny_delivery_delays) {
+            return(
+              <div className="deliveryNote">We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</div>
+            );
+          }
+        })()}
         <Modal
           style={MODAL_STYLE}
           className="md"

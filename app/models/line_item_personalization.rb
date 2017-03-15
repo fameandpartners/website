@@ -128,6 +128,8 @@ class LineItemPersonalization < ActiveRecord::Base
     end
   end
 
+  # TODO: since we get Product#basic_colors via Product#basic_color_ids probably it's better to use #basic_color_ids here
+  # Nickolay 2016-01-05
   def basic_color?
     product.basic_colors.where(id: color_id).exists?
   end

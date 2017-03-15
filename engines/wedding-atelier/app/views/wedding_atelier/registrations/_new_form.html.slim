@@ -1,6 +1,6 @@
 .registrations__new-form.left-side-centered-container
   h1
-    | Welcome to the App. <em>Create</em> your account to get started...
+    | Welcome to the Wedding Atelier. Let's <em>create</em> your account.
 
   = link_to fb_auth_path({ return_to: wedding_atelier.events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
      | Sign up with facebook
@@ -20,19 +20,20 @@
         = f.text_field :last_name, class: 'form-control'
 
     = f.label :email, 'Email Address'
-    = f.text_field :email, class: 'form-control', disabled: @user.email.present? && !@user.errors.any?
+    = f.email_field :email, class: 'form-control', disabled: @user.email.present? && !@user.errors.any?
     = f.label :password, 'Password'
     = f.password_field :password, class: 'form-control'
 
     .checkbox
-      = f.fields_for :user_profile, @user.build_user_profile(skip_validation: true) do |ff|
+      = f.fields_for :user_profile, @user.user_profile do |ff|
         = ff.hidden_field :skip_validation
         = ff.check_box :trend_updates
         = ff.label :trend_updates
-          | <span></span> Sign up to get the latest trend updates
+          | <span></span> Sign up to get the latest from Fame
     = f.submit 'Create Account', class: 'btn-black hidden-sm hidden-md hidden-lg'
     = f.submit 'Next', class: 'btn-black hidden-xs'
 
     p.already-member
       | Already a member?&nbsp;
-      = link_to 'login here', wedding_atelier.sign_in_path, class: 'bold hover-link'
+      = link_to 'log in here', wedding_atelier.sign_in_path, class: 'bold hover-link'
+      | .

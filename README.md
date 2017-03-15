@@ -5,6 +5,7 @@
 * Ruby 2.1.6
 * Postgres 9.5
 * ElasticSearch 1.7.x
+* Yarn
 * Redis
 * memcached
 * `imagemagick` 6.9.1
@@ -45,6 +46,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ cd ./website`
 * `$ cp config/database.yml.example config/database.yml`
 * `$ bundle install`
+* `$ bundle exec rails r 'Features.deactivate(:force_sitewide_ssl)`
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
@@ -52,7 +54,7 @@ If you are using homebrew and it's default settings, the supplied Procfile may w
 $ bundle exec foreman s
 ```
 
-It's also important to configure your Elasticsearch to enable dynamic scripting
+It is important to configure your Elasticsearch to enable dynamic scripting
 
 ```yaml
 # Procfile assumes that this file is under /usr/local/opt/elasticsearch/config/elasticsearch.yml
@@ -289,6 +291,8 @@ Example:
 ## Testing
 
 To run every test, including engines', use the `bundle exec rake spec engines` command
+
+Make sure you are running all processes described at the `Procfile`, otherwise, specs will **NOT** work.
 
 ## Useful Pages
 

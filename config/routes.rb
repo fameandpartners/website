@@ -1,5 +1,4 @@
 FameAndPartners::Application.routes.draw do
-
   ############################
   # Devise Omniauth Workaround
   ############################
@@ -96,6 +95,27 @@ FameAndPartners::Application.routes.draw do
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
+    # The Evening Shop landing page
+    get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
+
+    # Bridesmaids Thank you landing page
+    get '/thanks-bridesmaid' => 'statics#landing_page_thanks_bridesmaid', :permalink => 'thanks-bridesmaid', :as => :thanks_bridesmaid_landing_page
+
+    # Thank You landing page
+    get '/thanks-for-shopping' => 'statics#landing_page_regular_thank_you', :permalink => 'thank-you-for-shopping', :as => :thank_you_for_shopping_landing_page
+
+    # VIP landing page
+    get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
+
+    # Thanks Bride landing page
+    get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
+
+    # Micro Influencer landing page
+    get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
+
+    # Fame SOciety Invitation
+    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -183,6 +203,9 @@ FameAndPartners::Application.routes.draw do
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
 
+    # Best of Fame Collection
+    get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
@@ -207,6 +230,19 @@ FameAndPartners::Application.routes.draw do
     # Relaxed Evening Collection page (Inside/Out)- Landing page
     get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
 
+    # Pre-Prom/Pre-Season Evening Collection - Landing page
+    get '/pre-season-evening-collection' => 'products/collections#show', :permalink => 'pre-season-evening-collection', :as => :pre_season_evening_collection_landing_page
+
+    # Modern Evening Collection - Landing page
+    get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
+
+    # Bespoke Bridal Collection - Landing page
+    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
+
+    # Bespoke Bridal Sweepstakes - Landing page
+    get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
+
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -220,6 +256,28 @@ FameAndPartners::Application.routes.draw do
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
+
+    get '/the-evening-shop/gowns' => 'products/collections#show', :permalink => 'evening-shop-gown', :as => :evening_shop_gown_page
+    get '/the-evening-shop/slips' => 'products/collections#show', :permalink => 'evening-shop-slips', :as => :evening_shop_slips_page
+    get '/the-evening-shop/fitted' => 'products/collections#show', :permalink => 'evening-shop-fitted', :as => :evening_shop_fitted_page
+    get '/the-evening-shop/lace' => 'products/collections#show', :permalink => 'evening-shop-lace', :as => :evening_shop_lace_page
+    get '/the-evening-shop/wraps' => 'products/collections#show', :permalink => 'evening-shop-wraps', :as => :evening_shop_wraps_page
+    get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening-shop-cold-shoulder', :as => :evening_shop_cold_shoulder_page
+    get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening-shop-plunging', :as => :evening_shop_plunging_page
+    get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
+    get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
+    get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
+
+    # Evening Category Page
+    get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
+
+    # Casual Category Page
+    get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
+
+    # Wedding Atelier App - Landing page
+    get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
+    # Redirection in case of misspelling
+    get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -321,17 +379,18 @@ FameAndPartners::Application.routes.draw do
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
     get '/terms'   => 'statics#ecom_terms'
-    get '/privacy' => 'statics#ecom_privacy'
+    get '/privacy' => 'statics#ecom_privacy', :as => :privacy
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
     get '/from-our-ceo' => 'statics#from_our_ceo', :as => :from_our_ceo
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
-    get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
+    get '/growth-plan', to: redirect("/about")
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
-    get '/pre-register-bridal'   => 'statics#pre_register_bridal_sweepstakes', :permalink => 'pre_register_bridal', :as => :pre_register_bridal
-    get '/pre-register-bridesmaid'   => 'statics#pre_register_bridesmaid_sweepstakes', :permalink => 'pre_register_bridesmaid_sweepstakes', :as => :pre_register_bridesmaid_sweepstakes
+    get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
+    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
+    get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
@@ -357,6 +416,10 @@ FameAndPartners::Application.routes.draw do
 
     get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
+    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+
+    get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
+    resource 'micro-influencer', as: 'micro_influencer', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
@@ -465,14 +528,6 @@ FameAndPartners::Application.routes.draw do
       get  :check_state
     end
   end
-
-  #################
-  # Mysterious URLs
-  #################
-
-  get '/undefined',    to: 'errors/mysterious_route#undefined'
-  get '/au/undefined', to: 'errors/mysterious_route#undefined'
-  get '/1000668',      to: 'errors/mysterious_route#undefined'
 
   #########
   # Widgets
@@ -584,11 +639,15 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
+  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
+  mount WeddingAtelier::Engine, at: '/wedding-atelier'
+end
 
-  if Features.active?(:wedding_atelier)
-    mount WeddingAtelier::Engine, at: '/wedding-atelier'
-  end
-
-  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
+# NOTE: Alexey Bobyrev 14 Feb 2017
+# Method append used here to handle all request directly right after defined ones (including engines)
+FameAndPartners::Application.routes.append do
+  # NOTE: Alexey Bobyrev 14 Jan 2017
+  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
+  match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

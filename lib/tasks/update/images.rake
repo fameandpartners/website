@@ -5,17 +5,10 @@ namespace :update do
         next if product.images.blank?
 
         grouped = product.images.group_by(&:viewable)
-        positions = grouped.values.first.map(&:position).sort
+        positions = grouped.values.first.map(&:position).map(&:to_i).sort
 
-        sorted = true
-
-        positions.each_with_index do |position, index|
-          if positions[index + 1].present?
-            unless positions[index + 1] == position.next
-              sorted = false
-            end
-          end
-        end
+        sorted = \
+          positions.each_cons(2).all? { |position, next_position| position.next == next_position }
 
         next if sorted
 

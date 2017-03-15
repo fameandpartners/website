@@ -18,15 +18,13 @@ class RefundGrid
 
   column :order_number
   column(:line_item_id) do |item_return|
-    item_return.line_item.try(:id)
+    item_return.line_item&.id
   end
   column(:date_purchased) do |item_return|
-    next unless item_return.line_item.present?
-    item_return.line_item.order.completed_at.try(:strftime, '%Y-%m-%d')
+    item_return.line_item&.order&.completed_at&.strftime('%Y-%m-%d')
   end
   column(:date_goods_shipped) do |item_return|
-    next unless item_return.line_item.present?
-    item_return.line_item.order.shipments.first.try(:shipped_at).try(:strftime, '%Y-%m-%d')
+    item_return.line_item&.order&.shipments&.first&.shipped_at&.strftime('%Y-%m-%d')
   end
   column(:return_status) do |item_return|
     item_return.acceptance_status == 'received' ? 'Received' : 'Not Received'
@@ -36,5 +34,11 @@ class RefundGrid
   end
   column :refund_status do |item_return|
     item_return.refund_status == 'Complete' ? 'Paid' : 'Not Paid'
+  end
+  column :requested_date do |item_return|
+    item_return.requested_at&.strftime('%Y-%m-%d')
+  end
+  column :refunded_date do |item_return|
+    item_return.refunded_at&.strftime('%Y-%m-%d')
   end
 end

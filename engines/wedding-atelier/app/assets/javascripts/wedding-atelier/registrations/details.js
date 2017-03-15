@@ -2,7 +2,6 @@ $.fn.incrementButton = function(){
   var $input = $(this);
 
   if (!$input.is('input[type="number"]')) {
-    console.warn('[incrementButton] <input> type must equal number');
     return;
   }
 
@@ -45,17 +44,17 @@ $.fn.incrementButton = function(){
 };
 
 $(document).ready(function() {
-  $('.js-number-field').incrementButton();
+  $('.registrations__details-form.signup .js-number-field').incrementButton();
 
-  $('#spree_user_event_role').select2({
+  $('.registrations__details-form #wedding_role').select2({
     minimumResultsForSearch: Infinity
   });
 
-  $('.input-group.date').datepicker({
-    format: "dd/mm/yyyy",
-    todayBtn: "linked",
+  $('.registrations__details-form .input-group').datepicker({
+    format: "mm/dd/yyyy",
     autoclose: true,
-    showOnFocus: true
+    showOnFocus: true,
+    startDate: moment().format('M/D/YYYY')
   }).on('show', function(e){
     $(this).addClass('active');
   }).on('hide', function(e){

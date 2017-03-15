@@ -34,13 +34,15 @@ Spree::OrderMailer.class_eval do
         adjustments:                 order_presenter.build_adjustments,
         display_total:               order_presenter.display_total,
         auto_account:                user && user.automagically_registered?,
-        today:                       Date.today.strftime('%d.%m.%y'),
+        today:                       Time.zone.today.strftime('%d.%m.%y'),
         phone:                       order_presenter.phone,
         delivery_date:               order_presenter.projected_delivery_date,
         billing_address_attributes:  order_presenter.billing_address_attributes.to_h,
         shipping_address_attributes: order_presenter.shipping_address_attributes.to_h,
         billing_address:             order_presenter.billing_address,
-        shipping_address:            order_presenter.shipping_address
+        shipping_address:            order_presenter.shipping_address,
+        cny_delivery_delay:          Features.active?(:cny_delivery_delays),
+        order_delivery_period:       order_presenter.delivery_period
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
@@ -74,7 +76,8 @@ Spree::OrderMailer.class_eval do
         billing_address:                order_presenter.billing_address,
         shipping_address:               order_presenter.shipping_address,
         required_to_present:            order_presenter.required_to.present?,
-        required_to:                    order_presenter.required_to
+        required_to:                    order_presenter.required_to,
+        cny_delivery_delay:             Features.active?(:cny_delivery_delays)
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

@@ -30,14 +30,15 @@ $pink-bg: #eeddf0;
 $black-checkout-input: #343434;
 $beage-bg: #efeeea;
 $c-blue: #3a8db9;
+$c-light-red: #e0a3a3;
 
 // @end Colors
 
 // Fonts
-$font-family-secondary: 'brandon-grotesque', sans-serif;
+$font-family-secondary: 'brandon-grotesque', Helvetica, Arial, sans-serif;
 // Freight - available weight and styles:
 // 300, 300 italic, 500, 500 italic
-$font-heading: 'freight-display-pro', sans-serif;
+$font-heading: 'freight-display-pro', Helvetica, Arial, sans-serif;
 // @end Fonts
 
 // Form
@@ -45,7 +46,7 @@ $form-control-height-md: 45px;
 // @end Form
 
 // Mega Menu
-$mega-menu-desktop-height: 114px;
+$mega-menu-desktop-height: 96px;
 $mega-menu-mobile-height: 113px;
 // @end Mega Menu
 
@@ -71,5 +72,10 @@ $bootstrap-md-width: 992px;
 $bootstrap-lg-width: 1200px;
 
 //Fixed header
-$md-content-margin-top: 106px;
+$md-content-margin-top: 97px;
 $fixed-header-with-locale-warn: ($md-content-margin-top + 49px);
+
+// PDP Side Menu
+// That's the distance between the top of the page and the close icon
+$pdp-active-side-menu-padding-top: ($fixed-header-with-locale-warn + 10px);
+// @end PDP Side Menu
