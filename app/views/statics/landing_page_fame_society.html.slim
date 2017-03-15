@@ -37,7 +37,7 @@
                               label.text-uppercase Mailing Address
                               input type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
                           .row
-                            .col-md-6.col-xs-12.form-group.form-social-group
+                            .col-md-6.col-xs-12.form-group.form-social-group.has-feedback
                               label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
                               input required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
                             .col-md-6.col-xs-12.form-group
@@ -220,6 +220,7 @@
 javascript:
   $(function() {
     'use strict';
+    var MAX_SOCIAL_HANDLERS = 5;
     var INPUT_ERROR_CLASS = 'input-error';
     var $microInfluencerForm = $('#microinfluencer_form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
@@ -242,15 +243,25 @@ javascript:
 
     $addSocialHandlers.click(function () {
       var countSocialInputs = $('.social_handler_inputs').size();
-      if (countSocialInputs < 5) {
-        $('<input>').attr({
-          required: 'true',
-          type: 'text',
-          placeholder: 'Social Handles',
-          class: 'form-control form-control-md social_handler_inputs',
-          name: 'social_handles_'+countSocialInputs
-        }).appendTo('.form-social-group');
+      if (countSocialInputs < MAX_SOCIAL_HANDLERS) {
+        $('.form-social-group').append('<div class="social-handler-wrapper"><input required type="text" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs js-social-handler-input" name="social_handles_'+countSocialInputs+'"><span class="icon btn-close social-handler-remove-icon js-social-handler-remove" title="Remove this input"></span></div>');
       }
+
+      $(".js-social-handler-remove").on('click', function(e) {
+        var $whichSocialHandlerRow = $(this).parent();
+        $whichSocialHandlerRow.remove();
+        $('.js-social-handler-input').each(function(index){
+          $(this).attr('name','social_handles_'+(index+1)+'');
+        });
+        $addSocialHandlers.show();
+      });
+
+      if (countSocialInputs == (MAX_SOCIAL_HANDLERS - 1)) {
+        $addSocialHandlers.hide();
+      } else {
+        $addSocialHandlers.show();
+      }
+
       return false;
     });
 
