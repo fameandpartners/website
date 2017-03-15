@@ -121,6 +121,21 @@
     width: 100%;
   }
 
+  .social-handler-wrapper {
+    position: relative;
+  }
+
+  .social-handler-remove-icon {
+    right: 5px;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      height: 15px;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .section-box {
