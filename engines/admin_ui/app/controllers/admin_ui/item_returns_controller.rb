@@ -4,7 +4,10 @@ module AdminUi
       @collection = ItemReturnsGrid.new(params[:item_returns_grid])
       respond_to do |f|
         f.html do
-          @collection.scope { |scope| scope.page(params[:page]).per(50) }
+          @collection.scope do |scope|
+            scope = scope.send(params[:scope]) if params[:scope]
+            scope.page(params[:page]).per(50)
+          end
         end
         f.csv do
           send_data @collection.to_csv,
@@ -32,6 +35,13 @@ module AdminUi
         redirect_to item_return_path(@new_return_form.model.item_return), notice: 'Return Created!'
       else
         render :new
+      end
+    end
+
+    def add_to_weekly_refund
+      item_return = ItemReturn.find(params[:item_return_id])
+      if item_return.update_attribute(:bulk_refund, true)
+        redirect_to weekly_refund_item_returns_path, notice: 'Added to weekly refund processing'
       end
     end
 
