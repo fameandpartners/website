@@ -3,6 +3,7 @@ var Chat = React.createClass({
   propTypes: {
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
+    current_user: React.PropTypes.object,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
     handleLikeDress: React.PropTypes.func,
@@ -13,7 +14,9 @@ var Chat = React.createClass({
     members: React.PropTypes.array,
     typing: React.PropTypes.array,
     dresses: React.PropTypes.array,
-    loading: React.PropTypes.bool
+    loading: React.PropTypes.bool,
+    event: React.PropTypes.object,
+    event_url: React.PropTypes.string
   },
 
   getInitialState: function(){
@@ -84,8 +87,30 @@ var Chat = React.createClass({
     if (message) {
       this.props.sendMessageFn(message).then(function() {
         this.refs.autocompleteInput.refs.input.value = '';
+        this.sendToSlack(message);
       }.bind(this));
     }
+  },
+
+  sendToSlack: function(message){
+    var user = this.props.current_user,
+        event = this.props.event,
+        adminLink = '<' + this.props.event_url + '>',
+        hook = 'https://hooks.slack.com/services/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';
+
+    var fullMessage = user.name + ' (' + user.email + '): ' + message + '\n'
+        + adminLink + '\n'
+        + 'Wedding Date: ' + event.date + '\n'
+        + 'Dresses in board: ' + event.dresses.length + '\n'
+        + 'Cart value: ' + event.current_cart_total + '\n'
+        + 'Date joined: ' + user.joined_at;
+
+    $.ajax({
+      url: hook,
+      type: 'POST',
+      data: 'payload=' + JSON.stringify({ text: fullMessage }),
+      dataType: 'json'
+    })
   },
 
   sendMessageTile: function(dress) {

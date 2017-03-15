@@ -8,6 +8,7 @@ var MoodBoardEvent = React.createClass({
     dresses_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
     event_path: React.PropTypes.string,
+    event_url: React.PropTypes.string,
     filestack_key: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
@@ -487,6 +488,7 @@ var MoodBoardEvent = React.createClass({
     var chatProps = {
       profile_photo: this.props.profile_photo,
       username: this.props.username,
+      current_user: this.props.current_user.user,
       user_id: this.props.user_id,
       filestack_key: this.props.filestack_key,
       handleLikeDress: this.handleLikeDress,
@@ -497,7 +499,9 @@ var MoodBoardEvent = React.createClass({
       members: this.state.chat.members,
       typing: this.state.chat.typing,
       dresses: this.state.event.dresses,
-      loading: this.state.chat.loading
+      loading: this.state.chat.loading,
+      event: this.state.event,
+      event_url: this.props.event_url
     };
 
     var selectSizeProps = {
