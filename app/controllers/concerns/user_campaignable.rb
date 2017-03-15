@@ -3,6 +3,8 @@ module Concerns::UserCampaignable
 
   included do
     before_filter :manage_campaigns
+
+    helper_method :current_promotion
   end
 
   def current_promotion

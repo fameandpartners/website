@@ -10,7 +10,7 @@ ruby:
   end
   cache_keys << 'products'
 
-  if show_prices_with_applied_promocode? && current_promotion.present?
+  if show_prices_with_applied_promocode?
     cache_keys.push(current_promotion.code)
   end
 
