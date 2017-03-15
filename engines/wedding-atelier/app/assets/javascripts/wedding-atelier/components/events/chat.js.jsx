@@ -105,10 +105,49 @@ var Chat = React.createClass({
         + 'Cart value: ' + event.current_cart_total + '\n'
         + 'Date joined: ' + user.joined_at;
 
+    var slackMessage = {
+      attachments: [
+        {
+          text: message,
+          fields: [
+            {
+              title: 'User',
+              value: user.name + ' (' + user.email + ')'
+            },
+            {
+              title: 'Board link',
+              value: this.props.event_url
+            },
+            {
+              title: 'Wedding date',
+              value: event.date,
+              short: true
+            },
+            {
+              title: 'Dresses in board',
+              value: event.dresses.length,
+              short: true
+            },
+            {
+              title: 'Cart value',
+              value: event.current_cart_total,
+              short: true
+            },
+            {
+              title: 'Date joined',
+              value: user.joined_at,
+              short: true
+            }
+          ]
+        }
+      ]
+
+    }
+
     $.ajax({
       url: hook,
       type: 'POST',
-      data: 'payload=' + JSON.stringify({ text: fullMessage }),
+      data: 'payload=' + JSON.stringify(slackMessage),
       dataType: 'json'
     })
   },
