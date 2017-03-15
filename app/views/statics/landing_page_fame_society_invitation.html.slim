@@ -18,7 +18,7 @@
                           h2.text-center We just need to know <br class=" visible-md visible-lg">a <em>little</em> bit more about you:
 
                       .row
-                        form#microinfluencer_form.form.clearfix
+                        form#microinfluencer_form.js-microinfluencer-form.form.clearfix
                           .row
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase FULL Name<span class="required">*</span>
@@ -141,7 +141,7 @@ javascript:
     'use strict';
     var MAX_SOCIAL_HANDLERS = 5;
     var INPUT_ERROR_CLASS = 'input-error';
-    var $microInfluencerForm = $('#microinfluencer_form');
+    var $microInfluencerForm = $('.js-microinfluencer-form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
     var $addSocialHandlers = $('.js-add-social-handler');
 
