@@ -9,7 +9,7 @@
   }
 
   p {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .cta-link {
@@ -24,6 +24,7 @@
   .title-highlight {
     font-family: $font-family-secondary;
     font-weight: bold;
+    letter-spacing: 2px;
   }
 
   .mobile-safe-padding {
@@ -59,9 +60,17 @@
       width: 80%;
     }
 
-    .intro-wrapper .gratitudePage__copy {
-      padding-left: 55px;
-      padding-right: 50px;
+    .intro-wrapper {
+
+      .container-fluid {
+        padding-left: 85px;
+      }
+
+      .gratitudePage__copy {
+        padding-left: 25px;
+        padding-right: 55px;
+      }
+
     }
 
     .social-content-left {
@@ -74,6 +83,26 @@
 
     .btn-featured {
       padding: 15px 42px;
+    }
+
+    .btn-featured-black {
+      padding: 15px 62px;
+    }
+
+    .cta-items {
+
+      .cta-link-arrow-right {
+        margin-bottom: 20px;
+      }
+
+    }
+
+    .same-height-cols {
+
+      .item {
+        padding-bottom: 40px;
+      }
+
     }
 
     .gratitude-promo-app {
@@ -100,7 +129,8 @@
       font-size: 2rem;
     }
 
-    .btn-featured {
+    .btn-featured,
+    .btn-featured-black {
       margin-top: 40px;
       padding: 20px 80px;
     }
