@@ -16,7 +16,8 @@ var Chat = React.createClass({
     dresses: React.PropTypes.array,
     loading: React.PropTypes.bool,
     event: React.PropTypes.object,
-    event_url: React.PropTypes.string
+    event_url: React.PropTypes.string,
+    slack_webhook: React.PropTypes.string
   },
 
   getInitialState: function(){
@@ -96,8 +97,7 @@ var Chat = React.createClass({
   sendToSlack: function(message){
     var user = this.props.current_user,
         event = this.props.event,
-        staffOnline = _.findWhere(this.props.members, { identity: 'Amber (Fame Stylist)' }),
-        hook = 'https://hooks.slack.com/services/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';
+        staffOnline = _.findWhere(this.props.members, { identity: 'Amber (Fame Stylist)' });
     var slackMessage = {
       attachments: [
         {
@@ -148,7 +148,7 @@ var Chat = React.createClass({
 
     if(!user.fame_staff) {
       $.ajax({
-        url: hook,
+        url: this.props.slack_webhook,
         type: 'POST',
         data: 'payload=' + JSON.stringify(slackMessage),
         dataType: 'json'

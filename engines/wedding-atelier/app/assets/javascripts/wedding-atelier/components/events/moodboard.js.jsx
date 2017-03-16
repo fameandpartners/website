@@ -19,7 +19,8 @@ var MoodBoardEvent = React.createClass({
     sizing_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     user_id: React.PropTypes.number,
-    wedding_name: React.PropTypes.string
+    wedding_name: React.PropTypes.string,
+    slack_webhook: React.PropTypes.string
   },
 
   twilioCodes: {
@@ -508,7 +509,8 @@ var MoodBoardEvent = React.createClass({
       dresses: this.state.event.dresses,
       loading: this.state.chat.loading,
       event: this.state.event,
-      event_url: this.props.event_url
+      event_url: this.props.event_url,
+      slack_webhook: this.props.slack_webhook
     };
 
     var selectSizeProps = {
