@@ -191,16 +191,19 @@ var MoodBoardEvent = React.createClass({
         time: Date.now(),
         type: 'notification',
         content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email when she replies.'
-      });
+      }).then(function(){
+        if(!sessionStorage.getItem('stylistTagged')){
+          this.sendMessageToTwillio({
+            author: null,
+            time: Date.now(),
+            type: 'notification',
+            content: 'In the meantime why don\'t you invite your birdal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
+          });
+          sessionStorage.setItem('stylistTagged', true);
+        }
+      }.bind(this));
 
-      if(!sessionStorage.getItem('stylistTagged')){
-        this.sendMessageToTwillio({
-          author: null,
-          time: Date.now(),
-          type: 'notification',
-          content: 'In the meantime why don\'t you invite your birdal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
-        });
-      }
+
 
       // TODO: Complete SMS feature
       // This SMS message would be completed in a different ticket
@@ -211,8 +214,6 @@ var MoodBoardEvent = React.createClass({
       //   content: ''
       // }
       // this.sendMessageToTwillio(smsMessage);
-
-      sessionStorage.setItem('stylistTagged', true);
     }
   },
 
