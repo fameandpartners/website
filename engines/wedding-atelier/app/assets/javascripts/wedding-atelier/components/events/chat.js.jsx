@@ -59,7 +59,7 @@ var Chat = React.createClass({
 
       var separator = ', ';
       if (index === that.state.members.length - 1) {
-        separator == '.';
+        separator = '.';
       }
 
       return <span className={className} key={'chat-member-' + index}>{member.initials}{separator}</span>;
