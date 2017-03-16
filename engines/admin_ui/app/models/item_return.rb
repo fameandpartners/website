@@ -14,6 +14,7 @@ class ItemReturn < ActiveRecord::Base
   attr_accessible :uuid
   validates :uuid, uniqueness: true
 
-  scope :refund_queue, where(bulk_refund: true)
+  scope :incomplete, where('refund_status IS NULL OR refund_status != ?', 'Complete')
+  scope :refund_queue, incomplete.where(bulk_refund: true)
 end
 
