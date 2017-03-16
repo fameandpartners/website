@@ -39,7 +39,14 @@
                           .row
                             .col-md-6.col-xs-12.form-group.form-social-group.has-feedback
                               label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
-                              input required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                              input required="true" type="url" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input"
+
+                              / Render 4 more inputs for social links
+                              - (1..4.to_i).each do |n|
+                                .social-handler-wrapper.js-social-handler-wrapper.hidden
+                                  input type="url" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input" name="social_handles_#{n}"
+                                  span.icon.btn-close.social-handler-remove-icon.js-social-handler-remove title="Remove this input"
+
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Dress Size
                               input type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
@@ -224,7 +231,7 @@ javascript:
     var INPUT_ERROR_CLASS = 'input-error';
     var $microInfluencerForm = $('#microinfluencer_form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
-    var $addSocialHandlers = $('.js-add-social-handler');
+    var $addSocialHandler = $('.js-add-social-handler');
 
     function submitFormValues(formVals){
       return $.ajax({
@@ -241,28 +248,26 @@ javascript:
       $microInfluencerForm.find('input[data-auto-focus]').focus();
     });
 
-    $addSocialHandlers.click(function () {
-      var countSocialInputs = $('.social_handler_inputs').size();
+    $addSocialHandler.on('click', function(e) {
+      var countSocialInputs = $('.js-social-handler-input:visible').length;
+
       if (countSocialInputs < MAX_SOCIAL_HANDLERS) {
-        $('.form-social-group').append('<div class="social-handler-wrapper"><input required type="text" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs js-social-handler-input" name="social_handles_'+countSocialInputs+'"><span class="icon btn-close social-handler-remove-icon js-social-handler-remove" title="Remove this input"></span></div>');
+        $(".js-social-handler-wrapper.hidden:first").insertAfter($(".js-social-handler-wrapper:last")).removeClass('hidden');
       }
 
-      $(".js-social-handler-remove").on('click', function(e) {
-        var $whichSocialHandlerRow = $(this).parent();
-        $whichSocialHandlerRow.remove();
-        $('.js-social-handler-input').each(function(index){
-          $(this).attr('name','social_handles_'+(index+1)+'');
-        });
-        $addSocialHandlers.show();
-      });
-
       if (countSocialInputs == (MAX_SOCIAL_HANDLERS - 1)) {
-        $addSocialHandlers.hide();
+        $(this).hide();
       } else {
-        $addSocialHandlers.show();
+        $(this).show();
       }
 
       return false;
+    });
+
+    $(".js-social-handler-remove").on('click', function(e) {
+      var $whichSocialHandlerRow = $(this).parent('.js-social-handler-wrapper');
+      $whichSocialHandlerRow.addClass('hidden').find('.js-social-handler-input').val('');
+      $addSocialHandler.show();
     });
 
     // FOCUS Event handler
