@@ -4,7 +4,7 @@ class UpdateColorGroups < ActiveRecord::Migration
     update_color_group('black', %w( black ) )
     update_color_group('white-ivory', %w( white ivory ) )
     update_color_group('nude-tan', %w( dark-tan dark-nude light-nude sand champagne nude  dark-chocolate chocolate coffee warm-tan taupe ochre tan ) )
-    update_color_group('grey', %w( pale-grey grey mid-grey charcoal water-grey winter-grep grey-marle) )
+    update_color_group('grey', %w( pale-grey grey mid-grey charcoal water-grey winter-grey grey-marle) )
     update_color_group('blue', %w( pale-blue cobalt-blue ice-blue indigo navy aqua cornflower-blue azure chambray pale-blue-cotton-stripe indigo-cotton-stripe ) )
     update_color_group('purple', %w(lilac lavender dark-lavender mauve plum purple) )
     update_color_group('green', %w( mint dark-mint olive army-green dark-forest sage-green teal aqua light-teal dark-teal turquoise apple-green light-khaki olive-shimmer irridescent-green forest-green green ) )
@@ -36,7 +36,7 @@ class UpdateColorGroups < ActiveRecord::Migration
   end
 
   def update_color_group( group_name, color_name_array )
-    group = Spree::OptionType.color.option_values_groups.includes(:option_values).find_by_name( 'nude-tan' )
+    group = Spree::OptionType.color.option_values_groups.includes(:option_values).find_by_name( group_name )
     group.option_values = color_name_array.collect { |name| color(name) }
     group.save
   end
