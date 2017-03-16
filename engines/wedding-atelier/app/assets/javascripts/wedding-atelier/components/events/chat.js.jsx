@@ -96,6 +96,7 @@ var Chat = React.createClass({
   sendToSlack: function(message){
     var user = this.props.current_user,
         event = this.props.event,
+        staffOnline = _.findWhere(this.props.members, { identity: 'Amber (Fame Stylist)' }),
         hook = 'https://hooks.slack.com/services/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';
     var slackMessage = {
       attachments: [
@@ -132,7 +133,7 @@ var Chat = React.createClass({
       ]
     };
 
-    if(!sessionStorage.getItem('staffReplied')){
+    if(!staffOnline){
       slackMessage.attachments[0].actions =
         [
           {

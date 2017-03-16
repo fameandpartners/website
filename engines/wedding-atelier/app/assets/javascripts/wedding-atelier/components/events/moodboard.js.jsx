@@ -193,14 +193,12 @@ var MoodBoardEvent = React.createClass({
         content: 'Our fame stylist generally gets back to you within the hour. You will be notified via email when she replies.'
       });
 
-      if(!localStorage.getItem('stylistTagged')){
+      if(!sessionStorage.getItem('stylistTagged')){
         this.sendMessageToTwillio({
           author: null,
           time: Date.now(),
           type: 'notification',
           content: 'In the meantime why don\'t you invite your birdal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
-        }).then(function(){
-          localStorage.setItem('stylistTagged', true)
         });
       }
 
@@ -213,6 +211,8 @@ var MoodBoardEvent = React.createClass({
       //   content: ''
       // }
       // this.sendMessageToTwillio(smsMessage);
+
+      sessionStorage.setItem('stylistTagged', true);
     }
   },
 
@@ -308,10 +308,7 @@ var MoodBoardEvent = React.createClass({
     this.state.chatChannel.on('messageAdded', function (message) {
       var _messages = [...that.state.chat.messages];
       var parsedMsg = JSON.parse(message.body);
-
       _messages.push(parsedMsg);
-      if(parsedMsg.staffMessage){ sessionStorage.setItem('staffReplied', true); }
-
       var _chat = $.extend({}, that.state.chat);
       _chat.messages = _messages;
       if(!$('.tab-chat').hasClass('active')) {
@@ -456,7 +453,6 @@ var MoodBoardEvent = React.createClass({
       profilePhoto: this.props.profile_photo,
       author: author,
       user_id: this.props.user_id,
-      staffMessage: this.props.current_user.fame_staff,
       time: Date.now(),
       type: type,
       content: message
