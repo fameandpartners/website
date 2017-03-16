@@ -8,7 +8,7 @@ module WeddingAtelier
     has_many :dresses
     has_many :assistants, serializer: WeddingAtelier::UserSerializer
 
-    attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days, :owner_id, :current_cart_total
+    attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days, :owner_id
 
     def invitations
       object.invitations.pending
@@ -20,10 +20,6 @@ module WeddingAtelier
 
     def remaining_days
       (object.date - Date.today).to_i
-    end
-
-    def current_cart_total
-      scope.current_order.display_total.to_s
     end
   end
 end

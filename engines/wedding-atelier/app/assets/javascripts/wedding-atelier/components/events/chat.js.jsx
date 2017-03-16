@@ -3,6 +3,7 @@ var Chat = React.createClass({
   propTypes: {
     profile_photo: React.PropTypes.string,
     current_user: React.PropTypes.object,
+    current_cart_total: React.PropTypes.string,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
     handleLikeDress: React.PropTypes.func,
@@ -118,7 +119,7 @@ var Chat = React.createClass({
             },
             {
               title: 'Cart value',
-              value: event.current_cart_total,
+              value: this.props.current_cart_total,
               short: true
             },
             {

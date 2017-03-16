@@ -4,6 +4,7 @@ var MoodBoardEvent = React.createClass({
     channel_prefix: React.PropTypes.string,
     current_user_id: React.PropTypes.number,
     current_user: React.PropTypes.object,
+    current_cart_total: React.PropTypes.string,
     dress: React.PropTypes.object,
     dresses_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
@@ -488,6 +489,7 @@ var MoodBoardEvent = React.createClass({
     var chatProps = {
       profile_photo: this.props.profile_photo,
       current_user: this.props.current_user,
+      current_cart_total: this.props.current_cart_total,
       user_id: this.props.user_id,
       filestack_key: this.props.filestack_key,
       handleLikeDress: this.handleLikeDress,
