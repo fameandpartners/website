@@ -7,8 +7,8 @@ class CustomisationValuesGrid
     CustomisationValue.order('created_at desc')
   end
 
-  filter(:presentation, :string) { |value| where("presentation ilike '%#{value}%'") }
-  filter(:name, :string) { |value| where("name ilike '%#{value}%'") }
+  filter(:presentation, :string) { |value| where("presentation ilike ?", "%#{value}%") }
+  filter(:name, :string) { |value| where("name ilike ?", "%#{value}%") }
   filter :customisation_type, :enum, select: CustomisationValue::AVAILABLE_CUSTOMISATION_TYPES
 
   column :id do |cv|
