@@ -69,6 +69,12 @@ var MoodBoardEvent = React.createClass({
     this.setDefaultTabWhenResize();
   },
 
+  componentDidMount: function(){
+    $(window).on('beforeunload', function(){
+      this.state.chatChannel.leave();
+    }.bind(this))
+  },
+
   setUpData: function(){
     var that = this;
     var eventPromise = $.getJSON(that.props.event_path + '.json');
@@ -162,12 +168,12 @@ var MoodBoardEvent = React.createClass({
 
   setTypingIndicator: function(member, typing){
     var _whoIsTyping = [...this.state.chat.typing];
-    var _isAlreadyTyping = _whoIsTyping.indexOf(member.identity) > -1;
+    var _isAlreadyTyping = _whoIsTyping.indexOf(member.userInfo.identity) > -1;
 
     if (typing && !_isAlreadyTyping) {
-      _whoIsTyping.push(member.identity);
+      _whoIsTyping.push(member.userInfo.identity);
     } else {
-      var index = _whoIsTyping.indexOf(member.identity);
+      var index = _whoIsTyping.indexOf(member.userInfo.identity);
       _whoIsTyping.splice(index, 1);
     }
 
@@ -224,11 +230,11 @@ var MoodBoardEvent = React.createClass({
     var that = this;
     this.state.chatChannel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
-        var nameInitials = member.identity.match(/\b\w/g).join("").toUpperCase();
+        var nameInitials = member.userInfo.identity.match(/\b\w/g).join("").toUpperCase();
 
         return {
           id: member.sid,
-          identity: member.identity,
+          identity: member.userInfo.identity,
           initials: nameInitials,
           online: true
         };
@@ -277,19 +283,22 @@ var MoodBoardEvent = React.createClass({
   },
 
   handleMember: function(member, joined) {
+    var _newChat = $.extend({}, this.state.chat);
     if (joined) {
       var newMember = {
         id: member.sid,
-        identity: member.identity,
-        initials: member.identity.match(/\b\w/g).join("").toUpperCase(),
+        identity: member.userInfo.identity,
+        initials: member.userInfo.identity.match(/\b\w/g).join("").toUpperCase(),
         online: joined
       };
 
-      var _newState = $.extend({}, this.state);
-      _newState.channelMembers.push(newMember);
-      this.setState(_newState);
+      _newChat.members.push(newMember);
+      this.setState({ chat: _newChat });
     } else {
-      // TODO: handle remove
+      _newChat.members = _.reject(_newChat.members, function(chatMember){
+        return chatMember.id === member.sid
+      });
+      this.setState({ chat: _newChat });
     }
   },
 
