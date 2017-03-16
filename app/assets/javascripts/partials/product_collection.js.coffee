@@ -17,6 +17,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       page_size: 21,
       mobileBreakpoint: 768,
       mobileFilterSelector: '.js-trigger-filter-mobile',
+      mobileSortSelector: '.js-trigger-sort-mobile',
       showMoreSelector: "*[data-action=show-more-collection-products]",
       ORDERS : {
         newest: 'What\'s New',
@@ -28,9 +29,13 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
+
+    # Sorting / Filtering
     @resultsMetaContent = $(options.resultsMetaContent)
     @mobileFilter = $(options.mobileFilterSelector)
+    @mobileSort = $(options.mobileSortSelector)
     @mobileFilter.on('click', @toggleFilters)
+    @mobileSort.on('click', @toggleSort)
     # base
     # if users comes by url with specific params, like /dresses/for/very/special/case
     # then use this path until user selects another collection
@@ -55,7 +60,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
 
   toggleFilters:(forceToggle) ->
-    $('.ExpandablePanel--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+    $('.ExpandablePanel-filter--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+  toggleSort:(forceToggle) ->
+    $('.ExpandablePanel-sort--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
 
   filterSortMetaDescription:(updateRequestParams) ->
     metaDescription = {

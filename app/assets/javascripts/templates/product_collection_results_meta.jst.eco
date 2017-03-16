@@ -1,5 +1,3 @@
 <div class="FilterSort__summary">
-  <span class="FilterSort__summaryHighlight FilterSort__filterAmount"><%= @resultsMeta.filtersText %></span>
-  displaying <span class="FilterSort__summaryHighlight FilterSort__itemAmount"><%= @resultsMeta.countText %></span>
   sorted by <span class="FilterSort__summaryHighlight FilterSort__sortedBy"><%= @resultsMeta.sortText %></span>
 </div>

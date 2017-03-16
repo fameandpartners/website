@@ -2,19 +2,12 @@
 -------------------------------------------------------*/
 
 .FilterSort__mobileTriggerBtn {
+  text-align: center;
   cursor: pointer;
-  background: $c-neutral-black;
-  color: $c-neutral-white;
-  text-transform: uppercase;
+  border: 2px solid $c-neutral-black;
   padding: 10px 15px;
-  margin: 10px 0;
   display: block;
   width: 100%;
-
-  .arrow {
-    float: right;
-  }
-
 }
 
 .FilterSort__summary {
