@@ -18,7 +18,6 @@ var MoodBoardEvent = React.createClass({
     sizing_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     user_id: React.PropTypes.number,
-    username: React.PropTypes.string,
     wedding_name: React.PropTypes.string
   },
 
@@ -301,6 +300,7 @@ var MoodBoardEvent = React.createClass({
       var parsedMsg = JSON.parse(message.body);
 
       _messages.push(parsedMsg);
+      if(parsedMsg.staffMessage){ sessionStorage.setItem('staffReplied', true); }
 
       var _chat = $.extend({}, that.state.chat);
       _chat.messages = _messages;
@@ -320,7 +320,6 @@ var MoodBoardEvent = React.createClass({
     });
 
     this.state.chatChannel.on('typingStarted', function(member){
-      // TODO: Set typing indicator.
       that.setTypingIndicator(member, true);
     });
 
@@ -442,11 +441,12 @@ var MoodBoardEvent = React.createClass({
     if (type === undefined) {
       type = "simple";
     }
-
+    var author = this.props.current_user.fame_staff ? 'Amber (Fame Stylist)' : this.props.current_user.name;
     message = {
       profilePhoto: this.props.profile_photo,
-      author: this.props.username,
+      author: author,
       user_id: this.props.user_id,
+      staffMessage: this.props.current_user.fame_staff,
       time: Date.now(),
       type: type,
       content: message
@@ -487,8 +487,7 @@ var MoodBoardEvent = React.createClass({
   render: function () {
     var chatProps = {
       profile_photo: this.props.profile_photo,
-      username: this.props.username,
-      current_user: this.props.current_user.user,
+      current_user: this.props.current_user,
       user_id: this.props.user_id,
       filestack_key: this.props.filestack_key,
       handleLikeDress: this.handleLikeDress,
@@ -602,7 +601,7 @@ var MoodBoardEvent = React.createClass({
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
                   <EventDetails event={this.state.event}
-                                current_user={this.props.current_user.user}
+                                current_user={this.props.current_user}
                                 eventDetailsUpdated={this.eventDetailsUpdated}
                                 eventDetailsUpdateFailed={this.eventDetailsUpdateFailed}
                                 eventDetailsUpdatePath={this.props.event_path}

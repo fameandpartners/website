@@ -1,7 +1,7 @@
 = react_component 'MoodBoardEvent',
                   { event_path: event_path(id: @event.id, slug: @event.slug),
                     event_url: event_url(id: @event.id, slug: @event.slug),
-                    current_user: WeddingAtelier::UserSerializer.new(spree_current_user, scope: self),
+                    current_user: WeddingAtelier::UserSerializer.new(spree_current_user, root: false, scope: self),
                     current_user_id: spree_current_user.id,
                     send_invite_path: event_invitations_path(@event),
                     sizing_path: sizing_index_path,
@@ -16,7 +16,7 @@
                     roles_path: '',
                     siteVersion: current_site_version.permalink,
                     filestack_key: ENV['FILESTACK_KEY'],
-                    channel_prefix: 'new-welcome'},
+                    channel_prefix: ENV['RAILS_ENV']},
                   { class: 'moodboard-react-container container-fluid' }
 
 - content_for :javascript do

@@ -2,7 +2,6 @@ var Chat = React.createClass({
 
   propTypes: {
     profile_photo: React.PropTypes.string,
-    username: React.PropTypes.string,
     current_user: React.PropTypes.object,
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
@@ -27,7 +26,7 @@ var Chat = React.createClass({
       members: this.props.members,
       typing: this.props.typing,
       showTags: false
-    }
+    };
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -55,7 +54,7 @@ var Chat = React.createClass({
     var that = this;
 
     var chatMembers = this.state.members.map(function(member, index) {
-      className = member.online ? '' : 'text-muted';
+      var className = member.online ? '' : 'text-muted';
 
       var separator = ', ';
       if (index === that.state.members.length - 1) {
@@ -92,31 +91,20 @@ var Chat = React.createClass({
     }
   },
 
+
   sendToSlack: function(message){
     var user = this.props.current_user,
         event = this.props.event,
-        adminLink = '<' + this.props.event_url + '>',
-        hook = 'https://hooks.slack.com/services/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';
-
-    var fullMessage = user.name + ' (' + user.email + '): ' + message + '\n'
-        + adminLink + '\n'
-        + 'Wedding Date: ' + event.date + '\n'
-        + 'Dresses in board: ' + event.dresses.length + '\n'
-        + 'Cart value: ' + event.current_cart_total + '\n'
-        + 'Date joined: ' + user.joined_at;
-
+        hook = 'https://hooks.slack.com/services/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';
     var slackMessage = {
       attachments: [
         {
           text: message,
+          callback_id: 'cust_sup',
           fields: [
             {
               title: 'User',
               value: user.name + ' (' + user.email + ')'
-            },
-            {
-              title: 'Board link',
-              value: this.props.event_url
             },
             {
               title: 'Wedding date',
@@ -141,8 +129,21 @@ var Chat = React.createClass({
           ]
         }
       ]
+    };
 
+    if(!sessionStorage.getItem('staffReplied')){
+      slackMessage.attachments[0].actions =
+        [
+          {
+            name: 'reply',
+            text: 'Reply',
+            type: 'button',
+            value: this.props.event_url,
+            style: 'primary'
+          }
+        ];
     }
+
     if(!user.fame_staff) {
       $.ajax({
         url: hook,
@@ -153,29 +154,8 @@ var Chat = React.createClass({
     }
   },
 
-  sendMessageTile: function(dress) {
-    return this.sendMessage(dress, "dress");
-  },
-
   sendMessageImage: function(image) {
-    return this.sendMessage(image, "image");
-  },
-
-  sendMessage: function (message, type){
-    if (type === undefined) {
-      type = "simple";
-    }
-
-    message = {
-      profilePhoto: this.props.profile_photo,
-      author: this.props.username,
-      user_id: this.props.user_id,
-      time: Date.now(),
-      type: type,
-      content: message
-    };
-
-    return this.props.sendMessageFn(message);
+    return this.props.sendMessageFn(image, "image");
   },
 
   getRenderedMessages() {
