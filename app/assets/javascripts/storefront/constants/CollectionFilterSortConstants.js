@@ -20,10 +20,14 @@ const actionTypes = assign({},
       selectedPrices: [],
       selectedShapes: [],
     },
+  },
+  { ORDERS:
+    {
+      newest: 'What\'s New',
+      price_high: 'Price High to Low',
+      price_low: 'Price Low to High',
+    }
   }
-)
-
-
-;
+);
 
 export default actionTypes;

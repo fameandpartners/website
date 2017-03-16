@@ -35,13 +35,6 @@ const PRICES = [
   },
 ];
 
-//TODO: @elgrecode check if this is provided by backend in legacy version
-const ORDERS = {
-  newest: 'What\'s New',
-  price_high: 'Price High to Low',
-  price_low: 'Price Low to High',
-};
-
 function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
     if (state.$$collectionFilterSortStore) {
@@ -260,6 +253,7 @@ class CollectionFilterSort extends Component {
 
     /**
      * Reaches into legacy application to control toggling of mobile filters
+     * Ugly. I know. But this is how we sprinkle in react components with prexisting framework
      */
     handleFilterCancel(){
       return () => {
@@ -380,50 +374,49 @@ class CollectionFilterSort extends Component {
                 <div className="FilterSort">
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
-                            <span className="ExpandablePanel__mainTitle">Filter & Sort by</span>
+                            <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter & Sort by'}</span>
                             <div className="ExpandablePanel__clearAllWrapper">
                               <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                             </div>
                         </div>
 
-                        <ExpandablePanelItem
+                        { isDrawerLayout ? null :
+                          <ExpandablePanelItem
                           itemGroup={(
                             <div>
-                              <div className="ExpandablePanel__name">
-                                Sort
-                              </div>
-                              <div className="ExpandablePanel__selectedOptions">
-                                <span className="ExpandablePanel__selectedItem">{ORDERS[filters.order]}</span>
-                              </div>
+                              <div className="ExpandablePanel__name">Sort</div>
+                            <div className="ExpandablePanel__selectedOptions">
+                              <span className="ExpandablePanel__selectedItem">{CollectionFilterSortConstants.ORDERS[filters.order]}</span>
+                            </div>
                             </div>
                           )}
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="price_high">
-                                <input
-                                  onChange={this.handleOrderBy('price_high')}
-                                  id="price_high"
-                                  name="price_high"
-                                  type="checkbox"
-                                  value="true"
-                                  checked={filters.order === 'price_high'}
-                                />
-                                <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">Price high to low</span>
-                                </span>
+                              <input
+                                onChange={this.handleOrderBy('price_high')}
+                                id="price_high"
+                                name="price_high"
+                                type="checkbox"
+                                value="true"
+                                checked={filters.order === 'price_high'}
+                              />
+                              <span className="checkboxBlackBg__check">
+                                <span className="ExpandablePanel__optionName">Price high to low</span>
+                              </span>
                               </label>
                               <label className="ExpandablePanel__option" name="price_low">
-                                <input
-                                  onChange={this.handleOrderBy('price_low')}
-                                  id="price_low"
-                                  name="price_low"
-                                  type="checkbox"
-                                  value="true"
-                                  checked={filters.order === 'price_low'}
-                                />
-                                <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">Price low to high</span>
-                                </span>
+                              <input
+                                onChange={this.handleOrderBy('price_low')}
+                                id="price_low"
+                                name="price_low"
+                                type="checkbox"
+                                value="true"
+                                checked={filters.order === 'price_low'}
+                              />
+                              <span className="checkboxBlackBg__check">
+                                <span className="ExpandablePanel__optionName">Price low to high</span>
+                              </span>
                               </label>
                               <label className="ExpandablePanel__option" name="newest">
                                 <input
@@ -440,7 +433,8 @@ class CollectionFilterSort extends Component {
                               </label>
                             </div>
                           )}
-                        />
+                          />
+                        }
 
                         <ExpandablePanelItem
                           itemGroup={(
