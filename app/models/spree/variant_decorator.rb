@@ -103,10 +103,6 @@ Spree::Variant.class_eval do
 
   private
 
-  def current_sale
-    @current_sale ||= Spree::Sale.first_or_initialize
-  end
-
   def set_default_values
     if self.new_record?
       self.on_demand     = true

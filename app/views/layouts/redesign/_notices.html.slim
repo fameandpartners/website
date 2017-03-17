@@ -1,11 +1,11 @@
-- if display_sale_notice?
+- if current_sale.present?
   #sale-banner.alert-sale role="alert"
     .outer-wrap
-        .inner-wrap
-          .title-wrap
-            .title
-              = current_sale.try(:sitewide_message)
-              = link_to 'Shop now!', sale_path
+      .inner-wrap
+        .title-wrap
+          .title
+            = current_sale.sitewide_message
+            = link_to 'Shop now!', dresses_path
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)

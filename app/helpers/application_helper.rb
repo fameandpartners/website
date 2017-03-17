@@ -170,27 +170,6 @@ module ApplicationHelper
     end
   end
 
-  def sale_active?
-    return unless current_sale.present?
-    sale_promo? || current_sale.active?
-  end
-
-  def display_sale_notice?
-    sale_active? && current_sale.sitewide_message.present?
-  end
-
-  def sale_path
-    if sale_promo?
-      dresses_path(:faadc => current_sale.sale_promo)
-    else
-      dresses_path
-    end
-  end
-
-  def sale_promo?
-    current_sale.present? && current_sale.sale_promo.present?
-  end
-
   def dynamic_colors
     type = Spree::OptionType.color
     return [] unless type
@@ -224,11 +203,12 @@ module ApplicationHelper
   end
 
   def current_sale
-    @current_sale ||= Spree::Sale.where(sitewide: true).first
+    @current_sale ||= Spree::Sale.active.sitewide.last
   end
 
   def bootstrap_class_for(flash_type)
-    { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type] || flash_type.to_s
+    flash_classes =  { success: 'alert-success', error: 'alert-danger', alert: 'alert-warning', notice: 'alert-info' }
+    flash_classes.fetch(flash_type, flash_type.to_s)
   end
 
 end
