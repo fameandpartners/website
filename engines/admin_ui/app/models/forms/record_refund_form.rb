@@ -16,7 +16,7 @@ module Forms
 
     validates :user, presence: true
     validates :refund_method, presence: true
-    validates :refund_amount, presence: true
+    validates :refund_amount, presence: true, numericality: true
     validates :refunded_at, presence: true
   end
 end

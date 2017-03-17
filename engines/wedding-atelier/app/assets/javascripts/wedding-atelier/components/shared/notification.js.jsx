@@ -35,20 +35,25 @@ var Notification = React.createClass({
     this.showAndHide();
   },
 
+  delayedUnmount: function() {
+    window.setTimeout(function(){
+      ReactDOM.unmountComponentAtNode($('#notification')[0]);
+    }, 600);
+  },
+
   showAndHide: function () {
     var show = Array.isArray(this.props.errors) && this.props.errors.length > 0 || Object.keys(this.props.errors).length > 0;
     if(this.state.show && show) {
       window.setTimeout(function () {
-        this.setState({show: false});
+        this.setState({ show: false });
+        this.delayedUnmount();
       }.bind(this), this.state.timeOut);
     }
   },
 
   close: function () {
     this.setState({show: false});
-    window.setTimeout(function(){
-      ReactDOM.unmountComponentAtNode($('#notification')[0]);
-    }, 600)
+    this.delayedUnmount();
   },
 
   renderErrors: function () {
