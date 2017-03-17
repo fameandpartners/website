@@ -35,6 +35,18 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
   # NOTE: Alexey Bobyrev 09 Feb 2017
   # Slack accepts only 4000 characters per message
   char_limit=1800
+  
+gifs[0]='http://68.media.tumblr.com/tumblr_lgb02mCfLm1qe0eclo1_r5_500.gif'
+gifs[1]='https://media.giphy.com/media/IzVwOO8xZsfks/giphy.gif'
+gifs[2]='https://media.giphy.com/media/1FT20zgiDr8Bi/giphy.gif'
+gifs[3]='https://media.giphy.com/media/E5Y1XC79e6Btm/giphy.gif'
+gifs[4]='http://i.imgur.com/LZsRtcX.gif'
+gifs[5]='https://s3-us-west-2.amazonaws.com/giffy-prod/e84eada496534922b22cb39cdbe566a4.gif'
+
+rand_gif_number=$[ $RANDOM % 6 ]
+echo ${gifs[$rand_gif_number]}
+
+  
 json_message=$(cat <<EOJ
   {
     "channel": "$channel",
@@ -68,7 +80,7 @@ json_message=$(cat <<EOJ
         "mrkdwn": true
       }],
       "mrkdwn_in": [ "fields" ],
-      "image_url": "https://media.giphy.com/media/Yip9sdlVQqkUg/giphy.gif",
+      "image_url": "${gifs[$rand_gif_number]}",
       "footer": "By $author",
       "ts": "$(date +%s)"
     }]
