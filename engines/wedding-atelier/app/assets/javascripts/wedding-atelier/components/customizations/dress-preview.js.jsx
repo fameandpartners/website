@@ -62,9 +62,9 @@ var DressPreview = React.createClass({
   },
 
   dressDescription: function(){
-    var silhouette = this.props.selectedOptions.silhouette;
+    var silhouette = this.props.selectedOptions.silhouette, index = 0;
     if(silhouette){
-      return silhouette.description.split("\\n").map(function(text){return(<p>{text}</p>)})
+      return silhouette.description.split("\\n").map(function(text){return(<p key={index++}>{text}</p>)});
     }
   },
 
