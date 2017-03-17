@@ -5,7 +5,7 @@ module Marketing
     module Presenter
       describe Order, type: :presenter do
         let(:line_item) { build(:dress_item, quantity: 2, price: 12.34) }
-        let(:order) { build(:complete_order, promocode: 'C336V398', email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
+        let(:order) { build(:complete_order, coupon_code: 'C336V398', email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
 
         subject(:presenter) { described_class.new(spree_order: order) }
 
