@@ -6,7 +6,7 @@
     .modal-dialog role='document'
       .container-fluid
         .row
-          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12
+          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12.col-md-offset-0
             .modal-content
               a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
               .modal-body
@@ -18,11 +18,11 @@
                           h2.text-center We just need to know <br class=" visible-md visible-lg">a <em>little</em> bit more about you:
 
                       .row
-                        form#microinfluencer_form.form.clearfix
+                        form#microinfluencer_form.js-microinfluencer-form.form.clearfix
                           .row
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase FULL Name<span class="required">*</span>
-                              input data-auto-focus= required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
+                              input required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Email<span class="required">*</span>
                               input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
@@ -32,13 +32,20 @@
                               textarea name="about" rows=5 cols=10  class="form-control form-control-md"
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Blog Url
-                              input type="text" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
+                              input type="url" name="blog_url" placeholder="Blog Url" class="form-control form-control-md"
                               label.text-uppercase Mailing Address
                               input type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
                           .row
-                            .col-md-6.col-xs-12.form-group.form-social-group
+                            .col-md-6.col-xs-12.form-group.form-social-group.has-feedback
                               label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
-                              input required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                              input required="true" type="url" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input"
+
+                              / Render 4 more inputs for social links
+                              - (1..4.to_i).each do |n|
+                                .social-handler-wrapper.js-social-handler-wrapper.hidden
+                                  input type="url" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input" name="social_handles_#{n}"
+                                  span.icon.btn-close.social-handler-remove-icon.js-social-handler-remove title="Remove this input"
+
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Dress Size
                               input type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
@@ -123,9 +130,9 @@
 
         .col-md-6.copy-padding-item.vertical-align
           .copy-wrap
-            h3 <em>Why</em> do we do it?
+            h3 <em>Why</em> we do it:
             p We want to create an unstoppable chain of women empowering women.
-            p The Fame Society is a network of likeminded ladies from all areas of the fashion industry–bloggers, stylists, photographers, designers, editors, and more–working together to support each other. Society members are encouraged to collaborate and post one another’s content, in effect growing your social followings exponentially. Through a group chats, local meetups, and influencer mentorships, The Fame Society offers a platform for creative collaboration and heightened exposure.
+            p The Fame Society is a network of likeminded ladies from all areas of the fashion industry–bloggers, stylists, photographers, designers, editors, and more–working together to support each other. Society members are encouraged to collaborate and post one another’s content, in effect growing your social followings exponentially. Through group chats, local meetups, and influencer mentorships, The Fame Society offers a platform for creative collaboration and heightened exposure.
 
     section.section-box.section-apply-now.text-center
       .row
@@ -139,10 +146,11 @@
 javascript:
   $(function () {
     'use strict';
+    var MAX_SOCIAL_HANDLERS = 5;
     var INPUT_ERROR_CLASS = 'input-error';
-    var $microInfluencerForm = $('#microinfluencer_form');
+    var $microInfluencerForm = $('.js-microinfluencer-form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
-    var $addSocialHandlers = $('.js-add-social-handler');
+    var $addSocialHandler = $('.js-add-social-handler');
 
     function submitFormValues(formVals) {
       return $.ajax({
@@ -159,18 +167,26 @@ javascript:
       $microInfluencerForm.find('input[data-auto-focus]').focus();
     });
 
-    $addSocialHandlers.click(function () {
-      var countSocialInputs = $('.social_handler_inputs').size();
-      if (countSocialInputs < 5) {
-        $('<input>').attr({
-          required: 'true',
-          type: 'text',
-          placeholder: 'Social Handles',
-          class: 'form-control form-control-md social_handler_inputs',
-          name: 'social_handles_' + countSocialInputs
-        }).appendTo('.form-social-group');
+    $addSocialHandler.on('click', function(e) {
+      var countSocialInputs = $('.js-social-handler-input:visible').length;
+
+      if (countSocialInputs < MAX_SOCIAL_HANDLERS) {
+        $(".js-social-handler-wrapper.hidden:first").insertAfter($(".js-social-handler-wrapper:last")).removeClass('hidden');
       }
+
+      if (countSocialInputs == (MAX_SOCIAL_HANDLERS - 1)) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+
       return false;
+    });
+
+    $(".js-social-handler-remove").on('click', function(e) {
+      var $whichSocialHandlerRow = $(this).parent('.js-social-handler-wrapper');
+      $whichSocialHandlerRow.addClass('hidden').find('.js-social-handler-input').val('');
+      $addSocialHandler.show();
     });
 
     // FOCUS Event handler

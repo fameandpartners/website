@@ -40,6 +40,7 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :user }
     it { is_expected.to validate_presence_of :refund_method }
     it { is_expected.to validate_presence_of :refund_amount }
+    it { is_expected.to validate_numericality_of :refund_amount }
     it { is_expected.to validate_presence_of :refunded_at }
   end
 
@@ -49,6 +50,7 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :user }
     it { is_expected.to validate_presence_of :refund_method }
     it { is_expected.to validate_presence_of :refund_amount }
+    it { is_expected.to validate_numericality_of :refund_amount }
   end
 
   describe 'factory fault' do

@@ -289,6 +289,7 @@ javascript:
 
 
     $weddingPlanningForm.find('.datepicker').datepicker({
+      minDate: new Date(),
       dateFormat: isUSSite ? 'mm/dd/yy' : 'dd/mm/yy',
       altField: '.wedding-date',
       altFormat: 'mm/dd/yy' 
