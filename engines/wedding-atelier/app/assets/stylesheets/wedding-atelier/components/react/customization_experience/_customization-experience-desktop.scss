@@ -13,17 +13,26 @@
       padding: 0;
     }
 
-
     &-container {
+      height: 100%;
       max-width: 90%;
       margin: 0 auto;
+      position: relative;
+    }
+
+    &-content {
+      left: 0;
+      right: 0;
+      top: 50%;
+      position: absolute;
+      transform: translatey(-50%);
     }
   }
 
   .title {
-    align-items: center;
     display: flex;
     margin-bottom: 25px;
+    align-items: center;
   }
 
   .title-text {
@@ -40,9 +49,9 @@
 
     > button {
       margin-right: 30px;
-      position: absolute;
       right: 0;
       top: 50%;
+      position: absolute;
       transform: translateY(-50%);
     }
   }
@@ -97,15 +106,15 @@
   }
 
   .footer {
-    align-items: center;
-    background-image: image-url('wedding-atelier/marbel.png');
-    bottom: 0;
     display: flex;
     height: 61px;
+    width: 100%;
+    bottom: 0;
     left: 0;
     padding: 8px;
     position: absolute;
-    width: 100%;
+    align-items: center;
+    background-image: image-url('wedding-atelier/marbel.png');
   }
 
   .favorites {
@@ -158,6 +167,16 @@
     }
   }
 
+  @include screen-xs {
+    .customization-panel {
+      padding-top: 15px;
+    }
+
+    .customization-type {
+      margin: 15px auto;
+    }
+  }
+
   @media screen and (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
     .footer {
       justify-content: center;
@@ -194,27 +213,13 @@
     }
 
     .customization-panel-container {
-      left: 0;
-      // Half the containers height
-      margin-top: -320px;
-      max-width: 75%;
-      position: absolute;
-      right: 0;
-      top: 50%;
-    }
-
-    .title {
-      margin-bottom: 100px;
+      width: 75%;
     }
   }
 
-  @media screen and (max-height: 710px) {
-    .customization-panel {
-      padding-top: 25px;
-    }
-
-    .customization-type {
-      margin: 20px auto;
+  @media screen and (min-width: $screen-xl-min) and (min-height: 768px) {
+    .title {
+      margin-bottom: 100px;
     }
   }
 }
