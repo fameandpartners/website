@@ -161,7 +161,9 @@ class Products::CollectionsController < Products::BaseController
     nil
   end
 
-  private def filter_options
+  private
+
+  def filter_options
     custom_product_ids = filters_applied? ? [] : product_ids
     {
       site_version:                    current_site_version,
@@ -169,6 +171,7 @@ class Products::CollectionsController < Products::BaseController
       style:                           params[:style],
       event:                           params[:event],
       color:                           params[:colour] || params[:color],
+      color_groups:                    params[:color_group],
       bodyshape:                       params[:bodyshape],
       discount:                        params[:sale] || params[:discount],
       fast_making:                     params[:fast_making],
