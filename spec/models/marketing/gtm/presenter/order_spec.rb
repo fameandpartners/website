@@ -4,7 +4,7 @@ module Marketing
   module Gtm
     module Presenter
       describe Order, type: :presenter do
-        subject(:order)     { FactoryGirl.create(:complete_order_with_items)
+        subject(:order)     { FactoryGirl.create(:complete_order_with_items) }
         subject(:presenter) { described_class.new(spree_order: order) }
 
         it_behaves_like 'a Marketing::Gtm::Presenter::Base'
