@@ -39,7 +39,8 @@ class Spree::Sale < ActiveRecord::Base
             presence: true,
             length: { minimum: 5 }
 
-  scope :active, lambda { where(is_active: true) }
+  scope :active,   -> { where(is_active: true) }
+  scope :sitewide, -> { where(sitewide: true) }
 
   has_many :discounts
 
@@ -54,15 +55,13 @@ class Spree::Sale < ActiveRecord::Base
     Discount.new(amount: discount_size.to_i)
   end
 
-  def apply(price, surryhills)
+  def apply(price)
     if fixed?
       discount_size < price ? price - discount_size : BigDecimal.new(0)
     elsif percentage?
-      unless surryhills
-        price * (BigDecimal.new(100) - discount_size) / 100
-      else
-        price * (BigDecimal.new(100) - 80) / 100
-      end
+      price * (1 - discount_size.to_f / 100)
+    else
+      price
     end
   end
 
@@ -71,11 +70,10 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def banner_images
-    banner_images = {
+    {
       full:  'tile-sale-full.gif',
       small: 'tile-sale-sml.gif'
     }
-    banner_images
   end
 
   def explanation
@@ -92,12 +90,6 @@ class Spree::Sale < ActiveRecord::Base
 
   def sitewide_message
     super.to_s.gsub(/{discount}/, discount_string)
-  end
-
-  # TODO: Alexey Bobyrev 14 Mar 2017
-  # Seems to be unnecessary method, should be removed.
-  def sale_promo
-    nil
   end
 
   def self.active_sales_ids
