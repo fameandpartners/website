@@ -14,6 +14,7 @@ class Spree::Sale < ActiveRecord::Base
 
   attr_accessible :is_active,
                   :sitewide,
+                  :sitewide_message,
                   :name,
                   :discount_size,
                   :discount_type,
@@ -90,7 +91,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    super.gsub(/{discount}/, discount_string)
+    super.to_s.gsub(/{discount}/, discount_string)
   end
 
   # TODO: Alexey Bobyrev 14 Mar 2017
