@@ -74,6 +74,12 @@ var MoodBoardEvent = React.createClass({
     $(window).on('beforeunload', function(){
       this.state.chatChannel.leave();
     }.bind(this))
+
+    _cio.identify({
+      id: this.props.current_user.id,
+      email: this.props.current_user.email,
+      created_at: this.props.current_user.created_at
+    });
   },
 
   setUpData: function(){
@@ -233,9 +239,11 @@ var MoodBoardEvent = React.createClass({
     this.state.chatChannel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
         var nameInitials = member.userInfo.identity.match(/\b\w/g).join("").toUpperCase();
+        var assistant = _.findWhere(that.state.event.assistants, { name: member.userInfo.identity }) || {};
 
         return {
           id: member.sid,
+          internalId: assistant.id,
           identity: member.userInfo.identity,
           initials: nameInitials,
           online: true
@@ -287,8 +295,11 @@ var MoodBoardEvent = React.createClass({
   handleMember: function(member, joined) {
     var _newChat = $.extend({}, this.state.chat);
     if (joined) {
+      var assistant = _.findWhere(this.state.event.assistants, { name: member.userInfo.identity }) || {};
+
       var newMember = {
         id: member.sid,
+        internalId: assistant.id,
         identity: member.userInfo.identity,
         initials: member.userInfo.identity.match(/\b\w/g).join("").toUpperCase(),
         online: joined
@@ -311,6 +322,17 @@ var MoodBoardEvent = React.createClass({
       var _messages = [...that.state.chat.messages];
       var parsedMsg = JSON.parse(message.body);
       _messages.push(parsedMsg);
+
+      if(parsedMsg.staffMessage && !sessionStorage.getItem('chatNotificationSent')){
+        var onlineMembersIds = _.pluck(that.state.chat.members, 'internalId');
+        that.state.event.assistants.map(function(assistant){
+          if(onlineMembersIds.indexOf(assistant.id) < 0){
+            _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content });
+          }
+        });
+        sessionStorage.setItem('chatNotificationSent', true);
+      }
+
       var _chat = $.extend({}, that.state.chat);
       _chat.messages = _messages;
       if(!$('.tab-chat').hasClass('active')) {
@@ -455,6 +477,7 @@ var MoodBoardEvent = React.createClass({
       profilePhoto: this.props.profile_photo,
       author: author,
       user_id: this.props.user_id,
+      staffMessage: this.props.current_user.fame_staff,
       time: Date.now(),
       type: type,
       content: message

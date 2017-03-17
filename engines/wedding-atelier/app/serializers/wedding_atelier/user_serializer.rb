@@ -2,7 +2,7 @@ module WeddingAtelier
   class UserSerializer < ActiveModel::Serializer
 
     has_one :user_profile
-    attributes :first_name, :id, :name, :role, :joined_at, :email, :fame_staff
+    attributes :first_name, :id, :name, :role, :joined_at, :email, :fame_staff, :created_at
 
     def name
       object.full_name
