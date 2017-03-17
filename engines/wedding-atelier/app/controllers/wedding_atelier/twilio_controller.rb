@@ -33,7 +33,7 @@ module WeddingAtelier
 
     private
     def identity
-      current_spree_user.email =~ /^.*@fameandpartners.com$/ ? 'Amber (Fame Stylist)' : current_spree_user.full_name
+      spree_current_user.email =~ /^.*@fameandpartners.com$/ ? 'Amber (Fame Stylist)' : spree_current_user.full_name
     end
   end
 end
