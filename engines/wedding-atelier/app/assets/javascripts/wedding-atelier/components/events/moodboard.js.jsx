@@ -204,23 +204,11 @@ var MoodBoardEvent = React.createClass({
             author: null,
             time: Date.now(),
             type: 'notification',
-            content: 'In the meantime why don\'t you invite your birdal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
+            content: 'In the meantime why don\'t you invite your bridal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
           });
-          sessionStorage.setItem('stylistTagged', true);
+          try { sessionStorage.setItem('stylistTagged', true); }catch (e){};
         }
       }.bind(this));
-
-
-
-      // TODO: Complete SMS feature
-      // This SMS message would be completed in a different ticket
-      // var smsMessage = {
-      //   author: null,
-      //   time: Date.now(),
-      //   type: 'sms',
-      //   content: ''
-      // }
-      // this.sendMessageToTwillio(smsMessage);
     }
   },
 
@@ -330,7 +318,7 @@ var MoodBoardEvent = React.createClass({
             _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content });
           }
         });
-        sessionStorage.setItem('chatNotificationSent', true);
+        try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){};
       }
 
       var _chat = $.extend({}, that.state.chat);
