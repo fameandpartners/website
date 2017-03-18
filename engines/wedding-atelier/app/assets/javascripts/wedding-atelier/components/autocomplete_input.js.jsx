@@ -31,7 +31,7 @@ var AutocompleteInput = React.createClass({
     }
 
     if((deleteKey && charBeforeCursor == '@') || (hideKeys && this.state.showOptions)){
-      _newState = this.getInitialState();
+      _newState = $.extend({},this.getInitialState());
     }
 
     this.setState(_newState);
@@ -62,16 +62,17 @@ var AutocompleteInput = React.createClass({
     var _newState = $.extend({}, this.state),
         input = this.refs.input,
         inputText = input.value,
+        keyCode = e.which || e.keyCode,
         charBeforeAt = inputText[input.selectionStart - 1],
         //check anything before @ is a whitespace
         showTags = ['', ' ', undefined].indexOf(charBeforeAt) > -1,
-        enterPressed = (e.which == 13 || e.keyCode == 13);
+        enterPressed = keyCode == 13;
 
     if(this.state.captureTyping){
       _newState.currentTyping = this.state.currentTyping + e.key
     }
 
-    if(e.key === '@' && showTags){
+    if(keyCode === 64 && showTags){
       _newState.showOptions = true;
       _newState.captureTyping = true;
     }
