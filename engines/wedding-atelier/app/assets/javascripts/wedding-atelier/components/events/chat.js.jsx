@@ -206,8 +206,7 @@ var Chat = React.createClass({
   },
 
   dressMessageComponent: function(message, showAuthor, isOwnerMessage, key) {
-    var dresses = [...this.state.dresses];
-    var dress = _.findWhere(dresses, {id: message.content.id});
+    var dress = _.findWhere(this.state.dresses, {id: message.content.id});
 
     if (dress) {
       message.content = dress;
