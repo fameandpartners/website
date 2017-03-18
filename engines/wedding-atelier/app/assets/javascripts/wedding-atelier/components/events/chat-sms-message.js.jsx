@@ -1,9 +1,5 @@
 var ChatSMSMessage = React.createClass({
 
-  sendSMS: function(){
-
-  },
-
   render: function() {
     return(
       <div className="msg msg-sms">
@@ -13,7 +9,7 @@ var ChatSMSMessage = React.createClass({
               <div className="msg-text">
                 <p>Also get notified by SMS</p>
                 <input type="phone" className="sms-phone-number"/>
-                <a href="javascript:;" className="btn btn-black send-sms" onClick={this.sendSMS}>></a>
+                <a href="javascript:;" className="btn btn-black send-sms">></a>
               </div>
             </div>
           </div>
