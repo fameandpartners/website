@@ -1,7 +1,7 @@
 = react_component 'MoodBoardEvent',
                   { event_path: event_path(@event),
                     event_url: event_url(id: @event.id, slug: @event.slug),
-                    current_user: WeddingAtelier::UserSerializer.new(spree_current_user, root: false, scope: self),
+                    current_user: @serialized_user,
                     current_cart_total: current_order.display_total.to_s,
                     current_user_id: spree_current_user.id,
                     send_invite_path: event_invitations_path(@event),

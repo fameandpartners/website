@@ -12,6 +12,7 @@ module WeddingAtelier
       @event = WeddingAtelier::Event.find(params[:id])
       @sizes = Spree::OptionType.size.option_values
       @heights = WeddingAtelier::Height.definitions
+      @serialized_user = WeddingAtelier::UserSerializer.new(spree_current_user, root: false)
 
       if @event.nil? || !@event.assistant_permitted?(current_spree_user)
         flash[:notice] = "You don't have permission to access this wedding board"
