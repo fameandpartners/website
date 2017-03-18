@@ -84,7 +84,7 @@ var AutocompleteInput = React.createClass({
           completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
 
       this.refs.input.value += completeItem;
-      _newState = this.getInitialState();
+      _newState = $.extend({},this.getInitialState());
     }
     this.setState(_newState);
   },
