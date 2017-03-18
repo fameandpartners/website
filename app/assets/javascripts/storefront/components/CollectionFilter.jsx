@@ -156,18 +156,6 @@ class CollectionFilterSort extends Component {
       }
     }
 
-
-    // V2
-    // updateFilterSort(newFilterSortVal, filterUpdateAction){
-    //   const {isDrawerLayout, setTemporaryFilters,} = this.props;
-    //   if (isDrawerLayout){
-    //     setTemporaryFilters(assign({}, newFilterSortVal));
-    //   } else {
-    //     filterUpdateAction(newPrices);
-    //     this.updateExternalProductCollection(newFilterSortVal);
-    //   }
-    // }
-
     updatePrice(newPrices){
       const {isDrawerLayout, setSelectedPrices, setTemporaryFilters, temporaryFilters,} = this.props;
       if (isDrawerLayout){ // mobile version
@@ -379,62 +367,6 @@ class CollectionFilterSort extends Component {
                               <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                             </div>
                         </div>
-
-                        { isDrawerLayout ? null :
-                          <ExpandablePanelItem
-                          itemGroup={(
-                            <div>
-                              <div className="ExpandablePanel__name">Sort</div>
-                            <div className="ExpandablePanel__selectedOptions">
-                              <span className="ExpandablePanel__selectedItem">{CollectionFilterSortConstants.ORDERS[filters.order]}</span>
-                            </div>
-                            </div>
-                          )}
-                          revealedContent={(
-                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="price_high">
-                              <input
-                                onChange={this.handleOrderBy('price_high')}
-                                id="price_high"
-                                name="price_high"
-                                type="checkbox"
-                                value="true"
-                                checked={filters.order === 'price_high'}
-                              />
-                              <span className="checkboxBlackBg__check">
-                                <span className="ExpandablePanel__optionName">Price high to low</span>
-                              </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="price_low">
-                              <input
-                                onChange={this.handleOrderBy('price_low')}
-                                id="price_low"
-                                name="price_low"
-                                type="checkbox"
-                                value="true"
-                                checked={filters.order === 'price_low'}
-                              />
-                              <span className="checkboxBlackBg__check">
-                                <span className="ExpandablePanel__optionName">Price low to high</span>
-                              </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="newest">
-                                <input
-                                  onChange={this.handleOrderBy('newest')}
-                                  id="newest"
-                                  name="newest"
-                                  type="checkbox"
-                                  value="true"
-                                  checked={filters.order === 'newest'}
-                                />
-                                <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">{`What's new`}</span>
-                                </span>
-                              </label>
-                            </div>
-                          )}
-                          />
-                        }
 
                         <ExpandablePanelItem
                           itemGroup={(

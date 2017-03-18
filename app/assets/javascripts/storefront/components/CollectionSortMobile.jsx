@@ -57,7 +57,7 @@ class CollectionSortMobile extends Component {
             <ul>
               {
                 Object.keys(ORDERS).map((orderKey) => {
-                  return (<li onClick={this.handleSelection(orderKey)}>{ORDERS[orderKey]}</li>)
+                  return (<li key={orderKey} onClick={this.handleSelection(orderKey)}>{ORDERS[orderKey]}</li>)
                 })
               }
             </ul>

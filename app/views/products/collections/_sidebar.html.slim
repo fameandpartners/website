@@ -1,10 +1,8 @@
 javascript:
-  window.CollectionFilterSortApp = {
+  window.CollectionFilterData = {
     colors: #{raw Repositories::ProductColors.color_groups.to_json},
     secondaryColors: #{raw @filter.colors.to_json},
     bodyShapes: #{raw @filter.shapes.to_json}
   };
-  
-- colors  = Repositories::ProductColors.color_groups
-- selectColors = @filter.colors
-#CollectionFilterSortApp
+
+#CollectionFilterApp

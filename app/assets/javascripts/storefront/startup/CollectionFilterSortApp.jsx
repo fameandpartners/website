@@ -2,48 +2,56 @@ import React from 'react';
 import RD from 'react-dom';
 import { Provider, } from 'react-redux';
 import AppStore from '../store/AppStore';
-import CollectionFilterSort from '../containers/CollectionFilterSort.jsx';
+import CollectionFilter from '../components/CollectionFilter.jsx';
+import CollectionSort from '../components/CollectionSort.jsx';
 import CollectionSortMobile from '../components/CollectionSortMobile.jsx';
 
 // GLOBAL INJECTION: Anti pattern to attach props via global scope, but currently necessary
-const props = (typeof window === 'object' && typeof window.CollectionFilterSortApp === 'object') ?
-  window.CollectionFilterSortApp : {};
+const props = (typeof window === 'object' && typeof window.CollectionFilterData === 'object') ?
+  window.CollectionFilterData : {};
 const store = AppStore(props); // shared
 
 // Filter sorts within 2col desktop
-const CollectionFilterSortApp = () => {
-  const reactComponent = (
+const CollectionFilterApp = () => {
+  return (
     <Provider store={store}>
-      <CollectionFilterSort />
+      <CollectionFilter />
     </Provider>
   );
-  return reactComponent;
+};
+// Filter sorts within 2col desktop
+const CollectionSortApp = () => {
+  return (
+    <Provider store={store}>
+      <CollectionSort />
+    </Provider>
+  );
 };
 
 // Drawer Filter Pattern in mobile
 const CollectionFilterMobileApp = () => {
-  const reactComponent = (
+  return (
     <Provider store={store}>
-      <CollectionFilterSort isDrawerLayout/>
+      <CollectionFilter isDrawerLayout/>
     </Provider>
   );
-  return reactComponent;
 };
 
 // Drawer Sort Pattern in mobile
 const CollectionSortMobileApp = () => {
-  const reactComponent = (
+  return (
     <Provider store={store}>
       <CollectionSortMobile/>
     </Provider>
   );
-  return reactComponent;
 };
 
-const elm = document.getElementById('CollectionFilterSortApp');
-const mobileFilter = document.getElementById('js-CollectionFilterMobile');
-const mobileSort = document.getElementById('js-CollectionSortMobile');
+const filterNode = document.getElementById('CollectionFilterApp');
+const sortNode = document.getElementById('CollectionSortApp');
+const mobileFilterNode = document.getElementById('js-CollectionFilterMobile');
+const mobileSortNode = document.getElementById('js-CollectionSortMobile');
 
-if (elm){ RD.render(CollectionFilterSortApp(), elm); }
-if (mobileFilter){ RD.render(CollectionFilterMobileApp(), mobileFilter); }
-if (mobileSort){ RD.render(CollectionSortMobileApp(), mobileSort); }
+if (filterNode){ RD.render(CollectionFilterApp(), filterNode); }
+if (sortNode){ RD.render(CollectionSortApp(), sortNode); }
+if (mobileFilterNode){ RD.render(CollectionFilterMobileApp(), mobileFilterNode); }
+if (mobileSortNode){ RD.render(CollectionSortMobileApp(), mobileSortNode); }
