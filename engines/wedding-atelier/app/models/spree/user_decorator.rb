@@ -26,7 +26,7 @@ Spree::User.class_eval do
 
   def role_in_event(event)
     if event
-      roles.where(resource_id: event.id).first.try(:name) || ''
+      roles.where(resource_id: event.id).pluck(:name).first.to_s
     end
   end
 
