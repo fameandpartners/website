@@ -5,8 +5,11 @@ class MicroInfluencerMailer < ActionMailer::Base
   def email(micro_influencer_form)
     @micro_influencer_form = micro_influencer_form
 
+    email_address = 'influencerapplications@fameandpartners.com'
+    email_address = 'qa@fameandpartners.com' unless RAILS_ENV == 'production'
+    
     mail(
-      to:      'influencerapplications@fameandpartners.com',
+      to:      email_address
       from:    'team@fameandpartners.com',
       subject: '[Micro Influencer Application]',
       layout:  false
