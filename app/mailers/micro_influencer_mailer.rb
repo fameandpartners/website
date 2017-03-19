@@ -9,7 +9,7 @@ class MicroInfluencerMailer < ActionMailer::Base
     email_address = 'qa@fameandpartners.com' unless RAILS_ENV == 'production'
     
     mail(
-      to:      email_address
+      to:      email_address,
       from:    'team@fameandpartners.com',
       subject: '[Micro Influencer Application]',
       layout:  false
