@@ -262,8 +262,8 @@ var Chat = React.createClass({
             <p> You can get started by either: </p>
             <ol>
               <li><p>Talking to a fame stylist by tagging <span className="stylist-tag">@Stylist</span> in chat</p></li>
-              <li><p> Invite and chat with your bridal party</p></li>
-              <li><p> Start adding dresses to your dress board to vote and share with your bridal party</p></li>
+              <li><p>Inviting your bridal party if you haven’t already</p></li>
+              <li><p>Start adding dresses to your dress board to vote and share with your bridal party</p></li>
             </ol>
           </div>
         </div>

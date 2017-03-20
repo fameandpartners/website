@@ -54,6 +54,10 @@ var AutocompleteInput = React.createClass({
         _newState.showOptions = false;
       }
 
+      if(_newState.currentTyping == 'stylist'){
+        _newState.showOptions = false;
+      }
+
       this.setState(_newState);
     }
   },
@@ -69,9 +73,8 @@ var AutocompleteInput = React.createClass({
         enterPressed = keyCode == 13;
 
     if(this.state.captureTyping){
-      _newState.currentTyping = this.state.currentTyping + e.key
+      _newState.currentTyping = this.state.currentTyping + e.key;
     }
-
     if(keyCode === 64 && showTags){
       _newState.showOptions = true;
       _newState.captureTyping = true;
@@ -86,6 +89,7 @@ var AutocompleteInput = React.createClass({
       this.refs.input.value += completeItem;
       _newState = $.extend({},this.getInitialState());
     }
+
     this.setState(_newState);
   },
 
