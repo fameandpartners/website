@@ -4,7 +4,10 @@ module Marketing
   module Gtm
     module Presenter
       describe Order, type: :presenter do
-        subject(:order)     { FactoryGirl.create(:complete_order_with_items) }
+        let(:line_item) { build(:dress_item, quantity: 2, price: 12.34) }
+        let(:order) { build(:complete_order, email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
+        order.coupon_code = 'C336V398'
+
         subject(:presenter) { described_class.new(spree_order: order) }
 
         it_behaves_like 'a Marketing::Gtm::Presenter::Base'
