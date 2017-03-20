@@ -14,10 +14,10 @@ const propTypes = {
     label: React.PropTypes.string,
     className: React.PropTypes.string,
     options: React.PropTypes.arrayOf(React.PropTypes.shape({
-        name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
-        id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-        active: React.PropTypes.bool
-    }))
+        name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node,]),
+        id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string,]),
+        active: React.PropTypes.bool,
+    })),
 };
 
 const defaultProps = {
@@ -31,14 +31,17 @@ class Select extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            arrowFocusedIndex: -1
+            arrowFocusedIndex: -1,
         };
         autobind(this);
 
         // debounce to avoid onFocus & onClick from firing setState twice
         const self = this;
         this.setDropdownState = _.debounce(function(state) {
-            self.setState({isOpen: state, arrowFocusedIndex: -1});
+            self.setState({
+              isOpen: state,
+              arrowFocusedIndex: -1,
+            });
         }, 250, true).bind(this);
     }
 
@@ -54,7 +57,10 @@ class Select extends Component {
 
     closeDropdown () {
         if (this.state.isOpen) {
-            this.setState({isOpen: false, arrowFocusedIndex: -1});
+            this.setState({
+              isOpen: false,
+              arrowFocusedIndex: -1,
+            });
         }
     }
 
@@ -68,17 +74,17 @@ class Select extends Component {
         case 38:
             event.preventDefault();
             if (index > 0) {
-                this.setState({arrowFocusedIndex: index - 1});
+                this.setState({arrowFocusedIndex: index - 1,});
             } else {
-                this.setState({arrowFocusedIndex: maxIndex});
+                this.setState({arrowFocusedIndex: maxIndex,});
             }
             break;
         case 40:
             event.preventDefault();
             if (index < maxIndex) {
-                this.setState({arrowFocusedIndex: index + 1});
+                this.setState({arrowFocusedIndex: index + 1,});
             } else {
-                this.setState({arrowFocusedIndex: 0});
+                this.setState({arrowFocusedIndex: 0,});
             }
             break;
         case 13:
@@ -114,7 +120,7 @@ class Select extends Component {
                     key={`${self.props.id}-${option.id}-${index}`}
                     data-value={option.id}
                     data-display-text={option.name}
-                    className={`${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''} Select-list-item noselect`}
+                    className={`${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''} Select-list-item noSelect`}
                     onClick={self.handleDropdownItemClick(option)}
                     aria-hidden={self.state.isOpen ? 'false' : 'true'}
                 >
@@ -130,12 +136,12 @@ class Select extends Component {
         const { options, label, className, } = this.props;
         const { isOpen,} = this.state;
         const contents = this.buildDropdown();
-        const activeOption = _.find(options, {active:true}) || {};
+        const activeOption = _.find(options, {active:true,}) || {};
         const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
         const singleOption = options.length === 1;
         return (
             <div
-                className={ `Select-wrapper ${className || ''} ${label ? 'translate-label': ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}` }
+                className={`Select-wrapper ${className || ''} ${label ? 'translate-label': ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}
                 ref="selectWrapper"
                 onClick={this.toggleDropdown}
                 onBlur={this.closeDropdown}
@@ -143,8 +149,8 @@ class Select extends Component {
                 onKeyDown={this.handleKeyboardActions}
                 tabIndex={isOpen ? '-1' : '0'}
             >
-                {label ? <label className="Select-label noselect">{label}</label> : null}
-                <span className="Select-item-text noselect">{spanText}</span>
+                {label ? <label className="Select-label noSelect">{label}</label> : null}
+                <span className="Select-item-text noSelect">{spanText}</span>
                 <div className="Select">
                     <div className="Select-list-wrapper">
                         <ul className="Select-list">
