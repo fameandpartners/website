@@ -1,6 +1,4 @@
 Spree::Variant.class_eval do
-  delegate_belongs_to :final_price, :price_without_discount if Spree::Price.table_exists?
-
   has_one :discount, foreign_key: :variant_id
 
   accepts_nested_attributes_for :prices
@@ -53,9 +51,7 @@ Spree::Variant.class_eval do
   end
 
   def set_default_sku
-    return if self.sku.present?
-
-    self.sku = generate_sku
+    self.sku ||= generate_sku
   end
 
   def generate_sku
@@ -81,11 +77,11 @@ Spree::Variant.class_eval do
   # NOTE: this differs from spree version by '|| prices.first'
   # for case, if we use price_in for site_version with another currency
   def price_in(currency)
-    prices.select{ |price| price.currency == currency }.first || prices.first || Spree::Price.new(:variant_id => self.id, :currency => currency)
+    get_price_in(currency) || prices.first || Spree::Price.new(:variant_id => self.id, :currency => currency)
   end
 
   def get_price_in(currency)
-    prices.select{ |price| price.currency == currency }.first
+    prices.find { |price| price.currency == currency }
   end
 
   def product_factory_name
