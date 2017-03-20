@@ -40,19 +40,11 @@ RSpec.describe ItemReturn, type: :model do
       end
     end
 
-    describe 'approved' do
-      it 'returns items with approve event' do
-        approve_return(items_with_empty_status.first)
-
-        expect(described_class.approved).to eq([items_with_empty_status.first])
-      end
-    end
-
     describe '::refund_queue' do
       it 'returns incomplete items marked as bulk refund' do
-        approve_return(items_with_empty_status.last)
-        approve_return(items_with_incomplete_status.last)
-        approve_return(items_with_complete_status.last)
+        items_with_empty_status.last.update_attribute(:acceptance_status, 'approved')
+        items_with_incomplete_status.last.update_attribute(:acceptance_status, 'approved')
+        items_with_complete_status.last.update_attribute(:acceptance_status, 'approved')
 
         scope = described_class.refund_queue
 
