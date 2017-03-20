@@ -15,7 +15,6 @@ class ItemReturn < ActiveRecord::Base
   validates :uuid, uniqueness: true
 
   scope :incomplete, where('refund_status IS NULL OR refund_status != ?', 'Complete')
-  scope :approved, joins(:events).where(item_return_events: { event_type: 'approve' })
-  scope :refund_queue, incomplete.approved
+  scope :refund_queue, incomplete.where(acceptance_status: 'approved')
 end
 
