@@ -56,7 +56,7 @@ Spree::Product.class_eval do
 
   default_scope order: "#{self.table_name}.position"
 
-  delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
+  delegate_belongs_to :master, :in_sale?, :original_price
 
   before_create :set_default_prototype
 
@@ -302,18 +302,15 @@ Spree::Product.class_eval do
   alias_method :is_active?, :active?
 
   def discount
-    return @discount if instance_variable_defined?('@discount')
-    @discount = Repositories::Discount.get_product_discount(self.id)
+    @discount ||= Repositories::Discount.get_product_discount(self.id)
   end
 
   def plus_size?
-    return @plus_size if defined? @plus_size
-    @plus_size = taxons.where(name: "Plus Size").exists?
+    @plus_size ||= taxons.where(name: 'Plus Size').exists?
   end
 
   def jumpsuit?
-    return @jumpsuit if defined? @jumpsuit
-    @jumpsuit = taxons.where(name: "Jumpsuit").exists?
+    @jumpsuit ||= taxons.where(name: 'Jumpsuit').exists?
   end
 
   def height_customisable?

@@ -16,7 +16,7 @@ module Products
     end
 
     def price
-      Repositories::ProductPrice.new(site_version: site_version, product: product).read
+      product.site_price_for(site_version || SiteVersion.default)
     end
 
     def image
