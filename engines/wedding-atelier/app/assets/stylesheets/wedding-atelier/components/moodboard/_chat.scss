@@ -81,6 +81,7 @@
         @include screen-sm { top: 20%; };
 
         .welcome-message-title {
+          font-size: 28px;
           font-weight: 300;
           text-align: center;
 
@@ -120,14 +121,15 @@
         font-family: $secondary-font;
         color: $gray;
         font-size: 14px;
-        margin-left: 40px;
+        margin-left: 20px;
         position: fixed;
         bottom: 65px;
 
         b { color: $mine-shaft;}
 
-        @include screen-xs {
-          margin-left: 10px;
+
+        @include screen-lg {
+          margin-left: 40px;
         };
       }
 
