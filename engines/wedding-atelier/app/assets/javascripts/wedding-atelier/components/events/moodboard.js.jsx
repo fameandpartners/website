@@ -369,7 +369,7 @@ var MoodBoardEvent = React.createClass({
   eventDetailsUpdated: function (collection) {
     this.setState({event: collection.moodboard_event});
     var _newEvent = $.extend({}, this.state.event);
-    event.hasError = {};
+    _newEvent.hasError = {};
     this.setState({
       event: _newEvent,
       event_backup: _newEvent
