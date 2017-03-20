@@ -18,6 +18,8 @@ RSpec.describe ItemReturn, type: :model do
   end
 
   describe 'scopes' do
+    let(:user) { FactoryGirl.create(:spree_user) }
+
     let!(:items_with_empty_status) { FactoryGirl.create_list(:item_return, 3, refund_status: nil) }
     let!(:items_with_incomplete_status) { FactoryGirl.create_list(:item_return, 3, refund_status: 'Some status') }
     let!(:items_with_complete_status) { FactoryGirl.create_list(:item_return, 3, refund_status: 'Complete') }
@@ -38,11 +40,19 @@ RSpec.describe ItemReturn, type: :model do
       end
     end
 
+    describe 'approved' do
+      it 'returns items with approve event' do
+        approve_return(items_with_empty_status.first)
+
+        expect(described_class.approved).to eq([items_with_empty_status.first])
+      end
+    end
+
     describe '::refund_queue' do
       it 'returns incomplete items marked as bulk refund' do
-        items_with_empty_status.last.update_attribute(:bulk_refund, true)
-        items_with_incomplete_status.last.update_attribute(:bulk_refund, true)
-        items_with_complete_status.last.update_attribute(:bulk_refund, true)
+        approve_return(items_with_empty_status.last)
+        approve_return(items_with_incomplete_status.last)
+        approve_return(items_with_complete_status.last)
 
         scope = described_class.refund_queue
 
@@ -56,6 +66,10 @@ RSpec.describe ItemReturn, type: :model do
           expect(scope).not_to include(item)
         end
       end
+    end
+
+    def approve_return(item_return)
+      item_return.events.approve.create!(user: user)
     end
   end
 end
