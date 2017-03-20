@@ -6,7 +6,6 @@ module Marketing
       describe Order, type: :presenter do
         let(:line_item) { build(:dress_item, quantity: 2, price: 12.34) }
         let(:order) { build(:complete_order, email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
-        order.coupon_code = 'C336V398'
 
         subject(:presenter) { described_class.new(spree_order: order) }
 
@@ -20,6 +19,7 @@ module Marketing
 
           context 'given a spree order' do
             it 'returns hash order details' do
+              expect(order).to receive(:promotions).and_return([double('promo', code: 'C336V398', event_name: "spree.checkout.coupon_code_added")])
               expect(subject.body).to eq({
                                              coupon_code:            'C336V398',
                                              currency:               'AUD',
