@@ -38,15 +38,6 @@ module AdminUi
       end
     end
 
-    def add_to_weekly_refund
-      item_return = ItemReturn.find(params[:item_return_id])
-      if item_return.bulk_refund?
-        redirect_to :back, alert: 'Already added to weekly refund processing'
-      elsif item_return.update_attribute(:bulk_refund, true)
-        redirect_to weekly_refund_item_returns_path, notice: 'Added to weekly refund processing'
-      end
-    end
-
     private
 
     helper_method def possible_events

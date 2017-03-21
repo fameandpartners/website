@@ -6,8 +6,6 @@ AdminUi::Engine.routes.draw do
     collection do
       get :weekly_refund, action: :index, scope: :refund_queue
     end
-
-    get :add_to_weekly_refund
   end
 
   resources :redirected_search_terms
