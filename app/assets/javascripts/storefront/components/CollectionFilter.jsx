@@ -17,23 +17,7 @@ import breakpoints from '../libs/breakpoints';
 import ExpandablePanelItem from '../components/ExpandablePanelItem.jsx';
 
 // Constants
-const PRICES = [
-  {
-    id: '0-199',
-    range: [0, 199,],
-    presentation: '$0 - $199',
-  },
-  {
-    id: '200-299',
-    range: [200, 299,],
-    presentation: '$200 - $299',
-  },
-  {
-    id: '300-399',
-    range: [300, 399,],
-    presentation: '$300 - $399',
-  },
-];
+const {PRICES,DEFAULTS,} = CollectionFilterSortConstants;
 
 function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
@@ -76,7 +60,8 @@ class CollectionFilterSort extends Component {
     }
 
     /**
-     * Converts props into legacy filter object
+     * UGLY necessity
+     * Converts props into legacy filter object for consumption by legacy AJAX
      * @param  {Object} props
      * @return {Object}
      */
@@ -142,7 +127,7 @@ class CollectionFilterSort extends Component {
       const {clearAllCollectionFilterSorts, isDrawerLayout, setTemporaryFilters,} = this.props;
       clearAllCollectionFilterSorts();
       if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS); }
+      else { this.updateExternalProductCollection(DEFAULTS); }
     }
 
     handleColorSelection({name,}){
@@ -542,7 +527,6 @@ CollectionFilterSort.propTypes = {
     $$colors: PropTypes.object,
     $$secondaryColors: PropTypes.object,
     $$bodyShapes: PropTypes.object,
-    fastMaking: PropTypes.bool,
     filters: PropTypes.object,
     temporaryFilters: PropTypes.object,
 
@@ -558,21 +542,3 @@ CollectionFilterSort.propTypes = {
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
-
-//<div className="ExpandablePanel__secondaryFiltersWrapper">
-//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-//         <div className="ExpandablePanel__name">
-//             Secondary Filter 1
-//         </div>
-//     </div>
-//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-//         <div className="ExpandablePanel__name">
-//             Secondary Filter 2
-//         </div>
-//     </div>
-//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-//         <div className="ExpandablePanel__name">
-//             Secondary Filter 3
-//         </div>
-//     </div>
-// </div>

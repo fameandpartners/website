@@ -23,10 +23,29 @@ const actionTypes = assign({},
   },
   { ORDERS:
     {
-      newest: 'What\'s New',
+      newest: 'Newest',
       price_high: 'Price High to Low',
       price_low: 'Price Low to High',
-    }
+    },
+  },
+  { PRICES:
+    [
+      {
+        id: '0-199',
+        range: [0, 199,],
+        presentation: '$0 - $199',
+      },
+      {
+        id: '200-299',
+        range: [200, 299,],
+        presentation: '$200 - $299',
+      },
+      {
+        id: '300-399',
+        range: [300, 399,],
+        presentation: '$300 - $399',
+      },
+    ],
   }
 );
 

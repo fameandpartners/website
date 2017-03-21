@@ -1,123 +1,113 @@
 /* [Filter / Sort]
 -------------------------------------------------------*/
-
-.Select-wrapper{
+.Select-wrapper {
   position: relative;
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
-  background-color: #fff;
-  border: solid 1px #caccd0;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 50px;
-  color: #848688;
+  background-color: $c-neutral-white;
+  border: 1px solid $c-neutral-4;
+  font-weight: bold;
+  font-size: 1.4rem;
   -webkit-font-smoothing: antialiased;
-  height: 50px;
-  padding-left: 10px;
-  padding-right: 40px;
+  height: 36px;
+  line-height: 35px;
+  padding: 0 14px;
   text-align: left;
+  text-transform: uppercase;
   white-space: nowrap;
-  transition: all 0.2s ease-in-out font 0.1s;
-}
-.Select-wrapper ul {
-  list-style-type: none;
-  padding: 0;
-}
+  transition: all 0.17s ease-in-out border 0.4s font 0.1s;
 
-.Select-wrapper.is-open {
-  border-color: $gray-light;
-}
+  &.is-open{
+    border-color: $gray-light;
 
-.Select-wrapper.is-open .Select {
-  z-index: 100;
-  pointer-events: auto;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-  max-height: 300px;
-  overflow-y: auto;
-  @include transform(scale(1) translateZ(0));
-}
+    .Select {
+      z-index: 100;
+      pointer-events: auto;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+      opacity: 1;
+      max-height: 300px;
+      overflow-y: auto;
+      @include transform(scale(1) translateZ(0));
+    }
 
-.Select-wrapper:before {
-  content: '';
-  width: 1px;
-  height: 18px;
-  position: absolute;
-  background-color: #caccd0;
-  right: 37px;
-  top: 50%;
-  @include transform(translateY(-50%));
-}
+    .Select-list-item {
+      cursor: pointer;
+    }
+  }
 
-.Select-wrapper:after {
-  content: 'v';
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  width: 12px;
-  height: 7px;
-  display: inline-block;
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  @include transform(translateY(-50%));
-  transition: transform 0.2s;
-}
+  &::after {
+    content: '';
+    background: image-url('react_components/caret.svg') center center no-repeat;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    width: 20px;
+    height: 10px;
+    display: inline-block;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    @include transform(translateY(-50%));
+    transition: transform 0.17s;
+  }
 
-.Select-wrapper .Select-label{
-  position: absolute;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 12px;
-  color: #565758;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: auto;
-  visibility: collapse;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  transition: all 0.2s ease;
-  @include transform(translate(0, 0));
-}
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
 
-.Select-wrapper .Select {
-  border: solid 1px #caccd0;
-  background-color: #fff;
-  margin-top: 5px;
-  padding: 5px 0;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  overflow: auto;
-  pointer-events: none;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  height: auto;
-  left: 0;
-  color: #848688;
-  z-index: -1;
-  transition: all 0.15s cubic-bezier(0.25, 0, 0.25, 1.75), opacity 0.1s linear;
-  @include transform(scale 0.75);
-  -webkit-transform: scale(0.75);
-  transform-origin: 50% 0;
-}
+  .Select-list {
+    margin: 8px 0;
+  }
 
-.Select-wrapper .Select-list-item {
-  cursor: default;
-  line-height: 42px;
-  outline: none;
-  text-align: left;
-  transition: all 0.2s;
-}
-.Select-wrapper.is-open .Select-list-item {
-  cursor: pointer;
-}
+  .Select-label{
+    position: absolute;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: auto;
+    visibility: collapse;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    @include transform(translate(0, 0));
+  }
 
-.Select-wrapper .Select-list-item:hover,
-.Select-wrapper .Select-list-item:focus,
-.Select-wrapper .Select-list-item.focused {
-  color: #6098e7;
-  background-color: #e0ebfb;
+  .Select {
+    padding: 0 14px;
+    top: 100%;
+    width: 100%;
+    height: auto;
+    left: 0;
+    border: solid 1px $gray-light;
+    background-color: $c-neutral-white;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    overflow: auto;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    transition: all 0.2s ease-in-out, opacity 0.1s ease-in;
+    @include transform(scale 0.75);
+    -webkit-transform: scale(0.75);
+    transform-origin: 50% 0;
+  }
+
+  .Select-list-item {
+    color: $c-neutral-10;
+    cursor: default;
+    line-height: 42px;
+    outline: none;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .Select-list-item:hover,
+  .Select-list-item:focus,
+  .Select-list-item.focused {
+    color: $c-neutral-12;
+  }
 }

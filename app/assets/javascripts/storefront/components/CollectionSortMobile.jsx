@@ -52,7 +52,10 @@ class CollectionSortMobile extends Component {
       return (
           <div className='CollectionSortMobile'>
               <div className="ExpandablePanel__heading">
-                <span className="ExpandablePanel__mainTitle">Sort by</span>
+                  <span className="ExpandablePanel__mainTitle">Sort by</span>
+              </div>
+              <div className="ExpandablePanel__clearAllWrapper">
+                  <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
               </div>
             <ul>
               {
@@ -62,9 +65,9 @@ class CollectionSortMobile extends Component {
               }
             </ul>
             <div className="ExpandablePanel__action">
-              <div className="ExpandablePanel__filterTriggers--cancel-apply">
-                <a onClick={this.handleSortCancel()} className="ExpandablePanel__btn ExpandablePanel__btn--secondary">Cancel</a>
-              </div>
+                <div className="ExpandablePanel__filterTriggers--cancel-apply">
+                    <a onClick={this.handleSortCancel()} className="ExpandablePanel__btn ExpandablePanel__btn--secondary">Cancel</a>
+                </div>
             </div>
           </div>
       );

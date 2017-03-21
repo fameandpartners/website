@@ -3,7 +3,7 @@
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
 //*****
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes,} from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 
@@ -11,11 +11,11 @@ const propTypes = {
     id: React.PropTypes.string,
     formId: React.PropTypes.string,
     onChange: React.PropTypes.func,
-    label: React.PropTypes.string,
     className: React.PropTypes.string,
     options: React.PropTypes.arrayOf(React.PropTypes.shape({
-        name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node,]),
         id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string,]),
+        name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node,]),
+        displayText: React.PropTypes.string,
         active: React.PropTypes.bool,
     })),
 };
@@ -103,7 +103,7 @@ class Select extends Component {
         return () => {
             this.closeDropdown();
             if (typeof this.props.onChange === 'function') {
-                this.props.onChange(this.props.id, option.id, this.props.formId, option);
+                this.props.onChange({ id: this.props.id, option, });
             }
         };
     }
@@ -112,17 +112,17 @@ class Select extends Component {
         const self = this;
         const options = this.props.options || [];
 
-        const dropdownComponent =  options.map(function(option, index) {
+        const dropdownComponent =  options.map((option, index) => {
             const isFocused = (self.state.arrowFocusedIndex === index);
 
             return (
                 <li ref={`options${index}`}
-                    key={`${self.props.id}-${option.id}-${index}`}
+                    key={`${this.props.id}-${option.id}-${index}`}
                     data-value={option.id}
                     data-display-text={option.name}
                     className={`${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''} Select-list-item noSelect`}
-                    onClick={self.handleDropdownItemClick(option)}
-                    aria-hidden={self.state.isOpen ? 'false' : 'true'}
+                    onClick={this.handleDropdownItemClick(option)}
+                    aria-hidden={this.state.isOpen ? 'false' : 'true'}
                 >
                     {option.name}
                 </li>
@@ -134,7 +134,7 @@ class Select extends Component {
 
     render () {
         const { options, label, className, } = this.props;
-        const { isOpen,} = this.state;
+        const { isOpen, } = this.state;
         const contents = this.buildDropdown();
         const activeOption = _.find(options, {active:true,}) || {};
         const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
@@ -167,4 +167,4 @@ Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
 
-module.exports = Select;
+export default Select;
