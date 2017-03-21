@@ -45,12 +45,25 @@ RSpec.describe ItemReturnEvent, :type => :model do
   end
 
   describe 'refund' do
-    subject(:event) { ItemReturnEvent.refund.new }
+    let(:line_item) { double(:line_item, price: 499) }
+    let(:item_return) { FactoryGirl.create(:item_return) }
+    subject(:event) { item_return.events.refund.new }
+
+    before(:each) { allow_any_instance_of(ItemReturn).to receive(:line_item).and_return(line_item) }
 
     it { is_expected.to validate_presence_of :user }
     it { is_expected.to validate_presence_of :refund_method }
     it { is_expected.to validate_presence_of :refund_amount }
     it { is_expected.to validate_numericality_of :refund_amount }
+
+    it "validates refund amount not greater than line item price" do
+      invalid_event = item_return.events.refund.new(refund_amount: 500, refund_method: 'Pin', user: :user)
+      expect(invalid_event).not_to be_valid
+      expect(invalid_event.errors.messages).to eq(refund_amount: ["must be less than or equal to 499"])
+
+      valid_event = item_return.events.refund.new(refund_amount: 499, refund_method: 'Pin', user: :user)
+      expect(valid_event).to be_valid
+    end
   end
 
   describe 'factory fault' do
