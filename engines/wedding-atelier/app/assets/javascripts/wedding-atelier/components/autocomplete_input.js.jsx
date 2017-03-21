@@ -54,7 +54,7 @@ var AutocompleteInput = React.createClass({
         _newState.showOptions = false;
       }
 
-      if(_newState.currentTyping == 'stylist'){
+      if(/stylist/i.test(_newState.currentTyping)){
         _newState.showOptions = false;
       }
 
