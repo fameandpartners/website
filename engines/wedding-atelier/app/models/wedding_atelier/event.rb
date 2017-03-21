@@ -21,7 +21,7 @@ module WeddingAtelier
     validates_numericality_of :number_of_assistants, greater_than_or_equal_to: 0
 
     def assistant_permitted?(user)
-      assistants.include? user
+      assistants.include?(user) || user.email =~ /^.*@fameandpartners.com$/
     end
 
     def date=(val)
