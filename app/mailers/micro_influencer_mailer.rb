@@ -5,9 +5,7 @@ class MicroInfluencerMailer < ActionMailer::Base
   def email(micro_influencer_form)
     @micro_influencer_form = micro_influencer_form
 
-    email_address = 'influencerapplications@fameandpartners.com'
-    email_address = 'qa@fameandpartners.com' unless RAILS_ENV == 'production'
-    
+    email_address = configatron.micro_influencer_email_address
     mail(
       to:      email_address,
       from:    'team@fameandpartners.com',
