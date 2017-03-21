@@ -17,7 +17,9 @@ nav.navbar.navbar-default.visible-xs.visible-sm
           = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
 
           li.grey-item
-            .text Dresses
+            .text
+              = link_to dresses_path
+                | Dresses
           = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
           li.grey-item
