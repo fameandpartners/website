@@ -311,7 +311,7 @@ var MoodBoardEvent = React.createClass({
       var parsedMsg = JSON.parse(message.body);
       _messages.push(parsedMsg);
 
-      if(true && !sessionStorage.getItem('chatNotificationSent')){
+      if(parsedMsg.staffMessage && !sessionStorage.getItem('chatNotificationSent')){
         var onlineMembersIds = _.pluck(that.state.chat.members, 'internalId');
         that.state.event.assistants.map(function(assistant){
           if(onlineMembersIds.indexOf(assistant.id) < 0){
