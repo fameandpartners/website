@@ -93,6 +93,15 @@ var AutocompleteInput = React.createClass({
     this.setState(_newState);
   },
 
+  selectOption: function(index){
+    var selectedItem = this.state.items[index],
+        _newState = $.extend({},this.getInitialState()),
+        regExp = new RegExp('@' + this.state.currentTyping),
+        completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
+    this.refs.input.value += completeItem;
+    this.setState(_newState);
+  },
+
   resetState: function(){
     this.setState({
       showOptions: false,
@@ -117,7 +126,7 @@ var AutocompleteInput = React.createClass({
         selected: i == that.state.selectedItemIndex
       });
 
-      return (<p key={i} className={className}>@{option}</p>);
+      return (<p key={i} className={className} onMouseDown={that.selectOption.bind(that,i)}>@{option}</p>);
     });
   },
 
