@@ -1,20 +1,21 @@
 /* [Filter / Sort]
 -------------------------------------------------------*/
 
+.FilterSort__border {
+  border: 2px solid $c-neutral-black;
+}
 .FilterSort__mobileTriggerBtn {
+  padding: 8px 0;
   text-align: center;
   cursor: pointer;
-  border: 2px solid $c-neutral-black;
-  padding: 10px 15px;
   display: block;
   width: 100%;
+  text-transform: uppercase;
 }
 
 .FilterSort__summary {
   text-transform: uppercase;
   text-align: center;
-  margin: 30px 0;
-  font-size: 0.8em;
 }
 
 .FilterSort__summaryHighlight {
@@ -364,10 +365,18 @@
   border-bottom: 1px solid $c-neutral-4;
   padding-bottom: 14px;
   margin-bottom: 14px;
+  min-height: 50px;
+  display: none;
 }
 
 .CollectionSort {
   width: 275px;
   padding-right: 15px;
   float: right;
+}
+
+@media (min-width: $bootstrap-lg-width) {
+  .CollectionSortApp {
+    display: block;
+  }
 }

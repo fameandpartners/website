@@ -210,6 +210,10 @@
 
 }
 
+.simple-border {
+  border-bottom: 1px solid $c-neutral-6;
+}
+
 .thin-line {
 
   &--bottom::after {
