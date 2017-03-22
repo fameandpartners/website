@@ -20,6 +20,13 @@ module Products
         
       end
 
+      it 'correctly redirects with a search term regardless of case' do
+        expect(RedirectedSearchTerm).to receive(:find_by_term).with( 'prom' ).and_return( RedirectedSearchTerm.new( { term: 'prom', redirect_to: '/dresses' } ) )
+        
+        get :search, q: 'Prom'
+        response.should redirect_to '/dresses?q=prom'
+      end
+      
       it 'sets its title based on the q param' do
         get :search, q: 'My Query'
         expect(assigns(:title)).to include('Search results for "My Query"')
