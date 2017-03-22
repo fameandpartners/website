@@ -39,6 +39,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @mobileSort = $(options.mobileSortSelector)
     @mobileFilter.on('click', @toggleFilters)
     @mobileSort.on('click', @toggleSort)
+
     # base
     # if users comes by url with specific params, like /dresses/for/very/special/case
     # then use this path until user selects another collection
@@ -62,10 +63,54 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @productOrderInput.on('change', @update)
     @$banner = $(options.banner)
 
+    # Initialize Meta Content based of previous params
+    queryFilters = @decodeQueryParams()
+    @updateMetaDescriptionSpan(@filterSortMetaDescription(queryFilters))
+
   toggleFilters:(forceToggle) ->
     $('.ExpandablePanel-filter--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
   toggleSort:(forceToggle) ->
     $('.ExpandablePanel-sort--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+
+
+  toConsumableArray:(arr) ->
+    if Array.isArray(arr)
+      i = 0
+      arr2 = Array(arr.length)
+      for i in [0..arr.length]
+        arr2[i] = arr[i];
+      return arr2;
+    else
+      Array.from(arr);
+
+  # This is duplicated, redundant code, but is necessary because we have to initialize legacy
+  # partials with metaDescription content pulled from url
+  decodeQueryParams:() ->
+    that = this
+    queryObj = {};
+    queryStrArr = decodeURIComponent(window.location.search.substring(1))
+    .replace(/\+/g, " ")
+    .split('&');
+
+    # Loop over each of the queries and build an object
+    queryStrArr.forEach((query) ->
+      query = query.split('=')
+      key = query[0]
+      val = query[1]
+      key = if key then key.replace(/([^a-z0-9_]+)/gi, '') else undefined # replace key with acceptable param name
+
+      if key && val
+        # We have an acceptable query string format
+        if !queryObj[key]
+          # No previous version
+          queryObj[key] = val
+        else if Array.isArray(queryObj[key])
+          # currently an array, add to it
+          queryObj[key] = [].concat(that.toConsumableArray(queryObj[key]), [val])
+        else
+          queryObj[key] = [queryObj[key], val] # not an array, create one
+    )
+    queryObj
 
   filterSortMetaDescription:(updateRequestParams) ->
     metaDescription = {
@@ -125,7 +170,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.hide()
 
   update: (updateRequestParams) =>
-    metaDescription = @filterSortMetaDescription(updateRequestParams)
+    @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
     @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
     updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
@@ -141,7 +186,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
         @resetPagination(collection.products.length, collection.total_products)
-        @updateMetaDescriptionSpan(metaDescription)
         if collection && collection.details
           @updateCollectionDetails(collection.details)
 
