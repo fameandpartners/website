@@ -9,7 +9,7 @@ class Products::BaseController < ApplicationController
   helper_method :page, :banner
 
   def search
-    if( params[:q].present? && (search_term =RedirectedSearchTerm.find_by_term( params[:q].strip ) ) )
+    if( params[:q].present? && (search_term = RedirectedSearchTerm.find_by_term( params[:q].strip ) ) )
       
       redirect_to "#{search_term.redirect_to}?q=#{CGI::escape params[:q]}", :status => 301       
     else
