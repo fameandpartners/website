@@ -13,26 +13,26 @@ section.section-box.container.section-social.same-height-cols
                 = link_to current_social_network_link, target: "_blank"
                   span.cta-link-arrow-right
                     span.cta-link View
-                    span.copy-highlight the Blog
+                    span.copy-highlight  the Blog
                     i.icon.icon-arrow-right
 
           .col-sm-7.img-side
             = link_to current_social_network_link, target: "_blank"
               = image_tag "homepage/social-media/social-media-1.jpg", class: "img-responsive"
 
-    - current_social_network_link = "https://instagram.com/FameandPartners"
+    - current_social_network_link = fame_society_application_landing_page_path + "?hp"
     .col-md-6.copy-img-side-by-side
       .item.bordered.item-alt.section-blog
         .row
           .col-sm-5.copy-side
             .content-wrapper
-              p Scroll through never-ending outfit ideas from our #{link_to "#famefatales", current_social_network_link}.
+              p Get free clothes. <br>Take some selfies. <br>#{link_to "Build your empire.", current_social_network_link}.
 
               .link-align-bottom
                 = link_to current_social_network_link, target: "_blank"
                   span.cta-link-arrow-right
-                    span.cta-link Explore
-                    span.copy-highlight Insta-Inspo
+                    span.cta-link Apply to
+                    span.copy-highlight  The Fame Society
                     i.icon.icon-arrow-right
 
           .col-sm-7.img-side
