@@ -83,10 +83,10 @@
             <dd>Size: <span><%= product.size.presentation %>, </span></dd>
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
-            <dd>Skirt Length: <span><%= product.height %></span></dd>
+            <dd><%= product.height_title %>: <span><%= product.height %></span></dd>
             <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>
-            <dd><%= customization.name %> <%= customization.display_price %></dd>
+            <dd><%= customization.cart_summary %></dd>
             <% end %>
 
             <%# Making options stands for Fast Making %>
