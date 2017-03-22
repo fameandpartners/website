@@ -268,16 +268,19 @@ var MoodBoardEvent = React.createClass({
   },
 
   loadChannelHistory: function() {
-    this.state.chatChannel.getMessages(20).then(function(messages) {
-      var _messages = messages.items.map(function(message) {
-        return JSON.parse(message.body);
-      });
+    var that = this;
+    this.state.chatChannel.getMessagesCount().then(function(count){
+      that.state.chatChannel.getMessages(count).then(function(messages) {
+        var _messages = messages.items.map(function(message) {
+          return JSON.parse(message.body);
+        });
 
-      var _chat = $.extend({}, this.state.chat);
-      _chat.messages = _messages;
-      _chat.loading = false;
-      this.setState({chat: _chat});
-    }.bind(this));
+        var _chat = $.extend({}, that.state.chat);
+        _chat.messages = _messages;
+        _chat.loading = false;
+        that.setState({chat: _chat});
+      });
+    });
   },
 
   handleMember: function(member, joined) {
