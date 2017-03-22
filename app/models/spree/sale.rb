@@ -56,13 +56,17 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def apply(price)
-    if fixed?
-      discount_size < price ? price - discount_size : BigDecimal.new(0)
-    elsif percentage?
-      price * (1 - discount_size.to_f / 100)
-    else
-      price
-    end
+    amount = price.amount
+    new_price = \
+      if fixed?
+        discount_size < amount ? amount - discount_size : BigDecimal.new(0)
+      elsif percentage?
+        amount * (1 - discount_size.to_f / 100)
+      else
+        amount
+      end
+    price.amount = new_price
+    price
   end
 
   def mega_menu_image_url
