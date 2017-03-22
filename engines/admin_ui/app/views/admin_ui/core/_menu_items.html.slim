@@ -35,6 +35,7 @@ li class=active_link_to_class('', active: /content|preferences/)
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
     = active_link_to 'Pages', admin_ui.content_pages_path, wrap_tag: :li
     = active_link_to 'Preferences', admin_ui.preferences_path, wrap_tag: :li
+    = active_link_to 'Search Term Redirect', admin_ui.search_term_redirects_path, wrap_tag: :li
 
 li class=active_link_to_class('', active: /bergen|next/)
   a href="#"
