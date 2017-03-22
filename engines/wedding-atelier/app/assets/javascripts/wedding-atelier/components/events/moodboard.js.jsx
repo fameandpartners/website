@@ -315,9 +315,9 @@ var MoodBoardEvent = React.createClass({
         var onlineMembersIds = _.pluck(that.state.chat.members, 'internalId');
         that.state.event.assistants.map(function(assistant){
           if(onlineMembersIds.indexOf(assistant.id) < 0){
-            _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content, moodboard_url: this.props.event_url });
+            _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content, moodboard_url: that.props.event_url });
           }
-        }.bind(this));
+        });
         try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){};
       }
 
