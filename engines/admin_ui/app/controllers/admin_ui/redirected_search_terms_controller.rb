@@ -7,7 +7,11 @@ module AdminUi
 
     def create
       search_term = RedirectedSearchTerm.new( params[:redirected_search_term] )
-      search_term.save
+      if( search_term.save )
+        flash[:success] = 'New Redirect Added'
+      else
+        flash[:error] = 'Failed'
+      end
       index
     end
     
