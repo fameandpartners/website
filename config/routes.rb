@@ -84,6 +84,10 @@ FameAndPartners::Application.routes.draw do
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
 
+    # Redirecting the evening shop
+    get '/the-evening-hours-collection' => redirect("/dresses/evening")
+
+
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
