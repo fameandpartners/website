@@ -1,15 +1,17 @@
 #= require 'templates/_product'
 #= require 'templates/product_collection'
 #= require 'templates/product_collection_append'
-#= require 'templates/product_collection_results_meta'
+#= require 'templates/product_collection_filter'
+#= require 'templates/product_collection_sort'
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
   filter: null
-  content: null,
+  content: null
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
   collectionMoreTemplate: JST['templates/product_collection_append']
-  collectionResultsMetaTemplate: JST['templates/product_collection_results_meta']
+  collectionFilterResultTemplate: JST['templates/product_collection_filter']
+  collectionSortResultTemplate: JST['templates/product_collection_sort']
 
   constructor: (options = {}) ->
     options = $.extend({
@@ -31,7 +33,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content = $(options.content)
 
     # Sorting / Filtering
-    @resultsMetaContent = $(options.resultsMetaContent)
+    @sortMetaContent = $(options.sortMetaContent)
+    @filterMetaContent = $(options.filterMetaContent)
     @mobileFilter = $(options.mobileFilterSelector)
     @mobileSort = $(options.mobileSortSelector)
     @mobileFilter.on('click', @toggleFilters)
@@ -69,6 +72,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       sortDescription: @ORDERS['newest'],
       totalFilters: 0
     }
+    console.log(updateRequestParams)
+    if updateRequestParams.fast_making
+      metaDescription.totalFilters++
+    if updateRequestParams.price_max && updateRequestParams.price_min
+      metaDescription.totalFilters++
     if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
       metaDescription.totalFilters++
     if updateRequestParams.color && updateRequestParams.color.length
@@ -84,22 +92,16 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @total            = total_records
     @updatePaginationLink('active')
 
-  updateMetaDescriptionSpan:(totalRecords, metaDescription) ->
-    if metaDescription.totalFilters == 0
-      filtersText = ''
-    else if metaDescription.totalFilters == 1
-      filtersText = '1 Filter'
-    else
-      filtersText = metaDescription.totalFilters + ' Filters'
+  updateMetaDescriptionSpan:(metaDescription) ->
+    @resultsMeta = {
+      filterText: '(' + metaDescription.totalFilters + ')',
+      sortText: metaDescription.sortDescription
+    }
+    content_sort_html = @collectionSortResultTemplate(resultsMeta: @resultsMeta)
+    @sortMetaContent.html(content_sort_html)
 
-    if totalRecords == 1
-      countText = '1 Dress'
-    else
-      countText = totalRecords + ' Dresses'
-
-    @resultsMeta = {filtersText: filtersText, countText: countText, sortText: metaDescription.sortDescription}
-    content_html = @collectionResultsMetaTemplate(resultsMeta: @resultsMeta)
-    @resultsMetaContent.html(content_html)
+    content_filter_html = @collectionFilterResultTemplate(resultsMeta: @resultsMeta)
+    @filterMetaContent.html(content_filter_html)
 
   updatePagination: (items_added, total_records) ->
     if items_added == 0
@@ -139,7 +141,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
         @resetPagination(collection.products.length, collection.total_products)
-        @updateMetaDescriptionSpan(collection.total_products, metaDescription)
+        @updateMetaDescriptionSpan(metaDescription)
         if collection && collection.details
           @updateCollectionDetails(collection.details)
 
