@@ -113,7 +113,8 @@ class Products::DetailsResource
     end
 
     def product_price
-      product.site_price_for(site_version || SiteVersion.default)
+      sale = Spree::Sale.active.sitewide.first
+      sale.apply product.site_price_for(site_version || SiteVersion.default)
     end
 
     def product_discount
