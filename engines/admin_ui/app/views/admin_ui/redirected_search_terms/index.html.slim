@@ -18,6 +18,8 @@
                     = t.term
                   td
                     = t.redirect_to
+                  td
+                    = button_to "Delete", t, :method => :delete
               tr
                 = form_for :redirected_search_term do |f|
                   td
