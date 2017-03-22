@@ -15,6 +15,6 @@ class ItemReturn < ActiveRecord::Base
   validates :uuid, uniqueness: true
 
   scope :incomplete, where('refund_status IS NULL OR refund_status != ?', 'Complete')
-  scope :refund_queue, incomplete.where(acceptance_status: 'approved')
+  scope :refund_queue, incomplete.where(acceptance_status: 'approved', order_payment_method: 'Pin')
 end
 
