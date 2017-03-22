@@ -72,7 +72,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       sortDescription: @ORDERS['newest'],
       totalFilters: 0
     }
-    console.log(updateRequestParams)
+
     if updateRequestParams.fast_making
       metaDescription.totalFilters++
     if updateRequestParams.price_max && updateRequestParams.price_min
