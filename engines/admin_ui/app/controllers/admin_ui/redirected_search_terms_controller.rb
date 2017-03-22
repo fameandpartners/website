@@ -12,7 +12,7 @@ module AdminUi
       else
         flash[:error] = search_term.errors.full_messages.to_sentence
       end
-      index
+      redirect_to action:  :index
     end
 
     def destroy
@@ -26,7 +26,7 @@ module AdminUi
       else
         flash[:error] = "Unknown Redirect to Delete"
       end
-      redirect_to action: :index
+      redirect_to action:  :index
     end
     
   end
