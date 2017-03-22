@@ -19,7 +19,7 @@
                   td
                     = t.redirect_to
                   td
-                    = button_to "Delete", t, :method => :delete
+                    = button_to "Delete", t, :method => :delete, class: 'btn btn-danger'
               tr
                 = form_for :redirected_search_term do |f|
                   td
@@ -27,4 +27,4 @@
                   td
                     = f.text_field :redirect_to
                   td
-                    = f.submit 'Add'
+                    = f.submit 'Add', class: 'btn btn-primary'
