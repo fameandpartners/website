@@ -41,10 +41,17 @@ RSpec.describe ItemReturn, type: :model do
     end
 
     describe '::refund_queue' do
-      it 'returns incomplete items marked as bulk refund' do
+      it 'returns incomplete items with Pin payment method and approved by 3pl' do
         items_with_empty_status.last.update_attribute(:acceptance_status, 'approved')
         items_with_incomplete_status.last.update_attribute(:acceptance_status, 'approved')
         items_with_complete_status.last.update_attribute(:acceptance_status, 'approved')
+        items_with_empty_status.last.update_attribute(:order_payment_method, 'Pin')
+        items_with_incomplete_status.last.update_attribute(:order_payment_method, 'Pin')
+        items_with_complete_status.last.update_attribute(:order_payment_method, 'Pin')
+
+        items_with_empty_status.first.update_attribute(:acceptance_status, 'approved')
+        items_with_incomplete_status.first.update_attribute(:acceptance_status, 'approved')
+        items_with_complete_status.first.update_attribute(:acceptance_status, 'approved')
 
         scope = described_class.refund_queue
 
