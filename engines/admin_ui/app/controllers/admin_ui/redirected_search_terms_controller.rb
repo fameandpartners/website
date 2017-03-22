@@ -10,7 +10,7 @@ module AdminUi
       if( search_term.save )
         flash[:success] = 'New Redirect Added'
       else
-        flash[:error] = 'Failed'
+        flash[:error] = search_term.errors.full_messages.to_sentence
       end
       index
     end
