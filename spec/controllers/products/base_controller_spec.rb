@@ -5,6 +5,14 @@ module Products
     before(:each) { allow(CollectionFilter).to receive(:read).and_return(:nothing) }
     
     describe 'GET search' do
+      it 'correctly redirects off site' do
+        expect(RedirectedSearchTerm).to receive(:find_by_term).with( 'prom' ).and_return( RedirectedSearchTerm.new( { term: 'prom', redirect_to: 'http://example.com/dresses' } ) )
+        
+        get :search, q: 'prom'
+        response.should redirect_to 'http://example.com/dresses?q=prom'
+        
+      end
+      
       it 'correctly redirects if a search term redirect is in place' do
         expect(RedirectedSearchTerm).to receive(:find_by_term).with( 'prom' ).and_return( RedirectedSearchTerm.new( { term: 'prom', redirect_to: '/dresses' } ) )
         

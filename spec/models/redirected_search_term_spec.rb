@@ -26,6 +26,27 @@ describe RedirectedSearchTerm do
     first =  RedirectedSearchTerm.new( {term: '', redirect_to: '/dresses' })
     expect( first.save ).to be_falsey
   end
+
+  it "should save a full url" do
+    first =  RedirectedSearchTerm.new( {term: 'prom', redirect_to: 'http://example.com/dresses' })
+    expect( first.save ).to be_truthy
+    expect( first.redirect_to ).to eq( 'http://example.com/dresses' )
+  end
+
+  it "should trim the end / off of a url" do
+    first =  RedirectedSearchTerm.new( {term: 'prom', redirect_to: '/dresses/' })
+    expect( first.save ).to be_truthy
+    expect(first.redirect_to).to eq( '/dresses' )
+    
+  end
+
+  it "should add a leading / to a url" do
+    first =  RedirectedSearchTerm.new( {term: 'prom', redirect_to: 'dresses' })
+    expect( first.save ).to be_truthy
+    expect(first.redirect_to).to eq( '/dresses' )
+  end
+  
+  
   
   
   
