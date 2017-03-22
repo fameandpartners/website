@@ -30,8 +30,8 @@ WeddingAtelier::Engine.routes.draw do
     resources :assistants, only: [:destroy]
   end
   get '/events/:id(/:slug)', to: 'events#show', as: 'event'
-
   resources :accounts, path: 'my-account', only: [:index, :update, :show]
 
   resource :orders, only: [:create, :show]
+  post '/slack_callbacks', to: 'slack_callbacks#create'
 end
