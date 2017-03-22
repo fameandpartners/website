@@ -4,7 +4,7 @@ AdminUi::Engine.routes.draw do
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
 
-  resources :search_term_redirects
+  resources :redirected_search_terms
   resources :preferences, only: :index do
     collection do
       put 'update'
