@@ -51,7 +51,9 @@ Spree::Variant.class_eval do
   end
 
   def set_default_sku
-    self.sku ||= generate_sku
+    if self.sku.blank?
+      self.sku = generate_sku
+    end
   end
 
   def generate_sku
