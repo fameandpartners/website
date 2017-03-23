@@ -186,7 +186,13 @@ $product-color-watermelon:      #ef525e;
 $product-color-white:           #ffffff;
 $product-color-wine:            #831c2e;
 $product-color-winter-grey:     #dadadc;
+$product-color-warm-tan:        #d2a788;
+$product-color-dusty-rose:      #deaaba;
+$product-color-pretty-pink:     #f7dbe9;
 
+.color-pretty-pink             { background-color: $product-color-pretty-pink; }
+.color-dusty-rose              { background-color: $product-color-dusty-rose; }
+.color-warm-tan                { background-color: $product-color-warm-tan; }
 .color-apple-green             { background-color: $product-color-apple-green; }
 .color-apricot                 { background-color: $product-color-apricot; }
 .color-aqua                    { background-color: $product-color-aqua; }
