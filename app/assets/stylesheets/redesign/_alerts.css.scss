@@ -36,7 +36,6 @@
 
   position: relative;
   padding: 0 15px;
-  margin-top: 104px;
   text-transform: uppercase;
   color: $c-neutral-black;
   background: $c-neutral-2;
@@ -188,6 +187,10 @@
 
     }
 
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+    margin-top: 104px;
   }
 
 }
