@@ -9,6 +9,7 @@ export default (props) => {
 
   const injectedState = {
     $$bodyShapes: props.bodyShapes,
+    $$bodyStyles: props.bodyStyles,
     $$colors: props.colors,
     fastMaking: props.fastMaking,
     order: props.order,

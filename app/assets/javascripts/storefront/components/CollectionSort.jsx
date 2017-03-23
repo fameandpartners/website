@@ -55,7 +55,7 @@ class CollectionSort extends Component {
      * @param  {Object} update - param object to be assigned to previous filters
      */
     updateExternalProductCollection(update) {
-        const {$$colors, $$bodyShapes} = this.props;
+        const {$$colors, $$bodyShapes,} = this.props;
         if (this.hasLegacyInstance()) {
             const filterSorts = assign({}, this.props.filters, update);
             const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes,});

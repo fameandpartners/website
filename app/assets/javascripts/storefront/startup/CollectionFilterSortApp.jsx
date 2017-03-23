@@ -22,10 +22,16 @@ if (typeof window === 'object' && typeof window.CollectionFilterData === 'object
   if (queryObj.price_min && queryObj.price_max){
     filterSorts.selectedPrices = convertURLPrices(queryObj.price_max);
   }
+  // Array options
   if (queryObj.bodyshape){
     filterSorts.selectedShapes = Array.isArray(queryObj.bodyshape)
     ? queryObj.bodyshape
     : [queryObj.bodyshape,];
+  }
+  if (queryObj.style){
+    filterSorts.selectedStyles = Array.isArray(queryObj.style)
+    ? queryObj.style
+    : [queryObj.style,];
   }
   if (queryObj.color_group){
     filterSorts.selectedColors = Array.isArray(queryObj.color_group)

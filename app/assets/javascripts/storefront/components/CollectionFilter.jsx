@@ -37,6 +37,7 @@ function stateToProps(state, props) {
             selectedColors: collectionFilterSortStore.selectedColors,
             selectedPrices: collectionFilterSortStore.selectedPrices,
             selectedShapes: collectionFilterSortStore.selectedShapes,
+            selectedStyles: collectionFilterSortStore.selectedStyles,
           }, collectionFilterSortStore.temporaryFilters),
           temporaryFilters: collectionFilterSortStore.temporaryFilters,
         };
@@ -508,6 +509,7 @@ CollectionFilterSort.propTypes = {
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
     setSelectedShapes: PropTypes.func,
+    setSelectedStyles: PropTypes.func,
     setTemporaryFilters: PropTypes.func,
 };
 
