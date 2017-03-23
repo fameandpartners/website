@@ -17,6 +17,10 @@
         font-size: 7rem;
       }
 
+      .title--small {
+        font-size: 3.2rem;
+      }
+
     }
 
     .sub-heading {
@@ -90,6 +94,17 @@
     .hero-wrap .sub-heading {
       padding-top: 0;
       font-size: inherit;
+      display: block;
+    }
+
+    // Overrides the default behaviour from the _hero.scss file
+    .copy-wrap .heading > span:first-child {
+      display: block;
+    }
+
+    .hero-wrap .heading .title {
+      font-size: 1.7rem;
+      padding: 0;
     }
 
     .section-fame-story {
