@@ -120,7 +120,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     if updateRequestParams.fast_making
       metaDescription.totalFilters++
-    if updateRequestParams.price_max && updateRequestParams.price_max.length && updateRequestParams.price_min && updateRequestPrams.price_min.length
+    if updateRequestParams.price_max && updateRequestParams.price_max.length && updateRequestParams.price_min && updateRequestParams.price_min.length
       metaDescription.totalFilters++
     if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
       metaDescription.totalFilters++
@@ -168,6 +168,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.hide()
 
   update: (updateRequestParams) =>
+    console.log updateRequestParams
     @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
     @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
@@ -266,6 +267,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     filter
 
   updatePageLocation: (filter) ->
+    console.log 'filter', filter
     source = _.clone(@source_path)
     filter = _.compactObject(filter || {})
     if _.isEmpty(filter)

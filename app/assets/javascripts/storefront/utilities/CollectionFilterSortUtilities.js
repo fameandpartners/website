@@ -21,7 +21,7 @@ export function convertURLPrices(priceMax = []){
 export function convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}, {$$bodyShapes, $$colors,}){
   const mainFilters = {
     bodyshape: selectedShapes.length === $$bodyShapes.toJS().length ? [] : selectedShapes,
-    color: selectedColors.length === $$colors.length ? [] : selectedColors,
+    color_group: selectedColors.length === $$colors.length ? [] : selectedColors,
     fast_making: fastMaking ? [true,] : undefined,
     order,
     q: getUrlParameter('q').replace(/\+/g," "),

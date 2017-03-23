@@ -21,16 +21,16 @@ if (typeof window === 'object' && typeof window.CollectionFilterData === 'object
   if (queryObj.fast_making){ filterSorts.fastMaking = true; }
   if (queryObj.price_min && queryObj.price_max){
     filterSorts.selectedPrices = convertURLPrices(queryObj.price_max);
-  } // TODO: translate prices here
+  }
   if (queryObj.bodyshape){
     filterSorts.selectedShapes = Array.isArray(queryObj.bodyshape)
     ? queryObj.bodyshape
     : [queryObj.bodyshape,];
   }
-  if (queryObj.color){
-    filterSorts.selectedColors = Array.isArray(queryObj.color)
-    ? queryObj.color
-    : [queryObj.color,];
+  if (queryObj.color_group){
+    filterSorts.selectedColors = Array.isArray(queryObj.color_group)
+    ? queryObj.color_group
+    : [queryObj.color_group,];
   }
   props = assign({}, window.CollectionFilterData, filterSorts);
 }
