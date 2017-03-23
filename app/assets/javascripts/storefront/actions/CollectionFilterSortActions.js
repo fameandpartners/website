@@ -35,6 +35,12 @@ export function setSelectedShapes(selectedShapes) {
     selectedShapes,
   };
 }
+export function setSelectedStyles(selectedStyles) {
+  return {
+    type: CollectionFilterSortConstants.SET_SELECTED_SHAPES,
+    selectedStyles,
+  };
+}
 export function setTemporaryFilters(temporaryFilters) {
   return {
     type: CollectionFilterSortConstants.SET_TEMPORARY_FILTERS,

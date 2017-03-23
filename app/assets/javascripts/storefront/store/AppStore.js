@@ -15,6 +15,7 @@ export default (props) => {
     selectedColors: props.selectedColors,
     selectedPrices: props.selectedPrices,
     selectedShapes: props.selectedShapes,
+    selectedStyles: props.selectedStyles,
   };
 
   // Merging of initial state with injected state
