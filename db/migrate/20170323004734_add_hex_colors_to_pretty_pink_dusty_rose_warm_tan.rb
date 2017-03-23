@@ -15,10 +15,7 @@ class AddHexColorsToPrettyPinkDustyRoseWarmTan < ActiveRecord::Migration
   private
 
   def set_hex_color( color_name, hex_color )
-    dress_color =Spree::OptionType.find_by_name('dress-color')    
-    dc = Spree::OptionValue.find_by_name_and_option_type_id(color_name, dress_color.id)
-    dc.value = hex_color
-    dc.save
+    Spree::OptionValue.colors.where(name: color_name).update_all(value: hex_color)    
   end
   
 end
