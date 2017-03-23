@@ -337,7 +337,7 @@ Spree::Product.class_eval do
   end
 
   def price_and_discount(discount: nil, site_version: nil)
-    price = product.site_price_for(site_version || SiteVersion.default)
+    price = site_price_for(site_version || SiteVersion.default)
 
     if discount&.amount.to_i > 0
       sale_price = price.apply(discount)
@@ -348,8 +348,8 @@ Spree::Product.class_eval do
     end
 
     {
-      original: price.display_price,
-      sale:     sale_price&.display_price,
+      original: price.display_price.to_s,
+      sale:     sale_price&.display_price&.to_s,
       discount: discount_string
     }
   end
