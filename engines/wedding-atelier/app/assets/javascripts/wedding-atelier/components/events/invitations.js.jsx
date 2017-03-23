@@ -47,6 +47,7 @@ var EventInvitations = React.createClass({
       dataType: 'json',
       data: {email_addresses: [email]},
       success: function(data) {
+        emailField.value = '';
         ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
             document.getElementById('notification'));
         that.setState({invitations: data.invitations});
