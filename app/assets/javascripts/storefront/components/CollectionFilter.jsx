@@ -347,7 +347,7 @@ class CollectionFilterSort extends Component {
                 <div className="FilterSort">
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
-                            <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter & Sort by'}</span>
+                            <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter by'}</span>
                             <div className="ExpandablePanel__clearAllWrapper">
                               <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                             </div>
