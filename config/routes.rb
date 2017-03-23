@@ -84,9 +84,6 @@ FameAndPartners::Application.routes.draw do
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
 
-    # Redirecting the evening shop
-    get '/the-evening-hours-collection' => redirect("/dresses/evening")
-
 
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
@@ -228,8 +225,8 @@ FameAndPartners::Application.routes.draw do
     # Skirts Collection - Landing page
     get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
 
-    # The Evening Hours Collection - Landing page
-    get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
+    # Redirecting the evening hours collection
+    get '/the-evening-hours-collection' => redirect("/dresses/evening")
 
     # Relaxed Evening Collection page (Inside/Out)- Landing page
     get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
