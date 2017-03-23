@@ -150,7 +150,7 @@ class Products::CollectionResource
     if color_group.present?
       result[:color_ids] += color_group.color_ids
     elsif color_groups.present?
-      color_groups.each { |c| result[:color_ids] += c.color_ids }
+      color_groups.each { |c| result[:color_ids] += c[:color_ids] }
     elsif color.present?
       Array.wrap(color).compact.each do |c|
         result[:color_ids] << c[:id]

@@ -20,7 +20,7 @@
     dl.cart-item-description
       - if product.size.present?
         dd Size: #{product.size.presentation},
-        dd Color: #{product.color.name}
+        dd Color: #{product.color[:name]}
         dd Skirt Length: #{product.height}
         dd Estimated delivery: #{product.delivery_period}
         - if product.customizations.present?
