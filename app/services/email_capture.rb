@@ -53,9 +53,10 @@ class EmailCapture
     subscriber = mailchimp.lists.members(configatron.mailchimp.list_id)['data'].select { |subscriber| subscriber['email'] == get_email }
     if subscriber.length > 0
       mailchimp.lists.update_member(set_list_id, {"leid" => subscriber[0]['leid']},
-                                    {email: current_email,
-                                    fname: first_name,
-    end                                lname: last_name})
+                                    { email: current_email,
+                                      fname: first_name,
+                                      lname: last_name})
+    end
   end
 
   def subscribe_list(current_email, merge_variables)
