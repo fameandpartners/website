@@ -14,6 +14,7 @@ class BulkRefundWorker
   private
 
   def report(events)
+    BulkRefundMailer.report(events).deliver
   end
 
   # Need to memoize this list to avoid unprocessed items at email report.
