@@ -4,9 +4,9 @@ import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
+import {convertPropsIntoLegacyFilter,} from '../utilities/CollectionFilterSortUtilities';
 import _find from 'lodash/find';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
-import {getUrlParameter,} from '../helpers/BOM';
 import assign from 'object-assign';
 
 //Libraries
@@ -60,41 +60,14 @@ class CollectionFilterSort extends Component {
     }
 
     /**
-     * UGLY necessity
-     * Converts props into legacy filter object for consumption by legacy AJAX
-     * @param  {Object} props
-     * @return {Object}
-     */
-    convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}){
-      const mainFilters = {
-        bodyshape: selectedShapes.length === this.props.$$bodyShapes.toJS().length ? [] : selectedShapes,
-        color: selectedColors.length === this.props.$$colors.length ? [] : selectedColors,
-        fast_making: fastMaking ? [true,] : undefined,
-        order,
-        q: getUrlParameter('q').replace(/\+/g," "),
-      };
-
-      if (selectedPrices.length !== PRICES.length){
-        let getPrice = (price, index) => _find(PRICES, {id: price,}).range[index];
-
-        return assign({}, mainFilters, {
-          price_min: selectedPrices.map(p => getPrice(p, 0)),
-          price_max: selectedPrices.map(p => getPrice(p, 1)),
-        });
-      } else {
-        return mainFilters;
-      }
-    }
-
-
-    /**
      * Updates the legacy product collection
      * @param  {Object} update - param object to be assigned to previous filters
      */
     updateExternalProductCollection(update){
+      const {filters, $$colors, $$bodyShapes,} = this.props;
       if (this.hasLegacyInstance()){
         const filterSorts = assign({}, this.props.filters, update);
-        const legacyFilterSorts = this.convertPropsIntoLegacyFilter(filterSorts);
+        const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes,});
         window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
       }
     }

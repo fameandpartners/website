@@ -1,8 +1,10 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes,} from 'react';
 import {connect,} from 'react-redux';
+import assign from 'object-assign';
 import {bindActionCreators,} from 'redux';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
+import {convertPropsIntoLegacyFilter,} from '../utilities/CollectionFilterSortUtilities';
 
 function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
@@ -10,7 +12,16 @@ function stateToProps(state, props) {
         const {$$collectionFilterSortStore,} = state;
         const collectionFilterSortStore = $$collectionFilterSortStore.toJS();
         return {
-          order: collectionFilterSortStore.order,
+          // Immutable Defaults
+          $$colors: $$collectionFilterSortStore.get('$$colors'),
+          $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
+          filters: assign({}, {
+            order: collectionFilterSortStore.order,
+            fastMaking: collectionFilterSortStore.fastMaking,
+            selectedColors: collectionFilterSortStore.selectedColors,
+            selectedPrices: collectionFilterSortStore.selectedPrices,
+            selectedShapes: collectionFilterSortStore.selectedShapes,
+          }, collectionFilterSortStore.temporaryFilters),
         };
     }
     return {};
@@ -20,7 +31,6 @@ function dispatchToProps(dispatch){ return bindActionCreators(CollectionFilterSo
 class CollectionSortMobile extends Component {
     constructor(props) {
         super(props);
-        console.log('props within CollectionSortMobile', props);
         this.handleSelection = this.handleSelection.bind(this);
     }
 
@@ -31,36 +41,60 @@ class CollectionSortMobile extends Component {
       return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
     }
 
-    handleSelection(selection) {
-      return () => {
-        console.log('clicking selection!', selection);
-      }
-    }
-    /**
+     /**
+      * Updates the legacy product collection
+      * @param  {Object} update - param object to be assigned to previous filters
+      */
+     updateExternalProductCollection(update){
+       const {filters, $$colors, $$bodyShapes,} = this.props;
+       if (this.hasLegacyInstance()){
+         const filterSorts = assign({}, this.props.filters, update);
+         const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes,});
+         window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
+         this.slideDrawerCancel();
+       }
+     }
+
+     /**
      * Reaches into legacy application to control toggling of mobile filters
      * Ugly. I know. But this is how we sprinkle in react components with prexisting framework
      */
-    handleSortCancel(){
+    slideDrawerCancel(){
+      if (this.hasLegacyInstance()) {
+        window.ProductCollectionFilter__Instance.toggleSort();
+      }
+    }
+
+    handleSelection(order) {
+      const {orderProductsBy,} = this.props;
       return () => {
-        if (this.hasLegacyInstance()) {
-          window.ProductCollectionFilter__Instance.toggleSort();
-      }};
+        orderProductsBy(order);
+        this.updateExternalProductCollection({order: order,});
+      };
+    }
+
+    handleSortCancel(){
+      return () => { this.slideDrawerCancel(); };
     }
 
     render() {
-      const { ORDERS } = CollectionFilterSortConstants;
+      const { ORDERS, } = CollectionFilterSortConstants;
+      const { filters, } = this.props;
       return (
-          <div className='CollectionSortMobile'>
+          <div className="CollectionSortMobile">
               <div className="ExpandablePanel__heading">
                   <span className="ExpandablePanel__mainTitle">Sort by</span>
-              </div>
-              <div className="ExpandablePanel__clearAllWrapper">
-                  <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
               </div>
             <ul>
               {
                 Object.keys(ORDERS).map((orderKey) => {
-                  return (<li key={orderKey} onClick={this.handleSelection(orderKey)}>{ORDERS[orderKey]}</li>)
+                  return (
+                    <li
+                      className={orderKey === filters.order ? 'is-active' : ''}
+                      key={orderKey}
+                      onClick={this.handleSelection(orderKey)}
+                    >{ORDERS[orderKey]}</li>
+                  );
                 })
               }
             </ul>
@@ -74,6 +108,11 @@ class CollectionSortMobile extends Component {
     }
 }
 
-CollectionSortMobile.propTypes = {};
+CollectionSortMobile.propTypes = {
+  filters: PropTypes.object,
+  $$colors: PropTypes.object,
+  $$bodyShapes: PropTypes.object,
+  orderProductsBy: PropTypes.func,
+};
 
 export default connect(stateToProps, dispatchToProps)(CollectionSortMobile);

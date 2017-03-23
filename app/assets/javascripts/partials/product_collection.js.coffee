@@ -120,13 +120,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     if updateRequestParams.fast_making
       metaDescription.totalFilters++
-    if updateRequestParams.price_max && updateRequestParams.price_min
+    if updateRequestParams.price_max && updateRequestParams.price_max.length && updateRequestParams.price_min && updateRequestPrams.price_min.length
       metaDescription.totalFilters++
     if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
       metaDescription.totalFilters++
     if updateRequestParams.color && updateRequestParams.color.length
-      metaDescription.totalFilters++
-    if updateRequestParams.fastMaking && updateRequestParams.fastMaking.length
       metaDescription.totalFilters++
     if @ORDERS[updateRequestParams.order]
       metaDescription.sortDescription = @ORDERS[updateRequestParams.order]
@@ -139,7 +137,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   updateMetaDescriptionSpan:(metaDescription) ->
     @resultsMeta = {
-      filterText: '(' + metaDescription.totalFilters + ')',
+      filterText: if metaDescription.totalFilters then '(' + metaDescription.totalFilters + ')' else '',
       sortText: metaDescription.sortDescription
     }
     content_sort_html = @collectionSortResultTemplate(resultsMeta: @resultsMeta)
