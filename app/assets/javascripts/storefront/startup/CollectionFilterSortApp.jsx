@@ -27,7 +27,11 @@ if (typeof window === 'object' && typeof window.CollectionFilterData === 'object
     ? queryObj.bodyshape
     : [queryObj.bodyshape,];
   }
-  if (queryObj.color){ filterSorts.selectedColors = queryObj.color; }
+  if (queryObj.color){
+    filterSorts.selectedColors = Array.isArray(queryObj.color)
+    ? queryObj.color
+    : [queryObj.color,];
+  }
   props = assign({}, window.CollectionFilterData, filterSorts);
 }
 

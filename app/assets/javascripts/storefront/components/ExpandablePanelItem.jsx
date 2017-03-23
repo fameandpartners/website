@@ -15,12 +15,11 @@ class ExpandablePanel extends Component {
     }
 
     render() {
-      const { itemGroup, isSecondaryFilter, revealedContent, } = this.props;
+      const { itemGroup, revealedContent, } = this.props;
       const { isActive, } = this.state;
       return (
           <div className={`ExpandablePanelItem
             ${isActive ? 'ExpandablePanelItem--is-active' : ''}
-            ${isSecondaryFilter ? 'ExpandablePanelItem--secondary' : ''}
           `}>
               <div className="ExpandablePanelItem__item-bar" onClick={this.openPanel}>
                   {itemGroup}
