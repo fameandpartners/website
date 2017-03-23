@@ -135,23 +135,26 @@ module ApplicationHelper
   # price: amount, currency, display_price
   # discount: amount
   def product_price_with_discount(price, discount)
-    if (discount.blank? || discount.amount.to_i == 0) && current_sale.nil?
-      price.display_price.to_s.html_safe
-    else
-      # NOTE - we should add fixed price amount calculations
-      if discount.present?
-        sale_price = price.apply(discount).display_price
-        discount_string = "#{discount.amount}%"
-      elsif current_sale.present?
-        sale_price = current_sale.apply(price).amount
-        discount_string = current_sale.discount_string
-      end
-
+    prices = -> (sale_price, discount_string) do
       [
         content_tag(:span, price.display_price, class: 'price-original'),
         content_tag(:span, '%.2f' % sale_price, class: 'price-sale'),
         content_tag(:span, "Save #{discount_string}", class: 'price-discount'),
       ].join("\n").html_safe
+    end
+
+    if discount&.amount.to_i > 0
+      sale_price = price.apply(discount).display_price
+      discount_string = "#{discount.amount}%"
+
+      prices[sale_price, discount_string]
+    elsif current_sale.present?
+      sale_price = current_sale.apply(price).display_price
+      discount_string = current_sale.discount_string
+
+      prices[sale_price, discount_string]
+    else
+      price.display_price.to_s.html_safe
     end
   end
 
@@ -207,7 +210,7 @@ module ApplicationHelper
   end
 
   def current_sale
-    @current_sale ||= Spree::Sale.active.sitewide.last
+    @current_sale ||= Spree::Sale.last_sitewide
   end
 
   def bootstrap_class_for(flash_type)
