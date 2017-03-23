@@ -36,7 +36,15 @@ describe BulkRefundWorker do
   end
 
   describe '#report' do
-    pending 'reports about processed refunds'
+    let(:events) { double(:events) }
+    let(:promise) { double(:promise) }
+
+    it 'reports about processed refunds via bulk refund mailer' do
+      expect(BulkRefundMailer).to receive(:report).with(events).and_return(promise)
+      expect(promise).to receive(:deliver)
+
+      subject.send(:report, events)
+    end
   end
 
   describe '#item_returns' do
