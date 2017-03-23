@@ -1,14 +1,32 @@
 import React from 'react';
 import RD from 'react-dom';
+import assign from 'object-assign';
 import { Provider, } from 'react-redux';
 import AppStore from '../store/AppStore';
+import {decodeQueryParams,} from '../helpers/BOM';
+import {convertURLPrices,} from '../utilities/CollectionFilterSortUtilities';
 import CollectionFilter from '../components/CollectionFilter.jsx';
 import CollectionSort from '../components/CollectionSort.jsx';
 import CollectionSortMobile from '../components/CollectionSortMobile.jsx';
 
 // GLOBAL INJECTION: Anti pattern to attach props via global scope, but currently necessary
-const props = (typeof window === 'object' && typeof window.CollectionFilterData === 'object') ?
-  window.CollectionFilterData : {};
+let props = {};
+if (typeof window === 'object' && typeof window.CollectionFilterData === 'object'){
+  // Converting legacy filtering from url
+  let filterSorts = {};
+  const queryObj = decodeQueryParams();
+
+  // Whitelisting query params for hydration
+  if (queryObj.order){ filterSorts.order = queryObj.order; }
+  if (queryObj.fast_making){ filterSorts.fastMaking = true; }
+  if (queryObj.price_min && queryObj.price_max){
+    filterSorts.selectedPrices = convertURLPrices(queryObj.price_max);
+  } // translate prices here
+  if (queryObj.bodyshape){ filterSorts.selectedShapes = queryObj.bodyshape; }
+  if (queryObj.color){ filterSorts.selectedColors = queryObj.color; }
+  props = assign({}, window.CollectionFilterData, filterSorts);
+}
+
 const store = AppStore(props); // shared
 
 // Filter sorts within 2col desktop

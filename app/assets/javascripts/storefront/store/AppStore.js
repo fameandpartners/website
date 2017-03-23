@@ -6,12 +6,22 @@ import { composeWithDevTools, } from 'redux-devtools-extension';
 export default (props) => {
   const initialComments = props.comments;
   const { $$collectionFilterSortState, } = initialStates;
-  const initialState = {
-    $$collectionFilterSortStore: $$collectionFilterSortState.merge({
-      $$bodyShapes: props.bodyShapes,
-      $$colors: props.colors,
-      $$secondaryColors: props.secondaryColors,
-    }),
+
+  const injectedState = {
+    $$bodyShapes: props.bodyShapes,
+    $$colors: props.colors,
+    fastMaking: props.fastMaking,
+    order: props.order,
+    selectedColors: props.selectedColors,
+    selectedPrices: props.selectedPrices,
+    selectedShapes: props.selectedShapes,
+  };
+
+  // Merging of initial state with injected state
+  const hydratedState = {
+    $$collectionFilterSortStore: $$collectionFilterSortState.mergeWith((initialVal, newVal) => {
+      return (newVal === null || newVal === undefined) ? initialVal : newVal;
+    }, injectedState),
   };
 
   const reducer = combineReducers(reducers);
@@ -19,5 +29,5 @@ export default (props) => {
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
 
-  return composedStore(createStore)(reducer, initialState);
+  return composedStore(createStore)(reducer, hydratedState);
 };
