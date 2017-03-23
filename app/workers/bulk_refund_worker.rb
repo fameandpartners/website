@@ -8,10 +8,13 @@ class BulkRefundWorker
       refund(item_return)
     end
 
-    binding.pry
+    report(events)
   end
 
   private
+
+  def report(events)
+  end
 
   # Need to memoize this list to avoid unprocessed items at email report.
   def item_returns
