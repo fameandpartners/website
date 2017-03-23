@@ -206,6 +206,7 @@ $product-color-winter-grey:     #dadadc;
 .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
 .color-black-and-red           { @include split-color-selector($product-color-black, $product-color-red); }
 .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
+.color-black-and-white-gingham { @include image-color-selector('BlackAndWhiteGingham.png'); }
 .color-blue                    { background-color: $product-color-blue; }
 .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
 .color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
@@ -218,6 +219,7 @@ $product-color-winter-grey:     #dadadc;
 .color-bronze                  { background-color: $product-color-bronze; }
 .color-burgundy                { background-color: $product-color-burgundy; }
 .color-burnt-orange            { background-color: $product-color-burnt-orange; }
+.color-candy-floral            { @include image-color-selector('CandyFloral.png'); }
 .color-candy-pink              { background-color: $product-color-candy-pink; }
 .color-chambray                { background-color: $product-color-chambray; }
 .color-champagne               { background-color: $product-color-champagne; }
@@ -254,6 +256,7 @@ $product-color-winter-grey:     #dadadc;
 .color-dusty-pink              { background-color: $product-color-dusty-pink; }
 .color-electric-blue           { background-color: $product-color-electric-blue; }
 .color-emerald-green           { background-color: $product-color-emerald-green; }
+.color-evening-bloom           { @include image-color-selector('EveningBloom.jpg'); }
 .color-feather-love            { @include image-color-selector('FeatherLove.png'); }
 .color-flamingo-pink           { background-color: $product-color-flamingo-pink; }
 .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
@@ -276,6 +279,7 @@ $product-color-winter-grey:     #dadadc;
 .color-icing-pink-and-red      { @include split-color-selector($product-color-icing-pink, $product-color-red);  }
 .color-indigo                  { background-color: $product-color-indigo; }
 .color-indigo-cotton-stripe    { @include image-color-selector('IndigoCottonStripe.png'); }
+.color-irridescent-green       { @include image-color-selector('IrridescentGreen.jpg'); }
 .color-ivory                   { background-color: $product-color-ivory; }
 .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
 .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
@@ -304,6 +308,7 @@ $product-color-winter-grey:     #dadadc;
 .color-metallic-peach          { background-color: $product-color-metallic-peach; }
 .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
 .color-mid-grey                { background-color: $product-color-mid-grey; }
+.color-midnight-daisy          { @include image-color-selector('MidnightDaisy.png') }
 .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
 .color-midnight-reptile        { @include image-color-selector('MidnightReptile.png'); }
 .color-mint                    { background-color: $product-color-mint; }
@@ -311,6 +316,7 @@ $product-color-winter-grey:     #dadadc;
 .color-monochrome-coda         { @include image-color-selector('MonochromeCoda.png'); }
 .color-moss-green              { background-color: $product-color-moss-green; }
 .color-mushroom                { background-color: $product-color-mushroom; }
+.color-mystic-floral           { @include image-color-selector('MysticFloral.jpg'); }
 .color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
 .color-navy                    { background-color: $product-color-navy; }
 .color-navy-and-black          { @include split-color-selector($product-color-navy, $product-color-black); }
@@ -324,6 +330,7 @@ $product-color-winter-grey:     #dadadc;
 .color-olive-shimmer           { background-color: $product-color-olive-shimmer; }
 .color-orange                  { background-color: $product-color-orange; }
 .color-orange-and-hot-pink     { @include split-color-selector($product-color-orange, $product-color-hot-pink); }
+.color-ornate-dusk-floral      { @include image-color-selector('OrnateDuskFloral.jpg'); }
 .color-ornate-midnight-floral  { @include image-color-selector('OrnateMidinightFloral.png'); }
 .color-pale-blue               { background-color: $product-color-pale-blue; }
 .color-pale-blue-cotton-stripe { @include image-color-selector('PaleBlueCottonStripe.png') }
@@ -342,6 +349,7 @@ $product-color-winter-grey:     #dadadc;
 .color-pink                    { background-color: $product-color-pink; }
 .color-pink-and-blush          { @include split-color-selector($product_color-pink, $product_color-blush); }
 .color-pink-and-rose           { @include split-color-selector($product_color-pink, $product-color-rose); }
+.color-pink-and-white-gingham  { @include image-color-selector('PinkAndWhiteGingham.png'); }
 .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
 .color-pink-nouveau            { background-color: $product-color-pink-nouveau; }
 .color-pink-shimmer            { background-color: $product-color-pink-shimmer; }
