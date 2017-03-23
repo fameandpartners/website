@@ -87,3 +87,6 @@ app/assets/javascripts/application_bundle.js
 
 # Ignore all helper Procfile
 Procfile.*
+
+# Ignore all Emacs Temp Files
+*#*

@@ -4,7 +4,7 @@ class Spree::Sale < ActiveRecord::Base
   DISCOUNT_TYPES = {
     1 => 'Fixed',
     2 => 'Percentage'
-  }
+  }.freeze
 
   default_value_for :is_active, false
 
@@ -34,6 +34,10 @@ class Spree::Sale < ActiveRecord::Base
               :greater_than_or_equal_to => 0
             }
 
+  validates :sitewide_message,
+            presence: true,
+            length: { minimum: 5 }
+
   scope :active, lambda { where(is_active: true) }
 
   has_many :discounts
@@ -62,7 +66,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def mega_menu_image_url
-    "#{configatron.asset_host}/sale/#{name.downcase}.jpg"
+    "#{ENV['RAILS_ASSET_HOST']}/sale/#{name.downcase}.jpg"
   end
 
   def banner_images
@@ -86,16 +90,17 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    "JANUARY JOY! 30% OFF STOREWIDE"
+    super.gsub(/{discount}/, discount_string)
   end
 
+  # TODO: Alexey Bobyrev 14 Mar 2017
+  # Seems to be unnecessary method, should be removed.
   def sale_promo
     nil
   end
 
-  class << self
-    def active_sales_ids
-      Spree::Sale.active.pluck(:id)
-    end
+  def self.active_sales_ids
+    Spree::Sale.active.pluck(:id)
   end
+
 end

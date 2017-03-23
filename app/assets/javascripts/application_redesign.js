@@ -126,6 +126,7 @@
 // Header
 //--------------------------------
 //= require partials/header
+//= require partials/simplified_nav
 
 //--------------------------------
 // Hero Tile Carousel
@@ -137,7 +138,7 @@ jQuery(document).ready(function($){
 
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();
-    email = $('#spree_user_email').val()
+    email = $('#spree_user_email').val();
     window.location = $(this).attr('href') + '?email=' + email;
   });
 
@@ -147,8 +148,8 @@ jQuery(document).ready(function($){
 			auto: false,             // Boolean: Animate automatically, true or false
 	 		pager: true,           // Boolean: Show pager, true or false
 			speed: 3000,            // Integer: Speed of the transition, in milliseconds
-	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
+	  		timeout: 6000          // Integer: Time between slide transitions, in milliseconds
     	});
 	});
 
-})
+});

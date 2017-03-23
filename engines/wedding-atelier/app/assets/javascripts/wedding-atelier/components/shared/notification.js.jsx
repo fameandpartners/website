@@ -35,6 +35,12 @@ var Notification = React.createClass({
     this.showAndHide();
   },
 
+  delayedUnmount: function() {
+    window.setTimeout(function(){
+      ReactDOM.unmountComponentAtNode($('#notification')[0]);
+    }, 600);
+  },
+
   showAndHide: function () {
     var show = Array.isArray(this.props.errors) && this.props.errors.length > 0 || Object.keys(this.props.errors).length > 0;
     if(this.state.show && show) {

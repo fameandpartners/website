@@ -101,22 +101,6 @@
                   = check_box_tag color.name, color.name, preSelected, 'data-all' => 'false'
                   span.icon
                   span = color.name
-            .custom-form-element.filter-option.selector-color name='Cheetah'
-              label class='swatch-color-Cheetah'
-                = check_box_tag 'Cheetah', 'Cheetah', params[:colour] == 'Cheetah' ? true : false, 'data-all' => 'false'
-                span.icon
-                span cheetah
-            .custom-form-element.filter-option.selector-color name='Rosebud'
-              label class='swatch-color-Rosebud'
-                = check_box_tag 'Rosebud', 'Rosebud', params[:colour] == 'Rosebud' ? true : false, 'data-all' => 'false'
-                span.icon
-                span rosebud
-          .form-group.select-color
-            label for='other-colors' Other colors
-            select.form-control#other-colors
-              option name='none' value='none' selected='selected' Please select one
-              - for color in selectColors
-                option name='#{color.name}' value='#{color.name}' #{color.name}
 
     .panel.content-collapse-expand.panel-default
       .panel-heading#heading-collapse-bodyshape role='tab'

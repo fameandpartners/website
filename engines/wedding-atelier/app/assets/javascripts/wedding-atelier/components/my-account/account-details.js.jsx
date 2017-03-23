@@ -25,6 +25,7 @@ var AccountDetails = React.createClass({
       autoclose: true,
       showOnFocus: true,
       startView: 'years',
+      startDate: moment().subtract(100, 'years').calendar(),
       endDate: moment().subtract(10, 'years').calendar()
     };
 

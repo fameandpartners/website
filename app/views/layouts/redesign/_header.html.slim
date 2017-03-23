@@ -55,7 +55,7 @@ ruby:
   header.main
 
     .nav-menu.nav-alert-top
-      #fixed-header.js-fixed-header
+      #fixed-header.fixed-header.js-fixed-header
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
 
@@ -83,143 +83,11 @@ ruby:
       = render 'layouts/redesign/notices'
     = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
-= render 'layouts/redesign/new_this_week'
+  = render 'layouts/redesign/new_this_week'
 
-- cache [:layout, :side_menu, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
   #sideMenu
-    nav.navbar.navbar-default.visible-xs.visible-sm
-      .navbar-header
-        a.navbar-brand href="#"  MENU
-        a#close
-          = image_tag('Hamburger_white.png', height: '25px')
-      .main-menu
-        div#new-this-week-menu.menu-new-this-week
-          ul.nav.navbar-nav
-            li.normal-item
-              .text.text-back NEW THIS WEEK
-              .arrow
-                i.fa.fa-chevron-left
-                .back BACK
-            li.images-content
-              = react_component('NewThisWeekProducts', {show: 6})
-          .btn-wrap
-            = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
-
-        div#dresses-menu
-          - cache ['views/layouts/redesign/mega_menu/_dress_code', 'dresses-menu'] do
-            ul.nav.navbar-nav
-              li.normal-item
-                .text.text-back SHOP
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
-              li.grey-item
-                .text SHOP BY
-              = render partial: 'layouts/redesign/mega_menu/shop_by'
-
-              li.grey-item
-                .text STYLES
-              = render partial: 'layouts/redesign/mega_menu/style'
-
-              li.grey-item
-                .text COLOR
-              = render partial: 'layouts/redesign/mega_menu/color'
-
-              li.grey-item
-                .text DRESS CODE
-              = render partial: 'layouts/redesign/mega_menu/dress_code'
-
-        - if Features.active?(:fameweddings)
-
-          div#wedding-menu.grid-img-cta-nav
-            ul.nav.navbar-nav
-              li.normal-item
-                .text.text-back FAMEWEDDINGS
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
-
-              li
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      = render partial: 'layouts/redesign/mega_menu/fame_weddings'
-
-        div#lookbook-menu
-          ul.nav.navbar-nav
-            li.normal-item
-              .text.text-back LOOKBOOKS
-              .arrow
-                i.fa.fa-chevron-left
-                .back BACK
-            li.menu-content
-              = render partial: 'layouts/redesign/mega_menu/lookbook_featured_item'
-
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
-
-        div#moodboards-menu
-          ul.nav.navbar-nav
-            li.normal-item
-              .text.text-back MOODBOARD
-              .arrow
-                i.fa.fa-chevron-left
-                .back BACK
-            - if spree_current_user
-              - spree_current_user.moodboards.each do |mb|
-                li.normal-item = link_to mb.name, moodboard_path(mb), class: 'text'
-
-        ul.nav.navbar-nav#inner-main-menu
-          li
-            div id='side-search-area' class='row'
-              = form_tag dresses_path, method: :get, id: 'searchForm'
-                input type='text' id='side-search' placeholder='SEARCH' name='q'
-                = image_tag '_icons/search.svg', class: 'side-search-icon', id: 'side-search-icon'
-          li.normal-item#new-this-week-open
-            .text NEW THIS WEEK
-            .arrow
-              i.fa.fa-chevron-right
-          li.normal-item#dress-menu-open
-            .text DRESSES
-            .arrow
-              i.fa.fa-chevron-right
-          - if Features.active?(:fameweddings)
-            li.normal-item#wedding-menu-open
-              .text FAMEWEDDINGS
-              .arrow
-                i.fa.fa-chevron-right
-          /!
-            li.normal-item#event-menu-open
-              .text SHOP BY EVENT
-              .arrow
-                i.fa.fa-chevron-right
-          li.normal-item#lookbook-menu-open
-            .text LOOKBOOKS
-            .arrow
-              i.fa.fa-chevron-right
-          li.normal-item
-            a.text href='http://blog.fameandpartners.com' target='_blank' BLOG
-          li.normal-item
-            div
-              = link_to 'ACCOUNT LOGIN', profile_path, class: 'text'
-          li.normal-item.no-border#moodboards-menu-open
-            .text MOODBOARD
-            - if spree_current_user && spree_current_user.moodboards.size > 1
-              .arrow
-                i.fa.fa-chevron-right
-
-          li.bottom-area.title ABOUT
-          li.bottom-area = link_to 'Why Shop With Us', why_us_path
-          li.bottom-area = link_to 'About Us', about_us_path
-          li.bottom-area = link_to 'Fame Chain', fame_chain_path
-          li.bottom-area = link_to 'From our CEO', from_our_ceo_path
-          li.bottom-area = link_to 'Privacy Policy', privacy_path
-          li.bottom-area = link_to 'Terms', terms_path
-
-          li.bottom-area.title HELP
-          li.bottom-area = link_to 'Shipping Info', faqs_path(anchor: 'collapse-delivery-how-long'), class: 'expand-faq'
-          li.bottom-area = link_to 'Returns Policy', faqs_path(anchor: 'collapse-returns-policy'), class: 'expand-faq'
-          li.bottom-area = link_to 'Contact Us', new_contact_url
-          li.bottom-area = link_to 'FAQs', faqs_path
-          li.bottom-area = link_to 'Size Guide', size_guide_path
-          li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track'), class: 'expand-faq'
-          /li.bottom-area = link_to 'Get styling advice', style_consultation_path
+    - ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
+      - if variation === 'mega'
+        = render 'layouts/redesign/header/mega_side_nav'
+      - else 
+        = render 'layouts/redesign/header/simplified_side_nav'

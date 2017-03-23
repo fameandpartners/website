@@ -8,7 +8,7 @@ var Roles = React.createClass({
 
   getInitialState: function() {
     return {
-      roles: ['bridesmaid', 'maid of honor', 'mother of bride', 'bride']
+      roles: ['Bride', 'Bridesmaid', 'Maid of Honor', 'Mother of Bride']
     };
   },
 
@@ -30,7 +30,7 @@ var Roles = React.createClass({
     var options = this.state.roles.map(function(role, index) {
       var props = {
         key: 'wedding-roles-' + index,
-        value: role
+        value: role.toLowerCase()
       };
 
       return (

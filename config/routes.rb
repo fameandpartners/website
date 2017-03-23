@@ -98,8 +98,23 @@ FameAndPartners::Application.routes.draw do
     # The Evening Shop landing page
     get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
 
+    # Bridesmaids Thank you landing page
+    get '/thanks-bridesmaid' => 'statics#landing_page_thanks_bridesmaid', :permalink => 'thanks-bridesmaid', :as => :thanks_bridesmaid_landing_page
+
+    # Thank You landing page
+    get '/thanks-for-shopping' => 'statics#landing_page_regular_thank_you', :permalink => 'thank-you-for-shopping', :as => :thank_you_for_shopping_landing_page
+
+    # VIP landing page
+    get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
+
     # Thanks Bride landing page
     get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
+
+    # Micro Influencer landing page
+    get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
+
+    # Fame Society Invitation
+    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
     ###########
     # Lookbooks
@@ -403,6 +418,9 @@ FameAndPartners::Application.routes.draw do
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
     resource 'wedding-planning', as: 'wedding_planning', only: [:create]
 
+    get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
+    resource 'micro-influencer', as: 'micro_influencer', only: [:create]
+
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
       get 'success'
@@ -621,15 +639,15 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
+  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
-
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 end
 
-# NOTE: Alexey Bobyrev 14 Feb 2017 
+# NOTE: Alexey Bobyrev 14 Feb 2017
 # Method append used here to handle all request directly right after defined ones (including engines)
 FameAndPartners::Application.routes.append do
-  # NOTE: Alexey Bobyrev 14 Jan 2017 
+  # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
   match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

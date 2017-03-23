@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require customerio
 
 //--------------
 // Bootstrap JS
@@ -29,6 +30,13 @@
 //= require moment-2.17.1.min
 //= require imagesloaded.min
 //= require libs/underscore-min
+
+// -------
+// Twilio
+// -------
+
+//= require twilio-common-0.1.5.min
+//= require twilio-chat-0.12.0
 
 //--------------------------
 // Helpers

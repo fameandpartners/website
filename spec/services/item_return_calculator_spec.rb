@@ -126,7 +126,8 @@ RSpec.describe ItemReturnCalculator do
 
   describe '#advance_refund' do
     let(:pin_payment) { double(:pin_payment) }
-    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => '2016-05-01' } }) }
+    let(:created_at) { Time.parse('2016-05-01').utc.to_s }
+    let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => created_at } }) }
 
     before do
       allow(Spree::Gateway::Pin).to receive(:where).and_return([pin_payment])
@@ -135,18 +136,25 @@ RSpec.describe ItemReturnCalculator do
     end
 
     it "calls Pins refund entry point" do
-      Time.zone do
-        expect(pin_payment).to receive(:refund).with(40, 'order_payment_ref').and_return(refund_response)
+        expect(pin_payment).to receive(:refund).with(4039, 'order_payment_ref').and_return(refund_response)
 
-        created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
+        created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40.39, user: user})
         created_item_return.reload
 
         expect(created_item_return.refund_status).to eq('Complete')
         expect(created_item_return.refund_method).to eq('Pin')
-        expect(created_item_return.refund_amount).to eq(4000)
+        expect(created_item_return.refund_amount).to eq(4039)
         expect(created_item_return.refund_ref).to eq('response_token')
-        expect(created_item_return.refunded_at).to eq(Time.parse('2016-04-30 14:00:00'))
-      end
+        expect(created_item_return.refunded_at.utc.strftime('%Y-%m-%d %H:%M:%S UTC')).to eq(created_at)
+    end
+
+    it "notifies user with customer.io" do
+      promise = double(:promise)
+      expect(RefundMailer).to receive(:notify_user).and_return(promise)
+      expect(promise).to receive(:deliver)
+      allow(pin_payment).to receive(:refund).and_return(refund_response)
+
+      created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
     end
   end
 end

@@ -33,6 +33,7 @@ class ItemReturnsGrid
     content_tag(:i, item_return.requested_action.to_s.upcase.first, class: action_icon_class(item_return.requested_action))
   end
 
+  column :order_number,           header: 'Order Number'  
   column :acceptance_status,      header: 'Status'
   column :customer_name
   column :order_number,           header: 'Order', order: 'item_returns.order_number', html: true do |item_return|
