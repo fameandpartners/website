@@ -336,6 +336,24 @@ Spree::Product.class_eval do
     @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
   end
 
+  def price_and_discount(discount: nil, site_version: nil)
+    price = product.site_price_for(site_version || SiteVersion.default)
+
+    if discount&.amount.to_i > 0
+      sale_price = price.apply(discount)
+      discount_string = "#{discount.amount}%"
+    elsif sale = Spree::Sale.last_sitewide.presence
+      sale_price = sale.apply(price)
+      discount_string = current_sale.discount_string
+    end
+
+    {
+      original: price.display_price,
+      sale:     sale_price&.display_price,
+      discount: discount_string
+    }
+  end
+
   private
 
   def build_variants_from_option_values_hash

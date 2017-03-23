@@ -101,4 +101,8 @@ class Spree::Sale < ActiveRecord::Base
     Spree::Sale.active.pluck(:id)
   end
 
+  def self.last_sitewide
+    active.sitewide.order('created_at DESC').last
+  end
+
 end

@@ -113,7 +113,7 @@ class Products::DetailsResource
     end
 
     def product_price
-      sale = Spree::Sale.active.sitewide.last
+      sale  = Spree::Sale.last_sitewide
       price = product.site_price_for(site_version || SiteVersion.default)
       sale.present? ? sale.apply(price) : price
     end
