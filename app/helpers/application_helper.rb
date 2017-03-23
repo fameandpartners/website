@@ -135,17 +135,16 @@ module ApplicationHelper
   # price: amount, currency, display_price
   # discount: amount
   def product_price_with_discount(price, discount)
-    sale = Spree::Sale.last
-    if (discount.blank? || discount.amount.to_i == 0) && sale.nil?
+    if (discount.blank? || discount.amount.to_i == 0) && current_sale.nil?
       price.display_price.to_s.html_safe
     else
       # NOTE - we should add fixed price amount calculations
       if discount.present?
         sale_price = price.apply(discount).display_price
         discount_string = "#{discount.amount}%"
-      elsif sale.present?
-        sale_price = sale.apply(price).amount
-        discount_string = sale.discount_string
+      elsif current_sale.present?
+        sale_price = current_sale.apply(price).amount
+        discount_string = current_sale.discount_string
       end
 
       [
