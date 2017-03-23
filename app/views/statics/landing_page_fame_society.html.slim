@@ -6,7 +6,7 @@
     .modal-dialog role='document'
       .container-fluid
         .row
-          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12
+          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12.col-md-offset-0
             .modal-content
               a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
               .modal-body
@@ -19,11 +19,11 @@
                           p.text-center Get free clothes. Take some selfies. Have your content shared by thousands of likeminded ladies. <br> Build your empire...
 
                       .row
-                        form#microinfluencer_form.form.clearfix
+                        form#microinfluencer_form.js-microinfluencer-form.form.clearfix
                           .row
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase FULL Name<span class="required">*</span>
-                              input data-auto-focus= required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
+                              input required="true" type="text" name="full_name" class="form-control form-control-md" placeholder="Full Name"
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Email<span class="required">*</span>
                               input required="true" type="email" name="email" class="form-control form-control-md" placeholder="EMAIL"
@@ -37,9 +37,16 @@
                               label.text-uppercase Mailing Address
                               input type="text" name="mailing_address" placeholder="Mailing Address" class="form-control form-control-md"
                           .row
-                            .col-md-6.col-xs-12.form-group.form-social-group
+                            .col-md-6.col-xs-12.form-group.form-social-group.has-feedback
                               label.text-uppercase Social Handles<span class="required">*</span> <span class="note">(at least one)</span>
-                              input required="true" type="text" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md social_handler_inputs"
+                              input required="true" type="url" name="social_handles_0" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input"
+
+                              / Render 4 more inputs for social links
+                              - (1..4.to_i).each do |n|
+                                .social-handler-wrapper.js-social-handler-wrapper.hidden
+                                  input type="url" placeholder="Social Handles" class="form-control form-control-md js-social-handler-input" name="social_handles_#{n}"
+                                  span.icon.btn-close.social-handler-remove-icon.js-social-handler-remove title="Remove this input"
+
                             .col-md-6.col-xs-12.form-group
                               label.text-uppercase Dress Size
                               input type="text" name="dress_size" placeholder="Dress Size" class="form-control form-control-md"
@@ -85,7 +92,7 @@
     section.section-box.section-goals.text-center
       .row
         .col-xs-10.col-xs-offset-1.col-md-12.col-md-offset-0
-          p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg">and score some gorgeous dresses in the process. Here’s how it works.
+          p You’ve got goals. We’ve got clothes. Join The Fame Society to grow your social empire–<br class="visible-md visible-lg"><em>and</em> score some gorgeous dresses in the process. Here’s how it works.
 
     - current_item_image = image_path("landingpages/fame-society/clothes.jpg")
     - current_item_mob_image = image_path("landingpages/fame-society/clothes-mob.jpg")
@@ -220,10 +227,11 @@
 javascript:
   $(function() {
     'use strict';
+    var MAX_SOCIAL_HANDLERS = 5;
     var INPUT_ERROR_CLASS = 'input-error';
-    var $microInfluencerForm = $('#microinfluencer_form');
+    var $microInfluencerForm = $('.js-microinfluencer-form');
     var $microInfluencerModalTrigger = $('.js-get-micro-modal-trigger');
-    var $addSocialHandlers = $('.js-add-social-handler');
+    var $addSocialHandler = $('.js-add-social-handler');
 
     function submitFormValues(formVals){
       return $.ajax({
@@ -240,18 +248,26 @@ javascript:
       $microInfluencerForm.find('input[data-auto-focus]').focus();
     });
 
-    $addSocialHandlers.click(function () {
-      var countSocialInputs = $('.social_handler_inputs').size();
-      if (countSocialInputs < 5) {
-        $('<input>').attr({
-          required: 'true',
-          type: 'text',
-          placeholder: 'Social Handles',
-          class: 'form-control form-control-md social_handler_inputs',
-          name: 'social_handles_'+countSocialInputs
-        }).appendTo('.form-social-group');
+    $addSocialHandler.on('click', function(e) {
+      var countSocialInputs = $('.js-social-handler-input:visible').length;
+
+      if (countSocialInputs < MAX_SOCIAL_HANDLERS) {
+        $(".js-social-handler-wrapper.hidden:first").insertAfter($(".js-social-handler-wrapper:last")).removeClass('hidden');
       }
+
+      if (countSocialInputs == (MAX_SOCIAL_HANDLERS - 1)) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+
       return false;
+    });
+
+    $(".js-social-handler-remove").on('click', function(e) {
+      var $whichSocialHandlerRow = $(this).parent('.js-social-handler-wrapper');
+      $whichSocialHandlerRow.addClass('hidden').find('.js-social-handler-input').val('');
+      $addSocialHandler.show();
     });
 
     // FOCUS Event handler

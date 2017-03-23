@@ -11,6 +11,8 @@
 module Repositories; end
 class Repositories::Taxonomy
   class << self
+    FILTER_TAXON_PERMALINKS = ["backless",  "halter", "strapless", "off-shoulder", "long-sleeve","split", "lace", "sequin", "a-line", "bodycon", "fit-and-flare",  "wrap"]
+    
     def get_taxon_by_name(taxon_name)
       result = Array.wrap(taxon_name).compact.map do |tn|
         taxons.find { |t| t.name.parameterize == tn.parameterize }
@@ -18,6 +20,10 @@ class Repositories::Taxonomy
       result.size < 2 ? result.first : result
     end
 
+    def collect_filterable_taxons
+      read_styles.select {|taxon| FILTER_TAXON_PERMALINKS.index( taxon.permalink ).present? }
+    end
+    
     def collection_root_taxon
       taxons.select{|taxon| taxon.taxonomy == 'Range' && taxon.root }.first
     end

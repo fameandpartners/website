@@ -245,7 +245,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     filter =  {
       bodyshape: bodyshapeArray,
-      color: colorArray,
+      color_group: colorArray,
       style: styleArray,
       fast_making: fastmakingArray,
       order: @productOrderInput.val()

@@ -4,9 +4,9 @@ class CreateFameSocietyInvitationLandingPage < ActiveRecord::Migration
     {
       path:             '/fame-society-invitation',
       template_path:    '/statics/landing_page_fame_society_invitation',
-      heading:          'Join The Fame Society',
-      title:            'Join The Fame Society',
-      meta_description: 'You\'re invited to join Fame and Partners\' network of influencers, The Fame Society.',
+      heading:          'Apply to The Fame Society',
+      title:            'Apply to The Fame Society',
+      meta_description: 'Apply to join Fame and Partners\' influencer network to expand your wardrobe (and your social reach).',
     }
   end
 

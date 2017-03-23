@@ -368,26 +368,26 @@ var MoodBoardEvent = React.createClass({
 
   eventDetailsUpdated: function (collection) {
     this.setState({event: collection.moodboard_event});
-    var event = $.extend(event, this.state.event);
+    var _newEvent = $.extend({}, this.state.event);
     event.hasError = {};
     this.setState({
-      event: event,
-      event_backup: event
+      event: _newEvent,
+      event_backup: _newEvent
     });
   },
 
   eventDetailsUpdateFailed: function (data) {
     var parsed = JSON.parse(data.responseText);
-    var newEventState = $.extend(event, this.state.event_backup);
+    var _newEvent = $.extend({}, this.state.event_backup);
     var hasError = {};
 
     for(var key in parsed.errors) {
       hasError[key] = true;
-      newEventState[key] = this.state.event_backup[key];
+      _newEvent[key] = this.state.event_backup[key];
     }
 
-    newEventState.hasError = hasError;
-    this.setState({event: event});
+    _newEvent.hasError = hasError;
+    this.setState({event: _newEvent});
   },
 
   handleRemoveAssistant: function(id, index){
@@ -396,9 +396,9 @@ var MoodBoardEvent = React.createClass({
       type: 'DELETE',
       dataType: 'json',
       success: function(_data) {
-        var event = this.state.event;
-        event.assistants.splice(index, 1);
-        this.setState({event: event});
+        var _newEvent = $.extend({}, this.state.event);
+        _newEvent.assistants.splice(index, 1);
+        this.setState({event: _newEvent});
         var errors = ['Board member removed.'];
         ReactDOM.render(<Notification errors={errors} />,
                     $('#notification')[0]);

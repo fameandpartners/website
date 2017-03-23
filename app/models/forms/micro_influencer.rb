@@ -4,6 +4,7 @@ module Forms
     property :full_name, virtual: true
     property :email, virtual: true
     property :blog_url, virtual: true
+    property :about, virtual: true
     property :dress_size, virtual: true
     property :mailing_address, virtual: true
     property :social_handles_0, virtual: true
@@ -13,6 +14,7 @@ module Forms
     property :social_handles_4, virtual: true
 
     validates :full_name,
+              :about,
               :social_handles_0,
               presence: true
 

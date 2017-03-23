@@ -113,7 +113,7 @@ FameAndPartners::Application.routes.draw do
     # Micro Influencer landing page
     get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
 
-    # Fame SOciety Invitation
+    # Fame Society Invitation
     get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
     ###########
