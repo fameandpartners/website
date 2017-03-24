@@ -54,7 +54,7 @@
 // Carousel Item 3
 - current_tile_image = "homepage/hero-featured/march-22-featured-3.jpg"
 - current_tile_image_mob = "homepage/hero-featured/march-22-featured-3-mob.jpg"
-= link_to "/daywear?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Shop Casual" }
+= link_to daywear_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Shop Casual" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
