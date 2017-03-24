@@ -11,20 +11,43 @@ export function convertURLPrices(priceMax = []){
   if (priceMax.indexOf('399') > -1){ prices.push(CollectionFilterSortConstants.PRICES[2].id); }
   return prices;
 }
+/**
+ * Helper to check if there is a LEGACY instance of product collection js.
+ */
+export function hasLegacyInstance(){
+  return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
+}
 
 /**
- * UGLY necessity
- * Converts props into legacy filter object for consumption by legacy AJAX
- * @param  {Object} props
- * @return {Object}
+ * Ugly necessity to convert into legacy filter/sorting mechanism
+ * @param  {Object} updatedFilters (state)
  */
-export function convertPropsIntoLegacyFilter(
-  {fastMaking, order, selectedColors, selectedShapes, selectedStyles, selectedPrices,},
-  {$$bodyShapes, $$bodyStyles, $$colors,})
-{
+export function updateExternalLegacyFilters(updatedFilters){
+  const legacyFilterSorts = convertIntoLegacyFilters(updatedFilters);
+  if (hasLegacyInstance()){
+    window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
+  }
+}
+
+/**
+ * Converts store/state into white-listed legacy filter object for consumption by legacy AJAX
+ * @param  {Object} updateFilters (state)
+ * @return {Object} legacyFilterSorts
+ */
+function convertIntoLegacyFilters({
+  fastMaking,
+  order,
+  selectedColors,
+  selectedShapes,
+  selectedStyles,
+  selectedPrices,
+  $$bodyShapes,
+  $$bodyStyles,
+  $$colors,
+}){
   const mainFilters = {
-    style: selectedStyles.length === $$bodyStyles.toJS().length ? [] : selectedStyles,
-    bodyshape: selectedShapes.length === $$bodyShapes.toJS().length ? [] : selectedShapes,
+    style: selectedStyles.length === $$bodyStyles.length ? [] : selectedStyles,
+    bodyshape: selectedShapes.length === $$bodyShapes.length ? [] : selectedShapes,
     color_group: selectedColors.length === $$colors.length ? [] : selectedColors,
     fast_making: fastMaking ? [true,] : undefined,
     order,

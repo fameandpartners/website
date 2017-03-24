@@ -12,6 +12,7 @@ const actionTypes = assign({},
     'SET_SELECTED_STYLES',
     'SET_TEMPORARY_FILTERS',
     'ORDER_PRODUCTS_BY',
+    'UPDATE_EXTERNAL_LEGACY_FILTERS',
   ]),
   { DEFAULTS :
     {

@@ -1,9 +1,9 @@
-import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState } from './CollectionFilterSortReducer';
+import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState, } from './CollectionFilterSortReducer';
 
 export default {
-  $$collectionFilterSortStore: CollectionFilterSortReducer
+  $$collectionFilterSortStore: CollectionFilterSortReducer,
 };
 
 export const initialStates = {
-  $$collectionFilterSortState
+  $$collectionFilterSortState,
 };

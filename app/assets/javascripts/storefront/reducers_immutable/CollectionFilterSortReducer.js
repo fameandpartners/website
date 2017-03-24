@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import FilterSortConstants from '../constants/CollectionFilterSortConstants';
+import {updateExternalLegacyFilters,} from '../utilities/CollectionFilterSortUtilities';
 
 export const $$initialState = Immutable.fromJS({
   $$colors: [],
@@ -60,7 +61,12 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
         temporaryFilters: action.temporaryFilters,
       });
     }
-
+    //NO MANIPULATION
+    case FilterSortConstants.UPDATE_EXTERNAL_LEGACY_FILTERS: {
+      const updatedFilters = $$state.merge(action.update);
+      updateExternalLegacyFilters(updatedFilters.toJS());
+      return $$state;
+    }
     default: {
       return $$state;
     }

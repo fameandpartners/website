@@ -53,3 +53,9 @@ export function orderProductsBy(order) {
     order,
   };
 }
+export function updateExternalLegacyFilters(update) {
+  return {
+    type: CollectionFilterSortConstants.UPDATE_EXTERNAL_LEGACY_FILTERS,
+    update,
+  };
+}

@@ -4,9 +4,9 @@ import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import {convertPropsIntoLegacyFilter,} from '../utilities/CollectionFilterSortUtilities';
 import _find from 'lodash/find';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
+import {hasLegacyInstance,} from '../utilities/CollectionFilterSortUtilities';
 import assign from 'object-assign';
 
 //Libraries
@@ -55,26 +55,6 @@ class CollectionFilterSort extends Component {
     }
 
     /**
-     * Helper to check if there is a LEGACY instance of product collection js.
-     */
-    hasLegacyInstance(){
-      return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
-    }
-
-    /**
-     * Updates the legacy product collection
-     * @param  {Object} update - param object to be assigned to previous filters
-     */
-    updateExternalProductCollection(update){
-      const {filters, $$colors, $$bodyShapes, $$bodyStyles,} = this.props;
-      if (this.hasLegacyInstance()){
-        const filterSorts = assign({}, this.props.filters, update);
-        const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes, $$bodyStyles,});
-        window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
-      }
-    }
-
-    /**
      * IMMUTABLE Removes option in array if present, adds to end if not
      * @param  {Array} selectedOptions
      * @param  {String} val
@@ -102,7 +82,7 @@ class CollectionFilterSort extends Component {
       const {clearAllCollectionFilterSorts, isDrawerLayout, setTemporaryFilters,} = this.props;
       clearAllCollectionFilterSorts();
       if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { this.updateExternalProductCollection(DEFAULTS); }
+      else { this.props.updateExternalLegacyFilters(DEFAULTS); }
     }
 
     handleColorSelection({name,}){
@@ -112,7 +92,7 @@ class CollectionFilterSort extends Component {
         setTemporaryFilters(assign({}, temporaryFilters, {selectedColors: newColors,}));
       } else {
         setSelectedColors(newColors);
-        this.updateExternalProductCollection({selectedColors: newColors,});
+        this.props.updateExternalLegacyFilters({selectedColors: newColors,});
       }
     }
 
@@ -122,7 +102,7 @@ class CollectionFilterSort extends Component {
         setTemporaryFilters(assign({}, temporaryFilters, {selectedPrices: newPrices,}));
       } else {
         setSelectedPrices(newPrices);
-        this.updateExternalProductCollection({selectedPrices: newPrices,});
+        this.props.updateExternalLegacyFilters({selectedPrices: newPrices,});
       }
     }
 
@@ -148,7 +128,7 @@ class CollectionFilterSort extends Component {
           setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
         } else {
           setSelectedShapes(newShapes);
-          this.updateExternalProductCollection({selectedShapes: [],});
+          this.props.updateExternalLegacyFilters({selectedShapes: [],});
         }
       };
     }
@@ -163,7 +143,7 @@ class CollectionFilterSort extends Component {
           }));
         } else {
           setSelectedStyles(newStyles);
-          this.updateExternalProductCollection({selectedStyles: [],});
+          this.props.updateExternalLegacyFilters({selectedStyles: [],});
         }
       };
     }
@@ -177,7 +157,7 @@ class CollectionFilterSort extends Component {
           setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
         } else {
           setSelectedShapes(newShapes);
-          this.updateExternalProductCollection({selectedShapes: newShapes,});
+          this.props.updateExternalLegacyFilters({selectedShapes: newShapes,});
         }
       };
     }
@@ -192,19 +172,7 @@ class CollectionFilterSort extends Component {
           setTemporaryFilters(assign({}, temporaryFilters, {selectedStyles: newStyles,}));
         } else {
           setSelectedStyles(newStyles);
-          this.updateExternalProductCollection({selectedStyles: newStyles,});
-        }
-      };
-    }
-
-    handleOrderBy(order){
-      const {isDrawerLayout, orderProductsBy, setTemporaryFilters, temporaryFilters,} = this.props;
-      return () => {
-        if (isDrawerLayout){
-          setTemporaryFilters(assign({}, temporaryFilters, {order: order,}));
-        } else {
-          orderProductsBy(order);
-          this.updateExternalProductCollection({order: order,});
+          this.props.updateExternalLegacyFilters({selectedStyles: newStyles,});
         }
       };
     }
@@ -213,7 +181,6 @@ class CollectionFilterSort extends Component {
       const {
         filters,
         isDrawerLayout,
-        orderProductsBy,
         setFastMaking,
         setTemporaryFilters,
         temporaryFilters,
@@ -224,7 +191,7 @@ class CollectionFilterSort extends Component {
           setTemporaryFilters(assign({}, temporaryFilters, {fastMaking: !fastMaking,}));
         } else {
           setFastMaking(!fastMaking);
-          this.updateExternalProductCollection({fastMaking: !fastMaking,});
+          this.props.updateExternalLegacyFilters({fastMaking: !fastMaking,});
         }
       };
     }
@@ -235,7 +202,7 @@ class CollectionFilterSort extends Component {
      */
     handleFilterCancel(){
       return () => {
-        if (this.hasLegacyInstance()){
+        if (hasLegacyInstance()){
           this.props.setTemporaryFilters({});
           window.ProductCollectionFilter__Instance.toggleFilters();
       }};
@@ -245,7 +212,7 @@ class CollectionFilterSort extends Component {
       const {applyTemporaryFilters, temporaryFilters,} = this.props;
       return () => {
         applyTemporaryFilters(temporaryFilters);
-        this.updateExternalProductCollection(temporaryFilters);
+        this.props.updateExternalLegacyFilters(temporaryFilters);
       };
     }
 
@@ -598,13 +565,13 @@ CollectionFilterSort.propTypes = {
     // Redux Actions
     applyTemporaryFilters: PropTypes.func,
     clearAllCollectionFilterSorts: PropTypes.func,
-    orderProductsBy: PropTypes.func,
     setFastMaking: PropTypes.func,
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
     setSelectedShapes: PropTypes.func,
     setSelectedStyles: PropTypes.func,
     setTemporaryFilters: PropTypes.func,
+    updateExternalLegacyFilters: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
