@@ -433,6 +433,67 @@ class CollectionFilterSort extends Component {
                           )}
                         />
 
+                        <ExpandablePanelItem
+                          itemGroup={(
+                            <div>
+                              <div className="ExpandablePanel__name">
+                                  Style
+                              </div>
+                              <div className="ExpandablePanel__selectedOptions">
+                                  {this.generateStyleSummary()}
+                              </div>
+                            </div>
+                          )}
+                          revealedContent={(
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="bodyshape">
+                                <input
+                                  onChange={this.handleAllSelectedStyles()}
+                                  checked={filters.selectedStyles.length === $$bodyStyles.toJS().length}
+                                  data-all="true"
+                                  id="styles-all"
+                                  name="styles-all"
+                                  type="checkbox"
+                                />
+                                  <span className="checkboxBlackBg__check">
+                                      <span className="ExpandablePanel__optionName">All styles</span>
+                                  </span>
+                              </label>
+                              {$$bodyStyles.toJS().map(this.buildStyleOptions)}
+                            </div>
+                          )}
+                        />
+
+                        <ExpandablePanelItem
+                          itemGroup={(
+                            <div>
+                              <div className="ExpandablePanel__name">
+                                  Bodyshape
+                              </div>
+                              <div className="ExpandablePanel__selectedOptions">
+                                  {this.generateShapeSummary()}
+                              </div>
+                            </div>
+                          )}
+                          revealedContent={(
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="bodyshape">
+                                <input
+                                  onChange={this.handleAllSelectedShapes()}
+                                  checked={filters.selectedShapes.length === $$bodyShapes.toJS().length}
+                                  data-all="true"
+                                  id="shapes-all"
+                                  name="shapes-all"
+                                  type="checkbox"
+                                />
+                                  <span className="checkboxBlackBg__check">
+                                      <span className="ExpandablePanel__optionName">All shapes</span>
+                                  </span>
+                              </label>
+                              {$$bodyShapes.toJS().map(this.buildShapeOptions)}
+                            </div>
+                          )}
+                        />
 
                         <ExpandablePanelItem
                           itemGroup={(
@@ -484,70 +545,6 @@ class CollectionFilterSort extends Component {
                             </div>
                           )}
                         />
-
-
-                        <ExpandablePanelItem
-                          itemGroup={(
-                            <div>
-                              <div className="ExpandablePanel__name">
-                                  Bodyshape
-                              </div>
-                              <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateShapeSummary()}
-                              </div>
-                            </div>
-                          )}
-                          revealedContent={(
-                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="bodyshape">
-                                <input
-                                  onChange={this.handleAllSelectedShapes()}
-                                  checked={filters.selectedShapes.length === $$bodyShapes.toJS().length}
-                                  data-all="true"
-                                  id="shapes-all"
-                                  name="shapes-all"
-                                  type="checkbox"
-                                />
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">All shapes</span>
-                                  </span>
-                              </label>
-                              {$$bodyShapes.toJS().map(this.buildShapeOptions)}
-                            </div>
-                          )}
-                        />
-
-                        <ExpandablePanelItem
-                          itemGroup={(
-                            <div>
-                              <div className="ExpandablePanel__name">
-                                  Style
-                              </div>
-                              <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateStyleSummary()}
-                              </div>
-                            </div>
-                          )}
-                          revealedContent={(
-                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="bodyshape">
-                                <input
-                                  onChange={this.handleAllSelectedStyles()}
-                                  checked={filters.selectedStyles.length === $$bodyStyles.toJS().length}
-                                  data-all="true"
-                                  id="styles-all"
-                                  name="styles-all"
-                                  type="checkbox"
-                                />
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">All styles</span>
-                                  </span>
-                              </label>
-                              {$$bodyStyles.toJS().map(this.buildStyleOptions)}
-                            </div>
-                          )}
-                        />
-
 
                         <ExpandablePanelItem
                           itemGroup={(
