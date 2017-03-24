@@ -21,6 +21,7 @@ function stateToProps(state, props) {
             selectedColors: collectionFilterSortStore.selectedColors,
             selectedPrices: collectionFilterSortStore.selectedPrices,
             selectedShapes: collectionFilterSortStore.selectedShapes,
+            selectedStyles: collectionFilterSortStore.selectedStyles,
           }, collectionFilterSortStore.temporaryFilters),
         };
     }
@@ -46,10 +47,10 @@ class CollectionSortMobile extends Component {
       * @param  {Object} update - param object to be assigned to previous filters
       */
      updateExternalProductCollection(update){
-       const {filters, $$colors, $$bodyShapes,} = this.props;
+       const {filters, $$colors, $$bodyShapes, $$bodyStyles,} = this.props;
        if (this.hasLegacyInstance()){
          const filterSorts = assign({}, this.props.filters, update);
-         const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes,});
+         const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes, $$bodyStyles,});
          window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
          this.slideDrawerCancel();
        }
@@ -112,6 +113,7 @@ CollectionSortMobile.propTypes = {
   filters: PropTypes.object,
   $$colors: PropTypes.object,
   $$bodyShapes: PropTypes.object,
+  $$bodyStyles: PropTypes.object,
   orderProductsBy: PropTypes.func,
 };
 

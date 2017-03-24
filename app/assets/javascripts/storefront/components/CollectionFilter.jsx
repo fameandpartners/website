@@ -29,6 +29,7 @@ function stateToProps(state, props) {
           $$colors: $$collectionFilterSortStore.get('$$colors'),
           $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
+          $$bodyStyles: $$collectionFilterSortStore.get('$$bodyStyles'),
           // Mutable props
           isDrawerLayout: props.isDrawerLayout,
           filters: assign({}, {
@@ -65,10 +66,10 @@ class CollectionFilterSort extends Component {
      * @param  {Object} update - param object to be assigned to previous filters
      */
     updateExternalProductCollection(update){
-      const {filters, $$colors, $$bodyShapes,} = this.props;
+      const {filters, $$colors, $$bodyShapes, $$bodyStyles,} = this.props;
       if (this.hasLegacyInstance()){
         const filterSorts = assign({}, this.props.filters, update);
-        const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes,});
+        const legacyFilterSorts = convertPropsIntoLegacyFilter(filterSorts, {$$colors, $$bodyShapes, $$bodyStyles,});
         window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
       }
     }
@@ -152,6 +153,21 @@ class CollectionFilterSort extends Component {
       };
     }
 
+    handleAllSelectedStyles(){
+      const {$$bodyStyles, isDrawerLayout, setSelectedStyles, setTemporaryFilters, temporaryFilters,} = this.props;
+      const newStyles = $$bodyStyles.toJS().map(s => s.permalink);
+      return () => {
+        if (isDrawerLayout){ // mobile version
+          setTemporaryFilters(assign({}, temporaryFilters, {
+            selectedStyles: newStyles,
+          }));
+        } else {
+          setSelectedStyles(newStyles);
+          this.updateExternalProductCollection({selectedStyles: [],});
+        }
+      };
+    }
+
     handleShapeSelection(shapeId){
       const {$$bodyShapes, isDrawerLayout, filters, setSelectedShapes, setTemporaryFilters, temporaryFilters,} = this.props;
       let newShapes = [];
@@ -162,6 +178,21 @@ class CollectionFilterSort extends Component {
         } else {
           setSelectedShapes(newShapes);
           this.updateExternalProductCollection({selectedShapes: newShapes,});
+        }
+      };
+    }
+
+    handleStyleSelection(style){
+      const {$$bodyShapes, isDrawerLayout, filters, setSelectedStyles, setTemporaryFilters, temporaryFilters,} = this.props;
+      let newStyles = [];
+      return () => {
+        const styleId = style.permalink;
+        const newStyles = this.addOrRemoveFrom(filters.selectedStyles, styleId).sort();
+        if (isDrawerLayout){ // mobile version
+          setTemporaryFilters(assign({}, temporaryFilters, {selectedStyles: newStyles,}));
+        } else {
+          setSelectedStyles(newStyles);
+          this.updateExternalProductCollection({selectedStyles: newStyles,});
         }
       };
     }
@@ -262,6 +293,26 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    buildStyleOptions(style){
+      const {selectedStyles,} = this.props.filters;
+      return (
+        <label key={`style-${style.permalink}`} className="ExpandablePanel__option" name="style">
+          <input
+            onChange={this.handleStyleSelection(style)}
+            checked={selectedStyles.indexOf(style.permalink) > -1 || selectedStyles.indexOf('all') > -1}
+            data-all="false"
+            id={`style-${style.permalink}`}
+            name={`style-${style.permalink}`}
+            type="checkbox"
+            value={style.name}
+          />
+            <span className="checkboxBlackBg__check">
+                <span className="ExpandablePanel__optionName">{style.name}</span>
+            </span>
+        </label>
+      );
+    }
+
     generateSelectedItemSpan(id, presentation, category='elem'){
       return (
         <span key={`${category}-${id}`} className="ExpandablePanel__selectedItem">{presentation}</span>
@@ -297,7 +348,7 @@ class CollectionFilterSort extends Component {
 
     }
 
-    generateShapeSummary(selectedColorIds){
+    generateShapeSummary(){
       const {$$bodyShapes, filters,} = this.props;
       if (filters.selectedShapes.length === $$bodyShapes.toJS().length || filters.selectedShapes.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
@@ -307,10 +358,21 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    generateStyleSummary(){
+      const {$$bodyStyles, filters,} = this.props;
+      if (filters.selectedStyles.length === $$bodyStyles.toJS().length || filters.selectedStyles.length === 0){ // All
+        return ( this.generateSelectedItemSpan('all', 'All Styles', 'style') );
+      }
+      return filters.selectedStyles.map( style => // Individual Elems
+        this.generateSelectedItemSpan(style, cleanCapitalizeWord(style, ['_',]), 'style')
+      );
+    }
+
 
     render() {
         const {
           $$bodyShapes,
+          $$bodyStyles,
           $$colors,
           $$secondaryColors,
           isDrawerLayout,
@@ -422,7 +484,7 @@ class CollectionFilterSort extends Component {
                                   Bodyshape
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateShapeSummary(filters.selectedShapes)}
+                                  {this.generateShapeSummary()}
                               </div>
                             </div>
                           )}
@@ -442,6 +504,37 @@ class CollectionFilterSort extends Component {
                                   </span>
                               </label>
                               {$$bodyShapes.toJS().map(this.buildShapeOptions)}
+                            </div>
+                          )}
+                        />
+
+                        <ExpandablePanelItem
+                          itemGroup={(
+                            <div>
+                              <div className="ExpandablePanel__name">
+                                  Style
+                              </div>
+                              <div className="ExpandablePanel__selectedOptions">
+                                  {this.generateStyleSummary()}
+                              </div>
+                            </div>
+                          )}
+                          revealedContent={(
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="bodyshape">
+                                <input
+                                  onChange={this.handleAllSelectedStyles()}
+                                  checked={filters.selectedStyles.length === $$bodyStyles.toJS().length}
+                                  data-all="true"
+                                  id="styles-all"
+                                  name="styles-all"
+                                  type="checkbox"
+                                />
+                                  <span className="checkboxBlackBg__check">
+                                      <span className="ExpandablePanel__optionName">All styles</span>
+                                  </span>
+                              </label>
+                              {$$bodyStyles.toJS().map(this.buildStyleOptions)}
                             </div>
                           )}
                         />
@@ -498,6 +591,7 @@ CollectionFilterSort.propTypes = {
     $$colors: PropTypes.object,
     $$secondaryColors: PropTypes.object,
     $$bodyShapes: PropTypes.object,
+    $$bodyStyles: PropTypes.object,
     filters: PropTypes.object,
     temporaryFilters: PropTypes.object,
 

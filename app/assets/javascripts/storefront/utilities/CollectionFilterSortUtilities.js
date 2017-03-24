@@ -18,8 +18,12 @@ export function convertURLPrices(priceMax = []){
  * @param  {Object} props
  * @return {Object}
  */
-export function convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}, {$$bodyShapes, $$colors,}){
+export function convertPropsIntoLegacyFilter(
+  {fastMaking, order, selectedColors, selectedShapes, selectedStyles, selectedPrices,},
+  {$$bodyShapes, $$bodyStyles, $$colors,})
+{
   const mainFilters = {
+    style: selectedStyles.length === $$bodyStyles.toJS().length ? [] : selectedStyles,
     bodyshape: selectedShapes.length === $$bodyShapes.toJS().length ? [] : selectedShapes,
     color_group: selectedColors.length === $$colors.length ? [] : selectedColors,
     fast_making: fastMaking ? [true,] : undefined,

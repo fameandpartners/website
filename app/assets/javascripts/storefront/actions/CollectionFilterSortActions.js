@@ -37,7 +37,7 @@ export function setSelectedShapes(selectedShapes) {
 }
 export function setSelectedStyles(selectedStyles) {
   return {
-    type: CollectionFilterSortConstants.SET_SELECTED_SHAPES,
+    type: CollectionFilterSortConstants.SET_SELECTED_STYLES,
     selectedStyles,
   };
 }
