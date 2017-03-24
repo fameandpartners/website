@@ -14,6 +14,8 @@
       = link_to 'Return a Manual Order', new_item_return_path, class: 'btn btn-info btn-sm'
       - if @weekly_refund
         = link_to 'Bulk Refund Process', bulk_refund_process_item_returns_path, method: 'POST', class: 'btn btn-info btn-sm'
+      - else
+        = link_to 'Weekly refund list', weekly_refund_item_returns_path, class: 'btn btn-info btn-sm'
 
 = paginate @collection.assets, theme: 'admin_ui'
 
