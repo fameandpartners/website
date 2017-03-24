@@ -2,6 +2,8 @@ module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
       @collection = ItemReturnsGrid.new(params[:item_returns_grid])
+      @weekly_refund = (params[:scope] == :refund_queue)
+
       respond_to do |f|
         f.html do
           @collection.scope do |scope|
@@ -36,6 +38,12 @@ module AdminUi
       else
         render :new
       end
+    end
+
+    def bulk_refund_process
+      BulkRefundWorker.perform_async(current_admin_user.id)
+
+      redirect_to :back, notice: "Bulk refund process started"
     end
 
     private

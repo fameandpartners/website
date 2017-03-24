@@ -43,6 +43,9 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
       @item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
 
       RefundMailer.notify_user(event).deliver
+    else
+      Rails.logger.error "Refund error for item_return ##{@item_return.id}:\n#{response.message}"
+      @item_return.refund_status = 'Failed'
     end
   end
 
