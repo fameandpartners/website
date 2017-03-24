@@ -7,7 +7,7 @@ const {PRICES,} = CollectionFilterSortConstants;
 /**
  * Helper to check if there is a LEGACY instance of product collection js.
  */
-export function hasLegacyInstance(){
+export function hasLegacyInstance() {
   return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
 }
 
@@ -15,9 +15,9 @@ export function hasLegacyInstance(){
  * Ugly necessity to convert into legacy filter/sorting mechanism
  * @param  {Object} updatedFilters (state)
  */
-export function updateExternalLegacyFilters(updatedFilters){
+export function updateExternalLegacyFilters(updatedFilters) {
   const legacyFilterSorts = convertIntoLegacyFilters(updatedFilters);
-  if (hasLegacyInstance()){
+  if (hasLegacyInstance()) {
     window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
   }
 }
@@ -26,33 +26,37 @@ export function updateExternalLegacyFilters(updatedFilters){
  * Builds white-listed filter sorting hydrated props from url
  * @return {Object} props
  */
-export function buildWhiteListedFilterSortProps(){
-  if (typeof window === 'object' && typeof window.CollectionFilterData === 'object'){
+export function buildWhiteListedFilterSortProps() {
+  if (typeof window === 'object' && typeof window.CollectionFilterData === 'object') {
     // Converting legacy filtering from url
     let filterSorts = {};
     const queryObj = decodeQueryParams();
 
     // Whitelisting query params for hydration
-    if (queryObj.order){ filterSorts.order = queryObj.order; }
-    if (queryObj.fast_making){ filterSorts.fastMaking = true; }
-    if (queryObj.price_min && queryObj.price_max){
+    if (queryObj.order) {
+      filterSorts.order = queryObj.order;
+    }
+    if (queryObj.fast_making) {
+      filterSorts.fastMaking = true;
+    }
+    if (queryObj.price_min && queryObj.price_max) {
       filterSorts.selectedPrices = convertURLPrices(queryObj.price_max);
     }
     // Array options
-    if (queryObj.bodyshape){
+    if (queryObj.bodyshape) {
       filterSorts.selectedShapes = Array.isArray(queryObj.bodyshape)
-      ? queryObj.bodyshape
-      : [queryObj.bodyshape,];
+        ? queryObj.bodyshape
+        : [queryObj.bodyshape,];
     }
-    if (queryObj.style){
+    if (queryObj.style) {
       filterSorts.selectedStyles = Array.isArray(queryObj.style)
-      ? queryObj.style
-      : [queryObj.style,];
+        ? queryObj.style
+        : [queryObj.style,];
     }
-    if (queryObj.color_group){
+    if (queryObj.color_group) {
       filterSorts.selectedColors = Array.isArray(queryObj.color_group)
-      ? queryObj.color_group
-      : [queryObj.color_group,];
+        ? queryObj.color_group
+        : [queryObj.color_group,];
     }
     return assign({}, window.CollectionFilterData, filterSorts);
   }
@@ -75,17 +79,25 @@ function convertIntoLegacyFilters({
   $$bodyShapes,
   $$bodyStyles,
   $$colors,
-}){
+}) {
   const mainFilters = {
-    style: selectedStyles.length === $$bodyStyles.length ? [] : selectedStyles,
-    bodyshape: selectedShapes.length === $$bodyShapes.length ? [] : selectedShapes,
-    color_group: selectedColors.length === $$colors.length ? [] : selectedColors,
-    fast_making: fastMaking ? [true,] : undefined,
+    style: selectedStyles.length === $$bodyStyles.length
+      ? []
+      : selectedStyles,
+    bodyshape: selectedShapes.length === $$bodyShapes.length
+      ? []
+      : selectedShapes,
+    color_group: selectedColors.length === $$colors.length
+      ? []
+      : selectedColors,
+    fast_making: fastMaking
+      ? [true,]
+      : undefined,
     order,
-    q: getUrlParameter('q').replace(/\+/g," "),
+    q: getUrlParameter('q').replace(/\+/g, " "),
   };
 
-  if (selectedPrices.length !== PRICES.length){
+  if (selectedPrices.length !== PRICES.length) {
     let getPrice = (price, index) => _find(PRICES, {id: price,}).range[index];
 
     return assign({}, mainFilters, {
@@ -102,10 +114,16 @@ function convertIntoLegacyFilters({
  * @param  {Array}  [priceMax=[]] [description]
  * @return {[type]}               [description]
  */
-function convertURLPrices(priceMax = []){
+function convertURLPrices(priceMax = []) {
   let prices = [];
-  if (priceMax.indexOf('199') > -1){ prices.push(CollectionFilterSortConstants.PRICES[0].id); }
-  if (priceMax.indexOf('299') > -1){ prices.push(CollectionFilterSortConstants.PRICES[1].id); }
-  if (priceMax.indexOf('399') > -1){ prices.push(CollectionFilterSortConstants.PRICES[2].id); }
+  if (priceMax.indexOf('199') > -1) {
+    prices.push(CollectionFilterSortConstants.PRICES[0].id);
+  }
+  if (priceMax.indexOf('299') > -1) {
+    prices.push(CollectionFilterSortConstants.PRICES[1].id);
+  }
+  if (priceMax.indexOf('399') > -1) {
+    prices.push(CollectionFilterSortConstants.PRICES[2].id);
+  }
   return prices;
 }
