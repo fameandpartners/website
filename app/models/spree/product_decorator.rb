@@ -350,7 +350,7 @@ Spree::Product.class_eval do
     {
       original: price.display_price.to_s,
       sale:     sale_price&.display_price&.to_s,
-      discount: discount_string
+      discount: discount_string.present? ? "Save #{discount_string}" : nil
     }
   end
 
