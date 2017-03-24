@@ -134,36 +134,25 @@ module ApplicationHelper
 
   # price: amount, currency, display_price
   # discount: amount
-  def product_price_with_discount(price, discount)
-    prices = -> (sale_price, discount_string) do
+  def product_price_with_discount(product:, discount: nil)
+    prices = product.price_and_discount(current_site_version, discount)
+
+    if discount.present? || current_sale.present?
       [
-        content_tag(:span, price.display_price, class: 'price-original'),
-        content_tag(:span, '%.2f' % sale_price, class: 'price-sale'),
-        content_tag(:span, "Save #{discount_string}", class: 'price-discount'),
+        content_tag(:span, prices[:original], class: 'price-original'),
+        content_tag(:span, prices[:sale], class: 'price-sale'),
+        content_tag(:span, prices[:discount], class: 'price-discount'),
       ].join("\n").html_safe
-    end
-
-    if discount&.amount.to_i > 0
-      sale_price = price.apply(discount).display_price
-      discount_string = "#{discount.amount}%"
-
-      prices[sale_price, discount_string]
-    elsif current_sale.present?
-      sale_price = current_sale.apply(price).display_price
-      discount_string = current_sale.discount_string
-
-      prices[sale_price, discount_string]
     else
-      price.display_price.to_s.html_safe
+      prices[:original].html_safe
     end
   end
 
   # span.price-old $355
   # ' $295
   def price_for_product(product)
-    price = product.site_price_for(current_site_version)
     discount = product_discount(product)
-    product_price_with_discount(price, discount)
+    product_price_with_discount(discount: discount, product: product)
   end
 
   def price_for_line_item(line_item)
