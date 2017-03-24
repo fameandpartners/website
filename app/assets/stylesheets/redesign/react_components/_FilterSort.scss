@@ -22,9 +22,6 @@
 .FilterSort__summary {
   text-transform: uppercase;
   text-align: center;
-}
-
-.FilterSort__summaryHighlight {
   font-weight: 600;
 }
 
@@ -412,7 +409,7 @@
   }
 
   &:first-child {
-    border-top: 1px solid $c-neutral-8;
+    border-top: 1px solid $c-neutral-4;
   }
 }
 
