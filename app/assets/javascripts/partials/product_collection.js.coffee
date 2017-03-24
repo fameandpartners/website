@@ -124,6 +124,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       metaDescription.totalFilters++
     if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
       metaDescription.totalFilters++
+    if updateRequestParams.style && updateRequestParams.style.length
+      metaDescription.totalFilters++
     if updateRequestParams.color && updateRequestParams.color.length
       metaDescription.totalFilters++
     if @ORDERS[updateRequestParams.order]
@@ -168,7 +170,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.hide()
 
   update: (updateRequestParams) =>
-    console.log updateRequestParams
     @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
     @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
@@ -267,7 +268,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     filter
 
   updatePageLocation: (filter) ->
-    console.log 'filter', filter
     source = _.clone(@source_path)
     filter = _.compactObject(filter || {})
     if _.isEmpty(filter)

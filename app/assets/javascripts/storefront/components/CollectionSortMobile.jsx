@@ -15,6 +15,7 @@ function stateToProps(state, props) {
           // Immutable Defaults
           $$colors: $$collectionFilterSortStore.get('$$colors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
+          $$bodyStyles: $$collectionFilterSortStore.get('$$bodyStyles'),
           filters: assign({}, {
             order: collectionFilterSortStore.order,
             fastMaking: collectionFilterSortStore.fastMaking,
