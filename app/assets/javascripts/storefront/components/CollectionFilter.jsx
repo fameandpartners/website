@@ -79,41 +79,66 @@ class CollectionFilterSort extends Component {
      **********************************
      */
     handleClearAll(){
-      const {clearAllCollectionFilterSorts, isDrawerLayout, setTemporaryFilters,} = this.props;
+      const {
+        clearAllCollectionFilterSorts,
+        isDrawerLayout,
+        setTemporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+
       clearAllCollectionFilterSorts();
       if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { this.props.updateExternalLegacyFilters(DEFAULTS); }
+      else { updateExternalLegacyFilters(DEFAULTS); }
     }
 
     handleColorSelection({name,}){
-      const {isDrawerLayout, filters, setSelectedColors, setTemporaryFilters, temporaryFilters,} = this.props;
+      const {
+        isDrawerLayout,
+        filters,
+        setSelectedColors,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
       let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
+
       if (isDrawerLayout){
-        setTemporaryFilters(assign({}, temporaryFilters, {selectedColors: newColors,}));
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedColors: newColors,
+        }));
       } else {
         setSelectedColors(newColors);
-        this.props.updateExternalLegacyFilters({selectedColors: newColors,});
+        updateExternalLegacyFilters({selectedColors: newColors,});
       }
     }
 
     updatePrice(newPrices){
-      const {isDrawerLayout, setSelectedPrices, setTemporaryFilters, temporaryFilters,} = this.props;
-      if (isDrawerLayout){ // mobile version
-        setTemporaryFilters(assign({}, temporaryFilters, {selectedPrices: newPrices,}));
+      const {
+        isDrawerLayout,
+        setSelectedPrices,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+
+      if (isDrawerLayout){
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedPrices: newPrices,
+        }));
       } else {
         setSelectedPrices(newPrices);
-        this.props.updateExternalLegacyFilters({selectedPrices: newPrices,});
+        updateExternalLegacyFilters({selectedPrices: newPrices,});
       }
     }
 
     handleAllPriceSelection(){
-      const {isDrawerLayout, filters, setSelectedPrices,} = this.props;
+      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
       const newPrices = PRICES.map(p => p.id);
       this.updatePrice(newPrices);
     }
 
     handlePriceSelection(id){
-      const {isDrawerLayout, filters, setSelectedPrices,} = this.props;
+      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
       return () => {
         const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
         this.updatePrice(newPrices);
@@ -121,14 +146,24 @@ class CollectionFilterSort extends Component {
     }
 
     handleAllSelectedShapes(){
-      const {$$bodyShapes, isDrawerLayout, setSelectedShapes, setTemporaryFilters, temporaryFilters,} = this.props;
+      const {
+        $$bodyShapes,
+        isDrawerLayout,
+        setSelectedShapes,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
       const newShapes = $$bodyShapes.toJS();
+
       return () => {
         if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {
+            selectedShapes: newShapes,
+          }));
         } else {
           setSelectedShapes(newShapes);
-          this.props.updateExternalLegacyFilters({selectedShapes: [],});
+          updateExternalLegacyFilters({selectedShapes: [],});
         }
       };
     }
@@ -154,10 +189,14 @@ class CollectionFilterSort extends Component {
       return () => {
         const newShapes = this.addOrRemoveFrom(filters.selectedShapes, shapeId).sort();
         if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {
+            selectedShapes: newShapes,
+          }));
         } else {
           setSelectedShapes(newShapes);
-          this.props.updateExternalLegacyFilters({selectedShapes: newShapes,});
+          this.props.updateExternalLegacyFilters({
+            selectedShapes: newShapes,
+          });
         }
       };
     }
@@ -169,10 +208,14 @@ class CollectionFilterSort extends Component {
         const styleId = style.permalink;
         const newStyles = this.addOrRemoveFrom(filters.selectedStyles, styleId).sort();
         if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {selectedStyles: newStyles,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {
+            selectedStyles: newStyles,
+          }));
         } else {
           setSelectedStyles(newStyles);
-          this.props.updateExternalLegacyFilters({selectedStyles: newStyles,});
+          this.props.updateExternalLegacyFilters({
+            selectedStyles: newStyles,
+          });
         }
       };
     }
@@ -188,10 +231,14 @@ class CollectionFilterSort extends Component {
       const {fastMaking,} = filters;
       return () => {
         if (isDrawerLayout){
-          setTemporaryFilters(assign({}, temporaryFilters, {fastMaking: !fastMaking,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {
+            fastMaking: !fastMaking,
+          }));
         } else {
           setFastMaking(!fastMaking);
-          this.props.updateExternalLegacyFilters({fastMaking: !fastMaking,});
+          this.props.updateExternalLegacyFilters({
+            fastMaking: !fastMaking,
+          });
         }
       };
     }
@@ -209,9 +256,14 @@ class CollectionFilterSort extends Component {
     }
 
     handleFilterApply(){
-      const {applyTemporaryFilters, temporaryFilters,} = this.props;
+      const {
+        applyTemporaryFilters,
+        setTemporaryFilters,
+        temporaryFilters,
+      } = this.props;
       return () => {
         applyTemporaryFilters(temporaryFilters);
+        setTemporaryFilters({});
         this.props.updateExternalLegacyFilters(temporaryFilters);
       };
     }
