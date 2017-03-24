@@ -111,7 +111,7 @@ javascript:
         .name = @product.name
         .price-delivery
           .price.sale
-            = price_for_product(@product)
+            = product_price_with_discount(@product)
           .delivery = @product.delivery_time_as_string(:long)
         .customize-block
           .prod-desc == @product.description

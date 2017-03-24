@@ -134,25 +134,19 @@ module ApplicationHelper
 
   # price: amount, currency, display_price
   # discount: amount
-  def product_price_with_discount(product:, discount: nil)
-    prices = product.price_and_discount(current_site_version, discount)
+  def product_price_with_discount(product)
+    prices = product.price_and_discount(site_version: current_site_version)
 
-    if discount.present? || current_sale.present?
+    if prices[:sale].present?
+      discount_message = prices[:discount].present? ? "Save #{prices[:discount]}" : nil
       [
         content_tag(:span, prices[:original], class: 'price-original'),
         content_tag(:span, prices[:sale], class: 'price-sale'),
-        content_tag(:span, prices[:discount], class: 'price-discount'),
+        content_tag(:span, discount_message, class: 'price-discount'),
       ].join("\n").html_safe
     else
       prices[:original].html_safe
     end
-  end
-
-  # span.price-old $355
-  # ' $295
-  def price_for_product(product)
-    discount = product_discount(product)
-    product_price_with_discount(discount: discount, product: product)
   end
 
   def price_for_line_item(line_item)

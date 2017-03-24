@@ -14,8 +14,7 @@ ruby:
         = cached_add_to_wishlist_link(variant.product, color_id: color_id, class: 'wish-list-link')
   h6 = variant.product.name
   .price
-    - discount = product_discount(Spree::Product.where(id: variant.product.id).first)
-    = product_price_with_discount(variant.price, discount)
+    = product_price_with_discount(variant.product)
   .buttons
     .buy-button
       = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
