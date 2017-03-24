@@ -1,8 +1,2 @@
-javascript:
-    window.CollectionFilterData = {
-    colors: #{raw Repositories::ProductColors.color_groups.to_json},
-    bodyShapes: #{raw @filter.shapes.to_json},
-    bodyStyles: #{raw @filter.styles.collect{ |s| {name: s.name, permalink: s.permalink }}.to_json}
-  };
-
+= render :partial => '/data/collection_filter_sort'
 #js-CollectionFilterApp
