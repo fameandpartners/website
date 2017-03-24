@@ -16,7 +16,7 @@ const actionTypes = assign({},
   ]),
   { DEFAULTS :
     {
-      fastMaking: undefined,
+      fastMaking: false,
       order: 'newest',
       selectedColors: [],
       selectedPrices: [],
