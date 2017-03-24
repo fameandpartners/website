@@ -4,7 +4,6 @@ import {updateExternalLegacyFilters,} from '../utilities/CollectionFilterSortUti
 
 export const $$initialState = Immutable.fromJS({
   $$colors: [],
-  $$secondaryColors: [],
   $$bodyShapes: [],
   $$bodyStyles: [],
   fastMaking: false,

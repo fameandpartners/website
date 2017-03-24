@@ -27,7 +27,6 @@ function stateToProps(state, props) {
         return {
           // Immutable Defaults
           $$colors: $$collectionFilterSortStore.get('$$colors'),
-          $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           $$bodyStyles: $$collectionFilterSortStore.get('$$bodyStyles'),
           // Mutable props
@@ -339,8 +338,9 @@ class CollectionFilterSort extends Component {
     }
 
     generateColorSummary(selectedColorNames){
-      const {$$colors, $$secondaryColors,} = this.props;
-      const selectedColors = selectedColorNames.map( name => _find($$colors.toJS().concat($$secondaryColors.toJS()), {name: name,}) );
+      const selectedColors = selectedColorNames.map( name =>
+        _find(this.props.$$colors.toJS(), { name })
+      );
       if (selectedColors.length === 0){
         return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
       }
@@ -393,7 +393,6 @@ class CollectionFilterSort extends Component {
           $$bodyShapes,
           $$bodyStyles,
           $$colors,
-          $$secondaryColors,
           isDrawerLayout,
           filters,
         } = this.props;
@@ -429,15 +428,6 @@ class CollectionFilterSort extends Component {
                                       })
                                     }
                                 </div>
-                              </div>
-                              <div className="ExpandablePanel__moreOptionsList">
-                                  <div className="ExpandablePanel__listOptions ExpandablePanel__listOptions--twoColumns ExpandablePanel__listOptions--panelColors">
-                                    {
-                                      $$secondaryColors.toJS().map(c => {
-                                        return this.buildColorOption(c);
-                                      })
-                                    }
-                                  </div>
                               </div>
                             </div>
                           )}
@@ -608,7 +598,6 @@ CollectionFilterSort.propTypes = {
     isDrawerLayout: PropTypes.bool,
     dispatch: PropTypes.func,
     $$colors: PropTypes.object,
-    $$secondaryColors: PropTypes.object,
     $$bodyShapes: PropTypes.object,
     $$bodyStyles: PropTypes.object,
     filters: PropTypes.object,
