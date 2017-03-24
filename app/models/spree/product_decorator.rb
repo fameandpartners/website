@@ -336,7 +336,8 @@ Spree::Product.class_eval do
     @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
   end
 
-  def price_and_discount(discount: nil, site_version: nil)
+  def price_and_discount(site_version: nil)
+    discount = Discount.find_by_discountable_id(id)
     price = site_price_for(site_version || SiteVersion.default)
 
     if discount&.amount.to_i > 0
@@ -344,13 +345,13 @@ Spree::Product.class_eval do
       discount_string = "#{discount.amount}%"
     elsif sale = Spree::Sale.last_sitewide.presence
       sale_price = sale.apply(price)
-      discount_string = current_sale.discount_string
+      discount_string = sale.discount_string
     end
 
     {
       original: price.display_price.to_s,
       sale:     sale_price&.display_price&.to_s,
-      discount: discount_string.present? ? "Save #{discount_string}" : nil
+      discount: discount_string
     }
   end
 
