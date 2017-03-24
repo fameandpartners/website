@@ -18,7 +18,7 @@ describe BulkRefundWorker do
     it "creates refund events for all item returns in queue and report about refund" do
       is_expected.to receive(:report)
 
-      subject.perform(user)
+      subject.perform(user.id)
 
       queued_item_returns.each do |item_return|
         refund_event = item_return.events.refund.last

@@ -1,8 +1,8 @@
 class BulkRefundWorker
   include Sidekiq::Worker
 
-  def perform(user)
-    @user = user
+  def perform(user_id)
+    @user = Spree::User.find(user_id)
 
     events = item_returns.map do |item_return|
       refund(item_return)
