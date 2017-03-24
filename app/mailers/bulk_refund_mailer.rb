@@ -11,7 +11,6 @@ class BulkRefundMailer < ActionMailer::Base
       events:                      events.map(&:id)
     )
   rescue StandardError => e
-    binding.pry
     NewRelic::Agent.notice_error(e)
     Raven.capture_exception(e)
   end
