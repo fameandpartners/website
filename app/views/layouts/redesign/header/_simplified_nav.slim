@@ -42,7 +42,9 @@
 
           .flex1.col.dresses-style
             ul
-              li.title Dresses
+              li.title
+                = link_to dresses_path
+                  | Dresses
               = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
           .flex1.col.dresses-color
