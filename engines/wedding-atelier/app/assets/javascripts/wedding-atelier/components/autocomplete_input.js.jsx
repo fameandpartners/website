@@ -92,13 +92,10 @@ var AutocompleteInput = React.createClass({
   selectOption: function(index){
     var selectedItem = this.state.items[index] + ': ',
         input = this.refs.input,
-        inputValue = input.value,
         replaceStart = input.selectionStart - this.state.currentTyping.length,
-        _newState = $.extend({},this.getInitialState()),
-        _newValue = inputValue.substr(0, replaceStart) + selectedItem + inputValue.substr(input.selectionStart);
+        _newState = $.extend({},this.getInitialState());
 
-
-    input.value = _newValue;
+    input.value = input.value.substr(0, replaceStart) + selectedItem + input.value.substr(input.selectionStart);
     input.selectionStart = replaceStart + selectedItem.length;
     input.selectionEnd = replaceStart + selectedItem.length;
     this.setState(_newState);
