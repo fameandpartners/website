@@ -294,8 +294,6 @@ var MoodBoardEvent = React.createClass({
         var _messages = messages.items.map(function(message) {
           return JSON.parse(message.body);
         });
-
-
         _chat.messages = _messages.concat(_chat.messages);
         _chat.loading = false;
         _chat.loadHistory = messages.hasPrevPage;
