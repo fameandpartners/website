@@ -8,6 +8,7 @@ var Chat = React.createClass({
     filestack_key: React.PropTypes.string,
     handleLikeDress: React.PropTypes.func,
     changeDressToAddToCartCallback: React.PropTypes.func,
+    loadChannelHistory: React.PropTypes.func,
     startTypingFn: React.PropTypes.func,
     sendMessageFn: React.PropTypes.func,
     messages: React.PropTypes.array,
@@ -48,8 +49,20 @@ var Chat = React.createClass({
     }
   },
 
-  componentDidUpdate: function() {
-    this.scrollToBottom();
+  componentDidMount: function(){
+    var that = this;
+    $(this.refs.chatLog).on('scroll', function(){
+      var elem = this;
+      if(elem.scrollTop == 0){
+        var lastScrollHeight = that.refs.chatLog.scrollHeight;
+        var promise = that.props.loadChannelHistory(20);
+        if(promise){
+          promise.then(function(){
+            elem.scrollTop += elem.scrollHeight - (lastScrollHeight + 30);
+          });
+        }
+      }
+    });
   },
 
   getChatMembers: function() {
