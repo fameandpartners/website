@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170314140248) do
+ActiveRecord::Schema.define(:version => 20170324225539) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -782,6 +782,13 @@ ActiveRecord::Schema.define(:version => 20170314140248) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "redirected_search_terms", :force => true do |t|
+    t.string   "term"
+    t.string   "redirect_to"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "refund_requests", :force => true do |t|
