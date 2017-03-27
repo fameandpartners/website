@@ -13,6 +13,10 @@ import assign from 'object-assign';
 import Resize from '../decorators/Resize.jsx';
 import breakpoints from '../libs/breakpoints';
 
+// Tracking
+import {trackEvent,} from '../libs/gaTracking';
+import COLLECTION_EVENTS from '../constants/CollectionFilterSortEvents.js';
+
 // Components
 import ExpandablePanelItem from '../components/ExpandablePanelItem.jsx';
 
@@ -90,6 +94,7 @@ class CollectionFilterSort extends Component {
       else { updateExternalLegacyFilters(DEFAULTS); }
     }
 
+
     handleColorSelection({name,}){
       const {
         isDrawerLayout,
@@ -101,7 +106,7 @@ class CollectionFilterSort extends Component {
       } = this.props;
       let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
 
-      if (isDrawerLayout){
+      if (isDrawerLayout){ // mobile, temporary setting
         setTemporaryFilters(assign({}, temporaryFilters, {
           selectedColors: newColors,
         }));
@@ -120,7 +125,7 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters,
       } = this.props;
 
-      if (isDrawerLayout){
+      if (isDrawerLayout){ // mobile, temporary setting
         setTemporaryFilters(assign({}, temporaryFilters, {
           selectedPrices: newPrices,
         }));
@@ -128,6 +133,12 @@ class CollectionFilterSort extends Component {
         setSelectedPrices(newPrices);
         updateExternalLegacyFilters({selectedPrices: newPrices,});
       }
+    }
+
+    handleFilterOpening(eventName){
+      return (isOpen) => {
+        if (isOpen){ trackEvent(COLLECTION_EVENTS[eventName]); }
+      };
     }
 
     handleAllPriceSelection(){
@@ -156,7 +167,7 @@ class CollectionFilterSort extends Component {
       const newShapes = $$bodyShapes.toJS();
 
       return () => {
-        if (isDrawerLayout){ // mobile version
+        if (isDrawerLayout){ // mobile, temporary setting
           setTemporaryFilters(assign({}, temporaryFilters, {
             selectedShapes: newShapes,
           }));
@@ -269,7 +280,7 @@ class CollectionFilterSort extends Component {
 
 
     /**
-     * RENDERERS, NOTE: Can be moved to separate components
+     * RENDERERS
      * ***************************************************
      */
     buildColorOption(color){
@@ -339,7 +350,7 @@ class CollectionFilterSort extends Component {
 
     generateColorSummary(selectedColorNames){
       const selectedColors = selectedColorNames.map( name =>
-        _find(this.props.$$colors.toJS(), { name })
+        _find(this.props.$$colors.toJS(), { name, })
       );
       if (selectedColors.length === 0){
         return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
@@ -364,7 +375,6 @@ class CollectionFilterSort extends Component {
       // Combined pricing
       const combinedSelectedPrices = selectedPrices.reduce((acc, c) => {return acc.concat(c.range);}, []);
       return this.generateSelectedItemSpan('combined', `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`);
-
     }
 
     generateShapeSummary(){
@@ -396,6 +406,7 @@ class CollectionFilterSort extends Component {
           isDrawerLayout,
           filters,
         } = this.props;
+
         return (
             <div className="CollectionFilterSort">
                 <div className="FilterSort">
@@ -408,6 +419,7 @@ class CollectionFilterSort extends Component {
                         </div>
 
                         <ExpandablePanelItem
+                          openPanelCallback={this.handleFilterOpening('COLLECTION_COLOR_FILTER_OPEN')}
                           itemGroup={(
                             <div>
                               <div className="ExpandablePanel__name">
@@ -434,6 +446,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openPanelCallback={this.handleFilterOpening('COLLECTION_STYLE_FILTER_OPEN')}
                           itemGroup={(
                             <div>
                               <div className="ExpandablePanel__name">
@@ -465,6 +478,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openPanelCallback={this.handleFilterOpening('COLLECTION_BODYSHAPE_FILTER_OPEN')}
                           itemGroup={(
                             <div>
                               <div className="ExpandablePanel__name">
@@ -496,6 +510,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openPanelCallback={this.handleFilterOpening('COLLECTION_PRICE_FILTER_OPEN')}
                           itemGroup={(
                             <div>
                               <div className="ExpandablePanel__name">
@@ -547,6 +562,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openPanelCallback={this.handleFilterOpening('COLLECTION_FASTMAKING_FILTER_OPEN')}
                           itemGroup={(
                             <div>
                               <div className="ExpandablePanel__name">

@@ -11,7 +11,11 @@ class ExpandablePanel extends Component {
     }
 
     openPanel() {
-        this.setState({ isActive: !this.state.isActive, });
+        const newActiveState = !this.state.isActive;
+        this.setState({ isActive: newActiveState, });
+        if (typeof this.props.openPanelCallback === 'function'){
+            this.props.openPanelCallback(newActiveState);
+        }
     }
 
     render() {
@@ -35,6 +39,7 @@ class ExpandablePanel extends Component {
 ExpandablePanel.propTypes = {
     itemGroup: PropTypes.node,
     revealedContent: PropTypes.node,
+    openPanelCallback: PropTypes.func,
 };
 
 export default ExpandablePanel;
