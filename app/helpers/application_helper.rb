@@ -135,6 +135,10 @@ module ApplicationHelper
   # price: amount, currency, display_price
   # discount: amount
   def product_price_with_discount(product)
+    unless product.respond_to?(:price_and_discount)
+      product = Spree::Product.find(product.id)
+    end
+
     prices = product.price_and_discount(site_version: current_site_version)
 
     if prices[:sale].present?
