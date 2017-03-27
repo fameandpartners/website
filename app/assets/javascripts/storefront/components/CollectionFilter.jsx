@@ -152,7 +152,7 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters({selectedColors: newColors,});
       }
 
-      this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', newColors);
+      this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', newColors.join(' '));
     }
 
     updatePrice(newPrices){
@@ -173,7 +173,7 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters({selectedPrices: newPrices,});
       }
 
-      this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', newPrices);
+      this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', newPrices.join(' '));
     }
 
     handleAllPriceSelection(){
@@ -209,7 +209,7 @@ class CollectionFilterSort extends Component {
         });
       }
 
-      this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', newStyles);
+      this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', newStyles.join(' '));
     }
 
     handleAllSelectedStyles(){
@@ -249,7 +249,7 @@ class CollectionFilterSort extends Component {
         });
       }
 
-      this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', newShapes);
+      this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', newShapes.join(' '));
     }
 
     handleAllSelectedShapes(){

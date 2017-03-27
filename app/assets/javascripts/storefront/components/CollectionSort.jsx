@@ -6,6 +6,11 @@ import CollectionFilterSortConstants from '../constants/CollectionFilterSortCons
 import autobind from 'auto-bind';
 import _find from 'lodash/find';
 import Select from './shared/Select.jsx';
+import assign from 'object-assign';
+
+// Tracking
+import {trackEvent,} from '../libs/gaTracking';
+import COLLECTION_EVENTS from '../constants/CollectionFilterSortEvents.js';
 
 const {ORDERS,} = CollectionFilterSortConstants;
 
@@ -28,9 +33,17 @@ class CollectionSort extends Component {
         autobind(this);
     }
 
+    trackSelection(eventName, selectionFilter){
+      trackEvent(assign({},
+        COLLECTION_EVENTS['COLLECTION_SORT_SELECTION'],
+        {label: selectionFilter,} // dynamic based on filter value
+      ));
+    }
+
     handleChange({option,}) {
         this.props.orderProductsBy(option.id);
         this.props.updateExternalLegacyFilters({order: option.id,});
+        this.trackSelection(option.id);
     }
 
     generateOptions() {
