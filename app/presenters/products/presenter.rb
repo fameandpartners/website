@@ -38,27 +38,15 @@ module Products
     end
 
     def default_color_options
-      if colors? && colors.default.any?
-        colors.default
-      else
-        []
-      end
+      colors&.default&.presence || []
     end
 
     def custom_color_options
-      if colors? && colors.extra.any?
-        colors.extra
-      else
-        []
-      end
+      colors&.extra&.presence || []
     end
 
     def custom_color_price
       colors.default_extra_price.display_price
-    end
-
-    def colors?
-      colors.present?  || colors.extra.any?
     end
 
     def colors
@@ -165,9 +153,7 @@ module Products
     alias_method :fast_making?, :fast_making
 
     def default_color
-      if color = available_options.colors.default.first
-        color.name
-      end
+      default_color_options.first&.name
     end
 
     def price_amount
@@ -225,11 +211,7 @@ module Products
     private
 
     def customisation_allowed?
-      policy.customisation_allowed?
-    end
-
-    def policy
-      @policy ||= Policy::Product.new(self)
+      product.discount.blank? || product.discount.customisation_allowed
     end
 
     def fallback_meta_description
