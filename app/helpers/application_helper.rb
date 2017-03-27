@@ -120,20 +120,9 @@ module ApplicationHelper
     end
   end
 
-  # individual product discount
-  # sale discount
-  # promocode discount
-  # note - fixed
-  def product_discount(product)
-    if product.present? && (discount = product.discount).present?
-      discount
-    else
-      nil
-    end
-  end
-
-  # price: amount, currency, display_price
-  # discount: amount
+  # @param product [Object] database record or presenter
+  # [DEPRECATED] @return [String] complete string with price markup
+  # @return [Hash] complete hash of price, discount and new price
   def product_price_with_discount(product)
     unless product.respond_to?(:price_and_discount)
       product = Spree::Product.find(product.id)
