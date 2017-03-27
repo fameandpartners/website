@@ -77,179 +77,16 @@ class CollectionFilterSort extends Component {
       return newSelections;
     }
 
-    /**
-     * FILTER/SORT Action Handlers
-     **********************************
-     */
-    handleClearAll(){
-      const {
-        clearAllCollectionFilterSorts,
-        isDrawerLayout,
-        setTemporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-
-      clearAllCollectionFilterSorts();
-      if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { updateExternalLegacyFilters(DEFAULTS); }
-    }
-
-
-    handleColorSelection({name,}){
-      const {
-        isDrawerLayout,
-        filters,
-        setSelectedColors,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-      let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
-
-      if (isDrawerLayout){ // mobile, temporary setting
-        setTemporaryFilters(assign({}, temporaryFilters, {
-          selectedColors: newColors,
-        }));
-      } else {
-        setSelectedColors(newColors);
-        updateExternalLegacyFilters({selectedColors: newColors,});
-      }
-    }
-
-    updatePrice(newPrices){
-      const {
-        isDrawerLayout,
-        setSelectedPrices,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-
-      if (isDrawerLayout){ // mobile, temporary setting
-        setTemporaryFilters(assign({}, temporaryFilters, {
-          selectedPrices: newPrices,
-        }));
-      } else {
-        setSelectedPrices(newPrices);
-        updateExternalLegacyFilters({selectedPrices: newPrices,});
-      }
+    trackSelection(eventName, selectionFilter){
+      trackEvent(assign({},
+        COLLECTION_EVENTS[eventName],
+        {label: selectionFilter,} // dynamic based on filter value
+      ));
     }
 
     handleFilterOpening(eventName){
       return (isOpen) => {
         if (isOpen){ trackEvent(COLLECTION_EVENTS[eventName]); }
-      };
-    }
-
-    handleAllPriceSelection(){
-      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
-      const newPrices = PRICES.map(p => p.id);
-      this.updatePrice(newPrices);
-    }
-
-    handlePriceSelection(id){
-      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
-      return () => {
-        const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
-        this.updatePrice(newPrices);
-      };
-    }
-
-    handleAllSelectedShapes(){
-      const {
-        $$bodyShapes,
-        isDrawerLayout,
-        setSelectedShapes,
-        setTemporaryFilters,
-        temporaryFilters,
-        updateExternalLegacyFilters,
-      } = this.props;
-      const newShapes = $$bodyShapes.toJS();
-
-      return () => {
-        if (isDrawerLayout){ // mobile, temporary setting
-          setTemporaryFilters(assign({}, temporaryFilters, {
-            selectedShapes: newShapes,
-          }));
-        } else {
-          setSelectedShapes(newShapes);
-          updateExternalLegacyFilters({selectedShapes: [],});
-        }
-      };
-    }
-
-    handleAllSelectedStyles(){
-      const {$$bodyStyles, isDrawerLayout, setSelectedStyles, setTemporaryFilters, temporaryFilters,} = this.props;
-      const newStyles = $$bodyStyles.toJS().map(s => s.permalink);
-      return () => {
-        if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {
-            selectedStyles: newStyles,
-          }));
-        } else {
-          setSelectedStyles(newStyles);
-          this.props.updateExternalLegacyFilters({selectedStyles: [],});
-        }
-      };
-    }
-
-    handleShapeSelection(shapeId){
-      const {$$bodyShapes, isDrawerLayout, filters, setSelectedShapes, setTemporaryFilters, temporaryFilters,} = this.props;
-      let newShapes = [];
-      return () => {
-        const newShapes = this.addOrRemoveFrom(filters.selectedShapes, shapeId).sort();
-        if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {
-            selectedShapes: newShapes,
-          }));
-        } else {
-          setSelectedShapes(newShapes);
-          this.props.updateExternalLegacyFilters({
-            selectedShapes: newShapes,
-          });
-        }
-      };
-    }
-
-    handleStyleSelection(style){
-      const {$$bodyShapes, isDrawerLayout, filters, setSelectedStyles, setTemporaryFilters, temporaryFilters,} = this.props;
-      let newStyles = [];
-      return () => {
-        const styleId = style.permalink;
-        const newStyles = this.addOrRemoveFrom(filters.selectedStyles, styleId).sort();
-        if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, temporaryFilters, {
-            selectedStyles: newStyles,
-          }));
-        } else {
-          setSelectedStyles(newStyles);
-          this.props.updateExternalLegacyFilters({
-            selectedStyles: newStyles,
-          });
-        }
-      };
-    }
-
-    handleFastMaking(){
-      const {
-        filters,
-        isDrawerLayout,
-        setFastMaking,
-        setTemporaryFilters,
-        temporaryFilters,
-      } = this.props;
-      const {fastMaking,} = filters;
-      return () => {
-        if (isDrawerLayout){
-          setTemporaryFilters(assign({}, temporaryFilters, {
-            fastMaking: !fastMaking,
-          }));
-        } else {
-          setFastMaking(!fastMaking);
-          this.props.updateExternalLegacyFilters({
-            fastMaking: !fastMaking,
-          });
-        }
       };
     }
 
@@ -275,6 +112,178 @@ class CollectionFilterSort extends Component {
         applyTemporaryFilters(temporaryFilters);
         setTemporaryFilters({});
         this.props.updateExternalLegacyFilters(temporaryFilters);
+      };
+    }
+
+    /**
+     * FILTER/SORT Action Handlers
+     **********************************
+     */
+    handleClearAll(){
+      const {
+        clearAllCollectionFilterSorts,
+        isDrawerLayout,
+        setTemporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+
+      clearAllCollectionFilterSorts();
+      if (isDrawerLayout){ setTemporaryFilters({}); }
+      else { updateExternalLegacyFilters(DEFAULTS); }
+    }
+
+    handleColorSelection({name,}){
+      const {
+        isDrawerLayout,
+        filters,
+        setSelectedColors,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+      let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
+
+      if (isDrawerLayout){ // mobile, temporary setting
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedColors: newColors,
+        }));
+      } else {
+        setSelectedColors(newColors);
+        updateExternalLegacyFilters({selectedColors: newColors,});
+      }
+
+      this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', newColors);
+    }
+
+    updatePrice(newPrices){
+      const {
+        isDrawerLayout,
+        setSelectedPrices,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+
+      if (isDrawerLayout){ // mobile, temporary setting
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedPrices: newPrices,
+        }));
+      } else {
+        setSelectedPrices(newPrices);
+        updateExternalLegacyFilters({selectedPrices: newPrices,});
+      }
+
+      this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', newPrices);
+    }
+
+    handleAllPriceSelection(){
+      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
+      const newPrices = PRICES.map(p => p.id);
+      this.updatePrice(newPrices);
+    }
+
+    handlePriceSelection(id){
+      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
+      return () => {
+        const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
+        this.updatePrice(newPrices);
+      };
+    }
+
+    updateStyles(newStyles){
+      const {
+        isDrawerLayout,
+        setSelectedStyles,
+        setTemporaryFilters,
+        temporaryFilters,
+      } = this.props;
+
+      if (isDrawerLayout){ // mobile version
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedStyles: newStyles,
+        }));
+      } else {
+        setSelectedStyles(newStyles);
+        this.props.updateExternalLegacyFilters({
+          selectedStyles: newStyles,
+        });
+      }
+
+      this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', newStyles);
+    }
+
+    handleAllSelectedStyles(){
+      const { $$bodyStyles, temporaryFilters, } = this.props;
+      const newStyles = $$bodyStyles.toJS().map(s => s.permalink);
+      return () => { this.updateStyles(newStyles); };
+    }
+
+    handleStyleSelection(style){
+      let newStyles = [];
+      return () => {
+        const styleId = style.permalink;
+        const newStyles = this.addOrRemoveFrom(this.props.filters.selectedStyles, styleId).sort();
+        this.updateStyles(newStyles);
+      };
+    }
+
+    updateShapes(newShapes){
+      const {
+        $$bodyShapes,
+        isDrawerLayout,
+        setSelectedShapes,
+        setTemporaryFilters,
+        temporaryFilters,
+        updateExternalLegacyFilters,
+      } = this.props;
+      if (isDrawerLayout){ // mobile, temporary setting
+        setTemporaryFilters(assign({}, temporaryFilters, {
+          selectedShapes: newShapes,
+        }));
+      } else {
+        setSelectedShapes(newShapes);
+        updateExternalLegacyFilters({
+          selectedShapes: newShapes.length === $$bodyShapes.toJS().length
+            ? []
+            : newShapes,
+        });
+      }
+
+      this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', newShapes);
+    }
+
+    handleAllSelectedShapes(){
+      return () => { this.updateShapes(this.props.$$bodyShapes.toJS()); };
+    }
+
+    handleShapeSelection(shapeId){
+      return () => {
+        const newShapes = this.addOrRemoveFrom(this.props.filters.selectedShapes, shapeId).sort();
+        this.updateShapes(newShapes);
+      };
+    }
+
+
+    handleFastMaking(){
+      const {
+        filters,
+        isDrawerLayout,
+        setFastMaking,
+        setTemporaryFilters,
+        temporaryFilters,
+      } = this.props;
+      const {fastMaking,} = filters;
+      const newFastMaking = {fastMaking: !fastMaking,};
+
+      return () => {
+        if (isDrawerLayout){
+          setTemporaryFilters(assign({}, temporaryFilters, newFastMaking));
+        } else {
+          setFastMaking(!fastMaking);
+          this.props.updateExternalLegacyFilters(newFastMaking);
+        }
+
+        this.trackSelection('COLLECTION_FASTMAKING_FILTER_SELECTION', !fastMaking);
       };
     }
 

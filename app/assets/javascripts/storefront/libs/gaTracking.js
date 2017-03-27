@@ -13,7 +13,7 @@ export function trackEvent(eventData) {
   if (isGAAvailable()){
     const event = assign({}, defaultData, eventData);
 
-    console.log('send', 'event', {
+    ga('send', 'event', {
       eventCategory: event.category,
       eventAction: event.action,
       eventLabel: event.label,
