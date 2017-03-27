@@ -157,12 +157,32 @@ module Products
     end
 
     def price_amount
-      display_price = price.apply(discount) || price
-      display_price.amount
+      prices[:sale].presence || price[:original]
     end
 
     def price_currency
       price.currency
+    end
+
+    def prices
+      @prices ||= begin
+        if discount&.amount.to_i > 0
+          sale_price = price.apply(discount) || price
+          discount_string = "#{discount.amount}%"
+        elsif sale = Spree::Sale.last_sitewide.presence
+          sale_price = sale.apply(price)
+          discount_string = sale.discount_string
+        end
+
+        {
+          original: price.display_price.to_s,
+          sale:     sale_price&.display_price&.to_s,
+          discount: discount_string
+        }
+      end
+    end
+
+    def prices_block
     end
 
     # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
