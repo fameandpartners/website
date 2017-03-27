@@ -14,6 +14,11 @@
     width: 100%;
   }
 
+  .checkbox {
+    text-align: center;
+    label { margin: 0; }
+  }
+
   .already-member {
     @extend .text-center;
     color: $boulder;
