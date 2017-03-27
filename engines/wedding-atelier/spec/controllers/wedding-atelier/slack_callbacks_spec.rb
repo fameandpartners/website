@@ -10,7 +10,7 @@ describe WeddingAtelier::SlackCallbacksController, type: :controller do
 
     context 'when token verification passes' do
       before do
-        allow(ENV).to receive(:[]).with('SLACK_VERIFICATION_TOKEN').and_return('slack_token')
+        stub_const('ENV', ENV.to_hash.merge('SLACK_VERIFICATION_TOKEN' => 'slack_token'))
       end
 
       it 'replaces the original message with the board link' do
@@ -25,7 +25,7 @@ describe WeddingAtelier::SlackCallbacksController, type: :controller do
 
     context 'when token verification doesnt pass' do
       before do
-        allow(ENV).to receive(:[]).with('SLACK_VERIFICATION_TOKEN').and_return('invalid_token')
+        stub_const('ENV', ENV.to_hash.merge('SLACK_VERIFICATION_TOKEN' => 'invalid_token'))
       end
 
       it 'responds false' do
