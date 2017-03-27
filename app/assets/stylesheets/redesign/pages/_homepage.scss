@@ -17,6 +17,10 @@
         font-size: 7rem;
       }
 
+      .title--small {
+        font-size: 3.2rem;
+      }
+
     }
 
     .sub-heading {
@@ -24,6 +28,8 @@
       font-style: normal;
       font-size: 2.2rem;
       line-height: 130%;
+      padding-top: 25px;
+      display: block;
     }
 
   }
@@ -90,6 +96,21 @@
     .hero-wrap .sub-heading {
       padding-top: 0;
       font-size: inherit;
+      display: block;
+    }
+
+    // Overrides the default behaviour from the _hero.scss file
+    .copy-wrap .heading > span:first-child {
+      display: block;
+    }
+
+    .hero-wrap .heading .title {
+      font-size: 1.7rem;
+      padding: 0;
+    }
+
+    .content-wrap {
+      padding-bottom: 10px;
     }
 
     .section-fame-story {
@@ -160,6 +181,10 @@
 
     .section-fame-story .item .item-copy {
       min-height: 200px;
+    }
+
+    .hero-wrap .heading .title--large {
+      font-size: 6rem;
     }
 
   }

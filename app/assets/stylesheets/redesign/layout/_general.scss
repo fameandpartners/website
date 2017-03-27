@@ -5,10 +5,14 @@ body {
 
 /////////// content container //////////
 
-.sticky-header #content-container {
-  margin-top: $mega-menu-desktop-height;
-}
-
 .page-content {
   padding-bottom: 60px;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .content-container {
+    margin-top: $mega-menu-desktop-height;
+  }
+
 }

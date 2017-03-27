@@ -224,8 +224,8 @@ FameAndPartners::Application.routes.draw do
     # Skirts Collection - Landing page
     get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
 
-    # The Evening Hours Collection - Landing page
-    get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
+    # The Evening Hours Collection - Redirection
+    get '/the-evening-hours-collection' => redirect("/dresses/evening"), :as => :evening_hours_collection_landing_page
 
     # Relaxed Evening Collection page (Inside/Out)- Landing page
     get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
@@ -268,6 +268,9 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
     get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
 
+    # Daywear Category Page
+    get '/daywear' => 'products/collections#show', :permalink => 'daywear', :as => :daywear_page
+    
     # Evening Category Page
     get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
 

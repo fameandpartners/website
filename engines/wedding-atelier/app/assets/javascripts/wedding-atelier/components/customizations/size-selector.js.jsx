@@ -34,7 +34,7 @@ var SizeSelector = React.createClass({
     // it's important to change size here to reset presentation as 4'10" / 147cm | 6
     // if previous size came from an user profile
     var height = target.value;
-    var heightGroup = target.selectedOptions[0].parentElement.label;
+    var heightGroup = $(target).find('option:selected').parent().attr('label');
     var _newState = $.extend({}, this.state);
     _newState.height = height;
     _newState.heightGroup = heightGroup;

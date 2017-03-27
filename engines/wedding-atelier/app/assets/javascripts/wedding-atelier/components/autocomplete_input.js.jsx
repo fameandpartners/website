@@ -75,6 +75,7 @@ var AutocompleteInput = React.createClass({
     if(this.state.captureTyping){
       _newState.currentTyping = this.state.currentTyping + e.key;
     }
+
     if(keyCode === 64 && showTags){
       _newState.showOptions = true;
       _newState.captureTyping = true;
@@ -82,23 +83,21 @@ var AutocompleteInput = React.createClass({
 
     if(this.state.showOptions && enterPressed){
       e.preventDefault();
-      var selectedItem = this.state.items[this.state.selectedItemIndex],
-          regExp = new RegExp('@' + this.state.currentTyping),
-          completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
-
-      this.refs.input.value += completeItem;
-      _newState = $.extend({},this.getInitialState());
+      this.selectOption(this.state.selectedItemIndex);
+    }else{
+      this.setState(_newState);
     }
-
-    this.setState(_newState);
   },
 
   selectOption: function(index){
-    var selectedItem = this.state.items[index],
-        _newState = $.extend({},this.getInitialState()),
-        regExp = new RegExp('@' + this.state.currentTyping),
-        completeItem = selectedItem.replace(this.state.currentTyping, '') + ': ';
-    this.refs.input.value += completeItem;
+    var selectedItem = this.state.items[index] + ': ',
+        input = this.refs.input,
+        replaceStart = input.selectionStart - this.state.currentTyping.length,
+        _newState = $.extend({},this.getInitialState());
+
+    input.value = input.value.substr(0, replaceStart) + selectedItem + input.value.substr(input.selectionStart);
+    input.selectionStart = replaceStart + selectedItem.length;
+    input.selectionEnd = replaceStart + selectedItem.length;
     this.setState(_newState);
   },
 
