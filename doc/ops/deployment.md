@@ -74,12 +74,12 @@ We have 3 environments for preview/feedback: Staging, QA1 and QA2.
 
 Merge stable with master, tag and push it
 
-1. Checkout stable (`git checkout stable`)
-1. Merge stable with master (`git merge master --ff-only`)
+1. Checkout master (`git checkout master`)
+1. Merge release branch into master (`git merge release/yyyy.m.d`)
 1. Tag it (`` git tag `date +v%Y-%m-%d-T%H%M%S%z` ``)
-1. Push stable with tags to origin (`git push stable --tags`)
+1. Push master with tags to origin (`git push origin master --tags`)
 
-After `stable` branch is updated, run `sentinel deploy production`.
+After `master` branch is updated, run `sentinel deploy production`.
 
 # LEGACY
 

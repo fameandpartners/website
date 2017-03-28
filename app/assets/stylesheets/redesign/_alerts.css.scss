@@ -1,3 +1,5 @@
+// TODO: Remove legacy styling from here.
+
 .sticky-header .alert-sale {
   position: absolute;
   top: $mega-menu-desktop-height;
@@ -36,10 +38,15 @@
 
   position: relative;
   padding: 0 15px;
-  margin-top: 104px;
   text-transform: uppercase;
   color: $c-neutral-black;
   background: $c-neutral-2;
+
+  // Quick-fix for the gap issue with the alert banner.
+  @media (min-width: $bootstrap-md-width) {
+    margin-top: 104px;
+    margin-bottom: -$mega-menu-desktop-height;
+  }
 
   a {
     text-decoration: underline;
