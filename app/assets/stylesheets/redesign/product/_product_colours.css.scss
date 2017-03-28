@@ -186,6 +186,9 @@ $product-color-watermelon:      #ef525e;
 $product-color-white:           #ffffff;
 $product-color-wine:            #831c2e;
 $product-color-winter-grey:     #dadadc;
+$product-color-warm-tan:        #d2a788;
+$product-color-dusty-rose:      #deaaba;
+$product-color-pretty-pink:     #f7dbe9;
 
 .color-apple-green             { background-color: $product-color-apple-green; }
 .color-apricot                 { background-color: $product-color-apricot; }
@@ -254,6 +257,7 @@ $product-color-winter-grey:     #dadadc;
 .color-dusty-mushroom          { background-color: $product-color-dusty-mushroom; }
 .color-dusty-peach             { background-color: $product-color-dusty-peach; }
 .color-dusty-pink              { background-color: $product-color-dusty-pink; }
+.color-dusty-rose              { background-color: $product-color-dusty-rose; }
 .color-electric-blue           { background-color: $product-color-electric-blue; }
 .color-emerald-green           { background-color: $product-color-emerald-green; }
 .color-evening-bloom           { @include image-color-selector('EveningBloom.jpg'); }
@@ -356,6 +360,7 @@ $product-color-winter-grey:     #dadadc;
 .color-pink-red                { @include split-color-selector($product_color-pink, $product_color-red); }
 .color-plum                    { background-color: $product-color-plum; }
 .color-polka-dot               { @include image-color-selector('Polka-dot.png'); }
+.color-pretty-pink             { background-color: $product-color-pretty-pink; }
 .color-purple                  { background-color: $product-color-purple; }
 .color-purple-metal            { background-color: $product-color-purple-metal; }
 .color-red                     { background-color: $product_color-red; }
@@ -392,6 +397,7 @@ $product-color-winter-grey:     #dadadc;
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
 .color-warm-grey               { background-color: $product-color-warm-grey; }
 .color-warm-olive              { background-color: $product-color-warm-olive; }
+.color-warm-tan                { background-color: $product-color-warm-tan; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
 .color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-water-grey              { background-color: $product-color-water-grey; }
