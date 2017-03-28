@@ -9,7 +9,7 @@ export function cleanCapitalizeWord(word, removeChars = []){
   // 'hour_glass' -> 'Hour Glass' (removedChars: ['_'])
   // 'blue-purple' -> 'Blue-Purple'
   const capitalizedWord = word.replace(
-    /(^([a-zA-Z\p{M}]))|([ -_][a-zA-Z\p{M}])/g, l => l.toUpperCase()
+    /(^([a-z\p{M}]))|([ -_][a-z\p{M}])/g, l => l.toUpperCase()
   );
 
   return removeChars.reduce((acc, cur) => acc.replace(new RegExp(cur, 'g'), ' '), capitalizedWord);
