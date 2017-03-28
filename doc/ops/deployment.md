@@ -79,7 +79,7 @@ Merge stable with master, tag and push it
 1. Tag it (`` git tag `date +v%Y-%m-%d-T%H%M%S%z` ``)
 1. Push stable with tags to origin (`git push stable --tags`)
 
-After `stable` branch is updated, run `sentinel deploy production`.
+After `stable` branch is updated, run `sentinel deploy production`. 
 
 # LEGACY
 
