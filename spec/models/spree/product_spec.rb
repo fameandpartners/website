@@ -170,19 +170,4 @@ describe Spree::Product, :type => :model do
     end
   end
 
-  describe '#price_and_discount' do
-    let(:first_variant) { build(:dress_variant, sku: 'SKU123') }
-    let(:second_variant) { build(:dress_variant, sku: 'SKU456') }
-    let(:product) { build(:dress, variants: [first_variant, second_variant]) }
-    let(:site_version) { build(:site_version, :us) }
-
-    it 'returns only original price' do
-      expect(product.price_and_discount(site_version: site_version)).to eq({
-        original: product.site_price_for(site_version).display_price.to_s,
-        sale: nil,
-        discount: nil
-      })
-    end
-
-  end
 end

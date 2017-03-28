@@ -22,7 +22,7 @@ input type='hidden' id="moodboard-id" value=@resource.id
                 = cropped_product_color_variant_image_tag(item.product.product_color_values.first)
         .details-wrap
           .product-name = item.product.name
-          span.price = product_price_with_discount(item.product)
+          span.price = product_price_with_discount(item)
 
         .actions-wrap
           .inner-wrap
