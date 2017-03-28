@@ -239,7 +239,7 @@ FameAndPartners::Application.routes.draw do
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
     # Redirect with querystring for GA tracking (Marketing campaign)
-    get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?theknot')
+    get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
