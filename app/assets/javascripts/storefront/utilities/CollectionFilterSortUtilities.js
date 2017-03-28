@@ -1,8 +1,7 @@
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import assign from 'object-assign';
-import _find from 'lodash/find';
-import {getUrlParameter, decodeQueryParams,} from '../helpers/BOM';
-const {PRICES,} = CollectionFilterSortConstants;
+import { assign, find, } from 'lodash';
+import { getUrlParameter, decodeQueryParams, } from '../helpers/BOM';
+const { PRICES, } = CollectionFilterSortConstants;
 
 /**
  * Helper to check if there is a LEGACY instance of product collection js.
@@ -98,7 +97,7 @@ function convertIntoLegacyFilters({
   };
 
   if (selectedPrices.length !== PRICES.length) {
-    let getPrice = (price, index) => _find(PRICES, {id: price,}).range[index];
+    let getPrice = (price, index) => find(PRICES, {id: price,}).range[index];
 
     return assign({}, mainFilters, {
       price_min: selectedPrices.map(p => getPrice(p, 0)),

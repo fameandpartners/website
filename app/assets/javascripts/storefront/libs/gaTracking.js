@@ -1,5 +1,5 @@
 /* global ga */
-import assign from 'object-assign';
+import {assign,} from 'lodash';
 
 function isGAAvailable() {
   return typeof window === 'object' && !!window.ga;

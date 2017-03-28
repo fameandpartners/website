@@ -4,10 +4,9 @@ import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import _find from 'lodash/find';
+import {assign, find,} from 'lodash';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
 import {hasLegacyInstance,} from '../utilities/CollectionFilterSortUtilities';
-import assign from 'object-assign';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
@@ -359,7 +358,7 @@ class CollectionFilterSort extends Component {
 
     generateColorSummary(selectedColorNames){
       const selectedColors = selectedColorNames.map( name =>
-        _find(this.props.$$colors.toJS(), { name, })
+        find(this.props.$$colors.toJS(), { name, })
       );
       if (selectedColors.length === 0){
         return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
@@ -371,7 +370,7 @@ class CollectionFilterSort extends Component {
     }
 
     generatePriceSummary(selectedPriceIds){
-      const selectedPrices = selectedPriceIds.map( id => _find(PRICES, {id: id,}) );
+      const selectedPrices = selectedPriceIds.map( id => find(PRICES, {id: id,}) );
       if (PRICES.length === selectedPriceIds.length || selectedPriceIds.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Prices', 'price') );
       }

@@ -1,8 +1,7 @@
-import assign from 'object-assign';
+import {assign,} from 'lodash';
 
 const COLLECTION_EVENTS = assign({},
-  {
-    COLLECTION_COLOR_FILTER_OPEN: {
+  { COLLECTION_COLOR_FILTER_OPEN: {
       category: "Category",
       action: "Filter Pane Open - Color",
     },

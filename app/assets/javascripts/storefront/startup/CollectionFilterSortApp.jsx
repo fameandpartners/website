@@ -1,6 +1,6 @@
 import React from 'react';
 import RD from 'react-dom';
-import assign from 'object-assign';
+import {assign,} from 'lodash';
 import { Provider, } from 'react-redux';
 import AppStore from '../store/AppStore';
 import { buildWhiteListedFilterSortProps, } from '../utilities/CollectionFilterSortUtilities';

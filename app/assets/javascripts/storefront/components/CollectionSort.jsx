@@ -4,9 +4,8 @@ import {bindActionCreators,} from 'redux';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
 import autobind from 'auto-bind';
-import _find from 'lodash/find';
+import {assign,} from 'lodash';
 import Select from './shared/Select.jsx';
-import assign from 'object-assign';
 
 // Tracking
 import {trackEvent,} from '../libs/gaTracking';
