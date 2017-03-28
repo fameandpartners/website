@@ -124,11 +124,7 @@ module ApplicationHelper
   # [DEPRECATED] @return [String] complete string with price markup
   # @return [Hash] complete hash of price, discount and new price
   def product_price_with_discount(product)
-    unless product.respond_to?(:price_and_discount)
-      product = Spree::Product.find(product.id)
-    end
-
-    prices = product.price_and_discount(site_version: current_site_version)
+    prices = product.prices || {}
 
     if prices[:sale].present?
       discount_message = prices[:discount].present? ? "Save #{prices[:discount]}" : nil
@@ -138,7 +134,7 @@ module ApplicationHelper
         content_tag(:span, discount_message, class: 'price-discount'),
       ].join("\n").html_safe
     else
-      prices[:original].html_safe
+      prices[:original].to_s.html_safe
     end
   end
 

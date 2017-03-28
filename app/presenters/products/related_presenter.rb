@@ -4,7 +4,7 @@ module Products
 
     def initialize(recommended_products: [], related_outerwear: [])
       @recommended_products = recommended_products
-      @related_outerwear      = related_outerwear
+      @related_outerwear    = related_outerwear
     end
 
     def recommended
