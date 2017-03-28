@@ -14,8 +14,8 @@ const actionTypes = assign({},
     'ORDER_PRODUCTS_BY',
     'UPDATE_EXTERNAL_LEGACY_FILTERS',
   ]),
-  { DEFAULTS :
-    {
+  {
+    DEFAULTS : {
       fastMaking: false,
       order: 'newest',
       selectedColors: [],
@@ -24,8 +24,8 @@ const actionTypes = assign({},
       selectedStyles: [],
     },
   },
-  { ORDERS:
-    {
+  {
+    ORDERS: {
       newest: 'Newest',
       price_high: 'Price High to Low',
       price_low: 'Price Low to High',
@@ -48,7 +48,7 @@ const actionTypes = assign({},
         range: [300, 399,],
         presentation: '$300 - $399',
       },
-    ],
+  ],
   }
 );
 

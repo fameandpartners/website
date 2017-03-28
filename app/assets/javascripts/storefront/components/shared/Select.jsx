@@ -114,11 +114,10 @@ class Select extends Component {
   }
 
   buildDropdown() {
-    const self = this;
     const options = this.props.options || [];
 
     const dropdownComponent = options.map((option, index) => {
-      const isFocused = (self.state.arrowFocusedIndex === index);
+      const isFocused = (this.state.arrowFocusedIndex === index);
 
       return (
         <li
