@@ -73,18 +73,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $('.ExpandablePanel-sort--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
 
 
-  toConsumableArray:(arr) ->
-    if Array.isArray(arr)
-      i = 0
-      arr2 = Array(arr.length)
-      for i in [0..arr.length]
-        arr2[i] = arr[i];
-      return arr2;
-    else
-      Array.from(arr);
-
   # This is duplicated, redundant code, but is necessary because we have to initialize legacy
-  # partials with metaDescription content pulled from url
+  # partials with metaDescription content pulled from url. We are avoiding coupling with React
   decodeQueryParams:() ->
     that = this
     queryObj = {};
@@ -106,7 +96,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
           queryObj[key] = val
         else if Array.isArray(queryObj[key])
           # currently an array, add to it
-          queryObj[key] = [].concat(that.toConsumableArray(queryObj[key]), [val])
+          queryObj[key] = [].concat(queryObj[key].slice(), [val])
         else
           queryObj[key] = [queryObj[key], val] # not an array, create one
     )
