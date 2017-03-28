@@ -68,11 +68,12 @@ configatron.bergen do |bergen|
 end
 
 configatron.site_version_detector_strategy = :path
+configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
-
+  
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
     expire.normally = 30.seconds
@@ -83,7 +84,6 @@ when :development
     index.spree_products = :spree_products_development
     index.color_variants = :color_variants_development
   end
-
 when :staging
   configatron.site_version_detector_strategy = :top_level_domain
 
@@ -91,6 +91,7 @@ when :production
   configatron.site_version_detector_strategy = :top_level_domain
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
+  configatron.micro_influencer_email_address='influencerapplications@fameandpartners.com'
 
 when :test
   configatron.site_version_detector_strategy = :subdomain
