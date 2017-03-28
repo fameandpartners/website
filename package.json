@@ -29,6 +29,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "immutable": "^3.8.1",
+    "inquirer": "^3.0.1",
     "lodash": "^4.17.2",
     "mirror-creator": "^1.1.0",
     "object-assign": "^4.1.0",
@@ -50,7 +51,8 @@
     "yargs": "^6.3.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development gulp build --watch true --lrbundle ${BUNDLE}",
+    "start": "NODE_ENV=development gulp build --watch true",
+    "start_bundle": "NODE_ENV=development gulp build --watch true --livereload --lrbundle ${BUNDLE}",
     "prod": "NODE_ENV=production gulp build --prod true",
     "production": "NODE_ENV=production gulp build --prod true"
   },
