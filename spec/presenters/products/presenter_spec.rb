@@ -93,14 +93,16 @@ module Products
     end
 
     describe '#price_amount' do
-      let(:price)   { Spree::Price.new(amount: 15.0, currency: 'AUD') }
+      let(:currency) { 'AUD' }
+      let(:price)   { Spree::Price.new(amount: 15.0, currency: currency) }
       let(:product) { described_class.new price: price, discount: discount }
 
       context 'product has discount' do
         let(:discount) { OpenStruct.new(amount: 10, size: 10) }
+        let(:new_price) { Spree::Price.new(amount: 13.5, currency: currency) }
 
         it 'returns the amount of the product price with the discount' do
-          expect(product.price_amount).to eq(13.5)
+          expect(product.price_amount).to eq(new_price.display_price.to_s )
         end
       end
 
@@ -108,7 +110,7 @@ module Products
         let(:discount) { nil }
 
         it 'returns the full amount of the product price' do
-          expect(product.price_amount).to eq(15)
+          expect(product.price_amount).to eq(price.display_price.to_s)
         end
       end
 
@@ -116,7 +118,7 @@ module Products
         let(:discount) { OpenStruct.new(amount: 0, size: 0) }
 
         it 'returns the full amount of the product price' do
-          expect(product.price_amount).to eq(15)
+          expect(product.price_amount).to eq(price.display_price.to_s)
         end
       end
     end
@@ -189,5 +191,38 @@ module Products
 
       it { expect(product.to_h).to eq(dummy_hash) }
     end
+
+    describe 'complete prices' do
+      let(:site_version)   { build(:site_version, :us) }
+      let(:first_variant)  { build(:dress_variant, sku: 'SKU123') }
+      let(:second_variant) { build(:dress_variant, sku: 'SKU456') }
+      let(:product)        { build(:dress, variants: [first_variant, second_variant], price: 100) }
+      let(:presenter)      { described_class.new(product: product, price: product.site_price_for(site_version), discount: discount) }
+
+      context 'without discount' do
+        let(:discount) { nil }
+
+        it 'returns only original price' do
+          expect(presenter.prices).to eq({
+            original: '$100.00',
+            sale: nil,
+            discount: nil
+          })
+        end
+      end
+
+      context 'with discount' do
+        let(:discount) { OpenStruct.new(amount: 10, size: 10) }
+
+        it 'returns price with discount' do
+          expect(presenter.prices).to eq({
+            original: '$100.00',
+            sale: '$90.00',
+            discount: '10%'
+          })
+        end
+      end
+    end
+
   end
 end

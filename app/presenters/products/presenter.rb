@@ -157,7 +157,7 @@ module Products
     end
 
     def price_amount
-      prices[:sale].presence || price[:original]
+      prices[:sale].presence || prices[:original]
     end
 
     def price_currency
@@ -232,7 +232,7 @@ module Products
     private
 
     def customisation_allowed?
-      product.discount.blank? || product.discount.customisation_allowed
+      discount.blank? || discount.customisation_allowed
     end
 
     def fallback_meta_description
