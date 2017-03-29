@@ -152,7 +152,7 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters({selectedColors: newColors,});
       }
 
-      this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', newColors.join(' '));
+      this.trackSelection('COLLECTION_COLOR_FILTER_SELECTION', name);
     }
 
     updatePrice(newPrices){
@@ -173,13 +173,13 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters({selectedPrices: newPrices,});
       }
 
-      this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', newPrices.join(' '));
     }
 
     handlePriceSelection(id){
       const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
       return () => {
         const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
+        this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', id);
         this.updatePrice(newPrices);
       };
     }
@@ -203,7 +203,6 @@ class CollectionFilterSort extends Component {
         });
       }
 
-      this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', newStyles.join(' '));
     }
 
     handleStyleSelection(style){
@@ -211,6 +210,7 @@ class CollectionFilterSort extends Component {
       return () => {
         const styleId = style.permalink;
         const newStyles = this.addOrRemoveFrom(this.props.filters.selectedStyles, styleId).sort();
+        this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', styleId);
         this.updateStyles(newStyles);
       };
     }
@@ -237,12 +237,12 @@ class CollectionFilterSort extends Component {
         });
       }
 
-      this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', newShapes.join(' '));
     }
 
     handleShapeSelection(shapeId){
       return () => {
         const newShapes = this.addOrRemoveFrom(this.props.filters.selectedShapes, shapeId).sort();
+        this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', shapeId);
         this.updateShapes(newShapes);
       };
     }
@@ -267,7 +267,7 @@ class CollectionFilterSort extends Component {
           this.props.updateExternalLegacyFilters(newFastMaking);
         }
 
-        this.trackSelection('COLLECTION_FASTMAKING_FILTER_SELECTION', !fastMaking);
+        // this.trackSelection('COLLECTION_FASTMAKING_FILTER_SELECTION', !fastMaking);
       };
     }
 
