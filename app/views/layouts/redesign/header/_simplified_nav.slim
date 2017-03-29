@@ -60,7 +60,7 @@
           .col.picture-col
             .featuredCollection.nav-item
               // TEMPORARY CONTENT FOR EQUAL PAY DAY
-              - if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 4 0:00am -7:00'), DateTime.parse('Apr 5 0:00am -7:00'))
+              - if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
                 = link_to dresses_path + "/prom"
                   = image_tag 'simplified-nav/equal-pay-day.jpg', class: 'img-responsive nav-img', alt: ''
                   .content-wrap
