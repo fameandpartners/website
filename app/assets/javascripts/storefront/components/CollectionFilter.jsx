@@ -417,6 +417,7 @@ class CollectionFilterSort extends Component {
                         </div>
 
                         <ExpandablePanelItem
+                          openedByDefault={true}
                           openPanelCallback={this.handleFilterOpening('COLLECTION_COLOR_FILTER_OPEN')}
                           itemGroup={(
                             <div>
@@ -442,6 +443,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openedByDefault={!!filters.selectedStyles.length}
                           openPanelCallback={this.handleFilterOpening('COLLECTION_STYLE_FILTER_OPEN')}
                           itemGroup={(
                             <div>
@@ -463,6 +465,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openedByDefault={!!filters.selectedShapes.length}
                           openPanelCallback={this.handleFilterOpening('COLLECTION_BODYSHAPE_FILTER_OPEN')}
                           itemGroup={(
                             <div>
@@ -484,6 +487,7 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          openedByDefault={!!filters.selectedPrices.length}
                           openPanelCallback={this.handleFilterOpening('COLLECTION_PRICE_FILTER_OPEN')}
                           itemGroup={(
                             <div>

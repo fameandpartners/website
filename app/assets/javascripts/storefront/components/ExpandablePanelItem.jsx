@@ -4,7 +4,7 @@ class ExpandablePanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isActive: false,
+            isActive: props.openedByDefault,
         };
 
         this.openPanel = this.openPanel.bind(this);
@@ -37,9 +37,14 @@ class ExpandablePanel extends Component {
 }
 
 ExpandablePanel.propTypes = {
+    openedByDefault: PropTypes.bool,
     itemGroup: PropTypes.node,
     revealedContent: PropTypes.node,
     openPanelCallback: PropTypes.func,
+};
+
+ExpandablePanel.defaultProps = {
+    openedByDefault: false,
 };
 
 export default ExpandablePanel;
