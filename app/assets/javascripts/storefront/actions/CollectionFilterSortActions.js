@@ -6,9 +6,9 @@ export function applyTemporaryFilters(temporaryFilters) {
     temporaryFilters,
   };
 }
-export function clearAllCollectionFilterSorts() {
+export function clearAllCollectionFilters() {
   return {
-    type: CollectionFilterSortConstants.CLEAR_ALL_COLLECTION_FILTER_SORTS,
+    type: CollectionFilterSortConstants.CLEAR_ALL_COLLECTION_FILTERS,
   };
 }
 export function setFastMaking(fastMaking) {

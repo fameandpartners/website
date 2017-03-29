@@ -21,7 +21,7 @@ import COLLECTION_EVENTS from '../constants/CollectionFilterSortEvents.js';
 import ExpandablePanelItem from '../components/ExpandablePanelItem.jsx';
 
 // Constants
-const {PRICES,DEFAULTS,} = CollectionFilterSortConstants;
+const {PRICES, FILTER_DEFAULTS,} = CollectionFilterSortConstants;
 
 function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
@@ -121,15 +121,15 @@ class CollectionFilterSort extends Component {
      */
     handleClearAll(){
       const {
-        clearAllCollectionFilterSorts,
+        clearAllCollectionFilters,
         isDrawerLayout,
         setTemporaryFilters,
         updateExternalLegacyFilters,
       } = this.props;
 
-      clearAllCollectionFilterSorts();
+      clearAllCollectionFilters();
       if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { updateExternalLegacyFilters(DEFAULTS); }
+      else { updateExternalLegacyFilters(FILTER_DEFAULTS); }
     }
 
     handleColorSelection({name,}){
@@ -553,7 +553,7 @@ CollectionFilterSort.propTypes = {
 
     // Redux Actions
     applyTemporaryFilters: PropTypes.func,
-    clearAllCollectionFilterSorts: PropTypes.func,
+    clearAllCollectionFilters: PropTypes.func,
     setFastMaking: PropTypes.func,
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,

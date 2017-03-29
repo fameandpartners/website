@@ -4,7 +4,7 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = assign({},
   mirrorCreator([
     'APPLY_TEMPORARY_FILTERS',
-    'CLEAR_ALL_COLLECTION_FILTER_SORTS',
+    'CLEAR_ALL_COLLECTION_FILTERS',
     'SET_FAST_MAKING',
     'SET_SELECTED_COLORS',
     'SET_SELECTED_PRICES',
@@ -15,9 +15,8 @@ const actionTypes = assign({},
     'UPDATE_EXTERNAL_LEGACY_FILTERS',
   ]),
   {
-    DEFAULTS : {
+    FILTER_DEFAULTS : {
       fastMaking: false,
-      order: 'newest',
       selectedColors: [],
       selectedPrices: [],
       selectedShapes: [],

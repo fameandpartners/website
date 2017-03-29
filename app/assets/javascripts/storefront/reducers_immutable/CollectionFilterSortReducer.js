@@ -24,8 +24,8 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     case FilterSortConstants.APPLY_TEMPORARY_FILTERS: {
       return $$state.merge(action.temporaryFilters);
     }
-    case FilterSortConstants.CLEAR_ALL_COLLECTION_FILTER_SORTS: {
-      return $$state.merge(FilterSortConstants.DEFAULTS);
+    case FilterSortConstants.CLEAR_ALL_COLLECTION_FILTERS: {
+      return $$state.merge(FilterSortConstants.FILTER_DEFAULTS);
     }
     case FilterSortConstants.ORDER_PRODUCTS_BY: {
       return $$state.merge({
