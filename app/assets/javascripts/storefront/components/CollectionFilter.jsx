@@ -417,7 +417,7 @@ class CollectionFilterSort extends Component {
                         </div>
 
                         <ExpandablePanelItem
-                          openedByDefault={true}
+                          openedByDefault
                           openPanelCallback={this.handleFilterOpening('COLLECTION_COLOR_FILTER_OPEN')}
                           itemGroup={(
                             <div>
