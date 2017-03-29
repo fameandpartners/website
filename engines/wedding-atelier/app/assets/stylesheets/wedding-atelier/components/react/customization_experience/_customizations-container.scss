@@ -92,9 +92,9 @@
 
     .real-label {
       vertical-align: super;
-      font-size: 10px;
+      font-size: .9em;
       @include screen-md {
-        font-size: 12px;
+        font-size: 1em;
       };
     }
   }
