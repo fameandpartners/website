@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20170326053740) do
 
-
   create_table "activities", :force => true do |t|
     t.string   "action"
     t.integer  "number"

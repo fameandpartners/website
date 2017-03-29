@@ -45,11 +45,7 @@ class AddStylesIntoDressTaxon < ActiveRecord::Migration
       'fp2244', '4B386', 'fp2274',
     ]
 
-    product_ids = Spree::Variant
-      .joins('INNER JOIN global_skus ON spree_variants.id = global_skus.variant_id')
-      .where('global_skus.style_number ILIKE ANY ( array[?] )', skus)
-      .pluck('DISTINCT(spree_variants.product_id)')
-
+    product_ids = GlobalSku.joins(:variant).where('global_skus.style_number ILIKE ANY ( array[?] )', skus).pluck('DISTINCT(spree_variants.product_id)')
     taxon.product_ids = product_ids
     taxon.save
   end
