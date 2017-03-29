@@ -1,20 +1,27 @@
 class BulkRefundWorker
   include Sidekiq::Worker
 
-  def perform(user_id)
-    @user = Spree::User.find(user_id)
+  def perform(user_email)
+    @user_email = user_email
 
-    events = item_returns.map do |item_return|
-      refund(item_return)
+    results =
+    {
+      success: [],
+      error:   []
+    }
+
+    item_returns.each do |item_return|
+      result = refund(item_return)
+      results[result[:status]] << { item_return_id: item_return.id, result: result }
     end
 
-    report(events)
+    report(results)
   end
 
   private
 
-  def report(events)
-    BulkRefundMailer.report(events).deliver
+  def report(results)
+    BulkRefundMailer.report(results).deliver
   end
 
   # Need to memoize this list to avoid unprocessed items at email report.
@@ -28,9 +35,16 @@ class BulkRefundWorker
     item_return.line_item.price
   end
 
+  def refund_data_for(item_return)
+    {
+      :user           => @user_email,
+      "refund_amount" => refund_amount_for(item_return),
+      "refund_method" => 'Pin'
+    }
+  end
+
   def refund(item_return)
-    item_return.events.refund.create(user: @user,
-                                     refund_amount: refund_amount_for(item_return),
-                                     refund_method: 'Pin')
+    RefundService.new(item_return_id: item_return.id,
+                      refund_data:    refund_data_for(item_return)).process
   end
 end

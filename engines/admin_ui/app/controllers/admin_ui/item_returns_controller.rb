@@ -41,7 +41,7 @@ module AdminUi
     end
 
     def bulk_refund_process
-      BulkRefundWorker.perform_async(current_admin_user.id)
+      BulkRefundWorker.perform_async(current_admin_user.email)
 
       redirect_to :back, notice: "Bulk refund process started"
     end

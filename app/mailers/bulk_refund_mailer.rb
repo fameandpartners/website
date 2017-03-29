@@ -1,5 +1,5 @@
 class BulkRefundMailer < ActionMailer::Base
-  def report(events)
+  def report(results)
     email = ''
     subject = 'Bulk refund report'
 
@@ -8,7 +8,8 @@ class BulkRefundMailer < ActionMailer::Base
       'bulk_refund_report_email',
       email_to:                    email,
       subject:                     subject,
-      events:                      events.map(&:id)
+      success:                     results[:success].map { |r| r['item_return_id'] },
+      fails:                       results[:error].map { |r| [ r['item_return_id'], r['result']['message'] ] }
     )
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
