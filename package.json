@@ -32,6 +32,7 @@
     "inquirer": "^3.0.1",
     "lodash": "^4.17.2",
     "mirror-creator": "^1.1.0",
+    "pluralize": "^4.0.0",
     "react": "^15.2.1",
     "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.2.1",

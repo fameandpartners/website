@@ -185,6 +185,11 @@
   &--is-active .ExpandablePanel__listOptions {
     display: block;
   }
+  // Filter is expanded => Show its options
+  &--is-active .ExpandablePanel__selectedOptions {
+    opacity: 0;
+  }
+
 
   // Secondary filters
   &--secondary {
@@ -227,6 +232,7 @@
   flex: 1 0 50%;
   box-sizing: border-box;
   padding-right: 15px;
+  position: relative;
   @extend .txt-truncate-1;
 }
 
@@ -257,7 +263,8 @@
   color: $c-neutral-8;
   float: right;
   max-width: 130px;
-  @extend .txt-truncate-1;
+  opacity: 1;
+  @include transition(0.3s opacity);
 }
 
 // Each selected item
@@ -273,7 +280,7 @@
 
 // List of available options
 .ExpandablePanel__listOptions {
-  padding: 0 0 15px 30px;
+  padding: 0 0 15px 10px;
   display: none;
 
   a {
@@ -285,7 +292,7 @@
   // Color panels need a different left padding
   &--panelColors,
   &--panelColors .ExpandablePanel__moreOptions {
-    padding-left: 15px;
+    padding-left: 10px;
   }
 
   // TODO: if this is needed elsewhere then it should become a global helper
@@ -322,6 +329,10 @@
   font-size: 0.95em;
   text-transform: capitalize;
   cursor: pointer;
+  // &.two-col {
+  //   width: 50%;
+  //   float: left;
+  // }
 }
 
 // Custom checkbox
@@ -345,11 +356,10 @@
   border-radius: 100%;
   background: $c-neutral-4;
   display: inline-block;
-  position: relative;
+  position: absolute;
   height: 17px;
   width: 17px;
   top: 2px;
-  left: 17px;
 }
 
 // Trigger to load more filter options
