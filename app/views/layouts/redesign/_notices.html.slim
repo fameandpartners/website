@@ -1,11 +1,25 @@
-- if current_sale.present?
-  #sale-banner.alert-sale role="alert"
-    .outer-wrap
+// TEMPORARY SALE BANNER for the EQUAL PAY DAY campaign
+- if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
+
+#sale-banner.alert-sale.equal-pay-day role="alert"
+  .outer-wrap
       .inner-wrap
         .title-wrap
           .title
-            = current_sale.sitewide_message
-            = link_to 'Shop now!', dresses_path
+            | Take 21% Off Of Everthing in honor of Equal Pay Day.
+            = link_to 'Find out why.', from_our_ceo_path, class: "alert-sale-cta"
+
+// REGULAR SALE BANNER
+- else
+
+  - if display_sale_notice?
+    #sale-banner.alert-sale role="alert"
+      .outer-wrap
+          .inner-wrap
+            .title-wrap
+              .title
+                = current_sale.try(:sitewide_message)
+                = link_to 'Shop now!', sale_path
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)
