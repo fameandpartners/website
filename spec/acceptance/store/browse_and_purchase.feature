@@ -33,7 +33,7 @@ Feature: Browse and Purchase
 
   Scenario: Show Filters on Dresses List
     When I visit the dresses page
-    Then I should see "View all prices"
+    Then I should see "All prices"
     Then I should see "$0 - $199"
     Then I should see "$200 - $299"
     Then I should see "$300 - $399"
