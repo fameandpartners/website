@@ -18,7 +18,7 @@
           .copy-wrap.text-center
             h2.heading.no-margin-md
               .hidden-sm.hidden-xs
-                span.title The Evening Shop. Style gets <em>personal</em>.
+                span.title.title--large The Evening Shop. Style gets <em>personal</em>.
                 span.sub-heading
                   | <em class="link-underline">Customize</em> your way.
 
@@ -44,7 +44,7 @@
         .col-md-4.col-md-offset-6
           .copy-wrap.text-center
             h2.heading.no-margin-md
-              span.title.title--large Made for the <em>modern</em> bride.
+              span.title.title--large Made for the <br class="visible-lg-block"><em>modern</em> bride.
               span.sub-heading.hidden-md.hidden-lg
                   | <em class="link-underline">Shop</em> Bespoke Bridal.
             .cta-wrapper
@@ -54,7 +54,7 @@
 // Carousel Item 3
 - current_tile_image = "homepage/hero-featured/march-22-featured-3.jpg"
 - current_tile_image_mob = "homepage/hero-featured/march-22-featured-3-mob.jpg"
-= link_to best_of_fame_collection_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Best of Fame" }
+= link_to daywear_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Shop Casual" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
