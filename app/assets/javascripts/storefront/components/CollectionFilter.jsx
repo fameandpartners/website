@@ -279,6 +279,7 @@ class CollectionFilterSort extends Component {
     buildColorOption(color){
       const {selectedColors,} = this.props.filters;
       const {name,id,} = color;
+      const inverse = name.toLowerCase().indexOf('white') > -1 ? 'inverse' : '';
       return (
         <label key={`color-${id}`} className="ExpandablePanel__option ExpandablePanel__listColumn">
           <input
@@ -289,7 +290,7 @@ class CollectionFilterSort extends Component {
             onChange={this.handleColorSelection.bind(this, color)}
           />
           <span className="ExpandablePanel__optionColorFallback"></span>
-          <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick color-${name}`}></span>
+          <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick ${inverse} color-${name}`}></span>
           <span className="ExpandablePanel__optionName">{name}</span>
         </label>
       );

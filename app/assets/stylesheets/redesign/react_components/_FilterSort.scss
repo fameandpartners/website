@@ -311,6 +311,10 @@
         top: -5px;
       }
 
+      &.inverse::after {
+        color: $c-neutral-12;
+      }
+
       // Black font-color for very light bg colors
       &.color-white::after {
         color: $c-neutral-black;
@@ -359,7 +363,7 @@
   position: absolute;
   height: 17px;
   width: 17px;
-  top: 2px;
+  top: 3px;
 }
 
 // Trigger to load more filter options
