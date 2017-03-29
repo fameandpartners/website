@@ -117,8 +117,7 @@ var SelectSizeModal = React.createClass({
         $('.shopping-bag-container').trigger('shoppingBag:open');
       },
       error: function (response) {
-        ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
-            document.getElementById('notification'));
+        that.refs.notifications.notify(['Oops! There was an error adding your current customization to the shopping cart, try another combination.']);
       }
     });
   },
@@ -269,6 +268,7 @@ var SelectSizeModal = React.createClass({
     return(
       <div className="js-select-size-modal select-size-modal cancelable" ref="modal" onClick={this.cancel}>
         <div className="body">
+          <Notification ref="notifications"/>
           <a className="btnClose icon-close-white hidden-xs cancelable" onClick={this.cancel}/>
           <a className="btnClose icon-close hidden-sm hidden-md hidden-lg cancelable" onClick={this.cancel}/>
           <div className="content-container">

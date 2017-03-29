@@ -89,12 +89,15 @@ var SaveDressButton = React.createClass({
 
   errorCallback: function(data) {
     var jsonData = JSON.parse(data.responseText);
-    ReactDOM.render(<Notification errors={jsonData.errors} />, $('#notification')[0]);
+    this.refs.notifications.notify(jsonData.errors);
   },
 
   render: function() {
     return (
-      <button className={this.props.buttonClass} onClick={this.saveDress}>{this.props.caption}</button>
+      <button className={this.props.buttonClass} onClick={this.saveDress}>
+        <Notification ref='notifications'/>
+        {this.props.caption}
+      </button>
      );
   }
 });

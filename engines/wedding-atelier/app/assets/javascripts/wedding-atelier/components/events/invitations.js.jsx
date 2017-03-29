@@ -10,7 +10,8 @@ var EventInvitations = React.createClass({
 
   getInitialState: function() {
     return {
-      invitations: []
+      invitations: [],
+      notifications: []
     };
   },
 
@@ -32,12 +33,12 @@ var EventInvitations = React.createClass({
         email = emailField.value;
     e.preventDefault();
     if(!emailField.checkValidity()) {
-      WeddingAtelierHelper.notify(["Invalid email format."]);
+      this.refs.notifications.notify(["Invalid email format."]);
       return false;
     }
 
     if(!email){
-      WeddingAtelierHelper.notify(["Email field can\'t be blank"]);
+      this.refs.notifications.notify(["Email field can\'t be blank"]);
       return false;
     }
 
@@ -48,13 +49,11 @@ var EventInvitations = React.createClass({
       data: {email_addresses: [email]},
       success: function(data) {
         emailField.value = '';
-        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
-            document.getElementById('notification'));
         that.setState({invitations: data.invitations});
+        that.refs.notifications.notify(['Invite successfully sent to ' + email + '.'])
       },
       error: function(error) {
-        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
-            document.getElementById('notification'));
+        that.refs.notifications.notify(["Sorry, we could not send the invitation to " + email + '.']);
       }
     });
   },
@@ -102,9 +101,9 @@ var EventInvitations = React.createClass({
   },
 
   render: function() {
-
     return(
       <form>
+        <Notification ref='notifications'/>
         <div className="form-group">
           <label htmlFor="input_email_address">Email address</label>
           <input type="email" className="form-control" placeholder="mail@mail.com" id="input_email_addres" ref="email_address"/>

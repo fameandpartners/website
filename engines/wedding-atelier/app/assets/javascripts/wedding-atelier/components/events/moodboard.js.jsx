@@ -115,8 +115,7 @@ var MoodBoardEvent = React.createClass({
         that.setupNotificationsChannel();
       });
     }).fail(function(e) {
-      ReactDOM.render(<Notification errors={['Sorry, there was a problem starting your chat session. We\'ll have it back up and running soon.']} />,
-          document.getElementById('notification'));
+      that.refs.notifications.notify(['Sorry, there was a problem starting your chat session. We\'ll have it back up and running soon.']);
     });
   },
 
@@ -363,8 +362,7 @@ var MoodBoardEvent = React.createClass({
         that.setState(_newState);
       }.bind(this),
       error: function(error) {
-        ReactDOM.render(<Notification errors={[error.statusText]} />,
-                    $('#notification')[0]);
+        that.refs.notifications.notify([error.statusText]);
       }
     });
   },
@@ -427,18 +425,17 @@ var MoodBoardEvent = React.createClass({
   },
 
   handleRemoveAssistant: function(id, index){
+    var that = this;
     $.ajax({
       url: this.props.remove_assistant_path.replace(':id', id),
       type: 'DELETE',
       dataType: 'json',
       success: function(_data) {
-        var _newEvent = $.extend({}, this.state.event);
+        var _newEvent = $.extend({}, that.state.event);
         _newEvent.assistants.splice(index, 1);
-        this.setState({event: _newEvent});
-        var errors = ['Board member removed.'];
-        ReactDOM.render(<Notification errors={errors} />,
-                    $('#notification')[0]);
-      }.bind(this),
+        that.setState({event: _newEvent});
+        that.refs.notifications.notify(['Board member removed.']);
+      },
       error: function(_data) {
         var errors;
         try{
@@ -446,8 +443,7 @@ var MoodBoardEvent = React.createClass({
         }catch(e){
           errors = ["We're sorry something went wrong."];
         }
-        ReactDOM.render(<Notification errors={[errors[0]]} />,
-                    $('#notification')[0]);
+        that.refs.notifications.notify(errors[0]);
       }
     });
   },
@@ -551,6 +547,7 @@ var MoodBoardEvent = React.createClass({
 
     return (
       <div id="events__moodboard" className="row">
+        <Notification ref="notifications"/>
         <SelectSizeModal {...selectSizeProps}/>
         <SizeGuideModal />
         <div className="left-content col-sm-5 hidden-xs">
