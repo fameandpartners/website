@@ -17,7 +17,8 @@ var Chat = React.createClass({
     loading: React.PropTypes.bool,
     event: React.PropTypes.object,
     event_url: React.PropTypes.string,
-    slack_webhook: React.PropTypes.string
+    slack_webhook: React.PropTypes.string,
+    mobile: React.PropTypes.bool
   },
 
   getInitialState: function(){
@@ -300,25 +301,29 @@ var Chat = React.createClass({
     var messages = this.getRenderedMessages(),
         typing = this.getWhoisTyping(),
         chatMembers = this.getChatMembers(),
-        chatWelcomeMessage = this.getWelcomeMessage();
+        chatWelcomeMessage = this.getWelcomeMessage(),
+        helpClass = '';
+
+    if(!this.props.mobile){ helpClass = 'walkthrough-messages'; }
 
     return(
       <div className="chat row">
         <div className="chat-general-info center-block">
           <div className="row">
             <div className="col-xs-12">
-              <div className="chat-header-left-side">
-                <strong className="walkthrough-messages" title="See who's online" data-content="Then start chatting." data-placement="bottom">Online</strong>: {chatMembers}
+              <div className={'chat-header-left-side ' + helpClass} title="See who's online" data-tooltip-content="See who's online, then start chatting." data-tooltip-my-position="center left" data-tooltip-at-position="center right">
+                <strong>Online</strong>: {chatMembers}
               </div>
             </div>
           </div>
         </div>
         <div
-          className="chat-log walkthrough-messages"
+          className={'chat-log ' + helpClass}
           ref="chatLog"
           title="Chat with your bridal party and stylists"
-          data-content="Share your designs and discuss each look."
-          data-placement="right">
+          data-tooltip-content="Share your designs and discuss each look."
+          data-tooltip-my-position="center left"
+          data-tooltip-at-position="center right">
           {this.chatContent()}
           <div className="chat-typing">
             {typing}
@@ -328,7 +333,7 @@ var Chat = React.createClass({
           </div>
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
-          <input className="btn upload-image walkthrough-messages" onClick={this.uploadImage} value="" data-content="Send pics to the group" data-placement="right" />
+          <input className={'btn upload-image ' + helpClass} onClick={this.uploadImage} value="" title="Send pics to the group" data-tooltip-content="Send pics to the group" data-tooltip-my-position="center left" data-tooltip-at-position="center right" />
           <AutocompleteInput
             ref="autocompleteInput"
             changeHandler={this.props.startTypingFn}

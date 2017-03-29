@@ -574,8 +574,10 @@ var MoodBoardEvent = React.createClass({
                     className="active walkthrough-messages"
                     role="presentation"
                     title="View your dresses"
-                    data-content="Create new looks and vote on your favorites"
-                    data-placement="bottom">
+                    data-tooltip-content="Create new looks and vote on your favorites"
+                    data-tooltip-my-position="top center"
+                    data-tooltip-at-position="bottom center"
+                    data-placement="   bottom">
                     <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                       Bridesmaid dresses</a>
                   </li>
@@ -583,8 +585,9 @@ var MoodBoardEvent = React.createClass({
                     role="presentation"
                     className="walkthrough-messages"
                     title="Update the details"
-                    data-content="Input everything you need to know about the big day"
-                    data-placement="top">
+                    data-tooltip-content="Input everything you need to know about the big day"
+                    data-tooltip-my-position="bottom center"
+                    data-tooltip-at-position="top center">
                     <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
                     Wedding details</a>
                   </li>
@@ -592,8 +595,9 @@ var MoodBoardEvent = React.createClass({
                     role="presentation"
                     className="walkthrough-messages"
                     title="Manage the group"
-                    data-content="Add, view, and remove members of the bridal party"
-                    data-placement="bottom">
+                    data-tooltip-content="Add, view, and remove members of the bridal party"
+                    data-tooltip-my-position="top center"
+                    data-tooltip-at-position="bottom center">
                     <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">Bridal party</a>
                   </li>
                   <li role="presentation" className="bridal-gowns">
@@ -606,7 +610,7 @@ var MoodBoardEvent = React.createClass({
               </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat {...chatProps}/>
+                  <Chat {...$.extend({ mobile: true}, chatProps)}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   {addNewDressBigButton}
