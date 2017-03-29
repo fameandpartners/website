@@ -116,7 +116,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       metaDescription.totalFilters++
     if updateRequestParams.style && updateRequestParams.style.length
       metaDescription.totalFilters++
-    if updateRequestParams.color && updateRequestParams.color.length
+    if updateRequestParams.color_group && updateRequestParams.color_group.length
       metaDescription.totalFilters++
     if @ORDERS[updateRequestParams.order]
       metaDescription.sortDescription = @ORDERS[updateRequestParams.order]
