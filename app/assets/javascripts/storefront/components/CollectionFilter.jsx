@@ -176,12 +176,6 @@ class CollectionFilterSort extends Component {
       this.trackSelection('COLLECTION_PRICE_FILTER_SELECTION', newPrices.join(' '));
     }
 
-    handleAllPriceSelection(){
-      const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
-      const newPrices = PRICES.map(p => p.id);
-      this.updatePrice(newPrices);
-    }
-
     handlePriceSelection(id){
       const { isDrawerLayout, filters, setSelectedPrices, } = this.props;
       return () => {
@@ -210,12 +204,6 @@ class CollectionFilterSort extends Component {
       }
 
       this.trackSelection('COLLECTION_STYLE_FILTER_SELECTION', newStyles.join(' '));
-    }
-
-    handleAllSelectedStyles(){
-      const { $$bodyStyles, temporaryFilters, } = this.props;
-      const newStyles = $$bodyStyles.toJS().map(s => s.permalink);
-      return () => { this.updateStyles(newStyles); };
     }
 
     handleStyleSelection(style){
@@ -250,10 +238,6 @@ class CollectionFilterSort extends Component {
       }
 
       this.trackSelection('COLLECTION_BODYSHAPE_FILTER_SELECTION', newShapes.join(' '));
-    }
-
-    handleAllSelectedShapes(){
-      return () => { this.updateShapes(this.props.$$bodyShapes.toJS()); };
     }
 
     handleShapeSelection(shapeId){
@@ -317,7 +301,7 @@ class CollectionFilterSort extends Component {
         <label key={`shape-${shape}`} className="ExpandablePanel__option ExpandablePanel__listColumn" name="shape">
           <input
             onChange={this.handleShapeSelection(shape)}
-            checked={selectedShapes.indexOf(shape) > -1 || selectedShapes.indexOf('all') > -1}
+            checked={selectedShapes.indexOf(shape) > -1}
             data-all="false"
             id={`shape-${shape}`}
             name={`shape-${shape}`}
@@ -337,7 +321,7 @@ class CollectionFilterSort extends Component {
         <label key={`style-${style.permalink}`} className="ExpandablePanel__option ExpandablePanel__listColumn" name="style">
           <input
             onChange={this.handleStyleSelection(style)}
-            checked={selectedStyles.indexOf(style.permalink) > -1 || selectedStyles.indexOf('all') > -1}
+            checked={selectedStyles.indexOf(style.permalink) > -1}
             data-all="false"
             id={`style-${style.permalink}`}
             name={`style-${style.permalink}`}
@@ -471,19 +455,6 @@ class CollectionFilterSort extends Component {
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
                               <div className="ExpandablePanel__listTwoColumns">
-                                <label className="ExpandablePanel__option ExpandablePanel__listColumn" name="style">
-                                  <input
-                                    onChange={this.handleAllSelectedStyles()}
-                                    checked={filters.selectedStyles.length === $$bodyStyles.toJS().length}
-                                    data-all="true"
-                                    id="styles-all"
-                                    name="styles-all"
-                                    type="checkbox"
-                                  />
-                                    <span className="checkboxBlackBg__check">
-                                        <span className="ExpandablePanel__optionName">All styles</span>
-                                    </span>
-                                </label>
                                 {$$bodyStyles.toJS().map(this.buildStyleOptions)}
                               </div>
                             </div>
@@ -505,19 +476,6 @@ class CollectionFilterSort extends Component {
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
                               <div className="ExpandablePanel__listTwoColumns">
-                                <label className="ExpandablePanel__option ExpandablePanel__listColumn" name="bodyshape">
-                                  <input
-                                    onChange={this.handleAllSelectedShapes()}
-                                    checked={filters.selectedShapes.length === $$bodyShapes.toJS().length}
-                                    data-all="true"
-                                    id="shapes-all"
-                                    name="shapes-all"
-                                    type="checkbox"
-                                  />
-                                    <span className="checkboxBlackBg__check">
-                                        <span className="ExpandablePanel__optionName">All shapes</span>
-                                    </span>
-                                </label>
                                 {$$bodyShapes.toJS().map(this.buildShapeOptions)}
                               </div>
                             </div>
@@ -539,21 +497,6 @@ class CollectionFilterSort extends Component {
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
                               <div>
-                                <label className="ExpandablePanel__option" name="price">
-                                  <input
-                                    checked={filters.selectedPrices.length === 3}
-                                    className="js-filter-all"
-                                    data-all="true"
-                                    id="price-all"
-                                    onChange={this.handleAllPriceSelection}
-                                    name="price-all"
-                                    type="checkbox"
-                                    value="all"
-                                  />
-                                    <span className="checkboxBlackBg__check">
-                                        <span className="ExpandablePanel__optionName">All prices</span>
-                                    </span>
-                                </label>
                                 {PRICES.map( (p, i) => {
                                   return (
                                     <label key={`price-${p.id}`} className="ExpandablePanel__option" name="price">
