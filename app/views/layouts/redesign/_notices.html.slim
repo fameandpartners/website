@@ -1,5 +1,5 @@
 // TEMPORARY SALE BANNER for the EQUAL PAY DAY campaign
-- if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
+- if equal_pay_active?
 
 #sale-banner.alert-sale.equal-pay-day role="alert"
   .outer-wrap
