@@ -3,7 +3,10 @@ module WeddingAtelier
     belongs_to :owner, class_name: 'Spree::User'
 
     has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
-    has_many :assistants, through: :event_assistants, source: :user
+    has_many :assistants,
+              through: :event_assistants,
+              source: :user,
+              conditions: ['wedding_atelier_signup_step in (?)', Spree::User::WEDDING_ATELIER_COMPLETED_STEPS]
     has_many :dresses, class_name: 'WeddingAtelier::EventDress'
     has_many :invitations
 
