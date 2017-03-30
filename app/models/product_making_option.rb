@@ -7,7 +7,7 @@ class ProductMakingOption < ActiveRecord::Base
   DEFAULT_OPTION_PRICE = 30
   DEFAULT_CURRENCY     = 'USD'.freeze
   ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase).freeze
-  OPTION_TYPES         = [DEFAULT_OPTION_TYPE].freeze
+  OPTION_TYPES         = ['fast_making', 'slow_making']  #[DEFAULT_OPTION_TYPE].freeze
 
   # NOTE: `#option_type` is not related to Spree::OptionType at all!
   attr_accessible :option_type, :currency, :price, :active
@@ -17,7 +17,7 @@ class ProductMakingOption < ActiveRecord::Base
             presence:   true,
             uniqueness: { scope: :product_id }
 
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :price, numericality: true#{ greater_than_or_equal_to: 0 }
 
   validates :currency, inclusion: ALL_CURRENCIES
 
@@ -37,10 +37,18 @@ class ProductMakingOption < ActiveRecord::Base
   end
 
   def name
-    'Express Making'
+    if fast_making?
+      'Express Making'
+    else
+      'Delayed Making'
+    end
   end
 
   def fast_making?
     option_type == 'fast_making'
+  end
+
+  def slow_making?
+    option_type == 'slow_making'
   end
 end

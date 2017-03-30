@@ -25,7 +25,7 @@ class Products::DetailsController < Products::BaseController
 
     @product.color_id   = color.try(:id)
     @product.color_name = color.try(:name)
-
+    binding.pry
     # make express delivery as default option
     @product.making_option_id = @product.making_options.first.try(:id)
 

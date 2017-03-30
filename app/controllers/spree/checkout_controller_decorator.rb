@@ -330,6 +330,7 @@ Spree::CheckoutController.class_eval do
   helper_method :current_step
 
   def update_adjustments
+    binding.pry
     @order.create_tax_charge!
     @order.updater.update_adjustments
   end

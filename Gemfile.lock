@@ -282,6 +282,7 @@ GEM
     business_time (0.7.4)
       activesupport (>= 3.1.0)
       tzinfo
+    byebug (9.0.6)
     cancan (1.6.8)
     capybara (2.11.0)
       addressable
@@ -568,6 +569,7 @@ GEM
       json (>= 1.7.7)
     mastercard_api (0.0.1)
     mastercard_masterpass_api (0.0.1)
+    method_source (0.8.2)
     mime-types (1.25.1)
     money (5.1.1)
       i18n (~> 0.6.0)
@@ -630,6 +632,13 @@ GEM
       activerecord (~> 3.0)
     polyglot (0.3.5)
     power_assert (0.2.6)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.2)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     psych (2.1.0)
     puma (3.4.0)
     quiet_assets (1.1.0)
@@ -799,6 +808,7 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
+    slop (3.6.0)
     split (2.2.0)
       redis (>= 2.1)
       simple-random (>= 0.9.3)
@@ -941,6 +951,7 @@ DEPENDENCIES
   pg
   pin_payment
   poltergeist (~> 1.12.0)
+  pry-byebug
   psych (~> 2.1.0)
   puma
   quiet_assets
@@ -996,4 +1007,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.14.3
+   1.14.6
