@@ -227,16 +227,17 @@ javascript:
 
     function initSticky() {
 
-      var safeStickyBottomSpacing = $('.pdp').innerHeight() - $('.pdp > .container').outerHeight() + $('.js-footer').outerHeight();
+      var safeStickyBottomSpacing = $('.pdp').innerHeight() - $('.pdp > .container').outerHeight() + $('.js-footer').outerHeight(),
+          fixedHeaderOuterHeight = $('.js-header').outerHeight();
 
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
-        topSpacing: $('.js-fixed-header').outerHeight(),
+        topSpacing: fixedHeaderOuterHeight,
         bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
-        topSpacing: $('.js-fixed-header').outerHeight(),
+        topSpacing: fixedHeaderOuterHeight,
         bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-left').sticky('update');

@@ -52,7 +52,7 @@ ruby:
   = raw side_menu_init
 
 - cache [:layout, :header, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
-  header.main
+  header.main.js-header
 
     .nav-menu.nav-alert-top
       #fixed-header.fixed-header.js-fixed-header
@@ -89,5 +89,5 @@ ruby:
     - ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
       - if variation === 'mega'
         = render 'layouts/redesign/header/mega_side_nav'
-      - else 
+      - else
         = render 'layouts/redesign/header/simplified_side_nav'
