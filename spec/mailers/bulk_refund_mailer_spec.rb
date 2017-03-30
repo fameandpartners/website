@@ -1,15 +1,27 @@
 require 'spec_helper'
 
 describe BulkRefundMailer, type: :mailer do
-  let(:events) do
-    3.times.map { |i| double(ItemReturnEvent, data: { refund_amount: '42' }, id: i) }
+  let(:statistics) do
+    {
+      error: [
+        { 'item_return_id' => 104, 'result' => { 'message' => 'error1' } },
+        { 'item_return_id' => 105, 'result' => { 'message' => 'error2' } },
+        { 'item_return_id' => 106, 'result' => { 'message' => 'error3' } },
+      ],
+      success: [
+        { 'item_return_id' => 101 },
+        { 'item_return_id' => 102 },
+        { 'item_return_id' => 103 }
+      ]
+    }
   end
 
   let(:expected_attributes) do
     {
       email_to: "",
       subject:  "Bulk refund report",
-      events:   [ 0, 1, 2 ]
+      success: [ 101, 102, 103 ],
+      fails: [ [ 104, 'error1' ], [ 105, 'error2' ], [ 106, 'error3' ] ]
     }
   end
 
@@ -17,7 +29,7 @@ describe BulkRefundMailer, type: :mailer do
     it 'sends data to customerio correctly' do
       expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(nil, 'bulk_refund_report_email', expected_attributes)
 
-      BulkRefundMailer.report(events).deliver
+      BulkRefundMailer.report(statistics).deliver
     end
   end
 end
