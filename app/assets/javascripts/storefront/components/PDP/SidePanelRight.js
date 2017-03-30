@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import SidePanelSize from './SidePanelSize';
+import React, {PropTypes,} from 'react';
+import {connect,} from 'react-redux';
+import SizeProfile from './SizeProfile';
 import SidePanelLength from './SidePanelLength';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
@@ -52,23 +52,17 @@ class PdpSidePanelRight extends React.Component {
               </li>
             </ul>
 
-            <div id="tab-size-fit" className="c-card-customize active" role="tabpanel">
-              <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Specify your size</h2>
-              {ERROR_MESSAGE}
-              <SidePanelSize />
-              <SidePanelLength />
-            </div>
 
             <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
-                <SidePanelColor />
-                {(() => {
-                  if(this.props.skirts.length) {
-                    return (
-                      <SidePanelCustom />
-                    );
-                  }
-                })()}
+              <div id="tab-size-fit" className="c-card-customize active" role="tabpanel">
+                {ERROR_MESSAGE}
+              </div>
+
+              <SidePanelColor />
+              <SizeProfile />
+              {this.props.skirts.length ?  <SidePanelCustom /> : null}
+
             </div>
           </div>
           <SidePanelFastMaking />
@@ -93,14 +87,16 @@ class PdpSidePanelRight extends React.Component {
 PdpSidePanelRight.propTypes = {
   skirts: PropTypes.array.isRequired,
   customize: PropTypes.object.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
+  console.log('state', state);
+  console.log('ownProps', ownProps);
   return {
     skirts: state.skirts,
     customize: state.customize,
-    product: state.product
+    product: state.product,
   };
 }
 

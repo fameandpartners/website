@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 import React from 'react';
-import {render} from 'react-dom';
+import {render,} from 'react-dom';
 import configureStore from './store/configureStore';
-import {Provider} from 'react-redux';
+import {Provider,} from 'react-redux';
 
 import PdpGallery from './components/PDP/Gallery';
 import PdpSidePanelRight from './components/PDP/SidePanelRight';
