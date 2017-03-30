@@ -41,53 +41,28 @@
                       = link_to content_tag(:span, 'Back to Top'), '#top'
 
             .panel.content-collapse-expand.panel-default
-              - if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
-                .panel-heading role="tab"
-                  a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
-                    | March 2017
-                    span.btn-open-close
+              .panel-heading role="tab"
+                a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                  | March 2017
+                  span.btn-open-close
 
-                .panel-collapse.collapse role="tabpanel"
-                  .panel-body
-                    p.highlight Friends and fashion followers,
+              .panel-collapse.collapse role="tabpanel"
+                .panel-body
+                  p.highlight Friends and fashion followers,
 
-                    p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
+                  p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
 
-                    p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
+                  p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
 
-                    p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
+                  p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
 
-                    p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
+                  p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
 
-                    p Warm wishes,
-                    p Nyree Corby
-                    p.highlight.title CEO & Founder
-                    .back-to-top
-                      = link_to content_tag(:span, 'Back to Top'), '#top'
-
-              - else
-                .panel-heading role="tab"
-                  a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
-                    | March 2017
-                    span.btn-open-close
-
-                .panel-collapse.collapse.in role="tabpanel"
-                  .panel-body
-                    p.highlight Friends and fashion followers,
-
-                    p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
-
-                    p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
-
-                    p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
-
-                    p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
-
-                    p Warm wishes,
-                    p Nyree Corby
-                    p.highlight.title CEO & Founder
-                    .back-to-top
-                      = link_to content_tag(:span, 'Back to Top'), '#top'
+                  p Warm wishes,
+                  p Nyree Corby
+                  p.highlight.title CEO & Founder
+                  .back-to-top
+                    = link_to content_tag(:span, 'Back to Top'), '#top'
 
             .panel.content-collapse-expand.panel-default
               .panel-heading role="tab"
