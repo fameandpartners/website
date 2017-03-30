@@ -224,6 +224,11 @@ header.main {
   }
 
   @media (min-width: $bootstrap-md-width) {
+
+    &.locale-warn-active {
+      padding-bottom: $fixed-header-with-locale-warn;
+    }
+
     #fixed-header {
       position: fixed;
     }
