@@ -36,7 +36,8 @@ class Repositories::CartProduct
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: line_item.delivery_period
+        delivery_period: product.delivery_period,
+        from_wedding_atelier: wedding_atelier_product?
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       result.color  = Repositories::ProductColors.read(color_id)
@@ -50,6 +51,10 @@ class Repositories::CartProduct
   cache_results :read
 
   private
+
+    def wedding_atelier_product?
+      Spree::Taxonomy.where(id: product.taxons.map(&:taxonomy_id), name: 'Wedding Atelier').any?
+    end
 
     def cache_key
       line_item.cache_key
