@@ -97,6 +97,8 @@ class CtaPrice extends React.Component {
         && this.props.customize.length.id
     );
 
+    const afterpayPrice = ( (calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2)
+
     return (
       <div className="btn-wrap">
         {(() => {
@@ -120,7 +122,7 @@ class CtaPrice extends React.Component {
           if(isAfterpayEnabled) {
             return (
               <div className="afterpay-message">
-                <span>or 4 easy payments of ${calculatePrice.original / 4} with</span>
+                <span>or 4 easy payments of ${afterpayPrice} with</span>
                 <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
                 <a href="javascript:;" onClick={this.openModal}>info</a>
               </div>
