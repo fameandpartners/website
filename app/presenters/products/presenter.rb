@@ -178,6 +178,7 @@ module Products
           end
 
           {
+                   currency: price.currency,
             original_amount: price.amount,
                 sale_amount: sale_price&.amount,
             discount_amount: discount_amount,
@@ -186,9 +187,6 @@ module Products
             discount_string: discount_string
           }
         end
-    end
-
-    def prices_block
     end
 
     # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
