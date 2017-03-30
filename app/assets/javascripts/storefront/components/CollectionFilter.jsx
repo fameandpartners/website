@@ -408,7 +408,7 @@ class CollectionFilterSort extends Component {
         return (
             <div className="CollectionFilterSort">
                 <div className="FilterSort">
-                    <div className="ExpandablePanel">
+                    <div className="ExpandablePanel--wrapper">
                         <div className="ExpandablePanel__heading">
                             <span className="ExpandablePanel__mainTitle">{isDrawerLayout ? 'Filter' : 'Filter by'}</span>
                             <div className="ExpandablePanel__clearAllWrapper">

@@ -1,5 +1,17 @@
 /* [Filter / Sort]
 -------------------------------------------------------*/
+// viewport height all mobile wrappers
+.ExpandablePanel--mobile {
+  #js-CollectionFilterMobile,
+  .CollectionFilterSort,
+  .ExpandablePanel--wrapper {
+    height: 100%;
+  }
+}
+
+.ExpandablePanel--mobile .FilterSort {
+  height: 1000px;
+}
 
 .FilterSort__border {
   border: 2px solid $c-neutral-black;
@@ -29,7 +41,6 @@
   display: block;
   position: fixed;
   overflow-y: scroll;
-  padding-bottom: 70px;
   background: $c-neutral-white;
   z-index: 999;
   height: 100%;
@@ -69,8 +80,13 @@
   // Attach the action buttons to the bottom of screen
   .ExpandablePanel__action {
     width: 100%;
-    position: fixed;
+    position: sticky;
     bottom: 0;
+  }
+
+  .ExpandablePanel__filterTriggers--cancel-apply {
+    display: flex;
+    width: 100%;
   }
 
 }
@@ -140,7 +156,7 @@
 }
 
 
-.ExpandablePanel {
+.ExpandablePanel--wrapper {
 
   input[type="checkbox"] {
     display: none;

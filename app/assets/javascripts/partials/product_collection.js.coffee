@@ -69,8 +69,10 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   toggleFilters:(forceToggle) ->
     $('.ExpandablePanel-filter--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+    $('body').toggleClass('no-scroll', forceToggle)
   toggleSort:(forceToggle) ->
     $('.ExpandablePanel-sort--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+    $('body').toggleClass('no-scroll', forceToggle)
 
 
   # This is duplicated, redundant code, but is necessary because we have to initialize legacy
