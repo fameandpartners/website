@@ -28,6 +28,7 @@ module Marketing
                 total_amount: 33.33,
                 sku:          'LineItemSKU',
                 variant_sku:  'VariantSKU',
+                variant_price: 198.37,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',
                 image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.
