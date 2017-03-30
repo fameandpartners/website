@@ -9,12 +9,22 @@
  */
 
 var Notification = React.createClass({
+  propTypes: {
+    notifications: React.PropTypes.array
+  },
+
   getInitialState: function () {
     return {
       notifications: [],
       show: false,
       timeOut: 8000
     };
+  },
+
+  componentDidMount: function(){
+    if(this.props.notifications){
+      this.notify(this.props.notifications);
+    }
   },
 
   notify: function(notifications){
