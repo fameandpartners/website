@@ -46,7 +46,7 @@
     width: 240px;
 
     @include screen-md {
-      width: 355px;
+      width: 400px;
     };
 
     &-close {
@@ -60,7 +60,7 @@
     }
 
     &-container {
-      padding: 45px 25px 0;
+      padding: 40px 10px 0;
     }
 
     &-title {
