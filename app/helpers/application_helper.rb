@@ -127,7 +127,7 @@ module ApplicationHelper
     prices = product.prices || {}
 
     if prices[:sale_string].present?
-      discount_message = prices[:discount_present].present? ? "Save #{prices[:discount_string]}" : nil
+      discount_message = prices[:discount_string].present? ? "Save #{prices[:discount_string]}" : nil
       [
         content_tag(:span, prices[:original_string], class: 'price-original'),
         content_tag(:span, prices[:sale_string], class: 'price-sale'),
