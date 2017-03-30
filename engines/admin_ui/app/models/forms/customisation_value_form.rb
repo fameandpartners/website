@@ -22,7 +22,7 @@ module Forms
               allow_blank: true
 
     def products
-      Spree::Product.active
+      Spree::Product.all
     end
 
     def customisation_types
