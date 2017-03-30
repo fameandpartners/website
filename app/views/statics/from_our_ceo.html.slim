@@ -7,66 +7,91 @@
       .page-content.content-collapse-expand.col-md-10.col-md-offset-1
         #panel-articles.tab-pane.active role='tabpanel'
           .panel-group roll='tablist' aria-multiselectable='true'
+            - if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
+              .panel.content-collapse-expand.panel-default
+                .panel-heading role="tab"
+                  a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                    | Equal Pay Day
+                    span.btn-open-close
+
+                .panel-collapse.collapse.in role="tabpanel"
+                  .panel-body
+                    p.highlight Friends and fashion followers,
+
+                    p I write this to you on Equal Pay Day, a day that symbolizes how far into the year women have to work in order to earn as much as men did in the previous calendar year. In 2017, the average gender wage gap in the United States falls between 18% - 21%–which, frankly, is unacceptable – especially when the gap is significantly steeper for Black, Hispanic, Asian, Native, minority and trans women.
+
+                    p I built Fame and Partners on the belief that women deserve more: more choices, more power, more brands that truly advocate for their needs. We advocate for women’s rights on a daily basis, and on Equal Pay Day we’re using our platform to raise awareness for gender inequality in the workplace–after all, awareness is the first step towards righting injustice.
+
+                    p For one day only, each piece on www.fameandpartners.com will be 21% off in representation of the 2017 wage gap.
+
+                    p As you may know, Fame and Partners never goes on sale–as a made-to-order, on-demand label that never mass produces its garments or carries stock, we don’t need to. Instead, we offer lower prices upfront without having to ‘bake in the’ markdowns (which is sadly the standard practice in the retail industry).
+
+                    p Hosting our first-ever flash sale is a big deal–but we felt it was necessary in order to raise awareness for women’s wage equality and the meaning behind Equal Pay Day.
+
+                    p In addition to marking down every single item by 21%, Fame and Partners will donate $5 of every sale to women’s empowerment projects around the world, including funding programs with UN Women that help end violence against women in Papua New Guinea and Plan International, which provides sanitary supplies for girls in Uganda. With each purchase, Fame and Partners hopes to create a cycle of women empowering women and give each customer a chance to dress up, give back and empower another woman.
+
+                    p I’d like to encourage you all to take more concrete action against the wage gap, as well. You can find more information on which state representatives to contact and specific state and federal actions to take here, courtesy of the #{link_to 'AAUW', 'http://www.aauw.org/resource/gender-pay-gap-by-state-and-congressional-district/'}.
+
+                    p Let’s fight the wage gap–and look fierce while doing so. Click #{link_to 'here', dresses_path} to shop the Equal Pay Day flash sale.
+
+                    p Warm wishes,
+                    p Nyree Corby
+                    p.highlight.title CEO & Founder
+                    .back-to-top
+                      = link_to content_tag(:span, 'Back to Top'), '#top'
+
+            .panel.content-collapse-expand.panel-default
+              - if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Apr 3 9:00pm -7:00'), DateTime.parse('Apr 5 0:01am -7:00'))
+                .panel-heading role="tab"
+                  a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                    | March 2017
+                    span.btn-open-close
+
+                .panel-collapse.collapse role="tabpanel"
+                  .panel-body
+                    p.highlight Friends and fashion followers,
+
+                    p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
+
+                    p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
+
+                    p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
+
+                    p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
+
+                    p Warm wishes,
+                    p Nyree Corby
+                    p.highlight.title CEO & Founder
+                    .back-to-top
+                      = link_to content_tag(:span, 'Back to Top'), '#top'
+
+              - else
+                .panel-heading role="tab"
+                  a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                    | March 2017
+                    span.btn-open-close
+
+                .panel-collapse.collapse.in role="tabpanel"
+                  .panel-body
+                    p.highlight Friends and fashion followers,
+
+                    p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
+
+                    p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
+
+                    p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
+
+                    p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
+
+                    p Warm wishes,
+                    p Nyree Corby
+                    p.highlight.title CEO & Founder
+                    .back-to-top
+                      = link_to content_tag(:span, 'Back to Top'), '#top'
 
             .panel.content-collapse-expand.panel-default
               .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
-                  | Equal Pay Day
-                  span.btn-open-close
-
-              .panel-collapse.collapse.in role="tabpanel"
-                .panel-body
-                  p.highlight Friends and fashion followers,
-
-                  p I write this to you on Equal Pay Day, a day that symbolizes how far into the year women have to work in order to earn as much as men did in the previous calendar year. In 2017, the average gender wage gap in the United States falls between 18% - 21%–which, frankly, is unacceptable – especially when the gap is significantly steeper for Black, Hispanic, Asian, Native, minority and trans women.
-
-                  p I built Fame and Partners on the belief that women deserve more: more choices, more power, more brands that truly advocate for their needs. We advocate for women’s rights on a daily basis, and on Equal Pay Day we’re using our platform to raise awareness for gender inequality in the workplace–after all, awareness is the first step towards righting injustice.
-
-                  p For one day only, each piece on www.fameandpartners.com will be 21% off in representation of the 2017 wage gap.
-
-                  p As you may know, Fame and Partners never goes on sale–as a made-to-order, on-demand label that never mass produces its garments or carries stock, we don’t need to. Instead, we offer lower prices upfront without having to ‘bake in the’ markdowns (which is sadly the standard practice in the retail industry).
-
-                  p Hosting our first-ever flash sale is a big deal–but we felt it was necessary in order to raise awareness for women’s wage equality and the meaning behind Equal Pay Day.
-
-                  p In addition to marking down every single item by 21%, Fame and Partners will donate $5 of every sale to women’s empowerment projects around the world, including funding programs with UN Women that help end violence against women in Papua New Guinea and Plan International, which provides sanitary supplies for girls in Uganda. With each purchase, Fame and Partners hopes to create a cycle of women empowering women and give each customer a chance to dress up, give back and empower another woman.
-
-                  p I’d like to encourage you all to take more concrete action against the wage gap, as well. You can find more information on which state representatives to contact and specific state and federal actions to take here, courtesy of the #{link_to 'AAUW', 'http://www.aauw.org/resource/gender-pay-gap-by-state-and-congressional-district/'}.
-
-                  p Let’s fight the wage gap–and look fierce while doing so. Click #{link_to 'here', dresses_path} to shop the Equal Pay Day flash sale.
-
-                  p Warm wishes,
-                  p Nyree Corby
-                  p.highlight.title CEO & Founder
-                  .back-to-top
-                    = link_to content_tag(:span, 'Back to Top'), '#top'
-
-            .panel.content-collapse-expand.panel-default
-              .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
-                  | March 2017
-                  span.btn-open-close
-
-              .panel-collapse.collapse role="tabpanel"
-                .panel-body
-                  p.highlight Friends and fashion followers,
-
-                  p This month, Women’s History Month, we celebrate International Women’s Day: a day to reflect on the power of women, the progress we’ve made, the women who paved the way–and the work that’s still ahead.
-
-                  p Women have always been the inspiration behind Fame and Partners. I founded the company in the hopes of empowering women to fully express themselves sartorially–my goal was (and is) to not only give women more options in their wardrobe, but to honor women’s individuality in an era of mass-produced fast fashion.
-
-                  p I am so proud that Fame and Partners has been able to take this mission even farther. $5 of every single sale now goes to women’s empowerment initiatives in partnership with UN Women, Plan International, and Akilah. We’ve donated hundreds of dollars to Planned Parenthood and the ACLU through our #{link_to '#slayitforward', slay_it_forward_path} movement. We marched in solidarity with 750,000 other women and men at the Women’s March LA earlier this year. We are utterly dedicated to using the power of personal style to advance women.
-
-                  p I can’t wait to reveal the next steps Fame and Partners is taking to bring attention to incredible women around the world and tackle gender equality head-on. Stay tuned.
-
-                  p Warm wishes,
-                  p Nyree Corby
-                  p.highlight.title CEO & Founder
-                  .back-to-top
-                    = link_to content_tag(:span, 'Back to Top'), '#top'
-
-            .panel.content-collapse-expand.panel-default
-              .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | February 2017
                   span.btn-open-close
 
@@ -94,7 +119,7 @@
 
             .panel.content-collapse-expand.panel-default
               .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | January 2017
                   span.btn-open-close
 
@@ -124,7 +149,7 @@
 
             .panel.content-collapse-expand.panel-default
               .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | December 2016
                   span.btn-open-close
 
@@ -148,7 +173,7 @@
 
             .panel.content-collapse-expand.panel-default
               .panel-heading role="tab"
-                a.panel-title href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                a.panel-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | November 2016
                   span.btn-open-close
 
