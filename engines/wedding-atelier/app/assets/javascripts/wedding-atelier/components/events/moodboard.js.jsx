@@ -576,8 +576,7 @@ var MoodBoardEvent = React.createClass({
                     title="View your dresses"
                     data-tooltip-content="Create new looks and vote on your favorites"
                     data-tooltip-my-position="top center"
-                    data-tooltip-at-position="bottom center"
-                    data-placement="   bottom">
+                    data-tooltip-at-position="bottom center">
                     <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                       Bridesmaid dresses</a>
                   </li>
