@@ -22,12 +22,20 @@
     };
   }
 
+  .left-side {
+    @media (max-height: 701px) {
+      overflow: auto;
+    }
+  }
+
+
   .left-side-centered-container {
     max-width: 340px;
     margin: 0 auto;
 
     &.registrations__new-form {
       margin-bottom: 50px;
+      margin-top: 50px;
     }
 
     @include screen-lg {
