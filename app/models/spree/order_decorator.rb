@@ -202,45 +202,49 @@ Spree::Order.class_eval do
   # WITH THIS SOLUTION , WE ARE NOW HAVING AN SMALL ISSUE WITH MULTIPLE SAME ITEM WITH QUANTITY = 1
   # SINCE THIS SMALL ISSUE IS NOT REALLY DAMAGING , WE WANT TO LEAVE IT LIKE THAT FOR NOW
   def add_variant(variant, quantity = 1, currency = nil)
-    price = variant.price_in(currency || self.currency)
+    prices_amount = get_prices_amount(variant, currency || self.currency)
+
     current_item = Spree::LineItem.new(:quantity => quantity)
     current_item.variant = variant
+
     if currency
       current_item.currency = currency
     end
 
-    if variant.in_sale?
-      current_item.price = price.apply(variant.discount).amount
-      current_item.old_price = price.amount
+    if prices_amount[:sale_amount].present?
+      current_item.price = prices_amount[:sale_amount]
+      current_item.old_price = prices_amount[:original_amount]
     else
-      current_item.price = price.amount
+      current_item.price = prices_amount[:original_amount]
     end
-    self.line_items << current_item
 
+    self.line_items << current_item
     self.reload
     current_item
   end
 
   def update_line_item(current_item, variant, quantity, currency)
-    price = variant.price_in(currency)
+    prices_amount = get_prices_amount(variant, currency)
 
     current_item.currency    = currency
     current_item.variant     = variant
     current_item.quantity    = quantity
 
-    if variant.in_sale?
-      current_item.price = price.apply(variant.discount).amount
-      current_item.old_price = price.amount
+    if prices_amount[:sale_amount].present?
+      current_item.price = prices_amount[:sale_amount]
+      current_item.old_price = prices_amount[:original_amount]
     else
-      current_item.price = price.amount
+      current_item.price = prices_amount[:original_amount]
     end
-    #current_item.price       = price.final_amount
-    #if variant.in_sale?
-    #  current_item.old_price = price.amount_without_discount
-    #end
 
     current_item.save
     self.reload
+  end
+
+  def get_prices_amount(variant, currency)
+    price  = variant.price_in(currency)
+    prices = Products::Presenter.new(product: variant.product, price: price).prices
+    prices.slice(:sale_amount, :original_amount)
   end
 
   def log_confirm_email_error(error = nil)
