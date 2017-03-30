@@ -23,7 +23,7 @@ module Marketing
         end
 
         def price_with_discount
-          product.price_amount
+          product.price_amount&.to_f&.round(2)
         end
 
         def discount_percent

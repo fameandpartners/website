@@ -121,8 +121,7 @@ module ApplicationHelper
   end
 
   # @param product [Object] database record or presenter
-  # [DEPRECATED] @return [String] complete string with price markup
-  # @return [Hash] complete hash of price, discount and new price
+  # @return [String] complete string with price markup
   def product_price_with_discount(product)
     prices = product.prices || {}
 

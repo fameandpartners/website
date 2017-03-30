@@ -96,7 +96,7 @@ module Marketing
               id:                123,
               name:              'Super Dress',
               price:             12.34,
-              priceWithDiscount: "$8.64",
+              priceWithDiscount: 8.64,
               selectedColor:     'Red',
               sizes:             ['US 2'],
               sku:               'ABC123',

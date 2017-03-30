@@ -102,7 +102,7 @@ module Products
         let(:new_price) { Spree::Price.new(amount: 13.5, currency: currency) }
 
         it 'returns the amount of the product price with the discount' do
-          expect(product.price_amount).to eq(new_price.display_price.to_s )
+          expect(product.price_amount).to eq(new_price.amount)
         end
       end
 
@@ -110,7 +110,7 @@ module Products
         let(:discount) { nil }
 
         it 'returns the full amount of the product price' do
-          expect(product.price_amount).to eq(price.display_price.to_s)
+          expect(product.price_amount).to eq(price.amount)
         end
       end
 
@@ -118,7 +118,7 @@ module Products
         let(:discount) { OpenStruct.new(amount: 0, size: 0) }
 
         it 'returns the full amount of the product price' do
-          expect(product.price_amount).to eq(price.display_price.to_s)
+          expect(product.price_amount).to eq(price.amount)
         end
       end
     end
@@ -203,10 +203,13 @@ module Products
         let(:discount) { nil }
 
         it 'returns only original price' do
-          expect(presenter.prices).to eq({
-            original: '$100.00',
-            sale: nil,
-            discount: nil
+          expect(presenter.prices).to include({
+            original_amount: 100.0,
+                sale_amount: nil,
+            discount_amount: nil,
+            original_string: '$100.00',
+                sale_string: nil,
+            discount_string: nil
           })
         end
       end
@@ -215,10 +218,13 @@ module Products
         let(:discount) { OpenStruct.new(amount: 10, size: 10) }
 
         it 'returns price with discount' do
-          expect(presenter.prices).to eq({
-            original: '$100.00',
-            sale: '$90.00',
-            discount: '10%'
+          expect(presenter.prices).to include({
+            original_amount: 100.0,
+                sale_amount: 90.0,
+            discount_amount: 10,
+            original_string: '$100.00',
+                sale_string: '$90.00',
+            discount_string: '10%'
           })
         end
       end
