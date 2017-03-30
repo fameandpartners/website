@@ -36,7 +36,7 @@ module WeddingAtelier
       end
 
       def height_group(height)
-        definitions.detect {|_, h| h.include?(height) }.first.to_s
+        definitions.detect {|_, h| h.include?(height) }.first.to_s if height
       end
     end
   end
