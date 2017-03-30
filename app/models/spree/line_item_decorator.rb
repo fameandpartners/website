@@ -46,7 +46,9 @@ Spree::LineItem.class_eval do
   def price
     total_price = super
 
-    if
+    if making_options.exists?
+      total_price += making_options_price_adjustment
+    end
 
     if personalization.present?
       total_price += personalization.price
@@ -56,12 +58,13 @@ Spree::LineItem.class_eval do
   end
 
   # this method returns the total adjustment of all making_options adjustments
-  def making_options_price_adjust
+  def making_options_price_adjustment
     total_adjustment = 0
     making_options.each do |mo|
       if mo.fast_making?
         total_adjustment += mo.price
       end
+      # slow_making price will be percentage based
       if mo.slow_making?
         total_adjustment += total_adjustment*mo.price
       end
