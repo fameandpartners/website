@@ -1,5 +1,5 @@
 // TEMPORARY HERO CAROUSEL FOR EQUAL PAY DAY
-- if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Mar 29 5:00pm -7:00'), DateTime.parse('Mar 30 4:00pm -7:00'))
+- if equal_pay_active?
 
   // Carousel Item 1
   - current_tile_image = "homepage/hero-featured/equal-pay-featured-1.jpg"
