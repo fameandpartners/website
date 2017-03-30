@@ -1,5 +1,5 @@
 // TEMPORARY HERO CAROUSEL FOR EQUAL PAY DAY
-- if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Mar 29 3:00pm -7:00'), DateTime.parse('Mar 29 5:00pm -7:00'))
+- if current_site_version.is_usa? && Time.zone.now.between?(DateTime.parse('Mar 29 5:00pm -7:00'), DateTime.parse('Mar 30 4:00pm -7:00'))
 
   // Carousel Item 1
   - current_tile_image = "homepage/hero-featured/equal-pay-featured-1.jpg"
@@ -45,7 +45,7 @@
               h2.heading.no-margin-md
                 span.title.title--large Let's <em>end</em> <br class="visible-lg-block">gender inequality.
                 span.sub-heading
-                    | We're calling attention to the wage gap <br class="visible-lg-block">with a sitewide sale. Here's why it matters.
+                    | We're calling attention to the wage gap <br class="visible-lg-block">with a sitewide sale. <span class="hidden-xs hidden-sm">Here's why it matters.</span>
               .cta-wrapper
                 span.btn-md.btn-featured
                   | From <span class="copy-highlight">THE CEO</span>
