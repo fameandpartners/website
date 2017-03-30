@@ -157,7 +157,7 @@ module Products
     end
 
     def price_amount
-      prices[:sale].presence || prices[:original]
+      prices[:sale_amount].presence || prices[:original_amount]
     end
 
     def price_currency
@@ -169,16 +169,21 @@ module Products
         if price.present?
           if discount&.amount.to_i > 0
             sale_price = price.apply(discount)
+            discount_amount   = discount.amount
             discount_string = "#{discount.amount}%"
           elsif sale = Spree::Sale.last_sitewide.presence
             sale_price = sale.apply(price)
+            discount_amount   = sale.discount_size
             discount_string = sale.discount_string
           end
 
           {
-            original: price.display_price.to_s,
-            sale:     sale_price&.display_price&.to_s,
-            discount: discount_string
+            original_amount: price.amount,
+                sale_amount: sale_price&.amount,
+            discount_amount: discount_amount,
+            original_string: price.display_price.to_s,
+                sale_string: sale_price&.display_price&.to_s,
+            discount_string: discount_string
           }
         end
     end

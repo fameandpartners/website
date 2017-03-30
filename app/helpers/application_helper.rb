@@ -126,15 +126,15 @@ module ApplicationHelper
   def product_price_with_discount(product)
     prices = product.prices || {}
 
-    if prices[:sale].present?
-      discount_message = prices[:discount].present? ? "Save #{prices[:discount]}" : nil
+    if prices[:sale_string].present?
+      discount_message = prices[:discount_present].present? ? "Save #{prices[:discount_string]}" : nil
       [
-        content_tag(:span, prices[:original], class: 'price-original'),
-        content_tag(:span, prices[:sale], class: 'price-sale'),
+        content_tag(:span, prices[:original_string], class: 'price-original'),
+        content_tag(:span, prices[:sale_string], class: 'price-sale'),
         content_tag(:span, discount_message, class: 'price-discount'),
       ].join("\n").html_safe
     else
-      prices[:original].to_s.html_safe
+      prices[:original_string].to_s.html_safe
     end
   end
 
