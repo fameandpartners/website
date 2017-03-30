@@ -20,11 +20,11 @@ module Products
       instance
     end
 
-    # TODO - Make this apply universally to product collections
     def use_auto_discount!(auto_discount)
-      return if auto_discount.blank? || auto_discount.amount.to_i == 0
-      self.products.each do |product|
-        product.discount = [product.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
+      if auto_discount.to_i > 0
+        self.products.each do |product|
+          product.use_auto_discount!(auto_discount)
+        end
       end
     end
 
