@@ -1,40 +1,47 @@
-//*****
-// ** Radio is an abstracted child component for Fame and Partners Radio selections
-//*****
-import React, {Component, PropTypes,} from 'react';
+// *****
+// ** Radio is an dumb, abstracted child component for Radio selections
+// *****
+import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-  id: React.PropTypes.string,
+  value: PropTypes.string.isRequired,
 };
 
 class Radio extends Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    const { radioGroup } = this.context;
+    const { value } = this.props;
+    if (typeof radioGroup.onChange === 'function') {
+      radioGroup.onChange({ value });
+    }
   }
 
   render() {
-    const {name, selectedValue, onChange,} = this.context.radioGroup;
-    const optional = {};
-    if(selectedValue !== undefined) {
-      optional.checked = (this.props.value === selectedValue);
-    }
-    if(typeof onChange === 'function') {
-      optional.onChange = onChange.bind(null, this.props.value);
-    }
+    const { name, selectedValue } = this.context.radioGroup;
+    const { value } = this.props;
 
     return (
-      <input
-        {...this.props}
-        type="radio"
-        name={name}
-        {...optional} />
+      <div className="Radio">
+        <input
+          type="radio"
+          value={value}
+          name={name}
+          onChange={this.handleChange}
+          checked={this.props.value === selectedValue}
+        />
+      </div>
     );
   }
 }
 
 Radio.propTypes = propTypes;
 Radio.contextTypes = {
-  radioGroup: React.PropTypes.object,
+  radioGroup: PropTypes.object,
 };
 
 export default Radio;
