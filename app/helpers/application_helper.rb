@@ -181,7 +181,7 @@ module ApplicationHelper
   end
 
   def current_sale
-    @current_sale ||= Spree::Sale.last_sitewide
+    @current_sale ||= Spree::Sale.last_sitewide_for(currency: current_site_version.currency)
   end
 
   def bootstrap_class_for(flash_type)

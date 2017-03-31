@@ -18,12 +18,13 @@
 <% if @collection.any? %>
   <table class="index">
     <colgroup>
-      <col style="width: 20%;">
+      <col style="width: 10%;">
       <col style="width: 20%;">
       <col style="width: 20%;">
       <col style="width: 10%;">
       <col style="width: 10%;">
       <col style="width: 20%;">
+      <col style="width: 10%;">
     </colgroup>
     <thead>
     <tr>
@@ -33,6 +34,7 @@
       <th><%= t(:sitewide) %></th>
       <th><%= t(:discount) %></th>
       <th><%= t(:sitewide_message) %></th>
+      <th><%= t(:currency) %></th>
       <th class="actions"></th>
     </tr>
     </thead>
@@ -45,6 +47,7 @@
         <td class="align-center"><%= sale.sitewide? ? 'Yes' : '-' %></td>
         <td class="align-center"><%= sale.discount_string %></td>
         <td class="align-center"><%= sale.sitewide_message %></td>
+        <td class="align-center"><%= sale.currency.presence || 'ALL' %></td>
         <td class="actions">
           <%= link_to_edit sale, :no_text => true, :class => 'edit'%>
           &nbsp;

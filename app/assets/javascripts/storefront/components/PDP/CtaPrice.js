@@ -65,7 +65,7 @@ class CtaPrice extends React.Component {
   render() {
     const prices = this.props.product.prices;
 
-    const parsedPrice = parseFloat(prices.original_amount) ||0;
+    const parsedPrice = parseFloat(prices.original_amount) || 0;
     const parsedSale  = parseFloat(prices.sale_amount) || 0;
 
     const calculatePrice = (price) => {
