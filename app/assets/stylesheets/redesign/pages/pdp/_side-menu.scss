@@ -43,6 +43,9 @@
     @include pdp-side-menu-active;
   }
 
+  .select-container {
+    width: 50%;
+  }
 }
 
 @media (max-width: $bootstrap-md-width - 1px) {

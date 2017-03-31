@@ -39,16 +39,9 @@
   }
 
   li {
-    display: inline-block;
+    display: block;
     line-height: 1;
-    font-size: 0.75em;
-
-    &:not(:first-child) {
-      margin-left: 10px;
-      padding: 0 0 0 10px;
-      border-left: solid $c-neutral-8 1px;
-    }
-
+    font-size: 1.3rem;
   }
 
   .btn.disabled,
@@ -90,7 +83,6 @@
 
   .panel-side-wrap {
     position: relative;
-    overflow: hidden;
   }
 
   .affix-bottom {

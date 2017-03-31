@@ -60,8 +60,8 @@ class PdpSidePanelRight extends React.Component {
               </div>
 
               <SidePanelColor />
-              <SizeProfile />
               {this.props.skirts.length ?  <SidePanelCustom /> : null}
+              <SizeProfile />
 
             </div>
           </div>
