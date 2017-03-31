@@ -19,7 +19,9 @@ module Marketing
 
           context 'given a spree order' do
             it 'returns hash order details' do
+              expect(order).to receive(:promotions).and_return([double('promo', code: 'C336V398', event_name: "spree.checkout.coupon_code_added")])
               expect(subject.body).to eq({
+                                             coupon_code:            'C336V398',
                                              currency:               'AUD',
                                              email:                  'something@intheway.com',
                                              line_items:             [],

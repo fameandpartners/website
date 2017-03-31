@@ -38,7 +38,9 @@ var MoodBoardEvent = React.createClass({
         messages: [],
         typing: [],
         unreadCount: 0,
-        loading: true
+        loading: true,
+        messagesCount: 0,
+        loadHistory: true
       },
       event: {
         dresses: [],
@@ -127,7 +129,7 @@ var MoodBoardEvent = React.createClass({
       chatChannel.join().then(function() {
         that.setState({ chatChannel: chatChannel });
         that.setUpMessagingEvents();
-        that.loadChannelHistory();
+        that.loadMessagesCountAndHistory();
         that.loadChannelMembers();
       });
 
@@ -267,17 +269,38 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  loadChannelHistory: function() {
-    this.state.chatChannel.getMessages(20).then(function(messages) {
-      var _messages = messages.items.map(function(message) {
-        return JSON.parse(message.body);
-      });
+  loadMessagesCountAndHistory: function(){
+    var that = this;
+    this.state.chatChannel.getMessagesCount().then(function(messagesCount){
+      var _chat = $.extend({}, that.state.chat);
+      _chat.messagesCount = messagesCount;
+      that.setState({ chat: _chat });
+      var historyPromise = that.loadChannelHistory(20);
+      if(historyPromise){
+        historyPromise.then(function(){
+          that.refs.ChatComp.scrollToBottom();
+          that.refs.MobileChatComp.scrollToBottom();
+        })
+      }
+    });
+  },
 
-      var _chat = $.extend({}, this.state.chat);
-      _chat.messages = _messages;
-      _chat.loading = false;
-      this.setState({chat: _chat});
-    }.bind(this));
+  loadChannelHistory: function(pageSize){
+    var that = this;
+    if(this.state.chat.loadHistory){
+      var anchor = this.state.chat.messagesCount - this.state.chat.messages.length;
+      return that.state.chatChannel.getMessages(pageSize, anchor).then(function(messages) {
+        var _chat = $.extend({}, that.state.chat);
+        var _messages = messages.items.map(function(message) {
+          return JSON.parse(message.body);
+        });
+        _chat.messages = _messages.concat(_chat.messages);
+        _chat.loading = false;
+        _chat.loadHistory = messages.hasPrevPage;
+        _chat.historyAnchor += messages.length;
+        that.setState({chat: _chat});
+      });
+    }
   },
 
   handleMember: function(member, joined) {
@@ -327,6 +350,8 @@ var MoodBoardEvent = React.createClass({
         _chat.unreadCount++;
       }
       that.setState({chat: _chat});
+      that.refs.ChatComp.scrollToBottom();
+      that.refs.MobileChatComp.scrollToBottom();
     });
 
     this.state.chatChannel.on('memberJoined', function(member) {
@@ -512,6 +537,7 @@ var MoodBoardEvent = React.createClass({
       filestack_key: this.props.filestack_key,
       handleLikeDress: this.handleLikeDress,
       changeDressToAddToCartCallback: this.changeDressToAddToCartCallback,
+      loadChannelHistory: this.loadChannelHistory,
       startTypingFn: this.startTyping,
       sendMessageFn: this.sendMessage,
       messages: this.state.chat.messages,
@@ -606,7 +632,7 @@ var MoodBoardEvent = React.createClass({
               </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat {...chatProps}/>
+                  <Chat ref="MobileChatComp" {...chatProps}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   {addNewDressBigButton}

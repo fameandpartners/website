@@ -3,6 +3,7 @@
 <%# - dataLayer must be declared above tag manager JS import %>
 <%# - Always use `#push()` with dataLayer array %>
 <%# http://www.simoahava.com/gtm-tips/datalayer-declaration-vs-push/ %>
+<% @gtm_id = Rails.env.production? ? 'GTM-KV54GB' : 'GTM-TPZ8PZK' %>
 
 <script>window.dataLayer = window.dataLayer || [];</script>
 
@@ -13,11 +14,11 @@
 </script>
 
 <% if Rails.env.production? || Features.active?(:test_analytics) %>
-  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KV54GB"
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<%= @gtm_id %>"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KV54GB');</script>
+})(window,document,'script','dataLayer','<%= @gtm_id %>');</script>
 <% end %>
