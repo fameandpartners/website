@@ -46,7 +46,7 @@ describe WeddingAtelier::Event do
     let(:event){ create(:wedding_atelier_event) }
     context 'when user is in assistants list' do
       it 'is permitted' do
-        user = create(:spree_user)
+        user = create(:spree_user, wedding_atelier_signup_step: 'completed')
         event.assistants << user
         expect(event.assistant_permitted?(user)).to be_truthy
       end
