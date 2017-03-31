@@ -19,7 +19,8 @@ class Spree::Sale < ActiveRecord::Base
                   :discount_size,
                   :discount_type,
                   :discounts_attributes,
-                  :customisation_allowed
+                  :customisation_allowed,
+                  :currency
 
   validates :is_active,
             :inclusion => {
@@ -39,8 +40,13 @@ class Spree::Sale < ActiveRecord::Base
             presence: true,
             length: { minimum: 5 }
 
+  validates :currency,
+            inclusion: { in: SiteVersion.pluck(:currency) },
+            allow_blank: true
+
   scope :active,   -> { where(is_active: true) }
   scope :sitewide, -> { where(sitewide: true) }
+  scope :for_currency, -> (currency) { where("currency = ?", currency.to_s) }
 
   has_many :discounts
 
@@ -101,8 +107,8 @@ class Spree::Sale < ActiveRecord::Base
     Spree::Sale.active.pluck(:id)
   end
 
-  def self.last_sitewide
-    active.sitewide.order('created_at DESC').last
+  def self.last_sitewide_for(currency: currency)
+    active.sitewide.order('created_at DESC').limit(1).for_currency(currency).last
   end
 
 end

@@ -86,6 +86,12 @@
               </label>
             <% end %>
           </div>
+          <div class="four columns">
+            <%= f.field_container :currency do %>
+              <%= f.label :currency, t(:currency) %> <span class="required">*</span><br />
+              <%= f.select :currency, SiteVersion.pluck(:currency), {:include_blank => 'ALL'}, {:class => 'select2 fullwidth'} %>
+            <% end %>
+          </div>
         </div>
       </fieldset>
       <fieldset>
