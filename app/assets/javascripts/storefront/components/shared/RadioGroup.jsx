@@ -1,9 +1,9 @@
-//*****
+// *****
 // ** RadioGroup is an abstracted component for Fame and Partners Radio selections
 // ** that manages the state of the selection
 // ** It requires an array of Radio chilren to iterate over to build the options
-//*****
-import React, {Component, PropTypes,} from 'react';
+// *****
+import React, { Component, PropTypes } from 'react';
 import autobind from 'auto-bind';
 
 const propTypes = {
@@ -13,9 +13,9 @@ const propTypes = {
     PropTypes.number,
     PropTypes.bool,
   ]),
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  Component: PropTypes.oneOfType([
+  ComponentWrapper: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
     PropTypes.object,
@@ -23,11 +23,13 @@ const propTypes = {
 };
 
 const defaultProps = {
-  Component: 'div',
+  name: 'RadioGroup',
+  selectedValue: 'option-1',
+  ComponentWrapper: 'div',
 };
 
 class RadioGroup extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     autobind(this);
   }
@@ -49,8 +51,8 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const {Component, name, selectedValue, onChange, children,} = this.props;
-    return <Component>{children}</Component>;
+    const { ComponentWrapper, children } = this.props;
+    return <ComponentWrapper>{children}</ComponentWrapper>;
   }
 }
 
