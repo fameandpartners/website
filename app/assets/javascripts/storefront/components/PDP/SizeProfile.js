@@ -4,13 +4,21 @@ import {bindActionCreators,} from 'redux';
 import {Scrollbars,} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
+import Select from '../shared/Select.jsx';
+import RadioGroup from '../shared/RadioGroup.jsx';
+import Radio from '../shared/Radio.jsx';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import {GetDressVariantId,} from './utils';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      ftHeightChosen: undefined,
+    };
     this.onChange = this.onChange.bind(this);
+    this.generateOptions = this.generateOptions.bind(this);
+    this.handleHeightChange = this.handleHeightChange.bind(this);
   }
 
   onChange(event) {
@@ -28,6 +36,23 @@ class SidePanelSize extends SidePanel {
     this.props.actions.customizeDress(customize);
 
     this.closeMenu();
+  }
+
+  handleHeightChange({option,}){
+    this.setState({ftHeightChosen: option.id,});
+  }
+
+  generateOptions(){
+    let options = [];
+    for (let i = 0; i < 20; i++) {
+      let ft = 5 + Math.floor(i / 12);
+      options.push({
+        id: i,
+        name: (<span><b>{ft}</b>ft <b>{i % 12}</b>in</span>),
+        active: i == this.state.ftHeightChosen,
+      });
+    }
+    return options;
   }
 
   render() {
@@ -71,7 +96,29 @@ class SidePanelSize extends SidePanel {
                     <span className="hide-visually">Close Menu</span>
                 </a>
               </div>
-              <h2 className="h4 c-card-customize__header">Choose your size</h2>
+              <h2 className="h4 c-card-customize__header">Create a Size Profile</h2>
+              <p>Enter your height and size information so we can ensure you get a better fit</p>
+
+              <h3>Choose your height</h3>
+              <div className="select-container">
+                <Select
+                  id="height-options"
+                  onChange={this.handleHeightChange}
+                  label="Height"
+                  className="sort-options"
+                  options={this.generateOptions()}
+                />
+              </div>
+              <div>
+              <RadioGroup name="fruit" selectedValue={this.state.selectedValue} onChange={this.handleChange}>
+                <Radio value="apple" />Apple
+                <Radio value="orange" />Orange
+                <Radio value="watermelon" />Watermelon
+              </RadioGroup>
+
+              </div>
+
+              <h3>Choose your size</h3>
               <div className="row">{SIZES}</div>
               <SidePanelSizeChart />
             </div>
