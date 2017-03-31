@@ -41,7 +41,7 @@ class Spree::Sale < ActiveRecord::Base
             length: { minimum: 5 }
 
   validates :currency,
-            inclusion: { in: SiteVersion.pluck(:currency) },
+            inclusion: { in: -> { SiteVersion.pluck(:currency) } },
             allow_blank: true
 
   scope :active,   -> { where(is_active: true) }
