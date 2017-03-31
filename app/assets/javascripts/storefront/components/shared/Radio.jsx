@@ -29,11 +29,13 @@ class Radio extends Component {
       <div className="Radio">
         <input
           type="radio"
-          value={value}
+          id={value}
           name={name}
           onChange={this.handleChange}
           checked={this.props.value === selectedValue}
         />
+        <label htmlFor={value} />
+        <span>{value}</span>
       </div>
     );
   }
