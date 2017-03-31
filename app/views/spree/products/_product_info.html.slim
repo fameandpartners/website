@@ -33,7 +33,7 @@ ruby:
     = product.name
   - unless product.short_description.empty?
     h1.product_short_description = product.translated_short_description(I18n.locale)
-  .price itemprop="price" = price_for_product(product)
+  .price itemprop="price" = product_price_with_discount(product)
   .section
     - options = color_options_for_select(colors, selected_color)
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'

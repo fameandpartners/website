@@ -6,7 +6,7 @@
       .grid-3
         = link_to collection_path do
             = image_tag ('banners/fashionista_newrange.gif')
-        - if sale_active?
+        - if current_sale.present?
           = link_to collection_path do
             = image_tag ('banners/sale-july-side-extended.jpg')
         h1 Browse our range of dresses

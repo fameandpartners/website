@@ -86,6 +86,12 @@
               </label>
             <% end %>
           </div>
+          <div class="four columns">
+            <%= f.field_container :currency do %>
+              <%= f.label :currency, t(:currency) %> <span class="required">*</span><br />
+              <%= f.select :currency, SiteVersion.pluck(:currency), {:include_blank => 'ALL'}, {:class => 'select2 fullwidth'} %>
+            <% end %>
+          </div>
         </div>
       </fieldset>
       <fieldset>
@@ -189,7 +195,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to customization.presentation, edit_admin_product_customisation_value_path(customization.product, customization), target: :blank %>
+                  customization.presentation
                 </td>
                 <td>
                   <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>

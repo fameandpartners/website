@@ -80,7 +80,7 @@ ruby:
               = product.name
           .details.text-center    
             .name = product.name
-            .price = price_for_product(product)
+            .price = product_price_with_discount(product)
 
       .col-md-12.btn-wrap.text-center
         = link_to 'MORE STYLES HERE', collection_path, class: 'btn btn-black', target: '_blank'
