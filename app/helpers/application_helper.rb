@@ -190,8 +190,8 @@ module ApplicationHelper
   end
 
   def equal_pay_active?
-    date_start = DateTime.parse('Apr 3 9:00pm -7:00')
-    date_end  = DateTime.parse('Apr 5 0:01am -7:00')
+    date_start = DateTime.parse('Mar 31 9:00am -7:00')
+    date_end  = DateTime.parse('Apr 3 4:00pm -7:00')
     current_site_version.is_usa? && Time.zone.now.between?(date_start, date_end)
   end
 
