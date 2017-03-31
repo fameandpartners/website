@@ -6,7 +6,10 @@ FactoryGirl.define do
     currency  ''
     discount_size 10
     discount_type Spree::Sale::DISCOUNT_TYPES.key('Percentage')
+    sitewide_message Faker::Lorem.sentence
 
-    association(:discounts, factory: :discount)
+    trait(:for_product) do
+      association(:discounts, factory: :discount)
+    end
   end
 end
