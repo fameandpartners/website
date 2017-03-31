@@ -1,17 +1,15 @@
 // TEMPORARY SALE BANNER for the EQUAL PAY DAY campaign
 - if equal_pay_active?
-
-#sale-banner.alert-sale.equal-pay-day role="alert"
-  .outer-wrap
-      .inner-wrap
-        .title-wrap
-          .title
-            | Take 21% Off Of Everthing in honor of Equal Pay Day.
-            = link_to 'Find out why.', from_our_ceo_path, class: "alert-sale-cta"
+  #sale-banner.alert-sale.equal-pay-day role="alert"
+    .outer-wrap
+        .inner-wrap
+          .title-wrap
+            .title
+              | Take 21% Off Of Everthing in honor of Equal Pay Day.
+              = link_to 'Find out why.', from_our_ceo_path, class: "alert-sale-cta"
 
 // REGULAR SALE BANNER
 - else
-
   - if display_sale_notice?
     #sale-banner.alert-sale role="alert"
       .outer-wrap
