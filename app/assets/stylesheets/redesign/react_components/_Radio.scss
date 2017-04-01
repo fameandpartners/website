@@ -6,32 +6,32 @@
   .Radio {
     display: inline;
     position: relative;
+    margin-right: 16px;
+    text-transform: uppercase;
   }
 
-  input[type='checkbox'],
   input[type='radio'] {
     display: none;
     cursor: pointer;
   }
 
-  input[type='checkbox']:active,
-  input[type='checkbox']:focus,
   input[type='radio']:active,
   input[type='radio']:focus {
     outline: none;
   }
 
   input[type='radio'] + label {
+    position: relative;
     cursor: pointer;
     display: inline-block;
     padding-right: 20px;
     line-height: 12px;
+    vertical-align: super;
   }
 
   input[type='radio'] + label:after,
   input[type='radio'] + label:before {
     content: '';
-    font-family: helvetica;
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -41,10 +41,9 @@
     position: absolute;
   }
 
-  input[type='checkbox'] + label:before,
   input[type='radio'] + label:before {
     border: 1px solid $product-color-pale-grey;
-    background-color: #fff;
+    background-color: $c-neutral-white;
     @include transition(all 0.3s ease-in-out);
   }
 
@@ -55,10 +54,8 @@
 
   input[type='checkbox']:checked + label:before,
   input[type='radio']:checked + label:before {
-    -moz-box-shadow: inset 0 0 0 2px #fff;
-    -webkit-box-shadow: inset 0 0 0 2px #fff;
-    box-shadow: inset 0 0 0 2px #fff;
-    background: black;
+    @include box-shadow(inset 0 0 0 2px $c-neutral-white);
+    background: $c-neutral-black;
   }
   /*Radio Specific styles*/
   input[type='radio'] + label:before {

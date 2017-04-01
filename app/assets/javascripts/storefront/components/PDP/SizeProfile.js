@@ -15,7 +15,7 @@ class SidePanelSize extends SidePanel {
     super(props, context);
     this.state = {
       ftHeightChosen: undefined,
-      metricOption: 'inches',
+      metricOption: 'in',
     };
     this.onChange = this.onChange.bind(this);
     this.generateOptions = this.generateOptions.bind(this);
@@ -102,7 +102,7 @@ class SidePanelSize extends SidePanel {
               <div className="text-right">
                 <a
                   href="javascript:;"
-                  className="btn-close lg"
+                  className="btn-close med"
                   onClick={this.closeMenu}
                 >
                   <span className="hide-visually">Close Menu</span>
@@ -112,31 +112,36 @@ class SidePanelSize extends SidePanel {
               <p>Enter your height and size information so we can ensure you get a better fit</p>
 
               <h3>Choose your height</h3>
-              <div className="select-container">
-                <Select
-                  id="height-options"
-                  onChange={this.handleHeightChange}
-                  label="Height"
-                  className="sort-options"
-                  options={this.generateOptions()}
-                />
-              </div>
-              <div>
-                <RadioGroup
-                  name="metricOptions"
-                  selectedValue={this.state.metricOption}
-                  onChange={this.handleMetricSwitch}
-                >
-                  <Radio value="inches" />
-                  <Radio value="cm" />
-                </RadioGroup>
+              <div className="height-selection clearfix">
+                <div className="select-container pull-left">
+                  { this.state.metricOption === 'in' ?
+                    <Select
+                      id="height-options"
+                      onChange={this.handleHeightChange}
+                      label="Height"
+                      className="sort-options"
+                      options={this.generateOptions()}
+                    /> :
+                    <input placeholder="cm" />
+                  }
+                </div>
 
+                <div className="metric-container pull-left">
+                  <RadioGroup
+                    name="metricOptions"
+                    selectedValue={this.state.metricOption}
+                    onChange={this.handleMetricSwitch}
+                  >
+                    <Radio display="Inches" value="in" />
+                    <Radio display="cm" value="cm" />
+                  </RadioGroup>
+                </div>
               </div>
-
-              <h3>Choose your size</h3>
-              <div className="row">{SIZES}</div>
-              <SidePanelSizeChart />
             </div>
+
+            <h3>Choose your size</h3>
+            <div className="row">{SIZES}</div>
+            <SidePanelSizeChart />
           </Scrollbars>
         </div>
       </div>

@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
   value: PropTypes.string.isRequired,
+  display: PropTypes.string.isRequired,
 };
 
 class Radio extends Component {
@@ -23,7 +24,7 @@ class Radio extends Component {
 
   render() {
     const { name, selectedValue } = this.context.radioGroup;
-    const { value } = this.props;
+    const { value, display } = this.props;
 
     return (
       <div className="Radio">
@@ -35,7 +36,7 @@ class Radio extends Component {
           checked={this.props.value === selectedValue}
         />
         <label htmlFor={value} />
-        <span>{value}</span>
+        <span>{display}</span>
       </div>
     );
   }

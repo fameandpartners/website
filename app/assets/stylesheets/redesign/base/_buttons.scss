@@ -195,6 +195,15 @@
     }
 
   }
+  &.med {
+    width: 30px;
+    height: 30px;
+    &:before,
+    &:after {
+      left: 30px;
+      height: 30px;
+    }
+  }
 
   &.lg {
     width: 50px;
