@@ -20,11 +20,11 @@
   .container
     .row
       .col-md-12
-        = render :partial => 'products/collections/filters_sort'
+        = render :partial => 'products/collections/breadcrumb'
       .col-lg-3.col-md-4.side-panel.side-panel-left.js-side-panel-filters
         a.btn-close.js-trigger-toggle-filters href='javascript:;'
           .hide-visually Close filters
-        = render :partial => 'products/collections/filters_color_shape_style'
+        = render :partial => 'products/collections/sidebar'
 
       .col-lg-9.col-md-8.products-collection
         .row.products-set.js-products-collection-wrap

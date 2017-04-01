@@ -20,7 +20,7 @@
     dl.cart-item-description
       - if product.size.present?
         dd Size: #{product.size.presentation},
-        dd Color: #{product.color.name}
+        dd Color: #{product.color[:name]}
         - height_title = product.from_wedding_atelier ? 'Height' : 'Skirt Length'
         dd #{height_title}: #{product.height}
         dd Estimated delivery: #{product.delivery_period}

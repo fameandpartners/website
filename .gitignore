@@ -76,6 +76,9 @@ bin/spring
 *.sublime-project
 *.sublime-workspace
 
+# Ignore other Procfiles
+Procfile.*
+
 # Ignore OpsCare.yml
 OpsCare.yml
 
