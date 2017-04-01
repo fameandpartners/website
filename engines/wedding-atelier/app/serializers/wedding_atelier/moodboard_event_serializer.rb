@@ -10,6 +10,10 @@ module WeddingAtelier
 
     attributes :id, :date, :number_of_assistants, :name, :slug, :dresses, :remaining_days, :owner_id
 
+    def assistants
+      object.assistants.with_complete_profile
+    end
+
     def invitations
       object.invitations.pending
     end

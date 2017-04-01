@@ -6,7 +6,7 @@ describe WeddingAtelier::CustomizationsController, type: :controller do
   before(:each) { enable_wedding_atelier_feature_flag }
 
   routes { WeddingAtelier::Engine.routes }
-  let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
+  let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar', wedding_atelier_signup_step: 'completed') }
   let(:event) { create(:wedding_atelier_event) }
   before do
     event.assistants << user
