@@ -1,0 +1,38 @@
+/* Input Component
+-------------------------------------------------------*/
+.Input-wrapper {
+  position: relative;
+  width: 100%;
+  outline: none;
+  background-color: $c-neutral-white;
+  font-size: 1.4rem;
+  -webkit-font-smoothing: antialiased;
+  height: 36px;
+  line-height: 35px;
+  padding: 0 14px;
+  text-align: left;
+
+  .Input {
+    font-size: 1.4rem;
+    border: 1px solid $c-neutral-4;
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    background-color: $c-neutral-white;
+    position: absolute;
+    transition: all 0.17s ease-in-out border 0.4s;
+
+    &::hover{
+      border-color: $gray-light;
+    }
+  }
+
+  .Input-label {
+    position: absolute;
+    right: 0;
+    padding-right: 14px;
+    color: $c-neutral-4;
+  }
+}

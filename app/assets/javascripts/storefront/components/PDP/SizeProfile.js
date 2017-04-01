@@ -4,11 +4,14 @@ import { bindActionCreators } from 'redux';
 import { Scrollbars } from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import Select from '../shared/Select.jsx';
-import RadioGroup from '../shared/RadioGroup.jsx';
-import Radio from '../shared/Radio.jsx';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
+
+// Generic components
+import Select from '../shared/Select.jsx';
+import Radio from '../shared/Radio.jsx';
+import Input from '../shared/Input';
+import RadioGroup from '../shared/RadioGroup.jsx';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -19,7 +22,8 @@ class SidePanelSize extends SidePanel {
     };
     this.onChange = this.onChange.bind(this);
     this.generateOptions = this.generateOptions.bind(this);
-    this.handleHeightChange = this.handleHeightChange.bind(this);
+    this.handleInchChange = this.handleInchChange.bind(this);
+    this.handleCMChange = this.handleCMChange.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
   }
 
@@ -40,8 +44,13 @@ class SidePanelSize extends SidePanel {
     this.closeMenu();
   }
 
-  handleHeightChange({ option }) {
+  handleInchChange({ option }) {
     this.setState({ ftHeightChosen: option.id });
+  }
+
+  handleCMChange(value) {
+    console.log('value', value);
+    this.setState({ cmHeight: value });
   }
 
   handleMetricSwitch({ value }) {
@@ -88,12 +97,13 @@ class SidePanelSize extends SidePanel {
     return (
       <div className="pdp-side-container pdp-side-container-size">
         <a
-          href="javascript:;"
           className={TRIGGER_STATE}
           onClick={this.openMenu}
         >
           <div className={ERROR}>Size Profile</div>
-          <div className="c-card-customize__content__right">{this.props.customize.size.presentation}</div>
+          <div className="c-card-customize__content__right">
+            {this.props.customize.size.presentation}
+          </div>
         </a>
 
         <div className={MENU_STATE}>
@@ -101,7 +111,6 @@ class SidePanelSize extends SidePanel {
             <div className="custom-scroll">
               <div className="text-right">
                 <a
-                  href="javascript:;"
                   className="btn-close med"
                   onClick={this.closeMenu}
                 >
@@ -117,12 +126,12 @@ class SidePanelSize extends SidePanel {
                   { this.state.metricOption === 'in' ?
                     <Select
                       id="height-options"
-                      onChange={this.handleHeightChange}
+                      onChange={this.handleInchChange}
                       label="Height"
                       className="sort-options"
                       options={this.generateOptions()}
                     /> :
-                    <input placeholder="cm" />
+                    <Input onChange={this.handleCMChange} />
                   }
                 </div>
 
@@ -153,7 +162,7 @@ SidePanelSize.propTypes = {
   customize: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     customize: state.customize,
     defaultSizes: state.product.available_options.table.sizes.table.default,
