@@ -7,7 +7,7 @@ import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
 
-// Generic components
+// Shared Components
 import Select from '../shared/Select.jsx';
 import Radio from '../shared/Radio.jsx';
 import Input from '../shared/Input';
@@ -17,17 +17,18 @@ class SidePanelSize extends SidePanel {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      ftHeightChosen: undefined,
+      ftHeight: undefined,
+      cmHeightChosen: undefined,
       metricOption: 'in',
     };
-    this.onChange = this.onChange.bind(this);
+    this.handleDressSizeSelection = this.handleDressSizeSelection.bind(this);
     this.generateOptions = this.generateOptions.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
   }
 
-  onChange(event) {
+  handleDressSizeSelection(event) {
     const customize = {};
     customize.size = {};
     customize.size.id = event.currentTarget.dataset.id;
@@ -38,19 +39,19 @@ class SidePanelSize extends SidePanel {
     customize.dressVariantId = GetDressVariantId(
       this.props.variants,
       this.props.customize.color.id,
-      customize.size.id);
-    this.props.actions.customizeDress(customize);
+      customize.size.id,
+    );
 
+    this.props.actions.customizeDress(customize);
     this.closeMenu();
   }
 
   handleInchChange({ option }) {
-    this.setState({ ftHeightChosen: option.id });
+    this.setState({ ftHeight: option.id });
   }
 
-  handleCMChange(value) {
-    console.log('value', value);
-    this.setState({ cmHeight: value });
+  handleCMChange({ value }) {
+    this.setState({ cmHeight: parseInt(value, 10) });
   }
 
   handleMetricSwitch({ value }) {
@@ -59,15 +60,41 @@ class SidePanelSize extends SidePanel {
 
   generateOptions() {
     const options = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i += 1) {
       const ft = 5 + Math.floor(i / 12);
       options.push({
         id: i,
-        name: (<span><b>{ft}</b>ft <b>{i % 12}</b>in</span>),
-        active: i == this.state.ftHeightChosen,
+        name: (
+          <div>
+            <span className="amt">{ft}</span>
+            <span className="metric">ft</span>
+            <span className="amt amt--last">{i % 12}</span>
+            <span className="metric">in</span>
+          </div>
+        ),
+        active: i === this.state.ftHeight,
       });
     }
     return options;
+  }
+
+  generateDressSizeSelections() {
+    // NOTE: I'm still apalled that we're having to parse nested tables because
+    // of Ruby's OpenStruct. Please note this is being done here.
+    return this.props.defaultSizes.map((size) => {
+      const ITEM_STATE = this.props.customize.size.id === size.table.id
+        ? 'selector-size is-selected' : 'selector-size';
+      return (
+        <a
+          className={ITEM_STATE}
+          onClick={this.handleDressSizeSelection}
+          key={`size-${size.table.id}`}
+          data-id={size.table.id} data-presentation={size.table.presentation}
+        >
+          {size.table.presentation}
+        </a>
+      );
+    });
   }
 
   render() {
@@ -80,19 +107,7 @@ class SidePanelSize extends SidePanel {
     const TRIGGER_STATE = this.props.customize.size.id
       ? 'c-card-customize__content is-selected' : 'c-card-customize__content';
 
-    const SIZES = this.props.defaultSizes.map((size, index) => {
-      const ITEM_STATE = this.props.customize.size.id == size.table.id
-        ? 'selector-size is-selected' : 'selector-size';
-      return (
-        <a
-          href="javascript:;" className={ITEM_STATE}
-          onClick={this.onChange} key={index}
-          data-id={size.table.id} data-presentation={size.table.presentation}
-        >
-          {size.table.presentation}
-        </a>
-      );
-    });
+    const SIZES = this.generateDressSizeSelections();
 
     return (
       <div className="pdp-side-container pdp-side-container-size">
@@ -118,20 +133,25 @@ class SidePanelSize extends SidePanel {
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Create a Size Profile</h2>
-              <p>Enter your height and size information so we can ensure you get a better fit</p>
+              <p>
+              Enter your height and size information so we can ensure
+              you'll get the best fit possible
+              </p>
 
-              <h3>Choose your height</h3>
               <div className="height-selection clearfix">
+                <h4>How tall are you?</h4>
                 <div className="select-container pull-left">
                   { this.state.metricOption === 'in' ?
                     <Select
                       id="height-options"
                       onChange={this.handleInchChange}
-                      label="Height"
                       className="sort-options"
                       options={this.generateOptions()}
                     /> :
-                    <Input onChange={this.handleCMChange} />
+                    <Input
+                      type="number"
+                      onChange={this.handleCMChange}
+                    />
                   }
                 </div>
 
@@ -148,9 +168,11 @@ class SidePanelSize extends SidePanel {
               </div>
             </div>
 
-            <h3>Choose your size</h3>
-            <div className="row">{SIZES}</div>
-            <SidePanelSizeChart />
+            <div className="size-selection">
+              <h4>What's your dress size?</h4>
+              <div className="row">{SIZES}</div>
+              <SidePanelSizeChart />
+            </div>
           </Scrollbars>
         </div>
       </div>

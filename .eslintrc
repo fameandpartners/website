@@ -1,3 +1,8 @@
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    # These are rules that have been annoying
+    "react/jsx-filename-extension": [0],
+    "no-return-assign": [0]
+  }
 }
