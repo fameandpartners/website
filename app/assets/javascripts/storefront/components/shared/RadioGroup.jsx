@@ -15,6 +15,7 @@ const propTypes = {
   ]).isRequired,
   onChange: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   ComponentWrapper: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
@@ -25,6 +26,7 @@ const propTypes = {
 const defaultProps = {
   name: 'RadioGroup',
   ComponentWrapper: 'div',
+  className: 'radio-group',
 };
 
 class RadioGroup extends Component {
@@ -50,8 +52,10 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const { ComponentWrapper, children } = this.props;
-    return <ComponentWrapper className="RadioGroup">{children}</ComponentWrapper>;
+    const { ComponentWrapper, children, className } = this.props;
+    return (
+      <ComponentWrapper className={`RadioGroup ${className}`}>{children}</ComponentWrapper>
+    );
   }
 }
 

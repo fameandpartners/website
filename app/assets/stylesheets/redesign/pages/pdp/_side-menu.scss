@@ -43,8 +43,19 @@
     @include pdp-side-menu-active;
   }
 
+  .height-selection {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
   .select-container {
     width: 50%;
+    padding-right: 15px;
+    input {
+      width: 100%;
+    }
+  }
+  .metric-container {
+    line-height: 36px;
   }
 }
 
