@@ -23,12 +23,6 @@ class Discount < ActiveRecord::Base
   scope :for_products, where(discountable_type: "Spree::Product")
 
   def size
-    if amount.present?
-      amount
-    elsif sale.present?
-      sale.discount_size
-    else
-      0
-    end
+    (amount.presence || sale&.discount_size.presence).to_f
   end
 end
