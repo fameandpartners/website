@@ -46,7 +46,7 @@ class Spree::Sale < ActiveRecord::Base
 
   scope :active,   -> { where(is_active: true) }
   scope :sitewide, -> { where(sitewide: true) }
-  scope :for_currency, -> (currency) { where("currency = ? OR currency = ''", currency.to_s) }
+  scope :for_currency, -> (currency) { where("lower(currency) = ? OR currency = ''", currency.to_s.downcase) }
 
   has_many :discounts
 

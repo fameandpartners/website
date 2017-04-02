@@ -15,7 +15,7 @@ module Marketing
         end
 
         def price
-          product.price.amount
+          product.price&.amount.to_f.round(2)
         end
 
         def variants
@@ -23,12 +23,11 @@ module Marketing
         end
 
         def price_with_discount
-          product.price_amount&.to_f&.round(2)
+          product.price_amount.to_f.round(2)
         end
 
         def discount_percent
-          discount = product.discount ? product.discount.amount : 0
-          discount.to_s
+          product.discount&.amount
         end
 
         def currency
