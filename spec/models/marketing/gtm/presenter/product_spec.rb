@@ -89,7 +89,7 @@ module Marketing
               colors:            ['Ivory'],
               currency:          'AUD',
               description:       'Super Dress Long Description',
-              discountPercent:   '30',
+              discountPercent:   30,
               expressMaking:     true,
               image:             { original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' },
               images:            [{ original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' }],
