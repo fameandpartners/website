@@ -35,14 +35,18 @@ function stateToProps(state, props) {
           $$bodyStyles: $$collectionFilterSortStore.get('$$bodyStyles'),
           // Mutable props
           isDrawerLayout: props.isDrawerLayout,
-          filters: assign({}, {
-            order: collectionFilterSortStore.order,
-            fastMaking: collectionFilterSortStore.fastMaking,
-            selectedColors: collectionFilterSortStore.selectedColors,
-            selectedPrices: collectionFilterSortStore.selectedPrices,
-            selectedShapes: collectionFilterSortStore.selectedShapes,
-            selectedStyles: collectionFilterSortStore.selectedStyles,
-          }, collectionFilterSortStore.temporaryFilters),
+          filters: assign({},
+            {
+              order: collectionFilterSortStore.order,
+              fastMaking: collectionFilterSortStore.fastMaking,
+              selectedColors: collectionFilterSortStore.selectedColors,
+              selectedPrices: collectionFilterSortStore.selectedPrices,
+              selectedShapes: collectionFilterSortStore.selectedShapes,
+              selectedStyles: collectionFilterSortStore.selectedStyles,
+            },
+            // Include temporary filters if we are in a drawer
+            (props.isDrawerLayout) ? collectionFilterSortStore.temporaryFilters : {}
+          ),
           temporaryFilters: collectionFilterSortStore.temporaryFilters,
         };
     }
