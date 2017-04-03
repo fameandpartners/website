@@ -128,9 +128,12 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters,
       } = this.props;
 
-      clearAllCollectionFilters();
-      if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { updateExternalLegacyFilters(FILTER_DEFAULTS); }
+      if (isDrawerLayout){
+        setTemporaryFilters(FILTER_DEFAULTS);
+      } else {
+        clearAllCollectionFilters();
+        updateExternalLegacyFilters(FILTER_DEFAULTS);
+      }
     }
 
     handleColorSelection({name,}){
