@@ -27,7 +27,7 @@ module Marketing
         end
 
         def discount_percent
-          product.discount&.amount.to_f.round(2)
+          product.discount&.amount
         end
 
         def currency
