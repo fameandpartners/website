@@ -113,7 +113,7 @@ class Products::DetailsResource
     end
 
     def product_price
-      Repositories::ProductPrice.new(site_version: site_version, product: product).read
+      product.site_price_for(site_version || SiteVersion.default)
     end
 
     def product_discount
@@ -131,9 +131,6 @@ class Products::DetailsResource
     end
 
     def related_outerwear
-      # TODO: 27/08/2015 remove this after CreateSpreeProductRelatedOuterwear migration was execute in production.
-      return [] unless ActiveRecord::Base.connection.table_exists?(:spree_product_related_outerwear)
-
       product.related_outerwear.first(RELATED_OUTERWEAR_LIMIT).map do |recommended_product|
         Products::Related.new(product: recommended_product, site_version: site_version)
       end

@@ -9,12 +9,7 @@ class CartSerializer < ActiveModel::Serializer
     :display_item_total,
     :display_adjustment_total,
     :display_promotion_total,
-    :display_total,
-    :sale_active
-
-  def sale_active
-    Spree::Sale.first.try(:active?)
-  end
+    :display_total
 
   def display_shipment_total
     if object.shipment.present? && object.shipment.amount.to_i > 0

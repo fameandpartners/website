@@ -1,7 +1,7 @@
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
 
-- if (image_url = marketing_banner_image_url).present? && !sale_active?
+- if (image_url = marketing_banner_image_url).present? && current_sale.nil?
   .row
     .grid-12
       = image_tag(image_url)

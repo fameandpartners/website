@@ -91,8 +91,8 @@ class Products::CollectionResource
 
   private
 
-  def collect_color_groups( color_group_names )
-    if( color_group_names.present? )
+  def collect_color_groups(color_group_names)
+    if color_group_names.present?
       to_return = color_group_names.collect { |group_name| Repositories::ProductColors.get_group_by_name(group_name) }
       to_return.compact
     else
@@ -101,20 +101,19 @@ class Products::CollectionResource
   end
 
   def details
-    @details ||= begin
-                   Products::CollectionDetails.new(
-                     collection:     collection,
-                     style:          style,
-                     event:          event,
-                     edits:          edits,
-                     bodyshape:      bodyshape,
-                     color:          color_group.try(:representative) || color,
-                     discount:       discount,
-                     site_version:   site_version,
-                     fast_delivery:  fast_delivery?,
-                     fast_making:    fast_making
-                   ).read
-                 end
+    @details ||= 
+      Products::CollectionDetails.new(
+        collection:     collection,
+        style:          style,
+        event:          event,
+        edits:          edits,
+        bodyshape:      bodyshape,
+        color:          color_group.try(:representative) || color,
+        discount:       discount,
+        site_version:   site_version,
+        fast_delivery:  fast_delivery?,
+        fast_making:    fast_making
+      ).read
   end
 
   def prepare_discount(value = nil)

@@ -41,7 +41,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)
     .s3
       .part1
         .copy
@@ -60,7 +60,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)
       = image_tag 'nye/s4_1.jpg', class: 'image'
 
     .s5
@@ -75,7 +75,7 @@ ruby:
               = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
           .text
             = link_to dress.name, collection_product_path(dress), class: 'title'
-            .price = price_for_product(dress)
+            .price = product_price_with_discount(dress)
 
     .s6
       = image_tag 'nye/s6_1.jpg', class: 'image'
@@ -88,7 +88,7 @@ ruby:
                   = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
-                .price = price_for_product(dress)
+                .price = product_price_with_discount(dress)
     .s7
       .right
         .copy
@@ -101,7 +101,7 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)
 
     .s8
       = image_tag 'nye/s7_1.jpg', class: 'image'
@@ -117,4 +117,4 @@ ruby:
                 = hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)

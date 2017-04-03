@@ -63,58 +63,91 @@ class CtaPrice extends React.Component {
   }
 
   render() {
-    const PRICE =
-      parseFloat(this.props.price)
-      + parseFloat(this.props.customize.color.price)
-      + parseFloat(this.props.customize.customization.price)
-      + parseFloat(this.props.customize.makingOption.price)
-      - parseFloat(this.props.discount);
+    const prices = this.props.product.prices;
+
+    const parsedPrice = parseFloat(prices.original_amount) || 0;
+    const parsedSale  = parseFloat(prices.sale_amount) || 0;
+
+    const calculatePrice = (price) => {
+      const parsedColorPrice  = parseFloat(this.props.customize.color.price) || 0;
+      const parsedCustomPrice = parseFloat(this.props.customize.customization.price) || 0;
+      const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
+
+      const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice
+      return PRICE;
+    }
+
+    let calculatedPrice = {
+      original: calculatePrice(parsedPrice)
+    };
+
+    if (parsedSale) {
+      calculatedPrice.sale = calculatePrice(parsedSale);
+    }
 
     let deliveryPeriod = this.props.product.delivery_period;
     if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
       deliveryPeriod = this.props.product.fast_making_delivery_period;
     }
 
-    let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
-    let isAddToBagAvailable = (
+    const isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
+    const isAddToBagAvailable = (
       this.props.customize.size.id
         && this.props.customize.color.id
         && this.props.customize.length.id
     );
 
+    const afterpayPrice = ( (calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2)
+
     return (
       <div className="btn-wrap">
-        <div className="price">${PRICE}</div>
-          {(() => {
-            if(isAfterpayEnabled) {
-              return (
-                <div className="afterpay-message">
-                  <span>or 4 easy payments of ${PRICE / 4} with</span>
-                  <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                  <a href="javascript:;" onClick={this.openModal}>info</a>
-                </div>
-              );
-            }
-          })()}
-          {(() => {
-            if(isAddToBagAvailable && !this.state.sending) {
-              return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
-                  ADD TO BAG
-                </a>
-              );
-            } else if(this.state.sending) {
-              return (
-                <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
-                  <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
-                </a>
-              );
-            } else {
-              return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-lowlight btn-lrg" disabled="disabled">ADD TO BAG</a>
-              );
-            }
-          })()}
+        {(() => {
+          let priceHtml;
+
+          if (parsedSale) {
+            priceHtml = <div className='price'>
+              <span className='price-original'>${calculatedPrice.original.toFixed(2)} </span>
+              <span className='price-sale'>${calculatedPrice.sale.toFixed(2)} </span>
+              <span className='price-discount'>SAVE {prices.discount_string} </span>
+            </div>;
+          } else {
+            priceHtml = <div className='price'>${calculatedPrice.original}</div>;
+          }
+
+          return (
+            priceHtml
+          );
+        })()}
+        {(() => {
+          if(isAfterpayEnabled) {
+            return (
+              <div className="afterpay-message">
+                <span>or 4 easy payments of ${afterpayPrice} with</span>
+                <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
+                <a href="javascript:;" onClick={this.openModal}>info</a>
+              </div>
+            );
+          }
+        })()}
+        {(() => {
+          if(isAddToBagAvailable && !this.state.sending) {
+            return (
+              <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
+                ADD TO BAG
+              </a>
+            );
+          } else if(this.state.sending) {
+            return (
+              <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
+                <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
+              </a>
+            );
+          } else {
+            return (
+              <a href="javascript:;" onClick={this.addToBag} className="btn btn-lowlight btn-lrg" disabled="disabled">ADD TO BAG</a>
+            );
+          }
+        })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
           <li>Estimated delivery, {deliveryPeriod}</li>

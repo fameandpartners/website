@@ -5,7 +5,7 @@
     .fright.like
       = cached_add_to_wishlist_link(product, class: 'wish-list-link')
 h6 = product.name
-.price = price_for_product(product)
+.price = product_price_with_discount(product)
 .buttons
   .buy-button
     = link_to "Buy", collection_product_path(product, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"
