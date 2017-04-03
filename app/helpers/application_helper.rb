@@ -120,43 +120,21 @@ module ApplicationHelper
     end
   end
 
-  # individual product discount
-  # sale discount
-  # promocode discount
-  # note - fixed
-  def product_discount(product)
-    if product.present? && (discount = product.discount).present?
-      discount
-    else
-      nil
-    end
-  end
+  # @param product [Object] database record or presenter
+  # @return [String] complete string with price markup
+  def product_price_with_discount(product)
+    prices = product.prices || {}
 
-  # price: amount, currency, display_price
-  # discount: amount
-  def product_price_with_discount(price, discount)
-    if (discount.blank? || discount.amount.to_i == 0)
-      price.display_price.to_s.html_safe
-    else
-      # NOTE - we should add fixed price amount calculations
-      if discount.present?
-        sale_price = price.apply(discount)
-      end
-
+    if prices[:sale_string].present?
+      discount_message = prices[:discount_string].present? ? "Save #{prices[:discount_string]}" : nil
       [
-        content_tag(:span, price.display_price, class: 'price-original'),
-        content_tag(:span, sale_price.display_price.to_s, class: 'price-sale'),
-        content_tag(:span, "Save #{discount.amount}%", class: 'price-discount'),
+        content_tag(:span, prices[:original_string], class: 'price-original'),
+        content_tag(:span, prices[:sale_string], class: 'price-sale'),
+        content_tag(:span, discount_message, class: 'price-discount'),
       ].join("\n").html_safe
+    else
+      prices[:original_string].to_s.html_safe
     end
-  end
-
-  # span.price-old $355
-  # ' $295
-  def price_for_product(product)
-    price = product.site_price_for(current_site_version)
-    discount = product_discount(product)
-    product_price_with_discount(price, discount)
   end
 
   def price_for_line_item(line_item)
@@ -168,27 +146,6 @@ module ApplicationHelper
     else
       line_item.money.to_s.html_safe
     end
-  end
-
-  def sale_active?
-    return unless current_sale.present?
-    sale_promo? || current_sale.active?
-  end
-
-  def display_sale_notice?
-    sale_active? && current_sale.sitewide_message.present?
-  end
-
-  def sale_path
-    if sale_promo?
-      dresses_path(:faadc => current_sale.sale_promo)
-    else
-      dresses_path
-    end
-  end
-
-  def sale_promo?
-    current_sale.present? && current_sale.sale_promo.present?
   end
 
   def dynamic_colors
@@ -224,11 +181,18 @@ module ApplicationHelper
   end
 
   def current_sale
-    @current_sale ||= Spree::Sale.where(sitewide: true).first
+    @current_sale ||= Spree::Sale.last_sitewide_for(currency: current_site_version.currency)
   end
 
   def bootstrap_class_for(flash_type)
-    { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type] || flash_type.to_s
+    flash_classes =  { success: 'alert-success', error: 'alert-danger', alert: 'alert-warning', notice: 'alert-info' }
+    flash_classes.fetch(flash_type, flash_type.to_s)
+  end
+
+  def equal_pay_active?
+    date_start = DateTime.parse('Mar 31 9:00am -7:00')
+    date_end  = DateTime.parse('Apr 3 4:00pm -7:00')
+    current_site_version.is_usa? && Time.zone.now.between?(date_start, date_end)
   end
 
 end

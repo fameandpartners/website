@@ -169,4 +169,5 @@ describe Spree::Product, :type => :model do
       expect(subject.delivery_period).to eq(delivery_period)
     end
   end
+
 end

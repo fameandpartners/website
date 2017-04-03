@@ -9,7 +9,7 @@
       )
     >
 
-- if Features.active?(:sales) && sale_active?
+- if Features.active?(:sales) && current_sale.present?
   ruby:
     enable_countdown_banner_sale = %Q<
       try {
