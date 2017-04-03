@@ -3,6 +3,10 @@
 .pdp {
   position: relative;
 
+  .container {
+    overflow: hidden;
+  }
+
   h1 {
     margin-bottom: 5px;
   }
