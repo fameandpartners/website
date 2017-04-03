@@ -35,14 +35,18 @@ function stateToProps(state, props) {
           $$bodyStyles: $$collectionFilterSortStore.get('$$bodyStyles'),
           // Mutable props
           isDrawerLayout: props.isDrawerLayout,
-          filters: assign({}, {
-            order: collectionFilterSortStore.order,
-            fastMaking: collectionFilterSortStore.fastMaking,
-            selectedColors: collectionFilterSortStore.selectedColors,
-            selectedPrices: collectionFilterSortStore.selectedPrices,
-            selectedShapes: collectionFilterSortStore.selectedShapes,
-            selectedStyles: collectionFilterSortStore.selectedStyles,
-          }, collectionFilterSortStore.temporaryFilters),
+          filters: assign({},
+            {
+              order: collectionFilterSortStore.order,
+              fastMaking: collectionFilterSortStore.fastMaking,
+              selectedColors: collectionFilterSortStore.selectedColors,
+              selectedPrices: collectionFilterSortStore.selectedPrices,
+              selectedShapes: collectionFilterSortStore.selectedShapes,
+              selectedStyles: collectionFilterSortStore.selectedStyles,
+            },
+            // Include temporary filters if we are in a drawer
+            (props.isDrawerLayout) ? collectionFilterSortStore.temporaryFilters : {}
+          ),
           temporaryFilters: collectionFilterSortStore.temporaryFilters,
         };
     }
@@ -112,6 +116,7 @@ class CollectionFilterSort extends Component {
         applyTemporaryFilters(temporaryFilters);
         setTemporaryFilters({});
         this.props.updateExternalLegacyFilters(temporaryFilters);
+        if (hasLegacyInstance()){ window.ProductCollectionFilter__Instance.toggleFilters(false); }
       };
     }
 
@@ -127,9 +132,12 @@ class CollectionFilterSort extends Component {
         updateExternalLegacyFilters,
       } = this.props;
 
-      clearAllCollectionFilters();
-      if (isDrawerLayout){ setTemporaryFilters({}); }
-      else { updateExternalLegacyFilters(FILTER_DEFAULTS); }
+      if (isDrawerLayout){
+        setTemporaryFilters(FILTER_DEFAULTS);
+      } else {
+        clearAllCollectionFilters();
+        updateExternalLegacyFilters(FILTER_DEFAULTS);
+      }
     }
 
     handleColorSelection({name,}){
@@ -289,8 +297,8 @@ class CollectionFilterSort extends Component {
             checked={selectedColors.indexOf(name) > -1}
             onChange={this.handleColorSelection.bind(this, color)}
           />
-          <span className="ExpandablePanel__optionColorFallback"></span>
-          <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick ${inverse} color-${name}`}></span>
+          <span className="ExpandablePanel__optionColorFallback" />
+          <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick ${inverse} color-${name}`} />
           <span className="ExpandablePanel__optionName">{name}</span>
         </label>
       );
