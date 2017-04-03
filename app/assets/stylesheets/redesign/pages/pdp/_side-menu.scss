@@ -2,7 +2,7 @@
 -------------------------------------------------------*/
 @mixin pdp-side-menu-core {
   top: 0;
-  left: 100%;
+  transform: translateX(100%);
   width: 100%;
   height: 100vh;
   padding-bottom: $pdp-active-side-menu-padding-top;
@@ -10,7 +10,7 @@
   overflow: hidden;
   opacity: 0;
   z-index: 1;
-  transition: all 200ms ease-in;
+  transition: all 200ms ease-in-out;
 }
 
 @mixin pdp-side-menu-mobile {
@@ -23,7 +23,7 @@
 }
 
 @mixin pdp-side-menu-active {
-  left: 0;
+  transform: translateX(0);
   opacity: 1;
 }
 

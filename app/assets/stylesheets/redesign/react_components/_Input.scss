@@ -40,6 +40,9 @@
       appearance: none;
       margin: 0;
     }
+    &[type=number] { // Firefox
+    -moz-appearance:textfield;
+}
   }
 
   .Input-label {
