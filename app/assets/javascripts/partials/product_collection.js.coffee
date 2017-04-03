@@ -163,7 +163,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   update: (updateRequestParams) =>
     @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
-    @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
     updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)

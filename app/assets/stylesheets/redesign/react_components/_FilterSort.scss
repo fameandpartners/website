@@ -432,7 +432,7 @@
   cursor: pointer;
   height: 40px;
   line-height: 40px;
-  padding: 0 26px;
+  padding: 0 30px;
   text-transform: uppercase;
   border-bottom: 1px solid $c-neutral-4;
   font-weight: 500;
@@ -454,4 +454,8 @@
 
 .CollectionSortMobile .ExpandablePanel__btn {
   width: 100%;
+}
+
+.CollectionSortMobile .ExpandablePanel__action {
+  position: fixed;
 }
