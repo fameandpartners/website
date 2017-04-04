@@ -19,6 +19,7 @@ class CreateDefaultProductHeightRanges < ActiveRecord::Migration
     
     
     english_six = ProductHeightRangeGroup.new( name: 'default_six_size_english_group', unit: 'inch' )
+    english_six.save
     english_six.product_height_ranges << ProductHeightRange.new( min: 0,   max: 61,  unit: 'inch', map_to: 'length1' )
     english_six.product_height_ranges << ProductHeightRange.new( min: 62,  max: 64,  unit: 'inch', map_to: 'length2' )
     english_six.product_height_ranges << ProductHeightRange.new( min: 65,  max: 67,  unit: 'inch', map_to: 'length3' )
@@ -27,6 +28,7 @@ class CreateDefaultProductHeightRanges < ActiveRecord::Migration
     english_six.product_height_ranges << ProductHeightRange.new( min: 74,  max: 999, unit: 'inch', map_to: 'length6' )
 
     english_three = ProductHeightRangeGroup.new( name: 'default_three_size_english_group', unit: 'inch' )
+    english_three.save
     english_three.product_height_ranges << ProductHeightRange.new( min: 0,   max: 67,   unit: 'inch', map_to: 'petite' )
     english_three.product_height_ranges << ProductHeightRange.new( min: 68,  max: 70,   unit: 'inch', map_to: 'standard' )
     english_three.product_height_ranges << ProductHeightRange.new( min: 71,  max: 999,  unit: 'inch', map_to: 'tall' )
@@ -44,7 +46,7 @@ class CreateDefaultProductHeightRanges < ActiveRecord::Migration
 
   def delete_if_exists( name )
     group = ProductHeightRangeGroup.find_by_name( name )
-    group.delete if group.exists?
+    group.delete if group.present?
   end
   
   
