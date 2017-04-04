@@ -21,7 +21,7 @@ module Products
     end
 
     def use_auto_discount!(auto_discount)
-      if auto_discount.to_i > 0
+      if auto_discount&.amount.to_i > 0
         self.products.each do |product|
           product.use_auto_discount!(auto_discount)
         end
@@ -47,7 +47,6 @@ module Products
       result[:details] = self.details.to_h
 
       result[:products] = self.products.map do |product|
-        sale_price = product.price.apply(product.discount)
         product.to_h.merge(
           collection_path: ApplicationController.helpers.collection_product_path(product),
           prices: product.prices
