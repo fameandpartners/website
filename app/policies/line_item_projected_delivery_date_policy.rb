@@ -19,7 +19,6 @@ module Policies
     end
 
     def delivery_date
-      binding.pry
       if fast_making
         FAST_DELIVERY_DAYS.business_days.after(completed_at)
       else

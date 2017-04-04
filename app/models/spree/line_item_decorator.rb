@@ -36,6 +36,7 @@ Spree::LineItem.class_eval do
 
   # Note: it seems we need to store this value in DB.
   def delivery_period
+    binding.pry
     delivery_period_policy.delivery_period
   end
 
