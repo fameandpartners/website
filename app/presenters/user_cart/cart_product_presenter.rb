@@ -17,6 +17,10 @@ module UserCart
         { id: option.id, name: option.name, display_price: option.display_price.to_s }
       end
 
+      result[:available_making_options] = (available_making_options || []).map do |mo|
+        { id: mo.id, name: mo.name, display_discount: mo.display_discount}
+      end
+
       result
     end
   end

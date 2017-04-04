@@ -1,3 +1,6 @@
+# todo: thanh 3/31/17
+# Would prefer to replace this mechanism for discounts with a more
+# spree conventional solution in the future
 class ProductMakingOption < ActiveRecord::Base
   belongs_to :product, class_name: 'Spree::Product', touch: true
   # Note: Spree::Variant relationship doesn't seems necessary for making options
@@ -22,11 +25,12 @@ class ProductMakingOption < ActiveRecord::Base
   validates :currency, inclusion: ALL_CURRENCIES
 
   scope :fast_making, -> { where(option_type: 'fast_making') }
+  scope :slow_making, -> { where(option_type: 'slow_making') }
   scope :active, -> { where(active: true) }
 
   def assign_default_attributes
     self.active     = true
-    self.variant_id ||= product.try(:master).try(:id)
+    self.variant_id ||= product.try(:master).try(:id) #seems like this is deprecated
     self.price      ||= DEFAULT_OPTION_PRICE
     self.currency   ||= DEFAULT_CURRENCY
     self
@@ -36,11 +40,21 @@ class ProductMakingOption < ActiveRecord::Base
     Spree::Money.new(price, currency: currency)
   end
 
+  def display_discount
+    if self.fast_making?
+      self.display_price.to_s
+    elsif self.slow_making?
+      (self.price*100).round.to_s + '% discount'
+    else
+      '' #bad
+    end
+  end
+
   def name
     if fast_making?
-      'Express Making'
+      'Express Delivery'
     else
-      'Delayed Making'
+      'Deliver Later'
     end
   end
 

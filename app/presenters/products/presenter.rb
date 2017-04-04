@@ -205,6 +205,7 @@ module Products
     end
 
     def delivery_date
+      binding.pry
       delivery_date_obj_default               = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
       delivery_date_obj_no_customize_standard = Policies::ProjectDeliveryDatePolicy.new(self,false,"standard").delivery_date
       delivery_date_obj_no_customize_express  = Policies::ProjectDeliveryDatePolicy.new(self,false,"fast").delivery_date

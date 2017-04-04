@@ -25,6 +25,15 @@ class UserCart::CartProduct
     end
   end
 
+  # don't know if this will be necessary
+  def create_making_option(id)
+    return if line_item.blank?
+    line_item.making_options << LineItemMakingOption.build_option(ProductMakingOption.find(id))
+    update_order
+
+    true
+  end
+
   def destroy_customization(id)
     return true if line_item.personalization.blank?
 

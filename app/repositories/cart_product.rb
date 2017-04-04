@@ -42,6 +42,7 @@ class Repositories::CartProduct
       result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       result.making_options = product_making_options
+      result.available_making_options = available_making_options
       result.height         = height
 
       result
@@ -102,6 +103,18 @@ class Repositories::CartProduct
           option_type: option.product_making_option.option_type,
           name: option.product_making_option.name,
           display_price: option.display_price
+        )
+      end
+    end
+
+    # provide the available making_options to front end
+    def available_making_options
+      product.making_options.map do |mo|
+        OpenStruct.new(
+          id: mo.id,
+          option_type: mo.option_type,
+          name: mo.name,
+          display_discount: mo.display_discount
         )
       end
     end

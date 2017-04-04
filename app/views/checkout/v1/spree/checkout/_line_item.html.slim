@@ -31,3 +31,9 @@
             dd
               = option.name
               =<> option.display_price
+        - if product.available_making_options.present?
+          - product.available_making_options.each do |mo|
+            - if mo.name == "Express Delivery" && !Features.active?(:getitquick_unavailable)
+              dd #{ mo.name }: #{ mo.display_discount }
+            - if mo.name == "Deliver Later" && Features.active?(:delayed_delivery)
+              dd #{ mo.name }: #{ mo.display_discount }
