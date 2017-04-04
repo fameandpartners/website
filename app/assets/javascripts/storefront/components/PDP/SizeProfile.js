@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Scrollbars } from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
+import PDPConstants from '../../constants/PDPConstants';
 import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
@@ -23,6 +23,7 @@ class SidePanelSize extends SidePanel {
     };
     this.handleDressSizeSelection = this.handleDressSizeSelection.bind(this);
     this.generateOptions = this.generateOptions.bind(this);
+    this.updateHeightSelection = this.updateHeightSelection.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
@@ -43,11 +44,21 @@ class SidePanelSize extends SidePanel {
     );
 
     this.props.actions.customizeDress(customize);
-    this.closeMenu();
+  }
+
+  updateHeightSelection(height) {
+    this.props.actions.customizeDress({ height });
   }
 
   handleInchChange({ option }) {
-    this.setState({ ftHeight: option.id });
+    const selection = PDPConstants.INCH_SIZES[option.id];
+    const inches = (selection.ft * 12) + selection.inch;
+
+    this.updateHeightSelection({
+      heightId: option.id,
+      heightValue: inches,
+      heightUnit: 'inch',
+    });
   }
 
   handleCMChange({ value }) {
@@ -59,23 +70,19 @@ class SidePanelSize extends SidePanel {
   }
 
   generateOptions() {
-    const options = [];
-    for (let i = 0; i < 20; i += 1) {
-      const ft = 5 + Math.floor(i / 12);
-      options.push({
-        id: i,
-        name: (
-          <div>
-            <span className="amt">{ft}</span>
-            <span className="metric">ft</span>
-            <span className="amt amt--last">{i % 12}</span>
-            <span className="metric">in</span>
-          </div>
-        ),
-        active: i === this.state.ftHeight,
-      });
-    }
-    return options;
+    const { height } = this.props.customize;
+    return PDPConstants.INCH_SIZES.map(({ ft, inch }, i) => ({
+      id: i,
+      name: (
+        <div>
+          <span className="amt">{`${ft}`}</span>
+          <span className="metric">ft</span>
+          <span className="amt amt--last">{`${inch}`}</span>
+          <span className="metric">in</span>
+        </div>
+      ),
+      active: i === height.heightId,
+    }));
   }
 
   generateDressSizeSelections() {
@@ -89,7 +96,8 @@ class SidePanelSize extends SidePanel {
           className={ITEM_STATE}
           onClick={this.handleDressSizeSelection}
           key={`size-${size.table.id}`}
-          data-id={size.table.id} data-presentation={size.table.presentation}
+          data-id={size.table.id}
+          data-presentation={size.table.presentation}
         >
           {size.table.presentation}
         </a>
@@ -98,8 +106,6 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
-    const AUTO_HIDE = true;
-
     const ERROR = this.props.customize.size.error
       ? 'c-card-customize__content__left error'
       : 'c-card-customize__content__left';
@@ -122,58 +128,57 @@ class SidePanelSize extends SidePanel {
         </a>
 
         <div className={MENU_STATE}>
-          <Scrollbars autoHide={AUTO_HIDE}>
-            <div className="custom-scroll">
-              <div className="text-right">
-                <a
-                  className="btn-close med"
-                  onClick={this.closeMenu}
+          <div className="custom-scroll">
+            <div className="text-right">
+              <a
+                className="btn-close med"
+                onClick={this.closeMenu}
+              >
+                <span className="hide-visually">Close Menu</span>
+              </a>
+            </div>
+            <h2 className="h4 c-card-customize__header">Create a Size Profile</h2>
+            <p>
+            Enter your height and size information so we can ensure
+            you'll get the best fit possible
+            </p>
+
+            <div className="height-selection clearfix">
+              <h4>How tall are you?</h4>
+              <div className="select-container pull-left">
+                { this.state.metricOption === 'in' ?
+                  <Select
+                    id="height-options"
+                    onChange={this.handleInchChange}
+                    className="sort-options"
+                    options={this.generateOptions()}
+                  /> :
+                  <Input
+                    type="number"
+                    onChange={this.handleCMChange}
+                  />
+                }
+              </div>
+
+              <div className="metric-container pull-left">
+                <RadioGroup
+                  name="metricOptions"
+                  selectedValue={this.state.metricOption}
+                  onChange={this.handleMetricSwitch}
                 >
-                  <span className="hide-visually">Close Menu</span>
-                </a>
-              </div>
-              <h2 className="h4 c-card-customize__header">Create a Size Profile</h2>
-              <p>
-              Enter your height and size information so we can ensure
-              you'll get the best fit possible
-              </p>
-
-              <div className="height-selection clearfix">
-                <h4>How tall are you?</h4>
-                <div className="select-container pull-left">
-                  { this.state.metricOption === 'in' ?
-                    <Select
-                      id="height-options"
-                      onChange={this.handleInchChange}
-                      className="sort-options"
-                      options={this.generateOptions()}
-                    /> :
-                    <Input
-                      type="number"
-                      onChange={this.handleCMChange}
-                    />
-                  }
-                </div>
-
-                <div className="metric-container pull-left">
-                  <RadioGroup
-                    name="metricOptions"
-                    selectedValue={this.state.metricOption}
-                    onChange={this.handleMetricSwitch}
-                  >
-                    <Radio display="Inches" value="in" />
-                    <Radio display="cm" value="cm" />
-                  </RadioGroup>
-                </div>
+                  <Radio display="Inches" value="in" />
+                  <Radio display="cm" value="cm" />
+                </RadioGroup>
               </div>
             </div>
+          </div>
 
-            <div className="size-selection">
-              <h4>What's your dress size?</h4>
-              <div className="row">{SIZES}</div>
-              <SidePanelSizeChart />
-            </div>
-          </Scrollbars>
+          <div className="size-selection">
+            <h4>What's your dress size?</h4>
+            <div className="row">{SIZES}</div>
+
+            <SidePanelSizeChart />
+          </div>
         </div>
       </div>
     );
