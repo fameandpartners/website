@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware,} from 'redux';
+import { createStore, applyMiddleware, } from 'redux';
 import rootReducer from '../reducers';
 import { composeWithDevTools, } from 'redux-devtools-extension';
 
@@ -28,49 +28,49 @@ export default function configureStore(initialState) {
         {
           type: 'Mini',
           heights: [
-            {type: 'Petite',   cm: '42.5', inches: '16 ¾',},
-            {type: 'Standard', cm: '45',   inches: '17 ½',},
-            {type: 'Tall',     cm: '47.5', inches: '18 ¾',},
+            { type: 'Petite', cm: '42.5', inches: '16 ¾', },
+            { type: 'Standard', cm: '45', inches: '17 ½', },
+            { type: 'Tall', cm: '47.5', inches: '18 ¾', },
           ],
         },
         {
           type: 'Knee',
           heights: [
-            {type: 'Petite',   cm: '54', inches: '21 ¼',},
-            {type: 'Standard', cm: '57', inches: '22 ½',},
-            {type: 'Tall',     cm: '60', inches: '23 ¾',},
+            { type: 'Petite', cm: '54', inches: '21 ¼', },
+            { type: 'Standard', cm: '57', inches: '22 ½', },
+            { type: 'Tall', cm: '60', inches: '23 ¾', },
           ],
         },
         {
           type: 'Petti',
           heights: [
-            {type: 'Petite',   cm: '68', inches: '26 ¾',},
-            {type: 'Standard', cm: '72', inches: '28 ¼',},
-            {type: 'Tall',     cm: '76', inches: '29 ¾',},
+            { type: 'Petite', cm: '68', inches: '26 ¾', },
+            { type: 'Standard', cm: '72', inches: '28 ¼', },
+            { type: 'Tall', cm: '76', inches: '29 ¾', },
           ],
         },
         {
           type: 'Midi',
           heights: [
-            {type: 'Petite',   cm: '75', inches: '29 ½',},
-            {type: 'Standard', cm: '80', inches: '31 ½',},
-            {type: 'Tall',     cm: '85', inches: '33 ½',},
+            { type: 'Petite', cm: '75', inches: '29 ½', },
+            { type: 'Standard', cm: '80', inches: '31 ½', },
+            { type: 'Tall', cm: '85', inches: '33 ½', },
           ],
         },
         {
           type: 'Ankle',
           heights: [
-            {type: 'Petite',   cm: '94',  inches: '37',},
-            {type: 'Standard', cm: '99',  inches: '39',},
-            {type: 'Tall',     cm: '104', inches: '41',},
+            { type: 'Petite', cm: '94', inches: '37', },
+            { type: 'Standard', cm: '99', inches: '39', },
+            { type: 'Tall', cm: '104', inches: '41', },
           ],
         },
         {
           type: 'Maxi',
           heights: [
-            {type: 'Petite',   cm: '104', inches: '41',},
-            {type: 'Standard', cm: '110', inches: '43 ¼',},
-            {type: 'Tall',     cm: '116', inches: '45 ½',},
+            { type: 'Petite', cm: '104', inches: '41', },
+            { type: 'Standard', cm: '110', inches: '43 ¼', },
+            { type: 'Tall', cm: '116', inches: '45 ½', },
           ],
         },
       ],
@@ -82,6 +82,11 @@ export default function configureStore(initialState) {
           presentation: '',
           error: false,
           message: '',
+        },
+        height: {
+          heightId: null,
+          heightValue: undefined,
+          heightUnit: '',
         },
         length: {
           id: null,
@@ -100,7 +105,7 @@ export default function configureStore(initialState) {
           presentation: '',
           price: 0,
         },
-        dressVariantId : null,
+        dressVariantId: null,
         makingOption: {
           id: null,
           price: 0,
@@ -112,7 +117,6 @@ export default function configureStore(initialState) {
   if (process.env.NODE_ENV === 'development') {
     const reduxImmutableStateInvariant = require('redux-immutable-state-invariant')();
     return createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(reduxImmutableStateInvariant)));
-  } else {
-    return createStore(rootReducer, initialState);
   }
+  return createStore(rootReducer, initialState);
 }
