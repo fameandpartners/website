@@ -12,7 +12,7 @@ class SidePanelSizeChart extends React.Component {
     this.state = {
       active: false,
       modalIsOpen: false,
-      imchesIsActive: true,
+      inchesIsActive: true,
       cmIsActive: false,
     };
 
@@ -32,20 +32,20 @@ class SidePanelSizeChart extends React.Component {
 
   showCm() {
     this.setState({
-      imchesIsActive: false,
+      inchesIsActive: false,
       cmIsActive: true,
     });
   }
 
   showInches() {
     this.setState({
-      imchesIsActive: true,
+      inchesIsActive: true,
       cmIsActive: false,
     });
   }
 
   render() {
-    const INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
+    const INCHES_IS_ACTIVE = this.state.inchesIsActive ? 'is-active' : '';
     const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
 
     return (

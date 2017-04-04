@@ -1,11 +1,10 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Scrollbars} from 'react-custom-scrollbars';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
-import {GetDressVariantId} from './utils';
+import { GetDressVariantId } from './utils';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -15,7 +14,7 @@ class SidePanelSize extends SidePanel {
   }
 
   onChange(event) {
-    let customize = {};
+    const customize = {};
     customize.size = {};
     customize.size.id = event.currentTarget.dataset.id;
     customize.size.presentation = event.currentTarget.dataset.presentation;
@@ -35,19 +34,21 @@ class SidePanelSize extends SidePanel {
     const AUTO_HIDE = true;
 
     const ERROR = this.props.customize.size.error
-      ? "c-card-customize__content__left error"
-      : "c-card-customize__content__left";
+      ? 'c-card-customize__content__left error'
+      : 'c-card-customize__content__left';
     const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
-      ? "c-card-customize__content is-selected" : "c-card-customize__content";
+      ? 'c-card-customize__content is-selected' : 'c-card-customize__content';
 
     const SIZES = this.props.defaultSizes.map((size, index) => {
       const ITEM_STATE = this.props.customize.size.id == size.table.id
-        ? "selector-size is-selected" : "selector-size";
+        ? 'selector-size is-selected' : 'selector-size';
       return (
-        <a href="javascript:;" className={ITEM_STATE}
+        <a
+          href="javascript:;" className={ITEM_STATE}
           onClick={this.onChange} key={index}
-          data-id={size.table.id} data-presentation={size.table.presentation}>
+          data-id={size.table.id} data-presentation={size.table.presentation}
+        >
           {size.table.presentation}
         </a>
       );
@@ -55,28 +56,29 @@ class SidePanelSize extends SidePanel {
 
     return (
       <div className="pdp-side-container pdp-side-container-size">
-        <a href="javascript:;"
+        <a
           className={TRIGGER_STATE}
-          onClick={this.openMenu}>
+          onClick={this.openMenu}
+        >
           <div className={ERROR}>Dress Size</div>
           <div className="c-card-customize__content__right">{this.props.customize.size.presentation}</div>
         </a>
 
         <div className={MENU_STATE}>
-          <Scrollbars autoHide={AUTO_HIDE}>
-            <div className="custom-scroll">
-              <div className="text-right">
-                <a href="javascript:;"
-                  className="btn-close lg"
-                  onClick={this.closeMenu}>
-                    <span className="hide-visually">Close Menu</span>
-                </a>
-              </div>
-              <h2 className="h4 c-card-customize__header">Choose your size</h2>
-              <div className="row">{SIZES}</div>
-              <SidePanelSizeChart />
+          <div className="custom-scroll">
+            <div className="text-right">
+              <a
+                href="javascript:;"
+                className="btn-close lg"
+                onClick={this.closeMenu}
+              >
+                <span className="hide-visually">Close Menu</span>
+              </a>
             </div>
-          </Scrollbars>
+            <h2 className="h4 c-card-customize__header">Choose your size</h2>
+            <div className="row">{SIZES}</div>
+            <SidePanelSizeChart />
+          </div>
         </div>
       </div>
     );
