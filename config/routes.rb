@@ -203,6 +203,9 @@ FameAndPartners::Application.routes.draw do
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
 
+    # Every BODY Dance Collection
+    get '/every-BODY-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
+
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
 
