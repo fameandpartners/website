@@ -88,12 +88,6 @@ export default function configureStore(initialState) {
           heightValue: undefined,
           heightUnit: 'inch',
         },
-        length: {
-          id: null,
-          presentation: '',
-          error: false,
-          message: '',
-        },
         color: {
           id: null,
           presentation: '',
