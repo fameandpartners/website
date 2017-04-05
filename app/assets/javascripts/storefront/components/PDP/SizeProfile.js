@@ -28,6 +28,7 @@ class SidePanelSize extends SidePanel {
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
+    this.handleApply = this.handleApply.bind(this);
   }
 
   handleDressSizeSelection(event) {
@@ -63,7 +64,14 @@ class SidePanelSize extends SidePanel {
   }
 
   handleCMChange({ value }) {
-    this.setState({ cmHeight: parseInt(value, 10) });
+    this.updateHeightSelection({
+      heightValue: value,
+      heightUnit: 'cm',
+    });
+  }
+
+  handleApply() {
+    this.closeMenu();
   }
 
   handleMetricSwitch({ value }) {
@@ -125,7 +133,7 @@ class SidePanelSize extends SidePanel {
     // NOTE: I'm still apalled that we're having to parse nested tables because
     // of Ruby's OpenStruct. Please note this is being done here.
     return this.props.defaultSizes.map((size) => {
-      const ITEM_STATE = this.props.customize.size.id === size.table.id
+      const ITEM_STATE = parseInt(this.props.customize.size.id, 10) === size.table.id
         ? 'selector-size is-selected' : 'selector-size';
       return (
         <a
@@ -209,7 +217,7 @@ class SidePanelSize extends SidePanel {
             <div className="row">{SIZES}</div>
             <SidePanelSizeChart />
             <div className="btn-wrap">
-              <div className="btn btn-black btn-lrg">Apply</div>
+              <div onClick={this.handleApply} className="btn btn-black btn-lrg">Apply</div>
             </div>
           </div>
         </div>
