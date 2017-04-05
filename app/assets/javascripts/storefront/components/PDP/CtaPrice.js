@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
-import {MODAL_STYLE} from './utils';
+import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
 
 class CtaPrice extends React.Component {
@@ -20,43 +20,37 @@ class CtaPrice extends React.Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
 
   addToBag() {
     // TODO: redo this
-    // this is just very hacky way to connect this with shopping cart
-    if(this.props.customize.size.id
+    // this is just EXTREMELY hacky way to connect this with shopping cart
+    if (this.props.customize.size.id
       && this.props.customize.color.id
-      && this.props.customize.length.id) {
+      && this.props.customize.height.heightValue) {
       // disable "ADD TO BAG" button and show spinner
-      this.setState({sending:true});
-      document.getElementById('pdpCartSizeId').value   = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value  = this.props.customize.color.id;
+      this.setState({ sending: true });
+      document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
+      document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
       document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartLength').value    = this.props.customize.length.id;
+      document.getElementById('pdpCartHeight').value = this.props.customize.height.heightValue;
+      document.getElementById('pdpCartHeightUnit').value = this.props.customize.height.heightUnit;
       document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOption.id;
+      document.getElementById('pdpCartMakingId').value = this.props.customize.makingOption.id;
       $('#pdpDataForCheckout').submit();
     } else {
       // set errors
-      if(!this.props.customize.size.id) {
-        let customize = {};
+      if (!this.props.customize.size.id) {
+        const customize = {};
         customize.size = {};
         customize.size.error = true;
         customize.size.message = 'dress size';
-        this.props.actions.customizeDress(customize);
-      }
-      if(!this.props.customize.length.id) {
-        let customize = {};
-        customize.length = {};
-        customize.length.error = true;
-        customize.length.message = 'dress length';
         this.props.actions.customizeDress(customize);
       }
     }
@@ -74,54 +68,43 @@ class CtaPrice extends React.Component {
     if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
       deliveryPeriod = this.props.product.fast_making_delivery_period;
     }
-
-    let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
-    let isAddToBagAvailable = (
-      this.props.customize.size.id
-        && this.props.customize.color.id
-        && this.props.customize.length.id
-    );
+    const isAfterpayEnabled = this.props.siteVersion === 'Australia' && this.props.flags.afterpay;
 
     return (
       <div className="btn-wrap">
         <div className="price">${PRICE}</div>
-          {(() => {
-            if(isAfterpayEnabled) {
-              return (
-                <div className="afterpay-message">
-                  <span>or 4 easy payments of ${PRICE / 4} with</span>
-                  <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                  <a href="javascript:;" onClick={this.openModal}>info</a>
-                </div>
-              );
-            }
-          })()}
-          {(() => {
-            if(isAddToBagAvailable && !this.state.sending) {
-              return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
-                  ADD TO BAG
-                </a>
-              );
-            } else if(this.state.sending) {
-              return (
-                <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
-                  <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
-                </a>
-              );
-            } else {
-              return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-lowlight btn-lrg" disabled="disabled">ADD TO BAG</a>
-              );
-            }
-          })()}
+        {(() => {
+          if (isAfterpayEnabled) {
+            return (
+              <div className="afterpay-message">
+                <span>or 4 easy payments of ${PRICE / 4} with</span>
+                <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
+                <a href="javascript:;" onClick={this.openModal}>info</a>
+              </div>
+            );
+          }
+        })()}
+        {(() => {
+          if (this.state.sending) {
+            return (
+              <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
+                <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
+              </a>
+            );
+          }
+          return (
+            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
+              ADD TO BAG
+            </a>
+          );
+        })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
           <li>Estimated delivery, {deliveryPeriod}</li>
         </ul>
         {(() => {
           if (this.props.product.cny_delivery_delays) {
-            return(
+            return (
               <div className="deliveryNote">We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</div>
             );
           }
@@ -130,7 +113,8 @@ class CtaPrice extends React.Component {
           style={MODAL_STYLE}
           className="md"
           isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}>
+          onRequestClose={this.closeModal}
+        >
           <div className="afterpay-modal">
             <div className="row">
               <div className="col-md-12">
