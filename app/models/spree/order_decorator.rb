@@ -34,6 +34,7 @@ Spree::Order.class_eval do
     # which on order number, is very very slow.
   end
 
+  # called from manual_order, value is derived from delivery_period
   def project_delivery_date
     if complete?
       delivery_date = delivery_policy.delivery_date
@@ -41,6 +42,7 @@ Spree::Order.class_eval do
     end
   end
 
+  # thanh 4/3/17- did not find any references to this method
   def delivery_period
     delivery_policy.delivery_period
   end

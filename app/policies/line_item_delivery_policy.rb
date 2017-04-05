@@ -10,11 +10,13 @@ module Policies
     end
 
     def delivery_period
-      binding.pry
+      # chinese new years wins out over all
       if Features.active?(:cny_delivery_delays)
-        cny_delivery_period
-      elsif @line_item.fast_making?
+        cny_delivery_period      
+      elsif @line_item.fast_making? #then the fast_making wins
         fast_making_delivery_period
+      elsif @line_item.slow_making? #how slow can you go
+        slow_making_delivery_period
       else
         maximum_delivery_period
       end
