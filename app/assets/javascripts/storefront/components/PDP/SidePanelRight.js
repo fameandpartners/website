@@ -1,7 +1,6 @@
-import React, {PropTypes,} from 'react';
-import {connect,} from 'react-redux';
+import React, { PropTypes, } from 'react';
+import { connect, } from 'react-redux';
 import SizeProfile from './SizeProfile';
-import SidePanelLength from './SidePanelLength';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
 import SidePanelFastMaking from './SidePanelFastMaking';
@@ -13,33 +12,7 @@ class PdpSidePanelRight extends React.Component {
   }
 
   render() {
-    const ERROR_MESSAGE = (() => {
-      if(this.props.customize.size.error && this.props.customize.length.error) {
-        return (
-          <div className="error-message">
-            Please select a {this.props.customize.size.message} and {this.props.customize.length.message} to continue.
-          </div>
-        );
-      } else if(this.props.customize.size.error && !this.props.customize.length.error) {
-        return (
-          <div className="error-message">
-            Please select a {this.props.customize.size.message} to continue.
-          </div>
-        );
-      } else if(!this.props.customize.size.error && this.props.customize.length.error) {
-        return (
-          <div className="error-message">
-            Please select a {this.props.customize.length.message} to continue.
-          </div>
-        );
-      } else {
-        return (
-          <span></span>
-        );
-      }
-    })();
-
-    if(this.props.product.is_active) {
+    if (this.props.product.is_active) {
       return (
         <div className="panel-side-container">
           <div>
@@ -55,12 +28,8 @@ class PdpSidePanelRight extends React.Component {
 
             <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
-              <div id="tab-size-fit" className="c-card-customize active" role="tabpanel">
-                {ERROR_MESSAGE}
-              </div>
-
               <SidePanelColor />
-              {this.props.skirts.length ?  <SidePanelCustom /> : null}
+              {this.props.skirts.length ? <SidePanelCustom /> : null}
               <SizeProfile />
 
             </div>
@@ -69,18 +38,17 @@ class PdpSidePanelRight extends React.Component {
           <CtaPrice />
         </div>
       );
-    } else {
-      return (
-        <div className="panel-side-container">
-          <div>
-            <p>Sorry, the dress you are looking for is currently unavailable.</p>
-            <p>
-              <a href="/dresses" className="link">Search similar dresses</a>
-            </p>
-          </div>
-        </div>
-      );
     }
+    return (
+      <div className="panel-side-container">
+        <div>
+          <p>Sorry, the dress you are looking for is currently unavailable.</p>
+          <p>
+            <a href="/dresses" className="link">Search similar dresses</a>
+          </p>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -90,9 +58,7 @@ PdpSidePanelRight.propTypes = {
   product: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state, ownProps) {
-  console.log('state', state);
-  console.log('ownProps', ownProps);
+function mapStateToProps(state) {
   return {
     skirts: state.skirts,
     customize: state.customize,

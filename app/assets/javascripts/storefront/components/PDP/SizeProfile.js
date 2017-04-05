@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { find } from 'lodash';
 import * as pdpActions from '../../actions/PdpActions';
 import PDPConstants from '../../constants/PDPConstants';
 import SidePanel from './SidePanel';
@@ -8,10 +9,10 @@ import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
 
 // Shared Components
-import Select from '../shared/Select.jsx';
-import Radio from '../shared/Radio.jsx';
+import Select from '../shared/Select.js';
+import Radio from '../shared/Radio.js';
 import Input from '../shared/Input';
-import RadioGroup from '../shared/RadioGroup.jsx';
+import RadioGroup from '../shared/RadioGroup.js';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -66,7 +67,23 @@ class SidePanelSize extends SidePanel {
   }
 
   handleMetricSwitch({ value }) {
-    this.setState({ metricOption: value });
+    const CM_TO_INCHES = 2.54;
+    const { heightValue } = this.props.customize.height;
+    const convertedMetric = { heightUnit: value };
+    if (value === 'cm' && heightValue) {
+      convertedMetric.heightValue = Math.round(heightValue * CM_TO_INCHES);
+    } else if (value === 'inch' && heightValue) {
+      const totalInches = Math.round(heightValue / CM_TO_INCHES);
+      const inchSizeObj = find(PDPConstants.INCH_SIZES, {
+        totalInches,
+      });
+      if (typeof inchSizeObj.id === 'number') {
+        convertedMetric.heightValue = totalInches;
+        convertedMetric.heightId = inchSizeObj.id;
+      }
+    }
+
+    this.updateHeightSelection(convertedMetric);
   }
 
   generateOptions() {
@@ -83,6 +100,25 @@ class SidePanelSize extends SidePanel {
       ),
       active: i === height.heightId,
     }));
+  }
+
+  generateSizeProfileSummary() {
+    const { height, size } = this.props.customize;
+    const ERROR = this.props.customize.size.error
+      ? 'c-card-customize__content__left error'
+      : 'c-card-customize__content__left';
+    const displayString = height.heightValue && size.presentation
+      ? `${height.heightValue} ${height.heightUnit} / ${size.presentation}`
+      : '';
+
+    return (
+      <div>
+        <div className={ERROR}>Size Profile</div>
+        <div className="c-card-customize__content__right">
+          { displayString }
+        </div>
+      </div>
+    );
   }
 
   generateDressSizeSelections() {
@@ -106,14 +142,11 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
-    const ERROR = this.props.customize.size.error
-      ? 'c-card-customize__content__left error'
-      : 'c-card-customize__content__left';
     const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
       ? 'c-card-customize__content is-selected' : 'c-card-customize__content';
-
     const SIZES = this.generateDressSizeSelections();
+    const { customize } = this.props;
 
     return (
       <div className="pdp-side-container pdp-side-container-size">
@@ -121,10 +154,7 @@ class SidePanelSize extends SidePanel {
           className={TRIGGER_STATE}
           onClick={this.openMenu}
         >
-          <div className={ERROR}>Size Profile</div>
-          <div className="c-card-customize__content__right">
-            {this.props.customize.size.presentation}
-          </div>
+          {this.generateSizeProfileSummary()}
         </a>
 
         <div className={MENU_STATE}>
@@ -146,7 +176,7 @@ class SidePanelSize extends SidePanel {
             <div className="height-selection clearfix">
               <h4>How tall are you?</h4>
               <div className="select-container pull-left">
-                { this.state.metricOption === 'in' ?
+                { customize.height.heightUnit === 'inch' ?
                   <Select
                     id="height-options"
                     onChange={this.handleInchChange}
@@ -156,6 +186,7 @@ class SidePanelSize extends SidePanel {
                   <Input
                     type="number"
                     onChange={this.handleCMChange}
+                    defaultValue={customize.height.heightValue}
                   />
                 }
               </div>
@@ -163,10 +194,10 @@ class SidePanelSize extends SidePanel {
               <div className="metric-container pull-left">
                 <RadioGroup
                   name="metricOptions"
-                  selectedValue={this.state.metricOption}
+                  selectedValue={customize.height.heightUnit}
                   onChange={this.handleMetricSwitch}
                 >
-                  <Radio display="Inches" value="in" />
+                  <Radio display="Inches" value="inch" />
                   <Radio display="cm" value="cm" />
                 </RadioGroup>
               </div>
@@ -176,8 +207,10 @@ class SidePanelSize extends SidePanel {
           <div className="size-selection">
             <h4>What's your dress size?</h4>
             <div className="row">{SIZES}</div>
-
             <SidePanelSizeChart />
+            <div className="btn-wrap">
+              <div className="btn btn-black btn-lrg">Apply</div>
+            </div>
           </div>
         </div>
       </div>
