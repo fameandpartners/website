@@ -6,12 +6,14 @@ import React, { Component, PropTypes } from 'react';
 const propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string,
+  defaultValue: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   type: 'input',
+  defaultValue: '',
   placeholder: '',
 };
 
@@ -30,8 +32,7 @@ class Input extends Component {
   }
 
   render() {
-    console.log('props', this.props);
-    const { id, placeholder, type } = this.props;
+    const { id, defaultValue, placeholder, type } = this.props;
     return (
       <div className="Input-wrapper">
         <input
@@ -41,6 +42,7 @@ class Input extends Component {
           onChange={this.handleChange}
           placeholder={placeholder}
           type={type}
+          defaultValue={defaultValue}
         />
         <span className="Input-label">cm</span>
       </div>
