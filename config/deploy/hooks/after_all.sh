@@ -23,7 +23,7 @@ curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
 # Add the list of merged to staging branch tasks into public/deployed.html
 # After deploy available to view by link: https://staging.fameandpartners.com/deployed
 if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "staging" ]) ; then
-  FILE_PATH=$APP_LOCATION/current/public/deployed.html
+  FILE_PATH=$current_app_path/public/deployed.html
   ISSUES_LIST=$(git -C $APP_LOCATION/cached-copy/$APP_NAME/.git log --merges --grep='WEBSITE.\+staging' | awk 'match($0, /WEBSITE-[0-9]+/) { print substr( $0, RSTART, RLENGTH )}' )
 
   HEADER_TEXT="<h3>Deployed branches on <a href='https://staging.fameandpartners.com'>https://staging.fameandpartners.com</a></h3>"
