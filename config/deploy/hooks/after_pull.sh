@@ -20,17 +20,20 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
   author='DeployBot'
 
   mkdir -p $log_folder
-  echo "Latest deploy changes at: $(date)" > $log_file
-  echo "Previous tag: $previous_tag">> $log_file
-  echo "Latest tag:   $latest_tag">> $log_file
 
-  echo >> $log_file
-  echo 'Files changed:' >> $log_file
-  echo "$message_diff" >> $log_file
+  if [ -d "$log_folder" ]; then
+    echo "Latest deploy changes at: $(date)" > $log_file
+    echo "Previous tag: $previous_tag" >> $log_file
+    echo "Latest tag:   $latest_tag" >> $log_file
 
-  echo >> $log_file
-  echo 'Merged PRs:' >> $log_file
-  echo "$message_changes" >> $log_file
+    echo >> $log_file
+    echo 'Files changed:' >> $log_file
+    echo "$message_diff" >> $log_file
+
+    echo >> $log_file
+    echo 'Merged PRs:' >> $log_file
+    echo "$message_changes" >> $log_file
+  fi
 
   # NOTE: Alexey Bobyrev 09 Feb 2017
   # Slack accepts only 4000 characters per message

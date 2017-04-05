@@ -9,7 +9,7 @@ describe 'deploy hook script:' do
   let(:server_role) { 'not-exist' }
   let(:framework_env) { 'not-exist' }
   let(:env_vars) do
-    { 'SERVER_ROLE' => server_role, 'FRAMEWORK_ENV' => framework_env, 'current_app_path' => Rails.root.to_s, 'this_release_dir' => Rails.root.to_s, 'app_full_name' => File.join('..', '..', Rails.root) }
+    { 'SERVER_ROLE' => server_role, 'FRAMEWORK_ENV' => framework_env, 'current_app_path' => Rails.root.to_s, 'this_release_dir' => Rails.root.to_s }
   end
   let(:servers) do
   end
