@@ -123,6 +123,7 @@ end
 group :development do
   gem 'foreman', require: false
   gem 'puma'
+  gem 'rack-timeout-puma'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'awesome_print'

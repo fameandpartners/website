@@ -647,6 +647,9 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.4.2)
+    rack-timeout-puma (0.0.1)
+      rack-timeout (~> 0.2, >= 0.2.0)
     rails (3.2.22.5)
       actionmailer (= 3.2.22.5)
       actionpack (= 3.2.22.5)
@@ -945,6 +948,7 @@ DEPENDENCIES
   puma
   quiet_assets
   rack-cors
+  rack-timeout-puma
   rails (~> 3.2.22.5)
   react-rails (~> 1.6)
   redcarpet (~> 2.3.0)
