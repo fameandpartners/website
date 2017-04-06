@@ -13,9 +13,9 @@ class CreateDefaultProductHeightRanges < ActiveRecord::Migration
 
     metric_three = ProductHeightRangeGroup.new( name: 'default_three_size_metric_group', unit: 'cm' )
     metric_three.save
-    metric_three.product_height_ranges << ProductHeightRange.new( min: 0,   max: 167, unit: 'cm', map_to: 'petite' )
-    metric_three.product_height_ranges << ProductHeightRange.new( min: 168, max: 174, unit: 'cm', map_to: 'standard' )
-    metric_three.product_height_ranges << ProductHeightRange.new( min: 175, max: 999, unit: 'cm', map_to: 'tall' )
+    metric_three.product_height_ranges << ProductHeightRange.new( min: 0,   max: 165, unit: 'cm', map_to: 'petite' )
+    metric_three.product_height_ranges << ProductHeightRange.new( min: 166, max: 176, unit: 'cm', map_to: 'standard' )
+    metric_three.product_height_ranges << ProductHeightRange.new( min: 177, max: 999, unit: 'cm', map_to: 'tall' )
     
     
     english_six = ProductHeightRangeGroup.new( name: 'default_six_size_english_group', unit: 'inch' )
@@ -29,9 +29,9 @@ class CreateDefaultProductHeightRanges < ActiveRecord::Migration
 
     english_three = ProductHeightRangeGroup.new( name: 'default_three_size_english_group', unit: 'inch' )
     english_three.save
-    english_three.product_height_ranges << ProductHeightRange.new( min: 0,   max: 67,   unit: 'inch', map_to: 'petite' )
-    english_three.product_height_ranges << ProductHeightRange.new( min: 68,  max: 70,   unit: 'inch', map_to: 'standard' )
-    english_three.product_height_ranges << ProductHeightRange.new( min: 71,  max: 999,  unit: 'inch', map_to: 'tall' )
+    english_three.product_height_ranges << ProductHeightRange.new( min: 0,   max: 65,   unit: 'inch', map_to: 'petite' )
+    english_three.product_height_ranges << ProductHeightRange.new( min: 66,  max: 69,   unit: 'inch', map_to: 'standard' )
+    english_three.product_height_ranges << ProductHeightRange.new( min: 70,  max: 999,  unit: 'inch', map_to: 'tall' )
     
   end
 
