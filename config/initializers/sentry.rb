@@ -9,4 +9,4 @@ Raven.configure do |config|
   config.environments    = %w(staging production)
 end
 
-https://6d51d1f989a44c33ad1b7e362f6b124e:b62fad1d2b3d4b998fced7da13d266e0@sentry.io/156022
+
