@@ -60,12 +60,17 @@ module Marketing
 
         def featured_image_urls
           image = product.featured_image
-          {
+
+          if image
+            {
               original: image.original,
               xlarge:   image.xlarge,
               large:    image.large,
               small:    image.small
-          }
+            }
+          else
+            nil 
+          end
         end
 
         def all_images
