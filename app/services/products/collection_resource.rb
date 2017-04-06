@@ -65,7 +65,7 @@ class Products::CollectionResource
     @remove_excluded_from_site_logic = options[:remove_excluded_from_site_logic]
   end
 
-  
+
   # what about ProductCollection class
   def read
     color     = color.first if color.is_a? Array
@@ -99,8 +99,9 @@ class Products::CollectionResource
       nil
     end
   end
-  
+
   def details
+    binding.pry
     @details ||= begin
                    Products::CollectionDetails.new(
                      collection:     collection,
@@ -113,6 +114,7 @@ class Products::CollectionResource
                      site_version:   site_version,
                      fast_delivery:  fast_delivery?,
                      fast_making:    fast_making
+                    # thanh - maybe add slowmaking code here
                    ).read
                  end
   end
@@ -146,8 +148,9 @@ class Products::CollectionResource
     # ignore this case.
     # also, having ability to query group=black&color=white seems useless
     result[:color_ids] = []
-    
+
     if color_group.present?
+      binding.pry
       result[:color_ids] += color_group.color_ids
     elsif color_groups.present?
       color_groups.each { |c| result[:color_ids] += c.color_ids }

@@ -28,14 +28,23 @@ module Policies
 
     # returns period with 2 numbers and a unit
     # eq 3 - 4 weeks, 12 - 14 business days etc
-    def delivery_period
-      if Features.active?(:cny_delivery_delays)
-        Policies::DeliveryPolicy::CNY_DELIVERY_PERIOD
-      elsif order.has_fast_making_items?
-        Policies::DeliveryPolicy::FAST_MAKING_DELIVERY_PERIOD
+    # this should only be called for manual orders which can only contain 1 line item
+    def delivery_period     
+      period = ''
+
+      if order.has_fast_making_items?
+        return Policies::DeliveryPolicy::FAST_MAKING_DELIVERY_PERIOD
+      elsif order.has_slow_making_items?
+        period = Policies::DeliveryPolicy::SLOW_MAKING_DELIVERY_MAP[maximal_delivery_period]        
       else
-        maximal_delivery_period
+        period = maximal_delivery_period
       end
+
+      # make adjustment for chinese new year
+      if Features.active?(:cny_delivery_delays)
+        period = adjust_for_cny(period)
+      end
+      period      
     end
 
     private

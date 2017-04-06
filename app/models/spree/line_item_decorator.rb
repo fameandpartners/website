@@ -36,7 +36,6 @@ Spree::LineItem.class_eval do
 
   # Note: it seems we need to store this value in DB.
   def delivery_period
-    binding.pry
     delivery_period_policy.delivery_period
   end
 
@@ -75,7 +74,11 @@ Spree::LineItem.class_eval do
   end
 
   def fast_making?
-    making_options.any? {|option| option.product_making_option.fast_making? }
+    making_options.any? {|mo| mo.product_making_option.fast_making? }
+  end
+
+  def slow_making?
+    making_options.any? {|mo| mo.product_making_option.slow_making? }
   end
 
   def making_options_price

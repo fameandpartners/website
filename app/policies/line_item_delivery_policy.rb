@@ -10,16 +10,21 @@ module Policies
     end
 
     def delivery_period
-      # chinese new years wins out over all
-      if Features.active?(:cny_delivery_delays)
-        cny_delivery_period      
-      elsif @line_item.fast_making? #then the fast_making wins
-        fast_making_delivery_period
+      period = ''
+      
+      if @line_item.fast_making? #fast_making wins
+        return fast_making_delivery_period
       elsif @line_item.slow_making? #how slow can you go
-        slow_making_delivery_period
+        period = slow_making_delivery_period
       else
-        maximum_delivery_period
+        period = maximum_delivery_period
       end
+
+      # make adjustment for chinese new year
+      if Features.active?(:cny_delivery_delays)
+        period = adjust_for_cny(period)
+      end
+      period
     end
   end
 end
