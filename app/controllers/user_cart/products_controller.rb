@@ -15,6 +15,8 @@ class UserCart::ProductsController < UserCart::BaseController
         customizations_ids: params[:customizations_ids],
         making_options_ids: params[:making_options_ids],
         height:             params[:height],
+        height_value:       params[:height_value],
+        height_unit:        params[:height_unit],
         quantity: 1
       }
     )
