@@ -20,6 +20,10 @@ module Acceptance
         visit collection_product_path(dress)
       end
 
+      step 'I click on element with text :text' do |text|
+        find(:xpath, "//*[text()='#{text}']").click
+      end
+
       step 'I click on :button_text button' do |button_text|
         click_button button_text
       end

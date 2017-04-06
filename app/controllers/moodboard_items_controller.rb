@@ -42,11 +42,15 @@ class MoodboardItemsController < ApplicationController
 
   helper_method def moodboard
     candidate_id = params[:moodboard_id].to_i
-    @moodboard ||= begin
+
+    @moodboard ||= \
       spree_current_user.moodboards.where(id: candidate_id).first ||
-        spree_current_user.shared_moodboards.where(id: candidate_id).first
+      spree_current_user.shared_moodboards.where(id: candidate_id).first
+
+    if @moodboard.present?
+      @moodboard
+    else
+      raise ActiveRecord::RecordNotFound
     end
-    raise ActiveRecord::RecordNotFound unless @moodboard.present?
-    @moodboard
   end
 end

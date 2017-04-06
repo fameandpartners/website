@@ -65,7 +65,7 @@ class Products::CollectionResource
     @remove_excluded_from_site_logic = options[:remove_excluded_from_site_logic]
   end
 
-  
+
   # what about ProductCollection class
   def read
     color     = color.first if color.is_a? Array
@@ -145,15 +145,15 @@ class Products::CollectionResource
     # ignore this case.
     # also, having ability to query group=black&color=white seems useless
     result[:color_ids] = []
-    
+
     if color_group.present?
       result[:color_ids] += color_group.color_ids
     elsif color_groups.present?
-      color_groups.each { |c| result[:color_ids] += c.color_ids }
+      color_groups.each { |c| result[:color_ids] += c[:color_ids] }
     elsif color.present?
       Array.wrap(color).compact.each do |c|
-        result[:color_ids] << c.id
-        result[:color_ids] += Repositories::ProductColors.get_similar(c.id, Similarity::Range::DEFAULT)
+        result[:color_ids] << c[:id]
+        result[:color_ids] += Repositories::ProductColors.get_similar(c[:id], Similarity::Range::DEFAULT)
       end
     end
 

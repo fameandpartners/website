@@ -7,6 +7,7 @@ FactoryGirl.define do
 
     trait :color do
       name 'dress-color'
+      presentation 'Color'
     end
 
     trait :size do

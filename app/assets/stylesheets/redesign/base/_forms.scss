@@ -218,6 +218,54 @@ select {
 
 }
 
+// Checkbox with black background (no "tick" symbol)
+.checkboxBlackBg {
+
+  label {
+    display: block;
+  }
+
+  .checkboxBlackBg__check {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-left: 20px;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      padding: 4px;
+      left: 0;
+      top: 6px;
+      border: 1px solid $c-neutral-black;
+      background-color: $c-neutral-white;
+    }
+
+  }
+
+  input[type="checkbox"] {
+    opacity: 0;
+
+    &:disabled ~ .checkboxBlackBg__check {
+      opacity: 0.65;
+
+      &::before {
+        background-color: $c-neutral-5;
+        cursor: not-allowed;
+      }
+
+    }
+
+    &:checked ~ .checkboxBlackBg__check::before {
+      background-color: $c-neutral-black;
+    }
+
+  }
+
+}
+
 .form-global {
 
   label {

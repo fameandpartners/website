@@ -1,26 +1,44 @@
 #= require 'templates/_product'
 #= require 'templates/product_collection'
 #= require 'templates/product_collection_append'
-
+#= require 'templates/product_collection_filter'
+#= require 'templates/product_collection_sort'
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
   filter: null
-  content: null,
+  content: null
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
   collectionMoreTemplate: JST['templates/product_collection_append']
+  collectionFilterResultTemplate: JST['templates/product_collection_filter']
+  collectionSortResultTemplate: JST['templates/product_collection_sort']
 
   constructor: (options = {}) ->
     options = $.extend({
       reset_source: true,
       page_size: 21,
       mobileBreakpoint: 768,
-      showMoreSelector: "*[data-action=show-more-collection-products]"
-		}, options)
+      mobileFilterSelector: '.js-trigger-filter-mobile',
+      mobileSortSelector: '.js-trigger-sort-mobile',
+      showMoreSelector: "*[data-action=show-more-collection-products]",
+      ORDERS : {
+        newest: 'What\'s New',
+        price_high: 'Price High to Low',
+        price_low: 'Price Low to High',
+      }
 
+    }, options)
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
+
+    # Sorting / Filtering
+    @sortMetaContent = $(options.sortMetaContent)
+    @filterMetaContent = $(options.filterMetaContent)
+    @mobileFilter = $(options.mobileFilterSelector)
+    @mobileSort = $(options.mobileSortSelector)
+    @mobileFilter.on('click', @toggleFilters)
+    @mobileSort.on('click', @toggleSort)
 
     # base
     # if users comes by url with specific params, like /dresses/for/very/special/case
@@ -35,61 +53,92 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     # pagination
     @page_size = options.page_size
+    @ORDERS = options.ORDERS
     @showMoreSelector = options.showMoreSelector
     @resetPagination(options.size, options.total_products)
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
-
-    @setUpFilterElements()
     @productOrderInput.on('change', @update)
     @$banner = $(options.banner)
 
-  setUpFilterElements: =>
-    $(".search-filters :input").on 'change', (e) =>
-      @updateFilterElements(e)
+    # Initialize Meta Content based of previous params
+    @updateParams = @decodeQueryParams()
+    @updateMetaDescriptionSpan(@filterSortMetaDescription(@updateParams))
 
-    $(".js-trigger-clear-all-filters").on('click', @clearAllOptions)
+  toggleFilters:(forceToggle) ->
+    $('.ExpandablePanel-filter--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+    $('body').toggleClass('no-scroll', forceToggle)
+  toggleSort:(forceToggle) ->
+    $('.ExpandablePanel-sort--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
+    $('body').toggleClass('no-scroll', forceToggle)
 
-    # toggle mobile version of filter menu
-    $('.js-trigger-toggle-filters').on 'click', (e) =>
-      $('body').toggleClass('filter-is-active no-scroll');
-      $('.js-side-panel-filters').toggleClass('is-active');
 
-    # enable content scroll for larger tablets if orientation changed
-    $(window).on 'resize', (e) =>
-      if $(window).width() >= @mobileBreakpoint && $('body').hasClass('filter-is-active')
-        $('body').removeClass('no-scroll');
-      if $(window).width() < @mobileBreakpoint && $('body').hasClass('filter-is-active')
-        $('body').addClass('no-scroll');
+  # This is duplicated, redundant code, but is necessary because we have to initialize legacy
+  # partials with metaDescription content pulled from url. We are avoiding coupling with React
+  decodeQueryParams:() ->
+    that = this
+    queryObj = {};
+    queryStrArr = decodeURIComponent(window.location.search.substring(1))
+    .replace(/\+/g, " ")
+    .split('&');
 
-  updateFilterElements: (e) =>
-    $this = $(e.target)
-    if $this.parents('.panel-collapse').find('input:checked').length == 0
-      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-    else
-      if !$this.hasClass('js-filter-all')
-        $this.parents('.panel-collapse').find('.js-filter-all').removeAttr("checked")
-      else
-        $this.parents('.panel-collapse').find('input').prop('checked', false)
-        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-        $this.parents('.panel-collapse').find("select option:selected").prop("selected", false)
-        $this.parents('.panel-collapse').find("select option:first").prop("selected", "selected")
+    # Loop over each of the queries and build an object
+    queryStrArr.forEach((query) ->
+      query = query.split('=')
+      key = query[0]
+      val = query[1]
+      key = if key then key.replace(/([^a-z0-9_]+)/gi, '') else undefined # replace key with acceptable param name
 
-    @update()
+      if key && val
+        # We have an acceptable query string format
+        if !queryObj[key]
+          # No previous version
+          queryObj[key] = val
+        else if Array.isArray(queryObj[key])
+          # currently an array, add to it
+          queryObj[key] = [].concat(queryObj[key].slice(), [val])
+        else
+          queryObj[key] = [queryObj[key], val] # not an array, create one
+    )
+    queryObj
 
-  clearAllOptions: =>
-    $('#filter-accordion :input').prop('checked', false)
-    $('#filter-accordion .js-filter-all').prop('checked', true)
-    $('#filter-accordion select').val('none')
-    $('#filter-accordion .panel-collapse').collapse('hide')
-    @update()
+  filterSortMetaDescription:(updateRequestParams) ->
+    metaDescription = {
+      sortDescription: @ORDERS['newest'],
+      totalFilters: 0
+    }
+
+    if updateRequestParams.fast_making
+      metaDescription.totalFilters++
+    if updateRequestParams.price_max && updateRequestParams.price_max.length && updateRequestParams.price_min && updateRequestParams.price_min.length
+      metaDescription.totalFilters++
+    if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
+      metaDescription.totalFilters++
+    if updateRequestParams.style && updateRequestParams.style.length
+      metaDescription.totalFilters++
+    if updateRequestParams.color_group && updateRequestParams.color_group.length
+      metaDescription.totalFilters++
+    if @ORDERS[updateRequestParams.order]
+      metaDescription.sortDescription = @ORDERS[updateRequestParams.order]
+    metaDescription
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
     @total            = total_records
     @updatePaginationLink('active')
+
+  updateMetaDescriptionSpan:(metaDescription) ->
+    @resultsMeta = {
+      filterText: if metaDescription.totalFilters then '(' + metaDescription.totalFilters + ')' else '',
+      sortText: metaDescription.sortDescription
+    }
+    content_sort_html = @collectionSortResultTemplate(resultsMeta: @resultsMeta)
+    @sortMetaContent.html(content_sort_html)
+
+    content_filter_html = @collectionFilterResultTemplate(resultsMeta: @resultsMeta)
+    @filterMetaContent.html(content_filter_html)
 
   updatePagination: (items_added, total_records) ->
     if items_added == 0
@@ -112,9 +161,10 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         row.hide()
 
-  update: () =>
+  update: (updateRequestParams) =>
+    @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
     @source_path = '/dresses' if @reset_source
-    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+    @updateParams = updateRequestParams
     pageUrl = @updatePageLocation(updateRequestParams)
 
     @updatePaginationLink('inactive')
@@ -123,9 +173,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       dataType: 'json',
       data: $.param(_.extend(updateRequestParams, { limit: @page_size })),
       success: (collection) =>
+        # Replace content HTML
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
-
         @resetPagination(collection.products.length, collection.total_products)
         if collection && collection.details
           @updateCollectionDetails(collection.details)
@@ -137,7 +187,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     e.preventDefault()
     if @loading != true
       @loading = true
-      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      updateRequestParams = _.extend({}, @updateParams)
       @updatePaginationLink('loading')
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
@@ -146,7 +196,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection, col: 3)
           @content.find(@showMoreSelector).closest('.more-products').before(content_html)
-          # @updatePagination(collection.products.length, collection.total_products)
           @updatePagination(collection.products.length, collection.total_products)
 
           if collection && collection.details
@@ -154,66 +203,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       ).always( =>
         @loading = false
       )
-
-  # private methods
-
-  addValue: (object, propertyName, elementSelector) ->
-    propertyValue = @filter.find(elementSelector).val()
-    object[propertyName] = propertyValue unless _.isEmpty(propertyValue)
-    object
-
-  getSelectedValues: () ->
-    bodyshapeArray = []
-    colorArray = []
-    styleArray = []
-    fastmakingArray = []
-    priceHash = {}
-
-    if $("#collapse-color .js-filter-all input:not(:checked)")
-      colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
-      for colorInput in colorInputs
-        colorArray.push($(colorInput).attr("name"))
-      color = $("#other-colors option:selected").attr("name")
-      if color != "none"
-        colorArray.push(color)
-
-    if $("#collapse-bodyshape .js-filter-all input:not(:checked)")
-      bodyshapeInputs = $("#collapse-bodyshape input:not(.js-filter-all):checked")
-      for bodyshapeInput in bodyshapeInputs
-        bodyshapeArray.push($(bodyshapeInput).attr("name"))
-
-    if $("#collapse-style .js-filter-all input:not(:checked)")
-      styleInputs = $("#collapse-style input:not(.js-filter-all):checked")
-      for styleInput in styleInputs
-        styleArray.push($(styleInput).attr("name"))
-
-    if $("#collapse-delivery-date .js-filter-all input:not(:checked)")
-      fastmakingInput = $("#collapse-delivery-date input:not(.js-filter-all):checked")
-      fastmakingArray.push(true) if fastmakingInput.is(":checked")
-
-    filter =  {
-      bodyshape: bodyshapeArray,
-      color_group: colorArray,
-      style: styleArray,
-      fast_making: fastmakingArray,
-      order: @productOrderInput.val()
-      q:         getUrlParameter("q")?.replace(/\+/g," ")
-    }
-
-    if $(".selector-price input:checked").data("all") == false
-      priceMinArr = []
-      priceMaxArr = []
-      priceMins = $(".selector-price input:checked")
-      for e in priceMins
-        priceMinArr.push $(e).data("pricemin")
-      priceMaxs = $(".selector-price input:checked")
-      for e in priceMaxs
-        priceMaxArr.push $(e).data("pricemax") || 5000
-      priceHash["price_min"] = priceMinArr
-      priceHash["price_max"] = priceMaxArr if priceMaxArr?
-      filter = $.extend(filter,priceHash)
-
-    filter
 
   updatePageLocation: (filter) ->
     source = _.clone(@source_path)
