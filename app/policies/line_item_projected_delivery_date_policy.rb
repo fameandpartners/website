@@ -3,7 +3,7 @@
 #
 # usage:
 #   LineItemProjectedDeliveryDatePolicy.new(item, order).delivery_date
-#
+# thanh - this class really just calculates the ship by date for the factory consumption
 require 'business_time'
 
 module Policies
@@ -13,7 +13,7 @@ module Policies
 
     attr_reader :completed_at, :fast_making
 
-    def initialize(completed_at, fast_making)
+    def initialize(completed_at, fast_making, slow_making)
       @completed_at = completed_at
       @fast_making = fast_making
     end

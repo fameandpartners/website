@@ -76,7 +76,7 @@ module Orders
     def projected_delivery_date
       return unless order.completed?
       @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(
-        order.completed_at, @item.fast_making?).delivery_date.try(:to_date)
+        order.completed_at, @item.fast_making?, @item.slow_making?).delivery_date.try(:to_date)
     end
 
     def fabrication_status
