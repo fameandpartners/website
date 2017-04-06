@@ -92,9 +92,12 @@ class Products::CollectionResource
   private
 
   def collect_color_groups(color_group_names)
+    color_group_names = Array.wrap(color_group_names)
+
     if color_group_names.present?
-      to_return = color_group_names.collect { |group_name| Repositories::ProductColors.get_group_by_name(group_name) }
-      to_return.compact
+      color_group_names.collect do |group_name| 
+        Repositories::ProductColors.get_group_by_name(group_name)
+      end.compact
     else
       nil
     end
@@ -147,7 +150,7 @@ class Products::CollectionResource
     result[:color_ids] = []
 
     if color_group.present?
-      result[:color_ids] += color_group.color_ids
+      result[:color_ids] += color_group[:color_ids]
     elsif color_groups.present?
       color_groups.each { |c| result[:color_ids] += c[:color_ids] }
     elsif color.present?
