@@ -43,7 +43,7 @@ common: &default_settings
   #       - All Services
   #
   # TODO - Rename to "Fame Website"
-  app_name: My Application
+  app_name: Fame-Production
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
@@ -229,5 +229,6 @@ production:
 # here.  By default, the staging environment has the agent turned on.
 staging:
   <<: *default_settings
-  monitor_mode: false
-  app_name: FameWebsite-STAGING
+  monitor_mode: true
+  capture_params: true
+  app_name: Fame-STAGING
