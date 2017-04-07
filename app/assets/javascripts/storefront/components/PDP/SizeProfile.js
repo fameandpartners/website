@@ -9,10 +9,10 @@ import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
 
 // Shared Components
-import Select from '../shared/Select.js';
-import Radio from '../shared/Radio.js';
+import Select from '../shared/Select';
 import Input from '../shared/Input';
-import RadioGroup from '../shared/RadioGroup.js';
+import RadioToggle from '../shared/RadioToggle';
+
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -200,14 +200,15 @@ class SidePanelSize extends SidePanel {
               </div>
 
               <div className="metric-container pull-left">
-                <RadioGroup
-                  name="metricOptions"
-                  selectedValue={customize.height.heightUnit}
-                  onChange={this.handleMetricSwitch}
-                >
-                  <Radio display="Inches" value="inch" />
-                  <Radio display="cm" value="cm" />
-                </RadioGroup>
+                <RadioToggle
+                  id="some-radio-tog"
+                  value="first"
+                  options={[
+                    { label: 'inches', value: 'inch' },
+                    { value: 'cm' },
+                  ]}
+                  onChange={() => {}}
+                />
               </div>
             </div>
           </div>
