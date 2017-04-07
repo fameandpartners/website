@@ -1,7 +1,6 @@
 
 <% if Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>
-  <%= render 'marketing/trackers/optimizely' %>
-  <%= render 'marketing/trackers/google_analytics' %>
+  <%= render 'marketing/trackers/customerio' %>
 <% end %>
 
 <%= render 'marketing/trackers/zopim' unless @zopim_opt_out %>
