@@ -69,7 +69,7 @@ module Marketing
               small:    image.small
             }
           else
-            nil 
+            {}
           end
         end
 
