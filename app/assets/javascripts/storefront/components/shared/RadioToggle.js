@@ -23,7 +23,8 @@ class RadioToggle extends Component {
   constructor(props) {
     super(props);
     this.labelClass = this.labelClass.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
 
 
@@ -42,15 +43,24 @@ class RadioToggle extends Component {
   }
 
   /**
-   * Propagates change upwards
-   * @param  {Object} e - event
+   * Propagates toggle change upwards
    */
-  handleChange() {
+  handleToggle() {
     const { onChange, options, value } = this.props;
     const newSelection = options[0].value === value ?
       { value: options[1].value } :
       { value: options[0].value };
     onChange(newSelection);
+  }
+  /**
+   * Propagates change upwards
+   * @param  {Number} position
+   */
+  handleSelection(position) {
+    const { onChange, options } = this.props;
+    return () => {
+      onChange({ value: options[position].value });
+    };
   }
 
   render() {
@@ -58,20 +68,19 @@ class RadioToggle extends Component {
     const switchClass = options[1].value === value ? 'right' : 'left';
 
     return (
-      <div className={`RadioToggle--wrapper ${switchClass}`}>
-        <span className={this.labelClass(0)}>
+      <div className="RadioToggle--wrapper">
+        <option className={this.labelClass(0)} onClick={this.handleSelection(0)}>
           {options[0].label || options[0].value}
-        </span>
+        </option>
         <input
-          className="RadioToggle"
+          className={`RadioToggle ${switchClass}`}
           type="checkbox"
           id={id}
-          value={value}
-          onChange={this.handleChange}
+          onChange={this.handleToggle}
         />
-        <span className={this.labelClass(1)}>
+        <option className={this.labelClass(1)} onClick={this.handleSelection(1)}>
           {options[1].label || options[1].value}
-        </span>
+        </option>
       </div>
     );
   }

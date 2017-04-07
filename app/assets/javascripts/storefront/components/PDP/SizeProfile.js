@@ -186,12 +186,13 @@ class SidePanelSize extends SidePanel {
               <div className="select-container pull-left">
                 { customize.height.heightUnit === 'inch' ?
                   <Select
-                    id="height-options"
+                    id="height-option-in"
                     onChange={this.handleInchChange}
                     className="sort-options"
                     options={this.generateOptions()}
                   /> :
                   <Input
+                    id="height-option-cm"
                     type="number"
                     onChange={this.handleCMChange}
                     defaultValue={customize.height.heightValue}

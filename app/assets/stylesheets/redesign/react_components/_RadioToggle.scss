@@ -7,6 +7,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  cursor: pointer;
   position: relative;
   display: inline-block;
   background-color: $c-neutral-10;
@@ -31,12 +32,15 @@
   outline: none !important;
 }
 .RadioToggle--label {
+  cursor: pointer;
+  display: inline-block;
   vertical-align: middle;
   color: $c-neutral-8;
   font-weight: 500;
   @include transition(color 300ms);
 
-  &__selected {
+  &__selected,
+  &:hover {
     color: $c-neutral-12;
   }
 }
@@ -55,6 +59,6 @@
   background-image: -o-linear-gradient(top, #f5f5f5 0%, #e8e8e8 100%);
   background-image: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
 }
-.RadioToggle:checked:after {
+.RadioToggle.right:after {
   transform: translateX(20px);
 }
