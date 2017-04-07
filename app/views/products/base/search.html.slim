@@ -34,9 +34,8 @@
               .FilterSort__summary
   .container
     .row
-      .col-md-12
-        = render :partial => 'products/collections/breadcrumb'
-        = render :partial => 'products/collections/sort'
+      = render :partial => 'products/collections/breadcrumb'
+      = render :partial => 'products/collections/sort'
       .col-lg-3.col-md-4.side-panel.side-panel-left.js-side-panel-filters
         a.btn-close.js-trigger-toggle-filters href='javascript:;'
           .hide-visually Close filters
