@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import SidePanelLengthChart from './SidePanelLengthChart';
 
 class SidePanelLength extends SidePanel {
   constructor(props, context) {
@@ -71,7 +70,6 @@ class SidePanelLength extends SidePanel {
               <h2 className="h4 c-card-customize__header">Choose your height</h2>
               <p>Tell us your height category and we can adjust the length of the hemline and sleeves on your garment for free!</p>
               {LENGTHS}
-              <SidePanelLengthChart />
             </div>
           </Scrollbars>
         </div>
