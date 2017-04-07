@@ -17,6 +17,6 @@ if ([ "${FRAMEWORK_ENV}" == "staging" ]) ; then
 
   curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
   -X POST \
-  --data-urlencode "payload={\"channel\":\"#dev\",\"username\":\"FameBot\",\"icon_emoji\":\":rocket:\",\"link_names\":\"1\",\"text\":\"@here, Deploying to *${SERVER_ROLE} ${SERVER_NAME:-staging}(${FRAMEWORK_ENV})* - ${git_branch} (${remote_sha:0:6})\"}"
+  --data-urlencode "payload={\"channel\":\"#dev\",\"username\":\"FameBot\",\"icon_emoji\":\":rocket:\",\"link_names\":\"1\",\"text\":\"@here, Deploying to *${SERVER_ROLE} ${SERVER_NAME:-staging}(${FRAMEWORK_ENV})* - ${git_branch} (${requested_sha:0:6})\"}"
 fi
 
