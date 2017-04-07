@@ -79,7 +79,7 @@ class Products::CollectionResource
       style:          style,
       event:          event,
       bodyshape:      bodyshape,
-      color:          color_group.try(:representative) || color,
+      color:          color_group.try(:[], :representative) || color,
       sale:           discount,
       fast_making:    fast_making,
       query_string:   query_string,
@@ -92,9 +92,12 @@ class Products::CollectionResource
   private
 
   def collect_color_groups(color_group_names)
+    color_group_names = Array.wrap(color_group_names)
+
     if color_group_names.present?
-      to_return = color_group_names.collect { |group_name| Repositories::ProductColors.get_group_by_name(group_name) }
-      to_return.compact
+      color_group_names.collect do |group_name| 
+        Repositories::ProductColors.get_group_by_name(group_name)
+      end.compact
     else
       nil
     end
@@ -108,7 +111,7 @@ class Products::CollectionResource
         event:          event,
         edits:          edits,
         bodyshape:      bodyshape,
-        color:          color_group.try(:representative) || color,
+        color:          color_group.try(:[], :representative) || color,
         discount:       discount,
         site_version:   site_version,
         fast_delivery:  fast_delivery?,
@@ -147,7 +150,7 @@ class Products::CollectionResource
     result[:color_ids] = []
 
     if color_group.present?
-      result[:color_ids] += color_group.color_ids
+      result[:color_ids] += color_group[:color_ids]
     elsif color_groups.present?
       color_groups.each { |c| result[:color_ids] += c[:color_ids] }
     elsif color.present?
