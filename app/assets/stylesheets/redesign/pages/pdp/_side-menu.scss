@@ -44,6 +44,7 @@
   }
 
   .height-selection {
+    text-decoration: uppercase;
     font-size: 1.3rem;
     padding-bottom: 30px;
   }
@@ -70,8 +71,7 @@
     }
   }
   .metric-container {
-    font-weight: bold;
-    line-height: 36px;
+    text-transform: uppercase;
   }
 }
 
