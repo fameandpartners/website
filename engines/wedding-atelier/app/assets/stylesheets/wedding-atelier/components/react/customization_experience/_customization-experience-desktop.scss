@@ -208,13 +208,13 @@
     }
   }
 
-  @media screen and (max-height: 710px) {
+  @media screen and (max-height: 768px) {
     .customization-panel {
       padding-top: 25px;
     }
 
     .customization-type {
-      margin: 20px auto;
+      margin: 15px auto;
     }
   }
 }
