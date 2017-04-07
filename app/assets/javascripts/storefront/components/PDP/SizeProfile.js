@@ -202,12 +202,12 @@ class SidePanelSize extends SidePanel {
               <div className="metric-container pull-left">
                 <RadioToggle
                   id="some-radio-tog"
-                  value="first"
+                  value={customize.height.heightUnit}
                   options={[
                     { label: 'inches', value: 'inch' },
                     { value: 'cm' },
                   ]}
-                  onChange={() => {}}
+                  onChange={this.handleMetricSwitch}
                 />
               </div>
             </div>

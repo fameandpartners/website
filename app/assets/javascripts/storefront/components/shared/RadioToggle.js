@@ -12,7 +12,7 @@ const propTypes = {
       React.PropTypes.bool,
     ]),
   }).isRequired,
-  valueSelected: PropTypes.oneOfType([
+  value: PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.bool,
   ]).isRequired,
@@ -22,28 +22,56 @@ const propTypes = {
 class RadioToggle extends Component {
   constructor(props) {
     super(props);
+    this.labelClass = this.labelClass.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    const { onChange, id } = this.props;
-    onChange({ id, value: e.target.value });
+
+  /**
+   * Constructs class for labels
+   * @param  {Number} position
+   * @return {String} className
+   */
+  labelClass(position) {
+    const { options, value } = this.props;
+    const positionName = position === 0 ? 'left' : 'right';
+    let labelClassName = `RadioToggle--label RadioToggle--label__${positionName}`;
+
+    if (options[position].value === value) { labelClassName += ' RadioToggle--label__selected'; }
+    return labelClassName;
+  }
+
+  /**
+   * Propagates change upwards
+   * @param  {Object} e - event
+   */
+  handleChange() {
+    const { onChange, options, value } = this.props;
+    const newSelection = options[0].value === value ?
+      { value: options[1].value } :
+      { value: options[0].value };
+    onChange(newSelection);
   }
 
   render() {
-    const { id, valueSelected, options } = this.props;
-    const switchClass = options[1].value === valueSelected ? 'right' : 'left';
+    const { id, value, options } = this.props;
+    const switchClass = options[1].value === value ? 'right' : 'left';
+
     return (
-      <div className={`RadioToggle-wrapper ${switchClass}`}>
-        <span>{options[0].label || options[0].value}</span>
+      <div className={`RadioToggle--wrapper ${switchClass}`}>
+        <span className={this.labelClass(0)}>
+          {options[0].label || options[0].value}
+        </span>
         <input
           className="RadioToggle"
           type="checkbox"
           id={id}
-          value={valueSelected}
+          value={value}
           onChange={this.handleChange}
         />
-        <span>{options[1].label || options[1].value}</span>
+        <span className={this.labelClass(1)}>
+          {options[1].label || options[1].value}
+        </span>
       </div>
     );
   }
