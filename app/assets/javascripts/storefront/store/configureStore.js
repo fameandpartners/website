@@ -77,6 +77,7 @@ export default function configureStore(initialState) {
     },
     {
       customize: {
+        errors: {},
         size: {
           id: null,
           presentation: '',

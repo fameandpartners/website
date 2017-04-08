@@ -1,24 +1,25 @@
-//*****
+//* ****
 // ** Select is an abstract component for Fame and Partners dropdowns
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
-//*****
-import React, {Component, PropTypes,} from 'react';
+//* ****
+import React, { Component, PropTypes, } from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
 
 const propTypes = {
-  id: React.PropTypes.string,
-  label: React.PropTypes.string,
-  formId: React.PropTypes.string,
-  onChange: React.PropTypes.func,
-  className: React.PropTypes.string,
-  options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string,]),
-    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node,]),
-    displayText: React.PropTypes.string,
-    active: React.PropTypes.bool,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  formId: PropTypes.string,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  error: PropTypes.bool,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    displayText: PropTypes.string,
+    active: PropTypes.bool,
   })),
 };
 
@@ -125,7 +126,7 @@ class Select extends Component {
           key={`${this.props.id}-${option.id}-${index}`}
           data-value={option.id}
           data-display-text={option.name}
-          className={`Select-list-item noSelect ${option.active ? 'selected': ''} ${isFocused ? 'focused' : ''}`}
+          className={`Select-list-item noSelect ${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
           onClick={this.handleDropdownItemClick(option)}
           aria-hidden={this.state.isOpen ? 'false' : 'true'}
         >
@@ -142,6 +143,7 @@ class Select extends Component {
   render() {
     const {
       options,
+      error,
       label,
       className,
     } = this.props;
@@ -153,7 +155,7 @@ class Select extends Component {
 
     return (
       <div
-        className={`Select-wrapper ${className || ''} ${label ? 'translate-label' : ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}
+        className={`Select--wrapper ${className || ''} ${error ? 'Select--wrapper__error' : ''} ${label ? 'translate-label' : ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}
         ref="selectWrapper"
         onClick={this.toggleDropdown}
         onBlur={this.closeDropdown}

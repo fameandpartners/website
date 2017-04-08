@@ -1,6 +1,6 @@
 /* Select Component
 -------------------------------------------------------*/
-.Select-wrapper {
+.Select--wrapper {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -20,7 +20,7 @@
   white-space: nowrap;
   transition: all 0.17s ease-in-out border 0.4s font 0.1s;
 
-  &.is-open{
+  &.is-open {
     border-color: $gray-light;
 
     .Select {
@@ -36,6 +36,10 @@
     .Select-list-item {
       cursor: pointer;
     }
+  }
+
+  &__error {
+    border-color: $form_error;
   }
 
   &::after {

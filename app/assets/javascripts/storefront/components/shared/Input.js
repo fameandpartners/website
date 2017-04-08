@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
+  error: PropTypes.bool.isRequired,
   type: PropTypes.string,
   defaultValue: PropTypes.string,
   placeholder: PropTypes.string,
@@ -32,9 +33,9 @@ class Input extends Component {
   }
 
   render() {
-    const { id, defaultValue, placeholder, type } = this.props;
+    const { id, defaultValue, placeholder, type, error } = this.props;
     return (
-      <div className="Input-wrapper">
+      <div className={`Input--wrapper ${error ? 'Input--wrapper__error' : ''}`}>
         <input
           ref={c => this.input = c}
           className="Input"
