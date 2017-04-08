@@ -241,12 +241,12 @@ FameAndPartners::Application.routes.draw do
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
 
     # Lookbook pages redirects (due to legal issues)
-    get '/skirts-collection', to: '/skirts', as: :skirts_collection_landing_page
-    get '/gown-collection', to: '/the-evening-shop/gowns', as: :gown_collection_landing_page
-    get '/dress-for-parties', to: '/dresses/cocktail', as: :dress_for_parties_page
-    get '/it-girl', to: '/dresses', as: :it_girl_landing_page
-    get '/lookbook/the-freshly-picked-collection', to: '/dresses/cotton-dresses', :as => :the_freshly_picked_collection
-    get '/lookbook/the-ruffled-up-collection', to: '/dresses/ruffle', as: :the_ruffled_up_collection
+    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+    get '/it-girl', to: redirect('/dresses'), as: :it_girl_landing_page
+    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
