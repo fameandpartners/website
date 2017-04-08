@@ -5,13 +5,13 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf({
+  options: PropTypes.arrayOf(PropTypes.shape({
     label: React.PropTypes.string,
     value: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.bool,
     ]),
-  }).isRequired,
+  })).isRequired,
   value: PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.bool,
