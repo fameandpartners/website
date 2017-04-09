@@ -37,6 +37,7 @@ module Shipping
 
     def extract_attributes_from_row(row, mapping)
       mapping.each_with_object({}) do |(attr_name, header), attrs|
+        binding.pry
         attrs[attr_name] = row[header].to_s.strip
       end
     end

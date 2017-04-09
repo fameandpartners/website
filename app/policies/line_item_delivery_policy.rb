@@ -1,3 +1,4 @@
+require 'business_time'
 require_relative 'delivery_policy'
 
 module Policies
@@ -11,7 +12,7 @@ module Policies
 
     def delivery_period
       period = ''
-      
+
       if @line_item.fast_making? #fast_making wins
         return fast_making_delivery_period
       elsif @line_item.slow_making? #how slow can you go

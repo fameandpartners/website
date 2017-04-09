@@ -2,16 +2,16 @@ module Policies
   module DeliveryPolicy
     CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '5 - 7 business days'
-    SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks", 
+    SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
                                   "12 - 15 business days" => "6 weeks",
-                                  "3 - 4 weeks" => "8 weeks",  
+                                  "3 - 4 weeks" => "8 weeks",
                                   "4 - 6 weeks" => "10 weeks" }
     CNY_DELIVERY_MAP = {  "7 - 10 business days" => "17 - 20 business days",
                           "12 - 15 business days" => "22 - 25 business days",
                           "3 - 4 weeks" => "5 - 6 weeks",
                           "4 - 6 weeks" => "6 - 8 weeks",
                           "6 weeks" => "8 weeks",
-                          "10 weeks" => "12 weeks" }   
+                          "10 weeks" => "12 weeks" }
 
     # Max delivery period got from taxons
     def maximum_delivery_period
@@ -36,7 +36,7 @@ module Policies
 
     # take the maximum_delivery_period then map that to whatever tania says
     # if any new delivery range are introduced slow_mapper needs to be updated
-    def slow_making_delivery_period     
+    def slow_making_delivery_period
       mdp = maximum_delivery_period
 
       if SLOW_MAKING_DELIVERY_MAP[mdp]
@@ -54,6 +54,25 @@ module Policies
         "#{period} + #{CNY_DELIVERY_PERIOD}"  # bad case
       end
     end
+
+    # determine ship_by_date for product manufacturing consumption
+    def ship_by_date(order_completed_at, delivery_period)
+      period = delivery_period
+      value = major_value_from_period(period)
+      units = period_units(period)
+
+      # todo: take 5 days off
+      case units
+      when 'weeks'
+        order.completed_at + value.weeks
+      when 'days'
+        order.completed_at + value.days
+      when 'business days'
+        value.business_days.after(order_completed_at)
+      end
+    end
+
+
 
     private
 

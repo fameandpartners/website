@@ -73,10 +73,12 @@ module Orders
       variant.try(:product).try(:name) || 'Missing Variant'
     end
 
+    # this badly named method refers to ship_by_date for use by our product manufacturing
     def projected_delivery_date
       return unless order.completed?
-      @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(
-        order.completed_at, @item.fast_making?, @item.slow_making?).delivery_date.try(:to_date)
+      # @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(
+      #   order.completed_at, @item.delivery_period).try(:to_date)
+      @projected_delivery_date ||= @item.delivery_period_policy.ship_by_date(order.completed_at, @item.delivery_period)
     end
 
     def fabrication_status
