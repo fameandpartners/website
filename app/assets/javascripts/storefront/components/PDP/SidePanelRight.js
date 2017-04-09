@@ -1,14 +1,20 @@
-import React, { PropTypes, } from 'react';
-import { connect, } from 'react-redux';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import SizeProfile from './SizeProfile';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
 import SidePanelFastMaking from './SidePanelFastMaking';
-import CtaPrice from './CtaPrice';
+import AddToBag from './AddToBag';
 
-class PdpSidePanelRight extends React.Component {
+class PdpSidePanelRight extends Component {
   constructor(props, context) {
     super(props, context);
+    this.handleAddToBag = this.handleAddToBag.bind(this);
+  }
+
+  handleAddToBag() {
+    console.log('LAST THING TO DO IS ADD TO BAG WHEN PENDING');
+    console.log('this.addToBag', this.AddToBag);
   }
 
   render() {
@@ -30,12 +36,12 @@ class PdpSidePanelRight extends React.Component {
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
               <SidePanelColor />
               {this.props.skirts.length ? <SidePanelCustom /> : null}
-              <SizeProfile />
+              <SizeProfile addToBagCallback={this.handleAddToBag} />
 
             </div>
           </div>
           <SidePanelFastMaking />
-          <CtaPrice />
+          <AddToBag ref={c => this.AddToBag = c} />
         </div>
       );
     }

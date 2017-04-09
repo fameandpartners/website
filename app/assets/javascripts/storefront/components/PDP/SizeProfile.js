@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { assign, find } from 'lodash';
@@ -14,7 +14,7 @@ import Input from '../shared/Input';
 import RadioToggle from '../shared/RadioToggle';
 
 
-class SidePanelSize extends SidePanel {
+class SidePanelSize extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -22,6 +22,8 @@ class SidePanelSize extends SidePanel {
       cmHeightChosen: undefined,
       metricOption: 'in',
     };
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
     this.handleDressSizeSelection = this.handleDressSizeSelection.bind(this);
     this.generateOptions = this.generateOptions.bind(this);
     this.updateHeightSelection = this.updateHeightSelection.bind(this);
@@ -29,6 +31,17 @@ class SidePanelSize extends SidePanel {
     this.handleCMChange = this.handleCMChange.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
     this.handleSizeProfileApply = this.handleSizeProfileApply.bind(this);
+  }
+
+  openMenu() {
+    const { actions } = this.props;
+    actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
+  }
+
+  closeMenu() {
+    const { actions } = this.props;
+    actions.addToBagPending(false);
+    actions.toggleDrawer(null);
   }
 
   updateCustomize(newCustomize) {
@@ -98,7 +111,9 @@ class SidePanelSize extends SidePanel {
   }
 
   handleSizeProfileApply() {
+    const { customize } = this.props;
     if (this.validateErrors()) {
+      if (customize.addToBagPending) { return this.props.addToBagCallback(); }
       this.closeMenu();
     }
   }
@@ -179,8 +194,8 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
-    const { height, size, errors } = this.props.customize;
-    const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
+    const { addToBagPending, height, size, errors, drawerOpen } = this.props.customize;
+    const MENU_STATE = drawerOpen === PDPConstants.DRAWERS.SIZE_PROFILE ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = size.id ?
     'c-card-customize__content is-selected' :
     'c-card-customize__content';
@@ -249,7 +264,9 @@ class SidePanelSize extends SidePanel {
             <div className="row">{SIZES}</div>
             <SidePanelSizeChart />
             <div className="btn-wrap">
-              <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">Apply</div>
+              <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">
+                Save {addToBagPending ? 'and Add To Bag' : ''}
+              </div>
             </div>
           </div>
         </div>
@@ -260,6 +277,8 @@ class SidePanelSize extends SidePanel {
 
 SidePanelSize.propTypes = {
   customize: PropTypes.object.isRequired,
+  actions: PropTypes.object,
+  addToBagCallback: PropTypes.func,
 };
 
 function mapStateToProps(state) {

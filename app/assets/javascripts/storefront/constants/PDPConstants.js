@@ -12,7 +12,12 @@ function generateInchesSizing() {
   return sizes;
 }
 const constants = assign({},
-  { INCH_SIZES: generateInchesSizing() },
+  {
+    INCH_SIZES: generateInchesSizing(),
+    DRAWERS: {
+      SIZE_PROFILE: 'SIZE_PROFILE',
+    },
+  },
 );
 
 export default constants;

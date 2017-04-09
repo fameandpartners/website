@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
+import PDPConstants from '../../constants/PDPConstants';
 import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
 
@@ -11,7 +12,7 @@ class CtaPrice extends React.Component {
 
     this.state = {
       sending: false,
-      modalIsOpen: false
+      modalIsOpen: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -28,31 +29,27 @@ class CtaPrice extends React.Component {
   }
 
   addToBag() {
+    const { customize, actions, product } = this.props;
     // TODO: redo this
     // this is just EXTREMELY hacky way to connect this with shopping cart
-    if (this.props.customize.size.id
-      && this.props.customize.color.id
-      && this.props.customize.height.heightValue) {
+    if (customize.size.id
+      && customize.color.id
+      && customize.height.heightValue) {
       // disable "ADD TO BAG" button and show spinner
       this.setState({ sending: true });
-      document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
-      document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
-      document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartHeight').value = this.props.customize.height.heightValue;
-      document.getElementById('pdpCartHeightUnit').value = this.props.customize.height.heightUnit;
-      document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      document.getElementById('pdpCartMakingId').value = this.props.customize.makingOption.id;
+      document.getElementById('pdpCartSizeId').value = customize.size.id;
+      document.getElementById('pdpCartColorId').value = customize.color.id;
+      document.getElementById('pdpCartCustomId').value = customize.customization.id;
+      document.getElementById('pdpCartDressVariantId').value = customize.dressVariantId;
+      document.getElementById('pdpCartHeight').value = customize.height.heightValue;
+      document.getElementById('pdpCartHeightUnit').value = customize.height.heightUnit;
+      document.getElementById('pdpCartVariantId').value = product.master_id;
+      document.getElementById('pdpCartMakingId').value = customize.makingOption.id;
       $('#pdpDataForCheckout').submit();
     } else {
-      // set errors
-      if (!this.props.customize.size.id) {
-        const customize = {};
-        customize.size = {};
-        customize.size.error = true;
-        customize.size.message = 'dress size';
-        this.props.actions.customizeDress(customize);
-      }
+      // force size profile
+      actions.addToBagPending(true);
+      actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
     }
   }
 
@@ -162,7 +159,7 @@ CtaPrice.propTypes = {
   product: PropTypes.object,
   siteVersion: PropTypes.string,
   flags: PropTypes.object,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {

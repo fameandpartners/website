@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware, } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { assign } from 'lodash';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
-import { composeWithDevTools, } from 'redux-devtools-extension';
 
 export default function configureStore(initialState) {
-  initialState = Object.assign({}, initialState,
+  initialState = assign({}, initialState,
     {
       lengths: [
         {
@@ -77,6 +78,8 @@ export default function configureStore(initialState) {
     },
     {
       customize: {
+        addToBagPending: false,
+        drawerOpen: null,
         errors: {},
         size: {
           id: null,
@@ -106,7 +109,7 @@ export default function configureStore(initialState) {
           price: 0,
         },
       },
-    }
+    },
   );
 
   if (process.env.NODE_ENV === 'development') {
