@@ -69,7 +69,7 @@ class SidePanelSize extends SidePanel {
             <div className="text-right">
               <a
                 href="javascript:;"
-                className="btn-close lg"
+                className="btn-close med"
                 onClick={this.closeMenu}
               >
                 <span className="hide-visually">Close Menu</span>

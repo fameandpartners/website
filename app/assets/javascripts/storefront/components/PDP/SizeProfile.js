@@ -261,7 +261,7 @@ class SidePanelSize extends Component {
 
           <div className="size-selection">
             <h4>What's your dress size?</h4>
-            <div className="row">{SIZES}</div>
+            <div className="size-row">{SIZES}</div>
             <SidePanelSizeChart />
             <div className="btn-wrap">
               <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">
