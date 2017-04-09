@@ -6,7 +6,7 @@ import PDPConstants from '../../constants/PDPConstants';
 import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
 
-class CtaPrice extends React.Component {
+class AddToBag extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -169,7 +169,7 @@ class CtaPrice extends React.Component {
   }
 }
 
-CtaPrice.propTypes = {
+AddToBag.propTypes = {
   customize: PropTypes.object,
   price: PropTypes.string,
   discount: PropTypes.number,
@@ -196,4 +196,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CtaPrice);
+export default connect(mapStateToProps, mapDispatchToProps)(AddToBag);

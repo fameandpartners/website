@@ -13,8 +13,7 @@ class PdpSidePanelRight extends Component {
   }
 
   handleAddToBag() {
-    console.log('LAST THING TO DO IS ADD TO BAG WHEN PENDING');
-    console.log('this.addToBag', this.AddToBag);
+    this.AddToBag.getWrappedInstance().addToBag();
   }
 
   render() {
