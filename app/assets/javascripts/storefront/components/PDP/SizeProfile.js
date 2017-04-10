@@ -25,8 +25,9 @@ class SidePanelSize extends Component {
     this.updateHeightSelection = this.updateHeightSelection.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
-    this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
     this.handleSizeProfileApply = this.handleSizeProfileApply.bind(this);
+    this.handleUnitConversionUpdate = this.handleUnitConversionUpdate.bind(this);
+    this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
   }
 
   openMenu() {
@@ -126,26 +127,36 @@ class SidePanelSize extends Component {
   }
 
   /**
-   * Handles the toggling of a metric switch and converts the values on the fly
-   * @param  {String} {value} (CM|INCH)
+   * Converts unit values on the fly
+   * @param  {String} value (CM|INCH)
    */
-  handleMetricSwitch({ value }) {
+  handleUnitConversionUpdate(value) {
     const CM_TO_INCHES = 2.54;
     const { height } = this.props.customize;
     const { heightValue } = height;
-
-    if (value === UNITS.CM && heightValue) {
+    if (value === UNITS.CM && heightValue) { // CM selected
       const newVal = Math.round(heightValue * CM_TO_INCHES);
       this.handleCMChange({ value: newVal });
-    } else if (value === UNITS.INCH && heightValue) {
+    } else if (value === UNITS.INCH && heightValue) { // INCH selected
       const totalInches = Math.round(heightValue / CM_TO_INCHES);
-      const selection = find(INCH_SIZES, { totalInches });
-      if (selection) {
-        this.handleInchChange({ option: {
-          id: selection.id,
-        } });
+      const option = find(INCH_SIZES, { totalInches });
+      if (option) {
+        this.handleInchChange({
+          option: {
+            id: option.id,
+          },
+        });
       }
     }
+  }
+
+  /**
+   * Handles the toggling of a metric switch
+   * @param  {String} {value} (CM|INCH)
+   */
+  handleMetricSwitch({ value }) {
+    this.updateHeightSelection({ heightUnit: value });
+    this.handleUnitConversionUpdate(value);
   }
 
   /**

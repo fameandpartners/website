@@ -2,6 +2,7 @@
 -------------------------------------------------------*/
 .RadioToggle--wrapper {
   line-height: 38px;
+  user-select: none;
 }
 .RadioToggle--wrapper .RadioToggle {
   -webkit-appearance: none;
