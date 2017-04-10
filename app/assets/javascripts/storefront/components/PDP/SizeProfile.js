@@ -170,14 +170,11 @@ class SidePanelSize extends Component {
   minMaxExtremeInchOption(i, ft, inch, last) {
     return (
       <div>
+        <span>{last ? '> ' : '< '}</span>
         <span className="amt">{ft}</span>
-        <span className="metric">'</span>
+        <span className="metric">ft</span>
         <span className="amt amt--last">{inch}</span>
-        <span className="metric">"</span>
-        { last ?
-          <span> & over</span> :
-          <span> & under</span>
-        }
+        <span className="metric">in</span>
       </div>
     );
   }
