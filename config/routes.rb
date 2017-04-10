@@ -208,6 +208,9 @@ FameAndPartners::Application.routes.draw do
     # Redirection in case of typo
     get '/everybody-dance', to: redirect('/every-body-dance')
 
+    # High Contrast Collection
+    get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
+
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
 
