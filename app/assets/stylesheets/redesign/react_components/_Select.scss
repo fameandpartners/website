@@ -7,7 +7,6 @@
   outline: none;
   cursor: pointer;
   box-shadow: inset 0 0 0 1px $c-neutral-4;
-  font-weight: bold;
   font-size: 1.4rem;
   // font-weight: bold;
   // text-transform: uppercase;
@@ -39,7 +38,7 @@
   }
 
   &__error {
-    border-color: $form_error;
+    box-shadow: inset 0 0 0 1px $form_error;
   }
 
   &::after {
