@@ -69,18 +69,18 @@ class RadioToggle extends Component {
 
     return (
       <div className="RadioToggle--wrapper">
-        <option className={this.labelClass(0)} onClick={this.handleSelection(0)}>
+        <span className={this.labelClass(0)} onClick={this.handleSelection(0)}>
           {options[0].label || options[0].value}
-        </option>
+        </span>
         <input
           className={`RadioToggle ${switchClass}`}
           type="checkbox"
           id={id}
           onChange={this.handleToggle}
         />
-        <option className={this.labelClass(1)} onClick={this.handleSelection(1)}>
+        <span className={this.labelClass(1)} onClick={this.handleSelection(1)}>
           {options[1].label || options[1].value}
-        </option>
+        </span>
       </div>
     );
   }

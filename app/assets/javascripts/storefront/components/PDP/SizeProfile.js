@@ -263,7 +263,7 @@ class SidePanelSize extends Component {
         ? 'selector-size is-selected' : 'selector-size';
       itemClassName += errors.size ? ' has-error' : '';
       return (
-        <option
+        <span
           className={itemClassName}
           onClick={this.handleDressSizeSelection}
           key={`size-${s.table.id}`}
@@ -271,7 +271,7 @@ class SidePanelSize extends Component {
           data-presentation={s.table.presentation}
         >
           {s.table.presentation}
-        </option>
+        </span>
       );
     });
   }
