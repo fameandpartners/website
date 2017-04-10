@@ -101,6 +101,10 @@ Spree::Order.class_eval do
     line_items.includes(making_options: :product_making_option).any?(&:fast_making?)
   end
 
+  def has_slow_making_items?
+    line_items.includes(making_options: :product_making_option).any(&:slow_making?)
+  end
+
   def update!
     if self.shipping_method.blank?
       self.update_attribute(:shipping_method_id, Services::FindShippingMethodForOrder.new(self).get.try(:id))
