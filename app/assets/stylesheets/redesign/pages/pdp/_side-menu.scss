@@ -49,8 +49,8 @@
     padding-bottom: 30px;
   }
   .select-container {
-    width: 50%;
-    padding-right: 15px;
+    min-width: 46%;
+    margin-right: 8px;
     input {
       width: 100%;
     }
@@ -60,11 +60,11 @@
     }
     .amt {
       color: $c-neutral-12;
-      margin-right: 3px;
+      margin-right: 1.5px;
       font-weight: 400;
     }
     .amt--last {
-      margin-left: 8px;
+      margin-left: 4px;
     }
     .metric {
       color: $c-neutral-9;

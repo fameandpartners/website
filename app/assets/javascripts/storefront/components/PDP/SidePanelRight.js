@@ -21,16 +21,6 @@ class PdpSidePanelRight extends Component {
       return (
         <div className="panel-side-container">
           <div>
-            <ul className="row l-tab-controls hidden-md hidden-lg" role="tablist">
-              <li className="col-xs-6 col-sm-6 active" role="presentation">
-                <a href="#tab-size-fit" role="tab" data-toggle="tab">Size + Fit</a>
-              </li>
-              <li className="col-xs-6 col-sm-6" role="presentation">
-                <a href="#tab-color-cust" role="tab" data-toggle="tab">Color + Customize</a>
-              </li>
-            </ul>
-
-
             <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
               <SidePanelColor />

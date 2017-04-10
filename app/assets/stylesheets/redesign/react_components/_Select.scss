@@ -2,7 +2,6 @@
 -------------------------------------------------------*/
 .Select--wrapper {
   position: relative;
-  display: inline-block;
   width: 100%;
   box-sizing: border-box;
   outline: none;
@@ -15,7 +14,7 @@
   -webkit-font-smoothing: antialiased;
   height: 38px;
   line-height: 37px;
-  padding: 0 15px;
+  padding: 0 35px 0 15px;
   text-align: left;
   white-space: nowrap;
   transition: all 0.17s ease-in-out border 0.4s font 0.1s;

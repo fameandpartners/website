@@ -55,8 +55,6 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
-    display: none;
-
     &.active {
       display: block;
     }
