@@ -167,7 +167,10 @@ class SidePanelSize extends Component {
    * @param  {Boolean} last
    * @return {Node} maxOption
    */
-  minMaxExtremeInchOption(i, ft, inch, last) {
+  minMaxExtremeInchOption(i, totalInches, last) {
+    const neighborTotalInches = last ? totalInches - 1 : totalInches + 1;
+    const ft = Math.floor(neighborTotalInches / 12);
+    const inch = neighborTotalInches % 12;
     return (
       <div>
         <span>{last ? '> ' : '< '}</span>
@@ -204,10 +207,10 @@ class SidePanelSize extends Component {
   generateInchesOptions() {
     const { height } = this.props.customize;
     const totalSizes = INCH_SIZES.length;
-    return INCH_SIZES.map(({ ft, inch }, i) => ({
+    return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
       id: i,
       name: (i === 0 || i === totalSizes - 1) ?
-        this.minMaxExtremeInchOption(i, ft, inch, i === totalSizes - 1) :
+        this.minMaxExtremeInchOption(i, totalInches, i === totalSizes - 1) :
         this.defaultInchOption(i, ft, inch),
       active: i === height.heightId,
     }));
