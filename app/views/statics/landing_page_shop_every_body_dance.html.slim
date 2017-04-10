@@ -1,0 +1,324 @@
+= render partial: 'pages/robots'
+
+.page-content.lookbook-v2-page.relative
+
+  // Hero tile
+  .main-hero-wrap.hero-wrap.copy-left.white-text
+    picture.media-wrap.keep-ratio.img-as-block
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}'
+        img src='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}' srcset='
+          #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")} 1023w,
+          #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")} 1024w' alt='Shop Every Dance Now'
+
+    .content-wrap
+      .container
+        .row
+          .col-md-6.col-md-offset-3
+            .copy-wrap.text-center.white-text
+              h1.heading.no-margin-md
+                span #everyBODYdance
+
+  section.section-box.text-center
+    .row
+      .col-xs-10.col-xs-offset-1.col-md-12.col-md-offset-0
+        p Girls all over the world–<em>including your favorite celebs</em>–are joining Fame and Partners' #everyBODYdance movement.<br class="visible-md visible-lg">It's celebration of different shapes, sizes, and bodies–because every body is beautiful, and every body deserves a <br class="visible-md visible-lg">custom-made dress that fits like a dream.
+
+  .local-navigation-wrapper.container-fluid
+    .row
+      .local-navigation.js-float-menu-on-scroll
+        .nav-wrapper.col-md-12
+          ul.nav data-slick='{"slidesToShow": 8, "slidesToScroll": 1}'
+            li.link = link_to "ChloeË Grace Moretz", "#chloe-grace-moretz"
+            li.link = link_to "Barbara Palvin", "#barbara-palvin"
+            li.link = link_to "Lauren Jauregui", "#lauren-jauregui"
+            li.link = link_to "Jasmine Sanders", "#jasmine-sanders"
+            li.link = link_to "Ashley Moore", "#ashley-moore"
+            li.link = link_to "Gabi Gregg", "#gabi-gregg"
+            li.link = link_to "Nicolette Mason", "#nicolette-mason"
+            li.link = link_to "Barbie Ferriera", "#barbie-ferreira"
+
+  - current_dress_name = "The Wrap Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.95"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$329.95"
+  .container
+    section.section-box#chloe-grace-moretz
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay CHLOË GRACE MORETZ
+
+            p There’s something refreshing about low-key glamour. The It Girl knows a show-stopping gown is statement enough; she styles it only with loose waves and a carefree attitude.
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "The Wrap Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.95"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$329.95"
+  .container
+    section.section-box#barbara-palvin
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay BARBARA PALVIN
+
+            p There’s something refreshing about low-key glamour. The It Girl knows a show-stopping gown is statement enough; she styles it only with loose waves and a carefree attitude.
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "MERIDIAN DRESS"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$319"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$319"
+  .container
+    section.section-box#lauren-jauregui
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay LAUREN JAUREGUI
+
+            p “Sooo I partnered up with @FameandPartners on a new project to celebrate every body type by showing off my new dress. See all the looks and all the beautiful women wearing them!”
+
+            .cta-product-caption.copy-highlight
+              .product-info = link_to "LAUREN WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "PISCES Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$299"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+  .container
+    section.section-box#jasmine-sanders
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay JASMINE SANDERS
+
+            p “I teamed up with @TeenVogue and @FameandPartners to dance around in mynew little black dress #everyBODYdance"
+
+            .cta-product-caption.copy-highlight
+              .product-info = link_to "JASMINE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "SUPERNOVA Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$279"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$279"
+  .container
+    section.section-box#ashley-moore
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay ASHLEY MOORE
+
+            p “I teamed up with @FameandPartners and @TeenVogue and had a blast getting creative and shooting this video. I knew which dress I wanted to wear right away…the sexy metallic shimmer works for day and night! Fame & Partners is all about giving back…$5 of every sale funds women's empowerment charities around the world. Truly something to celebrate! #everyBODYdance”
+
+            .cta-product-caption.copy-highlight
+              .product-info = link_to "ASHLEY WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "The Wrap Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.95"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$329.95"
+  .container
+    section.section-box#gabi-gregg
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay GABI GREGG
+
+            p There’s something refreshing about low-key glamour. The It Girl knows a show-stopping gown is statement enough; she styles it only with loose waves and a carefree attitude.
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "The Wrap Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.95"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$329.95"
+  .container
+    section.section-box#nicolette-mason
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay NICOLETTE MASON
+
+            p There’s something refreshing about low-key glamour. The It Girl knows a show-stopping gown is statement enough; she styles it only with loose waves and a carefree attitude.
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
+
+  - current_dress_name = "CELESTINE Dress"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
+  - current_edit_link = "#{dresses_path}/black-tie"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$329"
+  .container
+    section.section-box#barbie-ferreira
+      .row.vertical-align-row
+        .col-md-5.col-md-offset-1.no-padding
+          = image_tag 'landingpages/outreach-micro-influencer/init-for-you.jpg', class: "img-responsive img-align-right"
+
+        .col-md-5.col-md-offset-1.copy-padding-item.vertical-align
+          .copy-wrap
+            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft
+              .heading-overlay Barbie Ferriera
+
+            p "Anyone who's curvier knows the struggle to find young, cute dresses in their size so I think this is a great company for all tha girls out there feeling a lil lost on their prom shopping spree."
+
+            .cta-product-caption.copy-highlight
+              .product-info = link_to "BARBIE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured Shop & customize
+
+  .products-grid.products-collections
+    .container
+      .row.products-set.js-products-collection-wrap
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
