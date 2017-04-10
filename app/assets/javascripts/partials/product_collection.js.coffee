@@ -64,8 +64,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
 
     # Initialize Meta Content based of previous params
-    queryFilters = @decodeQueryParams()
-    @updateMetaDescriptionSpan(@filterSortMetaDescription(queryFilters))
+    @updateParams = @decodeQueryParams()
+    @updateMetaDescriptionSpan(@filterSortMetaDescription(@updateParams))
 
   toggleFilters:(forceToggle) ->
     $('.ExpandablePanel-filter--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
@@ -163,9 +163,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   update: (updateRequestParams) =>
     @updateMetaDescriptionSpan(@filterSortMetaDescription(updateRequestParams))
-    @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
-    updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
+    @updateParams = updateRequestParams
     pageUrl = @updatePageLocation(updateRequestParams)
 
     @updatePaginationLink('inactive')
@@ -188,7 +187,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     e.preventDefault()
     if @loading != true
       @loading = true
-      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      updateRequestParams = _.extend({}, @updateParams)
       @updatePaginationLink('loading')
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
@@ -204,60 +203,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       ).always( =>
         @loading = false
       )
-
-  # private methods
-  getSelectedValues: () ->
-    bodyshapeArray = []
-    colorArray = []
-    styleArray = []
-    fastmakingArray = []
-    priceHash = {}
-
-    if $("#collapse-color .js-filter-all input:not(:checked)")
-      colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
-      for colorInput in colorInputs
-        colorArray.push($(colorInput).attr("name"))
-      color = $("#other-colors option:selected").attr("name")
-      if color != "none"
-        colorArray.push(color)
-
-    if $("#collapse-bodyshape .js-filter-all input:not(:checked)")
-      bodyshapeInputs = $("#collapse-bodyshape input:not(.js-filter-all):checked")
-      for bodyshapeInput in bodyshapeInputs
-        bodyshapeArray.push($(bodyshapeInput).attr("name"))
-
-    if $("#collapse-style .js-filter-all input:not(:checked)")
-      styleInputs = $("#collapse-style input:not(.js-filter-all):checked")
-      for styleInput in styleInputs
-        styleArray.push($(styleInput).attr("name"))
-
-    if $("#collapse-delivery-date .js-filter-all input:not(:checked)")
-      fastmakingInput = $("#collapse-delivery-date input:not(.js-filter-all):checked")
-      fastmakingArray.push(true) if fastmakingInput.is(":checked")
-
-    filter =  {
-      bodyshape: bodyshapeArray,
-      color_group: colorArray,
-      style: styleArray,
-      fast_making: fastmakingArray,
-      order: @productOrderInput.val()
-      q:         getUrlParameter("q")?.replace(/\+/g," ")
-    }
-
-    if $(".selector-price input:checked").data("all") == false
-      priceMinArr = []
-      priceMaxArr = []
-      priceMins = $(".selector-price input:checked")
-      for e in priceMins
-        priceMinArr.push $(e).data("pricemin")
-      priceMaxs = $(".selector-price input:checked")
-      for e in priceMaxs
-        priceMaxArr.push $(e).data("pricemax") || 5000
-      priceHash["price_min"] = priceMinArr
-      priceHash["price_max"] = priceMaxArr if priceMaxArr?
-      filter = $.extend(filter,priceHash)
-
-    filter
 
   updatePageLocation: (filter) ->
     source = _.clone(@source_path)

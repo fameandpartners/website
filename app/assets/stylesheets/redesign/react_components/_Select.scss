@@ -6,8 +6,8 @@
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
-  background-color: $c-neutral-white;
-  border: 1px solid $c-neutral-4;
+  box-shadow: inset 0 0 0 1px $c-neutral-4;
+  font-weight: bold;
   font-size: 1.4rem;
   // font-weight: bold;
   // text-transform: uppercase;
@@ -17,10 +17,11 @@
   padding: 0 35px 0 15px;
   text-align: left;
   white-space: nowrap;
-  transition: all 0.17s ease-in-out border 0.4s font 0.1s;
+  transition: all 0.17s ease-in-out box-shadow 0.4s font 0.1s;
 
-  &.is-open {
-    border-color: $gray-light;
+
+  &.is-open{
+    box-shadow: inset 0 0 0 1px $gray-light;
 
     .Select {
       z-index: 100;
@@ -82,7 +83,7 @@
 
   .Select {
     padding: 0 14px;
-    top: 100%;
+    top: 37px;
     width: 100%;
     height: auto;
     left: 0;

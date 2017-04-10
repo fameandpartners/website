@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170404001857) do
+ActiveRecord::Schema.define(:version => 20170405182914) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -690,23 +690,6 @@ ActiveRecord::Schema.define(:version => 20170404001857) do
   end
 
   add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
-
-  create_table "product_height_range_groups", :force => true do |t|
-    t.string   "unit"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "product_height_ranges", :force => true do |t|
-    t.integer  "min"
-    t.integer  "max"
-    t.string   "unit"
-    t.string   "map_to"
-    t.integer  "product_height_range_group_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
 
   create_table "product_making_options", :force => true do |t|
     t.integer "product_id"
@@ -1709,13 +1692,6 @@ ActiveRecord::Schema.define(:version => 20170404001857) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
-  end
-
-  create_table "style_to_product_height_range_groups", :force => true do |t|
-    t.string   "style_number"
-    t.integer  "product_height_range_group_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
   end
 
   create_table "styles", :force => true do |t|

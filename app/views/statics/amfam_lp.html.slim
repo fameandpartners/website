@@ -32,7 +32,7 @@ ruby:
                     = amfam_hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
                 .text
                   = link_to dress.name, collection_product_path(dress), class: 'title'
-                  .price = price_for_product(dress)
+                  .price = product_price_with_discount(dress)
         .right
           = image_tag 'campaigns/amfam/1.jpg', width: 496, class: 'image1', alt: ''
       .catalog
@@ -43,7 +43,7 @@ ruby:
                 = amfam_hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)
       .sb3
         .left
           = image_tag 'campaigns/amfam/2.jpg', width: 764, class: 'image', alt: ''
@@ -56,7 +56,7 @@ ruby:
                   = amfam_hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
-                .price = price_for_product(dress)
+                .price = product_price_with_discount(dress)
 
       .catalog
         - products[7..10].each do |dress|
@@ -66,4 +66,4 @@ ruby:
                 = amfam_hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress)
+              .price = product_price_with_discount(dress)

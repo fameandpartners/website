@@ -1,11 +1,25 @@
-- if display_sale_notice?
-  #sale-banner.alert-sale role="alert"
+// TEMPORARY SALE BANNER for the EQUAL PAY DAY campaign
+// It's hardcoded because our default banner component doesn't have an automatic trigger to run between date ranges.
+- if equal_pay_active?
+  #sale-banner.alert-sale.equal-pay-day role="alert"
     .outer-wrap
         .inner-wrap
           .title-wrap
             .title
-              = current_sale.try(:sitewide_message)
-              = link_to 'Shop now!', sale_path
+              | Take 21% Off Of Everything in honor of Equal Pay Day.
+              = link_to 'Find out why.', from_our_ceo_path, class: "alert-sale-cta"
+
+// REGULAR SALE BANNER IS TEMPORARILY HIDDEN
+// Once the EQUAL PAY DAY campaign is over we can enable it again.
+/ - else
+/   - if display_sale_notice?
+/     #sale-banner.alert-sale role="alert"
+/       .outer-wrap
+/           .inner-wrap
+/             .title-wrap
+/               .title
+/                 = current_sale.try(:sitewide_message)
+/                 = link_to 'Shop now!', sale_path
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)

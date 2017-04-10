@@ -32,7 +32,7 @@ class CollectionSort extends Component {
         autobind(this);
     }
 
-    trackSelection(eventName, selectionFilter){
+    trackSelection(selectionFilter){
       trackEvent(assign({},
         COLLECTION_EVENTS['COLLECTION_SORT_SELECTION'],
         {label: selectionFilter,} // dynamic based on filter value

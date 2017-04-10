@@ -47,13 +47,6 @@ ruby:
               span.input-group-btn
                 button.btn.btn-block.btn-black.promo-code-apply Apply
 
-            - if sale_active?
-              - if current_sale.try(:sale_promo)
-                p style="font-size:0.8em;"
-                  = current_sale.sitewide_message
-                  br
-                  = "Use discount code: #{current_sale.try(:sale_promo)}"
-
       .row
         .col-xs-12
           .cart-total

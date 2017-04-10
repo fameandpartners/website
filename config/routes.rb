@@ -179,7 +179,7 @@ FameAndPartners::Application.routes.draw do
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
     get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
     get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
-    get '/prom-ad'            => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_ad_collection
+    get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
@@ -202,6 +202,11 @@ FameAndPartners::Application.routes.draw do
     get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
+
+    # Every BODY Dance Collection
+    get '/every-body-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
+    # Redirection in case of typo
+    get '/everybody-dance', to: redirect('/every-body-dance')
 
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
@@ -238,6 +243,8 @@ FameAndPartners::Application.routes.draw do
 
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
+    # Redirect with querystring for GA tracking (Marketing campaign)
+    get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
@@ -270,7 +277,7 @@ FameAndPartners::Application.routes.draw do
 
     # Daywear Category Page
     get '/daywear' => 'products/collections#show', :permalink => 'daywear', :as => :daywear_page
-    
+
     # Evening Category Page
     get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
 

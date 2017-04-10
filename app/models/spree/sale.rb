@@ -14,11 +14,13 @@ class Spree::Sale < ActiveRecord::Base
 
   attr_accessible :is_active,
                   :sitewide,
+                  :sitewide_message,
                   :name,
                   :discount_size,
                   :discount_type,
                   :discounts_attributes,
-                  :customisation_allowed
+                  :customisation_allowed,
+                  :currency
 
   validates :is_active,
             :inclusion => {
@@ -38,7 +40,13 @@ class Spree::Sale < ActiveRecord::Base
             presence: true,
             length: { minimum: 5 }
 
-  scope :active, lambda { where(is_active: true) }
+  validates :currency,
+            inclusion: { in: -> (currency) { SiteVersion.pluck(:currency) } },
+            allow_blank: true
+
+  scope :active,   -> { where(is_active: true) }
+  scope :sitewide, -> { where(sitewide: true) }
+  scope :for_currency, -> (currency) { where("lower(currency) = ? OR currency = ''", currency.to_s.downcase) }
 
   has_many :discounts
 
@@ -53,16 +61,19 @@ class Spree::Sale < ActiveRecord::Base
     Discount.new(amount: discount_size.to_i)
   end
 
-  def apply(price, surryhills)
-    if fixed?
-      discount_size < price ? price - discount_size : BigDecimal.new(0)
-    elsif percentage?
-      unless surryhills
-        price * (BigDecimal.new(100) - discount_size) / 100
+  def apply(price)
+    amount = price.amount
+
+    new_amount = \
+      if fixed?
+        discount_size < amount ? amount - discount_size : BigDecimal.new(0)
+      elsif percentage?
+        amount * (1 - discount_size.to_f / 100)
       else
-        price * (BigDecimal.new(100) - 80) / 100
+        amount
       end
-    end
+
+    Spree::Price.new(amount: new_amount, currency: price.currency)
   end
 
   def mega_menu_image_url
@@ -70,11 +81,10 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def banner_images
-    banner_images = {
+    {
       full:  'tile-sale-full.gif',
       small: 'tile-sale-sml.gif'
     }
-    banner_images
   end
 
   def explanation
@@ -90,17 +100,15 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    super.gsub(/{discount}/, discount_string)
-  end
-
-  # TODO: Alexey Bobyrev 14 Mar 2017
-  # Seems to be unnecessary method, should be removed.
-  def sale_promo
-    nil
+    super.to_s.gsub(/{discount}/, discount_string)
   end
 
   def self.active_sales_ids
     Spree::Sale.active.pluck(:id)
+  end
+
+  def self.last_sitewide_for(currency: currency)
+    active.sitewide.order('created_at DESC').limit(1).for_currency(currency).last
   end
 
 end

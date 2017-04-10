@@ -77,6 +77,7 @@ var SizeProfile = React.createClass({
   sizeProfileSavedHandle: function(e){
     e.preventDefault();
     var state = $.extend({}, this.state);
+    var that = this;
     var payload = {
       account: {
         user_profile_attributes: {
@@ -92,12 +93,10 @@ var SizeProfile = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
-        ReactDOM.unmountComponentAtNode(notificationNode);
-        ReactDOM.render(<Notification errors={['Changes successfully saved']} />, notificationNode);
+        that.refs.notifications.notify(['Changes successfully saved']);
       },
       error: function (data) {
-        ReactDOM.unmountComponentAtNode(notificationNode);
-        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors} />, notificationNode);
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     });
 
@@ -106,6 +105,7 @@ var SizeProfile = React.createClass({
   render: function () {
     return (
       <div className="size-profile">
+        <Notification ref="notifications"/>
         <div className="customization-title">
           <h1><em>Update,</em> your size profile.</h1>
         </div>

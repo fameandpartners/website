@@ -163,38 +163,9 @@
   width: 1%;
 }
 
-// Align content vericaly
-.h-v-align {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__item--top {
-    align-self: flex-start;
-  }
-
-  &__item--bottom {
-    align-self: flex-end;
-  }
-
-}
-
-.vertical-align-row {
-  @include column-vertical-align();
-}
-
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
-}
-
-.row-equal-width {
-  @include display-flex;
-
-  > .equal-width {
-    flex-basis: 100%;
-  }
-
 }
 
 .text-transform-none {
@@ -241,6 +212,10 @@
 }
 .margin--center {
   margin: 0 auto;
+}
+
+.vertical-align-row {
+  @include column-vertical-align();
 }
 
 @media (min-width: $bootstrap-md-width) {

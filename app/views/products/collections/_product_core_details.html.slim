@@ -10,7 +10,7 @@ ruby:
   = link_to product_link.call(product), :class => 'media-wrap product-name' do
     span.name
       = product.name
-  span.price = product_price_with_discount(product.price, product.discount)
+  span.price = product_price_with_discount(product)
 
   - if Features.active?(:moodboard)
     .dropdown

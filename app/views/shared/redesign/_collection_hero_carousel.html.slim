@@ -1,71 +1,146 @@
-// HOMEPAGE HERO CAROUSEL
+// TEMPORARY HERO CAROUSEL FOR EQUAL PAY DAY CAMPAIGN
+- if equal_pay_active?
+  // Carousel Item 1
+  - current_tile_image = "homepage/hero-featured/equal-pay-featured-1.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/equal-pay-featured-1-mob.jpg"
+  = link_to dresses_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "21% off everything. Today only." }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
 
-// Carousel Item 1
-- current_tile_image = "homepage/hero-featured/march-22-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/march-22-featured-1-mob.jpg"
-= link_to the_evening_shop_landing_page_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Evening Shop" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
-
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-4.col-md-offset-4
-          .copy-wrap.text-center
-            h2.heading.no-margin-md
-              .hidden-sm.hidden-xs
-                span.title.title--large The Evening Shop. Style gets <em>personal</em>.
+    .content-wrap
+      .container-fluid
+        .row
+          .col-lg-5.col-md-6.col-md-offset-1
+            .copy-wrap
+              h2.heading.no-margin-md
+                span.title.title--large 21% off <em>everything</em>.<br class="hidden-xs hidden-sm"> Today only.
                 span.sub-heading
-                  | <em class="link-underline">Customize</em> your way.
+                  | In honor of Equal Pay Day, let's fight the<br class="hidden-xs hidden-sm"> 21% wage gap and look fierce while doing it.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Shop <span class="copy-highlight">NOW</span>
 
-              .hidden-md.hidden-lg
-                span.title The Evening Shop. Style gets personal.
+
+  // Carousel Item 2
+  - current_tile_image = "homepage/hero-featured/equal-pay-featured-2.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/equal-pay-featured-2-mob.jpg"
+  = link_to from_our_ceo_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Let's end gender inequality." }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container-fluid
+        .row
+          .col-md-5.col-md-offset-1
+            .copy-wrap
+              h2.heading.no-margin-md
+                span.title.title--large Let's <em>end</em> <br class="visible-lg-block">gender inequality.
                 span.sub-heading
-                  | <em class="link-underline">Explore</em> The Evening Shop.
+                    | We're calling attention to the wage gap <br class="visible-lg-block">with a sitewide sale. <span class="hidden-xs hidden-sm">Here's why it matters.</span>
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | From <span class="copy-highlight">THE CEO</span>
 
-// Carousel Item 2
-- current_tile_image = "homepage/hero-featured/march-22-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/march-22-featured-2-mob.jpg"
-= link_to bespoke_bridal_collection_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
+  // Carousel Item 3
+  - current_tile_image = "homepage/hero-featured/equal-pay-featured-3.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/equal-pay-featured-3-mob.jpg"
+  = link_to the_evening_shop_landing_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Evening Shop" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
 
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-4.col-md-offset-6
-          .copy-wrap.text-center
-            h2.heading.no-margin-md
-              span.title.title--large Made for the <br class="visible-lg-block"><em>modern</em> bride.
-              span.sub-heading.hidden-md.hidden-lg
-                  | <em class="link-underline">Shop</em> Bespoke Bridal.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">BESPOKE BRIDAL</span>
+    .content-wrap
+      .container-fluid
+        .row
+           .col-lg-5.col-md-4.col-md-offset-1
+            .copy-wrap
+              h2.heading.no-margin-md
+                span.sub-heading Today symbolizes how far into 2017 women<br class="visible-lg"> have to work to earn as much as men did in 2016.
+                span.title.title--large.title--top-spacing-md You <em>deserve</em> a <br class="visible-lg-block">discount.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Take <span class="copy-highlight">21% off</span>
 
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/march-22-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/march-22-featured-3-mob.jpg"
-= link_to daywear_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Shop Casual" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
 
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-5.col-md-offset-3
-          .copy-wrap.text-center
-            h2.heading.no-margin-md
-              span.title.title--small Custom <em>shouldn't</em> be reserved for <br class="visible-lg">special occassions. <br class="hidden-md hidden-lg"><em class="link-underline">Shop casual.</em>
+- else
+  // REGULAR HOMEPAGE HERO CAROUSEL
+  // Carousel Item 1
+  - current_tile_image = "homepage/hero-featured/march-22-featured-1.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/march-22-featured-1-mob.jpg"
+  = link_to the_evening_shop_landing_page_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Evening Shop" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container-fluid
+        .row
+          .col-md-4.col-md-offset-4
+            .copy-wrap.text-center
+              h2.heading.no-margin-md
+                .hidden-sm.hidden-xs
+                  span.title.title--large The Evening Shop. Style gets <em>personal</em>.
+                  span.sub-heading
+                    | <em class="link-underline">Customize</em> your way.
+
+                .hidden-md.hidden-lg
+                  span.title The Evening Shop. Style gets personal.
+                  span.sub-heading
+                    | <em class="link-underline">Explore</em> The Evening Shop.
+
+  // Carousel Item 2
+  - current_tile_image = "homepage/hero-featured/march-22-featured-2.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/march-22-featured-2-mob.jpg"
+  = link_to bespoke_bridal_collection_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal Collection" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container-fluid
+        .row
+          .col-md-4.col-md-offset-6
+            .copy-wrap.text-center
+              h2.heading.no-margin-md
+                span.title.title--large Made for the <br class="visible-lg-block"><em>modern</em> bride.
+                span.sub-heading.hidden-md.hidden-lg
+                    | <em class="link-underline">Shop</em> Bespoke Bridal.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Shop <span class="copy-highlight">BESPOKE BRIDAL</span>
+
+  // Carousel Item 3
+  - current_tile_image = "homepage/hero-featured/march-22-featured-3.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/march-22-featured-3-mob.jpg"
+  = link_to daywear_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Shop Casual" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container-fluid
+        .row
+          .col-md-5.col-md-offset-3
+            .copy-wrap.text-center
+              h2.heading.no-margin-md
+                span.title.title--small Custom <em>shouldn't</em> be reserved for <br class="visible-lg">special occassions. <br class="hidden-md hidden-lg"><em class="link-underline">Shop casual.</em>

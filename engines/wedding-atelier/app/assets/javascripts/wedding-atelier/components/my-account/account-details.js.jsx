@@ -52,6 +52,7 @@ var AccountDetails = React.createClass({
 
   changesSavedHandle: function(e) {
     e.preventDefault();
+    var that = this;
     var state = this.state;
     var payload = {
       account: {
@@ -60,7 +61,7 @@ var AccountDetails = React.createClass({
         email: state.email,
         dob: state.dateOfBirth? moment(state.dateOfBirth).format('DD/MM/YYYY') : null,
         newsletter: state.newsletter
-      },
+      }
     };
     var notificationNode = document.getElementById('notification');
     if (this.allowedChangePassword()) {
@@ -74,12 +75,10 @@ var AccountDetails = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
-        ReactDOM.unmountComponentAtNode(notificationNode);
-        ReactDOM.render(<Notification errors={['Changes successfully saved']} />, notificationNode);
+        that.refs.notifications.notify(['Changes successfully saved']);
       },
       error: function (data) {
-        ReactDOM.unmountComponentAtNode(notificationNode);
-        ReactDOM.render(<Notification errors={JSON.parse(data.responseText).errors} />, notificationNode);
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     });
   },
@@ -92,6 +91,7 @@ var AccountDetails = React.createClass({
   render: function () {
     return (
       <div className="account-details">
+        <Notification ref="notifications"/>
         <form autoComplete={'off'} className="registrations__details-form">
           <div className="account-details-left col-xs-12 col-sm-6">
             <h1>Account details</h1>

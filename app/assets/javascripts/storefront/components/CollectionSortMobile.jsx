@@ -38,7 +38,7 @@ class CollectionSortMobile extends Component {
      */
     slideDrawerCancel() {
         if (hasLegacyInstance()) {
-            window.ProductCollectionFilter__Instance.toggleSort();
+            window.ProductCollectionFilter__Instance.toggleSort(false);
         }
     }
 

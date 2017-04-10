@@ -1,7 +1,7 @@
 ruby:
   related = Products::RelatedPresenter.new(
-          recommended_products: product.recommended_products,
-          related_outerwear:      product.related_outerwear
+    recommended_products: product.recommended_products,
+    related_outerwear:    product.related_outerwear
   )
 
 .row
@@ -22,4 +22,4 @@ ruby:
         .details.text-center
           = link_to collection_product_path(recommended_product), :class => 'media-wrap product-name' do
             span.name = recommended_product.name
-          span.price = product_price_with_discount(recommended_product.price, recommended_product.discount)
+          span.price = product_price_with_discount(recommended_product)
