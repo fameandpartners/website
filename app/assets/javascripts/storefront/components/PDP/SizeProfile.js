@@ -125,20 +125,26 @@ class SidePanelSize extends Component {
     return null;
   }
 
+  /**
+   * Handles the toggling of a metric switch and converts the values on the fly
+   * @param  {String} {value} (CM|INCH)
+   */
   handleMetricSwitch({ value }) {
     const CM_TO_INCHES = 2.54;
     const { height } = this.props.customize;
     const { heightValue } = height;
 
-    if (value === UNITS.CM && heightValue) { // Switching to CM
+    if (value === UNITS.CM && heightValue) {
       const newVal = Math.round(heightValue * CM_TO_INCHES);
       this.handleCMChange({ value: newVal });
-    } else if (value === UNITS.INCH && heightValue) { // switching to INCH
+    } else if (value === UNITS.INCH && heightValue) {
       const totalInches = Math.round(heightValue / CM_TO_INCHES);
-      const option = {
-        id: find(INCH_SIZES, { totalInches }).id,
-      };
-      this.handleInchChange({ option });
+      const selection = find(INCH_SIZES, { totalInches });
+      if (selection) {
+        this.handleInchChange({ option: {
+          id: selection.id,
+        } });
+      }
     }
   }
 
@@ -246,7 +252,7 @@ class SidePanelSize extends Component {
         ? 'selector-size is-selected' : 'selector-size';
       itemClassName += errors.size ? ' has-error' : '';
       return (
-        <a
+        <option
           className={itemClassName}
           onClick={this.handleDressSizeSelection}
           key={`size-${s.table.id}`}
@@ -254,7 +260,7 @@ class SidePanelSize extends Component {
           data-presentation={s.table.presentation}
         >
           {s.table.presentation}
-        </a>
+        </option>
       );
     });
   }
