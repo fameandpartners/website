@@ -30,7 +30,7 @@ class Moodboard < ActiveRecord::Base
   # TODO ? Promote into a service?
   def add_item(product:, color:, user:, variant: nil)
     product_id = product.id
-    color_id   = color.id
+    color_id   = color[:id]
 
     return unless user_member?(user)
     return if items.active.where(product_id: product_id, color_id: color_id ).exists?
@@ -41,7 +41,7 @@ class Moodboard < ActiveRecord::Base
       moodboard_id:           self.id,
       product_id:             product_id,
       product_color_value_id: pcv_id,
-      color_id:               color.id,
+      color_id:               color[:id],
       user_id:                user.id
     )
     ev.variant_id = variant.id if variant.present?

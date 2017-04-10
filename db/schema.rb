@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170217005814) do
+ActiveRecord::Schema.define(:version => 20170405182914) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -785,6 +785,13 @@ ActiveRecord::Schema.define(:version => 20170217005814) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "redirected_search_terms", :force => true do |t|
+    t.string   "term"
+    t.string   "redirect_to"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "refund_requests", :force => true do |t|
     t.integer  "order_id"
     t.integer  "payment_id"
@@ -1438,6 +1445,8 @@ ActiveRecord::Schema.define(:version => 20170217005814) do
     t.string   "name"
     t.boolean  "sitewide",              :default => false
     t.boolean  "customisation_allowed", :default => false
+    t.string   "sitewide_message"
+    t.string   "currency",              :default => ""
   end
 
   create_table "spree_shipments", :force => true do |t|

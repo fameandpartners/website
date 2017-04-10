@@ -13,9 +13,16 @@ $.fn.incrementButton = function(config){
 
   if (config && config.onChange) {
     $input.on("change", function() {
+      if(this.value == ''){
+        this.value = 0;
+       }
       config.onChange({target: this});
     });
   }
+
+  $input.on("keypress", function(e){
+    e.preventDefault();
+  });
 
   $input
     .wrap( "<div class='number-field'></div>" )
@@ -44,9 +51,14 @@ $.fn.incrementButton = function(config){
   $incButton.on("click", function() {
     var oldValue = parseInt($input.val(), 10);
     var newVal = ++oldValue;
+    var max = parseInt($input.attr('max'));
 
     if (isNaN(newVal)) {
       $input.val(0);
+      return;
+    }
+    if(newVal >= max){
+      $input.val(oldValue = max);
       return;
     }
 

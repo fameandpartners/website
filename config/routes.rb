@@ -98,8 +98,23 @@ FameAndPartners::Application.routes.draw do
     # The Evening Shop landing page
     get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
 
+    # Bridesmaids Thank you landing page
+    get '/thanks-bridesmaid' => 'statics#landing_page_thanks_bridesmaid', :permalink => 'thanks-bridesmaid', :as => :thanks_bridesmaid_landing_page
+
+    # Thank You landing page
+    get '/thanks-for-shopping' => 'statics#landing_page_regular_thank_you', :permalink => 'thank-you-for-shopping', :as => :thank_you_for_shopping_landing_page
+
+    # VIP landing page
+    get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
+
     # Thanks Bride landing page
     get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
+
+    # Micro Influencer landing page
+    get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
+
+    # Fame Society Invitation
+    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
     ###########
     # Lookbooks
@@ -126,7 +141,9 @@ FameAndPartners::Application.routes.draw do
     get '/lp/1512/4/p3' => redirect("/lp/1512/4?text=What%20were%20they%20Thinking?!%20The%208%20Craziest%20Bridesmaids%20Photos.")
     get '/lp/1512/4/p4' => redirect("/lp/1512/4?text=Real-Life%20Bridesmaid%20that%20went%20that%20Step%20too%20Far")
 
-    get '/lookbook' => 'statics#lookbook', :as => :lookbook
+    # Redirect Lookbook page to homepage (due to legal issues)
+    get '/lookbook', to: redirect('/'), :as => :lookbook
+
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
@@ -151,8 +168,6 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
-    get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
-    get '/lookbook/the-freshly-picked-collection' => 'products/collections#show', :permalink => 'cotton-collection', :as => :the_freshly_picked_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -164,7 +179,7 @@ FameAndPartners::Application.routes.draw do
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
     get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
     get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
-    get '/prom-ad'            => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_ad_collection
+    get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
@@ -188,17 +203,16 @@ FameAndPartners::Application.routes.draw do
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
 
+    # Every BODY Dance Collection
+    get '/every-body-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
+    # Redirection in case of typo
+    get '/everybody-dance', to: redirect('/every-body-dance')
+
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
 
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
-
-    # IT Girl - Landing page
-    get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
-
-    # Gown Collection - Landing page
-    get '/gown-collection' => 'products/collections#show', :permalink => 'gown-collection', :as => :gown_collection_landing_page
 
     # Cocktail Collection - Landing page
     get '/cocktail-collection' => 'products/collections#show', :permalink => 'cocktail-collection', :as => :cocktail_collection_landing_page
@@ -206,11 +220,8 @@ FameAndPartners::Application.routes.draw do
     # Spring Racing Collection - Landing page
     get '/spring-racing-collection' => 'products/collections#show', :permalink => 'spring-racing-collection', :as => :spring_racing_collection_landing_page
 
-    # Skirts Collection - Landing page
-    get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
-
-    # The Evening Hours Collection - Landing page
-    get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
+    # The Evening Hours Collection - Redirection
+    get '/the-evening-hours-collection' => redirect("/dresses/evening"), :as => :evening_hours_collection_landing_page
 
     # Relaxed Evening Collection page (Inside/Out)- Landing page
     get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
@@ -223,10 +234,19 @@ FameAndPartners::Application.routes.draw do
 
     # Bespoke Bridal Collection - Landing page
     get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
+    # Redirect with querystring for GA tracking (Marketing campaign)
+    get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
 
+    # Lookbook pages redirects (due to legal issues)
+    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+    get '/it-girl', to: redirect('/dresses'), as: :it_girl_landing_page
+    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -238,7 +258,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
-    get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
@@ -252,6 +271,9 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
     get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
     get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
+
+    # Daywear Category Page
+    get '/daywear' => 'products/collections#show', :permalink => 'daywear', :as => :daywear_page
 
     # Evening Category Page
     get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
@@ -402,6 +424,9 @@ FameAndPartners::Application.routes.draw do
     get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
     resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+
+    get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
+    resource 'micro-influencer', as: 'micro_influencer', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
@@ -626,10 +651,10 @@ FameAndPartners::Application.routes.draw do
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 end
 
-# NOTE: Alexey Bobyrev 14 Feb 2017 
+# NOTE: Alexey Bobyrev 14 Feb 2017
 # Method append used here to handle all request directly right after defined ones (including engines)
 FameAndPartners::Application.routes.append do
-  # NOTE: Alexey Bobyrev 14 Jan 2017 
+  # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
   match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

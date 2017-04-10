@@ -9,14 +9,19 @@ class Products::BaseController < ApplicationController
   helper_method :page, :banner
 
   def search
-    title("Search results for \"#{params[:q]}\"", default_seo_title)
-    load_filters
-    @collection = search_results
-    append_gtm_collection(@collection)
-    respond_to do |format|
-      format.html { render :search }
-      format.json do
-        render json: @collection.serialize
+    @zopim_opt_out = true
+    if( params[:q].present? && (search_term = RedirectedSearchTerm.find_by_term( params[:q].downcase.strip ) ) )
+      redirect_to "#{search_term.redirect_to}?q=#{CGI::escape search_term.term}", :status => 301
+    else
+      title("Search results for \"#{params[:q]}\"", default_seo_title)
+      load_filters
+      @collection = search_results
+      append_gtm_collection(@collection)
+      respond_to do |format|
+        format.html { render :search }
+        format.json do
+          render json: @collection.serialize
+        end
       end
     end
   end

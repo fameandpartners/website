@@ -5,7 +5,8 @@ var AddToCartButton = React.createClass({
     dress: React.PropTypes.object
   },
   handleAddToCart: function () {
-    var dress = null;
+    var that = this,
+        dress = null;
     if(this.props.customizations.customized) {
       dress = this.props.customizations;
     } else {
@@ -38,8 +39,7 @@ var AddToCartButton = React.createClass({
         $('.shopping-bag-container').trigger('shoppingBag:open');
       },
       error: function (response) {
-        ReactDOM.render(<Notification errors={['Oops! There was an error adding your current customization to the shopping cart, try another combination.']} />,
-            document.getElementById('notification'));
+        that.refs.notifications.notify(['Oops! There was an error adding your current customization to the shopping cart, try another combination.']);
       }
     })
   },

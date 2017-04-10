@@ -15,12 +15,12 @@
       <span class="name"><%= @product.name %></span>
     </a>
     <span class="price">
-      <% if @product.sale_price: %>
-        <span class="price-original"><%= @product.price %></span>
-        <span class="price-sale"><%= @product.sale_price %></span>
-        <span class="price-discount">Save <%= @product.discount.table.amount %>%</span>
+      <% if @product.prices.sale_string: %>
+        <span class="price-original"><%= @product.prices.original_string %></span>
+        <span class="price-sale"><%= @product.prices.sale_string %></span>
+        <span class="price-discount">Save <%= @product.prices.discount_string %></span>
       <% else: %>
-        <%= @product.price %>
+        <%= @product.prices.original_string %>
       <% end %>
     </span>
 

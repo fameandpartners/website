@@ -34,7 +34,7 @@ var SizeSelector = React.createClass({
     // it's important to change size here to reset presentation as 4'10" / 147cm | 6
     // if previous size came from an user profile
     var height = target.value;
-    var heightGroup = target.selectedOptions[0].parentElement.label;
+    var heightGroup = $(target).find('option:selected').parent().attr('label');
     var _newState = $.extend({}, this.state);
     _newState.height = height;
     _newState.heightGroup = heightGroup;
@@ -70,6 +70,31 @@ var SizeSelector = React.createClass({
     this.props.selectCallback('heightGroup', assistant.user_profile.heigh_group);
   },
 
+  renderAssistants: function () {
+    var that = this;
+    return that.props.assistants.map(function(assistant, index){
+      var id = 'desktop-assistant-' + index,
+          inputProps = {
+            id: id,
+            type: 'radio',
+            name: 'desktop-assistant',
+            value: assistant.user_profile.dress_size,
+            onChange: that.assistantSelectedHandle.bind(null, assistant)
+          };
+
+      if (that.state.assistant) {
+        inputProps.checked = assistant.id === that.state.assistant.id;
+      }
+
+      return (
+        <li key={index}>
+          <input {...inputProps} />
+          <label htmlFor={id}>{assistant.first_name}</label>
+        </li>
+      );
+    });
+  },
+
   render: function() {
     var that = this;
     var optionsForHeights = this.props.heights.map(function(group) {
@@ -95,35 +120,13 @@ var SizeSelector = React.createClass({
           };
 
       if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size.id)) {
-        inputProps.defaultChecked = true;
+        inputProps.checked = true;
       }
 
       return (
         <li key={index}>
           <input {...inputProps} />
           <label htmlFor={id}>{PresentationHelper.sizePresentation(size, that.props.siteVersion)}</label>
-        </li>
-      );
-    });
-
-    var assistantsSizes = this.props.assistants.map(function(assistant, index){
-      var id = 'desktop-assistant-' + index,
-          inputProps = {
-            id: id,
-            type: 'radio',
-            name: 'desktop-assistant',
-            value: assistant.user_profile.dress_size,
-            onChange: that.assistantSelectedHandle.bind(null, assistant)
-          };
-
-      if (that.state.assistant) {
-        inputProps.defaultChecked = assistant.id === that.state.assistant.id;
-      }
-
-      return (
-        <li key={index}>
-          <input {...inputProps} />
-          <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       );
     });
@@ -165,7 +168,7 @@ var SizeSelector = React.createClass({
             <div className="dress-sizes ungrouped large-labels">
               <ul className="customization-dress-sizes-ul people">
                 <div>
-                  {assistantsSizes}
+                  {this.renderAssistants()}
                 </div>
               </ul>
             </div>

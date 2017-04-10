@@ -9,7 +9,7 @@
   }
 
   p {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .cta-link {
@@ -24,11 +24,7 @@
   .title-highlight {
     font-family: $font-family-secondary;
     font-weight: bold;
-  }
-
-  .mobile-safe-padding {
-    padding-left: 20px;
-    padding-right: 20px;
+    letter-spacing: 2px;
   }
 
   .diagonal-line {
@@ -59,9 +55,17 @@
       width: 80%;
     }
 
-    .intro-wrapper .gratitudePage__copy {
-      padding-left: 55px;
-      padding-right: 50px;
+    .intro-wrapper {
+
+      .container-fluid {
+        padding-left: 85px;
+      }
+
+      .gratitudePage__copy {
+        padding-left: 25px;
+        padding-right: 70px;
+      }
+
     }
 
     .social-content-left {
@@ -74,6 +78,26 @@
 
     .btn-featured {
       padding: 15px 42px;
+    }
+
+    .btn-featured-black {
+      padding: 15px 62px;
+    }
+
+    .cta-items {
+
+      .cta-link-arrow-right {
+        margin-bottom: 20px;
+      }
+
+    }
+
+    .same-height-cols {
+
+      .item {
+        padding-bottom: 40px;
+      }
+
     }
 
     .gratitude-promo-app {
@@ -100,7 +124,8 @@
       font-size: 2rem;
     }
 
-    .btn-featured {
+    .btn-featured,
+    .btn-featured-black {
       margin-top: 40px;
       padding: 20px 80px;
     }
@@ -120,6 +145,11 @@
 
     .diagonal-line {
       margin-bottom: 55px;
+    }
+
+    .mobile-safe-padding {
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
   }
@@ -165,6 +195,14 @@
 
 .section-go-to-account {
   margin-top: 50px;
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .btn-black {
+      padding: 15px 42px;
+    }
+
+  }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 

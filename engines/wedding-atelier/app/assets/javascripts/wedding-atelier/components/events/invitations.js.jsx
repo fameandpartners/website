@@ -5,12 +5,13 @@ var EventInvitations = React.createClass({
     send_invite_path: React.PropTypes.string.isRequired,
     handleRemoveAssistant: React.PropTypes.func,
     current_user_id: React.PropTypes.number,
-    event_owner_id: React.PropTypes.number.isRequired,
+    event_owner_id: React.PropTypes.number.isRequired
   },
 
   getInitialState: function() {
     return {
-      invitations: []
+      invitations: [],
+      notifications: []
     };
   },
 
@@ -27,9 +28,19 @@ var EventInvitations = React.createClass({
   },
 
   handleSendInvite: function(e){
-    var that = this;
-    var email = that.refs.email_address.value;
+    var that = this,
+        emailField = that.refs.email_address,
+        email = emailField.value;
     e.preventDefault();
+    if(!emailField.checkValidity()) {
+      this.refs.notifications.notify(["Invalid email format."]);
+      return false;
+    }
+
+    if(!email){
+      this.refs.notifications.notify(["Email field can\'t be blank"]);
+      return false;
+    }
 
     $.ajax({
       url: that.props.send_invite_path,
@@ -37,16 +48,12 @@ var EventInvitations = React.createClass({
       dataType: 'json',
       data: {email_addresses: [email]},
       success: function(data) {
-        ReactDOM.render(<Notification errors={['Invite successfully sent to ' + email + '.']} />,
-            document.getElementById('notification'));
-        var invitations = that.state.invitations.slice().concat(data.invitations.map(function (inviteWrapper) {
-          return inviteWrapper.invitation;
-        }));
-        that.setState({invitations: invitations});
+        emailField.value = '';
+        that.setState({invitations: data.invitations});
+        that.refs.notifications.notify(['Invite successfully sent to ' + email + '.'])
       },
       error: function(error) {
-        ReactDOM.render(<Notification errors={["Sorry, we could not send the invitation to " + email + '.']} />,
-            document.getElementById('notification'));
+        that.refs.notifications.notify(["Sorry, we could not send the invitation to " + email + '.']);
       }
     });
   },
@@ -81,7 +88,7 @@ var EventInvitations = React.createClass({
   renderInvitations: function () {
     return this.state.invitations.map(function(invitation, index){
       return (
-        <div className="person" key={index + '-' + invitation.user_email}>
+        <div className="person" key={invitation.id}>
           <div className="person-name">
             {invitation.user_email}
           </div>
@@ -94,9 +101,9 @@ var EventInvitations = React.createClass({
   },
 
   render: function() {
-
     return(
       <form>
+        <Notification ref='notifications'/>
         <div className="form-group">
           <label htmlFor="input_email_address">Email address</label>
           <input type="email" className="form-control" placeholder="mail@mail.com" id="input_email_addres" ref="email_address"/>

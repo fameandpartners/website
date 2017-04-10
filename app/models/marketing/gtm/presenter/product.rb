@@ -15,7 +15,7 @@ module Marketing
         end
 
         def price
-          product.price.amount
+          product.price&.amount.to_f.round(2)
         end
 
         def variants
@@ -23,12 +23,11 @@ module Marketing
         end
 
         def price_with_discount
-          product.price_amount
+          product.price_amount.to_f.round(2)
         end
 
         def discount_percent
-          discount = product.discount ? product.discount.amount : 0
-          discount.to_s
+          product.discount&.amount
         end
 
         def currency
@@ -86,7 +85,7 @@ module Marketing
               name:              product.name,
               brand:             'Fame & Partners', # Hardcoded for the moment
               sku:               product.sku,
-              price:             price,
+              price:             price.to_f,
               priceWithDiscount: price_with_discount,
               discountPercent:   discount_percent,
               type:              'dresses', # Hardcoded for the moment

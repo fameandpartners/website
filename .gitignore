@@ -76,6 +76,9 @@ bin/spring
 *.sublime-project
 *.sublime-workspace
 
+# Ignore other Procfiles
+Procfile.*
+
 # Ignore OpsCare.yml
 OpsCare.yml
 
@@ -87,3 +90,6 @@ app/assets/javascripts/application_bundle.js
 
 # Ignore all helper Procfile
 Procfile.*
+
+# Ignore all Emacs Temp Files
+*#*

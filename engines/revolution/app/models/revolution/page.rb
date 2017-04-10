@@ -32,12 +32,12 @@ module Revolution
 
     # TODO: `collection.details.banner.title` reference should be removed. This is 100% CMS responsibility
     def heading
-      (translation && translation.heading) || collection.details.banner.title
+      (translation && translation.heading) || collection.details&.banner&.title
     end
 
     # TODO: `collection.details.banner.subtitle` reference should be removed. This is 100% CMS responsibility
     def sub_heading
-      (translation && translation.sub_heading) || collection.details.banner.subtitle
+      (translation && translation.sub_heading) || collection.details&.banner&.subtitle
     end
 
     def description
@@ -52,7 +52,7 @@ module Revolution
 
     # TODO: `collection.details.banner.image` should be removed and URLs controlled over the CMS
     def banner_image
-      get(:banner_image_url).presence || collection.details.banner.image
+      get(:banner_image_url).presence || collection.details&.banner&.image
     end
 
     def translation

@@ -1,3 +1,15 @@
+
+<% if Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>
+  <%= render 'marketing/trackers/customerio' %>
+<% end %>
+
+<%= render 'marketing/trackers/zopim' unless @zopim_opt_out %>
+
+
+<!-- Body End is for Javascript that needs to be loaded after markup -->
+<%= yield :body_end %>
+
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
 
 <!-- bootstrap -->
@@ -19,6 +31,7 @@
   };
 
   $(document).ready(function(){
+    // Inline Javascript is for javascript to be executed after DOM Content loaded event fired
     <%= yield :inline_javascript %>
 
     // init here allows assigned listeners to update data

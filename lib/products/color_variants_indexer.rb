@@ -172,6 +172,14 @@ module Products
         create :mappings => {
           :document => {
             :properties => {
+              :product => {
+                :properties => {
+                  :created_at => {
+                    :format => "dateOptionalTime",
+                    :type   => "date"
+                  }
+                }
+              },
               :prices => {
                 :properties => {
                   :aud => { :type => 'float'},

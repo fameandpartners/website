@@ -1,24 +1,49 @@
 // Section: Categories tiles
 section.section-box.container.section-style-icon
-  .row
-    .col-md-12.heading-overlay-wrapper
-      h2.heading-overlay The Wedding Atelier App Beta
 
-  .row
-    .col-md-12.cta-item-huge
-      - current_edit_image = "homepage/fp-style-icon/feb-09-tile-1.jpg"
-      - current_edit_mob_image = "homepage/fp-style-icon/feb-09-tile-1-mob.jpg"
-      - current_edit_link = wedding_atelier_app_landing_page_path
+  // TEMPORARY CONTENT FOR THE EQUAL PAY DAY CAMPAIGN
+  - if equal_pay_active?
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay Flash Sale
 
-      = link_to current_edit_link + "?hp"
-        .section-img-wrap.copy-center
-          picture
-            .img-wrap
-              source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
-              source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
-              img src="#{image_path(current_edit_image)}" srcset="
-                #{image_path(current_edit_mob_image)} 991w,
-                #{image_path(current_edit_image)} 992w"
+    .row
+      .col-md-12.cta-item-huge
+        - current_edit_image = "homepage/category-tiles/equal-pay-day-tile-1.jpg"
+        - current_edit_mob_image = "homepage/category-tiles/equal-pay-day-tile-1-mob.jpg"
+        - current_edit_link = daywear_page_path + "?secondaryhp"
+
+        = link_to current_edit_link
+          .section-img-wrap.copy-center
+            picture
+              .img-wrap
+                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+                img src="#{image_path(current_edit_image)}" srcset="
+                  #{image_path(current_edit_mob_image)} 991w,
+                  #{image_path(current_edit_image)} 992w"
+
+  // REGULAR CONTENT
+  - else
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay The Wedding Atelier App Beta
+
+    .row
+      .col-md-12.cta-item-huge
+        - current_edit_image = "homepage/category-tiles/march-22-tile-1.jpg"
+        - current_edit_mob_image = "homepage/category-tiles/march-22-tile-1-mob.jpg"
+        - current_edit_link = get_the_look_path + "?secondaryhp"
+
+        = link_to current_edit_link
+          .section-img-wrap.copy-center
+            picture
+              .img-wrap
+                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+                img src="#{image_path(current_edit_image)}" srcset="
+                  #{image_path(current_edit_mob_image)} 991w,
+                  #{image_path(current_edit_image)} 992w"
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
@@ -28,10 +53,10 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/two-piece?hp'
+        = link_to dresses_path + '/two-piece?edit1'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-2.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/march-22-tile-2.jpg")}'
 
             .content-wrap
               .container-cta
@@ -40,13 +65,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Two Piece Sets
+                        span.copy-highlight Sets
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/backless?hp'
+        = link_to dresses_path + '/backless?edit2'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-3.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/march-22-tile-3.jpg")}'
 
             .content-wrap
               .container-cta
@@ -55,14 +80,14 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight All things Backless
+                        span.copy-highlight Backless
 
     .row
       .col-md-6.cta-item
-        = link_to evening_shop_lace_page_path + '?hp'
+        = link_to dresses_path + '/red?edit3'
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-4.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/march-22-tile-4.jpg")}'
 
             .content-wrap
               .container-cta
@@ -71,13 +96,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Lace Looks
+                        span.copy-highlight Red
 
       .col-md-6.cta-item
-        = link_to evening_shop_cold_shoulder_page_path + "?hp"
+        = link_to evening_shop_lace_page_path + "?edit4"
           .section-img-wrap.copy-center
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/fp-style-icon/march-02-tile-5.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/march-22-tile-5.jpg")}'
 
             .content-wrap
               .container-cta
@@ -86,4 +111,4 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Shoulder-baring styles
+                        span.copy-highlight Lace

@@ -2,6 +2,7 @@
 # TODO: This `Spree::User` eval should be a `WeddingAtelier::User`
 
 Spree::User.class_eval do
+  WEDDING_ATELIER_COMPLETED_STEPS = %w(completed invite)
   attr_accessor :event_role
 
   attr_accessible :wedding_atelier_signup_step,
@@ -20,12 +21,16 @@ Spree::User.class_eval do
   accepts_nested_attributes_for :events, :user_profile
   rolify role_cname: 'WeddingAtelier::EventRole', role_join_table_name: 'wedding_atelier_users_event_roles'
 
+  scope :with_complete_profile, -> { where('wedding_atelier_signup_step in (?)', WEDDING_ATELIER_COMPLETED_STEPS )}
+
   def create_wedding
     events.create(event_type: 'wedding')
   end
 
   def role_in_event(event)
-    roles.where(resource_id: event.id).first.name if event
+    if event
+      roles.where(resource_id: event.id).pluck(:name).first.to_s
+    end
   end
 
   def update_role_in_event(role, event)
@@ -40,6 +45,6 @@ Spree::User.class_eval do
   end
 
   def wedding_atelier_signup_complete?
-    ['completed', 'invite'].include? wedding_atelier_signup_step
+    WEDDING_ATELIER_COMPLETED_STEPS.include? wedding_atelier_signup_step
   end
 end

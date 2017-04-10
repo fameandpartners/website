@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>carrot</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="carrot" fill-rule="nonzero" fill="#000000">
+            <path d="M0.901910707,0.159216198 C0.695586156,-0.053072066 0.361067964,-0.053072066 0.154743413,0.159216198 C-0.0515811378,0.371504462 -0.0515811378,0.715691743 0.154743413,0.927980007 L8,9 L15.8452566,0.927980007 C16.0515811,0.715691743 16.0515811,0.371504462 15.8452566,0.159216198 C15.638932,-0.053072066 15.3044138,-0.053072066 15.0980893,0.159216198 L8,7.46247238 L0.901910707,0.159216198 Z" id="Stroke-2"></path>
+        </g>
+    </g>
+</svg>

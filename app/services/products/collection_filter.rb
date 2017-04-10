@@ -9,7 +9,7 @@ class Products::CollectionFilter
   class << self
     def read
       Collection.new(
-        Repositories::Taxonomy.read_styles,
+        Repositories::Taxonomy.collect_filterable_taxons,
         Repositories::Taxonomy.read_events,
         ProductStyleProfile::BODY_SHAPES.sort,
         Repositories::ProductColors.read_all,

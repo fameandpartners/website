@@ -41,4 +41,31 @@ describe WeddingAtelier::Event do
       end
     end
   end
+
+  describe '#assistant_permitted?' do
+    let(:event){ create(:wedding_atelier_event) }
+    context 'when user is in assistants list' do
+      it 'is permitted' do
+        user = create(:spree_user, wedding_atelier_signup_step: 'completed')
+        event.assistants << user
+        expect(event.assistant_permitted?(user)).to be_truthy
+      end
+    end
+
+    context 'when user is not in the list but is an admin' do
+      it 'is permitted' do
+        user = create(:spree_user, email: 'admin@fameandpartners.com')
+        expect(event.assistants).not_to include(user)
+        expect(event.assistant_permitted?(user)).to be_truthy
+      end
+    end
+
+    context 'when user is not in the assistants list and is not an admin' do
+      it 'it is not permitted' do
+        user = create(:spree_user)
+        expect(event.assistants).not_to include(user)
+        expect(event.assistant_permitted?(user)).to be_falsey
+      end
+    end
+  end
 end

@@ -20,7 +20,7 @@ describe 'invitations', type: :feature do
       it 'indicates the invitation has been accepted' do
         visit "wedding-atelier/events/#{event.id}/invitations/#{invitation.id}/accept"
         expect(page.current_path).to eq "/wedding-atelier/signup"
-        expect(react_flash_errors[0]).to eq 'This is invitation has already been accepted.'
+        expect(page.find(:css, '.error-notification')).to be_truthy
       end
     end
 
@@ -31,7 +31,7 @@ describe 'invitations', type: :feature do
           fill_in 'spree_user_email', with: invited_user.email
           fill_in 'spree_user_password', with: invited_user.password
         end
-        click_button 'Sign in'
+        click_button 'Log in'
         visit "wedding-atelier/events/#{event.id}/invitations/#{invitation.id}/accept"
         expect(invitation.reload.state).to eq 'accepted'
         expect(invited_user.reload.events.length).to eq 1
@@ -49,7 +49,7 @@ describe 'invitations', type: :feature do
           fill_in 'spree_user_email', with: invited_user.email
           fill_in 'spree_user_password', with: invited_user.password
         end
-        click_button 'Sign in'
+        click_button 'Log in'
         expect(invitation.reload.state).to eq 'accepted'
         expect(invited_user.reload.events.length).to eq 1
         expect(page.current_path).to eq "/wedding-atelier/events/#{event.id}/#{event.slug}"

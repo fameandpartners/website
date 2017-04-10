@@ -50,6 +50,15 @@
           </div>
         </div>
         <div class="clearfix">
+          <div class="twelve columns">
+            <%= f.field_container :sitewide_message do %>
+              <%= f.label :sitewide_message, t(:sitewide_message) %> <span class="required">*</span> <small>- (Variable '{discount}' will be replaced with actual discount representaion)</small><br />
+              <%= f.text_field :sitewide_message, :class => 'fullwidth' %>
+              <%= f.error_message_on :sitewide_message %>
+            <% end %>
+          </div>
+        </div>
+        <div class="clearfix">
           <div class="four columns">
             <%= f.field_container :is_active, :class => ['checkbox'] do %>
               <label>
@@ -75,6 +84,12 @@
                 customisation allowed?
                 <%= f.error_message_on :customisation_allowed %>
               </label>
+            <% end %>
+          </div>
+          <div class="four columns">
+            <%= f.field_container :currency do %>
+              <%= f.label :currency, t(:currency) %> <span class="required">*</span><br />
+              <%= f.select :currency, SiteVersion.pluck(:currency), {:include_blank => 'ALL'}, {:class => 'select2 fullwidth'} %>
             <% end %>
           </div>
         </div>
@@ -180,7 +195,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to customization.presentation, edit_admin_product_customisation_value_path(customization.product, customization), target: :blank %>
+                  customization.presentation
                 </td>
                 <td>
                   <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>

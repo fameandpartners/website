@@ -42,7 +42,9 @@
 
           .flex1.col.dresses-style
             ul
-              li.title Dresses
+              li.title
+                = link_to dresses_path
+                  | Dresses
               = render partial: 'layouts/redesign/header/simplified_nav/dresses'
 
           .flex1.col.dresses-color
@@ -57,15 +59,29 @@
 
           .col.picture-col
             .featuredCollection.nav-item
-              = link_to evening_hours_collection_landing_page_path
-                = image_tag 'simplified-nav/modernevening.jpg', class: 'img-responsive nav-img', alt: ''
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      .cta-wrap
-                        span.cta-copy.cta-link-white-bg
-                          span.cta-link Shop
-                          span.copy-highlight &nbsp;THE MODERN EVENING COLLECTION
+              // TEMPORARY CONTENT FOR EQUAL PAY DAY
+              - if equal_pay_active?
+                = link_to dresses_path + "/prom"
+                  = image_tag 'simplified-nav/equal-pay-day.jpg', class: 'img-responsive nav-img', alt: ''
+                  .content-wrap
+                    .container-cta
+                      .row-cta
+                        .cta-wrap
+                          span.cta-copy.cta-link-white-bg
+                            span.cta-link Shop
+                            span.copy-highlight  THE EQUAL PAY DAY SALE
+
+              // REGULAR CONTENT
+              - else
+                = link_to modern_collection_landing_page_path
+                  = image_tag 'simplified-nav/modernevening.jpg', class: 'img-responsive nav-img', alt: ''
+                  .content-wrap
+                    .container-cta
+                      .row-cta
+                        .cta-wrap
+                          span.cta-copy.cta-link-white-bg
+                            span.cta-link Shop
+                            span.copy-highlight  THE MODERN EVENING COLLECTION
 
       .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center

@@ -38,27 +38,15 @@ module Products
     end
 
     def default_color_options
-      if colors? && colors.default.any?
-        colors.default
-      else
-        []
-      end
+      colors&.default&.presence || []
     end
 
     def custom_color_options
-      if colors? && colors.extra.any?
-        colors.extra
-      else
-        []
-      end
+      colors&.extra&.presence || []
     end
 
     def custom_color_price
       colors.default_extra_price.display_price
-    end
-
-    def colors?
-      colors.present?  || colors.extra.any?
     end
 
     def colors
@@ -165,18 +153,42 @@ module Products
     alias_method :fast_making?, :fast_making
 
     def default_color
-      if color = available_options.colors.default.first
-        color.name
-      end
+      default_color_options.first&.name
     end
 
     def price_amount
-      display_price = price.apply(discount) || price
-      display_price.amount
+      prices[:sale_amount].presence || prices[:original_amount]
     end
 
     def price_currency
       price.currency
+    end
+
+    def prices
+      @prices ||= \
+        if price.present?
+          if discount&.amount.to_i > 0
+            sale_price      = price.apply(discount)
+            discount_amount = discount.amount
+            discount_string = "#{discount.amount}%"
+
+          elsif sale = Spree::Sale.last_sitewide_for(currency: price.currency).presence
+            sale_price      = sale.apply(price)
+            discount_amount = sale.discount_size
+            discount_string = sale.discount_string
+
+          end
+
+          {
+                   currency: price.currency,
+            original_amount: price.amount,
+                sale_amount: sale_price&.amount,
+            discount_amount: discount_amount,
+            original_string: price.display_price.to_s,
+                sale_string: sale_price&.display_price&.to_s,
+            discount_string: discount_string
+          }
+        end
     end
 
     # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
@@ -225,11 +237,7 @@ module Products
     private
 
     def customisation_allowed?
-      policy.customisation_allowed?
-    end
-
-    def policy
-      @policy ||= Policy::Product.new(self)
+      discount.blank? || discount.customisation_allowed
     end
 
     def fallback_meta_description

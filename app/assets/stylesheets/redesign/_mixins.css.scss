@@ -124,23 +124,9 @@
 
 //////// CSS3 Flex Box ////////////
 
-@mixin column-vertical-align($v-align: center, $min-md-screen: false) {
+@mixin column-vertical-align($v-align: center) {
 
-  @if $min-md-screen == true {
-
-    @include min-tablet {
-
-      display: flex;
-
-      .vertical-align {
-        display: flex;
-        align-items: $v-align;
-      }
-
-    }
-
-  } @else {
-
+  @media (min-width: $bootstrap-md-width) {
     display: flex;
 
     .vertical-align {

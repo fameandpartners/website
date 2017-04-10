@@ -4,11 +4,10 @@
 #   Products::SelectionOptions.new(product: product).read
 module Products
 class SelectionOptions
-  attr_reader :site_version, :product, :policy
+  attr_reader :site_version, :product
 
   def initialize(options = {})
     @product      = options[:product]
-    @policy       = Policy::Product.new(product)
     @site_version = options[:site_version] || SiteVersion.default
   end
 
@@ -47,15 +46,12 @@ class SelectionOptions
   private
 
     def customisations_available?
-      policy.customisation_allowed?
+      product.discount.blank? || product.discount.customisation_allowed
     end
-
-    def extra_sizes_available?
-      policy.customisation_allowed?
-    end
+    alias_method :extra_sizes_available?, :customisations_available?
 
     def extra_colors_available?
-      policy.customisation_allowed? && product.color_customization
+      customisations_available? && product.color_customization
     end
 
     def product_variants

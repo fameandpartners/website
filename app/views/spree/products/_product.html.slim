@@ -5,4 +5,4 @@ div class=(element_class ||= 'grid-4')
     .popup.striped
       .fright.like = add_to_wishlist_link(product)
   h6 = product.name
-  .price = price_for_product(product)
+  .price = product_price_with_discount(product)

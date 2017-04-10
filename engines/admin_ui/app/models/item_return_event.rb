@@ -99,7 +99,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
     validates :user, presence: true
     validates :refund_method, presence: true
-    validates :refund_amount, presence: true
+    validates :refund_amount, presence: true, numericality: true
   end
 
   event_type :record_refund do
@@ -108,7 +108,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
     validates :user, presence: true
     validates :refund_method, presence: true
-    validates :refund_amount, presence: true
+    validates :refund_amount, presence: true, numericality: true
     validates :refunded_at, presence: true
   end
 

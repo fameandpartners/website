@@ -20,11 +20,11 @@ module Products
       instance
     end
 
-    # TODO - Make this apply universally to product collections
     def use_auto_discount!(auto_discount)
-      return if auto_discount.blank? || auto_discount.amount.to_i == 0
-      self.products.each do |product|
-        product.discount = [product.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
+      if auto_discount&.amount.to_i > 0
+        self.products.each do |product|
+          product.use_auto_discount!(auto_discount)
+        end
       end
     end
 
@@ -47,11 +47,9 @@ module Products
       result[:details] = self.details.to_h
 
       result[:products] = self.products.map do |product|
-        sale_price = product.price.apply(product.discount)
         product.to_h.merge(
           collection_path: ApplicationController.helpers.collection_product_path(product),
-          price: product.price.display_price.to_s,
-          sale_price: sale_price.present? ? sale_price.display_price.to_s : nil
+          prices: product.prices
         )
       end
       result

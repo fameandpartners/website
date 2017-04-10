@@ -4,6 +4,7 @@
   "description": "Fame & Partners JS bundle",
   "author": "F&P Dev Team",
   "devDependencies": {
+    "babel-plugin-react-transform": "^2.0.2",
     "chalk": "^1.1.3",
     "eslint": "^2.13.1",
     "eslint-plugin-import": "^1.9.2",
@@ -11,9 +12,12 @@
     "eslint-watch": "^2.1.11",
     "gulp-clean": "^0.3.2",
     "gulp-eslint": "^3.0.1",
+    "livereactload": "^3.1.1",
+    "react-proxy": "^1.1.8",
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "auto-bind": "^0.1.0",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-polyfill": "^6.9.1",
@@ -25,8 +29,10 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "immutable": "^3.8.1",
+    "inquirer": "^3.0.1",
     "lodash": "^4.17.2",
     "mirror-creator": "^1.1.0",
+    "pluralize": "^4.0.0",
     "react": "^15.2.1",
     "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.2.1",
@@ -36,7 +42,9 @@
     "react-simpletabs": "0.7.0",
     "react-slick": "^0.12.2",
     "redux": "^3.5.2",
+    "redux-devtools-extension": "^1.0.0",
     "redux-immutable-state-invariant": "^1.2.3",
+    "redux-thunk": "^2.1.0",
     "require-dir": "^0.3.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
@@ -44,6 +52,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development gulp build --watch true",
+    "start_bundle": "NODE_ENV=development gulp build --watch true --livereload --lrbundle ${BUNDLE}",
     "prod": "NODE_ENV=production gulp build --prod true",
     "production": "NODE_ENV=production gulp build --prod true"
   },
