@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { assign, find } from 'lodash';
 import * as pdpActions from '../../actions/PdpActions';
 import PDPConstants from '../../constants/PDPConstants';
-import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
 
@@ -13,19 +12,16 @@ import Select from '../shared/Select';
 import Input from '../shared/Input';
 import RadioToggle from '../shared/RadioToggle';
 
+// Constants
+const { DRAWERS, INCH_SIZES, UNITS } = PDPConstants;
 
 class SidePanelSize extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      ftHeight: undefined,
-      cmHeightChosen: undefined,
-      metricOption: 'in',
-    };
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.handleDressSizeSelection = this.handleDressSizeSelection.bind(this);
-    this.generateOptions = this.generateOptions.bind(this);
+    this.generateInchesOptions = this.generateInchesOptions.bind(this);
     this.updateHeightSelection = this.updateHeightSelection.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
@@ -35,7 +31,7 @@ class SidePanelSize extends Component {
 
   openMenu() {
     const { actions } = this.props;
-    actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
+    actions.toggleDrawer(DRAWERS.SIZE_PROFILE);
   }
 
   closeMenu() {
@@ -92,80 +88,150 @@ class SidePanelSize extends Component {
     this.props.actions.customizeDress(customize);
   }
 
+  /**
+   * Handles for changes of INCH metric
+   * @param  {Object} {option} - Select dropdown's option chosen
+   */
   handleInchChange({ option }) {
-    const selection = PDPConstants.INCH_SIZES[option.id];
+    const selection = INCH_SIZES[option.id];
     const inches = (selection.ft * 12) + selection.inch;
 
     this.updateHeightSelection({
       heightId: option.id,
       heightValue: inches,
-      heightUnit: 'inch',
+      heightUnit: UNITS.INCH,
     });
   }
 
+  /**
+   * Handler for changes of CM metric
+   */
   handleCMChange({ value }) {
     this.updateHeightSelection({
       heightValue: value,
-      heightUnit: 'cm',
+      heightUnit: UNITS.CM,
     });
   }
 
+  /**
+   * Handler for size profile applying
+   */
   handleSizeProfileApply() {
     const { customize } = this.props;
     if (this.validateErrors()) {
       if (customize.addToBagPending) { return this.props.addToBagCallback(); }
       this.closeMenu();
     }
+    return null;
   }
 
   handleMetricSwitch({ value }) {
     const CM_TO_INCHES = 2.54;
     const { height } = this.props.customize;
     const { heightValue } = height;
-    const convertedMetric = { heightUnit: value };
-    if (value === 'cm' && heightValue) {
-      convertedMetric.heightValue = Math.round(heightValue * CM_TO_INCHES);
-    } else if (value === 'inch' && heightValue) {
-      const totalInches = Math.round(heightValue / CM_TO_INCHES);
-      const inchSizeObj = find(PDPConstants.INCH_SIZES, {
-        totalInches,
-      });
-      if (typeof inchSizeObj.id === 'number') {
-        convertedMetric.heightValue = totalInches;
-        convertedMetric.heightId = inchSizeObj.id;
-      }
-    }
 
-    this.updateHeightSelection(convertedMetric);
+    if (value === UNITS.CM && heightValue) { // Switching to CM
+      const newVal = Math.round(heightValue * CM_TO_INCHES);
+      this.handleCMChange({ value: newVal });
+    } else if (value === UNITS.INCH && heightValue) { // switching to INCH
+      const totalInches = Math.round(heightValue / CM_TO_INCHES);
+      const option = {
+        id: find(INCH_SIZES, { totalInches }).id,
+      };
+      this.handleInchChange({ option });
+    }
   }
 
-  generateOptions() {
+  /**
+   * Helper method to generate the option and min/max extremas
+   * @param  {Number} i
+   * @param  {Number} ft
+   * @param  {Number} inch
+   * @param  {Boolean} last
+   * @return {Node} maxOption
+   */
+  minMaxExtremeInchOption(i, ft, inch, last) {
+    return (
+      <div>
+        <span className="amt">{ft}</span>
+        <span className="metric">'</span>
+        <span className="amt amt--last">{inch}</span>
+        <span className="metric">"</span>
+        { last ?
+          <span> & over</span> :
+          <span> & under</span>
+        }
+      </div>
+    );
+  }
+
+  /**
+   * Helper method to generate normal option for Select
+   * @param  {Number} i
+   * @param  {Nunber} ft
+   * @param  {Number} inch
+   * @return {Node} defaultOption
+   */
+  defaultInchOption(i, ft, inch) {
+    return (
+      <div>
+        <span className="amt">{ft}</span>
+        <span className="metric">ft</span>
+        <span className="amt amt--last">{inch}</span>
+        <span className="metric">in</span>
+      </div>
+    );
+  }
+
+  /**
+   * Generates the inches options for the Select dropdown
+   * @return {Object} options
+   */
+  generateInchesOptions() {
     const { height } = this.props.customize;
-    return PDPConstants.INCH_SIZES.map(({ ft, inch }, i) => ({
+    const totalSizes = INCH_SIZES.length;
+    return INCH_SIZES.map(({ ft, inch }, i) => ({
       id: i,
-      name: (
-        <div>
-          <span className="amt">{`${ft}`}</span>
-          <span className="metric">ft</span>
-          <span className="amt amt--last">{`${inch}`}</span>
-          <span className="metric">in</span>
-        </div>
-      ),
+      name: (i === 0 || i === totalSizes - 1) ?
+        this.minMaxExtremeInchOption(i, ft, inch, i === totalSizes - 1) :
+        this.defaultInchOption(i, ft, inch),
       active: i === height.heightId,
     }));
   }
 
+  /**
+   * Creates a readable string for size summary based on units
+   * @param  {Number} heightValue
+   * @param  {String} heightUnit {CM|INCH}
+   * @param  {String} sizePresentation - dress
+   * @return {String} summary
+   */
+  sizeSummaryUnitSelection(heightValue, heightUnit, sizePresentation) {
+    if (heightValue && sizePresentation) {
+      if (heightUnit === UNITS.INCH) {
+        const ft = Math.floor(heightValue / 12);
+        const inch = heightValue % 12;
+        return `${ft}ft ${inch}in / ${sizePresentation}`;
+      }
+      return `${heightValue} ${heightUnit.toLowerCase()} / ${sizePresentation}`;
+    }
+
+    return '';
+  }
+
+  /**
+   * Generates a description of height and dress size solection
+   * @return {Node} profileSummary
+   */
   generateSizeProfileSummary() {
     const { height, size } = this.props.customize;
-    const displayString = height.heightValue && size.presentation
-      ? `${height.heightValue} ${height.heightUnit} / ${size.presentation}`
-      : '';
-
     return (
       <div>
         <div className="c-card-customize__content__left">Size Profile</div>
         <div className="c-card-customize__content__right">
-          { displayString }
+          {this.sizeSummaryUnitSelection(
+            height.heightValue, height.heightUnit, size.presentation,
+          )}
         </div>
       </div>
     );
@@ -195,7 +261,7 @@ class SidePanelSize extends Component {
 
   render() {
     const { addToBagPending, height, size, errors, drawerOpen } = this.props.customize;
-    const MENU_STATE = drawerOpen === PDPConstants.DRAWERS.SIZE_PROFILE ? 'pdp-side-menu is-active' : 'pdp-side-menu';
+    const MENU_STATE = drawerOpen === DRAWERS.SIZE_PROFILE ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = size.id ?
     'c-card-customize__content is-selected' :
     'c-card-customize__content';
@@ -234,7 +300,7 @@ class SidePanelSize extends Component {
                   id="height-option-in"
                   onChange={this.handleInchChange}
                   className="sort-options"
-                  options={this.generateOptions()}
+                  options={this.generateInchesOptions()}
                 /> :
                 <Input
                   error={errors.height}

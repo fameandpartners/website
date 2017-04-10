@@ -2,12 +2,18 @@ import { assign } from 'lodash';
 
 function generateInchesSizing() {
   const sizes = [];
-  for (let i = 0; i < 20; i += 1) {
+  const OFFSET = 11;
+  for (let i = 11; i < 32; i += 1) {
     const id = i;
-    const ft = 5 + Math.floor(i / 12);
+    const ft = 4 + Math.floor(i / 12);
     const inch = i % 12;
     const totalInches = (ft * 12) + inch;
-    sizes.push({ id, ft, inch, totalInches });
+    sizes.push({
+      id: id - OFFSET,
+      ft,
+      inch,
+      totalInches,
+    });
   }
   return sizes;
 }
@@ -16,6 +22,10 @@ const constants = assign({},
     INCH_SIZES: generateInchesSizing(),
     DRAWERS: {
       SIZE_PROFILE: 'SIZE_PROFILE',
+    },
+    UNITS: {
+      INCH: 'inch',
+      CM: 'cm',
     },
   },
 );
