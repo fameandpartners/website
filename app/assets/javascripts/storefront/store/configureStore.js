@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
+  const siteVersion = initialState.siteVersion.toLowerCase();
   initialState = assign({}, initialState,
     {
       lengths: [
@@ -90,7 +91,7 @@ export default function configureStore(initialState) {
         height: {
           heightId: null,
           heightValue: undefined,
-          heightUnit: 'inch',
+          heightUnit: siteVersion === 'au' || siteVersion === 'australia' ? 'cm' : 'inch',
         },
         color: {
           id: null,
