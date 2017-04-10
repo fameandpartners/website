@@ -299,10 +299,8 @@ class SidePanelSize extends Component {
               <span className="hide-visually">Close Menu</span>
             </a>
           </div>
-          <h2 className="h4 c-card-customize__header">Create a Size Profile</h2>
-          <p>
-          Enter your height and size information so we can ensure
-          you'll get the best fit possible
+          <h2 className="h4 c-card-customize__header">Let’s create your Personal Size Profile</h2>
+          <p>Tell us your height and size, and we’ll handcraft your made-to-order item to fit your body perfectly.
           </p>
 
           <div className="height-selection clearfix">
@@ -340,7 +338,7 @@ class SidePanelSize extends Component {
           </div>
 
           <div className="size-selection">
-            <h4>What's your dress size?</h4>
+            <h4>What's your size?</h4>
             <div className="size-row">{SIZES}</div>
             <SidePanelSizeChart />
             <div className="btn-wrap">
