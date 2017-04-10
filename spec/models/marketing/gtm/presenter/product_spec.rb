@@ -84,27 +84,28 @@ module Marketing
         describe '#body' do
           it 'returns hash with product info' do
             expect(subject.body).to eq({
-                                           brand:             'Fame & Partners',
-                                           categories:        ['jeans'],
-                                           colors:            ['Ivory'],
-                                           currency:          'AUD',
-                                           description:       'Super Dress Long Description',
-                                           discountPercent:   '30',
-                                           expressMaking:     true,
-                                           image:             { original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' },
-                                           images:            [{ original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' }],
-                                           id:                123,
-                                           name:              'Super Dress',
-                                           price:             12.34,
-                                           priceWithDiscount: 8.638,
-                                           selectedColor:     'Red',
-                                           sizes:             ['US 2'],
-                                           sku:               'ABC123',
-                                           type:              'dresses',
-                                           variants:          []
-                                       })
+              brand:             'Fame & Partners',
+              categories:        ['jeans'],
+              colors:            ['Ivory'],
+              currency:          'AUD',
+              description:       'Super Dress Long Description',
+              discountPercent:   30,
+              expressMaking:     true,
+              image:             { original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' },
+              images:            [{ original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' }],
+              id:                123,
+              name:              'Super Dress',
+              price:             12.34,
+              priceWithDiscount: 8.64,
+              selectedColor:     'Red',
+              sizes:             ['US 2'],
+              sku:               'ABC123',
+              type:              'dresses',
+              variants:          []
+            })
           end
         end
+
       end
     end
   end

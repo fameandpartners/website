@@ -8,6 +8,7 @@ var Chat = React.createClass({
     filestack_key: React.PropTypes.string,
     handleLikeDress: React.PropTypes.func,
     changeDressToAddToCartCallback: React.PropTypes.func,
+    loadChannelHistory: React.PropTypes.func,
     startTypingFn: React.PropTypes.func,
     sendMessageFn: React.PropTypes.func,
     messages: React.PropTypes.array,
@@ -49,8 +50,20 @@ var Chat = React.createClass({
     }
   },
 
-  componentDidUpdate: function() {
-    this.scrollToBottom();
+  componentDidMount: function(){
+    var that = this;
+    $(this.refs.chatLog).on('scroll', function(){
+      var elem = this;
+      if(elem.scrollTop == 0){
+        var lastScrollHeight = that.refs.chatLog.scrollHeight;
+        var promise = that.props.loadChannelHistory(20);
+        if(promise){
+          promise.then(function(){
+            elem.scrollTop += elem.scrollHeight - (lastScrollHeight + 30);
+          });
+        }
+      }
+    });
   },
 
   getChatMembers: function() {
@@ -259,12 +272,12 @@ var Chat = React.createClass({
       return(
         <div className="chat-welcome-message">
           <div className="welcome-message-content">
-            <h2 className="welcome-message-title"> Welcome to your Wedding Board </h2>
-            <p> You can get started by either: </p>
+            <h2 className="welcome-message-title">Welcome to your Atelier App wedding board </h2>
+            <p> Here's how to get started: </p>
             <ol>
-              <li><p>Talking to a fame stylist by tagging <span className="stylist-tag">@Stylist</span> in chat</p></li>
-              <li><p>Inviting your bridal party if you haven’t already</p></li>
-              <li><p>Start adding dresses to your dress board to vote and share with your bridal party</p></li>
+              <li><p>Invite the members of your bridal party to join the wedding board.</p></li>
+              <li><p>Get advice from a Fame stylist by tagging <span className="stylist-tag">@stylist</span> in your chat.</p></li>
+              <li><p>Add dresses to your board to share with the group and vote on your favorites.</p></li>
             </ol>
           </div>
         </div>

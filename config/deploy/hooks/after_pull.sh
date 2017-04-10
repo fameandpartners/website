@@ -20,22 +20,25 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
   author='DeployBot'
 
   mkdir -p $log_folder
-  echo "Latest deploy changes at: $(date)" > $log_file
-  echo "Previous tag: $previous_tag">> $log_file
-  echo "Latest tag:   $latest_tag">> $log_file
 
-  echo >> $log_file
-  echo 'Files changed:' >> $log_file
-  echo "$message_diff" >> $log_file
+  if [ -d "$log_folder" ]; then
+    echo "Latest deploy changes at: $(date)" > $log_file
+    echo "Previous tag: $previous_tag" >> $log_file
+    echo "Latest tag:   $latest_tag" >> $log_file
 
-  echo >> $log_file
-  echo 'Merged PRs:' >> $log_file
-  echo "$message_changes" >> $log_file
+    echo >> $log_file
+    echo 'Files changed:' >> $log_file
+    echo "$message_diff" >> $log_file
+
+    echo >> $log_file
+    echo 'Merged PRs:' >> $log_file
+    echo "$message_changes" >> $log_file
+  fi
 
   # NOTE: Alexey Bobyrev 09 Feb 2017
   # Slack accepts only 4000 characters per message
   char_limit=1800
-  
+
 gifs[0]='http://68.media.tumblr.com/tumblr_lgb02mCfLm1qe0eclo1_r5_500.gif'
 gifs[1]='https://media.giphy.com/media/IzVwOO8xZsfks/giphy.gif'
 gifs[2]='https://media.giphy.com/media/1FT20zgiDr8Bi/giphy.gif'
@@ -46,7 +49,6 @@ gifs[5]='https://s3-us-west-2.amazonaws.com/giffy-prod/e84eada496534922b22cb39cd
 rand_gif_number=$[ $RANDOM % 6 ]
 echo ${gifs[$rand_gif_number]}
 
-  
 json_message=$(cat <<EOJ
   {
     "channel": "$channel",
@@ -85,7 +87,8 @@ json_message=$(cat <<EOJ
       "ts": "$(date +%s)"
     }]
   }
-EOJ)
+EOJ
+)
 
   curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
     -X POST \

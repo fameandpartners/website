@@ -28,7 +28,7 @@ describe 'registrations', type: :feature do
           end
           click_button 'Next'
           expect(page.current_path).to eq "/wedding-atelier/sign_in"
-          expect(react_flash_errors[0]).to eq 'Invalid email or password.'
+          expect(page.find(:css, '.error-notification')).to be_truthy
         end
       end
 

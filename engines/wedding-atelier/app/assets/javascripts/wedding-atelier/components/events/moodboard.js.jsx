@@ -38,7 +38,9 @@ var MoodBoardEvent = React.createClass({
         messages: [],
         typing: [],
         unreadCount: 0,
-        loading: true
+        loading: true,
+        messagesCount: 0,
+        loadHistory: true
       },
       event: {
         dresses: [],
@@ -73,7 +75,7 @@ var MoodBoardEvent = React.createClass({
   componentDidMount: function(){
     $(window).on('beforeunload', function(){
       this.state.chatChannel.leave();
-    }.bind(this))
+    }.bind(this));
 
     _cio.identify({
       id: this.props.current_user.id,
@@ -115,8 +117,7 @@ var MoodBoardEvent = React.createClass({
         that.setupNotificationsChannel();
       });
     }).fail(function(e) {
-      ReactDOM.render(<Notification errors={['Sorry, there was a problem starting your chat session. We\'ll have it back up and running soon.']} />,
-          document.getElementById('notification'));
+      that.refs.notifications.notify(['Sorry, there was a problem starting your chat session. We\'ll have it back up and running soon.']);
     });
   },
 
@@ -127,7 +128,7 @@ var MoodBoardEvent = React.createClass({
       chatChannel.join().then(function() {
         that.setState({ chatChannel: chatChannel });
         that.setUpMessagingEvents();
-        that.loadChannelHistory();
+        that.loadMessagesCountAndHistory();
         that.loadChannelMembers();
       });
 
@@ -206,7 +207,7 @@ var MoodBoardEvent = React.createClass({
             type: 'notification',
             content: 'In the meantime why don\'t you invite your bridal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
           });
-          try { sessionStorage.setItem('stylistTagged', true); }catch (e){};
+          try { sessionStorage.setItem('stylistTagged', true); }catch (e){}
         }
       }.bind(this));
     }
@@ -267,17 +268,38 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  loadChannelHistory: function() {
-    this.state.chatChannel.getMessages(20).then(function(messages) {
-      var _messages = messages.items.map(function(message) {
-        return JSON.parse(message.body);
-      });
+  loadMessagesCountAndHistory: function(){
+    var that = this;
+    this.state.chatChannel.getMessagesCount().then(function(messagesCount){
+      var _chat = $.extend({}, that.state.chat);
+      _chat.messagesCount = messagesCount;
+      that.setState({ chat: _chat });
+      var historyPromise = that.loadChannelHistory(20);
+      if(historyPromise){
+        historyPromise.then(function(){
+          that.refs.ChatComp.scrollToBottom();
+          that.refs.MobileChatComp.scrollToBottom();
+        });
+      }
+    });
+  },
 
-      var _chat = $.extend({}, this.state.chat);
-      _chat.messages = _messages;
-      _chat.loading = false;
-      this.setState({chat: _chat});
-    }.bind(this));
+  loadChannelHistory: function(pageSize){
+    var that = this;
+    if(this.state.chat.loadHistory){
+      var anchor = this.state.chat.messagesCount - this.state.chat.messages.length;
+      return that.state.chatChannel.getMessages(pageSize, anchor).then(function(messages) {
+        var _chat = $.extend({}, that.state.chat);
+        var _messages = messages.items.map(function(message) {
+          return JSON.parse(message.body);
+        });
+        _chat.messages = _messages.concat(_chat.messages);
+        _chat.loading = false;
+        _chat.loadHistory = messages.hasPrevPage;
+        _chat.historyAnchor += messages.length;
+        that.setState({chat: _chat});
+      });
+    }
   },
 
   handleMember: function(member, joined) {
@@ -297,7 +319,7 @@ var MoodBoardEvent = React.createClass({
       this.setState({ chat: _newChat });
     } else {
       _newChat.members = _.reject(_newChat.members, function(chatMember){
-        return chatMember.id === member.sid
+        return chatMember.id === member.sid;
       });
       this.setState({ chat: _newChat });
     }
@@ -318,7 +340,7 @@ var MoodBoardEvent = React.createClass({
             _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content, moodboard_url: that.props.event_url });
           }
         });
-        try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){};
+        try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){}
       }
 
       var _chat = $.extend({}, that.state.chat);
@@ -327,6 +349,8 @@ var MoodBoardEvent = React.createClass({
         _chat.unreadCount++;
       }
       that.setState({chat: _chat});
+      that.refs.ChatComp.scrollToBottom();
+      that.refs.MobileChatComp.scrollToBottom();
     });
 
     this.state.chatChannel.on('memberJoined', function(member) {
@@ -363,8 +387,7 @@ var MoodBoardEvent = React.createClass({
         that.setState(_newState);
       }.bind(this),
       error: function(error) {
-        ReactDOM.render(<Notification errors={[error.statusText]} />,
-                    $('#notification')[0]);
+        that.refs.notifications.notify([error.statusText]);
       }
     });
   },
@@ -427,18 +450,17 @@ var MoodBoardEvent = React.createClass({
   },
 
   handleRemoveAssistant: function(id, index){
+    var that = this;
     $.ajax({
       url: this.props.remove_assistant_path.replace(':id', id),
       type: 'DELETE',
       dataType: 'json',
       success: function(_data) {
-        var _newEvent = $.extend({}, this.state.event);
+        var _newEvent = $.extend({}, that.state.event);
         _newEvent.assistants.splice(index, 1);
-        this.setState({event: _newEvent});
-        var errors = ['Board member removed.'];
-        ReactDOM.render(<Notification errors={errors} />,
-                    $('#notification')[0]);
-      }.bind(this),
+        that.setState({event: _newEvent});
+        that.refs.notifications.notify(['Board member removed.']);
+      },
       error: function(_data) {
         var errors;
         try{
@@ -446,8 +468,7 @@ var MoodBoardEvent = React.createClass({
         }catch(e){
           errors = ["We're sorry something went wrong."];
         }
-        ReactDOM.render(<Notification errors={[errors[0]]} />,
-                    $('#notification')[0]);
+        that.refs.notifications.notify(errors[0]);
       }
     });
   },
@@ -512,6 +533,7 @@ var MoodBoardEvent = React.createClass({
       filestack_key: this.props.filestack_key,
       handleLikeDress: this.handleLikeDress,
       changeDressToAddToCartCallback: this.changeDressToAddToCartCallback,
+      loadChannelHistory: this.loadChannelHistory,
       startTypingFn: this.startTyping,
       sendMessageFn: this.sendMessage,
       messages: this.state.chat.messages,
@@ -551,6 +573,7 @@ var MoodBoardEvent = React.createClass({
 
     return (
       <div id="events__moodboard" className="row">
+        <Notification ref="notifications"/>
         <SelectSizeModal {...selectSizeProps}/>
         <SizeGuideModal />
         <div className="left-content col-sm-5 hidden-xs">
@@ -645,9 +668,7 @@ var MoodBoardEvent = React.createClass({
                     current_user_id={this.props.current_user_id}
                   />
                 </div>
-                <div id="bridal-gowns" className="tab-pane" role="tabpanel">
-
-                </div>
+                <div id="bridal-gowns" className="tab-pane" role="tabpanel" />
               </div>
             </div>
           </div>

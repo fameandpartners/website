@@ -5,5 +5,9 @@ module WeddingAtelier
     has_many :sizes, serializer: WeddingAtelier::OptionValueSerializer
     has_many :assistants, serializer: WeddingAtelier::UserSerializer
     has_many :heights
+
+    def assistants
+      object.assistants.with_complete_profile
+    end
   end
 end

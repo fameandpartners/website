@@ -142,7 +142,7 @@ z-index levels
 @import 'redesign/base/buttons';
 @import 'redesign/base/containers';
 
-@import 'redesign/layout';
+@import 'redesign/layout/general';
 @import 'redesign/header';
 
 @import 'redesign/product/*';
@@ -256,6 +256,8 @@ z-index levels
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';
+@import 'redesign/react_components/FilterSort';
+@import 'redesign/react_components/Select';
 
 //Orders
 @import 'redesign/orders/order-details';

@@ -20,7 +20,7 @@ describe 'invitations', type: :feature do
       it 'indicates the invitation has been accepted' do
         visit "wedding-atelier/events/#{event.id}/invitations/#{invitation.id}/accept"
         expect(page.current_path).to eq "/wedding-atelier/signup"
-        expect(react_flash_errors[0]).to eq 'This is invitation has already been accepted.'
+        expect(page.find(:css, '.error-notification')).to be_truthy
       end
     end
 

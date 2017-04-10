@@ -1,13 +1,14 @@
 module Products
   class Related
-    extend Forwardable
+    attr_reader :product, :site_version, :presenter
 
-    attr_reader :product, :site_version
-
-    def_delegators :@product, :id, :name
+    delegate :id, :name, to: :product
+    delegate :prices, to: :presenter
 
     def initialize(product: nil, site_version: nil)
       @product      = product
+      @price        = product.site_price_for(site_version || SiteVersion.default)
+      @presenter    = Products::Presenter.new(product: @product, price: @price)
       @site_version = site_version
     end
 
@@ -16,7 +17,7 @@ module Products
     end
 
     def price
-      Repositories::ProductPrice.new(site_version: site_version, product: product).read
+      presenter.price_amount
     end
 
     def image

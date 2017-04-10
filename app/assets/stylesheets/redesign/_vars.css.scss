@@ -30,6 +30,7 @@ $pink-bg: #eeddf0;
 $black-checkout-input: #343434;
 $beage-bg: #efeeea;
 $c-blue: #3a8db9;
+$c-royal-blue: #0000d2;
 $c-light-red: #e0a3a3;
 
 // @end Colors
@@ -73,7 +74,7 @@ $bootstrap-lg-width: 1200px;
 
 //Fixed header
 $md-content-margin-top: 97px;
-$fixed-header-with-locale-warn: ($md-content-margin-top + 49px);
+$fixed-header-with-locale-warn: 49px;
 
 // PDP Side Menu
 // That's the distance between the top of the page and the close icon

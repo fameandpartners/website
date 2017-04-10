@@ -60,7 +60,7 @@ nav.navbar.navbar-default.visible-xs.visible-sm
     ul.nav.navbar-nav#inner-main-menu
       li
         div id='side-search-area' class='row'
-          = form_tag dresses_path, method: :get, id: 'searchForm'
+          = form_tag search_path, method: :get, id: 'searchForm'
             input type='text' id='side-search' placeholder='SEARCH' name='q'
             = image_tag '_icons/search.svg', class: 'side-search-icon', id: 'side-search-icon'
       li.normal-item#dress-menu-open

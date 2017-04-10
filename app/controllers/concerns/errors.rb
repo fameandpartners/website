@@ -32,6 +32,14 @@ module Concerns
       end
     end
 
+    # NOTE: Alexey Bobyrev 30 Mar 2017
+    # Redefine 404s method render for all controllers
+    # Rquired due to legacy spree methods
+    # Ref: https://github.com/fameandpartners/website/blob/master/vendor/cache/spree-7d19c8933042/core/app/controllers/spree/taxons_controller.rb#L3
+    def render_404
+      render_error(code: 404)
+    end
+
     protected
 
     def render_error(code:)

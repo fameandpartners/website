@@ -56,7 +56,7 @@ Spree::Product.class_eval do
 
   default_scope order: "#{self.table_name}.position"
 
-  delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
+  delegate_belongs_to :master, :in_sale?, :original_price
 
   before_create :set_default_prototype
 
@@ -302,18 +302,23 @@ Spree::Product.class_eval do
   alias_method :is_active?, :active?
 
   def discount
-    return @discount if instance_variable_defined?('@discount')
-    @discount = Repositories::Discount.get_product_discount(self.id)
+    @discount ||= Repositories::Discount.get_product_discount(self.id)
   end
 
   def plus_size?
-    return @plus_size if defined? @plus_size
-    @plus_size = taxons.where(name: "Plus Size").exists?
+    # NOTE: Alexey Bobyrev 31 Mar 2017
+    # We need explicit check on nil value for memoization of false value
+    if @plus_size.nil?
+      @plus_size = taxons.where(name: 'Plus Size').exists?
+    end
   end
 
   def jumpsuit?
-    return @jumpsuit if defined? @jumpsuit
-    @jumpsuit = taxons.where(name: "Jumpsuit").exists?
+    # NOTE: Alexey Bobyrev 31 Mar 2017
+    # We need explicit check on nil value for memoization of false value
+    if @jumpsuit.nil?
+      @jumpsuit = taxons.where(name: 'Jumpsuit').exists?
+    end
   end
 
   def height_customisable?
@@ -326,8 +331,8 @@ Spree::Product.class_eval do
 
   def presenter_as_details_resource(site_version = nil)
     @product ||= Products::DetailsResource.new(
-        site_version: site_version,
-        product: self
+      site_version: site_version,
+      product: self
     ).read
   end
 
