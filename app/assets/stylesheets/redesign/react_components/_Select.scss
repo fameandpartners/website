@@ -85,7 +85,7 @@
     width: 100%;
     height: auto;
     left: 0;
-    border: solid 1px $gray-light;
+    box-shadow: inset 0 0 0 1px $gray-light;
     background-color: $c-neutral-white;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
