@@ -1,5 +1,8 @@
 module Policies
   module DeliveryPolicy
+    DAYS_IN_FLIGHT = 5 # the number of days item takes for delivery(3 + 2 buffer days)
+    DAYS_IN_FLIGHT_FAST = 3 # number of days for express delivery
+
     CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '5 - 7 business days'
     SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
@@ -35,7 +38,7 @@ module Policies
     end
 
     # take the maximum_delivery_period then map that to whatever tania says
-    # if any new delivery range are introduced slow_mapper needs to be updated
+    # if any new delivery range are introduced SLOW_MAKING_DELIVERY_MAP needs to be updated
     def slow_making_delivery_period
       mdp = maximum_delivery_period
 
@@ -58,17 +61,22 @@ module Policies
     # determine ship_by_date for product manufacturing consumption
     def ship_by_date(order_completed_at, delivery_period)
       period = delivery_period
-      value = major_value_from_period(period)
+      value = minor_value_from_period(period) #take the smaller number, for more aggressive make times
       units = period_units(period)
 
-      # todo: take 5 days off
+      # special case for express
+      if delivery_period == FAST_MAKING_DELIVERY_PERIOD
+        return DAYS_IN_FLIGHT_FAST.business_days.before(order_completed_at + value.days)
+      end
+
+      # figure out delivery date then subtract the days_in_flight
       case units
       when 'weeks'
-        order.completed_at + value.weeks
+        DAYS_IN_FLIGHT.business_days.before(order_completed_at + value.weeks)
       when 'days'
-        order.completed_at + value.days
+        DAYS_IN_FLIGHT.business_days.before(order_completed_at + value.days)
       when 'business days'
-        value.business_days.after(order_completed_at)
+        DAYS_IN_FLIGHT.business_days.before(value.business_days.after(order_completed_at))
       end
     end
 
@@ -90,6 +98,11 @@ module Policies
     # returns the larger number from the range in given string
     def major_value_from_period(period)
       period.match(/\d+(?=\s+\w+|$)/).to_s.to_i
+    end
+
+    # returns small number
+    def minor_value_from_period(period)
+      period.match(/\d+/).to_s.to_i
     end
   end
 end

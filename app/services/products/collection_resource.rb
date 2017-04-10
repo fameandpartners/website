@@ -101,7 +101,6 @@ class Products::CollectionResource
   end
 
   def details
-    binding.pry
     @details ||= begin
                    Products::CollectionDetails.new(
                      collection:     collection,
@@ -150,7 +149,6 @@ class Products::CollectionResource
     result[:color_ids] = []
 
     if color_group.present?
-      binding.pry
       result[:color_ids] += color_group.color_ids
     elsif color_groups.present?
       color_groups.each { |c| result[:color_ids] += c.color_ids }
