@@ -7,7 +7,10 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   type: PropTypes.string,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
