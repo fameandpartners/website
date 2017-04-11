@@ -130,7 +130,7 @@ class AddToBag extends React.Component {
           );
         })()}
         <ul className="est-delivery">
-          <li>Free Shipping</li>
+          <li className="shipping">Free Shipping</li>
           <li>Estimated delivery, {deliveryPeriod}</li>
         </ul>
         {(() => {
