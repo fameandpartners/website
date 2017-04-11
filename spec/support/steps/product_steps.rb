@@ -1,7 +1,7 @@
 module Acceptance
   module ProductSteps
     step 'I select :dress_size size' do |dress_size|
-      click_link 'Dress Size'
+      click_link 'Size Profile'
       sleep 0.2 # User interacting with sidebar + animation
       click_link dress_size
       sleep 0.2 # User interacting with sidebar + animation
