@@ -202,7 +202,7 @@ FameAndPartners::Application.routes.draw do
     get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
-    get '/festival-style' => 'products/collections#show', :permalink => 'festival-style', :as => :festival_style_page
+    get '/festival' => 'products/collections#show', :permalink => 'festival', :as => :festival_page
 
     # Every BODY Dance Collection
     get '/every-body-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
