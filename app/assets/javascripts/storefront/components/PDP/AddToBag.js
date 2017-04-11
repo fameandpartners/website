@@ -54,43 +54,77 @@ class AddToBag extends React.Component {
   }
 
   render() {
-    const PRICE =
-      parseFloat(this.props.price)
-      + parseFloat(this.props.customize.color.price)
-      + parseFloat(this.props.customize.customization.price)
-      + parseFloat(this.props.customize.makingOption.price)
-      - parseFloat(this.props.discount);
+    const prices = this.props.product.prices;
+
+    const parsedPrice = parseFloat(prices.original_amount) || 0;
+    const parsedSale = parseFloat(prices.sale_amount) || 0;
+
+    const calculatePrice = (price) => {
+      const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
+      const parsedCustomPrice = parseFloat(this.props.customize.customization.price) || 0;
+      const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
+
+      const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
+      return PRICE;
+    };
+
+    const calculatedPrice = {
+      original: calculatePrice(parsedPrice),
+    };
+
+    if (parsedSale) {
+      calculatedPrice.sale = calculatePrice(parsedSale);
+    }
 
     let deliveryPeriod = this.props.product.delivery_period;
     if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
       deliveryPeriod = this.props.product.fast_making_delivery_period;
     }
+
     const isAfterpayEnabled = this.props.siteVersion === 'Australia' && this.props.flags.afterpay;
+    const afterpayPrice = ((calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2);
 
     return (
       <div className="btn-wrap">
-        <div className="price">${PRICE}</div>
+        {(() => {
+          let priceHtml;
+
+          if (parsedSale) {
+            priceHtml = (<div className="price">
+              <span className="price-original">${calculatedPrice.original.toFixed(2)} </span>
+              <span className="price-sale">${calculatedPrice.sale.toFixed(2)} </span>
+              <span className="price-discount">SAVE {prices.discount_string} </span>
+            </div>);
+          } else {
+            priceHtml = <div className="price">${calculatedPrice.original}</div>;
+          }
+
+          return (
+            priceHtml
+          );
+        })()}
         {(() => {
           if (isAfterpayEnabled) {
             return (
               <div className="afterpay-message">
-                <span>or 4 easy payments of ${PRICE / 4} with</span>
+                <span>or 4 easy payments of ${afterpayPrice} with</span>
                 <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                <a href="javascript:;" onClick={this.openModal}>info</a>
+                <a onClick={this.openModal}>info</a>
               </div>
             );
           }
+          return null;
         })()}
         {(() => {
           if (this.state.sending) {
             return (
-              <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
+              <a className="btn btn-black btn-loading btn-lrg">
                 <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
               </a>
             );
           }
           return (
-            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
+            <a onClick={this.addToBag} className="btn btn-black btn-lrg">
               ADD TO BAG
             </a>
           );
@@ -102,9 +136,13 @@ class AddToBag extends React.Component {
         {(() => {
           if (this.props.product.cny_delivery_delays) {
             return (
-              <div className="deliveryNote">We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</div>
+              <div className="deliveryNote">We're experiencing a high order volume right now,
+              so it's taking longer than usual to handcraft each made-to-order garment.
+              We'll be back to our normal timeline of 7-10 days soon.
+              </div>
             );
           }
+          return null;
         })()}
         <Modal
           style={MODAL_STYLE}
