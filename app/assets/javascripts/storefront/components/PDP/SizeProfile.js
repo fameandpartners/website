@@ -316,7 +316,7 @@ class SidePanelSize extends Component {
               <span className="hide-visually">Close Menu</span>
             </a>
           </div>
-          <h2 className="h4 c-card-customize__header">Create a Personal Size Profile</h2>
+          <h2 className="h4 c-card-customize__header textAlign--left">Create a Personal Size Profile</h2>
           <p>Tell us your height and size, and we’ll handcraft your made-to-order item to fit your body perfectly.
           </p>
 

@@ -50,7 +50,7 @@ class SidePanelSizeChart extends React.Component {
 
     return (
       <div className="chart-wrap">
-        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>View size guide</a>
+        <a className="chart-wrap-trigger textAlign--left" onClick={this.openModal}>View size guide</a>
 
         <Modal
           style={MODAL_STYLE}
