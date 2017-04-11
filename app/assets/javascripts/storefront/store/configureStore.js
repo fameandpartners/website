@@ -89,6 +89,9 @@ export default function configureStore(initialState) {
           message: '',
         },
         height: {
+          temporaryHeightId: null,
+          temporaryHeightValue: undefined,
+          temporaryHeightUnit: siteVersion === 'au' || siteVersion === 'australia' ? 'cm' : 'inch',
           heightId: null,
           heightValue: undefined,
           heightUnit: siteVersion === 'au' || siteVersion === 'australia' ? 'cm' : 'inch',

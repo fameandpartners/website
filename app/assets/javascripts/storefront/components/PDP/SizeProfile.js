@@ -30,6 +30,7 @@ class SidePanelSize extends Component {
     this.updateHeightSelection = this.updateHeightSelection.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
+    this.applyTemporaryFilters = this.applyTemporaryFilters.bind(this);
     this.handleSizeProfileApply = this.handleSizeProfileApply.bind(this);
     this.handleUnitConversionUpdate = this.handleUnitConversionUpdate.bind(this);
     this.handleMetricSwitch = this.handleMetricSwitch.bind(this);
@@ -65,9 +66,20 @@ class SidePanelSize extends Component {
    */
   validateErrors() {
     const { height, size } = this.props.customize;
-    if (!(height.heightValue && height.heightUnit && size.id)) { // Errors present
-      const errors = {};
-      if (!height.heightValue) { errors.height = true; }
+    const errors = {};
+
+    if ( // Errors present
+      !(height.temporaryHeightValue && height.temporaryHeightUnit && size.id) || // Not present
+      (
+        height.temporaryHeightUnit === UNITS.CM &&
+        (height.temporaryHeightValue < MIN_CM || height.temporaryHeightValue > MAX_CM)
+      ) // CM too low/high
+    ) {
+      if (!height.temporaryHeightValue ||
+        height.temporaryHeightValue < MIN_CM ||
+        height.temporaryHeightValue > MAX_CM) {
+        errors.height = true;
+      }
       if (!size.id) { errors.size = true; }
       this.updateCustomize({ errors });
       return false;
@@ -100,13 +112,21 @@ class SidePanelSize extends Component {
    */
   handleInchChange({ option }) {
     const selection = INCH_SIZES[option.id];
-    const inches = (selection.ft * 12) + selection.inch;
 
-    this.updateHeightSelection({
-      heightId: option.id,
-      heightValue: inches,
-      heightUnit: UNITS.INCH,
-    });
+    if (selection) {
+      const inches = (selection.ft * 12) + selection.inch;
+      this.updateHeightSelection({
+        temporaryHeightId: option.id,
+        temporaryHeightValue: inches,
+        temporaryHeightUnit: UNITS.INCH,
+      });
+    } else {
+      this.updateHeightSelection({
+        temporaryHeightId: null,
+        temporaryHeightValue: null,
+        temporaryHeightUnit: UNITS.INCH,
+      });
+    }
   }
 
   /**
@@ -118,14 +138,20 @@ class SidePanelSize extends Component {
 
     if (typeof numVal === 'number') {
       this.updateHeightSelection({
-        heightValue: numVal,
-        heightUnit: UNITS.CM,
+        temporaryHeightValue: numVal,
+        temporaryHeightUnit: UNITS.CM,
       });
-
-      if (digitCount >= 3 && (numVal < MIN_CM || numVal > MAX_CM)) {
-        this.updateCustomize({ errors: { height: true } });
-      }
     }
+  }
+
+  applyTemporaryFilters() {
+    console.log('applying temporary filters');
+    const { height } = this.props.customize;
+    this.updateHeightSelection({
+      heightId: height.temporaryHeightId,
+      heightValue: height.temporaryHeightValue,
+      heightUnit: height.temporaryHeightUnit,
+    });
   }
 
   /**
@@ -134,8 +160,14 @@ class SidePanelSize extends Component {
   handleSizeProfileApply() {
     const { customize } = this.props;
     if (this.validateErrors()) {
-      if (customize.addToBagPending) { return this.props.addToBagCallback(); }
+      this.applyTemporaryFilters();
       this.closeMenu();
+      if (customize.addToBagPending) {
+        setTimeout(() => {
+          // Ugly I know, but this is temporary workaround to hook into previous functionality
+          this.props.addToBagCallback();
+        }, 300);
+      }
     }
     return null;
   }
@@ -147,20 +179,18 @@ class SidePanelSize extends Component {
   handleUnitConversionUpdate(value) {
     const CM_TO_INCHES = 2.54;
     const { height } = this.props.customize;
-    const { heightValue } = height;
-    if (value === UNITS.CM && heightValue) { // CM selected
-      const newVal = Math.round(heightValue * CM_TO_INCHES);
+    const { temporaryHeightValue } = height;
+    if (value === UNITS.CM && temporaryHeightValue) { // CM selected
+      const newVal = Math.round(temporaryHeightValue * CM_TO_INCHES);
       this.handleCMChange({ value: newVal });
-    } else if (value === UNITS.INCH && heightValue) { // INCH selected
-      const totalInches = Math.round(heightValue / CM_TO_INCHES);
+    } else if (value === UNITS.INCH && temporaryHeightValue) { // INCH selected
+      const totalInches = Math.round(temporaryHeightValue / CM_TO_INCHES);
       const option = find(INCH_SIZES, { totalInches });
-      if (option) {
-        this.handleInchChange({
-          option: {
-            id: option.id,
-          },
-        });
-      }
+      this.handleInchChange({
+        option: {
+          id: option ? option.id : null,
+        },
+      });
     }
   }
 
@@ -169,7 +199,7 @@ class SidePanelSize extends Component {
    * @param  {String} {value} (CM|INCH)
    */
   handleMetricSwitch({ value }) {
-    this.updateHeightSelection({ heightUnit: value });
+    this.updateHeightSelection({ temporaryHeightUnit: value });
     this.handleUnitConversionUpdate(value);
   }
 
@@ -200,7 +230,7 @@ class SidePanelSize extends Component {
     return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
       id: i,
       name: this.defaultInchOption(i, ft, inch),
-      active: i === height.heightId,
+      active: i === height.temporaryHeightId,
     }));
   }
 
@@ -276,7 +306,7 @@ class SidePanelSize extends Component {
   render() {
     const { addToBagPending, height, size, errors, drawerOpen } = this.props.customize;
     const MENU_STATE = drawerOpen === DRAWERS.SIZE_PROFILE ? 'pdp-side-menu is-active' : 'pdp-side-menu';
-    const TRIGGER_STATE = size.id ?
+    const TRIGGER_STATE = size.id && height.heightValue ?
     'c-card-customize__content is-selected' :
     'c-card-customize__content';
     const SIZES = this.generateDressSizeSelections();
@@ -300,13 +330,15 @@ class SidePanelSize extends Component {
             </a>
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Create a Personal Size Profile</h2>
-          <p>Tell us your height and size, and we’ll handcraft your made-to-order item to fit your body perfectly.
+          <p>
+          Tell us your height and size, and we’ll handcraft
+          your made-to-order item to fit your body perfectly.
           </p>
 
           <div className="height-selection clearfix">
             <h4>How tall are you?</h4>
             <div className="select-container pull-left">
-              { height.heightUnit === 'inch' ?
+              { height.temporaryHeightUnit === 'inch' ?
                 <Select
                   error={errors.height}
                   id="height-option-in"
@@ -319,7 +351,7 @@ class SidePanelSize extends Component {
                   id="height-option-cm"
                   type="number"
                   onChange={this.handleCMChange}
-                  defaultValue={height.heightValue}
+                  defaultValue={height.temporaryHeightValue}
                 />
               }
             </div>
@@ -327,7 +359,7 @@ class SidePanelSize extends Component {
             <div className="metric-container pull-left">
               <RadioToggle
                 id="metric"
-                value={height.heightUnit}
+                value={height.temporaryHeightUnit}
                 options={[
                   { label: 'inches', value: 'inch' },
                   { value: 'cm' },
