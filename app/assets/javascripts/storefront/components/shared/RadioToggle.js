@@ -72,11 +72,11 @@ class RadioToggle extends Component {
         <span className={this.labelClass(0)} onClick={this.handleSelection(0)}>
           {options[0].label || options[0].value}
         </span>
-        <input
+        <button
           className={`RadioToggle ${switchClass}`}
           type="checkbox"
           id={id}
-          onChange={this.handleToggle}
+          onClick={this.handleToggle}
         />
         <span className={this.labelClass(1)} onClick={this.handleSelection(1)}>
           {options[1].label || options[1].value}
