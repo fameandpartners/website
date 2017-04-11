@@ -4,8 +4,13 @@ import { bindActionCreators } from 'redux';
 import { assign, find } from 'lodash';
 import * as pdpActions from '../../actions/PdpActions';
 import PDPConstants from '../../constants/PDPConstants';
+import { noScrollBody } from '../../helpers/DOM';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
+
+// Libraries
+import Resize from '../../decorators/Resize.jsx';
+import breakpoints from '../../libs/PDPBreakpoints';
 
 // Shared Components
 import Select from '../shared/Select';
@@ -263,7 +268,7 @@ class SidePanelSize extends Component {
         ? 'selector-size is-selected' : 'selector-size';
       itemClassName += errors.size ? ' has-error' : '';
       return (
-        <span
+        <a
           className={itemClassName}
           onClick={this.handleDressSizeSelection}
           key={`size-${s.table.id}`}
@@ -271,9 +276,18 @@ class SidePanelSize extends Component {
           data-presentation={s.table.presentation}
         >
           {s.table.presentation}
-        </span>
+        </a>
       );
     });
+  }
+
+  componentDidUpdate() {
+    if (this.props.breakpoint === 'mobile'
+    && this.props.customize.drawerOpen === PDPConstants.DRAWERS.SIZE_PROFILE) {
+      noScrollBody(true);
+    } else {
+      noScrollBody(false);
+    }
   }
 
   render() {
@@ -357,6 +371,7 @@ class SidePanelSize extends Component {
 }
 
 SidePanelSize.propTypes = {
+  breakpoint: PropTypes.string,
   customize: PropTypes.object.isRequired,
   actions: PropTypes.object,
   addToBagCallback: PropTypes.func,
@@ -377,4 +392,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidePanelSize);
+export default Resize(breakpoints)(connect(mapStateToProps, mapDispatchToProps)(SidePanelSize));
