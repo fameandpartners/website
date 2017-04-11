@@ -18,7 +18,7 @@ import Input from '../shared/Input';
 import RadioToggle from '../shared/RadioToggle';
 
 // Constants
-const { DRAWERS, INCH_SIZES, UNITS } = PDPConstants;
+const { DRAWERS, INCH_SIZES, UNITS, MIN_CM, MAX_CM } = PDPConstants;
 
 class SidePanelSize extends Component {
   constructor(props, context) {
@@ -113,10 +113,19 @@ class SidePanelSize extends Component {
    * Handler for changes of CM metric
    */
   handleCMChange({ value }) {
-    this.updateHeightSelection({
-      heightValue: value,
-      heightUnit: UNITS.CM,
-    });
+    const digitCount = (value.length) ? value.length : 0;
+    const numVal = parseInt(value, 10);
+
+    if (typeof numVal === 'number') {
+      this.updateHeightSelection({
+        heightValue: numVal,
+        heightUnit: UNITS.CM,
+      });
+
+      if (digitCount >= 3 && (numVal < MIN_CM || numVal > MAX_CM)) {
+        this.updateCustomize({ errors: { height: true } });
+      }
+    }
   }
 
   /**
@@ -165,29 +174,6 @@ class SidePanelSize extends Component {
   }
 
   /**
-   * Helper method to generate the option and min/max extremas
-   * @param  {Number} i
-   * @param  {Number} ft
-   * @param  {Number} inch
-   * @param  {Boolean} last
-   * @return {Node} maxOption
-   */
-  minMaxExtremeInchOption(i, totalInches, last) {
-    const neighborTotalInches = last ? totalInches - 1 : totalInches + 1;
-    const ft = Math.floor(neighborTotalInches / 12);
-    const inch = neighborTotalInches % 12;
-    return (
-      <div>
-        <span>{last ? '> ' : '< '}</span>
-        <span className="amt">{ft}</span>
-        <span className="metric">ft</span>
-        <span className="amt amt--last">{inch}</span>
-        <span className="metric">in</span>
-      </div>
-    );
-  }
-
-  /**
    * Helper method to generate normal option for Select
    * @param  {Number} i
    * @param  {Nunber} ft
@@ -211,12 +197,9 @@ class SidePanelSize extends Component {
    */
   generateInchesOptions() {
     const { height } = this.props.customize;
-    const totalSizes = INCH_SIZES.length;
     return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
       id: i,
-      name: (i === 0 || i === totalSizes - 1) ?
-        this.minMaxExtremeInchOption(i, totalInches, i === totalSizes - 1) :
-        this.defaultInchOption(i, ft, inch),
+      name: this.defaultInchOption(i, ft, inch),
       active: i === height.heightId,
     }));
   }
