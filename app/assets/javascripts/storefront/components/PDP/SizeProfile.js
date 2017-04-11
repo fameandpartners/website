@@ -343,7 +343,7 @@ class SidePanelSize extends Component {
 
             <div className="metric-container pull-left">
               <RadioToggle
-                id="some-radio-tog"
+                id="metric"
                 value={height.heightUnit}
                 options={[
                   { label: 'inches', value: 'inch' },
