@@ -337,7 +337,7 @@ var Chat = React.createClass({
             {typing}
           </div>
           <div className="chat-tagging-help">
-            <p> Type <b>@Stylist</b> to message a fame stylist </p>
+            <p> Type <b>@stylist</b> to message a Fame stylist. </p>
           </div>
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
