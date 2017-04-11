@@ -229,7 +229,7 @@ javascript:
     function initSticky() {
 
       var safeStickyBottomSpacing = $('.pdp').innerHeight() - $('.pdp > .container').outerHeight() + $('.js-footer').outerHeight(),
-          fixedHeaderOuterHeight = $('.js-header').outerHeight();
+          fixedHeaderOuterHeight = $('.js-fixed-header').outerHeight();
 
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
@@ -253,6 +253,7 @@ javascript:
     function updateSticky() {
       unstickSticky();
       if(window.innerWidth >= minDesktopWidth) {
+        console.log('stickyyyyy')
         initSticky();
       }
     }
