@@ -632,7 +632,7 @@ var MoodBoardEvent = React.createClass({
               </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat {...$.extend({ mobile: true}, chatProps)}/>
+                  <Chat ref="MobileChatComp" {...$.extend({ mobile: true}, chatProps)}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   {addNewDressBigButton}
