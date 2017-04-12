@@ -56,7 +56,7 @@ javascript:
         .product-header
           h1.product-title
             = link_to @product.name, collection_product_path(@product)
-          .product-price = product_price_with_discount(@product.price, @product.discount)
+          .product-price = product_price_with_discount(@product)
           .product-short-description
             = truncate(@product.stylist_quote, length: 80, separator: ' ')
 

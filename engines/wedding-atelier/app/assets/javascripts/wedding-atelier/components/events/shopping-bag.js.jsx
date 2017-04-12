@@ -64,8 +64,7 @@ var ShoppingBag = React.createClass({
         });
       },
       error: function (response) {
-        ReactDOM.render(<Notification errors={['Oops! There was an error trying to load your shopping cart.']} />,
-            document.getElementById('notification'));
+        that.refs.notifications.notify(['Oops! There was an error trying to load your shopping cart.']);
       }
     });
   },
@@ -83,8 +82,7 @@ var ShoppingBag = React.createClass({
   },
 
   itemRemovedErrorHandler: function (response) {
-    ReactDOM.render(<Notification errors={['Oops! There was an error trying to remove the item from the shopping cart.']} />,
-        document.getElementById('notification'));
+    this.refs.notifications.notify(['Oops! There was an error trying to remove the item from the shopping cart.']);
   },
 
   renderCartItems: function () {
@@ -122,6 +120,7 @@ var ShoppingBag = React.createClass({
 
     return (
       <div className="shopping-bag-container" ref="shoppingBag">
+        <Notification ref="notifications"/>
         <div className="commands-shopping-bag" onClick={this.bagOpenHandler}></div>
         {count}
         <div className={backdropClasses} ref="backdrop" onClick={this.bagClosedHandler}></div>

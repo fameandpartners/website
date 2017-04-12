@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170403202453) do
+ActiveRecord::Schema.define(:version => 20170410001828) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1445,6 +1445,7 @@ ActiveRecord::Schema.define(:version => 20170403202453) do
     t.boolean  "sitewide",              :default => false
     t.boolean  "customisation_allowed", :default => false
     t.string   "sitewide_message"
+    t.string   "currency",              :default => ""
   end
 
   create_table "spree_shipments", :force => true do |t|

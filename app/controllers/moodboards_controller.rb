@@ -60,14 +60,19 @@ class MoodboardsController < ApplicationController
 
   def show
     candidate_id = params[:id].to_i
-    @resource = if candidate_id.nonzero?
-                     spree_current_user.all_moodboards.detect {|mb| mb.id == candidate_id }
-                   else
-                     collection.default_or_create
-                end
-    raise ActiveRecord::RecordNotFound unless @resource.present?
-    @title = @resource.name
-    spree_current_user.update_active_moodboard(@resource)
+    @resource = \
+      if candidate_id.nonzero?
+        spree_current_user.all_moodboards.detect {|mb| mb.id == candidate_id }
+      else
+        collection.default_or_create
+      end
+
+    if @resource.present?
+      @title = @resource.name
+      spree_current_user.update_active_moodboard(@resource)
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   private

@@ -1,16 +1,15 @@
 var NewThisWeekProduct = React.createClass({
   render: function(){
-
     var price;
 
-    if (this.props.product.sale_price !== null || this.props.product.discount !== null) {
+    if (this.props.product.prices.sale_string !== null) {
       price = <span>
-              <span className='original-price'>{this.props.product.price} </span>
-              <span className='sale-price'>{this.props.product.sale_price} </span>
-              <span className='discount'>SAVE {this.props.product.discount.table.amount}% </span>
+              <span className='original-price'>{this.props.product.prices.original_string} </span>
+              <span className='sale-price'>{this.props.product.prices.sale_string} </span>
+              <span className='discount'>SAVE {this.props.product.prices.discount_string} </span>
               </span>;
     } else {
-      price = <span>{this.props.product.price}</span>;
+      price = <span>{this.props.product.prices.original_string}</span>;
     }
 
     return(

@@ -16,15 +16,22 @@ class Products::DetailsController < Products::BaseController
     end
 
     # set preselected images colors
-    if params[:color]
-      color = Repositories::ProductColors.get_by_name(params[:color])
-    else
-      # select images of one/default color
-      color = @product.available_options.colors.default.first
-    end
 
-    @product.color_id   = color.try(:id)
-    @product.color_name = color.try(:name)
+    color_hash = \
+      if params[:color]
+        Repositories::ProductColors.get_by_name(params[:color]) || {}
+      else
+        # select images of one/default color
+        color = @product.available_options.colors.default.first
+
+        {
+          id:   color&.id,
+          name: color&.name
+        }
+      end
+
+    @product.color_id   = color_hash[:id]
+    @product.color_name = color_hash[:name]
 
     # todo: thanh 4/3/17- why would we want to default this following line
     # make express delivery as default option

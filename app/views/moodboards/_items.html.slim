@@ -23,7 +23,7 @@ input type='hidden' id="moodboard-id" value=@resource.id
         .details-wrap
           .product-name = item.product.name
           - product_presenter = item.product.presenter_as_details_resource(current_site_version)
-          span.price = product_price_with_discount(product_presenter.price, product_presenter.discount)
+          span.price= product_price_with_discount(product_presenter)
 
         .actions-wrap
           .inner-wrap

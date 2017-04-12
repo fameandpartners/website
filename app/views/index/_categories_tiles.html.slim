@@ -1,24 +1,49 @@
 // Section: Categories tiles
 section.section-box.container.section-style-icon
-  .row
-    .col-md-12.heading-overlay-wrapper
-      h2.heading-overlay The Wedding Atelier App Beta
 
-  .row
-    .col-md-12.cta-item-huge
-      - current_edit_image = "homepage/category-tiles/march-22-tile-1.jpg"
-      - current_edit_mob_image = "homepage/category-tiles/march-22-tile-1-mob.jpg"
-      - current_edit_link = get_the_look_path + "?secondaryhp"
+  // TEMPORARY CONTENT FOR THE EQUAL PAY DAY CAMPAIGN
+  - if equal_pay_active?
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay Flash Sale
 
-      = link_to current_edit_link
-        .section-img-wrap.copy-center
-          picture
-            .img-wrap
-              source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
-              source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
-              img src="#{image_path(current_edit_image)}" srcset="
-                #{image_path(current_edit_mob_image)} 991w,
-                #{image_path(current_edit_image)} 992w"
+    .row
+      .col-md-12.cta-item-huge
+        - current_edit_image = "homepage/category-tiles/equal-pay-day-tile-1.jpg"
+        - current_edit_mob_image = "homepage/category-tiles/equal-pay-day-tile-1-mob.jpg"
+        - current_edit_link = daywear_page_path + "?secondaryhp"
+
+        = link_to current_edit_link
+          .section-img-wrap.copy-center
+            picture
+              .img-wrap
+                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+                img src="#{image_path(current_edit_image)}" srcset="
+                  #{image_path(current_edit_mob_image)} 991w,
+                  #{image_path(current_edit_image)} 992w"
+
+  // REGULAR CONTENT
+  - else
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay The Wedding Atelier App Beta
+
+    .row
+      .col-md-12.cta-item-huge
+        - current_edit_image = "homepage/category-tiles/march-22-tile-1.jpg"
+        - current_edit_mob_image = "homepage/category-tiles/march-22-tile-1-mob.jpg"
+        - current_edit_link = get_the_look_path + "?secondaryhp"
+
+        = link_to current_edit_link
+          .section-img-wrap.copy-center
+            picture
+              .img-wrap
+                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+                img src="#{image_path(current_edit_image)}" srcset="
+                  #{image_path(current_edit_mob_image)} 991w,
+                  #{image_path(current_edit_image)} 992w"
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
