@@ -19,6 +19,7 @@ const propTypes = {
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     displayText: PropTypes.string,
+    meta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     active: PropTypes.bool,
   })),
 };
@@ -124,8 +125,7 @@ class Select extends Component {
         <li
           ref={`options${index}`}
           key={`${this.props.id}-${option.id}-${index}`}
-          data-value={option.id}
-          data-display-text={option.name}
+          data-value={option.meta}
           className={`Select-list-item noSelect ${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
           onClick={this.handleDropdownItemClick(option)}
           aria-hidden={this.state.isOpen ? 'false' : 'true'}
