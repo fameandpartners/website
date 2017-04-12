@@ -64,18 +64,6 @@
     border-radius: 50%;
     box-sizing: content-box;
   }
-
-  // input[type='radio'] + label:hover:after,
-  // input[type='radio']:checked + label:after {
-  //   content: '\2022';
-  //   position: absolute;
-  //   top: 0;
-  // }
-
-  // input[type='radio'] + label:hover:after {
-  //   color: #c7c7c7;
-  // }
-  //
   input[type='radio'] + label:hover::before {
     border-color: $c-neutral-12;
   }
