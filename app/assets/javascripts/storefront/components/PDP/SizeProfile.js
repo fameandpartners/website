@@ -229,6 +229,7 @@ class SidePanelSize extends Component {
     return INCH_SIZES.map(({ ft, inch, totalInches }, i) => ({
       id: i,
       name: this.defaultInchOption(i, ft, inch),
+      meta: totalInches,
       active: i === height.temporaryHeightId,
     }));
   }

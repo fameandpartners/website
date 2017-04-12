@@ -16,6 +16,13 @@ module Acceptance
       expect(page).to have_selector('.pdp-side-menu', visible: true)
     end
 
+    step 'I select :height_value inch height' do |height_value|
+      sleep 0.2 # User interacting with sidebar + animation
+      find('.Select--wrapper').click
+      sleep 0.4 # User interacting with Select
+      find('.Select-list-item[data-value="#{height_value}"]').click
+    end
+
     step 'I select the :color_name color' do |color_name|
       click_link 'Color'
       sleep 0.2 # User interacting with sidebar + animation
@@ -23,7 +30,7 @@ module Acceptance
       sleep 0.2 # User interacting with sidebar + animation
       expect(page).to have_selector('.pdp-side-menu', visible: false)
     end
- 
+
     step 'I save the profile' do
       find(:css,'.size-selection .btn-black', visible: false ).click
     end
