@@ -23,8 +23,7 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
 - if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"
 
-- if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
-  = render 'marketing/sync_trackers'
+= render 'marketing/sync_trackers'
 
 = render 'marketing/structured_data_markup'
 
