@@ -50,7 +50,6 @@ class Populator
         :site_version       => @site_version.to_h,
         :product_attributes => @product_attributes
       }
-      puts err_attrs
       NewRelic::Agent.notice_error(e, err_attrs)
     rescue StandardError
       #turtles
@@ -101,7 +100,6 @@ class Populator
     end
 
     def build_personalization
-      puts "******** #{product_attributes}"
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
         item['size']  = product_size.value
