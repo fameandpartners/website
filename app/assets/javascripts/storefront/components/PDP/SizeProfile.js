@@ -262,7 +262,7 @@ class SidePanelSize extends Component {
     const { height, size } = this.props.customize;
     return (
       <div>
-        <div className="c-card-customize__content__left">Size Profile</div>
+        <a className="c-card-customize__content__left">Size Profile</a>
         <div className="c-card-customize__content__right">
           {this.sizeSummaryUnitSelection(
             height.heightValue, height.heightUnit, size.presentation,
@@ -313,12 +313,12 @@ class SidePanelSize extends Component {
 
     return (
       <div className="pdp-side-container pdp-side-container-size">
-        <a
+        <div
           className={TRIGGER_STATE}
           onClick={this.openMenu}
         >
           {this.generateSizeProfileSummary()}
-        </a>
+        </div>
 
         <div className={MENU_STATE}>
           <div className="text-right">
