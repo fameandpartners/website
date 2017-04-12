@@ -7,15 +7,16 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And Setup default feature flags
     And The "afterpay" feature is enabled
     And The "getitquick_unavailable" feature is enabled
-
+ 
   @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Successfully Buy a Dress
     When I am on Connie dress page
     Then I select "Australia" site version
     And I select "AU 14" size
-    And I select "Petite" skirt length
+    And I select "147" skirt length
+    And I save the profile    
     Then I should see add to cart link enabled
-    And I click on "ADD TO BAG" link
+    And I add to bag
     #Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
@@ -41,9 +42,10 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     When I am on Connie dress page
     Then I select "Australia" site version
     And I select "AU 14" size
-    And I select "Petite" skirt length
+    And I select "147" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
-    And I click on "ADD TO BAG" link
+    And I add to bag
     #Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
