@@ -123,6 +123,11 @@
 
   .product-info a {
     border-bottom: 1px solid $c-neutral-black;
+
+    &.link-no-underline {
+      border-bottom: none;
+    }
+
   }
 
   &.portrait-template {
