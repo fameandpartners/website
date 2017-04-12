@@ -11,11 +11,8 @@ class StyleToProductHeightRangeGroup < ActiveRecord::Base
   end
 
   def self.map_height_values_to_height_name( variant, height_value, height_units )
-    find_both_for_variant_or_use_default(variant)
-      .where(unit: height_units)
-      .product_height_ranges.where('min <= ? AND max >= ?', height_value.to_i, height_value.to_i)
-      .pluck(:map_to)
-      .first
+    height_groups = find_both_for_variant_or_use_default(variant).where(unit: height_units).first
+    height_groups.product_height_ranges.where( "min <= ? and max >= ?", height_value.to_i, height_value.to_i ).pluck(:map_to).first
   end
   
   
