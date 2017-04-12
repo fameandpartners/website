@@ -75,7 +75,7 @@ var MoodBoardEvent = React.createClass({
   componentDidMount: function(){
     $(window).on('beforeunload', function(){
       this.state.chatChannel.leave();
-    }.bind(this))
+    }.bind(this));
 
     _cio.identify({
       id: this.props.current_user.id,
@@ -207,7 +207,7 @@ var MoodBoardEvent = React.createClass({
             type: 'notification',
             content: 'In the meantime why don\'t you invite your bridal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
           });
-          try { sessionStorage.setItem('stylistTagged', true); }catch (e){};
+          try { sessionStorage.setItem('stylistTagged', true); }catch (e){}
         }
       }.bind(this));
     }
@@ -279,7 +279,7 @@ var MoodBoardEvent = React.createClass({
         historyPromise.then(function(){
           that.refs.ChatComp.scrollToBottom();
           that.refs.MobileChatComp.scrollToBottom();
-        })
+        });
       }
     });
   },
@@ -319,7 +319,7 @@ var MoodBoardEvent = React.createClass({
       this.setState({ chat: _newChat });
     } else {
       _newChat.members = _.reject(_newChat.members, function(chatMember){
-        return chatMember.id === member.sid
+        return chatMember.id === member.sid;
       });
       this.setState({ chat: _newChat });
     }
@@ -340,7 +340,7 @@ var MoodBoardEvent = React.createClass({
             _cio.track('wedding_atelier_chat_notification', { recipient: assistant.email, message: parsedMsg.content, moodboard_url: that.props.event_url });
           }
         });
-        try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){};
+        try { sessionStorage.setItem('chatNotificationSent', true); }catch(e){}
       }
 
       var _chat = $.extend({}, that.state.chat);
@@ -597,8 +597,9 @@ var MoodBoardEvent = React.createClass({
                     className="active walkthrough-messages"
                     role="presentation"
                     title="View your dresses"
-                    data-content="Create new looks and vote on your favorites"
-                    data-placement="bottom">
+                    data-tooltip-content="Create new looks and vote on your favorites"
+                    data-tooltip-my-position="top center"
+                    data-tooltip-at-position="bottom center">
                     <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                       Bridesmaid dresses</a>
                   </li>
@@ -606,8 +607,9 @@ var MoodBoardEvent = React.createClass({
                     role="presentation"
                     className="walkthrough-messages"
                     title="Update the details"
-                    data-content="Input everything you need to know about the big day"
-                    data-placement="top">
+                    data-tooltip-content="Input everything you need to know about the big day"
+                    data-tooltip-my-position="bottom center"
+                    data-tooltip-at-position="top center">
                     <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab">
                     Wedding details</a>
                   </li>
@@ -615,8 +617,9 @@ var MoodBoardEvent = React.createClass({
                     role="presentation"
                     className="walkthrough-messages"
                     title="Manage the group"
-                    data-content="Add, view, and remove members of the bridal party"
-                    data-placement="bottom">
+                    data-tooltip-content="Add, view, and remove members of the bridal party"
+                    data-tooltip-my-position="top center"
+                    data-tooltip-at-position="bottom center">
                     <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">Bridal party</a>
                   </li>
                   <li role="presentation" className="bridal-gowns">
@@ -629,7 +632,7 @@ var MoodBoardEvent = React.createClass({
               </div>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane col-xs-12" ref="chatMobile" role="tabpanel">
-                  <Chat ref="MobileChatComp" {...chatProps}/>
+                  <Chat {...$.extend({ mobile: true}, chatProps)}/>
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   {addNewDressBigButton}
@@ -665,9 +668,7 @@ var MoodBoardEvent = React.createClass({
                     current_user_id={this.props.current_user_id}
                   />
                 </div>
-                <div id="bridal-gowns" className="tab-pane" role="tabpanel">
-
-                </div>
+                <div id="bridal-gowns" className="tab-pane" role="tabpanel" />
               </div>
             </div>
           </div>
