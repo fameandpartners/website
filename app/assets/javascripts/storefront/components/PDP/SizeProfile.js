@@ -145,7 +145,6 @@ class SidePanelSize extends Component {
   }
 
   applyTemporaryFilters() {
-    console.log('applying temporary filters');
     const { height } = this.props.customize;
     this.updateHeightSelection({
       heightId: height.temporaryHeightId,

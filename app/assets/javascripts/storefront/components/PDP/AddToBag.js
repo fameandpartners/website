@@ -124,9 +124,7 @@ class AddToBag extends React.Component {
             );
           }
           return (
-            <a onClick={this.addToBag} className="btn btn-black btn-lrg">
-              ADD TO BAG
-            </a>
+            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
           );
         })()}
         <ul className="est-delivery">

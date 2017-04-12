@@ -45,6 +45,9 @@
     width: 50%;
     text-decoration: underline;
   }
+  &__content__left:hover {
+    text-decoration: underline;
+  }
 
   &__content__right {
     float: left;
