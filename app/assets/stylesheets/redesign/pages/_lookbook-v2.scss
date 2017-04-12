@@ -114,6 +114,11 @@
     margin: 70px 0;
   }
 
+  .products-set--border-bottom {
+    border-bottom: 1px solid $c-neutral-6;
+    padding-bottom: 25px;
+  }
+
   .product-heading .title {
     font-size: 1.4rem;
     font-style: italic;
