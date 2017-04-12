@@ -9,7 +9,7 @@ Feature: Afterpay on Australian's Website Checkout
   @javascript @vcr @shorter_cassette_names
   Scenario: I see Afterpay payment method on Australian Site Version
     # See on Australia site version
-    When I select "Connie" dress on "Australia", with "AU 14", "Petite" and proceed to checkout
+    When I select "Connie" dress on "Australia", with "AU 14", "147" and proceed to checkout
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
       | Email                   | test@email.com |
@@ -24,7 +24,7 @@ Feature: Afterpay on Australian's Website Checkout
     Then I should see "Afterpay"
 
     # Do not see on USA site version
-    When I select "Connie" dress on "USA", with "US 10", "Tall" and proceed to checkout
+    When I select "Connie" dress on "USA", with "US 10", "200" and proceed to checkout
     Then I select "United States" country and "California" state
     And I fill in form fields with:
       | Email                   | test@email.com |

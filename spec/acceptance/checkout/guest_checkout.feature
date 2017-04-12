@@ -10,7 +10,8 @@ Feature: Complete Guest Checkout
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Size Profile>" size
-    And I select "<Height & Hemline>" skirt length
+    And I select "<Height Value>" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
@@ -31,16 +32,17 @@ Feature: Complete Guest Checkout
     Then I should see "First name can't be blank"
     Then I should see "Last name can't be blank"
     Examples:
-      | Site Version | Country       | State      | Zipcode Label | Size Profile | Height & Hemline |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Standard         |
-      | USA          | United States | California | Zipcode       | US 10      | Petite           |
+      | Site Version | Country       | State      | Zipcode Label | Size Profile | Height Value |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14        | 200          |
+      | USA          | United States | California | Zipcode       | US 10        | 147          |
 
   @javascript @no_vcr
   Scenario Outline: Successfully Buy a Dress and Ship To a Country With Custom Duty Feeds
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Size Profile>" size
-    And I select "<Height & Hemline>" skirt length
+    And I select "<Height Value>" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
@@ -69,8 +71,8 @@ Feature: Complete Guest Checkout
     Then I should see my order placed, with "Connie" dress, "<Size Profile>" size and "<Dress Price>" price
 
     Examples:
-      | Site Version | Country | State             | Zipcode Label | Size Profile | Height & Hemline | Dress Price |
-      | USA          | Germany | Baden-Württemberg | Zipcode       | US 10      | Petite           | 289.00      |
+      | Site Version | Country | State             | Zipcode Label | Size Profile | Height Value | Dress Price |
+      | USA          | Germany | Baden-Württemberg | Zipcode       | US 10        | 147          | 289.00      |
 
   # VCR is disabled on full checkout acceptance specs since we can detect PIN payments breaking changes!
   @javascript @no_vcr
@@ -78,7 +80,8 @@ Feature: Complete Guest Checkout
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Size Profile>" size
-    And I select "<Height & Hemline>" skirt length
+    And I select "<Height Value>" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
@@ -105,7 +108,7 @@ Feature: Complete Guest Checkout
     Then I should see my order placed, with "Connie" dress, "<Size Profile>" size and "<Dress Price>" price
 
     Examples:
-      | Site Version | Country       | State      | Zipcode Label | Size Profile | Height & Hemline | Dress Price |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite           | 319.00      |
-      | USA          | United States | California | Zipcode       | US 10      | Petite           | 289.00      |
-      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite           | 319.00      |
+      | Site Version | Country       | State      | Zipcode Label | Size Profile | Height Value | Dress Price |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14        | 147          | 319.00      |
+      | USA          | United States | California | Zipcode       | US 10        | 147          | 289.00      |
+      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14        | 147          | 319.00      |
