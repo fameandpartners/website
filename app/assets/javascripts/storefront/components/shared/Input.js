@@ -16,6 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  error: false,
   type: 'input',
   defaultValue: '',
   placeholder: '',
