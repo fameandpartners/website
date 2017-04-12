@@ -8,7 +8,7 @@ class CreateShopEveryBodyDancePage < ActiveRecord::Migration
       heading:          '#everyBODYdance',
       title:            'Body-Positive Evening Dresses and Gowns',
       limit:            '99',
-      meta_description: 'Fame and Partners and Teen Vogue present #everyBODY dance with Lauren Jauregui, Chloe Grace Moretz, Barbara Palvin and more.',
+      meta_description: 'Fame and Partners and Teen Vogue present #everyBODY dance with Lauren Jauregui, Ashley Moore, Nicolette Mason and more.',
     }
   end
 
