@@ -3,6 +3,6 @@ class ProductHeightRangeGroup < ActiveRecord::Base
 
   has_many :product_height_ranges
 
-  DEFAULTS = [ProductHeightRangeGroup.find_by_name( 'default_three_size_metric_group' ), ProductHeightRangeGroup.find_by_name( 'default_three_size_english_group' )]
+  scope :defaults, -> { where(name: ['default_three_size_metric_group', 'default_three_size_english_group']) }
   
 end

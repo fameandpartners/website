@@ -6,7 +6,7 @@ class StyleToProductHeightRangeGroup < ActiveRecord::Base
   def self.find_both_for_variant_or_use_default( variant )
     style_number  = variant&.product&.sku
     height_groups = StyleToProductHeightRangeGroup.where(style_number: style_number )
-    height_groups = ProductHeightRangeGroup::DEFAULTS if( height_groups.empty? )
+    height_groups = ProductHeightRangeGroup.defaults if( height_groups.empty? )
     height_groups
   end
 
