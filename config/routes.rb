@@ -321,7 +321,7 @@ FameAndPartners::Application.routes.draw do
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
 
     scope '/dresses' do
-      root to: 'products/collections#show', as: :dresses
+      root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
 
       # Colors should behave like query strings, and not paths
