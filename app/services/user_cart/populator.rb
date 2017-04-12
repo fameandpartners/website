@@ -114,7 +114,6 @@ class Populator
         end
       end
     end
-
     
     def personalized_product?
       product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
