@@ -55,7 +55,7 @@ module Acceptance
     end
 
     def click_a_with_no_href( text )
-      find("a", :text => text, :exact => true).click
+      find("a", :text => text).click
     end
 
   end
