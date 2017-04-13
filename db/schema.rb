@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170405182914) do
+ActiveRecord::Schema.define(:version => 20170411221422) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20170405182914) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
+    t.string   "point_of_view"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -691,23 +692,6 @@ ActiveRecord::Schema.define(:version => 20170405182914) do
 
   add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
 
-  create_table "product_height_range_groups", :force => true do |t|
-    t.string   "unit"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "product_height_ranges", :force => true do |t|
-    t.integer  "min"
-    t.integer  "max"
-    t.string   "unit"
-    t.string   "map_to"
-    t.integer  "product_height_range_group_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
   create_table "product_making_options", :force => true do |t|
     t.integer "product_id"
     t.integer "variant_id"
@@ -715,6 +699,7 @@ ActiveRecord::Schema.define(:version => 20170405182914) do
     t.string  "option_type"
     t.decimal "price",                     :precision => 10, :scale => 2
     t.string  "currency",    :limit => 10
+    t.integer "discount"
   end
 
   add_index "product_making_options", ["product_id", "active", "option_type"], :name => "index_product_making_options_on_product_id"
@@ -1709,13 +1694,6 @@ ActiveRecord::Schema.define(:version => 20170405182914) do
     t.integer  "zone_members_count", :default => 0
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
-  end
-
-  create_table "style_to_product_height_range_groups", :force => true do |t|
-    t.string   "style_number"
-    t.integer  "product_height_range_group_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
   end
 
   create_table "styles", :force => true do |t|
