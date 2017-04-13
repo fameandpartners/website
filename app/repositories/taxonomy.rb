@@ -114,7 +114,17 @@ class Repositories::Taxonomy
         all_taxons.push(result)
       end
 
-      all_taxons.sort_by{|i| i.position}
+      all_taxons.sort do |a, b|
+        if a.banner.image.present? && b.banner.image.present?
+          a.id <=> b.id
+        elsif a.banner.image.present?
+          -1
+        elsif b.banner.image.present?
+          1
+        else
+          a.id <=> b.id
+        end
+      end
     end
   end
 end
