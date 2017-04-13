@@ -8,4 +8,4 @@ Test::Unit::AutoRunner.need_auto_run = false if defined?(Test::Unit::AutoRunner)
 
 FameAndPartners::Application.load_tasks
 
-Knapsack.load_task if defined?(Knapsack)
+Knapsack.load_tasks if defined?(Knapsack)
