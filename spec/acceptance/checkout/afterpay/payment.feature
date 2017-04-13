@@ -16,7 +16,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And I select "147" skirt length
     And I save the profile
     Then I should see add to cart link enabled
-    And I add to bag
+    And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
@@ -45,7 +45,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And I select "147" skirt length
     And I save the profile
     Then I should see add to cart link enabled
-    And I add to bag
+    And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
