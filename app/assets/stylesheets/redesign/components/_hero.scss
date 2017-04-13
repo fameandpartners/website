@@ -10,6 +10,7 @@
   // versions
   &.copy-right, &.copy-left {
     margin-bottom: 50px;
+    position: relative;
 
     .media-wrap {
       padding-bottom: 0;
@@ -21,6 +22,36 @@
 
     .content-wrap {
       text-align: center;
+    }
+
+    .content-middle-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+
+      .container,
+      .container-fluid {
+        display: table;
+        height: 100%;
+
+        > .row {
+          display: table-cell;
+          vertical-align: middle;
+        }
+
+        > .row.v-align-top {
+          vertical-align: top;
+        }
+
+      }
+
+      .container-fluid {
+        width: 100%;
+      }
+
     }
 
     p {
