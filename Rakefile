@@ -6,4 +6,6 @@ require File.expand_path('../config/application', __FILE__)
 
 Test::Unit::AutoRunner.need_auto_run = false if defined?(Test::Unit::AutoRunner)
 
+Knapsack.load_task if defined?(Knapsack)
+
 FameAndPartners::Application.load_tasks

@@ -32,3 +32,4 @@ describe Spree::Admin::ProductsController, type: :controller do
     end
   end
 end
+
