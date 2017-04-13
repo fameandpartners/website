@@ -70,6 +70,13 @@
     padding-top: $box-padding-top;
   }
 
+  .section-style-icon .cta-link-center-padding {
+    display: block;
+    max-width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .title--top-spacing-md {
