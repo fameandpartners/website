@@ -22,7 +22,7 @@ Feature: PDP's Express Making
     When I am on "Connie" dress page
     Then I select "USA" site version
     And I select "US 10" size
-    And I select "147" skirt length
+    And I select "58" inch height
     And I save the profile
     And I select the express making option checkbox
     Then I should see add to cart link enabled
