@@ -33,7 +33,7 @@ Feature: Complete Guest Checkout
     Then I should see "Last name can't be blank"
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Size Profile | Height Value |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14        | 200          |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14        | 152          |
 
   @javascript @no_vcr
   Scenario Outline: User Validation Errors
@@ -74,7 +74,6 @@ Feature: Complete Guest Checkout
     And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    #Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I should see shipping to "<Country>" warning
     And I fill in form fields with:
@@ -151,7 +150,6 @@ Feature: Complete Guest Checkout
     And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    #Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I fill in form fields with:
       | Email                   | test@email.com |
