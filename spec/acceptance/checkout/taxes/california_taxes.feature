@@ -7,7 +7,7 @@ Feature: Californian Taxes
 
   @javascript
   Scenario: Californians Will Pay extra 7.5% for their orders
-    When I select "Connie" dress on "USA", with "US 10", "147" and proceed to checkout
+    When I select "Connie" dress on "USA", with "US 10", "58" and proceed to checkout
     And I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger          |
