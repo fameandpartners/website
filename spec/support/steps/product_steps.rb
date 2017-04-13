@@ -51,6 +51,7 @@ module Acceptance
 
     step "I add to bag" do
       find("a", :text => "ADD TO BAG").click
+      wait_for_ajax
     end
 
     def click_a_with_no_href( text )
