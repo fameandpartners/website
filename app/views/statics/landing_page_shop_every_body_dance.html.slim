@@ -4,13 +4,12 @@
 
   // Hero tile
   .main-hero-wrap.hero-wrap.copy-left.white-text
-    picture.media-wrap.keep-ratio.img-as-block
-      .inner-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("/shop-every-body-dance/shop-every-body-banner-mobile.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}'
-        img src='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}' srcset='
-          #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner-mobile.jpg")} 1023w,
-          #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")} 1024w' alt='Shop'
+    picture.media-wrap
+      source media='(max-width: 991px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner-mobile.jpg")}'
+      source media='(min-width: 992px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}'
+      img src='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}' srcset='
+        #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner-mobile.jpg")} 991w,
+        #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")} 992w' alt='Shop'
 
     .content-middle-wrap
       .container
