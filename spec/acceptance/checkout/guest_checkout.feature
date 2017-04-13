@@ -147,7 +147,7 @@ Feature: Complete Guest Checkout
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Size Profile>" size
-    And I select "<Height Value>" skirt length
+    And I select "<Height Value>" inch height
     And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
