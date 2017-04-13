@@ -102,7 +102,7 @@ Spree::Order.class_eval do
   end
 
   def has_slow_making_items?
-    line_items.includes(making_options: :product_making_option).any(&:slow_making?)
+    line_items.includes(making_options: :product_making_option).any?(&:slow_making?)
   end
 
   def update!

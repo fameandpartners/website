@@ -7,15 +7,15 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
 
   describe '#maximum_delivery_period' do
     it "returns minimal delivery period if line_item has no taxons" do
-      expect(subject.maximum_delivery_period).to eq('7 - 10 business days')
+      expect(subject.maximum_delivery_period).to eq('8 - 10 business days')
     end
 
     it "returns maximum delivery period from taxons" do
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
       expect(subject.maximum_delivery_period).to eq('12 - 15 business days')
 
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '2 - 4 weeks')
-      expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
+      product.taxons << FactoryGirl.create(:taxon, delivery_period: '3 - 4 weeks')
+      expect(subject.maximum_delivery_period).to eq('3 - 4 weeks')
 
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
       expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
@@ -24,16 +24,17 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
 
   describe '#delivery_period' do
     it "returns minimum delivery period by default" do
-      expect(subject.delivery_period).to eq('7 - 10 business days')
+      expect(subject.delivery_period).to eq('8 - 10 business days')
     end
 
     it "returns fast making delivery period if line_item is fast making" do
       expect(line_item).to receive(:fast_making?).and_return(true)
 
-      expect(subject.delivery_period).to eq('4 - 6 business days')
+      expect(subject.delivery_period).to eq('5 - 7 business days')
     end
 
     it "returns cny delivery period if cny flag enabled" do
+      binding.pry
       Features.activate(:cny_delivery_delays)
       allow(line_item).to receive(:fast_making?).and_return(true)
 
