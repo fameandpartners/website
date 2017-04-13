@@ -12,6 +12,10 @@ describe 'search page', type: :feature, js: true do
     color_red  = FactoryGirl.create(:option_value, name: 'red', presentation: 'Red', option_type: color_option_type)
 
     @dress = FactoryGirl.create(:dress, name: 'Bianca Dress', sku: 'ABC123')
+    taxon = FactoryGirl.create(:taxon, permalink: 'style/dress', name: 'dresses', published_at: Time.now)
+    taxonomy = FactoryGirl.create(:taxonomy, name: 'Style')
+    taxonomy.taxons << taxon
+    @dress.taxons << taxon
 
     image = FactoryGirl.create(:image)
     FactoryGirl.create(:product_color_value, product: @dress, option_value: color_red, images: [image])
