@@ -43,24 +43,26 @@ module Revolution
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
-        colour_name = colours[params[:offset].to_i + i]
+        if p.present?
+          colour_name = colours[params[:offset].to_i + i]
 
-        images = collection_images(p, colour_name)
+          images = collection_images(p, colour_name)
 
-        price = p.site_price_for(site_version)
-        color = Spree::OptionValue.where(:name => colour_name).first
+          price = p.site_price_for(site_version)
+          color = Spree::OptionValue.where(:name => colour_name).first
 
-        Products::Presenter.new(
-          :id           => p.id,
-          :sku          => p.sku,
-          :variant_skus => p.variant_skus,
-          :name         => p.name,
-          :price        => price,
-          :discount     => p.discount,
-          :images       => images,
-          :color        => color
-        )
-      end
+          Products::Presenter.new(
+            :id           => p.id,
+            :sku          => p.sku,
+            :variant_skus => p.variant_skus,
+            :name         => p.name,
+            :price        => price,
+            :discount     => p.discount,
+            :images       => images,
+            :color        => color
+          )
+        end
+      end.compact
     end
 
     def collection_images(product, colour_name)
