@@ -50,11 +50,11 @@ module Acceptance
     end
 
     step "I add to bag" do
-      find("a", :text => "ADD TO BAG", exact: true).click
+      find("a", :text => "ADD TO BAG").click
     end
 
     def click_a_with_no_href( text )
-      find("a", :text => text).click
+      find("a", :text => text, :exact => true).click
     end
 
   end
