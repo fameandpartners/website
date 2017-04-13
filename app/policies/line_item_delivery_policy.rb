@@ -12,7 +12,7 @@ module Policies
 
     def delivery_period
       period = ''
-binding.pry
+
       if @line_item.fast_making? #fast_making wins
         return fast_making_delivery_period
       elsif @line_item.slow_making? #how slow can you go

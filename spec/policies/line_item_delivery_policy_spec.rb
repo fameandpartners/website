@@ -18,7 +18,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
       expect(subject.maximum_delivery_period).to eq('3 - 4 weeks')
 
       product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
-      expect(subject.maximum_delivery_period).to eq('2 - 4 weeks')
+      expect(subject.maximum_delivery_period).to eq('3 - 4 weeks')
     end
   end
 
@@ -34,11 +34,10 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
     end
 
     it "returns cny delivery period if cny flag enabled" do
-      binding.pry
       Features.activate(:cny_delivery_delays)
-      allow(line_item).to receive(:fast_making?).and_return(true)
 
-      expect(subject.delivery_period).to eq('2 weeks')
+
+      expect(subject.delivery_period).to eq('17 - 20 business days')
     end
   end
 end
