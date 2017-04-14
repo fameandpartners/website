@@ -30,14 +30,12 @@ module Acceptance
       sleep 0.2 # User interacting with sidebar + animation
       expect(page).to have_selector('.pdp-side-menu', visible: false)
     end
- 
+  
     step 'I save the profile' do
       # Trying to use a normal find/click pair caues crazy scrolling for some reason
       # Seems to be purely a capybara thing though - not an actual bug
-      script = <<-JS
-      $('.size-selection .btn-black').click()
-    JS
-      Capybara.current_session.driver.browser.execute_script(script)
+      script = "$('.size-selection .btn-black').click()"
+      page.execute_script(script)
     end
 
     step 'I select the express making option checkbox' do
