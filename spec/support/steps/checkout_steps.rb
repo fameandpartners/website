@@ -48,7 +48,7 @@ module Acceptance
 
     step 'I select :dress_name dress on AUSTRALIA, with :dress_size, :skirt_length and proceed to checkout' do |dress_name, dress_size, skirt_length|
       send 'I am on :dress_name dress page', dress_name
-      send 'I select "Australia" site version', site_version
+      send 'I select :site_version site version', "Australia"
       send 'I select :dress_size size', dress_size
       send 'I select :skirt_length skirt length', skirt_length
       send 'I should see add to cart link enabled'
@@ -59,7 +59,7 @@ module Acceptance
 
     step 'I select :dress_name dress on USA, with :dress_size, :height_value and proceed to checkout' do |dress_name, dress_size, skirt_length|
       send 'I am on :dress_name dress page', dress_name
-      send 'I select "USA" site version'
+      send 'I select :site_version site version', "USA"
       send 'I select :dress_size size', dress_size
       send 'I select :height_value inch height', height_value
       send 'I should see add to cart link enabled'
