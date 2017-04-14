@@ -43,7 +43,8 @@ RSpec.configure do |config|
 
   # Max height max width
   config.before(:each, js: true) do
-  Capybara.page.driver.browser.manage.window.maximize
+    Capybara.page.driver.browser.manage.window.maximize
+  end
 end
 
 # TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912
