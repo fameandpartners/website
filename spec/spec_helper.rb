@@ -43,7 +43,7 @@ RSpec.configure do |config|
 
   # Max height max width
   config.before(:each, js: true) do
-    Capybara.page.driver.browser.manage.window.maximize
+     Capybara.page.driver.browser.resize(2000,1400)
   end
 end
 
