@@ -210,7 +210,8 @@
   "spec/policies/order_projected_delivery_date_policy_spec.rb": 0.019797086715698242,
   "spec/policies/product_delivery_period_policy_spec.rb": 0.04768538475036621,
   "spec/policies/project_delivery_date_policy_spec.rb": 1.346540927886963,
-  "spec/presenters/admin/fabric_card_grid_spec.rb": 0.005007266998291016,.Knapsack report was generated. Preview:
+  "spec/presenters/admin/fabric_card_grid_spec.rb": 0.005007266998291016
+}
 {
   "engines/admin_ui/spec/acceptance/product_colors.feature": 77.68082904815674,
   "engines/admin_ui/spec/controllers/admin_ui/pages_controller_spec.rb": 0.09542131423950195,
