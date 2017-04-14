@@ -5,11 +5,11 @@ Feature: Afterpay on Australian's Website Checkout
     And Data is setup correctly
     And The "afterpay" feature is enabled
     And The "getitquick_unavailable" feature is enabled
-
+ 
   @javascript @vcr @shorter_cassette_names
   Scenario: I see Afterpay payment method on Australian Site Version
     # See on Australia site version
-    When I select "Connie" dress on Australia, with "AU 14", "147" and proceed to checkout
+    When I select "Connie" dress on AUSTRALIA, with "AU 14", "147" and proceed to checkout
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
       | Email                   | test@email.com |
