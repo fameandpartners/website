@@ -149,6 +149,14 @@
       position: absolute;
     }
 
+    .custom-video-player-wrapper {
+      margin: 0 auto;
+    }
+
+    video {
+      padding: 0 15%;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -179,6 +187,12 @@
           margin-top: -25%;
         }
 
+        &.intro--no-featured-img .content-copy {
+          margin-top: 0;
+          padding-bottom: 40px;
+          text-align: center;
+        }
+
       }
 
       section {
@@ -194,8 +208,12 @@
         display: none;
       }
 
+      .local-navigation-wrapper {
+        position: absolute;
+      }
+
       .local-navigation-vertical {
-        top: $fixed-header-with-locale-warn;
+        top: ($md-content-margin-top + 45px);
         position: fixed;
       }
 
