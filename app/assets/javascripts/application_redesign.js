@@ -78,6 +78,7 @@
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
 //= require partials/helpers/anchor_navigation
+//= require partials/helpers/custom_video_player
 
 //-----------------------------------
 // Show old quiz in popup with iframe
