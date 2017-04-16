@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe ItemReturnCalculator do
   before(:each) do
     @user  = FactoryGirl.create(:spree_user)
-    @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)
+    @order = FactoryGirl.create(:complete_order_with_items, id: 67, user_id: @user.id)
 
     shipment = FactoryGirl.build(:simple_shipment, order: @order)
     FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
