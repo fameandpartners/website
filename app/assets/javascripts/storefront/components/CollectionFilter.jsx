@@ -450,27 +450,7 @@ class CollectionFilterSort extends Component {
                           )}
                         />
 
-                        <ExpandablePanelItem
-                          openedByDefault={!!filters.selectedStyles.length}
-                          openPanelCallback={this.handleFilterOpening('COLLECTION_STYLE_FILTER_OPEN')}
-                          itemGroup={(
-                            <div>
-                              <div className="ExpandablePanel__name">
-                                  Style
-                              </div>
-                              <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateStyleSummary()}
-                              </div>
-                            </div>
-                          )}
-                          revealedContent={(
-                            <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
-                              <div className="ExpandablePanel__listTwoColumns">
-                                {$$bodyStyles.toJS().map(this.buildStyleOptions)}
-                              </div>
-                            </div>
-                          )}
-                        />
+                        {/* Removing Style Filters Temporarily */}
 
                         <ExpandablePanelItem
                           openedByDefault={!!filters.selectedShapes.length}
@@ -572,3 +552,26 @@ CollectionFilterSort.propTypes = {
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
+
+// ***** Rare occasion in which Commented out code is OK
+// <ExpandablePanelItem
+//   openedByDefault={!!filters.selectedStyles.length}
+//   openPanelCallback={this.handleFilterOpening('COLLECTION_STYLE_FILTER_OPEN')}
+//   itemGroup={(
+//     <div>
+//       <div className="ExpandablePanel__name">
+//           Style
+//       </div>
+//       <div className="ExpandablePanel__selectedOptions">
+//           {this.generateStyleSummary()}
+//       </div>
+//     </div>
+//   )}
+//   revealedContent={(
+//     <div className="ExpandablePanel__listOptions checkboxBlackBg clearfix">
+//       <div className="ExpandablePanel__listTwoColumns">
+//         {$$bodyStyles.toJS().map(this.buildStyleOptions)}
+//       </div>
+//     </div>
+//   )}
+// />
