@@ -333,26 +333,27 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-javascript:
-  (function ($) {
+- content_for :body_end do
+  javascript:
+    (function ($) {
 
-    $(".custom-video-player-wrapper").click(function () {
+      $(".custom-video-player-wrapper").click(function () {
 
-      var videoElement = $(this).children("video").get(0),
-          videoControlBtn = $(this).children(".btn-play-pause");
+        var videoElement = $(this).children("video").get(0),
+            videoControlBtn = $(this).children(".btn-play-pause");
 
-      if (videoElement.paused) {
-        videoElement.play();
-        videoControlBtn.hide();
-      } else {
-        videoElement.pause();
-        videoControlBtn.show();
-      }
+        if (videoElement.paused) {
+          videoElement.play();
+          videoControlBtn.hide();
+        } else {
+          videoElement.pause();
+          videoControlBtn.show();
+        }
 
-      videoElement.onended = function(e) {
-        videoControlBtn.show();
-      }
+        videoElement.onended = function(e) {
+          videoControlBtn.show();
+        }
 
-    });
+      });
 
-  })(jQuery);
+    })(jQuery);
