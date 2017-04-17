@@ -1,8 +1,3 @@
-# app_id = '68181'	#production
-# if Rails.env.staging?
-#   app_id = '156022' #staging, qa1, qa2
-# end
-
 Raven.configure do |config|
   app_id = '156022' #devs
 
