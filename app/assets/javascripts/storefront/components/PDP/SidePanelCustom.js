@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Scrollbars} from 'react-custom-scrollbars';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Scrollbars } from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 
@@ -13,12 +13,12 @@ class SidePanelCustom extends SidePanel {
   }
 
   onChange(event) {
-    let customize = {};
+    const customize = {};
     customize.customization = {};
 
-    if(this.props.customize.customization.id == event.currentTarget.dataset.id) {
+    if (this.props.customize.customization.id == event.currentTarget.dataset.id) {
       customize.customization.id = undefined;
-      customize.customization.presentation = "";
+      customize.customization.presentation = '';
       customize.customization.price = 0;
     } else {
       customize.customization.id = parseInt(event.currentTarget.dataset.id);
@@ -36,19 +36,21 @@ class SidePanelCustom extends SidePanel {
 
     const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = this.props.customize.customization.id
-      ? "c-card-customize__content is-selected" : "c-card-customize__content";
+      ? 'c-card-customize__content is-selected' : 'c-card-customize__content';
     const customs = this.props.customOptions.map((option, index) => {
       const itemState = this.props.customize.customization.id == option.table.id
-        ? "selector-custom is-selected" : "selector-custom";
+        ? 'selector-custom is-selected' : 'selector-custom';
       const price =
         parseFloat(option.table.display_price.money.fractional
         / option.table.display_price.money.currency.subunit_to_unit);
       return (
-        <a href="javascript:;" className={itemState}
+        <a
+          href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={option.table.id}
           data-presentation={option.table.name}
-          data-price={price}>
+          data-price={price}
+        >
           <div className="item-name">
             {option.table.name}
             <div className="item-price">+${price}</div>
@@ -62,9 +64,11 @@ class SidePanelCustom extends SidePanel {
 
     return (
       <div className="pdp-side-container pdp-side-container-custom">
-        <a href="javascript:;"
+        <a
+          href="javascript:;"
           className={triggerState}
-          onClick={this.openMenu}>
+          onClick={this.openMenu}
+        >
           <div className="c-card-customize__content__left">Customize</div>
           <div className="c-card-customize__content__right">{this.props.customize.customization.presentation}</div>
         </a>
@@ -73,10 +77,12 @@ class SidePanelCustom extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="javascript:;"
-                  className="btn-close lg"
-                  onClick={this.closeMenu}>
-                    <span className="hide-visually">Close Menu</span>
+                <a
+                  href="javascript:;"
+                  className="btn-close med"
+                  onClick={this.closeMenu}
+                >
+                  <span className="hide-visually">Close Menu</span>
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Select your customization</h2>

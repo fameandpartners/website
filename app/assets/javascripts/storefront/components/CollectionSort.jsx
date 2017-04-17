@@ -5,7 +5,7 @@ import * as CollectionFilterSortActions from '../actions/CollectionFilterSortAct
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
 import autobind from 'auto-bind';
 import {assign,} from 'lodash';
-import Select from './shared/Select.jsx';
+import Select from './shared/Select.js';
 
 // Tracking
 import {trackEvent,} from '../libs/gaTracking';

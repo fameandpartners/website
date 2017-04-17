@@ -10,7 +10,7 @@ Feature: Afterpay on Australian's Website Storefront
     When I am on Connie dress page
     And I select "Australia" site version
     Then I should see "or 4 easy payments of $79.75 with"
-    And I click on "info" link
+    And I click on element with text "info"
     Then I should see "Just select Afterpay at checkout"
     And I click on "Close Menu" link
     When I select "USA" site version

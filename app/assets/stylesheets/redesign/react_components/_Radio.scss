@@ -1,0 +1,75 @@
+/* [RadioGroup | Radio]
+-------------------------------------------------------*/
+.RadioGroup {
+  display: inline-block;
+
+  .Radio {
+    display: inline;
+    position: relative;
+    margin-right: 16px;
+    text-transform: uppercase;
+  }
+
+  input[type='radio'] {
+    display: none;
+    cursor: pointer;
+  }
+
+  input[type='radio']:active,
+  input[type='radio']:focus {
+    outline: none;
+  }
+
+  input[type='radio'] + label {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    padding-right: 20px;
+    line-height: 12px;
+    vertical-align: super;
+  }
+
+  input[type='radio'] + label:after,
+  input[type='radio'] + label:before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    left: 0;
+    top: 0;
+    text-align: center;
+    position: absolute;
+  }
+
+  input[type='radio'] + label:before {
+    border: 1px solid $product-color-pale-grey;
+    background-color: $c-neutral-white;
+    @include transition(all 0.3s ease-in-out);
+  }
+
+  input[type='checkbox'] + label:after,
+  input[type='radio'] + label:after {
+    color: #fff;
+  }
+
+  input[type='checkbox']:checked + label:before,
+  input[type='radio']:checked + label:before {
+    @include box-shadow(inset 0 0 0 2px $c-neutral-white);
+    background: $c-neutral-black;
+  }
+  /*Radio Specific styles*/
+  input[type='radio'] + label:before {
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    box-sizing: content-box;
+  }
+  input[type='radio'] + label:hover::before {
+    border-color: $c-neutral-12;
+  }
+
+  input[type='radio']:checked + label:after,
+  input[type='radio']:checked + label:hover:after {
+    color: #fff;
+  }
+}

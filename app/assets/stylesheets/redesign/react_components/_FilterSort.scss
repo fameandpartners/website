@@ -415,6 +415,10 @@
   width: 275px;
   padding-right: 15px;
   float: right;
+  .Select--wrapper {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
 
 @media (min-width: $bootstrap-md-width) {

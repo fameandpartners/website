@@ -1,9 +1,14 @@
+import { assign } from 'lodash';
 export function customizeReducer(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'CUSTOMIZE_DRESS':
-      return Object.assign({}, state, action.customize);
+      return assign({}, state, action.customize);
     case 'CUSTOMIZE_MAKING_OPTION':
-      return Object.assign({}, state, action.customize);
+      return assign({}, state, action.customize);
+    case 'TOGGLE_PDP_DRAWER':
+      return assign({}, state, { drawerOpen: action.drawerName });
+    case 'ADD_TO_BAG_PENDING':
+      return assign({}, state, { addToBagPending: action.addToBagPending });
     default:
       return state;
   }

@@ -1,17 +1,18 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
-import {MODAL_STYLE} from './utils';
+import PDPConstants from '../../constants/PDPConstants';
+import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
 
-class CtaPrice extends React.Component {
+class AddToBag extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       sending: false,
-      modalIsOpen: false
+      modalIsOpen: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -20,45 +21,35 @@ class CtaPrice extends React.Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
 
   addToBag() {
+    const { customize, actions, product } = this.props;
     // TODO: redo this
-    // this is just very hacky way to connect this with shopping cart
-    if(this.props.customize.size.id
-      && this.props.customize.color.id
-      && this.props.customize.length.id) {
+    // this is just EXTREMELY hacky way to connect this with shopping cart
+    if (customize.size.id
+      && customize.color.id
+      && customize.height.heightValue) {
       // disable "ADD TO BAG" button and show spinner
-      this.setState({sending:true});
-      document.getElementById('pdpCartSizeId').value   = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value  = this.props.customize.color.id;
-      document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
-      document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartLength').value    = this.props.customize.length.id;
-      document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOption.id;
+      this.setState({ sending: true });
+      document.getElementById('pdpCartSizeId').value = customize.size.id;
+      document.getElementById('pdpCartColorId').value = customize.color.id;
+      document.getElementById('pdpCartCustomId').value = customize.customization.id;
+      document.getElementById('pdpCartDressVariantId').value = customize.dressVariantId;
+      document.getElementById('pdpCartHeight').value = customize.height.heightValue;
+      document.getElementById('pdpCartHeightUnit').value = customize.height.heightUnit;
+      document.getElementById('pdpCartVariantId').value = product.master_id;
+      document.getElementById('pdpCartMakingId').value = customize.makingOption.id;
       $('#pdpDataForCheckout').submit();
     } else {
-      // set errors
-      if(!this.props.customize.size.id) {
-        let customize = {};
-        customize.size = {};
-        customize.size.error = true;
-        customize.size.message = 'dress size';
-        this.props.actions.customizeDress(customize);
-      }
-      if(!this.props.customize.length.id) {
-        let customize = {};
-        customize.length = {};
-        customize.length.error = true;
-        customize.length.message = 'dress length';
-        this.props.actions.customizeDress(customize);
-      }
+      // force size profile
+      actions.addToBagPending(true);
+      actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
     }
   }
 
@@ -66,19 +57,19 @@ class CtaPrice extends React.Component {
     const prices = this.props.product.prices;
 
     const parsedPrice = parseFloat(prices.original_amount) || 0;
-    const parsedSale  = parseFloat(prices.sale_amount) || 0;
+    const parsedSale = parseFloat(prices.sale_amount) || 0;
 
     const calculatePrice = (price) => {
-      const parsedColorPrice  = parseFloat(this.props.customize.color.price) || 0;
+      const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
       const parsedCustomPrice = parseFloat(this.props.customize.customization.price) || 0;
       const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
 
-      const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice
+      const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
       return PRICE;
-    }
+    };
 
-    let calculatedPrice = {
-      original: calculatePrice(parsedPrice)
+    const calculatedPrice = {
+      original: calculatePrice(parsedPrice),
     };
 
     if (parsedSale) {
@@ -90,14 +81,8 @@ class CtaPrice extends React.Component {
       deliveryPeriod = this.props.product.fast_making_delivery_period;
     }
 
-    const isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
-    const isAddToBagAvailable = (
-      this.props.customize.size.id
-        && this.props.customize.color.id
-        && this.props.customize.length.id
-    );
-
-    const afterpayPrice = ( (calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2)
+    const isAfterpayEnabled = this.props.siteVersion === 'Australia' && this.props.flags.afterpay;
+    const afterpayPrice = ((calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2);
 
     return (
       <div className="btn-wrap">
@@ -105,13 +90,13 @@ class CtaPrice extends React.Component {
           let priceHtml;
 
           if (parsedSale) {
-            priceHtml = <div className='price'>
-              <span className='price-original'>${calculatedPrice.original.toFixed(2)} </span>
-              <span className='price-sale'>${calculatedPrice.sale.toFixed(2)} </span>
-              <span className='price-discount'>SAVE {prices.discount_string} </span>
-            </div>;
+            priceHtml = (<div className="price">
+              <span className="price-original">${calculatedPrice.original.toFixed(2)} </span>
+              <span className="price-sale">${calculatedPrice.sale.toFixed(2)} </span>
+              <span className="price-discount">SAVE {prices.discount_string} </span>
+            </div>);
           } else {
-            priceHtml = <div className='price'>${calculatedPrice.original}</div>;
+            priceHtml = <div className="price">${calculatedPrice.original}</div>;
           }
 
           return (
@@ -119,51 +104,50 @@ class CtaPrice extends React.Component {
           );
         })()}
         {(() => {
-          if(isAfterpayEnabled) {
+          if (isAfterpayEnabled) {
             return (
               <div className="afterpay-message">
                 <span>or 4 easy payments of ${afterpayPrice} with</span>
                 <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                <a href="javascript:;" onClick={this.openModal}>info</a>
+                <a onClick={this.openModal}>info</a>
               </div>
             );
           }
+          return null;
         })()}
         {(() => {
-          if(isAddToBagAvailable && !this.state.sending) {
+          if (this.state.sending) {
             return (
-              <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
-                ADD TO BAG
-              </a>
-            );
-          } else if(this.state.sending) {
-            return (
-              <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
+              <a className="btn btn-black btn-loading btn-lrg">
                 <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
               </a>
             );
-          } else {
-            return (
-              <a href="javascript:;" onClick={this.addToBag} className="btn btn-lowlight btn-lrg" disabled="disabled">ADD TO BAG</a>
-            );
           }
+          return (
+            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
+          );
         })()}
         <ul className="est-delivery">
-          <li>Free Shipping</li>
+          <li className="shipping">Free Shipping</li>
           <li>Estimated delivery, {deliveryPeriod}</li>
         </ul>
         {(() => {
           if (this.props.product.cny_delivery_delays) {
-            return(
-              <div className="deliveryNote">We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</div>
+            return (
+              <div className="deliveryNote">We're experiencing a high order volume right now,
+              so it's taking longer than usual to handcraft each made-to-order garment.
+              We'll be back to our normal timeline of 7-10 days soon.
+              </div>
             );
           }
+          return null;
         })()}
         <Modal
           style={MODAL_STYLE}
           className="md"
           isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}>
+          onRequestClose={this.closeModal}
+        >
           <div className="afterpay-modal">
             <div className="row">
               <div className="col-md-12">
@@ -204,14 +188,14 @@ class CtaPrice extends React.Component {
   }
 }
 
-CtaPrice.propTypes = {
+AddToBag.propTypes = {
   customize: PropTypes.object,
   price: PropTypes.string,
   discount: PropTypes.number,
   product: PropTypes.object,
   siteVersion: PropTypes.string,
   flags: PropTypes.object,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -231,4 +215,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CtaPrice);
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(AddToBag);
