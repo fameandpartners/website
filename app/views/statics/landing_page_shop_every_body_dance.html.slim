@@ -295,3 +295,27 @@
                 = link_to current_dress_link
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
+
+javascript:
+  (function ($) {
+
+    $(".custom-video-player-wrapper").click(function () {
+
+      var videoElement = $(this).children("video").get(0),
+          videoControlBtn = $(this).children(".btn-play-pause");
+
+      if (videoElement.paused) {
+        videoElement.play();
+        videoControlBtn.hide();
+      } else {
+        videoElement.pause();
+        videoControlBtn.show();
+      }
+
+      videoElement.onended = function(e) {
+        videoControlBtn.show();
+      }
+
+    });
+
+  })(jQuery);
