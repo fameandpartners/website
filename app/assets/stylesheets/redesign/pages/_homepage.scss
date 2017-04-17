@@ -70,6 +70,13 @@
     padding-top: $box-padding-top;
   }
 
+  .section-style-icon .cta-link-center-padding {
+    display: block;
+    max-width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .title--top-spacing-md {
@@ -91,6 +98,14 @@
     .section-styling .styling-session {
       margin-top: 30px;
       padding-left: 15px;
+    }
+
+    .copy-align--top {
+      margin-top: -250px;
+    }
+
+    .hero-wrap .sub-heading--large {
+      font-size: 2.8rem;
     }
 
   }
@@ -189,6 +204,10 @@
 
     .hero-wrap .heading .title--large {
       font-size: 6rem;
+    }
+
+    .copy-align--top {
+      margin-top: -190px;
     }
 
   }

@@ -289,8 +289,9 @@ function create_test_fixture_dump
   DELETE FROM spree_prices AS sp WHERE sp.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
   DELETE FROM spree_option_values_variants AS sovv WHERE sovv.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
   DELETE FROM product_color_values AS pcv WHERE pcv.product_id != 681;
-  UPDATE spree_sales set is_active = false;
+  UPDATE spree_sales SET is_active = false;
   UPDATE spree_products AS sp SET hidden = false WHERE sp.id = 681;
+  UPDATE spree_products_taxons AS spt SET product_id = 681, taxon_id = st.id FROM spree_taxons AS st WHERE st.permalink = 'style/dress';
   "
 
   ENABLE_FAST_MAKING_SQL="

@@ -212,6 +212,9 @@ FameAndPartners::Application.routes.draw do
     # High Contrast Collection
     get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
 
+    # Shop Every Dance Page
+    get '/shop-every-body-dance' => 'products/collections#show', :permalink => 'shop-every-body-dance', :as => :shop_every_body_dance_collection
+
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
 
@@ -321,7 +324,7 @@ FameAndPartners::Application.routes.draw do
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
 
     scope '/dresses' do
-      root to: 'products/collections#show', as: :dresses
+      root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
 
       # Colors should behave like query strings, and not paths
