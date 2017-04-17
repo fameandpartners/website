@@ -141,7 +141,9 @@ FameAndPartners::Application.routes.draw do
     get '/lp/1512/4/p3' => redirect("/lp/1512/4?text=What%20were%20they%20Thinking?!%20The%208%20Craziest%20Bridesmaids%20Photos.")
     get '/lp/1512/4/p4' => redirect("/lp/1512/4?text=Real-Life%20Bridesmaid%20that%20went%20that%20Step%20too%20Far")
 
-    get '/lookbook' => 'statics#lookbook', :as => :lookbook
+    # Redirect Lookbook page to homepage (due to legal issues)
+    get '/lookbook', to: redirect('/'), :as => :lookbook
+
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
@@ -166,8 +168,6 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
-    get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
-    get '/lookbook/the-freshly-picked-collection' => 'products/collections#show', :permalink => 'cotton-collection', :as => :the_freshly_picked_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -202,11 +202,18 @@ FameAndPartners::Application.routes.draw do
     get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
+    get '/festival' => 'products/collections#show', :permalink => 'festival', :as => :festival_page
 
     # Every BODY Dance Collection
     get '/every-body-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
     # Redirection in case of typo
     get '/everybody-dance', to: redirect('/every-body-dance')
+
+    # High Contrast Collection
+    get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
+
+    # Shop Every Dance Page
+    get '/shop-every-body-dance' => 'products/collections#show', :permalink => 'shop-every-body-dance', :as => :shop_every_body_dance_collection
 
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
@@ -214,20 +221,11 @@ FameAndPartners::Application.routes.draw do
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
-    # IT Girl - Landing page
-    get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
-
-    # Gown Collection - Landing page
-    get '/gown-collection' => 'products/collections#show', :permalink => 'gown-collection', :as => :gown_collection_landing_page
-
     # Cocktail Collection - Landing page
     get '/cocktail-collection' => 'products/collections#show', :permalink => 'cocktail-collection', :as => :cocktail_collection_landing_page
 
     # Spring Racing Collection - Landing page
     get '/spring-racing-collection' => 'products/collections#show', :permalink => 'spring-racing-collection', :as => :spring_racing_collection_landing_page
-
-    # Skirts Collection - Landing page
-    get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
 
     # The Evening Hours Collection - Redirection
     get '/the-evening-hours-collection' => redirect("/dresses/evening"), :as => :evening_hours_collection_landing_page
@@ -249,6 +247,13 @@ FameAndPartners::Application.routes.draw do
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
 
+    # Lookbook pages redirects (due to legal issues)
+    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+    get '/it-girl', to: redirect('/dresses'), as: :it_girl_landing_page
+    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -260,7 +265,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
-    get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
@@ -320,7 +324,7 @@ FameAndPartners::Application.routes.draw do
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
 
     scope '/dresses' do
-      root to: 'products/collections#show', as: :dresses
+      root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
 
       # Colors should behave like query strings, and not paths

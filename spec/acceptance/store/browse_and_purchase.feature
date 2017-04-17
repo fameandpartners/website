@@ -15,22 +15,6 @@ Feature: Browse and Purchase
     And Search for an empty string
     Then I should see "Results for"
 
-  Scenario: List All Lookbooks
-    When I visit the "/lookbook" path
-    # Current Lookbooks
-    Then I should see "Modern Evening"
-    Then I should see "Bespoke Bridal"
-    Then I should see "Pre-Season Evening"
-    Then I should see "INSIDE\OUT"
-    Then I should see "Evening Hours"
-    Then I should see "Skirts"
-    Then I should see "Gowns"
-    # Previous Lookbooks
-    Then I should see "Parties Collection"
-    Then I should see "It Girl Collection"
-    Then I should see "The Freshly Picked Collection"
-    Then I should see "The Ruffled Up Collection"
-
   @javascript
   Scenario: Show Filters on Dresses List
     When I visit the dresses page
