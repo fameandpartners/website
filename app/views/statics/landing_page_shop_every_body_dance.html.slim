@@ -1,6 +1,6 @@
 = render partial: 'pages/robots'
 
-.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll
+.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll.page-everybodydance
 
   .container-fluid
 
@@ -9,12 +9,17 @@
       .local-navigation-wrapper.col-md-2
         .local-navigation-vertical.js-float-vertical-menu-on-scroll
           .nav-wrapper
-            h4.hidden-sm.hidden-xs #everyBODYdance Collection
+            h4.nav-title.hidden-sm.hidden-xs #everyBODYdance Collection
 
-            ul.nav.arrow-when-active
+            ul.nav.nav--no-padding-left.arrow-when-active
               li.link
                 = link_to "#intro"
                   | Introduction
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#barbara-palvin"
+                  | Barbara Palvin
                   i.icon.icon-arrow-right
 
               li.link
@@ -51,19 +56,51 @@
     .row
       section.section-box.intro.intro--no-featured-img.vertical-align-copy#intro
 
-        .col-md-6.col-md-offset-4
+        .col-md-6.col-md-offset-4.no-padding-md
           .content-copy
             h1.no-margin-md #everyBODYdance
 
-            p Girls all over the world–<em>including your favorite celebs</em>–are joining Fame and Partners' #everyBODYdance movement.
-            p It's a celebration of different shapes, sizes, and bodies–because every body is beautiful, and every body deserves a custom-made dress that fits like a dream.
-
-            .cta-wrapper
-              = link_to "#lauren-jauregui"
-                span.btn-md.btn-featured.no-margin
-                 | Explore
+            p Girls all over the world–<em>including your favorite celebs</em>–are joining Fame and Partners' #everyBODYdance movement. It's a celebration of different shapes, sizes, and bodies–because every body is beautiful, and every body deserves a custom-made dress that fits like a dream.
 
     // Section #2
+    - current_dress_name = "URSA DRESS"
+    - current_dress_link = "#{dresses_path}/dress-the-ursa-1337?color=black-and-white"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$369"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$289"
+    .row
+      section.section-box#barbara-palvin
+        .col-md-5.col-md-offset-2
+          .custom-video-player-wrapper
+            video.item-video(name="Barbara Palvin" src="https://player.vimeo.com/external/213558444.sd.mp4?s=fa37945c45f2fbcb253c408484334e04b499ce6c&profile_id=165")
+            .btn-play-pause
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Barbara Palvin", current_dress_link
+
+                p “I teamed up with @teenvogue & @fameandpartners to dance around in my new dress #everyBODYdance”
+
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "Barbara wears: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #3
     - current_dress_name = "MERIDIAN DRESS"
     - current_dress_link = "#{dresses_path}/dress-the-meridian-1362?color=black"
     - if current_site_version.is_australia?
@@ -93,7 +130,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
@@ -101,7 +138,7 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-    // Section #3
+    // Section #4
     - current_dress_name = "PISCES Dress"
     - current_dress_link = "#{dresses_path}/dress-the-pisces-1344?color=black"
     - if current_site_version.is_australia?
@@ -132,7 +169,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
@@ -140,7 +177,7 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-    // Section #4
+    // Section #5
     - current_dress_name = "SUPERNOVA Dress"
     - current_dress_link = "#{dresses_path}/dress-the-supernova-1379?color=silver"
     - if current_site_version.is_australia?
@@ -171,7 +208,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
@@ -179,7 +216,7 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-    // Section #5
+    // Section #6
     - current_dress_name = "Antares Dress"
     - current_dress_link = "#{dresses_path}/dress-the-antares-1339?color=red"
     - if current_site_version.is_australia?
@@ -210,7 +247,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
@@ -218,7 +255,7 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-    // Section #6
+    // Section #7
     - current_dress_name = "Gigi dress"
     - current_dress_link = "#{dresses_path}/dress-gigi-989?color=nude"
     - if current_site_version.is_australia?
@@ -249,7 +286,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
@@ -257,7 +294,7 @@
                   span.btn-md.btn-featured.no-margin
                    | Shop & Customize
 
-    // Section #7
+    // Section #8
     - current_dress_name = "CELESTINE Dress"
     - current_dress_link = "#{dresses_path}/dress-the-celestine-1369?color=black"
     - if current_site_version.is_australia?
@@ -288,7 +325,7 @@
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
 
             .row
               .cta-wrapper.col-md-12
