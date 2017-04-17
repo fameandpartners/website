@@ -157,6 +157,10 @@
       padding: 0 15%;
     }
 
+    .nav--no-padding-left li a {
+      padding-left: 0;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -330,6 +334,14 @@
       font-size: 3.5rem;
     }
 
+  }
+
+}
+
+.page-everybodydance {
+
+  .nav-title {
+    font-size: 2.2rem;
   }
 
 }
