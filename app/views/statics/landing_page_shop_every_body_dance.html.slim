@@ -1,254 +1,359 @@
 = render partial: 'pages/robots'
 
-.page-content.lookbook-v2-page.relative.mobile-text-center
+.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll.page-everybodydance
 
-  // Hero tile
-  .main-hero-wrap.hero-wrap.copy-left.white-text
-    picture.media-wrap
-      source media='(max-width: 991px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner-mobile.jpg")}'
-      source media='(min-width: 992px)' srcset='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}'
-      img src='#{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")}' srcset='
-        #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner-mobile.jpg")} 991w,
-        #{image_path("landingpages/shop-every-body-dance/shop-every-body-banner.jpg")} 992w' alt='Shop'
+  .container-fluid
 
-    .content-middle-wrap
-      .container
-        .row
-          .col-md-6.col-md-offset-3
-            .copy-wrap.text-center
-              h1.heading.no-margin-md.title-highlight
-                | #everyBODYdance
-
-  .container
-    section.section-box.text-center
-      .row
-        .col-xs-10.col-xs-offset-1.col-md-12.col-md-offset-0
-          p Girls all over the world–<em>including your favorite celebs</em>–are joining Fame and Partners' #everyBODYdance movement.<br class="visible-md visible-lg"> It's a celebration of different shapes, sizes, and bodies–because every body is beautiful, and every body deserves a <br class="visible-md visible-lg">custom-made dress that fits like a dream.
-
-  .local-navigation-wrapper.container-fluid
+    // On-page navigation
     .row
-      .local-navigation.js-float-menu-on-scroll
-        .nav-wrapper.col-md-12
-          ul.nav data-slick='{"slidesToShow": 6, "slidesToScroll": 1}'
-            li.link = link_to "Lauren Jauregui", "#lauren-jauregui"
-            li.link = link_to "Jasmine Sanders", "#jasmine-sanders"
-            li.link = link_to "Ashley Moore", "#ashley-moore"
-            li.link = link_to "Gabi Gregg", "#gabi-gregg"
-            li.link = link_to "Nicolette Mason", "#nicolette-mason"
-            li.link = link_to "Barbie Ferreira", "#barbie-ferreira"
+      .local-navigation-wrapper.col-md-2
+        .local-navigation-vertical.js-float-vertical-menu-on-scroll
+          .nav-wrapper
+            h4.nav-title.hidden-sm.hidden-xs #everyBODYdance Collection
 
-  - current_dress_name = "MERIDIAN DRESS"
-  - current_dress_link = "#{dresses_path}/dress-the-meridian-1362?color=black"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$399"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$319"
-  .container
-    section.section-box#lauren-jauregui
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay LAUREN JAUREGUI
+            ul.nav.nav--no-padding-left.arrow-when-active
+              li.link
+                = link_to "#intro"
+                  | Introduction
+                  i.icon.icon-arrow-right
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212988492" style="height: 700px; max-height: 675px; max-width: 100%; width: 100%;" frameborder="0"
+              li.link
+                = link_to "#barbara-palvin"
+                  | Barbara Palvin
+                  i.icon.icon-arrow-right
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay LAUREN JAUREGUI
+              li.link
+                = link_to "#lauren-jauregui"
+                  | Lauren Jauregui
+                  i.icon.icon-arrow-right
 
-            p “Sooo I partnered up with @FameandPartners on a new project to celebrate every body type by showing off my new dress. See all the looks and all the beautiful women wearing them!”
+              li.link
+                = link_to "#jasmine-sanders"
+                  | Jasmine Sanders
+                  i.icon.icon-arrow-right
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "LAUREN WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+              li.link
+                = link_to "#ashley-moore"
+                  | Ashley Moore
+                  i.icon.icon-arrow-right
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+              li.link
+                = link_to "#gabi-gregg"
+                  | Gabi Gregg
+                  i.icon.icon-arrow-right
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+              li.link
+                = link_to "#nicolette-mason"
+                  | Nicolette Mason
+                  i.icon.icon-arrow-right
 
-  - current_dress_name = "PISCES Dress"
-  - current_dress_link = "#{dresses_path}/dress-the-pisces-1344?color=black"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$379"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$299"
-  .container
-    section.section-box#jasmine-sanders
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay JASMINE SANDERS
+              li.link
+                = link_to "#barbie-ferreira"
+                  | Barbie Ferreira
+                  i.icon.icon-arrow-right
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212988482" style="height: 700px; max-height: 675px; max-width: 100%; width: 100%;" frameborder="0"
+    // Section #1 - Intro area
+    .row
+      section.section-box.intro.intro--no-featured-img.vertical-align-copy#intro
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay JASMINE SANDERS
+        .col-md-6.col-md-offset-4.no-padding-md
+          .content-copy
+            h1.no-margin #everyBODYdance
 
-            p “I teamed up with @TeenVogue and @FameandPartners to dance around in my new little black dress #everyBODYdance"
+            p Girls all over the world–<em>including your favorite celebs</em>–are joining Fame and Partners' #everyBODYdance movement. It's a celebration of different shapes, sizes, and bodies–because every body is beautiful, and every body deserves a custom-made dress that fits like a dream.
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "JASMINE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+    // Section #2
+    - current_dress_name = "URSA DRESS"
+    - current_dress_link = "#{dresses_path}/dress-the-ursa-1337?color=black-and-white"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$369"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$289"
+    .row
+      section.section-box#barbara-palvin
+        .col-md-5.col-md-offset-2
+          .custom-video-player-wrapper
+            video.item-video(name="Barbara Palvin" src="https://player.vimeo.com/external/213558444.sd.mp4?s=fa37945c45f2fbcb253c408484334e04b499ce6c&profile_id=165")
+            .btn-play-pause
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Barbara Palvin", current_dress_link
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+                p “I teamed up with @teenvogue & @fameandpartners to dance around in my new dress #everyBODYdance”
 
-  - current_dress_name = "SUPERNOVA Dress"
-  - current_dress_link = "#{dresses_path}/dress-the-supernova-1379?color=silver"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$349"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$279"
-  .container
-    section.section-box#ashley-moore
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay ASHLEY MOORE
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "Barbara wears: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212988466" style="height: 600px; max-height: 598px; max-width: 100%; width: 100%;" frameborder="0"
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay ASHLEY MOORE
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
 
-            p “I knew which dress I wanted to wear right away…the sexy metallic shimmer works for day and night! Fame & Partners is all about giving back…$5 of every sale funds women’s empowerment charities around the world. Truly something to celebrate! #everyBODYdance”
+    // Section #3
+    - current_dress_name = "MERIDIAN DRESS"
+    - current_dress_link = "#{dresses_path}/dress-the-meridian-1362?color=black"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$399"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$319"
+    .row
+      section.section-box#lauren-jauregui
+        .col-md-5.col-md-offset-2
+          .custom-video-player-wrapper
+            video.item-video(name="Lauren Jauregui" src="https://player.vimeo.com/external/212988492.sd.mp4?s=b3359d5287b837207060acb99a2b4aa6752b5c87&profile_id=165")
+            .btn-play-pause
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "ASHLEY WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Lauren Jauregui", current_dress_link
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+                p “Sooo I partnered up with @FameandPartners on a new project to celebrate every body type by showing off my new dress. See all the looks and all the beautiful women wearing them!”
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "Lauren wears: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
 
-  - current_dress_name = "Antares Dress"
-  - current_dress_link = "#{dresses_path}/dress-the-antares-1339?color=red"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$389"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$309"
-  .container
-    section.section-box#gabi-gregg
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay GABI GREGG
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212989097" style="height: 500px; max-height: 499px; max-width: 100%; width: 100%;" frameborder="0"
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay GABI GREGG
+    // Section #4
+    - current_dress_name = "PISCES Dress"
+    - current_dress_link = "#{dresses_path}/dress-the-pisces-1344?color=black"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$379"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$299"
 
-            p “I teamed up with @teenvogue and @fameandpartners to celebrate every body type by dancing around the house in my new dress! #everyBODYdance”
+    .row
+      section.section-box#jasmine-sanders
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          .custom-video-player-wrapper
+            video.item-video(name="Jasmine Sanders" src="https://player.vimeo.com/external/212988482.sd.mp4?s=83783e6edf3bdf7308007b0529dfa0cda7e39b56&profile_id=165")
+            .btn-play-pause
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "GABI WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Jasmine Sanders", current_dress_link
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+                p “I teamed up with @TeenVogue and @FameandPartners to dance around in my new little black dress #everyBODYdance"
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "JASMINE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
 
-  - current_dress_name = "Gigi dress"
-  - current_dress_link = "#{dresses_path}/dress-gigi-989?color=nude"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$339"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$259"
-  .container
-    section.section-box#nicolette-mason
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay NICOLETTE MASON
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212988501" style="height: 700px; max-height: 675px; max-width: 100%; width: 100%;" frameborder="0"
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay NICOLETTE MASON
+    // Section #5
+    - current_dress_name = "SUPERNOVA Dress"
+    - current_dress_link = "#{dresses_path}/dress-the-supernova-1379?color=silver"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$349"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$279"
 
-            p “Twirling around in this sequin and tulle @fameandpartners number and thinking about how I wish the size-inclusive wardrobe options of today existed when I was younger, but damn am I happy I get to enjoy them now!”
+    .row
+      section.section-box#ashley-moore
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          .custom-video-player-wrapper
+            video.item-video(name="Ashley Moore" src="https://player.vimeo.com/external/212988466.sd.mp4?s=2109291c4d2fed439cda0122ac1d72bdb653fba8&profile_id=165")
+            .btn-play-pause
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "NICOLETTE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Ashley Moore", current_dress_link
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+                p “I knew which dress I wanted to wear right away…the sexy metallic shimmer works for day and night! Fame & Partners is all about giving back…$5 of every sale funds women’s empowerment charities around the world. Truly something to celebrate! #everyBODYdance”
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "ASHLEY WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
 
-  - current_dress_name = "CELESTINE Dress"
-  - current_dress_link = "#{dresses_path}/dress-the-celestine-1369?color=black"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_price = "$419"
-  - else
-    // USA - PRICE
-    - current_dress_price = "$329"
-  .container
-    section.section-box#barbie-ferreira
-      .row.vertical-align-row
-        .col-xs-12.heading-overlay-wrapper.hidden-md.hidden-lg
-          h1.heading-overlay Barbie Ferreira
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
 
-        .col-md-4.col-md-offset-2.no-padding
-          iframe src="https://player.vimeo.com/video/212988473" style="height: 700px; max-height: 675px; max-width: 100%; width: 100%;" frameborder="0"
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
 
-        .col-md-4.copy-padding-item.vertical-align
-          .copy-wrap
-            .heading-overlay-wrapper.is-bordered.heading-overlay-wrapper--alignLeft.hidden-xs.hidden-sm
-              .heading-overlay Barbie Ferreira
+    // Section #6
+    - current_dress_name = "Antares Dress"
+    - current_dress_link = "#{dresses_path}/dress-the-antares-1339?color=red"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$389"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$309"
 
-            p "Anyone who's curvier knows the struggle to find young, cute dresses in their size so I think this is a great company for all tha girls out there feeling a lil lost on their prom shopping spree.”
+    .row
+      section.section-box#gabi-gregg
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          .custom-video-player-wrapper
+            video.item-video(name="Gabi Gregg" src="https://player.vimeo.com/external/212989097.sd.mp4?s=ae88895d1bb4dee1f9f1b78165a5cbdeefa122f8&profile_id=165")
+            .btn-play-pause
 
-            .cta-product-caption.copy-highlight
-              .product-info = link_to "BARBIE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Gabi Gregg", current_dress_link
 
-            .cta-wrapper.visible-xs.visible-sm.visible-md.visible-lg
-              = link_to current_dress_link
-                span.btn-md.btn-featured Shop & customize
+                p “I teamed up with @teenvogue and @fameandpartners to celebrate every body type by dancing around the house in my new dress! #everyBODYdance”
 
-  .products-grid.products-collections
-    .container
-      .row.products-set.js-products-collection-wrap.products-set--border-bottom
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-3 col-xs-6'}
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "GABI WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #7
+    - current_dress_name = "Gigi dress"
+    - current_dress_link = "#{dresses_path}/dress-gigi-989?color=nude"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$339"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$259"
+
+    .row
+      section.section-box#nicolette-mason
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          .custom-video-player-wrapper
+            video.item-video(name="Nicolette Mason" src="https://player.vimeo.com/external/212988501.sd.mp4?s=02ac05719be624a375eed5bc3d7c600f5f99082f&profile_id=165")
+            .btn-play-pause
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Nicolette Mason", current_dress_link
+
+                p “Twirling around in this sequin and tulle @fameandpartners number and thinking about how I wish the size-inclusive wardrobe options of today existed when I was younger, but damn am I happy I get to enjoy them now!”
+
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "NICOLETTE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #8
+    - current_dress_name = "CELESTINE Dress"
+    - current_dress_link = "#{dresses_path}/dress-the-celestine-1369?color=black"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$419"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$329"
+
+    .row
+      section.section-box#barbie-ferreira
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          .custom-video-player-wrapper
+            video.item-video(name="Barbie Ferreira" src="https://player.vimeo.com/external/212988473.sd.mp4?s=761d5ae4b38aeec2ce1dc0cc4cc3879fb2a47113&profile_id=165")
+            .btn-play-pause
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Barbie Ferreira", current_dress_link
+
+                p "Anyone who's curvier knows the struggle to find young, cute dresses in their size so I think this is a great company for all tha girls out there feeling a lil lost on their prom shopping spree.”
+
+                .cta-product-caption.copy-highlight
+                  .product-info = link_to "BARBIE WEARS: The #{current_dress_name} #{current_dress_price}", current_dress_link, class: "link-no-underline"
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_dress_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+- content_for :body_end do
+  javascript:
+    (function ($) {
+
+      $(".custom-video-player-wrapper").click(function () {
+
+        var videoElement = $(this).children("video").get(0),
+            videoControlBtn = $(this).children(".btn-play-pause");
+
+        if (videoElement.paused) {
+          videoElement.play();
+          videoControlBtn.hide();
+        } else {
+          videoElement.pause();
+          videoControlBtn.show();
+        }
+
+        videoElement.onended = function(e) {
+          videoControlBtn.show();
+        }
+
+      });
+
+    })(jQuery);
