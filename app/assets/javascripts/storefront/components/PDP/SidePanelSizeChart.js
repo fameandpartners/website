@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
-import {MODAL_STYLE} from './utils';
+import { MODAL_STYLE } from './utils';
 import SizeChartCell from './SizeChartCell';
 
 class SidePanelSizeChart extends React.Component {
@@ -12,8 +12,8 @@ class SidePanelSizeChart extends React.Component {
     this.state = {
       active: false,
       modalIsOpen: false,
-      imchesIsActive: true,
-      cmIsActive: false
+      inchesIsActive: true,
+      cmIsActive: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -23,39 +23,40 @@ class SidePanelSizeChart extends React.Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
 
   showCm() {
     this.setState({
-      imchesIsActive: false,
-      cmIsActive: true
+      inchesIsActive: false,
+      cmIsActive: true,
     });
   }
 
   showInches() {
     this.setState({
-      imchesIsActive: true,
-      cmIsActive: false
+      inchesIsActive: true,
+      cmIsActive: false,
     });
   }
 
   render() {
-    const INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
+    const INCHES_IS_ACTIVE = this.state.inchesIsActive ? 'is-active' : '';
     const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
 
     return (
       <div className="chart-wrap">
-        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>View size guide</a>
+        <a className="chart-wrap-trigger textAlign--left" onClick={this.openModal}>View size guide</a>
 
         <Modal
           style={MODAL_STYLE}
           isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}>
+          onRequestClose={this.closeModal}
+        >
           <div className="pdp-sizeguide">
             <div className="row">
               <div className="col-md-12">
@@ -65,8 +66,10 @@ class SidePanelSizeChart extends React.Component {
                 <Tabs>
                   <Tabs.Panel title="Where to measure">
                     <div className="media-wrap">
-                      <img src="/assets/_pdp/tile-how-to-measure.jpg"
-                        alt="Where to measure - Bust, Underbust, Waist, Hips" />
+                      <img
+                        src="/assets/_pdp/tile-how-to-measure.jpg"
+                        alt="Where to measure - Bust, Underbust, Waist, Hips"
+                      />
                     </div>
                   </Tabs.Panel>
                   <Tabs.Panel title="Measuring tips">
@@ -96,12 +99,16 @@ class SidePanelSizeChart extends React.Component {
                       <th colSpan="4">
                         Measurements
                         <span className="toggle-controls">
-                          <a href="javascript:;"
-                            className={"toggle-selector " + INCHES_IS_ACTIVE}
-                            onClick={this.showInches}>inches</a>
-                          <a href="javascript:;"
-                            className={"toggle-selector " + CM_IS_ACTIVE}
-                            onClick={this.showCm}>cm</a>
+                          <a
+                            href="javascript:;"
+                            className={`toggle-selector ${INCHES_IS_ACTIVE}`}
+                            onClick={this.showInches}
+                          >inches</a>
+                          <a
+                            href="javascript:;"
+                            className={`toggle-selector ${CM_IS_ACTIVE}`}
+                            onClick={this.showCm}
+                          >cm</a>
                         </span>
                       </th>
                     </tr>
@@ -116,8 +123,8 @@ class SidePanelSizeChart extends React.Component {
                   </thead>
                   <tbody>
                     {this.props.sizeChart.map((row, index) => {
-                      let dataArray = new Array;
-                      for(let obj in row) {
+                      const dataArray = new Array();
+                      for (const obj in row) {
                         dataArray.push(row[obj]);
                       }
                       return (
@@ -132,8 +139,8 @@ class SidePanelSizeChart extends React.Component {
                       );
                     })}
                     {this.props.sizeChart.map((row, index) => {
-                      let dataArray = new Array;
-                      for(let obj in row) {
+                      const dataArray = new Array();
+                      for (const obj in row) {
                         dataArray.push(row[obj]);
                       }
                       return (
@@ -163,13 +170,13 @@ class SidePanelSizeChart extends React.Component {
 
 SidePanelSizeChart.propTypes = {
   sizeChart: PropTypes.array.isRequired,
-  sizeChartVersion: PropTypes.string.isRequired
+  sizeChartVersion: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     sizeChart: state.sizeChart,
-    sizeChartVersion: state.product.size_chart
+    sizeChartVersion: state.product.size_chart,
   };
 }
 

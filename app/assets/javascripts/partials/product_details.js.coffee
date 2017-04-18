@@ -9,12 +9,14 @@ page.initProductDetailsPage = (options = {}) ->
 
     $this = $(this)
 
+    # Really really bad and CRINGEWORTHY, TODO: REFACTOR
     product_data = {
       size_id:            parseNumber($this.find('#pdpCartSizeId').val()),
       color_id:           parseNumber($this.find('#pdpCartColorId').val()),
       variant_id:         parseNumber($this.find('#pdpCartVariantId').val()),
       making_options_ids: parseNumber($this.find('#pdpCartMakingId').val()),
-      height:             $this.find('#pdpCartLength').val(),
+      height_value:       parseNumber($this.find('#pdpCartHeight').val()),
+      height_unit:        $this.find('#pdpCartHeightUnit').val(),
       customizations_ids: parseNumber($this.find('#pdpCartCustomId').val()),
       dress_variant_id:   parseNumber($this.find('#pdpCartDressVariantId').val())
     }

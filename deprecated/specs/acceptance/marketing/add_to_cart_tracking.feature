@@ -11,7 +11,8 @@ Feature: Add to Cart Tracking
   Scenario: Buy a Dress
     When I am on Connie dress page
     And I select "US 2" size
-    And I select "Petite" skirt length
+    And I select "58" inch height
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button

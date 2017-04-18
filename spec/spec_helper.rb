@@ -40,6 +40,11 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
+
+  # Max height max width
+  config.before(:each, js: true) do
+     Capybara.page.driver.browser.resize(2000,1400)
+  end
 end
 
 # TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912
