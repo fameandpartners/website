@@ -450,7 +450,7 @@ class CollectionFilterSort extends Component {
                           )}
                         />
 
-                        {/* Removing Style Filters Temporarily */}
+                        {/* TODO: URGENT Add Style Expandable Filter Back. */}
 
                         <ExpandablePanelItem
                           openedByDefault={!!filters.selectedShapes.length}
@@ -553,6 +553,7 @@ CollectionFilterSort.propTypes = {
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
 
+// TODO: URGENT Add Style Expandable Filter Back.
 // ***** Rare occasion in which Commented out code is OK
 // <ExpandablePanelItem
 //   openedByDefault={!!filters.selectedStyles.length}
