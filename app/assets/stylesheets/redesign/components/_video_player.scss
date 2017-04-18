@@ -7,7 +7,11 @@
   cursor: pointer;
 
   video {
+    height: auto;
+    min-height: 100%;
     width: 100%;
+    min-width: 100%;
+    object-fit: contain;
   }
 
   .btn-play-pause {
