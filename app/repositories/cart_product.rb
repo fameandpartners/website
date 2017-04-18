@@ -20,6 +20,11 @@ class Repositories::CartProduct
     @cart_product ||= begin
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
+        color: Repositories::ProductColors.read(color_id),
+        customizations: product_customizations.to_a,
+        making_options: product_making_options,
+        height: height,
+        height_value: line_item.personalization.height_value,
         name: product.name,
         sku: product.sku,
         permalink: product.permalink,
@@ -37,13 +42,9 @@ class Repositories::CartProduct
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: product.delivery_period,
-        from_wedding_atelier: wedding_atelier_product?
+        from_wedding_atelier: wedding_atelier_product?,
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
-      result.color  = Repositories::ProductColors.read(color_id)
-      result.customizations = product_customizations.to_a
-      result.making_options = product_making_options
-      result.height         = height
 
       result
     end
@@ -92,8 +93,21 @@ class Repositories::CartProduct
       end
     end
 
+    def convert_height_units(height_value, height_unit)
+      if (height_unit == 'inch')
+        "#{height_value.to_i / 12}ft #{height_value.to_i % 12}in"
+      else
+        "#{height_value}cm"
+      end
+    end
+
     def height
-      if customized_product?
+      height_value = line_item.personalization.height_value
+      height_unit = line_item.personalization.height_unit
+
+      if height_value && height_unit
+        convert_height_units(height_value, height_unit)
+      elsif customized_product?
         line_item.personalization.height.presence.to_s.titleize
       else
         LineItemPersonalization::DEFAULT_HEIGHT.titleize
