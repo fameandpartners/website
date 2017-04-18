@@ -86,7 +86,7 @@ class SidePanelCustom extends SidePanel {
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Select your customization</h2>
-              <div className="row">{customs}</div>
+              <div>{customs}</div>
             </div>
           </Scrollbars>
         </div>
