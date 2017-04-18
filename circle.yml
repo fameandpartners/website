@@ -14,6 +14,7 @@ dependencies:
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
     - gem list bundler -i || gem install bundler
     - bundle config without test
+    - bundle check --path=vendor/cache || bundle install --path=vendor/cache --jobs=4 --retry=3
 
 
 checkout:
