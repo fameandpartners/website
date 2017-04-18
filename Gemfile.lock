@@ -552,9 +552,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    knapsack (1.13.3)
-      rake
-      timecop (>= 0.1.0)
     koala (2.3.0)
       addressable
       faraday
@@ -932,7 +929,6 @@ DEPENDENCIES
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
   jquery-ui-rails
-  knapsack
   koala
   letter_opener (~> 1.4.1)
   mailchimp-api

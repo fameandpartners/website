@@ -37,8 +37,5 @@ general:
 
 test:
   override:
-    - bundle exec rspec spec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml:
-    # - bundle exec rake knapsack:rspec spec engines:
-    #     parallel: true
-    # - case $CIRCLE_NODE_INDEX in 0) bundle exec rspec spec --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; 1) bundle exec rspec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; esac:
-        # parallel: true
+    - case $CIRCLE_NODE_INDEX in 0) bundle exec rspec spec --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; 1) bundle exec rspec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; esac:
+        parallel: true
