@@ -125,21 +125,15 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_refund' do
-    #let(:pin_payment) { double(:pin_payment) }
-    #let(:created_at) { Time.parse('2016-05-01').utc.to_s }
-    #let(:refund_response) { double(:response, success?: true, params: { 'response' => { 'token' => 'response_token', 'created_at' => created_at } }) }
 
     before do
-      #allow(Spree::Gateway::Pin).to receive(:where).and_return([pin_payment])
       creation_event
-      #allow_any_instance_of(ItemReturn).to receive(:order_payment_ref).and_return('order_payment_ref')
     end
 
     it "notifies user with customer.io" do
       promise = double(:promise)
       expect(RefundMailer).to receive(:notify_user).and_return(promise)
       expect(promise).to receive(:deliver)
-      #allow(pin_payment).to receive(:refund).and_return(refund_response)
 
       created_item_return.events.refund.create!({refund_method: 'Pin', refund_amount: 40, user: user})
     end
