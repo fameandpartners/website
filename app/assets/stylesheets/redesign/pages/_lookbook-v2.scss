@@ -149,14 +149,6 @@
       position: absolute;
     }
 
-    .custom-video-player-wrapper {
-      margin: 0 auto;
-    }
-
-    video {
-      padding: 0 15%;
-    }
-
     .nav--no-padding-left li a {
       padding-left: 0;
     }
@@ -352,6 +344,7 @@
 
 .custom-video-player-wrapper {
   padding: 0 15%;
+  margin: 0 auto;
 
   iframe {
     max-width: 100%;
