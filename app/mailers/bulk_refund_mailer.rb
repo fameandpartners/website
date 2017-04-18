@@ -1,6 +1,6 @@
 class BulkRefundMailer < ActionMailer::Base
   def report(results)
-    email = ''
+    email = 'finance@fameandpartners.com'
     subject = 'Bulk refund report'
 
     Marketing::CustomerIOEventTracker.new.track(
