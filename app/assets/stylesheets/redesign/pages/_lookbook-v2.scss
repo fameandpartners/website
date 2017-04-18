@@ -349,3 +349,13 @@
   }
 
 }
+
+.custom-video-player-wrapper {
+  padding: 0 15%;
+
+  iframe {
+    max-width: 100%;
+    border: 0;
+  }
+
+}
