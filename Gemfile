@@ -129,6 +129,7 @@ group :development do
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'pry-byebug'
 end
 
 group :test do
