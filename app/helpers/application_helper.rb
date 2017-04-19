@@ -198,7 +198,7 @@ module ApplicationHelper
   end
 
   def height_title(personalization)
-    personalization.height_value ? 'Height' : 'Skirt Length'
+    personalization.nil? || personalization.height_value ? 'Height' : 'Skirt Length'
   end
 
   def display_height(height_value, height_unit, height)
