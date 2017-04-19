@@ -134,7 +134,7 @@ class SidePanelColor extends SidePanel {
               </h2>
               <div className={previewColor} />
               <h3 className="h5 heading-secondary">Fame Recommends</h3>
-              <div>{defaultColors}</div>
+              <div className="clearfix">{defaultColors}</div>
               {(() => {
                 if (customColors.length) {
                   return (
@@ -142,7 +142,7 @@ class SidePanelColor extends SidePanel {
                       <h3 className="h5 heading-secondary">
                         Additional Colors&nbsp; +${parseFloat(props.customColorPrice)}
                       </h3>
-                      <div className="row">{customColors}</div>
+                      <div className="clearfix">{customColors}</div>
                     </div>
                   );
                 }
