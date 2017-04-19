@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe ItemReturnCalculator do
   before(:each) do
     @user  = FactoryGirl.create(:spree_user)
-    @order = FactoryGirl.create(:complete_order_with_items, id: 67, user_id: @user.id)
+    @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)
 
     shipment = FactoryGirl.build(:simple_shipment, order: @order)
     FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
@@ -148,7 +148,7 @@ RSpec.describe ItemReturnCalculator do
         expect(created_item_return.refunded_at.utc.strftime('%Y-%m-%d %H:%M:%S UTC')).to eq(created_at)
     end
 
-    xit "notifies user with customer.io" do
+    it "notifies user with customer.io" do
       promise = double(:promise)
       expect(RefundMailer).to receive(:notify_user).and_return(promise)
       expect(promise).to receive(:deliver)
