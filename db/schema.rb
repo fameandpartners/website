@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20170418210655) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
+    t.string   "point_of_view"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -717,6 +718,7 @@ ActiveRecord::Schema.define(:version => 20170418210655) do
     t.string  "option_type"
     t.decimal "price",                     :precision => 10, :scale => 2
     t.string  "currency",    :limit => 10
+    t.integer "discount"
   end
 
   add_index "product_making_options", ["product_id", "active", "option_type"], :name => "index_product_making_options_on_product_id"

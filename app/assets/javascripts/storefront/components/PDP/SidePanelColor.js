@@ -134,7 +134,7 @@ class SidePanelColor extends SidePanel {
               </h2>
               <div className={previewColor} />
               <h3 className="h5 heading-secondary">Fame Recommends</h3>
-              <div className="row">{defaultColors}</div>
+              <div>{defaultColors}</div>
               {(() => {
                 if (customColors.length) {
                   return (
