@@ -189,4 +189,23 @@ module ApplicationHelper
     flash_classes.fetch(flash_type, flash_type.to_s)
   end
 
+  def convert_height_units(height_value, height_unit)
+    if (height_unit == 'inch')
+      "#{height_value.to_i / 12}ft #{height_value.to_i % 12}in"
+    else
+      "#{height_value}cm"
+    end
+  end
+
+  def height_title(personalization)
+    personalization.height_value ? 'Height' : 'Skirt Length'
+  end
+
+  def display_height(height_value, height_unit, height)
+    if height_value && height_unit
+      convert_height_units(height_value, height_unit)
+    else
+      height
+    end
+  end
 end

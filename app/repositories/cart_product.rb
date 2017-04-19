@@ -25,6 +25,7 @@ class Repositories::CartProduct
         making_options: product_making_options,
         height: height,
         height_value: line_item.personalization&.height_value,
+        height_unit: line_item.personalization&.height_unit,
         name: product.name,
         sku: product.sku,
         permalink: product.permalink,
@@ -93,21 +94,8 @@ class Repositories::CartProduct
       end
     end
 
-    def convert_height_units(height_value, height_unit)
-      if (height_unit == 'inch')
-        "#{height_value.to_i / 12}ft #{height_value.to_i % 12}in"
-      else
-        "#{height_value}cm"
-      end
-    end
-
     def height
-      height_value = line_item.personalization&.height_value
-      height_unit = line_item.personalization&.height_unit
-
-      if height_value && height_unit
-        convert_height_units(height_value, height_unit)
-      elsif customized_product?
+      if customized_product?
         line_item.personalization.height.presence.to_s.titleize
       else
         LineItemPersonalization::DEFAULT_HEIGHT.titleize
