@@ -13,7 +13,7 @@ module.exports = {
       mainJS: {
         'App': './app/assets/javascripts/storefront/App.js',
         'SlayItForwardApp': './app/assets/javascripts/storefront/startup/SlayItForwardApp.jsx',
-        'CollectionFilterSortApp': './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx',
+        'CollectionComponentsApp': './app/assets/javascripts/storefront/startup/CollectionComponentsApp.jsx',
       },
     },
     src: baseDir + '/*.jsx',
