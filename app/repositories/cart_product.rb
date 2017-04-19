@@ -24,7 +24,7 @@ class Repositories::CartProduct
         customizations: product_customizations.to_a,
         making_options: product_making_options,
         height: height,
-        height_value: line_item.personalization.height_value,
+        height_value: line_item.personalization&.height_value,
         name: product.name,
         sku: product.sku,
         permalink: product.permalink,
@@ -102,8 +102,8 @@ class Repositories::CartProduct
     end
 
     def height
-      height_value = line_item.personalization.height_value
-      height_unit = line_item.personalization.height_unit
+      height_value = line_item.personalization&.height_value
+      height_unit = line_item.personalization&.height_unit
 
       if height_value && height_unit
         convert_height_units(height_value, height_unit)
