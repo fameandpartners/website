@@ -107,9 +107,12 @@ class Populator
         item['color'] = product_color.color_name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
+
         if product_attributes[:height].present?
           item.height = product_attributes[:height]
         else
+          item.height_value = product_attributes[:height_value]
+          item.height_unit = product_attributes[:height_unit]          
           item.height = StyleToProductHeightRangeGroup.map_height_values_to_height_name( product_variant, product_attributes[:height_value], product_attributes[:height_unit] ) 
         end
       end

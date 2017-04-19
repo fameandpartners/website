@@ -133,14 +133,14 @@ class SidePanelColor extends SidePanel {
                 <span> {props.customize.color.presentation}</span>
               </h2>
               <div className={previewColor} />
-              <h3 className="h5 heading-secondary">Recommended Colors</h3>
+              <h3 className="h5 heading-secondary">Fame Recommends</h3>
               <div className="row">{defaultColors}</div>
               {(() => {
                 if (customColors.length) {
                   return (
                     <div>
                       <h3 className="h5 heading-secondary">
-                        Custom Colors&nbsp;&nbsp; +${parseFloat(props.customColorPrice)}
+                        Additional Colors&nbsp; +${parseFloat(props.customColorPrice)}
                       </h3>
                       <div className="row">{customColors}</div>
                     </div>

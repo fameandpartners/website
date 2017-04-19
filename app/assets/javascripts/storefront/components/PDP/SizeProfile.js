@@ -235,6 +235,22 @@ class SidePanelSize extends Component {
   }
 
   /**
+   * Generates the inches options for the Select dropdown
+   * @return {Object} options
+   */
+  generateErrorMessage({ height, size }) {
+    if (height || size) {
+      if (!height) {
+        return 'Select a size';
+      } else if (!size) {
+        return 'Enter a valid height';
+      }
+      return 'Enter a valid height and select a size';
+    }
+    return null;
+  }
+
+  /**
    * Creates a readable string for size summary based on units
    * @param  {Number} heightValue
    * @param  {String} heightUnit {CM|INCH}
@@ -373,6 +389,13 @@ class SidePanelSize extends Component {
             <h4>What's your size?</h4>
             <div className="size-row">{SIZES}</div>
             <SidePanelSizeChart />
+            <div className="error-filler-height">
+              {errors.height || errors.size ?
+                <div className="error-wrap">
+                  <span className="error-message">{this.generateErrorMessage(errors)}</span>
+                </div> : null
+              }
+            </div>
             <div className="btn-wrap">
               <div onClick={this.handleSizeProfileApply} className="btn btn-black btn-lrg">
                 Save {addToBagPending ? 'and Add To Bag' : ''}

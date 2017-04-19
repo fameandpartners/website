@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170417213117) do
+ActiveRecord::Schema.define(:version => 20170418210655) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -153,7 +153,6 @@ ActiveRecord::Schema.define(:version => 20170417213117) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
-    t.string   "point_of_view"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -385,6 +384,8 @@ ActiveRecord::Schema.define(:version => 20170417213117) do
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
     t.string   "height",                                                :default => "standard"
+    t.string   "height_value"
+    t.string   "height_unit"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
@@ -716,7 +717,6 @@ ActiveRecord::Schema.define(:version => 20170417213117) do
     t.string  "option_type"
     t.decimal "price",                     :precision => 10, :scale => 2
     t.string  "currency",    :limit => 10
-    t.integer "discount"
   end
 
   add_index "product_making_options", ["product_id", "active", "option_type"], :name => "index_product_making_options_on_product_id"

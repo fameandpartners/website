@@ -48,6 +48,22 @@
     font-size: 1.3rem;
     padding-bottom: 30px;
   }
+  .size-selection {
+    .error-filler-height {
+      min-height: 47px;
+      margin-bottom: 20px;
+    }
+    .error-wrap {
+      border: 1px solid $c-brand-red;
+      background: #FBE7E7;
+      text-align: center;
+      padding: 10px;
+    }
+    .error-message {
+      color: $c-brand-red;
+      text-align: center;
+    }
+  }
   .select-container {
     min-width: 46%;
     margin-right: 8px;
