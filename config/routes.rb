@@ -288,6 +288,9 @@ FameAndPartners::Application.routes.draw do
     # Casual Category Page
     get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
 
+    # Spring Weddings Collection Page
+    get '/dresses/spring-weddings' => 'products/collections#show', :permalink => 'spring-weddings', :as => :spring_weddings_collection_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
