@@ -1,11 +1,15 @@
+require 'elasticsearch/model'
+
 module Overrides
   module Spree
     module Product
       extend ActiveSupport::Concern
 
       included do
-        include Tire::Model::Search
-        include Tire::Model::Callbacks
+        # include Tire::Model::Search
+        # include Tire::Model::Callbacks
+        include Elastic::Model
+
 
         has_one :style_profile,
                 :class_name => '::ProductStyleProfile',
@@ -144,7 +148,7 @@ module Overrides
             sort do
               by ({
                 :_script => {
-                  script: %q{    
+                  script: %q{
                     intersection_size = 0;
 
                     if ( doc.containsKey('taxon_ids') ) {
