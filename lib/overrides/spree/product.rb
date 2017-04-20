@@ -6,9 +6,9 @@ module Overrides
       extend ActiveSupport::Concern
 
       included do
-        # include Tire::Model::Search
-        # include Tire::Model::Callbacks
-        include Elastic::Model
+        include Tire::Model::Search
+        include Tire::Model::Callbacks
+        # include Elastic::Model
 
 
         has_one :style_profile,
