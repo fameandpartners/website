@@ -1,4 +1,12 @@
 import { assign } from 'lodash';
+
+export function addonsReducer(state = { empty: true }, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
 export function customizeReducer(state = {}, action) {
   switch (action.type) {
     case 'CUSTOMIZE_DRESS':

@@ -26,7 +26,27 @@ ruby:
       images: #{raw @product.all_images.to_json},
       sizeChart: #{raw @product.size_chart_data.to_json},
       siteVersion: #{raw @current_site_version.name.to_json},
-      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} }
+      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
+      addons: {
+        // 1013 is the fake ID of the dress
+        "bases": [ // In order of specificity (top down)
+          "#{asset_path('cad_customize/sample/1013-base-2-3.png')}",
+          "#{asset_path('cad_customize/sample/1013-base-1.png')}",
+          "#{asset_path('cad_customize/sample/1013-base.png')}"
+        ],
+        addons: [ // In order of specificity (top down)
+          "#{asset_path('cad_customize/sample/1013-addons-0.png')}",
+          "#{asset_path('cad_customize/sample/1013-addons-1.png')}",
+          "#{asset_path('cad_customize/sample/1013-addons-2.png')}"
+        ],
+        // Future proofing Conflicts, checkbox can remove other checks on indexes
+        // "conflicts": {
+          // 3: [0, 1],
+          // 1: [1],
+          // 0: [3]
+        // Also, potentially we can add an optional regex provided by the backend to explain the structure of the image names… And I can parse the important substring aka 34, 1, 0, etc however the backend tells me too. This would ensure more flexibility to change
+        //"regex": "/\[0-9]-[a-zA-z]-[optional-substring-numberdashes]/g"
+      }
     };
 
 = content_for :inline_javascript do

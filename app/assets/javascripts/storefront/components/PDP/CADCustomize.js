@@ -84,12 +84,12 @@ class CADCustomize extends Component {
 
     return (
       <div className="pdp-side-container pdp-side-container-custom">
-        <a
+        <div
           className={selectedClass}
           onClick={this.openMenu}
         >
           {this.generateAddonsSummary()}
-        </a>
+        </div>
 
         <div className={menuClass}>
           <div className="text-right">
