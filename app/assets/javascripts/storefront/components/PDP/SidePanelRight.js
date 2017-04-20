@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SizeProfile from './SizeProfile';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
+import CADCustomize from './CADCustomize';
 import SidePanelFastMaking from './SidePanelFastMaking';
 import AddToBag from './AddToBag';
 
@@ -17,6 +18,7 @@ class PdpSidePanelRight extends Component {
   }
 
   render() {
+    const CAD_STYLES = true;
     if (this.props.product.is_active) {
       return (
         <div className="panel-side-container">
@@ -24,7 +26,10 @@ class PdpSidePanelRight extends Component {
             <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
               <SidePanelColor />
-              {this.props.skirts.length ? <SidePanelCustom /> : null}
+              {
+                CAD_STYLES ? <CADCustomize /> :
+                this.props.skirts.length ? <SidePanelCustom /> : null
+              }
               <SizeProfile addToBagCallback={this.handleAddToBag} />
 
             </div>
