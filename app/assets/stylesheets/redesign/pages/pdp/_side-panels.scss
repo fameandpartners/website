@@ -38,19 +38,18 @@
     text-align: center;
   }
 
-  .row {
-    margin-left: -2%;
-    margin-right: -2%;
+  .size-row {
+    margin: 0 -2% -2% -2%;
   }
 
   .chart-wrap-trigger {
-    display: block;
-    text-align: center;
+    display: inline-block;
     text-decoration: underline;
   }
 
   .chart-wrap {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     .inner-wrap {
       margin-top: 10px;
@@ -91,6 +90,11 @@
       padding: 12px 2px;
       font-size: 0.75em;
       font-weight: 500;
+      @include transition(300ms border-color);
+
+      &.has-error {
+        border-color: $form_error;
+      }
     }
 
   }
