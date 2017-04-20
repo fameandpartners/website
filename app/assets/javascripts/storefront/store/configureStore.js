@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
+  console.log('initialState', initialState);
   const siteVersion = initialState.siteVersion.toLowerCase();
   initialState = assign({}, initialState,
     {
@@ -114,6 +115,21 @@ export default function configureStore(initialState) {
         },
       },
     },
+    // Unfortunately, old code does not take into account the concept of hydration,
+    // which does not work great on deep nesting. The ugly code below is a workaround
+    // to allow a computed property to be added to a state tree
+    initialState.addons.empty ? {} :
+    { addons: assign({}, initialState.addons, {
+      addonsBasesComputed: initialState.addons.bases.map((base) => {
+        const filename = base.substring(base.lastIndexOf('/') + 1);
+        // [ID]-base-?-?
+        const rgxp = /base-(.*)/g;
+        const match = rgxp.exec(filename);
+        console.log('filename', filename);
+        console.log('match', match);
+        return filename;
+      }),
+    }) },
   );
 
   if (process.env.NODE_ENV === 'development') {

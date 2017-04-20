@@ -10,7 +10,7 @@ import {
   addonsReducer,
   customizeReducer,
   siteVersionReducer,
-  flagsReducer
+  flagsReducer,
 } from './pdpReducers';
 
 import SlayItForwardReducer from './SlayItForwardReducer';
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   customize: customizeReducer,
   siteVersion: siteVersionReducer,
   flags: flagsReducer,
-  SlayItForwardStore: SlayItForwardReducer
+  SlayItForwardStore: SlayItForwardReducer,
 });
 
 export const initialStates = {
