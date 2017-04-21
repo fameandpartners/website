@@ -20,8 +20,12 @@ class BulkRefundWorker
 
   private
 
+  def user
+    Spree::User.where(email: @user_email).first
+  end
+
   def report(results)
-    BulkRefundMailer.report(results).deliver
+    BulkRefundMailer.report(results, user).deliver
   end
 
   # Need to memoize this list to avoid unprocessed items at email report.

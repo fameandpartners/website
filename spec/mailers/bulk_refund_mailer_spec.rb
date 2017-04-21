@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe BulkRefundMailer, type: :mailer do
+  let(:user) { FactoryGirl.create(:spree_user) }
   let(:statistics) do
     {
       error: [
@@ -18,7 +19,7 @@ describe BulkRefundMailer, type: :mailer do
 
   let(:expected_attributes) do
     {
-      email_to: "",
+      email_to: "finance@fameandpartners.com",
       subject:  "Bulk refund report",
       success: [ 101, 102, 103 ],
       fails: [ [ 104, 'error1' ], [ 105, 'error2' ], [ 106, 'error3' ] ]
@@ -27,9 +28,9 @@ describe BulkRefundMailer, type: :mailer do
 
   describe '#report' do
     it 'sends data to customerio correctly' do
-      expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(nil, 'bulk_refund_report_email', expected_attributes)
+      expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(user, 'bulk_refund_report_email', expected_attributes)
 
-      BulkRefundMailer.report(statistics).deliver
+      BulkRefundMailer.report(statistics, user).deliver
     end
   end
 end

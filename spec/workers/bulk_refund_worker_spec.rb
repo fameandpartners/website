@@ -41,7 +41,8 @@ describe BulkRefundWorker do
     let(:promise) { double(:promise) }
 
     it 'reports about processed refunds via bulk refund mailer' do
-      expect(BulkRefundMailer).to receive(:report).with(events).and_return(promise)
+      allow(subject).to receive(:user).and_return(user)
+      expect(BulkRefundMailer).to receive(:report).with(events, user).and_return(promise)
       expect(promise).to receive(:deliver)
 
       subject.send(:report, events)
