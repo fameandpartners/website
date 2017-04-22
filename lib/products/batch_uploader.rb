@@ -61,6 +61,10 @@ module Products
       13
     end
 
+    def has_cad_data?( file_path )
+      cad_data_present?( load_excel_book( file_path ) )
+    end
+    
     def new_this_week_taxon_id
       Spree::Taxon.where(name: 'New This Week').first.try(:id)
     end
@@ -69,15 +73,8 @@ module Products
       info "Loading Excel File #{file_path}"
       return if file_path.nil?
 
-      if file_path =~ /\.xls$/
-        book = Roo::Excel.new(file_path, false, :warning)
-      elsif file_path =~ /\.xlsx$/
-        # false - packed, warning - ignore not xslx format
-        book = Roo::Excelx.new(file_path, false, :warning)
-      else
-        raise 'Invalid file type'
-      end
-
+      book = load_excel_book( file_path )
+      
       book.default_sheet = book.sheets.first
       columns            = get_column_indices(book)
       rows               = get_rows_indexes(book, columns)
@@ -87,13 +84,34 @@ module Products
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
         processed = process_raw_row_data(raw)
-
-        build_item_hash(processed, raw)
+        item_hash = build_item_hash(processed, raw)
       end
+      # add_cad_data( book, @parsed_data ) if cad_data_present?( book )
+      
       info "Parse Complete"
     end
 
-    private def extract_raw_row_data(book, columns, row_num)
+    
+    private
+
+
+    def load_excel_book( file_path )
+      if file_path =~ /\.xls$/
+        Roo::Excel.new(file_path, false, :warning)
+      elsif file_path =~ /\.xlsx$/
+        # false - packed, warning - ignore not xslx format
+        Roo::Excelx.new(file_path, false, :warning)
+      else
+        raise 'Invalid file type'
+      end
+    end
+    
+    def cad_data_present?(book)
+      !book.sheets.index( "CADs" ).nil?
+    end
+
+    
+    def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
       # Basic
