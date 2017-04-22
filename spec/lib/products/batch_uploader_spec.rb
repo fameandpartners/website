@@ -46,6 +46,17 @@ describe Products::BatchUploader do
   it "should be able to parse the cads in the upload sheet" do
     batch_uploader = Products::BatchUploader.new( Date.today )
     expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import_with_cads.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+
+    expect( data.first[:cads] ).not_to eq( nil )
+    expect( data.first[:cads].length ).to eq( 6 )
+
+    expect( data.first[:cads].first[:customization_1] ).to eq( false )
+    expect( data.first[:cads].first[:customization_2] ).to eq( false )
+    expect( data.first[:cads].first[:customization_3] ).to eq( true )
+    expect( data.first[:cads].first[:customization_4] ).to eq( true )
+    expect( data.first[:cads].first[:base_image_name] ).to eq( "base_3_4.png" )
+    expect( data.first[:cads].first[:layer_image] ).to eq( nil )
     
   end unless @disabled
   

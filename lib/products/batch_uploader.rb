@@ -86,7 +86,7 @@ module Products
         processed = process_raw_row_data(raw)
         item_hash = build_item_hash(processed, raw)
       end
-      # add_cad_data( book, @parsed_data ) if cad_data_present?( book )
+      add_cad_data( book, @parsed_data ) if cad_data_present?( book )
       
       info "Parse Complete"
     end
@@ -94,7 +94,37 @@ module Products
     
     private
 
+    def add_cad_data( book, parsed_data )
+      total_rows = book.last_row("CADs")
+      columns = {}
+      style_data = {}
+      
+      (1..book.last_column( "CADs" )).each do |i|
+        columns[book.cell( 1, i, "CADs" ).parameterize.underscore] = i
+      end
 
+      (2..total_rows).each do |i|
+        current_row = book.row( i, "CADs" )
+        current_style_number = current_row[columns["style"] - 1]
+        style_data[current_style_number] = [] if style_data[current_style_number].nil?
+        style_array = style_data[current_style_number]
+        style_array << {customization_1: map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
+                        customization_2: map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
+                        customization_3: map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
+                        customization_4: map_to_true_or_false( current_row[columns["customisation_4"] - 1] ),
+                        base_image_name: current_row[columns["base_image_name"] - 1] ,
+                        layer_image: current_row[columns["layer_image"] - 1] }
+        
+      end
+      parsed_data.each do |style|
+        style[:cads] = style_data[style[:sku]]
+      end
+    end
+
+    def map_to_true_or_false( value )
+      value == "Selected"
+    end
+    
     def load_excel_book( file_path )
       if file_path =~ /\.xls$/
         Roo::Excel.new(file_path, false, :warning)
