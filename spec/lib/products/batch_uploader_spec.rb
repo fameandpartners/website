@@ -15,8 +15,23 @@ describe Products::BatchUploader do
                                             )
                              ]
                            ) 
+    allow(Spree::Taxon).to receive(:where).and_return([
+                               build_stubbed(:blank_taxon, 
+                                             name: 'Daywear',
+                                             position: 0
+                                            )
+                             ]
+                           ) 
+    allow(Spree::OptionType).to receive(:where).with( name: 'dress-color' ).and_return([
+                                                                                         build_stubbed(:option_type,
+                                                                                                       name: 'dress-color',
+                                                                                                       presentation: "Color",
+                                                                                                       position: 0
+                                                                                                      )
+                                                                                       ] )
+
     
     batch_uploader = Products::BatchUploader.new( Date.today )
-    expect (batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).not_to eq( nil )
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )
   end
 end
