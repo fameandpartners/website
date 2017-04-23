@@ -1,101 +1,85 @@
 export default {
   'categories': [
     {
-      'dresses': {
-        'displayName': 'Dresses',
-        'path': '/dresses',
-        'categoryLength': [
-          {
-            'maxi': {
-              'count': 22,
-              'displayName': 'Maxi',
-              'path': '/long'  // relative
-            }
-          }, {
-            'midi': {
-              'count': 10,
-              'displayName': 'Midi',
-              'path': '/midi'
-            }
-          }, {
-            'mini': {
-              'count': 44,
-              'displayName': 'Mini',
-              'path': '/mini'
-            }
-          }, {
-            'twoPiece': {
-              'count': 22,
-              'displayName': 'Two Piece',
-              'path': '/two-piece'
-            }
-          }
-        ],
-        'categoryEvent': [
-          {
-            'prom': {
-              'count': 10,
-              'displayName': 'Prom',
-              'path': '/prom'
-            }
-          }, {
-            'bridal': {
-              'count': 22,
-              'displayName': 'Bridal',
-              'path': '/bridal'
-            }
-          }, {
-            'bridesmaid': {
-              'count': 43,
-              'displayName': 'Bridesmaid',
-              'path': '/bridesmaid'
-            }
-          }, {
-            'wedding': {
-              'count': 32,
-              'displayName': 'Wedding Guests',
-              'path': '/wedding-guests'
-            }
-          }, {
-            'cocktail': {
-              'count': 34,
-              'displayName': 'Cocktail',
-              'path': '/cocktail'
-            }
-          }, {
-            'graduation': {
-              'count': 56,
-              'displayName': 'Graduation',
-              'path': '/graduation'
-            }
-          }
-        ]
-      }
+      'id': 'dresses',
+      'displayName': 'Dresses',
+      'relativePath': '/dresses',
+      'lengthSubcategories': [
+        {
+          'id': 'maxi',
+          'count': 22,
+          'displayName': 'Maxi',
+          'relativePath': '/long'
+        }, {
+          'id': 'midi',
+          'count': 10,
+          'displayName': 'Midi',
+          'relativePath': '/midi'
+        }, {
+          'id': 'mini',
+          'count': 44,
+          'displayName': 'Mini',
+          'relativePath': '/mini'
+        }, {
+          'id': 'twoPiece',
+          'count': 22,
+          'displayName': 'Two Piece',
+          'relativePath': '/two-piece'
+        }
+      ],
+      'eventSubcategories': [
+        {
+          'id': 'prom',
+          'count': 10,
+          'displayName': 'Prom',
+          'relativePath': '/prom'
+        }, {
+          'id': 'bridal',
+          'count': 22,
+          'displayName': 'Bridal',
+          'relativePath': '/bridal'
+        }, {
+          'id': 'bridesmaid',
+          'count': 43,
+          'displayName': 'Bridesmaid',
+          'relativePath': '/bridesmaid'
+        }, {
+          'id': 'wedding',
+          'count': 32,
+          'displayName': 'Wedding Guests',
+          'relativePath': '/wedding-guests'
+        }, {
+          'id': 'cocktail',
+          'count': 34,
+          'displayName': 'Cocktail',
+          'relativePath': '/cocktail'
+        }, {
+          'id': 'graduation',
+          'count': 56,
+          'displayName': 'Graduation',
+          'relativePath': '/graduation'
+        }
+      ]
     }, {
-      'skirts': {
-        'displayName': 'Skirts',
-        'path': '/skirts'
-      }
+      'id': 'skirts',
+      'displayName': 'Skirts',
+      'relativePath': '/skirts'
     }, {
-      'jumpsuits': {
-        'displayName': 'Jumpsuits & Rompers',
-        'path': '/dresses/jumpsuit' // actual path on live...
-      }
+      'id': 'jumpsuits',
+      'displayName': 'Jumpsuits & Rompers',
+      'relativePath': '/dresses/jumpsuit' // actual relativePath on live
     }, {
-      'tops': {
-        'displayName': 'Tops',
-        'path': '/tops'
-      }
+      'id': 'tops',
+      'displayName': 'Tops',
+      'relativePath': '/tops'
     }, {
-      'pants': {
-        'displayName': 'Pants',
-        'path': '/pants'
-      }
+      'id': 'pants',
+      'displayName': 'Pants',
+      'relativePath': '/pants'
     }, {
-      'outerwear': {
-        'displayName': 'Outerwear & Jackets',
-        'path': '/outerwear-and-jackets'
-      }
+      'id': 'outerwear',
+      'displayName': 'Outerwear & Jackets',
+      'relativePath': '/outerwear-and-jackets'
     }
   ]
 };
