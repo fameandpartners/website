@@ -567,8 +567,6 @@ module Products
       end
     end
     
-          
-    
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       allowed = [:style_notes,

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Products::BatchUploader do
-  @disabled = true
+  @disabled = false
   before(:each) do
     allow(Spree::Taxonomy).to receive(:where).with( name: 'Range' ).and_return([
                                build_stubbed(:taxonomy, 
@@ -11,7 +11,8 @@ describe Products::BatchUploader do
                              ]
                            ) 
     allow(Spree::Taxon).to receive(:where).and_return([
-                                                        build_stubbed(:blank_taxon, 
+                                                        build_stubbed(:blank_taxon,
+                                                                      id: 1002,                                                                      
                                                                       name: 'Daywear',
                                                                       position: 0
                                                                      )
@@ -41,9 +42,6 @@ describe Products::BatchUploader do
                                                                                                        position: 0
                                                                                                       )
                                                                                        ] )
-    allow_any_instance_of(Spree::Product).to receive(:update_index).and_return(true)    
-    allow_any_instance_of(Spree::Product).to receive(:index).and_return(true)    
-    allow_any_instance_of(Tire).to receive(:index).and_return(true)    
     allow_any_instance_of(Tire::Model::Search::InstanceMethodsProxy).to receive(:update_index).and_return(true)    
 
 
@@ -112,8 +110,7 @@ describe Products::BatchUploader do
     expect( product.layer_cads[0].customization_4 ).to eq( true )
     expect( product.layer_cads[0].base_image_name ).to eq('base_3_4.png')
     expect( product.layer_cads[0].layer_image_name ).to eq(nil)
-    
-  end
+  end unless @disabled
   
   
 end
