@@ -21,7 +21,10 @@ gem 'tire'
 gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'redcarpet', '~> 2.3.0'
+gem 'elasticsearch'
+gem 'elasticsearch-persistence'
 gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Monitoring & Events
 gem 'newrelic_rpm'

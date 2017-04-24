@@ -5,10 +5,22 @@ module Products
       include PathBuildeersHelper
     end
 
+    attr_reader :variants
+
     def self.index!
+      new.call
+    end
+
+    def initialize
+      'crappa'
+    end
 
     end
 
+    def call
+      build_variants
+      push_to_index
+    end
 
     private
 
@@ -22,7 +34,7 @@ module Products
 
       product_count = product_scope.count
 
-      variants = []
+      @variants = []
       product_scope.find_each do |product|
         product_price_in_us = product.price_in(us_site_version.currency)
         product_price_in_au = product.price_in(au_site_version.currency)
@@ -37,7 +49,7 @@ module Products
             next
           end
 
-          variants << {
+          @variants << {
             id: color_variant_id,
             product: {
               id:           product.id,
@@ -63,14 +75,58 @@ module Products
               fast_delivery:      product.fast_delivery,
               fast_making:        product.fast_making?,
               taxon_ids:          product.taxons.map(&:id),
-              taxon_names:        product.taxons.map( |tx| tx.name }.flatten,
-              taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, perma
+              taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
+              taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink },
+              price:              product.price.to_f,
 
+              is_outerwear:     Spree::Product.outerwear.exists?(product.id),
+
+              # bodyshape sorting
+              apple:              product.style_profile&.apple,
+              pear:               product.style_profile&.pear,
+              athletic:           product.style_profile&.athletic,
+              strawberry:         product.style_profile&.hour_glass,
+              column:             product.style_profile&.column,
+              petite:             product.style_profile&.petite,
+              color:              color_customizable
+
+            },
+            color:  {
+              id:             color.id,
+              name:           color.name,
+              presentation:   color.presentation
+            },
+            images: product_color_value.images.map do |image|
+              {
+                large: image.attachment.url(:large)
+              }
+            end,
+            cropped_images: cropped_images_for(product_color_value),
+
+            prices: {
+              aud:  product_price_in_au.amount,
+              usd:  product_price_in_us.amount
+            },
+            sale_prices:  {
+              aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+              usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
             }
-
           }
+          color_variant_id += 1
         end
+        product_index +=1
       end
+      @variants
+    end
+
+    def push_to_index
+      #delete existing index
+      index_name = configatron.elasticsearch.indices.color_variants
+      client = Elasticsearch::Client.new
+      client.indices.delete index: index_name
+      binding.pry
+      # Create index w/ defined types for specific fields
+      client.bulk body: variants
     end
 
     def product_scope

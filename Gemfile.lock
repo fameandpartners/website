@@ -258,6 +258,10 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -363,9 +367,18 @@ GEM
       activesupport (> 3)
       elasticsearch (> 1)
       hashie
+    elasticsearch-persistence (0.1.9)
+      activemodel (> 3)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      elasticsearch-model (>= 0.1)
+      hashie
+      virtus
+    elasticsearch-rails (5.0.0)
     elasticsearch-transport (5.0.4)
       faraday
       multi_json
+    equalizer (0.0.11)
     erubis (2.7.0)
     event_sourced_record (0.2.2)
       activemodel
@@ -548,6 +561,7 @@ GEM
     httpi (1.1.1)
       rack
     i18n (0.6.11)
+    ice_nine (0.11.2)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     journey (1.0.4)
@@ -887,6 +901,11 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
     wasabi (2.5.1)
@@ -936,7 +955,10 @@ DEPENDENCIES
   default_value_for
   device_detector (~> 0.8.1)
   eco
+  elasticsearch
   elasticsearch-model
+  elasticsearch-persistence
+  elasticsearch-rails
   event_sourced_record
   execjs (~> 2)
   factory_girl_rails (= 4.2.1)
