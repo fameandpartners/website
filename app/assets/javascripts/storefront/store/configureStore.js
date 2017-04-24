@@ -128,14 +128,25 @@ export default function configureStore(initialState) {
     // to allow a computed property to be added to a state tree
     initialState.addons.empty ? {} :
     { addons: assign({}, initialState.addons, {
-      addonsBasesComputed: initialState.addons.bases.map((base) => {
+      // Marry previous customizations to addons
+      addonOptions: initialState.product.available_options.table.customizations.table.all.map(
+        (ao, i) => assign({}, {
+          id: ao.table.id,
+          name: ao.table.name,
+          price: '$9.95',
+          img: initialState.addons.addonImages[i],
+          active: false,
+        }),
+      ),
+      baseSelected: null,
+      addonsBasesComputed: initialState.addons.baseImages.map((base) => {
         // [ID]-base-??
         // Example "1038-base-01.png"
         // We want to parse this and have computed a code for each file name
         // 1038-base-01.png will create [1, 1, *, *]
-        // 1038-base-23.png will create [*, *, 2, 3]
+        // 1038-base-23.png will create [*, *, 1, 1]
         // 1038-base.png will create    [*, *, *, *]
-        const baseCode = generateBaseCode(initialState.addons.bases.length);
+        const baseCode = generateBaseCode(initialState.addons.baseImages.length);
         const filename = base.substring(base.lastIndexOf('/') + 1);
         const rgxp = /base-(.*).png/g;
         const matches = rgxp.exec(filename);
