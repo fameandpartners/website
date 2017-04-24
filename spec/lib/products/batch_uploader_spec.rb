@@ -88,9 +88,32 @@ describe Products::BatchUploader do
     batch_uploader = Products::BatchUploader.new( Date.today )
     expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )
     data = batch_uploader.parsed_data
+    expect( batch_uploader.create_or_update_products(data) ).not_to eq( nil )
+  end unless @disabled
 
-    batch_uploader.create_or_update_products(data)
+  it "should be able to create a new product and some cads" do
+    batch_uploader = Products::BatchUploader.new( Date.today )
+    
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import_with_cads.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+    product = batch_uploader.create_or_update_products(data).first
 
-  end 
+    expect( product.layer_cads.size ).to eq(6)
+    expect( product.layer_cads[0].position ).to eq(1)
+    expect( product.layer_cads[1].position ).to eq(2)
+    expect( product.layer_cads[2].position ).to eq(3)
+    expect( product.layer_cads[3].position ).to eq(4)
+    expect( product.layer_cads[4].position ).to eq(5)
+    expect( product.layer_cads[5].position ).to eq(6)
+
+    expect( product.layer_cads[0].customization_1 ).to eq( false )
+    expect( product.layer_cads[0].customization_2 ).to eq( false )
+    expect( product.layer_cads[0].customization_3 ).to eq( true )
+    expect( product.layer_cads[0].customization_4 ).to eq( true )
+    expect( product.layer_cads[0].base_image_name ).to eq('base_3_4.png')
+    expect( product.layer_cads[0].layer_image_name ).to eq(nil)
+    
+  end
+  
   
 end

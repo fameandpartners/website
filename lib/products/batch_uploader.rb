@@ -91,9 +91,6 @@ module Products
       info "Parse Complete"
     end
 
-    
-    private
-
     def add_cad_data( book, parsed_data )
       total_rows = book.last_row("CADs")
       columns = {}
@@ -113,7 +110,7 @@ module Products
                         customization_3: map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
                         customization_4: map_to_true_or_false( current_row[columns["customisation_4"] - 1] ),
                         base_image_name: current_row[columns["base_image_name"] - 1] ,
-                        layer_image: current_row[columns["layer_image"] - 1] }
+                        layer_image_name: current_row[columns["layer_image"] - 1] }
         
       end
       parsed_data.each do |style|
@@ -141,7 +138,7 @@ module Products
     end
 
     
-    def extract_raw_row_data(book, columns, row_num)
+    private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
       # Basic
@@ -487,7 +484,8 @@ module Products
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
           add_product_song(product, args[:song].symbolize_keys || {})
-
+          add_product_layered_cads( product, args[:cads] || [] )
+          
           product
         end
       end.compact
@@ -562,6 +560,15 @@ module Products
       product
     end
 
+    def add_product_layered_cads( product, cads )
+      # How do we do the product uploads?
+      cads.each_with_index do |cad, index|
+        product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
+      end
+    end
+    
+          
+    
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       allowed = [:style_notes,
