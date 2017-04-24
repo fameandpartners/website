@@ -44,7 +44,7 @@ Spree::ShipmentMailer.class_eval do
 
   private def shipped_email_subject(spree_shipment:, resend:)
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
-    subject += "Hey babe, your dress is on it's way - Order: ##{spree_shipment.order.number}"
+    subject += "Hey babe, your dress is on its way - Order: ##{spree_shipment.order.number}"
     subject
   end
 end

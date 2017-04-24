@@ -12,7 +12,7 @@
   - shipped email
     - event: an (completed) order was shipped
     - to: order's email
-    - sample subject: `Hey babe, your dress is on it's way - Order: #R123456`
+    - sample subject: `Hey babe, your dress is on its way - Order: #R123456`
     - template: `/app/views/spree/shipment_mailer/shipped_email.html.slim`
   - order return request email
     - event: return request is created by the user
@@ -165,7 +165,7 @@ shipment = Spree::Shipment.last
 Spree::ShipmentMailer.shipped_email(shipment).deliver
 
 
-## wishlist item added - after 2 days (Deprecated)(Requires adaptation to MoodboardItem usage) 
+## wishlist item added - after 2 days (Deprecated)(Requires adaptation to MoodboardItem usage)
 item = WishlistItem.last
 MarketingMailer.wishlist_item_added(item.user, item).deliver
 
