@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170418210655) do
+ActiveRecord::Schema.define(:version => 20170424042211) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -358,6 +358,19 @@ ActiveRecord::Schema.define(:version => 20170418210655) do
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
+
+  create_table "layer_cads", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "position"
+    t.boolean  "customization_1"
+    t.boolean  "customization_2"
+    t.boolean  "customization_3"
+    t.boolean  "customization_4"
+    t.string   "base_image_name"
+    t.string   "layer_image_name"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
