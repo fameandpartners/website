@@ -368,8 +368,16 @@ ActiveRecord::Schema.define(:version => 20170424042211) do
     t.boolean  "customization_4"
     t.string   "base_image_name"
     t.string   "layer_image_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
+    t.string   "layer_image_file_name"
+    t.string   "layer_image_content_type"
+    t.integer  "layer_image_file_size"
+    t.datetime "layer_image_updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "line_item_making_options", :force => true do |t|

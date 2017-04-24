@@ -9,6 +9,8 @@ class CreateLayerCads < ActiveRecord::Migration
       t.boolean :customization_4
       t.string :base_image_name
       t.string :layer_image_name
+      t.has_attached_file :base_image
+      t.has_attached_file :layer_image
 
       t.timestamps
     end
