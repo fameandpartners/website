@@ -35,9 +35,26 @@ ruby:
           "#{asset_path('cad_customize/sample/1013-base.png')}"
         ],
         addons: [ // In order of specificity (top down)
-          "#{asset_path('cad_customize/sample/1013-addons-0.png')}",
-          "#{asset_path('cad_customize/sample/1013-addons-1.png')}",
-          "#{asset_path('cad_customize/sample/1013-addons-2.png')}"
+          { 
+            name: 'Option 1',
+            price: '$9.95',
+            img: "#{asset_path('cad_customize/sample/1013-addons-0.png')}",
+          },
+          { 
+            name: 'Option 2 - Slit',
+            price: '$0',
+            img: "#{asset_path('cad_customize/sample/1013-addons-1.png')}",
+          },
+          { 
+            name: 'Option 3 - Maxi',
+            price: '$0',
+            img: "",
+          },
+          { 
+            name: 'Option 4 - Add Bow',
+            price: '$19.95',
+            img: "#{asset_path('cad_customize/sample/1013-addons-3.png')}",
+          },
         ],
         // Future proofing Conflicts, checkbox can remove other checks on indexes
         // "conflicts": {

@@ -143,7 +143,6 @@ export default function configureStore(initialState) {
         if (matches && matches[1]) {
           matches[1].split('').forEach(i => baseCode[i] = '1');
         }
-        console.log('baseCode', baseCode);
         return baseCode;
       }),
     }) },

@@ -10,8 +10,10 @@ const { DRAWERS } = PDPConstants;
 function mapStateToProps(state) {
   console.log('state', state);
   return {
-    customize: state.customize,
-    customOptions: state.product.available_options.table.customizations.table.all,
+    addons: state.addons.addons,
+    addonsBasesComputed: state.addons.addonsBasesComputed,
+    bases: state.addons.bases,
+    isOpen: state.customize.drawerOpen === DRAWERS.CAD_CUSTOMIZE,
   };
 }
 
@@ -26,7 +28,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 const propTypes = {
-  customize: PropTypes.object.isRequired,
+  addons: PropTypes.array.isRequired,
+  bases: PropTypes.array.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   // Redux actions
   toggleDrawer: PropTypes.func.isRequired,
 };
@@ -77,13 +81,13 @@ class CADCustomize extends Component {
   }
 
   render() {
-    const { drawerOpen } = this.props.customize;
+    const { addons, addonsBasesComputed, bases, isOpen } = this.props;
     let menuClass = 'pdp-side-menu';
     const selectedClass = 'c-card-customize__content';
-    menuClass += drawerOpen === DRAWERS.CAD_CUSTOMIZE ? ' is-active' : '';
+    menuClass += isOpen ? ' is-active' : '';
 
     return (
-      <div className="pdp-side-container pdp-side-container-custom">
+      <div className="pdp-side-container pdp-side-container-custom CADCustomize">
         <div
           className={selectedClass}
           onClick={this.openMenu}
@@ -105,8 +109,13 @@ class CADCustomize extends Component {
             Select as many as you want
           </p>
 
-          <div className="height-selection clearfix">
-            <h4>CAD HERE</h4>
+          <div className="CAD--layer-wrapper">
+            { bases.map((b, i) => (
+              <div key={`base-${i}`} className="CAD--layer" style={{ backgroundImage: `url(${b})` }} />
+            ))}
+            { addons.map((a, i) => (
+              <div key={`addon-${i}`} className="CAD--layer" style={{ backgroundImage: `url(${a})` }} />
+            ))}
           </div>
 
           <div className="btn-wrap">
