@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
@@ -126,7 +126,7 @@ export default function configureStore(initialState) {
     // Unfortunately, old code does not take into account the concept of hydration,
     // which does not work great on deep nesting. The ugly code below is a workaround
     // to allow for hydration and add a computed property to the state tree
-    // addons ? {} :
+    isEmpty(addons) ? {} :
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
       addonOptions: initialState.product.available_options.table.customizations.table.all.map(

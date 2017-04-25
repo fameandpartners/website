@@ -204,7 +204,9 @@ class CADCustomize extends Component {
     const basesLength = addonsBasesComputed.length;
 
     for (let i = 0; i < basesLength; i += 1) {
-      if (addonsBasesComputed[i].join() === code.join()) {
+      /* eslint-disable no-new */
+      const regexp = new RegExp(addonsBasesComputed[i].join().replace(/\*/g, '.+'));
+      if (code.join().match(regexp) != null) {
         return i;
       }
     }
@@ -242,13 +244,13 @@ class CADCustomize extends Component {
 
     return (
       <div className="pdp-side-container pdp-side-container-custom CADCustomize">
-        <a
+        <div
           role="button"
           className={selectedClass}
           onClick={this.openMenu}
         >
           {this.generateAddonsSummary()}
-        </a>
+        </div>
 
         <div className={menuClass}>
           <div className="text-right">
