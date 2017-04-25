@@ -146,6 +146,7 @@ module Products
             nil
           end
         end
+        result.compact
       end
 
       def customisations_incompatibility_map
