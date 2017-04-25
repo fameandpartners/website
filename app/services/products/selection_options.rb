@@ -17,40 +17,46 @@ module Products
       #put the layers in order for processing
       @product.layer_cads&.sort!{|layer| layer.position}.reverse!
 
-      OpenStruct.new({
-        variants: product_variants,
+      os =
+        OpenStruct.new({
+          variants: product_variants,
 
-        sizes: OpenStruct.new({
-          default: default_product_sizes,
-          extra: extra_product_sizes,
-          default_extra_price: Spree::Price.new(
-            amount: LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE,
-            currency: site_version.currency
-          )
-        }),
+          sizes: OpenStruct.new({
+            default: default_product_sizes,
+            extra: extra_product_sizes,
+            default_extra_price: Spree::Price.new(
+              amount: LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE,
+              currency: site_version.currency
+            )
+          }),
 
-        colors: OpenStruct.new({
-          default: default_product_colors,
-          extra: extra_product_colors,
-          default_extra_price: Spree::Price.new(
-            amount: LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE,
-            currency: site_version.currency
-          )
-        }),
+          colors: OpenStruct.new({
+            default: default_product_colors,
+            extra: extra_product_colors,
+            default_extra_price: Spree::Price.new(
+              amount: LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE,
+              currency: site_version.currency
+            )
+          }),
 
-        customizations: OpenStruct.new({
-          all: available_product_customisations,
-          incompatibilities: customisations_incompatibility_map,
-          is_free: Spree::Config[:free_customisations]
-        }),
+          customizations: OpenStruct.new({
+            all: available_product_customisations,
+            incompatibilities: customisations_incompatibility_map,
+            is_free: Spree::Config[:free_customisations]
+          }),
 
-        addons: {
-          base_images: cad_images('base'),
-          layer_images: cad_images('layer')
-        },
+          making_options: product_making_options
+        })
 
-        making_options: product_making_options
-      })
+        # make this property conditional
+        if product.layer_cads.present?
+          os[:addons] = {
+            base_images: cad_images('base'),
+            layer_images: cad_images('layer')
+          }
+        end
+
+      os
     end
 
     private
