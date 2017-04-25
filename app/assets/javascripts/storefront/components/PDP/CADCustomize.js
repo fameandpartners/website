@@ -55,6 +55,8 @@ class CADCustomize extends Component {
     this.generateAddonLayers = this.generateAddonLayers.bind(this);
     this.generateAddonOptions = this.generateAddonOptions.bind(this);
     this.computeNewAddons = this.computeNewAddons.bind(this);
+    this.resetActiveOptions = this.resetActiveOptions.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.handleApply = this.handleApply.bind(this);
   }
 
@@ -229,8 +231,16 @@ class CADCustomize extends Component {
     };
   }
 
-  handleApply() {
-    console.warn('apply customizations');
+  resetActiveOptions() {
+    const { addonOptions, setAddonOptions, setAddonBaseLayer } = this.props;
+    const newAddons = addonOptions.map(addon => assign({}, addon, { active: true }));
+
+    setAddonBaseLayer(null);
+    setAddonOptions(newAddons);
+  }
+
+  handleClose() {
+    this.resetActiveOptions();
     this.closeMenu();
   }
 
@@ -257,7 +267,7 @@ class CADCustomize extends Component {
             <div
               role="button"
               className="btn-close med"
-              onClick={this.closeMenu}
+              onClick={this.handleClose}
             >
               <span className="hide-visually">Close Menu</span>
             </div>
@@ -277,7 +287,7 @@ class CADCustomize extends Component {
           </div>
 
           <div className="btn-wrap">
-            <button onClick={this.handleApply} className="btn btn-black btn-lrg">
+            <button onClick={this.closeMenu} className="btn btn-black btn-lrg">
               Apply Customizations
             </button>
           </div>
