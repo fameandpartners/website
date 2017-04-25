@@ -141,11 +141,13 @@ module Products
             {
               name: cad.send("#{type}_image_name"),
               url:  cad.send("#{type}_image").url(:display),
+              bit_array: cad.customizations_enabled_for
             }
           else
             nil
           end
         end
+        result.compact
       end
 
       def customisations_incompatibility_map
