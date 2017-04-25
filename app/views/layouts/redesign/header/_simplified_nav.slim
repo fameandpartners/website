@@ -70,6 +70,11 @@
                           span.cta-link Shop
                           span.copy-highlight  THE HIGH CONTRAST COLLECTION
 
+      // temp. fix to avoid breaking menu handler in simplified_nav.js
+      //  (addition of anti-fast nav item means triggers & menus no longer share indexes)
+      .rect#rect-TEMP.nav-menu-wrap.menu-TEMP.grid-img-cta-nav.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
+
       .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
