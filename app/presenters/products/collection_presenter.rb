@@ -4,6 +4,7 @@ module Products
     :total_products,
     :collection,
     :style,
+    :styles,
     :event,
     :bodyshape,
     :color,
