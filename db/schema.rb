@@ -364,6 +364,14 @@ ActiveRecord::Schema.define(:version => 20170425002532) do
     t.integer  "position"
     t.string   "base_image_name"
     t.string   "layer_image_name"
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
+    t.string   "layer_image_file_name"
+    t.string   "layer_image_content_type"
+    t.integer  "layer_image_file_size"
+    t.datetime "layer_image_updated_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.string   "customizations_enabled_for", :default => "--- []\n"

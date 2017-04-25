@@ -133,10 +133,7 @@ module Products
             position: cad.position,
             base_image_url: cad.base_image&.url,
             layer_image_url: cad.layer_image&.url,
-            customization_1: cad.customization_1,
-            customization_2: cad.customization_2,
-            customization_3: cad.customization_3,
-            customization_4: cad.customization_4
+            customizations_enabled_for: cad.customizations_enabled_for
           }
         end
       end
