@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Products::BatchUploader do
-  @disabled = true
+  @disabled = false
   before(:each) do
     allow(Spree::Taxonomy).to receive(:where).with( name: 'Range' ).and_return([
                                build_stubbed(:taxonomy, 
@@ -125,7 +125,7 @@ describe Products::BatchUploader do
     batch_uploader = Products::BatchUploader.new( Date.today )
     expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )
     data = batch_uploader.parsed_data
-    expect( data.first[:properties][:height_mapping_count] ).to eq("3")
+    expect( data.first[:properties][:height_mapping_count] ).to eq(3)
     
     product = batch_uploader.create_or_update_products(data).first
     expect( product.master.style_to_product_height_range_groups.count ).to eq(2)
@@ -134,13 +134,37 @@ describe Products::BatchUploader do
     expect( names.index( 'default_three_size_metric_group' ) ).not_to eq( nil )
     expect( names.index( 'default_three_size_english_group' ) ).not_to eq( nil )
     
-  end
+  end unless @disabled
 
   it "should correctly set the height mappings to 3 if that is what is in the sheet" do
-  end
+    batch_uploader = Products::BatchUploader.new( Date.today )
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import_with_3.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+    expect( data.first[:properties][:height_mapping_count] ).to eq(3.0)
+    
+    product = batch_uploader.create_or_update_products(data).first
+    expect( product.master.style_to_product_height_range_groups.count ).to eq(2)
+    
+    names = product.master.style_to_product_height_range_groups.collect { |phrg| phrg.product_height_range_group.name }
+    expect( names.index( 'default_three_size_metric_group' ) ).not_to eq( nil )
+    expect( names.index( 'default_three_size_english_group' ) ).not_to eq( nil )
+    
+  end unless @disabled
 
   it "should correctly set the height mappings to 6 if that is what is in the sheet" do
-  end
+    batch_uploader = Products::BatchUploader.new( Date.today )
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import_with_6.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+    expect( data.first[:properties][:height_mapping_count] ).to eq(6.0)
+    
+    product = batch_uploader.create_or_update_products(data).first
+    expect( product.master.style_to_product_height_range_groups.count ).to eq(2)
+    
+    names = product.master.style_to_product_height_range_groups.collect { |phrg| phrg.product_height_range_group.name }
+    expect( names.index( 'default_six_size_metric_group' ) ).not_to eq( nil )
+    expect( names.index( 'default_six_size_english_group' ) ).not_to eq( nil )
+    
+  end unless @disabled
   
   
 end

@@ -18,7 +18,7 @@ require 'log_formatter'
 module Products
   class BatchUploader
     extend Forwardable
-    DEFAULT_HEIGHT_MAPPING_COUNT = "3"
+    DEFAULT_HEIGHT_MAPPING_COUNT = 3
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
 
     attr_reader :parsed_data, :keep_taxons, :available_on
