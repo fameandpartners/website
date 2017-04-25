@@ -8,9 +8,6 @@ module BatchUpload
           directory_name = File.basename directory_path
           next unless directory_name =~ /cads?/i
           product.layer_cads.each do |cad|
-            info "************"
-            info "#{path}/#{directory_name}"
-            
             if( cad.base_image_name )
               cad.base_image = File.open( "#{path}/#{directory_name}/#{cad.base_image_name}" )
               cad.save
