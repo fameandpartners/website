@@ -136,7 +136,7 @@ export default function configureStore(initialState) {
           id: ao.table.id,
           name: ao.table.name,
           price: ao.table.display_price,
-          img: addons.layer_images[i].url,
+          img: addons.layer_images[i] ? addons.layer_images[i].url : '',
           active: false,
         }),
       ),
