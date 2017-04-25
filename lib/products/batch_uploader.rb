@@ -105,10 +105,12 @@ module Products
         current_style_number = current_row[columns["style"] - 1]
         style_data[current_style_number] = [] if style_data[current_style_number].nil?
         style_array = style_data[current_style_number]
-        style_array << {customization_1: map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
-                        customization_2: map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
-                        customization_3: map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
-                        customization_4: map_to_true_or_false( current_row[columns["customisation_4"] - 1] ),
+        customizations_enabled_for = [map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_4"] - 1] )]
+                                      
+        style_array << {customizations_enabled_for: customizations_enabled_for, 
                         base_image_name: current_row[columns["base_image_name"] - 1] ,
                         layer_image_name: current_row[columns["layer_image"] - 1] }
         

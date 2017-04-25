@@ -72,10 +72,10 @@ describe Products::BatchUploader do
     expect( data.first[:cads] ).not_to eq( nil )
     expect( data.first[:cads].length ).to eq( 6 )
 
-    expect( data.first[:cads].first[:customization_1] ).to eq( false )
-    expect( data.first[:cads].first[:customization_2] ).to eq( false )
-    expect( data.first[:cads].first[:customization_3] ).to eq( true )
-    expect( data.first[:cads].first[:customization_4] ).to eq( true )
+    expect( data.first[:cads].first[:customizations_enabled_for][0] ).to eq( false )
+    expect( data.first[:cads].first[:customizations_enabled_for][1] ).to eq( false )
+    expect( data.first[:cads].first[:customizations_enabled_for][2] ).to eq( true )
+    expect( data.first[:cads].first[:customizations_enabled_for][3] ).to eq( true )
     expect( data.first[:cads].first[:base_image_name] ).to eq( "base_3_4.png" )
     expect( data.first[:cads].first[:layer_image_name] ).to eq( nil )
     
@@ -104,10 +104,10 @@ describe Products::BatchUploader do
     expect( product.layer_cads[4].position ).to eq(5)
     expect( product.layer_cads[5].position ).to eq(6)
 
-    expect( product.layer_cads[0].customization_1 ).to eq( false )
-    expect( product.layer_cads[0].customization_2 ).to eq( false )
-    expect( product.layer_cads[0].customization_3 ).to eq( true )
-    expect( product.layer_cads[0].customization_4 ).to eq( true )
+    expect( product.layer_cads[0].customizations_enabled_for[0] ).to eq( false )
+    expect( product.layer_cads[0].customizations_enabled_for[1] ).to eq( false )
+    expect( product.layer_cads[0].customizations_enabled_for[2] ).to eq( true )
+    expect( product.layer_cads[0].customizations_enabled_for[3] ).to eq( true )
     expect( product.layer_cads[0].base_image_name ).to eq('base_3_4.png')
     expect( product.layer_cads[0].layer_image_name ).to eq(nil)
   end unless @disabled
