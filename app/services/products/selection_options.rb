@@ -14,6 +14,9 @@ module Products
     end
 
     def read
+      #put the layers in order for processing
+      product.layer_cads&.sort!{|layer| layer.position}.reverse!
+
       OpenStruct.new({
         variants: product_variants,
 
@@ -158,18 +161,6 @@ module Products
           end
         end
         result.compact
-      end
-
-      def image_pair_sanitize(paper_clip_image)
-        binding.pry
-        if paper_clip_image.name.present?
-          {
-            name: paper_clip_image.name,
-            url: paper_clip_image.url
-          }
-        else
-          nil
-        end
       end
 
       def customisations_incompatibility_map
