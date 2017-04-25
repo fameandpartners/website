@@ -14,6 +14,8 @@ function generateBaseCode(length) {
 export default function configureStore(initialState) {
   console.log('initialState', initialState);
   const siteVersion = initialState.siteVersion.toLowerCase();
+  const addons = initialState.product.available_options.table.addons;
+  console.log('addons', addons);
   initialState = assign({}, initialState,
     {
       lengths: [
@@ -126,7 +128,7 @@ export default function configureStore(initialState) {
     // Unfortunately, old code does not take into account the concept of hydration,
     // which does not work great on deep nesting. The ugly code below is a workaround
     // to allow for hydration and add a computed property to the state tree
-    initialState.addons.empty ? {} :
+    // addons ? {} :
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
       addonOptions: initialState.product.available_options.table.customizations.table.all.map(
@@ -134,10 +136,11 @@ export default function configureStore(initialState) {
           id: ao.table.id,
           name: ao.table.name,
           price: ao.table.display_price,
-          img: initialState.addons.addonImages[i],
+          img: addons.layer_images[i].url,
           active: false,
         }),
       ),
+      baseImages: addons.base_images,
       baseSelected: null,
       addonsBasesComputed: initialState.addons.baseImages.map((base) => {
         // [ID]-base-??
@@ -158,6 +161,8 @@ export default function configureStore(initialState) {
       }),
     }) },
   );
+
+  console.log('appended', initialState);
 
   if (process.env.NODE_ENV === 'development') {
     const reduxImmutableStateInvariant = require('redux-immutable-state-invariant')();
