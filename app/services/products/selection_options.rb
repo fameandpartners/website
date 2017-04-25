@@ -140,7 +140,7 @@ module Products
           if cad.base_image_name
             {
               name: cad.base_image_name,
-              url: cad.base_image.url
+              url: cad.base_image.url(:display)
             }
           else
             nil
@@ -154,7 +154,7 @@ module Products
           if cad.layer_image_name
             {
               name: cad.layer_image_name,
-              url: cad.layer_image.url
+              url: cad.layer_image.url(:display)
             }
           else
             nil
