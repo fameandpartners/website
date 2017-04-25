@@ -1,6 +1,6 @@
 import { assign } from 'lodash';
 
-export function addonsReducer(state = { empty: true }, action) {
+export function addonsReducer(state = {}, action) {
   switch (action.type) {
     case 'SET_ADDON_OPTIONS':
       return assign({}, state, { addonOptions: action.addonOptions });

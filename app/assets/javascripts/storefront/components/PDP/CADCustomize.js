@@ -232,7 +232,7 @@ class CADCustomize extends Component {
 
   resetActiveOptions() {
     const { addonOptions, setAddonOptions, setAddonBaseLayer } = this.props;
-    const newAddons = addonOptions.map(addon => assign({}, addon, { active: true }));
+    const newAddons = addonOptions.map(addon => assign({}, addon, { active: false }));
 
     setAddonBaseLayer(null);
     setAddonOptions(newAddons);
