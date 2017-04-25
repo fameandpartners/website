@@ -6,13 +6,14 @@
         span.logo
           = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
 
-    .col.col-md-6.nav-main-menu.text-center
+    .col.col-md-7.nav-main-menu.text-center
 
       span.dresses.js-open-nav-menu Shop all
+      span.anti-fast.js-close-nav-menu = link_to 'ANTI-FAST FASHION SHOP', 'the-anti-fast-fashion-shop'
 
       - if Features.active?(:fameweddings)
-        span.wedding.js-open-nav-menu The Wedding Shop
-      span.lookbook.js-close-nav-menu = link_to 'THE EVENING SHOP', the_evening_shop_landing_page_path
+        span.wedding.js-open-nav-menu Wedding Shop
+      span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
 
     .col.col-md-2.nav-icons.text-right.pull-right
       span#search.search-wrapper.js-search
