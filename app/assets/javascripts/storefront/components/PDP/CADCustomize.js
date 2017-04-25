@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { findIndex } from 'lodash';
+import { assign, findIndex } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
 
@@ -22,9 +22,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Binds our dispatcher to Redux calls
   const actions = bindActionCreators(pdpActions, dispatch);
-  const { toggleDrawer } = actions;
+  const { setAddonOptions, setAddonBaseLayer, toggleDrawer } = actions;
 
   return {
+    setAddonBaseLayer,
+    setAddonOptions,
     toggleDrawer,
   };
 }
@@ -35,6 +37,8 @@ const propTypes = {
   baseImages: PropTypes.array.isRequired,
   isOpen: PropTypes.bool.isRequired,
   // Redux actions
+  setAddonOptions: PropTypes.func.isRequired,
+  setAddonBaseLayer: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };
 
@@ -46,6 +50,7 @@ class CADCustomize extends Component {
     this.generateBaseLayers = this.generateBaseLayers.bind(this);
     this.generateAddonLayers = this.generateAddonLayers.bind(this);
     this.generateAddonOptions = this.generateAddonOptions.bind(this);
+    this.computeNewAddons = this.computeNewAddons.bind(this);
     this.handleApply = this.handleApply.bind(this);
   }
 
@@ -121,27 +126,42 @@ class CADCustomize extends Component {
     ));
   }
 
-  computeNewAddons() {
-    // const { addonOptions } = this.props;
-    // const matchedIndex = findIndex(addonOptions, { id: addon.id });
-    // const newAddons = [
-    //   ...addonOptions.slice(0, matchedIndex),
-    //   assign({}, addon, { active: !addon.active }),
-    //   ...addonOptions.slice(matchedIndex)
-    // ];
-    // this.switchAddonActiveState(addon);
+  computeNewAddons(addon) {
+    const { addonOptions } = this.props;
+    const matchedIndex = findIndex(addonOptions, { id: addon.id });
+    // NOTE: Mutable way to modify item in array
+    const newAddons = [
+      ...addonOptions.slice(0, matchedIndex),
+      assign({}, addon, { active: !addon.active }),
+      ...addonOptions.slice(matchedIndex + 1),
+    ];
+    return newAddons;
   }
 
-  computeBaseLayerToShow() {
-    // const { addonsBasesComputed } = this.props;
-    // console.log('want to compare to : ', addonsBasesComputed);
+  computeBaseCodeFromAddons(newAddons) {
+    return newAddons.map(a => a.active ? '1' : '*');
+  }
+
+  chooseBaseLayerFromCode(code) {
+    const { addonsBasesComputed, setAddonBaseLayer } = this.props;
+    const basesLength = addonsBasesComputed.length;
+
+    for (let i = 0; i < basesLength; i += 1) {
+      if (addonsBasesComputed[i].join() === code.join()) {
+        setAddonBaseLayer(i);
+        break;
+      }
+    }
   }
 
 
   handleAddonSelection(addon) {
+    const { setAddonOptions } = this.props;
     return () => {
-      // this.computeNewAddons(addon);
-      console.log('do something with this addonOption', a);
+      const newAddons = this.computeNewAddons(addon);
+      const newBaseCode = this.computeBaseCodeFromAddons(newAddons);
+      setAddonOptions(newAddons);
+      this.chooseBaseLayerFromCode(newBaseCode);
     };
   }
 
