@@ -9,13 +9,13 @@ module Products
     def initialize(options = {})
       @product      = options[:product]
       #put the layers in order for processing
-      @product.layer_cads&.sort!{|layer| layer.position}.reverse!
+      # @product.layer_cads&.sort!{|layer| layer.position}.reverse!
       @site_version = options[:site_version] || SiteVersion.default
     end
 
     def read
       #put the layers in order for processing
-      product.layer_cads&.sort!{|layer| layer.position}.reverse!
+      @product.layer_cads&.sort!{|layer| layer.position}.reverse!
 
       OpenStruct.new({
         variants: product_variants,
@@ -45,8 +45,8 @@ module Products
         }),
 
         addons: {
-          base_images: base_images,
-          layer_images: layer_images
+          base_images: cad_images('base'),
+          layer_images: cad_images('layer')
         },
 
         making_options: product_making_options
@@ -135,26 +135,12 @@ module Products
         end
       end
 
-      def base_images
+      def cad_images(type)
         result = product.layer_cads.map do |cad|
-          if cad.base_image_name
+          if cad.send("#{type}_image_name")
             {
-              name: cad.base_image_name,
-              url: cad.base_image.url(:display)
-            }
-          else
-            nil
-          end
-        end
-        result.compact
-      end
-
-      def layer_images
-        result = product.layer_cads.map do |cad|
-          if cad.layer_image_name
-            {
-              name: cad.layer_image_name,
-              url: cad.layer_image.url(:display)
+              name: cad.send("#{type}_image_name"),
+              url:  cad.send("#{type}_image").url(:display),
             }
           else
             nil
