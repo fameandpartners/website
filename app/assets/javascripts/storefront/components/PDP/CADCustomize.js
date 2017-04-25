@@ -110,16 +110,16 @@ class CADCustomize extends Component {
    */
   generateBaseLayers() {
     const { baseImages, baseSelected } = this.props;
-    return baseImages.map((b, i) => {
+    return baseImages.map(({ url }, i) => {
       const isSelected = (
         i === baseSelected ||
         (i === baseImages.length - 1 && typeof baseSelected !== 'number')
       );
       return (
         <div
-          key={`base-${b}`}
+          key={`base-${url}`}
           className={`CAD--layer CAD--layer__base ${isSelected ? 'show' : 'hide'}`}
-          style={{ backgroundImage: `url(${b})` }}
+          style={{ backgroundImage: `url(${url})` }}
         />
       );
     });
