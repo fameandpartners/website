@@ -44,7 +44,16 @@ describe Products::BatchUploader do
                                                                                        ] )
     allow_any_instance_of(Tire::Model::Search::InstanceMethodsProxy).to receive(:update_index).and_return(true)    
 
+    allow( ProductHeightRangeGroup ).to receive( :default_three).and_return( [
+                                                                             ProductHeightRangeGroup.new( name: 'default_three_size_metric_group', unit: 'cm' ),
+                                                                             ProductHeightRangeGroup.new( name: 'default_three_size_english_group', unit: 'inch' )
+                                                                           ])
 
+    allow( ProductHeightRangeGroup ).to receive( :default_six).and_return( [
+                                                                             ProductHeightRangeGroup.new( name: 'default_six_size_metric_group', unit: 'cm' ),
+                                                                             ProductHeightRangeGroup.new( name: 'default_six_size_english_group', unit: 'inch' )
+                                                                           ])
+    
   end
 
   it "should be able to run the constructor" do
@@ -117,6 +126,14 @@ describe Products::BatchUploader do
     expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )
     data = batch_uploader.parsed_data
     expect( data.first[:properties][:height_mapping_count] ).to eq("3")
+    
+    product = batch_uploader.create_or_update_products(data).first
+    expect( product.master.style_to_product_height_range_groups.count ).to eq(2)
+    
+    names = product.master.style_to_product_height_range_groups.collect { |phrg| phrg.product_height_range_group.name }
+    expect( names.index( 'default_three_size_metric_group' ) ).not_to eq( nil )
+    expect( names.index( 'default_three_size_english_group' ) ).not_to eq( nil )
+    
   end
 
   it "should correctly set the height mappings to 3 if that is what is in the sheet" do

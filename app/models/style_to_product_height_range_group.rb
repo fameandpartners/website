@@ -1,7 +1,7 @@
 class StyleToProductHeightRangeGroup < ActiveRecord::Base
-  attr_accessible :product_height_range_group_id, :style_number
+  attr_accessible :product_height_range_group_id, :style_number, :product_height_range_group
   belongs_to :product_height_range_group
-  
+
   scope :with_style_number, ->(style_number) { where(style_number: style_number) }
 
   def self.find_both_for_variant_or_use_default( variant )

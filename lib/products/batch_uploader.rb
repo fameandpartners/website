@@ -491,6 +491,7 @@ module Products
           add_product_customizations(product, args[:customizations] || [])
           add_product_song(product, args[:song].symbolize_keys || {})
           add_product_layered_cads( product, args[:cads] || [] )
+          add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
           
           product
         end
@@ -611,6 +612,25 @@ module Products
       product
     end
 
+    def add_product_height_ranges( product, height_mapping_count )
+      master_variant = product.master
+      master_variant.style_to_product_height_range_groups = []
+      product_height_groups = []
+      
+      if( height_mapping_count == 3 )
+        product_height_groups = ProductHeightRangeGroup.default_three
+      elsif( height_mapping_count == 6 )
+        product_height_groups = ProductHeightRangeGroup.default_six
+      else
+        raise "Unknown height mapping count"
+      end
+
+      product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }
+      
+      master_variant.save
+    end
+    
+      
     def add_product_color_options(product, recommended_colors:, available_colors:)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       custom_colors = available_colors - recommended_colors
