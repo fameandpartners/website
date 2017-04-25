@@ -57,7 +57,6 @@ class CADCustomize extends Component {
     this.computeNewAddons = this.computeNewAddons.bind(this);
     this.resetActiveOptions = this.resetActiveOptions.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleApply = this.handleApply.bind(this);
   }
 
   openMenu() {
@@ -120,7 +119,7 @@ class CADCustomize extends Component {
       return (
         <div
           key={`base-${url}`}
-          className={`CAD--layer CAD--layer__base ${isSelected ? 'show' : 'hide'}`}
+          className={`CAD--layer CAD--layer__base ${isSelected ? ' is-selected' : ''}`}
           style={{ backgroundImage: `url(${url})` }}
         />
       );
@@ -136,7 +135,7 @@ class CADCustomize extends Component {
     return addonOptions.map(a => (
       <div
         key={`addon-${a.id}`}
-        className={`CAD--layer CAD--layer__addon ${a.active ? 'show' : 'hide'}`}
+        className={`CAD--layer CAD--layer__addon ${a.active ? ' is-selected' : ''}`}
         style={{ backgroundImage: `url(${a.img})` }}
       />
     ));
@@ -159,11 +158,11 @@ class CADCustomize extends Component {
         <li
           role="button"
           key={`addon-option-${a.id}`}
-          className={`CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
+          className={`clearfix CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
           onClick={this.handleAddonSelection(a)}
         >
+          <span className="price pull-right"> + ${displayPrice}</span>
           <span className="name">{a.name}</span>
-          <span className="price"> + ${displayPrice}</span>
         </li>
       );
     });

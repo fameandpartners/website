@@ -130,13 +130,16 @@ export default function configureStore(initialState) {
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
       addonOptions: initialState.product.available_options.table.customizations.table.all.map(
-        (ao, i) => assign({}, {
-          id: ao.table.id,
-          name: ao.table.name,
-          price: ao.table.display_price,
-          img: addons.layer_images[i] ? addons.layer_images[i].url : '',
-          active: false,
-        }),
+        (ao, i) => {
+          const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
+          return assign({}, {
+            id: ao.table.id,
+            name: ao.table.name,
+            price: ao.table.display_price,
+            img: mappedImageLayer ? mappedImageLayer.url : '',
+            active: false,
+          });
+        },
       ),
       baseImages: addons.base_images,
       baseSelected: null,
