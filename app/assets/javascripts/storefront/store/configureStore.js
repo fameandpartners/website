@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
@@ -12,8 +12,8 @@ function generateBaseCode(length) {
 }
 
 export default function configureStore(initialState) {
-  console.log('initialState', initialState);
   const siteVersion = initialState.siteVersion.toLowerCase();
+  const addons = initialState.product.available_options.table.addons;
   initialState = assign({}, initialState,
     {
       lengths: [
@@ -126,7 +126,7 @@ export default function configureStore(initialState) {
     // Unfortunately, old code does not take into account the concept of hydration,
     // which does not work great on deep nesting. The ugly code below is a workaround
     // to allow for hydration and add a computed property to the state tree
-    initialState.addons.empty ? {} :
+    isEmpty(addons) ? {} :
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
       addonOptions: initialState.product.available_options.table.customizations.table.all.map(
@@ -134,20 +134,21 @@ export default function configureStore(initialState) {
           id: ao.table.id,
           name: ao.table.name,
           price: ao.table.display_price,
-          img: initialState.addons.addonImages[i],
+          img: addons.layer_images[i] ? addons.layer_images[i].url : '',
           active: false,
         }),
       ),
+      baseImages: addons.base_images,
       baseSelected: null,
-      addonsBasesComputed: initialState.addons.baseImages.map((base) => {
+      addonsBasesComputed: addons.base_images.map(({ url }) => {
         // [ID]-base-??
         // Example "1038-base-01.png"
         // We want to parse this and have computed a code for each file name
         // 1038-base-01.png will create [1, 1, *, *]
         // 1038-base-23.png will create [*, *, 1, 1]
         // 1038-base.png will create    [*, *, *, *]
-        const baseCode = generateBaseCode(initialState.addons.baseImages.length);
-        const filename = base.substring(base.lastIndexOf('/') + 1);
+        const baseCode = generateBaseCode(addons.base_images.length);
+        const filename = url.substring(url.lastIndexOf('/') + 1);
         const rgxp = /base-(.*).png/g;
         const matches = rgxp.exec(filename);
 
