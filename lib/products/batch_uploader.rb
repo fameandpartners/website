@@ -477,7 +477,7 @@ module Products
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
-
+          
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
@@ -561,7 +561,8 @@ module Products
     end
 
     def add_product_layered_cads( product, cads )
-      # How do we do the product uploads?
+      info "Processing Cads #{cads}"
+      product.layer_cads = []
       cads.each_with_index do |cad, index|
         product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
       end
