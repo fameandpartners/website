@@ -5,7 +5,7 @@ export function addonsReducer(state = { empty: true }, action) {
     case 'SET_ADDON_OPTIONS':
       return assign({}, state, { addonOptions: action.addonOptions });
     case 'SET_ADDON_BASE_LAYER':
-      return assign({}, state, { addonOptions: action.addonOptions });
+      return assign({}, state, { baseSelected: action.baseSelected });
     default:
       return state;
   }

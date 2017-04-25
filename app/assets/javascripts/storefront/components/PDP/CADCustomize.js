@@ -35,11 +35,16 @@ const propTypes = {
   addonOptions: PropTypes.array.isRequired,
   addonsBasesComputed: PropTypes.array.isRequired,
   baseImages: PropTypes.array.isRequired,
+  baseSelected: PropTypes.number,
   isOpen: PropTypes.bool.isRequired,
   // Redux actions
   setAddonOptions: PropTypes.func.isRequired,
   setAddonBaseLayer: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  baseSelected: null,
 };
 
 class CADCustomize extends Component {
@@ -65,11 +70,24 @@ class CADCustomize extends Component {
   }
 
   /**
-   * Creates a readable string for size summary based on units
-   * @return {String} summary
+   * Computed count of active addonOptions
+   * @return {Numbere} Count
+   */
+  get activeAddonsCount() {
+    const { addonOptions } = this.props;
+    return addonOptions.reduce((acc, val) => (val.active ? acc + 1 : acc), 0);
+  }
+
+  /**
+   * Creates a numerical string for addons based on selection
+   * @return {String|null} summary
    */
   addonsSummarySelectedOptions() {
-    return '';
+    const activeOptions = this.activeAddonsCount;
+    if (activeOptions) {
+      return `${activeOptions} Customization${activeOptions > 1 ? 's' : ''}`;
+    }
+    return null;
   }
 
   /**
@@ -87,13 +105,17 @@ class CADCustomize extends Component {
     );
   }
 
+  /**
+   * Determines positioning and hide show of base layers
+   * @return {Array[Node]}
+   */
   generateBaseLayers() {
     const { baseImages, baseSelected } = this.props;
     return baseImages.map((b, i) => {
       const isSelected = (i === baseSelected || (i === baseImages.length - 1 && !baseSelected));
       return (
         <div
-          key={`base-${i}`}
+          key={`base-${b}`}
           className={`CAD--layer CAD--layer__base ${isSelected ? 'show' : 'hide'}`}
           style={{ backgroundImage: `url(${b})` }}
         />
@@ -101,17 +123,25 @@ class CADCustomize extends Component {
     });
   }
 
+  /**
+   * Determines positioning and hide show of addon layers
+   * @return {Array[Node]}
+   */
   generateAddonLayers() {
     const { addonOptions } = this.props;
-    return addonOptions.map((a, i) => (
+    return addonOptions.map(a => (
       <div
-        key={`addon-${i}`}
+        key={`addon-${a.id}`}
         className={`CAD--layer CAD--layer__addon ${a.active ? 'show' : 'hide'}`}
         style={{ backgroundImage: `url(${a.img})` }}
       />
     ));
   }
 
+  /**
+   * Creates selectable addon options
+   * @return {Array[Node]} - addonOptionNodes
+   */
   generateAddonOptions() {
     const { addonOptions } = this.props;
 
@@ -123,6 +153,8 @@ class CADCustomize extends Component {
 
       return (
         <li
+          role="button"
+          key={`addon-option-${a.id}`}
           className={`CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
           onClick={this.handleAddonSelection(a)}
         >
@@ -133,10 +165,15 @@ class CADCustomize extends Component {
     });
   }
 
+  /**
+   * Immutably creates new addon array, flipping switch on addons active state
+   * @param  {Object} addon - addon selected or deselected
+   * @return {Array} - newAddons
+   */
   computeNewAddons(addon) {
     const { addonOptions } = this.props;
     const matchedIndex = findIndex(addonOptions, { id: addon.id });
-    // NOTE: Mutable way to modify item in array
+    // NOTE: Mutable way to modify item in array (creating new array)
     const newAddons = [
       ...addonOptions.slice(0, matchedIndex),
       assign({}, addon, { active: !addon.active }),
@@ -145,60 +182,81 @@ class CADCustomize extends Component {
     return newAddons;
   }
 
-  computeBaseCodeFromAddons(newAddons) {
-    return newAddons.map(a => a.active ? '1' : '*');
+
+  /**
+   * Creates a binary code representation of addons selected
+   * @param  {Array} addons - addons selected
+   * @return {Array} code - ie [*, *, *, 1]
+   */
+  computeBaseCodeFromAddons(addons) {
+    return addons.map(a => (a.active ? '1' : '*'));
   }
 
+  /**
+   * Determines what base layer to select based on code comparisons
+   * @param  {Array} code - generated from active addons
+   * @return {Number} index
+   */
   chooseBaseLayerFromCode(code) {
-    const { addonsBasesComputed, setAddonBaseLayer } = this.props;
+    const { addonsBasesComputed } = this.props;
     const basesLength = addonsBasesComputed.length;
 
     for (let i = 0; i < basesLength; i += 1) {
       if (addonsBasesComputed[i].join() === code.join()) {
-        setAddonBaseLayer(i);
-        break;
+        return i;
       }
     }
+    return null;
   }
 
 
+  /**
+   * Event handler for addon selection
+   * @param  {Object} addon
+   * @action -> setAddonOptions, setAddonBaseLayer
+   */
   handleAddonSelection(addon) {
-    const { setAddonOptions } = this.props;
+    const { setAddonOptions, setAddonBaseLayer } = this.props;
     return () => {
       const newAddons = this.computeNewAddons(addon);
       const newBaseCode = this.computeBaseCodeFromAddons(newAddons);
       setAddonOptions(newAddons);
-      this.chooseBaseLayerFromCode(newBaseCode);
+      setAddonBaseLayer(this.chooseBaseLayerFromCode(newBaseCode));
     };
   }
 
   handleApply() {
-
+    console.warn('apply customizations');
+    this.closeMenu();
   }
 
   render() {
     const { isOpen } = this.props;
     let menuClass = 'pdp-side-menu';
-    const selectedClass = 'c-card-customize__content';
+    let selectedClass = 'c-card-customize__content';
+
     menuClass += isOpen ? ' is-active' : '';
+    selectedClass += this.activeAddonsCount > 0 ? ' is-selected' : '';
 
     return (
       <div className="pdp-side-container pdp-side-container-custom CADCustomize">
-        <div
+        <a
+          role="button"
           className={selectedClass}
           onClick={this.openMenu}
         >
           {this.generateAddonsSummary()}
-        </div>
+        </a>
 
         <div className={menuClass}>
           <div className="text-right">
-            <a
+            <div
+              role="button"
               className="btn-close med"
               onClick={this.closeMenu}
             >
               <span className="hide-visually">Close Menu</span>
-            </a>
+            </div>
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Customize It</h2>
           <p>
@@ -215,9 +273,9 @@ class CADCustomize extends Component {
           </div>
 
           <div className="btn-wrap">
-            <div onClick={this.handleApply} className="btn btn-black btn-lrg">
+            <button onClick={this.handleApply} className="btn btn-black btn-lrg">
               Apply Customizations
-            </div>
+            </button>
           </div>
 
         </div>
@@ -227,5 +285,6 @@ class CADCustomize extends Component {
 }
 
 CADCustomize.propTypes = propTypes;
+CADCustomize.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(CADCustomize);
