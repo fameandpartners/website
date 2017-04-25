@@ -9,7 +9,6 @@ import * as pdpActions from '../../actions/PdpActions';
 const { DRAWERS } = PDPConstants;
 
 function mapStateToProps(state) {
-  console.log('state', state);
   return {
     addonOptions: state.addons.addonOptions,
     addonsBasesComputed: state.addons.addonsBasesComputed,
