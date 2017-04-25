@@ -22,12 +22,12 @@ class LayerCad < ActiveRecord::Base
   def rename_files
     if( self.respond_to?(:base_image_file_name) && base_image_file_name.present? )
       extension = File.extname(base_image_file_name).gsub(/^\.+/, '')      
-      base_image.instance_write(:file_name, "base-#{customizations_on.join( "-" )}.#{extension}" )
+      base_image.instance_write(:file_name, "base-#{customizations_on.join( "" )}.#{extension}" )
     end
 
     if( self.respond_to?(:layer_image_file_name) && layer_image_file_name.present? )
       extension = File.extname(layer_image_file_name).gsub(/^\.+/, '')            
-      layer_image.instance_write(:file_name, "layer-#{customizations_on.join( "-" )}.#{extension}" )
+      layer_image.instance_write(:file_name, "layer-#{customizations_on.join( "" )}.#{extension}" )
     end
 
     true
@@ -38,7 +38,7 @@ class LayerCad < ActiveRecord::Base
     to_return = []
     customizations_enabled_for.each_with_index do |customization, i|
       if( customization )
-        to_return << (i + 1)
+        to_return << i
       end
     end
     to_return
