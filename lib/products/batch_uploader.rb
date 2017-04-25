@@ -18,6 +18,7 @@ require 'log_formatter'
 module Products
   class BatchUploader
     extend Forwardable
+    DEFAULT_HEIGHT_MAPPING_COUNT = "3"
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
 
     attr_reader :parsed_data, :keep_taxons, :available_on
@@ -172,6 +173,7 @@ module Products
       raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
       raw[:fit]                        = book.cell(row_num, columns[:fit])
       raw[:size]                       = book.cell(row_num, columns[:size])
+      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT
       raw[:fabric]                     = book.cell(row_num, columns[:fabric])
       raw[:product_type]               = book.cell(row_num, columns[:product_type])
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
@@ -193,7 +195,7 @@ module Products
       # Additional
       raw[:song_link]                  = book.cell(row_num, columns[:song_link])
       raw[:song_name]                  = book.cell(row_num, columns[:song_name])
-
+      
       raw[:customizations] = []
       columns[:customizations].each_with_index do |customization, index|
         raw[:customizations] << {
@@ -319,6 +321,7 @@ module Products
           style_notes:                raw[:style_notes],
           care_instructions:          raw[:care_instructions],
           size:                       raw[:size],
+          height_mapping_count:       raw[:height_mapping_count],
           fit:                        raw[:fit],
           fabric:                     raw[:fabric],
           product_type:               raw[:product_type],
@@ -398,7 +401,8 @@ module Products
           product_details:            /product details/i,
           short_description:          /short description/i,
           standard_days_for_making:   /standard days for making/i,
-          customised_days_for_making: /customised days for making/i
+          customised_days_for_making: /customised days for making/i,
+          height_mapping_count: /height mapping count/i
       }
 
       conformities.each do |key, regex|

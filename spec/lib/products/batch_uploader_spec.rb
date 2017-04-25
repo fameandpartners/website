@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Products::BatchUploader do
-  @disabled = false
+  @disabled = true
   before(:each) do
     allow(Spree::Taxonomy).to receive(:where).with( name: 'Range' ).and_return([
                                build_stubbed(:taxonomy, 
@@ -111,6 +111,19 @@ describe Products::BatchUploader do
     expect( product.layer_cads[0].base_image_name ).to eq('base_3_4.png')
     expect( product.layer_cads[0].layer_image_name ).to eq(nil)
   end unless @disabled
+
+  it "should correctly the set the height mappings if the height mapping count column isn't present" do
+    batch_uploader = Products::BatchUploader.new( Date.today )
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+    expect( data.first[:properties][:height_mapping_count] ).to eq("3")
+  end
+
+  it "should correctly set the height mappings to 3 if that is what is in the sheet" do
+  end
+
+  it "should correctly set the height mappings to 6 if that is what is in the sheet" do
+  end
   
   
 end
