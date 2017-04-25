@@ -133,7 +133,7 @@ export default function configureStore(initialState) {
         (ao, i) => assign({}, {
           id: ao.table.id,
           name: ao.table.name,
-          price: '$9.95',
+          price: ao.table.display_price,
           img: initialState.addons.addonImages[i],
           active: false,
         }),

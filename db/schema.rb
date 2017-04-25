@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170424042211) do
+ActiveRecord::Schema.define(:version => 20170425002532) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -362,22 +362,11 @@ ActiveRecord::Schema.define(:version => 20170424042211) do
   create_table "layer_cads", :force => true do |t|
     t.integer  "product_id"
     t.integer  "position"
-    t.boolean  "customization_1"
-    t.boolean  "customization_2"
-    t.boolean  "customization_3"
-    t.boolean  "customization_4"
     t.string   "base_image_name"
     t.string   "layer_image_name"
-    t.string   "base_image_file_name"
-    t.string   "base_image_content_type"
-    t.integer  "base_image_file_size"
-    t.datetime "base_image_updated_at"
-    t.string   "layer_image_file_name"
-    t.string   "layer_image_content_type"
-    t.integer  "layer_image_file_size"
-    t.datetime "layer_image_updated_at"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "customizations_enabled_for", :default => "--- []\n"
   end
 
   create_table "line_item_making_options", :force => true do |t|

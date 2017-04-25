@@ -113,17 +113,24 @@ class CADCustomize extends Component {
   }
 
   generateAddonOptions() {
-    const { customizationOptions } = this.props;
     const { addonOptions } = this.props;
-    return addonOptions.map(a => (
-      <li
-        className={`CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
-        onClick={this.handleAddonSelection(a)}
-      >
-        <span className="name">{a.name}</span>
-        <span className="price">{a.price}</span>
-      </li>
-    ));
+
+    return addonOptions.map((a) => {
+      const displayPrice = parseFloat((
+        a.price.money.fractional /
+        a.price.money.currency.subunit_to_unit
+      ));
+
+      return (
+        <li
+          className={`CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
+          onClick={this.handleAddonSelection(a)}
+        >
+          <span className="name">{a.name}</span>
+          <span className="price"> + ${displayPrice}</span>
+        </li>
+      );
+    });
   }
 
   computeNewAddons(addon) {

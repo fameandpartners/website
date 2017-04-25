@@ -105,10 +105,12 @@ module Products
         current_style_number = current_row[columns["style"] - 1]
         style_data[current_style_number] = [] if style_data[current_style_number].nil?
         style_array = style_data[current_style_number]
-        style_array << {customization_1: map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
-                        customization_2: map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
-                        customization_3: map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
-                        customization_4: map_to_true_or_false( current_row[columns["customisation_4"] - 1] ),
+        customizations_enabled_for = [map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_4"] - 1] )]
+                                      
+        style_array << {customizations_enabled_for: customizations_enabled_for, 
                         base_image_name: current_row[columns["base_image_name"] - 1] ,
                         layer_image_name: current_row[columns["layer_image"] - 1] }
         
@@ -477,7 +479,7 @@ module Products
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
-
+          
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
@@ -561,7 +563,8 @@ module Products
     end
 
     def add_product_layered_cads( product, cads )
-      # How do we do the product uploads?
+      info "Processing Cads #{cads}"
+      product.layer_cads = []
       cads.each_with_index do |cad, index|
         product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
       end
