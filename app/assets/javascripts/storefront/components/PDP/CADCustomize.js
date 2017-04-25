@@ -111,7 +111,10 @@ class CADCustomize extends Component {
   generateBaseLayers() {
     const { baseImages, baseSelected } = this.props;
     return baseImages.map((b, i) => {
-      const isSelected = (i === baseSelected || (i === baseImages.length - 1 && !baseSelected));
+      const isSelected = (
+        i === baseSelected ||
+        (i === baseImages.length - 1 && typeof baseSelected !== 'number')
+      );
       return (
         <div
           key={`base-${b}`}
