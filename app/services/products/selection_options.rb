@@ -8,6 +8,8 @@ module Products
 
     def initialize(options = {})
       @product      = options[:product]
+      #put the layers in order for processing
+      @product.layer_cads.sort!{|layer| layer.position}.reverse!
       @site_version = options[:site_version] || SiteVersion.default
     end
 
@@ -39,7 +41,10 @@ module Products
           is_free: Spree::Config[:free_customisations]
         }),
 
-        addons: layer_cads,
+        addons: {
+          base_images: base_images,
+          layer_images: layer_images
+        },
 
         making_options: product_making_options
       })
@@ -127,14 +132,43 @@ module Products
         end
       end
 
-      def layer_cads
-        product.layer_cads.map do |cad|
+      def base_images
+        result = product.layer_cads.map do |cad|
+          if cad.base_image_name
+            {
+              name: cad.base_image_name,
+              url: cad.base_image.url
+            }
+          else
+            nil
+          end
+        end
+        result.compact
+      end
+
+      def layer_images
+        result = product.layer_cads.map do |cad|
+          if cad.layer_image_name
+            {
+              name: cad.layer_image_name,
+              url: cad.layer_image.url
+            }
+          else
+            nil
+          end
+        end
+        result.compact
+      end
+
+      def image_pair_sanitize(paper_clip_image)
+        binding.pry
+        if paper_clip_image.name.present?
           {
-            position: cad.position,
-            base_image_url: cad.base_image&.url,
-            layer_image_url: cad.layer_image&.url,
-            customizations_enabled_for: cad.customizations_enabled_for
+            name: paper_clip_image.name,
+            url: paper_clip_image.url
           }
+        else
+          nil
         end
       end
 
