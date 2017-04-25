@@ -29,15 +29,16 @@ ruby:
       flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
       addons: {
         // 1013 is the fake ID of the dress
-        "bases": [ // In order of specificity (top down)
-          "#{asset_path('cad_customize/sample/1013-base-2-3.png')}",
-          "#{asset_path('cad_customize/sample/1013-base-1.png')}",
+        "baseImages": [ // In order of specificity (top down)
+          "#{asset_path('cad_customize/sample/1013-base-23.png')}",
+          "#{asset_path('cad_customize/sample/1013-base-2.png')}",
           "#{asset_path('cad_customize/sample/1013-base.png')}"
         ],
-        addons: [ // In order of specificity (top down)
+        "addonImages": [ // In order of specificity (top down)
           "#{asset_path('cad_customize/sample/1013-addons-0.png')}",
           "#{asset_path('cad_customize/sample/1013-addons-1.png')}",
-          "#{asset_path('cad_customize/sample/1013-addons-2.png')}"
+          "",
+          "#{asset_path('cad_customize/sample/1013-addons-3.png')}",
         ],
         // Future proofing Conflicts, checkbox can remove other checks on indexes
         // "conflicts": {

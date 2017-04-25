@@ -542,6 +542,30 @@
   .Select {
     height: 195px;
   }
+
+  // CADCustomize
+  .CAD--layer-wrapper {
+    height: 200px;
+    position: relative;
+  }
+
+  .CAD--layer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+  }
+
+  .CAD--addon-list-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    &:hover, &.is-selected {
+      background: black;
+      color: white;
+    }
+  }
 }
 
 // load all other PDP components here

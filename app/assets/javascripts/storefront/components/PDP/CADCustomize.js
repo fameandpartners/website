@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { findIndex } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
 
@@ -10,8 +11,11 @@ const { DRAWERS } = PDPConstants;
 function mapStateToProps(state) {
   console.log('state', state);
   return {
-    customize: state.customize,
-    customOptions: state.product.available_options.table.customizations.table.all,
+    addonOptions: state.addons.addonOptions,
+    addonsBasesComputed: state.addons.addonsBasesComputed,
+    baseImages: state.addons.baseImages,
+    baseSelected: state.addons.baseSelected,
+    isOpen: state.customize.drawerOpen === DRAWERS.CAD_CUSTOMIZE,
   };
 }
 
@@ -26,7 +30,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 const propTypes = {
-  customize: PropTypes.object.isRequired,
+  addonOptions: PropTypes.array.isRequired,
+  addonsBasesComputed: PropTypes.array.isRequired,
+  baseImages: PropTypes.array.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   // Redux actions
   toggleDrawer: PropTypes.func.isRequired,
 };
@@ -36,6 +43,9 @@ class CADCustomize extends Component {
     super(props, context);
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.generateBaseLayers = this.generateBaseLayers.bind(this);
+    this.generateAddonLayers = this.generateAddonLayers.bind(this);
+    this.generateAddonOptions = this.generateAddonOptions.bind(this);
     this.handleApply = this.handleApply.bind(this);
   }
 
@@ -72,18 +82,81 @@ class CADCustomize extends Component {
     );
   }
 
+  generateBaseLayers() {
+    const { baseImages, baseSelected } = this.props;
+    return baseImages.map((b, i) => {
+      const isSelected = (i === baseSelected || (i === baseImages.length - 1 && !baseSelected));
+      return (
+        <div
+          key={`base-${i}`}
+          className={`CAD--layer CAD--layer__base ${isSelected ? 'show' : 'hide'}`}
+          style={{ backgroundImage: `url(${b})` }}
+        />
+      );
+    });
+  }
+
+  generateAddonLayers() {
+    const { addonOptions } = this.props;
+    return addonOptions.map((a, i) => (
+      <div
+        key={`addon-${i}`}
+        className={`CAD--layer CAD--layer__addon ${a.active ? 'show' : 'hide'}`}
+        style={{ backgroundImage: `url(${a.img})` }}
+      />
+    ));
+  }
+
+  generateAddonOptions() {
+    const { customizationOptions } = this.props;
+    const { addonOptions } = this.props;
+    return addonOptions.map(a => (
+      <li
+        className={`CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
+        onClick={this.handleAddonSelection(a)}
+      >
+        <span className="name">{a.name}</span>
+        <span className="price">{a.price}</span>
+      </li>
+    ));
+  }
+
+  computeNewAddons() {
+    // const { addonOptions } = this.props;
+    // const matchedIndex = findIndex(addonOptions, { id: addon.id });
+    // const newAddons = [
+    //   ...addonOptions.slice(0, matchedIndex),
+    //   assign({}, addon, { active: !addon.active }),
+    //   ...addonOptions.slice(matchedIndex)
+    // ];
+    // this.switchAddonActiveState(addon);
+  }
+
+  computeBaseLayerToShow() {
+    // const { addonsBasesComputed } = this.props;
+    // console.log('want to compare to : ', addonsBasesComputed);
+  }
+
+
+  handleAddonSelection(addon) {
+    return () => {
+      // this.computeNewAddons(addon);
+      console.log('do something with this addonOption', a);
+    };
+  }
+
   handleApply() {
 
   }
 
   render() {
-    const { drawerOpen } = this.props.customize;
+    const { isOpen } = this.props;
     let menuClass = 'pdp-side-menu';
     const selectedClass = 'c-card-customize__content';
-    menuClass += drawerOpen === DRAWERS.CAD_CUSTOMIZE ? ' is-active' : '';
+    menuClass += isOpen ? ' is-active' : '';
 
     return (
-      <div className="pdp-side-container pdp-side-container-custom">
+      <div className="pdp-side-container pdp-side-container-custom CADCustomize">
         <div
           className={selectedClass}
           onClick={this.openMenu}
@@ -105,8 +178,13 @@ class CADCustomize extends Component {
             Select as many as you want
           </p>
 
-          <div className="height-selection clearfix">
-            <h4>CAD HERE</h4>
+          <div className="CAD--layer-wrapper">
+            { this.generateBaseLayers() }
+            { this.generateAddonLayers() }
+          </div>
+
+          <div className="CAD--addon-option-select">
+            { this.generateAddonOptions() }
           </div>
 
           <div className="btn-wrap">
