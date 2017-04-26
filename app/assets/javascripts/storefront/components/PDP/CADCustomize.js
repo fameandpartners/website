@@ -71,7 +71,7 @@ class CADCustomize extends Component {
 
   /**
    * Computed count of active addonOptions
-   * @return {Numbere} Count
+   * @return {Number} Count
    */
   get activeAddonsCount() {
     const { addonOptions } = this.props;
