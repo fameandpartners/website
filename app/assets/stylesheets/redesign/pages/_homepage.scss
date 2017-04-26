@@ -108,6 +108,16 @@
       font-size: 2.8rem;
     }
 
+    .hero-wrap .sub-heading--extra-large {
+      font-size: 5.6rem;
+      line-height: 105%;
+    }
+
+    .link-underline.hero-middle-header-link {
+      font-size: 0.35em;
+      line-height: 100%;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -207,7 +217,7 @@
     }
 
     .copy-align--top {
-      margin-top: -190px;
+      margin-top: 50px;
     }
 
   }
