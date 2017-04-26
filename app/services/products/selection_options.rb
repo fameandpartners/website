@@ -8,8 +8,6 @@ module Products
 
     def initialize(options = {})
       @product      = options[:product]
-      #put the layers in order for processing
-      # @product.layer_cads&.sort!{|layer| layer.position}.reverse!
       @site_version = options[:site_version] || SiteVersion.default
     end
 
