@@ -8,14 +8,14 @@ class LayerCad < ActiveRecord::Base
                     :styles => { :original => "944x800", :display => "-gravity Center -crop 760x680+0+0 +repage" },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
-                    :path => ':rails_root/public/spree/products/:product_id/cads/:id/:style/:basename.:extension',
+                    :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :convert_options => { :all => '-strip -auto-orient' }
 
   has_attached_file :layer_image,
                     :styles => { :original => "944x800", :display => "-gravity Center -crop 760x680+0+0 +repage" },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
-                    :path => ':rails_root/public/spree/products/:product_id/cads/:id/:style/:basename.:extension',
+                    :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :convert_options => { :all => '-strip -auto-orient' }
   before_save :rename_files
 
