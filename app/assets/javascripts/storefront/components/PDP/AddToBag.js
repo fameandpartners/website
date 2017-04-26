@@ -34,7 +34,9 @@ class AddToBag extends React.Component {
   buildCustomizationIds() {
     const { addons, customize } = this.props;
     if (isEmpty(addons)) {
-      return [parseInt(customize.customization.id, 10)];
+      return customize.customization.id ?
+        [parseInt(customize.customization.id, 10)] :
+        [''];
     }
     // Filter active addonOptions
     return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
@@ -84,8 +86,8 @@ class AddToBag extends React.Component {
 
     const calculatePrice = (price) => {
       const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
-      const parsedCustomPrice = parseFloat(this.props.customize.customization.price) || 0;
-      const parsedOptionPrice = parseFloat(this.calculateCustomizationTotal()) || 0;
+      const parsedCustomPrice = parseFloat(this.calculateCustomizationTotal()) || 0;
+      const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
 
       const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
       return PRICE;

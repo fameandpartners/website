@@ -14,6 +14,7 @@ function generateBaseCode(length) {
 export default function configureStore(initialState) {
   const siteVersion = initialState.siteVersion.toLowerCase();
   const addons = initialState.product.available_options.table.addons;
+  const allCustomizations = initialState.product.available_options.table.customizations.table.all;
   initialState = assign({}, initialState,
     {
       lengths: [
@@ -129,7 +130,7 @@ export default function configureStore(initialState) {
     isEmpty(addons) ? {} :
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
-      addonOptions: initialState.product.available_options.table.customizations.table.all.map(
+      addonOptions: allCustomizations.map(
         (ao, i) => {
           const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
           return assign({}, {
@@ -150,7 +151,7 @@ export default function configureStore(initialState) {
         // 1038-base-01.png will create [1, 1, *, *]
         // 1038-base-23.png will create [*, *, 1, 1]
         // 1038-base.png will create    [*, *, *, *]
-        const baseCode = generateBaseCode(addons.base_images.length);
+        const baseCode = generateBaseCode(allCustomizations.length - 1);
         const filename = url.substring(url.lastIndexOf('/') + 1);
         const rgxp = /base-(.*).png/g;
         const matches = rgxp.exec(filename);

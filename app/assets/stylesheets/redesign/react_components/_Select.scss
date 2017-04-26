@@ -16,7 +16,12 @@
   padding: 0 35px 0 15px;
   text-align: left;
   white-space: nowrap;
-  transition: all 0.17s ease-in-out border 0.4s font 0.1s;
+  transition: all 0.17s ease-in-out, box-shadow 0.4s, font 0.1s;
+  -webkit-transition: all 0.17s ease-in-out, box-shadow 0.4s, font 0.1s;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px $c-neutral-12;
+  }
 
   &.is-open {
     border-color: $gray-light;
