@@ -2,12 +2,11 @@ class StyleToProductHeightRangeGroup < ActiveRecord::Base
   attr_accessible :product_height_range_group_id, :style_number, :product_height_range_group
   belongs_to :product_height_range_group
 
-  scope :with_style_number, ->(style_number) { where(style_number: style_number) }
+  scope :with_style_number, ->(style_number) { where(style_number: style_number).joins( :product_height_range_group) }
 
   def self.find_both_for_variant_or_use_default( variant )
     style_number  = variant&.product&.sku
-    height_groups = StyleToProductHeightRangeGroup.where(style_number: style_number )
-    with_style_number(style_number).presence || ProductHeightRangeGroup.defaults
+    with_style_number(style_number).presence&.collect(&:product_height_range_group) || ProductHeightRangeGroup.defaults
   end
 
   def self.map_height_values_to_height_name( variant, height_value, height_units )
