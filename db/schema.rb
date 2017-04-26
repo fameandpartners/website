@@ -359,6 +359,24 @@ ActiveRecord::Schema.define(:version => 20170425023634) do
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
 
+  create_table "layer_cads", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "position"
+    t.string   "base_image_name"
+    t.string   "layer_image_name"
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
+    t.string   "layer_image_file_name"
+    t.string   "layer_image_content_type"
+    t.integer  "layer_image_file_size"
+    t.datetime "layer_image_updated_at"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "customizations_enabled_for", :default => "--- []\n"
+  end
+
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
     t.integer  "variant_id"
