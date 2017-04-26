@@ -64,7 +64,7 @@ function mapStateToProps(state) {
     skirts: state.skirts,
     customize: state.customize,
     product: state.product,
-    hasAddons: isEmpty(state.addons),
+    hasAddons: !isEmpty(state.addons),
   };
 }
 
