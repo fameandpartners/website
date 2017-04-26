@@ -1,0 +1,241 @@
+ruby:
+  formNewsletterTop = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  formNewsletterBottom = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+
+= render partial: 'pages/robots'
+
+.page-the-anti-fast-fashion-shop.mobile-text-center
+
+  .container
+    section.section-box.section-intro.text-center.no-margin
+      .row
+        .col-md-6.hidden-xs.hidden-sm
+          = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1.jpg', class: "img-responsive"
+
+        .col-md-6
+          .content-copy.text-center
+            h1.title The Anti-Fast Fashion Shop
+            p Modern must-haves, made-to-order. All customizable. <br class="visible-lg">Never mass-produced.
+
+            .diagonal-line
+
+            .newsletter-signup-form
+              h5 This is just the beginning. <br class="hidden-lg">Sign up for style updates from Fame.
+
+              form class=(formNewsletterTop)
+                input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
+                .input-group
+                  input.form-control.input-md.js-en-field-email (type="email" placeholder="Enter your email" required="required")
+                  span.input-group-btn
+                    button.btn.btn-black.btn-xs type="submit" Sign up
+
+              = content_for :inline_javascript do
+                |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterTop}'});
+
+
+            .hidden-md.hidden-lg
+              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1-mob.jpg', class: "img-responsive"
+
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6'}
+
+    section.section-box.section-welcome.text-center
+      .row
+        .col-md-6
+          .row
+            .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+              .thin-line-separator--center
+              .content-copy
+                p Fame and Partners is taking a stand against the mass-produced fast-fashion culture–because together, we have to power to revolutionize the industry and reduce fashion waste. <br class="visible-lg">Welcome to Anti-Fast Fashion.
+
+          .content-img.hidden-md.hidden-lg
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2-mob.jpg', class: "img-responsive"
+
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-xs-6'}
+
+        .col-md-6.hidden-sm.hidden-xs
+          .content-img
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2.jpg', class: "img-responsive"
+
+    section.section-box.section-more-styles
+      .row
+        .col-xs-12
+          h4 More Styles
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+
+    section.section-box.section-feel-good-about.text-center
+      .row
+        .col-md-6.hidden-sm.hidden-xs
+          .content-img
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3.jpg', class: "img-responsive"
+
+        .col-md-6
+          .row
+            .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+              .thin-line-separator--center
+              .content-copy
+                p Anti-pollution. Anti-waste. Anti-uniformity. For the first time, women can shop customizable, ethically-produced clothing that’s made-to-order in under two weeks–and doesn’t break the bank. This is fashion you can feel good about.
+
+          .content-img.hidden-md.hidden-lg
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
+
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-xs-6'}
+
+    section.section-box.section-more-styles
+      .row
+        .col-xs-12
+          h4 More Styles
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 13, customWrapper: 'col-md-3 col-xs-6'}
+
+    section.section-box.section-shop-info.text-center
+      .row
+        .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2
+          .thin-line-separator--center
+          .content-copy
+            h3 <em>You</em> have the power to disrupt <br class="visible-lg">the system. Shop ethically. <br class="visible-lg">Shop Anti-Fast Fashion.
+
+    section.section-box.section-welcome.text-center
+      .row
+        .col-md-6.hidden-xs.hidden-sm
+          .row
+            .products-grid.products-collections.no-padding.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 14, rangeTo: 14, customWrapper: 'col-xs-6 col-md-offset-6'}
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 15, rangeTo: 16, customWrapper: 'col-xs-6'}
+
+        .col-xs-12.hidden-md.hidden-lg
+          .content-img
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
+
+          .products-grid.products-collections.no-margin.no-fixed-height
+            .products-set
+              = render partial: 'pick_products_without_content', locals: {rangeFrom: 14, rangeTo: 16, customWrapper: 'col-xs-6'}
+
+        .col-md-6.hidden-sm.hidden-xs
+          .content-img
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4.jpg', class: "img-responsive"
+
+    section.section-box.section-more-styles
+      .row
+        .col-xs-12
+          h4 More Styles
+          .row
+            .products-grid.products-collections.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
+
+    section.section-box.section-newsletter-footer.text-center
+      .row
+        .col-md-8.col-md-offset-2
+          .newsletter-signup-form
+            h4 This is just the beginning. Sign up for style updates from Fame.
+
+            form class=(formNewsletterBottom)
+              input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
+              .input-group
+                input.form-control.input-lg.js-en-field-email (type="email" placeholder="Enter your email" required="required")
+                span.input-group-btn
+                  button.btn.btn-black.btn-xs type="submit" Sign up
+
+              = content_for :inline_javascript do
+                |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterBottom}'});
+
+- content_for :body_end do
+
+  javascript:
+
+    var NewsletterSubscriberOnPage,
+      bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+    window.page || (window.page = {});
+
+    window.page.NewsletterSubscriberOnPage = NewsletterSubscriberOnPage = (function() {
+      function NewsletterSubscriberOnPage(opts) {
+        if (opts == null) {
+          opts = {};
+        }
+        this.success = bind(this.success, this);
+        this.failure = bind(this.failure, this);
+        this.handler = bind(this.handler, this);
+        this.submit = bind(this.submit, this);
+        this.url = bind(this.url, this);
+        this.campaign = opts.campaign || 'home';
+        this.$form = $('.' + opts.form);
+        this.$form.on('submit', this.submit);
+      }
+
+      NewsletterSubscriberOnPage.prototype.url = function() {
+        return this.$form.attr('action') + "?callback=?";
+      };
+
+      NewsletterSubscriberOnPage.prototype.submit = function(e) {
+        var $this, email, url;
+        e.preventDefault();
+        $this = $(e.target);
+        url = $('.js-en-field-mailchimp', $this)[0].value;
+        email = $('.js-en-field-email', $this)[0].value;
+        return $.ajax({
+          dataType: 'json',
+          url: url,
+          async: true,
+          data: {
+            email: email
+          },
+          success: this.handler
+        });
+      };
+
+      NewsletterSubscriberOnPage.prototype.handler = function(data) {
+        if (data.status === 'done') {
+          return this.success(data);
+        } else {
+          return this.failure(data);
+        }
+      };
+
+      NewsletterSubscriberOnPage.prototype.failure = function() {
+        var message, title;
+        title = 'Sorry';
+        message = 'Please enter a valid email';
+        window.helpers.showAlert({
+          message: message,
+          type: 'warning',
+          title: title,
+          timeout: 55555
+        });
+        return window.track.event('Newsletter', 'Error', this.campaign);
+      };
+
+      NewsletterSubscriberOnPage.prototype.success = function() {
+        var message, title;
+        title = 'thanks babe';
+        message = 'Thanks for signing up. You\'ll be the first to know what\'s new.';
+        window.helpers.showAlert({
+          message: message,
+          type: 'success',
+          title: title,
+          timeout: 55555
+        });
+        return window.track.event('Newsletter', 'Submitted', this.campaign);
+      };
+
+      return NewsletterSubscriberOnPage;
+
+    })();
