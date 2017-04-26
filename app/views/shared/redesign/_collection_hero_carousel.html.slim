@@ -1,7 +1,7 @@
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/april-13-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-1-mob.jpg"
-= link_to high_contrast_collection_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+- current_tile_image = "homepage/hero-featured/april-26-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-1-mob.jpg"
+= link_to "/the-anti-fast-fashion-shop?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -15,14 +15,14 @@
         .col-md-4
           .copy-wrap.copy-align--top.extra-padding-left
             h2.heading.no-margin-md.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Color <em>pop.</em>
-              span.sub-heading
-                | Style gets loud in super-saturated hues of red, pink, and navy. <em class="link-underline">Shop what’s new.</em>
+              span.sub-heading.hidden-md.hidden-lg
+                | Introducing<br/>
+                | The Anti-Fast Fashion Shop.<br/>
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/april-13-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-2-mob.jpg"
-= link_to modern_collection_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
+- current_tile_image = "homepage/hero-featured/april-26-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-2-mob.jpg"
+= link_to high_contrast_collection_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -33,16 +33,25 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-lg-3
-          .copy-wrap.copy-align--top.extra-padding-left
+        .col-md-4.col-lg-3.pull-right.hidden-xs.hidden-sm
+          .copy-wrap.copy-align--top.extra-padding-left.text-center
             h2.heading.no-margin-md
-              span.sub-heading.sub-heading--large.no-margin-md.no-padding
-                  | This dress was <em>made</em> for you, darling. <em class="link-underline">Customize</em> your evening look.
+              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
+                | Bright.</br>
+                | Bold.</br>
+                | Custom.</br>
+                <em class="link-underline hero-middle-header-link">Shop The High Contrast Collection.</em>
+        .col-md-4.col-lg-3.hidden-md.hidden-lg
+          .copy-wrap.copy-align--top.extra-padding-left.text-center
+            h2.heading.no-margin-md
+              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
+                | Bright. Bold. Custom. <br/>
+                <em class="link-underline">Shop The High Contrast Collection.</em>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-13-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-3-mob.jpg"
-= link_to bespoke_bridal_collection_landing_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
+= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -53,13 +62,15 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-5.col-md-offset-6
-          .copy-wrap.text-center
+        / .col-md-5.col-md-offset-6
+        .col-md-6
+          / .copy-wrap.text-center
+          .copy-wrap
             h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Elevated, elegant, and a bit irreverent.
+              span.title.title--large.hidden-xs.hidden-sm The modern wedding dress code dictates <em>stand-out</em> style.
               span.sub-heading.hidden-md.hidden-lg
-                  | Elevated, elegant, and a bit irreverent. <em class="link-underline">Shop</em> Bespoke Bridal.
+                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
 
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Bespoke Bridal</span>
+                | Customize <span class="copy-highlight">Your Look</span>
