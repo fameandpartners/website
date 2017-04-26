@@ -296,6 +296,9 @@ FameAndPartners::Application.routes.draw do
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
+    # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
+    get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
