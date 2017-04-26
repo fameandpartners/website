@@ -1,0 +1,95 @@
+// Gratitude Page Template
+
+.page-the-anti-fast-fashion-shop {
+  margin-bottom: 60px;
+
+  .diagonal-line {
+    @include transform (rotate(45deg));
+    border-top: 1px solid $c-neutral-black;
+    width: 30px;
+    margin: 50px auto;
+  }
+
+  .section-intro {
+
+    .newsletter-signup-form {
+      margin-bottom: 60px;
+    }
+
+  }
+
+  .thin-line-separator--center {
+    border-top: 1px solid $c-neutral-black;
+    display: block;
+    width: 20px;
+    content: "";
+    margin: 40px auto;
+
+    + .content-copy {
+      margin: 60px auto 80px;
+    }
+
+  }
+
+  .section-shop-info {
+
+    .content-copy {
+      margin-top: 0;
+    }
+
+  }
+
+  .section-newsletter-footer {
+    margin: 60px 0;
+  }
+
+  .products-grid {
+
+    .dropdown {
+      display: none;
+    }
+
+    .category--item .price {
+      display: inline-block;
+      margin: 0;
+    }
+
+    .details .product-name {
+      display: inline-block;
+      padding-right: 5px;
+      width: auto;
+      top: 6px;
+    }
+
+  }
+
+  .newsletter-signup-form {
+
+    form {
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    input {
+      height: 41px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .section-intro {
+
+      .newsletter-signup-form {
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+  }
+
+}
