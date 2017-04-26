@@ -1,4 +1,16 @@
 import { assign } from 'lodash';
+
+export function addonsReducer(state = {}, action) {
+  switch (action.type) {
+    case 'SET_ADDON_OPTIONS':
+      return assign({}, state, { addonOptions: action.addonOptions });
+    case 'SET_ADDON_BASE_LAYER':
+      return assign({}, state, { baseSelected: action.baseSelected });
+    default:
+      return state;
+  }
+}
+
 export function customizeReducer(state = {}, action) {
   switch (action.type) {
     case 'CUSTOMIZE_DRESS':

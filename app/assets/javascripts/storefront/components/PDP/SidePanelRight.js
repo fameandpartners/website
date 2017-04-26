@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 import SizeProfile from './SizeProfile';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
+import CADCustomize from './CADCustomize';
 import SidePanelFastMaking from './SidePanelFastMaking';
 import AddToBag from './AddToBag';
 
@@ -24,7 +26,10 @@ class PdpSidePanelRight extends Component {
             <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
               <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
               <SidePanelColor />
-              {this.props.skirts.length ? <SidePanelCustom /> : null}
+              {
+                this.props.hasAddons ? <CADCustomize /> :
+                this.props.skirts.length ? <SidePanelCustom /> : null
+              }
               <SizeProfile addToBagCallback={this.handleAddToBag} />
 
             </div>
@@ -51,6 +56,7 @@ PdpSidePanelRight.propTypes = {
   skirts: PropTypes.array.isRequired,
   customize: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired,
+  hasAddons: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -58,6 +64,7 @@ function mapStateToProps(state) {
     skirts: state.skirts,
     customize: state.customize,
     product: state.product,
+    hasAddons: !isEmpty(state.addons),
   };
 }
 

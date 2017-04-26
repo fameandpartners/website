@@ -1,10 +1,19 @@
 import { createStore, applyMiddleware } from 'redux';
-import { assign } from 'lodash';
+import { assign, isEmpty } from 'lodash';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
+function generateBaseCode(length) {
+  const code = [];
+  for (let i = 0; i <= length; i += 1) {
+    code.push('*');
+  }
+  return code;
+}
+
 export default function configureStore(initialState) {
   const siteVersion = initialState.siteVersion.toLowerCase();
+  const addons = initialState.product.available_options.table.addons;
   initialState = assign({}, initialState,
     {
       lengths: [
@@ -114,6 +123,44 @@ export default function configureStore(initialState) {
         },
       },
     },
+    // Unfortunately, old code does not take into account the concept of hydration,
+    // which does not work great on deep nesting. The ugly code below is a workaround
+    // to allow for hydration and add a computed property to the state tree
+    isEmpty(addons) ? {} :
+    { addons: assign({}, initialState.addons, {
+      // Marry previous customizations to addons
+      addonOptions: initialState.product.available_options.table.customizations.table.all.map(
+        (ao, i) => {
+          const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
+          return assign({}, {
+            id: ao.table.id,
+            name: ao.table.name,
+            price: ao.table.display_price,
+            img: mappedImageLayer ? mappedImageLayer.url : '',
+            active: false,
+          });
+        },
+      ),
+      baseImages: addons.base_images,
+      baseSelected: null,
+      addonsBasesComputed: addons.base_images.map(({ url }) => {
+        // [ID]-base-??
+        // Example "1038-base-01.png"
+        // We want to parse this and have computed a code for each file name
+        // 1038-base-01.png will create [1, 1, *, *]
+        // 1038-base-23.png will create [*, *, 1, 1]
+        // 1038-base.png will create    [*, *, *, *]
+        const baseCode = generateBaseCode(addons.base_images.length);
+        const filename = url.substring(url.lastIndexOf('/') + 1);
+        const rgxp = /base-(.*).png/g;
+        const matches = rgxp.exec(filename);
+
+        if (matches && matches[1]) {
+          matches[1].split('').forEach(i => baseCode[i] = '1');
+        }
+        return baseCode;
+      }),
+    }) },
   );
 
   if (process.env.NODE_ENV === 'development') {
