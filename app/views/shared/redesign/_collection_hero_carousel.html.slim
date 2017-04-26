@@ -1,7 +1,7 @@
 // Carousel Item 1
 - current_tile_image = "homepage/hero-featured/april-26-featured-1.jpg"
 - current_tile_image_mob = "homepage/hero-featured/april-26-featured-1-mob.jpg"
-= link_to "/the-anti-fast-fashion-shop?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
