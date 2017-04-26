@@ -34,7 +34,9 @@ class AddToBag extends React.Component {
   buildCustomizationIds() {
     const { addons, customize } = this.props;
     if (isEmpty(addons)) {
-      return [parseInt(customize.customization.id, 10)];
+      return customize.customization.id ?
+        [parseInt(customize.customization.id, 10)] :
+        [''];
     }
     // Filter active addonOptions
     return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
