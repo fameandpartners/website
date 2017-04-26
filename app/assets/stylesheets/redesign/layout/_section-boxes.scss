@@ -118,6 +118,24 @@ $top-overlay-margin-top: 37px;
 
   }
 
+  @media (max-width: $bootstrap-md-width) {
+
+    .section-img-wrap {
+
+      &.top-left-category-tile,
+      &.top-right-category-tile,
+      &.bottom-left-category-tile,
+      &.bottom-right-category-tile {
+        border-top: 2px solid #fff;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+    }
+
+  }
+
   .cta-item {
 
     &.col-md-6:nth-child(even) {
@@ -320,6 +338,11 @@ $top-overlay-margin-top: 37px;
 
 .section-last {
   margin-bottom: 60px;
+}
+
+.heading-wrapper-container {
+  // hacky but alas, time
+  overflow: visible !important;
 }
 
 .heading-overlay-wrapper {
