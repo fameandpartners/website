@@ -161,8 +161,8 @@ class CADCustomize extends Component {
           className={`clearfix CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
           onClick={this.handleAddonSelection(a)}
         >
-          <span className="price pull-right"> + ${displayPrice}</span>
-          <span className="name">{a.name}</span>
+          <span className="price pull-right noselect"> + ${displayPrice}</span>
+          <span className="name noselect">{a.name}</span>
         </li>
       );
     });
