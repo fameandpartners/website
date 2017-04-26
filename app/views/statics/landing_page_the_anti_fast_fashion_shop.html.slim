@@ -73,24 +73,34 @@ ruby:
 
     section.section-box.section-feel-good-about.text-center
       .row
+        .col-md-4.col-md-offset-4.col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2
+          .thin-line-separator--center
+          .content-copy
+            p Anti-pollution. Anti-waste. Anti-uniformity. <br class="visible-lg">For the first time, women can shop customizable, ethically-produced clothing that’s made-to-order in under two weeks–and doesn’t break the bank. This is fashion you can feel good about.
+
+    section.section-box.section-welcome.text-center
+      .row
         .col-md-6.hidden-sm.hidden-xs
           .content-img
             = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3.jpg', class: "img-responsive"
 
-        .col-md-6
+        .col-md-6.hidden-xs.hidden-sm
           .row
-            .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
-              .thin-line-separator--center
-              .content-copy
-                p Anti-pollution. Anti-waste. Anti-uniformity. For the first time, women can shop customizable, ethically-produced clothing that’s made-to-order in under two weeks–and doesn’t break the bank. This is fashion you can feel good about.
-
-          .content-img.hidden-md.hidden-lg
-            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
-
+            .products-grid.products-collections.no-padding.no-margin.no-fixed-height
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, customWrapper: 'col-xs-6'}
           .row
             .products-grid.products-collections.no-margin.no-fixed-height
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 10, customWrapper: 'col-xs-6'}
+
+        .col-xs-12.hidden-md.hidden-lg
+          .content-img
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
+
+          .products-grid.products-collections.no-margin.no-fixed-height
+            .products-set
+              = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 10, customWrapper: 'col-xs-6'}
 
     section.section-box.section-more-styles
       .row
@@ -99,34 +109,24 @@ ruby:
           .row
             .products-grid.products-collections.no-margin.no-fixed-height
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 13, customWrapper: 'col-md-3 col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 14, customWrapper: 'col-md-3 col-xs-6'}
 
-    section.section-box.section-shop-info.text-center
+    section.section-box.section-disrupt.text-center
       .row
-        .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2
-          .thin-line-separator--center
-          .content-copy
-            h3 <em>You</em> have the power to disrupt <br class="visible-lg">the system. Shop ethically. <br class="visible-lg">Shop Anti-Fast Fashion.
-
-    section.section-box.section-welcome.text-center
-      .row
-        .col-md-6.hidden-xs.hidden-sm
+        .col-md-6
           .row
-            .products-grid.products-collections.no-padding.no-margin.no-fixed-height
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 14, rangeTo: 14, customWrapper: 'col-xs-6 col-md-offset-6'}
+            .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+              .thin-line-separator--center
+              .content-copy
+                p <em>You</em> have the power to disrupt the system. Shop ethically. <br class="visible-lg">Shop Anti-Fast Fashion.
+
+          .content-img.hidden-md.hidden-lg
+            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
+
           .row
             .products-grid.products-collections.no-margin.no-fixed-height
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 15, rangeTo: 16, customWrapper: 'col-xs-6'}
-
-        .col-xs-12.hidden-md.hidden-lg
-          .content-img
-            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
-
-          .products-grid.products-collections.no-margin.no-fixed-height
-            .products-set
-              = render partial: 'pick_products_without_content', locals: {rangeFrom: 14, rangeTo: 16, customWrapper: 'col-xs-6'}
 
         .col-md-6.hidden-sm.hidden-xs
           .content-img
