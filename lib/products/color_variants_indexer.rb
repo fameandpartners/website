@@ -190,7 +190,7 @@ module Products
           }
         }
       end
-
+      binding.pry
       logger.info('Bulk Upload')
       index.bulk_store(variants)
       logger.info('Refresh')
