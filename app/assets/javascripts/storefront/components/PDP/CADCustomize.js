@@ -272,7 +272,7 @@ class CADCustomize extends Component {
             </div>
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Customize It</h2>
-          <p>
+          <p className="no-margin-bottom">
             Select as many as you want
           </p>
 
