@@ -14,7 +14,7 @@ class ProductHeightRangeGroup < ActiveRecord::Base
 
   def self.find_both_for_variant_or_use_default( variant )
     style_number  = variant&.product&.sku
-    with_style_number(style_number).presence&.collect(&:product_height_range_group) || ProductHeightRangeGroup.defaults
+    with_style_number(style_number).presence || ProductHeightRangeGroup.defaults
   end
   
 end
