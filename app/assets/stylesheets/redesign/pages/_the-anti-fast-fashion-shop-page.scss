@@ -83,15 +83,12 @@
     }
 
     .category--item .price {
-      display: inline-block;
       margin: 0;
     }
 
     .details .product-name {
-      display: inline-block;
       padding-right: 5px;
       width: auto;
-      top: 6px;
     }
 
   }
@@ -135,6 +132,20 @@
       .content-copy p {
         max-width: 350px;
         margin: 0 auto;
+      }
+
+    }
+
+
+    .products-grid {
+
+      .category--item .price,
+      .details .product-name {
+        display: inline-block;
+      }
+
+      .category--item .product-name {
+        top: 6px;
       }
 
     }
