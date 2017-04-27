@@ -37,7 +37,7 @@ ruby:
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1-mob.jpg', class: "img-responsive"
 
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6'}
 
@@ -54,7 +54,7 @@ ruby:
             = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2-mob.jpg', class: "img-responsive"
 
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-xs-6'}
 
@@ -67,7 +67,7 @@ ruby:
         .col-xs-12
           h4.more-styles-heading More Styles
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -86,11 +86,11 @@ ruby:
 
         .col-md-6.hidden-xs.hidden-sm
           .row
-            .products-grid.products-collections.no-padding.no-margin.no-fixed-height
+            .products-grid.products-collections.no-padding.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, customWrapper: 'col-xs-6'}
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 10, customWrapper: 'col-xs-6'}
 
@@ -98,7 +98,7 @@ ruby:
           .content-img
             = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
 
-          .products-grid.products-collections.no-margin.no-fixed-height
+          .products-grid.products-collections.no-margin
             .products-set
               = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 10, customWrapper: 'col-xs-6'}
 
@@ -107,7 +107,7 @@ ruby:
         .col-xs-12
           h4.more-styles-heading More Styles
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 14, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -124,7 +124,7 @@ ruby:
             = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
 
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 15, rangeTo: 16, customWrapper: 'col-xs-6'}
 
@@ -137,7 +137,7 @@ ruby:
         .col-xs-12
           h4.more-styles-heading More Styles
           .row
-            .products-grid.products-collections.no-margin.no-fixed-height
+            .products-grid.products-collections.no-margin
               .products-set
                 = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -145,7 +145,7 @@ ruby:
       .row
         .col-md-8.col-md-offset-2
           .newsletter-signup-form
-            h4 Sign up and be the first to know when new styles drop.
+            h5 Sign up and be the first to know when new styles drop.
 
             form class=(formNewsletterBottom)
               input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)

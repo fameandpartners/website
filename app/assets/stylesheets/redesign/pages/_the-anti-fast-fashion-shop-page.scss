@@ -17,11 +17,12 @@
   .section-intro {
 
     .title {
+      margin-top: 50px;
       margin-bottom: 5px;
     }
 
     .content-copy p {
-      line-height: 3.4rem;
+      line-height: 2.8rem;
     }
 
     .newsletter-signup-form {
@@ -34,7 +35,6 @@
     border-top: 1px solid $c-neutral-black;
     display: block;
     width: 20px;
-    content: "";
     margin: 28px auto;
 
     + .content-copy {
@@ -51,12 +51,16 @@
     padding: 0 25px;
   }
 
-  .section-welcome .content-copy p {
-    font-size: 2.4rem;
+  .section-feel-good-about,
+  .section-welcome {
+
+    .content-copy p {
+      font-size: 2.4rem;
+    }
+
   }
 
-  .section-disrupt,
-  .section-feel-good-about {
+  .section-disrupt {
 
     .content-copy p {
       font-size: 3.8rem;
@@ -110,6 +114,15 @@
 
   }
 
+  .products-set {
+
+    .col-md-3:nth-child(4n+1),
+    .col-md-4:nth-child(3n+1) {
+      clear: both;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .section-intro {
@@ -120,7 +133,7 @@
       }
 
       .content-copy p {
-        max-width: 400px;
+        max-width: 350px;
         margin: 0 auto;
       }
 
@@ -129,6 +142,11 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    .category--item {
+      min-height: 320px;
+    }
+
   }
 
 }
