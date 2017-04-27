@@ -562,9 +562,21 @@
   }
 
   .CAD--layer-wrapper {
-    height: 200px;
+    height: 400px;
+    position: relative;
+    width: 480px;
+    margin: 0 auto;
+    margin-bottom: 5px;
     position: relative;
   }
+
+  @media (min-width: $bootstrap-md-width) {
+    .CAD--layer-wrapper {
+      height: 220px;
+      width: auto;
+    }
+  }
+
 
   .CAD--layer {
     position: absolute;
