@@ -102,6 +102,7 @@
 
   // Overwrites
   &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+    margin: 0 15px;
     display: inline;
     font-size: 1.3rem;
     letter-spacing: 0.05rem;
@@ -113,13 +114,19 @@
     }
   }
 
-  &.nav-menu-container .home-menu .nav-main-menu span.lookbook {
+  &.nav-menu-container .home-menu .nav-main-menu span.dresses {
+    margin-left: 0px;
+  }
+
+  &.nav-menu-container .home-menu .nav-main-menu span.culture {
     margin-right: 0px;
   }
+
   .col .cta-link {
     font-weight: 300;
     font-family: $font-heading;
     font-style: italic;
     border-bottom: 1px solid $c-neutral-6;
   }
+
 }
