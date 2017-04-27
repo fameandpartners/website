@@ -16,6 +16,14 @@
 
   .section-intro {
 
+    .title {
+      margin-bottom: 5px;
+    }
+
+    .content-copy p {
+      line-height: 3.4rem;
+    }
+
     .newsletter-signup-form {
       margin-bottom: 60px;
     }
@@ -27,24 +35,31 @@
     display: block;
     width: 20px;
     content: "";
-    margin: 40px auto;
+    margin: 28px auto;
 
     + .content-copy {
-      margin: 60px auto 80px;
+      margin: 40px auto 80px;
     }
 
   }
 
   .section-feel-good-about .content-copy {
     margin-top: 0;
-    font-size: 2.6rem;
   }
 
   .section-disrupt .content-copy {
     padding: 0 25px;
+  }
 
-    p {
-      font-size: 2.8rem;
+  .section-welcome .content-copy p {
+    font-size: 2.4rem;
+  }
+
+  .section-disrupt,
+  .section-feel-good-about {
+
+    .content-copy p {
+      font-size: 3.8rem;
     }
 
   }
@@ -57,6 +72,10 @@
 
     .dropdown {
       display: none;
+    }
+
+    .category--item .details {
+      margin: 2px 0 15px;
     }
 
     .category--item .price {
@@ -76,12 +95,17 @@
   .newsletter-signup-form {
 
     form {
-      max-width: 460px;
+      max-width: 354px;
       margin: 0 auto;
     }
 
     input {
       height: 41px;
+    }
+
+    .btn {
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
   }
@@ -93,6 +117,11 @@
       .newsletter-signup-form {
         margin-left: 10%;
         margin-right: 10%;
+      }
+
+      .content-copy p {
+        max-width: 400px;
+        margin: 0 auto;
       }
 
     }
