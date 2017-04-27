@@ -55,6 +55,12 @@ window.SideMenu = class SideMenu
       @slideMainMenu()
       $("#dresses-menu").toggleClass("sub-menu-slide-left")
 
+    $("#culture-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#culture-menu").toggleClass("sub-menu-slide-left")
+    $("#culture-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#culture-menu").toggleClass("sub-menu-slide-left")
 
     $("#event-menu-open").on 'click', =>
       @slideMainMenu()
@@ -111,6 +117,8 @@ window.SideMenu = class SideMenu
       lowestItemPosition = $("#events-menu .nav").height()
     else if $("#lookbook-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#lookbook-menu .nav").height()
+    else if $("#culture-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#lookbook-menu .nav").height()
     else if $("#magazine-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#magazine-menu .nav").height()
 
@@ -122,6 +130,7 @@ window.SideMenu = class SideMenu
     @$overlay.addClass('is-visible')
     $("#new-this-week-menu").show()
     $("#dresses-menu").show()
+    $("#culture-menu").show()
     $("#events-menu").show()
     $("#lookbook-menu").show()
     $("#magazine-menu").show()
@@ -129,6 +138,7 @@ window.SideMenu = class SideMenu
   close: () =>
     $("#new-this-week-menu").hide().removeClass("sub-menu-slide-left")
     $("#dresses-menu").hide().removeClass("sub-menu-slide-left")
+    $("#culture-menu").hide().removeClass("sub-menu-slide-left")
     $("#events-menu").hide().removeClass("sub-menu-slide-left")
     $("#lookbook-menu").hide().removeClass("sub-menu-slide-left")
     $("#magazine-menu").hide().removeClass("sub-menu-slide-left")
