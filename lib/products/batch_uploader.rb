@@ -113,7 +113,10 @@ module Products
                                       
         style_array << {customizations_enabled_for: customizations_enabled_for, 
                         base_image_name: current_row[columns["base_image_name"] - 1] ,
-                        layer_image_name: current_row[columns["layer_image"] - 1] }
+                        layer_image_name: current_row[columns["layer_image"] - 1],
+                        width: current_row[columns["width"] - 1],
+                        height: current_row[columns["height"] - 1]
+        }
         
       end
       parsed_data.each do |style|
