@@ -756,7 +756,7 @@ ul.secondary.pull-right {
   }
 
   @media(min-width: 600px)and(max-width:767px){
-    #new-this-week-menu, #dresses-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
+    #new-this-week-menu, #dresses-menu, #culture-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
       .text-back{
         width: 85% !important;
       }
@@ -792,7 +792,7 @@ ul.secondary.pull-right {
     .grey-item{
       margin-left: 0px !important;
     }
-    #dresses-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
+    #dresses-menu, #culture-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
       margin-top: 125px !important;
       .text{
         width: 90% !important;
@@ -848,7 +848,7 @@ ul.secondary.pull-right {
         margin-left: 0px !important;
       }
     }
-    #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
+    #lookbook-menu, #culture-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
       margin-top: 125px !important;
       .text{
         width: 90% !important;
@@ -911,7 +911,7 @@ ul.secondary.pull-right {
       margin-left: 0;
     }
   }
-  #dresses-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
+  #dresses-menu, #culture-menu, #lookbook-menu, #wedding-menu, #moodboards-menu, #magazine-menu, #events-menu{
     height: 100%;
     background-color: white;
     position: absolute;
