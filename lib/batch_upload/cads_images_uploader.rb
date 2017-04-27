@@ -11,11 +11,15 @@ module BatchUpload
             if( cad.base_image_name )
               cad.base_image = File.open( "#{path}/#{directory_name}/#{cad.base_image_name.downcase}" )
               cad.save
+              # if you update any of the cut sizes and want them regenerated you have to call reprocess
+              cad.base_image.reprocess!
            end
             
             if( cad.layer_image_name )
               cad.layer_image = File.open( "#{path}/#{directory_name}/#{cad.layer_image_name.downcase}" )
               cad.save
+              # if you update any of the cut sizes and want them regenerated you have to call reprocess
+              cad.layer_image.reprocess!
             end
           end
         end

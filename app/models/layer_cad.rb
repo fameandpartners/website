@@ -7,7 +7,7 @@ class LayerCad < ActiveRecord::Base
   has_attached_file :base_image,
                     :styles => lambda { |a|
                                            { :original => "944x800",
-                                             :display => "-gravity Center -crop #{a.width}x#{a.height}+0+0 +repage" }
+                                             :display => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
                     },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
@@ -16,8 +16,9 @@ class LayerCad < ActiveRecord::Base
 
   has_attached_file :layer_image,
                     :styles => lambda { |a|
+   
                                            { :original => "944x800",
-                                             :display => "-gravity Center -crop #{a.width}x#{a.height}+0+0 +repage" }
+                                             :display => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
                      },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',

@@ -510,8 +510,8 @@ module Products
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
       section_heading = get_section_heading(sku: args[:sku], name: args[:name])
-      info "#{section_heading} Building"
-
+      info "#{section_heading} Building #{sku}"
+      
       raise 'SKU should be present!' unless sku.present?
 
       master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
