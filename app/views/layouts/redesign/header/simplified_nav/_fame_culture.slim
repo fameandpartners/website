@@ -1,0 +1,24 @@
+- cache ['views/layouts/redesign/header/simplified_nav/_fame_culture'] do
+  .flex-container
+    .col.flex1.dresses-shop-by
+      ul
+        li.title About
+        = render partial: 'layouts/redesign/header/simplified_nav/about'
+
+    .col.flex1.dresses-shop-by
+      ul
+        li.title Community
+        = render partial: 'layouts/redesign/header/simplified_nav/community'
+
+    .col.picture-col
+      .wedding-planner.nav-item
+        = link_to 'http://blog.fameandpartners.com/think-every-closet-like-mini-gallery/'
+          = image_tag 'simplified-nav/fameculture.jpg', class: 'img-responsive nav-img', alt: 'Lauren Gould'
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .cta-wrap
+                  span.cta-copy.cta-link-white-bg
+                    span.cta-link Read
+                    span.copy-highlight  Lauren Gould on Wearable Art
