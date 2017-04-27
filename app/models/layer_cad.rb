@@ -5,14 +5,20 @@ class LayerCad < ActiveRecord::Base
   belongs_to :product, class_name: 'Spree::Product'
   
   has_attached_file :base_image,
-                    :styles => { :original => "944x800", :display => "-gravity Center -crop 760x680+0+0 +repage" },
+                    :styles => lambda { |a|
+                                           { :original => "944x800",
+                                             :display => "-gravity Center -crop #{a.width}x#{a.height}+0+0 +repage" }
+                    },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :convert_options => { :all => '-strip -auto-orient' }
 
   has_attached_file :layer_image,
-                    :styles => { :original => "944x800", :display => "-gravity Center -crop 760x680+0+0 +repage" },
+                    :styles => lambda { |a|
+                                           { :original => "944x800",
+                                             :display => "-gravity Center -crop #{a.width}x#{a.height}+0+0 +repage" }
+                     },
                     :default_style => :original,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
