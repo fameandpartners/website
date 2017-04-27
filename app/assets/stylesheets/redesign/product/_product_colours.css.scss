@@ -286,7 +286,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-icing-pink-and-red      { @include split-color-selector($product-color-icing-pink, $product-color-red);  }
 .color-indigo                  { background-color: $product-color-indigo; }
 .color-indigo-cotton-stripe    { @include image-color-selector('IndigoCottonStripe.png'); }
-.color-irridescent-green       { @include image-color-selector('IrridescentGreen.jpg'); }
+.color-iridescent-green       { @include image-color-selector('IridescentGreen.jpg'); }
 .color-ivory                   { background-color: $product-color-ivory; }
 .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
 .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }

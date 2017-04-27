@@ -7,12 +7,12 @@ class UpdateColorGroups < ActiveRecord::Migration
     update_color_group('grey', %w( pale-grey grey mid-grey charcoal water-grey winter-grey grey-marle) )
     update_color_group('blue', %w( pale-blue cobalt-blue ice-blue indigo navy aqua cornflower-blue azure chambray pale-blue-cotton-stripe indigo-cotton-stripe ) )
     update_color_group('purple', %w(lilac lavender dark-lavender mauve plum purple) )
-    update_color_group('green', %w( mint dark-mint olive army-green dark-forest sage-green teal aqua light-teal dark-teal turquoise apple-green light-khaki olive-shimmer irridescent-green forest-green green ) )
+    update_color_group('green', %w( mint dark-mint olive army-green dark-forest sage-green teal aqua light-teal dark-teal turquoise apple-green light-khaki olive-shimmer iridescent-green forest-green green ) )
     update_color_group('pink', %w( candy-pink pale-pink light-pink blush rose watermelon coral salmon petal-pink pink-nouveau hot-pink magenta flamingo-pink berry pretty-pink pink dusk mushroom dusty-mushroom) )
     update_color_group('red', %w(burgundy red cherry-red lipstick-red dark-burgundy ) )
     update_color_group('pastel', %w(pale-pink pale-blue pale-yellow pale-grey peach pastel-peach ) )
     update_color_group('metallic', %w(silver gold olive-shimmer gold-shimmer pink-shimmer gunmetal bronze dark-gold pale-silver) )
-    
+
   end
 
   def down
@@ -27,7 +27,7 @@ class UpdateColorGroups < ActiveRecord::Migration
     update_color_group('red', %w(burgundy red lipstick-red dark-burgundy cherry-red) )
     update_color_group('pastel', %w(pale-yellow pale-blue pastel-peach peach pale-pink pale-yellow pale-grey) )
     update_color_group('metallic', %w(gold bronze silver gunmetal pink-shimmer gold-shimmer olive-shimmer) )
-    
+
   end
 
   private
@@ -40,5 +40,5 @@ class UpdateColorGroups < ActiveRecord::Migration
     group.option_values = color_name_array.collect { |name| color(name) }
     group.save
   end
-  
+
 end
