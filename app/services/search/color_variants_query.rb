@@ -85,7 +85,14 @@ binding.pry
         end
 
         if taxons.present?
-          filter :terms, 'product.taxon_ids' => taxons
+          # NOTE: Alexey Bobyrev 25 May 2017
+          # We need to filter products by exact ids of taxon records
+          # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
+          taxons_terms = taxons.map do |taxon_id|
+            { term: { 'product.taxon_ids' => taxon_id } }
+          end
+
+          filter :bool, { must: taxons_terms }
         end
 
         # exclude items marked not-a-dress
