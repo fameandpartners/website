@@ -19,6 +19,7 @@
     .title {
       margin-top: 50px;
       margin-bottom: 5px;
+      font-size: 3.5rem;
     }
 
     .content-copy p {
@@ -38,7 +39,7 @@
     margin: 28px auto;
 
     + .content-copy {
-      margin: 40px auto 80px;
+      margin: 25px auto 80px;
     }
 
   }
@@ -63,7 +64,7 @@
   .section-disrupt {
 
     .content-copy p {
-      font-size: 3.8rem;
+      font-size: 3.7rem;
     }
 
   }
@@ -136,13 +137,7 @@
 
     }
 
-
     .products-grid {
-
-      .category--item .price,
-      .details .product-name {
-        display: inline-block;
-      }
 
       .category--item .product-name {
         top: 6px;
@@ -150,9 +145,21 @@
 
     }
 
+    .section-feel-good-about .content-copy {
+      max-width: 400px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    .section-intro {
+
+      .title {
+        font-size: 3.4rem;
+      }
+
+    }
 
     .category--item {
       min-height: 320px;
