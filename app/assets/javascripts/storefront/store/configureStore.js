@@ -136,12 +136,13 @@ export default function configureStore(initialState) {
           return assign({}, {
             id: ao.table.id,
             name: ao.table.name,
+            position: mappedImageLayer ? mappedImageLayer.position : '',
             price: ao.table.display_price,
             img: mappedImageLayer ? mappedImageLayer.url : '',
             active: false,
           });
         },
-      ),
+      ).reverse(),
       baseImages: addons.base_images,
       baseSelected: null,
       addonsBasesComputed: addons.base_images.map(({ url }) => {

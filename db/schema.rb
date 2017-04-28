@@ -153,7 +153,6 @@ ActiveRecord::Schema.define(:version => 20170427165431) do
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
-    t.string   "point_of_view"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -365,6 +364,14 @@ ActiveRecord::Schema.define(:version => 20170427165431) do
     t.integer  "position"
     t.string   "base_image_name"
     t.string   "layer_image_name"
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
+    t.string   "layer_image_file_name"
+    t.string   "layer_image_content_type"
+    t.integer  "layer_image_file_size"
+    t.datetime "layer_image_updated_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.string   "customizations_enabled_for", :default => "--- []\n"
@@ -730,7 +737,6 @@ ActiveRecord::Schema.define(:version => 20170427165431) do
     t.string  "option_type"
     t.decimal "price",                     :precision => 10, :scale => 2
     t.string  "currency",    :limit => 10
-    t.integer "discount"
   end
 
   add_index "product_making_options", ["product_id", "active", "option_type"], :name => "index_product_making_options_on_product_id"
