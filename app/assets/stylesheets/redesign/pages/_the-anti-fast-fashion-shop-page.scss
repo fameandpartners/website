@@ -15,6 +15,7 @@
   }
 
   .section-intro {
+    margin-top: 50px;
 
     .title {
       margin-top: 50px;
@@ -24,6 +25,7 @@
 
     .content-copy p {
       line-height: 2.8rem;
+      margin: 0 auto;
     }
 
     .newsletter-signup-form {
@@ -132,7 +134,6 @@
 
       .content-copy p {
         max-width: 350px;
-        margin: 0 auto;
       }
 
     }
@@ -140,7 +141,7 @@
     .products-grid {
 
       .category--item .product-name {
-        top: 6px;
+        margin-top: 6px;
       }
 
     }
@@ -153,7 +154,12 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    .diagonal-line {
+      margin: 35px auto;
+    }
+
     .section-intro {
+      margin-top: 0;
 
       .title {
         font-size: 3.4rem;
