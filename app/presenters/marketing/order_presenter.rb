@@ -95,7 +95,7 @@ module Marketing
           size:                   item.size_name,
           color:                  item.colour_name,
           height:                 item.height,
-          display_height:         convert_height_units(item.personalization.height_value, item.personalization.height_unit),
+          display_height:         convert_height_units(item.personalization&.height_value, item.personalization&.height_unit),
           customisation:          item.customisation_text,
           image_url:              item.image_url
         }
