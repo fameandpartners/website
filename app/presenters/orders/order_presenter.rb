@@ -141,7 +141,7 @@ module Orders
     end
 
     def missing_image_to_nil(url)
-      url.includes?('missing.png') ? nil : url
+      url.include?('missing.png') ? nil : url
     end
 
     def extract_line_items
