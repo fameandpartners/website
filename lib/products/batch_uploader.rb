@@ -113,7 +113,10 @@ module Products
                                       
         style_array << {customizations_enabled_for: customizations_enabled_for, 
                         base_image_name: current_row[columns["base_image_name"] - 1] ,
-                        layer_image_name: current_row[columns["layer_image"] - 1] }
+                        layer_image_name: current_row[columns["layer_image"] - 1],
+                        width: current_row[columns["width"] - 1],
+                        height: current_row[columns["height"] - 1]
+        }
         
       end
       parsed_data.each do |style|
@@ -507,8 +510,8 @@ module Products
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
       section_heading = get_section_heading(sku: args[:sku], name: args[:name])
-      info "#{section_heading} Building"
-
+      info "#{section_heading} Building #{sku}"
+      
       raise 'SKU should be present!' unless sku.present?
 
       master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first

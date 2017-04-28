@@ -121,6 +121,21 @@ describe Products::BatchUploader do
     expect( product.layer_cads[0].layer_image_name ).to eq(nil)
   end unless @disabled
 
+  it "should be able to set the width and the height should be set" do
+    batch_uploader = Products::BatchUploader.new( Date.today )
+    
+    expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import_with_cads.xlsx' ) ).to eq( true )
+    data = batch_uploader.parsed_data
+    product = batch_uploader.create_or_update_products(data).first
+
+    expect( product.layer_cads.size ).to eq(6)
+    expect( product.layer_cads[0].width ).to eq(760)
+    expect( product.layer_cads[0].height ).to eq(680)
+    expect( product.layer_cads[1].width ).to eq(100)
+    expect( product.layer_cads[1].height ).to eq(200)
+    
+  end unless @disabled
+  
   it "should correctly the set the height mappings if the height mapping count column isn't present" do
     batch_uploader = Products::BatchUploader.new( Date.today )
     expect(batch_uploader.parse_file( 'spec/test_data/test_batch_import.xlsx' ) ).to eq( true )

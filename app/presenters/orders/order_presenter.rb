@@ -140,6 +140,10 @@ module Orders
       @return_request ||= OrderReturnRequest.where(:order_id => spree_order.id).first
     end
 
+    def missing_image_to_nil(url)
+      url.includes?('missing.png') ? nil : url
+    end
+
     def extract_line_items
       self.line_items.collect do |item|
         {
@@ -175,7 +179,7 @@ module Orders
            # :customizations_0=>{:name=>"N/A", :url=>nil},
            # :customizations_1=>{:name=>"Cool", :url=>nil},
           item.customisations.each_with_index.map do |(name, image_url), idx|
-            ["customizations_#{idx}".to_sym, {name: name, url: image_url.to_s}]
+            ["customizations_#{idx}".to_sym, {name: name, url: missing_image_to_nil(image_url.to_s)}]
           end.to_h
         )
       end
