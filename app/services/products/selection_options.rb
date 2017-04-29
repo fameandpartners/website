@@ -144,7 +144,7 @@ module Products
           if cad.send("#{type}_image_name")
             {
               name: cad.send("#{type}_image_name"),
-              url:  cad.send("#{type}_image").url(:display),
+              url:  cad.send("#{type}_image").url,
               position: cad.position,
               bit_array: cad.customizations_enabled_for
             }
