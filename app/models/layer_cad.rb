@@ -7,9 +7,9 @@ class LayerCad < ActiveRecord::Base
   has_attached_file :base_image,
                     :styles => lambda { |a|
                                            { :original => "944x800",
-                                             :display => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
+                                             :web => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
                     },
-                    :default_style => :original,
+                    :default_style => :web,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :convert_options => { :all => '-strip -auto-orient' }
@@ -18,9 +18,9 @@ class LayerCad < ActiveRecord::Base
                     :styles => lambda { |a|
    
                                            { :original => "944x800",
-                                             :display => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
+                                             :web => "-gravity Center -crop #{a.instance.width}x#{a.instance.height}+0+0 +repage" }
                      },
-                    :default_style => :original,
+                    :default_style => :web,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :convert_options => { :all => '-strip -auto-orient' }
