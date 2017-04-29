@@ -106,17 +106,11 @@ window.SideMenu = class SideMenu
   open: () =>
     @$container.css("margin-left", @$container.width())
     @$overlay.addClass('is-visible')
-    $("#new-this-week-menu").show()
-    $("#dresses-menu").show()
-    $("#culture-menu").show()
-    $("#events-menu").show()
-    $("#lookbook-menu").show()
-    $("#magazine-menu").show()
+    $("#new-this-week-menu, #dresses-menu, #culture-menu, #events-menu, #lookbook-menu, #magazine-menu").show()
 
   close: () =>
     $("#new-this-week-menu, #dresses-menu, #culture-menu, #events-menu, #lookbook-menu, #magazine-menu").hide().removeClass("sub-menu-slide-left")
-    $("#inner-main-menu li[class*='normal-item']").removeClass('inner-main-menu-slide-left')
-    $("#inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
+    $("#inner-main-menu li[class*='normal-item'], #inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
     @$container.css("margin-left", -@$container.width())
     @$overlay.removeClass('is-visible')
 
