@@ -88,6 +88,8 @@
             <% else: %>
               <% if product.display_height: %>
                 <dd>Height: <span><%= product.display_height %></span></dd>
+              <% else: %>
+                <dd>Skirt Length: <span><%= product.height %></span></dd>
               <% end %>
             <% end %>
             <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
