@@ -363,6 +363,7 @@ GEM
       elasticsearch-transport (= 5.0.4)
     elasticsearch-api (5.0.4)
       multi_json
+    elasticsearch-dsl (0.1.5)
     elasticsearch-model (5.0.0)
       activesupport (> 3)
       elasticsearch (> 1)
@@ -375,6 +376,9 @@ GEM
       hashie
       virtus
     elasticsearch-rails (5.0.0)
+    elasticsearch-ruby (0.0.4)
+      activesupport (>= 3.0.0)
+      thrift
     elasticsearch-transport (5.0.4)
       faraday
       multi_json
@@ -859,6 +863,7 @@ GEM
       power_assert
     thor (0.19.1)
     thread_safe (0.3.5)
+    thrift (0.10.0.0)
     tilt (1.4.1)
     timecop (0.8.0)
     tins (1.5.1)
@@ -955,10 +960,11 @@ DEPENDENCIES
   default_value_for
   device_detector (~> 0.8.1)
   eco
-  elasticsearch
+  elasticsearch-dsl
   elasticsearch-model
   elasticsearch-persistence
   elasticsearch-rails
+  elasticsearch-ruby
   event_sourced_record
   execjs (~> 2)
   factory_girl_rails (= 4.2.1)
