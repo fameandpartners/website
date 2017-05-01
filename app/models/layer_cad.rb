@@ -6,25 +6,24 @@ class LayerCad < ActiveRecord::Base
   
   has_attached_file :base_image,
                     :styles => lambda { |a|
-    puts "#{a.instance.width}x#{a.instance.height}#"
                                            { :original => "944x800",
-                                             :web => "#{a.instance.width}x#{a.instance.height}#"
+                                             :web => "#{a.instance.width}x#{a.instance.height}"
                                            }
                     },
                     :default_style => :web,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
-                    :convert_options => { :web => '-quality 100 -strip -auto-orient -gravity Center' }
+                    :processors => [:cropper]
   has_attached_file :layer_image,
                     :styles => lambda { |a|
    
                                            { :original => "944x800",
-                                             :web => "#{a.instance.width}x#{a.instance.height}#" }
+                                             :web => "#{a.instance.width}x#{a.instance.height}" }
                      },
                     :default_style => :web,
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
-                    :convert_options => { :all => '-quality 100 -strip -auto-orient -gravity Center' }
+                    :processors => [:cropper]                    
   before_save :rename_files
 
   def rename_files
