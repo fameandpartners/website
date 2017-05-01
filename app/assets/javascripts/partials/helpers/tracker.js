@@ -103,8 +103,6 @@ window.track = {
   },
 
   antiFastTrack: function (action, label) {
-    console.log('calling', action, label);
-    console.log('this', this);
     this.event('Collection', action, label, false);
   },
 };

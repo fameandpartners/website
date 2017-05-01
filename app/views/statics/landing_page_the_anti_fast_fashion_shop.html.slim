@@ -26,9 +26,11 @@ ruby:
               form class=(formNewsletterTop)
                 input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
                 .input-group
-                  input.form-control.input-md.js-en-field-email (type="email" placeholder="Enter your email" required="required")
+                  .js-anti-fast-click-track data-action='Email Field Press'
+                    input.form-control.input-md.js-en-field-email (type="email" placeholder="Enter your email" required="required")
                   span.input-group-btn
-                    button.btn.btn-black.btn-xs type="submit" Sign up
+                    .js-anti-fast-click-track data-action='Email Signup Button Press'
+                      button.btn.btn-black.btn-xs type="submit" Sign up
 
               = content_for :inline_javascript do
                 |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterTop}'});
@@ -74,8 +76,9 @@ ruby:
           h4.more-styles-heading More Styles
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+              .js-anti-fast-click-track data-action='More Styles Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-feel-good-about.text-center
       .row
@@ -119,8 +122,9 @@ ruby:
           h4.more-styles-heading More Styles
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 14, customWrapper: 'col-md-3 col-xs-6'}
+              .js-anti-fast-click-track data-action='More Styles Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 14, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-disrupt.text-center
       .row
@@ -151,7 +155,7 @@ ruby:
           h4.more-styles-heading More Styles
           .row
             .products-grid.products-collections.no-margin
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press - Product Press'
+              .js-anti-fast-click-track data-action='More Styles Product Press'
                 .products-set
                   = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -164,9 +168,11 @@ ruby:
             form class=(formNewsletterBottom)
               input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
               .input-group
-                input.form-control.input-lg.js-en-field-email (type="email" placeholder="Enter your email" required="required")
+                .js-anti-fast-click-track data-action='Email Field Press'
+                  input.form-control.input-lg.js-en-field-email (type="email" placeholder="Enter your email" required="required")
                 span.input-group-btn
-                  button.btn.btn-black.btn-xs type="submit" Sign up
+                  .js-anti-fast-click-track data-action='Email Signup Button Press'
+                    button.btn.btn-black.btn-xs type="submit" Sign up
 
               = content_for :inline_javascript do
                 |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterBottom}'});
