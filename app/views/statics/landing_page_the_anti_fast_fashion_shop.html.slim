@@ -10,7 +10,7 @@ ruby:
     section.section-box.section-intro.text-center
       .row
         .col-md-6.hidden-xs.hidden-sm
-          .js-anti-fast-click-track data-action='{Drop 1 - Editorial 1 Press}'
+          .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press'
             = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1.jpg', class: "img-responsive"
 
         .col-md-6
@@ -35,13 +35,14 @@ ruby:
 
 
             .hidden-md.hidden-lg
-              .js-anti-fast-click-track data-action='{Drop 1 - Editorial 1 Press}'
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press'
                 = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1-mob.jpg', class: "img-responsive"
 
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6'}
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press - Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6 js-anti-fast-click-track', action: 'Drop 1 - Editorial 1 Press'}
 
     section.section-box.section-welcome.text-center
       .row
@@ -53,17 +54,18 @@ ruby:
                 p Fame and Partners is taking a stand against the mass-produced fast-fashion culture–because together, we have to power to revolutionize the industry and reduce fashion waste. <br class="visible-lg">Welcome to Anti-Fast Fashion.
 
           .content-img.hidden-md.hidden-lg
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 2 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2-mob.jpg', class: "img-responsive"
 
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-xs-6'}
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press - Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-xs-6'}
 
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 2 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2.jpg', class: "img-responsive"
 
     section.section-box.section-more-styles
@@ -86,27 +88,30 @@ ruby:
       .row
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 3 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3.jpg', class: "img-responsive"
 
         .col-md-6.hidden-xs.hidden-sm
           .row
             .products-grid.products-collections.no-padding.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, customWrapper: 'col-xs-6'}
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, customWrapper: 'col-xs-6'}
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 10, customWrapper: 'col-xs-6'}
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 10, customWrapper: 'col-xs-6'}
 
         .col-xs-12.hidden-md.hidden-lg
           .content-img
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 3 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
 
           .products-grid.products-collections.no-margin
-            .products-set
-              = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 10, customWrapper: 'col-xs-6'}
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 10, customWrapper: 'col-xs-6'}
 
     section.section-box.section-more-styles
       .row
@@ -127,7 +132,7 @@ ruby:
                 p <em>You</em> have the power to disrupt the system. Shop ethically. Shop Anti-Fast Fashion.
 
           .content-img.hidden-md.hidden-lg
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 4 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
 
           .row
@@ -137,7 +142,7 @@ ruby:
 
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='{Drop 1 - Editorial 4 Press}'
+            .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press'
               = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4.jpg', class: "img-responsive"
 
     section.section-box.section-more-styles
@@ -146,8 +151,9 @@ ruby:
           h4.more-styles-heading More Styles
           .row
             .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
+              .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press - Product Press'
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-newsletter-footer.text-center
       .row
