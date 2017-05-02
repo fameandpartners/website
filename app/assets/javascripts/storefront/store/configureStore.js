@@ -142,7 +142,7 @@ export default function configureStore(initialState) {
             active: false,
           });
         },
-      ).reverse(),
+      ),
       baseImages: addons.base_images,
       baseSelected: null,
       addonsBasesComputed: addons.base_images.map(({ url }) => {
