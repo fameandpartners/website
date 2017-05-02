@@ -25,7 +25,7 @@ class Products::CollectionResource
 
   attr_reader :site_version
   attr_reader :collection
-  attr_reader :style
+  attr_reader :styles
   attr_reader :edits
   attr_reader :event
   attr_reader :bodyshape
@@ -44,7 +44,7 @@ class Products::CollectionResource
   def initialize(options = {})
     @site_version                    = options[:site_version] || SiteVersion.default
     @collection                      = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
-    @style                           = Repositories::Taxonomy.get_taxon_by_name(options[:style])
+    @styles                          = Array.wrap(Repositories::Taxonomy.get_taxon_by_name(options[:style]))
     @edits                           = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event                           = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape                       = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
@@ -69,14 +69,14 @@ class Products::CollectionResource
   # what about ProductCollection class
   def read
     color     = color.first if color.is_a? Array
-    style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
 
     Products::CollectionPresenter.from_hash(
       products:       products,
       total_products: total_products,
       collection:     collection,
-      style:          style,
+      style:          styles.first,
+      styles:         styles,
       event:          event,
       bodyshape:      bodyshape,
       color:          color_group.try(:[], :representative) || color,
@@ -107,7 +107,7 @@ class Products::CollectionResource
     @details ||= 
       Products::CollectionDetails.new(
         collection:     collection,
-        style:          style,
+        style:          styles.first,
         event:          event,
         edits:          edits,
         bodyshape:      bodyshape,
@@ -136,7 +136,7 @@ class Products::CollectionResource
     result = { taxon_ids: [] }
 
     result[:taxon_ids].push(collection.id) if collection.present?
-    Array.wrap(style).compact.each do |s|
+    styles.compact.each do |s|
       result[:taxon_ids].push(s.id)
     end
     result[:taxon_ids].push(edits.id) if edits.present?
@@ -206,7 +206,7 @@ class Products::CollectionResource
     end
 
     # apply custom order
-    if order.blank? && color.blank? && style.blank?
+    if order.blank? && color.blank? && styles.blank?
       result = Products::ProductsSorter.new(products: result).sorted_products
     end
 

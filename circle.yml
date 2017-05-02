@@ -14,10 +14,6 @@ dependencies:
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
     - gem list bundler -i || gem install bundler
 
-checkout:
-  post:
-    - rm -rf vendor/bundle
-
 machine:
   ruby:
     version: 2.3.3
@@ -37,4 +33,5 @@ general:
 
 test:
   override:
-    - bundle exec rspec spec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
+    - case $CIRCLE_NODE_INDEX in 0) bundle exec rspec spec --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; 1) bundle exec rspec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml ;; esac:
+        parallel: true

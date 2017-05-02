@@ -132,11 +132,13 @@ class Products::CollectionsController < Products::BaseController
 
   def collection_resource(collection_options = {})
     resource_args = filter_options.merge(collection_options || {})
+    resource_args.update(all_style_options(resource_options: resource_args))
     Products::CollectionResource.new(resource_args).read
   end
 
   def parse_permalink(permalink)
-    return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
+    # Note: remember the route "/*permalink".
+    return {} if permalink.blank?
 
     # Color groups as categories
     if (color_group = Spree::OptionValuesGroup.for_colors.available_as_taxon.where(name: permalink).first)
@@ -164,6 +166,15 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private
+
+  def all_style_options(resource_options:)
+    resource_styles = Array.wrap(resource_options[:style])
+    filter_styles   = Array.wrap(filter_options[:style])
+
+    {
+      style: resource_styles | filter_styles
+    }
+  end
 
   def filter_options
     custom_product_ids = filters_applied? ? [] : product_ids

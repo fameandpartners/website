@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Scrollbars} from 'react-custom-scrollbars';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Scrollbars } from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import {GetDressVariantId, UpdateUrl} from './utils';
+import { GetDressVariantId, UpdateUrl } from './utils';
 import _get from 'lodash/get';
 
 class SidePanelColor extends SidePanel {
@@ -15,28 +15,26 @@ class SidePanelColor extends SidePanel {
   }
 
   componentWillMount() {
-    let customize        = {};
-    let productColors    = this.props.defaultColors.concat(this.props.customColors);
-    let preselectedColor = productColors.find((color) => {
-      return color.option_value.id === this.props.preselectedColorId;
-    });
+    const customize = {};
+    const productColors = this.props.defaultColors.concat(this.props.customColors);
+    const preselectedColor = productColors.find(color => color.option_value.id === this.props.preselectedColorId);
 
     customize.color = {
-      id:           parseInt(this.props.preselectedColorId),
-      name:         this.props.preselectedColorName,
-      price:        0,
+      id: parseInt(this.props.preselectedColorId),
+      name: this.props.preselectedColorName,
+      price: 0,
       presentation: _get(preselectedColor, 'option_value.presentation')
     };
     this.props.actions.customizeDress(customize);
   }
 
   onChange(event) {
-    let customize = {};
+    const customize = {};
     customize.color = {
-      id:           parseInt(event.currentTarget.dataset.id),
-      name:         event.currentTarget.dataset.name,
+      id: parseInt(event.currentTarget.dataset.id),
+      name: event.currentTarget.dataset.name,
       presentation: event.currentTarget.dataset.presentation,
-      price:        event.currentTarget.dataset.price
+      price: event.currentTarget.dataset.price
     };
     // search for dress variant id, this will work only for default color dresses
     // NOTE: we should check if this is even needed, since length
@@ -66,22 +64,24 @@ class SidePanelColor extends SidePanel {
     const props = this.props;
     const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = props.customize.color.id
-      ? "c-card-customize__content is-selected" : "c-card-customize__content";
+      ? 'c-card-customize__content is-selected' : 'c-card-customize__content';
 
-    const previewColor = "color-preview color-" + props.customize.color.name;
+    const previewColor = `color-preview color-${props.customize.color.name}`;
 
     const defaultColors = props.defaultColors.map((color, index) => {
       const itemState = props.customize.color.id == color.option_value.id
-        ? "selector-color is-selected" : "selector-color";
-      const swatch = "swatch color-" + color.option_value.name;
+        ? 'selector-color is-selected' : 'selector-color';
+      const swatch = `swatch color-${color.option_value.name}`;
       return (
-        <a href="javascript:;" className={itemState}
+        <a
+          href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
           data-name={color.option_value.name}
-          data-price="0">
-          <div className={swatch}></div>
+          data-price="0"
+        >
+          <div className={swatch} />
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
       );
@@ -89,25 +89,29 @@ class SidePanelColor extends SidePanel {
 
     const customColors = props.customColors.map((color, index) => {
       const itemState = props.customize.color.id == color.option_value.id
-        ? "selector-color is-selected" : "selector-color";
-      const swatch = "swatch color-" + color.option_value.name;
+        ? 'selector-color is-selected' : 'selector-color';
+      const swatch = `swatch color-${color.option_value.name}`;
       return (
-        <a href="javascript:;" className={itemState}
+        <a
+          href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
           data-name={color.option_value.name}
-          data-price={props.customColorPrice}>
-          <div className={swatch}></div>
+          data-price={props.customColorPrice}
+        >
+          <div className={swatch} />
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
       );
     });
     return (
       <div className="pdp-side-container pdp-side-container-color">
-        <a href="javascript:;"
+        <a
+          href="javascript:;"
           className={triggerState}
-          onClick={this.openMenu}>
+          onClick={this.openMenu}
+        >
           <div className="c-card-customize__content__left">Color</div>
           <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
         </a>
@@ -116,27 +120,29 @@ class SidePanelColor extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="javascript:;"
-                  className="btn-close lg"
-                  onClick={this.closeMenu}>
-                    <span className="hide-visually">Close Menu</span>
+                <a
+                  href="javascript:;"
+                  className="btn-close med"
+                  onClick={this.closeMenu}
+                >
+                  <span className="hide-visually">Close Menu</span>
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">
                 Selected Color:
                 <span> {props.customize.color.presentation}</span>
               </h2>
-              <div className={previewColor}></div>
-              <h3 className="h5 heading-secondary">Recommended Colors</h3>
-              <div className="row">{defaultColors}</div>
+              <div className={previewColor} />
+              <h3 className="h5 heading-secondary">Fame Recommends</h3>
+              <div className="clearfix">{defaultColors}</div>
               {(() => {
-                if(customColors.length) {
+                if (customColors.length) {
                   return (
                     <div>
                       <h3 className="h5 heading-secondary">
-                        Custom Colors&nbsp;&nbsp; +${parseFloat(props.customColorPrice)}
+                        Additional Colors&nbsp; +${parseFloat(props.customColorPrice)}
                       </h3>
-                      <div className="row">{customColors}</div>
+                      <div className="clearfix">{customColors}</div>
                     </div>
                   );
                 }

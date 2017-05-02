@@ -154,6 +154,7 @@
   text-align: right;
 
   li {
+    display: inline-block;
     border-left: none;
 
     &:not(:first-child) {

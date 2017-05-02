@@ -4,10 +4,14 @@
     var url = window.location.hash;
     if ( url.match('#') ) {
         var hash = url.split('#')[1];
-        if ($('#'+hash).length) {
-          // activate the requested panel
-          $('.active #' + hash + ' .panel-collapse').addClass('in');
-          $('.active #' + hash + ' .panel-title').removeClass('collapsed');
+        try { // User or Callback can give jquery invalid, error selectors
+          if ($('#' + hash).length) {
+            // activate the requested panel
+            $('.active #' + hash + ' .panel-collapse').addClass('in');
+            $('.active #' + hash + ' .panel-title').removeClass('collapsed');
+          }
+        } catch(error) {
+          console.warn('Invalid jQuery selector');
         }
     }
   }

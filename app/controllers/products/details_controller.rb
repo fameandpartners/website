@@ -4,6 +4,7 @@ class Products::DetailsController < Products::BaseController
   layout 'redesign/application'
 
   def show
+    @zopim_opt_out = true
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
       slug:         params[:product_slug],

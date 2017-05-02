@@ -20,7 +20,7 @@ class LineItemPersonalization < ActiveRecord::Base
   validates :size, :color,  presence: true
 
   DEFAULT_HEIGHT = 'standard'
-  HEIGHTS = %w(petite standard tall)
+  HEIGHTS = %w(petite standard tall length1 length2 length3 length4 length5 length6)
   validates :height, inclusion: { in: HEIGHTS }
 
   DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')

@@ -13,7 +13,8 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     When I am on Connie dress page
     Then I select "Australia" site version
     And I select "AU 14" size
-    And I select "Petite" skirt length
+    And I select "147" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
@@ -41,7 +42,8 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     When I am on Connie dress page
     Then I select "Australia" site version
     And I select "AU 14" size
-    And I select "Petite" skirt length
+    And I select "147" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button
@@ -70,7 +72,8 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     When I am on Connie dress page
     Then I select "Australia" site version
     And I select "AU 14" size
-    And I select "Petite" skirt length
+    And I select "147" skirt length
+    And I save the profile
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     #Then I click on "Continue to payment" button

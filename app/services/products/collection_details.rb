@@ -20,17 +20,17 @@
 #   }
 class Products::CollectionDetails
 
-  attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
+  attr_reader :collection, :style, :styles, :event, :edits, :bodyshape, :color,
+              :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
 
   def initialize(options = {})
-    options[:color] = options[:color].first if options[:color].is_a? Array
-    options[:style] = options[:style].first if options[:style].is_a? Array
     @collection     = options[:collection]
-    @style          = options[:style]
+    @styles         = Array.wrap(options[:style])
+    @style          = @styles.first
     @event          = options[:event]
     @edits          = options[:edits]
     @bodyshape      = options[:bodyshape]
-    @color          = options[:color]
+    @color          = options[:color].first if options[:color].is_a?(Array)
     @discount       = options[:discount]
     @site_version   = options[:site_version]
     @fast_delivery  = options[:fast_delivery]
@@ -42,6 +42,7 @@ class Products::CollectionDetails
     fast_making_taxon if fast_making.present?
     colorize_taxon if color.present?
     deliverize_taxon if fast_delivery.present?
+
     taxon
   end
 

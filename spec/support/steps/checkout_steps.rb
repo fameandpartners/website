@@ -45,14 +45,28 @@ module Acceptance
       expect(page).to have_content(dress_price)
       expect(page).to have_content(dress_size_without_spaces)
     end
-
-    step 'I select :dress_name dress on :site_version, with :dress_size, :skirt_length and proceed to checkout' do |dress_name, site_version, dress_size, skirt_length|
+ 
+    step 'I select :dress_name dress on AUSTRALIA, with :dress_size, :skirt_length and proceed to checkout' do |dress_name, dress_size, skirt_length|
       send 'I am on :dress_name dress page', dress_name
-      send 'I select :site_version site version', site_version
+      send 'I select :site_version site version', "Australia"
       send 'I select :dress_size size', dress_size
       send 'I select :skirt_length skirt length', skirt_length
+      send 'I save the profile'
       send 'I should see add to cart link enabled'
-      send 'I click on :link_text link', 'ADD TO BAG'
+      find("a", :text => "ADD TO BAG").click
+      wait_for_ajax
+      # send 'I click on :button_text button', 'Continue to payment'
+    end
+
+    step 'I select :dress_name dress on USA, with :dress_size, :height_value and proceed to checkout' do |dress_name, dress_size, height_value|
+      send 'I am on :dress_name dress page', dress_name
+      send 'I select :site_version site version', "USA"
+      send 'I select :dress_size size', dress_size
+      send 'I select :height_value inch height', height_value
+      send 'I save the profile'      
+      send 'I should see add to cart link enabled'
+      find("a", :text => "ADD TO BAG").click
+      wait_for_ajax
       # send 'I click on :button_text button', 'Continue to payment'
     end
   end
