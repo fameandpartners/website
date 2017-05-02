@@ -28,62 +28,74 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/red?edit1'
-          .section-img-wrap.copy-center
-            .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-2.jpg")}'
+        - topLeft = contentful.entries(content_type: 'topLeftCategoryTile')
+        - topLeft.each do |tile|
+          = link_to tile.link
+            .section-img-wrap.copy-center
+              .img-wrap
+                img.img-responsive*{src: tile.image.image_url }
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight Red
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile.title_overlay
 
       .col-md-6.cta-item
-        = link_to evening_shop_lace_page_path + "?edit2"
-          .section-img-wrap.copy-center
-            .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-3.jpg")}'
+        - topRight = contentful.entries(content_type: 'topRightCategoryTile')
+        - topRight.each do |tile|
+          = link_to tile.link
+            .section-img-wrap.copy-center
+              .img-wrap
+                img.img-responsive*{src: tile.image.image_url }
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight Lace
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile.title_overlay
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/two-piece?edit3'
-          .section-img-wrap.copy-center
-            .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-4.jpg")}'
+        - bottomLeft = contentful.entries(content_type: 'bottomLeftCategoryTile')
+        - bottomLeft.each do |tile|
+          = link_to tile.link
+            .section-img-wrap.copy-center
+              .img-wrap
+                img.img-responsive*{src: tile.image.image_url }
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight Sets
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile.title_overlay
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/backless?edit4'
-          .section-img-wrap.copy-center
-            .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-5.jpg")}'
+        - bottomRight = contentful.entries(content_type: 'bottomRightCategoryTile')
+        - bottomRight.each do |tile|
+          = link_to tile.link
+            .section-img-wrap.copy-center
+              .img-wrap
+                img.img-responsive*{src: tile.image.image_url }
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight Backless
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile.title_overlay
