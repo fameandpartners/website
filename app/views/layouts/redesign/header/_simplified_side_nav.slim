@@ -40,11 +40,13 @@ nav.navbar.navbar-default.visible-xs.visible-sm
               i.fa.fa-chevron-left
               .back BACK
 
-          li
-            .content-wrap
-              .container-cta
-                .row-cta
-                  = render partial: 'layouts/redesign/mega_menu/fame_weddings'
+          li.grey-item
+            .text Featured
+            = render partial: 'layouts/redesign/header/simplified_nav/wedding_featured'
+
+          li.grey-item
+            .text Services
+            = render partial: 'layouts/redesign/header/simplified_nav/wedding_services'
 
     div#moodboards-menu
       ul.nav.navbar-nav
