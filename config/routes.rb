@@ -212,6 +212,9 @@ FameAndPartners::Application.routes.draw do
     # High Contrast Collection
     get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
 
+    # Modern Bridesmaid Collection
+    get '/modern-bridesmaid-dresses' => 'products/collections#show', :permalink => 'modern-bridesmaid-dresses', :as => :modern_bridesmaid_collection
+
     # Shop Every Dance Page
     get '/shop-every-body-dance' => 'products/collections#show', :permalink => 'shop-every-body-dance', :as => :shop_every_body_dance_collection
 
