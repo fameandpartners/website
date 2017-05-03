@@ -5,7 +5,7 @@ class LineItemMakingOption < ActiveRecord::Base
   belongs_to :product_making_option, class_name: 'ProductMakingOption', foreign_key: :making_option_id
 
   delegate :name, to: :product_making_option, allow_nil: true
-  # delegate :price, to: :product_making_option, allow_nil: true  #thanh does not recall writing this line of code
+  delegate :price, to: :product_making_option, allow_nil: true  #thanh does not recall writing this line of code
 
   def display_price
     Spree::Money.new(price, currency: currency)

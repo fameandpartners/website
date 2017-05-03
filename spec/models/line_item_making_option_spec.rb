@@ -20,7 +20,7 @@ describe LineItemMakingOption do
         currency: "CUR"
       }, { without_protection: true })
       option = LineItemMakingOption.build_option(product_option)
-      binding.pry
+
       expect(option.price).to     eq(product_option.price)
       expect(option.currency).to  eq(product_option.currency)
     end
