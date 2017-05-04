@@ -198,7 +198,7 @@ var MoodBoardEvent = React.createClass({
         author: null,
         time: Date.now(),
         type: 'notification',
-        content: 'Our Fame stylist generally gets back to you within 24 hours. You will be notified via email when she replies.'
+        content: "Our Fame stylist is ready to help from Monday through Friday, 9am to 6pm PST. She'll reply to you as soon as she can, and you'll be notified via email when she does."
       }).then(function(){
         if(!sessionStorage.getItem('stylistTagged')){
           this.sendMessageToTwillio({
