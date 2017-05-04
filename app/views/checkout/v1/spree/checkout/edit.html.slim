@@ -72,6 +72,9 @@
         - if current_step.eql?('address')
           .checkout-step data-name="address"
             = render 'address_step', current_step: current_step
+            .row
+              .col-xs-12
+                = render 'spree/checkout/delivery_times', cart: cart
 
         - if current_step.eql?('payment')
           - content_for :inline_javascript do

@@ -1,0 +1,15 @@
+h2.checkout-section-title Delivery
+p Choose how quickly you receive the order
+- for product in cart.products
+  .cart-item-delivery-adjustment
+    section.product-delivery-adjustment
+      fieldset.RadioGroup
+        .Radio
+          input#delivery_time_slow type="radio" name="delivery_time" value="slow"
+          label for="delivery_time_slow" Slow
+        .Radio
+          input#delivery_time_normal type="radio" name="delivery_time" value="normal"
+          label for="delivery_time_normal" Medium
+        .Radio
+          input#delivery_time_fast type="radio" name="delivery_time" value="fast"
+          label for="delivery_time_fast" Slow
