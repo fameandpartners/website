@@ -1,3 +1,8 @@
+ruby:
+  def tile_responsive_classes(currentTile)
+    (currentTile == @instaTiles.last) ? {class: 'hidden-sm hidden-xs'} : {class: 'col-xs-6'}
+  end
+
 // Section: Instagram
 section.container
   .row
@@ -17,65 +22,19 @@ section.container
 
         .instagram-widget
 
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to dresses_path + "/dress-pretoria-skirt-1167?color=black&hp", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/Instagram-1.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @lisadengler
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-the-zenith-1338?color=black-and-white-gingham&hp", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/Instagram-2.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @iambeauticurve
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-the-supernova-1379?color=silver&hp", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/Instagram-3.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @mindyplaz
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-the-twilight-1341?color=burgundy&hp", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/Instagram-4.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @theindiegirlblog
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.hidden-sm.hidden-xs
-            = link_to  dresses_path + "/dress-the-sirene-1305?color=ivory&hp", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/Instagram-5.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @annstreetstudios
-                        span.cta-link shop
+          // Instagram Items fetched via Contentful
+          - @instaTiles = contentful.entries(content_type: 'homePageContainer')[0].instagram_thumbnails_container
+          - @instaTiles.each do |tile|
+            .item.col-md-5ths*tile_responsive_classes(tile)
+              = link_to tile.path_link, class: "item-wrap"
+                .media-wrap
+                  img.img-responsive*{src: tile.image.image_url }
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user = tile.handle
+                          span.cta-link shop
 
       .row
         .col-md-12.text-center
