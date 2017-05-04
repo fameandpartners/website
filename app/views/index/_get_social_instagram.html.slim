@@ -21,7 +21,6 @@ section.container
             .diagonal-line
 
         .instagram-widget
-
           // Instagram Items fetched via Contentful
           - @instaTiles = contentful.entries(content_type: 'homePageContainer')[0].instagram_thumbnails_container
           - @instaTiles.each do |tile|

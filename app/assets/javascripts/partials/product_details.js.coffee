@@ -17,7 +17,7 @@ page.initProductDetailsPage = (options = {}) ->
       making_options_ids: parseNumber($this.find('#pdpCartMakingId').val()),
       height_value:       parseNumber($this.find('#pdpCartHeight').val()),
       height_unit:        $this.find('#pdpCartHeightUnit').val(),
-      customizations_ids: parseNumber($this.find('#pdpCartCustomId').val()),
+      customizations_ids: $this.find('#pdpCartCustomId').val().split(','),
       dress_variant_id:   parseNumber($this.find('#pdpCartDressVariantId').val())
     }
 

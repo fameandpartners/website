@@ -28,6 +28,7 @@ class SidePanelSize extends Component {
     this.handleDressSizeSelection = this.handleDressSizeSelection.bind(this);
     this.generateInchesOptions = this.generateInchesOptions.bind(this);
     this.updateHeightSelection = this.updateHeightSelection.bind(this);
+    this.hasHeightError = this.hasHeightError.bind(this);
     this.handleInchChange = this.handleInchChange.bind(this);
     this.handleCMChange = this.handleCMChange.bind(this);
     this.applyTemporaryFilters = this.applyTemporaryFilters.bind(this);
@@ -60,26 +61,25 @@ class SidePanelSize extends Component {
     });
   }
 
+  hasHeightError() {
+    const { height } = this.props.customize;
+    return (
+      !(height.temporaryHeightValue && height.temporaryHeightUnit) || // Not Present
+      (height.temporaryHeightUnit === UNITS.CM &&
+      (height.temporaryHeightValue < MIN_CM || height.temporaryHeightValue > MAX_CM))
+    );
+  }
+
   /**
    * Validates errors for Size Profile
    * @return {Boolean} isValid ?
    */
   validateErrors() {
-    const { height, size } = this.props.customize;
+    const { size } = this.props.customize;
     const errors = {};
 
-    if ( // Errors present
-      !(height.temporaryHeightValue && height.temporaryHeightUnit && size.id) || // Not present
-      (
-        height.temporaryHeightUnit === UNITS.CM &&
-        (height.temporaryHeightValue < MIN_CM || height.temporaryHeightValue > MAX_CM)
-      ) // CM too low/high
-    ) {
-      if (!height.temporaryHeightValue ||
-        height.temporaryHeightValue < MIN_CM ||
-        height.temporaryHeightValue > MAX_CM) {
-        errors.height = true;
-      }
+    if (this.hasHeightError() || !size.id) {
+      if (this.hasHeightError()) { errors.height = true; }
       if (!size.id) { errors.size = true; }
       this.updateCustomize({ errors });
       return false;

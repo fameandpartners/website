@@ -125,10 +125,11 @@ group :development do
   gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'awesome_print'
+  gem 'awesome_print', require: "ap"
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'pry-byebug'
 end
 
 group :test do

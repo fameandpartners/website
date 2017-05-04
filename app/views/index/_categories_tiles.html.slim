@@ -6,8 +6,8 @@ section.section-box.container.section-style-icon
 
   .row
     .col-md-12.cta-item-huge
-      - current_edit_image = "homepage/category-tiles/april-13-tile-1.jpg"
-      - current_edit_mob_image = "homepage/category-tiles/april-13-tile-1-mob.jpg"
+      - current_edit_image = "homepage/category-tiles/april-26-tile-1.jpg"
+      - current_edit_mob_image = "homepage/category-tiles/april-26-tile-1-mob.jpg"
       - current_edit_link = get_the_look_path + "?secondaryhp"
 
       = link_to current_edit_link
@@ -31,7 +31,7 @@ section.section-box.container.section-style-icon
         - topLeft = contentful.entries(content_type: 'topLeftCategoryTile')
         - topLeft.each do |tile|
           = link_to tile.link
-            .section-img-wrap.copy-center
+            .section-img-wrap.copy-center.top-left-category-tile
               .img-wrap
                 img.img-responsive*{src: tile.image.image_url }
 
@@ -49,7 +49,7 @@ section.section-box.container.section-style-icon
         - topRight = contentful.entries(content_type: 'topRightCategoryTile')
         - topRight.each do |tile|
           = link_to tile.link
-            .section-img-wrap.copy-center
+            .section-img-wrap.copy-center.top-right-category-tile
               .img-wrap
                 img.img-responsive*{src: tile.image.image_url }
 
@@ -68,7 +68,7 @@ section.section-box.container.section-style-icon
         - bottomLeft = contentful.entries(content_type: 'bottomLeftCategoryTile')
         - bottomLeft.each do |tile|
           = link_to tile.link
-            .section-img-wrap.copy-center
+            .section-img-wrap.copy-center.bottom-left-category-tile
               .img-wrap
                 img.img-responsive*{src: tile.image.image_url }
 
@@ -86,7 +86,7 @@ section.section-box.container.section-style-icon
         - bottomRight = contentful.entries(content_type: 'bottomRightCategoryTile')
         - bottomRight.each do |tile|
           = link_to tile.link
-            .section-img-wrap.copy-center
+            .section-img-wrap.copy-center.bottom-right-category-tile
               .img-wrap
                 img.img-responsive*{src: tile.image.image_url }
 

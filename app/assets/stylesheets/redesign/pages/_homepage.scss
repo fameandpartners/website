@@ -103,9 +103,22 @@
     .copy-align--top {
       margin-top: -250px;
     }
+    .middle-carousel-item .copy-align--top {
+      margin-top: 50px;
+    }
 
     .hero-wrap .sub-heading--large {
       font-size: 2.8rem;
+    }
+
+    .hero-wrap .sub-heading--extra-large {
+      font-size: 5.6rem;
+      line-height: 105%;
+    }
+
+    .link-underline.hero-middle-header-link {
+      font-size: 0.35em;
+      line-height: 100%;
     }
 
   }
@@ -207,7 +220,7 @@
     }
 
     .copy-align--top {
-      margin-top: -190px;
+      margin-top: 50px;
     }
 
   }
