@@ -220,6 +220,47 @@
       margin-right: -5px;
     }
 
+    .product-delivery-adjustment {
+      padding: 15px;
+      border: 2px solid black;
+
+      .product-name {
+        margin-top: 0;
+      }
+
+      .image-wrapper {
+        float: left;
+        width: 20%;
+      }
+
+      .cart-item-image {
+        padding-right: 5px;
+        width: 100%;
+        min-height: 100px;
+      }
+
+      .description-wrapper {
+        float: left;
+        width: 50%;
+      }
+
+      .price-wrapper {
+        float: left;
+        width: 30%;
+        text-align: left;
+        font-size: 20px;
+      }
+
+      .delivery-time-wrapper {
+        padding: 12px 0;
+      }
+
+      .delivery-time-wrapper .Radio label{
+        text-indent: 15px;
+        padding: 2px;
+      }
+    }
+
   }
 
   // Payment page

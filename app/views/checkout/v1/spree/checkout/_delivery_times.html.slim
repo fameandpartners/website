@@ -1,15 +1,33 @@
 h2.checkout-section-title Delivery
 p Choose how quickly you receive the order
 - for product in cart.products
-  .cart-item-delivery-adjustment
+  .cart-item
     section.product-delivery-adjustment
-      fieldset.RadioGroup
-        .Radio
-          input#delivery_time_slow type="radio" name="delivery_time" value="slow"
-          label for="delivery_time_slow" Slow
-        .Radio
-          input#delivery_time_normal type="radio" name="delivery_time" value="normal"
-          label for="delivery_time_normal" Medium
-        .Radio
-          input#delivery_time_fast type="radio" name="delivery_time" value="fast"
-          label for="delivery_time_fast" Slow
+      dl.cart-item-description.clearfix
+        .image-wrapper
+          = image_tag product.image.large, class: 'cart-item-image', alt: product.name
+        .description-wrapper
+          h3.product-name
+            = product.name
+          - if product.size.present?
+            dd Size: #{product.size.presentation},
+            dd Color: #{product.color[:name]}
+        .price-wrapper
+          | $199
+
+      fieldset.RadioGroup.delivery-options
+        .delivery-time-wrapper
+          .Radio
+            input#delivery_time_slow type="radio" name="delivery_time" value="slow"
+            label for="delivery_time_slow" Slow
+            div Free
+        .delivery-time-wrapper
+          .Radio
+            input#delivery_time_normal type="radio" name="delivery_time" value="normal" checked="checked"
+            label for="delivery_time_normal" Medium
+            div -10% discount
+        .delivery-time-wrapper
+          .Radio
+            input#delivery_time_fast type="radio" name="delivery_time" value="fast"
+            label for="delivery_time_fast" Slow
+            div +30$
