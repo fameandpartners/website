@@ -11,6 +11,10 @@ class LineItemMakingOption < ActiveRecord::Base
     Spree::Money.new(price, currency: currency)
   end
 
+  def price
+    making_option.price || self.price
+  end
+
   class << self
     def build_option(making_option)
       new({
