@@ -91,7 +91,7 @@ class SidePanelSizeChart extends React.Component {
                 </Tabs>
               </div>
               <div className="col-md-6">
-                <p className="table-title text-center">Fame & Partners sizes are designed to fit the following measurements.</p>
+                <p className="table-title text-center">Fame and Partners sizes are designed to fit the following measurements.</p>
                 <table>
                   <thead>
                     <tr>
