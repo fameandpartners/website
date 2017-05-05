@@ -100,11 +100,11 @@ class GlobalSku
     end
 
     def customization_value_ids
-      customizations.sort.map(&:id).join(';').presence
+      customizations&.sort.map(&:id).join(';').presence
     end
 
     def customization_value_names
-      customizations.sort.map(&:name).join(';').presence
+      customizations&.sort.map(&:name).join(';').presence
     end
   end
 end

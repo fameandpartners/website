@@ -40,7 +40,7 @@ class CustomItemSku
   end
 
   def customization_value_ids
-    line_item.personalization.customization_value_ids.sort
+    line_item.personalization.customization_value_ids&.sort
   end
 
   def height
