@@ -27,6 +27,7 @@
     @extend .text-center;
     color: $boulder;
     font-size: .8rem;
+
     @include screen-sm {
       position: absolute;
       left: 0;
@@ -35,11 +36,19 @@
     }
   }
 
-  @media screen and (min-width: $screen-sm-min) {
+  .checkbox {
+    text-align: center;
+
+    label {
+      margin-left: 0;
+    }
+  }
+
+  @include screen-sm {
+
     .btn-black {
       @include block-center(10px);
       width: 150px;
     }
-  }
-
+  };
 }
