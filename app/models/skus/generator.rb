@@ -16,7 +16,7 @@ module Skus
       @size                    = size
       @color_id                = color_id
       @height                  = height
-      @customization_value_ids = customization_value_ids.sort
+      @customization_value_ids = customization_value_ids&.sort
     end
 
     def call
