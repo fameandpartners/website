@@ -46,6 +46,7 @@ var CustomizationSelectorMobile = React.createClass({
       'active': this.props.currentCustomization === this.props.type
     });
 
+    var lenghtGuideModalLauncherComp = itemProps.type === "length" ? <LenghtGuideModalLauncher /> : '';
 
     if(options.length == 0){
       options = <p className="no-customizations">No customization options are available for this combination</p>
@@ -55,7 +56,7 @@ var CustomizationSelectorMobile = React.createClass({
       <div ref="container" className={containerClasses}>
         <div className="customizations-selector-mobile-title">
           <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
-          <p>{this.props.description}</p>
+          <p>{this.props.description} {lenghtGuideModalLauncherComp}</p>
         </div>
         <div className="customizations-selector-mobile-grid row">
           {options}

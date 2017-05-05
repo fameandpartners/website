@@ -42,7 +42,7 @@ var LengthGuideModal = React.createClass({
               <div className="modal-body">
                 <div className="close-modal pull-right" data-dismiss="modal" aria-label="Close"></div>
                 <div className="length-guide-container">
-                  <div className="modal-body-container text-center">
+                  <div className="modal-body-container center-vertical text-center">
                     <h1>Height & Hemline Size Chart</h1>
                     <p>Skirt height is measured straight, from waist to hem and is based on wearing 5cm heels.</p>
 
