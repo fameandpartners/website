@@ -15,19 +15,20 @@ p Choose how quickly you receive the order
         .price-wrapper
           | $199
 
-      fieldset.RadioGroup.delivery-options
-        .delivery-time-wrapper
-          .Radio
-            input#delivery_time_slow type="radio" name="delivery_time" value="slow"
-            label for="delivery_time_slow" Slow
-            div Free
-        .delivery-time-wrapper
-          .Radio
-            input#delivery_time_normal type="radio" name="delivery_time" value="normal" checked="checked"
-            label for="delivery_time_normal" Medium
-            div -10% discount
-        .delivery-time-wrapper
-          .Radio
-            input#delivery_time_fast type="radio" name="delivery_time" value="fast"
-            label for="delivery_time_fast" Slow
-            div +30$
+      dl.cart-item-delivery-options.clearfix
+        fieldset.RadioGroup.delivery-options
+          .delivery-time-wrapper
+            .Radio
+              input#delivery_time_slow type="radio" name="delivery_time" value="slow"
+              label for="delivery_time_slow" Slow
+              .price-wrapper Free
+          .delivery-time-wrapper
+            .Radio
+              input#delivery_time_normal type="radio" name="delivery_time" value="normal" checked="checked"
+              label for="delivery_time_normal" Medium
+              .price-wrapper -10% discount
+          .delivery-time-wrapper
+            .Radio
+              input#delivery_time_fast type="radio" name="delivery_time" value="fast"
+              label for="delivery_time_fast" Slow
+              .price-wrapper +$30
