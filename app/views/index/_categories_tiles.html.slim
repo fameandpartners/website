@@ -5,20 +5,20 @@ section.section-box.container.section-style-icon
       h2.heading-overlay Get the look
 
   .row
+    - secondaryHero = contentful.entries(content_type: 'homePageContainer')[0].secondary_header_container
     .col-md-12.cta-item-huge
-      - current_edit_image = "homepage/category-tiles/april-26-tile-1.jpg"
-      - current_edit_mob_image = "homepage/category-tiles/april-26-tile-1-mob.jpg"
-      - current_edit_link = get_the_look_path + "?secondaryhp"
+      - secondaryHero_image = secondaryHero.secondary_header_image.url;
+      - secondaryHero_mobileImage = secondaryHero.secondary_header_mobile_image.url;
 
-      = link_to current_edit_link
+      = link_to secondaryHero.secondary_header_link
         .section-img-wrap.copy-center
           .img-wrap
             picture
-              source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
-              source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
-              img src="#{image_path(current_edit_image)}" srcset="
-                #{image_path(current_edit_mob_image)} 991w,
-                #{image_path(current_edit_image)} 992w"
+              source media="(max-width: 991px)" srcset="#{secondaryHero_mobileImage}"
+              source media="(min-width: 992px)" srcset="#{secondaryHero_image}"
+              img src="#{secondaryHero_image}" srcset="
+                #{secondaryHero_mobileImage} 991w,
+                #{secondaryHero_image} 992w"
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
