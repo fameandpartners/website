@@ -159,5 +159,11 @@ module Orders
       colour.try(:id)
     end
 
+    def available_making_options
+      (available_making_options || []).map do |mo|
+        { id: mo.id, name: mo.name, display_discount: mo.display_discount }
+      end
+    end
+
   end
 end

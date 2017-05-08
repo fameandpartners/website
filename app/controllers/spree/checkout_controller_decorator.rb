@@ -30,6 +30,8 @@ Spree::CheckoutController.class_eval do
 
     current_order.updater.update_totals
 
+    @order.line_items = @order_line_items.map {|li| Spree::Orders.LineItemPresenter.new(li)}
+
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
       format.html { render 'edit' }
