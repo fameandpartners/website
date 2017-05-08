@@ -245,7 +245,7 @@
       }
 
       .price-wrapper {
-        float: left;
+        float: right;
         width: 30%;
         text-align: left;
         font-size: 20px;
@@ -257,7 +257,11 @@
 
       .delivery-time-wrapper .Radio label{
         text-indent: 15px;
-        padding: 2px;
+        padding: 2px 5px;
+      }
+
+      .delivery-options {
+        width: 100%;
       }
     }
 
