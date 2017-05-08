@@ -37,6 +37,10 @@
 
     - if delivery_date_messaging_enabled?
       = react_component('Delivery')
+    
+    .row
+      .col-xs-12
+        = render 'spree/checkout/delivery_times', cart: cart
 
     .row
       .col-xs-12.form-group

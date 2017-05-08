@@ -29,7 +29,6 @@ Spree::CheckoutController.class_eval do
     end
 
     current_order.updater.update_totals
-binding.pry
     # li_presenters = @order.line_items.map {|li| Orders::LineItemPresenter.new(li)}
     # @order.line_item_presenters = li_presenters
 
