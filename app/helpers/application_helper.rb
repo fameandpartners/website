@@ -221,4 +221,15 @@ module ApplicationHelper
       raise_errors: true
     )
   end
+
+  # Contentful Preview
+  def contentful_preview
+    @preview_client ||= Contentful::Client.new(
+      api_url: 'preview.contentful.com',
+      access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
+      space: ENV['CONTENTFUL_SPACE_ID'],
+      dynamic_entries: :auto,
+      raise_errors: true
+    )
+  end
 end
