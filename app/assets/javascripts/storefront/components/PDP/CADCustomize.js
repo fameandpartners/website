@@ -282,7 +282,7 @@ class CADCustomize extends Component {
   }
 
   /**
-   * Determines what BASW layer to select based on code comparisons
+   * Determines what BASE layer to select based on code comparisons
    * @param  {Array} code - generated from active addons
    * @return {Number} index
    */
