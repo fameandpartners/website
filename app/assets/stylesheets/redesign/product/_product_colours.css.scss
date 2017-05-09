@@ -327,6 +327,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-mystic-floral           { @include image-color-selector('MysticFloral.jpg'); }
 .color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
 .color-navy                    { background-color: $product-color-navy; }
+.color-navy-stripe             { @include image-color-selector('NavyStripe.png'); }
 .color-navy-and-black          { @include split-color-selector($product-color-navy, $product-color-black); }
 .color-neon-mint               { background-color: $product-color-neon-mint; }
 .color-nude, .color-nude-tan   { background-color: $product-color-nude; }
@@ -359,6 +360,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-pink-and-blush          { @include split-color-selector($product_color-pink, $product_color-blush); }
 .color-pink-and-rose           { @include split-color-selector($product_color-pink, $product-color-rose); }
 .color-pink-and-white-gingham  { @include image-color-selector('PinkAndWhiteGingham.png'); }
+.color-pink-and-white-stripe   { @include image-color-selector('PinkAndWhiteStripe.png'); }
 .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
 .color-pink-nouveau            { background-color: $product-color-pink-nouveau; }
 .color-pink-shimmer            { background-color: $product-color-pink-shimmer; }
@@ -408,7 +410,9 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-water-grey              { background-color: $product-color-water-grey; }
 .color-watermelon              { background-color: $product-color-watermelon; }
+.color-white-and-black-pinstripe { @include image-color-selector('WhiteAndBlackPinstripe.png'); }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
+.color-white-and-red-stripe    { @include image-color-selector('WhiteAndRedStripe.png'); }
 .color-white-ivory             { background-color: white; border: 1px solid $product-color-white-ivory-border; }
 .color-wine                    { background-color: $product-color-wine; }
 .color-winter-grey             { background-color: $product-color-winter-grey; }
