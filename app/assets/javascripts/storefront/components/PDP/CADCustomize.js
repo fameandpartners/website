@@ -139,16 +139,18 @@ class CADCustomize extends Component {
    * @return {Array[Node]}
    */
   generateAddonLayers() {
-    const { selectedAddonImageLayers } = this.props;
-    console.log('selectedAddonImageLayers', selectedAddonImageLayers);
+    const { addonLayerImages, selectedAddonImageLayers } = this.props;
 
-    return selectedAddonImageLayers.map(a => (
-      <div
-        key={`addon-layer-image-${a.name}`}
-        className="CAD--layer CAD--layer__addon is-selected"
-        style={{ backgroundImage: `url(${a.url})` }}
-      />
-    ));
+    return addonLayerImages.map((a) => {
+      const isSelected = findIndex(selectedAddonImageLayers, { position: a.position }) > -1;
+      return (
+        <div
+          key={`addon-layer-image-${a.name}`}
+          className={`CAD--layer CAD--layer__addon ${isSelected ? 'is-selected' : ''}`}
+          style={{ backgroundImage: `url(${a.url})` }}
+        />
+      );
+    });
   }
 
   /**
