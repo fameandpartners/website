@@ -4,6 +4,8 @@ export function addonsReducer(state = {}, action) {
   switch (action.type) {
     case 'SET_ADDON_OPTIONS':
       return assign({}, state, { addonOptions: action.addonOptions });
+    case 'SET_ACTIVE_ADDON_IMAGE_LAYERS':
+      return assign({}, state, { selectedAddonImageLayers: action.addonImageLayers });
     case 'SET_ADDON_BASE_LAYER':
       return assign({}, state, { baseSelected: action.baseSelected });
     default:

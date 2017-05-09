@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { assign, findIndex } from 'lodash';
+import { assign, findIndex, uniqBy } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
 
@@ -10,7 +10,10 @@ const { DRAWERS } = PDPConstants;
 
 function mapStateToProps(state) {
   return {
+    addonLayerImages: state.addons.addonLayerImages,
+    selectedAddonImageLayers: state.addons.selectedAddonImageLayers,
     addonOptions: state.addons.addonOptions,
+    addonsLayersComputed: state.addons.addonsLayersComputed,
     addonsBasesComputed: state.addons.addonsBasesComputed,
     baseImages: state.addons.baseImages,
     baseSelected: state.addons.baseSelected,
@@ -21,17 +24,21 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Binds our dispatcher to Redux calls
   const actions = bindActionCreators(pdpActions, dispatch);
-  const { setAddonOptions, setAddonBaseLayer, toggleDrawer } = actions;
+  const { setAddonOptions, setAddonBaseLayer, setActiveAddonImageLayers, toggleDrawer } = actions;
 
   return {
     setAddonBaseLayer,
+    setActiveAddonImageLayers,
     setAddonOptions,
     toggleDrawer,
   };
 }
 
 const propTypes = {
+  addonLayerImages: PropTypes.array.isRequired,
+  selectedAddonImageLayers: PropTypes.array.isRequired,
   addonOptions: PropTypes.array.isRequired,
+  addonsLayersComputed: PropTypes.array.isRequired,
   addonsBasesComputed: PropTypes.array.isRequired,
   baseImages: PropTypes.array.isRequired,
   baseSelected: PropTypes.number,
@@ -39,6 +46,7 @@ const propTypes = {
   // Redux actions
   setAddonOptions: PropTypes.func.isRequired,
   setAddonBaseLayer: PropTypes.func.isRequired,
+  setActiveAddonImageLayers: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };
 
@@ -131,14 +139,18 @@ class CADCustomize extends Component {
    * @return {Array[Node]}
    */
   generateAddonLayers() {
-    const { addonOptions } = this.props;
-    return addonOptions.map(a => (
-      <div
-        key={`addon-${a.id}`}
-        className={`CAD--layer CAD--layer__addon ${a.active ? ' is-selected' : ''}`}
-        style={{ backgroundImage: `url(${a.img})` }}
-      />
-    ));
+    const { addonLayerImages, selectedAddonImageLayers } = this.props;
+
+    return addonLayerImages.map((a) => {
+      const isSelected = findIndex(selectedAddonImageLayers, { position: a.position }) > -1;
+      return (
+        <div
+          key={`addon-layer-image-${a.name}`}
+          className={`CAD--layer CAD--layer__addon ${isSelected ? 'is-selected' : ''}`}
+          style={{ backgroundImage: `url(${a.url})` }}
+        />
+      );
+    });
   }
 
   /**
@@ -191,12 +203,86 @@ class CADCustomize extends Component {
    * @param  {Array} addons - addons selected
    * @return {Array} code - ie [*, *, *, 1]
    */
-  computeBaseCodeFromAddons(addons) {
+  computeLayerCodeFromAddons(addons) {
     return addons.map(a => (a.active ? '1' : '*'));
   }
 
+
   /**
-   * Determines what base layer to select based on code comparisons
+   * Generates a single layer code for a particular "on" index
+   * @param  {Number} onIndex
+   * @return {Array} singleLayerCode
+   */
+  generateSingleLayerCodeAtIndex(onIndex) {
+    const singleOnLayerCode = ['*', '*', '*', '*'];
+    singleOnLayerCode[onIndex] = '1';
+    return singleOnLayerCode;
+  }
+
+
+  /**
+   * Reduces matches for a given subset based on position
+   * @param  {Array} matches (AT MOST 2, currently)
+   * @return {Object} highest priority image from subset
+   */
+  reduceMatchesBasedOnPriority(matches) {
+    return matches.reduce((accum, curr) => {
+      if (accum.image.position <= curr.image.position) {
+        return accum;
+      }
+      return curr;
+    }, matches[0]);
+  }
+
+  /**
+   * Finds a subset of matches
+   * @param  {[type]} code [description]
+   * @return {[type]}      [description]
+   */
+  findHighestPriorityMatch(singleLayerMatchCode, fullCode) {
+    const { addonsLayersComputed, addonLayerImages } = this.props;
+    const addonLayerLength = addonsLayersComputed.length;
+    const singleMatchingAddonLayers = [];
+
+    // Do we have matches for SINGLE LAYER   [***1]
+    for (let i = 0; i < addonLayerLength; i += 1) {
+      /* eslint-disable no-new */
+      const singleMatchRegex = new RegExp(singleLayerMatchCode.join().replace(/\*/g, '.+'));
+      const fullCodeMatchRegex = new RegExp(addonsLayersComputed[i].join().replace(/\*/g, '.+'));
+      if (addonsLayersComputed[i].join().match(singleMatchRegex) != null // single match
+      && fullCode.join().match(fullCodeMatchRegex) != null// We have a full match
+    ) {
+        singleMatchingAddonLayers.push({ i, image: addonLayerImages[i] });
+      }
+    }
+
+    return this.reduceMatchesBasedOnPriority(singleMatchingAddonLayers);
+  }
+
+  /**
+   * Finds addon layers that match the full code
+   * @param  {Array} fullCode - i.e. ['1', '1', '1', '1']
+   * @return {Array} matches - unique matches ordered by priority
+   */
+  findAddonCodeMatches(fullCode) {
+    const matches = [];
+
+    // Iterate over code ['*', '*', '1', '1'] and determine what matches we have
+    fullCode.forEach((layerSelection, i) => {
+      if (layerSelection === '1') { // active
+        const singleLayerMatchCode = this.generateSingleLayerCodeAtIndex(i);
+        matches.push(this.findHighestPriorityMatch(singleLayerMatchCode, fullCode));
+      }
+    });
+
+    if (matches && matches.length > 0) {
+      return uniqBy(matches, 'i').filter(m => m).map(m => m.image);
+    }
+    return [];
+  }
+
+  /**
+   * Determines what BASE layer to select based on code comparisons
    * @param  {Array} code - generated from active addons
    * @return {Number} index
    */
@@ -221,12 +307,13 @@ class CADCustomize extends Component {
    * @action -> setAddonOptions, setAddonBaseLayer
    */
   handleAddonSelection(addon) {
-    const { setAddonOptions, setAddonBaseLayer } = this.props;
+    const { setAddonOptions, setActiveAddonImageLayers, setAddonBaseLayer } = this.props;
     return () => {
       const newAddons = this.computeNewAddons(addon);
-      const newBaseCode = this.computeBaseCodeFromAddons(newAddons);
-      setAddonOptions(newAddons);
-      setAddonBaseLayer(this.chooseBaseLayerFromCode(newBaseCode));
+      const newLayerCode = this.computeLayerCodeFromAddons(newAddons);
+      setAddonOptions(newAddons); // Customization activation
+      setActiveAddonImageLayers(this.findAddonCodeMatches((newLayerCode))); // Addon image activate
+      setAddonBaseLayer(this.chooseBaseLayerFromCode(newLayerCode)); // Addon base layer active
     };
   }
 
@@ -234,8 +321,8 @@ class CADCustomize extends Component {
     const { addonOptions, setAddonOptions, setAddonBaseLayer } = this.props;
     const newAddons = addonOptions.map(addon => assign({}, addon, { active: false }));
 
-    setAddonBaseLayer(null);
     setAddonOptions(newAddons);
+    setAddonBaseLayer(null);
   }
 
   handleClose() {
