@@ -123,6 +123,7 @@
 
   }
 
+  // Image caption
   .overlay {
     position: absolute;
     text-align: center;
@@ -230,6 +231,18 @@
 
     .category--item {
       min-height: 320px;
+    }
+
+    .item-wrap .overlay {
+
+      &.show-mobile {
+        opacity: 1;
+      }
+
+      &.hide-mobile {
+        opacity: 0;
+      }
+
     }
 
   }

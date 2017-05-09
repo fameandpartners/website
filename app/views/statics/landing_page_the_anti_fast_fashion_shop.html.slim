@@ -322,6 +322,18 @@ ruby:
         window.track.antiFastTrack(this.dataset.action, this.dataset.label);
       });
 
+      // Toggle caption visibility on mobile, based on tap or click
+      $('.item-wrap .overlay').on('click', function(){
+        if ($(this).css('opacity') == '1') {
+          $(this).addClass('hide-mobile');
+          $(this).removeClass('show-mobile');
+        } else {
+          $(this).addClass('show-mobile');
+          $(this).removeClass('hide-mobile');
+        }
+      });
+
+      // Newsletter subscription
       var NewsletterSubscriberOnPage,
         bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
