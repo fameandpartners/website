@@ -463,6 +463,7 @@ module Products
       product = master.try(:product)
 
       if product.blank?
+
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
       end
 
@@ -501,6 +502,13 @@ module Products
           product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
         end
       end
+
+      #add slow making
+      prdmo = ProductMakingOption.new( active: true,
+                                          option_type: 'slow_making',
+                                          price: -0.1,
+                                          currency: 'USD')
+      product.making_options << prdmo
 
       new_product = product.persisted? ? 'Updated' : 'Created'
 
