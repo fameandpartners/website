@@ -1,0 +1,176 @@
+// Gratitude Page Template
+
+.page-the-anti-fast-fashion-shop {
+  margin-bottom: 60px;
+
+  .diagonal-line {
+    @include transform (rotate(45deg));
+    border-top: 1px solid $c-neutral-black;
+    width: 30px;
+    margin: 50px auto;
+  }
+
+  .more-styles-heading {
+    font-style: italic;
+  }
+
+  .section-intro {
+    margin-top: 50px;
+
+    .title {
+      margin-top: 50px;
+      margin-bottom: 5px;
+      font-size: 3.5rem;
+    }
+
+    .content-copy p {
+      line-height: 2.8rem;
+      margin: 0 auto;
+    }
+
+    .newsletter-signup-form {
+      margin-bottom: 60px;
+    }
+
+  }
+
+  .thin-line-separator--center {
+    border-top: 1px solid $c-neutral-black;
+    display: block;
+    width: 20px;
+    margin: 28px auto;
+
+    + .content-copy {
+      margin: 25px auto 80px;
+    }
+
+  }
+
+  .section-feel-good-about .content-copy {
+    margin-top: 0;
+  }
+
+  .section-disrupt .content-copy {
+    padding: 0 25px;
+  }
+
+  .section-feel-good-about,
+  .section-welcome {
+
+    .content-copy p {
+      font-size: 2.4rem;
+    }
+
+  }
+
+  .section-disrupt {
+
+    .content-copy p {
+      font-size: 3.7rem;
+    }
+
+  }
+
+  .section-newsletter-footer {
+    margin: 60px 0;
+  }
+
+  .products-grid {
+
+    .dropdown {
+      display: none;
+    }
+
+    .category--item .details {
+      margin: 2px 0 15px;
+    }
+
+    .category--item .price {
+      margin: 0;
+    }
+
+    .details .product-name {
+      padding-right: 5px;
+      width: auto;
+    }
+
+  }
+
+  .newsletter-signup-form {
+
+    form {
+      max-width: 354px;
+      margin: 0 auto;
+    }
+
+    input {
+      height: 41px;
+    }
+
+    .btn {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+  }
+
+  .products-set {
+
+    .col-md-3:nth-child(4n+1),
+    .col-md-4:nth-child(3n+1) {
+      clear: both;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .section-intro {
+
+      .newsletter-signup-form {
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+
+      .content-copy p {
+        max-width: 350px;
+      }
+
+    }
+
+    .products-grid {
+
+      .category--item .product-name {
+        margin-top: 6px;
+      }
+
+    }
+
+    .section-feel-good-about .content-copy {
+      max-width: 400px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .diagonal-line {
+      margin: 35px auto;
+    }
+
+    .section-intro {
+      margin-top: 0;
+
+      .title {
+        font-size: 3.4rem;
+      }
+
+    }
+
+    .category--item {
+      min-height: 320px;
+    }
+
+  }
+
+}

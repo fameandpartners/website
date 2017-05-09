@@ -6,8 +6,8 @@ section.section-box.container.section-style-icon
 
   .row
     .col-md-12.cta-item-huge
-      - current_edit_image = "homepage/category-tiles/april-13-tile-1.jpg"
-      - current_edit_mob_image = "homepage/category-tiles/april-13-tile-1-mob.jpg"
+      - current_edit_image = "homepage/category-tiles/april-26-tile-1.jpg"
+      - current_edit_mob_image = "homepage/category-tiles/april-26-tile-1-mob.jpg"
       - current_edit_link = get_the_look_path + "?secondaryhp"
 
       = link_to current_edit_link
@@ -28,10 +28,10 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/red?edit1'
-          .section-img-wrap.copy-center
+        = link_to '/skirts?edit1'
+          .section-img-wrap.copy-center.top-left-category-tile
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-2.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/april-26-tile-2.jpg")}'
 
             .content-wrap
               .container-cta
@@ -40,13 +40,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap
                       span.cta-link-white-bg.cta-link-center-padding
                         span.cta-link Shop
-                        span.copy-highlight Red
+                        span.copy-highlight Skirts
 
       .col-md-6.cta-item
-        = link_to evening_shop_lace_page_path + "?edit2"
-          .section-img-wrap.copy-center
+        = link_to dresses_path + '/ruffle?edit2'
+          .section-img-wrap.copy-center.top-right-category-tile
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-3.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/april-26-tile-3.jpg")}'
 
             .content-wrap
               .container-cta
@@ -55,14 +55,14 @@ section.section-box.container.section-style-icon
                     .copy-wrap
                       span.cta-link-white-bg.cta-link-center-padding
                         span.cta-link Shop
-                        span.copy-highlight Lace
+                        span.copy-highlight Ruffles
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/two-piece?edit3'
-          .section-img-wrap.copy-center
+        = link_to dresses_path + '/pink?edit3'
+          .section-img-wrap.copy-center.bottom-left-category-tile
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-4.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/april-26-tile-4.jpg")}'
 
             .content-wrap
               .container-cta
@@ -71,13 +71,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap
                       span.cta-link-white-bg.cta-link-center-padding
                         span.cta-link Shop
-                        span.copy-highlight Sets
+                        span.copy-highlight Pink
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/backless?edit4'
-          .section-img-wrap.copy-center
+        = link_to dresses_path + '/burgundy?edit4'
+          .section-img-wrap.copy-center.bottom-right-category-tile
             .img-wrap
-              img.img-responsive src='#{image_path("homepage/category-tiles/april-13-tile-5.jpg")}'
+              img.img-responsive src='#{image_path("homepage/category-tiles/april-26-tile-5.jpg")}'
 
             .content-wrap
               .container-cta
@@ -86,4 +86,4 @@ section.section-box.container.section-style-icon
                     .copy-wrap
                       span.cta-link-white-bg.cta-link-center-padding
                         span.cta-link Shop
-                        span.copy-highlight Backless
+                        span.copy-highlight Burgundy

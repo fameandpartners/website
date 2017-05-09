@@ -5,6 +5,7 @@
     "react/jsx-filename-extension": [0],
     "react/no-unescaped-entities": [0],
     "no-return-assign": [0],
+    "no-confusing-arrow": ["error", {"allowParens": true}],
     "class-methods-use-this": [0],
     "jsx-a11y/no-static-element-interactions": [1],
     "react/sort-comp": [1, {

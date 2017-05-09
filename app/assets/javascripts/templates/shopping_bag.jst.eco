@@ -86,7 +86,11 @@
             <% if product.from_wedding_atelier: %>
               <dd>Height: <span><%= product.height %></span></dd>
             <% else: %>
-              <dd>Skirt Length: <span><%= product.height %></span></dd>
+              <% if product.display_height: %>
+                <dd>Height: <span><%= product.display_height %></span></dd>
+              <% else: %>
+                <dd>Skirt Length: <span><%= product.height %></span></dd>
+              <% end %>
             <% end %>
             <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>

@@ -1,6 +1,6 @@
 table.table.table-condensed
   tbody
-  - attributes.each do |k,v|
+  - formatted_attributes(attributes).each do |k,v|
     tr
       th = k.to_s.humanize
       td = v

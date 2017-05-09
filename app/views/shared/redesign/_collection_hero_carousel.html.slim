@@ -1,7 +1,39 @@
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/april-13-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-1-mob.jpg"
-= link_to high_contrast_collection_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+- current_tile_image = "homepage/hero-featured/may-05-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-05-featured-1-mob.jpg"
+= link_to dresses_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
+  picture.media-wrap
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
+
+  .content-wrap
+    .container-fluid
+      .row
+        .col-md-6.col-lg-6.pull-right.hidden-xs.hidden-sm
+          .copy-wrap.extra-padding-left
+            h2.heading.no-margin-md
+              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
+                | The Modern</br>
+                | Evening Collection.</br>
+              span.sub-heading--small
+                | Custom evening wear, made-to-order.</br>
+                | Because ball gowns are not meant to blend in.</br>
+                <em class="link-underline">Explore</em> gowns.
+        .col-md-4.col-lg-3.hidden-md.hidden-lg
+          .copy-wrap.copy-align--top.extra-padding-left.text-center
+            h2.heading.no-margin-md
+              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
+                | The Modern Evening Collection. <br/>
+                <em class="link-underline">Explore</em> gowns.
+
+
+// Carousel Item 2
+- current_tile_image = "homepage/hero-featured/april-26-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-2-mob.jpg"
+= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -15,34 +47,14 @@
         .col-md-4
           .copy-wrap.copy-align--top.extra-padding-left
             h2.heading.no-margin-md.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Color <em>pop.</em>
-              span.sub-heading
-                | Style gets loud in super-saturated hues of red, pink, and navy. <em class="link-underline">Shop what’s new.</em>
-
-// Carousel Item 2
-- current_tile_image = "homepage/hero-featured/april-13-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-2-mob.jpg"
-= link_to modern_collection_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
-
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-4.col-lg-3
-          .copy-wrap.copy-align--top.extra-padding-left
-            h2.heading.no-margin-md
-              span.sub-heading.sub-heading--large.no-margin-md.no-padding
-                  | This dress was <em>made</em> for you, darling. <em class="link-underline">Customize</em> your evening look.
+              span.sub-heading.hidden-md.hidden-lg
+                | Introducing<br/>
+                | The Anti-Fast Fashion Shop.<br/>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-13-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-3-mob.jpg"
-= link_to bespoke_bridal_collection_landing_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
+= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -53,13 +65,15 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-5.col-md-offset-6
-          .copy-wrap.text-center
+        / .col-md-5.col-md-offset-6
+        .col-md-6
+          / .copy-wrap.text-center
+          .copy-wrap
             h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Elevated, elegant, and a bit irreverent.
+              span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
               span.sub-heading.hidden-md.hidden-lg
-                  | Elevated, elegant, and a bit irreverent. <em class="link-underline">Shop</em> Bespoke Bridal.
+                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
 
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Bespoke Bridal</span>
+                | Customize <span class="copy-highlight">Your Look</span>
