@@ -3,12 +3,30 @@ import { assign, isEmpty } from 'lodash';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers';
 
-function generateBaseCode(length) {
+function generateDefaultCode(length) {
   const code = [];
-  for (let i = 0; i <= length; i += 1) {
+  for (let i = 0; i < length; i += 1) {
     code.push('*');
   }
   return code;
+}
+
+function computeLayerCode(url, sentinel, length = 4) {
+  // [ID]-base-??
+  // Example "1038-base-01.png"
+  // We want to parse this and have computed a code for each file name
+  // 1038-base-01.png will create [1, 1, *, *]
+  // 1038-base-23.png will create [*, *, 1, 1]
+  // 1038-base.png will create    [*, *, *, *]
+  const defaultCode = generateDefaultCode(length);
+  const filename = url.substring(url.lastIndexOf('/') + 1);
+  const rgxp = new RegExp(`${sentinel}-(.*).png`, 'g');
+  const matches = rgxp.exec(filename);
+
+  if (matches && matches[1]) {
+    matches[1].split('').forEach(i => defaultCode[i] = '1');
+  }
+  return defaultCode;
 }
 
 export default function configureStore(initialState) {
@@ -130,6 +148,8 @@ export default function configureStore(initialState) {
     isEmpty(addons) ? {} :
     { addons: assign({}, initialState.addons, {
       // Marry previous customizations to addons
+      addonLayerImages: addons.layer_images,
+      selectedAddonImageLayers: [],
       addonOptions: allCustomizations.map(
         (ao, i) => {
           const mappedImageLayer = addons.layer_images.find(img => (img.bit_array[i] ? img : null));
@@ -145,23 +165,8 @@ export default function configureStore(initialState) {
       ),
       baseImages: addons.base_images,
       baseSelected: null,
-      addonsBasesComputed: addons.base_images.map(({ url }) => {
-        // [ID]-base-??
-        // Example "1038-base-01.png"
-        // We want to parse this and have computed a code for each file name
-        // 1038-base-01.png will create [1, 1, *, *]
-        // 1038-base-23.png will create [*, *, 1, 1]
-        // 1038-base.png will create    [*, *, *, *]
-        const baseCode = generateBaseCode(allCustomizations.length - 1);
-        const filename = url.substring(url.lastIndexOf('/') + 1);
-        const rgxp = /base-(.*).png/g;
-        const matches = rgxp.exec(filename);
-
-        if (matches && matches[1]) {
-          matches[1].split('').forEach(i => baseCode[i] = '1');
-        }
-        return baseCode;
-      }),
+      addonsLayersComputed: addons.layer_images.map(({ url }) => computeLayerCode(url, 'layer')),
+      addonsBasesComputed: addons.base_images.map(({ url }) => computeLayerCode(url, 'base')),
     }) },
   );
 
