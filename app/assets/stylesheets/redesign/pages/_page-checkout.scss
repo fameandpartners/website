@@ -98,9 +98,9 @@
 
   .checkout-section-title {
     font-family: $font-heading;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 300;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
 
   .toggle-shopping-bag {
@@ -222,7 +222,8 @@
 
     .product-delivery-adjustment {
       padding: 15px;
-      border: 2px solid black;
+      border: 1px solid $c-neutral-4;
+      margin-bottom: 20px;
 
       .product-name {
         margin-top: 0;
@@ -231,6 +232,7 @@
       .image-wrapper {
         float: left;
         width: 20%;
+        margin-bottom: 10px;
       }
 
       .cart-item-image {
@@ -242,23 +244,38 @@
       .description-wrapper {
         float: left;
         width: 50%;
+        padding-left: 10px;
+      }
+
+      .description-wrapper .product-name {
+        font-size: 2.8rem;
+      }
+
+      .description-wrapper dd{
+        text-transform: capitalize;
       }
 
       .price-wrapper {
         float: right;
         width: 30%;
         text-align: left;
-        font-size: 20px;
+        font-size: 18px;
       }
 
       .delivery-time-wrapper {
-        padding: 12px 0;
+        line-height: 32px;
+      }
+
+      .delivery-time-wrapper label {
+        vertical-align: inherit;
+        text-transform: none;
       }
 
       .delivery-time-wrapper .Radio label{
         text-indent: 15px;
         padding: 2px 5px;
       }
+
 
       .delivery-options {
         width: 100%;
