@@ -207,6 +207,7 @@ $product-color-winter-grey:     #dadadc;
 .color-black-and-red           { @include split-color-selector($product-color-black, $product-color-red); }
 .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
 .color-black-and-white-gingham { @include image-color-selector('BlackAndWhiteGingham.png'); }
+.color-black-and-white-spot    { @include image-color-selector('BlackAndWhiteSpot.png'); }
 .color-blue                    { background-color: $product-color-blue; }
 .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
 .color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
