@@ -10,8 +10,8 @@ describe Policies::LineItemProjectedDeliveryDatePolicy, type: :policy do
     context 'line item is for standard delivery' do
       let(:line_item) { double(Spree::LineItem, fast_making?: false) }
 
-      it 'calculates 10 business days' do
-        expected_date = DateTime.parse('Friday April 15 2015')
+      it 'calculates 7 business days' do
+        expected_date = DateTime.parse('Friday April 10 2015')
         expect(policy.delivery_date).to eq expected_date
       end
     end
