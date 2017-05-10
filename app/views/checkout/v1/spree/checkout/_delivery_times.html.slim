@@ -3,7 +3,7 @@ p.minor-callout Choose how quickly you receive the order
 - i = 0
 - for product in cart.products
   - i += 1
-  .cart-item
+  .cart-item.js-delivery-times-wrapper
     section.product-delivery-adjustment
       .cart-item-description.clearfix
         .image-wrapper
@@ -18,16 +18,48 @@ p.minor-callout Choose how quickly you receive the order
           | $199
 
       .cart-item-delivery-options.clearfix
-        fieldset.RadioGroup.delivery-options
+        fieldset.RadioGroup.delivery-options.js-delivery-times-fieldset data-line-item-id="#{product.id}"
           .delivery-time-wrapper
             .Radio
-              input id="delivery_time_normal_#{i}" checked="checked" type="radio" name="delivery_time_#{i}" value="slow"
+              input id="delivery_time_normal_#{i}" class="js-remove-making-option" checked="checked" type="radio" name="delivery_time_#{i}" value="default"
               label for="delivery_time_normal_#{i}"
                 | Standard Delivery - #{product.delivery_period}
               .price-wrapper Free
           - for mo in product.available_making_options
             .delivery-time-wrapper
               .Radio
-                input id="delivery_time_#{mo.option_type}_#{i}" type="radio" name="delivery_time_#{i}" value="#{mo.option_type}"
+                input id="delivery_time_#{mo.option_type}_#{i}" class="js-create-making-option" type="radio" name="delivery_time_#{i}" value="#{mo.id}"
                 label for="delivery_time_#{mo.option_type}_#{i}" #{mo.name}
                 .price-wrapper #{mo.display_discount}
+
+- content_for :body_end do
+  javascript:
+    var cart = window.app.shopping_cart;
+    var FIELDSET_CLASS = '.js-delivery-times-fieldset';
+
+    // Create Making Option
+    $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
+      var $input = $(evt.target);
+      var $fieldset = $input.closest(FIELDSET_CLASS);
+      var lineItemId = $fieldset.data().lineItemId;
+      var chosenVal = $input.val();
+      
+      cart.createMakingOption(lineItemId, chosenVal);
+    });
+    
+    // Removal of Making Option
+    $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
+      var $input = $(evt.target);
+      var $fieldset = $input.closest(FIELDSET_CLASS);
+      var lineItemId = $fieldset.data().lineItemId;
+      var makingOption;
+      cart.data.products.forEach(function(p){
+        if (p.id === lineItemId){ // Option change on this line item
+          makingOption = p.making_options && p.making_options.length > 0 ? p.making_options[0].id : undefined;
+        }
+      });
+      
+      if (makingOption){
+        cart.deleteMakingOption(lineItemId, makingOption);
+      }
+    });
