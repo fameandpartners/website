@@ -18,7 +18,7 @@ p.minor-callout Choose how quickly you receive the order
           | $199
 
       .cart-item-delivery-options.clearfix
-        fieldset.RadioGroup.delivery-options.js-delivery-times-fieldset data-line-item-id="#{product.id}"
+        fieldset.RadioGroup.delivery-options.js-delivery-times-fieldset data-line-item-id="#{product.line_item_id}" data-line-item-index="#{i}"
           .delivery-time-wrapper
             .Radio
               input id="delivery_time_normal_#{i}" class="js-remove-making-option" checked="checked" type="radio" name="delivery_time_#{i}" value="default"
@@ -39,6 +39,7 @@ p.minor-callout Choose how quickly you receive the order
 
     // Create Making Option
     $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
+      console.log('cart', cart)
       var $input = $(evt.target);
       var $fieldset = $input.closest(FIELDSET_CLASS);
       var lineItemId = $fieldset.data().lineItemId;
@@ -49,16 +50,13 @@ p.minor-callout Choose how quickly you receive the order
     
     // Removal of Making Option
     $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
-      var $input = $(evt.target);
-      var $fieldset = $input.closest(FIELDSET_CLASS);
-      var lineItemId = $fieldset.data().lineItemId;
-      var makingOption;
-      cart.data.products.forEach(function(p){
-        if (p.id === lineItemId){ // Option change on this line item
-          makingOption = p.making_options && p.making_options.length > 0 ? p.making_options[0].id : undefined;
-        }
-      });
+      console.log('cart', cart)
+      var $fieldset = $(evt.target).closest(FIELDSET_CLASS);
+      var index = parseInt($fieldset.data().lineItemIndex, 10);
+      var lineItem = cart.data.products[index];
+      var makingOption = lineItem.making_options && lineItem.making_options.length > 0 ? lineItem.making_options[0].id : undefined; 
       
+      console.log('makingOption', makingOption)
       if (makingOption){
         cart.deleteMakingOption(lineItemId, makingOption);
       }
