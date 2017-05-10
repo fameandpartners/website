@@ -94,14 +94,34 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
-  updateProduct: (line_item_id, options = {}) ->
-    console.log('updateProduct', options)
-
-  removeProduct: (line_item_id) ->
+  deleteMakingOption: (line_item_id, making_option_id) ->
     $.ajax(
-      url: "/user_cart/products/#{line_item_id}"
+      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
       type: "DELETE"
       dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  createMakingOption: (line_item_id, making_option_id) ->
+    $.ajax(
+      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
+      type: "POST"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
+  updateProduct: (line_item_id, data) ->
+    $.ajax(
+      url: "/user_cart/products/#{line_item_id}"
+      type: "PUT"
+      dataType: "json",
+      data: data
     ).success(
       @updateData
     ).error( () =>
