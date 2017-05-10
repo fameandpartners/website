@@ -158,6 +158,7 @@ class CADCustomize extends Component {
    * @return {Array[Node]} - addonOptionNodes
    */
   generateAddonOptions() {
+    console.log('changing');
     const { addonOptions } = this.props;
 
     return addonOptions.map((a) => {
@@ -365,7 +366,7 @@ class CADCustomize extends Component {
 
           <div className="CAD--layer-wrapper">
             { this.generateBaseLayers() }
-            { this.generateAddonLayers() }
+            { this.generateAddonLayers().reverse() }
           </div>
 
           <div className="CAD--addon-option-select">
