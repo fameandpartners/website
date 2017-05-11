@@ -18,17 +18,19 @@ p.minor-callout Choose how quickly you receive the order
           | $199
 
       .cart-item-delivery-options.clearfix
+        - isDefaultChosen = product.making_options.length == 0
+        - makingOptionChosen = product.making_options[0]
         fieldset.RadioGroup.delivery-options.js-delivery-times-fieldset data-line-item-id="#{product.line_item_id}" data-line-item-index="#{i}"
           .delivery-time-wrapper
             .Radio
-              input id="delivery_time_normal_#{i}" class="js-remove-making-option" checked="checked" type="radio" name="delivery_time_#{i}" value="default"
+              input id="delivery_time_normal_#{i}" class="js-remove-making-option" checked="#{isDefaultChosen}" type="radio" name="delivery_time_#{i}" value="default"
               label for="delivery_time_normal_#{i}"
                 | Standard Delivery - #{product.delivery_period}
               .price-wrapper Free
           - for mo in product.available_making_options
             .delivery-time-wrapper
               .Radio
-                input id="delivery_time_#{mo.option_type}_#{i}" class="js-create-making-option" type="radio" name="delivery_time_#{i}" value="#{mo.id}"
+                input id="delivery_time_#{mo.option_type}_#{i}" class="js-create-making-option" checked="#{!isDefaultChosen && makingOptionChosen.id === mo.id}" type="radio" name="delivery_time_#{i}" value="#{mo.id}"
                 label for="delivery_time_#{mo.option_type}_#{i}" #{mo.name}
                 .price-wrapper #{mo.display_discount}
 
@@ -39,7 +41,6 @@ p.minor-callout Choose how quickly you receive the order
 
     // Create Making Option
     $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
-      console.log('cart', cart)
       var $input = $(evt.target);
       var $fieldset = $input.closest(FIELDSET_CLASS);
       var lineItemId = $fieldset.data().lineItemId;
@@ -50,13 +51,11 @@ p.minor-callout Choose how quickly you receive the order
     
     // Removal of Making Option
     $('.js-delivery-times-wrapper input.js-create-making-option').on('click', function(evt){
-      console.log('cart', cart)
       var $fieldset = $(evt.target).closest(FIELDSET_CLASS);
       var index = parseInt($fieldset.data().lineItemIndex, 10);
       var lineItem = cart.data.products[index];
       var makingOption = lineItem.making_options && lineItem.making_options.length > 0 ? lineItem.making_options[0].id : undefined; 
       
-      console.log('makingOption', makingOption)
       if (makingOption){
         cart.deleteMakingOption(lineItemId, makingOption);
       }
