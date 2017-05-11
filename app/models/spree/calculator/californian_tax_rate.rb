@@ -1,7 +1,7 @@
 require_dependency 'spree/calculator'
 
-module Taxes
-  class CalifornianCalculator < Spree::Calculator
+module Spree
+  class Calculator::CalifornianTaxRate < Calculator
     def self.description
       'Californian Tax Calculator'.freeze
     end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Taxes::CalifornianCalculator do
+describe Spree::Calculator::CalifornianTaxRate do
   # Note: tax rates are associated with zones. We need to create countries before proceeding
   let!(:usa) { create(:country, iso3: 'USA') }
   let!(:brazil) { create(:country, iso3: 'BRA') }
