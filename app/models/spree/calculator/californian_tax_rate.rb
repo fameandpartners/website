@@ -31,7 +31,7 @@ module Spree
 
     def compute_order(order)
       if shipping_to_california?(order)
-        line_items_total = order.line_items.sum(&:total)
+        line_items_total = order.total
         round_to_two_places(line_items_total * rate.amount)
       else
         0
