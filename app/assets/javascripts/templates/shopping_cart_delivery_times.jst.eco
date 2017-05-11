@@ -2,7 +2,7 @@
   Delivery
 </h2>
 <p class="minor-callout">Choose how quickly you receive the order</p>
-<% i = 0 %>
+<% i = -1 %>
 <% for product in @cart.products: %>
   <% i += 1 %>
     <div class="cart-item js-delivery-times-wrapper">
@@ -22,20 +22,19 @@
         </div>
 
         <div class="cart-item-delivery-options clearfix">
-          <% isDefaultChosen = product.making_options.length == 0 %>
-          <% makingOptionChosen = product.making_options[0] %>
           <fieldset
             class="RadioGroup delivery-options js-delivery-times-fieldset"
             data-line-item-id="<%= product.line_item_id %>"
             data-line-item-index="<%= i %>"
           >
+
             <div class="delivery-time-wrapper">
               <div class="Radio">
                 <input
                   type="radio"
                   id="delivery_time_normal_<%= i %>"
-                  class="js-remove=making-option"
-                  checked="<%= isDefaultChosen %>"
+                  class="js-remove-making-option"
+                  name="delivery_time_<%=i%>"
                 >
                 <label for="delivery_time_normal_<%= i %>">
                   Standard Delivery - <%= product.delivery_period %>
@@ -49,13 +48,12 @@
                 <div class="Radio">
                   <input
                     type="radio"
-                    id="delivery_time_<%= mo.option_type %>_<%= i %>"
+                    id="delivery_time_<%= mo.id %>_<%= i %>"
                     class="js-create-making-option"
                     name="delivery_time_<%=i%>"
-                    checked="<%= !isDefaultChosen && makingOptionChosen.id == mo.id %>
                     value="<%=mo.id%>"
                   >
-                  <label for="delivery_time_<%=mo.option_type%>_<%=i%>">
+                  <label for="delivery_time_<%=mo.id%>_<%=i%>">
                     <%= mo.name %>
                   </label>
                   <div class="price-wrapper"><%= mo.display_discount %></div>
