@@ -225,10 +225,6 @@
       border: 1px solid $c-neutral-4;
       margin-bottom: 20px;
 
-      .product-name {
-        margin-top: 0;
-      }
-
       .image-wrapper {
         float: left;
         width: 20%;
@@ -247,8 +243,16 @@
         padding-left: 10px;
       }
 
+      .description-heading {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: 600;
+        line-height: 26px;
+      }
+
       .description-wrapper .product-name {
-        font-size: 2.8rem;
+        margin-top: 0;
+        font-size: 3rem;
       }
 
       .description-wrapper dd{

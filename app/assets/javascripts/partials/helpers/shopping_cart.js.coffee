@@ -94,6 +94,17 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  removeProduct: (line_item_id) ->
+    $.ajax(
+      url: "/user_cart/products/#{line_item_id}"
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      @updateData
+    ).error( () =>
+      @trigger('error')
+    )
+
   deleteMakingOption: (line_item_id, making_option_id) ->
     $.ajax(
       url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
