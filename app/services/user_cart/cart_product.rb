@@ -28,6 +28,8 @@ class UserCart::CartProduct
   # don't know if this will be necessary
   def create_making_option(id)
     return if line_item.blank?
+    #kill pre-existing options, we're gonna make assumption only 1 option is allowed
+    line_item.making_options.each(&:destroy)
     line_item.making_options << LineItemMakingOption.build_option(ProductMakingOption.find(id))
     update_order
 

@@ -319,7 +319,7 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
 
-      post 'products/:line_item_id/making_options/:production_making_option_id' => 'products#create_line_item_making_option'
+      post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
