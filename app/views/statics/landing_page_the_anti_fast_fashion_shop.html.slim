@@ -10,8 +10,16 @@ ruby:
     section.section-box.section-intro.text-center
       .row
         .col-md-6.hidden-xs.hidden-sm
-          .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press'
-            = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1.jpg', class: "img-responsive"
+          .js-anti-fast-click-track data-action='Drop 2 - Editorial 1 Press'
+            .item-wrap
+              .media-wrap
+                = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1.jpg', class: "img-responsive"
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-item
+                        h3.cta-title Shop the Look
+                        a.cta-item-name href="#{dresses_path}/dress-the-doona-dress-1466?color=white" The Doona Dress
 
         .col-md-6
           .content-copy.text-center
@@ -37,14 +45,21 @@ ruby:
 
 
             .hidden-md.hidden-lg
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press'
-                = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1-mob.jpg', class: "img-responsive"
-
+              .js-anti-fast-click-track data-action='Drop 2 - Editorial 1 Press'
+                .item-wrap
+                  .media-wrap
+                    = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-1-mob.jpg', class: "img-responsive"
+                    .overlay
+                      .overlay-outer-wrap
+                        .overlay-inner-wrap
+                          span.cta-item
+                            h3.cta-title Shop the Look
+                            a.cta-item-name href="#{dresses_path}/dress-the-doona-dress-1466?color=white" The Doona Dress
           .row
             .products-grid.products-collections.no-margin
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 1 Press - Product Press'
+              .js-anti-fast-click-track data-action='Drop 2 - Editorial 1 Press - Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6 js-anti-fast-click-track', action: 'Drop 1 - Editorial 1 Press'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-xs-6 js-anti-fast-click-track', action: 'Drop 2 - Editorial 1 Press'}
 
     section.section-box.section-welcome.text-center
       .row
@@ -53,22 +68,38 @@ ruby:
             .col-xs-10.col-xs-offset-1
               .thin-line-separator--center
               .content-copy
-                p Fame and Partners is taking a stand against the mass-produced fast-fashion culture–because together, we have to power to revolutionize the industry and reduce fashion waste. <br class="visible-lg">Welcome to Anti-Fast Fashion.
+                p Fame and Partners is taking a stand against the mass-produced fast-fashion culture–because together, we have the power to revolutionize the industry and reduce fashion waste. <br class="visible-lg">Welcome to Anti-Fast Fashion.
 
           .content-img.hidden-md.hidden-lg
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2-mob.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 2 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2-mob.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-jan-dress-1469?color=red" The Jan Dress
 
           .row
             .products-grid.products-collections.no-margin
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press - Product Press'
+              .js-anti-fast-click-track data-action='Drop 2 - Editorial 2 Press - Product Press'
                 .products-set
                   = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-xs-6'}
 
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 2 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 2 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-2.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-jan-dress-1469?color=red" The Jan Dress
 
     section.section-box.section-more-styles
       .row
@@ -78,7 +109,7 @@ ruby:
             .products-grid.products-collections.no-margin
               .js-anti-fast-click-track data-action='More Styles Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-feel-good-about.text-center
       .row
@@ -91,30 +122,46 @@ ruby:
       .row
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 3 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-foley-jumpsuit-1474?color=black" The Foley Jumpsuit
 
         .col-md-6.hidden-xs.hidden-sm
           .row
             .products-grid.products-collections.no-padding.no-margin
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+              .js-anti-fast-click-track data-action='Drop 2 - Editorial 3 Press - Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, customWrapper: 'col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 12, customWrapper: 'col-xs-6'}
           .row
             .products-grid.products-collections.no-margin
-              .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+              .js-anti-fast-click-track data-action='Drop 2 - Editorial 3 Press - Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 10, customWrapper: 'col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 13, rangeTo: 14, customWrapper: 'col-xs-6'}
 
         .col-xs-12.hidden-md.hidden-lg
           .content-img
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 3 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-3-mob.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-foley-jumpsuit-1474?color=black" The Foley Jumpsuit
 
           .products-grid.products-collections.no-margin
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 3 Press - Product Press'
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 3 Press - Product Press'
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 10, customWrapper: 'col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 14, customWrapper: 'col-xs-6'}
 
     section.section-box.section-more-styles
       .row
@@ -124,30 +171,49 @@ ruby:
             .products-grid.products-collections.no-margin
               .js-anti-fast-click-track data-action='More Styles Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 14, customWrapper: 'col-md-3 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 15, rangeTo: 26, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-disrupt.text-center
       .row
-        .col-md-6
-          .row
-            .col-xs-10.col-xs-offset-1
-              .thin-line-separator--center
-              .content-copy
-                p <em>You</em> have the power to disrupt the system. Shop ethically. Shop Anti-Fast Fashion.
+        .col-xs-10.col-xs-offset-1
+          .thin-line-separator--center
+          .content-copy
+            p <em>You</em> have the power to disrupt the system. Shop ethically. Shop Anti-Fast Fashion.
 
+    section.section-box
+      .row
+        .col-md-6
           .content-img.hidden-md.hidden-lg
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 4 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4-mob.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-aldridge-shirt-1499?color=navy-stripe" The Aldridge Top
+                          a.cta-item-name href="#{dresses_path}/dress-the-elinor-skirt-1484?color=black-and-white-gingham" The Elinor Skirt
 
           .row
             .products-grid.products-collections.no-margin
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 15, rangeTo: 16, customWrapper: 'col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 27, rangeTo: 30, customWrapper: 'col-xs-6'}
 
         .col-md-6.hidden-sm.hidden-xs
           .content-img
-            .js-anti-fast-click-track data-action='Drop 1 - Editorial 4 Press'
-              = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4.jpg', class: "img-responsive"
+            .js-anti-fast-click-track data-action='Drop 2 - Editorial 4 Press'
+              .item-wrap
+                .media-wrap
+                  = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-4.jpg', class: "img-responsive"
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-item
+                          h3.cta-title Shop the Look
+                          a.cta-item-name href="#{dresses_path}/dress-the-aldridge-shirt-1499?color=navy-stripe" The Aldridge Top
+                          a.cta-item-name href="#{dresses_path}/dress-the-elinor-skirt-1484?color=black-and-white-gingham" The Elinor Skirt
 
     section.section-box.section-more-styles
       .row
@@ -157,7 +223,7 @@ ruby:
             .products-grid.products-collections.no-margin
               .js-anti-fast-click-track data-action='More Styles Product Press'
                 .products-set
-                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 17, rangeTo: 28, customWrapper: 'col-md-3 col-xs-6'}
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 31, rangeTo: 46, customWrapper: 'col-md-3 col-xs-6'}
 
     section.section-box.section-newsletter-footer.text-center
       .row
@@ -177,17 +243,98 @@ ruby:
               = content_for :inline_javascript do
                 |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterBottom}'});
 
+    section.section-box.section-more-styles
+      .row
+        .col-xs-12
+          .row
+            .products-grid.products-collections.no-margin
+              .js-anti-fast-click-track data-action='More Styles Product Press - Under 2nd Sign-up form'
+                .products-set
+
+                  .col-md-3.col-xs-6
+                    .js-anti-fast-click-track data-action='Drop 2 - Editorial 5 Press'
+                      .item-wrap
+                        .media-wrap
+                          = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-5.jpg', class: "img-responsive"
+                          .overlay
+                            .overlay-outer-wrap
+                              .overlay-inner-wrap
+                                span.cta-item
+                                  h4.cta-title Shop the Look
+                                  a.cta-item-name href="#{dresses_path}/dress-the-radhika-top-1440?color=white" The Radhika Top
+                                  a.cta-item-name href="#{dresses_path}/dress-the-marley-skirt-1448?color=olive" The Marley Skirt
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 47, rangeTo: 49, customWrapper: 'col-md-3 col-xs-6'}
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 50, rangeTo: 52, customWrapper: 'col-md-3 col-xs-6'}
+                  .col-md-3.col-xs-6
+                    .js-anti-fast-click-track data-action='Drop 2 - Editorial 6 Press'
+                      .item-wrap
+                        .media-wrap
+                          = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-6.jpg', class: "img-responsive"
+                          .overlay
+                            .overlay-outer-wrap
+                              .overlay-inner-wrap
+                                span.cta-item
+                                  h4.cta-title Shop the Look
+                                  a.cta-item-name href="#{dresses_path}/dress-the-preetma-pant-1479?color=black" The Preetma Pant
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 53, rangeTo: 53, customWrapper: 'col-md-3 col-xs-6'}
+                  .col-md-3.col-xs-6
+                    .js-anti-fast-click-track data-action='Drop 2 - Editorial 7 Press'
+                      .item-wrap
+                        .media-wrap
+                          = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-7.jpg', class: "img-responsive"
+                          .overlay
+                            .overlay-outer-wrap
+                              .overlay-inner-wrap
+                                span.cta-item
+                                  h4.cta-title Shop the Look
+                                  a.cta-item-name href="#{dresses_path}/dress-the-reynolds-coat-1447?color=pretty-pink" The Reynolds Coat
+                                  a.cta-item-name href="#{dresses_path}/dress-the-irina-dress-1435?color=olive" The Irina Dress
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 54, rangeTo: 55, customWrapper: 'col-md-3 col-xs-6'}
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 56, rangeTo: 58, customWrapper: 'col-md-3 col-xs-6'}
+                  .col-md-3.col-xs-6
+                    .js-anti-fast-click-track data-action='Drop 2 - Editorial 8 Press'
+                      .item-wrap
+                        .media-wrap
+                          = image_tag 'landingpages/the-anti-fast-fashion-shop/tile-8.jpg', class: "img-responsive"
+                          .overlay
+                            .overlay-outer-wrap
+                              .overlay-inner-wrap
+                                span.cta-item
+                                  h4.cta-title Shop the Look
+                                  a.cta-item-name href="#{dresses_path}/dress-the-selah-corset-1450?color=olive" The Selah Corset
+                                  a.cta-item-name href="#{dresses_path}/dress-the-ece-shirt-1446?color=white-and-black-pinstripe" The Ece Shirt
+                                  a.cta-item-name href="#{dresses_path}/dress-the-camille-pant-1443?color=black" The Camille Pant
+
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 59, rangeTo: 70, customWrapper: 'col-md-3 col-xs-6'}
+
 - content_for :body_end do
 
   javascript:
 
     (function(window) {
-    
+
       // Event Tracking Listener
       $('.js-anti-fast-click-track').on('click', function(){
         window.track.antiFastTrack(this.dataset.action, this.dataset.label);
       });
 
+      // Toggle caption visibility on mobile, based on tap or click
+      $('.item-wrap .overlay').on('click', function(){
+        if ($(this).css('opacity') == '1') {
+          $(this).addClass('hide-mobile');
+          $(this).removeClass('show-mobile');
+        } else {
+          $(this).addClass('show-mobile');
+          $(this).removeClass('hide-mobile');
+        }
+      });
+
+      // Newsletter subscription
       var NewsletterSubscriberOnPage,
         bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
