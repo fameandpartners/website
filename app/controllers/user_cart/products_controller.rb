@@ -67,7 +67,6 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
   def create_line_item_making_option
-    binding.pry
     cart_product_service.create_making_option(params[:product_making_option_id])
     render json: user_cart_resource.read.serialize, status: :ok
   end
