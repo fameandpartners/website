@@ -5,7 +5,7 @@ section.section-box.container.section-style-icon
       h2.heading-overlay Get the look
 
   .row
-    - secondaryHero = contentful.entries(content_type: 'homePageContainer')[0].secondary_header_container
+    - secondaryHero = @home_page_container.secondary_header_container
     .col-md-12.cta-item-huge
       - secondaryHero_image = secondaryHero.secondary_header_image.url;
       - secondaryHero_mobileImage = secondaryHero.secondary_header_mobile_image.url;
@@ -28,74 +28,70 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        - topLeft = contentful.entries(content_type: 'topLeftCategoryTile')
-        - topLeft.each do |tile|
-          = link_to tile.link
-            .section-img-wrap.copy-center.top-left-category-tile
-              .img-wrap
-                img.img-responsive*{src: tile.image.image_url }
+        - topLeftTile = @home_page_container.category_tiles_container[0]
+        = link_to topLeftTile.link
+          .section-img-wrap.copy-center.top-left-category-tile
+            .img-wrap
+              img.img-responsive*{src: topLeftTile.image.image_url }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile.title_overlay
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap
+                      span.cta-link-white-bg.cta-link-center-padding
+                        span.cta-link Shop
+                        span.copy-highlight
+                          = topLeftTile.title_overlay
 
       .col-md-6.cta-item
-        - topRight = contentful.entries(content_type: 'topRightCategoryTile')
-        - topRight.each do |tile|
-          = link_to tile.link
-            .section-img-wrap.copy-center.top-right-category-tile
-              .img-wrap
-                img.img-responsive*{src: tile.image.image_url }
+        - topRightTile = @home_page_container.category_tiles_container[1]
+        = link_to topRightTile.link
+          .section-img-wrap.copy-center.top-right-category-tile
+            .img-wrap
+              img.img-responsive*{src: topRightTile.image.image_url }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile.title_overlay
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap
+                      span.cta-link-white-bg.cta-link-center-padding
+                        span.cta-link Shop
+                        span.copy-highlight
+                          = topRightTile.title_overlay
 
     .row
       .col-md-6.cta-item
-        - bottomLeft = contentful.entries(content_type: 'bottomLeftCategoryTile')
-        - bottomLeft.each do |tile|
-          = link_to tile.link
-            .section-img-wrap.copy-center.bottom-left-category-tile
-              .img-wrap
-                img.img-responsive*{src: tile.image.image_url }
+        - bottomLeftTile = @home_page_container.category_tiles_container[2]
+        = link_to bottomLeftTile.link
+          .section-img-wrap.copy-center.bottom-left-category-tile
+            .img-wrap
+              img.img-responsive*{src: bottomLeftTile.image.image_url }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile.title_overlay
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap
+                      span.cta-link-white-bg.cta-link-center-padding
+                        span.cta-link Shop
+                        span.copy-highlight
+                          = bottomLeftTile.title_overlay
 
       .col-md-6.cta-item
-        - bottomRight = contentful.entries(content_type: 'bottomRightCategoryTile')
-        - bottomRight.each do |tile|
-          = link_to tile.link
-            .section-img-wrap.copy-center.bottom-right-category-tile
-              .img-wrap
-                img.img-responsive*{src: tile.image.image_url }
+        - bottomRightTile = @home_page_container.category_tiles_container[3]
+        = link_to bottomRightTile.link
+          .section-img-wrap.copy-center.bottom-right-category-tile
+            .img-wrap
+              img.img-responsive*{src: bottomRightTile.image.image_url }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile.title_overlay
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap
+                      span.cta-link-white-bg.cta-link-center-padding
+                        span.cta-link Shop
+                        span.copy-highlight
+                          = bottomRightTile.title_overlay

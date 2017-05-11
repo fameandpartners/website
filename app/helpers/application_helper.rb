@@ -212,24 +212,33 @@ module ApplicationHelper
     end
   end
 
-  # Contentful
-  def contentful
-    @client ||= Contentful::Client.new(
-      access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-      space: ENV['CONTENTFUL_SPACE_ID'],
-      dynamic_entries: :auto,
-      raise_errors: true
-    )
+  # CMS
+  def get_contentful_parent_container
+    if (params['developer'] == 'preview')
+      puts '*'*30
+      puts 'Contentful - PREVIEW'
+      puts '*'*30
+      Rails.cache.clear
+      @contentful_client ||= Contentful::Client.new(
+        api_url: 'preview.contentful.com',
+        access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
+        space: ENV['CONTENTFUL_SPACE_ID'],
+        dynamic_entries: :auto,
+        raise_errors: true
+      )
+    else
+      puts '-'*30
+      puts 'Contentful - LIVE'
+      puts '-'*30
+      Rails.cache.fetch('#{cache_key}') do
+        @contentful_client ||= Contentful::Client.new(
+          access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
+          space: ENV['CONTENTFUL_SPACE_ID'],
+          dynamic_entries: :auto,
+          raise_errors: true
+        )
+      end
+    end
   end
 
-  # Contentful Preview
-  def contentful_preview
-    @preview_client ||= Contentful::Client.new(
-      api_url: 'preview.contentful.com',
-      access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
-      space: ENV['CONTENTFUL_SPACE_ID'],
-      dynamic_entries: :auto,
-      raise_errors: true
-    )
-  end
 end
