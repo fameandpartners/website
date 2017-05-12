@@ -1,0 +1,75 @@
+@-webkit-keyframes triangle-skew-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+    transform: perspective(100px) rotateX(180deg) rotateY(0);
+  }
+
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+  }
+
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+    transform: perspective(100px) rotateX(0) rotateY(180deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+    transform: perspective(100px) rotateX(0) rotateY(0);
+  }
+}
+@keyframes triangle-skew-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+    transform: perspective(100px) rotateX(180deg) rotateY(0);
+  }
+
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+  }
+
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+    transform: perspective(100px) rotateX(0) rotateY(180deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+    transform: perspective(100px) rotateX(0) rotateY(0);
+  }
+}
+
+.spinner-wrapper .loader {
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  max-width: 25%;
+  height: 100%;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.triangle-skew-spin > div {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid $c-neutral-black;
+  -webkit-animation: triangle-skew-spin 3s 0s cubic-bezier(.09,.57,.49,.9) infinite;
+  animation: triangle-skew-spin 3s 0s cubic-bezier(.09,.57,.49,.9) infinite;
+}
