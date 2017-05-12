@@ -218,7 +218,7 @@ module ApplicationHelper
       puts '*'*30
       puts 'Contentful - PREVIEW'
       puts '*'*30
-      Rails.cache.clear
+      Rails.cache.delete('contentful-cms-cache-key')
       @contentful_client ||= Contentful::Client.new(
         api_url: 'preview.contentful.com',
         access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
@@ -226,18 +226,31 @@ module ApplicationHelper
         dynamic_entries: :auto,
         raise_errors: true
       )
+      create_home_page_container_from_contentful(@contentful_client.entries(content_type: 'homePageContainer')[0])
     else
       puts '-'*30
       puts 'Contentful - LIVE'
       puts '-'*30
-      Rails.cache.fetch('#{cache_key}') do
+      Rails.cache.fetch('contentful-cms-cache-key') do
         @contentful_client ||= Contentful::Client.new(
           access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
           space: ENV['CONTENTFUL_SPACE_ID'],
           dynamic_entries: :auto,
           raise_errors: true
         )
+        create_home_page_container_from_contentful(@contentful_client.entries(content_type: 'homePageContainer')[0])
       end
+    end
+  end
+
+  # currently just doing Instagram Tiles (fix, obv.)
+  def create_home_page_container_from_contentful(data)
+    data.instagram_thumbnails_container.map do |item|
+      {
+        path_link: item.path_link,
+        handle: item.handle,
+        image: item.image.image_url
+      }
     end
   end
 

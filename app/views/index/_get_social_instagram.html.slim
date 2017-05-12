@@ -22,17 +22,17 @@ section.container
 
         .instagram-widget
           // Instagram Items fetched via Contentful
-          - @instaTiles = @home_page_container.instagram_thumbnails_container
+          / - @instaTiles = @home_page_container.instagram_thumbnails_container
           - @instaTiles.each do |tile|
             .item.col-md-5ths*tile_responsive_classes(tile)
-              = link_to tile.path_link, class: "item-wrap"
+              = link_to tile[:path_link], class: "item-wrap"
                 .media-wrap
-                  img.img-responsive*{src: tile.image.image_url }
+                  img.img-responsive*{src: tile[:image] }
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user = tile.handle
+                          span.user = tile[:handle]
                           span.cta-link shop
 
       .row
