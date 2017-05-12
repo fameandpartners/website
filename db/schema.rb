@@ -1612,7 +1612,7 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
-    t.string   "delivery_period",   :default => "7 - 10 business days"
+    t.string   "delivery_period",   :default => "8 - 10 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
