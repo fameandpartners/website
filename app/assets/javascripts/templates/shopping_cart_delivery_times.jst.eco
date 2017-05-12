@@ -48,12 +48,12 @@
                 <div class="Radio">
                   <input
                     type="radio"
-                    id="delivery_time_<%= mo.id %>_<%= i %>"
+                    id="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%= i %>"
                     class="js-create-making-option"
                     name="delivery_time_<%=i%>"
                     value="<%=mo.id%>"
                   >
-                  <label for="delivery_time_<%=mo.id%>_<%=i%>">
+                  <label for="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%=i%>">
                     <%= mo.name %>
                   </label>
                   <div class="price-wrapper"><%= mo.display_discount %></div>

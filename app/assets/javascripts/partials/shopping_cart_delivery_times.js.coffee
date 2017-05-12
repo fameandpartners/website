@@ -6,8 +6,8 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     @$container = $(options.container || '.js-shopping_cart_delivery_times')
     console.log('options', options)
     console.log('@template', @template)
-    _.bindAll(@, 'render', 'determineChecked', 'bindEventHandlers', 'handleRemoveDeliveryTime', 'handleAddDeliveryTime')
-    @cart.on('change', @render)
+    _.bindAll(@, 'render', 'determineChecked', 'bindEventHandlers', 'handleRemoveDeliveryTime', 'handleAddDeliveryTime', 'handleCartChange')
+    @cart.on('change', @handleCartChange)
 
     @render()
     @determineChecked()
@@ -15,7 +15,7 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     @
 
   bindEventHandlers: () ->
-    $('.js-remove-making-option').on('click', @handleRemoveDelivery)
+    $('.js-remove-making-option').on('click', @handleRemoveDeliveryTime)
     $('.js-create-making-option').on('click', @handleAddDeliveryTime)
 
   handleAddDeliveryTime: (evt) ->
@@ -24,7 +24,6 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     $fieldset = $input.closest(FIELDSET_CLASS)
     lineItemId = $fieldset.data().lineItemId
     chosenVal = $input.val()
-    console.log 'adding'
     window.app.shopping_cart.createMakingOption(lineItemId, chosenVal)
 
   handleRemoveDeliveryTime: (evt) ->
@@ -36,21 +35,26 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     console.log 'removing'
 
     if makingOption
-      window.app.shopping_cart.deleteMakingOption(lineItemId, makingOption)
+      window.app.shopping_cart.deleteMakingOption(lineItem.line_item_id, makingOption)
 
   determineChecked: () ->
     @cart.data.products.forEach(@initCheckbox)
 
   initCheckbox: (p, i) ->
     isDefaultChosen = p.making_options.length == 0
-    makingOptionChosen = p.making_options[i]
 
     if isDefaultChosen
       $selection = $("#delivery_time_normal_" + i)
     else
-      $selection = $("#delivery_time_" + p.making_option.id + '_' + i)
+      # find element by name and index
+      $selection = $("#delivery_time_" + p.making_options[0].name.toLowerCase().replace(" ", "") + '_' + i)
 
     $selection.attr('checked', true)
 
   render: () ->
     @$container.html(@template(cart: @cart.data))
+
+  handleCartChange: () ->
+    @render()
+    @determineChecked()
+    @bindEventHandlers()
