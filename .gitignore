@@ -97,5 +97,3 @@ Procfile.*
 # Ignore all Emacs Temp Files
 *#*
 
-# Ignore locally created paperclip files
-spree
