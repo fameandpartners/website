@@ -10,7 +10,7 @@ module Search
       # some kind of documentation
       colors            = options[:color_ids]
       body_shapes       = options[:body_shapes]
-      taxons            = options[:taxon_ids]
+      taxons_ids        = options[:taxon_ids]
       exclude_products  = options[:exclude_products]
       discount          = options[:discount]
       query_string      = options[:query_string]
@@ -38,17 +38,39 @@ module Search
       binding.pry
       hash = Elasticsearch::DSL::Search.search do
         query do
-          bool do
-            must do
-              term 'product.is_deleted' => false
-              term 'product.is_hidden' => false
+          filtered do
+            bool do
+              must do
+                term 'product.is_deleted' => false
+                term 'product.is_hidden' => false
+                # Outerwear filter
+                term 'product.is_outerwear' => show_outerwear
+                # Only available items
+                term 'product.in_stock' => true
+
+                if fast_making.present?
+                  term 'product.fast_making' => fast_making
+                end
+
+                if taxon_ids.present?
+                  term 'product.taxon_ids' => taxon_ids
+                end
+
+              end
+              should do
+                range 'product.available_on' => { :lte => Time.now}
+              end
             end
-            #should do
-            #  range 'product.available_on' =>
-            #end
+            if colors.present?
+              term 'color.id' => colors
+            end
           end
         end
       end
+
+
+
+      hash
     end
 
     def self.product_orderings(currency: nil)
