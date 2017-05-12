@@ -41,3 +41,5 @@ else
     storage: :filesystem
   )
 end
+
+Paperclip.interpolates('product_id') do |attachment, style| attachment.instance.product.id end 

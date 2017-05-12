@@ -13,6 +13,8 @@ Spree::Product.class_eval do
 
   has_many  :customisation_values,
             order: 'customisation_values.position ASC'
+  has_many :layer_cads,
+           order: 'layer_cads.position ASC'
   has_many :product_color_values,
            dependent: :destroy, inverse_of: :product
 

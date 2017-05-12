@@ -90,10 +90,9 @@
       padding: 12px 2px;
       font-size: 0.75em;
       font-weight: 500;
-      @include transition(300ms border-color);
 
       &.has-error {
-        border-color: $form_error;
+        box-shadow: inset 0 0 0 1px $form_error;
       }
     }
 

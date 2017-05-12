@@ -8,7 +8,7 @@ require 'business_time'
 
 module Policies
   class LineItemProjectedDeliveryDatePolicy
-    DELIVERY_DAYS = 10
+    DELIVERY_DAYS = 7
     FAST_DELIVERY_DAYS = 4
 
     attr_reader :order_completed_at, :fast_making

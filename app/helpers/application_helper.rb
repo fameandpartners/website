@@ -190,6 +190,9 @@ module ApplicationHelper
   end
 
   def convert_height_units(height_value, height_unit)
+    if ( !height_value || !height_unit)
+      return nil
+    end
     if (height_unit == 'inch')
       "#{height_value.to_i / 12}ft #{height_value.to_i % 12}in"
     else
