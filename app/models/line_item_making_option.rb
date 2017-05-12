@@ -6,6 +6,7 @@ class LineItemMakingOption < ActiveRecord::Base
 
   delegate :name, to: :product_making_option, allow_nil: true
   #delegate :price, to: :product_making_option, allow_nil: true  #thanh does not recall writing this line of code
+  delegate :description, to: :product_making_option
 
   def display_price
     Spree::Money.new(price, currency: currency)
@@ -17,7 +18,7 @@ class LineItemMakingOption < ActiveRecord::Base
         product_id: product_making_option.product_id,
         variant_id: product_making_option.variant_id,
         making_option_id: product_making_option.id,
-        price: product_making_option.price, #some reason this don't work, used delegation to make it work
+        price: product_making_option.price,
         currency: product_making_option.currency
       }, { without_protection: true })
     end

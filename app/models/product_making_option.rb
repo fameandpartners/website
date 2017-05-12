@@ -44,7 +44,7 @@ class ProductMakingOption < ActiveRecord::Base
     if self.fast_making?
       self.display_price.to_s
     elsif self.slow_making?
-      (self.price*100).round.to_s + '% discount'
+      (self.price*100).round.to_s + '%'
     else
       '' #bad
     end
@@ -55,6 +55,14 @@ class ProductMakingOption < ActiveRecord::Base
       'Express Delivery'
     else
       'Deliver Later'
+    end
+  end
+
+  def description
+    if fast_making?
+      'Delivered in 7 business days'
+    else
+      'Delivered in 6 weeks'
     end
   end
 

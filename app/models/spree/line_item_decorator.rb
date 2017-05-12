@@ -60,13 +60,14 @@ Spree::LineItem.class_eval do
   # this method returns the total adjustment of all making_options adjustments
   def making_options_price_adjustment
     total_adjustment = 0
+
     making_options.each do |mo|
       if mo.product_making_option.fast_making?
         total_adjustment += mo.price
       end
       # slow_making price will be percentage based
       if mo.product_making_option.slow_making?
-        total_adjustment += total_adjustment*mo.price
+        total_adjustment = total_adjustment + self.attributes["price"]*mo.price
       end
     end
 
