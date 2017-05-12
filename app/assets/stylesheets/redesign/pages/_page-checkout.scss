@@ -104,6 +104,7 @@
   }
 
   .minor-callout {
+    font-family: $font-family-secondary;
     margin-bottom: 10px;
   }
 
@@ -302,16 +303,21 @@
         }
       }
 
-      .delivery-time-wrapper {
+      .delivery-time-options-wrapper {
         line-height: 32px;
       }
 
-      .delivery-time-wrapper label {
+      .delivery-time-options-wrapper label {
         vertical-align: inherit;
         text-transform: none;
         text-indent: 15px;
         padding: 2px 5px;
         font-size: 1.7rem;
+      }
+
+      .delivery-time-options-wrapper.is-selected,
+      .delivery-time-options-wrapper.is-selected label {
+        font-weight: 500;
       }
 
       .delivery-options {

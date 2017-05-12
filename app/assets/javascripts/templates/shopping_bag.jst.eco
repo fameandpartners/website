@@ -50,7 +50,7 @@
     <div class="cart-items">
       <% for product in @cart.products: %>
       <div class="row cart-item" data-id="<%= product.line_item_id %>">
-        <div class="cart-item-image-holder col-md-5">
+        <div class="cart-item-image-holder col-xs-5">
           <a href="<%= product.path %>">
             <% if product.name != "Gift" : %>
               <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
@@ -66,7 +66,7 @@
             <% end %>
           </a>
         </div>
-        <div class="cart-item-info col-md-7">
+        <div class="cart-item-info col-xs-7">
           <a class="pull-right remove-product" href="javascript:;">
             <span class="icon btn-close"></span>
           </a>

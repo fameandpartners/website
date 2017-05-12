@@ -11,7 +11,7 @@
         <% if product.making_options.length: %>
           <div class="ribbon-wrapper express-making">
             <div class="ribbon-txt">
-              Make it express
+              <%= product.making_options[0].name %>
             </div>
           </div>
         <% end %>

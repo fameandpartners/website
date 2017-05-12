@@ -28,7 +28,7 @@
             data-line-item-index="<%= i %>"
           >
 
-            <div class="delivery-time-wrapper">
+            <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
               <div class="Radio">
                 <input
                   type="radio"
@@ -44,7 +44,7 @@
             </div>
 
             <% for mo in product.available_making_options: %>
-              <div class="delivery-time-wrapper">
+              <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
                 <div class="Radio">
                   <input
                     type="radio"

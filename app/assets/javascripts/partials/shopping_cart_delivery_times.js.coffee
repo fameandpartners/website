@@ -66,6 +66,7 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
       $selection = $("#delivery_time_" + p.making_options[0].name.toLowerCase().replace(" ", "") + '_' + i)
 
     $selection.attr('checked', true)
+    $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
 
   render: () ->
     @$container.html(@template(cart: @cart.data))
