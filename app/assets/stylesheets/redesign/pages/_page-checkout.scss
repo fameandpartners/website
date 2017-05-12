@@ -227,7 +227,7 @@
 
       .image-wrapper {
         float: left;
-        width: 20%;
+        width: 17%;
         margin-bottom: 10px;
       }
 
@@ -239,7 +239,7 @@
 
       .description-wrapper {
         float: left;
-        width: 50%;
+        width: 57%;
         padding-left: 10px;
       }
 
@@ -261,9 +261,15 @@
 
       .price-wrapper {
         float: right;
-        width: 30%;
+        width: 20%;
         text-align: left;
-        font-size: 18px;
+        font-size: 1.7rem;
+        text-transform: none;
+        &.main {
+          font-size: 2rem;
+          font-family: $font-heading;
+          font-weight: 300;
+        }
       }
 
       .delivery-time-wrapper {
@@ -273,13 +279,10 @@
       .delivery-time-wrapper label {
         vertical-align: inherit;
         text-transform: none;
-      }
-
-      .delivery-time-wrapper .Radio label{
         text-indent: 15px;
         padding: 2px 5px;
+        font-size: 1.7rem;
       }
-
 
       .delivery-options {
         width: 100%;

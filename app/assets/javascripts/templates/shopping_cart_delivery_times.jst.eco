@@ -18,7 +18,7 @@
             <% end %>
             <dd><span class="description-heading">Color:</span> <%= product.color.name %></dd>
           </div>
-          <div class="price-wrapper"><%= product.price.display_price %></div>
+          <div class="price-wrapper main"><%= product.price.display_price %></div>
         </div>
 
         <div class="cart-item-delivery-options clearfix">
