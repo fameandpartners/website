@@ -5,7 +5,7 @@
 <% i = -1 %>
 <% for product in @cart.products: %>
   <% i += 1 %>
-    <div class="cart-item js-delivery-times-wrapper">
+    <div class="cart-item js-delivery-times-wrapper" data-index=<%= i %>>
       <section class="product-delivery-adjustment">
         <div class="cart-item-description clearfix">
           <div class="image-wrapper">

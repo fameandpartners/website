@@ -23,6 +23,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     @loaded = true
     @data = data
     @trigger('change')
+    @trigger('requestEnd')
 
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
@@ -106,6 +107,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   deleteMakingOption: (line_item_id, making_option_id) ->
+    @trigger('requestProcessing')
     $.ajax(
       url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
       type: "DELETE"
@@ -117,6 +119,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   createMakingOption: (line_item_id, making_option_id) ->
+    @trigger('requestProcessing')
     $.ajax(
       url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
       type: "POST"
