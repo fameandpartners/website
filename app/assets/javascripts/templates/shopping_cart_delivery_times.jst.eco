@@ -14,9 +14,9 @@
           <div class="description-wrapper">
             <h3 class="product-name"><%= product.name %></h3>
             <% if (product.size.presentation): %>
-              <dd><span class="description-heading">Size:</span> <%= product.size.presentation %></dd>
+              <dd><span class="line-item-description-heading">Size:</span> <%= product.size.presentation %></dd>
             <% end %>
-            <dd><span class="description-heading">Color:</span> <%= product.color.name %></dd>
+            <dd><span class="line-item-description-heading">Color:</span> <%= product.color.name %></dd>
           </div>
           <div class="price-wrapper main"><%= product.price.display_price %></div>
         </div>

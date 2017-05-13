@@ -80,21 +80,21 @@
           <div class="cart-item-price"><%= product.price.display_price %></div>
           <dl class="cart-item-description">
             <% if product.size != null : %>
-            <dd><span class="description-heading">Size:</span> <span><%= product.size.presentation %></span></dd>
+            <dd><span class="line-item-description-heading">Size:</span> <span><%= product.size.presentation %></span></dd>
             <% end %>
-            <dd><span class="description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
+            <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
 
             <% if product.from_wedding_atelier: %>
-              <dd><span class="description-heading">Height:</span> <span><%= product.height %></span></dd>
+              <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
             <% else: %>
               <% if product.display_height: %>
-                <dd><span class="description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+                <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
               <% else: %>
                 <dd><span>Skirt Length:</span> <span><%= product.height %></span></dd>
               <% end %>
             <% end %>
 
-            <dd><span class="description-heading">Estimated delivery:<span> <span><%= product.delivery_period %></span></dd>
+            <dd><span class="line-item-description-heading">Estimated delivery:</span> <span><%= product.delivery_period %></span></dd>
             <% for customization in product.customizations: %>
               <dd><%= customization.cart_summary %></dd>
             <% end %>

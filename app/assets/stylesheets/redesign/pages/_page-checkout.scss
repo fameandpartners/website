@@ -1,3 +1,11 @@
+.line-item-description-heading {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
 .page-checkout {
   p {
     font-weight: 400;
@@ -16,14 +24,6 @@
       margin: 0;
     }
 
-  }
-
-  .description-heading {
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    font-weight: 600;
-    line-height: 26px;
   }
 
   // Breadcrumbs
@@ -282,13 +282,16 @@
         padding-left: 10px;
       }
 
-      .description-heading {
+      .line-item-description-heading {
         text-transform: uppercase;
       }
 
       .description-wrapper .product-name {
         margin-top: 0;
-        font-size: 3rem;
+        font-size: 2.6rem;
+        font-weight: 300;
+        line-height: 2.4rem;
+        margin-bottom: 6px;
       }
 
       .description-wrapper dd{

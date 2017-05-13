@@ -2,7 +2,7 @@
 <div class="cart-items">
   <% for product in @cart.products: %>
   <div class="row cart-item" data-id="<%= product.line_item_id %>">
-    <div class="cart-item-image-holder col-md-5">
+    <div class="cart-item-image-holder col-xs-5">
       <a href="<%= product.path %>">
         <% if product.name != "Gift" : %>
         <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
@@ -18,33 +18,29 @@
 
       </a>
     </div>
-    <div class="cart-item-info col-md-7">
+    <div class="cart-item-info col-xs-7">
       <a class="pull-right remove-product" href="javascript:;">
         <span class="icon btn-close"></span>
       </a>
-      <div class="heading txt-truncate-1">
-        <% if product.name != "Gift" : %>
-        <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
-        <% else :%>
-        <a class="cart-item-title" href="#"><%= product.name %></a>
-        <% end %>
+      <div class="heading">
+        <span class="cart-item-title"><%= product.name %></span>
       </div>
       <div class="cart-item-price"><%= product.price.display_price %></div>
       <dl class="cart-item-description">
         <% if product.size != null : %>
-        <dd><span class="description-heading">Size: </span><%= product.size.presentation %></span></dd>
+        <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
         <% end %>
-        <dd><span class="description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
+        <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
         <% if product.from_wedding_atelier: %>
-          <dd><span class="description-heading">Height:</span> <span><%= product.height %></span></dd>
+          <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
         <% else: %>
           <% if product.display_height: %>
-            <dd><span class="description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
           <% else: %>
-            <dd><span class="description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
+            <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
           <% end %>
         <% end %>
-        <dd><span class="description-heading">Estimated delivery:</span><br /><span><%= product.delivery_period %></span></dd>
+        <dd><span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= product.delivery_period %></span></dd>
         <% for customization in product.customizations: %>
         <dd><%= customization.name %> <%= customization.display_price %></dd>
         <% end %>
