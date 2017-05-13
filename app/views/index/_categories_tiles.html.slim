@@ -5,20 +5,22 @@ section.section-box.container.section-style-icon
       h2.heading-overlay Get the look
 
   .row
-    - secondaryHero = @home_page_container.secondary_header_container
-    .col-md-12.cta-item-huge
-      - secondaryHero_image = secondaryHero.secondary_header_image.url;
-      - secondaryHero_mobileImage = secondaryHero.secondary_header_mobile_image.url;
+    // Secondary Hero - via Contentful CMS
+    - secondary_hero = @home_page_container[:secondary_header]
 
-      = link_to secondaryHero.secondary_header_link
+    .col-md-12.cta-item-huge
+      - secondary_hero_image = secondary_hero[:image];
+      - secondary_hero_mobile_image = secondary_hero[:mobile_image];
+
+      = link_to secondary_hero[:path_link]
         .section-img-wrap.copy-center
           .img-wrap
             picture
-              source media="(max-width: 991px)" srcset="#{secondaryHero_mobileImage}"
-              source media="(min-width: 992px)" srcset="#{secondaryHero_image}"
-              img src="#{secondaryHero_image}" srcset="
-                #{secondaryHero_mobileImage} 991w,
-                #{secondaryHero_image} 992w"
+              source media="(max-width: 991px)" srcset="#{secondary_hero_mobile_image}"
+              source media="(min-width: 992px)" srcset="#{secondary_hero_image}"
+              img src="#{secondary_hero_image}" srcset="
+                #{secondary_hero_mobile_image} 991w,
+                #{secondary_hero_image} 992w"
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
@@ -26,72 +28,41 @@ section.section-box.container.section-style-icon
         .section-name.vertical-text Our Edits
         .diagonal-line
 
-    .row
-      .col-md-6.cta-item
-        - topLeftTile = @home_page_container.category_tiles_container[0]
-        = link_to topLeftTile.link
-          .section-img-wrap.copy-center.top-left-category-tile
-            .img-wrap
-              img.img-responsive*{src: topLeftTile.image.image_url }
+    // Category Tiles - via Contentful CMS
+    - category_tiles = @home_page_container[:category_tiles]
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight
-                          = topLeftTile.title_overlay
+    .row.top-category-tiles-row
+      - category_tiles[0..1].each do |tile|
+        .col-md-6.cta-item
+          = link_to tile[:link]
+            .section-img-wrap.copy-center.category-tile
+              .img-wrap
+                img.img-responsive*{src: tile[:image] }
 
-      .col-md-6.cta-item
-        - topRightTile = @home_page_container.category_tiles_container[1]
-        = link_to topRightTile.link
-          .section-img-wrap.copy-center.top-right-category-tile
-            .img-wrap
-              img.img-responsive*{src: topRightTile.image.image_url }
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile[:title]
 
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight
-                          = topRightTile.title_overlay
+    .row.bottom-category-tiles-row
+      - category_tiles[2..3].each do |tile|
+        .col-md-6.cta-item
+          = link_to tile[:link]
+            .section-img-wrap.copy-center.category-tile
+              .img-wrap
+                img.img-responsive*{src: tile[:image] }
 
-    .row
-      .col-md-6.cta-item
-        - bottomLeftTile = @home_page_container.category_tiles_container[2]
-        = link_to bottomLeftTile.link
-          .section-img-wrap.copy-center.bottom-left-category-tile
-            .img-wrap
-              img.img-responsive*{src: bottomLeftTile.image.image_url }
-
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight
-                          = bottomLeftTile.title_overlay
-
-      .col-md-6.cta-item
-        - bottomRightTile = @home_page_container.category_tiles_container[3]
-        = link_to bottomRightTile.link
-          .section-img-wrap.copy-center.bottom-right-category-tile
-            .img-wrap
-              img.img-responsive*{src: bottomRightTile.image.image_url }
-
-            .content-wrap
-              .container-cta
-                .row-cta
-                  .col-md-12
-                    .copy-wrap
-                      span.cta-link-white-bg.cta-link-center-padding
-                        span.cta-link Shop
-                        span.copy-highlight
-                          = bottomRightTile.title_overlay
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link Shop
+                          span.copy-highlight
+                            = tile[:title]

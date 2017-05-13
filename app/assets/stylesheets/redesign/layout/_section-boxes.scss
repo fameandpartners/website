@@ -54,33 +54,6 @@ $top-overlay-margin-top: 37px;
 
   .section-img-wrap {
 
-    &.top-left-category-tile,
-    &.top-right-category-tile,
-    &.bottom-left-category-tile,
-    &.bottom-right-category-tile {
-      border: 2px solid #fff;
-    }
-
-    &.top-left-category-tile,
-    &.bottom-left-category-tile {
-      border-left: none;
-    }
-
-    &.top-left-category-tile,
-    &.top-right-category-tile {
-      border-top: 4px solid #fff;
-    }
-
-    &.top-right-category-tile,
-    &.bottom-right-category-tile {
-      border-right: none;
-    }
-
-    &.bottom-left-category-tile,
-    &.bottom-right-category-tile {
-      border-bottom: none;
-    }
-
     &.copy-center {
       position: relative;
     }
@@ -441,7 +414,50 @@ $top-overlay-margin-top: 37px;
 
   }
 
+  .category-tile {
+    border: 2px solid #fff;
+  }
+
+  .top-category-tiles-row {
+    // Top Left Tile
+    .cta-item:first-of-type .category-tile {
+      border-left: none;
+      border-top: 4px solid #fff;
+    }
+    // Top Right Tile
+    .cta-item:last-of-type .category-tile {
+      border-top: 4px solid #fff;
+      border-right: none;
+    }
+  }
+
+  .bottom-category-tiles-row {
+    // Bottom Left Tile
+    .cta-item:first-of-type .category-tile {
+      border-left: none;
+      border-bottom: none;
+    }
+    // Bottom Right Tile
+    .cta-item:last-of-type .category-tile {
+      border-right: none;
+      border-bottom: none;
+    }
+  }
+
 }
+
+  @media (max-width: $bootstrap-md-width) {
+
+    .tag-info-section {
+      .category-tile {
+        border-top: 2px solid #fff !important;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+
+  }
 
 // An alternative styling for section boxes
 // Sample usage: landing_pages/bespoke_bridal_collection.html.slim

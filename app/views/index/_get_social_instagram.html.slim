@@ -1,6 +1,6 @@
 ruby:
   def tile_responsive_classes(currentTile)
-    (currentTile == @instaTiles.last) ? {class: 'hidden-sm hidden-xs'} : {class: 'col-xs-6'}
+    (currentTile == @insta_tiles.last) ? {class: 'hidden-sm hidden-xs'} : {class: 'col-xs-6'}
   end
 
 // Section: Instagram
@@ -21,9 +21,9 @@ section.container
             .diagonal-line
 
         .instagram-widget
-          // Instagram Items fetched via Contentful
-          / - @instaTiles = @home_page_container.instagram_thumbnails_container
-          - @instaTiles.each do |tile|
+          // Instagram Tiles - via Contentful CMS
+          - @insta_tiles = @home_page_container[:instagram_tiles]
+          - @insta_tiles.each do |tile|
             .item.col-md-5ths*tile_responsive_classes(tile)
               = link_to tile[:path_link], class: "item-wrap"
                 .media-wrap
