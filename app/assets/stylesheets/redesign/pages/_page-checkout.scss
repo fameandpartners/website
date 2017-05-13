@@ -18,6 +18,14 @@
 
   }
 
+  .description-heading {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+
   // Breadcrumbs
   .checkout-breadcrumbs {
     background-color: $c-neutral-2;
@@ -275,10 +283,7 @@
       }
 
       .description-heading {
-        font-size: 14px;
         text-transform: uppercase;
-        font-weight: 600;
-        line-height: 26px;
       }
 
       .description-wrapper .product-name {
@@ -298,8 +303,11 @@
         text-transform: none;
         &.main {
           font-size: 2rem;
+          line-height: 1.6rem;
+          font-weight: 500;
+          font-size: 2rem;
           font-family: $font-heading;
-          font-weight: 300;
+          color: $c-neutral-10;
         }
       }
 

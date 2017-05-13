@@ -28,8 +28,6 @@ ruby:
  
         - if cart.products
           .cart-items
-            - (cart.products || []).each do |product|
-              = render 'line_item', product: product
 
         - else
           .row.cart-is-empty
