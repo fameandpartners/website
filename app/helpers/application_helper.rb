@@ -247,7 +247,34 @@ module ApplicationHelper
   end
 
   def create_home_page_container_from_contentful(parent_container)
+
+    hero_tiles = parent_container.hero_tiles_container.map do |item|
+
+      # check fields that may be optional
+      if (item.respond_to? :sub_heading)
+        subheading = item.sub_heading
+      else
+        subheading = nil
+      end
+      # item.respond_to? :sub_heading ? subheading = item.sub_heading : subheading = nil
+      # cta = item.respond_to? :cta_button_text ? item.cta_button_text : nil
+
+      {
+        heading: item.heading,
+        sub_heading: subheading,
+        mobile_text: item.mobile_text,
+        image: item.image.url,
+        mobile_image: item.mobile_image.url,
+        link: item.path_link,
+        text_align: item.text_alignment,
+        # text_position: item.text_position,
+        text_color: item.text_color,
+        cta_button_text: item.cta_button_text,
+      }
+    end
+
     # binding.pry
+
     second_hero = {
       image: parent_container.secondary_header_container.secondary_header_image.url,
       mobile_image: parent_container.secondary_header_container.secondary_header_mobile_image.url,
@@ -271,6 +298,7 @@ module ApplicationHelper
     end
 
     @main_container = {
+      hero_tiles: hero_tiles,
       secondary_header: second_hero,
       category_tiles: category_tiles,
       instagram_tiles: ig_tiles

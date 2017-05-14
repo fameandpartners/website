@@ -55,29 +55,64 @@
               span.sub-heading.hidden-md.hidden-lg
                 | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
 
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
-= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
+/ // Carousel Item 3
+/ - current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
+/ - current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
+/ = link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+/   picture.media-wrap
+/     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+/     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+/     img src="#{image_path(current_tile_image)}" srcset="
+/       #{image_path(current_tile_image_mob)} 991w,
+/       #{image_path(current_tile_image)} 992w"
 
-  .content-wrap
-    .container-fluid
-      .row
-        / .col-md-5.col-md-offset-6
-        .col-md-6
-          / .copy-wrap.text-center
-          .copy-wrap
-            h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
-              span.sub-heading.hidden-md.hidden-lg
-                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
+/   .content-wrap
+/     .container-fluid
+/       .row
+/         / .col-md-5.col-md-offset-6
+/         .col-md-6
+/           / .copy-wrap.text-center
+/           .copy-wrap
+/             h2.heading.no-margin-md
+/               span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
+/               span.sub-heading.hidden-md.hidden-lg
+/                   | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
 
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Customize <span class="copy-highlight">Your Look</span>
+/             .cta-wrapper
+/               span.btn-md.btn-featured
+/                 | Customize <span class="copy-highlight">Your Look</span>
+
+- hero_tiles = @home_page_container[:hero_tiles].each do |tile|
+  / - current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
+  - current_tile_image = tile[:image]
+  - current_tile_mobile_image = tile[:mobile_image]
+  = link_to tile[:link], class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
+      source media="(min-width: 992px)" srcset="#{current_tile_image}"
+      img src="#{current_tile_image}" srcset="
+        #{current_tile_mobile_image} 991w,
+        #{current_tile_image} 992w"
+
+    .content-wrap
+      .container-fluid
+        .row
+          / .col-md-5.col-md-offset-6
+          .col-md-6
+            / .copy-wrap.text-center
+            .copy-wrap
+              h2.heading.no-margin-md
+                span.title.title--large.hidden-xs.hidden-sm
+                  - tile[:heading].each do |heading|
+                    = heading
+                    br
+                span.sub-heading.hidden-md.hidden-lg
+                  - tile[:mobile_text].each do |mobile_text|
+                    = mobile_text
+                    br
+              / .cta-wrapper
+              /   - tile[:cta_button_text][0].each do |cta_text|
+              /     span.btn-md.btn-featured
+              /       = cta_text
+              /       span.copy-highlight
+              /         / = tile[:cta_button_text][1]
