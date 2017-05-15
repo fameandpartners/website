@@ -9,6 +9,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
     _.bindAll(@,
       'customizationPrice',
+      'makingOptionDescriptionTag',
       'render',
       'removeProductHandler',
       'removeProductCustomizationHandler',
@@ -26,16 +27,21 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @
 
   customizationPrice: (displayPriceObj) ->
-    console.log(displayPriceObj)
     currencySymbol = displayPriceObj.money.currency.html_entity
     displayTotal = parseInt(displayPriceObj.money.fractional, 10) / displayPriceObj.money.currency.subunit_to_unit
     currencySymbol + displayTotal
 
+  makingOptionDescriptionTag: (makingOptions) ->
+    if (makingOptions[0].name.toLowerCase() == 'deliver later')
+      return '(-' + makingOptions.display_discount + ')'
+    else if (makingOptions[0].name.toLowerCase() == 'express delivery')
+      return '(+' + makingOptions.display_discount + ')'
 
   render: () ->
     @$container.html(@template(
       cart: @cart.data,
-      customizationPrice: @customizationPrice
+      customizationPrice: @customizationPrice,
+      makingOptionDescriptionTag: @makingOptionDescriptionTag,
       value_proposition: @value_proposition,
       shipping_message: @shipping_message
     ))

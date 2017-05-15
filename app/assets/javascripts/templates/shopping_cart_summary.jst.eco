@@ -40,19 +40,20 @@
             <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
           <% end %>
         <% end %>
-        <dd><span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= product.delivery_period %></span></dd>
+        <dd>
+          <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= product.delivery_period %></span>
+          <% if product.making_options && product.making_options.length > 0: %>
+            <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
+          <% end %>
+        </dd>
 
         <% if product.customizations && product.customizations.length > 0: %>
           <dd>
             <span class="line-item-description-heading">Customizations:</span><br />
             <% for customization in product.customizations: %>
-              <span><%= customization.name %></span> <span class='line-item-customization-price'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+              <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
             <% end %>
           </dd>
-        <% end %>
-
-        <% for making_option in product.making_options: %>
-          <dd><%= making_option.display_price %></dd>
         <% end %>
 
       </dl>
