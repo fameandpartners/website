@@ -5,14 +5,14 @@ describe BulkRefundMailer, type: :mailer do
   let(:statistics) do
     {
       error: [
-        { 'item_return_id' => 104, 'result' => { 'message' => 'error1' } },
-        { 'item_return_id' => 105, 'result' => { 'message' => 'error2' } },
-        { 'item_return_id' => 106, 'result' => { 'message' => 'error3' } },
+        { item_return_id: 104, result: { message: 'error1' } },
+        { item_return_id: 105, result: { message: 'error2' } },
+        { item_return_id: 106, result: { message: 'error3' } },
       ],
       success: [
-        { 'item_return_id' => 101 },
-        { 'item_return_id' => 102 },
-        { 'item_return_id' => 103 }
+        { item_return_id: 101 },
+        { item_return_id: 102 },
+        { item_return_id: 103 }
       ]
     }
   end
