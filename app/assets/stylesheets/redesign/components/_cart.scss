@@ -155,8 +155,16 @@
 
     dd {
       text-transform: capitalize;
+      margin-bottom: 3px;
     }
 
+  }
+
+  .line-item-customization-price {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+    color: $c-neutral-10;
   }
 
   .cart-footer {

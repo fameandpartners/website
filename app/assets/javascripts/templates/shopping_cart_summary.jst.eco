@@ -44,11 +44,9 @@
 
         <% if product.customizations && product.customizations.length > 0: %>
           <dd>
-            <span class="line-item-description-heading">Customizations:</span>
-            <br />
-            <span><%= product.display_height %></span>
+            <span class="line-item-description-heading">Customizations:</span><br />
             <% for customization in product.customizations: %>
-              <span><%= customization.name %> <%= customization.display_price %></span>
+              <span><%= customization.name %></span> <span class='line-item-customization-price'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
             <% end %>
           </dd>
         <% end %>
