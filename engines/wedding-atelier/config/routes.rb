@@ -6,6 +6,7 @@ WeddingAtelier::Engine.routes.draw do
       get '/', to: 'registrations#new'
       get '/size', to: 'registrations#size'
       get '/details', to: 'registrations#details'
+      get '/member', to: 'registrations#member'
       get '/invite', to: 'registrations#invite'
     end
 

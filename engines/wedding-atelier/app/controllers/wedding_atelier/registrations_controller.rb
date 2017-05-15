@@ -6,7 +6,7 @@ module WeddingAtelier
     before_filter :check_spree_user_signed_in, except: [:new, :create]
     before_filter :redirect_if_completed, except: :new
     before_filter :sign_in_if_exists, only: :create, if: -> { spree_user_params[:email] }
-    before_filter :prepare_form_default_values, only: [:new, :update, :size, :details]
+    before_filter :prepare_form_default_values, only: [:new, :update, :size, :details, :member]
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -78,6 +78,8 @@ module WeddingAtelier
     end
 
     def size; end
+
+    def member; end
 
     def details
       @event = current_spree_user.events.last || current_spree_user.events.new
