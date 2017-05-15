@@ -19,6 +19,18 @@ module Forms
       end
     end
 
+    def heights_options
+      if product_heights_range_groups.first.blank? || product_heights_range_groups.first =~ /three_size/
+        skirt_length_options[0..2]
+      else
+        skirt_length_options[3..-1]
+      end
+    end
+
+    def skirt_length_options
+      LineItemPersonalization::HEIGHTS.map { |h| { id: h, name: h.humanize } }
+    end
+
     def custom_colors
       product_options[:colors][:extra].map do |p|
         { id: p.id, name: "#{p.presentation} (+ $#{extra_color_price})", type: 'custom' }
@@ -75,6 +87,10 @@ module Forms
     end
 
     private
+
+    def product_heights_range_groups
+      ProductHeightRangeGroup.find_both_for_variant_or_use_default(product.master)
+    end
 
     def site_version
       SiteVersion.where(currency: params[:currency]).first
