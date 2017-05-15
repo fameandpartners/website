@@ -64,9 +64,9 @@ window.ShoppingBag = class ShoppingBag
 
   makingOptionDescriptionTag: (makingOptions) ->
     if (makingOptions[0].name.toLowerCase() == 'deliver later')
-      return '(-' + makingOptions.display_discount + ')'
+      return '(' + makingOptions[0].display_discount + ')'
     else if (makingOptions[0].name.toLowerCase() == 'express delivery')
-      return '(+' + makingOptions.display_discount + ')'
+      return '(+' + makingOptions[0].display_discount + ')'
 
   render: () ->
     $.ajax(
