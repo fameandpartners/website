@@ -90,6 +90,7 @@ ruby:
     when "Right"
       {class: 'col-md-6 col-lg-6 pull-right'}
     else
+      # Defaults to 'Center'...
       {class: 'col lg-4 col-md-5 col-md-offset-3'}
     end
   end
@@ -98,6 +99,7 @@ ruby:
     if color == "White"
       {class: 'main-hero-wrap hero-wrap copy-left white-text'}
     else
+      # Defaults to 'Black'...
       {class: 'main-hero-wrap hero-wrap copy-left'}
     end
   end
@@ -107,6 +109,7 @@ ruby:
     when "Small"
       {class: 'title title--small hidden-xs hidden-sm'}
     else
+      # Defaults to 'Large' option...
       {class: 'title title--large hidden-xs hidden-sm'}
     end
   end
@@ -144,7 +147,7 @@ ruby:
                 - if tile[:cta_button_text]
                   span.btn-md.btn-featured
                     = tile[:cta_button_text][0]
-                    span.copy-highlight
+                    span.copy-highlight.cta-button-secondary-text
                       = tile[:cta_button_text][1]
 
           .col-sm-12.col-md-12.hidden-md.hidden-lg
