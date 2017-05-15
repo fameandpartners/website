@@ -5,7 +5,8 @@ module WeddingAtelier
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
     before_filter :redirect_if_completed, except: :new
-    before_filter :sign_in_if_exists, only: :create
+    before_filter :sign_in_if_exists, only: :create, if: -> { spree_user_params[:email] }
+    before_filter :prepare_form_default_values, only: [:new, :update, :size, :details]
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -23,6 +24,7 @@ module WeddingAtelier
 
       @user = Spree::User.new(email: invitation.try(:user_email))
       @user.build_user_profile(skip_validation: true)
+      @event = @user.events.new
     end
 
     def create
@@ -31,7 +33,7 @@ module WeddingAtelier
         resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
         resource.sign_up_reason = session[:sign_up_reason]
       end
-      if resource.save
+      if resource.save(validate: false)
         EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
                                                       landing_page: session[:landing_page],
                                                       utm_params:   session[:utm_params],
@@ -56,8 +58,8 @@ module WeddingAtelier
     end
 
     def update
-      prepare_form_default_values
-      if @user.update_attributes(spree_user_params)
+      @user.assign_attributes(spree_user_params)
+      if @user.save(validate:false)
         @user.add_role(@user.event_role, @user.events.last) if @user.event_role
         if @user.wedding_atelier_signup_step == 'completed'
           redirect_to wedding_atelier.event_path(@user.events.last)
@@ -75,12 +77,9 @@ module WeddingAtelier
 
     end
 
-    def size
-      prepare_form_default_values
-    end
+    def size; end
 
     def details
-      prepare_form_default_values
       @event = current_spree_user.events.last || current_spree_user.events.new
     end
 
@@ -113,7 +112,8 @@ module WeddingAtelier
 
     def prepare_form_default_values
       @user = current_spree_user
-      @user.build_user_profile unless @user.user_profile
+
+      @user.build_user_profile if @user && !@user.user_profile
 
       @roles = {
         'Bride' => 'bride',
@@ -122,7 +122,7 @@ module WeddingAtelier
         'Mother of Bride' => 'mother of bride'
       }
 
-      @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
+      @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'size'
 
       @heights = WeddingAtelier::Height.definitions
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170503074637) do
+ActiveRecord::Schema.define(:version => 20170514235116) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1653,8 +1653,8 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                                           :default => 0,      :null => false
-    t.integer  "failed_attempts",                                         :default => 0,      :null => false
+    t.integer  "sign_in_count",                                           :default => 0,         :null => false
+    t.integer  "failed_attempts",                                         :default => 0,         :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -1667,8 +1667,8 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                                                  :null => false
-    t.datetime "updated_at",                                                                  :null => false
+    t.datetime "created_at",                                                                     :null => false
+    t.datetime "updated_at",                                                                     :null => false
     t.string   "spree_api_key",                            :limit => 48
     t.datetime "remember_created_at"
     t.string   "first_name"
@@ -1690,7 +1690,7 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.date     "birthday"
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
-    t.string   "wedding_atelier_signup_step",                             :default => "size"
+    t.string   "wedding_atelier_signup_step",                             :default => "details"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

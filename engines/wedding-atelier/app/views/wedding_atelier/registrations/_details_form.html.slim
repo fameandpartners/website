@@ -1,18 +1,17 @@
 .registrations__details-form.signup.left-side-centered-container
-  h1
-    em = current_spree_user.first_name
-    | , we want to know more.
+  h1 Tell us about the event.
   .form
-    = form_for current_spree_user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
+    = form_for @user, as: :spree_user, url: wedding_atelier.signup_path do |f|
+      = f.fields_for :user_profile, @user.user_profile do |ff|
+        = ff.hidden_field :skip_validation
       = f.fields_for :events, @event do |ff|
-        = ff.hidden_field :owner_id, value: current_spree_user.id
         .form-group
           = ff.label :name, 'What should we call your wedding board?'
           = ff.text_field :name, class: 'form-control', id: 'weddding_name'
         .form-group
           = f.label :event_role, "What's your role in the wedding?"
           = f.select :event_role, options_for_select(@roles), {}, class: 'form-control', id: 'wedding_role'
-          = f.hidden_field :wedding_atelier_signup_step, value: 'invite'
+          = f.hidden_field :wedding_atelier_signup_step, value: @next_signup_step_value
         .form-group
           = ff.label :number_of_assistants, "How many bridesmaids will be in the wedding?"
           = ff.number_field :number_of_assistants, { min: 0, class: 'form-control number-field js-number-field', id: 'wedding_bridesmaids' }
@@ -26,6 +25,5 @@
         br
         .row
           .col-xs-12.col-sm-6
-            = link_to 'back', wedding_atelier.size_signup_path, class: 'btn btn-white full-width'
           .col-xs-12.col-sm-6
             = f.submit 'next', class: 'btn btn-black full-width'
