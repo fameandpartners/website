@@ -24,6 +24,7 @@ const constants = assign({},
     MAX_CM: 193,
     DRAWERS: {
       SIZE_PROFILE: 'SIZE_PROFILE',
+      CAD_CUSTOMIZE: 'CAD_CUSTOMIZE',
     },
     UNITS: {
       INCH: 'inch',

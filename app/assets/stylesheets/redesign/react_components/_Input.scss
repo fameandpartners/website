@@ -23,9 +23,9 @@
     left: 0;
     background-color: $c-neutral-white;
     position: absolute;
-    transition: all 0.17s ease-in-out border 0.4s border-color 0.3s;
+    transition: all 0.17s ease-in-out, border 0.4s, border-color 0.3s;
 
-    &::hover{
+    &:hover{
       border-color: $gray-light;
     }
 

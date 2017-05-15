@@ -174,7 +174,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
-    get '/bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_collection
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
     get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
@@ -211,6 +210,10 @@ FameAndPartners::Application.routes.draw do
 
     # High Contrast Collection
     get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
+
+    # Modern Bridesmaid Collection
+    get '/modern-bridesmaid-dresses' => 'products/collections#show', :permalink => 'modern-bridesmaid-dresses', :as => :modern_bridesmaid_collection
+    get '/bridesmaid-dresses', to: redirect('/modern-bridesmaid-dresses'), :as => :bridesmaid_collection
 
     # Shop Every Dance Page
     get '/shop-every-body-dance' => 'products/collections#show', :permalink => 'shop-every-body-dance', :as => :shop_every_body_dance_collection
@@ -291,10 +294,16 @@ FameAndPartners::Application.routes.draw do
     # Spring Weddings Collection Page
     get '/dresses/spring-weddings' => 'products/collections#show', :permalink => 'spring-weddings', :as => :spring_weddings_collection_page
 
+    # Burgundy Collection Page
+    get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
+
+    # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
+    get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { isEmpty } from 'lodash';
 import * as pdpActions from '../../actions/PdpActions';
 import PDPConstants from '../../constants/PDPConstants';
 import { MODAL_STYLE } from './utils';
@@ -17,6 +18,8 @@ class AddToBag extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.buildCustomizationIds = this.buildCustomizationIds.bind(this);
+    this.calculateCustomizationTotal = this.calculateCustomizationTotal.bind(this);
     this.addToBag = this.addToBag.bind(this);
   }
 
@@ -26,6 +29,17 @@ class AddToBag extends React.Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
+  }
+
+  buildCustomizationIds() {
+    const { addons, customize } = this.props;
+    if (isEmpty(addons)) {
+      return customize.customization.id ?
+        [parseInt(customize.customization.id, 10)] :
+        [''];
+    }
+    // Filter active addonOptions
+    return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
   }
 
   addToBag() {
@@ -39,7 +53,7 @@ class AddToBag extends React.Component {
       this.setState({ sending: true });
       document.getElementById('pdpCartSizeId').value = customize.size.id;
       document.getElementById('pdpCartColorId').value = customize.color.id;
-      document.getElementById('pdpCartCustomId').value = customize.customization.id;
+      document.getElementById('pdpCartCustomId').value = this.buildCustomizationIds();
       document.getElementById('pdpCartDressVariantId').value = customize.dressVariantId;
       document.getElementById('pdpCartHeight').value = customize.height.heightValue;
       document.getElementById('pdpCartHeightUnit').value = customize.height.heightUnit;
@@ -53,6 +67,17 @@ class AddToBag extends React.Component {
     }
   }
 
+  calculateCustomizationTotal() {
+    const { addons, customize } = this.props;
+    if (isEmpty(addons)) {
+      return customize.customization.price;
+    }
+    return addons.addonOptions.reduce((accum, addon) => {
+      if (addon.active) { return accum + (addon.price.money.fractional / 100); }
+      return accum;
+    }, 0);
+  }
+
   render() {
     const prices = this.props.product.prices;
 
@@ -61,7 +86,7 @@ class AddToBag extends React.Component {
 
     const calculatePrice = (price) => {
       const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
-      const parsedCustomPrice = parseFloat(this.props.customize.customization.price) || 0;
+      const parsedCustomPrice = parseFloat(this.calculateCustomizationTotal()) || 0;
       const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
 
       const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
@@ -189,6 +214,7 @@ class AddToBag extends React.Component {
 }
 
 AddToBag.propTypes = {
+  addons: PropTypes.object,
   customize: PropTypes.object,
   price: PropTypes.string,
   discount: PropTypes.number,
@@ -200,6 +226,7 @@ AddToBag.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    addons: state.addons,
     customize: state.customize,
     price: state.product.price.price.amount,
     discount: state.discount.table.amount,

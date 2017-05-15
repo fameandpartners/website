@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import {
   productReducer,
   imagesReducer,
@@ -7,9 +7,10 @@ import {
   productPathsReducer,
   lengthReducer,
   skirtChartReducer,
+  addonsReducer,
   customizeReducer,
   siteVersionReducer,
-  flagsReducer
+  flagsReducer,
 } from './pdpReducers';
 
 import SlayItForwardReducer from './SlayItForwardReducer';
@@ -23,10 +24,11 @@ const rootReducer = combineReducers({
   paths: productPathsReducer,
   lengths: lengthReducer,
   skirts: skirtChartReducer,
+  addons: addonsReducer,
   customize: customizeReducer,
   siteVersion: siteVersionReducer,
   flags: flagsReducer,
-  SlayItForwardStore: SlayItForwardReducer
+  SlayItForwardStore: SlayItForwardReducer,
 });
 
 export const initialStates = {

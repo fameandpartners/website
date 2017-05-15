@@ -1,5 +1,17 @@
 import { defaultMakingOption } from '../components/PDP/models/MakingOption';
 
+export function setAddonOptions(addonOptions) {
+  return { type: 'SET_ADDON_OPTIONS', addonOptions };
+}
+
+export function setActiveAddonImageLayers(addonImageLayers) {
+  return { type: 'SET_ACTIVE_ADDON_IMAGE_LAYERS', addonImageLayers };
+}
+
+export function setAddonBaseLayer(baseSelected) {
+  return { type: 'SET_ADDON_BASE_LAYER', baseSelected };
+}
+
 export function customizeDress(customize) {
   return { type: 'CUSTOMIZE_DRESS', customize };
 }
