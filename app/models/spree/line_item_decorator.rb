@@ -26,14 +26,6 @@ Spree::LineItem.class_eval do
       where('pmo.id IS NULL')
   end
 
-  after_save do
-    order.clean_cache!
-  end
-
-  after_destroy do
-    order.clean_cache!
-  end
-
   # Note: it seems we need to store this value in DB.
   def delivery_period
     delivery_period_policy.delivery_period

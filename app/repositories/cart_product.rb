@@ -114,7 +114,8 @@ class Repositories::CartProduct
           id: option.id,
           option_type: option.product_making_option.option_type,
           name: option.product_making_option.name,
-          display_price: option.display_price
+          display_price: option.display_price,
+          description: option.description
         )
       end
     end

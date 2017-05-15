@@ -5,11 +5,11 @@ module Policies
 
     CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '5 - 7 business days'
-    SLOW_MAKING_DELIVERY_MAP = {  "8 - 10 business days" => "6 weeks",
+    SLOW_MAKING_DELIVERY_MAP = {  "7 business days" => "6 weeks",
                                   "12 - 15 business days" => "6 weeks",
                                   "3 - 4 weeks" => "8 weeks",
                                   "4 - 6 weeks" => "10 weeks" }
-    CNY_DELIVERY_MAP = {  "8 - 10 business days" => "17 - 20 business days",
+    CNY_DELIVERY_MAP = {  "7 business days" => "17 - 20 business days",
                           "12 - 15 business days" => "22 - 25 business days",
                           "3 - 4 weeks" => "5 - 6 weeks",
                           "4 - 6 weeks" => "6 - 8 weeks",

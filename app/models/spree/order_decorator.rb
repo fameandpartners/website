@@ -7,8 +7,6 @@ Spree::Order.class_eval do
 
   has_one :traffic_parameters, class_name: Marketing::OrderTrafficParameters
 
-  after_save :clean_cache!
-
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -81,11 +79,6 @@ Spree::Order.class_eval do
 
   def cache_key
     "orders/#{id}-#{updated_at.to_s(:number)}"
-  end
-
-  def clean_cache!
-    # NOOP
-    # TODO: `Spree::Order#clean_cache!` isn't clearing any cache. There are no cache keys with `Spree::Order#cache_key` value
   end
 
   def has_personalized_items?
