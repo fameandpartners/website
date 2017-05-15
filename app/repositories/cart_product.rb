@@ -127,7 +127,9 @@ class Repositories::CartProduct
           id: mo.id,
           option_type: mo.option_type,
           name: mo.name,
-          display_discount: mo.display_discount
+          display_discount: mo.display_discount,
+          description: mo.description
+
         )
       end
     end
