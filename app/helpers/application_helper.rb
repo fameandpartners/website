@@ -251,25 +251,40 @@ module ApplicationHelper
     hero_tiles = parent_container.hero_tiles_container.map do |item|
 
       # check fields that may be optional
+      if (item.respond_to? :heading)
+        heading = item.heading
+      else
+        heading = nil
+      end
+
       if (item.respond_to? :sub_heading)
         subheading = item.sub_heading
       else
         subheading = nil
       end
+
+      if (item.respond_to? :cta_button_text)
+        cta = item.cta_button_text
+      else
+        cta = nil
+      end
+
       # item.respond_to? :sub_heading ? subheading = item.sub_heading : subheading = nil
       # cta = item.respond_to? :cta_button_text ? item.cta_button_text : nil
 
       {
-        heading: item.heading,
+        heading: heading,
         sub_heading: subheading,
         mobile_text: item.mobile_text,
         image: item.image.url,
         mobile_image: item.mobile_image.url,
         link: item.path_link,
         text_align: item.text_alignment,
-        # text_position: item.text_position,
+        text_position: item.text_position,
         text_color: item.text_color,
-        cta_button_text: item.cta_button_text,
+        text_size: item.text_size,
+        cta_button_text: cta,
+        description: item.description,
       }
     end
 

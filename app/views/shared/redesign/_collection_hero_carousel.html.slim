@@ -55,38 +55,68 @@
               span.sub-heading.hidden-md.hidden-lg
                 | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
 
-/ // Carousel Item 3
-/ - current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
-/ - current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
-/ = link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
-/   picture.media-wrap
-/     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-/     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-/     img src="#{image_path(current_tile_image)}" srcset="
-/       #{image_path(current_tile_image_mob)} 991w,
-/       #{image_path(current_tile_image)} 992w"
+// Carousel Item 3
+- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
+= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+  picture.media-wrap
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
 
-/   .content-wrap
-/     .container-fluid
-/       .row
-/         / .col-md-5.col-md-offset-6
-/         .col-md-6
-/           / .copy-wrap.text-center
-/           .copy-wrap
-/             h2.heading.no-margin-md
-/               span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
-/               span.sub-heading.hidden-md.hidden-lg
-/                   | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
+  .content-wrap
+    .container-fluid
+      .row
+        / .col-md-5.col-md-offset-6
+        .col-md-6
+          / .copy-wrap.text-center
+          .copy-wrap
+            h2.heading.no-margin-md
+              span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
+              span.sub-heading.hidden-md.hidden-lg
+                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
 
-/             .cta-wrapper
-/               span.btn-md.btn-featured
-/                 | Customize <span class="copy-highlight">Your Look</span>
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Customize <span class="copy-highlight">Your Look</span>
 
+ruby:
+  def hero_text_position(position)
+    case position
+    when "Left"
+      {class: 'col-md-6'}
+    when "Right"
+      {class: 'col-md-6 col-lg-6 pull-right'}
+    else
+      {class: 'col lg-4 col-md-5 col-md-offset-3'}
+    end
+  end
+
+  def hero_text_color(color)
+    if color == "White"
+      {class: 'main-hero-wrap hero-wrap copy-left white-text'}
+    else
+      {class: 'main-hero-wrap hero-wrap copy-left'}
+    end
+  end
+
+  def hero_text_size(size)
+    case size
+    when "Small"
+      {class: 'title title--small hidden-xs hidden-sm'}
+    else
+      {class: 'title title--large hidden-xs hidden-sm'}
+    end
+  end
+
+
+// Hero Tiles - via Contentful CMS
 - hero_tiles = @home_page_container[:hero_tiles].each do |tile|
-  / - current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
   - current_tile_image = tile[:image]
   - current_tile_mobile_image = tile[:mobile_image]
-  = link_to tile[:link], class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+  = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
     picture.media-wrap
       source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
       source media="(min-width: 992px)" srcset="#{current_tile_image}"
@@ -97,22 +127,30 @@
     .content-wrap
       .container-fluid
         .row
-          / .col-md-5.col-md-offset-6
-          .col-md-6
-            / .copy-wrap.text-center
+          *hero_text_position(tile[:text_position])
             .copy-wrap
               h2.heading.no-margin-md
-                span.title.title--large.hidden-xs.hidden-sm
-                  - tile[:heading].each do |heading|
-                    = heading
-                    br
-                span.sub-heading.hidden-md.hidden-lg
+                span*hero_text_size(tile[:text_size])
+                  - if tile[:heading]
+                    - tile[:heading].each do |heading|
+                      = heading
+                      br
+                span.sub-heading--small.hidden-xs.hidden-sm
+                  - if tile[:sub_heading]
+                    - tile[:sub_heading].each do |sub_heading|
+                      = sub_heading
+                      br
+              .cta-wrapper
+                - if tile[:cta_button_text]
+                  span.btn-md.btn-featured
+                    = tile[:cta_button_text][0]
+                    span.copy-highlight
+                      = tile[:cta_button_text][1]
+
+          .col-sm-12.col-md-12.hidden-md.hidden-lg
+            .copy-wrap.text-center
+              h2.heading.mobile-heading
+                span.sub-heading
                   - tile[:mobile_text].each do |mobile_text|
                     = mobile_text
                     br
-              / .cta-wrapper
-              /   - tile[:cta_button_text][0].each do |cta_text|
-              /     span.btn-md.btn-featured
-              /       = cta_text
-              /       span.copy-highlight
-              /         / = tile[:cta_button_text][1]
