@@ -115,6 +115,7 @@ class Repositories::CartProduct
           option_type: option.product_making_option.option_type,
           name: option.product_making_option.name,
           display_price: option.display_price,
+          display_discount: option.display_discount,
           description: option.description
         )
       end
@@ -129,7 +130,6 @@ class Repositories::CartProduct
           name: mo.name,
           display_discount: mo.display_discount,
           description: mo.description
-
         )
       end
     end

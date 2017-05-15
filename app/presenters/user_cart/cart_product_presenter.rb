@@ -28,7 +28,7 @@ module UserCart
       end
 
       result[:making_options] = (making_options || []).map do |option|
-        { id: option.id, name: option.name, display_price: option.display_price.to_s }
+        { id: option.id, name: option.name, display_price: option.display_price.to_s, display_discount: option.display_discount }
       end
 
       result[:available_making_options] = (available_making_options || []).map do |mo|

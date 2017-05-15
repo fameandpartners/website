@@ -145,14 +145,15 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
+    t.string   "point_of_view",                                    :default => "front"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -1612,7 +1613,7 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
-    t.string   "delivery_period",   :default => "7 - 10 business days"
+    t.string   "delivery_period",   :default => "8 - 10 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

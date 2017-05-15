@@ -5,7 +5,7 @@ class LineItemMakingOption < ActiveRecord::Base
   belongs_to :product_making_option, class_name: 'ProductMakingOption', foreign_key: :making_option_id
 
   delegate :name, to: :product_making_option, allow_nil: true
-  #delegate :price, to: :product_making_option, allow_nil: true  #thanh does not recall writing this line of code
+  delegate :display_discount, to: :product_making_option
   delegate :description, to: :product_making_option
 
   def display_price
