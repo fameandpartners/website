@@ -159,6 +159,13 @@
 
   }
 
+  .line-item-description-heading {
+    font-size: 12px;
+    font-weight: 600;
+    font-style: italic;
+    color: $c-neutral-10;
+  }
+
   .cart-footer {
     border-bottom: 1px solid $beage-bg;
     border-top: 1px solid $beage-bg;
