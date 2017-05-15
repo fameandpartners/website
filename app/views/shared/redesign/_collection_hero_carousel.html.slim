@@ -31,9 +31,9 @@
 
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/april-26-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-26-featured-2-mob.jpg"
-= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+- current_tile_image = "homepage/hero-featured/may-12-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-12-featured-2-mob.jpg"
+= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Anti-Fast Fashion Shop" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -44,12 +44,16 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4
-          .copy-wrap.copy-align--top.extra-padding-left
-            h2.heading.no-margin-md.no-margin-md
-              span.sub-heading.hidden-md.hidden-lg
+        .col.lg-4.col-md-5.col-md-offset-3
+          .copy-wrap.extra-padding-left
+            h2.heading
+              span.title.title--small.hidden-xs.hidden-sm style="line-height: 130%"
                 | Introducing<br/>
-                | The Anti-Fast Fashion Shop.<br/>
+                | <em>The Anti-Fast Fashion Shop.</em><br/>
+                | Everyday must haves,<br class="visible-lg" /> ethically made-to-order.<br>
+                | <span class="h6 copy-highlight link-underline">SHOP NOW</span>
+              span.sub-heading.hidden-md.hidden-lg
+                | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
 
 // Carousel Item 3
 - current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
