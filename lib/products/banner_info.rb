@@ -11,7 +11,7 @@ module Products
     end
 
     def default_seo_title
-      if Spree::Config[:default_seo_title].present? 
+      if Spree::Config[:default_seo_title].present?
         Spree::Config[:default_seo_title]
       else
         "Prom Dresses"
@@ -37,7 +37,7 @@ module Products
     #    footer_text
     #  }
     def get
-      
+
       info = get_info_by_taxons
 
       info[:page_title] = get_page_title
@@ -74,9 +74,9 @@ module Products
     def get_page_title
       if @searcher.discount.present?
         if @searcher.discount == :all
-          return "All Dresses on Sale | Fame & Partners"
+          return "All Dresses on Sale | Fame and Partners"
         else
-          return "Sale #{ @searcher.discount }% Off | Fame & Partners"
+          return "Sale #{ @searcher.discount }% Off | Fame and Partners"
         end
       end
 
@@ -94,7 +94,7 @@ module Products
       if !color.present? && !t_root.present?
         t_root = @root_range_taxon.name
         taxon = @root_range_taxon
-      end 
+      end
 
       if t_root == "Style"
         style = "#{taxon.name.titleize} " || ""
@@ -106,9 +106,9 @@ module Products
 
       bodyshape = " for #{@searcher.properties[:bodyshape].first} body shapes" if @searcher.properties[:bodyshape].present?
 
-      #r =  "#{event}fashion starts with Fame & Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
-      r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame & Partners"
-      
+      #r =  "#{event}fashion starts with Fame and Partners - shop and customize #{color}#{style}dresses#{bodyshape}"
+      r = "Shop the latest #{color}#{style}#{event}Dresses#{bodyshape} | Fame and Partners"
+
       if taxon.present? && taxon.seo_title.present?
         return taxon.seo_title
       elsif taxon.present? && taxon.banner.present? && taxon.banner.title.present?
@@ -143,7 +143,7 @@ module Products
       if !color.present? && !t_root.present?
         t_root = @root_range_taxon.name
         taxon = @root_range_taxon
-      end 
+      end
 
       if t_root == "Style"
         style = " #{taxon.name.titleize} " || ""
@@ -152,8 +152,8 @@ module Products
       if t_root == "Event"
         event = " #{taxon.name.titleize} " || "any event "
       end
-      
-      r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame & Partners."
+
+      r =  "Shop and customize the best #{color}#{style}#{event}dress trends #{event}at Fame and Partners."
 
       if taxon.present? && taxon.meta_description.present?
         r = taxon.meta_description
@@ -189,9 +189,9 @@ module Products
         color = ""
       end
 
-      
+
       taxon = selected_categories.first
-      
+
       t_root = ""
       t_root = taxon.parent.name if taxon.present?
 
@@ -199,7 +199,7 @@ module Products
       if !color.present? && !t_root.present?
         t_root = @root_range_taxon.name
         taxon = @root_range_taxon
-      end 
+      end
 
       # strapless formal dresses // style
       # strapless homecoming dresss // style + event
@@ -262,14 +262,14 @@ module Products
         return
       end
     end
-    
+
     def get_footer_text
       taxon = selected_categories.first
 
       # if the all dresses page /dresses
       if !taxon.present?
         taxon = @root_range_taxon
-      end 
+      end
 
       if taxon.present? && taxon.banner.present? && taxon.banner.footer_text.present?
         return taxon.banner.footer_text
@@ -279,7 +279,7 @@ module Products
 
     end
 
-    
+
 
     private
 
@@ -331,13 +331,13 @@ module Products
     def default_collections_info
       {
         banner_image: taxon_image(root_range_taxon),
-        banner_title: "Fame & Partners Formal Dresses",
+        banner_title: "Fame and Partners Formal Dresses",
         banner_text: "High fashion dresses."
       }
     end
 
     def from_taxon(taxon)
-      
+
       r ={
         banner_image: taxon_image(taxon) || taxon_image(root_range_taxon),
         banner_title: taxon.try(:banner).try(:title) || taxon.name,
