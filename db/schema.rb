@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170503074637) do
+ActiveRecord::Schema.define(:version => 20170503004457) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -343,8 +343,8 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.integer  "refund_amount"
     t.datetime "refunded_at"
     t.string   "uuid"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
@@ -354,31 +354,12 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.integer  "bergen_damaged_quantity"
     t.string   "shippo_tracking_number"
     t.string   "shippo_label_url"
+    t.boolean  "bulk_refund",             :default => false, :null => false
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
-
-  create_table "layer_cads", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "position"
-    t.string   "base_image_name"
-    t.string   "layer_image_name"
-    t.string   "base_image_file_name"
-    t.string   "base_image_content_type"
-    t.integer  "base_image_file_size"
-    t.datetime "base_image_updated_at"
-    t.string   "layer_image_file_name"
-    t.string   "layer_image_content_type"
-    t.integer  "layer_image_file_size"
-    t.datetime "layer_image_updated_at"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.string   "customizations_enabled_for", :default => "--- []\n"
-    t.integer  "width"
-    t.integer  "height"
-  end
 
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
@@ -405,8 +386,6 @@ ActiveRecord::Schema.define(:version => 20170503074637) do
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
     t.string   "height",                                                :default => "standard"
-    t.string   "height_value"
-    t.string   "height_unit"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
