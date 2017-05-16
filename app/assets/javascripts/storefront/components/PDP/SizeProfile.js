@@ -304,7 +304,7 @@ class SidePanelSize extends Component {
     const { size, errors } = this.props.customize;
     return this.props.defaultSizes.map((s) => {
       let itemClassName = parseInt(size.id, 10) === s.table.id
-        ? 'selector-size no-select is-selected' : 'selector-size noselect';
+        ? 'selector-size noselect is-selected' : 'selector-size noselect';
       itemClassName += errors.size ? ' has-error' : '';
       return (
         <a
@@ -357,7 +357,7 @@ class SidePanelSize extends Component {
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Create a Personal Size Profile</h2>
           <p>
-            Just tell us your height and size, and we'll take care of the tailoring.
+            Just tell us your height and size, and we&apos;ll take care of the tailoring.
           </p>
 
           <div className="height-selection clearfix">
