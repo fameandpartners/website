@@ -250,7 +250,7 @@ module ApplicationHelper
 
     hero_tiles = parent_container.hero_tiles_container.map do |item|
 
-      # check fields that may be optional
+      # Check Optional Fields
       heading = (item.respond_to? :heading) ? item.heading : nil
       mobile_text = (item.respond_to? :mobile_text) ? item.mobile_text : nil
       sub_heading = (item.respond_to? :sub_heading) ? item.sub_heading : nil
@@ -271,8 +271,6 @@ module ApplicationHelper
         description: item.description,
       }
     end
-
-    # binding.pry
 
     second_hero = {
       image: parent_container.secondary_header_container.secondary_header_image.url,

@@ -163,12 +163,20 @@ h1 .sub-heading {
 
 // This class is used when most of the copy has serif font and
 //  we need to add a custom sans-serif style to highlight part of it
+.title--small strong,
+.mobile-heading strong,
 .copy-highlight {
   font-family: $font-family-secondary;
   font-style: normal;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
+}
+
+.title--small strong,
+.mobile-heading strong {
+  font-size: 1.4rem;
+  border-bottom: 1px solid $c-neutral-6;
 }
 
 .cta-link + .copy-highlight,
