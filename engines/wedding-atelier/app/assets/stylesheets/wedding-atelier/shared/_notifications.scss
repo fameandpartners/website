@@ -13,8 +13,8 @@
   width: 100%;
   z-index: 10;
 
-  &.show {
-    display: table !important;
+  &.open {
+    display: table;
     transform: translateY(0%);
   }
 
