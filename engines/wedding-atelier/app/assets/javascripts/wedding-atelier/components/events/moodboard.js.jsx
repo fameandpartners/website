@@ -205,7 +205,7 @@ var MoodBoardEvent = React.createClass({
             author: null,
             time: Date.now(),
             type: 'notification',
-            content: 'In the meantime why don\'t you invite your bridal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
+            content: 'If you haven\'t already, invite the rest of the bridal party to join your Wedding Board so you can create dresses and discuss your favorites together via chat.'
           });
           try { sessionStorage.setItem('stylistTagged', true); }catch (e){}
         }

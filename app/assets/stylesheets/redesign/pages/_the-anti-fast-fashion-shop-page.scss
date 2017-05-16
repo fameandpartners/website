@@ -252,3 +252,11 @@
   }
 
 }
+
+@media (max-width: $bootstrap-sm-width - 1px) {
+
+  .section-more-styles .item-wrap--safe-margin-bottom {
+    margin-bottom: 125px;
+  }
+
+}

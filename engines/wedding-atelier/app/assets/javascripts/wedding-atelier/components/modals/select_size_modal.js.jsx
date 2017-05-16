@@ -269,7 +269,6 @@ var SelectSizeModal = React.createClass({
     return(
       <div className="js-select-size-modal select-size-modal cancelable" ref="modal" onClick={this.cancel}>
         <div className="body">
-          <Notification ref="notifications"/>
           <a className="btnClose icon-close-white hidden-xs cancelable" onClick={this.cancel}/>
           <a className="btnClose icon-close hidden-sm hidden-md hidden-lg cancelable" onClick={this.cancel}/>
           <div className="content-container">

@@ -46,7 +46,7 @@
         <% end %>
         <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
         <% for customization in product.customizations: %>
-        <dd><%= customization.name %> <%= customization.display_price %></dd>
+        <dd><%= customization.cart_summary %></dd>
         <% end %>
 
         <% for making_option in product.making_options: %>
