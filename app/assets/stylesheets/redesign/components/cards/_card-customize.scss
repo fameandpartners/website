@@ -38,11 +38,15 @@
       border-color: $c-neutral-black;
     }
 
+    .selection {
+      text-align: right;
+    }
+
   }
 
   &__content__left {
     float: left;
-    width: 50%;
+    width: 33%;
     text-decoration: underline;
   }
   &__content__left:hover {
@@ -51,7 +55,7 @@
 
   &__content__right {
     float: left;
-    width: 50%;
+    width: 67%;
     text-align: right;
   }
 
