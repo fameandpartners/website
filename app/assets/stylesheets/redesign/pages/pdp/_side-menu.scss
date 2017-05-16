@@ -44,9 +44,10 @@
   }
 
   .height-selection {
-    text-decoration: uppercase;
+    margin-bottom: 15px;
+  }
+  .height-selection .metric-container {
     font-size: 1.3rem;
-    padding-bottom: 30px;
   }
   .size-selection {
     .error-filler-height {

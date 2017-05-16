@@ -356,12 +356,12 @@ class SidePanelSize extends Component {
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Create a Personal Size Profile</h2>
           <p>
-          Tell us your height and size, and we’ll handcraft
-          your made-to-order item to fit your body perfectly.
+            Just tell us your height and size, and we'll take care of the tailoring.
           </p>
 
           <div className="height-selection clearfix">
             <h4>How tall are you?</h4>
+            <p>Tell the truth–you don't need to add height for heels.</p>
             <div className="select-container pull-left">
               { height.temporaryHeightUnit === 'inch' ?
                 <Select
