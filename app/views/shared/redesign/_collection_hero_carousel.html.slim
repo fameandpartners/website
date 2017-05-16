@@ -11,6 +11,18 @@ ruby:
     end
   end
 
+  def hero_text_alignment(alignment)
+    case alignment
+    when "Center"
+      {class: 'text-center'}
+    when "Right"
+      {class: 'text-right'}
+    else
+      # Defaults to 'Left'...
+      {class: ''}
+    end
+  end
+
   def hero_text_color(color)
     if color == "White"
       {class: 'main-hero-wrap hero-wrap copy-left white-text'}
@@ -47,7 +59,7 @@ ruby:
       .container-fluid
         .row
           *hero_text_position(tile[:text_position])
-            .copy-wrap
+            .copy-wrap*hero_text_alignment(tile[:text_align])
               h2.heading.no-margin-md
                 span*hero_text_size(tile[:text_size])
                   - if tile[:heading]
