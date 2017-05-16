@@ -31,9 +31,16 @@ module UserCart
         { id: option.id, name: option.name, display_price: option.display_price.to_s, display_discount: option.display_discount }
       end
 
-      result[:available_making_options] = (available_making_options || []).map do |mo|
-        { id: mo.id, name: mo.name, display_discount: mo.display_discount, description: mo.description}
+      #filter out fastmaking option if non recommended color is chosen by user
+      avo = (available_making_options || []).map do |mo|
+        if (mo.name == 'Deliver Later') || (color.present? && color[:use_in_customisation])
+          { id: mo.id, name: mo.name, display_discount: mo.display_discount, description: mo.description}
+        else
+          nil
+        end
       end
+
+      result[:available_making_options] = avo.compact
 
       result
     end
