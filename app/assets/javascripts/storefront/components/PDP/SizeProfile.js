@@ -45,6 +45,7 @@ class SidePanelSize extends Component {
   closeMenu() {
     const { actions } = this.props;
     this.validateErrors();
+    this.applyTemporaryFilters();
     actions.addToBagPending(false);
     actions.toggleDrawer(null);
   }
@@ -361,7 +362,7 @@ class SidePanelSize extends Component {
 
           <div className="height-selection clearfix">
             <h4>How tall are you?</h4>
-            <p>Tell the truth–you don't need to add height for heels.</p>
+            <p>Tell the truth–no need to add height for heels.</p>
             <div className="select-container pull-left">
               { height.temporaryHeightUnit === 'inch' ?
                 <Select
