@@ -64,6 +64,10 @@
 
   .cta-wrapper {
     margin-top: 25px;
+    .btn-featured {
+      font-family: $font-family-secondary !important;
+      font-style: normal;
+    }
   }
 
   .middle-carousel-item {

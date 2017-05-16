@@ -173,10 +173,24 @@ h1 .sub-heading {
   letter-spacing: 0.1rem;
 }
 
+.cta-button-secondary-text {
+  text-transform: none;
+}
+
 .title--small strong,
 .mobile-heading strong {
   font-size: 1.4rem;
   border-bottom: 1px solid $c-neutral-6;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .title--small strong {
+    line-height: 150%;
+    display: inline-block;
+    margin-top: 2em;
+  }
+
 }
 
 .cta-link + .copy-highlight,

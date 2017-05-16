@@ -59,7 +59,7 @@ ruby:
       .container-fluid
         .row
           *hero_text_position(tile[:text_position])
-            .copy-wrap*hero_text_alignment(tile[:text_align])
+            .copy-wrap.extra-padding-left*hero_text_alignment(tile[:text_align])
               h2.heading.no-margin-md
                 span*hero_text_size(tile[:text_size])
                   - if tile[:heading]
