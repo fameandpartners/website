@@ -3,9 +3,9 @@ namespace :data do
   task :clean => :environment do
     sql = {
       :old_carts =>
-        "FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{14.days.ago}'",
+        "FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{6.months.ago}'",
       :old_checkouts =>
-        "FROM spree_orders WHERE completed_at IS NULL AND state = 'address' AND created_at < '#{60.days.ago}'",
+        "FROM spree_orders WHERE completed_at IS NULL AND state = 'address' AND created_at < '#{90.days.ago}'",
       :orphan_line_items =>
         "FROM spree_line_items WHERE order_id IN (SELECT order_id FROM spree_line_items EXCEPT SELECT id AS order_id FROM spree_orders);",
       :orphan_line_item_personalizations =>
@@ -13,7 +13,7 @@ namespace :data do
       :old_activities =>
         "FROM activities WHERE created_at < '#{6.months.ago}'",
       :old_permissions =>
-        "FROM spree_tokenized_permissions WHERE created_at < '#{7.days.ago}'"
+        "FROM spree_tokenized_permissions WHERE created_at < '#{60.days.ago}'"
     }
 
     actions = { :count => 'SELECT count(*) ',
@@ -28,7 +28,7 @@ namespace :data do
         puts result.cmd_status if action == :delete
       end
     end
-    puts 'VACUUM ANALYZE'
-    ActiveRecord::Base.connection.execute('VACUUM ANALYZE')
+    puts 'Dunzo'
+    # ActiveRecord::Base.connection.execute('VACUUM ANALYZE')
   end
 end
