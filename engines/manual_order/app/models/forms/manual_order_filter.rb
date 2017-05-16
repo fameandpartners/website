@@ -1,6 +1,15 @@
 module Forms
   class ManualOrderFilter
 
+    HEIGHT_DISPLAY_NAMES = {
+      'length1' => "Length1 (4'10\"-5'1\") or (148-156cm)",
+      'length2' => "Length2 (5'2\"-5'4\") or (157-164cm)",
+      'length3' => "Length3 (5'5\"-5'7\") or (165-172cm)",
+      'length4' => "Length4 (5'8\"-5'10\") or (173-179cm)",
+      'length5' => "Length5 (5'11\"-6'1\") or (180-186cm)",
+      'length6' => "Length6 (6'2\"-6'4\") or (187-193cm)"
+    }
+
     attr_reader :params
 
     def initialize(params)
@@ -28,7 +37,7 @@ module Forms
     end
 
     def skirt_length_options
-      LineItemPersonalization::HEIGHTS.map { |h| { id: h, name: h.humanize } }
+      LineItemPersonalization::HEIGHTS.map { |h| { id: h, name: HEIGHT_DISPLAY_NAMES[h] || h.humanize } }
     end
 
     def custom_colors
