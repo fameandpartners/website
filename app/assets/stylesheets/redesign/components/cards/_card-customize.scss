@@ -46,7 +46,7 @@
 
   &__content__left {
     float: left;
-    width: 33%;
+    margin-right: 6px;
     text-decoration: underline;
   }
   &__content__left:hover {
@@ -54,8 +54,7 @@
   }
 
   &__content__right {
-    float: left;
-    width: 67%;
+    float: right;
     text-align: right;
   }
 

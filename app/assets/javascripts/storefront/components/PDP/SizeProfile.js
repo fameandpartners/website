@@ -44,8 +44,8 @@ class SidePanelSize extends Component {
 
   closeMenu() {
     const { actions } = this.props;
-    this.validateErrors();
     this.applyTemporaryFilters();
+    this.validateErrors();
     actions.addToBagPending(false);
     actions.toggleDrawer(null);
   }
@@ -247,7 +247,7 @@ class SidePanelSize extends Component {
       } else if (!size) {
         return 'Enter a valid height';
       }
-      return inline ? 'Enter valid height and size' : 'Enter a valid height and select a size';
+      return inline ? 'Enter height / size' : 'Enter a valid height and select a size';
     }
     return null;
   }
