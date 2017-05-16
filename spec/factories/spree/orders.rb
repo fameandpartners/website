@@ -13,7 +13,7 @@ FactoryGirl.define do
       completed_at { DateTime.now }
       state        'complete'
 
-      line_items   { create_list :dress_item, 1 }
+      line_items   { build_list :dress_item, 1 }
     end
   end
 end
