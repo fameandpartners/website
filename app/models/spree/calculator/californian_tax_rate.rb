@@ -31,8 +31,15 @@ module Spree
 
     def compute_order(order)
       if shipping_to_california?(order)
-        line_items_total = order.total
-        round_to_two_places(line_items_total * rate.amount)
+        adjustment_total = order.adjustments.eligible\
+                            .delete_if { |a| a.originator.calculator == self }\
+                            .map(&:amount)\
+                            .sum
+
+        item_total       = order.line_items.map(&:amount).sum
+        order_total      = item_total + adjustment_total
+
+        round_to_two_places(order_total * rate.amount)
       else
         0
       end

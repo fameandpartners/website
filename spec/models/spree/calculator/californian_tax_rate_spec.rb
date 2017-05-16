@@ -8,13 +8,21 @@ describe Spree::Calculator::CalifornianTaxRate do
 
   let!(:calculator) { described_class.new }
   let!(:rate) { create(:tax_rate, zone: global_zone, calculator: described_class.new, amount: 0.075) }
+  let!(:shipping_method) { FactoryGirl.create(:simple_shipping_method) }
 
-  let!(:order) { create(:spree_order, ship_address: ship_address) }
-  let!(:line_item) { build(:line_item, price: 123.45, quantity: 1) }
+  let!(:line_item) do
+    FactoryGirl.create(:dress_item, price: 123.45, quantity: 1) 
+  end
+  let!(:order) { line_item.order }
 
-  # Very strange, but Spree uses this trick: https://github.com/spree/spree/blob/7d19c8933042cec667634c8cffedcbe6084abf1d/core/spec/models/calculator/default_tax_spec.rb#L17
-  # It's avoiding a bunch of ActiveRecord callbacks
-  before(:each) { allow(order).to receive(:line_items).and_return([line_item]) }
+  before(:each) do
+    order.shipping_method = shipping_method
+    order.ship_address = ship_address
+    order.save!
+
+    order.create_tax_charge!
+    order.updater.update
+  end
 
   context 'given an order from USA' do
     context 'from California' do
@@ -22,8 +30,6 @@ describe Spree::Calculator::CalifornianTaxRate do
       let!(:ship_address) { build(:address, country: usa, state: california) }
 
       it 'adds configured rate amount of tax to the order total' do
-        order.create_tax_charge!
-        order.updater.update
         expect(order.reload.total).to eq(132.71)
       end
     end
@@ -33,8 +39,6 @@ describe Spree::Calculator::CalifornianTaxRate do
       let!(:ship_address) { build(:address, country: usa, state: texas) }
 
       it 'does not add any tax to the order total' do
-        order.create_tax_charge!
-        order.updater.update
         expect(order.reload.total).to eq(123.45)
       end
     end
@@ -45,8 +49,6 @@ describe Spree::Calculator::CalifornianTaxRate do
     let!(:ship_address) { build(:address, state: rio_de_janeiro, country: brazil) }
 
     it 'does not add any tax to the order total' do
-      order.create_tax_charge!
-      order.updater.update
       expect(order.reload.total).to eq(123.45)
     end
   end
