@@ -4,7 +4,7 @@ module Policies
     DAYS_IN_FLIGHT_FAST = 3 # number of days for express delivery
 
     CNY_DELIVERY_PERIOD = '2 weeks'
-    FAST_MAKING_DELIVERY_PERIOD = '5 - 7 business days'
+    FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
     SLOW_MAKING_DELIVERY_MAP = {  "7 business days" => "6 weeks",
                                   "12 - 15 business days" => "6 weeks",
                                   "3 - 4 weeks" => "8 weeks",
@@ -27,11 +27,6 @@ module Policies
         current_major_value > max_major_value ? taxon.delivery_period : max_period
       end
     end
-
-    # thanh - deprecating this useless thing
-    # def cny_delivery_period
-    #   CNY_DELIVERY_PERIOD
-    # end
 
     def fast_making_delivery_period
       FAST_MAKING_DELIVERY_PERIOD

@@ -25,6 +25,7 @@ module Policies
       if Features.active?(:cny_delivery_delays)
         period = adjust_for_cny(period)
       end
+
       period
     end
   end
