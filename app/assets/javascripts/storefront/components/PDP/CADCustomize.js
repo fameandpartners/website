@@ -63,8 +63,6 @@ class CADCustomize extends Component {
     this.generateAddonLayers = this.generateAddonLayers.bind(this);
     this.generateAddonOptions = this.generateAddonOptions.bind(this);
     this.computeNewAddons = this.computeNewAddons.bind(this);
-    this.resetActiveOptions = this.resetActiveOptions.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   openMenu() {
@@ -119,6 +117,7 @@ class CADCustomize extends Component {
    */
   generateBaseLayers() {
     const { baseImages, baseSelected } = this.props;
+
     return baseImages.map(({ url }, i) => {
       const isSelected = (
         i === baseSelected ||
@@ -158,7 +157,6 @@ class CADCustomize extends Component {
    * @return {Array[Node]} - addonOptionNodes
    */
   generateAddonOptions() {
-    console.log('changing');
     const { addonOptions } = this.props;
 
     return addonOptions.map((a) => {
@@ -318,19 +316,6 @@ class CADCustomize extends Component {
     };
   }
 
-  resetActiveOptions() {
-    const { addonOptions, setAddonOptions, setAddonBaseLayer } = this.props;
-    const newAddons = addonOptions.map(addon => assign({}, addon, { active: false }));
-
-    setAddonOptions(newAddons);
-    setAddonBaseLayer(null);
-  }
-
-  handleClose() {
-    this.resetActiveOptions();
-    this.closeMenu();
-  }
-
   render() {
     const { isOpen } = this.props;
     let menuClass = 'pdp-side-menu';
@@ -354,7 +339,7 @@ class CADCustomize extends Component {
             <div
               role="button"
               className="btn-close med"
-              onClick={this.handleClose}
+              onClick={this.closeMenu}
             >
               <span className="hide-visually">Close Menu</span>
             </div>
