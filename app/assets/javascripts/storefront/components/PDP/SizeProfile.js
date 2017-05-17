@@ -44,6 +44,8 @@ class SidePanelSize extends Component {
 
   closeMenu() {
     const { actions } = this.props;
+    this.applyTemporaryFilters();
+    this.validateErrors();
     actions.addToBagPending(false);
     actions.toggleDrawer(null);
   }
@@ -238,14 +240,14 @@ class SidePanelSize extends Component {
    * Generates the inches options for the Select dropdown
    * @return {Object} options
    */
-  generateErrorMessage({ height, size }) {
+  generateErrorMessage({ height, size }, inline = false) {
     if (height || size) {
       if (!height) {
         return 'Select a size';
       } else if (!size) {
         return 'Enter a valid height';
       }
-      return 'Enter a valid height and select a size';
+      return inline ? 'Enter height / size' : 'Enter a valid height and select a size';
     }
     return null;
   }
@@ -275,15 +277,23 @@ class SidePanelSize extends Component {
    * @return {Node} profileSummary
    */
   generateSizeProfileSummary() {
-    const { height, size } = this.props.customize;
+    const { customize } = this.props;
+    const { height, size } = customize;
+    const hasErrors = (customize.errors.height || customize.errors.size);
     return (
       <div>
-        <a className="c-card-customize__content__left">Size Profile</a>
-        <div className="c-card-customize__content__right">
-          {this.sizeSummaryUnitSelection(
-            height.heightValue, height.heightUnit, size.presentation,
-          )}
-        </div>
+        <a className={`c-card-customize__content__left ${hasErrors ? 'error-wrap' : ''}`}>Size Profile</a>
+        { hasErrors ?
+          <span className="error selection c-card-customize__content__right">
+            {this.generateErrorMessage(customize.errors, true)}
+          </span>
+          :
+          <div className="c-card-customize__content__right">
+            {this.sizeSummaryUnitSelection(
+              height.heightValue, height.heightUnit, size.presentation,
+            )}
+          </div>
+        }
       </div>
     );
   }
@@ -294,7 +304,7 @@ class SidePanelSize extends Component {
     const { size, errors } = this.props.customize;
     return this.props.defaultSizes.map((s) => {
       let itemClassName = parseInt(size.id, 10) === s.table.id
-        ? 'selector-size is-selected' : 'selector-size';
+        ? 'selector-size noselect is-selected' : 'selector-size noselect';
       itemClassName += errors.size ? ' has-error' : '';
       return (
         <a
@@ -347,12 +357,12 @@ class SidePanelSize extends Component {
           </div>
           <h2 className="h4 c-card-customize__header textAlign--left">Create a Personal Size Profile</h2>
           <p>
-          Tell us your height and size, and we’ll handcraft
-          your made-to-order item to fit your body perfectly.
+            Just tell us your height and size, and we&apos;ll take care of the tailoring.
           </p>
 
           <div className="height-selection clearfix">
             <h4>How tall are you?</h4>
+            <p>Tell the truth–no need to add height for heels.</p>
             <div className="select-container pull-left">
               { height.temporaryHeightUnit === 'inch' ?
                 <Select

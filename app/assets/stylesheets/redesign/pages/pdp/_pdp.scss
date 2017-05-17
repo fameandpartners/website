@@ -511,7 +511,8 @@
   }
 
   // add helpers here, its only place where !important is allowed
-  .error {
+  .error,
+  .error-wrap {
     color: $c-brand-red !important;
   }
 
@@ -577,7 +578,7 @@
   @media (min-width: $bootstrap-md-width) {
     .CAD--layer-wrapper {
       height: 240px;
-      width: 260px;
+      width: 282px;
     }
   }
 
