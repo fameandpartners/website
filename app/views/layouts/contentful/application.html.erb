@@ -8,6 +8,8 @@
 
     <%= stylesheet_link_tag 'application_contentful' %>
 
+    <%= render 'layouts/redesign/head' %>
+
   </head>
   <body>
     <%= render 'layouts/contentful/header' %>
@@ -17,6 +19,9 @@
       <h1 style="margin-top: 5em;">contents of: application.html.erb</h1>
       <%= yield %>
     </div>
+
+    <%= javascript_include_tag 'storefront' %>
+    <%= render 'layouts/redesign/javascript' %>
 
   </body>
 </html>
