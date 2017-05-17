@@ -54,7 +54,7 @@ Spree::LineItem.class_eval do
     total_adjustment = 0
 
     making_options.each do |mo|
-      if mo.product_making_option.fast_making?
+      if mo.product_making_option.fast_making? and mo.price
         total_adjustment += mo.price
       end
       # slow_making price will be percentage based
