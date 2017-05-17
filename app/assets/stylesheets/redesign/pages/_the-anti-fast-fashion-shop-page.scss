@@ -233,6 +233,10 @@
       min-height: 320px;
     }
 
+    .section-more-styles .item-wrap {
+      margin-bottom: 35px;
+    }
+
     .item-wrap .overlay {
 
       &.show-mobile {
@@ -245,6 +249,14 @@
 
     }
 
+  }
+
+}
+
+@media (max-width: $bootstrap-sm-width - 1px) {
+
+  .section-more-styles .item-wrap--safe-margin-bottom {
+    margin-bottom: 125px;
   }
 
 }
