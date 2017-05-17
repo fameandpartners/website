@@ -1,0 +1,80 @@
+.nav-menu-container.simplified-nav-container.js-simplified-nav-container
+  .row.home-menu.js-simplified-nav.simplified-nav.hidden-xs.hidden-sm.container-fluid
+
+    .col.col-md-3
+      = link_to root_path, class: 'logo-wrap' do
+        span.logo
+          = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
+
+    .col.col-md-7.nav-main-menu.text-center
+
+      span.dresses.js-open-nav-menu Shop all
+      span.anti-fast.js-close-nav-menu = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
+
+      - if Features.active?(:fameweddings)
+        span.wedding.js-open-nav-menu Wedding Shop
+      span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+
+    .col.col-md-2.nav-icons.text-right.pull-right
+      span#search.search-wrapper.js-search
+        a.icon.icon-search.js-search-trigger href="javascript:;"
+        .search-input#search-area
+          span.close-search.btn-close
+          = form_tag search_path, method: :get, id: 'searchForm'
+            input type="text" id="searchValue" placeholder="Search here" name="q"
+
+      = link_to moodboards_path do
+        span.icon.icon-heart-o
+
+      span.shopping-bag-wrapper.js-header-toolbar
+        a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
+          span.icon.icon-bag
+          span.count.js-cart-item-count 0
+
+  .rect-wrapper.margin--center
+    .center-wrapper.margin--center
+      .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav.background--white.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.flex-container
+
+          .flex1.col.dresses-shop-by
+            ul
+              li.title Featured
+              = render partial: 'layouts/redesign/header/simplified_nav/shop_featured'
+
+          .flex1.col.dresses-style
+            ul
+              li.title
+                = link_to dresses_path
+                  | Dresses
+              = render partial: 'layouts/redesign/header/simplified_nav/dresses'
+
+          .flex1.col.dresses-color
+            ul
+              li.title Separates
+              = render partial: 'layouts/redesign/header/simplified_nav/separates'
+
+          .flex1.col.dresses-events
+            .two-cols
+              li.title Collections
+              = render partial: 'layouts/redesign/header/simplified_nav/collections'
+
+          .col.picture-col
+            .featuredCollection.nav-item
+              = link_to high_contrast_collection_path
+                = image_tag 'simplified-nav/highcontrast.jpg', class: 'img-responsive nav-img', alt: ''
+                .content-wrap
+                  .container-cta
+                    .row-cta
+                      .cta-wrap
+                        span.cta-copy.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  THE HIGH CONTRAST COLLECTION
+
+      // temp. fix to avoid breaking menu handler in simplified_nav.js
+      //  (addition of anti-fast nav item means triggers & menus no longer share indexes)
+      .rect#rect-TEMP.nav-menu-wrap.menu-TEMP.grid-img-cta-nav.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
+
+      .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
+          = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'

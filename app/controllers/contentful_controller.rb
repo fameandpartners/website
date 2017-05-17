@@ -1,4 +1,4 @@
-class ContentfulController < ActionController::Base
+class ContentfulController < ApplicationController
   layout 'contentful/application'
 
   def main

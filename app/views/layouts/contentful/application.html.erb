@@ -5,11 +5,16 @@
 <!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
 <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
   <head data-hook="inside_head">
+
+    <%= stylesheet_link_tag 'application_contentful' %>
+
   </head>
   <body>
+    <%= render 'layouts/contentful/header' %>
 
     <div class="container">
-      <h1>contents of: application.html.erb</h1>
+
+      <h1 style="margin-top: 5em;">contents of: application.html.erb</h1>
       <%= yield %>
     </div>
 
