@@ -40,6 +40,11 @@ module Repositories
         }
       end
 
+      def marshal_load(data)
+        puts "******************Booyaa: #{data}"
+        raise Exception.new('check da log')
+      end
+
       def self.default
         self.new
       end
