@@ -60,7 +60,7 @@ class Products::CollectionDetails
   # => banner images on Revolution Page: https://github.com/fameandpartners/website/blob/d94a69b40caae7f54f416e8b7658673c48b9585d/engines/revolution/app/models/revolution/page.rb#L51-L53
   def colorize_taxon
     taxon.meta_title        = "Shop the latest #{color[:presentation]} dresses"
-    taxon.title             = "Shop and customize the best #{color[:presentation]} dress trends at Fame & Partners"
+    taxon.title             = "Shop and customize the best #{color[:presentation]} dress trends at Fame and Partners"
     taxon.description       = ''
     taxon.footer            = ''
     selected_color_data      = color_data[color[:name].to_s.downcase]
@@ -76,7 +76,7 @@ class Products::CollectionDetails
 
   def deliverize_taxon
     taxon.meta_title        = "Shop the latest express delivery dresses"
-    taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
+    taxon.title             = "Shop and customize express delivery dresses at Fame and Partners"
     taxon.description       = ''
     taxon.footer            = ''
     taxon.banner.title      = 'Express Delivery Dresses'
@@ -85,7 +85,7 @@ class Products::CollectionDetails
 
   def fast_making_taxon
     taxon.meta_title        = "Shop the latest express delivery dresses"
-    taxon.title             = "Shop and customize express delivery dresses at Fame & Partners"
+    taxon.title             = "Shop and customize express delivery dresses at Fame and Partners"
     taxon.description       = ''
     taxon.footer            = ''
     taxon.banner.title      = 'GET IT QUICK!'
