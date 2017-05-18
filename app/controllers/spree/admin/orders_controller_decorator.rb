@@ -7,8 +7,6 @@ module Spree
       attr_reader :hide_line_items
       helper_method :hide_line_items, :order_shipment_states
 
-      DEFAULT_ELD_DATE = 3.month.ago
-
       def mark_order_as_shipped
         if @order.can_ship?
           @order.shipment_state = 'shipped'
@@ -53,7 +51,7 @@ module Spree
           if params[:q].delete(:search_old_orders)
             Spree::Order
           else
-            Spree::Order.where('created_at > ?', DEFAULT_ELD_DATE)
+            Spree::Order.where('created_at > ?', 3.month.ago)
           end
 
         @search = scope.accessible_by(current_ability, :index).ransack(params[:q])
