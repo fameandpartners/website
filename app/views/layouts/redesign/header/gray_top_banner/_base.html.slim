@@ -1,7 +1,5 @@
 ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
-- ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
-  - @variation = variation
   
 
 #gray-top-banner.visible-md-block.visible-lg-block
@@ -26,7 +24,4 @@ ruby:
                 li = link_to 'Logout', '/logout'
 
 .nav-menu-container
-  - if @variation === 'mega'
-    = render 'layouts/redesign/header/mega'
-  - else 
-    = render 'layouts/redesign/header/simplified_nav'
+  = render 'layouts/redesign/header/simplified_nav'

@@ -12,13 +12,16 @@
 
   </head>
   <body>
-    <%= render 'layouts/contentful/header' %>
+    <%= render 'layouts/redesign/header' %>
 
     <div class="container">
 
       <h1 style="margin-top: 5em;">contents of: application.html.erb</h1>
       <%= yield %>
     </div>
+
+    <%= render 'layouts/redesign/footer' %>
+    <%= render 'layouts/redesign/shopping_bag' %>
 
     <%= javascript_include_tag 'storefront' %>
     <%= render 'layouts/redesign/javascript' %>
