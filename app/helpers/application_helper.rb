@@ -215,12 +215,12 @@ module ApplicationHelper
   # CMS
   def get_contentful_parent_container
     if (params['developer'] == 'preview')
-      puts '*'*60
-      puts 'In PREVIEW MODE - Fetching unpublished Contentful data...'
-      puts '*'*60
+      # puts '*'*60
+      # puts 'In PREVIEW MODE - Fetching unpublished Contentful data...'
+      # puts '*'*60
       Rails.cache.delete('contentful-cms-cache-key')
       @contentful_client ||= Contentful::Client.new(
-        api_url: 'preview.contentful.com',
+        api_url: ENV['CONTENTFUL_PREVIEW_API_URL'],
         access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
         space: ENV['CONTENTFUL_SPACE_ID'],
         dynamic_entries: :auto,
@@ -228,13 +228,13 @@ module ApplicationHelper
       )
       create_home_page_container_from_contentful(@contentful_client.entries(content_type: 'homePageContainer')[0])
     else
-      puts '-'*60
-      puts 'In PRODUCTION Mode - Loading cached Contentful data...'
-      puts '-'*60
+      # puts '-'*60
+      # puts 'In PRODUCTION Mode - Loading cached Contentful data...'
+      # puts '-'*60
       Rails.cache.fetch('contentful-cms-cache-key') do
-        puts '/'*60
-        puts 'NO CACHE - Fetching latest published Contentful data...'
-        puts '/'*60
+        # puts '/'*60
+        # puts 'NO CACHE - Fetching latest published Contentful data...'
+        # puts '/'*60
         @contentful_client ||= Contentful::Client.new(
           access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
           space: ENV['CONTENTFUL_SPACE_ID'],
