@@ -30,7 +30,6 @@ module Repositories
       # Used in `UserCart::CartProductPresenter#serialize`
       # @return [Repositories::Images::Template]
       def marshal_dump
-        binding.pry
         {
           id:       id,
           position: position,
