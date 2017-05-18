@@ -1,3 +1,4 @@
+module ContentfulHelper
   ## CMS
 
   ## to-do: Refactor!
@@ -91,3 +92,4 @@
       instagram_tiles: ig_tiles
     }
   end
+end
