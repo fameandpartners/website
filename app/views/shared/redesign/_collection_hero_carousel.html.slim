@@ -1,39 +1,7 @@
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/may-05-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/may-05-featured-1-mob.jpg"
-= link_to dresses_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
-
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-6.col-lg-6.pull-right.hidden-xs.hidden-sm
-          .copy-wrap.extra-padding-left
-            h2.heading.no-margin-md
-              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
-                | The Modern</br>
-                | Evening Collection.</br>
-              span.sub-heading--small
-                | Custom evening wear, made-to-order.</br>
-                | Because ball gowns are not meant to blend in.</br>
-                <em class="link-underline">Explore</em> gowns.
-        .col-md-4.col-lg-3.hidden-md.hidden-lg
-          .copy-wrap.copy-align--top.extra-padding-left.text-center
-            h2.heading.no-margin-md
-              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
-                | The Modern Evening Collection. <br/>
-                <em class="link-underline">Explore</em> gowns.
-
-
-// Carousel Item 2
-- current_tile_image = "homepage/hero-featured/may-12-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/may-12-featured-2-mob.jpg"
-= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Anti-Fast Fashion Shop" }
+- current_tile_image = "homepage/hero-featured/may-12-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-12-featured-1-mob.jpg"
+= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Anti-Fast Fashion Shop" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -55,10 +23,10 @@
               span.sub-heading.hidden-md.hidden-lg
                 | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
 
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
-= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
+// Carousel Item 2
+- current_tile_image = "homepage/hero-featured/may-18-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-18-featured-2-mob.jpg"
+= link_to modern_bridesmaid_collection_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Bridesmaid Dresses" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -69,15 +37,46 @@
   .content-wrap
     .container-fluid
       .row
-        / .col-md-5.col-md-offset-6
-        .col-md-6
-          / .copy-wrap.text-center
+        .col-md-4.col-lg-4.pull-right.hidden-xs.hidden-sm
           .copy-wrap
             h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
-              span.sub-heading.hidden-md.hidden-lg
-                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
+              span.title.title--large <em>Break</em><br/> Tradition.
+              span.sub-heading
+                | Find a bridesmaid dress you<br/><em>actually</em> want to wear.
 
             .cta-wrapper
               span.btn-md.btn-featured
-                | Customize <span class="copy-highlight">Your Look</span>
+                | <span class="copy-highlight">Customize Now</span>
+
+        .col-md-4.col-lg-4.hidden-md.hidden-lg
+          .copy-wrap
+            h2.heading.no-margin-md
+              span.sub-heading
+                | Find a bridesmaid dress you <em>actually</em> want to wear. <br/><span class="h6 copy-highlight">Customize Now</span>
+
+// Carousel Item 3
+- current_tile_image = "homepage/hero-featured/may-18-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-18-featured-3-mob.jpg"
+= link_to high_contrast_collection_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+  picture.media-wrap
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
+
+  .content-wrap
+    .container-fluid
+      .row
+        .col-md-4.col-md-offset-4
+          .copy-wrap
+            h2.heading.no-margin-md
+              span.title.title--large.hidden-xs.hidden-sm You're <em>not</em><br/> meant to<br/> blend in.
+              span.sub-heading.hidden-xs.hidden-sm
+                | Especially when you go out.
+              span.sub-heading.hidden-md.hidden-lg
+                | You're <em>not</em> meant to blend in. Especially when you go out. <br/><span class="h6 copy-highlight">Shop High Contrast</span>
+
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | <span class="copy-highlight">Shop High Contrast</span>
