@@ -30,6 +30,7 @@ module Repositories
       # Used in `UserCart::CartProductPresenter#serialize`
       # @return [Repositories::Images::Template]
       def marshal_dump
+        binding.pry
         {
           id:       id,
           position: position,
@@ -41,12 +42,12 @@ module Repositories
       end
 
       def marshal_load(data)
-        self.id       = data['id']
-        self.position = data['position'] || 0
-        self.original = data['original'] || DEFAULT_URL
-        self.large    = data['large'] || DEFAULT_URL
-        self.xlarge   = data['xlarge'] || DEFAULT_URL
-        self.small    = data['small'] || DEFAULT_URL
+        self.id       = data[:id]
+        self.position = data[:position] || 0
+        self.original = data[:original] || DEFAULT_URL
+        self.large    = data[:large] || DEFAULT_URL
+        self.xlarge   = data[:xlarge] || DEFAULT_URL
+        self.small    = data[:small] || DEFAULT_URL
       end
 
       def self.default
