@@ -58,6 +58,7 @@ module ContentfulHelper
         text_position: item.text_position,
         text_color: item.text_color,
         text_size: item.text_size,
+        text_padding: item.text_padding,
         cta_button_text: cta,
         description: item.description,
       }
