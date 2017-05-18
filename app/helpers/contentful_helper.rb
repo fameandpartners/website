@@ -11,9 +11,9 @@ module ContentfulHelper
       # puts '*'*60
       Rails.cache.delete('contentful-cms-cache-key')
       @contentful_client ||= Contentful::Client.new(
-        api_url: ENV['CONTENTFUL_PREVIEW_API_URL'],
-        access_token: ENV['CONTENTFUL_PREVIEW_TOKEN'],
-        space: ENV['CONTENTFUL_SPACE_ID'],
+        api_url: configatron.contentful.preview_api_url,
+        access_token: configatron.contentful.preview_token,
+        space: configatron.contentful.space_id,
         dynamic_entries: :auto,
         raise_errors: true
       )
@@ -27,8 +27,8 @@ module ContentfulHelper
         # puts 'NO CACHE - Fetching latest published Contentful data...'
         # puts '/'*60
         @contentful_client ||= Contentful::Client.new(
-          access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-          space: ENV['CONTENTFUL_SPACE_ID'],
+          access_token: configatron.contentful.access_token,
+          space: configatron.contentful.space_id,
           dynamic_entries: :auto,
           raise_errors: true
         )
