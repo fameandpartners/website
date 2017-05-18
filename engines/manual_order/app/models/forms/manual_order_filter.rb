@@ -1,6 +1,15 @@
 module Forms
   class ManualOrderFilter
 
+    HEIGHT_DISPLAY_NAMES = {
+      'length1' => "Length1 (4'10\"-5'1\") or (148-156cm)",
+      'length2' => "Length2 (5'2\"-5'4\") or (157-164cm)",
+      'length3' => "Length3 (5'5\"-5'7\") or (165-172cm)",
+      'length4' => "Length4 (5'8\"-5'10\") or (173-179cm)",
+      'length5' => "Length5 (5'11\"-6'1\") or (180-186cm)",
+      'length6' => "Length6 (6'2\"-6'4\") or (187-193cm)"
+    }
+
     attr_reader :params
 
     def initialize(params)
@@ -17,6 +26,18 @@ module Forms
       product_options[:colors][:default].map do |p|
         { id: p.id, name: p.presentation, type: 'color' }
       end
+    end
+
+    def heights_options
+      if product_heights_range_groups.first.blank? || product_heights_range_groups.first =~ /three_size/
+        skirt_length_options[0..2]
+      else
+        skirt_length_options[3..-1]
+      end
+    end
+
+    def skirt_length_options
+      LineItemPersonalization::HEIGHTS.map { |h| { id: h, name: HEIGHT_DISPLAY_NAMES[h] || h.humanize } }
     end
 
     def custom_colors
@@ -75,6 +96,10 @@ module Forms
     end
 
     private
+
+    def product_heights_range_groups
+      ProductHeightRangeGroup.find_both_for_variant_or_use_default(product.master)
+    end
 
     def site_version
       SiteVersion.where(currency: params[:currency]).first

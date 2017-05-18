@@ -11,7 +11,9 @@ $ ->
   optCustomColors = $('<optgroup>').attr('label', "Custom Colors + $16.00")
 
   sizeUrl = '/fame_admin/manual_orders/sizes/:product_id'
+  heightUrl = '/fame_admin/manual_orders/heights/:product_id'
   sizeSelect = $('#forms_manual_order_size')
+  heightSelect = $('#forms_manual_order_height')
 
   customisationUrl = '/fame_admin/manual_orders/customisations/:product_id'
   customisationSelect = $('#forms_manual_order_customisations')
@@ -37,6 +39,7 @@ $ ->
     optColors.html('')
     optCustomColors.html('')
     sizeSelect.html('<option></option>')
+    heightSelect.html('<option></option>')
     customisationSelect.html('<option></option>')
     imageTag.html('Please select style and color to see image')
     priceTag.html('Please select product details')
@@ -68,6 +71,16 @@ $ ->
     else
       sizeSelect.trigger("chosen:updated")
 
+  updateHeights = ->
+    if styleSelect.val()
+      url = heightUrl.replace(/:product_id/, styleSelect.val())
+      $.getJSON url, (data) =>
+        $.each data['manual_orders'], (index, el) =>
+          heightSelect.append $('<option>').attr('value', el.id).text(el.name)
+        heightSelect.trigger("chosen:updated")
+    else
+      heightSelect.trigger("chosen:updated")
+
   updatePrice = ->
     url = priceUrl.replace(/:product_id/, styleSelect.val())
     .replace(/:currency/, currencySelect.val())
@@ -97,6 +110,7 @@ $ ->
     clearAll()
     updateColors()
     updateSizes()
+    updateHeights()
     updateCustomisations()
 
   colorSelect.on 'change', =>
