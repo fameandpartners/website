@@ -1,83 +1,86 @@
-// Carousel Item 1
-- current_tile_image = "homepage/hero-featured/may-05-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/may-05-featured-1-mob.jpg"
-= link_to dresses_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
+ruby:
+  def hero_text_position(position)
+    case position
+    when "Left"
+      {class: 'col-md-6'}
+    when "Right"
+      {class: 'col-md-6 col-lg-6 pull-right'}
+    else
+      # Defaults to 'Center-Left'...
+      {class: 'col lg-4 col-md-5 col-md-offset-3'}
+    end
+  end
 
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-6.col-lg-6.pull-right.hidden-xs.hidden-sm
-          .copy-wrap.extra-padding-left
-            h2.heading.no-margin-md
-              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
-                | The Modern</br>
-                | Evening Collection.</br>
-              span.sub-heading--small
-                | Custom evening wear, made-to-order.</br>
-                | Because ball gowns are not meant to blend in.</br>
-                <em class="link-underline">Explore</em> gowns.
-        .col-md-4.col-lg-3.hidden-md.hidden-lg
-          .copy-wrap.copy-align--top.extra-padding-left.text-center
-            h2.heading.no-margin-md
-              span.sub-heading.sub-heading--extra-large.no-margin-md.no-padding
-                | The Modern Evening Collection. <br/>
-                <em class="link-underline">Explore</em> gowns.
+  def hero_text_alignment(alignment)
+    case alignment
+    when "Center"
+      {class: 'text-center'}
+    when "Right"
+      {class: 'text-right'}
+    else
+      # Defaults to 'Left'...
+      {class: ''}
+    end
+  end
 
+  def hero_text_color(color)
+    if color == "White"
+      {class: 'main-hero-wrap hero-wrap copy-left white-text'}
+    else
+      # Defaults to 'Black'...
+      {class: 'main-hero-wrap hero-wrap copy-left'}
+    end
+  end
 
-// Carousel Item 2
-- current_tile_image = "homepage/hero-featured/may-12-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/may-12-featured-2-mob.jpg"
-= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Anti-Fast Fashion Shop" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
+  def hero_text_size(size)
+    case size
+    when "Small"
+      {class: 'title title--small hidden-xs hidden-sm'}
+    else
+      # Defaults to 'Large' option...
+      {class: 'title title--large hidden-xs hidden-sm'}
+    end
+  end
 
-  .content-wrap
-    .container-fluid
-      .row
-        .col.lg-4.col-md-5.col-md-offset-3
-          .copy-wrap.extra-padding-left
-            h2.heading
-              span.title.title--small.hidden-xs.hidden-sm style="line-height: 130%"
-                | Introducing<br/>
-                | <em>The Anti-Fast Fashion Shop.</em><br/>
-                | Everyday must haves,<br class="visible-lg" /> ethically made-to-order.<br>
-                | <span class="h6 copy-highlight link-underline">SHOP NOW</span>
-              span.sub-heading.hidden-md.hidden-lg
-                | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
+// Hero Tiles - via Contentful CMS
+- hero_tiles = @home_page_container[:hero_tiles].each do |tile|
+  - current_tile_image = tile[:image]
+  - current_tile_mobile_image = tile[:mobile_image]
+  = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
+      source media="(min-width: 992px)" srcset="#{current_tile_image}"
+      img src="#{current_tile_image}" srcset="
+        #{current_tile_mobile_image} 991w,
+        #{current_tile_image} 992w"
 
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-26-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-26-featured-3-mob.jpg"
-= link_to "/dresses/spring-weddings?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
+    .content-wrap
+      .container-fluid
+        .row
+          *hero_text_position(tile[:text_position])
+            .copy-wrap.extra-padding-left*hero_text_alignment(tile[:text_align])
+              h2.heading.no-margin-md
+                span*hero_text_size(tile[:text_size])
+                  - if tile[:heading]
+                    - tile[:heading].each do |heading|
+                      == heading
+                      br
+                span.sub-heading--small.hidden-xs.hidden-sm
+                  - if tile[:sub_heading]
+                    - tile[:sub_heading].each do |sub_heading|
+                      == sub_heading
+                      br
+              .cta-wrapper
+                - if tile[:cta_button_text]
+                  span.btn-md.btn-featured
+                    = tile[:cta_button_text][0]
+                    span.copy-highlight.cta-button-secondary-text
+                      = tile[:cta_button_text][1]
 
-  .content-wrap
-    .container-fluid
-      .row
-        / .col-md-5.col-md-offset-6
-        .col-md-6
-          / .copy-wrap.text-center
-          .copy-wrap
-            h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm The modern wedding<br/> dress code dictates<br/> <em>stand-out</em> style.
-              span.sub-heading.hidden-md.hidden-lg
-                  | The modern wedding dress code dictates <em>stand-out</em> style. <em class="link-underline">Customize</em> Your Look.
-
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Customize <span class="copy-highlight">Your Look</span>
+        .col-sm-12.col-md-12.hidden-md.hidden-lg
+          .copy-wrap.text-center
+            h2.heading.mobile-heading
+              span.sub-heading
+                - tile[:mobile_text].each do |mobile_text|
+                  == mobile_text
+                  br

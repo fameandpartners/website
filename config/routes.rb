@@ -665,6 +665,8 @@ FameAndPartners::Application.routes.draw do
   mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+
+  get '/contentful' => 'contentful#main'
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
