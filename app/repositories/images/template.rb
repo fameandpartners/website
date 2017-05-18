@@ -41,8 +41,12 @@ module Repositories
       end
 
       def marshal_load(data)
-        puts "******************Booyaa: #{data}"
-        raise Exception.new('check da log')
+        self.id       = data['id']
+        self.position = data['position'] || 0
+        self.original = data['original'] || DEFAULT_URL
+        self.large    = data['large'] || DEFAULT_URL
+        self.xlarge   = data['xlarge'] || DEFAULT_URL
+        self.small    = data['small'] || DEFAULT_URL
       end
 
       def self.default
