@@ -1,6 +1,6 @@
 # application base
 configatron.host                    = ENV['APP_HOST']
-configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
+configatron.noreply                 = 'Fame And Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
 configatron.sitemap_url             = "#{ENV['RAILS_ASSET_HOST']}/sitemap/sitemap.xml.gz"

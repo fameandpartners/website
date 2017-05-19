@@ -21,10 +21,10 @@ ruby:
       = render 'spree/products/breadcrumbs', product: @product, active: :style
       .style-it
         .heading
-          h1 Fame & Partners' styling team has compiled the cutest accessories to complete your look with this dress.
+          h1 Fame and Partners' styling team has compiled the cutest accessories to complete your look with this dress.
           h2 Scroll below or simply book a free styling session
           = mail_to 'team@fameandpartners.com', "Book a free styling session", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'btn empty border book-free-style-session'
-          h4 
+          h4
             ' Remember, if you BUY NOW, you can brief us on sourcing any accessories you like, completely free!
         .lookbox
           .row
@@ -44,7 +44,7 @@ ruby:
                           .picture
                             = image_tag image_url
                 .text
-                  h4 WANT US TO SOURCE A DIFFERENT LOOK? 
+                  h4 WANT US TO SOURCE A DIFFERENT LOOK?
                   p BUY YOUR DRESS TODAY AND WE WILL SOURCE ACCESSORIES FOR FREE!
                   p= mail_to 'team@fameandpartners.com', "or book a free styling session now", subject: "Free Styling Session for #{@product.name} | #{@product.sku}", class: 'italic'
               .grid-6

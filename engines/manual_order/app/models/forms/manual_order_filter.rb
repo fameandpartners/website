@@ -29,7 +29,7 @@ module Forms
     end
 
     def heights_options
-      if product_heights_range_groups.first.blank? || product_heights_range_groups.first =~ /three_size/
+      if product_heights_range_groups.first.blank? || product_heights_range_groups.first.name =~ /three_size/
         skirt_length_options[0..2]
       else
         skirt_length_options[3..-1]
