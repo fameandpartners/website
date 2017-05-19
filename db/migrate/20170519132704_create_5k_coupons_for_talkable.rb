@@ -19,7 +19,7 @@ class Create5kCouponsForTalkable < ActiveRecord::Migration
       promotion.code                     = code
       promotion.advertise                = false
       promotion.eligible_to_custom_order = true
-      promotion.eligible_to_sale_order   = true
+      promotion.eligible_to_sale_order   = false
       promotion.require_shipping_charge  = false
       promotion.save
 
