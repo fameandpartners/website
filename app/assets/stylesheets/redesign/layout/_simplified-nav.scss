@@ -35,7 +35,7 @@
   }
 
   .nav-menu-buffer {
-    padding: 0px 60px 10px;
+    padding: 0px 45px 10px;
   }
 
   .center-wrapper {
@@ -100,6 +100,10 @@
     width: 990px;
   }
 
+  .fame-culture-about {
+    padding-right: 10px;
+  }
+
   // Overwrites
   &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
     margin: 0 15px;
@@ -108,17 +112,30 @@
     letter-spacing: 0.05rem;
   }
 
-  @media only screen and (min-width: 1160px) {
+  @media only screen and (min-width: 1320px) {
     &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-      margin: 0 26px;
+      margin: 0 25px;
     }
   }
 
-  &.nav-menu-container .home-menu .nav-main-menu span.dresses {
+  @media only screen and (max-width: 1320px) {
+    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+      margin: 0 12px;
+    }
+  }
+
+  @media only screen and (max-width: 1140px) {
+    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+      font-size: 1.15rem;
+      letter-spacing: 0;
+    }
+  }
+
+  &.nav-menu-container .home-menu .nav-main-menu span:first-child {
     margin-left: 0px;
   }
 
-  &.nav-menu-container .home-menu .nav-main-menu span.culture {
+  &.nav-menu-container .home-menu .nav-main-menu span:last-child {
     margin-right: 0px;
   }
 
