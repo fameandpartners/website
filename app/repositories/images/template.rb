@@ -42,11 +42,11 @@ module Repositories
 
       def marshal_load(data)
         @id       = data[:id]
-        self.position = data[:position] || 0
-        self.original = data[:original] || DEFAULT_URL
-        self.large    = data[:large] || DEFAULT_URL
-        self.xlarge   = data[:xlarge] || DEFAULT_URL
-        self.small    = data[:small] || DEFAULT_URL
+        @position = data[:position] || 0
+        @original = data[:original] || DEFAULT_URL
+        @large    = data[:large] || DEFAULT_URL
+        @xlarge   = data[:xlarge] || DEFAULT_URL
+        @small    = data[:small] || DEFAULT_URL
       end
 
       def self.default
