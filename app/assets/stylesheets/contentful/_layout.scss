@@ -1,0 +1,35 @@
+@import "bulma/utilities/_all";
+@import "bulma/grid/_all";
+@import "bulma/elements/box";
+
+@import '_mixins';
+
+.app-container {
+  width: 100%;
+}
+
+// use this class for breakpoints
+.app-child {
+  margin: 0 auto;
+  padding: 0 48px;
+  width: calc(100% - 96px);
+  max-width: 1776px;
+
+  background: limegreen;
+  @include breakpoint(tablet) {
+
+    background: coral;
+  }
+  @include breakpoint(desktop) {
+
+    background: lemonchiffon;
+  }
+  @include breakpoint(widescreen) {
+
+    background: firebrick;
+  }
+  @include breakpoint(fullhd) {
+
+    background: thistle;
+  }
+}

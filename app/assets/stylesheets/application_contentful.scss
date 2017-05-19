@@ -156,9 +156,7 @@
 @import 'redesign/generic/helpers';
 
 // Contentful
-@import "contentful/sass/utilities/_all";
-@import "contentful/sass/grid/_all";
-@import "contentful/sass/elements/box";
+@import 'contentful/contentful';
 
 .tile {
   color: #fff;

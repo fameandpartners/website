@@ -1,0 +1,5 @@
+// overrides
+$tablet: 768px;       // grow 'til $desktop
+$desktop: 1280px;     // fixed 'til $widescreen
+$widescreen: 1440px;  // grow 'til $fullhd
+$fullhd: 1920px;      // fixed past $fullhd
