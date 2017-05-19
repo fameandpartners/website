@@ -17,6 +17,7 @@ module Orders
         "shipment_date ",
         "fabrication_state ",
         "style (款号)",
+        "extended_style_number (扩展样式号码)",
         "style_name ",
         "factory (工厂)",
         "color (颜色)",
