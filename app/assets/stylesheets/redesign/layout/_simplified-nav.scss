@@ -105,38 +105,37 @@
   }
 
   // Overwrites
-  &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-    margin: 0 15px;
-    display: inline;
-    font-size: 1.3rem;
-    letter-spacing: 0.05rem;
-  }
+  &.nav-menu-container .home-menu .nav-main-menu {
 
-  @media only screen and (min-width: 1320px) {
-    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-      margin: 0 25px;
+    span:not(.logo) {
+      margin: 0 15px;
+      display: inline;
+      font-size: 1.3rem;
+      letter-spacing: 0.05rem;
+
+      @media only screen and (min-width: 1320px) {
+        margin: 0 25px;
+      }
+
+      @media only screen and (max-width: 1320px) {
+        margin: 0 12px;
+      }
+
+      @media only screen and (max-width: 1140px) {
+        font-size: 1.15rem;
+        letter-spacing: 0;
+      }
+
     }
-  }
 
-  @media only screen and (max-width: 1320px) {
-    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-      margin: 0 12px;
+    span:first-child {
+      margin-left: 0px;
     }
-  }
 
-  @media only screen and (max-width: 1140px) {
-    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-      font-size: 1.15rem;
-      letter-spacing: 0;
+    span:last-child {
+      margin-right: 0px;
     }
-  }
 
-  &.nav-menu-container .home-menu .nav-main-menu span:first-child {
-    margin-left: 0px;
-  }
-
-  &.nav-menu-container .home-menu .nav-main-menu span:last-child {
-    margin-right: 0px;
   }
 
   .col .cta-link {
