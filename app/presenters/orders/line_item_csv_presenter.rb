@@ -115,6 +115,10 @@ module Orders
         end
       end
 
+      def extended_style_number
+        global_sku.data.try(:[], 'extended-style-number')
+      end
+
       private
 
       def shipping_address_line
