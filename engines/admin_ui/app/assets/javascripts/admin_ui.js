@@ -14,6 +14,7 @@
 //= require inspinia-rails
 //= require jquery-ui
 //= require chosen-jquery
+//= require jquery_ujs
 
 //= require react
 //= require react_ujs

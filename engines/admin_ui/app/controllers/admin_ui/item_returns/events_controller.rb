@@ -45,13 +45,23 @@ module AdminUi
         form_data = { user: current_admin_user.email }.merge(params[:event_data])
 
         if event_type
-          @event = event_for(item_return_id: params[:item_return_id])
-          @form  = form_class(event_type).new(@event)
+          if event_type == :refund
+            result = RefundService.new(item_return_id: params[:item_return_id], refund_data: form_data).process
 
-          if @form.validate(form_data) && @form.save
-            redirect_to @event.item_return
+            if result[:status] == :success
+              redirect_to item_return, notice: 'Refund created'
+            else
+              redirect_to item_return, alert: result[:message]
+            end
           else
-            redirect_to item_return, alert: "Can't create Event"
+            @event = event_for(item_return_id: params[:item_return_id])
+            @form  = form_class(event_type).new(@event)
+
+            if @form.validate(form_data) && @form.save
+              redirect_to @event.item_return
+            else
+              redirect_to item_return, alert: "Can't create Event"
+            end
           end
         else
           redirect_to item_return, alert: "No Event Type #{event_type}"
