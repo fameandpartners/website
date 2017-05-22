@@ -1,13 +1,13 @@
 - content_for :head do
-  meta property="og:site_name" content="Fame & Partners - Beautiful dresses crafted from red carpet looks"
+  meta property="og:site_name" content="Fame and Partners - Beautiful dresses crafted from red carpet looks"
   meta property="og:image" content="#{absolute_image_url(image_path('image-landing.jpg'), 'http')}"
   meta property="og:locale" content="en_US"
   meta property="og:title" content="Win a $1000 Celebrity Inspired Formal Outfit"
   meta property="og:type" content="website"
-  meta property="og:description" content="Win a $1000 Celebrity Inspired Formal Outfit. Fame & Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
+  meta property="og:description" content="Win a $1000 Celebrity Inspired Formal Outfit. Fame and Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
   meta name="twitter:card" content="Win $1000 Celebrity Inspired Formal Outfit"
-  meta name="twitter:title" content="Fame & Partners"
-  meta name="twitter:description" content="Win $1000 Celebrity Inspired Formal Outfit. Fame & Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
+  meta name="twitter:title" content="Fame and Partners"
+  meta name="twitter:description" content="Win $1000 Celebrity Inspired Formal Outfit. Fame and Partners is a new online shopping destination providing celebrity-inspired looks for high school formals."
 
 javascript:
   share_url = '#{ raw @competition_share_url }';
@@ -54,13 +54,13 @@ javascript:
         span match
       .text
         .title Promocode:
-        .code 
+        .code
           'GREGG
-          span.pink 
+          span.pink
             '25
         = link_to 'share', '#', class: 'btn mid empty border send-to-friends'
     .page-title-secondary
-      h2.bordered 
+      h2.bordered
         span Gregg’s favourite dresses
 
     .category-catalog.products
@@ -71,7 +71,7 @@ javascript:
               - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
                 = render 'spree/products/cached_product', product: product
         - else
-          .not-found Sorry, no dresses match your criteria  
+          .not-found Sorry, no dresses match your criteria
 
     .page-title-secondary
       h2 Recommended DRESSES
@@ -86,7 +86,7 @@ javascript:
           .grid-3
             - cache [:shared, :product, product.id], :expires_in => configatron.cache.expire.long do
               = render 'spree/products/cached_product', product: product
-    
+
 
     .page-title-secondary
       h2 more dresses
@@ -96,7 +96,7 @@ javascript:
       .bg-elem-1
       .bg-elem-2
       .bg-elem-3
-    
+
     .category-catalog
       .row
         - @dresses.each do |product|
