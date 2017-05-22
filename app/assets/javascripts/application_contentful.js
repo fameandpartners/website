@@ -1,7 +1,7 @@
 //---------
 // Our code
 //---------
-// require libs/typekit.min
+//= require libs/typekit.min
 // require jquery_ujs
 // require jquery-ui/datepicker
 // require jquery-fileupload/vendor/jquery.ui.widget
