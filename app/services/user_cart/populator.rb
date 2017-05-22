@@ -27,7 +27,6 @@ class Populator
   end
 
   def populate
-binding.pry
     validate!
     if personalized_product?
       add_personalized_product
