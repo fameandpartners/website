@@ -23,7 +23,6 @@ class UserCart::ProductsController < UserCart::BaseController
     result = cart_populator.populate
 
     if result.success
-      # ab_finished(:add_to_cart)
       if spree_user_signed_in? && current_order.user.nil?
         self.extend(Spree::Core::ControllerHelpers::Order)
         associate_user
