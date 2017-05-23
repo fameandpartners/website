@@ -4,7 +4,7 @@ module CheckoutHelper
     checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])
 
     if checkout_zone && checkout_zone.kind == 'country'
-      countries = Rails.cache.fetch("countries_in_zone_#{checkout_zone.name}", expires_in: 24.hours) do |variable|
+      countries = Rails.cache.fetch("countries_in_zone_#{checkout_zone.name}", expires_in: 24.hours) do
         checkout_zone.country_list
       end
     else
