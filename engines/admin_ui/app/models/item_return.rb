@@ -13,5 +13,8 @@ class ItemReturn < ActiveRecord::Base
 
   attr_accessible :uuid
   validates :uuid, uniqueness: true
+
+  scope :incomplete, where('refund_status IS NULL OR refund_status != ?', 'Complete')
+  scope :refund_queue, incomplete.where(acceptance_status: 'approved', order_payment_method: 'Pin')
 end
 

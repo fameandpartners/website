@@ -99,7 +99,9 @@ class ItemReturnEvent < ActiveRecord::Base
 
     validates :user, presence: true
     validates :refund_method, presence: true
-    validates :refund_amount, presence: true, numericality: true
+    validates :refund_amount,
+              presence: true,
+              numericality: { less_than_or_equal_to: ->(event) { event.item_return.line_item.price } }
   end
 
   event_type :record_refund do

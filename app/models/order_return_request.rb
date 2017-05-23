@@ -7,7 +7,8 @@ class OrderReturnRequest < ActiveRecord::Base
 
   has_many :return_request_items
   accepts_nested_attributes_for :return_request_items
-
+  validates_uniqueness_of :order_id
+  
   def build_items
     order.line_items.each do |line_item|
       return_request_items.build(:order_return_request => self, :line_item => line_item)
