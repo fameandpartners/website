@@ -121,37 +121,37 @@ section.order-details
               h3 What happens next?
 
               .item.step-counter
-                h4.step-title Your Dress is Being Custom Cut & Made
-                p Our team of artisan seamstresses make your dress from start to finish.
+                h4.step-title YOUR ITEM IS MADE-TO-ORDER.
+                p Our team of skilled artisans will create your garment from start to finish.
                 = link_to why_us_path, class: 'sidebar-link'
-                  | Learn more about our processes
+                  | Learn more
                   i.link-icon.fa.fa-chevron-right
 
               .item.step-counter
-                h4.step-title Your dress is shipped
-                p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
+                h4.step-title YOUR ITEM IS SHIPPED.
+                p Once your order has been made and shipped, we’ll notify you via email.
 
               .item.step-counter
-                h4.step-title Expect Express Making items in 6-9 business days
-                p You'll be able to track your delivery with your shipping confirmation.
+                h4.step-title EXPECT YOUR EXPRESS ORDER IN 6-9 BUSINESS DAYS
+                p You’ll be able to track the delivery date with your shipping confirmation.
                 = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
-                  | Learn more about Shipping and Delivery
+                  | Learn more
                   i.link-icon.fa.fa-chevron-right
 
               .item.step-counter
                 h4.step-title
-                  | Expect Standard delivery:
-                  |  #{order.projected_delivery_date.strftime('%d of %b, %Y')}
-                p You'll be able to track your delivery with your shipping confirmation.
+                  | EXPECT YOUR STANDARD ORDER ON
+                  |  #{order.projected_delivery_date.strftime('%d of %b, %Y')}.
+                p You’ll be able to track the delivery date with your shipping confirmation.
                 = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
-                  | Learn more about Shipping and Delivery
+                  | Learn more
                   i.link-icon.fa.fa-chevron-right
 
               .item.step-counter
-                h4.step-title It arrives!
-                p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
+                h4.step-title YOUR ITEM ARRIVES.
+                p Keep all packaging and leave the tags on just in case you need to return.
                 = link_to faqs_path(anchor: 'collapse-returns-policy'), class: 'sidebar-link'
-                  | See our Return Policy
+                  | Our return policy
                   i.link-icon.fa.fa-chevron-right
 
 - if successfully_ordered || params[:force_tracking]
