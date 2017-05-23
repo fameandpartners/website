@@ -63,25 +63,25 @@ module Search
 binding.pry
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
-        filter :bool, :must => { :term => { 'product.is_deleted' => false } }
-        filter :bool, :must => { :term => { 'product.is_hidden' => false } }
-        filter :exists, :field => :available_on
-        filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
+        filter :bool, :must => { :term => { 'product.is_deleted' => false } } #
+        filter :bool, :must => { :term => { 'product.is_hidden' => false } } #
+        filter :exists, :field => :available_on #
+        filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } } #
 
         # Filter by colors
         if colors.present?
-          filter :terms, 'color.id' => colors
+          filter :terms, 'color.id' => colors #
         end
 
         # Outerwear filter
-        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
+        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }  #
 
         # only available items
-        filter :bool, :must => { :term => { 'product.in_stock' => true } }
+        filter :bool, :must => { :term => { 'product.in_stock' => true } }  #
 
         # not defined /  only false / only true
         unless fast_making.nil?
-          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }
+          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }  #
         end
 
         if taxons.present?
@@ -89,7 +89,7 @@ binding.pry
           # We need to filter products by exact ids of taxon records
           # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
           taxons_terms = taxons.map do |taxon_id|
-            { term: { 'product.taxon_ids' => taxon_id } }
+            { term: { 'product.taxon_ids' => taxon_id } }   #
           end
 
           filter :bool, { must: taxons_terms }

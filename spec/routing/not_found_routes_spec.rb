@@ -19,7 +19,7 @@ describe 'Not found requests', type: :request do
 
       expect(response.body).to match("this page doesn't exist")
       expect(response.body).to match('MY ACCOUNT')
-      expect(response.body).to match('Fame &amp; Partners. All rights reserved.')
+      expect(response.body).to match('Fame and Partners. All rights reserved.')
       expect(response).to have_http_status(404)
     end
 

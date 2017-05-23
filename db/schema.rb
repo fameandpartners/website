@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170420003828) do
+ActiveRecord::Schema.define(:version => 20170518161536) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -145,14 +145,15 @@ ActiveRecord::Schema.define(:version => 20170420003828) do
     t.integer  "position"
     t.string   "name"
     t.string   "presentation"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
     t.string   "customisation_type",                               :default => "cut"
+    t.string   "point_of_view",                                    :default => "front"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -358,6 +359,26 @@ ActiveRecord::Schema.define(:version => 20170420003828) do
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
+
+  create_table "layer_cads", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "position"
+    t.string   "base_image_name"
+    t.string   "layer_image_name"
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
+    t.string   "layer_image_file_name"
+    t.string   "layer_image_content_type"
+    t.integer  "layer_image_file_size"
+    t.datetime "layer_image_updated_at"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "customizations_enabled_for", :default => "--- []\n"
+    t.integer  "width"
+    t.integer  "height"
+  end
 
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
@@ -1592,7 +1613,7 @@ ActiveRecord::Schema.define(:version => 20170420003828) do
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
-    t.string   "delivery_period",   :default => "7 - 10 business days"
+    t.string   "delivery_period",   :default => "8 - 10 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

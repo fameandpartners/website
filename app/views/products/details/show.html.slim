@@ -26,7 +26,7 @@ ruby:
       images: #{raw @product.all_images.to_json},
       sizeChart: #{raw @product.size_chart_data.to_json},
       siteVersion: #{raw @current_site_version.name.to_json},
-      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} }
+      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
     };
 
 = content_for :inline_javascript do

@@ -73,7 +73,7 @@ var Notification = React.createClass({
   render: function () {
     var notificationClasses = classNames({
       'wedding-atelier-notification': true,
-      'show': this.state.show
+      'open': this.state.show
     });
 
     return (

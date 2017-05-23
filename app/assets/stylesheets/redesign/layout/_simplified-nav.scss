@@ -102,11 +102,17 @@
 
   // Overwrites
   &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-    margin: 0 20px;
     display: inline;
     font-size: 1.3rem;
     letter-spacing: 0.05rem;
   }
+
+  @media only screen and (min-width: 1160px) {
+    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
+      margin: 0 26px;
+    }
+  }
+
   &.nav-menu-container .home-menu .nav-main-menu span.lookbook {
     margin-right: 0px;
   }

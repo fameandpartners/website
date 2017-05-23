@@ -16,7 +16,7 @@
 @mixin pdp-side-menu-mobile {
   position: fixed;
   bottom: 0;
-  padding: 0 30px;
+  padding: 0 30px 0 15px;
   overflow-y: scroll;
   border-top: solid $c-neutral-2 2px;
   z-index: 1001;
@@ -44,9 +44,10 @@
   }
 
   .height-selection {
-    text-decoration: uppercase;
+    margin-bottom: 15px;
+  }
+  .height-selection .metric-container {
     font-size: 1.3rem;
-    padding-bottom: 30px;
   }
   .size-selection {
     .error-filler-height {

@@ -66,12 +66,21 @@
     margin-top: 25px;
   }
 
+  .middle-carousel-item {
+    padding: 15px;
+  }
+
   // START - desktop
   @media (min-width: $bootstrap-lg-width) {
 
     // NOTE: this is just a workaround for a Design request.
     .extra-padding-top {
       padding-top: 50px;
+    }
+
+    // hacks on hacks on hacks
+    .middle-carousel-item .extra-padding-left {
+      padding-left: 0 !important;
     }
 
   }

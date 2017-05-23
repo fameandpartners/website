@@ -116,7 +116,7 @@ namespace :dev do
       amount:             0.075,
       included_in_price:  false,
       show_rate_in_label: false,
-      calculator:         Taxes::CalifornianCalculator.new
+      calculator:         Spree::Calculator::CalifornianTaxRate.new
     })
   end
 end

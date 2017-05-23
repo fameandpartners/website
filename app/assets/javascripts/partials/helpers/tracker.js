@@ -6,11 +6,12 @@ window.track = {
     this.ga('send', 'pageview', page_url);
   },
 
-  event: function (category, action, label, value) {
+  event: function (category, action, label, value, nonInteraction) {
     var event_params = {
       hitType: 'event',
       eventCategory: category,
-      eventAction: action
+      eventAction: action,
+      nonInteraction: nonInteraction,
     };
 
     if (label != null) {
@@ -99,5 +100,9 @@ window.track = {
 
   AddPromocodeFailure: function (label) {
     this.event('AddPromocode', 'Failure', label);
-  }
+  },
+
+  antiFastTrack: function (action, label) {
+    this.event('Collection', action, label, false);
+  },
 };

@@ -40,11 +40,13 @@ nav.navbar.navbar-default.visible-xs.visible-sm
               i.fa.fa-chevron-left
               .back BACK
 
-          li
-            .content-wrap
-              .container-cta
-                .row-cta
-                  = render partial: 'layouts/redesign/mega_menu/fame_weddings'
+          li.grey-item
+            .text Featured
+            = render partial: 'layouts/redesign/header/simplified_nav/wedding_featured'
+
+          li.grey-item
+            .text Services
+            = render partial: 'layouts/redesign/header/simplified_nav/wedding_services'
 
     div#moodboards-menu
       ul.nav.navbar-nav
@@ -67,14 +69,17 @@ nav.navbar.navbar-default.visible-xs.visible-sm
         .text SHOP ALL
         .arrow
           i.fa.fa-chevron-right
+      li.normal-item
+        .text
+          = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
       - if Features.active?(:fameweddings)
         li.normal-item#wedding-menu-open
-          .text THE WEDDING SHOP
+          .text WEDDING SHOP
           .arrow
             i.fa.fa-chevron-right
       li.normal-item
         .text
-          = link_to 'THE EVENING SHOP', the_evening_shop_landing_page_path
+          = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       li.normal-item
         .text
           = link_to 'ACCOUNT LOGIN', profile_path

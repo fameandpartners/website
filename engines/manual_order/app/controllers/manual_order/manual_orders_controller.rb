@@ -43,6 +43,10 @@ module ManualOrder
       render json: manual_order_filter.color_options | manual_order_filter.custom_colors
     end
 
+    def heights_options
+      render json: manual_order_filter.heights_options
+    end
+
     def customisations_options
       render json: manual_order_filter.customisations_options
     end

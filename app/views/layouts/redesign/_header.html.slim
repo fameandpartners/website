@@ -61,7 +61,7 @@ ruby:
 
       = render 'layouts/redesign/header/locale_selector/mobile'
 
-      .container-fluid
+      .container-fluid.mobile-header-fluid
         #masthead-container.cfix
           .masthead.pull-left.visible-xs.visible-sm
             nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
@@ -71,7 +71,7 @@ ruby:
 
           .mobile-logo-area.visible-xs.visible-sm
             = link_to root_path do
-              = image_tag src='logo/new-logo.svg', :alt => 'Fame & Partners'
+              = image_tag src='logo/new-logo.svg', :alt => 'Fame and Partners'
 
           .masthead.nav-icons.pull-right.visible-xs.visible-sm
             span.shopping-bag-wrapper.js-header-toolbar

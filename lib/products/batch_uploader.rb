@@ -18,6 +18,7 @@ require 'log_formatter'
 module Products
   class BatchUploader
     extend Forwardable
+    DEFAULT_HEIGHT_MAPPING_COUNT = 3
     def_delegators :@logger, :info, :debug, :warn, :error, :fatal
 
     attr_reader :parsed_data, :keep_taxons, :available_on
@@ -61,6 +62,10 @@ module Products
       13
     end
 
+    def has_cad_data?( file_path )
+      cad_data_present?( load_excel_book( file_path ) )
+    end
+    
     def new_this_week_taxon_id
       Spree::Taxon.where(name: 'New This Week').first.try(:id)
     end
@@ -69,15 +74,8 @@ module Products
       info "Loading Excel File #{file_path}"
       return if file_path.nil?
 
-      if file_path =~ /\.xls$/
-        book = Roo::Excel.new(file_path, false, :warning)
-      elsif file_path =~ /\.xlsx$/
-        # false - packed, warning - ignore not xslx format
-        book = Roo::Excelx.new(file_path, false, :warning)
-      else
-        raise 'Invalid file type'
-      end
-
+      book = load_excel_book( file_path )
+      
       book.default_sheet = book.sheets.first
       columns            = get_column_indices(book)
       rows               = get_rows_indexes(book, columns)
@@ -87,12 +85,65 @@ module Products
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
         processed = process_raw_row_data(raw)
-
-        build_item_hash(processed, raw)
+        item_hash = build_item_hash(processed, raw)
       end
+      add_cad_data( book, @parsed_data ) if cad_data_present?( book )
+      
       info "Parse Complete"
     end
 
+    def add_cad_data( book, parsed_data )
+      total_rows = book.last_row("CADs")
+      columns = {}
+      style_data = {}
+      
+      (1..book.last_column( "CADs" )).each do |i|
+        columns[book.cell( 1, i, "CADs" ).parameterize.underscore] = i
+      end
+
+      (2..total_rows).each do |i|
+        current_row = book.row( i, "CADs" )
+        current_style_number = current_row[columns["style"] - 1]
+        style_data[current_style_number] = [] if style_data[current_style_number].nil?
+        style_array = style_data[current_style_number]
+        customizations_enabled_for = [map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_2"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_3"] - 1] ),
+                                      map_to_true_or_false( current_row[columns["customisation_4"] - 1] )]
+                                      
+        style_array << {customizations_enabled_for: customizations_enabled_for, 
+                        base_image_name: current_row[columns["base_image_name"] - 1] ,
+                        layer_image_name: current_row[columns["layer_image"] - 1],
+                        width: current_row[columns["width"] - 1],
+                        height: current_row[columns["height"] - 1]
+        }
+        
+      end
+      parsed_data.each do |style|
+        style[:cads] = style_data[style[:sku]]
+      end
+    end
+
+    def map_to_true_or_false( value )
+      value == "Selected"
+    end
+    
+    def load_excel_book( file_path )
+      if file_path =~ /\.xls$/
+        Roo::Excel.new(file_path, false, :warning)
+      elsif file_path =~ /\.xlsx$/
+        # false - packed, warning - ignore not xslx format
+        Roo::Excelx.new(file_path, false, :warning)
+      else
+        raise 'Invalid file type'
+      end
+    end
+    
+    def cad_data_present?(book)
+      !book.sheets.index( "CADs" ).nil?
+    end
+
+    
     private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
@@ -125,6 +176,7 @@ module Products
       raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
       raw[:fit]                        = book.cell(row_num, columns[:fit])
       raw[:size]                       = book.cell(row_num, columns[:size])
+      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT
       raw[:fabric]                     = book.cell(row_num, columns[:fabric])
       raw[:product_type]               = book.cell(row_num, columns[:product_type])
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
@@ -146,7 +198,7 @@ module Products
       # Additional
       raw[:song_link]                  = book.cell(row_num, columns[:song_link])
       raw[:song_name]                  = book.cell(row_num, columns[:song_name])
-
+      
       raw[:customizations] = []
       columns[:customizations].each_with_index do |customization, index|
         raw[:customizations] << {
@@ -272,6 +324,7 @@ module Products
           style_notes:                raw[:style_notes],
           care_instructions:          raw[:care_instructions],
           size:                       raw[:size],
+          height_mapping_count:       raw[:height_mapping_count],
           fit:                        raw[:fit],
           fabric:                     raw[:fabric],
           product_type:               raw[:product_type],
@@ -351,7 +404,8 @@ module Products
           product_details:            /product details/i,
           short_description:          /short description/i,
           standard_days_for_making:   /standard days for making/i,
-          customised_days_for_making: /customised days for making/i
+          customised_days_for_making: /customised days for making/i,
+          height_mapping_count: /height mapping count/i
       }
 
       conformities.each do |key, regex|
@@ -432,14 +486,16 @@ module Products
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
-
+          
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
           add_product_song(product, args[:song].symbolize_keys || {})
-
+          add_product_layered_cads( product, args[:cads] || [] )
+          add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
+          
           product
         end
       end.compact
@@ -454,8 +510,8 @@ module Products
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
       section_heading = get_section_heading(sku: args[:sku], name: args[:name])
-      info "#{section_heading} Building"
-
+      info "#{section_heading} Building #{sku}"
+      
       raise 'SKU should be present!' unless sku.present?
 
       master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
@@ -514,6 +570,14 @@ module Products
       product
     end
 
+    def add_product_layered_cads( product, cads )
+      info "Processing Cads #{cads}"
+      product.layer_cads = []
+      cads.each_with_index do |cad, index|
+        product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
+      end
+    end
+    
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       allowed = [:style_notes,
@@ -551,6 +615,25 @@ module Products
       product
     end
 
+    def add_product_height_ranges( product, height_mapping_count )
+      master_variant = product.master
+      master_variant.style_to_product_height_range_groups = []
+      product_height_groups = []
+      
+      if( height_mapping_count == 3 )
+        product_height_groups = ProductHeightRangeGroup.default_three
+      elsif( height_mapping_count == 6 )
+        product_height_groups = ProductHeightRangeGroup.default_six
+      else
+        raise "Unknown height mapping count"
+      end
+
+      product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }
+      
+      master_variant.save
+    end
+    
+      
     def add_product_color_options(product, recommended_colors:, available_colors:)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       custom_colors = available_colors - recommended_colors

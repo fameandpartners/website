@@ -1,7 +1,7 @@
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/april-13-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-1-mob.jpg"
-= link_to high_contrast_collection_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+- current_tile_image = "homepage/hero-featured/may-12-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-12-featured-1-mob.jpg"
+= link_to the_anti_fast_fashion_shop_landing_page_path + "?hpbanner1", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Anti-Fast Fashion Shop" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -12,17 +12,21 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4
-          .copy-wrap.copy-align--top.extra-padding-left
-            h2.heading.no-margin-md.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Color <em>pop.</em>
-              span.sub-heading
-                | Style gets loud in super-saturated hues of red, pink, and navy. <em class="link-underline">Shop what’s new.</em>
+        .col.lg-4.col-md-5.col-md-offset-3
+          .copy-wrap.extra-padding-left
+            h2.heading
+              span.title.title--small.hidden-xs.hidden-sm style="line-height: 130%"
+                | Introducing<br/>
+                | <em>The Anti-Fast Fashion Shop.</em><br/>
+                | Everyday must haves,<br class="visible-lg" /> ethically made-to-order.<br>
+                | <span class="h6 copy-highlight link-underline">SHOP NOW</span>
+              span.sub-heading.hidden-md.hidden-lg
+                | Everyday must haves, ethically made-to-order. <br><span class="h6 copy-highlight">SHOP NOW</span>
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/april-13-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-2-mob.jpg"
-= link_to modern_collection_landing_page_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Evening Collection" }
+- current_tile_image = "homepage/hero-featured/may-18-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-18-featured-2-mob.jpg"
+= link_to modern_bridesmaid_collection_path + "?hpbanner2", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Modern Bridesmaid Dresses" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -33,33 +37,46 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-lg-3
-          .copy-wrap.copy-align--top.extra-padding-left
+        .col-md-4.col-lg-4.pull-right.hidden-xs.hidden-sm
+          .copy-wrap
             h2.heading.no-margin-md
-              span.sub-heading.sub-heading--large.no-margin-md.no-padding
-                  | This dress was <em>made</em> for you, darling. <em class="link-underline">Customize</em> your evening look.
-
-// Carousel Item 3
-- current_tile_image = "homepage/hero-featured/april-13-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/april-13-featured-3-mob.jpg"
-= link_to bespoke_bridal_collection_landing_page_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Bespoke Bridal" }
-  picture.media-wrap
-    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-    img src="#{image_path(current_tile_image)}" srcset="
-      #{image_path(current_tile_image_mob)} 991w,
-      #{image_path(current_tile_image)} 992w"
-
-  .content-wrap
-    .container-fluid
-      .row
-        .col-md-5.col-md-offset-6
-          .copy-wrap.text-center
-            h2.heading.no-margin-md
-              span.title.title--large.hidden-xs.hidden-sm Elevated, elegant, and a bit irreverent.
-              span.sub-heading.hidden-md.hidden-lg
-                  | Elevated, elegant, and a bit irreverent. <em class="link-underline">Shop</em> Bespoke Bridal.
+              span.title.title--large <em>Break</em><br/> tradition.
+              span.sub-heading
+                | Find a bridesmaid dress you<br/><em>actually</em> want to wear.
 
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">Bespoke Bridal</span>
+                | <span class="copy-highlight">Customize Now</span>
+
+        .col-md-4.col-lg-4.hidden-md.hidden-lg
+          .copy-wrap
+            h2.heading.no-margin-md
+              span.sub-heading
+                | Find a bridesmaid dress you <em>actually</em> want to wear. <br/><span class="h6 copy-highlight">Customize Now</span>
+
+// Carousel Item 3
+- current_tile_image = "homepage/hero-featured/may-18-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/may-18-featured-3-mob.jpg"
+= link_to high_contrast_collection_path + "?hpbanner3", class: "main-hero-wrap hero-wrap copy-left", data: { description: "High Contrast" }
+  picture.media-wrap
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
+
+  .content-wrap
+    .container-fluid
+      .row
+        .col-md-4.col-md-offset-4
+          .copy-wrap
+            h2.heading.no-margin-md
+              span.title.title--large.hidden-xs.hidden-sm You're <em>not</em><br/> meant to<br/> blend in.
+              span.sub-heading.hidden-xs.hidden-sm
+                | Especially when you go out.
+              span.sub-heading.hidden-md.hidden-lg
+                | You're <em>not</em> meant to blend in. Especially when you go out. <br/><span class="h6 copy-highlight">Shop High Contrast</span>
+
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | <span class="copy-highlight">Shop High Contrast</span>

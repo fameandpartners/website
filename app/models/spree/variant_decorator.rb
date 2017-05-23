@@ -1,7 +1,9 @@
 Spree::Variant.class_eval do
   has_one :discount, foreign_key: :variant_id
+  has_many :style_to_product_height_range_groups, foreign_key: "style_number", primary_key: "sku"
 
   accepts_nested_attributes_for :prices
+
 
   attr_accessible :product_factory_name, :prices_attributes
 

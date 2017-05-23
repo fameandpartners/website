@@ -94,5 +94,5 @@ Procfile.*
 # Ignore all Emacs Temp Files
 *#*
 
-# Dev local storage of assets
-/spree
+# Ignore locally created paperclip files
+spree

@@ -105,35 +105,38 @@ var DressPreview = React.createClass({
   },
 
   getImages: function(imagesStyles){
-    var images;
     if(this.isCustomDress()){
-      images = [
-        imagesStyles.front.large,
-        imagesStyles.back.large,
-        imagesStyles.real.large[0]
-      ]
+      if(this.isBackPov()){
+        return [imagesStyles.back.large, imagesStyles.front.large, imagesStyles.real.large[0]];
+      }else{
+        return [imagesStyles.front.large, imagesStyles.back.large, imagesStyles.real.large[0]];
+      }
     }else{
-      images = imagesStyles.real.large
+      return imagesStyles.real.large;
     }
-    return images;
   },
 
   getThumbnails: function(imagesStyles){
-    var thumbnails;
     if(this.isCustomDress()){
-      thumbnails = [
-        imagesStyles.front.thumbnail.white,
-        imagesStyles.back.thumbnail.white,
-        imagesStyles.real.thumbnails[0]
-      ]
+      if(this.isBackPov()){
+        return [imagesStyles.back.thumbnail.white, imagesStyles.front.thumbnail.white, imagesStyles.real.thumbnails[0]];
+      }else{
+        return [imagesStyles.front.thumbnail.white, imagesStyles.back.thumbnail.white, imagesStyles.real.thumbnails[0]];
+      }
     }else{
-      thumbnails = imagesStyles.real.thumbnails;
+      return imagesStyles.real.thumbnails;
     }
-    return thumbnails;
   },
 
   getImage: function(images){
     return this.isCustomDress() ? images.front.normal : images.real.large[0];
+  },
+
+  isBackPov: function(){
+    var fitPov = this.props.selectedOptions.fit && this.props.selectedOptions.fit.point_of_view,
+        stylePov = this.props.selectedOptions.style && this.props.selectedOptions.style.point_of_view;
+
+    return (fitPov === 'back' || stylePov === 'back')
   },
 
   render: function() {

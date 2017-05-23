@@ -11,6 +11,7 @@ javascript:
 
     var callback = function() {
       iec(iecData.url, iecData.id, iecData.payload);
+      $(document.body).addClass('iec-open');
     };
 
     var head   = document.getElementsByTagName('head')[0];

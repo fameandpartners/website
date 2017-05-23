@@ -6,11 +6,10 @@ module Search
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
-
       # some kind of documentation
       colors            = options[:color_ids]
       body_shapes       = options[:body_shapes]
-      taxons_ids        = options[:taxon_ids]
+      taxon_ids         = options[:taxon_ids]
       exclude_products  = options[:exclude_products]
       discount          = options[:discount]
       query_string      = options[:query_string]
@@ -25,7 +24,6 @@ module Search
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
 
       product_orderings = self.product_orderings(currency: currency)
-
 
       product_ordering = product_orderings.fetch(order) do
         if query_string.present?
@@ -64,6 +62,9 @@ module Search
             if colors.present?
               term 'color.id' => colors
             end
+          end
+          filter do
+            exists field: 'available_on'
           end
         end
       end
