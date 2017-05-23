@@ -31,6 +31,7 @@ module Search
     end
 
     def self.build(options = {})
+      binding.pry
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
@@ -92,7 +93,7 @@ binding.pry
             { term: { 'product.taxon_ids' => taxon_id } }   #
           end
 
-          filter :bool, { must: taxons_terms }
+          filter :bool, { must: taxons_terms }  #
         end
 
         # exclude items marked not-a-dress

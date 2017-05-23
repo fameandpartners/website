@@ -49,12 +49,25 @@ module Search
                 if fast_making.present?
                   term 'product.fast_making' => fast_making
                 end
+                # We need to filter products by exact ids of taxon records
+                # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
+                # if taxon_ids.present?
+                #   taxon_terms = taxon_ids.map do |tid|
+                #     { term: { 'product.taxon_ids' => tid } }
+                #   end
+                # end
 
-                if taxon_ids.present?
-                  term 'product.taxon_ids' => taxon_ids
+                if exclude_taxon_ids.present?
+
                 end
 
               end
+
+              # exclude items marked not-a-dress
+              must_not do
+                term 'product.taxon_ids' => exclude_taxon_ids
+              end
+
               should do
                 range 'product.available_on' => { :lte => Time.now}
               end
@@ -65,6 +78,7 @@ module Search
           end
           filter do
             exists field: 'available_on'
+
           end
         end
       end
