@@ -64,6 +64,10 @@
 
   .cta-wrapper {
     margin-top: 25px;
+    .btn-featured {
+      font-family: $font-family-secondary !important;
+      font-style: normal;
+    }
   }
 
   .middle-carousel-item {
@@ -94,6 +98,9 @@
     // NOTE: this is just a workaround for a Design request.
     .extra-padding-left {
       padding-left: 55px;
+    }
+    .extra-padding-right {
+      padding-right: 55px;
     }
 
     &.copy-right, &.copy-left {
@@ -226,6 +233,10 @@
         display: none;
       }
 
+    }
+
+    .heading.mobile-heading {
+      margin-top: 0;
     }
 
     .sub-heading span {

@@ -210,4 +210,5 @@ module ApplicationHelper
       height
     end
   end
+
 end
