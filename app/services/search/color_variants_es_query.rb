@@ -33,7 +33,7 @@ module Search
           product_orderings['newest']
         end
       end
-      binding.pry
+
       hash = Elasticsearch::DSL::Search.search do
         query do
           filtered do
@@ -51,21 +51,18 @@ module Search
                 end
                 # We need to filter products by exact ids of taxon records
                 # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
-                # if taxon_ids.present?
-                #   taxon_terms = taxon_ids.map do |tid|
-                #     { term: { 'product.taxon_ids' => tid } }
-                #   end
-                # end
-
-                if exclude_taxon_ids.present?
-
+                if taxon_ids.present?
+                  taxon_terms = taxon_ids.map do |tid|
+                    { term: { 'product.taxon_ids' => tid } }
+                  end
                 end
-
               end
 
               # exclude items marked not-a-dress
-              must_not do
-                term 'product.taxon_ids' => exclude_taxon_ids
+              if exclude_taxon_ids.present?
+                must_not do
+                  term 'product.taxon_ids' => exclude_taxon_ids
+                end
               end
 
               should do
@@ -83,7 +80,7 @@ module Search
         end
       end
 
-
+binding.pry
 
       hash
     end

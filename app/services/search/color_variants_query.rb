@@ -31,7 +31,6 @@ module Search
     end
 
     def self.build(options = {})
-      binding.pry
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
@@ -98,10 +97,11 @@ binding.pry
 
         # exclude items marked not-a-dress
         if exclude_taxon_ids.present?
+          binding.pry
           filter :bool, :must => {
             :not => {
               :terms => {
-                'product.taxon_ids' => exclude_taxon_ids
+                'product.taxon_ids' => exclude_taxon_ids  #
               }
             }
           }
