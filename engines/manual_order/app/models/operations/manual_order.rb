@@ -47,10 +47,18 @@ module Operations
 
     def assign_customer
       user = Spree::User.find(params[:existing_customer])
-      user_last_order = user.orders.complete.last
+
+      new_address_params = address_params.merge(
+        firstname: user.first_name,
+        lastname:  user.last_name,
+        email:     user.email
+      )
+
       order.user = user
-      order.bill_address = user_last_order.bill_address
-      order.ship_address = user_last_order.ship_address
+      order.bill_address = Spree::Address.create(new_address_params)
+      order.ship_address = Spree::Address.create(new_address_params)
+
+      user.update_attribute(:user_data, new_address_params)
     end
 
     def create_customer
