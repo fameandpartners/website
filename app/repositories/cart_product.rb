@@ -22,7 +22,7 @@ class Repositories::CartProduct
         id: product.id,
         color: Repositories::ProductColors.read(color_id),
         customizations: product_customizations.to_a,
-        making_options: product_making_options,
+        making_options: making_options,
         height: height,
         height_value: line_item.personalization&.height_value,
         height_unit: line_item.personalization&.height_unit,
@@ -42,13 +42,13 @@ class Repositories::CartProduct
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: line_item.delivery_period_policy.delivery_period,
+        delivery_period: product.delivery_period, #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
-      result.making_options = product_making_options
+      # result.making_options = product_making_options
       result.available_making_options = available_making_options
       result.height         = height
 
@@ -107,7 +107,7 @@ class Repositories::CartProduct
       end
     end
 
-    def product_making_options
+    def making_options
       line_item.making_options.includes(:product_making_option).map do |option|
         OpenStruct.new(
           id: option.id,
@@ -115,7 +115,8 @@ class Repositories::CartProduct
           name: option.product_making_option.name,
           display_price: option.display_price,
           display_discount: option.display_discount,
-          description: option.description
+          description: option.description,
+          delivery_period: option.display_delivery_period
         )
       end
     end
@@ -128,7 +129,8 @@ class Repositories::CartProduct
           option_type: mo.option_type,
           name: mo.name,
           display_discount: mo.display_discount,
-          description: mo.description
+          description: mo.description,
+          delivery_period: mo.display_delivery_period
         )
       end
     end

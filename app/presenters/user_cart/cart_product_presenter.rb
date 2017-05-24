@@ -28,7 +28,13 @@ module UserCart
       end
 
       result[:making_options] = (making_options || []).map do |option|
-        { id: option.id, name: option.name, display_price: option.display_price.to_s, display_discount: option.display_discount }
+        {
+          id: option.id,
+          name: option.name,
+          display_price: option.display_price.to_s,
+          display_discount: option.display_discount,
+          delivery_period: option.delivery_period
+        }
       end
 
       #filter out fastmaking option if non recommended color is chosen by user

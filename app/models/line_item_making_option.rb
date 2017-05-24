@@ -7,6 +7,7 @@ class LineItemMakingOption < ActiveRecord::Base
   delegate :name, to: :product_making_option, allow_nil: true
   delegate :display_discount, to: :product_making_option
   delegate :description, to: :product_making_option
+  delegate :display_delivery_period, to: :product_making_option
 
   def display_price
     Spree::Money.new(price, currency: currency)

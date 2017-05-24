@@ -60,9 +60,18 @@ class ProductMakingOption < ActiveRecord::Base
 
   def description
     if fast_making?
-      'Delivered in 7 business days'
+      'Delivered in 4 - 6 business days'
     else
       'Delivered in 6 weeks'
+    end
+  end
+
+  # yes, this hardcoding is atrocious.
+  def display_delivery_period
+    if fast_making?
+      '4 - 6 business days'
+    else
+      '6 weeks'
     end
   end
 
