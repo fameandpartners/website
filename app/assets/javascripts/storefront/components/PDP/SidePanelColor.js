@@ -6,12 +6,15 @@ import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import { GetDressVariantId, UpdateUrl } from './utils';
 import _get from 'lodash/get';
+import { trackEvent } from '../../libs/gaTracking'
+import { openColorMenuEvent, selectColorEvent } from '../../libs/gaEventObjects'
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
     super(props, context);
 
     this.onChange = this.onChange.bind(this);
+    this.sendToAnalytics = this.sendToAnalytics.bind(this)
   }
 
   componentWillMount() {
@@ -54,10 +57,12 @@ class SidePanelColor extends SidePanel {
     // this is just very hacky way to connect this with wishlist_item_data
     document.getElementById('pdpWishlistColorId').value = this.props.customize.color.id;
     document.getElementById('pdpWishlistVariantId').value = customize.dressVariantId;
-
+    trackEvent(selectColorEvent, true, customize.color.name)
     this.closeMenu();
   }
-
+  sendToAnalytics() {
+    trackEvent(openColorMenuEvent)
+  }
   render() {
     const AUTO_HIDE = true;
 
@@ -107,14 +112,16 @@ class SidePanelColor extends SidePanel {
     });
     return (
       <div className="pdp-side-container pdp-side-container-color">
-        <a
-          href="javascript:;"
-          className={triggerState}
-          onClick={this.openMenu}
-        >
-          <div className="c-card-customize__content__left">Color</div>
-          <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
-        </a>
+        <div onClick={this.sendToAnalytics}>
+          <a
+            href="javascript:;"
+            className={triggerState}
+            onClick={this.openMenu}
+          >
+            <div className="c-card-customize__content__left">Color</div>
+            <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
+          </a>
+        </div>
 
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
