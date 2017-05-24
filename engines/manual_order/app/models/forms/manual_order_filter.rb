@@ -85,13 +85,13 @@ module Forms
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
-        address1: address.address1,
-        address2: address.address2,
-        city: address.city,
-        zipcode: address.zipcode,
-        phone: address.phone,
-        state_id: address.state_id,
-        country_id: address.country_id
+        address1: user.user_data.fetch(:address1, address.address1),
+        address2: user.user_data.fetch(:address2, address.address2),
+        city: user.user_data.fetch(:city, address.city),
+        zipcode: user.user_data.fetch(:zipcode, address.zipcode),
+        phone: user.user_data.fetch(:phone, address.phone),
+        state_id: user.user_data.fetch(:state_id, address.state_id),
+        country_id: user.user_data.fetch(:country_id, address.country_id)
       }
     end
 
