@@ -7,10 +7,10 @@ import PDPConstants from '../../constants/PDPConstants';
 import { noScrollBody } from '../../helpers/DOM';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
-
 // Libraries
 import Resize from '../../decorators/Resize.jsx';
 import breakpoints from '../../libs/PDPBreakpoints';
+import { trackEvent } from '../../libs/gaTracking'
 
 // Shared Components
 import Select from '../shared/Select';
@@ -19,6 +19,7 @@ import RadioToggle from '../shared/RadioToggle';
 
 // Constants
 const { DRAWERS, INCH_SIZES, UNITS, MIN_CM, MAX_CM } = PDPConstants;
+import { dressSizeOpenedEvent, dressSizeSelectedEvent, selectHeightEvent } from '../../libs/gaEventObjects'
 
 class SidePanelSize extends Component {
   constructor(props, context) {
@@ -40,6 +41,7 @@ class SidePanelSize extends Component {
   openMenu() {
     const { actions } = this.props;
     actions.toggleDrawer(DRAWERS.SIZE_PROFILE);
+    trackEvent(dressSizeOpenedEvent)
   }
 
   closeMenu() {
@@ -104,7 +106,6 @@ class SidePanelSize extends Component {
       this.props.customize.color.id,
       customize.size.id,
     );
-
     this.props.actions.customizeDress(customize);
   }
 
@@ -160,6 +161,8 @@ class SidePanelSize extends Component {
    */
   handleSizeProfileApply() {
     const { customize } = this.props;
+    trackEvent(dressSizeSelectedEvent, true, customize.size.presentation)
+    trackEvent(selectHeightEvent, true, `${customize.height.temporaryHeightValue} ${customize.height.temporaryHeightUnit}`)
     if (this.validateErrors()) {
       this.applyTemporaryFilters();
       this.closeMenu();
@@ -282,7 +285,8 @@ class SidePanelSize extends Component {
     const hasErrors = (customize.errors.height || customize.errors.size);
     return (
       <div>
-        <a className={`c-card-customize__content__left ${hasErrors ? 'error-wrap' : ''}`}>Size Profile</a>
+        <a className={`c-card-customize__content__left ${hasErrors ? 'error-wrap' : ''}`}
+        >Size Profile</a>
         { hasErrors ?
           <span className="error selection c-card-customize__content__right">
             {this.generateErrorMessage(customize.errors, true)}
@@ -319,7 +323,6 @@ class SidePanelSize extends Component {
       );
     });
   }
-
   componentDidUpdate() {
     if (this.props.breakpoint === 'mobile'
     && this.props.customize.drawerOpen === PDPConstants.DRAWERS.SIZE_PROFILE) {
@@ -328,7 +331,6 @@ class SidePanelSize extends Component {
       noScrollBody(false);
     }
   }
-
   render() {
     const { addToBagPending, height, size, errors, drawerOpen } = this.props.customize;
     const MENU_STATE = drawerOpen === DRAWERS.SIZE_PROFILE ? 'pdp-side-menu is-active' : 'pdp-side-menu';
