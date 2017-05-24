@@ -58,7 +58,7 @@ class SiteVersion < ActiveRecord::Base
           locale_unit_code: 'cm',
           locale_unit_symbol: 'cm',
           currency_code: 'AUD'
-        }) 
+        })
       else
         OpenStruct.new({
           size_info_label: 'US Sizes Displayed',
@@ -76,10 +76,14 @@ class SiteVersion < ActiveRecord::Base
 
   def countries
     if self.zone
-      country_ids = zone.zone_members.where(zoneable_type: "Spree::Country").collect(&:zoneable_id)
-      Spree::Country.where(id: country_ids)
+      Rails.cache.fetch("countries_in_zone_#{zone.name}", expires_in: 24.hours) do
+        country_ids = zone.zone_members.where(zoneable_type: "Spree::Country").collect(&:zoneable_id)
+        Spree::Country.where(id: country_ids)
+      end
     else
-      Spree::Country.all
+      Rails.cache.fetch("countries_all", expires_in: 24.hours) do
+        Spree::Country.all
+      end
     end
   rescue
     Spree::Country.all
@@ -90,7 +94,7 @@ class SiteVersion < ActiveRecord::Base
   end
 
   def update_exchange_rate(rate = nil, options = {})
-    if self.currency == Spree::Config.currency 
+    if self.currency == Spree::Config.currency
       puts "site version uses default currency"
       return true
     end
