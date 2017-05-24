@@ -68,6 +68,12 @@ window.ShoppingBag = class ShoppingBag
     else if (makingOptions[0].name.toLowerCase() == 'express delivery')
       return '(+' + makingOptions[0].display_discount + ')'
 
+  makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
+    if (makingOptions[0])
+      return makingOptions[0].delivery_period
+
+    deliveryPeriod
+
   render: () ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
@@ -87,6 +93,7 @@ window.ShoppingBag = class ShoppingBag
           country_code: @country_code,
           customizationPrice: @customizationPrice,
           makingOptionDescriptionTag: @makingOptionDescriptionTag,
+          makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
           value_proposition: @value_proposition,
           shipping_message: @shipping_message,
           date_vars: @date_vars

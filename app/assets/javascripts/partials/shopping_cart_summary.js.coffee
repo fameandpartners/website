@@ -37,11 +37,18 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     else if (makingOptions[0].name.toLowerCase() == 'express delivery')
       return '(+' + makingOptions[0].display_discount + ')'
 
+  makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
+    if (makingOptions[0])
+      return makingOptions[0].delivery_period
+
+    deliveryPeriod
+
   render: () ->
     @$container.html(@template(
       cart: @cart.data,
       customizationPrice: @customizationPrice,
       makingOptionDescriptionTag: @makingOptionDescriptionTag,
+      makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
       value_proposition: @value_proposition,
       shipping_message: @shipping_message
     ))
