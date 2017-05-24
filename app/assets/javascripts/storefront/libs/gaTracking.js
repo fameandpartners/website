@@ -9,17 +9,18 @@ const defaultData = {
   nonInteraction: false,
 };
 
-export function trackEvent(eventData) {
+export function trackEvent(eventData, dynamicStatus, dynamicData) {
+  dynamicStatus ? eventData.label = dynamicData : ''
+  const event = assign({}, defaultData, eventData);
   if (isGAAvailable()){
-    const event = assign({}, defaultData, eventData);
-
     ga('send', 'event', {
       eventCategory: event.category,
       eventAction: event.action,
       eventLabel: event.label,
       nonInteraction: event.nonInteraction,
-    });
+    })
   }
-
-
+  else {
+    console.log("Google analytics not loaded.")
+  }
 }
