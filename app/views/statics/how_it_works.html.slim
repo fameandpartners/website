@@ -41,7 +41,7 @@
         h2 Your perfect dress is made
         p We proceed with manufacturing your dress which includes the following steps:
         ol
-          li Creation of a technical production brief 
+          li Creation of a technical production brief
           li Brief our factory
           li Approve final fabric samples
           li Selection of any trims
@@ -51,25 +51,25 @@
           li Make any tweaks/adjustments
           li Carefully package your dress
           li Post your dress to you!
-        p Every dress comes with a 20% discount voucher to use at Looksmart Alterations, in case you need a small alteration. 
+        p Every dress comes with a 20% discount voucher to use at Looksmart Alterations, in case you need a small alteration.
         - unless spree_user_signed_in?
           .create-now
             h3.calltoaction Get a free quote now!
             - if facebook_authentication_available?
               .signup = link_to 'Start now with Facebook', fb_auth_path, class: 'facebook-signup signup'
-              .signup-link = link_to 'or get started with your email address instead', spree.signup_path 
+              .signup-link = link_to 'or get started with your email address instead', spree.signup_path
             - else
               .signup-link = link_to 'Get started with your email address', spree.signup_path
-        
-        
-  .moreinfo.clearfix 
+
+
+  .moreinfo.clearfix
 
     h2 More Information
-    
+
     h3 Best Fit Process
     p We are committed to helping you get the best possible fit for your dream dress. In our Best Fit Process, we take your measurements and then match them to your closest size block, flagging any issues we can foresee with fit on the style you have requested. We will work with you to design a style that will best fit your shape.
-    a href="#{image_path('sizeguide.pdf')}" title="Fame & Partners Measurement Guide" Click here for our Measurement Guide
-    
+    a href="#{image_path('sizeguide.pdf')}" title="Fame and Partners Measurement Guide" Click here for our Measurement Guide
+
     h3 30 Day Returns
     p If you are not happy with your dress, you may return it to us within 30 days of receipt for a full refund.
 
@@ -78,6 +78,6 @@
 
     h3 Additional Alterations
     p One of the reasons celebrities look great on the red carpet is because their dresses have been tailored to fit their exact measurements. As we fit to your nearest size block, as opposed to made-to-measure, we have established a relationship with Looksmart Alterations to provide you with the opportunity to make final alterations to your dress, should you feel it is required. Each dress comes with a $20 voucher for Looksmart.
-    
-    
-    
+
+
+

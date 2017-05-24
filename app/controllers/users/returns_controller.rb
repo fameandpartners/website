@@ -17,7 +17,7 @@ class Users::ReturnsController < Users::BaseController
     end
 
     if order.present?
-      @order_return = OrderReturnRequest.new(:order => order)
+      @order_return = OrderReturnRequest.find_by_order_id( order.id ) || OrderReturnRequest.new(:order => order)
       @order_return.build_items
 
       @title = "Order ##{ @order_return.number }"
