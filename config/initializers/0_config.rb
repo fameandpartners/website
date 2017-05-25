@@ -1,6 +1,6 @@
 # application base
 configatron.host                    = ENV['APP_HOST']
-configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
+configatron.noreply                 = 'Fame And Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
 configatron.sitemap_url             = "#{ENV['RAILS_ASSET_HOST']}/sitemap/sitemap.xml.gz"
@@ -67,13 +67,20 @@ configatron.bergen do |bergen|
   bergen.password   = ENV['BERGEN_PASSWORD']
 end
 
+configatron.contentful do |contentful|
+  contentful.preview_api_url = ENV['CONTENTFUL_PREVIEW_API_URL']
+  contentful.preview_token = ENV['CONTENTFUL_PREVIEW_TOKEN']
+  contentful.access_token = ENV['CONTENTFUL_ACCESS_TOKEN']
+  contentful.space_id = ENV['CONTENTFUL_SPACE_ID']
+end
+
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
-  
+
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
     expire.normally = 30.seconds

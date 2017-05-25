@@ -48,6 +48,22 @@ nav.navbar.navbar-default.visible-xs.visible-sm
             .text Services
             = render partial: 'layouts/redesign/header/simplified_nav/wedding_services'
 
+    div#culture-menu
+      - cache ['views/layouts/redesign/mega_menu/_culture', 'culture-menu'] do
+        ul.nav.navbar-nav
+          li.normal-item
+            .text.text-back.text-uppercase FAME CULTURE
+            .arrow
+              i.fa.fa-chevron-left
+              .back BACK
+          li.grey-item
+            .text About
+          = render partial: 'layouts/redesign/header/simplified_nav/about'
+
+          li.grey-item
+            .text Community
+          = render partial: 'layouts/redesign/header/simplified_nav/community'
+
     div#moodboards-menu
       ul.nav.navbar-nav
         li.normal-item
@@ -80,6 +96,10 @@ nav.navbar.navbar-default.visible-xs.visible-sm
       li.normal-item
         .text
           = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+      li.normal-item#culture-menu-open
+        .text FAME CULTURE
+        .arrow
+          i.fa.fa-chevron-right
       li.normal-item
         .text
           = link_to 'ACCOUNT LOGIN', profile_path

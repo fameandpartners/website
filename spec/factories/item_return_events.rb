@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :item_return_event do
-    item_return_uuid "MyString"
+    association :item_return
     event_type "MyString"
     data "MyText"
     created_at "2015-06-23 13:49:10"

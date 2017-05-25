@@ -5,7 +5,7 @@ module Bergen
     def received_parcel(item_return:)
       mail(
         to: item_return.contact_email,
-        subject: "Fame & Partners Order #{item_return.order_number} - Package Received"
+        subject: "Fame and Partners Order #{item_return.order_number} - Package Received"
       )
     end
   end

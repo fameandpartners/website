@@ -4,7 +4,7 @@ class FameChainsController < ApplicationController
 
   def new
     @fame_chain = FameChain.new
-    title('Join The Fame Chain - Fame & Partners', default_seo_title)
+    title('Join The Fame Chain - Fame and Partners', default_seo_title)
     description('Join a network of fashion forward free thinking bloggers and increase your cred through being linked.')
   end
 

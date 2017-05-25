@@ -665,7 +665,6 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 

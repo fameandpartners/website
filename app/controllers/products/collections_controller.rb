@@ -89,7 +89,11 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def set_collection_resource
-    @collection_options = parse_permalink(params[:permalink])
+    @collection_options = parse_permalink(params.fetch(:permalink, params[:q]))
+    if @collection_options.blank? && (params[:permalink] != params[:q])
+      @query_string = params[:q]
+    end
+
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
     punch_products unless product_ids.empty?
@@ -136,6 +140,8 @@ class Products::CollectionsController < Products::BaseController
     Products::CollectionResource.new(resource_args).read
   end
 
+  private
+
   def parse_permalink(permalink)
     # Note: remember the route "/*permalink".
     return {} if permalink.blank?
@@ -165,8 +171,6 @@ class Products::CollectionsController < Products::BaseController
     nil
   end
 
-  private
-
   def all_style_options(resource_options:)
     resource_styles = Array.wrap(resource_options[:style])
     filter_styles   = Array.wrap(filter_options[:style])
@@ -193,7 +197,7 @@ class Products::CollectionsController < Products::BaseController
       offset:                          page.offset(custom_product_ids, params[:offset]),
       price_min:                       params[:price_min],
       price_max:                       params[:price_max],
-      query_string:                    params[:q],
+      query_string:                    @query_string,
       # TODO: delete this bad named variable: "remove_excluded_from_site_logic".
       remove_excluded_from_site_logic: page.get(:remove_excluded_from_site_logic)
     }
