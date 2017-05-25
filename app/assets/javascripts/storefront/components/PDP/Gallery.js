@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Scrollspy} from 'react-scrollspy';
 import Slick from 'react-slick';
+import { trackEvent } from '../../libs/gaTracking'
+import { selectPhotoEvent } from '../../libs/gaEventObjects'
 
 class PdpGallery extends React.Component {
   constructor() {
@@ -10,7 +12,6 @@ class PdpGallery extends React.Component {
     this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.calculateOffset = this.calculateOffset.bind(this);
-
     this.state = { loaded: {}, margin: {}, zoom: {} }
   }
 
@@ -18,7 +19,6 @@ class PdpGallery extends React.Component {
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
   }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
@@ -28,7 +28,7 @@ class PdpGallery extends React.Component {
     zoomObj[stateId] = shouldZoom;
     this.setState({ zoom: zoomObj });
   }
-
+ 
   handleLoad(event) {
     let loadedObj = this.state.loaded;
     let marginObj = this.state.margin;
@@ -75,7 +75,6 @@ class PdpGallery extends React.Component {
       return offset;
     }
   }
-
   render() {
     let galleryImages = [];
     let thumbIds = [];
@@ -156,7 +155,7 @@ class PdpGallery extends React.Component {
       thumbIds.push(id);
 
       return (
-        <div className="media-wrap-outer" key={index}>
+        <div className="media-wrap-outer" key={index} onClick={() => this.trackEvent(selectPhotoEvent, true, index)}>
           <div className={`media-wrap ${loadedClass} ${zoomClass}`}>
             <span id={id} className="scrollspy-trigger"></span>
             <img src={image.url} alt={image.alt} id={stateId}
