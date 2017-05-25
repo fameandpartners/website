@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { assign, findIndex, uniqBy } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
+import { trackEvent } from '../../libs/gaTracking'
+import { openCustomizeMenuEvent, selectCustomizedOptionMenuEvent, closeCustomizeMenuEvent } from '../../libs/gaEventObjects'
 
 // Constants
 const { DRAWERS } = PDPConstants;
@@ -71,8 +73,10 @@ class CADCustomize extends Component {
   }
 
   closeMenu() {
-    const { toggleDrawer } = this.props;
+    const { toggleDrawer, addonOptions } = this.props;
+    addonOptions.map(c => c.active ? trackEvent(selectCustomizedOptionMenuEvent, true, c.name) : '')
     toggleDrawer(null);
+    trackEvent(closeCustomizeMenuEvent)
   }
 
   /**
@@ -102,8 +106,13 @@ class CADCustomize extends Component {
    */
   generateAddonsSummary() {
     return (
-      <div>
-        <a className="c-card-customize__content__left">Customize It</a>
+      <div >
+        <a 
+          className="c-card-customize__content__left"
+          onClick={() => trackEvent(openCustomizeMenuEvent)}
+        >
+          Customize It
+        </a>
         <div className="c-card-customize__content__right">
           {this.addonsSummarySelectedOptions()}
         </div>
@@ -357,6 +366,7 @@ class CADCustomize extends Component {
           <div className="CAD--addon-option-select">
             { this.generateAddonOptions() }
           </div>
+
 
           <div className="btn-wrap">
             <button onClick={this.closeMenu} className="btn btn-black btn-lrg">

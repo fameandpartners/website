@@ -7,7 +7,7 @@ import PDPConstants from '../../constants/PDPConstants';
 import { noScrollBody } from '../../helpers/DOM';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
-// Libraries
+// Librariessssss
 import Resize from '../../decorators/Resize.jsx';
 import breakpoints from '../../libs/PDPBreakpoints';
 import { trackEvent } from '../../libs/gaTracking'
@@ -19,7 +19,7 @@ import RadioToggle from '../shared/RadioToggle';
 
 // Constants
 const { DRAWERS, INCH_SIZES, UNITS, MIN_CM, MAX_CM } = PDPConstants;
-import { dressSizeOpenedEvent, dressSizeSelectedEvent, selectHeightEvent } from '../../libs/gaEventObjects'
+import { saveStyleProfileEvent, closeSizeProfileEvent, sizeSelectedEvent, sizeOpenedEvent, selectHeightEvent } from '../../libs/gaEventObjects'
 
 class SidePanelSize extends Component {
   constructor(props, context) {
@@ -41,15 +41,15 @@ class SidePanelSize extends Component {
   openMenu() {
     const { actions } = this.props;
     actions.toggleDrawer(DRAWERS.SIZE_PROFILE);
-    trackEvent(dressSizeOpenedEvent)
   }
 
-  closeMenu() {
+  closeMenu(sendToAnalytics) {
     const { actions } = this.props;
     this.applyTemporaryFilters();
     this.validateErrors();
     actions.addToBagPending(false);
     actions.toggleDrawer(null);
+    sendToAnalytics ? trackEvent(closeSizeProfileEvent) : ''
   }
 
   updateCustomize(newCustomize) {
@@ -107,6 +107,7 @@ class SidePanelSize extends Component {
       customize.size.id,
     );
     this.props.actions.customizeDress(customize);
+    trackEvent(sizeSelectedEvent, true, customize.size.presentation)
   }
 
   /**
@@ -161,8 +162,10 @@ class SidePanelSize extends Component {
    */
   handleSizeProfileApply() {
     const { customize } = this.props;
-    trackEvent(dressSizeSelectedEvent, true, customize.size.presentation)
     trackEvent(selectHeightEvent, true, `${customize.height.temporaryHeightValue} ${customize.height.temporaryHeightUnit}`)
+    trackEvent(saveStyleProfileEvent)
+    console.log("Saved events")
+
     if (this.validateErrors()) {
       this.applyTemporaryFilters();
       this.closeMenu();
@@ -284,7 +287,7 @@ class SidePanelSize extends Component {
     const { height, size } = customize;
     const hasErrors = (customize.errors.height || customize.errors.size);
     return (
-      <div>
+      <div onClick={() => trackEvent(sizeOpenedEvent  )}>
         <a className={`c-card-customize__content__left ${hasErrors ? 'error-wrap' : ''}`}
         >Size Profile</a>
         { hasErrors ?

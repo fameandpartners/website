@@ -155,7 +155,7 @@ class PdpGallery extends React.Component {
       thumbIds.push(id);
 
       return (
-        <div className="media-wrap-outer" key={index} onClick={() => this.trackEvent(selectPhotoEvent, true, index)}>
+        <div className="media-wrap-outer" key={index} onClick={() => trackEvent(selectPhotoEvent, true, index)}>
           <div className={`media-wrap ${loadedClass} ${zoomClass}`}>
             <span id={id} className="scrollspy-trigger"></span>
             <img src={image.url} alt={image.alt} id={stateId}
