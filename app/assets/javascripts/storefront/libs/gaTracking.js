@@ -10,9 +10,9 @@ const defaultData = {
 };
 
 export function trackEvent(eventData, dynamicStatus, dynamicData) {
-  dynamicStatus ? eventData.label = dynamicData : ''
-  const event = assign({}, defaultData, eventData);
   if (isGAAvailable()){
+    dynamicStatus ? eventData.label = dynamicData : ''
+    const event = assign({}, defaultData, eventData);
     ga('send', 'event', {
       eventCategory: event.category,
       eventAction: event.action,
