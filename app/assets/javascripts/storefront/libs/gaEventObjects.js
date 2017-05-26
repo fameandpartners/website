@@ -10,15 +10,27 @@ export const sizeSelectedEvent = {
   label: 'dynamic', 
   nonInteraction: false 
 }
+export const openHeightSelectEvent = {
+  category: 'PDP', 
+  action: 'Height Open', 
+  label: null, 
+  nonInteraction: false 
+}
 export const selectHeightEvent = {
   category: 'PDP', 
   action: 'Height Select', 
   label: 'dynamic', 
   nonInteraction: false 
 }
-export const openHeightSelectEvent = {
+export const viewSizeGuideEvent = {
   category: 'PDP', 
-  action: 'Height Open', 
+  action: 'Guide Open', 
+  label: null, 
+  nonInteraction: false 
+}
+export const closeSizeProfileEvent = {
+  category: 'PDP', 
+  action: 'Close Size Profile Press', 
   label: null, 
   nonInteraction: false 
 }
@@ -40,21 +52,9 @@ export const selectPremiumColorEvent = {
   label: 'dynamic', 
   nonInteraction: false 
 }
-export const viewSizeGuideEvent = {
-  category: 'PDP', 
-  action: 'Guide Open', 
-  label: null, 
-  nonInteraction: false 
-}
 export const saveStyleProfileEvent = {
   category: 'PDP', 
   action: 'Save Size Profile Press', 
-  label: null, 
-  nonInteraction: false 
-}
-export const closeSizeProfileEvent = {
-  category: 'PDP', 
-  action: 'Close Size Profile Press', 
   label: null, 
   nonInteraction: false 
 }
@@ -88,54 +88,52 @@ export const selectPhotoEvent = {
   label: 'dynamic', 
   nonInteraction: false
 }
-
-// Ruby
-export const hashtagFameMomentsEvent = {
-  category: 'PDP', 
-  action: 'Social Module Photo Press', 
-  label:  'dynamic', 
-  nonInteraction: false
-}
-export const createALookEvent = {
-  category: 'PDP', 
-  action: 'Create A Look Press', 
-  label:  null, 
-  nonInteraction: false
-}
-export const viewFameStylistEvent = {
-  category: 'PDP', 
-  action: 'Fame Stylist Press', 
-  label:  null, 
-  nonInteraction: false
-}
-export const similarStyleEvent = {
-  category: 'PDP', 
-  action: 'Similar Style Press', 
-  label:  'dynamic', 
+// These objects are for views that are in Ruby
+export const fabricInfoEvent = {
+  eventCategory: 'PDP', 
+  eventAction: 'Fabric Information Open', 
+  eventLabel: null, 
   nonInteraction: false
 }
 export const aboutOurModelEvent = {
-  category: 'PDP', 
-  action: 'About Our Model Open', 
-  label: null, 
+  eventCategory: 'PDP', 
+  eventAction: 'About Our Model Open', 
+  eventLabel: null, 
   nonInteraction: false
 }
 export const addToMoodboardEvent = {
-  category: 'PDP', 
-  action: 'Add to Moodboard Open', 
-  label: null, 
+  eventCategory: 'PDP', 
+  eventAction: 'Add to Moodboard Open', 
+  eventLabel: null, 
   nonInteraction: false
 }
 export const shareLinkEvent = {
-  category: 'PDP', 
-  action: 'Share Open', 
-  label: null, 
+  eventCategory: 'PDP', 
+  eventAction: 'Share Open', 
+  eventLabel: null, 
   nonInteraction: false
 }
-export const fabricInfoEvent = {
-  category: 'PDP', 
-  action: 'Fabric Information Open', 
-  label: null, 
+export const createALookEvent = {
+  eventCategory: 'PDP', 
+  eventAction: 'Create A Look Press', 
+  eventLabel:  null, 
   nonInteraction: false
 }
-// ...
+export const viewFameStylistEvent = {
+  eventCategory: 'PDP', 
+  eventAction: 'Fame Stylist Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const similarStyleEvent = {
+  eventCategory: 'PDP', 
+  eventAction: 'Similar Style Press', 
+  eventLabel:  'dynamic', 
+  nonInteraction: false
+}
+export const hashtagFameMomentsEvent = {
+  eventCategory: 'PDP', 
+  eventAction: 'Social Module Photo Press', 
+  eventLabel:  'dynamic', 
+  nonInteraction: false
+}
