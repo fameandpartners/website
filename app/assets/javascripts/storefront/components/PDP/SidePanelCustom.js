@@ -62,19 +62,17 @@ class SidePanelCustom extends SidePanel {
 
     return (
       <div className="pdp-side-container pdp-side-container-custom">
-        <div>
-          <a href="javascript:;" className={triggerState} onClick={this.openMenu}>
-            <div 
-              className="c-card-customize__content__left"
-              onClick={() => trackEvent(openCustomizeMenuEvent)}
-            >
-              Customize
-            </div>
-            <div className="c-card-customize__content__right">
-              {this.props.customize.customization.presentation}
-            </div>
-          </a>
-        </div>
+        <a href="javascript:;" className={triggerState} onClick={this.openMenu}>
+          <div 
+            className="c-card-customize__content__left"
+            onClick={() => trackEvent(openCustomizeMenuEvent)}
+          >
+            Customize
+          </div>
+          <div className="c-card-customize__content__right">
+            {this.props.customize.customization.presentation}
+          </div>
+        </a>
 
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
