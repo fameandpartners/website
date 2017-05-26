@@ -75,10 +75,11 @@ class SidePanelColor extends SidePanel {
       return (
        <div
           onClick={() => trackEvent(selectRecommendedColorEvent, true, color.option_value.name)}
+          key={index}
        >
           <a
             href="javascript:;" className={itemState}
-            onClick={this.onChange} key={index}
+            onClick={this.onChange}
             data-id={color.option_value.id}
             data-presentation={color.option_value.presentation}
             data-name={color.option_value.name}
