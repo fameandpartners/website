@@ -20,16 +20,8 @@ section.order-details
             .order-content
               .row
                 .order-items
-                  - if order.fast_making_items.any?
-                    .fast-making-items
-                      .shipping-title.item Express making, get in 5 to 7 days
-                      - order.fast_making_line_items.each do |line_item|
-                        = render 'spree/orders/show/order_item', line_item: line_item
-                  - if order.standard_making_items.any?
-                    .standard-making-items
-                      .shipping-title.item Free shipping to USA, Canada and the UK
-                      - order.standard_making_line_items.each do |line_item|
-                        = render 'spree/orders/show/order_item', line_item: line_item
+                  - order.line_items.each do |line_item|
+                    = render 'spree/orders/show/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 

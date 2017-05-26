@@ -559,17 +559,25 @@ module Products
         end
       end
 
+      # need to save first to get a product_id since product_making_option requires it
+      product.save!
+
       #add slow making
-      prdmo = ProductMakingOption.create( active: true,
-                                          option_type: 'slow_making',
-                                          price: -0.1,
-                                          currency: 'USD')
-      product.making_options << prdmo
+      prdmo = ProductMakingOption.new(  {product_id: product.id,
+                                        active: true,
+                                        option_type: 'slow_making',
+                                        price: -0.1,
+                                        currency: 'USD'},
+                                        without_protection: true
+                                      )
+      # only connect the 2 if not already done before
+      if prdmo.save
+        product.making_options << prdmo
+      end
 
       new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
-
 
       if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
