@@ -26,7 +26,7 @@
             input type="text" id="searchValue" placeholder="Search here" name="q"
 
       = link_to moodboards_path do
-        span.icon.icon-heart-o
+        span.icon.icon-heart-o onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Moodboard Press', eventLabel: null, nonInteraction: false })"
 
       span.shopping-bag-wrapper.js-header-toolbar
         a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
