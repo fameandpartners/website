@@ -367,7 +367,6 @@ class CADCustomize extends Component {
             { this.generateAddonOptions() }
           </div>
 
-
           <div className="btn-wrap">
             <button onClick={this.closeMenu} className="btn btn-black btn-lrg">
               Apply Customizations

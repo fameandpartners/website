@@ -114,18 +114,16 @@ class SidePanelColor extends SidePanel {
     });
     return (
       <div className="pdp-side-container pdp-side-container-color">
-          <div>
-            <a
-            href="javascript:;"
-            className={triggerState}
-            onClick={this.openMenu}
-          >
-              <div onClick={() => trackEvent(openColorMenuEvent)}>
-                  <div className="c-card-customize__content__left">Color</div>
-                  <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
-              </div>
-            </a>
+        <a
+        href="javascript:;"
+        className={triggerState}
+        onClick={this.openMenu}
+      >
+          <div onClick={() => trackEvent(openColorMenuEvent)}>
+              <div className="c-card-customize__content__left">Color</div>
+              <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
           </div>
+        </a>
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
