@@ -7,7 +7,7 @@ import PDPConstants from '../../constants/PDPConstants';
 import { noScrollBody } from '../../helpers/DOM';
 import SidePanelSizeChart from './SidePanelSizeChart';
 import { GetDressVariantId } from './utils';
-// Librariessssss
+// Libraries
 import Resize from '../../decorators/Resize.jsx';
 import breakpoints from '../../libs/PDPBreakpoints';
 import { trackEvent } from '../../libs/gaTracking'
