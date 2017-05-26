@@ -164,8 +164,6 @@ class SidePanelSize extends Component {
     const { customize } = this.props;
     trackEvent(selectHeightEvent, true, `${customize.height.temporaryHeightValue} ${customize.height.temporaryHeightUnit}`)
     trackEvent(saveStyleProfileEvent)
-    console.log("Saved events")
-
     if (this.validateErrors()) {
       this.applyTemporaryFilters();
       this.closeMenu();
