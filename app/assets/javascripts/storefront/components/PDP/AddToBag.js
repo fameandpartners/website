@@ -45,8 +45,8 @@ class AddToBag extends React.Component {
 
   addToBag() {
     const { customize, actions, product } = this.props;
-    let prodcutPrice = product.price.price.amount
-    let priceWithoutDecimals = prodcutPrice.substring(0, prodcutPrice.indexOf('.'));
+    let productPrice = product.price.price.amount
+    let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
     console.log(priceWithoutDecimals)
     trackEvent(addToBagEvent, true, priceWithoutDecimals)
     // TODO: redo this
