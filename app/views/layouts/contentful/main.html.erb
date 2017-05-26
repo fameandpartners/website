@@ -1,7 +1,12 @@
 <div class="app-child contentful-container">
 
+  <% @landing_page_container[:rows].each do |row| %>
+    <%= render partial: "layouts/contentful/modules/rows/#{row[:id]}", locals: {contents: row[:contents]} %>
+  <% end %>
+
   <!-- SAMPLE CONTENTFUL MODULES/ROWS BELOW -->
 
+<!--
   <div class="tile is-ancestor">
 
         <div class="tile is-parent is-6">
@@ -277,5 +282,6 @@
     </div>
 
   </div>
+-->
 
 </div>

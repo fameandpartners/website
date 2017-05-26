@@ -1,0 +1,33 @@
+<div class="tile is-ancestor">
+
+  <div class="tile is-parent is-6">
+    <article class="tile is-child box">
+      <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+    </article>
+  </div>
+
+  <div class="tile is-vertical is-6">
+
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <%= render partial: "layouts/contentful/modules/items/ITEM--md-email" %>
+        <!--
+        <%= render partial: "layouts/contentful/modules/items/ITEM--md-text" %>
+        -->
+      </article>
+    </div>
+
+    <div class="tile is-parent">
+      <div class="columns is-gapless is-mobile module-small-container">
+        <div class="column">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+        </div>
+        <div class="column">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
