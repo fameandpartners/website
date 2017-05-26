@@ -17,7 +17,7 @@
       span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.culture.js-open-nav-menu Fame Culture
 
-    .col.col-md-2.nav-icons.text-right.pull-right onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Fame Stylist Press', eventLabel: null, nonInteraction: false })"
+    .col.col-md-2.nav-icons.text-right.pull-right onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Search Press', eventLabel: null, nonInteraction: false })"
       span#search.search-wrapper.js-search
         a.icon.icon-search.js-search-trigger href="javascript:;"
         .search-input#search-area
@@ -30,7 +30,7 @@
 
       span.shopping-bag-wrapper.js-header-toolbar
         a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-          span.icon.icon-bag
+          span.icon.icon-bag onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false })"
           span.count.js-cart-item-count 0
 
   .rect-wrapper.margin--center
