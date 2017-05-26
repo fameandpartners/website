@@ -106,7 +106,7 @@ class CADCustomize extends Component {
    */
   generateAddonsSummary() {
     return (
-      <div >
+      <div>
         <a 
           className="c-card-customize__content__left"
           onClick={() => trackEvent(openCustomizeMenuEvent)}
