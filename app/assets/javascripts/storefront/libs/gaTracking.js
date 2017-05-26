@@ -20,7 +20,4 @@ export function trackEvent(eventData, dynamicStatus, dynamicData) {
       nonInteraction: event.nonInteraction,
     })
   }
-  else {
-    console.log("Google analytics not loaded.")
-  }
 }
