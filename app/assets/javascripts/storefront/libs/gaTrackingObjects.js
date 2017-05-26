@@ -189,24 +189,17 @@ export const navMoodboardPressEvent = {
   eventLabel:  null, 
   nonInteraction: false
 }
-// User presses "Moodboard" (heart icon)
-export const navMoodboardPressEvent = {
-  eventCategory: 'Top Nav', 
-  eventAction: 'Moodboard Press', 
-  eventLabel:  null, 
-  nonInteraction: false
-}
 // User presses hamburger menu (in mobile/tablet view)
-export const navMoodboardPressEvent = {
+export const navHamburgerPressEvent = {
   eventCategory: 'Top Nav', 
-  eventAction: 'Menu Open', 
+  eventAction: 'Menu Open Press', 
   eventLabel:  null, 
   nonInteraction: false
 }
 // User presses My Account
-export const navMoodboardPressEvent = {
+export const navMyAccountPressEvent = {
   eventCategory: 'Top Nav', 
-  eventAction: 'Menu Open', 
+  eventAction: 'My Account Press', 
   eventLabel:  null, 
   nonInteraction: false
 }

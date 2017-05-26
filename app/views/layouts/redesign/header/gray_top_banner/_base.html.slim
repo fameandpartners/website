@@ -12,7 +12,7 @@ ruby:
 
       span.pipe |
       = link_to profile_path do
-        span.my-account MY ACCOUNT
+        span.my-account onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'My Account Press', eventLabel: null, nonInteraction: false })" MY ACCOUNT
         .account-menu.hidden-sm.account-list
           - if spree_user_signed_in?
             .account.container-fluid
