@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170518161536) do
+ActiveRecord::Schema.define(:version => 20170527060310) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -238,6 +238,17 @@ ActiveRecord::Schema.define(:version => 20170518161536) do
   add_index "fabrications", ["line_item_id"], :name => "index_fabrications_on_line_item_id", :unique => true
   add_index "fabrications", ["purchase_order_number"], :name => "index_fabrications_on_purchase_order_number"
   add_index "fabrications", ["uuid"], :name => "index_fabrications_on_uuid", :unique => true
+
+  create_table "facebook_accounts", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "name"
+    t.integer  "account_status"
+    t.integer  "amount_spent"
+    t.string   "currency"
+    t.float    "age"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"

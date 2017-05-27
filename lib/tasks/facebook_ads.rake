@@ -10,8 +10,10 @@ namespace :facebook_ads do
 
       while( sync.has_more_pages? ) do
         account = sync.next_page
+        FacebookAccount.update_from_json( account )        
         account['campaigns']['data'].each do |campaign|
-          puts "#{campaign['name']}"
+
+
           campaign['adsets']['data'].each do |adset|
             puts "\t#{adset['name']} has #{adset['ads']['data'].count} ads" unless adset['ads'].nil?
           end unless( campaign.nil? || campaign['adsets'].nil? )
