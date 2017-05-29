@@ -144,6 +144,9 @@ PATH
       sentry-raven
       shippo (~> 1.0.4)
       sidekiq
+    bronto (0.0.1)
+      savon (~> 1.2.0)
+      sidekiq
     fame_favicon (0.0.1)
       rails
     iequalchange (0.0.1)
@@ -910,6 +913,7 @@ DEPENDENCIES
   bergen!
   better_errors
   binding_of_caller
+  bronto!
   bullet
   business_time
   canonical-rails!
@@ -1008,4 +1012,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
