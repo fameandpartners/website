@@ -116,81 +116,82 @@ module ContentfulHelper
           dynamic_entries: :auto,
           raise_errors: true
         )
-        create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer')[0])
+        get_all_landing_pages_from_entries()
+        # @contentful_client ||= Contentful::Client.new(
+        #   access_token: '6f6dc6fc69767cae44e0a31af09400a340b82ceda752d4131ebdb32685c881f3',
+        #   space: 'fsxg2d84t7b3',
+        #   dynamic_entries: :auto,
+        #   raise_errors: true
+        # )
+        # create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer')[0])
       # end
     # end
   end
 
+  def get_all_landing_pages_from_entries
+    # later: find all LPs from this array
+    # for now we're just fetching our lone LP container
+    create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer')[0])
+  end
+
+  def create_hash_of_contentful_entries
+    @global_contentful_entries_hash = Hash.new
+
+    @contentful_client.entries.each.with_index do |item, i|
+      @global_contentful_entries_hash[item.id] = i
+    end
+  end
+
+  def jsonify_large_lp_container(large_container)
+    id = large_container.id
+
+    fetched_lg_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
+
+    {
+      image: fetched_lg_container.image.url,
+      mobile_image: fetched_lg_container.mobile_image.url,
+      overlay_pids: fetched_lg_container.overlay_pids
+    }
+  end
+
+  def jsonify_medium_lp_container(medium_container)
+    id = medium_container.id
+
+    fetched_md_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
+
+    if (fetched_md_container.content_type.id == 'ITEM--md-text')
+      {
+        id: 'ITEM--md-text',
+        text: fetched_md_container.content.split("\n")
+      }
+    else
+      # 'ITEM--md-email'
+    end
+  end
+
   def create_landing_page_container(parent_container)
 
+    create_hash_of_contentful_entries()
+
     row_tiles = parent_container.rows_container.map do |item|
+
+      lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
+      md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
+      sm_items = (item.respond_to? :pids) ? item.pids : nil
+
       {
         id: item.content_type.id,
-        # title: item.row_heading,
-        # contents: item.contents
+        lg_item: lg_item,
+        md_item: md_item,
+        sm_items: sm_items
       }
     end
 
-    # hero_tiles = parent_container.hero_tiles_container.map do |item|
-
-    #   # Check Optional Fields
-    #   heading = (item.respond_to? :heading) ? item.heading : nil
-    #   mobile_text = (item.respond_to? :mobile_text) ? item.mobile_text : nil
-    #   sub_heading = (item.respond_to? :sub_heading) ? item.sub_heading : nil
-    #   cta = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
-
-    #   {
-    #     heading: heading,
-    #     sub_heading: sub_heading,
-    #     mobile_text: mobile_text,
-    #     image: item.image.url,
-    #     mobile_image: item.mobile_image.url,
-    #     link: item.path_link,
-    #     text_align: item.text_alignment,
-    #     text_position: item.text_position,
-    #     text_color: item.text_color,
-    #     text_size: item.text_size,
-    #     cta_button_text: cta,
-    #     description: item.description,
-    #   }
-    # end
-
-    # second_hero = {
-    #   image: parent_container.secondary_header_container.secondary_header_image.url,
-    #   mobile_image: parent_container.secondary_header_container.secondary_header_mobile_image.url,
-    #   path_link: parent_container.secondary_header_container.secondary_header_link
-    # }
-
-    # category_tiles = parent_container.category_tiles_container.map do |item|
-    #   {
-    #     link: item.link,
-    #     title: item.title_overlay,
-    #     image: item.image.image_url
-    #   }
-    # end
-
-    # ig_tiles = parent_container.instagram_thumbnails_container.map do |item|
-    #   {
-    #     path_link: item.path_link,
-    #     handle: item.handle,
-    #     image: item.image.image_url
-    #   }
-    # end
-
-    # @main_container = {
-    #   hero_tiles: hero_tiles,
-    #   secondary_header: second_hero,
-    #   category_tiles: category_tiles,
-    #   instagram_tiles: ig_tiles
-    # }
-
-    binding.pry
+    # binding.pry
 
     @landing_page_container = {
-      # to-do: title
-      # to-do: path
+      path: parent_container.page_title,
       # to-do: header
-
       rows: row_tiles
     }
   end

@@ -4,21 +4,21 @@
 
     <div class="tile is-parent">
       <article class="tile is-child box">
-        <%= render partial: "layouts/contentful/modules/items/ITEM--md-email" %>
-        <!--
-        <%= render partial: "layouts/contentful/modules/items/ITEM--md-text" %>
+        <%= render partial: "layouts/contentful/modules/items/#{contents[:md_item][:id]}" %>
+        <!-- Not working! :(
+        <%= render partial: "layouts/contentful/modules/items/#{contents[:md_item][:id]}", locals: {contents: contents[:md_item]} %>
         -->
       </article>
     </div>
 
     <div class="tile is-parent">
       <div class="columns is-gapless is-mobile module-small-container">
+      <% contents[:sm_items].each do |item| %>
+        <% @pid = item %>
         <div class="column">
           <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
         </div>
-        <div class="column">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
-        </div>
+      <% end %>
       </div>
     </div>
 

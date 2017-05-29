@@ -1,7 +1,14 @@
 <div class="app-child contentful-container">
 
   <% @landing_page_container[:rows].each do |row| %>
-    <%= render partial: "layouts/contentful/modules/rows/#{row[:id]}", locals: {contents: row[:contents]} %>
+    <!--
+        Frustrating! I shouldn't have to set instance variables, but nested partials are
+        not accepting locals for some reason... Requires further investigation.
+    -->
+    <% @md_contents = row[:md_item] %>
+    <% @lg_contents = row[:lg_item] %>
+
+    <%= render partial: "layouts/contentful/modules/rows/#{row[:id]}", locals: {contents: row} %>
   <% end %>
 
   <!-- SAMPLE CONTENTFUL MODULES/ROWS BELOW -->
