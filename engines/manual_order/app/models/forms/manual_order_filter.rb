@@ -53,15 +53,23 @@ module Forms
       end
     end
 
-    def image
-      url = product_image.present? ? product_image[:large] : 'null'
-      { url: url }
+    def images
+      params.fetch(:product_colors, []).map do |_, param|
+        p = Spree::Product.find(param.fetch(:product_id))
+        image = Repositories::ProductImages.new(product: p).filter(color_id: param.fetch(:color_id).to_i).first
+
+        { url: image.present? ? image[:large] : 'null' }
+      end
     end
 
     def price
-      price = product.site_price_for(site_version)
-      { price: price.amount, currency: params[:currency] }
+      price = products\
+        .map { |p| p.site_price_for(site_version).amount }
+        .sum
+
+      { price: price, currency: params[:currency] }
     end
+
 
     def users_searched
       first_name_term, last_name_term = params[:term].split(' ')
@@ -109,17 +117,18 @@ module Forms
       Spree::Product.find(params[:product_id])
     end
 
+    def products
+      params.fetch(:product_ids, []).map do |id|
+        Spree::Product.find(id)
+      end
+    end
+
     def product_options
       @product_options ||= Products::SelectionOptions.new(site_version: site_version, product: product).read
     end
 
     def extra_color_price
       product_options[:colors][:default_extra_price][:amount]
-    end
-
-    def product_image
-      product_images = Repositories::ProductImages.new(product: product).read_all
-      product_images.find{ |i| i[:color_id] == params[:color_id].to_i }
     end
 
   end
