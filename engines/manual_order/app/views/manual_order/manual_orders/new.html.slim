@@ -1,6 +1,28 @@
 javascript:
   var countriesWithStates = #{manual_order_form.countries_with_states.to_s.html_safe};
 
+script#product_template type='text/template'
+  .panel.panel-default.product
+    .panel-heading 
+      span Product
+      span.close ×
+    .panel-body
+      .form-group
+        label.col-sm-2.control-label Style name
+        .col-sm-10 = collection_select :products, :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select2' }
+      .form-group
+        label.col-sm-2.control-label Size
+        .col-sm-10 = collection_select :products, :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
+      .form-group
+        label.col-sm-2.control-label Skirt Length
+        .col-sm-10 = collection_select :products, :height, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
+      .form-group
+        label.col-sm-2.control-label Color
+        .col-sm-10 = collection_select :products, :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
+      .form-group
+        label.col-sm-2.control-label Customisation
+        .col-sm-10 = collection_select :products, :customisations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2', multiple: '' }
+
 .pages.wrapper.wrapper-content
   = simple_form_for manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|
     .ibox.float-e-margins
@@ -15,21 +37,9 @@ javascript:
                 .form-group
                   label.col-sm-2.control-label Site version
                   .col-sm-10 = f.collection_select :currency, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select2' }
-                .form-group
-                  label.col-sm-2.control-label Style name
-                  .col-sm-10 = f.collection_select :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select2' }
-                .form-group
-                  label.col-sm-2.control-label Size
-                  .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
-                .form-group
-                  label.col-sm-2.control-label Skirt Length
-                  .col-sm-10 = f.collection_select :height, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
-                .form-group
-                  label.col-sm-2.control-label Color
-                  .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
-                .form-group
-                  label.col-sm-2.control-label Customisation
-                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2', multiple: '' }
+                .form-group#products
+                .form-group.text-center
+                  = link_to 'Add another product', '#', class: 'btn btn-primary', id: 'product_add'
                 .form-group
                   label.col-sm-2.control-label Notes
                   .col-sm-10 = f.text_area :notes, class: 'manual-textarea'
