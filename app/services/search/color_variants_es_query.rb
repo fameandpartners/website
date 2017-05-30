@@ -17,8 +17,8 @@ module Search
       fast_making       = options[:fast_making]
       limit             = options[:limit].present? ? options[:limit].to_i : 1000
       offset            = options[:offset].present? ? options[:offset].to_i : 0
-      price_min         = Array.wrap(options[:price_min]).map(&:to_f)
-      price_max         = Array.wrap(options[:price_max]).map(&:to_f)
+      price_mins         = Array.wrap(options[:price_min]).map(&:to_f)
+      price_maxs         = Array.wrap(options[:price_max]).map(&:to_f)
       currency          = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
@@ -68,6 +68,23 @@ module Search
               should do
                 range 'product.available_on' => { :lte => Time.now}
               end
+
+              if discount.present?
+                if discount == :all?
+                  should do
+                    term range 'product.discount' => { :gt => 0 }
+                  end
+                else
+                  must do
+                    term 'product.discount' => discount.to_i
+                  end
+                end
+              end
+
+              if price_min.present? || price_max.present?
+                ColorVariantsESQuery.build_pricing_comparison(price_mins, price_maxs, currency)
+              end
+
             end
             if colors.present?
               term 'color.id' => colors
@@ -75,7 +92,6 @@ module Search
           end
           filter do
             exists field: 'available_on'
-
           end
         end
       end
@@ -83,6 +99,14 @@ module Search
 binding.pry
 
       hash
+    end
+
+    def self.build_pricing_comparison(min_prices, max_prices, currency)
+      Filter.new do
+        min.prices.zip(max_prices).map do |min, max|
+          should { Range.new {"sale_prices.#{currency}" => {gte: min, lte: max}} }
+        end
+      end
     end
 
     def self.product_orderings(currency: nil)

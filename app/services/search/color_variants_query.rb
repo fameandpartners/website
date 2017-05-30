@@ -97,7 +97,6 @@ binding.pry
 
         # exclude items marked not-a-dress
         if exclude_taxon_ids.present?
-          binding.pry
           filter :bool, :must => {
             :not => {
               :terms => {
@@ -110,14 +109,14 @@ binding.pry
         # select only products with given discount
         if discount.present?
           if discount == :all
-            filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
+            filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } } #
           else
-            filter :bool, :must => { :term => { 'product.discount' => discount.to_i } }
+            filter :bool, :must => { :term => { 'product.discount' => discount.to_i } } #
           end
         end
 
         if price_min.present? || price_max.present?
-          filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)
+          filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)  #
         end
 
         if query_string.present?
