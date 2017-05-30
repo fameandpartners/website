@@ -48,7 +48,7 @@ class EmailCapture
         NewRelic::Agent.notice_error("Mailchimp: #{e} for #{email}")
       end
     elsif service == :bronto
-      # TODO: handle capture with bronto
+      Bronto::SubscribeUsersWorker.new.perform(configatron.bronto.subscription_list, [email])
     end
 
   end
