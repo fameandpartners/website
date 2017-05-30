@@ -142,6 +142,53 @@ module ContentfulHelper
     end
   end
 
+  def create_sample_product_hash
+    @sample_product_collection = {
+      "1545-red" => {
+        name: "The Cohen Top",
+        price: "$199.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36589/large/fpsb1044-red-front-crop.jpg?1495664888",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36579/large/fpsb1044-red-crop.jpg?1495664881",
+        path: "/dresses/dress-the-cohen-top-1545?color=red"
+      },
+      "1544-black-and-white-gingham" => {
+        name: "The Russo Dress",
+        price: "$249.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36714/large/fprv1036-black_and_white_gingham-front-crop.jpg?1495664990",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36715/large/fprv1036-black_and_white_gingham-crop.jpg?1495664991",
+        path: "/dress-the-russo-dress-1544?color=black-and-white-gingham"
+      },
+      "1541-red" => {
+        name: "The Berenson Dress",
+        price: "$269.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36694/large/fprv1010-red-front-crop.jpg?1495664976",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36690/large/fprv1010-red-crop.jpg?1495664973",
+        path: "/dresses/dress-the-berenson-dress-1541?color=red"
+      },
+      "1537-navy" => {
+        name: "The Anka Dress",
+        price: "$229.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36666/large/fp2331-navy-crop.jpg?1495664956",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36672/large/fp2331-navy-front-crop.jpg?1495664960",
+        path: "/dresses/dress-the-anka-dress-1537?color=navy"
+      },
+      "1517-navy-and-white-gingham" => {
+        name: "The Giovana Dress",
+        price: "$269.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36558/large/fprv1032-navy_and_white_gingham-front-crop.jpg?1495664596",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36557/large/fprv1032-navy_and_white_gingham-crop.jpg?1495664596",
+        path: "/dresses/dress-the-giovana-dress-1517?color=navy-and-white-gingham"
+      },
+      "1547-red" => {
+        name: "The Nguyen Dress",
+        price: "$249.00",
+        image: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36676/large/fpsb1098-red-front-crop.jpg?1495664963",
+        image_hover: "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/36678/large/fpsb1098-red-crop.jpg?1495664965",
+        path: "/dresses/dress-the-nguyen-dress-1547?color=red"
+      }
+    }
+  end
+
   def jsonify_large_lp_container(large_container)
     id = large_container.id
 
@@ -172,6 +219,7 @@ module ContentfulHelper
   def create_landing_page_container(parent_container)
 
     create_hash_of_contentful_entries()
+    create_sample_product_hash()
 
     row_tiles = parent_container.rows_container.map do |item|
 

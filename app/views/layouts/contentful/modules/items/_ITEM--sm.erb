@@ -1,4 +1,13 @@
+<%
+  name = @sample_product_collection[@pid][:name]
+  price = @sample_product_collection[@pid][:price]
+  image = @sample_product_collection[@pid][:image]
+  image_hover = @sample_product_collection[@pid][:image_hover]
+%>
+
 <div class="content">
   PID: <%= @pid %>
+  <%= image_tag(image, class: 'img-product temp-resize', 'data-hover': image_hover, 'data-original': image ) %>
 </div>
-<p class="title">ITEM TYPE - SMALL</p>
+<p class="title"><%= name %></p>
+<span><%= price %></span>

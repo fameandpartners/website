@@ -5,7 +5,7 @@
   <ul>
   <% @lg_contents[:overlay_pids].each do |pid| %>
     <li>
-      <%= pid %>
+      <%= @sample_product_collection[pid][:name] %>
     </li>
   <% end %>
   </ul>
