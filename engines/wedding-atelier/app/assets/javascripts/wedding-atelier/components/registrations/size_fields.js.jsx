@@ -21,6 +21,8 @@ var SizeFields = React.createClass({
   },
 
   render: function() {
+    var that = this;
+
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
         return(<option key={index} value={height}>{height}</option>);
@@ -30,6 +32,32 @@ var SizeFields = React.createClass({
         <optgroup key={group[0]} label={group[0]}>
           {heights}
         </optgroup>
+      );
+    });
+
+    var dressSizes = this.props.sizes.map(function(sizes) {
+      var index = 1;
+      var sizesGroup = sizes.map(function(value){
+        var size = value.option_value,
+          id = "dress-size-" + index,
+          inputProps = {
+            id: id,
+            type: "radio",
+            ref: "profile.dress_size_id",
+            value: size.name
+          };
+
+        index += 1;
+        return (
+          <li key={index} className="dress-size">
+          <input {...inputProps} />
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size, that.props.siteVersion)}</label>
+          </li>
+        );
+      });
+
+      return (
+        <div className="sizing-row">{sizesGroup}</div>
       );
     });
 
@@ -53,12 +81,7 @@ var SizeFields = React.createClass({
 
             <div className="dress-sizes">
               <ul>
-                <div className="sizing-row">
-                  <li className="dress-size">
-                    <input id="spree_user_user_profile_attributes_dress_size_id_86" ref="profile.dress_size_id" type="radio" value="86" />
-                    <label htmlFor="spree_user_user_profile_attributes_dress_size_id_86">US 0</label>
-                  </li>
-                </div>
+                {dressSizes}
               </ul>
             </div>
 
