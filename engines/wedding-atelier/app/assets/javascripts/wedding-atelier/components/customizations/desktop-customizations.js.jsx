@@ -35,6 +35,10 @@ var DesktopCustomizations = React.createClass({
     this.setState({showContainer: state});
   },
 
+  askStylistsCallback: function () {
+    window.location = this.props.event_path;
+  },
+
   show: function(currentCustomization) {
     var el = $('.js-customizations-container');
 
@@ -108,7 +112,22 @@ var DesktopCustomizations = React.createClass({
           <DressPreview selectedOptions={$.extend({},this.props.selectedOptions)}/>
         </div>
         <div className="footer">
-          <div className="col-sm-12 col-lg-offset-6 col-md-offset-6 col-md-6 col-lg-6">
+          <div className="col-sm-6">
+            <div className="row">
+              <SaveDressButton
+                eventId={this.props.eventId}
+                selectedOptions={this.props.selectedOptions}
+                buttonClass='btn-transparent'
+                edit={this.props.edit}
+                initialDress={this.props.initialDress}
+                currentUser={this.props.currentUser}
+                savedDressCallback={this.askStylistsCallback}
+                caption="Ask our stylists"
+                showSavedModal={false}
+                />
+            </div>
+          </div>
+          <div className="col-sm-6">
             <div className="row">
             <div className="results">
               <div className="view-customizations">
