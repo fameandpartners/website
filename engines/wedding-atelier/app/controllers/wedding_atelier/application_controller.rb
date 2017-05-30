@@ -4,7 +4,6 @@ module WeddingAtelier
 
     layout 'wedding_atelier/application'
     before_filter :authenticate_spree_user!
-    before_filter :check_signup_completeness
     serialization_scope :view_context
 
     def check_signup_completeness

@@ -1,39 +1,37 @@
 module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
     include WeddingAtelier::Concerns::FeatureFlaggable
+    include WeddingAtelier::Concerns::DummyData
 
     layout 'wedding_atelier/application'
-    before_filter :check_spree_user_signed_in, except: [:new, :create]
-    before_filter :redirect_if_completed, except: :new
+
+    before_filter :set_dummy_data, only: :new
     before_filter :sign_in_if_exists, only: :create, if: -> { spree_user_params[:email] }
-    before_filter :prepare_form_default_values, only: [:new, :update, :size, :details, :member]
+    before_filter :prepare_form_default_values, only: [:new,:create]
     helper WeddingAtelier::Engine.helpers
 
     def new
-      if current_spree_user
-        if current_spree_user.wedding_atelier_signup_complete?
-          redirect_to wedding_atelier.events_path
-        else
-          redirect_to action: current_spree_user.wedding_atelier_signup_step
-        end
+      if current_spree_user && current_spree_user.wedding_atelier_signup_complete?
+        redirect_to wedding_atelier.events_path
       end
+
       if params[:invitation_id]
         invitation = Invitation.find(params[:invitation_id])
         @signup_params = { invitation_id: invitation.id }
       end
 
       @user = Spree::User.new(email: invitation.try(:user_email))
-      @user.build_user_profile(skip_validation: true)
-      @event = @user.events.new
+      @event = Event.new
     end
 
     def create
       @user = build_resource(spree_user_params)
+
       if resource.new_record?
         resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
         resource.sign_up_reason = session[:sign_up_reason]
       end
-      if resource.save(validate: false)
+      if resource.save()
         EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
                                                       landing_page: session[:landing_page],
                                                       utm_params:   session[:utm_params],
@@ -51,15 +49,14 @@ module WeddingAtelier
           invitation = Invitation.find(params[:invitation_id]).accept
           session[:accepted_invitation] = true
         end
-        redirect_to wedding_atelier.size_signup_path
+        render json: resource.events.last, status: :ok
       else
-        render :new
+        render json: { errors: resource.errors }, status: :unprocessable_entity
       end
     end
 
     def update
-      @user.assign_attributes(spree_user_params)
-      if @user.save(validate:false)
+      if @user.update_attributes(spree_user_params)
         @user.add_role(@user.event_role, @user.events.last) if @user.event_role
         if @user.wedding_atelier_signup_step == 'completed'
           redirect_to wedding_atelier.event_path(@user.events.last)
@@ -77,23 +74,6 @@ module WeddingAtelier
 
     end
 
-    def size; end
-
-    def member; end
-
-    def details
-      @event = current_spree_user.events.last || current_spree_user.events.new
-    end
-
-    def invite
-      @event = current_spree_user.events.last
-      if @event.number_of_assistants == 0
-        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
-        redirect_to wedding_atelier.event_path(id: @event.id, slug: @event.slug)
-      end
-    end
-
-
     private
 
     def sign_in_if_exists
@@ -105,7 +85,7 @@ module WeddingAtelier
           event = user.events.last
           redirect_to wedding_atelier.event_path(id: event.id, slug: event.slug)
         elsif spree_user_signed_in?
-          redirect_to action: user.wedding_atelier_signup_step
+          render :new
         else
           redirect_to sign_in_path, flash: { error:  t('devise.failure.invalid') }
         end
@@ -133,23 +113,11 @@ module WeddingAtelier
     end
 
     def spree_user_params
-      # email input is disabled in new form, to guarantee
-      # invited user uses that email.
-      # Since disabled inputs are not sent, here we set
-      # the user email in the params from the invitation.
       if !params[:spree_user][:email] && params[:invitation_id]
         invitation = Invitation.find(params[:invitation_id])
         params[:spree_user][:email] = invitation.user_email
       end
       params[:spree_user]
-    end
-
-    def check_spree_user_signed_in
-      redirect_to(wedding_atelier.signup_path) unless spree_user_signed_in?
-    end
-
-    def redirect_if_completed
-      redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?) && action_name != 'invite'
     end
   end
 end

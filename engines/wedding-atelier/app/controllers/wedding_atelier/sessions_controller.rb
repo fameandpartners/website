@@ -1,11 +1,14 @@
 module WeddingAtelier
   class SessionsController < Spree::UserSessionsController
     include WeddingAtelier::Concerns::FeatureFlaggable
+    include WeddingAtelier::Concerns::DummyData
 
     layout 'wedding_atelier/application'
     helper WeddingAtelier::Engine.helpers
 
     skip_before_filter :require_no_authentication
+
+    before_filter :set_dummy_data, only: [:new, :create]
 
     def new
       @user = Spree::User.new
