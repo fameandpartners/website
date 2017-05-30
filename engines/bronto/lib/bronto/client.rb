@@ -2,11 +2,6 @@ require 'savon'
 
 module Bronto
   class Client
-    def initialize(api_token:, wsdl_path:)
-      @api_token = api_token
-      @wsdl_path = wsdl_path
-    end
-
     # @param contacts Array or Hash
     # @option email
     def add_contacts(contacts)
@@ -47,8 +42,6 @@ module Bronto
     end
 
     private
-
-    attr_reader :api_token, :wsdl_path
 
     def contacts_by_email(emails:)
       conditions = Array.wrap(emails).map do |email|
@@ -91,6 +84,14 @@ module Bronto
 
     def soap_header
       { "tns:sessionHeader" => { session_id: session_id } }
+    end
+
+    def api_token
+      Bronto.api_token
+    end
+
+    def wsdl_path
+      Bronto.wsdl_path
     end
   end
 end

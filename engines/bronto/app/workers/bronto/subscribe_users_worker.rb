@@ -8,8 +8,7 @@ module Bronto
     end
 
     def bronto_client
-      @bronto_client ||= Bronto::Client.new(api_token: ENV.fetch('BRONTO_API_TOKEN'),
-                                            wsdl_path: ENV.fetch('BRONTO_WSDL'))
+      @bronto_client ||= Bronto::Client.new
     end
   end
 end
