@@ -3,7 +3,8 @@ var Registration = React.createClass({
     fieldValues: React.PropTypes.object,
     signupPath: React.PropTypes.string.isRequired,
     eventsPath: React.PropTypes.string.isRequired,
-    signinPath: React.PropTypes.string.isRequired
+    signinPath: React.PropTypes.string.isRequired,
+    heightDefinitions: React.PropTypes.array
   },
 
   componentDidMount: function() {
@@ -63,7 +64,8 @@ var Registration = React.createClass({
         return <SizeFields fieldValues={this.props.fieldValues}
                            nextStep={this.nextStep}
                            previousStep={this.previousStep}
-                           saveValues={this.saveValues} />
+                           saveValues={this.saveValues}
+                           heights={this.props.heightDefinitions} />
       case 3:
         return <UserFields fieldValues={this.props.fieldValues}
                            previousStep={this.previousStep}

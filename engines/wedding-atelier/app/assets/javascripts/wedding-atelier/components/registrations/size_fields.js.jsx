@@ -21,6 +21,18 @@ var SizeFields = React.createClass({
   },
 
   render: function() {
+    var optionsForHeights = this.props.heights.map(function(group) {
+      var heights = group[1].map(function(height, index){
+        return(<option key={index} value={height}>{height}</option>);
+      });
+
+      return (
+        <optgroup key={group[0]} label={group[0]}>
+          {heights}
+        </optgroup>
+      );
+    });
+
     return (
       <div className="registrations__size-form signup left-side-centered-container">
         <h1 className="text-center">Let's start with your size profile.</h1>
@@ -30,9 +42,7 @@ var SizeFields = React.createClass({
             <label>What's Your Height?</label>
             <div>
               <select className="form-control" id="spree_user_user_profile_attributes_height" ref="profile.height">
-                <optgroup label="petite">
-                  <option value="4'10&quot;/147cm">4'10/147cm</option>
-                  </optgroup>
+                {optionsForHeights}
               </select>
             </div>
           </div>

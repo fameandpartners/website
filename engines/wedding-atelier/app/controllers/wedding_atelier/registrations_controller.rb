@@ -106,7 +106,7 @@ module WeddingAtelier
 
       @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'size'
 
-      @heights = WeddingAtelier::Height.definitions
+      @heights = WeddingAtelier::Height.definitions.to_a
 
       @site_version = env['site_version_code'] || 'us'
       @dress_sizes = Spree::OptionType.size.option_values
