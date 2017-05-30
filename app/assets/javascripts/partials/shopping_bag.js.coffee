@@ -23,7 +23,20 @@ window.ShoppingBag = class ShoppingBag
     @value_proposition  = options.value_proposition
     @shipping_message  = options.shipping_message
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
+    _.bindAll(@,
+      'closeHandler',
+      'openHandler',
+      'open',
+      'close',
+      'customizationPrice',
+      'makingOptionDescriptionTag',
+      'render',
+      'removeProductHandler',
+      'couponFormSubmitHandler',
+      'removeProductCustomizationHandler',
+      'removeProductMakingOptionHandler',
+      'masterpassOpenHandler'
+    )
 
     $(options.toggle_link || '.js-header-toolbar .js-trigger-shopping-bag').on('click', @openHandler)
 
@@ -44,6 +57,23 @@ window.ShoppingBag = class ShoppingBag
   addEventToMasterPassButton: () ->
     $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
 
+  customizationPrice: (displayPriceObj) ->
+    currencySymbol = displayPriceObj.money.currency.html_entity
+    displayTotal = parseInt(displayPriceObj.money.fractional, 10) / displayPriceObj.money.currency.subunit_to_unit
+    currencySymbol + displayTotal
+
+  makingOptionDescriptionTag: (makingOptions) ->
+    if (makingOptions[0].name.toLowerCase() == 'deliver later')
+      return '(' + makingOptions[0].display_discount + ')'
+    else if (makingOptions[0].name.toLowerCase() == 'express delivery')
+      return '(+' + makingOptions[0].display_discount + ')'
+
+  makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
+    if (makingOptions[0])
+      return makingOptions[0].delivery_period
+
+    deliveryPeriod
+
   render: () ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
@@ -58,7 +88,16 @@ window.ShoppingBag = class ShoppingBag
           @date_vars["start_date_non_express"]    = data.start_date_non_express
           @date_vars["end_date_non_express"]      = data.end_date_non_express
 
-        @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message, date_vars: @date_vars))
+        @$container.html(@template(
+          cart: @cart.data,
+          country_code: @country_code,
+          customizationPrice: @customizationPrice,
+          makingOptionDescriptionTag: @makingOptionDescriptionTag,
+          makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
+          value_proposition: @value_proposition,
+          shipping_message: @shipping_message,
+          date_vars: @date_vars
+        ))
         @addEventToMasterPassButton()
         @rendered = true
     )

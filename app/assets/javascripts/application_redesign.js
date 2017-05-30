@@ -109,6 +109,7 @@
 //= require partials/product_collection_moodboard_links
 //= require partials/shopping_bag
 //= require partials/shopping_cart_summary
+//= require partials/shopping_cart_delivery_times
 //= require partials/side_menu
 
 //= require partials/user_order_returner

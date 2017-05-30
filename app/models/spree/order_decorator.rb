@@ -7,8 +7,6 @@ Spree::Order.class_eval do
 
   has_one :traffic_parameters, class_name: Marketing::OrderTrafficParameters
 
-  after_save :clean_cache!
-
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -34,6 +32,7 @@ Spree::Order.class_eval do
     # which on order number, is very very slow.
   end
 
+  # called from manual_order, value is derived from delivery_period
   def project_delivery_date
     if complete?
       delivery_date = delivery_policy.delivery_date
@@ -41,6 +40,7 @@ Spree::Order.class_eval do
     end
   end
 
+  # thanh 4/3/17- did not find any references to this method
   def delivery_period
     delivery_policy.delivery_period
   end
@@ -81,11 +81,6 @@ Spree::Order.class_eval do
     "orders/#{id}-#{updated_at.to_s(:number)}"
   end
 
-  def clean_cache!
-    # NOOP
-    # TODO: `Spree::Order#clean_cache!` isn't clearing any cache. There are no cache keys with `Spree::Order#cache_key` value
-  end
-
   def has_personalized_items?
     line_items.includes(:personalization).any?{|line_item| line_item.personalization.present? }
   end
@@ -97,6 +92,10 @@ Spree::Order.class_eval do
 
   def has_fast_making_items?
     line_items.includes(making_options: :product_making_option).any?(&:fast_making?)
+  end
+
+  def has_slow_making_items?
+    line_items.includes(making_options: :product_making_option).any?(&:slow_making?)
   end
 
   def update!

@@ -1,3 +1,11 @@
+.line-item-description-heading {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
 .page-checkout {
   p {
     font-weight: 400;
@@ -98,9 +106,14 @@
 
   .checkout-section-title {
     font-family: $font-heading;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 300;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+  }
+
+  .minor-callout {
+    font-family: $font-family-secondary;
+    margin-bottom: 10px;
   }
 
   .toggle-shopping-bag {
@@ -218,6 +231,109 @@
       float: left;
       margin-left: -5px;
       margin-right: -5px;
+    }
+
+    .cart-item {
+      position: relative;
+    }
+
+    .cart-item.is-loading {
+      position: relative;
+      .spinner-wrapper {
+        display: block;
+      }
+
+      .product-delivery-adjustment {
+        opacity: 0.6;
+      }
+    }
+
+    .spinner-wrapper {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .product-delivery-adjustment {
+      opacity: 1;
+      padding: 15px;
+      border: 1px solid $c-neutral-4;
+      margin-bottom: 20px;
+      position: relative;
+      @include transition(300ms opacity fade-in-out);
+
+
+      .image-wrapper {
+        float: left;
+        width: 17%;
+        margin-bottom: 10px;
+      }
+
+      .cart-item-image {
+        padding-right: 5px;
+        width: 100%;
+        min-height: 100px;
+      }
+
+      .description-wrapper {
+        float: left;
+        width: 57%;
+        padding-left: 10px;
+      }
+
+      .line-item-description-heading {
+        text-transform: uppercase;
+      }
+
+      .description-wrapper .product-name {
+        margin-top: 0;
+        font-size: 2.6rem;
+        font-weight: 300;
+        line-height: 2.4rem;
+        margin-bottom: 6px;
+      }
+
+      .description-wrapper dd{
+        text-transform: capitalize;
+      }
+
+      .price-wrapper {
+        float: right;
+        width: 20%;
+        text-align: left;
+        font-size: 1.7rem;
+        text-transform: none;
+        &.main {
+          font-size: 2rem;
+          line-height: 1.6rem;
+          font-weight: 500;
+          font-size: 2rem;
+          font-family: $font-heading;
+          color: $c-neutral-10;
+        }
+      }
+
+      .delivery-time-options-wrapper {
+        line-height: 32px;
+      }
+
+      .delivery-time-options-wrapper label {
+        vertical-align: inherit;
+        text-transform: none;
+        text-indent: 15px;
+        padding: 2px 5px;
+        font-size: 1.7rem;
+      }
+
+      .delivery-time-options-wrapper.is-selected,
+      .delivery-time-options-wrapper.is-selected label {
+        font-weight: 500;
+      }
+
+      .delivery-options {
+        width: 100%;
+      }
     }
 
   }

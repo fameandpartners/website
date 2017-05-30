@@ -18,8 +18,9 @@ module Repositories
               name: option_value.name,
               presentation: option_value.presentation,
               value: option_value.value,
-              use_in_customisation: option_value.use_in_customisation,
+              use_in_customisation: option_value.use_in_customisation,  #thanh thinks this means 'recommended color'
               image: option_value.image? ? option_value.image.url(:small_square) : nil
+
             }
             result
           end

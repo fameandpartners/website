@@ -3,12 +3,13 @@ require_dependency 'spree/taxonomy_decorator'
 Spree::Taxon.class_eval do
   include Concerns::Publishable
 
-  DELIVERY_PERIODS = [
-    '8 - 10 business days',
-    '12 - 15 business days',
-    '3 - 4 weeks',
-    '4 - 6 weeks'
-  ].freeze
+  DELIVERY_PERIODS =
+    [
+      '7 business days',
+      '12 - 15 business days',
+      '3 - 4 weeks',
+      '4 - 6 weeks'
+    ]
 
   attr_accessible :delivery_period
 
