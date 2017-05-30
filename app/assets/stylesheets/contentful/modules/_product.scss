@@ -1,0 +1,15 @@
+// .Product {
+//   position: relative;
+// }
+
+.Product__image,
+.Product__name,
+.Product__price {
+  width: 100%;
+}
+
+.Product__name,
+.Product__price {
+  margin-bottom: 0;
+  text-align: center;
+}

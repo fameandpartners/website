@@ -1,7 +1,9 @@
-@import 'variables.scss';
+@import 'variables';
 @import 'grid';
 @import 'mixins';
-@import 'layout.scss';
-@import 'base.scss';
+@import 'layout';
+@import 'modules';
+@import 'base';
 
-@import 'temp.scss'
+// use this file for temporary styling
+@import 'temp'

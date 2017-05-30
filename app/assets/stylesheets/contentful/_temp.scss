@@ -7,36 +7,3 @@
     background: #6565aa;
   }
 }
-
-.column p {
-  background: #faab2b;
-}
-
-.module-c-wrapper {
-  padding-top: 20px;
-  background: none !important;
-}
-
-.module-c {
-  height: 240px;
-  position: relative;
-  background: cadetblue;
-  border-radius: 2px;
-  .title {
-    margin: 0;
-    position: absolute;
-    bottom: -25px;
-    color: #000;
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-  }
-
-  @include breakpoint(tablet) {
-    height: 100%;
-  }
-}
-
-.module-small-container {
-  width: 100%;
-}
