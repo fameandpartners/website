@@ -1,4 +1,11 @@
 var SizeFields = React.createClass({
+  componentDidMount: function() {
+    $('#spree_user_user_profile_attributes_height').select2({
+      placeholder: 'Please select your height',
+      minimumResultsForSearch: Infinity
+    });
+  },
+
   nextStep: function(e) {
     e.preventDefault();
 
