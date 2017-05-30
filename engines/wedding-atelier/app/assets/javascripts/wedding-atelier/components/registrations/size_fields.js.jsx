@@ -22,6 +22,7 @@ var SizeFields = React.createClass({
 
   render: function() {
     var that = this;
+    var index = 1;
 
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
@@ -36,7 +37,6 @@ var SizeFields = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(sizes) {
-      var index = 1;
       var sizesGroup = sizes.map(function(value){
         var size = value.option_value,
           id = "dress-size-" + index,
