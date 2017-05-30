@@ -42,23 +42,37 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 
 ### Getting started
 
-* `$ git clone git@github.com:fameandpartners/website.git`
-* `$ cd ./website`
+* `$ brew install postgres memcached git-lfs ruby@2.3.3 rbenv node yarn redis && rbenv init`
+* `$ gem install foreman`
+* `$ git clone git@github.com:fameandpartners/website.git && cd website && npm install`
 * `$ cp config/database.yml.example config/database.yml`
+*  Get a copy of `database.yml` from a neighbor. 
 * `$ bundle install`
-* `$ bundle exec rails r 'Features.deactivate(:force_sitewide_ssl)`
+* `$ psql -d postgres` (enter the psql console)
+* `$ CREATE DATABASE fame_website_development;`
+* `$ CREATE ROLE fandp_web_production;`
+* `$ CREATE ROLE read_only_users;`
+* `$ CREATE ROLE postgres;`
+* `$ alter role postgres with login;`
+* `$ alter role postgres with superuser;`
+* `$ \q` (quit the psql console)
+* `$ psql -d fame_website_development`
+* `$ \i <full_path_to_db_dump.sql>;`
+* Install ElasticSearch 1.7.6 (get the zip file, cannot be found on Homebrew)
+* `cd` into the ElasticSearch folder and enter `./bin/elasticsearch`
+* Enter the rails console in the terminal with `$ run bundle exec rails c`
+* `$ Features.deactivate(:force_sitewide_ssl)`
+* `quit`
+* `$ brew services start postgresql`
+* `$ brew services start redis-server`
+* `$ run bundle exec rails s` (this will start the build process)
+* `$ yarn start`
+* Check http://0.0.0.0:3000 
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
 $ bundle exec foreman s
-```
-
-It is important to configure your Elasticsearch to enable dynamic scripting
-
-```yaml
-# Procfile assumes that this file is under /usr/local/opt/elasticsearch/config/elasticsearch.yml
-script.disable_dynamic: false
 ```
 
 ## Environment Variables
