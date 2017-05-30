@@ -5,9 +5,8 @@
   image_hover = @sample_product_collection[@pid][:image_hover]
 %>
 
-<div class="content">
-  PID: <%= @pid %>
-  <%= image_tag(image, class: 'img-product temp-resize', 'data-hover': image_hover, 'data-original': image ) %>
+<div class="Product">
+  <%= image_tag(image, class: 'img-product Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+  <p class="Product__name"><%= name %></p>
 </div>
-<p class="title"><%= name %></p>
 <span><%= price %></span>

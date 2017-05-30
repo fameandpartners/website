@@ -28,14 +28,36 @@
   }
 }
 
+// modules -- todo: organize into folders / appropriate partials
 
-// modules
+// _ITEM--sm.erb
+.Product {
+  position: relative;
+}
+
+.Product__image {
+  width: 100%;
+}
+
+.Product__name {
+  position: absolute;
+  bottom: 0;
+}
+
 .module-small {
 
 }
+
+// _ITEM--md.erb
 .module-medium {
 
 }
+
+// _ITEM--lg.erb
+.Editorial__image {
+  width: 100%;
+}
+
 .module-large {
 
 }
