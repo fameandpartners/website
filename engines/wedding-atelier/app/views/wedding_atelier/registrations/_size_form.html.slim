@@ -1,6 +1,9 @@
 = react_component 'SizeGuideModal'
+
+= link_to 'back', wedding_atelier.details_signup_path
+
 .registrations__size-form.left-side-centered-container
-  h1 Let's start by finding your size profile.
+  h1.text-center Let's start with your size profile.
   .form
     = form_for @user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
       = hidden_field_tag :skip_event_validation, true
@@ -9,11 +12,11 @@
         = ff.hidden_field :owner_id, value: @user.id
       = f.fields_for :user_profile, @user.user_profile do |ff|
         .form-group
-          = ff.label :height, "Height"
+          = ff.label :height, "What's Your Height?"
           div
             = ff.select :height, grouped_options_for_select(@heights, @user.user_profile.height), { include_blank: true }, class: 'form-control'
         .form-group
-          = ff.label :dress_size, "Dress size".html_safe
+          = ff.label :dress_size, "DRESS SIZE".html_safe
           = ' '
           = react_component 'SizeGuideModalLauncher', {}, { class: 'size-guide-modal-launcher-container' }
           = dress_size_grid ff, @dress_sizes
@@ -21,7 +24,5 @@
             span.help-inline Dress size can't be blank
         br
         .row
-          .col-xs-12.col-sm-6
-            = link_to 'back', wedding_atelier.details_signup_path, class: 'btn btn-white full-width'
-          .col-xs-12.col-sm-6
+          .col-xs-12
             = f.submit 'next', class: 'btn btn-black full-width'
