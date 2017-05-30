@@ -427,7 +427,7 @@ FameAndPartners::Application.routes.draw do
     namespace 'campaigns' do
       resource :email_capture, only: [:create], controller: :email_capture do
         collection do
-          get :mailchimp
+          post :subscribe
         end
       end
     end

@@ -75,8 +75,8 @@ class Campaigns::EmailCaptureController < ApplicationController
     render :json => { status: 'invalid' }, status: :error
   end
 
-  def mailchimp
-    captured_email = EmailCapture.new({ service: :mailchimp }, email: params[:email],
+  def subscribe
+    captured_email = EmailCapture.new({ service: params[:service] }, email: params[:email],
                                  current_sign_in_ip: request.remote_ip,
                                  landing_page: session[:landing_page],
                                  utm_params: session[:utm_params], site_version: current_site_version.name,

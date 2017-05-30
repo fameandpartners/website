@@ -14,14 +14,16 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
   submit: (e) =>
     e.preventDefault()
     $this = $(e.target)
-    url = $('.js-en-field-mailchimp', $this)[0].value
-    email = $('.js-en-field-email', $this)[0].value
+    url = $('input[name="url"]', $this)[0].value
+    email = $('input[name="email"]', $this)[0].value
+    service = $('input[name="service"]', $this)[0].value
     $.ajax
       dataType: 'json'
       url: url
       async: true
-      data: { email: email }
+      data: { email: email, service: service }
       success: @handler
+      method: 'POST'
 
   handler: (data) =>
     if (data.status == 'done')

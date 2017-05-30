@@ -1,7 +1,7 @@
 # TODO: this should be replaced with the MailChimp Client engine. The engine works with background workers and it uses an updated MailChimp API client lib: gibbon
 class EmailCapture
 
-  attr_reader :service, :mailchimp, :mailchimp_struct, :email,
+  attr_reader :service, :mailchimp_struct, :email,
               :previous_email, :newsletter, :first_name,
               :last_name, :current_sign_in_ip,
               :landing_page, :utm_params, :site_version,
@@ -11,8 +11,7 @@ class EmailCapture
                  first_name: nil, last_name: nil, current_sign_in_ip:, landing_page:,
                  utm_params: nil, site_version:, facebook_uid: nil, form_name:)
 
-    @service            = options[:service]
-    @mailchimp          = Mailchimp::API.new(configatron.mailchimp.api_key)
+    @service            = options[:service].to_sym
     @email              = email
     @previous_email     = previous_email
     @newsletter         = newsletter
@@ -27,8 +26,11 @@ class EmailCapture
 
   end
 
-  def capture
+  def mailchimp
+    @mailchimp ||= Mailchimp::API.new(configatron.mailchimp.api_key)
+  end
 
+  def capture
     if service == :mailchimp
 
       get_email = email_changed? ? previous_email : email
@@ -45,6 +47,8 @@ class EmailCapture
       rescue Mailchimp::ValidationError => e
         NewRelic::Agent.notice_error("Mailchimp: #{e} for #{email}")
       end
+    elsif service == :bronto
+      # TODO: handle capture with bronto
     end
 
   end

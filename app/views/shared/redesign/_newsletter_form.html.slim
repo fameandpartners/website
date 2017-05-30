@@ -1,10 +1,12 @@
 ruby:
   formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  service = configatron.subscription_service
 
 form id=(formID)
-  input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
+  input name='url' type='hidden' value=(subscribe_campaigns_email_capture_path)
   .input-group
-    input.form-control.input-lg.js-en-field-email (type="email" placeholder="Register your email for this $25 offer" required="required")
+    input name='service' type='hidden' value=(service)
+    input.form-control.input-lg.js-en-field-email  (name='email' type="email" placeholder="Register your email for this $25 offer" required="required")
     span.input-group-btn
       button.btn.btn-black.btn-md type="submit" Submit
 
