@@ -3,10 +3,13 @@
   price = @sample_product_collection[@pid][:price]
   image = @sample_product_collection[@pid][:image]
   image_hover = @sample_product_collection[@pid][:image_hover]
+  path = @sample_product_collection[@pid][:path]
 %>
 
 <div class="Product">
-  <%= image_tag(image, class: 'img-product Product__image', 'data-hover': image_hover, 'data-original': image ) %>
-  <p class="Product__name"><%= name %></p>
-  <p class="Product__price"><%= price %></p>
+  <a href="<%= path %>">
+    <%= image_tag(image, class: 'img-product Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+    <p class="Product__name"><%= name %></p>
+    <p class="Product__price"><%= price %></p>
+  </a>
 </div>
