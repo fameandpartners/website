@@ -3,3 +3,9 @@ $tablet: 768px;       // grow 'til $desktop
 $desktop: 1280px;     // fixed 'til $widescreen
 $widescreen: 1440px;  // grow 'til $fullhd
 $fullhd: 1920px;      // fixed past $fullhd
+
+// fonts
+$primary-font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
+
+// colors
+$oil: #333;

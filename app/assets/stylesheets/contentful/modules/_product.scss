@@ -12,4 +12,13 @@
 .Product__price {
   margin-bottom: 0;
   text-align: center;
+  font-family: $primary-font-family;
+  font-size: 1.2rem;
+  color: $oil;
+}
+
+.Product__name {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: bold;
 }
