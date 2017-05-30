@@ -1,7 +1,7 @@
 <div class="tile is-ancestor">
 
   <div class="tile is-parent is-6">
-    <article class="tile is-child box">
+    <article class="tile is-child">
       <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
     </article>
   </div>
@@ -9,7 +9,7 @@
   <div class="tile is-vertical is-6">
 
     <div class="tile is-parent">
-      <article class="tile is-child box">
+      <article class="tile is-child">
         <%= render partial: "layouts/contentful/modules/items/#{contents[:md_item][:id]}" %>
         <!--
         <%= render partial: "layouts/contentful/modules/items/ITEM--md-email" %>

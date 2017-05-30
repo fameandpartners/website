@@ -12,23 +12,23 @@
 
     <div class="tile">
       <div class="columns is-gapless is-mobile module-small-container">
+      <% contents[:sm_items][0..1].each do |item| %>
+        <% @pid = item %>
         <div class="column">
           <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
         </div>
-        <div class="column">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
-        </div>
+      <% end %>
       </div>
     </div>
 
     <div class="tile">
       <div class="columns is-gapless is-mobile module-small-container">
+      <% contents[:sm_items][2..3].each do |item| %>
+        <% @pid = item %>
         <div class="column">
           <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
         </div>
-        <div class="column">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
-        </div>
+      <% end %>
       </div>
     </div>
 
