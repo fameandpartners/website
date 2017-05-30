@@ -2,7 +2,8 @@ var Registration = React.createClass({
   propTypes: {
     fieldValues: React.PropTypes.object,
     signupPath: React.PropTypes.string.isRequired,
-    eventsPath: React.PropTypes.string.isRequired
+    eventsPath: React.PropTypes.string.isRequired,
+    signinPath: React.PropTypes.string.isRequired
   },
 
   componentDidMount: function() {
@@ -87,6 +88,10 @@ var Registration = React.createClass({
               </form>
             </div>
             <div className="modal-footer">
+              <p className="already-member text-center">
+                Already a member?
+                <a className="bold hover=link" href={this.props.signinPath}>log in here</a>
+              </p>
             </div>
           </div>
         </div>
@@ -94,3 +99,4 @@ var Registration = React.createClass({
     );
   }
 });
+
