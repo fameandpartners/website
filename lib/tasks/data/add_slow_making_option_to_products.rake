@@ -12,8 +12,9 @@ namespace :data do
         prd.save!
         counter += 1
         puts counter
-      end
+      else
         puts 'punt'
+      end
     end
     puts "#{counter} slooow making options added"
   end
