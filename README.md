@@ -59,7 +59,8 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ psql -d fame_website_development`
 * `$ \i <full_path_to_db_dump.sql>;`
 * Install ElasticSearch 1.7.6 (get the zip file, cannot be found on Homebrew)
-* `cd` into the ElasticSearch folder and enter `./bin/elasticsearch`
+* `cd` into the ElasticSearch, update the `config/elasticsearch.yml` file and add `script.disable_dynamic: false` to the bottom of the file to enable dynamic scripting.
+*  type `./bin/elasticsearch`, open up a new terminal tab
 * Enter the rails console in the terminal with `$ run bundle exec rails c`
 * `$ Features.deactivate(:force_sitewide_ssl)`
 * `quit`
