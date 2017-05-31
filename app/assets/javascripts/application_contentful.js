@@ -99,7 +99,8 @@
 // require partials/inputs/new.js.coffee
 // require partials/inputs/product_option_selectors.js.coffee
 // require partials/helpers/product_images_slider.js.coffee
-//= require partials/product_collection_image_hover.js.coffee
+// require partials/product_collection_image_hover.js.coffee
+//= require partials/product_collection_image_hover.js
 
 //--------------------------------
 // Shopping cart & bag & moodboard
