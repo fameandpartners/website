@@ -32,7 +32,8 @@ Spree::Order.class_eval do
     # which on order number, is very very slow.
   end
 
-  # called from manual_order, value is derived from delivery_period
+  # called from manual_order and a state transition in checkout, value is derived from delivery_period
+  # don't think anybody actually consumes except for the manual order thingy
   def project_delivery_date
     if complete?
       delivery_date = delivery_policy.delivery_date
