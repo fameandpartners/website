@@ -147,13 +147,12 @@
     }
 
   }
-
-  .pdp-panel-side-right {
-
-    .panel-side {
-      height: 100vh;
-    }
-
+  @media (min-width: $bootstrap-md-width) {
+      .pdp-panel-side-right {
+        .panel-side {
+          height: 100vh;
+        }
+      }
   }
 
   .btn-wrap .price {
