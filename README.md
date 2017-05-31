@@ -64,6 +64,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * Enter the rails console in the terminal with `$ run bundle exec rails c`
 * `$ Features.deactivate(:force_sitewide_ssl)`
 * `quit`
+*  Go to the `website/config/environments/development.rb` file and set `config.use_s3 = true`
 * `$ brew services start postgresql`
 * `$ brew services start redis-server`
 * `$ run bundle exec rails s` (this will start the build process)
