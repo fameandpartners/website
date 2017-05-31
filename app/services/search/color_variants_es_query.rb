@@ -7,11 +7,11 @@ module Search
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
-      colors            = options[:color_ids]
-      body_shapes       = options[:body_shapes]
-      taxon_ids         = options[:taxon_ids]
-      exclude_products  = options[:exclude_products]
-      discount          = options[:discount]
+      colors            = options[:color_ids] #
+      body_shapes       = options[:body_shapes] #
+      taxon_ids         = options[:taxon_ids] #
+      exclude_products  = options[:exclude_products]  #no!
+      discount          = options[:discount]  #
       query_string      = options[:query_string]
       order             = options[:order]
       fast_making       = options[:fast_making]
@@ -58,6 +58,13 @@ module Search
                 end
               end
 
+              # exclude products found
+              if exclude_products.present?
+                must_not do
+                  term id: exclude_products
+                end
+              end
+
               # exclude items marked not-a-dress
               if exclude_taxon_ids.present?
                 must_not do
@@ -67,6 +74,14 @@ module Search
 
               should do
                 range 'product.available_on' => { :lte => Time.now}
+              end
+
+              if body_shapes.present?
+                body_shapes.each do |bs|
+                  should do
+                    range "product.#{bs}" => {:gte => 4}
+                  end
+                end
               end
 
               if discount.present?
@@ -84,14 +99,25 @@ module Search
               if price_min.present? || price_max.present?
                 ColorVariantsESQuery.build_pricing_comparison(price_mins, price_maxs, currency)
               end
+            end
+
+            filter do
+              if colors.present?
+                term 'color.id' => colors
+              end
+
+              exists field: 'available_on'
+
 
             end
-            if colors.present?
-              term 'color.id' => colors
-            end
           end
-          filter do
-            exists field: 'available_on'
+
+          query do
+            if query_string.present?
+              query_string do
+                query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+              end
+            end
           end
         end
       end
@@ -104,7 +130,7 @@ binding.pry
     def self.build_pricing_comparison(min_prices, max_prices, currency)
       Filter.new do
         min.prices.zip(max_prices).map do |min, max|
-          should { Range.new {"sale_prices.#{currency}" => {gte: min, lte: max}} }
+          should { Range.new "sale_prices.#{currency}" => {gte: min, lte: max} }
         end
       end
     end

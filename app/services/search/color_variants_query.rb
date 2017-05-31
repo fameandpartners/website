@@ -118,10 +118,10 @@ binding.pry
         if price_min.present? || price_max.present?
           filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)  #
         end
-
+binding.pry
         if query_string.present?
           query_string = query_string.downcase.gsub("dresses","").gsub("dress","")
-          query do
+          query do  #
             string "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
           end
         end
@@ -131,13 +131,13 @@ binding.pry
           filter :bool, :must => {
             :not => {
               :terms => {
-                :id => exclude_products
+                :id => exclude_products #
               }
             }
           }
         end
 
-        if body_shapes.present?
+        if body_shapes.present? #
           if body_shapes.size.eql?(1)
             filter :bool, :should => {
                           :range => {
