@@ -9,23 +9,14 @@
   width: 100%;
   max-width: 1776px;
 
-  background: limegreen;
   @include breakpoint(tablet) {
     padding: 0 48px;
     width: calc(100% - 96px);
-
-    background: coral;
   }
   @include breakpoint(desktop) {
-
-    background: lemonchiffon;
   }
   @include breakpoint(widescreen) {
-
-    background: firebrick;
   }
   @include breakpoint(fullhd) {
-
-    background: thistle;
   }
 }

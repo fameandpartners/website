@@ -7,3 +7,24 @@
     background: #6565aa;
   }
 }
+
+.app-child {
+  background: limegreen;
+
+  @include breakpoint(tablet) {
+    background: coral;
+  }
+
+  @include breakpoint(desktop) {
+    background: lemonchiffon;
+  }
+
+  @include breakpoint(widescreen) {
+    background: firebrick;
+  }
+
+  @include breakpoint(fullhd) {
+    background: thistle;
+  }
+}
+

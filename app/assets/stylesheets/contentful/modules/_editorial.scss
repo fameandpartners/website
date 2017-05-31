@@ -1,3 +1,24 @@
+.Editorial {
+  position: relative;
+  padding-bottom: 41px;
+}
+
 .Editorial__image {
   width: 100%;
+}
+
+.Editorial__overlay {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  color: $oil;
+  opacity: 0.7;
+}
+
+.Editorial__overlay ul {
+  list-style-type: none;
+  margin: 0;
+  font-weight: bold;
 }

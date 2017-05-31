@@ -1,11 +1,13 @@
 <div class="Editorial">
   <%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
 
-  <ul>
-  <% @lg_contents[:overlay_pids].each do |pid| %>
-    <li>
-      <%= @sample_product_collection[pid][:name] %>
-    </li>
-  <% end %>
-  </ul>
+  <div class="Editorial__overlay">
+    <ul>
+    <% @lg_contents[:overlay_pids].each do |pid| %>
+      <li>
+        <%= @sample_product_collection[pid][:name] %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
 </div>
