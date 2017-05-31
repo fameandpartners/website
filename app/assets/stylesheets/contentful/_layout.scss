@@ -5,12 +5,14 @@
 // use this class for breakpoints
 .app-child {
   margin: 0 auto;
-  padding: 0 48px;
-  width: calc(100% - 96px);
+  padding: 0 12px;
+  width: 100%;
   max-width: 1776px;
 
   background: limegreen;
   @include breakpoint(tablet) {
+    padding: 0 48px;
+    width: calc(100% - 96px);
 
     background: coral;
   }
