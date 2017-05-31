@@ -61,7 +61,7 @@ module Policies
 
       # special case for express
       if delivery_period == FAST_MAKING_DELIVERY_PERIOD
-        return DAYS_IN_FLIGHT_FAST.business_days.before(order_completed_at + value.days)
+        return DAYS_IN_FLIGHT_FAST.business_days.before(value.business_days.after(order_completed_at))
       end
 
       # figure out delivery date then subtract the days_in_flight
