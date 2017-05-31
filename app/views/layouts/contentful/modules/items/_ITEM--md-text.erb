@@ -1,6 +1,8 @@
-<div class="content">
-  <% @md_contents[:text].each do |line| %>
-    <span><%= line %></span>
-    <br/>
-  <% end %>
+<div class="CopyHeader">
+  <div class="CopyHeader__separator"></div>
+  <div class="CopyHeader__content">
+    <% @md_contents[:text].each do |line| %>
+      <p><%= line %></p>
+    <% end %>
+  </div>
 </div>

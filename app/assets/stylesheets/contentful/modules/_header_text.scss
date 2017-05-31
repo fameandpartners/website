@@ -1,0 +1,21 @@
+.CopyHeader {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.CopyHeader__separator {
+  border-top: 1px solid $oil;
+  width: 20px;
+  margin: 56px auto 28px;
+}
+
+.CopyHeader__content {
+  max-width: 440px;
+  margin: 0 auto;
+  font-size: 2.4rem;
+  font-family: $secondary-font-family;
+}
+
+.CopyHeader__content p {
+  margin-bottom: 0;
+}
