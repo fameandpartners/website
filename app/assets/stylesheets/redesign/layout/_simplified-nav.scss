@@ -35,7 +35,7 @@
   }
 
   .nav-menu-buffer {
-    padding: 0px 60px 10px;
+    padding: 0px 45px 10px;
   }
 
   .center-wrapper {
@@ -100,26 +100,49 @@
     width: 990px;
   }
 
+  .fame-culture-about {
+    padding-right: 10px;
+  }
+
   // Overwrites
-  &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-    display: inline;
-    font-size: 1.3rem;
-    letter-spacing: 0.05rem;
-  }
+  &.nav-menu-container .home-menu .nav-main-menu {
 
-  @media only screen and (min-width: 1160px) {
-    &.nav-menu-container .home-menu .nav-main-menu span:not(.logo) {
-      margin: 0 26px;
+    span:not(.logo) {
+      margin: 0 15px;
+      display: inline;
+      font-size: 1.3rem;
+      letter-spacing: 0.05rem;
+
+      @media only screen and (min-width: 1320px) {
+        margin: 0 25px;
+      }
+
+      @media only screen and (max-width: 1320px) {
+        margin: 0 12px;
+      }
+
+      @media only screen and (max-width: 1140px) {
+        font-size: 1.15rem;
+        letter-spacing: 0;
+      }
+
     }
+
+    span:first-child {
+      margin-left: 0px;
+    }
+
+    span:last-child {
+      margin-right: 0px;
+    }
+
   }
 
-  &.nav-menu-container .home-menu .nav-main-menu span.lookbook {
-    margin-right: 0px;
-  }
   .col .cta-link {
     font-weight: 300;
     font-family: $font-heading;
     font-style: italic;
     border-bottom: 1px solid $c-neutral-6;
   }
+
 }

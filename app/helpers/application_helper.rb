@@ -1,6 +1,5 @@
 # encoding: utf-8
 module ApplicationHelper
-  include Split::Helper # Split testing
 
   def conditional_html(options = {}, &block)
     lang = I18n.locale
@@ -211,4 +210,5 @@ module ApplicationHelper
       height
     end
   end
+
 end

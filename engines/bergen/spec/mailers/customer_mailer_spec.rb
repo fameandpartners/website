@@ -16,7 +16,7 @@ module Bergen
       let(:mailer) { described_class.received_parcel(item_return: item_return) }
 
       it do
-        expect(mailer.subject).to eq('Fame & Partners Order R123123123 - Package Received')
+        expect(mailer.subject).to eq('Fame and Partners Order R123123123 - Package Received')
         expect(mailer.to).to eq(['loroteiro@silvestre.com'])
         expect(mailer.body).to have_text('Thank you for sending back your order for return')
       end

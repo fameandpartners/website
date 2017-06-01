@@ -4,7 +4,7 @@
     .col.col-md-3
       = link_to root_path, class: 'logo-wrap' do
         span.logo
-          = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
+          = image_tag 'logo/new-logo.svg', alt: 'Fame and Partners', class: 'img-responsive'
 
     .col.col-md-7.nav-main-menu.text-center
 
@@ -13,7 +13,9 @@
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu Wedding Shop
+
       span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+      span.culture.js-open-nav-menu Fame Culture
 
     .col.col-md-2.nav-icons.text-right.pull-right
       span#search.search-wrapper.js-search
@@ -78,3 +80,9 @@
       .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/wedding_shop'
+
+      .rect#rect-evening.nav-menu-wrap
+
+      .rect#rect-culture.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
+          = render partial: 'layouts/redesign/header/simplified_nav/fame_culture'

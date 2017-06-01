@@ -1,3 +1,8 @@
+ruby:
+  def tile_responsive_classes(currentTile)
+    (currentTile == @insta_tiles.last) ? {class: 'hidden-sm hidden-xs'} : {class: 'col-xs-6'}
+  end
+
 // Section: Instagram
 section.container
   .row
@@ -16,66 +21,19 @@ section.container
             .diagonal-line
 
         .instagram-widget
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to dresses_path + "/dress-kiki-corset-1263?color=white", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/april-26-Instagram-1.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @chantal_li
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-dream-about-me-1202?color=red", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/april-26-Instagram-2.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @lisadengler
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-wafia-skirt-1233?color=micro-spot", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/april-26-Instagram-3.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @seaofshoes
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.col-xs-6
-            = link_to  dresses_path + "/dress-pluto-1214?color=navy", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/april-26-Instagram-4.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @stylechine
-                        span.cta-link shop
-
-          // Instagram Item
-          .item.col-md-5ths.hidden-sm.hidden-xs
-            = link_to  dresses_path + "/dress-keira-skirt-1158?color=black", class: "item-wrap"
-              .media-wrap
-                = image_tag "homepage/get-social/april-26-Instagram-5.jpg", class: "img-responsive", alt: ""
-                .overlay
-                  .overlay-outer-wrap
-                    .overlay-inner-wrap
-                      span.cta-instagram
-                        span.user @milexr
-                        span.cta-link shop
+          // Instagram Tiles - via Contentful CMS
+          - @insta_tiles = @home_page_container[:instagram_tiles]
+          - @insta_tiles.each do |tile|
+            .item.col-md-5ths*tile_responsive_classes(tile)
+              = link_to tile[:path_link], class: "item-wrap"
+                .media-wrap
+                  img.img-responsive*{src: tile[:image] }
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user = tile[:handle]
+                          span.cta-link shop
 
       .row
         .col-md-12.text-center
