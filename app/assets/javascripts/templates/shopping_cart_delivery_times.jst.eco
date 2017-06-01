@@ -37,7 +37,7 @@
                 <label for="delivery_time_normal_<%= i %>">
                   Deliver Standard - Delivered in <%= product.delivery_period %>
                 </label>
-                <div class="price-wrapper">Free</div>
+                <div class="price-wrapper">FREE</div>
               </div>
             </div>
 
