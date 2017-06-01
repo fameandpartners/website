@@ -23,7 +23,6 @@ class EmailCapture
     @site_version       = site_version
     @facebook_uid       = facebook_uid
     @form_name          = form_name
-
   end
 
   def mailchimp
@@ -48,9 +47,27 @@ class EmailCapture
         NewRelic::Agent.notice_error("Mailchimp: #{e} for #{email}")
       end
     elsif service == :bronto
-      Bronto::SubscribeUsersWorker.new.perform(configatron.bronto.subscription_list, [email])
+      # for current realization of this class we can't use async job
+      Bronto::SubscribeUsersWorker.new.perform(configatron.bronto.subscription_list, [user_data])
     end
+  end
 
+  # user data we pass to bronto worker
+  def user_data
+    {
+      email: email,
+      fields: {
+        lastname:         last_name,
+        firstname:        first_name,
+        facebook_UID:     facebook_uid,
+        ip_address:       current_sign_in_ip,
+        site_add_source:  site_version,
+        landing_page:     landing_page,
+        utm_term:         utm_params,
+        form_name:        form_name,
+        newsletter:       newsletter
+      }
+    }
   end
 
   def update_list(get_email, current_email, first_name, last_name)

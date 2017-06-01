@@ -2,9 +2,9 @@ module Bronto
   class SubscribeUsersWorker
     include Sidekiq::Worker
 
-    def perform(list_name, emails)
-      bronto_client.add_contacts(emails.map{ |email| { email: email }})
-      bronto_client.add_to_list(list_name: list_name, emails: emails)
+    def perform(list_name, users)
+      bronto_client.add_contacts(users)
+      bronto_client.add_to_list(list_name: list_name, emails: users.map{ |user| user[:email] })
     end
 
     def bronto_client
