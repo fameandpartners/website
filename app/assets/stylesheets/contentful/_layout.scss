@@ -20,3 +20,8 @@
   @include breakpoint(fullhd) {
   }
 }
+
+// custom offset (bulma doesn't have this margin-right version)
+.is-offset-6-right {
+  margin-right: 50%;
+}
