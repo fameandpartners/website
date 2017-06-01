@@ -35,7 +35,7 @@
                   name="delivery_time_<%=i%>"
                 >
                 <label for="delivery_time_normal_<%= i %>">
-                  Deliver Standard - Delivered in <%= product.delivery_period %>
+                  Deliver Standard: Delivered in <%= product.delivery_period %>
                 </label>
                 <div class="price-wrapper">FREE</div>
               </div>
@@ -52,7 +52,7 @@
                     value="<%=mo.id%>"
                   >
                   <label for="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%=i%>">
-                    <%= mo.name %> - <%= mo.description %>
+                    <%= mo.name %>: <%= mo.description %>
                   </label>
                   <div class="price-wrapper"><%= mo.display_discount %></div>
                 </div>

@@ -37,14 +37,14 @@ class ProductMakingOption < ActiveRecord::Base
   end
 
   def display_price
-    Spree::Money.new(price, currency: currency)
+    Spree::Money.new(price, currency: currency, no_cents: true)
   end
 
   def display_discount
     if self.fast_making?
       self.display_price.to_s
     elsif self.slow_making?
-      (self.price*100).round.to_s + '%'
+      (self.price*100*(-1)).round.to_s + '% OFF'
     else
       '' #bad
     end
@@ -52,7 +52,7 @@ class ProductMakingOption < ActiveRecord::Base
 
   def name
     if fast_making?
-      'Express Delivery'
+      'Deliver Express'
     else
       'Deliver Later'
     end
