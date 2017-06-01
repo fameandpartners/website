@@ -11,7 +11,7 @@
       </article>
     </div>
 
-    <div class="tile is-parent">
+    <div class="tile is-parent is-hidden-mobile">
       <div class="columns is-mobile">
       <% contents[:sm_items].each do |item| %>
         <% @pid = item %>
@@ -28,6 +28,17 @@
     <article class="tile is-child">
       <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
     </article>
+  </div>
+
+  <div class="tile is-parent is-12 is-hidden-tablet">
+    <div class="columns is-mobile">
+    <% contents[:sm_items].each do |item| %>
+      <% @pid = item %>
+      <div class="column">
+        <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+      </div>
+    <% end %>
+    </div>
   </div>
 
 </div>

@@ -12,13 +12,12 @@
   bottom: 50px;
   width: 100%;
   text-align: center;
-  background: #fff;
+  background: rgba(255,255,255,0.95);
   color: $oil;
-  opacity: 0.7;
 }
 
 .Editorial__overlay ul {
   list-style-type: none;
-  margin: 0;
+  padding: 0;
   font-weight: bold;
 }

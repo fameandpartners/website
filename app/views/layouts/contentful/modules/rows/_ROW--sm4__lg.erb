@@ -1,6 +1,6 @@
 <div class="tile is-ancestor">
 
-  <div class="tile is-parent is-vertical is-6">
+  <div class="tile is-parent is-vertical is-6 is-hidden-mobile">
 
     <div class="tile">
       <div class="columns is-mobile">
@@ -31,6 +31,32 @@
     <article class="tile is-child">
       <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
     </article>
+
+  </div>
+
+  <div class="tile is-parent is-vertical is-12 is-hidden-tablet">
+
+    <div class="tile">
+      <div class="columns is-mobile">
+      <% contents[:sm_items][0..1].each do |item| %>
+        <% @pid = item %>
+        <div class="column">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="columns is-mobile">
+      <% contents[:sm_items][2..3].each do |item| %>
+        <% @pid = item %>
+        <div class="column">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+        </div>
+      <% end %>
+      </div>
+    </div>
 
   </div>
 
