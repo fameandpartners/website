@@ -32,7 +32,7 @@ module Spree
     def compute_order(order)
       if shipping_to_california?(order)
         adjustment_total = order.adjustments.eligible\
-                            .delete_if { |a| a.originator.calculator == self }\
+                            .delete_if { |a| a.originator&.calculator == self }\
                             .map(&:amount)\
                             .sum
 
