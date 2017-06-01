@@ -18,14 +18,11 @@
     - Partial Name: `_ROW--md-sm2__lg.erb`
 
   - LARGE || SMALL * 4
+  - LARGE || SMALL * 3
     - Partial Name: `_ROW--lg__sm4.erb`
   - SMALL * 4 || LARGE
-    - Partial Name: `_ROW--sm4__lg.erb`
-
-  - LARGE || SMALL * 3
-    - Partial Name: `_ROW--sm3__lg.erb`
   - SMALL * 3 || LARGE
-    - Partial Name: `_ROW--lg__sm3.erb`
+    - Partial Name: `_ROW--sm4__lg.erb`
 
   - SMALL * 4
     - Partial Name: `_ROW--sm4.erb`
