@@ -242,7 +242,7 @@ module ContentfulHelper
     # binding.pry
 
     @landing_page_container = {
-      path: parent_container.page_title,
+      path: parent_container.relative_url,
       # to-do: header
       rows: row_tiles
     }
