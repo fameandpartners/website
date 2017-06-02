@@ -23,5 +23,7 @@
 
 // custom offset (bulma doesn't have this margin-right version)
 .is-offset-6-right {
-  margin-right: 50%;
+  @include breakpoint(tablet) {
+    margin-right: 50%;
+  }
 }
