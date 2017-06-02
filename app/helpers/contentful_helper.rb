@@ -135,7 +135,7 @@ module ContentfulHelper
   def get_all_landing_pages_from_entries
     # later: find all LPs from this array
     # for now we're just fetching our lone LP container
-    create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'sys.id' => '1dZp2VKhRUyGSWoMiYgEaO')[0)
+    create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'sys.id' => '1dZp2VKhRUyGSWoMiYgEaO')[0])
   end
 
   def create_hash_of_contentful_entries
