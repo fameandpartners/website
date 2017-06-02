@@ -1,6 +1,8 @@
 # encoding: utf-8
 module ApplicationHelper
 
+  include ContentfulHelper
+
   def conditional_html(options = {}, &block)
     lang = I18n.locale
     html_class = options[:class]

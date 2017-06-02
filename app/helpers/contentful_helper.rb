@@ -93,6 +93,9 @@ module ContentfulHelper
   ## TO-DO: NEEDS REFACTORING WITH ABOVE!!!
 
   def get_contentful_lp_parent_container
+
+    # binding.pry
+
     # if (params['developer'] == 'preview')
     #   puts '*'*60
     #   puts 'In PREVIEW MODE - Fetching unpublished Contentful data...'
@@ -120,7 +123,7 @@ module ContentfulHelper
           dynamic_entries: :auto,
           raise_errors: true
         )
-        get_all_landing_pages_from_entries()
+        get_all_landing_pages_from_entries(request.fullpath)
         # @contentful_client ||= Contentful::Client.new(
         #   access_token: '6f6dc6fc69767cae44e0a31af09400a340b82ceda752d4131ebdb32685c881f3',
         #   space: 'fsxg2d84t7b3',
@@ -132,10 +135,10 @@ module ContentfulHelper
     # end
   end
 
-  def get_all_landing_pages_from_entries
+  def get_all_landing_pages_from_entries(route_name)
     # later: find all LPs from this array
     # for now we're just fetching our lone LP container
-    create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'sys.id' => '1dZp2VKhRUyGSWoMiYgEaO')[0])
+    create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'fields.relativeUrl' => route_name)[0])
   end
 
   def create_hash_of_contentful_entries

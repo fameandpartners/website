@@ -1,5 +1,9 @@
 <div class="app-child contentful-container">
 
+<%
+    @landing_page_container = get_contentful_lp_parent_container
+%>
+
   <% @landing_page_container[:rows].each do |row| %>
     <!--
         Frustrating! I shouldn't have to set instance variables, but nested partials are
