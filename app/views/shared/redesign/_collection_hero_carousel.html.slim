@@ -62,13 +62,13 @@ ruby:
 
 // Hero Tiles - via Contentful CMS
 - hero_tiles = @home_page_container[:hero_tiles].each do |tile|
-  - current_tile_image = tile[:image]
-  - current_tile_mobile_image = tile[:mobile_image]
+  - current_tile_image = tile[:image] + "?fl=progressive"
+  - current_tile_mobile_image = tile[:mobile_image] + "?fl=progressive"
   = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
     picture.media-wrap
       source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
       source media="(min-width: 992px)" srcset="#{current_tile_image}"
-      img src="#{current_tile_image}" srcset="
+      img src="#{current_tile_image}?fl=progressive" srcset="
         #{current_tile_mobile_image} 991w,
         #{current_tile_image} 992w"
 

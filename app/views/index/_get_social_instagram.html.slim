@@ -27,7 +27,7 @@ section.container
             .item.col-md-5ths*tile_responsive_classes(tile)
               = link_to tile[:path_link], class: "item-wrap"
                 .media-wrap
-                  img.img-responsive*{src: tile[:image] }
+                  img.img-responsive*{src: tile[:image] + "?fl=progressive" }
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap

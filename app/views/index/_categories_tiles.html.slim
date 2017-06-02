@@ -9,8 +9,8 @@ section.section-box.container.section-style-icon
     - secondary_hero = @home_page_container[:secondary_header]
 
     .col-md-12.cta-item-huge
-      - secondary_hero_image = secondary_hero[:image];
-      - secondary_hero_mobile_image = secondary_hero[:mobile_image];
+      - secondary_hero_image = secondary_hero[:image] + "?fl=progressive";
+      - secondary_hero_mobile_image = secondary_hero[:mobile_image] + "?fl=progressive";
 
       = link_to secondary_hero[:path_link]
         .section-img-wrap.copy-center
@@ -37,7 +37,7 @@ section.section-box.container.section-style-icon
           = link_to tile[:link]
             .section-img-wrap.copy-center.category-tile
               .img-wrap
-                img.img-responsive*{src: tile[:image] }
+                img.img-responsive*{src: tile[:image] + "?fl=progressive" }
 
               .content-wrap
                 .container-cta
@@ -55,7 +55,7 @@ section.section-box.container.section-style-icon
           = link_to tile[:link]
             .section-img-wrap.copy-center.category-tile
               .img-wrap
-                img.img-responsive*{src: tile[:image] }
+                img.img-responsive*{src: tile[:image] + "?fl=progressive" }
 
               .content-wrap
                 .container-cta
