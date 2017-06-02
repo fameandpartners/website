@@ -12,8 +12,9 @@ namespace :facebook_ads do
         account = sync.next_page
         active_record_account = FacebookAccount.update_from_json( account )        
         account['campaigns']['data'].each do |campaign|
-          FacebookCampaign.update_from_json( active_record_account, campaign )
+          campaign_ar = FacebookCampaign.update_from_json( active_record_account, campaign )
           campaign['adsets']['data'].each do |adset|
+            FacebookAdset.update_from_json( campaign_ar, adset )
             puts "\t#{adset['name']} has #{adset['ads']['data'].count} ads" unless adset['ads'].nil?
           end unless( campaign.nil? || campaign['adsets'].nil? )
         end if account['campaigns'] && account['campaigns']['data']
