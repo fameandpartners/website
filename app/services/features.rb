@@ -13,7 +13,7 @@ module Features
     fameweddings:                  'Weddings "Shop"',
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",
-    delayed_delivery:              "Turn off delayed delivery option for end users.",
+    delayed_delivery:              "Show delayed delivery option for end users in Checkout page.",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
     i_equal_change:                'Toggles i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout).',
