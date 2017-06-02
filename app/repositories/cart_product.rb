@@ -20,7 +20,7 @@ class Repositories::CartProduct
     @cart_product ||= begin
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
-        color: Repositories::ProductColors.read(color_id),
+        color: Repositories::ProductColors.read(color_id, product.id),
         customizations: product_customizations.to_a,
         making_options: making_options,
         height: height,
@@ -46,7 +46,7 @@ class Repositories::CartProduct
         from_wedding_atelier: wedding_atelier_product?,
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
-      result.color  = Repositories::ProductColors.read(color_id)
+      # result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       # result.making_options = product_making_options
       result.available_making_options = available_making_options
