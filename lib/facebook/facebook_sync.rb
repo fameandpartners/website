@@ -14,6 +14,7 @@ class FacebookSync
     response = begin
                  RestClient.get(generate_uri, accept: :json, accept_encoding: :identity)
                rescue RestClient::Exception => e
+                 puts "Error!"
                  puts e.response
                end
     results = JSON.parse( response )

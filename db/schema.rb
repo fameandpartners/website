@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170527071529) do
+ActiveRecord::Schema.define(:version => 20170602062951) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -249,6 +249,9 @@ ActiveRecord::Schema.define(:version => 20170527071529) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+# Could not dump table "facebook_ads" because of following StandardError
+#   Unknown type 'json' for column 'recommendations'
 
 # Could not dump table "facebook_adsets" because of following StandardError
 #   Unknown type 'json' for column 'adlabels'

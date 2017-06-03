@@ -14,8 +14,10 @@ namespace :facebook_ads do
         account['campaigns']['data'].each do |campaign|
           campaign_ar = FacebookCampaign.update_from_json( active_record_account, campaign )
           campaign['adsets']['data'].each do |adset|
-            FacebookAdset.update_from_json( campaign_ar, adset )
-            puts adset['ads']['data']
+            adset_ar = FacebookAdset.update_from_json( campaign_ar, adset )
+            adset['ads']['data'].each do|ad|
+              ad_ar = FacebookAd.update_from_json( adset_ar, ad )
+            end unless adset['ads'].nil?
           end unless( campaign.nil? || campaign['adsets'].nil? )
         end if account['campaigns'] && account['campaigns']['data']
       end

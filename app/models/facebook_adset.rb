@@ -15,7 +15,8 @@ class FacebookAdset < ActiveRecord::Base
                              start_time: adset_json['start_time'],
                              status: adset_json['status'],
                              targeting: adset_json['targeting']&.to_json,
-                             updated_time: adset_json['updated_time'] )
+                             updated_time: adset_json['updated_time'],
+                             facebook_id: adset_json['id'])
     
     adset
   end
