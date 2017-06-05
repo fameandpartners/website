@@ -146,6 +146,10 @@ module ContentfulHelper
     end
   end
 
+  def create_json_from_contentful_entries
+    @global_contentful_json = @contentful_client.entries.as_json
+  end
+
   def create_sample_product_hash
     @sample_product_collection = {
       "1545-red" => {
@@ -223,7 +227,25 @@ module ContentfulHelper
   def create_landing_page_container(parent_container)
 
     create_hash_of_contentful_entries()
+    create_json_from_contentful_entries()
     create_sample_product_hash()
+
+    # binding.pry
+
+    lp_header = parent_container.header
+
+    header_lg_item = (lp_header.respond_to? :editorial_container) ? jsonify_large_lp_container(lp_header.editorial_container) : nil
+    header_sm_items = (lp_header.respond_to? :pids) ? lp_header.pids : nil
+    email_text = (lp_header.respond_to? :email_capture_text) ? lp_header.email_capture_text : nil
+
+    main_header_tile = {
+      id: lp_header.content_type.id,
+      header_lg_item: header_lg_item,
+      header_text: lp_header.header_text,
+      email_capture: lp_header.show_email_capture,
+      email_text: email_text,
+      header_sm_items: header_sm_items
+    }
 
     row_tiles = parent_container.rows_container.map do |item|
 
@@ -243,7 +265,7 @@ module ContentfulHelper
 
     @landing_page_container = {
       path: parent_container.relative_url,
-      # to-do: header
+      header: main_header_tile,
       rows: row_tiles
     }
   end
