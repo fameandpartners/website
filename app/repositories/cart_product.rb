@@ -7,7 +7,7 @@ require File.join(Rails.root, 'app', 'models', 'customisation_value.rb')
 
 module Repositories; end
 class Repositories::CartProduct
-  include Repositories::CachingSystem
+  # include Repositories::CachingSystem
   attr_reader :line_item, :product
 
   def initialize(options = {})
@@ -50,7 +50,7 @@ class Repositories::CartProduct
       result
     end
   end
-  cache_results :read
+  # cache_results :read
 
   private
 
