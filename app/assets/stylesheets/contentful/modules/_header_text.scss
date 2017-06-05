@@ -19,3 +19,20 @@
 .CopyHeader__content p {
   margin-bottom: 0;
 }
+
+.CopyHeader--featured.CopyHeader {
+  padding: 50px 20px;
+}
+
+.CopyHeader--featured .CopyHeader__separator {
+  transform: rotate(45deg);
+  width: 30px;
+  margin: 50px auto;
+}
+
+.CopyHeader--featured .CopyHeader__content p {
+  font-size: 2.0rem;
+  &:first-of-type {
+    font-size: 3.5rem;
+  }
+}
