@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { Scrollbars } from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
+import { trackEvent } from '../../libs/gaTracking'
+import { openCustomizeMenuEvent, closeCustomizeMenuEvent, selectCustomizedOptionMenuEvent } from '../../libs/gaEventObjects'
 
 class SidePanelCustom extends SidePanel {
   constructor(props, context) {
@@ -15,7 +17,6 @@ class SidePanelCustom extends SidePanel {
   onChange(event) {
     const customize = {};
     customize.customization = {};
-
     if (this.props.customize.customization.id == event.currentTarget.dataset.id) {
       customize.customization.id = undefined;
       customize.customization.presentation = '';
@@ -25,12 +26,10 @@ class SidePanelCustom extends SidePanel {
       customize.customization.presentation = event.currentTarget.dataset.presentation;
       customize.customization.price = parseFloat(event.currentTarget.dataset.price);
     }
-
     this.props.actions.customizeDress(customize);
-
+    trackEvent(selectCustomizedOptionMenuEvent, true, event.currentTarget.dataset.presentation)
     this.closeMenu();
   }
-
   render() {
     const AUTO_HIDE = true;
 
@@ -64,7 +63,12 @@ class SidePanelCustom extends SidePanel {
     return (
       <div className="pdp-side-container pdp-side-container-custom">
         <a href="javascript:;" className={triggerState} onClick={this.openMenu}>
-          <div className="c-card-customize__content__left">Customize</div>
+          <div 
+            className="c-card-customize__content__left"
+            onClick={() => trackEvent(openCustomizeMenuEvent)}
+          >
+            Customize
+          </div>
           <div className="c-card-customize__content__right">
             {this.props.customize.customization.presentation}
           </div>
@@ -73,7 +77,7 @@ class SidePanelCustom extends SidePanel {
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
-              <div className="text-right">
+              <div className="text-right" onClick={() => trackEvent(closeCustomizeMenuEvent)}>
                 <a href="javascript:;" className="btn-close med" onClick={this.closeMenu}>
                   <span className="hide-visually">Close Menu</span>
                 </a>
