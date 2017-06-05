@@ -227,6 +227,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       elBottom = elTop + $el.height();
 
       if ((elBottom <= bottom) && (elTop >= top))
+        console.log("Clicking in javascript")
         $el.click()
 
   updateCollectionDetails: (details) =>
