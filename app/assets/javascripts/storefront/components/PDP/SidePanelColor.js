@@ -97,7 +97,9 @@ class SidePanelColor extends SidePanel {
         ? 'selector-color is-selected' : 'selector-color';
       const swatch = `swatch color-${color.option_value.name}`;
       return (  
-        <div onClick={() => trackEvent(selectPremiumColorEvent, true, color.option_value.name)}>
+        <div 
+          key={index}
+          onClick={() => trackEvent(selectPremiumColorEvent, true, color.option_value.name)}>
           <a
             href="javascript:;" className={itemState}
             onClick={this.onChange} key={index}
