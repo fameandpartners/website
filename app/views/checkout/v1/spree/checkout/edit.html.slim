@@ -71,7 +71,7 @@
       .col-md-6
         - if current_step.eql?('address')
           .checkout-step data-name="address"
-            = render 'address_step', current_step: current_step
+            = render 'address_step', current_step: current_step, cart: cart
 
         - if current_step.eql?('payment')
           - content_for :inline_javascript do

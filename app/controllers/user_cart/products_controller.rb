@@ -65,6 +65,11 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
+  def create_line_item_making_option
+    cart_product_service.create_making_option(params[:product_making_option_id])
+    render json: user_cart_resource.read.serialize, status: :ok
+  end
+
   def destroy
     cart_product_service.destroy
     render json: user_cart_resource.read.serialize, status: :ok
