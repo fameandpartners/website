@@ -24,7 +24,7 @@ export const selectHeightEvent = {
 }
 export const viewSizeGuideEvent = {
   category: 'PDP', 
-  action: 'Guide Open', 
+  action: 'Size Guide Open', 
   label: null, 
   nonInteraction: false 
 }
