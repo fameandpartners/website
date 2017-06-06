@@ -46,3 +46,17 @@
   left: calc(50% - 20px);
   transform: translateX(-50%);
 }
+
+.Editorial--mini .Editorial__image {
+  padding-top: 0;
+}
+
+.Editorial--mini .Editorial__overlay ul {
+  a {
+    font-size: 1.4rem;
+  }
+}
+
+.Editorial--mini .Editorial__overlayTitle {
+  font-size: 2rem;
+}
