@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170603045344) do
+ActiveRecord::Schema.define(:version => 20170606004911) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -246,6 +246,14 @@ ActiveRecord::Schema.define(:version => 20170603045344) do
     t.integer  "amount_spent"
     t.string   "currency"
     t.float    "age"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "facebook_ad_creatives", :force => true do |t|
+    t.string   "facebook_id"
+    t.integer  "facebook_ad_id"
+    t.string   "image_url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
