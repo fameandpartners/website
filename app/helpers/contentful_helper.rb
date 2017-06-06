@@ -204,7 +204,7 @@ module ContentfulHelper
 
     {
       image: fetched_lg_container.image.url,
-      mobile_image: fetched_lg_container.mobile_image.url,
+      # mobile_image: fetched_lg_container.mobile_image.url,
       overlay_pids: fetched_lg_container.overlay_pids
     }
   end
@@ -217,10 +217,43 @@ module ContentfulHelper
     if (fetched_md_container.content_type.id == 'ITEM--md-text')
       {
         id: 'ITEM--md-text',
-        text: fetched_md_container.content.split("\n")
+        text: fetched_md_container.content.split("\n"),
+        text_size: fetched_md_container.text_size
       }
     else
       # 'ITEM--md-email'
+    end
+  end
+
+  def jsonify_header_container(main_header_container)
+    if (main_header_container.content_type.id == 'HEADER--xl-text')
+      id = main_header_container.header_container.id
+      subcontainer = @contentful_client.entries[@global_contentful_entries_hash[id]]
+
+      {
+        id: main_header_container.content_type.id,
+        text: subcontainer.content.split("\n"),
+      }
+    elsif (main_header_container.content_type.id == 'HEADER--lg__md-sm2')
+      header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
+      header_sm_items = (main_header_container.respond_to? :pids) ? main_header_container.pids : nil
+      email_text = (main_header_container.respond_to? :email_capture_text) ? main_header_container.email_capture_text : nil
+
+      {
+        id: main_header_container.content_type.id,
+        header_lg_item: header_lg_item,
+        header_text: main_header_container.header_text,
+        email_capture: main_header_container.show_email_capture,
+        email_text: email_text,
+        header_sm_items: header_sm_items
+      }
+    elsif (main_header_container.content_type.id == 'HEADER--xl-editorial')
+      {
+        id: main_header_container.content_type.id,
+        image: main_header_container.image.url,
+        # mobile_image: main_header_container.mobile_image.url,
+        overlay_pids: main_header_container.overlay_pids
+      }
     end
   end
 
@@ -232,32 +265,21 @@ module ContentfulHelper
 
     # binding.pry
 
-    lp_header = parent_container.header
-
-    header_lg_item = (lp_header.respond_to? :editorial_container) ? jsonify_large_lp_container(lp_header.editorial_container) : nil
-    header_sm_items = (lp_header.respond_to? :pids) ? lp_header.pids : nil
-    email_text = (lp_header.respond_to? :email_capture_text) ? lp_header.email_capture_text : nil
-
-    main_header_tile = {
-      id: lp_header.content_type.id,
-      header_lg_item: header_lg_item,
-      header_text: lp_header.header_text,
-      email_capture: lp_header.show_email_capture,
-      email_text: email_text,
-      header_sm_items: header_sm_items
-    }
+    main_header_tile = jsonify_header_container(parent_container.header)
 
     row_tiles = parent_container.rows_container.map do |item|
 
       lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
       md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
       sm_items = (item.respond_to? :pids) ? item.pids : nil
+      email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
 
       {
         id: item.content_type.id,
         lg_item: lg_item,
         md_item: md_item,
-        sm_items: sm_items
+        sm_items: sm_items,
+        email_text: email_text
       }
     end
 
