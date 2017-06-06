@@ -2,12 +2,12 @@ require 'pathname'
 require 'facebook/facebook_sync'
 
 namespace :facebook_ads do
-  namespace :campaigns do
-    desc 'Update the list of facebook campaigns in the database'     
-    task :sync => :environment do
-      access_token = "EAAaDM5wsv7sBAG1cPMRDktA1O4yi9XFu7MvoEPqDuSNQljlaYIX829iCxmlPQAx0ao1vaY6dhZCZCUUakj9ES5MNt4uDu0rLzwJdj68YP003kf40sjtKMNTo5T4dDsZBOjxGLqZBMlDVb2DHcNFGxs9GGlMZASFQZD"
-      sync = FacebookSync.new( access_token )
-
+  desc 'Update the list of facebook campaigns in the database'     
+  task :sync => :environment do
+    access_token = "EAAaDM5wsv7sBAG1cPMRDktA1O4yi9XFu7MvoEPqDuSNQljlaYIX829iCxmlPQAx0ao1vaY6dhZCZCUUakj9ES5MNt4uDu0rLzwJdj68YP003kf40sjtKMNTo5T4dDsZBOjxGLqZBMlDVb2DHcNFGxs9GGlMZASFQZD"
+    (0..28).each do |days_back|
+      puts "Working on day #{days_back.days.ago.to_date.to_s}"
+      sync = FacebookSync.new( access_token, days_back.days.ago.to_date )
       while( sync.has_more_pages? ) do
         account = sync.next_page
         active_record_account = FacebookAccount.update_from_json( account )        

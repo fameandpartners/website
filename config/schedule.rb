@@ -33,6 +33,7 @@ every(30.minutes) { rake 'bergen:workers:verify_style_masters' }
 every(30.minutes) { rake 'bergen:workers:update_tracking_numbers' }
 every(30.minutes) { rake 'bergen:workers:create_asns' }
 every(3.hours)    { rake 'bergen:workers:receive_asns' }
+every(1.hours)    { rake 'facebook_ads:sync' }
 
 # Next Logistics scheduled tasks
 
