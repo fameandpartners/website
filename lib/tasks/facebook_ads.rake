@@ -17,6 +17,9 @@ namespace :facebook_ads do
             adset_ar = FacebookAdset.update_from_json( campaign_ar, adset )
             adset['ads']['data'].each do|ad|
               ad_ar = FacebookAd.update_from_json( adset_ar, ad )
+              ad['insights']['data'].each do|insight|
+                insight_ar = FacebookAdInsight.update_from_json( ad_ar, insight )
+              end unless ad['insights'].nil?
             end unless adset['ads'].nil?
           end unless( campaign.nil? || campaign['adsets'].nil? )
         end if account['campaigns'] && account['campaigns']['data']
