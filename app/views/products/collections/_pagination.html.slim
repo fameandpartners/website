@@ -3,8 +3,10 @@
 - if is_pagination_link_shown
   - if @collection.total_products > @collection.products.size
     .relative.more-products
-      a.btn
-          = link_to (@collection.total_products / 21), 'javascript:;', class: 'btn btn-featured', data: { action: 'show-more-collection-products' }
+      - for i in (0...@collection.total_products / 21)
+        div 
+          a.btn
+              = link_to i + 1, 'javascript:;', class: 'btn btn-featured', data: { action: 'show-more-collection-products', startIndex: i + 1 }
   - if !current_page?(dresses_path)
     .relative.more-products
       = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'
