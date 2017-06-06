@@ -1,17 +1,23 @@
 <%
+  split_pid = @pid.split('-', 2)
 
-   # Once the correct collection is being referenced, use the below:
-   split_pid = @pid.split('-', 2)
+  product = @collection.products.select do |item|
+    item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+  end
 
-   product = @collection.products.select do |item|
-     item.id == split_pid[0].to_i && item.color.name == split_pid[1]
-   end
-
-   name = product[0].name
-   price = product_price_with_discount(product[0])
-   image = product[0].images.first
-   image_hover = product[0].images.last
-   path = collection_product_path(product[0], color: product[0].color.try(:name))
+  if product.present?
+    name = product[0].name
+    price = product_price_with_discount(product[0])
+    image = product[0].images.first
+    image_hover = product[0].images.last
+    path = collection_product_path(product[0], color: product[0].color.try(:name))
+  else
+    name = 'INVALID PRODUCT ID'
+    price = '<<PRICE>>'
+    image = 'https://placeholdit.co//i/411x590?bg=00ff00&text='
+    image_hover = 'https://placeholdit.co//i/411x590?bg=ff0000&text='
+    path = ''
+  end
 %>
 
 <div class="Product">

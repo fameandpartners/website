@@ -5,15 +5,19 @@
   <ul>
   <% @lg_contents[:overlay_pids].each do |pid| %>
   <%
-   # Once the correct collection is being referenced, use the below:
-   split_pid = pid.split('-', 2)
+    split_pid = pid.split('-', 2)
 
-   product = @collection.products.select do |item|
-     item.id == split_pid[0].to_i && item.color.name == split_pid[1]
-   end
+    product = @collection.products.select do |item|
+      item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+    end
 
-   name = product[0].name
-   path = collection_product_path(product[0], color: product[0].color.try(:name))
+    if product.present?
+      name = product[0].name
+      path = collection_product_path(product[0], color: product[0].color.try(:name))
+    else
+      name = 'INVALID PRODUCT ID'
+      path = ''
+    end
   %>
     <li>
       <a href="<%= path %>">
