@@ -98,6 +98,12 @@
   .cart-items {
     padding: 0;
 
+    .heading {
+      line-height: 2.4rem;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
     .remove-product {
       color: $c-neutral-10;
     }
@@ -114,30 +120,51 @@
 
     .remove-product .icon {
       top: 8px;
+      right: -17px;
     }
 
   }
 
   .cart-item-title {
-    font-size: 1.4em;
+    font-size: 2.6rem;
     color: $c-neutral-black;
     font-family: $font-heading;
     font-weight: 300;
   }
 
   .cart-item-price {
-    padding: 8px 0;
-    color: $c-neutral-8;
-    font-size: 1.2em;
+    position: relative;
+    padding: 0 0 24px 0px;
+    color: $c-neutral-10;
+    font-size: 1.8rem;
+    line-height: 1.6rem;
     font-weight: 500;
+    font-family: $font-heading;
+    &:after {
+      content: '';
+      height: 1px;
+      width: 20px;
+      background: $c-neutral-8;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+    }
   }
 
   .cart-item-description {
 
     dd {
       text-transform: capitalize;
+      margin-bottom: 3px;
     }
 
+  }
+
+  .line-item-customization--mini {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+    color: $c-neutral-10;
   }
 
   .cart-footer {

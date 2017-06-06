@@ -34,6 +34,7 @@ class Products::DetailsController < Products::BaseController
     @product.color_id   = color_hash[:id]
     @product.color_name = color_hash[:name]
 
+    # todo: thanh 4/3/17- why would we want to default this following line
     # make express delivery as default option
     @product.making_option_id = @product.making_options.first.try(:id)
 
