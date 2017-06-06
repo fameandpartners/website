@@ -128,3 +128,8 @@
 //--------------------------------
 //= require partials/header
 //= require partials/simplified_nav
+
+//--------------------------------
+// Contentful
+//--------------------------------
+//= require partials/contentful/alert
