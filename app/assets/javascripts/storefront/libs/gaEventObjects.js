@@ -77,6 +77,12 @@ export let closeCustomizeMenuEvent = {
   label: null, 
   nonInteraction: false 
 }
+export let applyCustomizeMenuEvent = {
+  category: 'PDP', 
+  action: 'Apply Customizations Press', 
+  label: null, 
+  nonInteraction: false 
+}
 export let addToBagEvent = {
   category: 'PDP', 
   action: 'Add To Bag', 

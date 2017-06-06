@@ -26,9 +26,18 @@ class SidePanelCustom extends SidePanel {
       customize.customization.presentation = event.currentTarget.dataset.presentation;
       customize.customization.price = parseFloat(event.currentTarget.dataset.price);
     }
+    console.log(event.currentTarget)
     this.props.actions.customizeDress(customize);
-    trackEvent(selectCustomizedOptionMenuEvent, true, event.currentTarget.dataset.presentation)
+    let customizePrice = event.currentTarget.dataset.price
+    if(customizePrice != "0") {
+      customizePrice = customizePrice.substring(0, customizePrice.indexOf('.'));
+      customizePrice = parseInt(customizePrice)
+    }
+    console.log("customizePrice", customizePrice)
+    selectCustomizedOptionMenuEvent.value = customizePrice
+    trackEvent(selectCustomizedOptionMenuEvent, true, event.currentTarget.dataset.key)
     this.closeMenu();
+    trackEvent(closeCustomizeMenuEvent)
   }
   render() {
     const AUTO_HIDE = true;
@@ -48,7 +57,7 @@ class SidePanelCustom extends SidePanel {
         option.table.display_price.money.currency.subunit_to_unit
       ));
       return (
-        <a href="javascript:;" className={itemState} onClick={this.onChange} key={index} data-id={option.table.id} data-presentation={option.table.name} data-price={price}>
+        <a href="javascript:;" className={itemState} onClick={this.onChange} key={index} data-key={index} data-id={option.table.id} data-presentation={option.table.name} data-price={price}>
           <div className="item-name">
             {option.table.name}
             <div className="item-price">+${price}</div>
@@ -77,7 +86,7 @@ class SidePanelCustom extends SidePanel {
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
-              <div className="text-right" onClick={() => trackEvent(closeCustomizeMenuEvent)}>
+              <div className="text-right">
                 <a href="javascript:;" className="btn-close med" onClick={this.closeMenu}>
                   <span className="hide-visually">Close Menu</span>
                 </a>
