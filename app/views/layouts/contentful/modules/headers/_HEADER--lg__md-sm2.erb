@@ -11,6 +11,8 @@
             <% end %>
           </div>
           <div class="CopyHeader__separator"></div>
+          <% @email_heading = contents[:email_text] %>
+          <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
         </div>
       </article>
   </div>
@@ -32,6 +34,8 @@
             <% end %>
           </div>
           <div class="CopyHeader__separator"></div>
+          <% @email_heading = contents[:email_text] %>
+          <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
         </div>
       </article>
     </div>
