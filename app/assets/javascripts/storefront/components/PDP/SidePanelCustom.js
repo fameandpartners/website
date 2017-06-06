@@ -12,6 +12,7 @@ class SidePanelCustom extends SidePanel {
     super(props, context);
 
     this.onChange = this.onChange.bind(this);
+    this.closeCustomizePanel = this.closeCustomizePanel.bind(this)
   }
 
   onChange(event) {
@@ -36,6 +37,10 @@ class SidePanelCustom extends SidePanel {
     console.log("customizePrice", customizePrice)
     selectCustomizedOptionMenuEvent.value = customizePrice
     trackEvent(selectCustomizedOptionMenuEvent, true, event.currentTarget.dataset.key)
+    this.closeMenu();
+    trackEvent(closeCustomizeMenuEvent)
+  }
+  closeCustomizePanel() {
     this.closeMenu();
     trackEvent(closeCustomizeMenuEvent)
   }
@@ -87,7 +92,7 @@ class SidePanelCustom extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="javascript:;" className="btn-close med" onClick={this.closeMenu}>
+                <a href="javascript:;" className="btn-close med" onClick={this.closeCustomizePanel}>
                   <span className="hide-visually">Close Menu</span>
                 </a>
               </div>
