@@ -3,11 +3,22 @@ AdminUi::Engine.routes.draw do
     get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
 
+    get :index, action: :index, type: :requests
+
+    get :requests, action: :index, type: :requests, on: :collection, as: ''
+    get :processed,  action: :index, type: :processed
+    get :exceptions, action: :index, type: :exceptions
+
     collection do
       get :weekly_refund, action: :index, scope: :refund_queue
       post :bulk_refund_process
     end
   end
+
+  get :'item_returns/requests',   controller: :item_returns, action: :index, type: :requests
+  get :'item_returns/processed',  controller: :item_returns, action: :index, type: :processed
+  get :'item_returns/exceptions', controller: :item_returns, action: :index, type: :exceptions
+
 
   resources :redirected_search_terms
   resources :preferences, only: :index do

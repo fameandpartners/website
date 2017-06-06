@@ -7,13 +7,41 @@ class ItemReturnsGrid
     ItemReturn
   end
 
-  filter(:acceptance_status, :enum,
-         checkboxes: true,
-         allow_blank: true,
-         select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
-         default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] })
-  filter(:refund_status, :enum, select: -> { ItemReturn.pluck(:refund_status).uniq })
-  filter(:requested_action, :enum, select: -> { ItemReturn.pluck(:requested_action).uniq })
+  FILTERS = {
+    requests: [{
+      name: :acceptance_status,
+      type: :enum, 
+      options: {
+        before: true,
+        checkboxes: true,
+        allow_blank: true,
+        select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
+        default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] }
+      }
+    }, {
+      name: :refund_status, type: :enum, options: { after: :acceptance_status, select: -> { ItemReturn.pluck(:refund_status).uniq } }
+    }, {
+      name: :requested_action, type: :enum, options: { after: :refund_status, select: -> { ItemReturn.pluck(:requested_action).uniq } }
+    }],
+
+    processed: [{
+      name: :requested_action, type: :enum, options: { select: -> { ItemReturn.pluck(:requested_action).uniq } }
+    }],
+
+    exceptions: [{
+      name: :exception_reason,
+      type: :enum, 
+      options: {
+        checkboxes: true,
+        allow_blank: true,
+        select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
+        default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] }
+      }
+    }, {
+      name: :dismissed_items, type: :enum, options: { checkboxes: true, allow_blank: true } 
+    }]
+  }
+
   filter(:order_payment_method, :enum, select: -> { ItemReturn.pluck(:order_payment_method).uniq })
   filter(:order_number, :string) {|value| where("order_number ilike ?", "%#{value}%")}
   filter(:contact_email, :string) {|value| where("contact_email ilike ?", "%#{value}%")}
@@ -51,5 +79,15 @@ class ItemReturnsGrid
 
   column :requested_at do |ir|
     ir.requested_at.try :to_date
+  end
+
+  def self.extend_with_custom_filters(type:)
+    custom_filters = FILTERS.fetch(type)
+
+    filters.delete_if { |f| custom_filters.keys.include?(f.name) }
+
+    custom_filters.each do |f|
+      filter(f[:name], f[:type], (f[:options] || {}), &f[:block])
+    end
   end
 end
