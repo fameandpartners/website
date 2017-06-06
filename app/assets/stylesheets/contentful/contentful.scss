@@ -5,8 +5,11 @@
 @import 'modules';
 @import 'base';
 
-// use this for now to override previous 'redesign' css
+// use this for now to override existing or library css
 @import 'overrides';
+
+// use this to style previous 'redesign' css
+@import 'restyles';
 
 // use this file for temporary styling
 // @import 'temp';
