@@ -74,7 +74,13 @@ class CADCustomize extends Component {
 
   closeMenu() {
     const { toggleDrawer, addonOptions } = this.props;
-    addonOptions.map(c => c.active ? trackEvent(selectCustomizedOptionMenuEvent, true, c.name) : '')
+    addonOptions.map(function(c, i){
+        if(c.active) {
+          selectCustomizedOptionMenuEvent.value = (c.price.money.fractional / 100)
+          trackEvent(selectCustomizedOptionMenuEvent, true, i)
+        }
+        return false
+    });
     toggleDrawer(null);
     trackEvent(closeCustomizeMenuEvent)
   }

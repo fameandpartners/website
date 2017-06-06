@@ -48,7 +48,8 @@ class AddToBag extends React.Component {
     let productPrice = product.price.price.amount
     let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
     console.log(priceWithoutDecimals)
-    trackEvent(addToBagEvent, true, priceWithoutDecimals)
+    addToBagEvent.value = priceWithoutDecimals
+    trackEvent(addToBagEvent)
     // TODO: redo this
     // this is just EXTREMELY hacky way to connect this with shopping cart
     if (customize.size.id
