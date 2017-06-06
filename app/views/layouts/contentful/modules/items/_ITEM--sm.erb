@@ -1,22 +1,17 @@
 <%
-  name = @sample_product_collection[@pid][:name]
-  price = @sample_product_collection[@pid][:price]
-  image = @sample_product_collection[@pid][:image]
-  image_hover = @sample_product_collection[@pid][:image_hover]
-  path = @sample_product_collection[@pid][:path]
 
-  # # Once the correct collection is being referenced, use the below:
-  # split_pid = @pid.split('-', 2)
-  #
-  # product = @collection.products.select do |item|
-  #   item.id == split_pid[0].to_i && item.color.name == split_pid[1]
-  # end
-  #
-  # name = product[0].name
-  # price = product_price_with_discount(product[0])
-  # image = product[0].images.first
-  # image_hover = product[0].images.last
-  # path = collection_product_path(product[0], color: product[0].color.try(:name))
+   # Once the correct collection is being referenced, use the below:
+   split_pid = @pid.split('-', 2)
+
+   product = @collection.products.select do |item|
+     item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+   end
+
+   name = product[0].name
+   price = product_price_with_discount(product[0])
+   image = product[0].images.first
+   image_hover = product[0].images.last
+   path = collection_product_path(product[0], color: product[0].color.try(:name))
 %>
 
 <div class="Product">

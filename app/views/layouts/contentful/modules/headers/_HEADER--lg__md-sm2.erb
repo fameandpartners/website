@@ -3,18 +3,18 @@
 <div class="section-row tile is-ancestor">
 
   <div class="tile is-parent is-12 is-hidden-tablet">
-      <article class="tile is-child">
-        <div class="CopyHeader CopyHeader--featured">
-          <div class="CopyHeader__content">
-            <% contents[:header_text].split("\n").each do |line| %>
-              <p><%= line %></p>
-            <% end %>
-          </div>
-          <div class="CopyHeader__separator"></div>
-          <% @email_heading = contents[:email_text] %>
-          <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
+    <article class="tile is-child">
+      <div class="CopyHeader CopyHeader--featured">
+        <div class="CopyHeader__content">
+          <% contents[:header_text].split("\n").each do |line| %>
+            <p><%= line %></p>
+          <% end %>
         </div>
-      </article>
+        <div class="CopyHeader__separator"></div>
+        <% @email_heading = contents[:email_text] %>
+        <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
+      </div>
+    </article>
   </div>
 
   <div class="tile is-parent is-6">

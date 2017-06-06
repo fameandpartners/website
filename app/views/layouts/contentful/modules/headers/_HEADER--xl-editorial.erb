@@ -1,34 +1,8 @@
 <div class="section-row columns">
   <div class="column">
     <div class="Editorial Editorial--featured">
-      <%= image_tag(contents[:image], class: 'Editorial__image') %>
-
-      <div class="Editorial__overlay">
-        <h4 class="Editorial__overlayTitle">Shop the Look</h4>
-        <ul>
-        <% contents[:overlay_pids].each do |pid| %>
-        <%
-          # # Once the correct collection is being referenced, use the below:
-          # split_pid = @pid.split('-', 2)
-          #
-          # product = @collection.products.select do |item|
-          #   item.id == split_pid[0].to_i && item.color.name == split_pid[1]
-          # end
-          #
-          # name = product[0].name
-          # path = collection_product_path(product[0], color: product[0].color.try(:name))
-
-          name = @sample_product_collection[pid][:name]
-          path = @sample_product_collection[pid][:path]
-        %>
-          <li>
-            <a href="<%= path %>">
-              <%= name %>
-            </a>
-          </li>
-        <% end %>
-        </ul>
-      </div>
+      <% @lg_contents = contents %>
+      <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
     </div>
   </div>
 </div>
