@@ -7,7 +7,8 @@ import React, { Component, PropTypes, } from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
-
+import { trackEvent } from '../../libs/gaTracking'
+import { openHeightSelectEvent } from '../../libs/gaEventObjects'
 const propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
@@ -49,6 +50,7 @@ class Select extends Component {
   }
 
   toggleDropdown() {
+    !this.state.isOpen ? trackEvent(openHeightSelectEvent) : ''
     this.setDropdownState(!this.state.isOpen);
   }
 

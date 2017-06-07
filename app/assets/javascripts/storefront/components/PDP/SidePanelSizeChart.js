@@ -4,7 +4,8 @@ import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
 import { MODAL_STYLE } from './utils';
 import SizeChartCell from './SizeChartCell';
-
+import { trackEvent } from '../../libs/gaTracking'
+import { viewSizeGuideEvent } from '../../libs/gaEventObjects'
 class SidePanelSizeChart extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -23,6 +24,7 @@ class SidePanelSizeChart extends React.Component {
   }
 
   openModal() {
+    trackEvent(viewSizeGuideEvent)
     this.setState({ modalIsOpen: true });
   }
 
