@@ -1,56 +1,70 @@
 module Operations
   class ManualOrder
 
-    attr_reader :params, :variant, :order
+    attr_reader :params, :order
 
     def initialize(params)
       @params = params
     end
 
     def create
-      cart = cart_populator
-      return false if !cart[:success]
+      if populate_products.all? { |cart| cart[:success] }
+        if params[:existing_customer].present?
+          assign_customer
+        else
+          create_customer
+        end
 
-      if params[:existing_customer].present?
-        assign_customer
+        fill_order_details
+        order.save!
+        finalize_order
+        create_inventory_units
+        adjust_price
+        create_global_skus
+
+        order
       else
-        create_customer
+        false
       end
-
-      fill_order_details
-      order.save!
-      finalize_order
-      create_inventory_units
-      adjust_price
-      create_global_skus
-
-      order
     end
 
     private
 
-    def cart_populator
-      UserCart::Populator.new(
-        order: order,
-        site_version: site_version,
-        currency: params[:currency],
-        product: {
-          variant_id: variant.id,
-          size_id: params[:size],
-          color_id: params[:color],
-          customizations_ids: params[:customisations],
-          height: params[:height],
-          quantity: 1
-        }
-      ).populate
+    def populate_products
+      params[:products].map do |_, product|
+        variant = get_variant(product[:style_name], product[:size], product[:color])
+
+        UserCart::Populator.new(
+          order: order,
+          site_version: site_version,
+          currency: params[:currency],
+          product: {
+            variant_id: variant.id,
+            size_id: product[:size],
+            color_id: product[:color],
+            customizations_ids: product[:customisations],
+            height: product[:height],
+            quantity: 1
+          }
+        ).populate
+      end
     end
+
 
     def assign_customer
       user = Spree::User.find(params[:existing_customer])
-      user_last_order = user.orders.complete.last
+
+      new_address_params = address_params.merge(
+        firstname: user.first_name,
+        lastname:  user.last_name,
+        email:     user.email
+      )
+
       order.user = user
-      order.bill_address = user_last_order.bill_address
-      order.ship_address = user_last_order.ship_address
+      order.bill_address = Spree::Address.create(new_address_params)
+      order.ship_address = Spree::Address.create(new_address_params)
+
+      user.update_attribute(:user_data, new_address_params)
     end
 
     def create_customer
@@ -76,10 +90,14 @@ module Operations
     end
 
     def create_inventory_units
-      unit = order.shipments.first.inventory_units.build
-      unit.variant_id = variant.id
-      unit.order_id = order.id
-      unit.save
+      params[:products].each do |_, product|
+        variant = get_variant(product[:style_name], product[:size], product[:color])
+
+        unit = order.shipments.first.inventory_units.build
+        unit.variant_id = variant.id
+        unit.order_id = order.id
+        unit.save
+      end
     end
 
     def adjust_price
@@ -133,9 +151,9 @@ module Operations
       (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
-    def variant
-      size_variants  = get_variant_ids(params[:size])
-      color_variants = get_variant_ids(params[:color])
+    def get_variant(product_id, size, color)
+      size_variants  = get_variant_ids(product_id, size)
+      color_variants = get_variant_ids(product_id, color)
 
       variant_ids = \
         if size_variants.present? && color_variants.present?
@@ -149,12 +167,12 @@ module Operations
       Spree::Variant.where(id: variant_ids).first!
     end
 
-    def get_variant_ids(option_value_id)
+    def get_variant_ids(product_id, option_value_id)
       Spree::Variant
         .joins(:option_values)
         .joins(:prices)
         .where('spree_option_values.id = ?', option_value_id)
-        .where(product_id: params[:style_name], is_master: false)
+        .where(product_id: product_id, is_master: false)
         .where('spree_prices.currency = ? AND spree_prices.amount IS NOT NULL', params[:currency] || 'USD')
         .pluck(:id)
     end
