@@ -94,20 +94,19 @@
   }
 
   function Product(adjust, templateHtml, urls) {
-    var index = $('.product').index(this.$product);
-
     this.$product = $(templateHtml).appendTo('#products');
     this.adjust = adjust;
     this.urls = urls;
+    this.index = $('.product').index(this.$product);
 
     this.$optColors = $('<optgroup>', { label: 'Colors' });
     this.$optCustomColors = $('<optgroup>', { label: 'Custom Colors + $16.00' });
 
-    this.$styleSelect = $('#products_style_name', this.$product).attr('name', 'forms_manual_order[products][' + index + '][style_name]');
-    this.$colorSelect = $('#products_color', this.$product).attr('name', 'forms_manual_order[products][' + index + '][color]');
-    this.$sizeSelect = $('#products_size', this.$product).attr('name', 'forms_manual_order[products][' + index + '][size]');
-    this.$heightSelect = $('#products_height', this.$product).attr('name', 'forms_manual_order[products][' + index + '][height]');
-    this.$customisationSelect = $('#products_customisations', this.$product).data('name', 'forms_manual_order[products][' + index + '][customisations][]');
+    this.$styleSelect = $('#products_style_name', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][style_name]');
+    this.$colorSelect = $('#products_color', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][color]');
+    this.$sizeSelect = $('#products_size', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][size]');
+    this.$heightSelect = $('#products_height', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][height]');
+    this.$customisationSelect = $('#products_customisations', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][customisations][]');
 
     this.clearFields = function() {
       this.$colorSelect.html('<option></option>');
@@ -206,7 +205,6 @@
 
     $('select', this.$product).chosen({ width: '100%' });
 
-    this.$customisationSelect.siblings('input').attr('name', this.$customisationSelect.data('name'));
     this.clearFields();
 
     this.$styleSelect.on('change', function() {
