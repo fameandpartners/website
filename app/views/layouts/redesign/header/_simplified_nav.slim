@@ -1,6 +1,5 @@
 .nav-menu-container.simplified-nav-container.js-simplified-nav-container
-  .row.home-menu.js-simplified-nav.simplified-nav.hidden-xs.hidden-sm.container-fluid onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: null, nonInteraction: false })"
-
+  .row.home-menu.js-simplified-nav.simplified-nav.hidden-xs.hidden-sm.container-fluid 
     .col.col-md-3 
       = link_to root_path, class: 'logo-wrap' do
         span.logo
@@ -9,15 +8,15 @@
     .col.col-md-7.nav-main-menu.text-center 
 
       span.dresses.js-open-nav-menu Shop all
-      span.anti-fast.js-close-nav-menu = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
+      span.anti-fast.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'ANTI-FAST FASHION SHOP', nonInteraction: true })" = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu Wedding Shop
 
-      span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+      span.lookbook.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'EVENING SHOP', nonInteraction: true })" = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.culture.js-open-nav-menu Fame Culture
 
-    .col.col-md-2.nav-icons.text-right.pull-right onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Search Press', eventLabel: null, nonInteraction: false })"
+    .col.col-md-2.nav-icons.text-right.pull-right 
       span#search.search-wrapper.js-search
         a.icon.icon-search.js-search-trigger href="javascript:;"
         .search-input#search-area
@@ -36,7 +35,7 @@
   .rect-wrapper.margin--center
     .center-wrapper.margin--center
       .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav.background--white.margin--center
-        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.flex-container onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Sub Nav Press', eventLabel: null, nonInteraction: false })"
+        .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.flex-container
 
           .flex1.col.dresses-shop-by
             ul 
@@ -86,3 +85,8 @@
       .rect#rect-culture.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/fame_culture'
+javascript:
+  $('.nav-menu-container li.normal-item').click(function() {
+    var subNavText = $(this).text().trim()
+    window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Sub Nav Press', eventLabel: subNavText, nonInteraction: true })
+  });

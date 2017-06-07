@@ -173,7 +173,7 @@ export const mainNavPressEvent = {
   eventCategory: 'Top Nav', 
   eventAction: 'Main Nav Press', 
   eventLabel:  null, 
-  nonInteraction: false
+  nonInteraction: true
 }
 // User presses any of the sub navigation items
 export const subNavPressEvent = {
@@ -192,7 +192,7 @@ export const navMoodboardPressEvent = {
 // User presses hamburger menu (in mobile/tablet view)
 export const navHamburgerPressEvent = {
   eventCategory: 'Top Nav', 
-  eventAction: 'Menu Open Press', 
+  eventAction: 'Menu Open', 
   eventLabel:  null, 
   nonInteraction: false
 }
