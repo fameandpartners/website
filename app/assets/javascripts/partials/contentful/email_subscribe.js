@@ -40,7 +40,12 @@
         data: {
           email: email,
         },
-        success: this.handler
+        success: this.handler,
+        error: function () {
+            alert('We got an error, but we will show the success message anyway');
+            $('.newsletter-signup-form').toggleClass('hide')
+            $('.success-message').toggleClass('hide');
+        }
       });
     };
 
