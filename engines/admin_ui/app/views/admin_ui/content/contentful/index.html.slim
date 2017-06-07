@@ -1,0 +1,79 @@
+- content_for :page_title do
+  | Contentful Admin
+
+.wrapper.wrapper-content
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-content
+          .row
+            .col-lg-6
+              form#js-contentful_form
+                .input-group
+                  = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'Type "CONFIRM"', value: params[:protected_term]
+                button.btn.btn-primary Upload new Contentful Version
+
+          hr
+
+          / = paginate collection, theme: 'admin_ui'
+          / 
+          / table.table
+          /   thead : tr
+          /     th Path
+          /     th Title
+          /     th Variables
+          /     th
+          / 
+          /   tbody
+          /     - collection.each do |page|
+          /       tr
+          /         td = link_to page.path, edit_content_page_path(page)
+          /         td
+          /           - if page.translation
+          /             = link_to page.translation.title, edit_content_page_path(page)
+          /         td = page.variables.keys.join(', ')
+          /         td
+          /           = link_to 'Edit', edit_content_page_path(page), action: 'edit', method: 'get', class: 'btn btn-info', id: 'edit_form'
+          /           = button_to 'Delete', content_page_path(page), action: 'destroy', method: 'delete', class: 'btn btn-danger', id: 'delete_form', data: { confirm: 'Are you sure?' }
+          / 
+          / = paginate collection, theme: 'admin_ui'
+
+javascript:
+  var CONFIRM = 'CONFIRM';
+  $('#js-contentful_form').on('submit', function(event){
+    event.preventDefault();
+    console.log('submitting');
+    var formVals = serializeFormVals(this);
+    if (formVals.protected_term && formVals.protected_term === CONFIRM){
+      createNewContent();
+    }
+  })
+  
+  $('.js-protected-term').on('change', function(event){
+    console.log('event', event.target);
+    // EXTRA CREDIT, undisable
+  })
+  
+  function serializeFormVals(formEl){
+    var vals = $(formEl).serializeArray()
+    var formVals = vals.reduce(function(accum, curr){
+      accum[curr.name] = curr.value;
+      return accum;
+    }, {});
+    return formVals
+  }
+  
+  function createNewContent(){
+    $.ajax({
+      method: 'POST',
+      url: 'contentful',
+      contentType: 'application/json',
+      dataType:'json'
+    })
+    .done(function( msg ) {
+      console.log('Oh YESSSSSS');
+    })
+    .error(function(){
+      console.log('Oh No');
+    })
+  }
