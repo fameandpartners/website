@@ -15,7 +15,7 @@
       <div class="columns is-mobile">
       <% contents[:sm_items].each do |item| %>
         <% @pid = item %>
-        <div class="column">
+        <div class="column product-top-margin no-margin-bottom">
           <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
         </div>
       <% end %>
