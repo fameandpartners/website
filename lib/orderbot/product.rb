@@ -5,8 +5,11 @@ module Orderbot
     end
 
     def sync
-      
+    end
+
+    def self.find_all
+      connection = Orderbot::Connection.new
+      puts connection.get( '/products.json/' )
     end
   end
-  
 end
