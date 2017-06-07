@@ -6,7 +6,8 @@ import * as pdpActions from '../../actions/PdpActions';
 import PDPConstants from '../../constants/PDPConstants';
 import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
-
+import { trackEvent } from '../../libs/gaTracking'
+import { addToBagEvent } from '../../libs/gaEventObjects'
 class AddToBag extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -44,6 +45,11 @@ class AddToBag extends React.Component {
 
   addToBag() {
     const { customize, actions, product } = this.props;
+    let productPrice = product.price.price.amount
+    let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
+    console.log(priceWithoutDecimals)
+    addToBagEvent.value = priceWithoutDecimals
+    trackEvent(addToBagEvent)
     // TODO: redo this
     // this is just EXTREMELY hacky way to connect this with shopping cart
     if (customize.size.id

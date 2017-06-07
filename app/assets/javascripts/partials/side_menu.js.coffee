@@ -82,6 +82,7 @@ window.SideMenu = class SideMenu
 
   slideMainMenu: =>
     $("#inner-main-menu li[class*='normal-item'], #inner-main-menu li[class*='bottom-area']").toggleClass('inner-main-menu-slide-left')
+    $("#sideMenu").toggleClass('inherit-height')
 
   blockScroll: =>
     sideMenuScrollTop = @$container.scrollTop()
@@ -113,4 +114,5 @@ window.SideMenu = class SideMenu
     $("#inner-main-menu li[class*='normal-item'], #inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
     @$container.css("margin-left", -@$container.width())
     @$overlay.removeClass('is-visible')
+
 

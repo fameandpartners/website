@@ -6,6 +6,8 @@ import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import { GetDressVariantId, UpdateUrl } from './utils';
 import _get from 'lodash/get';
+import { trackEvent } from '../../libs/gaTracking'
+import { openColorMenuEvent, selectRecommendedColorEvent, selectPremiumColorEvent } from '../../libs/gaEventObjects'
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -54,10 +56,8 @@ class SidePanelColor extends SidePanel {
     // this is just very hacky way to connect this with wishlist_item_data
     document.getElementById('pdpWishlistColorId').value = this.props.customize.color.id;
     document.getElementById('pdpWishlistVariantId').value = customize.dressVariantId;
-
     this.closeMenu();
   }
-
   render() {
     const AUTO_HIDE = true;
 
@@ -73,17 +73,22 @@ class SidePanelColor extends SidePanel {
         ? 'selector-color is-selected' : 'selector-color';
       const swatch = `swatch color-${color.option_value.name}`;
       return (
-        <a
-          href="javascript:;" className={itemState}
-          onClick={this.onChange} key={index}
-          data-id={color.option_value.id}
-          data-presentation={color.option_value.presentation}
-          data-name={color.option_value.name}
-          data-price="0"
-        >
-          <div className={swatch} />
-          <div className="item-name">{color.option_value.presentation}</div>
-        </a>
+       <div
+          onClick={() => trackEvent(selectRecommendedColorEvent, true, color.option_value.name)}
+          key={index}
+       >
+          <a
+            href="javascript:;" className={itemState}
+            onClick={this.onChange}
+            data-id={color.option_value.id}
+            data-presentation={color.option_value.presentation}
+            data-name={color.option_value.name}
+            data-price="0"
+          >
+            <div className={swatch} />
+            <div className="item-name">{color.option_value.presentation}</div>
+          </a>
+       </div>
       );
     });
 
@@ -91,31 +96,36 @@ class SidePanelColor extends SidePanel {
       const itemState = props.customize.color.id == color.option_value.id
         ? 'selector-color is-selected' : 'selector-color';
       const swatch = `swatch color-${color.option_value.name}`;
-      return (
-        <a
-          href="javascript:;" className={itemState}
-          onClick={this.onChange} key={index}
-          data-id={color.option_value.id}
-          data-presentation={color.option_value.presentation}
-          data-name={color.option_value.name}
-          data-price={props.customColorPrice}
-        >
-          <div className={swatch} />
-          <div className="item-name">{color.option_value.presentation}</div>
-        </a>
+      return (  
+        <div 
+          key={index}
+          onClick={() => trackEvent(selectPremiumColorEvent, true, color.option_value.name)}>
+          <a
+            href="javascript:;" className={itemState}
+            onClick={this.onChange} key={index}
+            data-id={color.option_value.id}
+            data-presentation={color.option_value.presentation}
+            data-name={color.option_value.name}
+            data-price={props.customColorPrice}
+          >
+            <div className={swatch} />
+            <div className="item-name">{color.option_value.presentation}</div>
+          </a>
+        </div>      
       );
     });
     return (
       <div className="pdp-side-container pdp-side-container-color">
         <a
-          href="javascript:;"
-          className={triggerState}
-          onClick={this.openMenu}
-        >
-          <div className="c-card-customize__content__left">Color</div>
-          <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
+        href="javascript:;"
+        className={triggerState}
+        onClick={this.openMenu}
+      >
+          <div onClick={() => trackEvent(openColorMenuEvent)}>
+              <div className="c-card-customize__content__left">Color</div>
+              <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
+          </div>
         </a>
-
         <div className={menuState}>
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">

@@ -16,6 +16,7 @@ Spree::CheckoutController.class_eval do
   layout 'redesign/checkout'
 
   def edit
+    @optimizely_opt_in = true
     prepare_order
     find_payment_methods
     data_layer_add_to_cart_event
