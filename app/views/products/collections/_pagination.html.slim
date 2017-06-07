@@ -4,7 +4,7 @@
   - if @collection.total_products > @collection.products.size
     .relative.more-products
       - for i in (0...@collection.total_products / 21)
-        div 
+        div.col-md-1
           a.btn
               = link_to i + 1, 'javascript:;', class: 'btn btn-featured', data: { action: 'show-more-collection-products', startIndex: i + 1 }
   - if !current_page?(dresses_path)
