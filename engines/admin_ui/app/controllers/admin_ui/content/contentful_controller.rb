@@ -19,10 +19,10 @@ module AdminUi
         # 3. ContentfulVersion.save (below)
 
         json = {}.to_json
-        ContentfulVersion.new({
+        ContentfulVersion.create({
           change_message: params[:change_message],
           contentful_payload: json
-        }).save
+        })
 
         # 4. Push to Rails cache
         # ContentfulVersion.pushCache(json)

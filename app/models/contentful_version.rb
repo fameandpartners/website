@@ -1,3 +1,3 @@
 class ContentfulVersion < ActiveRecord::Base
-  attr_accessible :change_message, :contentful_payload
+  has_one: :user, :class_name => Spree::User    
 end
