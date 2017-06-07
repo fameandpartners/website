@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170524184517) do
+ActiveRecord::Schema.define(:version => 20170607184815) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -117,6 +117,9 @@ ActiveRecord::Schema.define(:version => 20170524184517) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+# Could not dump table "contentful_versions" because of following StandardError
+#   Unknown type 'json' for column 'contentful_payload'
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"
