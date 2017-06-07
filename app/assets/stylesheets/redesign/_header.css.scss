@@ -468,10 +468,12 @@ ul.secondary.pull-right {
 
 /////////// side menu (hamburger) //////////
 
+.inherit-height {
+  height: inherit;
+}
 #sideMenu {
   overflow-x: hidden;
   display: block;
-  height: inherit;
   overflow: auto;
   position: fixed;
   font-size: 15px;

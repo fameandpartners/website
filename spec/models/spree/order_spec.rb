@@ -11,7 +11,7 @@ describe Spree::Order, :type => :model do
   end
 
   it '#project_delivery_date' do
-    expected_date = DateTime.parse('Friday April 15 2015')
+    expected_date = DateTime.parse('Friday April 10 2015')
     expect(order).to receive(:update_attribute).with(:projected_delivery_date, expected_date)
     order.project_delivery_date
   end
