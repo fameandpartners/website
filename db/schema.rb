@@ -239,6 +239,37 @@ ActiveRecord::Schema.define(:version => 20170607040735) do
   add_index "fabrications", ["purchase_order_number"], :name => "index_fabrications_on_purchase_order_number"
   add_index "fabrications", ["uuid"], :name => "index_fabrications_on_uuid", :unique => true
 
+  create_table "facebook_accounts", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "name"
+    t.integer  "account_status"
+    t.integer  "amount_spent"
+    t.string   "currency"
+    t.float    "age"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "facebook_ad_creatives", :force => true do |t|
+    t.string   "facebook_id"
+    t.integer  "facebook_ad_id"
+    t.string   "image_url"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+# Could not dump table "facebook_ad_insights" because of following StandardError
+#   Unknown type 'json' for column 'relevance_score'
+
+# Could not dump table "facebook_ads" because of following StandardError
+#   Unknown type 'json' for column 'recommendations'
+
+# Could not dump table "facebook_adsets" because of following StandardError
+#   Unknown type 'json' for column 'adlabels'
+
+# Could not dump table "facebook_campaigns" because of following StandardError
+#   Unknown type 'json' for column 'recommendations'
+
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"
     t.text     "value"
@@ -1692,6 +1723,7 @@ ActiveRecord::Schema.define(:version => 20170607040735) do
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
     t.string   "wedding_atelier_signup_step",                             :default => "size"
+    t.text     "user_data",                                               :default => "{}"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
