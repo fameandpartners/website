@@ -15,8 +15,9 @@ class FacebookSync
     response = begin
                  RestClient.get(generate_uri( @date ), accept: :json, accept_encoding: :identity)
                rescue RestClient::Exception => e
-                 puts "Error!"
-                 puts e.response
+                 NewRelic::Agent.notice_error(e)
+                 Raven.capture_exception(e)
+                 throw e
                end
     results = JSON.parse( response )
     account_array = results['data']
