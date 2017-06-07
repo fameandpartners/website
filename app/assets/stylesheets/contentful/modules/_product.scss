@@ -30,3 +30,13 @@
 .success-message {
   text-align: center;
 }
+
+.product-top-margin .Product {
+  @include breakpoint(desktop) {
+    margin-top: 6px;
+    margin-bottom: 2.5px;
+  }
+}
+.product-top-margin.no-margin-bottom .Product {
+  margin-bottom: 0;
+}
