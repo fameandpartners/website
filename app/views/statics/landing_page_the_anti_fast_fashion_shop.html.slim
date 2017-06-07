@@ -435,9 +435,10 @@ ruby:
           var $this, email, url;
           e.preventDefault();
           $this = $(e.target);
-          url = $('input[name="url"]', $this)[0].value
-          email = $('input[name="email"]', $this)[0].value
-          service = $('input[name="service"]', $this)[0].value
+          url = $('input[name="url"]', $this).val()
+          form_name = $('input[name="form_name"]', $this).val()
+          email = $('input[name="email"]', $this).val()
+          service = $('input[name="service"]', $this).val()
 
           return $.ajax({
             method: 'POST',
@@ -446,7 +447,8 @@ ruby:
             async: true,
             data: {
               email: email,
-              service: service
+              service: service,
+              form_name: form_name
             },
             success: this.handler
           });
