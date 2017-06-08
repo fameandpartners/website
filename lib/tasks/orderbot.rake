@@ -2,7 +2,7 @@ require 'pathname'
 
 namespace :orderbot do
 
-  namespace: :products do
+  namespace :products do
     desc 'Sync all of the products to orderbot'    
     task :sync => :environment do
       orderbot_product = Orderbot::Product.new( 1380 )
@@ -10,7 +10,7 @@ namespace :orderbot do
     end
   end
 
-  namespace: :orders do
+  namespace :orders do
     desc 'Sync all of the orders to orderbot'    
     task :sync => :environment do
     end

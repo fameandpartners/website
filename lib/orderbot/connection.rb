@@ -18,7 +18,7 @@ module Orderbot
                    puts e
                    throw e
                  end
-      response
+      JSON.parse( response )
     end
     
   end
