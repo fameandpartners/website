@@ -297,6 +297,9 @@ FameAndPartners::Application.routes.draw do
     # White Trend Page
     get '/trends-white' => 'products/collections#show', :permalink => 'white-trend', :as => :white_trend_page
 
+    # Gingham & Stripes Category page
+    get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling

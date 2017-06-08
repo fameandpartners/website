@@ -1,33 +1,6 @@
 class ContentfulService
   ## CMS
 
-  ## to-do: Refactor!
-  ##  when: Before adding next modules
-
-  def get_contentful_parent_container
-    if (params['developer'] == 'preview')
-      Rails.cache.delete('contentful-cms-cache-key')
-      @contentful_client ||= Contentful::Client.new(
-        api_url: configatron.contentful.preview_api_url,
-        access_token: configatron.contentful.preview_token,
-        space: configatron.contentful.space_id,
-        dynamic_entries: :auto,
-        raise_errors: true
-      )
-      create_home_page_container_from_contentful(@contentful_client.entries(content_type: 'homePageContainer')[0])
-    else
-      Rails.cache.fetch('contentful-cms-cache-key') do
-        @contentful_client ||= Contentful::Client.new(
-          access_token: configatron.contentful.access_token,
-          space: configatron.contentful.space_id,
-          dynamic_entries: :auto,
-          raise_errors: true
-        )
-        create_home_page_container_from_contentful(@contentful_client.entries(content_type: 'homePageContainer')[0])
-      end
-    end
-  end
-
   def self.create_home_page_container_from_contentful(parent_container)
 
     hero_tiles = parent_container.hero_tiles_container.map do |item|
@@ -86,14 +59,11 @@ class ContentfulService
 
     rescue Exception => e
       Raven.capture_exception(e)
-      return {:hero_tiles=>[{:heading=>["The Anti-Fast", "Fashion Shop."], :sub_heading=>["Everyday must-haves, ethically", "made-to-order. <em>Shop now.</em>"], :mobile_text=>["Everyday must-haves, ethically made-to-order.", "<strong>Shop now</strong>"], :image=>"//images.contentful.com/o546qnqj0du7/6mSiWbl1NCAO8MqkskMWUy/3eec91d6d988cdf78401a5479a4fd803/Hero1-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/6ntEhTMBwWUuckiy48WuIQ/c4ed848accedfd9600f93784bd97bcbd/Hero1-Mobile.jpg", :link=>"/the-anti-fast-fashion-shop?hpbannerv3", :text_align=>"Left", :text_position=>"Right", :text_color=>"Black", :text_size=>"Large", :text_padding=>"None", :cta_button_text=>nil, :description=>"The Anti-Fast Fashion Shop"}, {:heading=>["<em>Break</em>", "tradition."], :sub_heading=>["Find a bridesmaid dress you", "<em>actually</em> want to wear."], :mobile_text=>["Find a bridesmaid dress you <em>actually</em> want to wear.", "<strong>Customize Now</strong>"], :image=>"//images.contentful.com/o546qnqj0du7/1pOJDKFu5KAMk20Kiiiei8/14288b1c03fef69909af461c185088f1/may-18-featured-2.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/7vZgJVw33qkWMAUWiwmyy4/3ea06a8bb671049d8eac287dafc05bd9/may-18-featured-2-mob.jpg", :link=>"/modern-bridesmaid-dresses?hpbanner2", :text_align=>"Left", :text_position=>"Right", :text_color=>"Black", :text_size=>"Large", :text_padding=>"Left", :cta_button_text=>["CUSTOMIZE", "NOW"], :description=>"Modern Bridesmaid Dresses"}, {:heading=>["You're <em>not</em>", "meant to", "blend in."], :sub_heading=>["Especially when you go out."], :mobile_text=>["You're <em>not</em> meant to blend in.", "<strong>Shop High Contrast</strong>"], :image=>"//images.contentful.com/o546qnqj0du7/1kis8vKZwCQYwU4ie2Socw/c1c6124975f295d2b7dd67beabe7651d/may-18-featured-3.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/7hXk8HXgsME8ssk8cgU602/f20ef4ac68795a6eba0866e92d6e5421/may-18-featured-3-mob.jpg", :link=>"/high-contrast?hpbanner3", :text_align=>"Left", :text_position=>"Center", :text_color=>"Black", :text_size=>"Large", :text_padding=>"None", :cta_button_text=>["SHOP", "HIGH CONTRAST"], :description=>"High Contrast"}], :secondary_header=>{:image=>"//images.contentful.com/o546qnqj0du7/1KUhHMcMMw028uWqUwCAkS/db77135ec3f99b0444e8530d56782416/StyleIcon-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/S1NSBrDj0q2QSIWOCSKCm/9fe7c9222793fa83600e3beba2c8f3d0/StyleIcon-Mobile.jpg", :path_link=>"/get-the-look?secondaryhp"}, :category_tiles=>[{:link=>"/dresses/little-black-dress?edit1", :title=>"Black", :image=>"//images.contentful.com/o546qnqj0du7/4DutxbOjb2OikgKi8qgWyc/9e58102b351c9092899cb6f4f2176590/Edit-01.jpg"}, {:link=>"/dresses/floral?edit2", :title=>"Floral", :image=>"//images.contentful.com/o546qnqj0du7/4bykWYgBzWkaokcE6cciQM/d224d81e9e7ce02e97de044ee2f7c7c9/Edit-02.jpg"}, {:link=>"/trends-white?edit3", :title=>"White", :image=>"//images.contentful.com/o546qnqj0du7/3Zwr1vyLG0mwoqM20a46SI/b47fe59a03e9b35871e0b34f2b8a656f/Edit-03.jpg"}, {:link=>"/dresses/jumpsuit?edit4", :title=>"Jumpsuits", :image=>"//images.contentful.com/o546qnqj0du7/6gppD31m36M8WCMmUCQGag/b0c8fde4ee78f4e4e368b492421b9396/Edit-04.jpg"}], :instagram_tiles=>[{:path_link=>"/dresses/dress-the-preetma-pant-1479?color=black", :handle=>"@luxeandlinen", :image=>"//images.contentful.com/o546qnqj0du7/2P6E3aEks828KumgmaEsw/134b8875a262fa99675fd94ce270eeef/5.jpg"}, {:path_link=>"/dresses/dress-maquino-1198?color=red", :handle=>"@jessyasmus", :image=>"//images.contentful.com/o546qnqj0du7/41QfjONqs8y8sYcmKyAKSU/bab8b9c92d1442e7029ef880190f7d75/4.jpg"}, {:path_link=>"/dresses/dress-liesl-two-piece-1079?color=white", :handle=>"@mystyleandgrace", :image=>"//images.contentful.com/o546qnqj0du7/4ZtRDTbRzym2GeQiUWIGYi/ff3c0efe9826cbb1b54a244d7de24d10/1.jpg"}, {:path_link=>"/dresses/dress-merille-two-piece-1080?color=navy", :handle=>"@whitney_rene", :image=>"//images.contentful.com/o546qnqj0du7/3VeMYLavnO6c8cA2aCG2aW/08f952abbca87be28acd0f694b43fd72/2.jpg"}, {:path_link=>"/dresses/dress-the-irina-dress-1435?color=white", :handle=>"@thetinycloset", :image=>"//images.contentful.com/o546qnqj0du7/1TH9slt1S44eGiM6iiMAyw/5cf6d1a9e8640b4ef4fc68145e9726a2/3.jpg"}]}
+      return {:hero_tiles=>[{:heading=>["Cute, custom", "clothing. All", "ethically made."], :sub_heading=>["<em>Shop Anti-Fast Fashion</em>"], :mobile_text=>["Cute, custom clothing.", "All ethically made.", "<em><strong>SHOP ANTI-FAST FASHION</strong></em>"], :image=>"//images.contentful.com/o546qnqj0du7/3gUrEDlMy48K86QOoyeso4/1184d8b37a094cc424e10f4bf51ed71c/Hero1-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/1ZbHcRlFGQmyu0wMWES2Go/bfd471537b5525de66f0e3c7c99abccb/Hero1-Mobile.jpg", :link=>"/the-anti-fast-fashion-shop?hpbanner1v4", :text_align=>"Center", :text_position=>"Center", :text_color=>"Black", :text_size=>"Large", :text_padding=>"None", :cta_button_text=>nil, :description=>"The Anti-Fast Fashion Shop"}, {:heading=>["The modern wedding", "dress code dictates", "stand-out style."], :sub_heading=>["<em>Shop the Wedding Guest Collection</em>"], :mobile_text=>["<em>Shop the Wedding Guest Collection</em>"], :image=>"//images.contentful.com/o546qnqj0du7/2nFEjHutPys44oOi4UcIcy/990e2cba6966987f32b779777f0f08b0/Hero2-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/4Nz6sSMm1Wy4YOuioogIie/bd8fcbdab7ae96d98d0720bd343d0d3c/Hero2-Mobile.jpg", :link=>"/modern-bridesmaid-dresses?hpbanner2v2", :text_align=>"Left", :text_position=>"Right", :text_color=>"Black", :text_size=>"Small", :text_padding=>"Left", :cta_button_text=>nil, :description=>"Modern Bridesmaid Dresses"}, {:heading=>["Pick your print,", "customize the fit."], :sub_heading=>nil, :mobile_text=>["Pick you print,", "customize the fit.", "<em><strong>SHOP GINGHAM & STRIPES</em></strong>"], :image=>"//images.contentful.com/o546qnqj0du7/3VsbK3Jl8cMeMKAYuOsewa/e5e6b64794c82a0b1b0c97111b91a9a5/Hero3-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/5slfKrm1LauqgqAGIAysck/2b1784d8c7130dd2101886735d1abfe5/Hero3-Mobile.jpg", :link=>"/trends-gingham-stripe?hpbanner3", :text_align=>"Left", :text_position=>"Far-Right", :text_color=>"Black", :text_size=>"Large", :text_padding=>"Left", :cta_button_text=>["Shop Stripes & Gingham"], :description=>"Gingham & Stripes"}], :secondary_header=>{:image=>"//images.contentful.com/o546qnqj0du7/2m3q114GyUmKIEEasuYaIo/cdc4e5056eb3c08f9cfd147865364ab0/StyleIcon-Desktop.jpg", :mobile_image=>"//images.contentful.com/o546qnqj0du7/7I8viaqzIWSwY2UCskAS2a/d789cf53e88797db23638588460c1e30/StyleIcon-Mobile.jpg", :path_link=>"/dresses/wedding-guests?secondaryhp"}, :category_tiles=>[{:link=>"/dresses/lace?edit1", :title=>"Lace", :image=>"//images.contentful.com/o546qnqj0du7/3V7VadpNheS4wMC84C6oCO/9d9c325d59124410ed0a9c139ff0a9ee/Edit-01.jpg"}, {:link=>"/dresses/floral?edit2", :title=>"Florals", :image=>"//images.contentful.com/o546qnqj0du7/1evUgUAH6ImCCmCAwkQYYg/38d01e8bfa4cc0f22ede4e5932d73885/Edit-02.jpg"}, {:link=>"/trends-white?edit3", :title=>"White", :image=>"//images.contentful.com/o546qnqj0du7/1TxWNw3sk0ws6Gw4ImiEMs/a149377760cbf0064f953ee8ad5aa9f7/Edit-04.jpg"}, {:link=>"/dresses/jumpsuit?edit4", :title=>"Jumpsuits", :image=>"//images.contentful.com/o546qnqj0du7/5PhaiwFkLCAueeOg4OI0GM/b09897e882667a8596b53c6024ce06cf/Edit-03.jpg"}], :instagram_tiles=>[{:path_link=>"/dresses/dress-khiva-1223?color=dark-forest", :handle=>"@overmystylishbody", :image=>"//images.contentful.com/o546qnqj0du7/4jqIPGAA9Gg6yg4U4KowI4/f0143d07fcacce8621b8ae866ecac21f/1.jpg"}, {:path_link=>"/dresses/dress-harbourside-dress-1123?color=champagne", :handle=>"@kelsey_white", :image=>"//images.contentful.com/o546qnqj0du7/ypBQSXw1t6owOESaIceKc/f7f43aa6bdffc4026addf901f310718c/2.jpg"}, {:path_link=>"/dresses/dress-the-russo-dress-1544?color=navy-and-white-gingham", :handle=>"@lifestylecatcher", :image=>"//images.contentful.com/o546qnqj0du7/3SDAIoaOZOuwWe04GCCe84/d09ed9887771996d28aec7007f2a0926/3.jpg"}, {:path_link=>"/dresses/dress-kiko-kimono-coat-1262?color=dark-tan", :handle=>"@tosha_eason", :image=>"//images.contentful.com/o546qnqj0du7/23tM4O8eZC88K20uicKoKa/308a7777b27fab31f0d515a1fda75f8b/4.jpg"}, {:path_link=>"/dresses/dress-the-fernanda-pant-1451?color=olive", :handle=>"@shhtephs", :image=>"//images.contentful.com/o546qnqj0du7/ExqrX8eZFIOKK0OsOs2eK/e0b098880e546881393ad0910d9daed4/5.jpg"}]}
   end
 
-  # LANDING PAGE SPECIFIC
-  ## TO-DO: NEEDS REFACTORING WITH ABOVE!!!
-
   def self.create_contentful_lp_client
-    @contentful_client ||= Contentful::Client.new(
+    @contentful_client = Contentful::Client.new(
       access_token: ENV['CONTENTFUL_SANDBOX_ACCESS_TOKEN'],
       space: ENV['CONTENTFUL_SANDBOX_SPACE_ID'],
       dynamic_entries: :auto,
@@ -102,7 +72,7 @@ class ContentfulService
   end
 
   def self.create_contentful_homepage_client
-    @contentful_client_homepage ||= Contentful::Client.new(
+    @contentful_client_homepage = Contentful::Client.new(
       access_token: configatron.contentful.access_token,
       space: configatron.contentful.space_id,
       dynamic_entries: :auto,
@@ -110,61 +80,41 @@ class ContentfulService
     )
   end
 
-  def self.get_all_contentful_containers
-    create_contentful_lp_client()
-    create_contentful_homepage_client()
+  def self.create_contentful_preview_lp_client
+    @contentful_client = Contentful::Client.new(
+      api_url: configatron.contentful.preview_api_url,
+      access_token: ENV['CONTENTFUL_SANDBOX_PREVIEW_TOKEN'],
+      space: ENV['CONTENTFUL_SANDBOX_SPACE_ID'],
+      dynamic_entries: :auto,
+      raise_errors: true
+    )
+  end
+
+  def self.create_contentful_preview_homepage_client
+    @contentful_client_homepage = Contentful::Client.new(
+      api_url: configatron.contentful.preview_api_url,
+      access_token: configatron.contentful.preview_token,
+      space: configatron.contentful.space_id,
+      dynamic_entries: :auto,
+      raise_errors: true
+    )
+  end
+
+  def self.get_all_contentful_containers(preview = false)
+
+    if preview
+      create_contentful_preview_lp_client()
+      create_contentful_preview_homepage_client()
+    else
+      create_contentful_lp_client()
+      create_contentful_homepage_client()
+    end
 
     landing_pages = get_all_landing_page_containers()
     home_page = get_all_homepage_containers()
 
     landing_pages.merge(home_page)
   end
-
-  def get_contentful_lp_parent_container
-    # if (params['developer'] == 'preview')
-    #   puts '*'*60
-    #   puts 'In PREVIEW MODE - Fetching unpublished Contentful data...'
-    #   puts '*'*60
-    #   Rails.cache.delete('contentful-cms-lp-cache-key')
-    #   @contentful_client ||= Contentful::Client.new(
-    #     api_url: ENV['CONTENTFUL_PREVIEW_API_URL'],
-    #     access_token: ENV['CONTENTFUL_SANDBOX_PREVIEW_TOKEN'],
-    #     space: ENV['CONTENTFUL_SANDBOX_SPACE_ID'],
-    #     dynamic_entries: :auto,
-    #     raise_errors: true
-    #   )
-    #   create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer')[0])
-    # else
-    #   puts '-'*60
-    #   puts 'In PRODUCTION Mode - Loading cached Contentful data...'
-    #   puts '-'*60
-    #   Rails.cache.fetch('contentful-cms-lp-cache-key') do
-        puts '/'*60
-        puts 'NO CACHE - Fetching latest published Contentful data...'
-        puts '/'*60
-        @contentful_client ||= Contentful::Client.new(
-          access_token: ENV['CONTENTFUL_SANDBOX_ACCESS_TOKEN'],
-          space: ENV['CONTENTFUL_SANDBOX_SPACE_ID'],
-          dynamic_entries: :auto,
-          raise_errors: true
-        )
-        get_all_landing_pages_from_entries()
-        # @contentful_client ||= Contentful::Client.new(
-        #   access_token: '6f6dc6fc69767cae44e0a31af09400a340b82ceda752d4131ebdb32685c881f3',
-        #   space: 'fsxg2d84t7b3',
-        #   dynamic_entries: :auto,
-        #   raise_errors: true
-        # )
-        # create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer')[0])
-      # end
-    # end
-  end
-
-  # def get_all_landing_pages_from_entries
-  #   # later: find all LPs from this array
-  #   # for now we're just fetching our lone LP container
-  #   create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'sys.id' => '1dZp2VKhRUyGSWoMiYgEaO')[0])
-  # end
 
   def self.get_all_landing_page_containers
     relative_url_array = @contentful_client.entries(content_type: 'landingPageContainer').map do |lp|
@@ -187,10 +137,6 @@ class ContentfulService
     @contentful_client.entries.each.with_index do |item, i|
       @global_contentful_entries_hash[item.id] = i
     end
-  end
-
-  def self.create_json_from_contentful_entries
-    @global_contentful_json = @contentful_client.entries.as_json
   end
 
   def self.jsonify_large_lp_container(large_container)
@@ -256,9 +202,6 @@ class ContentfulService
   def self.create_landing_page_container(parent_container)
 
     create_hash_of_contentful_entries()
-    create_json_from_contentful_entries()
-
-    # binding.pry
 
     main_header_tile = jsonify_header_container(parent_container.header)
 
@@ -277,15 +220,6 @@ class ContentfulService
         email_text: email_text
       }
     end
-
-    # binding.pry
-
-    # @landing_page_container = {
-    #   path: parent_container.relative_url,
-    #   header: main_header_tile,
-    #   rows: row_tiles
-    # }
-
 
     parent_container.relative_url
     {

@@ -11,8 +11,8 @@ class ContentfulController < ApplicationController
                 :set_collection_resource
 
   def main
-    hash_of_results = ContentfulService.get_all_contentful_containers()
-    @landing_page_container = hash_of_results[request.fullpath]
+    hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
+    @landing_page_container = hash_of_results[request.path]
     render 'layouts/contentful/main'
   end
 
