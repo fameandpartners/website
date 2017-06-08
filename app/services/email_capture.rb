@@ -48,7 +48,7 @@ class EmailCapture
       end
     elsif service == :bronto
       # for current realization of this class we can't use async job
-      Bronto::SubscribeUsersWorker.new.perform(configatron.bronto.subscription_list, [user_data])
+      Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
     end
   end
 

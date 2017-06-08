@@ -353,11 +353,13 @@ Spree::CheckoutController.class_eval do
     'checkout'
   end
 
+  # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
     EmailCaptureWorker.perform_async(user.id, 'remote_ip'    => request.remote_ip,
                                               'landing_page' => session[:landing_page],
                                               'utm_params'   => session[:utm_params],
                                               'site_version' => current_site_version.name,
-                                              'form_name'    => 'Checkout')
+                                              'form_name'    => 'Checkout',
+                                              'service'      => ENV.fetch('SUBSCRIPTION_SERVICE'))
   end
 end
