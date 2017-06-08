@@ -5,8 +5,7 @@
     .relative.more-products
       - for i in (0...@collection.total_products / 21)
         div.col-md-1
-          a.btn
-              = link_to i + 1, 'javascript:;', class: 'btn btn-featured', data: { action: 'show-more-collection-products', startindex: i }
+          a.btn.btn-featured data-action="show-more-collection-products" href='?page=#{i+1}' #{i + 1}
   - if !current_page?(dresses_path)
     .relative.more-products
       = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'

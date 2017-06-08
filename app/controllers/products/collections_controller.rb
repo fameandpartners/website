@@ -42,11 +42,11 @@ class Products::CollectionsController < Products::BaseController
                 :set_collection_seo_meta_data
 
   def show
+    @page_index = params[:page]
     @optimizely_opt_in = true
     @zopim_opt_out = true
     @filter = Products::CollectionFilter.read
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
-
     respond_to do |format|
       format.html { render collection_template }
       format.json do
