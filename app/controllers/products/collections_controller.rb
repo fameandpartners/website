@@ -47,6 +47,7 @@ class Products::CollectionsController < Products::BaseController
     @zopim_opt_out = true
     @filter = Products::CollectionFilter.read
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
+    
     respond_to do |format|
       format.html { render collection_template }
       format.json do
