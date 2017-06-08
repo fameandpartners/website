@@ -1,4 +1,4 @@
-module ContentfulHelper
+class ContentfulService
   ## CMS
 
   ## to-do: Refactor!
@@ -28,7 +28,7 @@ module ContentfulHelper
     end
   end
 
-  def create_home_page_container_from_contentful(parent_container)
+  def self.create_home_page_container_from_contentful(parent_container)
 
     hero_tiles = parent_container.hero_tiles_container.map do |item|
 
@@ -92,7 +92,7 @@ module ContentfulHelper
   # LANDING PAGE SPECIFIC
   ## TO-DO: NEEDS REFACTORING WITH ABOVE!!!
 
-  def create_contentful_lp_client
+  def self.create_contentful_lp_client
     @contentful_client ||= Contentful::Client.new(
       access_token: ENV['CONTENTFUL_SANDBOX_ACCESS_TOKEN'],
       space: ENV['CONTENTFUL_SANDBOX_SPACE_ID'],
@@ -101,7 +101,7 @@ module ContentfulHelper
     )
   end
 
-  def create_contentful_homepage_client
+  def self.create_contentful_homepage_client
     @contentful_client_homepage ||= Contentful::Client.new(
       access_token: configatron.contentful.access_token,
       space: configatron.contentful.space_id,
@@ -110,11 +110,14 @@ module ContentfulHelper
     )
   end
 
-  def get_all_contentful_containers
+  def self.get_all_contentful_containers
     create_contentful_lp_client()
     create_contentful_homepage_client()
 
-    get_all_landing_page_containers()
+    landing_pages = get_all_landing_page_containers()
+    home_page = get_all_homepage_containers()
+
+    landing_pages.merge(home_page)
   end
 
   def get_contentful_lp_parent_container
@@ -163,15 +166,22 @@ module ContentfulHelper
   #   create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'sys.id' => '1dZp2VKhRUyGSWoMiYgEaO')[0])
   # end
 
-  def get_all_landing_page_containers
+  def self.get_all_landing_page_containers
     relative_url_array = @contentful_client.entries(content_type: 'landingPageContainer').map do |lp|
       lp.relative_url
     end
 
-    @hash_of_results = Hash[relative_url_array.map { |url| [url, create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'fields.relativeUrl[match]' => url)[0]) ]}]
+    Hash[relative_url_array.map { |url| [url, create_landing_page_container(@contentful_client.entries(content_type: 'landingPageContainer', 'fields.relativeUrl[match]' => url)[0]) ]}]
   end
 
-  def create_hash_of_contentful_entries
+  def self.get_all_homepage_containers
+
+    homepage = create_home_page_container_from_contentful(@contentful_client_homepage.entries(content_type: 'homePageContainer')[0])
+
+    { "/" => homepage }
+  end
+
+  def self.create_hash_of_contentful_entries
     @global_contentful_entries_hash = Hash.new
 
     @contentful_client.entries.each.with_index do |item, i|
@@ -179,11 +189,11 @@ module ContentfulHelper
     end
   end
 
-  def create_json_from_contentful_entries
+  def self.create_json_from_contentful_entries
     @global_contentful_json = @contentful_client.entries.as_json
   end
 
-  def jsonify_large_lp_container(large_container)
+  def self.jsonify_large_lp_container(large_container)
     id = large_container.id
 
     fetched_lg_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
@@ -195,7 +205,7 @@ module ContentfulHelper
     }
   end
 
-  def jsonify_medium_lp_container(medium_container)
+  def self.jsonify_medium_lp_container(medium_container)
     id = medium_container.id
 
     fetched_md_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
@@ -211,7 +221,7 @@ module ContentfulHelper
     end
   end
 
-  def jsonify_header_container(main_header_container)
+  def self.jsonify_header_container(main_header_container)
     if (main_header_container.content_type.id == 'HEADER--xl-text')
       id = main_header_container.header_container.id
       subcontainer = @contentful_client.entries[@global_contentful_entries_hash[id]]
@@ -243,7 +253,7 @@ module ContentfulHelper
     end
   end
 
-  def create_landing_page_container(parent_container)
+  def self.create_landing_page_container(parent_container)
 
     create_hash_of_contentful_entries()
     create_json_from_contentful_entries()
@@ -283,6 +293,7 @@ module ContentfulHelper
       rows: row_tiles
     }
   end
+
 
 
 end
