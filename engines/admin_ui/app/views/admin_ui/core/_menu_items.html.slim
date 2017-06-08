@@ -1,7 +1,16 @@
 = menu_item admin_ui.root_path, 'Dashboard', icon: 'dashboard', exact: true
-
-= menu_item admin_ui.item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
 = menu_item manual_order.manual_orders_path, 'Manual Orders', icon: 'thumbs-up'
+
+li class=active_link_to_class(admin_ui.root_path, active: /item_returns/)
+  a href="#"
+    i.fa.fa-thumbs-down
+    span.nav-label Returns
+    span.fa.arrow
+  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    = active_link_to 'Requests', admin_ui.item_returns_requests_path, wrap_tag: :li
+    = active_link_to 'Processed', admin_ui.item_returns_processed_path, wrap_tag: :li
+    = active_link_to 'Exceptions', admin_ui.item_returns_exceptions_path, wrap_tag: :li
+
 
 li class=active_link_to_class(admin_ui.root_path, active: /customisation/)
   a href="#"

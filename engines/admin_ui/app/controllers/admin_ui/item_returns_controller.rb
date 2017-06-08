@@ -1,7 +1,10 @@
 module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
-      ItemReturnsGrid.extend_with_custom_filters(type: params.fetch(:type))
+      type = params.fetch(:type)
+      ItemReturnsGrid.extend_with_custom_filters(type: type)
+
+      @title = "Returns - #{type.to_s.capitalize}"
 
       @collection = ItemReturnsGrid.new(params[:item_returns_grid])
       @weekly_refund = (params[:scope] == :refund_queue)

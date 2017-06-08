@@ -83,8 +83,9 @@ class ItemReturnsGrid
 
   def self.extend_with_custom_filters(type:)
     custom_filters = FILTERS.fetch(type)
+    excess_filters = FILTERS.values.flatten.map { |f| f[:name] }.uniq
 
-    filters.delete_if { |f| custom_filters.keys.include?(f.name) }
+    filters.delete_if { |f| excess_filters.include?(f.name) }
 
     custom_filters.each do |f|
       filter(f[:name], f[:type], (f[:options] || {}), &f[:block])
