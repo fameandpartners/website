@@ -11,6 +11,9 @@ module Overrides
                 :class_name => '::ProductStyleProfile',
                 :foreign_key => :product_id
 
+        has_one :product_to_orderbot_product_group
+        has_one :orderbot_product_group, through: :product_to_orderbot_product_group
+        
         mapping do
           indexes :id, :index => :not_analyzed
 

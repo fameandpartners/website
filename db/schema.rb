@@ -846,7 +846,7 @@ ActiveRecord::Schema.define(:version => 20170608044047) do
   add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
 
   create_table "product_to_orderbot_product_groups", :force => true do |t|
-    t.integer  "spree_product_id"
+    t.integer  "product_id"
     t.integer  "orderbot_product_group_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
