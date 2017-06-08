@@ -4,7 +4,7 @@ class RefundRequestGrid
   include Datagrid
 
   scope do
-    RefundRequest
+    RefundRequest.includes(order: :shipments)
   end
 
   filter(:custom1, :dynamic)
@@ -24,7 +24,7 @@ class RefundRequestGrid
   filter(:refund_currency, :enum, :select => RefundRequest.pluck(:refund_currency).uniq)
   # filter :refund_success
   filter :refund_amount
-  filter :refund_created_at
+  filter(:refund_created_at, :date, range: true, default: proc { [1.year.ago.to_date, Date.today] })
   filter(:refund_status_message, :enum, :select => RefundRequest.pluck(:refund_status_message).uniq)
 
   # column :payment
@@ -38,6 +38,8 @@ class RefundRequestGrid
   column :payment_created_at
   column :customer_name
   column :customer_email
+  column(:date_purchased) { self.order.completed_at }
+  column(:date_goods_shipped) { self.order.shipments.last.try(:shipped_at) }
   column :refund_ref
   column :refund_currency
   # column :refund_success
