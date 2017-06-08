@@ -2,13 +2,8 @@ require 'reform'
 
 module Forms
   class ManualOrderForm < ::Reform::Form
-
     property :currency, virtual: true
-    property :style_name, virtual: true
-    property :size, virtual: true
-    property :height, virtual: true
-    property :color, virtual: true
-    property :customisations, virtual: true
+    property :products, virtual: true
     property :notes, virtual: true
     property :status, virtual: true
     property :email, virtual: true
