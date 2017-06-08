@@ -15,39 +15,16 @@
                       span (Limit 255)
                     .input-group
                       = text_area_tag(:change_message, '', :size => "31x6")
-                
+
                 .row
                   .form-group
                     .label Type "CONFIRM" if you are sure you want to make this change
                     .input-group.col-lg-3
                       = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'CONFIRM', value: params[:protected_term]
-                
+
                 button.btn.btn-primary Upload new Contentful Version
 
           hr
-
-          = paginate collection, theme: 'admin_ui'
-          
-          table.table
-            thead : tr
-              th Path
-              th Title
-              th Variables
-              th
-          
-            tbody
-              - collection.each do |page|
-                tr
-                  td = link_to page.path, edit_content_page_path(page)
-                  td
-                    - if page.translation
-                      = link_to page.translation.title, edit_content_page_path(page)
-                  td = page.variables.keys.join(', ')
-                  td
-                    = link_to 'Edit', edit_content_page_path(page), action: 'edit', method: 'get', class: 'btn btn-info', id: 'edit_form'
-                    = button_to 'Delete', content_page_path(page), action: 'destroy', method: 'delete', class: 'btn btn-danger', id: 'delete_form', data: { confirm: 'Are you sure?' }
-          
-          = paginate collection, theme: 'admin_ui'
 
 javascript:
   var CONFIRM = 'CONFIRM';
@@ -58,12 +35,12 @@ javascript:
       createNewContent(JSON.stringify(formVals));
     }
   })
-  
+
   $('.js-protected-term').on('change', function(event){
     console.log('event', event.target);
     // EXTRA CREDIT, undisable
   })
-  
+
   function serializeFormVals(formEl){
     var vals = $(formEl).serializeArray()
     var formVals = vals.reduce(function(accum, curr){
@@ -72,7 +49,7 @@ javascript:
     }, {});
     return formVals
   }
-  
+
   function createNewContent(data){
     $.ajax({
       method: 'POST',

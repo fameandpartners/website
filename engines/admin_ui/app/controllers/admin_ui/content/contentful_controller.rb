@@ -1,7 +1,7 @@
 module AdminUi
   module Content
     class ContentfulController < ::AdminUi::ApplicationController
-      before_filter :normalize_page_variables, only: [:update, :create]
+      # before_filter :normalize_page_variables, only: [:update, :create]
 
       def index
       end
@@ -12,13 +12,11 @@ module AdminUi
       def create
         # TODO: @navsamra
         # 1. Create the object that will be saved to DB as json
-        # entries = Contentful.getEntries
-        # json = Contentful.cleanAndResolveLinks(entries)
-        #
+        json = ContentfulService.get_all_contentful_containers()
+
         # 2. Create a DB Record
         # 3. ContentfulVersion.save (below)
 
-        json = {}.to_json
         ContentfulVersion.new({
           change_message: params[:change_message],
           contentful_payload: json
