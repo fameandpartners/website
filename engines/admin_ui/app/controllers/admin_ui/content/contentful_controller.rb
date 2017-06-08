@@ -12,16 +12,17 @@ module AdminUi
       def create
         # TODO: @navsamra
         # 1. Create the object that will be saved to DB as json
-        json = ContentfulService.get_all_contentful_containers()
-
+        contenful_json = ContentfulService.get_all_contentful_containers()
+binding.pry
         # 2. Create a DB Record
         # 3. ContentfulVersion.save (below)
 
-        json = {}.to_json
         ContentfulVersion.create({
-          change_message: params[:change_message],
-          contentful_payload: json
-        })
+            change_message: params[:change_message],
+            user: current_admin_user,
+            contentful_payload: contenful_json
+          }, without_protection: true
+        )
 
         # 4. Push to Rails cache
         # ContentfulVersion.pushCache(json)

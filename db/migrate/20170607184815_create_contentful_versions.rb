@@ -4,7 +4,7 @@ class CreateContentfulVersions < ActiveRecord::Migration
       t.string :change_message, :limit => 255
       t.text :contentful_payload
       t.integer :user_id
-      t.boolean :is_live
+      t.boolean :is_live, default: false
 
       t.timestamps
     end
