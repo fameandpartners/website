@@ -2,7 +2,6 @@ class IndexController < ApplicationController
   layout 'redesign/application'
 
   def show
-    binding.pry
     hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
     @home_page_container = hash_of_results[request.path]
 
