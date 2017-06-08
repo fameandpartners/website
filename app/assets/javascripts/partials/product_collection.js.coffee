@@ -31,6 +31,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
+
     # Sorting / Filtering
     @sortMetaContent = $(options.sortMetaContent)
     @filterMetaContent = $(options.filterMetaContent)
@@ -54,7 +55,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @page_size = options.page_size
     @ORDERS = options.ORDERS
     @showMoreSelector = options.showMoreSelector
-
     @resetPagination(options.size, options.total_products)
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
@@ -185,11 +185,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   showMoreProductsClickHandler: (e) =>
     e.preventDefault()
-    @productStartIndex = Number(e.currentTarget.dataset.startindex)
-    @productEndIndex = (@productStartIndex + 1) * 21
-    @productStartIndex = (Number(@productEndIndex) - 21) + 1
-    console.log("Start with product #", @productStartIndex)
-    console.log("End with product #", @productEndIndex)
     if @loading != true
       @loading = true
       updateRequestParams = _.extend({}, @updateParams)
