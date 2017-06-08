@@ -7,9 +7,9 @@ li class=active_link_to_class(admin_ui.root_path, active: /item_returns/)
     span.nav-label Returns
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Requests', admin_ui.item_returns_requests_path, wrap_tag: :li
-    = active_link_to 'Processed', admin_ui.item_returns_processed_path, wrap_tag: :li
-    = active_link_to 'Exceptions', admin_ui.item_returns_exceptions_path, wrap_tag: :li
+    = active_link_to 'Requests', admin_ui.requests_item_returns_path, wrap_tag: :li
+    = active_link_to 'Processed', admin_ui.processed_item_returns_path, wrap_tag: :li
+    = active_link_to 'Exceptions', admin_ui.exceptions_item_returns_path, wrap_tag: :li
 
 
 li class=active_link_to_class(admin_ui.root_path, active: /customisation/)
