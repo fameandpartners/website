@@ -108,7 +108,7 @@ module Bronto
     end
 
     def session_id
-      @session_id ||= login.body[:login_response][:return]
+      @session_id ||= login.body[:login_response].try(:[], :return)
     end
 
     def logout
