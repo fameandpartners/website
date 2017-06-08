@@ -1,5 +1,5 @@
 class FacebookAdInsight < ActiveRecord::Base
-  attr_accessible :clicks, :cost_per_action_type, :cpc, :cpm, :cpp, :ctr, :date_start, :date_stop, :facebook_ad_id,  :frequency, :reach, :relevance_score, :social_impressions, :spend, :total_actions, :total_unique_actions, :website_clicks, :website_ctr
+  attr_accessible :clicks, :cost_per_action_type, :cpc, :cpm, :cpp, :ctr, :date_start, :date_stop, :facebook_ad_id,  :frequency, :reach, :relevance_score, :social_impressions, :spend, :total_actions, :total_unique_actions, :website_clicks, :website_ctr, :actions, :action_values
 
   belongs_to :facebook_ad
   
@@ -22,7 +22,9 @@ class FacebookAdInsight < ActiveRecord::Base
                          total_actions: insight_json['total_actions'],
                          total_unique_actions: insight_json['total_unique_actions'],
                          website_clicks: insight_json['website_clicks'],
-                         website_ctr: insight_json['website_ctr']&.to_json  )
+                         website_ctr: insight_json['website_ctr']&.to_json,
+                         actions: insight_json['actions']&.to_json,
+                         action_values: insight_json['action_values']&.to_json )
     insight
   end
   
