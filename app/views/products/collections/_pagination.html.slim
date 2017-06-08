@@ -1,12 +1,13 @@
 ruby:
-	extra_button = (@collection.total_products / 21) + 1
+	number_of_pages = @collection.total_products / 21
+	extra_button = number_of_pages + 1
 	extra_button_status = @collection.total_products % 21 != 0
 - is_pagination_link_shown = page.try(:get, 'hide_pagination_link') != 'true'
 
 - if is_pagination_link_shown
   - if @collection.total_products > @collection.products.size
     .relative.more-products
-      - for i in (0...@collection.total_products / 21)
+      - for i in (0...number_of_pages)
         div.col-md-1
           a.btn.btn-featured href='?page=#{i+1}' #{i+1}
 	  - if extra_button_status
