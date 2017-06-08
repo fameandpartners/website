@@ -1,9 +1,9 @@
 module AdminUi
   module Content
-    class ContentfulController < ::AdminUi::ApplicationController
-      before_filter :normalize_page_variables, only: [:update, :create]
+    class ContentfulController < ::AdminUi::ApplicationController      
 
       def index
+        @contentful_versions = ContentfulVersion.order(id: :desc).page(params[:page])
       end
 
       def show

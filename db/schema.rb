@@ -118,8 +118,14 @@ ActiveRecord::Schema.define(:version => 20170607184815) do
     t.datetime "updated_at",                   :null => false
   end
 
-# Could not dump table "contentful_versions" because of following StandardError
-#   Unknown type 'json' for column 'contentful_payload'
+  create_table "contentful_versions", :force => true do |t|
+    t.string   "change_message"
+    t.text     "contentful_payload"
+    t.integer  "user_id"
+    t.boolean  "is_live"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "custom_dress_images", :force => true do |t|
     t.integer  "custom_dress_id"

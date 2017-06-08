@@ -1,3 +1,6 @@
 class ContentfulVersion < ActiveRecord::Base
-  has_one: :user, :class_name => Spree::User    
+  paginates_per 20
+  serialize :contentful_payload
+
+  has_one :user, :class_name => Spree::User    
 end
