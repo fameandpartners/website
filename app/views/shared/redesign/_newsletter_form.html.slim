@@ -1,6 +1,6 @@
 ruby:
   formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
-  service = configatron.subscription_service
+  service = ENV.fetch('SUBSCRIPTION_SERVICE')
 
 form id=(formID)
   input name='url' type='hidden' value=(subscribe_campaigns_email_capture_path)
