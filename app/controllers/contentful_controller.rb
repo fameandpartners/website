@@ -1,5 +1,6 @@
 class ContentfulController < ApplicationController
-  include ContentfulHelper
+  # include ContentfulHelper
+  # include ContentfulService
 
   layout 'contentful/application'
 
@@ -10,7 +11,8 @@ class ContentfulController < ApplicationController
                 :set_collection_resource
 
   def main
-    @landing_page_container = get_contentful_lp_parent_container
+    hash_of_results = ContentfulService.get_all_contentful_containers()
+    @landing_page_container = hash_of_results[request.fullpath]
     render 'layouts/contentful/main'
   end
 

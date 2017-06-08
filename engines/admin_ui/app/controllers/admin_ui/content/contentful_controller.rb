@@ -12,9 +12,8 @@ module AdminUi
       def create
         # TODO: @navsamra
         # 1. Create the object that will be saved to DB as json
-        # entries = Contentful.getEntries
-        # json = Contentful.cleanAndResolveLinks(entries)
-        #
+        json = ContentfulService.get_all_contentful_containers()
+
         # 2. Create a DB Record
         # 3. ContentfulVersion.save (below)
 
