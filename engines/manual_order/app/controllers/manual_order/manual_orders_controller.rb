@@ -51,8 +51,8 @@ module ManualOrder
       render json: manual_order_filter.customisations_options
     end
 
-    def image
-      render json: manual_order_filter.image
+    def images
+      render json: manual_order_filter.images
     end
 
     def price
