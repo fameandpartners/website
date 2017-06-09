@@ -10,22 +10,17 @@ module AdminUi
       end
 
       def create
-        # TODO: @navsamra
-        # 1. Create the object that will be saved to DB as json
-
-binding.pry
-        # 2. Create a DB Record
-        # 3. ContentfulVersion.save (below)
         ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
 
-
-        # 4. Push to Rails cache
-        # ContentfulVersion.pushCache(json)
-        #
-        # 5. Respond with success or failure
-        render status: 200, json: {
-          message: "New Contentful version saved and cached"
-        }.to_json
+        respond_to do |format|
+          format.html do
+            if ret_val
+              flash[:success] = "New contently version is live."
+            else
+              flash[:error] = "Something did not work right."
+            end
+          end
+        end
       end
 
 

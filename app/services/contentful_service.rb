@@ -273,7 +273,7 @@ module Contentful
 				false
 			else
 				current = ContentfulVersion.where(is_live: true).last
-				current = false
+				current.is_live = false
 				current.save!
 
 				last_v.user = user
