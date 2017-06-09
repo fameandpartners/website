@@ -2,8 +2,10 @@ class IndexController < ApplicationController
   layout 'redesign/application'
 
   def show
-    hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
-    @home_page_container = hash_of_results[request.path]
+    #hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
+    current_contently = Contentful::Version.fetch(params['developer'] == 'preview')
+
+    @home_page_container = current_contently.payload[request.path]
 
     @banner      = Spree::BannerBox.big_banner.for_site_version(current_site_version).limit(10)
     @title       = [homepage_title, default_seo_title].join(' ')

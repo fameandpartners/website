@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170607040735) do
+ActiveRecord::Schema.define(:version => 20170609001931) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -120,11 +120,11 @@ ActiveRecord::Schema.define(:version => 20170607040735) do
 
   create_table "contentful_versions", :force => true do |t|
     t.string   "change_message"
-    t.text     "contentful_payload"
+    t.text     "payload"
     t.integer  "user_id"
-    t.boolean  "is_live",            :default => false
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.boolean  "is_live",        :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "custom_dress_images", :force => true do |t|

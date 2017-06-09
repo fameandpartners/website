@@ -11,8 +11,9 @@ class ContentfulController < ApplicationController
                 :set_collection_resource
 
   def main
-    hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
-    @landing_page_container = hash_of_results[request.path]
+    current_contently = Contentful::Version.fetch(params['developer'] == 'preview')
+
+    @landing_page_container = current_contently.payload[request.path]
     render 'layouts/contentful/main'
   end
 
