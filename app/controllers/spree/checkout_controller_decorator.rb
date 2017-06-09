@@ -16,6 +16,7 @@ Spree::CheckoutController.class_eval do
   layout 'redesign/checkout'
 
   def edit
+    @optimizely_opt_in = true
     prepare_order
     find_payment_methods
     data_layer_add_to_cart_event
@@ -29,6 +30,10 @@ Spree::CheckoutController.class_eval do
     end
 
     current_order.updater.update_totals
+
+    # li_presenters = @order.line_items.map {|li| Orders::LineItemPresenter.new(li)}
+    # @order.line_item_presenters = li_presenters
+
 
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170601014655) do
+ActiveRecord::Schema.define(:version => 20170607040735) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -238,6 +238,37 @@ ActiveRecord::Schema.define(:version => 20170601014655) do
   add_index "fabrications", ["line_item_id"], :name => "index_fabrications_on_line_item_id", :unique => true
   add_index "fabrications", ["purchase_order_number"], :name => "index_fabrications_on_purchase_order_number"
   add_index "fabrications", ["uuid"], :name => "index_fabrications_on_uuid", :unique => true
+
+  create_table "facebook_accounts", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "name"
+    t.integer  "account_status"
+    t.integer  "amount_spent"
+    t.string   "currency"
+    t.float    "age"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "facebook_ad_creatives", :force => true do |t|
+    t.string   "facebook_id"
+    t.integer  "facebook_ad_id"
+    t.string   "image_url"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+# Could not dump table "facebook_ad_insights" because of following StandardError
+#   Unknown type 'json' for column 'relevance_score'
+
+# Could not dump table "facebook_ads" because of following StandardError
+#   Unknown type 'json' for column 'recommendations'
+
+# Could not dump table "facebook_adsets" because of following StandardError
+#   Unknown type 'json' for column 'adlabels'
+
+# Could not dump table "facebook_campaigns" because of following StandardError
+#   Unknown type 'json' for column 'recommendations'
 
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"
@@ -1596,7 +1627,7 @@ ActiveRecord::Schema.define(:version => 20170601014655) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                                                  :null => false
+    t.string   "name",                                             :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -1606,14 +1637,14 @@ ActiveRecord::Schema.define(:version => 20170601014655) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
-    t.string   "delivery_period",   :default => "8 - 10 business days"
+    t.string   "delivery_period",   :default => "7 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
@@ -1692,6 +1723,7 @@ ActiveRecord::Schema.define(:version => 20170601014655) do
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
     t.string   "wedding_atelier_signup_step",                             :default => "size"
+    t.text     "user_data",                                               :default => "{}"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

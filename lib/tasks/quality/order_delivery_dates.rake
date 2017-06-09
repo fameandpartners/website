@@ -1,4 +1,5 @@
 namespace :quality do
+  # thanh - is this ever run anymore?
   desc 'ensure orders have a projected delivery date'
   task :order_delivery_dates => :environment do
 
