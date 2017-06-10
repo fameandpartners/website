@@ -7,6 +7,12 @@ class ItemReturnsGrid
     ItemReturn
   end
 
+  SCOPES = {
+    requests: ItemReturn,
+    processed: ItemReturn.where(refund_status: 'Completed'),
+    exceptions: ItemReturn
+  }
+
   FILTERS = {
     requests: [{
       name: :acceptance_status,
@@ -32,13 +38,14 @@ class ItemReturnsGrid
       name: :exception_reason,
       type: :enum, 
       options: {
+        before: true,
         checkboxes: true,
         allow_blank: true,
         select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
         default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] }
       }
     }, {
-      name: :dismissed_items, type: :enum, options: { checkboxes: true, allow_blank: true } 
+      name: :dismissed_items, type: :enum, options: { after: :exception_reason, checkboxes: true, allow_blank: true, select: -> { [:yes, :no] } }
     }]
   }
 
@@ -90,5 +97,9 @@ class ItemReturnsGrid
     custom_filters.each do |f|
       filter(f[:name], f[:type], (f[:options] || {}), &f[:block])
     end
+  end
+
+  def self.set_scope(type:)
+    scope { SCOPES.fetch(type) }
   end
 end

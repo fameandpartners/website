@@ -2,7 +2,9 @@ module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
       type = params.fetch(:type)
+
       ItemReturnsGrid.extend_with_custom_filters(type: type)
+      ItemReturnsGrid.set_scope(type: type)
 
       @title = "Returns - #{type.to_s.capitalize}"
 
