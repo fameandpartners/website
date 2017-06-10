@@ -1,27 +1,27 @@
 module AdminUi
   module Content
-    class ContentfulController < ::AdminUi::ApplicationController      
+    class ContentfulController < ::AdminUi::ApplicationController
 
       def index
-        @contentful_versions = ContentfulVersion.order(id: :desc).page(params[:page])
+        @contentful_versions = ContentfulVersion.order
       end
 
       def show
       end
 
-      def create
-        ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
+      # def create
+      #   ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
 
-        respond_to do |format|
-          format.html do
-            if ret_val
-              flash[:success] = "New contently version is live."
-            else
-              flash[:error] = "Something did not work right."
-            end
-          end
-        end
-      end
+      #   respond_to do |format|
+      #     format.html do
+      #       if ret_val
+      #         flash[:success] = "New contently version is live."
+      #       else
+      #         flash[:error] = "Something did not work right."
+      #       end
+      #     end
+      #   end
+      # end
 
 
       private

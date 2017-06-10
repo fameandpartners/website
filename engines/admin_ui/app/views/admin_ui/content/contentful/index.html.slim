@@ -24,7 +24,39 @@
 
                 button.btn.btn-primary Upload new Contentful Version
 
+          br
+
+          .alert.alert-danger.fade.in.js-contentful-danger.hidden
+            | Something did not work right.
+            button.close data-dismiss="alert"
+              | X
+          .alert.alert-success.fade.in.js-contentful-success.hidden
+            | New Contentful version is live!
+            button.close data-dismiss="alert"
+              | X
+
           hr
+
+            table.table
+              thead
+                tr
+                  th
+                    | Version
+                  th
+                    | Commit Message
+                  th
+                    | Pages
+              tbody
+              - @contentful_versions.each do |item|
+                tr
+                  th
+                    = item[:id]
+                  th
+                    = item[:change_message]
+                  th
+                    ul.list-group
+                    - item[:payload].keys.each do |page|
+                      li.list-group-item = page
 
 
 javascript:
@@ -60,9 +92,11 @@ javascript:
       data: data,
     })
     .done(function( msg ) {
+      $(".js-contentful-success").removeClass('hidden');
       console.log('Oh YESSSSSS');
     })
     .error(function(){
+      $(".js-contentful-danger").removeClass('hidden');
       console.log('Oh No');
     })
   }
