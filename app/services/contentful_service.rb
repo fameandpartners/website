@@ -278,6 +278,7 @@ module Contentful
 
         last_v.user = user
         last_v.is_live = true
+        last_v.change_message = change_message
         last_v.save!
         true
       end

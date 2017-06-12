@@ -3,25 +3,19 @@ module AdminUi
     class ContentfulController < ::AdminUi::ApplicationController
 
       def index
-        @contentful_versions = ContentfulVersion.order
+        @contentful_versions = ContentfulVersion.order.reverse
       end
 
-      def show
+      def create
+        ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
+
+        if ret_val
+          render status: 200, json: {message: 'Successfully created new version'}
+        else
+          render status: 400, json: {message: 'Failed. Make sure to hit ?developer=preview on the URL to save a new version'}
+        end
+
       end
-
-      # def create
-      #   ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
-
-      #   respond_to do |format|
-      #     format.html do
-      #       if ret_val
-      #         flash[:success] = "New contently version is live."
-      #       else
-      #         flash[:error] = "Something did not work right."
-      #       end
-      #     end
-      #   end
-      # end
 
 
       private
