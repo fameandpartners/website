@@ -30,11 +30,12 @@ $ ->
 
   existingCustomer.on 'change', =>
     url = userUrl.replace(/:user_id/, existingCustomer.val()) if existingCustomer.val()
+
     if url
       $.getJSON url, (data) =>
-        email.val(data.email)
-        first_name.val(data.first_name)
-        last_name.val(data.last_name)
+        email.val(data.email).prop('disabled', true)
+        first_name.val(data.first_name).prop('disabled', true)
+        last_name.val(data.last_name).prop('disabled', true)
         address1.val(data.address1)
         address2.val(data.address2)
         city.val(data.city)
@@ -43,7 +44,10 @@ $ ->
         phone.val(data.phone)
         refreshStates(true)
         state.val(data.state_id)
-        updateCountryAndState()
+
+        customerForm.prop('disabled', false)
+        country.prop('disabled', false).trigger("chosen:updated")
+        state.prop('disabled', false).trigger("chosen:updated")
     else
       clearCustomerForm()
       updateCountryAndState()
@@ -68,11 +72,11 @@ $ ->
 
     $.each states, (index, el) =>
       state.append $('<option>').attr('value', el.id).text(el.name)
-    state.attr('disabled', status)
+    state.prop('disabled', status)
 
   clearStates = ->
     state.html('<option></option>')
-    state.attr('disabled', true)
+    state.prop('disabled', true)
 
   updateStates = ->
     state.trigger('chosen:updated')
@@ -88,29 +92,29 @@ $ ->
     country.val('')
     state.val('')
 
-    existingCustomer.attr('disabled', false)
+    existingCustomer.prop('disabled', false)
     updateExistingCustomer()
 
-    customerForm.attr('disabled', true)
-    country.attr('disabled', true)
-    state.attr('disabled', true)
+    customerForm.prop('disabled', true)
+    country.prop('disabled', true)
+    state.prop('disabled', true)
     updateCountryAndState()
 
   $('#customer_new').on 'click', =>
     clearCustomerForm()
 
     existingCustomer.val('')
-    existingCustomer.attr('disabled', true)
+    existingCustomer.prop('disabled', true)
     updateExistingCustomer()
 
-    customerForm.attr('disabled', false)
-    country.attr('disabled', false)
+    customerForm.prop('disabled', false)
+    country.prop('disabled', false)
     updateCountryAndState()
 
   clearCustomerForm = ->
-    email.val('')
-    first_name.val('')
-    last_name.val('')
+    email.val('').prop('disabled', false)
+    first_name.val('').prop('disabled', false)
+    last_name.val('').prop('disabled', false)
     address1.val('')
     address2.val('')
     city.val('')
