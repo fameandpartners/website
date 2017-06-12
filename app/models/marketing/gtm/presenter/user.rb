@@ -2,7 +2,6 @@ module Marketing
   module Gtm
     module Presenter
       class User < Base
-        include Split::Helper # Split testing
         attr_reader :user, :request_ip, :session
 
         def initialize(spree_user:, request_ip: nil, session: {})
@@ -11,13 +10,6 @@ module Marketing
           @session    = session
         end
 
-        # Active experiments for a/b testing
-        def active_experiments
-          if @session.present?
-            ab_user.active_experiments.values.join(' ')
-          end
-        end
- 
         def name
           logged_in? ? "#{user.first_name} #{user.last_name}" : UNKNOWN_STRING
         end
@@ -52,7 +44,6 @@ module Marketing
 
         def body
           {
-            active_experiments: active_experiments,
             country:  country,
             email:    email,
             facebook: from_facebook?,

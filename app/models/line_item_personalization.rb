@@ -28,14 +28,6 @@ class LineItemPersonalization < ActiveRecord::Base
 
   before_save :recalculate_price
 
-  after_save do
-    line_item.order.clean_cache!
-  end
-
-  after_destroy do
-    line_item.order.clean_cache!
-  end
-
   validate do
     if product.present? && customization_value_ids.present?
       unless customization_value_ids.all?{ |id| product.customisation_value_ids.include?(id.to_i) }

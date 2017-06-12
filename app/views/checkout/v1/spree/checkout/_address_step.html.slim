@@ -1,3 +1,14 @@
+ruby:
+  shopping_cart_delivery_times_init = "
+    window.app.shopping_cart_delivery_times = new ShoppingCartDeliveryTimes({
+      cart: window.app.shopping_cart,
+      container: '.js-shopping-cart-delivery-times'
+    });
+  "
+
+= content_for :inline_javascript do
+  = raw shopping_cart_delivery_times_init
+
 - if current_step.eql?('address')
   = render :partial => 'shared/error_messages', locals: { target: @order }
 
@@ -37,6 +48,10 @@
 
     - if delivery_date_messaging_enabled?
       = react_component('Delivery')
+    
+    .row
+      .col-xs-12
+        #shopping-cart-delivery-times.js-shopping-cart-delivery-times
 
     .row
       .col-xs-12.form-group

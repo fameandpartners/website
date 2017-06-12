@@ -116,6 +116,9 @@ FameAndPartners::Application.routes.draw do
     # Fame Society Invitation
     get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
+    # "Invite a friend" landing page
+    get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -294,6 +297,12 @@ FameAndPartners::Application.routes.draw do
     # Burgundy Collection Page
     get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
 
+    # White Trend Page
+    get '/trends-white' => 'products/collections#show', :permalink => 'white-trend', :as => :white_trend_page
+
+    # Gingham & Stripes Category page
+    get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
@@ -324,6 +333,8 @@ FameAndPartners::Application.routes.draw do
       post 'products' => 'products#create'
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+
+      post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
@@ -662,7 +673,6 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 

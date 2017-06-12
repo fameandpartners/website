@@ -1,13 +1,31 @@
 ruby:
   def hero_text_position(position)
     case position
-    when "Left"
+    when "Far-Left"
       {class: 'col-md-6'}
-    when "Right"
-      {class: 'col-md-6 col-lg-6 pull-right'}
-    else
-      # Defaults to 'Center-Left'...
+    when "Left"
       {class: 'col lg-4 col-md-5 col-md-offset-3'}
+    when "Center-Right"
+      {class: 'col-md-6 col-lg-6 pull-right'}
+    when "Right"
+      {class: 'col-md-4 col-lg-4 pull-right'}
+    when "Far-Right"
+      {class: 'col-md-6 pull-right'}
+    else
+      # Defaults to 'Center'...
+      {class: 'col-md-4 col-md-offset-4'}
+    end
+  end
+
+  def hero_extra_padding(side)
+    case side
+    when "Left"
+      {class: 'extra-padding-left'}
+    when "Right"
+      {class: 'extra-padding-right'}
+    else
+      # Defaults to 'None'...
+      {class: ''}
     end
   end
 
@@ -58,7 +76,7 @@ ruby:
       .container-fluid
         .row
           *hero_text_position(tile[:text_position])
-            .copy-wrap.extra-padding-left*hero_text_alignment(tile[:text_align])
+            .copy-wrap*hero_extra_padding(tile[:text_padding]) *hero_text_alignment(tile[:text_align])
               h2.heading.no-margin-md
                 span*hero_text_size(tile[:text_size])
                   - if tile[:heading]

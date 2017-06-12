@@ -4,7 +4,8 @@ import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
 import { MODAL_STYLE } from './utils';
 import SizeChartCell from './SizeChartCell';
-
+import { trackEvent } from '../../libs/gaTracking'
+import { viewSizeGuideEvent } from '../../libs/gaEventObjects'
 class SidePanelSizeChart extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -23,6 +24,7 @@ class SidePanelSizeChart extends React.Component {
   }
 
   openModal() {
+    trackEvent(viewSizeGuideEvent)
     this.setState({ modalIsOpen: true });
   }
 
@@ -91,7 +93,7 @@ class SidePanelSizeChart extends React.Component {
                 </Tabs>
               </div>
               <div className="col-md-6">
-                <p className="table-title text-center">Fame & Partners sizes are designed to fit the following measurements.</p>
+                <p className="table-title text-center">Fame and Partners sizes are designed to fit the following measurements.</p>
                 <table>
                   <thead>
                     <tr>

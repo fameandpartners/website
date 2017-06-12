@@ -15,5 +15,15 @@ FactoryGirl.define do
 
       line_items   { build_list :dress_item, 1 }
     end
+
+    factory :complete_order_with_items_fast do
+      association(:user,         factory: :spree_user)
+      association(:bill_address, factory: :address)
+
+      completed_at { DateTime.now }
+      state        'complete'
+
+      line_items   { build_list :dress_item, 1 , :fast_making}
+    end
   end
 end

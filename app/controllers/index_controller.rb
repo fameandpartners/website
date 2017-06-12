@@ -1,4 +1,6 @@
 class IndexController < ApplicationController
+  include ContentfulHelper
+
   layout 'redesign/application'
 
   def show

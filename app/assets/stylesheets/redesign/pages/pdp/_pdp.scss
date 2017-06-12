@@ -147,13 +147,12 @@
     }
 
   }
-
-  .pdp-panel-side-right {
-
-    .panel-side {
-      height: 100vh;
-    }
-
+  @media (min-width: $bootstrap-md-width) {
+      .pdp-panel-side-right {
+        .panel-side {
+          height: 100vh;
+        }
+      }
   }
 
   .btn-wrap .price {
@@ -511,7 +510,8 @@
   }
 
   // add helpers here, its only place where !important is allowed
-  .error {
+  .error,
+  .error-wrap {
     color: $c-brand-red !important;
   }
 
@@ -577,7 +577,7 @@
   @media (min-width: $bootstrap-md-width) {
     .CAD--layer-wrapper {
       height: 240px;
-      width: 260px;
+      width: 282px;
     }
   }
 
