@@ -26,3 +26,16 @@
     height: 100%;
   }
 }
+
+.bridal-party__no-invites {
+  &:before {
+    content: '1';
+    padding: 2px 7px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: $red;
+    color: $white;
+    border-radius: 50%;
+  }
+}

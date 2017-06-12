@@ -7,3 +7,8 @@ a {
   letter-spacing: 1px;
   text-decoration: underline;
 }
+
+.vertically-centered {
+  top: 50%;
+  transform: translateY(-50%);
+}

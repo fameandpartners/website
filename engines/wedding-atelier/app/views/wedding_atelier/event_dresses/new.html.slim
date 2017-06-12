@@ -5,3 +5,7 @@
                   event_name: @event.name,
                   event_path: wedding_atelier.event_path(id: @event.id, slug: @event.slug),
                   currentUser: WeddingAtelier::UserSerializer.new(spree_current_user, scope: self)
+
+= react_component 'Tutorial',
+                  signupStep: spree_current_user.wedding_atelier_signup_step,
+                  userPath: wedding_atelier.user_path(spree_current_user)

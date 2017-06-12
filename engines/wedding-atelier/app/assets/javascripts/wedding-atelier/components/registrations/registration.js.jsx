@@ -47,7 +47,7 @@ var Registration = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
-        window.location = "/wedding-atelier/events/" + response.event.id;
+        window.location = "/wedding-atelier/events/" + response.event.id + "/dresses/new";
       },
       error: function (data) {
         console.log('error');
@@ -85,17 +85,17 @@ var Registration = React.createClass({
       <div className="modal">
         <div className="modal-dialog modal-sm">
           <div className="modal-content">
-            <div className="modal-header">
-              <button onClick={this.previousStep}>Prev</button>
+            <div className="modal-header registrations__header">
+              <a href='#' className='registrations__back-arrow' onClick={this.previousStep}></a>
             </div>
             <div className="modal-body">
               <form action="/wedding-atelier/signup" className="new_spree_user">
                 {this.showStep()}
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer registrations__footer">
               <p className="already-member text-center">
-                Already a member?
+                Already a member?&nbsp;
                 <a className="bold hover=link" href={this.props.signinPath}>log in here</a>
               </p>
             </div>

@@ -7,6 +7,7 @@ var UserFields = React.createClass({
       last_name: this.refs["user.last_name"].value,
       email: this.refs["user.email"].value,
       password: this.refs["user.password"].value,
+      wedding_atelier_signup_step: 'tutorial',
 
       user_profile_attributes: {
         trend_updates: this.refs["profile.trend_updates"].value

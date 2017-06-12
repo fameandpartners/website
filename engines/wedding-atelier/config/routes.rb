@@ -30,5 +30,7 @@ WeddingAtelier::Engine.routes.draw do
   resources :accounts, path: 'my-account', only: [:index, :update, :show]
 
   resource :orders, only: [:create, :show]
+
+  resources :users, only: [:update]
   post '/slack_callbacks', to: 'slack_callbacks#create'
 end

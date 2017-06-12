@@ -1,0 +1,10 @@
+.registrations__header,
+.registrations__footer {
+  border: none;
+}
+
+.registrations__back-arrow {
+  background: transparent image-url('lessthan.svg') no-repeat center;
+  background-size: 10px;
+  padding: 5px;
+}

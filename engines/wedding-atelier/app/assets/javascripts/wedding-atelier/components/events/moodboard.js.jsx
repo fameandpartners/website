@@ -620,7 +620,14 @@ var MoodBoardEvent = React.createClass({
                     data-tooltip-content="Add, view, and remove members of the bridal party"
                     data-tooltip-my-position="top center"
                     data-tooltip-at-position="bottom center">
-                    <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab">Bridal party</a>
+                    <a
+                      aria-controls="manage-bridal-party"
+                      data-toggle="tab"
+                      href="#manage-bridal-party"
+                      role="tab"
+                      className={!this.state.event.invitations.length && 'bridal-party__no-invites'}>
+                      Bridal party
+                    </a>
                   </li>
                   <li role="presentation" className="bridal-gowns">
                     <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
