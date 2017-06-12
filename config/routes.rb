@@ -307,7 +307,6 @@ FameAndPartners::Application.routes.draw do
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
-    get '/the-anti-fast-fashion-shop'   => 'contentful#main', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -674,7 +673,12 @@ FameAndPartners::Application.routes.draw do
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
-  get '/contentful' => 'contentful#main'
+  get '/contentful' => 'contentful#main', as: :the_anti_fast_fashion_shop_landing_page
+
+
+  ContentfulRoute.all.each do |cr|
+    match cr.route_name, :controller => cr.controller, :action => cr.action
+  end
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
