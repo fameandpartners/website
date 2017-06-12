@@ -19,6 +19,10 @@ var DesktopCustomizations = React.createClass({
     savedDressCallback: React.PropTypes.func
   },
 
+  componentWillMount: function(){
+    this.loadChatToken();
+  },
+
   getInitialState: function () {
     return {
       showContainer: false,
@@ -36,7 +40,55 @@ var DesktopCustomizations = React.createClass({
   },
 
   askStylistsCallback: function () {
-    window.location = this.props.event_path;
+    var that = this;
+    this.sendMessageToTwillio({
+      author: null,
+      time: Date.now(),
+      type: 'notification',
+      content: 'The Fame @stylist will answer any questions you have about designing your perfect dress. Please ask any questions you have about designing or buying your dresses in the chat below, and she will get back to you ASAP!'
+    }).then(function() {
+      window.location = that.props.event_path;
+    });
+  },
+
+  loadChatToken: function() {
+    var that = this;
+    $.post(this.props.twilio_token_path + '.json', function(response){
+      var token = response.token,
+          twilioClient = new Twilio.Chat.Client(token);
+      var _state = $.extend({}, that.state);
+      _state.twilioClient = twilioClient;
+      that.setState(_state);
+      twilioClient.initialize().then(function(){ that.setupChatChannel(); });
+    }).fail(function(e) {});
+  },
+
+  setupChatChannel: function(){
+    var that = this;
+    var chatChannelName = this.props.channel_prefix + 'wedding-atelier-channel-' + this.props.eventId;
+    this.state.twilioClient.getChannelByUniqueName(chatChannelName).then(function(chatChannel){
+      chatChannel.join().then(function() {
+        that.setState({ chatChannel: chatChannel });
+      });
+
+    }, function(e){
+      if(e.body.code == that.twilioCodes.CHANNEL_NOT_FOUND){
+        that.state.twilioClient.createChannel({
+          uniqueName: chatChannelName,
+          friendlyName: that.props.event_name
+        }).then(function(chatChannel) {
+          chatChannel.join().then(function() {
+            var _chat = $.extend({}, that.state.chat);
+            _chat.loading = false;
+            that.setState({ chatChannel: chatChannel, chat: _chat });
+          });
+        });
+      }
+    });
+  },
+
+  sendMessageToTwillio: function(message) {
+    return this.state.chatChannel.sendMessage(JSON.stringify(message));
   },
 
   show: function(currentCustomization) {
@@ -118,7 +170,7 @@ var DesktopCustomizations = React.createClass({
                 eventId={this.props.eventId}
                 selectedOptions={this.props.selectedOptions}
                 buttonClass='btn-transparent'
-                edit={this.props.edit}
+                edit={false}
                 initialDress={this.props.initialDress}
                 currentUser={this.props.currentUser}
                 savedDressCallback={this.askStylistsCallback}
