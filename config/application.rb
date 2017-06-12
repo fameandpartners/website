@@ -14,6 +14,8 @@ module FameAndPartners
     config.skylight.environments += ['staging']
     config.skylight.alert_log_file = true
 
+    # sidekicq needs lib in eager paths
+    config.eager_load_paths += %W( #{config.root}/lib )
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed
     if Rails.env.test?
