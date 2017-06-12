@@ -1,0 +1,29 @@
+<%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
+
+<div class="Editorial__overlay">
+  <h4 class="Editorial__overlayTitle">Shop the Look</h4>
+  <ul>
+  <% @lg_contents[:overlay_pids].each do |pid| %>
+  <%
+    split_pid = pid.split('-', 2)
+
+    product = @collection.products.select do |item|
+      item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+    end
+
+    if product.present?
+      name = product[0].name
+      path = collection_product_path(product[0], color: product[0].color.try(:name))
+    else
+      name = 'INVALID PRODUCT ID'
+      path = ''
+    end
+  %>
+    <li>
+      <a href="<%= path %>">
+        <%= name %>
+      </a>
+    </li>
+  <% end %>
+  </ul>
+</div>

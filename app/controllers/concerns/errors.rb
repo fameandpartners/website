@@ -24,6 +24,10 @@ module Concerns
         NewRelic::Agent.record_custom_event('UndefinedURL', data)
         render text: 'Not Found', status: :not_found
 
+      elsif ContentfulRoute.where(route_name: request.path)[0].present?
+        c = ContentfulController.new
+        c.main(params, request.path, &:render)
+
       else
         # NOTE: Alexey Bobyrev 14 Jan 2017
         # Raise error here to make it visible for application#rescue_from

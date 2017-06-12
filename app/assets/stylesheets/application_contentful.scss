@@ -71,7 +71,7 @@
 @import 'redesign/layout/nav-menu';
 @import 'redesign/layout/simplified-nav';
 // @import 'redesign/layout/menu-new-this-week';
-@import 'redesign/layout/section-boxes';
+// @import 'redesign/layout/section-boxes';
 
 // // Components
 // @import 'redesign/components/lists';
@@ -154,6 +154,10 @@
 // // Generic
 @import 'redesign/generic/content-order';
 @import 'redesign/generic/helpers';
+
+// Contentful
+@import 'contentful/contentful';
+
 //
 // .standard-form {
 //   height: 60px;

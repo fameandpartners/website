@@ -1,0 +1,102 @@
+- content_for :page_title do
+  | Contentful Admin
+
+.wrapper.wrapper-content
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-content
+          .row
+            .col-lg-6
+              form#js-contentful_form
+                .row
+                  .form-group
+                    .label What changed in this version?
+                      span (Limit 255)
+                    .input-group
+                      = text_area_tag(:change_message, '', :size => "31x6")
+
+                .row
+                  .form-group
+                    .label Type "CONFIRM" if you are sure you want to make this change
+                    .input-group.col-lg-3
+                      = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'CONFIRM', value: params[:protected_term]
+
+                button.btn.btn-primary Upload new Contentful Version
+
+          br
+
+          .alert.alert-danger.fade.in.js-contentful-danger.hidden
+            | Something did not work right.
+            button.close data-dismiss="alert"
+              | X
+          .alert.alert-success.fade.in.js-contentful-success.hidden
+            | New Contentful version is live!
+            button.close data-dismiss="alert"
+              | X
+
+          hr
+
+            table.table
+              thead
+                tr
+                  th
+                    | Version
+                  th
+                    | Commit Message
+                  th
+                    | Pages
+              tbody
+              - @contentful_versions.each do |item|
+                tr
+                  th
+                    = item[:id]
+                  th
+                    = item[:change_message]
+                  th
+                    ul.list-group
+                    - item[:payload].keys.each do |page|
+                      li.list-group-item = page
+
+
+javascript:
+  var CONFIRM = 'CONFIRM';
+  $('#js-contentful_form').on('submit', function(event){
+    event.preventDefault();
+    var formVals = serializeFormVals(this);
+    if (formVals.protected_term && formVals.protected_term === CONFIRM){
+      createNewContent(JSON.stringify(formVals));
+    }
+  })
+
+  $('.js-protected-term').on('change', function(event){
+    console.log('event', event.target);
+    // EXTRA CREDIT, undisable
+  })
+
+  function serializeFormVals(formEl){
+    var vals = $(formEl).serializeArray()
+    var formVals = vals.reduce(function(accum, curr){
+      accum[curr.name] = curr.value;
+      return accum;
+    }, {});
+    return formVals
+  }
+
+  function createNewContent(data){
+    $.ajax({
+      method: 'POST',
+      url: 'contentful',
+      contentType: 'application/json',
+      dataType:'json',
+      data: data,
+    })
+    .done(function( msg ) {
+      $(".js-contentful-success").removeClass('hidden');
+      console.log('Oh YESSSSSS');
+    })
+    .error(function(){
+      $(".js-contentful-danger").removeClass('hidden');
+      console.log('Oh No');
+    })
+  }

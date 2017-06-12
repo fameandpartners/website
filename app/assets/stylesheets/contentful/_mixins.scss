@@ -1,0 +1,21 @@
+@mixin breakpoint($class) {
+  @if $class == tablet {
+    @media (min-width: $tablet) { @content; }
+  }
+
+  @else if $class == desktop {
+    @media (min-width: $desktop) { @content; }
+  }
+
+  @else if $class == widescreen {
+    @media (min-width: $widescreen) { @content; }
+  }
+
+  @else if $class == fullhd {
+    @media (min-width: $fullhd) { @content; }
+  }
+
+  @else {
+    @warn "Breakpoint mixin supports: tablet, desktop, widescreen, fullhd";
+  }
+}

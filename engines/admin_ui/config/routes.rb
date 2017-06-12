@@ -58,6 +58,7 @@ AdminUi::Engine.routes.draw do
 
   namespace :content do
     resources :pages
+    resources :contentful
   end
 
   namespace :logistics do

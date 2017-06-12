@@ -1,7 +1,7 @@
 //---------
 // Our code
 //---------
-// require libs/typekit.min
+//= require libs/typekit.min
 // require jquery_ujs
 // require jquery-ui/datepicker
 // require jquery-fileupload/vendor/jquery.ui.widget
@@ -99,13 +99,14 @@
 // require partials/inputs/new.js.coffee
 // require partials/inputs/product_option_selectors.js.coffee
 // require partials/helpers/product_images_slider.js.coffee
-//= require partials/product_collection_image_hover.js.coffee
+// require partials/product_collection_image_hover.js.coffee
+//= require partials/product_collection_image_hover.js
 
 //--------------------------------
 // Shopping cart & bag & moodboard
 //--------------------------------
 //= require partials/helpers/shopping_cart
-//= require partials/helpers/user_moodboard
+// require partials/helpers/user_moodboard
 // require partials/product_collection_moodboard_links
 //= require partials/shopping_bag
 // require partials/shopping_cart_summary
@@ -127,3 +128,8 @@
 //--------------------------------
 //= require partials/header
 //= require partials/simplified_nav
+
+//--------------------------------
+// Contentful
+//--------------------------------
+//= require partials/contentful/alert

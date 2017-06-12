@@ -1,0 +1,35 @@
+.app-container {
+  width: 100%;
+  margin-top: 96px;
+}
+
+// use this class for breakpoints
+.app-child {
+  margin: 0 auto;
+  padding: 0 12px;
+  width: 100%;
+  max-width: 1776px;
+
+  @include breakpoint(tablet) {
+    padding: 24px 48px;
+    width: calc(100% - 96px);
+  }
+  @include breakpoint(desktop) {
+  }
+  @include breakpoint(widescreen) {
+  }
+  @include breakpoint(fullhd) {
+  }
+}
+
+div.section-row.tile,
+div.section-row.columns {
+  margin-top: 50px;
+}
+
+// custom offset (bulma doesn't have this margin-right version)
+.is-offset-6-right {
+  @include breakpoint(tablet) {
+    margin-right: 50%;
+  }
+}
