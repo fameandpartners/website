@@ -17,6 +17,18 @@ css:
   .doomsday strong {
     padding-right: 4px;
   }
+  .table-success {
+    background-color: #dff0d8;
+  }
+
+ruby:
+  def is_active_row(row_item)
+    if row_item
+      {class: 'table-success'}
+    else
+      {class: ''}
+    end
+  end
 
 .wrapper.wrapper-content
   .row
@@ -61,11 +73,11 @@ css:
           br
 
           .alert.alert-danger.fade.in.js-contentful-danger.hidden
-            | Something did not work right.
+            | -- ERROR MESSAGE --
             button.close data-dismiss="alert"
               | X
           .alert.alert-success.fade.in.js-contentful-success.hidden
-            | New Contentful version is live!
+            | -- SUCCESS MESSAGE --
             button.close data-dismiss="alert"
               | X
 
@@ -82,7 +94,7 @@ css:
                     | Pages
               tbody
               - @contentful_versions.each do |item|
-                tr
+                tr*is_active_row(item[:is_live])
                   th
                     = item[:id]
                   th
@@ -125,12 +137,12 @@ javascript:
       dataType:'json',
       data: data,
     })
-    .done(function( msg ) {
-      $(".js-contentful-success").removeClass('hidden');
+    .done(function(msg) {
+      $(".js-contentful-success").text(msg.message).removeClass('hidden');
       console.log('Oh YESSSSSS');
     })
-    .error(function(){
-      $(".js-contentful-danger").removeClass('hidden');
+    .error(function(msg){
+      $(".js-contentful-danger").text(msg.responseJSON.message).removeClass('hidden');
       console.log('Oh No');
     })
   }

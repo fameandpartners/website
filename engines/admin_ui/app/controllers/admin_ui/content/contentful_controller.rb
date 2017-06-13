@@ -10,9 +10,9 @@ module AdminUi
         ret_val = Contentful::Version.set_live(current_admin_user, params[:change_message])
 
         if ret_val
-          render status: 200, json: {message: 'Successfully created new version'}
+          render status: 200, json: {message: 'Successfully created a new version.'}
         else
-          render status: 400, json: {message: 'Failed. Make sure to hit ?developer=preview on the URL to save a new version'}
+          render status: 400, json: {message: 'Failed. Make sure to hit ?developer=preview on the URL to save a new version.'}
         end
 
       end
@@ -28,7 +28,7 @@ module AdminUi
 
         ContentfulRoute.create(route_params)
 
-        render status: 200, json: {message: 'Route created!'}
+        render status: 200, json: {message: 'Route successfully created!'}
       end
 
 
