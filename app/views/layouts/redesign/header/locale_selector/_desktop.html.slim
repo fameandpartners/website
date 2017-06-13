@@ -1,8 +1,8 @@
 span#locale-selector-container
   #locale-selector-label
     | You're shopping in:
-  #locale-selector-current
-    .arrow
+  #locale-selector-current onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Country Dropdown Press', eventLabel: null, nonInteraction: false })"
+    .arrow 
     = render 'layouts/redesign/header/locale_selector/item', site_version: current_site_version
     ul
       - SiteVersion.all.each do |site_version|
