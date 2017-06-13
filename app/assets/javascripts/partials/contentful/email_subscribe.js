@@ -42,9 +42,7 @@
         },
         success: this.handler,
         error: function () {
-            alert('We got an error, but we will show the success message anyway');
-            $('.newsletter-signup-form').toggleClass('hide')
-            $('.success-message').toggleClass('hide');
+            this.signupFailure
         }
       });
     };
@@ -70,6 +68,19 @@
       return window.track.event('Newsletter', 'Error', this.campaign);
     };
 
+    NewsletterSubscriberOnPage.prototype.signupFailure = function() {
+      var message, title;
+      title = 'Sorry';
+      message = 'We had an issue saving your email.';
+      window.helpers.showAlert({
+        message: message,
+        type: 'warning',
+        title: title,
+        timeout: 55555
+      });
+      return window.track.event('Newsletter', 'Error', this.campaign);
+    };
+
     NewsletterSubscriberOnPage.prototype.success = function() {
       var message, title;
       title = 'Thanks';
@@ -80,6 +91,8 @@
         title: title,
         timeout: 55555
       });
+      $('.newsletter-signup-form').toggleClass('hide')
+      $('.success-message').toggleClass('hide');
       return window.track.event('Newsletter', 'Submitted', this.campaign);
     };
 
