@@ -394,9 +394,7 @@ ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
 CREATE TABLE contentful_versions (
     id integer NOT NULL,
     change_message character varying(255),
-    payload text,
-    user_id integer,
-    is_live boolean DEFAULT false,
+    contentful_payload json,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -9526,8 +9524,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170527060310');
 INSERT INTO schema_migrations (version) VALUES ('20170527063724');
 
 INSERT INTO schema_migrations (version) VALUES ('20170527071529');
-
-INSERT INTO schema_migrations (version) VALUES ('20170601014655');
 
 INSERT INTO schema_migrations (version) VALUES ('20170602062951');
 

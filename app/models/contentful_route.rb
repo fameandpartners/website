@@ -4,4 +4,5 @@ class ContentfulRoute < ActiveRecord::Base
                   :route_name
 
   validates_uniqueness_of :route_name
+  validates_format_of :route_name, :with => /^\/([a-z]{1})([a-z-0-9])+$/, :on => :create
 end
