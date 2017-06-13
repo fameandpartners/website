@@ -288,8 +288,11 @@ FameAndPartners::Application.routes.draw do
     # Casual Category Page
     get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
 
-    # Spring Weddings Collection Page
-    get '/dresses/spring-weddings' => 'products/collections#show', :permalink => 'spring-weddings', :as => :spring_weddings_collection_page
+    # Summer Weddings Collection Page
+    get '/dresses/summer-weddings' => 'products/collections#show', :permalink => 'summer-weddings', :as => :summer_weddings_collection_page
+
+    # Redirect old Spring Weddings to Summer Weddings Collection Page
+    get '/dresses/spring-weddings', to: redirect('/dresses/summer-weddings'), as: :spring_weddings_collection_page
 
     # Burgundy Collection Page
     get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
