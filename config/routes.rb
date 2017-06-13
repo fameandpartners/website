@@ -679,6 +679,8 @@ FameAndPartners::Application.routes.draw do
   get '/contentful' => 'contentful#main', as: :the_anti_fast_fashion_shop_landing_page
 
 
+
+
   ContentfulRoute.all.each do |cr|
     match cr.route_name, :controller => cr.controller, :action => cr.action
   end
