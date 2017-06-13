@@ -99,6 +99,10 @@ ruby:
                     = item[:id]
                   th
                     = item[:change_message]
+                  th
+                    ul.list-group
+                    - item[:payload].keys.each do |page|
+                      li.list-group-item = page
 
 
 javascript:
