@@ -17,6 +17,20 @@ module AdminUi
 
       end
 
+      def create_route
+
+        # future: use different params (controller/action)
+        route_params = {
+          route_name: params[:route_name],
+          controller: 'contentful',
+          action: 'main'
+        }
+
+        ContentfulRoute.create(route_params)
+
+        render status: 200, json: {message: 'Route created!'}
+      end
+
 
       private
 

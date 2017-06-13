@@ -59,6 +59,7 @@ AdminUi::Engine.routes.draw do
   namespace :content do
     resources :pages
     resources :contentful
+    post 'contentful_route' => 'contentful#create_route'
   end
 
   namespace :logistics do
