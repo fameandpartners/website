@@ -1,18 +1,34 @@
 - content_for :page_title do
   | Contentful Admin
 
+css:
+  .doom-wrapper {
+    padding: 10px;
+    border: 2px solid #f00;
+    border-radius: 2px;
+    background: #eee;
+  }
+  .doom-wrapper form .row {
+    margin: 0;
+  }
+  .doomsday {
+    color: #f00;
+  }
+  .doomsday strong {
+    padding-right: 4px;
+  }
+
 .wrapper.wrapper-content
   .row
     .col-lg-12
       .ibox
         .ibox-content
           .row
-            .col-lg-6
-              form#js-contentful_form
+            .col-md-6
+              form.js-contentful-form data-path='contentful'
                 .row
                   .form-group
-                    .label What changed in this version?
-                      span (Limit 255)
+                    .label What changed in this version? (Limit 255)
                     .input-group
                       = text_area_tag(:change_message, '', :size => "31x6")
 
@@ -23,6 +39,24 @@
                       = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'CONFIRM', value: params[:protected_term]
 
                 button.btn.btn-primary Upload new Contentful Version
+            .col-md-6.doom-wrapper
+              h2.doomsday
+                strong WARNING:
+                | DO NOT EDIT UNLESS YOU KNOW WHAT YOU'RE DOING
+              form.js-contentful-form data-path='contentful_route'
+                .row
+                  .form-group
+                    .label ENTER NEW ROUTE
+                    .input-group
+                      = text_field_tag :route_name, params[:route_name], placeholder: '/example-path'
+
+                .row
+                  .form-group
+                    .label Type "CONFIRM" if you are sure you want to make this change
+                    .input-group.col-lg-3
+                      = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'CONFIRM', value: params[:protected_term]
+
+                button.btn.btn-primary Add New Route
 
           br
 
@@ -61,11 +95,11 @@
 
 javascript:
   var CONFIRM = 'CONFIRM';
-  $('#js-contentful_form').on('submit', function(event){
+  $('.js-contentful-form').on('submit', function(event){
     event.preventDefault();
     var formVals = serializeFormVals(this);
     if (formVals.protected_term && formVals.protected_term === CONFIRM){
-      createNewContent(JSON.stringify(formVals));
+      contentfulPOST(JSON.stringify(formVals), $(this).data('path'));
     }
   })
 
@@ -83,10 +117,10 @@ javascript:
     return formVals
   }
 
-  function createNewContent(data){
+  function contentfulPOST(data, path){
     $.ajax({
       method: 'POST',
-      url: 'contentful',
+      url: path,
       contentType: 'application/json',
       dataType:'json',
       data: data,
