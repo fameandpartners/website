@@ -103,8 +103,6 @@ form.hide-fully#pdpDataForWishlist
                       #collapse-about.collapse role='tabpanel'
                         - if @product.fit.present?
                           p = simple_format(@product.fit)
-                        - if @product.size.present?
-                          p = simple_format(@product.size)
                     - if Features.active?(:moodboard)
                       - if current_spree_user.present?
                         .panel
