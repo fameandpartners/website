@@ -42,12 +42,14 @@ Spree::UserRegistrationsController.class_eval do
       resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
       resource.sign_up_reason = session[:sign_up_reason]
     end
+
     if @user.newsletter
       cookies[:track_email_subscription] = {
         :value => true,
         :expires => 1.day.from_now
       }
     end
+    
     if resource.save
       EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
                                                     landing_page: session[:landing_page],
