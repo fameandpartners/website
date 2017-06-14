@@ -355,8 +355,6 @@ ALTER SEQUENCE competition_participations_id_seq OWNED BY competition_participat
 
 
 --
-<<<<<<< HEAD
-=======
 -- Name: contentful_routes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -390,7 +388,6 @@ ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
 
 
 --
->>>>>>> 60d49acf54ef88b4a8f8add27538b714b8678f8f
 -- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5450,8 +5447,6 @@ ALTER TABLE ONLY competition_participations ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
-<<<<<<< HEAD
-=======
 -- Name: contentful_routes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5459,7 +5454,6 @@ ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentf
 
 
 --
->>>>>>> 60d49acf54ef88b4a8f8add27538b714b8678f8f
 -- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6450,8 +6444,6 @@ ALTER TABLE ONLY competition_participations
 
 
 --
-<<<<<<< HEAD
-=======
 -- Name: contentful_routes contentful_routes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6460,7 +6452,6 @@ ALTER TABLE ONLY contentful_routes
 
 
 --
->>>>>>> 60d49acf54ef88b4a8f8add27538b714b8678f8f
 -- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9536,8 +9527,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170527063724');
 
 INSERT INTO schema_migrations (version) VALUES ('20170527071529');
 
-INSERT INTO schema_migrations (version) VALUES ('20170601014655');
-
 INSERT INTO schema_migrations (version) VALUES ('20170602062951');
 
 INSERT INTO schema_migrations (version) VALUES ('20170603045344');
@@ -9547,16 +9536,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170606004911');
 INSERT INTO schema_migrations (version) VALUES ('20170607040735');
 
 INSERT INTO schema_migrations (version) VALUES ('20170607184815');
-<<<<<<< HEAD
-
-INSERT INTO schema_migrations (version) VALUES ('20170608215959');
-
-INSERT INTO schema_migrations (version) VALUES ('20170609001931');
-=======
 
 INSERT INTO schema_migrations (version) VALUES ('20170608215959');
 
 INSERT INTO schema_migrations (version) VALUES ('20170609001931');
 
 INSERT INTO schema_migrations (version) VALUES ('20170612215626');
->>>>>>> 60d49acf54ef88b4a8f8add27538b714b8678f8f
