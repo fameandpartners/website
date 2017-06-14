@@ -14,12 +14,17 @@ window.helpers.showAlert = function(opts) {
     icon = 'fa-frown-o';
   }
 
-  var message = `<h3>${title}</h3><p><span class=\"fa fa-icon ${icon}\"></span> ${opts.message}</p>`;
+  var message = [
+    '<h3>' + title + '</h3>',
+    '<p><span class="fa fa-icon ' + icon + '></span> ' + opts.message + '</p>'
+  ].join('\n');
 
   vex.dialog.buttons.YES.text = 'X';
   vex.dialog.alert({
     message,
-    className: `vex vex-theme-bottom-right-corner alert alert-${type} ${opts.className || ''}`,
+    className: [
+      'vex vex-theme-bottom-right-corner alert alert-' + type + ' '+ (opts.className || ''),
+    ].join('\n'),
     afterOpen() {
       return $('.vex-dialog-buttons button').addClass('btn btn-black');
     }
