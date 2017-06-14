@@ -47,8 +47,11 @@ class EmailCapture
         NewRelic::Agent.notice_error("Mailchimp: #{e} for #{email}")
       end
     elsif service == :bronto
-      # for current realization of this class we can't use async job
-      Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
+      begin
+        result = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
+      rescue Savon::SOAP::Fault => e
+        NewRelic::Agent.notice_error("Bronto error: #{e} for #{email}")
+      end
     end
   end
 
