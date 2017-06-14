@@ -45,6 +45,10 @@
   .chart-wrap-trigger {
     display: inline-block;
     text-decoration: underline;
+    @-moz-document url-prefix() { 
+      float: left;
+      padding: 5px 0 85px;
+    }
   }
 
   .chart-wrap {
