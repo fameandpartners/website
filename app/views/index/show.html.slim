@@ -2,6 +2,33 @@
 
 ruby:
   link_to_dresses = build_taxon_path('dresses')
+javascript:
+  function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+  function delete_cookie( name ) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+  if(getCookie('track_email_subscription')) {
+    window.ga('send', 'event', { eventCategory: 'Newsletter', eventAction: 'Submitted', eventLabel: null, nonInteraction: true });
+    delete_cookie('track_email_subscription')
+    console.log("Sent email subscribe event to GA, deleted cookie for track_email_subscription")
+  }
+  else {
+    console.log("No cookies for track_email_subscription")
+  }
 
 .page-content.index
 
