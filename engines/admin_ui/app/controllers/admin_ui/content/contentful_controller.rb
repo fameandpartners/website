@@ -18,7 +18,6 @@ module AdminUi
       end
 
       def create_route
-
         # future: use different params (controller/action)
         route_params = {
           route_name: params[:route_name],
@@ -35,19 +34,10 @@ module AdminUi
 
       end
 
-
       private
 
       helper_method :collection
 
-      def collection
-        # TODO: @dagnar, help me figure out how to paginate this
-        # Potentially using https://github.com/mislav/will_paginate
-        # ContentfulVersion.all
-        # page = (params[:page] || 1).to_i
-        # per_page = (params[:per_page] || 50).to_i
-        # @collection ||= ContentfulVersion.all
-      end
     end
   end
 end

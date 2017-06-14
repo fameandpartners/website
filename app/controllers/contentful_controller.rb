@@ -14,7 +14,12 @@ class ContentfulController < ApplicationController
     current_contently = Contentful::Version.fetch(params['developer'] == 'preview')
 
     @landing_page_container = current_contently.payload[request.path]
-    render 'layouts/contentful/main'
+
+    if @landing_page_container
+      render 'layouts/contentful/main'
+    else
+      render_404
+    end
   end
 
   def load_page
