@@ -24,10 +24,14 @@ module AdminUi
           controller: 'contentful',
           action: 'main'
         }
+        cr = ContentfulRoute.new(route_params)
 
-        ContentfulRoute.create(route_params)
+        if cr.save
+          render status: 200, json: {message: 'Route successfully created!'}
+        else
+          render status: 400, json: {message: cr.errors.map{|attr_name, message| message }}
+        end
 
-        render status: 200, json: {message: 'Route successfully created!'}
       end
 
       private
