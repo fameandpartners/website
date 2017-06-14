@@ -19,18 +19,18 @@ window.initProductCollectionImageHover = function(options) {
 
   $(options.selector).on('mouseenter', options.delegate, function(e) {
     e.preventDefault();
-    let $this = $(this);
+    var $this = $(this);
     if ($this.data('hover')) {
-      let src = $this.data('hover');
+      var src = $this.data('hover');
       return $this.attr('src', src);
     }
   });
 
   return $(options.selector).on('mouseleave', options.delegate, function(e) {
     e.preventDefault();
-    let $this = $(this);
+    var $this = $(this);
     if ($this.data('original')) {
-      let src = $this.data('original');
+      var src = $this.data('original');
       return $this.attr('src', src);
     }
   });
