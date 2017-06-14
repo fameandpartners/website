@@ -21,11 +21,11 @@ window.helpers.showAlert = function(opts) {
 
   vex.dialog.buttons.YES.text = 'X';
   vex.dialog.alert({
-    message,
+    message: message,
     className: [
       'vex vex-theme-bottom-right-corner alert alert-' + type + ' '+ (opts.className || ''),
     ].join('\n'),
-    afterOpen() {
+    afterOpen: function() {
       return $('.vex-dialog-buttons button').addClass('btn btn-black');
     }
   }); // HACKETRY
