@@ -20,13 +20,14 @@ module AdminUi
       def create_route
         # future: use different params (controller/action)
         route_params = {
-          route_name: params[:route_name],
+          route_name: params[:route_name].downcase,
           controller: 'contentful',
           action: 'main'
         }
         cr = ContentfulRoute.new(route_params)
 
         if cr.save
+          Contentful::Version.clear_version_cache
           render status: 200, json: {message: 'Route successfully created!'}
         else
           render status: 400, json: {message: cr.errors.map{|attr_name, message| message }}

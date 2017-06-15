@@ -230,13 +230,20 @@ module Contentful
   end
 
   class Version
+    VERSION_CACHE_KEY = 'contentful_route_content'
 
-    def self.fetch(preview)
+    # returns the payload
+    def self.fetch_payload(preview)
       if preview
-        self.new_or_update
+        self.new_or_update.payload
       else
-        current = Rails.cache.fetch("contentful_route_content") do
-          ContentfulVersion.where(is_live: true).last
+        current = Rails.cache.fetch(VERSION_CACHE_KEY) do
+          contentful_payload = ContentfulVersion.where(is_live: true).last&.payload
+          all_routes = ContentfulRoute.pluck(:route_name)
+          sifted = contentful_payload.select { |key, _| all_routes.include?(key)}
+          # need to add the homepage route manually
+          sifted["/"] = contentful_payload["/"]
+          sifted
         end
 
         if current
@@ -282,9 +289,13 @@ module Contentful
         last_v.is_live = true
         last_v.change_message = change_message
         last_v.save!
-        Rails.cache.delete('contentful_route_content')
+        clear_version_cache
         true
       end
+    end
+
+    def self.clear_version_cache
+      Rails.cache.delete(VERSION_CACHE_KEY)
     end
   end
 

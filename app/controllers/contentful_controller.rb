@@ -11,15 +11,14 @@ class ContentfulController < ApplicationController
                 :set_collection_resource
 
   def main
-    current_contently = Contentful::Version.fetch(params['developer'] == 'preview')
+    current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
 
-    @landing_page_container = current_contently.payload[request.path]
+    @landing_page_container = current_contently[request.path]
 
     if @landing_page_container
       render 'layouts/contentful/main'
     else
-      # render_404
-      non_matching_request
+      render_404
     end
   end
 
