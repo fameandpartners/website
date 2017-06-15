@@ -18,7 +18,8 @@ class ContentfulController < ApplicationController
     if @landing_page_container
       render 'layouts/contentful/main'
     else
-      render_404
+      # render_404
+      non_matching_request
     end
   end
 
