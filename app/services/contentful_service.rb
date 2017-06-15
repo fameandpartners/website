@@ -235,8 +235,10 @@ module Contentful
       if preview
         self.new_or_update
       else
-        #cache this mofo
-        current = ContentfulVersion.where(is_live: true).last
+        current = Rails.cache.fetch("contentful_route_content") do
+          ContentfulVersion.where(is_live: true).last
+        end
+
         if current
           return current
         else
