@@ -1,23 +1,30 @@
 <%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
 
+<%
+  products = []
+
+  @lg_contents[:overlay_pids].each do |pid|
+    split_pid = pid.split('-', 2)
+    current_id = split_pid[0].to_i
+    current_color = split_pid[1]
+
+    present_product = @collection.products.select do |item|
+      item.id == current_id && item.color.name == current_color
+    end
+
+    if present_product.present?
+      products.push(present_product[0])
+    end
+  end
+%>
+
+<% if products.count > 0 %>
 <div class="Editorial__overlay">
   <h4 class="Editorial__overlayTitle">Shop the Look</h4>
   <ul>
-  <% @lg_contents[:overlay_pids].each do |pid| %>
-  <%
-    split_pid = pid.split('-', 2)
-
-    product = @collection.products.select do |item|
-      item.id == split_pid[0].to_i && item.color.name == split_pid[1]
-    end
-
-    if product.present?
-      name = product[0].name
-      path = collection_product_path(product[0], color: product[0].color.try(:name))
-    else
-      name = 'INVALID PRODUCT ID'
-      path = ''
-    end
+  <% products.each do |item|
+       name = item.name
+       path = collection_product_path(item, color: item.color.try(:name))
   %>
     <li>
       <a href="<%= path %>">
@@ -27,3 +34,4 @@
   <% end %>
   </ul>
 </div>
+<% end %>
