@@ -116,10 +116,10 @@ javascript:
         contentfulPOST(JSON.stringify(formVals), $(this).data('path'));
         return;
       }
-      $(".js-contentful-danger").text('GTFO! YOU ARE NOT REGGIE').removeClass('hidden');
+      $(".js-contentful-danger").text('Hi! You are not allowed to press that button.  Please ask Reggie for assistance.').removeClass('hidden');
       return; // Has a param Reggie_Term but is an incorrect Reggie_Term. aka, not Reggie
     }
-    
+
     if (formVals.protected_term && formVals.protected_term === CONFIRM){
       contentfulPOST(JSON.stringify(formVals), $(this).data('path'));
     }
