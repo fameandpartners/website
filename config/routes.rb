@@ -676,14 +676,13 @@ FameAndPartners::Application.routes.draw do
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
-  get '/contentful' => 'contentful#main', as: :the_anti_fast_fashion_shop_landing_page
 
   # load up all contentful routes
-  if Object.const_defined?('ContentfulRoute')
-    ContentfulRoute.all.each do |cr|
-      match cr.route_name, :controller => cr.controller, :action => cr.action
-    end
-  end
+  # if Object.const_defined?('ContentfulRoute')
+  #   ContentfulRoute.all.each do |cr|
+  #     match cr.route_name, :controller => cr.controller, :action => cr.action
+  #   end
+  # end
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
@@ -691,5 +690,6 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
+  match '*path', to: 'contentful#main'
   match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
