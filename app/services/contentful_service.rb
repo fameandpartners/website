@@ -282,6 +282,7 @@ module Contentful
         last_v.is_live = true
         last_v.change_message = change_message
         last_v.save!
+        Rails.cache.delete('contentful_route_content')
         true
       end
     end
