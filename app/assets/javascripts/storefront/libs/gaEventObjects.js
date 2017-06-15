@@ -95,7 +95,6 @@ export let selectPhotoEvent = {
   label: 'dynamic', 
   nonInteraction: false
 }
-// These objects are for views that are in Ruby
 export let fabricInfoEvent = {
   eventCategory: 'PDP', 
   eventAction: 'Fabric Information Open', 
@@ -142,5 +141,60 @@ export let hashtagFameMomentsEvent = {
   eventCategory: 'PDP', 
   eventAction: 'Social Module Photo Press', 
   eventLabel:  'dynamic', 
+  nonInteraction: false
+}
+
+export const navSearchPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Search Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navBagPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Bag Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navCountryDropdownEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Country Dropdown Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navFreeShippingPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Free Shipping Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const mainNavPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Main Nav Press', 
+  eventLabel:  null, 
+  nonInteraction: true
+}
+export const subNavPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Sub Nav Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navMoodboardPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Moodboard Press', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navHamburgerPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'Menu Open', 
+  eventLabel:  null, 
+  nonInteraction: false
+}
+export const navMyAccountPressEvent = {
+  eventCategory: 'Top Nav', 
+  eventAction: 'My Account Press', 
+  eventLabel:  null, 
   nonInteraction: false
 }

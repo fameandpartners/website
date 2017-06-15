@@ -1,6 +1,5 @@
 .nav-menu-container.simplified-nav-container.js-simplified-nav-container
   .row.home-menu.js-simplified-nav.simplified-nav.hidden-xs.hidden-sm.container-fluid
-
     .col.col-md-3
       = link_to root_path, class: 'logo-wrap' do
         span.logo
@@ -9,12 +8,12 @@
     .col.col-md-7.nav-main-menu.text-center
 
       span.dresses.js-open-nav-menu Shop all
-      span.anti-fast.js-close-nav-menu = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
+      span.anti-fast.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'ANTI-FAST FASHION SHOP', nonInteraction: true })" = link_to 'ANTI-FAST FASHION SHOP', the_anti_fast_fashion_shop_landing_page_path
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu Wedding Shop
 
-      span.lookbook.js-close-nav-menu = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+      span.lookbook.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'EVENING SHOP', nonInteraction: true })" = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.culture.js-open-nav-menu Fame Culture
 
     .col.col-md-2.nav-icons.text-right.pull-right
@@ -26,11 +25,11 @@
             input type="text" id="searchValue" placeholder="Search here" name="q"
 
       = link_to moodboards_path do
-        span.icon.icon-heart-o
+        span.icon.icon-heart-o onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Moodboard Press', eventLabel: null, nonInteraction: false })"
 
       span.shopping-bag-wrapper.js-header-toolbar
         a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-          span.icon.icon-bag
+          span.icon.icon-bag onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false })"
           span.count.js-cart-item-count 0
 
   .rect-wrapper.margin--center
@@ -62,15 +61,15 @@
 
           .col.picture-col
             .featuredCollection.nav-item
-              = link_to high_contrast_collection_path
-                = image_tag 'simplified-nav/highcontrast.jpg', class: 'img-responsive nav-img', alt: ''
+              = link_to dresses_path +"/floral"
+                = image_tag 'simplified-nav/florals.jpg', class: 'img-responsive nav-img', alt: ''
                 .content-wrap
                   .container-cta
                     .row-cta
                       .cta-wrap
                         span.cta-copy.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  THE HIGH CONTRAST COLLECTION
+                          span.copy-highlight  FLORALS
 
       // temp. fix to avoid breaking menu handler in simplified_nav.js
       //  (addition of anti-fast nav item means triggers & menus no longer share indexes)
@@ -86,3 +85,8 @@
       .rect#rect-culture.nav-menu-wrap.menu-wedding.grid-img-cta-nav.margin--center
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/fame_culture'
+javascript:
+  $('.nav-menu-container li.normal-item').click(function() {
+    var subNavText = $(this).text().trim()
+    window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Sub Nav Press', eventLabel: subNavText, nonInteraction: true })
+  });

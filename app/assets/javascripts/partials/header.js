@@ -19,6 +19,12 @@
 
 
   $('.js-search-trigger').on('click', function(e) {
+    window.ga('send', 'event', { 
+      eventCategory: 'Top Nav', 
+      eventAction: 'Search Press', 
+      eventLabel: null, 
+      nonInteraction: false 
+    });
     if ($(this).parent().hasClass('active')) {
       if ($("#searchForm #searchValue").val() !== '') {
         $("#searchForm").submit();
