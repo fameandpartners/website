@@ -1,7 +1,5 @@
 (function(window) {
 
-  console.log('partials/contentful/email_subscribe.js');
-
   // Newsletter subscription
   var NewsletterSubscriberOnPage,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -56,44 +54,22 @@
     };
 
     NewsletterSubscriberOnPage.prototype.failure = function() {
-      var message, title;
-      title = 'Sorry';
-      message = 'Please enter a valid email';
-      window.helpers.showAlert({
-        message: message,
-        type: 'warning',
-        title: title,
-        timeout: 55555
-      });
-      return window.track.event('Newsletter', 'Error', this.campaign);
+      var message = 'Please enter a valid email.';
+
+      $('.js-email-error-message-body').text(message);
+      $('.js-email-error-message').removeClass('hide');
     };
 
     NewsletterSubscriberOnPage.prototype.signupFailure = function() {
-      var message, title;
-      title = 'Sorry';
-      message = 'We had an issue saving your email.';
-      window.helpers.showAlert({
-        message: message,
-        type: 'warning',
-        title: title,
-        timeout: 55555
-      });
-      return window.track.event('Newsletter', 'Error', this.campaign);
+      var message = 'We had an issue saving your email.';
+
+      $('.js-email-error-message-body').text(message);
+      $('.js-email-error-message').removeClass('hide');
     };
 
     NewsletterSubscriberOnPage.prototype.success = function() {
-      var message, title;
-      title = 'Thanks';
-      message = 'Thanks for signing up. You\'ll be the first to know what\'s new.';
-      window.helpers.showAlert({
-        message: message,
-        type: 'success',
-        title: title,
-        timeout: 55555
-      });
-      $('.newsletter-signup-form').toggleClass('hide')
-      $('.success-message').toggleClass('hide');
-      return window.track.event('Newsletter', 'Submitted', this.campaign);
+      $('.js-email-error-message').addClass('hide');
+      $('.newsletter-signup-form, .js-email-success-message').toggleClass('hide');
     };
 
     return NewsletterSubscriberOnPage;

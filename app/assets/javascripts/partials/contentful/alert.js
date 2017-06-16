@@ -1,6 +1,4 @@
 
-console.log('partials/contentful/alert.js');
-
 if (!window.helpers) { window.helpers = {}; }
 
 window.helpers.showAlert = function(opts) {
