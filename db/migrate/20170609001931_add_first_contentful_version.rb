@@ -1,9 +1,11 @@
 class AddFirstContentfulVersion < ActiveRecord::Migration
   def up
-  	cful = ContentfulVersion.new
+    fark = nil
+    File.open("db/contentful_dump.txt") {|f| fark = JSON.parse(f.read) }
+    cful = ContentfulVersion.new
   	cful.change_message = "First version is the deepest."
   	cful.is_live = true
-  	cful.payload = Contentful::Service.get_all_contentful_containers
+  	cful.payload = fark
   	cful.save!
   end
 
