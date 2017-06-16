@@ -220,10 +220,19 @@ module Contentful
         }
       end
 
+      meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
+      meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
+      meta_heading = (parent_container.respond_to? :meta_heading) ? parent_container.meta_heading : nil
+
       parent_container.relative_url
       {
         header: main_header_tile,
-        rows: row_tiles
+        rows: row_tiles,
+        meta_info: {
+          meta_title: meta_title,
+          meta_description: meta_description,
+          meta_heading: meta_heading,
+        }
       }
     end
 
@@ -239,19 +248,18 @@ module Contentful
       else
         current = Rails.cache.fetch(VERSION_CACHE_KEY) do
           contentful_payload = ContentfulVersion.where(is_live: true).last&.payload
-          all_routes = ContentfulRoute.pluck(:route_name)
-          sifted = contentful_payload.select { |key, _| all_routes.include?(key)}
-          # need to add the homepage route manually
-          sifted["/"] = contentful_payload["/"]
-          sifted
-        end
 
-        if current
-          return current
-        else
-          Raven.capture_exception(Exception.new("No ContentfulVersion set live."))
-          #show 2nd to last version
-          ContentfulVersion.offset(1).last
+          if contentful_payload
+            all_routes = ContentfulRoute.pluck(:route_name)
+            sifted = contentful_payload.select { |key, _| all_routes.include?(key)}
+            # need to add the homepage route manually
+            sifted["/"] = contentful_payload["/"]
+            sifted
+          else
+            Raven.capture_exception(Exception.new("No ContentfulVersion set live."))
+            #show 2nd to last version
+            ContentfulVersion.offset(1).last&.payload
+          end
         end
       end
     end
