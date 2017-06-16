@@ -26,5 +26,7 @@
 </div>
 
 <script>
-  new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>'});
+  $(function() {
+    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>'});
+  });
 </script>
