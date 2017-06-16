@@ -1,5 +1,23 @@
-title = @landing_page_container[:meta_info][:meta_title] + ' | ' + (get_title)
-meta name="description" content= @landing_page_container[:meta_info][:meta_description]
+ruby:
+
+  fetched_title = @landing_page_container[:meta_title]
+  fetched_description = @landing_page_container[:meta_description]
+
+  if fetched_title.present?
+    site_title = fetched_title + ' | ' + get_title()
+  else
+    site_title = get_title()
+  end
+
+  if fetched_description.present?
+    site_description = truncate(fetched_description, length:140)
+  else
+    site_description = truncate(get_meta_description, length:140)
+  end
+
+
+title = site_title
+meta name="description" content= site_description
 meta charset="utf-8"
 meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"
 

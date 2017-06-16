@@ -222,17 +222,13 @@ module Contentful
 
       meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
       meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
-      meta_heading = (parent_container.respond_to? :meta_heading) ? parent_container.meta_heading : nil
 
       parent_container.relative_url
       {
         header: main_header_tile,
         rows: row_tiles,
-        meta_info: {
-          meta_title: meta_title,
-          meta_description: meta_description,
-          meta_heading: meta_heading,
-        }
+        meta_title: meta_title,
+        meta_description: meta_description
       }
     end
 
