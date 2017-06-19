@@ -4,8 +4,8 @@ class LeftHandNav extends Component {
     constructor() {
         super()
         this.state = {
-          activeID: 'dresses',
-          activeSubcategory: 'maxi',
+          activeCategory: '',
+          activeSubcategory: '',
           categories: [
             {
               id: 'dresses',
@@ -31,7 +31,7 @@ class LeftHandNav extends Component {
                       displayName: 'Mini',
                       relativePath: '/dresses/mini'
                     }, {
-                      id: 'twoPiece',
+                      id: 'two-piece',
                       count: 22,
                       displayName: 'Two Piece',
                       relativePath: '/dresses/two-piece'
@@ -56,7 +56,7 @@ class LeftHandNav extends Component {
                       displayName: 'Bridesmaid',
                       relativePath: '/dresses/bridesmaid'
                     }, {
-                      id: 'wedding',
+                      id: 'wedding-guests',
                       count: 32,
                       displayName: 'Wedding Guests',
                       relativePath: '/dresses/wedding-guests'
@@ -79,7 +79,7 @@ class LeftHandNav extends Component {
               displayName: 'Skirts',
               relativePath: '/skirts'
             }, {
-              id: 'jumpsuits',
+              id: 'jumpsuit',
               displayName: 'Jumpsuits & Rompers',
               relativePath: '/dresses/jumpsuit' 
             }, {
@@ -91,7 +91,7 @@ class LeftHandNav extends Component {
               displayName: 'Pants',
               relativePath: '/pants'
             }, {
-              id: 'outerwear',
+              id: 'outerwear-and-jackets',
               displayName: 'Outerwear & Jackets',
               relativePath: '/outerwear-and-jackets'
             }
@@ -99,11 +99,16 @@ class LeftHandNav extends Component {
         }
     }
     componentWillMount() {
-      let url = url.replace('/', '').split('/')[0]
-      console.log("url", url)
+      let mainCategory = window.location.pathname
+      mainCategory = mainCategory.replace('/', '').split('/')[0]
+      let subCategory = window.location.pathname.replace(`/${mainCategory}`, '').replace('/', '')
+      this.setState({
+        activeCategory: mainCategory,
+        activeSubcategory: subCategory
+      });
     }
     render() {
-      let { categories, activeID, activeSubcategory } = this.state
+      let { categories, activeCategory, activeSubcategory } = this.state
       return (
         <div className="">
             <div className="ExpandablePanel__heading">
@@ -114,7 +119,7 @@ class LeftHandNav extends Component {
                 // Dresses logic
                 if(c.subCategories) {
                   let subCategories = c.subCategories
-                  if(activeID === c.id) {
+                  if(activeCategory === c.id) {
                     return (
                     <li key={Math.random()}>
                         <div>
@@ -148,7 +153,7 @@ class LeftHandNav extends Component {
                     </li>
                   }                
                 }
-                else if(activeID === c.id) {
+                else if(activeCategory === c.id) {
                   return <b key={Math.random()}>{c.displayName}</b>
                 }
                 return (
