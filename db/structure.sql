@@ -4782,7 +4782,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
