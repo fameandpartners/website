@@ -98,54 +98,62 @@ class LeftHandNav extends Component {
           ]
         }
     }
+    componentWillMount() {
+      let url = url.replace('/', '').split('/')[0]
+      console.log("url", url)
+    }
     render() {
       let { categories, activeID, activeSubcategory } = this.state
       return (
-        <div>
-            <h1 onClick={() => this.setState({ activeID: Math.random() })}>Active Category: {activeID}</h1>
-            <ul>
+        <div className="">
+            <div className="ExpandablePanel__heading">
+                <span className="ExpandablePanel__mainTitle">Clothing</span>
+            </div>
+            <ul className="LeftHandNav--container">
               {categories.map(c => {
                 // Dresses logic
                 if(c.subCategories) {
                   let subCategories = c.subCategories
                   if(activeID === c.id) {
                     return (
-                    <li onClick={() => this.setState({ activeID: c.id })}>
-                        <b>{c.displayName}</b>
-                        {subCategories.map(s => {
-                          return (
-                            <li>
-                              <p>{s.label}</p>
-                              <ul>
-                                {s.subItems.map(i => {
-                                  if(i.id === activeSubcategory) {
-                                    return <b>{i.displayName}</b>
-                                  }
-                                  return (
-                                    <li>
-                                      <a href={`#${i.relativePath}`}>{i.displayName}</a>
-                                    </li>
-                                  )
-                                })}
-                              </ul>
-                            </li>
-                          )
-                        })}
+                    <li key={Math.random()}>
+                        <div>
+                            <b>{c.displayName}</b>
+                            {subCategories.map(s => {
+                              return (
+                                <div key={Math.random()}>
+                                  { s.label ?  <a href="#">{s.label}</a> : ''  }
+                                  <ul>
+                                    {s.subItems.map(i => {
+                                      if(i.id === activeSubcategory) {
+                                        return <b key={Math.random()}>{i.displayName}</b>
+                                      }
+                                      return (
+                                        <li key={Math.random()}>
+                                          <a target="_blank" href={`${i.relativePath}`}>{i.displayName}</a>
+                                        </li>
+                                      )
+                                    })}
+                                  </ul>
+                                </div>
+                              )
+                            })}
+                        </div>
                     </li>
                     )
                   }
                   else {
-                    <li onClick={() => this.setState({ activeID: c.id })}>
-                      <a href={`#${c.relativePath}`}>{c.displayName}</a>
+                    <li key={Math.random()}>
+                      <a target="_blank" href={`${c.relativePath}`}>{c.displayName}</a>
                     </li>
                   }                
                 }
                 else if(activeID === c.id) {
-                  return <b>{c.displayName}</b>
+                  return <b key={Math.random()}>{c.displayName}</b>
                 }
                 return (
-                  <li onClick={() => this.setState({ activeID: c.id })}>
-                    <a href={`#${c.relativePath}`}>{c.displayName}</a>
+                  <li key={Math.random()}>
+                    <a target="_blank" href={`${c.relativePath}`}>{c.displayName}</a>
                   </li>
                 )
               })}
