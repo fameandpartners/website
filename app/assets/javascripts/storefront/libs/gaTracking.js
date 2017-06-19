@@ -9,17 +9,16 @@ const defaultData = {
   nonInteraction: false,
 };
 
-export function trackEvent(eventData) {
+export function trackEvent(eventData, dynamicLabelStatus, dynamicLabelData) {
   if (isGAAvailable()){
+    dynamicLabelStatus ? eventData.label = dynamicLabelData : ''
     const event = assign({}, defaultData, eventData);
-
     ga('send', 'event', {
       eventCategory: event.category,
       eventAction: event.action,
       eventLabel: event.label,
+      eventValue: event.value,
       nonInteraction: event.nonInteraction,
-    });
+    })
   }
-
-
 }

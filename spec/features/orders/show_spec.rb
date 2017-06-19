@@ -63,7 +63,7 @@ describe 'show order', type: :feature do
       end
     end
 
-    it "splits line items by delivery" do
+    xit "splits line items by delivery" do
       visit spree.order_path(order)
 
       within('.fast-making-items') do
@@ -78,7 +78,7 @@ describe 'show order', type: :feature do
     end
 
     describe "color" do
-      it "displays customized color" do
+      xit "displays customized color" do
         visit spree.order_path(order)
 
         within('.item .details') do
@@ -86,7 +86,7 @@ describe 'show order', type: :feature do
         end
       end
 
-      it "displays default color" do
+      xit "displays default color" do
         # Add line item color as basic for product
         line_item = order.line_items.last
         product = line_item.product
@@ -101,7 +101,7 @@ describe 'show order', type: :feature do
     end
 
     describe 'attributes' do
-      it 'displays line item attributes' do
+      xit 'displays line item attributes' do
         visit spree.order_path(order)
 
         within('.item .details') do

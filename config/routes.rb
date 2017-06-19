@@ -288,8 +288,11 @@ FameAndPartners::Application.routes.draw do
     # Casual Category Page
     get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
 
-    # Spring Weddings Collection Page
-    get '/dresses/spring-weddings' => 'products/collections#show', :permalink => 'spring-weddings', :as => :spring_weddings_collection_page
+    # Summer Weddings Collection Page
+    get '/dresses/summer-weddings' => 'products/collections#show', :permalink => 'summer-weddings', :as => :summer_weddings_collection_page
+
+    # Redirect old Spring Weddings to Summer Weddings Collection Page
+    get '/dresses/spring-weddings', to: redirect('/dresses/summer-weddings'), as: :spring_weddings_collection_page
 
     # Burgundy Collection Page
     get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
@@ -297,13 +300,16 @@ FameAndPartners::Application.routes.draw do
     # White Trend Page
     get '/trends-white' => 'products/collections#show', :permalink => 'white-trend', :as => :white_trend_page
 
+    # Gingham & Stripes Category page
+    get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
+
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
-    get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
+    # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -327,6 +333,8 @@ FameAndPartners::Application.routes.draw do
       post 'products' => 'products#create'
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+
+      post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
@@ -667,6 +675,7 @@ FameAndPartners::Application.routes.draw do
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
@@ -674,5 +683,6 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-  match '*path', to: 'application#non_matching_request', as: 'routing_error'
+  match '*path', to: 'contentful#main'
+  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

@@ -15,18 +15,15 @@ Spree::LineItem.class_eval do
       where(product_making_options: { option_type: 'fast_making' })
   end
 
+  scope :slow_making, -> do
+    joins(making_options: :product_making_option).
+      where(product_making_options: { option_type: 'slow_making' })
+  end
+
   scope :standard_making, -> do
     joins('LEFT JOIN line_item_making_options limo ON limo.line_item_id = spree_line_items.id').
       joins('LEFT JOIN product_making_options pmo ON limo.making_option_id = pmo.id').
       where('pmo.id IS NULL')
-  end
-
-  after_save do
-    order.clean_cache!
-  end
-
-  after_destroy do
-    order.clean_cache!
   end
 
   # Note: it seems we need to store this value in DB.
@@ -41,7 +38,9 @@ Spree::LineItem.class_eval do
   def price
     total_price = super
 
-    total_price += making_options_price
+    if making_options.exists?
+      total_price += making_options_price_adjustment
+    end
 
     if personalization.present?
       total_price += personalization.price
@@ -50,8 +49,29 @@ Spree::LineItem.class_eval do
     total_price
   end
 
+  # this method returns the total adjustment of all making_options adjustments
+  def making_options_price_adjustment
+    total_adjustment = 0
+
+    making_options.each do |mo|
+      if mo.product_making_option.fast_making? and mo.price
+        total_adjustment += mo.price
+      end
+      # slow_making price will be percentage based
+      if mo.product_making_option.slow_making?
+        total_adjustment = total_adjustment + self.attributes["price"]*mo.price
+      end
+    end
+
+    total_adjustment
+  end
+
   def fast_making?
-    making_options.any? {|option| option.product_making_option.fast_making? }
+    making_options.any? {|mo| mo.product_making_option.fast_making? }
+  end
+
+  def slow_making?
+    making_options.any? {|mo| mo.product_making_option.slow_making? }
   end
 
   def making_options_price

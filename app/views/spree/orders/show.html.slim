@@ -20,16 +20,8 @@ section.order-details
             .order-content
               .row
                 .order-items
-                  - if order.fast_making_items.any?
-                    .fast-making-items
-                      .shipping-title.item Express making, get in 5 to 7 days
-                      - order.fast_making_line_items.each do |line_item|
-                        = render 'spree/orders/show/order_item', line_item: line_item
-                  - if order.standard_making_items.any?
-                    .standard-making-items
-                      .shipping-title.item Free shipping to USA, Canada and the UK
-                      - order.standard_making_line_items.each do |line_item|
-                        = render 'spree/orders/show/order_item', line_item: line_item
+                  - order.line_items.each do |line_item|
+                    = render 'spree/orders/show/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 
@@ -83,9 +75,9 @@ section.order-details
                   h4 Email
                   span = order.decorated_billing_address.email
 
-                .delivery-date
-                  h4 Expected delivery date
-                  span = order.expected_delivery_date
+                / .delivery-date
+                /   h4 Expected delivery date
+                /   span = order.expected_delivery_date
 
           .row
             .faq-wrapper.col-md-12
@@ -129,20 +121,7 @@ section.order-details
 
               .item.step-counter
                 h4.step-title YOUR ITEM IS SHIPPED.
-                p Once your order has been made and shipped, we’ll notify you via email.
-
-              .item.step-counter
-                h4.step-title EXPECT YOUR EXPRESS ORDER IN 6-9 BUSINESS DAYS.
-                p You’ll be able to track the delivery date with your shipping confirmation.
-                = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
-                  | Learn more
-                  i.link-icon.fa.fa-chevron-right
-
-              .item.step-counter
-                h4.step-title
-                  | EXPECT YOUR STANDARD ORDER ON
-                  |  #{order.projected_delivery_date.strftime('%d of %b, %Y')}.
-                p You’ll be able to track the delivery date with your shipping confirmation.
+                p Once your order has been made and shipped, we’ll notify you via email. You’ll be able to track the delivery date with your shipping confirmation.
                 = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
                   | Learn more
                   i.link-icon.fa.fa-chevron-right
