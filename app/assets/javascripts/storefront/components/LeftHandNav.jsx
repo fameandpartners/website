@@ -1,7 +1,7 @@
 import React, {Component, PropTypes,} from 'react';
-
+import SubCategoryList from './SubCategoryList'
 class LeftHandNav extends Component {
-    constructor() {
+    constructor() { 
         super()
         this.state = {
           activeCategory: '',
@@ -117,49 +117,21 @@ class LeftHandNav extends Component {
             </div>
             <ul className="LeftHandNav__categoryContainer">
               {categories.map(c => {
-                // Dresses logic
                 if(c.subCategories && !hideDressLinks) {
                   let subCategories = c.subCategories
                   if(activeCategory === c.id) {
                     return (
-                    <li 
-                      className="LeftHandNav__subcategoryContainer"
-                      key={Math.random()}>
-                        <div>
-                            <b className="LeftHandNav__activeLink">{c.displayName}</b>
-                            {subCategories.map(s => {
-                              return (
-                                <div key={Math.random()}>
-                                  <ul className="LeftHandNav__subcategoryList">
-                                    {s.label ?  <li className="LeftHandNav__categoryLabel">{s.label}</li> : ''}
-                                    {s.subItems.map(i => {
-                                      if(i.id === activeSubcategory) {
-                                        return (
-                                          <b 
-                                            key={Math.random()}
-                                            className="LeftHandNav__activeLink"
-                                          >
-                                            {i.displayName}
-                                          </b>
-                                        )
-                                      }
-                                      return (
-                                        <li key={Math.random()}>
-                                          <a 
-                                            target="_blank" 
-                                            href={`${i.relativePath}`}
-                                          >
-                                            {i.displayName}
-                                          </a>
-                                        </li>
-                                      )
-                                    })}
-                                  </ul>
-                                </div>
-                              )
-                            })}
-                        </div>
-                    </li>
+                      <li 
+                        className="LeftHandNav__subcategoryContainer"
+                        key={Math.random()}>
+                          <div>
+                              <b >{c.displayName}</b>
+                              <SubCategoryList 
+                                subCategoryData={subCategories} 
+                                activeSubcategory={activeSubcategory}
+                              />
+                          </div>
+                      </li>
                     )
                   }
                   else {
@@ -169,12 +141,7 @@ class LeftHandNav extends Component {
                   }                
                 }
                 else if(activeCategory === c.id && !hideDressLinks) {
-                  return <b 
-                            key={Math.random()}
-                            className="LeftHandNav__activeLink"
-                          >
-                              {c.displayName}
-                        </b>
+                  return <b key={Math.random()}>{c.displayName}</b>
                 }
                 else if(c.id === activeSubcategory) {
                   // Jumpsuits & Rompers
