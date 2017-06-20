@@ -38,7 +38,7 @@ class LeftHandNav extends Component {
                     }
                   ]
                 }, {
-                  label: 'Event',
+                  label: 'By Event',
                   subItems: [
                     {
                       id: 'prom',
@@ -110,30 +110,38 @@ class LeftHandNav extends Component {
     render() {
       let { categories, activeCategory, activeSubcategory } = this.state
       let hideDressLinks = activeCategory === 'dresses' && activeSubcategory === 'jumpsuit'
-      console.log("Should we hide shit?", hideDressLinks)
       return (
         <div className="LeftHandNav--container">
             <div className="ExpandablePanel__heading">
                 <span className="ExpandablePanel__mainTitle">Clothing</span>
             </div>
-            <ul>
+            <ul className="LeftHandNav__categoryContainer">
               {categories.map(c => {
                 // Dresses logic
                 if(c.subCategories && !hideDressLinks) {
                   let subCategories = c.subCategories
                   if(activeCategory === c.id) {
                     return (
-                    <li key={Math.random()}>
+                    <li 
+                      className="LeftHandNav__subcategoryContainer"
+                      key={Math.random()}>
                         <div>
-                            <b>{c.displayName}</b>
+                            <b className="LeftHandNav__activeLink">{c.displayName}</b>
                             {subCategories.map(s => {
                               return (
                                 <div key={Math.random()}>
-                                  { s.label ?  <a>{s.label}</a> : ''  }
-                                  <ul>
+                                  <ul className="LeftHandNav__subcategoryList">
+                                    {s.label ?  <li className="LeftHandNav__categoryLabel">{s.label}</li> : ''}
                                     {s.subItems.map(i => {
                                       if(i.id === activeSubcategory) {
-                                        return <b key={Math.random()}>{i.displayName}</b>
+                                        return (
+                                          <b 
+                                            key={Math.random()}
+                                            className="LeftHandNav__activeLink"
+                                          >
+                                            {i.displayName}
+                                          </b>
+                                        )
                                       }
                                       return (
                                         <li key={Math.random()}>
@@ -161,7 +169,12 @@ class LeftHandNav extends Component {
                   }                
                 }
                 else if(activeCategory === c.id && !hideDressLinks) {
-                  return <b key={Math.random()}>{c.displayName}</b>
+                  return <b 
+                            key={Math.random()}
+                            className="LeftHandNav__activeLink"
+                          >
+                              {c.displayName}
+                        </b>
                 }
                 else if(c.id === activeSubcategory) {
                   // Jumpsuits & Rompers
