@@ -29,7 +29,7 @@
       eventCategory: 'Top Nav', 
       eventAction: 'Main Nav Press', 
       eventLabel: menuText, 
-      nonInteraction: true 
+      nonInteraction: false 
     });
     openMenu($(this).index());
   });
