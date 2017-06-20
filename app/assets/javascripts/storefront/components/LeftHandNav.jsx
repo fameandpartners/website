@@ -5,7 +5,7 @@ class LeftHandNav extends Component {
         super()
         this.state = {
           activeCategory: '',
-          activeSubcategory: '',
+          activeSubCategory: '',
           categories: [
             {
               id: 'dresses',
@@ -104,12 +104,12 @@ class LeftHandNav extends Component {
       let subCategory = window.location.pathname.replace(`/${mainCategory}`, '').replace('/', '')
       this.setState({
         activeCategory: mainCategory,
-        activeSubcategory: subCategory
+        activeSubCategory: subCategory
       });
     }
     render() {
-      let { categories, activeCategory, activeSubcategory } = this.state
-      let hideDressLinks = activeCategory === 'dresses' && activeSubcategory === 'jumpsuit'
+      let { categories, activeCategory, activeSubCategory } = this.state
+      let hideDressLinks = activeCategory === 'dresses' && activeSubCategory === 'jumpsuit'
       return (
         <div className="LeftHandNav--container">
             <div className="ExpandablePanel__heading">
@@ -128,7 +128,7 @@ class LeftHandNav extends Component {
                               <b >{c.displayName}</b>
                               <SubCategoryList 
                                 subCategoryData={subCategories} 
-                                activeSubcategory={activeSubcategory}
+                                activeSubCategory={activeSubCategory}
                               />
                           </div>
                       </li>
@@ -143,7 +143,7 @@ class LeftHandNav extends Component {
                 else if(activeCategory === c.id && !hideDressLinks) {
                   return <b key={Math.random()}>{c.displayName}</b>
                 }
-                else if(c.id === activeSubcategory) {
+                else if(c.id === activeSubCategory) {
                   // Jumpsuits & Rompers
                   return <b key={Math.random()}>{c.displayName}</b>
                 }

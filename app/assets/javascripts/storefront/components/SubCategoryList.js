@@ -4,17 +4,17 @@ class SubCategoryList extends Component {
         super()
         this.state = {
           subCategories: [],
-          activeSubcategory: '',
+          activeSubCategory: '',
         }
     }
     componentWillMount() {
       this.setState({
         subCategories: this.props.subCategoryData,
-        activeSubcategory: this.props.activeSubcategory
+        activeSubCategory: this.props.activeSubCategory
       });
     }
     render() {
-      let { subCategories, activeSubcategory } = this.state
+      let { subCategories, activeSubCategory } = this.state
       return (
         <div>
             {subCategories.map(s => {
@@ -23,7 +23,7 @@ class SubCategoryList extends Component {
                   <ul className="LeftHandNav__subcategoryList">
                     {s.label ?  <li className="LeftHandNav__categoryLabel">{s.label}</li> : ''}
                     {s.subItems.map(i => {
-                      if(i.id === activeSubcategory) {
+                      if(i.id === activeSubCategory) {
                         return (
                           <b 
                             key={Math.random()}
