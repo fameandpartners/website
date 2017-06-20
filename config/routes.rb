@@ -309,7 +309,7 @@ FameAndPartners::Application.routes.draw do
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
-    get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
+    # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -675,6 +675,7 @@ FameAndPartners::Application.routes.draw do
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
@@ -682,5 +683,6 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-  match '*path', to: 'application#non_matching_request', as: 'routing_error'
+  match '*path', to: 'contentful#main'
+  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

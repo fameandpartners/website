@@ -1,0 +1,8 @@
+<%= content_tag(:div, :class => (@md_contents[:text_size] == 'large') ? "CopyHeader CopyHeader--large" : "CopyHeader") do %>
+  <div class="CopyHeader__separator"></div>
+  <div class="CopyHeader__content">
+    <% @md_contents[:text].each do |line| %>
+      <p><%== line %></p>
+    <% end %>
+  </div>
+<% end %>

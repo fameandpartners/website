@@ -355,6 +355,73 @@ ALTER SEQUENCE competition_participations_id_seq OWNED BY competition_participat
 
 
 --
+-- Name: contentful_routes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE contentful_routes (
+    id integer NOT NULL,
+    route_name character varying(255),
+    controller character varying(255),
+    action character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contentful_routes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE contentful_routes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contentful_routes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
+
+
+--
+-- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE contentful_versions (
+    id integer NOT NULL,
+    change_message character varying(255),
+    payload text,
+    user_id integer,
+    is_live boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE contentful_versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
+
+
+--
 -- Name: custom_dress_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1971,42 +2038,6 @@ CREATE TABLE order_shipments_factories_concrete (
 
 
 --
--- Name: orderbot_product_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE orderbot_product_groups (
-    id integer NOT NULL,
-    product_class_id integer,
-    product_class_name character varying(255),
-    category_id integer,
-    category_name character varying(255),
-    group_id integer,
-    group_name character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: orderbot_product_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE orderbot_product_groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: orderbot_product_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE orderbot_product_groups_id_seq OWNED BY orderbot_product_groups.id;
-
-
---
 -- Name: payment_requests; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2347,38 +2378,6 @@ CREATE SEQUENCE product_style_profiles_id_seq
 --
 
 ALTER SEQUENCE product_style_profiles_id_seq OWNED BY product_style_profiles.id;
-
-
---
--- Name: product_to_orderbot_product_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE product_to_orderbot_product_groups (
-    id integer NOT NULL,
-    product_id integer,
-    orderbot_product_group_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE product_to_orderbot_product_groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE product_to_orderbot_product_groups_id_seq OWNED BY product_to_orderbot_product_groups.id;
 
 
 --
@@ -4783,7 +4782,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
@@ -5448,6 +5447,20 @@ ALTER TABLE ONLY competition_participations ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: contentful_routes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentful_routes_id_seq'::regclass);
+
+
+--
+-- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
+
+
+--
 -- Name: custom_dress_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5721,13 +5734,6 @@ ALTER TABLE ONLY order_return_requests ALTER COLUMN id SET DEFAULT nextval('orde
 
 
 --
--- Name: orderbot_product_groups id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY orderbot_product_groups ALTER COLUMN id SET DEFAULT nextval('orderbot_product_groups_id_seq'::regclass);
-
-
---
 -- Name: payment_requests id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5788,13 +5794,6 @@ ALTER TABLE ONLY product_reservations ALTER COLUMN id SET DEFAULT nextval('produ
 --
 
 ALTER TABLE ONLY product_style_profiles ALTER COLUMN id SET DEFAULT nextval('product_style_profiles_id_seq'::regclass);
-
-
---
--- Name: product_to_orderbot_product_groups id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY product_to_orderbot_product_groups ALTER COLUMN id SET DEFAULT nextval('product_to_orderbot_product_groups_id_seq'::regclass);
 
 
 --
@@ -6445,6 +6444,22 @@ ALTER TABLE ONLY competition_participations
 
 
 --
+-- Name: contentful_routes contentful_routes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_routes
+    ADD CONSTRAINT contentful_routes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions
+    ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: custom_dress_images custom_dress_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6765,14 +6780,6 @@ ALTER TABLE ONLY order_shipments_factories_concrete
 
 
 --
--- Name: orderbot_product_groups orderbot_product_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY orderbot_product_groups
-    ADD CONSTRAINT orderbot_product_groups_pkey PRIMARY KEY (id);
-
-
---
 -- Name: payment_requests payment_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6850,14 +6857,6 @@ ALTER TABLE ONLY product_reservations
 
 ALTER TABLE ONLY product_style_profiles
     ADD CONSTRAINT product_style_profiles_pkey PRIMARY KEY (id);
-
-
---
--- Name: product_to_orderbot_product_groups product_to_orderbot_product_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY product_to_orderbot_product_groups
-    ADD CONSTRAINT product_to_orderbot_product_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -9536,8 +9535,14 @@ INSERT INTO schema_migrations (version) VALUES ('20170606004911');
 
 INSERT INTO schema_migrations (version) VALUES ('20170607040735');
 
-INSERT INTO schema_migrations (version) VALUES ('20170608005536');
-
-INSERT INTO schema_migrations (version) VALUES ('20170608044047');
+INSERT INTO schema_migrations (version) VALUES ('20170607184815');
 
 INSERT INTO schema_migrations (version) VALUES ('20170608215959');
+
+INSERT INTO schema_migrations (version) VALUES ('20170609001931');
+
+INSERT INTO schema_migrations (version) VALUES ('20170612150350');
+
+INSERT INTO schema_migrations (version) VALUES ('20170612215626');
+
+INSERT INTO schema_migrations (version) VALUES ('20170615180547');
