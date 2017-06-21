@@ -205,7 +205,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-ballerina               { background-color: $product-color-ballerina; }
 .color-beige                   { background-color: $product-color-beige; }
 .color-berry                   { background-color: $product-color-berry; }
-.color-betsy-floral        { @include image-color-selector('BetsyFloral.png'); }
+.color-betsy-floral            { @include image-color-selector('BetsyFloral.png'); }
 .color-bird-of-paradise        { @include image-color-selector('BirdOfParadise.png'); }
 .color-black                   { background-color: $product-color-black; }
 .color-black-and-chartreuse    { @include split-color-selector($product-color-black, $product-color-chartreuse); }
@@ -267,7 +267,6 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-electric-blue           { background-color: $product-color-electric-blue; }
 .color-emerald-green           { background-color: $product-color-emerald-green; }
 .color-evening-bloom           { @include image-color-selector('EveningBloom.jpg'); }
-.color-falling-daisies         { @include image-color-selector('FallingDaisies.png'); }
 .color-feather-love            { @include image-color-selector('FeatherLove.png'); }
 .color-flamingo-pink           { background-color: $product-color-flamingo-pink; }
 .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
@@ -307,6 +306,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-light-gold              { background-color: $product-color-light-gold; }
 .color-light-khaki             { background-color: $product-color-light-khaki; }
 .color-light-nude              { background-color: $product-color-light-nude; }
+.color-light-romance           { @include image-color-selector('LightRomance.png'); }
 .color-light-pink              { background-color: $product-color-light-pink; }
 .color-light-pink-and-charcoal { @include split-color-selector($product-color-light-pink, $product-color-charcoal); }
 .color-light-teal              { background-color: $product-color-light-teal; }
