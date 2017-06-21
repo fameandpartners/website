@@ -308,6 +308,7 @@ FameAndPartners::Application.routes.draw do
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
+<<<<<<< HEAD
 
     # Casual Summer Styles Collection Page
     get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
