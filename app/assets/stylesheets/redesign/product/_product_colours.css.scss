@@ -420,6 +420,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-water-grey              { background-color: $product-color-water-grey; }
 .color-watermelon              { background-color: $product-color-watermelon; }
 .color-white-and-black-pinstripe { @include image-color-selector('WhiteAndBlackPinstripe.png'); }
+.color-white-and-black-spot    { @include image-color-selector('WhiteAndBlackSpot.png'); }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-white-and-red-stripe    { @include image-color-selector('WhiteAndRedStripe.png'); }
 .color-white-ivory             { background-color: white; border: 1px solid $product-color-white-ivory-border; }
