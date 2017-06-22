@@ -103,7 +103,7 @@ module Products
 
       (2..total_rows).each do |i|
         current_row = book.row( i, "CADs" )
-        current_style_number = current_row[columns["style"] - 1]
+        current_style_number = current_row[columns["style"] - 1].strip
         style_data[current_style_number] = [] if style_data[current_style_number].nil?
         style_array = style_data[current_style_number]
         customizations_enabled_for = [map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
@@ -120,7 +120,7 @@ module Products
 
       end
       parsed_data.each do |style|
-        style[:cads] = style_data[style[:sku]]
+        style[:cads] = style_data[style[:sku].strip]
       end
     end
 

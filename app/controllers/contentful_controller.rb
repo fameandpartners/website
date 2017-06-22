@@ -7,14 +7,21 @@ class ContentfulController < ApplicationController
   attr_reader :page, :banner
   helper_method :page, :banner
 
-  before_filter :load_page,
-                :set_collection_resource
+  # before_filter :load_page,
+  #               :set_collection_resource
 
   def main
-    current_contently = Contentful::Version.fetch(params['developer'] == 'preview')
+    current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
 
-    @landing_page_container = current_contently.payload[request.path]
-    render 'layouts/contentful/main'
+    @landing_page_container = current_contently[request.path]
+
+    if @landing_page_container
+      load_page
+      set_collection_resource
+      render 'layouts/contentful/main'
+    else
+      render_404
+    end
   end
 
   def load_page

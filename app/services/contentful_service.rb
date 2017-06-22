@@ -220,29 +220,42 @@ module Contentful
         }
       end
 
+      meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
+      meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
+
       parent_container.relative_url
       {
         header: main_header_tile,
-        rows: row_tiles
+        rows: row_tiles,
+        meta_title: meta_title,
+        meta_description: meta_description
       }
     end
 
   end
 
   class Version
+    VERSION_CACHE_KEY = 'contentful_route_content'
 
-    def self.fetch(preview)
+    # returns the payload
+    def self.fetch_payload(preview)
       if preview
-        self.new_or_update
+        self.new_or_update.payload
       else
-        #cache this mofo
-        current = ContentfulVersion.where(is_live: true).last
-        if current
-          return current
-        else
-          Raven.capture_exception(Exception.new("No ContentfulVersion set live."))
-          #show 2nd to last version
-          ContentfulVersion.offset(1).last
+        current = Rails.cache.fetch(VERSION_CACHE_KEY) do
+          contentful_payload = ContentfulVersion.where(is_live: true).last&.payload
+
+          if contentful_payload
+            all_routes = ContentfulRoute.pluck(:route_name)
+            sifted = contentful_payload.select { |key, _| all_routes.include?(key)}
+            # need to add the homepage route manually
+            sifted["/"] = contentful_payload["/"]
+            sifted
+          else
+            Raven.capture_exception(Exception.new("No ContentfulVersion set live."))
+            #show 2nd to last version
+            ContentfulVersion.offset(1).last&.payload
+          end
         end
       end
     end
@@ -280,8 +293,13 @@ module Contentful
         last_v.is_live = true
         last_v.change_message = change_message
         last_v.save!
+        clear_version_cache
         true
       end
+    end
+
+    def self.clear_version_cache
+      Rails.cache.delete(VERSION_CACHE_KEY)
     end
   end
 

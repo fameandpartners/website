@@ -311,6 +311,14 @@ FameAndPartners::Application.routes.draw do
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
+
+    # Casual Summer Styles Collection Page
+    get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
+
+    # Florals Collection Page
+    get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
+
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
@@ -681,12 +689,10 @@ FameAndPartners::Application.routes.draw do
 
   get '/contentful' => 'contentful#main', as: :the_anti_fast_fashion_shop_landing_page
 
-
-
-
   ContentfulRoute.all.each do |cr|
     match cr.route_name, :controller => cr.controller, :action => cr.action
   end
+
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
@@ -694,5 +700,6 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-  match '*path', to: 'application#non_matching_request', as: 'routing_error'
+  match '*path', to: 'contentful#main'
+  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

@@ -1,6 +1,9 @@
 .app-container {
   width: 100%;
-  margin-top: 96px;
+  margin-top: 16px;
+  @include breakpoint(tablet) {
+    margin-top: 96px;
+  }
 }
 
 // use this class for breakpoints
@@ -24,7 +27,9 @@
 
 div.section-row.tile,
 div.section-row.columns {
-  margin-top: 50px;
+  @include breakpoint(tablet) {
+    margin-top: 50px;
+  }
 }
 
 // custom offset (bulma doesn't have this margin-right version)

@@ -18,6 +18,19 @@ css:
     padding-right: 4px;
   }
 
+  .table-success {
+    background-color: #dff0d8;
+  }
+
+ruby:
+  def is_active_row(row_item)
+    if row_item
+      {class: 'table-success'}
+    else
+      {class: ''}
+    end
+  end
+
 .wrapper.wrapper-content
   .row
     .col-lg-12
@@ -52,20 +65,20 @@ css:
 
                 .row
                   .form-group
-                    .label Type "CONFIRM" if you are sure you want to make this change
+                    .label Type "???" if you are sure you want to make this change
                     .input-group.col-lg-3
-                      = text_field_tag :protected_term, params[:protected_term], class: 'js-protected-term form-control', placeholder: 'CONFIRM', value: params[:protected_term]
+                      = text_field_tag :reggie_term, params[:reggie_term], class: 'js-protected-term form-control', placeholder: '???', value: params[:reggie_term]
 
                 button.btn.btn-primary Add New Route
 
           br
 
           .alert.alert-danger.fade.in.js-contentful-danger.hidden
-            | Something did not work right.
+            | -- ERROR MESSAGE --
             button.close data-dismiss="alert"
               | X
           .alert.alert-success.fade.in.js-contentful-success.hidden
-            | New Contentful version is live!
+            | -- SUCCESS MESSAGE --
             button.close data-dismiss="alert"
               | X
 
@@ -82,7 +95,7 @@ css:
                     | Pages
               tbody
               - @contentful_versions.each do |item|
-                tr
+                tr*is_active_row(item[:is_live])
                   th
                     = item[:id]
                   th
@@ -95,9 +108,19 @@ css:
 
 javascript:
   var CONFIRM = 'CONFIRM';
+  var REGGIE_TERM = 'IRUNSHIT';
   $('.js-contentful-form').on('submit', function(event){
     event.preventDefault();
     var formVals = serializeFormVals(this);
+    if (formVals.reggie_term){
+      if (formVals.reggie_term === REGGIE_TERM){
+        contentfulPOST(JSON.stringify(formVals), $(this).data('path'));
+        return;
+      }
+      $(".js-contentful-danger").text('Hi! You are not allowed to press that button.  Please ask Reggie for assistance.').removeClass('hidden');
+      return; // Has a param Reggie_Term but is an incorrect Reggie_Term. aka, not Reggie
+    }
+
     if (formVals.protected_term && formVals.protected_term === CONFIRM){
       contentfulPOST(JSON.stringify(formVals), $(this).data('path'));
     }
@@ -125,12 +148,12 @@ javascript:
       dataType:'json',
       data: data,
     })
-    .done(function( msg ) {
-      $(".js-contentful-success").removeClass('hidden');
+    .done(function(msg) {
+      $(".js-contentful-success").text(msg.message).removeClass('hidden');
       console.log('Oh YESSSSSS');
     })
-    .error(function(){
-      $(".js-contentful-danger").removeClass('hidden');
+    .error(function(msg){
+      $(".js-contentful-danger").text(msg.responseJSON.message).removeClass('hidden');
       console.log('Oh No');
     })
   }

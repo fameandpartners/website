@@ -133,3 +133,4 @@
 // Contentful
 //--------------------------------
 //= require partials/contentful/alert
+//= require partials/contentful/email_subscribe
