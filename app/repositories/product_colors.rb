@@ -58,9 +58,15 @@ module Repositories
         colors_map.values.clone.sort_by { |color| color[:name] }
       end
 
-      def read(id)
+      def read(id, product_id = nil)
         if id.present?
-          colors_map[id.to_i]&.clone
+          result = colors_map[id.to_i]&.clone
+          # added this to get the real value for custom colors...not the fake one
+          if product_id.present?
+            pcv = ProductColorValue.where(product_id: product_id, option_value_id: id).first
+            result[:custom_color] = pcv&.custom
+          end
+          result
         end
       end
 
