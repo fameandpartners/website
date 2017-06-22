@@ -11,41 +11,44 @@ module Repositories
   class ProductColors
     class << self
       def colors_map
-        @colors_map ||= begin
-          Spree::OptionType.color.option_values.inject({}) do |result, option_value|
-            result[option_value.id] = {
-              id: option_value.id,
-              name: option_value.name,
-              presentation: option_value.presentation,
-              value: option_value.value,
-              use_in_customisation: option_value.use_in_customisation,  #thanh confirmed that this value is a lie
-              image: option_value.image? ? option_value.image.url(:small_square) : nil
-
-            }
-            result
+        @colors_map = begin
+          Rails.cache.fetch("colors_map") do
+            Spree::OptionType.color.option_values.inject({}) do |result, option_value|
+              result[option_value.id] = {
+                id: option_value.id,
+                name: option_value.name,
+                presentation: option_value.presentation,
+                value: option_value.value,
+                use_in_customisation: option_value.use_in_customisation,
+                image: option_value.image? ? option_value.image.url(:small_square) : nil
+              }
+              result
+            end
           end
         end
       end
 
       def color_groups
-        @color_groups ||= begin
-          Spree::OptionType.color.option_values_groups.includes(:option_values).map do |group|
-            color_ids = group.option_values.map(&:id)
+        @color_groups = begin
+          Rails.cache.fetch("color_groups") do
+            Spree::OptionType.color.option_values_groups.includes(:option_values).map do |group|
+              color_ids = group.option_values.map(&:id)
 
-            representative = \
-              if color_ids.size == 1
-                Repositories::ProductColors.read(color_ids.first)
-              else
-                { name: group.name, presentation: group.name }
-              end
+              representative = \
+                if color_ids.size == 1
+                  Repositories::ProductColors.read(color_ids.first)
+                else
+                  { name: group.name, presentation: group.name }
+                end
 
-            {
-              id: group.id,
-              name: group.name.to_s.downcase,
-              presentation: group.presentation,
-              color_ids: color_ids,
-              representative: representative
-            }
+              {
+                id: group.id,
+                name: group.name.to_s.downcase,
+                presentation: group.presentation,
+                color_ids: color_ids,
+                representative: representative
+              }
+            end
           end
         end
       end
@@ -55,20 +58,10 @@ module Repositories
         colors_map.values.clone.sort_by { |color| color[:name] }
       end
 
-      def read(id, product_id = nil)
+      def read(id)
         if id.present?
-          result = colors_map[id.to_i]&.clone
-          # added this to get the real value for custom colors...not the fake one
-          if product_id.present?
-            pcv = ProductColorValue.where(product_id: product_id, option_value_id: id).first
-            result[:custom_color] = pcv&.custom
-          end
-          result
+          colors_map[id.to_i]&.clone
         end
-      end
-
-      def read_non_custom(product_id, color_id)
-
       end
 
       def get_by_name(color_name = nil)
@@ -82,6 +75,20 @@ module Repositories
       def get_similar(color_ids, range = nil)
         range = Similarity::Range::DEFAULT if range < 0 or range > 100
         Similarity.where(original_id: color_ids).where('coefficient <= ?', range).pluck(:similar_id)
+      end
+
+      # groups
+      def get_group_by_name(name)
+        if name.present?
+          group_name = name.to_s.downcase
+          color_groups.find{|group| group[:name] == group_name }.try(:clone)
+        end
+      end
+
+    end
+  end
+end
+d)
       end
 
       # groups
