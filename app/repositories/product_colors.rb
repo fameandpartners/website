@@ -88,17 +88,3 @@ module Repositories
     end
   end
 end
-d)
-      end
-
-      # groups
-      def get_group_by_name(name)
-        if name.present?
-          group_name = name.to_s.downcase
-          color_groups.find{|group| group[:name] == group_name }.try(:clone)
-        end
-      end
-
-    end
-  end
-end
