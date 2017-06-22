@@ -8,12 +8,12 @@
     .col.col-md-7.nav-main-menu.text-center
 
       span.dresses.js-open-nav-menu Shop all
-      span.anti-fast.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'ANTI-FAST FASHION SHOP', nonInteraction: false })" = link_to 'ANTI-FAST FASHION SHOP', '/the-anti-fast-fashion-shop'
+      span.anti-fast.js-close-nav-menu onclick="typeof window === 'object' && !!window.ga ? window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'ANTI-FAST FASHION SHOP', nonInteraction: false }) : console.log('Google analytics not found')" = link_to 'ANTI-FAST FASHION SHOP', '/the-anti-fast-fashion-shop'
 
       - if Features.active?(:fameweddings)
         span.wedding.js-open-nav-menu Wedding Shop
 
-      span.lookbook.js-close-nav-menu onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'EVENING SHOP', nonInteraction: false })" = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
+      span.lookbook.js-close-nav-menu onclick="typeof window === 'object' && !!window.ga ? window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'EVENING SHOP', nonInteraction: false }) : console.log('Google analytics not found')" = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.culture.js-open-nav-menu Fame Culture
 
     .col.col-md-2.nav-icons.text-right.pull-right
@@ -25,11 +25,11 @@
             input type="text" id="searchValue" placeholder="Search here" name="q"
 
       = link_to moodboards_path do
-        span.icon.icon-heart-o onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Moodboard Press', eventLabel: null, nonInteraction: false })"
+        span.icon.icon-heart-o onclick="typeof window === 'object' && !!window.ga ? window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Moodboard Press', eventLabel: null, nonInteraction: false }) : console.log('Google analytics not found')"
 
       span.shopping-bag-wrapper.js-header-toolbar
         a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-          span.icon.icon-bag onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false })"
+          span.icon.icon-bag onclick="typeof window === 'object' && !!window.ga ? window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false }) : console.log('Google analytics not found')"
           span.count.js-cart-item-count 0
 
   .rect-wrapper.margin--center
@@ -86,7 +86,21 @@
         .row.nav-menu-buffer.nav-menu-contents.margin--center.background--white.margin--center
           = render partial: 'layouts/redesign/header/simplified_nav/fame_culture'
 javascript:
+  function sendToGA(eventObject) {
+      if(typeof window === 'object' && !!window.ga) {
+        window.ga('send', 'event', eventObject)
+      }  
+      else {
+        console.log('Google analytics not found')
+      }
+  }
   $('.nav-menu-container li.normal-item').click(function() {
     var subNavText = $(this).text().trim()
-    window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Sub Nav Press', eventLabel: subNavText, nonInteraction: false })
+    var subNavObject = { 
+      eventCategory: 'Top Nav', 
+      eventAction: 'Sub Nav Press', 
+      eventLabel: subNavText, 
+      nonInteraction: false
+    }
+    sendToGA(subNavObject)
   });
