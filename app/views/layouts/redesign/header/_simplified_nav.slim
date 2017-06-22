@@ -28,7 +28,7 @@
         span.icon.icon-heart-o onclick="sendToGA({eventCategory: 'Top Nav', eventAction: 'Moodboard Press', eventLabel: null, nonInteraction: false })"
       span.shopping-bag-wrapper.js-header-toolbar
         a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-          span.icon.icon-bag onclick="typeof window === 'object' && !!window.ga ? window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false }) : console.log('Google analytics not found')"
+          span.icon.icon-bag onclick="sendToGA({eventCategory: 'Top Nav', eventAction: 'Bag Press', eventLabel: null, nonInteraction: false })"
           span.count.js-cart-item-count 0
 
   .rect-wrapper.margin--center
