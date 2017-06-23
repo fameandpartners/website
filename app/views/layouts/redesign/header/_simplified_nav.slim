@@ -87,13 +87,13 @@
           = render partial: 'layouts/redesign/header/simplified_nav/fame_culture'
 
 javascript:
-  function sendToGA(eventObject) {
-	 if(typeof window === 'object' && !!window.ga) {
-	 	window.ga('send', 'event', eventObject)
-	 }
-	 else {
-	 	console.log('Google analytics not found')
-	 }
+  	function sendToGA(eventObject) {
+		 if(typeof window === 'object' && !!window.ga) {
+		 	window.ga('send', 'event', eventObject)
+		 }
+		 else {
+		 	console.log('Google analytics not found')
+		 }
  	}
  	$('.nav-menu-container li.normal-item').click(function() {
 		 var subNavText = $(this).text().trim()
