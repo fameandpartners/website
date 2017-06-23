@@ -68,6 +68,11 @@ ruby:
       = form.email_field :email, class: 'required form-control form-control-md js-checkout-email-shipping', value: form.object.email, required: 'required'
 - elsif address_type == 'billing'
       = form.hidden_field :email, class: 'required form-control form-control-md js-checkout-email-billing', value: form.object.email
+.row
+  .col-xs-12.form-group
+    .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
+      = check_box_tag 'subscribe', 'Subscribe'
+      label for="subscribe" Receive new styles in my inbox each week
 
 .row
   .col-xs-12.form-group

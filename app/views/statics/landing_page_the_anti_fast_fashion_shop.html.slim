@@ -1,6 +1,7 @@
 ruby:
   formNewsletterTop = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
   formNewsletterBottom = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  service = ENV.fetch('SUBSCRIPTION_SERVICE')
 
 = render partial: 'pages/robots'
 
@@ -28,21 +29,7 @@ ruby:
 
             .diagonal-line
 
-            .newsletter-signup-form
-              h5 Sign up and be the first to know when new styles drop.
-
-              form class=(formNewsletterTop)
-                input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
-                .input-group
-                  .js-anti-fast-click-track data-action='Email Field Press'
-                    input.form-control.input-md.js-en-field-email (type="email" placeholder="Enter your email" required="required")
-                  span.input-group-btn
-                    .js-anti-fast-click-track data-action='Email Signup Button Press'
-                      button.btn.btn-black.btn-xs type="submit" Sign up
-
-              = content_for :inline_javascript do
-                |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterTop}'});
-
+            = render "shared/subscribe_form", form_name: (formNewsletterTop), service: (service)
 
             .hidden-md.hidden-lg
               .js-anti-fast-click-track data-action='Drop 5 - Editorial 1 Press'
@@ -189,20 +176,7 @@ ruby:
     section.section-box.section-newsletter-footer.text-center
       .row
         .col-md-8.col-md-offset-2
-          .newsletter-signup-form
-            h5 Sign up and be the first to know when new styles drop.
-
-            form class=(formNewsletterBottom)
-              input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
-              .input-group
-                .js-anti-fast-click-track data-action='Email Field Press'
-                  input.form-control.input-lg.js-en-field-email (type="email" placeholder="Enter your email" required="required")
-                span.input-group-btn
-                  .js-anti-fast-click-track data-action='Email Signup Button Press'
-                    button.btn.btn-black.btn-xs type="submit" Sign up
-
-              = content_for :inline_javascript do
-                |  new window.page.NewsletterSubscriberOnPage({form: '#{formNewsletterBottom}'});
+          = render "shared/subscribe_form", form_name: (formNewsletterBottom), service: (service)
 
     section.section-box.section-more-styles
       .row
@@ -461,14 +435,20 @@ ruby:
           var $this, email, url;
           e.preventDefault();
           $this = $(e.target);
-          url = $('.js-en-field-mailchimp', $this)[0].value;
-          email = $('.js-en-field-email', $this)[0].value;
+          url = $('input[name="url"]', $this).val()
+          form_name = $('input[name="form_name"]', $this).val()
+          email = $('input[name="email"]', $this).val()
+          service = $('input[name="service"]', $this).val()
+
           return $.ajax({
+            method: 'POST',
             dataType: 'json',
             url: url,
             async: true,
             data: {
               email: email,
+              service: service,
+              form_name: form_name
             },
             success: this.handler
           });

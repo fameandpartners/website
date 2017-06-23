@@ -1,15 +1,18 @@
 <%
   form_newsletter = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  service = ENV.fetch('SUBSCRIPTION_SERVICE')
 %>
 
 <div>
   <div class="newsletter-signup-form">
     <h5><%= @email_heading %></h5>
     <form class="<%= form_newsletter %>">
-      <input class="js-en-field-mailchimp" type="hidden" value="<%= mailchimp_campaigns_email_capture_path %>">
+      <input name='url' type="hidden" value="<%= subscribe_campaigns_email_capture_path %>">
+      <input name='form_name' type="hidden" value="Contentful Email Module">
       <div class="input-group">
+        <input name='service' type="hidden" value="<%= service %>">
         <div class="js-REPLACE-WITH-TEMPLATE-NAME-click-track" data-action="Email Field Press">
-          <input class="form-control input-lg js-en-field-email" placeholder="Enter your email" required="required" type="email" data-emailcapturepoint="All">
+          <input class="form-control input-lg js-en-field-email" name="email" placeholder="Enter your email" required="required" type="email" data-emailcapturepoint="All">
         </div>
         <span class="input-group-btn">
           <div class="js-REPLACE-WITH-TEMPLATE-NAME-click-track" data-action="Email Signup Button Press">
