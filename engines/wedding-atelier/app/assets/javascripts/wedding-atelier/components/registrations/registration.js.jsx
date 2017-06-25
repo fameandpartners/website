@@ -84,7 +84,9 @@ var Registration = React.createClass({
         <div className="modal-dialog modal-sm">
           <div className="modal-content">
             <div className="modal-header registrations__header">
-              <a href='#' className='registrations__back-arrow' onClick={this.previousStep}></a>
+              {this.state.step > 1 &&
+                <a className='registrations__back-arrow' onClick={this.previousStep}></a>
+              }
             </div>
             <div className="modal-body">
               <form action="/wedding-atelier/signup" className="new_spree_user">
