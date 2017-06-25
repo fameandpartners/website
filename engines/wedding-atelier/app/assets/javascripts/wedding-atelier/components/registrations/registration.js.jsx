@@ -75,8 +75,6 @@ var Registration = React.createClass({
                            previousStep={this.previousStep}
                            saveValues={this.saveValues}
                            submitRegistration={this.submitRegistration} />
-      case 4:
-        return <InviteFields fieldValues={this.props.fieldValues} />
     }
   },
 
