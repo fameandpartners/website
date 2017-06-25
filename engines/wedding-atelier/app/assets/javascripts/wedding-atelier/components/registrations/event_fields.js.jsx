@@ -6,12 +6,12 @@ var EventFields = React.createClass({
       events_attributes: {
         '0': {
           event_type: 'wedding',
-          name: this.refs["event.name"].value,
-          date: this.refs["event.date"].value,
-          number_of_assistants: this.refs["event.number_of_assistants"].value
+          name: this.refs.event_name.value,
+          date: this.refs.event_date.value,
+          number_of_assistants: this.refs.event_number_of_assistants.value
         }
       },
-      event_role: this.refs["user.role"].value
+      event_role: this.refs.user_role.value
     }
 
     this.props.saveValues(data)
@@ -25,13 +25,13 @@ var EventFields = React.createClass({
         <div className="form">
           <div className="form-group">
             <label>What should we call your wedding?</label>
-            <input className="form-control" ref="event.name" />
+            <input className="form-control" ref="event_name" />
           </div>
 
           <div className="form-group">
             <label>What's your Role?</label>
 
-            <select className="form-control" id="wedding_role" ref="user.role">
+            <select className="form-control" id="wedding_role" ref="user_role">
               <option value="">Select one</option>
               <option value="bride">Bride</option>
               <option value="bridesmaid">Bridesmaid</option>
@@ -43,7 +43,7 @@ var EventFields = React.createClass({
           <div className="form-group">
             <label>Whens the Wedding?</label>
             <div className="input-group date date-picker">
-              <input className="form-control wedding-date" data-outside-error="true" ref="event.date" onkeydown="return false" placeholder="mm/dd/yyyy" />
+              <input className="form-control wedding-date" data-outside-error="true" ref="event_date" onkeydown="return false" placeholder="mm/dd/yyyy" />
               <span className="input-group-addon">
                 <i className="calendar-icon"></i>
               </span>
@@ -53,7 +53,7 @@ var EventFields = React.createClass({
           <div className="form-group">
             <label>How Many Bridesmaids?</label>
             <div className="number-field">
-              <input className="form-control number-field js-number-field" min="0" ref="event.number_of_assistants" type="number" />
+              <input className="form-control number-field js-number-field" min="0" ref="event_number_of_assistants" type="number" />
             </div>
           </div>
 

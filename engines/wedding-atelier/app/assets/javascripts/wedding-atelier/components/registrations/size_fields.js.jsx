@@ -11,8 +11,8 @@ var SizeFields = React.createClass({
 
     var data = {
       user_profile_attributes: {
-        height: this.refs["profile.height"].value,
-        dress_size_id: this.refs["profile.dress_size_id"].value,
+        height: this.refs.profile_height.value,
+        dress_size_id: this.refs.profile_dress_size_id.value,
       }
     }
 
@@ -43,7 +43,7 @@ var SizeFields = React.createClass({
           inputProps = {
             id: id,
             type: "radio",
-            ref: "profile.dress_size_id",
+            ref: "profile_dress_size_id",
             value: size.id
           };
 
@@ -69,7 +69,7 @@ var SizeFields = React.createClass({
           <div className="form-group">
             <label>What's Your Height?</label>
             <div>
-              <select className="form-control" id="spree_user_user_profile_attributes_height" ref="profile.height">
+              <select className="form-control" id="spree_user_user_profile_attributes_height" ref="profile_height">
                 {optionsForHeights}
               </select>
             </div>
