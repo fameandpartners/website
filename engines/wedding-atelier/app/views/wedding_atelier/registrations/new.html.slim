@@ -1,2 +1,16 @@
-= render partial: 'layouts/registrations_layout',
-locals: { nested_partial: 'details_form', user: @user, signup_params: @signup_params, step_number: 1 }
+= react_component 'CustomizationExperience',
+                  siteVersion: current_site_version.permalink,
+                  eventId: @dummy_event.id,
+                  customizationsUrl: event_customizations_url(@dummy_event, format: :json),
+                  event_name: @dummy_event.name,
+                  event_path: wedding_atelier.event_path(id: @dummy_event.id, slug: @dummy_event.slug),
+                  currentUser: WeddingAtelier::UserSerializer.new(@dummy_user, scope: self)
+
+= react_component 'Registration',
+                  signupPath: wedding_atelier.signup_path,
+                  eventsPath: wedding_atelier.events_path,
+                  signinPath: wedding_atelier.sign_in_path,
+                  heightDefinitions: @heights,
+                  siteVersion: @site_version,
+                  dressSizes: @dress_sizes
+
