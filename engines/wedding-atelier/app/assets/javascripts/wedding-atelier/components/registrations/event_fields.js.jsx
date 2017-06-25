@@ -24,7 +24,7 @@ var EventFields = React.createClass({
         <h1 className="text-center">Tell us about the event.</h1>
         <div className="form">
           <div className="form-group">
-            <label>Name the Wedding Board</label>
+            <label>What should we call your wedding?</label>
             <input className="form-control" ref="event.name" />
           </div>
 

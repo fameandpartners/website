@@ -22,8 +22,7 @@ var UserFields = React.createClass({
     return (
       <div className="registrations__new-form left-side-centered-container">
         <h1 className="text-center">
-          <em>Sign up </em>
-          to save your creation.
+          One last thing.
         </h1>
         <div className="form">
 
