@@ -23,7 +23,7 @@ var SizeFields = React.createClass({
   render: function() {
     return (
       <div className="registrations__size-form signup left-side-centered-container">
-        <h1 className="text-center">Let's start with your size profile.</h1>
+        <h1 className="text-center">Let's get your size profile</h1>
         <div className="form">
 
           <div className="form-group">
