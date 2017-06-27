@@ -26,7 +26,7 @@ class SubCategoryList extends Component {
                       if(i.id === activeSubCategory) {
                         return (
                           <b 
-                            key={Math.random()}
+                            key={i.id}
                             className="LeftHandNav__activeLink"
                           >
                             {i.displayName}
@@ -34,7 +34,7 @@ class SubCategoryList extends Component {
                         )
                       }
                       return (
-                        <li key={Math.random()}>
+                        <li key={i.id}>
                           <a 
                             href={i.relativePath}
                           >

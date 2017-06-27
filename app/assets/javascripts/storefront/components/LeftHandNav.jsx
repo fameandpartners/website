@@ -37,7 +37,7 @@ class LeftHandNav extends Component {
                     return (
                       <li 
                         className="LeftHandNav--subcategoryContainer"
-                        key={Math.random()}>
+                        key={c.id}>
                           <div>                              
                               <a 
                                 href={c.relativePath}
@@ -54,16 +54,16 @@ class LeftHandNav extends Component {
                     )
                   }               
                 }
-                else if(activeCategory === c.id && !hideDressLinks) {
-                  return <span className="LeftHandNav--activeLink" key={Math.random()}>{c.displayName}</span>
+                else if(c.id === activeCategory  && !hideDressLinks) {
+                  return <span className="LeftHandNav--activeLink" key={c.id}>{c.displayName}</span>
                 }
                 else if(c.id === activeSubCategory) {
                   // Jumpsuits & Rompers
-                  return <span className="LeftHandNav--activeLink" key={Math.random()}>{c.displayName}</span>
+                  return <span className="LeftHandNav--activeLink" key={c.id}>{c.displayName}</span>
                 }
                 return (
-                  <li key={Math.random()}>
-                    <a href={`${c.relativePath}`}>{c.displayName}</a>
+                  <li key={c.id}>
+                    <a href={{c.relativePath}}>{c.displayName}</a>
                   </li>
                 )
               })}
