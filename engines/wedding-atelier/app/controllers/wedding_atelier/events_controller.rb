@@ -47,7 +47,7 @@ module WeddingAtelier
 
     def check_signup_completeness
       if current_spree_user && !current_spree_user.wedding_atelier_signup_complete?
-        redirect_to :new
+        redirect_to controller: :events, action: :new
       end
     end
 

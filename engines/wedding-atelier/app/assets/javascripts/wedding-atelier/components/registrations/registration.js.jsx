@@ -64,6 +64,7 @@ var Registration = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
+        debugger
         window.location = "/wedding-atelier/events/" + response.event.id
       }
     })
