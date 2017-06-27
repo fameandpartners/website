@@ -36,8 +36,7 @@ class SubCategoryList extends Component {
                       return (
                         <li key={Math.random()}>
                           <a 
-                            target="_blank" 
-                            href={`${i.relativePath}`}
+                            href={i.relativePath}
                           >
                             {i.displayName}
                           </a>

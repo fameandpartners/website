@@ -1,131 +1,50 @@
 import React, {Component, PropTypes,} from 'react';
 import SubCategoryList from './SubCategoryList'
+import categoryTypes from '../constants/productCategoryConstants'
 class LeftHandNav extends Component {
     constructor() { 
         super()
         this.state = {
           activeCategory: '',
           activeSubCategory: '',
-          categories: [
-            {
-              id: 'dresses',
-              displayName: 'Dresses',
-              relativePath: '/dresses',
-              subCategories: [
-                {
-                  label: null,
-                  subItems: [
-                    {
-                      id: 'maxi',
-                      count: 22,
-                      displayName: 'Maxi',
-                      relativePath: '/dresses/long'
-                    }, {
-                      id: 'midi',
-                      count: 10,
-                      displayName: 'Midi',
-                      relativePath: '/dresses/midi'
-                    }, {
-                      id: 'mini',
-                      count: 44,
-                      displayName: 'Mini',
-                      relativePath: '/dresses/mini'
-                    }, {
-                      id: 'two-piece',
-                      count: 22,
-                      displayName: 'Two Piece',
-                      relativePath: '/dresses/two-piece'
-                    }
-                  ]
-                }, {
-                  label: 'By Event',
-                  subItems: [
-                    {
-                      id: 'prom',
-                      count: 10,
-                      displayName: 'Prom',
-                      relativePath: '/dresses/prom'
-                    }, {
-                      id: 'bridal',
-                      count: 22,
-                      displayName: 'Bridal',
-                      relativePath: '/dresses/bridal'
-                    }, {
-                      id: 'bridesmaid',
-                      count: 43,
-                      displayName: 'Bridesmaid',
-                      relativePath: '/dresses/bridesmaid'
-                    }, {
-                      id: 'wedding-guests',
-                      count: 32,
-                      displayName: 'Wedding Guests',
-                      relativePath: '/dresses/wedding-guests'
-                    }, {
-                      id: 'cocktail',
-                      count: 34,
-                      displayName: 'Cocktail',
-                      relativePath: '/dresses/cocktail'
-                    }, {
-                      id: 'graduation',
-                      count: 56,
-                      displayName: 'Graduation',
-                      relativePath: '/dresses/graduation'
-                    }
-                  ]
-                }
-              ]
-            }, {
-              id: 'skirts',
-              displayName: 'Skirts',
-              relativePath: '/skirts'
-            }, {
-              id: 'jumpsuit',
-              displayName: 'Jumpsuits & Rompers',
-              relativePath: '/dresses/jumpsuit' 
-            }, {
-              id: 'tops',
-              displayName: 'Tops',
-              relativePath: '/tops'
-            }, {
-              id: 'pants',
-              displayName: 'Pants',
-              relativePath: '/pants'
-            }, {
-              id: 'outerwear',
-              displayName: 'Outerwear & Jackets',
-              relativePath: '/outerwear'
-            }
-          ]
+          categories: categoryTypes
         }
     }
     componentWillMount() {
       let mainCategory = window.location.pathname
       mainCategory = mainCategory.replace('/', '').split('/')[0]
-      let subCategory = window.location.pathname.replace(`/${mainCategory}`, '').replace('/', '')
+      const subCategory = window.location.pathname.replace(`/${mainCategory}`, '').replace('/', '')
       this.setState({
         activeCategory: mainCategory,
         activeSubCategory: subCategory
       });
     }
     render() {
-      let { categories, activeCategory, activeSubCategory } = this.state
-      let hideDressLinks = activeCategory === 'dresses' && activeSubCategory === 'jumpsuit'
+      const { categories, activeCategory, activeSubCategory } = this.state
+      const hideDressLinks = activeCategory === 'dresses' && activeSubCategory === 'jumpsuit'
+      let categoryStyle
+      activeSubCategory.length > 1 ? categoryStyle = 'LeftHandNav--inActiveLink' : categoryStyle = 'LeftHandNav__activeLink'
       return (
-        <div className="LeftHandNav--container">
+        <div className="LeftHandNav__container">
             <div className="ExpandablePanel__heading">
                 <span className="ExpandablePanel__mainTitle">Clothing</span>
             </div>
-            <ul className="LeftHandNav__categoryContainer">
+            <ul className="LeftHandNav--categoryContainer">
               {categories.map(c => {
                 if(c.subCategories && !hideDressLinks) {
-                  let subCategories = c.subCategories
+                  const subCategories = c.subCategories
                   if(activeCategory === c.id) {
                     return (
                       <li 
-                        className="LeftHandNav__subcategoryContainer"
+                        className="LeftHandNav--subcategoryContainer"
                         key={Math.random()}>
-                          <div>
-                              <b >{c.displayName}</b>
+                          <div>                              
+                              <a 
+                                href={c.relativePath}
+                                className={categoryStyle}
+                              >
+                                {c.displayName}
+                              </a>
                               <SubCategoryList 
                                 subCategoryData={subCategories} 
                                 activeSubCategory={activeSubCategory}
@@ -133,23 +52,18 @@ class LeftHandNav extends Component {
                           </div>
                       </li>
                     )
-                  }
-                  else {
-                    <li key={Math.random()}>
-                      <a target="_blank" href={`${c.relativePath}`}>{c.displayName}</a>
-                    </li>
-                  }                
+                  }               
                 }
                 else if(activeCategory === c.id && !hideDressLinks) {
-                  return <b key={Math.random()}>{c.displayName}</b>
+                  return <span className="LeftHandNav--activeLink" key={Math.random()}>{c.displayName}</span>
                 }
                 else if(c.id === activeSubCategory) {
                   // Jumpsuits & Rompers
-                  return <b key={Math.random()}>{c.displayName}</b>
+                  return <span className="LeftHandNav--activeLink" key={Math.random()}>{c.displayName}</span>
                 }
                 return (
                   <li key={Math.random()}>
-                    <a target="_blank" href={`${c.relativePath}`}>{c.displayName}</a>
+                    <a href={`${c.relativePath}`}>{c.displayName}</a>
                   </li>
                 )
               })}
