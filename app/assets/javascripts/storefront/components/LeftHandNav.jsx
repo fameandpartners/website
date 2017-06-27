@@ -63,7 +63,7 @@ class LeftHandNav extends Component {
                 }
                 return (
                   <li key={c.id}>
-                    <a href={{c.relativePath}}>{c.displayName}</a>
+                    <a href={c.relativePath}>{c.displayName}</a>
                   </li>
                 )
               })}
