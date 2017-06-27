@@ -11,7 +11,7 @@ class EmailCapture
                  first_name: nil, last_name: nil, current_sign_in_ip:, landing_page:,
                  utm_params: nil, site_version:, facebook_uid: nil, form_name:)
 
-    @service            = options[:service].to_sym
+    @service            = options[:service] ? options[:service].to_sym : :bronto
     @email              = email
     @previous_email     = previous_email
     @newsletter         = newsletter
