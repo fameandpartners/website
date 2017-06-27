@@ -1,43 +1,35 @@
-import React, {Component, PropTypes,} from 'react';
+import React, {Component} from 'react';
 import SubCategoryList from './SubCategoryList'
 import categoryTypes from '../constants/productCategoryConstants'
+
 class LeftHandNav extends Component {
     constructor() { 
         super()
+        const currentURL   = window.location.pathname.replace('/', '')
+        const mainCategory = currentURL.split('/')[0]
+        const subCategory  = currentURL.split('/')[1]
         this.state = {
-          activeCategory: '',
-          activeSubCategory: '',
+          activeCategory: mainCategory,
+          activeSubCategory: subCategory,
           categories: categoryTypes
         }
-    }
-    componentWillMount() {
-      let mainCategory = window.location.pathname
-      mainCategory = mainCategory.replace('/', '').split('/')[0]
-      const subCategory = window.location.pathname.replace(`/${mainCategory}`, '').replace('/', '')
-      this.setState({
-        activeCategory: mainCategory,
-        activeSubCategory: subCategory
-      });
     }
     render() {
       const { categories, activeCategory, activeSubCategory } = this.state
       const hideDressLinks = activeCategory === 'dresses' && activeSubCategory === 'jumpsuit'
       let categoryStyle
-      activeSubCategory.length > 1 ? categoryStyle = 'LeftHandNav--inActiveLink' : categoryStyle = 'LeftHandNav__activeLink'
+      activeSubCategory ? categoryStyle = 'navigation-link' : categoryStyle = 'navigation-link navigation-link--active'
       return (
-        <div className="LeftHandNav__container">
+        <div className="LeftHandNav__Container">
             <div className="ExpandablePanel__heading">
                 <span className="ExpandablePanel__mainTitle">Clothing</span>
             </div>
-            <ul className="LeftHandNav--categoryContainer">
+            <ul className="Category__Container">
               {categories.map(c => {
                 if(c.subCategories && !hideDressLinks) {
-                  const subCategories = c.subCategories
-                  if(activeCategory === c.id) {
+                  if(c.id === activeCategory) {
                     return (
-                      <li 
-                        className="LeftHandNav--subcategoryContainer"
-                        key={c.id}>
+                      <li key={c.id}>
                           <div>                              
                               <a 
                                 href={c.relativePath}
@@ -46,7 +38,7 @@ class LeftHandNav extends Component {
                                 {c.displayName}
                               </a>
                               <SubCategoryList 
-                                subCategoryData={subCategories} 
+                                subCategoryData={c.subCategories} 
                                 activeSubCategory={activeSubCategory}
                               />
                           </div>
@@ -54,16 +46,29 @@ class LeftHandNav extends Component {
                     )
                   }               
                 }
-                else if(c.id === activeCategory  && !hideDressLinks) {
-                  return <span className="LeftHandNav--activeLink" key={c.id}>{c.displayName}</span>
+                else if(c.id === activeCategory && !hideDressLinks) {
+                  return (
+                    <span 
+                      className="navigation-link navigation-link--active" 
+                      key={c.id}
+                    >
+                      {c.displayName}
+                    </span>
+                  )
                 }
-                else if(c.id === activeSubCategory) {
+                else if(c.id === activeSubCategory && hideDressLinks) {
                   // Jumpsuits & Rompers
-                  return <span className="LeftHandNav--activeLink" key={c.id}>{c.displayName}</span>
+                  return (
+                    <span className="navigation-link navigation-link--active" key={c.id}>
+                        {c.displayName}
+                    </span>
+                  )
                 }
                 return (
                   <li key={c.id}>
-                    <a href={c.relativePath}>{c.displayName}</a>
+                    <a href={c.relativePath} className="navigation-link">
+                      {c.displayName}
+                    </a>
                   </li>
                 )
               })}
