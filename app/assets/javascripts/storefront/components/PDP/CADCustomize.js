@@ -247,12 +247,13 @@ class CADCustomize extends Component {
    */
   reduceMatchesBasedOnPriority(matches) {
     return matches.reduce((accum, curr) => {
+      // debugger;
       // accum is current highest priority winner, this is NOT based on position,
       // but on specificity of bit_array (higher wins)
       const accumSpecificity = accum.image.bit_array
-            .reduce((total, bit) => (bit ? total + 1 : bit), 0);
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
       const currSpecificity = curr.image.bit_array
-            .reduce((total, bit) => (bit ? total + 1 : bit), 0);
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
 
       return accumSpecificity >= currSpecificity ? accum : curr;
     }, matches[0]);
