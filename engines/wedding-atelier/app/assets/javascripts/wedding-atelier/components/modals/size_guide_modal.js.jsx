@@ -124,7 +124,6 @@ var SizeGuideModal = React.createClass({
                           <p>Fame Tips</p>
                           <ul>
                             <li>Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress. Stand tall with your feet together.</li>
-                            <li>If you plan on wearing heels with the dress, don’t forget to include heel height in your measurement! This will help you decide which of our three dress lengths - Petite, Standard, or Tall - is best for you.</li>
                           </ul>
                           <p>Bust - Measure around the fullest part of your chest, keeping the tape level to the floor.</p>
                           <p>Under-bust - Measure directly under your bust (around your rib cage, where your bra band sits), keeping the tape level to the floor.</p>
