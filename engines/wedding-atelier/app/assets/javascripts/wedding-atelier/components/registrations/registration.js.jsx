@@ -2,7 +2,7 @@ var Registration = React.createClass({
   propTypes: {
     fieldValues: React.PropTypes.object,
     signupPath: React.PropTypes.string.isRequired,
-    eventsPath: React.PropTypes.string.isRequired,
+    userPath: React.PropTypes.string.isRequired,
     signinPath: React.PropTypes.string.isRequired,
     siteVersion: React.PropTypes.string,
     heightDefinitions: React.PropTypes.array,
@@ -55,6 +55,20 @@ var Registration = React.createClass({
     });
   },
 
+  submitEvent: function() {
+    var payload = { spree_user: $.extend({}, this.state.fieldValues) };
+
+    $.ajax({
+      url:  this.props.userPath,
+      type: 'PUT',
+      dataType: 'json',
+      data: payload,
+      success: function (response) {
+        window.location = "/wedding-atelier/events/" + response.event.id
+      }
+    })
+  },
+
   showStep: function() {
     switch (this.state.step) {
       case 1:
@@ -65,6 +79,7 @@ var Registration = React.createClass({
       case 2:
         return <SizeFields fieldValues={this.props.fieldValues}
                            nextStep={this.nextStep}
+                           submitEvent={this.submitEvent}
                            previousStep={this.previousStep}
                            saveValues={this.saveValues}
                            heights={this.props.heightDefinitions}

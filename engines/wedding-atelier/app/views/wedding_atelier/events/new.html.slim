@@ -1,0 +1,16 @@
+= react_component 'CustomizationExperience',
+                  siteVersion: current_site_version.permalink,
+                  eventId: @dummy_event.id,
+                  customizationsUrl: event_customizations_url(@dummy_event, format: :json),
+                  event_name: @dummy_event.name,
+                  event_path: wedding_atelier.event_path(id: @dummy_event.id, slug: @dummy_event.slug),
+                  currentUser: WeddingAtelier::UserSerializer.new(@dummy_user, scope: self)
+
+= react_component 'Registration',
+                  signupPath: wedding_atelier.signup_path,
+                  userPath: wedding_atelier.user_path(@user),
+                  signinPath: wedding_atelier.sign_in_path,
+                  heightDefinitions: @heights,
+                  siteVersion: @site_version,
+                  dressSizes: @dress_sizes
+

@@ -17,7 +17,11 @@ var SizeFields = React.createClass({
     }
 
     this.props.saveValues(data)
-    this.props.nextStep()
+    if (false) {
+      this.props.nextStep();
+    } else {
+      this.props.submitEvent();
+    }
   },
 
   render: function() {
