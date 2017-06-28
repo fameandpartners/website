@@ -1,0 +1,53 @@
+PATH
+  remote: .
+  specs:
+    bronto (0.0.1)
+      savon (~> 1.2.0)
+      sidekiq
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    akami (1.2.2)
+      gyoku (>= 0.4.0)
+      nokogiri
+    builder (3.2.3)
+    concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
+    gyoku (0.4.6)
+      builder (>= 2.1.2)
+    httpi (1.1.1)
+      rack
+    mini_portile2 (2.1.0)
+    nokogiri (1.7.2)
+      mini_portile2 (~> 2.1.0)
+    nori (1.1.5)
+    rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
+    redis (3.3.3)
+    savon (1.2.0)
+      akami (~> 1.2.0)
+      builder (>= 2.1.2)
+      gyoku (~> 0.4.5)
+      httpi (~> 1.1.0)
+      nokogiri (>= 1.4.0)
+      nori (~> 1.1.0)
+      wasabi (~> 2.5.0)
+    sidekiq (5.0.0)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 3.3, >= 3.3.3)
+    wasabi (2.5.1)
+      httpi (~> 1.0)
+      nokogiri (>= 1.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bronto!
+
+BUNDLED WITH
+   1.15.0
