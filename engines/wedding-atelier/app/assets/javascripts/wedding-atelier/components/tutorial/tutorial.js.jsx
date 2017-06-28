@@ -19,11 +19,12 @@ var Tutorial = React.createClass({
 
   finishTutorial: function() {
     var modal = $(ReactDOM.findDOMNode(this));
+    var payload = { spree_user: { wedding_atelier_signup_step: 'completed' } };
     $.ajax({
       url: this.props.userPath,
       type: 'PUT',
       dataType: 'json',
-      data: { wedding_atelier_signup_step: 'completed' },
+      data: payload,
       success: function (response) {
         modal.modal('toggle');
       },
