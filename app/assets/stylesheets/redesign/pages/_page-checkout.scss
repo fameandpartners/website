@@ -316,6 +316,11 @@
 
       .delivery-time-options-wrapper {
         line-height: 32px;
+
+        .price-wrapper {
+          width: initial;
+        }
+
       }
 
       .delivery-time-options-wrapper label {
@@ -334,6 +339,21 @@
       .delivery-options {
         width: 100%;
       }
+
+      .delivery-time-label-mobile {
+
+        .price-wrapper {
+          float: none;
+        }
+
+        .delivered-in-wrapper {
+          margin: 10px 0 20px 3px;
+          font-size: 1.4rem;
+          font-style: italic;
+        }
+
+      }
+
     }
 
   }

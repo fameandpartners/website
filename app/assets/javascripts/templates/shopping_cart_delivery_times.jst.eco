@@ -34,10 +34,16 @@
                   class="js-remove-making-option"
                   name="delivery_time_<%=i%>"
                 >
-                <label for="delivery_time_normal_<%= i %>">
-                  Deliver Standard: Delivered in <%= product.delivery_period %>
-                </label>
-                <div class="price-wrapper">FREE</div>
+                  <label for="delivery_time_normal_<%= i %>">
+                    <div class="delivery-time-label-desktop visible-lg visible-md">
+                      Deliver Standard: Delivered in <%= product.delivery_period %>
+                      <div class="price-wrapper">FREE</div>
+                    </div>
+                    <div class="delivery-time-label-mobile visible-sm visible-xs">
+                      Deliver Standard: <span class="price-wrapper">FREE</span>
+                      <div class="delivered-in-wrapper">- Delivered in <%= product.delivery_period %></div>
+                    </div>
+                  </label>
               </div>
             </div>
 
@@ -51,10 +57,16 @@
                     name="delivery_time_<%=i%>"
                     value="<%=mo.id%>"
                   >
-                  <label for="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%=i%>">
-                    <%= mo.name %>: <%= mo.description %>
-                  </label>
-                  <div class="price-wrapper"><%= mo.display_discount %></div>
+                    <label for="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%=i%>">
+                      <div class="delivery-time-label-desktop visible-lg visible-md">
+                        <%= mo.name %>: <%= mo.description %>
+                        <div class="price-wrapper"><%= mo.display_discount %></div>
+                      </div>
+                      <div class="delivery-time-label-mobile visible-sm visible-xs">
+                        <%= mo.name %>: <span class="price-wrapper"><%= mo.display_discount %></span>
+                        <div class="delivered-in-wrapper">- <%= mo.description %></div>
+                      </div>
+                    </label>
                 </div>
               </div>
             <% end %>
