@@ -16,12 +16,13 @@ var SizeFields = React.createClass({
       }
     }
 
-    this.props.saveValues(data)
-    if (false) {
-      this.props.nextStep();
-    } else {
+    this.props.saveValues(data);
+
+    if (this.props.newEvent) {
       this.props.saveValues({ wedding_atelier_signup_step: 'completed' });
       this.props.submitEvent();
+    } else {
+      this.props.nextStep();
     }
   },
 

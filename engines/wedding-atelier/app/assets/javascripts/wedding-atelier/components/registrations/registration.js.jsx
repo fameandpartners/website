@@ -6,7 +6,8 @@ var Registration = React.createClass({
     signinPath: React.PropTypes.string.isRequired,
     siteVersion: React.PropTypes.string,
     heightDefinitions: React.PropTypes.array,
-    dressSizes: React.PropTypes.array
+    dressSizes: React.PropTypes.array,
+    newEvent: React.PropTypes.bool
   },
 
   componentDidMount: function() {
@@ -85,7 +86,8 @@ var Registration = React.createClass({
                            saveValues={this.saveValues}
                            heights={this.props.heightDefinitions}
                            sizes={this.props.dressSizes}
-                           siteVersion={this.props.siteVersion} />
+                           siteVersion={this.props.siteVersion}
+                           newEvent={this.props.newEvent} />
       case 3:
         return <UserFields fieldValues={this.props.fieldValues}
                            previousStep={this.previousStep}
