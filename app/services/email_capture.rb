@@ -30,28 +30,10 @@ class EmailCapture
   end
 
   def capture
-    if service == :mailchimp
-
-      get_email = email_changed? ? previous_email : email
-
-      merge_variables = set_merge
-
-      begin
-        if email_changed?
-          #Making an assumption here: The only place where the email changes is on "Account Settings"
-          update_list(get_email, email, retrieve_first_name, retrieve_last_name)
-        elsif !unsubscribed?(email)
-          subscribe_list(email, merge_variables)
-        end
-      rescue Mailchimp::ValidationError => e
-        NewRelic::Agent.notice_error("Mailchimp: #{e} for #{email}")
-      end
-    elsif service == :bronto
-      begin
-        result = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
-      rescue Savon::SOAP::Fault => e
-        NewRelic::Agent.notice_error("Bronto error: #{e} for #{email}")
-      end
+    begin
+      result = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
+    rescue Savon::SOAP::Fault => e
+      NewRelic::Agent.notice_error("Bronto error: #{e} for #{email}")
     end
   end
 
