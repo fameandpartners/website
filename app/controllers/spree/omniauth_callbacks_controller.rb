@@ -1,5 +1,5 @@
 # coding: utf-8
-
+class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
@@ -46,6 +46,7 @@
     session[:spree_user_return_to] = "/moodboards"
     session[:nonlogin_go_to_mb_page] = nil
   end
+  
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -120,7 +121,7 @@
                      landing_page: session[:landing_page],
                      utm_params: session[:utm_params],
                      site_version: current_site_version.name,
-                     form_name: 'FACEBOOK').capture )
+                     form_name: 'FACEBOOK').capture
     
     if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
       tracker = Marketing::CustomerIOEventTracker.new
