@@ -1,0 +1,13 @@
+<form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form">
+  <div class="form-row">
+
+    <div id="card-element">
+      <!-- a Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display Element errors -->
+    <div id="card-errors" role="alert" class="errorExplanation"></div>
+  </div>
+
+  <button class="btn btn-black btn-block btn-md">Place your order now</button>
+</form>
