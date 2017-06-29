@@ -48,6 +48,7 @@ var SizeFields = React.createClass({
           id = "dress-size-" + index,
           inputProps = {
             id: id,
+            name: "dessSize",
             type: "radio",
             ref: "profile_dress_size_id",
             value: size.id
