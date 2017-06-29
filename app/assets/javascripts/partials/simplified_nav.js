@@ -1,7 +1,9 @@
 (function ($) {
   'use strict';
   var $simplifiedNavContainer = $('.js-simplified-nav-container');
-
+  function isGAAvailable() {
+    return typeof window === 'object' && !!window.ga;
+  }
   function addHighlightingToMenuIndex(menuIndex){
     $('.nav-main-menu span:eq(' + menuIndex + ')').addClass('active');
   }
@@ -25,12 +27,17 @@
   //Mega menu trigger
   $simplifiedNavContainer.find('.js-open-nav-menu').on('mouseover', function() {
     var menuText = $(this).text().trim().toUpperCase();
-    window.ga('send', 'event', { 
-      eventCategory: 'Top Nav', 
-      eventAction: 'Main Nav Press', 
-      eventLabel: menuText, 
-      nonInteraction: false 
-    });
+    if(isGAAvailable()) {
+      window.ga('send', 'event', { 
+        eventCategory: 'Top Nav', 
+        eventAction: 'Main Nav Press', 
+        eventLabel: menuText, 
+        nonInteraction: false 
+      });
+    }
+    else {
+      console.log("Google analytics not found")
+    }
     openMenu($(this).index());
   });
   $simplifiedNavContainer.find('.js-close-nav-menu').on('mouseover', function() {

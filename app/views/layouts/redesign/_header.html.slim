@@ -8,7 +8,6 @@ ruby:
       updateShoppingBagCounter();
     })();
   "
-
   init_style_quiz = ""
   if Features.active?(:style_quiz)
     init_style_quiz = "
@@ -66,7 +65,7 @@ ruby:
           .masthead.pull-left.visible-xs.visible-sm
             nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
               .navbar-header
-                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button" onclick="window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Menu Open', eventLabel: null, nonInteraction: false })"
+                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button" onclick="typeof window === 'object' && !!window.ga ?  window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Menu Open', eventLabel: null, nonInteraction: false }) : console.log('Google analytics not found')"
                   = image_tag('Hamburger.svg', height: '25px')
 
           .mobile-logo-area.visible-xs.visible-sm
@@ -87,3 +86,12 @@ ruby:
 
   #sideMenu
     = render 'layouts/redesign/header/simplified_side_nav'
+javascript:
+  function sendToGA(eventObject) {
+      if(typeof window === 'object' && !!window.ga) {
+        window.ga('send', 'event', eventObject)
+      }  
+      else {
+        console.log('Google analytics not found')
+      }
+  }
