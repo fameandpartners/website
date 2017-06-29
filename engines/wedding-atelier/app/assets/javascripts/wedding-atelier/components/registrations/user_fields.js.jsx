@@ -45,7 +45,7 @@ var UserFields = React.createClass({
             </label>
           </div>
       </div>
-      <input className="btn btn-black full-width" name="commit" defaultValue="next" onClick={this.nextStep} />
+      <input className="btn btn-black full-width" name="commit" defaultValue="next" onClick={this.nextStep} type="button" />
 
       </div>
     );

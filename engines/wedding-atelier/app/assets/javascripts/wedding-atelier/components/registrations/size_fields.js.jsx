@@ -93,7 +93,7 @@ var SizeFields = React.createClass({
 
           </div>
         </div>
-        <input className="btn btn-black full-width" defaultValue="next" onClick={this.nextStep} />
+        <input className="btn btn-black full-width" defaultValue="next" onClick={this.nextStep} type="button" />
       </div>
     );
   }
