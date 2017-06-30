@@ -55,6 +55,12 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute('value', token.id);
   form.appendChild(hiddenInput);
 
+  var hiddenInput_AuthToken = document.createElement('input');
+  hiddenInput_AuthToken.setAttribute('type', 'hidden');
+  hiddenInput_AuthToken.setAttribute('name', 'authenticity_token');
+  hiddenInput_AuthToken.setAttribute('value', $('meta[name="csrf-token"]').attr('content'));
+  form.appendChild(hiddenInput_AuthToken);
+
   // Submit the form
   form.submit();
 }
