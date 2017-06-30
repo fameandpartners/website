@@ -116,6 +116,9 @@ FameAndPartners::Application.routes.draw do
     # Fame Society Invitation
     get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
+    # "Invite a friend" landing page
+    get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -496,6 +499,8 @@ FameAndPartners::Application.routes.draw do
     # Storefront (Search, Checkout and Payments)
     ############################################
     get 'search' => 'products/base#search'
+
+    post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
 
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]
