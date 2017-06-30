@@ -110,6 +110,13 @@ GIT
       okcomputer
       skylight
 
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: bf8638a06fb5885f3af8759c7a0bdea67400608b
+  specs:
+    stripe (3.0.0)
+      faraday (~> 0.9)
+
 PATH
   remote: engines
   specs:
@@ -996,6 +1003,7 @@ DEPENDENCIES
   spree_masterpass!
   spree_paypal_express!
   spree_social!
+  stripe!
   term-ansicolor
   test-unit
   timecop

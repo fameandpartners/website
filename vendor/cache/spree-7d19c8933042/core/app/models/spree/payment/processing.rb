@@ -140,7 +140,7 @@ module Spree
     def gateway_action(source, action, success_state)
       protect_from_connection_error do
         check_environment
-
+binding.pry
         response = payment_method.send(action, (amount * 100).round,
                                        source,
                                        gateway_options)

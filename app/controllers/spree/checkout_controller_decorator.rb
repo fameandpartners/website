@@ -16,6 +16,7 @@ Spree::CheckoutController.class_eval do
   layout 'redesign/checkout'
 
   def edit
+    binding.pry
     @optimizely_opt_in = true
     prepare_order
     find_payment_methods
@@ -31,10 +32,6 @@ Spree::CheckoutController.class_eval do
 
     current_order.updater.update_totals
 
-    # li_presenters = @order.line_items.map {|li| Orders::LineItemPresenter.new(li)}
-    # @order.line_item_presenters = li_presenters
-
-
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
       format.html { render 'edit' }
@@ -43,6 +40,7 @@ Spree::CheckoutController.class_eval do
 
   # update - address/payment
   def update
+    binding.pry
     set_order_site_version
     find_payment_methods
 
@@ -226,6 +224,7 @@ Spree::CheckoutController.class_eval do
   end
 
   def before_masterpass
+    binding.pry
     if params[:state] != nil && params[:state] != 'masterpass' && @order.state.to_s == 'masterpass'
       @order.state = params[:state]
     end
@@ -309,6 +308,7 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
+    binding.pry
     @credit_card_gateway = Payments::CreditCardLocalizer.new(@order, current_site_version.currency).gateway
 
     @pay_pal_method = Payments::PaypalLocalizer.new(@order, current_site_version.currency).gateway
