@@ -18,6 +18,19 @@ var EventFields = React.createClass({
     this.props.nextStep()
   },
 
+  componentDidMount: function() {
+
+    $(this.refs.event_number_of_assistants).incrementButton();
+
+    $(this.refs.event_date)
+    .datepicker({
+      format: "mm/dd/yyyy",
+      autoclose: true,
+      showOnFocus: true,
+      startDate: moment().format('M/D/YYYY')
+    });
+  },
+
   render: function() {
     return (
       <div className="registrations__details-form signup left-side-centered-container">
@@ -53,7 +66,7 @@ var EventFields = React.createClass({
           <div className="form-group">
             <label>How Many Bridesmaids?</label>
             <div className="number-field">
-              <input className="form-control number-field js-number-field" min="0" ref="event_number_of_assistants" type="number" />
+              <input className="form-control number-field" min="0" ref="event_number_of_assistants" type="number" />
             </div>
           </div>
 
