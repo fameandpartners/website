@@ -11,7 +11,8 @@ module Bronto
         contact
       end
 
-      request(:add_contacts, contacts: Array.wrap(contacts))
+      response = request(:add_contacts, contacts: Array.wrap(contacts))
+      response[:add_contacts_response][:return][:results][:id]      
     end
 
     # @param lists Array or Hash
@@ -25,12 +26,8 @@ module Bronto
       request(:add_lists, list_options)
     end
 
-    def add_to_list(list_name:, emails:)
-      conditions = Array.wrap(emails).map do |email|
-        { email: email }
-      end
-      body = { list: { name: list_name }, contacts: conditions }
-
+    def add_to_list(list_name:, user_id:)
+      body = { list: { name: list_name }, contacts: {id: user_id} }
       request(:add_to_list, body)
     end
 
