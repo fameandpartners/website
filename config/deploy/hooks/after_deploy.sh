@@ -7,5 +7,5 @@
 cd ${current_app_path} ; bundle exec rake cache:clear
 
 # Zero Downtime Deploy
-zdd_unicorn
+restart_unicorn
 wheneverize_worker
