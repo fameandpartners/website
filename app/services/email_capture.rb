@@ -30,12 +30,9 @@ class EmailCapture
   end
 
   def capture
-    puts "*************** Capturing Email ****************"
     begin
       resultpe = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
     rescue Savon::SOAP::Fault => e
-      puts "************* Bronto error **************"
-      puts e
       NewRelic::Agent.notice_error("Bronto error: #{e} for #{email}")
     end
   end
@@ -52,7 +49,7 @@ class EmailCapture
         site_add_source:  site_version,
         landing_page:     landing_page,
         utm_term:         utm_params,
-        form_name:        form_name,
+        site_add_source:  form_name,
         newsletter:       newsletter
       }
     }

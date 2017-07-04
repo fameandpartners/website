@@ -7,7 +7,6 @@ module Bronto
     def add_contacts(contacts)
       contacts = Array.wrap(contacts).map do |contact|
         contact[:fields] = prepare_fields(contact[:fields])
-
         contact
       end
 

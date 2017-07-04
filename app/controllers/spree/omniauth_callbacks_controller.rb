@@ -121,7 +121,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                      landing_page: session[:landing_page],
                      utm_params: session[:utm_params],
                      site_version: current_site_version.name,
-                     form_name: 'FACEBOOK').capture
+                     form_name: 'create_account').capture
     
     if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
       tracker = Marketing::CustomerIOEventTracker.new
