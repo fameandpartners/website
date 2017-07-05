@@ -1,4 +1,6 @@
 <form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form" class="StripeForm">
+  <input id="StripePaymentMethodID" type="hidden" value="<%= @credit_card_gateway.id %>" />
+
   <div id="card-element-container" class="form-row StripeForm__input-wrapper">
 
     <div id="card-element">
