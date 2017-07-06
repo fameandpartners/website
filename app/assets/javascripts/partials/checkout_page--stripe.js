@@ -48,19 +48,55 @@ form.addEventListener('submit', function(event) {
 
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('payment-form');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput);
+//   var form = document.getElementById('payment-form');
+//   var hiddenInput = document.createElement('input');
+//   var cardInfo = {
+//                     "1": {
+//                           "gateway_payment_profile_id": token.id,
+//                           "cc_type": token.card.brand
+//                        }
+//                  };
+//   hiddenInput.setAttribute('type', 'hidden');
+//   hiddenInput.setAttribute('name', 'payment_source');
+//   hiddenInput.setAttribute('value', JSON.stringify(cardInfo));
+//   form.appendChild(hiddenInput);
 
-  var hiddenInput_AuthToken = document.createElement('input');
-  hiddenInput_AuthToken.setAttribute('type', 'hidden');
-  hiddenInput_AuthToken.setAttribute('name', 'authenticity_token');
-  hiddenInput_AuthToken.setAttribute('value', $('meta[name="csrf-token"]').attr('content'));
-  form.appendChild(hiddenInput_AuthToken);
+//   var hiddenOrder = document.createElement('input');
+//   var orderInfo = {
+//                     payment_attributes: [ {payment_method_id: 1} ]
+//                   };
+//   hiddenOrder.setAttribute('type', 'hidden');
+//   hiddenOrder.setAttribute('name', 'order');
+//   hiddenOrder.setAttribute('value', orderInfo);
+//   form.appendChild(hiddenOrder);
 
-  // Submit the form
-  form.submit();
+//   var hiddenInput_AuthToken = document.createElement('input');
+//   hiddenInput_AuthToken.setAttribute('type', 'hidden');
+//   hiddenInput_AuthToken.setAttribute('name', 'authenticity_token');
+//   hiddenInput_AuthToken.setAttribute('value', $('meta[name="csrf-token"]').attr('content'));
+//   form.appendChild(hiddenInput_AuthToken);
+// debugger;
+//   // Submit the form
+//   form.submit();
+
+  var params = {};
+  params["authenticity_token"] = $('meta[name="csrf-token"]').attr('content');
+  params["payment_source"] = {"20":
+                                    {
+                                      "cc_type": token.card.brand.toLowerCase(),
+                                      "gateway_payment_profile_id": token.id
+                                    }
+                             };
+  params["_method"] = "put";
+  params["state"] = "payment";
+  params["order"] = {"payments_attributes": [{"payment_method_id": "20"}] };
+
+
+  $.ajax({
+    type: 'POST',
+    url: form.action,
+    data: JSON.stringify(params),
+    dataType: 'script',
+    contentType: 'application/json'
+  });
 }

@@ -4,7 +4,7 @@ module Spree
       before_filter :load_order, :only => :update
       before_filter :associate_user, :only => :update
 
-      # Spree::Core::ControllerHelpers::Auth overrides 
+      # Spree::Core::ControllerHelpers::Auth overrides
       # Spree::Api::BaseController's unauthorized method...
       # Which is not a good thing.
       # Here's a small hack to shuffle around the method.
@@ -40,6 +40,7 @@ module Spree
       private
 
         def object_params
+          binding.pry
           # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
           # respond_to check is necessary due to issue described in #2910
           if @order.has_checkout_step?("payment") && @order.payment?
@@ -64,6 +65,7 @@ module Spree
         end
 
         def load_order
+          binding.pry
           @order = Spree::Order.find_by_number!(params[:id])
           raise_insufficient_quantity and return if @order.insufficient_stock_lines.present?
           @order.state = params[:state] if params[:state]

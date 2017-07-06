@@ -7,7 +7,7 @@ module Spree
 
       payment = @order.payments.where(:state => "pending",
                                       :payment_method_id => payment_method).first
-
+binding.pry
       if payment
         payment.source = skrill_transaction
         payment.save

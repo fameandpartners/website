@@ -2,6 +2,7 @@ module Spree
   class Payment < ActiveRecord::Base
     module Processing
       def process!
+        binding.pry
         if payment_method && payment_method.source_required?
           if source
             if !processing?
@@ -140,7 +141,7 @@ module Spree
     def gateway_action(source, action, success_state)
       protect_from_connection_error do
         check_environment
-binding.pry
+
         response = payment_method.send(action, (amount * 100).round,
                                        source,
                                        gateway_options)

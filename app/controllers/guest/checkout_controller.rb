@@ -15,7 +15,6 @@ module Guest
     layout 'guest'
 
     def edit
-      binding.pry
       respond_with(@order) do |format|
         format.js { render 'guest/checkout/update/success' }
         format.html{ @order.complete? ? render('complete') : render }
@@ -23,7 +22,6 @@ module Guest
     end
 
     def update
-      binding.pry
       move_order_from_cart_state(@order)
 
       if @order.update_attributes(object_params)

@@ -25,6 +25,17 @@ class Spree::Gateway::Thanhpay < Spree::Gateway
 
   def purchase(money, creditcard, gateway_options)
     binding.pry
+
+    Stripe.api_key = self.preferred_api_key
+
+    charge = Stripe::Charge.create(
+      :amount => money,
+      :currency => preferred_currency.downcase,
+      :description => gateway_options[:description],
+      :source => creditcard[:gateway_payment_profile_id]
+
+      )
+
     ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
     # if token = creditcard.gateway_payment_profile_id
     #   # The Balanced ActiveMerchant gateway supports passing the token directly as the creditcard parameter
