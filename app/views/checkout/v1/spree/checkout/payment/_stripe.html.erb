@@ -1,13 +1,20 @@
-<form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form">
-  <div class="form-row">
+<form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form" class="StripeForm">
+  <input id="StripePaymentMethodID" type="hidden" value="<%= @credit_card_gateway.id %>" />
+
+  <div id="card-element-container" class="form-row StripeForm__input-wrapper">
 
     <div id="card-element">
       <!-- a Stripe Element will be inserted here. -->
     </div>
 
-    <!-- Used to display Element errors -->
-    <div id="card-errors" role="alert" class="errorExplanation"></div>
   </div>
 
-  <button class="btn btn-black btn-block btn-md">Place your order now</button>
+  <div class="form-row StripeForm__error-wrapper">
+
+    <!-- Used to display Element errors -->
+    <div id="card-errors" role="alert" class="errorExplanation"></div>
+
+  </div>
+
+  <button class="btn btn-black btn-block btn-md StripeForm__checkout-button">Place your order now</button>
 </form>
