@@ -33,6 +33,8 @@ class EmailCapture
     begin
       resultpe = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
     rescue Savon::SOAP::Fault => e
+      puts "********** Error *************"
+      puts e
       NewRelic::Agent.notice_error("Bronto error: #{e} for #{email}")
     end
   end
