@@ -1,6 +1,9 @@
 - content_for :head do
   = javascript_include_tag 'https://js.stripe.com/v3/'
 
+javascript:
+  var stripe = Stripe('#{get_stripe_key()}');
+
 - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
   - content_for :head do
     - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?

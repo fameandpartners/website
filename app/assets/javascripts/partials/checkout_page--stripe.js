@@ -1,4 +1,3 @@
-var stripe = Stripe('pk_test_W2TXpgZbnoebFKeDzNW74xhB');
 var elements = stripe.elements();
 
 var stripeInputWrapper = document.getElementById('card-element-container');
