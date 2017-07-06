@@ -204,7 +204,6 @@ Spree::CheckoutController.class_eval do
   private
 
   def object_params
-    binding.pry
     # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
     if (@order.has_checkout_step?("payment") && @order.payment?) || (params[:state] == "masterpass" && @order.has_checkout_step?("address"))
       if params[:payment_source].present? && source_params = params.delete(:payment_source)[params[:order][:payments_attributes].first[:payment_method_id].underscore]

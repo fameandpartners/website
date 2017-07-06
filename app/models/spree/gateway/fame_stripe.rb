@@ -1,4 +1,4 @@
-class Spree::Gateway::Thanhpay < Spree::Gateway
+class Spree::Gateway::FameStripe < Spree::Gateway
   require 'stripe'
 
   preference :api_key, :string, :description => 'Secret API Key'
@@ -12,20 +12,14 @@ class Spree::Gateway::Thanhpay < Spree::Gateway
   DEFAULT_CURRENCY = 'USD'.freeze
 
   def provider_class
-    Spree::Gateway::Thanhpay
+    Spree::Gateway::FameStripe
   end
 
   def payment_source_class
     Spree::CreditCard
   end
 
-  # def method_type
-  #   'stripe'
-  # end
-
   def purchase(money, creditcard, gateway_options)
-    binding.pry
-
     Stripe.api_key = self.preferred_api_key
 
     charge = Stripe::Charge.create(
@@ -37,12 +31,6 @@ class Spree::Gateway::Thanhpay < Spree::Gateway
       )
 
     ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
-    # if token = creditcard.gateway_payment_profile_id
-    #   # The Balanced ActiveMerchant gateway supports passing the token directly as the creditcard parameter
-    #   creditcard = token
-    # end
-
-    # provider.purchase(money, creditcard, gateway_options)
   end
 
   def currency
@@ -52,13 +40,4 @@ class Spree::Gateway::Thanhpay < Spree::Gateway
   def auto_capture?
     true
   end
-
-  # def void(response_code, gateway_options)
-  #   provider.refund(nil, response_code)
-  # end
-
-  # no refund for you!
-  # def refund(amount, payment_code, gateway_options = {})
-  # end
-
 end
