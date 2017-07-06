@@ -41,6 +41,7 @@ var Registration = React.createClass({
 
   submitRegistration: function() {
     var payload = { spree_user: $.extend({}, this.state.fieldValues) };
+    var that = this;
 
     $.ajax({
       url: this.props.signupPath,
@@ -51,13 +52,14 @@ var Registration = React.createClass({
         window.location = "/wedding-atelier/events/" + response.event.id + "/dresses/new";
       },
       error: function (data) {
-        console.log('error');
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     });
   },
 
   submitEvent: function() {
     var payload = { spree_user: $.extend({}, this.state.fieldValues) };
+    var that = this;
 
     $.ajax({
       url:  this.props.userPath,
@@ -65,8 +67,10 @@ var Registration = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
-        debugger
         window.location = "/wedding-atelier/events/" + response.event.id
+      },
+      error: function (data) {
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     })
   },
@@ -99,6 +103,7 @@ var Registration = React.createClass({
   render: function() {
     return (
       <div className="modal">
+        <Notification ref="notifications"/>
         <div className="modal-dialog modal-sm">
           <div className="modal-content">
             <div className="modal-header registrations__header">
