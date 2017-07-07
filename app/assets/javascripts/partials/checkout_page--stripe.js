@@ -67,8 +67,7 @@ form.addEventListener('submit', function(event) {
   stripe.createToken(card).then(function(result) {
     if (result.error) {
       // Inform the user if there was an error
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
+      displayError(result.error.message)
     } else {
       // Send the token to your server
       stripeTokenHandler(result.token);
@@ -76,6 +75,24 @@ form.addEventListener('submit', function(event) {
   });
 });
 
+function displayError(message) {
+  var errorElement = document.getElementById('card-errors');
+  errorElement.textContent = message;
+
+  jsAddClass(stripeInputWrapper, stripeInputError);
+}
+
+// remove
+function fakeServerError() {
+  var fakeResponse = {
+    "error": "invalid_resource",
+    "code": "666",
+    "error_description": "One or more parameters were missing or invalid",
+    "message": "Name must contain at least two words (e.g. 'John Smith')"
+  };
+
+  displayError(fakeResponse.message);
+}
 
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
@@ -97,6 +114,16 @@ function stripeTokenHandler(token) {
     url: form.action,
     data: JSON.stringify(params),
     dataType: 'script',
-    contentType: 'application/json'
+    contentType: 'application/json',
+    error: function(xhr, textStatus, errorThrown) {
+
+      displayError(errorThrown);
+
+      // remove
+      console.log(xhr);
+      console.log(textStatus);
+      console.log(errorThrown);
+    }
   });
 }
+
