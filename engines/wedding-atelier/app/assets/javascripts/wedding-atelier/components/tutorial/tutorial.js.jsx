@@ -20,6 +20,7 @@ var Tutorial = React.createClass({
   finishTutorial: function() {
     var modal = $(ReactDOM.findDOMNode(this));
     var payload = { spree_user: { wedding_atelier_signup_step: 'completed' } };
+    var that = this;
     $.ajax({
       url: this.props.userPath,
       type: 'PUT',
@@ -29,7 +30,7 @@ var Tutorial = React.createClass({
         modal.modal('toggle');
       },
       error: function (data) {
-        console.log('error');
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     });
   },
@@ -65,6 +66,7 @@ var Tutorial = React.createClass({
   render: function() {
     return (
       <div className="modal vertically-centered">
+        <Notification ref="notifications"/>
         <div className="modal-dialog modal-sm">
           <div className="modal-content">
             <div className="modal-header registrations__header">
