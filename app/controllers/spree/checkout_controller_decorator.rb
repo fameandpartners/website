@@ -85,12 +85,16 @@ Spree::CheckoutController.class_eval do
       if @order.next
         state_callback(:after)
       else
+        binding.pry
         flash[:error] = t(:payment_processing_failed)
-        @order.state = 'masterpass' if params[:state] == 'masterpass'
-        respond_with(@order) do |format|
-          format.html{ redirect_to checkout_state_path(@order.state) }
-          format.js{ render 'spree/checkout/update/failed' }
-        end
+        render status: 402, json: {
+          :message => @order.errors.full_messages.first
+        }
+        # @order.state = 'masterpass' if params[:state] == 'masterpass'
+        # respond_with(@order) do |format|
+        #   format.html{ redirect_to checkout_state_path(@order.state) }
+        #   format.js{ render 'spree/checkout/update/failed' }
+        # end
         return
       end
 
@@ -103,11 +107,10 @@ Spree::CheckoutController.class_eval do
           @order.errors.delete(:state)
         end
       end
-
+binding.pry
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
-        flash[:commerce_tracking] = 'nothing special'
 
         session[:successfully_ordered] = true
 
@@ -131,6 +134,7 @@ Spree::CheckoutController.class_eval do
       end
 
     else
+      binding.pry
       @order.state = 'masterpass' if params[:state] == 'masterpass'
       respond_with(@order) do |format|
         format.html { render :edit }

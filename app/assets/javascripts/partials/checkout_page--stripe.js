@@ -116,7 +116,7 @@ function stripeTokenHandler(token) {
     dataType: 'script',
     contentType: 'application/json',
     error: function(xhr, textStatus, errorThrown) {
-
+debugger;
       displayError(errorThrown);
 
       // remove

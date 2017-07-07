@@ -20,17 +20,26 @@ class Spree::Gateway::FameStripe < Spree::Gateway
   end
 
   def purchase(money, creditcard, gateway_options)
-    Stripe.api_key = self.preferred_api_key
+    begin
+      Stripe.api_key = self.preferred_api_key
 
-    charge = Stripe::Charge.create(
-      :amount => money,
-      :currency => preferred_currency.downcase,
-      :description => gateway_options[:description],
-      :source => creditcard[:gateway_payment_profile_id]
-
+      charge = Stripe::Charge.create(
+        :amount => money,
+        :currency => preferred_currency.downcase,
+        :description => gateway_options[:description],
+        :source => creditcard[:gateway_payment_profile_id]
       )
 
-    ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
+      resp = ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
+      resp.authorization = charge.id
+      resp
+    rescue Stripe::CardError => e
+      ActiveMerchant::Billing::Response.new(false, e.json_body[:error][:message], {}, {})
+    rescue => e
+      NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
+      raise
+    end
   end
 
   def currency
