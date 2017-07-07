@@ -127,7 +127,6 @@ Spree::CheckoutController.class_eval do
       end
 
     else
-      binding.pry
       @order.state = 'masterpass' if params[:state] == 'masterpass'
       respond_with(@order) do |format|
         format.html { render :edit }
