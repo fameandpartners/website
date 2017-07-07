@@ -44,11 +44,11 @@ Spree::UserRegistrationsController.class_eval do
     end
 
     if resource.save
-      EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
-                                                    landing_page: session[:landing_page],
-                                                    utm_params:   session[:utm_params],
-                                                    site_version: current_site_version.name,
-                                                    form_name:    'Register')
+      EmailCaptureWorker.perform_async(resource.id, 'remote_ip'    => request.remote_ip,
+                                                    'landing_page' => session[:landing_page],
+                                                    'utm_params'   => session[:utm_params],
+                                                    'site_version' => current_site_version.name,
+                                                    'form_name'    => 'Register')
 
       session.delete(:sign_up_reason)
 

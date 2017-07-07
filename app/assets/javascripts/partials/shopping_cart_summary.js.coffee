@@ -7,7 +7,15 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @value_proposition = options.value_proposition
     @shipping_message = options.shipping_message
 
-    _.bindAll(@, 'render', 'removeProductHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'couponFormSubmitHandler')
+    _.bindAll(@,
+      'customizationPrice',
+      'makingOptionDescriptionTag',
+      'render',
+      'removeProductHandler',
+      'removeProductCustomizationHandler',
+      'removeProductMakingOptionHandler',
+      'couponFormSubmitHandler'
+    )
 
     @$container.on('click', '.remove-product', @removeProductHandler)
     @$container.on('click', '.customization-remove', @removeProductCustomizationHandler)
@@ -15,10 +23,35 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @cart.on('change', @render)
+    @render()
     @
 
+  customizationPrice: (displayPriceObj) ->
+    currencySymbol = displayPriceObj.money.currency.html_entity
+    displayTotal = parseInt(displayPriceObj.money.fractional, 10) / displayPriceObj.money.currency.subunit_to_unit
+    currencySymbol + displayTotal
+
+  makingOptionDescriptionTag: (makingOptions) ->
+    if (makingOptions[0].name.toLowerCase() == 'deliver later')
+      return '(' + makingOptions[0].display_discount + ')'
+    else if (makingOptions[0].name.toLowerCase() == 'deliver express')
+      return '(+' + makingOptions[0].display_discount + ')'
+
+  makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
+    if (makingOptions[0])
+      return makingOptions[0].delivery_period
+
+    deliveryPeriod
+
   render: () ->
-    @$container.html(@template(cart: @cart.data, value_proposition: @value_proposition, shipping_message: @shipping_message ))
+    @$container.html(@template(
+      cart: @cart.data,
+      customizationPrice: @customizationPrice,
+      makingOptionDescriptionTag: @makingOptionDescriptionTag,
+      makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
+      value_proposition: @value_proposition,
+      shipping_message: @shipping_message
+    ))
 
   removeProductHandler: (e) ->
     e.preventDefault()

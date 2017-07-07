@@ -3,7 +3,7 @@
 #
 # usage:
 #   LineItemProjectedDeliveryDatePolicy.new(item, order).delivery_date
-#
+# thanh - deprecating this junk
 require 'business_time'
 
 module Policies
@@ -11,18 +11,18 @@ module Policies
     DELIVERY_DAYS = 7
     FAST_DELIVERY_DAYS = 4
 
-    attr_reader :completed_at, :fast_making
+    attr_reader :order_completed_at, :fast_making
 
-    def initialize(completed_at, fast_making)
-      @completed_at = completed_at
+    def initialize(order_completed_at, fast_making)
+      @order_completed_at = order_completed_at
       @fast_making = fast_making
     end
 
     def delivery_date
       if fast_making
-        FAST_DELIVERY_DAYS.business_days.after(completed_at)
+        FAST_DELIVERY_DAYS.business_days.after(order_completed_at)
       else
-        DELIVERY_DAYS.business_days.after(completed_at)
+        DELIVERY_DAYS.business_days.after(order_completed_at)
       end
     end
   end

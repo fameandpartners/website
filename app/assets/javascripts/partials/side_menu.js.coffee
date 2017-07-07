@@ -41,46 +41,31 @@ window.SideMenu = class SideMenu
     $('#sideMenu').on 'mousewheel', (e) =>
       @blockScroll()
 
-    $("#new-this-week-open").on 'click', =>
+    $("#new-this-week-open, #new-this-week-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#new-this-week-menu").toggleClass("sub-menu-slide-left")
-    $("#new-this-week-menu .arrow").on 'click', =>
-      $("#new-this-week-menu").toggleClass("sub-menu-slide-left")
-      @slideMainMenu()
 
-    $("#dress-menu-open").on 'click', =>
-      @slideMainMenu()
-      $("#dresses-menu").toggleClass("sub-menu-slide-left")
-    $("#dresses-menu .arrow").on 'click', =>
+    $("#dress-menu-open, #dresses-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#dresses-menu").toggleClass("sub-menu-slide-left")
 
+    $("#culture-menu-open, #culture-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#culture-menu").toggleClass("sub-menu-slide-left")
 
-    $("#event-menu-open").on 'click', =>
+    $("#event-menu-open, #events-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#events-menu").toggleClass("sub-menu-slide-left")
-    $("#events-menu .arrow").on 'click', =>
-      @slideMainMenu()
-      $("#events-menu").toggleClass("sub-menu-slide-left")
 
-    $("#wedding-menu-open").on 'click', =>
-      @slideMainMenu()
-      $("#wedding-menu").toggleClass("sub-menu-slide-left")
-    $("#wedding-menu .arrow").on 'click', =>
+    $("#wedding-menu-open, #wedding-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#wedding-menu").toggleClass("sub-menu-slide-left")
 
-    $("#lookbook-menu-open").on 'click', =>
-      @slideMainMenu()
-      $("#lookbook-menu").toggleClass("sub-menu-slide-left")
-    $("#lookbook-menu .arrow").on 'click', =>
+    $("#lookbook-menu-open, #lookbook-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#lookbook-menu").toggleClass("sub-menu-slide-left")
 
-    $("#magazine-menu-open").on 'click', =>
-      @slideMainMenu()
-      $("#magazine-menu").toggleClass("sub-menu-slide-left")
-    $("#magazine-menu .arrow").on 'click', =>
+    $("#magazine-menu-open, #magazine-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#magazine-menu").toggleClass("sub-menu-slide-left")
 
@@ -96,8 +81,8 @@ window.SideMenu = class SideMenu
       $("#moodboards-menu").toggleClass("sub-menu-slide-left")
 
   slideMainMenu: =>
-    $("#inner-main-menu li[class*='normal-item']").toggleClass('inner-main-menu-slide-left')
-    $("#inner-main-menu li[class*='bottom-area']").toggleClass('inner-main-menu-slide-left')
+    $("#inner-main-menu li[class*='normal-item'], #inner-main-menu li[class*='bottom-area']").toggleClass('inner-main-menu-slide-left')
+    $("#sideMenu").toggleClass('inherit-height')
 
   blockScroll: =>
     sideMenuScrollTop = @$container.scrollTop()
@@ -111,6 +96,8 @@ window.SideMenu = class SideMenu
       lowestItemPosition = $("#events-menu .nav").height()
     else if $("#lookbook-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#lookbook-menu .nav").height()
+    else if $("#culture-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#lookbook-menu .nav").height()
     else if $("#magazine-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#magazine-menu .nav").height()
 
@@ -120,20 +107,12 @@ window.SideMenu = class SideMenu
   open: () =>
     @$container.css("margin-left", @$container.width())
     @$overlay.addClass('is-visible')
-    $("#new-this-week-menu").show()
-    $("#dresses-menu").show()
-    $("#events-menu").show()
-    $("#lookbook-menu").show()
-    $("#magazine-menu").show()
+    $("#new-this-week-menu, #dresses-menu, #culture-menu, #events-menu, #lookbook-menu, #magazine-menu").show()
 
   close: () =>
-    $("#new-this-week-menu").hide().removeClass("sub-menu-slide-left")
-    $("#dresses-menu").hide().removeClass("sub-menu-slide-left")
-    $("#events-menu").hide().removeClass("sub-menu-slide-left")
-    $("#lookbook-menu").hide().removeClass("sub-menu-slide-left")
-    $("#magazine-menu").hide().removeClass("sub-menu-slide-left")
-    $("#inner-main-menu li[class*='normal-item']").removeClass('inner-main-menu-slide-left')
-    $("#inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
+    $("#new-this-week-menu, #dresses-menu, #culture-menu, #events-menu, #lookbook-menu, #magazine-menu").hide().removeClass("sub-menu-slide-left")
+    $("#inner-main-menu li[class*='normal-item'], #inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
     @$container.css("margin-left", -@$container.width())
     @$overlay.removeClass('is-visible')
+
 

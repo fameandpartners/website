@@ -14,6 +14,8 @@ module FameAndPartners
     config.skylight.environments += ['staging']
     config.skylight.alert_log_file = true
 
+    # sidekiq needs lib in eager paths
+    config.eager_load_paths += %W( #{config.root}/lib/facebook )
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed
     if Rails.env.test?
@@ -95,7 +97,7 @@ module FameAndPartners
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
-    # config.active_record.schema_format = :sql
+    config.active_record.schema_format = :sql
 
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models

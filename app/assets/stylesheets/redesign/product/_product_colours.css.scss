@@ -205,6 +205,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-ballerina               { background-color: $product-color-ballerina; }
 .color-beige                   { background-color: $product-color-beige; }
 .color-berry                   { background-color: $product-color-berry; }
+.color-betsy-floral            { @include image-color-selector('BetsyFloral.png'); }
 .color-bird-of-paradise        { @include image-color-selector('BirdOfParadise.png'); }
 .color-black                   { background-color: $product-color-black; }
 .color-black-and-chartreuse    { @include split-color-selector($product-color-black, $product-color-chartreuse); }
@@ -254,6 +255,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-dark-mint               { background-color: $product-color-dark-mint; }
 .color-dark-nude               { background-color: $product-color-dark-nude; }
 .color-dark-purple             { background-color: $product-color-dark-purple; }
+.color-dark-romance-floral     { @include image-color-selector('DarkRomanceFloral.png'); }
 .color-dark-tan                { background-color: $product-color-dark-tan; }
 .color-dark-teal               { background-color: $product-color-dark-teal; }
 .color-deep-purple             { background-color: $product-color-deep-purple; }
@@ -272,6 +274,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-forest                  { background-color: $product-color-forest; }
 .color-forest-green            { background-color: #246b5b; } /* Deprecated? */
 .color-fuschia                 { background-color: $product-color-fuschia; }
+.color-garden-at-dusk-floral   { @include image-color-selector('GardenAtDuskFloral.png'); }
 .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
 .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
 .color-gold                    { background-color: $product-color-gold; }
@@ -303,12 +306,14 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-light-gold              { background-color: $product-color-light-gold; }
 .color-light-khaki             { background-color: $product-color-light-khaki; }
 .color-light-nude              { background-color: $product-color-light-nude; }
+.color-light-romance           { @include image-color-selector('LightRomance.png'); }
 .color-light-pink              { background-color: $product-color-light-pink; }
 .color-light-pink-and-charcoal { @include split-color-selector($product-color-light-pink, $product-color-charcoal); }
 .color-light-teal              { background-color: $product-color-light-teal; }
 .color-lilac                   { background-color: $product-color-lilac; }
 .color-lipstick-red            { background-color: $product-color-lipstick-red; }
 .color-looking-glass           { @include image-color-selector('LookingGlass.png'); }
+.color-love-in-bloom           { @include image-color-selector('LoveInBloom.png'); }
 .color-magenta                 { background-color: $product-color-magenta; }
 .color-marine-blue             { background-color: $product-color-marine-blue; }
 .color-mauve                   { background-color: $product-color-mauve; }
@@ -366,6 +371,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-pink-nouveau            { background-color: $product-color-pink-nouveau; }
 .color-pink-shimmer            { background-color: $product-color-pink-shimmer; }
 .color-pink-red                { @include split-color-selector($product_color-pink, $product_color-red); }
+.color-pinpoint-polka-dot     { @include image-color-selector('PinpointPolkaDot.png'); }
 .color-plum                    { background-color: $product-color-plum; }
 .color-print                   { @include image-color-selector('Cheetah.png'); background-size: 700%; }
 .color-polka-dot               { @include image-color-selector('Polka-dot.png'); }
@@ -396,11 +402,13 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-sunset-orange           { background-color: $product-color-sunset-orange; }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
 .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
+.color-sweet-romance-floral    { @include image-color-selector('SweetRomanceFloral.png'); }
 .color-tan                     { background-color: $product-color-tan; }
 .color-taupe                   { background-color: $product-color-taupe; }
 .color-teal                    { background-color: $product-color-teal; }
 .color-tribal-love             { @include image-color-selector('TribalLove.png'); }
 .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
+.color-true-romance-floral        { @include image-color-selector('TrueRomanceFloral.png'); }
 .color-turquoise               { background-color: $product-color-turquoise; }
 .color-vibrant-pink            { background-color: $product-color-vibrant-pink; }
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
@@ -412,11 +420,13 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-water-grey              { background-color: $product-color-water-grey; }
 .color-watermelon              { background-color: $product-color-watermelon; }
 .color-white-and-black-pinstripe { @include image-color-selector('WhiteAndBlackPinstripe.png'); }
+.color-white-and-black-spot    { @include image-color-selector('WhiteAndBlackSpot.png'); }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-white-and-red-stripe    { @include image-color-selector('WhiteAndRedStripe.png'); }
 .color-white-ivory             { background-color: white; border: 1px solid $product-color-white-ivory-border; }
 .color-wine                    { background-color: $product-color-wine; }
 .color-winter-grey             { background-color: $product-color-winter-grey; }
+.color-young-love-floral        { @include image-color-selector('YoungLoveFloral.png'); }
 
 .color-white,
 .color-optic-white {

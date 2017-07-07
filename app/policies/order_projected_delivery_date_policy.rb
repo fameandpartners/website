@@ -16,26 +16,25 @@ module Policies
       value = major_value_from_period(period)
       units = period_units(period)
 
+      retval = ''
+
       case units
       when 'weeks'
-        order.completed_at + value.weeks
+        retval = order.completed_at + value.weeks
       when 'days'
-        order.completed_at + value.days
+        retval = order.completed_at + value.days
       when 'business days'
-        value.business_days.after(order.completed_at)
+        retval = value.business_days.after(order.completed_at)
       end
+
+      retval.to_date
     end
 
     # returns period with 2 numbers and a unit
     # eq 3 - 4 weeks, 12 - 14 business days etc
+    # this should only be called for manual orders which can only contain 1 line item
     def delivery_period
-      if Features.active?(:cny_delivery_delays)
-        Policies::DeliveryPolicy::CNY_DELIVERY_PERIOD
-      elsif order.has_fast_making_items?
-        Policies::DeliveryPolicy::FAST_MAKING_DELIVERY_PERIOD
-      else
-        maximal_delivery_period
-      end
+      order.line_items.first.delivery_period
     end
 
     private

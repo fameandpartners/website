@@ -163,6 +163,8 @@ h1 .sub-heading {
 
 // This class is used when most of the copy has serif font and
 //  we need to add a custom sans-serif style to highlight part of it
+.title--small strong,
+.mobile-heading strong,
 .copy-highlight {
   font-family: $font-family-secondary;
   font-style: normal;
@@ -171,9 +173,33 @@ h1 .sub-heading {
   letter-spacing: 0.1rem;
 }
 
+.cta-button-secondary-text {
+  text-transform: none;
+}
+
+.title--small strong,
+.mobile-heading strong {
+  font-size: 1.4rem;
+  border-bottom: 1px solid $c-neutral-6;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .title--small strong {
+    line-height: 150%;
+    display: inline-block;
+    margin-top: 2em;
+  }
+
+}
+
 .cta-link + .copy-highlight,
 .btn-featured .copy-highlight {
   padding-left: 3px;
+}
+
+.copy-highlight.cta-button-secondary-text {
+  padding-left: 6px;
 }
 
 // This is aimed to be used in headings, like in the "About Us" page

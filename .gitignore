@@ -88,11 +88,11 @@ OpsCare.yml
 # Ignore JS bundle
 app/assets/javascripts/application_bundle.js
 
+* Ignore local assets
+/spree
+
 # Ignore all helper Procfile
 Procfile.*
 
 # Ignore all Emacs Temp Files
 *#*
-
-# Ignore locally created paperclip files
-spree
