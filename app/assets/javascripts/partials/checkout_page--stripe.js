@@ -84,18 +84,6 @@ function displayError(message) {
   jsAddClass(stripeInputWrapper, stripeInputError);
 }
 
-// remove
-function fakeServerError() {
-  var fakeResponse = {
-    "error": "invalid_resource",
-    "code": "666",
-    "error_description": "One or more parameters were missing or invalid",
-    "message": "Name must contain at least two words (e.g. 'John Smith')"
-  };
-
-  displayError(fakeResponse.message);
-}
-
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
   var params = {};
