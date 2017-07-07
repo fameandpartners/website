@@ -116,13 +116,8 @@ function stripeTokenHandler(token) {
     dataType: 'script',
     contentType: 'application/json',
     error: function(xhr, textStatus, errorThrown) {
-debugger;
-      displayError(errorThrown);
-
-      // remove
-      console.log(xhr);
-      console.log(textStatus);
-      console.log(errorThrown);
+      var errorMessage = JSON.parse(xhr.responseText).message;
+      displayError(errorMessage);
     }
   });
 }
