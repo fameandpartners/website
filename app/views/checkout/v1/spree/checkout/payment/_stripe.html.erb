@@ -1,9 +1,9 @@
-<form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form" class="StripeForm">
+<form action="<%= update_checkout_path(@order.state) %>" method="post" id="payment-form" class="js-payment-form StripeForm">
   <input id="StripePaymentMethodID" type="hidden" value="<%= @credit_card_gateway.id %>" />
 
-  <div id="card-element-container" class="form-row StripeForm__input-wrapper">
+  <div class="js-card-element-container form-row StripeForm__input-wrapper">
 
-    <div id="card-element">
+    <div class="js-card-element">
       <!-- a Stripe Element will be inserted here. -->
     </div>
 
@@ -12,7 +12,7 @@
   <div class="form-row StripeForm__error-wrapper">
 
     <!-- Used to display Element errors -->
-    <div id="card-errors" role="alert" class="errorExplanation"></div>
+    <div role="alert" class="js-card-errors errorExplanation"></div>
 
   </div>
 
