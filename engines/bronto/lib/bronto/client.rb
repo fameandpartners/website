@@ -12,7 +12,8 @@ module Bronto
 
       response = request(:add_contacts, contacts: Array.wrap(contacts))
       if( response[:add_contacts_response][:return][:results][:is_error] )
-        results = contacts_by_email( emails: contacts_as_hash[:email] )
+
+        results = contacts_by_email( emails: Array.wrap(contacts_as_hash).first[:email] )
         results[:id]
       else
         response[:add_contacts_response][:return][:results][:id]
