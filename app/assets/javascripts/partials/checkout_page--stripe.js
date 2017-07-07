@@ -1,79 +1,81 @@
-var elements = stripe.elements();
+if ("stripe" in window) {
+  var elements = stripe.elements();
 
-var stripeInputWrapper = document.getElementById('card-element-container');
+  var stripeInputWrapper = document.getElementById('card-element-container');
 
-// Stripe input container style classes
-var stripeInputError = 'StripeForm__input-wrapper--error';
-var stripeInputFocus = 'StripeForm__input-wrapper--focus';
-var stripeInputDirty = 'StripeForm__input-wrapper--dirty';
+  // Stripe input container style classes
+  var stripeInputError = 'StripeForm__input-wrapper--error';
+  var stripeInputFocus = 'StripeForm__input-wrapper--focus';
+  var stripeInputDirty = 'StripeForm__input-wrapper--dirty';
 
-// Custom styling can be passed to options when creating an Element.
-var style = {
-  base: {
-    // Add your base input styles here. For example:
-    fontSize: '16px',
-    lineHeight: '24px',
-    color: '#484848',
+  // Custom styling can be passed to options when creating an Element.
+  var style = {
+    base: {
+      // Add your base input styles here. For example:
+      fontSize: '16px',
+      lineHeight: '24px',
+      color: '#484848',
 
-    '::placeholder': {
-      color: '#a4a4a4'
+      '::placeholder': {
+        color: '#a4a4a4'
+      }
+    },
+    complete: {
+      color: '#444'
     }
-  },
-  complete: {
-    color: '#444'
-  }
-};
+  };
 
-// Create an instance of the card Element
-var card = elements.create('card', {style: style});
+  // Create an instance of the card Element
+  var card = elements.create('card', {style: style});
 
-// Add an instance of the card Element into the `card-element` <div>
-card.mount('#card-element');
+  // Add an instance of the card Element into the `card-element` <div>
+  card.mount('#card-element');
 
 
-card.addEventListener('change', function(event) {
-  var displayError = document.getElementById('card-errors');
+  card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
 
-  if (event.error) {
-    displayError.textContent = event.error.message;
-    jsAddClass(stripeInputWrapper, stripeInputError);
-  } else {
-    displayError.textContent = '';
-    jsRemoveClass(stripeInputWrapper, stripeInputError);
-  }
-
-  if (event.empty) {
-    jsRemoveClass(stripeInputWrapper, stripeInputDirty);
-  } else {
-    jsAddClass(stripeInputWrapper, stripeInputDirty);
-  }
-
-});
-
-card.addEventListener('focus', function(event) {
-  jsAddClass(stripeInputWrapper, stripeInputFocus);
-});
-
-card.addEventListener('blur', function(event) {
-  jsRemoveClass(stripeInputWrapper, stripeInputFocus);
-});
-
-
-// Create a token or display an error when the form is submitted.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error
-      displayError(result.error.message)
+    if (event.error) {
+      displayError.textContent = event.error.message;
+      jsAddClass(stripeInputWrapper, stripeInputError);
     } else {
-      // Send the token to your server
-      stripeTokenHandler(result.token);
+      displayError.textContent = '';
+      jsRemoveClass(stripeInputWrapper, stripeInputError);
     }
+
+    if (event.empty) {
+      jsRemoveClass(stripeInputWrapper, stripeInputDirty);
+    } else {
+      jsAddClass(stripeInputWrapper, stripeInputDirty);
+    }
+
   });
-});
+
+  card.addEventListener('focus', function(event) {
+    jsAddClass(stripeInputWrapper, stripeInputFocus);
+  });
+
+  card.addEventListener('blur', function(event) {
+    jsRemoveClass(stripeInputWrapper, stripeInputFocus);
+  });
+
+
+  // Create a token or display an error when the form is submitted.
+  var form = document.getElementById('payment-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+      if (result.error) {
+        // Inform the user if there was an error
+        displayError(result.error.message)
+      } else {
+        // Send the token to your server
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+}
 
 function displayError(message) {
   var errorElement = document.getElementById('card-errors');
