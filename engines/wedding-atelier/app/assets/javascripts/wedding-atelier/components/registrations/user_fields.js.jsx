@@ -25,18 +25,25 @@ var UserFields = React.createClass({
           One last thing.
         </h1>
         <div className="form">
+          <div className="form-group">
+            <label>First name</label>
+            <input className="form-control" id="spree_user_first_name" ref="user_first_name" type="text" required />
+          </div>
 
-          <label>First name</label>
-          <input className="form-control" id="spree_user_first_name" ref="user_first_name" />
+          <div className="form-group">
+            <label>Last name</label>
+            <input className="form-control" id="spree_user_last_name" ref="user_last_name" type="text" required />
+          </div>
 
-          <label>Last name</label>
-          <input className="form-control" id="spree_user_last_name" ref="user_last_name" />
+          <div className="form-group">
+            <label>Email Address</label>
+            <input className="form-control" id="spree_user_email" ref="user_email" type="email" required />
+          </div>
 
-          <label>Email Address</label>
-          <input className="form-control" id="spree_user_email" ref="user_email" type="email" />
-
-          <label>Password</label>
-          <input className="form-control" id="spree_user_password" ref="user_password" type="password" />
+          <div className="form-group">
+            <label>Password</label>
+            <input className="form-control" id="spree_user_password" ref="user_password" type="password" required />
+          </div>
 
           <div className="checkbox">
             <input ref="profile_trend_updates" type="checkbox" value="1" />

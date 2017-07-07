@@ -112,7 +112,7 @@ var Registration = React.createClass({
               }
             </div>
             <div className="modal-body">
-              <form action="/wedding-atelier/signup" className="new_spree_user">
+              <form data-toggle="validator"  action="/wedding-atelier/signup" className="new_spree_user">
                 {this.showStep()}
               </form>
             </div>

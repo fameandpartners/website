@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require customerio
 //= require jquery.qtip.min
+//= require libs/validator.min
 
 //--------------
 // Bootstrap JS
