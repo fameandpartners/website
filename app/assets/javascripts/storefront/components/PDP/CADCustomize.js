@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { assign, findIndex, uniqBy } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
-import { trackEvent } from '../../libs/gaTracking'
-import { openCustomizeMenuEvent, selectCustomizedOptionMenuEvent, closeCustomizeMenuEvent, applyCustomizeMenuEvent } from '../../libs/gaEventObjects'
+import { trackEvent } from '../../libs/gaTracking';
+import { openCustomizeMenuEvent, selectCustomizedOptionMenuEvent, closeCustomizeMenuEvent, applyCustomizeMenuEvent } from '../../libs/gaEventObjects';
 
 // Constants
 const { DRAWERS } = PDPConstants;
@@ -65,7 +65,7 @@ class CADCustomize extends Component {
     this.generateBaseLayers = this.generateBaseLayers.bind(this);
     this.generateAddonLayers = this.generateAddonLayers.bind(this);
     this.generateAddonOptions = this.generateAddonOptions.bind(this);
-    this.sendCustomizationsToAnalytics = this.sendCustomizationsToAnalytics.bind(this)
+    this.sendCustomizationsToAnalytics = this.sendCustomizationsToAnalytics.bind(this);
   }
 
   openMenu() {
@@ -75,20 +75,20 @@ class CADCustomize extends Component {
 
   sendCustomizationsToAnalytics() {
     const { toggleDrawer, addonOptions } = this.props;
-    addonOptions.map(function(c, i){
-        if(c.active) {
-          selectCustomizedOptionMenuEvent.value = (c.price.money.fractional / 100)
-          trackEvent(selectCustomizedOptionMenuEvent, true, i)
-        }
-        return false
+    addonOptions.map((c, i) => {
+      if (c.active) {
+        selectCustomizedOptionMenuEvent.value = (c.price.money.fractional / 100);
+        trackEvent(selectCustomizedOptionMenuEvent, true, i);
+      }
+      return false;
     });
     toggleDrawer(null);
-    trackEvent(applyCustomizeMenuEvent)
+    trackEvent(applyCustomizeMenuEvent);
   }
   closeMenu() {
     const { toggleDrawer } = this.props;
     toggleDrawer(null);
-    trackEvent(closeCustomizeMenuEvent)
+    trackEvent(closeCustomizeMenuEvent);
   }
 
   /**
@@ -119,7 +119,7 @@ class CADCustomize extends Component {
   generateAddonsSummary() {
     return (
       <div>
-        <a 
+        <a
           className="c-card-customize__content__left"
           onClick={() => trackEvent(openCustomizeMenuEvent)}
         >
@@ -247,10 +247,14 @@ class CADCustomize extends Component {
    */
   reduceMatchesBasedOnPriority(matches) {
     return matches.reduce((accum, curr) => {
-      if (accum.image.position <= curr.image.position) {
-        return accum;
-      }
-      return curr;
+      // accum is current highest priority winner, this is NOT based on position,
+      // but on specificity of bit_array (higher wins)
+      const accumSpecificity = accum.image.bit_array
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
+      const currSpecificity = curr.image.bit_array
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
+
+      return accumSpecificity >= currSpecificity ? accum : curr;
     }, matches[0]);
   }
 
