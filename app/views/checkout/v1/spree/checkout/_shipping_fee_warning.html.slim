@@ -16,3 +16,29 @@
         .checkbox.custom-form-element-thin.checkbox-black-bg.checkbox-inline.duty_fee_alert
             = check_box_tag :international_shipping_fee
             label for="international_shipping_fee" I understand that there may be a custom duty fee
+
+  .js-modal-duty-fee.modal-duty-fee.modal.modal-v2 role='dialog' tabindex="-1" aria-hidden="true"
+    .modal-dialog role='document'
+      .container-fluid
+        .row
+          .col-xs-12.col-sm-10.col-sm-offset-1.col-md-6.col-md-offset-3
+            .modal-content
+              a.close.btn-close type='button' data-dismiss='modal' aria-label="Close"
+              .modal-body
+                h3 Are taxes and duties included in my order total?
+
+                p If you are ordering outside of the U.S. and Australia, your order may be required to pay customs and import duties upon arrival of the goods into your country. Fame and Partners is not responsible for any taxes or duties the customs office may charge you, and payment is necessary to release your order from customs.
+
+                p Please check your local customs office for more information as customs policies and import duties vary from country to country.
+
+
+javascript:
+  $(function() {
+    'use strict';
+    var $modalDutyFeeSelector = $('.js-modal-duty-fee-trigger');
+
+    $modalDutyFeeSelector.click(function(){
+      $('.js-modal-duty-fee').modal('show');
+    });
+
+  });
