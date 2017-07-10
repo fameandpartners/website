@@ -78,7 +78,6 @@
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
 //= require partials/helpers/anchor_navigation
-//= require partials/helpers/no_jquery
 
 //-----------------------------------
 // Show old quiz in popup with iframe
@@ -116,7 +115,7 @@
 //= require partials/user_order_returner
 
 //= require partials/checkout_page
-//= require partials/checkout_page--stripe
+//= require partials/checkout_page__stripe
 //= require partials/extra_fees_alert
 
 // Profile/Account Settings

@@ -1,7 +1,7 @@
 if ("stripe" in window) {
   var elements = stripe.elements();
 
-  var stripeInputWrapper = document.getElementById('card-element-container');
+  var stripeInputWrapper = $('.js-card-element-container');
 
   // Stripe input container style classes
   var stripeInputError = 'StripeForm__input-wrapper--error';
@@ -29,40 +29,40 @@ if ("stripe" in window) {
   var card = elements.create('card', {style: style});
 
   // Add an instance of the card Element into the `card-element` <div>
-  card.mount('#card-element');
+  card.mount('.js-card-element');
 
 
   card.addEventListener('change', function(event) {
-    var displayError = document.getElementById('card-errors');
+    var displayError = $('.js-card-errors');
 
     if (event.error) {
-      displayError.textContent = event.error.message;
-      jsAddClass(stripeInputWrapper, stripeInputError);
+      displayError.text(event.error.message);
+      stripeInputWrapper.addClass(stripeInputError);
     } else {
-      displayError.textContent = '';
-      jsRemoveClass(stripeInputWrapper, stripeInputError);
+      displayError.text('');
+      stripeInputWrapper.removeClass(stripeInputError);
     }
 
     if (event.empty) {
-      jsRemoveClass(stripeInputWrapper, stripeInputDirty);
+      stripeInputWrapper.removeClass(stripeInputDirty);
     } else {
-      jsAddClass(stripeInputWrapper, stripeInputDirty);
+      stripeInputWrapper.addClass(stripeInputDirty);
     }
 
   });
 
   card.addEventListener('focus', function(event) {
-    jsAddClass(stripeInputWrapper, stripeInputFocus);
+    stripeInputWrapper.addClass(stripeInputFocus);
   });
 
   card.addEventListener('blur', function(event) {
-    jsRemoveClass(stripeInputWrapper, stripeInputFocus);
+    stripeInputWrapper.removeClass(stripeInputFocus);
   });
 
 
   // Create a token or display an error when the form is submitted.
-  var form = document.getElementById('payment-form');
-  form.addEventListener('submit', function(event) {
+  var form = $('.js-payment-form');
+  form.on('submit', function(event) {
     event.preventDefault();
 
     stripe.createToken(card).then(function(result) {
@@ -78,10 +78,10 @@ if ("stripe" in window) {
 }
 
 function displayError(message) {
-  var errorElement = document.getElementById('card-errors');
+  var errorElement = $('.js-card-errors');
   errorElement.textContent = message;
 
-  jsAddClass(stripeInputWrapper, stripeInputError);
+  stripeInputWrapper.addClass(stripeInputError);
 }
 
 function stripeTokenHandler(token) {
