@@ -82,6 +82,18 @@ Spree::CheckoutController.class_eval do
         return
       end
 
+      if @order.next && @credit_card_gateway.type == "Spree::Gateway::Pin"
+        state_callback(:after)
+      else
+        flash[:error] = t(:payment_processing_failed)
+        @order.state = 'masterpass' if params[:state] == 'masterpass'
+        respond_with(@order) do |format|
+          format.html{ redirect_to checkout_state_path(@order.state) }
+          format.js{ render 'spree/checkout/update/failed' }
+        end
+        return
+      end
+
       if @order.next
         state_callback(:after)
       else
