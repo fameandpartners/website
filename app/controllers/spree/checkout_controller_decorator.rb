@@ -50,7 +50,7 @@ Spree::CheckoutController.class_eval do
 
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
-      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
+      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params.merge( {form_name: 'checkout' }))
       registration.update
       subscribe(registration.user) if params[:subscribe].present?
       if registration.new_user_created?
