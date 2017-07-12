@@ -101,7 +101,7 @@ function stripeTokenHandler(token) {
 
   $.ajax({
     type: 'POST',
-    url: form.action,
+    url: $('.js-payment-form').attr('action'),
     data: JSON.stringify(params),
     dataType: 'script',
     contentType: 'application/json',
