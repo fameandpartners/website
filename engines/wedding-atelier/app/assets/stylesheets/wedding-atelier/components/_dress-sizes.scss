@@ -18,18 +18,12 @@
 
   ul {
     @extend .text-center;
+
+    border-spacing: 5px;
+    display: table;
     list-style: none;
     padding: 0;
-    width: 340px;
-    text-align: justify;
-
-    @include screen-xs {
-      width: 260px;
-    };
-
-    @include screen-lg {
-      width: 440px;
-    }
+    width: 100%;
 
     &.customization-dress-sizes-ul {
       width: auto;
@@ -38,28 +32,13 @@
   }
 
   .sizing-row {
-    text-align: justify;
-    li:first-child {
-      margin-left: 0;
-    }
-
-    li:last-child {
-      margin-right: 0;
-    }
+    display: table-row;
   }
 
   li {
     @extend .text-uppercase;
-    display: inline-block;
-    margin: 4px 14px;
 
-    @include screen-lg {
-      margin: 4px 27px;
-    };
-
-    @include screen-xs {
-      margin: 4px 3px;
-    };
+    display: table-cell;
 
     [type=radio], [type=checkbox] {
       position: absolute;
@@ -71,11 +50,7 @@
       cursor: pointer;
       display: block;
       font-weight: 400;
-      line-height: 1.5em;
-      width: 55px;
       padding: 9px 5px;
-      position: relative;
-      text-align: center;
       z-index: 2;
     }
 
