@@ -19,6 +19,7 @@ class ContentfulController < ApplicationController
       get_all_pids
       load_page
       set_collection_resource
+      binding.pry
       render 'layouts/contentful/main'
     else
       render_404
@@ -26,27 +27,7 @@ class ContentfulController < ApplicationController
   end
 
   def get_all_pids
-    @pids_array = []
-
-    if @landing_page_container[:header][:header_sm_items].present?
-      @pids_array.push(*@landing_page_container[:header][:header_sm_items])
-    end
-
-    if @landing_page_container[:header][:overlay_pids].present?
-      @pids_array.push(*@landing_page_container[:header][:overlay_pids])
-    end
-
-    @landing_page_container[:rows].each do |row|
-      if row[:sm_items].present?
-        @pids_array.push(*row[:sm_items])
-      end
-
-      if row[:lg_item].present?
-        @pids_array.push(*row[:lg_item][:overlay_pids])
-      end
-    end
-
-    @pids_array = @pids_array.uniq
+    @pids_array = @landing_page_container.to_json.scan(/\"([0-9]+[+\-a-z]+)/).flatten.uniq
   end
 
   def load_page
