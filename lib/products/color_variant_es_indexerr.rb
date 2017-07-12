@@ -1,5 +1,5 @@
 module Products
-  class ColorVariantESIndexer
+  class ColorVariantESIndexerr
     class Helpers
       include ApplicationHelper
       include PathBuildersHelper
@@ -13,10 +13,16 @@ module Products
       new.call
     end
 
+    def initialize
+      'crappa'
+    end
+
     def call
       build_variants
       push_to_index
     end
+
+    private
 
     def build_variants
       helpers = Helpers.new
@@ -127,13 +133,35 @@ module Products
 
     def push_to_index
       #delete existing index
+      binding.pry
       index_name = configatron.elasticsearch.indices.color_variants
       client = Elasticsearch::Client.new
       if client.indices.exists?(index: index_name)
         client.indices.delete index: index_name
       end
 
-      client.indices.create(index: index_name)
+      # Tire.index index_name do
+      #   create :mappings => {
+      #     :document => {
+      #       :properties => {
+      #         :product => {
+      #           :properties => {
+      #             :created_at => {
+      #               :format => "dateOptionalTime",
+      #               :type   => "date"
+      #             }
+      #           }
+      #         },
+      #         :prices => {
+      #           :properties => {
+      #             :aud => { :type => 'float'},
+      #             :usd => { :type => 'float'},
+      #           }
+      #         }
+      #       }
+      #     }
+      #   }
+      # end
       binding.pry
       # Create index w/ defined types for specific fields
       client.bulk body: variants
