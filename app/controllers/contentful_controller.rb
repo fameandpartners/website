@@ -19,7 +19,6 @@ class ContentfulController < ApplicationController
       get_all_pids
       load_page
       set_collection_resource
-      binding.pry
       render 'layouts/contentful/main'
     else
       render_404
