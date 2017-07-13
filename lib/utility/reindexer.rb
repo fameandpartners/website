@@ -8,6 +8,7 @@ module Utility
         delete
         import Spree::Product.all
       end
+
       Products::ColorVariantsIndexer.index!
     end
   end

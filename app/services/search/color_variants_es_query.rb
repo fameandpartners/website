@@ -1,9 +1,10 @@
 #   balls = Search::ColorVariantsESQuery.farkme
 #   client = Elasticsearch::Client.new
 #   client.search body: balls
-
-# balls = Search::ColorVariantsESQuery.build({:taxon_ids=>[383], :color_ids=>[], :exclude_taxon_ids=>[260, 278], :order=>"newest", :limit=>8, :offset=>0, :currency=>"usd", :show_outerwear=>nil})
-# response = client.search index: configatron.elasticsearch.indices.color_variants, body: balls
+#   response["hits"]["total"]
+# balls = Search::ColorVariantsESQuery.build({:taxon_ids =>[383],:body_shapes =>["apple", "petite"],:color_ids =>[],:exclude_taxon_ids =>[260,278],:fast_making => "",:order => "newest",:limit => 21,:offset => 0,:currency => "usd",:show_outerwear => nil})
+# client = Elasticsearch::Client.new
+# response = Elasticsearch::Client.new.search index: configatron.elasticsearch.indices.color_variants, body: balls
 module Search
   class ColorVariantsESQuery
     require 'elasticsearch/dsl'
@@ -52,7 +53,7 @@ module Search
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
 
       product_orderings = self.product_orderings(currency: currency)
-binding.pry
+
       product_ordering = product_orderings.fetch(order) do
         if query_string.present?
           # Do not apply ordering for searches, let ES order by term relevance.
@@ -80,27 +81,6 @@ binding.pry
               end
             end
 
-            # must do
-            #   term 'product.is_deleted' => false
-            #   term 'product.is_hidden' => false
-            #   # Outerwear filter
-            #   term 'product.is_outerwear' => show_outerwear
-            #   # Only available items
-            #   term 'product.in_stock' => true
-
-            #   if fast_making.present?
-            #     term 'product.fast_making' => fast_making
-            #   end
-            #   # We need to filter products by exact ids of taxon records
-            #   # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
-            #   binding.pry
-            #   if taxon_ids.present?
-            #     taxon_terms = taxon_ids.map do |tid|
-            #       { term: { 'product.taxon_ids' => tid } }
-            #     end
-            #   end
-            # end
-
             # exclude products found
             if exclude_products.present?
               must_not do
@@ -119,13 +99,21 @@ binding.pry
             end
 
             should do
-              range 'product.available_on' => { :lte => Time.now}
+              range 'product.available_on' => {lte: Time.now}
             end
 
             if body_shapes.present?
-              body_shapes.each do |bs|
-                should do
-                  range "product.#{bs}" => {:gte => 4}
+              if body_shapes.size.eql?(1)
+                must {range "product.#{body_shapes.first}" => {gte: 4}}
+              else
+                filter do
+                  bool do
+                    body_shapes.map do |bs|
+                      should do
+                        range "product.#{bs}" => {gte: 4}
+                      end
+                    end
+                  end
                 end
               end
             end
@@ -143,7 +131,15 @@ binding.pry
             end
 
             if price_mins.present? || price_maxs.present?
-              ColorVariantsESQuery.build_pricing_comparison(price_mins, price_maxs, currency)
+              filter do
+                bool do
+                  price_mins.zip(price_maxs).map do |min, max|
+                    should do
+                      range "sale_prices.#{currency}" => {gte: min, lte: max}
+                    end
+                  end
+                end
+              end
             end
           end
 
@@ -165,14 +161,12 @@ binding.pry
         end
       end
 
-binding.pry
-
       definition
     end
 
     def self.build_pricing_comparison(min_prices, max_prices, currency)
       Filter.new do
-        min.prices.zip(max_prices).map do |min, max|
+        min_prices.zip(max_prices).map do |min, max|
           should { Range.new "sale_prices.#{currency}" => {gte: min, lte: max} }
         end
       end
