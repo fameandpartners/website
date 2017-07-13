@@ -1,3 +1,4 @@
+# coding: utf-8
 class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
@@ -45,6 +46,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     session[:spree_user_return_to] = "/moodboards"
     session[:nonlogin_go_to_mb_page] = nil
   end
+  
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -110,14 +112,17 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user ||= (spree_current_user || authentication.try(:user))
 
-    # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
-    EmailCaptureWorker.perform_async(user.id, 'remote_ip'    => request.remote_ip,
-                                              'landing_page' => session[:landing_page],
-                                              'utm_params'   => session[:utm_params],
-                                              'site_version' => current_site_version.name,
-                                              'form_name'    => 'Facebook',
-                                              'service'      => ENV.fetch('SUBSCRIPTION_SERVICE'))
-
+    EmailCapture.new({},
+                     email: user.email,
+                     newsletter: user.newsletter,
+                     first_name: user.first_name,
+                     last_name: user.last_name,
+                     current_sign_in_ip: request.remote_ip,
+                     landing_page: session[:landing_page],
+                     utm_params: session[:utm_params],
+                     site_version: current_site_version.name,
+                     form_name: 'create_account').capture
+    
     if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
       tracker = Marketing::CustomerIOEventTracker.new
       tracker.identify_user(user, current_site_version)

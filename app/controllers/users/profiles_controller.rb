@@ -17,7 +17,7 @@ class Users::ProfilesController < Users::BaseController
                                    previous_email: old_email, first_name: @user.first_name,
                                    last_name: @user.last_name, current_sign_in_ip: request.remote_ip,
                                    landing_page: session[:landing_page], utm_params: session[:utm_params],
-                                   site_version: current_site_version.name, form_name: 'Account Settings').capture
+                                   site_version: current_site_version.name, form_name: 'account_update').capture
 
       respond_with(@user) do |format|
         format.html { redirect_to profile_path }
