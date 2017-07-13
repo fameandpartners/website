@@ -10,28 +10,6 @@ module Search
     require 'elasticsearch/dsl'
     include Elasticsearch::DSL
 
-    def self.farkme
-      definition = Elasticsearch::DSL::Search.search do
-        query do
-
-          bool do
-            must {term 'product.is_deleted' => false}
-            must {term 'product.is_hidden' => false}
-            # must do
-            #   term 'product.is_deleted' => false
-            #   term 'product.is_hidden' => false
-            # end
-          end
-
-        end
-      end
-
-      client = Elasticsearch::Client.new
-      response = client.search index: configatron.elasticsearch.indices.color_variants, body: definition
-
-      response
-    end
-
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 

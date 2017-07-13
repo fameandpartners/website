@@ -129,7 +129,7 @@ class Products::CollectionResource
   end
 
   def query
-    @query ||= Search::ColorVariantsQuery.build(query_options)
+    @query ||= Search::ColorVariantsESQuery.build(query_options)
   end
 
   def query_options
@@ -179,14 +179,20 @@ class Products::CollectionResource
   end
 
   def total_products
-    query.json["hits"]["total"]
-  rescue Tire::Search::SearchRequestFailed => nope
-    NewRelic::Agent.notice_error(nope, query: query.to_json)
+    results["hits"]["total"]
+  rescue Exception => e
+    NewRelic::Agent.notice_error(e)
     0
   end
 
+  def results
+    binding.pry
+    @results ||= Elasticsearch::Client.new.search(index: configatron.elasticsearch.indices.color_variants, body: query)
+  end
+
   def products
-    result = query.results.map do |color_variant|
+    binding.pry
+    result = results.map do |color_variant|
       discount = Repositories::Discount.get_product_discount(color_variant.product.id)
       color    = Repositories::ProductColors.read(color_variant.color.id)
       price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
@@ -211,8 +217,8 @@ class Products::CollectionResource
     end
 
     result
-  rescue Tire::Search::SearchRequestFailed => nope
-    NewRelic::Agent.notice_error(nope, query: query.to_json)
+  rescue Exception => e
+    NewRelic::Agent.notice_error(e)
     []
   end
 
