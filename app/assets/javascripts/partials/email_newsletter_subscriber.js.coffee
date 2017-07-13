@@ -5,6 +5,7 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
 
     @campaign = opts.campaign || 'home'
 
+    @source = opts.source
     @$form = $('#' + opts.form)
     @$form.on('submit', @submit)
 
@@ -25,7 +26,8 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
       data: {
         email: email,
         service: service,
-        form_name: form_name
+        form_name: form_name,
+        source: @source
       }
       success: @handler
       method: 'POST'

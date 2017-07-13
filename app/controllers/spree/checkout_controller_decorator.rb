@@ -50,7 +50,7 @@ Spree::CheckoutController.class_eval do
 
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
-      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
+      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params.merge( {form_name: 'checkout' }))
       registration.update
       subscribe(registration.user) if params[:subscribe].present?
       if registration.new_user_created?
@@ -360,11 +360,15 @@ Spree::CheckoutController.class_eval do
 
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
-    EmailCaptureWorker.perform_async(user.id, 'remote_ip'    => request.remote_ip,
-                                              'landing_page' => session[:landing_page],
-                                              'utm_params'   => session[:utm_params],
-                                              'site_version' => current_site_version.name,
-                                              'form_name'    => 'Checkout',
-                                              'service'      => ENV.fetch('SUBSCRIPTION_SERVICE'))
+    EmailCapture.new({},
+                     email: user.email,
+                     newsletter: user.newsletter,
+                     first_name: user.first_name,
+                     last_name: user.last_name,
+                     current_sign_in_ip: request.remote_ip,
+                     landing_page: session[:landing_page],
+                     utm_params: session[:utm_params],
+                     site_version: current_site_version.name,
+                     form_name: 'checkout').capture
   end
 end

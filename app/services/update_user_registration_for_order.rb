@@ -20,7 +20,12 @@ class Services::UpdateUserRegistrationForOrder
   end
 
   def update
-    create_user if create_user?
+    if user_exists? 
+      load_user
+    elsif create_user?
+      create_user
+    end
+    
     update_order
     @order
   end
@@ -39,8 +44,16 @@ class Services::UpdateUserRegistrationForOrder
 
   private
 
+  def load_user
+    @user = Spree::User.where(:email => order_params[:email]).first
+  end
+
+  def user_exists?
+    Spree::User.where(:email => order_params[:email]).exists?    
+  end
+  
   def create_user?
-    @user.blank? && @params[:create_account] && !Spree::User.where(:email => order_params[:email]).exists?
+    @user.blank? && @params[:create_account] && !user_exists?
   end
 
   def create_user

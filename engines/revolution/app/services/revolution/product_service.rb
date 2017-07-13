@@ -43,7 +43,8 @@ module Revolution
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
-        if p.present?
+
+        if p.present? && !p.hidden
           colour_name = colours[params[:offset].to_i + i]
 
           images = collection_images(p, colour_name)
