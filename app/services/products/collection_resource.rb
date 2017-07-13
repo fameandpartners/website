@@ -130,7 +130,6 @@ class Products::CollectionResource
 
   def query
     @query ||= Search::ColorVariantsQuery.build(query_options)
-    binding.pry
   end
 
   def query_options

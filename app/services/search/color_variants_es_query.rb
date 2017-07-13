@@ -25,7 +25,7 @@ module Search
 
         end
       end
-      binding.pry
+
       client = Elasticsearch::Client.new
       response = client.search index: configatron.elasticsearch.indices.color_variants, body: definition
 

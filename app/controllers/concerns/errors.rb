@@ -13,7 +13,6 @@ module Concerns
     end
 
     def non_matching_request
-      binding.pry
       path   = params.fetch(:path, '')
       format = params.fetch(:format, '')
 

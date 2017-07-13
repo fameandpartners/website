@@ -31,7 +31,6 @@ module Search
     end
 
     def self.build(options = {})
-    binding.pry
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
@@ -61,7 +60,7 @@ module Search
           product_orderings['newest']
         end
       end
-binding.pry
+
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
         filter :bool, :must => { :term => { 'product.is_deleted' => false } } #
@@ -119,7 +118,7 @@ binding.pry
         if price_min.present? || price_max.present?
           filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)  #
         end
-binding.pry
+
         if query_string.present?
           query_string = query_string.downcase.gsub("dresses","").gsub("dress","")
           query do  #
