@@ -1,4 +1,4 @@
-<% 
+<%
   image = @product.images.first
   if image.present? && image.attachment.present?
     product_image_url = absolute_image_url(image.attachment.url(:large), 'http')
@@ -22,14 +22,14 @@
         <meta name="twitter:image:src" content="<%= absolute_image_url(image.attachment.url(:large), 'http') %>" />
       <% end %>
     <% end %>
-    <meta property="og:site_name" content="<%= 'Fame&Partners' %>" />
+    <meta property="og:site_name" content="<%= 'Fame and Partners' %>" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="<%= get_title %>" />
     <meta property="og:type" content="product" />
     <meta property="og:price:amount" content="<%= @product.price %>" />
     <meta property="og:url" content="<%= collection_product_url(@product) %>" />
     <meta property="og:description" content="<%= get_meta_description %>" />
-    <meta property="og:price:currency" content="AUD" /> 
+    <meta property="og:price:currency" content="AUD" />
     <meta property="og:availability" content="instock" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="<%= get_title %>" />

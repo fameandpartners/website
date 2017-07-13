@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :item_return do
+    sequence(:uuid) { SecureRandom.uuid }
     order_number "MyString"
-    line_item_id 1
+    sequence(:line_item_id)
     qty 1
     requested_action "MyString"
     requested_at "2015-06-23 13:49:32"

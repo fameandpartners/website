@@ -2,7 +2,7 @@
 <div class="cart-items">
   <% for product in @cart.products: %>
   <div class="row cart-item" data-id="<%= product.line_item_id %>">
-    <div class="cart-item-image-holder col-md-5">
+    <div class="cart-item-image-holder col-xs-5">
       <a href="<%= product.path %>">
         <% if product.name != "Gift" : %>
         <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
@@ -11,46 +11,49 @@
         <% if product.making_options.length: %>
           <div class="ribbon-wrapper express-making">
             <div class="ribbon-txt">
-              Make it express
+              <%= product.making_options[0].name %>
             </div>
           </div>
         <% end %>
 
       </a>
     </div>
-    <div class="cart-item-info col-md-7">
+    <div class="cart-item-info col-xs-7">
       <a class="pull-right remove-product" href="javascript:;">
         <span class="icon btn-close"></span>
       </a>
-      <div class="heading txt-truncate-1">
-        <% if product.name != "Gift" : %>
-        <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
-        <% else :%>
-        <a class="cart-item-title" href="#"><%= product.name %></a>
-        <% end %>
+      <div class="heading">
+        <span class="cart-item-title"><%= product.name %></span>
       </div>
       <div class="cart-item-price"><%= product.price.display_price %></div>
       <dl class="cart-item-description">
         <% if product.size != null : %>
-        <dd>Size: <span><%= product.size.presentation %>, </span></dd>
+        <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
         <% end %>
-        <dd>Color: <span class="color"><%= product.color.name %></span></dd>
+        <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
         <% if product.from_wedding_atelier: %>
-          <dd>Height: <span><%= product.height %></span></dd>
+          <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
         <% else: %>
           <% if product.display_height: %>
-            <dd>Height: <span><%= product.display_height %></span></dd>
+            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
           <% else: %>
-            <dd>Skirt Length: <span><%= product.height %></span></dd>
+            <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
           <% end %>
         <% end %>
-        <dd>Estimated delivery: <span><%= product.delivery_period %></span></dd>
-        <% for customization in product.customizations: %>
-        <dd><%= customization.name %> <%= customization.display_price %></dd>
-        <% end %>
+        <dd>
+          <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
+          <% if product.making_options && product.making_options.length > 0: %>
+            <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
+          <% end %>
+        </dd>
 
-        <% for making_option in product.making_options: %>
-          <dd><%= making_option.name %> <%= making_option.display_price %></dd>
+        <% if product.customizations && product.customizations.length > 0: %>
+          <dd>
+            <span class="line-item-description-heading">Customizations:</span><br />
+            <% for customization in product.customizations: %>
+              <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+            <% end %>
+          </dd>
         <% end %>
 
       </dl>

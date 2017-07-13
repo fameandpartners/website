@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { assign, findIndex, uniqBy } from 'lodash';
 import PDPConstants from '../../constants/PDPConstants';
 import * as pdpActions from '../../actions/PdpActions';
+import { trackEvent } from '../../libs/gaTracking';
+import { openCustomizeMenuEvent, selectCustomizedOptionMenuEvent, closeCustomizeMenuEvent, applyCustomizeMenuEvent } from '../../libs/gaEventObjects';
 
 // Constants
 const { DRAWERS } = PDPConstants;
@@ -59,12 +61,11 @@ class CADCustomize extends Component {
     super(props, context);
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.computeNewAddons = this.computeNewAddons.bind(this);
     this.generateBaseLayers = this.generateBaseLayers.bind(this);
     this.generateAddonLayers = this.generateAddonLayers.bind(this);
     this.generateAddonOptions = this.generateAddonOptions.bind(this);
-    this.computeNewAddons = this.computeNewAddons.bind(this);
-    this.resetActiveOptions = this.resetActiveOptions.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.sendCustomizationsToAnalytics = this.sendCustomizationsToAnalytics.bind(this);
   }
 
   openMenu() {
@@ -72,9 +73,22 @@ class CADCustomize extends Component {
     toggleDrawer(DRAWERS.CAD_CUSTOMIZE);
   }
 
+  sendCustomizationsToAnalytics() {
+    const { toggleDrawer, addonOptions } = this.props;
+    addonOptions.map((c, i) => {
+      if (c.active) {
+        selectCustomizedOptionMenuEvent.value = (c.price.money.fractional / 100);
+        trackEvent(selectCustomizedOptionMenuEvent, true, i);
+      }
+      return false;
+    });
+    toggleDrawer(null);
+    trackEvent(applyCustomizeMenuEvent);
+  }
   closeMenu() {
     const { toggleDrawer } = this.props;
     toggleDrawer(null);
+    trackEvent(closeCustomizeMenuEvent);
   }
 
   /**
@@ -105,7 +119,12 @@ class CADCustomize extends Component {
   generateAddonsSummary() {
     return (
       <div>
-        <a className="c-card-customize__content__left">Customize It</a>
+        <a
+          className="c-card-customize__content__left"
+          onClick={() => trackEvent(openCustomizeMenuEvent)}
+        >
+          Customize It
+        </a>
         <div className="c-card-customize__content__right">
           {this.addonsSummarySelectedOptions()}
         </div>
@@ -119,6 +138,7 @@ class CADCustomize extends Component {
    */
   generateBaseLayers() {
     const { baseImages, baseSelected } = this.props;
+
     return baseImages.map(({ url }, i) => {
       const isSelected = (
         i === baseSelected ||
@@ -158,7 +178,6 @@ class CADCustomize extends Component {
    * @return {Array[Node]} - addonOptionNodes
    */
   generateAddonOptions() {
-    console.log('changing');
     const { addonOptions } = this.props;
 
     return addonOptions.map((a) => {
@@ -228,10 +247,14 @@ class CADCustomize extends Component {
    */
   reduceMatchesBasedOnPriority(matches) {
     return matches.reduce((accum, curr) => {
-      if (accum.image.position <= curr.image.position) {
-        return accum;
-      }
-      return curr;
+      // accum is current highest priority winner, this is NOT based on position,
+      // but on specificity of bit_array (higher wins)
+      const accumSpecificity = accum.image.bit_array
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
+      const currSpecificity = curr.image.bit_array
+            .reduce((total, bit) => (bit ? total + 1 : total), 0);
+
+      return accumSpecificity >= currSpecificity ? accum : curr;
     }, matches[0]);
   }
 
@@ -318,19 +341,6 @@ class CADCustomize extends Component {
     };
   }
 
-  resetActiveOptions() {
-    const { addonOptions, setAddonOptions, setAddonBaseLayer } = this.props;
-    const newAddons = addonOptions.map(addon => assign({}, addon, { active: false }));
-
-    setAddonOptions(newAddons);
-    setAddonBaseLayer(null);
-  }
-
-  handleClose() {
-    this.resetActiveOptions();
-    this.closeMenu();
-  }
-
   render() {
     const { isOpen } = this.props;
     let menuClass = 'pdp-side-menu';
@@ -354,7 +364,7 @@ class CADCustomize extends Component {
             <div
               role="button"
               className="btn-close med"
-              onClick={this.handleClose}
+              onClick={this.closeMenu}
             >
               <span className="hide-visually">Close Menu</span>
             </div>
@@ -374,7 +384,7 @@ class CADCustomize extends Component {
           </div>
 
           <div className="btn-wrap">
-            <button onClick={this.closeMenu} className="btn btn-black btn-lrg">
+            <button onClick={this.sendCustomizationsToAnalytics} className="btn btn-black btn-lrg">
               Apply Customizations
             </button>
           </div>

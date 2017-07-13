@@ -34,7 +34,7 @@
         .logo.text-center
           h1
             = link_to root_path
-              = image_tag "logo/new-logo.svg", alt: "Fame & Partners", class: "img-responsive"
+              = image_tag "logo/new-logo.svg", alt: "Fame and Partners", class: "img-responsive"
       .col-xs-3.text-right.live-chat
         // TODO: add new chat icon
         = react_component('SupportOptions', { support_telephone: support_telephone }, class: 'support-options cta-icon-text')
@@ -71,7 +71,7 @@
       .col-md-6
         - if current_step.eql?('address')
           .checkout-step data-name="address"
-            = render 'address_step', current_step: current_step
+            = render 'address_step', current_step: current_step, cart: cart
 
         - if current_step.eql?('payment')
           - content_for :inline_javascript do

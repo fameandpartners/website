@@ -1,4 +1,4 @@
-unicorn_init_script="/etc/init.d/unicorn-${app_full_name}"
+unicorn_init_script=/usr/local/bin/unicorn-ctl
 
 service_unicorn(){
   if [ -f "${unicorn_init_script}" ] ; then
@@ -17,8 +17,4 @@ start_unicorn(){
 
 restart_unicorn(){
   service_unicorn restart
-}
-
-zdd_unicorn(){
-  service_unicorn zdd
 }

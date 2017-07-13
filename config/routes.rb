@@ -116,6 +116,9 @@ FameAndPartners::Application.routes.draw do
     # Fame Society Invitation
     get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
 
+    # "Invite a friend" landing page
+    get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -203,20 +206,12 @@ FameAndPartners::Application.routes.draw do
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
     get '/festival' => 'products/collections#show', :permalink => 'festival', :as => :festival_page
 
-    # Every BODY Dance Collection
-    get '/every-body-dance' => 'products/collections#show', :permalink => 'every-body-dance', :as => :every_body_dance_collection
-    # Redirection in case of typo
-    get '/everybody-dance', to: redirect('/every-body-dance')
-
     # High Contrast Collection
     get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
 
     # Modern Bridesmaid Collection
     get '/modern-bridesmaid-dresses' => 'products/collections#show', :permalink => 'modern-bridesmaid-dresses', :as => :modern_bridesmaid_collection
     get '/bridesmaid-dresses', to: redirect('/modern-bridesmaid-dresses'), :as => :bridesmaid_collection
-
-    # Shop Every Dance Page
-    get '/shop-every-body-dance' => 'products/collections#show', :permalink => 'shop-every-body-dance', :as => :shop_every_body_dance_collection
 
     # Best of Fame Collection
     get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
@@ -258,6 +253,11 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
     get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
+    # Redirect Every BODY Dance LPs due to legal issues
+    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
+    get '/everybody-dance', to: redirect('/dresses/prom')
+    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -291,19 +291,36 @@ FameAndPartners::Application.routes.draw do
     # Casual Category Page
     get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
 
-    # Spring Weddings Collection Page
-    get '/dresses/spring-weddings' => 'products/collections#show', :permalink => 'spring-weddings', :as => :spring_weddings_collection_page
+    # Summer Weddings Collection Page
+    get '/dresses/summer-weddings' => 'products/collections#show', :permalink => 'summer-weddings', :as => :summer_weddings_collection_page
+
+    # Redirect old Spring Weddings to Summer Weddings Collection Page
+    get '/dresses/spring-weddings', to: redirect('/dresses/summer-weddings'), as: :spring_weddings_collection_page
 
     # Burgundy Collection Page
     get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
+
+    # White Trend Page
+    get '/trends-white' => 'products/collections#show', :permalink => 'white-trend', :as => :white_trend_page
+
+    # Gingham & Stripes Category page
+    get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
     # Wedding Atelier App - Landing page
     get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
     get '/weddings-atelier', to: redirect('/wedding-atelier')
 
+
+    # Casual Summer Styles Collection Page
+    get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
+
+    # Florals Collection Page
+    get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
+
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
-    get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
+    # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -327,6 +344,8 @@ FameAndPartners::Application.routes.draw do
       post 'products' => 'products#create'
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+
+      post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
@@ -427,7 +446,7 @@ FameAndPartners::Application.routes.draw do
     namespace 'campaigns' do
       resource :email_capture, only: [:create], controller: :email_capture do
         collection do
-          get :mailchimp
+          post :subscribe
         end
       end
     end
@@ -665,9 +684,9 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-  mount Split::Dashboard, at: 'split'
   mount Revolution::Engine => '/'
   mount WeddingAtelier::Engine, at: '/wedding-atelier'
+
 end
 
 # NOTE: Alexey Bobyrev 14 Feb 2017
@@ -675,5 +694,6 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-  match '*path', to: 'application#non_matching_request', as: 'routing_error'
+  match '*path', to: 'contentful#main'
+  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

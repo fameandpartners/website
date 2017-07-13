@@ -1,8 +1,17 @@
+javascript:
+  function sendToGA(eventObject) {
+      if(typeof window === 'object' && !!window.ga) {
+        window.ga('send', 'event', eventObject)
+      }  
+      else {
+        console.log('Google analytics not found')
+      }
+  }
 span#locale-selector-container
   #locale-selector-label
     | You're shopping in:
-  #locale-selector-current
-    .arrow
+  #locale-selector-current onclick="sendToGA({ eventCategory: 'Top Nav', eventAction: 'Country Dropdown Press', eventLabel: null, nonInteraction: false })"
+    .arrow 
     = render 'layouts/redesign/header/locale_selector/item', site_version: current_site_version
     ul
       - SiteVersion.all.each do |site_version|

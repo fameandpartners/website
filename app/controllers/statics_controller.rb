@@ -20,68 +20,68 @@ class StaticsController < ApplicationController
   end
 
   def bridesmaid_lp
-    @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame & Partners"
-    @description = "Discover beautiful bridesmaid dresses at Fame & Partners"
+    @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame and Partners"
+    @description = "Discover beautiful bridesmaid dresses at Fame and Partners"
     render :template => 'landing_pages/bridesmaids', :layout => 'redesign/application'
   end
 
   def break_hearts_not_banks
-    @title = "Break Hearts not Banks | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
+    @title = "Break Hearts not Banks | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses that don't break the bank at Fame and Partners"
     render :template => 'landing_pages/break-hearts-not-banks', :layout => 'redesign/application'
   end
 
   def lookbook
-    @title = "Lookbooks | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
+    @title = "Lookbooks | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses that don't break the bank at Fame and Partners"
     render :template => 'landing_pages/lookbook', :layout => 'redesign/application'
   end
 
   def here_comes_the_sun
-    @title = "Here comes the sun | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful summer dresses here at Fame & Partners"
+    @title = "Here comes the sun | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful summer dresses here at Fame and Partners"
     render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
   end
 
   def bohemian_summer
-    @title = "Bohemian Summer | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful summer dresses here at Fame & Partners"
+    @title = "Bohemian Summer | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful summer dresses here at Fame and Partners"
     render :template => 'landing_pages/bohemian_summer', :layout => 'redesign/application'
   end
 
   def all_size
-    @title = "All Size | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses for every body here at Fame & Partners"
+    @title = "All Size | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses for every body here at Fame and Partners"
     render :template => 'landing_pages/all_size', :layout => 'redesign/application'
   end
 
   def wicked_game
-    @title = "The Wicked Game | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses at Fame & Partners"
+    @title = "The Wicked Game | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses at Fame and Partners"
     render :template => 'landing_pages/wicked_game', :layout => 'redesign/application'
   end
 
   def prom
-    @title = "Prom | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses at Fame & Partners"
+    @title = "Prom | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses at Fame and Partners"
     render :template => 'landing_pages/prom', :layout => 'redesign/application'
   end
 
   def prom_lp
-    @title = "Prom | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses at Fame & Partners"
+    @title = "Prom | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses at Fame and Partners"
     render :template => 'statics/prom_lp', :layout => 'redesign/application'
   end
 
   def sale
-    @title = "Sale Items | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
+    @title = "Sale Items | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses that don't break the bank at Fame and Partners"
     render :template => 'landing_pages/sale', :layout => 'redesign/application'
   end
 
   def facebook_lp
-    @title = "Facebook | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
+    @title = "Facebook | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses that don't break the bank at Fame and Partners"
     render :template => 'landing_pages/facebook_lp', :layout => 'redesign/application'
   end
 
@@ -93,8 +93,8 @@ class StaticsController < ApplicationController
 
   # Monday March 23 2015 TTL: 6 months
   def unidays_lp
-    @title = "Unidays | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
+    @title = "Unidays | Beautiful Dresses - Fame and Partners"
+    @description = "Discover beautiful dresses that don't break the bank at Fame and Partners"
     render :template => 'statics/unidays_lp', :layout => 'redesign/application'
   end
 
@@ -133,7 +133,7 @@ class StaticsController < ApplicationController
 
   def nylonxfame
     render layout: 'statics_fullscreen'
-    @title = "About Fame & Partners"
+    @title = "About Fame and Partners"
   end
 
   def team
@@ -184,8 +184,8 @@ class StaticsController < ApplicationController
       @competition_participation = CompetitionParticipation.find_or_create_by_spree_user_id(spree_current_user.id)
     end
 
-    @title = "Girlfriend x Fame & Partners Collaboration " + default_seo_title
-    @description = "Girlfriend Magazine x Fame & Partners Collaboration"
+    @title = "Girlfriend x Fame and Partners Collaboration " + default_seo_title
+    @description = "Girlfriend Magazine x Fame and Partners Collaboration"
   end
 
   def nye
@@ -195,8 +195,8 @@ class StaticsController < ApplicationController
 
   def us_prom_2015_lp
     @nofollow = true
-    @title = "Prom Dresses | Beautiful Prom Dresses Online - Fame & Partners"
-    @description = "Discover beautiful prom dresses at Fame & Partners"
+    @title = "Prom Dresses | Beautiful Prom Dresses Online - Fame and Partners"
+    @description = "Discover beautiful prom dresses at Fame and Partners"
   end
 
   def amfam_lp

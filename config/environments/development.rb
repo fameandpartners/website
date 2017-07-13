@@ -5,6 +5,7 @@ FameAndPartners::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  config.action_controller.perform_caching = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -44,7 +45,7 @@ FameAndPartners::Application.configure do
   config.assets.debug = ENV.fetch('DEVELOPMENT_ASSETS_DEBUG', 'true') == 'true'
 
   # Use S3 for storing attachments
-  config.use_s3 = false
+  config.use_s3 = true
 
   Slim::Engine.set_options :pretty => true, :sort_attrs => false
 

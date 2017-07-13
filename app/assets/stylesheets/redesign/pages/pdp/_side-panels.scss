@@ -45,6 +45,10 @@
   .chart-wrap-trigger {
     display: inline-block;
     text-decoration: underline;
+    @-moz-document url-prefix() { 
+      float: left;
+      padding: 5px 0 85px;
+    }
   }
 
   .chart-wrap {
@@ -87,7 +91,7 @@
     .selector-size {
       width: 21%;
       margin: 2%;
-      padding: 12px 2px;
+      padding: 9px 2px;
       font-size: 0.75em;
       font-weight: 500;
 

@@ -1,5 +1,8 @@
 'use strict';
 (function ($) {
+  function isGAAvailable() {
+    return typeof window === 'object' && !!window.ga;
+  }
   function close_menu() {
     $('#home-menu .nav-main-menu span, .rect').removeClass('active');
   }
@@ -19,6 +22,18 @@
 
 
   $('.js-search-trigger').on('click', function(e) {
+    
+    if(isGAAvailable()) {
+      window.ga('send', 'event', { 
+        eventCategory: 'Top Nav', 
+        eventAction: 'Search Press', 
+        eventLabel: null, 
+        nonInteraction: false 
+      });
+    }
+    else {
+      console.log("Google analytics not found")
+    }
     if ($(this).parent().hasClass('active')) {
       if ($("#searchForm #searchValue").val() !== '') {
         $("#searchForm").submit();

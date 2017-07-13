@@ -3,7 +3,7 @@
 .c-card-customize {
 
   &__header {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 
     span {
       font-style: italic;
@@ -38,11 +38,15 @@
       border-color: $c-neutral-black;
     }
 
+    .selection {
+      text-align: right;
+    }
+
   }
 
   &__content__left {
     float: left;
-    width: 50%;
+    margin-right: 6px;
     text-decoration: underline;
   }
   &__content__left:hover {
@@ -50,8 +54,7 @@
   }
 
   &__content__right {
-    float: left;
-    width: 50%;
+    float: right;
     text-align: right;
   }
 

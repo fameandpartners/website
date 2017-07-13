@@ -26,6 +26,8 @@ Spree::User.class_eval do
 
   attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
+  serialize :user_data, JSON
+
   validates :first_name, :last_name, :presence => true
 
   validates :phone,

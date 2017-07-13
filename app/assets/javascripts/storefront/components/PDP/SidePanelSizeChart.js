@@ -4,7 +4,8 @@ import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
 import { MODAL_STYLE } from './utils';
 import SizeChartCell from './SizeChartCell';
-
+import { trackEvent } from '../../libs/gaTracking'
+import { viewSizeGuideEvent } from '../../libs/gaEventObjects'
 class SidePanelSizeChart extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -23,6 +24,7 @@ class SidePanelSizeChart extends React.Component {
   }
 
   openModal() {
+    trackEvent(viewSizeGuideEvent)
     this.setState({ modalIsOpen: true });
   }
 
@@ -78,8 +80,6 @@ class SidePanelSizeChart extends React.Component {
                     <ul className="custom">
                       <li>Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress.
                       Stand tall with your feet together.</li>
-                      <li>If you plan on wearing heels with the dress, don’t forget to include heel height in your measurement! This will help you decide which of our three dress
-                      lengths - Petite, Standard, or Tall - is best for you.</li>
                     </ul>
                     <p><span>Bust</span> - Measure around the fullest part of your chest, keeping the tape level to the floor.</p>
                     <p><span>Under-bust</span> - Measure directly under your bust (around your rib cage, where your bra band sits), keeping the tape level to the floor.</p>
@@ -91,7 +91,7 @@ class SidePanelSizeChart extends React.Component {
                 </Tabs>
               </div>
               <div className="col-md-6">
-                <p className="table-title text-center">Fame & Partners sizes are designed to fit the following measurements.</p>
+                <p className="table-title text-center">Fame and Partners sizes are designed to fit the following measurements.</p>
                 <table>
                   <thead>
                     <tr>

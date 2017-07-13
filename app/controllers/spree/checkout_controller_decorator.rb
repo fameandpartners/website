@@ -16,6 +16,7 @@ Spree::CheckoutController.class_eval do
   layout 'redesign/checkout'
 
   def edit
+    @optimizely_opt_in = true
     prepare_order
     find_payment_methods
     data_layer_add_to_cart_event
@@ -29,6 +30,10 @@ Spree::CheckoutController.class_eval do
     end
 
     current_order.updater.update_totals
+
+    # li_presenters = @order.line_items.map {|li| Orders::LineItemPresenter.new(li)}
+    # @order.line_item_presenters = li_presenters
+
 
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
@@ -47,6 +52,7 @@ Spree::CheckoutController.class_eval do
       # update first/last names, email
       registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
       registration.update
+      subscribe(registration.user) if params[:subscribe].present?
       if registration.new_user_created?
         fire_event("spree.user.signup", order: current_order)
         sign_in :spree_user, registration.user
@@ -350,5 +356,15 @@ Spree::CheckoutController.class_eval do
 
   def gtm_page_type
     'checkout'
+  end
+
+  # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
+  def subscribe(user)
+    EmailCaptureWorker.perform_async(user.id, 'remote_ip'    => request.remote_ip,
+                                              'landing_page' => session[:landing_page],
+                                              'utm_params'   => session[:utm_params],
+                                              'site_version' => current_site_version.name,
+                                              'form_name'    => 'Checkout',
+                                              'service'      => ENV.fetch('SUBSCRIPTION_SERVICE'))
   end
 end

@@ -8,7 +8,6 @@ ruby:
       updateShoppingBagCounter();
     })();
   "
-
   init_style_quiz = ""
   if Features.active?(:style_quiz)
     init_style_quiz = "
@@ -61,17 +60,17 @@ ruby:
 
       = render 'layouts/redesign/header/locale_selector/mobile'
 
-      .container-fluid
+      .container-fluid.mobile-header-fluid
         #masthead-container.cfix
           .masthead.pull-left.visible-xs.visible-sm
             nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
               .navbar-header
-                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
+                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button" onclick="typeof window === 'object' && !!window.ga ?  window.ga('send', 'event', { eventCategory: 'Top Nav', eventAction: 'Menu Open', eventLabel: null, nonInteraction: false }) : console.log('Google analytics not found')"
                   = image_tag('Hamburger.svg', height: '25px')
 
           .mobile-logo-area.visible-xs.visible-sm
             = link_to root_path do
-              = image_tag src='logo/new-logo.svg', :alt => 'Fame & Partners'
+              = image_tag src='logo/new-logo.svg', :alt => 'Fame and Partners'
 
           .masthead.nav-icons.pull-right.visible-xs.visible-sm
             span.shopping-bag-wrapper.js-header-toolbar
@@ -86,8 +85,13 @@ ruby:
   = render 'layouts/redesign/new_this_week'
 
   #sideMenu
-    - ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
-      - if variation === 'mega'
-        = render 'layouts/redesign/header/mega_side_nav'
-      - else
-        = render 'layouts/redesign/header/simplified_side_nav'
+    = render 'layouts/redesign/header/simplified_side_nav'
+javascript:
+  function sendToGA(eventObject) {
+      if(typeof window === 'object' && !!window.ga) {
+        window.ga('send', 'event', eventObject)
+      }  
+      else {
+        console.log('Google analytics not found')
+      }
+  }

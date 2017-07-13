@@ -33,7 +33,7 @@ module Spree
         billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
         shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
         cny_delivery_delay:          false,
-        order_delivery_period:       '7 - 10 business days'
+        order_delivery_period:       '7 business days'
       }
     }
 

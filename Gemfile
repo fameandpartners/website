@@ -40,6 +40,7 @@ path 'engines' do
   gem 'next_logistics'
   gem 'iequalchange'
   gem 'wedding-atelier'
+  gem 'bronto'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -60,7 +61,6 @@ gem 'fog-aws', '~> 1.2.0'
 gem 'event_sourced_record'
 gem 'coercible'
 gem 'reform', '~> 2.0.5'
-gem 'split', require: 'split/dashboard'
 
 gem 'ipaddress'
 gem 'geoip', require: false
@@ -160,3 +160,6 @@ end
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
 gem 'mailchimp-api', require: 'mailchimp'
+
+# Contentful
+gem 'contentful'

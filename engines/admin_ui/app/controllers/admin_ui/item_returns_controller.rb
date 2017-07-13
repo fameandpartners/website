@@ -2,9 +2,14 @@ module AdminUi
   class ItemReturnsController < AdminUi::ApplicationController
     def index
       @collection = ItemReturnsGrid.new(params[:item_returns_grid])
+      @weekly_refund = (params[:scope] == :refund_queue)
+
       respond_to do |f|
         f.html do
-          @collection.scope { |scope| scope.page(params[:page]).per(50) }
+          @collection.scope do |scope|
+            scope = scope.send(params[:scope]) if params[:scope]
+            scope.page(params[:page]).per(50)
+          end
         end
         f.csv do
           send_data @collection.to_csv,
@@ -33,6 +38,12 @@ module AdminUi
       else
         render :new
       end
+    end
+
+    def bulk_refund_process
+      BulkRefundWorker.perform_async(current_admin_user.email)
+
+      redirect_to :back, notice: "Bulk refund process started"
     end
 
     private

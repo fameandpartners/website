@@ -198,14 +198,14 @@ var MoodBoardEvent = React.createClass({
         author: null,
         time: Date.now(),
         type: 'notification',
-        content: 'Our Fame stylist generally gets back to you within 24 hours. You will be notified via email when she replies.'
+        content: "Our Fame stylist is ready to help from Monday through Friday, 9am to 6pm PST. She'll reply to you as soon as she can, and you'll be notified via email when she does."
       }).then(function(){
         if(!sessionStorage.getItem('stylistTagged')){
           this.sendMessageToTwillio({
             author: null,
             time: Date.now(),
             type: 'notification',
-            content: 'In the meantime why don\'t you invite your bridal party if you haven\'t already. Remember you can create and discuss dresses with them via chat.'
+            content: 'If you haven\'t already, invite the rest of the bridal party to join your Wedding Board so you can create dresses and discuss your favorites together via chat.'
           });
           try { sessionStorage.setItem('stylistTagged', true); }catch (e){}
         }

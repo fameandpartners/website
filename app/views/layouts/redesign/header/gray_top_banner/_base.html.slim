@@ -1,13 +1,19 @@
+javascript:
+  function sendToGA(eventObject) {
+      if(typeof window === 'object' && !!window.ga) {
+        window.ga('send', 'event', eventObject)
+      }  
+      else {
+        console.log('Google analytics not found')
+      }
+  }
 ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
-- ab_test(:main_nav, 'mega', 'simplified_var_1' ) do |variation|
-  - @variation = variation
-  
 
 #gray-top-banner.visible-md-block.visible-lg-block
   .row.container-fluid.background--black
 
-    #free-shipping.free-shipping.col-md-4.col-md-offset-4.text-center
+    #free-shipping.free-shipping.col-md-4.col-md-offset-4.text-center onclick="sendToGA({ eventCategory: 'Top Nav', eventAction: 'Free Shipping Press', eventLabel: null, nonInteraction: false })"
       = banner.center_text.to_s.html_safe
 
     #account-area.col-md-4.text-right
@@ -15,7 +21,7 @@ ruby:
 
       span.pipe |
       = link_to profile_path do
-        span.my-account MY ACCOUNT
+        span.my-account onclick="sendToGA({eventCategory: 'Top Nav', eventAction: 'My Account Press', eventLabel: null, nonInteraction: false })" MY ACCOUNT
         .account-menu.hidden-sm.account-list
           - if spree_user_signed_in?
             .account.container-fluid
@@ -26,7 +32,4 @@ ruby:
                 li = link_to 'Logout', '/logout'
 
 .nav-menu-container
-  - if @variation === 'mega'
-    = render 'layouts/redesign/header/mega'
-  - else 
-    = render 'layouts/redesign/header/simplified_nav'
+  = render 'layouts/redesign/header/simplified_nav'

@@ -1,7 +1,7 @@
 class UserCart::BaseController < ApplicationController
   include SslRequirement
   ssl_allowed
-  
+
   private
 
     def user_cart_resource
