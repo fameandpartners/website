@@ -2,8 +2,12 @@ var Registration = React.createClass({
   propTypes: {
     fieldValues: React.PropTypes.object,
     signupPath: React.PropTypes.string.isRequired,
-    eventsPath: React.PropTypes.string.isRequired,
-    signinPath: React.PropTypes.string.isRequired
+    userPath: React.PropTypes.string.isRequired,
+    signinPath: React.PropTypes.string.isRequired,
+    siteVersion: React.PropTypes.string,
+    heightDefinitions: React.PropTypes.array,
+    dressSizes: React.PropTypes.array,
+    newEvent: React.PropTypes.bool
   },
 
   componentDidMount: function() {
@@ -37,6 +41,7 @@ var Registration = React.createClass({
 
   submitRegistration: function() {
     var payload = { spree_user: $.extend({}, this.state.fieldValues) };
+    var that = this;
 
     $.ajax({
       url: this.props.signupPath,
@@ -44,12 +49,30 @@ var Registration = React.createClass({
       dataType: 'json',
       data: payload,
       success: function (response) {
-        window.location = "/wedding-atelier/events/" + response.event.id;
+        window.location = "/wedding-atelier/events/" + response.event.id + "/dresses/new";
       },
       error: function (data) {
-        console.log('error');
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
       }
     });
+  },
+
+  submitEvent: function() {
+    var payload = { spree_user: $.extend({}, this.state.fieldValues) };
+    var that = this;
+
+    $.ajax({
+      url:  this.props.userPath,
+      type: 'PUT',
+      dataType: 'json',
+      data: payload,
+      success: function (response) {
+        window.location = "/wedding-atelier/events/" + response.event.id
+      },
+      error: function (data) {
+        that.refs.notifications.notify(JSON.parse(data.responseText).errors);
+      }
+    })
   },
 
   showStep: function() {
@@ -62,8 +85,13 @@ var Registration = React.createClass({
       case 2:
         return <SizeFields fieldValues={this.props.fieldValues}
                            nextStep={this.nextStep}
+                           submitEvent={this.submitEvent}
                            previousStep={this.previousStep}
-                           saveValues={this.saveValues} />
+                           saveValues={this.saveValues}
+                           heights={this.props.heightDefinitions}
+                           sizes={this.props.dressSizes}
+                           siteVersion={this.props.siteVersion}
+                           newEvent={this.props.newEvent} />
       case 3:
         return <UserFields fieldValues={this.props.fieldValues}
                            previousStep={this.previousStep}
@@ -75,19 +103,22 @@ var Registration = React.createClass({
   render: function() {
     return (
       <div className="modal">
+        <Notification ref="notifications"/>
         <div className="modal-dialog modal-sm">
           <div className="modal-content">
-            <div className="modal-header">
-              <button onClick={this.previousStep}>Prev</button>
+            <div className="modal-header registrations__header">
+              {this.state.step > 1 &&
+                <a className='registrations__back-arrow' onClick={this.previousStep}></a>
+              }
             </div>
             <div className="modal-body">
-              <form action="/wedding-atelier/signup" className="new_spree_user">
+              <form data-toggle="validator"  action="/wedding-atelier/signup" className="new_spree_user">
                 {this.showStep()}
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer registrations__footer">
               <p className="already-member text-center">
-                Already a member?
+                Already a member?&nbsp;
                 <a className="bold hover=link" href={this.props.signinPath}>log in here</a>
               </p>
             </div>

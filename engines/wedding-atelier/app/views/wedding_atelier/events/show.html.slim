@@ -21,5 +21,9 @@
                     channel_prefix: ENV['RAILS_ENV']},
                   { class: 'moodboard-react-container container-fluid' }
 
+= react_component 'Tutorial',
+                  signupStep: spree_current_user.wedding_atelier_signup_step,
+                  userPath: wedding_atelier.user_path(spree_current_user)
+
 - content_for :javascript do
   script src="//api.filestackapi.com/filestack.js"

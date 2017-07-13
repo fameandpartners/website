@@ -1,9 +1,0 @@
-= render partial: 'layouts/registrations_layout', locals: {nested_partial: 'size_form', user: @user, signup_params: @signup_params, step_number: 2}
-
-javascript:
-  $(document).ready(function(){
-    $('#spree_user_user_profile_attributes_height').select2({
-      placeholder: 'Please select your height',
-      minimumResultsForSearch: Infinity
-    });
-  })

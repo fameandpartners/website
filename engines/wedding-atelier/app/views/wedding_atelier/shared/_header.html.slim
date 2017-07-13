@@ -14,7 +14,7 @@
         li.shared-header-profile-image = profile_image_tag
         li.shared-header-user-name
           .border-wrapper = current_spree_user.first_name
-        - !current_spree_user.role_in_event(@event).empty?
+        - !current_spree_user.role_in_event(@event).try(:empty?)
           li.shared-header-user-role
             .border-wrapper = current_spree_user.role_in_event(@event)
         li.shared-header-account title="Manage your account" data-tooltip-content="Edit your personal details, check order status, and update your size profile." data-tooltip-my-position="center left" data-tooltip-at-position="center right" class="walkthrough-messages"

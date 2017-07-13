@@ -2,7 +2,7 @@
 # TODO: This `Spree::User` eval should be a `WeddingAtelier::User`
 
 Spree::User.class_eval do
-  WEDDING_ATELIER_COMPLETED_STEPS = %w(completed invite)
+  WEDDING_ATELIER_COMPLETED_STEPS = %w(completed invite tutorial)
   attr_accessor :event_role
 
   attr_accessible :wedding_atelier_signup_step,

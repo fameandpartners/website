@@ -2,7 +2,11 @@ module WeddingAtelier
   module ApplicationHelper
 
     def include_header?
-      !['registrations', 'sessions', 'event_dresses', 'home'].include?(controller_name)
+      !(['registrations', 'sessions', 'event_dresses', 'home'].include?(controller_name) || new_event)
+    end
+
+    def new_event
+      controller_name == 'events' && action_name == 'new'
     end
 
     def profile_image_path

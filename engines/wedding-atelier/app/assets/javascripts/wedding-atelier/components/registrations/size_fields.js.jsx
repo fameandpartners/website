@@ -11,16 +11,63 @@ var SizeFields = React.createClass({
 
     var data = {
       user_profile_attributes: {
-        height: this.refs["profile.height"].value,
-        dress_size_id: this.refs["profile.dress_size_id"].value,
+        height: this.refs.profile_height.value,
+        dress_size_id: this.refs.profile_dress_size_id.value,
       }
     }
 
-    this.props.saveValues(data)
-    this.props.nextStep()
+    this.props.saveValues(data);
+
+    if (this.props.newEvent) {
+      this.props.saveValues({ wedding_atelier_signup_step: 'completed' });
+      this.props.submitEvent();
+    } else {
+      this.props.nextStep();
+    }
   },
 
   render: function() {
+    var that = this;
+    var index = 1;
+
+    var optionsForHeights = this.props.heights.map(function(group) {
+      var heights = group[1].map(function(height, index){
+        return(<option key={index} value={height}>{height}</option>);
+      });
+
+      return (
+        <optgroup key={group[0]} label={group[0]}>
+          {heights}
+        </optgroup>
+      );
+    });
+
+    var dressSizes = this.props.sizes.map(function(sizes) {
+      var sizesGroup = sizes.map(function(value){
+        var size = value.option_value,
+          id = "dress-size-" + index,
+          inputProps = {
+            id: id,
+            name: "dessSize",
+            type: "radio",
+            ref: "profile_dress_size_id",
+            value: size.id
+          };
+
+        index += 1;
+        return (
+          <li key={index} className="dress-size">
+          <input {...inputProps} />
+          <label htmlFor={id}>{PresentationHelper.sizePresentation(size, that.props.siteVersion)}</label>
+          </li>
+        );
+      });
+
+      return (
+        <div className="sizing-row">{sizesGroup}</div>
+      );
+    });
+
     return (
       <div className="registrations__size-form signup left-side-centered-container">
         <h1 className="text-center">Let's get your size profile</h1>
@@ -29,10 +76,8 @@ var SizeFields = React.createClass({
           <div className="form-group">
             <label>What's Your Height?</label>
             <div>
-              <select className="form-control" id="spree_user_user_profile_attributes_height" ref="profile.height">
-                <optgroup label="petite">
-                  <option value="4'10&quot;/147cm">4'10/147cm</option>
-                  </optgroup>
+              <select className="form-control" id="spree_user_user_profile_attributes_height" ref="profile_height">
+                {optionsForHeights}
               </select>
             </div>
           </div>
@@ -43,12 +88,7 @@ var SizeFields = React.createClass({
 
             <div className="dress-sizes">
               <ul>
-                <div className="sizing-row">
-                  <li className="dress-size">
-                    <input id="spree_user_user_profile_attributes_dress_size_id_86" ref="profile.dress_size_id" type="radio" value="86" />
-                    <label htmlFor="spree_user_user_profile_attributes_dress_size_id_86">US 0</label>
-                  </li>
-                </div>
+                {dressSizes}
               </ul>
             </div>
 

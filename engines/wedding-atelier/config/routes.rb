@@ -4,9 +4,6 @@ WeddingAtelier::Engine.routes.draw do
   devise_scope :spree_user do
     resource :signup, controller: :registrations, only: [:update, :create] do
       get '/', to: 'registrations#new'
-      get '/size', to: 'registrations#size'
-      get '/details', to: 'registrations#details'
-      get '/invite', to: 'registrations#invite'
     end
 
     get '/sign_in', to: 'sessions#new'
@@ -33,5 +30,7 @@ WeddingAtelier::Engine.routes.draw do
   resources :accounts, path: 'my-account', only: [:index, :update, :show]
 
   resource :orders, only: [:create, :show]
+
+  resources :users, only: [:update]
   post '/slack_callbacks', to: 'slack_callbacks#create'
 end

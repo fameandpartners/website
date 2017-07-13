@@ -8,5 +8,10 @@
 
 = react_component 'Registration',
                   signupPath: wedding_atelier.signup_path,
-                  eventsPath: wedding_atelier.events_path,
-                  signinPath: wedding_atelier.sign_in_path
+                  userPath: wedding_atelier.user_path(@user),
+                  signinPath: wedding_atelier.sign_in_path,
+                  heightDefinitions: @heights,
+                  siteVersion: @site_version,
+                  dressSizes: @dress_sizes,
+                  newEvent: new_event
+

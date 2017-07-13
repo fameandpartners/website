@@ -7,7 +7,8 @@ var CustomizationExperience = React.createClass({
     event_name: React.PropTypes.string,
     event_path: React.PropTypes.string,
     edit: React.PropTypes.bool,
-    initialDress: React.PropTypes.object
+    initialDress: React.PropTypes.object,
+    twilio_token_path: React.PropTypes.string
   },
 
   getInitialState: function() {
@@ -181,7 +182,9 @@ var CustomizationExperience = React.createClass({
       edit: this.props.edit,
       initialDress: this.props.initialDress && this.props.initialDress.event_dress,
       savedDress: this.state.savedDress,
-      savedDressCallback: this.savedDressCallback
+      savedDressCallback: this.savedDressCallback,
+      twilio_token_path: this.props.twilio_token_path,
+      channel_prefix: this.props.channel_prefix
     };
 
     return (
