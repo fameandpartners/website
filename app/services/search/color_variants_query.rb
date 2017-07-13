@@ -31,6 +31,7 @@ module Search
     end
 
     def self.build(options = {})
+    binding.pry
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation

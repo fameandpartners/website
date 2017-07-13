@@ -381,7 +381,6 @@ GEM
       elasticsearch-model (>= 0.1)
       hashie
       virtus
-    elasticsearch-rails (5.0.0)
     elasticsearch-ruby (0.0.4)
       activesupport (>= 3.0.0)
       thrift
@@ -967,9 +966,7 @@ DEPENDENCIES
   device_detector (~> 0.8.1)
   eco
   elasticsearch-dsl
-  elasticsearch-model
   elasticsearch-persistence
-  elasticsearch-rails
   elasticsearch-ruby
   event_sourced_record
   execjs (~> 2)

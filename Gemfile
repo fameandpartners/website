@@ -24,8 +24,8 @@ gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
 gem 'elasticsearch-ruby'
 gem 'elasticsearch-persistence'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+# gem 'elasticsearch-model'
+# gem 'elasticsearch-rails'
 
 # Monitoring & Events
 gem 'newrelic_rpm'

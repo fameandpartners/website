@@ -56,69 +56,66 @@ module Products
               _type: 'document',
               _id: color_variant_id,
               data: {
-                doc:
-                {
-                  id: color_variant_id,
-                  product: {
-                    id:           product.id,
-                    name:         product.name,
-                    sku:          product.sku,
-                    description:  product.description,
-                    created_at:   product.created_at,
-                    available_on: product.available_on,
-                    is_deleted:   product.deleted_at.present?,
-                    is_hidden:    product.hidden?,
-                    position:     product.permalink,
-                    permalink:    product.permalink,
-                    master_id:    product.master.id,
-                    variant_skus: product.variant_skus,
-                    in_stock:     product.has_stock?,
-                    discount:     discount,
-                    urls: {
-                      en_au: helpers.descriptive_url(product, :"en-AU"),
-                      en_us: helpers.descriptive_url(product, :"en-US")
-                    },
-
-                    can_be_customized:  product.can_be_customized?,
-                    fast_delivery:      product.fast_delivery,
-                    fast_making:        product.fast_making?,
-                    taxon_ids:          product.taxons.map(&:id),
-                    taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
-                    taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
-                    price:              product.price.to_f,
-
-                    is_outerwear:     Spree::Product.outerwear.exists?(product.id),
-
-                    # bodyshape sorting
-                    apple:              product.style_profile&.apple,
-                    pear:               product.style_profile&.pear,
-                    athletic:           product.style_profile&.athletic,
-                    strawberry:         product.style_profile&.hour_glass,
-                    column:             product.style_profile&.column,
-                    petite:             product.style_profile&.petite,
-                    color:              color_customizable
-
+                id: color_variant_id,
+                product: {
+                  id:           product.id,
+                  name:         product.name,
+                  sku:          product.sku,
+                  description:  product.description,
+                  created_at:   product.created_at,
+                  available_on: product.available_on,
+                  is_deleted:   product.deleted_at.present?,
+                  is_hidden:    product.hidden?,
+                  position:     product.permalink,
+                  permalink:    product.permalink,
+                  master_id:    product.master.id,
+                  variant_skus: product.variant_skus,
+                  in_stock:     product.has_stock?,
+                  discount:     discount,
+                  urls: {
+                    en_au: helpers.descriptive_url(product, :"en-AU"),
+                    en_us: helpers.descriptive_url(product, :"en-US")
                   },
-                  color:  {
-                    id:             color.id,
-                    name:           color.name,
-                    presentation:   color.presentation
-                  },
-                  images: product_color_value.images.map do |image|
-                    {
-                      large: image.attachment.url(:large)
-                    }
-                  end,
-                  cropped_images: cropped_images_for(product_color_value),
 
-                  prices: {
-                    aud:  product_price_in_au.amount,
-                    usd:  product_price_in_us.amount
-                  },
-                  sale_prices:  {
-                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
-                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
+                  can_be_customized:  product.can_be_customized?,
+                  fast_delivery:      product.fast_delivery,
+                  fast_making:        product.fast_making?,
+                  taxon_ids:          product.taxons.map(&:id),
+                  taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
+                  taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
+                  price:              product.price.to_f,
+
+                  is_outerwear:     Spree::Product.outerwear.exists?(product.id),
+
+                  # bodyshape sorting
+                  apple:              product.style_profile&.apple,
+                  pear:               product.style_profile&.pear,
+                  athletic:           product.style_profile&.athletic,
+                  strawberry:         product.style_profile&.hour_glass,
+                  column:             product.style_profile&.column,
+                  petite:             product.style_profile&.petite,
+                  color:              color_customizable
+
+                },
+                color:  {
+                  id:             color.id,
+                  name:           color.name,
+                  presentation:   color.presentation
+                },
+                images: product_color_value.images.map do |image|
+                  {
+                    large: image.attachment.url(:large)
                   }
+                end,
+                cropped_images: cropped_images_for(product_color_value),
+
+                prices: {
+                  aud:  product_price_in_au.amount,
+                  usd:  product_price_in_us.amount
+                },
+                sale_prices:  {
+                  aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+                  usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
                 }
               }
             }
