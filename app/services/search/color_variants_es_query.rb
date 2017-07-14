@@ -119,15 +119,21 @@ module Search
                 end
               end
             end
+
+            if colors.present?
+              filter do
+                bool do
+                  colors.map do |color|
+                    should do
+                      term 'color.id' => color
+                    end
+                  end
+                end
+              end
+            end
+
           end
 
-          # filter do
-          #   if colors.present?
-          #     term 'color.id' => colors
-          #   end
-
-          #   exists field: 'available_on'
-          # end
 
           # query do
           #   if query_string.present?
