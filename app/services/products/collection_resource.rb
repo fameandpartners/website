@@ -189,8 +189,8 @@ class Products::CollectionResource
     @results ||= Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200').search(
         index: configatron.elasticsearch.indices.color_variants,
         body: query,
-        size: @size,
-        from: @offset
+        size: @size || 10,
+        from: @offset || 0
 
       )
   end
@@ -232,7 +232,6 @@ class Products::CollectionResource
   def cropped_images(color_variant)
     color_variant["cropped_images"].presence || begin
                                                # TODO Remove this block once indexes are live on production - 20150522
-                                               binding.pry
                                                Rails.logger.warn 'Building Product Cropped images on render'
                                                cropped_images = color_variant["images"].select{ |i| i["large"].to_s.downcase.include?('crop') }
 

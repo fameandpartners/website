@@ -134,14 +134,11 @@ module Search
 
           end
 
-
-          # query do
-          #   if query_string.present?
-          #     query_string do
-          #       query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
-          #     end
-          #   end
-          # end
+          if query_string.present?
+            query_string do
+              query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+            end
+          end
         end
       end
 
