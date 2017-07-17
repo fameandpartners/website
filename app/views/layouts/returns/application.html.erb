@@ -1,15 +1,31 @@
-<div class="app-child contentful-container">
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
 
-  <% lp_head = @landing_page_container[:header] %>
+    <%= stylesheet_link_tag 'application_contentful' %>
 
-  <%= render partial: "layouts/contentful/modules/headers/#{lp_head[:id]}", locals: {contents: lp_head} %>
+    <%= render 'layouts/redesign/head' %>
 
-  <% @landing_page_container[:rows].each do |row| %>
+  </head>
+  <body>
 
-    <% @md_contents = row[:md_item] %>
-    <% @lg_contents = row[:lg_item] %>
 
-    <%= render partial: "layouts/contentful/modules/rows/#{row[:id]}", locals: {contents: row} %>
-  <% end %>
+    <%= render 'layouts/redesign/header' %>
 
-</div>
+    <div class="app-container">
+      <%= yield %>
+    </div>
+
+    <%= render 'google_tag_manager/base' %>
+    <%= render 'layouts/redesign/footer' %>
+    <%= render 'layouts/redesign/shopping_bag' %>
+
+    <%= javascript_include_tag 'application_contentful' %>
+    <%= render 'layouts/contentful/javascript' %>
+
+  </body>
+</html>
