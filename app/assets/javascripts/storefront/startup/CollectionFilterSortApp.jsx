@@ -7,6 +7,7 @@ import { buildWhiteListedFilterSortProps, } from '../utilities/CollectionFilterS
 import CollectionFilter from '../components/CollectionFilter.jsx';
 import CollectionSort from '../components/CollectionSort.jsx';
 import CollectionSortMobile from '../components/CollectionSortMobile.jsx';
+import LeftHandNav from '../components/LeftHandNav'
 
 // GLOBAL INJECTION PATTERN: Anti pattern to attach props via global scope (currently necessary)
 const props = buildWhiteListedFilterSortProps();
@@ -16,7 +17,10 @@ const store = AppStore(props); // shared
 const CollectionFilterApp = () => {
   return (
     <Provider store={store}>
-      <CollectionFilter />
+     <div>
+       <LeftHandNav />
+       <CollectionFilter />
+     </div>
     </Provider>
   );
 };
@@ -33,7 +37,9 @@ const CollectionSortApp = () => {
 const CollectionFilterMobileApp = () => {
   return (
     <Provider store={store}>
-      <CollectionFilter isDrawerLayout/>
+     <div>
+       <CollectionFilter isDrawerLayout/>
+     </div>
     </Provider>
   );
 };
