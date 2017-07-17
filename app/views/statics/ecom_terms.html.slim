@@ -7,7 +7,7 @@
       .page-content.content-collapse-expand.col-md-8.col-md-offset-2
         #panel-articles.tab-pane.active role='tabpanel'
           .panel-group roll='tablist' aria-multiselectable='true'
-            - if custom_sale_banner_active?
+            - if Time.zone.now >= (DateTime.parse('Jul 17 12:01am -7:00'))
               .panel.content-collapse-expand.panel-default#collapse-july-offer-buy-2-get-1
                 .panel-heading role="tab"
                   a.panel-title.panel-uc-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
