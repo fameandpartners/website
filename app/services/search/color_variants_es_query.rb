@@ -140,6 +140,20 @@ module Search
             end
           end
         end
+
+        sort do
+          if body_shapes.present?
+            body_shapes.each {|bs| by "product.#{bs}", order: 'desc'}
+          end
+
+          if colors.present?
+            by "color.id", order: 'asc'
+          end
+
+          if product_ordering[:behaviour].present?
+            by product_ordering[:behaviour].first, product_ordering[:behaviour].last
+          end
+        end
       end
 
       definition
