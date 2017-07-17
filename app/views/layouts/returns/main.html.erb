@@ -1,0 +1,15 @@
+<div class="app-child contentful-container">
+
+  <% lp_head = @landing_page_container[:header] %>
+
+  <%= render partial: "layouts/contentful/modules/headers/#{lp_head[:id]}", locals: {contents: lp_head} %>
+
+  <% @landing_page_container[:rows].each do |row| %>
+
+    <% @md_contents = row[:md_item] %>
+    <% @lg_contents = row[:lg_item] %>
+
+    <%= render partial: "layouts/contentful/modules/rows/#{row[:id]}", locals: {contents: row} %>
+  <% end %>
+
+</div>
