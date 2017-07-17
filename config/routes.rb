@@ -416,7 +416,9 @@ FameAndPartners::Application.routes.draw do
 
     # Old Blog Redirection (30/06/2015)
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+    # Returns
 
+    get '/view-orders'   => 'returns#main'
     #######################
     # (Others) Static pages
     #######################

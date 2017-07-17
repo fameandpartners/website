@@ -2,7 +2,7 @@ class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
   require 'enumerator'
 
-  layout 'redesign/application'
+  layout 'returns/application'
 
   # enable showing of display banner
   before_filter :display_marketing_banner,
