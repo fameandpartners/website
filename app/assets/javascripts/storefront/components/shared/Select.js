@@ -118,7 +118,9 @@ class Select extends Component {
   }
 
   buildDropdown() {
+    console.log('buildDropdown()...');
     const options = this.props.options || [];
+    console.log(options);
 
     const dropdownComponent = options.map((option, index) => {
       const isFocused = (this.state.arrowFocusedIndex === index);
