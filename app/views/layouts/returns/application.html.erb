@@ -19,13 +19,8 @@
     <div class="app-container">
       <%= yield %>
     </div>
-
-    <%= render 'google_tag_manager/base' %>
     <%= render 'layouts/redesign/footer' %>
     <%= render 'layouts/redesign/shopping_bag' %>
-
-    <%= javascript_include_tag 'application_contentful' %>
-    <%= render 'layouts/contentful/javascript' %>
-
+    <%= javascript_include_tag 'application_returns' %>
   </body>
 </html>
