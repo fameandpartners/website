@@ -5,8 +5,8 @@ let localDataObject = {
     products: [
       {
         productName: 'The Carlotta Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'White and black pinstripe',
         height: '5ft 6in',
         price: 229,
@@ -20,8 +20,8 @@ let localDataObject = {
       },
       {
         productName: 'The Tania Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 199,
@@ -35,8 +35,8 @@ let localDataObject = {
       },
       {
         productName: 'The Cohen Shirt',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 99,
@@ -50,8 +50,8 @@ let localDataObject = {
       },
       {
         productName: 'The Torrance Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 99,

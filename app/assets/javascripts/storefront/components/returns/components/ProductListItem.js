@@ -1,30 +1,39 @@
-import React, {Component} from 'react';
-import Button from '../components/Button'
-import autoBind from 'auto-bind'
-import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject'
 import {Link} from 'react-router'
+import autoBind from 'auto-bind'
+import React, {Component, PropTypes} from 'react';
+import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject'
 import Checkbox from './Checkbox'
 import Select from '../../shared/Select'
+import Button from '../components/Button'
+
+const propTypes = {
+  product: PropTypes.object.isRequired,
+  orderIndex: PropTypes.number.isRequired,
+  activeTextBox: PropTypes.number,
+  updatePrimaryReturnReason: PropTypes.func,
+  updateOpenEndedReturnReason: PropTypes.func,
+  returnArray: PropTypes.array.isRequired,
+  showForm: PropTypes.bool,
+  confirmationPage: PropTypes.bool,
+  checkboxStatus: PropTypes.bool,
+  updateReturnArray: PropTypes.func,
+};
+
+const defaultProps = {
+  activeTextBox: null,
+  updatePrimaryReturnReason: null,
+  updateOpenEndedReturnReason: null,
+  updateReturnArray: null,
+  showForm: false,
+  confirmationPage: false,
+  checkboxStatus: false,
+};
+
+
 class ProductListItem extends Component {
-  constructor(props) {
-    super(props)
-    const {
-      product,
-      returnArray,
-      returnSubtotal,
-      confirmationPage,
-      showForm,
-      orderIndex,
-      activeTextBox
-    } = this.props
+  constructor() {
+    super()
     autoBind(this);
-  }
-  componentDidMount() {
-    const {product, activeTextBox} = this.props
-    const {productOrderID} = product
-    if(productOrderID === activeTextBox) {
-      this.textInput.focus()
-    }
   }
   updatePrimaryReason(reason) {
     const {updatePrimaryReturnReason, product, returnArray} = this.props
@@ -37,7 +46,6 @@ class ProductListItem extends Component {
   }
   generateOptions() {
     const product = this.props
-    const {primaryReturnReason} = product
     let primaryKeys = Object.keys(PrimaryReturnReasonsObject)
     return primaryKeys.map(p => {
       return {
@@ -46,6 +54,13 @@ class ProductListItem extends Component {
         id: p
       }
     })
+  }
+  componentDidMount() {
+    const {product, activeTextBox} = this.props
+    const {productOrderID} = product
+    if(productOrderID === activeTextBox) {
+      this.textInput.focus()
+    }
   }
   render() {
     const {
@@ -60,13 +75,13 @@ class ProductListItem extends Component {
           productOrderID, 
           image, 
           price, 
-          size_AU, 
-          size_US, 
+          auSize, 
+          usSize, 
           color, 
           height, 
         } = product
-    let { primaryReturnReason, 
-          openEndedReturnReason } = product
+    let {primaryReturnReason} = product
+    const {openEndedReturnReason} = product
     if(!primaryReturnReason) {
       primaryReturnReason = {}
     }
@@ -100,7 +115,7 @@ class ProductListItem extends Component {
                     Size:
                   </span>
                   <span className="meta--value">
-                    US {size_US}/AU {size_AU}
+                    US {usSize}/AU {auSize}
                   </span>
                 </div>
                 <div className="meta--marginBottom">
@@ -128,6 +143,7 @@ class ProductListItem extends Component {
                       href="https://www.ups.com/WebTracking/track?loc=en_us" 
                       className="button-link button-link--black-text"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Track Shipping
                     </a>
@@ -168,4 +184,7 @@ class ProductListItem extends Component {
     )
   }
 }
+ProductListItem.propTypes = propTypes;
+ProductListItem.defaultProps = defaultProps;
+
 export default ProductListItem;

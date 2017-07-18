@@ -6,8 +6,8 @@ const orders = [
     products: [
       {
         productName: 'The Carlotta Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'White and black pinstripe',
         height: '5ft 6in',
         price: 229,
@@ -20,8 +20,8 @@ const orders = [
       },
       {
         productName: 'The Tania Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 199,
@@ -34,8 +34,8 @@ const orders = [
       },
       {
         productName: 'The Cohen Shirt',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 99,
@@ -48,8 +48,8 @@ const orders = [
       },
       {
         productName: 'The Torrance Dress',
-        size_US: '6',
-        size_AU: '10',
+        usSize: '6',
+        auSize: '10',
         color: 'Red',
         height: '5ft 6in',
         price: 99,
