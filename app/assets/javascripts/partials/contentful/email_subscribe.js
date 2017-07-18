@@ -19,6 +19,7 @@
       this.campaign = opts.campaign || 'home';
       this.$form = $('.' + opts.form);
       this.$form.on('submit', this.submit);
+      this.source = opts.source || 'Contentful Email Module'
     }
 
     NewsletterSubscriberOnPage.prototype.url = function() {
@@ -41,7 +42,8 @@
         data: {
           email: email,
           service: service,
-          form_name: form_name
+          form_name: form_name,
+          source: this.source
         },
         success: this.handler,
         error: function () {
