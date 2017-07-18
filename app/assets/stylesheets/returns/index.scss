@@ -5,6 +5,9 @@ body {
   font-family: sans-serif;
   background: #F5F5F5
 }
+#returnsApp {
+	margin-top: 150px;
+}
 .u-hide {
 	display: none !important;
 }
@@ -32,6 +35,9 @@ button a {
 .button-link {
 	padding: 1.3em 3em;
 	display: block;
+}
+.button-link:hover {
+	color: inherit;
 }
 .button-link--black-text {
 	color: black;

@@ -145,14 +145,14 @@ class ProductListItem extends Component {
              <div className={showForm ? "col-4_md-10_sm-10_xs-12 Form__Container" : "u-hide"}>
                 <div className={showForm && checkboxStatus ? "u-show" : "u-hide"}>
                  <form>
-                   <p>Why are you returning this?</p>
+                       <p className="u-no-margin">Why are you returning this?</p>
                        <Select
                          id={`${productOrderID}-primary`}
                          options={primaryReturnReasonArray}
                          onChange={this.updatePrimaryReason}
                        />
                        <div className={primaryReturnReason ? "u-show" : "u-hide"}>
-                         <p>Let us know what you didn’t like.</p>
+                         <p className="u-no-margin">Let us know what you didn’t like.</p>
                          <textarea 
                            onChange={this.updateOpenEndedReason} 
                            value={openEndedReturnReason} 
