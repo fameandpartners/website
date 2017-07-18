@@ -17,7 +17,6 @@ let localDataObject = {
         trackingNumber: '123',
         productOrderID: 342,
         primaryReturnReason: "DELIVERY_ISSUES",
-        secondaryReturnReason: "ORDER_LATE",
       },
       {
         productName: 'The Tania Dress',
@@ -33,7 +32,6 @@ let localDataObject = {
         trackingNumber: '123',
         productOrderID: 502,
         primaryReturnReason: "DELIVERY_ISSUES",
-        secondaryReturnReason: "ORDER_LATE",
       },
       {
         productName: 'The Cohen Shirt',
@@ -49,7 +47,6 @@ let localDataObject = {
         trackingNumber: '123',
         productOrderID: 999,
         primaryReturnReason: "DELIVERY_ISSUES",
-        secondaryReturnReason: "ORDER_LATE",
       },
       {
         productName: 'The Torrance Dress',
@@ -65,7 +62,6 @@ let localDataObject = {
         trackingNumber: '456',
         productOrderID: 231,
         primaryReturnReason: "DELIVERY_ISSUES",
-        secondaryReturnReason: "ORDER_LATE",
       }
     ]
 }

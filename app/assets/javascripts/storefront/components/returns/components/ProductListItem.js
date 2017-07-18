@@ -14,7 +14,6 @@ class ProductListItem extends Component {
       returnSubtotal,
       confirmationPage,
       showForm,
-      secondaryReturnReasonsArray,
       orderIndex,
       activeTextBox
     } = this.props
@@ -30,10 +29,6 @@ class ProductListItem extends Component {
   updatePrimaryReason(reason) {
     const {updatePrimaryReturnReason, product, returnArray} = this.props
     updatePrimaryReturnReason(reason, product, returnArray)
-  }
-  updateSecondaryReason(reason) {
-    const {updateSecondaryReturnReason, product, returnArray} = this.props
-    updateSecondaryReturnReason(reason, product, returnArray)
   }
   updateOpenEndedReason(e) {
     const {updateOpenEndedReturnReason, product, returnArray} = this.props
@@ -57,7 +52,6 @@ class ProductListItem extends Component {
       product,
       showForm,
       confirmationPage,
-      secondaryReturnReasonsArray,
       orderIndex,
       checkboxStatus, 
       updateReturnArray
@@ -72,15 +66,10 @@ class ProductListItem extends Component {
           height, 
         } = product
     let { primaryReturnReason, 
-          secondaryReturnReason, 
           openEndedReturnReason } = product
     if(!primaryReturnReason) {
       primaryReturnReason = {}
     }
-    if(!secondaryReturnReason) {
-      secondaryReturnReason = {}
-    }
-
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject)
     return (
           <div 
@@ -163,11 +152,6 @@ class ProductListItem extends Component {
                          onChange={this.updatePrimaryReason}
                        />
                        <div className={primaryReturnReason ? "u-show" : "u-hide"}>
-                         <Select
-                           id={`${productOrderID}-secondary`}
-                           options={secondaryReturnReasonsArray}
-                           onChange={this.updateSecondaryReason}
-                         />
                          <p>Let us know what you didn’t like.</p>
                          <textarea 
                            onChange={this.updateOpenEndedReason} 

@@ -51,12 +51,9 @@ class ProductContainer extends Component {
 				return true
 			}
 			return false
-		})
-		let secondaryReasonsObject = generateSecondaryObject(product.primaryReturnReason)
-		let secondaryReturnReasonsArray = this.generateSecondaryOptionArray(secondaryReasonsObject)
+		});
 		this.setState({
 			checkboxStatus: currentCheckboxStatus,
-			secondaryReturnReasonsArray: secondaryReturnReasonsArray
 		});
 	}
 	updateReturnArray() {

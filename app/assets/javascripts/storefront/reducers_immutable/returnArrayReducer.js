@@ -6,8 +6,6 @@ export default function(state = [], action) {
             return action.payload.returnArray
         case 'UPDATE_PRIMARY_RETURN_REASON':
             return action.payload
-        case 'UPDATE_SECONDARY_RETURN_REASON':
-            return action.payload
         case 'UPDATE_OPEN_ENDED_RETURN_REASON':
             return action.payload.returnArray
         default:
