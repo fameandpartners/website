@@ -1,0 +1,99 @@
+@import './mixins';
+.u-center-text {
+    text-align: center;
+}
+
+.StepOne__Container {
+    background: #F5F5F5;
+    margin: 0;
+    @include desktop {
+        margin: auto 32px;
+    }
+}
+
+.StepOne__Container .return-checkbox {
+    float: left;
+    margin-right: 15px;
+    @include mobile {
+        position: absolute;
+        left: 5vw;
+    }
+    @include tablet {
+        position: absolute;
+        left: 25vw;
+    }
+}
+
+.StepOne__Container .Product__listItem__container {
+    padding: 60px 20px;
+    @include desktop {
+        padding: 40px 45px 25px 75px;
+        margin-bottom: 80px;
+    }
+}
+
+.StepOne__Container .instructions {
+    text-align: center;
+    color: #000000;
+}
+
+.StepOne__Container .instructions.instructions__title {
+    font-size: 34px;
+    margin-bottom: 0;
+}
+
+.StepOne__Container .instructions.instructions__subtitle {
+    font-size: 18px;
+}
+
+.StepOne__Container .ship-date {
+    font-size: 22px;
+    text-align: center;
+    color: black;
+    margin-bottom: 35px;
+    @include desktop {
+        text-align: left;
+    }
+    @include xLarge {
+        text-align: center;
+    }
+}
+
+.StepOne__Container .order-id {
+    @include desktop {
+        margin-top: -35px;
+    }
+}
+
+.StepOne__Container .Form__Container {
+    @include tablet {
+        padding: 0;
+    }
+    @include desktop {
+        padding: 0;
+        margin: 10px 0 0 35px;
+    }
+}
+
+.StepOne__Container .Form__Container textarea {
+    border: 1px solid #979797;
+    resize: none;
+    width: 100%;
+    min-height: 150px;
+    @include mediumUp {
+        min-height: 110px;
+    }
+}
+
+.StepOne__Container .Form__Container select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid;
+    border-radius: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+    background: white;
+    width: 100%;
+}

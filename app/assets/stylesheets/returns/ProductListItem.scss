@@ -1,0 +1,121 @@
+@import './mixins';
+.Product__listItem {
+    margin: auto;
+    @include desktop {
+        margin: inherit;
+    }
+    @include tablet {
+        margin-top: 40px;
+        padding: 25px;
+    }
+}
+
+.Product__listItem .checkbox--container {
+    text-align: right;
+}
+
+.Product__listItem .meta--key {
+    font-weight: 600;
+    padding: 0 7px 0 0;
+    font-size: 16px;
+}
+
+.Product__listItem .nameAndPrice--marginBottom {
+    margin: 3px auto 38px;
+}
+
+.Product__listItem .meta--marginBottom {
+    margin-bottom: 7px;
+}
+
+.Product__listItem .product-image {
+    width: 100%;
+    @include tablet {
+        min-width: 216px;
+        float: left;
+        margin-right: 25px;
+        width: auto;
+    }
+    @include desktop {
+        max-width: 180px;
+        float: left;
+        margin-right: 30px;
+    }
+}
+
+.Product__listItem .product--image {
+    @include mediumUp {
+        float: left;
+        margin-right: 45px;
+    }
+}
+
+.Product__listItem .Checkbox__wrapper label {
+    position: absolute;
+    left: 25px;
+    @include mediumUp {
+        position: relative;
+        left: 0px;
+    }
+}
+
+.Product__listItem .Checkbox {
+    &:checked + label:after {
+        left: 3px;
+        top: 3px;
+        width: 15px;
+        height: 15px;
+        background: black;
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        background-repeat: no-repeat;
+        background-image: url('../assets/checkbox.png');
+        background-size: contain;
+        box-shadow: none;
+    }
+}
+
+.Product__listItem__container {
+    background-color: #FFFFFF;
+    @include xLarge {
+        max-width: 1000px;
+        margin: 0 auto 80px;
+    }
+}
+
+.Product__listItem__container hr {
+    display: none;
+    margin: 45px 10px 50px;
+    @include desktop {
+        display: block;
+    }
+}
+
+.Product__listItem__container .Select--wrapper {
+    margin: 10px 0;
+}
+
+.ReturnButton__Container {
+    @include tablet {
+        padding: 0;
+    }
+}
+
+.ReturnButton__Container button {
+    margin: 0 .5em 1em;
+    padding: 0;
+    font-family: inherit;
+    @include desktop {
+        min-width: 200px;
+    }
+}
+
+.ReturnButton__Container div p:first-child {
+    @include desktop {
+        margin-top: 0;
+    }
+}
+
+.Form__Container .select--marginTop {
+    margin-top: 20px;
+}

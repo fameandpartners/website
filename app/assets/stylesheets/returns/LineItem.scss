@@ -1,0 +1,30 @@
+@import './mixins';
+.LineItem__Container {
+    @include tablet {
+        margin: 0 auto;
+    }
+}
+
+.LineItem {
+    margin-top: 72px;
+    text-align: center;
+    @include desktop {
+        margin-top: 92px;
+        text-align: right;
+    }
+    .total {
+        font-weight: 600;
+    }
+    .button-link {
+        padding: 1.3em 5em;
+    }
+}
+
+.LineItem hr {
+    @include desktop {
+        display: block;
+        width: 20vw;
+        position: relative;
+        left: 39vw;
+    }
+}

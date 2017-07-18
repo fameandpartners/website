@@ -1,0 +1,100 @@
+@import './mixins';
+.instructions__container {
+    margin-top: 30px;
+}
+.instructions__container .orders-link {
+    color: black;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.instructions__container hr {
+    width: 100%;
+}
+.instructions__body {
+    width: 85%;
+    margin: 7.5% auto;
+    @include mediumUp {
+        width: 75%;
+        margin: 30px auto;
+    }
+}
+
+.instructions__body .headline {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.instructions__body .label-list {
+    @include tablet {
+        float: left;
+        text-align: center;
+        padding: 0 30%;
+    }
+    @include desktop {
+        float: right;
+        margin-top: -30px;
+    }
+}
+
+.instructions__body .label-list li {
+    float: left;
+    list-style: none;
+    margin: 0 50px 0 0;
+}
+
+.instructions__body .label-list li:last-child {
+    margin-right: 0;
+}
+
+.instructions__body .label-list li a {
+    color: black;
+}
+
+.instructions__body .list-title {
+    font-size: 22px;
+}
+
+.instructions__body .list {
+    list-style: none;
+}
+
+.instructions__body .list {
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.instructions__body .list .list-text {
+    display: inline-block;
+    text-indent: 5px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.instructions__body .list > li {
+    list-style: none;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.instructions__body .list > li:before {
+    content: "-";
+}
+
+.instructions__body .list .link {
+    color: black;
+}
+
+.instructions__body .shipping-label {
+    margin-bottom: 70px;
+}
+
+.instructions__body .button__container {
+    @include tablet {
+        margin: 50px 150px;
+    }
+}
+
+.instructions__body .button__container button {
+    max-width: 390px;
+    width: 100%
+}

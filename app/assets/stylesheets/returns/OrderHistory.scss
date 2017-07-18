@@ -1,0 +1,54 @@
+@import './mixins';
+.Order__Container {
+    padding: 0;
+    @include mediumUp {
+        margin: auto 32px;
+    }
+}
+
+.Order__Container .order-id {
+    font-size: 22px;
+    text-align: center;
+}
+
+.Order__Container .order-placed {
+    font-size: 14px;
+    color: #979797;
+    text-align: center;
+}
+
+.Order__Container .order-id {
+    @include desktop {
+        float: left;
+        margin-top: -40px;
+        text-align: left;
+    }
+}
+
+.Order__Container .order-placed {
+    @include desktop {
+        margin-top: 30px;
+        text-align: right;
+    }
+}
+
+.Order__Container .Product__listItem__container {
+    padding: 40px 20px;
+    @include mediumUp {
+        padding: 25px 45px;
+        margin-bottom: 90px;
+    }
+}
+.Product__listItem, .Order__Container .ReturnButton__Container {
+    margin: 25px 0px 40px;
+}
+.Order__Container .Product__listItem__container .ship-date {
+    color: #979797;
+    text-indent: 12vw;
+    @include tablet {
+        text-indent: 0;
+    }
+    @include desktop {
+        text-indent: -10px;
+    }
+}
