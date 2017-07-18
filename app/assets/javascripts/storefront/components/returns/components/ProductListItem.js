@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Button from '../components/Button'
 import autoBind from 'auto-bind'
-import PrimaryReturnReasonsArray from '../../../constants/PrimaryReturnReasonsArray'
+import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject'
 import {Link} from 'react-router'
 import Checkbox from './Checkbox'
 import Select from '../../shared/Select'
@@ -18,41 +18,39 @@ class ProductListItem extends Component {
       orderIndex,
       activeTextBox
     } = this.props
-    this.state = {
-      product: product,
-      returnArray: returnArray,
-      returnSubtotal: returnSubtotal,
-      showForm: showForm,
-      secondaryReturnReasonsArray: secondaryReturnReasonsArray,
-      orderIndex: orderIndex,
-      reason: '',
-      confirmationPage: confirmationPage,
-      activeTextBox: activeTextBox
-    };
     autoBind(this);
   }
   componentDidMount() {
-    const {product, activeTextBox} = this.state
+    const {product, activeTextBox} = this.props
     const {productOrderID} = product
     if(productOrderID === activeTextBox) {
       this.textInput.focus()
     }
   }
   updatePrimaryReason(reason) {
-    const {returnArray, product} = this.state
-    const {updatePrimaryReturnReason} = this.props
+    const {updatePrimaryReturnReason, product, returnArray} = this.props
     updatePrimaryReturnReason(reason, product, returnArray)
   }
   updateSecondaryReason(reason) {
-    const {product, returnArray} = this.state
-    const {updateSecondaryReturnReason} = this.props
+    const {updateSecondaryReturnReason, product, returnArray} = this.props
     updateSecondaryReturnReason(reason, product, returnArray)
   }
   updateOpenEndedReason(e) {
-    const {product, returnArray} = this.state
-    const {updateOpenEndedReturnReason} = this.props
+    const {updateOpenEndedReturnReason, product, returnArray} = this.props
     const reason = e.target.value
     updateOpenEndedReturnReason(reason, product, returnArray)
+  }
+  generateOptions() {
+    const product = this.props
+    const {primaryReturnReason} = product
+    let primaryKeys = Object.keys(PrimaryReturnReasonsObject)
+    return primaryKeys.map(p => {
+      return {
+        active: p === product.product.primaryReturnReason,
+        name: PrimaryReturnReasonsObject[p].name,
+        id: p
+      }
+    })
   }
   render() {
     const {
@@ -61,8 +59,9 @@ class ProductListItem extends Component {
       confirmationPage,
       secondaryReturnReasonsArray,
       orderIndex,
-    } = this.state
-    const {checkboxStatus, updateReturnArray} = this.props
+      checkboxStatus, 
+      updateReturnArray
+    } = this.props
     const { productName,
           productOrderID, 
           image, 
@@ -81,6 +80,8 @@ class ProductListItem extends Component {
     if(!secondaryReturnReason) {
       secondaryReturnReason = {}
     }
+
+    const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject)
     return (
           <div 
             key={productOrderID}
@@ -158,14 +159,12 @@ class ProductListItem extends Component {
                    <p>Why are you returning this?</p>
                        <Select
                          id={`${productOrderID}-primary`}
-                         label={primaryReturnReason.displayText || "Choose Something"}
-                         options={PrimaryReturnReasonsArray}
+                         options={primaryReturnReasonArray}
                          onChange={this.updatePrimaryReason}
                        />
                        <div className={primaryReturnReason ? "u-show" : "u-hide"}>
                          <Select
                            id={`${productOrderID}-secondary`}
-                           label={secondaryReturnReason.displayText || "Choose Something"}
                            options={secondaryReturnReasonsArray}
                            onChange={this.updateSecondaryReason}
                          />

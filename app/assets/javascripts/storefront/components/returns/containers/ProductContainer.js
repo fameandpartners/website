@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as AppActions from '../actions/index'
 import autoBind from 'auto-bind'
-import generateSecondaryReasons from '../../../libs/generateSecondaryReasons'
+import generateSecondaryObject from '../../../libs/generateSecondaryReasons'
 import ProductListItem from '../components/ProductListItem'
 
 class ProductContainer extends Component {
@@ -28,9 +28,22 @@ class ProductContainer extends Component {
 		}
 		autoBind(this);
 	}
+	generateSecondaryOptionArray(optionsObject) {
+	  const product = this.props
+	  const {secondaryReturnReason} = product
+	  let secondaryKeys = Object.keys(optionsObject)
+	  return secondaryKeys.map(p => {
+	    return {
+	      active: p === product.product.secondaryReturnReason,
+	      name: optionsObject[p].name,
+	      id: p
+	    }
+	  })
+	}
 	componentWillMount() {
 		const {product, checkboxStatus} = this.state
 		const {returnArray} = this.props
+		const {secondaryReturnReason} = product
 		let currentCheckboxStatus = checkboxStatus
 		returnArray.map(r => {
 			if(r.productOrderID === product.productOrderID) {
@@ -39,9 +52,11 @@ class ProductContainer extends Component {
 			}
 			return false
 		})
+		let secondaryReasonsObject = generateSecondaryObject(product.primaryReturnReason)
+		let secondaryReturnReasonsArray = this.generateSecondaryOptionArray(secondaryReasonsObject)
 		this.setState({
 			checkboxStatus: currentCheckboxStatus,
-			secondaryReturnReasonsArray: generateSecondaryReasons(product.primaryReturnReason),
+			secondaryReturnReasonsArray: secondaryReturnReasonsArray
 		});
 	}
 	updateReturnArray() {

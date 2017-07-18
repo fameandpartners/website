@@ -1,6 +1,5 @@
 export const addProductToReturnArray = (product, currentArray) => {
-	product['primaryReturnReason'] = ''
-	product['secondaryReturnReason'] = ''
+	console.log("PRODUCT", product)
 	product['openEndedReturnReason'] = ''
 	currentArray.push(product)
 	// Remove duplicates
@@ -44,10 +43,9 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
 };
 
 export const updatePrimaryReturnReason = (reason, product, returnArray) => {
-	console.log(reason, product, returnArray)
 	const newReturnArray = returnArray.map(p => {
 		if(p.productOrderID === product.productOrderID) {
-			p.primaryReturnReason = reason
+			p.primaryReturnReason = reason.option.id
 			return p
 		}
 		return p
