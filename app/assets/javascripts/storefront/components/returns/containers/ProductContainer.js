@@ -1,98 +1,112 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes} from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import autoBind from 'auto-bind';
 import * as AppActions from '../actions/index'
-import autoBind from 'auto-bind'
-import generateSecondaryObject from '../../../libs/generateSecondaryReasons'
 import ProductListItem from '../components/ProductListItem'
 
+const propTypes = {
+  product: PropTypes.object.isRequired,
+  returnArray: PropTypes.array.isRequired,
+  addProductToReturnArray: PropTypes.func,
+  removeProductFromReturnArray: PropTypes.func,
+  returnSubtotal: PropTypes.number,
+  checkboxStatus: PropTypes.bool,
+  confirmationPage: PropTypes.bool,
+  orderIndex: PropTypes.number
+};
+
+const defaultProps = {
+	addProductToReturnArray: null,
+	removeProductFromReturnArray: null,
+	returnSubtotal: 0,
+	confirmationPage: false,
+	checkboxStatus: false,
+	orderIndex: null,
+};
+
+
 class ProductContainer extends Component {
-	constructor(props) {
-		super(props)
-		const { product,
-			    showForm,
-			    orderIndex,
-			    confirmationPage,
-			    returnSubtotal,
-			    activeTextBox 
-		} = this.props
-		this.state = {
-			product: product,
-			showForm: showForm,
-			orderIndex: orderIndex,
-			confirmationPage: confirmationPage,
-			returnSubtotal: returnSubtotal,
-			activeTextBox: activeTextBox,
-			checkboxStatus: false,
-			secondaryReturnReasonsArray: [],
-		}
-		autoBind(this);
-	}
-	generateSecondaryOptionArray(optionsObject) {
-	  const product = this.props
-	  const {secondaryReturnReason} = product
-	  let secondaryKeys = Object.keys(optionsObject)
-	  return secondaryKeys.map(p => {
-	    return {
-	      active: p === product.product.secondaryReturnReason,
-	      name: optionsObject[p].name,
-	      id: p
-	    }
-	  })
-	}
-	componentWillMount() {
-		const {product, checkboxStatus} = this.state
-		const {returnArray} = this.props
-		const {secondaryReturnReason} = product
-		let currentCheckboxStatus = checkboxStatus
-		returnArray.map(r => {
-			if(r.productOrderID === product.productOrderID) {
-				currentCheckboxStatus = true
-				return true
-			}
-			return false
-		});
-		this.setState({
-			checkboxStatus: currentCheckboxStatus,
-		});
-	}
-	updateReturnArray() {
-		const {checkboxStatus, product} = this.state
-		const {addProductToReturnArray, removeProductFromReturnArray, returnSubtotal, returnArray} = this.props
-		if(!checkboxStatus){	
-			addProductToReturnArray(product, returnArray, returnSubtotal)
-		} else {	
-			removeProductFromReturnArray(product, returnArray, returnSubtotal)
-		}
-	}
-	render() {
-		const {	orderIndex, 
-				confirmationPage, 
-				checkboxStatus, 
-				secondaryReturnReasonsArray, 
-		} = this.state 
-		return (
-		  <div>
-			 <ProductListItem 
-			 {...this.props} 
-			 confirmationPage={confirmationPage} 
-			 checkboxStatus={checkboxStatus}
-			 secondaryReturnReasonsArray={secondaryReturnReasonsArray}
-			 orderIndex={orderIndex}
-			 updateReturnArray={() => this.updateReturnArray()}
-			 />
-		  </div>
-		)
-	}
+  constructor() {
+    super();
+    this.state = {
+      checkboxStatus: false
+    }
+    autoBind(this);
+  }
+  generateSecondaryOptionArray(optionsObject) {
+    const product = this.props
+    let secondaryKeys = Object.keys(optionsObject)
+    return secondaryKeys.map(p => {
+      return {
+        active: p === product.product.secondaryReturnReason,
+        name: optionsObject[p].name,
+        id: p
+      }
+    });
+  }
+  updateReturnArray() {
+    const { checkboxStatus } = this.state
+    const { product } = this.props
+    const {
+      addProductToReturnArray,
+      removeProductFromReturnArray,
+      returnSubtotal,
+      returnArray
+    } = this.props
+    if (!checkboxStatus) {
+      addProductToReturnArray(product, returnArray, returnSubtotal)
+    } else {
+      removeProductFromReturnArray(product, returnArray, returnSubtotal)
+    }
+  }
+  componentWillMount() {
+    const { checkboxStatus } = this.props
+    const { returnArray, product } = this.props
+    let currentCheckboxStatus = checkboxStatus
+    returnArray.map(r => {
+      if (r.productOrderID === product.productOrderID) {
+        currentCheckboxStatus = true
+        return true
+      }
+      return false
+    });
+    this.setState({
+      checkboxStatus: currentCheckboxStatus,
+    });
+  }
+  render() {
+    const {
+      orderIndex,
+      confirmationPage,
+    } = this.props
+    const { checkboxStatus } = this.state
+    return ( 
+    <div>
+      <ProductListItem { ...this.props } 
+      	confirmationPage={confirmationPage} 
+      	checkboxStatus={checkboxStatus} 
+      	orderIndex={orderIndex} 
+      	updateReturnArray={() => this.updateReturnArray()}
+      />
+    </div>
+    )
+  }
 }
+
 function mapStateToProps(state) {
-    return {
-        returnArray: state.returnArray,
-        returnSubtotal: state.returnSubtotal,
-        activeTextBox: state.activeTextBox
-    };
+  return {
+    returnArray: state.returnArray,
+    returnSubtotal: state.returnSubtotal,
+    activeTextBox: state.activeTextBox
+  };
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators(AppActions, dispatch);
+
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators(AppActions, dispatch);
 }
+
+ProductContainer.propTypes = propTypes;
+ProductContainer.defaultProps = defaultProps;
+
 export default connect(mapStateToProps, matchDispatchToProps)(ProductContainer);
