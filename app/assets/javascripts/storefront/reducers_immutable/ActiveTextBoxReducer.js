@@ -1,4 +1,4 @@
-export default function(state = [], action) {
+export default function(state = null, action) {
     switch (action.type) {
         case 'ADD_PRODUCT_TO_RETURN_ARRAY':
             return action.payload.productID

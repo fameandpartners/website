@@ -6,7 +6,9 @@ body {
   background: #F5F5F5
 }
 #returnsApp {
-	margin-top: 150px;
+	@include desktop {
+		margin-top: 150px;
+	}
 }
 .u-hide {
 	display: none !important;
@@ -25,6 +27,9 @@ body {
 }
 .u-margin-auto {
 	margin: 0 auto;
+}
+.u-no-opacity {
+	opacity: 0 !important;
 }
 .u-white-text {
 	color: white;

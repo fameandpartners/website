@@ -32,7 +32,7 @@ class StepOneContainer extends Component {
               </div>
             </div>                        
             <div className="grid-noGutter-right">
-              <div className="col-10_sm-12">
+              <div className="col-10_md-12_sm-12">
                 {
                   orderArray.map(productArray => {
                     return (

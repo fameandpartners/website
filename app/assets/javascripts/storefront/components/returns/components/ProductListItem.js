@@ -1,6 +1,7 @@
 import {Link} from 'react-router'
 import autoBind from 'auto-bind'
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react'
+import moment from 'moment'
 import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject'
 import Checkbox from './Checkbox'
 import Select from '../../shared/Select'
@@ -8,7 +9,7 @@ import Button from '../components/Button'
 
 const propTypes = {
   product: PropTypes.object.isRequired,
-  orderIndex: PropTypes.number.isRequired,
+  orderIndex: PropTypes.number,
   activeTextBox: PropTypes.number,
   updatePrimaryReturnReason: PropTypes.func,
   updateOpenEndedReturnReason: PropTypes.func,
@@ -57,7 +58,7 @@ class ProductListItem extends Component {
   }
   componentDidMount() {
     const {product, activeTextBox} = this.props
-    const {productOrderID} = product
+    const {productOrderID} = product    
     if(productOrderID === activeTextBox) {
       this.textInput.focus()
     }
@@ -79,6 +80,8 @@ class ProductListItem extends Component {
           usSize, 
           color, 
           height, 
+          orderPlaced,
+          returnWindowEnd
         } = product
     let {primaryReturnReason} = product
     const {openEndedReturnReason} = product
@@ -86,6 +89,14 @@ class ProductListItem extends Component {
       primaryReturnReason = {}
     }
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject)
+    const currentDay = moment()
+    const lastDay = moment(new Date(orderPlaced))
+    const lastDayArray = moment([[lastDay.format("YYYY")][0], [lastDay.format("M")][0], [lastDay.format("D")][0]])
+    const currentDayArray = moment([[currentDay.format("YYYY")][0], [currentDay.format("M")][0], [currentDay.format("D")][0]]) 
+    const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50
+    if(!returnEligible) {
+      console.log(productName, " is not eligible for return.")
+    }
     return (
           <div 
             key={productOrderID}
@@ -94,8 +105,8 @@ class ProductListItem extends Component {
            <div className="col-7_md-9_sm-5_xs-9 Product__listItem">
               <Checkbox 
                 id={`${productOrderID}-checkbox`}
-                wrapperClassName="Modal__content--med-margin-bottom"
-                onChange={() => updateReturnArray()}
+                wrapperClassName={returnEligible ? "Modal__content--med-margin-bottom" : "u-no-opacity"}
+                onChange={returnEligible ? () => updateReturnArray() : () => {}}
                 checkboxStatus={checkboxStatus} 
                 showForm={showForm} 
               />  
@@ -136,49 +147,70 @@ class ProductListItem extends Component {
                 </div>
               </div>          
            </div>
-           <div className={!showForm ? "col-3_md-9_xs-9 ReturnButton__Container" : "u-hide"}>
-                <div className={orderIndex === 0 ? "grid-spaceAround" : "u-hide"}>
-                  <Button className="col-12_md-5_sm-12">
-                    <a 
-                      href="https://www.ups.com/WebTracking/track?loc=en_us" 
-                      className="button-link button-link--black-text"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Track Shipping
-                    </a>
-                  </Button>
-                  <Button primary className="col-12_md-5_sm-12">
-                    <Link 
-                      to={'/start-return/123'}
-                      className="u-white-text button-link"
-                    >
-                      Start Return
-                    </Link>
-                  </Button>
+           <div className={!returnEligible && showForm ? "col-4_md-10_sm-10_xs-12 returnWindowPassed__container" : "u-hide"}>
+              <div className="grid-middle">
+                <div className="col-12">
+                  <p className="windowClosed-copy">
+                    Return window closed on <br/>
+                    {returnWindowEnd}
+                  </p>
+                </div>
+                <div className="col-12">
+                  <ul className="windowClosed-list">
+                    <li>
+                      <a href="#">View Return Policy</a>
+                    </li>
+                    <li>
+                      <a href="#">Contact Customer Service</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-             <div className={showForm ? "col-4_md-10_sm-10_xs-12 Form__Container" : "u-hide"}>
-                <div className={showForm && checkboxStatus ? "u-show" : "u-hide"}>
-                 <form>
-                       <p className="u-no-margin">Why are you returning this?</p>
-                       <Select
-                         id={`${productOrderID}-primary`}
-                         options={primaryReturnReasonArray}
-                         onChange={this.updatePrimaryReason}
+              
+           </div>
+           <div className={showForm ? "u-hide" : "col-3_md-9_xs-9 ReturnButton__Container"}>
+              <div className={orderIndex === 0 ? "grid-spaceAround" : "u-hide"}>
+                <Button className="col-12_md-5_sm-12">
+                  <a 
+                    href="https://www.ups.com/WebTracking/track?loc=en_us" 
+                    className="button-link button-link--black-text"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Track Shipping
+                  </a>
+                </Button>
+                <Button primary className="col-12_md-5_sm-12">
+                  <Link 
+                    to={'/start-return/123'}
+                    className="u-white-text button-link"
+                  >
+                    Start Return
+                  </Link>
+                </Button>
+              </div>
+            </div>
+           <div className={showForm ? "col-4_md-10_sm-10_xs-12 Form__Container" : "u-hide"}>
+              <div className={showForm && checkboxStatus && returnEligible ? "u-show" : "u-hide"}>
+               <form>
+                     <p className="u-no-margin">Why are you returning this?</p>
+                     <Select
+                       id={`${productOrderID}-primary`}
+                       options={primaryReturnReasonArray}
+                       onChange={this.updatePrimaryReason}
+                     />
+                     <div className={primaryReturnReason ? "u-show" : "u-hide"}>
+                       <p className="u-no-margin">Let us know what you didn’t like.</p>
+                       <textarea 
+                         onChange={this.updateOpenEndedReason} 
+                         value={openEndedReturnReason} 
+                         ref={(text) => { this.textInput = text; }} 
+                         type="text" 
                        />
-                       <div className={primaryReturnReason ? "u-show" : "u-hide"}>
-                         <p className="u-no-margin">Let us know what you didn’t like.</p>
-                         <textarea 
-                           onChange={this.updateOpenEndedReason} 
-                           value={openEndedReturnReason} 
-                           ref={(text) => { this.textInput = text; }} 
-                           type="text" 
-                         />
-                       </div>
-                 </form>
-                </div>
-             </div>
+                     </div>
+               </form>
+              </div>
+           </div>
            
           </div>
     )

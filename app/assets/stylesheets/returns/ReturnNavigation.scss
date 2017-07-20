@@ -4,6 +4,10 @@
     padding-top: 20px;
     background: white;
     padding-left: 0;
+    margin-bottom: 50px;
+    @include mediumUp {
+        margin-bottom: 0;
+    }
     @include desktop {
         padding-top: 60px;
         padding-left: 80px;
