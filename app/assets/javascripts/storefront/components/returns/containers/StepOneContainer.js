@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import LineItem from '../components/LineItem'
 import ReturnNavigation from '../components/ReturnNavigation'
 import ProductContainer from './ProductContainer'
 import {getOrderArray} from '../../../libs/getOrderArray';
-import {connect} from 'react-redux';
+
+const propTypes = {
+  orderData: PropTypes.array.isRequired,
+  returnSubtotal: PropTypes.number.isRequired,
+};
 
 class StepOneContainer extends Component {
   constructor(props) {
@@ -12,7 +17,7 @@ class StepOneContainer extends Component {
       order: this.props.orderData,
       orderArray: getOrderArray(this.props.orderData['products'])
     }
-  }
+  } 
   render() {
     let {order, orderArray} = this.state
     let {shipDate} = order
@@ -27,7 +32,9 @@ class StepOneContainer extends Component {
                       <br/> Please select the item(s) you would like to return                      
                   </p>
                   <p className="instructions instructions__subtitle">
-                      Please note that any item must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
+                      Please note that any item must be in new, unused and resalable condition, 
+                      with the DO NOT REMOVE tag still attached in the same place as 
+                      originally sent.
                   </p>
               </div>
             </div>                        
@@ -64,6 +71,8 @@ class StepOneContainer extends Component {
     );
   }
 }
+
+StepOneContainer.propTypes = propTypes;
 
 function mapStateToProps(state) {
     return {
