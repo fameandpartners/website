@@ -46,6 +46,10 @@ class Spree::Gateway::FameStripe < Spree::Gateway
     preferred_currency.presence || DEFAULT_CURRENCY
   end
 
+  def refund(amount, payment_code, gateway_options = {})
+    binding.pry
+  end
+
   def auto_capture?
     true
   end

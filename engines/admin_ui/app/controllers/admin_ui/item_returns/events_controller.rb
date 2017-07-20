@@ -42,6 +42,7 @@ module AdminUi
       end
 
       def create
+        binding.pry
         form_data = { user: current_admin_user.email }.merge(params[:event_data])
 
         if event_type
