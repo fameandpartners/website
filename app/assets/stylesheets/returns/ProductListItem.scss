@@ -92,7 +92,7 @@
 }
 
 .Product__listItem__container .Select--wrapper {
-    margin: 10px 0;
+    margin: 10px 0 20px;
 }
 
 .ReturnButton__Container {
@@ -118,4 +118,9 @@
 
 .Form__Container .select--marginTop {
     margin-top: 20px;
+}
+
+.Form__Container p {
+    margin-bottom: 12px;
+    font-weight: 500;
 }

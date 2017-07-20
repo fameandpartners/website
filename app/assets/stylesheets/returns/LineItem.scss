@@ -1,8 +1,8 @@
 @import './mixins';
-.LineItem__Container {
-    @include tablet {
-        margin: 0 auto;
-    }
+
+.LineItem p {
+    margin-bottom: 0;
+    font-weight: 500;
 }
 
 .LineItem {
@@ -12,19 +12,28 @@
         margin-top: 92px;
         text-align: right;
     }
-    .total {
-        font-weight: 600;
-    }
-    .button-link {
-        padding: 1.3em 5em;
+}
+
+.LineItem .total {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.LineItem .button-link {
+    padding: 1.3em 5em;
+    @include desktop { 
+        min-width: 344px;
     }
 }
 
 .LineItem hr {
+    border-color: #000;
     @include desktop {
         display: block;
         width: 20vw;
         position: relative;
-        left: 39vw;
+        left: 37.25vw;
+    }
+    @include xLarge {
+        left: 38vw;
     }
 }

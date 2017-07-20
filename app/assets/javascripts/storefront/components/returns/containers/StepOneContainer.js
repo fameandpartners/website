@@ -6,7 +6,7 @@ import ProductContainer from './ProductContainer'
 import {getOrderArray} from '../../../libs/getOrderArray';
 
 const propTypes = {
-  orderData: PropTypes.array.isRequired,
+  orderData: PropTypes.object.isRequired,
   returnSubtotal: PropTypes.number.isRequired,
 };
 
