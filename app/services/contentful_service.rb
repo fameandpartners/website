@@ -130,18 +130,10 @@ module Contentful
       { "/" => homepage }
     end
 
-    def self.create_hash_of_contentful_entries
-      @global_contentful_entries_hash = Hash.new
-
-      @contentful_client.entries.each.with_index do |item, i|
-        @global_contentful_entries_hash[item.id] = i
-      end
-    end
-
     def self.jsonify_large_lp_container(large_container)
       id = large_container.id
 
-      fetched_lg_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
+      fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
 
       {
         image: fetched_lg_container.image.url,
@@ -153,7 +145,7 @@ module Contentful
     def self.jsonify_medium_lp_container(medium_container)
       id = medium_container.id
 
-      fetched_md_container = @contentful_client.entries[@global_contentful_entries_hash[id]]
+      fetched_md_container = @contentful_client.entries('sys.id' => id)[0]
 
       if (fetched_md_container.content_type.id == 'ITEM--md-text')
         {
@@ -169,7 +161,7 @@ module Contentful
     def self.jsonify_header_container(main_header_container)
       if (main_header_container.content_type.id == 'HEADER--xl-text')
         id = main_header_container.header_container.id
-        subcontainer = @contentful_client.entries[@global_contentful_entries_hash[id]]
+        subcontainer = @contentful_client.entries('sys.id' => id)[0]
 
         {
           id: main_header_container.content_type.id,
@@ -199,8 +191,6 @@ module Contentful
     end
 
     def self.create_landing_page_container(parent_container)
-
-      create_hash_of_contentful_entries()
 
       main_header_tile = jsonify_header_container(parent_container.header)
 
