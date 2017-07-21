@@ -11,12 +11,6 @@
     text-align: center;
 }
 
-.Order__Container .order-placed {
-    font-size: 14px;
-    color: #979797;
-    text-align: center;
-}
-
 .Order__Container .order-id {
     @include desktop {
         float: left;
@@ -26,6 +20,12 @@
 }
 
 .Order__Container .order-placed {
+    font-size: 14px;
+    color: #979797;
+    text-align: center;
+    @include tablet {
+        margin-top: 20px;
+    }
     @include desktop {
         margin-top: 30px;
         text-align: right;

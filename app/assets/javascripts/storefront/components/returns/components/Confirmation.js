@@ -4,15 +4,8 @@ import {Link} from 'react-router'
 import Button from './Button'
 
 class Confirmation extends Component {
-  constructor(props) {
-    super(props)
-    const {returnArray}= props
-    this.state = {
-    	returnArray: returnArray
-    }
-  }
   render() {
-  	const {returnArray} = this.state
+  	const {returnArray, internationalCustomer} = this.props
   	if(returnArray) {
 	  	return (
 	  		<div className="instructions__container">
@@ -30,8 +23,25 @@ class Confirmation extends Component {
 	  		        		<a href="#">Email Label</a>
 	  		        	</li>
 	  		        </ul>
-			  		<hr className="hide-for-mobile" />
+			  		<hr className="hide-for-mobile" />			  		
 			  		<div>
+			  			{
+			  				internationalCustomer ?
+			  				<div>
+			  					<p className="list-title">
+			  						Please mail your package to
+			  					</p>
+			  					<p>
+			  						<b>
+			  							Fame and Partners Returns <br/>
+			  							PO Box. 12345 <br/>
+			  							Los Angeles, CA 90013
+			  						</b>
+			  					</p>
+			  				</div>
+			  				:
+			  				<div></div>
+			  			}
 			  			<p className="list-title">
 			  				Instructions for mailing your package
 			  			</p>
@@ -59,7 +69,7 @@ class Confirmation extends Component {
 			  			</ul>
 			  			<img src="http://placehold.it/610x410?text=Shipping Label" 
 			  				 alt="Shipping Label" 
-			  				 className="shipping-label hide-for-mobile"
+			  				 className={internationalCustomer ? "u-hide" : "shipping-label hide-for-mobile"}
 			  			/>
 			  			<p className="list-title">
 			  				Packing Slip

@@ -3,17 +3,11 @@ import {connect} from 'react-redux';
 import Confirmation from '../components/Confirmation'
 
 class ConfirmationContainer extends Component {
-  constructor(props) {
-    super(props)
-    const {returnArray} = this.props
-    this.state = {
-      returnArray: returnArray
-    }
-  }
   render() {
-    const {returnArray} = this.state
+    const {returnArray} = this.props
+    let internationalCustomer = true
     return (
-       <Confirmation returnArray={returnArray} />
+       <Confirmation returnArray={returnArray} internationalCustomer={internationalCustomer} />
     );
   }
 }
