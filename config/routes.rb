@@ -436,6 +436,7 @@ FameAndPartners::Application.routes.draw do
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
     get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
     get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
+    get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info

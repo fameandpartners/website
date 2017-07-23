@@ -334,6 +334,21 @@
       .delivery-options {
         width: 100%;
       }
+
+      .delivery-time-label-mobile {
+
+        .price-wrapper {
+          float: none;
+          width: initial;
+        }
+
+        .delivered-in-wrapper {
+          margin: 10px 0 20px 3px;
+          font-style: italic;
+        }
+
+      }
+
     }
 
   }
@@ -461,6 +476,14 @@
 
   .cart-wrapper, {
     border-top: 1px solid $beage-bg;
+  }
+
+}
+
+@media (max-width: $bootstrap-lg-width - 1px) {
+
+  .delivered-in-wrapper {
+    font-size: 1.4rem;
   }
 
 }

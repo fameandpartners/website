@@ -95,7 +95,7 @@ class Products::CollectionResource
     color_group_names = Array.wrap(color_group_names)
 
     if color_group_names.present?
-      color_group_names.collect do |group_name| 
+      color_group_names.collect do |group_name|
         Repositories::ProductColors.get_group_by_name(group_name)
       end.compact
     else
@@ -104,7 +104,7 @@ class Products::CollectionResource
   end
 
   def details
-    @details ||= 
+    @details ||=
       Products::CollectionDetails.new(
         collection:     collection,
         style:          styles.first,
