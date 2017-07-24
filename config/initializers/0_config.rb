@@ -54,7 +54,7 @@ configatron.mailchimp do |mailchimp|
   mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.es_url = ENV['ES_URL']
+configatron.es_url = ENV['ES_URL2']
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
