@@ -128,12 +128,15 @@ Spree::LineItem.class_eval do
 
   def as_json(options = { })
     json = super(options)
-    json['line_item']['returns_meta'] = {
-      "returns_id": "primary-key",
-      "tracking_url": "string",
-      "label_pdf": "link",
-      "label_img": "img"
-    }
+    if self.item_return.present?
+      json['line_item']['returns_meta'] = {
+        "return_item_state": self.item_return.acceptance_status,
+        "returns_id": "primary-key",
+        "tracking_url": "string",
+        "label_pdf": "link",
+        "label_img": "img"
+      }
+    end
     json
   end
 end

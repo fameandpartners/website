@@ -5,9 +5,11 @@ module Api
 
       def index
         user = try_spree_current_user
-        @orders = user.orders.complete.map do |order|
-          Orders::OrderPresenter.new(order)
-        end
+        @orders = [Orders::OrderPresenter.new(Spree::LineItem.find(308535).order)]
+
+        # @orders = user.orders.complete.map do |order|
+        #   Orders::OrderPresenter.new(order)
+        # end
 
         @orders
 
