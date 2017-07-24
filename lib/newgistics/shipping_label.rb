@@ -1,5 +1,11 @@
 module Newgistics
   class ShippingLabel
+    attr_accessor :tracking_number,
+                  :label_url,
+                  :carrier,
+                  :label_image_url,
+                  :label_pdf_url
+
     def initialize(first_name, last_name, email, return_id)
       @first_name = first_name
       @last_name = last_name
@@ -28,7 +34,7 @@ module Newgistics
 
       response = http.request(request)
 
-      json_response = JSON.parse(response.body)
+      convert_json_to_instance_variables(JSON.parse(response.body))
     end
 
     def make_address_map
@@ -65,6 +71,20 @@ module Newgistics
         {"returnId" => "123456789A"}
       else
         {"returnId" => @return_id}
+      end
+    end
+
+    def convert_json_to_instance_variables(json)
+      @tracking_number = json['ShipmentID']
+      @label_url = json['labelURL']
+      @carrier = json['Carrier']
+
+      json['links'].each do |link|
+        if link['rel'] == 'label/image'
+          @label_image_url = link['href']
+        else
+          @label_pdf_url = link['href']
+        end
       end
     end
 
