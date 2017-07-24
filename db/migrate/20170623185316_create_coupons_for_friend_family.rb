@@ -1,6 +1,6 @@
 class CreateCouponsForFriendFamily < ActiveRecord::Migration
   def up
-    peeps = ["BondA", "GarciaS", "AlwiT", "BeckmanL", "AmbrizN", "BarnabyA", "DeFinoJ", "MeyerM", "RitaccoA", "VarinskyA", "CannelosL", "TannreutherM", "SchuldA", "RiveraR", "TruongT", "MorrowP", "ChungD", "SamraN", "SellersD", "StigileL", "CorbyN", "KeigL", "SmithB", "FarrJ", "HoL", "RomeroG", "FarisC", "ChihF", "ZhangJ", "SuR", "BaoS", "ChenL ", "YuanL", "JiangC", "ChenI", "YanL", "ChengK ", "HuF ", "MaM", "ZhengP ", "LiuO", "WangJ", "YangD", "YuK", "XuA", "YanL", "FeiZ", "PriceD", "SavageL", "CorbyA", "GnanakoneM", "MingM"]
+    peeps = ["BondA", "GarciaS", "AlwiT", "BeckmanL", "AmbrizN", "BarnabyA", "DeFinoJ", "MeyerM", "RitaccoA", "VarinskyA", "CannelosL", "TannreutherM", "SchuldA", "RiveraR", "TruongT", "MorrowP", "ChungD", "SamraN", "SellersD", "StigileL", "CorbyN", "KeigL", "FarrJ", "HoL", "RomeroG", "FarisC", "ChihF", "ZhangJ", "SuR", "BaoS", "ChenL ", "YuanL", "JiangC", "ChenI", "YanL", "ChengK ", "HuF ", "MaM", "ZhengP ", "LiuO", "WangJ", "YangD", "YuK", "XuA", "YanL", "FeiZ", "PriceD", "SavageL", "CorbyA", "GnanakoneM", "MingM"]
 
     promo_codes = peeps.inject([]) do |acc, name|
       ncodes = (1..5).map { |i| "#{name.downcase}ff#{i}" }
