@@ -9651,4 +9651,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170615180547');
 
 INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
+<<<<<<< HEAD
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
+=======
+INSERT INTO schema_migrations (version) VALUES ('20170623185316');
+>>>>>>> e9f9056aa278596b83c13d24e19268c92d7c236e
