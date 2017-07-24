@@ -7,7 +7,19 @@
       .page-content.content-collapse-expand.col-md-8.col-md-offset-2
         #panel-articles.tab-pane.active role='tabpanel'
           .panel-group roll='tablist' aria-multiselectable='true'
-            .panel.content-collapse-expand.panel-default#collapse-inside-out-sweepstakes
+            - if Time.zone.now >= (DateTime.parse('Jul 17 12:01am -7:00'))
+              .panel.content-collapse-expand.panel-default#collapse-july-offer-buy-2-get-1
+                .panel-heading role="tab"
+                  a.panel-title.panel-uc-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                    | July Offer: Buy Two, Get One Free
+                    span.btn-open-close
+
+                .panel-collapse.collapse role="tabpanel"
+                  .panel-body
+                    p <em>Buy Two, Get One Free</em> applies to orders using code JULY342. Discount applies to the lowest priced item in the order, offer is only applied to one item per order. May not be combined with any other offer. Orders made using this offer may be exchanged only, no returns. If the ‘free’ item is exchanged for a higher value item, customer will be charged the difference. Offer ends July 31, 2017 at 11:59 PM PDT.
+
+
+            .panel.content-collapse-expand.panel-default#collapse-equal-pay-day
               .panel-heading role="tab"
                 a.panel-title.panel-uc-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | Equal Pay Day Flash Sale: 21% Off
@@ -18,7 +30,7 @@
                   p 21% Off applies to orders placed from 9PM PDT on April 3, 2017 to 12PM PDT on April 5, 2017. Returned items ordered through this promotion will be processed using the discounted rate with our standard returns and exchanges policy. Discount may not be combined with any other offer or promotion.
 
 
-            .panel.content-collapse-expand.panel-default#collapse-inside-out-sweepstakes
+            .panel.content-collapse-expand.panel-default#collapse-march-bogo-offer
               .panel-heading role="tab"
                 a.panel-title.panel-uc-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
                   | March BOGO Offer

@@ -63,25 +63,25 @@ module Search
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
-        filter :bool, :must => { :term => { 'product.is_deleted' => false } }
-        filter :bool, :must => { :term => { 'product.is_hidden' => false } }
-        filter :exists, :field => :available_on
-        filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } }
+        filter :bool, :must => { :term => { 'product.is_deleted' => false } } #
+        filter :bool, :must => { :term => { 'product.is_hidden' => false } } #
+        filter :exists, :field => :available_on #
+        filter :bool, :should => { :range => { 'product.available_on' => { :lte => Time.now } } } #
 
         # Filter by colors
         if colors.present?
-          filter :terms, 'color.id' => colors
+          filter :terms, 'color.id' => colors #
         end
 
         # Outerwear filter
-        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
+        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }  #
 
         # only available items
-        filter :bool, :must => { :term => { 'product.in_stock' => true } }
+        filter :bool, :must => { :term => { 'product.in_stock' => true } }  #
 
         # not defined /  only false / only true
         unless fast_making.nil?
-          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }
+          filter :bool, :must => { :term => { 'product.fast_making' => fast_making } }  #
         end
 
         if taxons.present?
@@ -89,10 +89,10 @@ module Search
           # We need to filter products by exact ids of taxon records
           # Ref: https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_multiple_exact_values.html#_equals_exactly
           taxons_terms = taxons.map do |taxon_id|
-            { term: { 'product.taxon_ids' => taxon_id } }
+            { term: { 'product.taxon_ids' => taxon_id } }   #
           end
 
-          filter :bool, { must: taxons_terms }
+          filter :bool, { must: taxons_terms }  #
         end
 
         # exclude items marked not-a-dress
@@ -100,7 +100,7 @@ module Search
           filter :bool, :must => {
             :not => {
               :terms => {
-                'product.taxon_ids' => exclude_taxon_ids
+                'product.taxon_ids' => exclude_taxon_ids  #
               }
             }
           }
@@ -109,19 +109,19 @@ module Search
         # select only products with given discount
         if discount.present?
           if discount == :all
-            filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } }
+            filter :bool, :should => { :range => { "product.discount" => { :gt => 0 } } } #
           else
-            filter :bool, :must => { :term => { 'product.discount' => discount.to_i } }
+            filter :bool, :must => { :term => { 'product.discount' => discount.to_i } } #
           end
         end
 
         if price_min.present? || price_max.present?
-          filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)
+          filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)  #
         end
 
         if query_string.present?
           query_string = query_string.downcase.gsub("dresses","").gsub("dress","")
-          query do
+          query do  #
             string "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
           end
         end
@@ -131,13 +131,13 @@ module Search
           filter :bool, :must => {
             :not => {
               :terms => {
-                :id => exclude_products
+                :id => exclude_products #
               }
             }
           }
         end
 
-        if body_shapes.present?
+        if body_shapes.present? #
           if body_shapes.size.eql?(1)
             filter :bool, :should => {
                           :range => {
