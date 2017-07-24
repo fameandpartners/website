@@ -35,7 +35,8 @@ module Orders
                    :fabrication,
                    :price,
                    :currency,
-                   :quantity
+                   :quantity,
+                   :style_name
 
     def delivery_period
       @item.delivery_period
@@ -67,10 +68,6 @@ module Orders
 
     def product_number
       global_sku.id
-    end
-
-    def style_name
-      variant.try(:product).try(:name) || 'Missing Variant'
     end
 
     # this badly named method refers to ship_by_date for use by our product manufacturing

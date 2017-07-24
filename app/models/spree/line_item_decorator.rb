@@ -126,8 +126,13 @@ Spree::LineItem.class_eval do
     product.try(:name) == "Gift"
   end
 
+  def style_name
+    variant.try(:product).try(:name) || 'Missing Variant'
+  end
+
   def as_json(options = { })
     json = super(options)
+    json['line_item']['style_name'] = self.style_name
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "return_item_state": self.item_return.acceptance_status,
