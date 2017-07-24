@@ -133,8 +133,8 @@ Spree::LineItem.class_eval do
         "return_item_state": self.item_return.acceptance_status,
         "returns_id": self.item_return.id,
         "tracking_url": "string",
-        "label_pdf": "link",
-        "label_img": "img"
+        "label_pdf": self.item_return.return_label.label_pdf_url,
+        "label_img": self.item_return.return_label.label_image_url,
       }
     end
     json
