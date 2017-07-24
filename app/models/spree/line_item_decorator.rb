@@ -131,7 +131,7 @@ Spree::LineItem.class_eval do
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "return_item_state": self.item_return.acceptance_status,
-        "returns_id": "primary-key",
+        "returns_id": self.item_return.id,
         "tracking_url": "string",
         "label_pdf": "link",
         "label_img": "img"
