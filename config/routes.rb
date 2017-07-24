@@ -603,6 +603,16 @@ FameAndPartners::Application.routes.draw do
     resources :dress_colours,      :only => :index
   end
 
+  # ----------
+  # API Routes
+  # ----------
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :user_orders, :only => :index
+    end
+  end
+
   Spree::Core::Engine.routes.append do
     namespace :admin do
       resources :orders do

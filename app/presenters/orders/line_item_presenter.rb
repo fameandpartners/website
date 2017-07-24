@@ -165,9 +165,5 @@ module Orders
       end
     end
 
-    def line_item_presenters
-      line_items.map {|li| Orders::LineItemPresenter.new(li)}
-    end
-
   end
 end

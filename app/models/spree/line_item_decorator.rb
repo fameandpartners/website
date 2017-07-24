@@ -125,4 +125,15 @@ Spree::LineItem.class_eval do
   def promotional_gift?
     product.try(:name) == "Gift"
   end
+
+  def as_json(options = { })
+    json = super(options)
+    json['line_item']['returns_meta'] = {
+      "returns_id": "primary-key",
+      "tracking_url": "string",
+      "label_pdf": "link",
+      "label_img": "img"
+    }
+    json
+  end
 end
