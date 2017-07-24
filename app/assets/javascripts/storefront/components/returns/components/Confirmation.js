@@ -32,11 +32,9 @@ class Confirmation extends Component {
 			  						Please mail your package to
 			  					</p>
 			  					<p>
-			  						<b>
-			  							Fame and Partners Returns <br/>
-			  							PO Box. 12345 <br/>
-			  							Los Angeles, CA 90013
-			  						</b>
+		  							Fame and Partners Returns <br/>
+		  							PO Box. 12345 <br/>
+		  							Los Angeles, CA 90013
 			  					</p>
 			  				</div>
 			  				:

@@ -14,6 +14,7 @@ module.exports = {
         'App': './app/assets/javascripts/storefront/App.js',
         'SlayItForwardApp': './app/assets/javascripts/storefront/startup/SlayItForwardApp.jsx',
         'CollectionFilterSortApp': './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx',
+        'GuestReturnsApp': './app/assets/javascripts/storefront/startup/GuestReturnsApp.jsx',
         'ReturnsApp': './app/assets/javascripts/storefront/startup/ReturnsApp.jsx',
       },
     },
