@@ -1289,7 +1289,6 @@ ALTER SEQUENCE item_return_events_id_seq OWNED BY item_return_events.id;
 
 CREATE TABLE item_return_labels (
     id integer NOT NULL,
-    tracking_number character varying(255),
     label_url character varying(255),
     carrier character varying(255),
     label_image_url character varying(255),

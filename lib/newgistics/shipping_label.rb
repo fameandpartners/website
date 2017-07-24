@@ -1,7 +1,6 @@
 module Newgistics
   class ShippingLabel
-    attr_accessor :tracking_number,
-                  :label_url,
+    attr_accessor :label_url,
                   :carrier,
                   :label_image_url,
                   :label_pdf_url
@@ -75,7 +74,6 @@ module Newgistics
     end
 
     def convert_json_to_instance_variables(json)
-      @tracking_number = json['ShipmentID']
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
 

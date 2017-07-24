@@ -137,7 +137,6 @@ Spree::LineItem.class_eval do
       json['line_item']['returns_meta'] = {
         "return_item_state": self.item_return.acceptance_status,
         "returns_id": self.item_return.id,
-        "tracking_url": "string",
         "label_pdf": self.item_return.return_label.label_pdf_url,
         "label_img": self.item_return.return_label.label_image_url,
       }

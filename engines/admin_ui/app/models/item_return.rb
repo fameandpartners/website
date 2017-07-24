@@ -44,7 +44,6 @@ class ItemReturn < ActiveRecord::Base
       :label_image_url => label.label_image_url,
       :label_pdf_url => label.label_pdf_url,
       :label_url => label.label_url,
-      :tracking_number => label.tracking_number,
       :carrier => label.carrier
     )
 
