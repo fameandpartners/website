@@ -15,18 +15,18 @@ module Newgistics
       uri = URI('https://apiint.newgistics.com/WebAPI/Shipment/')
       request = Net::HTTP::Post.new(
         uri,
-        'Content-Type' => 'application/json',
-        'x-api-key' => configatron.newgistics.api_key
+        {
+          'Accept' => 'application/json',
+          'Content-Type' => 'application/json',
+          'x-api-key' => configatron.newgistics.api_key
+        }
       )
-
       request.body = make_request_map.to_json
-      puts request.body
-      puts 'starting request'
-      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-        http.request(request)
-      end
-      puts 'completed request'
-      binding.pry
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = (uri.scheme == "https")
+
+      response = http.request(request)
 
       json_response = JSON.parse(response.body)
     end
