@@ -77,7 +77,7 @@ module Newgistics
     def convert_json_to_instance_variables(json)
       @tracking_number = json['ShipmentID']
       @label_url = json['labelURL']
-      @carrier = json['Carrier']
+      @carrier = json['transporter']['Carrier']
 
       json['links'].each do |link|
         if link['rel'] == 'label/image'
