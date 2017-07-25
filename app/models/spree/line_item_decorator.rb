@@ -126,19 +126,51 @@ Spree::LineItem.class_eval do
     product.try(:name) == "Gift"
   end
 
+  def color_name
+    cart_item.try(:color).try(:presentation) || ''
+  end
+
+  def height_name
+    personalization.try(:height) || ''
+  end
+
+  def height_unit
+    personalization.try(:height_unit) || ''
+  end
+
+  def height_value
+    personalization.try(:height_value) || ''
+  end
+
+  def image_url
+    cart_item.try(:image).try(:large) || ''
+  end
+
+  def size_name
+    cart_item.try(:size).try(:presentation) || ''
+  end
+
   def style_name
     variant.try(:product).try(:name) || 'Missing Variant'
   end
 
   def as_json(options = { })
     json = super(options)
-    json['line_item']['style_name'] = self.style_name
+    json['line_item']['products_meta'] = {
+      "name": self.style_name,
+      "size": self.size_name,
+      "color": self.color_name,
+      "height": self.height_name,
+      "height_unit": self.height_unit,
+      "height_value": self.height_value,
+      "image": self.image_url
+    }
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "return_item_state": self.item_return.acceptance_status,
         "returns_id": self.item_return.id,
         "label_pdf": self.item_return.return_label.label_pdf_url,
-        "label_img": self.item_return.return_label.label_image_url,
+        "label_img": self.item_return.return_label.label_image_url
       }
     end
     json

@@ -10,8 +10,6 @@ module Api
           Orders::OrderPresenter.new(order)
         end
 
-        @orders
-
         respond_with @orders
       end
     end
