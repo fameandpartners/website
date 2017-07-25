@@ -111,6 +111,7 @@ class Products::CollectionsController < Products::BaseController
 
   def punch_products
     return if filters_applied?
+
     products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.effective_page_limit)
     @collection.products = if page.get('curated') && product_ids.size > 0
                              @collection.total_products = product_ids.size
