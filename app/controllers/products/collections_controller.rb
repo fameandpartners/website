@@ -84,7 +84,7 @@ class Products::CollectionsController < Products::BaseController
                       Array.wrap(params[:pids])
                   end
 
-    page_pids = page.get(:pids).to_s.split(',')
+    page_pids = page.get(:pids).to_s.strip.split(',')
     pids = params_pids.empty? ? page_pids : params_pids
     pids&.uniq
   end
