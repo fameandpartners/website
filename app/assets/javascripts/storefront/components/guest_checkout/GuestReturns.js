@@ -14,7 +14,8 @@ class GuestReturnApp extends Component {
     	lookupError: false
     };
   }
-  checkStuff() {
+  checkOrder(e) {
+  	e.preventDefault()
   	const {guestOrderID, guestEmail} = this.state
   	console.log(guestOrderID, guestEmail)
   }
@@ -55,7 +56,7 @@ class GuestReturnApp extends Component {
 						Please check them and enter again. 
 					</p>
 				</div>
-				<form className="guestForm__container">
+				<form className="guestForm__container" onSubmit={this.checkOrder}>
 					<input 
 						type="text" 
 						placeholder="Enter your order number" 
@@ -68,7 +69,7 @@ class GuestReturnApp extends Component {
 		 				onChange={this.updateEmail}
 		 				value={guestEmail}
 		 			/>
-		 			<Button primary noMargin onClick={validEmailAddress ? () => this.checkStuff() : () => {}} className="return-button">
+		 			<Button primary noMargin className="return-button">
 		 				Start Your Return
 		 			</Button>
 				</form>
