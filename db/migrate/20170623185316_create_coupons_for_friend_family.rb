@@ -16,6 +16,7 @@ class CreateCouponsForFriendFamily < ActiveRecord::Migration
       promotion.event_name                  = 'spree.checkout.coupon_code_added'
       promotion.usage_limit                 = 1
       promotion.match_policy                = 'all'
+      promotion.code                        = code
       promotion.advertise                   = false
       promotion.eligible_to_custom_order    = true
       promotion.eligible_to_sale_order      = false
