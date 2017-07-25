@@ -1,7 +1,6 @@
 module AdminUi
   class RefundRequestsController < AdminUi::ApplicationController
     def index
-      binding.pry
       @collection = RefundRequestGrid.new(params[:refund_request_grid])
 
       respond_to do |f|
@@ -18,7 +17,6 @@ module AdminUi
     end
 
     def update
-      binding.pry
       @refund_request = RefundRequest.find(params[:id])
 
       if @refund_request.refundable?

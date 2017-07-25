@@ -316,7 +316,6 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-
     @credit_card_gateway = Payments::CreditCardLocalizer.new(@order, current_site_version.currency).gateway
 
     @pay_pal_method = Payments::PaypalLocalizer.new(@order, current_site_version.currency).gateway

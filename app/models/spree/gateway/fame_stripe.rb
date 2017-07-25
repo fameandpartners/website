@@ -47,7 +47,14 @@ class Spree::Gateway::FameStripe < Spree::Gateway
   end
 
   def refund(amount, payment_code, gateway_options = {})
-    binding.pry
+    Stripe.api_key = self.preferred_api_key
+
+    resp = Stripe::Refund.create(
+      charge: payment_code,
+      amount: amount
+    )
+
+    resp
   end
 
   def auto_capture?
