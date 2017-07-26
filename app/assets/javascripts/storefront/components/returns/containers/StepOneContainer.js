@@ -1,25 +1,56 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
+import {browserHistory} from 'react-router';
 import LineItem from '../components/LineItem'
 import ReturnNavigation from '../components/ReturnNavigation'
 import ProductContainer from './ProductContainer'
 import {getOrderArray} from '../../../libs/getOrderArray';
+import * as AppActions from '../actions/index'
 
 const propTypes = {
-  orderData: PropTypes.object.isRequired,
-  returnSubtotal: PropTypes.number.isRequired,
+  orderData: PropTypes.array,
+  returnSubtotal: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+};
+
+const defaultProps = {
+  orderData: [],
+  returnSubtotal: "0.00"
 };
 
 class StepOneContainer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    console.log("returnSubtotal", this.props.returnSubtotal)
     this.state = {
-      order: this.props.orderData,
-      orderArray: getOrderArray(this.props.orderData['items'])
-    }
+      order: null,
+      orderArray: null
+    }  
+
   } 
+  componentWillMount() {
+    if(this.props.orderData === null) {
+      this.props.actions.getProductData();
+      browserHistory.push('/view-orders');
+      location.reload()
+    }
+    else {
+      const activeOrder = this.props.orderData.filter(o => o.number === this.props.params.orderID)[0]
+      this.state = {
+        order: activeOrder,
+        orderArray: getOrderArray(activeOrder['items'])
+      }
+    }
+    
+  }
   render() {
     let {order, orderArray} = this.state
+    if(!order) {
+      return <div></div>
+    }
     let {shipDate} = order
     return (
         <div className="StepOne__Container">
@@ -70,7 +101,7 @@ class StepOneContainer extends Component {
 }
 
 StepOneContainer.propTypes = propTypes;
-
+StepOneContainer.defaultProps = defaultProps
 function mapStateToProps(state) {
     return {
         returnSubtotal: state.returnSubtotal,
@@ -78,4 +109,9 @@ function mapStateToProps(state) {
         orderData: state.orderData
     };
 }
-export default connect(mapStateToProps)(StepOneContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(AppActions, dispatch),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(StepOneContainer);

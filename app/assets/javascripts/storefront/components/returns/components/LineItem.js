@@ -15,14 +15,14 @@ class LineItem extends Component {
       <div className="LineItem grid-center">
           <div className="col-12_md-4_sm-10">
             <p>
-              Refund subtotal: ${returnSubtotal || 0.00}
+              Refund subtotal: ${Number(returnSubtotal).toFixed(2) || 0.00}
             </p>
             <p>
               Shipping: $0.00
             </p>
             <hr/>
             <p className="total">
-              Total estimated refund: ${returnSubtotal || 0.00}
+              Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
             </p>
             <Button primary noMargin>
               <Link to="/return-confirmation" className="u-white-text button-link">

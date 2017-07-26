@@ -13,7 +13,7 @@ const propTypes = {
   returnSubtotal: PropTypes.number,
   checkboxStatus: PropTypes.bool,
   confirmationPage: PropTypes.bool,
-  orderIndex: PropTypes.number
+  orderIndex: PropTypes.number,
 };
 
 const defaultProps = {
@@ -30,7 +30,7 @@ class ProductContainer extends Component {
   constructor() {
     super();
     this.state = {
-      checkboxStatus: false
+      checkboxStatus: false,
     }
     autoBind(this);
   }
@@ -79,6 +79,7 @@ class ProductContainer extends Component {
     const {
       orderIndex,
       confirmationPage,
+      orderNumber
     } = this.props
     const { checkboxStatus } = this.state
     return ( 

@@ -42,6 +42,7 @@ class OrderHistory extends Component {
                                       product={o} 
                                       orderIndex={i}
                                       showForm={false}
+                                      orderNumber={number}
                                     />
                                     <hr className={!showHR ? "u-hide" : "u-show"}/>
                                   </div>

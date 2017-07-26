@@ -15,7 +15,7 @@ class OrderContainer extends Component {
     }
     return (
         <div>
-          <OrderHistory orderData={orderData} />
+          {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
         </div>
     );
   }

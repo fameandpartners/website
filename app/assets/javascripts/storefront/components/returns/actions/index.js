@@ -8,7 +8,7 @@ export const addProductToReturnArray = (product, currentArray) => {
 	// Calculate Return Total
 	let refundAmount = 0
 	refundAmount = newReturnArray.reduce(function(sum, product) {
-	  return sum + product.price;	  
+	  return sum + Number(product.price);	  
 	}, 0);
 	const productID = product.id
 	return {

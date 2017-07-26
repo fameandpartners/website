@@ -70,7 +70,8 @@ class ProductListItem extends Component {
       confirmationPage,
       orderIndex,
       checkboxStatus, 
-      updateReturnArray
+      updateReturnArray,
+      orderNumber
     } = this.props
     const {
           id, 
@@ -167,7 +168,7 @@ class ProductListItem extends Component {
               <div className={orderIndex === 0 ? "grid-spaceAround" : "u-hide"}>
                 <Button primary className="col-12_md-5_sm-12">
                   <Link 
-                    to={'/start-return/123'}
+                    to={`/start-return/${orderNumber}`}
                     className="u-white-text button-link"
                   >
                     Start Return
