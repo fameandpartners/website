@@ -610,7 +610,7 @@ FameAndPartners::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :user_orders, :only => :index
+      resources :returns_process, :only => :index
     end
   end
 

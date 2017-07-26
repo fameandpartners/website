@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UserOrdersController < Users::OrdersController
+    class ReturnsProcessController < Users::OrdersController
       respond_to :json
 
       def index
