@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const addProductToReturnArray = (product, currentArray) => {
 	product['openEndedReturnReason'] = ''
 	currentArray.push(product)
@@ -8,7 +10,7 @@ export const addProductToReturnArray = (product, currentArray) => {
 	refundAmount = newReturnArray.reduce(function(sum, product) {
 	  return sum + product.price;	  
 	}, 0);
-	const productID = product.productOrderID
+	const productID = product.id
 	return {
 		type: 'ADD_PRODUCT_TO_RETURN_ARRAY',
 		payload: {
@@ -23,7 +25,7 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
 	let newReturnArray = []
 	let newRefundAmount = refundAmount
 	currentArray.filter(p => {
-		if(p.productOrderID === product.productOrderID) {
+		if(p.id === product.id) {
 			newRefundAmount = newRefundAmount - p.price
 		}
 		else {
@@ -43,7 +45,7 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
 
 export const updatePrimaryReturnReason = (reason, product, returnArray) => {
 	const newReturnArray = returnArray.map(p => {
-		if(p.productOrderID === product.productOrderID) {
+		if(p.id === product.id) {
 			p.primaryReturnReason = reason.option.id
 			return p
 		}
@@ -57,13 +59,13 @@ export const updatePrimaryReturnReason = (reason, product, returnArray) => {
 
 export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 	const newReturnArray = returnArray.map(p => {
-		if(p.productOrderID === product.productOrderID) {
+		if(p.id === product.id) {
 			p.openEndedReturnReason = reason
 			return p
 		}
 		return p
 	})
-	const productID = product.productOrderID
+	const productID = product.id
 	return {
 		type: 'UPDATE_OPEN_ENDED_RETURN_REASON',
 		payload: {
@@ -72,3 +74,16 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 		}
 	}
 };
+
+export const getProductData = () => {
+  return (dispatch) => {
+    axios.get('https://85s0db362c.execute-api.us-west-2.amazonaws.com/dev')
+    	.then(function(response) {
+    		dispatch({type: 'UPDATE_ORDER_DATA', payload: response.data})
+    	})
+    	.catch(function(error) {
+    		console.log(error) 
+    	})
+  }
+}
+

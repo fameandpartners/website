@@ -58,8 +58,8 @@ class ProductListItem extends Component {
   }
   componentDidMount() {
     const {product, activeTextBox} = this.props
-    const {productOrderID} = product    
-    if(productOrderID === activeTextBox) {
+    const {id} = product    
+    if(id === activeTextBox) {
       this.textInput.focus()
     }
   }
@@ -72,19 +72,14 @@ class ProductListItem extends Component {
       checkboxStatus, 
       updateReturnArray
     } = this.props
-    const { productName,
-          productOrderID, 
-          image, 
-          price, 
-          auSize, 
-          usSize, 
-          color, 
-          height, 
+    const {
+          id, 
           orderPlaced,
-          returnWindowEnd
+          returnWindowEnd,
         } = product
     let {primaryReturnReason} = product
-    const {openEndedReturnReason} = product
+    const {openEndedReturnReason, productMeta, price} = product
+    const {name, size, color, height_value, image} = productMeta
     if(!primaryReturnReason) {
       primaryReturnReason = {}
     }
@@ -95,27 +90,27 @@ class ProductListItem extends Component {
     const currentDayArray = moment([[currentDay.format("YYYY")][0], [currentDay.format("M")][0], [currentDay.format("D")][0]]) 
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50
     if(!returnEligible) {
-      console.log(productName, " is not eligible for return.")
+      console.log(name, " is not eligible for return.")
     }
     return (
           <div 
-            key={productOrderID}
+            key={id}
             className={confirmationPage || showForm ? "grid-noGutter-center" : "grid-noGutter-center"}
           >
            <div className="col-7_md-9_sm-5_xs-9 Product__listItem">
               <Checkbox 
-                id={`${productOrderID}-checkbox`}
+                id={`${id}-checkbox`}
                 wrapperClassName={returnEligible ? "Modal__content--med-margin-bottom" : "u-no-opacity"}
                 onChange={returnEligible ? () => updateReturnArray() : () => {}}
                 checkboxStatus={checkboxStatus} 
                 showForm={showForm} 
               />  
 
-              <img src={image} alt={productName} className="product-image" />
+              <img src={image} alt={name} className="product-image" />
               <div>
                 <div className="nameAndPrice--marginBottom">
                   <span className="meta--key">
-                    {productName}
+                    {name}
                   </span>
                   <span className="meta--value">
                     ${price}
@@ -126,7 +121,7 @@ class ProductListItem extends Component {
                     Size:
                   </span>
                   <span className="meta--value">
-                    US {usSize}/AU {auSize}
+                    {size}
                   </span>
                 </div>
                 <div className="meta--marginBottom">
@@ -142,7 +137,7 @@ class ProductListItem extends Component {
                     Height:
                   </span>
                   <span className="meta--value">
-                    {height}
+                   {Math.floor(height_value / 12)}ft {height_value % 12}in
                   </span>
                 </div>
               </div>          
@@ -158,10 +153,10 @@ class ProductListItem extends Component {
                 <div className="col-12">
                   <ul className="windowClosed-list">
                     <li>
-                      <a href="#">View Return Policy</a>
+                      <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy">View Return Policy</a>
                     </li>
                     <li>
-                      <a href="#">Contact Customer Service</a>
+                      <a href="https://www.fameandpartners.com/contact">Contact Customer Service</a>
                     </li>
                   </ul>
                 </div>
@@ -170,16 +165,6 @@ class ProductListItem extends Component {
            </div>
            <div className={showForm ? "u-hide" : "col-3_md-9_xs-9 ReturnButton__Container"}>
               <div className={orderIndex === 0 ? "grid-spaceAround" : "u-hide"}>
-                <Button className="col-12_md-5_sm-12">
-                  <a 
-                    href="https://www.ups.com/WebTracking/track?loc=en_us" 
-                    className="button-link button-link--black-text"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Track Shipping
-                  </a>
-                </Button>
                 <Button primary className="col-12_md-5_sm-12">
                   <Link 
                     to={'/start-return/123'}
@@ -195,7 +180,7 @@ class ProductListItem extends Component {
                <form>
                      <p className="u-no-margin">Why are you returning this?</p>
                      <Select
-                       id={`${productOrderID}-primary`}
+                       id={`${id}-primary`}
                        options={primaryReturnReasonArray}
                        onChange={this.updatePrimaryReason}
                      />

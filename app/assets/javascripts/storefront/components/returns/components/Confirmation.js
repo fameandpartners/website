@@ -86,8 +86,8 @@ class Confirmation extends Component {
 	  				<div>
 	  					<p>Order #1231</p>
 	  					{returnArray.map(p => {
-	  					  const {productOrderID} = p
-	  					  return <ProductContainer confirmationPage={true} key={productOrderID} product={p} />
+	  					  const {id} = p
+	  					  return <ProductContainer confirmationPage={true} key={id} product={p} />
 	  					})}
 	  				</div>
 					<div className="button__container">

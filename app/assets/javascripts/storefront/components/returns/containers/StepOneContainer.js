@@ -15,7 +15,7 @@ class StepOneContainer extends Component {
     super(props)
     this.state = {
       order: this.props.orderData,
-      orderArray: getOrderArray(this.props.orderData['products'])
+      orderArray: getOrderArray(this.props.orderData['items'])
     }
   } 
   render() {
@@ -24,9 +24,6 @@ class StepOneContainer extends Component {
     return (
         <div className="StepOne__Container">
             <div className="grid-noGutter-center">
-              <div className="col-2_md-12">
-                <ReturnNavigation />
-              </div>
               <div className="col-10_md-10_sm-11">
                   <p className="instructions instructions__title">Sorry it didn't work out.
                       <br/> Please select the item(s) you would like to return                      
@@ -38,7 +35,7 @@ class StepOneContainer extends Component {
                   </p>
               </div>
             </div>                        
-            <div className="grid-noGutter-right">
+            <div className="grid-noGutter-center">
               <div className="col-10_md-12_sm-12">
                 {
                   orderArray.map(productArray => {

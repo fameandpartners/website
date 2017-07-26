@@ -65,7 +65,7 @@ class ProductContainer extends Component {
     const { returnArray, product } = this.props
     let currentCheckboxStatus = checkboxStatus
     returnArray.map(r => {
-      if (r.productOrderID === product.productOrderID) {
+      if (r.id === product.id) {
         currentCheckboxStatus = true
         return true
       }
@@ -102,11 +102,11 @@ function mapStateToProps(state) {
   };
 }
 
-function matchDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(AppActions, dispatch);
 }
 
 ProductContainer.propTypes = propTypes;
 ProductContainer.defaultProps = defaultProps;
 
-export default connect(mapStateToProps, matchDispatchToProps)(ProductContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer);

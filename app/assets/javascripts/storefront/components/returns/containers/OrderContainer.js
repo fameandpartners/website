@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
-import {getOrderArray} from '../../../libs/getOrderArray';
+import {bindActionCreators} from 'redux'
 import OrderHistory from '../components/OrderHistory'
+import * as AppActions from '../actions/index'
 import {connect} from 'react-redux';
 
 class OrderContainer extends Component {
-  constructor(props) {
-    super(props)
-    const {orderData} = this.props
-    const {products} = orderData
-    this.state = {
-        orderData: orderData,    
-        orderArray: getOrderArray(products)    
-    }
+  componentWillMount() {
+    this.props.actions.getProductData()
   }
   render() {
-    const {orderData, orderArray} = this.state
+    const {orderData} = this.props
+    if(!orderData) {
+      return <div></div>
+    }
     return (
         <div>
-          <OrderHistory orderData={orderData} orderArray={orderArray} />
+          <OrderHistory orderData={orderData} />
         </div>
     );
   }
@@ -28,5 +26,10 @@ function mapStateToProps(state) {
         orderData: state.orderData,
     };
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(AppActions, dispatch),
+  };
+}
 
-export default connect(mapStateToProps)(OrderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderContainer);
