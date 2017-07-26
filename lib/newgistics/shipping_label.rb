@@ -5,10 +5,16 @@ module Newgistics
                   :label_image_url,
                   :label_pdf_url
 
-    def initialize(first_name, last_name, email, return_id)
+    def initialize(first_name, last_name, address, email, return_id)
       @first_name = first_name
       @last_name = last_name
       @email = email
+      @address_1 = address.address1
+      @address_2 = address.address2
+      @city = address.city
+      @state = address.state.abbr
+      @country = address.country.iso
+      @zip = address.zipcode
       @return_id = return_id
 
       fetch_shipping_label_from_api()
@@ -39,13 +45,13 @@ module Newgistics
     def make_address_map
       {
         "Address" => {
-          "Address1" => configatron.newgistics.return_street_0,
-          "Address2" => "",
+          "Address1" => @address_1,
+          "Address2" => @address_2,
           "Address3" => "",
-          "City" => configatron.newgistics.return_city,
-          "CountryCode" => "US",
-          "State" => configatron.newgistics.return_state,
-          "Zip" => configatron.newgistics.return_zip
+          "City" => @city,
+          "CountryCode" => @country,
+          "State" => @state,
+          "Zip" => @zip
         }
       }
     end

@@ -35,12 +35,12 @@ class ItemReturn < ActiveRecord::Base
     label = Newgistics::ShippingLabel.new(
       order.user_first_name,
       order.user_last_name,
+      order.billing_address,
       order.email,
       self.id
     )
 
     self.item_return_label = ItemReturnLabel.new(
-      :carrier => label.carrier,
       :label_image_url => label.label_image_url,
       :label_pdf_url => label.label_pdf_url,
       :label_url => label.label_url,
