@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link} from 'react-router';
-import GuestReturns from '../components/guest_checkout/GuestReturns'
+import GuestReturns from '../components/guest_checkout/GuestReturns';
 
-const GuestReturnsApp = () => {
-  return <GuestReturns />
-}
+const GuestReturnsApp = () => <GuestReturns />;
 
-export default GuestReturnsApp
+export default GuestReturnsApp;
 
 const guestNode = document.getElementById('guestReturn');
-if (guestNode){ ReactDOM.render(GuestReturnsApp(), guestNode); }
+if (guestNode) { ReactDOM.render(GuestReturnsApp(), guestNode); }
