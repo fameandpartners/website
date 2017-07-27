@@ -18,9 +18,10 @@ const propTypes = {
   confirmationPage: PropTypes.bool,
   checkboxStatus: PropTypes.bool,
   updateReturnArray: PropTypes.func,
+  orderNumber: PropTypes.string,
 };
 
-const defaultProps = {
+const defaultProps = { 
   activeTextBox: null,
   updatePrimaryReturnReason: null,
   updateOpenEndedReturnReason: null,
@@ -28,8 +29,9 @@ const defaultProps = {
   showForm: false,
   confirmationPage: false,
   checkboxStatus: false,
+  orderIndex: 0,
+  orderNumber: ""
 };
-
 
 class ProductListItem extends Component {
   constructor() {
@@ -90,9 +92,6 @@ class ProductListItem extends Component {
     const lastDayArray = moment([[lastDay.format("YYYY")][0], [lastDay.format("M")][0], [lastDay.format("D")][0]])
     const currentDayArray = moment([[currentDay.format("YYYY")][0], [currentDay.format("M")][0], [currentDay.format("D")][0]]) 
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50
-    if(!returnEligible) {
-      console.log(name, " is not eligible for return.")
-    }
     return (
           <div 
             key={id}
@@ -159,7 +158,7 @@ class ProductListItem extends Component {
                     <li>
                       <a href="https://www.fameandpartners.com/contact">Contact Customer Service</a>
                     </li>
-                  </ul>
+                  </ul> 
                 </div>
               </div>
               

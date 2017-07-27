@@ -1,11 +1,9 @@
 import _ from 'lodash'
 
-export function getOrderArray(items) {
+export default function getOrderArray(items) {
 	const grouped = _.groupBy(items, p => p.trackingNumber);
 	let trackingNumberArray = Object.keys(grouped)
 	let orderArray = []
-	for (var i = trackingNumberArray.length - 1; i >= 0; i--) {
-	  orderArray.push(grouped[trackingNumberArray[i]])
-	}
-	return orderArray
+	trackingNumberArray.map(i => orderArray.push(grouped[trackingNumberArray[i]]))
+	return orderArray 
 }

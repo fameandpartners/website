@@ -1,8 +1,18 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import OrderHistory from '../components/OrderHistory'
 import * as AppActions from '../actions/index'
-import {connect} from 'react-redux';
+ 
+const propTypes = {
+  actions: PropTypes.object,
+  orderData: PropTypes.array
+};
+
+const defaultProps = {
+  actions: {},
+  orderData: []
+};
 
 class OrderContainer extends Component {
   componentWillMount() {
@@ -31,5 +41,6 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(AppActions, dispatch),
   };
 }
-
+OrderContainer.propTypes = propTypes
+OrderContainer.defaultProps = defaultProps
 export default connect(mapStateToProps, mapDispatchToProps)(OrderContainer);

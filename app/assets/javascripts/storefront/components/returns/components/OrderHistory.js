@@ -1,11 +1,19 @@
-import React, {Component} from 'react';
-import ProductContainer from '../containers/ProductContainer.js'
-import moment from 'moment'
-import {getOrderArray} from '../../../libs/getOrderArray';
+import React, {Component, PropTypes} from 'react';
+import ProductContainer from '../containers/ProductContainer'
+import getOrderArray from '../../../libs/getOrderArray';
+ 
+const propTypes = {
+  orderData: PropTypes.object
+};
+
+const defaultProps = {
+  orderData: {}
+};
+
 class OrderHistory extends Component {
   constructor(props) {
     super(props)
-    const {orderData, orderArray} = this.props
+    const {orderData} = this.props
     const {items} = orderData
     this.state = {
         orderData: orderData,
@@ -59,5 +67,8 @@ class OrderHistory extends Component {
     );
   }
 }
+
+OrderHistory.propTypes = propTypes
+OrderHistory.defaultProps = defaultProps
 
 export default OrderHistory;

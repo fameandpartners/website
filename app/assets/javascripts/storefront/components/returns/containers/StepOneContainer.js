@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import {browserHistory} from 'react-router';
 import LineItem from '../components/LineItem'
-import ReturnNavigation from '../components/ReturnNavigation'
 import ProductContainer from './ProductContainer'
-import {getOrderArray} from '../../../libs/getOrderArray';
+import getOrderArray from '../../../libs/getOrderArray';
 import * as AppActions from '../actions/index'
 
 const propTypes = {
@@ -14,17 +13,20 @@ const propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  params: PropTypes.object,
+  actions: PropTypes.object
 };
 
 const defaultProps = {
   orderData: [],
+  params: {},
+  actions: {},
   returnSubtotal: "0.00"
 };
 
 class StepOneContainer extends Component {
   constructor(props) {
     super(props);
-    console.log("returnSubtotal", this.props.returnSubtotal)
     this.state = {
       order: null,
       orderArray: null
@@ -32,8 +34,9 @@ class StepOneContainer extends Component {
 
   } 
   componentWillMount() {
-    if(this.props.orderData === null) {
-      this.props.actions.getProductData();
+    const {orderData, actions} = this.props
+    if(orderData === null) {
+      actions.getProductData();
       browserHistory.push('/view-orders');
       location.reload()
     }
@@ -100,7 +103,7 @@ class StepOneContainer extends Component {
   }
 }
 
-StepOneContainer.propTypes = propTypes;
+StepOneContainer.propTypes = propTypes
 StepOneContainer.defaultProps = defaultProps
 function mapStateToProps(state) {
     return {

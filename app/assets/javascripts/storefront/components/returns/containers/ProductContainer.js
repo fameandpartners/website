@@ -79,7 +79,6 @@ class ProductContainer extends Component {
     const {
       orderIndex,
       confirmationPage,
-      orderNumber
     } = this.props
     const { checkboxStatus } = this.state
     return ( 

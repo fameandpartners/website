@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 const Button = styled.button`
   /* Adapt the colours based on primary prop */
   background: ${props => props.primary ? 'black' : 'white'};
