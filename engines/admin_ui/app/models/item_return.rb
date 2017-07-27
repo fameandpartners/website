@@ -37,7 +37,7 @@ class ItemReturn < ActiveRecord::Base
       order.user_last_name,
       order.billing_address,
       order.email,
-      self.id
+      order.number
     )
 
     self.item_return_label = ItemReturnLabel.new(
