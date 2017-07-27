@@ -1,3 +1,4 @@
+# trash code. thanh.
 class PaymentRequestsController < ApplicationController
   respond_to :js
 

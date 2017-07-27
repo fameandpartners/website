@@ -61,12 +61,15 @@ $product-color-black:           #050505;
 $product-color-blue:            #0000ff;
 $product-color-blush:           #eac3c7;
 $product-color-brick:           #993333;
+$product-color-bright-blush:    #f9aab2;
 $product-color-bright-lavender: #ddb6f9;
 $product-color-bright-red:      #ff3333;
+$product-color-bright-turquoise: #0fbaa9;
 $product-color-bright-yellow:   #fcf751;
 $product-color-bronze:          #dd905b;
 $product-color-burgundy:        #77202f;
 $product-color-burnt-orange:    #ce4f36;
+$product-color-candy-blue:      #b6daf2;
 $product-color-candy-pink:      #f998cb;
 $product-color-chambray:        #7c90b5;
 $product-color-champagne:       #efe4dc;
@@ -125,6 +128,7 @@ $product-color-light-teal:      #12a3b2;
 $product-color-lilac:           #ccc3e2;
 $product-color-lipstick-red:    #f40c0c;
 $product-color-magenta:         #a6188b;
+$product-color-marigold:        #efb961;
 $product-color-marine-blue:     #055281;
 $product-color-mauve:           #9988a5;
 $product-color-merlot:          #8d2705;
@@ -212,21 +216,26 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-black-and-hot-pink      { @include split-color-selector($product-color-black, $product-color-hot-pink); }
 .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
 .color-black-and-red           { @include split-color-selector($product-color-black, $product-color-red); }
+.color-black-and-tan-spot      { @include image-color-selector('BlackAndTanSpot.png'); }
 .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
 .color-black-and-white-gingham { @include image-color-selector('BlackAndWhiteGingham.png'); }
 .color-black-and-white-spot    { @include image-color-selector('BlackAndWhiteSpot.png'); }
+.color-black-and-white-stripe  { @include image-color-selector('BlackAndWhiteStripe.png'); }
 .color-blue                    { background-color: $product-color-blue; }
 .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
 .color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
 .color-blush                   { background-color: $product-color-blush; }
 .color-blush-and-black         { @include split-color-selector(#e1c2c1, #000000); }
 .color-brick                   { background-color: $product-color-brick; }
+.color-bright-blush            { background-color: $product-color-bright-blush; }
 .color-bright-lavender         { background-color: $product-color-bright-lavender; }
+.color-bright-turquoise        { background-color: $product-color-bright-turquoise; }
 .color-bright-red              { background-color: $product-color-bright-red; }
 .color-bright-yellow           { background-color: $product-color-bright-yellow; }
 .color-bronze                  { background-color: $product-color-bronze; }
 .color-burgundy                { background-color: $product-color-burgundy; }
 .color-burnt-orange            { background-color: $product-color-burnt-orange; }
+.color-candy-blue              { background-color: $product-color-candy-blue; }
 .color-candy-floral            { @include image-color-selector('CandyFloral.png'); }
 .color-candy-pink              { background-color: $product-color-candy-pink; }
 .color-chambray                { background-color: $product-color-chambray; }
@@ -315,6 +324,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-looking-glass           { @include image-color-selector('LookingGlass.png'); }
 .color-love-in-bloom           { @include image-color-selector('LoveInBloom.png'); }
 .color-magenta                 { background-color: $product-color-magenta; }
+.color-marigold                { background-color: $product-color-marigold; }
 .color-marine-blue             { background-color: $product-color-marine-blue; }
 .color-mauve                   { background-color: $product-color-mauve; }
 .color-merlot                  { background-color: $product-color-merlot; }
@@ -322,6 +332,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-metallic-peach          { background-color: $product-color-metallic-peach; }
 .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
 .color-mid-grey                { background-color: $product-color-mid-grey; }
+.color-midnight-bloom          { @include image-color-selector('MidnightBloom.png') }
 .color-midnight-daisy          { @include image-color-selector('MidnightDaisy.png') }
 .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
 .color-midnight-reptile        { @include image-color-selector('MidnightReptile.png'); }
