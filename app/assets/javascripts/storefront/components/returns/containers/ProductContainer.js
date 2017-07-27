@@ -1,9 +1,9 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
-import * as AppActions from '../actions/index'
-import ProductListItem from '../components/ProductListItem'
+import * as AppActions from '../actions/index';
+import ProductListItem from '../components/ProductListItem';
 
 const propTypes = {
   product: PropTypes.object.isRequired,
@@ -17,12 +17,12 @@ const propTypes = {
 };
 
 const defaultProps = {
-	addProductToReturnArray: null,
-	removeProductFromReturnArray: null,
-	returnSubtotal: 0,
-	confirmationPage: false,
-	checkboxStatus: false,
-	orderIndex: null,
+  addProductToReturnArray: null,
+  removeProductFromReturnArray: null,
+  returnSubtotal: 0,
+  confirmationPage: false,
+  checkboxStatus: false,
+  orderIndex: null,
 };
 
 
@@ -31,45 +31,43 @@ class ProductContainer extends Component {
     super();
     this.state = {
       checkboxStatus: false,
-    }
+    };
     autoBind(this);
   }
   generateSecondaryOptionArray(optionsObject) {
-    const product = this.props
-    let secondaryKeys = Object.keys(optionsObject)
-    return secondaryKeys.map(p => {
-      return {
-        active: p === product.product.secondaryReturnReason,
-        name: optionsObject[p].name,
-        id: p
-      }
-    });
+    const product = this.props;
+    const secondaryKeys = Object.keys(optionsObject);
+    return secondaryKeys.map(p => ({
+      active: p === product.product.secondaryReturnReason,
+      name: optionsObject[p].name,
+      id: p,
+    }));
   }
   updateReturnArray() {
-    const { checkboxStatus } = this.state
-    const { product } = this.props
+    const { checkboxStatus } = this.state;
+    const { product } = this.props;
     const {
       addProductToReturnArray,
       removeProductFromReturnArray,
       returnSubtotal,
-      returnArray
-    } = this.props
+      returnArray,
+    } = this.props;
     if (!checkboxStatus) {
-      addProductToReturnArray(product, returnArray, returnSubtotal)
+      addProductToReturnArray(product, returnArray, returnSubtotal);
     } else {
-      removeProductFromReturnArray(product, returnArray, returnSubtotal)
+      removeProductFromReturnArray(product, returnArray, returnSubtotal);
     }
   }
   componentWillMount() {
-    const { checkboxStatus } = this.props
-    const { returnArray, product } = this.props
-    let currentCheckboxStatus = checkboxStatus
-    returnArray.map(r => {
+    const { checkboxStatus } = this.props;
+    const { returnArray, product } = this.props;
+    let currentCheckboxStatus = checkboxStatus;
+    returnArray.map((r) => {
       if (r.id === product.id) {
-        currentCheckboxStatus = true
-        return true
+        currentCheckboxStatus = true;
+        return true;
       }
-      return false
+      return false;
     });
     this.setState({
       checkboxStatus: currentCheckboxStatus,
@@ -79,18 +77,19 @@ class ProductContainer extends Component {
     const {
       orderIndex,
       confirmationPage,
-    } = this.props
-    const { checkboxStatus } = this.state
-    return ( 
-    <div>
-      <ProductListItem { ...this.props } 
-      	confirmationPage={confirmationPage} 
-      	checkboxStatus={checkboxStatus} 
-      	orderIndex={orderIndex} 
-      	updateReturnArray={() => this.updateReturnArray()}
-      />
-    </div>
-    )
+    } = this.props;
+    const { checkboxStatus } = this.state;
+    return (
+      <div>
+        <ProductListItem
+          {...this.props}
+          confirmationPage={confirmationPage}
+          checkboxStatus={checkboxStatus}
+          orderIndex={orderIndex}
+          updateReturnArray={() => this.updateReturnArray()}
+        />
+      </div>
+    );
   }
 }
 
@@ -98,7 +97,7 @@ function mapStateToProps(state) {
   return {
     returnArray: state.returnArray,
     returnSubtotal: state.returnSubtotal,
-    activeTextBox: state.activeTextBox
+    activeTextBox: state.activeTextBox,
   };
 }
 

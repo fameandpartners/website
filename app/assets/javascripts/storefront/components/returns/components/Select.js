@@ -3,21 +3,18 @@
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [
 // {id: 0, name: 'Option One', active: false},
-// {id: 1, name: 'Option Two', active: false}, ... etc] 
+// {id: 1, name: 'Option Two', active: false}, ... etc]
 //* ****
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import autoBind from 'auto-bind';
-import noop from '../libs/noop';
-import KEYS from '../constants/keys';
+import noop from '../../../libs/noop';
+import KEYS from '../../../constants/keys';
 
 // CSS
-import '../styles/Select.scss';
-import Carat from '../svg/carat.svg';
+import Carat from '../../../../../images/carat.svg';
 
 const propTypes = {
-  id: PropTypes.string.isRequired,
   label: PropTypes.string,
   className: PropTypes.string,
   error: PropTypes.bool,
@@ -112,7 +109,7 @@ class Select extends Component {
   handleDropdownItemClick(option) {
     return () => {
       this.closeDropdown();
-      console.log("User chooses", option.displayText)
+      console.log('User chooses', option.displayText);
       this.props.onChange(option);
     };
   }
@@ -121,14 +118,14 @@ class Select extends Component {
     const options = this.props.options || [];
 
     const dropdownComponent = options.map((option, index) => {
-    const isFocused = (this.state.arrowFocusedIndex === index);
-    const {isOpen} = this.state
+      const isFocused = (this.state.arrowFocusedIndex === index);
+      const { isOpen } = this.state;
       return (
         <li
           ref={`options${index}`}
           key={`${option.constantName}`}
           data-value={option.displayText}
-          className='Select-list-item noSelect'
+          className="Select-list-item noSelect"
           onClick={this.handleDropdownItemClick(option)}
           aria-hidden={isOpen ? 'false' : 'true'}
         >

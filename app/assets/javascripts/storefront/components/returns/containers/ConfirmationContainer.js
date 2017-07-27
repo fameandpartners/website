@@ -1,21 +1,21 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import Confirmation from '../components/Confirmation'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Confirmation from '../components/Confirmation';
 
 const propTypes = {
   returnArray: PropTypes.array.isRequired,
 };
-let internationalCustomer = true
-const ConfirmationContainer = (props) => (
-  <Confirmation returnArray={props.returnArray} internationalCustomer={internationalCustomer} />
+const internationalCustomer = true;
+const ConfirmationContainer = ({ returnArray }) => (
+  <Confirmation returnArray={returnArray} internationalCustomer={internationalCustomer} />
 );
 
 function mapStateToProps(state) {
-    return {
-        returnArray: state.returnArray
-    };
+  return {
+    returnArray: state.returnArray,
+  };
 }
 
-ConfirmationContainer.propTypes = propTypes
+ConfirmationContainer.propTypes = propTypes;
 
 export default connect(mapStateToProps)(ConfirmationContainer);
