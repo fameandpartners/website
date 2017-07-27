@@ -158,14 +158,9 @@ Spree::LineItem.class_eval do
     personalization.customization_values.count > 0
   end
 
-  def date_iso_mdy
-    self.created_at.strftime("%m/%d/%y")
-  end
-
   def as_json(options = { })
     json = super(options)
     json['line_item']['customized'] = has_been_customized?
-    json['line_item']['date_iso_mdy'] = date_iso_mdy
     json['line_item']['products_meta'] = {
       "name": self.style_name,
       "price": self.price,
