@@ -10,4 +10,4 @@ const Button = styled.button`
   border: 2px solid black;
 `;
 
-export default Button
+export default Button;
