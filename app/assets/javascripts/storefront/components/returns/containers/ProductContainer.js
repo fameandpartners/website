@@ -4,25 +4,35 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import * as AppActions from '../actions/index';
 import ProductListItem from '../components/ProductListItem';
+import noop from '../../../libs/noop';
 
 const propTypes = {
   product: PropTypes.object.isRequired,
   returnArray: PropTypes.array.isRequired,
   addProductToReturnArray: PropTypes.func,
   removeProductFromReturnArray: PropTypes.func,
+  updatePrimaryReturnReason: PropTypes.func,
+  updateOpenEndedReturnReason: PropTypes.func,
   returnSubtotal: PropTypes.number,
-  checkboxStatus: PropTypes.bool,
   confirmationPage: PropTypes.bool,
+  activeTextBox: PropTypes.number,
   orderIndex: PropTypes.number,
+  showForm: PropTypes.bool,
+  orderNumber: PropTypes.string,
 };
 
 const defaultProps = {
-  addProductToReturnArray: null,
-  removeProductFromReturnArray: null,
+  addProductToReturnArray: noop,
+  removeProductFromReturnArray: noop,
+  updatePrimaryReturnReason: noop,
+  updateOpenEndedReturnReason: noop,
   returnSubtotal: 0,
+  activeTextBox: null,
   confirmationPage: false,
   checkboxStatus: false,
+  showForm: false,
   orderIndex: null,
+  orderNumber: '',
 };
 
 
@@ -59,10 +69,8 @@ class ProductContainer extends Component {
     }
   }
   componentWillMount() {
-    const { checkboxStatus } = this.props;
     const { returnArray, product } = this.props;
-    let currentCheckboxStatus = checkboxStatus;
-    currentCheckboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
+    const currentCheckboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     this.setState({
       checkboxStatus: currentCheckboxStatus,
     });
@@ -71,16 +79,29 @@ class ProductContainer extends Component {
     const {
       orderIndex,
       confirmationPage,
+      updatePrimaryReturnReason,
+      updateOpenEndedReturnReason,
+      product,
+      activeTextBox,
+      returnArray,
+      showForm,
+      orderNumber,
     } = this.props;
     const { checkboxStatus } = this.state;
     return (
       <div>
         <ProductListItem
-          {...this.props}
+          product={product}
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
           orderIndex={orderIndex}
           updateReturnArray={() => this.updateReturnArray()}
+          updatePrimaryReturnReason={updatePrimaryReturnReason}
+          updateOpenEndedReturnReason={updateOpenEndedReturnReason}
+          activeTextBox={activeTextBox}
+          returnArray={returnArray}
+          showForm={showForm}
+          orderNumber={orderNumber}
         />
       </div>
     );
