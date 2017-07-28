@@ -7,7 +7,10 @@ const propTypes = {
 };
 const internationalCustomer = true;
 const ConfirmationContainer = ({ returnArray }) => (
-  <Confirmation returnArray={returnArray} internationalCustomer={internationalCustomer} />
+  <Confirmation
+    returnArray={returnArray}
+    internationalCustomer={internationalCustomer}
+  />
 );
 
 function mapStateToProps(state) {

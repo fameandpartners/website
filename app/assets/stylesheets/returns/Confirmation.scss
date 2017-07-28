@@ -8,6 +8,10 @@
     text-decoration: underline;
     margin-top: 30px;
 }
+
+.instructions__container .orders-link-container {
+    padding-top: 20px;
+}
 .instructions__container hr {
     width: 100%;
 }
@@ -23,6 +27,9 @@
 .instructions__body .headline {
     font-size: 34px;
     margin-bottom: 10px;
+    @include desktop {
+      width: 80%;
+    }
 }
 
 .instructions__body .label-list {

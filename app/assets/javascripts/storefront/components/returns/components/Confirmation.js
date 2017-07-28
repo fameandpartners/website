@@ -16,10 +16,12 @@ const defaultProps = {
 
 const Confirmation = ({ returnArray, internationalCustomer }) => (
   <div className="instructions__container">
-    <Link to="/" className="orders-link">Back to Orders</Link>
+    <p className="orders-link-container"><Link to="/" className="orders-link">
+      Back to Orders</Link></p>
     <div className="instructions__body">
       <p className="headline">
-We have emailed you your label and instructions <br />Return your items by MM/DD/YYYY
+        We’ve emailed you a return label and shipping instructions.
+        Ship your return by MM/DD/YYYY
       </p>
       <ul className="label-list hide-for-mobile">
         <li>
@@ -35,15 +37,23 @@ We have emailed you your label and instructions <br />Return your items by MM/DD
           internationalCustomer ?
             <div>
               <p className="list-title"> Please mail your package to</p>
-              <p>Fame and Partners Returns <br />PO Box. 12345 <br />Los Angeles
-, CA 90013
-              </p>
+              <p>Fame and Partners – Returns <br /> 15905 Commerce Way <br />
+              Cerritos, CA, 90703</p>
             </div>
             :
             <div />
          }
         <p className="list-title">Instructions for mailing your package</p>
-        <ul className="list">
+        <ul className={!internationalCustomer ? 'u-hide' : 'list'}>
+          <li>
+            <p className="list-text">Package your dress</p>
+          </li>
+          <li>
+            <p className="list-text">Follow your postal service’s labeling instructions.
+            </p>
+          </li>
+        </ul>
+        <ul className={internationalCustomer ? 'u-hide' : 'list'}>
           <li>
             <p className="list-text">Print and cut out the shipping label</p>
           </li>
@@ -69,10 +79,10 @@ tracking numbers on your package
         <p className="list-title">Packing Slip</p>
         <ul className="list">
           <li>
-            <p className="list-text">Print and cut out the packing slip</p>
+            <p className="list-text">Print and cut out your packing slip</p>
           </li>
           <li>
-            <p className="list-text">Include inside your return package</p>
+            <p className="list-text">Include the packing slip inside your return package.</p>
           </li>
         </ul>
       </div>
