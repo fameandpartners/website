@@ -36,13 +36,6 @@ class GuestReturnApp extends Component {
         console.log(error);
       });
   }
-  validEmail() {
-    const { guestEmail } = this.state;
-    if (guestEmail.match(mailformat)) {
-      return true;
-    }
-    return false;
-  }
   updateEmail(event) {
     this.setState({
       guestEmail: event.target.value,
@@ -58,9 +51,9 @@ class GuestReturnApp extends Component {
     return (
       <div className="grid-center-noGutter GuestReturn__Container">
         <div className="col-4_md-5_sm-10">
-          <p className="headline">Returns</p>
-          <p className="subheader">Not your fav? No problem: Return standard
-            items up to 30 days after yourpurchase.</p>
+          <p className="headline">Let’s get started.</p>
+          <p className="subheader">Want to return? No problem. You can return
+           standard items up to 30 days after your purchase.</p>
           <div className={lookupError ? 'error-box' : 'u-hide'}>
             <p>Sorry the order number and/or email you entered are incorrect.
               Please check them and enter again.</p>
