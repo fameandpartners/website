@@ -62,13 +62,7 @@ class ProductContainer extends Component {
     const { checkboxStatus } = this.props;
     const { returnArray, product } = this.props;
     let currentCheckboxStatus = checkboxStatus;
-    returnArray.map((r) => {
-      if (r.id === product.id) {
-        currentCheckboxStatus = true;
-        return true;
-      }
-      return false;
-    });
+    currentCheckboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     this.setState({
       checkboxStatus: currentCheckboxStatus,
     });
