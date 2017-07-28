@@ -75,12 +75,12 @@ class GuestReturnApp extends Component {
           </form>
           <div className="grid-noGutter-spaceBetween">
             <div className="col">
-              <p className="copy">Have an account?
+              <p className="copy">Have an account?&nbsp;
                 <Link to="/login">Log in</Link>
               </p>
             </div>
             <div className="col-right">
-              <p className="copy">Need help?
+              <p className="copy">Need help?&nbsp;
                 <Link to="/login">Contact Us</Link>
               </p>
             </div>
