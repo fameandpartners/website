@@ -6,6 +6,7 @@ import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsO
 import Checkbox from './Checkbox';
 import Select from '../../shared/Select';
 import Button from '../components/Button';
+import noop from '../../../libs/noop';
 
 const propTypes = {
   product: PropTypes.object.isRequired,
@@ -25,7 +26,7 @@ const defaultProps = {
   activeTextBox: null,
   updatePrimaryReturnReason: null,
   updateOpenEndedReturnReason: null,
-  updateReturnArray: null,
+  updateReturnArray: noop,
   showForm: false,
   confirmationPage: false,
   checkboxStatus: false,
@@ -99,7 +100,7 @@ class ProductListItem extends Component {
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
-            onChange={returnEligible ? () => updateReturnArray() : () => {}}
+            onChange={() => updateReturnArray()}
             checkboxStatus={checkboxStatus}
             showForm={showForm}
           />

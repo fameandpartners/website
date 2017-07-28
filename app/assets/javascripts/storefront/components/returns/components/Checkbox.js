@@ -2,22 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
-  onChange: PropTypes.function,
   id: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
   wrapperClassName: PropTypes.string,
   checkboxStatus: PropTypes.bool,
-  showForm: PropTypes.string,
+  showForm: PropTypes.bool,
 };
 
 const defaultProps = {
   id: '',
   wrapperClassName: '',
   checkboxStatus: false,
-  showForm: '',
-  onChange: () => {},
+  showForm: false,
 };
 
 class Checkbox extends Component {

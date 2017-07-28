@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Button from './Button';
 
 const propTypes = {
-  returnSubtotal: PropTypes.string.isRequired,
+  returnSubtotal: PropTypes.number.isRequired,
 };
 
 const LineItem = ({ returnSubtotal }) => (
