@@ -20,14 +20,16 @@ class OrderContainer extends Component {
   }
   render() {
     const { orderData } = this.props;
-    if (!orderData) {
-      return <div />;
-    }
     return (
-      <div>
-        {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
-      </div>
-    );
+      { orderData
+        ? (
+          <div>
+            {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
+          </div>
+        )
+        : null
+      }
+    )
   }
 }
 
