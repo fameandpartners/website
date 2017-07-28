@@ -9,8 +9,8 @@ const propTypes = {
 };
 
 const defaultProps = {
-  returnArray: PropTypes.array,
-  internationalCustomer: PropTypes.bool,
+  returnArray: [],
+  internationalCustomer: false,
 };
 
 
