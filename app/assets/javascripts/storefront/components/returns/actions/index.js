@@ -3,15 +3,14 @@ import axios from 'axios';
 export const addProductToReturnArray = (product, currentArray) => {
   product.openEndedReturnReason = '';
   currentArray.push(product);
-  const newReturnArray = [...new Set(currentArray)];
   let refundAmount = 0;
-  refundAmount = newReturnArray.reduce((sum, returnedProduct) =>
+  refundAmount = currentArray.reduce((sum, returnedProduct) =>
   sum + Number(returnedProduct.price), 0);
   const productID = product.id;
   return {
     type: 'ADD_PRODUCT_TO_RETURN_ARRAY',
     payload: {
-      returnArray: newReturnArray,
+      returnArray: currentArray,
       returnSubtotal: refundAmount,
       productID,
     },
