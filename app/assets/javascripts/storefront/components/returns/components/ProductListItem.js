@@ -93,7 +93,6 @@ class ProductListItem extends Component {
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50;
     return (
       <div
-        key={id}
         className={confirmationPage || showForm ? 'grid-noGutter-center' : 'grid-noGutter-center'}
       >
         <div className="col-7_md-9_sm-5_xs-9 Product__listItem">

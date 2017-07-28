@@ -71,11 +71,11 @@ class StepOneContainer extends Component {
           <div className="col-10_md-12_sm-12">
             {
               orderArray.map(productArray => (
-                <div key={Math.random()}>
+                <div key={shipDate}>
                   <p className="ship-date">
                       Shipped {shipDate}
                   </p>
-                  <div key={Math.random()} className="Product__listItem__container">
+                  <div className="Product__listItem__container">
                     {
                         productArray.map(p => (
                           <ProductContainer
