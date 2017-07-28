@@ -1,6 +1,7 @@
 module Guest
   class CheckoutController < Spree::CheckoutController
     include GuestHelper
+    include StripeHelper
     prepend_before_filter :check_presence_of_token
     prepend_before_filter :save_token_to_session, only: [:edit]
 

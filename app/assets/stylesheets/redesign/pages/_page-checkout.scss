@@ -512,3 +512,32 @@
   }
 
 }
+
+// Stripe Form
+
+.StripeForm__input-wrapper {
+  border: 1px solid $c-neutral-4;
+  padding: 10px;
+  transition: all 0.3s;
+}
+
+.StripeForm__input-wrapper.StripeForm__input-wrapper--focus {
+  border-color: $c-neutral-black;
+}
+
+.StripeForm__input-wrapper.StripeForm__input-wrapper--dirty {
+  border-color: $stripe-form-dirty;
+}
+
+.StripeForm__input-wrapper.StripeForm__input-wrapper--error {
+  border-color: $stripe-form-error;
+}
+
+.StripeForm__error-wrapper {
+  margin-top: 10px;
+}
+
+.StripeForm__checkout-button {
+  min-height: 56px;
+  text-transform: none;
+}

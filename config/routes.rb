@@ -501,6 +501,8 @@ FameAndPartners::Application.routes.draw do
     ############################################
     get 'search' => 'products/base#search'
 
+    post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
+
     # Guest checkout routes
     resources :payment_requests, only: [:new, :create]
     namespace :guest do
