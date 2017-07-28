@@ -161,7 +161,7 @@ class ProductListItem extends Component {
           </div>
 
         </div>
-        <div className={showForm ? 'u-hide' : 'col-3_md-9_xs-9 ReturnButton__Container'}>
+        <div className={showForm ? 'u-hide' : 'col-3_md-9_xs-9 returnButton__container'}>
           <div className={orderIndex === 0 ? 'grid-spaceAround' : 'u-hide'}>
             <Button primary className="col-12_md-5_sm-12">
               <Link

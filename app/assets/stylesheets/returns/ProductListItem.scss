@@ -95,13 +95,13 @@
     margin: 10px 0 20px;
 }
 
-.ReturnButton__Container {
+.returnButton__container {
     @include tablet {
         padding: 0;
     }
 }
 
-.ReturnButton__Container button {
+.returnButton__container button {
     margin: 0 .5em 1em;
     padding: 0;
     font-family: inherit;
@@ -110,7 +110,7 @@
     }
 }
 
-.ReturnButton__Container div p:first-child {
+.returnButton__container div p:first-child {
     @include desktop {
         margin-top: 0;
     }
