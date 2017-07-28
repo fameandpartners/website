@@ -418,8 +418,8 @@ FameAndPartners::Application.routes.draw do
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
     # Returns
     get '/view-orders'   => 'returns#main'
-    get '/guest-returns'   => 'returns#guest'
-    get '/order-lookup/', :to => 'returns#lookup'
+    get '/guest-returns' => 'returns#guest'
+    get '/order-lookup/' => 'returns#lookup'
 
     #######################
     # (Others) Static pages
