@@ -9,8 +9,8 @@ class GuestReturnApp extends Component {
     super(props);
     autobind(this);
     this.state = {
-      guestEmail: 'notreal@gmail.com',
-      guestOrderID: 'R833073426',
+      guestEmail: '',
+      guestOrderID: '',
       lookupError: false,
     };
   }
@@ -53,35 +53,35 @@ class GuestReturnApp extends Component {
         <div className="col-4_md-5_sm-10">
           <p className="headline">Let’s get started.</p>
           <p className="subheader">Want to return? No problem. You can return
-           standard items up to 30 days after your purchase.</p>
+           standard items up to 30 days after your&nbsp;purchase.</p>
           <div className={lookupError ? 'error-box' : 'u-hide'}>
-            <p>Sorry the order number and/or email you entered are incorrect.
-              Please check them and enter again.</p>
+            <p>Sorry, the order number or email address you entered is incorrect.
+              Please check your information and try again.</p>
           </div>
           <form className="guestForm__container" onSubmit={this.checkOrder}>
             <input
               type="text"
-              placeholder="Enter your order number"
+              placeholder="Order number"
               onChange={this.updateOrderNumber}
               value={guestOrderID}
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email address"
               onChange={this.updateEmail}
               value={guestEmail}
             />
-            <Button primary noMargin className="return-button">Start Your Return</Button>
+            <Button primary noMargin className="return-button">Return My Order</Button>
           </form>
           <div className="grid-noGutter-spaceBetween">
-            <div className="col">
+            <div className="col-6_sm-12">
               <p className="copy">Have an account?&nbsp;
-                <Link to="/login">Log in</Link>
+                <a href="/login">Log In</a>
               </p>
             </div>
-            <div className="col-right">
+            <div className="col-6_sm-12-right">
               <p className="copy">Need help?&nbsp;
-                <Link to="/login">Contact Us</Link>
+                <a href="/contact">Contact Us</a>
               </p>
             </div>
           </div>

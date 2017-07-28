@@ -1,3 +1,5 @@
+@import './mixins';
+
 .GuestReturn__Container {
   background: white;
 }
@@ -26,6 +28,7 @@
   margin: 20px 0;
   text-align: center;
   padding: 5px;
+  border: 1px solid #979797;
   font-size: 14px;
 }
 
@@ -37,7 +40,11 @@
 .GuestReturn__Container .copy {
   font-size: 14px;
   margin-top: 20px;
-  margin-bottom: 200px;
+  text-align: center;
+  margin: 10px 0;
+  @include mediumUp {
+    margin-bottom: 200px;
+  }
   text-align: left;
 }
 
@@ -50,6 +57,7 @@
     color: #F70913;
     border: 1px solid #F70913;
     text-align: center;
-    padding: 10px;
+    padding: 13px 25px;
     font-weight: 500;
+    // background: #
 }
