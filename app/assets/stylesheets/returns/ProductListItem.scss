@@ -1,6 +1,6 @@
 @import './mixins';
 .Product__listItem {
-    margin: auto;
+     margin-top: 0;
     @include desktop {
         margin: inherit;
     }
@@ -78,7 +78,6 @@
 .Product__listItem__container {
     background-color: #FFFFFF;
     @include xLarge {
-        max-width: 1000px;
         margin: 0 auto 80px;
     }
 }
@@ -123,4 +122,5 @@
 .Form__Container p {
     margin-bottom: 12px;
     font-weight: 500;
+    margin-top: 25px;
 }

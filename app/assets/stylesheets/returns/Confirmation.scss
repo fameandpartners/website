@@ -28,7 +28,7 @@
     font-size: 34px;
     margin-bottom: 10px;
     @include desktop {
-      width: 80%;
+      width: 90%;
     }
 }
 
@@ -99,7 +99,7 @@
 
 .instructions__body .button__container {
     @include tablet {
-        margin: 50px 150px;
+        margin: 0;
     }
     padding-bottom: 100px;
 }

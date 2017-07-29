@@ -9,9 +9,6 @@
 .order__container .order-id {
     font-size: 22px;
     text-align: center;
-}
-
-.order__container .order-id {
     @include desktop {
         float: left;
         margin-top: -40px;
@@ -23,11 +20,12 @@
     font-size: 14px;
     color: #979797;
     text-align: center;
+    margin-bottom: 0;
     @include tablet {
-        margin-top: 20px;
+        margin-bottom: 5px;
     }
     @include desktop {
-        margin-top: 30px;
+        margin-top: 10px;
         text-align: right;
     }
 }
@@ -44,11 +42,11 @@
 }
 .order__container .Product__listItem__container .ship-date {
     color: #979797;
-    text-indent: 12vw;
+    text-indent: 10vw;
+    margin-bottom: -10px;
     @include tablet {
         text-indent: 0;
-    }
-    @include desktop {
-        text-indent: -10px;
+        margin-bottom: auto;
+        text-indent: 3vw;
     }
 }

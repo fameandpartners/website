@@ -75,23 +75,25 @@ class StepOneContainer extends Component {
                   <p className="ship-date">
                       Shipped {shipDate}
                   </p>
-                  <div className="Product__listItem__container">
+                  <div>
                     {
                         productArray.map(p => (
-                          <ProductContainer
-                            key={Math.random()}
-                            product={p}
-                            showForm
-                          />
+                          <div className="Product__listItem__container">
+                            <ProductContainer
+                              key={Math.random()}
+                              product={p}
+                              showForm
+                            />
+                          </div>
                           ))
-                      }
+                    }
+                    <LineItem returnSubtotal={this.props.returnSubtotal} />
                   </div>
                 </div>
                 ))
             }
           </div>
         </div>
-        <LineItem returnSubtotal={this.props.returnSubtotal} />
       </div>
     );
   }

@@ -25,8 +25,7 @@
 .StepOne__Container .Product__listItem__container {
     padding: 60px 20px;
     @include desktop {
-        padding: 40px 45px 25px 75px;
-        margin-bottom: 80px;
+        padding-bottom: 20px;
     }
 }
 
@@ -80,13 +79,14 @@
     }
     @include desktop {
         padding: 0;
-        margin: 25px 0 0 35px;
+        margin: auto;
     }
 }
 
 .StepOne__Container .Form__Container textarea {
     border: 1px solid #979797;
     resize: none;
+    padding: 14px;
     width: 100%;
     min-height: 150px;
     @include mediumUp {
@@ -110,14 +110,12 @@
 .Product__listItem__container .returnWindowPassed__container {
     background: #F4F4F4;
     text-align: center;
-    max-height: 170px;
+    border: 1px solid #979797;
     font-size: 14px;
 }
 
 .returnWindowPassed__container .windowClosed-copy {
     font-weight: 600;
-    margin-top: 30px;
-    margin-bottom: 10px;
 }
 
 .returnWindowPassed__container .windowClosed-list {
@@ -125,10 +123,14 @@
     padding: 0;
 }
 
-.returnWindowPassed__container .windowClosed-list li {
-    margin: 5px 0;
+.returnWindowPassed__container .windowClosed-list {
+  margin-bottom: 0;
 }
 
 .returnWindowPassed__container .windowClosed-list li a {
     text-decoration: underline;
+}
+
+.windowPassed__copy {
+  padding: 40px;
 }

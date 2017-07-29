@@ -94,7 +94,7 @@ class ProductListItem extends Component {
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50;
     return (
       <div
-        className={confirmationPage || showForm ? 'grid-noGutter-center' : 'grid-noGutter-center'}
+        className="grid-noGutter-center-spaceAround"
       >
         <div className="col-7_md-9_sm-5_xs-9 Product__listItem">
           <Checkbox
@@ -104,14 +104,14 @@ class ProductListItem extends Component {
             checkboxStatus={checkboxStatus}
             showForm={showForm}
           />
-          <img src={image} alt={name} className="product-image" />
+          <img src="http://placehold.it/180x180" alt={name} className="product-image" />
           <div>
             <div className="nameAndPrice--marginBottom">
               <span className="meta--key">
                 {name}
               </span>
               <span className="meta--value">
-                ${price}
+                ${Number(price).toFixed(2)}
               </span>
             </div>
             <div className="meta--marginBottom">
@@ -141,20 +141,20 @@ class ProductListItem extends Component {
           </div>
         </div>
         <div className={!returnEligible && showForm ? 'col-4_md-10_sm-10_xs-12 returnWindowPassed__container' : 'u-hide'}>
-          <div className="grid-middle">
+          <div className="grid-middle windowPassed__copy">
             <div className="col-12">
               <p className="windowClosed-copy">
-                Return window closed on <br />
-                {returnWindowEnd}
+                Your 30-day return window closed on <br />
+                {returnWindowEnd} and this item is no longer eligible for a return.
               </p>
             </div>
             <div className="col-12">
               <ul className="windowClosed-list">
                 <li>
-                  <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy">View Return Policy</a>
+                  <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
                 </li>
                 <li>
-                  <a href="https://www.fameandpartners.com/contact">Contact Customer Service</a>
+                  <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
                 </li>
               </ul>
             </div>

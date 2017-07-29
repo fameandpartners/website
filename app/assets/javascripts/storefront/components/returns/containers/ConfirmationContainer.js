@@ -5,7 +5,7 @@ import Confirmation from '../components/Confirmation';
 const propTypes = {
   returnArray: PropTypes.array.isRequired,
 };
-const internationalCustomer = true;
+const internationalCustomer = false;
 const ConfirmationContainer = ({ returnArray }) => (
   <Confirmation
     returnArray={returnArray}

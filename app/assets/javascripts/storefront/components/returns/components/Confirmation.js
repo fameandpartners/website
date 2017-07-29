@@ -21,7 +21,7 @@ const Confirmation = ({ returnArray, internationalCustomer }) => (
     <div className="instructions__body">
       <p className="headline">
         We’ve emailed you a return label and shipping instructions.
-        Ship your return by MM/DD/YYYY
+        <br />Ship your return by MM/DD/YYYY
       </p>
       <ul className="label-list hide-for-mobile">
         <li>
@@ -36,14 +36,14 @@ const Confirmation = ({ returnArray, internationalCustomer }) => (
         {
           internationalCustomer ?
             <div>
-              <p className="list-title"> Please mail your package to</p>
+              <p className="list-title"> <b>Please mail your package to</b></p>
               <p>Fame and Partners – Returns <br /> 15905 Commerce Way <br />
               Cerritos, CA, 90703</p>
             </div>
             :
             <div />
          }
-        <p className="list-title">Instructions for mailing your package</p>
+        <p className="list-title"><b>Instructions for mailing your package</b></p>
         <ul className={!internationalCustomer ? 'u-hide' : 'list'}>
           <li>
             <p className="list-text">Package your dress</p>
@@ -76,7 +76,7 @@ tracking numbers on your package
           alt="Shipping Label"
           className={internationalCustomer ? 'u-hide' : 'shipping-label hide-for-mobile'}
         />
-        <p className="list-title">Packing Slip</p>
+        <p className="list-title"><b>Packing Slip</b></p>
         <ul className="list">
           <li>
             <p className="list-text">Print and cut out your packing slip</p>

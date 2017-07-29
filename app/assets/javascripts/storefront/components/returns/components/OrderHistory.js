@@ -25,21 +25,20 @@ class OrderHistory extends Component {
     const { shipDate, orderPlaced, number } = orderData;
     return (
       <div>
-        <div className="grid-noGutter-center">
-          <div className="col-9_md-12 u-no-padding-right">
+        <div className="grid-noGutter-center-spaceAround">
+          <div className="col-10_md-12 u-no-padding-right">
             <div className="order__container">
-              <p className="order-placed">
+              <p className="order-placed u-margin-bottom-small">
                 Placed on {orderPlaced}
               </p>
-              <p className="order-id">
+              <p className="order-id u-margin-bottom-small">
                 Order #{number}
               </p>
               <div className="Product__listItem__container">
                 <p className="ship-date">Shipped {shipDate}</p>
                 {
-                 orderArray.map(order => {
-                   return (
-                    order.map(function(o, i){
+                 orderArray.map(order => (
+                    order.map((o, i) => {
                       const showHR = order.length === Number(i + 1);
                       const { id } = o;
                       return (
@@ -51,12 +50,10 @@ class OrderHistory extends Component {
                             showForm={false}
                             orderNumber={number}
                           />
-                          <hr className={!showHR ? 'u-hide' : 'u-show'} />
                         </div>
                       );
                     })
-                   );
-                 })
+                   ))
                 }
               </div>
             </div>

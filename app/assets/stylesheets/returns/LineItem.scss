@@ -20,7 +20,7 @@
 }
 .LineItem .button-link {
     padding: 1.3em 5em;
-    @include desktop { 
+    @include desktop {
         min-width: 344px;
     }
 }
@@ -31,9 +31,9 @@
         display: block;
         width: 20vw;
         position: relative;
-        left: 37.25vw;
+        left: 29vw;
     }
     @include xLarge {
-        left: 38vw;
+        left: 30vw;
     }
 }
