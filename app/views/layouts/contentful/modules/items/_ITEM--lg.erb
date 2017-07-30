@@ -1,37 +1,39 @@
-<%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
+<div class="Editorial Editorial--featured">
+  <%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
 
-<%
-  products = []
+  <%
+    products = []
 
-  @lg_contents[:overlay_pids].each do |pid|
-    split_pid = pid.split('-', 2)
-    current_id = split_pid[0].to_i
-    current_color = split_pid[1]
+    @lg_contents[:overlay_pids].each do |pid|
+      split_pid = pid.split('-', 2)
+      current_id = split_pid[0].to_i
+      current_color = split_pid[1]
 
-    present_product = @collection.products.select do |item|
-      item.id == current_id && item.color.name == current_color
+      present_product = @collection.products.select do |item|
+        item.id == current_id && item.color.name == current_color
+      end
+
+      if present_product.present?
+        products.push(present_product[0])
+      end
     end
-
-    if present_product.present?
-      products.push(present_product[0])
-    end
-  end
-%>
-
-<% if products.count > 0 %>
-<div class="Editorial__overlay">
-  <h4 class="Editorial__overlayTitle">Shop the Look</h4>
-  <ul>
-  <% products.each do |item|
-       name = item.name
-       path = collection_product_path(item, color: item.color.try(:name))
   %>
-    <li>
-      <a href="<%= path %>">
-        <%= name %>
-      </a>
-    </li>
+
+  <% if products.count > 0 %>
+  <div class="Editorial__overlay">
+    <h4 class="Editorial__overlayTitle">Shop the Look</h4>
+    <ul>
+    <% products.each do |item|
+      name = item.name
+      path = collection_product_path(item, color: item.color.try(:name))
+    %>
+      <li>
+        <a href="<%= path %>">
+          <%= name %>
+        </a>
+      </li>
+    <% end %>
+    </ul>
+  </div>
   <% end %>
-  </ul>
 </div>
-<% end %>
