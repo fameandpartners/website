@@ -24,15 +24,18 @@
   color: $oil;
   opacity: 0;
   transition: 0.3s all;
-}
 
-.Editorial__overlay ul {
-  list-style-type: none;
-  padding: 0;
-  font-weight: bold;
-  a {
-    text-decoration: underline;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    font-weight: bold;
+
+    a {
+      text-decoration: underline;
+    }
+
   }
+
 }
 
 .Editorial__overlayTitle {
@@ -59,4 +62,18 @@
 
 .Editorial--mini .Editorial__overlayTitle {
   font-size: 2rem;
+}
+
+.Editorial__overlayBottomCaption {
+  color: $c-white;
+  font-size: 1.4rem;
+  position: absolute;
+  margin: 10px 7%;
+  padding: 5px;
+  bottom: 0;
+
+  .Editorial__overlayBottomCaptionTitle {
+    color: $c-white;
+  }
+
 }
