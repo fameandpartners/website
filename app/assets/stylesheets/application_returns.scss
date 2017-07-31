@@ -1,7 +1,7 @@
 
 
 //= require_tree ./redesign/stylesheets
-
+@import 'bootstrap/variables';
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
@@ -41,7 +41,7 @@
 @import 'returns/Checkbox';
 @import 'returns/LineItem';
 @import 'returns/ProductListItem';
-@import 'returns/Select';
+@import 'redesign/react_components/Select';
 @import 'returns/index';
 @import 'returns/Confirmation';
 @import 'returns/OrderHistory';
