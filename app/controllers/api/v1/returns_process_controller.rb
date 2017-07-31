@@ -21,11 +21,16 @@ module Api
       def create
 
         if has_incorrect_params?
-          error_response("Incorrect parameters. Expecting { line_item_ids: ARRAY }")
+          error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }")
           return
         end
 
-        return_item_ids = params['line_item_ids']
+        if has_invalid_order_id?(params['order_id'])
+          error_response("Invalid Order ID.")
+          return
+        end
+
+        return_item_ids = map_line_item_ids(params['line_items'])
 
         if has_invalid_line_items?(return_item_ids)
           error_response("One or more line_item_ids is not valid.")
@@ -37,13 +42,23 @@ module Api
           return
         end
 
-        process_returns(return_item_ids)
+        process_returns(params)
 
       end
 
 
       def has_incorrect_params?
-        !(params['line_item_ids'].present? && (params['line_item_ids'].instance_of? Array))
+        !(params['order_id'].present? && params['line_items'].present?)
+      end
+
+      def has_invalid_order_id?(id)
+        !Spree::Order.exists?(id)
+      end
+
+      def map_line_item_ids(arr)
+        ids = arr.map do |id|
+                id['line_item_id']
+              end
       end
 
       def has_invalid_line_items?(arr)
@@ -59,12 +74,37 @@ module Api
       end
 
 
-      def process_returns(arr)
-        new_return_labels = arr.map do |id|
-          ItemReturnEvent.creation.create(line_item_id: id).item_return.return_label
-        end
-        success_response(new_return_labels)
+      def process_returns(obj)
+
+        return_request = {
+          :order_return_request => {
+            :order_id => obj['order_id'],
+            :return_request_items_attributes => obj['line_items']
+          }
+        }
+
+        @order_return = OrderReturnRequest.new(return_request[:order_return_request])
+        @order = Spree::Order.find(return_request[:order_return_request][:order_id])
+
+        @order_return.save
+
+        start_bergen_return_process(@order_return)
+        start_next_logistics_process(@order_return)
+
+        return_labels = map_return_labels(obj['line_items'])
+
+        success_response(return_labels)
         return
+
+      end
+
+      def map_return_labels(arr)
+        arr.map do |item|
+          {
+            "line_item_id": item['line_item_id'],
+            "label_meta": ItemReturn.where(line_item_id: item['line_item_id']).first.return_label
+          }
+        end
       end
 
 
@@ -82,6 +122,20 @@ module Api
           status: 200
         }
         render :json => payload, :status => :ok
+      end
+
+      private
+
+      def start_bergen_return_process(order_return)
+        order_return.return_request_items.each do |rri|
+          Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
+        end
+      end
+
+      def start_next_logistics_process(order_return)
+        if Features.active?(:next_logistics)
+          NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
+        end
       end
 
     end
