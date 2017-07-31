@@ -98,9 +98,8 @@ module Api
       def map_return_labels(arr)
         arr.map do |item|
           {
-            "line_item_id": item['line_item_id'],
-            "label_meta": ItemReturn.where(line_item_id: item['line_item_id']).first.return_label
-          }
+            "line_item_id": item['line_item_id']
+          }.merge(ItemReturn.where(line_item_id: item['line_item_id']).first&.return_label.as_json)
         end
       end
 
