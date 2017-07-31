@@ -21,7 +21,6 @@ module Api
 
       # POST
       def create
-
         if has_incorrect_params?
           error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }")
           return
@@ -45,7 +44,6 @@ module Api
         end
 
         process_returns(params)
-
       end
 
 
@@ -86,8 +84,6 @@ module Api
         }
 
         @order_return = OrderReturnRequest.new(return_request[:order_return_request])
-        @order = Spree::Order.find(return_request[:order_return_request][:order_id])
-
         @order_return.save
 
         start_bergen_return_process(@order_return)
