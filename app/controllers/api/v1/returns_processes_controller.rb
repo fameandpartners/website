@@ -58,9 +58,9 @@ module Api
       end
 
       def map_line_item_ids(arr)
-        ids = arr.map do |id|
-                id['line_item_id']
-              end
+        arr.map do |id|
+          id['line_item_id']
+        end
       end
 
       def has_invalid_line_items?(arr)
