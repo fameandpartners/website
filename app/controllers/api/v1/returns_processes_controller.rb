@@ -1,7 +1,7 @@
 module Api
   module V1
     # TO-DO: Refactor into an ApiController
-    class ReturnsProcessController < ApplicationController
+    class ReturnsProcessesController < ApplicationController
       before_filter :authenticate_spree_user!, :only => [:index]
 
       respond_to :json
@@ -21,6 +21,7 @@ module Api
 
       # POST
       def create
+        binding.pry
         if has_incorrect_params?
           error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }")
           return
