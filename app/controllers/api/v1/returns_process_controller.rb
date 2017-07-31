@@ -6,6 +6,7 @@ module Api
 
       respond_to :json
 
+
       # GET
       def index
         user = try_spree_current_user
@@ -16,6 +17,7 @@ module Api
 
         respond_with @orders
       end
+
 
       # POST
       def create
@@ -47,6 +49,8 @@ module Api
       end
 
 
+      private
+
       def has_incorrect_params?
         !(params['order_id'].present? && params['line_items'].present?)
       end
@@ -72,7 +76,6 @@ module Api
           ItemReturn.exists?(line_item_id: id)
         end
       end
-
 
       def process_returns(obj)
 
@@ -107,7 +110,6 @@ module Api
         end
       end
 
-
       def error_response(err)
         payload = {
           error: err,
@@ -123,8 +125,6 @@ module Api
         }
         render :json => payload, :status => :ok
       end
-
-      private
 
       def start_bergen_return_process(order_return)
         order_return.return_request_items.each do |rri|
