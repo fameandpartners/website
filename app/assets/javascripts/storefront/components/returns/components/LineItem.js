@@ -21,13 +21,13 @@ const LineItem = ({ returnSubtotal }) => (
       </div>
     </div>
     <div className="grid-right">
-      <div className="col-4_md-12_sm-10">
+      <div className="col-4_md-12_sm-12">
         <p className="total">
          Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
         </p>
         <SimpleButton
           buttonCopy="Start Return"
-          link="/"
+          link="/return-confirmation"
           localLink
         />
       </div>

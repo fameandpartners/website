@@ -1,8 +1,14 @@
+@import './mixins';
+
 .simpleButton__container {
   background: black;
-  max-width: 320px;
+  max-width: 300px;
   text-align: center;
   font-size: 14px;
+  margin: 0 auto;
+  @include desktop {
+    max-width: 390px;
+  }
 }
 
 .simpleButton__container .copy {
