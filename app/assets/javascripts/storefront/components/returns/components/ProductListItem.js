@@ -5,7 +5,7 @@ import moment from 'moment';
 import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject';
 import Checkbox from './Checkbox';
 import Select from '../../shared/Select';
-import Button from '../components/Button';
+import SimpleButton from '../components/SimpleButton';
 import noop from '../../../libs/noop';
 
 const propTypes = {
@@ -96,7 +96,7 @@ class ProductListItem extends Component {
       <div
         className="grid-noGutter-middle-spaceAround u-background-white"
       >
-        <div className="col-7_md-9_sm-5_xs-9 Product__listItem">
+        <div className="col-6_md-9_sm-5_xs-9 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
@@ -140,7 +140,7 @@ class ProductListItem extends Component {
             </div>
           </div>
         </div>
-        <div className={!returnEligible && showForm ? 'col-3_md-9_xs-9' : 'u-hide'}>
+        <div className={!returnEligible && showForm ? 'col-4_md-9_xs-9' : 'u-hide'}>
           <div className="grid-center">
             <div className="returnWindowPassed__container">
               <div className="col-12">
@@ -162,19 +162,18 @@ class ProductListItem extends Component {
             </div>
           </div>
         </div>
-        <div className={showForm ? 'u-hide' : 'col-3_md-9_xs-9 returnButton__container'}>
+        <div className={showForm ? 'u-hide' : 'col-4_md-9_xs-9 returnButton__container'}>
           <div className={orderIndex === 0 ? 'grid-spaceAround' : 'u-hide'}>
-            <Button primary className="col-12_md-5_sm-12">
-              <Link
-                to={`/start-return/${orderNumber}`}
-                className="u-white-text button-link"
-              >
-                Start Return
-              </Link>
-            </Button>
+            <div className="col-12_md-5_sm-12">
+              <SimpleButton
+                buttonCopy="Start Return"
+                link={`/start-return/${orderNumber}`}
+                localLink
+              />
+            </div>
           </div>
         </div>
-        <div className={showForm ? 'col-3_md-9_xs-9 Form__Container' : 'u-hide'}>
+        <div className={showForm ? 'col-4_md-9_xs-9 Form__Container' : 'u-hide'}>
           <div className={showForm && checkboxStatus && returnEligible ? 'u-show' : 'u-hide'}>
             <form>
               <p className="u-no-margin">Why are you returning this?</p>

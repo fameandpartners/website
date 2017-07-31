@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ProductContainer from '../containers/ProductContainer';
+import Button from './Button';
 import SimpleButton from './SimpleButton';
 
 const propTypes = {

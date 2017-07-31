@@ -38,10 +38,14 @@ class OrderHistory extends Component {
                 {
                  orderArray.map(order => (
                     order.map((o, i) => {
-                      const showHR = order.length === Number(i + 1);
                       const { id } = o;
                       return (
                         <div>
+                          <div className="grid-noGutter-center">
+                            <div className="col-11_md-9_sm-5_xs-9">
+                              <p className={i === 0 ? 'u-show u-margin-bottom-none u-heavyFont u-margin-top-small' : 'u-hide'} >Shipped {shipDate}</p>
+                            </div>
+                          </div>
                           <ProductContainer
                             key={id}
                             product={o}

@@ -8,25 +8,29 @@ const propTypes = {
 };
 
 const LineItem = ({ returnSubtotal }) => (
-  <div className="LineItem grid-center">
-    <div className="col-12_md-4_sm-10">
-      <p>
-       Refund subtotal: ${Number(returnSubtotal).toFixed(2) || 0.00}
-      </p>
-      <p>
-       Shipping: $0.00
-      </p>
-      <hr />
+  <div className="LineItem">
+    <div className="grid-center">
+      <div className="col-12_md-12_sm-10">
+        <p>
+         Refund subtotal: ${Number(returnSubtotal).toFixed(2) || 0.00}
+        </p>
+        <p>
+         Shipping: $0.00
+        </p>
+        <hr />
+      </div>
     </div>
-    <div className="col-12_md-4_sm-10">
-      <p className="total">
-       Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
-      </p>
-      <SimpleButton
-        buttonCopy="Start Return"
-        link="/"
-        localLink
-      />
+    <div className="grid-right">
+      <div className="col-4_md-12_sm-10">
+        <p className="total">
+         Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
+        </p>
+        <SimpleButton
+          buttonCopy="Start Return"
+          link="/"
+          localLink
+        />
+      </div>
     </div>
   </div>
 );
