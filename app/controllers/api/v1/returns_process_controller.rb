@@ -78,7 +78,6 @@ module Api
       end
 
       def process_returns(obj)
-
         return_request = {
           :order_return_request => {
             :order_id => obj['order_id'],
@@ -98,7 +97,6 @@ module Api
 
         success_response(return_labels)
         return
-
       end
 
       def map_return_labels(arr)
