@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Button from './Button';
+import SimpleButton from './SimpleButton';
 
 const propTypes = {
   returnSubtotal: PropTypes.number.isRequired,
@@ -21,11 +22,11 @@ const LineItem = ({ returnSubtotal }) => (
       <p className="total">
        Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
       </p>
-      <Button primary noMargin>
-        <Link to="/return-confirmation" className="u-white-text button-link">
-         Start Return
-       </Link>
-      </Button>
+      <SimpleButton
+        buttonCopy="Start Return"
+        link="/"
+        localLink
+      />
     </div>
   </div>
 );

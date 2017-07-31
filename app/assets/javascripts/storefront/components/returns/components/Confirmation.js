@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ProductContainer from '../containers/ProductContainer';
-import Button from './Button';
+import SimpleButton from './SimpleButton';
 
 const propTypes = {
   returnArray: PropTypes.array,
@@ -95,11 +95,11 @@ tracking numbers on your package
           return <ProductContainer confirmationPage key={id} product={p} />;
         })}
       </div>
-      <div className="button__container">
-        <Button primary noMargin>
-          <Link className="u-white-text button-link" to="/">Continue Shopping</Link>
-        </Button>
-      </div>
+      <SimpleButton
+        buttonCopy="Continue Shopping"
+        link="/"
+        localLink
+      />
     </div>
   </div>
 );
