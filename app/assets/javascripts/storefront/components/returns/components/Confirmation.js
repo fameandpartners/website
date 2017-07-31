@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ProductContainer from '../containers/ProductContainer';
-import Button from './Button';
 import SimpleButton from './SimpleButton';
 
 const propTypes = {
@@ -56,18 +55,24 @@ const Confirmation = ({ returnArray, internationalCustomer }) => (
         </ul>
         <ul className={internationalCustomer ? 'u-hide' : 'list'}>
           <li>
-            <p className="list-text">Print and cut out the shipping label</p>
+            <p className="list-text">Print/Cutout the SmartLabel&reg; below. </p>
           </li>
           <li>
-            <p className="list-text">Affix the label to your package, making
-              sure there are no other visible barcodes or tracking numbers on the
-              package.
+            <p className="list-text">Package the item(s) and Return Form,
+              seal securely with tape. Affix the SmartLabel&reg; to the package.
             </p>
           </li>
           <li>
-            <p className="list-text">Take to the nearest US post office for drop off.
-              <a href="#" className="link">Locate nearest post office</a>
-            </p>
+            <p className="list-text">Drop your return anywhere in the U.S. Mail
+              location—in your mailbox, at work, or at a Post Office without
+              waiting in line. <a
+                href="https://tools.usps.com/go/POLocatorAction!input.action"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link u-underline"
+              >
+                  Locate Post Office.
+              </a></p>
           </li>
         </ul>
         <img
