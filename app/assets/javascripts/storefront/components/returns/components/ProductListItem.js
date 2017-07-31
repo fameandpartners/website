@@ -183,7 +183,9 @@ class ProductListItem extends Component {
                 onChange={this.updatePrimaryReason}
               />
               <div className={primaryReturnReason ? 'u-show' : 'u-hide'}>
-                <p className="u-no-margin">Let us know what you didn’t like.</p>
+                <p className="u-no-margin">
+                  Let's get specific. What didn't you like?
+                </p>
                 <textarea
                   onChange={this.updateOpenEndedReason}
                   value={openEndedReturnReason}

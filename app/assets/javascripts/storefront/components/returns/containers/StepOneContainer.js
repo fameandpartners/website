@@ -57,13 +57,13 @@ class StepOneContainer extends Component {
       <div className="StepOne__Container">
         <div className="grid-noGutter-center">
           <div className="col-10_md-10_sm-11">
-            <p className="instructions instructions__title">Sorry it didn't work out.
+            <p className="instructions instructions__title">
+                Returns happen.
                 <br /> Please select the item(s) you would like to return
             </p>
             <p className="instructions instructions__subtitle">
-                Please note that any item must be in new, unused and resalable condition,
-                with the DO NOT REMOVE tag still attached in the same place as
-                originally sent.
+                Please note that any returns must be in new, unused, and
+                resalable condition with the "DO NOT REMOVE" tag still attached.
             </p>
           </div>
         </div>
