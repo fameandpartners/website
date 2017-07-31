@@ -19,6 +19,7 @@ const propTypes = {
   orderIndex: PropTypes.number,
   showForm: PropTypes.bool,
   orderNumber: PropTypes.string,
+  returnEligible: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -32,6 +33,7 @@ const defaultProps = {
   checkboxStatus: false,
   showForm: false,
   orderIndex: null,
+  returnEligible: true,
   orderNumber: '',
 };
 
@@ -86,6 +88,7 @@ class ProductContainer extends Component {
       returnArray,
       showForm,
       orderNumber,
+      returnEligible,
     } = this.props;
     const { checkboxStatus } = this.state;
     return (
@@ -102,6 +105,7 @@ class ProductContainer extends Component {
           returnArray={returnArray}
           showForm={showForm}
           orderNumber={orderNumber}
+          returnEligible={returnEligible}
         />
       </div>
     );

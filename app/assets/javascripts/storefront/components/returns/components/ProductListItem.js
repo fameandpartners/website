@@ -17,6 +17,7 @@ const propTypes = {
   returnArray: PropTypes.array.isRequired,
   showForm: PropTypes.bool,
   confirmationPage: PropTypes.bool,
+  returnEligible: PropTypes.bool.isRequired,
   checkboxStatus: PropTypes.bool,
   updateReturnArray: PropTypes.func,
   orderNumber: PropTypes.string,
@@ -29,14 +30,15 @@ const defaultProps = {
   updateReturnArray: noop,
   showForm: false,
   confirmationPage: false,
+  returnEligible: true,
   checkboxStatus: false,
   orderIndex: 0,
   orderNumber: '',
 };
 
 class ProductListItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     autoBind(this);
   }
   updatePrimaryReason(reason) {
@@ -73,7 +75,9 @@ class ProductListItem extends Component {
       checkboxStatus,
       updateReturnArray,
       orderNumber,
+      returnEligible,
     } = this.props;
+    console.log('returnEligible', returnEligible);
     const {
           id,
           orderPlaced,
@@ -83,11 +87,6 @@ class ProductListItem extends Component {
     const { name, size, color, image } = productMeta;
     const heightValue = productMeta.height_value;
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
-    const currentDay = moment();
-    const lastDay = moment(new Date(orderPlaced));
-    const lastDayArray = moment([[lastDay.format('YYYY')][0], [lastDay.format('M')][0], [lastDay.format('D')][0]]);
-    const currentDayArray = moment([[currentDay.format('YYYY')][0], [currentDay.format('M')][0], [currentDay.format('D')][0]]);
-    const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50;
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
