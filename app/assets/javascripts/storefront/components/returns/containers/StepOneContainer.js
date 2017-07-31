@@ -47,6 +47,11 @@ class StepOneContainer extends Component {
       };
     }
   }
+  componentDidMount() {
+    $('html, body').animate({
+      scrollTop: 0,
+    }, 600);
+  }
   render() {
     const { order, orderArray } = this.state;
     if (!order) {
@@ -85,10 +90,12 @@ class StepOneContainer extends Component {
                         />
                         ))
                   }
-                  <LineItem returnSubtotal={this.props.returnSubtotal} />
                 </div>
                 ))
             }
+            </div>
+            <div>
+              <LineItem returnSubtotal={this.props.returnSubtotal} />
             </div>
           </div>
         </div>

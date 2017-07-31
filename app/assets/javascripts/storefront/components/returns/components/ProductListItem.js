@@ -177,7 +177,7 @@ class ProductListItem extends Component {
                 id={`${id}-primary`}
                 options={primaryReturnReasonArray}
                 onChange={this.updatePrimaryReason}
-                label="Please select an option"
+                label={primaryReturnReason ? null : 'Please select an option'}
               />
               <div className={primaryReturnReason ? 'u-show' : 'u-no-opacity'}>
                 <p className="u-no-margin">

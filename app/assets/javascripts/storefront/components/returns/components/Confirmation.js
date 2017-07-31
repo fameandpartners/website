@@ -59,16 +59,14 @@ const Confirmation = ({ returnArray, internationalCustomer }) => (
             <p className="list-text">Print and cut out the shipping label</p>
           </li>
           <li>
-            <p className="list-text">Make sure there are no barcodes or
-tracking numbers on your package
+            <p className="list-text">Affix the label to your package, making
+              sure there are no other visible barcodes or tracking numbers on the
+              package.
             </p>
           </li>
           <li>
-            <p className="list-text">Securely affix this label to your package.</p>
-          </li>
-          <li>
             <p className="list-text">Take to the nearest US post office for drop off.
- <a href="#" className="link">Locate nearest post office</a>
+              <a href="#" className="link">Locate nearest post office</a>
             </p>
           </li>
         </ul>
@@ -87,7 +85,7 @@ tracking numbers on your package
           </li>
         </ul>
       </div>
-      <hr />
+      <hr className="dotted-line" />
 
       <div>
         <p>Order #1231</p>
@@ -109,6 +107,5 @@ tracking numbers on your package
 
 Confirmation.propTypes = propTypes;
 Confirmation.defaultProps = defaultProps;
-
 
 export default Confirmation;
