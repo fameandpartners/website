@@ -94,7 +94,7 @@ class ProductListItem extends Component {
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50;
     return (
       <div
-        className="grid-noGutter-middle-spaceAround u-background-white"
+        className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
       >
         <div className="col-6_md-9_sm-5_xs-9 Product__listItem">
           <Checkbox
@@ -183,7 +183,7 @@ class ProductListItem extends Component {
                 onChange={this.updatePrimaryReason}
                 label="Please select an option"
               />
-              <div className={primaryReturnReason ? 'u-show' : 'u-hide'}>
+              <div className={primaryReturnReason.name ? 'u-no-opacity' : 'u-hide'}>
                 <p className="u-no-margin">
                   Let's get specific. What didn't you like?
                 </p>
