@@ -63,7 +63,7 @@ class StepOneContainer extends Component {
             </p>
             <p className="instructions instructions__subtitle">
                 Please note that any returns must be in new, unused, and
-                resalable condition with the "DO NOT REMOVE" tag still attached.
+                resalable condition with the "DO&nbsp;NOT&nbsp;REMOVE" tag still attached.
             </p>
           </div>
         </div>
@@ -76,18 +76,16 @@ class StepOneContainer extends Component {
               {
               orderArray.map(productArray => (
                 <div key={shipDate}>
-                  <div>
-                    {
-                        productArray.map(p => (
-                          <ProductContainer
-                            key={Math.random()}
-                            product={p}
-                            showForm
-                          />
-                          ))
-                    }
-                    <LineItem returnSubtotal={this.props.returnSubtotal} />
-                  </div>
+                  {
+                      productArray.map(p => (
+                        <ProductContainer
+                          key={Math.random()}
+                          product={p}
+                          showForm
+                        />
+                        ))
+                  }
+                  <LineItem returnSubtotal={this.props.returnSubtotal} />
                 </div>
                 ))
             }

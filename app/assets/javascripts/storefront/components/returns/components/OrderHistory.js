@@ -43,7 +43,7 @@ class OrderHistory extends Component {
                         <div>
                           <div className="grid-noGutter-center">
                             <div className="col-11_md-9_sm-5_xs-9">
-                              <p className={i === 0 ? 'u-show u-margin-bottom-none u-heavyFont u-margin-top-small' : 'u-hide'} >Shipped {shipDate}</p>
+                              <p className={i === 0 ? 'u-show u-margin-bottom-none u-heavyFont u-margin-top-small ship-date' : 'u-hide'} >Shipped {shipDate}</p>
                             </div>
                           </div>
                           <ProductContainer

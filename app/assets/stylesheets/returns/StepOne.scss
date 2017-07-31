@@ -31,14 +31,14 @@
     font-weight: 500;
     margin-top: 20px;
     @include mediumUp {
-        margin-top: 40px;
+        margin-top: 15px;
     }
 }
 
 .StepOne__Container .instructions.instructions__subtitle {
     font-size: 18px;
     @include desktop {
-        margin: 0 15%;
+        margin: 0 30% 85px;
     }
     @include xLarge {
         margin: 0 30%;

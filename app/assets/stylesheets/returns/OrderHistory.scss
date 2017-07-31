@@ -36,10 +36,9 @@
 }
 .order__container  .ship-date {
     color: #979797;
-    text-indent: 10vw;
     margin-bottom: -10px;
     @include tablet {
-        text-indent: 0;
+        color: black;
         margin-bottom: auto;
     }
 }
