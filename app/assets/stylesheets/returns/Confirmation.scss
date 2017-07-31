@@ -1,6 +1,7 @@
 @import './mixins';
 .instructions__container {
     background: white;
+    padding-bottom: 150px;
 }
 .instructions__container .orders-link {
     color: black;
@@ -10,7 +11,8 @@
 }
 
 .instructions__container .orders-link-container {
-    padding-top: 20px;
+    padding-top: 30px;
+    margin-top: -30px;
 }
 .instructions__container hr {
     width: 100%;
@@ -26,18 +28,13 @@
 
 .instructions__body .headline {
     font-size: 34px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     @include desktop {
       width: 90%;
     }
 }
 
 .instructions__body .label-list {
-    @include tablet {
-        float: left;
-        text-align: center;
-        padding: 0 30%;
-    }
     @include desktop {
         float: right;
         margin-top: -30px;

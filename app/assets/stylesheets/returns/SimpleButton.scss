@@ -8,6 +8,7 @@
   margin: 0 auto;
   @include desktop {
     max-width: 390px;
+    margin: initial;
   }
 }
 

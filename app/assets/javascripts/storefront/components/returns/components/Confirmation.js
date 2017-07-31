@@ -96,11 +96,13 @@ tracking numbers on your package
           return <ProductContainer confirmationPage key={id} product={p} />;
         })}
       </div>
-      <SimpleButton
-        buttonCopy="Continue Shopping"
-        link="/"
-        localLink
-      />
+      <div className="u-margin-bottom-large">
+        <SimpleButton
+          buttonCopy="Continue Shopping"
+          link="/"
+          localLink
+        />
+      </div>
     </div>
   </div>
 );
