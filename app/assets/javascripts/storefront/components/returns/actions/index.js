@@ -1,4 +1,5 @@
 import axios from 'axios';
+import setReturnWindow from '../../../libs/setReturnWindow';
 
 export const addProductToReturnArray = (product, currentArray) => {
   product.openEndedReturnReason = '';
@@ -73,6 +74,7 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 export const getProductData = () => (dispatch) => {
   axios.get('https://85s0db362c.execute-api.us-west-2.amazonaws.com/dev')
       .then((response) => {
+        setReturnWindow(response.data);
         dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data });
       })
       .catch((error) => {
