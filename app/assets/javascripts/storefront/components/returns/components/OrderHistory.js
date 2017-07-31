@@ -35,7 +35,6 @@ class OrderHistory extends Component {
                 Order #{number}
               </p>
               <div className="Product__listItem__container">
-                <p className="ship-date">Shipped {shipDate}</p>
                 {
                  orderArray.map(order => (
                     order.map((o, i) => {

@@ -1,4 +1,8 @@
 @import './mixins';
+.Product__listItem__container {
+  background: white;
+  padding-top: 25px;
+}
 .Product__listItem {
      margin-top: 0;
     @include desktop {
@@ -44,7 +48,7 @@
 }
 
 .Product__listItem .product--image {
-    @include mediumUp {
+    @include tablet {
         float: left;
         margin-right: 45px;
     }
@@ -52,8 +56,8 @@
 
 .Product__listItem .Checkbox__wrapper label {
     position: absolute;
-    left: 25px;
-    @include mediumUp {
+    left: 10px;
+    @include tablet {
         position: relative;
         left: 0px;
     }
@@ -75,14 +79,14 @@
     }
 }
 
-.Product__listItem__container {
+.Product__listItem {
     background-color: #FFFFFF;
     @include xLarge {
         margin: 0 auto 80px;
     }
 }
 
-.Product__listItem__container hr {
+.Product__listItem hr {
     display: none;
     margin: 45px 10px 50px;
     @include desktop {
@@ -90,7 +94,7 @@
     }
 }
 
-.Product__listItem__container .Select--wrapper {
+.Product__listItem .Select--wrapper {
     margin: 10px 0 20px;
 }
 
@@ -118,9 +122,12 @@
 .Form__Container .select--marginTop {
     margin-top: 20px;
 }
-
+.Form__Container {
+  position: relative;
+  top: 15px;
+  margin: 30px 0;
+}
 .Form__Container p {
     margin-bottom: 12px;
     font-weight: 500;
-    margin-top: 25px;
 }

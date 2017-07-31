@@ -16,6 +16,8 @@ const LineItem = ({ returnSubtotal }) => (
        Shipping: $0.00
       </p>
       <hr />
+    </div>
+    <div className="col-12_md-4_sm-10">
       <p className="total">
        Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
       </p>

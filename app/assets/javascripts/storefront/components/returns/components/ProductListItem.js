@@ -94,7 +94,7 @@ class ProductListItem extends Component {
     const returnEligible = currentDayArray.diff(lastDayArray, 'days') < 50;
     return (
       <div
-        className="grid-noGutter-center-spaceAround"
+        className="grid-noGutter-middle-spaceAround u-background-white"
       >
         <div className="col-7_md-9_sm-5_xs-9 Product__listItem">
           <Checkbox
@@ -140,26 +140,27 @@ class ProductListItem extends Component {
             </div>
           </div>
         </div>
-        <div className={!returnEligible && showForm ? 'col-4_md-10_sm-10_xs-12 returnWindowPassed__container' : 'u-hide'}>
-          <div className="grid-middle windowPassed__copy">
-            <div className="col-12">
-              <p className="windowClosed-copy">
-                Your 30-day return window closed on <br />
-                {returnWindowEnd} and this item is no longer eligible for a return.
-              </p>
-            </div>
-            <div className="col-12">
-              <ul className="windowClosed-list">
-                <li>
-                  <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
-                </li>
-                <li>
-                  <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
-                </li>
-              </ul>
+        <div className={!returnEligible && showForm ? 'col-3_md-9_xs-9' : 'u-hide'}>
+          <div className="grid-center">
+            <div className="returnWindowPassed__container">
+              <div className="col-12">
+                <p className="windowClosed-copy">
+                      Your 30-day return window closed on <br />
+                  {returnWindowEnd} and this item is no longer eligible for a return.
+                    </p>
+              </div>
+              <div className="col-12">
+                <ul className="windowClosed-list">
+                  <li>
+                    <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
+                  </li>
+                  <li>
+                    <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-
         </div>
         <div className={showForm ? 'u-hide' : 'col-3_md-9_xs-9 returnButton__container'}>
           <div className={orderIndex === 0 ? 'grid-spaceAround' : 'u-hide'}>
@@ -173,7 +174,7 @@ class ProductListItem extends Component {
             </Button>
           </div>
         </div>
-        <div className={showForm ? 'col-4_md-10_sm-10_xs-12 Form__Container' : 'u-hide'}>
+        <div className={showForm ? 'col-3_md-9_xs-9 Form__Container' : 'u-hide'}>
           <div className={showForm && checkboxStatus && returnEligible ? 'u-show' : 'u-hide'}>
             <form>
               <p className="u-no-margin">Why are you returning this?</p>
