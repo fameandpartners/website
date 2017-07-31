@@ -36,12 +36,6 @@ module Orders
                    :price,
                    :currency,
                    :quantity,
-                   :color_name,
-                   :height_name,
-                   :height_unit,
-                   :height_value,
-                   :image_url,
-                   :size_name,
                    :style_name
 
     def delivery_period
