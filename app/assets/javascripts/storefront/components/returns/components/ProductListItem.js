@@ -77,10 +77,8 @@ class ProductListItem extends Component {
       orderNumber,
       returnEligible,
     } = this.props;
-    console.log('returnEligible', returnEligible);
     const {
           id,
-          orderPlaced,
           returnWindowEnd,
         } = product;
     const { openEndedReturnReason, productMeta, price, primaryReturnReason } = product;
