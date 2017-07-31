@@ -79,13 +79,9 @@ class ProductListItem extends Component {
           orderPlaced,
           returnWindowEnd,
         } = product;
-    let { primaryReturnReason } = product;
-    const { openEndedReturnReason, productMeta, price } = product;
+    const { openEndedReturnReason, productMeta, price, primaryReturnReason } = product;
     const { name, size, color, image } = productMeta;
     const heightValue = productMeta.height_value;
-    if (!primaryReturnReason) {
-      primaryReturnReason = {};
-    }
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const currentDay = moment();
     const lastDay = moment(new Date(orderPlaced));
@@ -183,7 +179,7 @@ class ProductListItem extends Component {
                 onChange={this.updatePrimaryReason}
                 label="Please select an option"
               />
-              <div className={primaryReturnReason.name ? 'u-no-opacity' : 'u-hide'}>
+              <div className={primaryReturnReason ? 'u-show' : 'u-no-opacity'}>
                 <p className="u-no-margin">
                   Let's get specific. What didn't you like?
                 </p>
