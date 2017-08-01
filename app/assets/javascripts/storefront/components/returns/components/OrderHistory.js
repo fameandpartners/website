@@ -28,7 +28,7 @@ class OrderHistory extends Component {
         <div className="grid-noGutter-center-spaceAround">
           <div className="col-10_md-12 u-no-padding-right">
             <div className="order__container">
-              <p className="order-placed u-margin-bottom-small">
+              <p className="order-placed font-sans-serif u-margin-bottom-small">
                 Placed on {orderPlaced}
               </p>
               <p className="order-id u-margin-bottom-small">

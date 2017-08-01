@@ -6,7 +6,6 @@
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
 @import 'media_queries';
-@import 'returns/type';
 
 @import 'redesign/icons';
 @import 'libs/icomoon_fame_2015/icons';
@@ -39,6 +38,7 @@
 @import 'returns/gridlex';
 
 // Returns
+@import 'returns/type';
 @import 'returns/Checkbox';
 @import 'returns/LineItem';
 @import 'returns/ProductListItem';
