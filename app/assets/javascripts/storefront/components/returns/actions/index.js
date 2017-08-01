@@ -74,7 +74,8 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 export const getProductData = () => (dispatch) => {
   axios.get('https://85s0db362c.execute-api.us-west-2.amazonaws.com/dev')
       .then((response) => {
-        dispatch({ type: 'UPDATE_ORDER_DATA', payload: setReturnWindow(response.data) });
+        console.log(response.data.returns_processes);
+        dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
       })
       .catch((error) => {
         console.log(error);
