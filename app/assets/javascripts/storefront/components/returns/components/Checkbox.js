@@ -29,7 +29,6 @@ class Checkbox extends Component {
     const { onChange } = this.props;
     onChange();
   }
-
   render() {
     const {
       id,
@@ -48,10 +47,9 @@ class Checkbox extends Component {
              )}
             >
               <input
-                className="Checkbox"
+                className={checkboxStatus ? 'Checkbox Checkbox--active' : 'Checkbox'}
                 id={id}
                 type="checkbox"
-                checked={checkboxStatus}
                 onChange={this.handleChange}
               />
               <label htmlFor={id} />

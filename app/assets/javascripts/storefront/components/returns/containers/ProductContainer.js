@@ -15,6 +15,7 @@ const propTypes = {
   updateOpenEndedReturnReason: PropTypes.func,
   returnSubtotal: PropTypes.number,
   confirmationPage: PropTypes.bool,
+  checkboxStatus: PropTypes.bool,
   activeTextBox: PropTypes.number,
   orderIndex: PropTypes.number,
   showForm: PropTypes.bool,
@@ -55,27 +56,20 @@ class ProductContainer extends Component {
       id: p,
     }));
   }
-  updateReturnArray() {
-    const { checkboxStatus } = this.state;
-    const { product } = this.props;
+  updateReturnArray(checkboxStatus) {
+    // const { checkboxStatus } = this.state;
     const {
       addProductToReturnArray,
       removeProductFromReturnArray,
       returnSubtotal,
       returnArray,
+      product,
     } = this.props;
     if (!checkboxStatus) {
       addProductToReturnArray(product, returnArray, returnSubtotal);
     } else {
       removeProductFromReturnArray(product, returnArray, returnSubtotal);
     }
-  }
-  componentWillMount() {
-    const { returnArray, product } = this.props;
-    const currentCheckboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
-    this.setState({
-      checkboxStatus: currentCheckboxStatus,
-    });
   }
   render() {
     const {
@@ -90,7 +84,8 @@ class ProductContainer extends Component {
       orderNumber,
       returnEligible,
     } = this.props;
-    const { checkboxStatus } = this.state;
+    // const { checkboxStatus } = this.state;
+    const checkboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     return (
       <div>
         <ProductListItem
@@ -98,7 +93,7 @@ class ProductContainer extends Component {
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
           orderIndex={orderIndex}
-          updateReturnArray={() => this.updateReturnArray()}
+          updateReturnArray={this.updateReturnArray}
           updatePrimaryReturnReason={updatePrimaryReturnReason}
           updateOpenEndedReturnReason={updateOpenEndedReturnReason}
           activeTextBox={activeTextBox}

@@ -57,7 +57,7 @@ class StepOneContainer extends Component {
     if (!order) {
       return <div />;
     }
-    const { shipDate, returnEligible } = order;
+    const { shipDate, returnEligible, number } = order;
     return (
       <div className="StepOne__Container">
         <div className="grid-noGutter-center">
@@ -84,7 +84,7 @@ class StepOneContainer extends Component {
                   {
                       productArray.map(p => (
                         <ProductContainer
-                          key={Math.random()}
+                          key={`${p.id}-${number}`}
                           product={p}
                           showForm
                           returnEligible={returnEligible}

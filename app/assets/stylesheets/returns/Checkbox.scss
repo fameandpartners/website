@@ -15,7 +15,7 @@
   }
 
   // Checkmark. Could be replaced with an image
-  &:checked + label:after {
+  &:checked + label:after, &--active + label:after {
     content: '';
     position: absolute;
     left: 5px;
@@ -41,7 +41,7 @@
 }
 
 // Box.
-.Checkbox:checked + label:before {
+.Checkbox:checked + label:before, .Checkbox--active + label:before {
   background: $c-black;
 }
 .Checkbox + label:before {
@@ -51,7 +51,7 @@
   vertical-align: text-top;
   width: 20px;
   height: 20px;
-  background: $c-white;
+  background: $c-black;
   box-shadow: 0 0 0 1px $c-light-gray;
   transition: 300ms box-shadow;
 }

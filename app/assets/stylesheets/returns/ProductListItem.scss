@@ -65,7 +65,7 @@
 }
 
 .Product__listItem .Checkbox {
-    &:checked + label:after {
+    &:checked + label:after, &.show-checkbox + label:before {
         left: 3px;
         top: 3px;
         width: 15px;
@@ -78,6 +78,7 @@
         background-size: contain;
         box-shadow: none;
     }
+
 }
 
 .Product__listItem {

@@ -66,6 +66,9 @@ class ProductListItem extends Component {
       this.textInput.focus();
     }
   }
+  handleUpdate() {
+    return () => this.props.updateReturnArray(this.props.checkboxStatus);
+  }
   render() {
     const {
       product,
@@ -73,7 +76,6 @@ class ProductListItem extends Component {
       confirmationPage,
       orderIndex,
       checkboxStatus,
-      updateReturnArray,
       orderNumber,
       returnEligible,
     } = this.props;
@@ -93,7 +95,7 @@ class ProductListItem extends Component {
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
-            onChange={() => updateReturnArray()}
+            onChange={this.handleUpdate()}
             checkboxStatus={checkboxStatus}
             showForm={showForm}
           />

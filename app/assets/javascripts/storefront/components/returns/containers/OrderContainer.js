@@ -25,8 +25,15 @@ class OrderContainer extends Component {
     }
     return (
       <div>
-        <h1 className="u-center-text">Orders</h1>
-        {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
+        { orderData ?
+          (
+            <div>
+              <h1 className="u-center-text">Orders</h1>
+              {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
+            </div>
+          )
+          : null
+        }
       </div>
     );
   }

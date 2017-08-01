@@ -8,7 +8,7 @@ export default function setReturnWindow(order) {
     const shipDay = moment(new Date(shipDate));
     const shipDayArray = moment([[shipDay.format('YYYY')][0], [shipDay.format('M')][0], [shipDay.format('D')][0]]);
     const currentDayArray = moment([[currentDay.format('YYYY')][0], [currentDay.format('M')][0], [currentDay.format('D')][0]]);
-    const returnEligible = currentDayArray.diff(shipDayArray, 'days') < 1;
+    const returnEligible = currentDayArray.diff(shipDayArray, 'days') < 100;
     const newOrderObject = Object.assign({}, o, {
       returnEligible,
     });
