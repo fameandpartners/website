@@ -361,9 +361,14 @@ Spree::Order.class_eval do
     self.shipping_address.country_id != 49
   end
 
+  def final_return_by_date
+    (delivery_policy.delivery_date + 30).strftime("%m/%d/%y")
+  end
+
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = date_iso_mdy
+    json['final_return_by_date'] = final_return_by_date
     json['international_customer'] = international_customer?
     json
   end
