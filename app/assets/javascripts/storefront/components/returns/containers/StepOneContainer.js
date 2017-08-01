@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import autoBind from 'auto-bind';
 import LineItem from '../components/LineItem';
 import ProductContainer from './ProductContainer';
 import getOrderArray from '../../../libs/getOrderArray';
@@ -9,6 +10,7 @@ import * as AppActions from '../actions/index';
 
 const propTypes = {
   orderData: PropTypes.array,
+  returnArray: PropTypes.array.isRequired,
   returnSubtotal: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -27,11 +29,29 @@ const defaultProps = {
 class StepOneContainer extends Component {
   constructor(props) {
     super(props);
+    autoBind(this);
     this.state = {
       order: null,
       orderArray: null,
     };
   }
+
+  requestReturn() {
+    const { actions, returnArray } = this.props;
+    const { spree_order } = this.state.order;
+    const returnsObj = {
+      order_id: spree_order.number,
+      line_items: returnArray.map(r => ({
+        line_item_id: r.id,
+        action: 'Return',
+        reason_category: r.primaryReturnReason,
+        reason: r.openEndedReturnReason,
+      })),
+    };
+
+    actions.submitReturnRequest(returnsObj);
+  }
+
   componentWillMount() {
     const { orderData, actions } = this.props;
     if (orderData === null) {
@@ -45,6 +65,8 @@ class StepOneContainer extends Component {
       const cleanItems = [];
       items.map(i => cleanItems.push(i.line_item));
       console.log('cleanItems', cleanItems);
+      // TODO: Figure out consistency between steps for order object
+      // Pass in with props instead of state
       this.state = {
         order: activeOrder,
         orderArray: cleanItems,
@@ -61,15 +83,14 @@ class StepOneContainer extends Component {
     if (!order) {
       return <div />;
     }
-    console.log('orderArray', orderArray);
-    const { shipDate, returnEligible, number } = order;
+    const { shipDate, returnEligible } = order;
     return (
       <div className="StepOne__Container">
         <div className="grid-noGutter-center">
           <div className="col-10_md-10_sm-11">
             <p className="instructions instructions__title">
                 Returns happen.
-                <br /> Please select the item(s) you would like to return
+              <br /> Please select the item(s) you would like to return
             </p>
             <p className="instructions instructions__subtitle">
                 Please note that any returns must be in new, unused, and
@@ -91,11 +112,16 @@ class StepOneContainer extends Component {
                     showForm
                     returnEligible={returnEligible}
                   />
-                  ))
+                ))
               }
-              <div>
-                <LineItem returnSubtotal={this.props.returnSubtotal} />
-              </div></div>
+
+            </div>
+            <div>
+              <LineItem
+                handleSubmission={this.requestReturn}
+                returnSubtotal={this.props.returnSubtotal}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -107,8 +133,8 @@ StepOneContainer.propTypes = propTypes;
 StepOneContainer.defaultProps = defaultProps;
 function mapStateToProps(state) {
   return {
-    returnSubtotal: state.returnSubtotal,
-    returnArray: state.returnArray,
+    returnSubtotal: state.returnsData.returnSubtotal,
+    returnArray: state.returnsData.returnArray,
     orderData: state.orderData,
   };
 }

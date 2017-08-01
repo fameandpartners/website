@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import Button from './Button';
 import SimpleButton from './SimpleButton';
 
 const propTypes = {
+  handleSubmission: PropTypes.func.isRequired,
   returnSubtotal: PropTypes.number.isRequired,
 };
 
-const LineItem = ({ returnSubtotal }) => (
+const LineItem = ({ handleSubmission, returnSubtotal }) => (
   <div className="LineItem">
     <div className="grid-center">
       <div className="col-12_md-12_sm-10">
@@ -25,11 +24,13 @@ const LineItem = ({ returnSubtotal }) => (
         <p className="total">
          Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
         </p>
-        <SimpleButton
-          buttonCopy="Start Return"
-          link="/return-confirmation"
-          localLink
-        />
+        <div className="SimpleButton__wrapper" onClick={handleSubmission}>
+          <SimpleButton
+            buttonCopy="Start Return"
+            link="/return-confirmation"
+            localLink
+          />
+        </div>
       </div>
     </div>
   </div>

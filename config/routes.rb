@@ -416,10 +416,6 @@ FameAndPartners::Application.routes.draw do
 
     # Old Blog Redirection (30/06/2015)
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
-    # Returns
-    get '/view-orders'   => 'returns#main'
-    get '/guest-returns' => 'returns#guest'
-    get '/order-lookup/' => 'returns#lookup'
 
     #######################
     # (Others) Static pages
@@ -513,7 +509,7 @@ FameAndPartners::Application.routes.draw do
       put '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
       get '/checkout/thanks', :to => 'spree/checkout#show' , :as => :checkout_thanks
       get '/checkout/:state', :to => 'spree/checkout#edit', :as => :checkout_state
-      get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout      
+      get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout
       post '/paypal', :to => 'paypal#express', :as => :paypal_express
       get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
@@ -619,6 +615,11 @@ FameAndPartners::Application.routes.draw do
       post 'submit_return' => 'returns_processes#create'
     end
   end
+
+  # Returns
+  get '/view-orders'   => 'returns#main'
+  get '/guest-returns' => 'returns#guest'
+  get '/order-lookup/' => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do

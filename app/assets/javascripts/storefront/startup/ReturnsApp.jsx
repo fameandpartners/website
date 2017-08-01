@@ -19,5 +19,5 @@ if (returnNode) {
         <Route path="/return-confirmation" component={ConfirmationContainer} />
       </Router>
     </Provider>,
-returnNode);
+    returnNode);
 }

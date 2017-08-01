@@ -4,10 +4,12 @@ import Confirmation from '../components/Confirmation';
 
 const propTypes = {
   returnArray: PropTypes.array.isRequired,
+  logisticsData: PropTypes.object.isRequired,
 };
 const internationalCustomer = false;
-const ConfirmationContainer = ({ returnArray }) => (
+const ConfirmationContainer = ({ returnArray, logisticsData }) => (
   <Confirmation
+    logisticsData={logisticsData}
     returnArray={returnArray}
     internationalCustomer={internationalCustomer}
   />
@@ -15,7 +17,8 @@ const ConfirmationContainer = ({ returnArray }) => (
 
 function mapStateToProps(state) {
   return {
-    returnArray: state.returnArray,
+    returnArray: state.returnsData.returnArray,
+    logisticsData: state.returnsData.logisticsData,
   };
 }
 

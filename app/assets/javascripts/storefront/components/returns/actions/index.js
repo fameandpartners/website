@@ -6,7 +6,7 @@ export const addProductToReturnArray = (product, currentArray) => {
   currentArray.push(product);
   let refundAmount = 0;
   refundAmount = currentArray.reduce((sum, returnedProduct) =>
-  sum + Number(returnedProduct.price), 0);
+    sum + Number(returnedProduct.price), 0);
   const productID = product.id;
   return {
     type: 'ADD_PRODUCT_TO_RETURN_ARRAY',
@@ -72,11 +72,24 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 };
 
 export const getProductData = () => (dispatch) => {
-  axios.get('https://85s0db362c.execute-api.us-west-2.amazonaws.com/dev')
-      .then((response) => {
-        dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  axios.get('/api/v1/orders')
+    .then((response) => {
+      console.log('response', response);
+      dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
+
+export const submitReturnRequest = returnsObj => (dispatch) => {
+  axios.post('/api/v1/submit_return', returnsObj)
+    .then((response) => {
+      console.log('response', response);
+      dispatch({ type: 'SET_LOGISTICS_DATA', payload: response.data.returns_processes });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+// export const update

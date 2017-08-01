@@ -1,12 +1,12 @@
-import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState, } from './CollectionFilterSortReducer';
-import ReturnArrayReducer from './returnArrayReducer'
-import SubtotalReducer from './SubtotalReducer'
-import OrderDataReducer from './OrderDataReducer'
-import ActiveTextBoxReducer from './ActiveTextBoxReducer'
+import CollectionFilterSortReducer, { $$initialState as $$collectionFilterSortState } from './CollectionFilterSortReducer';
+import ReturnsReducer from './ReturnsReducer';
+import SubtotalReducer from './SubtotalReducer';
+import OrderDataReducer from './OrderDataReducer';
+import ActiveTextBoxReducer from './ActiveTextBoxReducer';
 
 export default {
   $$collectionFilterSortStore: CollectionFilterSortReducer,
-  returnArray: ReturnArrayReducer,
+  returnsData: ReturnsReducer,
   returnSubtotal: SubtotalReducer,
   orderData: OrderDataReducer,
   activeTextBox: ActiveTextBoxReducer,

@@ -109,8 +109,8 @@ class ProductContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    returnArray: state.returnArray,
-    returnSubtotal: state.returnSubtotal,
+    returnArray: state.returnsData.returnArray,
+    returnSubtotal: state.returnsData.returnSubtotal,
     activeTextBox: state.activeTextBox,
   };
 }
