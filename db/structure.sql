@@ -1284,6 +1284,41 @@ ALTER SEQUENCE item_return_events_id_seq OWNED BY item_return_events.id;
 
 
 --
+-- Name: item_return_labels; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE item_return_labels (
+    id integer NOT NULL,
+    label_url character varying(255),
+    carrier character varying(255),
+    label_image_url character varying(255),
+    label_pdf_url character varying(255),
+    item_return_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: item_return_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE item_return_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: item_return_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE item_return_labels_id_seq OWNED BY item_return_labels.id;
+
+
+--
 -- Name: item_returns; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2038,42 +2073,6 @@ CREATE TABLE order_shipments_factories_concrete (
 
 
 --
--- Name: orderbot_product_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE orderbot_product_groups (
-    id integer NOT NULL,
-    product_class_id integer,
-    product_class_name character varying(255),
-    category_id integer,
-    category_name character varying(255),
-    group_id integer,
-    group_name character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: orderbot_product_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE orderbot_product_groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: orderbot_product_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE orderbot_product_groups_id_seq OWNED BY orderbot_product_groups.id;
-
-
---
 -- Name: payment_requests; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2417,38 +2416,6 @@ ALTER SEQUENCE product_style_profiles_id_seq OWNED BY product_style_profiles.id;
 
 
 --
--- Name: product_to_orderbot_product_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE product_to_orderbot_product_groups (
-    id integer NOT NULL,
-    product_id integer,
-    orderbot_product_group_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE product_to_orderbot_product_groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE product_to_orderbot_product_groups_id_seq OWNED BY product_to_orderbot_product_groups.id;
-
-
---
 -- Name: questions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2633,6 +2600,42 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
+
+
+--
+-- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE return_item_labels (
+    id integer NOT NULL,
+    tracking_number character varying(255),
+    label_url character varying(255),
+    carrier character varying(255),
+    label_image_url character varying(255),
+    label_pdf_url character varying(255),
+    return_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE return_item_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -5683,6 +5686,13 @@ ALTER TABLE ONLY item_return_events ALTER COLUMN id SET DEFAULT nextval('item_re
 
 
 --
+-- Name: item_return_labels id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY item_return_labels ALTER COLUMN id SET DEFAULT nextval('item_return_labels_id_seq'::regclass);
+
+
+--
 -- Name: item_returns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5802,13 +5812,6 @@ ALTER TABLE ONLY order_return_requests ALTER COLUMN id SET DEFAULT nextval('orde
 
 
 --
--- Name: orderbot_product_groups id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY orderbot_product_groups ALTER COLUMN id SET DEFAULT nextval('orderbot_product_groups_id_seq'::regclass);
-
-
---
 -- Name: payment_requests id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5872,13 +5875,6 @@ ALTER TABLE ONLY product_style_profiles ALTER COLUMN id SET DEFAULT nextval('pro
 
 
 --
--- Name: product_to_orderbot_product_groups id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY product_to_orderbot_product_groups ALTER COLUMN id SET DEFAULT nextval('product_to_orderbot_product_groups_id_seq'::regclass);
-
-
---
 -- Name: questions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5911,6 +5907,13 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
+
+
+--
+-- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6710,6 +6713,14 @@ ALTER TABLE ONLY item_return_events
 
 
 --
+-- Name: item_return_labels item_return_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY item_return_labels
+    ADD CONSTRAINT item_return_labels_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: item_returns item_returns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6862,14 +6873,6 @@ ALTER TABLE ONLY order_shipments_factories_concrete
 
 
 --
--- Name: orderbot_product_groups orderbot_product_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY orderbot_product_groups
-    ADD CONSTRAINT orderbot_product_groups_pkey PRIMARY KEY (id);
-
-
---
 -- Name: payment_requests payment_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6950,14 +6953,6 @@ ALTER TABLE ONLY product_style_profiles
 
 
 --
--- Name: product_to_orderbot_product_groups product_to_orderbot_product_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY product_to_orderbot_product_groups
-    ADD CONSTRAINT product_to_orderbot_product_groups_pkey PRIMARY KEY (id);
-
-
---
 -- Name: questions questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6995,6 +6990,14 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels
+    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9625,6 +9628,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170527063724');
 
 INSERT INTO schema_migrations (version) VALUES ('20170527071529');
 
+INSERT INTO schema_migrations (version) VALUES ('20170601014655');
+
 INSERT INTO schema_migrations (version) VALUES ('20170602062951');
 
 INSERT INTO schema_migrations (version) VALUES ('20170603045344');
@@ -9634,10 +9639,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170606004911');
 INSERT INTO schema_migrations (version) VALUES ('20170607040735');
 
 INSERT INTO schema_migrations (version) VALUES ('20170607184815');
-
-INSERT INTO schema_migrations (version) VALUES ('20170608005536');
-
-INSERT INTO schema_migrations (version) VALUES ('20170608044047');
 
 INSERT INTO schema_migrations (version) VALUES ('20170608215959');
 
@@ -9651,6 +9652,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170615180547');
 
 INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
+INSERT INTO schema_migrations (version) VALUES ('20170724212720');
 
-INSERT INTO schema_migrations (version) VALUES ('20170721184956');
+INSERT INTO schema_migrations (version) VALUES ('20170724213118');
