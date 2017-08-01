@@ -22,7 +22,7 @@ module Api
       # POST
       def create
         if has_incorrect_params?
-          error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }")
+          error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }.")
           return
         end
 
