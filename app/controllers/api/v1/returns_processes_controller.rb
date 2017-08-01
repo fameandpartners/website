@@ -2,7 +2,7 @@ module Api
   module V1
     # TO-DO: Refactor into an ApiController
     class ReturnsProcessesController < ApplicationController
-      before_filter :authenticate_spree_user!, :only => [:index]
+      before_filter :authenticate_spree_user!
 
       respond_to :json
 
@@ -21,6 +21,8 @@ module Api
 
       # POST
       def create
+        @user = try_spree_current_user
+
         if has_incorrect_params?
           error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }.")
           return
@@ -31,12 +33,27 @@ module Api
           return
         end
 
+        if has_incorrect_order_id?(params['order_id'])
+          # probably should be the same response as above,
+          # for security's sake but leaving as is for testing
+          error_response("Order ID does not belong to this user.")
+          return
+        end
+
         return_item_ids = params['line_items'].map do |id|
                             id['line_item_id']
                           end
 
         if has_invalid_line_items?(return_item_ids)
           error_response("One or more line_item_ids is not valid.")
+          return
+        end
+
+        if has_incorrect_line_items?(return_item_ids, params['order_id'])
+          # should probably have the same message as has_invalid_line_items?,
+          # as above in the case of has_incorrect_order_id?,
+          # ideally both conditionals should check for either
+          error_response("One or more line_item_ids do not belong to this Order ID.")
           return
         end
 
@@ -59,9 +76,19 @@ module Api
         !Spree::Order.exists?(id)
       end
 
+      def has_incorrect_order_id?(id)
+        !@user.orders.where(id: id).first
+      end
+
       def has_invalid_line_items?(arr)
         arr.any? do |id|
           !Spree::LineItem.exists?(id)
+        end
+      end
+
+      def has_incorrect_line_items?(arr, order)
+        arr.any? do |id|
+          Spree::LineItem.where(id: id).first&.order_id != order
         end
       end
 
