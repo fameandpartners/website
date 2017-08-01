@@ -31,7 +31,9 @@ module Api
           return
         end
 
-        return_item_ids = map_line_item_ids(params['line_items'])
+        return_item_ids = params['line_items'].map do |id|
+                            id['line_item_id']
+                          end
 
         if has_invalid_line_items?(return_item_ids)
           error_response("One or more line_item_ids is not valid.")
@@ -55,12 +57,6 @@ module Api
 
       def has_invalid_order_id?(id)
         !Spree::Order.exists?(id)
-      end
-
-      def map_line_item_ids(arr)
-        arr.map do |id|
-          id['line_item_id']
-        end
       end
 
       def has_invalid_line_items?(arr)
