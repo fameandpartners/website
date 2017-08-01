@@ -29,7 +29,7 @@ class OrderContainer extends Component {
           (
             <div>
               <h1 className="u-center-text">Orders</h1>
-              {orderData.map(o => <OrderHistory key={o.number} orderData={o} />)}
+              {orderData.map(o => <OrderHistory key={o.spree_order.number} orderData={o} />)}
             </div>
           )
           : null

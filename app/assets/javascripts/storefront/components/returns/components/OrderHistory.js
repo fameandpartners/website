@@ -15,35 +15,37 @@ class OrderHistory extends Component {
     super(props);
     const { orderData } = this.props;
     const { items } = orderData;
+    const cleanItems = [];
+    items.map(i => cleanItems.push(i.line_item));
     this.state = {
       orderData,
-      orderArray: getOrderArray(items),
+      orderArray: cleanItems,
     };
   }
   render() {
     const { orderData, orderArray } = this.state;
-    const { shipDate, orderPlaced, number } = orderData;
+    const { spree_order } = orderData;
+    const { date_iso_mdy, number } = spree_order;
     return (
       <div>
         <div className="grid-noGutter-center-spaceAround">
           <div className="col-10_md-12 u-no-padding-right">
             <div className="order__container">
               <p className="order-placed u-margin-bottom-small">
-                Placed on {orderPlaced}
+                Placed on {date_iso_mdy}
               </p>
               <p className="order-id u-margin-bottom-small">
                 Order #{number}
               </p>
               <div className="Product__listItem__container">
                 {
-                 orderArray.map(order => (
-                    order.map((o, i) => {
+                    orderArray.map((o, i) => {
                       const { id } = o;
                       return (
-                        <div>
+                        <div key={id}>
                           <div className="grid-noGutter-center">
                             <div className="col-11_md-9_sm-5_xs-9">
-                              <p className={i === 0 ? 'u-show u-margin-bottom-none u-heavyFont u-margin-top-small ship-date' : 'u-hide'} >Shipped {shipDate}</p>
+                              <p className={i === 0 ? 'u-show u-margin-bottom-none u-heavyFont u-margin-top-small ship-date' : 'u-hide'} >Shipped {date_iso_mdy}</p>
                             </div>
                           </div>
                           <ProductContainer
@@ -56,7 +58,6 @@ class OrderHistory extends Component {
                         </div>
                       );
                     })
-                   ))
                 }
               </div>
             </div>

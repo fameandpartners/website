@@ -39,11 +39,15 @@ class StepOneContainer extends Component {
       browserHistory.push('/view-orders');
       location.reload();
     } else {
-      const activeOrder = this.props.orderData.filter(o =>
-        o.number === this.props.params.orderID)[0];
+      const activeOrder = this.props.orderData.filter(o => o.spree_order.number === this.props.params.orderID)[0];
+      const { items } = activeOrder;
+      console.log('activeOrder', activeOrder);
+      const cleanItems = [];
+      items.map(i => cleanItems.push(i.line_item));
+      console.log('cleanItems', cleanItems);
       this.state = {
         order: activeOrder,
-        orderArray: getOrderArray(activeOrder.items),
+        orderArray: cleanItems,
       };
     }
   }
@@ -57,6 +61,7 @@ class StepOneContainer extends Component {
     if (!order) {
       return <div />;
     }
+    console.log('orderArray', orderArray);
     const { shipDate, returnEligible, number } = order;
     return (
       <div className="StepOne__Container">
@@ -79,25 +84,18 @@ class StepOneContainer extends Component {
             </p>
             <div className="order__container Product__listItem__container">
               {
-              orderArray.map(productArray => (
-                <div key={shipDate}>
-                  {
-                      productArray.map(p => (
-                        <ProductContainer
-                          key={`${p.id}-${number}`}
-                          product={p}
-                          showForm
-                          returnEligible={returnEligible}
-                        />
-                        ))
-                  }
-                </div>
-                ))
-            }
-            </div>
-            <div>
-              <LineItem returnSubtotal={this.props.returnSubtotal} />
-            </div>
+                orderArray.map(p => (
+                  <ProductContainer
+                    key={`${p.id}-${p.order_id}`}
+                    product={p}
+                    showForm
+                    returnEligible={returnEligible}
+                  />
+                  ))
+              }
+              <div>
+                <LineItem returnSubtotal={this.props.returnSubtotal} />
+              </div></div>
           </div>
         </div>
       </div>

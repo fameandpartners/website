@@ -83,7 +83,8 @@ class ProductListItem extends Component {
           id,
           returnWindowEnd,
         } = product;
-    const { openEndedReturnReason, productMeta, price, primaryReturnReason } = product;
+    const { openEndedReturnReason, products_meta, price, primaryReturnReason } = product;
+    const productMeta = products_meta;
     const { name, size, color, image } = productMeta;
     const heightValue = productMeta.height_value;
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
@@ -99,7 +100,7 @@ class ProductListItem extends Component {
             checkboxStatus={checkboxStatus}
             showForm={showForm}
           />
-          <img src="http://placehold.it/180x180" alt={name} className="product-image" />
+          <img src={image} alt={name} className="product-image" />
           <div>
             <div className="nameAndPrice--marginBottom">
               <span className="meta--key">
