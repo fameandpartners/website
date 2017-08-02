@@ -117,14 +117,15 @@
         margin-top: 0;
     }
 }
-
-.Form__Container .select--marginTop {
-    margin-top: 20px;
-}
 .Form__Container {
   position: relative;
-  top: 25px;
-  margin: 30px 0;
+  @include desktop {
+    top: 25px;
+    margin: 30px 0;
+  }
+}
+.Form__Container .select--marginTop {
+    margin-top: 20px;
 }
 .Form__Container p {
     margin-bottom: 12px;

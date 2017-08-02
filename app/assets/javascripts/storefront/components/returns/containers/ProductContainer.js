@@ -84,7 +84,6 @@ class ProductContainer extends Component {
       orderNumber,
       returnEligible,
     } = this.props;
-    // const { checkboxStatus } = this.state;
     const checkboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     return (
       <div>

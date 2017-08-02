@@ -7,6 +7,8 @@ import Checkbox from './Checkbox';
 import Select from '../../shared/Select';
 import SimpleButton from '../components/SimpleButton';
 import noop from '../../../libs/noop';
+import ReactDOM from 'react-dom';
+
 
 const propTypes = {
   product: PropTypes.object.isRequired,
@@ -65,6 +67,9 @@ class ProductListItem extends Component {
     if (id === activeTextBox) {
       this.textInput.focus();
     }
+    const rect = ReactDOM.findDOMNode(this)
+      .getBoundingClientRect();
+    console.log(rect);
   }
   handleUpdate() {
     return () => this.props.updateReturnArray(this.props.checkboxStatus);
@@ -173,7 +178,7 @@ class ProductListItem extends Component {
         <div className={showForm ? 'col-4_md-9_xs-9 Form__Container' : 'u-hide'}>
           <div className={showForm && checkboxStatus && returnEligible ? 'u-show' : 'u-hide'}>
             <form>
-              <p className="u-no-margin">Why are you returning this?</p>
+              <p className="u-no-margin-top">Why are you returning this?</p>
               <Select
                 id={`${id}-primary`}
                 options={primaryReturnReasonArray}
@@ -181,7 +186,7 @@ class ProductListItem extends Component {
                 label={primaryReturnReason ? null : 'Please select an option'}
               />
               <div className={primaryReturnReason ? 'u-show' : 'u-no-opacity'}>
-                <p className="u-no-margin">
+                <p className="u-no-margin-top">
                   Let's get specific. What didn't you like?
                 </p>
                 <textarea

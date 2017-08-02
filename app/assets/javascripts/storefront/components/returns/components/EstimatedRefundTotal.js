@@ -7,7 +7,7 @@ const propTypes = {
 const EstimatedRefundTotal = ({ returnSubtotal }) => (
   <div className="EstimatedRefundTotal">
     <div className="grid-center">
-      <div className="col-12_md-12_sm-10">
+      <div className="col-12_md-4_sm-10">
         <p>
          Refund subtotal: ${Number(returnSubtotal).toFixed(2) || 0.00}
         </p>
