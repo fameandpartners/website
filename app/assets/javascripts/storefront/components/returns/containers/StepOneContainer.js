@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
-import LineItem from '../components/LineItem';
+import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
+import SimpleButton from '../components/SimpleButton';
 import ProductContainer from './ProductContainer';
 import * as AppActions from '../actions/index';
 
@@ -78,6 +79,7 @@ class StepOneContainer extends Component {
   }
   render() {
     const { order, orderArray } = this.state;
+    const { returnSubtotal } = this.props;
     if (!order) {
       return <div />;
     }
@@ -117,10 +119,18 @@ class StepOneContainer extends Component {
 
             </div>
             <div>
-              <LineItem
-                handleSubmission={this.requestReturn}
-                returnSubtotal={this.props.returnSubtotal}
+              <EstimatedRefundTotal
+                returnSubtotal={returnSubtotal}
               />
+              <div className="grid-right">
+                <div className="col-4_md-12_sm-12">
+                  <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
+                    <SimpleButton
+                      buttonCopy="Start Return"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
