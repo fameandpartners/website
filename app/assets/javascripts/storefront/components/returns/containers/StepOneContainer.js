@@ -5,7 +5,6 @@ import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
 import LineItem from '../components/LineItem';
 import ProductContainer from './ProductContainer';
-import getOrderArray from '../../../libs/getOrderArray';
 import * as AppActions from '../actions/index';
 
 const propTypes = {
@@ -59,12 +58,11 @@ class StepOneContainer extends Component {
       browserHistory.push('/view-orders');
       location.reload();
     } else {
-      const activeOrder = this.props.orderData.filter(o => o.spree_order.number === this.props.params.orderID)[0];
+      const activeOrder = this.props.orderData.filter(o =>
+        o.spree_order.number === this.props.params.orderID)[0];
       const { items } = activeOrder;
-      console.log('activeOrder', activeOrder);
       const cleanItems = [];
       items.map(i => cleanItems.push(i.line_item));
-      console.log('cleanItems', cleanItems);
       // TODO: Figure out consistency between steps for order object
       // Pass in with props instead of state
       this.state = {
@@ -83,7 +81,9 @@ class StepOneContainer extends Component {
     if (!order) {
       return <div />;
     }
-    const { shipDate, returnEligible } = order;
+    const spreeOrder = order.spree_order;
+    const shipDate = spreeOrder.date_iso_mdy;
+    const { returnEligible } = order;
     return (
       <div className="StepOne__Container">
         <div className="grid-noGutter-center">
