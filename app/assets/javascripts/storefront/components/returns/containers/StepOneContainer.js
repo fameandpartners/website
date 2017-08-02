@@ -49,7 +49,7 @@ class StepOneContainer extends Component {
       })),
     };
 
-    actions.submitReturnRequest(returnsObj);
+    actions.submitReturnRequest({ order: spree_order, returnsObj });
   }
 
   componentWillMount() {

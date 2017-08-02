@@ -3,21 +3,20 @@ import { connect } from 'react-redux';
 import Confirmation from '../components/Confirmation';
 
 const propTypes = {
-  returnArray: PropTypes.array.isRequired,
+  orderData: PropTypes.object.isRequired,
   logisticsData: PropTypes.object.isRequired,
 };
-const internationalCustomer = false;
-const ConfirmationContainer = ({ returnArray, logisticsData }) => (
+
+const ConfirmationContainer = ({ logisticsData, orderData }) => (
   <Confirmation
+    orderData={orderData}
     logisticsData={logisticsData}
-    returnArray={returnArray}
-    internationalCustomer={internationalCustomer}
   />
 );
 
 function mapStateToProps(state) {
   return {
-    returnArray: state.returnsData.returnArray,
+    orderData: state.orderData,
     logisticsData: state.returnsData.logisticsData,
   };
 }

@@ -388,40 +388,6 @@ ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
 
 
 --
--- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE contentful_versions (
-    id integer NOT NULL,
-    change_message character varying(255),
-    payload text,
-    user_id integer,
-    is_live boolean DEFAULT false,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE contentful_versions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
-
-
---
 -- Name: custom_dress_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2600,42 +2566,6 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
-
-
---
--- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE return_item_labels (
-    id integer NOT NULL,
-    tracking_number character varying(255),
-    label_url character varying(255),
-    carrier character varying(255),
-    label_image_url character varying(255),
-    label_pdf_url character varying(255),
-    return_item_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE return_item_labels_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -5525,13 +5455,6 @@ ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentf
 
 
 --
--- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
-
-
---
 -- Name: custom_dress_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5907,13 +5830,6 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
-
-
---
--- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6537,14 +6453,6 @@ ALTER TABLE ONLY contentful_routes
 
 
 --
--- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY contentful_versions
-    ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
-
-
---
 -- Name: custom_dress_images custom_dress_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6990,14 +6898,6 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
-
-
---
--- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels
-    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9652,6 +9552,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170615180547');
 
 INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
-INSERT INTO schema_migrations (version) VALUES ('20170724212720');
+INSERT INTO schema_migrations (version) VALUES ('20170623185316');
+
+INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');

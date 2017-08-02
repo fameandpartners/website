@@ -22,13 +22,13 @@ const SimpleButton = ({ buttonCopy, link, localLink, withLink }) => (
         <Link to={link}>
           <span className="copy">{buttonCopy}</span>
         </Link>
-      :
+        :
         <a href={link}>
           <span className="copy">External Link</span>
         </a>}
     </div>
     :
-    <div className="simpleButton__container u-padding-medium">
+    <div className="simpleButton__container u-padding-medium u-width-full">
       <span className="copy u-no-padding">{buttonCopy}</span>
     </div>
 );

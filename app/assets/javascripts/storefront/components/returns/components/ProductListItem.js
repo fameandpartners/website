@@ -85,14 +85,15 @@ class ProductListItem extends Component {
       returnEligible,
     } = this.props;
     const {
-          id,
-          returnWindowEnd,
-        } = product;
+      id,
+      returnWindowEnd,
+    } = product;
     const { openEndedReturnReason, products_meta, price, primaryReturnReason } = product;
     const productMeta = products_meta;
     const { name, size, color, image } = productMeta;
     const heightValue = productMeta.height_value;
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
+
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
@@ -148,7 +149,7 @@ class ProductListItem extends Component {
                 <p className="windowClosed-copy">
                       Your 30-day return window closed on <br />
                   {returnWindowEnd} and this item is no longer eligible for a return.
-                    </p>
+                </p>
               </div>
               <div className="col-12">
                 <ul className="windowClosed-list">

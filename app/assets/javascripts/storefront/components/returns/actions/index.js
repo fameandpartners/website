@@ -83,11 +83,15 @@ export const getProductData = () => (dispatch) => {
     });
 };
 
-export const submitReturnRequest = returnsObj => (dispatch) => {
+export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
   axios.post('/api/v1/submit_return', returnsObj)
     .then((response) => {
-      console.log('response', response);
-      dispatch({ type: 'SET_LOGISTICS_DATA', payload: response.data.returns_processes });
+      // TODO: dispatch(Stop Loading Event)
+      dispatch({ type: 'POPULATE_LOGISTICS_DATA',
+        payload: {
+          order,
+          line_items: response.data.message,
+        } });
     })
     .catch((error) => {
       console.log(error);
