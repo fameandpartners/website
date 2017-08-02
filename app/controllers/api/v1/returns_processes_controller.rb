@@ -12,7 +12,6 @@ module Api
       # GET
       def index
         user = spree_current_user
-
         @orders = user.orders.complete.map do |order|
           Orders::OrderPresenter.new(order)
         end

@@ -99,7 +99,7 @@ class StepOneContainer extends Component {
           </div>
         </div>
         <div className="grid-noGutter-spaceAround">
-          <div className="col-10_md-12 u-no-padding-right">
+          <div className="col-10_md-12 u-no-padding">
             <p className="ship-date">
                 Shipped {shipDate}
             </p>

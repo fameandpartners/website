@@ -165,6 +165,7 @@ class ProductListItem extends Component {
                 buttonCopy="Start Return"
                 link={`/start-return/${orderNumber}`}
                 localLink
+                withLink
               />
             </div>
           </div>

@@ -155,7 +155,7 @@ Spree::LineItem.class_eval do
   end
 
   def has_been_customized?
-    personalization.customization_values.count > 0
+    false
   end
 
   def as_json(options = { })
