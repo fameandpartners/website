@@ -15,6 +15,14 @@ Spree::CheckoutController.class_eval do
 
   layout 'redesign/checkout'
 
+  CARD_TYPE_MAPPING = {
+    'visa' => 'visa',
+    'mastercard' => 'master',
+    'american express' => 'american_express',
+    'discover' => 'discover',
+    'diners club' => 'diners_club'
+  }
+
   def edit
     @optimizely_opt_in = true
     prepare_order
@@ -31,10 +39,6 @@ Spree::CheckoutController.class_eval do
 
     current_order.updater.update_totals
 
-    # li_presenters = @order.line_items.map {|li| Orders::LineItemPresenter.new(li)}
-    # @order.line_item_presenters = li_presenters
-
-
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
       format.html { render 'edit' }
@@ -50,7 +54,7 @@ Spree::CheckoutController.class_eval do
 
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
-      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
+      registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params.merge( {form_name: 'checkout' }))
       registration.update
       subscribe(registration.user) if params[:subscribe].present?
       if registration.new_user_created?
@@ -86,18 +90,30 @@ Spree::CheckoutController.class_eval do
         return
       end
 
-      if @order.next
-        state_callback(:after)
-      else
-        flash[:error] = t(:payment_processing_failed)
-        @order.state = 'masterpass' if params[:state] == 'masterpass'
-        respond_with(@order) do |format|
-          format.html{ redirect_to checkout_state_path(@order.state) }
-          format.js{ render 'spree/checkout/update/failed' }
+      if @credit_card_gateway.type == "Spree::Gateway::Pin"
+        #take this path for pin, this code only survives while we transistion to stripe
+        if @order.next
+          state_callback(:after)
+        else
+          flash[:error] = t(:payment_processing_failed)
+          @order.state = 'masterpass' if params[:state] == 'masterpass'
+          respond_with(@order) do |format|
+            format.html{ redirect_to checkout_state_path(@order.state) }
+            format.js{ render 'spree/checkout/update/failed' }
+          end
+          return
         end
-        return
+      else
+        #go here for stripeypay
+        if @order.next
+          state_callback(:after)
+        else
+          render status: 402, json: {
+            :message => @order.errors.full_messages.first
+          }
+          return
+        end
       end
-
       # with 'cart checkout' by paypal express we can return to fill address
       if @order.state == 'payment' && @order.has_checkout_step?('payment')
         state_callback(:before)
@@ -111,7 +127,7 @@ Spree::CheckoutController.class_eval do
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
-        flash[:commerce_tracking] = 'nothing special'
+        flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
 
         session[:successfully_ordered] = true
 
@@ -217,7 +233,14 @@ Spree::CheckoutController.class_eval do
         params[:order][:payments_attributes].first[:amount] = @order.total
       end
     end
-    params[:order].except(:password, :password_confirmation)
+
+    retval = params[:order].except(:password, :password_confirmation)
+
+    #need to map stripe cc_types to accepted accepted activemerchant vals
+    if cc_type = retval["payments_attributes"].try(:[], 0)&.dig("source_attributes", "cc_type")
+      retval["payments_attributes"][0]["source_attributes"]["cc_type"] = CARD_TYPE_MAPPING[cc_type]
+    end
+    retval
   end
 
   # run callback - preparations to order states
@@ -360,11 +383,15 @@ Spree::CheckoutController.class_eval do
 
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
-    EmailCaptureWorker.perform_async(user.id, 'remote_ip'    => request.remote_ip,
-                                              'landing_page' => session[:landing_page],
-                                              'utm_params'   => session[:utm_params],
-                                              'site_version' => current_site_version.name,
-                                              'form_name'    => 'Checkout',
-                                              'service'      => ENV.fetch('SUBSCRIPTION_SERVICE'))
+    EmailCapture.new({},
+                     email: user.email,
+                     newsletter: user.newsletter,
+                     first_name: user.first_name,
+                     last_name: user.last_name,
+                     current_sign_in_ip: request.remote_ip,
+                     landing_page: session[:landing_page],
+                     utm_params: session[:utm_params],
+                     site_version: current_site_version.name,
+                     form_name: 'checkout').capture
   end
 end

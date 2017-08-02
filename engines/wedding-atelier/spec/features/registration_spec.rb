@@ -85,7 +85,7 @@ describe 'registrations', type: :feature do
         allow(Marketing::CustomerIOEventTracker).to receive(:new).and_return(customerio)
         expect(customerio).to receive(:track)
         allow_any_instance_of(Spree::User).to receive(:send_welcome_email)
-        allow(EmailCaptureWorker).to receive(:perform_async)
+        allow(EmailCapture).to receive(:new)
       end
 
       it 'completes onboarding process' do

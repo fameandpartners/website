@@ -4,14 +4,21 @@ module Bronto
   class Client
     # @param contacts Array or Hash
     # @option email
-    def add_contacts(contacts)
-      contacts = Array.wrap(contacts).map do |contact|
+    def add_contacts(contacts_as_hash)
+      contacts = Array.wrap(contacts_as_hash).map do |contact|
         contact[:fields] = prepare_fields(contact[:fields])
-
         contact
       end
 
-      request(:add_contacts, contacts: Array.wrap(contacts))
+      response = request(:add_contacts, contacts: Array.wrap(contacts))
+      if( response[:add_contacts_response][:return][:results][:is_error] )
+
+        request(:update_contacts, contacts: Array.wrap( contacts ) )
+        results = contacts_by_email( emails: Array.wrap(contacts_as_hash).first[:email] )
+        results[:id]
+      else
+        response[:add_contacts_response][:return][:results][:id]
+      end
     end
 
     # @param lists Array or Hash
@@ -25,12 +32,8 @@ module Bronto
       request(:add_lists, list_options)
     end
 
-    def add_to_list(list_name:, emails:)
-      conditions = Array.wrap(emails).map do |email|
-        { email: email }
-      end
-      body = { list: { name: list_name }, contacts: conditions }
-
+    def add_to_list(list_name:, user_id:)
+      body = { list: { name: list_name }, contacts: {id: user_id} }
       request(:add_to_list, body)
     end
 
@@ -76,19 +79,6 @@ module Bronto
     end
 
     private
-
-    def contacts_by_email(emails:)
-      conditions = Array.wrap(emails).map do |email|
-        {
-          operator: 'EqualTo',
-          value: email
-        }
-      end
-
-      contact = request(:read_contacts, filter: { type: 'OR', email: conditions })
-
-      contact.hash[:envelope][:body][:read_contacts_response][:return]
-    end
 
     def client
       @client ||= Savon.client(wsdl_path)

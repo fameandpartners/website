@@ -95,7 +95,7 @@ class Products::CollectionResource
     color_group_names = Array.wrap(color_group_names)
 
     if color_group_names.present?
-      color_group_names.collect do |group_name| 
+      color_group_names.collect do |group_name|
         Repositories::ProductColors.get_group_by_name(group_name)
       end.compact
     else
@@ -104,7 +104,7 @@ class Products::CollectionResource
   end
 
   def details
-    @details ||= 
+    @details ||=
       Products::CollectionDetails.new(
         collection:     collection,
         style:          styles.first,
@@ -129,7 +129,7 @@ class Products::CollectionResource
   end
 
   def query
-    @query ||= Search::ColorVariantsQuery.build(query_options)
+    @query ||= Search::ColorVariantsESQuery.build(query_options)
   end
 
   def query_options
@@ -167,8 +167,8 @@ class Products::CollectionResource
     result[:fast_making]  = fast_making unless fast_making.nil?
     result[:query_string] = query_string if query_string.present?
     result[:order]        = order if order.present?
-    result[:limit]        = limit if limit.present?
-    result[:offset]       = offset if offset.present?
+    @size                 = limit if limit.present?
+    @offset              = offset if offset.present?
     result[:price_min]    = price_min if price_min.present?
     result[:price_max]    = price_max if price_max.present?
     result[:currency]     = current_currency
@@ -179,29 +179,41 @@ class Products::CollectionResource
   end
 
   def total_products
-    query.json["hits"]["total"]
-  rescue Tire::Search::SearchRequestFailed => nope
-    NewRelic::Agent.notice_error(nope, query: query.to_json)
+    results["hits"]["total"]
+  rescue Exception => e
+    NewRelic::Agent.notice_error(e)
     0
   end
 
+  def results
+    @results ||= Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200').search(
+        index: configatron.elasticsearch.indices.color_variants,
+        body: query,
+        size: @size || 10,
+        from: @offset || 0
+
+      )
+  end
+
   def products
-    result = query.results.map do |color_variant|
-      discount = Repositories::Discount.get_product_discount(color_variant.product.id)
-      color    = Repositories::ProductColors.read(color_variant.color.id)
-      price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
+    results_ary = results["hits"]["hits"]
+    result = results_ary.map do |cvar|
+      cvar = cvar['_source']
+      discount = Repositories::Discount.get_product_discount(cvar["product"]["id"])
+      color    = Repositories::ProductColors.read(cvar["color"]["id"])
+      price    = Spree::Price.new(amount: cvar["prices"][current_currency], currency: current_currency)
 
       Products::Presenter.new(
-        id:             color_variant.product.id,
-        sku:            color_variant.product.sku,
-        variant_skus:   color_variant.product.variant_skus,
-        name:           color_variant.product.name,
-        color:          color_variant.color,
-        images:         cropped_images(color_variant),
+        id:             cvar["product"]["id"],
+        sku:            cvar["product"]["sku"],
+        variant_skus:   cvar["product"]["variant_skus"],
+        name:           cvar["product"]["name"],
+        color:          OpenStruct.new(cvar["color"]),
+        images:         cropped_images(cvar),
         price:          price,
         discount:       discount,
-        fast_delivery:  color_variant.product.fast_delivery,
-        fast_making:    color_variant.product.fast_making
+        fast_delivery:  cvar["product"]["fast_delivery"],
+        fast_making:    cvar["product"]["fast_making"]
       )
     end
 
@@ -211,24 +223,24 @@ class Products::CollectionResource
     end
 
     result
-  rescue Tire::Search::SearchRequestFailed => nope
-    NewRelic::Agent.notice_error(nope, query: query.to_json)
+  rescue Exception => e
+    NewRelic::Agent.notice_error(e)
     []
   end
 
   # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
   def cropped_images(color_variant)
-    color_variant.cropped_images.presence || begin
+    color_variant["cropped_images"].presence || begin
                                                # TODO Remove this block once indexes are live on production - 20150522
                                                Rails.logger.warn 'Building Product Cropped images on render'
-                                               cropped_images = color_variant.images.select{ |i| i.large.to_s.downcase.include?('crop') }
+                                               cropped_images = color_variant["images"].select{ |i| i["large"].to_s.downcase.include?('crop') }
 
                                                if cropped_images.blank?
-                                                 cropped_images = color_variant.images.select { |i| i.large.to_s.downcase.include?('front') }
+                                                 cropped_images = color_variant["images"].select { |i| i["large"].to_s.downcase.include?('front') }
                                                end
 
-                                               cropped_images.sort_by!{ |i| i.position }
-                                               cropped_images.collect{ |i| i.try(:large) }
+                                               cropped_images.sort_by!{ |i| i["position"] }
+                                               cropped_images.collect{ |i| i.try("large") }
                                              end
   end
 

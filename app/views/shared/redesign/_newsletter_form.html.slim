@@ -12,4 +12,4 @@ form id=(formID)
       button.btn.btn-black.btn-md type="submit" Submit
 
 = content_for :inline_javascript do
-  | new window.page.EmailNewsletterSubscriber({form: '#{formID}'});
+  | new window.page.EmailNewsletterSubscriber({form: '#{formID}', source: 'footer'});

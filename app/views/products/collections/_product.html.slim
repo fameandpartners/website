@@ -1,8 +1,8 @@
 - grid_class = local_assigns[:col] == 3 ? 'col-md-4' : 'col-md-3'
 
 - if defined?(customWrapper)
-  .category--item data-id=(product.id) data-color-id=(product.color.try(:id)) class=customWrapper
+  .category--item data-id=(product.try(:id)) data-color-id=(product.color.try(:id)) class=customWrapper
     = render partial: '/products/collections/product_core_details', locals: {product: product}
 - else
-  .col-xs-6.col-xxs-6.category--item data-id=(product.id) data-color-id=(product.color.try(:id)) class=grid_class
+  .col-xs-6.col-xxs-6.category--item data-id=(product.try(:id)) data-color-id=(product.color.try(:id)) class=grid_class
     = render partial: '/products/collections/product_core_details', locals: {product: product}

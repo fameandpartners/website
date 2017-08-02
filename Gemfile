@@ -21,6 +21,11 @@ gem 'tire'
 gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'redcarpet', '~> 2.3.0'
+gem 'elasticsearch-dsl'
+gem 'elasticsearch-ruby'
+gem 'elasticsearch-persistence'
+# gem 'elasticsearch-model'
+# gem 'elasticsearch-rails'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -81,6 +86,7 @@ gem 'spree_banner', '~> 1.3.0'
 
 #payments
 gem 'pin_payment'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',

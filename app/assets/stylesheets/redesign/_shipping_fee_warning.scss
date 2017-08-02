@@ -49,3 +49,35 @@
   }
 
 }
+
+// Modal window
+.modal-duty-fee {
+
+  .heading,
+  p {
+    @extend .font-sans-serif;
+  }
+
+  .heading {
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 2.4rem;
+  }
+
+  .copy-content {
+    margin: 50px 30px;
+  }
+
+  p {
+    font-size: 1.7rem;
+  }
+
+}
+
+@media (min-width: $bootstrap-sm-width) {
+
+  .modal-duty-fee .modal-dialog {
+    max-width: 450px;
+  }
+
+}

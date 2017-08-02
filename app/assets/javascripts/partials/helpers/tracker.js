@@ -105,4 +105,8 @@ window.track = {
   antiFastTrack: function (action, label) {
     this.event('Collection', action, label, false);
   },
+
+  wholesaleTrack: function (action, label) {
+    this.event('Wholesale', action, label, false);
+  },
 };
