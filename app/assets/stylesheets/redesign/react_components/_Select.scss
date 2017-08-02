@@ -41,15 +41,12 @@
     }
 
     .Select-list-item:hover {
-      background: $c-neutral-6;
+      background: $c-neutral-2;
     }
 
-    .Select-list-item.focused {
-      background: blue;
-    }
-
+    .Select-list-item.focused,
     .Select-list-item.selected {
-      background: red;
+      background: $c-neutral-4;
     }
   }
 
@@ -124,11 +121,5 @@
     transition: all 0.2s;
     padding: 0 14px;
     margin: 0 1px;
-  }
-
-  .Select-list-item:hover,
-  .Select-list-item:focus,
-  .Select-list-item.focused {
-    color: $c-neutral-12;
   }
 }

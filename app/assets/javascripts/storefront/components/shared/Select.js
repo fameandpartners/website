@@ -3,12 +3,13 @@
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
 //* ****
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
-import { trackEvent } from '../../libs/gaTracking'
-import { openHeightSelectEvent } from '../../libs/gaEventObjects'
+import { trackEvent } from '../../libs/gaTracking';
+import { openHeightSelectEvent } from '../../libs/gaEventObjects';
+
 const propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
@@ -37,20 +38,18 @@ class Select extends Component {
     this.state = {
       isOpen: false,
       arrowFocusedIndex: -1,
+      selectedIndex: 0,
     };
     autobind(this);
 
     // debounce to avoid onFocus & onClick from firing setState twice
     this.setDropdownState = _.debounce((state) => {
-      this.setState({
-        isOpen: state,
-        arrowFocusedIndex: -1,
-      });
+      this.setState({ isOpen: state });
     }, 250, true);
   }
 
   toggleDropdown() {
-    !this.state.isOpen ? trackEvent(openHeightSelectEvent) : ''
+    !this.state.isOpen ? trackEvent(openHeightSelectEvent) : '';
     this.setDropdownState(!this.state.isOpen);
   }
 
@@ -64,7 +63,7 @@ class Select extends Component {
     if (this.state.isOpen) {
       this.setState({
         isOpen: false,
-        arrowFocusedIndex: -1,
+        arrowFocusedIndex: this.state.selectedIndex,
       });
     }
   }
@@ -78,20 +77,22 @@ class Select extends Component {
     switch (event.keyCode) {
       case keys.ARROW_UP:
         event.preventDefault();
+        this.setState({ isOpen: true });
         if (index > 0) {
-          this.setState({ arrowFocusedIndex: index - 1, });
+          this.setState({ arrowFocusedIndex: index - 1 });
         } else {
-          this.setState({ arrowFocusedIndex: maxIndex, });
+          this.setState({ arrowFocusedIndex: maxIndex });
         }
         break;
       case keys.ARROW_DOWN:
         event.preventDefault();
+        this.setState({ isOpen: true });
         if (index < maxIndex) {
           this.setState({
             arrowFocusedIndex: index + 1,
           });
         } else {
-          this.setState({ arrowFocusedIndex: 0, });
+          this.setState({ arrowFocusedIndex: 0 });
         }
         break;
       case keys.ENTER:
@@ -107,6 +108,7 @@ class Select extends Component {
 
   handleDropdownItemClick(option) {
     return () => {
+      this.setState({ selectedIndex: option.id });
       this.closeDropdown();
       if (typeof this.props.onChange === 'function') {
         this.props.onChange({
@@ -118,19 +120,18 @@ class Select extends Component {
   }
 
   buildDropdown() {
-    console.log('buildDropdown()...');
     const options = this.props.options || [];
-    console.log(options);
 
     const dropdownComponent = options.map((option, index) => {
       const isFocused = (this.state.arrowFocusedIndex === index);
+      const anyItemFocused = (this.state.arrowFocusedIndex !== this.state.selectedIndex);
 
       return (
         <li
           ref={`options${index}`}
           key={`${this.props.id}-${option.id}-${index}`}
           data-value={option.meta}
-          className={`Select-list-item noSelect ${option.active ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
+          className={`Select-list-item noSelect ${(option.active && !anyItemFocused) ? 'selected' : ''} ${isFocused ? 'focused' : ''}`}
           onClick={this.handleDropdownItemClick(option)}
           aria-hidden={this.state.isOpen ? 'false' : 'true'}
         >
@@ -151,9 +152,9 @@ class Select extends Component {
       label,
       className,
     } = this.props;
-    const { isOpen, } = this.state;
+    const { isOpen } = this.state;
     const contents = this.buildDropdown();
-    const activeOption = _.find(options, { active: true, }) || {};
+    const activeOption = _.find(options, { active: true }) || {};
     const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
     const singleOption = options.length === 1;
 
