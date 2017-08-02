@@ -15,26 +15,31 @@
   color: $c-neutral-black;
   background: $c-neutral-2;
 
-  &.equal-pay-day {
+  &.custom-sale-banner-top {
+    background: $c-light-blue;
     color: $c-neutral-white;
-    background: $c-royal-blue;
+
+    a {
+      color: $c-neutral-white;
+      text-decoration: none;
+    }
 
     .title-wrap {
-      height: 35px;
+      height: 30px;
     }
 
     .title {
       max-width: 100%;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
+      font-weight: 500;
     }
 
     .alert-sale-cta {
       color: $c-neutral-white;
-      font-size: 1.6rem;
-      font-style: italic;
-      text-decoration: none;
-      text-transform: none;
-      @extend .font-serif, .link-underline;
+      font-weight: 600;
+      padding-left: 2px;
+      text-decoration: underline;
+      @extend .link-underline;
     }
 
   }

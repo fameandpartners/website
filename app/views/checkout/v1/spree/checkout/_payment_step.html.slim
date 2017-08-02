@@ -1,3 +1,9 @@
+- content_for :head do
+  = javascript_include_tag 'https://js.stripe.com/v3/'
+
+javascript:
+  var stripe = Stripe('#{get_stripe_key()}');
+
 - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
   - content_for :head do
     - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
@@ -39,16 +45,20 @@
     .payment-selection.tab-content
       - if @credit_card_gateway
         #creditcard.payment-selected.tab-pane.in.active role="tabpanel"
-          = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
-            - payment_failure = payment_failed_messages(@order.errors.full_messages.first.to_s)
-            - if payment_failure
-              .title Try a different payment method?
-              .sub We'd love to make this happen for you, but there was a problem with your credit card.
+          - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+            = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+              - payment_failure = payment_failed_messages(@order.errors.full_messages.first.to_s)
+              - if payment_failure
+                .title Try a different payment method?
+                .sub We'd love to make this happen for you, but there was a problem with your credit card.
 
-            = render 'shared/error_messages', :target => @order, :view => "payment"
+              = render 'shared/error_messages', :target => @order, :view => "payment"
 
-            = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
-            = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+              = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+              = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+
+          - elsif @credit_card_gateway.is_a?(Spree::Gateway::FameStripe)
+            = render :partial => "spree/checkout/payment/stripe"
 
       - if @afterpay_method
         #afterpay.panel-afterpay.text-center.payment-selected.tab-pane role="tabpanel"

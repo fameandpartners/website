@@ -115,6 +115,7 @@
 //= require partials/user_order_returner
 
 //= require partials/checkout_page
+//= require partials/checkout_page__stripe
 //= require partials/extra_fees_alert
 
 // Profile/Account Settings
