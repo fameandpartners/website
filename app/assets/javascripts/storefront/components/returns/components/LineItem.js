@@ -27,8 +27,6 @@ const LineItem = ({ handleSubmission, returnSubtotal }) => (
         <div className="SimpleButton__wrapper" onClick={handleSubmission}>
           <SimpleButton
             buttonCopy="Start Return"
-            link="/return-confirmation"
-            localLink
           />
         </div>
       </div>

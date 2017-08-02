@@ -40,7 +40,7 @@ class StepOneContainer extends Component {
     const { actions, returnArray } = this.props;
     const { spree_order } = this.state.order;
     const returnsObj = {
-      order_id: spree_order.number,
+      order_id: spree_order.id,
       line_items: returnArray.map(r => ({
         line_item_id: r.id,
         action: 'Return',

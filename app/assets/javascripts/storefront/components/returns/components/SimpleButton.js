@@ -17,9 +17,7 @@ const SimpleButton = ({ buttonCopy, link, localLink }) => (
     </div>
     :
     <div className="simpleButton__container">
-      <a href={link}>
-        <span className="copy">{buttonCopy}</span>
-      </a>
+      <span className="copy">{buttonCopy}</span>
     </div>
 );
 

@@ -1,15 +1,17 @@
 module Api
   module V1
+
     # TO-DO: Refactor into an ApiController
     class ReturnsProcessesController < ApplicationController
-      before_filter :authenticate_spree_user!
+      include Spree::Core::ControllerHelpers::Auth
+      # before_filter :authenticate_spree_user!
 
       respond_to :json
 
 
       # GET
       def index
-        user = try_spree_current_user
+        user = spree_current_user
 
         @orders = user.orders.complete.map do |order|
           Orders::OrderPresenter.new(order)
@@ -21,7 +23,7 @@ module Api
 
       # POST
       def create
-        @user = try_spree_current_user
+        @user = spree_current_user
 
         if has_incorrect_params?
           error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }.")
