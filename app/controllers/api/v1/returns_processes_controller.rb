@@ -1,10 +1,8 @@
 module Api
   module V1
-
     # TO-DO: Refactor into an ApiController
     class ReturnsProcessesController < ApplicationController
       include Spree::Core::ControllerHelpers::Auth
-      # before_filter :authenticate_spree_user!
 
       respond_to :json
 
