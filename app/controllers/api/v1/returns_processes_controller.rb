@@ -23,6 +23,11 @@ module Api
 
       # POST
       def create
+        @error_message_code = {
+          "RETRY" => "Please try again.",
+          "RETURN_EXISTS" => "These items already have a return."
+        }
+
         @user = spree_current_user
 
         if has_incorrect_params?
@@ -31,14 +36,12 @@ module Api
         end
 
         if has_invalid_order_id?(params['order_id'])
-          error_response("Invalid Order ID.")
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_order_id?(params['order_id'])
-          # probably should be the same response as above,
-          # for security's sake but leaving as is for testing
-          error_response("Order ID does not belong to this user.")
+          error_response(@error_message_code["RETRY"])
           return
         end
 
@@ -47,20 +50,17 @@ module Api
                           end
 
         if has_invalid_line_items?(return_item_ids)
-          error_response("One or more line_item_ids is not valid.")
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_line_items?(return_item_ids, params['order_id'])
-          # should probably have the same message as has_invalid_line_items?,
-          # as above in the case of has_incorrect_order_id?,
-          # ideally both conditionals should check for either
-          error_response("One or more line_item_ids do not belong to this Order ID.")
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_existing_returns?(return_item_ids)
-          error_response("One or more line_item_ids already has a return.")
+          error_response(@error_message_code["RETURN_EXISTS"])
           return
         end
 

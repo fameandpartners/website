@@ -1,5 +1,6 @@
 import axios from 'axios';
 import setReturnWindow from '../../../libs/setReturnWindow';
+import { assign } from 'lodash';
 
 export const addProductToReturnArray = (product, currentArray) => {
   product.openEndedReturnReason = '';

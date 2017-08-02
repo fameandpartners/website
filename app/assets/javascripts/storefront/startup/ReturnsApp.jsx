@@ -6,6 +6,7 @@ import AppStore from '../store/AppStore';
 import ConfirmationContainer from '../components/returns/containers/ConfirmationContainer';
 import OrderContainer from '../components/returns/containers/OrderContainer';
 import StepOneContainer from '../components/returns/containers/StepOneContainer';
+import '../libs/default-csrf';
 
 const returnNode = document.getElementById('returnsApp');
 if (returnNode) {
