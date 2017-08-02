@@ -3,24 +3,37 @@ import { Link } from 'react-router';
 
 const propTypes = {
   buttonCopy: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  localLink: PropTypes.bool.isRequired,
+  link: PropTypes.string,
+  localLink: PropTypes.bool,
+  withLink: PropTypes.bool,
+};
+
+const defaultProps = {
+  withLink: false,
+  link: '/',
+  localLink: false,
 };
 
 
-const SimpleButton = ({ buttonCopy, link, localLink }) => (
-  localLink ?
+const SimpleButton = ({ buttonCopy, link, localLink, withLink }) => (
+  withLink ?
     <div className="simpleButton__container">
-      <Link to={link}>
-        <span className="copy">{buttonCopy}</span>
-      </Link>
+      {localLink ?
+        <Link to={link}>
+          <span className="copy">{buttonCopy}</span>
+        </Link>
+      :
+        <a href={link}>
+          <span className="copy">External Link</span>
+        </a>}
     </div>
     :
-    <div className="simpleButton__container">
-      <span className="copy">{buttonCopy}</span>
+    <div className="simpleButton__container u-padding-medium">
+      <span className="copy u-no-padding">{buttonCopy}</span>
     </div>
 );
 
 SimpleButton.propTypes = propTypes;
+SimpleButton.defaultProps = defaultProps;
 
 export default SimpleButton;

@@ -29,7 +29,7 @@ class OrderHistory extends Component {
     return (
       <div>
         <div className="grid-noGutter-center-spaceAround">
-          <div className="col-10_md-12 u-no-padding-right">
+          <div className="col-10_md-12 u-no-padding">
             <div className="order__container">
               <p className="order-placed u-margin-bottom-small">
                 Placed on {date_iso_mdy}

@@ -1,11 +1,11 @@
 @import './mixins';
 
-.LineItem p {
+.EstimatedRefundTotal p {
     margin-bottom: 0;
     font-weight: 500;
 }
 
-.LineItem {
+.EstimatedRefundTotal {
     text-align: center;
     background: #f5f5f5;
     padding-top: 50px;
@@ -15,22 +15,23 @@
     }
 }
 
-.LineItem .total {
+.EstimatedRefundTotal .total {
     font-weight: 600;
     margin-bottom: 30px;
 }
-.LineItem .button-link {
+.EstimatedRefundTotal .button-link {
     padding: 1.3em 5em;
     @include desktop {
         min-width: 344px;
     }
 }
 
-.LineItem hr {
+.EstimatedRefundTotal hr {
     border-color: #000;
     @include desktop {
       width: 220px;
       float: right;
       display: block;
+      margin: 10px auto 0;
     }
 }
