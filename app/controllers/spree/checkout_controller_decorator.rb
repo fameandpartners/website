@@ -235,8 +235,9 @@ Spree::CheckoutController.class_eval do
     end
 
     retval = params[:order].except(:password, :password_confirmation)
+
     #need to map stripe cc_types to accepted accepted activemerchant vals
-    if cc_type = retval["payments_attributes"][0].dig("source_attributes", "cc_type")
+    if cc_type = retval["payments_attributes"].try(:[], 0)&.dig("source_attributes", "cc_type")
       retval["payments_attributes"][0]["source_attributes"]["cc_type"] = CARD_TYPE_MAPPING[cc_type]
     end
     retval
