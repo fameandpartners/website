@@ -53,14 +53,6 @@ class OrderHistory extends Component {
                     const { id } = o;
                     return (
                       <div key={id}>
-
-                        { i === 0 ?
-                          <p className="u-heavyFont ship-date font-sans-serif">
-                                Expected Delivery on {moment(projectedDeliveryDate).calendar()}
-                          </p>
-                          :
-                          null
-                        }
                         <ProductContainer
                           key={id}
                           product={o}
@@ -84,13 +76,6 @@ class OrderHistory extends Component {
                     const { id } = o;
                     return (
                       <div key={id}>
-                        { i === 0 ?
-                          <p className="u-heavyFont ship-date font-sans-serif">
-                              Expected Delivery on {moment(projectedDeliveryDate).calendar()}
-                          </p>
-                        :
-                        null
-                      }
                         <ProductContainer
                           key={id}
                           product={o}
