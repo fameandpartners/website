@@ -47,7 +47,11 @@ module Api
           "RETURN_EXISTS" => "These items already have a return."
         }
 
-        @user = spree_current_user
+        @user = get_user()
+
+        if @user.nil?
+          error_response(@error_message_code["RETRY"])
+        end
 
         if has_incorrect_params?
           error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }.")
@@ -88,6 +92,14 @@ module Api
 
 
       private
+
+      def get_user
+        if params['email'].present?
+          Spree::User.where(email: params['email']).first
+        else
+          spree_current_user
+        end
+      end
 
       def has_incorrect_guest_params?
         !(params['email'].present? && params['order_number'].present?)
