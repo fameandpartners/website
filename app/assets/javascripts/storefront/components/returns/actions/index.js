@@ -70,15 +70,25 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
   };
 };
 
-export const getProductData = () => (dispatch) => {
-  axios.get('/api/v1/orders')
-    .then((response) => {
-      console.log('response', response);
-      dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
+  if (guestReturn) {
+    axios.get(`/api/v1/guest/order?email=${email}&order_number=${orderID}`)
+      .then((response) => {
+        const guestOrderArray = [response.data];
+        dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    axios.get('/api/v1/orders')
+      .then((response) => {
+        dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 };
 
 export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {

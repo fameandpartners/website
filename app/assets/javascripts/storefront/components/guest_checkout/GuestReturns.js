@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import autobind from 'auto-bind';
 import axios from 'axios';
 import Button from '../returns/components/Button';
@@ -9,8 +9,8 @@ class GuestReturnApp extends Component {
     super(props);
     autobind(this);
     this.state = {
-      guestEmail: '',
-      guestOrderID: '',
+      guestEmail: 'notreal@gmail.com',
+      guestOrderID: 'R348637707',
       lookupError: false,
     };
   }
@@ -30,6 +30,9 @@ class GuestReturnApp extends Component {
           that.setState({
             lookupError: true,
           });
+        } else {
+          browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
+          location.reload();
         }
       })
       .catch((error) => {
