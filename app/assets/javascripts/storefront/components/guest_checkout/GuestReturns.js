@@ -74,9 +74,7 @@ class GuestReturnApp extends Component {
               onChange={this.updateEmail}
               value={guestEmail}
             />
-            <SimpleButton
-              buttonCopy="Return My Order"
-            />
+            <input type="submit" value="Return My Order" />
           </form>
           <div className="grid-noGutter-spaceBetween">
             <div className="col-6_sm-12">
