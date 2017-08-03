@@ -18,6 +18,24 @@ module Api
       end
 
 
+      # GET (guest)
+      def guest
+        if has_incorrect_guest_params?
+          error_response("Incorrect parameters. Expecting { email: STRING, order_number: STRING }.")
+          return
+        end
+
+        fetched_order = Spree::Order.where(email: params['email'], number: params['order_number']).first
+
+        if fetched_order.present?
+          respond_with Orders::OrderPresenter.new(fetched_order)
+        else
+          error_response("No order found.")
+          return
+        end
+      end
+
+
       # POST
       def create
         # TODO: REMOVE
@@ -70,6 +88,10 @@ module Api
 
 
       private
+
+      def has_incorrect_guest_params?
+        !(params['email'].present? && params['order_number'].present?)
+      end
 
       def has_incorrect_params?
         !(params['order_id'].present? && params['line_items'].present?)
