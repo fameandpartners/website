@@ -173,6 +173,7 @@ Spree::LineItem.class_eval do
     }
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
+        "created_at_iso_mdy": self.created_at.strftime("%m/%d/%y"),
         "return_item_state": self.item_return.acceptance_status,
         "item_return_id": self.item_return.id,
         "label_pdf_url": self.item_return.return_label.label_pdf_url,
