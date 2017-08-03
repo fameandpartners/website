@@ -182,6 +182,7 @@ class Products::CollectionResource
     results["hits"]["total"]
   rescue Exception => e
     NewRelic::Agent.notice_error(e)
+    Raven.capture_exception(e)
     0
   end
 
@@ -225,6 +226,7 @@ class Products::CollectionResource
     result
   rescue Exception => e
     NewRelic::Agent.notice_error(e)
+    Raven.capture_exception(e)
     []
   end
 
