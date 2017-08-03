@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
+/* global window */
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import autobind from 'auto-bind';
 import Confirmation from '../components/Confirmation';
 
 const propTypes = {
@@ -7,13 +9,29 @@ const propTypes = {
   logisticsData: PropTypes.object.isRequired,
 };
 
-const ConfirmationContainer = ({ logisticsData, orderData }) => (
-  <Confirmation
-    orderData={orderData}
-    logisticsData={logisticsData}
-  />
-);
+class ConfirmationContainer extends Component {
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
 
+  componentDidMount() {
+    if (!this.props.logisticsData) {
+      // TODO: go back to page one and refresh
+    }
+  }
+
+  render() {
+    const { orderData, logisticsData } = this.props;
+    return (
+      <Confirmation
+        orderData={orderData}
+        logisticsData={logisticsData}
+      />
+    );
+  }
+
+}
 function mapStateToProps(state) {
   return {
     orderData: state.orderData,
