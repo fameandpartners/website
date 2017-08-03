@@ -99,7 +99,6 @@ const Confirmation = ({ orderData, logisticsData }) => {
           </ul>
           <img
             src={logisticsData.line_items[0].item_return_label.label_image_url}
-            something={logisticsData.line_items[0].label_image_url}
             alt="Shipping Label"
             className={logisticsData.internationalCustomer ? 'u-hide' : 'Confirmation__shipping-label hide-for-mobile'}
           />
@@ -119,7 +118,7 @@ const Confirmation = ({ orderData, logisticsData }) => {
           <p>Order #{logisticsData.order_id}</p>
           {logisticsData.line_items.map((li) => {
             const lineItem = extractLineItemFromOrders(orderData, li.line_item_id);
-            return <ProductContainer confirmationPage key={li.id} product={lineItem} />;
+            return <ProductContainer confirmationPage key={li.line_item_id} product={lineItem} />;
           })}
         </div>
         <div className="u-margin-bottom-large">

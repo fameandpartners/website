@@ -103,39 +103,39 @@ module Api
 
       def process_returns(obj)
         # TODO: REMOVE
-        return_request = [{
-              :line_item_id => 291829,
-        "item_return_label" => {
-                    "carrier" => "USPS",
-                 "created_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00",
-                         "id" => 2,
-             "item_return_id" => 12975,
-            "label_image_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/image",
-              "label_pdf_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/pdf",
-                  "label_url" => "http://www.preview.shipmentmanager.com/V3/PrintWebLabel.aspx?weblabelid=D2C3713B1806A9632332DE503F4DFE8D20FB14076E262EDE",
-                 "updated_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00"
-             }
-        }]
-        success_response(return_request)
+        # return_request = [{
+        #       :line_item_id => 316051,
+        # "item_return_label" => {
+        #             "carrier" => "USPS",
+        #          "created_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00",
+        #                  "id" => 2,
+        #      "item_return_id" => 316051,
+        #     "label_image_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/image",
+        #       "label_pdf_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/pdf",
+        #           "label_url" => "http://www.preview.shipmentmanager.com/V3/PrintWebLabel.aspx?weblabelid=D2C3713B1806A9632332DE503F4DFE8D20FB14076E262EDE",
+        #          "updated_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00"
+        #      }
+        # }]
+        # success_response(return_request)
         #
         #
-        # return_request = {
-        #   :order_return_request => {
-        #     :order_id => obj['order_id'],
-        #     :return_request_items_attributes => obj['line_items']
-        #   }
-        # }
-        #
-        # @order_return = OrderReturnRequest.new(return_request[:order_return_request])
-        # @order_return.save
-        #
-        # start_bergen_return_process(@order_return)
-        # start_next_logistics_process(@order_return)
-        #
-        # return_labels = map_return_labels(obj['line_items'])
-        #
-        #
-        # success_response(return_labels)
+        return_request = {
+          :order_return_request => {
+            :order_id => obj['order_id'],
+            :return_request_items_attributes => obj['line_items']
+          }
+        }
+
+        @order_return = OrderReturnRequest.new(return_request[:order_return_request])
+        @order_return.save
+
+        start_bergen_return_process(@order_return)
+        start_next_logistics_process(@order_return)
+
+        return_labels = map_return_labels(obj['line_items'])
+
+
+        success_response(return_labels)
         return
       end
 
