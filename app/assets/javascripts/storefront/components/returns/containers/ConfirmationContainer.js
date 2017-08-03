@@ -22,13 +22,16 @@ class ConfirmationContainer extends Component {
   }
 
   componentDidMount() {
-    $('html, body').animate({
-      scrollTop: 0,
-    }, 600);
+
   }
 
   render() {
     const { orderData, logisticsData } = this.props;
+    if (logisticsData) {
+      $('html, body').animate({
+        scrollTop: 0,
+      }, 600);
+    }
     return (
       <Confirmation
         orderData={orderData}
