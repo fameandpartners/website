@@ -6,7 +6,7 @@
 
 .GuestReturn__Container .subheader,
 .GuestReturn__Container .headline,
-.GuestReturn__Container .copy {
+{
   text-align: center;
   font-weight: 500;
 }
@@ -34,23 +34,30 @@
 
 .guestForm__container .return-button {
   width: 100%;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
-.GuestReturn__Container .copy {
+.GuestReturn__Container .guest-copy {
   font-size: 14px;
   margin-top: 20px;
-  text-align: center;
   margin: 10px 0;
-  @include mediumUp {
+  text-align: left;
+  @include tablet {
     margin-bottom: 200px;
   }
-  text-align: left;
+  @include mobile {
+    text-align: center;
+  };
 }
 
-.GuestReturn__Container .copy a {
+.GuestReturn__Container .contact-us {
+  @include tablet {
+    text-align: right;
+  };
+}
+
+.GuestReturn__Container .guest-copy a {
     text-decoration: underline;
-    // padding-left: 8px;
 }
 
 .error-box p {
