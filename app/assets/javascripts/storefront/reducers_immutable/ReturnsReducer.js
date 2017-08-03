@@ -7,6 +7,8 @@ const initialState = {
   returnSubtotal: 0,
   logisticsData: {
     // order_id: Number,
+    // order_number: String,
+    // final_return_by_date: Number,
     // international_customer: Bool,
     // line_items: [{
     //   line_item_id: Number
@@ -41,6 +43,8 @@ export default function (state = initialState, action) {
       return assign({}, state, {
         logisticsData: {
           order_id: action.payload.order.id,
+          order_number: action.payload.order.number,
+          final_return_by_date: action.payload.order.final_return_by_date,
           international_customer: action.payload.order.international_customer,
           line_items: action.payload.line_items,
         },
