@@ -78,12 +78,12 @@
     display: inline-block;
     text-indent: 5px;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .instructions__body .list > li {
     list-style: none;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
 }
 
@@ -120,4 +120,6 @@
 .Confirmation__shipping-label {
   width: 100%;
   max-width: 730px;
+  border: 2px dashed black;
+  margin-bottom: 80px;
 }

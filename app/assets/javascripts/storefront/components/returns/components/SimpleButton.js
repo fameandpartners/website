@@ -21,12 +21,7 @@ const defaultProps = {
 const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
   withLink ?
     <div className="simpleButton__container">
-      <div
-        className={classnames(
-      'simpleButton__container',
-      className,
-    )}
-      >
+      <div className={className}>
         {localLink ?
           <Link to={link}>
             <span className="copy">{buttonCopy}</span>
