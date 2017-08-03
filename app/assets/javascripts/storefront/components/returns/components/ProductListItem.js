@@ -1,14 +1,18 @@
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import autoBind from 'auto-bind';
-import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import ReactDOM from 'react-dom';
+
+// Constants
 import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject';
+import noop from '../../../libs/noop';
+
+// UI Components
 import Checkbox from './Checkbox';
 import Select from '../../shared/Select';
 import SimpleButton from '../components/SimpleButton';
-import noop from '../../../libs/noop';
-import ReactDOM from 'react-dom';
-
+import ShippingInfo from './ShippingInfo';
 
 const propTypes = {
   product: PropTypes.object.isRequired,
@@ -132,7 +136,7 @@ class ProductListItem extends Component {
                 ${Number(price).toFixed(2)}
               </span>
             </div>
-            <div className="meta--marginBottom">
+            <div>
               <span className="meta--key">
                 Size:
               </span>
@@ -140,7 +144,7 @@ class ProductListItem extends Component {
                 {size}
               </span>
             </div>
-            <div className="meta--marginBottom">
+            <div>
               <span className="meta--key">
                 Color:
               </span>
@@ -148,7 +152,7 @@ class ProductListItem extends Component {
                 {color}
               </span>
             </div>
-            <div className="meta--marginBottom">
+            <div>
               <span className="meta--key">
                 Height:
               </span>
@@ -161,28 +165,10 @@ class ProductListItem extends Component {
         {
           SHOW_LOGISTICS_DATA ?
             <div className="col-4_md-9_xs-9">
-              <div className="grid-center">
-                <div>
-                  <div className="col-12">
-                    <p className="windowClosed-copy">
-                      Return Started <br /> MM/DD/YYYY
-                  </p>
-                  </div>
-                  <div className="col-12">
-                    <ul className="windowClosed-list">
-                      <li>
-                        <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
-                      </li>
-                      <li>
-                        <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <ShippingInfo returns_meta={returns_meta} />
             </div>
-          :
-          null
+            :
+            null
         }
         {
           WINDOW_CLOSED ?
@@ -193,7 +179,7 @@ class ProductListItem extends Component {
                     <p className="windowClosed-copy">
                         Your 30-day return window closed on <br />
                       {returnWindowEnd} and this item is no longer eligible for a return.
-                  </p>
+                    </p>
                   </div>
                   <div className="col-12">
                     <ul className="windowClosed-list">
@@ -208,8 +194,8 @@ class ProductListItem extends Component {
                 </div>
               </div>
             </div>
-          :
-          null
+            :
+            null
         }
         {
           SHOW_RETURN_BUTTON ?
@@ -243,7 +229,7 @@ class ProductListItem extends Component {
                   <div className={primaryReturnReason ? 'u-show' : 'u-no-opacity'}>
                     <p className="u-no-margin-top">
                     Let's get specific. What didn't you like?
-                  </p>
+                    </p>
                     <textarea
                       onChange={this.updateOpenEndedReason}
                       value={openEndedReturnReason}
@@ -254,14 +240,14 @@ class ProductListItem extends Component {
                 </form>
               </div>
             </div>
-          :
-          null
+            :
+            null
         }
         {
           Object.keys(uiState).every(state => !uiState[state]) ?
             <div className="col-4_md-9_xs-9" />
-          :
-          null
+            :
+            null
         }
       </div>
     );
