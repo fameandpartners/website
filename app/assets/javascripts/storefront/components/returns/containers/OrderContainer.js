@@ -23,6 +23,10 @@ class OrderContainer extends Component {
       this.props.actions.getProductData();
     }
   }
+  componentDidMount() {
+    const { email } = this.props.params;
+    this.props.actions.setGuestEmail(email);
+  }
   render() {
     const { orderData } = this.props;
     if (!orderData) {

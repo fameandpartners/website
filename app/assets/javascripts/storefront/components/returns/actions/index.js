@@ -91,7 +91,7 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   }
 };
 
-export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
+export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
   axios.post('/api/v1/submit_return', returnsObj)
     .then((response) => {
       // TODO: dispatch(Stop Loading Event)
@@ -99,12 +99,18 @@ export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
         payload: {
           order,
           line_items: response.data.message,
+          guestEmail,
         } });
     })
     .catch((error) => {
       console.log(error);
     });
 };
+
+export const setGuestEmail = guestEmail => ({
+  type: 'SET_GUEST_EMAIL',
+  payload: guestEmail,
+});
 
 export const populateLogisticsData = ({ order, lineItems }) => ({
   type: 'POPULATE_LOGISTICS_DATA',

@@ -17,6 +17,7 @@ const propTypes = {
   ]),
   params: PropTypes.object,
   actions: PropTypes.object,
+  guestEmail: PropTypes.string,
 };
 
 const defaultProps = {
@@ -24,6 +25,7 @@ const defaultProps = {
   params: {},
   actions: {},
   returnSubtotal: '0.00',
+  guestEmail: null,
 };
 
 class StepOneContainer extends Component {
@@ -37,7 +39,7 @@ class StepOneContainer extends Component {
   }
 
   requestReturn() {
-    const { actions, returnArray } = this.props;
+    const { actions, returnArray, guestEmail } = this.props;
     const { spree_order } = this.state.order;
     const returnsObj = {
       order_id: spree_order.id,
@@ -48,8 +50,11 @@ class StepOneContainer extends Component {
         reason: r.openEndedReturnReason,
       })),
     };
-
-    actions.submitReturnRequest({ order: spree_order, returnsObj });
+    if (guestEmail) {
+      actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
+    } else {
+      actions.submitReturnRequest({ order: spree_order, returnsObj });
+    }
   }
 
   componentWillMount() {
@@ -142,6 +147,7 @@ function mapStateToProps(state) {
   return {
     returnSubtotal: state.returnsData.returnSubtotal,
     returnArray: state.returnsData.returnArray,
+    guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData,
   };
 }
