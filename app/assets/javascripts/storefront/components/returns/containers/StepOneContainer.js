@@ -107,7 +107,7 @@ class StepOneContainer extends Component {
         </div>
         <div className="grid-noGutter-spaceAround">
           <div className="col-10_md-12 u-no-padding">
-            <div className="order__container Product__listItem__container">
+            <div className="order__container Product__listItem__container u-no-margin">
               {
                 orderArray.map(p => (
                   <ProductContainer
