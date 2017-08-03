@@ -118,8 +118,8 @@ module Products
                 cropped_images: cropped_images_for(product_color_value),
 
                 prices: {
-                  aud:  product_price_in_au.amount,
-                  usd:  product_price_in_us.amount
+                  aud:  product_price_in_au.amount.to_f,
+                  usd:  product_price_in_us.amount.to_f
                 },
                 sale_prices:  {
                   aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
