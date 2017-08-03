@@ -4,8 +4,9 @@ import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
 
 const propTypes = {
-  orderData: PropTypes.object,
+  orderData: PropTypes.object.isRequired,
   logisticsData: PropTypes.shape({
+    final_return_by_date: PropTypes.string,
     line_item_id: PropTypes.number,
     item_return_label: PropTypes.shape({
       carrier: PropTypes.string,
@@ -48,10 +49,13 @@ const Confirmation = ({ orderData, logisticsData }) => (
         </p>
         <ul className="label-list hide-for-print">
           <li>
-            <a href="#">Print Label</a>
-          </li>
-          <li>
-            <a href="#">Email Label</a>
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href={logisticsData.line_items[0].item_return_label.label_url}
+            >
+                Print Label
+              </a>
           </li>
         </ul>
       </div>
@@ -118,7 +122,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
       <hr className="dotted-line" />
 
       <div>
-        <p className="u-no-margin">Order #{logisticsData.order_number}</p>
+        <p className="font-sans-serif u-no-margin">Order #{logisticsData.order_number}</p>
         {logisticsData.line_items.map((li) => {
           const lineItem = extractLineItemFromOrders(orderData, li.line_item_id);
           return <ProductContainer confirmationPage key={li.line_item_id} product={lineItem} />;
@@ -127,7 +131,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
       <div className="u-margin-bottom-large hide-for-print">
         <SimpleButton
           buttonCopy="Continue Shopping"
-          link="/"
+          link="/dresses"
           localLink
           withLink
         />
