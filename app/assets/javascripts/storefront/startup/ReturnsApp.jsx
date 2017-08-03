@@ -15,7 +15,7 @@ if (returnNode) {
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path="/" component={OrderContainer} />
-        <Route path="/order-history" component={OrderContainer} />
+        <Route path="/guest-return/:orderID/:email" component={OrderContainer} />
         <Route path="/start-return/:orderID" component={StepOneContainer} />
         <Route path="/return-confirmation" component={ConfirmationContainer} />
       </Router>

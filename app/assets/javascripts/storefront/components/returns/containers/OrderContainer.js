@@ -16,7 +16,12 @@ const defaultProps = {
 
 class OrderContainer extends Component {
   componentWillMount() {
-    this.props.actions.getProductData();
+    const { email, orderID } = this.props.params;
+    if (email && orderID) {
+      this.props.actions.getProductData(true, email, orderID);
+    } else {
+      this.props.actions.getProductData();
+    }
   }
   render() {
     const { orderData } = this.props;
