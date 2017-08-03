@@ -95,7 +95,6 @@ class ProductContainer extends Component {
       activeTextBox,
       returnArray,
       showForm,
-      orderData,
       orderNumber,
       returnEligible,
     } = this.props;

@@ -35,7 +35,6 @@ class OrderHistory extends Component {
 
     const notRequestedArray = orderArray.filter(i => !i.returns_meta);
     const returnRequestedArray = orderArray.filter(i => i.returns_meta);
-    console.log('notRequestedArray', notRequestedArray);
 
     return (
       <div>
@@ -54,17 +53,14 @@ class OrderHistory extends Component {
                     const { id } = o;
                     return (
                       <div key={id}>
-                        <div className="grid-noGutter-center">
-                          <div className="col-11_md-9_sm-5_xs-9">
-                            { i === 0 ?
-                              <p className="u-heavyFont ship-date font-sans-serif">
+
+                        { i === 0 ?
+                          <p className="u-heavyFont ship-date font-sans-serif">
                                 Expected Delivery on {moment(projectedDeliveryDate).calendar()}
-                              </p>
-                              :
-                              null
-                            }
-                          </div>
-                        </div>
+                          </p>
+                          :
+                          null
+                        }
                         <ProductContainer
                           key={id}
                           product={o}
@@ -74,6 +70,11 @@ class OrderHistory extends Component {
                           orderNumber={number}
                           returnEligible={false}
                         />
+                        { (i === returnRequestedArray.length - 1
+                          && orderArray.length > returnRequestedArray.length) ?
+                            <hr />
+                          : null
+                        }
                       </div>
                     );
                   })
@@ -83,16 +84,13 @@ class OrderHistory extends Component {
                     const { id } = o;
                     return (
                       <div key={id}>
-                        <div className="grid-noGutter-center">
-                          <div className="col-11_md-9_sm-5_xs-9">
-                            { i === 0 ?
-                              <p className="u-heavyFont u-margin-top-small ship-date font-sans-serif">
+                        { i === 0 ?
+                          <p className="u-heavyFont ship-date font-sans-serif">
                               Expected Delivery on {moment(projectedDeliveryDate).calendar()}
-                              </p>
-                              : null
-                            }
-                          </div>
-                        </div>
+                          </p>
+                        :
+                        null
+                      }
                         <ProductContainer
                           key={id}
                           product={o}

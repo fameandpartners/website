@@ -1,6 +1,4 @@
 import axios from 'axios';
-import setReturnWindow from '../../../libs/setReturnWindow';
-import { assign } from 'lodash';
 
 export const addProductToReturnArray = (product, currentArray) => {
   product.openEndedReturnReason = '';
@@ -98,14 +96,10 @@ export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
     });
 };
 
-export const populateLogisticsData = ({ order, lineItems }) => {
-  console.log('popu', order);
-  console.log('popu', lineItems);
-  return {
-    type: 'POPULATE_LOGISTICS_DATA',
-    payload: {
-      order,
-      line_items: lineItems,
-    },
-  };
-};
+export const populateLogisticsData = ({ order, lineItems }) => ({
+  type: 'POPULATE_LOGISTICS_DATA',
+  payload: {
+    order,
+    line_items: lineItems,
+  },
+});

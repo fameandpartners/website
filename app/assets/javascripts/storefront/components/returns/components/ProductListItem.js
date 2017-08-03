@@ -151,7 +151,7 @@ class ProductListItem extends Component {
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
       >
-        <div className="col-6_md-9_sm-5_xs-9 Product__listItem">
+        <div className="col-8_md-9_sm-5_xs-9 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
