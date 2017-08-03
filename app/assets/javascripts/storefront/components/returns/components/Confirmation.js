@@ -118,7 +118,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
       <hr className="dotted-line" />
 
       <div>
-        <p>Order #{logisticsData.order_number}</p>
+        <p className="u-no-margin">Order #{logisticsData.order_number}</p>
         {logisticsData.line_items.map((li) => {
           const lineItem = extractLineItemFromOrders(orderData, li.line_item_id);
           return <ProductContainer confirmationPage key={li.line_item_id} product={lineItem} />;

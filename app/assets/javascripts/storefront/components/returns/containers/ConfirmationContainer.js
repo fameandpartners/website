@@ -15,9 +15,9 @@ class ConfirmationContainer extends Component {
     autobind(this);
   }
 
-  componentDidMount() {
-    if (!this.props.logisticsData) {
-      // TODO: go back to page one and refresh
+  componentWillMount() {
+    if (this.props.logisticsData && !this.props.logisticsData.order_id) {
+      window.location = '/view-orders';
     }
   }
 
