@@ -18,26 +18,26 @@ class GuestReturnApp extends Component {
     e.preventDefault();
     const { guestOrderID, guestEmail } = this.state;
     const that = this;
-    // axios({
-    //   method: 'get',
-    //   url: `/order-lookup?id=${guestOrderID}&email=${guestEmail}`,
-    //   headers: {
-    //     Accept: 'application/json',
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.data.status) {
-    //       that.setState({
-    //         lookupError: true,
-    //       });
-    //     } else {
-    //       browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
-    //       location.reload();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    axios({
+      method: 'get',
+      url: `/order-lookup?id=${guestOrderID}&email=${guestEmail}`,
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.data.status) {
+          that.setState({
+            lookupError: true,
+          });
+        } else {
+          browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
+          location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   updateEmail(event) {
     this.setState({
