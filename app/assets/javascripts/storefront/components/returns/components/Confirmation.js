@@ -86,7 +86,7 @@ const Confirmation = ({ orderData, logisticsData }) => {
             <li>
               <p className="list-text">Drop your return anywhere in the U.S. Mail
               location—in your mailbox, at work, or at a Post Office without
-              waiting in line.
+              waiting in line.&nbsp;
                 <a
                   href="https://tools.usps.com/go/POLocatorAction!input.action"
                   target="_blank"

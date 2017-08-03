@@ -48,7 +48,7 @@ class ShippingInfo extends Component {
         )}
         >
           <div className="col-12">
-            <p className="ShippingInfo__copy">
+            <p className="ShippingInfo__copy font-sans-serif">
               {copy}
             </p>
           </div>
