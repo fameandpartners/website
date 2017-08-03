@@ -53,8 +53,11 @@ class ProductContainer extends Component {
   }
 
   handlePopulateLogistics(lineItem) {
-    console.log('order data ->', this.props.orderData);
-    this.props.populateLogisticsData({ order: this.props.orderData.spree_order, lineItems: [lineItem] });
+    this.props.populateLogisticsData(
+      {
+        order: this.props.orderData.spree_order,
+        lineItems: [lineItem],
+      });
   }
 
   generateSecondaryOptionArray(optionsObject) {

@@ -105,7 +105,7 @@ export const populateLogisticsData = ({ order, lineItems }) => {
     type: 'POPULATE_LOGISTICS_DATA',
     payload: {
       order,
-      lineItems,
+      line_items: lineItems,
     },
   };
 };
