@@ -241,7 +241,7 @@ class ProductListItem extends Component {
               <div className="grid-spaceAround">
                 <div className="col-12_md-5_sm-12">
                   <SimpleButton
-                    className="u-float-right u-width-full"
+                    className="u-width-full"
                     buttonCopy="Start Return"
                     link={`/start-return/${orderNumber}`}
                     localLink
