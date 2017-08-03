@@ -35,21 +35,26 @@ function extractLineItemFromOrders(orders, lineItemId) {
 
 const Confirmation = ({ orderData, logisticsData }) => (
   <div className="instructions__container">
-    <p className="orders-link-container"><Link to="/" className="orders-link">
-      Back to Orders</Link></p>
+    <p className="orders-link-container hide-for-print">
+      <Link to="/" className="orders-link">
+        Back to Orders
+      </Link>
+    </p>
     <div className="instructions__body">
-      <p className="headline">
-        We’ve emailed you a return label and shipping instructions.
-          <br />Ship your return by {logisticsData.final_return_by_date}
-      </p>
-      <ul className="label-list hide-for-mobile">
-        <li>
-          <a href="#">Print Label</a>
-        </li>
-        <li>
-          <a href="#">Email Label</a>
-        </li>
-      </ul>
+      <div className="instructions__header">
+        <p className="headline">
+      We’ve emailed you a return label and shipping instructions.
+      <br />Ship your return by {logisticsData.final_return_by_date}
+        </p>
+        <ul className="label-list hide-for-print">
+          <li>
+            <a href="#">Print Label</a>
+          </li>
+          <li>
+            <a href="#">Email Label</a>
+          </li>
+        </ul>
+      </div>
       <hr className="hide-for-mobile" />
       <div>
         {
@@ -98,12 +103,12 @@ const Confirmation = ({ orderData, logisticsData }) => (
         <img
           src={logisticsData.line_items[0].item_return_label.label_image_url}
           alt="Shipping Label"
-          className={logisticsData.internationalCustomer ? 'u-hide' : 'Confirmation__shipping-label hide-for-mobile'}
+          className={logisticsData.internationalCustomer ? 'u-hide' : 'Confirmation__shipping-label'}
         />
-        <p className="list-title"><b>Packing Slip</b></p>
+        <p className="list-title Confirmation__packaging-slip"><b>Packing Slip</b></p>
         <ul className="list">
           <li>
-            <p className="list-text">Print and cut out your packing slip</p>
+            <p className="list-text">Print and cut out your packing slip below</p>
           </li>
           <li>
             <p className="list-text">Include the packing slip inside your return package.</p>
@@ -119,7 +124,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
           return <ProductContainer confirmationPage key={li.line_item_id} product={lineItem} />;
         })}
       </div>
-      <div className="u-margin-bottom-large">
+      <div className="u-margin-bottom-large hide-for-print">
         <SimpleButton
           buttonCopy="Continue Shopping"
           link="/"
