@@ -18,28 +18,31 @@ const propTypes = {
   product: PropTypes.object.isRequired,
   orderIndex: PropTypes.number,
   activeTextBox: PropTypes.number,
-  updatePrimaryReturnReason: PropTypes.func,
-  updateOpenEndedReturnReason: PropTypes.func,
   returnArray: PropTypes.array.isRequired,
   showForm: PropTypes.bool,
   confirmationPage: PropTypes.bool,
   returnEligible: PropTypes.bool.isRequired,
   checkboxStatus: PropTypes.bool,
-  updateReturnArray: PropTypes.func,
   orderNumber: PropTypes.string,
+
+  handlePopulateLogistics: PropTypes.func,
+  updateReturnArray: PropTypes.func,
+  updatePrimaryReturnReason: PropTypes.func,
+  updateOpenEndedReturnReason: PropTypes.func,
 };
 
 const defaultProps = {
   activeTextBox: null,
-  updatePrimaryReturnReason: null,
-  updateOpenEndedReturnReason: null,
-  updateReturnArray: noop,
   showForm: false,
   confirmationPage: false,
   returnEligible: true,
   checkboxStatus: false,
   orderIndex: 0,
   orderNumber: '',
+  handlePopulateLogistics: noop,
+  updatePrimaryReturnReason: null,
+  updateOpenEndedReturnReason: null,
+  updateReturnArray: noop,
 };
 
 class ProductListItem extends Component {
@@ -47,15 +50,18 @@ class ProductListItem extends Component {
     super(props);
     autoBind(this);
   }
+
   updatePrimaryReason(reason) {
     const { updatePrimaryReturnReason, product, returnArray } = this.props;
     updatePrimaryReturnReason(reason, product, returnArray);
   }
+
   updateOpenEndedReason(e) {
     const { updateOpenEndedReturnReason, product, returnArray } = this.props;
     const reason = e.target.value;
     updateOpenEndedReturnReason(reason, product, returnArray);
   }
+
   generateOptions() {
     const product = this.props;
     const primaryKeys = Object.keys(PrimaryReturnReasonsObject);
@@ -65,6 +71,7 @@ class ProductListItem extends Component {
       id: p,
     }));
   }
+
   generateUIState() {
     const { returnEligible, showForm, orderIndex, product } = this.props;
     const { returns_meta: returnsMeta } = product;
@@ -82,6 +89,21 @@ class ProductListItem extends Component {
   handleUpdate() {
     return () => this.props.updateReturnArray(this.props.checkboxStatus);
   }
+
+  handlePrintLabelClick() {
+    const {
+      returns_meta: returnsMeta,
+      id: lineItemId,
+    } = this.props.product;
+
+    this.props.handlePopulateLogistics(
+      {
+        line_item_id: lineItemId,
+        item_return_label: returnsMeta,
+      },
+    );
+  }
+
   componentDidMount() {
     const { product, activeTextBox } = this.props;
     const { id } = product;
@@ -91,6 +113,8 @@ class ProductListItem extends Component {
     // const rect = ReactDOM.findDOMNode(this)
     //   .getBoundingClientRect();
   }
+
+
   render() {
     const {
       product,
@@ -101,19 +125,28 @@ class ProductListItem extends Component {
       orderNumber,
       returnEligible,
     } = this.props;
+
     const {
       id,
       returnWindowEnd,
+      openEndedReturnReason,
+      products_meta: productMeta,
+      returns_meta: returnsMeta,
+      price,
+      primaryReturnReason,
     } = product;
-    const { openEndedReturnReason, products_meta, returns_meta, price, primaryReturnReason } = product;
-    const productMeta = products_meta;
-    console.log('returns_meta', returns_meta);
-    const { name, size, color, image } = productMeta;
-    const heightValue = productMeta.height_value;
+
+    const {
+      name,
+      height_value: heightValue,
+      size,
+      color,
+      image,
+    } = productMeta;
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
-    const { SHOW_FORM, SHOW_RETURN_BUTTON, WINDOW_CLOSED, SHOW_LOGISTICS_DATA } = uiState;
-    console.log('uiState', SHOW_FORM, SHOW_RETURN_BUTTON, WINDOW_CLOSED);
+    const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
+
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
@@ -165,7 +198,21 @@ class ProductListItem extends Component {
         {
           SHOW_LOGISTICS_DATA ?
             <div className="col-4_md-9_xs-9">
-              <ShippingInfo returns_meta={returns_meta} />
+              <div className="grid-right">
+                <ShippingInfo
+                  copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
+                  listLinks={(
+                    <div>
+                      <li
+                        className="u-underline u-cursor-pointer"
+                        onClick={this.handlePrintLabelClick}
+                      >
+                        Print Label
+                      </li>
+                    </div>
+                  )}
+                />
+              </div>
             </div>
             :
             null
@@ -173,25 +220,16 @@ class ProductListItem extends Component {
         {
           WINDOW_CLOSED ?
             <div className="col-4_md-9_xs-9">
-              <div className="grid-center">
-                <div className="returnWindowPassed__container">
-                  <div className="col-12">
-                    <p className="windowClosed-copy">
-                        Your 30-day return window closed on <br />
+              <div className="grid-right">
+                <ShippingInfo
+                  grayBackground
+                  copy={(
+                    <span>
+                      Your 30-day return window closed on <br />
                       {returnWindowEnd} and this item is no longer eligible for a return.
-                    </p>
-                  </div>
-                  <div className="col-12">
-                    <ul className="windowClosed-list">
-                      <li>
-                        <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
-                      </li>
-                      <li>
-                        <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                    </span>
+                  )}
+                />
               </div>
             </div>
             :

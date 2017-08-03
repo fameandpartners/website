@@ -35,6 +35,7 @@ class OrderHistory extends Component {
 
     const notRequestedArray = orderArray.filter(i => !i.returns_meta);
     const returnRequestedArray = orderArray.filter(i => i.returns_meta);
+    console.log('notRequestedArray', notRequestedArray);
 
     return (
       <div>
@@ -67,6 +68,7 @@ class OrderHistory extends Component {
                         <ProductContainer
                           key={id}
                           product={o}
+                          orderData={orderData}
                           orderIndex={i}
                           showForm={false}
                           orderNumber={number}
@@ -94,6 +96,7 @@ class OrderHistory extends Component {
                         <ProductContainer
                           key={id}
                           product={o}
+                          orderData={orderData}
                           orderIndex={i}
                           showForm={false}
                           orderNumber={number}

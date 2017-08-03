@@ -17,17 +17,16 @@ const propTypes = {
   confirmationPage: PropTypes.bool,
   checkboxStatus: PropTypes.bool,
   activeTextBox: PropTypes.number,
+  orderData: PropTypes.object,
   orderIndex: PropTypes.number,
   showForm: PropTypes.bool,
   orderNumber: PropTypes.string,
   returnEligible: PropTypes.bool,
+  // Redux Functions
+  populateLogisticsData: PropTypes.func,
 };
 
 const defaultProps = {
-  addProductToReturnArray: noop,
-  removeProductFromReturnArray: noop,
-  updatePrimaryReturnReason: noop,
-  updateOpenEndedReturnReason: noop,
   returnSubtotal: 0,
   activeTextBox: null,
   confirmationPage: false,
@@ -35,18 +34,29 @@ const defaultProps = {
   showForm: false,
   orderIndex: null,
   returnEligible: true,
+  orderData: null,
   orderNumber: '',
+  addProductToReturnArray: noop,
+  removeProductFromReturnArray: noop,
+  updatePrimaryReturnReason: noop,
+  updateOpenEndedReturnReason: noop,
 };
 
 
 class ProductContainer extends Component {
   constructor() {
     super();
+    autoBind(this);
     this.state = {
       checkboxStatus: false,
     };
-    autoBind(this);
   }
+
+  handlePopulateLogistics(lineItem) {
+    console.log('order data ->', this.props.orderData);
+    this.props.populateLogisticsData({ order: this.props.orderData.spree_order, lineItems: [lineItem] });
+  }
+
   generateSecondaryOptionArray(optionsObject) {
     const product = this.props;
     const secondaryKeys = Object.keys(optionsObject);
@@ -56,6 +66,7 @@ class ProductContainer extends Component {
       id: p,
     }));
   }
+
   updateReturnArray(checkboxStatus) {
     // const { checkboxStatus } = this.state;
     const {
@@ -81,6 +92,7 @@ class ProductContainer extends Component {
       activeTextBox,
       returnArray,
       showForm,
+      orderData,
       orderNumber,
       returnEligible,
     } = this.props;
@@ -91,15 +103,16 @@ class ProductContainer extends Component {
           product={product}
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
-          orderIndex={orderIndex}
-          updateReturnArray={this.updateReturnArray}
-          updatePrimaryReturnReason={updatePrimaryReturnReason}
-          updateOpenEndedReturnReason={updateOpenEndedReturnReason}
           activeTextBox={activeTextBox}
           returnArray={returnArray}
           showForm={showForm}
+          orderIndex={orderIndex}
           orderNumber={orderNumber}
           returnEligible={returnEligible}
+          handlePopulateLogistics={this.handlePopulateLogistics}
+          updateReturnArray={this.updateReturnArray}
+          updatePrimaryReturnReason={updatePrimaryReturnReason}
+          updateOpenEndedReturnReason={updateOpenEndedReturnReason}
         />
       </div>
     );

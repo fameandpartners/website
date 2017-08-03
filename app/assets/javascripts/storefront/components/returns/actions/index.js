@@ -97,4 +97,15 @@ export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
       console.log(error);
     });
 };
-// export const update
+
+export const populateLogisticsData = ({ order, lineItems }) => {
+  console.log('popu', order);
+  console.log('popu', lineItems);
+  return {
+    type: 'POPULATE_LOGISTICS_DATA',
+    payload: {
+      order,
+      lineItems,
+    },
+  };
+};

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autoBind from 'auto-bind';
+import classnames from 'classnames';
 
 class ShippingInfo extends Component {
   constructor(props) {
@@ -30,54 +31,104 @@ class ShippingInfo extends Component {
     // const uiState = this.generateUIState();
     // const { SHOW_FORM, SHOW_RETURN_BUTTON, WINDOW_CLOSED, SHOW_LOGISTICS_DATA } = uiState;
     // console.log('uiState', SHOW_FORM, SHOW_RETURN_BUTTON, WINDOW_CLOSED);
-    const { returns_meta: returnsMeta } = this.props;
-    const { return_item_state: returnItemState } = returnsMeta;
+    const {
+      copy,
+      grayBackground,
+      listLinks,
+    } = this.props;
+
     return (
       <div>
-        { returnsMeta ?
-          <div className="grid-center">
-            { returnItemState === 'requested' ?
-              <div>
-                <div className="col-12">
-                  <p className="windowClosed-copy">
-                    Return Started <br /> MM/DD/YYYY
-                  </p>
-                </div>
-                <div className="col-12">
-                  <ul className="windowClosed-list">
-                    <li>
-                      <a href="https://www.fameandpartners.com/faqs#collapse-returns-policy" rel="noopener noreferrer" target="_blank">View Return Policy</a>
-                    </li>
-                    <li>
-                      <a href="https://www.fameandpartners.com/contact" rel="noopener noreferrer" target="_blank">Contact Customer Service</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              :
-              null
-            }
+        <div
+          className={classnames(
+          'ShippingInfo',
+            {
+              'ShippingInfo--gray': grayBackground,
+            },
+        )}
+        >
+          <div className="col-12">
+            <p className="ShippingInfo__copy">
+              {copy}
+            </p>
           </div>
-          :
-          null
-
-        }
+          <div className="col-12">
+            <ul className="ShippingInfo__list">
+              { listLinks ? listLinks :
+                (
+                  <div>
+                    <li>
+                      <a
+                        className="u-underline"
+                        href="https://www.fameandpartners.com/faqs#collapse-returns-policy"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        View Return Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="u-underline"
+                        href="https://www.fameandpartners.com/contact"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        Contact Customer Service
+                      </a>
+                    </li>
+                  </div>
+                )
+              }
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 ShippingInfo.propTypes = {
-  returns_meta: PropTypes.shape({
-    item_return_id: PropTypes.number,
-    label_image_url: PropTypes.string,
-    label_pdf_url: PropTypes.string,
-    label_url: PropTypes.string,
-    return_item_state: PropTypes.string, // "requested"
-  }),
+  copy: PropTypes.node,
+  listLinks: PropTypes.node,
+  grayBackground: PropTypes.bool,
 };
 ShippingInfo.defaultProps = {
-  returns_meta: null,
+  copy: null,
+  grayBackground: false,
 };
 
 export default ShippingInfo;
+
+// <div className="ShippingInfo">
+//   <div className="col-12">
+//     <p className="ShippingInfo__copy">
+//         Your 30-day return window closed on <br />
+//       {returnWindowEnd} and this item is no longer eligible for a return.
+//     </p>
+//   </div>
+// <div className="col-12">
+//   <ul className="ShippingInfo__list">
+//     <li>
+//       <a
+//         className="u-underline"
+//         href="https://www.fameandpartners.com/faqs#collapse-returns-policy"
+//         rel="noopener noreferrer"
+//         target="_blank"
+//       >
+//         View Return Policy
+//       </a>
+//     </li>
+//     <li>
+//       <a
+//         className="u-underline"
+//         href="https://www.fameandpartners.com/contact"
+//         rel="noopener noreferrer"
+//         target="_blank"
+//       >
+//           Contact Customer Service
+//       </a>
+//     </li>
+//   </ul>
+// </div>
+// </div>

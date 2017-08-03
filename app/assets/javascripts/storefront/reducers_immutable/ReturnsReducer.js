@@ -22,7 +22,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  console.log('state', state);
   switch (action.type) {
     case 'ADD_PRODUCT_TO_RETURN_ARRAY':
       return assign({}, state, {
