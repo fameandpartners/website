@@ -52,11 +52,23 @@ class ProductContainer extends Component {
     };
   }
 
-  handlePopulateLogistics(lineItem) {
+  findReturnRequestedItems() {
+    return this.props.orderData.items.filter((li) => {
+      if (li.line_item.returns_meta && li.line_item.returns_meta.return_item_state === 'requested') {
+        return true;
+      }
+      return false;
+    }).map(li => ({
+      line_item_id: li.line_item.id,
+      item_return_label: li.line_item.returns_meta,
+    }));
+  }
+
+  handlePopulateLogistics() {
     this.props.populateLogisticsData(
       {
         order: this.props.orderData.spree_order,
-        lineItems: [lineItem],
+        lineItems: this.findReturnRequestedItems(),
       });
   }
 
