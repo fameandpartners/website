@@ -12,7 +12,39 @@
 
     <%= csrf_meta_tags %>
 
+    <style>
+       @media print {
+         .main,
+         #sideMenu,
+         .instructions__header,
+         .product-image,
+         .hide-for-print {
+           display: none !important;
+         }
 
+         .Confirmation__shipping-label {
+           max-width: 720px;
+           padding: 20px;
+           margin: 20px 0;
+           border: 2px dashed black;
+         }
+
+         .dotted-line {
+           border-style: dashed;
+         }
+
+         .Product__listItem {
+            border: 2px solid;
+            padding: 10px;
+            margin-bottom: 10px;
+         }
+
+         .Confirmation__packaging-slip {
+           page-break-before: always;
+         }
+       }
+
+    </style>
   </head>
   <body>
 
