@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import autobind from 'auto-bind';
 import axios from 'axios';
-import Button from '../returns/components/Button';
+import SimpleButton from '../returns/components/SimpleButton';
 
 class GuestReturnApp extends Component {
   constructor(props) {
@@ -74,16 +74,16 @@ class GuestReturnApp extends Component {
               onChange={this.updateEmail}
               value={guestEmail}
             />
-            <Button primary noMargin className="return-button">Return My Order</Button>
+            <input type="submit" value="Return My Order" />
           </form>
           <div className="grid-noGutter-spaceBetween">
             <div className="col-6_sm-12">
-              <p className="copy">Have an account?&nbsp;
+              <p className="guest-copy">Have an account?&nbsp;
                 <a href="/login">Log In</a>
               </p>
             </div>
             <div className="col-6_sm-12-right">
-              <p className="copy">Need help?&nbsp;
+              <p className="guest-copy contact-us">Need help?&nbsp;
                 <a href="/contact">Contact Us</a>
               </p>
             </div>

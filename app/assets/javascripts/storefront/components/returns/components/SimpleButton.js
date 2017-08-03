@@ -38,7 +38,7 @@ const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
       </div>
     </div>
     :
-    <div className="simpleButton__container u-padding-medium u-width-full">
+    <div className="simpleButton__container u-width-full">
       <span className="copy u-no-padding">{buttonCopy}</span>
     </div>
 );

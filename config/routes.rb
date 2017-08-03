@@ -402,10 +402,6 @@ FameAndPartners::Application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    get 'user_orders' => 'users/orders#index', as: 'user_orders'
-    get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
-
-    resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 
@@ -618,9 +614,10 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Returns
-  get '/view-orders'   => 'returns#main'
-  get '/guest-returns' => 'returns#guest'
-  get '/order-lookup/' => 'returns#lookup'
+  get '/view-orders'    => 'returns#main'
+  get '/user_orders'    => 'returns#main', as: 'user_orders'
+  get '/guest-returns'  => 'returns#guest'
+  get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
