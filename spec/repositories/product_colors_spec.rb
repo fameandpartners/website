@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Repositories::ProductColors do
+xdescribe Repositories::ProductColors do
   let!(:color_option_type) { create(:option_type, :color) }
 
   describe '.get_group_by_name' do
