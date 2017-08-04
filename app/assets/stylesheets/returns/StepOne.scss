@@ -30,8 +30,10 @@
   margin-bottom: 0;
   font-weight: 500;
   margin-top: 20px;
+  line-height: 42px;
   @include tablet {
     margin-top: 15px;
+    margin-bottom: 14px;
   };
   @include desktop {
     margin-top: 67px;
@@ -44,7 +46,7 @@
       margin: 0 25% 75px;
   };
   @include desktop {
-      margin: 0 25% 115px;
+      margin: 0 25% 108px;
   };
 }
 
