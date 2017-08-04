@@ -1,3 +1,4 @@
+/* global window */
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import autobind from 'auto-bind';
@@ -9,8 +10,6 @@ class GuestReturnApp extends Component {
     super(props);
     autobind(this);
     this.state = {
-      guestEmail: 'notreal@gmail.com',
-      guestOrderID: 'R867775721',
       lookupError: false,
     };
   }
@@ -20,7 +19,7 @@ class GuestReturnApp extends Component {
     const that = this;
     axios({
       method: 'get',
-      url: `/order-lookup?id=${guestOrderID}&email=${guestEmail}`,
+      url: `api/v1/guest/order?order_number=${guestOrderID}&email=${guestEmail}`,
       headers: {
         Accept: 'application/json',
       },
@@ -32,11 +31,13 @@ class GuestReturnApp extends Component {
           });
         } else {
           browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
-          location.reload();
+          window.location.reload();
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        that.setState({
+          lookupError: true,
+        });
       });
   }
   updateEmail(event) {

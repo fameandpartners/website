@@ -28,7 +28,7 @@ const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
           </Link>
         :
           <a href={link}>
-            <span className="copy">External Link</span>
+            <span className="copy">{buttonCopy}</span>
           </a>}
       </div>
     </div>

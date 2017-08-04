@@ -5,6 +5,7 @@ import { assign } from 'lodash';
 const initialState = {
   returnArray: [],
   returnSubtotal: 0,
+  requiresViewOrdersRefresh: false,
   logisticsData: {
     // order_id: Number,
     // order_number: String,
@@ -41,6 +42,7 @@ export default function (state = initialState, action) {
       // TODO: 2. Do not use string for route, reference a constant file.
       window.location.hash = '/return-confirmation';
       return assign({}, state, {
+        requiresViewOrdersRefresh: action.payload.requiresViewOrdersRefresh,
         logisticsData: {
           order_id: action.payload.order.id,
           order_number: action.payload.order.number,

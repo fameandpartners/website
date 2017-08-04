@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import autoBind from 'auto-bind';
-import moment from 'moment';
-import ReactDOM from 'react-dom';
 
 // Constants
 import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject';
 import noop from '../../../libs/noop';
+
+// Utilities
+import { displayHeight } from '../../../utilities/convertHeight';
 
 // UI Components
 import Checkbox from './Checkbox';
@@ -120,7 +120,6 @@ class ProductListItem extends Component {
       product,
       showForm,
       confirmationPage,
-      orderIndex,
       checkboxStatus,
       orderNumber,
       returnEligible,
@@ -139,6 +138,7 @@ class ProductListItem extends Component {
     const {
       name,
       height_value: heightValue,
+      height_unit: heightUnit,
       size,
       color,
       image,
@@ -190,15 +190,15 @@ class ProductListItem extends Component {
                 Height:
               </span>
               <span className="meta--value">
-                {Math.floor(heightValue / 12)}ft {heightValue % 12}in
+                {displayHeight(heightValue, heightUnit)}
               </span>
             </div>
           </div>
         </div>
         {
           SHOW_LOGISTICS_DATA ?
-            <div className="col-4_md-9_xs-11">
-              <div className="grid-right">
+            <div className="col-4_md-9_xs-9">
+              <div className="grid-right-spaceAround">
                 <ShippingInfo
                   copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
                   listLinks={(
@@ -219,8 +219,8 @@ class ProductListItem extends Component {
         }
         {
           WINDOW_CLOSED ?
-            <div className="col-4_md-9_xs-11">
-              <div className="grid-right">
+            <div className="col-4_md-9_xs-9">
+              <div className="grid-right-spaceAround">
                 <ShippingInfo
                   grayBackground
                   copy={(
