@@ -1,171 +1,169 @@
-@import './mixins';
+@import url('./mixins');
 body {
-  margin: 0;
-  padding: 0;
-  font-family: $font-family-secondary;
-  background: #F5F5F5
+    margin: 0;
+    padding: 0;
+    font-family: $font-family-secondary;
+    background: #F5F5F5;
 }
 #returnsApp {
-  @include desktop {
-    padding-top: 110px;
-  }
+    @include desktop {
+        padding-top: 110px;
+    }
 }
 .u-hide {
-	display: none !important;
+    display: none !important;
 }
 .u-show {
-	display: block !important;
+    display: block !important;
 }
 .u-center-text {
-	text-align: center !important;
+    text-align: center !important;
 }
 .u-no-padding {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 .u-padding-small {
-	padding: 5px !important;
+    padding: 5px !important;
 }
 .u-padding-medium {
-	padding: 15px !important;
+    padding: 15px !important;
 }
 .u-padding-large {
-	padding: 25px !important;
+    padding: 25px !important;
 }
 .u-no-padding-top {
-	padding-top: 0 !important;
+    padding-top: 0 !important;
 }
 .u-no-padding-bottom {
-	padding-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 .u-no-padding-left {
-	padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 .u-no-padding-right {
-	padding-right: 0 !important;
+    padding-right: 0 !important;
 }
 .u-no-margin {
-	margin: 0 !important;
+    margin: 0 !important;
 }
 .u-margin-auto {
-	margin: 0 auto !important;
+    margin: 0 auto !important;
 }
 .u-margin-bottom-none {
-  margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 .u-margin-bottom-small {
-  margin-bottom: 15px !important;
+    margin-bottom: 15px !important;
 }
 .u-margin-bottom-medium {
-  margin-bottom: 20px !important;
+    margin-bottom: 20px !important;
 }
 .u-margin-bottom-large {
-  margin-bottom: 30px !important;
+    margin-bottom: 30px !important;
 }
 .u-margin-top-none {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 .u-margin-top-small {
-  margin-top: 15px !important;
+    margin-top: 15px !important;
 }
 .u-margin-top-medium {
-  margin-top: 20px !important;
+    margin-top: 20px !important;
 }
 .u-margin-top-large {
-  margin-top: 30px !important;
+    margin-top: 30px !important;
 }
-
 .u-line-height-small {
-  line-height: 15px !important;
+    line-height: 15px !important;
 }
 .u-line-height-medium {
-  line-height: 25px !important;
+    line-height: 25px !important;
 }
 .u-line-height-large {
-  margin-top: 35px !important;
+    margin-top: 35px !important;
 }
 .u-no-opacity {
-	opacity: 0 !important;
+    opacity: 0 !important;
 }
 .u-white-text {
-	color: white !important;
+    color: white !important;
 }
 .u-background-white {
-  background-color: white !important;
+    background-color: white !important;
 }
 .u-heavyFont {
-  font-weight: 500 !important;
+    font-weight: 500 !important;
 }
 .u-underline, .u-underline:hover {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 .u-cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 .u-width-full {
-  width: 100%;
+    width: 100%;
 }
 .u-float-right {
-  float: right;
+    float: right;
 }
 .u-full-length-border-top {
-  padding-top: 15px
+    padding-top: 15px;
 }
-
 .u-full-length-border-top:before {
-  content: '';
-  height: 1px;
-  width: 100%;
-  position: absolute;
-  right: 0;
-  background: $c-black;
-  margin-top: -15px;
+    content: '';
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    background: $c-black;
+    margin-top: -15px;
 }
 .u-position-relative {
-  position: relative;
+    position: relative;
 }
 button a {
-	text-decoration: none;
+    text-decoration: none;
 }
 .button-link {
-	padding: 1.3em 3em;
-	display: block;
+    padding: 1.3em 3em;
+    display: block;
 }
 .button-link:hover {
-	color: inherit;
+    color: inherit;
 }
 .button-link--black-text {
-	color: black;
+    color: black;
 }
 textarea:focus {
     outline: none;
 }
-@include mobile  {
-	.hide-for-mobile {
-		display: none !important;
-	}
-	.show-for-mobile-only {
-		display: inline-block !important;
-	}
+@include mobile {
+    .hide-for-mobile {
+        display: none !important;
+    }
+    .show-for-mobile-only {
+        display: inline-block !important;
+    }
 }
 @include tablet {
-	.show-for-mobile-only {
-		display: none !important;
-	}
+    .show-for-mobile-only {
+        display: none !important;
+    }
 }
 @media print {
-	.show-for-print {
-		display: block !important;
-	}
-	.hide-for-print {
-		display: none !important;
-	}
+    .show-for-print {
+        display: block !important;
+    }
+    .hide-for-print {
+        display: none !important;
+    }
 }
 .grid-right-desktop {
-	@include desktop {
-		-ms-flex-pack: end;
-		justify-content: flex-end;
-		-ms-flex-item-align: end;
-		align-self: flex-end;
-		margin-left: auto;
-	}
+    @include desktop {
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+        margin-left: auto;
+    }
 }
