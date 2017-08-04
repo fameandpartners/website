@@ -86,7 +86,8 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
         dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
       })
       .catch((error) => {
-        console.log(error);
+        console.log('ERROR getting order data');
+        window.location = '/guest-returns';
       });
   }
 };

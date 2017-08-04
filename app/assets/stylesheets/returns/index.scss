@@ -107,6 +107,22 @@ body {
 .u-float-right {
   float: right;
 }
+.u-full-length-border-top {
+  padding-top: 15px
+}
+
+.u-full-length-border-top:before {
+  content: '';
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  background: $c-black;
+  margin-top: -15px;
+}
+.u-position-relative {
+  position: relative;
+}
 button a {
 	text-decoration: none;
 }
