@@ -34,7 +34,7 @@ const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
     </div>
     :
     <div className="simpleButton__container u-width-full">
-      <span className="copy u-no-padding">{buttonCopy}</span>
+      <span className="copy">{buttonCopy}</span>
     </div>
 );
 

@@ -21,8 +21,17 @@ class ConfirmationContainer extends Component {
     }
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
     const { orderData, logisticsData } = this.props;
+    if (logisticsData) {
+      $('html, body').animate({
+        scrollTop: 0,
+      }, 600);
+    }
     return (
       <Confirmation
         orderData={orderData}

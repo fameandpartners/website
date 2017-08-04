@@ -55,6 +55,10 @@ export default function (state = initialState, action) {
       return assign({}, state, {
         returnArray: action.payload,
       });
+    case 'SET_GUEST_EMAIL':
+      return assign({}, state, {
+        guestEmail: action.payload,
+      });
     case 'UPDATE_OPEN_ENDED_RETURN_REASON':
       return assign({}, state, {
         returnArray: action.payload.returnArray,
