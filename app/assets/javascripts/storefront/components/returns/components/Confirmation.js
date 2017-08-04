@@ -82,7 +82,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
         </ul>
         <ul className={logisticsData.internationalCustomer ? 'u-hide' : 'list'}>
           <li>
-            <p className="list-text">Print/Cutout the SmartLabel&reg; below. </p>
+            <p className="list-text">Print/Cutout the SmartLabel&reg; below.</p>
           </li>
           <li>
             <p className="list-text">Package the item(s) and Return Form,
