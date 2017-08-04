@@ -7,4 +7,6 @@ const returnRoutes = {
   CONFIRMATION: '/return-confirmation',
 };
 
-export default assign({}, { RETURN_ROUTES: returnRoutes });
+const constants = assign({}, { RETURN_ROUTES: returnRoutes });
+
+export default constants;

@@ -82,6 +82,8 @@ module Api
           error_response(@error_message_code["RETURN_EXISTS"])
           return
         end
+
+        process_returns(params)
       end
 
 
