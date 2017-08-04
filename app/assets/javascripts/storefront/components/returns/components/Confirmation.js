@@ -77,18 +77,17 @@ const Confirmation = ({ orderData, logisticsData }) => (
             <p className="list-text">Package your dress</p>
           </li>
           <li>
-            <p className="list-text">Follow your postal service’s labeling instructions.
-              </p>
+            <p className="list-text">Follow your postal service’s labeling instructions.</p>
           </li>
         </ul>
         <ul className={logisticsData.internationalCustomer ? 'u-hide' : 'list'}>
           <li>
-            <p className="list-text">Print/Cutout the SmartLabel&reg; below. </p>
+            <p className="list-text">Print/Cutout the SmartLabel&reg; below.</p>
           </li>
           <li>
             <p className="list-text">Package the item(s) and Return Form,
               seal securely with tape. Affix the SmartLabel&reg; to the package.
-              </p>
+            </p>
           </li>
           <li>
             <p className="list-text">Drop your return anywhere in the U.S. Mail
@@ -101,7 +100,8 @@ const Confirmation = ({ orderData, logisticsData }) => (
                   className="link u-underline"
                 >
                   Locate Post Office.
-                </a></p>
+                </a>
+            </p>
           </li>
         </ul>
         <img

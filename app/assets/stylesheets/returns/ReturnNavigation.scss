@@ -5,7 +5,7 @@
     background: white;
     padding-left: 0;
     margin-bottom: 50px;
-    @include mediumUp {
+    @include tablet {
         margin-bottom: 0;
     }
     @include desktop {

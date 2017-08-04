@@ -24,7 +24,7 @@
 .instructions__body {
     width: 85%;
     margin: 7.5% auto;
-    @include mediumUp {
+    @include tablet {
         width: 75%;
         margin: 30px auto;
     }

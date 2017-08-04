@@ -76,7 +76,7 @@
   padding: 14px;
   width: 100%;
   min-height: 150px;
-  @include mediumUp {
+  @include tablet {
     min-height: 110px;
   }
 }

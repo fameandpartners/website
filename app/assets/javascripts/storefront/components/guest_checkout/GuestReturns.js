@@ -20,9 +20,6 @@ class GuestReturnApp extends Component {
     axios({
       method: 'get',
       url: `api/v1/guest/order?order_number=${guestOrderID}&email=${guestEmail}`,
-      headers: {
-        Accept: 'application/json',
-      },
     })
       .then((response) => {
         if (response.data.status) {
