@@ -235,17 +235,15 @@ class ProductListItem extends Component {
         }
         {
           SHOW_RETURN_BUTTON ?
-            <div className="col-4_md-9_xs-11 returnButton__container">
-              <div className="grid-spaceAround">
-                <div className="col-12_md-5_sm-12">
-                  <SimpleButton
-                    className="u-width-full"
-                    buttonCopy="Start Return"
-                    link={`/start-return/${orderNumber}`}
-                    localLink
-                    withLink
-                  />
-                </div>
+            <div className="col-4_md-9_xs-11 returnButton__container grid-middle-spaceAround">
+              <div className="col-12_md-5_sm-12">
+                <SimpleButton
+                  className="u-width-full"
+                  buttonCopy="Start Return"
+                  link={`/start-return/${orderNumber}`}
+                  localLink
+                  withLink
+                />
               </div>
             </div>
             :
