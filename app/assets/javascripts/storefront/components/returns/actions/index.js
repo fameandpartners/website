@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { assign } from 'lodash';
 
 export const addProductToReturnArray = (product, currentArray) => {
   const newProduct = product;
