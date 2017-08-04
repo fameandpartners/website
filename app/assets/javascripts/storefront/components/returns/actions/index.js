@@ -18,7 +18,7 @@ export const addProductToReturnArray = (product, currentArray) => {
 };
 
 export const removeProductFromReturnArray = (product, currentArray, refundAmount) => {
-  let newReturnArray = [];
+  const newReturnArray = [];
   let newRefundAmount = refundAmount;
   currentArray.filter((p) => {
     if (p.id === product.id) {
@@ -28,7 +28,6 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
     }
     return true;
   });
-  newReturnArray = [...new Set(newReturnArray)];
   return {
     type: 'REMOVE_PRODUCT_FROM_RETURN_ARRAY',
     payload: {
