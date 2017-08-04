@@ -1,10 +1,14 @@
-/* global window */
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+// window polyfill
+import win from '../../../polyfills/windowPolyfill';
+
+// Components
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
-import ReturnConstants from '../../../constants/ReturnConstants';
+import { RETURN_ROUTES } from '../../../constants/ReturnConstants';
 
 const propTypes = {
   actions: PropTypes.object,
@@ -26,7 +30,7 @@ class OrderContainer extends Component {
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
     if (this.props.requiresViewOrdersRefresh) {
-      window.location = ReturnConstants.ORDERS;
+      win.location = RETURN_ROUTES.ORDERS;
     }
 
     // Get the order product data

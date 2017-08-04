@@ -154,13 +154,13 @@ Spree::LineItem.class_eval do
     variant.try(:product).try(:name) || 'Missing Variant'
   end
 
-  def has_been_customized?
-    false
+  def can_dress_be_returned?
+    personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }
   end
 
   def as_json(options = { })
     json = super(options)
-    json['line_item']['customized'] = has_been_customized?
+    json['line_item']['returnable'] = can_dress_be_returned?
     json['line_item']['products_meta'] = {
       "name": self.style_name,
       "price": self.price,
