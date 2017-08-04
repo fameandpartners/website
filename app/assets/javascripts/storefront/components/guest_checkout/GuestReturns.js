@@ -47,6 +47,9 @@ class GuestReturnApp extends Component {
       guestOrderID: event.target.value,
     });
   }
+  componentDidMount() {
+    console.log('g');
+  }
   render() {
     const { guestOrderID, guestEmail, lookupError } = this.state;
     return (
