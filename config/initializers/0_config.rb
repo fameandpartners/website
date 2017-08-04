@@ -71,10 +71,6 @@ configatron.newgistics do |newgistics|
   newgistics.api_key = ENV['NEWGISTICS_API_KEY']
   newgistics.merchant_id = ENV['NEWGISTICS_MERCHANT_ID']
   newgistics.disposition_rule_set = ENV['NEWGISTICS_DISPOSITION_RULE_SET'].to_i
-  newgistics.return_street_0 = '15905 Commerce Way'
-  newgistics.return_city = 'Cerritos'
-  newgistics.return_state = 'CA'
-  newgistics.return_zip = '90703'
 end
 
 configatron.contentful do |contentful|
