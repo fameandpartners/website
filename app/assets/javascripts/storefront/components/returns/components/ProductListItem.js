@@ -110,8 +110,6 @@ class ProductListItem extends Component {
     if (id === activeTextBox) {
       this.textInput.focus();
     }
-    // const rect = ReactDOM.findDOMNode(this)
-    //   .getBoundingClientRect();
   }
 
 

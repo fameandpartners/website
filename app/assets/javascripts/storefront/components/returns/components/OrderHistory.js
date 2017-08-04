@@ -14,8 +14,7 @@ class OrderHistory extends Component {
     super(props);
     const { orderData } = this.props;
     const { items } = orderData;
-    const cleanItems = [];
-    items.map(i => cleanItems.push(i.line_item));
+    const cleanItems = items.map(i => i.line_item);
     this.state = {
       orderData,
       orderArray: cleanItems,
