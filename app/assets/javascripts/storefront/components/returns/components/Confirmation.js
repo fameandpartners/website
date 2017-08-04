@@ -100,7 +100,8 @@ const Confirmation = ({ orderData, logisticsData }) => (
                   className="link u-underline"
                 >
                   Locate Post Office.
-                </a></p>
+                </a>
+            </p>
           </li>
         </ul>
         <img
