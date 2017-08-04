@@ -1,6 +1,8 @@
-/* global window */
-// TODO: Bring this in from global window lib
 import { assign } from 'lodash';
+import { ROUTES } from '../constants/ReturnConstants';
+
+// window polyfill
+import win from '../polyfills/windowPolyfill';
 
 const initialState = {
   returnArray: [],
@@ -38,9 +40,7 @@ export default function (state = initialState, action) {
       });
     case 'POPULATE_LOGISTICS_DATA':
       // NOTE: This is impure, but we should tightly couple a route change in the action
-      // TODO: 1. clicking on a button to view shipping label transforms logisticsData here or in component
-      // TODO: 2. Do not use string for route, reference a constant file.
-      window.location.hash = '/return-confirmation';
+      win.location.hash = ROUTES.CONFIRMATION;
       return assign({}, state, {
         requiresViewOrdersRefresh: action.payload.requiresViewOrdersRefresh,
         logisticsData: {
