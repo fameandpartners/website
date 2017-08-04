@@ -47,6 +47,9 @@ class GuestReturnApp extends Component {
       guestOrderID: event.target.value,
     });
   }
+  componentDidMount() {
+    console.log('g');
+  }
   render() {
     const { guestOrderID, guestEmail, lookupError } = this.state;
     return (
@@ -72,7 +75,7 @@ class GuestReturnApp extends Component {
               onChange={this.updateEmail}
               value={guestEmail}
             />
-            <input type="submit" value="Return My Order" />
+            <input type="submit" value="Return My Order" className="GuestReturn--submitButton" />
           </form>
           <div className="grid-noGutter-spaceBetween">
             <div className="col-6_sm-12">

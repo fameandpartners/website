@@ -49,12 +49,7 @@ class ProductContainer extends Component {
   }
 
   findReturnRequestedItems() {
-    return this.props.orderData.items.filter((li) => {
-      if (li.line_item.returns_meta && li.line_item.returns_meta.return_item_state === 'requested') {
-        return true;
-      }
-      return false;
-    }).map(li => ({
+    return this.props.orderData.items.filter(li => (li.line_item.returns_meta && li.line_item.returns_meta.return_item_state === 'requested')).map(li => ({
       line_item_id: li.line_item.id,
       item_return_label: li.line_item.returns_meta,
     }));

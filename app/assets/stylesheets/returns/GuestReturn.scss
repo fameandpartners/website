@@ -32,7 +32,7 @@
   font-size: 14px;
 }
 
-.guestForm__container input[type="submit"] {
+.guestForm__container .GuestReturn--submitButton {
   padding: 17px 0px;
   background: black;
   color: white;
@@ -68,8 +68,8 @@
 }
 
 .error-box p {
-    color: #F70913;
-    border: 1px solid #F70913;
+    color: $c-red;
+    border: 1px solid $c-red;
     text-align: center;
     padding: 13px 25px;
     font-weight: 500;
