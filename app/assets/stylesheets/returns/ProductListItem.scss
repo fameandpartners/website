@@ -68,6 +68,7 @@
     width: 15px;
     height: 15px;
     background: black;
+    @include transform(rotate(0deg));
     background-repeat: no-repeat;
     background-image: url('checkbox.png');
     background-size: contain;
