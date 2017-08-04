@@ -77,8 +77,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
             <p className="list-text">Package your dress</p>
           </li>
           <li>
-            <p className="list-text">Follow your postal service’s labeling instructions.
-              </p>
+            <p className="list-text">Follow your postal service’s labeling instructions.</p>
           </li>
         </ul>
         <ul className={logisticsData.internationalCustomer ? 'u-hide' : 'list'}>
