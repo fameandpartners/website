@@ -3,3 +3,4 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.q
 const axiosDefaults = require('axios/lib/defaults');
 
 axiosDefaults.headers.common['X-CSRF-Token'] = csrfToken;
+axiosDefaults.headers.common['Content-Type'] = 'application/json';
