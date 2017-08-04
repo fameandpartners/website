@@ -154,7 +154,6 @@ class Select extends Component {
     const activeOption = _.find(options, { active: true, }) || {};
     const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
     const singleOption = options.length === 1;
-
     return (
       <div
         className={`Select--wrapper ${className || ''} ${error ? 'Select--wrapper__error' : ''} ${label ? 'translate-label' : ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}

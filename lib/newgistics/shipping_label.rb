@@ -1,0 +1,99 @@
+module Newgistics
+  class ShippingLabel
+    attr_accessor :label_url,
+                  :carrier,
+                  :label_image_url,
+                  :label_pdf_url
+
+    def initialize(first_name, last_name, address, email, return_id)
+      @first_name = first_name
+      @last_name = last_name
+      @email = email
+      @address_1 = address.address1
+      @address_2 = address.address2
+      @city = address.city
+      @state = address.state.abbr
+      @country = address.country.iso
+      @zip = address.zipcode
+      @return_id = return_id
+
+      fetch_shipping_label_from_api()
+    end
+
+    private
+
+    def fetch_shipping_label_from_api
+      uri = URI('https://apiint.newgistics.com/WebAPI/Shipment/')
+      request = Net::HTTP::Post.new(
+        uri,
+        {
+          'Accept' => 'application/json',
+          'Content-Type' => 'application/json',
+          'x-api-key' => configatron.newgistics.api_key
+        }
+      )
+      request.body = make_request_map.to_json
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = (uri.scheme == "https")
+
+      response = http.request(request)
+
+      convert_json_to_instance_variables(JSON.parse(response.body))
+    end
+
+    def make_address_map
+      {
+        "Address" => {
+          "Address1" => @address_1,
+          "Address2" => @address_2,
+          "Address3" => "",
+          "City" => @city,
+          "CountryCode" => @country,
+          "State" => @state,
+          "Zip" => @zip
+        }
+      }
+    end
+
+    def make_request_map
+      {
+        "clientServiceFlag" => "Standard",
+        "consumer" => {
+          "FirstName" => @first_name,
+          "LastName" => @last_name,
+          "PrimaryEmailAddress" => @email
+        }.merge(make_address_map),
+        "deliveryMethod" => "SelfService",
+        "dispositionRuleSetId" => configatron.newgistics.disposition_rule_set,
+        "labelCount" => 1,
+        "merchantID" => configatron.newgistics.merchant_id
+      }.merge(make_return_id_map)
+    end
+
+    def make_return_id_map
+      if using_newgistics_staging_env?
+        {"returnId" => "123456789A"}
+      else
+        {"returnId" => @return_id}
+      end
+    end
+
+    def convert_json_to_instance_variables(json)
+      @label_url = json['labelURL']
+      @carrier = json['transporter']['Carrier']
+
+      json['links'].each do |link|
+        if link['rel'] == 'label/image'
+          @label_image_url = link['href']
+        else
+          @label_pdf_url = link['href']
+        end
+      end
+    end
+
+    def using_newgistics_staging_env?
+      Rails.env != 'production'
+    end
+  end
+end
