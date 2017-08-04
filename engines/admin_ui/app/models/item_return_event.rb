@@ -101,7 +101,18 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :refund_method, presence: true
     validates :refund_amount,
               presence: true,
-              numericality: { less_than_or_equal_to: ->(event) { event.item_return.line_item.price } }
+              numericality: { less_than_or_equal_to:
+                          lambda do |event|
+                            binding.pry
+                            tax_adj = event.item_return.line_item.order.adjustments.find {|adj| adj.originator_type == "Spree::TaxRate"}
+                            tax_total = 0
+                            if tax_adj
+                              tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
+                              tax_total = ((event.item_return.line_item.price*100).to_i * tax_rate).round / 100.0
+                            end
+                            event.item_return.line_item.price + tax_total
+                          end
+                }
   end
 
   event_type :record_refund do
