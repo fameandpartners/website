@@ -147,7 +147,7 @@ textarea:focus {
 		display: inline-block !important;
 	}
 }
-@include mediumUp {
+@include tablet {
 	.show-for-mobile-only {
 		display: none !important;
 	}
