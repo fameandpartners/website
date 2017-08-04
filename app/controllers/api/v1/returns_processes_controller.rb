@@ -38,10 +38,6 @@ module Api
 
       # POST
       def create
-        # TODO: REMOVE
-        process_returns(params)
-        return
-
         @error_message_code = {
           "RETRY" => "Please try again.",
           "RETURN_EXISTS" => "These items already have a return."
@@ -87,7 +83,7 @@ module Api
           return
         end
 
-        # process_returns(params)
+        process_returns(params)
       end
 
 
@@ -136,23 +132,6 @@ module Api
       end
 
       def process_returns(obj)
-        # TODO: REMOVE
-        # return_request = [{
-        #       :line_item_id => 316051,
-        # "item_return_label" => {
-        #             "carrier" => "USPS",
-        #          "created_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00",
-        #                  "id" => 2,
-        #      "item_return_id" => 316051,
-        #     "label_image_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/image",
-        #       "label_pdf_url" => "https://apiint.newgistics.com/WebAPI/Shipment/D5BFE2D718928D5C180E0FCB74F0FA15DE7AC47B757907E5/label/pdf",
-        #           "label_url" => "http://www.preview.shipmentmanager.com/V3/PrintWebLabel.aspx?weblabelid=D2C3713B1806A9632332DE503F4DFE8D20FB14076E262EDE",
-        #          "updated_at" => "Wed, 02 Aug 2017 11:37:42 PDT -07:00"
-        #      }
-        # }]
-        # success_response(return_request)
-        #
-        #
         return_request = {
           :order_return_request => {
             :order_id => obj['order_id'],

@@ -8,7 +8,7 @@ import win from '../../../polyfills/windowPolyfill';
 // Components
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
-import { RETURN_ROUTES } from '../../../constants/ReturnConstants';
+import ReturnConstants from '../../../constants/ReturnConstants';
 
 const propTypes = {
   actions: PropTypes.object,
@@ -30,7 +30,7 @@ class OrderContainer extends Component {
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
     if (this.props.requiresViewOrdersRefresh) {
-      win.location = RETURN_ROUTES.ORDERS;
+      win.location = ReturnConstants.RETURN_ROUTES.ORDERS;
     }
 
     // Get the order product data
