@@ -11,6 +11,5 @@ export default function setReturnWindow(orders) {
     });
     newOrderArray.push(newOrderObject);
   });
-  console.log(newOrderArray);
   return newOrderArray;
 }
