@@ -149,7 +149,7 @@ class ProductListItem extends Component {
 
     return (
       <div
-        className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
+        className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
         <div className="col-8_md-9_sm-5_xs-12 Product__listItem">
           <Checkbox
