@@ -42,9 +42,6 @@ class OrderContainer extends Component {
   }
   render() {
     const { orderData } = this.props;
-    if (!orderData) {
-      return <div />;
-    }
     return (
       <div>
         { orderData ?
