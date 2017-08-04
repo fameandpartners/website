@@ -157,7 +157,12 @@ class ProductListItem extends Component {
             checkboxStatus={checkboxStatus}
             showForm={showForm}
           />
-          <img src={image} alt={name} className="product-image" />
+          <img
+            onClick={this.handleUpdate()}
+            src={image}
+            alt={name}
+            className="product-image u-cursor-pointer"
+          />
           <div className="u-line-height-medium">
             <div className="nameAndPrice--marginBottom">
               <span className="meta--key">
@@ -235,7 +240,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_RETURN_BUTTON ?
-            <div className="col-4_md-9_xs-11 returnButton__container grid-middle-spaceAround">
+            <div className="col-4_md-9_xs-11 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
                   className="u-width-full"

@@ -9,6 +9,7 @@ const propTypes = {
   wrapperClassName: PropTypes.string,
   checkboxStatus: PropTypes.bool,
   showForm: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -26,8 +27,7 @@ class Checkbox extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    const { onChange } = this.props;
-    onChange();
+    this.props.onChange();
   }
   render() {
     const {
@@ -49,8 +49,7 @@ class Checkbox extends Component {
               <input
                 className={checkboxStatus ? 'Checkbox Checkbox--active' : 'Checkbox'}
                 id={id}
-                type="checkbox"
-                onChange={this.handleChange}
+                onClick={this.handleChange}
               />
               <label htmlFor={id} />
             </div>
