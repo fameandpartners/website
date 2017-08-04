@@ -5,4 +5,4 @@ const returnRoutes = {
   ORDERS: '/view-orders',
 };
 
-export default assign({}, returnRoutes);
+export default assign({}, { RETURN_ROUTES: returnRoutes });
