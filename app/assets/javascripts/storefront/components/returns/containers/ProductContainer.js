@@ -83,7 +83,6 @@ class ProductContainer extends Component {
   }
 
   updateReturnArray(checkboxStatus) {
-    // const { checkboxStatus } = this.state;
     const {
       addProductToReturnArray,
       removeProductFromReturnArray,
