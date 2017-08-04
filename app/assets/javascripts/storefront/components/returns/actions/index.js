@@ -97,6 +97,7 @@ export const submitReturnRequest = ({ order, returnsObj }) => (dispatch) => {
       // TODO: dispatch(Stop Loading Event)
       dispatch({ type: 'POPULATE_LOGISTICS_DATA',
         payload: {
+          requiresViewOrdersRefresh: true,
           order,
           line_items: response.data.message,
         } });

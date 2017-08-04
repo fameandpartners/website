@@ -198,7 +198,7 @@ class ProductListItem extends Component {
         {
           SHOW_LOGISTICS_DATA ?
             <div className="col-4_md-9_xs-9">
-              <div className="grid-right">
+              <div className="grid-right-spaceAround">
                 <ShippingInfo
                   copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
                   listLinks={(
@@ -220,7 +220,7 @@ class ProductListItem extends Component {
         {
           WINDOW_CLOSED ?
             <div className="col-4_md-9_xs-9">
-              <div className="grid-right">
+              <div className="grid-right-spaceAround">
                 <ShippingInfo
                   grayBackground
                   copy={(

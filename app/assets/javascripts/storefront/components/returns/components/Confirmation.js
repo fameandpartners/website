@@ -47,7 +47,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
       We’ve emailed you a return label and shipping instructions.
       <br />Ship your return by {logisticsData.final_return_by_date}
         </p>
-        <ul className="label-list hide-for-print">
+        <ul className="label-list hide-for-print hide-for-mobile">
           <li>
             <a
               rel="noreferrer noopener"
@@ -71,7 +71,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
               :
               <div />
           }
-        <p className="list-title"><b>Instructions for mailing your package</b></p>
+        <p className="list-title">Instructions for mailing your package</p>
         <ul className={!logisticsData.internationalCustomer ? 'u-hide' : 'list'}>
           <li>
             <p className="list-text">Package your dress</p>
@@ -109,7 +109,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
           alt="Shipping Label"
           className={logisticsData.internationalCustomer ? 'u-hide' : 'Confirmation__shipping-label'}
         />
-        <p className="list-title Confirmation__packaging-slip"><b>Packing Slip</b></p>
+        <p className="list-title Confirmation__packaging-slip">Packing Slip</p>
         <ul className="list">
           <li>
             <p className="list-text">Print and cut out your packing slip below</p>
@@ -132,7 +132,6 @@ const Confirmation = ({ orderData, logisticsData }) => (
         <SimpleButton
           buttonCopy="Continue Shopping"
           link="/dresses"
-          localLink
           withLink
         />
       </div>

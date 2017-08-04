@@ -1,3 +1,4 @@
+/* global window */
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,16 +8,28 @@ import * as AppActions from '../actions/index';
 const propTypes = {
   actions: PropTypes.object,
   orderData: PropTypes.array,
+  params: PropTypes.object.isRequired,
+  requiresViewOrdersRefresh: PropTypes.bool,
 };
 
 const defaultProps = {
   actions: {},
   orderData: [],
+  requiresViewOrdersRefresh: false,
 };
 
 class OrderContainer extends Component {
   componentWillMount() {
     const { email, orderID } = this.props.params;
+
+    // We need to refresh whenever we visit this route after
+    // our POST changes the order data
+    if (this.props.requiresViewOrdersRefresh) {
+      window.location = '/view-orders';
+    }
+
+
+    // Get the order product data
     if (email && orderID) {
       this.props.actions.getProductData(true, email, orderID);
     } else {
@@ -47,6 +60,7 @@ class OrderContainer extends Component {
 function mapStateToProps(state) {
   return {
     orderData: state.orderData,
+    requiresViewOrdersRefresh: state.returnsData.requiresViewOrdersRefresh,
   };
 }
 function mapDispatchToProps(dispatch) {
