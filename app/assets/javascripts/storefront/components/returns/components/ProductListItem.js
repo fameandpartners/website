@@ -151,7 +151,7 @@ class ProductListItem extends Component {
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-middle-spaceAround u-background-white'}
       >
-        <div className="col-8_md-9_sm-5_xs-9 Product__listItem">
+        <div className="col-8_md-9_sm-5_xs-12 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
@@ -197,7 +197,7 @@ class ProductListItem extends Component {
         </div>
         {
           SHOW_LOGISTICS_DATA ?
-            <div className="col-4_md-9_xs-9">
+            <div className="col-4_md-9_xs-11">
               <div className="grid-right">
                 <ShippingInfo
                   copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
@@ -219,7 +219,7 @@ class ProductListItem extends Component {
         }
         {
           WINDOW_CLOSED ?
-            <div className="col-4_md-9_xs-9">
+            <div className="col-4_md-9_xs-11">
               <div className="grid-right">
                 <ShippingInfo
                   grayBackground
@@ -237,7 +237,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_RETURN_BUTTON ?
-            <div className="col-4_md-9_xs-9 returnButton__container">
+            <div className="col-4_md-9_xs-11 returnButton__container">
               <div className="grid-spaceAround">
                 <div className="col-12_md-5_sm-12">
                   <SimpleButton
@@ -255,7 +255,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_FORM ?
-            <div className="col-4_md-9_xs-9 Form__Container">
+            <div className="col-4_md-9_xs-11 Form__Container">
               <div className={checkboxStatus ? 'u-show' : 'u-hide'}>
                 <form>
                   <p className="u-no-margin-top">Why are you returning this?</p>
@@ -284,7 +284,7 @@ class ProductListItem extends Component {
         }
         {
           Object.keys(uiState).every(state => !uiState[state]) ?
-            <div className="col-4_md-9_xs-9" />
+            <div className="col-4_md-9_xs-11" />
             :
             null
         }

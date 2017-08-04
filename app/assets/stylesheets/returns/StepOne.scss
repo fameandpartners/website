@@ -30,19 +30,22 @@
   margin-bottom: 0;
   font-weight: 500;
   margin-top: 20px;
-  @include mediumUp {
+  @include tablet {
     margin-top: 15px;
-  }
+  };
+  @include desktop {
+    margin-top: 67px;
+  };
 }
 
 .StepOne__Container .instructions.instructions__subtitle {
   font-size: 18px;
+  @include tablet {
+      margin: 0 25% 75px;
+  };
   @include desktop {
-      margin: 0 30% 85px;
-  }
-  @include xLarge {
-      margin: 0 30%;
-  }
+      margin: 0 25% 115px;
+  };
 }
 
 .StepOne__Container .ship-date {
@@ -117,4 +120,10 @@
 
 .StepOne__Container .SimpleButton__wrapper {
   margin-bottom: 150px;
+}
+
+.StepOne__Container .simpleButton__container {
+  @include xLarge {
+    float: right;
+  }
 }
