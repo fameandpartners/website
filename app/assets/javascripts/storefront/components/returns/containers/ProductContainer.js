@@ -15,7 +15,6 @@ const propTypes = {
   updateOpenEndedReturnReason: PropTypes.func,
   returnSubtotal: PropTypes.number,
   confirmationPage: PropTypes.bool,
-  checkboxStatus: PropTypes.bool,
   activeTextBox: PropTypes.number,
   orderData: PropTypes.object,
   orderIndex: PropTypes.number,
@@ -23,7 +22,7 @@ const propTypes = {
   orderNumber: PropTypes.string,
   returnEligible: PropTypes.bool,
   // Redux Functions
-  populateLogisticsData: PropTypes.func,
+  populateLogisticsData: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -47,9 +46,6 @@ class ProductContainer extends Component {
   constructor() {
     super();
     autoBind(this);
-    this.state = {
-      checkboxStatus: false,
-    };
   }
 
   findReturnRequestedItems() {
@@ -83,7 +79,6 @@ class ProductContainer extends Component {
   }
 
   updateReturnArray(checkboxStatus) {
-    // const { checkboxStatus } = this.state;
     const {
       addProductToReturnArray,
       removeProductFromReturnArray,
