@@ -1,0 +1,37 @@
+@import './mixins';
+
+.EstimatedRefundTotal p {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.EstimatedRefundTotal {
+    text-align: center;
+    background: #f5f5f5;
+    padding-top: 50px;
+    @include desktop {
+        text-align: right;
+        padding-top: 115px;
+    }
+}
+
+.EstimatedRefundTotal .total {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.EstimatedRefundTotal .button-link {
+    padding: 1.3em 5em;
+    @include desktop {
+        min-width: 344px;
+    }
+}
+
+.EstimatedRefundTotal hr {
+    border-color: #000;
+    @include desktop {
+      width: 210px;
+      float: right;
+      display: block;
+      margin: 10px auto 0;
+    }
+}

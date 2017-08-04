@@ -1,0 +1,116 @@
+@import './mixins';
+
+.Product__listItem__container {
+  background: white;
+  padding: 30px 60px;
+}
+
+.Product__listItem {
+    margin-top: 0;
+    line-height: 1.8em;
+    @include desktop {
+        margin: inherit;
+    }
+    @include tablet {
+        margin-top: 40px;
+        padding: 25px;
+    }
+}
+
+.Product__listItem .checkbox--container {
+    text-align: right;
+}
+
+.Product__listItem .meta--key {
+    font-weight: 600;
+    padding: 0 7px 0 0;
+    font-size: 16px;
+}
+
+.Product__listItem .nameAndPrice--marginBottom {
+    margin: 0px auto 12px;
+}
+
+.Product__listItem .product-image {
+    width: 100%;
+    @include tablet {
+       float: left;
+       margin-right: 25px;
+       width: 217px;
+       height: auto;
+    }
+    @include desktop {
+        max-width: 180px;
+        float: left;
+        margin-right: 30px;
+    }
+}
+
+.Product__listItem .product--image {
+    @include tablet {
+        float: left;
+        margin-right: 45px;
+    }
+}
+
+.Product__listItem .Checkbox__wrapper label {
+    position: absolute;
+    left: 10px;
+    @include tablet {
+        position: relative;
+        left: 0px;
+    }
+}
+
+.Product__listItem {
+    background-color: #FFFFFF;
+    @include xLarge {
+        margin: 0 auto 80px;
+    }
+}
+
+.Product__listItem hr {
+    display: none;
+    margin: 45px 10px 50px;
+    @include desktop {
+        display: block;
+    }
+}
+
+.Product__listItem .Select--wrapper {
+    margin: 10px 0 20px;
+}
+
+.returnButton__container {
+    @include tablet {
+        padding: 0;
+    }
+}
+
+.returnButton__container button {
+    margin: 0 .5em 1em;
+    padding: 0;
+    font-family: inherit;
+    @include desktop {
+        min-width: 200px;
+    }
+}
+
+.returnButton__container div p:first-child {
+    @include desktop {
+        margin-top: 0;
+    }
+}
+.Form__Container {
+  position: relative;
+  @include desktop {
+    top: 25px;
+  }
+}
+.Form__Container .select--marginTop {
+    margin-top: 20px;
+}
+.Form__Container p {
+    margin-bottom: 12px;
+    font-weight: 500;
+}

@@ -1,11 +1,10 @@
-import { compose, createStore, applyMiddleware, combineReducers, } from 'redux';
+import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducers, { initialStates, } from '../reducers_immutable';
-import { composeWithDevTools, } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducers, { initialStates } from '../reducers_immutable';
 
 export default (props) => {
-  const initialComments = props.comments;
-  const { $$collectionFilterSortState, } = initialStates;
+  const { $$collectionFilterSortState } = initialStates;
 
   const injectedState = {
     $$bodyShapes: props.bodyShapes,
@@ -21,14 +20,15 @@ export default (props) => {
 
   // Merging of initial state with injected state
   const hydratedState = {
-    $$collectionFilterSortStore: $$collectionFilterSortState.mergeWith((initialVal, newVal) => {
-      return (newVal === null || newVal === undefined) ? initialVal : newVal;
-    }, injectedState),
+    $$collectionFilterSortStore: $$collectionFilterSortState.mergeWith(
+      (initialVal, newVal) => ((newVal === null || newVal === undefined)
+        ? initialVal
+        : newVal), injectedState),
   };
 
   const reducer = combineReducers(reducers);
   const composedStore = compose(
-    composeWithDevTools(applyMiddleware(thunkMiddleware))
+    composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
 
   return composedStore(createStore)(reducer, hydratedState);

@@ -1,0 +1,20 @@
+@import './mixins';
+
+.simpleButton__container {
+  background: black;
+  max-width: 300px;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 auto;
+  cursor: pointer;
+  @include desktop {
+    max-width: 390px;
+    margin: initial;
+  }
+}
+
+.simpleButton__container .copy {
+  color: white;
+  padding: 15px;
+  display: block;
+}
