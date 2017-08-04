@@ -160,7 +160,7 @@ class ProductListItem extends Component {
             showForm={showForm}
           />
           <img src={image} alt={name} className="product-image" />
-          <div>
+          <div className="u-line-height-medium">
             <div className="nameAndPrice--marginBottom">
               <span className="meta--key">
                 {name}
