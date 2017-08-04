@@ -50,11 +50,7 @@ class StepOneContainer extends Component {
         reason: r.openEndedReturnReason,
       })),
     };
-    if (guestEmail) {
-      actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
-    } else {
-      actions.submitReturnRequest({ order: spree_order, returnsObj });
-    }
+    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
   }
 
   componentWillMount() {
