@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import ProductContainer from '../containers/ProductContainer';
 
 const propTypes = {
@@ -26,7 +25,6 @@ class OrderHistory extends Component {
     const { orderData, orderArray } = this.state;
     const { spree_order: spreeOrder } = orderData;
     const {
-      projected_delivery_date: projectedDeliveryDate,
       date_iso_mdy: dateIsoMdy,
       number,
     } = spreeOrder;
