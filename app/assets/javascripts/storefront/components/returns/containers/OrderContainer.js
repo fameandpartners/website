@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
+import ReturnConstants from '../../../constants/ReturnConstants';
 
 const propTypes = {
   actions: PropTypes.object,
@@ -25,9 +26,8 @@ class OrderContainer extends Component {
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
     if (this.props.requiresViewOrdersRefresh) {
-      window.location = '/view-orders';
+      window.location = ReturnConstants.ORDERS;
     }
-
 
     // Get the order product data
     if (email && orderID) {
