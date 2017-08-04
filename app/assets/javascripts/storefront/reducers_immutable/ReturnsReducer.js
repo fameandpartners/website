@@ -1,5 +1,5 @@
 import { assign } from 'lodash';
-import { ROUTES } from '../constants/ReturnConstants';
+import { RETURN_ROUTES } from '../constants/ReturnConstants';
 
 // window polyfill
 import win from '../polyfills/windowPolyfill';
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
       });
     case 'POPULATE_LOGISTICS_DATA':
       // NOTE: This is impure, but we should tightly couple a route change in the action
-      win.location.hash = ROUTES.CONFIRMATION;
+      win.location.hash = RETURN_ROUTES.CONFIRMATION;
       return assign({}, state, {
         requiresViewOrdersRefresh: action.payload.requiresViewOrdersRefresh,
         logisticsData: {
