@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { assign } from 'lodash';
 
 export const addProductToReturnArray = (product, currentArray) => {
   const newArray = currentArray;
-  const newProduct = {
-    ...product,
+  const newProduct = assign({}, product, {
     openEndedReturnReason: '',
-  };
+  });
   newArray.push(newProduct);
   let refundAmount = 0;
   refundAmount = newArray.reduce((sum, returnedProduct) =>
