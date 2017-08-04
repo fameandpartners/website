@@ -87,7 +87,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
           <li>
             <p className="list-text">Package the item(s) and Return Form,
               seal securely with tape. Affix the SmartLabel&reg; to the package.
-              </p>
+            </p>
           </li>
           <li>
             <p className="list-text">Drop your return anywhere in the U.S. Mail
