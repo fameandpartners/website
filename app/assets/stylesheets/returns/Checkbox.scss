@@ -2,12 +2,13 @@
 .Checkbox__wrapper {
   text-align: left;
   float: left;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 
 .Checkbox {
   position: absolute; // take it out of document flow
   opacity: 0; // hide it
+  display: none;
 
   // Box hover
   &:hover + label:before {
