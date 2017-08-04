@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import ProductContainer from '../containers/ProductContainer';
-import getOrderArray from '../../../libs/getOrderArray';
 
 const propTypes = {
   orderData: PropTypes.object,
@@ -18,7 +17,6 @@ class OrderHistory extends Component {
     const { items } = orderData;
     const cleanItems = [];
     items.map(i => cleanItems.push(i.line_item));
-    getOrderArray(cleanItems);
     this.state = {
       orderData,
       orderArray: cleanItems,
