@@ -20,7 +20,7 @@ class GuestReturnApp extends Component {
     const that = this;
     axios({
       method: 'get',
-      url: `/order-lookup?id=${guestOrderID}&email=${guestEmail}`,
+      url: `api/v1/guest/order?order_number=${guestOrderID}&email=${guestEmail}`,
       headers: {
         Accept: 'application/json',
       },
