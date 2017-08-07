@@ -6,14 +6,11 @@
 }
 
 .Product__listItem {
-    margin-top: 0;
+    margin-bottom: 30px;
     line-height: 1.8em;
     @include desktop {
+        margin-bottom: 0px;
         margin: inherit;
-    }
-    @include tablet {
-        margin-top: 40px;
-        padding: 25px;
     }
 }
 
@@ -64,9 +61,6 @@
 
 .Product__listItem {
     background-color: #FFFFFF;
-    @include xLarge {
-        margin: 0 auto 80px;
-    }
 }
 
 .Product__listItem hr {
