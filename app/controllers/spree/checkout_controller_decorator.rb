@@ -15,6 +15,14 @@ Spree::CheckoutController.class_eval do
 
   layout 'redesign/checkout'
 
+  CARD_TYPE_MAPPING = {
+    'visa' => 'visa',
+    'mastercard' => 'master',
+    'american express' => 'american_express',
+    'discover' => 'discover',
+    'diners club' => 'diners_club'
+  }
+
   def edit
     @optimizely_opt_in = true
     prepare_order
@@ -119,6 +127,7 @@ Spree::CheckoutController.class_eval do
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
+        flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
 
         session[:successfully_ordered] = true
 
@@ -224,7 +233,14 @@ Spree::CheckoutController.class_eval do
         params[:order][:payments_attributes].first[:amount] = @order.total
       end
     end
-    params[:order].except(:password, :password_confirmation)
+
+    retval = params[:order].except(:password, :password_confirmation)
+
+    #need to map stripe cc_types to accepted accepted activemerchant vals
+    if cc_type = retval["payments_attributes"].try(:[], 0)&.dig("source_attributes", "cc_type")
+      retval["payments_attributes"][0]["source_attributes"]["cc_type"] = CARD_TYPE_MAPPING[cc_type]
+    end
+    retval
   end
 
   # run callback - preparations to order states

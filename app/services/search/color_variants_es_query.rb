@@ -1,10 +1,3 @@
-#   balls = Search::ColorVariantsESQuery.farkme
-#   client = Elasticsearch::Client.new
-#   client.search body: balls
-#   response["hits"]["total"]
-# balls = Search::ColorVariantsESQuery.build({:taxon_ids =>[383],:body_shapes =>["apple", "petite"],:color_ids =>[],:exclude_taxon_ids =>[260,278],:fast_making => "",:order => "newest",:limit => 21,:offset => 0,:currency => "usd",:show_outerwear => nil})
-# client = Elasticsearch::Client.new
-# response = Elasticsearch::Client.new.search index: configatron.elasticsearch.indices.color_variants, body: balls
 module Search
   class ColorVariantsESQuery
     require 'elasticsearch/dsl'
