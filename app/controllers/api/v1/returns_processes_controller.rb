@@ -180,6 +180,7 @@ module Api
         order_return.return_request_items.each do |rri|
           Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
         end
+        # ReturnMailer.notify_user(order_return).deliver
       end
 
       def start_next_logistics_process(order_return)
