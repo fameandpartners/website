@@ -141,6 +141,11 @@ class ProductListItem extends Component {
       color,
       image,
     } = productMeta;
+
+    const {
+      created_at_iso_mdy: returnCreatedAtMdy,
+    } = returnsMeta;
+
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
@@ -203,7 +208,7 @@ class ProductListItem extends Component {
             <div className="col-4_md-9_xs-9">
               <div className="grid-right-spaceAround">
                 <ShippingInfo
-                  copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
+                  copy={(<span>Return Started <br /> {returnCreatedAtMdy}</span>)}
                   listLinks={(
                     <div>
                       <li

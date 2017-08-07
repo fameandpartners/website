@@ -47,7 +47,7 @@ class OrderContainer extends Component {
   render() {
     const { orderData } = this.props;
     return (
-      <div>
+      <div className="OrderContainer">
         { orderData ?
           (
             <div>
