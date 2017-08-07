@@ -128,7 +128,7 @@ class ProductListItem extends Component {
       returnWindowEnd,
       openEndedReturnReason,
       products_meta: productMeta,
-      returns_meta: returnsMeta,
+      returns_meta: returnsMeta = {},
       price,
       primaryReturnReason,
     } = product;
@@ -245,7 +245,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_RETURN_BUTTON ?
-            <div className="col-4_md-9_xs-11 returnButton__container grid-spaceAround">
+            <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
                   className="u-width-full"
@@ -261,7 +261,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_FORM ?
-            <div className="col-4_md-9_xs-11 Form__Container">
+            <div className="col-4_md-9_xs-12 Form__Container">
               <div className={checkboxStatus ? 'u-show' : 'u-hide'}>
                 <form>
                   <p className="u-no-margin-top">Why are you returning this?</p>
@@ -290,7 +290,7 @@ class ProductListItem extends Component {
         }
         {
           Object.keys(uiState).every(state => !uiState[state]) ?
-            <div className="col-4_md-9_xs-11" />
+            <div className="col-4_md-9_xs-12" />
             :
             null
         }
