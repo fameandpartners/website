@@ -16,7 +16,7 @@ class ShippingInfo extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="u-width-full">
         <div
           className={classnames(
           'ShippingInfo',

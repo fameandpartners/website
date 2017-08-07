@@ -1,11 +1,16 @@
+/* global window */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
+
+// Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
 import SimpleButton from '../components/SimpleButton';
 import ProductContainer from './ProductContainer';
+
+// Actions
 import * as AppActions from '../actions/index';
 
 const propTypes = {
@@ -58,7 +63,7 @@ class StepOneContainer extends Component {
     if (orderData === null) {
       actions.getProductData();
       browserHistory.push('/view-orders');
-      location.reload();
+      window.location.reload();
     } else {
       const activeOrder = this.props.orderData.filter(o =>
         o.spree_order.number === this.props.params.orderID)[0];
@@ -73,6 +78,7 @@ class StepOneContainer extends Component {
       };
     }
   }
+  // TODO: @mikeg must remove
   componentDidMount() {
     $('html, body').animate({
       scrollTop: 0,
@@ -84,8 +90,7 @@ class StepOneContainer extends Component {
     if (!order) {
       return <div />;
     }
-    const spreeOrder = order.spree_order;
-    const shipDate = spreeOrder.date_iso_mdy;
+
     const { returnEligible } = order;
     return (
       <div className="StepOne__Container">
@@ -105,12 +110,13 @@ class StepOneContainer extends Component {
           <div className="col-10_md-12 u-no-padding">
             <div className="order__container Product__listItem__container u-no-margin">
               {
-                orderArray.map(p => (
+                orderArray.map((p, i) => (
                   <ProductContainer
                     key={`${p.id}-${p.order_id}`}
                     product={p}
                     showForm
                     returnEligible={returnEligible}
+                    lastChild={i === (orderArray.length - 1)}
                   />
                 ))
               }

@@ -56,6 +56,7 @@ class OrderHistory extends Component {
                           showForm={false}
                           orderNumber={number}
                           returnEligible={false}
+                          lastChild={i === (returnRequestedArray.length - 1)}
                         />
                         { (i === returnRequestedArray.length - 1
                           && orderArray.length > returnRequestedArray.length) ?
@@ -78,6 +79,7 @@ class OrderHistory extends Component {
                           orderIndex={i}
                           showForm={false}
                           orderNumber={number}
+                          lastChild={i === (notRequestedArray.length - 1)}
                         />
                       </div>
                     );
