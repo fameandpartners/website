@@ -128,7 +128,7 @@ class ProductListItem extends Component {
       returnWindowEnd,
       openEndedReturnReason,
       products_meta: productMeta,
-      returns_meta: returnsMeta,
+      returns_meta: returnsMeta = {},
       price,
       primaryReturnReason,
     } = product;
@@ -141,15 +141,20 @@ class ProductListItem extends Component {
       color,
       image,
     } = productMeta;
+
+    const {
+      created_at_iso_mdy: returnCreatedAtMdy,
+    } = returnsMeta;
+
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
 
     return (
       <div
-        className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white u-margin-top-large'}
+        className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
-        <div className="col-8_md-9_sm-5_xs-12 Product__listItem">
+        <div className="col-8_md-7_sm-6_xs-12 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
@@ -200,10 +205,10 @@ class ProductListItem extends Component {
         </div>
         {
           SHOW_LOGISTICS_DATA ?
-            <div className="col-4_md-9_xs-9">
+            <div className="col-4_md-7_xs-9">
               <div className="grid-right-spaceAround">
                 <ShippingInfo
-                  copy={(<span>Return Started <br /> MM/DD/YYYY</span>)}
+                  copy={(<span>Return Started <br /> {returnCreatedAtMdy}</span>)}
                   listLinks={(
                     <div>
                       <li
@@ -240,7 +245,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_RETURN_BUTTON ?
-            <div className="col-4_md-9_xs-11 returnButton__container grid-spaceAround">
+            <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
                   className="u-width-full"
@@ -256,7 +261,7 @@ class ProductListItem extends Component {
         }
         {
           SHOW_FORM ?
-            <div className="col-4_md-9_xs-11 Form__Container">
+            <div className="col-4_md-9_xs-12 Form__Container">
               <div className={checkboxStatus ? 'u-show' : 'u-hide'}>
                 <form>
                   <p className="u-no-margin-top">Why are you returning this?</p>
@@ -285,7 +290,7 @@ class ProductListItem extends Component {
         }
         {
           Object.keys(uiState).every(state => !uiState[state]) ?
-            <div className="col-4_md-9_xs-11" />
+            <div className="col-4_md-9_xs-12" />
             :
             null
         }

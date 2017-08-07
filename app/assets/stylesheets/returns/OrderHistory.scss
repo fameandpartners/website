@@ -1,9 +1,10 @@
 @import './mixins';
-.order__container {
+.OrderContainer {
   @include desktop {
     margin-bottom: 150px;
   }
 }
+
 .order__container .order-id {
   font-size: 22px;
   text-align: center;
@@ -31,7 +32,7 @@
   }
 }
 
-.Product__listItem, .order__container .returnButton__container {
+.order__container .returnButton__container {
   margin: 25px 0px 20px;
   @include tablet {
     margin: 25px 0px 40px;

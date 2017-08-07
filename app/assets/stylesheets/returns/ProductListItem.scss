@@ -1,19 +1,24 @@
 @import './mixins';
 
+.ProductContainer {
+  margin-bottom: 30px;
+}
+
+.ProductContainer__last-child {
+  margin-bottom: 0;
+}
+
 .Product__listItem__container {
   background: white;
   padding: 30px 60px;
 }
 
 .Product__listItem {
-    margin-top: 0;
+    margin-bottom: 30px;
     line-height: 1.8em;
     @include desktop {
+        margin-bottom: 0px;
         margin: inherit;
-    }
-    @include tablet {
-        margin-top: 40px;
-        padding: 25px;
     }
 }
 
@@ -64,9 +69,6 @@
 
 .Product__listItem {
     background-color: #FFFFFF;
-    @include xLarge {
-        margin: 0 auto 80px;
-    }
 }
 
 .Product__listItem hr {
@@ -101,12 +103,7 @@
         margin-top: 0;
     }
 }
-.Form__Container {
-  position: relative;
-  @include desktop {
-    top: 25px;
-  }
-}
+
 .Form__Container .select--marginTop {
     margin-top: 20px;
 }
