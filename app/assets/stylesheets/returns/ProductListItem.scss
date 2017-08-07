@@ -1,5 +1,13 @@
 @import './mixins';
 
+.ProductContainer {
+  margin-bottom: 30px;
+}
+
+.ProductContainer__last-child {
+  margin-bottom: 0;
+}
+
 .Product__listItem__container {
   background: white;
   padding: 30px 60px;
@@ -95,12 +103,7 @@
         margin-top: 0;
     }
 }
-.Form__Container {
-  position: relative;
-  @include desktop {
-    top: 25px;
-  }
-}
+
 .Form__Container .select--marginTop {
     margin-top: 20px;
 }

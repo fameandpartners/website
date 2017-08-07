@@ -123,9 +123,16 @@ const Confirmation = ({ orderData, logisticsData }) => (
 
       <div>
         <p className="font-sans-serif u-no-margin">Order #{logisticsData.order_number}</p>
-        {logisticsData.line_items.map((li) => {
+        {logisticsData.line_items.map((li, i) => {
           const lineItem = extractLineItemFromOrders(orderData, li.line_item_id);
-          return <ProductContainer confirmationPage key={li.line_item_id} product={lineItem} />;
+          return (
+            <ProductContainer
+              confirmationPage
+              key={li.line_item_id}
+              product={lineItem}
+              lastChild={i === (logisticsData.line_items.length - 1)}
+            />
+          );
         })}
       </div>
       <div className="u-margin-bottom-large hide-for-print">

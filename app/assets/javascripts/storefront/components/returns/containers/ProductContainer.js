@@ -5,22 +5,25 @@ import autoBind from 'auto-bind';
 import * as AppActions from '../actions/index';
 import ProductListItem from '../components/ProductListItem';
 import noop from '../../../libs/noop';
+import classnames from 'classnames';
 
 const propTypes = {
+  activeTextBox: PropTypes.number,
+  confirmationPage: PropTypes.bool,
   product: PropTypes.object.isRequired,
+  lastChild: PropTypes.bool,
+  orderData: PropTypes.object,
+  orderNumber: PropTypes.string,
+  orderIndex: PropTypes.number,
   returnArray: PropTypes.array.isRequired,
-  addProductToReturnArray: PropTypes.func,
+  returnSubtotal: PropTypes.number,
+  returnEligible: PropTypes.bool,
+  showForm: PropTypes.bool,
+  // Functions
   removeProductFromReturnArray: PropTypes.func,
   updatePrimaryReturnReason: PropTypes.func,
   updateOpenEndedReturnReason: PropTypes.func,
-  returnSubtotal: PropTypes.number,
-  confirmationPage: PropTypes.bool,
-  activeTextBox: PropTypes.number,
-  orderData: PropTypes.object,
-  orderIndex: PropTypes.number,
-  showForm: PropTypes.bool,
-  orderNumber: PropTypes.string,
-  returnEligible: PropTypes.bool,
+  addProductToReturnArray: PropTypes.func,
   // Redux Functions
   populateLogisticsData: PropTypes.func.isRequired,
 };
@@ -89,20 +92,28 @@ class ProductContainer extends Component {
   }
   render() {
     const {
-      orderIndex,
+      activeTextBox,
       confirmationPage,
+      lastChild,
+      orderNumber,
+      orderIndex,
+      product,
+      returnArray,
+      returnEligible,
+      showForm,
       updatePrimaryReturnReason,
       updateOpenEndedReturnReason,
-      product,
-      activeTextBox,
-      returnArray,
-      showForm,
-      orderNumber,
-      returnEligible,
     } = this.props;
     const checkboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     return (
-      <div>
+      <div
+        className={classnames(
+        'ProductContainer',
+        { 'ProductContainer__last-child': lastChild },
+
+      )}
+
+      >
         <ProductListItem
           product={product}
           confirmationPage={confirmationPage}
