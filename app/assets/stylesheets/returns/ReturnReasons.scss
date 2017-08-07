@@ -3,12 +3,12 @@
   text-align: center;
 }
 
-.StepOne__Container {
+.ReturnReasonsContainer {
   background: #F5F5F5;
   margin: 0;
 }
 
-.StepOne__Container .return-checkbox {
+.ReturnReasonsContainer .return-checkbox {
   float: left;
   margin-right: 15px;
   position: absolute;
@@ -20,12 +20,12 @@
 }
 
 
-.StepOne__Container .instructions {
+.ReturnReasonsContainer .instructions {
   text-align: center;
   color: #000000;
 }
 
-.StepOne__Container .instructions.instructions__title {
+.ReturnReasonsContainer .instructions.instructions__title {
   font-size: 34px;
   margin-bottom: 0;
   font-weight: 500;
@@ -40,7 +40,7 @@
   };
 }
 
-.StepOne__Container .instructions.instructions__subtitle {
+.ReturnReasonsContainer .instructions.instructions__subtitle {
   font-size: 18px;
   @include tablet {
       margin: 0 25% 75px;
@@ -50,7 +50,7 @@
   };
 }
 
-.StepOne__Container .ship-date {
+.ReturnReasonsContainer .ship-date {
   font-size: 22px;
   text-align: center;
   color: black;
@@ -64,13 +64,13 @@
     text-align: center;
   }
 }
-.StepOne__Container .order-id {
+.ReturnReasonsContainer .order-id {
   @include desktop {
     margin-top: -35px;
   }
 }
 
-.StepOne__Container .Form__Container textarea {
+.ReturnReasonsContainer .Form__Container textarea {
   border: 1px solid #979797;
   resize: none;
   padding: 14px;
@@ -81,7 +81,7 @@
   }
 }
 
-.StepOne__Container .Form__Container select {
+.ReturnReasonsContainer .Form__Container select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -120,11 +120,11 @@
   margin-bottom: 25px;;
 }
 
-.StepOne__Container .SimpleButton__wrapper {
+.ReturnReasonsContainer .SimpleButton__wrapper {
   margin-bottom: 150px;
 }
 
-.StepOne__Container .simpleButton__container {
+.ReturnReasonsContainer .simpleButton__container {
   @include xLarge {
     float: right;
   }

@@ -6,6 +6,7 @@ import win from '../polyfills/windowPolyfill';
 
 const initialState = {
   returnArray: [],
+  returnRequestErrors: {},
   returnSubtotal: 0,
   requiresViewOrdersRefresh: false,
   logisticsData: {
@@ -51,13 +52,18 @@ export default function (state = initialState, action) {
           line_items: action.payload.line_items,
         },
       });
-    case 'UPDATE_PRIMARY_RETURN_REASON':
+    case 'SET_RETURN_REASON_ERRORS':
       return assign({}, state, {
-        returnArray: action.payload,
+        returnRequestErrors: action.payload.returnRequestErrors,
       });
     case 'SET_GUEST_EMAIL':
       return assign({}, state, {
         guestEmail: action.payload,
+      });
+    case 'UPDATE_PRIMARY_RETURN_REASON':
+      return assign({}, state, {
+        returnRequestErrors: {},
+        returnArray: action.payload,
       });
     case 'UPDATE_OPEN_ENDED_RETURN_REASON':
       return assign({}, state, {

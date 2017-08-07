@@ -11,6 +11,7 @@ const propTypes = {
   activeTextBox: PropTypes.number,
   confirmationPage: PropTypes.bool,
   product: PropTypes.object.isRequired,
+  hasError: PropTypes.bool,
   lastChild: PropTypes.bool,
   orderData: PropTypes.object,
   orderNumber: PropTypes.string,
@@ -29,15 +30,17 @@ const propTypes = {
 };
 
 const defaultProps = {
-  returnSubtotal: 0,
   activeTextBox: null,
   confirmationPage: false,
   checkboxStatus: false,
-  showForm: false,
-  orderIndex: null,
-  returnEligible: true,
+  hasError: false,
+  lastChild: false,
   orderData: null,
+  orderIndex: null,
   orderNumber: '',
+  returnEligible: true,
+  returnSubtotal: 0,
+  showForm: false,
   addProductToReturnArray: noop,
   removeProductFromReturnArray: noop,
   updatePrimaryReturnReason: noop,
@@ -94,6 +97,7 @@ class ProductContainer extends Component {
     const {
       activeTextBox,
       confirmationPage,
+      hasError,
       lastChild,
       orderNumber,
       orderIndex,
@@ -110,21 +114,20 @@ class ProductContainer extends Component {
         className={classnames(
         'ProductContainer',
         { 'ProductContainer__last-child': lastChild },
-
       )}
-
       >
         <ProductListItem
-          product={product}
+          activeTextBox={activeTextBox}
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
-          activeTextBox={activeTextBox}
-          returnArray={returnArray}
-          showForm={showForm}
           orderIndex={orderIndex}
           orderNumber={orderNumber}
+          product={product}
+          returnArray={returnArray}
           returnEligible={returnEligible}
+          showForm={showForm}
           handlePopulateLogistics={this.handlePopulateLogistics}
+          hasError={hasError}
           updateReturnArray={this.updateReturnArray}
           updatePrimaryReturnReason={updatePrimaryReturnReason}
           updateOpenEndedReturnReason={updateOpenEndedReturnReason}
