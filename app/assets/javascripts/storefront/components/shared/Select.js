@@ -3,18 +3,20 @@
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
 //* ****
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
-import { trackEvent } from '../../libs/gaTracking'
-import { openHeightSelectEvent } from '../../libs/gaEventObjects'
+import { trackEvent } from '../../libs/gaTracking';
+import { openHeightSelectEvent } from '../../libs/gaEventObjects';
+
 const propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
   formId: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
+  focusOnError: PropTypes.bool,
   error: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -26,6 +28,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  focusOnError: false,
   label: '',
   options: [],
 };
@@ -50,7 +53,7 @@ class Select extends Component {
   }
 
   toggleDropdown() {
-    !this.state.isOpen ? trackEvent(openHeightSelectEvent) : ''
+    !this.state.isOpen ? trackEvent(openHeightSelectEvent) : '';
     this.setDropdownState(!this.state.isOpen);
   }
 
@@ -79,9 +82,9 @@ class Select extends Component {
       case keys.ARROW_UP:
         event.preventDefault();
         if (index > 0) {
-          this.setState({ arrowFocusedIndex: index - 1, });
+          this.setState({ arrowFocusedIndex: index - 1 });
         } else {
-          this.setState({ arrowFocusedIndex: maxIndex, });
+          this.setState({ arrowFocusedIndex: maxIndex });
         }
         break;
       case keys.ARROW_DOWN:
@@ -91,7 +94,7 @@ class Select extends Component {
             arrowFocusedIndex: index + 1,
           });
         } else {
-          this.setState({ arrowFocusedIndex: 0, });
+          this.setState({ arrowFocusedIndex: 0 });
         }
         break;
       case keys.ENTER:
@@ -140,7 +143,15 @@ class Select extends Component {
     return dropdownComponent;
   }
 
+
   generateClassName() {}
+
+  componentDidUpdate(prevProps) {
+    const { error, focusOnError } = this.props;
+    if (error && !prevProps.error && focusOnError) {
+      this.refs.selectWrapper.focus();
+    }
+  }
 
   render() {
     const {
@@ -149,9 +160,9 @@ class Select extends Component {
       label,
       className,
     } = this.props;
-    const { isOpen, } = this.state;
+    const { isOpen } = this.state;
     const contents = this.buildDropdown();
-    const activeOption = _.find(options, { active: true, }) || {};
+    const activeOption = _.find(options, { active: true }) || {};
     const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
     const singleOption = options.length === 1;
     return (

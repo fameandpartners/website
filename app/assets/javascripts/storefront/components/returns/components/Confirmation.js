@@ -135,7 +135,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
           );
         })}
       </div>
-      <div className="u-margin-bottom-large hide-for-print">
+      <div className="u-margin-top-small u-margin-bottom-large hide-for-print">
         <SimpleButton
           buttonCopy="Continue Shopping"
           link="/dresses"

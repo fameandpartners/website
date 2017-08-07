@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
+import { assign } from 'lodash';
 
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
@@ -11,11 +12,12 @@ import SimpleButton from '../components/SimpleButton';
 import ProductContainer from './ProductContainer';
 
 // Actions
-import * as AppActions from '../actions/index';
+import * as ReturnActions from '../actions/index';
 
 const propTypes = {
   orderData: PropTypes.array,
   returnArray: PropTypes.array.isRequired,
+  returnRequestErrors: PropTypes.object.isRequired,
   returnSubtotal: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -33,7 +35,7 @@ const defaultProps = {
   guestEmail: null,
 };
 
-class StepOneContainer extends Component {
+class ReturnReasonsContainer extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -43,7 +45,34 @@ class StepOneContainer extends Component {
     };
   }
 
+  doesNotHaveReturnReason(primaryReturnReason) {
+    return (!primaryReturnReason || primaryReturnReason.length === 0);
+  }
+
+  checkForReturnRequestErrors() {
+    const { actions, returnArray } = this.props;
+    // This is a little convuluted
+    // We're creating an error object that is keyed off of line_item_id
+    const returnRequestErrors = returnArray.reduce(
+      (prev, curr) => {
+        const accum = assign({}, prev, {
+          [curr.id]: this.doesNotHaveReturnReason(curr.primaryReturnReason),
+        });
+        return accum;
+      },
+      {},
+    );
+
+    if (Object.keys(returnRequestErrors).some(key => returnRequestErrors[key])) {
+      actions.setReturnReasonErrors({ returnRequestErrors });
+      return true;
+    }
+
+    return false;
+  }
+
   requestReturn() {
+    if (this.checkForReturnRequestErrors()) { return; }
     const { actions, returnArray, guestEmail } = this.props;
     const { spree_order } = this.state.order;
     const returnsObj = {
@@ -86,14 +115,16 @@ class StepOneContainer extends Component {
   }
   render() {
     const { order, orderArray } = this.state;
-    const { returnSubtotal } = this.props;
+    const { returnRequestErrors, returnSubtotal } = this.props;
+    console.log('orderArray', orderArray);
+    console.log('returnRequestErrors', returnRequestErrors);
     if (!order) {
       return <div />;
     }
 
     const { returnEligible } = order;
     return (
-      <div className="StepOne__Container">
+      <div className="ReturnReasonsContainer">
         <div className="grid-noGutter-center">
           <div className="col-10_md-10_sm-11">
             <p className="instructions instructions__title">
@@ -116,6 +147,7 @@ class StepOneContainer extends Component {
                     product={p}
                     showForm
                     returnEligible={returnEligible}
+                    hasError={returnRequestErrors[p.id]}
                     lastChild={i === (orderArray.length - 1)}
                   />
                 ))
@@ -143,19 +175,20 @@ class StepOneContainer extends Component {
   }
 }
 
-StepOneContainer.propTypes = propTypes;
-StepOneContainer.defaultProps = defaultProps;
+ReturnReasonsContainer.propTypes = propTypes;
+ReturnReasonsContainer.defaultProps = defaultProps;
 function mapStateToProps(state) {
   return {
     returnSubtotal: state.returnsData.returnSubtotal,
     returnArray: state.returnsData.returnArray,
+    returnRequestErrors: state.returnsData.returnRequestErrors,
     guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AppActions, dispatch),
+    actions: bindActionCreators(ReturnActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(StepOneContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ReturnReasonsContainer);
