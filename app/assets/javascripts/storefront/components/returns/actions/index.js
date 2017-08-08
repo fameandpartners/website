@@ -39,6 +39,11 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
   };
 };
 
+export const setReturnLoadingState = ({ isLoading }) => ({
+  type: 'SET_RETURN_LOADING_STATE',
+  payload: { isLoading },
+});
+
 export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
   type: 'SET_RETURN_REASON_ERRORS',
   payload: { returnRequestErrors },

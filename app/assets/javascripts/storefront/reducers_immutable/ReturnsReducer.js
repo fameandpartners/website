@@ -7,6 +7,7 @@ import win from '../polyfills/windowPolyfill';
 const initialState = {
   returnArray: [],
   returnRequestErrors: {},
+  returnIsLoading: false,
   returnSubtotal: 0,
   requiresViewOrdersRefresh: false,
   logisticsData: {
@@ -51,6 +52,10 @@ export default function (state = initialState, action) {
           international_customer: action.payload.order.international_customer,
           line_items: action.payload.line_items,
         },
+      });
+    case 'SET_RETURN_LOADING_STATE':
+      return assign({}, state, {
+        returnIsLoading: action.payload.isLoading,
       });
     case 'SET_RETURN_REASON_ERRORS':
       return assign({}, state, {

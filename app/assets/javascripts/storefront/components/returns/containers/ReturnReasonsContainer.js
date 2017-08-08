@@ -17,6 +17,7 @@ import * as ReturnActions from '../actions/index';
 const propTypes = {
   orderData: PropTypes.array,
   returnArray: PropTypes.array.isRequired,
+  returnIsLoading: PropTypes.bool.isRequired,
   returnRequestErrors: PropTypes.object.isRequired,
   returnSubtotal: PropTypes.oneOfType([
     PropTypes.string,
@@ -68,7 +69,8 @@ class ReturnReasonsContainer extends Component {
       return true;
     }
 
-    return false;
+    actions.setReturnLoadingState({ isLoading: true });
+    return true;
   }
 
   requestReturn() {
@@ -115,9 +117,12 @@ class ReturnReasonsContainer extends Component {
   }
   render() {
     const { order, orderArray } = this.state;
-    const { returnRequestErrors, returnSubtotal } = this.props;
-    console.log('orderArray', orderArray);
-    console.log('returnRequestErrors', returnRequestErrors);
+    const {
+      returnIsLoading,
+      returnRequestErrors,
+      returnSubtotal,
+    } = this.props;
+
     if (!order) {
       return <div />;
     }
@@ -163,6 +168,8 @@ class ReturnReasonsContainer extends Component {
                   <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
                       buttonCopy="Start Return"
+                      isLoading={returnIsLoading}
+                      isLoadingCopy="Starting..."
                     />
                   </div>
                 </div>
@@ -179,9 +186,10 @@ ReturnReasonsContainer.propTypes = propTypes;
 ReturnReasonsContainer.defaultProps = defaultProps;
 function mapStateToProps(state) {
   return {
-    returnSubtotal: state.returnsData.returnSubtotal,
     returnArray: state.returnsData.returnArray,
+    returnIsLoading: state.returnsData.returnIsLoading,
     returnRequestErrors: state.returnsData.returnRequestErrors,
+    returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData,
   };

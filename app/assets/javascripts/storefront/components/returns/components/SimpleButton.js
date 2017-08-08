@@ -5,6 +5,7 @@ import classnames from 'classnames';
 const propTypes = {
   buttonCopy: PropTypes.string.isRequired,
   className: PropTypes.string,
+  isLoading: PropTypes.bool,
   link: PropTypes.string,
   localLink: PropTypes.bool,
   withLink: PropTypes.bool,
@@ -13,14 +14,28 @@ const propTypes = {
 const defaultProps = {
   className: '',
   withLink: false,
+  isLoading: false,
+  isLoadingCopy: 'Loading...',
   link: '/',
   localLink: false,
 };
 
 
-const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
+const SimpleButton = ({
+  buttonCopy,
+  className,
+  link,
+  isLoading,
+  localLink,
+  withLink,
+}) => (
   withLink ?
-    <div className="simpleButton__container">
+    <div
+      className={classnames(
+      'SimpleButton__container',
+      { SimpleButton__container__loading: isLoading },
+    )}
+    >
       <div className={className}>
         {localLink ?
           <Link to={link}>
@@ -33,7 +48,7 @@ const SimpleButton = ({ buttonCopy, className, link, localLink, withLink }) => (
       </div>
     </div>
     :
-    <div className="simpleButton__container u-width-full">
+    <div className="SimpleButton__container u-width-full">
       <span className="copy">{buttonCopy}</span>
     </div>
 );
