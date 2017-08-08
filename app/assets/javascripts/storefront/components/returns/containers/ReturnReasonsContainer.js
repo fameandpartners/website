@@ -74,7 +74,7 @@ class ReturnReasonsContainer extends Component {
   }
 
   requestReturn() {
-    if (this.checkForReturnRequestErrors()) { return; }
+    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) { return; }
     const { actions, returnArray, guestEmail } = this.props;
     const { spree_order } = this.state.order;
     const returnsObj = {
@@ -146,7 +146,9 @@ class ReturnReasonsContainer extends Component {
           <div className="col-10_md-12 u-no-padding">
             <div className="order__container Product__listItem__container u-no-margin">
               {
-                orderArray.map((p, i) => (
+                orderArray
+                .filter(p => !p.returns_meta)
+                .map((p, i) => (
                   <ProductContainer
                     key={`${p.id}-${p.order_id}`}
                     product={p}
@@ -167,9 +169,8 @@ class ReturnReasonsContainer extends Component {
                 <div className="col-4_md-12_sm-12">
                   <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
-                      buttonCopy="Start Return"
+                      buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
-                      isLoadingCopy="Starting..."
                     />
                   </div>
                 </div>

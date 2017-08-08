@@ -28,30 +28,37 @@ const SimpleButton = ({
   isLoading,
   localLink,
   withLink,
-}) => (
-  withLink ?
-    <div
-      className={classnames(
-      'SimpleButton__container',
-      { SimpleButton__container__loading: isLoading },
-    )}
-    >
-      <div className={className}>
-        {localLink ?
-          <Link to={link}>
-            <span className="copy">{buttonCopy}</span>
-          </Link>
-        :
-          <a href={link}>
-            <span className="copy">{buttonCopy}</span>
-          </a>}
+}) => {
+  return (
+    withLink ?
+      <div
+        className={classnames(
+        'SimpleButton__container',
+        { 'SimpleButton__container--loading': isLoading },
+      )}
+      >
+        <div className={className}>
+          {localLink ?
+            <Link to={link}>
+              <span className="copy">{buttonCopy}</span>
+            </Link>
+          :
+            <a href={link}>
+              <span className="copy">{buttonCopy}</span>
+            </a>}
+        </div>
       </div>
-    </div>
-    :
-    <div className="SimpleButton__container u-width-full">
-      <span className="copy">{buttonCopy}</span>
-    </div>
-);
+      :
+      <div
+        className={classnames(
+        'SimpleButton__container u-width-full',
+        { 'SimpleButton__container--loading': isLoading },
+      )}
+      >
+        <span className="copy co">{buttonCopy}</span>
+      </div>
+  );
+};
 
 SimpleButton.propTypes = propTypes;
 SimpleButton.defaultProps = defaultProps;
