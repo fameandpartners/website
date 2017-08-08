@@ -4,7 +4,7 @@ import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
 
 const propTypes = {
-  orderData: PropTypes.object.isRequired,
+  orderData: PropTypes.array.isRequired,
   logisticsData: PropTypes.shape({
     final_return_by_date: PropTypes.string,
     line_item_id: PropTypes.number,
