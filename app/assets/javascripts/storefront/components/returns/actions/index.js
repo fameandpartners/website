@@ -119,10 +119,12 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
     })
     .catch((error) => {
       dispatch(setReturnLoadingState({ isLoading: false }));
-      dispatch({
-        type: 'SET_RETURN_RESPONSE_ERRORS',
-        payload: { error },
-      });
+      if (error.response && error.response.data) {
+        dispatch({
+          type: 'SET_RETURN_RESPONSE_ERRORS',
+          payload: { error: error.response.data },
+        });
+      }
     });
 };
 

@@ -174,8 +174,8 @@ class ReturnReasonsContainer extends Component {
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />
-                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.message ?
-                      <span>{returnResponseErrors.message}</span>
+                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.error ?
+                      <span>{returnResponseErrors.error}</span>
                       :
                       <span />
                     }

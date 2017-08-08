@@ -40,6 +40,7 @@ module Api
       def create
         @error_message_code = {
           "RETRY" => "Please try again.",
+          "CONTACT" => "Something's wrong, please contact customer service."
           "RETURN_EXISTS" => "These items already have a return."
         }
 
@@ -68,13 +69,18 @@ module Api
                             id['line_item_id']
                           end
 
-        if has_invalid_line_items?(return_item_ids)
+        if has_nonexistent_line_items?(return_item_ids)
           error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_line_items?(return_item_ids, params['order_id'])
           error_response(@error_message_code["RETRY"])
+          return
+        end
+
+        if has_nonreturnable_line_items?(return_item_ids)
+          error_response(@error_message_code["CONTACT"])
           return
         end
 
@@ -113,9 +119,15 @@ module Api
         !@user.orders.where(id: id).first
       end
 
-      def has_invalid_line_items?(arr)
+      def has_nonexistent_line_items?(arr)
         arr.any? do |id|
           !Spree::LineItem.exists?(id)
+        end
+      end
+
+      def has_nonreturnable_line_items?(arr)
+        arr.any? do |id|
+          !Spree::LineItem.where(id: id).first&.can_dress_be_returned?
         end
       end
 
