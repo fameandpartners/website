@@ -107,7 +107,7 @@ class ProductListItem extends Component {
     );
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     const { product, activeTextBox } = this.props;
     const { id } = product;
     if (id === activeTextBox) {
@@ -144,7 +144,6 @@ class ProductListItem extends Component {
       color,
       image,
     } = productMeta;
-
     const {
       created_at_iso_mdy: returnCreatedAtMdy,
     } = returnsMeta;
