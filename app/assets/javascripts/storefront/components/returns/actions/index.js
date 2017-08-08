@@ -1,4 +1,7 @@
-import axios from 'axios';
+const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
+const contentType = 'application/json';
+
+const request = require('superagent');
 
 export const addProductToReturnArray = (product, currentArray) => {
   const newProduct = product;
@@ -59,7 +62,7 @@ export const updatePrimaryReturnReason = (reason, product, returnArray) => {
   });
   return {
     type: 'UPDATE_PRIMARY_RETURN_REASON',
-    payload: newReturnArray,
+    payload: { newReturnArray, productID: product.id },
   };
 };
 
@@ -83,46 +86,63 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 
 export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   if (guestReturn) {
-    axios.get(`/api/v1/guest/order?email=${email}&order_number=${orderID}`)
-      .then((response) => {
-        const guestOrderArray = [response.data];
-        dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
-      })
-      .catch((error) => {
-        console.log(error);
+    request
+      .get(`/api/v1/guest/order?email=${email}&order_number=${orderID}`)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(res);
+          const response = JSON.parse(res.text);
+          const guestOrderArray = [response.returns_processes];
+          dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
+        }
       });
   } else {
-    axios.get('/api/v1/orders')
-      .then((response) => {
-        dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.data.returns_processes });
-      })
-      .catch((error) => {
-        console.log('ERROR getting order data', error);
-        // window.location = '/guest-returns';
+    request
+      .get('/api/v1/orders')
+      .end((err, res) => {
+        if (err) {
+          console.log('ERROR getting order data', err);
+        } else {
+          const response = JSON.parse(res.text);
+          console.log(response);
+          dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.returns_processes });
+        }
       });
   }
 };
 
 
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
-  axios.post('/api/v1/submit_return', returnsObj)
-    .then((response) => {
-      dispatch(setReturnLoadingState({ isLoading: false }));
-      dispatch({ type: 'POPULATE_LOGISTICS_DATA',
-        payload: {
-          requiresViewOrdersRefresh: true,
-          order,
-          line_items: response.data.message,
-          guestEmail,
-        },
-      });
-    })
-    .catch((error) => {
-      dispatch(setReturnLoadingState({ isLoading: false }));
-      if (error.response && error.response.data) {
-        dispatch({
-          type: 'SET_RETURN_RESPONSE_ERRORS',
-          payload: { error: error.response.data },
+  console.log(csrfToken);
+  console.log(contentType);
+  request
+    .post('/api/v1/submit_return')
+    .send(returnsObj)
+    .set('Accept', contentType)
+    .set('X-CSRF-Token', csrfToken)
+    .end((err, res) => {
+      if (err) {
+        console.log(err);
+        dispatch(setReturnLoadingState({ isLoading: false }));
+        if (err.response && err.response.data) {
+          dispatch({
+            type: 'SET_RETURN_RESPONSE_ERRORS',
+            payload: { error: err.response.data },
+          });
+        }
+      } else {
+        console.log(res);
+        const response = JSON.parse(res.text);
+        dispatch(setReturnLoadingState({ isLoading: false }));
+        dispatch({ type: 'POPULATE_LOGISTICS_DATA',
+          payload: {
+            requiresViewOrdersRefresh: true,
+            order,
+            line_items: response.message,
+            guestEmail,
+          },
         });
       }
     });

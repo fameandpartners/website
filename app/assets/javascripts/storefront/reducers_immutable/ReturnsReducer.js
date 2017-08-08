@@ -73,7 +73,7 @@ export default function (state = initialState, action) {
     case 'UPDATE_PRIMARY_RETURN_REASON':
       return assign({}, state, {
         returnRequestErrors: {},
-        returnArray: action.payload,
+        returnArray: action.payload.newReturnArray,
       });
     case 'UPDATE_OPEN_ENDED_RETURN_REASON':
       return assign({}, state, {
