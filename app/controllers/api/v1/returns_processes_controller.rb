@@ -40,7 +40,7 @@ module Api
       def create
         @error_message_code = {
           "RETRY" => "Please try again.",
-          "CONTACT" => "Something's wrong, please contact customer service."
+          "CONTACT" => "Something's wrong, please contact customer service.",
           "RETURN_EXISTS" => "These items already have a return."
         }
 
