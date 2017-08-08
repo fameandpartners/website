@@ -403,6 +403,8 @@ FameAndPartners::Application.routes.draw do
       put 'update_image', on: :member
     end
 
+    resource 'users/returns', as: 'user_returns', only: [:new, :create]
+
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 
     get 'reviews' => 'users/reviews#index', as: 'reviews'

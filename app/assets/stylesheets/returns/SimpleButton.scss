@@ -1,19 +1,25 @@
 @import './mixins';
 
-.simpleButton__container {
+.SimpleButton__container {
   background: black;
   max-width: 300px;
   text-align: center;
   font-size: 14px;
   margin: 0 auto;
   cursor: pointer;
+  @include transition(0.3s opacity);
   @include desktop {
     max-width: 390px;
     margin: initial;
   }
 }
 
-.simpleButton__container .copy {
+.SimpleButton__container--loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.SimpleButton__container .copy {
   color: white;
   padding: 15px;
   display: block;

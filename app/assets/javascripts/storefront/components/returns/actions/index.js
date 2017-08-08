@@ -39,6 +39,11 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
   };
 };
 
+export const setReturnLoadingState = ({ isLoading }) => ({
+  type: 'SET_RETURN_LOADING_STATE',
+  payload: { isLoading },
+});
+
 export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
   type: 'SET_RETURN_REASON_ERRORS',
   payload: { returnRequestErrors },
@@ -98,20 +103,28 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   }
 };
 
+
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
   axios.post('/api/v1/submit_return', returnsObj)
     .then((response) => {
-      // TODO: dispatch(Stop Loading Event)
+      dispatch(setReturnLoadingState({ isLoading: false }));
       dispatch({ type: 'POPULATE_LOGISTICS_DATA',
         payload: {
           requiresViewOrdersRefresh: true,
           order,
           line_items: response.data.message,
           guestEmail,
-        } });
+        },
+      });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(setReturnLoadingState({ isLoading: false }));
+      if (error.response && error.response.data) {
+        dispatch({
+          type: 'SET_RETURN_RESPONSE_ERRORS',
+          payload: { error: error.response.data },
+        });
+      }
     });
 };
 

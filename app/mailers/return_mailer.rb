@@ -3,6 +3,20 @@ class ReturnMailer < ActionMailer::Base
     binding.pry
 
     user = order.return_request_items[0].line_item.order.user
+    email = user.email
+    order_number  = order.id
+    subject = "Refund notification for order #" + Spree::Order.where(id: order.order_id)[0].number
+    returnTotal = 0
+    ItemReturn.where(id: order_number).select{ |item| returnTotal += item.item_price_adjusted }
+    returnArray = []
+    ItemReturn.where(id: order_number).select{ |item| returnArray.push(item) }
+    # Get billing address
+    addressObject = Spree::Address.where(id: Spree::Order.where(id: order.order_id)[0].bill_address_id)[0]
+    addressOne = addressObject.address1
+    addressTwo = addressObject.address2
+    city = addressObject.city:q
+    billingState = Spree::State.where(id: addressObject.state_id)[0].abbr
+    zipCode = addressObject.zipcode
 
     # line_item = event.item_return.line_item
     # order = line_item.order
@@ -19,8 +33,6 @@ class ReturnMailer < ActionMailer::Base
       # amount:                      event.refund_amount,
       # order_number:                order.number
     )
-
-    binding.pry
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
     Raven.capture_exception(e)

@@ -17,6 +17,8 @@ import * as ReturnActions from '../actions/index';
 const propTypes = {
   orderData: PropTypes.array,
   returnArray: PropTypes.array.isRequired,
+  returnIsLoading: PropTypes.bool.isRequired,
+  returnResponseErrors: PropTypes.object.isRequired,
   returnRequestErrors: PropTypes.object.isRequired,
   returnSubtotal: PropTypes.oneOfType([
     PropTypes.string,
@@ -68,11 +70,12 @@ class ReturnReasonsContainer extends Component {
       return true;
     }
 
+    actions.setReturnLoadingState({ isLoading: true });
     return false;
   }
 
   requestReturn() {
-    if (this.checkForReturnRequestErrors()) { return; }
+    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) { return; }
     const { actions, returnArray, guestEmail } = this.props;
     const { spree_order } = this.state.order;
     const returnsObj = {
@@ -115,9 +118,13 @@ class ReturnReasonsContainer extends Component {
   }
   render() {
     const { order, orderArray } = this.state;
-    const { returnRequestErrors, returnSubtotal } = this.props;
-    console.log('orderArray', orderArray);
-    console.log('returnRequestErrors', returnRequestErrors);
+    const {
+      returnIsLoading,
+      returnResponseErrors,
+      returnRequestErrors,
+      returnSubtotal,
+    } = this.props;
+
     if (!order) {
       return <div />;
     }
@@ -141,7 +148,9 @@ class ReturnReasonsContainer extends Component {
           <div className="col-10_md-12 u-no-padding">
             <div className="order__container Product__listItem__container u-no-margin">
               {
-                orderArray.map((p, i) => (
+                orderArray
+                .filter(p => !p.returns_meta)
+                .map((p, i) => (
                   <ProductContainer
                     key={`${p.id}-${p.order_id}`}
                     product={p}
@@ -162,8 +171,14 @@ class ReturnReasonsContainer extends Component {
                 <div className="col-4_md-12_sm-12">
                   <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
-                      buttonCopy="Start Return"
+                      buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
+                      isLoading={returnIsLoading}
                     />
+                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.error ?
+                      <span>{returnResponseErrors.error}</span>
+                      :
+                      <span />
+                    }
                   </div>
                 </div>
               </div>
@@ -179,9 +194,11 @@ ReturnReasonsContainer.propTypes = propTypes;
 ReturnReasonsContainer.defaultProps = defaultProps;
 function mapStateToProps(state) {
   return {
-    returnSubtotal: state.returnsData.returnSubtotal,
     returnArray: state.returnsData.returnArray,
+    returnIsLoading: state.returnsData.returnIsLoading,
     returnRequestErrors: state.returnsData.returnRequestErrors,
+    returnResponseErrors: state.returnsData.returnResponseErrors,
+    returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData,
   };
