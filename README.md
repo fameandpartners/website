@@ -42,19 +42,22 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 
 ### Getting started
 * `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-* `$ brew install postgres memcached git-lfs ruby@2.3.3 rbenv node yarn redis && rbenv init`
+* `$ brew tap homebrew/core https://github.com/Homebrew/homebrew-core`
+* `$ brew install elasticsearch imagemagick postgres memcached git-lfs rbenv node yarn redis && rbenv init`
+* `$ rbenv install ruby@2.3.3`
+* `$ rbenv global 2.3.3`
+* `$ rbenv rehash`
+* `$ gem install bundler`
 * `$ gem install foreman`
 * `$ git clone git@github.com:fameandpartners/website.git && cd website && npm install`
 * `$ cp config/database.yml.example config/database.yml`
 *  Get a copy of `database.yml` from a neighbor. 
 * `$ bundle install`
+* `$ brew services start postgresql`
 * `$ psql -d postgres` (enter the psql console)
+* `# \du` (Use the account that gets listed here in the database.yml file as username)
 * `$ CREATE DATABASE fame_website_development;`
 * `$ CREATE ROLE fandp_web_production;`
-* `$ CREATE ROLE read_only_users;`
-* `$ CREATE ROLE postgres;`
-* `$ alter role postgres with login;`
-* `$ alter role postgres with superuser;`
 * `$ \q` (quit the psql console)
 * `$ psql -d fame_website_development`
 * `$ \i <full_path_to_db_dump.sql>;`
@@ -64,10 +67,9 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * Enter the rails console in the terminal with `$ run bundle exec rails c`
 * `$ Features.deactivate(:force_sitewide_ssl)`
 * `quit`
-* `$ brew services start postgresql`
-* `$ brew services start redis-server`
+* `$ brew services start redis`
 * `$ run bundle exec rails s` (this will start the build process)
-* `$ yarn start`
+* `$ yarn start` (If there are issues make sure packages.json matches another a devs)
 * Check http://0.0.0.0:3000 
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
