@@ -59,7 +59,7 @@ export const updatePrimaryReturnReason = (reason, product, returnArray) => {
   });
   return {
     type: 'UPDATE_PRIMARY_RETURN_REASON',
-    payload: newReturnArray,
+    payload: { newReturnArray, productID: product.id },
   };
 };
 
