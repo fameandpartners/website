@@ -18,6 +18,7 @@ const propTypes = {
   orderData: PropTypes.array,
   returnArray: PropTypes.array.isRequired,
   returnIsLoading: PropTypes.bool.isRequired,
+  returnResponseErrors: PropTypes.object.isRequired,
   returnRequestErrors: PropTypes.object.isRequired,
   returnSubtotal: PropTypes.oneOfType([
     PropTypes.string,
@@ -70,7 +71,7 @@ class ReturnReasonsContainer extends Component {
     }
 
     actions.setReturnLoadingState({ isLoading: true });
-    return true;
+    return false;
   }
 
   requestReturn() {
@@ -119,6 +120,7 @@ class ReturnReasonsContainer extends Component {
     const { order, orderArray } = this.state;
     const {
       returnIsLoading,
+      returnResponseErrors,
       returnRequestErrors,
       returnSubtotal,
     } = this.props;
@@ -172,6 +174,11 @@ class ReturnReasonsContainer extends Component {
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />
+                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.message ?
+                      <span>{returnResponseErrors.message}</span>
+                      :
+                      <span />
+                    }
                   </div>
                 </div>
               </div>
@@ -190,6 +197,7 @@ function mapStateToProps(state) {
     returnArray: state.returnsData.returnArray,
     returnIsLoading: state.returnsData.returnIsLoading,
     returnRequestErrors: state.returnsData.returnRequestErrors,
+    returnResponseErrors: state.returnsData.returnResponseErrors,
     returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData,

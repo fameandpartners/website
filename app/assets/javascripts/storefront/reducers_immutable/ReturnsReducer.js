@@ -7,6 +7,7 @@ import win from '../polyfills/windowPolyfill';
 const initialState = {
   returnArray: [],
   returnRequestErrors: {},
+  returnResponseErrors: {},
   returnIsLoading: false,
   returnSubtotal: 0,
   requiresViewOrdersRefresh: false,
@@ -56,6 +57,10 @@ export default function (state = initialState, action) {
     case 'SET_RETURN_LOADING_STATE':
       return assign({}, state, {
         returnIsLoading: action.payload.isLoading,
+      });
+    case 'SET_RETURN_RESPONSE_ERRORS':
+      return assign({}, state, {
+        returnResponseErrors: action.payload.error,
       });
     case 'SET_RETURN_REASON_ERRORS':
       return assign({}, state, {
