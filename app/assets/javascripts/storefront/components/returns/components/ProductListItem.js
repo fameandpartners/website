@@ -1,3 +1,4 @@
+/* global window */
 import React, { Component, PropTypes } from 'react';
 import autoBind from 'auto-bind';
 
@@ -15,15 +16,16 @@ import SimpleButton from '../components/SimpleButton';
 import ShippingInfo from './ShippingInfo';
 
 const propTypes = {
-  product: PropTypes.object.isRequired,
-  orderIndex: PropTypes.number,
   activeTextBox: PropTypes.number,
-  returnArray: PropTypes.array.isRequired,
-  showForm: PropTypes.bool,
   confirmationPage: PropTypes.bool,
-  returnEligible: PropTypes.bool.isRequired,
   checkboxStatus: PropTypes.bool,
+  hasError: PropTypes.bool,
+  orderIndex: PropTypes.number,
   orderNumber: PropTypes.string,
+  product: PropTypes.object.isRequired,
+  returnArray: PropTypes.array.isRequired,
+  returnEligible: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool,
 
   handlePopulateLogistics: PropTypes.func,
   updateReturnArray: PropTypes.func,
@@ -33,15 +35,16 @@ const propTypes = {
 
 const defaultProps = {
   activeTextBox: null,
-  showForm: false,
-  confirmationPage: false,
-  returnEligible: true,
   checkboxStatus: false,
+  confirmationPage: false,
+  hasError: false,
   orderIndex: 0,
   orderNumber: '',
-  handlePopulateLogistics: noop,
+  returnEligible: true,
+  showForm: false,
   updatePrimaryReturnReason: null,
   updateOpenEndedReturnReason: null,
+  handlePopulateLogistics: noop,
   updateReturnArray: noop,
 };
 
@@ -112,15 +115,15 @@ class ProductListItem extends Component {
     }
   }
 
-
   render() {
     const {
-      product,
-      showForm,
       confirmationPage,
       checkboxStatus,
+      hasError,
       orderNumber,
+      product,
       returnEligible,
+      showForm,
     } = this.props;
 
     const {
@@ -266,10 +269,13 @@ class ProductListItem extends Component {
                 <form>
                   <p className="u-no-margin-top">Why are you returning this?</p>
                   <Select
+                    ref={(prc) => { this.prc = prc; }}
                     id={`${id}-primary`}
                     options={primaryReturnReasonArray}
                     onChange={this.updatePrimaryReason}
                     label={primaryReturnReason ? null : 'Please select an option'}
+                    error={hasError}
+                    focusOnError
                   />
                   <div className={primaryReturnReason ? 'u-show' : 'u-no-opacity'}>
                     <p className="u-no-margin-top">

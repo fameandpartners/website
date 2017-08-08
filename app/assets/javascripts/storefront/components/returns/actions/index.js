@@ -39,6 +39,11 @@ export const removeProductFromReturnArray = (product, currentArray, refundAmount
   };
 };
 
+export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
+  type: 'SET_RETURN_REASON_ERRORS',
+  payload: { returnRequestErrors },
+});
+
 export const updatePrimaryReturnReason = (reason, product, returnArray) => {
   const newReturnArray = returnArray.map((p) => {
     if (p.id === product.id) {
