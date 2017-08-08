@@ -6,8 +6,6 @@
 .page-content.user.profiles.show
   .container.relative
 
-    = render 'users/shared/tabs', active_tab: 'account_settings'
-
     = form_for @user, :as => :profile, :url => profile_path, :method => :put, :html => { :class => 'devise-forms' } do |f|
      .row
       .col-md-8.col-md-offset-2.col-xs-12
