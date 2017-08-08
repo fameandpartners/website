@@ -41,7 +41,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * We are using Spree Ecommerce base engine. See more details at the [Spree Guides website.](http://guides.spreecommerce.com)
 
 ### Getting started
-
+* `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 * `$ brew install postgres memcached git-lfs ruby@2.3.3 rbenv node yarn redis && rbenv init`
 * `$ gem install foreman`
 * `$ git clone git@github.com:fameandpartners/website.git && cd website && npm install`
