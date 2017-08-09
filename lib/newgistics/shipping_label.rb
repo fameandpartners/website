@@ -38,8 +38,11 @@ module Newgistics
       http.use_ssl = (uri.scheme == "https")
 
       response = http.request(request)
-
-      convert_json_to_instance_variables(JSON.parse(response.body))
+      if(response.kind_of? Net::HTTPSuccess)
+        convert_json_to_instance_variables(JSON.parse(response.body))
+      else
+        raise Exception.new("Newgistics Label Creation Failure")
+      end
     end
 
     def make_address_map

@@ -21,12 +21,7 @@ class ItemReturn < ActiveRecord::Base
 
   after_create do |user|
     user.return_label
-
     return_shipping_label = user.item_return_label.as_json
-
-    if return_shipping_label['item_return_label']&.values.include? nil
-      raise Exception.new("Newgistics Label Creation Failure")
-    end
   end
 
   def return_label
