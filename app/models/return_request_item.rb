@@ -88,6 +88,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def order
+    # binding.pry
     order_return_request.order
   end
 
@@ -108,6 +109,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def push_return_event
+    # binding.pry
     ReturnRequestItemMapping.new(return_request_item: self).call
   # Note: I had troubles with debug because of this rescue
   # Probably we need to handle this exception another way
