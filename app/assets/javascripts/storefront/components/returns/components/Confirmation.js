@@ -124,12 +124,7 @@ const Confirmation = ({ orderData, logisticsData }) => (
       <div>
         <p className="font-sans-serif u-no-margin">Order #{logisticsData.order_number}</p>
         {logisticsData.line_items.map((li, i) => {
-          console.log(orderData);
-          console.log(li);
-
           const lineItem = extractLineItemFromOrders(orderData, li.line_item_id);
-          console.log(lineItem);
-
           return (
             <ProductContainer
               confirmationPage
