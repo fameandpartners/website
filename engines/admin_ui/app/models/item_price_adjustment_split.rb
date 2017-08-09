@@ -16,7 +16,14 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
   end
 
   def per_item_adjustment
-    order.adjustment_total / num_items_in_order
+    tax_adj = order&.adjustments&.tax&.first
+    tax_total = 0
+    if tax_adj
+      tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
+      tax_total = ((price*100).to_i * tax_rate).round / 100.0
+    end
+
+    price + tax_total
   end
 
   def num_items_in_order
