@@ -10,7 +10,7 @@ module Repositories
 
     # @return [Repositories::Images::Template]
     def read(color_id: nil, cropped: true)
-      if product_from_wedding_atelier?
+      if product_from_wedding_atelier? #&& !line_item.personalization.nil?
         wedding_attrs = image_for_wedding_atelier
         Images::Template.new(wedding_attrs)
       else
@@ -23,14 +23,14 @@ module Repositories
 
     # TODO: related to "primitive obsession" reported at the `WeddingAtelier::EventDress` model. This conversion shouldn't be here
     def image_for_wedding_atelier
-      customization_values = line_item.personalization.customization_values
+      customization_values = line_item&.personalization&.customization_values
       images = WeddingAtelier::EventDress.new({
         product_id: line_item.product.id,
-        color_id:   line_item.personalization.color_id,
-        fit_id:     customization_values.by_type(:fit).first&.id,
-        style_id:   customization_values.by_type(:style).first&.id,
-        fabric_id:  customization_values.by_type(:fabric).first&.id,
-        length_id:  customization_values.by_type(:length).first&.id
+        color_id:   line_item&.personalization&.color_id,
+        fit_id:     customization_values&.by_type(:fit)&.first&.id,
+        style_id:   customization_values&.by_type(:style)&.first&.id,
+        fabric_id:  customization_values&.by_type(:fabric)&.first&.id,
+        length_id:  customization_values&.by_type(:length)&.first&.id
       }).images
 
       {
