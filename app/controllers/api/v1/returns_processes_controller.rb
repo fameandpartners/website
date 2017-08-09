@@ -38,8 +38,6 @@ module Api
 
       # POST
       def create
-        binding.pry
-
         @error_message_code = {
           "RETRY" => "Please try again.",
           "CONTACT" => "Something's wrong, please contact customer service.",
