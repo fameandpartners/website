@@ -46,6 +46,7 @@
     }
     @include desktop {
         max-width: 180px;
+        min-height: 180px;
         float: left;
         margin-right: 30px;
     }
