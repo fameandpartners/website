@@ -47,7 +47,6 @@ module Api
         @user = get_user()
 
         if @user.nil?
-          puts 'no user'
           error_response(@error_message_code["RETRY"])
         end
 
@@ -62,13 +61,11 @@ module Api
         }
 
         if has_invalid_order_id?(request_object[:order_id])
-          puts 'a'
           error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_order_id?(request_object[:order_id])
-          puts 'b'
           error_response(@error_message_code["RETRY"])
           return
         end
@@ -78,13 +75,11 @@ module Api
                           end
 
         if has_nonexistent_line_items?(return_item_ids)
-          puts 'c'
           error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_line_items?(return_item_ids, request_object[:order_id])
-          puts 'd'
           error_response(@error_message_code["RETRY"])
           return
         end
