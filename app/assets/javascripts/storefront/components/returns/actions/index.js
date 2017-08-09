@@ -96,13 +96,11 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
         'Content-Type': contentType,
       },
     })
-    .success((res) => {
-      console.log(res);
-
+    .done((res) => {
       const guestOrderArray = [res.returns_processes];
       dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
     })
-    .error((err) => {
+    .fail((err) => {
       console.log(err);
     });
   } else {
@@ -112,12 +110,10 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
         'Content-Type': contentType,
       },
     })
-    .success((res) => {
-      console.log(res);
-
+    .done((res) => {
       dispatch({ type: 'UPDATE_ORDER_DATA', payload: res.returns_processes });
     })
-    .error((err) => {
+    .fail((err) => {
       console.log(err);
     });
   }
@@ -129,17 +125,14 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
   console.log(contentType);
   $.ajax({
     url: '/api/v1/submit_return',
-    dataType: 'script',
+    dataType: 'json',
     accepts: {
       'Content-Type': contentType,
     },
     method: 'POST',
     data: returnsObj,
   })
-  .success((res) => {
-    console.log(res);
-
-
+  .done((res) => {
     dispatch(setReturnLoadingState({ isLoading: false }));
     dispatch({ type: 'POPULATE_LOGISTICS_DATA',
       payload: {
@@ -150,7 +143,7 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
       },
     });
   })
-  .error((err) => {
+  .fail((err) => {
     console.log(err);
 
     dispatch(setReturnLoadingState({ isLoading: false }));

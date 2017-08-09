@@ -182,7 +182,11 @@ module Api
           error: err,
           status: 400
         }
-        render :json => payload, :status => :bad_request
+        respond_with err do |format|
+          format.json do
+            render :json => payload, :status => :bad_request
+          end
+        end
       end
 
       def success_response(msg)
@@ -190,7 +194,11 @@ module Api
           message: msg,
           status: 200
         }
-        render :json => payload, :status => :ok
+        respond_with msg do |format|
+          format.json do
+            render :json => payload, :status => :ok
+          end
+        end
       end
 
       def start_bergen_return_process(order_return)
