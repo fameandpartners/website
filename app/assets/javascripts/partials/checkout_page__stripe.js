@@ -65,7 +65,8 @@ if ("stripe" in window) {
     var form = $('.js-payment-form');
     form.on('submit', function(event) {
       event.preventDefault();
-
+      
+      $('#payment-form.StripeForm button').toggleClass('hide');
       stripe.createToken(card).then(function(result) {
         if (result.error) {
           // Inform the user if there was an error
@@ -109,6 +110,7 @@ function stripeTokenHandler(token) {
     contentType: 'application/json',
     error: function(xhr, textStatus, errorThrown) {
       var errorMessage = JSON.parse(xhr.responseText).message;
+      $('#payment-form.StripeForm button').toggleClass('hide');
       displayError(errorMessage);
     }
   });
