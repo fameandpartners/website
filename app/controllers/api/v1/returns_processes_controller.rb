@@ -55,18 +55,23 @@ module Api
           return
         end
 
-        if has_invalid_order_id?(params['order_id'])
+        request_object = {
+          "order_id": params['order_id']&.to_i,
+          "line_items": params['line_items'].values
+        }
+
+        if has_invalid_order_id?(request_object[:order_id])
           error_response(@error_message_code["RETRY"])
           return
         end
 
-        if has_incorrect_order_id?(params['order_id'])
+        if has_incorrect_order_id?(request_object[:order_id])
           error_response(@error_message_code["RETRY"])
           return
         end
 
-        return_item_ids = params['line_items'].map do |id|
-                            id['line_item_id']
+        return_item_ids = request_object[:line_items].map do |id|
+                            id['line_item_id'].to_i
                           end
 
         if has_nonexistent_line_items?(return_item_ids)
@@ -74,7 +79,7 @@ module Api
           return
         end
 
-        if has_incorrect_line_items?(return_item_ids, params['order_id'])
+        if has_incorrect_line_items?(return_item_ids, request_object[:order_id])
           error_response(@error_message_code["RETRY"])
           return
         end
@@ -89,7 +94,7 @@ module Api
           return
         end
 
-        process_returns(params)
+        process_returns(request_object)
       end
 
 
@@ -146,8 +151,8 @@ module Api
       def process_returns(obj)
         return_request = {
           :order_return_request => {
-            :order_id => obj['order_id'],
-            :return_request_items_attributes => obj['line_items']
+            :order_id => obj[:order_id],
+            :return_request_items_attributes => obj[:line_items]
           }
         }
 
@@ -157,7 +162,7 @@ module Api
         start_bergen_return_process(@order_return)
         start_next_logistics_process(@order_return)
 
-        return_labels = map_return_labels(obj['line_items'])
+        return_labels = map_return_labels(obj[:line_items])
 
 
         success_response(return_labels)
@@ -177,7 +182,11 @@ module Api
           error: err,
           status: 400
         }
-        render :json => payload, :status => :bad_request
+        respond_with err do |format|
+          format.json do
+            render :json => payload, :status => :bad_request
+          end
+        end
       end
 
       def success_response(msg)
@@ -185,7 +194,11 @@ module Api
           message: msg,
           status: 200
         }
-        render :json => payload, :status => :ok
+        respond_with msg do |format|
+          format.json do
+            render :json => payload, :status => :ok
+          end
+        end
       end
 
       def start_bergen_return_process(order_return)

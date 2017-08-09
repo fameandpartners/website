@@ -1,7 +1,5 @@
 class ReturnMailer < ActionMailer::Base
   def notify_user(order)
-    binding.pry
-
     user = order.return_request_items[0].line_item.order.user
     email = user.email
     order_number  = order.id
