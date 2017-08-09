@@ -103,7 +103,7 @@ class ItemReturnEvent < ActiveRecord::Base
               presence: true,
               numericality: { less_than_or_equal_to:
                           lambda do |event|
-                            tax_adj = event.item_return.line_item&.order&.adjustments&.tax
+                            tax_adj = event.item_return.line_item.try(:order)&.adjustments&.tax
                             tax_total = 0
                             if tax_adj
                               tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
