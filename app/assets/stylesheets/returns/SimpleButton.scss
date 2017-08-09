@@ -10,7 +10,7 @@
   @include transition(0.3s opacity);
   @include desktop {
     max-width: 390px;
-    margin: initial;
+    margin: 0 0 0 auto;
   }
 }
 

@@ -1,7 +1,5 @@
 class ReturnMailer < ActionMailer::Base
   def notify_user(order)
-    binding.pry
-
     user = order.return_request_items[0].line_item.order.user
     email = user.email
     order_number  = order.id
@@ -14,10 +12,9 @@ class ReturnMailer < ActionMailer::Base
     addressObject = Spree::Address.where(id: Spree::Order.where(id: order.order_id)[0].bill_address_id)[0]
     addressOne = addressObject.address1
     addressTwo = addressObject.address2
-    city = addressObject.city:q
+    city = addressObject.city
     billingState = Spree::State.where(id: addressObject.state_id)[0].abbr
     zipCode = addressObject.zipcode
-
     # line_item = event.item_return.line_item
     # order = line_item.order
     # user = order.user
@@ -33,8 +30,8 @@ class ReturnMailer < ActionMailer::Base
       # amount:                      event.refund_amount,
       # order_number:                order.number
     )
-  rescue StandardError => e
-    NewRelic::Agent.notice_error(e)
-    Raven.capture_exception(e)
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
   end
 end
