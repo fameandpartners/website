@@ -25,7 +25,7 @@ function extractLineItemFromOrders(orders, lineItemId) {
   let match = {};
   orders.forEach((o) => {
     o.items.forEach((li) => {
-      if (li.line_item.id === lineItemId) {
+      if (li.line_item.id === Number(lineItemId)) {
         match = li.line_item;
       }
     });
