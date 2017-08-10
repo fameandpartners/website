@@ -1,6 +1,7 @@
 /* global window */
 import React, { Component, PropTypes } from 'react';
 import autoBind from 'auto-bind';
+import classnames from 'classnames';
 
 // Constants
 import PrimaryReturnReasonsObject from '../../../constants/PrimaryReturnReasonsObject';
@@ -17,6 +18,7 @@ import ShippingInfo from './ShippingInfo';
 
 const propTypes = {
   activeTextBox: PropTypes.number,
+  canUpdateReturnArray: PropTypes.bool,
   confirmationPage: PropTypes.bool,
   checkboxStatus: PropTypes.bool,
   hasError: PropTypes.bool,
@@ -35,6 +37,7 @@ const propTypes = {
 
 const defaultProps = {
   activeTextBox: null,
+  canUpdateReturnArray: false,
   checkboxStatus: false,
   confirmationPage: false,
   hasError: false,
@@ -90,7 +93,13 @@ class ProductListItem extends Component {
     };
   }
   handleUpdate() {
-    return () => this.props.updateReturnArray(this.props.checkboxStatus);
+    const { canUpdateReturnArray } = this.props;
+
+    return () => {
+      if (canUpdateReturnArray) {
+        this.props.updateReturnArray(this.props.checkboxStatus);
+      }
+    };
   }
 
   handlePrintLabelClick() {
@@ -117,6 +126,7 @@ class ProductListItem extends Component {
 
   render() {
     const {
+      canUpdateReturnArray,
       confirmationPage,
       checkboxStatus,
       hasError,
@@ -168,7 +178,7 @@ class ProductListItem extends Component {
             onClick={this.handleUpdate()}
             src={image}
             alt={name}
-            className="product-image u-cursor-pointer"
+            className={classnames('product-image', { 'u-cursor-pointer': canUpdateReturnArray })}
           />
           <div className="u-line-height-medium">
             <div className="nameAndPrice--marginBottom">

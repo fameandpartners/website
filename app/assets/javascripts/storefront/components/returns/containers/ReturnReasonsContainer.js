@@ -153,6 +153,7 @@ class ReturnReasonsContainer extends Component {
                 .map((p, i) => (
                   <ProductContainer
                     key={`${p.id}-${p.order_id}`}
+                    canUpdateReturnArray
                     product={p}
                     showForm
                     returnEligible={returnEligible}
