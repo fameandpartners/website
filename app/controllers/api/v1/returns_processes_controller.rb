@@ -93,8 +93,8 @@ module Api
           error_response(@error_message_code["RETURN_EXISTS"])
           return
         end
-
-        if(return_label = create_label(request_object[:order_id]))
+        
+        unless(return_label = create_label(request_object[:order_id]))
           error_response(@error_message_code["RETRY"])
           return
         end 
@@ -208,7 +208,7 @@ module Api
         arr.map do |item|
           {
             "line_item_id": item['line_item_id']
-          }.merge(ItemReturn.where(line_item_id: item['line_item_id']).first&.return_label.as_json)
+          }.merge(ItemReturn.where(line_item_id: item['line_item_id']).first&.item_return_label.as_json)
         end
       end
 
