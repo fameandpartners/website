@@ -5,16 +5,13 @@ class RefundService
   end
 
   def process
+    # manually fill in payment method
+    @refund_data["refund_method"] = gateway.type.split('::').last
     if refund_event.valid?
       response = send_refund_request
-      if response.success?
+      if response_success?(response)#response.success?
         refund_event.save!
-        item_return.refund_status = 'Complete'
-        item_return.refund_method = refund_event.refund_method
-        item_return.refund_amount = Money.parse(refund_amount).amount
-        item_return.refund_ref    = response.params['response']['token']
-        item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
-        item_return.save!
+        process_save_status(response)
 
         { status: :success, event: refund_event }
       else
@@ -28,6 +25,35 @@ class RefundService
   end
 
   private
+  def response_success?(response)
+    if gateway.type == "Spree::Gateway::Pin"
+      response.success?
+    elsif gateway.type == "Spree::Gateway::FameStripe"
+      response[:status] == "succeeded"
+    elsif gateway.type == "Spree::Gateway::PayPalExpress"
+      response.success?
+    end
+  end
+
+  def process_save_status(response)
+    item_return.refund_status = 'Complete'
+    item_return.refund_method = @gateway.type.split('::').last
+    item_return.refund_amount = Money.parse(refund_amount).amount
+
+    if gateway.type == "Spree::Gateway::Pin"
+      item_return.refund_ref    = response.params['response']['token']
+      item_return.refunded_at   = Time.parse(response.params['response']['created_at'])
+    elsif gateway.type == "Spree::Gateway::FameStripe"
+      item_return.refund_ref    = response[:id]
+      item_return.refunded_at   = Time.now
+    elsif gateway.type == "Spree::Gateway::PayPalExpress"
+      item_return.refund_ref    = response.RefundTransactionID
+      item_return.refunded_at   = Time.now
+    end
+
+    item_return.save!
+  end
+
   def response_message(response)
     if response.params['messages'].present?
       response.params['messages'].map { |m| m['message'] }.join("\n")
@@ -37,16 +63,22 @@ class RefundService
   end
 
   def send_refund_request
-    payment_method.refund(refund_amount, item_return.order_payment_ref)
+    if gateway.type == "Spree::Gateway::PayPalExpress"
+      gateway.refund_reparam(@refund_data['refund_amount'], item_return)
+    else
+      gateway.refund(refund_amount, item_return.order_payment_ref)
+    end
   end
 
   def refund_amount
     (@refund_data['refund_amount'].to_f * 100).to_i
   end
 
-  def payment_method
-    Spree::Gateway::Pin.where(active: true).first
+  def gateway
+    # safe to take first cause there's only ever 1 payment method
+    @gateway ||= Spree::PaymentMethod.find(item_return.line_item.order.payments.first.payment_method_id)
   end
+
 
   def refund_event
     @refund_event ||= item_return.events.refund.build(@refund_data)

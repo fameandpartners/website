@@ -4,7 +4,7 @@ module Spree
       before_filter :load_order, :only => :update
       before_filter :associate_user, :only => :update
 
-      # Spree::Core::ControllerHelpers::Auth overrides 
+      # Spree::Core::ControllerHelpers::Auth overrides
       # Spree::Api::BaseController's unauthorized method...
       # Which is not a good thing.
       # Here's a small hack to shuffle around the method.

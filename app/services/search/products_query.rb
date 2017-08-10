@@ -1,12 +1,14 @@
 # adapter to search mechanics
 # products search
 #   query: query string
-#   limit: 1000 by default  
+#   limit: 1000 by default
+
+# thanh: cannot find references to this forsaken file
 module Search
   class ProductsQuery
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
-      
+
       limit        = options[:limit].present? ? options[:limit].to_i : 1000
 
       query_string = Tire::Utils.escape(options[:query])

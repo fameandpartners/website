@@ -84,8 +84,9 @@ class Products::CollectionsController < Products::BaseController
                       Array.wrap(params[:pids])
                   end
 
-    page_pids = page.get(:pids).to_s.split(',')
-    params_pids.empty? ? page_pids : params_pids
+    page_pids = page.get(:pids).to_s.strip.split(',')
+    pids = params_pids.empty? ? page_pids : params_pids
+    pids&.uniq
   end
 
   def set_collection_resource
@@ -111,6 +112,7 @@ class Products::CollectionsController < Products::BaseController
 
   def punch_products
     return if filters_applied?
+
     products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.effective_page_limit)
     @collection.products = if page.get('curated') && product_ids.size > 0
                              @collection.total_products = product_ids.size
