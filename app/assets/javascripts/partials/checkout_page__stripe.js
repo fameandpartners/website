@@ -3,6 +3,8 @@ eslint-disable
 */
 (function() {
   if ("stripe" in window) {
+    var stripePending = false;
+    var form = $('.js-payment-form');
     var elements = stripe.elements();
 
     if ($('.js-card-element').length){
@@ -66,22 +68,20 @@ eslint-disable
 
 
       // Create a token or display an error when the form is submitted.
-      var form = $('.js-payment-form');
-      var stripePending = false
       form.on('submit', function(event) {
         event.preventDefault();
         if(stripePending) {
-          console.log("Too fast, already processing")
-          return null
+          console.log("Too fast, already processing");
+          return null;
         }
-        stripePending = true
+        stripePending = true;
         // $('#payment-form.StripeForm button').toggleClass('hide');
         stripe.createToken(card).then(function(result) {
           if (result.error) {
             // Inform the user if there was an error
-            stripePending = false
-            console.log("Create Token complete, setting stripePending to false")
-            displayError(result.error.message)
+            stripePending = false;
+            console.log("Create Token complete, setting stripePending to false");
+            displayError(result.error.message);
           } else {
             // Send the token to your server
             stripeTokenHandler(result.token);
@@ -89,14 +89,14 @@ eslint-disable
         });
       });
     }
-  }
+  };
 
   function displayError(message) {
     var errorElement = $('.js-card-errors');
     errorElement.textContent = message;
 
     stripeInputWrapper.addClass(stripeInputError);
-  }
+  };
 
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
@@ -136,4 +136,4 @@ eslint-disable
     });
   }
 
-})()
+})();
