@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
 import { assign } from 'lodash';
-
+import scroll from 'scroll';
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
 import SimpleButton from '../components/SimpleButton';
@@ -13,6 +13,8 @@ import ProductContainer from './ProductContainer';
 
 // Actions
 import * as ReturnActions from '../actions/index';
+
+const page = require('scroll-doc')();
 
 const propTypes = {
   orderData: PropTypes.array,
@@ -53,6 +55,7 @@ class ReturnReasonsContainer extends Component {
 
   checkForReturnRequestErrors() {
     const { actions, returnArray } = this.props;
+
     // This is a little convuluted
     // We're creating an error object that is keyed off of line_item_id
     const returnRequestErrors = returnArray.reduce(
@@ -75,8 +78,12 @@ class ReturnReasonsContainer extends Component {
   }
 
   requestReturn() {
-    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) { return; }
     const { actions, returnArray, guestEmail } = this.props;
+    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) {
+      return;
+    } else if (returnArray.length === 0) {
+      scroll.top(page, 0);
+    }
     const { spree_order } = this.state.order;
     const returnsObj = {
       order_id: spree_order.id,
@@ -110,11 +117,8 @@ class ReturnReasonsContainer extends Component {
       };
     }
   }
-  // TODO: @mikeg must remove
   componentDidMount() {
-    $('html, body').animate({
-      scrollTop: 0,
-    }, 600);
+    scroll.top(page, 0);
   }
   render() {
     const { order, orderArray } = this.state;
