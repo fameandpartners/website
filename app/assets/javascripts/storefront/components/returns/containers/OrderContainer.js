@@ -65,7 +65,7 @@ class OrderContainer extends Component {
           returnIsLoading
           ? (
             <div>
-              <div className="OrderContainer__loading animate-flicker">Loading Orders...</div>
+              <div className="OrderContainer--loading animate-flicker">Loading Orders...</div>
               <div className="sk-folding-cube">
                 <div className="sk-cube1 sk-cube" />
                 <div className="sk-cube2 sk-cube" />
