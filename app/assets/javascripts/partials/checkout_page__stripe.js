@@ -102,10 +102,10 @@ eslint-disable
     // Insert the token ID into the form so it gets submitted to the server
     var params = {};
     var payment_method_id = $("#StripePaymentMethodID").val();
-    var card = {}
+    var card = {};
     card[payment_method_id] = {
                                 "cc_type": token.card.brand.toLowerCase(),
-                                "gateway_payment_profile_id": token.id
+                                "gateway_payment_profile_id": token.id,
                               };
     params["authenticity_token"] = $('meta[name="csrf-token"]').attr('content');
     params["payment_source"] = card;
@@ -125,13 +125,12 @@ eslint-disable
           displayError("Unknown error occured");
         }
         catch (e) {
-          console.log(e)
-          stripePending = false
+          console.log(e);
+          stripePending = false;
         }
       },
       always: function() {
-        console.log("POST complete, setting stripePending to false")
-        stripePending = false
+        stripePending = false;
       }
 
     });
