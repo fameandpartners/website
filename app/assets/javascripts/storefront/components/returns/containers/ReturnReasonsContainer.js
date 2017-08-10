@@ -94,8 +94,8 @@ class ReturnReasonsContainer extends Component {
   }
 
   requestReturn() {
-    const { actions, returnArray, guestEmail } = this.props;
-    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) {
+    const { actions, returnArray, guestEmail, returnIsLoading } = this.props;
+    if (returnIsLoading || this.checkForReturnRequestErrors()) {
       return;
     } else if (returnArray.length === 0) {
       scroll.top(scrollElement, 0);
