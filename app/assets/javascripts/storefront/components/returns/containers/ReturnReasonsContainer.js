@@ -7,6 +7,7 @@ import autoBind from 'auto-bind';
 import { assign } from 'lodash';
 import scroll from 'scroll';
 import scrollDoc from 'scroll-doc';
+
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
 import SimpleButton from '../components/SimpleButton';
@@ -84,6 +85,7 @@ class ReturnReasonsContainer extends Component {
       returnResponseErrors,
       returnRequestErrors,
     } = this.props;
+
     if (!returnIsLoading && returnResponseErrors && returnResponseErrors.error) {
       return returnResponseErrors.error;
     }
@@ -115,13 +117,11 @@ class ReturnReasonsContainer extends Component {
       })),
     };
     actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
-    return false;
   }
 
   componentWillMount() {
-    const { orderData, actions } = this.props;
-    if (orderData === null) {
-      actions.getProductData();
+    const { orderData } = this.props;
+    if (!orderData || orderData.length === 0) {
       browserHistory.push('/view-orders');
       window.location.reload();
     } else {
@@ -144,8 +144,8 @@ class ReturnReasonsContainer extends Component {
   render() {
     const { order, orderArray } = this.state;
     const {
+      params,
       returnIsLoading,
-      returnResponseErrors,
       returnRequestErrors,
       returnSubtotal,
     } = this.props;
@@ -170,8 +170,11 @@ class ReturnReasonsContainer extends Component {
           </div>
         </div>
         <div className="grid-noGutter-spaceAround">
-          <div className="col-10_md-12 u-no-padding">
-            <div className="order__container Product__listItem__container u-no-margin">
+          <div className="col-10_md-12 u-no-padding order__container">
+            <p className="order-id u-margin-bottom-small font-sans-serif">
+              Order {params.orderID}
+            </p>
+            <div className="Product__listItem__container u-no-margin">
               {
                 orderArray
                 .filter(p => !p.returns_meta)
@@ -195,12 +198,13 @@ class ReturnReasonsContainer extends Component {
               />
               <div className="grid-right">
                 <div className="col-4_md-12_sm-12">
-                  <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
+                  <div role="button" className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
+                      containerClassName="SimpleButton__container--right-align"
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />
-                    <span>
+                    <span className="u-margin-top-medium u-right-text u-display-inherit">
                       {this.showError()}
                     </span>
                   </div>
