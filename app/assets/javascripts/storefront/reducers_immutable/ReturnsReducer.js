@@ -35,6 +35,8 @@ export default function (state = initialState, action) {
       return assign({}, state, {
         returnArray: action.payload.returnArray,
         returnSubtotal: action.payload.returnSubtotal,
+        returnResponseErrors: {},
+        returnRequestErrors: {},
       });
     case 'REMOVE_PRODUCT_FROM_RETURN_ARRAY':
       return assign({}, state, {

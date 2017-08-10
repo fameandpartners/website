@@ -9,6 +9,7 @@ import classnames from 'classnames';
 
 const propTypes = {
   activeTextBox: PropTypes.number,
+  canUpdateReturnArray: PropTypes.bool,
   confirmationPage: PropTypes.bool,
   product: PropTypes.object.isRequired,
   hasError: PropTypes.bool,
@@ -31,6 +32,7 @@ const propTypes = {
 
 const defaultProps = {
   activeTextBox: null,
+  canUpdateReturnArray: false,
   confirmationPage: false,
   checkboxStatus: false,
   hasError: false,
@@ -96,6 +98,7 @@ class ProductContainer extends Component {
   render() {
     const {
       activeTextBox,
+      canUpdateReturnArray,
       confirmationPage,
       hasError,
       lastChild,
@@ -118,6 +121,7 @@ class ProductContainer extends Component {
       >
         <ProductListItem
           activeTextBox={activeTextBox}
+          canUpdateReturnArray={canUpdateReturnArray}
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
           orderIndex={orderIndex}

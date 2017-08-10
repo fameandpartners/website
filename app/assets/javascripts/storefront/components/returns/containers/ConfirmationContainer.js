@@ -2,10 +2,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'auto-bind';
+import scroll from 'scroll';
+import scrollDoc from 'scroll-doc';
 import Confirmation from '../components/Confirmation';
 
+const scrollElement = scrollDoc();
+
 const propTypes = {
-  orderData: PropTypes.object.isRequired,
+  orderData: PropTypes.array.isRequired,
   logisticsData: PropTypes.object.isRequired,
 };
 
@@ -28,9 +32,7 @@ class ConfirmationContainer extends Component {
   render() {
     const { orderData, logisticsData } = this.props;
     if (logisticsData) {
-      $('html, body').animate({
-        scrollTop: 0,
-      }, 600);
+      scroll.top(scrollElement, 0);
     }
     return (
       <Confirmation
@@ -43,7 +45,7 @@ class ConfirmationContainer extends Component {
 }
 function mapStateToProps(state) {
   return {
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
     logisticsData: state.returnsData.logisticsData,
   };
 }

@@ -51,6 +51,11 @@ export const setReturnLoadingState = ({ isLoading }) => ({
   payload: { isLoading },
 });
 
+export const setHasRequestedOrders = ({ hasRequestedOrders }) => ({
+  type: 'SET_HAS_REQUESTED_ORDERS',
+  payload: { hasRequestedOrders },
+});
+
 export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
   type: 'SET_RETURN_REASON_ERRORS',
   payload: { returnRequestErrors },
@@ -115,14 +120,15 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
     })
     .fail((err) => {
       console.log(err);
+    })
+    .always(() => {
+      dispatch(setReturnLoadingState({ isLoading: false }));
     });
   }
 };
 
 
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
-  console.log(csrfToken);
-  console.log(contentType);
   $.ajax({
     url: '/api/v1/submit_return',
     dataType: 'json',

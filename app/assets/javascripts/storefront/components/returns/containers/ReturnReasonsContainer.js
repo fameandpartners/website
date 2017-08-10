@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
 import { assign } from 'lodash';
+import scroll from 'scroll';
+import scrollDoc from 'scroll-doc';
 
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
@@ -13,6 +15,7 @@ import ProductContainer from './ProductContainer';
 
 // Actions
 import * as ReturnActions from '../actions/index';
+
 
 const propTypes = {
   orderData: PropTypes.array,
@@ -36,6 +39,8 @@ const defaultProps = {
   returnSubtotal: '0.00',
   guestEmail: null,
 };
+
+const scrollElement = scrollDoc();
 
 class ReturnReasonsContainer extends Component {
   constructor(props) {
@@ -74,9 +79,33 @@ class ReturnReasonsContainer extends Component {
     return false;
   }
 
+  showError() {
+    const {
+      returnIsLoading,
+      returnResponseErrors,
+      returnRequestErrors,
+    } = this.props;
+
+    if (!returnIsLoading && returnResponseErrors && returnResponseErrors.error) {
+      return returnResponseErrors.error;
+    }
+    if (!returnIsLoading && returnRequestErrors && returnRequestErrors.error) {
+      return returnRequestErrors.error;
+    }
+    return '';
+  }
+
   requestReturn() {
-    if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) { return; }
-    const { actions, returnArray, guestEmail } = this.props;
+    const { actions, returnArray, guestEmail, returnIsLoading } = this.props;
+    if (returnIsLoading || this.checkForReturnRequestErrors()) {
+      return;
+    } else if (returnArray.length === 0) {
+      scroll.top(scrollElement, 0);
+      actions.setReturnLoadingState({ isLoading: false });
+      actions.setReturnReasonErrors({ returnRequestErrors: {
+        error: 'Please select an item you would like to return.',
+      } });
+    }
     const { spree_order } = this.state.order;
     const returnsObj = {
       order_id: spree_order.id,
@@ -91,9 +120,8 @@ class ReturnReasonsContainer extends Component {
   }
 
   componentWillMount() {
-    const { orderData, actions } = this.props;
-    if (orderData === null) {
-      actions.getProductData();
+    const { orderData } = this.props;
+    if (!orderData || orderData.length === 0) {
       browserHistory.push('/view-orders');
       window.location.reload();
     } else {
@@ -110,17 +138,14 @@ class ReturnReasonsContainer extends Component {
       };
     }
   }
-  // TODO: @mikeg must remove
   componentDidMount() {
-    $('html, body').animate({
-      scrollTop: 0,
-    }, 600);
+    scroll.top(scrollElement, 0);
   }
   render() {
     const { order, orderArray } = this.state;
     const {
+      params,
       returnIsLoading,
-      returnResponseErrors,
       returnRequestErrors,
       returnSubtotal,
     } = this.props;
@@ -145,14 +170,18 @@ class ReturnReasonsContainer extends Component {
           </div>
         </div>
         <div className="grid-noGutter-spaceAround">
-          <div className="col-10_md-12 u-no-padding">
-            <div className="order__container Product__listItem__container u-no-margin">
+          <div className="col-10_md-12 u-no-padding order__container">
+            <p className="order-id u-margin-bottom-small font-sans-serif">
+              Order {params.orderID}
+            </p>
+            <div className="Product__listItem__container u-no-margin">
               {
                 orderArray
                 .filter(p => !p.returns_meta)
                 .map((p, i) => (
                   <ProductContainer
                     key={`${p.id}-${p.order_id}`}
+                    canUpdateReturnArray
                     product={p}
                     showForm
                     returnEligible={returnEligible}
@@ -169,16 +198,15 @@ class ReturnReasonsContainer extends Component {
               />
               <div className="grid-right">
                 <div className="col-4_md-12_sm-12">
-                  <div className="SimpleButton__wrapper" onClick={this.requestReturn}>
+                  <div role="button" className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
+                      containerClassName="SimpleButton__container--right-align"
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />
-                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.error ?
-                      <span>{returnResponseErrors.error}</span>
-                      :
-                      <span />
-                    }
+                    <span className="u-margin-top-medium u-right-text u-display-inherit">
+                      {this.showError()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -200,7 +228,7 @@ function mapStateToProps(state) {
     returnResponseErrors: state.returnsData.returnResponseErrors,
     returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
   };
 }
 function mapDispatchToProps(dispatch) {
