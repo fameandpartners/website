@@ -115,14 +115,15 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
     })
     .fail((err) => {
       console.log(err);
+    })
+    .always(() => {
+      dispatch(setReturnLoadingState({ isLoading: false }));
     });
   }
 };
 
 
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
-  console.log(csrfToken);
-  console.log(contentType);
   $.ajax({
     url: '/api/v1/submit_return',
     dataType: 'json',
