@@ -72,10 +72,10 @@ module Newgistics
     end
 
     def make_return_id_map
-      if using_newgistics_staging_env?
-        {"returnId" => "123456789A"}
-      else
+      if Rails.env == 'production'
         {"returnId" => @return_id}
+      else
+        {"returnId" => "123456789A"}        
       end
     end
 
@@ -90,10 +90,6 @@ module Newgistics
           @label_pdf_url = link['href']
         end
       end
-    end
-
-    def using_newgistics_staging_env?
-      Rails.env != 'production'
     end
   end
 end
