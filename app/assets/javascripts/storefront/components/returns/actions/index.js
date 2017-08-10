@@ -51,6 +51,11 @@ export const setReturnLoadingState = ({ isLoading }) => ({
   payload: { isLoading },
 });
 
+export const setHasRequestedOrders = ({ hasRequestedOrders }) => ({
+  type: 'SET_HAS_REQUESTED_ORDERS',
+  payload: { hasRequestedOrders },
+});
+
 export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
   type: 'SET_RETURN_REASON_ERRORS',
   payload: { returnRequestErrors },
