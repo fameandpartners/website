@@ -76,12 +76,31 @@ class ReturnReasonsContainer extends Component {
     return false;
   }
 
+  showError() {
+    const {
+      returnIsLoading,
+      returnResponseErrors,
+      returnRequestErrors,
+    } = this.props;
+    if (!returnIsLoading && returnResponseErrors && returnResponseErrors.error) {
+      return returnResponseErrors.error;
+    }
+    if (!returnIsLoading && returnRequestErrors && returnRequestErrors.error) {
+      return returnRequestErrors.error;
+    }
+    return '';
+  }
+
   requestReturn() {
     const { actions, returnArray, guestEmail } = this.props;
     if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) {
       return;
     } else if (returnArray.length === 0) {
       scroll.top(page, 0);
+      actions.setReturnLoadingState({ isLoading: false });
+      actions.setReturnReasonErrors({ returnRequestErrors: {
+        error: 'Please select an item you would like to return.',
+      } });
     }
     const { spree_order } = this.state.order;
     const returnsObj = {
@@ -94,6 +113,7 @@ class ReturnReasonsContainer extends Component {
       })),
     };
     actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
+    return false;
   }
 
   componentWillMount() {
@@ -177,11 +197,9 @@ class ReturnReasonsContainer extends Component {
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />
-                    { !returnIsLoading && returnResponseErrors && returnResponseErrors.error ?
-                      <span>{returnResponseErrors.error}</span>
-                      :
-                      <span />
-                    }
+                    <span>
+                      {this.showError()}
+                    </span>
                   </div>
                 </div>
               </div>
