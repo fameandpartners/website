@@ -159,7 +159,6 @@ Spree::LineItem.class_eval do
   end
 
   def as_json(options = { })
-   # binding.pry
     json = super(options)
     json['line_item']['returnable'] = can_dress_be_returned?
     json['line_item']['products_meta'] = {

@@ -182,26 +182,26 @@ module Api
 
 
       def create_label(order_id)
-      order = Spree::Order.find(order_id)
+        order = Spree::Order.find(order_id)
 
-      label = Newgistics::ShippingLabel.new(
-        order.user_first_name,
-        order.user_last_name,
-        order.billing_address,
-        order.email,
-        order.number
-      )
-
-      if(label.fetch_shipping_label_from_api().nil?)
-         return nil
-      end
-
-      item_return_label = ItemReturnLabel.new(
-        :label_image_url => label.label_image_url,
-        :label_pdf_url => label.label_pdf_url,
-        :label_url => label.label_url,
-        :carrier => label.carrier 
+        label = Newgistics::ShippingLabel.new(
+          order.user_first_name,
+          order.user_last_name,
+          order.billing_address,
+          order.email,
+          order.number
         )
+
+        if(label.fetch_shipping_label_from_api().nil?)
+           return nil
+        end
+
+        item_return_label = ItemReturnLabel.new(
+          :label_image_url => label.label_image_url,
+          :label_pdf_url => label.label_pdf_url,
+          :label_url => label.label_url,
+          :carrier => label.carrier 
+          )
       end
 
       def map_return_labels(arr)
