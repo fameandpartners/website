@@ -201,7 +201,7 @@ function mapStateToProps(state) {
     returnResponseErrors: state.returnsData.returnResponseErrors,
     returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
   };
 }
 function mapDispatchToProps(dispatch) {

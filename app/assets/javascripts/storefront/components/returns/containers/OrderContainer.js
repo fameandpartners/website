@@ -13,6 +13,7 @@ import ReturnConstants from '../../../constants/ReturnConstants';
 const propTypes = {
   actions: PropTypes.object,
   orderData: PropTypes.array,
+  hasRequestedOrders: PropTypes.bool,
   returnIsLoading: PropTypes.bool,
   params: PropTypes.object.isRequired,
   requiresViewOrdersRefresh: PropTypes.bool,
@@ -20,32 +21,27 @@ const propTypes = {
 
 const defaultProps = {
   actions: {},
+  hasRequestedOrders: false,
   orderData: [],
   returnIsLoading: false,
   requiresViewOrdersRefresh: false,
 };
 
 class OrderContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasRequestedReturns: false,
-    };
-  }
-
   componentWillMount() {
     const { email, orderID } = this.props.params;
+    const { hasRequestedOrders, requiresViewOrdersRefresh } = this.props;
 
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
-    if (this.props.requiresViewOrdersRefresh) {
+    if (requiresViewOrdersRefresh) {
       win.location = ReturnConstants.RETURN_ROUTES.ORDERS;
     }
 
     // Get the order product data only once
-    if (!this.state.hasRequestedReturns) {
+    if (!hasRequestedOrders) {
       const { actions } = this.props;
-      this.setState({ hasRequestedReturns: true });
+      actions.setHasRequestedOrders({ hasRequestedOrders: true });
       actions.setReturnLoadingState({ isLoading: true });
       if (email && orderID) {
         actions.getProductData(true, email, orderID);
@@ -80,7 +76,7 @@ class OrderContainer extends Component {
           )
           : null
         }
-        { orderData ?
+        { orderData.length ?
           (
             <div>
               <h1 className="u-center-text">Orders</h1>
@@ -96,7 +92,8 @@ class OrderContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
+    hasRequestedOrders: state.orderData.hasRequestedOrders,
     returnIsLoading: state.returnsData.returnIsLoading,
     requiresViewOrdersRefresh: state.returnsData.requiresViewOrdersRefresh,
   };
