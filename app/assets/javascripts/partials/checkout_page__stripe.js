@@ -89,14 +89,14 @@ eslint-disable
         });
       });
     }
-  };
+  }
 
   function displayError(message) {
     var errorElement = $('.js-card-errors');
     errorElement.textContent = message;
 
     stripeInputWrapper.addClass(stripeInputError);
-  };
+  }
 
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
