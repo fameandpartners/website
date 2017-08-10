@@ -55,7 +55,6 @@ class ReturnReasonsContainer extends Component {
 
   checkForReturnRequestErrors() {
     const { actions, returnArray } = this.props;
-
     // This is a little convuluted
     // We're creating an error object that is keyed off of line_item_id
     const returnRequestErrors = returnArray.reduce(
