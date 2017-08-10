@@ -41,7 +41,8 @@ module Api
         @error_message_code = {
           "RETRY" => "Please try again.",
           "CONTACT" => "Something's wrong, please contact customer service.",
-          "RETURN_EXISTS" => "These items already have a return."
+          "RETURN_EXISTS" => "These items already have a return.",
+          "NO_ITEMS_SELECTED" => "Please select an item you would like to return."
         }
 
         @user = get_user()
@@ -51,7 +52,7 @@ module Api
         end
 
         if has_incorrect_params?
-          error_response("Please select an item you would like to return.")
+          error_response(@error_message_code["NO_ITEMS_SELECTED"])
           return
         end
 
