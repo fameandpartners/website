@@ -51,7 +51,7 @@ module Api
         end
 
         if has_incorrect_params?
-          error_response("Incorrect parameters. Expecting { order_id: INT, line_items: ARRAY }.")
+          error_response("Please select an item you would like to return.")
           return
         end
 
