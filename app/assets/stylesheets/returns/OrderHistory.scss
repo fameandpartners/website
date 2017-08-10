@@ -5,6 +5,12 @@
   }
 }
 
+.OrderContainer--loading {
+  margin-top: 200px;
+  text-align: center;
+  font-size: 46px;
+}
+
 .order__container .order-id {
   font-size: 22px;
   text-align: center;
@@ -38,6 +44,7 @@
     margin: 25px 0px 40px;
   }
 }
+
 .order__container  .ship-date {
     color: #979797;
     text-align: center;

@@ -9,7 +9,7 @@ import Confirmation from '../components/Confirmation';
 const scrollElement = scrollDoc();
 
 const propTypes = {
-  orderData: PropTypes.object.isRequired,
+  orderData: PropTypes.array.isRequired,
   logisticsData: PropTypes.object.isRequired,
 };
 
@@ -45,7 +45,7 @@ class ConfirmationContainer extends Component {
 }
 function mapStateToProps(state) {
   return {
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
     logisticsData: state.returnsData.logisticsData,
   };
 }
