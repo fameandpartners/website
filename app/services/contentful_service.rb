@@ -192,6 +192,12 @@ module Contentful
       end
     end
 
+    def self.map_editorials(arr)
+      arr.map do |item|
+        jsonify_large_lp_container(item)
+      end
+    end
+
     def self.create_landing_page_container(parent_container)
 
       main_header_tile = jsonify_header_container(parent_container.header)
@@ -204,6 +210,7 @@ module Contentful
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
+        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
 
         {
           id: item.content_type.id,
@@ -212,9 +219,12 @@ module Contentful
           sm_items: sm_items,
           email_text: email_text,
           button_label: button_label,
-          relative_url: relative_url
+          relative_url: relative_url,
+          lg_items: lg_items
         }
       end
+
+      binding.pry
 
       meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
       meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
