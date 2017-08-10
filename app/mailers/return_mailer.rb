@@ -45,7 +45,7 @@ class ReturnMailer < ActionMailer::Base
     Marketing::CustomerIOEventTracker.new.track(
       user,
       'return_started_email',
-      userData: user_returns_object
+      user_data: user_returns_object
     )
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
