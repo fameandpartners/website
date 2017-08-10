@@ -16,11 +16,7 @@ module Newgistics
       @country = address.country.iso
       @zip = address.zipcode
       @return_id = return_id
-
-      fetch_shipping_label_from_api()
     end
-
-    private
 
     def fetch_shipping_label_from_api
       uri = URI('https://apiint.newgistics.com/WebAPI/Shipment/')
@@ -36,14 +32,15 @@ module Newgistics
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == "https")
-
       response = http.request(request)
       if(response.kind_of? Net::HTTPSuccess)
         convert_json_to_instance_variables(JSON.parse(response.body))
       else
-        raise Exception.new("Newgistics Label Creation Failure")
+        nil
       end
     end
+
+    private
 
     def make_address_map
       {
