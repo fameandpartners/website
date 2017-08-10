@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router';
 import autoBind from 'auto-bind';
 import { assign } from 'lodash';
 import scroll from 'scroll';
+import scrollDoc from 'scroll-doc';
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
 import SimpleButton from '../components/SimpleButton';
@@ -14,7 +15,6 @@ import ProductContainer from './ProductContainer';
 // Actions
 import * as ReturnActions from '../actions/index';
 
-const page = require('scroll-doc')();
 
 const propTypes = {
   orderData: PropTypes.array,
@@ -38,6 +38,8 @@ const defaultProps = {
   returnSubtotal: '0.00',
   guestEmail: null,
 };
+
+const scrollElement = scrollDoc();
 
 class ReturnReasonsContainer extends Component {
   constructor(props) {
@@ -96,7 +98,7 @@ class ReturnReasonsContainer extends Component {
     if (this.props.returnIsLoading || this.checkForReturnRequestErrors()) {
       return;
     } else if (returnArray.length === 0) {
-      scroll.top(page, 0);
+      scroll.top(scrollElement, 0);
       actions.setReturnLoadingState({ isLoading: false });
       actions.setReturnReasonErrors({ returnRequestErrors: {
         error: 'Please select an item you would like to return.',
@@ -137,7 +139,7 @@ class ReturnReasonsContainer extends Component {
     }
   }
   componentDidMount() {
-    scroll.top(page, 0);
+    scroll.top(scrollElement, 0);
   }
   render() {
     const { order, orderArray } = this.state;

@@ -2,10 +2,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'auto-bind';
-import Confirmation from '../components/Confirmation';
 import scroll from 'scroll';
+import scrollDoc from 'scroll-doc';
+import Confirmation from '../components/Confirmation';
 
-const page = require('scroll-doc')();
+const scrollElement = scrollDoc();
 
 const propTypes = {
   orderData: PropTypes.object.isRequired,
@@ -31,7 +32,7 @@ class ConfirmationContainer extends Component {
   render() {
     const { orderData, logisticsData } = this.props;
     if (logisticsData) {
-      scroll.top(page, 0);
+      scroll.top(scrollElement, 0);
     }
     return (
       <Confirmation
