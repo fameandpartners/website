@@ -9,14 +9,12 @@ module Api
 
       # GET
       def index
-        user = spree_current_user
-        @orders = user.orders.complete.map do |order|
-          Orders::OrderPresenter.new(order)
+        @orders = spree_current_user.orders.joins(line_items: [:personalization, :variant, :item_return]).eager_load(line_items: [:personalization, :variant, :item_return]).map do |order|
+          Orders::OrderPresenter.new(order, order.line_items)
         end
 
         respond_with @orders
       end
-
 
       # GET (guest)
       def guest
