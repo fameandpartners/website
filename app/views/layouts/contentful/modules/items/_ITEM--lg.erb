@@ -35,3 +35,9 @@
   </ul>
 </div>
 <% end %>
+
+<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
+  <div class="Editorial__overlayBottomCaption">
+    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
+  </div>
+<% end %>
