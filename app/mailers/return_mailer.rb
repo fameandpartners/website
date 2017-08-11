@@ -1,35 +1,51 @@
 class ReturnMailer < ActionMailer::Base
-  def notify_user(order)
-    user = order.return_request_items[0].line_item.order.user
-    email = user.email
-    order_number  = order.id
-    subject = "Refund notification for order #" + Spree::Order.where(id: order.order_id)[0].number
-    returnTotal = 0
-    ItemReturn.where(id: order_number).select{ |item| returnTotal += item.item_price_adjusted }
-    returnArray = []
-    ItemReturn.where(id: order_number).select{ |item| returnArray.push(item) }
-    # Get billing address
-    addressObject = Spree::Address.where(id: Spree::Order.where(id: order.order_id)[0].bill_address_id)[0]
-    addressOne = addressObject.address1
-    addressTwo = addressObject.address2
-    city = addressObject.city:q
-    billingState = Spree::State.where(id: addressObject.state_id)[0].abbr
-    zipCode = addressObject.zipcode
 
-    # line_item = event.item_return.line_item
-    # order = line_item.order
-    # user = order.user
-    # subject = "Refund notification for order #{order.number}"
+  def create_formatted_order(return_request)
+    order = return_request.order
+    user = order.user
+    return_items = return_request.return_request_items
+    billing_address = order.billing_address
+    label_print_link = return_items.first.item_return.return_label[:label_url]
+    send_by_date = (return_request.order.projected_delivery_date + 45).strftime("%m/%d/%y")
+    formatted_return_items = return_items.map do |item|
+      {
+        name: item.line_item&.product&.name,
+        size: item.line_item&.cart_item&.size&.presentation,
+        color: item.line_item&.cart_item&.color&.presentation,
+        image: item.line_item&.cart_item&.image&.large,
+        price: item.line_item&.product&.price,
+        height_value: item.line_item&.personalization&.height_value,
+        height_unit: item.line_item&.personalization&.height_unit
+      }
+    end
 
+    # .sum isn't working for some reason (also need to verify this includes tax / discounts...)
+    total_refund_amount = formatted_return_items.reduce(0) { |sum, item| sum + item[:price] }
+
+    {
+      "order_number": order.number,
+      "email": user.email,
+      "send_by_date": send_by_date,
+      "label_url": label_print_link,
+      "total_refund": total_refund_amount,
+      "address": {
+        "address_one": billing_address[:address1],
+        "address_two": billing_address[:address2],
+        "city": billing_address[:city],
+        "state": billing_address.state[:abbr],
+        "zipcode": billing_address[:zipcode]
+      },
+      "items": formatted_return_items
+    }
+  end
+
+  def notify_user(order_return_request)
+    user_returns_object = create_formatted_order(order_return_request).as_json
+    user = order_return_request.order.user
     Marketing::CustomerIOEventTracker.new.track(
       user,
       'return_started_email',
-      email_to: 'navs@fameandpartners.com',
-      amount: '$123.45'
-      # email_to:                    user.email,
-      # subject:                     subject,
-      # amount:                      event.refund_amount,
-      # order_number:                order.number
+      user_data: user_returns_object
     )
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
