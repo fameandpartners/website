@@ -116,6 +116,23 @@ class ProductListItem extends Component {
     );
   }
 
+  showCharLimit() {
+    const { product } = this.props;
+    const { openEndedReturnReason } = product;
+    if (!openEndedReturnReason || openEndedReturnReason.length < 250) {
+      return false;
+    }
+    const charactersRemaining = 500 - openEndedReturnReason.length;
+    if (charactersRemaining > 20) {
+      return <span>{charactersRemaining} characters left</span>;
+    }
+    return (
+      <span className="u-warning-text">
+        {charactersRemaining} characters left
+      </span>
+    );
+  }
+
   componentDidUpdate() {
     const { product, activeTextBox } = this.props;
     const { id } = product;
@@ -295,7 +312,9 @@ class ProductListItem extends Component {
                       value={openEndedReturnReason}
                       ref={(text) => { this.textInput = text; }}
                       type="text"
+                      maxLength="500"
                     />
+                    {this.showCharLimit()}
                   </div>
                 </form>
               </div>
