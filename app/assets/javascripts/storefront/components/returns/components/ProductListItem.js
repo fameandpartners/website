@@ -119,12 +119,20 @@ class ProductListItem extends Component {
   showCharLimit() {
     const { product } = this.props;
     const { openEndedReturnReason } = product;
-    if (!openEndedReturnReason || openEndedReturnReason.length < 250) {
+    if (!openEndedReturnReason) {
       return false;
     }
     const charactersRemaining = 500 - openEndedReturnReason.length;
-    if (charactersRemaining > 20) {
+    if (charactersRemaining > 250) {
+      return false;
+    } else if (charactersRemaining > 20) {
       return <span>{charactersRemaining} characters left</span>;
+    } else if (charactersRemaining === 1) {
+      return (
+        <span className="u-warning-text">
+          {charactersRemaining} character left
+        </span>
+      );
     }
     return (
       <span className="u-warning-text">
