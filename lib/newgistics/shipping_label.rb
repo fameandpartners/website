@@ -19,7 +19,7 @@ module Newgistics
     end
 
     def fetch_shipping_label_from_api
-      uri = URI('https://apiint.newgistics.com/WebAPI/Shipment/')
+      uri = URI(configatron.newgistics.uri)
       request = Net::HTTP::Post.new(
         uri,
         {
