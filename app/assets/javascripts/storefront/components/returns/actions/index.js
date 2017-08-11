@@ -1,3 +1,4 @@
+/* global $, document */
 const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 const contentType = 'application/json';
 
@@ -102,11 +103,14 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
       },
     })
     .done((res) => {
-      const guestOrderArray = [res.returns_processes];
+      const guestOrderArray = [res];
       dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
     })
     .fail((err) => {
       console.log(err);
+    })
+    .always(() => {
+      dispatch(setReturnLoadingState({ isLoading: false }));
     });
   } else {
     $.ajax({
@@ -150,8 +154,6 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
     });
   })
   .fail((err) => {
-    console.log(err);
-
     dispatch(setReturnLoadingState({ isLoading: false }));
     if (err && err.responseText) {
       const error = JSON.parse(err.responseText);
