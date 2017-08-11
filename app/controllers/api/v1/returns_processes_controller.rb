@@ -94,11 +94,11 @@ module Api
           error_response(@error_message_code["RETURN_EXISTS"])
           return
         end
-        
+
         unless(return_label = create_label(request_object[:order_id]))
           error_response(@error_message_code["RETRY"])
           return
-        end 
+        end
 
         process_returns(request_object, return_label)
       end
@@ -165,7 +165,7 @@ module Api
         @order_return = OrderReturnRequest.new(return_request[:order_return_request])
 
         @order_return.save
-        
+
         @order_return.return_request_items.each do |x|
           x.item_return.item_return_label = return_label
         end
@@ -201,7 +201,7 @@ module Api
           :label_image_url => label.label_image_url,
           :label_pdf_url => label.label_pdf_url,
           :label_url => label.label_url,
-          :carrier => label.carrier 
+          :carrier => label.carrier
           )
       end
 
@@ -241,7 +241,8 @@ module Api
         order_return.return_request_items.each do |rri|
           Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
         end
-        # ReturnMailer.notify_user(order_return).deliver
+        
+        ReturnMailer.notify_user(order_return).deliver
       end
 
       def start_next_logistics_process(order_return)
