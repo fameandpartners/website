@@ -16,14 +16,10 @@ module Newgistics
       @country = address.country.iso
       @zip = address.zipcode
       @return_id = return_id
-
-      fetch_shipping_label_from_api()
     end
 
-    private
-
     def fetch_shipping_label_from_api
-      uri = URI('https://apiint.newgistics.com/WebAPI/Shipment/')
+      uri = URI(configatron.newgistics.uri)
       request = Net::HTTP::Post.new(
         uri,
         {
@@ -36,11 +32,15 @@ module Newgistics
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == "https")
-
       response = http.request(request)
-
-      convert_json_to_instance_variables(JSON.parse(response.body))
+      if(response.kind_of? Net::HTTPSuccess)
+        convert_json_to_instance_variables(JSON.parse(response.body))
+      else
+        nil
+      end
     end
+
+    private
 
     def make_address_map
       {
@@ -72,10 +72,10 @@ module Newgistics
     end
 
     def make_return_id_map
-      if using_newgistics_staging_env?
-        {"returnId" => "123456789A"}
-      else
+      if Rails.env == 'production'
         {"returnId" => @return_id}
+      else
+        {"returnId" => "123456789A"}        
       end
     end
 
@@ -90,10 +90,6 @@ module Newgistics
           @label_pdf_url = link['href']
         end
       end
-    end
-
-    def using_newgistics_staging_env?
-      Rails.env != 'production'
     end
   end
 end

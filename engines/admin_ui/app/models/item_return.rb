@@ -19,46 +19,5 @@ class ItemReturn < ActiveRecord::Base
   scope :incomplete, where('refund_status IS NULL OR refund_status != ?', 'Complete')
   scope :refund_queue, incomplete.where(acceptance_status: 'approved', order_payment_method: 'Pin')
 
-  after_create do |user|
-    user.return_label
-
-    return_shipping_label = user.item_return_label.as_json
-
-    if return_shipping_label['item_return_label']&.values.include? nil
-      raise Exception.new("Newgistics Label Creation Failure")
-    end
-  end
-
-  def return_label
-    if item_return_label.nil?
-      build_item_return_label()
-    end
-
-    item_return_label
-  end
-
-  private
-
-  def build_item_return_label
-    order = self.line_item.order
-
-    label = Newgistics::ShippingLabel.new(
-      order.user_first_name,
-      order.user_last_name,
-      order.billing_address,
-      order.email,
-      order.number
-    )
-
-    self.item_return_label = ItemReturnLabel.new(
-      :label_image_url => label.label_image_url,
-      :label_pdf_url => label.label_pdf_url,
-      :label_url => label.label_url,
-      :carrier => label.carrier
-    )
-
-    self.save
-  end
-
 end
 
