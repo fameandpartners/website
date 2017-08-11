@@ -134,12 +134,26 @@ module Contentful
       id = large_container.id
 
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
+      image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
+      image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
+      image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
 
-      {
-        image: fetched_lg_container.image.url,
-        # mobile_image: fetched_lg_container.mobile_image.url,
-        overlay_pids: fetched_lg_container.overlay_pids
-      }
+      if (image_caption_link_target == 'true')
+        image_caption_link_target = '_blank'
+      else
+        image_caption_link_target = '_self'
+      end
+
+      if (fetched_lg_container.content_type.id == 'ITEM--lg')
+        {
+          image: fetched_lg_container.image.url,
+          # mobile_image: fetched_lg_container.mobile_image.url,
+          overlay_pids: fetched_lg_container.overlay_pids,
+          image_caption: image_caption,
+          image_caption_url: image_caption_url,
+          image_caption_link_target: image_caption_link_target
+        }
+      end
     end
 
     def self.jsonify_medium_lp_container(medium_container)
@@ -223,8 +237,6 @@ module Contentful
           lg_items: lg_items
         }
       end
-
-      binding.pry
 
       meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
       meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
