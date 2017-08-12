@@ -16,7 +16,25 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
   end
 
   def per_item_adjustment
-    order.adjustment_total / num_items_in_order
+    # deal with tax adjustments
+    tax_adj = order&.adjustments&.tax&.first
+
+    item_tax = 0
+    total_tax = 0
+    if tax_adj
+      tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
+      item_tax = (((price*100).to_i * tax_rate) / 100.0).round(2)
+
+      total_tax = order.line_items.inject(0) do |total, li|
+        total + ((((li.price*100).to_i * tax_rate) / 100.0))
+      end
+      total_tax = total_tax.round(2)
+    end
+
+    # deal with all other adjustments
+    splittable_adjustment = ((order.adjustment_total - total_tax) / num_items_in_order)
+
+    item_tax + splittable_adjustment
   end
 
   def num_items_in_order
