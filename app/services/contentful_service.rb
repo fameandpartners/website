@@ -225,6 +225,7 @@ module Contentful
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
         lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
+        floating_email_scroll_percentage = (item.respond_to? :floating_email_scroll_percentage) ? item.floating_email_scroll_percentage : nil
 
         {
           id: item.content_type.id,
@@ -234,7 +235,8 @@ module Contentful
           email_text: email_text,
           button_label: button_label,
           relative_url: relative_url,
-          lg_items: lg_items
+          lg_items: lg_items,
+          floating_email_scroll_percentage: floating_email_scroll_percentage
         }
       end
 

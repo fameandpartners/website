@@ -5,7 +5,7 @@
     var floatingEmailSelector = $(".FloatingEmailWrapper"),
         floatingEmailRowHeight = floatingEmailSelector.outerHeight(), // The height of our email box component
         pageHeight = ($(".contentful-container").outerHeight() - floatingEmailRowHeight), // The total height of our page, minus the floating email row itself
-        showFloatingEmailTriggerPercentage = 0.55, // Show floating email box when user scrolls at least 55% of the page
+        showFloatingEmailTriggerPercentage = parseInt(floatingEmailSelector.attr('data-showAfterPagePercentage'))/100, // Show floating email box when user scrolls at least 55% of the page
         showFloatingEmailTriggerPixels = (pageHeight*showFloatingEmailTriggerPercentage);
 
     $('.js-FloatingEmailClose').click(function() {
