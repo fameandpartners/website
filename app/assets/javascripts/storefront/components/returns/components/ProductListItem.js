@@ -206,7 +206,12 @@ class ProductListItem extends Component {
             className={classnames('product-image', { 'u-cursor-pointer': canUpdateReturnArray })}
           />
           <div className="u-line-height-medium">
-            <div className="nameAndPrice--marginBottom">
+            <div className="meta--storeCreditContainer">
+              <span className="meta--storeCredit font-sans-serif">
+                RETURNABLE&nbsp;FOR&nbsp;STORE&nbsp;CREDIT&nbsp;ONLY
+              </span> <br />
+            </div>
+            <div className="nameAndPrice--marginBottom u-margin-top-medium">
               <span className="meta--key">
                 {name}
               </span>

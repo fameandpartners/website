@@ -10,13 +10,16 @@
 
 .Product__listItem__container {
   background: white;
-  padding: 30px 60px;
+  padding: 30px 40px;
+    @include desktop {
+      padding: 30px 60px;
+    }
 }
 
 .Product__listItem {
     margin-bottom: 30px;
     line-height: 1.8em;
-    @include desktop {
+    @include tablet {
         margin-bottom: 0px;
         margin: inherit;
     }
@@ -25,7 +28,23 @@
 .Product__listItem .checkbox--container {
     text-align: right;
 }
+.Product__listItem .meta--storeCredit {
+    background: #D8D8D8;
+    font-size: 12px;
+    padding: 0 10px;
+    @include desktop {
+      font-size: 14px;
+      padding: 0 13px;
 
+    }
+
+}
+.Product__listItem .meta--storeCreditContainer {
+  text-align: center;
+  @include desktop {
+    text-align: left;
+  }
+}
 .Product__listItem .meta--key {
     font-weight: 600;
     padding: 0 7px 0 0;
