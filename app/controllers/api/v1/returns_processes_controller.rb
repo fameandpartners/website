@@ -83,11 +83,6 @@ module Api
           return
         end
 
-        if has_nonreturnable_line_items?(return_item_ids)
-          error_response(@error_message_code["CONTACT"])
-          return
-        end
-
         if has_existing_returns?(return_item_ids)
           error_response(@error_message_code["RETURN_EXISTS"])
           return
@@ -131,12 +126,6 @@ module Api
       def has_nonexistent_line_items?(arr)
         arr.any? do |id|
           !Spree::LineItem.exists?(id)
-        end
-      end
-
-      def has_nonreturnable_line_items?(arr)
-        arr.any? do |id|
-          !Spree::LineItem.where(id: id).first&.can_dress_be_returned?
         end
       end
 
