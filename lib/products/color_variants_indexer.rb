@@ -99,7 +99,8 @@ module Products
                   apple:              product.style_profile&.apple,
                   pear:               product.style_profile&.pear,
                   athletic:           product.style_profile&.athletic,
-                  strawberry:         product.style_profile&.hour_glass,
+                  strawberry:         product.style_profile&.strawberry,
+                  hour_glass:         product.style_profile&.hour_glass,
                   column:             product.style_profile&.column,
                   petite:             product.style_profile&.petite,
                   color:              color_customizable
