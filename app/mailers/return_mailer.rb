@@ -11,6 +11,7 @@ class ReturnMailer < ActionMailer::Base
     NewRelic::Agent.notice_error(e)
     Raven.capture_exception(e)
   end
+
   private
     def convert_height_units(height_value, height_unit)
       if ( !height_value || !height_unit)
@@ -22,6 +23,7 @@ class ReturnMailer < ActionMailer::Base
         "#{height_value}cm"
       end
     end
+    
     def create_formatted_order(return_request)
       order = return_request.order
       user = order.user
