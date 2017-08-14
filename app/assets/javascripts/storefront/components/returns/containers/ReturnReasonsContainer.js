@@ -217,9 +217,9 @@ class ReturnReasonsContainer extends Component {
                       buttonCopy={returnIsLoading ? 'Starting...' : this.buttonText()}
                       isLoading={returnIsLoading || returnArray.length === 0}
                     />
-                    <span className="EstimatedRefundTotal__error u-margin-top-medium u-display-inherit">
-                      {this.showError()}
-                    </span>
+                  </div>
+                  <div className="EstimatedRefundTotal__message EstimatedRefundTotal__message--error u-margin-top-medium u-display-inherit">
+                    {this.showError()}
                   </div>
                 </div>
               </div>
