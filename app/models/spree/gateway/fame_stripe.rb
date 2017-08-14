@@ -23,11 +23,42 @@ class Spree::Gateway::FameStripe < Spree::Gateway
     begin
       Stripe.api_key = self.preferred_api_key
 
+      billing_addy = gateway_options[:billing_address]
+      shipping_addy = gateway_options[:shipping_address]
+
       charge = Stripe::Charge.create(
-        :amount => money,
-        :currency => preferred_currency.downcase,
-        :description => gateway_options[:description],
-        :source => creditcard[:gateway_payment_profile_id]
+        amount: money,
+        currency: preferred_currency.downcase,
+        description: gateway_options[:description],
+
+        source: creditcard[:gateway_payment_profile_id],
+        metadata: {
+          billing_city: billing_addy[:city],
+          billing_country: billing_addy[:country],
+          billing_line1: billing_addy[:address1],
+          billing_line2: billing_addy[:address2],
+          billing_state: billing_addy[:state],
+          billing_zip: billing_addy[:zip],
+          billing_country: billing_addy[:country],
+          name: billing_addy[:name],
+          email: gateway_options[:email],
+          ip_address: gateway_options[:ip],
+          order: gateway_options[:order_id]
+        },
+
+        receipt_email: gateway_options[:email],
+        shipping: {
+          address: { #shipping address
+            city: shipping_addy[:city],
+            country: shipping_addy[:country],
+            line1: shipping_addy[:address1],
+            line2: shipping_addy[:address2],
+            postal_code: shipping_addy[:zip],
+            state: shipping_addy[:state],
+          },
+          name: shipping_addy[:name],
+          phone: shipping_addy[:phone]
+        }
       )
 
       resp = ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
