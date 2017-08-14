@@ -35,10 +35,13 @@
     }
 }
 
-.EstimatedRefundTotal__error {
-    color: $c-red;
+.EstimatedRefundTotal__message {
     text-align: center;
     @include desktop {
-      text-align: right;
+        text-align: right;
     }
+}
+
+.EstimatedRefundTotal__message--error {
+    color: $c-red;
 }
