@@ -15,15 +15,13 @@ describe ReturnRequestItem do
           let(:action)  { action_type }
 
           it { is_expected.to validate_presence_of :reason_category }
-          it { is_expected.to validate_presence_of :reason }
         end
       end
 
       context 'not when keeping' do
         let(:action)  { 'keep' }
 
-        it { is_expected.to_not validate_presence_of :reason_category }
-        it { is_expected.to_not validate_presence_of :reason }
+        it { is_expected.to_not validate_presence_of :reason_category }     
       end
     end
   end
