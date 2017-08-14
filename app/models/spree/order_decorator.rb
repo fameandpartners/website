@@ -356,7 +356,15 @@ Spree::Order.class_eval do
   #hijack method, original merge logic was faulty cause variant_id is not unique enough
   # so as a cleaner solution=drop the older cart, newer cart becomes current cart
   def merge!(order)
-    order.destroy
+    if self.line_items.count > 0
+      order.destroy
+    else
+      order.line_items.each do |line_item|
+        next unless line_item.currency == currency
+        line_item.order_id = self.id
+        line_item.save
+      end
+    end
   end
 
 end
