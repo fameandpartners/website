@@ -29,7 +29,7 @@ class Spree::Gateway::FameStripe < Spree::Gateway
       charge = Stripe::Charge.create(
         amount: money,
         currency: preferred_currency.downcase,
-        description: gateway_options[:description],
+        description: gateway_options[:description] + ", #{billing_addy[:name]}",
 
         source: creditcard[:gateway_payment_profile_id],
         metadata: {
