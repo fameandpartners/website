@@ -9,7 +9,8 @@ module Api
 
       # GET
       def index
-        @orders = spree_current_user.orders.joins(line_items: [:personalization, :variant, :item_return]).eager_load(line_items: [:personalization, :variant, :item_return]).map do |order|
+        #binding.pry
+        @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
           Orders::OrderPresenter.new(order, order.line_items)
         end
 
