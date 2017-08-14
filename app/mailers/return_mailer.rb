@@ -28,7 +28,6 @@ class ReturnMailer < ActionMailer::Base
         height_copy: convert_height_units(item.line_item&.personalization&.height_value, item.line_item&.personalization&.height_unit)
       }
     end
-
     # .sum isn't working for some reason (also need to verify this includes tax / discounts...)
     total_refund_amount = formatted_return_items.reduce(0) { |sum, item| sum + item[:price] }
 
