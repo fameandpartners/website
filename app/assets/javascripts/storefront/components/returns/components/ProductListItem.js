@@ -132,7 +132,7 @@ class ProductListItem extends Component {
       <span
         className={classnames(
           { 'u-warning-text': charactersRemaining <= 20 },
-          { 'u-hide': charactersRemaining > 250 },
+          { 'u-hide': charactersRemaining > 100 },
       )}
       >
         {charactersRemaining} {characterCopy} left
@@ -185,7 +185,7 @@ class ProductListItem extends Component {
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
-    const maxCharacterCount = 500;
+    const maxCharacterCount = 255;
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
