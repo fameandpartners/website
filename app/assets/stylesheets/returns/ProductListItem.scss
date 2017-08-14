@@ -31,7 +31,7 @@
 .Product__listItem .checkbox--container {
     text-align: right;
 }
-.Product__listItem .meta--storeCredit {
+.Product__listItem .ProductlistItem__meta-container-text {
     background: #D8D8D8;
     font-size: 11px;
     padding: 0 10px;
@@ -43,7 +43,7 @@
     }
 
 }
-.Product__listItem .meta--storeCreditContainer {
+.Product__listItem .ProductlistItem__meta-container {
   text-align: center;
   @include tablet {
     text-align: left;
