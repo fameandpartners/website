@@ -27,6 +27,10 @@ export const addProductToReturnArray = (product, currentArray) => {
   };
 };
 
+export const clearReturnProductArray = () => ({
+  type: 'CLEAR_PRODUCT_FROM_RETURN_ARRAY',
+});
+
 export const removeProductFromReturnArray = (product, currentArray, refundAmount) => {
   const newReturnArray = [];
   let newRefundAmount = refundAmount;

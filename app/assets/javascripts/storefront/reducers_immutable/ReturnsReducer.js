@@ -31,6 +31,10 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case 'CLEAR_PRODUCT_FROM_RETURN_ARRAY':
+      return assign({}, state, {
+        returnArray: [],
+      });
     case 'ADD_PRODUCT_TO_RETURN_ARRAY':
       return assign({}, state, {
         returnArray: action.payload.returnArray,

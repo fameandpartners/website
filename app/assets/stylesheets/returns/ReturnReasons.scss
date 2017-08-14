@@ -122,7 +122,10 @@
 }
 
 .ReturnReasonsContainer .SimpleButton__wrapper {
-  margin-bottom: 150px;
+  margin-bottom: 25px;
+  @include desktop {
+    margin-bottom: 75px;
+  }
 }
 
 .ReturnReasonsContainer .SimpleButton__container {
