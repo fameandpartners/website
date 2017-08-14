@@ -200,7 +200,7 @@ class ReturnReasonsContainer extends Component {
                 <div className="col-4_md-12_sm-12">
                   <div role="button" className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
-                      containerClassName="SimpleButton__container--right-align"
+                      big
                       buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
                       isLoading={returnIsLoading}
                     />

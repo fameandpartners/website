@@ -14,6 +14,10 @@
   }
 }
 
+.SimpleButton__container--big {
+  max-width: 420px;
+}
+
 .SimpleButton__container--loading {
   opacity: 0.6;
   cursor: not-allowed;
@@ -26,5 +30,5 @@
 }
 
 .SimpleButton__container--right-align {
-  margin: 0 0 0 auto;  
+  margin: 0 0 0 auto;
 }
