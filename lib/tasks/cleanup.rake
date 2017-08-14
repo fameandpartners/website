@@ -16,6 +16,8 @@ namespace :data do
         "FROM spree_tokenized_permissions WHERE created_at < '#{7.days.ago}'"
     }
 
+    tables = ['spree_orders', 'spree_line_items', 'line_item_personalizations', 'activities', 'spree_tokenized_permissions']
+
     actions = { :count => 'SELECT count(*) ',
                 :delete => 'DELETE ' }
     sql.each do |name, fragment|
@@ -27,6 +29,11 @@ namespace :data do
         puts result.values.flatten if action == :count
         puts result.cmd_status if action == :delete
       end
+    end
+
+    puts 'REINDEXING TABLES'
+    tables.each do |name|
+      ActiveRecord::Base.connection.execute("REINDEX TABLE #{name}") 
     end
     puts 'VACUUM ANALYZE'
     ActiveRecord::Base.connection.execute('VACUUM ANALYZE')
