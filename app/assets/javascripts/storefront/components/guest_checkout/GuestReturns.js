@@ -1,9 +1,16 @@
-/* global window */
+/* global window, document */
+/* global $ */
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import autobind from 'auto-bind';
-import axios from 'axios';
-import SimpleButton from '../returns/components/SimpleButton';
+
+const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': csrfToken,
+  },
+});
 
 class GuestReturnApp extends Component {
   constructor(props) {
@@ -17,25 +24,21 @@ class GuestReturnApp extends Component {
     e.preventDefault();
     const { guestOrderID, guestEmail } = this.state;
     const that = this;
-    axios({
+    $.ajax({
       method: 'get',
       url: `api/v1/guest/order?order_number=${guestOrderID}&email=${guestEmail}`,
     })
-      .then((response) => {
-        if (response.data.status) {
-          that.setState({
-            lookupError: true,
-          });
-        } else {
-          browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        that.setState({
-          lookupError: true,
-        });
+    .success((response) => {
+      if (response) {
+        browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
+        window.location.reload();
+      }
+    })
+    .error(() => {
+      that.setState({
+        lookupError: true,
       });
+    });
   }
   updateEmail(event) {
     this.setState({
@@ -47,9 +50,7 @@ class GuestReturnApp extends Component {
       guestOrderID: event.target.value,
     });
   }
-  componentDidMount() {
-    console.log('g');
-  }
+
   render() {
     const { guestOrderID, guestEmail, lookupError } = this.state;
     return (

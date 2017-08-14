@@ -1,7 +1,12 @@
+/* global $, document */
 const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 const contentType = 'application/json';
 
-const request = require('superagent');
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': csrfToken,
+  },
+});
 
 export const addProductToReturnArray = (product, currentArray) => {
   const newProduct = product;
@@ -47,6 +52,11 @@ export const setReturnLoadingState = ({ isLoading }) => ({
   payload: { isLoading },
 });
 
+export const setHasRequestedOrders = ({ hasRequestedOrders }) => ({
+  type: 'SET_HAS_REQUESTED_ORDERS',
+  payload: { hasRequestedOrders },
+});
+
 export const setReturnReasonErrors = ({ returnRequestErrors }) => ({
   type: 'SET_RETURN_REASON_ERRORS',
   payload: { returnRequestErrors },
@@ -86,66 +96,74 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 
 export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   if (guestReturn) {
-    request
-      .get(`/api/v1/guest/order?email=${email}&order_number=${orderID}`)
-      .end((err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(res);
-          const response = JSON.parse(res.text);
-          const guestOrderArray = [response.returns_processes];
-          dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
-        }
-      });
+    $.ajax({
+      url: `/api/v1/guest/order?email=${email}&order_number=${orderID}`,
+      accepts: {
+        'Content-Type': contentType,
+      },
+    })
+    .done((res) => {
+      const guestOrderArray = [res];
+      dispatch({ type: 'UPDATE_ORDER_DATA', payload: guestOrderArray });
+    })
+    .fail((err) => {
+      console.log(err);
+    })
+    .always(() => {
+      dispatch(setReturnLoadingState({ isLoading: false }));
+    });
   } else {
-    request
-      .get('/api/v1/orders')
-      .end((err, res) => {
-        if (err) {
-          console.log('ERROR getting order data', err);
-        } else {
-          const response = JSON.parse(res.text);
-          console.log(response);
-          dispatch({ type: 'UPDATE_ORDER_DATA', payload: response.returns_processes });
-        }
-      });
+    $.ajax({
+      url: '/api/v1/orders',
+      accepts: {
+        'Content-Type': contentType,
+      },
+    })
+    .done((res) => {
+      dispatch({ type: 'UPDATE_ORDER_DATA', payload: res.returns_processes });
+    })
+    .fail((err) => {
+      console.log(err);
+    })
+    .always(() => {
+      dispatch(setReturnLoadingState({ isLoading: false }));
+    });
   }
 };
 
 
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
-  console.log(csrfToken);
-  console.log(contentType);
-  request
-    .post('/api/v1/submit_return')
-    .send(returnsObj)
-    .set('Accept', contentType)
-    .set('X-CSRF-Token', csrfToken)
-    .end((err, res) => {
-      if (err) {
-        console.log(err);
-        dispatch(setReturnLoadingState({ isLoading: false }));
-        if (err.response && err.response.data) {
-          dispatch({
-            type: 'SET_RETURN_RESPONSE_ERRORS',
-            payload: { error: err.response.data },
-          });
-        }
-      } else {
-        console.log(res);
-        const response = JSON.parse(res.text);
-        dispatch(setReturnLoadingState({ isLoading: false }));
-        dispatch({ type: 'POPULATE_LOGISTICS_DATA',
-          payload: {
-            requiresViewOrdersRefresh: true,
-            order,
-            line_items: response.message,
-            guestEmail,
-          },
-        });
-      }
+  $.ajax({
+    url: '/api/v1/submit_return',
+    dataType: 'json',
+    accepts: {
+      'Content-Type': contentType,
+    },
+    method: 'POST',
+    data: returnsObj,
+  })
+  .done((res) => {
+    dispatch(setReturnLoadingState({ isLoading: false }));
+    dispatch({ type: 'POPULATE_LOGISTICS_DATA',
+      payload: {
+        requiresViewOrdersRefresh: true,
+        order,
+        line_items: res.message,
+        guestEmail,
+      },
     });
+  })
+  .fail((err) => {
+    dispatch(setReturnLoadingState({ isLoading: false }));
+    if (err && err.responseText) {
+      const error = JSON.parse(err.responseText);
+
+      dispatch({
+        type: 'SET_RETURN_RESPONSE_ERRORS',
+        payload: { error },
+      });
+    }
+  });
 };
 
 export const setGuestEmail = guestEmail => ({

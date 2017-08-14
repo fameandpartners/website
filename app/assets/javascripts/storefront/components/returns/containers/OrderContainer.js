@@ -13,42 +13,70 @@ import ReturnConstants from '../../../constants/ReturnConstants';
 const propTypes = {
   actions: PropTypes.object,
   orderData: PropTypes.array,
+  hasRequestedOrders: PropTypes.bool,
+  returnIsLoading: PropTypes.bool,
   params: PropTypes.object.isRequired,
   requiresViewOrdersRefresh: PropTypes.bool,
 };
 
 const defaultProps = {
   actions: {},
+  hasRequestedOrders: false,
   orderData: [],
+  returnIsLoading: false,
   requiresViewOrdersRefresh: false,
 };
 
 class OrderContainer extends Component {
   componentWillMount() {
     const { email, orderID } = this.props.params;
+    const { hasRequestedOrders, requiresViewOrdersRefresh } = this.props;
 
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
-    if (this.props.requiresViewOrdersRefresh) {
+    if (requiresViewOrdersRefresh) {
       win.location = ReturnConstants.RETURN_ROUTES.ORDERS;
     }
 
-    // Get the order product data
-    if (email && orderID) {
-      this.props.actions.getProductData(true, email, orderID);
-    } else {
-      this.props.actions.getProductData();
+    // Get the order product data only once
+    if (!hasRequestedOrders) {
+      const { actions } = this.props;
+      actions.setHasRequestedOrders({ hasRequestedOrders: true });
+      actions.setReturnLoadingState({ isLoading: true });
+      if (email && orderID) {
+        actions.getProductData(true, email, orderID);
+      } else {
+        actions.getProductData();
+      }
     }
   }
+
   componentDidMount() {
-    const { email } = this.props.params;
-    this.props.actions.setGuestEmail(email);
+    const { params } = this.props;
+    if (params && params.email) { this.props.actions.setGuestEmail(params.email); }
   }
+
   render() {
-    const { orderData } = this.props;
+    const { orderData, returnIsLoading } = this.props;
+
     return (
       <div className="OrderContainer">
-        { orderData ?
+        {
+          returnIsLoading
+          ? (
+            <div>
+              <div className="OrderContainer--loading animate-flicker">Loading Orders...</div>
+              <div className="sk-folding-cube">
+                <div className="sk-cube1 sk-cube" />
+                <div className="sk-cube2 sk-cube" />
+                <div className="sk-cube4 sk-cube" />
+                <div className="sk-cube3 sk-cube" />
+              </div>
+            </div>
+          )
+          : null
+        }
+        { orderData.length ?
           (
             <div>
               <h1 className="u-center-text">Orders</h1>
@@ -64,7 +92,9 @@ class OrderContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    orderData: state.orderData,
+    orderData: state.orderData.orders,
+    hasRequestedOrders: state.orderData.hasRequestedOrders,
+    returnIsLoading: state.returnsData.returnIsLoading,
     requiresViewOrdersRefresh: state.returnsData.requiresViewOrdersRefresh,
   };
 }

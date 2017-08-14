@@ -16,11 +16,20 @@ body {
 .u-show {
     display: block !important;
 }
+.u-display-inherit {
+    display: inherit;
+}
 .u-center-text {
     text-align: center !important;
 }
+.u-right-text {
+    text-align: right;
+}
 .u-no-padding {
     padding: 0 !important;
+}
+.u-warning-text {
+  color: $c-red;
 }
 .u-padding-small {
     padding: 5px !important;

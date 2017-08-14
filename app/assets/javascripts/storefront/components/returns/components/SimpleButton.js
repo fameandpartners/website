@@ -5,6 +5,7 @@ import classnames from 'classnames';
 const propTypes = {
   buttonCopy: PropTypes.string.isRequired,
   className: PropTypes.string,
+  containerClassName: PropTypes.string,
   isLoading: PropTypes.bool,
   link: PropTypes.string,
   localLink: PropTypes.bool,
@@ -13,6 +14,7 @@ const propTypes = {
 
 const defaultProps = {
   className: '',
+  containerClassName: '',
   withLink: false,
   isLoading: false,
   isLoadingCopy: 'Loading...',
@@ -24,16 +26,17 @@ const defaultProps = {
 const SimpleButton = ({
   buttonCopy,
   className,
+  containerClassName,
   link,
   isLoading,
   localLink,
   withLink,
-}) => {
-  return (
+}) => (
     withLink ?
       <div
         className={classnames(
         'SimpleButton__container',
+        containerClassName,
         { 'SimpleButton__container--loading': isLoading },
       )}
       >
@@ -52,13 +55,13 @@ const SimpleButton = ({
       <div
         className={classnames(
         'SimpleButton__container u-width-full',
+        containerClassName,
         { 'SimpleButton__container--loading': isLoading },
       )}
       >
         <span className="copy co">{buttonCopy}</span>
       </div>
   );
-};
 
 SimpleButton.propTypes = propTypes;
 SimpleButton.defaultProps = defaultProps;
