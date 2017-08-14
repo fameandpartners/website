@@ -115,28 +115,28 @@ class ProductListItem extends Component {
       },
     );
   }
-
-  showCharLimit() {
+  pluralizeWord(count, word) {
+    if (count === 1) {
+      return word;
+    }
+    return `${word}s`;
+  }
+  showCharLimit(maxCharacterCount) {
     const { product } = this.props;
     const { openEndedReturnReason } = product;
     if (!openEndedReturnReason) {
       return false;
     }
-    const charactersRemaining = 500 - openEndedReturnReason.length;
-    if (charactersRemaining > 250) {
-      return false;
-    } else if (charactersRemaining > 20) {
-      return <span>{charactersRemaining} characters left</span>;
-    } else if (charactersRemaining === 1) {
-      return (
-        <span className="u-warning-text">
-          {charactersRemaining} character left
-        </span>
-      );
-    }
+    const charactersRemaining = maxCharacterCount - openEndedReturnReason.length;
+    const characterCopy = this.pluralizeWord(charactersRemaining, 'character');
     return (
-      <span className="u-warning-text">
-        {charactersRemaining} characters left
+      <span
+        className={classnames(
+          { 'u-warning-text': charactersRemaining <= 20 },
+          { 'u-hide': charactersRemaining > 250 },
+      )}
+      >
+        {charactersRemaining} {characterCopy} left
       </span>
     );
   }
@@ -186,7 +186,7 @@ class ProductListItem extends Component {
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
-
+    const maxCharacterCount = 500;
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
@@ -320,9 +320,9 @@ class ProductListItem extends Component {
                       value={openEndedReturnReason}
                       ref={(text) => { this.textInput = text; }}
                       type="text"
-                      maxLength="500"
+                      maxLength={maxCharacterCount}
                     />
-                    {this.showCharLimit()}
+                    {this.showCharLimit(maxCharacterCount)}
                   </div>
                 </form>
               </div>
