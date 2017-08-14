@@ -104,13 +104,26 @@ class ItemReturnEvent < ActiveRecord::Base
               numericality: { less_than_or_equal_to:
                           #this lambda essentially checks for california tax and adjusts
                           lambda do |event|
-                            tax_adj = event.item_return.line_item.try(:order)&.adjustments&.tax&.first
+                            order = event.item_return.line_item.try(:order)
+                            tax_adj = order&.adjustments&.tax&.first
+
+                            item_tax = 0
                             tax_total = 0
                             if tax_adj
                               tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
-                              tax_total = ((event.item_return.line_item.price*100).to_i * tax_rate).round / 100.0
+                              item_tax = (((event.item_return.line_item.price*100).to_i * tax_rate) / 100.0).round(2)
+
+
+                              total_tax = order.line_items.inject(0) do |total, li|
+                                total + ((((li.price*100).to_i * tax_rate) / 100.0))
+                              end
+                              total_tax = total_tax.round(2)
                             end
-                            event.item_return.line_item.price + tax_total
+
+                            # deal with all other adjustments
+                            splittable_adjustment = ((order.adjustment_total - total_tax) / [order.line_items.count, 1].max )
+
+                            event.item_return.line_item.price + item_tax + splittable_adjustment
                           end
                 }
   end
