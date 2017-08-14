@@ -29,7 +29,6 @@ class ReturnMailer < ActionMailer::Base
       }
     end
 
-
     # .sum isn't working for some reason (also need to verify this includes tax / discounts...)
     total_refund_amount = formatted_return_items.reduce(0) { |sum, item| sum + item[:price] }
     international_user = order.shipping_address&.country_id != 49
