@@ -165,6 +165,7 @@ class ProductListItem extends Component {
       id,
       returnWindowEnd,
       openEndedReturnReason,
+      store_credit_only: storeCreditOnly,
       products_meta: productMeta,
       returns_meta: returnsMeta = {},
       price,
@@ -206,12 +207,23 @@ class ProductListItem extends Component {
             className={classnames('product-image', { 'u-cursor-pointer': canUpdateReturnArray })}
           />
           <div className="u-line-height-medium">
-            <div className="meta--storeCreditContainer">
-              <span className="meta--storeCredit font-sans-serif">
-                RETURNABLE&nbsp;FOR&nbsp;STORE&nbsp;CREDIT&nbsp;ONLY
-              </span> <br />
-            </div>
-            <div className="nameAndPrice--marginBottom u-margin-top-medium">
+            {
+              storeCreditOnly ?
+                <div className="meta--storeCreditContainer">
+                  <span className="meta--storeCredit font-sans-serif">
+                  RETURNABLE&nbsp;FOR&nbsp;STORE&nbsp;CREDIT&nbsp;ONLY
+                </span> <br />
+                </div>
+              :
+              null
+            }
+
+            <div
+              className={classnames(
+                'nameAndPrice--marginBottom',
+                { 'u-margin-top-medium': storeCreditOnly })
+              }
+            >
               <span className="meta--key">
                 {name}
               </span>
