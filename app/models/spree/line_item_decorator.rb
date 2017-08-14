@@ -155,7 +155,7 @@ Spree::LineItem.class_eval do
   end
 
   def store_credit_only_return?
-    !personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }
+    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
   end
 
   def as_json(options = { })
