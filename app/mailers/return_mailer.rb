@@ -1,5 +1,16 @@
 class ReturnMailer < ActionMailer::Base
 
+  def convert_height_units(height_value, height_unit)
+    if ( !height_value || !height_unit)
+      return nil
+    end
+    if (height_unit == 'inch')
+      "#{height_value.to_i / 12}ft #{height_value.to_i % 12}in"
+    else
+      "#{height_value}cm"
+    end
+  end
+
   def create_formatted_order(return_request)
     order = return_request.order
     user = order.user
@@ -14,8 +25,7 @@ class ReturnMailer < ActionMailer::Base
         color: item.line_item&.cart_item&.color&.presentation,
         image: item.line_item&.cart_item&.image&.large,
         price: item.line_item&.product&.price,
-        height_value: item.line_item&.personalization&.height_value,
-        height_unit: item.line_item&.personalization&.height_unit
+        height_copy: convert_height_units(item.line_item&.personalization&.height_value, item.line_item&.personalization&.height_unit)
       }
     end
 
