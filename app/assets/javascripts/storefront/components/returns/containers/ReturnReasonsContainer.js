@@ -159,7 +159,6 @@ class ReturnReasonsContainer extends Component {
     if (!order) {
       return <div />;
     }
-    this.calculateStoreCredit();
 
     const { returnEligible } = order;
     return (
