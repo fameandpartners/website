@@ -34,3 +34,11 @@
       margin: 10px auto 0;
     }
 }
+
+.EstimatedRefundTotal__error {
+    color: $c-red;
+    text-align: center;
+    @include desktop {
+      text-align: right;
+    }
+}

@@ -7,6 +7,7 @@ import autoBind from 'auto-bind';
 import { assign } from 'lodash';
 import scroll from 'scroll';
 import scrollDoc from 'scroll-doc';
+import pluralize from 'pluralize';
 
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
@@ -138,14 +139,27 @@ class ReturnReasonsContainer extends Component {
       };
     }
   }
+
+  buttonText() {
+    const { returnArray } = this.props;
+    if (returnArray.length === 0) {
+      return 'Select Items to Return';
+    }
+
+    const pluralizeText = pluralize('Items', returnArray.length, true);
+    return `Return ${pluralizeText}`;
+  }
+
   componentDidMount() {
     scroll.top(scrollElement, 0);
   }
+
   render() {
     const { order, orderArray } = this.state;
     const {
       params,
       returnIsLoading,
+      returnArray,
       returnRequestErrors,
       returnSubtotal,
     } = this.props;
@@ -200,11 +214,10 @@ class ReturnReasonsContainer extends Component {
                 <div className="col-4_md-12_sm-12">
                   <div role="button" className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
-                      big
-                      buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
-                      isLoading={returnIsLoading}
+                      buttonCopy={returnIsLoading ? 'Starting...' : this.buttonText()}
+                      isLoading={returnIsLoading || returnArray.length === 0}
                     />
-                    <span className="u-margin-top-medium u-right-text u-display-inherit">
+                    <span className="EstimatedRefundTotal__error u-margin-top-medium u-display-inherit">
                       {this.showError()}
                     </span>
                   </div>
