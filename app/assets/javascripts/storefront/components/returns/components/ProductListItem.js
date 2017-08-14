@@ -115,6 +115,31 @@ class ProductListItem extends Component {
       },
     );
   }
+  pluralizeWord(count, word) {
+    if (count === 1) {
+      return word;
+    }
+    return `${word}s`;
+  }
+  showCharLimit(maxCharacterCount) {
+    const { product } = this.props;
+    const { openEndedReturnReason } = product;
+    if (!openEndedReturnReason) {
+      return false;
+    }
+    const charactersRemaining = maxCharacterCount - openEndedReturnReason.length;
+    const characterCopy = this.pluralizeWord(charactersRemaining, 'character');
+    return (
+      <span
+        className={classnames(
+          { 'u-warning-text': charactersRemaining <= 20 },
+          { 'u-hide': charactersRemaining > 250 },
+      )}
+      >
+        {charactersRemaining} {characterCopy} left
+      </span>
+    );
+  }
 
   componentDidUpdate() {
     const { product, activeTextBox } = this.props;
@@ -161,7 +186,7 @@ class ProductListItem extends Component {
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
-
+    const maxCharacterCount = 500;
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
@@ -295,7 +320,9 @@ class ProductListItem extends Component {
                       value={openEndedReturnReason}
                       ref={(text) => { this.textInput = text; }}
                       type="text"
+                      maxLength={maxCharacterCount}
                     />
+                    {this.showCharLimit(maxCharacterCount)}
                   </div>
                 </form>
               </div>
