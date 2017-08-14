@@ -1,5 +1,4 @@
 class ReturnMailer < ActionMailer::Base
-
   def create_formatted_order(return_request)
     order = return_request.order
     user = order.user
@@ -47,8 +46,8 @@ class ReturnMailer < ActionMailer::Base
       'return_started_email',
       user_data: user_returns_object
     )
-  rescue StandardError => e
-    NewRelic::Agent.notice_error(e)
-    Raven.capture_exception(e)
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
   end
 end
