@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import classnames from 'classnames';
 
 const propTypes = {
+  big: PropTypes.bool,
   buttonCopy: PropTypes.string.isRequired,
   className: PropTypes.string,
   containerClassName: PropTypes.string,
@@ -13,6 +14,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  big: false,
   className: '',
   containerClassName: '',
   withLink: false,
@@ -29,6 +31,7 @@ const SimpleButton = ({
   containerClassName,
   link,
   isLoading,
+  big,
   localLink,
   withLink,
 }) => (
@@ -37,7 +40,10 @@ const SimpleButton = ({
         className={classnames(
         'SimpleButton__container',
         containerClassName,
-        { 'SimpleButton__container--loading': isLoading },
+          {
+            'SimpleButton__container--loading': isLoading,
+            'SimpleButton__container--big': big,
+          },
       )}
       >
         <div className={className}>
@@ -56,7 +62,10 @@ const SimpleButton = ({
         className={classnames(
         'SimpleButton__container u-width-full',
         containerClassName,
-        { 'SimpleButton__container--loading': isLoading },
+          {
+            'SimpleButton__container--loading': isLoading,
+            'SimpleButton__container--big': big,
+          },
       )}
       >
         <span className="copy co">{buttonCopy}</span>

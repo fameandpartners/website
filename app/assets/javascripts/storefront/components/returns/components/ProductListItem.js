@@ -1,4 +1,3 @@
-/* global window */
 import React, { Component, PropTypes } from 'react';
 import autoBind from 'auto-bind';
 import classnames from 'classnames';
@@ -285,6 +284,8 @@ class ProductListItem extends Component {
             <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
+                  big
+                  containerClassName="SimpleButton__container--right-align"
                   className="u-width-full"
                   buttonCopy="Start Return"
                   link={`/start-return/${orderNumber}`}
