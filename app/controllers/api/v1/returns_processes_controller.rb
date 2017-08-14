@@ -9,14 +9,12 @@ module Api
 
       # GET
       def index
-        user = spree_current_user
-        @orders = user.orders.complete.map do |order|
-          Orders::OrderPresenter.new(order)
+        @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
+          Orders::OrderPresenter.new(order, order.line_items)
         end
 
         respond_with @orders
       end
-
 
       # GET (guest)
       def guest
@@ -85,11 +83,6 @@ module Api
           return
         end
 
-        if has_nonreturnable_line_items?(return_item_ids)
-          error_response(@error_message_code["CONTACT"])
-          return
-        end
-
         if has_existing_returns?(return_item_ids)
           error_response(@error_message_code["RETURN_EXISTS"])
           return
@@ -133,12 +126,6 @@ module Api
       def has_nonexistent_line_items?(arr)
         arr.any? do |id|
           !Spree::LineItem.exists?(id)
-        end
-      end
-
-      def has_nonreturnable_line_items?(arr)
-        arr.any? do |id|
-          !Spree::LineItem.where(id: id).first&.can_dress_be_returned?
         end
       end
 
@@ -241,7 +228,7 @@ module Api
         order_return.return_request_items.each do |rri|
           Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
         end
-        
+
         ReturnMailer.notify_user(order_return).deliver
       end
 
