@@ -192,7 +192,7 @@ class ProductListItem extends Component {
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
-        <div className="col-8_md-7_sm-6_xs-12 Product__listItem">
+        <div className="col-8_md-10_sm-6_xs-12 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
@@ -211,7 +211,7 @@ class ProductListItem extends Component {
               storeCreditOnly ?
                 <div className="meta--storeCreditContainer">
                   <span className="meta--storeCredit font-sans-serif">
-                  RETURNABLE&nbsp;FOR&nbsp;STORE&nbsp;CREDIT&nbsp;ONLY
+                  RETURNABLE FOR STORE CREDIT&nbsp;ONLY
                 </span> <br />
                 </div>
               :

@@ -118,13 +118,35 @@ class ReturnReasonsContainer extends Component {
     };
     actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
   }
+
+  calculateCashCredit() {
+    const { returnArray } = this.props;
+    const cashCreditAmount = returnArray
+    .filter(product => !product.store_credit_only)
+    .reduce((sum, returnedProduct) =>
+      sum + Number(returnedProduct.price), 0);
+
+    if (cashCreditAmount) {
+      return cashCreditAmount;
+    }
+
+    return 0;
+  }
+
   calculateStoreCredit() {
     const { returnArray } = this.props;
-    const storeCreditItems = returnArray.filter(product => product.store_credit_only);
-    const storeCreditAmount = storeCreditItems.reduce((sum, returnedProduct) =>
+    const storeCreditAmount = returnArray
+    .filter(product => product.store_credit_only)
+    .reduce((sum, returnedProduct) =>
       sum + Number(returnedProduct.price), 0);
-    return Number(storeCreditAmount / 2);
+
+    if (storeCreditAmount) {
+      return storeCreditAmount;
+    }
+
+    return 0;
   }
+
   componentWillMount() {
     const { orderData } = this.props;
     if (!orderData || orderData.length === 0) {
@@ -201,6 +223,7 @@ class ReturnReasonsContainer extends Component {
             <div>
               <EstimatedRefundTotal
                 returnSubtotal={returnSubtotal}
+                refundCashTotal={this.calculateCashCredit()}
                 storeCreditTotal={this.calculateStoreCredit()}
               />
               <div className="grid-right">

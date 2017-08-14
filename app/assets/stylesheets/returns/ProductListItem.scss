@@ -20,8 +20,11 @@
     margin-bottom: 30px;
     line-height: 1.8em;
     @include tablet {
-        margin-bottom: 0px;
         margin: inherit;
+        margin-bottom: 20px;
+    }
+    @include desktop {
+      margin-bottom: 0px;
     }
 }
 
@@ -30,9 +33,10 @@
 }
 .Product__listItem .meta--storeCredit {
     background: #D8D8D8;
-    font-size: 12px;
+    font-size: 11px;
     padding: 0 10px;
     @include desktop {
+      text-align: left;
       font-size: 11px;
       padding: 0 13px;
 
@@ -41,7 +45,7 @@
 }
 .Product__listItem .meta--storeCreditContainer {
   text-align: center;
-  @include desktop {
+  @include tablet {
     text-align: left;
   }
 }
@@ -67,7 +71,6 @@
         max-width: 180px;
         min-height: 180px;
         float: left;
-        margin-right: 30px;
     }
 }
 
