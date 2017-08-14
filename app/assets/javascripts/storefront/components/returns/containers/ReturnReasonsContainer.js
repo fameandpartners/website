@@ -118,7 +118,13 @@ class ReturnReasonsContainer extends Component {
     };
     actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
   }
-
+  calculateStoreCredit() {
+    const { returnArray } = this.props;
+    const storeCreditItems = returnArray.filter(product => product.store_credit_only);
+    const storeCreditAmount = storeCreditItems.reduce((sum, returnedProduct) =>
+      sum + Number(returnedProduct.price), 0);
+    return Number(storeCreditAmount / 2);
+  }
   componentWillMount() {
     const { orderData } = this.props;
     if (!orderData || orderData.length === 0) {
@@ -153,6 +159,7 @@ class ReturnReasonsContainer extends Component {
     if (!order) {
       return <div />;
     }
+    this.calculateStoreCredit();
 
     const { returnEligible } = order;
     return (
@@ -195,6 +202,7 @@ class ReturnReasonsContainer extends Component {
             <div>
               <EstimatedRefundTotal
                 returnSubtotal={returnSubtotal}
+                storeCreditTotal={this.calculateStoreCredit()}
               />
               <div className="grid-right">
                 <div className="col-4_md-12_sm-12">
