@@ -1,5 +1,4 @@
 class ReturnMailer < ActionMailer::Base
-
   def notify_user(order_return_request)
     user_returns_object = create_formatted_order(order_return_request).as_json
     user = order_return_request.order.user
