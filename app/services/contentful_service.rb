@@ -242,13 +242,19 @@ module Contentful
 
       meta_title = (parent_container.respond_to? :meta_title) ? parent_container.meta_title : nil
       meta_description = (parent_container.respond_to? :meta_description) ? parent_container.meta_description : nil
+      site_version = (parent_container.respond_to? :site_version) ? parent_container.site_version : 'all'
+
+      # When the LP is oriented to a specific site version (AU or US), this is where users are redirected to
+      site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
       parent_container.relative_url
       {
         header: main_header_tile,
         rows: row_tiles,
         meta_title: meta_title,
-        meta_description: meta_description
+        meta_description: meta_description,
+        site_version: site_version.downcase,
+        site_version_url_to_redirect: site_version_url_to_redirect
       }
     end
 
