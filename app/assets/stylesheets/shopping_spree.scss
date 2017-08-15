@@ -124,6 +124,11 @@
 
 @media (max-width: 767px)
 {
+    .navbar-collapse
+    {
+        height: 100vh;
+    }    
+    
     .nav-side-menu
     {
         position: fixed;
@@ -155,6 +160,11 @@
         }
         
     }
+
+    .chat-content
+    {
+        height: calc( 100vh - 50px );
+    }
     
 }
 
@@ -162,9 +172,9 @@
 {
     .nav-side-menu
     {
-        .menu-list
+        .chat-list
         {
-            .menu-content
+            .chat-content
             {
                 display: block;
             }
