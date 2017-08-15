@@ -4,9 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers, { initialStates } from '../reducers_immutable';
 
 export default (props) => {
-  const { $$collectionFilterSortState } = initialStates;
+  const { $$collectionFilterSortState, $$userState } = initialStates;
 
-  const injectedState = {
+  const injectedCollectionFilterStoreState = {
     $$bodyShapes: props.bodyShapes,
     $$bodyStyles: props.bodyStyles,
     $$colors: props.colors,
@@ -23,7 +23,8 @@ export default (props) => {
     $$collectionFilterSortStore: $$collectionFilterSortState.mergeWith(
       (initialVal, newVal) => ((newVal === null || newVal === undefined)
         ? initialVal
-        : newVal), injectedState),
+        : newVal), injectedCollectionFilterStoreState),
+    $$userStore: $$userState.merge(props.user),
   };
 
   const reducer = combineReducers(reducers);
