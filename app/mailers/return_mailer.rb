@@ -1,5 +1,5 @@
 class ReturnMailer < ActionMailer::Base
-  
+
   def notify_user(order_return_request)
     user_returns_object = create_formatted_order(order_return_request).as_json
     user = order_return_request.order.user
@@ -31,7 +31,7 @@ class ReturnMailer < ActionMailer::Base
       return_items = return_request.return_request_items
       billing_address = order.billing_address
       label_print_link = return_items.first.item_return.item_return_label[:label_url]
-      send_by_date = (return_request.order.projected_delivery_date + 45).strftime("%m/%d/%y")
+      send_by_date = (return_request.order.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
       formatted_return_items = return_items.map do |item|
         {
           name: item.line_item&.product&.name,
