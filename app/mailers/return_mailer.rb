@@ -31,6 +31,7 @@ class ReturnMailer < ActionMailer::Base
       return_items = return_request.return_request_items
       billing_address = order.billing_address
       label_print_link = return_items.first.item_return.item_return_label[:label_url]
+      #todo: need to revisit this next line when we get final delivery date approval
       send_by_date = (return_request.order.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
       formatted_return_items = return_items.map do |item|
         {
