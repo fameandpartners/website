@@ -125,7 +125,7 @@ class ItemReturnEvent < ActiveRecord::Base
                               # deal with all other adjustments
                               splittable_adjustment = ((order.adjustment_total - tax_total) / [order.line_items.count, 1].max )
 
-                              event.item_return.line_item.price + item_tax + splittable_adjustment
+                              (event.item_return.line_item.price + item_tax + splittable_adjustment).round(2)
                             else
                               event.item_return.line_item.price
                             end
