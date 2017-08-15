@@ -23,7 +23,7 @@ class ReturnMailer < ActionMailer::Base
         "#{height_value}cm"
       end
     end
-    
+
     def create_formatted_order(return_request)
       order = return_request.order
       user = order.user
@@ -37,7 +37,7 @@ class ReturnMailer < ActionMailer::Base
           size: item.line_item&.cart_item&.size&.presentation,
           color: item.line_item&.cart_item&.color&.presentation,
           image: item.line_item&.cart_item&.image&.large,
-          price: item.line_item&.product&.price,
+          price: item.line_item&.price,
           height_copy: convert_height_units(item.line_item&.personalization&.height_value, item.line_item&.personalization&.height_unit)
         }
       end
