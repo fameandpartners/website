@@ -1,3 +1,5 @@
+import { assign } from 'lodash';
+
 /* global $, document */
 const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 const contentType = 'application/json';
@@ -137,6 +139,10 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
 
 
 export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
+  const updatedReturnsObj = assign({}, returnsObj, {
+    email: guestEmail,
+  });
+
   $.ajax({
     url: '/api/v1/submit_return',
     dataType: 'json',
@@ -144,7 +150,7 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
       'Content-Type': contentType,
     },
     method: 'POST',
-    data: returnsObj,
+    data: updatedReturnsObj,
   })
   .done((res) => {
     dispatch(setReturnLoadingState({ isLoading: false }));
