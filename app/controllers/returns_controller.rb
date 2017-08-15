@@ -3,12 +3,7 @@ class ReturnsController < ApplicationController
   layout 'returns/application'
 
   def main
-    user = spree_current_user
-    if user.present?
-      render 'layouts/returns/main'
-    else
-      redirect_to spree_login_path
-    end
+    render 'layouts/returns/main'
   end
 
   def guest

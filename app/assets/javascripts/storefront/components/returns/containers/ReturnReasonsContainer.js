@@ -7,6 +7,7 @@ import autoBind from 'auto-bind';
 import { assign } from 'lodash';
 import scroll from 'scroll';
 import scrollDoc from 'scroll-doc';
+import pluralize from 'pluralize';
 
 // Components
 import EstimatedRefundTotal from '../components/EstimatedRefundTotal';
@@ -119,6 +120,34 @@ class ReturnReasonsContainer extends Component {
     actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
   }
 
+  calculateCashCredit() {
+    const { returnArray } = this.props;
+    const cashCreditAmount = returnArray
+    .filter(product => !product.store_credit_only)
+    .reduce((sum, returnedProduct) =>
+      sum + Number(returnedProduct.price), 0);
+
+    if (cashCreditAmount) {
+      return cashCreditAmount;
+    }
+
+    return 0;
+  }
+
+  calculateStoreCredit() {
+    const { returnArray } = this.props;
+    const storeCreditAmount = returnArray
+    .filter(product => product.store_credit_only)
+    .reduce((sum, returnedProduct) =>
+      sum + Number(returnedProduct.price), 0);
+
+    if (storeCreditAmount) {
+      return storeCreditAmount;
+    }
+
+    return 0;
+  }
+
   componentWillMount() {
     const { orderData } = this.props;
     if (!orderData || orderData.length === 0) {
@@ -138,14 +167,27 @@ class ReturnReasonsContainer extends Component {
       };
     }
   }
+
+  buttonText() {
+    const { returnArray } = this.props;
+    if (returnArray.length === 0) {
+      return 'Select Items to Return';
+    }
+
+    const pluralizeText = pluralize('Items', returnArray.length, true);
+    return `Return ${pluralizeText}`;
+  }
+
   componentDidMount() {
     scroll.top(scrollElement, 0);
   }
+
   render() {
     const { order, orderArray } = this.state;
     const {
       params,
       returnIsLoading,
+      returnArray,
       returnRequestErrors,
       returnSubtotal,
     } = this.props;
@@ -195,18 +237,19 @@ class ReturnReasonsContainer extends Component {
             <div>
               <EstimatedRefundTotal
                 returnSubtotal={returnSubtotal}
+                refundCashTotal={this.calculateCashCredit()}
+                storeCreditTotal={this.calculateStoreCredit()}
               />
               <div className="grid-right">
                 <div className="col-4_md-12_sm-12">
                   <div role="button" className="SimpleButton__wrapper" onClick={this.requestReturn}>
                     <SimpleButton
-                      big
-                      buttonCopy={returnIsLoading ? 'Starting...' : 'Start Return'}
-                      isLoading={returnIsLoading}
+                      buttonCopy={returnIsLoading ? 'Starting...' : this.buttonText()}
+                      isLoading={returnIsLoading || returnArray.length === 0}
                     />
-                    <span className="u-margin-top-medium u-right-text u-display-inherit">
-                      {this.showError()}
-                    </span>
+                  </div>
+                  <div className="EstimatedRefundTotal__message EstimatedRefundTotal__message--error u-margin-top-medium u-display-inherit">
+                    {this.showError()}
                   </div>
                 </div>
               </div>

@@ -30,7 +30,9 @@ const defaultProps = {
 class OrderContainer extends Component {
   componentWillMount() {
     const { email, orderID } = this.props.params;
-    const { hasRequestedOrders, requiresViewOrdersRefresh } = this.props;
+    const { actions, hasRequestedOrders, requiresViewOrdersRefresh } = this.props;
+
+    actions.clearReturnProductArray();
 
     // We need to refresh whenever we visit this route after
     // our POST changes the order data
@@ -38,9 +40,9 @@ class OrderContainer extends Component {
       win.location = ReturnConstants.RETURN_ROUTES.ORDERS;
     }
 
+
     // Get the order product data only once
     if (!hasRequestedOrders) {
-      const { actions } = this.props;
       actions.setHasRequestedOrders({ hasRequestedOrders: true });
       actions.setReturnLoadingState({ isLoading: true });
       if (email && orderID) {

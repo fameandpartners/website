@@ -132,7 +132,7 @@ class ProductListItem extends Component {
       <span
         className={classnames(
           { 'u-warning-text': charactersRemaining <= 20 },
-          { 'u-hide': charactersRemaining > 250 },
+          { 'u-hide': charactersRemaining > 100 },
       )}
       >
         {charactersRemaining} {characterCopy} left
@@ -164,6 +164,7 @@ class ProductListItem extends Component {
       id,
       returnWindowEnd,
       openEndedReturnReason,
+      store_credit_only: storeCreditOnly,
       products_meta: productMeta,
       returns_meta: returnsMeta = {},
       price,
@@ -185,12 +186,12 @@ class ProductListItem extends Component {
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
-    const maxCharacterCount = 500;
+    const maxCharacterCount = 255;
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
-        <div className="col-8_md-7_sm-6_xs-12 Product__listItem">
+        <div className="col-8_md-10_sm-6_xs-12 Product__listItem">
           <Checkbox
             id={`${id}-checkbox`}
             wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
@@ -205,7 +206,23 @@ class ProductListItem extends Component {
             className={classnames('product-image', { 'u-cursor-pointer': canUpdateReturnArray })}
           />
           <div className="u-line-height-medium">
-            <div className="nameAndPrice--marginBottom">
+            {
+              storeCreditOnly ?
+                <div className="ProductlistItem__meta-container">
+                  <span className="ProductlistItem__meta-container-text font-sans-serif">
+                    RETURNABLE FOR STORE CREDIT&nbsp;ONLY
+                  </span> <br />
+                </div>
+              :
+              null
+            }
+
+            <div
+              className={classnames(
+                'nameAndPrice--marginBottom',
+                { 'u-margin-top-medium': storeCreditOnly })
+              }
+            >
               <span className="meta--key">
                 {name}
               </span>

@@ -10,22 +10,45 @@
 
 .Product__listItem__container {
   background: white;
-  padding: 30px 60px;
+  padding: 30px 40px;
+    @include desktop {
+      padding: 30px 60px;
+    }
 }
 
 .Product__listItem {
     margin-bottom: 30px;
     line-height: 1.8em;
-    @include desktop {
-        margin-bottom: 0px;
+    @include tablet {
         margin: inherit;
+        margin-bottom: 20px;
+    }
+    @include desktop {
+      margin-bottom: 0px;
     }
 }
 
 .Product__listItem .checkbox--container {
     text-align: right;
 }
+.Product__listItem .ProductlistItem__meta-container-text {
+    background: #D8D8D8;
+    font-size: 11px;
+    padding: 0 10px;
+    @include desktop {
+      text-align: left;
+      font-size: 11px;
+      padding: 0 13px;
 
+    }
+
+}
+.Product__listItem .ProductlistItem__meta-container {
+  text-align: center;
+  @include tablet {
+    text-align: left;
+  }
+}
 .Product__listItem .meta--key {
     font-weight: 600;
     padding: 0 7px 0 0;
@@ -48,7 +71,6 @@
         max-width: 180px;
         min-height: 180px;
         float: left;
-        margin-right: 30px;
     }
 }
 

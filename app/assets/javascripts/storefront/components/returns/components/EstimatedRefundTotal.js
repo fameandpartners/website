@@ -1,30 +1,59 @@
 import React, { PropTypes } from 'react';
 
 const propTypes = {
-  returnSubtotal: PropTypes.number.isRequired,
+  refundCashTotal: PropTypes.number.isRequired,
+  storeCreditTotal: PropTypes.number.isRequired,
 };
 
-const EstimatedRefundTotal = ({ returnSubtotal }) => (
+const EstimatedRefundTotal = ({ refundCashTotal, storeCreditTotal }) => (
   <div className="EstimatedRefundTotal">
-    <div className="grid-center u-margin-bottom-medium">
-      <div className="col-12_md-4_sm-10">
-        <p
-          className="font-sans-serif"
-        >
-         Refund subtotal: ${Number(returnSubtotal).toFixed(2) || 0.00}
-        </p>
-        <p className="font-sans-serif">
-         Shipping: $0.00
-        </p>
-      </div>
-    </div>
-    <div className="grid-right">
-      <div className="col-4_md-12_sm-12">
-        <p className="font-sans-serif total">
-          <span className="u-full-length-border-top u-position-relative">
-             Total estimated refund: ${Number(returnSubtotal).toFixed(2) || 0.00}
-          </span>
-        </p>
+    <div className="grid-right-noGutter">
+      <div className="col-4_md-12">
+        { storeCreditTotal ?
+          <div className="grid-noGutter">
+            <div className="col-6">
+              <p className="font-sans-serif u-left-text u-margin-bottom-small">
+                Estimated store credit:
+              </p>
+            </div>
+            <div className="col-6">
+              <p className="font-sans-serif u-right-text u-margin-bottom-small">
+                ${Number(storeCreditTotal).toFixed(2) || 0.00}
+              </p>
+            </div>
+          </div>
+        : null
+        }
+
+        { refundCashTotal ?
+          <div className="grid-noGutter">
+            <div className="col-6">
+              <p className="font-sans-serif u-left-text u-margin-bottom-small">
+                Estimated cash credit:
+              </p>
+            </div>
+            <div className="col-6">
+              <p className="font-sans-serif u-right-text u-margin-bottom-small">
+                ${Number(refundCashTotal).toFixed(2) || 0.00}
+              </p>
+            </div>
+          </div>
+        : null
+        }
+
+
+        <div className="grid-noGutter u-border-top">
+          <div className="col-6">
+            <p className="EstimatedRefundTotal__total u-left-text font-sans-serif u-margin-top-small u-margin-bottom-medium">
+              Estimated total refund:
+            </p>
+          </div>
+          <div className="col-6">
+            <p className="EstimatedRefundTotal__total font-sans-serif u-margin-top-small u-right-text">
+              ${Number(refundCashTotal + storeCreditTotal).toFixed(2) || 0.00}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
