@@ -50,7 +50,7 @@ const EstimatedRefundTotal = ({ refundCashTotal, storeCreditTotal }) => (
           </div>
           <div className="col-6">
             <p className="EstimatedRefundTotal__total font-sans-serif u-margin-top-small u-right-text">
-              ${Number(refundCashTotal).toFixed(2) || 0.00}
+              ${Number(refundCashTotal + storeCreditTotal).toFixed(2) || 0.00}
             </p>
           </div>
         </div>
