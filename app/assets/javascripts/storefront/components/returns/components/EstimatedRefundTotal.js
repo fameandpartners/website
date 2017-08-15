@@ -2,18 +2,17 @@ import React, { PropTypes } from 'react';
 
 const propTypes = {
   refundCashTotal: PropTypes.number.isRequired,
-  returnSubtotal: PropTypes.number.isRequired,
   storeCreditTotal: PropTypes.number.isRequired,
 };
 
-const EstimatedRefundTotal = ({ refundCashTotal, returnSubtotal, storeCreditTotal }) => (
+const EstimatedRefundTotal = ({ refundCashTotal, storeCreditTotal }) => (
   <div className="EstimatedRefundTotal">
     <div className="grid-right-noGutter">
       <div className="col-4_md-12">
         { storeCreditTotal ?
           <div className="grid-noGutter">
             <div className="col-6">
-              <p className="font-sans-serif u-margin-bottom-small">
+              <p className="font-sans-serif u-left-text u-margin-bottom-small">
                 Estimated store credit:
               </p>
             </div>
@@ -29,7 +28,7 @@ const EstimatedRefundTotal = ({ refundCashTotal, returnSubtotal, storeCreditTota
         { refundCashTotal ?
           <div className="grid-noGutter">
             <div className="col-6">
-              <p className="font-sans-serif u-margin-bottom-small">
+              <p className="font-sans-serif u-left-text u-margin-bottom-small">
                 Estimated cash credit:
               </p>
             </div>
@@ -45,13 +44,13 @@ const EstimatedRefundTotal = ({ refundCashTotal, returnSubtotal, storeCreditTota
 
         <div className="grid-noGutter u-border-top">
           <div className="col-6">
-            <p className="EstimatedRefundTotal__total font-sans-serif u-margin-top-small u-margin-bottom-medium">
+            <p className="EstimatedRefundTotal__total u-left-text font-sans-serif u-margin-top-small u-margin-bottom-medium">
               Estimated total refund:
             </p>
           </div>
           <div className="col-6">
             <p className="EstimatedRefundTotal__total font-sans-serif u-margin-top-small u-right-text">
-              ${Number(returnSubtotal).toFixed(2) || 0.00}
+              ${Number(refundCashTotal + storeCreditTotal).toFixed(2) || 0.00}
             </p>
           </div>
         </div>
