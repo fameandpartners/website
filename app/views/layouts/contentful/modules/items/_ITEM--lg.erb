@@ -23,8 +23,8 @@
   <h4 class="Editorial__overlayTitle">Shop the Look</h4>
   <ul>
   <% products.each do |item|
-       name = item.name
-       path = collection_product_path(item, color: item.color.try(:name))
+    name = item.name
+    path = collection_product_path(item, color: item.color.try(:name))
   %>
     <li>
       <a href="<%= path %>">
@@ -34,4 +34,10 @@
   <% end %>
   </ul>
 </div>
+<% end %>
+
+<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
+  <div class="Editorial__overlayBottomCaption">
+    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
+  </div>
 <% end %>

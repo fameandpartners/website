@@ -38,3 +38,22 @@ div.section-row.columns {
     margin-right: 50%;
   }
 }
+
+.forced-full-width-wrapper {
+
+  @include breakpoint(tablet) {
+    width: 99vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    &.is-ancestor {
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+  }
+
+}

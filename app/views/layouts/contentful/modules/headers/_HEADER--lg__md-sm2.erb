@@ -1,6 +1,6 @@
 <% @lg_contents = contents[:header_lg_item] %>
 
-<div class="section-row tile is-ancestor">
+<div class="section-row <%= contents[:full_width_content] %> tile is-ancestor">
 
   <div class="tile is-parent is-12 is-hidden-tablet">
     <article class="tile is-child">
@@ -19,7 +19,9 @@
 
   <div class="tile is-parent is-6">
     <article class="tile is-child">
-      <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      <div class="Editorial Editorial--featured">
+        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      </div>
     </article>
   </div>
 

@@ -134,12 +134,26 @@ module Contentful
       id = large_container.id
 
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
+      image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
+      image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
+      image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
 
-      {
-        image: fetched_lg_container.image.url,
-        # mobile_image: fetched_lg_container.mobile_image.url,
-        overlay_pids: fetched_lg_container.overlay_pids
-      }
+      if (image_caption_link_target == 'true')
+        image_caption_link_target = '_blank'
+      else
+        image_caption_link_target = '_self'
+      end
+
+      if (fetched_lg_container.content_type.id == 'ITEM--lg')
+        {
+          image: fetched_lg_container.image.url,
+          # mobile_image: fetched_lg_container.mobile_image.url,
+          overlay_pids: fetched_lg_container.overlay_pids,
+          image_caption: image_caption,
+          image_caption_url: image_caption_url,
+          image_caption_link_target: image_caption_link_target
+        }
+      end
     end
 
     def self.jsonify_medium_lp_container(medium_container)
@@ -171,6 +185,7 @@ module Contentful
         header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
         header_sm_items = (main_header_container.respond_to? :pids) ? main_header_container.pids : nil
         email_text = (main_header_container.respond_to? :email_capture_text) ? main_header_container.email_capture_text : nil
+        full_width_content = (main_header_container.respond_to? :full_width_content) ? 'forced-full-width-wrapper' : nil
 
         {
           id: main_header_container.content_type.id,
@@ -178,7 +193,8 @@ module Contentful
           header_text: main_header_container.header_text,
           email_capture: main_header_container.show_email_capture,
           email_text: email_text,
-          header_sm_items: header_sm_items
+          header_sm_items: header_sm_items,
+          full_width_content: full_width_content
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial')
         {
@@ -187,6 +203,12 @@ module Contentful
           # mobile_image: main_header_container.mobile_image.url,
           overlay_pids: main_header_container.overlay_pids
         }
+      end
+    end
+
+    def self.map_editorials(arr)
+      arr.map do |item|
+        jsonify_large_lp_container(item)
       end
     end
 
@@ -200,13 +222,21 @@ module Contentful
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
         sm_items = (item.respond_to? :pids) ? item.pids : nil
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
+        button_label = (item.respond_to? :button_label) ? item.button_label : nil
+        relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
+        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
+        floating_email_scroll_percentage = (item.respond_to? :floating_email_scroll_percentage) ? item.floating_email_scroll_percentage : nil
 
         {
           id: item.content_type.id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
-          email_text: email_text
+          email_text: email_text,
+          button_label: button_label,
+          relative_url: relative_url,
+          lg_items: lg_items,
+          floating_email_scroll_percentage: floating_email_scroll_percentage
         }
       end
 
