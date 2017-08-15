@@ -99,7 +99,8 @@ module Products
                   apple:              product.style_profile&.apple,
                   pear:               product.style_profile&.pear,
                   athletic:           product.style_profile&.athletic,
-                  strawberry:         product.style_profile&.hour_glass,
+                  strawberry:         product.style_profile&.strawberry,
+                  hour_glass:         product.style_profile&.hour_glass,
                   column:             product.style_profile&.column,
                   petite:             product.style_profile&.petite,
                   color:              color_customizable
@@ -118,8 +119,8 @@ module Products
                 cropped_images: cropped_images_for(product_color_value),
 
                 prices: {
-                  aud:  product_price_in_au.amount,
-                  usd:  product_price_in_us.amount
+                  aud:  product_price_in_au.amount.to_f,
+                  usd:  product_price_in_us.amount.to_f
                 },
                 sale_prices:  {
                   aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
