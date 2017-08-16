@@ -5,6 +5,7 @@ import autobind from 'auto-bind';
 import scroll from 'scroll';
 import scrollDoc from 'scroll-doc';
 import Confirmation from '../components/Confirmation';
+import { orderBy, cloneDeep } from 'lodash';
 
 const scrollElement = scrollDoc();
 
@@ -31,13 +32,19 @@ class ConfirmationContainer extends Component {
 
   render() {
     const { orderData, logisticsData } = this.props;
+
+    const sortedLogisticsData = cloneDeep(logisticsData);
+    const sortedLineItems = orderBy(sortedLogisticsData.line_items, i => i.item_return_label.item_return_id, ['desc']);
+
+    sortedLogisticsData.line_items = sortedLineItems;
+
     if (logisticsData) {
       scroll.top(scrollElement, 0);
     }
     return (
       <Confirmation
         orderData={orderData}
-        logisticsData={logisticsData}
+        logisticsData={sortedLogisticsData}
       />
     );
   }
