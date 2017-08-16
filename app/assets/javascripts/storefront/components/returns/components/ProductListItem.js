@@ -184,6 +184,7 @@ class ProductListItem extends Component {
     } = productMeta;
     const {
       created_at_iso_mdy: returnCreatedAtMdy,
+      label_url: labelUrl,
     } = returnsMeta;
 
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
@@ -268,7 +269,7 @@ class ProductListItem extends Component {
                   listLinks={(
                     <div>
                       {
-                        image ? (
+                        labelUrl ? (
                           <li
                             className="u-underline u-cursor-pointer"
                             onClick={this.handlePrintLabelClick}
