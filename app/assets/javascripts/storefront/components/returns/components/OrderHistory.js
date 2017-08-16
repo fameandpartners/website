@@ -45,12 +45,14 @@ class OrderHistory extends Component {
               <div className="Product__listItem__container">
                 {
                   returnRequestedArray.map((o, i) => {
+                    const internationalCustomer = orderData.spree_order.international_customer;
                     const { id } = o;
                     return (
                       <div key={id}>
                         <ProductContainer
                           key={id}
                           product={o}
+                          internationalCustomer={internationalCustomer}
                           orderData={orderData}
                           orderIndex={i}
                           showForm={false}
@@ -69,12 +71,14 @@ class OrderHistory extends Component {
                 }
                 {
                   notRequestedArray.map((o, i) => {
+                    const internationalCustomer = orderData.spree_order.international_customer;
                     const { id } = o;
                     return (
                       <div key={id}>
                         <ProductContainer
                           key={id}
                           product={o}
+                          internationalCustomer={internationalCustomer}
                           orderData={orderData}
                           orderIndex={i}
                           showForm={false}

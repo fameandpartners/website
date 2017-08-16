@@ -388,6 +388,40 @@ ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
 
 
 --
+-- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE contentful_versions (
+    id integer NOT NULL,
+    change_message character varying(255),
+    payload text,
+    user_id integer,
+    is_live boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE contentful_versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
+
+
+--
 -- Name: custom_dress_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4783,7 +4817,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
@@ -5452,6 +5486,13 @@ ALTER TABLE ONLY competition_participations ALTER COLUMN id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentful_routes_id_seq'::regclass);
+
+
+--
+-- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
 
 
 --
@@ -6450,6 +6491,14 @@ ALTER TABLE ONLY competition_participations
 
 ALTER TABLE ONLY contentful_routes
     ADD CONSTRAINT contentful_routes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions
+    ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
 
 
 --
