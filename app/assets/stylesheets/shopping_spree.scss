@@ -66,7 +66,7 @@
             padding-bottom: 3px;
         }
 
-        .line-caret
+        .open-caret
         {
             background-color: white;
             &:before
@@ -87,6 +87,32 @@
                 left: 1px;
                 top: 0;
                 border-top: 7px solid white;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+            }
+            
+        }
+        
+        .closed-caret
+        {
+            background-color: white;
+            &:before
+            {
+                content: '';
+                top: 0;
+                left: 0;
+                position: absolute;
+                border-bottom: 8px solid #000000;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;            }
+
+            &:after
+            {
+                content: '';
+                left: 1px;
+                top: 1px;
+                position: absolute;
+                border-bottom: 7px solid white;
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
             }
