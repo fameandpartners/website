@@ -138,7 +138,7 @@ module Contentful
       image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
       image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
 
-      if (image_caption_link_target == 'true')
+      if (image_caption_link_target)
         image_caption_link_target = '_blank'
       else
         image_caption_link_target = '_self'
