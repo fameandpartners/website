@@ -267,12 +267,24 @@ class ProductListItem extends Component {
                   copy={(<span>Return Started <br /> {returnCreatedAtMdy}</span>)}
                   listLinks={(
                     <div>
-                      <li
-                        className="u-underline u-cursor-pointer"
-                        onClick={this.handlePrintLabelClick}
-                      >
-                        {internationalCustomer ? 'View Return Instructions' : 'Print Label' }
-                      </li>
+                      {
+                        image ? (
+                          <li
+                            className="u-underline u-cursor-pointer"
+                            onClick={this.handlePrintLabelClick}
+                          >
+                            {internationalCustomer ? 'View Return Instructions' : 'Print Label' }
+                          </li>
+                        )
+                        :
+                        (
+                          <li
+                            className="u-underline u-cursor-pointer"
+                          >
+                            <a href="/contact">Contact Customer Service</a>
+                          </li>
+                        )
+                      }
                     </div>
                   )}
                 />

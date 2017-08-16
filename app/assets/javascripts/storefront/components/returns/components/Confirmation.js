@@ -75,17 +75,20 @@ class Confirmation extends PureComponent {
               <br />
               Ship your return by {logisticsData.final_return_by_date}
             </p>
-            <ul className="label-list hide-for-print hide-for-mobile">
-              <li>
-                <a
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  href={latestLineItem.item_return_label.label_url}
-                >
+            { !internationalCustomer ?
+              <ul className="label-list hide-for-print hide-for-mobile">
+                <li>
+                  <a
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    href={latestLineItem.item_return_label.label_url}
+                  >
                     Print Label
                   </a>
-              </li>
-            </ul>
+                </li>
+              </ul>
+              : null
+            }
           </div>
           <hr className="hide-for-mobile" />
           <div>
@@ -94,7 +97,7 @@ class Confirmation extends PureComponent {
                 <div className="Confirmation__text-box">
                   <h3 className="list-title">Please mail your package to</h3>
                   <p>Fame and Partners – Returns <br /> 15905 Commerce Way <br />
-                Cerritos, CA, 90703</p>
+                  Cerritos, CA, 90703</p>
                 </div>
                 :
                 <div />
