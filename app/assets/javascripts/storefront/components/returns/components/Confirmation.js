@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
+import { maxBy } from 'lodash';
 
 const propTypes = {
   orderData: PropTypes.array.isRequired,
@@ -45,12 +46,18 @@ function findOrderFromLineItem(orders, lineItemId) {
   return match;
 }
 
+function grabLatestLineItem(lineItems) {
+  return maxBy(lineItems, o => o.item_return_label.item_return_id);
+}
+
 /* eslint-disable react/prefer-stateless-function */
 class Confirmation extends PureComponent {
   render() {
     const { logisticsData, orderData } = this.props;
-    const currentOrder = findOrderFromLineItem(orderData, logisticsData.line_items[0].line_item_id);
+    const latestLineItem = grabLatestLineItem(logisticsData.line_items);
+    const currentOrder = findOrderFromLineItem(orderData, latestLineItem.line_item_id);
     const internationalCustomer = currentOrder.international_customer;
+
     return (
       <div className="instructions__container">
         <p className="orders-link-container hide-for-print">
@@ -73,7 +80,7 @@ class Confirmation extends PureComponent {
                 <a
                   rel="noreferrer noopener"
                   target="_blank"
-                  href={logisticsData.line_items[0].item_return_label.label_url}
+                  href={latestLineItem.item_return_label.label_url}
                 >
                     Print Label
                   </a>
@@ -140,9 +147,9 @@ class Confirmation extends PureComponent {
                 </ul>
               )
             }
-              { logisticsData.line_items[0].item_return_label && !internationalCustomer ?
+              { latestLineItem.item_return_label && !internationalCustomer ?
                 <img
-                  src={logisticsData.line_items[0].item_return_label.label_image_url}
+                  src={latestLineItem.item_return_label.label_image_url}
                   alt="Shipping Label"
                   className="Confirmation__shipping-label"
                 /> : null
