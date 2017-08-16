@@ -41,17 +41,21 @@
     {
         font-size: 22px;
     }
+    &.collapsed
+    {
+        .chat-list
+        {
+            display: none;
+        }
+    }
+    
 }
 
 @media (max-width: 767px)
 {
-    .navbar-collapse
-    {
-        height: 100vh;
-    }    
     
     .shopping-spree-container
-    {
+    {        
         position: fixed;
         top: auto;
         bottom: 0px;

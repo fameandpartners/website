@@ -7,7 +7,7 @@ class Drawer extends React.Component
         super();
         this.state =
             {
-                closed: false
+                closed: true
             };
         this.handleToggle = this.handleToggle.bind(this);        
     }
@@ -20,18 +20,17 @@ class Drawer extends React.Component
     render()
     {
           return (
-                  <div className="shopping-spree-container container">
+                  <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : '')}>
                   <div className="row header vertical-align">
                   <div className="col-xs-2">
-                  <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}
-              data-toggle="collapse" data-target=".chat-content" onClick={this.handleToggle}></i>
+                  <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
                   </div>
                   <div className="col-xs-8 text-center">Shopping Spree</div>
                   <div className="col-xs-2"><span className="icon icon-bag"></span></div>
                   </div>
                   <div className="row">
                   <div className="chat-list">
-                  <div className="chat-content collapse out">Test</div>
+                  <div className="chat-content">Test</div>
                   </div>
                   </div>
                   </div>
