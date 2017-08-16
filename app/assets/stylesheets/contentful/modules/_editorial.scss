@@ -70,6 +70,11 @@
   color: $c-white;
 }
 
+.Editorial__overlayBottomCaptionTitle--dark,
+.Editorial__overlayBottomCaptionTitle--dark:hover {
+  color: $c-black;
+}
+
 .Editorial--mini {
 
   .Editorial__overlay {

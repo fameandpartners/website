@@ -135,6 +135,7 @@ module Contentful
 
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
       image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
+      image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
       image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
       image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
 
@@ -150,6 +151,7 @@ module Contentful
           # mobile_image: fetched_lg_container.mobile_image.url,
           overlay_pids: fetched_lg_container.overlay_pids,
           image_caption: image_caption,
+          image_caption_color: image_caption_color,
           image_caption_url: image_caption_url,
           image_caption_link_target: image_caption_link_target
         }
