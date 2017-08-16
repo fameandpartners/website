@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
+import classnames from 'classnames';
 import * as AppActions from '../actions/index';
 import ProductListItem from '../components/ProductListItem';
 import noop from '../../../libs/noop';
-import classnames from 'classnames';
 
 const propTypes = {
   activeTextBox: PropTypes.number,
@@ -13,6 +13,7 @@ const propTypes = {
   confirmationPage: PropTypes.bool,
   product: PropTypes.object.isRequired,
   hasError: PropTypes.bool,
+  internationalCustomer: PropTypes.bool,
   lastChild: PropTypes.bool,
   orderData: PropTypes.object,
   orderNumber: PropTypes.string,
@@ -36,6 +37,7 @@ const defaultProps = {
   confirmationPage: false,
   checkboxStatus: false,
   hasError: false,
+  internationalCustomer: false,
   lastChild: false,
   orderData: null,
   orderIndex: null,
@@ -103,6 +105,7 @@ class ProductContainer extends Component {
       hasError,
       lastChild,
       orderNumber,
+      internationalCustomer,
       orderIndex,
       product,
       returnArray,
@@ -124,6 +127,7 @@ class ProductContainer extends Component {
           canUpdateReturnArray={canUpdateReturnArray}
           confirmationPage={confirmationPage}
           checkboxStatus={checkboxStatus}
+          internationalCustomer={internationalCustomer}
           orderIndex={orderIndex}
           orderNumber={orderNumber}
           product={product}
