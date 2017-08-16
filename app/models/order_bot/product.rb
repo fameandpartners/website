@@ -5,9 +5,9 @@ module OrderBot
 		def initialize(line_item)
 			product = line_item.product
 			@reference_product_id = product.id # This is going to need to change
-			@group_id = get_group_id_by_product(1234)
+			@group_id = get_group_id_by_product(1234) # Need to check on this
 			@create_bom = false 
-			@create_purchase_unit =
+			@create_purchase_unit = false
 			@name = product.name
 			@sku = line_item.variant.sku
 			@base_price = line_item.price
