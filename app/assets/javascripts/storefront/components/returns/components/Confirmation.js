@@ -83,8 +83,8 @@ class Confirmation extends PureComponent {
                     target="_blank"
                     href={latestLineItem.item_return_label.label_url}
                   >
-              Print Label
-              </a>
+                    Print Label
+                  </a>
                 </li>
               </ul>
               : null
