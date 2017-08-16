@@ -76,7 +76,7 @@ module ReturnsProcessesControllerHelper
     label = Newgistics::ShippingLabel.new(
       order.user_first_name,
       order.user_last_name,
-      order.billing_address,
+      order.shipping_address,
       order.email,
       order.number
     )
