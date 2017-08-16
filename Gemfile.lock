@@ -990,6 +990,7 @@ DEPENDENCIES
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
   jquery-ui-rails
+  json
   koala
   letter_opener (~> 1.4.1)
   mailchimp-api
@@ -1058,4 +1059,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.15.0
+   1.15.3

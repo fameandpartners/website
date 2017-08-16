@@ -104,6 +104,8 @@ gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
 # utils
+
+gem 'json'
 # replacement for standard library.
 gem 'addressable'
 

@@ -9,6 +9,7 @@ class CustomItemSku
   def call
     return line_item.variant.sku unless line_item.personalization.present?
 
+    #TODO: figure out this logic to get cusomized skus into the DB
     Skus::Generator.new(
       style_number:            style_number,
       size:                    size,
