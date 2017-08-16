@@ -3,7 +3,7 @@ import React from 'react';
 const Drawer = () =>
       {
           return (
-                  <div className="shopping-spree-container container">
+                  <div>
                   <div className="row header vertical-align">
                   <div className="col-xs-2">
                   <i className="line-caret toggle-btn"
