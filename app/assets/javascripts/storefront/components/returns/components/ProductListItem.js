@@ -275,12 +275,14 @@ class ProductListItem extends Component {
                           >
                             {internationalCustomer ? 'View Return Instructions' : 'Print Label' }
                           </li>
-                        ) :
-                            <li
-                              className="u-underline u-cursor-pointer"
-                            >
-                              <a href="/contact">Contact Customer Service</a>
-                            </li>(
+                        )
+                        :
+                        (
+                          <li
+                            className="u-underline u-cursor-pointer"
+                          >
+                            <a href="/contact">Contact Customer Service</a>
+                          </li>
                         )
                       }
                     </div>
