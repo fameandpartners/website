@@ -1,5 +1,6 @@
+
 .shopping-spree-container
-{
+{    
     overflow: auto;
     background-color: white;
     position: fixed;
@@ -12,7 +13,6 @@
     .header
     {
         background-color: white;
-        line-height: 68px;
         display: block;
         text-align: center;
         font-size: 14px;
@@ -22,7 +22,7 @@
         border-top: 1px;
         border-top-color: #979797;
         border-top-style: solid;
-        
+        height: 68px;
     }
 
     .toggle-btn
@@ -30,6 +30,12 @@
         display: none;
     }
 
+    .vertical-align
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }    
 }
 
 @media (max-width: 767px)
@@ -89,7 +95,6 @@
             text-align: left !important;
             font-size: 22px;
             padding-left: 20px;
-            line-height: 68px !important;
         }
         
     }
