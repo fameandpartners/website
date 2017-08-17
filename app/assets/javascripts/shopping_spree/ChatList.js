@@ -1,4 +1,5 @@
 import React from 'react';
+import * as firebase from 'firebase';
 
 export default class ChatList extends React.Component
 {
@@ -7,10 +8,19 @@ export default class ChatList extends React.Component
         super( props );
         this.initializeFirebase()
     }
-
+ 
     initializeFirebase()
     {
+        var config =
+            {
+                apiKey: this.props.firebaseAPI,
+                authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
+                databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
+                projectId: this.props.firebaseDatabase,
+                storageBucket: this.props.firebaseDatabase + ".appspot.com"
+            }
         
+        this.chatsDB  = firebase.initializeApp( config ).database().ref( this.props.firebaseNodeId + "/chats" );
     }
     
     render()
@@ -25,6 +35,7 @@ export default class ChatList extends React.Component
 
 
 ChatList.propTypes = {
-        firebaseAPI: React.PropTypes.string.isRequired,
-        firebaseDatabase: React.PropTypes.string.isRequired
-    }
+    firebaseAPI: React.PropTypes.string.isRequired,
+    firebaseDatabase: React.PropTypes.string.isRequired,
+    firebaseNodeId: React.PropTypes.string.isRequired
+}

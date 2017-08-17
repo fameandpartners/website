@@ -13,7 +13,8 @@ export default class Drawer extends React.Component
             {
                 closed: true,
                 firebaseAPI: props.firebaseAPI,
-                firebaseDatabase: props.firebaseDatabase
+                firebaseDatabase: props.firebaseDatabase,
+                firebaseNodeId: props.firebaseNodeId
                 
             };
         this.handleToggle = this.handleToggle.bind(this);        
@@ -39,7 +40,9 @@ export default class Drawer extends React.Component
               <div className="row">
               <ChatList
                 firebaseAPI={this.state.firebaseAPI}
-                firebaseDatabase={this.state.firebaseDatabase} />
+                firebaseDatabase={this.state.firebaseDatabase}
+                firebaseNodeId={this.state.firebaseNodeId}
+              />
               </div>
               </div>
           );
@@ -48,5 +51,6 @@ export default class Drawer extends React.Component
 
 Drawer.propTypes = {
         firebaseAPI: React.PropTypes.string.isRequired,
-        firebaseDatabase: React.PropTypes.string.isRequired
+        firebaseDatabase: React.PropTypes.string.isRequired,
+        firebaseNodeId: React.PropTypes.string.isRequired
     }
