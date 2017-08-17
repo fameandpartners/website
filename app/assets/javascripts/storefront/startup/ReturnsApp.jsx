@@ -1,3 +1,4 @@
+/* global window */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
@@ -8,9 +9,10 @@ import OrderContainer from '../components/returns/containers/OrderContainer';
 import ReturnReasonsContainer from '../components/returns/containers/ReturnReasonsContainer';
 import '../libs/default-csrf';
 
-const returnNode = document.getElementById('returnsApp');
+const returnNode = window.document.getElementById('returnsApp');
 if (returnNode) {
-  const store = AppStore({}); // shared
+  /* eslint-disable no-underscore-dangle */
+  const store = AppStore({ user: window.__user__ }); // shared
   ReactDOM.render(
     <Provider store={store}>
       <Router history={hashHistory}>

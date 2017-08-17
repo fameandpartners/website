@@ -21,6 +21,7 @@ const propTypes = {
   confirmationPage: PropTypes.bool,
   checkboxStatus: PropTypes.bool,
   hasError: PropTypes.bool,
+  internationalCustomer: PropTypes.bool,
   orderIndex: PropTypes.number,
   orderNumber: PropTypes.string,
   product: PropTypes.object.isRequired,
@@ -40,6 +41,7 @@ const defaultProps = {
   checkboxStatus: false,
   confirmationPage: false,
   hasError: false,
+  internationalCustomer: false,
   orderIndex: 0,
   orderNumber: '',
   returnEligible: true,
@@ -154,6 +156,7 @@ class ProductListItem extends Component {
       confirmationPage,
       checkboxStatus,
       hasError,
+      internationalCustomer,
       orderNumber,
       product,
       returnEligible,
@@ -181,6 +184,7 @@ class ProductListItem extends Component {
     } = productMeta;
     const {
       created_at_iso_mdy: returnCreatedAtMdy,
+      label_url: labelUrl,
     } = returnsMeta;
 
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
@@ -264,12 +268,24 @@ class ProductListItem extends Component {
                   copy={(<span>Return Started <br /> {returnCreatedAtMdy}</span>)}
                   listLinks={(
                     <div>
-                      <li
-                        className="u-underline u-cursor-pointer"
-                        onClick={this.handlePrintLabelClick}
-                      >
-                        Print Label
-                      </li>
+                      {
+                        labelUrl ? (
+                          <li
+                            className="u-underline u-cursor-pointer"
+                            onClick={this.handlePrintLabelClick}
+                          >
+                            {internationalCustomer ? 'View Return Instructions' : 'Print Label' }
+                          </li>
+                        )
+                        :
+                        (
+                          <li
+                            className="u-underline u-cursor-pointer"
+                          >
+                            <a href="/contact">Contact Customer Service</a>
+                          </li>
+                        )
+                      }
                     </div>
                   )}
                 />

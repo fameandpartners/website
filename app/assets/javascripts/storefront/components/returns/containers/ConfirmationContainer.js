@@ -31,6 +31,7 @@ class ConfirmationContainer extends Component {
 
   render() {
     const { orderData, logisticsData } = this.props;
+
     if (logisticsData) {
       scroll.top(scrollElement, 0);
     }
