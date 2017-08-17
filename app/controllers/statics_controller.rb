@@ -2,6 +2,7 @@ class StaticsController < ApplicationController
   include Spree::Core::ControllerHelpers::Auth
   require 'enumerator'
 
+  # layout 'returns/application'
   layout 'redesign/application'
 
   # enable showing of display banner

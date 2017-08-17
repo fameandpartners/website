@@ -35,7 +35,8 @@ module Orders
                    :fabrication,
                    :price,
                    :currency,
-                   :quantity
+                   :quantity,
+                   :style_name
 
     def delivery_period
       @item.delivery_period
@@ -67,10 +68,6 @@ module Orders
 
     def product_number
       global_sku.id
-    end
-
-    def style_name
-      variant.try(:product).try(:name) || 'Missing Variant'
     end
 
     # this badly named method refers to ship_by_date for use by our product manufacturing
@@ -163,10 +160,6 @@ module Orders
       (available_making_options || []).map do |mo|
         { id: mo.id, name: mo.name, display_discount: mo.display_discount }
       end
-    end
-
-    def line_item_presenters
-      line_items.map {|li| Orders::LineItemPresenter.new(li)}
     end
 
   end
