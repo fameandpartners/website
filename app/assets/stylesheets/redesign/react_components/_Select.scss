@@ -31,13 +31,22 @@
       pointer-events: auto;
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1;
-      max-height: 300px;
+      max-height: 325px;
       overflow-y: auto;
       @include transform(scale(1) translateZ(0));
     }
 
     .Select-list-item {
       cursor: pointer;
+    }
+
+    .Select-list-item:hover {
+      background: $c-neutral-2;
+    }
+
+    .Select-list-item.focused,
+    .Select-list-item.selected {
+      background: $c-neutral-4;
     }
   }
 
@@ -85,7 +94,6 @@
   }
 
   .Select {
-    padding: 0 14px;
     top: 37px;
     width: 100%;
     height: auto;
@@ -111,11 +119,7 @@
     outline: none;
     text-align: left;
     transition: all 0.2s;
-  }
-
-  .Select-list-item:hover,
-  .Select-list-item:focus,
-  .Select-list-item.focused {
-    color: $c-neutral-12;
+    padding: 0 14px;
+    margin: 0 1px;
   }
 }
