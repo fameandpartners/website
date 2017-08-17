@@ -8,7 +8,7 @@ module OrderBot
 			@address = billing_address.address1
 			@address2 = billing_address.address2 
 			@city = billing_address.city
-			@state = "N/A" #TODO: Look into this
+			@state = billing_address.state.abbr
 			@postal_code = billing_address.zipcode
 		    @country = billing_address.country.iso
 		end
