@@ -9,6 +9,10 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
     in_cents(price + per_item_adjustment)
   end
 
+  def per_item_adjustment_in_cents
+    in_cents(per_item_adjustment)
+  end
+
   private
 
   def in_cents(amount)

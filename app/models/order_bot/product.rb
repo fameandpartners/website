@@ -3,6 +3,7 @@ module OrderBot
 		include Spree::OrderBotHelper
 
 		def initialize(line_item)
+			binding.pry
 			product = line_item.product
 			@reference_product_id = product.id # This is going to need to change
 			@group_id = get_group_id_by_product(1234) # Need to check on this
@@ -10,11 +11,11 @@ module OrderBot
 			@create_purchase_unit = false
 			@name = product.name
 			@sku = line_item.variant.sku
-			@base_price = line_item.price
-			@units_of_measure = 'Piece'
+			@base_price = line_item.price.to_f
+			@units_of_measure = 1
 			@units_of_measure_type_id = get_measurement_type_id_by_name('Piece')
 			@weight = 3.0
-			@shipping_units_of_measure_type_id = get_measurement_type_id_by_name('Lbs')
+			@shipping_units_of_measure_type_id = 1
 			@taxable = true #Assume everything is taxable it is dependent on where the order is from
 			@min_quantity = 1
 			@active = true

@@ -3,7 +3,7 @@ module OrderBot
 
 		def initialize(line_item, order)
 			@line_number = line_item.id
-			@product_sku = line_item.variant.sku
+			@product_sku = CustomItemSku.new(line_item).call
 			@quantity = line_item.quantity
 			@price = line_item.price
 			@product_taxes = generate_taxes(line_item, order)

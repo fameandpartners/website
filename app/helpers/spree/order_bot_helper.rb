@@ -23,12 +23,12 @@ module Spree
     def get_measurement_type_id_by_name(measurement_name)
       res = make_get_request('admin/units_of_measurement_types.json/')
       res_json = JSON.parse(res.body)
-      res_json.select {|e| e['name'] == measurement_name}.first['units_of_measure_id']
+      res_json.select {|measurement| measurement['name'] == measurement_name}.first['units_of_measure_id']
       #add logic if above returns nil
     end
 
     def get_group_id_by_product(product)
-      20340
+      19990
       # res = make_get_request('admin/product_structure.json/')
       # res_json = JSON.parse(res.body)
       # taxon_names = product.taxons.map{ |taxon| taxon.name}
@@ -43,10 +43,22 @@ module Spree
       #add logic if above returns nil
     end
 
-     def get_group_id_by_group_name(group_name)
+    def create_new_product(line_item)
+      product = OrderBot::Product.new(line_item)
+      make_post_request('admin/products.json/', [product]) #needs to take in an array of objects for api
+    end
+
+    def create_new_order(order)
+      bot_order = OrderBot::Order.new(order, order.line_items)
+      res = make_post_request('admin/orders.json/', bot_order)
+      binding.pry
+      rel = res
+    end
+
+    def get_group_id_by_group_name(group_name)
       res = make_get_request('admin/product_structure.json/')
       res_json = JSON.parse(res.body)
-      category = res_json.first['product_classes'].first['categories'].select {|category| category['groups'].any? {|z| z['group_name'] == group_name}} #product.taxons.map{ |taxon| taxon.name}.includes? z['group_name']
+      res_json.first['product_classes'].first['categories'].select {|category| category['groups'].any? {|z| z['group_name'] == group_name}} #product.taxons.map{ |taxon| taxon.name}.includes? z['group_name']
       #add logic if above returns nil
     end
 
@@ -62,8 +74,7 @@ module Spree
     def make_post_request(url, request_object)
       uri = URI( "http://api.orderbot.com/#{url}" )
       http = Net::HTTP.new( uri.host, uri.port )
-      request = Net::HTTP::Post.new( uri.request_uri )
-      binding.pry
+      request = Net::HTTP::Post.new( uri.request_uri, 'Content-Type' => 'application/json' )
       request.basic_auth( 'apitestfp@test.com', 'Testing2000' )
       request.body = request_object.to_json
       http.request( request )
