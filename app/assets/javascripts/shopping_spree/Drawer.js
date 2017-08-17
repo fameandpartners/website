@@ -1,15 +1,19 @@
 import React from 'react';
 import ChatList from './ChatList'
 
-class Drawer extends React.Component
+
+export default class Drawer extends React.Component
 {
+    
     constructor(props)
     {
         super(props);
 
         this.state =
             {
-                closed: true
+                closed: true,
+                firebaseAPI: props.firebaseAPI,
+                firebaseDatabase: props.firebaseDatabase
                 
             };
         this.handleToggle = this.handleToggle.bind(this);        
@@ -32,10 +36,17 @@ class Drawer extends React.Component
               <div className="col-xs-8 text-center">Shopping Spree</div>
               <div className="col-xs-2"><span className="icon icon-bag"></span></div>
               </div>
-              <div className="row"><ChatList /></div>
+              <div className="row">
+              <ChatList
+                firebaseAPI={this.state.firebaseAPI}
+                firebaseDatabase={this.state.firebaseDatabase} />
+              </div>
               </div>
           );
     }
 }
 
-export default Drawer;
+Drawer.propTypes = {
+        firebaseAPI: React.PropTypes.string.isRequired,
+        firebaseDatabase: React.PropTypes.string.isRequired
+    }

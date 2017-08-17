@@ -24,3 +24,7 @@ export default class ChatList extends React.Component
 }
 
 
+ChatList.propTypes = {
+        firebaseAPI: React.PropTypes.string.isRequired,
+        firebaseDatabase: React.PropTypes.string.isRequired
+    }
