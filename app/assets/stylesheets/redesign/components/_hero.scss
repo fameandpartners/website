@@ -74,13 +74,9 @@
     padding: 15px;
   }
 
-  .position-child-content--center {
-
-    .is-child {
-      display: table;
-      margin: 0 auto;
-    }
-
+  .CopyWrap__position--center .copy-wrap {
+    display: table;
+    margin: 0 auto;
   }
 
   // START - desktop
