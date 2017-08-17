@@ -8,7 +8,7 @@
     width: 300px;
     height: 100%;
     color: black;
-    z-index: 999999;
+    z-index: 999;
     font-family: NeuzeGro;
     
     .header
@@ -25,12 +25,13 @@
         border-top-style: solid;
         height: 68px;
     }
-
-    .toggle-btn
+    
+    .full-toggle-btn
     {
         display: none;
+        cursor: pointer;
     }
-
+    
     .vertical-align
     {
         display: flex;
@@ -41,13 +42,53 @@
     {
         font-size: 22px;
     }
+
+    .toggle-btn
+    {
+        display: block;       
+        cursor: pointer;
+        z-index: 10 !important;
+        color: #000;
+        padding-bottom: 3px;
+    }
+    
+    .open-caret
+    {
+        background-color: white;
+        padding-bottom: 15px;
+        &:before
+        {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            border-left: 8px solid #000000;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        &:after
+        { 
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            border-left: 7px solid white;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+        }
+        
+    }
+    
     &.collapsed
     {
+        height: auto;
         .chat-list
         {
             display: none;
         }
     }
+    
     
 }
 
@@ -61,14 +102,6 @@
         bottom: 0px;
         width: 100%;
         height: auto;
-        .toggle-btn
-        {
-            display: block;
-            cursor: pointer;
-            z-index: 10 !important;
-            color: #000;
-            padding-bottom: 3px;
-        }
 
         .open-caret
         {
@@ -143,6 +176,29 @@
 {
     .shopping-spree-container
     {
+        &.collapsed
+        {
+
+            .toggle-btn
+            {
+                display: none; 
+                
+            }
+            
+            .full-toggle-btn
+            {
+                background-color: red;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100%;
+                background-color: transparent;
+                z-index: 1000;
+            }
+        }
+        
         .chat-list
         {
             .chat-content
