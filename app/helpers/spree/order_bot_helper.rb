@@ -32,7 +32,6 @@ module Spree
       # res = make_get_request('admin/product_structure.json/')
       # res_json = JSON.parse(res.body)
       # taxon_names = product.taxons.map{ |taxon| taxon.name}
-      # binding.pry
       # groups = res_json.first['product_classes'].first['categories'].select {
       #     |category| category['groups'].any? {
       #         |z| taxon_names.include?(z['group_name'])
@@ -47,7 +46,6 @@ module Spree
      def get_group_id_by_group_name(group_name)
       res = make_get_request('admin/product_structure.json/')
       res_json = JSON.parse(res.body)
-      binding.pry
       category = res_json.first['product_classes'].first['categories'].select {|category| category['groups'].any? {|z| z['group_name'] == group_name}} #product.taxons.map{ |taxon| taxon.name}.includes? z['group_name']
       #add logic if above returns nil
     end
@@ -73,13 +71,3 @@ module Spree
 
   end
 end
-#obj_list2 = [{ :product => {:named => 'steve', :factory_id => 1}},{:product => {:named => 'steve2',:factory_id => 1}},{:product => {:named => 'rob', :factory_id => 2}}]
-
-#obj_list = { "product" => {"named" => 'steve', "factory_i" => 1}}
-
-# obj1 = { :product => {:named => 'steve', :factory_id => 1}}
-# obj2 = {:product => {:named => 'steve2',:factory_id => 1}}
-# obj3 = {:product => {:named => 'rob', :factory_id => 2}}
-
-# include Spree::OrderBotHelper
-# res = make_get_request('/admin/products.json/')

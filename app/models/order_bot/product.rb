@@ -15,7 +15,7 @@ module OrderBot
 			@units_of_measure_type_id = get_measurement_type_id_by_name('Piece')
 			@weight = 3.0
 			@shipping_units_of_measure_type_id = get_measurement_type_id_by_name('Lbs')
-			@taxable = true #Check and make item is taxable
+			@taxable = true #Assume everything is taxable it is dependent on where the order is from
 			@min_quantity = 1
 			@active = true
 			@is_parent = false
