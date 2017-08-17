@@ -74,6 +74,15 @@
     padding: 15px;
   }
 
+  .position-child-content--center {
+
+    .is-child {
+      display: table;
+      margin: 0 auto;
+    }
+
+  }
+
   // START - desktop
   @media (min-width: $bootstrap-lg-width) {
 

@@ -4,7 +4,9 @@ ruby:
     when "Far-Left"
       {class: 'col-md-6'}
     when "Left"
-      {class: 'col lg-4 col-md-5 col-md-offset-3'}
+      {class: 'col-lg-4 col-md-5 col-md-offset-3'}
+    when "Center-Left"
+      {class: 'col-md-6 col-lg-4 position-child-content--center'}
     when "Center-Right"
       {class: 'col-md-6 col-lg-6 pull-right'}
     when "Right"
@@ -76,7 +78,7 @@ ruby:
       .container-fluid
         .row
           *hero_text_position(tile[:text_position])
-            .copy-wrap*hero_extra_padding(tile[:text_padding]) *hero_text_alignment(tile[:text_align])
+            .copy-wrap.is-child*hero_extra_padding(tile[:text_padding]) *hero_text_alignment(tile[:text_align])
               h2.heading.no-margin-md
                 span*hero_text_size(tile[:text_size])
                   - if tile[:heading]
