@@ -30,6 +30,7 @@ module Orders
         csv << headers
         orders.map do |order|
           line.set_line order.attributes
+          binding.pry
           lip = Orders::LineItemPresenter.new(Spree::LineItem.find(order.attributes["line_item_id"].to_i))
           csv << [
             line.order_state,

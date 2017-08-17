@@ -19,7 +19,7 @@ module Policies
       "4 - 6 weeks" => "25 business days"
     }
 
-    CNY_DELIVERY_MAP = {  "7 business days" => "17 - 20 business days",
+    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "17 - 20 business days",
                           "12 - 15 business days" => "22 - 25 business days",
                           "3 - 4 weeks" => "5 - 6 weeks",
                           "4 - 6 weeks" => "6 - 8 weeks"
@@ -47,11 +47,7 @@ module Policies
 
     # adjusts for cny based on hard mappings
     def adjust_for_cny(period)
-      if CNY_DELIVERY_MAP[period]
-        CNY_DELIVERY_MAP[period]
-      else
-        "#{period} + #{CNY_DELIVERY_PERIOD}"  # bad case
-      end
+      CNY_DELIVERY_MAP[period] || "#{period} + #{CNY_DELIVERY_PERIOD}"  # bad case
     end
 
     # determine ship_by_date for product manufacturing consumption
