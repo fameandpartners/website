@@ -60,10 +60,11 @@ export default class ChatList extends React.Component
     {
         return(
                 <div className="chat-list">
-                <div className="chat-content">Test</div>
+                <div className="chat-content">
                 <ul>
                 {this.state.messages}
                 </ul>
+                </div>
                 </div> 
         )
     }

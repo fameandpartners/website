@@ -1,3 +1,5 @@
+@import 'shopping_spree_text_message';
+
 .shopping-spree-container
 {    
     overflow: auto;
@@ -78,6 +80,14 @@
             border-bottom: 7px solid transparent;
         }
         
+    }
+
+    .chat-list
+    {
+        ul
+        {
+            list-style-type: none;
+        }
     }
     
     &.collapsed

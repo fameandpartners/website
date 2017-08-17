@@ -5,7 +5,7 @@ export default class TextMessage extends React.Component
     render()
     {
         return(
-                <li>{this.props.text}</li>
+                <li className='text-message'>{this.props.text}</li>
         )
     }
 }
