@@ -67,6 +67,13 @@ configatron.bergen do |bergen|
   bergen.password   = ENV['BERGEN_PASSWORD']
 end
 
+configatron.newgistics do |newgistics|
+  newgistics.api_key = ENV['NEWGISTICS_API_KEY']
+  newgistics.merchant_id = ENV['NEWGISTICS_MERCHANT_ID']
+  newgistics.disposition_rule_set = ENV['NEWGISTICS_DISPOSITION_RULE_SET'].to_i
+  newgistics.uri = 'https://api.newgistics.com/WebAPI/Shipment/'
+end
+
 configatron.contentful do |contentful|
   contentful.preview_api_url = ENV['CONTENTFUL_PREVIEW_API_URL']
   contentful.preview_token = ENV['CONTENTFUL_PREVIEW_TOKEN']

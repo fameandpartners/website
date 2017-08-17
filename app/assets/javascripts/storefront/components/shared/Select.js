@@ -16,6 +16,7 @@ const propTypes = {
   formId: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
+  focusOnError: PropTypes.bool,
   error: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -27,6 +28,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  focusOnError: false,
   label: '',
   options: [],
 };
@@ -143,7 +145,15 @@ class Select extends Component {
     return dropdownComponent;
   }
 
+
   generateClassName() {}
+
+  componentDidUpdate(prevProps) {
+    const { error, focusOnError } = this.props;
+    if (error && !prevProps.error && focusOnError) {
+      this.refs.selectWrapper.focus();
+    }
+  }
 
   render() {
     const {
@@ -157,7 +167,6 @@ class Select extends Component {
     const activeOption = _.find(options, { active: true }) || {};
     const spanText = activeOption.displayText || activeOption.name || label; // Waterfall of span text
     const singleOption = options.length === 1;
-
     return (
       <div
         className={`Select--wrapper ${className || ''} ${error ? 'Select--wrapper__error' : ''} ${label ? 'translate-label' : ''} ${isOpen ? 'is-open' : ''} ${singleOption ? 'single-option' : ''} ${activeOption.active ? 'is-set' : ''}`}

@@ -32,7 +32,7 @@ nav.navbar.navbar-default.visible-xs.visible-sm
 
     - if Features.active?(:fameweddings)
 
-      div#wedding-menu.grid-img-cta-nav
+      div#wedding-menu.img-cta-nav
         ul.nav.navbar-nav
           li.normal-item
             .text.text-back.text-uppercase The Wedding Shop
@@ -102,7 +102,16 @@ nav.navbar.navbar-default.visible-xs.visible-sm
           i.fa.fa-chevron-right
       li.normal-item
         .text
-          = link_to 'ACCOUNT LOGIN', profile_path
+          - if try_spree_current_user.present?
+            = link_to 'MY ACCOUNT', profile_path
+          - else
+            = link_to 'ACCOUNT LOGIN', profile_path
+      li.normal-item
+        .text
+          - if try_spree_current_user.present?
+            = link_to 'MY ORDERS', '/view-orders'
+          - else
+            = link_to 'RETURNS', '/guest-returns'
       li.normal-item.no-border#moodboards-menu-open
         .text MOODBOARD
         - if spree_current_user && spree_current_user.moodboards.size > 1
