@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 // window polyfill
 import win from '../../../polyfills/windowPolyfill';
 
+// Utilities
+import { serialize } from '../../../utilities/HTMLUtility';
+
 // Components
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
@@ -17,6 +20,7 @@ const propTypes = {
   returnIsLoading: PropTypes.bool,
   params: PropTypes.object.isRequired,
   requiresViewOrdersRefresh: PropTypes.bool,
+  userSignedIn: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -25,12 +29,21 @@ const defaultProps = {
   orderData: [],
   returnIsLoading: false,
   requiresViewOrdersRefresh: false,
+  userSignedIn: false,
 };
 
 class OrderContainer extends Component {
+  /**
+   * Generate a URL that returns back to view orders
+   */
+  redirectToLoginAndBack() {
+    const data = { return_to: win.location.href };
+    win.location.href = `/spree_user/sign_in?${serialize(data)}`;
+  }
+
   componentWillMount() {
     const { email, orderID } = this.props.params;
-    const { actions, hasRequestedOrders, requiresViewOrdersRefresh } = this.props;
+    const { actions, hasRequestedOrders, requiresViewOrdersRefresh, userSignedIn } = this.props;
 
     actions.clearReturnProductArray();
 
@@ -40,6 +53,10 @@ class OrderContainer extends Component {
       win.location = ReturnConstants.RETURN_ROUTES.ORDERS;
     }
 
+    // Not logged in and no email
+    if (!userSignedIn && !email) {
+      this.redirectToLoginAndBack();
+    }
 
     // Get the order product data only once
     if (!hasRequestedOrders) {
@@ -94,6 +111,7 @@ class OrderContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    userSignedIn: state.$$userStore.get('user_signed_in'),
     orderData: state.orderData.orders,
     hasRequestedOrders: state.orderData.hasRequestedOrders,
     returnIsLoading: state.returnsData.returnIsLoading,

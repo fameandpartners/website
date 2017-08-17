@@ -171,14 +171,15 @@ Spree::LineItem.class_eval do
       "height_value": self.height_value,
       "image": self.image_url
     }
+
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "created_at_iso_mdy": self.created_at.strftime("%m/%d/%y"),
         "return_item_state": self.item_return.acceptance_status,
         "item_return_id": self.item_return.id,
-        "label_pdf_url": self.item_return.item_return_label.label_pdf_url,
-        "label_image_url": self.item_return.item_return_label.label_image_url,
-        "label_url": self.item_return.item_return_label.label_url
+        "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',
+        "label_image_url": self.item_return&.item_return_label&.label_image_url || '',
+        "label_url": self.item_return&.item_return_label&.label_url || ''
       }
     end
     json

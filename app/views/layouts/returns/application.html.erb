@@ -18,7 +18,8 @@
          #sideMenu,
          .instructions__header,
          .product-image,
-         .hide-for-print {
+         .hide-for-print,
+         #cart {
            display: none !important;
          }
 
@@ -56,6 +57,7 @@
     </div>
     <%= render 'layouts/redesign/footer' %>
     <%= render 'layouts/redesign/shopping_bag' %>
+    <%= render 'layouts/returns/user' %>
     <%= javascript_include_tag 'application_returns' %>
     <%= render 'layouts/contentful/javascript' %>
 

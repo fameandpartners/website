@@ -67,11 +67,7 @@
 
 .instructions__body .list {
     list-style: none;
-}
-
-.instructions__body .list {
     padding: 0;
-    margin-bottom: 50px;
 }
 
 .instructions__body .list .list-text {
@@ -122,4 +118,8 @@
   max-width: 730px;
   border: 2px dashed black;
   margin-bottom: 80px;
+}
+
+.Confirmation__text-box {
+  margin-bottom: 45px;
 }
