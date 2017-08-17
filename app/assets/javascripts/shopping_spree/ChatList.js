@@ -62,7 +62,7 @@ export default class ChatList extends React.Component
                 <div className="chat-list">
                 <div className="chat-content">Test</div>
                 <ul>
-                {this.state.messages.map( element => element ) }
+                {this.state.messages}
                 </ul>
                 </div> 
         )
