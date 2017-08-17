@@ -187,7 +187,7 @@ module Contentful
         header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
         header_sm_items = (main_header_container.respond_to? :pids) ? main_header_container.pids : nil
         email_text = (main_header_container.respond_to? :email_capture_text) ? main_header_container.email_capture_text : nil
-        full_width_content = (main_header_container.respond_to? :full_width_content) ? 'forced-full-width-wrapper' : nil
+        full_width_content = (main_header_container.respond_to? :full_width_content) ? 'u-forced-full-width-wrapper' : nil
 
         {
           id: main_header_container.content_type.id,

@@ -39,7 +39,7 @@ div.section-row.columns {
   }
 }
 
-.forced-full-width-wrapper {
+.u-forced-full-width-wrapper {
 
   @include breakpoint(tablet) {
     width: 99vw;

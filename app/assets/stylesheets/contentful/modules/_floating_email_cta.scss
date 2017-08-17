@@ -7,18 +7,12 @@
   bottom: 0;
   left: 0;
   z-index: 10;
-  animation: animate-slidedown 0.3s;
-  -webkit-animation: animate-slidedown 0.3s;
-  -moz-animation: animate-slidedown 0.3s;
-  -ms-animation: animate-slidedown 0.3s;
-  -o-animation: animate-slidedown 0.3s;
+}
 
-  h5 {
-    @extend .font-sans-serif;
-    font-weight: 400;
-    font-size: 2rem;
-  }
-
+.FloatingEmailWrapper h5 {
+  font-family: $secondary-font-family;
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 .FloatingEmailClose {
@@ -33,7 +27,7 @@
 
 }
 
-.FloatingEmailWrapper--isActive {
+.FloatingEmailWrapper--is-active {
   display: block;
   animation: animate-slideup 0.3s;
   -webkit-animation: animate-slideup 0.3s;
