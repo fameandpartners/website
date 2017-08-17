@@ -6,26 +6,80 @@
 
   .panel-collapse.collapse role="tabpanel"
     .panel-body
+      h5  For customers within the US
+      p   We provide a pre-paid return label for our US customers
       ol
         li
-          | First, please submit a return/exchange request by logging into your Fame and Partners account and clicking on the My Orders tab. On the right hand side, you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to return. Select the appropriate reason for your return and submit the form.
+          | Click on #{link_to "Return My Order", "/guest-returns"}, enter your order number and email address to start your return, or sign into your account then click on #{link_to "My Orders", "/view-orders"} 
 
         li
-          | Then, please print your Return Confirmation email, which you will receive after you submit your Return Request, and include in your package.
+          | Select the item(s) in the order you want to return and select your reason, let us know why you are returning the item. This will help us improve your next experience with us
 
         li
-          | Lastly, contact our customer service with your order number #{link_to "(team@fameandpartners.com)", "mailto:team@fameandpartners.com?subject=Returning Order Address - ORDER NUMBER"} to know which address you should ship your returning order
+          | Click on ‘Start Return’
 
-        /li Lastly, please ship your returning order, along with the completed Return/Exchange Form and all receipts, to the following address:
-        /<br>
-        /'Fame and Partners<br>
-        /'25 Broadway, Floor 9<br>
-        /'New York, NY 10004<br>
-        /'UNITED STATES
+        li
+          | You will be prompted to print the shipping label
+        
+        li
+          | Package the item(s) and stick the prepaid return label on the package
+
+        li
+          | You will receive an email to confirm and track your return
+
+        li
+          | Take the package to the nearest USPS office for drop-off. Be sure to send your package within the 30-day period
+
+
+      h5  For customers within Australia
+      p   We will reimburse up to $10AUD for return shipping fee
+      ol
+        li
+          | Click on #{link_to "Return My Order", "/guest-returns"}, enter your order number and email address to start your return, or sign into your account then click on #{link_to "My Orders", "/view-orders"} 
+
+        li
+          | Select the item(s) in the order you want to return and select your reason, let us know why you are returning the item. This will help us improve your next experience with us
+
+        li
+          | Click on ‘Submit Return’
+
+        li
+          | Package the item(s) along with a print out of the Packing Slip
+
+        li
+          | Send us the package using your preferred carrier, and keep a copy of the tracking number. Be sure to send your package within the 30-day period
+
+        li
+          | Email the shipping receipt to  #{link_to "customerservice@fameandpartners.com", "mailto:customerservice@fameandpartners.com"} for your reimbursement (up to $10AUD)
+
+        li
+          | You will receive an email to confirm your return
+
+
+      h5  For customers outside the US and Australia
+      p   You will be responsible for any return shipping fees
+      ol
+        li
+          | Click on #{link_to "Return My Order", "/guest-returns"}, enter your order number and email address to start your return, or sign into your account then click on #{link_to "My Orders", "/view-orders"} 
+
+        li
+          | Select the item(s) in the order you want to return and select your reason, let us know why you are returning the item. This will help us improve your next experience with us
+
+        li
+          | Click on ‘Submit Return’
+
+        li
+          | Package the item(s) along with a print out of the Packing Slip
+
+        li
+          | Send us the package using your preferred carrier, and keep a copy of the tracking number. Be sure to send your package within the 30-day period
+
+        li
+          | You will receive an email to confirm your return
 
       hr
       p
-        i The cost of your return postage fee will be reimbursed up to the value of $15 USD. The postage receipt must be included in your returns package for reimbursement. Please note that any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
+        i *Any customs and import duties paid are non-refundable. Please note that any item to be returned must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
       .col-md-12.no-padding
         - if try_spree_current_user.present?
           a.btn.btn-black.btn-lrg.text-white.no-underline href='/view-orders' Return My Order
