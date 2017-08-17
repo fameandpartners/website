@@ -280,7 +280,8 @@ FameAndPartners::Application.routes.draw do
     get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening-shop-plunging', :as => :evening_shop_plunging_page
     get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
     get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
-    get '/the-evening-shop/under-249' => 'products/collections#show', :permalink => 'evening-shop-249', :as => :evening_shop_under_249_page, :redirect => { :us => :evening_shop_under_200_page }
+    get '/the-evening-shop/under-249', to: redirect('/the-evening-shop/under-300'), as: :evening_shop_under_249_page
+    get '/the-evening-shop/under-300' => 'products/collections#show', :permalink => 'evening-shop-300', :as => :evening_shop_under_300_page, :redirect => { :us => :evening_shop_under_200_page }
 
     # Daywear Category Page
     get '/daywear' => 'products/collections#show', :permalink => 'daywear', :as => :daywear_page
@@ -402,8 +403,6 @@ FameAndPartners::Application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    get 'user_orders' => 'users/orders#index', as: 'user_orders'
-    get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
@@ -510,7 +509,6 @@ FameAndPartners::Application.routes.draw do
       get '/checkout/thanks', :to => 'spree/checkout#show' , :as => :checkout_thanks
       get '/checkout/:state', :to => 'spree/checkout#edit', :as => :checkout_state
       get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout
-
       post '/paypal', :to => 'paypal#express', :as => :paypal_express
       get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
@@ -605,6 +603,23 @@ FameAndPartners::Application.routes.draw do
     resource  :sku_generation,     :only => [:show, :create]
     resources :dress_colours,      :only => :index
   end
+
+  # ----------
+  # API Routes
+  # ----------
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      get 'orders' => 'returns_processes#index'
+      get 'guest/order' => 'returns_processes#guest'
+      post 'submit_return' => 'returns_processes#create'
+    end
+  end
+
+  # Returns
+  get '/view-orders'    => 'returns#main', as: 'user_orders'
+  get '/guest-returns'  => 'returns#guest'
+  get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
