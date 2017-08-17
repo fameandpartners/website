@@ -23,7 +23,7 @@ describe Policies::ProductDeliveryPeriodPolicy, type: :policy do
 
   describe '#delivery_period' do
     it "returns minimum delivery period by default" do
-      expect(subject.delivery_period).to eq('7 business days')
+      expect(subject.delivery_period).to eq('7 - 10 business days')
     end
 
     it "returns cny delivery period if cny flag enabled" do

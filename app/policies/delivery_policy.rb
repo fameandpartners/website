@@ -5,16 +5,25 @@ module Policies
 
     CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
-    SLOW_MAKING_DELIVERY_MAP = {  "7 business days" => "6 weeks",
-                                  "12 - 15 business days" => "6 weeks",
-                                  "3 - 4 weeks" => "8 weeks",
-                                  "4 - 6 weeks" => "10 weeks" }
+    SLOW_MAKING_DELIVERY_PERIOD = "6 weeks"
+    # SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "5 weeks",
+    #                               "12 - 15 business days" => "5 weeks",
+    #                               "3 - 4 weeks" => "5 weeks"
+    #                            }
+    FAST_MAKING_MAKE_TIME = "2 business days"
+    SLOW_MAKING_MAKE_TIME = "5 weeks"
+    STANDARD_MAKE_TIME_MAP = {
+      "7 - 10 business days" => "5 business days",
+      "12 - 15 business days" => "9 business days",
+      "3 - 4 weeks" => "15 business days",
+      "4 - 6 weeks" => "25 business days"
+    }
+
     CNY_DELIVERY_MAP = {  "7 business days" => "17 - 20 business days",
                           "12 - 15 business days" => "22 - 25 business days",
                           "3 - 4 weeks" => "5 - 6 weeks",
-                          "4 - 6 weeks" => "6 - 8 weeks",
-                          "6 weeks" => "8 weeks",
-                          "10 weeks" => "12 weeks" }
+                          "4 - 6 weeks" => "6 - 8 weeks"
+                       }
 
     # Max delivery period got from taxons
     def maximum_delivery_period
@@ -32,16 +41,8 @@ module Policies
       FAST_MAKING_DELIVERY_PERIOD
     end
 
-    # take the maximum_delivery_period then map that to whatever tania says
-    # if any new delivery range are introduced SLOW_MAKING_DELIVERY_MAP needs to be updated
     def slow_making_delivery_period
-      mdp = maximum_delivery_period
-
-      if SLOW_MAKING_DELIVERY_MAP[mdp]
-        SLOW_MAKING_DELIVERY_MAP[mdp]
-      else
-        "Delayed Shipping"  # using this catch all will raise a red flag and force an inquiry
-      end
+      SLOW_MAKING_DELIVERY_PERIOD
     end
 
     # adjusts for cny based on hard mappings
@@ -55,24 +56,25 @@ module Policies
 
     # determine ship_by_date for product manufacturing consumption
     def ship_by_date(order_completed_at, delivery_period)
-      period = delivery_period
-      value = minor_value_from_period(period) #take the smaller number, for more aggressive make times
-      units = period_units(period)
+      value = minor_value_from_period(delivery_period) #take the smaller number, for more aggressive make times
+      units = period_units(delivery_period)
 
       # special case for express
       if delivery_period == FAST_MAKING_DELIVERY_PERIOD
-        return DAYS_IN_FLIGHT_FAST.business_days.before(value.business_days.after(order_completed_at))
+        return period_in_business_days(FAST_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
-      # figure out delivery date then subtract the days_in_flight
-      case units
-      when 'weeks'
-        DAYS_IN_FLIGHT.business_days.before(order_completed_at + value.weeks)
-      when 'days'
-        DAYS_IN_FLIGHT.business_days.before(order_completed_at + value.days)
-      when 'business days'
-        DAYS_IN_FLIGHT.business_days.before(value.business_days.after(order_completed_at))
+      if delivery_period == SLOW_MAKING_DELIVERY_PERIOD
+        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
+
+      if make_time = STANDARD_MAKE_TIME_MAP[delivery_period]
+        return period_in_business_days(make_time).business_days.after(order_completed_at)
+      end
+
+      #this is no bueno case
+      Raven.capture_exception("#{delivery_period} does not map.")
+      raise Exception("Invalid delivery_period: #{delivery_period}")
     end
 
 
