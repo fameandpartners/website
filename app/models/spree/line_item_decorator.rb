@@ -158,9 +158,14 @@ Spree::LineItem.class_eval do
     !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
   end
 
+  def window_closed?
+    created_at <= DateTime.now - 45
+  end
+
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
+    json['line_item']['window_closed'] = self.window_closed?
     json['line_item']['products_meta'] = {
       "name": self.style_name,
       "price": self.price,
