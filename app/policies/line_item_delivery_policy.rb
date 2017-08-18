@@ -20,7 +20,7 @@ module Policies
       else
         period = maximum_delivery_period
       end
-binding.pry
+
       # make adjustment for chinese new year
       if Features.active?(:cny_delivery_delays)
         period = adjust_for_cny(period)
