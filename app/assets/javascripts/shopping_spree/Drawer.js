@@ -45,7 +45,11 @@ export default class Drawer extends React.Component
                 firebaseNodeId={this.state.firebaseNodeId}
               />
               </div>
-              <ChatBar />
+              <ChatBar
+                firebaseAPI={this.state.firebaseAPI}
+                firebaseDatabase={this.state.firebaseDatabase}
+                firebaseNodeId={this.state.firebaseNodeId}
+              />
               </div>
           );
     }
