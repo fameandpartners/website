@@ -20,7 +20,23 @@ export default class DressMessage extends React.Component
                 {name}
                 <div className='row equal'>
                 <div className={"avatar col-xs-2 " + (this.props.sameOwnerAsLastMessage ? "" : "avatar-" + this.props.iconNumber ) }></div>
-                <div className="firebase-text col-xs-8">{this.props.dress.name}</div>
+                <div className="dress-card col-xs-6">
+                <div className="dress-card-content">
+                <div className="row">
+                <div className="dress-card-image col-xs-12">
+                <img alt={this.props.dress.name} src={this.props.dress.image}/>
+                </div>
+                </div>
+                <div className="row dress-card-headline">
+                <div className="col-xs-8">
+                {this.props.dress.name}
+                </div>
+                <div className="dress-price col-xs-4">
+                ${parseInt(this.props.dress.price)}
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
                 </li>
         )

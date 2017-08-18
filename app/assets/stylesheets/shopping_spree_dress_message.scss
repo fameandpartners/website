@@ -6,6 +6,7 @@
     {
         .dress-message
         {
+            margin-bottom: 10px;
             .message-name
             {
                 margin-top: 16px;
@@ -21,7 +22,35 @@
                 margin-bottom: 5px;
                 font-family: NeuzeGro;
                 font-size: 15px;
-    
+                
+            }
+
+            .dress-card
+            {
+                border: 1px solid black;
+                .dress-card-content
+                {
+                    margin-top: 14px;
+                    margin-bottom: 14px;
+                    .dress-card-image
+                    {
+                        img
+                        {
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+                        margin-bottom: 8px;
+                    }
+
+                    .dress-card-headline
+                    {
+                        font-size: 15px;
+                        .dress-price
+                        {
+                            text-align: right;
+                        }
+                    }
+                }
             }
             
         }
