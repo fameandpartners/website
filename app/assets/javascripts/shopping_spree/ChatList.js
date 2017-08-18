@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 
 import TextMessage from './TextMessage';
 import JoinedMessage from './JoinedMessage';
+import DressMessage from './DressMessage';
 
 export default class ChatList extends React.Component
 {
@@ -46,6 +47,13 @@ export default class ChatList extends React.Component
             break;
             
             case 'share_dress':
+            this.state.messages.push(<DressMessage key={data.key}
+                                     iconNumber={data.val().from.icon}
+                                     name={data.val().from.name}
+                                     email={data.val().from.email}
+                                     sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
+                                     dress={data.val().value}
+                                     />)
             break;
             
             case 'joined':
