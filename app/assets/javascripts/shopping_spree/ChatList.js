@@ -23,7 +23,8 @@ export default class ChatList extends React.Component
             case 'text':
             this.state.messages.push(<TextMessage key={data.key}
                                      text={data.val().value} 
-                                     iconNumber={data.val().from.icon} />)
+                                     iconNumber={data.val().from.icon}
+                                     name={data.val().from.name}/>)
             break;
             
             case 'welcome_message':
