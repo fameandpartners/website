@@ -31,6 +31,9 @@ class RefundMailer < ActionMailer::Base
       user,
       'refund_notification_email',
       email_to:                    user.email,
+      subject:                     subject,
+      amount:                      event.refund_amount,
+      order_number:                order.number,
       user_data:                   user_returns_object
     )
   rescue StandardError => e
