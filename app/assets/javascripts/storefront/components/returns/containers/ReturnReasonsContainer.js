@@ -215,9 +215,7 @@ class ReturnReasonsContainer extends Component {
           <div className="col-10_md-12 u-no-padding order__container">
             <p className="order-id u-margin-bottom-small font-sans-serif">
               <a href={`/orders/${params.orderID}`}>
-                <span className="order-id font-sans-serif">
                   Order {params.orderID}
-                </span>
               </a>
             </p>
             <div className="Product__listItem__container u-no-margin">
