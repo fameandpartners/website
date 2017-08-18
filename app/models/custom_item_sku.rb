@@ -9,14 +9,19 @@ class CustomItemSku
   def call
     return line_item.variant.sku unless line_item.personalization.present?
 
-    #TODO: figure out this logic to get cusomized skus into the DB
-    Skus::Generator.new(
+    if line_item.personalization.sku.nil?
+      line_item.personalization.sku = Skus::Generator.new(
       style_number:            style_number,
       size:                    size,
       color_id:                color_id,
       height:                  height,
       customization_value_ids: customization_value_ids
-    ).call
+      ).call
+      line_item.personalization.save!
+    end
+
+    line_item.personalizaton.sku
+
   rescue StandardError => e
     Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, line_item_id: line_item.id)

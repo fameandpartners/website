@@ -10,7 +10,7 @@ module OrderBot
 			@create_bom = false 
 			@create_purchase_unit = false
 			@name = product.name
-			@sku = line_item.variant.sku
+			@sku = CustomItemSku.new(line_item).call
 			@base_price = line_item.price.to_f
 			@units_of_measure = 1
 			@units_of_measure_type_id = get_measurement_type_id_by_name('Piece')

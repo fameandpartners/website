@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1488,7 +1488,8 @@ CREATE TABLE line_item_personalizations (
     size_id integer,
     height character varying(255) DEFAULT 'standard'::character varying,
     height_value character varying(255),
-    height_unit character varying(255)
+    height_unit character varying(255),
+    width character varying(128)
 );
 
 
@@ -2563,6 +2564,28 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
+
+
+--
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -9607,12 +9630,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
-INSERT INTO schema_migrations (version) VALUES ('20170721184956');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
-
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
+
+INSERT INTO schema_migrations (version) VALUES ('20170817173805');

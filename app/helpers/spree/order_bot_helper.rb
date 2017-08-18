@@ -50,7 +50,7 @@ module Spree
 
     def create_new_order(order)
       bot_order = OrderBot::Order.new(order, order.line_items)
-      res = make_post_request('admin/orders.json/', bot_order)
+      res = make_post_request('admin/orders.json/', [bot_order])
       binding.pry
       rel = res
     end
