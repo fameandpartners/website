@@ -2,6 +2,7 @@ import React from 'react';
 import * as firebase from 'firebase';
 
 import TextMessage from './TextMessage';
+import JoinedMessage from './JoinedMessage';
 
 export default class ChatList extends React.Component
 {
@@ -34,7 +35,7 @@ export default class ChatList extends React.Component
         {
             case 'text':
             this.state.messages.push(<TextMessage key={data.key}
-                                     text={data.val().value} p
+                                     text={data.val().value} 
                                      iconNumber={data.val().from.icon}
                                      name={data.val().from.name}
                                      email={data.val().from.email}
@@ -48,7 +49,13 @@ export default class ChatList extends React.Component
             break;
             
             case 'joined':
+            this.state.messages.push(<JoinedMessage key={data.key}
+                                     name={data.val().name}
+                                     email={data.val().email}
+                                     createdAt={data.val().created_at} />)
+            
             break;
+            
             
             default:
             console.log( "unknown card type: " + data.val().type );
