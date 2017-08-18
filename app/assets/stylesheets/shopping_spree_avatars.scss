@@ -1,0 +1,18 @@
+.shopping-spree-container
+{
+    .chat-content
+    {
+        .avatar
+        {
+            min-width: 38px;
+        }
+
+        @for $i from 1 through 20
+        {
+          .avatar-#{$i}
+          {
+              background: url("/images/shopping_spree/avatars/avatar-#{$i}.png") no-repeat center center;
+          }
+        }
+    }
+}

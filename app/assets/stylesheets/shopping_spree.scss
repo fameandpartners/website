@@ -1,5 +1,6 @@
 @import 'shopping_spree_text_message';
 @import 'shopping_spree_joined_message';
+@import 'shopping_spree_dress_message';
 
 .shopping-spree-container
 {    
@@ -91,6 +92,7 @@
 
     .chat-list
     {
+        overflow-x: hidden;
         ul
         {
             list-style-type: none;

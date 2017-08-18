@@ -16,7 +16,7 @@ export default class DressMessage extends React.Component
         }
         
         return(
-                <li className='text-message'>
+                <li className='dress-message'>
                 {name}
                 <div className='row equal'>
                 <div className={"avatar col-xs-2 " + (this.props.sameOwnerAsLastMessage ? "" : "avatar-" + this.props.iconNumber ) }></div>
