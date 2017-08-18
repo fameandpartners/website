@@ -69,7 +69,7 @@ class ContentfulController < ApplicationController
 
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
-    punch_products unless product_ids.empty?
+    punch_products
   end
 
   def collection_resource(collection_options = {})
