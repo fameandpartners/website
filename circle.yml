@@ -40,5 +40,5 @@ deployment:
   staging:
     branch: In-House-Deployments
     commands:
-      - aws opsworks --region us-east-1 update-app --app-id namewebsite --app-source Revision="${CIRCLE_BRANCH}"
-      - aws opsworks --region us-east-1 create-deployment --app-id namewebsite --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
+      - aws opsworks --region us-east-1 update-app --app-id website --app-source Revision="${CIRCLE_BRANCH}"
+      - aws opsworks --region us-east-1 create-deployment --app-id website --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
