@@ -22,6 +22,18 @@ $chat_bar_height: 68px;
         display: flex;
         flex-wrap: wrap;
     }    
+
+    .no-right-gutter
+    {
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    .no-left-gutter
+    {
+        margin-left: 0;
+        padding-left: 0;
+    }
     
     .header
     {
@@ -105,7 +117,24 @@ $chat_bar_height: 68px;
 
     .chat-bar
     {
-        height: $chat_bar_height;
+        height: 55px;
+        .shoppingSpreeTextInput
+        {
+            height: 100%;
+            width: 100%;
+            border-color: #979797;
+            border-width: 1px;
+            padding-bottom: 8px            
+        }
+
+        .btn
+        {
+            height: 100%;
+            padding:0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     .chat-content
