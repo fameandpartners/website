@@ -97,7 +97,7 @@ export default class ChatList extends React.Component
                 {this.state.messages}
                 </ul>
                 </div>
-                </div> 
+                </div>
         )
     }
 }

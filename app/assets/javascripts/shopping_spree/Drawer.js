@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatList from './ChatList'
+import ChatBar from './ChatBar';
 
 
 export default class Drawer extends React.Component
@@ -44,6 +45,7 @@ export default class Drawer extends React.Component
                 firebaseNodeId={this.state.firebaseNodeId}
               />
               </div>
+              <ChatBar />
               </div>
           );
     }

@@ -2,9 +2,11 @@
 @import 'shopping_spree_joined_message';
 @import 'shopping_spree_dress_message';
 
+$header_height: 68px;
+$chat_bar_height: 68px;
 .shopping-spree-container
 {    
-    overflow: auto;
+    overflow: hidden;
     background-color: white;
     position: fixed;
     top: 0px;
@@ -33,7 +35,7 @@
         border-top: 1px;
         border-top-color: #979797;
         border-top-style: solid;
-        height: 68px;
+        height: $header_height;
     }
     
     .full-toggle-btn
@@ -93,11 +95,24 @@
     .chat-list
     {
         overflow-x: hidden;
+
         ul
         {
             list-style-type: none;
             padding:0;
         }
+    }
+
+    .chat-bar
+    {
+        height: $chat_bar_height;
+    }
+
+    .chat-content
+    {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc( 100vh - #{$header_height} - #{$chat_bar_height} );
     }
     
     &.collapsed
@@ -107,6 +122,11 @@
         {
             display: none;
         }
+        .chat-bar
+        {
+            display: none;
+        }
+        
     }
     
     
@@ -190,10 +210,6 @@
         
     }
 
-    .chat-content
-    {
-        height: calc( 100vh - 68px );
-    }
     
 }
 
