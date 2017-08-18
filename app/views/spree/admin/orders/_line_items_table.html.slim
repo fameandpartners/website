@@ -30,7 +30,6 @@ table.line_items
 
         tr class="state-#{order.state.to_s.downcase}"
           td = maybe_date(order.completed_at)
-          - binding.pry
           td = maybe_date(line_item.projected_delivery_date)
           td style="text-align: center"
             - if line_item.fast_making? || order.fast_making_promo?
