@@ -15,7 +15,6 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
         Features.activate(:cny_delivery_delays)
 
         # expected_date = DateTime.parse('Tue, 28 Apr 2015')
-binding.pry
         expect(policy.delivery_date).to eq expected_date
       end
     end
