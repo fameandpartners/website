@@ -4,7 +4,30 @@
     {
         .text-message
         {
-            background-color: gray;
+
+            .firebase-text
+            {
+                background-color: #f5f5f5;
+                border-radius: 9px;
+                padding: 10px 12px 17px 23px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .avatar
+            {
+                min-width: 38px;
+            }
+            .avatar-14
+            {
+                background: url("/images/shopping_spree/avatars/avatar-14.png") no-repeat center center;
+            }
+
+            .avatar-8
+            {
+                background: url("/images/shopping_spree/avatars/avatar-8.png") no-repeat center center;
+            }
+            
         }
     }
 }

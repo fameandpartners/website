@@ -7,11 +7,17 @@
     position: fixed;
     top: 0px;
     right: 0px;
-    width: 300px;
+    width: 500px;
     height: 100%;
     color: black;
     z-index: 999;
     font-family: NeuzeGro;
+
+    .equal
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }    
     
     .header
     {
@@ -87,6 +93,7 @@
         ul
         {
             list-style-type: none;
+            padding:0;
         }
     }
     
@@ -186,8 +193,11 @@
 {
     .shopping-spree-container
     {
+
+        
         &.collapsed
         {
+            width: 250px;            
             border-radius: 9px;                    
             top: 40px;
             right: 20px;

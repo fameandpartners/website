@@ -17,11 +17,13 @@ export default class ChatList extends React.Component
     }
 
     addChatMessage( data )
-    {
+    { 
         switch( data.val().type )
         {
             case 'text':
-            this.state.messages.push(<TextMessage key={data.key} text="test" />)            
+            this.state.messages.push(<TextMessage key={data.key}
+                                     text={data.val().value} 
+                                     iconNumber={data.val().from.icon} />)
             break;
             
             case 'welcome_message':
