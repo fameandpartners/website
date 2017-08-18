@@ -35,6 +35,11 @@ export default class DressMessage extends React.Component
                 ${parseInt(this.props.dress.price)}
                 </div>
                 </div>
+                <div className="row add-to-spree-btn">
+                <div className="col-xs-12">
+                <a className='center-block btn btn-black btn-lrg'>Add to my cart</a>
+                </div>
+                </div>
                 </div>
                 </div>
                 </div>
