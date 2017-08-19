@@ -12,10 +12,12 @@ export default class ChatList extends React.Component
         super( props );
         this.addChatMessage = this.addChatMessage.bind(this);
         this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
+        this.scrollToBottom = this.scrollToBottom.bind(this);
         this.initializeFirebase();
         this.state =
             {
-                messages:  []
+                messages:  [],
+                updateCount: 0
             };
     }
 
@@ -43,7 +45,8 @@ export default class ChatList extends React.Component
                                                 iconNumber={data.val().from.icon}
                                                 name={data.val().from.name}
                                                 email={data.val().from.email}
-                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />])
+                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />]),
+                    updateCount: this.state.updateCount + 1
                 }
             );
             break;
@@ -52,13 +55,20 @@ export default class ChatList extends React.Component
             break;
             
             case 'share_dress':
-            this.state.messages.push(<DressMessage key={data.key}
-                                     iconNumber={data.val().from.icon}
-                                     name={data.val().from.name}
-                                     email={data.val().from.email}
-                                     sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
-                                     dress={data.val().value}
-                                     />)
+            this.setState(
+                {
+                    messages: 
+                    this.state.messages.concat([<DressMessage key={data.key}
+                                                iconNumber={data.val().from.icon}
+                                                name={data.val().from.name}
+                                                email={data.val().from.email}
+                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
+                                                dress={data.val().value}
+                                                />]),
+                    updateCount: this.state.updateCount + 1
+
+                }
+            );
             break;
             
             case 'joined':
@@ -72,7 +82,9 @@ export default class ChatList extends React.Component
                             email={data.val().email}
                             createdAt={data.val().created_at} />
                         ]
-                    )
+                    ),
+                    updateCount: this.state.updateCount + 1
+                    
                 }
             );
             
@@ -86,6 +98,11 @@ export default class ChatList extends React.Component
 
 
 
+    }
+
+    scrollToBottom ()
+    {
+        this.bottomOfChat.scrollIntoView( { behavior: "smooth" } );
     }
     
     initializeFirebase()
@@ -103,7 +120,16 @@ export default class ChatList extends React.Component
         this.chatsDB.on( 'child_added', this.addChatMessage );
     }
 
-    
+
+    componentDidUpdate()
+    {
+        this.scrollToBottom();
+    }
+
+    componentDidMount()
+    {
+        this.scrollToBottom();
+    }
     render()
     {
         return(
@@ -112,6 +138,9 @@ export default class ChatList extends React.Component
                 <ul>
                 {this.state.messages}
                 </ul>
+                <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
+                </div>
+                
                 </div>
                 </div>
         )
