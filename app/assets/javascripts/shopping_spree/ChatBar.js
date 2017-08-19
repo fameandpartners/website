@@ -1,7 +1,8 @@
 import React from 'react';
 import * as firebase from 'firebase';
-
-export default class ChatBar extends React.Component
+import FirebaseComponent from './FirebaseComponent';
+ 
+export default class ChatBar extends FirebaseComponent
 {
     constructor( props )
     {
@@ -12,19 +13,7 @@ export default class ChatBar extends React.Component
     
     initializeFirebase()
     {
-        if( !firebase.apps.length === 0 )
-        {
-            var config =
-                {
-                    apiKey: this.props.firebaseAPI,
-                    authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
-                    databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
-                    projectId: this.props.firebaseDatabase,
-                    storageBucket: this.props.firebaseDatabase + ".appspot.com"
-                }
-            firebase.initializeApp( config );
-        }
-        
+        super.connectToFirebase()
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
     }
     

@@ -4,8 +4,9 @@ import * as firebase from 'firebase';
 import TextMessage from './TextMessage';
 import JoinedMessage from './JoinedMessage';
 import DressMessage from './DressMessage';
+import FirebaseComponent from './FirebaseComponent';
 
-export default class ChatList extends React.Component
+export default class ChatList extends FirebaseComponent
 {
     constructor( props )
     {
@@ -107,16 +108,9 @@ export default class ChatList extends React.Component
     
     initializeFirebase()
     {
-        var config =
-            {
-                apiKey: this.props.firebaseAPI,
-                authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
-                databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
-                projectId: this.props.firebaseDatabase,
-                storageBucket: this.props.firebaseDatabase + ".appspot.com"
-            }
-        
-        this.chatsDB  = firebase.initializeApp( config ).database().ref( this.props.firebaseNodeId + "/chats" );
+        super.connectToFirebase();
+
+        this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
         this.chatsDB.on( 'child_added', this.addChatMessage );
     }
 
