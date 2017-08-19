@@ -21,12 +21,12 @@ export default class ChatList extends React.Component
 
     sameOwnerAsLastMessage( email )
     {
-        if( this.state.messages.length == 0 )
+        if( this.state.messages.length === 0 )
         {
             return false;
         } else
         {
-            return this.state.messages[this.state.messages.length - 1].props.email == email;
+            return this.state.messages[this.state.messages.length - 1].props.email === email;
         }
         
     }
@@ -35,12 +35,17 @@ export default class ChatList extends React.Component
         switch( data.val().type )
         {
             case 'text':
-            this.state.messages.push(<TextMessage key={data.key}
-                                     text={data.val().value} 
-                                     iconNumber={data.val().from.icon}
-                                     name={data.val().from.name}
-                                     email={data.val().from.email}
-                                     sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />)
+            this.setState(
+                {
+                    messages:
+                    this.state.messages.concat([<TextMessage key={data.key}
+                                                text={data.val().value} 
+                                                iconNumber={data.val().from.icon}
+                                                name={data.val().from.name}
+                                                email={data.val().from.email}
+                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />])
+                }
+            );
             break;
             
             case 'welcome_message':
@@ -57,10 +62,19 @@ export default class ChatList extends React.Component
             break;
             
             case 'joined':
-            this.state.messages.push(<JoinedMessage key={data.key}
-                                     name={data.val().name}
-                                     email={data.val().email}
-                                     createdAt={data.val().created_at} />)
+            this.setState(
+                {
+                    messages:
+                    this.state.messages.concat(
+                        [
+                                <JoinedMessage key={data.key}
+                            name={data.val().name}
+                            email={data.val().email}
+                            createdAt={data.val().created_at} />
+                        ]
+                    )
+                }
+            );
             
             break;
             
@@ -69,6 +83,8 @@ export default class ChatList extends React.Component
             console.log( "unknown card type: " + data.val().type );
 
         }
+
+
 
     }
     
