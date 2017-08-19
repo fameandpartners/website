@@ -13,48 +13,70 @@ export default class Drawer extends React.Component
         this.state =
             {
                 closed: true,
+                display: 'chat',
                 firebaseAPI: props.firebaseAPI,
                 firebaseDatabase: props.firebaseDatabase,
                 firebaseNodeId: props.firebaseNodeId
                 
+                
             };
-        this.handleToggle = this.handleToggle.bind(this);        
+        this.handleToggle = this.handleToggle.bind(this);
+        this.transitionToCart = this.transitionToCart.bind(this);
     }
 
     handleToggle()
     {
         this.setState( { closed: !this.state.closed } );
     }
+
+    transitionToCart()
+    {
+        this.setState(
+        {
+            display: 'cart'
+        });
+    }
     
     render()
     {
-          return (
-              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : '')}>
-              <div className="full-toggle-btn" onClick={this.handleToggle}></div>
-              <div className="row header vertical-align">
-              <div className="col-xs-2">
-              <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
-              </div>
-              <div className="col-xs-8 text-center">Shopping Spree</div>
-              <div className="col-xs-3"><span className="icon icon-bag"></span></div>
-              </div>
-              <div className="row">
-              <ChatList
+        if( this.state.display === 'cart' )
+        {
+            return (
+                <div className={"shopping-spree-container container"}>
+                </div>
+                )
+            
+        } else
+        {
+
+            return (
+                <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : '')}>
+                <div className="full-toggle-btn" onClick={this.handleToggle}></div>
+                <div className="row header vertical-align">
+                <div className="col-xs-2">
+                <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
+                </div>
+                <div className="col-xs-8 text-center">Shopping Spree</div>
+                <div className="col-xs-3"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+                </div>
+                <div className="row">
+                <ChatList
                 firebaseAPI={this.state.firebaseAPI}
                 firebaseDatabase={this.state.firebaseDatabase}
                 firebaseNodeId={this.state.firebaseNodeId}
-              />
-              </div>
-              <ChatBar
+                />
+                </div>
+                <ChatBar
                 firebaseAPI={this.state.firebaseAPI}
                 firebaseDatabase={this.state.firebaseDatabase}
                 firebaseNodeId={this.state.firebaseNodeId}
                 name='Doug'
                 email='dougs@fameandpartners.com'
                 icon='14'
-              />
-              </div>
-          ); 
+                />
+                </div>
+            );
+        }
     }
 }
 
