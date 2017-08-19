@@ -17,6 +17,10 @@ $chat_bar_height: 68px;
     z-index: 999;
     font-family: NeuzeGro;
 
+    .back-to-spree
+    {
+        cursor: pointer;
+    }
     .equal
     {
         display: flex;

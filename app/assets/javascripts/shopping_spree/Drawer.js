@@ -22,6 +22,8 @@ export default class Drawer extends React.Component
             };
         this.handleToggle = this.handleToggle.bind(this);
         this.transitionToCart = this.transitionToCart.bind(this);
+        this.transitionToChat = this.transitionToChat.bind(this);
+        
     }
 
     handleToggle()
@@ -37,12 +39,25 @@ export default class Drawer extends React.Component
         });
     }
     
+    transitionToChat()
+    {
+        this.setState(
+        {
+            display: 'chat'
+        });
+    }
+    
     render()
     {
         if( this.state.display === 'cart' )
         {
             return (
                 <div className={"shopping-spree-container container"}>
+                <div className="row header vertical-align">
+                <div className="back-to-spree col-xs-2" onClick={this.transitionToChat}>
+                Back to spree
+                </div>
+                </div>
                 </div>
                 )
             
