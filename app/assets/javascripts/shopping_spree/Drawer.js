@@ -49,9 +49,12 @@ export default class Drawer extends React.Component
                 firebaseAPI={this.state.firebaseAPI}
                 firebaseDatabase={this.state.firebaseDatabase}
                 firebaseNodeId={this.state.firebaseNodeId}
+                name='Doug'
+                email='dougs@fameandpartners.com'
+                icon='14'
               />
               </div>
-          );
+          ); 
     }
 }
 
