@@ -14,7 +14,6 @@ export default class ChatList extends FirebaseComponent
         this.addChatMessage = this.addChatMessage.bind(this);
         this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
         this.scrollToBottom = this.scrollToBottom.bind(this);
-        this.initializeFirebase();
         this.state =
             {
                 messages:  [],
@@ -106,7 +105,7 @@ export default class ChatList extends FirebaseComponent
         this.bottomOfChat.scrollIntoView( { behavior: "smooth" } );
     }
     
-    initializeFirebase()
+    startListeningToFirebase()
     {
         super.connectToFirebase();
 
@@ -114,12 +113,26 @@ export default class ChatList extends FirebaseComponent
         this.chatsDB.on( 'child_added', this.addChatMessage );
     }
 
+    stopListeningToFirebase()
+    {
+        this.chatsDB.off( 'child_added', this.addChatMessage );        
+    }
 
     componentDidUpdate()
     {
         this.scrollToBottom();
     }
 
+    componentWillMount()
+    {
+        this.startListeningToFirebase();             
+    }
+
+    componentWillUnmount()
+    {
+        this.stopListeningToFirebase();
+    }
+    
     componentDidMount()
     {
         this.scrollToBottom();
