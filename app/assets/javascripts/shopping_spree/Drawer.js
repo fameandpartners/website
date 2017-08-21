@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatList from './ChatList'
 import ChatBar from './ChatBar';
+import Cart from './Cart';
 
 
 export default class Drawer extends React.Component
@@ -52,21 +53,7 @@ export default class Drawer extends React.Component
         return (
             <div>
             <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
-            <div className="row header vertical-align">
-            <div className="back-to-spree col-xs-6" onClick={this.transitionToChat}>
-            <div className="left-caret"></div>
-            <div className="back-to-spree-text shopping-spree-headline">
-            Back to spree
-            </div>
-            </div>
-            <div className="col-xs-9 col-xs-pull-1">
-            Your Bag
-            </div>
-            <div className="col-xs-3 col-xs-pull-1 text-right">
-            23% off
-            </div>
-            
-            </div>
+            <Cart transitionToChat={this.transitionToChat} />
             </div>
             
             <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : '') + (this.state.display === 'cart' ? " hidden" : "")}>
