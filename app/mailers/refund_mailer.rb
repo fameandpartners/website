@@ -4,6 +4,7 @@ class RefundMailer < ActionMailer::Base
     line_item = event.item_return.line_item
     order = line_item.order
     user = order.user
+
     subject = "Refund notification for order #{order.number}"
     address_object = order.billing_address
     product_data = {
@@ -15,19 +16,19 @@ class RefundMailer < ActionMailer::Base
       height_copy: convert_height_units(line_item&.personalization&.height_value, line_item&.personalization&.height_unit)
     }
     user_returns_object = {
-      "order_number": event.item_return.order_number,
+      "order_number": order.number,
       "first_name": user.first_name,
       "last_name": user.last_name,
       "email": user.email,
       "total_refund": event.refund_amount,
       "address": {
-        "address_one": address_object.address1,
-        "address_two": address_object.address2,
-        "city": address_object.city,
-        "state": address_object.state.abbr,
-        "zipcode": address_object.zipcode
+        "address_one": address_object&.address1,
+        "address_two": address_object&.address2,
+        "city": address_object&.city,
+        "state": address_object&.state&.abbr,
+        "zipcode": address_object&.zipcode
       },
-      "item": product_data,
+      "item": product_data
     }
     Marketing::CustomerIOEventTracker.new.track(
       user,
