@@ -1,6 +1,7 @@
 module Spree
   module OrderBotHelper
     require 'json'
+    require 'rest-client'
 
     def separate_line_items_by_factory(line_items)
       h = Hash.new { |hash, key| hash[key] = [] }
@@ -43,9 +44,16 @@ module Spree
       #add logic if above returns nil
     end
 
+    def create_new_order_guide(product_id, price)
+
+    end
+
     def create_new_product(line_item)
       product = OrderBot::Product.new(line_item)
-      make_post_request('admin/products.json/', [product]) #needs to take in an array of objects for api
+      res = make_post_request('admin/products.json/', [product]) #needs to take in an array of objects for api
+      order_bot_product = JSON.parse(res.body)
+      order_bot_product_id = order_bot_product['orderbot_product_id']
+      create_new_order_guide(order_bot_product_id, product.price)
     end
 
     def create_new_order(order)
@@ -62,21 +70,11 @@ module Spree
     end
 
     def make_get_request( url, params = {}) 
-      uri = URI( "http://api.orderbot.com/#{url}" )
-      uri.query = URI.encode_www_form( params )
-      http = Net::HTTP.new( uri.host, uri.port )
-      request = Net::HTTP::Get.new( uri.request_uri )
-      request.basic_auth( 'apitestfp@test.com', 'Testing2000' )
-      http.request( request )
+      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: 'apitestfp@test.com', password: 'Testing2000', log: Logger.new(STDERR))
     end
 
     def make_post_request(url, request_object)
-      uri = URI( "http://api.orderbot.com/#{url}" )
-      http = Net::HTTP.new( uri.host, uri.port )
-      request = Net::HTTP::Post.new( uri.request_uri, 'Content-Type' => 'application/json' )
-      request.basic_auth( 'apitestfp@test.com', 'Testing2000' )
-      request.body = request_object.to_json
-      http.request( request )
+      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: 'apitestfp@test.com', password: 'Testing2000', log: Logger.new(STDERR))
     end
 
   end
