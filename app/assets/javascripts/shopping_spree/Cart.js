@@ -105,6 +105,32 @@ export default class Cart extends FirebaseComponent
             </div>
             </div>
 
+                <div className="row">
+                <div className="col-xs-push-1 col-xs-4">
+                Subtotal
+                </div>
+                <div className="col-xs-push-1 col-xs-5 text-right">
+                $210.00
+                </div>
+                </div>
+                
+                <div className="row">
+                <div className="col-xs-push-1 col-xs-4">{this.state.discount} off
+                </div>
+                <div className="col-xs-push-1 col-xs-5 text-right">
+                $43.00
+                </div>
+                </div>
+                
+                <div className="row">
+                <div className="col-xs-push-1 col-xs-4">
+                <strong>Total</strong>
+                </div>
+                <div className="col-xs-push-1 col-xs-5 text-right">
+                <strong>$143.00</strong>
+                </div>
+                </div>
+
             <div className="row">
                 <div className="col-xs-18">
                 <ul className="cart-item-list">
