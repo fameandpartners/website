@@ -34,7 +34,7 @@ RSpec.describe CustomItemSku do
     let(:line_item) { build :line_item, variant: variant, personalization: personalization }
 
     it 'generates a custom SKU' do
-      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X1HS"
+      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X#{customizationvalue.id.to_s}HS"
     end
 
     it 'includes the style number' do
