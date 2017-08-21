@@ -32,16 +32,21 @@ export default class Cart extends FirebaseComponent
 
     recalculateDiscount()
     {
-        let discount = "0%";
-        
+        let discount = 0
+
+        console.log( this.state.totalInSharedCart );
         if( this.state.totalInSharedCart > 200 )
         {
-            discount = Math.ceil((this.state.totalInSharedCart - 200 ) / 100 ) + "%";
+            discount = Math.ceil((this.state.totalInSharedCart - 200 ) / 100)
+            if( discount > 30 )
+            {
+                discount = 30;
+            }
         }
 
         this.setState(
             {
-                disount: discount
+                discount: discount + "%"
             }
         );
     }
