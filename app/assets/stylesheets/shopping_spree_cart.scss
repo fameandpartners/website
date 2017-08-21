@@ -1,5 +1,18 @@
 .shopping-spree-container
 {
+    .shopping-spree-cart
+    {
+        .header
+        {
+            margin-bottom: 27px;
+        }
+    }
+
+    .checkout-btn
+    {
+        margin-top: 27px;
+    }
+
     .back-to-spree
     {
         cursor: pointer;
