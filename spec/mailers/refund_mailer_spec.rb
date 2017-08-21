@@ -5,7 +5,7 @@ describe RefundMailer, type: :mailer do
   let(:order) { FactoryGirl.create(:complete_order, user: user) }
   let(:line_item) { FactoryGirl.build(:dress_item, order: order) }
   let(:item_return) { FactoryGirl.create(:item_return, line_item: line_item) }
-  let(:event) { double(ItemReturnEvent, item_return: item_return, data: { refund_amount: '42' }) }
+  let(:event) { double(ItemReturnEvent, item_return: item_return, user: user, data: { refund_amount: '42' }) }
 
   let(:expected_attributes) {
     {
