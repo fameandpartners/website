@@ -5,8 +5,7 @@ class RefundMailer < ActionMailer::Base
     order = line_item.order
     user = order.user
     subject = "Refund notification for order #{order.number}"
-    userData = Spree::Order.where(email: event.user).first
-    address_object = Spree::Address.where(id: userData.bill_address_id).first
+    address_object = order.billing_address
     product_data = {
       name: line_item&.product&.name,
       size: line_item&.cart_item&.size&.presentation,
@@ -17,9 +16,9 @@ class RefundMailer < ActionMailer::Base
     }
     user_returns_object = {
       "order_number": event.item_return.order_number,
-      "first_name": userData.first_name,
-      "last_name": userData.last_name,
-      "email": userData.email,
+      "first_name": user.first_name,
+      "last_name": user.last_name,
+      "email": user.email,
       "total_refund": event.refund_amount,
       "address": {
         "address_one": address_object.address1,
@@ -33,7 +32,7 @@ class RefundMailer < ActionMailer::Base
     Marketing::CustomerIOEventTracker.new.track(
       user,
       'refund_notification_email',
-      email_to:                    userData.email,
+      email_to:                    user.email,
       user_data:                   user_returns_object
     )
   rescue StandardError => e
