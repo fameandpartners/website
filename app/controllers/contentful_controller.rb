@@ -20,6 +20,7 @@ class ContentfulController < ApplicationController
     if @landing_page_container
       # Check if the domain is either AU or US and compare with the flag
       if (landing_page_specific_site_version == 'all' || current_site_version[:permalink] == landing_page_specific_site_version)
+        get_all_pids
         load_page
         set_collection_resource
         render 'layouts/contentful/main'
@@ -32,6 +33,10 @@ class ContentfulController < ApplicationController
     end
   end
 
+  def get_all_pids
+    @pids_array = @landing_page_container.to_json.scan(/\"([0-9]+[+\-a-z]+)/).flatten.uniq
+  end
+
   def load_page
     current_path = LocalizeUrlService.remove_version_from_path(request.path)
     @page        = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
@@ -42,7 +47,7 @@ class ContentfulController < ApplicationController
 
   def punch_products
     return if filters_applied?
-    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.effective_page_limit)
+    products             = Revolution::ProductService.new(@pids_array, current_site_version).products(params, page.effective_page_limit)
     @collection.products = if page.get('curated') && product_ids.size > 0
                              @collection.total_products = product_ids.size
                              products
@@ -72,7 +77,7 @@ class ContentfulController < ApplicationController
 
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
-    punch_products unless product_ids.empty?
+    punch_products
   end
 
   def collection_resource(collection_options = {})
