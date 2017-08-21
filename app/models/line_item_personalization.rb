@@ -15,7 +15,8 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :customization_value_ids,
                   :height,
                   :size_id,
-                  :color_id
+                  :color_id,
+                  :sku
 
   validates :size, :color,  presence: true
 

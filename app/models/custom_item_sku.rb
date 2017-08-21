@@ -8,7 +8,6 @@ class CustomItemSku
 
   def call
     return line_item.variant.sku unless line_item.personalization.present?
-
     if line_item.personalization.sku.nil?
       line_item.personalization.sku = Skus::Generator.new(
       style_number:            style_number,
@@ -20,7 +19,7 @@ class CustomItemSku
       line_item.personalization.save!
     end
 
-    line_item.personalizaton.sku
+    line_item.personalization.sku
 
   rescue StandardError => e
     Raven.capture_exception(e)
