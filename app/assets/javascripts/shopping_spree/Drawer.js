@@ -53,10 +53,13 @@ export default class Drawer extends React.Component
             <div>
             <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
             <div className="row header vertical-align">
-            <div className="back-to-spree col-xs-5" onClick={this.transitionToChat}>
-            <div className="left-caret"></div>Back to spree
+            <div className="back-to-spree col-xs-6" onClick={this.transitionToChat}>
+            <div className="left-caret"></div>
+            <div className="back-to-spree-text shopping-spree-headline">
+            Back to spree
             </div>
-            <div className="col-xs-10" onClick={this.transitionToChat}>
+            </div>
+            <div className="col-xs-9 col-xs-pull-1" onClick={this.transitionToChat}>
             Your Bag
             </div>
             <div className="col-xs-3" onClick={this.transitionToChat}>

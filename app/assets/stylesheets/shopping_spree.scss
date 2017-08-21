@@ -20,6 +20,18 @@ $chat_bar_height: 68px;
     .back-to-spree
     {
         cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        .back-to-spree-text
+        {
+            color: #979797;
+            font-size: 16px;
+        }
+    }
+
+    .shopping-spree-headline
+    {
+        font-size: 18px;
     }
     .equal
     {
@@ -110,12 +122,13 @@ $chat_bar_height: 68px;
     }
     .left-caret
     {
+        width: 25px;
         &:before
         {
             content: '';
             position: absolute;
             top: 5px;
-            left: 7px;
+            left: 23px;
             border-right: 8px solid #000000;
             border-top: 8px solid transparent;
             border-bottom: 8px solid transparent;
@@ -125,7 +138,7 @@ $chat_bar_height: 68px;
             content: '';
             position: absolute;
             top: 6px;            
-            left: 8px;
+            left: 24px;
             border-right: 7px solid #fbf5f5;
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
