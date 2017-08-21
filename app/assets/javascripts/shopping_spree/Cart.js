@@ -2,6 +2,7 @@ import React from 'react';
 import * as firebase from 'firebase';
 
 import FirebaseComponent from './FirebaseComponent';
+import CartItem from './CartItem';
 
 export default class Cart extends FirebaseComponent
 {
@@ -12,9 +13,10 @@ export default class Cart extends FirebaseComponent
         this.state =
             {
                 discount: "0%",
-                totalInSharedCart: 0
-            }
+                totalInSharedCart: 0,
+                myItems: []
 
+            }
         this.addToCart = this.addToCart.bind(this);
         this.recalculateDiscount = this.recalculateDiscount.bind(this);
     }
@@ -26,6 +28,16 @@ export default class Cart extends FirebaseComponent
                 totalInSharedCart: this.state.totalInSharedCart + Math.round( parseFloat( data.val().dress.price ) )
             }
         );
+        
+        if( data.val().entry_for.email === this.props.email  )
+        {
+            this.setState(
+                {
+                    myItems: this.state.myItems.concat( [
+                            <CartItem key={data.key} dress={data.val().dress} />] )
+                }
+            )
+        }
 
         this.recalculateDiscount();
     }
@@ -34,7 +46,6 @@ export default class Cart extends FirebaseComponent
     {
         let discount = 0
 
-        console.log( this.state.totalInSharedCart );
         if( this.state.totalInSharedCart > 200 )
         {
             discount = Math.ceil((this.state.totalInSharedCart - 200 ) / 100)
@@ -78,6 +89,7 @@ export default class Cart extends FirebaseComponent
     render()
     {
         return(
+            <div>
             <div className="row header vertical-align">
             <div className="back-to-spree col-md-4 col-xs-8" onClick={this.props.transitionToChat}>
             <div className="left-caret"></div>
@@ -93,6 +105,14 @@ export default class Cart extends FirebaseComponent
             </div>
             </div>
 
+            <div className="row">
+                <div className="col-xs-18">
+                <ul className="cart-item-list">
+                {this.state.myItems}
+                </ul>
+            </div>
+            </div>
+            </div>
         )
     }
 }
