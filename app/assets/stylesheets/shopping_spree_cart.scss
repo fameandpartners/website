@@ -6,6 +6,12 @@
         {
             margin-bottom: 27px;
         }
+        .shopping-spree-contents
+        {
+            height: calc(100vh - 244px);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 
     .checkout-btn

@@ -20,7 +20,7 @@ export default class Cart extends FirebaseComponent
         this.addToCart = this.addToCart.bind(this);
         this.recalculateDiscount = this.recalculateDiscount.bind(this);
     }
- 
+    
     addToCart( data, previousChildKey )
     {
         this.setState(
@@ -104,7 +104,6 @@ export default class Cart extends FirebaseComponent
                   {this.state.discount} off
                 </div>
               </div>
-
               <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">
                   Subtotal
@@ -133,12 +132,13 @@ export default class Cart extends FirebaseComponent
               <div className="row checkout-btn">
                 <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a className="center-block btn btn-black btn-lrg">Checkout</a></div>
               </div>
-
-              <div className="row">
-                <div className="col-xs-18">
-                  <ul className="cart-item-list">
-                    {this.state.myItems}
-                  </ul>
+              <div className="shopping-spree-contents">
+                <div className="row">
+                  <div className="col-xs-18">
+                    <ul className="cart-item-list">
+                      {this.state.myItems}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
