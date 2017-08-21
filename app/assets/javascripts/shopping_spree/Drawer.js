@@ -59,10 +59,10 @@ export default class Drawer extends React.Component
             Back to spree
             </div>
             </div>
-            <div className="col-xs-9 col-xs-pull-1" onClick={this.transitionToChat}>
+            <div className="col-xs-9 col-xs-pull-1">
             Your Bag
             </div>
-            <div className="col-xs-3" onClick={this.transitionToChat}>
+            <div className="col-xs-3 col-xs-pull-1 text-right">
             23% off
             </div>
             
