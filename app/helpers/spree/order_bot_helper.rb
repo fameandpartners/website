@@ -45,7 +45,8 @@ module Spree
     end
 
     def create_new_order_guide(product_id, price)
-
+      res = make_post_request('admin/order_guides.json/897', [{'product_id' => product_id, 'og_price' => price}])
+      binding.pry 
     end
 
     def create_new_product(line_item)
