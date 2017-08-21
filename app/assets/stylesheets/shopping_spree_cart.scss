@@ -13,6 +13,18 @@
         margin-top: 27px;
     }
 
+    .btn-close
+    {
+        cursor: pointer;
+        &:before
+        {
+            left: 0;
+        }
+        &:after
+        {
+            left: 0;
+        }        
+    }
     .back-to-spree
     {
         cursor: pointer;

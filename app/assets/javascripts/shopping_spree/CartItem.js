@@ -12,10 +12,21 @@ export default class CartItem extends React.Component
                   <img src={this.props.dress.image} alt={this.props.dress.name}/>
                 </div>
                 <div className="col-xs-4 col-xs-push-1">
-                  {this.props.dress.name}
+                  <div className="row">
+                    <strong>{this.props.dress.name} ${parseInt(this.props.dress.price)}</strong>
+                  </div>
+                  <div className="row">
+                    {this.props.dress.fabric}
+                  </div>
+                  <div className="row">
+                    {this.props.dress.length}
+                  </div>
+                  <div className="row">
+                    {this.props.dress.size}
+                  </div>                    
                 </div>
-                <div className="col-xs-1 col-xs-push-1">
-                  X
+                <div className="col-xs-1 col-xs-push-2">
+                  <a className="btn-close med" alt="Delete Item"></a>
                 </div>
               </div>
             </li> );
@@ -23,13 +34,17 @@ export default class CartItem extends React.Component
     }
 }
 
- 
+
 CartItem.propTypes = {
     dress: React.PropTypes.shape(
         {
             image: React.PropTypes.string.isRequired,
             name: React.PropTypes.string.isRequired,
-            url: React.PropTypes.string.isRequired
+            url: React.PropTypes.string.isRequired,
+            fabric: React.PropTypes.string.isRequired,
+            length: React.PropTypes.string.isRequired,
+            price: React.PropTypes.string.isRequired,
+            size: React.PropTypes.string.isRequired
         }
     ).isRequired
 

@@ -109,7 +109,7 @@ export default class Cart extends FirebaseComponent
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">
                   Subtotal
                 </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-5 text-right">
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
                   $210.00
                 </div>
               </div>
@@ -117,7 +117,7 @@ export default class Cart extends FirebaseComponent
               <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
                 </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-5 text-right">
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
                   $43.00
                 </div>
               </div>
@@ -125,13 +125,13 @@ export default class Cart extends FirebaseComponent
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">
                   <strong>Total</strong>
                 </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-5 text-right">
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
                   <strong>$143.00</strong>
                 </div>
               </div>
               
               <div className="row checkout-btn">
-                <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-9"><a className="center-block btn btn-black btn-lrg">Checkout</a></div>
+                <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a className="center-block btn btn-black btn-lrg">Checkout</a></div>
               </div>
 
               <div className="row">
