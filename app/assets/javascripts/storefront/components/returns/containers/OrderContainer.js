@@ -131,8 +131,7 @@ class OrderContainer extends Component {
                     className="
                     u-margin-top-medium
                     font-sans-serif
-                    empty__orders__container-customer-service
-                    "
+                    empty__orders__container-customer-service"
                   >
                     Have a Question? &nbsp;
                     <a
