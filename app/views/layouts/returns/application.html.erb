@@ -1,0 +1,65 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
+
+    <%= stylesheet_link_tag 'application_returns' %>
+
+    <%= render 'layouts/redesign/head' %>
+
+    <%= csrf_meta_tags %>
+
+    <style>
+       @media print {
+         .main,
+         #sideMenu,
+         .instructions__header,
+         .product-image,
+         .hide-for-print,
+         #cart {
+           display: none !important;
+         }
+
+         .Confirmation__shipping-label {
+           max-width: 720px;
+           padding: 20px;
+           margin: 20px 0;
+           border: 2px dashed black;
+         }
+
+         .dotted-line {
+           border-style: dashed;
+         }
+
+         .Product__listItem {
+            border: 2px solid;
+            padding: 10px;
+            margin-bottom: 10px;
+         }
+
+         .Confirmation__packaging-slip {
+           page-break-before: always;
+         }
+       }
+
+    </style>
+  </head>
+  <body>
+
+
+    <%= render 'layouts/returns/header' %>
+
+    <div class="app-container">
+      <%= yield %>
+    </div>
+    <%= render 'layouts/redesign/footer' %>
+    <%= render 'layouts/redesign/shopping_bag' %>
+    <%= render 'layouts/returns/user' %>
+    <%= javascript_include_tag 'application_returns' %>
+    <%= render 'layouts/contentful/javascript' %>
+
+  </body>
+</html>
