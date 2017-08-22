@@ -14,5 +14,5 @@ import ShoppingSpreeOnboarding from './ShoppingSpreeOnboarding';
  
 render(
     <ShoppingSpreeOnboarding firebaseAPI={window.ShoppingSpreeData.firebaseAPI} firebaseDatabase={window.ShoppingSpreeData.firebaseDatabase} firebaseNodeId={window.ShoppingSpreeData.firebaseNodeId}/>,
-    document.getElementById( 'shopping-spree-modal' )
+    document.getElementById( 'shopping-spree-onboarding' )
 );
