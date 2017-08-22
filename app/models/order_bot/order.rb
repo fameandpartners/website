@@ -16,7 +16,6 @@ module OrderBot
 			@subtotal = line_items.inject(0){|sum, item| sum + item.price}
 			@order_status = 'unconfirmed'
 			@shipping = 0 #TODO: Revist this. We currently bake in the shipping cost.
-			binding.pry
 			@order_total = ((adjustments) * line_items.count) + @subtotal
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
@@ -33,6 +32,10 @@ module OrderBot
 		def generate_other_charges(adjustments)
 			[{'other_charge_id' => 1, 'amount' => adjustments}]
 		end
+
+	    def split_order(order)
+
+    	end
 	end
 end
 # include Spree::OrderBotHelper
