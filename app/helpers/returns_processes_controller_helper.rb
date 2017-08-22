@@ -101,11 +101,15 @@ module ReturnsProcessesControllerHelper
     end
   end
 
-  def error_response(err)
+  def error_response(err, error_code)
     payload = {
       error: err,
+      error_code: error_code,
       status: 400
     }
+
+    Raven.capture_exception(payload.to_json)
+
     respond_with err do |format|
       format.json do
         render :json => payload, :status => :bad_request

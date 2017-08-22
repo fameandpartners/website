@@ -20,7 +20,7 @@ module Api
       # GET (guest)
       def guest
         if has_incorrect_guest_params?
-          error_response("Incorrect parameters. Expecting { email: STRING, order_number: STRING }.")
+          error_response("Incorrect parameters. Expecting { email: STRING, order_number: STRING }.", 10)
           return
         end
 
@@ -29,7 +29,7 @@ module Api
         if fetched_order.present?
           respond_with Orders::OrderPresenter.new(fetched_order)
         else
-          error_response("No order found.")
+          error_response("No order found.", 20)
           return
         end
       end
@@ -47,11 +47,11 @@ module Api
         @user = get_user()
 
         if @user.nil?
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 30)
         end
 
         if has_incorrect_params?
-          error_response(@error_message_code["NO_ITEMS_SELECTED"])
+          error_response(@error_message_code["NO_ITEMS_SELECTED"], 40)
           return
         end
 
@@ -61,12 +61,12 @@ module Api
         }
 
         if has_invalid_order_id?(request_object[:order_id])
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 50)
           return
         end
 
         if has_incorrect_order_id?(request_object[:order_id])
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 60)
           return
         end
 
@@ -75,22 +75,22 @@ module Api
                           end
 
         if has_nonexistent_line_items?(return_item_ids)
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 70)
           return
         end
 
         if has_incorrect_line_items?(return_item_ids, request_object[:order_id])
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 80)
           return
         end
 
         if has_existing_returns?(return_item_ids)
-          error_response(@error_message_code["RETURN_EXISTS"])
+          error_response(@error_message_code["RETURN_EXISTS"], 90)
           return
         end
 
         unless(return_label = create_label(request_object[:order_id]))
-          error_response(@error_message_code["RETRY"])
+          error_response(@error_message_code["RETRY"], 100)
           return
         end
 
