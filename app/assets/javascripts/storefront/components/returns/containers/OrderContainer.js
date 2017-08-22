@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 // window polyfill
 import win from '../../../polyfills/windowPolyfill';
@@ -108,14 +109,19 @@ class OrderContainer extends Component {
         { !returnIsLoading && !orderData.length ?
           <div>
             <div>
-              <div className="grid-noGutter-center-spaceAround empty__orders__container">
+              <div
+                className={classNames(
+                  'grid-noGutter-center-spaceAround',
+                  'ProductListItem__empty-orders-container',
+                )}
+              >
                 <div className="col-10_md-12 u-no-padding">
                   <div className="order__container">
                     <div className="Product__listItem__container u-center-text">
-                      <p className="empty__orders__container-headline">
+                      <p className="ProductListItem__empty-orders-container-headline">
                         You have no orders
                       </p>
-                      <p className="empty__orders__container-copy">
+                      <p className="ProductListItem__empty-orders-container-copy">
                         Let’s change that
                       </p>
                       <SimpleButton
@@ -128,10 +134,11 @@ class OrderContainer extends Component {
                     </div>
                   </div>
                   <p
-                    className="
-                    u-margin-top-medium
-                    font-sans-serif
-                    empty__orders__container-customer-service"
+                    className={classNames(
+                      'u-margin-top-medium',
+                      'font-sans-serif',
+                      'ProductListItem__empty-orders-container-customer-service',
+                    )}
                   >
                     Have a Question? &nbsp;
                     <a
