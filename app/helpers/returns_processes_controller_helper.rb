@@ -101,9 +101,39 @@ module ReturnsProcessesControllerHelper
     end
   end
 
-  def error_response(err, error_code)
+  def error_response(err, *err_code)
+    @error_messages = {
+      :RETRY => "Please try again.",
+      :CONTACT => "Something's wrong, please contact customer service.",
+      :RETURN_EXISTS => "These items already have a return.",
+      :NO_ITEMS_SELECTED => "Please select an item you would like to return.",
+      :INCORRECT_GUEST_PARAMS => "Incorrect parameters. Expecting { email: STRING, order_number: STRING }.",
+      :GUEST_ORDER_NOT_FOUND => "No order found.",
+    }
+
+    @error_codes = {
+      :INCORRECT_GUEST_PARAMS => 10,
+      :GUEST_ORDER_NOT_FOUND => 20,
+      :USER_NOT_FOUND => 30,
+      :INCORRECT_PARAMS => 40,
+      :INVALID_ORDER_ID => 50,
+      :INCORRECT_ORDER_ID => 60,
+      :NON_EXISTENT_LINE_ITEMS => 70,
+      :INCORRECT_LINE_ITEMS => 80,
+      :RETURN_EXISTS => 90,
+      :LABEL_FAILED => 100,
+    }
+
+    message = @error_messages[err]
+
+    if err_code.present?
+      error_code = @error_codes[err_code]
+    else
+      error_code = @error_codes[err]
+    end
+
     payload = {
-      error: err,
+      error: message,
       error_code: error_code,
       status: 400
     }
