@@ -5,7 +5,6 @@ namespace :data do
       if (pcids = page.get(:pids))
         #grab all the pids which also contain color, then strip down to just the id
         pcids = pcids.strip.split(',')
-        pids = pcids.collect { |pcid| pcid.split('-', 2)[0] }
 
         #verify the id, if it's a goner wipe it
         verified_pcids = []
