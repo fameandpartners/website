@@ -41,6 +41,6 @@ deployment:
     branch: In-House-Deployments
     commands:
       - zip -r deploy.zip .
-      - aws s3 sync deploy.zip s3.amazonaws.com/dev-fameandpartners-website/deploy/ --delete
+      - aws s3 sync deploy.zip s3://amazonaws.com/dev-fameandpartners-website/deploy/ --delete
       - aws opsworks --region us-east-1 update-app --app-id website --app-source Revision="${CIRCLE_BRANCH}"
       - aws opsworks --region us-east-1 create-deployment --app-id website --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
