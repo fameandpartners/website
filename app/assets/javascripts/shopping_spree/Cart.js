@@ -14,7 +14,9 @@ export default class Cart extends FirebaseComponent
             {
                 discount: "0%",
                 totalInSharedCart: 0,
-                myItems: []
+                totalInMyCart: 0,
+                myItems: [],
+                totalOff: 0
 
             };
         this.addToCart = this.addToCart.bind(this);
@@ -34,7 +36,8 @@ export default class Cart extends FirebaseComponent
             this.setState(
                 {
                     myItems: this.state.myItems.concat( [
-                            <CartItem key={data.key} dress={data.val().dress} />] )
+                            <CartItem key={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
+                    totalInMyCart: this.state.totalInMyCart + Math.round(data.val().dress.price)
                 }
             );
         }
@@ -42,6 +45,11 @@ export default class Cart extends FirebaseComponent
         this.recalculateDiscount();
     }
 
+    deleteItem( firebaseKey )
+    {
+        
+    }
+    
     recalculateDiscount()
     {
         let discount = 0;
@@ -57,7 +65,8 @@ export default class Cart extends FirebaseComponent
 
         this.setState(
             {
-                discount: discount + "%"
+                discount: discount + "%",
+                totalOff: (discount / 100.0) * this.state.totalInMyCart
             }
         );
     }
@@ -109,7 +118,7 @@ export default class Cart extends FirebaseComponent
                   Subtotal
                 </div>
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                  $210.00
+                  ${this.state.totalInMyCart}.00
                 </div>
               </div>
               
@@ -117,7 +126,7 @@ export default class Cart extends FirebaseComponent
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
                 </div>
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                  $43.00
+                  ${this.state.totalOff.toFixed(2)}
                 </div>
               </div>
               <div className="row">
@@ -125,7 +134,7 @@ export default class Cart extends FirebaseComponent
                   <strong>Total</strong>
                 </div>
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                  <strong>$143.00</strong>
+                  <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
                 </div>
               </div>
               
