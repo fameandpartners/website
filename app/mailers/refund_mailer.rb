@@ -4,6 +4,7 @@ class RefundMailer < ActionMailer::Base
     line_item = event.item_return.line_item
     order = line_item.order
     user = order.user
+
     subject = "Refund notification for order #{order.number}"
     address_object = order.billing_address
     product_data = {
@@ -29,7 +30,6 @@ class RefundMailer < ActionMailer::Base
       },
       item: product_data,
     }
-    binding.pry
     Marketing::CustomerIOEventTracker.new.track(
       user,
       'refund_notification_email',
