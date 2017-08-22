@@ -21,19 +21,19 @@ describe RefundMailer, type: :mailer do
 
   let(:user_return_object) {
     {
-      "order_number": order.number,
-      "first_name": user.first_name,
-      "last_name": user.last_name,
-      "email": user.email,
-      "total_refund": event.refund_amount,
-      "address": {
+      order_number: order.number,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      total_refund: event.refund_amount,
+      address: {
         address_one: address&.address1,
         address_two: address&.address2,
         city: address&.city,
         state: address&.state&.abbr,
         zipcode: address&.zipcode
       },
-      "item": product_data
+      item: product_data
     }
   }
 
