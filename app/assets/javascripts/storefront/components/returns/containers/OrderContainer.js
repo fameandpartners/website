@@ -12,6 +12,7 @@ import { serialize } from '../../../utilities/HTMLUtility';
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
 import ReturnConstants from '../../../constants/ReturnConstants';
+import SimpleButton from '../components/SimpleButton';
 
 const propTypes = {
   actions: PropTypes.object,
@@ -102,7 +103,48 @@ class OrderContainer extends Component {
               {orderData.map(o => <OrderHistory key={o.spree_order.number} orderData={o} />)}
             </div>
           )
-          : null
+          : <div>
+            <div>
+              <div className="grid-noGutter-center-spaceAround empty__orders__container">
+                <div className="col-10_md-12 u-no-padding">
+                  <div className="order__container">
+                    <div className="Product__listItem__container u-center-text">
+                      <p className="empty__orders__container-headline font-sans-serif">
+                        You have no orders :/
+                      </p>
+                      <p className="font-sans-serif">
+                        Let’s change that
+                      </p>
+                      <SimpleButton
+                        containerClassName="SimpleButton__container u-margin-auto"
+                        className="u-width-full"
+                        buttonCopy="Start Shopping"
+                        link="/dresses/best-sellers"
+                        withLink
+                      />
+                    </div>
+                  </div>
+                  <p
+                    className="
+                    u-margin-top-medium
+                    font-sans-serif
+                    empty__orders__container-customer-service
+                    "
+                  >
+                    Have a Question? &nbsp;
+                    <a
+                      href="/contact"
+                      className="u-underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                    Contact Customer Service
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         }
       </div>
     );

@@ -56,3 +56,22 @@
       text-align: left;
     }
 }
+
+.empty__orders__container .Product__listItem__container {
+  @include desktop {
+    padding: 85px 60px 160px;
+  }
+}
+
+.empty__orders__container .empty__orders__container-headline {
+  font-size: 36px;
+}
+
+.empty__orders__container .empty__orders__container-customer-service,
+.empty__orders__container .empty__orders__container-customer-service a {
+  color: #858585;
+  text-align: center;
+  @include desktop {
+    text-align: right
+  }
+}
