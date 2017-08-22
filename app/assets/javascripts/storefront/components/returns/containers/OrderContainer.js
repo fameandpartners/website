@@ -103,16 +103,19 @@ class OrderContainer extends Component {
               {orderData.map(o => <OrderHistory key={o.spree_order.number} orderData={o} />)}
             </div>
           )
-          : <div>
+          : null
+        }
+        { !returnIsLoading && !orderData.length ?
+          <div>
             <div>
               <div className="grid-noGutter-center-spaceAround empty__orders__container">
                 <div className="col-10_md-12 u-no-padding">
                   <div className="order__container">
                     <div className="Product__listItem__container u-center-text">
-                      <p className="empty__orders__container-headline font-sans-serif">
+                      <p className="empty__orders__container-headline">
                         You have no orders :/
                       </p>
-                      <p className="font-sans-serif">
+                      <p className="empty__orders__container-copy">
                         Let’s change that
                       </p>
                       <SimpleButton
@@ -145,6 +148,8 @@ class OrderContainer extends Component {
               </div>
             </div>
           </div>
+          :
+          null
         }
       </div>
     );
