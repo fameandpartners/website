@@ -113,7 +113,7 @@ class OrderContainer extends Component {
                   <div className="order__container">
                     <div className="Product__listItem__container u-center-text">
                       <p className="empty__orders__container-headline">
-                        You have no orders :/
+                        You have no orders
                       </p>
                       <p className="empty__orders__container-copy">
                         Let’s change that
