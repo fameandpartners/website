@@ -6,7 +6,7 @@ module ReturnsProcessesControllerHelper
     :RETURN_EXISTS => "These items already have a return.",
     :NO_ITEMS_SELECTED => "Please select an item you would like to return.",
     :INCORRECT_GUEST_PARAMS => "Incorrect parameters. Expecting { email: STRING, order_number: STRING }.",
-    :GUEST_ORDER_NOT_FOUND => "No order found.",
+    :GUEST_ORDER_NOT_FOUND => "No order found."
   }
 
   ERROR_CODES = {
@@ -19,7 +19,7 @@ module ReturnsProcessesControllerHelper
     :NON_EXISTENT_LINE_ITEMS => 70,
     :INCORRECT_LINE_ITEMS => 80,
     :RETURN_EXISTS => 90,
-    :LABEL_FAILED => 100,
+    :LABEL_FAILED => 100
   }
 
   def get_user
