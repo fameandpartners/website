@@ -40,14 +40,16 @@
                 font-size: 26px;
             }
 
+            .dress-image-left
+            {
+                margin-top: -100px;
+                z-index: -1;
+                padding-left: 0px;
+            }
+            
             #dress-one
             {
                 z-index: -1;
-                #dress-one-image
-                {
-                    margin-top: -100px;
-                    z-index: -1;
-                }
                 .dress-one-text
                 {
                     padding-top: 42px;
@@ -61,15 +63,42 @@
 
             #dress-two
             {
+                height: 100%;
                 #dress-two-image
                 {
                     z-index: -1;
+                    img
+                    {
+                        display: block;
+                    }
                 }
 
                 #dress-two-text
                 {
                     padding-top: 60%;
                 }
+            }
+
+            #dress-three
+            {
+                z-index: -1;
+                .dress-three-text
+                {
+                    padding-top: 130px;
+                }
+                
+                .dress-image-left
+                {
+                    margin-top: -350px;
+                }
+
+                #dress-three-percent-text
+                {
+                    font-size: 56px;
+                    font-weight: bold;
+                    padding-top: 36px;
+                }
+                
             }
         }
         

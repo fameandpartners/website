@@ -50,8 +50,9 @@ export default class ShoppingSpreeOnboarding extends React.Component
                     Partner Shop.
                   </div>
                 </div>
+                
                 <div id="dress-one" className="row">
-                  <div id="dress-one-image" className="col-md-4 col-xs-3 col-xs-push-1">
+                  <div className="col-md-4 col-xs-3 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress1.jpg" alt=""/>
                   </div>
                   <div className="col-md-4">
@@ -68,8 +69,8 @@ export default class ShoppingSpreeOnboarding extends React.Component
                       <div className="body-text col-md-12 text-center">to shop with you</div>
                     </div>
                   </div>
-                  
                 </div>
+                
                 <div id="dress-two" className="row">
                   <div className="col-md-push-4 col-md-4">
                     <div id="dress-two-text" className="row">
@@ -85,8 +86,25 @@ export default class ShoppingSpreeOnboarding extends React.Component
                       <div className="body-text col-md-12 text-center">shopping spree</div>
                     </div>                    
                   </div>
-                  <div id="dress-two-image" className="col-md-push-2 col-md-4">
+                  <div id="dress-two-image" className="col-md-push-4 col-md-8">
                     <img src="/images/shopping_spree/dresses/Dress2.jpg" alt=""/>
+                  </div>
+                </div>
+
+                <div id="dress-three" className="row">
+                  <div className="col-md-4 col-xs-3 dress-image-left">
+                    <img src="/images/shopping_spree/dresses/Dress3.jpg" alt=""/>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="row dress-three-text">
+                      <div className="body-text col-md-12 text-center">Checkout with</div>
+                    </div>
+                    <div className="row">
+                      <div className="body-text col-md-12 text-center">discounts up to</div>
+                    </div>
+                    <div className="row">
+                      <div id="dress-three-percent-text" className="body-text col-md-12 text-center">30%</div>
+                    </div>
                   </div>
                 </div>
               </div>
