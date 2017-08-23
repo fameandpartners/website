@@ -52,10 +52,10 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 </div>
                 
                 <div id="dress-one" className="row">
-                  <div className="col-md-4 col-xs-8 col-xs-pull-2 dress-image-left">
+                  <div className="col-md-4 col-md-pull-0 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress1.jpg" alt=""/>
                   </div>
-                  <div className="col-md-4 col-xs-4 col-xs-pull-4">
+                  <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-4">
                     <div className="row dress-one-text">
                       <div className="body-text col-md-12 text-center">
                         Shop with your friends and get discounts the more you add to your cart
