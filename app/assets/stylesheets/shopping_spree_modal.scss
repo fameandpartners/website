@@ -26,6 +26,18 @@
         {
             display: block;
         }
+
+        #dress-image-one
+        {
+            margin-top: -5%;
+        }
+        .dress-one-text
+        {
+            .body-text
+            {
+            }
+        }
+        
 }
 
 .shopping-spree-onboarding
@@ -74,6 +86,12 @@
                 {
                     padding-top: 42px;
                 }
+
+                &#bottom-headline
+                {
+                    padding-bottom: 42px;
+                }
+                
             }
 
             .body-text
@@ -106,10 +124,6 @@
             #dress-one
             {
                 z-index: -1;
-                .dress-one-text
-                {
-                    padding-top: 42px;
-                }
 
                 .dress-one-text-two
                 {
