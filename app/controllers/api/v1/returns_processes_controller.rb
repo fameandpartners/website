@@ -82,9 +82,11 @@ module Api
           return
         end
 
-        unless(return_label = create_label(request_object[:order_id]))
-          error_response(:RETRY, :LABEL_FAILED)
-          return
+        if (has_us_shipping_address?(request_object[:order_id]))
+          unless(return_label = create_label(request_object[:order_id]))
+            error_response(:RETRY, :LABEL_FAILED)
+            return
+          end
         end
 
         process_returns(request_object, return_label)

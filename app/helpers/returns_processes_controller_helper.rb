@@ -64,6 +64,10 @@ module ReturnsProcessesControllerHelper
     end
   end
 
+  def has_us_shipping_address?(order_id)
+    Spree::Order.find(order_id).shipping_address&.country_id == 49
+  end
+
   def process_returns(obj, return_label)
     return_request = {
       :order_return_request => {
@@ -76,18 +80,25 @@ module ReturnsProcessesControllerHelper
 
     @order_return.save
 
-    @order_return.return_request_items.each do |x|
-      x.item_return.item_return_label = return_label
-    end
+    if (has_us_shipping_address?(@order_return.order_id))
+      @order_return.return_request_items.each do |x|
+        x.item_return.item_return_label = return_label
+      end
 
-    @order_return.save
+      @order_return.save
+    end
 
     start_bergen_return_process(@order_return)
     start_next_logistics_process(@order_return)
 
-    return_labels = map_return_labels(obj[:line_items])
+    if (has_us_shipping_address?(@order_return.order_id))
+      return_labels = map_return_labels(obj[:line_items])
+      success_response(return_labels)
+    else
+      item_returns = map_item_returns(obj[:line_items])
+      success_response(item_returns)
+    end
 
-    success_response(return_labels)
     return
   end
 
@@ -123,11 +134,22 @@ module ReturnsProcessesControllerHelper
     end
   end
 
+  def map_item_returns(arr)
+    arr.map do |item|
+      {
+        "line_item_id": item['line_item_id'],
+        "item_return_label": {
+          "item_return_id": ItemReturn.where(line_item_id: item['line_item_id']).first&.id
+        }
+      }
+    end
+  end
+
   def error_response(err, *err_code)
     message = ERROR_MESSAGES[err]
 
     if err_code.present?
-      error_code = ERROR_CODES[err_code]
+      error_code = ERROR_CODES[err_code.first]
     else
       error_code = ERROR_CODES[err]
     end
