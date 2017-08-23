@@ -127,7 +127,7 @@ module ReturnsProcessesControllerHelper
     message = ERROR_MESSAGES[err]
 
     if err_code.present?
-      error_code = ERROR_CODES[err_code]
+      error_code = ERROR_CODES[err_code.first]
     else
       error_code = ERROR_CODES[err]
     end
