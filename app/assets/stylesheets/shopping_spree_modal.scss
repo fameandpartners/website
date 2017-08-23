@@ -26,6 +26,31 @@
             .welcome-headline
             {
                 font-size: 46px;
+                line-height: 1;
+                &#top-headline
+                {
+                    padding-top: 42px;
+                }
+            }
+
+            .body-text
+            {
+                line-height: 31px;
+                font-size: 26px;
+            }
+
+            #dress-one
+            {
+                z-index: -1;
+                #dress-one-image
+                {
+                    margin-top: -100px;
+                    z-index: -1;
+                }
+                .dress-one-text
+                {
+                    padding-top: 42px;
+                }
             }
         }
         
