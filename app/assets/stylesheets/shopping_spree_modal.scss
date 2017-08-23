@@ -1,6 +1,48 @@
 @import 'redesign/vars';
+@media (max-width: 767px)
+{
+    .shopping-spree-onboarding
+    {
+        .mobile
+        {
+            display: block;
+        }
+
+        .desktop
+        {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 767px)
+{
+        .mobile
+        {
+            display: none;
+        }
+
+        .desktop
+        {
+            display: block;
+        }
+}
+
 .shopping-spree-onboarding
 {
+    .equal
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .vertical-align
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     &.modal
     {
         position: fixed;
@@ -38,13 +80,27 @@
             {
                 line-height: 31px;
                 font-size: 26px;
+                min-width: 225px;
             }
 
             .dress-image-left
             {
-                margin-top: -100px;
                 z-index: -1;
                 padding-left: 0px;
+                img
+                {
+                    width: 100%;
+                }
+            }
+
+            .dress-image-right
+            {
+                z-index: -1;
+                padding-right: 0px;
+                img
+                {
+                    width: 100%;
+                }
             }
             
             #dress-one
@@ -63,7 +119,6 @@
 
             #dress-two
             {
-                height: 100%;
                 #dress-two-image
                 {
                     z-index: -1;
@@ -87,10 +142,6 @@
                     padding-top: 130px;
                 }
                 
-                .dress-image-left
-                {
-                    margin-top: -350px;
-                }
 
                 #dress-three-percent-text
                 {

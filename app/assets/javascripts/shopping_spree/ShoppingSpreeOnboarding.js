@@ -52,17 +52,16 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 </div>
                 
                 <div id="dress-one" className="row">
-                  <div className="col-md-4 col-xs-3 dress-image-left">
+                  <div className="col-md-4 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress1.jpg" alt=""/>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-4 col-xs-4 col-xs-pull-4">
                     <div className="row dress-one-text">
-                      <div className="body-text col-md-12 text-center">Shop with your friends and get discounts</div>
+                      <div className="body-text col-md-12 text-center">
+                        Shop with your friends and get discounts the more you add to your cart
+                      </div>
                     </div>
-                    <div className="row">
-                      <div className="body-text col-md-12 text-center">the more you add to your cart</div>
-                    </div>
-                    <div className="row dress-one-text-two">
+                    <div className="row dress-one-text-two desktop">
                       <div className="body-text col-md-12 text-center">Invite your friends</div>
                     </div>
                     <div className="row">
@@ -71,8 +70,8 @@ export default class ShoppingSpreeOnboarding extends React.Component
                   </div>
                 </div>
                 
-                <div id="dress-two" className="row">
-                  <div className="col-md-push-4 col-md-4">
+                <div id="dress-two" className="row equal">
+                  <div className="col-md-push-4 col-md-4 desktop">
                     <div id="dress-two-text" className="row">
                       <div className="body-text col-md-12 text-center">You and your</div>
                     </div>
@@ -86,16 +85,21 @@ export default class ShoppingSpreeOnboarding extends React.Component
                       <div className="body-text col-md-12 text-center">shopping spree</div>
                     </div>                    
                   </div>
-                  <div id="dress-two-image" className="col-md-push-4 col-md-8">
+                  <div className="col-md-4 col-xs-4 col-xs-push-2 text-center mobile vertical-align">
+                    <div className="body-text">
+                      Invite your friends to shop with you
+                    </div>
+                  </div>
+                  <div id="dress-two-image" className="col-md-push-4 col-xs-8 col-xs-push-2 col-md-8 dress-image-right">
                     <img src="/images/shopping_spree/dresses/Dress2.jpg" alt=""/>
                   </div>
                 </div>
 
                 <div id="dress-three" className="row">
-                  <div className="col-md-4 col-xs-3 dress-image-left">
+                  <div className="col-md-4 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress3.jpg" alt=""/>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-4 col-xs-4 col-xs-pull-4">
                     <div className="row dress-three-text">
                       <div className="body-text col-md-12 text-center">Checkout with</div>
                     </div>
