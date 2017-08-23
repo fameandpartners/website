@@ -95,7 +95,7 @@ Spree::CheckoutController.class_eval do
 
         if @order.line_items.length < 1
             render status: 402, json: {
-            :message => @order.errors.full_messages.first
+            :message => 'StaleCart'
           }
           return
         end
@@ -124,7 +124,7 @@ Spree::CheckoutController.class_eval do
           state_callback(:after)
         else
           render status: 402, json: {
-            :message => 'StaleCart'
+            :message => @order.errors.full_messages.first
           }
           return
         end

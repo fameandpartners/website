@@ -128,7 +128,7 @@ eslint-disable
           displayError("Unknown error occured");
         }
         catch (e) {
-          console.log(e)
+          console.log(e);
           stripePending = false;
         }
       },
