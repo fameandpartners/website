@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createStore, applyMiddleware } from 'redux';
 import { assign, isEmpty } from 'lodash';
 import { composeWithDevTools } from 'redux-devtools-extension';

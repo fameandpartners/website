@@ -1,0 +1,6 @@
+<script type="text/javascript">
+  window.__user__ = {
+    id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %>,
+    user_signed_in: <%= signed_in? %>,
+  }
+</script>

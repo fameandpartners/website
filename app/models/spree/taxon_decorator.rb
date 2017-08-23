@@ -5,7 +5,7 @@ Spree::Taxon.class_eval do
 
   DELIVERY_PERIODS =
     [
-      '7 business days',
+      '7 - 10 business days',
       '12 - 15 business days',
       '3 - 4 weeks',
       '4 - 6 weeks'

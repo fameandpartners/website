@@ -1,11 +1,14 @@
+.EditorialHeaderContent {
+  padding-bottom: 42px;
+}
+
 .Editorial {
   position: relative;
-  margin-bottom: 42px;
-  &:hover {
-    .Editorial__overlay {
-      opacity: 1;
-    }
+
+  &:hover .Editorial__overlay {
+    opacity: 1;
   }
+
 }
 
 .Editorial__image {
@@ -24,18 +27,16 @@
   color: $oil;
   opacity: 0;
   transition: 0.3s all;
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-    font-weight: bold;
+.Editorial__overlay ul {
+  list-style-type: none;
+  padding: 0;
+  font-weight: bold;
+}
 
-    a {
-      text-decoration: underline;
-    }
-
-  }
-
+.Editorial__overlay ul a {
+  text-decoration: underline;
 }
 
 .Editorial__overlayTitle {
@@ -75,28 +76,24 @@
   color: $c-black;
 }
 
-.Editorial--mini {
+.Editorial--mini .Editorial__overlay {
 
-  .Editorial__overlay {
-
-    @include breakpoint(tablet) {
-      top: 0;
-      bottom: initial;
-    }
-
+  @include breakpoint(tablet) {
+    top: 0;
+    bottom: initial;
   }
 
-  .Editorial__image {
-    padding-top: 0;
-  }
+}
 
-  .Editorial__overlay ul a {
-    font-size: 1.4rem;
-  }
+.Editorial--mini .Editorial__image {
+  padding-top: 0;
+}
 
-  .Editorial__overlayTitle {
-    font-size: 2rem;
-    margin-top: 0;
-  }
+.Editorial--mini .Editorial__overlay ul a {
+  font-size: 1.4rem;
+}
 
+.Editorial--mini .Editorial__overlayTitle {
+  font-size: 2rem;
+  margin-top: 0;
 }

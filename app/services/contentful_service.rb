@@ -187,7 +187,7 @@ module Contentful
         header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
         header_sm_items = (main_header_container.respond_to? :pids) ? main_header_container.pids : nil
         email_text = (main_header_container.respond_to? :email_capture_text) ? main_header_container.email_capture_text : nil
-        full_width_content = (main_header_container.respond_to? :full_width_content) ? 'forced-full-width-wrapper' : nil
+        full_width_content = (main_header_container.respond_to? :full_width_content) ? 'u-forced-full-width-wrapper' : nil
 
         {
           id: main_header_container.content_type.id,
@@ -249,6 +249,9 @@ module Contentful
       # When the LP is oriented to a specific site version (AU or US), this is where users are redirected to
       site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
+      # Check if the LP requests an extra spacing between top navigation and content
+      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
+
       parent_container.relative_url
       {
         header: main_header_tile,
@@ -256,7 +259,8 @@ module Contentful
         meta_title: meta_title,
         meta_description: meta_description,
         site_version: site_version.downcase,
-        site_version_url_to_redirect: site_version_url_to_redirect
+        site_version_url_to_redirect: site_version_url_to_redirect,
+        page_white_spacing_top: page_white_spacing_top
       }
     end
 

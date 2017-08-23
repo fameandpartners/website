@@ -63,7 +63,7 @@ class ReturnRequestItem < ActiveRecord::Base
   validates :line_item, :action, :presence => true
   validates :action, :inclusion => { :in => ACTIONS }
 
-  validates :reason_category, :reason, :presence => true, :unless => Proc.new { |o| o.keep? }
+  validates :reason_category, :presence => true, :unless => Proc.new { |o| o.keep? }
 
   after_initialize :set_defaults
 

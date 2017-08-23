@@ -403,8 +403,6 @@ FameAndPartners::Application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    get 'user_orders' => 'users/orders#index', as: 'user_orders'
-    get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
@@ -511,7 +509,6 @@ FameAndPartners::Application.routes.draw do
       get '/checkout/thanks', :to => 'spree/checkout#show' , :as => :checkout_thanks
       get '/checkout/:state', :to => 'spree/checkout#edit', :as => :checkout_state
       get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout
-
       post '/paypal', :to => 'paypal#express', :as => :paypal_express
       get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
@@ -606,6 +603,23 @@ FameAndPartners::Application.routes.draw do
     resource  :sku_generation,     :only => [:show, :create]
     resources :dress_colours,      :only => :index
   end
+
+  # ----------
+  # API Routes
+  # ----------
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      get 'orders' => 'returns_processes#index'
+      get 'guest/order' => 'returns_processes#guest'
+      post 'submit_return' => 'returns_processes#create'
+    end
+  end
+
+  # Returns
+  get '/view-orders'    => 'returns#main', as: 'user_orders'
+  get '/guest-returns'  => 'returns#guest'
+  get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do

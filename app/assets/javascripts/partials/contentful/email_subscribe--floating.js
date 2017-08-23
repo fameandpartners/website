@@ -16,10 +16,10 @@
       $(window).on( 'scroll', function(){ // Monitor page scrolling
         if ( $(window).scrollTop() >= showFloatingEmailTriggerPixels) {
           $(".js-footer").css('padding-bottom', floatingEmailRowHeight+'px');
-          floatingEmailSelector.addClass("FloatingEmailWrapper--isActive");
+          floatingEmailSelector.addClass("FloatingEmailWrapper--is-active");
         } else {
           $(".js-footer").css('padding-bottom', 'initial');
-          floatingEmailSelector.removeClass("FloatingEmailWrapper--isActive");
+          floatingEmailSelector.removeClass("FloatingEmailWrapper--is-active");
         }
       });
     }

@@ -9,7 +9,11 @@
     current_color = split_pid[1]
 
     present_product = @collection.products.select do |item|
-      item.id == current_id && item.color.name == current_color
+      if item.color.present?
+        item.id == current_id && item.color.name == current_color
+      else
+        nil
+      end
     end
 
     if present_product.present?
