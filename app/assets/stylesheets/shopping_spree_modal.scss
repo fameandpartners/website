@@ -8,7 +8,8 @@
         right: 0;
         bottom: 0;
         left: 0;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         background-color: #f6f5f3;
         #shopping-spree-modal-content
         {
@@ -50,6 +51,24 @@
                 .dress-one-text
                 {
                     padding-top: 42px;
+                }
+
+                .dress-one-text-two
+                {
+                    padding-top: 319px;
+                }
+            }
+
+            #dress-two
+            {
+                #dress-two-image
+                {
+                    z-index: -1;
+                }
+
+                #dress-two-text
+                {
+                    padding-top: 60%;
                 }
             }
         }
