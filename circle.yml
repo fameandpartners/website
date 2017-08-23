@@ -45,7 +45,7 @@ deployment:
     #   fame-website_dev:
     #     deployment_group: f_and_p_dev_stack
     commands:
-      - zip -r deploy.zip .
+      - zip -r deploy.zip website/ -x \*spec\* -x \*node_modules\* -x \*.git\* -x \*vendor\*bundle\* -x \*doc\* -x
       - aws s3 sync deploy.zip s3://amazonaws.com/dev-fameandpartners-website/deploy/ --delete
       - aws opsworks --region us-east-1 update-app --app-id website --app-source Revision="${CIRCLE_BRANCH}"
       - aws opsworks --region us-east-1 create-deployment --app-id website --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
