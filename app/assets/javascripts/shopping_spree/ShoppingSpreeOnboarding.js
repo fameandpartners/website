@@ -104,7 +104,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
                       You and your friends can add items to your shopping spree
                     </div>
                   </div>
-                  <div className="col-md-4 col-xs-4 col-xs-pull-4 desktop">
+                  <div className="col-md-4 col-xs-12">
                     <div className="row dress-three-text">
                       <div className="body-text col-md-12 text-center">Checkout with</div>
                     </div>
