@@ -122,10 +122,13 @@ eslint-disable
       error: function(xhr, textStatus, errorThrown) {
         try {
           var errorMessage = JSON.parse(xhr.responseText).message;
+          if(errorMessage === "StaleCart") {
+            window.location.reload(true);
+          }
           displayError("Unknown error occured");
         }
         catch (e) {
-          console.log(e);
+          console.log(e)
           stripePending = false;
         }
       },

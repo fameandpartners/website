@@ -90,7 +90,15 @@ Spree::CheckoutController.class_eval do
         return
       end
 
+
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
+
+        if @order.line_items.length < 1
+            render status: 402, json: {
+            :message => @order.errors.full_messages.first
+          }
+          return
+        end
         #take this path for pin, this code only survives while we transistion to stripe
         if @order.next
           state_callback(:after)
@@ -104,12 +112,19 @@ Spree::CheckoutController.class_eval do
           return
         end
       else
+
+        if @order.line_items.length < 1
+            render status: 402, json: {
+            :message => 'StaleCart'
+          }
+          return
+        end
         #go here for stripeypay
         if @order.next
           state_callback(:after)
         else
           render status: 402, json: {
-            :message => @order.errors.full_messages.first
+            :message => 'StaleCart'
           }
           return
         end
