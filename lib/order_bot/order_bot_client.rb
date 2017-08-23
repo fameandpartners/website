@@ -1,10 +1,19 @@
 module OrderBot
   class OrderBotClient
+    
+    def initialize(user, pass)
+      @user = user
+      @pass = pass
+    end
     def get_measurement_type_id_by_name(measurement_name)
         res = make_get_request('admin/units_of_measurement_types.json/')
         res_json = JSON.parse(res.body)
-        res_json.select {|measurement| measurement['name'] == measurement_name}.first['units_of_measure_id']
-        #add logic if above returns nil
+        measure = res_json.select {|measurement| measurement['name'] == measurement_name}&.first
+        if measure.nil?
+          return false
+        else
+          return measure['units_of_measure_id']
+        end
     end
 
     def get_group_id_by_product(product)
@@ -47,11 +56,11 @@ module OrderBot
     end
 
     def make_get_request( url, params = {}) 
-      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: 'apitestfp@test.com', password: 'Testing2000', log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass, log: Logger.new(STDERR))
     end
 
     def make_post_request(url, request_object)
-      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: 'apitestfp@test.com', password: 'Testing2000', log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass, log: Logger.new(STDERR))
     end
   end
 end
