@@ -1,6 +1,9 @@
+.EditorialHeaderContent {
+  padding-bottom: 42px;
+}
+
 .Editorial {
   position: relative;
-  margin-bottom: 42px;
 
   &:hover .Editorial__overlay {
     opacity: 1;
