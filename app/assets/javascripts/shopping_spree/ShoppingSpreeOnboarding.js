@@ -85,25 +85,33 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 </div>
 
                 <div id="dress-three" className="row equal">
-                  <div className="col-md-4 col-xs-8 col-xs-pull-2 dress-image-left">
+                  <div className="col-md-4 col-md-pull-0 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress3.jpg" alt=""/>
                   </div>
-                  <div className="col-md-4 col-xs-4 col-xs-pull-3 mobile vertical-align">
-                    <div className="body-text text-center">
+                  <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-3 vertical-align">
+                    <div className="body-text text-center mobile">
                       You and your friends can add items to your shopping spree
                     </div>
-                  </div>
-                  <div className="col-md-4 col-xs-12">
-                    <div className="row dress-three-text">
-                      <div className="body-text col-md-12 text-center">Checkout with</div>
-                    </div>
                     <div className="row">
-                      <div className="body-text col-md-12 text-center">discounts up to</div>
-                    </div>
-                    <div className="row">
-                      <div id="dress-three-percent-text" className="body-text col-md-12 text-center">30%</div>
+                      <div className="body-text text-center col-md-12 desktop">
+                        Checkout with discounts up to
+                      </div>
+                      <div id="dress-three-percent-text" className="body-text col-md-12 text-center desktop">
+                        30%
+                      </div>
                     </div>
                   </div>
+                </div>
+
+                <div id="mobile-text" className="row mobile">
+                  <div className="body-text text-center col-md-12">
+                    Checkout with discounts up to
+                  </div>
+                  <div className="col-md-12">
+                    <div id="dress-three-percent-text" className="body-text text-center">
+                      30%
+                    </div>
+                  </div>                  
                 </div>
               </div>
             </div>                        
