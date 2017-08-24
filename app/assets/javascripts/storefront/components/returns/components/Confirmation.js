@@ -57,7 +57,7 @@ class Confirmation extends PureComponent {
     const latestLineItem = grabLatestLineItem(logisticsData.line_items);
     const currentOrder = findOrderFromLineItem(orderData, latestLineItem.line_item_id);
     const internationalCustomer = currentOrder.international_customer;
-
+    const isAustralian = currentOrder.is_australian;
     return (
       <div className="instructions__container">
         <p className="orders-link-container hide-for-print">
@@ -96,14 +96,19 @@ class Confirmation extends PureComponent {
               internationalCustomer ?
                 <div className="Confirmation__text-box">
                   <h3 className="list-title">Please mail your package to</h3>
-                  <p>
-                    Reply Paid: 86373 <br /><br />
-                    Fame and Partners – Returns <br />
-                  C/O - Next Logistics <br />
-                    Warehouse 1A, 35-47 Stennett Road <br />
-                    Ingleburn, NSW 2565 <br />
-                    Australia
-                 </p>
+                  { isAustralian ?
+                    <p>
+                      Reply Paid: 86373 <br /><br />
+                      Fame and Partners – Returns <br />
+                    C/O - Next Logistics <br />
+                      Warehouse 1A, 35-47 Stennett Road <br />
+                      Ingleburn, NSW 2565 <br />
+                      Australia
+                   </p>
+                   :
+                    <p>Fame and Partners – Returns <br /> 15905 Commerce Way <br />
+ -                  Cerritos, CA, 90703</p>
+                 }
                 </div>
                 :
                 <div />
