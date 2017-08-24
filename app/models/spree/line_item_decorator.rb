@@ -159,7 +159,7 @@ Spree::LineItem.class_eval do
   end
 
   def window_closed?
-    created_at <= DateTime.now - 45
+    created_at <= DateTime.now - 60
   end
 
   def as_json(options = { })
