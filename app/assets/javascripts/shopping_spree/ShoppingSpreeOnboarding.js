@@ -71,26 +71,15 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 </div>
                 
                 <div id="dress-two" className="row equal">
-                  <div className="col-md-push-4 col-md-4 desktop">
-                    <div id="dress-two-text" className="row">
-                      <div className="body-text col-md-12 text-center">You and your</div>
-                    </div>
-                    <div className="row">
-                      <div className="body-text col-md-12 text-center">friends can add</div>
-                    </div>
-                    <div className="row">
-                      <div className="body-text col-md-12 text-center">items to your</div>
-                    </div>
-                    <div className="row">
-                      <div className="body-text col-md-12 text-center">shopping spree</div>
-                    </div>                    
-                  </div>
-                  <div className="col-md-4 col-xs-4 col-xs-push-2 text-center mobile vertical-align">
-                    <div className="body-text">
+                  <div className="col-md-4 col-md-push-4 col-xs-4 col-xs-push-2 text-center vertical-align">
+                    <div className="body-text mobile">
                       Invite your friends to shop with you
                     </div>
+                    <div className="body-text desktop">
+                      You and your friends can add items to your shopping spree
+                    </div>
                   </div>
-                  <div id="dress-two-image" className="col-md-push-4 col-xs-8 col-xs-push-2 col-md-8 dress-image-right">
+                  <div id="dress-two-image" className="col-md-push-4 col-md-4 col-xs-8 col-xs-push-2  dress-image-right">
                     <img src="/images/shopping_spree/dresses/Dress2.jpg" alt=""/>
                   </div>
                 </div>
