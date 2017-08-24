@@ -113,6 +113,13 @@ export default class ShoppingSpreeOnboarding extends React.Component
                     </div>
                   </div>                  
                 </div>
+
+                <div id="enter-email-text" className="row">
+                  <div className="base-text text-center col-xs-8 col-xs-push-2">
+                    Enter your name and email to start!
+                  </div>
+                </div>
+                
               </div>
             </div>                        
         );

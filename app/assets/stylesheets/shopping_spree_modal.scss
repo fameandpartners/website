@@ -99,12 +99,24 @@
                 
             }
 
-            .body-text
+
+            .base-text
             {
                 line-height: 31px;
                 font-size: 26px;
+            }
+            
+            .body-text
+            {
+                @extend .base-text;
                 min-width: 225px;
             }
+
+            #enter-email-text
+            {
+                padding-top: 92px;
+            }
+            
 
             .dress-image-left
             {
