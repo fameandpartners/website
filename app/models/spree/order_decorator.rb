@@ -358,9 +358,10 @@ Spree::Order.class_eval do
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
     json['final_return_by_date'] = (delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
+    json['is_australian'] = self.shipping_address&.country_id === 109 || false
     json
   end
-  
+
   #hijack method, original merge logic was faulty cause variant_id is not unique enough
   # so as a cleaner solution=drop the older cart, newer cart becomes current cart
   def merge!(order)
