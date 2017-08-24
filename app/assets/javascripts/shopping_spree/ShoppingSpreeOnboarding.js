@@ -96,7 +96,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
                       <div className="body-text text-center col-md-12 desktop">
                         Checkout with discounts up to
                       </div>
-                      <div id="dress-three-percent-text" className="body-text col-md-12 text-center desktop">
+                      <div className="body-text col-md-12 text-center desktop dress-three-percent-text">
                         30%
                       </div>
                     </div>
@@ -108,7 +108,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
                     Checkout with discounts up to
                   </div>
                   <div className="col-md-12">
-                    <div id="dress-three-percent-text" className="body-text text-center">
+                    <div className="body-text text-center dress-three-percent-text">
                       30%
                     </div>
                   </div>                  

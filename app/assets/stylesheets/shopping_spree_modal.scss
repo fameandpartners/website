@@ -17,7 +17,12 @@
         {
             margin-top: 60%;
         }
-        
+
+
+        #mobile-text
+        {
+            padding-top: 42px;
+        }
     }
 }
 
@@ -151,15 +156,21 @@
             #dress-three
             {
                 z-index: -1;
-
-                #dress-three-percent-text
+                .dress-three-percent-text
                 {
-                    font-size: 56px;
-                    font-weight: bold;
                     padding-top: 36px;
                 }
+
                 
             }
+
+            .dress-three-percent-text
+            {
+                font-size: 56px;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+            
         }
         
     }
