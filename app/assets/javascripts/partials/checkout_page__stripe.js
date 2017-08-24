@@ -70,7 +70,7 @@ eslint-disable
       // Create a token or display an error when the form is submitted.
       form.on('submit', function(event) {
         event.preventDefault();
-        if(stripePending) {
+        if (stripePending) {
           console.log("Too fast, already processing");
           return null;
         }
@@ -122,6 +122,9 @@ eslint-disable
       error: function(xhr, textStatus, errorThrown) {
         try {
           var errorMessage = JSON.parse(xhr.responseText).message;
+          if (errorMessage === "StaleCart") {
+            window.location.reload(true);
+          }
           displayError("Unknown error occured");
         }
         catch (e) {

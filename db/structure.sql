@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1488,7 +1488,8 @@ CREATE TABLE line_item_personalizations (
     size_id integer,
     height character varying(255) DEFAULT 'standard'::character varying,
     height_value character varying(255),
-    height_unit character varying(255)
+    height_unit character varying(255),
+    sku character varying(128)
 );
 
 
@@ -2566,6 +2567,28 @@ ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
 
 
 --
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
+
+
+--
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2600,6 +2623,42 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
+
+
+--
+-- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE return_item_labels (
+    id integer NOT NULL,
+    tracking_number character varying(255),
+    label_url character varying(255),
+    carrier character varying(255),
+    label_image_url character varying(255),
+    label_pdf_url character varying(255),
+    return_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE return_item_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -4644,7 +4703,7 @@ CREATE TABLE spree_taxons (
     meta_keywords character varying(255),
     title character varying(255),
     published_at timestamp without time zone,
-    delivery_period character varying(255) DEFAULT '7 business days'::character varying
+    delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying
 );
 
 
@@ -5874,6 +5933,13 @@ ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_i
 
 
 --
+-- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
+
+
+--
 -- Name: return_request_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6947,6 +7013,14 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels
+    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9605,14 +9679,14 @@ INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
+INSERT INTO schema_migrations (version) VALUES ('20170724212720');
+
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
-INSERT INTO schema_migrations (version) VALUES ('20170721184956');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
-
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
+
+INSERT INTO schema_migrations (version) VALUES ('20170816220818');
+
+INSERT INTO schema_migrations (version) VALUES ('20170817173805');
+
+INSERT INTO schema_migrations (version) VALUES ('20170821173721');
