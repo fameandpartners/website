@@ -43,8 +43,17 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   # Max height max width
   config.before(:each) do
-     stub_request(:get, OrderBot::MEASURE_TYPE_URI).
+    stub_request(:get, OrderBot::MEASURE_TYPE_URI).
       to_return(status: 200, body: OrderBot::MEASURE_TYPE_RESPONSE, headers: {})
+
+
+    stub_request(:post, OrderBot::PRODUCT_URI).
+      with(body: "[\"junk\"]").
+      to_return(status: 200, body: OrderBot::PRODUCT_RESPONSE, headers: {})
+
+     stub_request(:post, OrderBot::PRODUCT_URI).
+      with(body: "[\"fail\"]").
+      to_return(status: 200, body: OrderBot::PRODUCT_FAILURE_RESPONSE, headers: {})
 
   end
 

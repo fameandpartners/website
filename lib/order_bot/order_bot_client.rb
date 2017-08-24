@@ -39,13 +39,14 @@ module OrderBot
     def create_new_product(product)
       res = make_post_request('admin/products.json/', [product]) #needs to take in an array of objects for api
       order_bot_product = JSON.parse(res.body)
-      order_bot_product['orderbot_product_id']
-      # create_new_order_guide(order_bot_product_id, product.price)
+      if res.code <300 && order_bot_product.first['success']
+        order_bot_product.first['orderbot_product_id']
+      end
     end
 
     def create_new_order(order)
-      res = make_post_request('admin/orders.json/', [order])
-      rel = res
+      make_post_request('admin/orders.json/', [order])
+      #TODO: Add stuff here after hear back from Frank
     end
 
     def get_group_id_by_group_name(group_name)

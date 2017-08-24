@@ -12,6 +12,7 @@ VCR.configure do |c|
   c.ignore_request do |request|
     request.headers['Use-Vcr'].nil? && \
       request.uri.include?('api-sandbox.secure-afterpay.com.au/v1/orders')
+      request.uri.include?('orderbot')
   end
 
   # VCR Filters

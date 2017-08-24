@@ -15,7 +15,7 @@ module Spree
     def create_new_order(order)
       line_items = split_order(order.line_items)
       line_items.each {|items| 
-        bot_order = OrderBot::Order.new(order, order.items)
+        bot_order = OrderBot::Order.new(order, items)
         OrderBot::OrderBotClient.create_new_order(bot_order)
       }
     end
