@@ -2,7 +2,11 @@
   split_pid = @pid.split('-', 2)
 
   product = @collection.products.select do |item|
-    item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+    if item.color.present?
+      item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+    else
+      nil
+    end
   end
 
   if product.present?
