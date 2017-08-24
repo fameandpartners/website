@@ -367,11 +367,14 @@ Spree::Order.class_eval do
     if self.line_items.count > 0
       order.destroy
     else
+      self.billing_address = self.billing_address || order.billing_address
+      self.shipping_address = self.shipping_address || order.shipping_address
       order.line_items.each do |line_item|
         next unless line_item.currency == currency
         line_item.order_id = self.id
         line_item.save
       end
+
     end
   end
 
