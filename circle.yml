@@ -42,7 +42,7 @@ deployment:
   staging:
     branch: In-House-Deployments
     commands:
-      - zip -r -q deploy.zip ./website -x \*spec\* -x \*node_modules\* -x \*.git\* -x \*vendor\*bundle\* -x \*doc\*
+      - zip -r -q deploy.zip . -x \*spec\* -x \*node_modules\* -x \*.git\* -x \*vendor\*bundle\* -x \*doc\*
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy
       - aws opsworks --region us-east-1 update-app --app-id website --app-source Revision="${CIRCLE_BRANCH}"
       - aws opsworks --region us-east-1 create-deployment --app-id website --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
