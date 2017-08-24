@@ -44,6 +44,6 @@ deployment:
     commands:
       - zip -r -q deploy.zip . -x \*spec\* -x \*node_modules\* -x \*.git\* -x \*vendor\*bundle\* -x \*doc\*
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy
-      - aws opsworks --region us-east-1 update-app --app-id website --app-source Revision="${CIRCLE_BRANCH}"
-      - aws opsworks --region us-east-1 create-deployment --app-id website --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
+      - aws opsworks --region us-east-1 update-app --app-id b703268b-1569-4b06-8b41-b4da70ae5be9 --app-source Revision="${CIRCLE_BRANCH}"
+      - aws opsworks --region us-east-1 create-deployment --app-id b703268b-1569-4b06-8b41-b4da70ae5be9 --command "{\"Name\":\"deploy\"}" --comment="CircleCI deploy staging"
 
