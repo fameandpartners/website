@@ -97,9 +97,9 @@ class Confirmation extends PureComponent {
                 <div className="Confirmation__text-box">
                   <h3 className="list-title">Please mail your package to</h3>
                   <p>
-                    Reply Paid: 86373 <br />
+                    Reply Paid: 86373 <br /><br />
                     Fame and Partners – Returns <br />
-                  C/O - Next Logistics <br /><br />
+                  C/O - Next Logistics <br />
                     Warehouse 1A, 35-47 Stennett Road <br />
                     Ingleburn, NSW 2565 <br />
                     Australia
