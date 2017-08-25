@@ -60,7 +60,7 @@ class ReturnMailer < ActionMailer::Base
           "address_two": billing_address[:address2],
           "city": billing_address[:city],
           "state": billing_address.state&.abbr,
-          "zipcode": billing_address.state&.zipcode
+          "zipcode": billing_address&.zipcode
         },
         "items": formatted_return_items,
         "international_user": international_user
