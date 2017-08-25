@@ -7,6 +7,9 @@
         - if product.making_options.present?
           = render 'shared/redesign/ribbon_fast_making'
 
+        // Price Drop ribbon
+        = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
+
   .cart-item-info.col-xs-7
     a.pull-right.remove-product[href="javascript:;"]
       span.icon.btn-close

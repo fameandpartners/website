@@ -6,6 +6,9 @@ ruby:
   - if product.fast_making?
       = render 'shared/redesign/ribbon_fast_making'
 
+  // Price Drop ribbon
+  = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
+
 .details.text-center
   = link_to product_link.call(product), :class => 'media-wrap product-name' do
     span.name
