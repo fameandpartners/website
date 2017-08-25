@@ -32,6 +32,44 @@ module OrderBot
       #add logic if above returns nil
     end
 
+    def get_tag_by_name(name)
+      res = make_get_request('admin/tags.json/?name=#{name}')
+      tag = JSON.parse(res.body)
+      tag['tag_id']
+    end
+
+    def create_new_tag(tag)
+      res = make_post_request('admin/tags.json/', [tag])
+      bot_tag = JSON.parse(res.body)
+      if res.code <300 && bot_tag.first['success']
+        bot_tag.first['tag_id']
+      end
+    end
+
+    def get_tag_group_id_by_name(name)
+      res = make_get_request('admin/tags.json/')
+      tag_groups = JSON.parse(res.body)
+      groups = tag_groups.select {|group| group['tag_group_name'] == name}
+      group = groups&.first
+      if group.nil?
+        return
+      end
+      group['tag_group_id']
+
+    end
+
+    def create_new_tag_group(group)
+      res = make_post_request('admin/taggroups.json/', group)
+      bot_group = JSON.parse(res.body)
+      if res.code <300 && bot_group.first['success']
+        bot_group[.first['group_id']
+      end
+    end
+
+    def link_product_to_tag(product_id, tag_id)
+      make_post_request('/ProductTags.json/?tagid=#{tag_id}', [{'product_id' => product_id}] )
+    end
+
     def create_new_order_guide(product_id, price)
       make_post_request('admin/order_guides.json/897', [{'product_id' => product_id, 'og_price' => price}])
     end
