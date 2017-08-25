@@ -159,9 +159,9 @@ group :test do
   gem 'rspec-shell-expectations'
 end
 
-group :staging do
-  gem 'unicorn'
-end
+# group :staging do
+#   gem 'unicorn'
+# end
 
 group :production do
   gem 'unicorn'
