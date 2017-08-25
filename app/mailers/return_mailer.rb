@@ -31,17 +31,17 @@ class ReturnMailer < ActionMailer::Base
       return_items = return_request.return_request_items
       billing_address = order.billing_address
       binding.pry
-      label_print_link = return_items.first.item_return.item_return_label&.label_url
+      label_print_link = return_items&.first&.item_return&.item_return_label&.label_url
       #todo: need to revisit this next line when we get final delivery date approval
-      send_by_date = (return_request.order.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
+      send_by_date = (return_request.order&.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
       formatted_return_items = return_items.map do |item|
         {
-          name: item.line_item&.product&.name,
-          size: item.line_item&.cart_item&.size&.presentation,
-          color: item.line_item&.cart_item&.color&.presentation,
-          image: item.line_item&.cart_item&.image&.large,
-          price: item.line_item&.price,
-          height_copy: convert_height_units(item.line_item&.personalization&.height_value, item.line_item&.personalization&.height_unit)
+          name: item&.line_item&.product&.name,
+          size: item&.line_item&.cart_item&.size&.presentation,
+          color: item&.line_item&.cart_item&.color&.presentation,
+          image: item&.line_item&.cart_item&.image&.large,
+          price: item&.line_item&.price,
+          height_copy: convert_height_units(item&.line_item&.personalization&.height_value, item.line_item&.personalization&.height_unit)
         }
       end
 
@@ -50,17 +50,17 @@ class ReturnMailer < ActionMailer::Base
       international_user = order.shipping_address&.country_id != 49
 
       {
-        "order_number": order.number,
-        "email": user.email,
+        "order_number": order&.number,
+        "email": user&.email,
         "send_by_date": send_by_date,
         "label_url": label_print_link,
         "total_refund": total_refund_amount,
         "address": {
-          "address_one": billing_address[:address1],
-          "address_two": billing_address[:address2],
-          "city": billing_address[:city],
-          "state": billing_address.state&.abbr,
-          "zipcode": billing_address.state&.zipcode
+          "address_one": billing_address&.address1,
+          "address_two": billing_address&.address2,
+          "city": billing_address&.city,
+          "state": billing_address&.state&.abbr,
+          "zipcode": billing_address&.zipcode
         },
         "items": formatted_return_items,
         "international_user": international_user
