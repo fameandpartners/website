@@ -43,4 +43,5 @@ deployment:
     commands:
       - zip -r -q deploy.zip . -x \*_spec\* -x \*node_modules\* -x \*.git\* -x \*doc\* -x \*rspec\* -x \spec\*
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deploy.zip
-      - aws elasticbeanstalk update-environment --environment-name staging $1$RANDOM --region us-east-1
+      - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_SHA1$RANDOM --source-bundle S3Bucket=dev-fameandpartners-website/deploy, S3Key=deploy.zip --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name staging --version-label $CIRCLE_SHA1$RANDOM --region us-east-1
