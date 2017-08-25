@@ -63,6 +63,14 @@
                 </div>
               <% end %>
 
+              <% if getSiteVersionPrefix() == '/au' && product.price_drop_au_product: %>
+                <div class="ribbon-wrapper PriceDrop">
+                  <div class="ribbon-txt">
+                    Price drop
+                  </div>
+                </div>
+              <% end %>
+
             <% end %>
           </a>
         </div>
