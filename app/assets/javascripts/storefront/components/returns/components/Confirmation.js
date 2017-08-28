@@ -2,7 +2,6 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
-import { maxBy } from 'lodash';
 
 const propTypes = {
   orderData: PropTypes.array.isRequired,
@@ -12,7 +11,6 @@ const propTypes = {
     item_return_label: PropTypes.shape({
       carrier: PropTypes.string,
       id: PropTypes.number,
-      item_return_id: PropTypes.number,
       label_image_url: PropTypes.string,
       label_pdf_url: PropTypes.string,
       label_url: PropTypes.string,
@@ -46,15 +44,11 @@ function findOrderFromLineItem(orders, lineItemId) {
   return match;
 }
 
-function grabLatestLineItem(lineItems) {
-  return maxBy(lineItems, o => o.item_return_label.item_return_id);
-}
-
 /* eslint-disable react/prefer-stateless-function */
 class Confirmation extends PureComponent {
   render() {
     const { logisticsData, orderData } = this.props;
-    const latestLineItem = grabLatestLineItem(logisticsData.line_items);
+    const latestLineItem = logisticsData.line_items[0];
     const currentOrder = findOrderFromLineItem(orderData, latestLineItem.line_item_id);
     const internationalCustomer = currentOrder.international_customer;
 
