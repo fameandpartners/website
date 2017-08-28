@@ -7,9 +7,13 @@ class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
   	count = 0
 	ItemReturnLabel.all.each do |label|
 	  ir = ItemReturn.find(label.item_return_id)
-	 ir.item_return_label_id = label.id
-	  ir.save
-	  count = count + 1
+    if ir.nil
+      label.destroy
+    else
+	    ir.item_return_label_id = label.id
+	    ir.save
+	    count = count + 1
+    end
 	end
 	p "relationships changed: #{count}"
   end
