@@ -147,7 +147,7 @@ class Confirmation extends PureComponent {
             <div className="Confirmation__text-box">
               {internationalCustomer ? null :
               (
-                <ul className="list">
+                <ol className="list">
                   <li>
                     <p className="list-text font-sans-serif">Print/Cutout the SmartLabel&reg; below.</p>
                   </li>
@@ -171,7 +171,7 @@ class Confirmation extends PureComponent {
                       </a>
                     </p>
                   </li>
-                </ul>
+                </ol>
               )
             }
               { latestLineItem.item_return_label && !internationalCustomer ?
@@ -210,7 +210,7 @@ class Confirmation extends PureComponent {
               );
             })}
           </div>
-          <div className="u-margin-top-small u-margin-bottom-large hide-for-print">
+          <div className="u-margin-top-large u-margin-bottom-large hide-for-print">
             <SimpleButton
               buttonCopy="Continue Shopping"
               link="/dresses"
