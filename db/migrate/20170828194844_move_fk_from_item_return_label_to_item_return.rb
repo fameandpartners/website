@@ -7,7 +7,7 @@ class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
   	count = 0
 	ItemReturnLabel.all.each do |label|
 	  ir = ItemReturn.find(label.item_return_id)
-    if ir.nil
+    if ir.nil?
       label.destroy
     else
 	    ir.item_return_label_id = label.id
