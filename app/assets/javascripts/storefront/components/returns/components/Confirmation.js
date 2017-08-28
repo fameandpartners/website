@@ -67,7 +67,7 @@ class Confirmation extends PureComponent {
         </p>
         <div className="instructions__body">
           <div className="instructions__header">
-            <p className="headline">
+            <p className="headline font-sans-serif">
               {internationalCustomer
                 ? <span>We have emailed you instructions.</span>
                 : <span>We have emailed you a return label and shipping instructions.</span>
@@ -95,10 +95,10 @@ class Confirmation extends PureComponent {
             {
               internationalCustomer ?
                 <div className="Confirmation__text-box">
-                  <h3 className="list-title">Please mail your package to</h3>
+                  <h3 className="list-title font-sans-serif">Please mail your package to</h3>
                   { isAustralian ?
-                    <p>
-                      Reply Paid: 86373 <br /><br />
+                    <p className="font-sans-serif">
+                      Reply Paid: 86373 <br />
                       Fame and Partners – Returns <br />
                       C/O - Next Logistics <br />
                       Warehouse 1A, 35-47 Stennett Road <br />
@@ -106,7 +106,7 @@ class Confirmation extends PureComponent {
                       Australia
                    </p>
                    :
-                    <p>
+                    <p className="font-sans-serif">
                       Fame and Partners – Returns <br />
                       15905 Commerce Way <br />
                       Cerritos, CA, 90703
@@ -118,17 +118,27 @@ class Confirmation extends PureComponent {
             }
 
             <div className="Confirmation__text-box">
-              <h3 className="list-title">Instructions for mailing your package</h3>
+              <h3 className="list-title font-sans-serif">Instructions for mailing your package</h3>
               {internationalCustomer
               ? (
-                <ul className="list">
+                <ol className="list">
                   <li>
-                    <p className="list-text">Package your dress</p>
+                    <p className="list-text font-sans-serif">Print this document.</p>
                   </li>
                   <li>
-                    <p className="list-text">Follow your postal service’s labeling instructions.</p>
+                    <p className="list-text font-sans-serif">
+                      Fold document in half as indicated on the form, and place on
+                      <br className="hide-for-mobile" />
+                      your return package (this will serve as your prepaid return label).
+                    </p>
                   </li>
-                </ul>
+                  <li>
+                    <p className="list-text font-sans-serif">
+                      Drop off at your nearest post office and ship!
+                    </p>
+                  </li>
+                </ol>
+
               )
               : null
             }
@@ -137,17 +147,17 @@ class Confirmation extends PureComponent {
             <div className="Confirmation__text-box">
               {internationalCustomer ? null :
               (
-                <ul className="list">
+                <ol className="list">
                   <li>
-                    <p className="list-text">Print/Cutout the SmartLabel&reg; below.</p>
+                    <p className="list-text font-sans-serif">Print/Cutout the SmartLabel&reg; below.</p>
                   </li>
                   <li>
-                    <p className="list-text">Package the item(s) and Return Form,
+                    <p className="list-text font-sans-serif">Package the item(s) and Return Form,
                       seal securely with tape. Affix the SmartLabel&reg; to the package.
                     </p>
                   </li>
                   <li>
-                    <p className="list-text">
+                    <p className="list-text font-sans-serif">
                       Drop your return anywhere in the U.S. Mail
                       location—in your mailbox, at work, or at a Post Office without
                       waiting in line.&nbsp;
@@ -161,7 +171,7 @@ class Confirmation extends PureComponent {
                       </a>
                     </p>
                   </li>
-                </ul>
+                </ol>
               )
             }
               { latestLineItem.item_return_label && !internationalCustomer ?
@@ -172,13 +182,13 @@ class Confirmation extends PureComponent {
                 /> : null
             }
 
-              <h3 className="list-title Confirmation__packaging-slip">Packing Slip</h3>
-              <ul className="list">
+              <h3 className="list-title Confirmation__packaging-slip font-sans-serif">Packing Slip</h3>
+              <ul className="list__packing-slip">
                 <li>
-                  <p className="list-text">Print and cut out your packing slip below</p>
+                  <p className="list-text font-sans-serif">Print and cut out your packing slip.</p>
                 </li>
                 <li>
-                  <p className="list-text">Include the packing slip inside your return package.</p>
+                  <p className="list-text font-sans-serif">Include the packing slip inside your return package.</p>
                 </li>
               </ul>
             </div>
@@ -200,7 +210,7 @@ class Confirmation extends PureComponent {
               );
             })}
           </div>
-          <div className="u-margin-top-small u-margin-bottom-large hide-for-print">
+          <div className="u-margin-top-large u-margin-bottom-large hide-for-print">
             <SimpleButton
               buttonCopy="Continue Shopping"
               link="/dresses"
