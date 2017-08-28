@@ -96,3 +96,8 @@ Procfile.*
 
 # Ignore all Emacs Temp Files
 *#*
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
