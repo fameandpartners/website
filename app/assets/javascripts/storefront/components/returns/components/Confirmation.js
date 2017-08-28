@@ -100,7 +100,7 @@ class Confirmation extends PureComponent {
                     <p>
                       Reply Paid: 86373 <br /><br />
                       Fame and Partners – Returns <br />
-                    C/O - Next Logistics <br />
+                      C/O - Next Logistics <br />
                       Warehouse 1A, 35-47 Stennett Road <br />
                       Ingleburn, NSW 2565 <br />
                       Australia
@@ -109,7 +109,7 @@ class Confirmation extends PureComponent {
                     <p>
                       Fame and Partners – Returns <br />
                       15905 Commerce Way <br />
- -                    Cerritos, CA, 90703
+                      Cerritos, CA, 90703
                     </p>
                  }
                 </div>
