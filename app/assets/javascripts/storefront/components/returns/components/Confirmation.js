@@ -185,7 +185,7 @@ class Confirmation extends PureComponent {
               <h3 className="list-title Confirmation__packaging-slip font-sans-serif">Packing Slip</h3>
               <ul className="list--packing-slip">
                 <li>
-                  <p className="list-text font-sans-serif">Print and cut out your packing slip below</p>
+                  <p className="list-text font-sans-serif">Print and cut out your packing slip.</p>
                 </li>
                 <li>
                   <p className="list-text font-sans-serif">Include the packing slip inside your return package.</p>
