@@ -119,7 +119,7 @@ class Confirmation extends PureComponent {
 
             <div className="Confirmation__text-box">
               <h3 className="list-title font-sans-serif">Instructions for mailing your package</h3>
-              {internationalCustomer
+              {internationalCustomer && isAustralian
               ? (
                 <ol className="list">
                   <li>
@@ -142,6 +142,21 @@ class Confirmation extends PureComponent {
               )
               : null
             }
+              {internationalCustomer && !isAustralian
+            ? (
+              <ol className="list">
+                <li>
+                  <p className="list-text font-sans-serif">Package your dress</p>
+                </li>
+                <li>
+                  <p className="list-text font-sans-serif">
+                    Follow your postal service’s labeling instructions.
+                  </p>
+                </li>
+              </ol>
+            )
+            : null
+          }
             </div>
 
             <div className="Confirmation__text-box">
