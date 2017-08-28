@@ -78,21 +78,21 @@
     font-size: 16px;
 }
 
-.instructions__body .list > li {
+.instructions__body .list li {
     font-size: 16px;
     line-height: 24px;
 }
 
-.list--packing-slip > li:before {
+.list__packing-slip li:before {
     content: "-";
 }
 
-.list--packing-slip {
+.list__packing-slip {
   list-style: none;
   padding: 0;
 }
 
-.list--packing-slip p {
+.list__packing-slip p {
   display: inline-block;
   padding-left: 4px;
   margin-bottom: 0;
