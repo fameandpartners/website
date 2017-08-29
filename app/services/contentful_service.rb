@@ -164,9 +164,13 @@ module Contentful
       fetched_md_container = @contentful_client.entries('sys.id' => id)[0]
 
       if (fetched_md_container.content_type.id == 'ITEM--md-text')
+        text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
+        text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+
         {
           id: 'ITEM--md-text',
-          text: fetched_md_container.content.split("\n"),
+          text: text_desktop,
+          text_mobile: text_mobile,
           text_size: fetched_md_container.text_size
         }
       else
