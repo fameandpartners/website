@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import request from 'superagent';
 
 // window polyfill
 import win from '../../../polyfills/windowPolyfill';
@@ -73,6 +74,14 @@ class OrderContainer extends Component {
   componentDidMount() {
     const { params } = this.props;
     if (params && params.email) { this.props.actions.setGuestEmail(params.email); }
+    request
+      .get('http://pokeapi.co/api/v2/ability/33/')
+      .then(() => {
+        console.log('Successful superagent call');
+      })
+      .catch(() => {
+        console.log('Error using superagent');
+      });
   }
 
   render() {
