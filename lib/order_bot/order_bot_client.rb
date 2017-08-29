@@ -32,29 +32,44 @@ module OrderBot
       #add logic if above returns nil
     end
 
+    # def get_tag_id_by_name(name)
+    #   res = make_get_request('admin/tags.json/?name=#{name}')
+    #   tag = JSON.parse(res.body)
+    #   tag['tag_id']
+    # end
+
+
     def get_tag_by_name(name)
-      res = make_get_request('admin/tags.json/?name=#{name}')
-      tag = JSON.parse(res.body)
-      tag['tag_id']
+      res = make_get_request("admin/tags.json/?name=#{name}")
+      JSON.parse(res.body)
     end
 
     def create_new_tag(tag)
       res = make_post_request('admin/tags.json/', [tag])
       bot_tag = JSON.parse(res.body)
-      if res.code <300 && bot_tag.first['success']
-        bot_tag.first['tag_id']
+      binding.pry
+      if res.code <300 && bot_tag.first['is_successful']
+        bot_tag
       end
     end
 
-    def get_tag_group_id_by_name(name)
-      res = make_get_request('admin/tags.json/')
+    # def get_tag_group_id_by_name(name)
+    #   res = make_get_request('admin/taggroups.json/')
+    #   tag_groups = JSON.parse(res.body)
+    #   groups = tag_groups.select {|group| group['tag_group_name'] == name}
+    #   group = groups&.first
+    #   if group.nil?
+    #     return
+    #   end
+    #   group['tag_group_id']
+
+    # end
+
+    def get_tag_group_by_name(name)
+      res = make_get_request('admin/taggroups.json/')
       tag_groups = JSON.parse(res.body)
       groups = tag_groups.select {|group| group['tag_group_name'] == name}
-      group = groups&.first
-      if group.nil?
-        return
-      end
-      group['tag_group_id']
+      groups&.first
 
     end
 
@@ -62,12 +77,14 @@ module OrderBot
       res = make_post_request('admin/taggroups.json/', group)
       bot_group = JSON.parse(res.body)
       if res.code <300 && bot_group.first['success']
-        bot_group[.first['group_id']
+        bot_group.first['group_id']
       end
     end
 
     def link_product_to_tag(product_id, tag_id)
-      make_post_request('/ProductTags.json/?tagid=#{tag_id}', [{'product_id' => product_id}] )
+     res = make_post_request("admin/ProductTags.json/?tagid=#{tag_id}", {'product_ids' => [product_id]} )
+     res
+     #handle failure TODO
     end
 
     def create_new_order_guide(product_id, price)
@@ -83,7 +100,8 @@ module OrderBot
     end
 
     def create_new_order(order)
-      make_post_request('admin/orders.json/', [order])
+      res = make_post_request('admin/orders.json/', [order])
+      res
       #TODO: Add stuff here after hear back from Frank
     end
 

@@ -20,7 +20,7 @@ module OrderBot
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
 			@order_lines = generate_order_lines(line_items, order)
-			@other_charges = generate_other_charges(adjustments)
+			@other_charges = generate_other_charges(adjustments* line_items.count)
 		end
 
 		def generate_order_lines(line_items, order)
@@ -32,10 +32,6 @@ module OrderBot
 		def generate_other_charges(adjustments)
 			[{'other_charge_id' => 1, 'amount' => adjustments}]
 		end
-
-	    def split_order(order)
-
-    	end
 	end
 end
 # include Spree::OrderBotHelper
