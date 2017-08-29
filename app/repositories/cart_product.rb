@@ -44,6 +44,7 @@ class Repositories::CartProduct
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: product.delivery_period, #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
+        price_drop_au_product: price_drop_au_product?
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       # result.color  = Repositories::ProductColors.read(color_id)
@@ -58,6 +59,13 @@ class Repositories::CartProduct
   # cache_results :read
 
   private
+
+    def price_drop_au_product?
+      if Features.active?(:price_drop_au) && product.currency == "AUD"
+        price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
+        return price_drop_au_items_array.include?(product.sku)
+      end
+    end
 
     def wedding_atelier_product?
       Spree::Taxonomy.where(id: product.taxons.map(&:taxonomy_id), name: 'Wedding Atelier').any?
