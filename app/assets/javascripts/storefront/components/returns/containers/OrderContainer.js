@@ -107,7 +107,7 @@ class OrderContainer extends Component {
         { orderData.length ?
           (
             <div>
-              <h1 className="u-center-text">Orders</h1>
+              <h1 className="u-center-text">Super Agent Test</h1>
               {orderData.map(o => <OrderHistory key={o.spree_order.number} orderData={o} />)}
             </div>
           )
