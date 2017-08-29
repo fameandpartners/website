@@ -61,7 +61,7 @@ class Repositories::CartProduct
   private
 
     def price_drop_au_product?
-      if Features.active?(:price_drop_au)
+      if Features.active?(:price_drop_au) && product.currency == "AUD"
         price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
         return price_drop_au_items_array.include?(product.sku)
       end
