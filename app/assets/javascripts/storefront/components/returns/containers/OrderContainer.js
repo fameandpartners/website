@@ -75,12 +75,21 @@ class OrderContainer extends Component {
     const { params } = this.props;
     if (params && params.email) { this.props.actions.setGuestEmail(params.email); }
     request
-      .get('http://pokeapi.co/api/v2/ability/33/')
+      .get('https://pokeapi.co/api/v2/ability/33/')
       .then(() => {
-        console.log('Successful superagent call');
+        console.log('Successful superagent GET');
       })
       .catch(() => {
-        console.log('Error using superagent');
+        console.log('Error using superagent GET');
+      });
+    request
+      .post('https://w22ybrydo0.execute-api.us-west-2.amazonaws.com/dev/send-survey')
+      .send({ name: 'Mike', email: 'mvg210@gmail.com' })
+      .then(() => {
+        console.log('Successful delightful.io POST');
+      })
+      .catch(() => {
+        console.log('Error using delightful.io POST');
       });
   }
 
