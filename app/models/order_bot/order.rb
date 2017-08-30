@@ -1,10 +1,11 @@
+require 'securerandom' 
 module OrderBot
 	class Order
 
 		def initialize(order, line_items)
 			splitter = ItemPriceAdjustmentSplit.new(line_items.first)
 			adjustments = splitter.per_item_adjustment_in_cents/100.0
-			@reference_order_id = order.id
+			@reference_order_id = order.id.to_s + SecureRandom.uuid
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
 			@account_group_id = 755
