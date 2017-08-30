@@ -20,7 +20,7 @@ module OrderBot
       end
 
       it 'create new product fails' do        
-        expect(client.create_new_product('fail')).to be_false
+        expect(client.create_new_product('fail')).to be_falsey
       end
 
     end
