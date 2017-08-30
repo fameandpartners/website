@@ -43,14 +43,12 @@ module Spree
       #order_bot_product_id = 2882372
       client.create_new_order_guide(order_bot_product_id, line_item.price)
       line_item.personalization.options_hash.each_pair do |key, value|
-                binding.pry
         unless value.nil?
           tag = get_or_create_tag(key, value)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       end
      line_item.personalization.customization_values.each do |customization|
-      binding.pry
           tag = get_or_create_tag(customization.customisation_type, customization.presentation)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
       end
@@ -83,7 +81,6 @@ module Spree
     end
 
     def split_order(line_items)
-      binding.pry
       lol = []
       nested_items = []
       sum = 0

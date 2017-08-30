@@ -13,9 +13,10 @@ module OrderBot
 			tax_adj =order&.adjustments&.tax&.first
 		    item_tax = 0
 		    total_tax = 0
+		    binding.pry
 		    tax_rate = Spree::TaxRate.find(tax_adj.originator_id)
 		    
-		    if tax_rate.nil?
+		    unless tax_rate.nil?
 				[{'tax_name' => tax_rate.name, 'tax_rate' => tax_rate.amount, 'amount' => line_item.price * tax_rate.amount}]
 			else
 				[]
