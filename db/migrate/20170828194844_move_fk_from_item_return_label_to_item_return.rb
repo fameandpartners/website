@@ -1,8 +1,8 @@
 class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
   def change
 
-  	# add_column :item_returns, :item_return_label_id, :integer
-  	# add_index :item_returns, :item_return_label_id
+  	add_column :item_returns, :item_return_label_id, :integer
+  	add_index :item_returns, :item_return_label_id
 
   	count = 0
   	ItemReturnLabel.all.each do |label|
