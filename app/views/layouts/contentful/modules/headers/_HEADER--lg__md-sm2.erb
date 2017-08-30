@@ -1,5 +1,6 @@
 <% @lg_contents = contents[:header_lg_item] %>
 <%
+  # Check if current header has any PID assigned and make grid accordingly
   if (contents[:header_sm_items].nil?)
     hero_pids = false
     hero_column_left_class = 'is-5'
@@ -17,7 +18,7 @@
     <article class="tile is-child">
       <div class="CopyHeader CopyHeader--featured">
         <div class="CopyHeader__content">
-          <% contents[:header_text].split("\n").each do |line| %>
+          <% contents[:header_text_mobile].split("\n").each do |line| %>
             <p><%= line %></p>
           <% end %>
         </div>
