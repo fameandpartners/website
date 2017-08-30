@@ -136,6 +136,7 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'pry-byebug'
+  gem 'quiet_assets'
 end
 
 group :test do

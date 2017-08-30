@@ -610,9 +610,13 @@ FameAndPartners::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      # returns
       get 'orders' => 'returns_processes#index'
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
+
+      # user
+      get 'profile' => 'user_sessions#show'
     end
   end
 
