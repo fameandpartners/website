@@ -35,7 +35,7 @@ class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
         no_labels = ir_arr.select {|ir| ir.item_return_label.nil? }
         no_labels.each do |ir|
           ir.item_return_label = labels.first.item_return_label
-          # ir.save!
+          ir.save!
           count = count + 1
         end
       end
