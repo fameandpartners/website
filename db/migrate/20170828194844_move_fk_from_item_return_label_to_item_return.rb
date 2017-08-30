@@ -1,8 +1,8 @@
 class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
   def change
 
-  	add_column :item_returns, :item_return_label_id, :integer
-  	add_index :item_returns, :item_return_label_id
+  	# add_column :item_returns, :item_return_label_id, :integer
+  	# add_index :item_returns, :item_return_label_id
 
   	count = 0
   	ItemReturnLabel.all.each do |label|
@@ -23,6 +23,11 @@ class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
         ItemReturn.find_by_request_id(rri.id)
       end
 
+      ir_arr.compact!
+      if ir_arr.empty?
+        # seriously broken orders
+        next
+      end
       labels = ir_arr.select {|ir| ir.item_return_label}
 
       # if we missing labels, then copy 1 label to the other item_returns
@@ -30,7 +35,7 @@ class MoveFkFromItemReturnLabelToItemReturn < ActiveRecord::Migration
         no_labels = ir_arr.select {|ir| ir.item_return_label.nil? }
         no_labels.each do |ir|
           ir.item_return_label = labels.first.item_return_label
-          ir.save!
+          # ir.save!
           count = count + 1
         end
       end
