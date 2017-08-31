@@ -615,8 +615,13 @@ FameAndPartners::Application.routes.draw do
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
 
-      # user
-      get 'profile' => 'user_sessions#show'
+      # user profile
+      get 'profile' => 'profiles#show'
+
+      # user session
+      devise_scope :spree_user do
+        post 'user/sign_in' => 'user_sessions#create'
+      end
     end
   end
 
