@@ -51,16 +51,18 @@ module Spree
       end
       #order_bot_product_id = 2882372
       client.create_new_order_guide(order_bot_product_id, line_item.price)
-      line_item.personalization.options_hash.each_pair do |key, value|
+      line_item.personalization.options_hash.each_pair do |key, value| #size and color
         unless value.nil?
           tag = get_or_create_tag(key, value)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       end
-     line_item.personalization.customization_values.each do |customization|
+     line_item.personalization.customization_values.each do |customization| #customizations
           tag = get_or_create_tag(customization.customisation_type, customization.presentation)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
       end
+       tag = get_or_create_tag('height', "#{line_item.personalization.height_value} #{line_item.personalization.height_unit}")
+       client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
     end
 
     def get_group_id_by_product(product)

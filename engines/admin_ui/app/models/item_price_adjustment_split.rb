@@ -34,7 +34,6 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
     # deal with all other adjustments
     splittable_adjustment = per_item_tax_free_adjustment(taxes['total_tax'])
 
-    binding.pry
     taxes['item_tax'] + splittable_adjustment
   end
 
@@ -52,7 +51,6 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
         total + ((((li.price*100).to_i * tax_rate) / 100.0))
       end
       total_tax = total_tax.round(2)
-      binding.pry
     end
 
     {
@@ -62,7 +60,6 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
   end
 
   def per_item_tax_free_adjustment(total_tax)
-    binding.pry
     ((order.adjustment_total - total_tax) / num_items_in_order)
   end
 

@@ -17,7 +17,7 @@ module OrderBot
 		    unless tax_rate.nil?
 		    	splitter = ItemPriceAdjustmentSplit.new(line_item)
 				
-				[{'tax_name' => tax_rate.name, 'tax_rate' => tax_rate.amount, 'amount' => splitter.per_item_tax_adjustment_in_cents.to_f/100}]
+				[{'tax_name' => "Tax", 'tax_rate' => tax_rate.amount, 'amount' => splitter.per_item_tax_adjustment_in_cents.to_f/100}]
 			else
 				[]
 			end
