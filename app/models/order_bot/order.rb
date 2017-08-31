@@ -4,7 +4,8 @@ module OrderBot
 
 		def initialize(order, line_items)
 			splitter = ItemPriceAdjustmentSplit.new(line_items.first)
-			adjustments = splitter.per_item_adjustment_in_cents/100.0
+			tax_free_adjustments = splitter.per_item_tax_free_adjustment_in_cents.to_f/100.0
+			adjustments = splitter.per_item_adjustment_in_cents.to_f/100
 			@reference_order_id = order.id.to_s + SecureRandom.uuid
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
@@ -21,7 +22,7 @@ module OrderBot
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
 			@order_lines = generate_order_lines(line_items, order)
-			@other_charges = generate_other_charges(adjustments* line_items.count)
+			@other_charges = generate_other_charges(tax_free_adjustments* line_items.count)
 		end
 
 		def generate_order_lines(line_items, order)

@@ -137,7 +137,6 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
-        binding.pry
         OrderBotWorker.perform_async(@order.id)
 
         respond_with(@order) do |format|

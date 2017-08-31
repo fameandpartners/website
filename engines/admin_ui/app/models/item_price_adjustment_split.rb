@@ -13,6 +13,14 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
     in_cents(per_item_adjustment)
   end
 
+  def per_item_tax_adjustment_in_cents
+    in_cents(per_item_tax_adjustment['item_tax'])
+  end
+
+  def per_item_tax_free_adjustment_in_cents
+    in_cents(per_item_tax_free_adjustment(per_item_tax_adjustment['total_tax']))
+  end
+
   private
 
   def in_cents(amount)
@@ -21,10 +29,21 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
 
   def per_item_adjustment
     # deal with tax adjustments
-    tax_adj = order&.adjustments&.tax&.first
+    taxes = per_item_tax_adjustment
 
+    # deal with all other adjustments
+    splittable_adjustment = per_item_tax_free_adjustment(taxes['total_tax'])
+
+    binding.pry
+    taxes['item_tax'] + splittable_adjustment
+  end
+
+  def per_item_tax_adjustment 
+
+    tax_adj = order&.adjustments&.tax&.first
     item_tax = 0
     total_tax = 0
+
     if tax_adj
       tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
       item_tax = (((price*100).to_i * tax_rate) / 100.0).round(2)
@@ -33,12 +52,18 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
         total + ((((li.price*100).to_i * tax_rate) / 100.0))
       end
       total_tax = total_tax.round(2)
+      binding.pry
     end
 
-    # deal with all other adjustments
-    splittable_adjustment = ((order.adjustment_total - total_tax) / num_items_in_order)
+    {
+      'item_tax' => item_tax,
+      'total_tax' => total_tax
+    }
+  end
 
-    item_tax + splittable_adjustment
+  def per_item_tax_free_adjustment(total_tax)
+    binding.pry
+    ((order.adjustment_total - total_tax) / num_items_in_order)
   end
 
   def num_items_in_order
