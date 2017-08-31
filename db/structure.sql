@@ -1365,7 +1365,8 @@ CREATE TABLE item_returns (
     bergen_actual_quantity integer,
     bergen_damaged_quantity integer,
     shippo_tracking_number character varying(255),
-    shippo_label_url character varying(255)
+    shippo_label_url character varying(255),
+    item_return_label_id integer
 );
 
 
@@ -2623,42 +2624,6 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
-
-
---
--- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE return_item_labels (
-    id integer NOT NULL,
-    tracking_number character varying(255),
-    label_url character varying(255),
-    carrier character varying(255),
-    label_image_url character varying(255),
-    label_pdf_url character varying(255),
-    return_item_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE return_item_labels_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -5933,13 +5898,6 @@ ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_i
 
 
 --
--- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
-
-
---
 -- Name: return_request_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7016,14 +6974,6 @@ ALTER TABLE ONLY render3d_images
 
 
 --
--- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels
-    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
-
-
---
 -- Name: return_request_items return_request_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7851,6 +7801,13 @@ CREATE INDEX index_inventory_units_on_variant_id ON spree_inventory_units USING 
 --
 
 CREATE INDEX index_item_return_events_on_item_return_uuid ON item_return_events USING btree (item_return_uuid);
+
+
+--
+-- Name: index_item_returns_on_item_return_label_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_item_returns_on_item_return_label_id ON item_returns USING btree (item_return_label_id);
 
 
 --
@@ -9681,8 +9638,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
-INSERT INTO schema_migrations (version) VALUES ('20170724212720');
-
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
@@ -9692,3 +9647,5 @@ INSERT INTO schema_migrations (version) VALUES ('20170816220818');
 INSERT INTO schema_migrations (version) VALUES ('20170817173805');
 
 INSERT INTO schema_migrations (version) VALUES ('20170821173721');
+
+INSERT INTO schema_migrations (version) VALUES ('20170828194844');
