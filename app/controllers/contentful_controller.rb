@@ -14,8 +14,8 @@ class ContentfulController < ApplicationController
     current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
 
     @landing_page_container = current_contently[request.path]
-    landing_page_specific_site_version = (@landing_page_container[:site_version]) ? @landing_page_container[:site_version] : 'all'
-    landing_page_redirect_to_url = (@landing_page_container[:site_version_url_to_redirect]) ? @landing_page_container[:site_version_url_to_redirect] : :best_sellers
+    landing_page_specific_site_version = @landing_page_container[:site_version]
+    landing_page_redirect_to_url = @landing_page_container[:site_version_url_to_redirect]
 
     if @landing_page_container
       # Check if the domain is either AU or US and compare with the flag
