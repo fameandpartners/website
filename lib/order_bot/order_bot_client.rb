@@ -68,6 +68,18 @@ module OrderBot
       make_post_request('admin/order_guides.json/897', [{'product_id' => product_id, 'og_price' => price}])
     end
 
+    def get_product_by_name_and_sku(name, sku)
+      binding.pry
+      res = make_get_request("admin/products.json/?product_name=#{name}")
+      order_bot_products = JSON.parse(res.body)
+      if res.code <300
+        prod = order_bot_products.select {|product| product['sku'] == sku}&.first
+        unless prod.nil?
+          return prod['product_id']
+        end
+      end
+    end
+
     def create_new_product(product)
       res = make_post_request('admin/products.json/', [product]) #needs to take in an array of objects for api
       order_bot_product = JSON.parse(res.body)

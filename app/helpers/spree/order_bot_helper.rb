@@ -31,9 +31,18 @@ module Spree
       }
     end
 
+    def get_or_create_product(line_item)
+      spree_product = line_item.product
+      product_id = client.get_product_by_name_and_sku(spree_product.name, CustomItemSku.new(line_item).call)
+      if product_id.nil?
+        product = OrderBot::Product.new(line_item, spree_product)
+        product_id = client.create_new_product(product)
+      end
+    product_id
+    end
+
     def create_new_product_associate_order_guide(line_item)
-      product = OrderBot::Product.new(line_item)
-      order_bot_product_id = client.create_new_product(product)
+      order_bot_product_id = get_or_create_product(line_item)
       if order_bot_product_id.nil?
         #unexpected failure retry
       end

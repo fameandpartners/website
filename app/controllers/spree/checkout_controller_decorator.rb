@@ -3,7 +3,6 @@ Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Product
   include Marketing::Gtm::Controller::Variant
   include Marketing::Gtm::Controller::Event
-  include Spree::OrderBotHelper
 
   before_filter :before_masterpass
   skip_before_filter :check_registration
@@ -139,7 +138,7 @@ Spree::CheckoutController.class_eval do
         end
 
         binding.pry
-        create_new_order_by_factory(@order)
+        OrderBotWorker.perform_async(@order.id)
 
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
