@@ -58,7 +58,7 @@
               <% if product.price_drop_au_product: %>
                 <div class="ribbon-wrapper PriceDrop">
                   <div class="ribbon-txt">
-                    Price drop
+                    New Lower Price
                   </div>
                 </div>
               <% else if product.making_options.length: %>
