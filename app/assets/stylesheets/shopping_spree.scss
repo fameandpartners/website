@@ -33,6 +33,13 @@ $chat_bar_height: 68px;
             padding-bottom: 15px;
         }
     }
+
+    .vertical-align
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     
 }
 
@@ -65,7 +72,6 @@ $chat_bar_height: 68px;
     .header
     {
         background-color: white;
-        display: block;
         text-align: center;
         font-size: 16px;
         border-bottom: 1px;
@@ -75,6 +81,7 @@ $chat_bar_height: 68px;
         border-top-color: #979797;
         border-top-style: solid;
         height: $header_height;
+        @extend .vertical-align;        
     }
     
     .full-toggle-btn

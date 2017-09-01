@@ -70,7 +70,7 @@ export default class Drawer extends React.Component
             <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
             </div>
             <div className="col-xs-8 text-center">Shopping Spree</div>
-            <div className="col-xs-3"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+            <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
             </div>
             <div className="row">
             <ChatList
