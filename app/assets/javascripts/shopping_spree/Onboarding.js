@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 
-export default class ShoppingSpreeOnboarding extends React.Component
+export default class Onboarding extends React.Component
 {
     constructor( props )
     {
@@ -45,6 +45,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
 
     join()
     {
+        let context = this;
         request.post( '/shopping_sprees' ).
             set('Content-Type', 'application/json').
             send( 
@@ -54,7 +55,11 @@ export default class ShoppingSpreeOnboarding extends React.Component
                     }
             ).end( function( error, response )
                    {
-                       console.log( response );
+
+                       context.props.doneOnboarding( response.body['name'],
+                                                  response.body['email'],
+                                                  response.body['icon'],
+                                                  response.body['id'] );
                    }
                  );
     }
