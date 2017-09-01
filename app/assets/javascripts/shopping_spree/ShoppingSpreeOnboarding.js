@@ -14,6 +14,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
         window.startShoppingSpree = this.open;
+        this.hideZopim = this.hideZopim.bind(this);
     }
 
     close()
@@ -32,6 +33,23 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 closed: false
             }
         );
+    }
+
+    hideZopim()
+    {
+        console.log( 'hiding zopim' );
+        if( window.$zopim && window.$zopim.livechat )
+        {
+            window.$zopim.livechat.hideAll();
+        } else
+        {
+            window.requestAnimationFrame( this.hideZopim );
+        }
+    }
+
+    componentDidMount()
+    {
+        this.hideZopim();
     }
     
     render()
