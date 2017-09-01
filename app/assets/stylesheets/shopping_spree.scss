@@ -35,6 +35,8 @@ $chat_bar_height: 68px;
     }
     
 }
+
+
 .shopping-spree-container
 {
     @extend .shopping-spree;
@@ -184,9 +186,20 @@ $chat_bar_height: 68px;
 
 @media (max-width: 767px)
 {
+
+    .shopping-spree
+    {
+        .no-gutter-mobile
+        {
+            margin-right: 0;
+            padding-right: 0;
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
     
     .shopping-spree-container
-    {        
+    {
         position: fixed;
         top: auto;
         bottom: 0px;

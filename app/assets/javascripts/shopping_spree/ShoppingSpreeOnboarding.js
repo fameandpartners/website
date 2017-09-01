@@ -121,19 +121,19 @@ export default class ShoppingSpreeOnboarding extends React.Component
                 </div>
 
                 <div className="row top-padding-sm bottom-padding-sm">
-                  <div className="col-xs-12">
+                  <div className="col-xs-12 col-lg-2 col-lg-push-5">
                     <input className="form-control input-lg" type="text" placeholder="Enter your name"></input>
                   </div>
                 </div>
                 
                 <div className="row bottom-padding-sm">
-                  <div className="col-xs-12">
+                  <div className="col-xs-12 col-lg-2 col-lg-push-5">
                     <input className="form-control input-lg" type="text" placeholder="Enter your email"></input>
                   </div>
                 </div>
                 
                 <div className="row">
-                  <div className="col-xs-18">
+                  <div  className="col-xs-12 col-lg-2 col-lg-push-5 no-gutter-mobile">
                     <a className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
                   </div>
                 </div>
