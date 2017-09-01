@@ -29,6 +29,11 @@
 
 @media (min-width: 767px)
 {
+
+    .shopping-spree-onboarding
+    {
+        padding-bottom: 150px;
+        
         .mobile
         {
             display: none;
@@ -38,12 +43,13 @@
         {
             display: block;
         }
-
         #dress-image-one
         {
             margin-top: -5%;
         }
         
+    }
+    
 }
 
 .shopping-spree-onboarding
