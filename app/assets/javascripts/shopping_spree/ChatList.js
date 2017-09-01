@@ -33,7 +33,7 @@ export default class ChatList extends FirebaseComponent
         
     }
     addChatMessage( data )
-    { 
+    {
         switch( data.val().type )
         {
             case 'text':
@@ -42,7 +42,7 @@ export default class ChatList extends FirebaseComponent
                     messages:
                     this.state.messages.concat([<TextMessage key={data.key}
                                                 text={data.val().value} 
-                                                iconNumber={data.val().from.icon}
+                                                iconNumber={parseInt(data.val().from.icon)}
                                                 name={data.val().from.name}
                                                 email={data.val().from.email}
                                                 sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />]),

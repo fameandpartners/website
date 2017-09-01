@@ -11,9 +11,9 @@ export default class ShoppingSpree extends React.Component
             {
                 showShareModal: false,
                 location: 'onboarding',
-                firebaseNodeId: null,
-                name: null,
-                email: null
+                firebaseNodeId: '',
+                name: '',
+                email: ''
             };
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
@@ -21,6 +21,7 @@ export default class ShoppingSpree extends React.Component
 
     doneOnboarding( name, email, icon, shoppingSpreeId )
     {
+        console.log( "Shopping Spree Id: " + shoppingSpreeId );
         this.setState(
             {
                 location: 'chat',
@@ -31,6 +32,7 @@ export default class ShoppingSpree extends React.Component
             }
         );
     }
+    
     render()
     {
         return( 

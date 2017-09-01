@@ -27,6 +27,7 @@ export default class Drawer extends React.Component
         
     }
 
+    
     handleToggle()
     {
         this.setState( { closed: !this.state.closed } );
@@ -84,7 +85,7 @@ export default class Drawer extends React.Component
             firebaseNodeId={this.state.firebaseNodeId}
             name='Doug'
             email='dougs@fameandpartners.com'
-            icon='14'
+            icon={14}
             />
             </div>
             </div>
