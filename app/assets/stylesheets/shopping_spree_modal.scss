@@ -76,6 +76,11 @@
             height: 100%;
             font-family: $font-heading;
             font-weight: 300;
+
+            input
+            {
+                color: black;
+            }
             
             .btn-close
             {
@@ -98,8 +103,6 @@
                 }
                 
             }
-
-
             .base-text
             {
                 line-height: 31px;
@@ -127,6 +130,7 @@
                     width: 100%;
                 }
             }
+
 
             .dress-image-right
             {

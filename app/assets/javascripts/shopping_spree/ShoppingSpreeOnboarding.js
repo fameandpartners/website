@@ -37,7 +37,7 @@ export default class ShoppingSpreeOnboarding extends React.Component
     render()
     {
         return(
-            <div id="shopping-spree-modal" className="shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true" style={this.state.closed ? {display: 'none'} : {display: 'block'}}>
+            <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true" style={this.state.closed ? {display: 'none'} : {display: 'block'}}>
               <div id="shopping-spree-modal-content" className="container">
                 <a className="btn-close med" alt="Close" onClick={this.close}></a>              
                 <div id="top-headline" className="welcome-headline row">
@@ -119,8 +119,27 @@ export default class ShoppingSpreeOnboarding extends React.Component
                     Enter your name and email to start!
                   </div>
                 </div>
+
+                <div className="row top-padding-sm bottom-padding-sm">
+                  <div className="col-xs-12">
+                    <input className="form-control input-lg" type="text" placeholder="Enter your name"></input>
+                  </div>
+                </div>
+                
+                <div className="row bottom-padding-sm">
+                  <div className="col-xs-12">
+                    <input className="form-control input-lg" type="text" placeholder="Enter your email"></input>
+                  </div>
+                </div>
+                
+                <div className="row">
+                  <div className="col-xs-18">
+                    <a className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
+                  </div>
+                </div>
                 
               </div>
+              
             </div>                        
         );
     }   
