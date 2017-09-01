@@ -1,0 +1,2 @@
+module ShoppingSpreesHelper
+end

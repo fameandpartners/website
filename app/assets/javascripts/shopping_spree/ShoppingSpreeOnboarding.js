@@ -1,4 +1,5 @@
 import React from 'react';
+import request from 'superagent';
 
 export default class ShoppingSpreeOnboarding extends React.Component
 {
@@ -13,8 +14,12 @@ export default class ShoppingSpreeOnboarding extends React.Component
 
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-        window.startShoppingSpree = this.open;
         this.hideZopim = this.hideZopim.bind(this);
+        this.join = this.join.bind(this);
+        window.startShoppingSpree = this.open;
+
+        
+
     }
 
     close()
@@ -26,18 +31,9 @@ export default class ShoppingSpreeOnboarding extends React.Component
         );
     }
 
-    open()
-    {
-        this.setState(
-            {
-                closed: false
-            }
-        );
-    }
 
     hideZopim()
     {
-        console.log( 'hiding zopim' );
         if( window.$zopim && window.$zopim.livechat )
         {
             window.$zopim.livechat.hideAll();
@@ -47,10 +43,36 @@ export default class ShoppingSpreeOnboarding extends React.Component
         }
     }
 
+    join()
+    {
+        request.post( '/shopping_sprees' ).
+            set('Content-Type', 'application/json').
+            send( 
+                    {
+                        name: this.nameInput.value,
+                        email: this.emailInput.value
+                    }
+            ).end( function( error, response )
+                   {
+                       console.log( response );
+                   }
+                 );
+    }
+    
+    open()
+    {
+        this.setState(
+            {
+                closed: false
+            }
+        );
+    }
+
     componentDidMount()
     {
         this.hideZopim();
     }
+
     
     render()
     {
@@ -140,19 +162,19 @@ export default class ShoppingSpreeOnboarding extends React.Component
 
                 <div className="row top-padding-sm bottom-padding-sm">
                   <div className="col-xs-12 col-lg-2 col-lg-push-5">
-                    <input className="form-control input-lg" type="text" placeholder="Enter your name"></input>
+                    <input className="form-control input-lg" type="text" placeholder="Enter your name" ref={(input) => { this.nameInput = input; }}></input>
                   </div>
                 </div>
                 
                 <div className="row bottom-padding-sm">
                   <div className="col-xs-12 col-lg-2 col-lg-push-5">
-                    <input className="form-control input-lg" type="text" placeholder="Enter your email"></input>
+                    <input className="form-control input-lg" type="text" placeholder="Enter your email" ref={(input) => { this.emailInput = input; }}></input>
                   </div>
                 </div>
                 
                 <div className="row">
                   <div  className="col-xs-12 col-lg-2 col-lg-push-5 no-gutter-mobile">
-                    <a className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
+                    <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
                   </div>
                 </div>
                 
