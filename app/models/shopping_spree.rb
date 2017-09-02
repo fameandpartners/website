@@ -52,8 +52,8 @@ class ShoppingSpree
   
   
   def post_welcome_messages
-    post_text_message( 'help@fameandpartners.com', 'Fame Bot', '20', 'You can post items here and chat with your friends' )
-    post_text_message( 'help@fameandpartners.com', 'Fame Bot', '20', 'Here''s something to get you started!' )
+    post_text_message( 'help@fameandpartners.com', '20', 'Fame Bot', 'You can post items here and chat with your friends' )
+    post_text_message( 'help@fameandpartners.com', '20', 'Fame Bot', 'Here''s something to get you started!' )
   end
   
 end
