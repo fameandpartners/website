@@ -5,7 +5,7 @@
 @import 'shopping_spree_modal';
 
 $header_height: 68px;
-$chat_bar_height: 68px;
+$chat_bar_height: 55px;
 
 .shopping-spree
 {
@@ -213,6 +213,12 @@ $chat_bar_height: 68px;
         width: 100%;
         height: auto;
 
+            
+        .shoppingSpreeTextInput
+        {
+            font-size: 14px;
+        }
+        
         &.open
         {
             min-height: 100%;
@@ -221,6 +227,7 @@ $chat_bar_height: 68px;
         .btn
         {
             padding: 10px 20px;
+            font-size: 14px;            
         }
         
         .open-caret
@@ -293,6 +300,8 @@ $chat_bar_height: 68px;
 {
     .shopping-spree-container
     {
+
+        
         
         &.collapsed
         {
