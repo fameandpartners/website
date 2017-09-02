@@ -10,7 +10,7 @@ export default class ShoppingSpree extends React.Component
         this.state =
             {
                 showShareModal: false,
-                location: 'onboarding',
+                display: 'onboarding',
                 firebaseNodeId: '',
                 name: '',
                 email: '',
@@ -25,7 +25,7 @@ export default class ShoppingSpree extends React.Component
         console.log( "Name:  " + name );
         this.setState(
             {
-                location: 'chat',
+                display: 'chat',
                 name: name,
                 email: email,
                 icon: icon,
@@ -39,11 +39,11 @@ export default class ShoppingSpree extends React.Component
         return( 
                 <div>
                 {
-                    this.state.location === 'chat' &&
+                    this.state.display === 'chat' &&
                         <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon}/>
                 }
                 {
-                    this.state.location === 'onboarding' &&
+                    this.state.display === 'onboarding' &&
                         <Onboarding doneOnboarding={this.doneOnboarding}/>
                 }
                 </div>

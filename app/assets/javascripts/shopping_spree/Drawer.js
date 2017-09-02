@@ -13,7 +13,7 @@ export default class Drawer extends React.Component
 
         this.state =
         {
-            closed: true,
+            closed: false,
             display: 'chat',
             firebaseAPI: props.firebaseAPI,
             firebaseDatabase: props.firebaseDatabase,
