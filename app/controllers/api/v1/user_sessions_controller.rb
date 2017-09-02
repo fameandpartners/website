@@ -4,41 +4,29 @@ module Api
       include SslRequirement
       helper 'spree/users', 'spree/base'
       include Spree::Core::ControllerHelpers::Auth
-      include Spree::Core::ControllerHelpers::Common
-      include Spree::Core::ControllerHelpers::Order
+      # include Spree::Core::ControllerHelpers::Common
+      # include Spree::Core::ControllerHelpers::Order
 
-      ssl_required :new, :create, :destroy, :update
+      ssl_required :new, :create, :destroy
 
       respond_to :json
       skip_before_filter :verify_authenticity_token
 
       def create
-        binding.pry
         authenticate_spree_user!
 
         if spree_user_signed_in?
-          respond_to do |format|
-            format.json {
-              spree_current_user.to_json
-            }
-            format.html {
-              binding.pry
-              'asdf'
-            }
-          end
+          respond_with spree_current_user
           # respond_with spree_current_user.to_json(:only => [:email, :sign_in_count, :first_name, :last_name])
         else
-          respond_to do |format|
-            format.json {
-              binding.pry
-              { suckit: true}
-            }
-            format.html {
-              binding.pry
-              "screw you"
-            }
-          end
+          warden.custom_failure!
+          render :json => {success: false, message: "Error with your login or password"}, status: 401
         end
+      end
+
+      def destroy
+        # env['warden'].logout(:spree_user) #this might work if below fails
+        sign_out(resource_name)
       end
 
     end
