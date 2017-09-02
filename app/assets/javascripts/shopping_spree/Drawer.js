@@ -63,9 +63,9 @@ export default class Drawer extends React.Component
             />
             </div>
             
-            <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : '') + (this.state.display === 'cart' ? " hidden" : "")}>
+            <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
             <div className="full-toggle-btn" onClick={this.handleToggle}></div>
-            <div className="row header vertical-align">
+            <div className="row header">
             <div className="col-xs-2">
             <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
             </div>

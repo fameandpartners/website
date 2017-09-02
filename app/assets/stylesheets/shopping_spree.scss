@@ -213,6 +213,11 @@ $chat_bar_height: 68px;
         width: 100%;
         height: auto;
 
+        &.open
+        {
+            min-height: 100%;
+        }
+        
         .btn
         {
             padding: 10px 20px;
@@ -256,7 +261,8 @@ $chat_bar_height: 68px;
                 position: absolute;
                 border-bottom: 8px solid #000000;
                 border-left: 8px solid transparent;
-                border-right: 8px solid transparent;            }
+                border-right: 8px solid transparent;
+            }
 
             &:after
             {
@@ -287,7 +293,6 @@ $chat_bar_height: 68px;
 {
     .shopping-spree-container
     {
-
         
         &.collapsed
         {
