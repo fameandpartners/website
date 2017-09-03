@@ -1,6 +1,7 @@
 import React from 'react';
 import Drawer from './Drawer';
 import Onboarding from './Onboarding';
+import ShareModal from './ShareModal';
 
 export default class ShoppingSpree extends React.Component
 {
@@ -22,10 +23,9 @@ export default class ShoppingSpree extends React.Component
 
     doneOnboarding( email, name, icon, shoppingSpreeId )
     {
-        console.log( "Name:  " + name );
         this.setState(
             {
-                display: 'chat',
+                display: 'share',
                 name: name,
                 email: email,
                 icon: icon,
@@ -44,6 +44,11 @@ export default class ShoppingSpree extends React.Component
                 }
                 {
                     this.state.display === 'onboarding' &&
+                        <ShareModal firebaseNodeId={this.state.firebaseNodeId}/>
+                }
+            
+                {
+                    this.state.display === 'share' &&
                         <Onboarding doneOnboarding={this.doneOnboarding}/>
                 }
                 </div>
