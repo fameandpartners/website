@@ -41,6 +41,12 @@ $chat_bar_height: 55px;
         align-items: center;
         justify-content: center;
     }
+
+    .no-horizontal-padding
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
     
 }
 

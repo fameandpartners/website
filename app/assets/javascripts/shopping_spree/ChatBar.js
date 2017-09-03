@@ -42,7 +42,7 @@ export default class ChatBar extends FirebaseComponent
                 <input ref={(input) => { this.textInput = input; }} className="shoppingSpreeTextInput" type="text"></input>
               </div>
               <div className="col-xs-2 no-left-gutter no-right-gutter">
-                <a onClick={this.sendMessage} className='center-block btn btn-black btn-lrg'>Send</a>
+                <a onClick={this.sendMessage} className='btn btn-black'>Send</a>
               </div>
             </div>
         );
