@@ -35,7 +35,9 @@ class ContentfulController < ApplicationController
   end
 
   def get_all_pids
-    @pids_array = @landing_page_container.to_json.scan(/\"([0-9]+[+\-a-z]+)/).flatten.uniq
+    if @landing_page_container
+      @pids_array = @landing_page_container.to_json.scan(/\"([0-9]+[+\-a-z]+)/).flatten.uniq
+    end
   end
 
   def load_page
