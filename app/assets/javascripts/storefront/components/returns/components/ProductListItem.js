@@ -207,7 +207,7 @@ class ProductListItem extends Component {
             onClick={this.handleUpdate()}
             src={image}
             alt={name}
-            className={classnames('product-image', { 'u-cursor-pointer': canUpdateReturnArray })}
+            className={classnames('product-image', { 'u-cursor--pointer': canUpdateReturnArray })}
           />
           <div className="u-line-height-medium">
             {
@@ -271,7 +271,7 @@ class ProductListItem extends Component {
                       {
                         labelUrl || internationalCustomer ? (
                           <li
-                            className="u-underline u-cursor-pointer"
+                            className="u-textDecoration--underline u-cursor--pointer"
                             onClick={this.handlePrintLabelClick}
                           >
                             {internationalCustomer ? 'View Return Instructions' : 'Print Label' }
@@ -280,7 +280,7 @@ class ProductListItem extends Component {
                         :
                         (
                           <li
-                            className="u-underline u-cursor-pointer"
+                            className="u-textDecoration--underline u-cursor--pointer"
                           >
                             <a href="/contact">Contact Customer Service</a>
                           </li>

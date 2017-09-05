@@ -1,8 +1,10 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { maxBy } from 'lodash';
+import autoBind from 'auto-bind';
 import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
-import { maxBy } from 'lodash';
+import win from '../../../polyfills/windowPolyfill';
 
 const propTypes = {
   orderData: PropTypes.array.isRequired,
@@ -52,6 +54,13 @@ function grabLatestLineItem(lineItems) {
 
 /* eslint-disable react/prefer-stateless-function */
 class Confirmation extends PureComponent {
+  constructor(props) {
+    super(props);
+    autoBind(this);
+  }
+  printPage() {
+    win.print();
+  }
   render() {
     const { logisticsData, orderData } = this.props;
     const latestLineItem = grabLatestLineItem(logisticsData.line_items);
@@ -141,7 +150,7 @@ class Confirmation extends PureComponent {
                         href="https://tools.usps.com/go/POLocatorAction!input.action"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link u-underline"
+                        className="link u-textDecoration--underline"
                       >
                       Locate Post Office.
                       </a>
@@ -161,7 +170,14 @@ class Confirmation extends PureComponent {
               <h3 className="list-title Confirmation__packaging-slip">Packing Slip</h3>
               <ul className="list">
                 <li>
-                  <p className="list-text">Print and cut out your packing slip below</p>
+                  <p
+                    className="list-text"
+                    onClick={this.printPage}
+                  >
+                    <span
+                      className="u-textDecoration--underline u-cursor--pointer"
+                    >Print</span>&nbsp; and cut out your packing slip below.
+                  </p>
                 </li>
                 <li>
                   <p className="list-text">Include the packing slip inside your return package.</p>

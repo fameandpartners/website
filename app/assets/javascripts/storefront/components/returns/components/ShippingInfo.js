@@ -37,7 +37,7 @@ class ShippingInfo extends Component {
                   <div>
                     <li>
                       <a
-                        className="u-underline"
+                        className="u-textDecoration--underline"
                         href="https://www.fameandpartners.com/faqs#collapse-returns-policy"
                         rel="noopener noreferrer"
                         target="_blank"
@@ -47,7 +47,7 @@ class ShippingInfo extends Component {
                     </li>
                     <li>
                       <a
-                        className="u-underline"
+                        className="u-textDecoration--underline"
                         href="https://www.fameandpartners.com/contact"
                         rel="noopener noreferrer"
                         target="_blank"
