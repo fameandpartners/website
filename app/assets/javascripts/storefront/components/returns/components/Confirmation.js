@@ -170,13 +170,14 @@ class Confirmation extends PureComponent {
               <h3 className="list-title Confirmation__packaging-slip">Packing Slip</h3>
               <ul className="list">
                 <li>
-                  <p
-                    className="list-text"
-                    onClick={this.printPage}
-                  >
+                  <p className="list-text">
                     <span
+                      onClick={this.printPage}
                       className="u-textDecoration--underline u-cursor--pointer"
-                    >Print</span>&nbsp; and cut out your packing slip below.
+                    >
+                        Print
+                    </span>&nbsp;
+                    and cut out your packing slip below.
                   </p>
                 </li>
                 <li>
