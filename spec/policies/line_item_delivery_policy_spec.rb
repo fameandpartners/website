@@ -7,7 +7,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
 
   describe '#maximum_delivery_period' do
     it "returns minimal delivery period if line_item has no taxons" do
-      expect(subject.maximum_delivery_period).to eq('7 business days')
+      expect(subject.maximum_delivery_period).to eq('7 - 10 business days')
     end
 
     it "returns maximum delivery period from taxons" do
@@ -24,7 +24,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
 
   describe '#delivery_period' do
     it "returns minimum delivery period by default" do
-      expect(subject.delivery_period).to eq('7 business days')
+      expect(subject.delivery_period).to eq('7 - 10 business days')
     end
 
     it "returns fast making delivery period if line_item is fast making" do
@@ -35,7 +35,6 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
 
     it "returns cny delivery period if cny flag enabled" do
       Features.activate(:cny_delivery_delays)
-
 
       expect(subject.delivery_period).to eq('17 - 20 business days')
     end
