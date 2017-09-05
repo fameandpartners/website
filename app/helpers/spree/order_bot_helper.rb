@@ -22,7 +22,6 @@ module Spree
     end
 
     def create_new_order(order, factory_line_items)
- 
       split_line_items = split_order(factory_line_items)
       split_line_items.each {|items| #not a traditional line_item
         items.each {|item| create_new_product_associate_order_guide(item)}
@@ -43,26 +42,38 @@ module Spree
 
     def create_new_product_associate_order_guide(line_item)
       order_bot_product_id = get_or_create_product(line_item)
-      if order_bot_product_id.nil?
-        #unexpected failure retry
-      end
-      if !order_bot_product_id
-        return true
-      end
+
       #order_bot_product_id = 2882372
-      client.create_new_order_guide(order_bot_product_id, line_item.price)
+      guide_id = line_item.currency.downcase == 'usd' ? '897' : '1917'
+      client.create_new_order_guide(guide_id, order_bot_product_id, line_item.price)
+      generate_tags_for_line_item(line_item, order_bot_product_id)
+    end
+
+    def generate_tags_for_line_item(line_item, order_bot_product_id)
       line_item.personalization.options_hash.each_pair do |key, value| #size and color
         unless value.nil?
           tag = get_or_create_tag(key, value)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       end
-     line_item.personalization.customization_values.each do |customization| #customizations
-          tag = get_or_create_tag(customization.customisation_type, customization.presentation)
-          client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+      
+      line_item.personalization.customization_values.each do |customization| #customizations
+        tag = get_or_create_tag(customization.customisation_type, customization.presentation)
+        client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+      end∂
+      
+      tag = get_or_create_tag('height', "#{line_item.personalization.height}") #height
+      client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+
+      tag = get_or_create_tag('style number', GlobalSku.find_by_product_id(line_item.product.id).style_number) #style number
+      client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+
+
+      if line_item.making_options.any? {|option| option.fast_making?} #fast_making
+        tag = get_or_create_tag('fast_making', "true")
+        client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
       end
-       tag = get_or_create_tag('height', "#{line_item.personalization.height_value} #{line_item.personalization.height_unit}")
-       client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+
     end
 
     def get_group_id_by_product(product)
@@ -75,9 +86,10 @@ module Spree
 
     def get_or_create_tag(group_name, tag_name)
       group = get_or_create_tag_group(group_name)
-      tag = client.get_tag_by_name(tag_name)
+      tags = client.get_tag_by_name(tag_name)
+      tag = tags.select {|t| t['group'] == group['tag_group_name']}
       if tag.empty? || tag.first['group'] != group['tag_group_name'] #create tag or link tag to group   
-                tag = client.create_new_tag({'group_id' => group['tag_group_id'], 'name' =>tag_name})
+        tag = client.create_new_tag({'group_id' => group['tag_group_id'], 'name' =>tag_name})
       end
       tag.first
     end

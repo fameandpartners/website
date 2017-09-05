@@ -21,6 +21,10 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
     in_cents(per_item_tax_free_adjustment(per_item_tax_adjustment['total_tax']))
   end
 
+  def per_item_discounts_in_cents
+    in_cents(per_item_discount_adjustment)
+  end
+
   private
 
   def in_cents(amount)
@@ -65,5 +69,10 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
 
   def num_items_in_order
     [order.line_items.count, 1].max
+  end
+
+  def per_item_discount_adjustment
+    discount = order&.adjustments&.promotion&.inject(0){|sum, item| sum + item.amount.abs}
+    discount/order.line_items.count
   end
 end

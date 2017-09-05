@@ -64,8 +64,8 @@ module OrderBot
      #handle failure TODO
     end
 
-    def create_new_order_guide(product_id, price)
-      make_post_request('admin/order_guides.json/897', [{'product_id' => product_id, 'og_price' => price}])
+    def create_new_order_guide(guide_id, product_id, price)
+      make_post_request("admin/order_guides.json/#{guide_id}", [{'product_id' => product_id, 'og_price' => price}])
     end
 
     def get_product_by_name_and_sku(name, sku)

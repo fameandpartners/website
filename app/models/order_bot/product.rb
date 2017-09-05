@@ -19,6 +19,8 @@ module OrderBot
 			@min_quantity = 1
 			@active = true
 			@is_parent = false
+			@upc = GlobalSku.find_by_product_id(product.id).upc
+			@country_of_product = 'CN'
 
 # 			[{
 # 	"reference_product_id": 1397,
