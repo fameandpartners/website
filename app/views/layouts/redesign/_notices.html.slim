@@ -9,6 +9,14 @@
               = link_to dresses_path
                 | FINAL DAY: BUY TWO, GET ONE FREE WITH CODE JULY342. <span class="alert-sale-cta">SHOP NOW.</span>
 
+- if price_drop_au_active?
+  #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
+    .outer-wrap
+        .inner-wrap
+          .title-wrap
+            .title
+              | WE'RE CELEBRATING AUSTRALIA BY DROPPING OUR PRICES! SHOP NOW.
+
 // REGULAR SALE BANNER IS TEMPORARILY HIDDEN
 / - else
 /   - if display_sale_notice?
