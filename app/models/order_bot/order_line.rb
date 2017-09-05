@@ -1,7 +1,8 @@
 module OrderBot
 	class OrderLine
 
-		def initialize(line_item, order)			splitter = ItemPriceAdjustmentSplit.new(line_item)
+		def initialize(line_item, order)
+			splitter = ItemPriceAdjustmentSplit.new(line_item)
 			@line_number = line_item.id
 			@product_sku = CustomItemSku.new(line_item).call
 			@quantity = line_item.quantity			

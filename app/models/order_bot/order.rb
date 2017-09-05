@@ -11,7 +11,7 @@ module OrderBot
 			@orderbot_account_id = 2
 			@account_group_id = 755
 			@orderbot_customer_id = 1
-			@ship_date = order.projected_delivery_date #NOT CORRECT NEED TO MODIFY
+			@ship_date = order.projected_delivery_date - 4.days
 			@billing_third_party = false
 			@insure_packages = false #Dont do insurance
 			@shipping_code = order.shipping_method.name

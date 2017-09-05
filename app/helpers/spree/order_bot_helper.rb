@@ -60,19 +60,13 @@ module Spree
       line_item.personalization.customization_values.each do |customization| #customizations
         tag = get_or_create_tag(customization.customisation_type, customization.presentation)
         client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
-      end∂
+      end
       
       tag = get_or_create_tag('height', "#{line_item.personalization.height}") #height
       client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
 
       tag = get_or_create_tag('style number', GlobalSku.find_by_product_id(line_item.product.id).style_number) #style number
       client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
-
-
-      if line_item.making_options.any? {|option| option.fast_making?} #fast_making
-        tag = get_or_create_tag('fast_making', "true")
-        client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
-      end
 
     end
 
