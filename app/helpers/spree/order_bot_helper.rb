@@ -102,16 +102,15 @@ module Spree
       nested_items = []
       sum = 0
       line_items = line_items.sort_by {|item| item.price}
-      line_items.each{ 
-        |item| 
+      line_items.each do |item| 
         if (sum + item.price >= 800)
           lol.push(nested_items)
           nested_items = []
           sum = 0
         end
-          nested_items.push(item)
-          sum += item.price
-      }
+        nested_items.push(item)
+        sum += item.price
+      end
       unless nested_items.empty?
         lol.push(nested_items)
       end
