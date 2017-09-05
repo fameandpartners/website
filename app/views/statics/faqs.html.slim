@@ -66,8 +66,8 @@
               = render 'shared/redesign/faqs/track_return'
               = render 'shared/redesign/faqs/excluded_items'
               = render 'shared/redesign/faqs/faulty_items'
+              = render 'shared/redesign/faqs/how_store_credit'
               = render 'shared/redesign/faqs/when_refunded'
-              = render 'shared/redesign/faqs/how_refunded'
               - if current_site_version.is_australia?
                 = render 'shared/redesign/faqs/pay_ship_return'
 
@@ -75,8 +75,6 @@
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
               = render 'shared/redesign/faqs/exchange_item'
-              = render 'shared/redesign/faqs/how_refunded'
-              = render 'shared/redesign/faqs/how_store_credit'
               - if current_site_version.is_australia?
                 = render 'shared/redesign/faqs/pay_ship_return'
 
