@@ -10,6 +10,14 @@ $chat_bar_height: 55px;
 
 .shopping-spree
 {
+    .center-button-text
+    {
+        padding:0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
     .no-right-gutter
     {
         margin-right: 0;
