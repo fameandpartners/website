@@ -112,9 +112,9 @@ GIT
 
 GIT
   remote: https://github.com/stripe/stripe-ruby
-  revision: 465da7a9978c17b22ebcb378b0fe72454a57b884
+  revision: bf8638a06fb5885f3af8759c7a0bdea67400608b
   specs:
-    stripe (3.3.1)
+    stripe (3.0.0)
       faraday (~> 0.9)
 
 PATH

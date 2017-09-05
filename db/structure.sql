@@ -1138,8 +1138,7 @@ CREATE TABLE item_returns (
     bergen_actual_quantity integer,
     bergen_damaged_quantity integer,
     shippo_tracking_number character varying(255),
-    shippo_label_url character varying(255),
-    item_return_label_id integer
+    shippo_label_url character varying(255)
 );
 
 
@@ -2338,28 +2337,6 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
-
-
---
--- Name: relbloat; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW relbloat AS
- SELECT pg_namespace.nspname,
-    pg_class.relname,
-    pg_class.reltuples,
-    pg_class.relpages,
-    rowwidths.avgwidth,
-    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
-    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
-    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
-   FROM ((( SELECT pg_statistic.starelid,
-            sum(pg_statistic.stawidth) AS avgwidth
-           FROM pg_statistic
-          GROUP BY pg_statistic.starelid) rowwidths
-     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
-     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
-  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -4475,7 +4452,7 @@ CREATE TABLE spree_taxons (
     meta_keywords character varying(255),
     title character varying(255),
     published_at timestamp without time zone,
-    delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying
+    delivery_period character varying(255) DEFAULT '7 business days'::character varying
 );
 
 
@@ -7543,13 +7520,6 @@ CREATE INDEX index_item_return_events_on_item_return_uuid ON item_return_events 
 
 
 --
--- Name: index_item_returns_on_item_return_label_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_item_returns_on_item_return_label_id ON item_returns USING btree (item_return_label_id);
-
-
---
 -- Name: index_item_returns_on_line_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9377,10 +9347,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
-INSERT INTO schema_migrations (version) VALUES ('20170816220818');
-
 INSERT INTO schema_migrations (version) VALUES ('20170817173805');
 
 INSERT INTO schema_migrations (version) VALUES ('20170821173721');
-
-INSERT INTO schema_migrations (version) VALUES ('20170828194844');

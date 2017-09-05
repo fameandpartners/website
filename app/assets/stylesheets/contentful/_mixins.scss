@@ -3,10 +3,6 @@
     @media (min-width: $tablet) { @content; }
   }
 
-  @else if $class == tablet-bootstrap-max {
-    @media (max-width: $desktop-bootstrap-min - 1px) { @content; }
-  }
-
   @else if $class == desktop {
     @media (min-width: $desktop) { @content; }
   }

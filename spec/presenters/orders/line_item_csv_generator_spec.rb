@@ -42,9 +42,7 @@ module Orders
     subject { described_class.new(orders) }
 
     describe '#to_csv' do
-      xit 'returns csv' do
-        allow(Spree::LineItem).to receive(:find) {orders.first}
-
+      it 'returns csv' do
         result_csv = subject.to_csv
 
         result = CSV.parse(result_csv)

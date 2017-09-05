@@ -10,11 +10,6 @@ module Api
 
       # GET
       def index
-
-        if spree_current_user.nil?
-          return
-        end
-
         @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
           Orders::OrderPresenter.new(order, order.line_items)
         end
@@ -25,7 +20,7 @@ module Api
       # GET (guest)
       def guest
         if has_incorrect_guest_params?
-          error_response(:INCORRECT_GUEST_PARAMS)
+          error_response("Incorrect parameters. Expecting { email: STRING, order_number: STRING }.")
           return
         end
 
@@ -34,7 +29,7 @@ module Api
         if fetched_order.present?
           respond_with Orders::OrderPresenter.new(fetched_order)
         else
-          error_response(:GUEST_ORDER_NOT_FOUND)
+          error_response("No order found.")
           return
         end
       end
@@ -42,14 +37,21 @@ module Api
 
       # POST
       def create
+        @error_message_code = {
+          "RETRY" => "Please try again.",
+          "CONTACT" => "Something's wrong, please contact customer service.",
+          "RETURN_EXISTS" => "These items already have a return.",
+          "NO_ITEMS_SELECTED" => "Please select an item you would like to return."
+        }
+
         @user = get_user()
 
         if @user.nil?
-          error_response(:RETRY, :USER_NOT_FOUND)
+          error_response(@error_message_code["RETRY"])
         end
 
         if has_incorrect_params?
-          error_response(:NO_ITEMS_SELECTED, :INCORRECT_PARAMS)
+          error_response(@error_message_code["NO_ITEMS_SELECTED"])
           return
         end
 
@@ -59,12 +61,12 @@ module Api
         }
 
         if has_invalid_order_id?(request_object[:order_id])
-          error_response(:RETRY, :INVALID_ORDER_ID)
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_order_id?(request_object[:order_id])
-          error_response(:RETRY, :INCORRECT_ORDER_ID)
+          error_response(@error_message_code["RETRY"])
           return
         end
 
@@ -73,25 +75,23 @@ module Api
                           end
 
         if has_nonexistent_line_items?(return_item_ids)
-          error_response(:RETRY, :NON_EXISTENT_LINE_ITEMS)
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_incorrect_line_items?(return_item_ids, request_object[:order_id])
-          error_response(:RETRY, :INCORRECT_LINE_ITEMS)
+          error_response(@error_message_code["RETRY"])
           return
         end
 
         if has_existing_returns?(return_item_ids)
-          error_response(:RETURN_EXISTS)
+          error_response(@error_message_code["RETURN_EXISTS"])
           return
         end
 
-        if (has_us_shipping_address?(request_object[:order_id]))
-          unless(return_label = create_label(request_object[:order_id]))
-            error_response(:RETRY, :LABEL_FAILED)
-            return
-          end
+        unless(return_label = create_label(request_object[:order_id]))
+          error_response(@error_message_code["RETRY"])
+          return
         end
 
         process_returns(request_object, return_label)

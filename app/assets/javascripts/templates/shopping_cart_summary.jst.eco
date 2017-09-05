@@ -8,13 +8,7 @@
         <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
         <% end %>
 
-        <% if product.price_drop_au_product: %>
-          <div class="ribbon-wrapper PriceDrop">
-            <div class="ribbon-txt">
-              New Lower Price
-            </div>
-          </div>
-        <% else if product.making_options.length: %>
+        <% if product.making_options.length: %>
           <div class="ribbon-wrapper express-making">
             <div class="ribbon-txt">
               <%= product.making_options[0].name %>

@@ -9,11 +9,7 @@
     current_color = split_pid[1]
 
     present_product = @collection.products.select do |item|
-      if item.color.present?
-        item.id == current_id && item.color.name == current_color
-      else
-        nil
-      end
+      item.id == current_id && item.color.name == current_color
     end
 
     if present_product.present?
@@ -27,8 +23,8 @@
   <h4 class="Editorial__overlayTitle">Shop the Look</h4>
   <ul>
   <% products.each do |item|
-    name = item.name
-    path = collection_product_path(item, color: item.color.try(:name))
+       name = item.name
+       path = collection_product_path(item, color: item.color.try(:name))
   %>
     <li>
       <a href="<%= path %>">
@@ -38,10 +34,4 @@
   <% end %>
   </ul>
 </div>
-<% end %>
-
-<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
-  <div class="Editorial__overlayBottomCaption">
-    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: (@lg_contents[:image_caption_color] == 'black') ? "Editorial__overlayBottomCaptionTitle Editorial__overlayBottomCaptionTitle--dark" : "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
-  </div>
 <% end %>

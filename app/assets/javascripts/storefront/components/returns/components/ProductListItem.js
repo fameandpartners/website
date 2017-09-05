@@ -269,7 +269,7 @@ class ProductListItem extends Component {
                   listLinks={(
                     <div>
                       {
-                        labelUrl || internationalCustomer ? (
+                        labelUrl ? (
                           <li
                             className="u-underline u-cursor-pointer"
                             onClick={this.handlePrintLabelClick}

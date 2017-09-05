@@ -20,7 +20,7 @@ describe 'product details page', type: :feature, js: true do
     meta = "meta[itemprop=\"category\"][content=\"#{text}\"]"
     expect(page).to have_css(meta, visible: false)
 
-    expect(page).to have_content('Estimated delivery, 7 - 10 business days')
+    expect(page).to have_content('Estimated delivery, 7 business days')
   end
 
   it "doesn't display type and displays default meta" do

@@ -30,8 +30,6 @@ module Orders
         csv << headers
         orders.map do |order|
           line.set_line order.attributes
-
-          lip = Orders::LineItemPresenter.new(Spree::LineItem.find(order.attributes["line_item_id"].to_i))
           csv << [
             line.order_state,
             line.order_number,
@@ -39,8 +37,7 @@ module Orders
             line.total_items,
             line.completed_at_date,
             line.fast_making,
-            lip.projected_delivery_date,
-            # line.delivery_date,
+            line.delivery_date,
             line.tracking_number,
             line.shipment_date,
             line.fabrication_state,

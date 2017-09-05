@@ -1,15 +1,8 @@
 .col-md-3.col-xs-6.col-xxs-12.category--item data-id=(product.id) data-color-id=(product.color.try(:id))
   = link_to collection_product_path(product, color: product.color.try(:name), product_type: 'outerwear'), :class => 'media-wrap' do
     = image_tag product.images.first, :alt => product.name, :class => 'img-product', 'data-hover' => product.images.last
-
-    // Price Drop AU ribbon
-    - if price_drop_au_item_check(product.sku)
-      = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
-
-    // Express Making ribbon if this product is not a "Price Drop (AU)" item
-    - if product.fast_making? && !price_drop_au_item_check(product.sku)
+    - if product.fast_making?
       = render 'shared/redesign/ribbon_fast_making'
-
 
   .details.text-center
     span.name = product.name
