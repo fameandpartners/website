@@ -138,12 +138,7 @@ module Contentful
       image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
       image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
       image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
-
-      if (image_caption_link_target)
-        image_caption_link_target = '_blank'
-      else
-        image_caption_link_target = '_self'
-      end
+      image_caption_link_target = image_caption_link_target ? '_blank' : '_self'
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
         {
@@ -175,6 +170,38 @@ module Contentful
         }
       else
         # 'ITEM--md-email'
+      end
+    end
+
+    def self.jsonify_small_lp_container(small_container)
+      id = small_container.id
+
+      fetched_sm_container = @contentful_client.entries('sys.id' => id)[0]
+
+      if (fetched_sm_container.content_type.id == 'ITEM--sm-cta-tile')
+        tile_cta_image_url = (fetched_sm_container.respond_to? :tile_cta_image) ? fetched_sm_container.tile_cta_image.url : nil
+        tile_cta_link = (fetched_sm_container.respond_to? :tile_cta_link_url) ? fetched_sm_container.tile_cta_link_url : :best_sellers
+        tile_cta_link_target = (fetched_sm_container.respond_to? :tile_cta_link_target) ? fetched_sm_container.tile_cta_link_target : nil
+        tile_cta_link_target = tile_cta_link_target ? "_blank" : "_self"
+        tile_cta_heading = (fetched_sm_container.respond_to? :tile_heading_text_desktop) ? fetched_sm_container.tile_heading_text_desktop : nil
+        tile_cta_heading_mobile = (fetched_sm_container.respond_to? :tile_heading_text_mobile) ? fetched_sm_container.tile_heading_text_mobile : heading
+        tile_cta_text = (fetched_sm_container.respond_to? :tile_content_desktop) ? fetched_sm_container.tile_content_desktop.gsub("\n", "<br />") : nil
+        tile_cta_text_mobile = (fetched_sm_container.respond_to? :tile_content_mobile) ? fetched_sm_container.tile_content_mobile.gsub("\n", "<br />") : text
+        tile_cta_link_text = (fetched_sm_container.respond_to? :tile_cta_text_desktop) ? fetched_sm_container.tile_cta_text_desktop : 'Find out more'
+        tile_cta_link_text_mobile = (fetched_sm_container.respond_to? :tile_cta_text_mobile) ? fetched_sm_container.tile_cta_text_mobile : tile_cta_text
+
+        {
+          id: 'ITEM--sm-cta-tile',
+          tile_cta_image_url: tile_cta_image_url,
+          tile_cta_link: tile_cta_link,
+          tile_cta_link_target: tile_cta_link_target,
+          tile_cta_heading: tile_cta_heading,
+          tile_cta_heading_mobile: tile_cta_heading_mobile,
+          tile_cta_text: tile_cta_text,
+          tile_cta_text_mobile: tile_cta_text_mobile,
+          tile_cta_link_text: tile_cta_link_text,
+          tile_cta_link_text_mobile: tile_cta_link_text_mobile
+        }
       end
     end
 
@@ -228,13 +255,17 @@ module Contentful
       row_tiles = parent_container.rows_container.map do |item|
 
         lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
+        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
         sm_items = (item.respond_to? :pids) ? item.pids : nil
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
-        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         floating_email_scroll_percentage = (item.respond_to? :floating_email_scroll_percentage) ? item.floating_email_scroll_percentage : nil
+
+        # CTA Tiles
+        tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
+        tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
 
         {
           id: item.content_type.id,
@@ -245,7 +276,9 @@ module Contentful
           button_label: button_label,
           relative_url: relative_url,
           lg_items: lg_items,
-          floating_email_scroll_percentage: floating_email_scroll_percentage
+          floating_email_scroll_percentage: floating_email_scroll_percentage,
+          tile_cta: tile_cta,
+          tile_cta_position: tile_cta_position
         }
       end
 
