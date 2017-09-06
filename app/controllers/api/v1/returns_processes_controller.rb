@@ -10,6 +10,11 @@ module Api
 
       # GET
       def index
+
+        if spree_current_user.nil?
+          return
+        end
+
         @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
           Orders::OrderPresenter.new(order, order.line_items)
         end
