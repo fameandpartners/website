@@ -1,5 +1,7 @@
 import React from 'react';
 import Clipboard from 'clipboard';
+import ReactTooltip from 'react-tooltip';
+import {findDOMNode} from 'react-dom';
 
 export default class ShareModal extends React.Component
 {
@@ -21,6 +23,9 @@ export default class ShareModal extends React.Component
                 clipboard: new Clipboard(this.copyTrigger,
                                          {
                                              text: () => this.state.url,
+                                             success: () => {
+                                                 console.log( 'hello' );
+                                                  }, 
                                              error: () =>
                                                  {
                                                  }
@@ -52,8 +57,15 @@ export default class ShareModal extends React.Component
                     <input readOnly defaultValue={this.state.url} className="form-control input-lg" type="text"></input>
                   </div>
                   <div className="col-xs-5 col-md-2 col-md-push-3 no-left-gutter">
-                    <a ref={i => this.copyTrigger = i} 
-                      className='btn btn-black btn-block no-horizontal-padding'>Copy Link</a>
+                    <a data-for='copy-button-tool-tip'
+                       id="copy-button"
+                       data-delay-hide='800'
+                       data-event="click"
+                       data-tip="copied!"
+                       ref={i => this.copyTrigger = i}
+                      className='btn btn-black btn-block no-horizontal-padding'
+                      >Copy Link</a>
+                    <ReactTooltip  afterShow={ () => ReactTooltip.hide(findDOMNode(this.copyTrigger)) } place="bottom" id="copy-button-tool-tip" effect="solid"/>
                   </div>
                 </div>
                 <div id="start-button" className="row">
