@@ -49,7 +49,7 @@ export default class ShareModal extends React.Component
                 </div>
                 <div className="row equal">
                   <div className="col-xs-7 col-md-4 col-md-push-3 no-right-gutter">
-                    <input defaultValue={this.state.url} className="form-control input-lg" type="text"></input>
+                    <input readOnly defaultValue={this.state.url} className="form-control input-lg" type="text"></input>
                   </div>
                   <div className="col-xs-5 col-md-2 col-md-push-3 no-left-gutter">
                     <a ref={i => this.copyTrigger = i} 
