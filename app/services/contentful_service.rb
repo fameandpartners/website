@@ -138,12 +138,7 @@ module Contentful
       image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
       image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
       image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
-
-      if (image_caption_link_target)
-        image_caption_link_target = '_blank'
-      else
-        image_caption_link_target = '_self'
-      end
+      image_caption_link_target = image_caption_link_target ? '_blank' : '_self'
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
         {
@@ -187,18 +182,13 @@ module Contentful
         tile_cta_image_url = (fetched_sm_container.respond_to? :tile_cta_image) ? fetched_sm_container.tile_cta_image.url : nil
         tile_cta_link = (fetched_sm_container.respond_to? :tile_cta_link_url) ? fetched_sm_container.tile_cta_link_url : :best_sellers
         tile_cta_link_target = (fetched_sm_container.respond_to? :tile_cta_link_target) ? fetched_sm_container.tile_cta_link_target : nil
+        tile_cta_link_target = tile_cta_link_target ? "_blank" : "_self"
         tile_cta_heading = (fetched_sm_container.respond_to? :tile_heading_text_desktop) ? fetched_sm_container.tile_heading_text_desktop : nil
         tile_cta_heading_mobile = (fetched_sm_container.respond_to? :tile_heading_text_mobile) ? fetched_sm_container.tile_heading_text_mobile : heading
         tile_cta_text = (fetched_sm_container.respond_to? :tile_content_desktop) ? fetched_sm_container.tile_content_desktop.gsub("\n", "<br />") : nil
         tile_cta_text_mobile = (fetched_sm_container.respond_to? :tile_content_mobile) ? fetched_sm_container.tile_content_mobile.gsub("\n", "<br />") : text
         tile_cta_link_text = (fetched_sm_container.respond_to? :tile_cta_text_desktop) ? fetched_sm_container.tile_cta_text_desktop : 'Find out more'
         tile_cta_link_text_mobile = (fetched_sm_container.respond_to? :tile_cta_text_mobile) ? fetched_sm_container.tile_cta_text_mobile : tile_cta_text
-
-        if (tile_cta_link_target)
-          tile_cta_link_target = '_blank'
-        else
-          tile_cta_link_target = '_self'
-        end
 
         {
           id: 'ITEM--sm-cta-tile',
