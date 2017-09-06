@@ -1,12 +1,9 @@
 Spree::UserSessionsController.class_eval do
   layout 'redesign/application'
 
-  respond_to :json
-  skip_before_filter :verify_authenticity_token
   before_filter :store_path_to_return, only: [:new, :destroy]
 
   def create
-    binding.pry
     authenticate_spree_user!
     if spree_user_signed_in?
       respond_to do |format|
@@ -26,12 +23,10 @@ Spree::UserSessionsController.class_eval do
     else
       respond_to do |format|
         format.html {
-          binding.pry
           flash.now[:error] = t('devise.failure.invalid')
           render :new
         }
-        format.json {
-          binding.pry
+        format.js {
           render json: { error: true }
         }
       end

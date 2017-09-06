@@ -33,7 +33,6 @@ class Spree::UserSessionsController < Devise::SessionsController
   end
 
   def destroy
-    binding.pry
     env['warden'].logout(:spree_user)
     super
   end

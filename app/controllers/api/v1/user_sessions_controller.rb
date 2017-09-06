@@ -10,10 +10,9 @@ module Api
       ssl_required :new, :create, :destroy
 
       respond_to :json
-      # skip_before_filter :verify_authenticity_token
+      skip_before_filter :verify_authenticity_token
 
       def create
-        binding.pry
         ensure_params_exist
         # authenticate_spree_user!
 
