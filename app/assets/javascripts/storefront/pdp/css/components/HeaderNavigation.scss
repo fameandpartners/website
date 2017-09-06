@@ -1,0 +1,6 @@
+.HeaderNavigation {
+  height: 0;
+  position: relative;
+  background: $c-white;
+  transition: $fast-transition-time height ease-in-out;
+}

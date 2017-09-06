@@ -1,0 +1,26 @@
+.masonry {
+  -moz-column-gap: 30px;
+  -webkit-column-gap: 30px;
+  column-gap: 30px;
+  -moz-column-fill: initial;
+  -webkit-column-fill: initial;
+  column-fill: initial;
+  column-count: 2;
+
+  .brick {
+    margin-bottom: 30px;
+  }
+}
+
+.hr {
+  display: flex;
+}
+
+.hr:before,
+.hr:after {
+  color: $c-black;
+  content: '';
+  flex: 1;
+  margin: auto 1rem;
+  border-bottom: solid 1px;
+}

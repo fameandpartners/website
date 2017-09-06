@@ -1,0 +1,30 @@
+.CartDrawer__wrapper {
+  top: 0;
+  right: 0;
+  position: fixed;
+  height: 100%;
+  width: 500px;
+  transform: translateX(500px);
+}
+
+.CartDrawer__header {
+  height: 60px;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $c-light-gray;
+  box-shadow: 0 3px 2px -2px $c-super-light-gray;
+}
+
+.Cart__line-description {
+  display: block;
+  line-height: 1.9em;
+}
+
+.Cart__layout-container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.Cart__subtotal-price {
+  margin-left: 30px;
+}

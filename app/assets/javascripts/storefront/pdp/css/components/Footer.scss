@@ -1,0 +1,52 @@
+.Footer {
+  background: $c-background-gray;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.Footer p {
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.Footer .Footer__category-list li {
+  font-size: 14px;
+  text-align: left;
+}
+
+.Footer .Footer__category-title {
+  text-transform: uppercase;
+}
+
+.Footer .Footer__site-version-container p {
+  display: none;
+
+  @include md {
+    text-align: left;
+    display: block;
+  }
+}
+
+.Footer .Footer__copy {
+  font-size: 18px;
+
+  @include sm {
+    font-size: 22px;
+  }
+
+}
+
+.Footer .Footer__copy--error {
+  color: $c-red;
+  text-indent: 3px;
+  font-size: 12px;
+}
+
+.Footer .Footer__form {
+  max-width: 350px;
+
+  @include md {
+    max-width: 480px;
+  }
+  margin: 0 auto;
+}

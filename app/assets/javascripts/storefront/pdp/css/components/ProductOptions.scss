@@ -1,0 +1,59 @@
+.ProductOptions__container {
+  width: 70%;
+  max-width: 450px;
+}
+
+.ProductOptions .ProductOptions__primary-image-container {
+  padding-bottom: 0;
+}
+
+.ProductOptionsRow {
+  color: $c-text-gray;
+  padding: 1em 0;
+  border-bottom: 1px solid $c-light-gray;
+  transition: 500ms all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: $c-black;
+    border-color: $c-black;
+  }
+}
+
+// TODO: @Elgrecode, this is a little overwritey, consider revising
+.ProductOptionsRow--heading {
+  color: $c-black;
+  cursor: default;
+
+  &:hover {
+    border-bottom: 1px solid $c-light-gray;
+    color: inherit;
+  }
+}
+
+.ProductOptionsRow__right {
+  opacity: 0;
+  transition: 300ms opacity ease-in-out;
+}
+
+.ProductOptionsRow:hover .ProductOptionsRow__right,
+.ProductOptionsRow__right--fade-in {
+  opacity: 1;
+}
+
+.ProductOptionsRow__right--selected {
+  font-weight: 500;
+  color: $c-black;
+}
+
+.ProductOptions__additional-info {
+  color: $c-text-gray;
+}
+
+.ProductOptions__color-swatch {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 10px;
+}

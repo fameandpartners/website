@@ -1,0 +1,9 @@
+.FadeIn {
+  opacity: 0;
+  transition: $fast-transition-time opacity ease-in-out;
+  transition-delay: $fastest-transition-time;
+}
+
+.FadeIn--fade-in {
+  opacity: 1;
+}

@@ -1,0 +1,124 @@
+// TODO: Needs improvement
+.Select--wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px $c-neutral-4;
+  height: 38px;
+  line-height: 37px;
+  padding: 0 35px 0 15px;
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.17s ease-in-out, box-shadow 0.4s, font 0.1s;
+  -webkit-transition: all 0.17s ease-in-out, box-shadow 0.4s, font 0.1s;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px $c-neutral-12;
+  }
+
+  &__error {
+    box-shadow: inset 0 0 0 1px $c-form-error;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+    right: 4px;
+    top: 21px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 13px;
+    transform: translateY(-50%);
+    transition: transform 0.17s;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .Select-label {
+    position: absolute;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: auto;
+    visibility: collapse;
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
+  .Select__list-item {
+    padding: 0 25px;
+    color: $c-neutral-10;
+    cursor: default;
+    line-height: 42px;
+    outline: none;
+    text-align: left;
+    transition: all 0.2s;
+    margin: 0 1px;
+  }
+
+  .Select__list-item:first-child {
+    margin-top: 1px;
+  }
+
+  .Select__list-item:hover {
+    background: $c-neutral-2;
+  }
+
+  .Select__list-item:focus,
+  .Select__list-item.focused {
+    background: $c-neutral-4;
+    color: $c-neutral-12;
+  }
+}
+
+.Select {
+  top: 37px;
+  width: 100%;
+  height: auto;
+  left: 0;
+  box-shadow: inset 0 0 0 1px $c-light-gray;
+  background-color: $c-white;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  overflow: auto;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  transition: all 0.2s ease-in-out, opacity 0.1s ease-in;
+  transform: scale(0);
+  transform-origin: 50% 0;
+
+  &__carat {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+}
+
+.Select--wrapper.is-open {
+  border-color: $c-light-gray;
+
+  .Select {
+    box-shadow: inset 0 0 0 1px $c-neutral-12;
+    z-index: 100;
+    pointer-events: auto;
+    opacity: 1;
+    max-height: 325px;
+    overflow-y: auto;
+    transform: scale(1) translateZ(0);
+  }
+
+  .Select__list-item {
+    cursor: pointer;
+  }
+}

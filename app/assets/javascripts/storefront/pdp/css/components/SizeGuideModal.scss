@@ -1,0 +1,36 @@
+.SizeGuideTabs__heading,
+.SizeGuideTabs__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.SizeGuideTabs__heading {
+  padding: 10px;
+  border-bottom: 2px solid $c-neutral-4;
+}
+
+.SizeGuideTabs__content {
+  top: 100px;
+  padding: 0 20px;
+
+  @include sm {
+    padding: 0 60px;
+  }
+}
+
+.SizeGuideTabs__heading .Tabs__list {
+  width: 400px;
+}
+
+.SizeGuideTabs__heading .Tabs__link {
+  font-size: 1.4em;
+  margin: 15px 20px 5px;
+  padding-bottom: 15px;
+}
+
+.SizeGuideTabs__heading .Tabs__link--active {
+  border-bottom: 3px solid $c-black;
+}
+

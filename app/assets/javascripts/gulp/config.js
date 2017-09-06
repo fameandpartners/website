@@ -16,6 +16,7 @@ module.exports = {
         'CollectionFilterSortApp': './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx',
         'GuestReturnsApp': './app/assets/javascripts/storefront/startup/GuestReturnsApp.jsx',
         'ReturnsApp': './app/assets/javascripts/storefront/startup/ReturnsApp.jsx',
+        'PDP': './app/assets/javascripts/storefront/startup/PDP.jsx',
       },
     },
     src: baseDir + '/*.jsx',

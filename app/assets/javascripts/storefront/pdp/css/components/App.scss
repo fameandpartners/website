@@ -1,0 +1,41 @@
+.App {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  background: $c-white;
+  overflow-y: scroll;
+}
+
+.App--scroll-lock {
+  overflow-y: hidden;
+}
+
+.App__link {
+  color: $c-black;
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.App .layout-container {
+  padding: 0 4%;
+}
+
+.App__content {
+  background-color: rgb(34, 34, 34);
+  padding: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.App__main--open .App__blanket {
+  z-index: 1;
+  visibility: visible;
+  opacity: 0.3;
+}
+
+.App__blanket {
+  position: absolute;
+  visibility: hidden;
+  background: $c-black;
+  z-index: 2;
+}

@@ -1,0 +1,14 @@
+.ProductDisplayOptionsTouch__option {
+  width: 150px;
+  height: 125px;
+  margin: 0 15px;
+
+  @include xs {
+    width: 180px;
+    height: 125px;
+  }
+}
+
+.ProductDisplayOptionsTouch__option--dark {
+  color: $c-white;
+}

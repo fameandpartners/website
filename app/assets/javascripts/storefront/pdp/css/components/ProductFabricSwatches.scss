@@ -1,0 +1,19 @@
+.ProductFabricSwatches__swatch {
+  opacity: 0;
+  transition: $standard-transition-time opacity;
+  font-weight: 500;
+
+  &:before {
+    content: '';
+    float: left;
+    padding-top: 100%;
+  }
+}
+
+.ProductFabricSwatches__swatch--dark {
+  color: $c-white;
+}
+
+.ProductFabricSwatches__swatch-wrapper:hover .ProductFabricSwatches__swatch {
+  opacity: 1;
+}

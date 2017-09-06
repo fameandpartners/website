@@ -1,0 +1,71 @@
+/* stylelint-disable */
+// TODO: Need to Clean up
+
+/* RadioToggle Component
+-------------------------------------------------------*/
+
+.RadioToggle--wrapper {
+  line-height: 38px;
+  user-select: none;
+}
+
+.RadioToggle--wrapper .RadioToggle {
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  background-color: $c-background-gray;
+  height: 26px;
+  width: 44px;
+  box-shadow: inset 0 0 0 1px $c-neutral-4, inset 0 0 1px $c-neutral-4;
+  // box-shadow: inset 0 1px 15px rgba(0, 0, 0, 0.1), inset 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: 0;
+  margin: 0 4px;
+  vertical-align: middle;
+
+  // Custom animation, similar to ease-in-out
+  transition: all 250ms cubic-bezier(0.725, 0.090, 0.205, 0.945); /* custom */
+  transition-timing-function: cubic-bezier(0.725, 0.090, 0.205, 0.945); /* custom */
+}
+
+.RadioToggle:focus {
+  outline: none;
+}
+
+.RadioToggle--label {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  color: $c-neutral-8;
+  font-weight: 500;
+  transition: color 300ms;
+
+  &__selected,
+  &:hover {
+    color: $c-neutral-12;
+  }
+}
+
+.RadioToggle:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 24px;
+  height: 24px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  background: $c-text-gray;
+  transform: translateX(1px);
+  // Older skeumorphic styles, Keep only because things change, wipe after UX review
+  // box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.5), 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+  // background-image: -webkit-linear-gradient(top, rgb(245, 245, 245) 0%, rgb(232, 232, 232) 100%);
+  // background-image: -moz-linear-gradient(top, rgb(245, 245, 245) 0%, rgb(232, 232, 232) 100%);
+  // background-image: -o-linear-gradient(top, rgb(245, 245, 245) 0%, rgb(232, 232, 232) 100%);
+  // background-image: linear-gradient(to bottom, rgb(245, 245, 245) 0%, rgb(232, 232, 232) 100%);
+}
+
+.RadioToggle.right:after {
+  transform: translateX(17px);
+}

@@ -1,0 +1,57 @@
+.ProductCustomizationStyle__cad-layer {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: 100%;
+}
+
+.ProductCustomizationStyle__cad-layer--selected {
+  opacity: 1;
+}
+
+.ProductCustomizationStyle__layer-wrapper {
+  height: 200px;
+  width: 300px;
+
+  @include xs {
+    height: 240px;
+    width: 440px;
+  }
+
+  @include sm {
+    height: 290px;
+    width: 480px;
+  }
+
+  @include md {
+    height: 450px;
+    width: 530px;
+  }
+}
+
+.ProductCustomizationStyle__cad-layer--legacy {
+  float: left;
+  position: relative;
+  background-size: 120%;
+  height: 360px;
+
+  @include xs {
+    background-size: 100%;
+    height: 450px;
+  }
+
+  @include sm {
+    background-size: 80%;
+    height: 380px;
+  }
+
+  @include md {
+    background-size: 90%;
+    height: 470px;
+  }
+}

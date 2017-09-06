@@ -1,0 +1,14 @@
+.CustomizationButtonLedge {
+  position: fixed;
+  width: 100%;
+  background: $c-white;
+  text-align: center;
+  bottom: 0;
+  box-shadow: $box-shadow-top;
+  z-index: 2;
+}
+
+.CustomizationButtonLedge .ButtonLedge .ButtonLedge__button-wrapper {
+  margin: 0 auto;
+  max-width: 680px;
+}

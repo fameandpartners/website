@@ -1,0 +1,36 @@
+.SideMenu {
+  z-index: 100;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  box-shadow: -2px 0px 4px $c-black;
+  transition: $standard-transition-time all ease-in-out;
+}
+
+.SideMenu__header {
+  height: 60px;
+}
+
+.SideMenu--mr-caret-bump {
+  margin-right: 10px;
+}
+
+.SideMenu__menu-btn {
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+}
+
+.SideMenu__body li {
+  line-height: 3.2em;
+}
+
+.SideMenu__icon-wrapper {
+  vertical-align: top;
+  margin-left: -22px;
+}
+
+.SideMenuActionButtons__caret--right {
+  margin-right: -20px;
+}

@@ -1,0 +1,25 @@
+.ProductCustomizationNavigation__nav {
+  display: inline-table;
+}
+
+.ProductCustomizationNavigation__nav-list {
+  margin-top: -50px;
+  position: absolute;
+}
+
+.ProductCustomizationNavigation__nav-item {
+  margin-bottom: 1rem;
+  padding-bottom: 2px;
+  color: $c-text-gray;
+  transition: $fast-transition-time all ease-in-out;
+}
+
+.ProductCustomizationNavigation__nav-item:hover {
+  transform: translateX(-5px);
+}
+
+.ProductCustomizationNavigation__nav-item--active {
+  font-weight: 500;
+  border-bottom: 1px solid $c-black;
+  color: $c-black;
+}

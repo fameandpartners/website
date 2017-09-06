@@ -1,0 +1,24 @@
+.SideMenuActionButtons--mr-caret-bump {
+  margin-right: 10px;
+}
+
+.SideMenuActionButtons__menu-btn {
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+}
+
+.SideMenuActionButtons__body li {
+  line-height: 3.2em;
+}
+
+.SideMenuActionButtons__icon-wrapper {
+  vertical-align: top;
+  margin-left: -22px;
+}
+
+.SideMenuActionButtons__caret--right {
+  margin-right: -20px;
+  transform: rotateZ(-90deg);
+  transform-origin: center;
+}

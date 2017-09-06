@@ -1,0 +1,19 @@
+.Slider__frame {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  line-height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Slider__slides {
+  height: 100%;
+}
+
+.Slider .Slide {
+  width: 85%;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  margin-right: 5px;
+}

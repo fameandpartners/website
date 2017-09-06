@@ -1,0 +1,75 @@
+.SizeGuideTable__actions {
+  width: 100%;
+  text-align: right;
+  margin: 10px 0;
+}
+
+.SizeGuideTable__unit-switch {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.SizeGuideTable__unit-switch--active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.SizeGuideTable__table {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 3em 0;
+  padding: 0;
+  flex-direction: column;
+
+  @include sm {
+    flex-direction: row;
+  }
+}
+
+.SizeGuideTable__cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0.8em 1.2em;
+  overflow: hidden;
+  list-style: none;
+  display: flex;
+
+  @include sm {
+    display: block;
+  }
+}
+
+.SizeGuideTable__header {
+  text-align: center;
+
+  @include sm {
+    text-align: left;
+  }
+}
+
+.SizeGuideTable__header .SizeGuideTable__cell {
+  font-weight: bold;
+  text-align: center;
+
+  @include sm {
+    text-align: right;
+  }
+}
+
+.SizeGuideTable__cell--active {
+  background: $c-background-gray;
+}
+
+.SizeGuideTable__cell--current {
+  background: $c-neutral-4;
+}
+
+.SizeGuideTable__column {
+  flex-flow: row;
+  display: flex;
+
+  @include sm {
+    flex-flow: column;
+  }
+}

@@ -1,0 +1,9 @@
+.Caret--right {
+  transform: rotateZ(-90deg);
+  transform-origin: center;
+}
+
+.Caret--left {
+  transform: rotateZ(90deg);
+  transform-origin: center;
+}

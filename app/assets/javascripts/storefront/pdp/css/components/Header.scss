@@ -1,0 +1,45 @@
+.Header,
+.header__wrapper {
+  text-align: center;
+  height: 60px;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $c-light-gray;
+  box-shadow: 0 3px 2px -2px $c-super-light-gray;
+}
+
+.Header__content-padding {
+  margin-bottom: 10px;
+}
+
+.Header__link {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.Header__action {
+  position: relative;
+  cursor: pointer;
+  margin-left: 2rem;
+  z-index: 1;
+  transition: $fast-transition-time margin;
+}
+
+.Header__action--active-search-left {
+  margin-right: -1.9em;
+}
+
+.Header__action--active-search-right {
+  margin-left: -1.2em;
+}
+
+.Header li {
+  display: inline-block;
+}
+
+.Header__cart-count {
+  font-weight: 500;
+  position: absolute;
+  left: -10px;
+  bottom: 2px;
+}
