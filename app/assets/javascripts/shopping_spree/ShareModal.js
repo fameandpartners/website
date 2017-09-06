@@ -1,12 +1,39 @@
 import React from 'react';
+import Clipboard from 'clipboard';
 
 export default class ShareModal extends React.Component
 {
     constructor( props )
     {
         super( props );
+        this.state =
+            {
+                url: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + "/shopping_sprees/" + this.props.firebaseNodeId + "/join"
+
+            };
+        this.click = this.click.bind( this );
     }
 
+    componentDidMount()
+    {
+        this.setState(
+            {
+                clipboard: new Clipboard(this.copyTrigger,
+                                         {
+                                             text: () => this.state.url,
+                                             error: () =>
+                                                 {
+                                                 }
+                                         }
+                                        )
+            }
+        );
+    }
+
+    click()
+    {
+        console.log( this.copyTrigger );
+    }
     render()
     {
         return(
@@ -22,10 +49,11 @@ export default class ShareModal extends React.Component
                 </div>
                 <div className="row equal">
                   <div className="col-xs-7 col-md-4 col-md-push-3 no-right-gutter">
-                    <input className="form-control input-lg" type="text"></input>
+                    <input defaultValue={this.state.url} className="form-control input-lg" type="text"></input>
                   </div>
                   <div className="col-xs-5 col-md-2 col-md-push-3 no-left-gutter">
-                    <a className='btn btn-black btn-block no-horizontal-padding'>Copy Link</a>
+                    <a ref={i => this.copyTrigger = i} 
+                      className='btn btn-black btn-block no-horizontal-padding'>Copy Link</a>
                   </div>
                 </div>
                 <div id="start-button" className="row">
