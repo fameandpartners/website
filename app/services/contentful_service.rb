@@ -255,9 +255,9 @@ module Contentful
       row_tiles = parent_container.rows_container.map do |item|
 
         lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
+        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
         sm_items = (item.respond_to? :pids) ? item.pids : nil
-        lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
