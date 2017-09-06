@@ -69,7 +69,6 @@ module OrderBot
     end
 
     def get_product_by_name_and_sku(name, sku)
-      binding.pry
       res = make_get_request("admin/products.json/?product_name=#{name}")
       order_bot_products = JSON.parse(res.body)
       if res.code <300
