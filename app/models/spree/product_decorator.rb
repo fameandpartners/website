@@ -6,6 +6,8 @@ Spree::Product.class_eval do
     class_name: 'CelebrityInspiration',
     foreign_key: :spree_product_id, inverse_of: :product
 
+  belongs_to :category
+
   has_one :style_profile,
     dependent: :destroy,
     class_name: 'ProductStyleProfile',
@@ -40,6 +42,7 @@ Spree::Product.class_eval do
                   :hidden,
                   :size_chart,
                   :related_outerwear_ids
+                  :category
 
   attr_reader :name_with_sku
 
