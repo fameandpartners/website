@@ -8,7 +8,7 @@ Use rbenv and the ruby-build plugin
 # Quick installation
 
 ```shell
-$ brew install redis elasticsearch imagemagick postgresql
+$ brew install redis elasticsearch imagemagick postgresql yarn
 ```
 
 To have ElasticSearch start on login:
