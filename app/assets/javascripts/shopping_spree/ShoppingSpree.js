@@ -8,14 +8,20 @@ export default class ShoppingSpree extends React.Component
     constructor( props )
     {
         super( props );
+        let display = 'onboarding';
+        if( this.props.firebaseId  )
+        {
+            display = 'chat';
+        }
+        
         this.state =
             {
-                showShareModal: false,
-                display: 'onboarding',
+                display: display,
                 firebaseNodeId: '',
-                name: '',
-                email: '',
-                icon: 0
+                name: this.props.name,
+                email: this.props.email,
+                icon: this.props.icon,
+                firebaseNodeId: this.props.firebaseId
             };
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
@@ -70,5 +76,16 @@ export default class ShoppingSpree extends React.Component
 
 ShoppingSpree.propTypes = {
     firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired
+    firebaseDatabase: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string,
+    icon: React.PropTypes.number,
+    email: React.PropTypes.string,
+    firebaseId: React.PropTypes.string
 };
+
+ShoppingSpree.defaultProps = {
+    name: null,
+    icon: 0,
+    email: null,
+    firebaseId: null
+}
