@@ -3,7 +3,6 @@ module OrderBot
 	class Order
 
 		def initialize(order, line_items)
-			binding.pry
 			splitter = ItemPriceAdjustmentSplit.new(line_items.first)
 			tax_free_adjustments = splitter.per_item_tax_free_adjustment_in_cents.to_f/100.0
 			adjustments = splitter.per_item_adjustment_in_cents.to_f/100
