@@ -16,20 +16,16 @@ module OrderBot
         end
     end
 
-    def get_group_id_by_product(product)
-      19990
-      # res = make_get_request('admin/product_structure.json/')
-      # res_json = JSON.parse(res.body)
-      # taxon_names = product.taxons.map{ |taxon| taxon.name}
-      # groups = res_json.first['product_classes'].first['categories'].select {
-      #     |category| category['groups'].any? {
-      #         |z| taxon_names.include?(z['group_name'])
-      #       }
-      #   }.map{
-      #     |z| z['groups']
-      #   }.first 
-      # groups.select{|group| group['group_name'] == 'Playsuit'}.first['group_id']
-      #add logic if above returns nil
+    def get_product_structure(product)
+       res = make_get_request('admin/product_structure.json/')
+       res_json = JSON.parse(res.body)
+       res_json
+    end
+
+    def create_new_product_group(product_group)
+      res = make_post_request('admin/product_groups.json/', [product_group])
+      res_json = JSON.parse(res.body)
+      res_json
     end
 
     def get_tag_by_name(name)
@@ -59,7 +55,7 @@ module OrderBot
     end
 
     def link_product_to_tag(product_id, tag_id)
-     res = make_post_request("admin/ProductTags.json/?tagid=#{tag_id}", {'product_ids' => [product_id]} )
+     res = make_post_request("admin/ProductTags.json/?tagid=#{tag_id}", {'product_ids' => [product_id]})
      res
      #handle failure TODO
     end
@@ -100,6 +96,12 @@ module OrderBot
       res_json = JSON.parse(res.body)
       res_json.first['product_classes'].first['categories'].select {|category| category['groups'].any? {|z| z['group_name'] == group_name}} #product.taxons.map{ |taxon| taxon.name}.includes? z['group_name']
       #add logic if above returns nil
+    end
+
+    def create_new_category(category)
+      res = make_post_request('admin/product_categories.json/', [category])
+      res_json = JSON.parse(res.body)
+      res_json.first['product_category_id']
     end
 
     def make_get_request( url, params = {}) 

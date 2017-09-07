@@ -70,8 +70,61 @@ module Spree
 
     end
 
-    def get_group_id_by_product(product)
-      client.get_group_id_by_product(product)
+    def get_or_create_group_id_by_product(product)
+      cat_ids = get_or_create_category_id_by_product(product)
+      product_structure = client.get_product_structure(product)
+
+      groups = []
+
+      sales_category = parse_product_structure(product.category.category, 'Sales', 655, product_structure)
+      sales_groups = sales_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
+
+      component_category = parse_product_structure(product.category.category, 'Component', 656, product_structure)
+      component_groups = sales_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
+
+      if sales_groups.empty?
+        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[0]}).first['product_group_id']
+      else
+        groups << sales_groups.first['group_id']
+      end
+
+      if component_groups.empty?
+        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[1]}).first['product_group_id']
+      else
+        groups << component_groups.first['group_id']
+      end
+
+      groups
+    end
+
+    def parse_product_structure(product_category, class_type_name, product_class_id, product_structure)
+      class_type = product_structure.select {|class_type| class_type['class_type_name'] == class_type_name}
+      product_class = class_type.first['product_classes'].select{|product_class| product_class['product_class_id'] == product_class_id }
+      category = product_class.first['categories'].select{|cat| cat['category_name'] == product_category}
+      category&.first
+    end
+
+    def get_or_create_category_id_by_product(product)
+      category = []
+      product_structure = client.get_product_structure(product.category.category)
+
+      sales_category = parse_product_structure(product.category.category, 'Sales', 655, product_structure)
+
+      if sales_category
+        category << sales_category['category_id']
+      end
+
+      component_category = parse_product_structure(product.category.category, 'Component', 656, product_structure)
+      if component_category
+        category << component_category['category_id']
+      end
+
+      if category.empty?
+        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => 655, 'category_active' => true}) # add to both components and Sales
+        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => 656, 'category_active' => true})  #update product_class_id for future
+      end
+
+      category
     end
 
     def get_measurement_type_id_by_name(name)
@@ -83,7 +136,7 @@ module Spree
       tags = client.get_tag_by_name(tag_name)
       tag = tags.select {|t| t['group'] == group['tag_group_name']}
       if tag.empty? || tag.first['group'] != group['tag_group_name'] #create tag or link tag to group   
-        tag = client.create_new_tag({'group_id' => group['tag_group_id'], 'name' =>tag_name})
+        tag = client.create_new_tag({'group_id' => group['tag_group_id'], 'name' => tag_name})
       end
       tag.first
     end
@@ -96,6 +149,7 @@ module Spree
       end
       group
     end
+
 
     def split_order(line_items)
       lol = []

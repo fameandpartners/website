@@ -3,8 +3,10 @@ module OrderBot
 		include Spree::OrderBotHelper
 
 		def initialize(line_item, product)
+			group_ids = get_or_create_group_id_by_product(product)
 			@reference_product_id = product.id # This is going to need to change
-			@group_id = get_group_id_by_product(1234) # Need to check on this
+			@component_group_id = group_ids[1]
+			@group_id = group_ids[0] 
 			@description = product.description
 			@create_bom = false 
 			@create_purchase_unit = false
