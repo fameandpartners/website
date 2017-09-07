@@ -79,7 +79,7 @@
         = label_tag nil, t(:orders_per_page)
         = select_tag :per_page, options_for_select(%w(15 50 100 300 500), per_page), :class => 'select2'
 
-    .four.columns.alpha
+    .five.columns.alpha
       .checkbox
         label
           = f.check_box :inventory_units_shipment_id_null, {}, '1', '0'
@@ -95,6 +95,11 @@
           = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''
           '
           = t(:hide_line_items)
+      .checkbox
+        label
+          = f.check_box :search_old_orders, { checked: false }, 'true', ''
+          '
+          = t(:search_old_orders)
 
     .clearfix
     .actions.filter-actions
