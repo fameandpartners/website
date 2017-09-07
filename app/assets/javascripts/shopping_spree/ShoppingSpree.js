@@ -9,19 +9,21 @@ export default class ShoppingSpree extends React.Component
     {
         super( props );
         let display = 'onboarding';
+        let minimize = false;
         if( this.props.firebaseId  )
         {
             display = 'chat';
+            minimize = true
         }
         
         this.state =
             {
                 display: display,
-                firebaseNodeId: '',
                 name: this.props.name,
                 email: this.props.email,
                 icon: this.props.icon,
-                firebaseNodeId: this.props.firebaseId
+                firebaseNodeId: this.props.firebaseId,
+                minimize: minimize
             };
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
@@ -55,7 +57,7 @@ export default class ShoppingSpree extends React.Component
                 <div>
                 {
                     this.state.display === 'chat' &&
-                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon}/>
+                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize}/>
                 }
                 {
                     this.state.display === 'share' &&

@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatList from './ChatList'
+import ChatList from './ChatList';
 import ChatBar from './ChatBar';
 import Cart from './Cart';
 
@@ -12,16 +12,16 @@ export default class Drawer extends React.Component
         super(props);
 
         this.state =
-        {
-            closed: false,
-            display: 'chat',
-            firebaseAPI: props.firebaseAPI,
-            firebaseDatabase: props.firebaseDatabase,
-            firebaseNodeId: props.firebaseNodeId,
-            name: props.name,
-            email: props.email,
-            icon: props.icon
-        };
+            {
+                closed: this.props.closed,
+                display: 'chat',
+                firebaseAPI: props.firebaseAPI,
+                firebaseDatabase: props.firebaseDatabase,
+                firebaseNodeId: props.firebaseNodeId,
+                name: props.name,
+                email: props.email,
+                icon: props.icon
+            };
         this.handleToggle = this.handleToggle.bind(this);
         this.transitionToCart = this.transitionToCart.bind(this);
         this.transitionToChat = this.transitionToChat.bind(this);
@@ -37,58 +37,58 @@ export default class Drawer extends React.Component
     transitionToCart()
     {
         this.setState(
-        {
-            display: 'cart'
-        });
+            {
+                display: 'cart'
+            });
     }
     
     transitionToChat()
     {
         this.setState(
-        {
-            display: 'chat'
-        });
+            {
+                display: 'chat'
+            });
     }
-    
+     
     render()
     {
         return (
             <div>
-            <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
-            <Cart transitionToChat={this.transitionToChat}
-            firebaseAPI={this.state.firebaseAPI}
-            firebaseDatabase={this.state.firebaseDatabase}
-            firebaseNodeId={this.state.firebaseNodeId}
-            name={this.state.name}
-            email={this.state.email}
-            />
-            </div>
-            
-            <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
-            <div className="full-toggle-btn" onClick={this.handleToggle}></div>
-            <div className="row header">
-            <div className="col-xs-2">
-            <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
-            </div>
-            <div className="col-xs-8 text-center">Shopping Spree</div>
-            <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
-            </div>
-            <div className="row">
-            <ChatList
-            firebaseAPI={this.state.firebaseAPI}
-            firebaseDatabase={this.state.firebaseDatabase}
-            firebaseNodeId={this.state.firebaseNodeId}
-            />
-            </div>
-            <ChatBar
-            firebaseAPI={this.state.firebaseAPI}
-            firebaseDatabase={this.state.firebaseDatabase}
-            firebaseNodeId={this.state.firebaseNodeId}
-            name={this.state.name}
-            email={this.state.email}
-            icon={this.state.icon}
-            />
-            </div>
+              <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
+                <Cart transitionToChat={this.transitionToChat}
+                      firebaseAPI={this.state.firebaseAPI}
+                      firebaseDatabase={this.state.firebaseDatabase}
+                      firebaseNodeId={this.state.firebaseNodeId}
+                      name={this.state.name}
+                      email={this.state.email}
+                      />
+              </div>
+              
+              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
+                <div className="full-toggle-btn" onClick={this.handleToggle}></div>
+                <div className="row header">
+                  <div className="col-xs-2">
+                    <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
+                  </div>
+                  <div className="col-xs-8 text-center">Shopping Spree</div>
+                  <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+                </div>
+                <div className="row">
+                  <ChatList
+                    firebaseAPI={this.state.firebaseAPI}
+                    firebaseDatabase={this.state.firebaseDatabase}
+                    firebaseNodeId={this.state.firebaseNodeId}
+                    />
+                </div>
+                <ChatBar
+                  firebaseAPI={this.state.firebaseAPI}
+                  firebaseDatabase={this.state.firebaseDatabase}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  name={this.state.name}
+                  email={this.state.email}
+                  icon={this.state.icon}
+                  />
+              </div>
             </div>
         );
         
@@ -102,5 +102,6 @@ Drawer.propTypes = {
     firebaseNodeId: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.number.isRequired
+    icon: React.PropTypes.number.isRequired,
+    closed: React.PropTypes.bool.isRequired
 }
