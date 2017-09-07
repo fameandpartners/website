@@ -212,7 +212,7 @@ class Confirmation extends PureComponent {
                       onClick={this.printPage}
                       className="u-textDecoration--underline u-cursor--pointer"
                     >
-                        Print
+                      Print
                     </span>&nbsp;
                     and cut out your packing slip below.
                   </p>
