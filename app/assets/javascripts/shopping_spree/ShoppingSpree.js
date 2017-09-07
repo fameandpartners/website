@@ -19,6 +19,7 @@ export default class ShoppingSpree extends React.Component
             };
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
+        this.doneSharing = this.doneSharing.bind(this);
     }
 
     doneOnboarding( email, name, icon, shoppingSpreeId )
@@ -33,7 +34,15 @@ export default class ShoppingSpree extends React.Component
             }
         );
     }
-    
+
+    doneSharing()
+    {
+        this.setState(
+            {
+                display: 'chat'
+            }
+        );
+    }
     render()
     {
         return( 
@@ -43,12 +52,12 @@ export default class ShoppingSpree extends React.Component
                         <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon}/>
                 }
                 {
-                    this.state.display === 'onboarding' &&
-                        <ShareModal firebaseNodeId={this.state.firebaseNodeId}/>
+                    this.state.display === 'share' &&
+                        <ShareModal nextStep={this.doneSharing} firebaseNodeId={this.state.firebaseNodeId}/>
                 }
             
                 {
-                    this.state.display === 'share' &&
+                    this.state.display === 'onboarding' &&
                         <Onboarding doneOnboarding={this.doneOnboarding}/>
                 }
                 </div>

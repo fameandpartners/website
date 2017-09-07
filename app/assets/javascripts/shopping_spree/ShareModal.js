@@ -13,7 +13,6 @@ export default class ShareModal extends React.Component
                 url: location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + "/shopping_sprees/" + this.props.firebaseNodeId + "/join"
 
             };
-        this.click = this.click.bind( this );
     }
 
     componentDidMount()
@@ -22,23 +21,13 @@ export default class ShareModal extends React.Component
             {
                 clipboard: new Clipboard(this.copyTrigger,
                                          {
-                                             text: () => this.state.url,
-                                             success: () => {
-                                                 console.log( 'hello' );
-                                                  }, 
-                                             error: () =>
-                                                 {
-                                                 }
+                                             text: () => this.state.url
                                          }
                                         )
             }
         );
     }
 
-    click()
-    {
-        console.log( this.copyTrigger );
-    }
     render()
     {
         return(
@@ -57,20 +46,18 @@ export default class ShareModal extends React.Component
                     <input readOnly defaultValue={this.state.url} className="form-control input-lg" type="text"></input>
                   </div>
                   <div className="col-xs-5 col-md-2 col-md-push-3 no-left-gutter">
-                    <a data-for='copy-button-tool-tip'
-                       id="copy-button"
-                       data-delay-hide='800'
+                    <a data-delay-hide='800'
                        data-event="click"
                        data-tip="copied!"
                        ref={i => this.copyTrigger = i}
                       className='btn btn-black btn-block no-horizontal-padding'
                       >Copy Link</a>
-                    <ReactTooltip  afterShow={ () => ReactTooltip.hide(findDOMNode(this.copyTrigger)) } place="bottom" id="copy-button-tool-tip" effect="solid"/>
+                    <ReactTooltip  afterShow={ () => ReactTooltip.hide(findDOMNode(this.copyTrigger)) } place="bottom" effect="solid"/>
                   </div>
                 </div>
                 <div id="start-button" className="row">
                   <div  className="col-xs-12 col-lg-3 col-lg-push-4 no-gutter-mobile">
-                    <a className="center-button-text btn btn-md btn-black btn-block">Start Shopping Spree</a>
+                    <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Start Shopping Spree</a>
                   </div>
                 </div>
               </div>
