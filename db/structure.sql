@@ -3616,7 +3616,7 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_success boolean DEFAULT false NOT NULL
+    orderbot_synced boolean DEFAULT false NOT NULL
 );
 
 
