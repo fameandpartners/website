@@ -60,133 +60,138 @@ form.hide-fully#pdpDataForWishlist
   input id='pdpWishlistVariantId' type='hidden' value=''
   input id='pdpWishlistProductId' type='hidden' value='#{raw @product.id}'
 
-.pdp
-  .container
-    .row.main-content-area
-      // to enable affix data-spy='affix' to this container
-      .col-md-3
-        .panel-side-wrap.js-panel-side-left
-          h1.heading = @product.name
-          - if @product.product_type.present?
-            h4.subheading = @product.product_type
-          .pdp-panel-side-left.js-panel-side-left-details-trigger
-            .text-right.visible-xs.visible-sm
-              a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
-                .hide-visually Close Menu
-            .panel-side
-              .panel-side-container
+/ .pdp
+/   .container
+/     .row.main-content-area
+/       // to enable affix data-spy='affix' to this container
+/       .col-md-3
+/         .panel-side-wrap.js-panel-side-left
+/           h1.heading = @product.name
+/           - if @product.product_type.present?
+/             h4.subheading = @product.product_type
+/           .pdp-panel-side-left.js-panel-side-left-details-trigger
+/             .text-right.visible-xs.visible-sm
+/               a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
+/                 .hide-visually Close Menu
+/             .panel-side
+/               .panel-side-container
 
-                div
-                  h2.hidden-md.hidden-lg = @product.name
-                  - if @product.product_type.present?
-                    h4.hidden-md.hidden-lg = @product.product_type
-                  #accordion role='tablist'
-                    .panel
-                      a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
-                      #collapse-description.collapse.in role='tabpanel'
-                        p = raw @product.description
-                        p SKU: #{@product.sku}
+/                 div
+/                   h2.hidden-md.hidden-lg = @product.name
+/                   - if @product.product_type.present?
+/                     h4.hidden-md.hidden-lg = @product.product_type
+/                   #accordion role='tablist'
+/                     .panel
+/                       a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
+/                       #collapse-description.collapse.in role='tabpanel'
+/                         p = raw @product.description
+/                         p SKU: #{@product.sku}
 
-                        - if Features.active?(:i_equal_change)
-                          p $5 of each sale funds a women's empowerment charity.
+/                         - if Features.active?(:i_equal_change)
+/                           p $5 of each sale funds a women's empowerment charity.
 
-                    .panel
-                      a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Fabric Information Open', eventLabel: null, nonInteraction: false })"  Fabric Information
-                      #collapse-fabric.collapse role='tabpanel'
-                        - if @product.fabric.present?
-                          p = simple_format(@product.fabric)
-                          p Due to dying process, product hue may look slightly different from image.
-                        h3.h5 Garment Care
-                        p Professional dry-clean only. See label for further details.
-                    .panel
-                      a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'About Our Model Open', eventLabel: null, nonInteraction: false })" About our model
-                      #collapse-about.collapse role='tabpanel'
-                        - if @product.fit.present?
-                          p = simple_format(@product.fit)
-                    - if Features.active?(:moodboard)
-                      - if current_spree_user.present?
-                        .panel
-                          a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Add to Moodboard Open', eventLabel: null, nonInteraction: false })"
-                            Add to Moodboard
-                          #moodboard-options.moodboard-options.collapse role='tabpanel'
-                            / TODO - Support for dynamic colours.
-                            = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
-                      - else
-                        // this will redirect not loged-in users to login page
-                        a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Add to Moodboard Open', eventLabel: null, nonInteraction: false })" Add to Moodboard
+/                     .panel
+/                       a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Fabric Information Open', eventLabel: null, nonInteraction: false })"  Fabric Information
+/                       #collapse-fabric.collapse role='tabpanel'
+/                         - if @product.fabric.present?
+/                           p = simple_format(@product.fabric)
+/                           p Due to dying process, product hue may look slightly different from image.
+/                         h3.h5 Garment Care
+/                         p Professional dry-clean only. See label for further details.
+/                     .panel
+/                       a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'About Our Model Open', eventLabel: null, nonInteraction: false })" About our model
+/                       #collapse-about.collapse role='tabpanel'
+/                         - if @product.fit.present?
+/                           p = simple_format(@product.fit)
+/                     - if Features.active?(:moodboard)
+/                       - if current_spree_user.present?
+/                         .panel
+/                           a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Add to Moodboard Open', eventLabel: null, nonInteraction: false })"
+/                             Add to Moodboard
+/                           #moodboard-options.moodboard-options.collapse role='tabpanel'
+/                             / TODO - Support for dynamic colours.
+/                             = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+/                       - else
+/                         // this will redirect not loged-in users to login page
+/                         a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Add to Moodboard Open', eventLabel: null, nonInteraction: false })" Add to Moodboard
 
-                    .panel
-                      .addthis_toolbox
-                        a.share-cta.js-panel-side-share-toggle href='#share-options' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Share Open', eventLabel: null, nonInteraction: false })" Share
+/                     .panel
+/                       .addthis_toolbox
+/                         a.share-cta.js-panel-side-share-toggle href='#share-options' onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Share Open', eventLabel: null, nonInteraction: false })" Share
 
-                        ul.share-btn-wrap.custom_images
-                          li
-                            a.addthis_button_facebook title='Share to Facebook'
-                              .icon-facebook2
-                          li
-                            a.addthis_button_twitter title='Share to Twitter'
-                              .icon-twitter
-                          li
-                            a.addthis_button_pinterest_share title='Share to Pinterest'
-                              .icon-pinterest
+/                         ul.share-btn-wrap.custom_images
+/                           li
+/                             a.addthis_button_facebook title='Share to Facebook'
+/                               .icon-facebook2
+/                           li
+/                             a.addthis_button_twitter title='Share to Twitter'
+/                               .icon-twitter
+/                           li
+/                             a.addthis_button_pinterest_share title='Share to Pinterest'
+/                               .icon-pinterest
 
-                ul.btn-wrap
-                  li Guaranteed Fit
-                  li Easy Returns
+/                 ul.btn-wrap
+/                   li Guaranteed Fit
+/                   li Easy Returns
 
-      .col-md-6.panel-media
-        #PdpGallery
-        a.trigger-details.visible-xs.visible-sm.js-panel-side-left-toggle href='javascript:;' + DETAILS
+/       .col-md-6.panel-media
+/         #PdpGallery
+/         a.trigger-details.visible-xs.visible-sm.js-panel-side-left-toggle href='javascript:;' + DETAILS
 
-      .col-md-3.pdp-panel-side-right
-        .panel-side-wrap.js-panel-side-right
-          // to enable affix data-spy='affix' to this container
-          .panel-side
-            #PdpSidePanelRight
+/       .col-md-3.pdp-panel-side-right
+/         .panel-side-wrap.js-panel-side-right
+/           // to enable affix data-spy='affix' to this container
+/           .panel-side
+/             #PdpSidePanelRight
 
-  // content bottom wrap START
-  // js class is used to get bottom offset for sticky side panel
-  .js-bottom-wrapper
-    .container
-      .section-box.same-height-cols.js-bottom-content
-        .row
-          .col-md-6
-            .item.bordered
-              .row onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Fame Stylist Press', eventLabel: null, nonInteraction: false })"
-                .col-md-5.item-copy
-                  h3 Styled by Fame – <em>for free</em>.
-                  p.summary Meet Amber Bond, Fame’s resident fashion guru. She’s here for whatever you need (personal shopping, wardrobe styling, fashion advice), however you need it (chat, phone, video, or even in person). Basically, she’s your closet’s new BFF.
-                  = link_to styling_session_path
-                    span.cta-link-arrow-right
-                      span.cta-link Book
-                      span.copy-highlight NOW
-                      i.icon.icon-arrow-right
-                .col-md-7
-                  = link_to styling_session_path
-                    picture.media-wrap
-                      source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-styling-advice-mob.jpg")}'
-                      source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-styling-advice.jpg")}'
-                      img src='#{image_path("_pdp/tile-styling-advice.jpg")}' srcset='
-                        #{image_path("_pdp/tile-styling-advice-mob.jpg")} 991w, #{image_path("_pdp/tile-styling-advice.jpg")} 992w'
+/   // content bottom wrap START
+/   // js class is used to get bottom offset for sticky side panel
+/   .js-bottom-wrapper
+/     .container
+/       .section-box.same-height-cols.js-bottom-content
+/         .row
+/           .col-md-6
+/             .item.bordered
+/               .row onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Fame Stylist Press', eventLabel: null, nonInteraction: false })"
+/                 .col-md-5.item-copy
+/                   h3 Styled by Fame – <em>for free</em>.
+/                   p.summary Meet Amber Bond, Fame’s resident fashion guru. She’s here for whatever you need (personal shopping, wardrobe styling, fashion advice), however you need it (chat, phone, video, or even in person). Basically, she’s your closet’s new BFF.
+/                   = link_to styling_session_path
+/                     span.cta-link-arrow-right
+/                       span.cta-link Book
+/                       span.copy-highlight NOW
+/                       i.icon.icon-arrow-right
+/                 .col-md-7
+/                   = link_to styling_session_path
+/                     picture.media-wrap
+/                       source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-styling-advice-mob.jpg")}'
+/                       source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-styling-advice.jpg")}'
+/                       img src='#{image_path("_pdp/tile-styling-advice.jpg")}' srcset='
+/                         #{image_path("_pdp/tile-styling-advice-mob.jpg")} 991w, #{image_path("_pdp/tile-styling-advice.jpg")} 992w'
 
-          .col-md-6
-            .item.bordered
-              .row onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Create A Look Press', eventLabel: null, nonInteraction: false })"
-                .col-md-5.item-copy
-                  h3 Create a look that’s <em>all your own</em>.
-                  p.summary Each Fame and Partners piece is completely customizable to suit your style. Start with a design you love, then use our customization menu to change the color, modify the details, and alter the fit to create a look that’s unique to you.
-                .col-md-7
-                  picture.media-wrap
-                    source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-modify-mob.jpg")}'
-                    source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-modify.jpg")}'
-                    img src='#{image_path("_pdp/tile-modify.jpg")}' srcset='
-                      #{image_path("_pdp/tile-modify-mob.jpg")} 991w, #{image_path("_pdp/tile-modify.jpg")} 992w'
+/           .col-md-6
+/             .item.bordered
+/               .row onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Create A Look Press', eventLabel: null, nonInteraction: false })"
+/                 .col-md-5.item-copy
+/                   h3 Create a look that’s <em>all your own</em>.
+/                   p.summary Each Fame and Partners piece is completely customizable to suit your style. Start with a design you love, then use our customization menu to change the color, modify the details, and alter the fit to create a look that’s unique to you.
+/                 .col-md-7
+/                   picture.media-wrap
+/                     source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-modify-mob.jpg")}'
+/                     source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-modify.jpg")}'
+/                     img src='#{image_path("_pdp/tile-modify.jpg")}' srcset='
+/                       #{image_path("_pdp/tile-modify-mob.jpg")} 991w, #{image_path("_pdp/tile-modify.jpg")} 992w'
 
-      = render partial: 'related_products', locals: { product: @product }
+/       = render partial: 'related_products', locals: { product: @product }
 
-    = render partial: 'shop_social'
-  // content bottom wrap END
+/     = render partial: 'shop_social'
+/   // content bottom wrap END
 
+/ = render partial: 'pdp_guts', locals: {partial_hash: @partial_hash}
+
+link rel="stylesheet" href="http://localhost:8001/#{@partial_hash['cssBundle']}"
+
+= render inline: @partial_hash['partial']
 = render partial: 'micro_data'
 
 javascript:
@@ -271,3 +276,5 @@ javascript:
 
 // Load AddThis asynchronously
 script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#async=1"
+
+script type="text/javascript" src="http://localhost:8001/#{@partial_hash['jsBundle']}"

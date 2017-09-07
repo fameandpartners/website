@@ -5,6 +5,7 @@ class Products::DetailsController < Products::BaseController
 
   def show
     @zopim_opt_out = true
+
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
       slug:         params[:product_slug],
@@ -46,6 +47,24 @@ class Products::DetailsController < Products::BaseController
     description(@product.meta_description)
 
     append_gtm_product(product_presenter: @product)
+
+    #let's makey object for nodepdp
+    pdp_obj = {
+      paths: env["REQUEST_URI"],  #temporary
+      product: @product,
+      discount: @product_discount,
+      images: @product.all_images,
+      sizeChart: @product.size_chart_data,
+      siteVersion: @current_site_version.name,
+      flags: {
+        afterpay: Features.active?(:afterpay),
+        fastMaking: !Features.active?(:getitquick_unavailable)
+      }
+    }
+
+
+    resp = RestClient.post "http://localhost:8001/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
+    @partial_hash = JSON.parse(resp)
 
     render :show, status: pdp_status
   end
