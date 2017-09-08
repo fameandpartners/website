@@ -5,7 +5,7 @@ module OrderBot
 			@first_name = billing_address.firstname
 			@last_name	= billing_address.lastname
 			@store_name = "" #NOT CORRECT NEED TO MODIFY
-			@address = billing_address.address1
+			@address1 = billing_address.address1
 			@address2 = billing_address.address2 
 			@city = billing_address.city
 			@state = billing_address.state.abbr
