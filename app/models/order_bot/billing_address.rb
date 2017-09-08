@@ -10,7 +10,7 @@ module OrderBot
 			@city = billing_address.city
 			@state = billing_address.state.abbr
 			@postal_code = billing_address.zipcode
-		    @country = billing_address.country.iso
+		  @country = billing_address.country.iso
 		end
 	end
 end

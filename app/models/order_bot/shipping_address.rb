@@ -10,7 +10,7 @@ module OrderBot
 			@city = shipping_address.city
 			@state = shipping_address.state.abbr
 			@postal_code = shipping_address.zipcode
-		    @country = shipping_address.country.iso
+		  @country = shipping_address.country.iso
 		end
 	end
 end
