@@ -87,8 +87,11 @@ module OrderBot
 
     def create_new_order(order)
       res = make_post_request('admin/orders.json/', [order])
+      res_json = JSON.parse(res.body)
+      if res_json['response_code'] == -1
+        raise res #Put entire response in error message if error
+      end
       res
-      #TODO: Add stuff here after hear back from Frank
     end
 
     def get_group_id_by_group_name(group_name)
