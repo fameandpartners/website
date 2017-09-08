@@ -62,7 +62,6 @@ class Products::DetailsController < Products::BaseController
       }
     }
 
-
     resp = RestClient.post "http://localhost:8001/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
     @partial_hash = JSON.parse(resp)
 
