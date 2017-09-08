@@ -120,6 +120,9 @@ FameAndPartners::Application.routes.draw do
     # "Invite a friend" landing page
     get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
 
+    # Internship landing page
+    get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
+
     ###########
     # Lookbooks
     ###########
