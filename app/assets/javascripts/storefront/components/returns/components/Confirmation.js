@@ -205,8 +205,7 @@ class Confirmation extends PureComponent {
               <ul className="list__packing-slip">
                 <li>
                   <p
-                    className="list-text"
-                    onClick={this.printPage}
+                    className="list-text font-sans-serif"
                   >
                     <span
                       onClick={this.printPage}
