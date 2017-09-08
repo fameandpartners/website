@@ -105,11 +105,11 @@ module OrderBot
     end
 
     def make_get_request( url, params = {}) 
-      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass, log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
     end
 
     def make_post_request(url, request_object)
-      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass, log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
     end
   end
 end
