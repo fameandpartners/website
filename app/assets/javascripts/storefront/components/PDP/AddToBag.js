@@ -53,7 +53,7 @@ class AddToBag extends React.Component {
         let productPrice = product.price.price.amount
         let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
         
-        window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].product, window.location.href , customize.color, customize.customization);
+        window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].table.product, window.location.href , customize.color, customize.customization);
     }
     
     addToBag() {

@@ -26,6 +26,7 @@ export default class ChatBar extends FirebaseComponent
                               product_id: product_id,
                               url: product_url,
                               color: color,
+                              image: product_image,
                               customizations: customizations,
                               description: product_description
                           },
