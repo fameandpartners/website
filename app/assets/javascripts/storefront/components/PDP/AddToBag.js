@@ -49,14 +49,17 @@ class AddToBag extends React.Component {
     }
 
     addToShoppingSpree() {
-        window.addToShoppingSpree();
+        const { customize, actions, product } = this.props;
+        let productPrice = product.price.price.amount
+        let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
+        
+        window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].product, window.location.href , customize.color, customize.customization);
     }
     
     addToBag() {
         const { customize, actions, product } = this.props;
         let productPrice = product.price.price.amount
         let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
-        console.log(priceWithoutDecimals)
         addToBagEvent.value = priceWithoutDecimals
         trackEvent(addToBagEvent)
         // TODO: redo this

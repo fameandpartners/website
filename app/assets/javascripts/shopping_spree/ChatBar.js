@@ -9,11 +9,41 @@ export default class ChatBar extends FirebaseComponent
         super( props );
         this.initializeFirebase();
         this.sendMessage = this.sendMessage.bind(this);
+        this.addProductToFirebase = this.addProductToFirebase.bind(this);
+        window.addToShoppingSpree = this.addProductToFirebase;
+        
+    }
+
+    addProductToFirebase( product_id, product_name, product_description, product_price,
+                          product_image, product_url, color, customizations )
+    {
+        let newMessage = this.chatsDB.push();
+        newMessage.set( { type: 'share_dress',
+                          value:
+                          {
+                              name: product_name,
+                              price: product_price,
+                              product_id: product_id,
+                              url: product_url,
+                              color: color,
+                              customizations: customizations,
+                              description: product_description
+                          },
+                          created_at: firebase.database.ServerValue.TIMESTAMP,
+                          from:
+                          {
+                              name: this.props.name,
+                              email: this.props.email,
+                              icon: this.props.icon
+                          }
+                        }
+                      );
+        
     }
     
     initializeFirebase()
     {
-        super.connectToFirebase()
+        super.connectToFirebase();
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
     }
     
