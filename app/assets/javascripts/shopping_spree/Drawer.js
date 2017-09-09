@@ -25,9 +25,15 @@ export default class Drawer extends React.Component
         this.handleToggle = this.handleToggle.bind(this);
         this.transitionToCart = this.transitionToCart.bind(this);
         this.transitionToChat = this.transitionToChat.bind(this);
-        
+        this.addToCart = this.addToCart.bind(this);
+        window.addToShoppingSpree = this.addToCart;
     }
 
+
+    addToCart()
+    {
+        console.log( "Adding to cart in drawer" );
+    }
     
     handleToggle()
     {
