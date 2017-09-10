@@ -140,16 +140,16 @@ export default class ChatList extends FirebaseComponent
     render()
     {
         return(
-                <div className="chat-list">
-                <div className="chat-content">
+            <div className="chat-list">
+              <div className="chat-content">
                 <ul>
-                {this.state.messages}
+                  {this.state.messages}
                 </ul>
                 <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
                 </div>
                 
-                </div>
-                </div>
+              </div>
+            </div>
         )
     }
 }
