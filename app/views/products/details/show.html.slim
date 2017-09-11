@@ -189,7 +189,7 @@ form.hide-fully#pdpDataForWishlist
 
 / = render partial: 'pdp_guts', locals: {partial_hash: @partial_hash}
 
-link rel="stylesheet" href="http://localhost:8001/#{@partial_hash['cssBundle']}"
+link rel="stylesheet" href="#{configatron.node_pdp_url}/#{@partial_hash['cssBundle']}"
 
 = render inline: @partial_hash['partial']
 = render partial: 'micro_data'
@@ -277,4 +277,4 @@ javascript:
 // Load AddThis asynchronously
 script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#async=1"
 
-script type="text/javascript" src="http://localhost:8001/#{@partial_hash['jsBundle']}"
+script type="text/javascript" src="#{configatron.node_pdp_url}/#{@partial_hash['jsBundle']}"

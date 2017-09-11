@@ -48,22 +48,24 @@ class Products::DetailsController < Products::BaseController
 
     append_gtm_product(product_presenter: @product)
 
-    #let's makey object for nodepdp
-    pdp_obj = {
-      paths: env["REQUEST_URI"],  #temporary
-      product: @product,
-      discount: @product_discount,
-      images: @product.all_images,
-      sizeChart: @product.size_chart_data,
-      siteVersion: @current_site_version.name,
-      flags: {
-        afterpay: Features.active?(:afterpay),
-        fastMaking: !Features.active?(:getitquick_unavailable)
+    @partial_hash = Rails.cache.fetch(env["REQUEST_PATH"], expires_in: 14.hours) do
+      #let's makey object for nodepdp
+      pdp_obj = {
+        paths: env["REQUEST_URI"],  #todo: work this out with adam
+        product: @product,
+        discount: @product_discount,
+        images: @product.all_images,
+        sizeChart: @product.size_chart_data,
+        siteVersion: @current_site_version.name,
+        flags: {
+          afterpay: Features.active?(:afterpay),
+          fastMaking: !Features.active?(:getitquick_unavailable)
+        }
       }
-    }
 
-    resp = RestClient.post "http://localhost:8001/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
-    @partial_hash = JSON.parse(resp)
+      resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
+      JSON.parse(resp)
+    end
 
     render :show, status: pdp_status
   end

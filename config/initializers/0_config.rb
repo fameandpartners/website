@@ -83,6 +83,7 @@ end
 
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
+configatron.node_pdp_url = ENV[node_content_url]
 
 case Rails.env.to_sym
 when :development
@@ -98,8 +99,6 @@ when :development
     index.spree_products = :spree_products_development
     index.color_variants = :color_variants_development
   end
-
-  configatron.node_pdp_url = "http://localhost:8001"
 when :staging
   configatron.site_version_detector_strategy = :top_level_domain
 
@@ -108,8 +107,6 @@ when :production
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
   configatron.micro_influencer_email_address='influencerapplications@fameandpartners.com'
-
-  configatron.node_pdp_url = "tbd"
 when :test
   configatron.site_version_detector_strategy = :subdomain
 
@@ -117,4 +114,6 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
+
+  configatron.node_pdp_url = "tbd"
 end
