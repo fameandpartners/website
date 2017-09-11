@@ -28,7 +28,6 @@ module OrderBot
 
 		def get_product_hts(product)
 			main = product.product_properties.select{|x| x.property.name == 'fabric'}.first.value.split("\n").first
-			binding.pry
 
 			if main.nil?
 				return
