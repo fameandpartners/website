@@ -1,0 +1,104 @@
+/* [IT Girl Internship]
+-------------------------------------------------------*/
+.page-it-girl {
+
+  .ContentCopy {
+    padding: 0 20px;
+    font-size: 1.2rem;
+  }
+
+  .section-box p {
+    font-size: 1.6rem;
+  }
+
+  .CtaBtn {
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  .Heading--italic {
+    font-style: italic;
+  }
+
+  .SectionContact {
+    padding: 55px 0;
+    border-top: 1px solid $c-neutral-black;
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
+  .OptionsList {
+    font-family: $font-heading;
+    text-align: left;
+    font-weight: 300;
+  }
+
+  .IconText {
+    margin: 35px 0;
+    text-align: left;
+  }
+
+  .IconText p {
+    margin-top: 0;
+  }
+
+  .IconText__icon {
+    position: relative;
+    top: 5px;
+    text-align: right;
+  }
+
+  .IconText_copy {
+    padding-right: 15px;
+  }
+
+  .ContentCopy__extraSpacingBottom {
+    margin-bottom: 80px;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+    text-align: center;
+
+    .title {
+      margin-top: 0;
+    }
+
+    section {
+      margin-bottom: 90px;
+    }
+
+    .SectionWhatToTell {
+      padding: 95px 0;
+      background: $c-neutral-2;
+    }
+
+    .OptionsList {
+      margin: 40px 0 85px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .CtaBtn {
+      width: 100%;
+    }
+
+    .SectionIntro .CtaBtn {
+      margin-top: 45px;
+    }
+
+    .IconText_copy {
+      padding-left: 15px;
+    }
+
+    .OptionsList {
+      margin-bottom: 40px;
+    }
+
+  }
+
+}
