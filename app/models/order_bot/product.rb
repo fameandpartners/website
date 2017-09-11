@@ -7,10 +7,10 @@ module OrderBot
 			@reference_product_id = product.id # This is going to need to change
 			@component_group_id = group_ids[1]
 			@group_id = group_ids[0] 
-			@description = product.description
+			@description = "#{product.name} &lt;br&gt; &lt;img src=#{line_item.image_url}? width=\"300\"&gt;"
 			@create_bom = false 
 			@create_purchase_unit = false
-			@name = product.name
+			@name = line_item.style_name
 			@sku = CustomItemSku.new(line_item).call
 			@base_price = line_item.price.to_f
 			@units_of_measure = 1
