@@ -23,25 +23,27 @@ module OrderBot
 			@is_parent = false
 			@upc = GlobalSku.find_by_product_id(product.id).upc
 			@country_of_product = 'CN'
+			@hts = get_product_hts(product)
+		end
 
-# 			[{
-# 	"reference_product_id": 1397,
-# 	"group_id": 19990,
-# 	"name": "The Jennifer",
-# 	"description": "TestAPIProduct",
-# 	"sku": "fp2212s2f3",
-# 	"base_price": 258.0,
-# 	"units_of_measure": 1, 
-# 	"units_of_measure_type_id": 3297,
-# 	"weight": 3,
-# 	"shipping_units_of_measure_type_id": 1,
-# 	"taxable": false,
-# 	"min_quantity": 1,
-# 	"active": true,
-# 	"upc": "1234",
-# 	"create_bom": false,
-# 	"create_purchase_unit": false
-# }]
+		def get_product_hts(product)
+			main = product.product_properties.select{|x| x.property.name == 'fabric'}.first.value.split("\n").first
+			binding.pry
+
+			if main.nil?
+				return
+			end
+			if main.downcase.include?("polyester")
+				return '6204.43.4030'
+			elsif main.downcase.include?("polyester")
+				if main.downcase.include?("100%")
+					return '6211.42.1081'
+				else
+					return '6204.42.3050'
+				end
+			else
+				return nil
+			end
 		end
 		
 	end
