@@ -568,6 +568,21 @@ namespace :data do
         'FP2207']
 
         link_product_category(UNKNOWN, 'Unkown', 'Unkown')
+
+
+       unassigned = Spree::Product.where(:category_id => nil)
+
+        cat = Category.where({category: 'Unkown', subcategory: 'Unkown'}).first
+        if(cat.nil?)
+            cat = Category.new()
+            cat.category = category
+            cat.subcategory = subcategory
+            cat.save!
+        end
+        unassigned.each do|product|
+            product.category = cat
+            product.save!
+        end
     end
 end
 
