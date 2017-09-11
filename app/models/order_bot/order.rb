@@ -4,8 +4,8 @@ module OrderBot
 
 		def initialize(order, line_items)
 			splitter = ItemPriceAdjustmentSplit.new(line_items.first)
-			tax_free_adjustments = splitter.per_item_tax_free_adjustment_in_cents.to_f/100.0
-			adjustments = splitter.per_item_adjustment_in_cents.to_f/100
+			tax_free_adjustments = splitter.per_item_tax_free_adjustment_no_param.to_f
+			adjustments = splitter.per_item_adjustment.to_f
 			@reference_order_id = order.number + SecureRandom.uuid
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
@@ -18,11 +18,11 @@ module OrderBot
 			@subtotal = line_items.inject(0){|sum, item| sum + item.price}
 			@order_status = 'unconfirmed'
 			@shipping = 0 #TODO: Revist this. We currently bake in the shipping cost.
-			@order_total = order.payment_total
+			@order_total = (((adjustments) * line_items.count) + @subtotal)
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
 			@order_lines = generate_order_lines(line_items, order)
-			@other_charges = generate_other_charges(tax_free_adjustments* line_items.count)
+			@other_charges = generate_other_charges((tax_free_adjustments* line_items.count)) #This should add or subtract the rounding errors as other amounts
 		end
 
 		def generate_order_lines(line_items, order)
@@ -37,5 +37,5 @@ module OrderBot
 	end
 end
 # include Spree::OrderBotHelper
-# @order = Spree::Order.find(35424843)
-# create_new_order(@order)
+# @order = Spree::Order.find(35425086)
+# create_new_order(@order,@order.line_items)

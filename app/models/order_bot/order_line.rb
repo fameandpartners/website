@@ -8,7 +8,7 @@ module OrderBot
 			@quantity = line_item.quantity			
 			@product_taxes = generate_taxes(line_item, order)
 			@discount = splitter.per_item_discounts_in_cents.to_f/100
-			@price = line_item.price - @discount
+			@price = line_item.price
 		end
 
 		def generate_taxes(line_item, order)
@@ -19,7 +19,7 @@ module OrderBot
 			    unless tax_rate.nil?
 			    	splitter = ItemPriceAdjustmentSplit.new(line_item)
 					
-					[{'tax_name' => "Tax", 'tax_rate' => tax_rate.amount, 'amount' => splitter.per_item_tax_adjustment_in_cents.to_f/100}]
+					[{'tax_name' => "Tax", 'tax_rate' => tax_rate.amount, 'amount' => line_item.price * tax_rate.amount}]
 				else
 					[]
 				end
