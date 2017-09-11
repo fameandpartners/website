@@ -34,7 +34,7 @@ module OrderBot
 			end
 			if main.downcase.include?("polyester")
 				return '6204.43.4030'
-			elsif main.downcase.include?("polyester")
+			elsif main.downcase.include?("cotton")
 				if main.downcase.include?("100%")
 					return '6211.42.1081'
 				else
