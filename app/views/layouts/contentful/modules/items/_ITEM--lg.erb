@@ -8,7 +8,9 @@
 </picture>
 
 <%
-  products = []
+products = []
+
+if @lg_contents[:overlay_pids]
 
   @lg_contents[:overlay_pids].each do |pid|
     split_pid = pid.split('-', 2)
@@ -27,6 +29,8 @@
       products.push(present_product[0])
     end
   end
+
+end
 %>
 
 <% if products.count > 0 %>
