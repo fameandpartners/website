@@ -85,13 +85,13 @@ module Spree
       component_groups = sales_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
 
       if sales_groups.empty?
-        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[0]}).first['product_group_id']
+        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[0], 'group_active' => true}).first['product_group_id']
       else
         groups << sales_groups.first['group_id']
       end
 
       if component_groups.empty?
-        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[1]}).first['product_group_id']
+        groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[1], 'group_active' => true}).first['product_group_id']
       else
         groups << component_groups.first['group_id']
       end
