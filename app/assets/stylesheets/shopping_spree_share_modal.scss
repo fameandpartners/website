@@ -9,7 +9,7 @@
         overflow-y: hidden;
         background-color: black;
         opacity: 0.60;
-        z-index: 999;
+        z-index: 1999;
 }
 
 .shopping-spree-share-modal
@@ -20,7 +20,7 @@
     height: 50%;
     position: fixed;
     background-color: white;
-    z-index: 1000;
+    z-index: 2000;
 
     .modal-headline
     {
