@@ -78,6 +78,7 @@ export default class Drawer extends React.Component
                     firebaseAPI={this.state.firebaseAPI}
                     firebaseDatabase={this.state.firebaseDatabase}
                     firebaseNodeId={this.state.firebaseNodeId}
+                    showAddToCartModal={this.props.showAddToCartModal}
                     />
                 </div>
                 <ChatBar
@@ -103,5 +104,6 @@ Drawer.propTypes = {
     name: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
     icon: React.PropTypes.number.isRequired,
-    closed: React.PropTypes.bool.isRequired
-}
+    closed: React.PropTypes.bool.isRequired,
+    showAddToCartModal: React.PropTypes.func.isRequired
+};

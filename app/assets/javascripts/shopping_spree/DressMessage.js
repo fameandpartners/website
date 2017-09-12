@@ -85,11 +85,9 @@ export default class DressMessage extends React.Component
                       <div className={"col-xs-4 dress-color swatch color-" + this.props.dress.color.name}/>
                     </div>
                     { this.renderCustomizations() }
-                    
-                    
                     <div className="row add-to-spree-btn">
                       <div className="col-xs-12">
-                        <a className='center-block btn btn-black btn-lrg'>Add to my cart</a>
+                        <a onClick={this.props.showAddToCartModal} className='center-block btn btn-black btn-lrg'>Add to my cart</a>
                       </div>
                     </div>
                   </div>
@@ -106,5 +104,6 @@ DressMessage.propTypes =
         email: React.PropTypes.string.isRequired,
         sameOwnerAsLastMessage: React.PropTypes.bool.isRequired,
         iconNumber: React.PropTypes.number.isRequired,
-        dress: React.PropTypes.object.isRequired
+        dress: React.PropTypes.object.isRequired,
+        showAddToCartModal: React.PropTypes.func.isRequired
     };

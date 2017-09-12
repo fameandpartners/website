@@ -64,6 +64,7 @@ export default class ChatList extends FirebaseComponent
                                                 email={data.val().from.email}
                                                 sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
                                                 dress={data.val().value}
+                                                showAddToCartModal={this.props.showAddToCartModal}
                                                 />]),
                     updateCount: this.state.updateCount + 1
 
@@ -150,7 +151,7 @@ export default class ChatList extends FirebaseComponent
                 
               </div>
             </div>
-        )
+        );p
     }
 }
 
@@ -158,5 +159,6 @@ export default class ChatList extends FirebaseComponent
 ChatList.propTypes = {
     firebaseAPI: React.PropTypes.string.isRequired,
     firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired
-}
+    firebaseNodeId: React.PropTypes.string.isRequired,
+    showAddToCartModal: React.PropTypes.func.isRequired
+};

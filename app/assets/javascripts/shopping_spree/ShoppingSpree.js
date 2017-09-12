@@ -13,8 +13,8 @@ export default class ShoppingSpree extends React.Component
         if( this.props.firebaseId  )
         {
             display = 'chat';
-            minimize = true
-        }
+            minimize = true;
+        };
         
         this.state =
             {
@@ -23,13 +23,38 @@ export default class ShoppingSpree extends React.Component
                 email: this.props.email,
                 icon: this.props.icon,
                 firebaseNodeId: this.props.firebaseId,
-                minimize: minimize
+                minimize: minimize,
+                showAddToCartModal: false,
+                dressAddingToCart: null
             };
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
         this.doneSharing = this.doneSharing.bind(this);
+        this.showAddToCartModal = this.showAddToCartModal.bind(this);
+        this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
     }
 
+    showAddToCartModal( dress )
+    {
+        console.log( 'showing add to cart modal' );
+        this.setState(
+            {
+                showAddingToCartModal: true,
+                dressAddingToCart: dress
+            }
+        );
+    }
+
+    closeAddToCartModal()
+    {
+        this.setState(
+            {
+                showAddingToCartModal: false,
+                dressAddingToCart: null
+            }
+        );
+    }
+    
     doneOnboarding( email, name, icon, shoppingSpreeId )
     {
         this.setState(
@@ -57,7 +82,7 @@ export default class ShoppingSpree extends React.Component
                 <div>
                 {
                     this.state.display === 'chat' &&
-                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize}/>
+                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal}/>
                 }
                 {
                     this.state.display === 'share' &&
