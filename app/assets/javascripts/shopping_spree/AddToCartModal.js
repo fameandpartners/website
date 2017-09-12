@@ -28,6 +28,21 @@ export default class AddToCartModal extends FirebaseComponent
                     <a className="btn-close med" alt="Close" onClick={this.close}></a>
                   </div>                      
                 </div>
+                <div className="row">
+                  <div className="col-xs-6 col-xs-push-3 text-center">
+                    Add to your cart!
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-6 col-xs-push-3 text-center">
+                    Just tell us your height and size, and
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-6 col-xs-push-3 text-center">
+                    we'll take care of your tailoring.
+                  </div>
+                </div>
               </div>
             </div>
         );
