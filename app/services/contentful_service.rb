@@ -239,9 +239,19 @@ module Contentful
         overlay_pids = (main_header_container.respond_to? :overlay_pids) ? main_header_container.overlay_pids : nil
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
+        full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
+
+        if full_width_content == 'desktop,mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'desktop'
+          full_width_content_class = 'u-forced-full-width-wrapper'
+        end
 
         {
           id: main_header_container.content_type.id,
+          full_width_content_class: full_width_content_class,
           image: desktop_image,
           mobile_image: mobile_image,
           overlay_pids: overlay_pids
