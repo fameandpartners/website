@@ -106,5 +106,5 @@ DressMessage.propTypes =
         email: React.PropTypes.string.isRequired,
         sameOwnerAsLastMessage: React.PropTypes.bool.isRequired,
         iconNumber: React.PropTypes.number.isRequired,
-        dress: React.PropTypes.node.isRequired
+        dress: React.PropTypes.object.isRequired
     };
