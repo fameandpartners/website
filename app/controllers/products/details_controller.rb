@@ -18,7 +18,6 @@ class Products::DetailsController < Products::BaseController
     end
 
     # set preselected images colors
-
     color_hash = \
       if params[:color]
         Repositories::ProductColors.get_by_name(params[:color]) || {}
@@ -47,7 +46,6 @@ class Products::DetailsController < Products::BaseController
     description(@product.meta_description)
 
     append_gtm_product(product_presenter: @product)
-
     @partial_hash = Rails.cache.fetch(env["REQUEST_PATH"], expires_in: 14.hours) do
       #let's makey object for nodepdp
       pdp_obj = {
@@ -57,6 +55,7 @@ class Products::DetailsController < Products::BaseController
         images: @product.all_images,
         sizeChart: @product.size_chart_data,
         siteVersion: @current_site_version.name,
+        hex_value: @product.colors.default.collect(&:value).join,
         flags: {
           afterpay: Features.active?(:afterpay),
           fastMaking: !Features.active?(:getitquick_unavailable)
