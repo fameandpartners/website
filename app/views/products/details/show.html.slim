@@ -10,6 +10,22 @@ ruby:
   discount  = @product.discount || { table: { amount: 0 } }
   @product_discount = discount.to_json
 
+/ NOTE: this JS block is loaded into the head, this should contain page data only		
+/ TODO: @product source will need to be cleaned, we have way too many duplicated there		
+/       also images are mess, have to load all_images separately because images inside		
+/       of @pruduct.images include mix of images in defferent ratios.		
+/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`		
+= content_for :head do		
+  javascript:		
+    window.PdpDataFull = {
+      paths: #{raw product_paths.to_json},
+      product: #{raw @product.to_json},
+      discount: #{raw @product_discount},
+      images: #{raw @product.all_images.to_json},
+      sizeChart: #{raw @product.size_chart_data.to_json},
+      siteVersion: #{raw @current_site_version.name.to_json},
+      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
+    };
 
 = content_for :head
   - @product.cropped_images.each_with_index do |image, index|
