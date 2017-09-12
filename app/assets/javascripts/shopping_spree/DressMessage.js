@@ -2,6 +2,47 @@ import React from 'react';
 
 export default class DressMessage extends React.Component
 {
+    constructor( props )
+    {
+        super( props );
+        let customization = null;
+
+        if( this.props.dress.customizations  )
+        {
+            customization = this.props.dress.customizations.presentation;
+        }
+
+        this.state =
+            {
+                customization: customization
+            };
+
+        this.renderCustomizations = this.renderCustomizations.bind(this);
+    }
+
+    renderCustomizations()
+    {
+        if( this.state.customization && this.state.customization !=  "" )
+        {
+            return (
+                <div>
+                  <div className="row">
+                    <div className={"col-xs-4"}>
+                      Customizations:
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-xs-12">{this.state.customization}</div>
+                  </div>
+                </div>
+            );
+        } else
+        {
+            return (<div/>);
+        }
+        
+    }
+    
     render()
     {
         const sameOwner = this.props.sameOwnerAsLastMessage;
@@ -14,9 +55,9 @@ export default class DressMessage extends React.Component
                     {this.props.name}
                   </div>
                 </div>
-                   );
+            );
         }
-        
+
         return(
             <li className='dress-message'>
               {name}
@@ -43,6 +84,9 @@ export default class DressMessage extends React.Component
                       </div>
                       <div className={"col-xs-4 dress-color swatch color-" + this.props.dress.color.name}/>
                     </div>
+                    { this.renderCustomizations() }
+                    
+                    
                     <div className="row add-to-spree-btn">
                       <div className="col-xs-12">
                         <a className='center-block btn btn-black btn-lrg'>Add to my cart</a>
