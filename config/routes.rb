@@ -8,7 +8,7 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
-  
+
   ###################################################################
   # Feed files redirections. They live above any `/us` + `/au` redirection
   ###################################################################
@@ -119,6 +119,9 @@ FameAndPartners::Application.routes.draw do
 
     # "Invite a friend" landing page
     get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
+
+    # Internship landing page
+    get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
     ###########
     # Lookbooks
@@ -250,7 +253,6 @@ FameAndPartners::Application.routes.draw do
     get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
     get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
     get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
-    get '/it-girl', to: redirect('/dresses'), as: :it_girl_landing_page
     get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
     get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
@@ -716,6 +718,6 @@ FameAndPartners::Application.routes.append do
 
   # Added in something to explicity exclude devise routes from going to contentful
   match '*path', to: 'contentful#main', constraints: lambda { |request| (request.path !~ /auth/) }
-  
+
   # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
