@@ -1,10 +1,11 @@
 class Products::DetailsController < Products::BaseController
   include Marketing::Gtm::Controller::Product
 
-  layout 'redesign/application'
+  layout 'custom_experience/application'
 
   def show
     @zopim_opt_out = true
+
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
       slug:         params[:product_slug],
@@ -46,6 +47,25 @@ class Products::DetailsController < Products::BaseController
     description(@product.meta_description)
 
     append_gtm_product(product_presenter: @product)
+
+    @partial_hash = Rails.cache.fetch(env["REQUEST_PATH"], expires_in: 14.hours) do
+      #let's makey object for nodepdp
+      pdp_obj = {
+        paths: env["REQUEST_URI"],  #todo: work this out with adam
+        product: @product,
+        discount: @product_discount,
+        images: @product.all_images,
+        sizeChart: @product.size_chart_data,
+        siteVersion: @current_site_version.name,
+        flags: {
+          afterpay: Features.active?(:afterpay),
+          fastMaking: !Features.active?(:getitquick_unavailable)
+        }
+      }
+
+      resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
+      JSON.parse(resp)
+    end
 
     render :show, status: pdp_status
   end
