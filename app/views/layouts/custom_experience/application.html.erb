@@ -1,0 +1,30 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
+
+    <%= stylesheet_link_tag 'application_custom_experience' %>
+
+    <%= render 'layouts/custom_experience/head' %>
+
+  </head>
+  <body>
+
+    <%= render 'layouts/redesign/header' %>
+
+    <div class="app-container app-container--top-margin">
+      <%= yield %>
+    </div>
+
+    <%= render 'google_tag_manager/base' %>
+    <%= render 'layouts/redesign/footer' %>
+    <%= render 'layouts/redesign/shopping_bag' %>
+
+    <%= javascript_include_tag 'application_custom_experience' %>
+    <%= render 'layouts/custom_experience/javascript' %>
+
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<%
+  form_newsletter = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  service = ENV.fetch('SUBSCRIPTION_SERVICE')
+%>
+
+<div>
+  <div class="newsletter-signup-form">
+    <h5><%= @email_heading %></h5>
+    <form class="<%= form_newsletter %>">
+      <input name='url' type="hidden" value="<%= subscribe_campaigns_email_capture_path %>">
+      <input name='form_name' type="hidden" value="Contentful Email Module">
+      <div class="input-group">
+        <input name='service' type="hidden" value="<%= service %>">
+        <div class="js-REPLACE-WITH-TEMPLATE-NAME-click-track" data-action="Email Field Press">
+          <input class="form-control input-lg js-en-field-email" name="email" placeholder="Enter your email" required="required" type="email" data-emailcapturepoint="All">
+        </div>
+        <span class="input-group-btn">
+          <div class="js-REPLACE-WITH-TEMPLATE-NAME-click-track" data-action="Email Signup Button Press">
+            <button class="btn btn-black btn-xs" type="submit">Sign Up</button>
+          </div>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="js-email-success-message email-module-message hide column is-half is-offset-one-quarter">
+    <h2>Thanks</h2>
+    <h5>Thanks for signing up. You'll be the first to know what's new.</h5>
+  </div>
+  <div class="js-email-error-message email-module-message hide column is-half is-offset-one-quarter">
+    <h2>Sorry</h2>
+    <h5 class="js-email-error-message-body">
+      There was an error saving your email.
+    </h5>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>', source: 'anti_fast_fashion_lp'});
+  });
+</script>

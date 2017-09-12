@@ -1,7 +1,7 @@
 class Products::DetailsController < Products::BaseController
   include Marketing::Gtm::Controller::Product
 
-  layout 'redesign/application'
+  layout 'custom_experience/application'
 
   def show
     @zopim_opt_out = true
