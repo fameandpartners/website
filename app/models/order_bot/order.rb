@@ -49,7 +49,6 @@ module OrderBot
 		end
 
 		def per_item_tax_adjustment (line_items)    
-
 			tax_adj = line_items.first.order&.adjustments&.tax&.first
 			item_tax = 0
 			total_tax = 0
@@ -63,9 +62,7 @@ module OrderBot
 			  total_tax = total_tax.round(2)
 			end
 
-			{
-			  'total_tax' => total_tax
-			}
+			{ 'total_tax' => total_tax }
 		end
 
 		def per_item_tax_free_adjustment_two_param(line_items,order)
@@ -79,7 +76,7 @@ module OrderBot
  		
  		def per_item_tax_free_adjustment(total_tax, line_items, order)
 		    ((order.adjustment_total - total_tax) / line_items.count)
-	  	end
+	  end
 	end
 end
 # include Spree::OrderBotHelper
