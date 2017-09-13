@@ -29,9 +29,10 @@ module OrderBot
 
 		def check_for_special_care(order)
 			promos = order&.adjustments&.promotion
-
+			vip_labels = ['CINFGW', 'CVIPGQ', 'CSG']
+			
 			if promos
-				special_care = promos.select {|promo| promo.label.upcase.include?('CINFGW') || promo.label.upcase.include?('CVIPGQ') || promo.label.upcase.include?('CSG')}
+				special_care =  promos.select {|promo| vip_labels.any?{ |vip_label| promo.label.upcase.include?(vip_label)}}
 				unless special_care.empty?
 					'VIP ORDER - EXTRA CARE REQUIRED'
 				end
