@@ -67,21 +67,23 @@ module Spree
     end
 
     def generate_tags_for_line_item(line_item, order_bot_product_id)
-      line_item.personalization.options_hash.each_pair do |key, value| #size and color
-        unless value.nil?
-          tag = get_or_create_tag(key, value)
+      unless line_item.personalization.nil?
+        line_item.personalization.options_hash.each_pair do |key, value| #size and color
+          unless value.nil?
+            tag = get_or_create_tag(key, value)
+            client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
+          end
+        end
+        
+        line_item.personalization.customization_values.each do |customization| #customizations
+          tag = get_or_create_tag(customization.customisation_type, customization.presentation)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
-      end
       
-      line_item.personalization.customization_values.each do |customization| #customizations
-        tag = get_or_create_tag(customization.customisation_type, customization.presentation)
+        tag = get_or_create_tag('height', "#{line_item.personalization.height}") #height
         client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
       end
       
-      tag = get_or_create_tag('height', "#{line_item.personalization.height}") #height
-      client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
-
       tag = get_or_create_tag('style number', GlobalSku.find_by_product_id(line_item.product.id).style_number) #style number
       client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
 

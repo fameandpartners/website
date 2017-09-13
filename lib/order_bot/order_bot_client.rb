@@ -87,8 +87,11 @@ module OrderBot
 
     def create_new_order(order)
       res = make_post_request('admin/orders.json/', [order])
+      res_json = JSON.parse(res.body)
+      if res_json['response_code'] == -1
+        raise res #Put entire response in error message if error
+      end
       res
-      #TODO: Add stuff here after hear back from Frank
     end
 
     def get_group_id_by_group_name(group_name)
@@ -105,11 +108,11 @@ module OrderBot
     end
 
     def make_get_request( url, params = {}) 
-      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass, log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
     end
 
     def make_post_request(url, request_object)
-      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass, log: Logger.new(STDERR))
+      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
     end
   end
 end

@@ -10,7 +10,7 @@ module OrderBot
 			@orderbot_account_id = 2
 			@account_group_id = 755
 			@orderbot_customer_id = 1
-			@ship_date = order.projected_delivery_date - 4.days
+			@ship_date =  line_items.first.delivery_period_policy.ship_by_date(order.completed_at, line_items.first.delivery_period)
 			@billing_third_party = false
 			@insure_packages = false #Dont do insurance
 			@shipping_code = order.shipping_method.name
@@ -22,6 +22,20 @@ module OrderBot
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
 			@order_lines = generate_order_lines(line_items, order)
 			@other_charges = generate_other_charges((tax_free_adjustments* line_items.count)) #This should add or subtract the rounding errors as other amounts
+			@internal_notes = check_for_special_care(order)
+
+		end
+
+		def check_for_special_care(order)
+			promos = order&.adjustments&.promotion
+			vip_labels = ['CINFGW', 'CVIPGQ', 'CSG']
+			
+			if promos
+				special_care =  promos.select {|promo| vip_labels.any?{ |vip_label| promo.label.upcase.include?(vip_label)}}
+				unless special_care.empty?
+					'VIP ORDER - EXTRA CARE REQUIRED'
+				end
+			end
 		end
 
 		private
@@ -79,6 +93,3 @@ module OrderBot
 	    end
 	end
 end
-# include Spree::OrderBotHelper
-# @order = Spree::Order.find(35425104)
-# create_new_order_by_factory(@order)
