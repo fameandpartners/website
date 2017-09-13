@@ -23,6 +23,19 @@ module OrderBot
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
 			@order_lines = generate_order_lines(line_items, order)
 			@other_charges = generate_other_charges((tax_free_adjustments* line_items.count)) #This should add or subtract the rounding errors as other amounts
+			@internal_notes = check_for_special_care(order)
+
+		end
+
+		def check_for_special_care(order)
+			promos = order&.adjustments&.promotion
+
+			if promos
+				special_care = promos.select {|promo| promo.label.upcase.include?('CINFGW') || promo.label.upcase.include?('CVIPGQ') || promo.label.upcase.include?('CSG')}
+				unless special_care.empty?
+					'VIP ORDER - EXTRA CARE REQUIRED'
+				end
+			end
 		end
 
 		def generate_order_lines(line_items, order)
