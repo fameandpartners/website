@@ -292,8 +292,9 @@ module Contentful
       # Check if the LP requests an extra spacing between top navigation and content
       page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
 
-      parent_container.relative_url
+      page_url = parent_container.relative_url
       {
+        page_url: page_url,
         header: main_header_tile,
         rows: row_tiles,
         meta_title: meta_title,

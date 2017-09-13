@@ -1,4 +1,5 @@
 <%
+  page_url = @landing_page_container[:page_url]
   form_newsletter = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
   service = ENV.fetch('SUBSCRIPTION_SERVICE')
 %>
@@ -36,6 +37,6 @@
 
 <script>
   $(function() {
-    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>', source: 'anti_fast_fashion_lp'});
+    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>', source: '<%= page_url %>'});
   });
 </script>
