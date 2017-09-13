@@ -8,10 +8,28 @@ module Spree
     end
 
     def create_new_order_by_factory(order)
+      binding.pry
       factory_line_items = separate_line_items_by_factory(order.line_items)
-      factory_line_items.each_key { |key| create_new_order(order, factory_line_items[key])}
+      making_time_line_items = separate_line_items_by_make_time(factory_line_items)
+      making_time_line_items.each_key { |key| create_new_order(order, making_tiem_line_items[key])}
     end
 
+    def separate_line_items_by_make_time(line_items_hash)
+      h = Hash.new { |hash, key| hash[key] = []}
+      line_items_hash.each_pair do |key, line_items|
+        line_items.each do |line_item|
+          if line_item.fast_making?
+            h["#{key}fast_making"] << line_item
+          elsif line_item.slow_making?
+            h["#{key}slow_making"] << line_item
+          else
+            h["#{key}regular_making"] << line_item
+          end
+        end
+      end
+      h
+    end
+    
     def separate_line_items_by_factory(line_items)
       h = Hash.new { |hash, key| hash[key] = [] }
       
