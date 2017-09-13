@@ -8,7 +8,6 @@ module Spree
     end
 
     def create_new_order_by_factory(order)
-      binding.pry
       factory_line_items = separate_line_items_by_factory(order.line_items)
       making_time_line_items = separate_line_items_by_make_time(factory_line_items)
       making_time_line_items.each_key { |key| create_new_order(order, making_tiem_line_items[key])}
