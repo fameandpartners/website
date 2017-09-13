@@ -2,6 +2,7 @@ import React from 'react';
 import * as firebase from 'firebase';
 
 import FirebaseComponent from './FirebaseComponent';
+import SizeButton from './SizeButton';
 
 export default class AddToCartModal extends FirebaseComponent
 {
@@ -9,11 +10,23 @@ export default class AddToCartModal extends FirebaseComponent
     constructor( props )
     {
         super( props );
+        this.state =
+            {
+                selectedSize: null
+            };
+        
         this.close = this.close.bind( this );
+        this.sizeSelected = this.sizeSelected.bind( this );
     }
 
     close()
     {
+    }
+
+    sizeSelected( size )
+    {
+        this.setState( { selectedSize: size } );
+        console.log( size + " selected" );
     }
     
     render()
@@ -88,68 +101,16 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
                 <div className="row">
                   <div className="col-xs-10 col-xs-push-1">
-                    <div className="size-table">
-                      <div className="size-row">
-                        <div className="size-button">
-                          <div className="size-button-content">
-                            0                            
-                          </div>
-                        </div>
-                        <div className="size-button">
-                          <div className="size-button-content">
-                            2                            
-                          </div>
-                        </div>
-                        <div className="size-button">
-                          <div className="size-button-content">
-                            4                            
-                          </div>
-                        </div>
-                        <div className="size-button">
-                          <div className="size-button-content">
-                            6                            
-                          </div>
-                        </div>
-                        <div className="size-button">
-                          <div className="size-button-content">
-                            8                            
-                          </div>
-                        </div>
-                      </div>
-                      <div className="size-row">
-                        <div className="size-button">
-                          10
-                        </div>
-                        <div className="size-button">
-                          12
-                        </div>
-                        <div className="size-button">
-                          14
-                        </div>
-                        <div className="size-button">
-                          16
-                        </div>
-                        <div className="size-button">
-                          18
-                        </div>
-                      </div>
-                      <div className="size-row">
-                        <div className="size-button">
-                          20
-                        </div>
-                        <div className="size-button">
-                          22
-                        </div>
-                        <div className="size-button">
-                          24
-                        </div>
-                        <div className="size-button">
-                          26
-                        </div>
-                      </div>
-                    </div>                      
+                    <div className="size-row">
+                      <SizeButton size="0" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
+                      <SizeButton size="2" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
+                      <SizeButton size="4" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
+                      <SizeButton size="6" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
+                      <SizeButton size="8" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
+                    </div>
                   </div>
                 </div>
+                
               </div>
             </div>
         );
