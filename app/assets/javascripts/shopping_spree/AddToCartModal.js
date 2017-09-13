@@ -23,35 +23,41 @@ export default class AddToCartModal extends FirebaseComponent
               <div className='shopping-spree-share-modal-background shopping-spree'>
               </div>
               <div className="shopping-spree-cart-modal shopping-spree">
+                
                 <div className="row" >
                   <div className="col-xs-2 col-xs-push-10">
                     <a className="btn-close med" alt="Close" onClick={this.close}></a>
                   </div>                      
                 </div>
+                
                 <div className="row">
                   <div className="col-xs-6 col-xs-push-3 text-center shopping-spree-big-headline">
                     Add to your cart!
                   </div>
                 </div>
+                
                 <div className="row modal-sub-headline">
                   <div className="col-xs-6 col-xs-push-3 text-center">
                     Just tell us your height and size, and
                   </div>
                 </div>
+                
                 <div className="row">
                   <div className="col-xs-6 col-xs-push-3 text-center">
                     we'll take care of your tailoring.
                   </div>
                 </div>
+                
                 <div className="row height-select-text">
                   <div className="col-xs-11 col-xs-push-1">
                     What's your Height?
                   </div>
                 </div>
+                
                 <div className="row"> 
                   <div className="col-xs-4 col-xs-push-1">
                     <select className="height-select">
-                      <option disabled selected value></option>
+                      <option disabled selected value>Select</option>
                       <option value="58">4ft 10in</option>
                       <option value="59">4ft 11in</option>
                       <option value="60">5ft 0in</option>
@@ -72,6 +78,76 @@ export default class AddToCartModal extends FirebaseComponent
                       <option value="75">6ft 3in</option>
                       <option value="76">6ft 4in</option>
                     </select>
+                  </div>
+                </div>
+                
+                <div className="row height-select-text">
+                  <div className="col-xs-11 col-xs-push-1">
+                    What's Your Dress Size?
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-10 col-xs-push-1">
+                    <div className="size-table">
+                      <div className="size-row">
+                        <div className="size-button">
+                          <div className="size-button-content">
+                            0                            
+                          </div>
+                        </div>
+                        <div className="size-button">
+                          <div className="size-button-content">
+                            2                            
+                          </div>
+                        </div>
+                        <div className="size-button">
+                          <div className="size-button-content">
+                            4                            
+                          </div>
+                        </div>
+                        <div className="size-button">
+                          <div className="size-button-content">
+                            6                            
+                          </div>
+                        </div>
+                        <div className="size-button">
+                          <div className="size-button-content">
+                            8                            
+                          </div>
+                        </div>
+                      </div>
+                      <div className="size-row">
+                        <div className="size-button">
+                          10
+                        </div>
+                        <div className="size-button">
+                          12
+                        </div>
+                        <div className="size-button">
+                          14
+                        </div>
+                        <div className="size-button">
+                          16
+                        </div>
+                        <div className="size-button">
+                          18
+                        </div>
+                      </div>
+                      <div className="size-row">
+                        <div className="size-button">
+                          20
+                        </div>
+                        <div className="size-button">
+                          22
+                        </div>
+                        <div className="size-button">
+                          24
+                        </div>
+                        <div className="size-button">
+                          26
+                        </div>
+                      </div>
+                    </div>                      
                   </div>
                 </div>
               </div>
