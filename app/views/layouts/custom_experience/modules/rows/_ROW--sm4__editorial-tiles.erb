@@ -1,0 +1,10 @@
+<div class="section-row columns is-multiline is-mobile">
+  <% contents[:lg_items].each do |item| %>
+    <% @lg_contents = item %>
+    <div class="column is-half-mobile is-half-tablet is-one-quarter-desktop">
+      <div class="Editorial Editorial--mini">
+        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      </div>
+    </div>
+  <% end %>
+</div>

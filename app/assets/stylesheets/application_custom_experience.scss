@@ -1,0 +1,43 @@
+// NOTE: THESE ARE ALL OF THE NECESSARY STYLES TO MAKE THE
+// HEADER, FOOTER, SIDE_CART, MOBILE NAVIGATION work
+
+//= require_tree ./custom_experience/stylesheets
+@import 'redesign/vars';
+@import 'redesign/mixins';
+@import 'redesign/extras/helpers';
+@import 'media_queries';
+
+@import 'redesign/icons';
+@import 'libs/icomoon_fame_2015/icons';
+
+// Base
+@import 'redesign/base/base';
+@import 'redesign/base/type';
+@import 'redesign/base/links';
+@import 'redesign/base/input-groups';
+@import 'redesign/base/forms';
+@import 'redesign/base/buttons';
+@import 'redesign/base/containers';
+
+@import 'redesign/layout/general';
+@import 'redesign/header';
+@import 'redesign/alerts';
+
+// Layout
+@import 'redesign/layout/header';
+@import 'redesign/layout/footer';
+@import 'redesign/layout/nav-menu';
+@import 'redesign/layout/simplified-nav';
+
+// Components
+@import 'redesign/components/cart';
+
+// // Generic
+@import 'redesign/generic/content-order';
+@import 'redesign/generic/helpers';
+
+.app-container--top-margin {
+  @media (min-width: 769px) {
+    margin-top: 96px;
+  }
+}
