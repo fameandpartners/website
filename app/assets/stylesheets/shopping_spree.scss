@@ -11,6 +11,18 @@ $chat_bar_height: 55px;
 
 .shopping-spree
 {
+    font-family: NeuzeGro;
+    
+    .shopping-spree-headline
+    {
+        font-size: 18px;
+    }
+
+    .shopping-spree-big-headline
+    {
+        font-size: 24px;
+    }
+    
     .center-button-text
     {
         padding:0px;
@@ -74,10 +86,6 @@ $chat_bar_height: 55px;
     z-index: 999;
     font-family: NeuzeGro;
 
-    .shopping-spree-headline
-    {
-        font-size: 18px;
-    }
     .equal
     {
         display: flex;

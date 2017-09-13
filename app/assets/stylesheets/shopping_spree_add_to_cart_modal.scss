@@ -7,10 +7,25 @@
     position: fixed;
     background-color: white;
     z-index: 2000;
+
+    .modal-sub-headline
+    {
+        margin-top: 17px;
+    }
     
     .btn-close
     {
         margin-top: 22px;
+    }
+
+    .height-select
+    {
+        min-width: 100%;
+    }
+
+    .height-select-text
+    {
+        margin-top: 42px;
     }
     
 }
