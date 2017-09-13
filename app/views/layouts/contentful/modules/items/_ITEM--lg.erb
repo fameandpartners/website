@@ -1,7 +1,16 @@
-<%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
+<% # Currenly using Bulma's responsive width %>
+<picture class="">
+  <source media="(max-width: 768px)" srcset="<%= @lg_contents[:mobile_image] %>">
+  <source media="(min-width: 769px)" srcset="<%= @lg_contents[:image] %>">
+  <img class="Editorial__image" src="<%= @lg_contents[:image] %>" srcset="
+    <%= @lg_contents[:mobile_image] %> 768w,
+    <%= @lg_contents[:image] %> 769w">
+</picture>
 
 <%
-  products = []
+products = []
+
+if @lg_contents[:overlay_pids]
 
   @lg_contents[:overlay_pids].each do |pid|
     split_pid = pid.split('-', 2)
@@ -20,6 +29,8 @@
       products.push(present_product[0])
     end
   end
+
+end
 %>
 
 <% if products.count > 0 %>

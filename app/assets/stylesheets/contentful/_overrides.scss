@@ -1,5 +1,7 @@
+// override original gap between columns
 .column {
-  // padding: 0.75rem 1.25rem;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
 }
 
 @media (max-width: $tablet) {
