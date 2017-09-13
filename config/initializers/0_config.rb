@@ -83,7 +83,7 @@ end
 
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
-configatron.node_pdp_url = ENV['NODE_CONTENT_URL'] || 'https://content.fameandgroups.com'
+configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 
 case Rails.env.to_sym
 when :development
