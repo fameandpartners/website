@@ -76,7 +76,7 @@ module OrderBot
  		
  		def per_item_tax_free_adjustment(total_tax, line_items, order)
 		    ((order.adjustment_total - total_tax) / line_items.count)
-	  end
+	    end
 	end
 end
 # include Spree::OrderBotHelper
