@@ -28,7 +28,6 @@ module OrderBot
 		end
 
 		def check_for_special_care(order)
-
 			promos = order&.adjustments&.promotion
 
 			if promos
