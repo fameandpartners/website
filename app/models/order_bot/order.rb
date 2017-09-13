@@ -3,7 +3,6 @@ module OrderBot
 	class Order
 
 		def initialize(order, line_items)
-			binding.pry
 			tax_free_adjustments = per_item_tax_free_adjustment_two_param(order.line_items, order).to_f
 			adjustments = per_item_adjustment(line_items, order).to_f
 			@reference_order_id = order.number + SecureRandom.uuid
