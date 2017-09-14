@@ -126,7 +126,7 @@ export default class AddToCartModal extends FirebaseComponent
                 { this.generateSizeRow( 20, 26 ) }
                 <div className="row">
                   <div className="col-xs-11 col-xs-push-1">
-                    <a href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
+                    <a className="shopping-spree-link" href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
                   </div>
                 </div>
                 <div className="row add-to-cart-button">

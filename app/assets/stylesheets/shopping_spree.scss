@@ -5,13 +5,20 @@
 @import 'shopping_spree_modal';
 @import 'shopping_spree_share_modal';
 @import 'shopping_spree_add_to_cart_modal';
+@import 'redesign/vars';
 
 $header_height: 68px;
 $chat_bar_height: 55px;
 
 .shopping-spree
 {
-    font-family: NeuzeGro;
+    font-family: $font-heading;
+    font-weight: 400;
+
+    .shopping-spree-link
+    {
+        text-decoration: underline;
+    }
     
     .shopping-spree-headline
     {
