@@ -8,7 +8,13 @@
     position: fixed;
     background-color: white;
     z-index: 2000;
+    overflow-y: scroll;
 
+
+    #add-to-cart-headline
+    {
+        margin-top: 60px;
+    }
     
     .modal-sub-headline
     {
@@ -17,7 +23,9 @@
     
     .btn-close
     {
-        margin-top: 22px;
+        position: absolute;
+        top: 22px;
+        right: 22px;
     }
 
     .height-select

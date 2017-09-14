@@ -58,15 +58,9 @@ export default class AddToCartModal extends FirebaseComponent
               <div className='shopping-spree-share-modal-background shopping-spree'>
               </div>
               <div className="shopping-spree-cart-modal shopping-spree">
-                
-                <div className="row" >
-                  <div className="col-xs-2 col-xs-push-10">
-                    <a className="btn-close med" alt="Close" onClick={this.close}></a>
-                  </div>                      
-                </div>
-                
+                <a className="btn-close med" alt="Close" onClick={this.close}></a>                
                 <div className="row">
-                  <div className="col-xs-12 text-center shopping-spree-big-headline">
+                  <div id="add-to-cart-headline" className="col-xs-12 text-center shopping-spree-big-headline">
                     Add to your cart!
                   </div>
                 </div>
