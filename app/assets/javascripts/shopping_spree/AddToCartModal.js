@@ -28,7 +28,23 @@ export default class AddToCartModal extends FirebaseComponent
         this.setState( { selectedSize: size } );
         console.log( size + " selected" );
     }
-    
+
+    generateSizeRow( startSize, endSize )
+    {
+        let sizeRows = [];
+        for( var i = startSize; i <= endSize; i+= 2 )
+        {
+            sizeRows.push( <SizeButton key={i.toString()} size={i.toString()} selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/> );
+            
+        }
+
+        for( var i = sizeRows.length; i < 5; i += 1 )
+        {
+            sizeRows.push( <div className="size-box-hidden"></div> );
+        }
+        
+        return( <div className="size-row">{sizeRows}</div> );
+    }
     render()
     {
         return(
@@ -101,13 +117,19 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
                 <div className="row">
                   <div className="col-xs-10 col-xs-push-1">
-                    <div className="size-row">
-                      <SizeButton size="0" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
-                      <SizeButton size="2" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
-                      <SizeButton size="4" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
-                      <SizeButton size="6" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
-                      <SizeButton size="8" selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/>
-                    </div>
+                    { this.generateSizeRow( 0, 8 ) }
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-xs-10 col-xs-push-1">
+                    { this.generateSizeRow( 10, 18 ) }
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-xs-10 col-xs-push-1">
+                    { this.generateSizeRow( 20, 26 ) }
                   </div>
                 </div>
                 

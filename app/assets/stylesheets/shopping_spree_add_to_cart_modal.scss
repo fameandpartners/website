@@ -40,11 +40,21 @@
         flex: 1 0 auto;
         position: relative;
         cursor: pointer;
+        
         &.selected
         {
             background-color: red;
         }
+        
     }
+
+    .size-box-hidden
+    {
+        @extend .size-box;
+        background: transparent;
+        cursor: default;
+    }
+    
     
     .size-box:after
     {
@@ -53,6 +63,7 @@
         display: block;
         padding-top: 100%;
     }
+    
     .size-box .size-inner
     {
         position: absolute;
