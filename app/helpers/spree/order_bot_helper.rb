@@ -18,11 +18,11 @@ module Spree
       line_items_hash.each_pair do |key, line_items|
         line_items.each do |line_item|
           if line_item.fast_making?
-            h["#{key}fast_making"] << line_item
+            h["#{key} #{line_item.delivery_period} fast_making"] << line_item
           elsif line_item.slow_making?
-            h["#{key}slow_making"] << line_item
+            h["#{key} #{line_item.delivery_period} slow_making"] << line_item
           else
-            h["#{key}regular_making"] << line_item
+            h["#{key} #{line_item.delivery_period} regular_making"] << line_item
           end
         end
       end
