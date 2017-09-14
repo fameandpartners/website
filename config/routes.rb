@@ -8,7 +8,7 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
-  
+
   ###################################################################
   # Feed files redirections. They live above any `/us` + `/au` redirection
   ###################################################################
@@ -624,6 +624,8 @@ FameAndPartners::Application.routes.draw do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
+
+      delete '/rails_cache' => 'systems#clear_cache'
     end
   end
 
@@ -726,6 +728,6 @@ FameAndPartners::Application.routes.append do
 
   # Added in something to explicity exclude devise routes from going to contentful
   match '*path', to: 'contentful#main', constraints: lambda { |request| (request.path !~ /auth/) }
-  
+
   # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end
