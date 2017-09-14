@@ -66,19 +66,19 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
                 
                 <div className="row">
-                  <div className="col-xs-6 col-xs-push-3 text-center shopping-spree-big-headline">
+                  <div className="col-xs-12 text-center shopping-spree-big-headline">
                     Add to your cart!
                   </div>
                 </div>
                 
                 <div className="row modal-sub-headline">
-                  <div className="col-xs-6 col-xs-push-3 text-center">
+                  <div className="col-xs-12 text-center">
                     Just tell us your height and size, and
                   </div>
                 </div>
                 
                 <div className="row">
-                  <div className="col-xs-6 col-xs-push-3 text-center">
+                  <div className="col-xs-12 text-center">
                     we'll take care of your tailoring.
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
                 
                 <div className="row"> 
-                  <div className="col-xs-4 col-xs-push-1">
+                  <div className="col-xs-8 col-md-6 col-xs-push-1">
                     <select className="height-select">
                       <option disabled selected value>Select</option>
                       <option value="58">4ft 10in</option>
