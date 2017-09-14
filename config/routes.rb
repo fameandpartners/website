@@ -626,6 +626,8 @@ FameAndPartners::Application.routes.draw do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
+
+      delete '/rails_cache' => 'systems#clear_cache'
     end
   end
 
