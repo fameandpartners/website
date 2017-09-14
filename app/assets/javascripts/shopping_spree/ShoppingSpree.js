@@ -82,7 +82,7 @@ export default class ShoppingSpree extends React.Component
         return( 
                 <div>
                 {
-                    this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon}/>
+                    this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closeModal={this.closeAddToCartModal}/>
                         
                 }
                 {

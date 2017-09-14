@@ -15,13 +15,9 @@ export default class AddToCartModal extends FirebaseComponent
                 selectedSize: null
             };
         
-        this.close = this.close.bind( this );
         this.sizeSelected = this.sizeSelected.bind( this );
     }
 
-    close()
-    {
-    }
     
     sizeSelected( size )
     {
@@ -58,7 +54,7 @@ export default class AddToCartModal extends FirebaseComponent
               <div className='shopping-spree-share-modal-background shopping-spree'>
               </div>
               <div className="shopping-spree-cart-modal shopping-spree">
-                <a className="btn-close med" alt="Close" onClick={this.close}></a>                
+                <a className="btn-close med" alt="Close" onClick={this.props.closeModal}></a>                
                 <div className="row">
                   <div id="add-to-cart-headline" className="col-xs-12 text-center shopping-spree-big-headline">
                     Add to your cart!
@@ -141,5 +137,6 @@ AddToCartModal.propTypes = {
     icon: React.PropTypes.number,
     email: React.PropTypes.string,
     firebaseId: React.PropTypes.string,
-    dress: React.PropTypes.object.isRequired
+    dress: React.PropTypes.object.isRequired,
+    closeModal: React.PropTypes.func.isRequired
 };
