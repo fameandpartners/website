@@ -22,7 +22,7 @@ export default class AddToCartModal extends FirebaseComponent
     close()
     {
     }
-
+    
     sizeSelected( size )
     {
         this.setState( { selectedSize: size } );
@@ -32,19 +32,25 @@ export default class AddToCartModal extends FirebaseComponent
     generateSizeRow( startSize, endSize )
     {
         let sizeRows = [];
-        for( var i = startSize; i <= endSize; i+= 2 )
+        for( let i = startSize; i <= endSize; i+= 2 )
         {
             sizeRows.push( <SizeButton key={i.toString()} size={i.toString()} selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/> );
             
         }
 
-        for( var i = sizeRows.length; i < 5; i += 1 )
+        for( let i = sizeRows.length; i < 5; i += 1 )
         {
             sizeRows.push( <div className="size-box-hidden"></div> );
         }
         
-        return( <div className="size-row">{sizeRows}</div> );
+        return( <div className="row">
+                  <div className="col-xs-8 col-xs-push-1">
+                    <div className="size-row">{sizeRows}</div>
+                  </div>
+                </div>
+              );
     }
+    
     render()
     {
         return(
@@ -115,24 +121,19 @@ export default class AddToCartModal extends FirebaseComponent
                     What's Your Dress Size?
                   </div>
                 </div>
+                { this.generateSizeRow( 0, 8 ) }
+                { this.generateSizeRow( 10, 18 ) }
+                { this.generateSizeRow( 20, 26 ) }
                 <div className="row">
-                  <div className="col-xs-10 col-xs-push-1">
-                    { this.generateSizeRow( 0, 8 ) }
+                  <div className="col-xs-11 col-xs-push-1">
+                    <a href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
                   </div>
                 </div>
-
-                <div className="row">
+                <div className="row add-to-cart-button">
                   <div className="col-xs-10 col-xs-push-1">
-                    { this.generateSizeRow( 10, 18 ) }
+                    <a  className="btn btn-lrg btn-black btn-block">Add to your cart</a>
                   </div>
                 </div>
-
-                <div className="row">
-                  <div className="col-xs-10 col-xs-push-1">
-                    { this.generateSizeRow( 20, 26 ) }
-                  </div>
-                </div>
-                
               </div>
             </div>
         );
