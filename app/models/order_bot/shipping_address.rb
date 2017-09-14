@@ -8,7 +8,7 @@ module OrderBot
 			@address1 = shipping_address.address2.blank? ? nil : shipping_address.address2 
 			@address2 = shipping_address.address1
 			@city = shipping_address.city
-			@state = shipping_address.state.abbr
+			@state = shipping_address&.state&.abbr || shipping_address.state_name
 			@postal_code = shipping_address.zipcode
 		    @country = shipping_address.country.iso
 		end

@@ -9,7 +9,7 @@ module OrderBot
 			@address1 = billing_address.address2.blank? ? nil : billing_address.address2 
 			@address2 = billing_address.address1
 			@city = billing_address.city
-			@state = billing_address.state.abbr
+			@state = billing_address&.state&.abbr ||  billing_address.state_name
 			@postal_code = billing_address.zipcode
 		    @country = billing_address.country.iso
 		end

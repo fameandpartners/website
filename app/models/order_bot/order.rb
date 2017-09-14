@@ -3,7 +3,6 @@ module OrderBot
 	class Order
 
 		def initialize(order, line_items)
-			tax_free_adjustments = per_item_tax_free_adjustment_two_param(order.line_items, order).to_f
 			adjustments = per_item_adjustment(line_items, order).to_f
 			@reference_order_id = order.number + SecureRandom.uuid
 			@order_date	= order.created_at
@@ -18,20 +17,21 @@ module OrderBot
 			@order_status = 'unconfirmed'
 			@shipping = 0 #TODO: Revist this. We currently bake in the shipping cost.
 			@order_total = (((adjustments) * line_items.count) + @subtotal)
+			@order_discount = per_item_discount_adjustment(line_items, order).abs * line_items.count
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
-			@billing_address = OrderBot::BillingAddress.new(order.bill_address)
+			@billing_address = OrderBot::BillingAddress.new(order.bill_address)			
 			@order_lines = generate_order_lines(line_items, order)
-			@other_charges = generate_other_charges((tax_free_adjustments* line_items.count)) #This should add or subtract the rounding errors as other amounts
+			@other_charges = generate_other_charges(per_item_shipping_adjustment(line_items, order))
 			@internal_notes = check_for_special_care(order)
 
 		end
 
 		def check_for_special_care(order)
-			promos = order&.adjustments&.promotion
+			promos = order&.promotions
 			vip_labels = ['CINFGW', 'CVIPGQ', 'CSG']
 			
 			if promos
-				special_care =  promos.select {|promo| vip_labels.any?{ |vip_label| promo.label.upcase.include?(vip_label)}}
+				special_care =  promos.select {|promo| vip_labels.any?{ |vip_label| promo.code.upcase.include?(vip_label)}}
 				unless special_care.empty?
 					'VIP ORDER - EXTRA CARE REQUIRED'
 				end
@@ -48,6 +48,11 @@ module OrderBot
 
 		def generate_other_charges(adjustments)
 			[{'other_charge_id' => 1, 'amount' => adjustments}]
+		end
+
+		def per_item_shipping_adjustment(line_items, order)
+			shipping = order&.adjustments&.shipping&.inject(0){|sum, item| sum + item.amount.abs}
+			shipping/line_items.count
 		end
 
 		def per_item_adjustment(line_items, order)
@@ -83,8 +88,8 @@ module OrderBot
 			per_item_tax_free_adjustment(per_item_tax_adjustment(line_items)['total_tax'], line_items, order)
 		end
 
-		def per_item_discount_adjustment(line_items)
-			discount = line_items.first.order&.adjustments&.promotion&.inject(0){|sum, item| sum + item.amount.abs}
+		def per_item_discount_adjustment(line_items, order)
+			discount = order&.adjustments&.promotion&.inject(0){|sum, item| sum + item.amount.abs}
 			discount/line_items.count
 		end
  		
