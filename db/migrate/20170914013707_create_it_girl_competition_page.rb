@@ -15,6 +15,11 @@ class CreateItGirlCompetitionPage < ActiveRecord::Migration
   end
 
   def up
+
+    # Remove the legacy page with this same URL (it's no longer used)
+    Revolution::Page.where(path: landing_page_properties[:path]).delete_all
+
+    # Create the new page
     page = Revolution::Page.create!(
       path:          landing_page_properties[:path],
       template_path: landing_page_properties[:template_path],
