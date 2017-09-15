@@ -36,7 +36,7 @@ export default class AddToCartModal extends FirebaseComponent
 
         for( let i = sizeRows.length; i < 5; i += 1 )
         {
-            sizeRows.push( <div className="size-box-hidden"></div> );
+            sizeRows.push( <div key={endSize + i } className="size-box-hidden"></div> );
         }
         
         return( <div className="row">
