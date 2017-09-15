@@ -12,17 +12,88 @@ export default class AddToCartModal extends FirebaseComponent
         super( props );
         this.state =
             {
-                selectedSize: null
+                selectedSize: null,
+                height: null,
+                showHeightError: false,
+                showSizeError: null
             };
         
         this.sizeSelected = this.sizeSelected.bind( this );
+        this.addToCart = this.addToCart.bind(this);
+        this.heightSelected = this.heightSelected.bind(this);
+        this.initializeFirebase = this.initializeFirebase.bind(this);
+        this.initializeFirebase();
+        
     }
 
+
+    addToCart()
+    {
+        if( this.state.height == null )
+        {
+            this.setState(
+                {
+                    showHeightError: true
+                }
+            );
+        }
+
+        if( this.state.selectedSize == null )
+        {
+            this.setState(
+                {
+                    showSizeError: true
+                }
+            );
+        }
+
+        if( this.state.height && this.state.selectedSize )
+        {
+            this.createFirebaseCartItem();
+            this.props.closeModal();
+        }
+    }
+
+    createFirebaseCartItem()
+    {
+        let newMessage = this.cartDB.push();
+        console.log( this.props.dress );
+        newMessage.set( { created_at: firebase.database.ServerValue.TIMESTAMP,
+                          dress:
+                          {
+                              size: this.state.selectedSize,
+                              height: this.state.height,
+                              description: this.props.dress['description'],
+                              image: this.props.dress['image'],
+                              name: this.props.dress['name'],
+                              price: this.props.dress['price'],
+                              product_id: this.props.dress['product_id'],
+                              url: this.props.dress['url']
+                          },
+                          entry_for:
+                          {
+                              name: this.props.name,
+                              email: this.props.email,
+                              icon: this.props.icon
+                          }
+                        }
+                      );
+    }
+
+    initializeFirebase()
+    {
+        super.connectToFirebase();
+        this.cartDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
+    }
     
+    heightSelected( event )
+    {
+        this.setState({height: event.target.value});
+        
+    }
     sizeSelected( size )
     {
         this.setState( { selectedSize: size } );
-        console.log( size + " selected" );
     }
 
     generateSizeRow( startSize, endSize )
@@ -81,7 +152,7 @@ export default class AddToCartModal extends FirebaseComponent
                 
                 <div className="row"> 
                   <div className="col-xs-8 col-md-6 col-xs-push-1">
-                    <select className="height-select">
+                    <select onChange={this.heightSelected} className={this.state.showHeightError ? "height-select red-border": "height-select"}>
                       <option disabled selected value>Select</option>
                       <option value="58">4ft 10in</option>
                       <option value="59">4ft 11in</option>
@@ -105,7 +176,12 @@ export default class AddToCartModal extends FirebaseComponent
                     </select>
                   </div>
                 </div>
-                
+                {
+                    this.state.showHeightError &&
+                        <div className="row">
+                              <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your height</div>
+                            </div>
+                }
                 <div className="row height-select-text">
                   <div className="col-xs-11 col-xs-push-1">
                     What's Your Dress Size?
@@ -114,6 +190,13 @@ export default class AddToCartModal extends FirebaseComponent
                 { this.generateSizeRow( 0, 8 ) }
                 { this.generateSizeRow( 10, 18 ) }
                 { this.generateSizeRow( 20, 26 ) }
+                {
+                    this.state.showSizeError &&
+                        <div className="row">
+                              <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your size</div>
+                            </div>
+                }
+                
                 <div className="row">
                   <div className="col-xs-11 col-xs-push-1">
                     <a className="shopping-spree-link" href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
@@ -121,7 +204,7 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
                 <div className="row add-to-cart-button">
                   <div className="col-xs-10 col-xs-push-1">
-                    <a  className="btn btn-lrg btn-black btn-block">Add to your cart</a>
+                    <a onClick={this.addToCart} className="btn btn-lrg btn-black btn-block">Add to your cart</a>
                   </div>
                 </div>
               </div>

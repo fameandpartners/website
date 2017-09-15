@@ -87,7 +87,7 @@ export default class DressMessage extends React.Component
                     { this.renderCustomizations() }
                     <div className="row add-to-spree-btn">
                       <div className="col-xs-12">
-                        <a onClick={this.props.showAddToCartModal} className='center-block btn btn-black btn-lrg'>Add to my cart</a>
+                <a onClick={() => this.props.showAddToCartModal(this.props.dress)} className='center-block btn btn-black btn-lrg'>Add to my cart</a>
                       </div>
                     </div>
                   </div>

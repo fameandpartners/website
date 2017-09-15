@@ -15,6 +15,15 @@ $chat_bar_height: 55px;
     font-family: $font-heading;
     font-weight: 400;
 
+    .shopping-spree-error
+    {
+        color: #F60614;
+    }
+
+    .red-border
+    {
+        border-color: #F60614;
+    }
     .shopping-spree-link
     {
         text-decoration: underline;

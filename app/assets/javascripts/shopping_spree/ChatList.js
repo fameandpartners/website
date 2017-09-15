@@ -138,6 +138,7 @@ export default class ChatList extends FirebaseComponent
     {
         this.scrollToBottom();
     }
+    
     render()
     {
         return(
