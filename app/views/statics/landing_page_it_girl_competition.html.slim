@@ -1,0 +1,212 @@
+= render partial: 'pages/robots'
+
+.page-it-girl.page-it-girl-contest.page-content
+
+  .container-fluid
+    section.section-box.SectionIntro
+
+      .row.hidden-md.hidden-lg
+        .col-xs-12.mobile-no-padding
+          .ContentCopy.text-center
+            h1.h2.Heading Win a paid internship and other prizes worth up to $20,000!
+
+            p Fame and Partners wants you to help shape the <br class="visible-lg visible-sm">next generation of the fashion industry.
+
+      .row.contentBox__verticalMiddle
+
+          .col-md-7.vertical-align
+            .item-wrap
+              = image_tag 'landingpages/internship/hero.jpg', class: "img-responsive"
+
+          .col-md-5.vertical-align.hidden-sm.hidden-xs
+            .ContentCopy
+              h1.title Win a paid internship and other prizes worth up to $20,000!
+
+              p Fame and Partners wants you to help shape the <br class="visible-lg visible-sm">next generation of the fashion industry.
+
+  .container
+    section.section-box.SectionWhatToDo
+      .row
+        .col-md-6.col-md-offset-3
+            h2.Heading The internship winner will receive
+
+      .IconText
+        .row
+          .col-md-4.col-md-offset-2
+            .row
+              .col-xs-2.col-md-3
+                .IconText__icon
+                  = image_tag 'landingpages/internship/icon-3.png'
+
+              .col-xs-10.col-md-9
+                .IconText_copy
+                  p A week-long, paid internship with <br class="visible-lg">Fame and Partners (including travel <br class="visible-lg">+ accommodations) in Los Angeles
+
+          .col-md-4
+            .row
+              .col-xs-2.col-md-3
+                .IconText__icon
+                  = image_tag 'landingpages/internship/icon-4.png'
+
+              .col-xs-10.col-md-9
+                .IconText_copy
+                  p Membership to The Fame <br class="visible-lg">Society, Fame and Partners’ <br class="visible-lg">influencer network
+
+        .row
+          .col-md-4.col-md-offset-2
+            .row
+              .col-xs-2.col-md-3
+                .IconText__icon
+                  = image_tag 'landingpages/internship/icon-5.png'
+
+              .col-xs-10.col-md-9
+                .IconText_copy
+                  p A feature on Fame and Partners’ <br class="visible-lg">blog & social media channels
+
+          .col-md-4
+            .row
+              .col-xs-2.col-md-3
+                .IconText__icon
+                  = image_tag 'landingpages/internship/icon-6.png'
+
+              .col-xs-10.col-md-9
+                .IconText_copy
+                  p A $2,000 gift card to <br class="visible-lg">Fame and Partners
+
+  section.section-box.SectionContestForm
+    .container-fluid
+      .row
+        .col-xs-12
+          h2.h1.Heading--mobile.Heading__Enter.text-center Enter to be the next <br>Fashion IT Girl
+
+      .row
+        .col-xs-12
+          #woobox-root
+          .woobox-offer data-offer='dxcguh'
+          p.PromoDisclaimer This promotion is managed by Fame and Partners, Powered by Woobox
+
+
+  .container
+    section.section-box.SectionAbout
+      .row
+        .col-md-6.col-md-offset-3
+          h2.h1.Heading About Fame <br class="visible-xs">and Partners
+
+          p Fame and Partners is a company dedicated to empowering women and girls. <br class="visible-lg">As the world’s first personalized, made-to-order fashion label, we encourage <br class="visible-lg">women to customize a look that suits their individual style and reduce <br class="visible-lg">fashion’s impact on the environment by producing every order on-demand.
+
+          p Additionally, Fame and Partners donates $5 of every sale to women's <br class="visible-lg">empowerment initiatives in partnership with UN Women and Plan <br class="visible-lg">International. We're more than just a pretty dress.
+
+      .row
+        .col-md-4.col-md-offset-4.col-xs-10.col-sm-6
+          = image_tag 'landingpages/internship/ichange.jpg', class: 'img-responsive'
+
+  .container-fluid
+    section.section-box.SectionJudges.text-left.u-section-border--top.u-section-border--bottom
+      .row
+        .col-md-6.col-md-offset-3
+          h2.h1.Heading__judges.Heading--mobile.text-center About the Judges
+
+      .row
+        .col-md-3.col-xs-12
+          .ContentCopy__judge
+
+            = image_tag "landingpages/it-girl-contest/judge-luciano.jpg", class: "ProfileImg__judge hidden-xs hidden-sm", alt: "Emily Luciano"
+
+            = image_tag "landingpages/it-girl-contest/judge-luciano-mobile.jpg", class: "img-responsive ProfileImg__judge hidden-md hidden-lg", alt: "Emily Luciano"
+
+            h4.Heading__judge Emily Luciano
+
+            p Emily Luciano is a New York City based fashion blogger and the founder of Lovely Luciano. Emily began blogging just over two years ago and uses her blog as a creative outlet to write about all things fashion and beauty. She has been passionate about the fashion industry from a young age and is so excited about the opportunity to help inspire young fashionistas.
+
+        .col-md-3.col-xs-12
+          .ContentCopy__judge
+
+            = image_tag "landingpages/it-girl-contest/judge-chung.jpg", class: "ProfileImg__judge hidden-xs hidden-sm", alt: "Jamie Chung"
+
+            = image_tag "landingpages/it-girl-contest/judge-chung-mobile.jpg", class: "img-responsive ProfileImg__judge hidden-md hidden-lg", alt: "Jamie Chung"
+
+            h4.Heading__judge Jamie Chung, <br>What the Chung
+
+            p Jamie Chung is an actress and blogger that was born and raised in San Francisco. Her most recent work includes Academy Award winning animation "Big Hero 6", ABC’s “Once Upon a Time" as Mulan, and she will star as Blink in the upcoming FOX TV X-Men series "the Gifted." She also produced and starred in her own film “It’s Already Tomorrow in Hong Kong.” In her spare time she enjoys blogging on “What the Chung” about what is inspiring her at the moment.
+
+        .col-md-3.col-xs-12
+          .ContentCopy__judge
+
+            = image_tag "landingpages/it-girl-contest/judge-bernad.jpg", class: "ProfileImg__judge hidden-xs hidden-sm", alt: "Maria Bernad"
+
+            = image_tag "landingpages/it-girl-contest/judge-bernad-mobile.jpg", class: "img-responsive ProfileImg__judge hidden-md hidden-lg", alt: "Maria Bernad"
+
+            h4.Heading__judge Maria Bernad
+
+            p Maria Bernad is a Madrid-based stylist and influencer who is known for her eclectic style and love for modernism with a vintage twist. Born in Valencia, the 21-year-old's interest in fashion began at a young age thanks to her mother and grandmother's collection of vintage clothing. She recently received a degree in Fashion Design and co-founded the online vintage store, Les Fleurs. To create, endlessly, is her motto.
+
+        .col-md-3.col-xs-12
+
+
+          .ContentCopy__judge
+
+            = image_tag "landingpages/it-girl-contest/judge-corby.jpg", class: "ProfileImg__judge hidden-xs hidden-sm", alt: "Nyree Corby"
+
+            = image_tag "landingpages/it-girl-contest/judge-corby-mobile.jpg", class: "img-responsive ProfileImg__judge hidden-md hidden-lg", alt: "Nyree Corby"
+
+            h4.Heading__judge Nyree Corby
+
+            p Nyree Corby is a female entrepreneur with a social conscience. She founded her first business at 21; by the age of 24 she was leading her second company to millions of dollars in revenue and running game-changing projects. A string of accolades followed including a nod from the B&T Achiever of the Year panel (2007) and Telstra’s Young Businesswoman of the Year (2008). Nyree founded Fame and Partners in 2013 to disrupt mainstream fashion and deliver perfectly-fitted, sustainably-produced dresses to women across the globe.
+
+  .container
+    section.section-box.SectionSponsors
+      .row
+        .col-md-6.col-md-offset-3
+          .ContentCopy__extraSpacingBottom
+            h2.h1.Heading.Heading--mobile.text-center Our Sponsors
+
+      .row
+        .col-md-3.col-xs-6
+          .Sponsor__Item
+            = image_tag "http://fakeimg.pl/300/?text=Sponsor 1", class: 'img-responsive'
+
+        .col-md-3.col-xs-6
+          .Sponsor__Item
+            = image_tag "http://fakeimg.pl/300/?text=Sponsor 2", class: 'img-responsive'
+
+        .col-md-3.col-xs-6
+          .Sponsor__Item
+            = image_tag "http://fakeimg.pl/300/?text=Sponsor 3", class: 'img-responsive'
+
+        .col-md-3.col-xs-6
+          .Sponsor__Item
+            = image_tag "http://fakeimg.pl/300/?text=Sponsor 4", class: 'img-responsive'
+
+  .container-fluid
+    .u-section-border--bottom
+
+  .container
+    section.section-box.SectionShop
+      .row
+        .col-md-6.col-md-offset-3
+          .ContentCopy__extraSpacingBottom
+            h2.h1.Heading.Heading--mobile.text-center Shop our Best Sellers
+
+      .row
+        .col-md-10.col-md-offset-1
+          .row
+              = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 2, customWrapper: 'col-xs-12 col-sm-4'}
+
+          .row
+            .col-xs-12
+              .FooterCTA
+                = link_to "Shop Our Best Sellers", best_sellers_path, class: "btn btn-black CtaBtn"
+
+
+- content_for :body_end do
+
+  javascript:
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//woobox.com/js/plugins/woo.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+    (document, 'script', 'woobox-sdk'));

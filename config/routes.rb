@@ -123,6 +123,9 @@ FameAndPartners::Application.routes.draw do
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
+    # IT Girl Internship Competition landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'fame-it-girl', :as => :it_girl_landing_page
+
     ###########
     # Lookbooks
     ###########

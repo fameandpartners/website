@@ -20,10 +20,6 @@
     text-transform: none;
   }
 
-  .Heading--italic {
-    font-style: italic;
-  }
-
   .SectionContact {
     padding: 55px 0;
     border-top: 1px solid $c-neutral-black;
@@ -59,11 +55,64 @@
     margin-bottom: 80px;
   }
 
+  .Heading__judges {
+    margin-bottom: 135px;
+  }
+
+  .Heading__judge {
+    font-size: 2.4rem;
+  }
+
+  .woobox-offer {
+    margin: 0 auto;
+  }
+
+  .PromoDisclaimer {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 60px;
+  }
+
+  .SectionJudges {
+    padding: 50px 0;
+  }
+
+  .SectionJudge {
+    margin-bottom: 95px;
+  }
+
+  .SectionContestForm {
+    padding: 55px 0;
+    background: $c-neutral-2;
+  }
+
+  .SectionSponsors {
+    padding-bottom: 95px;
+  }
+
+  .Sponsor__Item {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .FooterCTA {
+    margin-top: 65px;
+  }
+
+  .u-section-border--top {
+    border-top: 1px solid $c-neutral-black;
+  }
+
+  .u-section-border--bottom {
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
   @media (min-width: $bootstrap-md-width) {
     text-align: center;
 
     .title {
       margin-top: 0;
+      padding: 0 55px;
     }
 
     section {
@@ -79,12 +128,24 @@
       margin: 40px 0 85px;
     }
 
+    .ContentCopy__judge {
+      margin: 0 30px;
+    }
+
+    .SectionShop {
+      margin-top: 135px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
     section {
       margin-bottom: 60px;
+    }
+
+    &.page-it-girl-contest section {
+      margin-bottom: 0;
     }
 
     .CtaBtn {
@@ -101,6 +162,22 @@
 
     .OptionsList {
       margin-bottom: 40px;
+    }
+
+    .Heading--mobile {
+      font-size: 2.6rem;
+    }
+
+    .Heading__judges {
+      margin-bottom: 35px;
+    }
+
+    &.page-it-girl-contest .ContentCopy__extraSpacingBottom {
+      margin-bottom: 40px;
+    }
+
+    .SectionSponsors {
+      padding-bottom: 35px;
     }
 
   }
