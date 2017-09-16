@@ -50,18 +50,7 @@ export default class ChatBar extends FirebaseComponent
     
     sendMessage()
     {
-        let newMessage = this.chatsDB.push();
-        newMessage.set( { type: 'text',
-                          value: this.textInput.value,
-                          created_at: firebase.database.ServerValue.TIMESTAMP,
-                          from:
-                          {
-                              name: this.props.name,
-                              email: this.props.email,
-                              icon: this.props.icon
-                          }
-                        }
-                      );
+        this.createTextMessage( this.textInput.value, this.props.name, this.props.email, this.props.icon );
         this.textInput.value = "";        
     } 
 

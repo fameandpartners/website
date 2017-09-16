@@ -22,8 +22,10 @@ export default class AddToCartModal extends FirebaseComponent
         this.addToCart = this.addToCart.bind(this);
         this.heightSelected = this.heightSelected.bind(this);
         this.initializeFirebase = this.initializeFirebase.bind(this);
-        this.initializeFirebase();
+        this.sumCartData = this.sumCartData.bind(this);
         
+        this.initializeFirebase();
+
     }
 
 
@@ -50,10 +52,32 @@ export default class AddToCartModal extends FirebaseComponent
         if( this.state.height && this.state.selectedSize )
         {
             this.createFirebaseCartItem();
+            this.createFirebaseFamebotMessage();
+            
             this.props.closeModal();
         }
     }
 
+    sumCartData( snapshot )
+    {
+        let data = snapshot.val();
+        let keys = Object.keys( data );
+        let cartTotal = 0;
+        for( let i = 0; i < keys.length; i += 1 )
+        {
+            let dress = data[keys[i]];
+            cartTotal += parseInt( dress['dress']['price'] );
+        }
+
+        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off" );
+                                   
+    }
+    
+    createFirebaseFamebotMessage()
+    {
+        this.databaseRef( "cart" ).once('value').then( this.sumCartData );
+    }
+    
     createFirebaseCartItem()
     {
         let newMessage = this.cartDB.push();
@@ -83,7 +107,7 @@ export default class AddToCartModal extends FirebaseComponent
     initializeFirebase()
     {
         super.connectToFirebase();
-        this.cartDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
+        this.cartDB  = this.databaseRef( "cart" );
     }
     
     heightSelected( event )
@@ -111,9 +135,9 @@ export default class AddToCartModal extends FirebaseComponent
         }
         
         return( <div className="row">
-                  <div className="col-xs-8 col-xs-push-1">
-                    <div className="size-row">{sizeRows}</div>
-                  </div>
+                <div className="col-xs-8 col-xs-push-1">
+                <div className="size-row">{sizeRows}</div>
+                </div>
                 </div>
               );
     }
@@ -181,32 +205,32 @@ export default class AddToCartModal extends FirebaseComponent
                         <div className="row">
                               <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your height</div>
                             </div>
-                }
-                <div className="row height-select-text">
-                  <div className="col-xs-11 col-xs-push-1">
-                    What's Your Dress Size?
-                  </div>
-                </div>
-                { this.generateSizeRow( 0, 8 ) }
-                { this.generateSizeRow( 10, 18 ) }
-                { this.generateSizeRow( 20, 26 ) }
-                {
-                    this.state.showSizeError &&
-                        <div className="row">
-                              <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your size</div>
-                            </div>
-                }
-                
-                <div className="row">
-                  <div className="col-xs-11 col-xs-push-1">
-                    <a className="shopping-spree-link" href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
-                  </div>
-                </div>
-                <div className="row add-to-cart-button">
-                  <div className="col-xs-10 col-xs-push-1">
-                    <a onClick={this.addToCart} className="btn btn-lrg btn-black btn-block">Add to your cart</a>
-                  </div>
-                </div>
+                        }
+                        <div className="row height-select-text">
+                          <div className="col-xs-11 col-xs-push-1">
+                            What's Your Dress Size?
+                          </div>
+                        </div>
+                        { this.generateSizeRow( 0, 8 ) }
+                        { this.generateSizeRow( 10, 18 ) }
+                        { this.generateSizeRow( 20, 26 ) }
+                        {
+                            this.state.showSizeError &&
+                                <div className="row">
+                                      <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your size</div>
+                                    </div>
+                                }
+                                
+                                <div className="row">
+                                  <div className="col-xs-11 col-xs-push-1">
+                                    <a className="shopping-spree-link" href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
+                                  </div>
+                                </div>
+                                <div className="row add-to-cart-button">
+                                  <div className="col-xs-10 col-xs-push-1">
+                                    <a onClick={this.addToCart} className="btn btn-lrg btn-black btn-block">Add to your cart</a>
+                                  </div>
+                                </div>
               </div>
             </div>
         );

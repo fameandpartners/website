@@ -37,7 +37,6 @@ export default class ShoppingSpree extends React.Component
 
     showAddToCartModal( dress )
     {
-        console.log( 'showing add to cart modal' );
         this.setState(
             {
                 showAddingToCartModal: true,
@@ -77,6 +76,7 @@ export default class ShoppingSpree extends React.Component
             }
         );
     }
+    
     render()
     {
         return( 

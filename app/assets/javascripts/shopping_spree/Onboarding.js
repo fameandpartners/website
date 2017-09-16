@@ -17,9 +17,6 @@ export default class Onboarding extends React.Component
         this.hideZopim = this.hideZopim.bind(this);
         this.join = this.join.bind(this);
         window.startShoppingSpree = this.open;
-
-        
-
     }
 
     close()
