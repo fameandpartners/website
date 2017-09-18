@@ -51,9 +51,14 @@ module OrderBot
 		private
 
 		def generate_order_lines(line_items, order)
-			line_items.map do |line_item|
-				OrderBot::OrderLine.new(line_item, order)
+			h = Hash.new { |hash, key| hash[key] = 0}
+			line_items.each {|item| h[item.personalization.sku] = h[item.personalization.sku] += 1 }
+		 	line_array = []
+			h.each_pair do |sku, quantity|
+				l_i = line_items.select {|item| item.personalization.sku == sku}.first
+				line_array << OrderBot::OrderLine.new(l_i, order, quantity)
 			end
+			line_array
 		end
 
 		def generate_other_charges(adjustments)

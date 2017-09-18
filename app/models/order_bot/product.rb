@@ -31,7 +31,7 @@ module OrderBot
 
 		def generate_html_encoded_images(product)
 			image_string = ""
-			product.images.each { |image| image_string += "%lt;img src=\"#{image.attachment.url}\" width=\"300\" %gt "}
+			product.images.each { |image| image_string += "%lt;img src=\"#{image.attachment.url}\" width=\"300\" %gt; "}
 			image_string
 		end
 
