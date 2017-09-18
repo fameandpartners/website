@@ -4,7 +4,7 @@ module Spree
     require 'rest-client'
 
     def client
-      OrderBot::OrderBotClient.new('apitestfp@test.com', 'Testing2000')
+      OrderBot::OrderBotClient.new('LiveTest@API.com', 'Testing2000')
     end
 
     def create_new_order_by_factory(order)
@@ -95,11 +95,11 @@ module Spree
 
       groups = []
 
-      sales_category = parse_product_structure(product.category.category, 'Sales', 655, product_structure)
+      sales_category = parse_product_structure(product.category.category, 'Sales', 'Sales', product_structure)
       sales_groups = sales_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
 
-      component_category = parse_product_structure(product.category.category, 'Component', 656, product_structure)
-      component_groups = sales_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
+      component_category = parse_product_structure(product.category.category, 'Component', 'Component', product_structure)
+      component_groups = component_category['groups'].select {|group| group['group_name'] == product.category.subcategory}
 
       if sales_groups.empty?
         groups << client.create_new_product_group({'group_name' => product.category.subcategory, 'category_id' => cat_ids[0], 'group_active' => true}).first['product_group_id']
@@ -112,35 +112,40 @@ module Spree
       else
         groups << component_groups.first['group_id']
       end
-
       groups
     end
 
-    def parse_product_structure(product_category, class_type_name, product_class_id, product_structure)
+    def parse_product_structure(product_category, class_type_name, product_class_name, product_structure)     
       class_type = product_structure.select {|class_type| class_type['class_type_name'] == class_type_name}
-      product_class = class_type.first['product_classes'].select{|product_class| product_class['product_class_id'] == product_class_id }
+      product_class = class_type.first['product_classes'].select{|product_class| product_class['product_class_name'] == product_class_name }
       category = product_class.first['categories'].select{|cat| cat['category_name'] == product_category}
       category&.first
+    end
+
+    def parse_product_class_id(structure, product_class_name)
+      class_type = structure.select {|class_type| class_type['class_type_name'] == class_type_name}
+      product_class = class_type.first['product_classes'].select{|product_class| product_class['product_class_name'] == product_class_name }
+      product_class['product_class_id']
     end
 
     def get_or_create_category_id_by_product(product)
       category = []
       product_structure = client.get_product_structure(product.category.category)
 
-      sales_category = parse_product_structure(product.category.category, 'Sales', 655, product_structure)
+      sales_category = parse_product_structure(product.category.category, 'Sales', 'Sales', product_structure)
 
       if sales_category
         category << sales_category['category_id']
       end
 
-      component_category = parse_product_structure(product.category.category, 'Component', 656, product_structure)
+      component_category = parse_product_structure(product.category.category, 'Component', 'Component', product_structure)
       if component_category
         category << component_category['category_id']
       end
 
       if category.empty?
-        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => 655, 'category_active' => true}) # add to both components and Sales
-        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => 656, 'category_active' => true})  #update product_class_id for future
+        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => parse_product_class_id(product_structure, 'Sales'), 'category_active' => true}) # add to both components and Sales
+        category << client.create_new_category({'category_name' => product.category.category, 'product_class_id' => parse_product_class_id(product_structure, 'Component'), 'category_active' => true})  #update product_class_id for future
       end
 
       category
