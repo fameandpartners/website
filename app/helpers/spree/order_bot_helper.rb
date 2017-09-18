@@ -123,7 +123,7 @@ module Spree
     end
 
     def parse_product_class_id(structure, product_class_name)
-      class_type = structure.select {|class_type| class_type['class_type_name'] == class_type_name}
+      class_type = structure.select {|class_type| class_type['class_type_name'] == product_class_name}
       product_class = class_type.first['product_classes'].select{|product_class| product_class['product_class_name'] == product_class_name }
       product_class['product_class_id']
     end
