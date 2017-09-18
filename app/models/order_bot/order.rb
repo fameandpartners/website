@@ -12,7 +12,7 @@ module OrderBot
 			first_line_item = line_items.first
 			adjustments = per_item_adjustment(line_items, order).to_f
 			
-			@reference_order_id = order.number + '#' + line_items.map(&:id).join('#')
+			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
 			@account_group_id = 755
