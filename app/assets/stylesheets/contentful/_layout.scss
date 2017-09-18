@@ -38,18 +38,15 @@
 .u-forced-full-width-wrapper {
 
   @include breakpoint(tablet) {
-    width: 99vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    @include real-full-width;
+  }
 
-    &.is-ancestor {
-      margin-left: -50vw;
-      margin-right: -50vw;
-    }
+}
 
+.u-forced-full-width-wrapper--mobile {
+
+  @include breakpoint(mobile-max) {
+    @include real-full-width;
   }
 
 }
