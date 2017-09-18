@@ -36,7 +36,7 @@ module OrderBot
 		end
 
 		def get_product_hts(product)
-			main = product.product_properties.select{|x| x.property.name == 'fabric'}.first.value.split("\n").first
+			main = product.product_properties.select{|x| x.property.name == 'fabric'}.first&.value&.split("\n")&.first
 
 			if main.nil?
 				return
