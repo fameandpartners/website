@@ -107,6 +107,21 @@ module OrderBot
       res_json.first['product_category_id']
     end
 
+    def get_distribution_center_id_by_name(factory_name)
+      res = make_get_request('admin/distribution_centers.json/')
+      res_json = JSON.parse(res.body)
+      factory = res_json.select {|factory| factory['distribution_center_name'].include?(factory_name)}&.first
+      if factory
+        factory.first['distribution_center_id']
+      end
+    end 
+
+    def get_orders_modified_last_hour
+      res = make_get_request("admin/orders.json/?last_modified_at_min=#{1.hour.ago.strftime('%Y-%m-%d')}")
+      res_json = JSON.parse(res.body)
+      res_json
+    end
+
     def make_get_request( url, params = {}) 
       RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
     end

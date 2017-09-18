@@ -174,6 +174,17 @@ module Spree
       group
     end
 
+    def get_distribution_center(factory)
+      distribution_center_id = client.get_distribution_center_id_by_name(factory)
+      distribution_center_id
+    end
+
+     def sync_last_hours_order_updates
+      orders = client.get_orders_modified_last_hours
+      orders.each do |order|
+        order['']
+      end
+    end
 
     def split_order(line_items)
       lol = []
