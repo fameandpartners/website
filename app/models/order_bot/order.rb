@@ -1,15 +1,23 @@
-require 'securerandom' 
+include Spree::OrderBotHelper
 module OrderBot
 	class Order
 
 		def initialize(order, line_items)
+			order_bot_factory_hash = {
+				'Zhesi' => 'INTEX',
+				'Milly' => 'ANYUYANG',
+				'Supertex' => 'SUPERTEX',
+				'Elizabeth' => 'ELIZABETH'
+			}
+			first_line_item = line_items.first
 			adjustments = per_item_adjustment(line_items, order).to_f
-			@reference_order_id = order.number + SecureRandom.uuid
+			
+			@reference_order_id = order.number + '#' + line_items.map(&:id).join('#')
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
 			@account_group_id = 755
 			@orderbot_customer_id = 1
-			@ship_date =  line_items.first.delivery_period_policy.ship_by_date(order.completed_at, line_items.first.delivery_period)
+			@ship_date = first_line_item.delivery_period_policy.ship_by_date(order.completed_at, first_line_item.delivery_period)
 			@billing_third_party = false
 			@insure_packages = false #Dont do insurance
 			@shipping_code = order.shipping_method.name
@@ -23,6 +31,8 @@ module OrderBot
 			@order_lines = generate_order_lines(line_items, order)
 			@other_charges = generate_other_charges(per_item_shipping_adjustment(line_items, order))
 			@internal_notes = check_for_special_care(order)
+			@order_notes = @reference_order_id
+			@distribution_center = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
 
 		end
 
@@ -98,3 +108,9 @@ module OrderBot
 	    end
 	end
 end
+# sync_yesterdays_order_updates
+# include Spree::OrderBotHelper 
+# @order = Spree::Order.find(35425111)
+# create_new_order(@order,@order.line_items)
+#341279
+
