@@ -34,7 +34,7 @@ RSpec.describe CustomItemSku do
     let(:line_item) { build :line_item, variant: variant, personalization: personalization }
 
     it 'generates a custom SKU' do
-      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X#{customisation_value.id.to_s}HS"
+      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X#{customisation_value.id.to_s}HSD"
     end
 
     it 'includes the style number' do
@@ -64,7 +64,7 @@ RSpec.describe CustomItemSku do
 
         it 'are marked with just X' do
           expect(sku).to include("X")
-          expect(sku).to end_with "XHS"
+          expect(sku).to end_with "XHSD"
         end
       end
 
@@ -82,17 +82,17 @@ RSpec.describe CustomItemSku do
     describe '#height' do
       context 'standard' do
         let(:chosen_height) { 'standard' }
-        it { expect(sku).to end_with("HS") }
+        it { expect(sku).to end_with("HSD") }
       end
 
       context 'petite' do
         let(:chosen_height) { 'petite' }
-        it { expect(sku).to end_with("HP") }
+        it { expect(sku).to end_with("HPE") }
       end
 
       context 'tall' do
         let(:chosen_height) { 'tall' }
-        it { expect(sku).to end_with("HT") }
+        it { expect(sku).to end_with("HTL") }
       end
 
     end
