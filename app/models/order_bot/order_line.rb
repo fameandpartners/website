@@ -7,7 +7,7 @@ module OrderBot
 			@product_sku = CustomItemSku.new(line_item).call
 			@quantity = quantity			
 			@product_taxes = generate_taxes(line_item, order, quantity)
-			@discount = per_item_discount_adjustment(order)
+			@discount = per_item_discount_adjustment(order) * quantity
 
 			@price = line_item.price
 		end

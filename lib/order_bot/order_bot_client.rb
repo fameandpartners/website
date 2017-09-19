@@ -111,7 +111,7 @@ module OrderBot
       res = make_get_request('admin/distribution_centers.json/')
       res_json = JSON.parse(res.body)
       factory = res_json.select {|factory| factory['distribution_center_name'].include?(factory_name)}&.first
-      factory&.first&['distribution_center_id'] || nil
+      factory ? factory['distribution_center_id'] : nil
     end 
 
     def get_orders_modified_last_hour
