@@ -63,8 +63,14 @@ class Products::DetailsController < Products::BaseController
         }
       }
 
-      resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
-      JSON.parse(resp)
+      begin
+        resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
+        JSON.parse(resp)
+      rescue Exception => e
+        Raven.capture_exception(e, response: resp)
+        NewRelic::Agent.notice_error(e, response: resp)
+        throw e
+      end
     end
 
     render :show, status: pdp_status
