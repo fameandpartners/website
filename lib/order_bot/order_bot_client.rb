@@ -90,6 +90,13 @@ module OrderBot
       res_json = JSON.parse(res.body)
       if res_json['response_code'] == -1
         raise res #Put entire response in error message if error
+      else
+        res = make_put_request("admin/orders.json/#{res_json['order_process_result'].first['orderbot_order_id']}", order)
+        res_json = JSON.parse(res.body)
+        
+        if res_json['response_code'] == -1
+          raise res #Put entire response in error message if error
+        end
       end
       res
     end
@@ -120,12 +127,26 @@ module OrderBot
       res_json
     end
 
+    def get_order_guide_for_currency(currency)
+      res = make_get_request("admin/order_guides.json/")
+      res_json = JSON.parse(res.body)
+      guide = res_json.select {|order_guide| order_guide['order_guide_name'].downcase == currency.downcase}&.first
+
+      if guide
+        return guide['order_guide_id']
+      end
+    end
+
     def make_get_request( url, params = {}) 
       RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
     end
 
     def make_post_request(url, request_object)
       RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
+    end
+
+    def make_put_request(url, request_object)
+      RestClient::Request.execute(method: :put, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
     end
   end
 end
