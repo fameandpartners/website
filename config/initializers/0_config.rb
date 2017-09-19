@@ -83,6 +83,8 @@ end
 
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
+configatron.order_bot_client_user = ENV['ORDERBOT_USER']
+configatron.order_bot_client_pass = ENV['ORDERBOT_PASS']
 
 case Rails.env.to_sym
 when :development
