@@ -32,7 +32,7 @@ module OrderBot
 			@other_charges = generate_other_charges(per_item_shipping_adjustment(line_items, order))
 			@internal_notes = check_for_special_care(order)
 			@order_notes = @reference_order_id
-			@distribution_center = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
+			@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
 
 		end
 
@@ -105,7 +105,7 @@ module OrderBot
 
 		def per_item_discount_adjustment(line_items, order)
 			discount = order&.adjustments&.promotion&.inject(0){|sum, item| sum + item.amount.abs}
-			discount/line_items.count
+			discount/order.line_items.count
 		end
  		
  		def per_item_tax_free_adjustment(total_tax, line_items, order)
@@ -115,7 +115,6 @@ module OrderBot
 end
 # sync_yesterdays_order_updates
 # include Spree::OrderBotHelper 
-# @order = Spree::Order.find(35425111)
-# create_new_order(@order,@order.line_items)
-#341279
+# @order = Spree::Order.find_by_number('R427516377')
+# create_new_order_by_factory(order)
 
