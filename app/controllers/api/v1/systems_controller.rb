@@ -7,6 +7,7 @@ module Api
         #nothing to see here
         if params['systems_key'] = 'f3UwF9ftw'
           Rails.cache.clear
+          Raven.capture_exception("Cache reset by nodey.")
         end
         render :json => {:success=>true}, status: 200
       end
