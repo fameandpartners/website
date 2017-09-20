@@ -36,8 +36,14 @@
 @import 'redesign/generic/content-order';
 @import 'redesign/generic/helpers';
 
+
+// Overwrites
 .app-container--top-margin {
-  @media (min-width: 769px) {
+  @media (min-width: 860px) {
     margin-top: 96px;
   }
+}
+
+header.main #locale-selector-mobile-container {
+  display: none !important;
 }
