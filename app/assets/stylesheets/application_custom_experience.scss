@@ -36,8 +36,23 @@
 @import 'redesign/generic/content-order';
 @import 'redesign/generic/helpers';
 
+
+// Overwrites
 .app-container--top-margin {
-  @media (min-width: 769px) {
+  @media (min-width: 996px) {
     margin-top: 96px;
   }
+}
+
+header.main #locale-selector-mobile-container {
+  display: none !important;
+}
+
+footer.main .form-control {
+  max-width: 243px;
+  display: inline;
+}
+
+footer.main .btn {
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
 }
