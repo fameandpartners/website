@@ -89,6 +89,10 @@ module Spree
 
     end
 
+    def get_customer_id(country_code)
+      client.get_customer_id(country_code)
+    end
+
     def get_or_create_group_id_by_product(product)
       cat_ids = get_or_create_category_id_by_product(product)
       product_structure = client.get_product_structure(product)

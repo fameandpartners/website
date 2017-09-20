@@ -16,7 +16,7 @@ module OrderBot
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
 			@account_group_id = 755
-			@orderbot_customer_id = 1
+			@orderbot_customer_id = get_customer_id(order.bill_address.country.iso)
 			@ship_date = first_line_item.delivery_period_policy.ship_by_date(order.completed_at, first_line_item.delivery_period)
 			@billing_third_party = false
 			@insure_packages = false #Dont do insurance
@@ -47,7 +47,7 @@ module OrderBot
 				end
 			end
 		end
-
+ #OrderBot::Order.new(@order,@order.line_items)
 		private
 
 		def generate_order_lines(line_items, order)
