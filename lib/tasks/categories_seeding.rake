@@ -457,8 +457,8 @@ namespace :data do
         cat = Category.where({category: 'Unkown', subcategory: 'Unkown'}).first
         if(cat.nil?)
             cat = Category.new()
-            cat.category = category
-            cat.subcategory = subcategory
+            cat.category = 'Unkown'
+            cat.subcategory = 'Unkown'
             cat.save!
         end
         unassigned.each do|product|
