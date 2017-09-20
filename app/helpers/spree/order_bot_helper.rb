@@ -4,7 +4,7 @@ module Spree
     require 'rest-client'
 
     def client
-      OrderBot::OrderBotClient.new('LiveTest@API.com', 'Testing2000')
+      OrderBot::OrderBotClient.new(configatron.order_bot_client_user , configatron.order_bot_client_pass)
     end
 
     def create_new_order_by_factory(order)
