@@ -48,6 +48,10 @@ class Products::DetailsController < Products::BaseController
 
     append_gtm_product(product_presenter: @product)
 
+    @product.fit = @product.fit.gsub("Height", ", Height")
+    @product.fit = @product.fit.gsub("Hips", ", Hips")
+    @product.fit = @product.fit.gsub("Waist",", Waist")
+
     @partial_hash = Rails.cache.fetch(env["REQUEST_PATH"], expires_in: 14.hours) do
       #let's makey object for nodepdp
       pdp_obj = {
