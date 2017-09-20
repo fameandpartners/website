@@ -60,6 +60,16 @@ module OrderBot
      #handle failure TODO
     end
 
+    def get_customer_id(country_code)
+      res = make_get_request('admin/customers.json/')
+      res_body = JSON.parse(res.body)
+      customer = res_body.select {|x| x['country'].downcase == 'us'}.first
+      if country_code.downcase == 'au'
+        customer = res_body.select {|x| x['country'].downcase != 'us'}.first
+      end
+      customer['customer_id']
+    end
+
     def create_new_order_guide(guide_id, product_id, price)
       make_post_request("admin/order_guides.json/#{guide_id}", [{'product_id' => product_id, 'og_price' => price}])
     end
