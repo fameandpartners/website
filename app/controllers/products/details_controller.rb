@@ -52,7 +52,7 @@ class Products::DetailsController < Products::BaseController
     @product.fit = @product.fit.gsub("Hips", ", Hips")
     @product.fit = @product.fit.gsub("Waist",", Waist")
 
-    @partial_hash = Rails.cache.fetch(env["ORIGINAL_FULLPATH"], expires_in: 14.hours) do
+    @partial_hash = Rails.cache.fetch(env["ORIGINAL_FULLPATH"]+current_site_version.name, expires_in: 14.hours) do
       #let's makey object for nodepdp
       pdp_obj = {
         paths: env["REQUEST_URI"],  #todo: work this out with adam
