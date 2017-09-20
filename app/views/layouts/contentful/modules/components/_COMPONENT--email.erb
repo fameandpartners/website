@@ -1,4 +1,5 @@
 <%
+  form_source = @landing_page_container[:page_url]
   form_newsletter = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
   service = ENV.fetch('SUBSCRIPTION_SERVICE')
 %>
@@ -8,7 +9,7 @@
     <h5><%= @email_heading %></h5>
     <form class="<%= form_newsletter %>">
       <input name='url' type="hidden" value="<%= subscribe_campaigns_email_capture_path %>">
-      <input name='form_name' type="hidden" value="Contentful Email Module">
+      <input name='form_name' type="hidden" value="<%= form_source %>">
       <div class="input-group">
         <input name='service' type="hidden" value="<%= service %>">
         <div class="js-REPLACE-WITH-TEMPLATE-NAME-click-track" data-action="Email Field Press">
@@ -36,6 +37,6 @@
 
 <script>
   $(function() {
-    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>', source: 'anti_fast_fashion_lp'});
+    new window.page.NewsletterSubscriberOnPage({form: '<%= form_newsletter %>', source: '<%= form_source %>'});
   });
 </script>
