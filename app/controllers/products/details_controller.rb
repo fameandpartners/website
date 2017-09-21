@@ -66,6 +66,7 @@ class Products::DetailsController < Products::BaseController
         images: @product.all_images,
         sizeChart: @product.size_chart_data,
         siteVersion: @current_site_version.name,
+        svgSpriteDirectory: "#{configatron.asset_host}/svg",
         flags: {
           afterpay: Features.active?(:afterpay),
           fastMaking: !Features.active?(:getitquick_unavailable)
