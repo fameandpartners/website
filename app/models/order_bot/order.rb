@@ -11,7 +11,6 @@ module OrderBot
 			}
 			first_line_item = line_items.first
 			adjustments = per_item_adjustment(line_items, order).to_f
-			
 			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
 			@order_date	= order.created_at
 			@orderbot_account_id = 2
@@ -113,6 +112,8 @@ module OrderBot
 
 		def per_item_discount_adjustment(line_items, order)
 			discount = order&.adjustments&.promotion&.inject(0){|sum, item| sum + item.amount.abs}
+			manual_order_adjustment = order&.adjustments.select {|o| o.label.downcase.include?('exchange') ||o.label.downcase.include?('manual')}
+			discount += manual_order_adjustment.inject(0){|sum, item| sum + item.amount.abs}
 			discount/order.line_items.count
 		end
  		
