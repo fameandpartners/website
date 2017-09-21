@@ -49,8 +49,11 @@ class Products::DetailsController < Products::BaseController
     append_gtm_product(product_presenter: @product)
 
     if @product.fit
+      @product.fit = @product.fit.gsub(" Height", "Height")
       @product.fit = @product.fit.gsub("Height", ", Height")
+      @product.fit = @product.fit.gsub(" Hips", "Hips")
       @product.fit = @product.fit.gsub("Hips", ", Hips")
+      @product.fit = @product.fit.gsub(" Waist","Waist")
       @product.fit = @product.fit.gsub("Waist",", Waist")
     end
 
