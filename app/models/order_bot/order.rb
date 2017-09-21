@@ -56,14 +56,16 @@ module OrderBot
 				if item.personalization
 					h[item.personalization.sku] = h[item.personalization.sku] += 1
 				else
-					h[item.variant.sku] = h[item.variant.sku] += 1}
+					h[item.variant.sku] = h[item.variant.sku] += 1
 				end
 			end
+
 		 	line_array = []
 			h.each_pair do |sku, quantity|
-				l_i = line_items.select {|item| (item.personalization.nil? && item.variant.sku == sku) || (item.personalization && item.personalization.sku == sku) }.first
+				l_i = line_items.select {|item| (item.personalization.nil? && item.variant.sku == sku) || (item.personalization && item.personalization.sku == sku)}.first
 				line_array << OrderBot::OrderLine.new(l_i, order, quantity)
 			end
+
 			line_array
 		end
 
