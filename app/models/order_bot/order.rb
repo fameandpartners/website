@@ -15,7 +15,7 @@ module OrderBot
 			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
 			@order_date	= order.completed_at
 			@orderbot_account_id = 2
-			@account_group_id = 755
+			@account_group_id = 1132
 			@orderbot_customer_id = get_customer_id(order.bill_address.country.iso)
 			@ship_date = first_line_item.delivery_period_policy.ship_by_date(order.completed_at, first_line_item.delivery_period)
 			@billing_third_party = false
