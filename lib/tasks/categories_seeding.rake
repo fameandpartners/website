@@ -454,11 +454,11 @@ namespace :data do
 
         unassigned = Spree::Product.where(:category_id => nil)
 
-        cat = Category.where({category: 'Unkown', subcategory: 'Unkown'}).first
+        cat = Category.where({category: 'Unknown', subcategory: 'Unknown'}).first
         if(cat.nil?)
             cat = Category.new()
-            cat.category = category
-            cat.subcategory = subcategory
+            cat.category = 'Unknown'
+            cat.subcategory = 'Unknown'
             cat.save!
         end
         unassigned.each do|product|
