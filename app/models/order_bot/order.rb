@@ -52,10 +52,16 @@ module OrderBot
 
 		def generate_order_lines(line_items, order)
 			h = Hash.new { |hash, key| hash[key] = 0}
-			line_items.each {|item| h[item.personalization.sku] = h[item.personalization.sku] += 1 }
+			line_items.each do |item| 
+				if item.personalization
+					h[item.personalization.sku] = h[item.personalization.sku] += 1
+				else
+					h[item.variant.sku] = h[item.variant.sku] += 1}
+				end
+			end
 		 	line_array = []
 			h.each_pair do |sku, quantity|
-				l_i = line_items.select {|item| item.personalization.sku == sku}.first
+				l_i = line_items.select {|item| (item.personalization.nil? && item.variant.sku == sku) || (item.personalization && item.personalization.sku == sku) }.first
 				line_array << OrderBot::OrderLine.new(l_i, order, quantity)
 			end
 			line_array
