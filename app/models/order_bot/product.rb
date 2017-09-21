@@ -24,6 +24,8 @@ module OrderBot
 			@is_parent = false
 			@upc = GlobalSku.find_by_product_id(product.id).upc
 			@country_of_product = 'CN'
+			@create_bom = true
+			@bom_quantity = 1
 			@hts = get_product_hts(product)
 		end
 
