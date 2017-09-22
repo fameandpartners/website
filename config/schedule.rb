@@ -39,4 +39,7 @@ every(2.hours)    { runner 'Facebook::FacebookSync.delay.sync_last_28_days' }
 
 every(30.minutes) { rake 'next:workers:asn_file_upload' }
 
+# Order bot Scheduled tasks
+every(30.minutes) { rake 'reports:order_bot_failure_check' }
+
 
