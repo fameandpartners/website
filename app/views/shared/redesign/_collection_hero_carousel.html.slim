@@ -66,7 +66,7 @@ ruby:
 - hero_tiles = @home_page_container[:hero_tiles].each do |tile|
   - current_tile_site_version = tile[:hero_tile_site_version]
 
-  - if current_tile_site_version.downcase == current_site_version[:permalink].downcase || current_tile_site_version.downcase == "all"
+  - if current_tile_site_version.nil? || current_tile_site_version == current_site_version[:permalink].downcase || current_tile_site_version == "all"
     - current_tile_image = tile[:image]
     - current_tile_mobile_image = tile[:mobile_image]
     = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
