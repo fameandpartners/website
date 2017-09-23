@@ -72,15 +72,14 @@ export default class Drawer extends React.Component
                   </div>
                   <div className="col-xs-8 text-center">Shopping Spree</div>
                   <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
-                </div>
-                <div className="row">
-                  <ChatList
-                    firebaseAPI={this.state.firebaseAPI}
-                    firebaseDatabase={this.state.firebaseDatabase}
-                    firebaseNodeId={this.state.firebaseNodeId}
-                    showAddToCartModal={this.props.showAddToCartModal}
-                    />
-                </div>
+                </div>                
+                <ChatList
+                  firebaseAPI={this.state.firebaseAPI}
+                  firebaseDatabase={this.state.firebaseDatabase}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  showAddToCartModal={this.props.showAddToCartModal}
+                  name={this.state.name}
+                  />
                 <ChatBar
                   firebaseAPI={this.state.firebaseAPI}
                   firebaseDatabase={this.state.firebaseDatabase}

@@ -5,7 +5,7 @@ export default class TextMessage extends React.Component
     render()
     {
         const sameOwner = this.props.sameOwnerAsLastMessage;
-        let name = ""
+        let name = "";
         if( !sameOwner )
         {
             name = (<div className='row equal'>
@@ -18,12 +18,12 @@ export default class TextMessage extends React.Component
         return(
                 <li className='text-message'>
                 {name}
-                <div className='row equal'>
+                <div className='row equal no-left-gutter'>
                 <div className={"avatar col-xs-2 " + (this.props.sameOwnerAsLastMessage ? "" : "avatar-" + this.props.iconNumber ) }></div>
                 <div className="firebase-text col-xs-8">{this.props.text}</div>
                 </div>
                 </li>
-        )
+        );
     }
 }
 

@@ -143,16 +143,28 @@ export default class ChatList extends FirebaseComponent
     {
         return(
             <div className="chat-list">
-              <div className="chat-content">
-                <ul>
-                  {this.state.messages}
-                </ul>
-                <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
+              <div className="row chat-header">
+                <div className="col-xs-4 header-name">
+                  {this.props.name}
                 </div>
-                
+                <div className="col-xs-1 col-xs-push-3">
+                  Exit
+                </div>
+                <div className="col-xs-4 col-xs-push-3 text-right">
+                  Invite other friends!
+                </div>
+              </div>
+              <div className="row">
+                <div className="chat-content">
+                  <ul>
+                    {this.state.messages}
+                  </ul>
+                  <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
+                  </div>
+                </div>
               </div>
             </div>
-        );p
+        );
     }
 }
 
@@ -161,5 +173,6 @@ ChatList.propTypes = {
     firebaseAPI: React.PropTypes.string.isRequired,
     firebaseDatabase: React.PropTypes.string.isRequired,
     firebaseNodeId: React.PropTypes.string.isRequired,
-    showAddToCartModal: React.PropTypes.func.isRequired
+    showAddToCartModal: React.PropTypes.func.isRequired,
+    name: React.PropTypes.string.isRequired    
 };

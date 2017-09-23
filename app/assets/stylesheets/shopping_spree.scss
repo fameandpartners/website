@@ -9,6 +9,7 @@
 
 $header_height: 68px;
 $chat_bar_height: 55px;
+$chat_bar_header_height: 22px;
 
 .shopping-spree
 {
@@ -100,7 +101,6 @@ $chat_bar_height: 55px;
     height: 100%;
     color: black;
     z-index: 999;
-    font-family: NeuzeGro;
 
     .equal
     {
@@ -182,6 +182,15 @@ $chat_bar_height: 55px;
             list-style-type: none;
             padding:0;
         }
+        
+        .chat-header
+        {
+            font-size: 14px;
+            .header-name
+            {
+                color: #979797;
+            }
+        }
     }
 
     .chat-bar
@@ -211,7 +220,7 @@ $chat_bar_height: 55px;
     {
         overflow-y: auto;
         overflow-x: hidden;
-        height: calc( 100vh - #{$header_height} - #{$chat_bar_height} );
+        height: calc( 100vh - #{$header_height} - #{$chat_bar_height} - #{$chat_bar_header_height} );
     }
     
     &.collapsed
