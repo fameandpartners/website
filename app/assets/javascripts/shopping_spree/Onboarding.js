@@ -31,7 +31,8 @@ export default class Onboarding extends React.Component
             send( 
                     {
                         name: this.nameInput.value,
-                        email: this.emailInput.value
+                        email: this.emailInput.value,
+                        shoppingSpreeId: this.props.shoppingSpreeId
                     }
             ).end( function( error, response )
                    {

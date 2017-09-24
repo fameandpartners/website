@@ -2,7 +2,11 @@ class ShoppingSpreesController < ApplicationController
   
   def create()
     if( !params[:email].blank? && !params[:name].blank? )
-      shopping_spree = ShoppingSpree.create
+      if( params[:shoppingSpreeId] )
+        shopping_spree = ShoppingSpree.new( params[:shoppingSpreeId] )
+      else
+        shopping_spree = ShoppingSpree.create
+      end
       to_return = shopping_spree.join( params[:name ], params[:email] )
       cookies[:shopping_spree_name] = to_return[:name]
       cookies[:shopping_spree_email] = to_return[:email]

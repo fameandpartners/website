@@ -168,7 +168,7 @@ export default class ShoppingSpree extends React.Component
             
                 {
                     this.state.display === 'onboarding' &&
-                        <Onboarding doneOnboarding={this.doneOnboarding} close={this.closeOnboarding}/>
+                        <Onboarding doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId}/>
                 }
                 </div>
         );
