@@ -154,7 +154,7 @@ export default class ChatList extends FirebaseComponent
                 <div onClick={this.props.doneShoppingSpree} className="col-xs-1 col-xs-push-3" role="button">
                   Exit
                 </div>
-                <div className="col-xs-4 col-xs-push-3 text-right" role="button">
+                <div onClick={this.props.showShareModal} className="col-xs-4 col-xs-push-3 text-right" role="button">
                   Invite other friends!
                 </div>
               </div>
@@ -179,6 +179,6 @@ ChatList.propTypes = {
     firebaseNodeId: React.PropTypes.string.isRequired,
     showAddToCartModal: React.PropTypes.func.isRequired,
     name: React.PropTypes.string.isRequired,
-    doneShoppingSpree: React.PropTypes.func.isRequired
-    
+    doneShoppingSpree: React.PropTypes.func.isRequired,
+    showShareModal: React.PropTypes.func.isRequired
 };

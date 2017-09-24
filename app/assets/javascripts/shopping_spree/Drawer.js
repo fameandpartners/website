@@ -80,6 +80,7 @@ export default class Drawer extends React.Component
                   showAddToCartModal={this.props.showAddToCartModal}
                   name={this.state.name}
                   doneShoppingSpree={this.props.doneShoppingSpree}
+                  showShareModal={this.props.showShareModal}
                   />
                 <ChatBar
                   firebaseAPI={this.state.firebaseAPI}
@@ -106,5 +107,6 @@ Drawer.propTypes = {
     icon: React.PropTypes.number.isRequired,
     closed: React.PropTypes.bool.isRequired,
     showAddToCartModal: React.PropTypes.func.isRequired,
-    doneShoppingSpree: React.PropTypes.func.isRequired
+    doneShoppingSpree: React.PropTypes.func.isRequired,
+    showShareModal: React.PropTypes.func.isRequired
 };

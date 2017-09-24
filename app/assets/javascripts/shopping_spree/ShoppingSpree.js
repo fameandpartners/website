@@ -35,6 +35,7 @@ export default class ShoppingSpree extends React.Component
         this.showAddToCartModal = this.showAddToCartModal.bind(this);
         this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
         this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
+        this.showShareModal = this.showShareModal.bind(this);
     }
 
     showAddToCartModal( dress )
@@ -70,7 +71,15 @@ export default class ShoppingSpree extends React.Component
         );
         
     }
-    
+
+    showShareModal()
+    {
+        this.setState(
+            {
+                display: 'share'
+            }
+        );
+    }
     doneOnboarding( email, name, icon, shoppingSpreeId )
     {
         this.setState(
@@ -103,7 +112,7 @@ export default class ShoppingSpree extends React.Component
                 }
                 {
                     this.state.display === 'chat' &&
-                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal} doneShoppingSpree={this.doneShoppingSpree}/>
+                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal} doneShoppingSpree={this.doneShoppingSpree} showShareModal={this.showShareModal}/>
                         
                 }
                 {
