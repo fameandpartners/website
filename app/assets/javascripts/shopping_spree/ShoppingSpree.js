@@ -10,26 +10,10 @@ export default class ShoppingSpree extends React.Component
     constructor( props )
     {
         super( props );
-        let display = 'none';
-        let minimize = false;
-        if( this.props.firebaseId  )
-        {
-            display = 'chat';
-            minimize = true;
-        };
         
-        this.state =
-            {
-                display: display,
-                name: this.props.name,
-                email: this.props.email,
-                icon: this.props.icon,
-                firebaseNodeId: this.props.firebaseId,
-                minimize: minimize,
-                showAddToCartModal: false,
-                dressAddingToCart: null
-            };
-
+        this.cookies = new Cookies();
+        this.setInitialState();
+        
         this.doneOnboarding = this.doneOnboarding.bind(this);
         this.doneSharing = this.doneSharing.bind(this);
         this.showAddToCartModal = this.showAddToCartModal.bind(this);
@@ -42,6 +26,46 @@ export default class ShoppingSpree extends React.Component
         
     }
 
+    fetchAndClearStartingState()
+    {
+        let toReturn = this.cookies.get( 'shopping_spree_starting_state' );
+        this.cookies.remove( 'shopping_spree_starting_state' );
+        return toReturn;
+    }
+    
+    setInitialState()
+    {
+        let startingState = this.fetchAndClearStartingState();
+        let name = this.cookies.get('shopping_spree_name');
+        let icon = parseInt(this.cookies.get('shopping_spree_icon'));
+        let email = this.cookies.get('shopping_spree_email');
+        let firebaseId = this.cookies.get('shopping_spree_id');
+        
+        let display = 'none' ;
+        let minimize = false;
+        
+        if( startingState )
+        {
+            display = startingState;
+        } else if( firebaseId  )
+        {
+            display = 'chat';
+            minimize = true;
+        };
+        
+        this.state =
+            {
+                display: display,
+                name: name,
+                email: email,
+                icon: icon,
+                firebaseNodeId: firebaseId,
+                minimize: minimize,
+                showAddToCartModal: false,
+                dressAddingToCart: null
+            };
+    }
+    
     startOnboarding()
     {
         console.log( 'start onboarding' );
@@ -73,10 +97,9 @@ export default class ShoppingSpree extends React.Component
 
     doneShoppingSpree()
     {
-        let cookies = new Cookies();
-        cookies.remove( 'shopping_spree_name' );
-        cookies.remove( 'shopping_spree_email' );
-        cookies.remove( 'shopping_spree_id' );
+        this.cookies.remove( 'shopping_spree_name' );
+        this.cookies.remove( 'shopping_spree_email' );
+        this.cookies.remove( 'shopping_spree_id' );
         this.setState(
             {
                 display: 'none'
@@ -157,11 +180,7 @@ export default class ShoppingSpree extends React.Component
 
 ShoppingSpree.propTypes = {
     firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string,
-    icon: React.PropTypes.number,
-    email: React.PropTypes.string,
-    firebaseId: React.PropTypes.string
+    firebaseDatabase: React.PropTypes.string.isRequired
 };
 
 ShoppingSpree.defaultProps = {
