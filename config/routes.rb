@@ -405,6 +405,8 @@ FameAndPartners::Application.routes.draw do
     end
 
     resource :shopping_sprees, only: [:create]
+
+    get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
     
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 

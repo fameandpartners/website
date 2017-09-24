@@ -7,25 +7,8 @@ export default class Onboarding extends React.Component
     {
         super( props );
 
-        this.state = 
-            {
-                closed: false
-            };
-
-        this.close = this.close.bind(this);
-        this.open = this.open.bind(this);
         this.hideZopim = this.hideZopim.bind(this);
         this.join = this.join.bind(this);
-        window.startShoppingSpree = this.open;
-    }
-
-    close()
-    {
-        this.setState(
-            {
-                closed: true
-            }
-        );
     }
 
 
@@ -60,15 +43,6 @@ export default class Onboarding extends React.Component
                    }
                  );
     }
-    
-    open()
-    {
-        this.setState(
-            {
-                closed: false
-            }
-        );
-    }
 
     componentDidMount()
     {
@@ -79,9 +53,9 @@ export default class Onboarding extends React.Component
     render()
     {
         return(
-            <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true" style={this.state.closed ? {display: 'none'} : {display: 'block'}}>
+                <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true">
               <div id="shopping-spree-modal-content" className="container">
-                <a className="btn-close med" alt="Close" onClick={this.close}></a>              
+                <a className="btn-close med" alt="Close" onClick={this.props.close}></a>              
                 <div id="top-headline" className="welcome-headline row">
                   <div className="col-xs-12 text-center">
                     Welcome to

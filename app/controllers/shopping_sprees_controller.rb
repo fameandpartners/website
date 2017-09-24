@@ -12,4 +12,8 @@ class ShoppingSpreesController < ApplicationController
       render json: (to_return.merge( { id: shopping_spree.shopping_spree_id } ) ).to_json
     end
   end
+
+  def join
+  end
+  
 end

@@ -10,7 +10,7 @@ export default class ShoppingSpree extends React.Component
     constructor( props )
     {
         super( props );
-        let display = 'onboarding';
+        let display = 'none';
         let minimize = false;
         if( this.props.firebaseId  )
         {
@@ -36,8 +36,21 @@ export default class ShoppingSpree extends React.Component
         this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
         this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
         this.showShareModal = this.showShareModal.bind(this);
+        this.startOnboarding = this.startOnboarding.bind(this);
+        this.closeOnboarding = this.closeOnboarding.bind(this);
+        window.startShoppingSpree = this.startOnboarding;
+        
     }
 
+    startOnboarding()
+    {
+        console.log( 'start onboarding' );
+        this.setState(
+            {
+                display: 'onboarding'
+            }
+        );
+    }
     showAddToCartModal( dress )
     {
         this.setState(
@@ -80,6 +93,16 @@ export default class ShoppingSpree extends React.Component
             }
         );
     }
+    closeOnboarding()
+    {
+        this.setState(
+            {
+                display: 'none'
+            }
+        );
+        
+    }
+    
     doneOnboarding( email, name, icon, shoppingSpreeId )
     {
         this.setState(
@@ -122,7 +145,7 @@ export default class ShoppingSpree extends React.Component
             
                 {
                     this.state.display === 'onboarding' &&
-                        <Onboarding doneOnboarding={this.doneOnboarding}/>
+                        <Onboarding doneOnboarding={this.doneOnboarding} close={this.closeOnboarding}/>
                 }
                 </div>
         );
