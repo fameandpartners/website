@@ -3,6 +3,7 @@ import Drawer from './Drawer';
 import Onboarding from './Onboarding';
 import ShareModal from './ShareModal';
 import AddToCartModal from './AddToCartModal';
+import Cookies from 'universal-cookie';
 
 export default class ShoppingSpree extends React.Component
 {
@@ -33,6 +34,7 @@ export default class ShoppingSpree extends React.Component
         this.doneSharing = this.doneSharing.bind(this);
         this.showAddToCartModal = this.showAddToCartModal.bind(this);
         this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
+        this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
     }
 
     showAddToCartModal( dress )
@@ -53,6 +55,20 @@ export default class ShoppingSpree extends React.Component
                 dressAddingToCart: null
             }
         );
+    }
+
+    doneShoppingSpree()
+    {
+        let cookies = new Cookies();
+        cookies.remove( 'shopping_spree_name' );
+        cookies.remove( 'shopping_spree_email' );
+        cookies.remove( 'shopping_spree_id' );
+        this.setState(
+            {
+                display: 'none'
+            }
+        );
+        
     }
     
     doneOnboarding( email, name, icon, shoppingSpreeId )
@@ -87,7 +103,7 @@ export default class ShoppingSpree extends React.Component
                 }
                 {
                     this.state.display === 'chat' &&
-                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal}/>
+                        <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal} doneShoppingSpree={this.doneShoppingSpree}/>
                         
                 }
                 {

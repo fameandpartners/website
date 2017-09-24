@@ -138,7 +138,11 @@ export default class ChatList extends FirebaseComponent
     {
         this.scrollToBottom();
     }
-    
+
+    exit()
+    {
+        console.log( 'exit' );
+    }
     render()
     {
         return(
@@ -147,10 +151,10 @@ export default class ChatList extends FirebaseComponent
                 <div className="col-xs-4 header-name">
                   {this.props.name}
                 </div>
-                <div className="col-xs-1 col-xs-push-3">
+                <div onClick={this.props.doneShoppingSpree} className="col-xs-1 col-xs-push-3" role="button">
                   Exit
                 </div>
-                <div className="col-xs-4 col-xs-push-3 text-right">
+                <div className="col-xs-4 col-xs-push-3 text-right" role="button">
                   Invite other friends!
                 </div>
               </div>
@@ -174,5 +178,7 @@ ChatList.propTypes = {
     firebaseDatabase: React.PropTypes.string.isRequired,
     firebaseNodeId: React.PropTypes.string.isRequired,
     showAddToCartModal: React.PropTypes.func.isRequired,
-    name: React.PropTypes.string.isRequired    
+    name: React.PropTypes.string.isRequired,
+    doneShoppingSpree: React.PropTypes.func.isRequired
+    
 };

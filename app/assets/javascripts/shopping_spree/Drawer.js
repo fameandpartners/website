@@ -79,6 +79,7 @@ export default class Drawer extends React.Component
                   firebaseNodeId={this.state.firebaseNodeId}
                   showAddToCartModal={this.props.showAddToCartModal}
                   name={this.state.name}
+                  doneShoppingSpree={this.props.doneShoppingSpree}
                   />
                 <ChatBar
                   firebaseAPI={this.state.firebaseAPI}
@@ -104,5 +105,6 @@ Drawer.propTypes = {
     email: React.PropTypes.string.isRequired,
     icon: React.PropTypes.number.isRequired,
     closed: React.PropTypes.bool.isRequired,
-    showAddToCartModal: React.PropTypes.func.isRequired
+    showAddToCartModal: React.PropTypes.func.isRequired,
+    doneShoppingSpree: React.PropTypes.func.isRequired
 };
