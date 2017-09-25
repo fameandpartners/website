@@ -76,7 +76,7 @@ module Spree
         end
         
         line_item.personalization.customization_values.each do |customization| #customizations
-          tag = get_or_create_tag(customization.customisation_type, customization.presentation)
+          tag = get_or_create_tag("customization", customization.presentation)
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       

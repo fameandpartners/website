@@ -19,7 +19,20 @@
     @media (min-width: $fullhd) { @content; }
   }
 
-  @else {
-    @warn "Breakpoint mixin supports: tablet, desktop, widescreen, fullhd";
+  @else if $class == mobile-max {
+    @media (max-width: $tablet - 1px) { @content; }
   }
+
+  @else {
+    @warn "Breakpoint mixin supports: tablet, tablet-bootstrap-max, desktop, widescreen, fullhd, mobile-max";
+  }
+
+}
+
+@mixin real-full-width {
+  flex: none;
+  left: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50% - 8px);
+  padding: 0;
 }

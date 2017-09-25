@@ -12,7 +12,7 @@ module OrderBot
 			first_line_item = line_items.first
 			adjustments = per_item_adjustment(line_items, order).to_f
 			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
-			@order_date	= order.created_at
+			@order_date	= order.completed_at
 			@orderbot_account_id = 2
 			@account_group_id = 1132
 			@orderbot_customer_id = get_customer_id(order.bill_address.country.iso)
@@ -30,7 +30,7 @@ module OrderBot
 			@order_lines = generate_order_lines(line_items, order)
 			@other_charges = generate_other_charges(per_item_shipping_adjustment(line_items, order))
 			@internal_notes = check_for_special_care(order)
-			@order_notes = @reference_order_id
+			@order_notes = generate_tag_description(line_items)
 			@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
 
 		end
@@ -46,8 +46,31 @@ module OrderBot
 				end
 			end
 		end
- #OrderBot::Order.new(@order,@order.line_items)
+
 		private
+
+		 def generate_tag_description(line_items)
+		 	item_description_array = []
+		 	line_items.each do |line_item|
+			 	item_description_array << "Name: #{line_item.product.name}"
+			 	item_description_array << "Style Number: #{GlobalSku.find_by_product_id(line_item.product.id).style_number}"
+				unless line_item.personalization.nil?
+					line_item.personalization.options_hash.each_pair do |key, value| #size and color
+						unless value.nil?
+							item_description_array << "#{key}: #{value}"
+						end
+					end
+
+					line_item.personalization.customization_values.each do |customization| #customizations
+						item_description_array << "Customization: #{customization.presentation}"
+					end
+
+					item_description_array << "Height: #{line_item.personalization.height}"
+				end
+				item_description_array << "\n"
+			end
+			item_description_array.join("\n")
+	    end
 
 		def generate_order_lines(line_items, order)
 			h = Hash.new { |hash, key| hash[key] = 0}
