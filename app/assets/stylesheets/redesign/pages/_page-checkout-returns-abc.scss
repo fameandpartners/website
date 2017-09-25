@@ -1,0 +1,93 @@
+// copied & modified from @LAMike310's ExpressMaking component of new PDP
+// TO-DO: break these out into their respective partials, temp. while WIP
+
+$c-elem-focus: rgb(51, 51, 51);
+$c-white: #fff;
+$c-black: #000;
+$c-light-gray: #ddd;
+$c-background-gray: #f5f5f5;
+$c-border-gray: #d8d8d8;
+$z-max: 9999;
+
+
+.ReturnOption__wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.ReturnOption__content {
+  background: $c-background-gray;
+  border: 1px solid $c-border-gray;
+  height: 75px;
+  padding: 15px 0 0 0;
+}
+
+.ReturnOption__content--headline {
+  font-weight: 600;
+}
+
+.Checkbox__wrapper {
+  text-align: left;
+}
+
+.Checkbox {
+  position: absolute; // take it out of document flow
+  opacity: 0; // hide it
+  margin-top: 0px;
+  width: 20px;
+  height: 20px;
+  z-index: $z-max;
+
+  // Box hover
+  &:hover + .Checkbox__label:before {
+    box-shadow: 0 0 0 1px $c-elem-focus;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked + .Checkbox__label:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 9px;
+    background: $c-black;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 $c-black,
+      4px 0 0 $c-black,
+      4px -2px 0 $c-black,
+      4px -4px 0 $c-black,
+      4px -6px 0 $c-black,
+      4px -8px 0 $c-black,
+      4px -9px 0 $c-black;
+    transform: rotate(45deg);
+  }
+}
+
+.Checkbox + .Checkbox__label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+}
+
+.Checkbox.disabled + .Checkbox__label {
+  cursor: not-allowed;
+}
+
+.Checkbox.disabled + .Checkbox__label:before {
+  box-shadow: 0 0 0 1px $c-light-gray;
+}
+
+// Box.
+.Checkbox + .Checkbox__label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 20px;
+  height: 20px;
+  background: $c-white;
+  box-shadow: 0 0 0 1px $c-light-gray;
+  transition: 300ms box-shadow;
+}

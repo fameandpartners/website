@@ -96,6 +96,62 @@ $('.js-trigger-empty-cart-modal').modal({
 <% end %>
 
 <div class="cart-footer">
+<div class="row js-returns-abc-option-a">
+  <div class="ReturnOption__wrapper">
+    <div class="ReturnOption__content">
+      <div class="col-xs-1">
+        <div class="Checkbox__wrapper">
+          <input
+            class="Checkbox"
+            type="checkbox"
+            value="Opt out of returns"
+            id="returns_option_a"
+          />
+          <label for="returns_option_a" class="Checkbox__label"></label>
+        </div>
+      </div>
+      <div class="col-xs-7">
+        <p class="ReturnOption__content--headline">
+          <strong>{ 10 % } off</strong>
+          of your order when you opt out of returns
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <a href="OPEN_MODAL">
+          Learn more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row js-returns-abc-option-b">
+  <div class="ReturnOption__wrapper">
+    <div class="ReturnOption__content">
+      <div class="col-xs-1">
+        <div class="Checkbox__wrapper">
+          <input
+            class="Checkbox"
+            type="checkbox"
+            value="Opt into returns"
+            id="returns_option_b"
+          />
+          <label for="returns_option_b" class="Checkbox__label"></label>
+        </div>
+      </div>
+      <div class="col-xs-7">
+        <p class="ReturnOption__content--headline">
+          <strong>Add $25</strong>
+          for the option to return
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <a href="OPEN_MODAL">
+          Learn more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12">
     <form class="promo-code" action="#">
@@ -110,6 +166,12 @@ $('.js-trigger-empty-cart-modal').modal({
       <div class="cart-total">
         <p>
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
+        </p>
+        <p class="js-returns-abc-option-a">
+          Returns Savings (10%)<span class="pull-right"><%= @cart.display_item_total %></span>
+        </p>
+        <p class="js-returns-abc-option-b">
+          Returns Deposit<span class="pull-right">$25.00</span>
         </p>
         <p>
           Shipping <span class="value"><%= @cart.display_shipment_total %></span>
