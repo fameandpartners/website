@@ -30,7 +30,7 @@ module OrderBot
 		end
 
 		def per_item_discount_adjustment(order)
-			promotions = order&.adjustments&.promotion&.uniq {|x| x.label}
+			promotions = order&.adjustments&.promotion&.uniq! {|x| x.label}
 			if promotions
 				discount = promotions&.inject(0){|sum, item| sum + item.amount.abs}
 				return discount/order.line_items.count
