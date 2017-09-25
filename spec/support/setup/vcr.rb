@@ -5,13 +5,14 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.hook_into :webmock
   c.ignore_localhost = true
-  c.allow_http_connections_when_no_cassette = true
+  c.allow_http_connections_when_no_cassette = false
 
   # Afterpay
   ## Ignores its creation token call ()
   c.ignore_request do |request|
     request.headers['Use-Vcr'].nil? && \
       request.uri.include?('api-sandbox.secure-afterpay.com.au/v1/orders')
+      request.uri.include?('orderbot')
   end
 
   # VCR Filters

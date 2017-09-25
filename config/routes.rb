@@ -115,7 +115,7 @@ FameAndPartners::Application.routes.draw do
     get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
 
     # Fame Society Invitation
-    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
+    get '/fame-society-invitation', to: redirect('/dresses'), as: :fame_society_invitation_landing_page
 
     # "Invite a friend" landing page
     get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
