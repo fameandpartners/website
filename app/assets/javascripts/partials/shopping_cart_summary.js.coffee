@@ -14,7 +14,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       'removeProductHandler',
       'removeProductCustomizationHandler',
       'removeProductMakingOptionHandler',
-      'couponFormSubmitHandler'
+      'couponFormSubmitHandler',
+      'returnsAbcHandler'
     )
 
     @$container.on('click', '.remove-product', @removeProductHandler)
@@ -22,6 +23,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', '.making-option-remove', @removeProductMakingOptionHandler)
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
+    @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
     @cart.on('change', @render)
     @render()
     @
@@ -57,6 +59,11 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     e.preventDefault()
     line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
     @cart.removeProduct(line_item_id)
+
+  returnsAbcHandler: (e) ->
+    e.preventDefault()
+    targetMessageClass = '.js-returns-abc-option-message-' + e.currentTarget.value;
+    $(targetMessageClass).toggleClass('hidden')
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()
