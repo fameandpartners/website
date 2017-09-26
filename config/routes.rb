@@ -241,8 +241,6 @@ FameAndPartners::Application.routes.draw do
     # Modern Evening Collection - Landing page
     get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
 
-    # Bespoke Bridal Collection - Landing page
-    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
     # Redirect with querystring for GA tracking (Marketing campaign)
     get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
