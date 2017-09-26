@@ -7,22 +7,22 @@ module OrderBot
 			product_images_string = generate_html_encoded_images(product)
 			@reference_product_id = product.id # This is going to need to change
 			@component_group_id = group_ids[1]
-			@group_id = group_ids[0] 
-			@description = "#{product.name} %lt;br%gt; #{product_images_string}"
-			@create_bom = false 
-			@create_purchase_unit = false
-			@name = line_item.style_name
-			@sku = CustomItemSku.new(line_item).call
-			@base_price = line_item.price.to_f
-			@units_of_measure = 1
-			@units_of_measure_type_id = get_measurement_type_id_by_name('Each')
-			@weight = 3.0
-			@shipping_units_of_measure_type_id = 1
-			@taxable = true #Assume everything is taxable it is dependent on where the order is from
-			@min_quantity = 1
-			@active = true
-			@is_parent = false
+			@group_id = group_ids[0]
 			@upc = GlobalSku.find_by_product_id(product.id).upc
+      @description = "#{product.name},  UPC: #{@upc} %lt;br%gt; #{product_images_string}"
+      @create_bom = false
+      @create_purchase_unit = false
+      @name = line_item.style_name
+      @sku = CustomItemSku.new(line_item).call
+      @base_price = line_item.price.to_f
+      @units_of_measure = 1
+      @units_of_measure_type_id = get_measurement_type_id_by_name('Each')
+      @weight = 3.0
+      @shipping_units_of_measure_type_id = 1
+      @taxable = true #Assume everything is taxable it is dependent on where the order is from
+      @min_quantity = 1
+      @active = true
+      @is_parent = false
 			@country_of_product = 'CN'
 			@create_bom = true
 			@bom_quantity = 1
@@ -55,6 +55,6 @@ module OrderBot
 				return nil
 			end
 		end
-		
+
 	end
 end

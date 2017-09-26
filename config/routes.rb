@@ -613,9 +613,21 @@ FameAndPartners::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      # returns
       get 'orders' => 'returns_processes#index'
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
+
+      # user profile
+      get 'profile' => 'profiles#show'
+
+      # user session
+      devise_scope :spree_user do
+        post 'user/login' => 'user_sessions#create'
+        delete 'user/logout' => 'user_sessions#destroy'
+      end
+
+      delete '/rails_cache' => 'systems#clear_cache'
     end
   end
 

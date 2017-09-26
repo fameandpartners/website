@@ -1,0 +1,1593 @@
+doctype html
+html
+  head
+    meta name="robots" content="noindex,nofollow"
+    title Body Shape Calculator | Fame and Partners
+    link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
+    link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/dist/switchery.min.css"
+    link rel="stylesheet" type="text/css" href="assets/standalone/body_type_finder/style.css"
+  body
+    .page-wrap
+      .outer-wrap
+        .inner-wrap
+
+          header
+            h1.heading Body type finder
+            span.sub-heading Input the measures below to find out the Body Type
+
+          .result-wrap
+
+            // screen 1
+            .inner-wrap.js-screen-1
+              .media-wrap.img-siluet
+                = image_tag "standalone/body_type_finder/siluet.png"
+
+            // screen 2
+            .inner-wrap.cust-results.hidden.js-screen-2
+
+              h3.heading Customer results
+
+              .row
+                .col-xs-5.col-sm-5
+                  table
+                    tr
+                      td Bust
+                      td.js-result-bust
+                    tr
+                      td Underbust
+                      td.js-result-underbust
+                    tr
+                      td Waist
+                      td.js-result-waist
+                    tr
+                      td Hips
+                      td.js-result-hips
+                .col-xs-2.col-sm-2
+                  .media-wrap
+                    = image_tag "standalone/body_type_finder/bodyshape-base.png"
+                .col-xs-5.col-sm-5
+                  .results
+                    .title.js-result-title
+                    h3.type.js-result-type
+                    .size.js-result-size
+                    .description.js-result-description
+
+              /.row.controls-wrap
+              /  .col-xs-6.col-sm-6
+              /    .form-group.form-group-btn
+              /      input.btn.btn-secondary.btn-lg.btn-block type="button" value="Copy"
+              /  .col-xs-6.col-sm-6
+              /    .form-group.form-group-btn
+              /      input.btn.btn-primary.btn-lg.btn-block type="button" value="Share measurements"
+
+          form.clearfix.form-wrap.measurements-form.js-measurements-form
+            .clearfix
+              .form-group.form-group-heading
+                h2.heading Add / Edit Measurements
+              .form-group.form-group-heading
+                .switch-wrap
+                  label.checkbox-label for="switch-to-cm" inches
+                  input#switch-to-cm.js-switch type="checkbox" name="switch-to-cm"
+                  label.checkbox-label for="switch-to-cm" cm
+            .form-group
+              label for="bust" Bust
+              input#bust.form-control type="text" required="required"
+            .form-group
+              label for="underbust" Underbust
+              input#underbust.form-control type="text" required="required"
+            .form-group
+              label for="waist" Waist
+              input#waist.form-control type="text" required="required"
+            .form-group
+              label for="hips" Hips
+              input#hips.form-control type="text" required="required"
+            .form-group.form-group-btn
+              input.btn.btn-primary.btn-lg.btn-block.js-trigger-generator type="button" value="Generate body shape"
+            .form-group.form-group-btn
+              input.btn.btn-secondary.btn-lg.btn-block type="reset" value="Reset"
+
+    script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"
+    script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"
+    script type="text/javascript" src="assets/bower_components/switchery/dist/switchery.min.js"
+
+    javascript:
+      (function ($) {
+
+        // create iOS like switch boxes
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(el) {
+          var switchery = new Switchery(el, {
+            color: '#000',
+            secondaryColor: '#000',
+            jackColor: '#fff',
+            size: 'large'
+          });
+        });
+
+        $('.js-trigger-generator').on('click', function() {
+          var result;
+          var user_measurements = {};
+          var units             = 'inches';
+          var bust              = $('#bust').val() || 0;
+          var underbust         = $('#underbust').val() || 0;
+          var waist             = $('#waist').val() || 0;
+          var hips              = $('#hips').val() || 0;
+
+          user_measurements.bust_circumference       = bust;
+          user_measurements.under_bust_circumference = underbust;
+          user_measurements.waist_circumference      = waist;
+          user_measurements.hip_circumference        = hips;
+
+          if ($('#switch-to-cm').is(':checked')) {
+            units = 'cm';
+          } else {
+            user_measurements.bust_circumference       = convert_to_cm(bust);
+            user_measurements.under_bust_circumference = convert_to_cm(underbust);
+            user_measurements.waist_circumference      = convert_to_cm(waist);
+            user_measurements.hip_circumference        = convert_to_cm(hips);
+          }
+
+          result = calculate_body_match(user_measurements);
+
+          if (result.shape.name.length > 0) {
+            $('.js-result-title').html('Your Body Type and Dress Size is');
+            $('.js-result-type').html(result.shape.name);
+            $('.js-result-size').html(result.size.presentation);
+            $('.js-result-description').html(result.shape.description);
+          } else {
+            $('.js-result-title').html('');
+            $('.js-result-type').html('');
+            $('.js-result-size').html('');
+            $('.js-result-description')
+              .html("Sorry, we don't have a match for you right now. Try the Standard fit sample in the size the customer usually wears and go from there.");
+          }
+
+          $('.js-result-bust').html(bust + ' ' + units);
+          $('.js-result-underbust').html(underbust + ' ' + units);
+          $('.js-result-waist').html(waist + ' ' + units);
+          $('.js-result-hips').html(hips + ' ' + units);
+
+          $('.js-screen-1').addClass('hidden');
+          $('.js-screen-2').removeClass('hidden');
+
+          $.ajax({
+            url:      '/body-shape-calculator/store-measures.json',
+            method:   'POST',
+            dataType: 'json',
+            data:     {
+              body_calculator_measure: {
+                email:                    'test@test.com', // TODO: this should be filled in when sharing measures
+                shape:                    result.shape.name || '-',
+                size:                     result.size.presentation || '-',
+                bust_circumference:       bust || 0,
+                under_bust_circumference: underbust || 0,
+                waist_circumference:      waist || 0,
+                hip_circumference:        hips || 0,
+                unit:                     units
+              }
+            }
+          });
+
+        });
+
+        // This algorithm will show how shapes and sizes are used to calculate an user shape.
+        // Remember to consider match tolerance around sizes
+        var Shape = function (opts) {
+          this.name                     = opts.name || "";
+          this.description              = opts.description || "";
+          this.bust_circumference       = opts.bust_circumference || 0;
+          this.under_bust_circumference = opts.under_bust_circumference || 0;
+          this.waist_circumference      = opts.waist_circumference || 0;
+          this.hip_circumference        = opts.hip_circumference || 0;
+        };
+
+        var Size = function (opts) {
+          this.presentation    = opts.presentation || "";
+          this.match_tolerance = opts.match_tolerance || 0;
+          this.shapes          = opts.shapes || [];
+        };
+
+        // Size 0
+        var size_0_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       78,
+          under_bust_circumference: 66,
+          waist_circumference:      60,
+          hip_circumference:        84
+        });
+
+        var size_0_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       75,
+          under_bust_circumference: 65,
+          waist_circumference:      60,
+          hip_circumference:        91
+        });
+
+        var size_0_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       83,
+          under_bust_circumference: 67,
+          waist_circumference:      60,
+          hip_circumference:        86
+        });
+
+        var size_0_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       81,
+          under_bust_circumference: 68,
+          waist_circumference:      62,
+          hip_circumference:        82
+        });
+
+        var size_0_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       80,
+          under_bust_circumference: 70,
+          waist_circumference:      64,
+          hip_circumference:        88
+        });
+
+        var size_0_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       78,
+          under_bust_circumference: 66,
+          waist_circumference:      60,
+          hip_circumference:        91
+        });
+
+        var size_0_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       76,
+          under_bust_circumference: 69,
+          waist_circumference:      63,
+          hip_circumference:        85
+        });
+
+        var size_0_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       83,
+          under_bust_circumference: 67,
+          waist_circumference:      60,
+          hip_circumference:        92
+        });
+
+        var size_0_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       74,
+          under_bust_circumference: 69,
+          waist_circumference:      63,
+          hip_circumference:        80
+        });
+
+        var size_0_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       82,
+          under_bust_circumference: 69,
+          waist_circumference:      63,
+          hip_circumference:        80
+        });
+
+        var size_0 = new Size({
+          presentation:    "US 0/AU 4",
+          match_tolerance: 1.25,
+          shapes:          [size_0_classic_hourglass_shape,
+                            size_0_pear_shape,
+                            size_0_top_hourglass_shape,
+                            //size_0_strawberry_shape,
+                            size_0_apple_shape,
+                            size_0_bottom_hourglass_shape,
+                            size_0_banana_shape,
+                            size_0_double_cherry_shape,
+                            size_0_ruler_shape,
+                            size_0_full_ruler_shape]
+        });
+
+        // Size 2
+        var size_2_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       85.5,
+          under_bust_circumference: 68.5,
+          waist_circumference:      62.5,
+          hip_circumference:        86.5
+        });
+
+        var size_2_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       77.5,
+          under_bust_circumference: 67.5,
+          waist_circumference:      62.5,
+          hip_circumference:        93.5
+        });
+
+        var size_2_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       85.5,
+          under_bust_circumference: 69.5,
+          waist_circumference:      62.5,
+          hip_circumference:        88.5
+        });
+
+        var size_2_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       83.5,
+          under_bust_circumference: 70.5,
+          waist_circumference:      64.5,
+          hip_circumference:        84.5
+        });
+
+        var size_2_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       82.5,
+          under_bust_circumference: 72.5,
+          waist_circumference:      66.5,
+          hip_circumference:        90.5
+        });
+
+        var size_2_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       80.5,
+          under_bust_circumference: 68.5,
+          waist_circumference:      62.5,
+          hip_circumference:        93.5
+        });
+
+        var size_2_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       78.5,
+          under_bust_circumference: 71.5,
+          waist_circumference:      65.5,
+          hip_circumference:        87.5
+        });
+
+        var size_2_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       85.5,
+          under_bust_circumference: 69.5,
+          waist_circumference:      62.5,
+          hip_circumference:        94.5
+        });
+
+        var size_2_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       76.5,
+          under_bust_circumference: 71.5,
+          waist_circumference:      65.5,
+          hip_circumference:        82.5
+        });
+
+        var size_2_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       84.5,
+          under_bust_circumference: 71.5,
+          waist_circumference:      65.5,
+          hip_circumference:        82.5
+        });
+
+        var size_2 = new Size({
+          presentation:    "US 2/AU 6",
+          match_tolerance: 1.25,
+          shapes:          [size_2_classic_hourglass_shape,
+                            size_2_pear_shape,
+                            size_2_top_hourglass_shape,
+                            //size_2_strawberry_shape,
+                            size_2_apple_shape,
+                            size_2_bottom_hourglass_shape,
+                            size_2_banana_shape,
+                            size_2_double_cherry_shape,
+                            size_2_ruler_shape,
+                            size_2_full_ruler_shape]
+        });
+
+        // Size 4
+        var size_4_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       83,
+          under_bust_circumference: 71,
+          waist_circumference:      65,
+          hip_circumference:        89
+        });
+
+        var size_4_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       80,
+          under_bust_circumference: 70,
+          waist_circumference:      65,
+          hip_circumference:        96
+        });
+
+        var size_4_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       88,
+          under_bust_circumference: 72,
+          waist_circumference:      65,
+          hip_circumference:        91
+        });
+
+        var size_4_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       86,
+          under_bust_circumference: 73,
+          waist_circumference:      67,
+          hip_circumference:        87
+        });
+
+        var size_4_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       85,
+          under_bust_circumference: 75,
+          waist_circumference:      69,
+          hip_circumference:        93
+        });
+
+        var size_4_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       83,
+          under_bust_circumference: 71,
+          waist_circumference:      65,
+          hip_circumference:        96
+        });
+
+        var size_4_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       81,
+          under_bust_circumference: 74,
+          waist_circumference:      68,
+          hip_circumference:        90
+        });
+
+        var size_4_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       88,
+          under_bust_circumference: 72,
+          waist_circumference:      65,
+          hip_circumference:        97
+        });
+
+        var size_4_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       79,
+          under_bust_circumference: 74,
+          waist_circumference:      68,
+          hip_circumference:        85
+        });
+
+        var size_4_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       87,
+          under_bust_circumference: 74,
+          waist_circumference:      68,
+          hip_circumference:        85
+        });
+
+        var size_4 = new Size({
+          presentation:    "US 4/AU 8",
+          match_tolerance: 2.5,
+          shapes:          [size_4_classic_hourglass_shape,
+                            size_4_pear_shape,
+                            size_4_top_hourglass_shape,
+                            //size_4_strawberry_shape,
+                            size_4_apple_shape,
+                            size_4_bottom_hourglass_shape,
+                            size_4_banana_shape,
+                            size_4_double_cherry_shape,
+                            size_4_ruler_shape,
+                            size_4_full_ruler_shape]
+        });
+
+        // Size 6
+        var size_6_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       88,
+          under_bust_circumference: 76,
+          waist_circumference:      70,
+          hip_circumference:        94
+        });
+
+        var size_6_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       85,
+          under_bust_circumference: 75,
+          waist_circumference:      70,
+          hip_circumference:        101
+        });
+
+        var size_6_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       93,
+          under_bust_circumference: 77,
+          waist_circumference:      70,
+          hip_circumference:        96
+        });
+
+        var size_6_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       91,
+          under_bust_circumference: 78,
+          waist_circumference:      72,
+          hip_circumference:        92
+        });
+
+        var size_6_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       90,
+          under_bust_circumference: 80,
+          waist_circumference:      74,
+          hip_circumference:        98
+        });
+
+        var size_6_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       88,
+          under_bust_circumference: 76,
+          waist_circumference:      70,
+          hip_circumference:        101
+        });
+
+        var size_6_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       86,
+          under_bust_circumference: 79,
+          waist_circumference:      73,
+          hip_circumference:        95
+        });
+
+        var size_6_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       93,
+          under_bust_circumference: 77,
+          waist_circumference:      70,
+          hip_circumference:        102
+        });
+
+        var size_6_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       84,
+          under_bust_circumference: 79,
+          waist_circumference:      73,
+          hip_circumference:        90
+        });
+
+        var size_6_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       92,
+          under_bust_circumference: 79,
+          waist_circumference:      73,
+          hip_circumference:        90
+        });
+
+        var size_6 = new Size({
+          presentation:    "US 6/AU 10",
+          match_tolerance: 2.5,
+          shapes:          [size_6_classic_hourglass_shape,
+                            size_6_pear_shape,
+                            size_6_top_hourglass_shape,
+                            //size_6_strawberry_shape,
+                            size_6_apple_shape,
+                            size_6_bottom_hourglass_shape,
+                            size_6_banana_shape,
+                            size_6_double_cherry_shape,
+                            size_6_ruler_shape,
+                            size_6_full_ruler_shape]
+        });
+
+        // Size 8
+        var size_8_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       93,
+          under_bust_circumference: 81,
+          waist_circumference:      75,
+          hip_circumference:        99
+        });
+
+        var size_8_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       90,
+          under_bust_circumference: 80,
+          waist_circumference:      75,
+          hip_circumference:        106
+        });
+
+        var size_8_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       98,
+          under_bust_circumference: 82,
+          waist_circumference:      75,
+          hip_circumference:        101
+        });
+
+        var size_8_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       96,
+          under_bust_circumference: 83,
+          waist_circumference:      77,
+          hip_circumference:        97
+        });
+
+        var size_8_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       95,
+          under_bust_circumference: 85,
+          waist_circumference:      79,
+          hip_circumference:        103
+        });
+
+        var size_8_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       93,
+          under_bust_circumference: 81,
+          waist_circumference:      75,
+          hip_circumference:        106
+        });
+
+        var size_8_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       91,
+          under_bust_circumference: 84,
+          waist_circumference:      78,
+          hip_circumference:        100
+        });
+
+        var size_8_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       98,
+          under_bust_circumference: 82,
+          waist_circumference:      75,
+          hip_circumference:        107
+        });
+
+        var size_8_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       89,
+          under_bust_circumference: 84,
+          waist_circumference:      78,
+          hip_circumference:        95
+        });
+
+        var size_8_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       97,
+          under_bust_circumference: 84,
+          waist_circumference:      78,
+          hip_circumference:        95
+        });
+
+        var size_8 = new Size({
+          presentation:    "US 8/AU 12",
+          match_tolerance: 2.5,
+          shapes:          [size_8_classic_hourglass_shape,
+                            size_8_pear_shape,
+                            size_8_top_hourglass_shape,
+                            //size_8_strawberry_shape,
+                            size_8_apple_shape,
+                            size_8_bottom_hourglass_shape,
+                            size_8_banana_shape,
+                            size_8_double_cherry_shape,
+                            size_8_ruler_shape,
+                            size_8_full_ruler_shape]
+        });
+
+        // Size 10
+        var size_10_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       98,
+          under_bust_circumference: 86,
+          waist_circumference:      80,
+          hip_circumference:        104
+        });
+
+        var size_10_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       95,
+          under_bust_circumference: 85,
+          waist_circumference:      80,
+          hip_circumference:        111
+        });
+
+        var size_10_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       103,
+          under_bust_circumference: 87,
+          waist_circumference:      80,
+          hip_circumference:        106
+        });
+
+        var size_10_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       101,
+          under_bust_circumference: 88,
+          waist_circumference:      82,
+          hip_circumference:        102
+        });
+
+        var size_10_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       100,
+          under_bust_circumference: 90,
+          waist_circumference:      84,
+          hip_circumference:        108
+        });
+
+        var size_10_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       98,
+          under_bust_circumference: 86,
+          waist_circumference:      80,
+          hip_circumference:        111
+        });
+
+        var size_10_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       96,
+          under_bust_circumference: 89,
+          waist_circumference:      83,
+          hip_circumference:        105
+        });
+
+        var size_10_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       103,
+          under_bust_circumference: 87,
+          waist_circumference:      80,
+          hip_circumference:        112
+        });
+
+        var size_10_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       94,
+          under_bust_circumference: 89,
+          waist_circumference:      83,
+          hip_circumference:        100
+        });
+
+        var size_10_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       102,
+          under_bust_circumference: 89,
+          waist_circumference:      83,
+          hip_circumference:        100
+        });
+
+        var size_10 = new Size({
+          presentation:    "US 10/AU 14",
+          match_tolerance: 2.5,
+          shapes:          [size_10_classic_hourglass_shape,
+                            size_10_pear_shape,
+                            size_10_top_hourglass_shape,
+                            //size_10_strawberry_shape,
+                            size_10_apple_shape,
+                            size_10_bottom_hourglass_shape,
+                            size_10_banana_shape,
+                            size_10_double_cherry_shape,
+                            size_10_ruler_shape,
+                            size_10_full_ruler_shape]
+        });
+
+        // Size 12
+        var size_12_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       103,
+          under_bust_circumference: 91,
+          waist_circumference:      85,
+          hip_circumference:        109
+        });
+
+        var size_12_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       100,
+          under_bust_circumference: 90,
+          waist_circumference:      85,
+          hip_circumference:        116
+        });
+
+        var size_12_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       108,
+          under_bust_circumference: 92,
+          waist_circumference:      85,
+          hip_circumference:        111
+        });
+
+        var size_12_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       106,
+          under_bust_circumference: 93,
+          waist_circumference:      87,
+          hip_circumference:        107
+        });
+
+        var size_12_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       105,
+          under_bust_circumference: 95,
+          waist_circumference:      89,
+          hip_circumference:        113
+        });
+
+        var size_12_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       103,
+          under_bust_circumference: 91,
+          waist_circumference:      85,
+          hip_circumference:        116
+        });
+
+        var size_12_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       101,
+          under_bust_circumference: 94,
+          waist_circumference:      88,
+          hip_circumference:        110
+        });
+
+        var size_12_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       108,
+          under_bust_circumference: 92,
+          waist_circumference:      85,
+          hip_circumference:        117
+        });
+
+        var size_12_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       99,
+          under_bust_circumference: 94,
+          waist_circumference:      88,
+          hip_circumference:        105
+        });
+
+        var size_12_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       107,
+          under_bust_circumference: 94,
+          waist_circumference:      88,
+          hip_circumference:        105
+        });
+
+        var size_12 = new Size({
+          presentation:    "US 12/AU 16",
+          match_tolerance: 3,
+          shapes:          [size_12_classic_hourglass_shape,
+                            size_12_pear_shape,
+                            size_12_top_hourglass_shape,
+                            //size_12_strawberry_shape,
+                            size_12_apple_shape,
+                            size_12_bottom_hourglass_shape,
+                            size_12_banana_shape,
+                            size_12_double_cherry_shape,
+                            size_12_ruler_shape,
+                            size_12_full_ruler_shape]
+        });
+
+        // Size 14
+        var size_14_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       109,
+          under_bust_circumference: 97,
+          waist_circumference:      91,
+          hip_circumference:        115
+        });
+
+        var size_14_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       106,
+          under_bust_circumference: 96,
+          waist_circumference:      91,
+          hip_circumference:        122
+        });
+
+        var size_14_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       114,
+          under_bust_circumference: 98,
+          waist_circumference:      91,
+          hip_circumference:        117
+        });
+
+        var size_14_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       112,
+          under_bust_circumference: 99,
+          waist_circumference:      93,
+          hip_circumference:        113
+        });
+
+        var size_14_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       111,
+          under_bust_circumference: 101,
+          waist_circumference:      95,
+          hip_circumference:        119
+        });
+
+        var size_14_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       109,
+          under_bust_circumference: 97,
+          waist_circumference:      91,
+          hip_circumference:        122
+        });
+
+        var size_14_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       107,
+          under_bust_circumference: 100,
+          waist_circumference:      94,
+          hip_circumference:        116
+        });
+
+        var size_14_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       114,
+          under_bust_circumference: 98,
+          waist_circumference:      91,
+          hip_circumference:        123
+        });
+
+        var size_14_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       105,
+          under_bust_circumference: 100,
+          waist_circumference:      94,
+          hip_circumference:        111
+        });
+
+        var size_14_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       113,
+          under_bust_circumference: 100,
+          waist_circumference:      94,
+          hip_circumference:        111
+        });
+
+        var size_14 = new Size({
+          presentation:    "US 14/AU 18",
+          match_tolerance: 3,
+          shapes:          [size_14_classic_hourglass_shape,
+                            size_14_pear_shape,
+                            size_14_top_hourglass_shape,
+                            //size_14_strawberry_shape,
+                            size_14_apple_shape,
+                            size_14_bottom_hourglass_shape,
+                            size_14_banana_shape,
+                            size_14_double_cherry_shape,
+                            size_14_ruler_shape,
+                            size_14_full_ruler_shape]
+        });
+
+        // Size 16
+        var size_16_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       116,
+          under_bust_circumference: 104,
+          waist_circumference:      98,
+          hip_circumference:        122
+        });
+
+        var size_16_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       113,
+          under_bust_circumference: 103,
+          waist_circumference:      98,
+          hip_circumference:        129
+        });
+
+        var size_16_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       121,
+          under_bust_circumference: 105,
+          waist_circumference:      98,
+          hip_circumference:        124
+        });
+
+        var size_16_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       119,
+          under_bust_circumference: 106,
+          waist_circumference:      100,
+          hip_circumference:        120
+        });
+
+        var size_16_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       118,
+          under_bust_circumference: 108,
+          waist_circumference:      102,
+          hip_circumference:        126
+        });
+
+        var size_16_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       116,
+          under_bust_circumference: 104,
+          waist_circumference:      98,
+          hip_circumference:        129
+        });
+
+        var size_16_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       114,
+          under_bust_circumference: 107,
+          waist_circumference:      101,
+          hip_circumference:        123
+        });
+
+        var size_16_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       121,
+          under_bust_circumference: 105,
+          waist_circumference:      98,
+          hip_circumference:        130
+        });
+
+        var size_16_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       112,
+          under_bust_circumference: 107,
+          waist_circumference:      101,
+          hip_circumference:        118
+        });
+
+        var size_16_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       120,
+          under_bust_circumference: 107,
+          waist_circumference:      101,
+          hip_circumference:        118
+        });
+
+        var size_16 = new Size({
+          presentation:    "US 16/AU 20",
+          match_tolerance: 3,
+          shapes:          [size_16_classic_hourglass_shape,
+                            size_16_pear_shape,
+                            size_16_top_hourglass_shape,
+                            //size_16_strawberry_shape,
+                            size_16_apple_shape,
+                            size_16_bottom_hourglass_shape,
+                            size_16_banana_shape,
+                            size_16_double_cherry_shape,
+                            size_16_ruler_shape,
+                            size_16_full_ruler_shape]
+        });
+
+        // Size 18
+        var size_18_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       123,
+          under_bust_circumference: 111,
+          waist_circumference:      105,
+          hip_circumference:        129
+        });
+
+        var size_18_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       120,
+          under_bust_circumference: 110,
+          waist_circumference:      105,
+          hip_circumference:        136
+        });
+
+        var size_18_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       128,
+          under_bust_circumference: 112,
+          waist_circumference:      105,
+          hip_circumference:        131
+        });
+
+        var size_18_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       126,
+          under_bust_circumference: 113,
+          waist_circumference:      107,
+          hip_circumference:        127
+        });
+
+        var size_18_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       125,
+          under_bust_circumference: 115,
+          waist_circumference:      109,
+          hip_circumference:        133
+        });
+
+        var size_18_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       123,
+          under_bust_circumference: 111,
+          waist_circumference:      105,
+          hip_circumference:        136
+        });
+
+        var size_18_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       121,
+          under_bust_circumference: 114,
+          waist_circumference:      108,
+          hip_circumference:        130
+        });
+
+        var size_18_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       128,
+          under_bust_circumference: 112,
+          waist_circumference:      105,
+          hip_circumference:        137
+        });
+
+        var size_18_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       119,
+          under_bust_circumference: 114,
+          waist_circumference:      108,
+          hip_circumference:        125
+        });
+
+        var size_18_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       127,
+          under_bust_circumference: 114,
+          waist_circumference:      108,
+          hip_circumference:        125
+        });
+
+        var size_18 = new Size({
+          presentation:    "US 18/AU 22",
+          match_tolerance: 3.5,
+          shapes:          [size_18_classic_hourglass_shape,
+                            size_18_pear_shape,
+                            size_18_top_hourglass_shape,
+                            //size_18_strawberry_shape,
+                            size_18_apple_shape,
+                            size_18_bottom_hourglass_shape,
+                            size_18_banana_shape,
+                            size_18_double_cherry_shape,
+                            size_18_ruler_shape,
+                            size_18_full_ruler_shape]
+        });
+
+        // Size 20
+        var size_20_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       130,
+          under_bust_circumference: 118,
+          waist_circumference:      112,
+          hip_circumference:        136
+        });
+
+        var size_20_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       127,
+          under_bust_circumference: 117,
+          waist_circumference:      112,
+          hip_circumference:        143
+        });
+
+        var size_20_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       135,
+          under_bust_circumference: 119,
+          waist_circumference:      112,
+          hip_circumference:        138
+        });
+
+        var size_20_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       133,
+          under_bust_circumference: 120,
+          waist_circumference:      114,
+          hip_circumference:        134
+        });
+
+        var size_20_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       132,
+          under_bust_circumference: 122,
+          waist_circumference:      116,
+          hip_circumference:        140
+        });
+
+        var size_20_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       130,
+          under_bust_circumference: 118,
+          waist_circumference:      112,
+          hip_circumference:        143
+        });
+
+        var size_20_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       128,
+          under_bust_circumference: 121,
+          waist_circumference:      115,
+          hip_circumference:        137
+        });
+
+        var size_20_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       135,
+          under_bust_circumference: 119,
+          waist_circumference:      112,
+          hip_circumference:        144
+        });
+
+        var size_20_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       126,
+          under_bust_circumference: 121,
+          waist_circumference:      115,
+          hip_circumference:        132
+        });
+
+        var size_20_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       134,
+          under_bust_circumference: 121,
+          waist_circumference:      115,
+          hip_circumference:        132
+        });
+
+        var size_20 = new Size({
+          presentation:    "US 20/AU 24",
+          match_tolerance: 3.5,
+          shapes:          [size_20_classic_hourglass_shape,
+                            size_20_pear_shape,
+                            size_20_top_hourglass_shape,
+                            //size_20_strawberry_shape,
+                            size_20_apple_shape,
+                            size_20_bottom_hourglass_shape,
+                            size_20_banana_shape,
+                            size_20_double_cherry_shape,
+                            size_20_ruler_shape,
+                            size_20_full_ruler_shape]
+        });
+
+        // Size 22
+        var size_22_classic_hourglass_shape = new Shape({
+          name:                     "Classic Hour Glass",
+          description:              "Try the Standard fit",
+          bust_circumference:       137,
+          under_bust_circumference: 125,
+          waist_circumference:      119,
+          hip_circumference:        143
+        });
+
+        var size_22_pear_shape = new Shape({
+          name:                     "Pear",
+          description:
+            "Try the Standard fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       134,
+          under_bust_circumference: 124,
+          waist_circumference:      119,
+          hip_circumference:        150
+        });
+
+        var size_22_top_hourglass_shape = new Shape({
+          name:                     "Top Hour Glass",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       142,
+          under_bust_circumference: 126,
+          waist_circumference:      119,
+          hip_circumference:        145
+        });
+
+        var size_22_strawberry_shape = new Shape({
+          name:                     "Strawberry",
+          description:              "",
+          bust_circumference:       140,
+          under_bust_circumference: 127,
+          waist_circumference:      121,
+          hip_circumference:        141
+        });
+
+        var size_22_apple_shape = new Shape({
+          name:                     "Apple",
+          description:
+            "Try the Standard Fit in their usual size and recommend trying one size up also.",
+          bust_circumference:       139,
+          under_bust_circumference: 129,
+          waist_circumference:      123,
+          hip_circumference:        147
+        });
+
+        var size_22_bottom_hourglass_shape = new Shape({
+          name:                     "Bottom Hour Glass",
+          description:
+            "Try the Standard Fit in styles with a full skirt. For fitted styles, try the Standard Fit and if the skirt is a little snug, suggest ordering the Hip Friendly fit.",
+          bust_circumference:       137,
+          under_bust_circumference: 125,
+          waist_circumference:      119,
+          hip_circumference:        150
+        });
+
+        var size_22_banana_shape = new Shape({
+          name:                     "Banana",
+          description:              "Try the Standard fit.",
+          bust_circumference:       135,
+          under_bust_circumference: 128,
+          waist_circumference:      122,
+          hip_circumference:        144
+        });
+
+        var size_22_double_cherry_shape = new Shape({
+          name:                     "Double Cherry",
+          description:
+            "Try the Standard Fit. If the top or skirt are a little snug, suggest ordering the Bust Friendly or Hip Friendly fit. In a Two-Piece they may go up one size.",
+          bust_circumference:       142,
+          under_bust_circumference: 126,
+          waist_circumference:      119,
+          hip_circumference:        151
+        });
+
+        var size_22_ruler_shape = new Shape({
+          name:                     "Ruler",
+          description:
+            "Try the Standard Fit in their usual size. The customer may need to go up or down a size based on their waist measurement.",
+          bust_circumference:       133,
+          under_bust_circumference: 128,
+          waist_circumference:      122,
+          hip_circumference:        139
+        });
+
+        var size_22_full_ruler_shape = new Shape({
+          name:                     "Full Ruler",
+          description:
+            "Try the Standard fit. If the bust is a little snug, suggest ordering the Bust Friendly fit.",
+          bust_circumference:       141,
+          under_bust_circumference: 128,
+          waist_circumference:      122,
+          hip_circumference:        139
+        });
+
+        var size_22 = new Size({
+          presentation:    "US 22/AU 26",
+          match_tolerance: 3.5,
+          shapes:          [size_22_classic_hourglass_shape,
+                            size_22_pear_shape,
+                            size_22_top_hourglass_shape,
+                            //size_22_strawberry_shape,
+                            size_22_apple_shape,
+                            size_22_bottom_hourglass_shape,
+                            size_22_banana_shape,
+                            size_22_double_cherry_shape,
+                            size_22_ruler_shape,
+                            size_22_full_ruler_shape]
+        });
+
+        var sizes = [size_0, size_2, size_4, size_6, size_8, size_10, size_12, size_14, size_16, size_18, size_20, size_22];
+
+        function measure_fits_user(user_measure, shape_measure, match_tolerance) {
+          var top_limit    = shape_measure + match_tolerance;
+          var bottom_limit = shape_measure - match_tolerance;
+          return user_measure >= bottom_limit && user_measure <= top_limit
+        }
+
+        function match_measurement(user_measurements, shape, size) {
+          var match_tolerance = size.match_tolerance;
+          return (
+            measure_fits_user(user_measurements.bust_circumference, shape.bust_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.under_bust_circumference, shape.under_bust_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.waist_circumference, shape.waist_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.hip_circumference, shape.hip_circumference, match_tolerance)
+          )
+        }
+
+        function calculate_body_match(user_measurements) {
+          // Fallback Shape and Size
+          var result = {
+            shape: new Shape({name: ""}),
+            size:  new Size({presentation: ""})
+          };
+
+          for (var i = 0; i < sizes.length; i++) {
+            var size        = sizes[i];
+            var found_shape = size.shapes.find(function (shape) {
+              return match_measurement(user_measurements, shape, size)
+            });
+
+            if (found_shape) {
+              result = {
+                shape: found_shape,
+                size:  size
+              };
+              break
+            }
+          }
+
+          return result;
+        }
+
+        function convert_to_cm(inches) {
+          return (inches * 2.54).toFixed(1);
+        }
+
+      })(jQuery);
