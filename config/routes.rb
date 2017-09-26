@@ -244,8 +244,6 @@ FameAndPartners::Application.routes.draw do
     # Modern Evening Collection - Landing page
     get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
 
-    # Bespoke Bridal Collection - Landing page
-    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
     # Redirect with querystring for GA tracking (Marketing campaign)
     get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
@@ -616,9 +614,21 @@ FameAndPartners::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      # returns
       get 'orders' => 'returns_processes#index'
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
+
+      # user profile
+      get 'profile' => 'profiles#show'
+
+      # user session
+      devise_scope :spree_user do
+        post 'user/login' => 'user_sessions#create'
+        delete 'user/logout' => 'user_sessions#destroy'
+      end
+
+      delete '/rails_cache' => 'systems#clear_cache'
     end
   end
 

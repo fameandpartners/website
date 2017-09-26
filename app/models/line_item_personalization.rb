@@ -15,12 +15,13 @@ class LineItemPersonalization < ActiveRecord::Base
   attr_accessible :customization_value_ids,
                   :height,
                   :size_id,
-                  :color_id
+                  :color_id,
+                  :sku
 
   validates :size, :color,  presence: true
 
   DEFAULT_HEIGHT = 'standard'
-  HEIGHTS = %w(petite standard tall length1 length2 length3 length4 length5 length6)
+  HEIGHTS = %w(petite standard tall length1 length2 length3 length4 length5 length6) #Make sure first letter+ last letter of Heights is unique otherwise skus will not be generated correctly
   validates :height, inclusion: { in: HEIGHTS }
 
   DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')
