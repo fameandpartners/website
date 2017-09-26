@@ -38,3 +38,6 @@ every(3.hours)    { rake 'bergen:workers:receive_asns' }
 # Next Logistics scheduled tasks
 
 every(30.minutes) { rake 'next:workers:asn_file_upload' }
+
+# Order bot Scheduled tasks
+every(30.minutes) { rake 'reports:order_bot_failure_check' }
