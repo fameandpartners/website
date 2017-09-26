@@ -35,7 +35,7 @@ $z-max: 9999;
 .Checkbox {
   position: absolute; // take it out of document flow
   opacity: 0; // hide it
-  margin-top: 0px;
+  margin-top: 0px !important; // to bypass conflict w/ base redesign styles
   width: 20px;
   height: 20px;
   z-index: $z-max;
