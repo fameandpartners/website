@@ -38,6 +38,18 @@ class PromotionsService
       @promotion ||= code.present? ? Spree::Promotion.find_by_code(code) : nil
     end
 
+    def conflicting_coupon_exists?
+
+      if @promotion.code == "DELIVERYDISC"
+        return order.promotions.any? {|x| x.code == "DELIVERYINS"}
+        
+      elsif @promotion.code == "DELIVERYINS"
+        return order.promotions.any? {|x| x.code == "DELIVERYDISC"}
+      end
+
+      return false
+    end
+
     def apply_coupon_code
       if order.nil?
         @message = I18n.t('spree.store.promotions.order_is_nil')
@@ -64,6 +76,10 @@ class PromotionsService
       #order.update_attributes(coupon_code: promotion.code)
       order.coupon_code = promotion.code # its working
 
+      if conflicting_coupon_exists?
+        return false
+      end
+
       # check if coupon code is already applied
       if order.adjustments.promotion.eligible.detect { |p| p.originator.promotion.code == promotion.code }.present?
         @message = I18n.t(:coupon_code_already_applied)
@@ -88,6 +104,8 @@ class PromotionsService
         @message = I18n.t(:coupon_code_not_found)
         false
       end
+
+
     end
 end
 end
