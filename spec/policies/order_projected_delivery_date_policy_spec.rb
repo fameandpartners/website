@@ -9,7 +9,7 @@ describe Policies::OrderProjectedDeliveryDatePolicy, type: :policy do
     context 'china new year delivery delay' do
       # let(:order) { double(Spree::Order, completed_at: completed_at, has_fast_making_items?: false, has_slow_making_items?: false) }
       let(:order) { FactoryGirl.create(:complete_order_with_items, completed_at: completed_at) }
-      let(:expected_date) { DateTime.parse('Tue April 28 2015') }
+      let(:expected_date) { DateTime.parse('Tue April 21 2015') }
 
       it 'calculates 28 calendar days on china new year period' do
         Features.activate(:cny_delivery_delays)
