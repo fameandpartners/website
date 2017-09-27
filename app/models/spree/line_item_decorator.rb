@@ -155,7 +155,15 @@ Spree::LineItem.class_eval do
   end
 
   def store_credit_only_return?
-    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
+    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
+  end
+
+  def return_eligible_AC?
+    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase == "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  end
+
+  def return_eligible_B?
+    self.order.return_type == 'B' && self.order.promotions.any? {|x| x.code.downcase == "deliveryins"}
   end
 
   def window_closed?
@@ -165,6 +173,7 @@ Spree::LineItem.class_eval do
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
+    json['line_item']['return_eligible'] = self.return_eligible_B? || self.return_eligible_AC?
     json['line_item']['window_closed'] = self.window_closed?
     json['line_item']['products_meta'] = {
       "name": self.style_name,
