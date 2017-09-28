@@ -87,7 +87,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   fakeOptimizely: () ->
     # TO-DO: replicate in Optimizely
-    returnTest = 'B'
+    returnTest = 'A'
     $('.js-returns-abc-option-' + returnTest).show()
     $('#return_type').val(returnTest)
 

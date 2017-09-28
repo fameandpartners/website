@@ -116,7 +116,7 @@ $('.js-trigger-empty-cart-modal').modal({
       </div>
       <div class="col-xs-7">
         <p class="ReturnOption__content--headline">
-          <strong><%= @cart.display_promotion_total %> off</strong>
+          <strong><%= @cart.delivery_discount %> off</strong>
           of your order when you opt out of returns
         </p>
       </div>
