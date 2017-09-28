@@ -1,0 +1,24 @@
+.section-box.section-box-alt.col-xs-12.col-sm-6.col-md-4.category--item
+  .item.bordered
+    .item-copy
+      = link_to iequalchange_landing_page_path
+        / Show one of the 3 tiles randomly
+        - random_tile = Random.rand(3)
+        - if random_tile == 0
+          = image_tag 'marketing/iequalchange/tile-akilah.jpg', :class => 'img-responsive', alt: 'i=Change - Akillah'
+          h4.heading Build a woman's <em>future.</em>
+          p.summary Your contribution can provide a day of education to young women in developing countries.
+        - elsif random_tile == 1
+          = image_tag 'marketing/iequalchange/tile-plan.jpg', :class => 'img-responsive', alt: 'i=Change - Plan'
+          h4.heading Keep girls in <em>school</em>.
+          p.summary Your contribution can provide young Ugandan women with the tools to stay in school.
+        - else
+          = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
+          h4.heading End <em>violence</em> against women.
+          p.summary Your contribution can give support for women to rebuild their lives and live free of violence.
+
+        span.cta-link-arrow-right
+          span.cta-link-alt
+            .copy-highlight
+              span Find out more
+          i.icon.icon-arrow-right

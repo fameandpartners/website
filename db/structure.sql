@@ -213,6 +213,36 @@ ALTER SEQUENCE bulk_order_updates_id_seq OWNED BY bulk_order_updates.id;
 
 
 --
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    category character varying(255),
+    subcategory character varying(255)
+);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
 -- Name: celebrity_inspirations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3585,7 +3615,8 @@ CREATE TABLE spree_orders (
     required_to date,
     customer_notes text,
     projected_delivery_date timestamp without time zone,
-    site_version text
+    site_version text,
+    orderbot_synced boolean DEFAULT false NOT NULL
 );
 
 
@@ -3939,7 +3970,8 @@ CREATE TABLE spree_products (
     hidden boolean DEFAULT false,
     factory_id integer,
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
-    fabric_card_id integer
+    fabric_card_id integer,
+    category_id integer
 );
 
 
@@ -5478,6 +5510,13 @@ ALTER TABLE ONLY bulk_order_updates ALTER COLUMN id SET DEFAULT nextval('bulk_or
 
 
 --
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
 -- Name: celebrity_inspirations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6483,6 +6522,14 @@ ALTER TABLE ONLY bulk_order_updates
 
 ALTER TABLE ONLY celebrity_inspirations
     ADD CONSTRAINT celebrity_inspirations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories classifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT classifications_pkey PRIMARY KEY (id);
 
 
 --
@@ -9647,3 +9694,11 @@ INSERT INTO schema_migrations (version) VALUES ('20170817173805');
 INSERT INTO schema_migrations (version) VALUES ('20170821173721');
 
 INSERT INTO schema_migrations (version) VALUES ('20170828194844');
+
+INSERT INTO schema_migrations (version) VALUES ('20170905235000');
+
+INSERT INTO schema_migrations (version) VALUES ('20170906001235');
+
+INSERT INTO schema_migrations (version) VALUES ('20170906170913');
+
+INSERT INTO schema_migrations (version) VALUES ('20170907211051');

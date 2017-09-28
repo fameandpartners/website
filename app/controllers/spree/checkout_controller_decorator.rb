@@ -152,6 +152,8 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
+        OrderBotWorker.perform_async(@order.id)
+
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }

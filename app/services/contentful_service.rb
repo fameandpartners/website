@@ -28,13 +28,22 @@ module Contentful
         mobile_text = (item.respond_to? :mobile_text) ? item.mobile_text : nil
         sub_heading = (item.respond_to? :sub_heading) ? item.sub_heading : nil
         cta = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
+        image = (item.respond_to? :image) ? item.image.url : nil
+        mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : image
+        hero_tile_site_version_array = (item.respond_to? :hero_tile_site_version) ? item.hero_tile_site_version.sort.join(',').downcase : nil
+
+        if hero_tile_site_version_array == "au" || hero_tile_site_version_array == "us"
+          hero_tile_site_version = hero_tile_site_version_array
+        else
+          hero_tile_site_version = "all"
+        end
 
         {
           heading: heading,
           sub_heading: sub_heading,
           mobile_text: mobile_text,
-          image: item.image.url,
-          mobile_image: item.mobile_image.url,
+          image: image,
+          mobile_image: mobile_image,
           link: item.path_link,
           text_align: item.text_alignment,
           text_position: item.text_position,
@@ -43,6 +52,7 @@ module Contentful
           text_padding: item.text_padding,
           cta_button_text: cta,
           description: item.description,
+          hero_tile_site_version: hero_tile_site_version
         }
       end
 
@@ -309,8 +319,9 @@ module Contentful
       # Check if the LP requests an extra spacing between top navigation and content
       page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
 
-      parent_container.relative_url
+      page_url = parent_container.relative_url
       {
+        page_url: page_url,
         header: main_header_tile,
         rows: row_tiles,
         meta_title: meta_title,
