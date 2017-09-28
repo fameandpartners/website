@@ -64,12 +64,12 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   initializeReturnTypeCheckbox: () ->
     # is there already a returnType in the cart?
-    if (@hasReturnInsurance())
-      console.log('In Cart: INSURANCE')
+    if (@hasReturnDiscount())
+      console.log('In Cart: DISCOUNT')
       $('.js-returns-trigger-A').prop('checked', true)
       $('.js-returns-abc-option-message-A').toggleClass('hidden')
-    else if (@hasReturnDiscount())
-      console.log('In Cart: DISCOUNT')
+    else if (hasReturnInsurance())
+      console.log('In Cart: INSURANCE')
       $('.js-returns-trigger-B').prop('checked', true)
       $('.js-returns-abc-option-message-B').toggleClass('hidden')
     else
@@ -87,7 +87,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   fakeOptimizely: () ->
     # TO-DO: replicate in Optimizely
-    returnTest = 'A'
+    returnTest = 'B'
     $('.js-returns-abc-option-' + returnTest).show()
     $('#return_type').val(returnTest)
 
@@ -110,21 +110,21 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   addReturnType: (option) ->
     if (option == 'A')
-      console.log('Applying INSURANCE...')
-      @cart.applyPromotionCode('deliveryins')
-    else if (option == 'B')
       console.log('Applying DISCOUNT...')
       @cart.applyPromotionCode('deliverydisc')
+    else if (option == 'B')
+      console.log('Applying INSURANCE...')
+      @cart.applyPromotionCode('deliveryins')
 
   removeReturnType: (option) ->
     if (option == 'A')
+      console.log('Removing DISCOUNT...')
+      # { REMOVE DISCOUNT CODE }
+    else if (option == 'B')
       console.log('Removing INSURANCE...')
       returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
       lineItemId = returnInsurance[0].line_item_id
       @cart.removeProduct(lineItemId)
-    else if (option == 'B')
-      console.log('Removing DISCOUNT...')
-      # { REMOVE DISCOUNT CODE }
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()
