@@ -46,6 +46,9 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     deliveryPeriod
 
   render: () ->
+    console.log(@cart)
+    console.log(@cart.data)
+
     @$container.html(@template(
       cart: @cart.data,
       customizationPrice: @customizationPrice,
@@ -55,6 +58,39 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       shipping_message: @shipping_message
     ))
 
+    @fakeOptimizely()
+    console.log('return test: ' + @whichReturnType())
+    @initializeReturnTypeCheckbox()
+
+  initializeReturnTypeCheckbox: () ->
+    # is there already a returnType in the cart?
+    if (@hasReturnInsurance())
+      console.log('In Cart: INSURANCE')
+      $('.js-returns-trigger-A').prop('checked', true)
+      $('.js-returns-abc-option-message-A').toggleClass('hidden')
+    else if (@hasReturnDiscount())
+      console.log('In Cart: DISCOUNT')
+      $('.js-returns-trigger-B').prop('checked', true)
+      $('.js-returns-abc-option-message-B').toggleClass('hidden')
+    else
+      console.log('No Return Type in Cart!')
+
+  hasReturnInsurance: () ->
+    returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+    returnInsurance.length
+
+  hasReturnDiscount: () ->
+    @cart.data.promocode == 'DELIVERYDISC'
+
+  whichReturnType: () ->
+    $('#return_type').val()
+
+  fakeOptimizely: () ->
+    # TO-DO: replicate in Optimizely
+    returnTest = 'A'
+    $('.js-returns-abc-option-' + returnTest).show()
+    $('#return_type').val(returnTest)
+
   removeProductHandler: (e) ->
     e.preventDefault()
     line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
@@ -62,8 +98,33 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   returnsAbcHandler: (e) ->
     e.preventDefault()
-    targetMessageClass = '.js-returns-abc-option-message-' + e.currentTarget.value;
+    returnOption = e.currentTarget.value;
+    targetMessageClass = '.js-returns-abc-option-message-' + returnOption;
+
+    if (e.currentTarget.checked)
+      @addReturnType(returnOption)
+    else
+      @removeReturnType(returnOption)
+
     $(targetMessageClass).toggleClass('hidden')
+
+  addReturnType: (option) ->
+    if (option == 'A')
+      console.log('Applying INSURANCE...')
+      @cart.applyPromotionCode('deliveryins')
+    else if (option == 'B')
+      console.log('Applying DISCOUNT...')
+      @cart.applyPromotionCode('deliverydisc')
+
+  removeReturnType: (option) ->
+    if (option == 'A')
+      console.log('Removing INSURANCE...')
+      returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+      lineItemId = returnInsurance[0].line_item_id
+      @cart.removeProduct(lineItemId)
+    else if (option == 'B')
+      console.log('Removing DISCOUNT...')
+      # { REMOVE DISCOUNT CODE }
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()

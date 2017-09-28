@@ -91,3 +91,8 @@ $z-max: 9999;
   box-shadow: 0 0 0 1px $c-light-gray;
   transition: 300ms box-shadow;
 }
+
+.js-returns-abc-option-A,
+.js-returns-abc-option-B {
+  display: none;
+}
