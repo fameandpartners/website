@@ -90,7 +90,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     # A == '10% Discount'
     # B == '$25 Insurance'
 
-    returnTest = 'A'
+    returnTest = 'B'
     $('.js-returns-abc-option-' + returnTest).show()
     $('#return_type').val(returnTest)
 
@@ -124,7 +124,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       console.log('Removing INSURANCE...')
       returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
       lineItemId = returnInsurance[0].line_item_id
-      $('.Loader__wrapper, .Checkbox__wrapper').toggleClass('hidden')
+      $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
       @cart.removeProduct(lineItemId)
 
   removeProductCustomizationHandler: (e) ->

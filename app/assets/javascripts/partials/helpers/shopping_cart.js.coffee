@@ -187,12 +187,12 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   applyReturnTypePromoCode: (code) ->
-    $('.Loader__wrapper, .Checkbox__wrapper').toggleClass('hidden')
-
     if (code == 'deliverydisc')
       option = 'A'
     else if (code == 'deliveryins')
       option = 'B'
+
+    $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
 
     $.ajax(
       url: "/user_cart/promotion",
@@ -201,6 +201,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       data: { promotion_code: code }
     ).success((data) =>
       if data.error
+        $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
         $('.js-returns-trigger-' + option).prop('checked', false)
         console.log(data.error)
         @trigger('error', data)
@@ -210,6 +211,7 @@ window.helpers.ShoppingCart = class ShoppingCart
         @trigger('success', data)
         @trigger('complete', data)
     ).error( () =>
+      $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
       $('.js-returns-trigger-' + option).prop('checked', false)
       @trigger('error')
     )
