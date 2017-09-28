@@ -62,6 +62,8 @@ class UserCart::CartProduct
 
     def update_order
       line_item.touch if line_item.persisted?
+      line_item.delivery_date = line_item.delivery_period_policy.delivery_period # new delivery date set
+      line_item.save!
       order.update!
       order.reload
     end
