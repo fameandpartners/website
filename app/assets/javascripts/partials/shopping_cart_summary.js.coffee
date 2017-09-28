@@ -68,7 +68,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       console.log('In Cart: DISCOUNT')
       $('.js-returns-trigger-A').prop('checked', true)
       $('.js-returns-abc-option-message-A').toggleClass('hidden')
-    else if (hasReturnInsurance())
+    else if (@hasReturnInsurance())
       console.log('In Cart: INSURANCE')
       $('.js-returns-trigger-B').prop('checked', true)
       $('.js-returns-abc-option-message-B').toggleClass('hidden')
@@ -87,7 +87,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   fakeOptimizely: () ->
     # TO-DO: replicate in Optimizely
-    returnTest = 'A'
+    # A == '10% Discount'
+    # B == '$25 Insurance'
+
+    returnTest = 'B'
     $('.js-returns-abc-option-' + returnTest).show()
     $('#return_type').val(returnTest)
 
@@ -99,22 +102,19 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   returnsAbcHandler: (e) ->
     e.preventDefault()
     returnOption = e.currentTarget.value;
-    targetMessageClass = '.js-returns-abc-option-message-' + returnOption;
 
     if (e.currentTarget.checked)
       @addReturnType(returnOption)
     else
       @removeReturnType(returnOption)
 
-    $(targetMessageClass).toggleClass('hidden')
-
   addReturnType: (option) ->
     if (option == 'A')
       console.log('Applying DISCOUNT...')
-      @cart.applyPromotionCode('deliverydisc')
+      @cart.applyReturnTypePromoCode('deliverydisc')
     else if (option == 'B')
       console.log('Applying INSURANCE...')
-      @cart.applyPromotionCode('deliveryins')
+      @cart.applyReturnTypePromoCode('deliveryins')
 
   removeReturnType: (option) ->
     if (option == 'A')
@@ -124,7 +124,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       console.log('Removing INSURANCE...')
       returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
       lineItemId = returnInsurance[0].line_item_id
-      @cart.removeProduct(lineItemId)
+      @cart.removeReturnTypeProduct(lineItemId)
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()

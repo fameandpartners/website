@@ -95,6 +95,22 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  removeReturnTypeProduct: (line_item_id) ->
+    $('.Loader__wrapper, .Checkbox__wrapper').toggleClass('hidden')
+
+    $.ajax(
+      url: "/user_cart/products/#{line_item_id}"
+      type: "DELETE"
+      dataType: "json"
+    ).success(
+      $('.js-returns-abc-option-message-B').toggleClass('hidden')
+      @updateData
+    ).error( () =>
+      $('.js-returns-trigger-B').prop('checked', false)
+      @trigger('error')
+    )
+
+
   removeProduct: (line_item_id) ->
     $.ajax(
       url: "/user_cart/products/#{line_item_id}"
@@ -185,6 +201,37 @@ window.helpers.ShoppingCart = class ShoppingCart
     ).error( () =>
       @trigger('error')
     )
+
+  applyReturnTypePromoCode: (code) ->
+    $('.Loader__wrapper, .Checkbox__wrapper').toggleClass('hidden')
+
+    if (code == 'deliverydisc')
+      option = 'A'
+    else if (code == 'deliveryins')
+      option = 'B'
+
+    $.ajax(
+      url: "/user_cart/promotion",
+      type: 'POST',
+      dataType: "json",
+      data: { promotion_code: code }
+    ).success((data) =>
+      if data.error
+        $('.js-returns-trigger-' + option).prop('checked', false)
+        console.log(data.error)
+        @trigger('error', data)
+        @trigger('complete', data)
+      else
+        targetMessageClass = '.js-returns-abc-option-message-' + option;
+        $(targetMessageClass).toggleClass('hidden')
+        @updateData(data)
+        @trigger('success', data)
+        @trigger('complete', data)
+    ).error( () =>
+      $('.js-returns-trigger-' + option).prop('checked', false)
+      @trigger('error')
+    )
+
 
   # analytics
   trackAddToCart: (product) ->
