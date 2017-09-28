@@ -123,6 +123,9 @@ FameAndPartners::Application.routes.draw do
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
+    # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
+    get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
+
     ###########
     # Lookbooks
     ###########
