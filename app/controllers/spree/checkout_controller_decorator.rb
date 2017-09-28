@@ -400,7 +400,7 @@ Spree::CheckoutController.class_eval do
   end
 
 
-  def line_item_delivery
+  def update_line_item_delivery
     if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs
       @order.line_items.each do |item|
         item.delivery_date = delivery_period_policy.delivery_period
