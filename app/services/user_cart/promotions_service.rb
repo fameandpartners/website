@@ -73,14 +73,17 @@ class PromotionsService
       previous_promo = order.adjustments.promotion.eligible.first
       promotion.activate(:order => order, :coupon_code => promotion.code)
       promo = order.adjustments.promotion.detect { |p| p.originator.promotion.code == order.coupon_code }
-
       if promo.present? and promo.eligible
         @message = I18n.t(:coupon_code_applied)
         true
       elsif previous_promo.present? and promo.present?
+        order.adjustments.promotion.delete(promo) #remove inferior promo
+        order.save
         @message = I18n.t(:coupon_code_better_exists)
         false
       elsif promo.present?
+        order.adjustments.promotion.delete(promo) #remove ineligible promo
+        order.save
         @message = I18n.t(:coupon_code_not_eligible)
         false
       else
