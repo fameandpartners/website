@@ -405,6 +405,7 @@ Spree::CheckoutController.class_eval do
       @order.line_items.each do |item|
         item.delivery_date = delivery_period_policy.delivery_period
         item.save!
+      end
     end
   end
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
