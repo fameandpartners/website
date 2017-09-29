@@ -28,11 +28,13 @@ Spree::LineItem.class_eval do
 
   # Note: it seems we need to store this value in DB.
   def delivery_period
-    if self.delivery_date.nil?
+    if self.delivery_date.nil? && self.order.state != 'complete'
       self.delivery_date = delivery_period_policy.delivery_period
       self.save!
+    else
+      return delivery_period_policy.delivery_period
     end
-    self.delivery_date
+    return self.delivery_date
   end
 
   def delivery_period_policy
