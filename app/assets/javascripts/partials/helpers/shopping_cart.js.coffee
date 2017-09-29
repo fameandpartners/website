@@ -201,8 +201,9 @@ window.helpers.ShoppingCart = class ShoppingCart
       data: { promotion_code: code }
     ).success((data) =>
       if data.error
-        $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
-        $('.js-returns-trigger-' + option).prop('checked', false)
+        $('.js-returns-trigger-' + option)
+          .toggleClass('AJAX__in-process')
+          .prop('checked', false)
         console.log(data.error)
         @trigger('error', data)
         @trigger('complete', data)
@@ -211,8 +212,9 @@ window.helpers.ShoppingCart = class ShoppingCart
         @trigger('success', data)
         @trigger('complete', data)
     ).error( () =>
-      $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
-      $('.js-returns-trigger-' + option).prop('checked', false)
+      $('.js-returns-trigger-' + option)
+        .toggleClass('AJAX__in-process')
+        .prop('checked', false)
       @trigger('error')
     )
 
