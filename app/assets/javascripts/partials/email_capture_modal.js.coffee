@@ -194,6 +194,63 @@ window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   updateHtml: (modal) ->
     modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
 
+
+window.page.CheckoutModal = class CheckoutModal
+  constructor: (opts = {}) ->
+    @opts = opts
+  message: =>
+    h = if @opts.heading then "<h2>#{@opts.heading}</h2>" else ''
+    str = "#{h}<p>#{@opts.message}</p>"
+  open: () =>
+    vex.dialog.open
+      className: "vex vex-theme-flat-attack #{@opts.className || ''}"
+      input: @$container.html()
+      message: @message()
+
+window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends CheckoutModal
+  constructor: (opts = {}) ->
+    vex.dialog.buttons.NO.text = 'X'
+    versionA = "<div class='row js-returns-abc-option-A' style='display: block'> <div class='ReturnOption__wrapper'> <div class='ReturnOption__content col-xs-12'> <div class='col-xs-1'><div class='Checkbox__wrapper'> <input class='Checkbox js-returns-abc-option-trigger js-returns-trigger-A' type='checkbox' value='A' id='returns_option_a' /> <label for='returns_option_a' class='Checkbox__label'></label> </div> </div> <div class='col-xs-10'> <p class='ReturnOption__copy font-sans-serif'> <b>Add $25</b> for the option to return </p> </div> </div> </div> </div>";
+
+    versionB = "<div class='row js-returns-abc-option-B' style='display: block'> <div class='ReturnOption__wrapper'> <div class='ReturnOption__content col-xs-12'> <div class='col-xs-1'><div class='Checkbox__wrapper'> <input class='Checkbox js-returns-abc-option-trigger js-returns-trigger-B' type='checkbox' value='B' id='returns_option_b' /> <label for='returns_option_b' class='Checkbox__label'></label> </div> </div> <div class='col-xs-10'> <p class='ReturnOption__copy ReturnOption__copy--optionB  font-sans-serif'><b>$27.90 off</b> your order total when you opt out of returns</p> </div> </div> </div> </div>";
+
+    vex.dialog.open _.extend({
+      message: '<h2 class="ReturnOption__content--headline font-sans-serif">Want to save 10%?</h2>' +
+        "<div class='checkout-content font-sans-serif'>The cost of returns are factored into the price of any online purchase. If you opt out of returning your made-to-order garment, we save money &mdash; and we want to pass that 10% savings on to you.</div> #{versionB}",
+      className: 'vex vex-theme-plain checkout-modal vex-dialog-bottom vex-text',
+      popup: true,
+      afterOpen: @updateHtml,
+      timeout: 0,
+      okText: "foo"
+    }, opts)
+    $('.vex-dialog-button-primary').text('continue')
+    $('.vex-dialog-button-secondary').html('&times;')
+
+window.page.CountdownBanner = class CountdownBanner
+  constructor: ($container, title, message) ->
+    @$container     = $container
+    @title          = title
+    @message        = message
+
+    @show(title, message)
+    @initCallbacks()
+
+  initCallbacks: ->
+    @$container.find('a.close').on 'click', =>
+      @hide()
+      false
+
+  show: (title, message) ->
+    if title
+      @$container.find('.banner-title').html(title)
+
+    if message
+      @$container.find('.banner-message').html(message)
+    @$container.removeClass('hidden')
+
+  hide: ->
+    @$container.addClass('hidden')
+
 window.page.CountdownBanner = class CountdownBanner
   constructor: ($container, title, message, startTime, durationInHours) ->
     @$container     = $container

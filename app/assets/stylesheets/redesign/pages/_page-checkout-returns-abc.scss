@@ -96,3 +96,41 @@ $z-max: 9999;
 .Checkbox.AJAX__in-process + .Checkbox__label:before {
   background: $c-lightest-gray;
 }
+
+// Checkout Modal
+.checkout-modal .vex-dialog-button-primary {
+  background: #000000;
+  color: #fff;
+  width: 100%;
+  padding: 23px 0;
+}
+
+.checkout-modal h2.ReturnOption__content--headline {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.checkout-modal .checkout-content {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.checkout-modal .ReturnOption__copy {
+  font-size: 14px;
+}
+
+.checkout-modal .ReturnOption__content {
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.checkout-modal .vex-content {
+  vertical-align: -webkit-baseline-middle;
+}
+
+.checkout-modal .ReturnOption__copy {
+    margin-bottom: 15px;
+    text-align: left;
+}

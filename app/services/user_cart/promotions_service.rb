@@ -82,6 +82,11 @@ class PromotionsService
 
       # check if coupon code is already applied
       if order.adjustments.promotion.eligible.detect { |p| p.originator.promotion.code == promotion.code }.present?
+        if promotion.code == 'DELIVERYDISC'
+          delivery_disc = order.adjustments.promotion.eligible.select{|p| p.originator.promotion.code == promotion.code}.first
+          delivery_disc.delete
+          return true
+        end
         @message = I18n.t(:coupon_code_already_applied)
         return true
       end
