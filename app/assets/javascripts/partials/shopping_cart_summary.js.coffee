@@ -60,7 +60,13 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
     @fakeOptimizely()
     console.log('return test: ' + @whichReturnType())
+    # @loadModal()
     @initializeReturnTypeCheckbox()
+
+  loadModal: () ->
+    new window.page.ReturnsOptimizelyModal(@whichReturnType())
+    $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+
 
   initializeReturnTypeCheckbox: () ->
     # is there already a returnType in the cart?
