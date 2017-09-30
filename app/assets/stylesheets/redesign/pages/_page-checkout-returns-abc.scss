@@ -117,8 +117,10 @@ $z-max: 9999;
   font-weight: 500;
 }
 
-.checkout-modal .ReturnOption__copy {
+.ReturnOption__copy {
+  text-align: left;
   font-size: 14px;
+  margin-bottom: 15px;
 }
 
 .checkout-modal .ReturnOption__content {
@@ -130,7 +132,18 @@ $z-max: 9999;
   vertical-align: -webkit-baseline-middle;
 }
 
-.checkout-modal .ReturnOption__copy {
-    margin-bottom: 15px;
-    text-align: left;
+.ReturnModal .js-returns-abc-option-A,
+.ReturnModal .js-returns-abc-option-B {
+  display: block;
+}
+
+// a terrible hack b/c we don't have access to Bootstrap v4's col-{sz}-auto
+// we're forcing a .col-xs-7 to a .col-xs-10 since @extend breaks here
+.ReturnModal .col-xs-7 {
+  width: 83.33333% !important;
+}
+
+// hide the 'Learn more' links when in modal...
+.ReturnModal .col-xs-4 {
+  display: none !important;
 }

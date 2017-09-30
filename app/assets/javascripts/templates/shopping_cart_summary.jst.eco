@@ -115,7 +115,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </div>
       </div>
       <div class="col-xs-7">
-        <p class="ReturnOption__content--headline">
+        <p class="ReturnOption__copy font-sans-serif">
           <strong><%= @cart.delivery_discount %> off</strong>
           of your order when you opt out of returns
         </p>
@@ -143,7 +143,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </div>
       </div>
       <div class="col-xs-7">
-        <p class="ReturnOption__content--headline">
+        <p class="ReturnOption__copy font-sans-serif">
           <strong>Add $25</strong>
           for the option to return
         </p>
