@@ -1,6 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
+import ToastTextMessage from './ToastTextMessage';
 import FirebaseComponent from './FirebaseComponent';
 
 export default class Toast extends FirebaseComponent
@@ -20,11 +21,19 @@ export default class Toast extends FirebaseComponent
     {
         if( this.firstRead )
         {
-            this.setState(
-                {
-                    toasts: this.state.toasts.concat( [data.val().value] )
-                }
-            );
+
+            if( ( this.props.visible ) && (this.props.email != data.val().from.email ) )
+            {
+                this.setState(
+                    {
+                        toasts: this.state.toasts.concat([<ToastTextMessage key={data.key}
+                                                           text={data.val().value} 
+                                                           iconNumber={parseInt(data.val().from.icon)}
+                                                           name={data.val().from.name}
+                                                           email={data.val().from.email} />])
+                    }
+                );
+            }
         } else
         {
             this.firstRead = true;
@@ -71,9 +80,11 @@ export default class Toast extends FirebaseComponent
     render()
     {
         return(
-                <div className="toast-container">
+            <div className="toast-container">
+              <ul>
                 {this.state.toasts}
-                </div>
+              </ul>
+            </div>
         );
     }
 }
@@ -82,5 +93,7 @@ Toast.propTypes = {
     firebaseAPI: React.PropTypes.string.isRequired,
     firebaseDatabase: React.PropTypes.string.isRequired,
     firebaseNodeId: React.PropTypes.string.isRequired,
-    visible: React.PropTypes.bool.isRequired
+    visible: React.PropTypes.bool.isRequired,
+    email: React.PropTypes.string.isRequired
+    
 }

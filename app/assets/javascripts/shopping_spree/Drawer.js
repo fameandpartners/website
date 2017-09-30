@@ -96,6 +96,7 @@ export default class Drawer extends React.Component
                 firebaseDatabase={this.state.firebaseDatabase}
                 firebaseNodeId={this.state.firebaseNodeId}
                 visible={this.state.closed}
+                email={this.state.email}
                 />
             </div>
         );

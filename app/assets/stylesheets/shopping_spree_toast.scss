@@ -3,5 +3,25 @@
     .toast-container
     {
         background-color: transparent;
+        ul
+        {
+            list-style-type: none;
+            padding:0;
+            margin-top: 20px;
+            
+            .toast-text
+            {
+                padding-top: 15px;
+                background-color: white;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 9px;
+                border-color: #888888;
+                padding: 10px 12px 17px 23px;
+                margin-bottom: 5px;
+                font-size: 15px;
+            }
+            
+        }
     }
 }
