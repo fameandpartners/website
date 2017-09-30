@@ -71,7 +71,7 @@ export default class Toast extends FirebaseComponent
     render()
     {
         return(
-                <div>
+                <div className="toast-container">
                 {this.state.toasts}
                 </div>
         );

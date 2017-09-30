@@ -5,7 +5,9 @@
 @import 'shopping_spree_modal';
 @import 'shopping_spree_share_modal';
 @import 'shopping_spree_add_to_cart_modal';
+@import 'shopping_spree_toast';
 @import 'redesign/vars';
+
 
 $header_height: 68px;
 $chat_bar_height: 55px;
@@ -89,19 +91,23 @@ $chat_bar_header_height: 22px;
 }
 
 
-.shopping-spree-container
+.shopping-spree-wrapper
 {
-    @extend .shopping-spree;
-    overflow: hidden;
-    background-color: white;
     position: fixed;
     top: 0px;
     right: 0px;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.shopping-spree-container
+{
+    @extend .shopping-spree;
+    background-color: white;
     width: 500px;
     height: 100%;
     color: black;
-    z-index: 999;
-
+    
     .equal
     {
         display: flex;
@@ -253,15 +259,20 @@ $chat_bar_header_height: 22px;
             padding-left: 0;
         }
     }
-    
-    .shopping-spree-container
+
+    .shopping-spree-wrapper
     {
         position: fixed;
         top: auto;
         bottom: 0px;
-        width: 100%;
         height: auto;
-
+        width: 100%;
+        
+    }
+    
+    .shopping-spree-container
+    {
+        width: 100%;
             
         .shoppingSpreeTextInput
         {
@@ -347,19 +358,25 @@ $chat_bar_header_height: 22px;
 
 @media (min-width: 767px)
 {
+
+    .shopping-spree-wrapper
+    {
+        &.collapsed
+        {
+            top: 40px;
+            right: 20px;
+        }
+    }
+    
     .shopping-spree-container
     {
-
-        
         
         &.collapsed
         {
             width: 250px;            
-            border-radius: 9px;                    
-            top: 40px;
-            right: 20px;
-            box-shadow: 0px 0px 15px #888888;
-
+//            box-shadow: 0px 0px 15px #888888;
+            border-radius: 9px;            
+            
             .header
             {
                 height: 44px;

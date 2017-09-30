@@ -53,7 +53,7 @@ export default class Drawer extends React.Component
     render()
     {
         return (
-            <div>
+            <div className={"shopping-spree-wrapper " + (this.state.closed ? 'collapsed' : 'open')}>
               <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
                 <Cart transitionToChat={this.transitionToChat}
                       firebaseAPI={this.state.firebaseAPI}
