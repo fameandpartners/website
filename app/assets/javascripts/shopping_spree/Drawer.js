@@ -2,7 +2,7 @@ import React from 'react';
 import ChatList from './ChatList';
 import ChatBar from './ChatBar';
 import Cart from './Cart';
-
+import Toast from './Toast';
 
 export default class Drawer extends React.Component
 {
@@ -91,6 +91,12 @@ export default class Drawer extends React.Component
                   icon={this.state.icon}
                   />
               </div>
+              <Toast
+                firebaseAPI={this.state.firebaseAPI}
+                firebaseDatabase={this.state.firebaseDatabase}
+                firebaseNodeId={this.state.firebaseNodeId}
+                visible={this.state.closed}
+                />
             </div>
         );
         
