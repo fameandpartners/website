@@ -28,7 +28,7 @@ const propTypes = {
   returnArray: PropTypes.array.isRequired,
   returnEligible: PropTypes.bool.isRequired,
   showForm: PropTypes.bool,
-
+  returnRequested: PropTypes.bool,
   handlePopulateLogistics: PropTypes.func,
   updateReturnArray: PropTypes.func,
   updatePrimaryReturnReason: PropTypes.func,
@@ -45,6 +45,7 @@ const defaultProps = {
   orderIndex: 0,
   orderNumber: '',
   returnEligible: true,
+  returnRequested: false,
   showForm: false,
   updatePrimaryReturnReason: null,
   updateOpenEndedReturnReason: null,
@@ -80,14 +81,14 @@ class ProductListItem extends Component {
   }
 
   generateUIState() {
-    const { returnEligible, showForm, orderIndex, product } = this.props;
+    const { returnEligible, showForm, orderIndex, product, returnRequested } = this.props;
     const { returns_meta: returnsMeta } = product;
-    const WINDOW_CLOSED = showForm && !returnEligible;
+    const NOT_RETURNABLE = !returnEligible && orderIndex === 0 && !returnRequested;
     const SHOW_FORM = showForm;
-    const SHOW_RETURN_BUTTON = !showForm && returnEligible && orderIndex === 0;
-    const SHOW_LOGISTICS_DATA = returnsMeta && orderIndex === 0;
+    const SHOW_RETURN_BUTTON = !showForm && returnEligible && orderIndex === 0 && !returnRequested;
+    const SHOW_LOGISTICS_DATA = returnsMeta && orderIndex === 0 && returnRequested;
     return {
-      WINDOW_CLOSED,
+      NOT_RETURNABLE,
       SHOW_FORM,
       SHOW_RETURN_BUTTON,
       SHOW_LOGISTICS_DATA,
@@ -189,7 +190,7 @@ class ProductListItem extends Component {
 
     const primaryReturnReasonArray = this.generateOptions(PrimaryReturnReasonsObject);
     const uiState = this.generateUIState();
-    const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, WINDOW_CLOSED } = uiState;
+    const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, NOT_RETURNABLE } = uiState;
     const maxCharacterCount = 255;
     return (
       <div
@@ -295,15 +296,15 @@ class ProductListItem extends Component {
             null
         }
         {
-          WINDOW_CLOSED ?
+          NOT_RETURNABLE ?
             <div className="col-4_md-9_xs-9">
               <div className="grid-right-spaceAround">
                 <ShippingInfo
                   grayBackground
                   copy={(
                     <span>
-                      Your 30-day return window closed on <br />
-                      {returnWindowEnd} and this item is no longer eligible for a return.
+                      This order is not eligible for a refund
+                      because you elected the return discount of 10%.
                     </span>
                   )}
                 />
