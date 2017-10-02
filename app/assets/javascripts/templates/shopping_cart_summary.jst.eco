@@ -121,7 +121,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <a href="OPEN_MODAL">
+        <a href="javascript:;" id="A-info" class="js-returns-learn-more">
           Learn more
         </a>
       </div>
@@ -149,7 +149,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <a href="OPEN_MODAL">
+        <a href="javascript:;" id="B-info" class="js-returns-learn-more">
           Learn more
         </a>
       </div>
