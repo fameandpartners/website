@@ -353,12 +353,21 @@ Spree::Order.class_eval do
     end
   end
 
+  def return_eligible_AC?
+    self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase == "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  end
+
+  def return_eligible_B?
+    self.return_type == 'B' && self.promotions.any? {|x| x.code.downcase == "deliveryins"}
+  end
+
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
     json['final_return_by_date'] = (delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
+    json['return_eligible'] = self.return_eligible_B? || self.return_eligible_AC?
     json
   end
 

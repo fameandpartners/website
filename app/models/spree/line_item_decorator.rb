@@ -173,7 +173,6 @@ Spree::LineItem.class_eval do
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
-    json['line_item']['return_eligible'] = self.return_eligible_B? || self.return_eligible_AC?
     json['line_item']['window_closed'] = self.window_closed?
     json['line_item']['products_meta'] = {
       "name": self.style_name,
