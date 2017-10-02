@@ -217,19 +217,4 @@ module ApplicationHelper
     Time.zone.now.between?(date_start, date_end)
   end
 
-  def price_drop_au_active?
-    if current_site_version.is_australia?
-      Features.active?(:price_drop_au)
-    end
-  end
-
-  def price_drop_au_item_check(current_item_sku)
-    if current_site_version.is_australia? && price_drop_au_active?
-      current_item_sku = current_item_sku.downcase
-      price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
-      price_drop_au_items_array.map!(&:downcase)
-      price_drop_au_items_array.include?(current_item_sku)
-    end
-  end
-
 end

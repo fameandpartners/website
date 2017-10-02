@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 
 // window polyfill
 import win from '../../../polyfills/windowPolyfill';
@@ -13,7 +12,6 @@ import { serialize } from '../../../utilities/HTMLUtility';
 import OrderHistory from '../components/OrderHistory';
 import * as AppActions from '../actions/index';
 import ReturnConstants from '../../../constants/ReturnConstants';
-import SimpleButton from '../components/SimpleButton';
 
 const propTypes = {
   actions: PropTypes.object,
@@ -105,57 +103,6 @@ class OrderContainer extends Component {
             </div>
           )
           : null
-        }
-        { !returnIsLoading && !orderData.length ?
-          <div>
-            <div>
-              <div
-                className={classNames(
-                  'grid-noGutter-center-spaceAround',
-                  'ProductListItem__empty-orders-container',
-                )}
-              >
-                <div className="col-10_md-12 u-no-padding">
-                  <div className="order__container">
-                    <div className="Product__listItem__container u-center-text">
-                      <p className="ProductListItem__empty-orders-container-headline">
-                        You have no orders
-                      </p>
-                      <p className="ProductListItem__empty-orders-container-copy">
-                        Let’s change that
-                      </p>
-                      <SimpleButton
-                        containerClassName="SimpleButton__container u-margin-auto"
-                        className="u-width-full"
-                        buttonCopy="Start Shopping"
-                        link="/dresses/best-sellers"
-                        withLink
-                      />
-                    </div>
-                  </div>
-                  <p
-                    className={classNames(
-                      'u-margin-top-medium',
-                      'font-sans-serif',
-                      'ProductListItem__empty-orders-container-customer-service',
-                    )}
-                  >
-                    Have a Question? &nbsp;
-                    <a
-                      href="/contact"
-                      className="u-underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                    Contact Customer Service
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          :
-          null
         }
       </div>
     );

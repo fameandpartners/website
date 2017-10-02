@@ -1,10 +1,6 @@
 .app-container {
   width: 100%;
   margin-top: 16px;
-  margin-bottom: 96px;
-}
-
-.app-container--top-margin {
   @include breakpoint(tablet) {
     margin-top: 96px;
   }
@@ -18,14 +14,22 @@
   max-width: 1776px;
 
   @include breakpoint(tablet) {
-    width: calc(100% - 96px);
-    padding: 78px 48px 24px 48px;
-  }
-
-  @include breakpoint(tablet-bootstrap-max) {
     padding: 24px 48px;
+    width: calc(100% - 96px);
   }
+  @include breakpoint(desktop) {
+  }
+  @include breakpoint(widescreen) {
+  }
+  @include breakpoint(fullhd) {
+  }
+}
 
+div.section-row.tile,
+div.section-row.columns {
+  @include breakpoint(tablet) {
+    margin-top: 50px;
+  }
 }
 
 // custom offset (bulma doesn't have this margin-right version)
@@ -33,20 +37,4 @@
   @include breakpoint(tablet) {
     margin-right: 50%;
   }
-}
-
-.u-forced-full-width-wrapper {
-
-  @include breakpoint(tablet) {
-    @include real-full-width;
-  }
-
-}
-
-.u-forced-full-width-wrapper--mobile {
-
-  @include breakpoint(mobile-max) {
-    @include real-full-width;
-  }
-
 }

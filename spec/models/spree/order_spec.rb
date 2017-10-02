@@ -10,7 +10,7 @@ describe Spree::Order, :type => :model do
     allow(order).to receive(:completed_at).and_return(completed_at)
   end
 
-  xit '#project_delivery_date' do
+  it '#project_delivery_date' do
     expected_date = DateTime.parse('Wednesday April 15 2015')
     expect(order).to receive(:update_attribute).with(:projected_delivery_date, expected_date)
     order.project_delivery_date

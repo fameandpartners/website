@@ -167,8 +167,6 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
     dispatch(setReturnLoadingState({ isLoading: false }));
     if (err && err.responseText) {
       const error = JSON.parse(err.responseText);
-      /* eslint-disable no-console */
-      console.log(`Error Code: ${error.error_code}`);
 
       dispatch({
         type: 'SET_RETURN_RESPONSE_ERRORS',

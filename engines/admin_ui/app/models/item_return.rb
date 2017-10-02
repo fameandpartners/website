@@ -4,7 +4,8 @@ class ItemReturn < ActiveRecord::Base
     foreign_key: 'item_return_uuid',
     primary_key: 'uuid'
 
-  belongs_to :item_return_label, class_name: 'ItemReturnLabel'
+  has_one :item_return_label
+
   belongs_to :line_item, class_name: 'Spree::LineItem', inverse_of: :item_return
   belongs_to :return_request, foreign_key: :request_id, class_name: 'ReturnRequestItem'
 

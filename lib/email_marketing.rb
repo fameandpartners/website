@@ -1,7 +1,7 @@
 class EmailMarketing
   def self.send_emails
     send_abandoned_cart_emails
-    # send_style_quiz_not_completed_emails
+    send_style_quiz_not_completed_emails
 
     #Email: Goes out 1 week after style profile complete
     send_style_quiz_completed_reminder_emails

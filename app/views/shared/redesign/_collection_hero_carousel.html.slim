@@ -64,46 +64,43 @@ ruby:
 
 // Hero Tiles - via Contentful CMS
 - hero_tiles = @home_page_container[:hero_tiles].each do |tile|
-  - current_tile_site_version = tile[:hero_tile_site_version]
+  - current_tile_image = tile[:image]
+  - current_tile_mobile_image = tile[:mobile_image]
+  = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
+      source media="(min-width: 992px)" srcset="#{current_tile_image}"
+      img src="#{current_tile_image}" srcset="
+        #{current_tile_mobile_image} 991w,
+        #{current_tile_image} 992w"
 
-  - if current_tile_site_version.nil? || current_tile_site_version == current_site_version[:permalink].downcase || current_tile_site_version == "all"
-    - current_tile_image = tile[:image]
-    - current_tile_mobile_image = tile[:mobile_image]
-    = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
-      picture.media-wrap
-        source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
-        source media="(min-width: 992px)" srcset="#{current_tile_image}"
-        img src="#{current_tile_image}" srcset="
-          #{current_tile_mobile_image} 991w,
-          #{current_tile_image} 992w"
+    .content-wrap
+      .container-fluid
+        .row
+          *hero_text_position(tile[:text_position])
+            .copy-wrap*hero_extra_padding(tile[:text_padding]) *hero_text_alignment(tile[:text_align])
+              h2.heading.no-margin-md
+                span*hero_text_size(tile[:text_size])
+                  - if tile[:heading]
+                    - tile[:heading].each do |heading|
+                      == heading
+                      br
+                span.sub-heading--small.hidden-xs.hidden-sm
+                  - if tile[:sub_heading]
+                    - tile[:sub_heading].each do |sub_heading|
+                      == sub_heading
+                      br
+              .cta-wrapper
+                - if tile[:cta_button_text]
+                  span.btn-md.btn-featured
+                    = tile[:cta_button_text][0]
+                    span.copy-highlight.cta-button-secondary-text
+                      = tile[:cta_button_text][1]
 
-      .content-wrap
-        .container-fluid
-          .row
-            *hero_text_position(tile[:text_position])
-              .copy-wrap*hero_extra_padding(tile[:text_padding]) *hero_text_alignment(tile[:text_align])
-                h2.heading.no-margin-md
-                  span*hero_text_size(tile[:text_size])
-                    - if tile[:heading]
-                      - tile[:heading].each do |heading|
-                        == heading
-                        br
-                  span.sub-heading--small.hidden-xs.hidden-sm
-                    - if tile[:sub_heading]
-                      - tile[:sub_heading].each do |sub_heading|
-                        == sub_heading
-                        br
-                .cta-wrapper
-                  - if tile[:cta_button_text]
-                    span.btn-md.btn-featured
-                      = tile[:cta_button_text][0]
-                      span.copy-highlight.cta-button-secondary-text
-                        = tile[:cta_button_text][1]
-
-          .col-sm-12.col-md-12.hidden-md.hidden-lg
-            .copy-wrap.text-center
-              h2.heading.mobile-heading
-                span.sub-heading
-                  - tile[:mobile_text].each do |mobile_text|
-                    == mobile_text
-                    br
+        .col-sm-12.col-md-12.hidden-md.hidden-lg
+          .copy-wrap.text-center
+            h2.heading.mobile-heading
+              span.sub-heading
+                - tile[:mobile_text].each do |mobile_text|
+                  == mobile_text
+                  br

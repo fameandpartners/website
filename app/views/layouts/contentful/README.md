@@ -8,12 +8,6 @@
   1) A combination type, which can contain various combinations of smaller modules (e.g. small / medium / large) as defined further below.
   2) A single type, which can contain only one of two full-width large modules (e.g. copy block / email capture).
 
-- Some landing pages eventually should be only seen under specific domains (AU or US). This can be managed from the landing page container (in CMS), where the default behaviors are:
-
-  - *Site version:* it's a required field but - just in case - the fallback is "all", which means the LP is viewable by any visitor (AU and US);
-  - *URL to redirect:* it's not a required field (as it depends on the site version flag) but if it's left empty the default URL is "/dresses/best-sellers".
-
-
 #### REMAINING TASKS
   - Implement Full-Width Editorial block (discuss w/ Dorothy).
   - Implement Full-Width Email block.
@@ -58,18 +52,6 @@
   - FULL-WIDTH EMAIL BLOCK
     - Partial Name: `_ROW--xl-email.erb`
 
-- E-Mail Container Floating CTA:
-  - FULL-WIDTH FLOATING EMAIL BLOCK
-    - Partial Name: `_ROW--xl-email__floating-cta.erb`
-
-- Editorial tiles (4-column):
-  - SMALL * 4
-    - Partial Name: `_ROW--sm4__editorial_tiles.erb`
-
-- Floating CTA BUTTON:
-  - FULL-WIDTH FLOATING CTA BUTTON
-    - Partial Name: `_ROW--xl__cta-button.erb`
-
 ## SMALL
 - Product (Image)
   - Partial Name: `_ITEM--sm.erb`
@@ -81,3 +63,5 @@
 ## LARGE
 - Image Block?
   - Partial Name: `_ITEM--lg.erb`
+
+

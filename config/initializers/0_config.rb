@@ -84,12 +84,6 @@ end
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
-configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
-
-configatron.order_bot_client_user = ENV['ORDERBOT_USER']
-configatron.order_bot_client_pass = ENV['ORDERBOT_PASS']
-
-
 case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
@@ -112,6 +106,7 @@ when :production
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
   configatron.micro_influencer_email_address='influencerapplications@fameandpartners.com'
+
 when :test
   configatron.site_version_detector_strategy = :subdomain
 
@@ -119,6 +114,4 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
-
-  configatron.node_pdp_url = "tbd"
 end

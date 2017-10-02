@@ -28,13 +28,7 @@ Spree::LineItem.class_eval do
 
   # Note: it seems we need to store this value in DB.
   def delivery_period
-    if self.delivery_date.nil? && self.order.state != 'complete'
-      self.delivery_date = delivery_period_policy.delivery_period
-      self.save!
-    else
-      return delivery_period_policy.delivery_period
-    end
-    return self.delivery_date
+    delivery_period_policy.delivery_period
   end
 
   def delivery_period_policy
@@ -164,14 +158,9 @@ Spree::LineItem.class_eval do
     !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
   end
 
-  def window_closed?
-    created_at <= DateTime.now - 60
-  end
-
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
-    json['line_item']['window_closed'] = self.window_closed?
     json['line_item']['products_meta'] = {
       "name": self.style_name,
       "price": self.price,
@@ -182,9 +171,10 @@ Spree::LineItem.class_eval do
       "height_value": self.height_value,
       "image": self.image_url
     }
+
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
-        "created_at_iso_mdy": self.item_return.created_at.strftime("%m/%d/%y"),
+        "created_at_iso_mdy": self.created_at.strftime("%m/%d/%y"),
         "return_item_state": self.item_return.acceptance_status,
         "item_return_id": self.item_return.id,
         "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',

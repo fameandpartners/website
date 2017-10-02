@@ -30,11 +30,9 @@ class ReturnMailer < ActionMailer::Base
       user = order.user
       return_items = return_request.return_request_items
       billing_address = order.billing_address
-      label_print_link = return_items.first.item_return&.item_return_label&.label_url
+      label_print_link = return_items.first.item_return.item_return_label[:label_url]
       #todo: need to revisit this next line when we get final delivery date approval
       send_by_date = (return_request.order.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
-      international_user = order.shipping_address&.country_id != 49
-      
       formatted_return_items = return_items.map do |item|
         {
           name: item.line_item&.product&.name,
@@ -48,6 +46,7 @@ class ReturnMailer < ActionMailer::Base
 
       # .sum isn't working for some reason (also need to verify this includes tax / discounts...)
       total_refund_amount = formatted_return_items.reduce(0) { |sum, item| sum + item[:price] }
+      international_user = order.shipping_address&.country_id != 49
 
       {
         "order_number": order.number,
@@ -56,11 +55,11 @@ class ReturnMailer < ActionMailer::Base
         "label_url": label_print_link,
         "total_refund": total_refund_amount,
         "address": {
-          "address_one": billing_address&.address1,
-          "address_two": billing_address&.address2,
-          "city": billing_address&.city,
-          "state": billing_address&.state&.abbr,
-          "zipcode": billing_address&.zipcode
+          "address_one": billing_address[:address1],
+          "address_two": billing_address[:address2],
+          "city": billing_address[:city],
+          "state": billing_address.state[:abbr],
+          "zipcode": billing_address[:zipcode]
         },
         "items": formatted_return_items,
         "international_user": international_user

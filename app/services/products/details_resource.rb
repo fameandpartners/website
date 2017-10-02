@@ -5,6 +5,7 @@
 #   permalink - 'naomi' or 'sweetheart_hi_low'
 #   product   - obsoleted! support legacy only
 #
+# thanh 4/5/17- cannot find a single reference to this forsaken class
 class Products::DetailsResource
   RECOMMENDED_PRODUCTS_LIMIT = 4
   RELATED_OUTERWEAR_LIMIT = 4

@@ -109,8 +109,4 @@ window.track = {
   wholesaleTrack: function (action, label) {
     this.event('Wholesale', action, label, false);
   },
-
-  internshipTrack: function (action, label) {
-    this.event('Internship', action, label, false);
-  },
 };

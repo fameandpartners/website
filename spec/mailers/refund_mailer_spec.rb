@@ -2,45 +2,17 @@ require 'spec_helper'
 
 describe RefundMailer, type: :mailer do
   let(:user) { FactoryGirl.create(:spree_user) }
-  let(:address) { FactoryGirl.create(:address) }
-  let(:order) { FactoryGirl.create(:complete_order, user: user, billing_address: address) }
+  let(:order) { FactoryGirl.create(:complete_order, user: user) }
   let(:line_item) { FactoryGirl.build(:dress_item, order: order) }
   let(:item_return) { FactoryGirl.create(:item_return, line_item: line_item) }
-  let(:event) { double(ItemReturnEvent, item_return: item_return, user: user, data: { refund_amount: '42' }) }
-
-  let(:product_data) {
-    {
-      name: line_item&.product&.name,
-      size: line_item&.cart_item&.size&.presentation,
-      color: line_item&.cart_item&.color&.presentation,
-      image: line_item&.cart_item&.image&.large,
-      price: line_item&.price,
-      height_copy: nil
-    }
-  }
-
-  let(:user_return_object) {
-    {
-      "order_number": order.number,
-      "first_name": user.first_name,
-      "last_name": user.last_name,
-      "email": user.email,
-      "total_refund": event.refund_amount,
-      "address": {
-        address_one: address&.address1,
-        address_two: address&.address2,
-        city: address&.city,
-        state: address&.state&.abbr,
-        zipcode: address&.zipcode
-      },
-      "item": product_data
-    }
-  }
+  let(:event) { double(ItemReturnEvent, item_return: item_return, data: { refund_amount: '42' }) }
 
   let(:expected_attributes) {
     {
-      email_to: user.email,
-      user_data: user_return_object
+      email_to:     user.email,
+      subject:      "Refund notification for order #{order.number}",
+      amount:       '42',
+      order_number: order.number
     }
   }
 

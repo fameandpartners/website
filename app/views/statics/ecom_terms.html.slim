@@ -7,17 +7,6 @@
       .page-content.content-collapse-expand.col-md-8.col-md-offset-2
         #panel-articles.tab-pane.active role='tabpanel'
           .panel-group roll='tablist' aria-multiselectable='true'
-
-            .panel.content-collapse-expand.panel-default#collapse-equal-pay-day
-              .panel-heading role="tab"
-                a.panel-title.panel-uc-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
-                  | September Bundles Promo
-                  span.btn-open-close
-
-              .panel-collapse.collapse role="tabpanel"
-                .panel-body
-                  p Buy Three, Get One Free applies to orders using code FAME443. Discount applies to the lowest priced item in the order, offer is only applied to one item per order. May not be combined with any other offer. Orders made using this offer may be exchanged only, no returns. If the ‘free’ item is exchanged for a higher value item, customer will be charged the difference. Offer ends October 31, 2017 at 11:59 PM PDT.
-
             - if Time.zone.now >= (DateTime.parse('Jul 17 12:01am -7:00'))
               .panel.content-collapse-expand.panel-default#collapse-july-offer-buy-2-get-1
                 .panel-heading role="tab"

@@ -20,6 +20,7 @@ Spree::OptionValue.class_eval do
   scope :sizes,   -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.size.try(:id)) }
 
   attr_accessible :image, :value, :use_in_customisation
+  validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
 
   def rgb_values
     # Color::HEX.new(value.to_s).to_lab
