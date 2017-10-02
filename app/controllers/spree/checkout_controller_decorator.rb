@@ -27,6 +27,7 @@ Spree::CheckoutController.class_eval do
     @optimizely_opt_in = true
     prepare_order
     find_payment_methods
+    update_line_item_delivery
     data_layer_add_to_cart_event
 
     unless signed_in?
@@ -90,7 +91,15 @@ Spree::CheckoutController.class_eval do
         return
       end
 
+
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
+
+        if @order.line_items.length < 1
+            render status: 402, json: {
+            :message => 'StaleCart'
+          }
+          return
+        end
         #take this path for pin, this code only survives while we transistion to stripe
         if @order.next
           state_callback(:after)
@@ -104,6 +113,13 @@ Spree::CheckoutController.class_eval do
           return
         end
       else
+
+        if @order.line_items.length < 1
+            render status: 402, json: {
+            :message => 'StaleCart'
+          }
+          return
+        end
         #go here for stripeypay
         if @order.next
           state_callback(:after)
@@ -136,6 +152,8 @@ Spree::CheckoutController.class_eval do
           session[:masterpass_data] = nil
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
+
+        OrderBotWorker.perform_async(@order.id)
 
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
@@ -381,6 +399,15 @@ Spree::CheckoutController.class_eval do
     'checkout'
   end
 
+
+  def update_line_item_delivery
+    if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs
+      @order.line_items.each do |item|
+        item.delivery_date = item.delivery_period_policy.delivery_period
+        item.save!
+      end
+    end
+  end
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
     EmailCapture.new({},

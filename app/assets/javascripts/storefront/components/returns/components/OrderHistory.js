@@ -39,10 +39,12 @@ class OrderHistory extends Component {
               <p className="order-placed u-margin-bottom-small font-sans-serif">
                 Order placed on {dateIsoMdy}
               </p>
-              <p className="order-id u-margin-bottom-small font-sans-serif">
-                Order #{number}
-              </p>
-              <div className="Product__listItem__container">
+              <a href={`/orders/${number}`}>
+                <span className="order-id font-sans-serif">
+                  Order #{number}
+                </span>
+              </a>
+              <div className="Product__listItem__container u-margin-top-small">
                 {
                   returnRequestedArray.map((o, i) => {
                     const internationalCustomer = orderData.spree_order.international_customer;

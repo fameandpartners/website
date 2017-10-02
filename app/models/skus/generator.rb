@@ -48,7 +48,7 @@ module Skus
     end
 
     def height
-      "H#{@height.to_s.first}"
+      "H#{@height.to_s.first}#{@height.to_s.last}"
     end
 
     # Height is also considered a customization

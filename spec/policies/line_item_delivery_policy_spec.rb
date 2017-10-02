@@ -36,7 +36,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
     it "returns cny delivery period if cny flag enabled" do
       Features.activate(:cny_delivery_delays)
 
-      expect(subject.delivery_period).to eq('17 - 20 business days')
+      expect(subject.delivery_period).to eq('12 - 15 business days')
     end
   end
 end

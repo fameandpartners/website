@@ -1,0 +1,38 @@
+.CtaTile {
+  font-family: $secondary-font-family;
+  padding: 15px;
+  border: 1px solid $c-neutral-4;
+}
+
+.CtaTile__heading {
+  font-size: 1.4em;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.CtaTile__content {
+  margin-bottom: 10px;
+  line-height: 125%;
+}
+
+.CtaTile__link {
+  display: inline-block;
+  font-family: $primary-font-family;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  margin: 10px 0;
+}
+
+.CtaTile__linkCopy {
+  border-bottom: 1px solid $c-black;
+}
+
+.CtaTile__heading,
+.CtaTile__content,
+.CtaTile__link {
+  padding-left: 15px;
+  padding-right: 15px;
+}
