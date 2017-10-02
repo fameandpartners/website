@@ -78,11 +78,7 @@
   }
 
   .SectionJudges {
-    padding: 50px 0;
-  }
-
-  .SectionJudge {
-    margin-bottom: 95px;
+    padding-top: 20px;
   }
 
   .SectionContestForm {
@@ -133,7 +129,7 @@
     }
 
     .ContentCopy__judge {
-      margin: 0 30px;
+      margin: 0 30px 120px;
     }
 
     .SectionShop {
@@ -182,6 +178,12 @@
 
     .SectionSponsors {
       padding-bottom: 35px;
+    }
+
+    .ContentCopy__judge,
+    .SectionJudges,
+    .SectionAbout {
+      padding-bottom: 50px;
     }
 
   }
