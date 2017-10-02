@@ -112,6 +112,7 @@ eslint-disable
     params["_method"] = "put";
     params["state"] = "payment";
     params["order"] = {"payments_attributes": [{"payment_method_id": payment_method_id}] };
+    params["return_type"] = $('#return_type').val();
 
     $.ajax({
       type: 'POST',
