@@ -15,7 +15,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       'removeProductCustomizationHandler',
       'removeProductMakingOptionHandler',
       'couponFormSubmitHandler',
-      'returnsAbcHandler'
+      'returnsAbcHandler',
+      'openLearnMoreHandler'
     )
 
     @$container.on('click', '.remove-product', @removeProductHandler)
@@ -24,6 +25,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+    @$container.on('click', '.js-returns-learn-more', @openLearnMoreHandler)
     @cart.on('change', @render)
     @render()
     @
@@ -60,13 +62,25 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
     @fakeOptimizely()
     console.log('return test: ' + @whichReturnType())
-    # @loadModal()
+    if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
+      @optInReminderModal()
     @initializeReturnTypeCheckbox()
 
-  loadModal: () ->
-    new window.page.ReturnsOptimizelyModal(@whichReturnType())
-    $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+  isPaymentStep: () ->
+    parser = document.createElement('a')
+    parser.href = window.location.href
+    pathArr = parser.pathname.split('/')
+    paymentStep = pathArr.filter (i) -> i == 'payment'
+    paymentStep.length > 0
 
+  noReturnTypeSelected: () ->
+    !@hasReturnDiscount() && !@hasReturnInsurance()
+
+  optInReminderModal: () ->
+    if (!sessionStorage.getItem('returnModalShown'))
+      new window.page.ReturnsOptimizelyModal(@whichReturnType())
+      $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+      sessionStorage.setItem('returnModalShown', true)
 
   initializeReturnTypeCheckbox: () ->
     # is there already a returnType in the cart?
@@ -96,9 +110,15 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     # A == '10% Discount'
     # B == '$25 Insurance'
 
-    returnTest = 'A'
+    returnTest = 'B'
     $('.js-returns-abc-option-' + returnTest).toggleClass('hidden')
     $('#return_type').val(returnTest)
+
+  openLearnMoreHandler: (e) ->
+    e.preventDefault()
+    console.log(e)
+    new window.page.ReturnsOptimizelyModal(e.currentTarget.id)
+    $('.vex-dialog-button-primary').hide()
 
   removeProductHandler: (e) ->
     e.preventDefault()
