@@ -6,22 +6,10 @@ export default class Onboarding extends React.Component
     constructor( props )
     {
         super( props );
-
-        this.hideZopim = this.hideZopim.bind(this);
         this.join = this.join.bind(this);
     }
 
 
-    hideZopim()
-    {
-        if( window.$zopim && window.$zopim.livechat )
-        {
-            window.$zopim.livechat.hideAll();
-        } else
-        {
-            window.requestAnimationFrame( this.hideZopim );
-        }
-    }
 
     join()
     {
@@ -44,12 +32,6 @@ export default class Onboarding extends React.Component
                    }
                  );
     }
-
-    componentDidMount()
-    {
-        this.hideZopim();
-    }
-
     
     render()
     {

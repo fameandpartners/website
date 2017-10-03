@@ -92,7 +92,7 @@ export default class Toast extends FirebaseComponent
             }
         }
         this.state.toasts.splice( index, 1 );
-        this.setState (n
+        this.setState (
             {
                 toasts: this.state.toasts
             }
