@@ -21,7 +21,6 @@ $z-max: 9999;
 .ReturnOption__content {
   background: $c-background-gray;
   border: 1px solid $c-border-gray;
-  height: 75px;
   padding: 15px 0 0 0;
 }
 
@@ -121,6 +120,10 @@ $z-max: 9999;
   text-align: left;
   font-size: 14px;
   margin-bottom: 15px;
+}
+
+.ReturnOption__copy--link {
+  text-decoration: underline;
 }
 
 .checkout-modal .ReturnOption__content {
