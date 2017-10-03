@@ -110,7 +110,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     # A == '10% Discount'
     # B == '$25 Insurance'
 
-    returnTest = 'B'
+    returnTest = 'A'
     $('.js-returns-abc-option-' + returnTest).toggleClass('hidden')
     $('#return_type').val(returnTest)
 
@@ -137,15 +137,15 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   addReturnType: (option) ->
     if (option == 'A')
       console.log('Applying DISCOUNT...')
-      @cart.applyReturnTypePromoCode('deliverydisc')
+      @cart.applyReturnTypePromoCode('DELIVERYDISC')
     else if (option == 'B')
       console.log('Applying INSURANCE...')
-      @cart.applyReturnTypePromoCode('deliveryins')
+      @cart.applyReturnTypePromoCode('DELIVERYINS')
 
   removeReturnType: (option) ->
     if (option == 'A')
       console.log('Removing DISCOUNT...')
-      @cart.applyReturnTypePromoCode('deliverydisc')
+      @cart.applyReturnTypePromoCode('DELIVERYDISC')
     else if (option == 'B')
       console.log('Removing INSURANCE...')
       returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
