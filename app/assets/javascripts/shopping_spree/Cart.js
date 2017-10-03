@@ -21,6 +21,7 @@ export default class Cart extends FirebaseComponent
             };
         this.addToCart = this.addToCart.bind(this);
         this.recalculateDiscount = this.recalculateDiscount.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
     
     addToCart( data, previousChildKey )
@@ -36,7 +37,7 @@ export default class Cart extends FirebaseComponent
             this.setState(
                 {
                     myItems: this.state.myItems.concat( [
-                            <CartItem key={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
+                            <CartItem key={data.key} firebaseKey={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
                     totalInMyCart: this.state.totalInMyCart + Math.round(data.val().dress.price)
                 }
             );
@@ -47,7 +48,22 @@ export default class Cart extends FirebaseComponent
 
     deleteItem( firebaseKey )
     {
-        console.log( 'delete item called' );
+        let index = -1;
+        for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
+        {
+            if( this.state.myItems[i].props.firebaseKey == firebaseKey )
+            {
+                index = i;
+            }
+        }
+        this.state.myItems.splice( index, 1 );
+        this.setState (
+            {
+                myItems: this.state.myItems
+            }
+        );
+
+        this.cartDB.child( firebaseKey ).remove();
     }
     
     recalculateDiscount()

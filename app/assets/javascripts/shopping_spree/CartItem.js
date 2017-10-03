@@ -3,6 +3,18 @@ import React from 'react';
 
 export default class CartItem extends React.Component
 {
+    constructor( props )
+    {
+        super( props );
+
+        this.deleteMe = this.deleteMe.bind(this);
+    }
+
+    deleteMe()
+    {
+        this.props.delete( this.props.firebaseKey );
+    }
+    
     render()
     {
         return (
@@ -26,7 +38,7 @@ export default class CartItem extends React.Component
                   </div>                    
                 </div>
                 <div className="col-xs-1 col-xs-push-2">
-                  <a className="btn-close med" alt="Delete Item"></a>
+                <a onClick={this.deleteMe} className="btn-close med" alt="Delete Item"></a>
                 </div>
               </div>
             </li> );
