@@ -82,7 +82,7 @@ class PromotionsService
 
       # check if coupon code is already applied
       if order.adjustments.promotion.eligible.detect { |p| p.originator.promotion.code == promotion.code }.present?
-        if promotion.code == 'DELIVERYDISC'
+        if promotion.code.downcase == 'deliverydisc'
           delivery_disc = order.adjustments.promotion.eligible.select{|p| p.originator.promotion.code == promotion.code}.first
           delivery_disc.delete
           return true
