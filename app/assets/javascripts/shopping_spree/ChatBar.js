@@ -11,7 +11,7 @@ export default class ChatBar extends FirebaseComponent
         this.sendMessage = this.sendMessage.bind(this);
         this.addProductToFirebase = this.addProductToFirebase.bind(this);
         window.addToShoppingSpree = this.addProductToFirebase;
-        
+        this.detectEnterKey = this.detectEnterKey.bind( this );
     }
 
     addProductToFirebase( product_id, product_name, product_description, product_price,
@@ -54,12 +54,20 @@ export default class ChatBar extends FirebaseComponent
         this.textInput.value = "";        
     } 
 
+    detectEnterKey(e)
+    {
+        if( e.key === 'Enter' )
+        {
+            this.sendMessage();
+        }
+    }
+    
     render()
     {
         return (
             <div className="row chat-bar equal">
               <div className="col-xs-10 no-right-gutter no-left-gutter">
-                <input ref={(input) => { this.textInput = input; }} className="shoppingSpreeTextInput" type="text"></input>
+                <input onKeyPress={this.detectEnterKey} ref={(input) => { this.textInput = input; }} className="shoppingSpreeTextInput" type="text"></input>
               </div>
               <div className="col-xs-2 no-left-gutter no-right-gutter">
                 <a onClick={this.sendMessage} className='btn btn-black'>Send</a>
