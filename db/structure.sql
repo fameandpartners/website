@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.5
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -415,40 +415,6 @@ CREATE SEQUENCE contentful_routes_id_seq
 --
 
 ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
-
-
---
--- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE contentful_versions (
-    id integer NOT NULL,
-    change_message character varying(255),
-    payload text,
-    user_id integer,
-    is_live boolean DEFAULT false,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE contentful_versions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
 
 
 --
@@ -2598,28 +2564,6 @@ ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
 
 
 --
--- Name: relbloat; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW relbloat AS
- SELECT pg_namespace.nspname,
-    pg_class.relname,
-    pg_class.reltuples,
-    pg_class.relpages,
-    rowwidths.avgwidth,
-    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
-    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
-    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
-   FROM ((( SELECT pg_statistic.starelid,
-            sum(pg_statistic.stawidth) AS avgwidth
-           FROM pg_statistic
-          GROUP BY pg_statistic.starelid) rowwidths
-     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
-     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
-  WHERE (pg_class.relpages > 1);
-
-
---
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3616,7 +3560,7 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean DEFAULT false NOT NULL
+    orderbot_synced boolean
 );
 
 
@@ -4873,7 +4817,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text NOT NULL
+    user_data text DEFAULT '{}'::text
 );
 
 
@@ -5549,13 +5493,6 @@ ALTER TABLE ONLY competition_participations ALTER COLUMN id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentful_routes_id_seq'::regclass);
-
-
---
--- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
 
 
 --
@@ -6562,14 +6499,6 @@ ALTER TABLE ONLY competition_participations
 
 ALTER TABLE ONLY contentful_routes
     ADD CONSTRAINT contentful_routes_pkey PRIMARY KEY (id);
-
-
---
--- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY contentful_versions
-    ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
 
 
 --
@@ -9702,3 +9631,5 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
+
+INSERT INTO schema_migrations (version) VALUES ('20170908182740');

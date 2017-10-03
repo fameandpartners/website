@@ -18,6 +18,25 @@ class UserCart::CartProduct
     @line_item = order.line_items.where(id: options[:line_item_id]).first
   end
 
+  def populate_cart(params)
+    cart_populator = UserCart::Populator.new(
+      order: current_order(true),
+      # site_version: current_site_version,
+      # currency: current_currency,
+      product: {
+        variant_id: params[:variant_id],
+        size_id: params[:size_id],
+        color_id: params[:color_id],
+        customizations_ids: params[:customizations_ids],
+        making_options_ids: params[:making_options_ids],
+        height:             params[:height],
+        height_value:       params[:height_value],
+        height_unit:        params[:height_unit],
+        quantity: 1
+      }
+    )
+  end
+
   def destroy
     if line_item.present?
       line_item.destroy
