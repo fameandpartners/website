@@ -96,3 +96,6 @@ Procfile.*
 
 # Ignore all Emacs Temp Files
 *#*
+
+* Ingore elb
+.elasticbeanstalk/

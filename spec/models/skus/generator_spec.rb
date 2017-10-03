@@ -6,15 +6,15 @@ describe Skus::Generator do
       [
         {
           attributes: { style_number: 'Something', size: 'US2/AU6', color_id: 123, height: 'Petite', customization_value_ids: [42, 123] },
-          expected:   'SOMETHINGUS2AU6C123X42X123HP'
+          expected:   'SOMETHINGUS2AU6C123X42X123HPE'
         },
         {
           attributes: { style_number: 'Single Customization', size: 'US2/AU6', color_id: 123, height: 'Tall', customization_value_ids: [998] },
-          expected:   'SINGLECUSTOMIZATIONUS2AU6C123X998HT'
+          expected:   'SINGLECUSTOMIZATIONUS2AU6C123X998HTL'
         },
         {
           attributes: { style_number: 'Lorotinha', size: 'US20/AU26', color_id: '514', height: 'Standard' },
-          expected:   'LOROTINHAUS20AU26C514XHS'
+          expected:   'LOROTINHAUS20AU26C514XHSD'
         }
       ]
     }
