@@ -103,7 +103,7 @@ export default class ChatList extends FirebaseComponent
 
     scrollToBottom ()
     {
-        this.bottomOfChat.scrollIntoView( { behavior: "smooth" } );
+        this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
     }
     
     startListeningToFirebase()
