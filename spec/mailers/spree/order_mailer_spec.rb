@@ -37,7 +37,7 @@ module Spree
       }
     }
 
-    it 'sends data to customerio correctly' do
+    xit 'sends data to customerio correctly' do
       Timecop.freeze(today_date) do
         expect_any_instance_of(Marketing::CustomerIOEventTracker).to receive(:track).with(order.user, 'order_confirmation_email', expected_attributes)
         described_class.confirm_email(order)

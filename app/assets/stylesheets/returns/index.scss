@@ -109,10 +109,10 @@ body {
 .u-heavyFont {
     font-weight: 500 !important;
 }
-.u-underline, .u-underline:hover {
+.u-textDecoration--underline, .u-textDecoration--underline:hover {
     text-decoration: underline !important;
 }
-.u-cursor-pointer {
+.u-cursor--pointer {
     cursor: pointer;
 }
 .u-width-full {
@@ -136,6 +136,7 @@ body {
 .u-position-relative {
     position: relative;
 }
+
 button a {
     text-decoration: none;
 }

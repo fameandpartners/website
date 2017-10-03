@@ -1,12 +1,18 @@
 // overrides
-$tablet: 768px;       // grow 'til $desktop
-$desktop: 1280px;     // fixed 'til $widescreen
-$widescreen: 1440px;  // grow 'til $fullhd
-$fullhd: 1920px;      // fixed past $fullhd
+$tablet: 768px;                // grow 'til $desktop
+$desktop: 1280px;              // fixed 'til $widescreen
+$desktop-bootstrap-min: 992px;     // desktop width (bootstrap)
+$widescreen: 1440px;           // grow 'til $fullhd
+$fullhd: 1920px;               // fixed past $fullhd
 
 // fonts
+// serif
 $primary-font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
+// sans-serif
 $secondary-font-family: "freight-display-pro", Helvetica, Arial, sans-serif;
 
 // colors
 $oil: #333;
+$c-black: #000;
+$c-white: #fff;
+$c-gray-light: #f5f5f5;

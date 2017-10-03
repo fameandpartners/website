@@ -4,7 +4,7 @@ describe 'product details page', type: :feature, js: true do
 
   let(:product) { FactoryGirl.create(:dress_with_variants) }
 
-  it 'displays product name and product type' do
+  xit 'displays product name and product type' do
     product.set_property('product_type', "the awesome prop")
     visit "/dresses/dress-#{product.id}"
 
@@ -23,7 +23,7 @@ describe 'product details page', type: :feature, js: true do
     expect(page).to have_content('Estimated delivery, 7 - 10 business days')
   end
 
-  it "doesn't display type and displays default meta" do
+  xit "doesn't display type and displays default meta" do
     visit "/dresses/dress-#{product.id}"
 
     within('h1.heading') do

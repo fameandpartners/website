@@ -1,16 +1,20 @@
 require 'spec_helper'
+require 'pry-byebug'
 
 # 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
 
 RSpec.describe CustomItemSku do
   let(:custom_colour) { create :product_colour, name: 'pink' }
   let(:custom_size)   { create :product_size, size_template: 3 }
-  let(:customization_ids) { [1] }
+  let(:customisation_value) { create :customisation_value}
+  let(:customization_ids) { [customisation_value.id] }
   let(:chosen_height) { 'standard' }
   let(:style_number)  { 'FB1000' }
-  let(:dress)         { create :dress_with_magenta_size_10, sku: style_number }
+  
+  let(:dress)         { create :dress_with_magenta_size_10, sku: style_number, customisation_value_ids: customization_ids }
   let(:master)        { dress.master }
   let(:variant)       { dress.variants.first }
+  #let(:product)       { variant.product}
 
   let(:generator)     { described_class.new(line_item) }
   let(:sku)           { generator.call }
@@ -25,11 +29,12 @@ RSpec.describe CustomItemSku do
     end
   }
 
+
   describe 'custom items' do
     let(:line_item) { build :line_item, variant: variant, personalization: personalization }
 
     it 'generates a custom SKU' do
-      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X1HS"
+      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X#{customisation_value.id.to_s}HSD"
     end
 
     it 'includes the style number' do
@@ -44,9 +49,11 @@ RSpec.describe CustomItemSku do
       expect(sku).to include("C#{custom_colour.id}")
     end
 
-    describe 'customizations' do
+   describe 'customizations' do
       describe 'single customization (the default)' do
-        let(:customization_ids) { [999] }
+        let(:customisation_value) {create :customisation_value, id: 999}
+
+        let(:customization_ids) { [customisation_value.id] }
         it 'are marked with X and the ID' do
           expect(sku).to include("X999")
         end
@@ -57,15 +64,17 @@ RSpec.describe CustomItemSku do
 
         it 'are marked with just X' do
           expect(sku).to include("X")
-          expect(sku).to end_with "XHS"
+          expect(sku).to end_with "XHSD"
         end
       end
 
       describe 'multiple customizations (legacy edge case)' do
-        let(:customization_ids) { [33, 55] }
+        let(:customisation_value) {create :customisation_value}
+        let(:customisation_value2) {create :customisation_value}
+        let(:customization_ids) { [customisation_value.id, customisation_value2.id] }
 
         it 'are each marked with X and the ID' do
-          expect(sku).to include("X33X55")
+          expect(sku).to include("X#{customisation_value.id.to_s}X#{customisation_value2.id.to_s}")
         end
       end
     end
@@ -73,23 +82,19 @@ RSpec.describe CustomItemSku do
     describe '#height' do
       context 'standard' do
         let(:chosen_height) { 'standard' }
-        it { expect(sku).to end_with("HS") }
+        it { expect(sku).to end_with("HSD") }
       end
 
       context 'petite' do
         let(:chosen_height) { 'petite' }
-        it { expect(sku).to end_with("HP") }
+        it { expect(sku).to end_with("HPE") }
       end
 
       context 'tall' do
         let(:chosen_height) { 'tall' }
-        it { expect(sku).to end_with("HT") }
+        it { expect(sku).to end_with("HTL") }
       end
 
-      describe 'transformation' do
-        let(:chosen_height) { 'abc' }
-        it { expect(sku).to end_with("HA") }
-      end
     end
 
     describe 'fallback on error' do

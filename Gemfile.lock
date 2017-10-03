@@ -112,9 +112,9 @@ GIT
 
 GIT
   remote: https://github.com/stripe/stripe-ruby
-  revision: bf8638a06fb5885f3af8759c7a0bdea67400608b
+  revision: 465da7a9978c17b22ebcb378b0fe72454a57b884
   specs:
-    stripe (3.0.0)
+    stripe (3.3.1)
       faraday (~> 0.9)
 
 PATH
@@ -994,6 +994,7 @@ DEPENDENCIES
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
   jquery-ui-rails
+  json
   koala
   letter_opener (~> 1.4.1)
   mailchimp-api
@@ -1062,4 +1063,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.15.0
+   1.15.3

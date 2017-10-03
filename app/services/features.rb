@@ -22,6 +22,7 @@ module Features
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
     moodboard:                     "Moodboards",
     next_logistics:                'Enable Next Logistics 3PL return process, whenever an user creates an order return in Australia',
+    price_drop_au:                 "(AU only) Quick & dirty toggle to shown/hide the 'price drop' ribbon on selected items.",
     redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
     redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
     sales:                         nil,

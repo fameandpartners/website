@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 # Tire tries to connect Elasticsearch on boot, and webmock blocks it.
 # Source: https://github.com/karmi/retire/issues/136
 require 'webmock/rspec'
-WebMock.allow_net_connect!(net_http_connect_on_start: true)
+WebMock.allow_net_connect!(net_http_connect_on_start: false)
 
 require File.expand_path('../../config/environment', __FILE__)
 
@@ -13,6 +13,7 @@ require 'capybara/rails'
 require 'shoulda/matchers'
 require 'ffaker'
 require 'chosen-rails/rspec'
+require 'constants/order_bot'
 
 # Rails.application.railties.all { |r| r.eager_load! }
 
@@ -40,10 +41,24 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
-
   # Max height max width
-  config.before(:each, js: true) do
-     Capybara.page.driver.browser.resize(2000,1400)
+  config.before(:each) do
+    stub_request(:get, OrderBot::MEASURE_TYPE_URI).
+      to_return(status: 200, body: OrderBot::MEASURE_TYPE_RESPONSE, headers: {})
+
+
+    stub_request(:post, OrderBot::PRODUCT_URI).
+      with(body: "[\"junk\"]").
+      to_return(status: 200, body: OrderBot::PRODUCT_RESPONSE, headers: {})
+
+     stub_request(:post, OrderBot::PRODUCT_URI).
+      with(body: "[\"fail\"]").
+      to_return(status: 200, body: OrderBot::PRODUCT_FAILURE_RESPONSE, headers: {})
+
+  end
+
+   config.before(:each, js: true) do
+   Capybara.page.driver.browser.resize(2000,1400)
   end
 end
 

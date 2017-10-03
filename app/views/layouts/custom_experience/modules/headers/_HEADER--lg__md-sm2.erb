@@ -1,0 +1,72 @@
+<% @lg_contents = contents[:header_lg_item] %>
+<%
+  # Check if current header has any PID assigned and make grid accordingly
+  if (contents[:header_sm_items].nil?)
+    hero_pids = false
+    hero_column_left_class = 'is-5'
+    hero_column_right_class = 'is-7'
+  else
+    hero_pids = true
+    hero_column_left_class = 'is-6'
+    hero_column_right_class = 'is-6'
+  end
+%>
+
+<div class="EditorialHeaderContent columns is-vcentered section-row <%= contents[:full_width_content] %> tile is-ancestor">
+
+  <div class="tile is-parent is-12 is-hidden-tablet">
+    <article class="tile is-child">
+      <div class="CopyHeader CopyHeader--featured">
+        <div class="CopyHeader__content">
+          <% contents[:header_text_mobile].split("\n").each do |line| %>
+            <p><%= line %></p>
+          <% end %>
+        </div>
+        <div class="CopyHeader__separator"></div>
+        <% @email_heading = contents[:email_text] %>
+        <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
+      </div>
+    </article>
+  </div>
+
+  <div class="tile is-parent <%= hero_column_left_class %>">
+    <article class="tile is-child">
+      <div class="Editorial Editorial--featured">
+        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      </div>
+    </article>
+  </div>
+
+  <div class="tile is-vertical <%= hero_column_right_class %>">
+
+    <div class="tile is-parent is-hidden-mobile">
+      <article class="tile is-child">
+        <div class="CopyHeader CopyHeader--featured">
+          <div class="CopyHeader__content">
+            <% contents[:header_text].split("\n").each do |line| %>
+              <p><%= line %></p>
+            <% end %>
+          </div>
+          <div class="CopyHeader__separator"></div>
+          <% @email_heading = contents[:email_text] %>
+          <%= render partial: "layouts/contentful/modules/components/COMPONENT--email" if contents[:email_capture] %>
+        </div>
+      </article>
+    </div>
+
+    <% if hero_pids %>
+      <div class="tile is-parent">
+        <div class="columns is-mobile">
+        <% contents[:header_sm_items].each do |item| %>
+          <% @pid = item %>
+          <div class="column product-top-margin">
+            <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>

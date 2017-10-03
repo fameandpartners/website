@@ -1,0 +1,45 @@
+
+<% if Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>
+  <%= render 'marketing/trackers/customerio' %>
+<% end %>
+
+
+<!-- Body End is for Javascript that needs to be loaded after markup -->
+<%= yield :body_end %>
+
+<!-- bootstrap -->
+<script type="text/javascript">
+  // moodboard_data  = <%= raw current_user_moodboard.to_json %>;
+  // user_moodboards = <%= raw user_moodboards.to_json %>;
+
+  window.app = {
+    env:    '<%= Rails.env %>',
+    debug:  <%= Rails.env.development? %>,
+    user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
+    user_signed_in: <%= signed_in? %>,
+    site_version: {  name: '<%= current_site_version.try(:name) %>' },
+    current_site_version: <%= raw SiteVersionSerializer.new(current_site_version).to_json %>,
+    shopping_cart: new helpers.ShoppingCart({track: <%= Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>}),
+    // user_moodboard: new helpers.UserMoodboard(user_moodboards),
+    // user_moodboards: new helpers.UserMoodboardStore(user_moodboards),
+    events: $({})
+  };
+
+  $(document).ready(function(){
+    // Inline Javascript is for javascript to be executed after DOM Content loaded event fired
+    <%= yield :inline_javascript %>
+
+    // init here allows assigned listeners to update data
+    // window.app.user_moodboard.updateData(moodboard_data);
+    // window.app.user_moodboards.updateMoodboards(user_moodboards);
+    window.app.shopping_cart.setItemCount(<%= current_order.try(:item_count).to_i %>);
+  });
+
+  $(document).ready(function () {
+    initProductCollectionImageHover({
+      selector: 'body',
+      delegate: '.js-product-image'
+    });
+  });
+
+</script>
