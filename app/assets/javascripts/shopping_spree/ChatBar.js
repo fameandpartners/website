@@ -50,7 +50,10 @@ export default class ChatBar extends FirebaseComponent
     
     sendMessage()
     {
-        this.createTextMessage( this.textInput.value, this.props.name, this.props.email, this.props.icon );
+        if( this.textInput.value.trim() !== "" )
+        {
+            this.createTextMessage( this.textInput.value, this.props.name, this.props.email, this.props.icon );
+        }
         this.textInput.value = "";        
     } 
 
