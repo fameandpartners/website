@@ -49,7 +49,6 @@ Spree::CheckoutController.class_eval do
   def update
     set_order_site_version
     find_payment_methods
-
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
@@ -141,6 +140,8 @@ Spree::CheckoutController.class_eval do
 
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
+        @order.return_type = params[:return_type]
+        @order.save!
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
 
@@ -152,8 +153,8 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
-        OrderBotWorker.perform_async(@order.id)
-
+        #OrderBotWorker.perform_async(@order.id)
+       
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
