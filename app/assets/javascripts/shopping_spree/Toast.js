@@ -15,6 +15,7 @@ export default class Toast extends FirebaseComponent
             {
                 toasts: []
             } ;
+        this.removeToast = this.removeToast.bind(this);
     }
 
     addToast( data )
@@ -24,13 +25,15 @@ export default class Toast extends FirebaseComponent
 
             if( ( this.props.visible ) && (this.props.email != data.val().from.email ) )
             {
+                this.state.toasts.unshift(<ToastTextMessage key={data.key}
+                                          text={data.val().value} 
+                                          iconNumber={parseInt(data.val().from.icon)}
+                                          name={data.val().from.name}
+                                          email={data.val().from.email}
+                                          removeToast={this.removeToast}/>);
                 this.setState(
                     {
-                        toasts: this.state.toasts.concat([<ToastTextMessage key={data.key}
-                                                           text={data.val().value} 
-                                                           iconNumber={parseInt(data.val().from.icon)}
-                                                           name={data.val().from.name}
-                                                           email={data.val().from.email} />])
+                        toasts: this.state.toasts
                     }
                 );
             }
@@ -65,6 +68,7 @@ export default class Toast extends FirebaseComponent
     }
 
 
+    
     componentWillReceiveProps(nextProps)
     {
         if (nextProps.visible === false )
@@ -75,6 +79,25 @@ export default class Toast extends FirebaseComponent
                 }
             );
         }
+    }
+
+    removeToast( toast )
+    {
+        let index = -1;
+        for( let i = 0; i < this.state.toasts.length; i++ )
+        {
+            if( this.state.toasts[i].props.key == toast.props.key )
+            {
+                index = i;
+            }
+        }
+        this.state.toasts.splice( index, 1 );
+        this.setState (n
+            {
+                toasts: this.state.toasts
+            }
+        );
+
     }
     
     render()
@@ -95,5 +118,4 @@ Toast.propTypes = {
     firebaseNodeId: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool.isRequired,
     email: React.PropTypes.string.isRequired
-    
-}
+};
