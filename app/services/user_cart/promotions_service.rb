@@ -70,7 +70,6 @@ class PromotionsService
         @message = I18n.t(:coupon_code_max_usage)
         return false
       end
-
       # NOTE: coupon_code - virtual attribute, calling update attributes for it useless
       # unless we have some tricky filters/callbacks
       #order.update_attributes(coupon_code: promotion.code)
@@ -96,6 +95,9 @@ class PromotionsService
       promo = order.adjustments.promotion.detect { |p| p.originator.promotion.code == order.coupon_code }
 
       if promo.present? and promo.eligible
+        @message = I18n.t(:coupon_code_applied)
+        true
+      elsif order.coupon_code.downcase == 'deliveryins' && order.line_items.any? {|x| x.product.name.downcase == 'return_insurance'}
         @message = I18n.t(:coupon_code_applied)
         true
       elsif previous_promo.present? and promo.present?
