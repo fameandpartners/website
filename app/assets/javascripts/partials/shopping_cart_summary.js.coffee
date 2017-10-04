@@ -103,7 +103,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     returnInsurance.length
 
   hasReturnDiscount: () ->
-    @cart.data.promocode.indexOf('DELIVERYDISC') > -1
+    if (@cart.data.promocode)
+      @cart.data.promocode.indexOf('DELIVERYDISC') > -1
 
   whichReturnType: () ->
     $('#return_type').val()
