@@ -60,7 +60,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       shipping_message: @shipping_message
     ))
 
-    @fakeOptimizely()
+    # @fakeOptimizely()
     console.log('return test: ' + @whichReturnType())
     if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
       @optInReminderModal()
