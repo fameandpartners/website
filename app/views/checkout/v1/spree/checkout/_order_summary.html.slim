@@ -25,7 +25,7 @@ ruby:
   .cart-wrapper
     .row
       .col-xs-12
- 
+
         - if cart.products
           .cart-items
 
@@ -57,10 +57,10 @@ ruby:
             p
               - if cart.display_promotion_total.to_s != "$0.00"
                 - if cart.promocode.present?
-                  | Promotion (#{ truncate(cart.promocode, length: 10) })
+                  | Additional Savings
                   span.value = cart.display_promotion_total
                 - else
-                  | Promotion
+                  | Additional Savings
                   span.value = cart.display_promotion_total
 
             - cart.taxes.each do |tax|
