@@ -176,7 +176,7 @@ $('.js-trigger-empty-cart-modal').modal({
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
         <p class="js-returns-abc-option-message-A hidden">
-          Returns Savings (10%)<span class="pull-right"><%= @cart.display_promotion_total %></span>
+          Returns Savings (10%)<span class="pull-right">-<%= @cart.delivery_discount %></span>
         </p>
         <p class="js-returns-abc-option-message-B hidden">
           Returns Deposit<span class="pull-right">$25.00</span>
