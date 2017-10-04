@@ -110,7 +110,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     # A == '10% Discount'
     # B == '$25 Insurance'
 
-    returnTest = 'A'
+    returnTest = 'B'
     $('.js-returns-abc-option-' + returnTest).toggleClass('hidden')
     $('#return_type').val(returnTest)
 

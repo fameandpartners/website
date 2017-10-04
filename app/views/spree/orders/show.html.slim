@@ -1,6 +1,54 @@
 ruby:
   successfully_ordered = session.delete(:successfully_ordered)
 
+  def has_return_insurance?
+    return_insurance = order.line_items.select {|li| li.style_name == 'RETURN_INSURANCE'}
+    !return_insurance.empty?
+  end
+
+  def has_return_discount?
+    return_discount = order.promo_codes.select {|c| c.include? '[DELIVERYDISC]'}
+    !return_discount.empty?
+  end
+
+
+javascript:
+  $(function() {
+    // fake Optimizely (remove)
+    returnTest = 'B'
+    $('#return_type').val(returnTest)
+
+    // Optimizely stuff
+
+    var hasReturnDiscount = #{ raw has_return_discount? };
+    var hasReturnInsurance = #{ raw has_return_insurance? };
+    var returnType = $('#return_type').val();
+
+    // ensures the optimizely object is defined globally
+    window['optimizely'] = window['optimizely'] || [];
+
+    if (returnType == 'A') {
+      if (hasReturnDiscount) {
+        console.log('Variant A --- ADDED discount.');
+        window.optimizely.push(["trackEvent", "customer_added__return_discount"]);
+      } else {
+        console.log('Variant A --- Did NOT add discount.');
+        window.optimizely.push(["trackEvent", "customer_no__return_discount"]);
+      }
+    } else if (returnType == 'B') {
+      if (hasReturnInsurance) {
+        console.log('Variant B --- ADDED insurance.');
+        window.optimizely.push(["trackEvent", "customer_added__return_insurance"]);
+      } else {
+        console.log('Variant B --- Did NOT add insurance.');
+        window.optimizely.push(["trackEvent", "customer_no__return_insurance"]);
+      }
+    } else {
+      console.log('Variant C --- Control');
+      window.optimizely.push(["trackEvent", "customer__control_option"]);
+    }
+  });
+
 section.order-details
   .page-title.default.order
     .container
@@ -21,7 +69,8 @@ section.order-details
               .row
                 .order-items
                   - order.line_items.each do |line_item|
-                    = render 'spree/orders/show/order_item', line_item: line_item
+                    - unless line_item.style_name == 'RETURN_INSURANCE'
+                      = render 'spree/orders/show/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 
@@ -29,6 +78,12 @@ section.order-details
                     .label.col-md-6 Shipping
                     / TODO: If price is integer remove decimals
                     .amount.col-md-6 #{order.shipment.display_amount}
+
+                  - if has_return_insurance?
+                    .row.discount-info
+                      .label.col-md-6 Returns Deposit
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6 $25.00
 
                   .row.discount-info
                     .label.col-md-6 Discount
@@ -132,6 +187,8 @@ section.order-details
                 = link_to faqs_path(anchor: 'collapse-returns-policy'), class: 'sidebar-link'
                   | Our return policy
                   i.link-icon.fa.fa-chevron-right
+
+= hidden_field_tag :return_type, 'C'
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
