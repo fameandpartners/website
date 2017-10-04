@@ -31,7 +31,7 @@ module OrderBot
 
 		def per_item_discount_adjustment(order)
 			promotion_action_ids = order.promotions.map {|x| x.promotion_actions&.first&.id }
-			promotions = order&.adjustments&.promotion&.select {|x| promotion_action_ids.include?(x.originator_id)}
+			promotions = order&.adjustments&.promotion&.eligible&.select {|x| promotion_action_ids.include?(x.originator_id)}
 			promotions = promotions&.uniq {|x| x.label}
 			discount = 0
 			if promotions
