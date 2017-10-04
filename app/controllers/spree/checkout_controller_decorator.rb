@@ -27,6 +27,7 @@ Spree::CheckoutController.class_eval do
     @optimizely_opt_in = true
     prepare_order
     find_payment_methods
+    update_line_item_delivery
     data_layer_add_to_cart_event
 
     unless signed_in?
@@ -399,6 +400,15 @@ Spree::CheckoutController.class_eval do
     'checkout'
   end
 
+
+  def update_line_item_delivery
+    if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs
+      @order.line_items.each do |item|
+        item.delivery_date = item.delivery_period_policy.delivery_period
+        item.save!
+      end
+    end
+  end
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
     EmailCapture.new({},

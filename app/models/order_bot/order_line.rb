@@ -30,13 +30,16 @@ module OrderBot
 		end
 
 		def per_item_discount_adjustment(order)
-			promotions = order&.adjustments&.promotion&.uniq {|x| x.label}
+			promotion_action_ids = order.promotions.map {|x| x.promotion_actions&.first&.id }
+			promotions = order&.adjustments&.promotion&.select {|x| promotion_action_ids.include?(x.originator_id)}
+			promotions = promotions&.uniq {|x| x.label}
+			discount = 0
 			if promotions
-				discount = promotions&.inject(0){|sum, item| sum + item.amount.abs}
-				return discount/order.line_items.count
-			else
-				return 0
+				discount += promotions.inject(0){|sum, item| sum + item.amount.abs}
 			end
+			manual_order_adjustment = order&.adjustments.select {|o| o.label.downcase.include?('exchange') ||o.label.downcase.include?('manual')}
+			discount += manual_order_adjustment.inject(0){|sum, item| sum + item.amount.abs}
+			discount/order.line_items.count
 		end
 
 	end

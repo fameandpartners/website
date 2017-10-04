@@ -6,6 +6,7 @@ module Policies
     CNY_DELIVERY_PERIOD = '2 weeks'
     FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
     SLOW_MAKING_DELIVERY_PERIOD = "6 weeks"
+    SLOW_MAKING_DELIVERY_PERIOD_CNY = "6 weeks + 2 weeks"
     # SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "5 weeks",
     #                               "12 - 15 business days" => "5 weeks",
     #                               "3 - 4 weeks" => "5 weeks"
@@ -16,13 +17,14 @@ module Policies
       "7 - 10 business days" => "5 business days",
       "12 - 15 business days" => "9 business days",
       "3 - 4 weeks" => "15 business days",
-      "4 - 6 weeks" => "25 business days"
+      "4 - 6 weeks" => "25 business days",
+
     }
 
-    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "17 - 20 business days",
-                          "12 - 15 business days" => "22 - 25 business days",
-                          "3 - 4 weeks" => "5 - 6 weeks",
-                          "4 - 6 weeks" => "6 - 8 weeks"
+    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "12 - 15 business days",
+                          "12 - 15 business days" => "3 - 4 weeks",
+                          "3 - 4 weeks" => "3 - 4 weeks",
+                          "4 - 6 weeks" => "4 - 6 weeks"
                        }
 
     # Max delivery period got from taxons
@@ -39,7 +41,7 @@ module Policies
 
     def fast_making_delivery_period
       FAST_MAKING_DELIVERY_PERIOD
-    end
+    end 
 
     def slow_making_delivery_period
       SLOW_MAKING_DELIVERY_PERIOD
@@ -54,13 +56,16 @@ module Policies
     def ship_by_date(order_completed_at, delivery_period)
       value = minor_value_from_period(delivery_period) #take the smaller number, for more aggressive make times
       units = period_units(delivery_period)
-
       # special case for express
       if delivery_period == FAST_MAKING_DELIVERY_PERIOD
         return period_in_business_days(FAST_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
       if delivery_period == SLOW_MAKING_DELIVERY_PERIOD
+        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
+      end
+
+      if delivery_period == SLOW_MAKING_DELIVERY_PERIOD_CNY
         return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
