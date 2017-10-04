@@ -65,6 +65,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
       @optInReminderModal()
     @initializeReturnTypeCheckbox()
+    @removeInsuranceIfCartEmpty()
 
   isPaymentStep: () ->
     parser = document.createElement('a')
@@ -94,6 +95,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       $('.js-returns-abc-option-message-B').toggleClass('hidden')
     else
       console.log('No Return Type in Cart!')
+
+  removeInsuranceIfCartEmpty: () ->
+    if (@cart.data.products.length == 1 && @cart.data.products[0].name == 'RETURN_INSURANCE')
+      @cart.removeProduct(@cart.data.products[0].line_item_id)
 
   hasReturnInsurance: () ->
     returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
