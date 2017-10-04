@@ -187,9 +187,9 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   applyReturnTypePromoCode: (code) ->
-    if (code == 'deliverydisc')
+    if (code == 'DELIVERYDISC')
       option = 'A'
-    else if (code == 'deliveryins')
+    else if (code == 'DELIVERYINS')
       option = 'B'
 
     $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
