@@ -49,7 +49,6 @@ window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends Checko
       popup: true,
       afterOpen: @updateHtml,
       timeout: 0,
-      okText: "foo"
     }, opts)
     $('.vex-dialog-button-primary').text('continue')
     $('.vex-dialog-button-secondary').html('&times;')
