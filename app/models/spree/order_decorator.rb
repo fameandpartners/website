@@ -121,7 +121,11 @@ Spree::Order.class_eval do
   end
 
   def display_promotion_total
-    promotion_total = self.adjustments.credit.eligible.sum(:amount)
+    if self.adjustments.credit.eligible.any? {|x| x.originator.promotion.code.include?('DELIVERYDISC')}
+      promotion_total = self.adjustments.credit.eligible.sum(:amount) + (self.item_total * 0.1)
+    else
+      promotion_total = self.adjustments.credit.eligible.sum(:amount)
+    end
     Spree::Money.new(promotion_total, { currency: currency })
   end
 
@@ -143,7 +147,11 @@ Spree::Order.class_eval do
 
   def promocode
     if promo = coupon_code_added_promotion
-      promo.code.to_s.upcase
+      if promo.code.include?('DELIVERYDISC') && promo.code != 'DELIVERYDISC'
+        return promo.code.to_s.upcase.split('DELIVERYDISC').first + 'DELIVERYDISC'
+      else
+        return promo.code.to_s.upcase
+      end
     end
   end
 
