@@ -39,11 +39,16 @@ $c-price-drop-bg: #3a459f;
 
 // @end Colors
 
+@font-face {
+    font-family: 'Bagnard';
+    src: font-url('Bagnard.woff'),
+         font-url("Bagnard.ttf") format("truetype"), /* Safari, Android, iOS */
+         font-url("Bagnard.otf") format("opentype");
+}
+
 // Fonts
-$font-family-secondary: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-// Freight - available weight and styles:
-// 300, 300 italic, 500, 500 italic
-$font-heading: 'freight-display-pro', Helvetica, Arial, sans-serif;
+$font-family-secondary: 'Roboto', sans-serif;
+$font-heading: 'Bagnard', serif;
 // @end Fonts
 
 // Form

@@ -5,14 +5,9 @@ doctype html
     - if !Rails.env.production?
       meta name="robots" content="noindex, nofollow"
 
-    script type="text/javascript"
-      | try{Typekit.load();}catch(e){}
-
     = stylesheet_link_tag 'widgets/site_navigations'
     = stylesheet_link_tag 'widgets/footer_widget'
     = csrf_meta_tags
 
   body#footer-widget
     = render 'layouts/redesign/footer'
-
-

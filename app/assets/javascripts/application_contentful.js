@@ -1,7 +1,6 @@
 //---------
 // Our code
 //---------
-//= require libs/typekit.min
 // require jquery_ujs
 // require jquery-ui/datepicker
 // require jquery-fileupload/vendor/jquery.ui.widget
@@ -85,7 +84,7 @@
 // require partials/style/popup
 
 // require partials/product_collection.js
-//require partials/product_customisation.js
+// require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 // require partials/email_capture_modal

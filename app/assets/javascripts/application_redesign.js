@@ -1,7 +1,6 @@
 //---------
 // Our code
 //---------
-//= require libs/typekit.min
 //= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
@@ -85,7 +84,7 @@
 // require partials/style/popup
 
 //= require partials/product_collection.js
-//require partials/product_customisation.js
+// require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
@@ -135,23 +134,22 @@
 //--------------------------------
 //= require partials/hero-tile-carousel
 
-jQuery(document).ready(function($){
+jQuery(document).ready(($) => {
   $('body').addClass('ready');
 
-  $('#forgot-password').on('click', function(e) {
+  $('#forgot-password').on('click', function (e) {
     e.preventDefault();
     email = $('#spree_user_email').val();
-    window.location = $(this).attr('href') + '?email=' + email;
+    window.location = `${$(this).attr('href')}?email=${email}`;
   });
 
-	//home page slider
-	$(function() {
-		$(".rslides").responsiveSlides({
-			auto: false,             // Boolean: Animate automatically, true or false
+	// home page slider
+  $(() => {
+    $('.rslides').responsiveSlides({
+      auto: false,             // Boolean: Animate automatically, true or false
 	 		pager: true,           // Boolean: Show pager, true or false
-			speed: 3000,            // Integer: Speed of the transition, in milliseconds
-	  		timeout: 6000          // Integer: Time between slide transitions, in milliseconds
+      speed: 3000,            // Integer: Speed of the transition, in milliseconds
+	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
     	});
-	});
-
+  });
 });

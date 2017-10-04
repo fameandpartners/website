@@ -5,9 +5,6 @@ doctype html
     - if !Rails.env.production?
       meta name="robots" content="noindex, nofollow"
 
-    script type="text/javascript"
-      | try{Typekit.load();}catch(e){}
-
     = stylesheet_link_tag 'widgets/site_navigations'
     = csrf_meta_tags
 
@@ -88,5 +85,3 @@ coffee:
       for e in hideItemsArray
         e.classList.remove('hidden')
       false
-
-

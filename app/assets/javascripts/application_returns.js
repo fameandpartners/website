@@ -1,5 +1,3 @@
-//= require libs/typekit.min
-
 // TO-DO: clean-up
 
 //= require libs/underscore-min
