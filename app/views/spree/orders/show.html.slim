@@ -24,30 +24,35 @@ javascript:
 
     var hasReturnDiscount = #{ raw has_return_discount? };
     var hasReturnInsurance = #{ raw has_return_insurance? };
-    var returnType = $('#return_type').val();
 
-    // ensures the optimizely object is defined globally
-    window['optimizely'] = window['optimizely'] || [];
+    window.optimizelyAssist = window.optimizelyAssist || {};
 
-    if (returnType == 'A') {
-      if (hasReturnDiscount) {
-        console.log('Variant A --- ADDED discount.');
-        window.optimizely.push(["trackEvent", "customer_added__return_discount"]);
+    window.optimizelyAssist.trackingCall = function() {
+      var returnType = $('#return_type').val();
+
+      // ensures the optimizely object is defined globally
+      window['optimizely'] = window['optimizely'] || [];
+
+      if (returnType == 'A') {
+        if (hasReturnDiscount) {
+          console.log('Variant A --- ADDED discount.');
+          window.optimizely.push(["trackEvent", "customer_added__return_discount"]);
+        } else {
+          console.log('Variant A --- Did NOT add discount.');
+          window.optimizely.push(["trackEvent", "customer_no__return_discount"]);
+        }
+      } else if (returnType == 'B') {
+        if (hasReturnInsurance) {
+          console.log('Variant B --- ADDED insurance.');
+          window.optimizely.push(["trackEvent", "customer_added__return_insurance"]);
+        } else {
+          console.log('Variant B --- Did NOT add insurance.');
+          window.optimizely.push(["trackEvent", "customer_no__return_insurance"]);
+        }
       } else {
-        console.log('Variant A --- Did NOT add discount.');
-        window.optimizely.push(["trackEvent", "customer_no__return_discount"]);
+        console.log('Variant C --- Control');
+        window.optimizely.push(["trackEvent", "customer__control_option"]);
       }
-    } else if (returnType == 'B') {
-      if (hasReturnInsurance) {
-        console.log('Variant B --- ADDED insurance.');
-        window.optimizely.push(["trackEvent", "customer_added__return_insurance"]);
-      } else {
-        console.log('Variant B --- Did NOT add insurance.');
-        window.optimizely.push(["trackEvent", "customer_no__return_insurance"]);
-      }
-    } else {
-      console.log('Variant C --- Control');
-      window.optimizely.push(["trackEvent", "customer__control_option"]);
     }
   });
 
