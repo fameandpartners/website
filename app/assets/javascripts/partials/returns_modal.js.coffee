@@ -13,7 +13,7 @@ window.page.CheckoutModal = class CheckoutModal
       message: @message()
 
 window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends CheckoutModal
-  constructor: (opts = {}) ->
+  constructor: (opts = '') ->
     if (opts == 'A')
       modalHeading = 'Don’t miss out on 10% savings!'
       modalBody = 'The cost of returns is factored into the price of any online purchase. If you opt out of returning your made-to-order garment, we save money–and we want to pass that 10% savings onto you. If you do choose to opt out of returns and save 10%, all items will still be eligible for exchange.'
