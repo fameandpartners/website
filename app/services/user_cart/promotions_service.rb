@@ -165,8 +165,6 @@ class PromotionsService
       previous_promo = order.adjustments.promotion.eligible.first
       promotion.activate(:order => order, :coupon_code => promotion.code)
       promo = order.adjustments.promotion.detect { |p| p.originator.promotion.code == order.coupon_code }
-     
-     
 
       if previous_promo.present? and promo.present? and promo.originator.promotion.code == 'DELIVERYDISC' 
         combine_promotion_with_return_discount(promo.amount.abs,previous_promo.amount.abs, previous_promo.originator.promotion.code, previous_promo.originator.promotion.name)
@@ -183,9 +181,13 @@ class PromotionsService
         @message = I18n.t(:coupon_code_applied)
         true
       elsif previous_promo.present? and promo.present?
-          @message = I18n.t(:coupon_code_better_exists)
-          false
+        order.adjustments.promotion.delete(promo) #remove inferior promo
+        order.save
+        @message = I18n.t(:coupon_code_better_exists)
+        false
       elsif promo.present?
+        order.adjustments.promotion.delete(promo) #remove ineligible promo
+        order.save
         @message = I18n.t(:coupon_code_not_eligible)
         false
       else

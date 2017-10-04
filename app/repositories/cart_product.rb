@@ -140,7 +140,8 @@ class Repositories::CartProduct
           name: mo.name,
           display_discount: mo.display_discount,
           description: mo.description,
-          delivery_period: mo.display_delivery_period
+          delivery_period: mo.display_delivery_period,
+          active: mo.active
         )
       end
     end

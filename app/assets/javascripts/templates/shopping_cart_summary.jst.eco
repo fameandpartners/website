@@ -121,9 +121,11 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <a href="javascript:;" id="A-info" class="js-returns-learn-more">
+        <p class="ReturnOption__copy font-sans-serif">
+          <a href="javascript:;" id="A-info" class="js-returns-learn-more ReturnOption__copy--link">
           Learn more
-        </a>
+          </a>
+        </p>
       </div>
     </div>
   </div>
@@ -149,9 +151,11 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <a href="javascript:;" id="B-info" class="js-returns-learn-more">
-          Learn more
-        </a>
+        <p class="ReturnOption__copy font-sans-serif">
+          <a href="javascript:;" id="B-info" class="js-returns-learn-more ReturnOption__copy--link">
+            Learn more
+          </a>
+        </p>
       </div>
     </div>
   </div>

@@ -60,11 +60,12 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       shipping_message: @shipping_message
     ))
 
-    @fakeOptimizely()
+    # @fakeOptimizely()
     console.log('return test: ' + @whichReturnType())
     if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
       @optInReminderModal()
     @initializeReturnTypeCheckbox()
+    @removeInsuranceIfCartEmpty()
 
   isPaymentStep: () ->
     parser = document.createElement('a')
@@ -94,6 +95,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       $('.js-returns-abc-option-message-B').toggleClass('hidden')
     else
       console.log('No Return Type in Cart!')
+
+  removeInsuranceIfCartEmpty: () ->
+    if (@cart.data.products.length == 1 && @cart.data.products[0].name == 'RETURN_INSURANCE')
+      @cart.removeProduct(@cart.data.products[0].line_item_id)
 
   hasReturnInsurance: () ->
     returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
@@ -137,15 +142,15 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   addReturnType: (option) ->
     if (option == 'A')
       console.log('Applying DISCOUNT...')
-      @cart.applyReturnTypePromoCode('deliverydisc')
+      @cart.applyReturnTypePromoCode('DELIVERYDISC')
     else if (option == 'B')
       console.log('Applying INSURANCE...')
-      @cart.applyReturnTypePromoCode('deliveryins')
+      @cart.applyReturnTypePromoCode('DELIVERYINS')
 
   removeReturnType: (option) ->
     if (option == 'A')
       console.log('Removing DISCOUNT...')
-      @cart.applyReturnTypePromoCode('deliverydisc')
+      @cart.applyReturnTypePromoCode('DELIVERYDISC')
     else if (option == 'B')
       console.log('Removing INSURANCE...')
       returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'

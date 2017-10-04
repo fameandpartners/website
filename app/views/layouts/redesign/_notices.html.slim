@@ -1,21 +1,32 @@
-// TEMPORARY SALE BANNER for the "BUY 2, GET 1" campaign
-// It's hardcoded because our default banner component doesn't have an automatic trigger to run between date ranges.
-- if custom_sale_banner_active?
-  #sale-banner.alert-sale.custom-sale-banner-top role="alert"
-    .outer-wrap
-        .inner-wrap
-          .title-wrap
-            .title
-              = link_to dresses_path
-                | FINAL DAY: BUY TWO, GET ONE FREE WITH CODE JULY342. <span class="alert-sale-cta">SHOP NOW.</span>
-
-- if price_drop_au_active?
+// If cny_delivery_delays feature flag is active: we show a banner to let our customers know about delays.
+- if Features.active?(:cny_delivery_delays)
   #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
     .outer-wrap
         .inner-wrap
           .title-wrap
-            .title
-              | WE'RE CELEBRATING AUSTRALIA BY DROPPING OUR PRICES! SHOP NOW.
+            .title.text-uppercase
+              | Due to high order volume, please allow additional time for delivery.
+
+// If cny_delivery_delays feature flag is OFF: we can show other banners.
+- else
+  // TEMPORARY: Sale banner for the "BUY 2, GET 1" campaign
+  - if custom_sale_banner_active?
+    #sale-banner.alert-sale.custom-sale-banner-top role="alert"
+      .outer-wrap
+          .inner-wrap
+            .title-wrap
+              .title
+                = link_to dresses_path
+                  | FINAL DAY: BUY TWO, GET ONE FREE WITH CODE JULY342. <span class="alert-sale-cta">SHOP NOW.</span>
+
+  // Temporary: Price Drop (AU-only) campaign
+  - if price_drop_au_active?
+    #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
+      .outer-wrap
+          .inner-wrap
+            .title-wrap
+              .title
+                | WE'RE CELEBRATING AUSTRALIA BY DROPPING OUR PRICES! SHOP NOW.
 
 // REGULAR SALE BANNER IS TEMPORARILY HIDDEN
 / - else

@@ -80,7 +80,7 @@ FameAndPartners::Application.routes.draw do
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
-    get '/slayitforward'   => 'statics#slay_it_forward', :as => :slay_it_forward
+    get '/slayitforward', to: redirect('https://www.instagram.com/explore/tags/slayitforward/'), :as => :slay_it_forward
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
@@ -122,6 +122,9 @@ FameAndPartners::Application.routes.draw do
 
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
+
+    # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
+    get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
     ###########
     # Lookbooks
@@ -241,8 +244,6 @@ FameAndPartners::Application.routes.draw do
     # Modern Evening Collection - Landing page
     get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
 
-    # Bespoke Bridal Collection - Landing page
-    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
     # Redirect with querystring for GA tracking (Marketing campaign)
     get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
