@@ -176,7 +176,7 @@ $('.js-trigger-empty-cart-modal').modal({
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
         <p class="js-returns-abc-option-message-A hidden">
-          Returns Savings (10%)<span class="pull-right"><%= @cart.display_promotion_total %></span>
+          Returns Savings (10%)<span class="pull-right">-<%= @cart.delivery_discount %></span>
         </p>
         <p class="js-returns-abc-option-message-B hidden">
           Returns Deposit<span class="pull-right">$25.00</span>
@@ -187,7 +187,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <p>
           <% #TODO: this is just a workaround due to Spree's limitations. We should compare numbers, not strings. %>
           <% if @cart.display_promotion_total != "$0.00" && @cart.promocode != 'DELIVERYDISC' : %>
-            Promotion (<%= @cart.promocode %>)<span class="value"><%= @cart.display_promotion_total %></span>
+            Additional Savings <span class="value"><%= @cart.display_promotion_total %></span>
           <% end %>
         </p>
         <% for tax in @cart.taxes: %>

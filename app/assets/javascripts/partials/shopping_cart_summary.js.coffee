@@ -60,10 +60,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       shipping_message: @shipping_message
     ))
 
-    # @fakeOptimizely()
     console.log('return test: ' + @whichReturnType())
     if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
       @optInReminderModal()
+    @showReturnCheckbox()
     @initializeReturnTypeCheckbox()
     @removeInsuranceIfCartEmpty()
 
@@ -82,6 +82,11 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       new window.page.ReturnsOptimizelyModal(@whichReturnType())
       $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
       sessionStorage.setItem('returnModalShown', true)
+
+  showReturnCheckbox: () ->
+    classToShow = '.js-returns-abc-option-' + @whichReturnType()
+    if (!$(classToShow).is(":visible"))
+      $(classToShow).toggleClass('hidden')
 
   initializeReturnTypeCheckbox: () ->
     # is there already a returnType in the cart?
@@ -105,19 +110,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     returnInsurance.length
 
   hasReturnDiscount: () ->
-    @cart.data.promocode == 'DELIVERYDISC'
+    @cart.data.promocode.indexOf('DELIVERYDISC') > -1
 
   whichReturnType: () ->
     $('#return_type').val()
-
-  fakeOptimizely: () ->
-    # TO-DO: replicate in Optimizely
-    # A == '10% Discount'
-    # B == '$25 Insurance'
-
-    returnTest = 'B'
-    $('.js-returns-abc-option-' + returnTest).toggleClass('hidden')
-    $('#return_type').val(returnTest)
 
   openLearnMoreHandler: (e) ->
     e.preventDefault()
