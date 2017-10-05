@@ -75,9 +75,9 @@ module Marketing
     def promotion?
       promo_codes.any?
     end
-    
+
     def delivery_discount
-      order.item_total * 0.1
+      "$#{('%.2f' %(order.item_total * 0.1/1000).round(2)).to_s}"
     end
 
     def promo_codes

@@ -137,7 +137,8 @@ module Orders
     end
 
     def delivery_discount
-      spree_order.item_total * 0.1
+      "$#{('%.2f' %(spree_order.item_total * 0.1/1000).round(2)).to_s}"
+      
     end
 
     def return_request
