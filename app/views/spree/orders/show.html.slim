@@ -7,7 +7,7 @@ ruby:
   end
 
   def has_return_discount?
-    return_discount = order.promo_codes.select {|c| c.include? '[DELIVERYDISC]'}
+    return_discount = order.promo_codes.select {|c| c.include? 'DELIVERYDISC'}
     !return_discount.empty?
   end
 
