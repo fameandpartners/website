@@ -7,10 +7,14 @@ ruby:
   end
 
   def has_return_discount?
-    return_discount = order.promo_codes.select {|c| c.include? '[DELIVERYDISC]'}
+    return_discount = order.promo_codes.select {|c| c.include? 'DELIVERYDISC'}
     !return_discount.empty?
   end
 
+  def formatted_delivery_discount
+    # for visual consistency with other discounts
+    '$-' + order.delivery_discount[1..-1]
+  end
 
 javascript:
   $(function() {
@@ -73,7 +77,7 @@ section.order-details
                     - unless line_item.style_name == 'RETURN_INSURANCE'
                       = render 'spree/orders/show/order_item', line_item: line_item
               .row
-                .order-total.col-md-7.col-md-offset-5
+                .order-total.col-md-9.col-md-offset-3
 
                   .row.discount-info
                     .label.col-md-6 Shipping
@@ -84,6 +88,11 @@ section.order-details
                     .row.discount-info
                       .label.col-md-6 Returns Deposit
                       .amount.col-md-6 $25.00
+
+                  - if has_return_discount?
+                    .row.discount-info
+                      .label.col-md-6 Returns Savings (10%)
+                      .amount.col-md-6 #{formatted_delivery_discount}
 
                   .row.discount-info
                     .label.col-md-6 Discount

@@ -136,6 +136,11 @@ module Orders
       return_request.present?
     end
 
+    def delivery_discount
+      "$#{('%.2f' %((spree_order.item_total * 0.1).to_f).round(2)).to_s}"
+      
+    end
+
     def return_request
       @return_request ||= OrderReturnRequest.where(:order_id => spree_order.id).first
     end

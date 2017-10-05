@@ -212,7 +212,7 @@ class ProductListItem extends Component {
           />
           <div className="u-line-height-medium">
             {
-              storeCreditOnly ?
+              storeCreditOnly && returnEligible ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     RETURNABLE FOR STORE CREDIT&nbsp;ONLY
