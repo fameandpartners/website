@@ -24,7 +24,6 @@ class PromotionsService
 
   def apply
     if apply_coupon_code
-      binding.pry
       order.reload
       @status = :ok
       true
