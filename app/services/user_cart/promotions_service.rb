@@ -165,7 +165,6 @@ class PromotionsService
         @message = I18n.t(:coupon_code_already_applied)
         return true
       end
-      binding.pry
 
       if order.adjustments.promotion.detect { |p| p.originator.promotion.code.include?(promotion.code)}.present? && promotion.code.downcase.include?('deliverydisc')
         #do splitting magic
