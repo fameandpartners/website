@@ -85,7 +85,7 @@ class OrderHistory extends Component {
                           orderData={orderData}
                           orderIndex={i}
                           showForm={false}
-                          returnEligible={!returnEligible}
+                          returnEligible={returnEligible}
                           returnRequested={false}
                           orderNumber={number}
                           lastChild={i === (notRequestedArray.length - 1)}

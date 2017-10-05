@@ -40,6 +40,8 @@ class UserCart::ProductsController < UserCart::BaseController
         end
       end
 
+      reapply_delivery_promo
+      
       @user_cart = user_cart_resource.read
 
       data = add_analytics_labels(@user_cart.serialize)
