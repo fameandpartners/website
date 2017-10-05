@@ -66,6 +66,10 @@ Spree::Order.class_eval do
     shipment_state == 'shipped'
   end
 
+  def item_count
+    line_items.reject{|p| p.style_name == 'RETURN_INSURANCE'}.sum{|product| product.quantity}
+  end
+
   def fabrication_status
     fabrication_states = line_items.collect {|i| i.fabrication.state if i.fabrication }.uniq
     return :processing if fabrication_states.include?(nil)

@@ -10,7 +10,7 @@ class  UserCart::UserCartResource
   def read
     UserCart::CartPresenter.new(
       products: cart_products,
-      item_count: cart_products.sum{|product| product.quantity},
+      item_count: cart_products.reject{|p| p.name == 'RETURN_INSURANCE'}.sum{|product| product.quantity},
       promocode: order.promocode,
       display_item_total: order.display_item_total,
       display_shipment_total: order_display_shipment_total,
