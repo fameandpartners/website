@@ -166,7 +166,6 @@ class ProductListItem extends Component {
 
     const {
       id,
-      returnWindowEnd,
       openEndedReturnReason,
       store_credit_only: storeCreditOnly,
       products_meta: productMeta,
@@ -192,6 +191,9 @@ class ProductListItem extends Component {
     const uiState = this.generateUIState();
     const { SHOW_FORM, SHOW_RETURN_BUTTON, SHOW_LOGISTICS_DATA, NOT_RETURNABLE } = uiState;
     const maxCharacterCount = 255;
+    if (name === 'RETURN_INSURANCE') {
+      return null;
+    }
     return (
       <div
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
