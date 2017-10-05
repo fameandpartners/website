@@ -55,6 +55,13 @@ class PromotionsService
       order.adjustments.promotion.each do |promo| 
         promo.delete
       end
+      order.adjustments.each do  |adj|
+        if !adj.eligible
+          order.adjustments.delete(adj)
+          adj.delete
+        end
+      end
+      order.save
     end
 
 
@@ -99,7 +106,7 @@ class PromotionsService
 
       promo.actions << action
       promo.save!
-
+      delete_old_promotions
       promo.activate(:order => order, :coupon_code => promo.code)
 
     end
@@ -111,6 +118,9 @@ class PromotionsService
         @message = I18n.t(:coupon_code_applied)
         true
       else
+        order.adjustments.promotion.delete(promo)
+        order.adjustments.delete(promo)
+        order.save
         @message = I18n.t(:coupon_code_better_exists)
         false
       end
@@ -155,8 +165,8 @@ class PromotionsService
         @message = I18n.t(:coupon_code_already_applied)
         return true
       end
-      
-      if order.adjustments.promotion.detect { |p| p.originator.promotion.code == promotion.code }.present? && promotion.code.downcase.include?('deliverydisc')
+
+      if order.adjustments.promotion.detect { |p| p.originator.promotion.code.include?(promotion.code)}.present? && promotion.code.downcase.include?('deliverydisc')
         #do splitting magic
         split_promotion
         return true
@@ -181,12 +191,14 @@ class PromotionsService
         @message = I18n.t(:coupon_code_applied)
         true
       elsif previous_promo.present? and promo.present?
-        order.adjustments.promotion.delete(promo) #remove inferior promo
+        order.adjustments.promotion.delete(promo) #remove inferior prom
+        order.adjustments.delete(promo)
         order.save
         @message = I18n.t(:coupon_code_better_exists)
         false
       elsif promo.present?
         order.adjustments.promotion.delete(promo) #remove ineligible promo
+        order.adjustments.delete(promo)
         order.save
         @message = I18n.t(:coupon_code_not_eligible)
         false
