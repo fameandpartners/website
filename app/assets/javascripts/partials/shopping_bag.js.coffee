@@ -111,7 +111,6 @@ window.ShoppingBag = class ShoppingBag
           shipping_message: @shipping_message,
           date_vars: @date_vars
         ))
-        console.log(@cart)
         @addEventToMasterPassButton()
         @rendered = true
     )
