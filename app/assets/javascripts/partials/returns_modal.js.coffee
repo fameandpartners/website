@@ -22,7 +22,7 @@ window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends Checko
                       '</div>'
     else if (opts == 'B')
       modalHeading = 'Don’t miss out on flexible returns.'
-      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer exchange or store credit. To experience our made-to-service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for exchange or store credit.'
+      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer exchange or store credit. To experience our made-to-order service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for exchange or store credit.'
       modalCheckbox = '<div class="row js-returns-abc-option-B">' +
                         $('.js-returns-abc-option-B').html() +
                       '</div>'
@@ -32,7 +32,7 @@ window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends Checko
       modalCheckbox = ''
     else if (opts == 'B-info')
       modalHeading = 'Want fully flexible returns?'
-      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer exchange or store credit. To experience our made-to-service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for exchange or store credit.'
+      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer exchange or store credit. To experience our made-to-order service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for exchange or store credit.'
       modalCheckbox = ''
 
     vex.dialog.buttons.NO.text = 'X'
