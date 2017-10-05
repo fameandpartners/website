@@ -84,7 +84,7 @@
 // require partials/style/popup
 
 // require partials/product_collection.js
-// require partials/product_customisation.js
+//require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 // require partials/email_capture_modal
