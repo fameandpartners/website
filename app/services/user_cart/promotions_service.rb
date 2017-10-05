@@ -33,6 +33,11 @@ class PromotionsService
     end
   end
 
+  def reapply
+    apply_coupon_code
+    apply_coupon_code
+  end
+
   private
 
     def promotion
