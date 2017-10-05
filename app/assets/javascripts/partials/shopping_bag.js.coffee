@@ -35,7 +35,9 @@ window.ShoppingBag = class ShoppingBag
       'couponFormSubmitHandler',
       'removeProductCustomizationHandler',
       'removeProductMakingOptionHandler',
-      'masterpassOpenHandler'
+      'masterpassOpenHandler',
+      'hasReturnInsurance',
+      'hasReturnDiscount'
     )
 
     $(options.toggle_link || '.js-header-toolbar .js-trigger-shopping-bag').on('click', @openHandler)
@@ -68,6 +70,15 @@ window.ShoppingBag = class ShoppingBag
     else if (makingOptions[0].name.toLowerCase() == 'deliver express')
       return '(+' + makingOptions[0].display_discount + ')'
 
+  hasReturnInsurance: () ->
+    if (@cart.data)
+      returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+      returnInsurance.length
+
+  hasReturnDiscount: () ->
+    if (@cart.data.promocode)
+      @cart.data.promocode.indexOf('DELIVERYDISC') > -1
+
   makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
     if (makingOptions[0])
       return makingOptions[0].delivery_period
@@ -93,11 +104,14 @@ window.ShoppingBag = class ShoppingBag
           country_code: @country_code,
           customizationPrice: @customizationPrice,
           makingOptionDescriptionTag: @makingOptionDescriptionTag,
+          hasReturnInsurance: @hasReturnInsurance,
+          hasReturnDiscount: @hasReturnDiscount,
           makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
           value_proposition: @value_proposition,
           shipping_message: @shipping_message,
           date_vars: @date_vars
         ))
+        console.log(@cart)
         @addEventToMasterPassButton()
         @rendered = true
     )
