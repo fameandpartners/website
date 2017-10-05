@@ -75,6 +75,10 @@ module Marketing
     def promotion?
       promo_codes.any?
     end
+    
+    def delivery_discount
+      order.item_total * 0.1
+    end
 
     def promo_codes
       @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
