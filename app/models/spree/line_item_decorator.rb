@@ -165,7 +165,7 @@ Spree::LineItem.class_eval do
   end
 
   def return_eligible_AC?
-    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
   end
 
   def return_eligible_B?
