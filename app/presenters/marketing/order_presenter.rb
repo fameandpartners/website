@@ -109,14 +109,35 @@ module Marketing
 
     def build_adjustments
       if order.adjustments.present?
-        order.adjustments.eligible.collect do |adjustments_item|
-          {
-            label:          adjustments_item.label,
-            display_amount: adjustments_item.display_amount.to_s
+        if order.adjustments.eligible.first.code.upcase.include? 'DELIVERYDISC'
+          arry = []
+          arry << {
+            label:          'Return Savings (10%)',
+            display_amount: "$#{('%.2f' %((spree_order.item_total * 0.1).to_f).round(2)).to_s}"
           }
+          arry << {
+            label:          'Additional Savings',
+            display_amount: order.display_promotion_total
+          }
+        else
+          order.adjustments.eligible.collect do |adjustments_item|
+            {
+              label:          adjustments_item.label,
+              display_amount: adjustments_item.display_amount.to_s
+            }
+          end
         end
       else
-        []
+        if order.line_items.any? {|x| x.product.style_name.downcase == 'return_insurance'}
+          [
+            {
+              label:          'Returns Deposit',
+              display_amount: '$25.00'
+            }
+          ]
+        else
+          []
+        end
       end
     end
 
