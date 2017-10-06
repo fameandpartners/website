@@ -305,8 +305,7 @@ class ProductListItem extends Component {
                   grayBackground
                   copy={(
                     <span>
-                      This order is not eligible for a refund
-                      because you elected the return discount of 10%.
+                      This order is not eligible for a refund.
                     </span>
                   )}
                 />
