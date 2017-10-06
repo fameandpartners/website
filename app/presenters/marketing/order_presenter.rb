@@ -109,7 +109,7 @@ module Marketing
 
     def build_adjustments
       if order.adjustments.present?
-        if order.adjustments.eligible.first.code.upcase.include? 'DELIVERYDISC'
+        if order.adjustments.eligible.first.label.upcase.include? 'DELIVERYDISC'
           arry = []
           arry << {
             label:          'Return Savings (10%)',
