@@ -294,6 +294,20 @@ module Contentful
         tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
         tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
 
+        # Hero tiles content
+        overlay_pids = (item.respond_to? :overlay_pids) ? item.overlay_pids : nil
+        desktop_image = (item.respond_to? :image) ? item.image.url : nil
+        mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
+        full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+
+        if full_width_content == 'desktop,mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'desktop'
+          full_width_content_class = 'u-forced-full-width-wrapper'
+        end
+
         {
           id: item.content_type.id,
           lg_item: lg_item,
@@ -305,7 +319,11 @@ module Contentful
           lg_items: lg_items,
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
-          tile_cta_position: tile_cta_position
+          tile_cta_position: tile_cta_position,
+          full_width_content_class: full_width_content_class,
+          overlay_pids: overlay_pids,
+          image: desktop_image,
+          mobile_image: mobile_image
         }
       end
 
