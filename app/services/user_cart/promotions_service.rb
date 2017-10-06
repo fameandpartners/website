@@ -35,7 +35,9 @@ class PromotionsService
 
   def reapply
     apply_coupon_code
+    order.reload
     apply_coupon_code
+    order.reload
   end
 
   private
