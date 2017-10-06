@@ -14,7 +14,8 @@ class OrderHistory extends Component {
     super(props);
     const { orderData } = this.props;
     const { items } = orderData;
-    const cleanItems = items.map(i => i.line_item);
+    let cleanItems = items.map(i => i.line_item);
+    cleanItems = cleanItems.filter(i => i.products_meta.name !== 'RETURN_INSURANCE');
     this.state = {
       orderData,
       orderArray: cleanItems,
