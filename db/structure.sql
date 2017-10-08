@@ -3360,7 +3360,8 @@ CREATE TABLE spree_line_items (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
-    old_price numeric(8,2)
+    old_price numeric(8,2),
+    delivery_date character varying(255)
 );
 
 
@@ -3616,7 +3617,8 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean DEFAULT false NOT NULL
+    orderbot_synced boolean DEFAULT false NOT NULL,
+    return_type character varying(255)
 );
 
 
@@ -9702,3 +9704,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
+
+INSERT INTO schema_migrations (version) VALUES ('20170908182740');
+
+INSERT INTO schema_migrations (version) VALUES ('20170927181851');
+
+INSERT INTO schema_migrations (version) VALUES ('20170928202521');
