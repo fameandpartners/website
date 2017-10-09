@@ -10,7 +10,7 @@ class CreateItGirlCompetitionPage < ActiveRecord::Migration
       curated:              'true',
       limit:                3,
       lookbook:             'true',
-      pids:                 %w(1339-red 1135-black 1341-burgundy).join(',')
+      pids:                 %w(1135-black 1334-black 1377-pale-pink 1287-black 1392-red 944-black).join(',')
     }
   end
 
