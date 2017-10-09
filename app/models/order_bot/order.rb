@@ -29,7 +29,6 @@ module OrderBot
 			@order_status = 'unconfirmed'
 			@shipping = 0 #TODO: Revist this. We currently bake in the shipping cost.
 			@order_total = (((adjustments) * line_items.count) + @subtotal)
-			@order_discount = per_item_discount_adjustment(line_items, order).abs * line_items.count
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)			
 			@order_lines = generate_order_lines(line_items, order)
@@ -37,6 +36,7 @@ module OrderBot
 			@internal_notes = check_for_special_care(order)
 			@order_notes = generate_tag_description(line_items)
 			unless first_line_item.product.name.downcase == 'return_insurance'
+				@order_discount = per_item_discount_adjustment(line_items, order).abs * line_items.count
 				@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
 			end
 
