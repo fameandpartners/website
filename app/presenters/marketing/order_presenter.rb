@@ -109,37 +109,43 @@ module Marketing
 
     def build_adjustments
       if order.adjustments.present?
-        if order.adjustments.eligible.first.label.upcase.include? 'DELIVERYDISC'
-          arry = []
-          arry << {
-            label:          'Return Savings (10%)',
-            display_amount: "$#{('%.2f' %((spree_order.item_total * 0.1).to_f).round(2)).to_s}"
-          }
-          arry << {
-            label:          'Additional Savings',
-            display_amount: order.display_promotion_total
-          }
-        else
-          order.adjustments.eligible.collect do |adjustments_item|
+        if order.adjustments.eligible.any? {|x| x.label.upcase.include? 'DELIVERYDISC'}
+          arry = order.adjustments.eligible.reject{ |x| x.label.upcase.include? 'DELIVERYDISC' }.collect do |adjustments_item|
             {
               label:          adjustments_item.label,
               display_amount: adjustments_item.display_amount.to_s
             }
           end
-        end
-      else
-        if order.line_items.any? {|x| x.product.style_name.downcase == 'return_insurance'}
-          [
+          if order.display_promotion_total.to_s != '$0.00'
+            arry << {
+              label:          'Additional Savings',
+              display_amount: order.display_promotion_total.to_s
+            }
+          end
+          arry << {
+            label:          'Return Savings (10%)',
+            display_amount: '$-' + delivery_discount[1..-1]
+          }
+        else
+          disp = order.adjustments.eligible.collect do |adjustments_item|
             {
+              label:          adjustments_item.label,
+              display_amount: adjustments_item.display_amount.to_s
+            }
+          end
+
+          if order.line_items.any? {|x| x.product.name.downcase == 'return_insurance'}
+            disp << {
               label:          'Returns Deposit',
               display_amount: '$25.00'
             }
-          ]
-        else
-          []
+          end
+
+          disp
         end
+      else
+        []
       end
     end
-
   end
 end
