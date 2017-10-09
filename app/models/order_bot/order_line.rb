@@ -7,7 +7,11 @@ module OrderBot
 			@product_sku = CustomItemSku.new(line_item).call
 			@quantity = quantity			
 			@product_taxes = generate_taxes(line_item, order, quantity)
-			@discount = per_item_discount_adjustment(order) * quantity
+			if line_item.product.name.downcase == 'return_insurance'
+				@discount = 0
+			else
+				@discount = per_item_discount_adjustment(order) * quantity
+			end
 
 			@price = line_item.price
 		end
@@ -16,8 +20,8 @@ module OrderBot
 		    tax_adj = order&.adjustments&.tax&.first
 
 		    unless tax_adj.nil?
-		    	tax_rate = Spree::TaxRate.find(tax_adj.originator_id)	    
-			    unless tax_rate.nil?
+		    	tax_rate = Spree::TaxRate.find(tax_adj.originator_id)	 
+			    unless tax_rate.nil? || line_item.product.name.downcase == 'return_insurance'
 
 					[{'tax_name' => "Tax", 'tax_rate' => tax_rate.amount, 'amount' => (line_item.price - per_item_discount_adjustment(order)) * tax_rate.amount * quantity}]
 				else

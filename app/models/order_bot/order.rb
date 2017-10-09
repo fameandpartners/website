@@ -11,7 +11,11 @@ module OrderBot
 			}
 			
 			first_line_item = line_items.first
-			adjustments = per_item_adjustment(line_items, order).to_f
+			if first_line_item.product.name.downcase == 'return_insurance'
+				adjustments = 0
+			else
+				adjustments = per_item_adjustment(line_items, order).to_f
+			end
 			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
 			@order_date	= order.completed_at
 			@orderbot_account_id = 2
