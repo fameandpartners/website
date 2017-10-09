@@ -440,7 +440,9 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
     get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
-    get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
+
+    get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
+
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
     get '/fashionista2014', to: redirect("/")

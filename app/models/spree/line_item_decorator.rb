@@ -161,7 +161,15 @@ Spree::LineItem.class_eval do
   end
 
   def store_credit_only_return?
-    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
+    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
+  end
+
+  def return_eligible_AC?
+    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  end
+
+  def return_eligible_B?
+    self.order.return_type == 'B' && self.order.line_items.any? {|x| x.product.name.downcase.include? "deliveryins"}
   end
 
   def window_closed?

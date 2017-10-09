@@ -45,7 +45,7 @@ class Products::CollectionsController < Products::BaseController
     @optimizely_opt_in = true
     @zopim_opt_out = true
     @filter = Products::CollectionFilter.read
-    @collection.use_auto_discount!(current_promotion.discount) if current_promotion
+    @collection.use_auto_discount!(current_promotion.discount) if current_promotion && current_promotion.code.downcase != 'deliverydisc'
 
     respond_to do |format|
       format.html { render collection_template }
