@@ -27,6 +27,7 @@ Spree::CheckoutController.class_eval do
     @optimizely_opt_in = true
     prepare_order
     find_payment_methods
+    update_line_item_delivery
     data_layer_add_to_cart_event
 
     unless signed_in?
@@ -49,7 +50,6 @@ Spree::CheckoutController.class_eval do
   def update
     set_order_site_version
     find_payment_methods
-
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
@@ -141,6 +141,8 @@ Spree::CheckoutController.class_eval do
 
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
+        @order.return_type = params[:return_type]
+        @order.save!
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
 
@@ -152,8 +154,8 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
-        OrderBotWorker.perform_async(@order.id)
-
+        #OrderBotWorker.perform_async(@order.id)
+       
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
@@ -398,6 +400,15 @@ Spree::CheckoutController.class_eval do
     'checkout'
   end
 
+
+  def update_line_item_delivery
+    if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs
+      @order.line_items.each do |item|
+        item.delivery_date = item.delivery_period_policy.delivery_period
+        item.save!
+      end
+    end
+  end
   # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
   def subscribe(user)
     EmailCapture.new({},

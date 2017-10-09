@@ -8,9 +8,8 @@ class CreateItGirlCompetitionPage < ActiveRecord::Migration
       title:                'Win a paid internship in LA',
       meta_description:     'Win $20,000 in prizes and a paid Los Angeles fashion internship with Fame and Partners. Enter now!',
       curated:              'true',
-      limit:                3,
       lookbook:             'true',
-      pids:                 %w(1339-red 1135-black 1341-burgundy).join(',')
+      pids:                 %w(1135-black 1334-black 1377-pale-pink 1287-black 1392-red 944-black).join(',')
     }
   end
 
@@ -26,7 +25,6 @@ class CreateItGirlCompetitionPage < ActiveRecord::Migration
       variables: {
         curated: landing_page_properties[:curated],
         hide_pagination_link: landing_page_properties[:hide_pagination_link],
-        limit: landing_page_properties[:limit],
         lookbook: landing_page_properties[:lookbook],
         pids: landing_page_properties[:pids]
       },

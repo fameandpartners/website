@@ -66,6 +66,10 @@ Spree::Order.class_eval do
     shipment_state == 'shipped'
   end
 
+  def item_count
+    line_items.reject{|p| p.style_name == 'RETURN_INSURANCE'}.sum{|product| product.quantity}
+  end
+
   def fabrication_status
     fabrication_states = line_items.collect {|i| i.fabrication.state if i.fabrication }.uniq
     return :processing if fabrication_states.include?(nil)
@@ -121,7 +125,11 @@ Spree::Order.class_eval do
   end
 
   def display_promotion_total
-    promotion_total = self.adjustments.credit.eligible.sum(:amount)
+    if self.adjustments.credit.eligible.any? {|x| x.originator.promotion.code.include?('DELIVERYDISC')}
+      promotion_total = self.adjustments.credit.eligible.sum(:amount) + (self.item_total * 0.1)
+    else
+      promotion_total = self.adjustments.credit.eligible.sum(:amount)
+    end
     Spree::Money.new(promotion_total, { currency: currency })
   end
 
@@ -143,7 +151,11 @@ Spree::Order.class_eval do
 
   def promocode
     if promo = coupon_code_added_promotion
-      promo.code.to_s.upcase
+      if promo.code.include?('DELIVERYDISC') && promo.code != 'DELIVERYDISC'
+        return promo.code.to_s.upcase.split('DELIVERYDISC').first + 'DELIVERYDISC'
+      else
+        return promo.code.to_s.upcase
+      end
     end
   end
 
@@ -353,12 +365,21 @@ Spree::Order.class_eval do
     end
   end
 
+  def return_eligible_AC?
+    self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  end
+
+  def return_eligible_B?
+    self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "deliveryins"}
+  end
+
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
     json['final_return_by_date'] = (delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
+    json['return_eligible'] = self.return_eligible_B? || self.return_eligible_AC?
     json
   end
 
