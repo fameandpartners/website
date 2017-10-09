@@ -169,7 +169,7 @@ Spree::LineItem.class_eval do
   end
 
   def return_eligible_B?
-    self.order.return_type == 'B' && self.order.line_items.any? {|x| x.product.name.downcase.include? "deliveryins"}
+    self.order.return_type == 'B' && self.order.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"}
   end
 
   def window_closed?
