@@ -9,6 +9,7 @@ module OrderBot
 				'Supertex' => 'SUPERTEX',
 				'Elizabeth' => 'ELIZABETH'
 			}
+			
 			first_line_item = line_items.first
 			adjustments = per_item_adjustment(line_items, order).to_f
 			@reference_order_id = order.number + '-' + line_items.map(&:id).join('-')
@@ -31,7 +32,9 @@ module OrderBot
 			@other_charges = generate_other_charges(per_item_shipping_adjustment(line_items, order))
 			@internal_notes = check_for_special_care(order)
 			@order_notes = generate_tag_description(line_items)
-			@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
+			unless first_line_item.product.name.downcase == 'return_insurance'
+				@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
+			end
 
 		end
 
