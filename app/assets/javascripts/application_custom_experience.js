@@ -1,6 +1,7 @@
 //---------
 // Our code
 //---------
+//= require libs/underscore-min
 //= require libs/typekit.min
 
 //--------------------------
@@ -8,7 +9,6 @@
 //--------------------------
 //= require helpers
 //= require partials/helpers/site_version
-
 
 //= require partials/email_newsletter_subscriber
 //= require partials/product_collection_image_hover.js
