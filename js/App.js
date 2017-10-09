@@ -12,7 +12,7 @@ import Onboarding from './Onboarding';
 // Polyfills
 import win from './windowPolyfill';
 
-import '../css/shopping_spree.scss';
+// import '../css/shopping_spree.scss';
 
 class ShoppingSpree extends Component {
   constructor(props) {
