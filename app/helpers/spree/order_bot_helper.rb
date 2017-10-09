@@ -58,12 +58,15 @@ module Spree
     end
 
     def create_new_product_associate_order_guide(line_item)
+
       order_bot_product_id = get_or_create_product(line_item)
 
       #order_bot_product_id = 2882372
       guide_id = client.get_order_guide_for_currency(line_item.currency)
       client.create_new_order_guide(guide_id, order_bot_product_id, line_item.price)
-      generate_tags_for_line_item(line_item, order_bot_product_id)
+      unless line_item.product.name.downcase == 'return_insurance'
+        generate_tags_for_line_item(line_item, order_bot_product_id)
+      end
     end
 
     def generate_tags_for_line_item(line_item, order_bot_product_id)
