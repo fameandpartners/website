@@ -131,7 +131,7 @@ module Spree
     end
 
     def display_item_total
-      Spree::Money.new(item_total, { :currency => currency })
+      Spree::Money.new(line_items.reject {|x| x.product.name.downcase == 'return_insurance'}.sum(&:amount), { :currency => currency })
     end
 
     def display_adjustment_total
