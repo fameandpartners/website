@@ -15,32 +15,25 @@ export default class ChatBar extends FirebaseComponent {
     this.detectEnterKey = this.detectEnterKey.bind(this);
   }
 
-  addProductToFirebase(productID, productName, productDescription, productPrice,
-    productImage, productUrl, color, customizations) {
-    const newMessage = this.chatsDB.push();
-    newMessage.set({ type: 'share_dress',
-      value:
-      {
-        name: productName,
-        price: productPrice,
-        product_id: productID,
-        url: productUrl,
-        color: color,
-        image: productImage,
-        customizations,
-        description: productDescription,
-      },
-      created_at: firebase.database.ServerValue.TIMESTAMP,
-      from:
-      {
-        name: this.props.name,
-        email: this.props.email,
-        icon: this.props.icon,
-      },
-    },
-
-                  );
-        
+    addProductToFirebase(productID,
+                         productName,
+                         productDescription,
+                         productPrice,
+                         productImage,
+                         productUrl,
+                         color,
+                         customizations) {
+        this.createShareDressMessage( this.props.name,
+                                      this.props.email,
+                                      this.props.icon,
+                                      productID,
+                                      productName,
+                                      productDescription,
+                                      productPrice,
+                                      productImage,
+                                      productUrl,
+                                      color,
+                                      customizations );
     }
     
     initializeFirebase()
