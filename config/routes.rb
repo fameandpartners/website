@@ -407,10 +407,6 @@ FameAndPartners::Application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-
-    resource :shopping_sprees, only: [:create]
-
-    get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
     
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
