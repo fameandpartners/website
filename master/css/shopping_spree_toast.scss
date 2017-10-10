@@ -1,0 +1,44 @@
+@import 'variables';
+
+.shopping-spree-wrapper .toast-container {
+  width: 250px;
+  background-color: transparent;
+}
+
+.shopping-spree-wrapper .toast-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  // @include keyframes(cd-fade-in)
+  // {
+  //     0%
+  //     {
+  //         opacity: 0;
+  //     }
+  //
+  //     25%
+  //     {
+  //         opacity: 1;
+  //     }
+  //
+  //     100%
+  //     {
+  //         opacity: 0;
+  //     }
+  // }
+}
+
+.shopping-spree-wrapper .toast-container ul .toast-text {
+  opacity: 1;
+  animation-duration: 5s;
+  animation-name: cd-fade-in;
+  padding-top: 15px;
+  background-color: $c-white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 9px;
+  border-color: $c-medium-gray;
+  padding: 10px 12px 17px 23px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}

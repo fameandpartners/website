@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:fameandpartners/shopping-spree.git
+	branch = master
+	commit = 39bdec8e1a7ffb52e762f73a4780b295725690df
+	parent = 6a92ded691e6635aba1e7dcbfb68491e260749bf
+	cmdver = 0.3.1
