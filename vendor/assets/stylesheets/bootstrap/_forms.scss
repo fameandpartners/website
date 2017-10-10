@@ -361,7 +361,8 @@ input[type="checkbox"] {
     padding: $padding-large-vertical $padding-large-horizontal;
     font-size: $font-size-large;
     line-height: $line-height-large;
-    border-radius: $input-border-radius-large;
+    border-radius: 0;
+    border: 1px solid black;
   }
   select.form-control {
     height: $input-height-large;
