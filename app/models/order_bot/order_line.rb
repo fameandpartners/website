@@ -43,7 +43,7 @@ module OrderBot
 			end
 			manual_order_adjustment = order&.adjustments.select {|o| o.label.downcase.include?('exchange') ||o.label.downcase.include?('manual')}
 			discount += manual_order_adjustment.inject(0){|sum, item| sum + item.amount.abs}
-			discount/order.line_items.count
+			discount/order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.count
 		end
 
 	end

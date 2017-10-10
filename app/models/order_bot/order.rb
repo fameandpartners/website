@@ -29,7 +29,6 @@ module OrderBot
 			@order_status = 'unconfirmed'
 			@shipping = 0 #TODO: Revist this. We currently bake in the shipping cost.
 			@order_total = (((adjustments) * line_items.count) + @subtotal)
-			@order_discount = per_item_discount_adjustment(line_items, order).abs * line_items.count
 			@shipping_address = OrderBot::ShippingAddress.new(order.ship_address)
 			@billing_address = OrderBot::BillingAddress.new(order.bill_address)			
 			@order_lines = generate_order_lines(line_items, order)
@@ -37,6 +36,7 @@ module OrderBot
 			@internal_notes = check_for_special_care(order)
 			@order_notes = generate_tag_description(line_items)
 			unless first_line_item.product.name.downcase == 'return_insurance'
+				@order_discount = per_item_discount_adjustment(line_items, order).abs * line_items.count
 				@distribution_center_id = get_distribution_center(order_bot_factory_hash[first_line_item.product.factory.name])
 			end
 
@@ -108,13 +108,13 @@ module OrderBot
 		end
 
 		def per_item_adjustment(line_items, order)
-			# deal with tax adjustments
+			# deal with tax adjustments'
 			line_item_taxes = per_item_tax_adjustment(line_items)
 
-			order_taxes = per_item_tax_adjustment(order.line_items)
+			order_taxes = per_item_tax_adjustment(order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'})
 
 			# deal with all other adjustments
-			splittable_adjustment = per_item_tax_free_adjustment(order_taxes['total_tax'], order.line_items, order)
+			splittable_adjustment = per_item_tax_free_adjustment(order_taxes['total_tax'], order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}, order)
 
 			(line_item_taxes['total_tax']/line_items.count) + splittable_adjustment
 		end
@@ -150,7 +150,7 @@ module OrderBot
 			end
 			manual_order_adjustment = order&.adjustments.select {|o| o.label.downcase.include?('exchange') ||o.label.downcase.include?('manual')}
 			discount += manual_order_adjustment.inject(0){|sum, item| sum + item.amount.abs}
-			discount/order.line_items.count
+			discount/order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.count
 		end
  		
  		def per_item_tax_free_adjustment(total_tax, line_items, order)
