@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import request from 'superagent';
 
@@ -16,7 +17,7 @@ export default class Onboarding extends React.Component
         let context = this;
         request.post( '/shopping_sprees' ).
             set('Content-Type', 'application/json').
-            send( 
+            send(
                     {
                         name: this.nameInput.value,
                         email: this.emailInput.value,
@@ -32,13 +33,13 @@ export default class Onboarding extends React.Component
                    }
                  );
     }
-    
+
     render()
     {
         return(
                 <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true">
               <div id="shopping-spree-modal-content" className="container">
-                <a className="btn-close med" alt="Close" onClick={this.props.close}></a>              
+                <a className="btn-close med" alt="Close" onClick={this.props.close}></a>
                 <div id="top-headline" className="welcome-headline row">
                   <div className="col-xs-12 text-center">
                     Welcome to
@@ -49,7 +50,7 @@ export default class Onboarding extends React.Component
                     Partner Shop.
                   </div>
                 </div>
-                
+
                 <div id="dress-one" className="row equal">
                   <div id="dress-image-one" className="col-md-4 col-md-pull-0 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress1.jpg" alt=""/>
@@ -68,7 +69,7 @@ export default class Onboarding extends React.Component
                     </div>
                   </div>
                 </div>
-                
+
                 <div id="dress-two" className="row equal">
                   <div className="col-md-4 col-md-push-4 col-xs-4 col-xs-push-2 text-center vertical-align">
                     <div className="body-text mobile">
@@ -110,37 +111,38 @@ export default class Onboarding extends React.Component
                     <div className="body-text text-center dress-three-percent-text">
                       30%
                     </div>
-                  </div>                  
-                </div>
-
-                <div id="enter-email-text" className="row">
-                  <div className="base-text text-center col-xs-8 col-xs-push-2">
-                    Enter your name and email to start!
                   </div>
                 </div>
 
-                <div className="row top-padding-sm bottom-padding-sm">
-                  <div className="col-xs-12 col-lg-2 col-lg-push-5">
-                    <input className="form-control input-lg" type="text" placeholder="Enter your name" ref={(input) => { this.nameInput = input; }}></input>
+                <div className="shspree-signup-section">
+                  <div id="enter-email-text" className="row">
+                    <div className="base-text text-center col-xs-8 col-xs-push-2">
+                      Enter your name and email to start!
+                    </div>
+                  </div>
+
+                  <div className="row top-padding-sm bottom-padding-sm">
+                    <div className="col-xs-12 col-lg-5 float-none margin--center">
+                      <input className="form-control input-lg" type="text" placeholder="Enter your name" ref={(input) => { this.nameInput = input; }}></input>
+                    </div>
+                  </div>
+
+                  <div className="row bottom-padding-sm">
+                    <div className="col-xs-12 col-lg-5 float-none margin--center">
+                      <input className="form-control input-lg" type="text" placeholder="Enter your email" ref={(input) => { this.emailInput = input; }}></input>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div  className="col-xs-12 col-lg-5 float-none margin--center">
+                      <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="row bottom-padding-sm">
-                  <div className="col-xs-12 col-lg-2 col-lg-push-5">
-                    <input className="form-control input-lg" type="text" placeholder="Enter your email" ref={(input) => { this.emailInput = input; }}></input>
-                  </div>
-                </div>
-                
-                <div className="row">
-                  <div  className="col-xs-12 col-lg-2 col-lg-push-5 no-gutter-mobile">
-                    <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
-                  </div>
-                </div>
-                
+
               </div>
-              
-            </div>                        
+            </div>
         );
-    }   
+    }
 
 }
