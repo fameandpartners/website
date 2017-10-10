@@ -14,7 +14,7 @@ module.exports = {
         CollectionFilterSortApp: './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx',
         GuestReturnsApp: './app/assets/javascripts/storefront/startup/GuestReturnsApp.jsx',
         ReturnsApp: './app/assets/javascripts/storefront/startup/ReturnsApp.jsx',
-        ShoppingSpreeApp: './app/assets/javascripts/shopping_spree/App.js',
+        ShoppingSpreeApp: './app/shopping-spree/js/App.js',
       },
     },
     src: `${baseDir}/*.jsx`,
