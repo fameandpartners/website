@@ -116,14 +116,14 @@ $('.js-trigger-empty-cart-modal').modal({
       </div>
       <div class="col-xs-7">
         <p class="ReturnOption__copy font-sans-serif">
-          <strong><%= @cart.delivery_discount %> off</strong>
-          of your order when you opt out of returns
+          Take <strong><%= @cart.delivery_discount %> off</strong>
+          of your order total when you opt out of returns
         </p>
       </div>
       <div class="col-xs-4">
         <p class="ReturnOption__copy font-sans-serif">
           <a href="javascript:;" id="A-info" class="js-returns-learn-more ReturnOption__copy--link">
-          Learn more
+            Learn more
           </a>
         </p>
       </div>
@@ -146,8 +146,8 @@ $('.js-trigger-empty-cart-modal').modal({
       </div>
       <div class="col-xs-7">
         <p class="ReturnOption__copy font-sans-serif">
-          <strong>Add $25</strong>
-          for the option to return
+          Add <strong>$25</strong>
+          for fully flexible returns
         </p>
       </div>
       <div class="col-xs-4">
