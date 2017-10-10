@@ -14,6 +14,7 @@ Spree::OrdersController.class_eval do
 
   # todo: merge order & user_cart => completed order resource
   def show
+    @optimizely_opt_in = true
 
     # this is a security hole
     order = ::Spree::Order.find_by_number!(params[:id])
