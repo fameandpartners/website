@@ -2,43 +2,44 @@ import React from 'react';
 import * as firebase from 'firebase';
 import FirebaseComponent from './FirebaseComponent';
  
-export default class ChatBar extends FirebaseComponent
-{
-    constructor( props )
-    {
-        super( props );
-        this.initializeFirebase();
-        this.sendMessage = this.sendMessage.bind(this);
-        this.addProductToFirebase = this.addProductToFirebase.bind(this);
-        window.addToShoppingSpree = this.addProductToFirebase;
-        this.detectEnterKey = this.detectEnterKey.bind( this );
-    }
+// Polyfills
+import win from './windowPolyfill';
 
-    addProductToFirebase( product_id, product_name, product_description, product_price,
-                          product_image, product_url, color, customizations )
-    {
-        let newMessage = this.chatsDB.push();
-        newMessage.set( { type: 'share_dress',
-                          value:
-                          {
-                              name: product_name,
-                              price: product_price,
-                              product_id: product_id,
-                              url: product_url,
-                              color: color,
-                              image: product_image,
-                              customizations: customizations,
-                              description: product_description
-                          },
-                          created_at: firebase.database.ServerValue.TIMESTAMP,
-                          from:
-                          {
-                              name: this.props.name,
-                              email: this.props.email,
-                              icon: this.props.icon
-                          }
-                        }
-                      );
+export default class ChatBar extends FirebaseComponent {
+  constructor(props) {
+    super(props);
+    this.initializeFirebase();
+    this.sendMessage = this.sendMessage.bind(this);
+    this.addProductToFirebase = this.addProductToFirebase.bind(this);
+    win.addToShoppingSpree = this.addProductToFirebase;
+    this.detectEnterKey = this.detectEnterKey.bind(this);
+  }
+
+  addProductToFirebase(productID, productName, productDescription, productPrice,
+    productImage, productUrl, color, customizations) {
+    const newMessage = this.chatsDB.push();
+    newMessage.set({ type: 'share_dress',
+      value:
+      {
+        name: productName,
+        price: productPrice,
+        product_id: productID,
+        url: productUrl,
+        color: color,
+        image: productImage,
+        customizations,
+        description: productDescription,
+      },
+      created_at: firebase.database.ServerValue.TIMESTAMP,
+      from:
+      {
+        name: this.props.name,
+        email: this.props.email,
+        icon: this.props.icon,
+      },
+    },
+
+                  );
         
     }
     
