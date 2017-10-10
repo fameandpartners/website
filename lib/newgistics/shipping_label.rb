@@ -1,4 +1,6 @@
-module Newgistics
+include Newgistics::NewgisticsHelper
+
+ module Newgistics
   class ShippingLabel
     attr_accessor :label_url,
                   :carrier,
@@ -12,10 +14,11 @@ module Newgistics
       @address_1 = address.address1
       @address_2 = address.address2
       @city = address.city
-      @state = address.state.abbr
+      @state = address.state&.abbr
       @country = address.country.iso
       @zip = address.zipcode
       @return_id = return_id
+      @address = address
     end
 
     def fetch_shipping_label_from_api
@@ -57,6 +60,7 @@ module Newgistics
     end
 
     def make_request_map
+      newgistics_conf = get_facitily_by_location(@address)
       {
         "clientServiceFlag" => "Standard",
         "consumer" => {
@@ -65,9 +69,9 @@ module Newgistics
           "PrimaryEmailAddress" => @email
         }.merge(make_address_map),
         "deliveryMethod" => "SelfService",
-        "dispositionRuleSetId" => configatron.newgistics.disposition_rule_set,
+        "dispositionRuleSetId" => newgistics_conf['rule_set']
         "labelCount" => 1,
-        "merchantID" => configatron.newgistics.merchant_id
+        "merchantID" => newgistics_conf['merchant_id']
       }.merge(make_return_id_map)
     end
 
