@@ -72,6 +72,8 @@ configatron.newgistics do |newgistics|
   newgistics.merchant_id = ENV['NEWGISTICS_MERCHANT_ID']
   newgistics.disposition_rule_set = ENV['NEWGISTICS_DISPOSITION_RULE_SET'].to_i
   newgistics.uri = 'https://api.newgistics.com/WebAPI/Shipment/'
+  newgistics.returns_uri = ENV['NEWGISTICS_RETURNS_API']
+  newgistics.returns_api_key = ENV['NEWGISTICS_RETURNS_API_KEY']
 end
 
 configatron.contentful do |contentful|
