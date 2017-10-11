@@ -6,6 +6,7 @@ import Onboarding from './Onboarding';
 import ShareModal from './ShareModal';
 import AddToCartModal from './AddToCartModal';
 import win from './windowPolyfill';
+import Modal from 'react-modal';
 
 export default class ShoppingSpree extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export default class ShoppingSpree extends React.Component {
     this.showAddToCartModal = this.showAddToCartModal.bind(this);
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
     this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
+    this.updateExitModalStatus = this.updateExitModalStatus.bind(this);
     this.showShareModal = this.showShareModal.bind(this);
     this.startOnboarding = this.startOnboarding.bind(this);
     this.closeOnboarding = this.closeOnboarding.bind(this);
@@ -57,6 +59,7 @@ export default class ShoppingSpree extends React.Component {
       minimize,
       showAddToCartModal: false,
       dressAddingToCart: null,
+      showExitModal: false,
     };
   }
 
@@ -82,7 +85,14 @@ export default class ShoppingSpree extends React.Component {
         showAddingToCartModal: false,
         dressAddingToCart: null,
       },
-        );
+    );
+  }
+
+  updateExitModalStatus() {
+    const { showExitModal } = this.state;
+    this.setState({
+      showExitModal: !showExitModal
+    })
   }
 
   doneShoppingSpree() {
@@ -92,8 +102,9 @@ export default class ShoppingSpree extends React.Component {
     this.setState(
       {
         display: 'none',
+        showExitModal: false,
       },
-        );
+    );
   }
 
   showShareModal() {
@@ -119,14 +130,14 @@ export default class ShoppingSpree extends React.Component {
       },
     )
   }
-      
+
   doneOnboarding(email, name, icon, shoppingSpreeId)
   {
       this.cookies.set('shopping_spree_name', name);
       this.cookies.set('shopping_spree_icon', icon);
       this.cookies.set('shopping_spree_email', email);
       this.cookies.set('shopping_spree_id', shoppingSpreeId);
-      
+
       this.setState(
           {
               display: 'share',
@@ -159,19 +170,47 @@ export default class ShoppingSpree extends React.Component {
                 }
         {
                 this.state.display === 'chat' &&
-                <Drawer firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closed={this.state.minimize} showAddToCartModal={this.showAddToCartModal} doneShoppingSpree={this.doneShoppingSpree} showShareModal={this.showShareModal} />
+                <Drawer
+                  firebaseAPI={this.props.firebaseAPI}
+                  firebaseDatabase={this.props.firebaseDatabase}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  name={this.state.name}
+                  email={this.state.email}
+                  icon={this.state.icon}
+                  closed={this.state.minimize}
+                  showAddToCartModal={this.showAddToCartModal}
+                  doneShoppingSpree={this.doneShoppingSpree}
+                  howShareModal={this.showShareModal}
+                  updateExitModalStatus={this.updateExitModalStatus} />
 
             }
         {
                 this.state.display === 'share' &&
                 <ShareModal nextStep={this.doneSharing} firebaseNodeId={this.state.firebaseNodeId} />
-            }
-
+        }
         {
-                this.state.display === 'onboarding' &&
-                <Onboarding firebaseDatabase={this.props.firebaseDatabase} doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
-
-            }
+          this.state.showExitModal &&
+            <Modal
+              isOpen={true}
+              onRequestClose={() => false}
+              className="ExitModal font-sans-serif"
+            >
+              <p
+                onClick={this.updateExitModalStatus}
+                className="font-sans-serif ExitModal__closeIcon">
+                  &times;
+              </p>
+              <p className="headline font-sans-serif">Are you sure you want to exit?</p>
+              <div className="ExitModal__buttonContainer">
+                <span onClick={this.updateExitModalStatus} className="btn btn-lrg">GO BACK</span>
+                <span onClick={this.doneShoppingSpree} className="btn btn-black btn-lrg">EXIT</span>
+              </div>
+            </Modal>
+        }
+        {
+            this.state.display === 'onboarding' &&
+            <Onboarding firebaseDatabase={this.props.firebaseDatabase} doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
+        }
       </div>
     );
   }
