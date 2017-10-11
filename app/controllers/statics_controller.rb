@@ -15,6 +15,10 @@ class StaticsController < ApplicationController
     @contact = Contact.new(site_version: current_site_version.code)
   end
 
+  def faqs
+    @optimizely_opt_in = true
+  end
+
   def fashionista_winner
     @title = "Fashionista 2014 Winner"
     @description = "Fashionista 2014 Winner"
