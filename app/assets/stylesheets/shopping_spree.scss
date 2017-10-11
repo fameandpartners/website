@@ -13,10 +13,11 @@ $header_height: 68px;
 $chat_bar_height: 55px;
 $chat_bar_header_height: 22px;
 
-.shopping-spree
+#shopping-spree
 {
-    font-family: $font-heading;
+    font-family: $font-family-secondary;
     font-weight: 400;
+    font-size: 14px;
 
     .shopping-spree-error
     {
@@ -31,7 +32,7 @@ $chat_bar_header_height: 22px;
     {
         text-decoration: underline;
     }
-    
+
     .shopping-spree-headline
     {
         font-size: 18px;
@@ -41,7 +42,7 @@ $chat_bar_header_height: 22px;
     {
         font-size: 24px;
     }
-    
+
     .center-button-text
     {
         padding:0px;
@@ -49,7 +50,7 @@ $chat_bar_header_height: 22px;
         justify-content: center;
         align-items: center;
     }
-    
+
     .no-right-gutter
     {
         margin-right: 0;
@@ -87,55 +88,64 @@ $chat_bar_header_height: 22px;
         padding-left: 0;
         padding-right: 0;
     }
-    
+
 }
 
 
 .shopping-spree-wrapper
 {
+    cursor: pointer;
     position: fixed;
-    top: 0px;
-    right: 0px;
     overflow: hidden;
     z-index: 999;
+    height: 100%;
+    max-width: 524px;
+    min-width: 360px;
+    width: 36%;
+    right: 0;
+    top: 0;
 
 
     .shopping-spree-container
     {
         @extend .shopping-spree;
-        background-color: white;
-        width: 500px;
+        width: 100%;
         height: 100%;
+        background: transparent;
         color: black;
-        
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        &.open {
+          background: white;
+        }
+
         .equal
         {
             display: flex;
             flex-wrap: wrap;
-        }    
+        }
 
-        
+
         .header
         {
             background-color: white;
             text-align: center;
-            font-size: 16px;
-            border-bottom: 1px;
-            border-bottom-color: #979797;
-            border-bottom-style: solid;
-            border-top: 1px;
-            border-top-color: #979797;
-            border-top-style: solid;
+            font-size: 1em;
+            box-shadow: 1px 0 4px -1px #979797;
             height: $header_height;
-            @extend .vertical-align;        
+            @extend .vertical-align;
         }
-        
+
         .full-toggle-btn
         {
             display: none;
             cursor: pointer;
         }
-        
+
         .icon-bag
         {
             cursor: pointer;
@@ -144,13 +154,13 @@ $chat_bar_header_height: 22px;
 
         .toggle-btn
         {
-            display: block;       
+            display: block;
             cursor: pointer;
             z-index: 10 !important;
             color: #000;
             padding-bottom: 3px;
         }
-        
+
         .open-caret
         {
             background-color: white;
@@ -167,7 +177,7 @@ $chat_bar_header_height: 22px;
             }
 
             &:after
-            { 
+            {
                 content: '';
                 position: absolute;
                 left: 20px;
@@ -176,22 +186,22 @@ $chat_bar_header_height: 22px;
                 border-top: 7px solid transparent;
                 border-bottom: 7px solid transparent;
             }
-            
+
         }
-        
+
         .chat-list
         {
             overflow-x: hidden;
-
+            padding-bottom: 20px;
             ul
             {
                 list-style-type: none;
                 padding:0;
             }
-            
+
             .chat-header
             {
-                font-size: 14px;
+                margin: 3px 0 0 0;
                 .header-name
                 {
                     color: #979797;
@@ -199,16 +209,28 @@ $chat_bar_header_height: 22px;
             }
         }
 
+        .chat-list-exit {
+          margin-right: 25px;
+        }
+
+        .link {
+          color: black;
+          text-decoration: underline;
+        }
+
         .chat-bar
         {
-            height: 55px;
+            width: 100%;
+            height: 45px;
+            left: 0;
+            bottom: 0;
+            position: absolute;
             .shoppingSpreeTextInput
             {
                 height: 100%;
                 width: 100%;
                 border-color: #979797;
                 border-width: 1px;
-                font-size: 20px;
                 padding-left: 20px;
             }
 
@@ -224,11 +246,12 @@ $chat_bar_header_height: 22px;
 
         .chat-content
         {
+            background: white;
             overflow-y: auto;
             overflow-x: hidden;
             height: calc( 100vh - #{$header_height} - #{$chat_bar_height} - #{$chat_bar_header_height} );
         }
-        
+
         &.collapsed
         {
             height: auto;
@@ -240,10 +263,14 @@ $chat_bar_header_height: 22px;
             {
                 display: none;
             }
-            
+
         }
-        
-        
+
+
+    }
+
+    .icon-bag {
+      vertical-align: text-bottom;
     }
 }
 
@@ -264,33 +291,37 @@ $chat_bar_header_height: 22px;
     .shopping-spree-wrapper
     {
         position: fixed;
-        top: auto;
+        top: 0;
         bottom: 0px;
         height: auto;
         width: 100%;
-        
+
     }
-    
+
     .shopping-spree-container
     {
         width: 100%;
-        
+        position: absolute;
+        right: 0;
+        top: 40px;
+        background: transparent;
+
         .shoppingSpreeTextInput
         {
             font-size: 14px;
         }
-        
+
         &.open
         {
             min-height: 100%;
         }
-        
+
         .btn
         {
             padding: 10px 20px;
-            font-size: 14px;            
+            font-size: 14px;
         }
-        
+
         .open-caret
         {
             background-color: white;
@@ -315,9 +346,9 @@ $chat_bar_header_height: 22px;
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
             }
-            
+
         }
-        
+
         .closed-caret
         {
             background-color: white;
@@ -342,19 +373,19 @@ $chat_bar_header_height: 22px;
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
             }
-            
+
         }
-        
+
         .header
         {
             text-align: left !important;
             font-size: 16px;
             padding-left: 20px;
         }
-        
+
     }
 
-    
+
 }
 
 @media (min-width: 767px)
@@ -364,20 +395,24 @@ $chat_bar_header_height: 22px;
     {
         &.collapsed
         {
+            width: 250px;
+            min-width: inherit;
             top: 40px;
-            right: 20px;
+            right: 10px;
+            max-height: 45px;
         }
-        
-        
+
+
         .shopping-spree-container
         {
-            
+
             &.collapsed
             {
-                width: 250px;            
-                //            box-shadow: 0px 0px 15px #888888;
-                border-radius: 9px;            
-                
+                border-radius: 9px;
+                margin: 0 0 0 auto;
+                height: auto;
+                top: 0;
+
                 .header
                 {
                     height: 44px;
@@ -386,28 +421,26 @@ $chat_bar_header_height: 22px;
                     border-radius: 9px;
                     border-color: #888888;
                 }
-                
+
                 .toggle-btn
                 {
-                    display: none; 
-                    
+                    display: none;
+
                 }
-                
+
                 .full-toggle-btn
                 {
-                    background-color: red;
                     display: block;
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 80%;
                     height: 100%;
                     background-color: transparent;
                     z-index: 1000;
-                    
+
                 }
             }
-            
+
             .chat-list
             {
                 .chat-content
