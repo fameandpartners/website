@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import * as firebase from 'firebase';
 
@@ -30,7 +31,7 @@ export default class ChatList extends FirebaseComponent
         {
             return this.state.messages[this.state.messages.length - 1].props.email === email;
         }
-        
+
     }
     addChatMessage( data )
     {
@@ -41,7 +42,7 @@ export default class ChatList extends FirebaseComponent
                 {
                     messages:
                     this.state.messages.concat([<TextMessage key={data.key}
-                                                text={data.val().value} 
+                                                text={data.val().value}
                                                 iconNumber={parseInt(data.val().from.icon)}
                                                 name={data.val().from.name}
                                                 email={data.val().from.email}
@@ -50,14 +51,14 @@ export default class ChatList extends FirebaseComponent
                 }
             );
             break;
-            
+
             case 'welcome_message':
             break;
-            
+
             case 'share_dress':
             this.setState(
                 {
-                    messages: 
+                    messages:
                     this.state.messages.concat([<DressMessage key={data.key}
                                                 iconNumber={data.val().from.icon}
                                                 name={data.val().from.name}
@@ -71,7 +72,7 @@ export default class ChatList extends FirebaseComponent
                 }
             );
             break;
-            
+
             case 'joined':
             this.setState(
                 {
@@ -85,13 +86,13 @@ export default class ChatList extends FirebaseComponent
                         ]
                     ),
                     updateCount: this.state.updateCount + 1
-                    
+
                 }
             );
-            
+
             break;
-            
-            
+
+
             default:
             console.log( "unknown card type: " + data.val().type );
 
@@ -105,7 +106,7 @@ export default class ChatList extends FirebaseComponent
     {
         this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
     }
-    
+
     startListeningToFirebase()
     {
         super.connectToFirebase();
@@ -116,7 +117,7 @@ export default class ChatList extends FirebaseComponent
 
     stopListeningToFirebase()
     {
-        this.chatsDB.off( 'child_added', this.addChatMessage );        
+        this.chatsDB.off( 'child_added', this.addChatMessage );
     }
 
     componentDidUpdate()
@@ -126,14 +127,14 @@ export default class ChatList extends FirebaseComponent
 
     componentWillMount()
     {
-        this.startListeningToFirebase();             
+        this.startListeningToFirebase();
     }
 
     componentWillUnmount()
     {
         this.stopListeningToFirebase();
     }
-    
+
     componentDidMount()
     {
         this.scrollToBottom();
@@ -151,12 +152,15 @@ export default class ChatList extends FirebaseComponent
                 <div className="col-xs-4 header-name">
                   {this.props.name}
                 </div>
-                <div onClick={this.props.doneShoppingSpree} className="col-xs-1 col-xs-push-3" role="button">
-                  Exit
+                <div className="col-xs-8 header-name text-right">
+                  <span className="chat-list-exit link" onClick={this.props.doneShoppingSpree} role="button">
+                    Exit
+                  </span>
+                  <span className="link" onClick={this.props.showShareModal} role="button">
+                    Invite other friends!
+                  </span>
                 </div>
-                <div onClick={this.props.showShareModal} className="col-xs-4 col-xs-push-3 text-right" role="button">
-                  Invite other friends!
-                </div>
+
               </div>
               <div className="row">
                 <div className="chat-content">

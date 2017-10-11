@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ChatList from './ChatList';
 import ChatBar from './ChatBar';
@@ -6,7 +7,7 @@ import Toast from './Toast';
 
 export default class Drawer extends React.Component
 {
-    
+
     constructor(props)
     {
         super(props);
@@ -28,7 +29,7 @@ export default class Drawer extends React.Component
     }
 
 
-    
+
     handleToggle()
     {
         this.setState( { closed: !this.state.closed } );
@@ -41,7 +42,7 @@ export default class Drawer extends React.Component
                 display: 'cart'
             });
     }
-    
+
     transitionToChat()
     {
         this.setState(
@@ -49,7 +50,7 @@ export default class Drawer extends React.Component
                 display: 'chat'
             });
     }
-     
+
     render()
     {
         return (
@@ -63,16 +64,17 @@ export default class Drawer extends React.Component
                       email={this.state.email}
                       />
               </div>
-              
+
               <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
-                <div className="full-toggle-btn" onClick={this.handleToggle}></div>
                 <div className="row header">
-                  <div className="col-xs-2">
-                    <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
-                  </div>
-                  <div className="col-xs-8 text-center">Shopping Spree</div>
-                  <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
-                </div>                
+                  <div role="button" className="row" onClick={this.handleToggle}>
+                    <div className="col-xs-2">
+                      <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
+                    </div>
+                      <div className="col-xs-8 text-center">Shopping Spree</div>
+                      <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+                    </div>
+                </div>
                 <ChatList
                   firebaseAPI={this.state.firebaseAPI}
                   firebaseDatabase={this.state.firebaseDatabase}
@@ -100,7 +102,7 @@ export default class Drawer extends React.Component
                 />
             </div>
         );
-        
+
 
     }
 }
