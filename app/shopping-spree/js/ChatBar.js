@@ -15,30 +15,35 @@ export default class ChatBar extends FirebaseComponent {
     this.addProductToFirebase = this.addProductToFirebase.bind(this);
     win.addToShoppingSpree = this.addProductToFirebase;
     this.detectEnterKey = this.detectEnterKey.bind(this);
-      
+
   }
 
-  addProductToFirebase(productID,
-                       productVariantId,
-                       productName,
-                       productDescription,
-                       productPrice,
-                       productImage,
-                       productUrl,
-                       color,
-                       customizations) {
-    this.createShareDressMessage(this.props.name,
-                                 this.props.email,
-                                 this.props.icon,
-                                 productID,
-                                 productVariantId,
-                                 productName,
-                                 productDescription,
-                                 productPrice,
-                                 productImage,
-                                 productUrl,
-                                 color,
-                                 customizations);
+  addProductToFirebase(productID, productName, productDescription, productPrice,
+    productImage, productUrl, color, customizations) {
+    const newMessage = this.chatsDB.push();
+    newMessage.set({ type: 'share_dress',
+      value:
+      {
+        name: productName,
+        price: productPrice,
+        product_id: productID,
+        url: productUrl,
+        color: color,
+        image: productImage,
+        customizations,
+        description: productDescription,
+      },
+      created_at: firebase.database.ServerValue.TIMESTAMP,
+      from:
+      {
+        name: this.props.name,
+        email: this.props.email,
+        icon: this.props.icon,
+      },
+    },
+
+                  );
+
     }
 
     initializeFirebase()
@@ -69,10 +74,10 @@ export default class ChatBar extends FirebaseComponent {
         return (
             <div className="chat-bar-container">
               <div className="chat-bar equal">
-                <div className="col-xs-10 no-right-gutter no-left-gutter">
+                <div className="col-xs-9 no-right-gutter no-left-gutter">
                   <input onKeyPress={this.detectEnterKey} ref={(input) => { this.textInput = input; }} className="shoppingSpreeTextInput" type="text"></input>
                 </div>
-                <div className="col-xs-2 no-left-gutter no-right-gutter">
+                <div className="col-xs-3 no-left-gutter no-right-gutter">
                   <a onClick={this.sendMessage} className='btn btn-black'>Send</a>
                 </div>
               </div>

@@ -161,6 +161,7 @@ export default class ChatList extends FirebaseComponent
                     Invite other friends!
                   </span>
                 </div>
+
               </div>
               <div className="row">
                 <div className="chat-content">
