@@ -27,18 +27,18 @@ export default class ChatBar extends FirebaseComponent {
                        productUrl,
                        color,
                        customizations) {
-    this.createShareDress( this.props.name,
-                           this.props.email,
-                           this.props.icon,
-                           productID,
-                           productVariantId,
-                           productName,
-                           productDescription,
-                           productPrice,
-                           productImage,
-                           productUrl,
-                           color,
-                           customizations );
+    this.createShareDressMessage(this.props.name,
+                                 this.props.email,
+                                 this.props.icon,
+                                 productID,
+                                 productVariantId,
+                                 productName,
+                                 productDescription,
+                                 productPrice,
+                                 productImage,
+                                 productUrl,
+                                 color,
+                                 customizations);
     }
 
     initializeFirebase()
