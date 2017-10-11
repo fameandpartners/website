@@ -1,5 +1,6 @@
-import React from 'react';
+/* eslint-disable */
 
+import React from 'react';
 
 export default class CartItem extends React.Component
 {

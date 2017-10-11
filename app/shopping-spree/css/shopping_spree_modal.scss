@@ -58,6 +58,10 @@
   background-color: $c-super-light-gray;
 }
 
+#shopping-spree-modal {
+  z-index: 1;
+}
+
 .shopping-spree-onboarding.modal #shopping-spree-modal-content input {
   color: $c-black;
 }

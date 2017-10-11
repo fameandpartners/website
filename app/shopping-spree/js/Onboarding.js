@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React from 'react';
 import request from 'superagent';
+import FirebaseComponent from './FirebaseComponent';
 
-export default class Onboarding extends React.Component
+export default class Onboarding extends FirebaseComponent
 {
     constructor( props )
     {
@@ -10,28 +11,35 @@ export default class Onboarding extends React.Component
         this.join = this.join.bind(this);
     }
 
-
-
     join()
     {
         let context = this;
-        request.post( '/shopping_sprees' ).
-            set('Content-Type', 'application/json').
-            send(
-                    {
-                        name: this.nameInput.value,
-                        email: this.emailInput.value,
-                        shoppingSpreeId: this.props.shoppingSpreeId
-                    }
-            ).end( function( error, response )
-                   {
 
-                       context.props.doneOnboarding( response.body['name'],
-                                                  response.body['email'],
-                                                  response.body['icon'],
-                                                  response.body['id'] );
-                   }
-                 );
+ 
+        this.connectToFirebase();
+        let shoppingSpreeId = this.createNewShoppingSpree();
+        this.createFamebotMessage( 'You can post items here and chat with your friends' )
+        this.createFamebotMessage( "Here's something to get you started!" )
+        this.createFamebotShareDressMessage( 1481,
+                                             "The Maritza Dress",
+                                             "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
+                                             409,
+                                             "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/35873/original/fprv1026p-black_and_white_spot-front.jpg?1494461867",
+                                             "/dresses/the-maritza-dress-1481",
+                                             {
+                                                 "id": 415,
+                                                 "name": "black-and-white-spot",
+                                                 "presentation": "Black and White Spot",
+                                                 "price": 0
+                                             },
+                                             null
+                                           )
+        
+        context.props.doneOnboarding( this.nameInput.value,
+                                      this.emailInput.value,
+                                      Math.floor(Math.random() * 20),
+                                      shoppingSpreeId );
+        
     }
 
     render()

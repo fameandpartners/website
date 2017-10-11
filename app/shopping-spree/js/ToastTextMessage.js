@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 
 export default class ToastTextMessage extends React.Component
