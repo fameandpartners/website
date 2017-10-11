@@ -100,10 +100,9 @@ $chat_bar_header_height: 22px;
     z-index: 999;
     height: 100%;
     max-width: 524px;
-    min-width: 360px;
+    min-width: 310px;
     width: 36%;
     right: 0;
-    top: 0;
 
 
     .shopping-spree-container
@@ -191,7 +190,7 @@ $chat_bar_header_height: 22px;
 
         .chat-list
         {
-            overflow-x: hidden;
+            overflow-x: visible;
             padding-bottom: 20px;
             ul
             {
@@ -291,11 +290,27 @@ $chat_bar_header_height: 22px;
     .shopping-spree-wrapper
     {
         position: fixed;
-        top: 0;
         bottom: 0px;
-        height: auto;
         width: 100%;
+    }
 
+    .shopping-spree-wrapper.collapsed
+    {
+      height: 80px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      min-width: initial;
+      max-width: initial;
+    }
+
+    .shopping-spree-container.collapsed .header
+    {
+      height: 68px;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 9px;
+      border-color: #888888;
     }
 
     .shopping-spree-container
@@ -311,6 +326,12 @@ $chat_bar_header_height: 22px;
             font-size: 14px;
         }
 
+        &.collapsed
+        {
+            width: 95%;
+            max-width: 400px;
+            border-radius: 9px;
+        }
         &.open
         {
             min-height: 100%;
@@ -450,4 +471,24 @@ $chat_bar_header_height: 22px;
             }
         }
     }
+}
+
+// Shared styles for Shopping Spree
+.float-none {
+  float: none !important;
+}
+
+.shspree-signup-section {
+  margin-bottom: 100px;
+}
+
+#shopping-spree {
+  input {
+    border-radius: 0;
+    border: 1px solid black;
+  }
+}
+
+.u-width--full {
+  width: 100%;
 }
