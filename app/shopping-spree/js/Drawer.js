@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import ChatList from './ChatList';
 import ChatBar from './ChatBar';
