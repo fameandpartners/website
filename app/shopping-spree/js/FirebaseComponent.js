@@ -9,6 +9,7 @@ export default class FirebaseComponent extends React.Component
     { 
         super( props );
         this.firebaseNodeId = this.props.firebaseNodeId;
+        console.log( this.firebaseNodeId );
     }
 
     calculateDiscount( total )
@@ -75,6 +76,7 @@ export default class FirebaseComponent extends React.Component
                                       20,
                                       productID,
                                       productName,
+                                      productVariantId,
                                       productDescription,
                                       productPrice,
                                       productImage,
