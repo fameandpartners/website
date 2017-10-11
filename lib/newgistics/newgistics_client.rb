@@ -2,8 +2,8 @@ require 'rest_client'
 module Newgistics
   class NewgisticsClient
 
-    def initialize(api_key)
-      @key = api_key
+    def initialize
+      @key = configatron.newgistics.returns_api_key
     end
 
     def get_inbound_returns(start_date, end_date)
