@@ -169,8 +169,12 @@ $chat_bar_header_height: 22px;
   color: $c-medium-gray;
 }
 
+.shopping-spree-wrapper .shopping-spree-container .chat-bar-container {
+  padding: 10px;
+}
+
 .shopping-spree-wrapper .shopping-spree-container .chat-bar {
-  height: 55px;
+  height: 45px;
 }
 
 .shopping-spree-wrapper .shopping-spree-container .chat-bar .btn {
@@ -186,7 +190,6 @@ $chat_bar_header_height: 22px;
   width: 100%;
   border-color: $c-medium-gray;
   border-width: 1px;
-  font-size: 20px;
   padding-left: 20px;
 }
 
@@ -354,6 +357,7 @@ $chat_bar_header_height: 22px;
   .shopping-spree-wrapper .shopping-spree-container.collapsed {
     width: 250px;
     border-radius: 9px;
+    margin: 0 0 0 auto;
   }
 
   .shopping-spree-wrapper .shopping-spree-container .chat-list .chat-content {
