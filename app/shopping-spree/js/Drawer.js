@@ -82,6 +82,7 @@ export default class Drawer extends React.Component
                   showAddToCartModal={this.props.showAddToCartModal}
                   name={this.state.name}
                   doneShoppingSpree={this.props.doneShoppingSpree}
+                  updateExitModalStatus={this.props.updateExitModalStatus}
                   showShareModal={this.props.showShareModal}
                   />
                 <ChatBar

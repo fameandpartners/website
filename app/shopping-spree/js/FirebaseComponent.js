@@ -6,9 +6,10 @@ import * as firebase from 'firebase';
 export default class FirebaseComponent extends React.Component
 {
     constructor( props )
-    {
+    { 
         super( props );
         this.firebaseNodeId = this.props.firebaseNodeId;
+        console.log( this.firebaseNodeId );
     }
 
     calculateDiscount( total )
@@ -61,6 +62,7 @@ export default class FirebaseComponent extends React.Component
     }
 
     createFamebotShareDressMessage( productID,
+                                    productVariantId,
                                     productName,
                                     productDescription,
                                     productPrice,
@@ -73,7 +75,8 @@ export default class FirebaseComponent extends React.Component
                                       'help@fameandpartners.com',
                                       20,
                                       productID,
-                                      productName,
+                                      productVariantId,
+                                      productName,                                      
                                       productDescription,
                                       productPrice,
                                       productImage,
@@ -88,6 +91,7 @@ export default class FirebaseComponent extends React.Component
                              email,
                              icon,
                              productID,
+                             productVariantId,
                              productName,
                              productDescription,
                              productPrice,
@@ -103,6 +107,7 @@ export default class FirebaseComponent extends React.Component
                              name: productName,
                              price: productPrice,
                              product_id: productID,
+                             product_variant_id: productVariantId,
                              url: productUrl,
                              color: color,
                              image: productImage,

@@ -364,3 +364,52 @@ $chat_bar_header_height: 22px;
     display: block;
   }
 }
+
+
+.ExitModal {
+  width: 320px;
+  height: 245px;
+  background-color: #ffffff;
+  border: 1px solid #bfbfbf;
+  margin: 25vh auto 0;
+}
+
+@media (min-width: 767px) {
+  .ExitModal {
+    width: 375px;
+  }
+}
+
+.ExitModal__buttonContainer {
+  text-align: center;
+}
+
+.ExitModal .headline {
+  text-align: center;
+  padding-top: 55px;
+  line-height: 24px;
+  font-size: 20px;
+}
+
+.ExitModal .btn {
+  min-width: 125px;
+  border: 1px solid #000;
+  object-fit: contain;
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+@media (min-width: 767px) {
+  min-width: 143px;
+  margin: 0 10px;
+}
+
+.ExitModal__closeIcon {
+  text-align: right;
+  margin-bottom: 0;
+  font-size: 55px;
+  line-height: 42px;
+  padding-right: 40px;
+  padding-top: 6px;
+  cursor: pointer;
+}
