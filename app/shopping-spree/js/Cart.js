@@ -106,6 +106,8 @@ export default class Cart extends FirebaseComponent
                 totalOff: (discount / 100.0) * this.state.totalInMyCart
             }
         );
+
+        this.props.updateDiscount(this.state.discount);
     }
 
     startListeningToFirebase()
@@ -197,5 +199,6 @@ Cart.propTypes = {
     firebaseDatabase: React.PropTypes.string.isRequired,
     firebaseNodeId: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired
+    email: React.PropTypes.string.isRequired,
+    updateDiscount: React.PropTypes.func.isRequired
 }
