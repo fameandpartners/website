@@ -8,7 +8,7 @@ import Toast from './Toast';
 
 export default class Drawer extends React.Component
 {
-    
+
     constructor(props)
     {
         super(props);
@@ -30,7 +30,7 @@ export default class Drawer extends React.Component
     }
 
 
-    
+
     handleToggle()
     {
         this.setState( { closed: !this.state.closed } );
@@ -43,7 +43,7 @@ export default class Drawer extends React.Component
                 display: 'cart'
             });
     }
-    
+
     transitionToChat()
     {
         this.setState(
@@ -51,7 +51,7 @@ export default class Drawer extends React.Component
                 display: 'chat'
             });
     }
-     
+
     render()
     {
         return (
@@ -65,7 +65,7 @@ export default class Drawer extends React.Component
                       email={this.state.email}
                       />
               </div>
-              
+
               <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
                 <div className="full-toggle-btn" onClick={this.handleToggle}></div>
                 <div className="row header">
@@ -74,7 +74,7 @@ export default class Drawer extends React.Component
                   </div>
                   <div className="col-xs-8 text-center">Shopping Spree</div>
                   <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
-                </div>                
+                </div>
                 <ChatList
                   firebaseAPI={this.state.firebaseAPI}
                   firebaseDatabase={this.state.firebaseDatabase}
@@ -82,6 +82,7 @@ export default class Drawer extends React.Component
                   showAddToCartModal={this.props.showAddToCartModal}
                   name={this.state.name}
                   doneShoppingSpree={this.props.doneShoppingSpree}
+                  updateExitModalStatus={this.props.updateExitModalStatus}
                   showShareModal={this.props.showShareModal}
                   />
                 <ChatBar
@@ -102,7 +103,7 @@ export default class Drawer extends React.Component
                 />
             </div>
         );
-        
+
 
     }
 }
