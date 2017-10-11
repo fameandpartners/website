@@ -6,6 +6,7 @@ import TextMessage from './TextMessage';
 import JoinedMessage from './JoinedMessage';
 import DressMessage from './DressMessage';
 import FirebaseComponent from './FirebaseComponent';
+import win from './windowPolyfill';
 
 export default class ChatList extends FirebaseComponent
 {

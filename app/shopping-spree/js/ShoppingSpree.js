@@ -9,8 +9,7 @@ import win from './windowPolyfill';
 
 export default class ShoppingSpree extends React.Component {
   constructor(props) {
-      super(props);
-      console.log( 'starting shopping spree' );
+    super(props);
     this.cookies = new Cookies();
     this.setInitialState();
 
