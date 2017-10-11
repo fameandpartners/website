@@ -1,6 +1,6 @@
-/* [IT Girl Internship]
+/* [Contests landing pages]
 -------------------------------------------------------*/
-.page-it-girl {
+.Page__contest {
 
   .ContentCopy {
     padding: 0 20px;
@@ -22,6 +22,10 @@
 
   .Heading--italic {
     font-style: italic;
+  }
+
+  .Heading--medium {
+    font-size: 4rem;
   }
 
   .SectionContact {
@@ -59,6 +63,31 @@
     margin-bottom: 80px;
   }
 
+  .ContentCopy__link {
+    font-size: 1.4rem;
+  }
+
+  .SectionTiles p.summary {
+    margin: 35px 5px;
+    font-size: 1.6rem;
+  }
+
+  .SectionTiles h3 {
+    font-size: 3rem;
+  }
+
+  .SectionTiles .item {
+    padding-bottom: 20px;
+  }
+
+  .FormWrapper {
+    margin-top: 30px;
+  }
+
+  .u-section-border--bottom {
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
   @media (min-width: $bootstrap-md-width) {
     text-align: center;
 
@@ -79,6 +108,14 @@
       margin: 40px 0 85px;
     }
 
+    .Heading__partners {
+      margin-bottom: 70px;
+    }
+
+    .SectionTiles {
+      margin-top: 120px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -95,12 +132,20 @@
       margin-top: 45px;
     }
 
+    .SectionIntro .CtaBtn--no-margin-top {
+      margin-top: 0;
+    }
+
     .IconText_copy {
       padding-left: 15px;
     }
 
     .OptionsList {
       margin-bottom: 40px;
+    }
+
+    .ContentCopy__partner {
+      margin-top: 50px;
     }
 
   }
