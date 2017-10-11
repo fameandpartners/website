@@ -7,8 +7,8 @@ module Newgistics
     end
 
     def get_inbound_returns(start_date, end_date)
-      params= { :key=>@key, :startCreatedTimestamp => start_date.to_s, :endCreatedTimestamp => end_date.to_s  }
-      response = make_get_request("#{configatron.newgistics.returns_uri.to_s}/inbound_returns.aspx", params)
+      params= { :key=>@key, :startTimestamp => start_date.to_s, :endTimestamp => end_date.to_s  }
+      response = make_get_request("#{configatron.newgistics.returns_uri.to_s}/returns.aspx", params)
       Hash.from_xml(response)
     end
 
