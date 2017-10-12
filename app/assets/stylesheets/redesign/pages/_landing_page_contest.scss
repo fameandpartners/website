@@ -20,10 +20,6 @@
     text-transform: none;
   }
 
-  .Heading {
-    margin-bottom: 70px;
-  }
-
   .Heading--italic {
     font-style: italic;
   }
@@ -152,6 +148,10 @@
       margin-bottom: 90px;
     }
 
+    .Heading {
+      margin-bottom: 70px;
+    }
+
     .SectionWhatToTell {
       padding: 95px 0;
       background: $c-neutral-2;
@@ -179,6 +179,10 @@
 
     .ContentCopy__partner {
       padding: 0 30px;
+    }
+
+    .Prizes__logos {
+      margin-bottom: 20px;
     }
 
   }
