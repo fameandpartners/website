@@ -139,25 +139,19 @@ export default class Cart extends FirebaseComponent
         return(
                 <div className="shopping-spree-cart">
                 <div className="row header vertical-align">
-                <div className="back-to-spree col-md-4 col-xs-8" onClick={this.props.transitionToChat}>
+                <div className="header__inner">
+                <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
                 <div className="left-caret"></div>
                 <div className="back-to-spree-text shopping-spree-headline">
-                Back to spree
-            </div>
+                    Back to spree
                 </div>
-                <div className="col-xs-6 col-md-4">
+                </div>
+                <div className="col-xs-4 col-md-4 text-center">
                   Your Bag
                 </div>
                 <div className="col-xs-4 col-md-4 text-right">
                   {this.state.discount} off
                 </div>
-                <div className="row">
-                <div className="no-left-gutter col-xs-push-1 col-xs-4">
-                Subtotal
-            </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                ${this.state.totalInMyCart}.00
-            </div>
                 </div>
               </div>
 

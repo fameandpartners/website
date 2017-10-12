@@ -53,6 +53,7 @@ export default class Drawer extends React.Component
     {
         this.setState(
             {
+                closed: false,
                 display: 'chat'
             });
     }
