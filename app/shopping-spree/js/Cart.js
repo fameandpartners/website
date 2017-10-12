@@ -51,8 +51,9 @@ export default class Cart extends FirebaseComponent
 
   checkout()
   {
-    for( let i = 0 ; this.state.myItems.length; i++ )
+    for( let i = 0 ; i < this.state.myItems.length; i++ )
     {
+      console.log(i);
       let dress = this.state.myItems[i].props.dress;
       console.log( this.state.myItems[i].props.dress );
       request.post('/user_cart/products')
