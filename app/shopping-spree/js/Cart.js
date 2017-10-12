@@ -27,7 +27,7 @@ export default class Cart extends FirebaseComponent
         this.deleteItem = this.deleteItem.bind(this);
         this.checkout = this.checkout.bind(this);
     }
-    
+
     addToCart( data, previousChildKey )
     {
         this.setState(
@@ -35,7 +35,7 @@ export default class Cart extends FirebaseComponent
                 totalInSharedCart: this.state.totalInSharedCart + Math.round( parseFloat( data.val().dress.price ) )
             }
         );
-        
+
         if( data.val().entry_for.email === this.props.email  )
         {
             this.setState(
@@ -59,7 +59,7 @@ export default class Cart extends FirebaseComponent
             request.post('/user_cart/products')
                 .set('Content-Type', 'application/json')
                 .send(
-                    { 
+                    {
                         product: {
                             variant_id: 45767,
                             dress_variant_id: 45767,
@@ -75,7 +75,7 @@ export default class Cart extends FirebaseComponent
                 } );
         }
     }
-    
+
     deleteItem( firebaseKey )
     {
         let index = -1;
@@ -95,11 +95,11 @@ export default class Cart extends FirebaseComponent
 
         this.cartDB.child( firebaseKey ).remove();
     }
-    
+
     recalculateDiscount()
     {
         let discount = this.calculateDiscount( this.state.totalInSharedCart );
-        
+
         this.setState(
             {
                 discount: discount + "%",
@@ -121,19 +121,19 @@ export default class Cart extends FirebaseComponent
 
     stopListeningToFirebase()
     {
-        this.cartDB.off( 'child_added', this.addToCart );        
+        this.cartDB.off( 'child_added', this.addToCart );
     }
-    
+
     componentWillMount()
     {
-        this.startListeningToFirebase();             
+        this.startListeningToFirebase();
     }
 
     componentWillUnmount()
     {
         this.stopListeningToFirebase();
     }
-    
+
     render()
     {
         return(
@@ -146,11 +146,10 @@ export default class Cart extends FirebaseComponent
             </div>
                 </div>
                 <div className="col-xs-6 col-md-4">
-                Your Bag
-            </div>
-                <div className="col-xs-4 col-md-4 text-center">
-                {this.state.discount} off
-            </div>
+                  Your Bag
+                </div>
+                <div className="col-xs-4 col-md-4 text-right">
+                  {this.state.discount} off
                 </div>
                 <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">
@@ -160,8 +159,9 @@ export default class Cart extends FirebaseComponent
                 ${this.state.totalInMyCart}.00
             </div>
                 </div>
-                
-                <div className="row">
+              </div>
+
+              <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
             </div>
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
@@ -175,12 +175,12 @@ export default class Cart extends FirebaseComponent
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
                 <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
                 </div>
-                </div>
-                
-                <div className="row checkout-btn">
+              </div>
+
+              <div className="row checkout-btn">
                 <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
-                </div>
-                <div className="shopping-spree-contents">
+              </div>
+              <div className="shopping-spree-contents">
                 <div className="row">
                 <div className="col-xs-18">
                 <ul className="cart-item-list">

@@ -58,6 +58,7 @@ export default class ShoppingSpree extends React.Component {
       firebaseNodeId: firebaseId,
       minimize,
       showAddToCartModal: false,
+      startingState: display,
       dressAddingToCart: null,
       showExitModal: false,
     };
@@ -127,6 +128,7 @@ export default class ShoppingSpree extends React.Component {
     this.setState(
       {
         display: 'chat',
+        minimize: false,
       },
     )
   }
@@ -162,6 +164,7 @@ export default class ShoppingSpree extends React.Component {
   }
 
   render() {
+    console.log('inita', this.state);
     return (
       <div>
         {
@@ -180,13 +183,17 @@ export default class ShoppingSpree extends React.Component {
                   closed={this.state.minimize}
                   showAddToCartModal={this.showAddToCartModal}
                   doneShoppingSpree={this.doneShoppingSpree}
-                  howShareModal={this.showShareModal}
+                  showShareModal={this.showShareModal}
                   updateExitModalStatus={this.updateExitModalStatus} />
 
             }
         {
                 this.state.display === 'share' &&
-                <ShareModal nextStep={this.doneSharing} firebaseNodeId={this.state.firebaseNodeId} />
+                <ShareModal
+                  hasEntered={this.state.startingState === 'chat'}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  nextStep={this.doneSharing}
+                />
         }
         {
           this.state.showExitModal &&
