@@ -1,16 +1,26 @@
 @import 'shopping_spree_avatars';
 
-@import 'variables';
+.shopping-spree-container
+{
+    .chat-content
+    {
+        .text-message
+        {
+            .message-name
+            {
+                margin-top: 16px;
+                font-size: 15px;
+                color: #979797;
+            }
 
-.shopping-spree-container .chat-content .text-message .firebase-text {
-  background-color: $c-neutral-2;
-  border-radius: 9px;
-  padding: 10px 12px 17px 23px;
-  margin-bottom: 5px;
-}
+            .firebase-text
+            {
+                background-color: #f5f5f5;
+                border-radius: 9px;
+                padding: 10px 12px 17px 23px;
+                margin-bottom: 5px;
+            }
 
-.shopping-spree-container .chat-content .text-message .message-name {
-  margin-top: 16px;
-  font-size: 15px;
-  color: $c-neutral-8;
+        }
+    }
 }
