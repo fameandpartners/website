@@ -83,7 +83,6 @@ export default class AddToCartModal extends FirebaseComponent
     createFirebaseCartItem()
     {
         let newMessage = this.cartDB.push();
-        console.log( this.props.dress );
         newMessage.set( { created_at: firebase.database.ServerValue.TIMESTAMP,
                           dress:
                           {
@@ -95,6 +94,7 @@ export default class AddToCartModal extends FirebaseComponent
                               name: this.props.dress['name'],
                               price: this.props.dress['price'],
                               product_id: this.props.dress['product_id'],
+                              product_variant_id: this.props.dress['product_variant_id'],
                               url: this.props.dress['url']
                           },
                           entry_for:
