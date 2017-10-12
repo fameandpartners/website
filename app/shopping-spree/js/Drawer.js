@@ -54,7 +54,7 @@ export default class Drawer extends React.Component
     render()
     {
         return (
-            <div className={"shopping-spree-wrapper " + (this.state.closed ? 'collapsed' : 'open')}>
+            <div className={"shopping-spree-wrapper " + (this.state.closed && this.state.display !== 'cart' ? 'collapsed' : 'open')}>
               <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
                 <Cart transitionToChat={this.transitionToChat}
                       firebaseAPI={this.state.firebaseAPI}
@@ -66,15 +66,25 @@ export default class Drawer extends React.Component
               </div>
 
               <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
-                <div className="row header">
-                  <div role="button" className="u-width--full" onClick={this.handleToggle}>
-                    <div className="col-xs-2">
-                      <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
-                    </div>
-                      <div className="col-xs-8 text-center">Shopping Spree</div>
-                      <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
-                    </div>
-                </div>
+                { this.state.closed ?
+                  <div className="row header">
+                    <div role="button" className="u-width--full" onClick={this.handleToggle}>
+                        <div className="col-xs-10 text-left">Shopping Spree</div>
+                        <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+                      </div>
+                  </div>
+                  :
+                  <div className="row header">
+                    <div role="button" className="u-width--full" onClick={this.handleToggle}>
+                      <div className="col-xs-2">
+                        <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
+                      </div>
+                        <div className="col-xs-8 text-center">Shopping Spree</div>
+                        <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
+                      </div>
+                  </div>
+                }
+
                 <ChatList
                   firebaseAPI={this.state.firebaseAPI}
                   firebaseDatabase={this.state.firebaseDatabase}
