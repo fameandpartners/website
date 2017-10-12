@@ -88,6 +88,7 @@ export default class AddToCartModal extends FirebaseComponent
                           dress:
                           {
                               size: this.state.selectedSize,
+                              color: this.props.dress['color'],
                               height: this.state.height,
                               description: this.props.dress['description'],
                               image: this.props.dress['image'],

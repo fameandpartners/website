@@ -21,14 +21,20 @@ export default class Drawer extends React.Component
                 firebaseNodeId: props.firebaseNodeId,
                 name: props.name,
                 email: props.email,
-                icon: props.icon
+                icon: props.icon,
+                currentDiscount: null,
             };
         this.handleToggle = this.handleToggle.bind(this);
         this.transitionToCart = this.transitionToCart.bind(this);
         this.transitionToChat = this.transitionToChat.bind(this);
+        this.updateDiscountOnDrawer = this.updateDiscountOnDrawer.bind(this);
     }
 
-
+    updateDiscountOnDrawer(newDiscount) {
+      this.setState({
+        currentDiscount: newDiscount
+      });
+    }
 
     handleToggle()
     {
@@ -52,7 +58,11 @@ export default class Drawer extends React.Component
     }
 
     render()
-    {
+      {
+        const {
+          currentDiscount,
+        } = this.state;
+
         return (
             <div className={"shopping-spree-wrapper " + (this.state.closed && this.state.display !== 'cart' ? 'collapsed' : 'open')}>
               <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
@@ -62,6 +72,7 @@ export default class Drawer extends React.Component
                       firebaseNodeId={this.state.firebaseNodeId}
                       name={this.state.name}
                       email={this.state.email}
+                      updateDiscount={this.updateDiscountOnDrawer}
                       />
               </div>
 
@@ -79,7 +90,14 @@ export default class Drawer extends React.Component
                       <div className="col-xs-2">
                         <i className={"toggle-btn " + (this.state.closed ? "closed-caret" : "open-caret")}  onClick={this.handleToggle}></i>
                       </div>
-                        <div className="col-xs-8 text-center">Shopping Spree</div>
+                      <div className="col-xs-8 text-center">
+                        Shopping Spree&nbsp;
+                        {
+                          currentDiscount
+                          ? `${currentDiscount} off`
+                          : null
+                        }
+                      </div>
                         <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
                       </div>
                   </div>
