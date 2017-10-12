@@ -51,24 +51,19 @@ export default class Cart extends FirebaseComponent
 
     checkout()
     {
-        console.log( 'checking out' );
         for( let i = 0 ;  this.state.myItems.length; i++ )
         {
             let dress = this.state.myItems[i].props.dress;
             console.log( this.state.myItems[i].props.dress );
             request.post('/user_cart/products')
-                .set('Content-Type', 'application/json')
                 .send(
-                    {
-                        product: {
-                            variant_id: 45767,
-                            dress_variant_id: 45767,
-                            size_id: 34,
-                            color_id: 283,
-                            height: 61,
-                            height_value: 1234,
-                            height_unit: 'inch'
-                        }
+                    { 
+                        variant_id: dress.product_variant_id,
+                        dress_variant_id: dress.product_variant_id,
+                        size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
+                        color_id: dress.color['id'],
+                        height_value: dress.height,
+                        height_unit: 'inch'
                     }
                 ).end((error, response) => {
                     console.log( response.body );
