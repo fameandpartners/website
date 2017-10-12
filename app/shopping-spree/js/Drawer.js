@@ -53,6 +53,7 @@ export default class Drawer extends React.Component
     {
         this.setState(
             {
+                closed: false,
                 display: 'chat'
             });
     }
@@ -73,6 +74,7 @@ export default class Drawer extends React.Component
                       name={this.state.name}
                       email={this.state.email}
                       updateDiscount={this.updateDiscountOnDrawer}
+                      doneShoppingSpree={this.props.doneShoppingSpree}
                       />
               </div>
 
