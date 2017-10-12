@@ -1,156 +1,202 @@
-/* stylelint-disable selector-no-id  */
+@import 'redesign/vars';
+@media (max-width: 767px)
+{
+    .shopping-spree-onboarding
+    {
+        .mobile
+        {
+            display: block;
+        }
 
-@import 'variables';
-@media (max-width: 767px) {
-  .shopping-spree-onboarding .mobile {
+        .desktop
+        {
+            display: none;
+        }
+
+        .dress-one-text
+        {
+            margin-top: 60%;
+        }
+
+
+        #mobile-text
+        {
+            padding-top: 42px;
+        }
+
+    }
+}
+
+@media (min-width: 767px)
+{
+
+    .shopping-spree-onboarding
+    {
+        padding-bottom: 150px;
+        
+        .mobile
+        {
+            display: none;
+        }
+
+        .desktop
+        {
+            display: block;
+        }
+        #dress-image-one
+        {
+            margin-top: -5%;
+        }
+        
+    }
+    
+}
+
+.shopping-spree-onboarding
+{
     display: block;
-  }
+    .btn
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .equal
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    
+    &.modal
+    {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #f6f5f3;
+        #shopping-spree-modal-content
+        {
+            width: 100%;
+            height: 100%;
+            font-family: $font-heading;
+            font-weight: 300;
 
-  .shopping-spree-onboarding .desktop {
-    display: none;
-  }
+            input
+            {
+                color: black;
+            }
+            
+            .btn-close
+            {
+                top: 22px;
+                right: 22px;
+            }
 
-  .shopping-spree-onboarding .dress-one-text {
-    margin-top: 60%;
-  }
+            .welcome-headline
+            {
+                font-size: 46px;
+                line-height: 1;
+                &#top-headline
+                {
+                    padding-top: 42px;
+                }
 
-  .shopping-spree-onboarding #mobile-text {
-    padding-top: 42px;
-  }
-}
+                &#bottom-headline
+                {
+                    padding-bottom: 42px;
+                }
+                
+            }
+            .base-text
+            {
+                line-height: 31px;
+                font-size: 26px;
+            }
+            
+            .body-text
+            {
+                @extend .base-text;
+                min-width: 225px;
+            }
 
-@media (min-width: 767px) {
-  .shopping-spree-onboarding {
-    padding-bottom: 150px;
-  }
+            #enter-email-text
+            {
+                padding-top: 92px;
+            }
+            
 
-  .shopping-spree-onboarding .mobile {
-    display: none;
-  }
+            .dress-image-left
+            {
+                z-index: -1;
+                padding-left: 0px;
+                img
+                {
+                    width: 100%;
+                }
+            }
 
-  .shopping-spree-onboarding .desktop {
-    display: block;
-  }
 
-  .shopping-spree-onboarding #dress-image-one {
-    margin-top: -5%;
-  }
-}
+            .dress-image-right
+            {
+                z-index: -1;
+                padding-right: 0px;
+                img
+                {
+                    width: 100%;
+                }
+            }
+            
+            #dress-one
+            {
+                z-index: -1;
 
-.shopping-spree-onboarding .btn {
-  padding-left: 0;
-  padding-right: 0;
-}
+                .dress-one-text-two
+                {
+                    padding-top: 319px;
+                }
+            }
 
-.shopping-spree-onboarding .equal {
-  display: flex;
-  flex-wrap: wrap;
-}
+            #dress-two
+            {
+                #dress-two-image
+                {
+                    z-index: -1;
+                    img
+                    {
+                        display: block;
+                    }
+                }
 
-.shopping-spree-onboarding.modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: $c-super-light-gray;
-}
+                #dress-two-text
+                {
+                    padding-top: 60%;
+                }
+            }
 
-#shopping-spree-modal {
-  z-index: 1;
-}
+            #dress-three
+            {
+                z-index: -1;
+                .dress-three-percent-text
+                {
+                    padding-top: 36px;
+                }
 
-.shopping-spree-onboarding.modal #shopping-spree-modal-content input {
-  color: $c-black;
-}
+                
+            }
 
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .btn-close {
-  top: 22px;
-  right: 22px;
-}
+            .dress-three-percent-text
+            {
+                font-size: 56px;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+            
+        }
+        
+    }
 
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .welcome-headline {
-  font-size: 46px;
-  line-height: 1;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .welcome-headline#top-headline {
-  padding-top: 42px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .welcome-headline#bottom-headline {
-  padding-bottom: 42px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .base-text {
-  line-height: 31px;
-  font-size: 26px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #enter-email-text {
-  padding-top: 92px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .dress-image-left {
-  z-index: -1;
-  padding-left: 0px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .dress-image-left img {
-  width: 100%;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .dress-image-right {
-  z-index: -1;
-  padding-right: 0px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .dress-image-right img {
-  width: 100%;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-one {
-  z-index: -1;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-one .dress-one-text-two {
-  padding-top: 319px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-two #dress-two-image {
-  z-index: -1;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-two #dress-two-image  img {
-  display: block;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-two #dress-two-text {
-  padding-top: 60%;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-three {
-  z-index: -1;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content #dress-three .dress-three-percent-text {
-  padding-top: 36px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content .dress-three-percent-text {
-  font-size: 56px;
-  font-weight: bold;
-  padding-top: 10px;
-}
-
-.shopping-spree-onboarding.modal #shopping-spree-modal-content {
-  width: 100%;
-  height: 100%;
-  font-weight: 300;
-}
-
-.shopping-spree-onboarding {
-  display: block;
 }
