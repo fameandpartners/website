@@ -4,6 +4,10 @@ class UserCart::ProductsController < UserCart::BaseController
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
   def create
+    if( params[:size_id].nil? && !params[:size].nil? )
+      params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
+    end
+
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
