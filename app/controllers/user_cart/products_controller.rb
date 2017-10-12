@@ -3,11 +3,11 @@ class UserCart::ProductsController < UserCart::BaseController
 
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
+  
   def create
-    if( params[:size_id].nil? && !params[:size].nil? )
-      params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
-    end
-
+    ensure_size_id_is_set( params )
+    ensure_height_is_set( params )
+    
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
@@ -91,20 +91,36 @@ class UserCart::ProductsController < UserCart::BaseController
 
   private
 
-    def cart_product_service
-      @cart_product_service ||= UserCart::CartProduct.new(
-        order: current_order(true),
-        line_item_id: params[:line_item_id]
-      )
+  def add_analytics_labels(data)
+    data = @user_cart.serialize
+
+    data[:products].each do |product|
+      product[:analytics_label] = analytics_label(:user_cart_product, product)
     end
 
-    def add_analytics_labels(data)
-      data = @user_cart.serialize
+    data
+  end
+  
+  def cart_product_service
+    @cart_product_service ||= UserCart::CartProduct.new(
+      order: current_order(true),
+      line_item_id: params[:line_item_id]
+    )
+  end
 
-      data[:products].each do |product|
-        product[:analytics_label] = analytics_label(:user_cart_product, product)
-      end
-
-      data
+  def ensure_size_id_is_set( params )
+    if( params[:size_id].nil? && !params[:size].nil? )
+      params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
     end
+  end
+
+  def ensure_height_is_set( params )
+    if( params[:height].nil? && params[:height_value] && params[:variant_id])
+      variant = Spree::Variant.find( params[:variant_id] )
+      product_height_range_group = ProductHeightRangeGroup.find_both_for_variant_or_use_default( variant ).find { |phrg| phrg.unit == params[:height_unit] }
+      params[:height] = product_height_range_group.map_height_to_name( params[:height_value] )
+    end
+    
+  end
+  
 end
