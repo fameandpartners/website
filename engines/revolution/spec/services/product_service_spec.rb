@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
+  let(:product_ids) { %w[471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green] }
 
   let(:current_site_version) { build_stubbed(:site_version, :au) }
   let(:service) { described_class.new(product_ids, current_site_version) }
@@ -12,11 +12,11 @@ describe Revolution::ProductService do
   subject(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
 
   it 'should parse the ids' do
-    expect(service.ids).to eq %w(471 680 683 262 704 504 680)
+    expect(service.ids).to eq %w[471 680 683 262 704 504 680]
   end
 
   it 'should parse the colours' do
-    expect(service.colours).to eq %w(coral light-pink burgundy white black lavender forest-green)
+    expect(service.colours).to eq %w[coral light-pink burgundy white black lavender forest-green]
   end
 
   describe '#products' do
@@ -25,7 +25,7 @@ describe Revolution::ProductService do
       subject(:service) { Revolution::ProductService.new(product_ids, current_site_version) }
 
       it 'given an offset greater than the number of products 0 products are returned' do
-        page.variables  = {pids: product_ids}
+        page.variables  = { pids: product_ids }
         params[:offset] = 8
 
         result = service.products(params, limit)
@@ -36,7 +36,10 @@ describe Revolution::ProductService do
     context 'when there are nil items' do
       let!(:dress) { create(:dress, id: 471) }
 
-      before(:each) { allow(service).to receive(:get_revolution_ids).and_return(['471', nil, nil, nil]) }
+      before(:each) do
+        allow(service).to receive(:get_revolution_ids)
+            .and_return(['471', nil, nil, nil])
+      end
 
       it 'remove all nil items' do
         result = service.products(params, limit)
@@ -70,13 +73,13 @@ describe Revolution::ProductService do
       it 'returns position of -1 if limit = 7 and offset = 7' do
         limit           = 7
         params[:offset] = 7
-        expect(service.id_end(params, limit)).to eq -1
+        expect(service.id_end(params, limit)).to eq(-1)
       end
     end
   end
 
   describe '.get_revolution_ids' do
-    context "given 7 products" do
+    context 'given 7 products' do
       it 'returns 7 ids if limit > ids' do
         expect(service.get_revolution_ids(params, limit).size).to eq 7
       end

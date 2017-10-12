@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    = 'app/helpers/application_helper.rb'
     - 'vendor/**/*'
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
@@ -12,30 +13,33 @@ Metrics/LineLength:
 Style/Documentation:
   Enabled: false
 
-Style/IndentHash:
-  EnforcedStyle: special_inside_parentheses
-  SupportedStyles:
-    - special_inside_parentheses
-    - consistent
-    - align_braces
-  IndentationWidth: 2
+# Style/IndentHash:
+#   EnforcedStyle: special_inside_parentheses
+#   SupportedStyles:
+#     - special_inside_parentheses
+#     - consistent
+#     - align_braces
+#   IndentationWidth: 2
 
-Style/IndentArray:
-  EnforcedStyle: special_inside_parentheses
-  SupportedStyles:
-    - special_inside_parentheses
-    - consistent
-    - align_braces
-  IndentationWidth: 2
+# Style/IndentArray:
+#   EnforcedStyle: special_inside_parentheses
+#   SupportedStyles:
+#     - special_inside_parentheses
+#     - consistent
+#     - align_braces
+#   IndentationWidth: 2
 
 Style/BlockComments:
   Enabled: false
 
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-  SupportedStyles:
-    - indented
-    - indented_relative_to_receiver
-  # By default, the indentation width from Style/IndentationWidth is used
-  # But it can be overridden by setting this parameter
-  IndentationWidth: 4
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Style/MultilineMethodCallIndentation:
+#   EnforcedStyle: indented
+#   SupportedStyles:
+#     - indented
+#     - indented_relative_to_receiver
+#   # By default, the indentation width from Style/IndentationWidth is used
+#   # But it can be overridden by setting this parameter
+#   IndentationWidth: 4

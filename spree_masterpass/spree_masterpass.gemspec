@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true.
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_masterpass'
@@ -11,8 +12,8 @@ Gem::Specification.new do |s|
   s.email     = 'lucky.thomaslee@gmail.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
-  #s.files       = `git ls-files`.split("\n")
-  #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+  # s.files       = `git ls-files`.split("\n")
+  # s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
@@ -25,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'factory_girl', '~> 4.2'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails',  '~> 2.13'
+  s.add_development_dependency 'rspec-rails', '~> 2.13'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'sqlite3'
 end
