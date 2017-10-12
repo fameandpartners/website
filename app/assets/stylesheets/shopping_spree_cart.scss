@@ -29,7 +29,7 @@
         &:after
         {
             left: 0;
-        }        
+        }
     }
     .back-to-spree
     {
@@ -39,7 +39,7 @@
         .back-to-spree-text
         {
             color: #979797;
-            font-size: 16px;
+            font-size: 1em;
         }
     }
 
@@ -59,11 +59,11 @@
         {
             content: '';
             position: absolute;
-            top: 6px;            
+            top: 6px;
             border-right: 7px solid white;
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
-        }        
+        }
     }
 
     .cart-item-list
@@ -81,7 +81,7 @@
             }
         }
     }
-    
+
 }
 
 @media (min-width: 767px)
@@ -100,11 +100,11 @@
             &:after
             {
                 left: 24px;
-            }        
-            
-        }        
+            }
+
+        }
     }
-    
+
 }
 
 @media (max-width: 767px)
@@ -123,8 +123,8 @@
             &:after
             {
                 left: 14px;
-            }        
-            
-        }        
+            }
+
+        }
     }
 }

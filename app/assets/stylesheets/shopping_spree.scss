@@ -33,11 +33,6 @@ $chat_bar_header_height: 22px;
         text-decoration: underline;
     }
 
-    .shopping-spree-headline
-    {
-        font-size: 18px;
-    }
-
     .shopping-spree-big-headline
     {
         font-size: 24px;
@@ -104,6 +99,13 @@ $chat_bar_header_height: 22px;
     width: 36%;
     right: 0;
 
+    .shopping-spree-cart {
+      background: white;
+    }
+
+    &.open {
+      background: white;
+    }
 
     .shopping-spree-container
     {
@@ -306,7 +308,7 @@ $chat_bar_header_height: 22px;
 
     .shopping-spree-container.collapsed .header
     {
-      height: 68px;
+      height: 56px;
       border-width: 1px;
       border-style: solid;
       border-radius: 9px;
@@ -329,7 +331,7 @@ $chat_bar_header_height: 22px;
         &.collapsed
         {
             width: 95%;
-            max-width: 400px;
+            max-width: 320px;
             border-radius: 9px;
         }
         &.open

@@ -17,7 +17,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    height: 50%;
+    height: auto;
     position: fixed;
     background-color: white;
     z-index: 2000;
@@ -30,10 +30,18 @@
         margin-bottom: 10px;
     }
 
+    .start-button-wrapper {
+      position: relative;
+      bottom: 20px;
+      margin-top: 100px;
+    }
+
     #start-button
     {
-        position: fixed;
         width: 100%;
+        position: relative;
+        width: 100%;
+        left: 0;
     }
     .btn
     {
@@ -50,13 +58,10 @@
     .shopping-spree-share-modal
     {
         width: 100%;
+        max-width: 500px;
+        padding: 20px;
     }
 
-    #start-button
-    {
-        bottom: 0;        
-    }
-    
 }
 
 @media (min-width: 767px)
@@ -68,8 +73,8 @@
 
     #start-button
     {
-        bottom: 15%;        
+        bottom: 15%;
     }
-    
-    
+
+
 }
