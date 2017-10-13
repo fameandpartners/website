@@ -34,7 +34,8 @@ module Orders
                    :shipped?,
                    :order_return_requested?,
                    :returnable?,
-                   :item_count
+                   :item_count,
+                   :return_type
 
     attr_reader :spree_order, :items
 
