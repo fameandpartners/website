@@ -48,7 +48,6 @@ Spree::PaypalController.class_eval do
         :PaymentDetails => [payment_details(items)]
       }})
 
-    # binding.pry
     current_order.return_type = params['return_type']
     current_order.save
 
