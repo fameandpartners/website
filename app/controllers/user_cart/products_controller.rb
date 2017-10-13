@@ -7,7 +7,6 @@ class UserCart::ProductsController < UserCart::BaseController
   def create
     ensure_size_id_is_set( params )
     ensure_height_is_set( params )
-    
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
@@ -32,7 +31,7 @@ class UserCart::ProductsController < UserCart::BaseController
         associate_user
       end
 
-      if current_promotion.present?
+      if false &&current_promotion.present?
         promotion_service = UserCart::PromotionsService.new(
           order: current_order,
           code:  current_promotion.code
@@ -42,6 +41,8 @@ class UserCart::ProductsController < UserCart::BaseController
           fire_event('spree.order.contents_changed')
           fire_event('spree.checkout.coupon_code_added')
         end
+      else
+        create_coupon_if_from_shopping_spree( current_order )
       end
 
       @user_cart = user_cart_resource.read
@@ -108,6 +109,35 @@ class UserCart::ProductsController < UserCart::BaseController
     )
   end
 
+  def create_coupon_if_from_shopping_spree( order )
+    promo = Spree::Promotion.new
+    guid = SecureRandom.uuid.to_s
+    promo.name = "SHOPPING_SPREE #{guid}"
+    promo.code = guid
+    promo.event_name = "spree.checkout.coupon_code_added"
+    promo.usage_limit = 1
+    promo.description = ""
+    promo.advertise                = false
+    promo.eligible_to_custom_order = true
+    promo.eligible_to_sale_order   = false
+    promo.save!
+
+    calculator  = Spree::Calculator::FlatRate.create
+    calculator.preferred_amount   = 35
+    calculator.preferred_currency = 'USD'
+    calculator.save!
+
+    action = Spree::Promotion::Actions::CreateAdjustment.create
+    action.calculator   = calculator
+    action.activator_id = promo.id
+    action.save!
+
+    promo.actions << action
+    promo.save!
+#    delete_old_promotions #This method exists in promotino_service
+    promo.activate(:order => order, :coupon_code => promo.code)    
+  end
+  
   def ensure_size_id_is_set( params )
     if( params[:size_id].nil? && !params[:size].nil? )
       params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id

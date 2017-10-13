@@ -76,6 +76,40 @@ export default class Cart extends FirebaseComponent
         }
     }
 
+  checkoutOneItem( position )
+  {
+    if( position >= this.state.myItems.length )
+    {
+      this.props.doneShoppingSpree();
+      window.location = '/checkout';    
+    } else
+    {
+      let dress = this.state.myItems[position].props.dress;
+      let context = this;
+      request.post('/user_cart/products')
+        .send(
+          { 
+            variant_id: dress.product_variant_id,
+            dress_variant_id: dress.product_variant_id,
+            size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
+            color_id: dress.color['id'],
+            height_value: dress.height,
+            height_unit: 'inch'
+          }
+        ).end((error, response) => {
+          context.checkoutOneItem( position + 1 );          
+          console.log( response.body );
+          
+        } );
+    }
+  }
+  
+  checkout()
+  {
+    this.checkoutOneItem( 0 );
+    
+  }
+    
     deleteItem( firebaseKey )
     {
         let index = -1;
