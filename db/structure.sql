@@ -2010,6 +2010,37 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE newgistics_schedulers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
+
+
+--
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5827,6 +5858,13 @@ ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_s
 
 
 --
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
+
+
+--
 -- Name: next_logistics_return_request_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6876,6 +6914,14 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
@@ -9710,3 +9756,5 @@ INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
