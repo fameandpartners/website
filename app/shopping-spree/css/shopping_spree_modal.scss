@@ -33,7 +33,7 @@
     .shopping-spree-onboarding
     {
         padding-bottom: 150px;
-        
+
         .mobile
         {
             display: none;
@@ -47,9 +47,9 @@
         {
             margin-top: -5%;
         }
-        
+
     }
-    
+
 }
 
 .shopping-spree-onboarding
@@ -60,14 +60,14 @@
         padding-left: 0;
         padding-right: 0;
     }
-    
+
     .equal
     {
         display: flex;
         flex-wrap: wrap;
     }
-    
-    
+
+
     &.modal
     {
         position: fixed;
@@ -78,6 +78,7 @@
         overflow-x: hidden;
         overflow-y: auto;
         background-color: #f6f5f3;
+        z-index: 150;
         #shopping-spree-modal-content
         {
             width: 100%;
@@ -89,7 +90,7 @@
             {
                 color: black;
             }
-            
+
             .btn-close
             {
                 top: 22px;
@@ -109,14 +110,14 @@
                 {
                     padding-bottom: 42px;
                 }
-                
+
             }
             .base-text
             {
                 line-height: 31px;
                 font-size: 26px;
             }
-            
+
             .body-text
             {
                 @extend .base-text;
@@ -127,7 +128,7 @@
             {
                 padding-top: 92px;
             }
-            
+
 
             .dress-image-left
             {
@@ -149,7 +150,7 @@
                     width: 100%;
                 }
             }
-            
+
             #dress-one
             {
                 z-index: -1;
@@ -185,7 +186,7 @@
                     padding-top: 36px;
                 }
 
-                
+
             }
 
             .dress-three-percent-text
@@ -194,9 +195,9 @@
                 font-weight: bold;
                 padding-top: 10px;
             }
-            
+
         }
-        
+
     }
 
 }
