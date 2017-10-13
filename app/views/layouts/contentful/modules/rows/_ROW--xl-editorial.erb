@@ -1,0 +1,8 @@
+<% @lg_contents = contents %>
+<div class="section-row columns">
+  <div class="column is-full">
+    <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
+      <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+    </div>
+  </div>
+</div>

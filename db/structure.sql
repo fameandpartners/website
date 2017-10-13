@@ -3663,7 +3663,8 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean
+    orderbot_synced boolean,
+    return_type character varying(255)
 );
 
 
@@ -9785,5 +9786,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
+
+INSERT INTO schema_migrations (version) VALUES ('20170914013707');
+
+INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');

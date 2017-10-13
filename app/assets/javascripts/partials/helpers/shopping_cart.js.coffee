@@ -186,6 +186,39 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  applyReturnTypePromoCode: (code) ->
+    if (code == 'DELIVERYDISC')
+      option = 'A'
+    else if (code == 'DELIVERYINS')
+      option = 'B'
+
+    $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
+
+    $.ajax(
+      url: "/user_cart/promotion",
+      type: 'POST',
+      dataType: "json",
+      data: { promotion_code: code }
+    ).success((data) =>
+      if data.error
+        $('.js-returns-trigger-' + option)
+          .toggleClass('AJAX__in-process')
+          .prop('checked', false)
+        console.log(data.error)
+        @trigger('error', data)
+        @trigger('complete', data)
+      else
+        @updateData(data)
+        @trigger('success', data)
+        @trigger('complete', data)
+    ).error( () =>
+      $('.js-returns-trigger-' + option)
+        .toggleClass('AJAX__in-process')
+        .prop('checked', false)
+      @trigger('error')
+    )
+
+
   # analytics
   trackAddToCart: (product) ->
     try

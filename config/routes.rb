@@ -123,6 +123,8 @@ FameAndPartners::Application.routes.draw do
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
+    # IT Girl Internship Competition landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'fame-it-girl', :as => :it_girl_landing_page
     # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
     get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
@@ -438,7 +440,9 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
     get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
-    get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
+
+    get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
+
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
     get '/fashionista2014', to: redirect("/")

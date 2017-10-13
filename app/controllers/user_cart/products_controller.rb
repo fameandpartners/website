@@ -45,6 +45,8 @@ class UserCart::ProductsController < UserCart::BaseController
         create_coupon_if_from_shopping_spree( current_order )
       end
 
+      reapply_delivery_promo
+      
       @user_cart = user_cart_resource.read
 
       data = add_analytics_labels(@user_cart.serialize)
@@ -77,16 +79,19 @@ class UserCart::ProductsController < UserCart::BaseController
 
   def destroy
     cart_product_service.destroy
+    reapply_delivery_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_customization
     cart_product_service.destroy_customization(params[:customization_id])
+    reapply_delivery_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_making_option
     cart_product_service.destroy_making_option(params[:making_option_id])
+    reapply_delivery_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
@@ -107,6 +112,16 @@ class UserCart::ProductsController < UserCart::BaseController
       order: current_order(true),
       line_item_id: params[:line_item_id]
     )
+  end
+
+  def reapply_delivery_promo
+    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
+      promotion_service = UserCart::PromotionsService.new(
+        order: current_order,
+        code:  'DELIVERYDISC'
+      )
+      promotion_service.reapply
+    end
   end
 
   def create_coupon_if_from_shopping_spree( order )
@@ -134,7 +149,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
     promo.actions << action
     promo.save!
-#    delete_old_promotions #This method exists in promotino_service
+    #    delete_old_promotions #This method exists in promotino_service
     promo.activate(:order => order, :coupon_code => promo.code)    
   end
   
