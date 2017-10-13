@@ -49,33 +49,6 @@ export default class Cart extends FirebaseComponent
         this.recalculateDiscount();
     }
 
-    checkout()
-    {
-        console.log( 'checking out' );
-        for( let i = 0 ;  this.state.myItems.length; i++ )
-        {
-            let dress = this.state.myItems[i].props.dress;
-            console.log( this.state.myItems[i].props.dress );
-            request.post('/user_cart/products')
-                .set('Content-Type', 'application/json')
-                .send(
-                    {
-                        product: {
-                            variant_id: 45767,
-                            dress_variant_id: 45767,
-                            size_id: 34,
-                            color_id: 283,
-                            height: 61,
-                            height_value: 1234,
-                            height_unit: 'inch'
-                        }
-                    }
-                ).end((error, response) => {
-                    console.log( response.body );
-                } );
-        }
-    }
-
   checkoutOneItem( position )
   {
     if( position >= this.state.myItems.length )
@@ -94,7 +67,8 @@ export default class Cart extends FirebaseComponent
             size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
             color_id: dress.color['id'],
             height_value: dress.height,
-            height_unit: 'inch'
+            height_unit: 'inch',
+            shopping_spree_total: this.state.totalInSharedCart
           }
         ).end((error, response) => {
           context.checkoutOneItem( position + 1 );          
@@ -107,7 +81,6 @@ export default class Cart extends FirebaseComponent
   checkout()
   {
     this.checkoutOneItem( 0 );
-    
   }
     
     deleteItem( firebaseKey )

@@ -31,7 +31,7 @@ class UserCart::ProductsController < UserCart::BaseController
         associate_user
       end
 
-      if false &&current_promotion.present?
+      if params[:shopping_spree_total].nil? && current_promotion.present?
         promotion_service = UserCart::PromotionsService.new(
           order: current_order,
           code:  current_promotion.code
@@ -41,8 +41,8 @@ class UserCart::ProductsController < UserCart::BaseController
           fire_event('spree.order.contents_changed')
           fire_event('spree.checkout.coupon_code_added')
         end
-      else
-        create_coupon_if_from_shopping_spree( current_order )
+p      elsif( params[:shopping_spree_total] )
+        create_coupon_if_from_shopping_spree( current_order, params[:shopping_spree_total] )
       end
 
       reapply_delivery_promo
@@ -114,6 +114,7 @@ class UserCart::ProductsController < UserCart::BaseController
     )
   end
 
+
   def reapply_delivery_promo
     if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
       promotion_service = UserCart::PromotionsService.new(
@@ -124,33 +125,41 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-  def create_coupon_if_from_shopping_spree( order )
-    promo = Spree::Promotion.new
-    guid = SecureRandom.uuid.to_s
-    promo.name = "SHOPPING_SPREE #{guid}"
-    promo.code = guid
-    promo.event_name = "spree.checkout.coupon_code_added"
-    promo.usage_limit = 1
-    promo.description = ""
-    promo.advertise                = false
-    promo.eligible_to_custom_order = true
-    promo.eligible_to_sale_order   = false
-    promo.save!
+  def calculate_discount( total )
+    (total.to_f - 200.0) / 10000.0
+  end
+  
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total )
+    if( current_promotion && !current_promotion.name.index( 'SHOPPING SPREE' ).nil? )
+      
+    else
+      promo = Spree::Promotion.new
+      guid = SecureRandom.uuid.to_s
+      promo.name = "SHOPPING_SPREE #{guid}"
+      promo.code = guid
+      promo.event_name = "spree.checkout.coupon_code_added"
+      promo.usage_limit = 1
+      promo.description = ""
+      promo.advertise                = false
+      promo.eligible_to_custom_order = true
+      promo.eligible_to_sale_order   = false
+      promo.save!
 
-    calculator  = Spree::Calculator::FlatRate.create
-    calculator.preferred_amount   = 35
-    calculator.preferred_currency = 'USD'
-    calculator.save!
+      calculator  = Spree::Calculator::FlatRate.create
+      calculator.preferred_amount   = calculate_discount( shopping_spree_total ) * order.total
+      calculator.preferred_currency = 'USD'
+      calculator.save!
 
-    action = Spree::Promotion::Actions::CreateAdjustment.create
-    action.calculator   = calculator
-    action.activator_id = promo.id
-    action.save!
+      action = Spree::Promotion::Actions::CreateAdjustment.create
+      action.calculator   = calculator
+      action.activator_id = promo.id
+      action.save!
 
-    promo.actions << action
-    promo.save!
-    #    delete_old_promotions #This method exists in promotino_service
-    promo.activate(:order => order, :coupon_code => promo.code)    
+      promo.actions << action
+      promo.save!
+      #    delete_old_promotions #This method exists in promotino_service
+      promo.activate(:order => order, :coupon_code => promo.code)
+    end
   end
   
   def ensure_size_id_is_set( params )
