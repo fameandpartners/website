@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 namespace :newgistics do
   task update_item_returns: :environment do
-    client = Newgistics::NewgisticsClient.new
     if (scheduler = Newgistics::NewgisticsScheduler.first).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
-      scheduler.last_successful_run = 1.day.ago.to_datetime.to_s
+      scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
       scheduler.save
     end
-    current_time = DateTime.now.utc.to_s
+    current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    client = Newgistics::NewgisticsClient.new
     res = client.get_inbound_returns(scheduler.last_successful_run, current_time)
-
     if res['response'].nil?
       NewRelic::Agent.notice_error(res.to_s)
       Raven.capture_exception(res.to_s)
