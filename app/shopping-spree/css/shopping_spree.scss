@@ -1,415 +1,499 @@
-/* stylelint-disable selector-no-id */
-
 @import 'shopping_spree_text_message';
-
 @import 'shopping_spree_joined_message';
-
 @import 'shopping_spree_dress_message';
-
 @import 'shopping_spree_cart';
-
 @import 'shopping_spree_modal';
-
 @import 'shopping_spree_share_modal';
-
 @import 'shopping_spree_add_to_cart_modal';
-
 @import 'shopping_spree_toast';
-
-@import 'variables';
+@import 'redesign/vars';
 
 
 $header_height: 68px;
 $chat_bar_height: 55px;
 $chat_bar_header_height: 22px;
 
-.shopping-spree {
-  font-weight: 400;
-}
+#shopping-spree
+{
+    font-family: $font-family-secondary;
+    font-weight: 400;
+    font-size: 14px;
 
-.shopping-spree .shopping-spree-error {
-  color: $c-red;
-}
+    .shopping-spree-error
+    {
+        color: #F60614;
+    }
 
-.shopping-spree .red-border {
-  border-color: $c-red;
-}
+    .red-border
+    {
+        border-color: #F60614;
+    }
+    .shopping-spree-link-container {
+      margin-bottom: 30px;
+    }
+    .shopping-spree-link
+    {
+        text-decoration: underline;
+    }
 
-.shopping-spree .shopping-spree-link {
-  text-decoration: underline;
-}
+    .shopping-spree-big-headline
+    {
+        font-size: 24px;
+    }
 
-.shopping-spree .shopping-spree-headline {
-  font-size: 18px;
-}
+    .center-button-text
+    {
+        padding:0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.shopping-spree .shopping-spree-big-headline {
-  font-size: 24px;
-}
+    .no-right-gutter
+    {
+        margin-right: 0;
+        padding-right: 0;
+    }
 
-.shopping-spree .center-button-text {
-  padding: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .no-left-gutter
+    {
+        margin-left: 0;
+        padding-left: 0;
+    }
 
-.shopping-spree .no-right-gutter {
-  margin-right: 0;
-  padding-right: 0;
-}
+    .row
+    {
+        &.top-padding-sm
+        {
+            padding-top: 15px;
+        }
 
-.shopping-spree .no-right-gutter {
-  margin-right: 0;
-  padding-right: 0;
-}
+        &.bottom-padding-sm
+        {
+            padding-bottom: 15px;
+        }
+    }
 
-.shopping-spree .no-left-gutter {
-  margin-left: 0;
-  padding-left: 0;
-}
+    .vertical-align
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.shopping-spree .row.top-padding-sm {
-  padding-top: 15px;
-}
-
-.shopping-spree .row.bottom-padding-sm {
-  padding-bottom: 15px;
-}
-
-.shopping-spree .vertical-align {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.shopping-spree .no-horizontal-padding {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .equal {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .header {
-  background-color: $c-white;
-  text-align: center;
-  font-size: 16px;
-  border-bottom: 1px;
-  border-bottom-color: $c-medium-gray;
-  border-bottom-style: solid;
-  border-top: 1px;
-  border-top-color: $c-medium-gray;
-  border-top-style: solid;
-  height: $header_height;
-
-  @extend .vertical-align;
+    .no-horizontal-padding
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
 }
 
-.shopping-spree-wrapper .shopping-spree-container .full-toggle-btn {
-  display: none;
-  cursor: pointer;
-}
 
-.shopping-spree-wrapper .shopping-spree-container .icon-bag {
-  cursor: pointer;
-  font-size: 22px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .toggle-btn {
-  display: block;
-  cursor: pointer;
-  z-index: 10;
-  color: $c-black;
-  padding-bottom: 3px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .open-caret:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20px;
-  border-left: 8px solid $c-black;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .open-caret:after {
-  content: '';
-  position: absolute;
-  left: 20px;
-  top: 1px;
-  border-left: 7px solid $c-white;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .open-caret {
-  background-color: $c-white;
-  padding-bottom: 15px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-list {
-  overflow-x: hidden;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-list ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-list .chat-header {
-  font-size: 14px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-list .chat-header .header-name {
-  color: $c-medium-gray;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-bar-container {
-  padding: 10px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-bar {
-  height: 45px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-bar .btn {
-  height: 100%;
-  padding: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-bar .shoppingSpreeTextInput {
-  height: 100%;
-  width: 100%;
-  border-color: $c-medium-gray;
-  border-width: 1px;
-  padding-left: 20px;
-}
-
-.shopping-spree-wrapper .shopping-spree-container .chat-content {
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: calc( 100vh - #{$header_height} - #{$chat_bar_height} - #{$chat_bar_header_height} );
-}
-
-.shopping-spree-wrapper .shopping-spree-container.collapsed {
-  height: auto;
-}
-
-.shopping-spree-wrapper .shopping-spree-container.collapsed .chat-bar {
-  display: none;
-}
-
-.shopping-spree-wrapper .shopping-spree-container.collapsed .chat-list {
-  display: none;
-}
-
-.shopping-spree-wrapper .shopping-spree-container {
-
-  @extend .shopping-spree;
-
-  background-color: $c-white;
-  width: 500px;
-  height: 100%;
-  color: $c-black;
-}
-
-.shopping-spree-wrapper {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  overflow: hidden;
-  z-index: 999;
-}
-
-@media (max-width: 767px) {
-  .shopping-spree .no-gutter-mobile {
-    margin-right: 0;
-    padding-right: 0;
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .shopping-spree .no-gutter-mobile {
-    margin-right: 0;
-    padding-right: 0;
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .shopping-spree-wrapper {
+.shopping-spree-wrapper
+{
+    cursor: pointer;
     position: fixed;
-    top: auto;
-    bottom: 0px;
-    height: auto;
-    width: 100%;
-  }
-
-  .shopping-spree-container {
-    width: 100%;
-  }
-
-  .shopping-spree-container .shoppingSpreeTextInput {
-    font-size: 14px;
-  }
-
-  .shopping-spree-container.open {
-    min-height: 100%;
-  }
-
-  .shopping-spree-container .btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-
-  .shopping-spree-container .open-caret:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-top: 8px solid $c-black;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-  }
-
-  .shopping-spree-container .open-caret:after {
-    content: '';
-    position: absolute;
-    left: 1px;
-    top: 0;
-    border-top: 7px solid $c-white;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-  }
-
-  .shopping-spree-container .open-caret {
-    background-color: $c-white;
-  }
-
-  .shopping-spree-container .closed-caret {
-    background-color: $c-white;
-  }
-
-  .shopping-spree-container .closed-caret:before {
-    content: '';
-    top: 0;
-    left: 0;
-    position: absolute;
-    border-bottom: 8px solid $c-black;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-  }
-
-  .shopping-spree-container .closed-caret:after {
-    content: '';
-    left: 1px;
-    top: 1px;
-    position: absolute;
-    border-bottom: 7px solid $c-white;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-  }
-
-  .shopping-spree-container .header {
-    text-align: left;
-    font-size: 16px;
-    padding-left: 20px;
-  }
-}
-
-@media (min-width: 767px) {
-  .shopping-spree-wrapper .collapsed {
-    top: 40px;
-    right: 20px;
-  }
-
-  .shopping-spree-wrapper .shopping-spree-container.collapsed .header {
-    height: 44px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 9px;
-    border-color: $c-medium-gray;
-  }
-
-  .shopping-spree-wrapper .shopping-spree-container.collapsed .toggle-btn {
-    display: none;
-  }
-
-  .shopping-spree-wrapper .shopping-spree-container.collapsed .full-toggle-btn {
-    background-color: $c-red;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
+    overflow: hidden;
+    z-index: 999;
     height: 100%;
-    background-color: transparent;
-    z-index: 1000;
+    max-width: 524px;
+    min-width: 310px;
+    width: 36%;
+    right: 0;
+
+    .shopping-spree-cart {
+      background: white;
+    }
+
+    &.open {
+      background: white;
+    }
+
+    .shopping-spree-container
+    {
+        @extend .shopping-spree;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        &.open {
+          background: white;
+        }
+
+        .equal
+        {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+
+        .header
+        {
+            background-color: white;
+            text-align: center;
+            font-size: 1em;
+            box-shadow: 1px 0 4px -1px #979797;
+            height: $header_height;
+            @extend .vertical-align;
+        }
+
+        .full-toggle-btn
+        {
+            display: none;
+            cursor: pointer;
+        }
+
+        .icon-bag
+        {
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        .toggle-btn
+        {
+            display: block;
+            cursor: pointer;
+            z-index: 10 !important;
+            color: #000;
+            padding-bottom: 3px;
+        }
+
+        .open-caret
+        {
+            background-color: white;
+            padding-bottom: 15px;
+            &:before
+            {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 20px;
+                border-left: 8px solid #000000;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+            }
+
+            &:after
+            {
+                content: '';
+                position: absolute;
+                left: 20px;
+                top: 1px;
+                border-left: 7px solid white;
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+            }
+
+        }
+
+        .chat-list
+        {
+            overflow-x: visible;
+            padding-bottom: 20px;
+            ul
+            {
+                list-style-type: none;
+                padding:0;
+            }
+
+            .chat-header
+            {
+                margin: 3px 0 0 0;
+                .header-name
+                {
+                    color: #979797;
+                }
+            }
+        }
+
+        .chat-list-exit {
+          margin-right: 25px;
+        }
+
+        .link {
+          color: black;
+          text-decoration: underline;
+        }
+
+        .chat-bar
+        {
+            width: 100%;
+            height: 45px;
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            .shoppingSpreeTextInput
+            {
+                height: 100%;
+                width: 100%;
+                border-color: #979797;
+                border-width: 1px;
+                padding-left: 20px;
+            }
+
+            .btn
+            {
+                height: 100%;
+                padding:0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .chat-content
+        {
+            background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: calc( 100vh - #{$header_height} - #{$chat_bar_height} - #{$chat_bar_header_height} );
+        }
+
+        &.collapsed
+        {
+            height: auto;
+            .chat-list
+            {
+                display: none;
+            }
+            .chat-bar
+            {
+                display: none;
+            }
+
+        }
+
+
+    }
+
+    .icon-bag {
+      vertical-align: text-bottom;
+    }
+}
+
+@media (max-width: 767px)
+{
+
+    .shopping-spree
+    {
+        .no-gutter-mobile
+        {
+            margin-right: 0;
+            padding-right: 0;
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
+
+    .shopping-spree-wrapper
+    {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    .shopping-spree-wrapper.collapsed
+    {
+      height: 80px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      min-width: initial;
+      max-width: initial;
+    }
+
+    .shopping-spree-container.collapsed .header
+    {
+      height: 56px;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 9px;
+      border-color: #888888;
+    }
+
+    .shopping-spree-container
+    {
+        width: 100%;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        background: transparent;
+
+        .shoppingSpreeTextInput
+        {
+            font-size: 14px;
+        }
+
+        &.collapsed
+        {
+            width: 95%;
+            max-width: 320px;
+            border-radius: 9px;
+        }
+        &.open
+        {
+            min-height: 100%;
+        }
+
+        .btn
+        {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .open-caret
+        {
+            background-color: white;
+            &:before
+            {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-top: 8px solid #000000;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+            }
+
+            &:after
+            {
+                content: '';
+                position: absolute;
+                left: 1px;
+                top: 0;
+                border-top: 7px solid white;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+            }
+
+        }
+
+        .closed-caret
+        {
+            background-color: white;
+            &:before
+            {
+                content: '';
+                top: 0;
+                left: 0;
+                position: absolute;
+                border-bottom: 8px solid #000000;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+            }
+
+            &:after
+            {
+                content: '';
+                left: 1px;
+                top: 1px;
+                position: absolute;
+                border-bottom: 7px solid white;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+            }
+
+        }
+
+        .header
+        {
+            text-align: left !important;
+            font-size: 16px;
+            padding-left: 20px;
+        }
+
+    }
+
+
+}
+
+@media (min-width: 767px)
+{
+
+    .shopping-spree-wrapper
+    {
+        &.collapsed
+        {
+            width: 250px;
+            min-width: inherit;
+            top: 40px;
+            right: 10px;
+            max-height: 45px;
+        }
+
+
+        .shopping-spree-container
+        {
+
+            &.collapsed
+            {
+                border-radius: 9px;
+                margin: 0 0 0 auto;
+                height: auto;
+                top: 0;
+
+                .header
+                {
+                    height: 44px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-radius: 9px;
+                    border-color: #888888;
+                }
+
+                .toggle-btn
+                {
+                    display: none;
+
+                }
+
+                .full-toggle-btn
+                {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    background-color: transparent;
+                    z-index: 1000;
+
+                }
+            }
+
+            .chat-list
+            {
+                .chat-content
+                {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Shared styles for Shopping Spree
+.float-none {
+  float: none !important;
+}
+
+.shspree-signup-section {
+  margin-bottom: 100px;
+}
+
+#shopping-spree {
+  input {
+    border-radius: 0;
+    border: 1px solid black;
   }
-
-  .shopping-spree-wrapper .shopping-spree-container.collapsed {
-    width: 250px;
-    border-radius: 9px;
-    margin: 0 0 0 auto;
-  }
-
-  .shopping-spree-wrapper .shopping-spree-container .chat-list .chat-content {
-    display: block;
-  }
 }
 
-
-.ExitModal {
-  width: 320px;
-  height: 245px;
-  background-color: #ffffff;
-  border: 1px solid #bfbfbf;
-  margin: 25vh auto 0;
-}
-
-@media (min-width: 767px) {
-  .ExitModal {
-    width: 375px;
-  }
-}
-
-.ExitModal__buttonContainer {
-  text-align: center;
-}
-
-.ExitModal .headline {
-  text-align: center;
-  padding-top: 55px;
-  line-height: 24px;
-  font-size: 20px;
-}
-
-.ExitModal .btn {
-  min-width: 125px;
-  border: 1px solid #000;
-  object-fit: contain;
-  margin: 0 5px;
-  font-size: 14px;
-}
-
-@media (min-width: 767px) {
-  min-width: 143px;
-  margin: 0 10px;
-}
-
-.ExitModal__closeIcon {
-  text-align: right;
-  margin-bottom: 0;
-  font-size: 55px;
-  line-height: 42px;
-  padding-right: 40px;
-  padding-top: 6px;
-  cursor: pointer;
+.u-width--full {
+  width: 100%;
 }

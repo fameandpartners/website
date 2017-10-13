@@ -1,9 +1,17 @@
-@import 'variables';
-
-.shopping-spree-container .chat-content .joined-message .joined-text {
-  margin-top: 16px;
-  margin-bottom: 16px;
-  font-size: 12px;
-  color: $c-neutral-8;
-  text-align: center;
+.shopping-spree-container
+{
+    .chat-content
+    {
+        .joined-message
+        {
+            .joined-text
+            {
+                margin-top: 16px;
+                margin-bottom: 16px;
+                font-size: 12px;
+                color: #979797;
+                text-align: center;
+            }
+        }
+    }
 }
