@@ -60,8 +60,8 @@ export default class ShareModal extends React.Component
                   <div id="start-button">
                     <div  className="col-xs-12 col-lg-6 margin--center float-none no-gutter-mobile">
                       { this.props.hasEntered
-                        ? <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Continue Shopping Spree</a>
-                        : <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Start Shopping Spree</a>
+                        ? <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Continue Clique</a>
+                        : <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Start Clique</a>
                       }
                     </div>
                   </div>

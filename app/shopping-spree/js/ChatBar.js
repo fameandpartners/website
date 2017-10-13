@@ -38,7 +38,9 @@ export default class ChatBar extends FirebaseComponent {
                                  productImage,
                                  productUrl,
                                  color,
-                                 customizations)
+                                 customizations);
+     this.props.transitionToChat();
+
   }
 
     initializeFirebase()
@@ -87,5 +89,6 @@ ChatBar.propTypes = {
     firebaseNodeId: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.number.isRequired
+    icon: React.PropTypes.number.isRequired,
+    transitionToChat: React.PropTypes.func.isRequired,
 }

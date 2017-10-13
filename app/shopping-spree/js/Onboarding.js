@@ -15,7 +15,7 @@ export default class Onboarding extends FirebaseComponent
     {
         let context = this;
 
- 
+
         this.connectToFirebase();
         let shoppingSpreeId = this.createNewShoppingSpree();
         this.createFamebotMessage( 'You can post items here and chat with your friends' )
@@ -35,12 +35,12 @@ export default class Onboarding extends FirebaseComponent
                                              },
                                              null
                                            )
-        
+
         context.props.doneOnboarding( this.nameInput.value,
                                       this.emailInput.value,
                                       Math.floor(Math.random() * 20),
                                       shoppingSpreeId );
-        
+
     }
 
     render()
@@ -56,7 +56,7 @@ export default class Onboarding extends FirebaseComponent
                 </div>
                 <div id="bottom-headline" className="welcome-headline row">
                   <div className="col-xs-12 text-center">
-                    Partner Shop.
+                    Clique.
                   </div>
                 </div>
 
@@ -67,7 +67,7 @@ export default class Onboarding extends FirebaseComponent
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-4">
                     <div className="row dress-one-text">
                       <div className="body-text col-md-12 text-center vertical-align">
-                        Shop with your friends and get discounts the more you add to your cart
+                        Shop with your friends and get discounts the more the group adds to the cart
                       </div>
                     </div>
                     <div className="row dress-one-text-two desktop">
@@ -85,7 +85,7 @@ export default class Onboarding extends FirebaseComponent
                       Invite your friends to shop with you
                     </div>
                     <div className="body-text desktop">
-                      You and your friends can add items to your shopping spree
+                      You and your friends can add items to Clique
                     </div>
                   </div>
                   <div id="dress-two-image" className="col-md-push-4 col-md-4 col-xs-8 col-xs-push-2  dress-image-right">
@@ -99,7 +99,7 @@ export default class Onboarding extends FirebaseComponent
                   </div>
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-3 vertical-align">
                     <div className="body-text text-center mobile">
-                      You and your friends can add items to your shopping spree
+                      You and your friends can add items to Clique
                     </div>
                     <div className="row">
                       <div className="body-text text-center col-md-12 desktop">
@@ -144,7 +144,7 @@ export default class Onboarding extends FirebaseComponent
 
                   <div className="row">
                     <div  className="col-xs-12 col-lg-5 float-none margin--center">
-                      <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Shopping Spree</a>
+                      <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Clique</a>
                     </div>
                   </div>
                 </div>

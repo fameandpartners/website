@@ -179,7 +179,7 @@ export default class Cart extends FirebaseComponent
                 <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
                 <div className="left-caret"></div>
                 <div className="back-to-spree-text shopping-spree-headline">
-                    Back to spree
+                    Back to Clique
                 </div>
                 </div>
                 <div className="col-xs-4 col-md-4 text-center">

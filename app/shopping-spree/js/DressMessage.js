@@ -45,17 +45,22 @@ export default class DressMessage extends React.Component
 
     }
 
-    generateBackgroundValueFromColor({ patternUrl, hexValue }) {
+    generateBackgroundValueFromColor({ image, patternUrl, hexValue }) {
       if (patternUrl) {
         return `url(${patternUrl})`;
+      }
+
+      if (image) {
+        return `url(${image})`;
       }
 
       return hexValue;
     }
 
-      generateColorSelectionNode({hexValue = '#ffffff', patternUrl}) {
+      generateColorSelectionNode({hexValue, image, patternUrl}) {
       const background = this.generateBackgroundValueFromColor({
         hexValue: hexValue,
+        image,
         patternUrl,
       });
 
@@ -104,7 +109,7 @@ export default class DressMessage extends React.Component
                     </div>
                     <div className="row">
                       <div className="col-xs-6">
-                        Color&nbsp;{this.props.dress.color.name}&nbsp;
+                        Color&nbsp;{this.props.dress.color.presentation}&nbsp;
                         {this.generateColorSelectionNode(this.props.dress.color)}
                       </div>
                     </div>
