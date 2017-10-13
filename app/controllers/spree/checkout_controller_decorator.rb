@@ -355,9 +355,9 @@ Spree::CheckoutController.class_eval do
   def remove_ineligible_promotions
      duplicate = @order.adjustments.select {|x| !x.eligible}
      if !duplicate.empty?
-       order.adjustments.promotion.delete(duplicate.first)
-       order.adjustments.delete(duplicate.first)
-       order.save!
+       @order.adjustments.promotion.delete(duplicate.first)
+       @order.adjustments.delete(duplicate.first)
+       @order.save!
      end
   end
 
