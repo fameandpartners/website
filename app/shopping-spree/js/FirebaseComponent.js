@@ -27,7 +27,7 @@ export default class FirebaseComponent extends React.Component
             return initialDiscount;
         }
     }
-    
+
     connectToFirebase()
     {
         if( firebase.apps.length === 0 )
@@ -41,7 +41,7 @@ export default class FirebaseComponent extends React.Component
                     storageBucket: this.props.firebaseDatabase + ".appspot.com"
                 }
             firebase.initializeApp( config );
-       } 
+       }
     }
 
     createNewShoppingSpree()
@@ -52,13 +52,13 @@ export default class FirebaseComponent extends React.Component
                    created_at:
                    firebase.database.ServerValue.TIMESTAMP } );
         this.firebaseNodeId = ref.key;
-        
+
         return ref.key
     }
-    
-    createFamebotMessage( text )
+
+    createFamebotMessage( text, type )
     {
-        this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20 );
+        this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20, type );
     }
 
     createFamebotShareDressMessage( productID,
@@ -124,14 +124,14 @@ export default class FirebaseComponent extends React.Component
                        },
 
                       );
-        
-    }
-    
 
-    createTextMessage( text, name, email, icon )
+    }
+
+
+    createTextMessage( text, name, email, icon, type = 'text' )
     {
         let newMessage = this.databaseRef( 'chats' ).push();
-        newMessage.set( { type: 'text',
+        newMessage.set( { type,
                           value: text,
                           created_at: firebase.database.ServerValue.TIMESTAMP,
                           from:
@@ -142,12 +142,12 @@ export default class FirebaseComponent extends React.Component
                           }
                         }
                       );
-        
+
     }
 
     databaseRef( name )
     {
         return firebase.apps[0].database().ref( this.firebaseNodeId + "/" + name )
     }
-    
+
 }

@@ -28,7 +28,7 @@ export default class Toast extends FirebaseComponent
             if( ( this.props.visible ) && (this.props.email != data.val().from.email ) )
             {
                 this.state.toasts.unshift(<ToastTextMessage key={data.key}
-                                          text={data.val().value} 
+                                          text={data.val().value}
                                           iconNumber={parseInt(data.val().from.icon)}
                                           name={data.val().from.name}
                                           email={data.val().from.email}
@@ -44,11 +44,11 @@ export default class Toast extends FirebaseComponent
             this.firstRead = true;
         }
     }
-    
+
     startListeningToFirebase()
     {
         super.connectToFirebase();
-        
+
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
         this.chatsDB.limitToLast(1).on( 'child_added', this.addToast );
     }
@@ -58,10 +58,10 @@ export default class Toast extends FirebaseComponent
         this.chatsDB.off( 'child_added', this.addToast );
         this.fristRead = false;
     }
-    
+
     componentWillMount()
     {
-        this.startListeningToFirebase();             
+        this.startListeningToFirebase();
     }
 
     componentWillUnmount()
@@ -70,7 +70,7 @@ export default class Toast extends FirebaseComponent
     }
 
 
-    
+
     componentWillReceiveProps(nextProps)
     {
         if (nextProps.visible === false )
@@ -101,7 +101,7 @@ export default class Toast extends FirebaseComponent
         );
 
     }
-    
+
     render()
     {
         return(

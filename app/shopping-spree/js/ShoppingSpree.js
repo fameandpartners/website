@@ -6,9 +6,14 @@ import Onboarding from './Onboarding';
 import ShareModal from './ShareModal';
 import AddToCartModal from './AddToCartModal';
 import win from './windowPolyfill';
+import FirebaseComponent from './FirebaseComponent';
 import Modal from 'react-modal';
+import * as firebase from 'firebase';
+import _ from 'lodash';
 
-export default class ShoppingSpree extends React.Component {
+import { ToastContainer, toast } from 'react-toastify';
+
+export default class ShoppingSpree extends FirebaseComponent {
   constructor(props) {
     super(props);
     this.cookies = new Cookies();
@@ -24,9 +29,45 @@ export default class ShoppingSpree extends React.Component {
     this.startOnboarding = this.startOnboarding.bind(this);
     this.closeOnboarding = this.closeOnboarding.bind(this);
     this.hideZopim = this.hideZopim.bind(this);
+    this.notify = this.notify.bind(this);
+    this.showValues = this.showValues.bind(this);
+    this.addChatMessage = this.addChatMessage.bind(this);
     win.startShoppingSpree = this.startOnboarding;
   }
 
+  componentWillMount() {
+    const { firebaseNodeId } = this.state;
+    console.log("firebaseNodeId", firebaseNodeId)
+    super.connectToFirebase();
+    const spreeFirebase = firebase.apps[0].database()
+    this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
+    this.chatsDB.on( 'child_added', this.addChatMessage );
+    this.chatsDB.once( 'value', this.showValues );
+
+  }
+  showValues(data) {
+
+    const chatValues = data.val();
+    const chatKeys = Object.keys(chatValues);
+    if(chatValues) {
+      console.log("chatValues", chatValues);
+      const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
+      console.log(lastChatTime)
+      this.setState({
+        lastChatTime
+      });
+    }
+  }
+  addChatMessage(data, prevChildKey) {
+    console.log(data.val()['created_at'])
+    console.log(data.val()['created_at'] > this.state.lastChatTime)
+    if(data.val()['created_at'] > this.state.lastChatTime) {
+      toast("The Supreme Leader.", {
+        closeButton: <span className="ToastAlert__closeButton">&times;</span>
+      });
+    }
+    console.log(prevChildKey)
+  }
   fetchAndClearStartingState() {
     const toReturn = this.cookies.get('shopping_spree_starting_state');
     this.cookies.remove('shopping_spree_starting_state');
@@ -163,10 +204,41 @@ export default class ShoppingSpree extends React.Component {
     this.hideZopim();
   }
 
+  notify() {
+    console.log("TOASTINNN")
+    toast("The Supreme Leader.", {
+      closeButton: <span className="ToastAlert__closeButton">&times;</span>,
+      className: 'test',
+    });
+  }
+
   render() {
     console.log('inita', this.state);
     return (
       <div>
+          <div>
+            <button onClick={this.notify}>Notify !</button>
+            <div className="ToastAlert__container">
+              <ToastContainer
+                position="top-right"
+                type="default"
+                autoClose={50000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                pauseOnHover
+              />
+              <ToastContainer
+                position="top-left"
+                type="default"
+                autoClose={50000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                pauseOnHover
+              />
+            </div>
+          </div>
         {
                     this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closeModal={this.closeAddToCartModal} />
 

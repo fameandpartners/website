@@ -61,7 +61,7 @@ export default class AddToCartModal extends FirebaseComponent
     }
 
     sumCartData( snapshot )
-    { 
+    {
         let data = snapshot.val();
         let keys = Object.keys( data );
         let cartTotal = 0;
@@ -71,7 +71,7 @@ export default class AddToCartModal extends FirebaseComponent
             cartTotal += parseInt( dress['dress']['price'] );
         }
 
-        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off" );
+        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off", "discount" );
 
     }
 

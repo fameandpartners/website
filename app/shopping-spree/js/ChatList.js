@@ -39,6 +39,7 @@ export default class ChatList extends FirebaseComponent
         switch( data.val().type )
         {
             case 'text':
+            case 'discount':
             this.setState(
                 {
                     messages:
