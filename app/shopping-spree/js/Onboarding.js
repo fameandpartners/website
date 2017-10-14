@@ -51,15 +51,14 @@ export default class Onboarding extends FirebaseComponent
                 <a className="btn-close med" alt="Close" onClick={this.props.close}></a>
                 <div id="top-headline" className="welcome-headline row">
                   <div className="col-xs-12 text-center">
-                    Welcome to
+                    You’re in.
                   </div>
                 </div>
                 <div id="bottom-headline" className="welcome-headline row">
                   <div className="col-xs-12 text-center">
-                    Clique.
+                    Welcome to Clique to Buy Beta.
                   </div>
                 </div>
-
                 <div id="dress-one" className="row equal">
                   <div id="dress-image-one" className="col-md-4 col-md-pull-0 col-xs-8 col-xs-pull-2 dress-image-left">
                     <img src="/images/shopping_spree/dresses/Dress1.jpg" alt=""/>
@@ -67,14 +66,14 @@ export default class Onboarding extends FirebaseComponent
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-4">
                     <div className="row dress-one-text">
                       <div className="body-text col-md-12 text-center vertical-align">
-                        Shop with your friends and get discounts the more the group adds to the cart
+                        Here’s the deal: You and your friends shop together. The more you add to your collective cart, the more you save.             
                       </div>
                     </div>
                     <div className="row dress-one-text-two desktop">
-                      <div className="body-text col-md-12 text-center">Invite your friends</div>
+                      <div className="body-text col-md-12 text-center">It’s easy.</div>
                     </div>
                     <div className="row">
-                      <div className="body-text col-md-12 text-center">to shop with you</div>
+                      <div className="body-text col-md-12 text-center">Just invite your friends to shop with you, give each other feedback and suggestions...</div>
                     </div>
                   </div>
                 </div>
@@ -82,10 +81,10 @@ export default class Onboarding extends FirebaseComponent
                 <div id="dress-two" className="row equal">
                   <div className="col-md-4 col-md-push-4 col-xs-4 col-xs-push-2 text-center vertical-align">
                     <div className="body-text mobile">
-                      Invite your friends to shop with you
+                      It’s easy. Just invite your friends to shop with you, give each other feedback and suggestions...                      
                     </div>
                     <div className="body-text desktop">
-                      You and your friends can add items to Clique
+                      ...and save up to 30% when you check out.                      
                     </div>
                   </div>
                   <div id="dress-two-image" className="col-md-push-4 col-md-4 col-xs-8 col-xs-push-2  dress-image-right">
@@ -99,14 +98,13 @@ export default class Onboarding extends FirebaseComponent
                   </div>
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-3 vertical-align">
                     <div className="body-text text-center mobile">
-                      You and your friends can add items to Clique
+                      ...and save up to 30% when you check out.
                     </div>
                     <div className="row">
                       <div className="body-text text-center col-md-12 desktop">
-                        Checkout with discounts up to
+                        Save money just by swapping shopping advice with your girlfriends and buying together? Which you pretty much do anyway? Believe it.
                       </div>
                       <div className="body-text col-md-12 text-center desktop dress-three-percent-text">
-                        30%
                       </div>
                     </div>
                   </div>
@@ -114,11 +112,10 @@ export default class Onboarding extends FirebaseComponent
 
                 <div id="mobile-text" className="row mobile">
                   <div className="body-text text-center col-md-12">
-                    Checkout with discounts up to
+                    Save money just by swapping shopping advice with your girlfriends and buying together? Which you pretty much do anyway? Believe it.
                   </div>
                   <div className="col-md-12">
                     <div className="body-text text-center dress-three-percent-text">
-                      30%
                     </div>
                   </div>
                 </div>
@@ -126,7 +123,7 @@ export default class Onboarding extends FirebaseComponent
                 <div className="shspree-signup-section">
                   <div id="enter-email-text" className="row">
                     <div className="base-text text-center col-xs-8 col-xs-push-2">
-                      Enter your name and email to start!
+                      Enter your name and email to start saving.
                     </div>
                   </div>
 
