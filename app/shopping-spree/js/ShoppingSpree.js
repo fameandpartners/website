@@ -140,7 +140,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   closeAddToCartModal() {
     this.setState(
       {
-        showAddingToCartModal: false,
+        showAddingToCartModal: true,
         dressAddingToCart: null,
         display: 'cart',
         minimize: false,
@@ -237,32 +237,22 @@ export default class ShoppingSpree extends FirebaseComponent {
                 closeOnClick
                 pauseOnHover
               />
-              <ToastContainer
-                position="top-left"
-                type="default"
-                autoClose={50000}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                pauseOnHover
-              />
             </div>
           </div>
         {
-                    this.state.showAddingToCartModal && (
-                      <AddToCartModal
-                        dress={this.state.dressAddingToCart}
-                        firebaseAPI={this.props.firebaseAPI}
-                        firebaseDatabase={this.props.firebaseDatabase}
-                        firebaseNodeId={this.state.firebaseNodeId}
-                        name={this.state.name}
-                        email={this.state.email}
-                        icon={this.state.icon}
-                        closeModal={this.closeAddToCartModal}
-                      />
-                    )
-
-                }
+              this.state.showAddingToCartModal && (
+                <AddToCartModal
+                  dress={this.state.dressAddingToCart}
+                  firebaseAPI={this.props.firebaseAPI}
+                  firebaseDatabase={this.props.firebaseDatabase}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  name={this.state.name}
+                  email={this.state.email}
+                  icon={this.state.icon}
+                  closeModal={this.closeAddToCartModal}
+                />
+              )
+          }
         {
                 this.state.display === 'chat' &&
                 <Drawer
