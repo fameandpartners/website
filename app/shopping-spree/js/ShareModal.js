@@ -39,7 +39,7 @@ export default class ShareModal extends React.Component
               <div className='shopping-spree shopping-spree-share-modal container'>
                 <div className="row">
                   <div className="modal-headline text-center col-xs-10 col-xs-push-1 col-md-10 col-md-push-1 no-gutter-mobile">
-                    Copy and share this link to start shopping with your&nbsp;friends!
+                    Let’s Clique to Buy. Copy and share this link with your friends.
                   </div>
                 </div>
                 <div className="row equal">
@@ -61,7 +61,7 @@ export default class ShareModal extends React.Component
                     <div  className="col-xs-12 col-lg-6 margin--center float-none no-gutter-mobile">
                       { this.props.hasEntered
                         ? <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Continue Clique</a>
-                        : <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Start Clique</a>
+                        : <a onClick={this.props.nextStep} className="center-button-text btn btn-md btn-black btn-block">Start Clique to buy</a>
                       }
                     </div>
                   </div>
