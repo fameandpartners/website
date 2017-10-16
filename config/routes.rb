@@ -325,6 +325,8 @@ FameAndPartners::Application.routes.draw do
     # Florals Collection Page
     get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
 
+    # Fall Weddings Collection Page
+    get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
