@@ -13,8 +13,6 @@ export default class FirebaseComponent extends React.Component
 
     calculateDiscount({totalItems = 0})
     {
-        console.log('totalItems', totalItems);
-        console.log('subTotal', subTotal);
         const SOLE_DISCOUNT = 5;
         if (totalItems === 1){
           return SOLE_DISCOUNT;
@@ -58,7 +56,6 @@ export default class FirebaseComponent extends React.Component
 
     createFamebotMessage( text, type )
     {
-        console.log('type-------', type);
         this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20, type );
     }
 
