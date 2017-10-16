@@ -142,6 +142,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       {
         showAddingToCartModal: false,
         dressAddingToCart: null,
+        display: 'chat',
       },
     );
   }
@@ -247,7 +248,18 @@ export default class ShoppingSpree extends FirebaseComponent {
             </div>
           </div>
         {
-                    this.state.showAddingToCartModal && <AddToCartModal dress={this.state.dressAddingToCart} firebaseAPI={this.props.firebaseAPI} firebaseDatabase={this.props.firebaseDatabase} firebaseNodeId={this.state.firebaseNodeId} name={this.state.name} email={this.state.email} icon={this.state.icon} closeModal={this.closeAddToCartModal} />
+                    this.state.showAddingToCartModal && (
+                      <AddToCartModal
+                        dress={this.state.dressAddingToCart}
+                        firebaseAPI={this.props.firebaseAPI}
+                        firebaseDatabase={this.props.firebaseDatabase}
+                        firebaseNodeId={this.state.firebaseNodeId}
+                        name={this.state.name}
+                        email={this.state.email}
+                        icon={this.state.icon}
+                        closeModal={this.closeAddToCartModal}
+                      />
+                    )
 
                 }
         {
