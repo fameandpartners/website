@@ -11,8 +11,8 @@ end
 
 module FameAndPartners
   class Application < Rails::Application
-    config.skylight.environments += ['staging']
-    config.skylight.alert_log_file = true
+    # config.skylight.environments += ['staging']
+    # config.skylight.alert_log_file = true
 
     # sidekiq needs lib in eager paths
     config.eager_load_paths += %W( #{config.root}/lib/facebook )
