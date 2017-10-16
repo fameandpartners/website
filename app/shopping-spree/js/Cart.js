@@ -54,14 +54,14 @@ export default class Cart extends FirebaseComponent
     if( position >= this.state.myItems.length )
     {
       this.props.doneShoppingSpree();
-      window.location = '/checkout';    
+      window.location = '/checkout';
     } else
     {
       let dress = this.state.myItems[position].props.dress;
       let context = this;
       request.post('/user_cart/products')
         .send(
-          { 
+          {
             variant_id: dress.product_variant_id,
             dress_variant_id: dress.product_variant_id,
             size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
@@ -71,18 +71,18 @@ export default class Cart extends FirebaseComponent
             shopping_spree_total: this.state.totalInSharedCart
           }
         ).end((error, response) => {
-          context.checkoutOneItem( position + 1 );          
+          context.checkoutOneItem( position + 1 );
           console.log( response.body );
-          
+
         } );
     }
   }
-  
+
   checkout()
   {
     this.checkoutOneItem( 0 );
   }
-    
+
     deleteItem( firebaseKey )
     {
         let index = -1;
@@ -105,7 +105,10 @@ export default class Cart extends FirebaseComponent
 
     recalculateDiscount()
     {
-        let discount = this.calculateDiscount( this.state.totalInSharedCart );
+        let discount = this.calculateDiscount({
+          totalItems: this.state.myItems.length,
+          subTotal: this.state.totalInSharedCart,
+        });
 
         this.setState(
             {
