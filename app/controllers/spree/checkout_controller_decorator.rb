@@ -70,6 +70,8 @@ Spree::CheckoutController.class_eval do
         end
         return
       end
+      remove_ineligible_promotions
+      @order.reload
     end
 
     if @order.update_attributes(object_params)
@@ -348,6 +350,15 @@ Spree::CheckoutController.class_eval do
       order.next
       state_callback(:after)
     end
+  end
+
+  def remove_ineligible_promotions
+     duplicate = @order.adjustments.select {|x| !x.eligible}
+     if !duplicate.empty?
+       @order.adjustments.promotion.delete(duplicate.first)
+       @order.adjustments.delete(duplicate.first)
+       @order.save!
+     end
   end
 
   def find_payment_methods
