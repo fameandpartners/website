@@ -36,7 +36,6 @@ export default class ShoppingSpree extends FirebaseComponent {
 
   componentWillMount() {
     const { firebaseNodeId } = this.state;
-    console.log("firebaseNodeId", firebaseNodeId)
     super.connectToFirebase();
     const spreeFirebase = firebase.apps[0].database();
     this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
@@ -49,9 +48,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     const chatValues = data.val();
     const chatKeys = Object.keys(chatValues);
     if(chatValues) {
-      console.log("chatValues", chatValues);
       const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
-      console.log(lastChatTime)
       this.setState({
         lastChatTime
       });
@@ -64,9 +61,9 @@ export default class ShoppingSpree extends FirebaseComponent {
         return (
           <span>
             <img className="toast-img" src={value.image} />
-            <span>{from.name} added {value.name} to the chat</span>
+            <span>{from.name} added a style to chat</span>
           </span>
-        )
+        );
       case 'discount':
         return (<span>{value}</span>);
       case 'text':
