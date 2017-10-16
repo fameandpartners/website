@@ -82,7 +82,14 @@ export default class Drawer extends React.Component
                 { this.state.closed ?
                   <div className="row header">
                     <div role="button" className="u-width--full" onClick={this.handleToggle}>
-                        <div className="col-xs-10 text-left">Clique</div>
+                        <div className="col-xs-10 text-left">
+                        Clique&nbsp;
+                        {
+                          currentDiscount
+                          ? `${currentDiscount} off`
+                          : null
+                        }
+                        </div>
                         <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
                       </div>
                   </div>
