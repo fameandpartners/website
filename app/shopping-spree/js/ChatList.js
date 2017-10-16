@@ -159,7 +159,7 @@ export default class ChatList extends FirebaseComponent
                     Exit
                   </span>
                   <span className="link" onClick={this.props.showShareModal} role="button">
-                    Invite other friends!
+                    Add more friends!
                   </span>
                 </div>
 

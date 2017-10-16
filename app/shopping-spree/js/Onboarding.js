@@ -18,8 +18,8 @@ export default class Onboarding extends FirebaseComponent
 
         this.connectToFirebase();
         let shoppingSpreeId = this.createNewShoppingSpree();
-        this.createFamebotMessage( 'You can post items here and chat with your friends' )
-        this.createFamebotMessage( "Here's something to get you started!" )
+        this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' )
+        this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." )
         this.createFamebotShareDressMessage( 1481,
                                              49684,
                                              "The Maritza Dress",
