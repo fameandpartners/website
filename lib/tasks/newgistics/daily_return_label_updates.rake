@@ -40,7 +40,7 @@ namespace :newgistics do
     end
     ftp = Net::FTP.new(configatron.newgistics.ftp_uri)
     ftp.login(configatron.newgistics.ftp_user, configatron.newgistics.ftp_password)
-    ftp.putbinaryfile(temp_file, "\\FameandPartners\\input\\shipments\\#{Date.today.to_s}.csv", 1024)
+    ftp.putbinaryfile(temp_file, "\\FameandPartners\\input\manifests\\#{Date.today.to_s}.csv", 1024)
     ftp.close
   end
 
