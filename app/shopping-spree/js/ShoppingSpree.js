@@ -142,7 +142,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       {
         showAddingToCartModal: false,
         dressAddingToCart: null,
-        display: 'chat',
+        display: 'cart',
       },
     );
   }

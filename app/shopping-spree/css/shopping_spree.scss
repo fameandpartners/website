@@ -687,6 +687,10 @@ $chat_bar_header_height: 22px;
   font-weight: 100;
 }
 
+.ToastAlert__discount .ToastAlert__closeButton {
+  color: rgb(69, 69, 69);
+}
+
 .ToastAlert__container .toastify__close {
   opacity: 1;
 }
