@@ -41,8 +41,8 @@ class UserCart::ProductsController < UserCart::BaseController
           fire_event('spree.order.contents_changed')
           fire_event('spree.checkout.coupon_code_added')
         end
-p      elsif( params[:shopping_spree_total] )
-        create_coupon_if_from_shopping_spree( current_order, params[:shopping_spree_total] )
+      elsif( params[:shopping_spree_total] )
+        create_coupon_if_from_shopping_spree( current_order, params[:shopping_spree_total], params[:shopping_spree_item_count] )
       end
 
       reapply_delivery_promo
@@ -125,11 +125,18 @@ p      elsif( params[:shopping_spree_total] )
     end
   end
 
-  def calculate_discount( total )
-    (total.to_f - 200.0) / 10000.0
+  def calculate_discount( total, count )
+    if( count == 0 )
+      return 0
+    else
+      to_return = 0.05
+      count = count - 1
+      to_return += 0.025 * count
+      return to_return
+    end
   end
   
-  def create_coupon_if_from_shopping_spree( order, shopping_spree_total )
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count )
     if( current_promotion && !current_promotion.name.index( 'SHOPPING SPREE' ).nil? )
       
     else
@@ -146,7 +153,7 @@ p      elsif( params[:shopping_spree_total] )
       promo.save!
 
       calculator  = Spree::Calculator::FlatRate.create
-      calculator.preferred_amount   = calculate_discount( shopping_spree_total ) * order.total
+      calculator.preferred_amount   = calculate_discount( shopping_spree_total, shopping_spree_item_count ) * order.total
       calculator.preferred_currency = 'USD'
       calculator.save!
 

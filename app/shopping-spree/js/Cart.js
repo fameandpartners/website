@@ -68,7 +68,8 @@ export default class Cart extends FirebaseComponent
             color_id: dress.color['id'],
             height_value: dress.height,
             height_unit: 'inch',
-            shopping_spree_total: this.state.totalInSharedCart
+            shopping_spree_total: this.state.totalInSharedCart,
+            shopping_spree_item_count: this.state.myItems.length  
           }
         ).end((error, response) => {
           context.checkoutOneItem( position + 1 );          
