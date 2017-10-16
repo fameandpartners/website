@@ -116,7 +116,7 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
+# gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
