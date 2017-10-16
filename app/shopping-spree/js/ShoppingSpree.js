@@ -38,7 +38,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     const { firebaseNodeId } = this.state;
     console.log("firebaseNodeId", firebaseNodeId)
     super.connectToFirebase();
-    const spreeFirebase = firebase.apps[0].database()
+    const spreeFirebase = firebase.apps[0].database();
     this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
     this.chatsDB.on( 'child_added', this.addChatMessage );
     this.chatsDB.once( 'value', this.showValues );
@@ -83,7 +83,6 @@ export default class ShoppingSpree extends FirebaseComponent {
         className: `ToastAlert__${data.type}`
       });
     }
-    console.log(prevChildKey)
   }
 
   fetchAndClearStartingState() {
