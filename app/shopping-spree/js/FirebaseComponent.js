@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 export default class FirebaseComponent extends React.Component
 {
     constructor( props )
-    { 
+    {
         super( props );
         this.firebaseNodeId = this.props.firebaseNodeId;
         console.log( this.firebaseNodeId );
@@ -58,6 +58,7 @@ export default class FirebaseComponent extends React.Component
 
     createFamebotMessage( text, type )
     {
+        console.log('type-------', type);
         this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20, type );
     }
 
@@ -76,7 +77,7 @@ export default class FirebaseComponent extends React.Component
                                       20,
                                       productID,
                                       productVariantId,
-                                      productName,                                      
+                                      productName,
                                       productDescription,
                                       productPrice,
                                       productImage,

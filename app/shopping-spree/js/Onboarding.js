@@ -36,8 +36,9 @@ export default class Onboarding extends FirebaseComponent
                                              null
                                            )
 
-        context.props.doneOnboarding( this.nameInput.value,
+        context.props.doneOnboarding( 
                                       this.emailInput.value,
+                                      this.nameInput.value,
                                       Math.floor(Math.random() * 20),
                                       shoppingSpreeId );
 
@@ -66,7 +67,7 @@ export default class Onboarding extends FirebaseComponent
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-4">
                     <div className="row dress-one-text">
                       <div className="body-text col-md-12 text-center vertical-align">
-                        Here’s the deal: You and your friends shop together. The more you add to your collective cart, the more you save.             
+                        Here’s the deal: You and your friends shop together. The more you add to your collective cart, the more you save.
                       </div>
                     </div>
                     <div className="row dress-one-text-two desktop">
@@ -81,10 +82,10 @@ export default class Onboarding extends FirebaseComponent
                 <div id="dress-two" className="row equal">
                   <div className="col-md-4 col-md-push-4 col-xs-4 col-xs-push-2 text-center vertical-align">
                     <div className="body-text mobile">
-                      It’s easy. Just invite your friends to shop with you, give each other feedback and suggestions...                      
+                      It’s easy. Just invite your friends to shop with you, give each other feedback and suggestions...
                     </div>
                     <div className="body-text desktop">
-                      ...and save up to 30% when you check out.                      
+                      ...and save up to 30% when you check out.
                     </div>
                   </div>
                   <div id="dress-two-image" className="col-md-push-4 col-md-4 col-xs-8 col-xs-push-2  dress-image-right">

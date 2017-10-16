@@ -71,7 +71,10 @@ export default class AddToCartModal extends FirebaseComponent
             cartTotal += parseInt( dress['dress']['price'] );
         }
 
-        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off", "discount" );
+        this.createFamebotMessage(
+          this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off", "discount",
+          "discount", // type
+        );
 
     }
 

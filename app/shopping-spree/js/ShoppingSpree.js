@@ -29,7 +29,6 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.startOnboarding = this.startOnboarding.bind(this);
     this.closeOnboarding = this.closeOnboarding.bind(this);
     this.hideZopim = this.hideZopim.bind(this);
-    this.notify = this.notify.bind(this);
     this.showValues = this.showValues.bind(this);
     this.addChatMessage = this.addChatMessage.bind(this);
     win.startShoppingSpree = this.startOnboarding;
@@ -58,16 +57,35 @@ export default class ShoppingSpree extends FirebaseComponent {
       });
     }
   }
+
+  renderToast({type, from, value}){
+    switch (type) {
+      case 'share_dress':
+        return (
+          <span>
+            <img className="toast-img" src={value.image} />
+            <span>{from.name} added {value.name} to the chat</span>
+          </span>
+        )
+      case 'text':
+      default:
+        return (<span>{from.name} said "{value}"</span>)
+      }
+  }
+
   addChatMessage(data, prevChildKey) {
-    console.log(data.val()['created_at'])
-    console.log(data.val()['created_at'] > this.state.lastChatTime)
+    const dataVal = data.val();
+    console.log('dataVal', dataVal);
     if(data.val()['created_at'] > this.state.lastChatTime) {
-      toast("The Supreme Leader.", {
-        closeButton: <span className="ToastAlert__closeButton">&times;</span>
+      console.log('toast', data.type);
+      toast(this.renderToast(dataVal), {
+        closeButton: <span className="ToastAlert__closeButton">&times;</span>,
+        className: `ToastAlert__${data.type}`
       });
     }
     console.log(prevChildKey)
   }
+
   fetchAndClearStartingState() {
     const toReturn = this.cookies.get('shopping_spree_starting_state');
     this.cookies.remove('shopping_spree_starting_state');
@@ -204,20 +222,11 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.hideZopim();
   }
 
-  notify() {
-    console.log("TOASTINNN")
-    toast("The Supreme Leader.", {
-      closeButton: <span className="ToastAlert__closeButton">&times;</span>,
-      className: 'test',
-    });
-  }
-
   render() {
     console.log('inita', this.state);
     return (
       <div>
           <div>
-            <button onClick={this.notify}>Notify !</button>
             <div className="ToastAlert__container">
               <ToastContainer
                 position="top-right"
