@@ -67,9 +67,11 @@ export default class ShoppingSpree extends FirebaseComponent {
             <span>{from.name} added {value.name} to the chat</span>
           </span>
         )
+      case 'discount':
+        return (<span>{value}</span>);
       case 'text':
       default:
-        return (<span>{from.name} said "{value}"</span>)
+        return (<span>{from.name} said "{value}"</span>);
       }
   }
 
@@ -80,7 +82,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       console.log('toast', data.type);
       toast(this.renderToast(dataVal), {
         closeButton: <span className="ToastAlert__closeButton">&times;</span>,
-        className: `ToastAlert__${data.type}`
+        className: `ToastAlert__${dataVal.type}`
       });
     }
     console.log(prevChildKey)

@@ -651,6 +651,7 @@ $chat_bar_header_height: 22px;
   float: left;
 }
 
+
 .ToastAlert__container .toastify-content {
     border-radius: 9px;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.5);
@@ -671,6 +672,13 @@ $chat_bar_header_height: 22px;
   padding: 10px 0;
 }
 
+.ToastAlert__container .ToastAlert__discount.toastify-content {
+  background: #1b1b1b;
+}
+
+.ToastAlert__discount .toastify__body  {
+  color: #bbbaba;
+}
 
 .ToastAlert__container .ToastAlert__closeButton {
   font-size: 30px;
