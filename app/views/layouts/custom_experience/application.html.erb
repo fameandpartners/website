@@ -13,7 +13,7 @@
 
   </head>
   <body>
-
+    <%= render 'layouts/redesign/shopping_spree' %>
     <%= render 'layouts/redesign/header' %>
 
     <div class="app-container app-container--top-margin">
@@ -26,7 +26,6 @@
 
     <%= javascript_include_tag 'application_custom_experience' %>
     <%= render 'layouts/custom_experience/javascript' %>
-
   </body>
   <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';

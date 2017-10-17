@@ -411,6 +411,9 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffaker (1.15.0)
     ffi (1.9.14)
+    firebase (0.2.6)
+      httpclient
+      json
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.38.0)
@@ -979,6 +982,7 @@ DEPENDENCIES
   execjs (~> 2)
   factory_girl_rails (= 4.2.1)
   fame_favicon!
+  firebase (~> 0.2.6)
   fog (~> 1.38.0)
   fog-aws (~> 1.2.0)
   foreman

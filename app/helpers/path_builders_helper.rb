@@ -54,7 +54,7 @@ module PathBuildersHelper
   # or respond to
   #  name - id
   def collection_product_path(product, options = {})
-    site_version_prefix = self.url_options[:site_version]
+    site_version_prefix = self.url_options[:site_version] ? self.url_options[:site_version] : ''
     product_type        = options.delete(:product_type) || 'dress'
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym

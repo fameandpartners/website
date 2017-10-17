@@ -7,12 +7,14 @@ doctype html
 
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'application_redesign'
+    = stylesheet_link_tag 'shopping_spree/shopping_spree'
+    
     = csrf_meta_tags
 
     = render 'layouts/redesign/head'
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
-
+    = render 'layouts/redesign/shopping_spree'
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
 
@@ -29,3 +31,4 @@ doctype html
 
     = javascript_include_tag 'storefront'
     = render 'layouts/redesign/javascript'
+

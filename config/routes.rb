@@ -411,7 +411,7 @@ FameAndPartners::Application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-
+    
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'

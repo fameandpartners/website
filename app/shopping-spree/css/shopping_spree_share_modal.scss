@@ -1,0 +1,80 @@
+.shopping-spree-share-modal-background
+{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        background-color: black;
+        opacity: 0.60;
+        z-index: 1999;
+}
+
+.shopping-spree-share-modal
+{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    position: fixed;
+    background-color: white;
+    z-index: 2000;
+
+    .modal-headline
+    {
+        font-size: 22px;
+        font-weight: lighter;
+        margin-top: 10%;
+        margin-bottom: 10px;
+    }
+
+    .start-button-wrapper {
+      position: relative;
+      bottom: 20px;
+      margin-top: 100px;
+    }
+
+    #start-button
+    {
+        width: 100%;
+        position: relative;
+        width: 100%;
+        left: 0;
+    }
+    .btn
+    {
+        font-weight: lighter;
+        text-transform: none;
+        border-bottom: 0px;
+    }
+
+}
+
+
+@media (max-width: 767px)
+{
+    .shopping-spree-share-modal
+    {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+    }
+
+}
+
+@media (min-width: 767px)
+{
+    .shopping-spree-share-modal
+    {
+        width: 50%;
+    }
+
+    #start-button
+    {
+        bottom: 15%;
+    }
+
+
+}

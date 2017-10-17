@@ -3,7 +3,10 @@ class UserCart::ProductsController < UserCart::BaseController
 
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
+  
   def create
+    ensure_size_id_is_set( params )
+    ensure_height_is_set( params )
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
@@ -28,7 +31,7 @@ class UserCart::ProductsController < UserCart::BaseController
         associate_user
       end
 
-      if current_promotion.present?
+      if params[:shopping_spree_total].nil? && current_promotion.present?
         promotion_service = UserCart::PromotionsService.new(
           order: current_order,
           code:  current_promotion.code
@@ -38,6 +41,8 @@ class UserCart::ProductsController < UserCart::BaseController
           fire_event('spree.order.contents_changed')
           fire_event('spree.checkout.coupon_code_added')
         end
+      elsif( params[:shopping_spree_total] )
+        create_coupon_if_from_shopping_spree( current_order, params[:shopping_spree_total], params[:shopping_spree_item_count] )
       end
 
       reapply_delivery_promo
@@ -92,30 +97,91 @@ class UserCart::ProductsController < UserCart::BaseController
 
   private
 
-    def cart_product_service
-      @cart_product_service ||= UserCart::CartProduct.new(
-        order: current_order(true),
-        line_item_id: params[:line_item_id]
+  def add_analytics_labels(data)
+    data = @user_cart.serialize
+
+    data[:products].each do |product|
+      product[:analytics_label] = analytics_label(:user_cart_product, product)
+    end
+
+    data
+  end
+  
+  def cart_product_service
+    @cart_product_service ||= UserCart::CartProduct.new(
+      order: current_order(true),
+      line_item_id: params[:line_item_id]
+    )
+  end
+
+
+  def reapply_delivery_promo
+    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
+      promotion_service = UserCart::PromotionsService.new(
+        order: current_order,
+        code:  'DELIVERYDISC'
       )
+      promotion_service.reapply
     end
+  end
 
-    def reapply_delivery_promo
-     if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
-        promotion_service = UserCart::PromotionsService.new(
-          order: current_order,
-          code:  'DELIVERYDISC'
-        )
-        promotion_service.reapply
-      end
+  def calculate_discount( total, count )
+    if( count == 0 )
+      return 0
+    else
+      to_return = 0.05
+      count = count - 1
+      to_return += 0.025 * count
+      return to_return
     end
+  end
+  
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count )
+    if( current_promotion && !current_promotion.name.index( 'SHOPPING SPREE' ).nil? )
+      
+    else
+      promo = Spree::Promotion.new
+      guid = SecureRandom.uuid.to_s
+      promo.name = "SHOPPING_SPREE #{guid}"
+      promo.code = guid
+      promo.event_name = "spree.checkout.coupon_code_added"
+      promo.usage_limit = 1
+      promo.description = ""
+      promo.advertise                = false
+      promo.eligible_to_custom_order = true
+      promo.eligible_to_sale_order   = false
+      promo.save!
 
-    def add_analytics_labels(data)
-      data = @user_cart.serialize
+      calculator  = Spree::Calculator::FlatRate.create
+      calculator.preferred_amount   = calculate_discount( shopping_spree_total, shopping_spree_item_count ) * order.total
+      calculator.preferred_currency = 'USD'
+      calculator.save!
 
-      data[:products].each do |product|
-        product[:analytics_label] = analytics_label(:user_cart_product, product)
-      end
+      action = Spree::Promotion::Actions::CreateAdjustment.create
+      action.calculator   = calculator
+      action.activator_id = promo.id
+      action.save!
 
-      data
+      promo.actions << action
+      promo.save!
+      #    delete_old_promotions #This method exists in promotino_service
+      promo.activate(:order => order, :coupon_code => promo.code)
     end
+  end
+  
+  def ensure_size_id_is_set( params )
+    if( params[:size_id].nil? && !params[:size].nil? )
+      params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
+    end
+  end
+
+  def ensure_height_is_set( params )
+    if( params[:height].nil? && params[:height_value] && params[:variant_id])
+      variant = Spree::Variant.find( params[:variant_id] )
+      product_height_range_group = ProductHeightRangeGroup.find_both_for_variant_or_use_default( variant ).find { |phrg| phrg.unit == params[:height_unit] }
+      params[:height] = product_height_range_group.map_height_to_name( params[:height_value] )
+    end
+    
+  end
+  
 end
