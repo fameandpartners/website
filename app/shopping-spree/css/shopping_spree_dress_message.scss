@@ -1,74 +1,76 @@
 @import 'shopping_spree_avatars';
 
-.shopping-spree-container
+.shopping-spree-container .chat-content .dress-message
 {
-    .chat-content
-    {
-        .dress-message
-        {
-            margin-bottom: 10px;
-            .message-name
-            {
-                margin-top: 16px;
-                font-size: 15px;
-                color: #979797;
-            }
+    margin-bottom: 10px;
+}
 
-            .firebase-text
-            {
-                background-color: #f5f5f5;
-                border-radius: 9px;
-                padding: 10px 12px 17px 23px;
-                margin-bottom: 5px;
-                font-size: 13px;
-            }
+.shopping-spree-container .chat-content .dress-message .message-name
+{
+    margin-top: 16px;
+    font-size: 15px;
+    color: #979797;
+}
 
-            .dress-card
-            {
-                min-width: 250px;
-                border: 1px solid black;
-                .dress-color
-                {
-                    height: 20px;
-                }
-                .dress-card-content
-                {
-                    margin-top: 14px;
-                    margin-bottom: 14px;
-                    .dress-card-image
-                    {
-                        img
-                        {
-                            max-width: 100%;
-                            max-height: 100%;
-                        }
-                        margin-bottom: 8px;
-                    }
+.shopping-spree-container .chat-content .dress-message .firebase-text
+{
+    background-color: #f5f5f5;
+    border-radius: 9px;
+    padding: 10px 12px 17px 23px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
 
-                    .dress-card-headline
-                    {
-                        font-size: 15px;
-                        .dress-price
-                        {
-                            text-align: right;
-                        }
-                    }
+.shopping-spree-container .chat-content .dress-message .dress-card
+{
+    min-width: 250px;
+    border: 1px solid black;
+}
 
-                    .add-to-spree-btn
-                    {
-                        margin-top: 22px;
-                    }
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-color
+{
+    height: 20px;
+}
 
-                }
-            }
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content
+{
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
 
-          .dress-message-color-selection {
-            height: 17px;
-            width: 17px;
-            border-radius: 50%;
-            display: inline-block;
-            vertical-align: middle;
-          }
-        }
-    }
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content .dress-card-image img
+{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content .dress-card-image
+{
+    margin-bottom: 8px;
+}
+
+
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content .dress-card-headline
+{
+    font-size: 15px;    
+}
+
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content .dress-card-headline .dress-price
+{
+    text-align: right;
+}
+
+.shopping-spree-container .chat-content .dress-message .dress-card .dress-card-content .add-to-spree-btn
+{
+    margin-top: 22px;
+}
+
+.shopping-spree-container .chat-content .dress-message .dress-message-color-selection
+{
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    
 }
