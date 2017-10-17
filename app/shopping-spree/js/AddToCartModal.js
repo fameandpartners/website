@@ -83,10 +83,7 @@ export default class AddToCartModal extends FirebaseComponent
 
     createFirebaseCartItem()
   {
-    console.log( 'adding item to firebase cart' );
-    console.log( this.props.dress );
         let newMessage = this.cartDB.push();
-        console.log( this.props.dress );
         newMessage.set( { created_at: firebase.database.ServerValue.TIMESTAMP,
                           dress:
                           {

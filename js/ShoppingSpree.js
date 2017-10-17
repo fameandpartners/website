@@ -61,7 +61,6 @@ export default class ShoppingSpree extends React.Component {
   }
 
   startOnboarding() {
-    console.log('start onboarding');
     this.setState(
       {
         display: 'onboarding',
