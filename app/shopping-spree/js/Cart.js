@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 
 import FirebaseComponent from './FirebaseComponent';
@@ -211,10 +212,10 @@ export default class Cart extends FirebaseComponent
 }
 
 Cart.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    updateDiscount: React.PropTypes.func.isRequired
+    firebaseAPI: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    updateDiscount: PropTypes.func.isRequired
 }

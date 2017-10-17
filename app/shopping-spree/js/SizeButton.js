@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class SizeButton extends React.Component
 {
@@ -11,12 +12,12 @@ export default class SizeButton extends React.Component
               <div className="size-inner">{this.props.size}</div>
             </div>
         );
-        
+
     }
 }
 
 SizeButton.propTypes = {
-    size: React.PropTypes.string.isRequired,
-    selectedSize: React.PropTypes.string,
-    selectionCallback: React.PropTypes.func.isRequired
-}; 
+    size: PropTypes.string.isRequired,
+    selectedSize: PropTypes.string,
+    selectionCallback: PropTypes.func.isRequired
+};

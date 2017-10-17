@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 
 import TextMessage from './TextMessage';
@@ -180,11 +181,11 @@ export default class ChatList extends FirebaseComponent
 
 
 ChatList.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired,
-    showAddToCartModal: React.PropTypes.func.isRequired,
-    name: React.PropTypes.string.isRequired,
-    doneShoppingSpree: React.PropTypes.func.isRequired,
-    showShareModal: React.PropTypes.func.isRequired
+    firebaseAPI: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    showAddToCartModal: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    doneShoppingSpree: PropTypes.func.isRequired,
+    showShareModal: PropTypes.func.isRequired
 };

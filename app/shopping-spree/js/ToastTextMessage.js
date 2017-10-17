@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ToastTextMessage extends React.Component
 {
@@ -10,7 +11,7 @@ export default class ToastTextMessage extends React.Component
         super( props );
         this.remove = this.remove.bind( this );
     }
-    
+
     componentDidMount()
     {
         this.timer = setTimeout( this.remove, 5000 );
@@ -31,9 +32,9 @@ export default class ToastTextMessage extends React.Component
 }
 
 ToastTextMessage.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    iconNumber: React.PropTypes.number.isRequired,
-    removeToast: React.PropTypes.func.isRequired    
+    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    iconNumber: PropTypes.number.isRequired,
+    removeToast: PropTypes.func.isRequired    
 }

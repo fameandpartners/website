@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import ChatList from './ChatList';
 import ChatBar from './ChatBar';
 import Cart from './Cart';
 import Toast from './Toast';
-import FirebaseComponent from './FirebaseComponent';
 
-export default class Drawer extends FirebaseComponent
+export default class Drawer extends React.Component
 {
 
     constructor(props)
@@ -16,6 +16,7 @@ export default class Drawer extends FirebaseComponent
         this.state =
             {
                 closed: this.props.closed,
+                display: 'chat',
                 firebaseAPI: props.firebaseAPI,
                 firebaseDatabase: props.firebaseDatabase,
                 firebaseNodeId: props.firebaseNodeId,
@@ -41,27 +42,32 @@ export default class Drawer extends FirebaseComponent
         this.setState( { closed: !this.state.closed } );
     }
 
-    transitionToCart(evt)
+    transitionToCart()
     {
-        evt.stopPropagation();
-        this.props.changeDisplayStatus('cart');
+        this.setState(
+            {
+                display: 'cart'
+            });
     }
 
     transitionToChat()
     {
-        this.props.changeDisplayStatus('chat');
-        this.setState({
-          closed: false
-        });
+        this.setState(
+            {
+                closed: false,
+                display: 'chat'
+            });
     }
 
     render()
       {
-        const { currentDiscount } = this.state;
+        const {
+          currentDiscount,
+        } = this.state;
 
         return (
-            <div className={"shopping-spree-wrapper " + (this.state.closed && this.props.display !== 'cart' ? 'collapsed' : 'open')}>
-              <div className={"shopping-spree-container container" + (this.props.display !== 'cart' ? " hidden" : "") }>
+            <div className={"shopping-spree-wrapper " + (this.state.closed && this.state.display !== 'cart' ? 'collapsed' : 'open')}>
+              <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
                 <Cart transitionToChat={this.transitionToChat}
                       firebaseAPI={this.state.firebaseAPI}
                       firebaseDatabase={this.state.firebaseDatabase}
@@ -73,18 +79,11 @@ export default class Drawer extends FirebaseComponent
                       />
               </div>
 
-              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.props.display === 'cart' ? " hidden" : "")}>
+              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
                 { this.state.closed ?
                   <div className="row header">
                     <div role="button" className="u-width--full" onClick={this.handleToggle}>
-                        <div className="col-xs-10 text-left">
-                        Clique&nbsp;
-                        {
-                          currentDiscount
-                          ? `${currentDiscount}% off`
-                          : null
-                        }
-                        </div>
+                        <div className="col-xs-10 text-left">Clique</div>
                         <div className="col-xs-2"><span onClick={this.transitionToCart} className="icon icon-bag"></span></div>
                       </div>
                   </div>
@@ -98,7 +97,7 @@ export default class Drawer extends FirebaseComponent
                         Clique&nbsp;
                         {
                           currentDiscount
-                          ? `${currentDiscount}% off`
+                          ? `${currentDiscount} off`
                           : null
                         }
                       </div>
@@ -142,16 +141,14 @@ export default class Drawer extends FirebaseComponent
 }
 
 Drawer.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.number.isRequired,
-    closed: React.PropTypes.bool.isRequired,
-    // Func
-    showAddToCartModal: React.PropTypes.func.isRequired,
-    doneShoppingSpree: React.PropTypes.func.isRequired,
-    changeDisplayStatus: React.PropTypes.func.isRequired,
-    showShareModal: React.PropTypes.func.isRequired
+    firebaseAPI: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    icon: PropTypes.number.isRequired,
+    closed: PropTypes.bool.isRequired,
+    showAddToCartModal: PropTypes.func.isRequired,
+    doneShoppingSpree: PropTypes.func.isRequired,
+    showShareModal: PropTypes.func.isRequired
 };

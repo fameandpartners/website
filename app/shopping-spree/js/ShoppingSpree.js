@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import Drawer from './Drawer';
 import Onboarding from './Onboarding';
@@ -233,7 +234,7 @@ export default class ShoppingSpree extends FirebaseComponent {
               <ToastContainer
                 position="top-right"
                 type="default"
-                autoClose={50000}
+                autoClose={3000}
                 hideProgressBar
                 newestOnTop={false}
                 closeOnClick
@@ -313,8 +314,8 @@ export default class ShoppingSpree extends FirebaseComponent {
 
 
 ShoppingSpree.propTypes = {
-  firebaseAPI: React.PropTypes.string.isRequired,
-  firebaseDatabase: React.PropTypes.string.isRequired,
+  firebaseAPI: PropTypes.string.isRequired,
+  firebaseDatabase: PropTypes.string.isRequired,
 };
 
 ShoppingSpree.defaultProps = {

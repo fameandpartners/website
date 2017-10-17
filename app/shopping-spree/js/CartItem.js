@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class CartItem extends React.Component
 {
@@ -44,15 +45,15 @@ export default class CartItem extends React.Component
 
 
 CartItem.propTypes = {
-    dress: React.PropTypes.shape(
+    dress: PropTypes.shape(
         {
-            image: React.PropTypes.string.isRequired,
-            name: React.PropTypes.string.isRequired,
-            url: React.PropTypes.string.isRequired,
-            fabric: React.PropTypes.string.isRequired,
-            length: React.PropTypes.string.isRequired,
-            price: React.PropTypes.string.isRequired,
-            size: React.PropTypes.string.isRequired
+            image: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
+            fabric: PropTypes.string.isRequired,
+            length: PropTypes.string.isRequired,
+            price: PropTypes.string.isRequired,
+            size: PropTypes.string.isRequired
         }
     ).isRequired
 

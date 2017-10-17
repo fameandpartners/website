@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 
 import ToastTextMessage from './ToastTextMessage';
@@ -115,9 +116,9 @@ export default class Toast extends FirebaseComponent
 }
 
 Toast.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired,
-    visible: React.PropTypes.bool.isRequired,
-    email: React.PropTypes.string.isRequired
+    firebaseAPI: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired,
+    email: PropTypes.string.isRequired
 };

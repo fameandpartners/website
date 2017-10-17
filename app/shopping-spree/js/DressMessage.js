@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class DressMessage extends React.Component
 {
@@ -129,10 +130,10 @@ export default class DressMessage extends React.Component
 
 DressMessage.propTypes =
     {
-        name: React.PropTypes.string.isRequired,
-        email: React.PropTypes.string.isRequired,
-        sameOwnerAsLastMessage: React.PropTypes.bool.isRequired,
-        iconNumber: React.PropTypes.number.isRequired,
-        dress: React.PropTypes.object.isRequired,
-        showAddToCartModal: React.PropTypes.func.isRequired
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        sameOwnerAsLastMessage: PropTypes.bool.isRequired,
+        iconNumber: PropTypes.number.isRequired,
+        dress: PropTypes.object.isRequired,
+        showAddToCartModal: PropTypes.func.isRequired
     };

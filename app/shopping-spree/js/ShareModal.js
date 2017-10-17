@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Clipboard from 'clipboard';
 import ReactTooltip from 'react-tooltip';
 import {findDOMNode} from 'react-dom';
@@ -75,5 +76,5 @@ export default class ShareModal extends React.Component
 
 
 ShareModal.propTypes = {
-    firebaseNodeId: React.PropTypes.string.isRequired
+    firebaseNodeId: PropTypes.string.isRequired
 };

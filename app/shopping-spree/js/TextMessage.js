@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TextMessage extends React.Component
 {
@@ -16,7 +17,7 @@ export default class TextMessage extends React.Component
                     </div>
                     </div>);
         }
-        
+
         return(
                 <li className='text-message'>
                 {name}
@@ -30,9 +31,9 @@ export default class TextMessage extends React.Component
 }
 
 TextMessage.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    sameOwnerAsLastMessage: React.PropTypes.bool.isRequired,
-    iconNumber: React.PropTypes.number.isRequired
+    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    sameOwnerAsLastMessage: PropTypes.bool.isRequired,
+    iconNumber: PropTypes.number.isRequired
 }

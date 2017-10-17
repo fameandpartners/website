@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import FirebaseComponent from './FirebaseComponent';
 
@@ -84,11 +85,11 @@ export default class ChatBar extends FirebaseComponent {
 }
 
 ChatBar.propTypes = {
-    firebaseAPI: React.PropTypes.string.isRequired,
-    firebaseDatabase: React.PropTypes.string.isRequired,
-    firebaseNodeId: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.number.isRequired,
-    transitionToChat: React.PropTypes.func.isRequired,
+    firebaseAPI: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    icon: PropTypes.number.isRequired,
+    transitionToChat: PropTypes.func.isRequired,
 }

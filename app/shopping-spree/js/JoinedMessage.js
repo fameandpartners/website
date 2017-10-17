@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class JoinedMessage extends React.Component
 {
@@ -34,7 +35,7 @@ export default class JoinedMessage extends React.Component
 }
 
 JoinedMessage.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    createdAt: React.PropTypes.number.isRequired
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    createdAt: PropTypes.number.isRequired
 }
