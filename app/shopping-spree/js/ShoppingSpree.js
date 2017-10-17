@@ -76,7 +76,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   addChatMessage(data, prevChildKey) {
     const dataVal = data.val();
     if(data.val()['created_at'] > this.state.lastChatTime) {
-      console.log('toast', data.type);
       toast(this.renderToast(dataVal), {
         closeButton: <span className="ToastAlert__closeButton">&times;</span>,
         className: `ToastAlert__${dataVal.type}`
@@ -227,7 +226,6 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   render() {
-    console.log('inita', this.state);
     return (
       <div>
           <div>
