@@ -54,7 +54,6 @@ class Populator
       #turtles
     end
     OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
-    raise e
   end
 
   private
@@ -81,10 +80,6 @@ class Populator
 
     def add_personalized_product
       personalization = build_personalization
-      puts "************** #{personalization} *************"
-      puts "************** #{personalization.valid?} ***********"
-      puts "************** #{personalization.errors.messages} ***********"
-      
       if personalization.valid?
         add_product_to_cart
         personalization.line_item = line_item
