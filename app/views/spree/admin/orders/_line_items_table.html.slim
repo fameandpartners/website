@@ -9,6 +9,7 @@ table.line_items
       th Fast Making
       th Due In
       th Order Number
+      th Return Type
       th Line ID
       th Style #
       th SKU
@@ -41,6 +42,7 @@ table.line_items
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"
               = ship_state.overdue_by
           td = link_to order.number, admin_order_path(order)
+          td = order.return_type
           td = line_item.id
           td = line_item.style_number
           td = line_item.sku
