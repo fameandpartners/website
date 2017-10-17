@@ -158,39 +158,39 @@ export default class Cart extends FirebaseComponent
     render()
     {
         return(
-                <div className="shopping-spree-cart">
-                <div className="row header vertical-align">
+            <div className="shopping-spree-cart">
+              <div className="row header vertical-align">
 
 
                 <div className="header__inner">
-                <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
-                <div className="left-caret"></div>
-                <div className="back-to-spree-text shopping-spree-headline">
-                    Back to Clique
-                </div>
-                </div>
-                <div className="col-xs-4 col-md-4 text-center">
-                  Your Bag
+                  <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
+                    <div className="left-caret"></div>
+                    <div className="back-to-spree-text shopping-spree-headline">
+                      Back to Clique
+                    </div>
+                  </div>
+                  <div className="col-xs-4 col-md-4 text-center">
+                    Your Bag
                   </div>
                   <div className="col-xs-4 col-md-4 text-right">
-                  {this.state.discount} off
+                    {this.state.discount} off
                   </div>
-                  </div>
+                </div>
               </div>
 
               <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
-            </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                ${this.state.totalOff.toFixed(2)}
-            </div>
                 </div>
-                <div className="row">
+                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
+                  ${this.state.totalOff.toFixed(2)}
+                </div>
+              </div>
+              <div className="row">
                 <div className="no-left-gutter col-xs-push-1 col-xs-4">
-                <strong>Total</strong>
+                  <strong>Total</strong>
                 </div>
                 <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
+                  <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
                 </div>
               </div>
 
@@ -199,14 +199,14 @@ export default class Cart extends FirebaseComponent
               </div>
               <div className="shopping-spree-contents">
                 <div className="row">
-                <div className="col-xs-18">
-                <ul className="cart-item-list">
-                {this.state.myItems}
-            </ul>
+                  <div className="col-xs-18">
+                    <ul className="cart-item-list">
+                      {this.state.myItems}
+                    </ul>
+                  </div>
                 </div>
-                </div>
-                </div>
-                </div>
+              </div>
+            </div>
         );
     }
 }
