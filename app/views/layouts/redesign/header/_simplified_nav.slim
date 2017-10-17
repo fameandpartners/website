@@ -11,7 +11,7 @@
       span.anti-fast.js-close-nav-menu onclick="sendToGA({eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'ANTI-FAST FASHION SHOP', nonInteraction: false })" = link_to 'ANTI-FAST FASHION SHOP', '/the-anti-fast-fashion-shop'
 
       - if Features.active?(:fameweddings)
-        span.wedding.js-open-nav-menu Wedding Shop
+        span.wedding.js-open-nav-menu onclick="sendToGA({ eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'FALL WEDDINGS', nonInteraction: false })" = link_to 'FALL WEDDINGS', fall_weddings_page_path
 
       span.lookbook.js-close-nav-menu onclick="sendToGA({ eventCategory: 'Top Nav', eventAction: 'Main Nav Press', eventLabel: 'EVENING SHOP', nonInteraction: false })" = link_to 'EVENING SHOP', the_evening_shop_landing_page_path
       span.culture.js-open-nav-menu Fame Culture
