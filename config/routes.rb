@@ -73,9 +73,9 @@ FameAndPartners::Application.routes.draw do
     get '/fashionitgirlau2015', to: redirect('/it-girl')
     get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
 
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/')
-    get '/fashionitgirl2015-competition', to: redirect('/')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
