@@ -69,7 +69,7 @@ export default class Cart extends FirebaseComponent
             height_value: dress.height,
             height_unit: 'inch',
             shopping_spree_total: this.state.totalInSharedCart,
-            shopping_spree_item_count: this.state.myItems.length  
+            shopping_spree_item_count: this.state.myItems.length
           }
         ).end((error, response) => {
           context.checkoutOneItem( position + 1 );
@@ -102,13 +102,17 @@ export default class Cart extends FirebaseComponent
         );
 
         this.cartDB.child( firebaseKey ).remove();
+        this.recalculateDiscount();
+        this.createFamebotMessage(
+          "Oh No! " + this.props.name + " just removed an item from their cart.  You are now getting " + this.calculateDiscount({totalItems: this.state.myItems.length}) +  "% off", "discount",
+          "discount", // type
+        );
     }
 
-    recalculateDiscount()
+    recalculateDiscount(count)
     {
         let discount = this.calculateDiscount({
-          totalItems: this.state.myItems.length,
-          subTotal: this.state.totalInSharedCart,
+          totalItems: count || this.state.myItems.length
         });
 
         this.setState(
@@ -118,7 +122,11 @@ export default class Cart extends FirebaseComponent
             }
         );
 
-        this.props.updateDiscount(this.state.discount);
+        this.props.updateDiscount(discount);
+    }
+
+    valueAdded(data){
+      this.recalculateDiscount
     }
 
     startListeningToFirebase()
@@ -126,6 +134,7 @@ export default class Cart extends FirebaseComponent
         super.connectToFirebase();
         this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
         this.cartDB.on( 'child_added', this.addToCart );
+        this.cartDB.on( 'value', (data) => { this.recalculateDiscount(Object.keys(data.val()).length) });
     }
 
 

@@ -23,6 +23,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.doneSharing = this.doneSharing.bind(this);
     this.showAddToCartModal = this.showAddToCartModal.bind(this);
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
+    this.changeDisplayStatus = this.changeDisplayStatus.bind(this);
     this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
     this.updateExitModalStatus = this.updateExitModalStatus.bind(this);
     this.showShareModal = this.showShareModal.bind(this);
@@ -74,7 +75,6 @@ export default class ShoppingSpree extends FirebaseComponent {
 
   addChatMessage(data, prevChildKey) {
     const dataVal = data.val();
-    console.log('dataVal', dataVal);
     if(data.val()['created_at'] > this.state.lastChatTime) {
       console.log('toast', data.type);
       toast(this.renderToast(dataVal), {
@@ -129,18 +129,16 @@ export default class ShoppingSpree extends FirebaseComponent {
     );
   }
   showAddToCartModal(dress) {
-    this.setState(
-      {
-        showAddingToCartModal: true,
-        dressAddingToCart: dress,
-      },
-        );
+    this.setState({
+      showAddingToCartModal: true,
+      dressAddingToCart: dress,
+    });
   }
 
   closeAddToCartModal() {
     this.setState(
       {
-        showAddingToCartModal: true,
+        showAddingToCartModal: false,
         dressAddingToCart: null,
         display: 'cart',
         minimize: false,
@@ -190,6 +188,12 @@ export default class ShoppingSpree extends FirebaseComponent {
         minimize: false,
       },
     )
+  }
+
+  changeDisplayStatus(display){
+    this.setState({
+      display
+    })
   }
 
   doneOnboarding(email, name, icon, shoppingSpreeId)
@@ -254,18 +258,20 @@ export default class ShoppingSpree extends FirebaseComponent {
               )
           }
         {
-                this.state.display === 'chat' &&
+                (this.state.display === 'chat' || this.state.display === 'cart') &&
                 <Drawer
                   firebaseAPI={this.props.firebaseAPI}
                   firebaseDatabase={this.props.firebaseDatabase}
                   firebaseNodeId={this.state.firebaseNodeId}
                   name={this.state.name}
+                  display={this.state.display}
                   email={this.state.email}
                   icon={this.state.icon}
                   closed={this.state.minimize}
                   showAddToCartModal={this.showAddToCartModal}
                   doneShoppingSpree={this.doneShoppingSpree}
                   showShareModal={this.showShareModal}
+                  changeDisplayStatus={this.changeDisplayStatus}
                   updateExitModalStatus={this.updateExitModalStatus} />
 
             }

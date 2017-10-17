@@ -4,8 +4,9 @@ import ChatList from './ChatList';
 import ChatBar from './ChatBar';
 import Cart from './Cart';
 import Toast from './Toast';
+import FirebaseComponent from './FirebaseComponent';
 
-export default class Drawer extends React.Component
+export default class Drawer extends FirebaseComponent
 {
 
     constructor(props)
@@ -15,7 +16,6 @@ export default class Drawer extends React.Component
         this.state =
             {
                 closed: this.props.closed,
-                display: 'chat',
                 firebaseAPI: props.firebaseAPI,
                 firebaseDatabase: props.firebaseDatabase,
                 firebaseNodeId: props.firebaseNodeId,
@@ -41,32 +41,27 @@ export default class Drawer extends React.Component
         this.setState( { closed: !this.state.closed } );
     }
 
-    transitionToCart()
+    transitionToCart(evt)
     {
-        this.setState(
-            {
-                display: 'cart'
-            });
+        evt.stopPropagation();
+        this.props.changeDisplayStatus('cart');
     }
 
     transitionToChat()
     {
-        this.setState(
-            {
-                closed: false,
-                display: 'chat'
-            });
+        this.props.changeDisplayStatus('chat');
+        this.setState({
+          closed: false
+        });
     }
 
     render()
       {
-        const {
-          currentDiscount,
-        } = this.state;
+        const { currentDiscount } = this.state;
 
         return (
-            <div className={"shopping-spree-wrapper " + (this.state.closed && this.state.display !== 'cart' ? 'collapsed' : 'open')}>
-              <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
+            <div className={"shopping-spree-wrapper " + (this.state.closed && this.props.display !== 'cart' ? 'collapsed' : 'open')}>
+              <div className={"shopping-spree-container container" + (this.props.display !== 'cart' ? " hidden" : "") }>
                 <Cart transitionToChat={this.transitionToChat}
                       firebaseAPI={this.state.firebaseAPI}
                       firebaseDatabase={this.state.firebaseDatabase}
@@ -78,7 +73,7 @@ export default class Drawer extends React.Component
                       />
               </div>
 
-              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.state.display === 'cart' ? " hidden" : "")}>
+              <div className={"shopping-spree-container container " + (this.state.closed ? 'collapsed' : 'open') + (this.props.display === 'cart' ? " hidden" : "")}>
                 { this.state.closed ?
                   <div className="row header">
                     <div role="button" className="u-width--full" onClick={this.handleToggle}>
@@ -86,7 +81,7 @@ export default class Drawer extends React.Component
                         Clique&nbsp;
                         {
                           currentDiscount
-                          ? `${currentDiscount} off`
+                          ? `${currentDiscount}% off`
                           : null
                         }
                         </div>
@@ -103,7 +98,7 @@ export default class Drawer extends React.Component
                         Clique&nbsp;
                         {
                           currentDiscount
-                          ? `${currentDiscount} off`
+                          ? `${currentDiscount}% off`
                           : null
                         }
                       </div>
@@ -154,7 +149,9 @@ Drawer.propTypes = {
     email: React.PropTypes.string.isRequired,
     icon: React.PropTypes.number.isRequired,
     closed: React.PropTypes.bool.isRequired,
+    // Func
     showAddToCartModal: React.PropTypes.func.isRequired,
     doneShoppingSpree: React.PropTypes.func.isRequired,
+    changeDisplayStatus: React.PropTypes.func.isRequired,
     showShareModal: React.PropTypes.func.isRequired
 };
