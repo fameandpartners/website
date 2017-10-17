@@ -6,6 +6,76 @@
 
 = render :partial => 'javascript'
 
+/ move to Optimizely once working...
+javascript:
+  $(function() {
+    // Your custom logic to decide if the user is in the Test Group
+    var userIsInTestGroup = true;
+
+    if (userIsInTestGroup) {
+      $('.js-optimizely-test, .js-optimizely-control').toggleClass('hidden');
+    }
+
+    window.fbAsyncInit = function() {
+      // Initialize the FB SDK
+      FB.init({
+        appId: '<YOUR_APP_ID>',
+        xfbml: true,
+        version: 'v2.10'
+      });
+
+      // Initialize the plugin
+      FB.Event.subscribe('xfbml.parse', function() {
+        // Call
+        if (userIsInTestGroup) {
+          FB.RankingService.showPlugin()
+        } else {
+          FB.RankingService.hidePlugin(
+              '<HIDE_REASON>',
+              '<USER_ID>',
+              document.getElementById('js-fb-optimizely-control')
+          );
+          // show control UI (your original recommendations).
+        }
+      });
+
+      // In the unlikely event that the iframe load fails, fallback to original UI
+      FB.Event.subscribe('xfbml.render', function() {
+        if (window.getComputedStyle) {
+          // If the iframe rendered without error, it will have a nonzero height.
+          const fbRecommendationDiv = document.getElementById('fb_recommendations');
+          const style = window.getComputedStyle(fbRecommendationDiv);
+          if (parseInt(style.height) <= 20) {
+            FB.RankingService.hidePlugin(
+                'iframe_load_failed',
+                '<USER_ID>',
+                document.getElementById('js-fb-optimizely-control')
+            );
+            // show control UI (your original recommendations).
+          }
+        }
+      });
+
+      // Only add this code if there is filtering / sorting on the page
+      // where the FB plugin needs to replaced after the user has seen the FB plugin.
+      // Call this function once the user has opted to filter / sort the products
+      // and the FB plugin is replaced
+      function removePluginAfterView() {
+        FB.RankingService.removePluginAfterView();
+      }
+    };
+
+    (function(d, s, id){
+      fbq('trackCustom', 'fb_ranking_start_load');
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/plugins/xfbml.rankingservice.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  });
+
+
 - if banner.display?
   .category-header
     .media-wrap
@@ -38,7 +108,11 @@
       .col-lg-3.col-md-4.side-panel.hidden-sm.hidden-xs
         = render :partial => 'sidebar'
 
-      .col-lg-9.col-md-8.products-collection
+      .col-lg-9.col-md-8.products-collection.hidden.js-optimizely-test
+        .row.products-set.js-products-collection-wrap
+          = render partial: 'best_sellers_test'
+
+      .col-lg-9.col-md-8.products-collection.js-optimizely-control#js-fb-optimizely-control
         .row.products-set.js-products-collection-wrap
           = render partial: 'products_with_content', locals: {col: 3}
           - if request.path.include?("/dresses/plus-size")
