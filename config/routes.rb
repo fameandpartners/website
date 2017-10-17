@@ -447,9 +447,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
-    get '/fashionista2014', to: redirect("/")
-    get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
-    get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
+    get '/fashionista2014', to: redirect("/it-girl")
+    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
