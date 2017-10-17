@@ -69,9 +69,9 @@ FameAndPartners::Application.routes.draw do
     # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
     # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015' => 'statics#fashion_it_girl'
-    get '/fashionitgirlau2015' => 'statics#fashion_it_girl_au_2015'
-    get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
+    get '/fashionitgirl2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
 
     get '/fashionitgirl2015-terms-and-conditions', to: redirect('/')
     get '/nyfw-comp-terms-and-conditions', to: redirect('/')
