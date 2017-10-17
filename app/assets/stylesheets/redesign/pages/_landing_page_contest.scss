@@ -124,6 +124,14 @@
     padding-bottom: 20px;
   }
 
+  .SectionPartnership {
+    margin: 70px 0;
+  }
+
+  .Partnership__logo img {
+    max-height: 105px;
+  }
+
   .FormWrapper {
     margin-top: 30px;
   }
@@ -193,10 +201,6 @@
       margin-bottom: 60px;
     }
 
-    &.page-it-girl-contest section {
-      margin-bottom: 0;
-    }
-
     .CtaBtn {
       width: 100%;
     }
@@ -241,6 +245,10 @@
 
     .ContentCopy__partner {
       margin-top: 50px;
+    }
+
+    .Partnership__logo img {
+      margin-top: 30px;
     }
 
   }
