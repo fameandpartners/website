@@ -6,13 +6,13 @@ describe 'Old Pages Redirection', type: :request do
   it_will :redirect, '/how-it-works', '/why-us'
 
   context 'fashionitgirl2015' do
-    it_will :redirect, '/it-girl', '/fashionitgirl2015-terms-and-conditions'
-    it_will :redirect, '/it-girl', '/fashionitgirl2015-competition'
+    it_will :redirect, '/fashionitgirl2015-terms-and-conditions', '/it-girl'
+    it_will :redirect, '/fashionitgirl2015-competition', '/it-girl'
   end
 
   context 'old statics' do
-    it_will :redirect, '/it-girl', '/fashionista2014'
-    it_will :redirect, '/it-girl', '/nyfw-comp-terms-and-conditions'
+    it_will :redirect, '/fashionista2014', '/it-girl'
+    it_will :redirect, '/nyfw-comp-terms-and-conditions', '/it-girl'
     it_will 'redirect to root', '/fame2015'
   end
 
