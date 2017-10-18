@@ -16,4 +16,6 @@ ln -s ${shared_modules_path} ${this_release_dir}/node_modules
 cd ${this_release_dir}
 yarn install && yarn run prod
 
-cd ${this_release_dir}/app/shopping-spree && npm i
+cd app/shopping-spree
+npm i
+
