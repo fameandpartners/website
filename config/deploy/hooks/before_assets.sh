@@ -13,9 +13,10 @@ mkdir -p ${shared_modules_path}
 ln -s ${shared_modules_path} ${this_release_dir}/node_modules
 
 # install npm modules
+cd ${this_release_dir}/app/shopping-spree
+npm i
+
 cd ${this_release_dir}
 yarn install && yarn run prod
 
-cd app/shopping-spree
-npm i
 
