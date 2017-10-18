@@ -19,11 +19,6 @@ class StaticsController < ApplicationController
     @optimizely_opt_in = true
   end
 
-  def fashionista_winner
-    @title = "Fashionista 2014 Winner"
-    @description = "Fashionista 2014 Winner"
-  end
-
   def bridesmaid_lp
     @title = "Bridesmaid Dresses | Beautiful Bridesmaid Gowns Online - Fame and Partners"
     @description = "Discover beautiful bridesmaid dresses at Fame and Partners"
@@ -119,13 +114,6 @@ class StaticsController < ApplicationController
 # OLD PAGES
 # =======================================================================
 
-  def fashionistacomp
-    @title = "Fashionista 2014 Competition"
-    @searcher = Products::ProductsFilter.new(:edits => "fashionista")
-    @searcher.current_user = try_spree_current_user
-    @searcher.current_currency = current_currency
-  end
-
   def landingpage_plus_size
     @title = "Plus Size Dresses"
 
@@ -171,16 +159,6 @@ class StaticsController < ApplicationController
     @description = "Mary Manaila Design Collaboration"
   end
 
-  def fashionista
-    @title = "Fashionista Program " + default_seo_title
-    @description = "Fashionista Program"
-  end
-
-  def nyfw_comp_terms_and_conditions
-    @title = "NYFW Competition 201" + default_seo_title
-    @description = "NYFW Competition 2015"
-  end
-
   def girlfriendxfame
 
     if !spree_user_signed_in?
@@ -207,31 +185,6 @@ class StaticsController < ApplicationController
   def amfam_lp
     @title = "AMFAM Dresses " + default_seo_title
     @description = "AMFAM Collaboration"
-  end
-
-  def fashion_it_girl
-    @title = "Fashion IT Girl" + default_seo_title
-    @description = "Fashion IT Girl 2015"
-  end
-
-  def fashion_it_girl_au_2015
-    @title = "Fashion IT Girl Australia" + default_seo_title
-    @description = "Fashion IT Girl Australia 2015"
-  end
-
-  def fashion_it_girl_au_tc
-    @title = "Fashion IT Girl Australia" + default_seo_title
-    @description = "Fashion IT Girl Australia 2015"
-  end
-
-  def fashion_it_girl_competition
-    @title = "Fashion IT Girl" + default_seo_title
-    @description = "Fashion IT Girl 2015"
-  end
-
-  def fashion_it_girl_terms_and_conditions
-    @title = "Fashion IT Girl" + default_seo_title
-    @description = "Fashion IT Girl 2015"
   end
 
   def fame2015
