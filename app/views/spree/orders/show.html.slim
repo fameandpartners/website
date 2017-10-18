@@ -52,6 +52,16 @@ javascript:
         window.optimizely.push(["trackEvent", "customer__control_option"]);
       }
     }
+
+    window.optimizelyAssist.bestSellersConversionCall = function(variant) {
+      if (variant == 'control') {
+        console.log('Best Sellers Conversion: CONTROL');
+        window.optimizely.push(["trackEvent", "conversion_bs__control"]);
+      } else if (variant == 'test') {
+        console.log('Best Sellers Conversion: TEST');
+        window.optimizely.push(["trackEvent", "conversion_bs__test"]);
+      }
+    }
   });
 
 section.order-details
