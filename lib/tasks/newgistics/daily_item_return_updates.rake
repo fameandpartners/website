@@ -29,7 +29,7 @@ namespace :newgistics do
             accept_return(order, li)
 
             refund_return(order, line_item)
-            # TODO: Send Email to customer that refund has been processed
+            NewgisticsRefundMailer.email(order,line_item)
           end
 
         end
