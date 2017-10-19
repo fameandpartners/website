@@ -13,7 +13,8 @@ module AdminUi
 
       def create
         @form = Forms::SkuUpcForm.new( OpenStruct.new )
-        if @form.validate( params[:sku_upc] )
+        @sizes_empty = true if params[:sku_upc][:sizes].blank?
+        if @form.validate( params[:sku_upc] ) && params[:sku_upc][:sizes].present?
           @results = {}
           @form.save do |hash|
             ensure_color_exists(

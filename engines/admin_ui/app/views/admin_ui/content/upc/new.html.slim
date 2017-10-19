@@ -22,12 +22,12 @@
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Style Number
+            label.col-sm-2.control-label Style number
             .col-sm-10 = f.text_field :style_number, :class => 'form-control'
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Style Name
+            label.col-sm-2.control-label Style name
             .col-sm-10 = f.text_field :style_name, :class => 'form-control'
 
         .ibox-content
@@ -37,18 +37,20 @@
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Color Name
+            label.col-sm-2.control-label Color name
             .col-sm-10 = f.text_field :color_name, :class => 'form-control'
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Color Presentation Name
+            label.col-sm-2.control-label Color presentation name
             .col-sm-10 = f.text_field :color_presentation_name, :class => 'form-control'
 
         .ibox-content
           .form-group
             label.col-sm-2.control-label Sizes
             .col-sm-10
+              - if @sizes_empty
+                span.help-inline Please select at least one size
               - for size in Spree::OptionType.size.option_values.collect(&:name)
                 .checkbox
                   label

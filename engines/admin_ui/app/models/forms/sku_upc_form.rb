@@ -10,7 +10,7 @@ module Forms
     property :sizes
 
     validates :style_number, :style_name, :height,
-      :color_name, :color_presentation_name, :sizes, presence: true
+      :color_name, :color_presentation_name, presence: true
 
     def available_products
       product_ids = Spree::Variant.where('deleted_at is NULL').uniq(:product_id).pluck(:product_id)
