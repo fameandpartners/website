@@ -2,6 +2,11 @@ module AdminUi
   module Content
     class UpcController < ::AdminUi::ApplicationController
 
+      # for convenience when on the create response screen and refresh screen
+      def index
+        redirect_to new_content_upc_url
+      end
+
       def new
         @form = Forms::SkuUpcForm.new( OpenStruct.new )
       end
@@ -28,9 +33,8 @@ module AdminUi
             puts "WE CREATED SOME UPC'S ****************"
             pp upcs
           end
-        else
-          puts "ERRORS *************"
         end
+        # always render new with results or errors
         render :new
       end
 

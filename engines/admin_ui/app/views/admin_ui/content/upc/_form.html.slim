@@ -32,7 +32,12 @@
       .ibox-content
         .form-group
           label.col-sm-2.control-label Sizes
-          .col-sm-10 = f.text_field :sizes, :class => 'form-control'
+          .col-sm-10
+            - for size in Spree::OptionType.size.option_values.collect(&:name)
+              .checkbox
+                label
+                  = f.check_box :sizes, { multiple: true }, size, false
+                  span = size
 
       .ibox-content
         .form-group
