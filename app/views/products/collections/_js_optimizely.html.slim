@@ -3,12 +3,10 @@ javascript:
   window.optimizelyHelpers = window.optimizelyHelpers || {};
 
   window.optimizelyHelpers.activateBestSellers = function() {
-    console.log('fakeOptimizely()');
     // Your custom logic to decide if the user is in the Test Group
     var userIsInTestGroup = true;
 
     window.fbAsyncInit = function() {
-      console.log('fbAsyncInit()');
       // Initialize the FB SDK
       FB.init({
         appId: '#{ ENV.fetch('FACEBOOK_APP_ID') }',
@@ -18,44 +16,37 @@ javascript:
 
       // Initialize the plugin
       FB.Event.subscribe('xfbml.parse', function() {
-        console.log('FB.Event.subscribe(\'xfbml.parse...\'');
         // Call
         if (userIsInTestGroup) {
-          console.log('xfbml.parse showPlugin()');
           FB.RankingService.showPlugin()
         } else {
-          console.log('xfbml.parse hidePlugin()');
           FB.RankingService.hidePlugin(
               '<HIDE_REASON>',
               '',
               document.getElementById('js-fb-optimizely-control')
           );
-          // show control UI (your original recommendations).
         }
       });
 
       // In the unlikely event that the iframe load fails, fallback to original UI
       FB.Event.subscribe('xfbml.render', function() {
-        console.log('FB.Event.subscribe(\'xfbml.render...\'');
         if (window.getComputedStyle) {
           // If the iframe rendered without error, it will have a nonzero height.
           const fbRecommendationDiv = document.getElementById('fb_recommendations');
           const style = window.getComputedStyle(fbRecommendationDiv);
           if (parseInt(style.height) <= 20) {
-            console.log('xfbml.render iframe failure');
             FB.RankingService.hidePlugin(
                 'iframe_load_failed',
                 '',
                 document.getElementById('js-fb-optimizely-control')
             );
-            // show control UI (your original recommendations).
+            $(".js-optimizely-control, js-optimizely-test").toggleClass('hidden');
           }
         }
       });
     };
 
     (function(d, s, id){
-      console.log('fbq IIFE...')
       fbq('trackCustom', 'fb_ranking_start_load');
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
