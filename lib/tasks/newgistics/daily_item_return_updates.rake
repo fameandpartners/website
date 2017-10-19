@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 namespace :newgistics do
   task update_item_returns: :environment do
+
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('item_return')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
@@ -17,10 +18,10 @@ namespace :newgistics do
       NewRelic::Agent.notice_error(res['response'].to_s)
       Raven.capture_exception(res['response'].to_s)
     else
-      res['response']['Returns']&.each do |item_return|
+      res['response']['Returns'].each do |item_return|
         order = Spree::Order.find_by_number(item_return['RmaNumber'].to_i)
         item_return['Items']&.each do |item|
-          line_items = order.line_items.select { |li| li.sku == item['SKU'] }
+          line_items = order.line_items.select { |li| li.personalization.sku == item['SKU'] }
                             .take(item['QtyReturnedToStock'].to_i)
           line_items.each do |li|
             receive_return(order, li)
@@ -33,11 +34,36 @@ namespace :newgistics do
 
         end
         failed_items = order.line_items.select do |li|
-          li.sku == item['SKU'] && li.item_return.status != 'Complete'
+          li.personalization.sku == item['SKU'] && li.item_return.status != 'Complete'
         end
-        failed_items.each do |li|
-          # TODO: Send email with the order number and line item id
+
+        failed_item_skus = failed_items.map { |li| li.personalization.sku }
+
+        unless failed_items.empty?
+
+          newgistics_order_id = item_return['orderID']
+          inventory_response = client.get_inventory_details(scheduler.last_successful_run)
+
+          inventories = inventory_response['inventories'].select do |inventory|
+            inventory['order_id'] == newgistics_order_id
+          end
+
+          damaged_inventory_items = inventories.select do |item|
+            item['reasonCode']['id'].to_i < 4 && failed_item_skus.include?(item['SKU'])
+          end
+          quarantined_inventory_items = inventories.select do |item|
+            item['reasonCode']['id'].to_i == 10 && failed_item_skus.include?(item['SKU'])
+          end
         end
+
+        unless damaged_inventory_items.empty?
+          DamagedReturnsMailer.email(order, damaged_inventory_items)
+        end
+
+        unless quarantined_inventory_items.empty?
+          QuarantinedReturnsMailer.email(order, damaged_inventory_items)
+        end
+
       end
     end
     scheduler.last_successful_run = current_time.to_s
