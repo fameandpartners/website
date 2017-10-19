@@ -74,6 +74,9 @@ configatron.newgistics do |newgistics|
   newgistics.uri = 'https://api.newgistics.com/WebAPI/Shipment/'
   newgistics.returns_uri = ENV['NEWGISTICS_RETURNS_API']
   newgistics.returns_api_key = ENV['NEWGISTICS_RETURNS_API_KEY']
+  newgistics.ftp_user = ENV['NEWGISTICS_FTP_USER']
+  newgistics.ftp_password= ENV['NEWGISTICS_FTP_PASS']
+  newgistics.ftp_uri= ENV['NEWGISTICS_FTP_URI']
 end
 
 configatron.contentful do |contentful|

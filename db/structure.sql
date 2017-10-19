@@ -2017,7 +2017,8 @@ CREATE TABLE newgistics_schedulers (
     id integer NOT NULL,
     last_successful_run character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
 );
 
 
@@ -9758,3 +9759,5 @@ INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
 
 INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
