@@ -9,7 +9,7 @@ javascript:
     window.fbAsyncInit = function() {
       // Initialize the FB SDK
       FB.init({
-        appId: '#{ ENV.fetch('FACEBOOK_APP_ID') }',
+        appId: $("[property='fb:app_id']").attr('content'),
         xfbml: true,
         version: 'v2.10'
       });
