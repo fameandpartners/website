@@ -1,2 +1,59 @@
+- if @results.present?
+  .upc.wrapper.wrapper-content
+    .ibox.float-e-margins
+      .ibox-title
+        h5 UPC Label’s
+
+      .ibox-content
+        .form-group
+          .ul
+          - for result in @results
+            .li
+              = "#{result[0]}: #{result[1]}"
+
 .upc.wrapper.wrapper-content
-  = render :partial => 'form'
+  = form_tag content_upc_index_path, method: :post, :class => 'form-horizontal'
+    = fields_for :sku_upc, @form do |f|
+      .ibox.float-e-margins
+        .ibox-title
+          h5 Generate UPC Label
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Style Number
+            .col-sm-10 = f.text_field :style_number, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Style Name
+            .col-sm-10 = f.text_field :style_name, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Height
+            .col-sm-10 = f.text_field :height, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Color Name
+            .col-sm-10 = f.text_field :color_name, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Color Presentation Name
+            .col-sm-10 = f.text_field :color_presentation_name, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Sizes
+            .col-sm-10
+              - for size in Spree::OptionType.size.option_values.collect(&:name)
+                .checkbox
+                  label
+                    = f.check_box :sizes, { multiple: true }, size, false
+                    span = size
+
+        .ibox-content
+          .form-group
+            .col-sm-4.col-sm-offset-2
+              = submit_tag "Create", :class => 'btn btn-primary save'

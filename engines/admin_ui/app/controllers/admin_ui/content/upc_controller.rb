@@ -14,24 +14,23 @@ module AdminUi
       def create
         @form = Forms::SkuUpcForm.new( OpenStruct.new )
         if @form.validate( params[:sku_upc] )
-          upcs = []
+          @results = {}
           @form.save do |hash|
             ensure_color_exists(
               hash[:color_name].parameterize,
               hash[:color_presentation_name].titleize
             )
             # gather upc numbers for each size combo
-            hash[:sizes].split(" ").each do |size|
-              upcs << generate_sku(
+            hash[:sizes].each do |size|
+              upc = generate_sku(
                 hash[:style_number].downcase,
                 hash[:style_name].upcase,
                 hash[:height].upcase,
                 hash[:color_name].parameterize,
                 size
               ).upc
+              @results[size] = upc
             end
-            puts "WE CREATED SOME UPC'S ****************"
-            pp upcs
           end
         end
         # always render new with results or errors
