@@ -24,7 +24,7 @@ module AdminUi
 
       describe "POST create" do
         before do
-          allow(controller).to receive(:generate_sku) { create(:global_sku)}
+          allow(controller).to receive(:find_or_create_sku) { create(:global_sku)}
         end
 
         let(:color_option_type) { FactoryGirl.create(:option_type, :color) }

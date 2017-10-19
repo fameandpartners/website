@@ -22,7 +22,7 @@ module AdminUi
             )
             # gather upc numbers for each size combo
             hash[:sizes].each do |size|
-              upc = generate_sku(
+              upc = find_or_create_sku(
                 hash[:style_number].downcase,
                 hash[:style_name].upcase,
                 hash[:height].upcase,
@@ -44,25 +44,25 @@ module AdminUi
         option_type.option_values.where( {name: color_name} ).first_or_create( {presentation: presentation_name} )
       end
 
-      def generate_sku( style_number, style_name, height, color_name, size )
-        sku = GlobalSku::Create.new(
+      def find_or_create_sku( style_number, style_name, height, color_name, size )
+        sku_value = Skus::Generator.new(
           style_number: style_number,
-          product_name: style_name,
           size: size,
-          color_name: color_name,
+          color_id: Spree::OptionValue.where(name: color_name).first.id,
           height: height,
-          customizations: []
+          customization_value_ids: []
         ).call
-        # Look up sku if the creation failed
-        if sku.blank?
-          sku_value = Skus::Generator.new(
+        sku = GlobalSku.find_by_sku( sku_value )
+        # Create sku if not found
+        if sku.nil?
+          sku = GlobalSku::Create.new(
             style_number: style_number,
+            product_name: style_name,
             size: size,
-            color_id: Spree::OptionValue.where(name: color_name).first.id,
+            color_name: color_name,
             height: height,
-            customization_value_ids: []
+            customizations: []
           ).call
-          sku = GlobalSku.find_by_sku( sku_value )
         end
 
         return sku

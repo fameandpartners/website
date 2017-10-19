@@ -9,7 +9,9 @@
           .ul
           - for result in @results
             .li
-              = "#{result[0]}: #{result[1]}"
+              = "#{result[0]}: "
+              strong = result[1]
+
 
 .upc.wrapper.wrapper-content
   = form_tag content_upc_index_path, method: :post, :class => 'form-horizontal'
