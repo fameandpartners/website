@@ -29,7 +29,7 @@ namespace :newgistics do
             accept_return(order, li)
 
             refund_return(order, line_item)
-            NewgisticsRefundMailer.email(order,line_item)
+            NewgisticsRefundMailer.email(order,li)
           end
 
         end
