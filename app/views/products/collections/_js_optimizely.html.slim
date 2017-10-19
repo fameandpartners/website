@@ -32,8 +32,8 @@ javascript:
       FB.Event.subscribe('xfbml.render', function() {
         if (window.getComputedStyle) {
           // If the iframe rendered without error, it will have a nonzero height.
-          const fbRecommendationDiv = document.getElementById('fb_recommendations');
-          const style = window.getComputedStyle(fbRecommendationDiv);
+          var fbRecommendationDiv = document.getElementById('fb_recommendations');
+          var style = window.getComputedStyle(fbRecommendationDiv);
           if (parseInt(style.height) <= 20) {
             FB.RankingService.hidePlugin(
                 'iframe_load_failed',
