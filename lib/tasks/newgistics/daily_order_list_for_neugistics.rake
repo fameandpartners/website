@@ -3,7 +3,7 @@
 # uploads all completed orders since last scheduled run
 require 'csv'
 require 'tempfile'
-require 'net/ftp'
+require 'net/sftp'
 namespace :newgistics do
   task upload_order_list: :environment do
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('daily_orders')).nil?
@@ -26,7 +26,7 @@ namespace :newgistics do
                    'Customer Fax', 'Ship Method Code', 'Pack Slip Info Line', 'Contents List (SKU, Qty)',
                    'Declared Value', 'Description of Contents', 'Product Country of Origin']
     temp_file = Tempfile.new('foo')  # self GC temp_file
-    csv_file = CSV.open(temp_file, "wb") do |csv|
+    csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       orders.each do |order|
         address = order.ship_address
@@ -36,10 +36,11 @@ namespace :newgistics do
                 order.total, order.line_items.map {|li|li.product.name}.join(','), "China" ]
       end
     end
-    ftp = Net::FTP.new(configatron.newgistics.ftp_uri)
-    ftp.login(configatron.newgistics.ftp_user, configatron.newgistics.ftp_password)
-    ftp.putbinaryfile(temp_file, "\\FameandPartners\\input\\shipments\\#{Date.today.to_s}.csv", 1024)
-    ftp.close
+    Net::SFTP.start(configatron.newgistics.ftp_uri,
+                    configatron.newgistics.ftp_user,
+                    password: configatron.newgistics.ftp_password) do |sftp|
+      sftp.upload!(temp_file, "\\FameandPartners\\input\\shipments\\#{Date.today.to_s}.csv")
+    end
   end
 
 end
