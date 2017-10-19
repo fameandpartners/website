@@ -33,7 +33,7 @@
         .ibox-content
           .form-group
             label.col-sm-2.control-label Height
-            .col-sm-10 = f.text_field :height, :class => 'form-control'
+            .col-sm-10 = f.collection_select :height, @form.available_heights, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
 
         .ibox-content
           .form-group

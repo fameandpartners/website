@@ -11,5 +11,14 @@ module Forms
 
     validates :style_number, :style_name, :height,
       :color_name, :color_presentation_name, :sizes, presence: true
+
+    def available_products
+      product_ids = Spree::Variant.where('deleted_at is NULL').uniq(:product_id).pluck(:product_id)
+      Spree::Product.where(id: product_ids)
+    end
+
+    def available_heights
+      Hash[LineItemPersonalization::HEIGHTS.map { |h| [h, h.humanize] }]
+    end
   end
 end
