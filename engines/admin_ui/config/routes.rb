@@ -59,7 +59,7 @@ AdminUi::Engine.routes.draw do
   namespace :content do
     resources :pages
     resources :contentful
-    resources :upc, only: [:show, :create, :new]
+    resources :upc, only: [:new, :create]
     post 'contentful_route' => 'contentful#create_route'
   end
 
