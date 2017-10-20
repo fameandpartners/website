@@ -68,6 +68,8 @@ export default class ShoppingSpree extends FirebaseComponent {
             );
         case 'discount':
             return (<span>{value}</span>);
+        case 'joined':
+            return( <span>{from.name} joined</span>);
         case 'text':
         default:
             return (<span>{from.name} said "{value}"</span>);

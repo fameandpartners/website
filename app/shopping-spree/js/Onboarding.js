@@ -39,11 +39,22 @@ export default class Onboarding extends FirebaseComponent
                                                  },
                                                  null
                                                );
+        } else
+        {
+            this.firebaseNodeId = shoppingSpreeId;
         }
+
+
+        let icon = Math.floor(Math.random() * 20);
+        this.createJoinedMessage(
+            this.nameInput.value,            
+            this.emailInput.value,
+            icon
+        );
         context.props.doneOnboarding( 
             this.emailInput.value,
             this.nameInput.value,
-            Math.floor(Math.random() * 20),
+            icon,
             shoppingSpreeId );
 
     }

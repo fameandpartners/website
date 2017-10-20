@@ -28,6 +28,7 @@ export default class FirebaseComponent extends React.Component
 
     connectToFirebase()
     {
+        
         if( firebase.apps.length === 0 )
         {
             var config =
@@ -37,7 +38,7 @@ export default class FirebaseComponent extends React.Component
                     databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
                     projectId: this.props.firebaseDatabase,
                     storageBucket: this.props.firebaseDatabase + ".appspot.com"
-                }
+                };
             firebase.initializeApp( config );
        }
     }
@@ -51,9 +52,26 @@ export default class FirebaseComponent extends React.Component
                    firebase.database.ServerValue.TIMESTAMP } );
         this.firebaseNodeId = ref.key;
 
-        return ref.key
+        return ref.key;
     }
 
+    createJoinedMessage( name, email, icon )
+    {
+        console.log( 'creating joined message' );
+        console.log( this.firebaseNodeId );
+        let newMessage = this.databaseRef( 'chats' ).push();
+        newMessage.set({ type: 'joined',
+                         created_at: firebase.database.ServerValue.TIMESTAMP,
+                         from:
+                         {
+                             email: email,
+                             icon: icon,
+                             name: name
+                         }
+                       }
+                      );
+        
+    }
     createFamebotMessage( text, type )
     {
         this.createTextMessage( text, 'Fame Bot', 'help@fameandpartners.com', 20, type );

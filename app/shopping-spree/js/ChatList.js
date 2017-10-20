@@ -83,8 +83,8 @@ export default class ChatList extends FirebaseComponent
                     this.state.messages.concat(
                         [
                                 <JoinedMessage key={data.key}
-                            name={data.val().name}
-                            email={data.val().email}
+                            name={data.val().from.name}
+                            email={data.val().from.email}
                             createdAt={data.val().created_at} />
                         ]
                     ),
