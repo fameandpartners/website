@@ -157,13 +157,11 @@ z-index levels
 @import 'redesign/registration';
 @import 'redesign/style_consult';
 @import 'redesign/contact';
-@import 'redesign/fashionista_winner';
 @import 'redesign/modal';
 @import 'redesign/shipping_fee_warning';
 @import 'redesign/flash_slider';
 @import 'redesign/login';
 @import 'redesign/sale_lp';
-@import 'redesign/fashion-it-girl-winner';
 @import 'redesign/style_session';
 @import 'redesign/tables';
 @import 'redesign/pages';
@@ -277,6 +275,7 @@ z-index levels
 // Generic
 @import 'redesign/generic/content-order';
 @import 'redesign/generic/helpers';
+@import 'shopping_spree/shopping_spree';
 
 .standard-form {
   height: 60px;
