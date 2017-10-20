@@ -407,6 +407,8 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
+    get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
+    
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
