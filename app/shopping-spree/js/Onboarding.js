@@ -18,40 +18,40 @@ export default class Onboarding extends FirebaseComponent
 
         this.connectToFirebase();
         let shoppingSpreeId = this.props.shoppingSpreeId;
-        if( shoppingSpreeId === null )
+        if( shoppingSpreeId == null )
         {
             shoppingSpreeId = this.createNewShoppingSpree();
+            
+            this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' );
+            this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." );
+            this.createFamebotShareDressMessage( 1481,
+                                                 49684,
+                                                 "The Maritza Dress",
+                                                 "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
+                                                 409,
+                                                 "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/35873/original/fprv1026p-black_and_white_spot-front.jpg?1494461867",
+                                                 "/dresses/the-maritza-dress-1481",
+                                                 {
+                                                     "id": 415,
+                                                     "name": "black-and-white-spot",
+                                                     "presentation": "Black and White Spot",
+                                                     "price": 0
+                                                 },
+                                                 null
+                                               );
         }
-        this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' )
-        this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." )
-        this.createFamebotShareDressMessage( 1481,
-                                             49684,
-                                             "The Maritza Dress",
-                                             "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
-                                             409,
-                                             "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/35873/original/fprv1026p-black_and_white_spot-front.jpg?1494461867",
-                                             "/dresses/the-maritza-dress-1481",
-                                             {
-                                                 "id": 415,
-                                                 "name": "black-and-white-spot",
-                                                 "presentation": "Black and White Spot",
-                                                 "price": 0
-                                             },
-                                             null
-                                           )
-
         context.props.doneOnboarding( 
-                                      this.emailInput.value,
-                                      this.nameInput.value,
-                                      Math.floor(Math.random() * 20),
-                                      shoppingSpreeId );
+            this.emailInput.value,
+            this.nameInput.value,
+            Math.floor(Math.random() * 20),
+            shoppingSpreeId );
 
     }
 
     render()
     {
         return(
-                <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true">
+            <div id="shopping-spree-modal" className="shopping-spree shopping-spree-onboarding modal modal animated bounceIn" role="dialog" aria-hidden="true">
               <div id="shopping-spree-modal-content" className="container">
                 <a className="btn-close med" alt="Close" onClick={this.props.close}></a>
                 <div id="top-headline" className="welcome-headline row">
