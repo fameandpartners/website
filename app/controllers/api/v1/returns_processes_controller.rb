@@ -29,7 +29,7 @@ module Api
           return
         end
 
-        fetched_order = Spree::Order.where(email: params['email'], number: params['order_number']).first
+        fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
           respond_with Orders::OrderPresenter.new(fetched_order)
