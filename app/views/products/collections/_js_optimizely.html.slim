@@ -58,3 +58,14 @@ javascript:
       }
     }(document, 'script', 'facebook-jssdk'));
   }
+
+  window.optimizelyHelpers.trackBestSellersVisit = function(variant) {
+    if (variant == 'control') {
+      console.log('Best Sellers CONTROL --- VISIT');
+      window.optimizely.push(["trackEvent", "visit_bs__control"]);
+    } else if (variant == 'test') {
+      console.log('Best Sellers TEST --- VISIT');
+      window.optimizely.push(["trackEvent", "visit_bs__test"]);
+    }
+    sessionStorage.setItem('bestSellersVisited', true);
+  }

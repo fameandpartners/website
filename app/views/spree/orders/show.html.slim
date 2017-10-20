@@ -49,10 +49,14 @@ javascript:
     }
 
     window.optimizelyAssist.bestSellersConversionCall = function(variant) {
-      if (variant == 'control') {
-        window.optimizely.push(["trackEvent", "conversion_bs__control"]);
-      } else if (variant == 'test') {
-        window.optimizely.push(["trackEvent", "conversion_bs__test"]);
+      if (sessionStorage.getItem('bestSellersVisited')) {
+        if (variant == 'control') {
+          console.log("Best Sellers CONTROL --- CONVERSION");
+          window.optimizely.push(["trackEvent", "conversion_bs__control"]);
+        } else if (variant == 'test') {
+          console.log("Best Sellers TEST --- CONVERSION");
+          window.optimizely.push(["trackEvent", "conversion_bs__test"]);
+        }
       }
     }
   });
