@@ -51,11 +51,13 @@ export default class Onboarding extends FirebaseComponent
             this.emailInput.value,
             icon
         );
+        
         context.props.doneOnboarding( 
             this.emailInput.value,
             this.nameInput.value,
             icon,
             shoppingSpreeId );
+        
 
     }
 

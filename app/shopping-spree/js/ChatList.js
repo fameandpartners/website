@@ -37,72 +37,56 @@ export default class ChatList extends FirebaseComponent
     }
     addChatMessage( data )
     {
+        let toConcat = null;
         switch( data.val().type )
         {
             case 'text':
             case 'discount':
-            this.setState(
-                {
-                    messages:
-                    this.state.messages.concat([<TextMessage key={data.key}
-                                                text={data.val().value}
-                                                iconNumber={parseInt(data.val().from.icon)}
-                                                name={data.val().from.name}
-                                                email={data.val().from.email}
-                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />]),
-                    updateCount: this.state.updateCount + 1
-                }
-            );
+            toConcat = [<TextMessage key={data.key}
+                        text={data.val().value}
+                        iconNumber={parseInt(data.val().from.icon)}
+                        name={data.val().from.name}
+                        email={data.val().from.email}
+                        sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />];
             break;
 
             case 'welcome_message':
             break;
 
             case 'share_dress':
-            this.setState(
-                {
-                    messages:
-                    this.state.messages.concat([<DressMessage key={data.key}
-                                                iconNumber={data.val().from.icon}
-                                                name={data.val().from.name}
-                                                email={data.val().from.email}
-                                                sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
-                                                dress={data.val().value}
-                                                showAddToCartModal={this.props.showAddToCartModal}
-                                                />]),
-                    updateCount: this.state.updateCount + 1
-
-                }
-            );
+            toConcat = 
+                [<DressMessage key={data.key}
+                 iconNumber={data.val().from.icon}
+                 name={data.val().from.name}
+                 email={data.val().from.email}
+                 sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
+                 dress={data.val().value}
+                 showAddToCartModal={this.props.showAddToCartModal}
+                 />];
             break;
 
             case 'joined':
-            this.setState(
-                {
-                    messages:
-                    this.state.messages.concat(
-                        [
-                                <JoinedMessage key={data.key}
-                            name={data.val().from.name}
-                            email={data.val().from.email}
-                            createdAt={data.val().created_at} />
-                        ]
-                    ),
-                    updateCount: this.state.updateCount + 1
-
-                }
-            );
-
+            toConcat = [
+                    <JoinedMessage key={data.key}
+                name={data.val().from.name}
+                email={data.val().from.email}
+                createdAt={data.val().created_at} />
+            ];
             break;
-
-
             default:
             console.log( "unknown card type: " + data.val().type );
 
         }
-
-
-
+        if( toConcat != null )
+        {
+            this.state.messages = this.state.messages.concat(toConcat);
+            this.setState(
+                {
+                    messages: this.state.messages,
+                    updateCount: this.state.updateCount + 1
+                }
+            );
+        }
     }
 
     scrollToBottom ()
