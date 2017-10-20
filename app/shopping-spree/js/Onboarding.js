@@ -17,7 +17,11 @@ export default class Onboarding extends FirebaseComponent
 
 
         this.connectToFirebase();
-        let shoppingSpreeId = this.createNewShoppingSpree();
+        let shoppingSpreeId = this.props.shoppingSpreeId;
+        if( shoppingSpreeId === null )
+        {
+            shoppingSpreeId = this.createNewShoppingSpree();
+        }
         this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' )
         this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." )
         this.createFamebotShareDressMessage( 1481,

@@ -86,6 +86,7 @@ export default class ShoppingSpree extends FirebaseComponent {
 
   fetchAndClearStartingState() {
     const toReturn = this.cookies.get('shopping_spree_starting_state');
+    console.log( 'Starting state: ' + toReturn );
     this.cookies.remove('shopping_spree_starting_state');
     return toReturn;
   }
@@ -96,6 +97,8 @@ export default class ShoppingSpree extends FirebaseComponent {
     const icon = parseInt(this.cookies.get('shopping_spree_icon'));
     const email = this.cookies.get('shopping_spree_email');
     const firebaseId = this.cookies.get('shopping_spree_id');
+
+    console.log( 'firebase id: ' + firebaseId );      
 
     let display = 'none';
     let minimize = false;

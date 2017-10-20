@@ -135,7 +135,7 @@ export default class Cart extends FirebaseComponent
         super.connectToFirebase();
         this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
         this.cartDB.on( 'child_added', this.addToCart );
-        this.cartDB.on( 'value', (data) => { this.recalculateDiscount(Object.keys(data.val()).length) });
+        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
     }
 
 
