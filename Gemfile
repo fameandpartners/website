@@ -104,6 +104,8 @@ gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
 # utils
+
+gem 'json'
 # replacement for standard library.
 gem 'addressable'
 
@@ -136,6 +138,7 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'pry-byebug'
+  gem 'quiet_assets'
 end
 
 group :test do
@@ -162,6 +165,7 @@ end
 group :production do
   # gem 'unicorn'
   gem 'aws-sdk'
+  gem 'rdoc', '3.12.2'
 end
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine

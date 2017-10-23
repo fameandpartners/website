@@ -63,11 +63,12 @@
 
 .instructions__body .list-title {
     font-size: 22px;
+    margin-bottom: 25px;
 }
 
 .instructions__body .list {
-    list-style: none;
-    padding: 0;
+    padding: 0 0 0 15px;
+    list-style-position: outside;
 }
 
 .instructions__body .list .list-text {
@@ -77,14 +78,24 @@
     font-size: 16px;
 }
 
-.instructions__body .list > li {
-    list-style: none;
+.instructions__body .list li {
     font-size: 16px;
     line-height: 24px;
 }
 
-.instructions__body .list > li:before {
+.list__packing-slip li:before {
     content: "-";
+}
+
+.list__packing-slip {
+  list-style: none;
+  padding: 0;
+}
+
+.list__packing-slip p {
+  display: inline-block;
+  padding-left: 4px;
+  margin-bottom: 0;
 }
 
 .instructions__body .list .link {

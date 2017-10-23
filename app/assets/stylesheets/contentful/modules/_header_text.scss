@@ -6,12 +6,12 @@
 .CopyHeader__separator {
   border-top: 1px solid $oil;
   width: 20px;
-  margin: 56px auto 28px;
+  margin: 60px auto 28px;
 }
 
 .CopyHeader__content {
   max-width: 440px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
   font-size: 2.4rem;
   font-family: $secondary-font-family;
 }
@@ -22,26 +22,36 @@
 
 .CopyHeader--featured.CopyHeader {
   padding: 0;
+
   @include breakpoint(tablet) {
     padding: 50px 20px;
   }
+
 }
 
 .CopyHeader--featured .CopyHeader__separator {
   transform: rotate(45deg);
   width: 30px;
   margin: 50px auto 25px;
+
   @include breakpoint(tablet) {
     margin: 50px auto;
   }
+
 }
 
 .CopyHeader--featured .CopyHeader__content p {
   font-size: 2.0rem;
+
   &:first-of-type {
     font-size: 3.25rem;
-    @include breakpoint(tablet) { font-size: 3.5rem; }
+
+    @include breakpoint(tablet) {
+      font-size: 3.5rem;
+    }
+
   }
+
 }
 
 .CopyHeader--large .CopyHeader__content p {

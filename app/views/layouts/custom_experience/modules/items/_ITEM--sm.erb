@@ -1,0 +1,35 @@
+<%
+  split_pid = @pid.split('-', 2)
+
+  product = @collection.products.select do |item|
+    if item.color.present?
+      item.id == split_pid[0].to_i && item.color.name == split_pid[1]
+    else
+      nil
+    end
+  end
+
+  if product.present?
+    name = product[0].name
+    price = product_price_with_discount(product[0])
+    image = product[0].images.first
+    image_hover = product[0].images.last
+    path = collection_product_path(product[0], color: product[0].color.try(:name))
+  else
+    name = ''
+    price = ''
+    image = ''
+    image_hover = ''
+    path = ''
+  end
+%>
+
+<% if product.present? %>
+<div class="Product">
+  <a href="<%= path %>">
+    <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+    <p class="Product__name"><%= name %></p>
+    <p class="Product__price"><%= price %></p>
+  </a>
+</div>
+<% end %>

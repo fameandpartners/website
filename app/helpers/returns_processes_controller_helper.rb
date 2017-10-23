@@ -81,8 +81,10 @@ module ReturnsProcessesControllerHelper
     @order_return.save
 
     if (has_us_shipping_address?(@order_return.order_id))
+      return_label.save
       @order_return.return_request_items.each do |x|
         x.item_return.item_return_label = return_label
+        x.item_return.save!
       end
 
       @order_return.save

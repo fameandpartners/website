@@ -20,7 +20,8 @@ const propTypes = {
   orderIndex: PropTypes.number,
   returnArray: PropTypes.array.isRequired,
   returnSubtotal: PropTypes.number,
-  returnEligible: PropTypes.bool,
+  returnEligible: PropTypes.bool.isRequired,
+  returnRequested: PropTypes.bool,
   showForm: PropTypes.bool,
   // Functions
   removeProductFromReturnArray: PropTypes.func,
@@ -42,7 +43,7 @@ const defaultProps = {
   orderData: null,
   orderIndex: null,
   orderNumber: '',
-  returnEligible: true,
+  returnRequested: false,
   returnSubtotal: 0,
   showForm: false,
   addProductToReturnArray: noop,
@@ -59,7 +60,7 @@ class ProductContainer extends Component {
   }
 
   findReturnRequestedItems() {
-    return this.props.orderData.items.filter(li => (li.line_item.returns_meta && li.line_item.returns_meta.return_item_state === 'requested')).map(li => ({
+    return this.props.orderData.items.filter(li => (li.line_item.returns_meta)).map(li => ({
       line_item_id: li.line_item.id,
       item_return_label: li.line_item.returns_meta,
     }));
@@ -113,6 +114,7 @@ class ProductContainer extends Component {
       showForm,
       updatePrimaryReturnReason,
       updateOpenEndedReturnReason,
+      returnRequested,
     } = this.props;
     const checkboxStatus = returnArray.filter(r => r.id === product.id).length > 0;
     return (
@@ -133,6 +135,7 @@ class ProductContainer extends Component {
           product={product}
           returnArray={returnArray}
           returnEligible={returnEligible}
+          returnRequested={returnRequested}
           showForm={showForm}
           handlePopulateLogistics={this.handlePopulateLogistics}
           hasError={hasError}

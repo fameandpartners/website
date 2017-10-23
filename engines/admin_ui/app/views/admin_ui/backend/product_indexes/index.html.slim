@@ -24,20 +24,19 @@
       .form-group
         button.btn.btn-danger BIG RED BUTTON
 
-table.table.admin-table-condensed
-  thead : tr
-    th id
-    th product_id
-    th product_name
-    th sku
-    th color
-  tbody
-    - @search.results.each do |res|
-      tr
-       td
-         = link_to res.id, {controller: :product_indexes, action: :show, id: res.id }
-       td = res.product.id
-       td = res.product.name
-       td = res.product.sku
-       td = res.color.try(:presentation)
-
+/ table.table.admin-table-condensed
+/   thead : tr
+/     th id
+/     th product_id
+/     th product_name
+/     th sku
+/     th color
+/   tbody
+/     - @search.results.each do |res|
+/       tr
+/        td
+/          = link_to res.id, {controller: :product_indexes, action: :show, id: res.id }
+/        td = res.product.id
+/        td = res.product.name
+/        td = res.product.sku
+/        td = res.color.try(:presentation)

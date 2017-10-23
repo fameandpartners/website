@@ -8,6 +8,7 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
+
   ###################################################################
   # Feed files redirections. They live above any `/us` + `/au` redirection
   ###################################################################
@@ -68,18 +69,18 @@ FameAndPartners::Application.routes.draw do
     # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
     # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015' => 'statics#fashion_it_girl'
-    get '/fashionitgirlau2015' => 'statics#fashion_it_girl_au_2015'
-    get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
+    get '/fashionitgirl2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
 
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/')
-    get '/fashionitgirl2015-competition', to: redirect('/')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
-    get '/slayitforward'   => 'statics#slay_it_forward', :as => :slay_it_forward
+    get '/slayitforward', to: redirect('https://www.instagram.com/explore/tags/slayitforward/'), :as => :slay_it_forward
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
@@ -114,10 +115,18 @@ FameAndPartners::Application.routes.draw do
     get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
 
     # Fame Society Invitation
-    get '/fame-society-invitation' => 'statics#landing_page_fame_society_invitation', :permalink => 'fame-society-invitation', :as => :fame_society_invitation_landing_page
+    get '/fame-society-invitation', to: redirect('/dresses'), as: :fame_society_invitation_landing_page
 
     # "Invite a friend" landing page
     get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
+
+    # Internship landing page
+    get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
+
+    # IT Girl Internship Competition landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'fame-it-girl', :as => :it_girl_landing_page
+    # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
+    get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
     ###########
     # Lookbooks
@@ -237,8 +246,6 @@ FameAndPartners::Application.routes.draw do
     # Modern Evening Collection - Landing page
     get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
 
-    # Bespoke Bridal Collection - Landing page
-    get '/bespoke-bridal-collection' => 'products/collections#show', :permalink => 'bespoke-bridal-collection', :as => :bespoke_bridal_collection_landing_page
     # Redirect with querystring for GA tracking (Marketing campaign)
     get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
 
@@ -249,7 +256,6 @@ FameAndPartners::Application.routes.draw do
     get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
     get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
     get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
-    get '/it-girl', to: redirect('/dresses'), as: :it_girl_landing_page
     get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
     get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
 
@@ -319,6 +325,8 @@ FameAndPartners::Application.routes.draw do
     # Florals Collection Page
     get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
 
+    # Fall Weddings Collection Page
+    get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
@@ -434,12 +442,14 @@ FameAndPartners::Application.routes.draw do
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
     get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
-    get '/get-the-look'   => 'statics#get_the_look', :permalink => 'get_the_look', :as => :get_the_look
+
+    get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
+
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
-    get '/fashionista2014', to: redirect("/")
-    get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
-    get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
+    get '/fashionista2014', to: redirect("/it-girl")
+    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
@@ -610,9 +620,21 @@ FameAndPartners::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      # returns
       get 'orders' => 'returns_processes#index'
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
+
+      # user profile
+      get 'profile' => 'profiles#show'
+
+      # user session
+      devise_scope :spree_user do
+        post 'user/login' => 'user_sessions#create'
+        delete 'user/logout' => 'user_sessions#destroy'
+      end
+
+      delete '/rails_cache' => 'systems#clear_cache'
     end
   end
 
@@ -712,6 +734,9 @@ end
 FameAndPartners::Application.routes.append do
   # NOTE: Alexey Bobyrev 14 Jan 2017
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-  match '*path', to: 'contentful#main'
+
+  # Added in something to explicity exclude devise routes from going to contentful
+  match '*path', to: 'contentful#main', constraints: lambda { |request| (request.path !~ /auth/) }
+
   # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

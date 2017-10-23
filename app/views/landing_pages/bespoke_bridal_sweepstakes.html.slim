@@ -1,159 +1,199 @@
 = render partial: 'pages/robots'
 
-.wedding-sweepstakes.landing-page-v2
+.Page__contest.js-smooth-scroll
 
-  .preRegisterSweepstakes__introWrapper
-    .container-fluid.containerHalfScreenHero
+  .container-fluid
+    section.section-box.SectionIntro
 
       .row.hidden-md.hidden-lg
-        .col-md-12.containerHalfScreenHero__heroImg
-          = image_tag 'landingpages/wedding-sweepstakes/bride-hero-sweep-mob.jpg', class: "img-responsive"
+        .col-xs-12.mobile-no-padding
+          .ContentCopy.text-center
+            h1.h2.Heading.Heading--medium Win a $6k bridal fashion and beauty experience!
 
+            p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, The W Hotel, Stylisted, The Daily Edited, The Buff, Blushington and more.
+
+            p
+              a.btn.btn-black.CtaBtn.CtaBtn--no-margin-top href="#form"
+                | Enter to Win
+
+      .row.contentBox__verticalMiddle
+
+          .col-md-7.vertical-align
+            .item-wrap
+              = image_tag 'landingpages/wedding-sweepstakes/hero.jpg', class: "img-responsive"
+
+          .col-md-5.vertical-align.hidden-sm.hidden-xs
+            .ContentCopy
+              h1.title.Heading--medium Win a $6k bridal fashion and beauty experience!
+
+              p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, The W Hotel, Stylisted, The Daily Edited, The Buff, Blushington and more.
+
+              a.btn.btn-black.CtaBtn href="#form"
+                | Enter to Win
+
+  .container
+    section.section-box.SectionWhatToDo
       .row
-        .col-md-6.hidden-md.hidden-lg
-          .heading-overlay-wrapper.preRegisterSweepstakes__heading
-            h2.heading-overlay
-              | FAME BRIDES
+        .col-md-6.col-md-offset-3
 
-      .row.vertical-align-row
-        .col-md-6.no-padding.hidden-xs.hidden-sm.vertical-align
-          .preRegisterSweepstakes__heroBg style='background-image: url("#{image_path('landingpages/wedding-sweepstakes/bride-hero-sweep.jpg')}")'
+            h2.Heading The winning bridal party will receive
 
-        .col-md-offset-1.col-md-4.vertical-align
-          .preRegisterSweepstakes__copy.heading-thin-line-top
-            .row
-              .col-xs-12
-                h1.title Custom, convenient,<br class="visible-lg"> and actually cool.
-                h3.subheading Exclusive designs. Elevated, elegant, and eff-ing gorgeous. Welcome to The Wedding Atelier.
+      .IconText
+        .row
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-fame.png', class: "Prizes__logos"
+            p From Fame and Partners: $3,000 of custom, made-to-order dresses for the bride and bridesmaids
 
-                = link_to '/wedding-atelier', class: 'cta-mobile-featured'
-                  span.btn-xs.btn-featured
-                    span.copy-highlight LEARN MORE
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-maybelline.png', class: "Prizes__logos"
+            p From Maybelline: The ultimate bridal beauty bundle for each member of the bridal party, worth $700
 
-  .preRegisterSweepstakes__formWrapperBg
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-w-hotel.png', class: "Prizes__logos"
+            p From The W Hotel: A 2-night stay at The W Union Square in New York City, worth $1,000
+
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-stylisted.png', class: "Prizes__logos"
+            p From Stylisted: A $500 gift card to use towards their in-home hair and makeup styling service
+
+        .row
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-tde.png', class: "Prizes__logos"
+            p From The Daily Edited: A monogrammed bag for each member of the bridal party, worth up to $2,000
+
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-blushington.png', class: "Prizes__logos"
+            p From Blushington: A $100 gift card to use towards their makeup application and aesthetician services
+
+          .col-md-3
+            = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-buff.png', class: "Prizes__logos"
+            p From The Buff: A custom-blended facial oil for each member of the bridal party, valued at $200
+
+  section.section-box.SectionContestForm#form
     .container
-      .preRegisterSweepstakes__formWrapperContent
-        section.section-box.padding-container.preRegisterSweepstakes__formWrapper
-          .row.hidden-xs.hidden-sm
-            .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
-              h2.heading-overlay FAME BRIDES
+      .row
+        .col-lg-8.col-lg-offset-2.col-md-6.col-md-offset-3
+          h2 Enter to win over $6k worth <br class="visible-lg visible-sm">of bridal fashion and beauty!
 
-          .row.text-center
-            .col-md-offset-2.col-md-8
-
-              .preRegisterSweepstakes__copyPadding
-                h2#formRegister
-                  | <em>Win</em> $5,000 of custom gowns <br> for the whole wedding party.
-
-                p
-                  | Get the bespoke bridal treatment, on us.
-
-              .iframe-middle-wrapper
-                .woobox-offer data-offer="5fbtad"
-
-              .preRegisterSweepstakes__copyPadding.text-center
-                span.text-grey
-                  | <em>By clicking ENTER NOW, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
-
-              .text-center
-                .row
-                  h3 <em class="link-underline">Previous Winners:</em>
-                .row
-                  span S. Shtephani | Houston, TX
-                .row
-                  span A. Botto | Jersey City, NJ
+      .row
+        .col-xs-12.col-md-offset-2.col-md-8
+          #woobox-root.FormWrapper
+          .woobox-offer data-offer='jtxnam'
+          p.PromoDisclaimer This promotion is managed by Fame and Partners, Powered by Woobox
 
   .container
-    section.section-box.section-price.section-extra-margin
+    section.section-box.SectionPartners.text-left
       .row
-        .col-md-6.hidden-md.hidden-lg
-          .heading-overlay-wrapper
-            h2.heading-overlay.preRegisterSweepstakes__heading
-              | THE PRIZE
+        .col-md-6.col-md-offset-3
+          h2.h1.Heading__partners.Heading--mobile.hidden-sm.hidden-xs.text-center Our Contest Partners
+          h2.h1.Heading__partners.Heading--mobile.hidden-md.hidden-lg Our Contest Partners
 
-        .col-md-5
-          .heading-overlay-wrapper.hidden-xs.hidden-sm
-            h2.heading-overlay.preRegisterSweepstakes__heading
-              | THE PRIZE
-          .preRegisterSweepstakes__copyPadding
-            h2.no-margin
-              | Win custom dresses for the <em>entire</em> bridal party.
-            p
-              | We're giving away $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+      .row
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
 
-        .col-md-6.col-md-offset-1
-          - current_tile_image = "landingpages/wedding-sweepstakes/bride-testimonial-sweep.jpg"
-          - current_tile_image_mob = "landingpages/wedding-sweepstakes/bride-testimonial-sweep-mob.jpg"
-          picture.media-wrap
-            source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
-            source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
-            img src="#{image_path(current_tile_image)}" srcset="
-              #{image_path(current_tile_image_mob)} 991w,
-              #{image_path(current_tile_image)} 992w"
+            = image_tag "landingpages/wedding-sweepstakes/logo-maybelline.png", alt: "Maybelline"
 
-  .container-fluid.no-spacing-cols-desktop
-    section.section-box.section-price.section-extra-margin
+            p From a small, family-owned business to the number one cosmetics company in America, Maybelline New York takes trends from the catwalk to the sidewalk, empowering women to make a statement, explore new looks, and flaunt their own creativity and individuality.
 
-      .row.hidden-lg.hidden-md
+            p #{link_to "Visit Maybelline", "https://www.maybelline.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
+            = image_tag "landingpages/wedding-sweepstakes/logo-w-hotel.png", alt: "W Hotel Union Square"
+
+            p With chic accommodations and a prime location offering an innovative mix of film, art, music, and fine dining, The W New York Union Square seamlessly blends old-school grandeur and avant-garde style.
+
+            p #{link_to "Visit W Hotel Union Square", "http://www.wnewyorkunionsquare.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
+
+            = image_tag "landingpages/wedding-sweepstakes/logo-stylisted.png", alt: "Stylisted"
+
+            p Stylisted allows women to book on-location hair styling and makeup appointments from freelance professionals. Skip the salon, select the professional for your needs, and wait for beauty to knock at your door.
+
+            p #{link_to "Visit Stylisted", "https://stylisted.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+      .row
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
+            = image_tag "landingpages/wedding-sweepstakes/logo-tde.png", alt: "The Daily Edited"
+
+            p The Daily Edited is an accessories company all about creating products where form meets function, a notion of understated chic, and the creation of products with a luxury feel at an attainable price point.
+
+            p #{link_to "Visit TDE", "https://www.thedailyedited.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
+            = image_tag "landingpages/wedding-sweepstakes/logo-blushington.png", alt: "Blushington"
+
+            p Blushington provides professional, affordable makeup applications and esthetician services in a beautifully designed and fun atmosphere. Artists are available seven days a week, in store or on the go, anywhere, anytime.
+
+            p #{link_to "Visit Blushington", "https://www.blushington.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+        .col-md-4.col-xs-12
+          .ContentCopy__partner
+            = image_tag "landingpages/wedding-sweepstakes/logo-buff.png", alt: "The Buff"
+
+            p The Buff believes there’s no such thing as one-size-fits-all when it comes to effective skincare. They tailor blends to your exact needs–and put your initials on the bottle. They get you, and they get your skin.
+
+            p #{link_to "Visit The Buff", "https://www.itsthebuff.com", target: "_blank", class: "ContentCopy__link link-underline"}
+
+  .container-fluid.hidden-sm.hidden-xs
+    .u-section-border--bottom
+
+  .container
+    section.section-box.SectionTiles
+      .row
         .col-xs-12
-          .videoWrapper
-            //Mobile Video
-            video.item-video.hidden-md.hidden-lg(name="Pre-register Bridal Sweepstakes" autoplay="true" muted="true" loop="true" src="https://player.vimeo.com/external/195553231.sd.mp4?s=925e837722e5dd40c5c935b6628bbcab184b75fc&profile_id=164")
+          h2.Heading.Heading--mobile The New Way to Wedding
 
-      .row.vertical-align-row
-        .col-md-6.vertical-align.hidden-xs.hidden-sm
-          .videoWrapper
-            //Desktop Video
-            video.item-video.video-half-display.hidden-xs.hidden-sm(name="Pre-register Bridal Sweepstakes" autoplay="true" muted="true" loop="true" src="https://player.vimeo.com/external/195554023.hd.mp4?s=de2c4aef64394e09d359734f5fe2f29e6a04781b&profile_id=174")
+      .same-height-cols
+        .row
+          .col-md-4
+            .item.bordered
+              a href="#{wedding_consultation_path}"
+                = image_tag 'landingpages/wedding-sweepstakes/tile-1.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
-        .col-md-4.vertical-align
-          .copyWrapper
-            h2.no-margin
-              | Give your bridesmaids <br class="visible-lg"> what they <em>want</em>.
-            p
-              | In the new Wedding Atelier App Beta, you can customize nearly everything about your bridesmaid dresses: fabric, color, fit, and design details. (There are over 40,000 combinations!) Invite the bridal party to group chat, share designs, and vote on the winning looks. Your dresses will be made-to-order to fit and flatter each individual– and they start at just $200.
+                .item-copy
+                  h3 Free wedding styling
+                  p.summary Fame and Partners’ wedding concierge will help you put your entire bridal party look together–for free.
 
-            = link_to '/wedding-atelier'
-              span.cta-link-arrow-right
-                span.cta-link-alt
-                  span Explore
-                  span.copy-highlight  The Atelier
-                i.icon.icon-arrow-right
+                  span.link-underline Learn More
 
-  .container
-    section.section-box.section-border-grey.section-stylist.section-extra-margin
-      .row.vertical-align-row
-        .col-md-6.hidden-xs.hidden-sm.vertical-align
-          = image_tag 'landingpages/wedding-sweepstakes/stylist.jpg', class: "img-responsive"
+          .col-md-4
+            .item.bordered
+              a href="/bespoke-bridal-collection"
+                = image_tag 'landingpages/wedding-sweepstakes/tile-2.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
-        .col-md-5.col-md-offset-1.vertical-align
-          .copyWrapper
-            h2.no-margin
-              | Can't <em>wait</em> <br class="hidden-md hidden-lg">to get started?
-            p
-              | Our wedding concierge, Amber, is here to help plan your look for the big day for free.
+                .item-copy
+                  h3 Bespoke bridal gowns
+                  p.summary An easy, convenient way to find custom-made, fashion-forward bridal starting at just $299.
 
-            = image_tag 'landingpages/wedding-sweepstakes/stylist-mob.jpg', class: "img-responsive hidden-md hidden-lg"
-            = link_to wedding_consultation_path, class: 'cta-mobile-featured'
-              span.btn-xs.btn-featured
-                span.copy-highlight BOOK NOW
+                  span.link-underline Shop Now
 
-    section.text-center.section-last.section-app-cta
-      .row
-        h2
-          | Welcome to the Wedding Atelier App Beta–the new way to wedding.
+          .col-md-4
+            .item.bordered
+              a href="#{modern_bridesmaid_collection_path}"
+                = image_tag 'landingpages/wedding-sweepstakes/tile-3.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
-      = link_to "/wedding-atelier", class: 'cta-mobile-featured'
-        span.btn.btn-black
-          | Start Customizing
+                .item-copy
+                  h3 Individually customized bridesmaid dresses
+                  p.summary Custom-made to suit each individual body in a way that’s cohesive (and actually cool).
 
-javascript:
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//woobox.com/js/plugins/woo.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }
-  (document, 'script', 'woobox-sdk'));
+                span.link-underline Start Customizing
+
+
+- content_for :body_end do
+
+  javascript:
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//woobox.com/js/plugins/woo.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+    (document, 'script', 'woobox-sdk'));

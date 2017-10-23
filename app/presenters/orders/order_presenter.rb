@@ -33,7 +33,9 @@ module Orders
                    :fabrication_status,
                    :shipped?,
                    :order_return_requested?,
-                   :returnable?
+                   :returnable?,
+                   :item_count,
+                   :return_type
 
     attr_reader :spree_order, :items
 
@@ -134,6 +136,10 @@ module Orders
 
     def return_requested?
       return_request.present?
+    end
+
+    def delivery_discount
+      "$#{('%.2f' %((spree_order.item_total * 0.1).to_f).round(2)).to_s}"
     end
 
     def return_request

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.0
+-- Dumped by pg_dump version 9.6.0
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -210,6 +210,36 @@ CREATE SEQUENCE bulk_order_updates_id_seq
 --
 
 ALTER SEQUENCE bulk_order_updates_id_seq OWNED BY bulk_order_updates.id;
+
+
+--
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    category character varying(255),
+    subcategory character varying(255)
+);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
@@ -1365,7 +1395,8 @@ CREATE TABLE item_returns (
     bergen_actual_quantity integer,
     bergen_damaged_quantity integer,
     shippo_tracking_number character varying(255),
-    shippo_label_url character varying(255)
+    shippo_label_url character varying(255),
+    item_return_label_id integer
 );
 
 
@@ -2567,28 +2598,6 @@ ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
 
 
 --
--- Name: relbloat; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW relbloat AS
- SELECT pg_namespace.nspname,
-    pg_class.relname,
-    pg_class.reltuples,
-    pg_class.relpages,
-    rowwidths.avgwidth,
-    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
-    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
-    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
-   FROM ((( SELECT pg_statistic.starelid,
-            sum(pg_statistic.stawidth) AS avgwidth
-           FROM pg_statistic
-          GROUP BY pg_statistic.starelid) rowwidths
-     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
-     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
-  WHERE (pg_class.relpages > 1);
-
-
---
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2623,42 +2632,6 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
-
-
---
--- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE return_item_labels (
-    id integer NOT NULL,
-    tracking_number character varying(255),
-    label_url character varying(255),
-    carrier character varying(255),
-    label_image_url character varying(255),
-    label_pdf_url character varying(255),
-    return_item_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE return_item_labels_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -3365,7 +3338,8 @@ CREATE TABLE spree_line_items (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
-    old_price numeric(8,2)
+    old_price numeric(8,2),
+    delivery_date character varying(255)
 );
 
 
@@ -3620,7 +3594,9 @@ CREATE TABLE spree_orders (
     required_to date,
     customer_notes text,
     projected_delivery_date timestamp without time zone,
-    site_version text
+    site_version text,
+    orderbot_synced boolean,
+    return_type character varying(255)
 );
 
 
@@ -3974,7 +3950,8 @@ CREATE TABLE spree_products (
     hidden boolean DEFAULT false,
     factory_id integer,
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
-    fabric_card_id integer
+    fabric_card_id integer,
+    category_id integer
 );
 
 
@@ -5513,6 +5490,13 @@ ALTER TABLE ONLY bulk_order_updates ALTER COLUMN id SET DEFAULT nextval('bulk_or
 
 
 --
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
 -- Name: celebrity_inspirations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5930,13 +5914,6 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
-
-
---
--- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6528,6 +6505,14 @@ ALTER TABLE ONLY celebrity_inspirations
 
 
 --
+-- Name: categories classifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT classifications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: competition_entries competition_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7013,14 +6998,6 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
-
-
---
--- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels
-    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -7851,6 +7828,13 @@ CREATE INDEX index_inventory_units_on_variant_id ON spree_inventory_units USING 
 --
 
 CREATE INDEX index_item_return_events_on_item_return_uuid ON item_return_events USING btree (item_return_uuid);
+
+
+--
+-- Name: index_item_returns_on_item_return_label_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_item_returns_on_item_return_label_id ON item_returns USING btree (item_return_label_id);
 
 
 --
@@ -9679,8 +9663,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
-INSERT INTO schema_migrations (version) VALUES ('20170724212720');
-
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
@@ -9690,3 +9672,21 @@ INSERT INTO schema_migrations (version) VALUES ('20170816220818');
 INSERT INTO schema_migrations (version) VALUES ('20170817173805');
 
 INSERT INTO schema_migrations (version) VALUES ('20170821173721');
+
+INSERT INTO schema_migrations (version) VALUES ('20170828194844');
+
+INSERT INTO schema_migrations (version) VALUES ('20170905235000');
+
+INSERT INTO schema_migrations (version) VALUES ('20170906001235');
+
+INSERT INTO schema_migrations (version) VALUES ('20170906170913');
+
+INSERT INTO schema_migrations (version) VALUES ('20170907211051');
+
+INSERT INTO schema_migrations (version) VALUES ('20170908182740');
+
+INSERT INTO schema_migrations (version) VALUES ('20170914013707');
+
+INSERT INTO schema_migrations (version) VALUES ('20170927181851');
+
+INSERT INTO schema_migrations (version) VALUES ('20170928202521');

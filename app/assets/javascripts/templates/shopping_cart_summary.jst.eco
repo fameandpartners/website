@@ -1,64 +1,74 @@
 <% if @cart.products.length: %>
 <div class="cart-items">
   <% for product in @cart.products: %>
-  <div class="row cart-item" data-id="<%= product.line_item_id %>">
-    <div class="cart-item-image-holder col-xs-5">
-      <a href="<%= product.path %>">
-        <% if product.name != "Gift" : %>
-        <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
-        <% end %>
+    <% if product.name != "RETURN_INSURANCE" : %>
+    <div class="row cart-item" data-id="<%= product.line_item_id %>">
+      <div class="cart-item-image-holder col-xs-5">
+        <a href="<%= product.path %>">
+          <% if product.name != "Gift" : %>
+          <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+          <% end %>
 
-        <% if product.making_options.length: %>
-          <div class="ribbon-wrapper express-making">
-            <div class="ribbon-txt">
-              <%= product.making_options[0].name %>
+          <% if product.price_drop_au_product: %>
+            <div class="ribbon-wrapper PriceDrop">
+              <div class="ribbon-txt">
+                New Lower Price
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% else if product.making_options.length: %>
+            <div class="ribbon-wrapper express-making">
+              <div class="ribbon-txt">
+                <%= product.making_options[0].name %>
+              </div>
+            </div>
+          <% end %>
 
-      </a>
-    </div>
-    <div class="cart-item-info col-xs-7">
-      <a class="pull-right remove-product" href="javascript:;">
-        <span class="icon btn-close"></span>
-      </a>
-      <div class="heading">
-        <span class="cart-item-title"><%= product.name %></span>
+        </a>
       </div>
-      <div class="cart-item-price"><%= product.price.display_price %></div>
-      <dl class="cart-item-description">
-        <% if product.size != null : %>
-        <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
-        <% end %>
-        <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
-        <% if product.from_wedding_atelier: %>
-          <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
-        <% else: %>
-          <% if product.display_height: %>
-            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+      <div class="cart-item-info col-xs-7">
+        <a class="pull-right remove-product" href="javascript:;">
+          <span class="icon btn-close"></span>
+        </a>
+        <div class="heading">
+          <span class="cart-item-title"><%= product.name %></span>
+        </div>
+        <div class="cart-item-price"><%= product.price.display_price %></div>
+        <dl class="cart-item-description">
+          <% if product.size != null : %>
+          <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
+          <% end %>
+          <% if product.color != null : %>
+          <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
+          <% end %>
+          <% if product.from_wedding_atelier: %>
+            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
           <% else: %>
-            <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
+            <% if product.display_height: %>
+              <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+            <% else: %>
+              <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
+            <% end %>
           <% end %>
-        <% end %>
-        <dd>
-          <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
-          <% if product.making_options && product.making_options.length > 0: %>
-            <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
-          <% end %>
-        </dd>
-
-        <% if product.customizations && product.customizations.length > 0: %>
           <dd>
-            <span class="line-item-description-heading">Customizations:</span><br />
-            <% for customization in product.customizations: %>
-              <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+            <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
+            <% if product.making_options && product.making_options.length > 0: %>
+              <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
             <% end %>
           </dd>
-        <% end %>
 
-      </dl>
+          <% if product.customizations && product.customizations.length > 0: %>
+            <dd>
+              <span class="line-item-description-heading">Customizations:</span><br />
+              <% for customization in product.customizations: %>
+                <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+              <% end %>
+            </dd>
+          <% end %>
+
+        </dl>
+      </div>
     </div>
-  </div>
+    <% end %>
   <% end %>
 </div>
 <% else: %>
@@ -90,6 +100,66 @@ $('.js-trigger-empty-cart-modal').modal({
 <% end %>
 
 <div class="cart-footer">
+<div class="row js-returns-abc-option-A hidden">
+  <div class="ReturnOption__wrapper">
+    <div class="ReturnOption__content col-xs-12">
+      <div class="col-xs-1">
+        <div class="Checkbox__wrapper">
+          <input
+            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-A"
+            type="checkbox"
+            value="A"
+            id="returns_option_a"
+          />
+          <label for="returns_option_a" class="Checkbox__label"></label>
+        </div>
+      </div>
+      <div class="col-xs-7">
+        <p class="ReturnOption__copy font-sans-serif">
+          Take <strong><%= @cart.delivery_discount %> off</strong>
+          of your order total when you opt out of returns
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <p class="ReturnOption__copy font-sans-serif">
+          <a href="javascript:;" id="A-info" class="js-returns-learn-more ReturnOption__copy--link">
+            Learn more
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row js-returns-abc-option-B hidden">
+  <div class="ReturnOption__wrapper">
+    <div class="ReturnOption__content col-xs-12">
+      <div class="col-xs-1">
+        <div class="Checkbox__wrapper">
+          <input
+            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-B"
+            type="checkbox"
+            value="B"
+            id="returns_option_b"
+          />
+          <label for="returns_option_b" class="Checkbox__label"></label>
+        </div>
+      </div>
+      <div class="col-xs-7">
+        <p class="ReturnOption__copy font-sans-serif">
+          Add <strong>$25</strong>
+          for fully flexible returns
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <p class="ReturnOption__copy font-sans-serif">
+          <a href="javascript:;" id="B-info" class="js-returns-learn-more ReturnOption__copy--link">
+            Learn more
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12">
     <form class="promo-code" action="#">
@@ -105,13 +175,19 @@ $('.js-trigger-empty-cart-modal').modal({
         <p>
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
+        <p class="js-returns-abc-option-message-A hidden">
+          Returns Savings (10%)<span class="pull-right">-<%= @cart.delivery_discount %></span>
+        </p>
+        <p class="js-returns-abc-option-message-B hidden">
+          Returns Deposit<span class="pull-right">$25.00</span>
+        </p>
         <p>
           Shipping <span class="value"><%= @cart.display_shipment_total %></span>
         </p>
         <p>
           <% #TODO: this is just a workaround due to Spree's limitations. We should compare numbers, not strings. %>
-          <% if @cart.display_promotion_total != "$0.00": %>
-            Promotion (<%= @cart.promocode %>)<span class="value"><%= @cart.display_promotion_total %></span>
+          <% if @cart.display_promotion_total != "$0.00" && @cart.promocode != 'DELIVERYDISC' : %>
+            Additional Savings <span class="value"><%= @cart.display_promotion_total %></span>
           <% end %>
         </p>
         <% for tax in @cart.taxes: %>

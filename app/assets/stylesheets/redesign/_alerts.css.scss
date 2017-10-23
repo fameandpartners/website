@@ -38,10 +38,14 @@
       color: $c-neutral-white;
       font-weight: 600;
       padding-left: 2px;
-      text-decoration: underline;
       @extend .link-underline;
     }
 
+  }
+
+  &.custom-sale-banner-top.PriceDropBanner {
+    background: $c-price-drop-bg;
+    color: $c-neutral-white;
   }
 
   .clock {

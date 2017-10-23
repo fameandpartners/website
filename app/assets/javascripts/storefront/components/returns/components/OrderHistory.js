@@ -14,7 +14,8 @@ class OrderHistory extends Component {
     super(props);
     const { orderData } = this.props;
     const { items } = orderData;
-    const cleanItems = items.map(i => i.line_item);
+    let cleanItems = items.map(i => i.line_item);
+    cleanItems = cleanItems.filter(i => i.products_meta.name !== 'RETURN_INSURANCE');
     this.state = {
       orderData,
       orderArray: cleanItems,
@@ -26,11 +27,11 @@ class OrderHistory extends Component {
     const {
       date_iso_mdy: dateIsoMdy,
       number,
+      return_eligible: returnEligible,
     } = spreeOrder;
 
     const notRequestedArray = orderArray.filter(i => !i.returns_meta);
     const returnRequestedArray = orderArray.filter(i => i.returns_meta);
-
     return (
       <div>
         <div className="grid-noGutter-center-spaceAround">
@@ -39,10 +40,12 @@ class OrderHistory extends Component {
               <p className="order-placed u-margin-bottom-small font-sans-serif">
                 Order placed on {dateIsoMdy}
               </p>
-              <p className="order-id u-margin-bottom-small font-sans-serif">
-                Order #{number}
-              </p>
-              <div className="Product__listItem__container">
+              <a href={`/orders/${number}`}>
+                <span className="order-id font-sans-serif">
+                  Order #{number}
+                </span>
+              </a>
+              <div className="Product__listItem__container u-margin-top-small">
                 {
                   returnRequestedArray.map((o, i) => {
                     const internationalCustomer = orderData.spree_order.international_customer;
@@ -57,7 +60,8 @@ class OrderHistory extends Component {
                           orderIndex={i}
                           showForm={false}
                           orderNumber={number}
-                          returnEligible={false}
+                          returnRequested
+                          returnEligible={returnEligible}
                           lastChild={i === (returnRequestedArray.length - 1)}
                         />
                         { (i === returnRequestedArray.length - 1
@@ -82,6 +86,8 @@ class OrderHistory extends Component {
                           orderData={orderData}
                           orderIndex={i}
                           showForm={false}
+                          returnEligible={returnEligible}
+                          returnRequested={false}
                           orderNumber={number}
                           lastChild={i === (notRequestedArray.length - 1)}
                         />

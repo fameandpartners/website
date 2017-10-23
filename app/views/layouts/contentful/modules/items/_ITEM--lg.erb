@@ -1,7 +1,16 @@
-<%= image_tag(@lg_contents[:image], class: 'Editorial__image') %>
+<% # Currenly using Bulma's responsive width %>
+<picture class="">
+  <source media="(max-width: 768px)" srcset="<%= @lg_contents[:mobile_image] %>">
+  <source media="(min-width: 769px)" srcset="<%= @lg_contents[:image] %>">
+  <img class="Editorial__image" src="<%= @lg_contents[:image] %>" srcset="
+    <%= @lg_contents[:mobile_image] %> 768w,
+    <%= @lg_contents[:image] %> 769w">
+</picture>
 
 <%
-  products = []
+products = []
+
+if @lg_contents[:overlay_pids]
 
   @lg_contents[:overlay_pids].each do |pid|
     split_pid = pid.split('-', 2)
@@ -20,6 +29,8 @@
       products.push(present_product[0])
     end
   end
+
+end
 %>
 
 <% if products.count > 0 %>
@@ -27,8 +38,8 @@
   <h4 class="Editorial__overlayTitle">Shop the Look</h4>
   <ul>
   <% products.each do |item|
-       name = item.name
-       path = collection_product_path(item, color: item.color.try(:name))
+    name = item.name
+    path = collection_product_path(item, color: item.color.try(:name))
   %>
     <li>
       <a href="<%= path %>">
@@ -38,4 +49,10 @@
   <% end %>
   </ul>
 </div>
+<% end %>
+
+<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
+  <div class="Editorial__overlayBottomCaption">
+    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: (@lg_contents[:image_caption_color] == 'black') ? "Editorial__overlayBottomCaptionTitle Editorial__overlayBottomCaptionTitle--dark" : "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
+  </div>
 <% end %>

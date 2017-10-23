@@ -76,6 +76,10 @@ module Marketing
       promo_codes.any?
     end
 
+    def delivery_discount
+      "$#{('%.2f' %((order.item_total * 0.1).to_f).round(2)).to_s}"
+    end
+
     def promo_codes
       @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
         "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
@@ -105,16 +109,43 @@ module Marketing
 
     def build_adjustments
       if order.adjustments.present?
-        order.adjustments.eligible.collect do |adjustments_item|
-          {
-            label:          adjustments_item.label,
-            display_amount: adjustments_item.display_amount.to_s
+        if order.adjustments.eligible.any? {|x| x.label.upcase.include? 'DELIVERYDISC'}
+          arry = order.adjustments.eligible.reject{ |x| x.label.upcase.include? 'DELIVERYDISC' }.collect do |adjustments_item|
+            {
+              label:          adjustments_item.label,
+              display_amount: adjustments_item.display_amount.to_s
+            }
+          end
+          if order.display_promotion_total.to_s != '$0.00'
+            arry << {
+              label:          'Additional Savings',
+              display_amount: order.display_promotion_total.to_s
+            }
+          end
+          arry << {
+            label:          'Return Savings (10%)',
+            display_amount: '$-' + delivery_discount[1..-1]
           }
+        else
+          disp = order.adjustments.eligible.collect do |adjustments_item|
+            {
+              label:          adjustments_item.label,
+              display_amount: adjustments_item.display_amount.to_s
+            }
+          end
+
+          if order.line_items.any? {|x| x.product.name.downcase == 'return_insurance'}
+            disp << {
+              label:          'Returns Deposit',
+              display_amount: '$25.00'
+            }
+          end
+
+          disp
         end
       else
         []
       end
     end
-
   end
 end
