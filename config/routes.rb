@@ -69,13 +69,13 @@ FameAndPartners::Application.routes.draw do
     # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
     # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015' => 'statics#fashion_it_girl'
-    get '/fashionitgirlau2015' => 'statics#fashion_it_girl_au_2015'
-    get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
+    get '/fashionitgirl2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
 
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/')
-    get '/fashionitgirl2015-competition', to: redirect('/')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
@@ -123,6 +123,8 @@ FameAndPartners::Application.routes.draw do
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
+    # IT Girl Internship Competition landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'fame-it-girl', :as => :it_girl_landing_page
     # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
     get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
@@ -323,6 +325,8 @@ FameAndPartners::Application.routes.draw do
     # Florals Collection Page
     get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
 
+    # Fall Weddings Collection Page
+    get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
@@ -443,9 +447,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
-    get '/fashionista2014', to: redirect("/")
-    get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
-    get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
+    get '/fashionista2014', to: redirect("/it-girl")
+    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
