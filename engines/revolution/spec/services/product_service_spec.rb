@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-  let(:product_ids) { %w[471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green] }
+  let(:product_ids) do
+    %w([471-coral] [680-light-pink] [683-burgundy] [262-white] [704-black] [504-lavender] [680-forest-green])
+  end
 
   let(:current_site_version) { build_stubbed(:site_version, :au) }
   let(:service) { described_class.new(product_ids, current_site_version) }

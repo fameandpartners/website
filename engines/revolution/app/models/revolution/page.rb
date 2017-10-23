@@ -7,41 +7,40 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-
     attr_accessible :translations_attributes, :path, :template_path, :variables,
                     :canonical, :redirect, :parent, :parent_id, :nofollow, :noindex,
                     :publish_from, :publish_to, :product_order
     attr_accessor :params
 
-    validates :path, :presence => true, :uniqueness => true
-    validate :path_has_not_changed, :on => :update #read only attributes
+    validates :path, presence: true, uniqueness: true
+    validate :path_has_not_changed, on: :update # read only attributes
 
-    validates_inclusion_of :product_order, { allow_blank: true, in: Search::ColorVariantsQuery.product_orderings.keys }
+    validates_inclusion_of :product_order, allow_blank: true, in: Search::ColorVariantsQuery.product_orderings.keys
 
     has_many :translations, dependent: :destroy, inverse_of: :page
-    accepts_nested_attributes_for :translations, :reject_if => :all_blank
+    accepts_nested_attributes_for :translations, reject_if: :all_blank
 
-    acts_as_nested_set :counter_cache => :children_count
+    acts_as_nested_set counter_cache: :children_count
 
     serialize :variables, Hash
 
-    delegate :title, :meta_description, :to => :translation, allow_nil: true
+    delegate :title, :meta_description, to: :translation, allow_nil: true
 
     attr_accessor :locale, :collection
     attr_readonly :path
 
     # TODO: `collection.details.banner.title` reference should be removed. This is 100% CMS responsibility
     def heading
-      (translation && translation.heading) || collection.details&.banner&.title
+      (translation&.heading) || collection&.details&.banner&.title
     end
 
     # TODO: `collection.details.banner.subtitle` reference should be removed. This is 100% CMS responsibility
     def sub_heading
-      (translation && translation.sub_heading) || collection.details&.banner&.subtitle
+      (translation&.sub_heading) || collection.details&.banner&.subtitle
     end
 
     def description
-      if translation && translation.description
+      if translation&.description
         @description ||= markdown? ? markdown.render(translation.description) : translation.description
       end
     end
@@ -74,7 +73,7 @@ module Revolution
 
     def self.published(n = nil)
       n ||= Time.now.utc
-      where("? BETWEEN publish_from AND COALESCE(publish_to, ?)", n, n)
+      where('? BETWEEN publish_from AND COALESCE(publish_to, ?)', n, n)
     end
 
     def published?(n = nil)
@@ -84,7 +83,7 @@ module Revolution
 
     def publish!(publish_date = nil)
       publish_date ||= Time.now.utc
-      update_attributes!(:publish_from => publish_date)
+      update_attributes!(publish_from: publish_date)
     end
 
     def redirect?
@@ -96,9 +95,7 @@ module Revolution
     end
 
     def path_has_not_changed
-      if path_changed?
-        errors.add(:path, 'path cannot be edited')
-      end
+      errors.add(:path, 'path cannot be edited') if path_changed?
     end
 
     def self.paging(page, per_page)
@@ -133,13 +130,12 @@ module Revolution
     end
 
     def page_is_lookbook?
-      self && self.get(:lookbook)
+      self&.get(:lookbook)
     end
 
     def markdown?
-      self && self.get(:markdown)
+      self&.get(:markdown)
     end
-
 
     def effective_page_limit
       (params[:limit] || self.get(:limit) || default_page_limit).to_i
@@ -159,6 +155,5 @@ module Revolution
         a << (nofollow? ? 'nofollow' : 'follow')
       end.join(',')
     end
-
   end
 end

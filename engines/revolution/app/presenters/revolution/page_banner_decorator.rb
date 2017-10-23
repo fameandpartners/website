@@ -32,6 +32,5 @@ module Revolution
     def custom_banner
       params[:lpi]
     end
-
   end
 end

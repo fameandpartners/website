@@ -17,7 +17,5 @@ module Revolution
     def self.find_for_default_locale
       find_by_locale(DEFAULT_LOCALE)
     end
-
   end
-
 end

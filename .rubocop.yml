@@ -5,7 +5,12 @@ AllCops:
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
     - 'db/schema.rb'
-  TargetRubyVersion: 2.2
+    - 'engines/revolution/db/**/*'
+    - 'engines/revolution/Gemfile'
+    - 'engines/revolution/spec/dummy/Rakefile'
+    - 'engines/revolution/lib/revolution/version.rb'
+
+  TargetRubyVersion: 2.3.3
 
 Metrics/LineLength:
   Max: 120
@@ -35,9 +40,11 @@ Style/BlockComments:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Metrics/ModuleLength:
+Style/RedundantSelf:
   Enabled: false
 
+Metrics/ModuleLength:
+  Enabled: false
 
 Metrics/BlockLength:
   Enabled: false
