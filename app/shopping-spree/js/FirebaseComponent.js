@@ -144,6 +144,12 @@ export default class FirebaseComponent extends React.Component
     }
 
 
+    printError( error )
+    {
+        console.log( "Firebase error " );
+        console.log( error );
+    }
+    
     createTextMessage( text, name, email, icon, type = 'text' )
     {
         let newMessage = this.databaseRef( 'chats' ).push();
@@ -156,7 +162,7 @@ export default class FirebaseComponent extends React.Component
                               email: email,
                               icon: icon
                           }
-                        }
+                        }, this.printError
                       );
 
     }
