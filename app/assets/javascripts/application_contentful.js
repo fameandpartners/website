@@ -38,7 +38,7 @@
 // require components
 
 // npm modules
-// require slick-carousel/slick/slick.min.js
+//= require slick-carousel/slick/slick.min.js
 
 //---------------------------
 // Spree have this by default
@@ -71,6 +71,7 @@
 //--------------------------
 //= require helpers
 //= require partials/helpers/site_version
+//= require partials/hero-tile-carousel
 // require partials/helpers/alert
 // require partials/helpers/product_side_selector_panel
 // require partials/helpers/modal
