@@ -186,12 +186,25 @@
       margin-top: 120px;
     }
 
+    .SectionTiles .item {
+      padding-bottom: 65px;
+    }
+
     .ContentCopy__partner {
       padding: 0 30px;
     }
 
     .Prizes__logos {
       margin-bottom: 20px;
+    }
+
+    .SectionTiles__Cta {
+      position: absolute;
+      display: inline-block;
+      margin-bottom: 20px;
+      width: 100%;
+      bottom: 20px;
+      left: 0;
     }
 
   }
