@@ -5,9 +5,9 @@ describe Revolution::Translation do
   let(:locale)    { 'en-AU' }
   let(:title)     { 'Blah Vtha' }
 
-  let(:page)  { Revolution::Page.new(:path => path) }
+  let(:page) { Revolution::Page.new(path: path) }
 
-  subject(:translation)  { Revolution::Translation.new(:page => page, :locale => locale, :title => title) }
+  subject(:translation) { Revolution::Translation.new(page: page, locale: locale, title: title) }
 
   it { should belong_to(:page).inverse_of(:translations) }
   it { is_expected.to validate_presence_of :title }
