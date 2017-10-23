@@ -24,7 +24,7 @@ module ReturnsProcessesControllerHelper
 
   def get_user
     if params['email'].present?
-      Spree::User.where(email: params['email']).first
+      Spree::User.where('lower(email) = ?', params['email'].downcase).first
     else
       spree_current_user
     end
