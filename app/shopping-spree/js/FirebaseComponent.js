@@ -37,7 +37,8 @@ export default class FirebaseComponent extends React.Component
                     authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
                     databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
                     projectId: this.props.firebaseDatabase,
-                    storageBucket: this.props.firebaseDatabase + ".appspot.com"
+                    storageBucket: this.props.firebaseDatabase + ".appspot.com",
+                    messagingSenderId: "868619391913"
                 };
             firebase.initializeApp( config );
        }
