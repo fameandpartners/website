@@ -40,7 +40,8 @@ export default class FirebaseComponent extends React.Component
                     storageBucket: this.props.firebaseDatabase + ".appspot.com",
                     messagingSenderId: "868619391913"
                 };
-            firebase.initializeApp( config );
+            console.log( 'connecting to firebase' );
+            console.log( firebase.initializeApp( config ) ); 
        }
     }
 
@@ -145,7 +146,7 @@ export default class FirebaseComponent extends React.Component
     }
 
 
-    printError( error )
+    printError( error, data )
     {
         console.log( "Firebase error " );
         console.log( error );

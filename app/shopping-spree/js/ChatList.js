@@ -94,12 +94,17 @@ export default class ChatList extends FirebaseComponent
         this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
     }
 
+    printError( error )
+    {
+        console.log( 'Chat List got error' );
+        console.log( error );
+    }
     startListeningToFirebase()
     {
         super.connectToFirebase();
 
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
-        this.chatsDB.on( 'child_added', this.addChatMessage );
+        this.chatsDB.on( 'child_added', this.addChatMessage, this.printError );
     }
 
     stopListeningToFirebase()

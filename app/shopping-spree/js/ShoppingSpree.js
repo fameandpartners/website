@@ -48,8 +48,8 @@ export default class ShoppingSpree extends FirebaseComponent {
     showValues(data) {
 
         const chatValues = data.val();
-        const chatKeys = Object.keys(chatValues);
         if(chatValues) {
+            const chatKeys = Object.keys(chatValues);            
             const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
             this.setState({
                 lastChatTime
