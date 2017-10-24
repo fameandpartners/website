@@ -200,10 +200,10 @@ export default class ShoppingSpree extends FirebaseComponent {
 
     doneOnboarding(email, name, icon, shoppingSpreeId)
     {
-        this.cookies.set('shopping_spree_name', name);
-        this.cookies.set('shopping_spree_icon', icon);
-        this.cookies.set('shopping_spree_email', email);
-        this.cookies.set('shopping_spree_id', shoppingSpreeId);
+        this.cookies.set('shopping_spree_name', name, { path: '/', secure: false });
+        this.cookies.set('shopping_spree_icon', icon, { path: '/', secure: false });
+        this.cookies.set('shopping_spree_email', email, { path: '/', secure: false });
+        this.cookies.set('shopping_spree_id', shoppingSpreeId, { path: '/', secure: false });
 
         this.setState(
             {
