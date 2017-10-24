@@ -20,23 +20,6 @@ Spree::Admin::UsersController.class_eval do
   #   render :edit
   # end
 
-  
-  def update 
-    if params[:user]
-       roles = params[:user].delete("spree_role_ids")
-    end
-    params[:user][:email] = params[:user][:email].downcase
-    if @user.update_attributes(params[:user])
-       if roles
-         @user.spree_roles = roles.reject(&:blank?).collect{|r| Spree::Role.find(r)}
-       end
-       flash.now[:success] = Spree.t(:account_updated)
-       render :edit
-     else
-      render :edit
-    end
-  end
-
   private
 
 
