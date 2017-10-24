@@ -164,9 +164,7 @@ module Contentful
           image_caption_url: image_caption_url,
           image_caption_link_target: image_caption_link_target
         }
-      end
-
-      if (fetched_lg_container.content_type.id == 'ITEM--lg__carousel')
+      elsif (fetched_lg_container.content_type.id == 'ITEM--lg__carousel')
         tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
         tile_link_target = (fetched_lg_container.respond_to? :tile_link_target) ? fetched_lg_container.tile_link_target : nil
         tile_link_target = tile_link_target ? '_blank' : '_self'
