@@ -18,31 +18,30 @@ class Products::DetailsController < Products::BaseController
 
     append_gtm_product(product_presenter: @product)
 
-    # @partial_hash = Rails.cache.fetch(env["ORIGINAL_FULLPATH"]+current_site_version.name, expires_in: 14.hours) do
-    #   #let's makey object for nodepdp
-    #   pdp_obj = {
-    #     paths: env["REQUEST_URI"],  #todo: work this out with adam
-    #     product: @product,
-    #     discount: @product_discount,
-    #     images: @product.all_images,
-    #     sizeChart: @product.size_chart_data,
-    #     siteVersion: @current_site_version.name,
-    #     svgSpritePath: "/assets/svg/sprite.svg",
-    #     flags: {
-    #       afterpay: Features.active?(:afterpay),
-    #       fastMaking: !Features.active?(:getitquick_unavailable)
-    #     }
-    #   }
+    @pdp_obj = {
+      paths: env["REQUEST_URI"],  #todo: work this out with adam
+      product: @product,
+      discount: @product_discount,
+      images: @product.all_images,
+      sizeChart: @product.size_chart_data,
+      siteVersion: @current_site_version.name,
+      svgSpritePath: "/assets/svg/sprite.svg",
+      flags: {
+        afterpay: Features.active?(:afterpay),
+        fastMaking: !Features.active?(:getitquick_unavailable)
+      }
+    }
 
-    #   begin
-    #     resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
-    #     JSON.parse(resp)
-    #   rescue Exception => e
-    #     Raven.capture_exception(e, response: resp)
-    #     NewRelic::Agent.notice_error(e, response: resp)
-    #     throw e
-    #   end
-    # end
+    @partial_hash = Rails.cache.fetch(env["ORIGINAL_FULLPATH"]+current_site_version.name, expires_in: 14.hours) do
+      begin
+        resp = RestClient.get "#{configatron.node_pdp_url}/webpack/asset-manifest"
+        JSON.parse(resp)
+      rescue Exception => e
+        Raven.capture_exception(e, response: resp)
+        NewRelic::Agent.notice_error(e, response: resp)
+        throw e
+      end
+    end
 
     render :show, status: pdp_status
   end
