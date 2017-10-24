@@ -50,7 +50,7 @@ class Products::DetailsController < Products::BaseController
   def show_json
     # TODO: Cache this json response
     # TODO: Add test coverage
-
+    puts "SHOW JSON START **********************"
     pdp_obj = {
       paths: env["REQUEST_URI"],  #todo: work this out with adam
       product: @product,
@@ -64,7 +64,10 @@ class Products::DetailsController < Products::BaseController
         fastMaking: !Features.active?(:getitquick_unavailable)
       }
     }
-    render json: pdp_obj
+    puts "SHOW JSON END **********************"
+    json = pdp_obj.to_json
+    pp json
+    render json: json
   end
 
   private
