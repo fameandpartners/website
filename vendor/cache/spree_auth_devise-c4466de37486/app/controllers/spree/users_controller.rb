@@ -25,6 +25,7 @@ class Spree::UsersController < Spree::BaseController
   end
 
   def update
+    params[:user][:email] = params[:user][:email].downcase
     if @user.update_attributes(params[:user])
       if params[:user][:password].present?
         # this logic needed b/c devise wants to log us out after password changes
