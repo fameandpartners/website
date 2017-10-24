@@ -4,20 +4,16 @@ describe NextLogistics::FTP::Interface do
   subject(:interface) { described_class.new }
 
   before(:each) do
-    ENV.update({
-      'NEXT_FTP_HOST'     => 'next-host',
-      'NEXT_FTP_USERNAME' => 'next-username',
-      'NEXT_FTP_PASSWORD' => 'next-password'
-    })
+    ENV.update('NEXT_FTP_HOST' => 'next-host',
+               'NEXT_FTP_USERNAME' => 'next-username',
+               'NEXT_FTP_PASSWORD' => 'next-password')
   end
 
   describe '.initialize' do
     it 'initializes an FTP with timeout, Next credentials and in passive mode' do
-      expect(interface.credentials).to eq({
-        host:     'next-host',
-        user:     'next-username',
-        password: 'next-password'
-      })
+      expect(interface.credentials).to eq(host:     'next-host',
+                                          user:     'next-username',
+                                          password: 'next-password')
       expect(interface.ftp.passive).to eq(true)
       expect(interface.ftp.read_timeout).to eq(described_class::FTP_TIMEOUT_SECONDS)
       expect(interface.ftp.open_timeout).to eq(described_class::FTP_TIMEOUT_SECONDS)
