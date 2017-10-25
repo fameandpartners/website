@@ -5,6 +5,7 @@ AdminUi::Engine.routes.draw do
 
     collection do
       get :weekly_refund, action: :index, scope: :refund_queue
+      get ':item_return_id/label', action: :generate_new_return_label
       post :bulk_refund_process
     end
   end

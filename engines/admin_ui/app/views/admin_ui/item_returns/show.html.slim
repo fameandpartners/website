@@ -18,7 +18,8 @@ javascript:
       - possible_events.each do |event_type|
         .btn-group
           a.btn.btn-primary data-toggle="modal" href=item_return_build_event_path(item_return_id: @item_return.id, event_type: event_type) data-target="#ajax-modal" = event_type.to_s.titleize
-
+      .btn-group
+        a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/label" Create Label
 /.ibox
 /  .ibox-title
 /    h3 History
