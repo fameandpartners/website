@@ -48,7 +48,7 @@ export default class Toast extends FirebaseComponent
 
     startListeningToFirebase()
     {
-        super.connectToFirebase();
+        this.connectToFirebase();
 
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
         this.chatsDB.limitToLast(1).on( 'child_added', this.addToast );
