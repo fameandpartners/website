@@ -18,7 +18,6 @@ export default class ShoppingSpree extends FirebaseComponent {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
-        this.setInitialState();
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
         this.doneSharing = this.doneSharing.bind(this);
@@ -34,17 +33,19 @@ export default class ShoppingSpree extends FirebaseComponent {
         this.showValues = this.showValues.bind(this);
         this.addChatMessage = this.addChatMessage.bind(this);
         win.startShoppingSpree = this.startOnboarding;
+        this.state = {};
     }
-
-    componentWillMount() {
+    componentDidMount() {
+        this.setInitialState();
         const { firebaseNodeId } = this.state;
-        console.log( "shoppnig spree is mounting" );
+        this.hideZopim();
+        console.log( "shopping spree is mounting" );
 //        super.connectToFirebase();
 //        const spreeFirebase = firebase.apps[0].database();
 //        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
 //        this.chatsDB.on( 'child_added', this.addChatMessage );
 //        this.chatsDB.once( 'value', this.showValues );
-
+        
     }
     showValues(data) {
 
@@ -110,7 +111,7 @@ export default class ShoppingSpree extends FirebaseComponent {
             minimize = true;
         }
 
-        this.state = {
+        this.setState({
             display,
             name,
             email,
@@ -121,7 +122,7 @@ export default class ShoppingSpree extends FirebaseComponent {
             startingState: display,
             dressAddingToCart: null,
             showExitModal: false,
-        };
+        } );
     }
 
     startOnboarding() {
@@ -223,10 +224,6 @@ export default class ShoppingSpree extends FirebaseComponent {
         } else {
             win.requestAnimationFrame(this.hideZopim);
         }
-    }
-
-    componentDidMount() {
-        this.hideZopim();
     }
 
     render() {
