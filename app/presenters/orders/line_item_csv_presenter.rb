@@ -122,21 +122,8 @@ module Orders
       end
 
       def global_sku
-        GlobalSku.find_or_create_by_line_hash(
-          line_hash: {
-            sku: sku,
-            style_number: style,
-            product_name: style_name,
-            size: size,
-            color_id: color_id,
-            color: color,
-            height: height,
-            product_id: line['product_id'],
-            variant_id: line['variant_id'],
-            customisation_id: customization_value_ids,
-            customisation_name: customization_values
-          }
-        )
+        lip = Orders::LineItemPresenter.new(Spree::LineItem.find(line['line_item_id']))
+        GlobalSku.find_or_create_by_line_item(lip)
       end
 
       def variant_sku
@@ -149,6 +136,7 @@ module Orders
 
       def personalization_sku
         # TODO: this is duplicated logic from the `CustomItemSku` generator!
+
         style_number = if (line['variant_master'] == 'TRUE' || line['variant_master'] == 't')
                          line['variant_sku']
                        else
@@ -157,7 +145,7 @@ module Orders
         size = line['size'].gsub('/', '')
         color = "C#{line['color_id']}"
         custom = customization_value_ids.map {|vid| "X#{vid}"}.join('').presence || 'X'
-        height = "H#{line['height'].to_s.upcase.first}"
+        height = "H#{line['height'].to_s.upcase.first}#{line['height'].to_s.upcase.last}"
         "#{style_number}#{size}#{color}#{custom}#{height}"
       end
 
