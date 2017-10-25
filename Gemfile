@@ -118,6 +118,8 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
+gem 'rdoc', '3.12.2'
+
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
@@ -165,7 +167,6 @@ end
 group :production do
   # gem 'unicorn'
   gem 'aws-sdk'
-  gem 'rdoc', '3.12.2'
 end
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
