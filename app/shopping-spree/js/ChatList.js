@@ -117,11 +117,6 @@ export default class ChatList extends FirebaseComponent
         this.scrollToBottom();
     }
 
-    componentWillMount()
-    {
-        this.startListeningToFirebase();
-    }
-
     componentWillUnmount()
     {
         this.stopListeningToFirebase();
@@ -129,6 +124,7 @@ export default class ChatList extends FirebaseComponent
 
     componentDidMount()
     {
+        this.startListeningToFirebase();        
         this.scrollToBottom();
     }
 

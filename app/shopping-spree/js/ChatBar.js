@@ -11,7 +11,6 @@ import win from './windowPolyfill';
 export default class ChatBar extends FirebaseComponent {
   constructor(props) {
     super(props);
-    this.initializeFirebase();
     this.sendMessage = this.sendMessage.bind(this);
     this.addProductToFirebase = this.addProductToFirebase.bind(this);
     win.addToShoppingSpree = this.addProductToFirebase;
@@ -44,6 +43,11 @@ export default class ChatBar extends FirebaseComponent {
 
   }
 
+    componentDidMount()
+    {
+        this.initializeFirebase();        
+    }
+    
     initializeFirebase()
     {
         super.connectToFirebase();

@@ -145,7 +145,7 @@ export default class Cart extends FirebaseComponent
         this.cartDB.off( 'child_added', this.addToCart );
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         this.startListeningToFirebase();
     }
