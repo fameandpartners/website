@@ -29,7 +29,7 @@
     "classnames": "^2.2.5",
     "clipboard": "^1.7.1",
     "envify": "^4.0.0",
-    "firebase": "^4.5.2",
+    "firebase": "^4.5.0",
     "gulp": "^3.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
