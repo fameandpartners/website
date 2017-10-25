@@ -38,8 +38,9 @@ export default class ShoppingSpree extends FirebaseComponent {
 
     componentWillMount() {
         const { firebaseNodeId } = this.state;
-        super.connectToFirebase();
-        const spreeFirebase = firebase.apps[0].database();
+        console.log( "shoppnig spree is mounting" );
+//        super.connectToFirebase();
+//        const spreeFirebase = firebase.apps[0].database();
 //        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
 //        this.chatsDB.on( 'child_added', this.addChatMessage );
 //        this.chatsDB.once( 'value', this.showValues );
