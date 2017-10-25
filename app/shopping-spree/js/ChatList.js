@@ -119,6 +119,7 @@ export default class ChatList extends FirebaseComponent
 
     componentWillUnmount()
     {
+        console.log( "Stopped listening in chatlist" );
         this.stopListeningToFirebase();
     }
 

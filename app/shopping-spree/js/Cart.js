@@ -132,16 +132,17 @@ export default class Cart extends FirebaseComponent
 
     startListeningToFirebase()
     {
-        super.connectToFirebase();
+        this.connectToFirebase();
         this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
         this.cartDB.on( 'child_added', this.addToCart );
-        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
+//        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
     }
 
 
 
     stopListeningToFirebase()
     {
+        console.log( "Stopping Listening in cart" );
         this.cartDB.off( 'child_added', this.addToCart );
     }
 
@@ -160,8 +161,6 @@ export default class Cart extends FirebaseComponent
         return(
             <div className="shopping-spree-cart">
               <div className="row header vertical-align">
-
-
                 <div className="header__inner">
                   <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
                     <div className="left-caret"></div>

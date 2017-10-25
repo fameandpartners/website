@@ -56,8 +56,9 @@ export default class Toast extends FirebaseComponent
 
     stopListeningToFirebase()
     {
+        console.log( "Stopped listening in toast" );
         this.chatsDB.off( 'child_added', this.addToast );
-        this.fristRead = false;
+        this.firstRead = false;
     }
 
     componentDidMount()

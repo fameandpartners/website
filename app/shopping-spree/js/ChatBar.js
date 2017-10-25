@@ -50,7 +50,7 @@ export default class ChatBar extends FirebaseComponent {
     
     initializeFirebase()
     {
-        super.connectToFirebase();
+        this.connectToFirebase();
         this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
     }
 
