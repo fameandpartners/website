@@ -60,7 +60,7 @@ export default class Toast extends FirebaseComponent
         this.fristRead = false;
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         this.startListeningToFirebase();
     }
