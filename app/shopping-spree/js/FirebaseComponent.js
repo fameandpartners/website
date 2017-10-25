@@ -41,6 +41,7 @@ export default class FirebaseComponent extends React.Component
                     messagingSenderId: "868619391913"
                 };
             console.log( 'connecting to firebase' );
+            firebase.database.enableLogging(true)            
             console.log( firebase.initializeApp( config ) ); 
        }
     }
