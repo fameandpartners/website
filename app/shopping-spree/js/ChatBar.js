@@ -45,7 +45,7 @@ export default class ChatBar extends FirebaseComponent {
 
     componentDidMount()
     {
-        this.initializeFirebase();        
+
     }
     
     initializeFirebase()
@@ -56,6 +56,7 @@ export default class ChatBar extends FirebaseComponent {
 
     sendMessage()
     {
+        this.initializeFirebase();                
         if( this.textInput.value.trim() !== "" )
         {
             this.createTextMessage( this.textInput.value, this.props.name, this.props.email, this.props.icon );

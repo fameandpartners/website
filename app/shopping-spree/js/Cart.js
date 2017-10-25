@@ -135,7 +135,7 @@ export default class Cart extends FirebaseComponent
         this.connectToFirebase();
         this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
         this.cartDB.on( 'child_added', this.addToCart );
-//        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
+        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
     }
 
 
@@ -148,12 +148,12 @@ export default class Cart extends FirebaseComponent
 
     componentDidMount()
     {
-        this.startListeningToFirebase();
+//        this.startListeningToFirebase();
     }
 
     componentWillUnmount()
     {
-        this.stopListeningToFirebase();
+//        this.stopListeningToFirebase();
     }
 
     render()

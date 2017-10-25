@@ -63,12 +63,12 @@ export default class Toast extends FirebaseComponent
 
     componentDidMount()
     {
-        this.startListeningToFirebase();
+//        this.startListeningToFirebase();
     }
 
     componentWillUnmount()
     {
-        this.stopListeningToFirebase();
+//        this.stopListeningToFirebase();
     }
 
 

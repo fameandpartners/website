@@ -22,6 +22,7 @@ export default class ChatList extends FirebaseComponent
                 messages:  [],
                 updateCount: 0
             };
+        this.startListeningToFirebase();                
     }
 
     sameOwnerAsLastMessage( email )
@@ -125,7 +126,7 @@ export default class ChatList extends FirebaseComponent
 
     componentDidMount()
     {
-        this.startListeningToFirebase();        
+
         this.scrollToBottom();
     }
 
