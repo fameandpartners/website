@@ -34,7 +34,7 @@ ruby:
   - if params[:color]
     = tag :meta, name: 'robots', content: 'noindex, follow'
 
-link rel="stylesheet" href="#{configatron.node_pdp_url}/#{@partial_hash['cssBundle']}"
+link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
 
 div#root.PDP__wrapper
 
@@ -43,4 +43,4 @@ javascript:
 
 = render partial: 'micro_data'
 
-script type="text/javascript" src="#{configatron.node_pdp_url}/#{@partial_hash['jsBundle']}"
+script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"

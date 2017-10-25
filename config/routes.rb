@@ -30,13 +30,6 @@ FameAndPartners::Application.routes.draw do
     get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
   end
 
-  # React API data endpoints
-  scope '/react-api' do
-    scope '/dresses' do
-      get ':product_slug' => 'products/details#show_json'
-    end
-  end
-
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
