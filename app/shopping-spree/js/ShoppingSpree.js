@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 export default class ShoppingSpree extends React.Component {
     constructor(props) {
         super(props);
+        console.log( React.version )
         this.cookies = new Cookies();
 
         this.doneOnboarding = this.doneOnboarding.bind(this);
