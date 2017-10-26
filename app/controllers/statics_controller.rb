@@ -3,7 +3,7 @@ class StaticsController < ApplicationController
   require 'enumerator'
 
   # layout 'returns/application'
-  layout 'redesign/application'
+  layout 'redesign/application_shopping'
 
   # enable showing of display banner
   before_filter :display_marketing_banner,

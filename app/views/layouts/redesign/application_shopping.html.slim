@@ -1,0 +1,32 @@
+doctype html
+= conditional_html do
+  head
+    = render 'layouts/redesign/unicorn'
+
+    link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"
+
+    /= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+    = stylesheet_link_tag 'application_redesign'
+    
+    = csrf_meta_tags
+
+    = render 'layouts/redesign/head'
+
+  body#top class=('locale-warning-active' if @locale_warning.show?)
+    = render 'layouts/redesign/shopping_spree'
+    /- if Features.active?(:google_tag_manager)
+      /= render 'google_tag_manager/base'
+
+    = render 'layouts/redesign/header'
+
+    #content-container.content-container
+      = yield
+
+    /= render 'layouts/redesign/footer'
+    /= render 'layouts/redesign/shopping_bag'
+
+    /- if Features.active?(:marketing_modals)
+      /= render '/shared/marketing'
+
+    = javascript_include_tag 'storefront_duplicated'
+    = render 'layouts/redesign/javascript'
