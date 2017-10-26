@@ -123,7 +123,7 @@ module Orders
 
       def global_sku
         lip = Orders::LineItemPresenter.new(Spree::LineItem.find(line['line_item_id']))
-        GlobalSku.find_or_create_by_line_item(lip)
+        GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
       end
 
       def variant_sku
