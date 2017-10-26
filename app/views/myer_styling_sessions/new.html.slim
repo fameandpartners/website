@@ -70,36 +70,37 @@
             .col-md-12.col-sm-6
               h3.Heading__medium Our Myer stylists are here for whatever you need: personal shopping; wardrobe styling; or advice on fit, fashion trends, and which Fame dress will suit your body best.
 
-javascript:
-  $(document).ready(function(){
+- content_for :body_end do
+  javascript:
+    $(document).ready(function(){
 
-    // First (and default) option is in person
-    $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+      // First (and default) option is in person
+      $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
 
-    $('.js-en-field-session-type').on('change', function () {
-      var sessionType = $(this).val().toLowerCase();
+      $('.js-en-field-session-type').on('change', function () {
+        var sessionType = $(this).val().toLowerCase();
 
-      // Setup: hide everything and mark as remove required
-      $('.js-en-styling-session-form .error').remove();
-      $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').hide().find('.required').hide().prop('required', false);
+        // Setup: hide everything and mark as remove required
+        $('.js-en-styling-session-form .error').remove();
+        $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').hide().find('.required').hide().prop('required', false);
 
-      switch (sessionType) {
-        case "in person stylist appointment at myer":
-          $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
-          break;
-        case "email":
-          $('.js-en-field-email').closest('.row').show().find('.required').show().prop('required', true);
-          break;
-        case "video chat":
-          $('.js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
-          break;
-        case "phone":
-          $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
-          break;
-        default:
-          break;
-      }
+        switch (sessionType) {
+          case "in person stylist appointment at myer":
+            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          case "email":
+            $('.js-en-field-email').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          case "video chat":
+            $('.js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          case "phone":
+            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          default:
+            break;
+        }
+      });
+
+      form_submit_ajax_validation('#new_forms_myer_styling_session', 'Confirm my booking', 'Myer Styling Session', 'myerStylingSessionFormSubmit');
     });
-
-    form_submit_ajax_validation('#new_forms_myer_styling_session', 'Confirm my booking', 'Myer Styling Session', 'myerStylingSessionFormSubmit');
-  });
