@@ -473,6 +473,10 @@ FameAndPartners::Application.routes.draw do
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
     resource 'wedding-planning', as: 'wedding_planning', only: [:create]
 
+    # TODO: Show this page only to AU users
+    get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session,  constraints: { site_version: /(au)/ }
+    resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
+
     get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
     resource 'micro-influencer', as: 'micro_influencer', only: [:create]
 
