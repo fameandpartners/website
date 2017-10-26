@@ -33,10 +33,6 @@
 // React
 //-------
 
-//= require react
-//= require react_ujs
-//= require components
-
 // npm modules
 //= require slick-carousel/slick/slick.min.js
 
@@ -85,7 +81,7 @@
 // require partials/style/popup
 
 //= require partials/product_collection.js
-//require partials/product_customisation.js
+// require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
