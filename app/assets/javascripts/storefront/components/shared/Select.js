@@ -3,7 +3,8 @@
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
 //* ****
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
