@@ -20,9 +20,6 @@
 //= require libs/jquery.slides.min
 //= require libs/jquery.countdown
 
-//= require react
-//= require react_ujs
-//= require components
 
 //= require helpers
 //= require_tree ./partials

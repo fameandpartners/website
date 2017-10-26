@@ -1,3 +1,4 @@
+/* eslint-disable */
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -15,10 +16,6 @@
 //= require jquery-ui
 //= require chosen-jquery
 //= require jquery_ujs
-
-//= require react
-//= require react_ujs
-//= require components
 
 //
 // Manual Orders
