@@ -27,10 +27,6 @@ class GlobalSku < ActiveRecord::Base
     where(sku: line_item_presenter.sku).first || create_by_line_item(line_item_presenter: line_item_presenter)
   end
 
-  def self.find_or_create_by_line_hash(line_hash:)
-    where(sku: line_hash[:sku]).first || create_by_line_hash(line_hash: line_hash)
-  end
-
   def self.create_by_line_item(line_item_presenter:)
     customizations = Array.wrap(line_item_presenter.personalization&.customization_values)
     GlobalSku::Create.new(
@@ -61,22 +57,6 @@ class GlobalSku < ActiveRecord::Base
       data: nil,
       product_id: variant.product_id,
       variant_id: variant.id
-    )
-  end
-
-  def self.create_by_line_hash(line_hash:)
-    self.create!(
-      sku: line_hash[:sku],
-      style_number: line_hash[:style_number],
-      product_name: line_hash[:product_name],
-      size: line_hash[:size],
-      color_id: line_hash[:color_id],
-      color_name: line_hash[:color],
-      height_value: line_hash[:height],
-      customisation_id: line_hash[:customisation_ids].try(:join, ';').presence,
-      customisation_name: line_hash[:customisation_names],
-      product_id: line_hash[:product_id],
-      variant_id: line_hash[:variant_id]
     )
   end
 end
