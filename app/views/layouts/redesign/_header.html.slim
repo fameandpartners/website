@@ -50,7 +50,10 @@ ruby:
   = raw init_style_quiz
   = raw side_menu_init
 
+.js-talkable-gleam-bar-top.talkable-gleam-bar
+
 - cache [:layout, :header, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
+
   header.main.js-header
 
     .nav-menu.nav-alert-top
@@ -90,7 +93,7 @@ javascript:
   function sendToGA(eventObject) {
       if(typeof window === 'object' && !!window.ga) {
         window.ga('send', 'event', eventObject)
-      }  
+      }
       else {
         console.log('Google analytics not found')
       }

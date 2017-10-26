@@ -86,9 +86,8 @@ module Api
           error_response(:RETURN_EXISTS)
           return
         end
-
         if (has_us_shipping_address?(request_object[:order_id]))
-          unless(return_label = create_label(request_object[:order_id]))
+          unless(return_label = ReturnsProcessesControllerHelper.create_label(request_object[:order_id]))
             error_response(:RETRY, :LABEL_FAILED)
             return
           end

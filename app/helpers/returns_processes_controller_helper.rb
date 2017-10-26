@@ -105,7 +105,7 @@ module ReturnsProcessesControllerHelper
   end
 
 
-  def create_label(order_id)
+  def self.create_label(order_id)
     order = Spree::Order.find(order_id)
 
     label = Newgistics::ShippingLabel.new(
