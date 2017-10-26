@@ -117,8 +117,7 @@ export default class Toast extends FirebaseComponent
 }
 
 Toast.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     firebaseNodeId: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
     email: PropTypes.string.isRequired

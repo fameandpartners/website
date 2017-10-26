@@ -9,6 +9,7 @@ export default class FirebaseComponent extends React.Component
     {
         super( props );
         this.firebaseNodeId = this.props.firebaseNodeId;
+        this.firebaseDatabase = this.props.firebaseDatabase;
     }
 
     calculateDiscount({totalItems = 0})
@@ -26,25 +27,6 @@ export default class FirebaseComponent extends React.Component
         return 0;
     }
 
-    connectToFirebase()
-    {
-        
-        if( firebase.apps.length === 0 )
-        {
-            var config =
-                {
-                    apiKey: this.props.firebaseAPI,
-                    authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
-                    databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
-                    projectId: this.props.firebaseDatabase,
-                    storageBucket: this.props.firebaseDatabase + ".appspot.com",
-                    messagingSenderId: "868619391913"
-                };
-            console.log( 'connecting to firebase' );
-            firebase.database.enableLogging(true)            
-            console.log( firebase.initializeApp( config ) ); 
-       }
-    }
 
     createNewShoppingSpree()
     {
@@ -172,7 +154,8 @@ export default class FirebaseComponent extends React.Component
 
     databaseRef( name )
     {
-        return firebase.apps[0].database().ref( this.firebaseNodeId + "/" + name )
+        console.log( this.firebaseDatabase );
+        return this.firebaseDatabase.database().ref( this.firebaseNodeId + "/" + name )
     }
 
 }

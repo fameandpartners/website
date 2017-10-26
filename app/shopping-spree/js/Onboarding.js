@@ -16,7 +16,6 @@ export default class Onboarding extends FirebaseComponent
         let context = this;
 
 
-        this.connectToFirebase();
         let shoppingSpreeId = this.props.shoppingSpreeId;
         if( shoppingSpreeId == null )
         {

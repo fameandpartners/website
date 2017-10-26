@@ -50,8 +50,7 @@ export default class ChatBar extends FirebaseComponent {
     
     initializeFirebase()
     {
-        this.connectToFirebase();
-        this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
+        this.chatsDB  = this.databaseRef( 'chats' );
     }
 
     sendMessage()
@@ -90,8 +89,7 @@ export default class ChatBar extends FirebaseComponent {
 }
 
 ChatBar.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     firebaseNodeId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

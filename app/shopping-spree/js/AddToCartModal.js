@@ -110,7 +110,6 @@ export default class AddToCartModal extends FirebaseComponent
 
     initializeFirebase()
     {
-        super.connectToFirebase();
         this.cartDB  = this.databaseRef( "cart" );
     }
 
@@ -245,8 +244,8 @@ export default class AddToCartModal extends FirebaseComponent
 }
 
 AddToCartModal.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseNodeId: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     name: PropTypes.string,
     icon: PropTypes.number,
     email: PropTypes.string,

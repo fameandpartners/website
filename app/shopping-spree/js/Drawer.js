@@ -17,7 +17,6 @@ export default class Drawer extends React.Component
             {
                 closed: this.props.closed,
                 display: 'chat',
-                firebaseAPI: props.firebaseAPI,
                 firebaseDatabase: props.firebaseDatabase,
                 firebaseNodeId: props.firebaseNodeId,
                 name: props.name,
@@ -71,7 +70,6 @@ export default class Drawer extends React.Component
                 <div className={"shopping-spree-wrapper " + (this.state.closed && this.state.display !== 'cart' ? 'collapsed' : 'open')}>
                   <div className={"shopping-spree-container container" + (this.state.display !== 'cart' ? " hidden" : "") }>
                     <Cart transitionToChat={this.transitionToChat}
-                          firebaseAPI={this.state.firebaseAPI}
                           firebaseDatabase={this.state.firebaseDatabase}
                           firebaseNodeId={this.state.firebaseNodeId}
                           name={this.state.name}
@@ -108,7 +106,6 @@ export default class Drawer extends React.Component
                                 </div>
                             }
                             <ChatList
-                              firebaseAPI={this.state.firebaseAPI}
                               firebaseDatabase={this.state.firebaseDatabase}
                               firebaseNodeId={this.state.firebaseNodeId}
                               showAddToCartModal={this.props.showAddToCartModal}
@@ -118,7 +115,6 @@ export default class Drawer extends React.Component
                               showShareModal={this.props.showShareModal}
                               /> 
                             <ChatBar
-                              firebaseAPI={this.state.firebaseAPI}
                               firebaseDatabase={this.state.firebaseDatabase}
                               firebaseNodeId={this.state.firebaseNodeId}
                               name={this.state.name}
@@ -129,7 +125,6 @@ export default class Drawer extends React.Component
                             
                   </div>
                   <Toast
-                    firebaseAPI={this.state.firebaseAPI}
                     firebaseDatabase={this.state.firebaseDatabase}
                     firebaseNodeId={this.state.firebaseNodeId}
                     visible={this.state.closed}
@@ -146,8 +141,7 @@ export default class Drawer extends React.Component
 }
 
 Drawer.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     firebaseNodeId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

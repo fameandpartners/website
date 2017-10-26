@@ -14,7 +14,7 @@ import _ from 'lodash';
 
 import { ToastContainer, toast } from 'react-toastify';
 
-export default class ShoppingSpree extends FirebaseComponent {
+export default class ShoppingSpree extends React.Component {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
@@ -32,10 +32,34 @@ export default class ShoppingSpree extends FirebaseComponent {
         this.hideZopim = this.hideZopim.bind(this);
         this.showValues = this.showValues.bind(this);
         this.addChatMessage = this.addChatMessage.bind(this);
+        this.connectToFirebase = this.connectToFirebase.bind(this);
+        
         win.startShoppingSpree = this.startOnboarding;
-        this.state = {};
+
+        this.state = {
+            firebaseDatabase: this.connectToFirebase()
+        };        
     }
+
+
+    connectToFirebase()
+    {
+        var config =
+            {
+                apiKey: this.props.firebaseAPI,
+                authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
+                databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
+                projectId: this.props.firebaseDatabase,
+                storageBucket: this.props.firebaseDatabase + ".appspot.com",
+                messagingSenderId: "868619391913"
+            };
+        console.log( 'connecting to firebase' );
+        firebase.database.enableLogging(true)            
+        return firebase.initializeApp( config );
+    }
+    
     componentDidMount() {
+        
         this.setInitialState();
         const { firebaseNodeId } = this.state;
         this.hideZopim();
@@ -104,6 +128,7 @@ export default class ShoppingSpree extends FirebaseComponent {
         let display = 'none';
         let minimize = false;
 
+        console.log( "FirebaseId: " + firebaseId );
         if (startingState) {
             display = startingState;
         } else if (firebaseId) {
@@ -245,9 +270,9 @@ export default class ShoppingSpree extends FirebaseComponent {
               {
                   this.state.showAddingToCartModal && (
                       <AddToCartModal
-                        dress={this.state.dressAddingToCart}
-                        firebaseAPI={this.props.firebaseAPI}
-                        firebaseDatabase={this.props.firebaseDatabase}
+                      dress={this.state.dressAddingToCart}
+                      firebaseDatabase={this.state.firebaseDatabase}
+                      
                         firebaseNodeId={this.state.firebaseNodeId}
                         name={this.state.name}
                         email={this.state.email}
@@ -259,9 +284,8 @@ export default class ShoppingSpree extends FirebaseComponent {
                 <div className={this.state.display === 'chat' || this.state.display === 'cart' ? '' : 'hidden' }>
                 {this.state.firebaseNodeId &&  this.state.email && this.state.name &&
                  <Drawer
-                 firebaseAPI={this.props.firebaseAPI}
-                 firebaseDatabase={this.props.firebaseDatabase}
                  firebaseNodeId={this.state.firebaseNodeId}
+                 firebaseDatabase={this.state.firebaseDatabase}
                  name={this.state.name}
                  display={this.state.display}
                  email={this.state.email}
@@ -303,7 +327,7 @@ export default class ShoppingSpree extends FirebaseComponent {
             }
             {
                 this.state.display === 'onboarding' &&
-                    <Onboarding firebaseDatabase={this.props.firebaseDatabase} doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
+                    <Onboarding firebaseDatabase={this.state.firebaseDatabase} doneOnboarding={this.doneOnboarding} close={this.closeOnboarding} shoppingSpreeId={this.state.firebaseNodeId} />
             }
             </div>
         );

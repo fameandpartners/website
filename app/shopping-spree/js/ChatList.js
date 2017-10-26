@@ -102,9 +102,8 @@ export default class ChatList extends FirebaseComponent
     }
     startListeningToFirebase()
     {
-        super.connectToFirebase();
 
-        this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
+        this.chatsDB  = this.databaseRef( 'chats' );
         this.chatsDB.on( 'child_added', this.addChatMessage, this.printError );
     }
 
@@ -165,11 +164,10 @@ export default class ChatList extends FirebaseComponent
         );
     }
 }
-
-
+ 
+ 
 ChatList.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     firebaseNodeId: PropTypes.string.isRequired,
     showAddToCartModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,

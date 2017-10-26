@@ -133,7 +133,7 @@ export default class Cart extends FirebaseComponent
     startListeningToFirebase()
     {
         this.connectToFirebase();
-        this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
+        this.cartDB = this.databaseRef( "cart" );
         this.cartDB.on( 'child_added', this.addToCart );
         this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
     }
@@ -211,8 +211,7 @@ export default class Cart extends FirebaseComponent
 }
 
 Cart.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
+    firebaseDatabase: PropTypes.object.isRequired,
     firebaseNodeId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
