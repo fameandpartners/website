@@ -72,6 +72,4 @@ FameAndPartners::Application.configure do
   config.use_s3 = true
 
   config.skip_mail_delivery = ENV['SKIP_MAIL_DELIVERY'] == 'true'
-
-  config.react.variant = :production
 end
