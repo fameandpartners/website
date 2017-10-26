@@ -22,7 +22,7 @@ Gemfile.local.lock
 /log/*.log
 /tmp
 
-config/database.yml
+#config/database.yml
 config/redis.yml
 config/elasticsearch.yml
 .DS_Store

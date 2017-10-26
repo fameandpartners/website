@@ -1,0 +1,28 @@
+defaults: &defaults
+  adapter: postgresql
+  username: postgres
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *defaults
+  # database: fame_website_development
+  database: fandp_dev5
+test:
+  <<: *defaults
+  database: fame_website_test
+
+staging:
+  <<: *defaults
+  database: fame_website_staging
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DBNAME'] %>
+  pool: 10
+  reconnect: true
+  connect_timeout: 2
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
