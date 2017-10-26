@@ -1012,7 +1012,6 @@ DEPENDENCIES
   quiet_assets
   rack-cors
   rails (~> 3.2.22.5)
-  react-rails (~> 2.4)
   redcarpet (~> 2.3.0)
   reform (~> 2.0.5)
   revolution!

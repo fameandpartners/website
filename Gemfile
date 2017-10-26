@@ -59,7 +59,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'react-rails', '~> 2.4'
 gem 'asset_sync', '~> 2.0'
 gem 'fog-aws', '~> 1.2.0'
 
