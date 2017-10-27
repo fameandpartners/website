@@ -65,6 +65,7 @@ export default class ShoppingSpree extends React.Component {
         let context = this;
         connectedRef.on("value", function(snap)
                         {
+                            console.log('snap.val()==', snap.val());
                             if (snap.val() === true)
                             {
                                 console.log("connected");
