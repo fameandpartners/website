@@ -85,12 +85,23 @@ export default class ShoppingSpree extends React.Component {
 
                             }
                         });
-        this.setState(
-            {
-                firebaseDatabase: toReturn
-            }
-        );
-        this.setInitialState();
+        console.log( "Starting fetch" );
+        firebase.auth().signInAnonymously().then( function( user )
+                                                  {
+                                                      console.log( "Got anon user" );
+                                                      console.log( user );
+                                                      context.setState(
+                                                          {
+                                                              firebaseDatabase: toReturn
+                                                          }
+                                                      );
+                                                      context.setInitialState();
+                                                      
+                                                  } ).catch( function( error )
+                                                             {
+                                                                 console.log( 'got error on user auth' );
+                                                                 console.log( error );
+                                                             } );
     }
 
     setupDocumentReadyListener(){
