@@ -26,3 +26,4 @@ production:
   username: <%= ENV['DBUSER'] %>
   password: <%= ENV['DBPASSWORD'] %>
   host: <%= ENV['DBHOST'] %>
+
