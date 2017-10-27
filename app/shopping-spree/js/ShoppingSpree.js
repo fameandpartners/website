@@ -105,7 +105,7 @@ export default class ShoppingSpree extends React.Component {
     }
 
     setupDocumentReadyListener(){
-      win.document.addEventListener("DOMContentLoaded", (event) => {
+      win.addEventListener("load", (event) => {
         this.connectToFirebase();
       });
     }
