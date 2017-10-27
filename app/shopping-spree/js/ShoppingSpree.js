@@ -33,14 +33,15 @@ export default class ShoppingSpree extends React.Component {
         this.showValues = this.showValues.bind(this);
         this.addChatMessage = this.addChatMessage.bind(this);
         this.connectToFirebase = this.connectToFirebase.bind(this);
-        
+        this.setupDocumentReadyListener = this.setupDocumentReadyListener.bind(this);
+
         win.startShoppingSpree = this.startOnboarding;
 
         this.state = {
             firebaseDatabase: null,
             firebaseConnected: false
-            
-        };        
+
+        };
     }
 
 
@@ -48,78 +49,65 @@ export default class ShoppingSpree extends React.Component {
     {
         console.log( 'connectToFirebase()' );
         console.log( document.readyState );
-        if( document.readyState == 'complete' )
-        {
-            var config =
-                {
-                    apiKey: this.props.firebaseAPI,
-                    authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
-                    databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
-                    projectId: this.props.firebaseDatabase,
-                    storageBucket: this.props.firebaseDatabase + ".appspot.com",
-                    messagingSenderId: "868619391913"
-                };
-            console.log( 'connecting to firebase' );
-            firebase.database.enableLogging(true);
-            let toReturn = firebase.initializeApp( config );
-            let connectedRef = firebase.database().ref(".info/connected");
-            let context = this;
-            connectedRef.on("value", function(snap)
+        var config =
+            {
+                apiKey: this.props.firebaseAPI,
+                authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
+                databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
+                projectId: this.props.firebaseDatabase,
+                storageBucket: this.props.firebaseDatabase + ".appspot.com",
+                messagingSenderId: "868619391913"
+            };
+        console.log( 'connecting to firebase' );
+        firebase.database.enableLogging(true);
+        let toReturn = firebase.initializeApp( config );
+        let connectedRef = firebase.database().ref(".info/connected");
+        let context = this;
+        connectedRef.on("value", function(snap)
+                        {
+                            if (snap.val() === true)
                             {
-                                if (snap.val() === true)
-                                {
-                                    console.log("connected");
-                                    context.setState(
-                                        {
-                                            firebaseConnected: true
-                                        }
-                                    );
-                                } else
-                                {
-                                    console.log("not connected");
-                                    context.setState(
-                                        {
-                                            firebaseConnected: false
-                                        }
-                                    );
-                                    
-                                }
-                            });
-            this.setState(
-                {
-                    firebaseDatabase: toReturn
-                }
-            );
-            this.setInitialState();                            
-        } else
-        {
-            setTimeout(this.connectToFirebase,100);            
-        }
+                                console.log("connected");
+                                context.setState(
+                                    {
+                                        firebaseConnected: true
+                                    }
+                                );
+                            } else
+                            {
+                                console.log("not connected");
+                                context.setState(
+                                    {
+                                        firebaseConnected: false
+                                    }
+                                );
 
-        
+                            }
+                        });
+        this.setState(
+            {
+                firebaseDatabase: toReturn
+            }
+        );
+        this.setInitialState();
     }
-    
+
+    setupDocumentReadyListener(){
+      win.document.addEventListener("DOMContentLoaded", (event) => {
+        this.connectToFirebase();
+      });
+    }
+
     componentDidMount() {
-        
-
-
-        this.hideZopim();
-        console.log( "shopping spree is mounting" );
-        this.connectToFirebase();        
-        const { firebaseNodeId } = this.state;
-        
-        //        super.connectToFirebase();
-        //        const spreeFirebase = firebase.apps[0].database();
-        //        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
-        //        this.chatsDB.on( 'child_added', this.addChatMessage );
-        //        this.chatsDB.once( 'value', this.showValues );
-        
+      const { firebaseNodeId } = this.state;
+      this.hideZopim();
+      this.setupDocumentReadyListener();
     }
     showValues(data) {
 
         const chatValues = data.val();
         if(chatValues) {
-            const chatKeys = Object.keys(chatValues);            
+            const chatKeys = Object.keys(chatValues);
             const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
             this.setState({
                 lastChatTime
@@ -171,7 +159,7 @@ export default class ShoppingSpree extends React.Component {
 
         let display = 'none';
         let minimize = false;
-        
+
         console.log( "FirebaseId: " + firebaseId );
         if (startingState) {
             display = startingState;
@@ -318,7 +306,7 @@ export default class ShoppingSpree extends React.Component {
                       <AddToCartModal
                         dress={this.state.dressAddingToCart}
                         firebaseDatabase={this.state.firebaseDatabase}
-                        
+
                         firebaseNodeId={this.state.firebaseNodeId}
                         name={this.state.name}
                         email={this.state.email}
