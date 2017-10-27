@@ -37,7 +37,7 @@ export default class ShoppingSpree extends React.Component {
         win.startShoppingSpree = this.startOnboarding;
 
         this.state = {
-            firebaseDatabase: this.connectToFirebase(),
+            firebaseDatabase: null,
             firebaseConnected: false
             
         };        
@@ -46,52 +46,68 @@ export default class ShoppingSpree extends React.Component {
 
     connectToFirebase()
     {
-        var config =
-            {
-                apiKey: this.props.firebaseAPI,
-                authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
-                databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
-                projectId: this.props.firebaseDatabase,
-                storageBucket: this.props.firebaseDatabase + ".appspot.com",
-                messagingSenderId: "868619391913"
-            };
-        console.log( 'connecting to firebase' );
-        firebase.database.enableLogging(true);
-        let toReturn = firebase.initializeApp( config );
-        let connectedRef = firebase.database().ref(".info/connected");
-        let context = this;
-        connectedRef.on("value", function(snap)
-                        {
-                            if (snap.val() === true)
+        console.log( 'connectToFirebase()' );
+        console.log( document.readyState );
+        if( document.readyState == 'complete' )
+        {
+            var config =
+                {
+                    apiKey: this.props.firebaseAPI,
+                    authDomain: this.props.firebaseDatabase + ".firebaseapp.com",
+                    databaseURL: "https://" + this.props.firebaseDatabase + ".firebaseio.com",
+                    projectId: this.props.firebaseDatabase,
+                    storageBucket: this.props.firebaseDatabase + ".appspot.com",
+                    messagingSenderId: "868619391913"
+                };
+            console.log( 'connecting to firebase' );
+            firebase.database.enableLogging(true);
+            let toReturn = firebase.initializeApp( config );
+            let connectedRef = firebase.database().ref(".info/connected");
+            let context = this;
+            connectedRef.on("value", function(snap)
                             {
-                                console.log("connected");
-                                context.setState(
-                                    {
-                                        firebaseConnected: true
-                                    }
-                                );
-                            } else
-                            {
-                                console.log("not connected");
-                                context.setState(
-                                    {
-                                        firebaseConnected: false
-                                    }
-                                );
-                                
-                            }
-                        });
+                                if (snap.val() === true)
+                                {
+                                    console.log("connected");
+                                    context.setState(
+                                        {
+                                            firebaseConnected: true
+                                        }
+                                    );
+                                } else
+                                {
+                                    console.log("not connected");
+                                    context.setState(
+                                        {
+                                            firebaseConnected: false
+                                        }
+                                    );
+                                    
+                                }
+                            });
+            this.setState(
+                {
+                    firebaseDatabase: toReturn
+                }
+            );
+            this.setInitialState();                            
+        } else
+        {
+            setTimeout(this.connectToFirebase,100);            
+        }
 
-        return toReturn;
         
     }
     
     componentDidMount() {
         
-        this.setInitialState();
-        const { firebaseNodeId } = this.state;
+
+
         this.hideZopim();
         console.log( "shopping spree is mounting" );
+        this.connectToFirebase();        
+        const { firebaseNodeId } = this.state;
+        
         //        super.connectToFirebase();
         //        const spreeFirebase = firebase.apps[0].database();
         //        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
@@ -155,7 +171,7 @@ export default class ShoppingSpree extends React.Component {
 
         let display = 'none';
         let minimize = false;
-
+        
         console.log( "FirebaseId: " + firebaseId );
         if (startingState) {
             display = startingState;
