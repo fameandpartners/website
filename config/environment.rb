@@ -8,13 +8,13 @@ FameAndPartners::Application.initialize!
 
 ActiveRecord::Base.include_root_in_json = true
 
-if defined?(PhusionPassenger)
-  PhusionPassenger.on_event(:starting_worker_process) do |forked|
-    if forked and defined?(Sidekiq)
-      Rails.logger.error('INFO: reconnect sidekiq')
-      Sidekiq.redis do |r|
-        r.client.reconnect
-      end
-    end
-  end
-end
+# if defined?(PhusionPassenger)
+#   PhusionPassenger.on_event(:starting_worker_process) do |forked|
+#     if forked and defined?(Sidekiq)
+#       Rails.logger.error('INFO: reconnect sidekiq')
+#       Sidekiq.redis do |r|
+#         r.client.reconnect
+#       end
+#     end
+#   end
+# end
