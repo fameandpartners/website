@@ -37,7 +37,9 @@ export default class ShoppingSpree extends React.Component {
         win.startShoppingSpree = this.startOnboarding;
 
         this.state = {
-            firebaseDatabase: this.connectToFirebase()
+            firebaseDatabase: this.connectToFirebase(),
+            firebaseConnected: false
+            
         };        
     }
 
@@ -54,8 +56,34 @@ export default class ShoppingSpree extends React.Component {
                 messagingSenderId: "868619391913"
             };
         console.log( 'connecting to firebase' );
-        firebase.database.enableLogging(true)            
-        return firebase.initializeApp( config );
+        firebase.database.enableLogging(true);
+        let toReturn = firebase.initializeApp( config );
+        let connectedRef = firebase.database().ref(".info/connected");
+        let context = this;
+        connectedRef.on("value", function(snap)
+                        {
+                            if (snap.val() === true)
+                            {
+                                console.log("connected");
+                                context.setState(
+                                    {
+                                        firebaseConnected: true
+                                    }
+                                );
+                            } else
+                            {
+                                console.log("not connected");
+                                context.setState(
+                                    {
+                                        firebaseConnected: false
+                                    }
+                                );
+                                
+                            }
+                        });
+
+        return toReturn;
+        
     }
     
     componentDidMount() {
@@ -64,11 +92,11 @@ export default class ShoppingSpree extends React.Component {
         const { firebaseNodeId } = this.state;
         this.hideZopim();
         console.log( "shopping spree is mounting" );
-//        super.connectToFirebase();
-//        const spreeFirebase = firebase.apps[0].database();
-//        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
-//        this.chatsDB.on( 'child_added', this.addChatMessage );
-//        this.chatsDB.once( 'value', this.showValues );
+        //        super.connectToFirebase();
+        //        const spreeFirebase = firebase.apps[0].database();
+        //        this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
+        //        this.chatsDB.on( 'child_added', this.addChatMessage );
+        //        this.chatsDB.once( 'value', this.showValues );
         
     }
     showValues(data) {
@@ -256,6 +284,7 @@ export default class ShoppingSpree extends React.Component {
             <div>
               <div>
                 <div className="ToastAlert__container">
+                  {this.state.firebaseConnected &&
                   <ToastContainer
                     position="top-right"
                     type="default"
@@ -264,15 +293,16 @@ export default class ShoppingSpree extends React.Component {
                     newestOnTop={false}
                     closeOnClick
                     pauseOnHover
-                    />
+                        />
+                  }
                 </div>
               </div>
               {
                   this.state.showAddingToCartModal && (
                       <AddToCartModal
-                      dress={this.state.dressAddingToCart}
-                      firebaseDatabase={this.state.firebaseDatabase}
-                      
+                        dress={this.state.dressAddingToCart}
+                        firebaseDatabase={this.state.firebaseDatabase}
+                        
                         firebaseNodeId={this.state.firebaseNodeId}
                         name={this.state.name}
                         email={this.state.email}
@@ -282,7 +312,7 @@ export default class ShoppingSpree extends React.Component {
                   )
               }
                 <div className={this.state.display === 'chat' || this.state.display === 'cart' ? '' : 'hidden' }>
-                {this.state.firebaseNodeId &&  this.state.email && this.state.name &&
+                {this.state.firebaseConnected && this.state.firebaseNodeId &&  this.state.email && this.state.name &&
                  <Drawer
                  firebaseNodeId={this.state.firebaseNodeId}
                  firebaseDatabase={this.state.firebaseDatabase}
