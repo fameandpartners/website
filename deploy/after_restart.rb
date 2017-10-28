@@ -1,5 +1,6 @@
 on_app_master do
   sudo "monit restart sidekiq_#{config.app}_0"
+  puts "i hate contractors"
   is_production = config.framework_env == 'production'
 
   # Alert deployment to NewRelic
