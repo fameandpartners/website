@@ -32,9 +32,7 @@ const bundle = function(args) {
   gutil.log('Is build prod?', isProd ? _true : _false);
   gutil.log('Is this dev?', isDevelopment ? _true : _false);
 
-  function generateEntries() {
-    const bundleList = _.values(config.paths.mainJS);
-
+  function generateEntries( bundleList ) {
     if (isLiveReloadActive) {
       gutil.log(new inquirer.Separator().line);
 
@@ -71,33 +69,34 @@ const bundle = function(args) {
     process.exit(1);
   }
 
-  function doBundle(bundler) {
-    const startTime = new Date().getTime();
+    function doBundle(bundler, filename) {
+      gutil.log( "Bundling " + filename );
+      const startTime = new Date().getTime();
 
-    if (isProd){
-      return bundler.bundle()
+      if (isProd){
+        return bundler.bundle()
           .on('error', crashProcess)
-          .pipe(source('application_bundle.js'))
+          .pipe(source(filename))
           .pipe(buffer())
           .pipe(uglify())
           .pipe(gulp.dest(config.dest))
           .on('end', function () {
-              const time = (new Date().getTime() - startTime) / 1000;
-              gutil.log(`Finished. Took: ${time}s`);
+            const time = (new Date().getTime() - startTime) / 1000;
+            gutil.log(`Finished. Took: ${time}s`);
           });
-    } else { // development build should not be minified and compressed
-      return bundler.bundle()
-        .on('error', function (err) {
-          if (isDevelopment) { return gutil.log(chalk.red(err.message)); }
-          crashProcess(err);
-        })
-        .pipe(source('application_bundle.js'))
-        .pipe(gulp.dest(config.dest))
-        .on('end', function () {
-          const time = (new Date().getTime() - startTime) / 1000;
-          gutil.log('Finished. Took:', chalk.magenta(time, 's') );
-        });
-    }
+      } else { // development build should not be minified and compressed
+        return bundler.bundle()
+          .on('error', function (err) {
+            if (isDevelopment) { return gutil.log(chalk.red(err.message)); }
+            crashProcess(err);
+          })
+          .pipe(source(filename))
+          .pipe(gulp.dest(config.dest))
+          .on('end', function () {
+            const time = (new Date().getTime() - startTime) / 1000;
+            gutil.log('Finished. Took:', chalk.magenta(time, 's') );
+          });
+      }
   }
 
   function attachBundleUpdate(bundler){
@@ -112,8 +111,28 @@ const bundle = function(args) {
   }
 
   function createBundle(resolve) {
-    return generateEntries()
-      .then(entries => {
+    return generateEntries(_.values(config.paths.mainJS))
+          .then(entries => {
+        const pluginList = isLiveReloadActive ? [ lrload, ] : [];
+        const bundler = browserify({
+          entries: entries,
+          cache: {},
+          plugin: pluginList,
+          packageCache: {},
+          transform: config.settings.transform,
+        });
+
+        isWatch && attachBundleUpdate(bundler);
+
+          doBundle(bundler, 'application_bundle.js');
+        resolve();
+      });
+  }
+
+  function createShoppingSpree(resolve) {
+    gutil.log('building shopping spree')
+    return generateEntries(_.values(config.paths.shoppingSpreeJS))
+       .then(entries => {
         const pluginList = isLiveReloadActive ? [ lrload, ] : [];
 
         const bundler = browserify({
@@ -126,20 +145,21 @@ const bundle = function(args) {
 
         isWatch && attachBundleUpdate(bundler);
 
-        doBundle(bundler);
+        doBundle(bundler, 'shopping_spree_bundle.js');
         resolve();
       });
   }
-
+    
   return {
     create: () => {
-      return new Promise(createBundle);
+        return (new Promise(createShoppingSpree)).then( () => { new Promise(createBundle) } );
     },
   };
 };
 
 gulp.task('clean-scripts', () => {
   return gulp.src(config.paths.dist + 'application_bundle.js', {read: false,})
+    .pipe( gulp.src(config.paths.dist + 'shopping_pree_bundle.js', {read: false,}) )
     .pipe(clean());
 });
 
