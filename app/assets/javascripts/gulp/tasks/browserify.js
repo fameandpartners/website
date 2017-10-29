@@ -78,7 +78,6 @@ const bundle = function(args) {
           .on('error', crashProcess)
           .pipe(source(filename))
           .pipe(buffer())
-          .pipe(uglify())
           .pipe(gulp.dest(config.dest))
           .on('end', function () {
             const time = (new Date().getTime() - startTime) / 1000;
