@@ -10,14 +10,14 @@ db_namespace = namespace :db do
         ActiveRecord::Base.establish_connection(config)
         File.open(filename, "w:utf-8") { |f| f << ActiveRecord::Base.connection.structure_dump }
       when /postgresql/
-        set_psql_env(config)
-        search_path = config['schema_search_path']
-        unless search_path.blank?
-          search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
-        end
-        `pg_dump -s -x -O -f #{Shellwords.escape(filename)} #{search_path} #{Shellwords.escape(config['database'])}`
-        raise 'Error dumping database' if $?.exitstatus == 1
-        File.open(filename, "a") { |f| f << "SET search_path TO #{ActiveRecord::Base.connection.schema_search_path};\n\n" }
+        # set_psql_env(config)
+        # search_path = config['schema_search_path']
+        # unless search_path.blank?
+        #   search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
+        # end
+        # `pg_dump -s -x -O -f #{Shellwords.escape(filename)} #{search_path} #{Shellwords.escape(config['database'])}`
+        # raise 'Error dumping database' if $?.exitstatus == 1
+        # File.open(filename, "a") { |f| f << "SET search_path TO #{ActiveRecord::Base.connection.schema_search_path};\n\n" }
       when /sqlite/
         dbfile = config['database']
         `sqlite3 #{dbfile} .schema > #{filename}`
