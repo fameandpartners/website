@@ -9,7 +9,7 @@ export default class SizeButton extends React.Component
     {
         return (
             <div onClick={() => this.props.selectionCallback( this.props.size )} className={"size-box" + (this.props.selectedSize === this.props.size ? ' selected' : '') }>
-              <div className="size-inner">{this.props.size}</div>
+              <div className="size-inner">US {this.props.size}</div>
             </div>
         );
 
