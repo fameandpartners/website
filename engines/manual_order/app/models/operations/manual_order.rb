@@ -102,7 +102,7 @@ module Operations
 
     def adjust_price
       if params[:adj_amount].present? && params[:adj_description].present?
-        order.adjustments.create({ amount: params[:adj_amount], label: params[:adj_description] })
+        order.adjustments.create({ amount: params[:adj_amount], label: "Manual #{params[:adj_description]}" })
       end
     end
 
