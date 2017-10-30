@@ -59,9 +59,9 @@ const bundle = function(args) {
   }
 
   /**
-  * Exits from bundle build
-  * @param  {Object} err
-  */
+   * Exits from bundle build
+   * @param  {Object} err
+   */
   function crashProcess (err) {
     gutil.log(err);
     gutil.log(chalk.red(err.message));
@@ -69,41 +69,46 @@ const bundle = function(args) {
     process.exit(1);
   }
 
-    function doBundle(bundler, filename) {
-      gutil.log( "Bundling " + filename );
-      const startTime = new Date().getTime();
+  function doBundle(bundler, filename, withuglify) {
+    gutil.log( "Bundling " + filename );
+    const startTime = new Date().getTime();
 
-      if (isProd){
-        return bundler.bundle()
+    if (isProd)
+    {
+      let toReturn = bundler.bundle()
           .on('error', crashProcess)
           .pipe(source(filename))
-          .pipe(buffer())
-          .pipe(gulp.dest(config.dest))
-          .on('end', function () {
-            const time = (new Date().getTime() - startTime) / 1000;
-            gutil.log(`Finished. Took: ${time}s`);
-          });
-      } else { // development build should not be minified and compressed
-        return bundler.bundle()
-          .on('error', function (err) {
-            if (isDevelopment) { return gutil.log(chalk.red(err.message)); }
-            crashProcess(err);
-          })
-          .pipe(source(filename))
-          .pipe(gulp.dest(config.dest))
-          .on('end', function () {
-            const time = (new Date().getTime() - startTime) / 1000;
-            gutil.log('Finished. Took:', chalk.magenta(time, 's') );
-          });
+          .pipe(buffer());
+      if( withuglify )
+      {
+        toReturn = toReturn.pipe(uglify())
       }
+      return toReturn.pipe(gulp.dest(config.dest))
+        .on('end', function () {
+          const time = (new Date().getTime() - startTime) / 1000;
+          gutil.log(`Finished. Took: ${time}s`);
+        });
+    } else { // development build should not be minified and compressed
+      return bundler.bundle()
+        .on('error', function (err) {
+          if (isDevelopment) { return gutil.log(chalk.red(err.message)); }
+          crashProcess(err);
+        })
+        .pipe(source(filename))
+        .pipe(gulp.dest(config.dest))
+        .on('end', function () {
+          const time = (new Date().getTime() - startTime) / 1000;
+          gutil.log('Finished. Took:', chalk.magenta(time, 's') );
+        });
+    }
   }
 
   function attachBundleUpdate(bundler){
     bundler = watchify(bundler);
     bundler.on('update', function (updatedFile) {
       const lint = gulp.src(updatedFile)
-        .pipe(eslint({ fix: true, }))
-        .pipe(eslint.format());
+            .pipe(eslint({ fix: true, }))
+            .pipe(eslint.format());
 
       doBundle(bundler);
     });
@@ -111,7 +116,7 @@ const bundle = function(args) {
 
   function createBundle(resolve) {
     return generateEntries(_.values(config.paths.mainJS))
-          .then(entries => {
+      .then(entries => {
         const pluginList = isLiveReloadActive ? [ lrload, ] : [];
         const bundler = browserify({
           entries: entries,
@@ -123,7 +128,7 @@ const bundle = function(args) {
 
         isWatch && attachBundleUpdate(bundler);
 
-          doBundle(bundler, 'application_bundle.js');
+        doBundle(bundler, 'application_bundle.js', true);
         resolve();
       });
   }
@@ -131,7 +136,7 @@ const bundle = function(args) {
   function createShoppingSpree(resolve) {
     gutil.log('building shopping spree')
     return generateEntries(_.values(config.paths.shoppingSpreeJS))
-       .then(entries => {
+      .then(entries => {
         const pluginList = isLiveReloadActive ? [ lrload, ] : [];
 
         const bundler = browserify({
@@ -144,14 +149,14 @@ const bundle = function(args) {
 
         isWatch && attachBundleUpdate(bundler);
 
-        doBundle(bundler, 'shopping_spree_bundle.js');
+        doBundle(bundler, 'shopping_spree_bundle.js', false);
         resolve();
       });
   }
-    
+  
   return {
     create: () => {
-        return (new Promise(createShoppingSpree)).then( () => { new Promise(createBundle) } );
+      return (new Promise(createShoppingSpree)).then( () => { new Promise(createBundle) } );
     },
   };
 };
