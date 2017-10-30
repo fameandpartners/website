@@ -3,7 +3,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
-  
+
   def create
     ensure_size_id_is_set( params )
     ensure_height_is_set( params )
@@ -46,7 +46,7 @@ class UserCart::ProductsController < UserCart::BaseController
       end
 
       reapply_delivery_promo
-      
+
       @user_cart = user_cart_resource.read
 
       data = add_analytics_labels(@user_cart.serialize)
@@ -106,7 +106,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
     data
   end
-  
+
   def cart_product_service
     @cart_product_service ||= UserCart::CartProduct.new(
       order: current_order(true),
@@ -135,10 +135,10 @@ class UserCart::ProductsController < UserCart::BaseController
       return to_return
     end
   end
-  
+
   def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count )
     if( current_promotion && !current_promotion.name.index( 'SHOPPING SPREE' ).nil? )
-      
+
     else
       promo = Spree::Promotion.new
       guid = SecureRandom.uuid.to_s
@@ -168,7 +168,7 @@ class UserCart::ProductsController < UserCart::BaseController
       promo.activate(:order => order, :coupon_code => promo.code)
     end
   end
-  
+
   def ensure_size_id_is_set( params )
     if( params[:size_id].nil? && !params[:size].nil? )
       params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
@@ -181,7 +181,7 @@ class UserCart::ProductsController < UserCart::BaseController
       product_height_range_group = ProductHeightRangeGroup.find_both_for_variant_or_use_default( variant ).find { |phrg| phrg.unit == params[:height_unit] }
       params[:height] = product_height_range_group.map_height_to_name( params[:height_value] )
     end
-    
+
   end
-  
+
 end

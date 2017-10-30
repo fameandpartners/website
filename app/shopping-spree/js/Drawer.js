@@ -99,7 +99,7 @@ export default class Drawer extends React.Component
                                                   Clique&nbsp;
                                                       {
                                                       currentDiscount
-                                                          ? `${currentDiscount} off`
+                                                          ? `${currentDiscount}% off`
                                                           : null
                                                       }
                                                 </div>
@@ -116,7 +116,7 @@ export default class Drawer extends React.Component
                               doneShoppingSpree={this.props.doneShoppingSpree}
                               updateExitModalStatus={this.props.updateExitModalStatus}
                               showShareModal={this.props.showShareModal}
-                              /> 
+                              />
                             <ChatBar
                               firebaseAPI={this.state.firebaseAPI}
                               firebaseDatabase={this.state.firebaseDatabase}
@@ -126,7 +126,7 @@ export default class Drawer extends React.Component
                               icon={this.state.icon}
                               transitionToChat={this.transitionToChat}
                               />
-                            
+
                   </div>
                   <Toast
                     firebaseAPI={this.state.firebaseAPI}

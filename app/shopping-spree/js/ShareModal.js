@@ -44,7 +44,7 @@ export default class ShareModal extends React.Component
                   </div>
                 </div>
                 <div className="row equal">
-                  <div className="col-xs-12 col-md-8 col-lg-6 float-none u-center">
+                  <div className="col-xs-12 col-md-10 col-lg-8 float-none u-center">
                     <input readOnly defaultValue={this.state.url} className="input-lg col-xs-8" type="text"></input>
                     <div className="col-xs-4 no-horizontal-padding">
                       <a data-delay-hide='800'
