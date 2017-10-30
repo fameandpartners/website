@@ -12,7 +12,7 @@
 
   </head>
   <body>
-
+    <%= render 'layouts/redesign/shopping_spree' %>    
     <%= render 'layouts/redesign/header' %>
 
     <% add_spacing_top_content_class = (@landing_page_container[:page_white_spacing_top]) ? 'app-container--top-margin' : nil %>
@@ -26,8 +26,6 @@
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
-    <%= render 'layouts/redesign/shopping_spree' %>    
     <%= javascript_include_tag 'shopping_spree_bundle' %>
-
   </body>
 </html>
