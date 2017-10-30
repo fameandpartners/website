@@ -133,7 +133,6 @@ group :development do
   gem 'foreman', require: false
   gem 'puma'
   gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'awesome_print', require: "ap"
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
