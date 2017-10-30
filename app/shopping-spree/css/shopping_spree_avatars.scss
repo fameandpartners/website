@@ -11,7 +11,8 @@
         {
           .avatar-#{$i}
           {
-              background: url("/images/shopping_spree/avatars/avatar-#{$i}.png") no-repeat center center;
+              
+              background: url(image-path("shopping_spree/avatars/avatar-#{$i}.png")) no-repeat center center;
           }
         }
     }
