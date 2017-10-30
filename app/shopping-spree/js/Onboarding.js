@@ -13,7 +13,6 @@ export default class Onboarding extends FirebaseComponent
 
     join(evt)
     {
-        console.log('happdning', evt);
         evt.preventDefault();
         let context = this;
 
@@ -172,7 +171,7 @@ export default class Onboarding extends FirebaseComponent
                       </div>
                     </div>
 
-                    <div className="row">
+                    <div className="row bottom-padding-lg">
                       <div  className="col-xs-12 col-lg-5 float-none margin--center">
                         <button type="submit" role="button" className="btn btn-lrg btn-black btn-block">Start Clique</button>
                       </div>

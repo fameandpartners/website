@@ -128,13 +128,6 @@ export default class Drawer extends React.Component
                               />
 
                   </div>
-                  <Toast
-                    firebaseAPI={this.state.firebaseAPI}
-                    firebaseDatabase={this.state.firebaseDatabase}
-                    firebaseNodeId={this.state.firebaseNodeId}
-                    visible={this.state.closed}
-                    email={this.state.email}
-                    />
                 </div>
             );
         } else

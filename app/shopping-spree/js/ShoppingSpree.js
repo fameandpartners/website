@@ -34,13 +34,12 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.addChatMessage = this.addChatMessage.bind(this);
     win.startShoppingSpree = this.startOnboarding;
     this.startListeningForToast = this.startListeningForToast.bind(this);
-    this.state = {};
+    this.state = this.setInitialState();
   }
 
   startListeningForToast() {
-    console.log( "Listening for toast" );
     super.connectToFirebase();
-    const { firebaseNodeId } = this.state;    
+    const { firebaseNodeId } = this.state;
     const spreeFirebase = firebase.apps[0].database();
     this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
     this.chatsDB.on( 'child_added', this.addChatMessage );
@@ -48,16 +47,14 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   componentDidMount() {
-    this.setInitialState();
     this.hideZopim();
-    console.log( "shopping spree is mounting" );
-    
+    this.startListeningForToast();
   }
-  showValues(data) {
 
+  showValues(data) {
     const chatValues = data.val();
     if(chatValues) {
-      const chatKeys = Object.keys(chatValues);            
+      const chatKeys = Object.keys(chatValues);
       const lastChatTime = Math.max(...chatKeys.map(k => chatValues[k].created_at));
       this.setState({
         lastChatTime
@@ -115,10 +112,9 @@ export default class ShoppingSpree extends FirebaseComponent {
     } else if (firebaseId) {
       display = 'chat';
       minimize = true;
-      this.startListeningForToast();
     }
 
-    this.setState({
+    return {
       display,
       name,
       email,
@@ -129,7 +125,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       startingState: display,
       dressAddingToCart: null,
       showExitModal: false,
-    } );
+    };
   }
 
   startOnboarding() {
@@ -243,12 +239,12 @@ export default class ShoppingSpree extends FirebaseComponent {
             <ToastContainer
               position="top-right"
               type="default"
-              autoClose={3000}
+              autoClose={8000}
               hideProgressBar
               newestOnTop={false}
               closeOnClick
               pauseOnHover
-              />
+            />
           </div>
         </div>
         {
