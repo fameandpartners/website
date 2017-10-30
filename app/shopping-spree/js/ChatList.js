@@ -11,166 +11,166 @@ import win from './windowPolyfill';
 
 export default class ChatList extends FirebaseComponent
 {
-    constructor( props )
+  constructor( props )
+  {
+    super( props );
+    this.addChatMessage = this.addChatMessage.bind(this);
+    this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
+    this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.state =
+      {
+        messages:  [],
+        updateCount: 0
+      };
+  }
+
+  sameOwnerAsLastMessage( email )
+  {
+    if( this.state.messages.length === 0 )
     {
-        super( props );
-        this.addChatMessage = this.addChatMessage.bind(this);
-        this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
-        this.scrollToBottom = this.scrollToBottom.bind(this);
-        this.state =
-            {
-                messages:  [],
-                updateCount: 0
-            };
+      return false;
+    } else
+    {
+      return ((this.state.messages[this.state.messages.length - 1].props.email === email) && (this.state.messages[this.state.messages.length - 1].type != JoinedMessage));
     }
 
-    sameOwnerAsLastMessage( email )
+  }
+  addChatMessage( data )
+  {
+    let toConcat = null;
+    switch( data.val().type )
     {
-        if( this.state.messages.length === 0 )
+      case 'text':
+      case 'discount':
+      toConcat = [<TextMessage key={data.key}
+                  text={data.val().value}
+                  iconNumber={parseInt(data.val().from.icon)}
+                  name={data.val().from.name}
+                  email={data.val().from.email}
+                  sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />];
+      break;
+
+      case 'welcome_message':
+      break;
+
+      case 'share_dress':
+      toConcat = 
+        [<DressMessage key={data.key}
+         iconNumber={data.val().from.icon}
+         name={data.val().from.name}
+         email={data.val().from.email}
+         sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
+         dress={data.val().value}
+         showAddToCartModal={this.props.showAddToCartModal}
+         />];
+      break;
+
+      case 'joined':
+      toConcat = [
+          <JoinedMessage key={data.key}
+        name={data.val().from.name}
+        email={data.val().from.email}
+        createdAt={data.val().created_at} />
+      ];
+      break;
+      default:
+      console.log( "unknown card type: " + data.val().type );
+
+    }
+    if( toConcat != null )
+    {
+      this.state.messages = this.state.messages.concat(toConcat);
+      this.setState(
         {
-            return false;
-        } else
-        {
-            return this.state.messages[this.state.messages.length - 1].props.email === email;
+          messages: this.state.messages,
+          updateCount: this.state.updateCount + 1
         }
-
+      );
     }
-    addChatMessage( data )
-    {
-        let toConcat = null;
-        switch( data.val().type )
-        {
-            case 'text':
-            case 'discount':
-            toConcat = [<TextMessage key={data.key}
-                        text={data.val().value}
-                        iconNumber={parseInt(data.val().from.icon)}
-                        name={data.val().from.name}
-                        email={data.val().from.email}
-                        sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />];
-            break;
+  }
 
-            case 'welcome_message':
-            break;
+  scrollToBottom ()
+  {
+    this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
+  }
 
-            case 'share_dress':
-            toConcat = 
-                [<DressMessage key={data.key}
-                 iconNumber={data.val().from.icon}
-                 name={data.val().from.name}
-                 email={data.val().from.email}
-                 sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
-                 dress={data.val().value}
-                 showAddToCartModal={this.props.showAddToCartModal}
-                 />];
-            break;
+  printError( error )
+  {
+    console.log( 'Chat List got error' );
+    console.log( error );
+  }
+  startListeningToFirebase()
+  {
+    super.connectToFirebase();
 
-            case 'joined':
-            toConcat = [
-                    <JoinedMessage key={data.key}
-                name={data.val().from.name}
-                email={data.val().from.email}
-                createdAt={data.val().created_at} />
-            ];
-            break;
-            default:
-            console.log( "unknown card type: " + data.val().type );
+    this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
+    this.chatsDB.on( 'child_added', this.addChatMessage, this.printError );
+  }
 
-        }
-        if( toConcat != null )
-        {
-            this.state.messages = this.state.messages.concat(toConcat);
-            this.setState(
-                {
-                    messages: this.state.messages,
-                    updateCount: this.state.updateCount + 1
-                }
-            );
-        }
-    }
+  stopListeningToFirebase()
+  {
+    this.chatsDB.off( 'child_added', this.addChatMessage );
+  }
 
-    scrollToBottom ()
-    {
-        this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
-    }
+  componentDidUpdate()
+  {
+    this.scrollToBottom();
+  }
 
-    printError( error )
-    {
-        console.log( 'Chat List got error' );
-        console.log( error );
-    }
-    startListeningToFirebase()
-    {
-        super.connectToFirebase();
+  componentWillUnmount()
+  {
+    this.stopListeningToFirebase();
+  }
 
-        this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
-        this.chatsDB.on( 'child_added', this.addChatMessage, this.printError );
-    }
+  componentDidMount()
+  {
+    this.startListeningToFirebase();        
+    this.scrollToBottom();
+  }
 
-    stopListeningToFirebase()
-    {
-        this.chatsDB.off( 'child_added', this.addChatMessage );
-    }
+  exit()
+  {
+    console.log( 'exit' );
+  }
+  render()
+  {
+    return(
+        <div className="chat-list">
+        <div className="row chat-header">
+        <div className="col-xs-4 header-name">
+        {this.props.name}
+      </div>
+        <div className="col-xs-8 header-name text-right">
+        <span className="chat-list-exit link" onClick={this.props.doneShoppingSpree} role="button">
+        Exit
+      </span>
+        <span className="link" onClick={this.props.showShareModal} role="button">
+        Add more friends!
+      </span>
+        </div>
 
-    componentDidUpdate()
-    {
-        this.scrollToBottom();
-    }
-
-    componentWillUnmount()
-    {
-        this.stopListeningToFirebase();
-    }
-
-    componentDidMount()
-    {
-        this.startListeningToFirebase();        
-        this.scrollToBottom();
-    }
-
-    exit()
-    {
-        console.log( 'exit' );
-    }
-    render()
-    {
-        return(
-            <div className="chat-list">
-              <div className="row chat-header">
-                <div className="col-xs-4 header-name">
-                  {this.props.name}
-                </div>
-                <div className="col-xs-8 header-name text-right">
-                  <span className="chat-list-exit link" onClick={this.props.doneShoppingSpree} role="button">
-                    Exit
-                  </span>
-                  <span className="link" onClick={this.props.showShareModal} role="button">
-                    Add more friends!
-                  </span>
-                </div>
-
-              </div>
-              <div className="row">
-                <div className="chat-content">
-                  <ul>
-                    {this.state.messages}
-                  </ul>
-                  <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
-                  </div>
-                </div>
-              </div>
-            </div>
-        );
-    }
+      </div>
+        <div className="row">
+        <div className="chat-content">
+        <ul>
+        {this.state.messages}
+      </ul>
+        <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
+        </div>
+        </div>
+        </div>
+        </div>
+    );
+  }
 }
 
 
 ChatList.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
-    firebaseNodeId: PropTypes.string.isRequired,
-    showAddToCartModal: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    doneShoppingSpree: PropTypes.func.isRequired,
-    showShareModal: PropTypes.func.isRequired
+  firebaseAPI: PropTypes.string.isRequired,
+  firebaseDatabase: PropTypes.string.isRequired,
+  firebaseNodeId: PropTypes.string.isRequired,
+  showAddToCartModal: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  doneShoppingSpree: PropTypes.func.isRequired,
+  showShareModal: PropTypes.func.isRequired
 };
