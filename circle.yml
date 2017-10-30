@@ -13,6 +13,9 @@ dependencies:
     - yarn run prod
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
     - gem install bundler
+  override:
+    - bundle install:
+      timeout: 180
 
 machine:
   ruby:
