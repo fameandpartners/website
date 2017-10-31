@@ -1,10 +1,10 @@
 module Forms
   class MyerStylingSession < Reform::Form
-    AVAILABLE_TIMES               = %w(morning midday afternoon evening)
-    SESSION_TYPES                 = ['In person stylist appointment at Myer', 'Email', 'Video Chat', 'Phone']
-    TYPES_REQUIRES_EMAIL          = ['In person stylist appointment at Myer', 'Email', 'Video Chat']
-    TYPES_REQUIRES_PHONE          = ['In person stylist appointment at Myer', 'Phone']
-    TYPES_REQUIRES_PREFERRED_TIME = ['In person stylist appointment at Myer', 'Phone', 'Video Chat']
+    AVAILABLE_TIMES               = ['Thursday, 11-2PM', 'Friday, 11-2PM']
+    SESSION_TYPES                 = ['In person stylist appointment at Myer Store, Sydney City', 'In person stylist appointment at Myer Store, Westfield Bondi Junction', 'Email', 'Video Chat', 'Phone']
+    TYPES_REQUIRES_EMAIL          = ['In person stylist appointment at Myer Store, Sydney City', 'In person stylist appointment at Myer Store, Westfield Bondi Junction', 'Email', 'Video Chat']
+    TYPES_REQUIRES_PHONE          = ['In person stylist appointment at Myer Store, Sydney City', 'In person stylist appointment at Myer Store, Westfield Bondi Junction', 'Phone']
+    TYPES_REQUIRES_PREFERRED_TIME = ['In person stylist appointment at Myer Store, Sydney City', 'In person stylist appointment at Myer Store, Westfield Bondi Junction', 'Phone', 'Video Chat']
 
     property :full_name, virtual: true
     property :session_type, virtual: true

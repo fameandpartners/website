@@ -85,9 +85,6 @@
         $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').hide().find('.required').hide().prop('required', false);
 
         switch (sessionType) {
-          case "in person stylist appointment at myer":
-            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
-            break;
           case "email":
             $('.js-en-field-email').closest('.row').show().find('.required').show().prop('required', true);
             break;
@@ -98,6 +95,7 @@
             $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
             break;
           default:
+            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
             break;
         }
       });
