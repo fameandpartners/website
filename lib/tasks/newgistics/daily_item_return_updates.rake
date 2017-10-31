@@ -21,7 +21,7 @@ namespace :newgistics do
       res['response']['Returns'].each do |item_return|
         order = Spree::Order.find_by_number(item_return['RmaNumber'])
         item_return['Items']&.each do |item|
-          line_items = order.line_items.select { |li| CustomItemSku.new(li) == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
+          line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
                             .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
           line_items.each do |li| # iterate over line_items and and move them along event progression.
             receive_return(order, li)
@@ -35,10 +35,10 @@ namespace :newgistics do
 
         end
         failed_items = order.line_items.select do |li|
-          (CustomItemSku.new(li) == item['SKU']) && (li.item_return.status != 'Complete') # get items that were returned and invalid
+          (CustomItemSku.new(li).call == item['SKU']) && (li.item_return.status != 'Complete') # get items that were returned and invalid
         end
 
-        failed_item_skus = failed_items.map { |li| li.personalization.sku }
+        failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
 
         unless failed_items.empty?
 
