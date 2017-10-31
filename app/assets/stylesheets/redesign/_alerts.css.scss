@@ -38,7 +38,7 @@
       color: $c-neutral-white;
       font-weight: 600;
       padding-left: 2px;
-      @extend .link-underline;
+      border-bottom: 1px solid $c-neutral-white;
     }
 
   }
