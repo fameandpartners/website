@@ -10,7 +10,7 @@
           .ContentCopy.text-center
             h1.h2.Heading.Heading--medium Win a $6k bridal fashion and beauty experience!
 
-            p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, The W Hotel, Stylisted, The Daily Edited, The Buff, Blushington and more.
+            p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, W New York - Union Square, Stylisted, The Daily Edited, The Buff, Blushington and more.
 
             p
               a.btn.btn-black.CtaBtn.CtaBtn--no-margin-top href="#form"
@@ -26,7 +26,7 @@
             .ContentCopy
               h1.title.Heading--medium Win a $6k bridal fashion and beauty experience!
 
-              p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, The W Hotel, Stylisted, The Daily Edited, The Buff, Blushington and more.
+              p With the ultimate prize package for the bride and her bridesmaids–including custom dresses from Fame and Partners and incredible prizes from Maybelline, W New York - Union Square, Stylisted, The Daily Edited, The Buff, Blushington and more.
 
               a.btn.btn-black.CtaBtn href="#form"
                 | Enter to Win
@@ -50,7 +50,7 @@
 
           .col-md-3
             = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-w-hotel.png', class: "Prizes__logos"
-            p From The W Hotel: A 2-night stay at The W Union Square in New York City, worth $1,000
+            p From W New York - Union Square: A 2-night stay at the W - Union Square in New York City, worth $1,000
 
           .col-md-3
             = image_tag 'landingpages/wedding-sweepstakes/logo-prizes-stylisted.png', class: "Prizes__logos"
@@ -100,11 +100,11 @@
 
         .col-md-4.col-xs-12
           .ContentCopy__partner
-            = image_tag "landingpages/wedding-sweepstakes/logo-w-hotel.png", alt: "W Hotel Union Square"
+            = image_tag "landingpages/wedding-sweepstakes/logo-w-hotel.png", alt: "W New York - Union Square"
 
-            p With chic accommodations and a prime location offering an innovative mix of film, art, music, and fine dining, The W New York Union Square seamlessly blends old-school grandeur and avant-garde style.
+            p With chic accommodations and a prime location offering an innovative mix of film, art, music, and fine dining, W New York - Union Square seamlessly blends old-school grandeur and avant-garde style.
 
-            p #{link_to "Visit W Hotel Union Square", "http://www.wnewyorkunionsquare.com", target: "_blank", class: "ContentCopy__link link-underline"}
+            p #{link_to "Visit W New York - Union Square", "http://www.wnewyorkunionsquare.com", target: "_blank", class: "ContentCopy__link link-underline"}
 
         .col-md-4.col-xs-12
           .ContentCopy__partner
@@ -153,36 +153,39 @@
         .row
           .col-md-4
             .item.bordered
-              a href="/bespoke-bridal-collection"
+              a href="#{wedding_consultation_path}"
                 = image_tag 'landingpages/wedding-sweepstakes/tile-1.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
                 .item-copy
                   h3 Free wedding styling
                   p.summary Fame and Partners’ wedding concierge will help you put your entire bridal party look together–for free.
 
-                  span.link-underline Learn More
+                  .SectionTiles__Cta
+                    span.link-underline Learn More
 
           .col-md-4
             .item.bordered
-              a href="#{modern_bridesmaid_collection_path}"
+              a href="/bespoke-bridal-collection"
                 = image_tag 'landingpages/wedding-sweepstakes/tile-2.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
                 .item-copy
                   h3 Bespoke bridal gowns
                   p.summary An easy, convenient way to find custom-made, fashion-forward bridal starting at just $299.
 
-                  span.link-underline Shop Now
+                  .SectionTiles__Cta
+                    span.link-underline Shop Now
 
           .col-md-4
             .item.bordered
-              a href="#{wedding_consultation_path}"
+              a href="#{modern_bridesmaid_collection_path}"
                 = image_tag 'landingpages/wedding-sweepstakes/tile-3.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
                 .item-copy
                   h3 Individually customized bridesmaid dresses
                   p.summary Custom-made to suit each individual body in a way that’s cohesive (and actually cool).
 
-                span.link-underline Start Customizing
+                .SectionTiles__Cta
+                  span.link-underline Start Customizing
 
 
 - content_for :body_end do

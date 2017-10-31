@@ -42,6 +42,9 @@ class Products::CollectionsController < Products::BaseController
                 :set_collection_seo_meta_data
 
   def show
+    # for Best Sellers A/B testing...
+    @facebook_ranking_opt_in = true
+
     @optimizely_opt_in = true
     @zopim_opt_out = true
     @filter = Products::CollectionFilter.read

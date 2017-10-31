@@ -11,8 +11,9 @@ export default class Onboarding extends FirebaseComponent
         this.join = this.join.bind(this);
     }
 
-    join()
+    join(evt)
     {
+        evt.preventDefault();
         let context = this;
 
 
@@ -21,7 +22,7 @@ export default class Onboarding extends FirebaseComponent
         if( shoppingSpreeId == null )
         {
             shoppingSpreeId = this.createNewShoppingSpree();
-            
+
             this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' );
             this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." );
             this.createFamebotShareDressMessage( 1481,
@@ -47,17 +48,17 @@ export default class Onboarding extends FirebaseComponent
 
         let icon = Math.floor(Math.random() * 20);
         this.createJoinedMessage(
-            this.nameInput.value,            
+            this.nameInput.value,
             this.emailInput.value,
             icon
         );
-        
-        context.props.doneOnboarding( 
+
+        context.props.doneOnboarding(
             this.emailInput.value,
             this.nameInput.value,
             icon,
             shoppingSpreeId );
-        
+
 
     }
 
@@ -139,29 +140,43 @@ export default class Onboarding extends FirebaseComponent
                 </div>
 
                 <div className="shspree-signup-section">
-                  <div id="enter-email-text" className="row">
-                    <div className="base-text text-center col-xs-8 col-xs-push-2">
-                      Enter your name and email to start saving.
+                  <form onSubmit={this.join}>
+                    <div id="enter-email-text" className="row">
+                      <div className="base-text text-center col-xs-8 col-xs-push-2">
+                        Enter your name and email to start saving.
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="row top-padding-sm bottom-padding-sm">
-                    <div className="col-xs-12 col-lg-5 float-none margin--center">
-                      <input className="form-control input-lg" type="text" placeholder="Enter your name" ref={(input) => { this.nameInput = input; }}></input>
+                    <div className="row top-padding-sm bottom-padding-sm">
+                      <div className="col-xs-12 col-lg-5 float-none margin--center">
+                        <input
+                          className="form-control input-lg"
+                          type="text"
+                          placeholder="Enter your name"
+                          required
+                          ref={(input) => { this.nameInput = input; }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="row bottom-padding-sm">
-                    <div className="col-xs-12 col-lg-5 float-none margin--center">
-                      <input className="form-control input-lg" type="text" placeholder="Enter your email" ref={(input) => { this.emailInput = input; }}></input>
+                    <div className="row bottom-padding-sm">
+                      <div className="col-xs-12 col-lg-5 float-none margin--center">
+                        <input
+                          className="form-control input-lg"
+                          type="email"
+                          placeholder="Enter your email"
+                          required
+                          ref={(input) => { this.emailInput = input; }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="row">
-                    <div  className="col-xs-12 col-lg-5 float-none margin--center">
-                      <a onClick={this.join} className="btn btn-lrg btn-black btn-block">Start Clique</a>
+                    <div className="row bottom-padding-lg">
+                      <div  className="col-xs-12 col-lg-5 float-none margin--center">
+                        <button type="submit" role="button" className="btn btn-lrg btn-black btn-block">Start Clique</button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
 
               </div>
