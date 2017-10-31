@@ -11,13 +11,13 @@
 - else
   // TEMPORARY: Sale banner for the "BUY 2, GET 1" campaign
   - if custom_sale_banner_active?
-    #sale-banner.alert-sale.custom-sale-banner-top role="alert"
+    #sale-banner.alert-sale.custom-sale-banner-top.custom-sale-banner-top--brown role="alert"
       .outer-wrap
           .inner-wrap
             .title-wrap
               .title
                 = link_to "/holiday-party-survival-kit"
-                  | Create your Holiday Party Survival Kit - <span class="alert-sale-cta link-underline-lighter">Buy 2, Get 1 Free</span>
+                  | Create your Holiday Party Survival Kit - Buy 2, Get 1 Free
 
   // Temporary: Price Drop (AU-only) campaign
   - if price_drop_au_active?

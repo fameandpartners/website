@@ -48,6 +48,17 @@
     color: $c-neutral-white;
   }
 
+  &.custom-sale-banner-top--brown {
+    background: #e4d3c2;
+
+    a,
+    .alert-sale-cta {
+      color: $c-neutral-black;
+      font-weight: 600;
+    }
+
+  }
+
   .clock {
     display: none;
     padding-bottom: 10px;
