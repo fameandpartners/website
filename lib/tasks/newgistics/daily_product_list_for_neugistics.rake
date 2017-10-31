@@ -23,9 +23,9 @@ namespace :newgistics do
   end
 
   def generate_csv(line_items)
-    csv_headers = ['SKU', 'Description', 'WeightInOunces', 'Height', 'Width', 'Depth', 'Value',
-                   'RetailValue', 'UPC', 'Category', 'Supplier', 'Notes',
-                   'SupplierCode', 'Image URL']
+    csv_headers = ['SKU', 'Description', 'WeightInOunces','Height', 'Width', 'Depth', 'Value',
+                   'RetailValue','UPC', 'Category', 'Supplier', 'Notes',
+                   'SupplierCode', 'Image URL', 'HarmonizationCode', 'ProductCountryOfOrigin']
     temp_file = Tempfile.new('foo') # Creates self garbage collecting temp file
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers
@@ -34,7 +34,7 @@ namespace :newgistics do
         csv << [CustomItemSku.new(li).call, product.description, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
                 GlobalSku.find_by_product_id(product.id).upc, product.category.category, product.factory.name, '',
-                CustomItemSku.new(li).call, product.images&.first&.attachment&.url]
+                CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
 

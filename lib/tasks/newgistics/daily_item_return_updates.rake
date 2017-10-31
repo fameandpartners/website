@@ -19,22 +19,23 @@ namespace :newgistics do
       Raven.capture_exception(res['response'].to_s)
     else
       res['response']['Returns'].each do |item_return|
-        order = Spree::Order.find_by_number(item_return['RmaNumber'].to_i)
+        order = Spree::Order.find_by_number(item_return['RmaNumber'])
         item_return['Items']&.each do |item|
-          line_items = order.line_items.select { |li| li.personalization.sku == item['SKU'] }
-                            .take(item['QtyReturnedToStock'].to_i)
-          line_items.each do |li|
+          line_items = order.line_items.select { |li| CustomItemSku.new(li) == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
+                            .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
+          line_items.each do |li| # iterate over line_items and and move them along event progression.
             receive_return(order, li)
 
             accept_return(order, li)
 
             refund_return(order, line_item)
-            NewgisticsRefundMailer.email(order,li)
+
+            NewgisticsRefundMailer.email(order, li)
           end
 
         end
         failed_items = order.line_items.select do |li|
-          li.personalization.sku == item['SKU'] && li.item_return.status != 'Complete'
+          (CustomItemSku.new(li) == item['SKU']) && (li.item_return.status != 'Complete') # get items that were returned and invalid
         end
 
         failed_item_skus = failed_items.map { |li| li.personalization.sku }
@@ -49,10 +50,10 @@ namespace :newgistics do
           end
 
           damaged_inventory_items = inventories.select do |item|
-            item['reasonCode']['id'].to_i < 4 && failed_item_skus.include?(item['SKU'])
+            item['reasonCode']['id'].to_i < 4 && failed_item_skus.include?(item['SKU']) # codes 1,2,3 represent damage in some form
           end
           quarantined_inventory_items = inventories.select do |item|
-            item['reasonCode']['id'].to_i == 10 && failed_item_skus.include?(item['SKU'])
+            item['reasonCode']['id'].to_i == 10 && failed_item_skus.include?(item['SKU']) # codes 10 represent quarantined
           end
         end
 
