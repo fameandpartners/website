@@ -17,6 +17,7 @@ export default class ChatList extends FirebaseComponent
     this.addChatMessage = this.addChatMessage.bind(this);
     this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.showExitModal = this.showExitModal.bind(this);
     this.state =
       {
         messages:  [],
@@ -94,6 +95,7 @@ export default class ChatList extends FirebaseComponent
     this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
   }
 
+  
   printError( error )
   {
     console.log( 'Chat List got error' );
@@ -128,10 +130,11 @@ export default class ChatList extends FirebaseComponent
     this.scrollToBottom();
   }
 
-  exit()
+  showExitModal()
   {
-    console.log( 'exit' );
+    this.props.updateExitModalStatus();
   }
+  
   render()
   {
     return(
@@ -141,7 +144,7 @@ export default class ChatList extends FirebaseComponent
         {this.props.name}
       </div>
         <div className="col-xs-8 header-name text-right">
-        <span className="chat-list-exit link" onClick={this.props.doneShoppingSpree} role="button">
+        <span className="chat-list-exit link" onClick={this.showExitModal} role="button">
         Exit
       </span>
         <span className="link" onClick={this.props.showShareModal} role="button">
@@ -172,5 +175,6 @@ ChatList.propTypes = {
   showAddToCartModal: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   doneShoppingSpree: PropTypes.func.isRequired,
-  showShareModal: PropTypes.func.isRequired
+  showShareModal: PropTypes.func.isRequired,
+  updateExitModalStatus: PropTypes.func.isRequired
 };

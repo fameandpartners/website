@@ -8,50 +8,52 @@ import FirebaseComponent from './FirebaseComponent';
 import CartItem from './CartItem';
 import request from 'superagent';
 
+
 export default class Cart extends FirebaseComponent
 {
-    constructor( props )
-    {
-        super(props);
-
-        this.state =
-            {
-                discount: "0%",
-                totalInSharedCart: 0,
-                totalInMyCart: 0,
-                myItems: [],
-                totalOff: 0
-
-            };
-        this.addToCart = this.addToCart.bind(this);
-        this.recalculateDiscount = this.recalculateDiscount.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
-        this.checkout = this.checkout.bind(this);
-    }
-
-    addToCart( data, previousChildKey )
-    {
-        this.setState(
-            {
-                totalInSharedCart: this.state.totalInSharedCart + Math.round( parseFloat( data.val().dress.price ) )
-            }
-        );
-
-        if( data.val().entry_for.email === this.props.email  )
-        {
-            this.setState(
-                {
-                    myItems: this.state.myItems.concat( [
-                            <CartItem key={data.key} firebaseKey={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
-                    totalInMyCart: this.state.totalInMyCart + Math.round(data.val().dress.price)
-                }
-            );
-        }
-        this.recalculateDiscount();
-    }
-
-  checkoutOneItem( position )
+  constructor( props )
   {
+    super(props);
+
+    this.state =
+      {
+        discount: "0%",
+        totalInSharedCart: 0,
+        totalInMyCart: 0,
+        myItems: [],
+        totalOff: 0
+
+      };
+    this.addToCart = this.addToCart.bind(this);
+    this.recalculateDiscount = this.recalculateDiscount.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.checkout = this.checkout.bind(this);
+  }
+
+  addToCart( data, previousChildKey )
+  {
+    this.setState(
+      {
+        totalInSharedCart: this.state.totalInSharedCart + Math.round( parseFloat( data.val().dress.price ) )
+      }
+    );
+
+    if( data.val().entry_for.email === this.props.email  )
+    {
+      this.setState(
+        {
+          myItems: this.state.myItems.concat( [
+              <CartItem key={data.key} firebaseKey={data.key} dress={data.val().dress} delete={this.deleteItem}/>] ),
+          totalInMyCart: this.state.totalInMyCart + Math.round(data.val().dress.price)
+        }
+      );
+    }
+    this.recalculateDiscount();
+  }
+
+  checkoutOneItem( position, agent )
+  {
+    console.log( "Position = " + position + " length = " + this.state.myItems.length );
     if( position >= this.state.myItems.length )
     {
       this.props.doneShoppingSpree();
@@ -60,7 +62,12 @@ export default class Cart extends FirebaseComponent
     {
       let dress = this.state.myItems[position].props.dress;
       let context = this;
+      
+      const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
+
       request.post('/user_cart/products')
+        .withCredentials()
+        .set( 'X-CSRF-TOKEN', csrfToken )
         .send(
           {
             variant_id: dress.product_variant_id,
@@ -73,149 +80,148 @@ export default class Cart extends FirebaseComponent
             shopping_spree_item_count: this.state.myItems.length
           }
         ).end((error, response) => {
-          context.checkoutOneItem( position + 1 );
-          console.log( response.body );
-
+          console.log( 'done with  add' );
+          context.checkoutOneItem( position + 1, agent );
         } );
     }
   }
 
   checkout()
   {
-    this.checkoutOneItem( 0 );
+    this.checkoutOneItem( 0, null );
   }
 
-    deleteItem( firebaseKey )
+  deleteItem( firebaseKey )
+  {
+    let index = -1;
+    for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
     {
-        let index = -1;
-        for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
-        {
-            if( this.state.myItems[i].props.firebaseKey == firebaseKey )
-            {
-                index = i;
-            }
-        }
-        this.state.myItems.splice( index, 1 );
-        this.setState (
-            {
-                myItems: this.state.myItems
-            }
-        );
-
-        this.cartDB.child( firebaseKey ).remove();
-        this.recalculateDiscount(this.state.myItems.length);
-        this.createFamebotMessage(
-          "Oh No! " + this.props.name + " just removed an item from their cart.  You are now getting " + this.calculateDiscount({totalItems: this.state.myItems.length}) +  "% off", "discount",
-          "discount", // type
-        );
+      if( this.state.myItems[i].props.firebaseKey == firebaseKey )
+      {
+        index = i;
+      }
     }
+    this.state.myItems.splice( index, 1 );
+    this.setState (
+      {
+        myItems: this.state.myItems
+      }
+    );
 
-    recalculateDiscount(count)
-    {
-        let discount = this.calculateDiscount({
-          totalItems: count || this.state.myItems.length
-        });
+    this.cartDB.child( firebaseKey ).remove();
+    this.recalculateDiscount();
+    this.createFamebotMessage(
+      "Oh No! " + this.props.name + " just removed an item from their cart.  You are now getting " + this.calculateDiscount({totalItems: this.state.myItems.length}) +  "% off", "discount",
+      "discount", // type
+    );
+  }
 
-        this.setState(
-            {
-                discount: discount + "%",
-                totalOff: (discount / 100.0) * this.state.totalInMyCart
-            }
-        );
+  recalculateDiscount(count)
+  {
+    let discount = this.calculateDiscount({
+      totalItems: count || this.state.myItems.length
+    });
 
-        this.props.updateDiscount(discount);
-    }
+    this.setState(
+      {
+        discount: discount + "%",
+        totalOff: (discount / 100.0) * this.state.totalInMyCart
+      }
+    );
 
-    valueAdded(data){
-      this.recalculateDiscount
-    }
+    this.props.updateDiscount(discount);
+  }
 
-    startListeningToFirebase()
-    {
-        super.connectToFirebase();
-        this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
-        this.cartDB.on( 'child_added', this.addToCart );
-        this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
-    }
+  valueAdded(data){
+    this.recalculateDiscount
+  }
 
-
-
-    stopListeningToFirebase()
-    {
-        this.cartDB.off( 'child_added', this.addToCart );
-    }
-
-    componentDidMount()
-    {
-        this.startListeningToFirebase();
-    }
-
-    componentWillUnmount()
-    {
-        this.stopListeningToFirebase();
-    }
-
-    render()
-    {
-        return(
-            <div className="shopping-spree-cart">
-              <div className="row header vertical-align">
+  startListeningToFirebase()
+  {
+    super.connectToFirebase();
+    this.cartDB = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/cart" );
+    this.cartDB.on( 'child_added', this.addToCart );
+    this.cartDB.on( 'value', (data) => { if( data && data.val() && Object.keys(data.val()) ) { this.recalculateDiscount(Object.keys(data.val()).length) } });
+  }
 
 
-                <div className="header__inner">
-                  <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
-                    <div className="left-caret"></div>
-                    <div className="back-to-spree-text shopping-spree-headline">
-                      Back to Clique
-                    </div>
-                  </div>
-                  <div className="col-xs-4 col-md-4 text-center">
-                    Your Bag
-                  </div>
-                  <div className="col-xs-4 col-md-4 text-right">
-                    {this.state.discount} off
-                  </div>
-                </div>
-              </div>
 
-              <div className="row">
-                <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
-                </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                  ${this.state.totalOff.toFixed(2)}
-                </div>
-              </div>
-              <div className="row">
-                <div className="no-left-gutter col-xs-push-1 col-xs-4">
-                  <strong>Total</strong>
-                </div>
-                <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
-                  <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
-                </div>
-              </div>
+  stopListeningToFirebase()
+  {
+    this.cartDB.off( 'child_added', this.addToCart );
+  }
 
-              <div className="row checkout-btn">
-                <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
-              </div>
-              <div className="shopping-spree-contents">
-                <div className="row">
-                  <div className="col-xs-18">
-                    <ul className="cart-item-list">
-                      {this.state.myItems}
-                    </ul>
-                  </div>
-                </div>
+  componentDidMount()
+  {
+    this.startListeningToFirebase();
+  }
+
+  componentWillUnmount()
+  {
+    this.stopListeningToFirebase();
+  }
+
+  render()
+  {
+    return(
+      <div className="shopping-spree-cart">
+        <div className="row header vertical-align">
+
+
+          <div className="header__inner">
+            <div className="back-to-spree col-md-4 col-xs-4" onClick={this.props.transitionToChat}>
+              <div className="left-caret"></div>
+              <div className="back-to-spree-text shopping-spree-headline">
+                Back to Clique
               </div>
             </div>
-        );
-    }
+            <div className="col-xs-4 col-md-4 text-center">
+              Your Bag
+            </div>
+            <div className="col-xs-4 col-md-4 text-right">
+              {this.state.discount} off
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="no-left-gutter col-xs-push-1 col-xs-4">{this.state.discount} off
+          </div>
+          <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
+            ${this.state.totalOff.toFixed(2)}
+          </div>
+        </div>
+        <div className="row">
+          <div className="no-left-gutter col-xs-push-1 col-xs-4">
+            <strong>Total</strong>
+          </div>
+          <div className="no-right-gutter col-xs-push-1 col-xs-6 text-right">
+            <strong>${(this.state.totalInMyCart - this.state.totalOff).toFixed(2)}</strong>
+          </div>
+        </div>
+
+        <div className="row checkout-btn">
+          <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
+        </div>
+        <div className="shopping-spree-contents">
+          <div className="row">
+            <div className="col-xs-18">
+              <ul className="cart-item-list">
+                {this.state.myItems}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 Cart.propTypes = {
-    firebaseAPI: PropTypes.string.isRequired,
-    firebaseDatabase: PropTypes.string.isRequired,
-    firebaseNodeId: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    updateDiscount: PropTypes.func.isRequired
+  firebaseAPI: PropTypes.string.isRequired,
+  firebaseDatabase: PropTypes.string.isRequired,
+  firebaseNodeId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  updateDiscount: PropTypes.func.isRequired
 }

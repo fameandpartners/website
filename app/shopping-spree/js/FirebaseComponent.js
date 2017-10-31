@@ -40,9 +40,8 @@ export default class FirebaseComponent extends React.Component
                     storageBucket: this.props.firebaseDatabase + ".appspot.com",
                     messagingSenderId: "868619391913"
                 };
-            console.log( 'connecting to firebase' );
 //            firebase.database.enableLogging(true)
-            console.log( firebase.initializeApp( config ) );
+          firebase.initializeApp( config );
        }
     }
 
@@ -60,8 +59,6 @@ export default class FirebaseComponent extends React.Component
 
     createJoinedMessage( name, email, icon )
     {
-        console.log( 'creating joined message' );
-        console.log( this.firebaseNodeId );
         let newMessage = this.databaseRef( 'chats' ).push();
         newMessage.set({ type: 'joined',
                          created_at: firebase.database.ServerValue.TIMESTAMP,
