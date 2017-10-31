@@ -56,8 +56,8 @@
 // @import 'transient_content';
 //
 // // Plugins
-// @import '../vendor/bower_components/slick-carousel/slick/slick';
-// @import 'redesign/vendor/slick-carousel';
+@import '../vendor/bower_components/slick-carousel/slick/slick';
+@import 'redesign/vendor/slick-carousel';
 // // Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,
 // // but I chose to duplicate the file, rather than rewrite any of the current usages.
 // @import 'libs/jquery-ui-1.10.4.custom';
@@ -94,7 +94,7 @@
 // @import 'redesign/components/panels/content-collapse-expand';
 // @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
-// @import 'redesign/components/carousel-dot-nav';
+@import 'redesign/components/carousel-dot-nav';
 // @import 'redesign/components/cards/cards';
 // @import 'redesign/components/legacy/legacy-carousel';
 // @import 'redesign/components/overlay';

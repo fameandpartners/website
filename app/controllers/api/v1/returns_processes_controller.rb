@@ -29,7 +29,7 @@ module Api
           return
         end
 
-        fetched_order = Spree::Order.where(email: params['email'], number: params['order_number']).first
+        fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
           respond_with Orders::OrderPresenter.new(fetched_order)
@@ -86,9 +86,8 @@ module Api
           error_response(:RETURN_EXISTS)
           return
         end
-
         if (has_us_shipping_address?(request_object[:order_id]))
-          unless(return_label = create_label(request_object[:order_id]))
+          unless(return_label = ReturnsProcessesControllerHelper.create_label(request_object[:order_id]))
             error_response(:RETRY, :LABEL_FAILED)
             return
           end
