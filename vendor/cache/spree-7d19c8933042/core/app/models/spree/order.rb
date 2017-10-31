@@ -131,7 +131,7 @@ module Spree
     end
 
     def display_item_total
-      Spree::Money.new(item_total, { :currency => currency })
+      Spree::Money.new(line_items.reject {|x| x.product.name.downcase == 'return_insurance'}.sum(&:amount), { :currency => currency })
     end
 
     def display_adjustment_total
@@ -339,7 +339,9 @@ module Spree
     # Creates new tax charges if there are any applicable rates. If prices already
     # include taxes then price adjustments are created instead.
     def create_tax_charge!
-      Spree::TaxRate.adjust(self)
+      self.with_lock do
+        Spree::TaxRate.adjust(self)
+      end
     end
 
     # Creates a new shipment (adjustment is created by shipment model)

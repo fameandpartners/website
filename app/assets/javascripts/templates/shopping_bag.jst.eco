@@ -49,66 +49,68 @@
     <% if @cart.products.length: %>
     <div class="cart-items">
       <% for product in @cart.products: %>
-      <div class="row cart-item" data-id="<%= product.line_item_id %>">
-        <div class="cart-item-image-holder col-xs-5">
-          <a href="<%= product.path %>">
-            <% if product.name != "Gift" : %>
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+        <% if product.name != "RETURN_INSURANCE" : %>
+        <div class="row cart-item" data-id="<%= product.line_item_id %>">
+          <div class="cart-item-image-holder col-xs-5">
+            <a href="<%= product.path %>">
+              <% if product.name != "Gift" : %>
+                <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
 
-              <% if product.price_drop_au_product: %>
-                <div class="ribbon-wrapper PriceDrop">
-                  <div class="ribbon-txt">
-                    New Lower Price
+                <% if product.price_drop_au_product: %>
+                  <div class="ribbon-wrapper PriceDrop">
+                    <div class="ribbon-txt">
+                      New Lower Price
+                    </div>
                   </div>
-                </div>
-              <% else if product.making_options.length: %>
-                <div class="ribbon-wrapper express-making">
-                  <div class="ribbon-txt">
-                    <%= product.making_options[0].name %>
+                <% else if product.making_options.length: %>
+                  <div class="ribbon-wrapper express-making">
+                    <div class="ribbon-txt">
+                      <%= product.making_options[0].name %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
+
               <% end %>
-
-            <% end %>
-          </a>
-        </div>
-        <div class="cart-item-info col-xs-7">
-          <a class="pull-right remove-product" href="javascript:;">
-            <span class="icon btn-close"></span>
-          </a>
-          <div class="heading txt-truncate-1">
-            <% if product.name != "Gift" : %>
-            <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
-            <% else :%>
-            <a class="cart-item-title" href="#"><%= product.name %></a>
-            <% end %>
+            </a>
           </div>
-          <div class="cart-item-price"><%= product.price.display_price %></div>
-          <dl class="cart-item-description">
-            <% if product.size != null : %>
-            <dd><span class="line-item-description-heading">Size:</span> <span><%= product.size.presentation %></span></dd>
-            <% end %>
-            <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
+          <div class="cart-item-info col-xs-7">
+            <a class="pull-right remove-product" href="javascript:;">
+              <span class="icon btn-close"></span>
+            </a>
+            <div class="heading txt-truncate-1">
+              <% if product.name != "Gift" : %>
+              <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+              <% else :%>
+              <a class="cart-item-title" href="#"><%= product.name %></a>
+              <% end %>
+            </div>
+            <div class="cart-item-price"><%= product.price.display_price %></div>
+            <dl class="cart-item-description">
+              <% if product.size != null : %>
+              <dd><span class="line-item-description-heading">Size:</span> <span><%= product.size.presentation %></span></dd>
+              <% end %>
+              <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
 
-            <% if product.from_wedding_atelier: %>
-              <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
-            <% else: %>
-              <% if product.display_height: %>
-                <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+              <% if product.from_wedding_atelier: %>
+                <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
               <% else: %>
-                <dd><span>Skirt Length:</span> <span><%= product.height %></span></dd>
+                <% if product.display_height: %>
+                  <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
+                <% else: %>
+                  <dd><span>Skirt Length:</span> <span><%= product.height %></span></dd>
+                <% end %>
               <% end %>
-            <% end %>
 
-            <dd>
-              <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
-              <% if product.making_options && product.making_options.length > 0: %>
-                <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
-              <% end %>
-            </dd>
-          </dl>
+              <dd>
+                <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
+                <% if product.making_options && product.making_options.length > 0: %>
+                  <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
+                <% end %>
+              </dd>
+            </dl>
+          </div>
         </div>
-      </div>
+        <% end %>
       <% end %>
     </div>
     <% else: %>
@@ -127,10 +129,20 @@
             <p>
               Shipping <span class="value"><%= @cart.display_shipment_total %></span>
             </p>
+            <% if @hasReturnInsurance() : %>
+            <p>
+              Returns Deposit <span class="value">$25.00</span>
+            </p>
+            <% end %>
+            <% if @hasReturnDiscount() : %>
+            <p>
+              Returns Savings (10%)<span class="value">-<%= @cart.delivery_discount %></span>
+            </p>
+            <% end %>
             <p>
               <% # TODO: this is just a workaround due to Spree's limitations. We should compare numbers, not strings. %>
-              <% if @cart.display_promotion_total != "$0.00": %>
-              Promotion (<span class="promocode-name"><%= @cart.promocode %></span>)<span class="value"><%= @cart.display_promotion_total %></span>
+              <% if @cart.display_promotion_total != "$0.00" && @cart.promocode != 'DELIVERYDISC' : %>
+              Additional Savings <span class="value"><%= @cart.display_promotion_total %></span>
               <% end %>
             </p>
             <% if @cart.taxes: %>

@@ -5,6 +5,7 @@ AdminUi::Engine.routes.draw do
 
     collection do
       get :weekly_refund, action: :index, scope: :refund_queue
+      get ':item_return_id/label', action: :generate_new_return_label
       post :bulk_refund_process
     end
   end
@@ -59,6 +60,7 @@ AdminUi::Engine.routes.draw do
   namespace :content do
     resources :pages
     resources :contentful
+    resources :upc, only: [:index, :new, :create]
     post 'contentful_route' => 'contentful#create_route'
   end
 

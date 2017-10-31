@@ -6,6 +6,10 @@
 
 = render :partial => 'javascript'
 
+/ for Optimizely Best Sellers - A/B...
+- if request.env['PATH_INFO'].include? 'best-sellers'
+  = render partial: 'js_optimizely'
+
 - if banner.display?
   .category-header
     .media-wrap
@@ -20,7 +24,7 @@
     = render :partial => 'sidebar_mobile'
 
   .container
-    .FilterSort__mobileTrigger.hidden-md.hidden-lg
+    .FilterSort__mobileTrigger.hidden-md.hidden-lg.js-optimizely-control
       .row
         .col-xs-12
           div.js-trigger-filter-mobile.FilterSort__mobileTriggerBtn.FilterSort__border href="javacsript:;"
@@ -35,10 +39,14 @@
     .row
       = render :partial => 'breadcrumb'
       = render :partial => 'sort'
-      .col-lg-3.col-md-4.side-panel.hidden-sm.hidden-xs
+      .col-lg-3.col-md-4.side-panel.hidden-sm.hidden-xs.js-optimizely-control
         = render :partial => 'sidebar'
 
-      .col-lg-9.col-md-8.products-collection
+      .col-lg-12.products-collection.hidden.js-optimizely-test
+        .row.products-set.js-products-collection-wrap
+          = render partial: 'best_sellers_test'
+
+      .col-lg-9.col-md-8.products-collection.js-optimizely-control#js-fb-optimizely-control
         .row.products-set.js-products-collection-wrap
           = render partial: 'products_with_content', locals: {col: 3}
           - if request.path.include?("/dresses/plus-size")

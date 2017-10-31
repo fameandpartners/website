@@ -24,7 +24,7 @@ module ReturnsProcessesControllerHelper
 
   def get_user
     if params['email'].present?
-      Spree::User.where(email: params['email']).first
+      Spree::User.where('lower(email) = ?', params['email'].downcase).first
     else
       spree_current_user
     end
@@ -105,7 +105,7 @@ module ReturnsProcessesControllerHelper
   end
 
 
-  def create_label(order_id)
+  def self.create_label(order_id)
     order = Spree::Order.find(order_id)
 
     label = Newgistics::ShippingLabel.new(
