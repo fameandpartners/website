@@ -103,7 +103,7 @@ export default class Cart extends FirebaseComponent
         );
 
         this.cartDB.child( firebaseKey ).remove();
-        this.recalculateDiscount();
+        this.recalculateDiscount(this.state.myItems.length);
         this.createFamebotMessage(
           "Oh No! " + this.props.name + " just removed an item from their cart.  You are now getting " + this.calculateDiscount({totalItems: this.state.myItems.length}) +  "% off", "discount",
           "discount", // type
