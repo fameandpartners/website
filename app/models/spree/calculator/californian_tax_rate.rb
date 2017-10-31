@@ -36,7 +36,7 @@ module Spree
                             .map(&:amount)\
                             .sum
 
-        item_total       = order.line_items.map(&:amount).sum
+        item_total       = order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map(&:amount).sum
         order_total      = item_total + adjustment_total
 
         round_to_two_places(order_total * rate.amount)

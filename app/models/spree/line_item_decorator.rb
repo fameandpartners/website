@@ -28,7 +28,13 @@ Spree::LineItem.class_eval do
 
   # Note: it seems we need to store this value in DB.
   def delivery_period
-    delivery_period_policy.delivery_period
+    if self.delivery_date.nil? && self.order.state != 'complete'
+      self.delivery_date = delivery_period_policy.delivery_period
+      self.save!
+    else
+      return delivery_period_policy.delivery_period
+    end
+    return self.delivery_date
   end
 
   def delivery_period_policy
@@ -155,7 +161,15 @@ Spree::LineItem.class_eval do
   end
 
   def store_credit_only_return?
-    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' })
+    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
+  end
+
+  def return_eligible_AC?
+    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  end
+
+  def return_eligible_B?
+    self.order.return_type == 'B' && self.order.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"}
   end
 
   def window_closed?

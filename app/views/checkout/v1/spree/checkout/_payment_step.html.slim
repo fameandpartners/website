@@ -14,6 +14,8 @@ javascript:
   - content_for :inline_javascript do
     | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
+= hidden_field_tag :return_type, 'C'
+
 .row
   .col-xs-12
     h2.checkout-section-title Payment method
@@ -67,7 +69,7 @@ javascript:
       - if @pay_pal_method
         #paypal.text-center.payment-selected.tab-pane role="tabpanel"
           p.hint Place your order and you will complete your purchase via the Paypal.
-          = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'payment-cta btn btn-black btn-block btn-md' do
+          = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'js-returns-abc-paypal payment-cta btn btn-black btn-block btn-md' do
             | Pay with
             =<> image_tag('checkout/logo/paypal-logo-white.png')
 
