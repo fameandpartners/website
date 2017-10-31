@@ -148,15 +148,21 @@ module OrderBot
     end
 
     def make_get_request( url, params = {}) 
-      RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
+      response = RestClient::Request.execute(method: :get, url: "http://api.orderbot.com/#{url}", user: @user, password: @pass)
+      Rails.logger.info(response)
+      response
     end
 
     def make_post_request(url, request_object)
-      RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
+      response = RestClient::Request.execute(method: :post, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
+      Rails.logger.info(response)
+      response
     end
 
     def make_put_request(url, request_object)
-      RestClient::Request.execute(method: :put, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
+      response = RestClient::Request.execute(method: :put, url: "http://api.orderbot.com/#{url}", payload: request_object.to_json, headers: {content_type: :json}, user: @user, password: @pass)
+      Rails.logger.info(response)
+      response
     end
   end
 end

@@ -5,7 +5,7 @@ class OrderBotStatusMailer < ActionMailer::Base
     @order_numbers = order_numbers
     mail(
       to: 'dev@fameandpartners.com',
-      subject: "Order bot order report #{Time.now.to_s}",
+      subject: "Order bot order report #{Time.now.to_s} #{Rails.env}",
       layout: false
     )
   end

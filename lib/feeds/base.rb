@@ -71,11 +71,14 @@ module Feeds
 
         product.variants.each do |variant|
           begin
-            item = get_item_properties(product, variant)
+            # need to weed out inactive color variants
+            if (ProductColorValue.where("product_id = ? and option_value_id = ?", product.id, variant.dress_color.id).first&.active)
+              item = get_item_properties(product, variant)
 
-            has_images = item['image'].present?
-            has_size   = item['size'].present?
-            items.push(item) if has_images && has_size
+              has_images = item['image'].present?
+              has_size   = item['size'].present?
+              items.push(item) if has_images && has_size
+            end
           rescue StandardError => ex
             puts ex
           end
