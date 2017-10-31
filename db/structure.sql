@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.5
+-- Dumped from database version 9.6.2
 -- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
@@ -415,6 +415,40 @@ CREATE SEQUENCE contentful_routes_id_seq
 --
 
 ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
+
+
+--
+-- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE contentful_versions (
+    id integer NOT NULL,
+    change_message character varying(255),
+    payload text,
+    user_id integer,
+    is_live boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE contentful_versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
 
 
 --
@@ -2601,6 +2635,42 @@ ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
 
 
 --
+-- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE return_item_labels (
+    id integer NOT NULL,
+    tracking_number character varying(255),
+    label_url character varying(255),
+    carrier character varying(255),
+    label_image_url character varying(255),
+    label_pdf_url character varying(255),
+    return_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE return_item_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
+
+
+--
 -- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3304,7 +3374,8 @@ CREATE TABLE spree_line_items (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
-    old_price numeric(8,2)
+    old_price numeric(8,2),
+    delivery_date character varying(255)
 );
 
 
@@ -3560,7 +3631,8 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean
+    orderbot_synced boolean,
+    return_type character varying(255)
 );
 
 
@@ -5496,6 +5568,13 @@ ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentf
 
 
 --
+-- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
+
+
+--
 -- Name: custom_dress_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5871,6 +5950,13 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
+
+
+--
+-- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6502,6 +6588,14 @@ ALTER TABLE ONLY contentful_routes
 
 
 --
+-- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY contentful_versions
+    ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: custom_dress_images custom_dress_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6947,6 +7041,14 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels
+    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9612,6 +9714,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
+INSERT INTO schema_migrations (version) VALUES ('20170724212720');
+
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
@@ -9633,3 +9737,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
+
+INSERT INTO schema_migrations (version) VALUES ('20170914013707');
+
+INSERT INTO schema_migrations (version) VALUES ('20170927181851');
+
+INSERT INTO schema_migrations (version) VALUES ('20170928202521');
