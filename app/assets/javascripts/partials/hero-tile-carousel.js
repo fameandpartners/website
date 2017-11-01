@@ -6,7 +6,7 @@
   // Hero Tile Carousel
   slickCarousel.slick({
     autoplay: true,
-    autoplaySpeed: 8000,
+    autoplaySpeed: 4000,
     speed: 1500,
     fade: true,
     arrows: true,
