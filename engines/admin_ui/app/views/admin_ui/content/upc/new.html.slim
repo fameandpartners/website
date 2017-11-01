@@ -22,18 +22,14 @@
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Style number
-            .col-sm-10 = f.text_field :style_number, :class => 'form-control'
-
-        .ibox-content
-          .form-group
-            label.col-sm-2.control-label Style name
-            .col-sm-10 = f.text_field :style_name, :class => 'form-control'
+            label.col-sm-2.control-label Product
+            .col-sm-10 = f.collection_select :product_id, @form.available_products, :id, :name_with_sku,
+            { include_blank: true }, { class: 'chosen-select', data: { selectable_target: '#product_color_value_option_value_id' }}
 
         .ibox-content
           .form-group
             label.col-sm-2.control-label Height
-            .col-sm-10 = f.collection_select :height, @form.available_heights, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
+            .col-sm-10 = f.collection_select :height, @form.available_heights, :first, :last, { include_blank: true }, { class: 'chosen-select' }
 
         .ibox-content
           .form-group

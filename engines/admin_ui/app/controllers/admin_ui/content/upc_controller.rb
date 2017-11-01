@@ -16,6 +16,7 @@ module AdminUi
         @sizes_empty = true if params[:sku_upc][:sizes].blank?
         if @form.validate( params[:sku_upc] ) && params[:sku_upc][:sizes].present?
           @results = {}
+          product = @form.selected_product
           @form.save do |hash|
             ensure_color_exists(
               hash[:color_name].parameterize,
@@ -24,8 +25,8 @@ module AdminUi
             # gather upc numbers for each size combo
             hash[:sizes].each do |size|
               upc = find_or_create_sku(
-                hash[:style_number].downcase,
-                hash[:style_name].upcase,
+                product.sku.squish.downcase,
+                product.name.squish.upcase,
                 hash[:height].upcase,
                 hash[:color_name].parameterize,
                 size
