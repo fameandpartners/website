@@ -30,8 +30,8 @@ namespace :newgistics do
       csv << csv_headers # set headers for csv
       orders.each do |order|
         address = order.ship_address
-        csv << [order.number, order.completed_at, address.firstname, address.lastname, address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso3,
+        csv << [order.number, order.completed_at, address.firstname, address.lastname, '', address.address1,
+                address.address2, address.city, address.state.name, address.zipcode, address.country.iso2,
                 address.email, address.phone, '', 'UPSGR', order.line_items.map {|li| CustomItemSku.new(li).call}.join(','),
                 order.total, order.line_items.map {|li|li.product.name}.join(','), "China" ]
       end
