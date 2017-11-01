@@ -38,7 +38,7 @@
       color: $c-neutral-white;
       font-weight: 600;
       padding-left: 2px;
-      @extend .link-underline;
+      border-bottom: 1px solid $c-neutral-white;
     }
 
   }
@@ -46,6 +46,17 @@
   &.custom-sale-banner-top.PriceDropBanner {
     background: $c-price-drop-bg;
     color: $c-neutral-white;
+  }
+
+  &.custom-sale-banner-top--brown {
+    background: #e4d3c2;
+
+    a,
+    .alert-sale-cta {
+      color: $c-neutral-black;
+      font-weight: 600;
+    }
+
   }
 
   .clock {
