@@ -1,5 +1,4 @@
 ruby:
-
   site_title = get_title()
   site_description = truncate(get_meta_description, length:140)
 
@@ -21,13 +20,7 @@ meta property="og:title" content=get_title
 meta property="og:url" content=get_canonical_href
 meta property="og:description" content=truncate(get_meta_description, length:140)
 meta property="og:site_name" content="Fame and Partners"
-
 meta name="p:domain_verify" content="bca305b234684f817b52dc0131747eb6"
-
-script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
-
-- if !Rails.env.production?
-  meta name="robots" content="noindex, nofollow"
 
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render '/layouts/custom_experience/marketing/sync_trackers'
