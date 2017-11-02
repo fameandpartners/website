@@ -177,8 +177,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   deleteAllItemsFromMyCart(){
-    const { myItems } = this.state;
-    console.log('myItems---->', this.state);
+    const { myItems, name } = this.state;
     const keys = myItems ? Object.keys(myItems) : [];
     let countRemoved = 0;
 
@@ -193,9 +192,9 @@ export default class ShoppingSpree extends FirebaseComponent {
 
     if (countRemoved >= 1){
       this.createFamebotMessage(
-        this.props.name + " left your group! "
+        name + " left your group! "
         + "You are now down to "
-        + this.calculateDiscount({totalItems: myItems.length - countRemoved})
+        + this.calculateDiscount({totalItems: keys.length - countRemoved})
         + "% off", "discount",
         "discount", // type
       );

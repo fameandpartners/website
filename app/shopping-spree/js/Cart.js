@@ -121,9 +121,7 @@ export default class Cart extends FirebaseComponent
   }
 
   calculateCartTotal(myItems = this.state.myItems){
-    console.log('calculateCartTotal....', myItems);
     return myItems.reduce((accum, curr) => {
-      console.log('curr->', curr);
       return accum + curr.props.dress.price;
     }, 0);
   }
