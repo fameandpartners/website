@@ -3,9 +3,6 @@ javascript:
   window.optimizelyHelpers = window.optimizelyHelpers || {};
 
   window.optimizelyHelpers.activateBestSellers = function() {
-    // Your custom logic to decide if the user is in the Test Group
-    var userIsInTestGroup = true;
-
     window.fbAsyncInit = function() {
       // Initialize the FB SDK
       FB.init({
@@ -16,16 +13,7 @@ javascript:
 
       // Initialize the plugin
       FB.Event.subscribe('xfbml.parse', function() {
-        // Call
-        if (userIsInTestGroup) {
-          FB.RankingService.showPlugin()
-        } else {
-          FB.RankingService.hidePlugin(
-              '<HIDE_REASON>',
-              '',
-              document.getElementById('js-fb-optimizely-control')
-          );
-        }
+        FB.RankingService.showPlugin()
       });
 
       // In the unlikely event that the iframe load fails, fallback to original UI
@@ -53,9 +41,7 @@ javascript:
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/plugins/xfbml.rankingservice.js";
       fjs.parentNode.insertBefore(js, fjs);
-      if (userIsInTestGroup) {
-        $('.js-optimizely-test, .js-optimizely-control').toggleClass('hidden');
-      }
+      $('.js-optimizely-test, .js-optimizely-control').toggleClass('hidden');
     }(document, 'script', 'facebook-jssdk'));
   }
 
