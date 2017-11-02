@@ -21,6 +21,7 @@ export default class ShoppingSpree extends FirebaseComponent {
 
     this.doneOnboarding = this.doneOnboarding.bind(this);
     this.doneSharing = this.doneSharing.bind(this);
+    this.deleteAllItemsFromMyCart = this.deleteAllItemsFromMyCart.bind(this);
     this.showAddToCartModal = this.showAddToCartModal.bind(this);
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
     this.changeDisplayStatus = this.changeDisplayStatus.bind(this);
@@ -32,6 +33,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.hideZopim = this.hideZopim.bind(this);
     this.showValues = this.showValues.bind(this);
     this.addChatMessage = this.addChatMessage.bind(this);
+    this.handleCartValueChanges = this.handleCartValueChanges.bind(this);
     win.startShoppingSpree = this.startOnboarding;
     this.startListeningForToast = this.startListeningForToast.bind(this);
     this.state = this.setInitialState();
@@ -41,9 +43,22 @@ export default class ShoppingSpree extends FirebaseComponent {
     super.connectToFirebase();
     const { firebaseNodeId } = this.state;
     const spreeFirebase = firebase.apps[0].database();
+    console.log('firebaseNodeId', firebaseNodeId);
     this.chatsDB  = spreeFirebase.ref( firebaseNodeId + "/chats" );
+    this.cartDB = spreeFirebase.ref( firebaseNodeId + "/cart" );
+
+    // Listeners
     this.chatsDB.on( 'child_added', this.addChatMessage );
     this.chatsDB.once( 'value', this.showValues );
+    this.cartDB.on( 'value', this.handleCartValueChanges);
+  }
+
+  handleCartValueChanges(data){
+    console.log('cartVal Changes', data.val());
+     if( data && data.val) {
+       console.log('setting cart values', data);
+       this.setState({myItems: data.val()});
+     }
   }
 
   componentDidMount() {
@@ -125,6 +140,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       startingState: display,
       dressAddingToCart: null,
       showExitModal: false,
+      myItems: {}, // Object of keys
     };
   }
 
@@ -160,10 +176,38 @@ export default class ShoppingSpree extends FirebaseComponent {
     })
   }
 
+  deleteAllItemsFromMyCart(){
+    const { myItems } = this.state;
+    console.log('myItems---->', this.state);
+    const keys = myItems ? Object.keys(myItems) : [];
+    let countRemoved = 0;
+
+    keys.forEach(firebaseKey => {
+      const item = myItems[firebaseKey];
+      console.log('this item', myItems[firebaseKey]);
+      if( item.entry_for.email === this.state.email ){
+        this.cartDB.child( firebaseKey ).remove();
+        countRemoved += 1;
+      }
+    });
+
+    if (countRemoved >= 1){
+      this.createFamebotMessage(
+        this.props.name + " left your group! "
+        + "You are now down to "
+        + this.calculateDiscount({totalItems: myItems.length - countRemoved})
+        + "% off", "discount",
+        "discount", // type
+      );
+    }
+  }
+
   doneShoppingSpree() {
-    this.cookies.remove('shopping_spree_name', { path: '/', secure: false });
-    this.cookies.remove('shopping_spree_email', { path: '/', secure: false });
-    this.cookies.remove('shopping_spree_id', { path: '/', secure: false });
+    this.cookies.remove('shopping_spree_name');
+    this.cookies.remove('shopping_spree_email');
+    this.cookies.remove('shopping_spree_id');
+    this.deleteAllItemsFromMyCart();
+
     this.setState(
       {
         display: 'none',

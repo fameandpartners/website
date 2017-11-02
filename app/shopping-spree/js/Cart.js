@@ -94,7 +94,6 @@ export default class Cart extends FirebaseComponent
 
   deleteItem( firebaseKey ){
     const { totalItemsInSharedCart, myItems } = this.state;
-    console.log('totalItemsInSharedCart', totalItemsInSharedCart);
     let index = -1;
     for( let i = 0; i < this.state.myItems.length && index === -1; i++ )
     {

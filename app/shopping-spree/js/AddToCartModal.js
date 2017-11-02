@@ -213,7 +213,7 @@ export default class AddToCartModal extends FirebaseComponent
                         <div className="clearfix">
                           { this.generateSizeRow( 0, 8 ) }
                           { this.generateSizeRow( 10, 18 ) }
-                          { this.generateSizeRow( 20, 26 ) }
+                          { this.generateSizeRow( 20, 22 ) }
                         </div>
                         {
                           this.state.showSizeError &&

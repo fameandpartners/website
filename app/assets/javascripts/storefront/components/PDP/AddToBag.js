@@ -52,10 +52,10 @@ class AddToBag extends React.Component {
         const { customize, actions, product } = this.props;
         let productPrice = product.price.price.amount
         let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
-        
+
         window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].table.product, window.location.href , customize.color, customize.customization);
     }
-    
+
     addToBag() {
         const { customize, actions, product } = this.props;
         let productPrice = product.price.price.amount
@@ -170,9 +170,9 @@ class AddToBag extends React.Component {
                     return (
                             <a href="javascript:;" onClick={this.addToShoppingSpree} className="btn btn-black btn-lrg">ADD TO CLIQUE</a>
                     );
-                    
+
                 } else {
-                    
+
                     return (
                             <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
                     );
