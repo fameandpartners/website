@@ -10,13 +10,13 @@ ruby:
   discount  = @product.discount || { table: { amount: 0 } }
   @product_discount = discount.to_json
 
-/ NOTE: this JS block is loaded into the head, this should contain page data only		
-/ TODO: @product source will need to be cleaned, we have way too many duplicated there		
-/       also images are mess, have to load all_images separately because images inside		
-/       of @pruduct.images include mix of images in defferent ratios.		
-/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`		
-= content_for :head do		
-  javascript:		
+/ NOTE: this JS block is loaded into the head, this should contain page data only
+/ TODO: @product source will need to be cleaned, we have way too many duplicated there
+/       also images are mess, have to load all_images separately because images inside
+/       of @pruduct.images include mix of images in defferent ratios.
+/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
+= content_for :head do
+  javascript:
     window.PdpDataFull = {
       paths: #{raw product_paths.to_json},
       product: #{raw @product.to_json},
@@ -34,10 +34,13 @@ ruby:
   - if params[:color]
     = tag :meta, name: 'robots', content: 'noindex, follow'
 
+link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
 
-link rel="stylesheet" href="#{configatron.node_pdp_url}/#{@partial_hash['cssBundle']}"
+div#react-pdp.PDP__wrapper
 
-= render inline: @partial_hash['partial']
+javascript:
+  window.__data = window.PdpDataFull
+
 = render partial: 'micro_data'
 
-script type="text/javascript" src="#{configatron.node_pdp_url}/#{@partial_hash['jsBundle']}"
+script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
