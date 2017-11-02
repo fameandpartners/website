@@ -25,8 +25,8 @@ export default class Onboarding extends FirebaseComponent
 
             this.createFamebotMessage( 'Here’s where you can chat about what to buy and add to your cart.' );
             this.createFamebotMessage( "Ready to start shopping? This is one of our favorites." );
-            this.createFamebotShareDressMessage( 1481,
-                                                 49684,
+            this.createFamebotShareDressMessage( 1494,
+                                                 49973,
                                                  "The Maritza Dress",
                                                  "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
                                                  409,

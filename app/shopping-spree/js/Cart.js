@@ -21,7 +21,9 @@ export default class Cart extends FirebaseComponent
         totalItemsInSharedCart: 0,
         totalInSharedCart: 0,
         myItems: [],
-        totalOff: 0
+        totalOff: 0,
+        checkingOut: false
+
       };
     this.addToCart = this.addToCart.bind(this);
     this.recalculateDiscount = this.recalculateDiscount.bind(this);
@@ -66,20 +68,27 @@ export default class Cart extends FirebaseComponent
 
       const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 
+      let toSend =           {
+        variant_id: dress.product_variant_id,
+        dress_variant_id: dress.product_variant_id,
+        size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
+        color_id: dress.color['id'],
+        height_value: dress.height,
+        height_unit: 'inch',
+        shopping_spree_total: this.state.totalInSharedCart
+      };
+
+      // Only send the spree item count on the last item so that the backend knows to create the coupon
+      if( position + 1 >= this.state.myItems.length )
+      {
+        toSend['shopping_spree_item_count' ] =  this.state.myItems.length;
+      }
+
       request.post('/user_cart/products')
         .withCredentials()
         .set( 'X-CSRF-TOKEN', csrfToken )
         .send(
-          {
-            variant_id: dress.product_variant_id,
-            dress_variant_id: dress.product_variant_id,
-            size: "US" + dress.size + "/AU" + (parseInt(dress.size) + 4),
-            color_id: dress.color['id'],
-            height_value: dress.height,
-            height_unit: 'inch',
-            shopping_spree_total: this.state.totalInSharedCart,
-            shopping_spree_item_count: this.state.myItems.length
-          }
+          toSend
         ).end((error, response) => {
           console.log( 'done with  add' );
           context.checkoutOneItem( position + 1, agent );
@@ -89,6 +98,11 @@ export default class Cart extends FirebaseComponent
 
   checkout()
   {
+    this.setState(
+      {
+        checkingOut: true
+      }
+    );
     this.checkoutOneItem( 0, null );
   }
 
@@ -215,7 +229,8 @@ export default class Cart extends FirebaseComponent
         </div>
 
         <div className="row checkout-btn">
-          <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div>
+          { !this.state.checkingOut && <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a onClick={this.checkout} className="center-block btn btn-black btn-lrg">Checkout</a></div> }
+          { this.state.checkingOut && <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10"><a  className="center-block btn btn-black btn-lrg">Checking Out...</a></div> }
         </div>
         <div className="shopping-spree-contents">
           <div className="row">
