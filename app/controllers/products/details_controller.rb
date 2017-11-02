@@ -5,7 +5,7 @@ class Products::DetailsController < Products::BaseController
 
   def show
     @zopim_opt_out = true
-
+    @user = spree_current_user || {}
     @product = Products::DetailsResource.new(
       site_version: current_site_version,
       slug:         params[:product_slug],
