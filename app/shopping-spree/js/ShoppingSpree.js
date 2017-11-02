@@ -127,6 +127,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     } else if (firebaseId) {
       display = 'chat';
       minimize = true;
+      this.setFirebaseNodeId(firebaseId);
     }
 
     return {
@@ -162,7 +163,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.setState(
       {
         showAddingToCartModal: false,
-        dressAddingToCart: null,
+        // dressAddingToCart: null,
         display: 'cart',
         minimize: false,
       },
@@ -179,6 +180,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   deleteAllItemsFromMyCart(){
     const { myItems, name } = this.state;
     const keys = myItems ? Object.keys(myItems) : [];
+    const keysLength = keys.length;
     let countRemoved = 0;
 
     keys.forEach(firebaseKey => {
@@ -191,21 +193,21 @@ export default class ShoppingSpree extends FirebaseComponent {
     });
 
     if (countRemoved >= 1){
-      this.createFamebotMessage(
-        name + " left your group! "
-        + "You are now down to "
-        + this.calculateDiscount({totalItems: keys.length - countRemoved})
-        + "% off", "discount",
-        "discount", // type
-      );
+    this.createFamebotMessage(
+      name + " left your group! "
+      + "You are now down to "
+      + this.calculateDiscount({totalItems: keysLength - countRemoved})
+      + "% off", "discount",
+      "discount", // type
+    );
     }
   }
 
   doneShoppingSpree() {
+    this.deleteAllItemsFromMyCart();
     this.cookies.remove('shopping_spree_name');
     this.cookies.remove('shopping_spree_email');
     this.cookies.remove('shopping_spree_id');
-    this.deleteAllItemsFromMyCart();
 
     this.setState(
       {
@@ -262,7 +264,7 @@ export default class ShoppingSpree extends FirebaseComponent {
         firebaseNodeId: shoppingSpreeId,
       },
     );
-
+    this.setFirebaseNodeId(shoppingSpreeId);
     this.startListeningForToast();
   }
 

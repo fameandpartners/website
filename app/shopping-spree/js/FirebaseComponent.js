@@ -8,7 +8,11 @@ export default class FirebaseComponent extends React.Component
     constructor( props )
     {
         super( props );
-        this.firebaseNodeId = this.props.firebaseNodeId;
+        this.setFirebaseNodeId(this.props.firebaseNodeId);
+    }
+
+    setFirebaseNodeId(nodeId){
+      this.firebaseNodeId = nodeId;
     }
 
     calculateDiscount({totalItems = 0})
@@ -40,7 +44,7 @@ export default class FirebaseComponent extends React.Component
                     storageBucket: this.props.firebaseDatabase + ".appspot.com",
                     messagingSenderId: "868619391913"
                 };
-//            firebase.database.enableLogging(true)
+          // firebase.database.enableLogging(true);
           firebase.initializeApp( config );
        }
     }
