@@ -41,7 +41,7 @@ class UserCart::ProductsController < UserCart::BaseController
           fire_event('spree.order.contents_changed')
           fire_event('spree.checkout.coupon_code_added')
         end
-      elsif( params[:shopping_spree_total] )
+      elsif( params[:shopping_spree_item_count] )
         create_coupon_if_from_shopping_spree( current_order, params[:shopping_spree_total], params[:shopping_spree_item_count] )
       end
 
@@ -125,48 +125,11 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-  def calculate_discount( total, count )
-    if( count == 0 )
-      return 0
-    else
-      to_return = 0.05
-      count = count - 1
-      to_return += 0.025 * count
-      return to_return
-    end
-  end
 
   def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count )
-    if( current_promotion && !current_promotion.name.index( 'SHOPPING SPREE' ).nil? )
-
-    else
-      promo = Spree::Promotion.new
-      guid = SecureRandom.uuid.to_s
-      promo.name = "SHOPPING_SPREE #{guid}"
-      promo.code = guid
-      promo.event_name = "spree.checkout.coupon_code_added"
-      promo.usage_limit = 1
-      promo.description = ""
-      promo.advertise                = false
-      promo.eligible_to_custom_order = true
-      promo.eligible_to_sale_order   = false
-      promo.save!
-
-      calculator  = Spree::Calculator::FlatRate.create
-      calculator.preferred_amount   = calculate_discount( shopping_spree_total, shopping_spree_item_count ) * order.total
-      calculator.preferred_currency = 'USD'
-      calculator.save!
-
-      action = Spree::Promotion::Actions::CreateAdjustment.create
-      action.calculator   = calculator
-      action.activator_id = promo.id
-      action.save!
-
-      promo.actions << action
-      promo.save!
-      #    delete_old_promotions #This method exists in promotino_service
-      promo.activate(:order => order, :coupon_code => promo.code)
-    end
+    guid = SecureRandom.uuid.to_s
+    promotion_service = UserCart::PromotionsService.new( order: order, code:  "SHOPPING_SPREE #{guid}" )
+    promotion_service.apply_shopping_spree_discount( shopping_spree_total, shopping_spree_item_count )
   end
 
   def ensure_size_id_is_set( params )

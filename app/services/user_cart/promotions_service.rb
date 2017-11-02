@@ -40,8 +40,53 @@ class PromotionsService
     order.reload
   end
 
+  def apply_shopping_spree_discount( shopping_spree_total, shopping_spree_item_count )
+      promo = Spree::Promotion.new
+
+      promo.name = @code
+      promo.code = @code
+      promo.event_name = "spree.checkout.coupon_code_added"
+      promo.usage_limit = 1
+      promo.description = ""
+      promo.advertise                = false
+      promo.eligible_to_custom_order = true
+      promo.eligible_to_sale_order   = false
+      promo.save!
+      
+      delete_old_promotions
+      
+      calculator  = Spree::Calculator::FlatRate.create
+      calculator.preferred_amount   = calculate_discount( shopping_spree_total, shopping_spree_item_count ) * order.total
+      calculator.preferred_currency = 'USD'
+      calculator.save!
+
+      action = Spree::Promotion::Actions::CreateAdjustment.create
+      action.calculator   = calculator
+      action.activator_id = promo.id
+      action.save!
+
+      promo.actions << action
+      promo.save!
+
+      
+      promo.activate(:order => order, :coupon_code => promo.code)
+    
+  end
+  
+  
   private
 
+    def calculate_discount( total, count )
+      if( count == 0 )
+        return 0
+      else
+        to_return = 0.05
+        count = count - 1
+        to_return += 0.025 * count
+        return to_return
+      end
+    end
+  
     def promotion
       @promotion ||= code.present? ? Spree::Promotion.find_by_code(code) : nil
     end
@@ -218,4 +263,5 @@ class PromotionsService
 
     end
 end
+
 end
