@@ -47,6 +47,16 @@
 
         .ibox-content
           .form-group
+            label.col-sm-2.control-label Customization ID
+            .col-sm-10 = f.text_field :customization_id, :class => 'form-control'
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Customization Name
+            .col-sm-10 = f.text_field :customization_name, :class => 'form-control'
+
+        .ibox-content
+          .form-group
             label.col-sm-2.control-label Sizes
             .col-sm-10
               - if @sizes_empty
