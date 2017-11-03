@@ -4,12 +4,9 @@ class Products::DetailsController < Products::BaseController
   layout 'custom_experience/application'
 
   def show
-    @product = setup_product(params)
-
-    #TODO: Possibly no longer needed??
     @zopim_opt_out = true
+    @product = setup_product(params)
     @user = spree_current_user || {}
-    @product = Products::DetailsResource.new(
 
     # Set SEO properties
     # Drop anything after the first period(.) and newline
