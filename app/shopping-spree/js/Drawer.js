@@ -77,7 +77,7 @@ export default class Drawer extends React.Component
                           name={this.state.name}
                           email={this.state.email}
                           updateDiscount={this.updateDiscountOnDrawer}
-                          doneShoppingSpree={this.props.doneShoppingSpree}
+                          completeShoppingSpree={this.props.completeShoppingSpree}
                           />
                   </div>
 
@@ -148,5 +148,6 @@ Drawer.propTypes = {
     closed: PropTypes.bool.isRequired,
     showAddToCartModal: PropTypes.func.isRequired,
     doneShoppingSpree: PropTypes.func.isRequired,
+    completeShoppingSpree: PropTypes.func.isRequired,
     showShareModal: PropTypes.func.isRequired
 };

@@ -26,6 +26,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
     this.changeDisplayStatus = this.changeDisplayStatus.bind(this);
     this.doneShoppingSpree = this.doneShoppingSpree.bind(this);
+    this.completeShoppingSpree = this.completeShoppingSpree.bind(this);
     this.updateExitModalStatus = this.updateExitModalStatus.bind(this);
     this.showShareModal = this.showShareModal.bind(this);
     this.startOnboarding = this.startOnboarding.bind(this);
@@ -203,8 +204,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     }
   }
 
-  doneShoppingSpree() {
-    this.deleteAllItemsFromMyCart();
+  completeShoppingSpree(){
     this.cookies.remove('shopping_spree_name');
     this.cookies.remove('shopping_spree_email');
     this.cookies.remove('shopping_spree_id');
@@ -215,6 +215,11 @@ export default class ShoppingSpree extends FirebaseComponent {
         showExitModal: false,
       },
     );
+  }
+
+  doneShoppingSpree() {
+    this.deleteAllItemsFromMyCart();
+    this.completeShoppingSpree();
   }
 
   showShareModal() {
@@ -319,6 +324,7 @@ export default class ShoppingSpree extends FirebaseComponent {
          closed={this.state.minimize}
          showAddToCartModal={this.showAddToCartModal}
          doneShoppingSpree={this.doneShoppingSpree}
+         completeShoppingSpree={this.completeShoppingSpree}
          showShareModal={this.showShareModal}
          changeDisplayStatus={this.changeDisplayStatus}
          updateExitModalStatus={this.updateExitModalStatus} />

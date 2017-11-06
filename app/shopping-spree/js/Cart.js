@@ -59,7 +59,7 @@ export default class Cart extends FirebaseComponent
     console.log( "Position = " + position + " length = " + this.state.myItems.length );
     if( position >= this.state.myItems.length )
     {
-      this.props.doneShoppingSpree();
+      this.props.completeShoppingSpree();
       window.location = '/checkout';
     } else
     {
@@ -252,5 +252,6 @@ Cart.propTypes = {
   firebaseNodeId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  updateDiscount: PropTypes.func.isRequired
+  updateDiscount: PropTypes.func.isRequired,
+  completeShoppingSpree: PropTypes.func.isRequired,
 }
