@@ -446,7 +446,26 @@ namespace :data do
             'FP2265'=>['Dresses', 'Maxi'],
             'FP2266'=>['Dresses', 'Maxi'],
             'FP2269'=>['Dresses', 'Maxi'],
-            'FP2267'=>['Dresses', 'Ankle']}
+            'FP2267'=>['Dresses', 'Ankle'],
+            'FP2485'=> ['Skirts', 'Two Piece'],
+            'FP2523'=> ['Dresses', 'Mini'],
+            'FP2524'=> ['Dresses', 'Maxi'],
+            'FP2596'=> ['Dresses', 'Maxi'],
+            'FP2599B'=> ['Dresses', 'Petti'],
+            'FP2606M'=> ['Dresses', 'Maxi'],
+            'FP2609M'=> ['Jumpsuits', 'Jumpsuit (pants)'],
+            'FP2610B'=> ['Dresses', 'Mini'],
+            'FP2615'=> ['Jumpsuits', 'Jumpsuit (pants)'],
+            'FP2621'=> ['Jumpsuits', 'Jumpsuit (pants)'],
+            'FP2626B'=> ['Dresses', 'Mini'],
+            'FP2630'=> ['Dresses', 'Maxi'],
+            'FP2633'=> ['Dresses', 'Mini'],
+            'FP2638'=> ['Dresses', 'Midi'],
+            'FP2815'=> ['Dresses', 'Mini'],
+            'FP2816'=> ['Dresses', 'Mini'],
+            'FPL1047'=> ['Jumpsuits', 'Jumpsuit (pants)'],
+            'FPRV1011V'=> ['Dresses', 'Mini'],
+            'FPRV1132'=> ['Dresses', 'Mini']}
 
 
         sku_category_hash.each_pair{|key,value| link_product_category(key, value[0], value[1])}
@@ -462,8 +481,10 @@ namespace :data do
             cat.save!
         end
         unassigned.each do|product|
-            product.category = cat
-            product.save!
+            if product.category.nil?
+                  product.category = cat
+                  product.save!
+            end
         end
     end
 end
@@ -486,11 +507,13 @@ def link_product_category(style_number, category, subcategory)
     end
     if sku && sku.product
         product= sku.product
-        product.category = cat
-        product.save!
+        if product.category.nil?
+              product.category = cat
+              product.save!
+        end
     else
         puts "#{style_number} failed to link #{category}, #{subcategory}"
     end
 
-  
-end  
+
+end

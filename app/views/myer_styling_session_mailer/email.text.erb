@@ -1,0 +1,16 @@
+<% if @myer_styling_session_form.respond_to? :full_name %>
+  Name: <%= @myer_styling_session_form.full_name %>
+<% else %>
+  Name: <%= @myer_styling_session_form.first_name %> <%= @myer_styling_session_form.last_name %>
+<% end %>
+
+Contact by: <%= @myer_styling_session_form.session_type if @myer_styling_session_form.respond_to? :session_type %>
+Email: <%= @myer_styling_session_form.email %>
+Phone: <%= @myer_styling_session_form.phone if @myer_styling_session_form.respond_to? :phone %>
+
+--------------------------------------------
+
+Time Zone: <%= @myer_styling_session_form.timezone if @myer_styling_session_form.respond_to? :timezone %>
+First Preference: <%= @myer_styling_session_form.preferred_time if @myer_styling_session_form.respond_to? :preferred_time %>
+
+--------------------------------------------
