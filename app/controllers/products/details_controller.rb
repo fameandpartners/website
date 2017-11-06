@@ -77,7 +77,8 @@ class Products::DetailsController < Products::BaseController
         resp = RestClient.post "#{configatron.node_pdp_url}/pdp", {'data' => pdp_obj}.to_json, {content_type: :json}
         JSON.parse(resp)
       rescue Exception => e
-        Raven.capture_exception(e, response: resp)
+        Raven.extra_context(response: resp)
+        Raven.capture_exception(e)
         NewRelic::Agent.notice_error(e, response: resp)
         throw e
       end

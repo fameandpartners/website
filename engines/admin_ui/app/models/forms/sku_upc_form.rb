@@ -7,6 +7,8 @@ module Forms
     property :color_name
     property :color_presentation_name
     property :sizes
+    property :customization_id
+    property :customization_name
 
     validates :product_id, :height, :color_name, :color_presentation_name, presence: true
 

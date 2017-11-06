@@ -24,14 +24,16 @@ module AdminUi
             )
             # gather upc numbers for each size combo
             hash[:sizes].each do |size|
-              upc = find_or_create_sku(
+              sku = find_or_create_sku(
                 product.sku.squish.downcase,
                 product.name.squish.upcase,
                 hash[:height].upcase,
                 hash[:color_name].parameterize,
                 size
-              ).upc
-              @results[size] = upc
+              )
+              update_sku_customizations(sku, hash[:customization_id], hash[:customization_name])
+              # collect all the upc codes per size
+              @results[size] = sku.upc
             end
           end
         end
@@ -40,6 +42,13 @@ module AdminUi
       end
 
       private
+
+      def update_sku_customizations(sku, id, name)
+        # normalize form data to keep nil if empty string
+        sku.customisation_id = id.blank? ? nil : id
+        sku.customisation_name = name.blank? ? nil : name
+        sku.save
+      end
 
       def ensure_color_exists( color_name, presentation_name )
         option_type = Spree::OptionType.color
