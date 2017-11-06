@@ -17,8 +17,14 @@ Spree::User.class_eval do
 
   before_post_process :randomize_file_name
 
+   before_save :downcase_email
+
   def fullname
     [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
+  def downcase_email
+    self.email = self.email.downcase
   end
 
   private

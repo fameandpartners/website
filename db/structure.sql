@@ -2635,6 +2635,42 @@ ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
 
 
 --
+-- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE return_item_labels (
+    id integer NOT NULL,
+    tracking_number character varying(255),
+    label_url character varying(255),
+    carrier character varying(255),
+    label_image_url character varying(255),
+    label_pdf_url character varying(255),
+    return_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE return_item_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
+
+
+--
 -- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4853,7 +4889,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text NOT NULL
+    user_data text DEFAULT '{}'::text
 );
 
 
@@ -5914,6 +5950,13 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
+
+
+--
+-- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6998,6 +7041,14 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_item_labels
+    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9662,6 +9713,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
+
+INSERT INTO schema_migrations (version) VALUES ('20170724212720');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 

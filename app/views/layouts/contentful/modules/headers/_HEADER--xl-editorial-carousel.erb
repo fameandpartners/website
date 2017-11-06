@@ -1,0 +1,14 @@
+<div class="section-row columns">
+  <div class="column is-full">
+    <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
+      <div class="main-hero-wrap js-hero-tile-carousel">
+        <% contents[:carousel_items].each do |carousel_item| %>
+          <div class="main-hero-wrap hero-wrap">
+            <% @lg_contents = carousel_item %>
+            <%= render partial: "layouts/contentful/modules/items/ITEM--lg__carousel" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -65,6 +65,29 @@ Spree::PaypalController.class_eval do
     end
   end
 
+  def confirm
+    order = current_order
+    order.payments.create!({
+      :source => Spree::PaypalExpressCheckout.create({
+        :token => params[:token],
+        :payer_id => params[:PayerID]
+      }, :without_protection => true),
+      :amount => order.total,
+      :payment_method => payment_method
+    }, :without_protection => true)
+    order.next
+    if order.complete?
+      OrderBotWorker.perform_async(order.id)
+      flash.notice = Spree.t(:order_processed_successfully)
+      flash[:commerce_tracking] = 'nothing special'
+      session[:successfully_ordered] = true
+
+      redirect_to completion_route
+    else
+      redirect_to checkout_state_path(order.state)
+    end
+  end
+
   # update order step using info from paypal
   def update_order_steps
     order = current_order
