@@ -12,6 +12,7 @@ module Skus
     # @param [String] height. Example: "Standard"
     # @param [Array<Integer>] customization_value_ids
     def initialize(style_number:, size:, color_id:, height: '', customization_value_ids: [])
+      binding.pry
       @style_number            = style_number
       @size                    = size
       @color_id                = color_id
@@ -48,6 +49,7 @@ module Skus
     end
 
     def height
+      @height = @height.present? ? @height : LineItemPersonalization::DEFAULT_HEIGHT
       "H#{@height.to_s.first}#{@height.to_s.last}"
     end
 
