@@ -81,7 +81,7 @@ export default class Cart extends FirebaseComponent
       // Only send the spree item count on the last item so that the backend knows to create the coupon
       if( position + 1 >= this.state.myItems.length )
       {
-        toSend['shopping_spree_item_count' ] =  this.state.myItems.length;
+        toSend['shopping_spree_item_count' ] =  this.state.totalItemsInSharedCart;
       }
 
       request.post('/user_cart/products')
