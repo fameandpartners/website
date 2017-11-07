@@ -17,12 +17,7 @@ module AdminUi
         if @form.validate( params[:sku_upc] ) && params[:sku_upc][:sizes].present?
           @results = {}
           product = @form.selected_product
-          # customization fields are free form text that allow multiple values
-          # seperated with a comma. Lookup or create CustomisationValue to pass to GlobalSku
-          # customization_ids = @form.customization_id&.split(',') || []
-          # customization_names = @form.customization_name&.split(',') || []
-          # customizations = find_or_create_customizations(customization_ids, customization_names)
-
+          customizations = @form.selected_customizations
           # Save form to access
           @form.save do |hash|
             ensure_color_exists(
@@ -39,7 +34,6 @@ module AdminUi
                 size,
                 customizations
               )
-              update_sku_customizations(sku, hash[:customization_id], hash[:customization_name])
               # collect all the upc codes per size
               @results[size] = sku.upc
             end
@@ -50,13 +44,6 @@ module AdminUi
       end
 
       private
-
-      def find_or_create_customizations(ids, names)
-        # normalize form data to keep nil if empty string
-        # sku.customisation_id = id.blank? ? nil : id
-        # sku.customisation_name = name.blank? ? nil : name
-        # sku.save
-      end
 
       def ensure_color_exists( color_name, presentation_name )
         option_type = Spree::OptionType.color

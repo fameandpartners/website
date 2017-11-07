@@ -23,5 +23,9 @@ module Forms
     def selected_product
       Spree::Product.find_by_id self.product_id
     end
+
+    def selected_customizations
+      CustomisationValue.where(id: self.customizations)
+    end
   end
 end
