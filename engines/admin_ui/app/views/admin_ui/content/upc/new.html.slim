@@ -44,7 +44,7 @@
         .ibox-content
           .form-group
             label.col-sm-2.control-label Customizations
-            .col-sm-10 = f.collection_select :customizations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2', multiple: '' }
+            .col-sm-10 = f.collection_select :customizations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2', id: 'customization_options', multiple: '' }
 
         .ibox-content
           .form-group

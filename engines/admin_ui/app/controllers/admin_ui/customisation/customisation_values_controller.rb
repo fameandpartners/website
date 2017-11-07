@@ -59,7 +59,7 @@ module AdminUi
         product = Spree::Product.find_by_id params[:product_id]
         product_options = Products::SelectionOptions.new(product: product).read
         customizations = product_options[:customizations][:all].map { |p| { id: p.id, name: p.name } }
-        render json: customizations
+        render json: customizations.to_json
       end
     end
   end
