@@ -24,7 +24,7 @@
           .form-group
             label.col-sm-2.control-label Product
             .col-sm-10 = f.collection_select :product_id, @form.available_products, :id, :name_with_sku,
-            { include_blank: true }, { class: 'chosen-select', data: { selectable_target: '#product_color_value_option_value_id' }}
+            { include_blank: true }, { class: 'chosen-select', id: 'customization_product_id', data: { selectable_target: 'customization_product_id' }}
 
         .ibox-content
           .form-group
@@ -43,13 +43,8 @@
 
         .ibox-content
           .form-group
-            label.col-sm-2.control-label Customization ID
-            .col-sm-10 = f.text_field :customization_id, :class => 'form-control'
-
-        .ibox-content
-          .form-group
-            label.col-sm-2.control-label Customization Name
-            .col-sm-10 = f.text_field :customization_name, :class => 'form-control'
+            label.col-sm-2.control-label Customizations
+            .col-sm-10 = f.collection_select :customizations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2', multiple: '' }
 
         .ibox-content
           .form-group

@@ -54,6 +54,13 @@ module AdminUi
         CustomisationValue.find(params[:id]).destroy
         redirect_to customisation_customisation_values_path, flash: { success: 'Customisation value successfully removed' }
       end
+
+      def option_values
+        product = Spree::Product.find_by_id params[:product_id]
+        product_options = Products::SelectionOptions.new(product: product).read
+        customizations = product_options[:customizations][:all].map { |p| { id: p.id, name: p.name } }
+        render json: customizations
+      end
     end
   end
 end
