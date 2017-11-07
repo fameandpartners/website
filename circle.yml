@@ -12,10 +12,8 @@ dependencies:
     - yarn install
     - yarn run prod
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
-    - gem install bundler
-  override:
-    - bundle install:
-      timeout: 180
+    - gem list bundler -i || gem install bundler
+
 
 machine:
   ruby:
@@ -48,7 +46,7 @@ deployment:
       - zip -r -q deploy.zip . -x \*node_modules\* -x \*.git\* -x \*doc\* -x \*rspec\*
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deployebs.zip
       - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_BUILD_NUM --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/deployebs.zip --region us-east-1
-      - aws elasticbeanstalk update-environment --environment-name development --version-label $CIRCLE_BUILD_NUM --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name devo2 --version-label $CIRCLE_BUILD_NUM --region us-east-1
   development2:
     branch: elb-deploy2
     commands:
