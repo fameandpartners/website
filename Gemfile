@@ -24,6 +24,7 @@ gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
 gem 'elasticsearch-ruby'
 gem 'elasticsearch-persistence'
+gem 'rdoc', '3.12.2'
 # gem 'elasticsearch-model'
 # gem 'elasticsearch-rails'
 
@@ -124,7 +125,7 @@ gem 'mailchimp-api', require: 'mailchimp'
 # Contentful
 gem 'contentful'
 
-gem 'rdoc', '3.12.2'
+
 
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
