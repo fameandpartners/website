@@ -29,7 +29,7 @@ export default class Onboarding extends FirebaseComponent
                                                  49973,
                                                  "The Maritza Dress",
                                                  "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
-                                                 409,
+                                                 309,
                                                  "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/35873/original/fprv1026p-black_and_white_spot-front.jpg?1494461867",
                                                  "/dresses/the-maritza-dress-1481",
                                                  {
