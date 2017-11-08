@@ -1,0 +1,7 @@
+.slick-prev:before,
+.slick-next:before {
+    font-family: "icomoon_fame_2015";
+}
+
+.slick-prev:before { content: $icon-arrow-left; }
+.slick-next:before { content: $icon-arrow-right; }

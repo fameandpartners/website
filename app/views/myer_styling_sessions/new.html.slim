@@ -1,0 +1,104 @@
+/ Myer Styling Session
+.landing-page-styling-session
+  .page.container
+    .row
+      .col-md-6
+        h1 Get styled at Myer–for <em>free</em>
+        h3  We're excited to announce that Fame and Partners has launched in Myer stores all around Australia!
+        p For the first time ever, customers can meet face-to-face with a professional stylist to learn more about Fame and Partners' custom, made-to-order experience, see the product in person, and get fitted for a custom order.
+
+        p The best part? It's totally free.
+
+        h2.h3 Sign up for a free personal styling session at Myer
+
+        .row
+          .col-md-12.not-submitted.js-en-not-submitted
+            = form_for @myer_styling_session, url: myer_styling_session_path, html: { class: 'form js-en-styling-session-form' } do |f|
+              .row
+                .col-md-12.form-group
+                  label for='style_session_full_name' class='label-full_name'
+                    | Name <span class="required">*</span>
+                  = f.text_field :full_name, class: 'form-control form-control-md js-en-field-full-name', required: 'true'
+              .row
+                .col-md-12.form-group
+                  label for='style_session_type' class='label-session_type'
+                    | How should we do this? <span class="hint">(select an option)</span> <span class="required">*</span>
+                  = f.select :session_type, options_for_select(f.object.session_types), {include_blank: false},  class: 'form-control form-control-md js-en-field-session-type'
+              .row.email-field-wrapper
+                .col-md-12.form-group
+                  label for='style_session_email' class='label-email'
+                    | Email Address <span class="required">*</span>
+                  = f.text_field :email , type: 'email', class: 'form-control form-control-md js-en-field-email', required: 'true'
+              .row.phone-field-wrapper
+                .col-md-12.form-group
+                  label for='style_session_phone' class='label-phone'
+                    | Phone <span class="hint">(include country code)</span> <span class="required">*</span>
+                  = f.text_field :phone, class: 'form-control form-control-md js-en-field-phone', required: 'true'
+              .row.preference-field-wrapper
+                .col-md-12.form-group
+                  label for='style_session_preference' class='label-preferred_time'
+                    | Preferred time <span class="required">*</span>
+                  = f.select :preferred_time, options_for_select(f.object.available_times), {include_blank: true}, class: 'form-control form-control-md js-en-field-preferred-time'
+              .row
+                .col-md-6.form-group
+                  .submit
+                    = f.submit 'BOOK ME IN', class: 'btn btn-black btn-block'
+
+          .col-md-12.confirmation.js-en-confirmation
+            .intro
+              h3 All done!
+              p Thank you for your booking request.
+              p We will be in touch shortly to confirm the date and time of your styling session.
+            .related-nav
+              p
+                a href='#{build_taxon_path('New This Week')}'
+                  | <span>Browse our <span class="copy-highlight">Latest Style</span></span> <i class="fa fa-chevron-right"></i>
+              p
+                a href='#{best_sellers_path}'
+                  | <span>Take a look at our <span class="copy-highlight">Bestsellers</span></span> <i class="fa fa-chevron-right"></i>
+
+      .col-md-5.col-md-offset-1
+        aside
+          .row
+            .col-md-12.col-sm-6
+              picture
+                source media='(max-width: 991px)' srcset='#{image_path("landingpages/myer-styling-session/hero-mob.jpg")}'
+                source media='(min-width: 992px)' srcset='#{image_path("landingpages/myer-styling-session/hero.jpg")}'
+                = image_tag 'landingpages/myer-styling-session/hero.jpg', srcset: "#{image_path("landingpages/myer-styling-session/hero-mob.jpg")} 991w,
+                                  #{image_path("landingpages/myer-styling-session/hero.jpg")} 992w", class: 'img-responsive', alt: "Amber"
+
+            .col-md-12.col-sm-6
+              h3.Heading__medium Our Myer stylists are here for whatever you need: personal shopping; wardrobe styling; or advice on fit, fashion trends, and which Fame dress will suit your body best.
+
+- content_for :body_end do
+  javascript:
+    $(document).ready(function(){
+
+      // First (and default) option is in person
+      $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+
+      $('.js-en-field-session-type').on('change', function () {
+        var sessionType = $(this).val().toLowerCase();
+
+        // Setup: hide everything and mark as remove required
+        $('.js-en-styling-session-form .error').remove();
+        $('.js-en-field-email, .js-en-field-phone, .js-en-field-preferred-time').closest('.row').hide().find('.required').hide().prop('required', false);
+
+        switch (sessionType) {
+          case "email":
+            $('.js-en-field-email').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          case "video chat":
+            $('.js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          case "phone":
+            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+          default:
+            $('.js-en-field-phone, .js-en-field-email, .js-en-field-preferred-time').closest('.row').show().find('.required').show().prop('required', true);
+            break;
+        }
+      });
+
+      form_submit_ajax_validation('#new_forms_myer_styling_session', 'Confirm my booking', 'Myer Styling Session', 'myerStylingSessionFormSubmit');
+    });

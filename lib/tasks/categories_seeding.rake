@@ -451,7 +451,7 @@ namespace :data do
             'FP2523'=> ['Dresses', 'Mini'],
             'FP2524'=> ['Dresses', 'Maxi'],
             'FP2596'=> ['Dresses', 'Maxi'],
-            'FP2599'=> ['Dresses', 'Petti'],
+            'FP2599B'=> ['Dresses', 'Petti'],
             'FP2606M'=> ['Dresses', 'Maxi'],
             'FP2609M'=> ['Jumpsuits', 'Jumpsuit (pants)'],
             'FP2610B'=> ['Dresses', 'Mini'],
@@ -515,5 +515,5 @@ def link_product_category(style_number, category, subcategory)
         puts "#{style_number} failed to link #{category}, #{subcategory}"
     end
 
-  
-end  
+
+end
