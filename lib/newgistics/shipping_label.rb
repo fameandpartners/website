@@ -3,7 +3,8 @@ module Newgistics
     attr_accessor :label_url,
                   :carrier,
                   :label_image_url,
-                  :label_pdf_url
+                  :label_pdf_url,
+                  :barcode
 
     def initialize(first_name, last_name, address, email, return_id)
       @first_name = first_name
@@ -75,13 +76,14 @@ module Newgistics
       if Rails.env == 'production'
         {"returnId" => @return_id}
       else
-        {"returnId" => "123456789A"}        
+        {"returnId" => "123456789A"}
       end
     end
 
     def convert_json_to_instance_variables(json)
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
+      @barcode = json['transporter']['Barcode'] # is actually the tracking number
 
       json['links'].each do |link|
         if link['rel'] == 'label/image'
