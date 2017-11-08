@@ -5,6 +5,89 @@ Spree::PaypalController.class_eval do
 
   before_filter :update_order_steps, only: [:confirm]
 
+  def express
+    items = current_order.line_items.map do |item|
+      {
+        :Name => item.product.name,
+        :Quantity => item.quantity,
+        :Amount => {
+          :currencyID => current_order.currency,
+          :value => item.price
+        },
+        :ItemCategory => "Physical"
+      }
+    end
+
+    tax_adjustments = current_order.adjustments.tax
+    shipping_adjustments = current_order.adjustments.shipping
+
+    current_order.adjustments.eligible.each do |adjustment|
+      next if (tax_adjustments + shipping_adjustments).include?(adjustment)
+      items << {
+        :Name => adjustment.label,
+        :Quantity => 1,
+        :Amount => {
+          :currencyID => current_order.currency,
+          :value => adjustment.amount
+        }
+      }
+    end
+
+    # Because PayPal doesn't accept $0 items at all.
+    # See #10
+    # https://cms.paypal.com/uk/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_ECCustomizing
+    # "It can be a positive or negative value but not zero."
+    items.reject! do |item|
+      item[:Amount][:value].zero?
+    end
+
+    pp_request = provider.build_set_express_checkout({
+      :SetExpressCheckoutRequestDetails => {
+        :ReturnURL => confirm_paypal_url(:payment_method_id => params[:payment_method_id]),
+        :CancelURL =>  cancel_paypal_url,
+        :PaymentDetails => [payment_details(items)]
+      }})
+
+    current_order.return_type = params['return_type']
+    current_order.save
+
+    begin
+      pp_response = provider.set_express_checkout(pp_request)
+      if pp_response.success?
+        redirect_to provider.express_checkout_url(pp_response)
+      else
+        flash[:error] = "PayPal failed. #{pp_response.errors.map(&:long_message).join(" ")}"
+        redirect_to checkout_state_path(:payment)
+      end
+    rescue SocketError
+      flash[:error] = "Could not connect to PayPal."
+      redirect_to checkout_state_path(:payment)
+    end
+  end
+
+  def confirm
+    order = current_order
+    order.payments.create!({
+      :source => Spree::PaypalExpressCheckout.create({
+        :token => params[:token],
+        :payer_id => params[:PayerID]
+      }, :without_protection => true),
+      :amount => order.total,
+      :payment_method => payment_method
+    }, :without_protection => true)
+    order.next
+    if order.complete?
+      OrderBotWorker.perform_async(order.id)
+      flash.notice = Spree.t(:order_processed_successfully)
+      flash[:commerce_tracking] = 'nothing special'
+      session[:successfully_ordered] = true
+
+      redirect_to completion_route
+    else
+      redirect_to checkout_state_path(order.state)
+    end
+  end
+
   # update order step using info from paypal
   def update_order_steps
     order = current_order

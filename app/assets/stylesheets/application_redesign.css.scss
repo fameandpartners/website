@@ -131,7 +131,8 @@ z-index levels
 @import 'redesign/extras/tabs';
 
 @import 'redesign/icons';
-@import 'libs/icomoon_fame_2015/icons';
+@import 'libs/icomoon_fame_2015/variables';
+@import 'libs/icomoon_fame_2015/style';
 
 // Base
 @import 'redesign/base/base';
@@ -157,21 +158,20 @@ z-index levels
 @import 'redesign/registration';
 @import 'redesign/style_consult';
 @import 'redesign/contact';
-@import 'redesign/fashionista_winner';
 @import 'redesign/modal';
 @import 'redesign/shipping_fee_warning';
 @import 'redesign/flash_slider';
-@import 'redesign/terms';
 @import 'redesign/login';
 @import 'redesign/sale_lp';
-@import 'redesign/fashion-it-girl-winner';
 @import 'redesign/style_session';
 @import 'redesign/tables';
 @import 'redesign/pages';
 @import 'redesign/error';
+@import 'redesign/pages/terms';
 
 // Checkout
 @import 'redesign/pages/page-checkout';
+@import 'redesign/pages/page-checkout-returns-abc';
 
 // Time specific content
 @import 'transient_content';
@@ -216,10 +216,10 @@ z-index levels
 @import 'redesign/components/panels/content-collapse-expand';
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
-@import 'redesign/components/carousel-dot-nav';
 @import 'redesign/components/cards/cards';
 @import 'redesign/components/legacy/legacy-carousel';
 @import 'redesign/components/overlay';
+@import 'redesign/components/slick-carousel';
 
 // Modals
 @import 'redesign/modals/vex';
@@ -256,7 +256,7 @@ z-index levels
 @import 'redesign/pages/gratitude-page';
 @import 'redesign/pages/the-anti-fast-fashion-shop-page';
 @import 'redesign/pages/wholesale';
-@import 'redesign/pages/landing_page_internship';
+@import 'redesign/pages/landing_page_contest';
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';

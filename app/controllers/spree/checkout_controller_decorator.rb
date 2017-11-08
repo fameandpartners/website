@@ -50,7 +50,6 @@ Spree::CheckoutController.class_eval do
   def update
     set_order_site_version
     find_payment_methods
-
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
@@ -71,6 +70,8 @@ Spree::CheckoutController.class_eval do
         end
         return
       end
+      remove_ineligible_promotions
+      @order.reload
     end
 
     if @order.update_attributes(object_params)
@@ -142,6 +143,8 @@ Spree::CheckoutController.class_eval do
 
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
+        @order.return_type = params[:return_type]
+        @order.save!
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
 
@@ -154,7 +157,7 @@ Spree::CheckoutController.class_eval do
         end
 
         OrderBotWorker.perform_async(@order.id)
-
+       
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
@@ -347,6 +350,15 @@ Spree::CheckoutController.class_eval do
       order.next
       state_callback(:after)
     end
+  end
+
+  def remove_ineligible_promotions
+     duplicate = @order.adjustments.select {|x| !x.eligible}
+     if !duplicate.empty?
+       @order.adjustments.promotion.delete(duplicate.first)
+       @order.adjustments.delete(duplicate.first)
+       @order.save!
+     end
   end
 
   def find_payment_methods

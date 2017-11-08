@@ -60,6 +60,15 @@
     margin-bottom: 40px;
   }
 
+  .Heading__medium {
+    font-size: 2.5rem;
+    line-height: 130%;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+    margin: 120px auto;
+  }
+
   @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-md-width - 1px) {
 
     aside {
@@ -69,6 +78,10 @@
         margin: 0;
       }
 
+    }
+
+    .Heading__medium {
+      font-size: 3rem;
     }
 
   }

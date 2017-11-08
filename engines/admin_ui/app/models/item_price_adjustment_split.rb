@@ -25,7 +25,7 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
       tax_rate = Spree::TaxRate.find(tax_adj.originator_id).amount
       item_tax = (((price*100).to_i * tax_rate) / 100.0).round(2)
 
-      total_tax = order.line_items.inject(0) do |total, li|
+      total_tax = order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.inject(0) do |total, li|
         total + ((((li.price*100).to_i * tax_rate) / 100.0))
       end
       total_tax = total_tax.round(2)
@@ -38,6 +38,6 @@ class ItemPriceAdjustmentSplit < SimpleDelegator
   end
 
   def num_items_in_order
-    [order.line_items.count, 1].max
+    [order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.count, 1].max
   end
 end

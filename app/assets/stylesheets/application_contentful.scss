@@ -12,7 +12,8 @@
 // @import 'redesign/extras/tabs';
 
 @import 'redesign/icons';
-@import 'libs/icomoon_fame_2015/icons';
+@import 'libs/icomoon_fame_2015/variables';
+@import 'libs/icomoon_fame_2015/style';
 
 // Base
 @import 'redesign/base/base';
@@ -38,14 +39,12 @@
 // @import 'redesign/registration';
 // @import 'redesign/style_consult';
 // @import 'redesign/contact';
-// @import 'redesign/fashionista_winner';
 // @import 'redesign/modal';
 // @import 'redesign/shipping_fee_warning';
 // @import 'redesign/flash_slider';
 // @import 'redesign/terms';
 // @import 'redesign/login';
 // @import 'redesign/sale_lp';
-// @import 'redesign/fashion-it-girl-winner';
 // @import 'redesign/style_session';
 // @import 'redesign/tables';
 // @import 'redesign/pages';
@@ -58,8 +57,8 @@
 // @import 'transient_content';
 //
 // // Plugins
-// @import '../vendor/bower_components/slick-carousel/slick/slick';
-// @import 'redesign/vendor/slick-carousel';
+@import '../vendor/bower_components/slick-carousel/slick/slick';
+@import 'redesign/vendor/slick-carousel';
 // // Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,
 // // but I chose to duplicate the file, rather than rewrite any of the current usages.
 // @import 'libs/jquery-ui-1.10.4.custom';
@@ -96,10 +95,11 @@
 // @import 'redesign/components/panels/content-collapse-expand';
 // @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
-// @import 'redesign/components/carousel-dot-nav';
 // @import 'redesign/components/cards/cards';
 // @import 'redesign/components/legacy/legacy-carousel';
 // @import 'redesign/components/overlay';
+@import 'redesign/components/slick-carousel';
+
 
 // Modals
 // @import 'redesign/modals/vex';

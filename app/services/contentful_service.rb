@@ -144,16 +144,17 @@ module Contentful
       id = large_container.id
 
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
-      overlay_pids = (fetched_lg_container.respond_to? :overlay_pids) ? fetched_lg_container.overlay_pids : nil
       desktop_image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
       mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : desktop_image
-      image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
-      image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
-      image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
-      image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
-      image_caption_link_target = image_caption_link_target ? '_blank' : '_self'
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
+        overlay_pids = (fetched_lg_container.respond_to? :overlay_pids) ? fetched_lg_container.overlay_pids : nil
+        image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
+        image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
+        image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
+        image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
+        image_caption_link_target = image_caption_link_target ? '_blank' : '_self'
+
         {
           image: desktop_image,
           mobile_image: mobile_image,
@@ -162,6 +163,17 @@ module Contentful
           image_caption_color: image_caption_color,
           image_caption_url: image_caption_url,
           image_caption_link_target: image_caption_link_target
+        }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--lg__carousel')
+        tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
+        tile_link_target = (fetched_lg_container.respond_to? :tile_link_target) ? fetched_lg_container.tile_link_target : nil
+        tile_link_target = tile_link_target ? '_blank' : '_self'
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          tile_url: tile_url,
+          tile_link_target: tile_link_target
         }
       end
     end
@@ -266,6 +278,23 @@ module Contentful
           mobile_image: mobile_image,
           overlay_pids: overlay_pids
         }
+      elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
+        carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
+        full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
+
+        if full_width_content == 'desktop,mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'desktop'
+          full_width_content_class = 'u-forced-full-width-wrapper'
+        end
+
+        {
+          id: main_header_container.content_type.id,
+          full_width_content_class: full_width_content_class,
+          carousel_items: carousel_items
+        }
       end
     end
 
@@ -294,6 +323,20 @@ module Contentful
         tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
         tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
 
+        # Hero tiles content
+        overlay_pids = (item.respond_to? :overlay_pids) ? item.overlay_pids : nil
+        desktop_image = (item.respond_to? :image) ? item.image.url : nil
+        mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
+        full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+
+        if full_width_content == 'desktop,mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'mobile'
+          full_width_content_class = 'u-forced-full-width-wrapper--mobile'
+        elsif full_width_content == 'desktop'
+          full_width_content_class = 'u-forced-full-width-wrapper'
+        end
+
         {
           id: item.content_type.id,
           lg_item: lg_item,
@@ -305,7 +348,11 @@ module Contentful
           lg_items: lg_items,
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
-          tile_cta_position: tile_cta_position
+          tile_cta_position: tile_cta_position,
+          full_width_content_class: full_width_content_class,
+          overlay_pids: overlay_pids,
+          image: desktop_image,
+          mobile_image: mobile_image
         }
       end
 
