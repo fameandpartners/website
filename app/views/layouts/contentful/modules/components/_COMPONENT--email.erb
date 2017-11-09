@@ -5,7 +5,7 @@
 %>
 
 <div>
-  <div class="newsletter-signup-form">
+  <div class="newsletter-signup-form <%= @padding_class %>">
     <h5><%= @email_heading %></h5>
     <form class="<%= form_newsletter %>">
       <input name='url' type="hidden" value="<%= subscribe_campaigns_email_capture_path %>">

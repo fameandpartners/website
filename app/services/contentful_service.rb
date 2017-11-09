@@ -338,6 +338,11 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Add padding options for specific modules
+        padding_top = (item.respond_to? :padding_top) ? ("u-padding-top--" + item.padding_top) : nil
+        padding_bottom = (item.respond_to? :padding_bottom) ? ("u-padding-bottom--" + item.padding_bottom) : nil
+        padding_class = [padding_top, padding_bottom].compact.reject(&:empty?).join(' ')
+
         {
           id: item_id,
           lg_item: lg_item,
@@ -353,7 +358,8 @@ module Contentful
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
-          mobile_image: mobile_image
+          mobile_image: mobile_image,
+          padding_class: padding_class
         }
       end
 
