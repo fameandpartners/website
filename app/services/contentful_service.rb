@@ -175,6 +175,14 @@ module Contentful
           tile_url: tile_url,
           tile_link_target: tile_link_target
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--category-block')
+        tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          tile_url: tile_url,
+        }
       end
     end
 
@@ -315,6 +323,7 @@ module Contentful
         lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
         sm_items = (item.respond_to? :pids) ? item.pids : nil
+        content_tiles = (item.respond_to? :content_tiles) ? map_editorials(item.content_tiles) : nil
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
@@ -348,6 +357,7 @@ module Contentful
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
+          content_tiles: content_tiles,
           email_text: email_text,
           button_label: button_label,
           relative_url: relative_url,
