@@ -5,6 +5,7 @@ class Products::DetailsController < Products::BaseController
 
   def show
     @zopim_opt_out = true
+    @optimizely_opt_in = true
 
     @product = Products::DetailsResource.new(
       site_version: current_site_version,

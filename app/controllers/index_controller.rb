@@ -2,6 +2,8 @@ class IndexController < ApplicationController
   layout 'redesign/application'
 
   def show
+    @optimizely_opt_in = true
+
     #hash_of_results = ContentfulService.get_all_contentful_containers(params['developer'] == 'preview')
     current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
 
