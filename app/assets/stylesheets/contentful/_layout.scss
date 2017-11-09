@@ -1,12 +1,15 @@
 .app-container {
   width: 100%;
-  margin-top: 16px;
-  margin-bottom: 96px;
+
+  @include breakpoint(desktop-bootstrap-min) {
+    margin-top: $mega-menu-desktop-height;
+  }
+
 }
 
 .app-container--top-margin {
   @include breakpoint(tablet) {
-    margin-top: 96px;
+    margin-top: ($mega-menu-desktop-height + 80px);
   }
 }
 
@@ -19,11 +22,10 @@
 
   @include breakpoint(tablet) {
     width: calc(100% - 96px);
-    padding: 78px 48px 24px 48px;
   }
 
   @include breakpoint(tablet-bootstrap-max) {
-    padding: 24px 48px;
+    padding: 0 48px 24px;
   }
 
 }
