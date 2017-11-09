@@ -93,12 +93,6 @@
 
   }
 
-  // Quick-fix for the gap issue with the alert banner.
-  @media (min-width: $bootstrap-md-width) {
-    margin-top: 104px;
-    margin-bottom: -$mega-menu-desktop-height;
-  }
-
   a {
     text-decoration: underline;
     color: $c-neutral-black;
