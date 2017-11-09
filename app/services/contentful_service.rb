@@ -310,6 +310,7 @@ module Contentful
 
       row_tiles = parent_container.rows_container.map do |item|
 
+        item_id = item.content_type.id
         lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
         lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
@@ -337,8 +338,13 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Add padding options for specific modules
+        padding_top = (item.respond_to? :padding_top) ? ("u-padding-top--" + item.padding_top) : nil
+        padding_bottom = (item.respond_to? :padding_bottom) ? ("u-padding-bottom--" + item.padding_bottom) : nil
+        padding_class = [padding_top, padding_bottom].compact.reject(&:empty?).join(' ')
+
         {
-          id: item.content_type.id,
+          id: item_id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
@@ -352,7 +358,8 @@ module Contentful
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
-          mobile_image: mobile_image
+          mobile_image: mobile_image,
+          padding_class: padding_class
         }
       end
 
