@@ -29,7 +29,7 @@ export default class Onboarding extends FirebaseComponent
                                                  49973,
                                                  "The Maritza Dress",
                                                  "<p>Dotted from head to toe. The Maritza is a light georgette maxi dress in a dotted print featuring tie detailing at the back, side cut-outs, and a tiered, ruffled skirt. It has an invisible zipper and hook and eye closure.</p>",
-                                                 309,
+                                                 409,
                                                  "https://d1msb7dh8kb0o9.cloudfront.net/spree/products/35873/original/fprv1026p-black_and_white_spot-front.jpg?1494461867",
                                                  "/dresses/the-maritza-dress-1481",
                                                  {
@@ -103,7 +103,7 @@ export default class Onboarding extends FirebaseComponent
                       It’s easy. Just invite your friends to shop with you, give each other feedback and suggestions...
                     </div>
                     <div className="body-text desktop">
-                      ...and save up to 30% when you check out.
+                      ...and save up to 25% when you check out.
                     </div>
                   </div>
                   <div id="dress-two-image" className="col-md-push-4 col-md-4 col-xs-8 col-xs-push-2  dress-image-right">
@@ -117,7 +117,7 @@ export default class Onboarding extends FirebaseComponent
                   </div>
                   <div className="col-md-4 col-md-pull-0 col-xs-4 col-xs-pull-3 vertical-align">
                     <div className="body-text text-center mobile">
-                      ...and save up to 30% when you check out.
+                      ...and save up to 25% when you check out.
                     </div>
                     <div className="row">
                       <div className="body-text text-center col-md-12 desktop">
