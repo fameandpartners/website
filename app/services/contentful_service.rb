@@ -310,6 +310,7 @@ module Contentful
 
       row_tiles = parent_container.rows_container.map do |item|
 
+        item_id = item.content_type.id
         lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
         lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
@@ -338,7 +339,7 @@ module Contentful
         end
 
         {
-          id: item.content_type.id,
+          id: item_id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
