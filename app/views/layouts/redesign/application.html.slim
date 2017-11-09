@@ -19,6 +19,9 @@ doctype html
     = render 'layouts/redesign/header'
 
     #content-container.content-container
+      - unless disable_notices?
+        = render 'layouts/redesign/notices'
+
       = yield
 
     = render 'layouts/redesign/footer'
