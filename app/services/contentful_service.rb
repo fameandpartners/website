@@ -347,10 +347,8 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
-        # Add padding options for specific modules
-        padding_top = (item.respond_to? :padding_top) ? ("u-padding-top--" + item.padding_top) : nil
-        padding_bottom = (item.respond_to? :padding_bottom) ? ("u-padding-bottom--" + item.padding_bottom) : nil
-        padding_class = [padding_top, padding_bottom].compact.reject(&:empty?).join(' ')
+        # Add extra padding between rows
+        padding_class = (item.respond_to? :padding_extra) ? ("u-padding-top--" + item.padding_extra) : nil
 
         {
           id: item_id,
@@ -381,7 +379,7 @@ module Contentful
       site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
       # Check if the LP requests an extra spacing between top navigation and content
-      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
+      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? 'app-container--top-margin' : nil
 
       page_url = parent_container.relative_url
       {
