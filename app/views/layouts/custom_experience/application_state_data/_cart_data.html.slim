@@ -1,0 +1,9 @@
+/ TODO:
+  "webby": move data fetch to the details_controller
+  "nodey": rewrite transformProductJSON to handle cart too
+
+ruby:
+  cart = UserCart::UserCartResource.new(order: current_order).read
+
+javascript:
+  window.CartData = #{ raw cart.serialize.to_json };
