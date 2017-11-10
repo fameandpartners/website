@@ -1,5 +1,6 @@
 .app-container {
   width: 100%;
+  margin-bottom: $mega-menu-desktop-height;
 
   @include breakpoint(desktop-bootstrap-min) {
     margin-top: $mega-menu-desktop-height;
