@@ -7,12 +7,6 @@
 
 }
 
-.app-container--top-margin {
-  @include breakpoint(tablet) {
-    margin-top: ($mega-menu-desktop-height + $app-container--top-margin);
-  }
-}
-
 .app-container--top-margin .alert-sale {
   top: -$app-container--top-margin;
 }
