@@ -2,7 +2,7 @@
   <% contents[:content_tiles].each do |item| %>
     <% @lg_contents = item %>
     <% #FUTURE: support other content items %>
-    <div class="column is-full-mobile is-half-tablet is-half-desktop">
+    <div class="tile is-parent is-full-mobile is-half-tablet is-half-desktop">
       <%= render partial: "layouts/contentful/modules/items/ITEM--category-block" %>
     </div>
   <% end %>
