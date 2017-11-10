@@ -21,10 +21,10 @@ module Policies
 
     }
 
-    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "12 - 15 business days",
-                          "12 - 15 business days" => "3 - 4 weeks",
-                          "3 - 4 weeks" => "3 - 4 weeks",
-                          "4 - 6 weeks" => "4 - 6 weeks"
+    CNY_DELIVERY_MAP = { "7 - 10 business days" => "12 - 15 business days",
+                         "12 - 15 business days" => "3 - 4 weeks",
+                         "3 - 4 weeks" => "3 - 4 weeks",
+                         "4 - 6 weeks" => "4 - 6 weeks"
                        }
 
     # Max delivery period got from taxons
