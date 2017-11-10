@@ -378,6 +378,9 @@ module Contentful
       # When the LP is oriented to a specific site version (AU or US), this is where users are redirected to
       site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
+      # Check if the LP requests an extra spacing between top navigation and content
+      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? 'app-container--top-margin' : nil
+
       page_url = parent_container.relative_url
       {
         page_url: page_url,
@@ -386,7 +389,8 @@ module Contentful
         meta_title: meta_title,
         meta_description: meta_description,
         site_version: site_version.downcase,
-        site_version_url_to_redirect: site_version_url_to_redirect
+        site_version_url_to_redirect: site_version_url_to_redirect,
+        page_white_spacing_top: page_white_spacing_top
       }
     end
 
