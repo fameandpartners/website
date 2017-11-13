@@ -9,13 +9,15 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require_relative '../app/middleware/webpack_proxy'
+
 module FameAndPartners
   class Application < Rails::Application
     config.skylight.environments += ['staging']
     config.skylight.alert_log_file = true
 
     # sidekiq needs lib in eager paths
-    config.eager_load_paths += %W( #{config.root}/lib/facebook )
+    config.eager_load_paths += %W( #{config.root}/lib/facebook)
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed
     if Rails.env.test?
@@ -153,5 +155,10 @@ module FameAndPartners
         end
       end
     end
+
+    # Add middleware to proxy requests to react app
+    config.paths.add File.join('app', 'middleware'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'middleware', '*')]
+    config.middleware.use WebpackProxy, {ssl_verify_none: true}
   end
 end
