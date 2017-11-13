@@ -7,6 +7,8 @@ doctype html
 
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'application_redesign'
+    = stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
+    
     = csrf_meta_tags
 
     = render 'layouts/redesign/head'
@@ -15,8 +17,9 @@ doctype html
 
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
-
-    = render 'layouts/redesign/header'
+    #react-menu.__react_root__
+    #react-header.__react_root__
+    #react-cart.__react_root__
 
     #content-container.content-container
       - unless disable_notices?
@@ -24,7 +27,7 @@ doctype html
 
       = yield
 
-    = render 'layouts/redesign/footer'
+    #react-footer.__react_root__
     = render 'layouts/redesign/shopping_bag'
 
     - if Features.active?(:marketing_modals)
@@ -32,3 +35,4 @@ doctype html
 
     = javascript_include_tag 'storefront'
     = render 'layouts/redesign/javascript'
+    = javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
