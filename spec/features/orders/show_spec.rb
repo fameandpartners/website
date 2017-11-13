@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'show order', type: :feature do
+xdescribe 'show order', type: :feature do
   before(:each) do
     @user  = FactoryGirl.create(:spree_user)
     @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)

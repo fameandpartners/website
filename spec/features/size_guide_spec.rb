@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'size guide spec', type: :feature do
+xdescribe 'size guide spec', type: :feature do
   it 'displays the page' do
     visit '/size-guide'
 
