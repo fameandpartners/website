@@ -104,7 +104,7 @@ module Orders
       end
 
       def product_number
-        global_sku.id
+        global_sku&.id
       end
 
       def sku
@@ -122,8 +122,14 @@ module Orders
       end
 
       def global_sku
-        lip = Orders::LineItemPresenter.new(Spree::LineItem.find(line['line_item_id']))
-        GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
+        li = Spree::LineItem.find_by_id(line['line_item_id'].to_i)
+        lip = nil
+        if li
+          lip = Orders::LineItemPresenter.new(li)
+          GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
+        else
+          nil
+        end
       end
 
       def variant_sku

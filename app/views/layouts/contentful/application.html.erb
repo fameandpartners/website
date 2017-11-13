@@ -15,8 +15,11 @@
 
     <%= render 'layouts/redesign/header' %>
 
-    <% add_spacing_top_content_class = (@landing_page_container[:page_white_spacing_top]) ? 'app-container--top-margin' : nil %>
+    <% add_spacing_top_content_class = @landing_page_container[:page_white_spacing_top] %>
     <div class="app-container <%= add_spacing_top_content_class %>">
+      <% unless disable_notices? %>
+        <%= render 'layouts/redesign/notices' %>
+      <% end %>
       <%= yield %>
     </div>
 
