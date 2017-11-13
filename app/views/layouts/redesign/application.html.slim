@@ -22,6 +22,9 @@ doctype html
     #react-cart.__react_root__
 
     #content-container.content-container
+      - unless disable_notices?
+        = render 'layouts/redesign/notices'
+
       = yield
 
     #react-footer.__react_root__

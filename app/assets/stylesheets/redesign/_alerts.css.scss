@@ -38,7 +38,7 @@
       color: $c-neutral-white;
       font-weight: 600;
       padding-left: 2px;
-      @extend .link-underline;
+      border-bottom: 1px solid $c-neutral-white;
     }
 
   }
@@ -46,6 +46,17 @@
   &.custom-sale-banner-top.PriceDropBanner {
     background: $c-price-drop-bg;
     color: $c-neutral-white;
+  }
+
+  &.custom-sale-banner-top--salmon {
+    background: #f09c90;
+
+    a,
+    .alert-sale-cta {
+      color: $c-neutral-white;
+      font-weight: 600;
+    }
+
   }
 
   .clock {
@@ -80,12 +91,6 @@
       margin-left: 20px;
     }
 
-  }
-
-  // Quick-fix for the gap issue with the alert banner.
-  @media (min-width: $bootstrap-md-width) {
-    margin-top: 104px;
-    margin-bottom: -$mega-menu-desktop-height;
   }
 
   a {
