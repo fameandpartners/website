@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 def questions_partials
   %w{outfits oscar_dresses style_words prom_makeup prom_hair prom_dresses fashionability sexiness hair_colours skin_colours body_shapes}
 end
