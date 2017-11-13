@@ -48,12 +48,12 @@
     color: $c-neutral-white;
   }
 
-  &.custom-sale-banner-top--brown {
-    background: #e4d3c2;
+  &.custom-sale-banner-top--salmon {
+    background: #f09c90;
 
     a,
     .alert-sale-cta {
-      color: $c-neutral-black;
+      color: $c-neutral-white;
       font-weight: 600;
     }
 
@@ -91,12 +91,6 @@
       margin-left: 20px;
     }
 
-  }
-
-  // Quick-fix for the gap issue with the alert banner.
-  @media (min-width: $bootstrap-md-width) {
-    margin-top: 104px;
-    margin-bottom: -$mega-menu-desktop-height;
   }
 
   a {

@@ -142,3 +142,12 @@
   display: -webkit-#{$display};
   display: $display;
 }
+
+// Force Full width
+@mixin real-full-width {
+  flex: none;
+  left: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50% - 8px);
+  padding: 0;
+}
