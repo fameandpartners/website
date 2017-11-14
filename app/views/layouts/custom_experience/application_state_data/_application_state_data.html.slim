@@ -7,6 +7,15 @@ ruby:
   auSite = current_site_version&.name != 'USA'
 
 javascript:
+  window.fixBody = function(shouldFix){
+    var body = document.querySelector('body');
+    if (shouldFix){
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'inherit';
+    }
+  };
+
   window.ApplicationStateData = {
     auSite: #{ raw auSite },
     CartData: #{ raw cart.serialize.to_json },
