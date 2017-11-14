@@ -20,9 +20,8 @@ namespace :newgistics do
     else
       res['response']['Returns'].each do |item_return|
         order = Spree::Order.find_by_number(item_return['RmaNumber'])
-          unless order.autorefundable
-            autorefund_items(item_return['Items'])
-          end
+        unless order.autorefundable
+          autorefund_items(item_return['Items'])
         end
         
         failed_items = order.line_items.select do |li|
@@ -65,17 +64,18 @@ end
 
 def autorefund_items(items)
   items&.each do |item|
-    line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
-                      .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
-    line_items.each do |li| # iterate over line_items and and move them along event progression.
-      receive_return(order, li)
+      line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
+                        .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
+      line_items.each do |li| # iterate over line_items and and move them along event progression.
+        receive_return(order, li)
 
-      accept_return(order, li)
+        accept_return(order, li)
 
-      refund_return(order, line_item)
+        refund_return(order, line_item)
 
-      NewgisticsRefundMailer.email(order, li)
-    end
+        NewgisticsRefundMailer.email(order, li)
+      end
+  end
 end
 
 def accept_return(order, line_item)
