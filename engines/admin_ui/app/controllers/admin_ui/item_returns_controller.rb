@@ -40,7 +40,7 @@ module AdminUi
       end
     end
 
-    def enable
+    def enable_autorefund
       @item_return = ItemReturn.find(params[:item_return_id])
       order = @item_return.line_item.order
       order.autorefundable = true
@@ -48,7 +48,7 @@ module AdminUi
       redirect_to item_return_path(@item_return)
     end
 
-    def disable
+    def disable_autorefund
       @item_return = ItemReturn.find(params[:item_return_id])
       order = @item_return.line_item.order
       order.autorefundable = false
