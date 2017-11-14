@@ -4,6 +4,10 @@
 
 ruby:
   cart = UserCart::UserCartResource.new(order: current_order).read
+  auSite = current_site_version
 
 javascript:
-  window.CartData = #{ raw cart.serialize.to_json };
+  window.ApplicationStateData = {
+    auSite: #{ raw auSite },
+    CartData: #{ raw cart.serialize.to_json },
+  };
