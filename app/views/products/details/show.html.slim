@@ -10,12 +10,12 @@ ruby:
   discount  = @product.discount || { table: { amount: 0 } }
   @product_discount = discount.to_json
 
-/ NOTE: this JS block is loaded into the head, this should contain page data only		
-/ TODO: @product source will need to be cleaned, we have way too many duplicated there		
-/       also images are mess, have to load all_images separately because images inside		
-/       of @pruduct.images include mix of images in defferent ratios.		
-/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`		
-= content_for :head do		
+/ NOTE: this JS block is loaded into the head, this should contain page data only
+/ TODO: @product source will need to be cleaned, we have way too many duplicated there
+/       also images are mess, have to load all_images separately because images inside
+/       of @pruduct.images include mix of images in defferent ratios.
+/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
+= content_for :head do
   javascript:
     window.__userData = {
       user: #{raw @user}
@@ -46,4 +46,5 @@ javascript:
 
 = render partial: 'micro_data'
 
-script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
+= content_for :microservice_js do
+  script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"

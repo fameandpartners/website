@@ -4,7 +4,7 @@
 
 ruby:
   cart = UserCart::UserCartResource.new(order: current_order).read
-  auSite = current_site_version
+  auSite = current_site_version&.name != 'USA'
 
 javascript:
   window.ApplicationStateData = {
