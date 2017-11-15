@@ -1,6 +1,6 @@
-
-
-//= require_tree ./redesign/stylesheets
-
 @import 'custom_experience/reset';
 @import 'custom_experience/react';
+
+// For Alerts
+@import 'redesign/vars';
+@import 'redesign/alerts';
