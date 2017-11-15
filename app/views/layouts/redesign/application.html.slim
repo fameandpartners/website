@@ -17,11 +17,11 @@ doctype html
 
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
+    #react-blanket.__react_root__
     #content-container.content-container
       - unless disable_notices?
       = render 'layouts/redesign/notices'
     
-    #react-blanket.__react_root__
     #react-menu.__react_root__
     #react-header.__react_root__
     #react-cart.__react_root__
