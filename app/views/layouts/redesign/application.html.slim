@@ -17,16 +17,16 @@ doctype html
 
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
+    #content-container.content-container
+      - unless disable_notices?
+      = render 'layouts/redesign/notices'
+    
     #react-blanket.__react_root__
     #react-menu.__react_root__
     #react-header.__react_root__
     #react-cart.__react_root__
+    = yield
 
-    #content-container.content-container
-      - unless disable_notices?
-        = render 'layouts/redesign/notices'
-
-      = yield
 
     #react-footer.__react_root__
     = render 'layouts/redesign/shopping_bag'

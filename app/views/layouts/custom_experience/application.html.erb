@@ -11,6 +11,11 @@
 
   </head>
   <body>
+    <div id="content-container" class="content-container">
+      <% unless disable_notices? %>
+      <%= render 'layouts/redesign/notices' %>
+      <% end %>
+    </div>
     <div id="react-blanket" class="__react_root__"></div>
     <div id="react-menu" class="__react_root__"></div>
     <div id="react-header" class="__react_root__"></div>
