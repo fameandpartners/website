@@ -69,10 +69,6 @@ javascript:
         .product-row
           = link_to 'buy now', '#', class: 'btn large grey wide', data: { action: 'buy' }
         .product-row
-          - moodboard_link_data = { 'title-add' => 'add to moodboard', 'title-remove' => 'Remove from moodboard', 'action' => 'add-to-wishlist', 'product-id' => @product.id, 'id' => @product.master_id, 'color-id' => nil }
-          - moodboard_link_path = spree_user_signed_in? ? @product.path : spree.signup_path
-          = link_to '+ moodboard', moodboard_link_path, class: 'btn large pink wide wish-list-link', data: moodboard_link_data
-        .product-row
           .grid-4
             = link_to '#what-size', class: 'product-icons toggle-sizes' do
               .icon-hanger
