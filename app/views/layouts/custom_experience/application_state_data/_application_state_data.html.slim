@@ -18,5 +18,6 @@ javascript:
 
   window.ApplicationStateData = {
     auSite: #{ raw auSite },
+    currentSiteVersion: "#{current_site_version&.name}",
     CartData: #{ raw cart.serialize.to_json },
   };
