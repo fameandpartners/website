@@ -39,6 +39,22 @@ javascript:
 
 .ibox
   .ibox-title
+    h3 Autocredit Refund
+  .ibox-content
+    .btn-toolbar
+      -if @item_return.line_item.order.autorefundable.nil? || @item_return.line_item.order.autorefundable
+        .btn-group
+          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Enable
+        .btn-group
+          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Disable
+      -else
+        .btn-group
+          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Enable
+        .btn-group
+          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Disable
+
+.ibox
+  .ibox-title
     h3 Return Request
   .ibox-content
     h3 Order

@@ -106,6 +106,7 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 # utils
 
 gem 'json'
+gem 'net-sftp'
 # replacement for standard library.
 gem 'addressable'
 
