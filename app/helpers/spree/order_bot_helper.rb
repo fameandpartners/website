@@ -49,7 +49,6 @@ module Spree
 
     def get_or_create_product(line_item)
       spree_product = line_item.product
-      binding.pry
       product_id = client.get_product_by_name_and_sku(spree_product.name, CustomItemSku.new(line_item).call)
       if product_id.nil?
         product = OrderBot::Product.new(line_item, spree_product)

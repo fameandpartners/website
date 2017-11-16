@@ -46,7 +46,6 @@ class CustomItemSku
   end
 
   def customization_value_ids
-    binding.pry
     JSON.parse(line_item.customizations).map{|cust| cust['customisation_value']['id']}&.sort
   end
 
