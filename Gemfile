@@ -24,6 +24,7 @@ gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
 gem 'elasticsearch-ruby'
 gem 'elasticsearch-persistence'
+gem 'net-ssh'
 # gem 'elasticsearch-model'
 # gem 'elasticsearch-rails'
 
