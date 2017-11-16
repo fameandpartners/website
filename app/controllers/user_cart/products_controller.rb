@@ -100,7 +100,7 @@ class UserCart::ProductsController < UserCart::BaseController
     end
 
     def reapply_delivery_promo
-     if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
+      if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
         promotion_service = UserCart::PromotionsService.new(
           order: current_order,
           code:  'DELIVERYDISC'
