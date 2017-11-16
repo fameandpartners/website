@@ -5,6 +5,7 @@
 ruby:
   cart = UserCart::UserCartResource.new(order: current_order).read
   auSite = current_site_version&.name != 'USA'
+  cartData = raw cart.serialize.to_json
 
 javascript:
   window.fixBody = function(shouldFix){
@@ -19,5 +20,6 @@ javascript:
   window.ApplicationStateData = {
     auSite: #{ raw auSite },
     currentSiteVersion: "#{current_site_version&.name}",
-    CartData: #{ raw cart.serialize.to_json },
+    CartData: #{ raw cartData },
+    UserData: #{ raw spree_current_user.to_json }
   };
