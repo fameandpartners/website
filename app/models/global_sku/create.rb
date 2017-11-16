@@ -104,7 +104,7 @@ class GlobalSku
     end
 
     def customization_value_names
-      customizations&.sort.map {|x| x['customisation_value']['name']}.join(';').presence. # TODO: Thoroughly test this
+      customizations&.sort.map {|x| x['customisation_value']['name']}.join(';').presence # TODO: Thoroughly test this
     end
   end
 end
