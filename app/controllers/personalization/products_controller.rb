@@ -6,15 +6,15 @@ module Personalization
     helper Spree::ProductsHelper
 
     def index
-      @products = Spree::Product.active.joins(:customisation_values).uniq
+      @products = Spree::Product.active.uniq
     end
 
     def show
       if params[:product_slug]
         product_id = get_id_from_slug(params[:product_slug])
-        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find(product_id)
+        @product = Spree::Product.uniq.active(Spree::Config.currency).find(product_id)
       else
-        @product = Spree::Product.joins(:customisation_values).uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
+        @product = Spree::Product.uniq.active(Spree::Config.currency).find_by_permalink(params[:permalink])
       end
 
       # check and redirect if needed
@@ -108,8 +108,8 @@ module Personalization
 
     def incompatibility_map(product = @product)
       result = {}
-      product.customisation_values.includes(:incompatibilities).each do |customisation_value|
-        result[customisation_value.id] = customisation_value.incompatibilities.map(&:incompatible_id)
+      JSON.parse(product.customizations).each do |customisation_value|
+        result[customisation_value['id'] = customisation_value['incompatibilities']&.map(&:incompatible_id)
       end
       result
     end

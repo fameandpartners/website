@@ -49,6 +49,7 @@ module Spree
 
     def get_or_create_product(line_item)
       spree_product = line_item.product
+      binding.pry
       product_id = client.get_product_by_name_and_sku(spree_product.name, CustomItemSku.new(line_item).call)
       if product_id.nil?
         product = OrderBot::Product.new(line_item, spree_product)
@@ -77,8 +78,8 @@ module Spree
           end
         end
         
-        line_item.personalization.customization_values.each do |customization| #customizations
-          tag = get_or_create_tag("customization", customization.presentation)
+        JSON.parse(line_item.customizations).each do |customization| #customizations
+          tag = get_or_create_tag("customization", customization['customisation_value']['presentation'])
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       

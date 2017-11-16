@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.0
--- Dumped by pg_dump version 9.6.0
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1325,7 +1325,9 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    shipped boolean,
+    barcode character varying(255)
 );
 
 
@@ -2010,6 +2012,38 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE newgistics_schedulers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
+
+
+--
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2598,6 +2632,28 @@ ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
 
 
 --
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
+
+
+--
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2632,42 +2688,6 @@ CREATE SEQUENCE render3d_images_id_seq
 --
 
 ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
-
-
---
--- Name: return_item_labels; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE return_item_labels (
-    id integer NOT NULL,
-    tracking_number character varying(255),
-    label_url character varying(255),
-    carrier character varying(255),
-    label_image_url character varying(255),
-    label_pdf_url character varying(255),
-    return_item_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE return_item_labels_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: return_item_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE return_item_labels_id_seq OWNED BY return_item_labels.id;
 
 
 --
@@ -3375,7 +3395,8 @@ CREATE TABLE spree_line_items (
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
     old_price numeric(8,2),
-    delivery_date character varying(255)
+    delivery_date character varying(255),
+    customizations json
 );
 
 
@@ -3631,8 +3652,9 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean,
-    return_type character varying(255)
+    orderbot_synced boolean DEFAULT false NOT NULL,
+    return_type character varying(255),
+    autorefundable boolean
 );
 
 
@@ -3987,7 +4009,8 @@ CREATE TABLE spree_products (
     factory_id integer,
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
     fabric_card_id integer,
-    category_id integer
+    category_id integer,
+    customizations jsonb
 );
 
 
@@ -4889,7 +4912,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
@@ -5841,6 +5864,13 @@ ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_s
 
 
 --
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
+
+
+--
 -- Name: next_logistics_return_request_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5950,13 +5980,6 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
-
-
---
--- Name: return_item_labels id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels ALTER COLUMN id SET DEFAULT nextval('return_item_labels_id_seq'::regclass);
 
 
 --
@@ -6900,6 +6923,14 @@ ALTER TABLE ONLY moodboards
 
 
 --
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: next_logistics_return_request_processes next_logistics_return_request_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7041,14 +7072,6 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
-
-
---
--- Name: return_item_labels return_item_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY return_item_labels
-    ADD CONSTRAINT return_item_labels_pkey PRIMARY KEY (id);
 
 
 --
@@ -9714,8 +9737,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
-INSERT INTO schema_migrations (version) VALUES ('20170724212720');
-
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
@@ -9743,3 +9764,17 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016232403');
+
+INSERT INTO schema_migrations (version) VALUES ('20171101200751');
+
+INSERT INTO schema_migrations (version) VALUES ('20171114001834');
+
+INSERT INTO schema_migrations (version) VALUES ('20171115172748');
+
+INSERT INTO schema_migrations (version) VALUES ('20171116214623');

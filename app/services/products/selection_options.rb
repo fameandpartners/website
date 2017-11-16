@@ -121,7 +121,7 @@ module Products
       # customizations
       def product_customisation_values
         if customisations_available?
-          @product_customisation_values ||= product.customisation_values.by_type(:cut).includes(:incompatibilities)
+          @product_customisation_values ||= JSON.parse(product.customizations)
         else
           []
         end
@@ -129,12 +129,13 @@ module Products
 
       def available_product_customisations
         product_customisation_values.map do |value|
+          value = value['customisation_value']
           OpenStruct.new({
-            id: value.id,
-            name: value.presentation,
-            image: value.image.present? ? value.image.url : 'logo_empty.png',
-            display_price: value.display_price,
-            position: value.position,
+            id: value['id'],
+            name: value['presentation'],
+            image: value['image'].present? ? value['image'].url : 'logo_empty.png',
+            display_price: Spree::Money.new(value['price'], currency: product_making_options.first.currency, no_cents: true),
+            position: value['position'],
           })
         end
       end
@@ -157,7 +158,7 @@ module Products
 
       def customisations_incompatibility_map
         product_customisation_values.inject({}) do |hash, value|
-          hash[value.id] = value.incompatibilities.map(&:incompatible_id)
+          hash[value['id']] = value['incompatibilities']&.map(&:incompatible_id)
           hash
         end
       end

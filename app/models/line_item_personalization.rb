@@ -44,7 +44,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customization_values
-    @customization_values ||= CustomisationValue.where(id: customization_value_ids)
+    @customization_values ||=  JSON.parse(self.line_item.customizations)
   end
 
   def options_hash
@@ -52,8 +52,9 @@ class LineItemPersonalization < ActiveRecord::Base
     values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
 
-    customization_values.each do |value|
-      values[value.presentation] = nil
+    customization_values.each do |customization_value|
+      value = customization_value['customisation_value']
+      values[value['presentation']] = nil
     end
 
     values
@@ -80,7 +81,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def customizations_cost
     result = BigDecimal.new(0)
     customization_values.each do |customization_value|
-      result += calculate_customization_value_cost(customization_value)
+      result += calculate_customization_value_cost(customization_value['customisation_value'])
     end
     result
   end
@@ -129,11 +130,11 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # customization value cost
   def calculate_customization_value_cost(customization_value)
-    discount = customization_value.discount
+    discount = customization_value['discount']
     if discount.present?
-      Spree::Price.new(amount: customization_value.price).apply(discount).price
+      Spree::Price.new(amount: customization_value['price'].to_f).apply(discount.to_f).price
     else
-      customization_value.price
+      customization_value['price'].to_f
     end
   end
 

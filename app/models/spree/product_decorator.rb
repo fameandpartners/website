@@ -274,7 +274,7 @@ Spree::Product.class_eval do
   end
 
   def can_be_customized?
-    customisation_values.present?
+    customizations.present?
   end
 
   # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter

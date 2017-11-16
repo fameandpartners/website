@@ -61,7 +61,7 @@ class CustomisationValue < ActiveRecord::Base
   def set_default_position
     return true if self.position.present? || product.blank?
     if product.present?
-      self.position = product.customisation_values.maximum(:position).to_i + 1
+      self.position = JSON.parse(product.customizations).maximum(:position).to_i + 1
     end
   end
 
