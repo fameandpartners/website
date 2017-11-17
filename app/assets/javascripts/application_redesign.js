@@ -72,6 +72,7 @@
 //= require helpers
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
+//= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
@@ -84,7 +85,7 @@
 // require partials/style/popup
 
 //= require partials/product_collection.js
-// require partials/product_customisation.js
+//require partials/product_customisation.js
 
 //= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
@@ -105,6 +106,9 @@
 // Shopping cart & bag & moodboard
 //--------------------------------
 //= require partials/helpers/shopping_cart
+//= require partials/helpers/user_moodboard
+//= require partials/product_collection_moodboard_links
+//= require partials/shopping_bag
 //= require partials/shopping_cart_summary
 //= require partials/shopping_cart_delivery_times
 //= require partials/side_menu

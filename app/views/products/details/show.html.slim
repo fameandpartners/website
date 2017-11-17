@@ -17,9 +17,6 @@ ruby:
 / TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
 = content_for :head do
   javascript:
-    window.__userData = {
-      user: #{raw @user}
-    };
     window.PdpDataFull = {
       paths: #{raw product_paths.to_json},
       product: #{raw @product.to_json},

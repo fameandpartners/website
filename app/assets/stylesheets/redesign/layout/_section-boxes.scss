@@ -315,7 +315,7 @@ $top-overlay-margin-top: 37px;
 
 .heading-overlay-wrapper {
   text-align: center;
-  z-index: 1;
+  z-index: 0;
 
   &--alignLeft {
     text-align: left;
@@ -334,7 +334,7 @@ $top-overlay-margin-top: 37px;
     text-transform: uppercase;
     background: $c-neutral-black;
     color: $c-neutral-white;
-    z-index: 1;
+    z-index: 0;
   }
 
   &.is-bordered .heading-overlay {
@@ -390,7 +390,7 @@ $top-overlay-margin-top: 37px;
     .tag-info {
       position: absolute;
       top: 48%;
-      z-index: 1;
+      z-index: 0;
     }
 
     .diagonal-line {

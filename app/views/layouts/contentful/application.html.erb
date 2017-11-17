@@ -13,18 +13,22 @@
   </head>
   <body>
 
-    <%= render 'layouts/redesign/header' %>
+    <div id="react-blanket" class="__react_root__"></div>
+    <div id="content-container" class="content-container">
 
     <div class="app-container <%= @landing_page_container[:page_white_spacing_top_class] %>">
       <% unless disable_notices? %>
         <%= render 'layouts/redesign/notices' %>
       <% end %>
+
+      <div id="react-menu" class="__react_root__"></div>
+      <div id="react-header" class="__react_root__"></div>
+      <div id="react-cart" class="__react_root__"></div>
       <%= yield %>
     </div>
 
+
     <%= render 'google_tag_manager/base' %>
-    <%= render 'layouts/redesign/footer' %>
-    <%= render 'layouts/redesign/shopping_bag' %>
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>

@@ -10,6 +10,8 @@
 
 <!-- bootstrap -->
 <script type="text/javascript">
+  moodboard_data  = <%= raw current_user_moodboard.to_json %>;
+  user_moodboards = <%= raw user_moodboards.to_json %>;
 
   window.app = {
     env:    '<%= Rails.env %>',
@@ -19,41 +21,43 @@
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
     current_site_version: <%= raw SiteVersionSerializer.new(current_site_version).to_json %>,
     shopping_cart: new helpers.ShoppingCart({track: <%= Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>}),
+    user_moodboard: new helpers.UserMoodboard(user_moodboards),
+    user_moodboards: new helpers.UserMoodboardStore(user_moodboards),
     events: $({})
   };
 
-  // $(document).ready(function(){
-  //   // Inline Javascript is for javascript to be executed after DOM Content loaded event fired
-  //   <%= yield :inline_javascript %>
-  //
-  //   // init here allows assigned listeners to update data
-  //   window.app.user_moodboard.updateData(moodboard_data);
-  //   window.app.user_moodboards.updateMoodboards(user_moodboards);
-  //   window.app.shopping_cart.setItemCount(<%= current_order.try(:item_count).to_i %>);
-  // });
-  //
-  // $(document).ready(function () {
-  //   initProductCollectionImageHover({
-  //     selector: 'body',
-  //     delegate: '.img-product'
-  //   });
-  // });
+  $(document).ready(function(){
+    // Inline Javascript is for javascript to be executed after DOM Content loaded event fired
+    <%= yield :inline_javascript %>
 
-  // window.clickAddMoodboard = function(target, event) {
-  //   event.stopPropagation();
-  //   var $target, item, user_moodboards;
-  //   $target = $(target);
-  //   user_moodboards = window.app.user_moodboards;
-  //   item = {
-  //     moodboard_id: $target.data("moodboard-id"),
-  //     product_id: $target.data("product-id"),
-  //     color_id: $target.data("color-id")
-  //   };
-  //   user_moodboards.addItem(item);
-  //   return user_moodboards.on("change", function() {
-  //     return $("i", $target).removeClass("fa-plus").addClass("fa-check");
-  //   });
-  // };
+    // init here allows assigned listeners to update data
+    window.app.user_moodboard.updateData(moodboard_data);
+    window.app.user_moodboards.updateMoodboards(user_moodboards);
+    window.app.shopping_cart.setItemCount(<%= current_order.try(:item_count).to_i %>);
+  });
+
+  $(document).ready(function () {
+    initProductCollectionImageHover({
+      selector: 'body',
+      delegate: '.img-product'
+    });
+  });
+
+  window.clickAddMoodboard = function(target, event) {
+    event.stopPropagation();
+    var $target, item, user_moodboards;
+    $target = $(target);
+    user_moodboards = window.app.user_moodboards;
+    item = {
+      moodboard_id: $target.data("moodboard-id"),
+      product_id: $target.data("product-id"),
+      color_id: $target.data("color-id")
+    };
+    user_moodboards.addItem(item);
+    return user_moodboards.on("change", function() {
+      return $("i", $target).removeClass("fa-plus").addClass("fa-check");
+    });
+  };
 
 </script>
 
