@@ -44,7 +44,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customization_values
-    @customization_values ||=  JSON.parse(self.line_item.customizations)
+    @customization_values ||=  JSON.parse(self.line_item.customizations, object_class: OpenStruct)
   end
 
   def options_hash

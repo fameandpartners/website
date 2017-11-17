@@ -205,18 +205,18 @@ class Products::ProductPersonalizationStyleResource
     end
 
     def product_customisation_values
-      JSON.parse(product.customizations)
+      JSON.parse(product.customizations, object_class: OpenStruct)
     end
 
     def available_product_customisations
       product_customisation_values.map do |value|
         value = value['customisation_value']
         OpenStruct.new({
-          id: value['id'],
-          name: value['presentation'],
-          image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
-          price: value['price'],
-          display_price: Spree::Money.new(value['price'], currency: product.making_options.first.currency, no_cents: true)
+          id: value.id,
+          name: value.presentation,
+          image: value.image.present? ? value.image.url : 'logo_empty.png',
+          price: value.price,
+          display_price: Spree::Money.new(value.price, currency: product.making_options.first.currency, no_cents: true)
         })
       end
     end
@@ -224,7 +224,7 @@ class Products::ProductPersonalizationStyleResource
     def customisations_incompatibility_map
       result = {}
       product_customisation_values.each do |value|
-        result[value['id']] = value['incompatibilities']&.map(&:incompatible_id)
+        result[value.customisation_value.id] = value.customisation_value.incompatibilities&.map(&:incompatible_id)
       end
       result
     end

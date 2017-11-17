@@ -49,7 +49,7 @@ module Orders
 
       def customisation_text
         if item.customizations.present?
-          JSON.parse(item.customizations).collect{|x| x['customisation_value']['presentation']}.join(' / ')
+          JSON.parse(item.customizations, object_class: OpenStruct).collect{|x| x.customisation_value.presentation}.join(' / ')
         end
       end
       alias_method :customization_text, :customisation_text
