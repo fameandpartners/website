@@ -24,6 +24,26 @@
       <% end %>
     </span>
 
+    <div class="dropdown">
+      <a href="javascript:;" class="js-trigger-add-to-moodboard" data-toggle="dropdown">
+        <sup>+</sup>
+        <span class="link-underline">Moodboard</span>
+      </a>
+      <div class="dropdown-menu">
+        <% for mb in user_moodboards.moodboards: %>
+          <a href="javascript:;" data-moodboard-id=<%=mb.id%> data-product-id=<%=@product.id%> data-color-id=<%=@product.color.id%> onclick="clickAddMoodboard(this, event);">
+            <% @item = {moodboard_id: mb.id, product_id: @product.id, color_id: @product.color.id} %>
+            <% if window.app.user_moodboards.hasItem(@item): %>
+              <i class="fa fa-check"></i>
+            <% else: %>
+              <i class="fa fa-plus"></i>
+            <% end %>
+            <%= mb.name %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
 </div>
