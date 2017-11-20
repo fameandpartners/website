@@ -1,203 +1,152 @@
-@import 'redesign/vars';
-@media (max-width: 767px)
-{
-    .shopping-spree-onboarding
-    {
-        .mobile
-        {
-            display: block;
-        }
-
-        .desktop
-        {
-            display: none;
-        }
-
-        .dress-one-text
-        {
-            margin-top: 60%;
-        }
-
-
-        #mobile-text
-        {
-            padding-top: 42px;
-        }
-
+@import "redesign/vars";
+@media (max-width: 767px) {
+  .shopping-spree-onboarding {
+    .mobile {
+      display: block;
     }
+
+    .desktop {
+      display: none;
+    }
+
+    .dress-one-text {
+      margin-top: 60%;
+    }
+
+    #mobile-text {
+      padding-top: 42px;
+    }
+  }
 }
 
-@media (min-width: 767px)
-{
+@media (min-width: 767px) {
+  .shopping-spree-onboarding {
+    padding-bottom: 150px;
 
-    .shopping-spree-onboarding
-    {
-        padding-bottom: 150px;
-
-        .mobile
-        {
-            display: none;
-        }
-
-        .desktop
-        {
-            display: block;
-        }
-        #dress-image-one
-        {
-            margin-top: -5%;
-        }
-
+    .mobile {
+      display: none;
     }
 
+    .desktop {
+      display: block;
+    }
+    #dress-image-one {
+      margin-top: -5%;
+    }
+  }
 }
 
-.shopping-spree-onboarding
-{
-    display: block;
-    .btn
-    {
-        padding-left: 0;
-        padding-right: 0;
-    }
+.shopping-spree-onboarding {
+  display: block;
+  .btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    .equal
-    {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  .equal {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
+  &.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f6f5f3;
+    z-index: 150;
+    #shopping-spree-modal-content {
+      width: 100%;
+      height: 100%;
+      font-family: $font-heading;
+      font-weight: 300;
 
-    &.modal
-    {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        background-color: #f6f5f3;
-        z-index: 150;
-        #shopping-spree-modal-content
-        {
-            width: 100%;
-            height: 100%;
-            font-family: $font-heading;
-            font-weight: 300;
+      input {
+        color: black;
+      }
 
-            input
-            {
-                color: black;
-            }
+      .btn-close {
+        top: 22px;
+        right: 22px;
+      }
 
-            .btn-close
-            {
-                top: 22px;
-                right: 22px;
-            }
-
-            .welcome-headline
-            {
-                font-size: 46px;
-                line-height: 1;
-                &#top-headline
-                {
-                    padding-top: 42px;
-                }
-
-                &#bottom-headline
-                {
-                    padding-bottom: 42px;
-                }
-
-            }
-            .base-text
-            {
-                line-height: 31px;
-                font-size: 26px;
-            }
-
-            .body-text
-            {
-                @extend .base-text;
-                min-width: 225px;
-            }
-
-            #enter-email-text
-            {
-                padding-top: 92px;
-            }
-
-
-            .dress-image-left
-            {
-                z-index: -1;
-                padding-left: 0px;
-                img
-                {
-                    width: 100%;
-                }
-            }
-
-
-            .dress-image-right
-            {
-                z-index: -1;
-                padding-right: 0px;
-                img
-                {
-                    width: 100%;
-                }
-            }
-
-            #dress-one
-            {
-                z-index: -1;
-
-                .dress-one-text-two
-                {
-                    padding-top: 319px;
-                }
-            }
-
-            #dress-two
-            {
-                #dress-two-image
-                {
-                    z-index: -1;
-                    img
-                    {
-                        display: block;
-                    }
-                }
-
-                #dress-two-text
-                {
-                    padding-top: 60%;
-                }
-            }
-
-            #dress-three
-            {
-                z-index: -1;
-                .dress-three-percent-text
-                {
-                    padding-top: 36px;
-                }
-
-
-            }
-
-            .dress-three-percent-text
-            {
-                font-size: 56px;
-                font-weight: bold;
-                padding-top: 10px;
-            }
-
+      .welcome-headline {
+        font-size: 46px;
+        line-height: 1;
+        &#top-headline {
+          padding-top: 42px;
         }
 
-    }
+        &#bottom-headline {
+          padding-bottom: 42px;
+        }
+      }
+      .base-text {
+        line-height: 31px;
+        font-size: 26px;
+      }
 
+      .body-text {
+        @extend .base-text;
+        min-width: 225px;
+      }
+
+      #enter-email-text {
+        padding-top: 92px;
+      }
+
+      .dress-image-left {
+        z-index: -1;
+        padding-left: 0px;
+        img {
+          width: 100%;
+        }
+      }
+
+      .dress-image-right {
+        z-index: -1;
+        padding-right: 0px;
+        img {
+          width: 100%;
+        }
+      }
+
+      #dress-one {
+        z-index: -1;
+
+        .dress-one-text-two {
+          padding-top: 319px;
+        }
+      }
+
+      #dress-two {
+        #dress-two-image {
+          z-index: -1;
+          img {
+            display: block;
+          }
+        }
+
+        #dress-two-text {
+          padding-top: 60%;
+        }
+      }
+
+      #dress-three {
+        z-index: -1;
+        .dress-three-percent-text {
+          padding-top: 36px;
+        }
+      }
+
+      .dress-three-percent-text {
+        font-size: 56px;
+        font-weight: bold;
+        padding-top: 10px;
+      }
+    }
+  }
 }

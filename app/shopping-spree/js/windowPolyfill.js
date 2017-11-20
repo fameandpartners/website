@@ -1,4 +1,5 @@
 /* global window */
+
 import noop from './noop';
 
 const win = typeof window === 'object'

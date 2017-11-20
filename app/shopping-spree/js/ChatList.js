@@ -1,172 +1,334 @@
 /* eslint-disable */
-import React from 'react';
-import PropTypes from 'prop-types';
-import * as firebase from 'firebase';
 
-import TextMessage from './TextMessage';
-import JoinedMessage from './JoinedMessage';
-import DressMessage from './DressMessage';
-import FirebaseComponent from './FirebaseComponent';
-import win from './windowPolyfill';
+import React from "react";
+import PropTypes from "prop-types";
+// import autobind from 'react-autobind';
+import * as firebase from "firebase";
 
-export default class ChatList extends FirebaseComponent
-{
-  constructor( props )
-  {
-    super( props );
+import StepMessage from "./StepMessage";
+import TextMessage from "./TextMessage";
+import JoinedMessage from "./JoinedMessage";
+import DressMessage from "./DressMessage";
+import FirebaseComponent from "./FirebaseComponent";
+import win from "./windowPolyfill";
+
+export default class ChatList extends FirebaseComponent {
+  constructor(props) {
+    super(props);
+    // autobind(this);
+
     this.addChatMessage = this.addChatMessage.bind(this);
-    this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind( this );
+    this.addMember = this.addMember.bind(this);
+    this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.showExitModal = this.showExitModal.bind(this);
-    this.state =
-      {
-        messages:  [],
-        updateCount: 0
-      };
+    this.sendStepMessage = this.sendStepMessage.bind(this);
+    this.setMasterUserEmail = this.setMasterUserEmail.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.updateLocalStateStep = this.updateLocalStateStep.bind(this);
+
+    this.state = {
+      messages: [],
+      updateCount: 0,
+      members: [],
+      masterUserEmail: null,
+      step: 0,
+      cart: [],
+    };
   }
 
-  sameOwnerAsLastMessage( email )
-  {
-    if( this.state.messages.length === 0 )
-    {
+  sameOwnerAsLastMessage(email) {
+    if (this.state.messages.length === 0) {
       return false;
-    } else
-    {
-      return ((this.state.messages[this.state.messages.length - 1].props.email === email) && (this.state.messages[this.state.messages.length - 1].type != JoinedMessage));
-    }
-
-  }
-  addChatMessage( data )
-  {
-    let toConcat = null;
-    switch( data.val().type )
-    {
-      case 'text':
-      case 'discount':
-      toConcat = [<TextMessage key={data.key}
-                  text={data.val().value}
-                  iconNumber={parseInt(data.val().from.icon)}
-                  name={data.val().from.name}
-                  email={data.val().from.email}
-                  sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )} />];
-      break;
-
-      case 'welcome_message':
-      break;
-
-      case 'share_dress':
-      toConcat = 
-        [<DressMessage key={data.key}
-         iconNumber={data.val().from.icon}
-         name={data.val().from.name}
-         email={data.val().from.email}
-         sameOwnerAsLastMessage={this.sameOwnerAsLastMessage( data.val().from.email )}
-         dress={data.val().value}
-         showAddToCartModal={this.props.showAddToCartModal}
-         />];
-      break;
-
-      case 'joined':
-      toConcat = [
-          <JoinedMessage key={data.key}
-        name={data.val().from.name}
-        email={data.val().from.email}
-        createdAt={data.val().created_at} />
-      ];
-      break;
-      default:
-      console.log( "unknown card type: " + data.val().type );
-
-    }
-    if( toConcat != null )
-    {
-      this.state.messages = this.state.messages.concat(toConcat);
-      this.setState(
-        {
-          messages: this.state.messages,
-          updateCount: this.state.updateCount + 1
-        }
+    } else {
+      return (
+        this.state.messages[this.state.messages.length - 1].props.email ===
+          email &&
+        this.state.messages[this.state.messages.length - 1].type !=
+          JoinedMessage
       );
     }
   }
+  addChatMessage(data) {
+    let toConcat = null;
+    switch (data.val().type) {
+      case "step":
+        toConcat = [
+          <StepMessage
+            key={data.key}
+            step={data.val().value}
+          />,
+        ];
+        break;
 
-  scrollToBottom ()
-  {
-    this.bottomOfChat.scrollIntoView( { behavior: "instant", block: "end" } );
+      case "text":
+      case "discount":
+        toConcat = [
+          <TextMessage
+            key={data.key}
+            text={data.val().value}
+            iconNumber={parseInt(data.val().from.icon)}
+            name={data.val().from.name}
+            email={data.val().from.email}
+            sameOwnerAsLastMessage={this.sameOwnerAsLastMessage(
+              data.val().from.email,
+            )}
+          />,
+        ];
+        break;
+
+      case "welcome_message":
+        break;
+
+      case "share_dress":
+        toConcat = [
+          <DressMessage
+            key={data.key}
+            iconNumber={data.val().from.icon}
+            name={data.val().from.name}
+            email={data.val().from.email}
+            sameOwnerAsLastMessage={this.sameOwnerAsLastMessage(
+              data.val().from.email,
+            )}
+            dress={data.val().value}
+            showAddToCartModal={this.props.showAddToCartModal}
+          />,
+        ];
+        break;
+
+      case "joined":
+        toConcat = [
+          <JoinedMessage
+            key={data.key}
+            name={data.val().from.name}
+            email={data.val().from.email}
+            createdAt={data.val().created_at}
+          />,
+        ];
+        break;
+      default:
+        console.log("unknown card type: " + data.val().type);
+    }
+    if (toConcat != null) {
+      this.state.messages = this.state.messages.concat(toConcat);
+      this.setState({
+        messages: this.state.messages,
+        updateCount: this.state.updateCount + 1,
+      });
+    }
   }
 
-  
-  printError( error )
-  {
-    console.log( 'Chat List got error' );
-    console.log( error );
+  scrollToBottom() {
+    this.bottomOfChat.scrollIntoView({ behavior: "instant", block: "end" });
   }
-  startListeningToFirebase()
-  {
+
+  printChatError(error) {
+    console.log('Chat List error!');
+    console.log(error);
+  }
+
+  printMemberError(error) {
+    console.log('Member List error!');
+    console.log(error);
+  }
+
+  printCartError(error) {
+    console.log('Cart List error!');
+    console.log(error);
+  }
+
+  addItem(data) {
+    console.log('addItem()...');
+    const item = data.val();
+
+    console.log(item);
+    console.log(`Adding ${item.dress.name} to cart...`);
+
+    this.setState(prevState => ({
+      cart: [...prevState.cart, item.dress],
+    }));
+
+    this.sendStepMessage();
+  }
+
+  addMember(data) {
+    console.log('addMember()...');
+
+    const member = data.val();
+
+    console.log(member);
+    console.log(`${member.from.name} joined Shopping Spree...`);
+
+    this.setState(prevState => ({
+      members: [...prevState.members, member.from],
+    }));
+
+    this.setMasterUserEmail();
+  }
+
+  updateLocalStateStep(data) {
+    let step = data.val();
+    console.log(`updateLocalStateStep(${step})...`);
+
+    this.setState({ step });
+  }
+
+  setMasterUserEmail() {
+    this.databaseRef("members")
+      .orderByKey()
+      .limitToLast(1)
+      .once("value")
+      .then((snapshot) => {
+        let key = Object.keys(snapshot.val())[0];
+        this.setState({
+          masterUserEmail: snapshot.val()[key].from.email,
+        });
+        this.sendStepMessage();
+      });
+  }
+
+  sendStepMessage() {
+    const {
+      email,
+    } = this.props;
+    const {
+      cart,
+      masterUserEmail,
+      members,
+      step,
+    } = this.state;
+
+    console.group('sendStepMessage()...');
+    console.log(`Props Email: ${email}`);
+    console.log(`Master Email: ${masterUserEmail}`);
+    console.log(`Step: ${step}`);
+    console.log('--- Members ---');
+    console.log(members);
+    console.log('--- Cart ---');
+    console.log(cart);
+    console.groupEnd();
+
+    const masterUser = (email == masterUserEmail);
+
+    if (masterUser) {
+      if ((step == 0) && (members.length == 1)) {
+        this.createStepMessage(1);
+        this.updateStepInDB(1);
+      } else if ((step == 1) && (members.length == 2)) {
+        this.createStepMessage(2);
+        this.updateStepInDB(2);
+      } else if ((step == 2) && (cart.length > 1)) {
+        this.createStepMessage(3);
+        this.updateStepInDB(3);
+      }
+    } else {
+      return;
+    }
+  }
+
+  startListeningToFirebase() {
     super.connectToFirebase();
 
-    this.chatsDB  = firebase.apps[0].database().ref( this.props.firebaseNodeId + "/chats" );
-    this.chatsDB.on( 'child_added', this.addChatMessage, this.printError );
+    this.databaseRef("step")
+      .once("value")
+      .then(this.updateLocalStateStep);
+
+    this.databaseRef("chats")
+      .on("child_added", this.addChatMessage, this.printChatError);
+
+    this.databaseRef("members")
+      .on("child_added", this.addMember, this.printMemberError);
+
+    this.databaseRef("cart")
+      .on("child_added", this.addItem, this.printCartError);
+
+    this.databaseRef("step")
+      .on("value", this.updateLocalStateStep);
   }
 
-  stopListeningToFirebase()
-  {
-    this.chatsDB.off( 'child_added', this.addChatMessage );
+  stopListeningToFirebase() {
+    this.databaseRef("chats")
+      .off("child_added", this.addChatMessage);
   }
 
-  componentDidUpdate()
-  {
+  componentDidUpdate() {
+    // console.group('STATE - members');
+    // console.log(this.state.members);
+    // console.groupEnd();
+
+    // console.group('STATE - masterUserEmail');
+    // console.log(this.state.masterUserEmail);
+    // console.groupEnd();
+
     this.scrollToBottom();
   }
 
-  componentWillUnmount()
-  {
+  componentWillUnmount() {
     this.stopListeningToFirebase();
   }
 
-  componentDidMount()
-  {
-    this.startListeningToFirebase();        
+  componentDidMount() {
+    this.startListeningToFirebase();
     this.scrollToBottom();
   }
 
-  showExitModal()
-  {
+  showExitModal() {
     this.props.updateExitModalStatus();
   }
-  
-  render()
-  {
-    return(
-        <div className="chat-list">
-        <div className="row chat-header">
-        <div className="col-xs-4 header-name">
-        {this.props.name}
-      </div>
-        <div className="col-xs-8 header-name text-right">
-        <span className="chat-list-exit link" onClick={this.showExitModal} role="button">
-        Exit
-      </span>
-        <span className="link" onClick={this.props.showShareModal} role="button">
-        Add more friends!
-      </span>
-        </div>
 
-      </div>
+  render() {
+    return (
+      <div className="chat-list">
+        <div className="row chat-header">
+          <div className="col-xs-4 header-name">
+            {this.props.name}
+            {
+              (this.state.members.length - 1) > 0
+                ?
+                (
+                  <span>
+                    &nbsp;and&nbsp;
+                    <span className="u-text-decoration--underline">
+                      {this.state.members.length - 1} more
+                    </span>
+                  </span>
+                )
+                :
+                null
+            }
+          </div>
+          <div className="col-xs-8 header-name text-right">
+            <span
+              className="chat-list-exit link"
+              onClick={this.showExitModal}
+              role="button"
+            >
+              Exit
+            </span>
+            <span
+              className="link"
+              onClick={this.props.showShareModal}
+              role="button"
+            >
+              Add more friends!
+            </span>
+          </div>
+        </div>
         <div className="row">
-        <div className="chat-content">
-        <ul>
-        {this.state.messages}
-      </ul>
-        <div style={{ float:"left", clear: "both" }} ref={(el) => { this.bottomOfChat = el; }} >
+          <div className="chat-content">
+            <ul>{this.state.messages}</ul>
+            <div
+              style={{ float: "left", clear: "both" }}
+              ref={el => {
+                this.bottomOfChat = el;
+              }}
+            />
+          </div>
         </div>
-        </div>
-        </div>
-        </div>
+      </div>
     );
   }
 }
-
 
 ChatList.propTypes = {
   firebaseAPI: PropTypes.string.isRequired,
@@ -176,5 +338,6 @@ ChatList.propTypes = {
   name: PropTypes.string.isRequired,
   doneShoppingSpree: PropTypes.func.isRequired,
   showShareModal: PropTypes.func.isRequired,
-  updateExitModalStatus: PropTypes.func.isRequired
+  updateExitModalStatus: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
 };

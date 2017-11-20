@@ -1,26 +1,20 @@
-@import 'shopping_spree_avatars';
+@import "shopping_spree_avatars";
 
-.shopping-spree-container
-{
-    .chat-content
-    {
-        .text-message
-        {
-            .message-name
-            {
-                margin-top: 16px;
-                font-size: 15px;
-                color: #979797;
-            }
+.shopping-spree-container {
+  .chat-content {
+    .text-message {
+      .message-name {
+        margin-top: 16px;
+        font-size: 15px;
+        color: #979797;
+      }
 
-            .firebase-text
-            {
-                background-color: #f5f5f5;
-                border-radius: 9px;
-                padding: 10px 12px 17px 23px;
-                margin-bottom: 5px;
-            }
-
-        }
+      .firebase-text {
+        background-color: #f5f5f5;
+        border-radius: 9px;
+        padding: 10px 12px 17px 23px;
+        margin-bottom: 5px;
+      }
     }
+  }
 }
