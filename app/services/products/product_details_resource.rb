@@ -267,7 +267,7 @@ class Products::ProductDetailsResource
           image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
           price: value['price'],
           display_price: Spree::Money.new(value['price'], currency: product.making_options.first.currency, no_cents: true),
-          discount: value['discounts'].detect{ |discount| discount['sale']blank? || discount['sale'].active? } #TODO: Check on this discount crud.
+          discount: value['discounts'].detect{ |discount| discount['sale'].blank? || discount['sale'].active? } #TODO: Check on this discount crud.
         })
       end
     end
