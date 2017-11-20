@@ -260,7 +260,7 @@ class Products::ProductDetailsResource
 
     def available_product_customisations
       product_customisation_values.map do |value|
-        value = valuep'customisation_value']
+        value = value['customisation_value']
         OpenStruct.new({
           id: value['id'],
           name: value['presentation'],
