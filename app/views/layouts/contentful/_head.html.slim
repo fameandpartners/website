@@ -38,9 +38,6 @@ meta name="p:domain_verify" content="bca305b234684f817b52dc0131747eb6"
 
 script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
 
-- if !Rails.env.production?
-  meta name="robots" content="noindex, nofollow"
-
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render 'marketing/sync_trackers'
 
