@@ -81,7 +81,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def customizations_cost
     result = BigDecimal.new(0)
     customization_values.each do |customization_value|
-      result += calculate_customization_value_cost(customization_value['customisation_value'])
+      result += calculate_customization_value_cost(customization_value.customisation_value)
     end
     result
   end
@@ -130,11 +130,11 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # customization value cost
   def calculate_customization_value_cost(customization_value)
-    discount = customization_value['discount']
+    discount = customization_value.discount
     if discount.present?
-      Spree::Price.new(amount: customization_value['price'].to_f).apply(discount.to_f).price
+      Spree::Price.new(amount: customization_value.price.to_f).apply(discount.to_f).price
     else
-      customization_value['price'].to_f
+      customization_value.price.to_f
     end
   end
 

@@ -123,7 +123,7 @@ module Orders
 
     def customisation_names
       return [] unless personalizations?
-      Array.wrap(JSON.parse(item.customizations).collect{|x| x.customisation_value.presentation})
+      Array.wrap(JSON.parse(item.customizations, object_class: OpenStruct).collect{|x| x.customisation_value.presentation})
     end
 
     def return_action
