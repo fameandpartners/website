@@ -46,7 +46,7 @@ class CustomItemSku
   end
 
   def customization_value_ids
-    JSON.parse(line_item.customizations, object_class: OpenStruct).map{ |cust| cust.customisation_value.id }&.sort
+    JSON.parse(line_item.customizations).map{ |cust| cust['customisation_value']['id'] }&.sort
   end
 
   def height

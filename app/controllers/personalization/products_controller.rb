@@ -108,8 +108,8 @@ module Personalization
 
     def incompatibility_map(product = @product)
       result = {}
-      JSON.parse(product.customizations, object_class: OpenStruct).each do |customization|
-        result[customization.customisation_value.id] = customization.customisation_value.incompatibilities&.map(&:incompatible_id)
+      JSON.parse(product.customizations).each do |customization|
+        result[customization['customisation_value']['id']] = customization['customisation_value']['incompatibilities']&.map(&:incompatible_id)
       end
       result
     end

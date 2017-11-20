@@ -57,7 +57,7 @@ module Orders
         line['color'] || 'Unknown Color'
       end
 
-      def customization_values
+      def customization_values #TODO: Need to address this situation
         if personalization.present?
           customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
           customs.join('|')

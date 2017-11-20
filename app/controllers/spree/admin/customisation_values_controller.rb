@@ -7,7 +7,7 @@ module Spree
         respond_with(collection)
       end
 
-      def update
+      def update #TODO: Need to address this
         customisation_value = @product.customisation_values.find(params[:id])
         customisation_value.update_attributes(
           params[:customisation_value].reverse_merge(incompatible_ids: [])

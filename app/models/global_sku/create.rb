@@ -100,11 +100,11 @@ class GlobalSku
     end
 
     def customization_value_ids
-      customizations&.sort.map {|x| x.customisation_value.id}.join(';').presence
+      customizations&.sort.map {|x| x['customisation_value']['id']}.join(';').presence
     end
 
     def customization_value_names
-      customizations&.sort.map {|x| x.customisation_value.name}.join(';').presence # TODO: Thoroughly test this
+      customizations&.sort.map {|x| x['customisation_value']['name']}.join(';').presence # TODO: Thoroughly test this
     end
   end
 end

@@ -28,7 +28,7 @@ class GlobalSku < ActiveRecord::Base
   end
 
   def self.create_by_line_item(line_item_presenter:)
-    customizations = Array.wrap(JSON.parse(line_item_presenter.item.customization_values, object_class: OpenStruct))
+    customizations = Array.wrap(JSON.parse(line_item_presenter.item.customizations))
     GlobalSku::Create.new(
       style_number:   line_item_presenter.style_number,
       product_name:   line_item_presenter.style_name,

@@ -44,7 +44,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customization_values
-    @customization_values ||=  JSON.parse(self.line_item.customizations, object_class: OpenStruct)
+    @customization_values ||=  JSON.parse(self.line_item.customizations)
   end
 
   def options_hash
@@ -81,7 +81,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def customizations_cost
     result = BigDecimal.new(0)
     customization_values.each do |customization_value|
-      result += calculate_customization_value_cost(customization_value.customisation_value)
+      result += calculate_customization_value_cost(customization_value['customisation_value'])
     end
     result
   end
