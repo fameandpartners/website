@@ -57,7 +57,7 @@ class GlobalSku
     # More at `https://fameandpartners.atlassian.net/browse/WEBSITE-1299?focusedCommentId=22330&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22330`
     # Example: FP2212-HG-S0-F0-AK
     def extended_style_number
-      customizations_map =  customizations.sort.map {|x| x['customisation_value']['name']}
+      customizations_map = customizations.sort.map {|x| x['customisation_value']['name']}
       [style_number].concat(customizations_map).join('-')
     end
 
