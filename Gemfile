@@ -62,6 +62,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'react-rails', '~> 1.6'
 gem 'asset_sync', '~> 2.0'
 gem 'fog-aws', '~> 1.2.0'
+gem 'rack-proxy'
 
 # Data
 gem 'event_sourced_record'

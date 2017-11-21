@@ -120,5 +120,5 @@ when :test
     index.color_variants = :color_variants_test
   end
 
-  configatron.node_pdp_url = "tbd"
+  configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 end

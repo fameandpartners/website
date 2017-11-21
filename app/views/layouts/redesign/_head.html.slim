@@ -20,9 +20,6 @@ meta name="p:domain_verify" content="bca305b234684f817b52dc0131747eb6"
 
 script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
 
-- if !Rails.env.production?
-  meta name="robots" content="noindex, nofollow"
-
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render 'marketing/sync_trackers'
 
@@ -31,3 +28,6 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
 = yield :head
+
+/ Application State Data for new header (e.g. Cart)...
+= render :partial => '/layouts/custom_experience/application_state_data/application_state_data'

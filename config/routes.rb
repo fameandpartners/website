@@ -630,6 +630,10 @@ FameAndPartners::Application.routes.draw do
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
 
+      scope '/user_cart' do
+        post 'products' => 'products#create'
+      end
+
       # user profile
       get 'profile' => 'profiles#show'
 
