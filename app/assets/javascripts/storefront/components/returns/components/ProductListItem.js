@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import autoBind from 'auto-bind';
 import classnames from 'classnames';
 
@@ -15,25 +16,25 @@ import Select from '../../shared/Select';
 import SimpleButton from '../components/SimpleButton';
 import ShippingInfo from './ShippingInfo';
 
-const propTypes = {
-  activeTextBox: PropTypes.number,
-  canUpdateReturnArray: PropTypes.bool,
-  confirmationPage: PropTypes.bool,
-  checkboxStatus: PropTypes.bool,
-  hasError: PropTypes.bool,
-  internationalCustomer: PropTypes.bool,
-  orderIndex: PropTypes.number,
-  orderNumber: PropTypes.string,
-  product: PropTypes.object.isRequired,
-  returnArray: PropTypes.array.isRequired,
-  returnEligible: PropTypes.bool.isRequired,
-  showForm: PropTypes.bool,
-  returnRequested: PropTypes.bool,
-  handlePopulateLogistics: PropTypes.func,
-  updateReturnArray: PropTypes.func,
-  updatePrimaryReturnReason: PropTypes.func,
-  updateOpenEndedReturnReason: PropTypes.func,
-};
+// const propTypes = {
+//   activeTextBox: PropTypes.number,
+//   canUpdateReturnArray: PropTypes.bool,
+//   confirmationPage: PropTypes.bool,
+//   checkboxStatus: PropTypes.bool,
+//   hasError: PropTypes.bool,
+//   internationalCustomer: PropTypes.bool,
+//   orderIndex: PropTypes.number,
+//   orderNumber: PropTypes.string,
+//   product: PropTypes.object.isRequired,
+//   returnArray: PropTypes.array.isRequired,
+//   returnEligible: PropTypes.bool.isRequired,
+//   showForm: PropTypes.bool,
+//   returnRequested: PropTypes.bool,
+//   handlePopulateLogistics: PropTypes.func,
+//   updateReturnArray: PropTypes.func,
+//   updatePrimaryReturnReason: PropTypes.func,
+//   updateOpenEndedReturnReason: PropTypes.func,
+// };
 
 const defaultProps = {
   activeTextBox: null,
@@ -53,7 +54,7 @@ const defaultProps = {
   updateReturnArray: noop,
 };
 
-class ProductListItem extends Component {
+class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -376,7 +377,7 @@ class ProductListItem extends Component {
     );
   }
 }
-ProductListItem.propTypes = propTypes;
+// ProductListItem.propTypes = propTypes;
 ProductListItem.defaultProps = defaultProps;
 
 export default ProductListItem;

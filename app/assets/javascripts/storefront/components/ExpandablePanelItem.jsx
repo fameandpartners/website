@@ -1,6 +1,8 @@
-import React, {Component, PropTypes,} from 'react';
+/* eslint-disable */
+import React from 'react';
 
-class ExpandablePanel extends Component {
+
+class ExpandablePanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,13 +37,6 @@ class ExpandablePanel extends Component {
       );
     }
 }
-
-ExpandablePanel.propTypes = {
-    openedByDefault: PropTypes.bool,
-    itemGroup: PropTypes.node,
-    revealedContent: PropTypes.node,
-    openPanelCallback: PropTypes.func,
-};
 
 ExpandablePanel.defaultProps = {
     openedByDefault: false,

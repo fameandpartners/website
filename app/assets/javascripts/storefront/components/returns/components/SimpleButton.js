@@ -1,17 +1,18 @@
-import React, { PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 
-const propTypes = {
-  big: PropTypes.bool,
-  buttonCopy: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  containerClassName: PropTypes.string,
-  isLoading: PropTypes.bool,
-  link: PropTypes.string,
-  localLink: PropTypes.bool,
-  withLink: PropTypes.bool,
-};
+// const propTypes = {
+//   big: PropTypes.bool,
+//   buttonCopy: PropTypes.string.isRequired,
+//   className: PropTypes.string,
+//   containerClassName: PropTypes.string,
+//   isLoading: PropTypes.bool,
+//   link: PropTypes.string,
+//   localLink: PropTypes.bool,
+//   withLink: PropTypes.bool,
+// };
 
 const defaultProps = {
   big: false,
@@ -72,7 +73,7 @@ const SimpleButton = ({
       </div>
   );
 
-SimpleButton.propTypes = propTypes;
+// SimpleButton.propTypes = propTypes;
 SimpleButton.defaultProps = defaultProps;
 
 export default SimpleButton;
