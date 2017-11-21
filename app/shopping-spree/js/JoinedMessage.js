@@ -22,9 +22,8 @@ export default class JoinedMessage extends React.Component {
     return (
       <li className="joined-message">
         <div className="row equal">
-          <div className="joined-text col-xs-push-2 col-xs-8">
-            {this.formatDate(this.props.createdAt)} - {this.props.name} <br />joined
-            the Clique
+          <div className="joined-text col-xs-push-1 col-xs-10">
+            {this.formatDate(this.props.createdAt)} - {this.props.name} joined the Social Experience
           </div>
         </div>
       </li>

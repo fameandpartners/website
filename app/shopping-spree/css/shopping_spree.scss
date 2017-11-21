@@ -1,6 +1,7 @@
 @import "shopping_spree_text_message";
 @import "shopping_spree_joined_message";
 @import "shopping_spree_dress_message";
+@import "shopping_spree_step_message";
 @import "shopping_spree_cart";
 @import "shopping_spree_modal";
 @import "shopping_spree_share_modal";
@@ -83,7 +84,6 @@ $chat_bar_header_height: 22px;
 }
 
 .shopping-spree-wrapper {
-  cursor: pointer;
   position: fixed;
   overflow: hidden;
   z-index: 999;

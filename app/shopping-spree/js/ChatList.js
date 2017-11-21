@@ -9,30 +9,30 @@ import TextMessage from "./TextMessage";
 import JoinedMessage from "./JoinedMessage";
 import DressMessage from "./DressMessage";
 import FirebaseComponent from "./FirebaseComponent";
-import win from "./windowPolyfill";
 
 export default class ChatList extends FirebaseComponent {
   constructor(props) {
     super(props);
 
     this.addChatMessage = this.addChatMessage.bind(this);
-    this.addMember = this.addMember.bind(this);
     this.sameOwnerAsLastMessage = this.sameOwnerAsLastMessage.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.showExitModal = this.showExitModal.bind(this);
-    this.sendStepMessage = this.sendStepMessage.bind(this);
-    this.setMasterUserEmail = this.setMasterUserEmail.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.updateLocalStateStep = this.updateLocalStateStep.bind(this);
+    this.addMember = this.addMember.bind(this);
 
     this.state = {
       messages: [],
       updateCount: 0,
       members: [],
-      masterUserEmail: null,
-      step: 0,
-      cliqueCart: [],
     };
+  }
+
+  addMember(data) {
+    const member = data.val();
+
+    this.setState(prevState => ({
+      members: [...prevState.members, member.from],
+    }));
   }
 
   sameOwnerAsLastMessage(email) {
@@ -56,6 +56,7 @@ export default class ChatList extends FirebaseComponent {
           <StepMessage
             key={data.key}
             step={data.val().value}
+            showShareModal={this.props.showShareModal}
           />,
         ];
         break;
@@ -93,7 +94,6 @@ export default class ChatList extends FirebaseComponent {
             showAddToCartModal={this.props.showAddToCartModal}
           />,
         ];
-        this.addItem(data);
         break;
 
       case "joined":
@@ -127,108 +127,11 @@ export default class ChatList extends FirebaseComponent {
     console.log(error);
   }
 
-  printMemberError(error) {
-    console.log('Member List error!');
-    console.log(error);
-  }
-
-  addItem(data) {
-    const item = data.val().value;
-    console.log(`Adding ${item.name} to Clique Cart...`);
-
-    let updatedCart = [...this.state.cliqueCart, item];
-
-    this.setState({
-      cliqueCart: updatedCart,
-    }, function() {
-      this.sendStepMessage();
-    });
-  }
-
-  addMember(data) {
-    const member = data.val();
-    console.log(`${member.from.name} joined Shopping Spree...`);
-
-    this.setState(prevState => ({
-      members: [...prevState.members, member.from],
-    }));
-
-    this.setMasterUserEmail();
-  }
-
-  updateLocalStateStep(data) {
-    let step = data.val();
-    console.log(`updateLocalStateStep(${step})...`);
-
-    this.setState({ step });
-  }
-
-  setMasterUserEmail() {
-    this.databaseRef("members")
-      .orderByKey()
-      .limitToLast(1)
-      .once("value")
-      .then((snapshot) => {
-        let key = Object.keys(snapshot.val())[0];
-        this.setState({
-          masterUserEmail: snapshot.val()[key].from.email,
-        });
-        this.sendStepMessage();
-      });
-  }
-
-  sendStepMessage() {
-    const {
-      email,
-    } = this.props;
-    const {
-      cliqueCart,
-      masterUserEmail,
-      members,
-      step,
-    } = this.state;
-
-    console.group('sendStepMessage()...');
-    console.log(`Props Email: ${email}`);
-    console.log(`Master Email: ${masterUserEmail}`);
-    console.log(`Step: ${step}`);
-    console.log('--- Members ---');
-    console.log(members);
-    console.log('--- Clique Cart ---');
-    console.log(cliqueCart);
-    console.groupEnd();
-
-    if ((step == 2) && (cliqueCart.length > 0)) {
-      this.createStepMessage(3);
-      this.updateStepInDB(3);
-    }
-
-    const masterUser = (email == masterUserEmail);
-
-    if (masterUser) {
-      if ((step == 0) && (members.length == 1)) {
-        this.createStepMessage(1);
-        this.updateStepInDB(1);
-      } else if ((step == 1) && (members.length == 2)) {
-        this.createStepMessage(2);
-        this.updateStepInDB(2);
-      }
-    } else {
-      return;
-    }
-  }
-
   startListeningToFirebase() {
     super.connectToFirebase();
 
-    this.databaseRef("step")
-      .on("value", this.updateLocalStateStep);
-
     this.databaseRef("chats")
       .on("child_added", this.addChatMessage, this.printChatError);
-
-    this.databaseRef("members")
-      .on("child_added", this.addMember, this.printMemberError);
   }
 
   stopListeningToFirebase() {

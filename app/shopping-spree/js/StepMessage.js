@@ -1,9 +1,9 @@
 /* eslint-disable */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
-export default class StepMessage extends Component {
+export default class StepMessage extends React.Component {
 
   render() {
     const stepNum = Number(this.props.step);
@@ -12,18 +12,25 @@ export default class StepMessage extends Component {
     if (stepNum == 1) {
       message = (
         <div>
-          <p>Step 1</p>
-          <p>
+          <p className="StepMessage__content">
+            Step 1
+            <br/>
             Invite your friends to shop with you
           </p>
-          <button>Invite</button>
+          <button
+            className="StepMessage__invite-button"
+            onClick={this.props.showShareModal}
+          >
+            Invite
+          </button>
         </div>
       );
     } else if (stepNum == 2) {
       message = (
         <div>
-          <p>Step 2</p>
-          <p>
+          <p className="StepMessage__content">
+            Step 2
+            <br/>
             Start sharing! Easily share products with the group from any product page.
           </p>
         </div>
@@ -31,8 +38,9 @@ export default class StepMessage extends Component {
     } else if (stepNum == 3) {
       message = (
         <div>
-          <p>Step 3</p>
-          <p>
+          <p className="StepMessage__content">
+            Step 3
+            <br/>
             Shop and save! Get up to 25% off when you check out together
           </p>
         </div>
@@ -40,9 +48,9 @@ export default class StepMessage extends Component {
     }
 
     return (
-      <li className="text-message">
+      <li className="StepMessage">
         <div className="row equal no-left-gutter">
-          <div className="firebase-text col-xs-12">
+          <div className="StepMessage__container col-xs-push-1 col-xs-10">
             {message}
           </div>
         </div>
@@ -53,4 +61,5 @@ export default class StepMessage extends Component {
 
 StepMessage.propTypes = {
   step: PropTypes.string.isRequired,
+  showShareModal: PropTypes.func.isRequired,
 };
