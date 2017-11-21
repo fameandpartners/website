@@ -1,0 +1,16 @@
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+/Users/truongster/.rbenv/versions/2.3.4/bin/ruby -r ./siteconf20171121-52434-1q7acgw.rb extconf.rb
+creating Makefile
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR=" clean
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR="
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.bundle
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20171121-52434-1350l3j

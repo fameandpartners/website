@@ -1,0 +1,72 @@
+=== 4.5.0
+
+* [backwards-incompatible] Switch from DeepClone to copy-on-write for temp. As part of the implementation, *values* are no longer cloned.
+
+=== 4.4.1
+
+* Make lock!/unlock! support blocks
+
+=== 4.4.0
+
+* [backwards-incompatible] Make temp preserve locking state across invocations
+
+=== 4.3.0
+
+* [backwards-incompatible] Make nil into a valid config value
+* [backwards-incompatible] Make temp clean up after itself when an exception is thrown
+
+=== 4.2.1
+
+* Fix a bug with deep cloning which caused temping to break for nested settings
+
+=== 4.2.0
+
+* [backwards-incompatible] Make to_h/to_hash recursively hashify Configatron::Stores, and resolve Configatron::Procs.
+
+=== 4.1.1
+
+* Fix delayed attributes
+
+=== 4.1.0
+
+* Fix bugs from BasicObject fallout
+* Have KernelStore proxy calls using `public_send` for consistent shadowing
+
+=== 4.0.3
+
+* Switch Store and RootStore to descend from BasicObject
+
+=== 4.0.2
+
+* Add missing require of Rails integration
+
+=== 4.0.1
+
+* Fix #inspect and #to_s methods on KernelStore to pass through to Store
+
+=== 4.0.0
+
+This is largely a restructuring of existing functionality, making it
+simpler and more consistent. The tests have also been fully
+refactored.
+
+Added the following:
+
+* A Minitest integration at Configatron::Integrations::Minitest
+* Key errors while locked return the name of the relevant configatron
+* Configatron::RootStore is now the intended way to start a new configatron hiearchy. (You should likely not initialize a Configatron::Store yourself.)
+
+Deprecated the following:
+
+* Initializing a Configatron::Store with a custom hash
+* Calling .nil?/.empty? on a Configatron::Store
+* Calling locking, temp, or reset methods directly on a Configatron::Store (moved instead to Configatron::RootStore)
+* A DeepClone module is no longer defined at the top-level
+* Removed Configatron::KernelStore
+
+Other backwards-incompatible changes:
+
+* Renamespaced Configatron::Rails under Configatron::Integrations::Rails.
+* Moved locking and temp methods to exist just on Configatron::RootStore.
+* Configatron::Store.inspect no longer takes a name
+* key? will now return true for sub-Configatron::Stores

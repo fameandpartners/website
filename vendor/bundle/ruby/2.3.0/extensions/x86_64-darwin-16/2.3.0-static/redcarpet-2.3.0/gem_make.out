@@ -1,0 +1,24 @@
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/redcarpet-2.3.0/ext/redcarpet
+/Users/truongster/.rbenv/versions/2.3.4/bin/ruby -r ./siteconf20171121-52434-dn7y40.rb extconf.rb
+creating Makefile
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/redcarpet-2.3.0/ext/redcarpet
+make "DESTDIR=" clean
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/redcarpet-2.3.0/ext/redcarpet
+make "DESTDIR="
+compiling autolink.c
+compiling buffer.c
+compiling houdini_href_e.c
+compiling houdini_html_e.c
+compiling html.c
+compiling html_smartypants.c
+compiling markdown.c
+compiling rc_markdown.c
+compiling rc_render.c
+compiling stack.c
+linking shared-object redcarpet.bundle
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/redcarpet-2.3.0/ext/redcarpet
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 redcarpet.bundle ./.gem.20171121-52434-qp57hz

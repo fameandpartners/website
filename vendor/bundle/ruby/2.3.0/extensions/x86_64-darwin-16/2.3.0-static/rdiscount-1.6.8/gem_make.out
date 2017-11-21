@@ -1,0 +1,273 @@
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/rdiscount-1.6.8/ext
+/Users/truongster/.rbenv/versions/2.3.4/bin/ruby -r ./siteconf20171121-52434-eaxsyt.rb extconf.rb
+checking for random()... yes
+checking for srandom()... yes
+checking for rand()... yes
+checking for srand()... yes
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/extensions/x86_64-darwin-16/2.3.0-static/rdiscount-1.6.8/mkmf.log
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/rdiscount-1.6.8/ext
+make "DESTDIR=" clean
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/rdiscount-1.6.8/ext
+make "DESTDIR="
+compiling basename.c
+compiling Csio.c
+compiling css.c
+css.c:49:2: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+        CREATE(f);
+        ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+1 warning generated.
+compiling docheader.c
+compiling dumptree.c
+dumptree.c:143:2: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+        CREATE(stack);
+        ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+1 warning generated.
+compiling emmatch.c
+emmatch.c:113:20: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+    case 2: if ( e = empair(f,first,last,match=2) )
+                 ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+emmatch.c:113:20: note: place parentheses around the assignment to silence this warning
+    case 2: if ( e = empair(f,first,last,match=2) )
+                   ^
+                 (                               )
+emmatch.c:113:20: note: use '==' to turn this assignment into an equality comparison
+    case 2: if ( e = empair(f,first,last,match=2) )
+                   ^
+                   ==
+1 warning generated.
+compiling generate.c
+generate.c:524:19: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+    else if ( tag = pseudo(ref->link) ) {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+generate.c:524:19: note: place parentheses around the assignment to silence this warning
+    else if ( tag = pseudo(ref->link) ) {
+                  ^
+              (                      )
+generate.c:524:19: note: use '==' to turn this assignment into an equality comparison
+    else if ( tag = pseudo(ref->link) ) {
+                  ^
+                  ==
+generate.c:578:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(name);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+generate.c:609:12: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+                if ( ref = bsearch(&key, T(*f->footnotes), S(*f->footnotes),
+                     ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+generate.c:609:12: note: place parentheses around the assignment to silence this warning
+                if ( ref = bsearch(&key, T(*f->footnotes), S(*f->footnotes),
+                         ^
+generate.c:609:12: note: use '==' to turn this assignment into an equality comparison
+                if ( ref = bsearch(&key, T(*f->footnotes), S(*f->footnotes),
+                         ^
+                         ==
+generate.c:1235:61: warning: incompatible pointer types passing 'void (int, MMIOT *)' (aka 'void (int, struct mmiot *)') to parameter of type 'void (*)(int, void *)' [-Wincompatible-pointer-types]
+        mkd_string_to_anchor(T(pp->text->text), S(pp->text->text), Qchar, f);
+                                                                   ^~~~~
+./markdown.h:135:51: note: passing argument to parameter here
+extern void mkd_string_to_anchor(char*,int, void(*)(int,void*), void*);
+                                                  ^
+generate.c:1306:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(align);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+5 warnings generated.
+compiling html5.c
+compiling markdown.c
+markdown.c:184:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+        if ( end = strstr(T(t->text), "-->") ) {
+             ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+markdown.c:184:11: note: place parentheses around the assignment to silence this warning
+        if ( end = strstr(T(t->text), "-->") ) {
+                 ^
+             (                              )
+markdown.c:184:11: note: use '==' to turn this assignment into an equality comparison
+        if ( end = strstr(T(t->text), "-->") ) {
+                 ^
+                 ==
+markdown.c:229:16: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+                if ( closing = (c == '/') ) c = flogetc(&f);
+                     ~~~~~~~~^~~~~~~~~~~~
+markdown.c:229:16: note: place parentheses around the assignment to silence this warning
+                if ( closing = (c == '/') ) c = flogetc(&f);
+                             ^
+                     (                   )
+markdown.c:229:16: note: use '==' to turn this assignment into an equality comparison
+                if ( closing = (c == '/') ) c = flogetc(&f);
+                             ^
+                             ==
+markdown.c:680:16: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+        if ( p->ident = malloc(4+strlen(prefix)+S(q->text)) )
+             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+markdown.c:680:16: note: place parentheses around the assignment to silence this warning
+        if ( p->ident = malloc(4+strlen(prefix)+S(q->text)) )
+                      ^
+             (                                             )
+markdown.c:680:16: note: use '==' to turn this assignment into an equality comparison
+        if ( p->ident = malloc(4+strlen(prefix)+S(q->text)) )
+                      ^
+                      ==
+markdown.c:799:12: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+        if ( para = (q != text) ) {
+             ~~~~~^~~~~~~~~~~~~
+markdown.c:799:12: note: place parentheses around the assignment to silence this warning
+        if ( para = (q != text) ) {
+                  ^
+             (                 )
+markdown.c:799:12: note: use '==' to turn this assignment into an equality comparison
+        if ( para = (q != text) ) {
+                  ^
+                  ==
+markdown.c:838:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(foot->tag);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+markdown.c:839:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(foot->link);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+markdown.c:840:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(foot->title);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+markdown.c:1089:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(doc->ctx->in);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+markdown.c:1091:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(*doc->ctx->footnotes);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+9 warnings generated.
+compiling mkdio.c
+mkdio.c:48:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(p->text);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+mkdio.c:103:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(line);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+mkdio.c:263:14: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+    if ( len = S(f.out) ) {
+         ~~~~^~~~~~~~~~
+mkdio.c:263:14: note: place parentheses around the assignment to silence this warning
+    if ( len = S(f.out) ) {
+             ^
+         (             )
+mkdio.c:263:14: note: use '==' to turn this assignment into an equality comparison
+    if ( len = S(f.out) ) {
+             ^
+             ==
+3 warnings generated.
+compiling rdiscount.c
+rdiscount.c:18:17: warning: implicit declaration of function 'rb_rdiscount__get_flags' is invalid in C99 [-Wimplicit-function-declaration]
+    int flags = rb_rdiscount__get_flags(self);
+                ^
+1 warning generated.
+compiling resource.c
+resource.c:92:2: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+        CREATE(f->in);
+        ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+resource.c:93:2: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+        CREATE(f->out);
+        ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+resource.c:94:2: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+        CREATE(f->Q);
+        ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+resource.c:99:6: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+            CREATE(*f->footnotes);
+            ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+4 warnings generated.
+compiling tags.c
+compiling toc.c
+toc.c:26:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(res);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+toc.c:53:70: warning: incompatible pointer types passing 'void (int, Cstring *)' to parameter of type 'void (*)(int, void *)' [-Wincompatible-pointer-types]
+                    mkd_string_to_anchor(T(srcp->text->text), S(srcp->text->text), Csputc, &res);
+                                                                                   ^~~~~~
+./markdown.h:135:51: note: passing argument to parameter here
+extern void mkd_string_to_anchor(char*,int, void(*)(int,void*), void*);
+                                                  ^
+2 warnings generated.
+compiling xml.c
+xml.c:49:14: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+        if ( entity = mkd_xmlchar(c) )
+             ~~~~~~~^~~~~~~~~~~~~~~~
+xml.c:49:14: note: place parentheses around the assignment to silence this warning
+        if ( entity = mkd_xmlchar(c) )
+                    ^
+             (                      )
+xml.c:49:14: note: use '==' to turn this assignment into an equality comparison
+        if ( entity = mkd_xmlchar(c) )
+                    ^
+                    ==
+xml.c:67:5: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+    CREATE(f);
+    ^
+./cstring.h:21:26: note: expanded from macro 'CREATE'
+#define CREATE(x)       T(x) = (void*)(S(x) = (x).alloc = 0)
+                               ^
+xml.c:72:14: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+        if ( entity = mkd_xmlchar(c) )
+             ~~~~~~~^~~~~~~~~~~~~~~~
+xml.c:72:14: note: place parentheses around the assignment to silence this warning
+        if ( entity = mkd_xmlchar(c) )
+                    ^
+             (                      )
+xml.c:72:14: note: use '==' to turn this assignment into an equality comparison
+        if ( entity = mkd_xmlchar(c) )
+                    ^
+                    ==
+3 warnings generated.
+linking shared-object rdiscount.bundle
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/rdiscount-1.6.8/ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rdiscount.bundle ./.gem.20171121-52434-pnmg0r

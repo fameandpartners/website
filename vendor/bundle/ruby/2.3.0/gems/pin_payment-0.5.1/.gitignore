@@ -1,0 +1,6 @@
+/.bundle
+/gems
+/pkg
+*.swp
+/.yardoc
+/doc

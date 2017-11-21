@@ -1,0 +1,27 @@
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/thrift-0.10.0.0/ext
+/Users/truongster/.rbenv/versions/2.3.4/bin/ruby -r ./siteconf20171121-52434-84cpci.rb extconf.rb
+checking for strlcpy() in string.h... yes
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/extensions/x86_64-darwin-16/2.3.0-static/thrift-0.10.0.0/mkmf.log
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/thrift-0.10.0.0/ext
+make "DESTDIR=" clean
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/thrift-0.10.0.0/ext
+make "DESTDIR="
+compiling binary_protocol_accelerated.c
+compiling bytes.c
+compiling compact_protocol.c
+compiling memory_buffer.c
+compiling protocol.c
+compiling strlcpy.c
+compiling struct.c
+compiling thrift_native.c
+linking shared-object thrift_native.bundle
+
+current directory: /Users/truongster/src/website/vendor/bundle/ruby/2.3.0/gems/thrift-0.10.0.0/ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 thrift_native.bundle ./.gem.20171121-52434-1u2a07m
