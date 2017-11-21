@@ -133,25 +133,20 @@ export default class ChatList extends FirebaseComponent {
   }
 
   addItem(data) {
-    console.log('addItem()...');
     const item = data.val().value;
+    console.log(`Adding ${item.name} to Clique Cart...`);
 
-    console.log(item);
-    console.log(`Adding ${item.name} to Clique "Cart"...`);
+    let updatedCart = [...this.state.cliqueCart, item];
 
-    this.setState(prevState => ({
-      cliqueCart: [...prevState.cliqueCart, item],
-    }));
-
-    this.sendStepMessage();
+    this.setState({
+      cliqueCart: updatedCart,
+    }, function() {
+      this.sendStepMessage();
+    });
   }
 
   addMember(data) {
-    console.log('addMember()...');
-
     const member = data.val();
-
-    console.log(member);
     console.log(`${member.from.name} joined Shopping Spree...`);
 
     this.setState(prevState => ({
@@ -199,9 +194,14 @@ export default class ChatList extends FirebaseComponent {
     console.log(`Step: ${step}`);
     console.log('--- Members ---');
     console.log(members);
-    console.log('--- Clique "Cart" ---');
+    console.log('--- Clique Cart ---');
     console.log(cliqueCart);
     console.groupEnd();
+
+    if ((step == 2) && (cliqueCart.length > 0)) {
+      this.createStepMessage(3);
+      this.updateStepInDB(3);
+    }
 
     const masterUser = (email == masterUserEmail);
 
@@ -212,9 +212,6 @@ export default class ChatList extends FirebaseComponent {
       } else if ((step == 1) && (members.length == 2)) {
         this.createStepMessage(2);
         this.updateStepInDB(2);
-      } else if ((step == 2) && (cliqueCart.length > 1)) {
-        this.createStepMessage(3);
-        this.updateStepInDB(3);
       }
     } else {
       return;
