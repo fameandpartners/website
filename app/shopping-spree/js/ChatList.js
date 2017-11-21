@@ -2,7 +2,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-// import autobind from 'react-autobind';
 import * as firebase from "firebase";
 
 import StepMessage from "./StepMessage";
@@ -15,7 +14,6 @@ import win from "./windowPolyfill";
 export default class ChatList extends FirebaseComponent {
   constructor(props) {
     super(props);
-    // autobind(this);
 
     this.addChatMessage = this.addChatMessage.bind(this);
     this.addMember = this.addMember.bind(this);
@@ -33,7 +31,7 @@ export default class ChatList extends FirebaseComponent {
       members: [],
       masterUserEmail: null,
       step: 0,
-      cart: [],
+      cliqueCart: [],
     };
   }
 
@@ -49,6 +47,7 @@ export default class ChatList extends FirebaseComponent {
       );
     }
   }
+
   addChatMessage(data) {
     let toConcat = null;
     switch (data.val().type) {
@@ -94,6 +93,7 @@ export default class ChatList extends FirebaseComponent {
             showAddToCartModal={this.props.showAddToCartModal}
           />,
         ];
+        this.addItem(data);
         break;
 
       case "joined":
@@ -132,20 +132,15 @@ export default class ChatList extends FirebaseComponent {
     console.log(error);
   }
 
-  printCartError(error) {
-    console.log('Cart List error!');
-    console.log(error);
-  }
-
   addItem(data) {
     console.log('addItem()...');
-    const item = data.val();
+    const item = data.val().value;
 
     console.log(item);
-    console.log(`Adding ${item.dress.name} to cart...`);
+    console.log(`Adding ${item.name} to Clique "Cart"...`);
 
     this.setState(prevState => ({
-      cart: [...prevState.cart, item.dress],
+      cliqueCart: [...prevState.cliqueCart, item],
     }));
 
     this.sendStepMessage();
@@ -192,7 +187,7 @@ export default class ChatList extends FirebaseComponent {
       email,
     } = this.props;
     const {
-      cart,
+      cliqueCart,
       masterUserEmail,
       members,
       step,
@@ -204,8 +199,8 @@ export default class ChatList extends FirebaseComponent {
     console.log(`Step: ${step}`);
     console.log('--- Members ---');
     console.log(members);
-    console.log('--- Cart ---');
-    console.log(cart);
+    console.log('--- Clique "Cart" ---');
+    console.log(cliqueCart);
     console.groupEnd();
 
     const masterUser = (email == masterUserEmail);
@@ -217,7 +212,7 @@ export default class ChatList extends FirebaseComponent {
       } else if ((step == 1) && (members.length == 2)) {
         this.createStepMessage(2);
         this.updateStepInDB(2);
-      } else if ((step == 2) && (cart.length > 1)) {
+      } else if ((step == 2) && (cliqueCart.length > 1)) {
         this.createStepMessage(3);
         this.updateStepInDB(3);
       }
@@ -230,20 +225,13 @@ export default class ChatList extends FirebaseComponent {
     super.connectToFirebase();
 
     this.databaseRef("step")
-      .once("value")
-      .then(this.updateLocalStateStep);
+      .on("value", this.updateLocalStateStep);
 
     this.databaseRef("chats")
       .on("child_added", this.addChatMessage, this.printChatError);
 
     this.databaseRef("members")
       .on("child_added", this.addMember, this.printMemberError);
-
-    this.databaseRef("cart")
-      .on("child_added", this.addItem, this.printCartError);
-
-    this.databaseRef("step")
-      .on("value", this.updateLocalStateStep);
   }
 
   stopListeningToFirebase() {
@@ -252,14 +240,6 @@ export default class ChatList extends FirebaseComponent {
   }
 
   componentDidUpdate() {
-    // console.group('STATE - members');
-    // console.log(this.state.members);
-    // console.groupEnd();
-
-    // console.group('STATE - masterUserEmail');
-    // console.log(this.state.masterUserEmail);
-    // console.groupEnd();
-
     this.scrollToBottom();
   }
 
