@@ -34,12 +34,13 @@ class LineItemPersonalization < ActiveRecord::Base
       unless customization_value_ids.all?{ |id| product.customisation_value_ids.include?(id.to_i) }
         errors.add(:base, 'Some customisation options can not be selected')
       end
-
-      customization_values.includes(:incompatibles).each_with_index do |customization_value, index|
-        unless customization_values.to_a.from(index + 1).all?{ |cv| cv.is_compatible_with?(customization_value) }
-          errors.add(:base, 'Some customisation options can not be selected')
-        end
-      end
+      # customization_values.each_with_index do |customization_value, index|
+      #   binding.pry
+      #   unless customization_values.to_a.from(index + 1).all?{ |cv| cv.is_compatible_with?(customization_value) }
+      #     errors.add(:base, 'Some customisation options can not be selected')
+      #   end
+      # end
+      #TODO: Update this code when we actually imploment incompatibilities
     end
   end
 
@@ -51,7 +52,6 @@ class LineItemPersonalization < ActiveRecord::Base
     values = {}
     values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
-
     customization_values.each do |customization_value|
       value = customization_value['customisation_value']
       values[value['presentation']] = nil
