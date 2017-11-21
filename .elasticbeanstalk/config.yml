@@ -5,6 +5,9 @@ environment-defaults:
   development:
     branch: null
     repository: null
+  development2:
+    branch: null
+    repository: null
 global:
   application_name: fameosity
   default_ec2_keyname: thanhops
