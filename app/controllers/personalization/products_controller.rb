@@ -109,7 +109,7 @@ module Personalization
     def incompatibility_map(product = @product)
       result = {}
       JSON.parse(product.customizations).each do |customization|
-        result[customization['customisation_value']['id']] = customization['customisation_value']['incompatibilities']&.map(&:incompatible_id)
+        result[customization['customisation_value']['id'].to_i] = customization['customisation_value']['incompatibilities']&.map(&:incompatible_id)
       end
       result
     end

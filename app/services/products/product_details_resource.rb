@@ -275,7 +275,7 @@ class Products::ProductDetailsResource
     def customisations_incompatibility_map
       result = {}
       product_customisation_values.each do |value|
-        result[value['customisation_value']['id']] = value['customisation_value']['incompatibilities'].map(&:incompatible_id)
+        result[value['customisation_value']['id'].to_i] = value['customisation_value']['incompatibilities'].map(&:incompatible_id)
       end
       result
     end
