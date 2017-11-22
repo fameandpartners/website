@@ -135,7 +135,7 @@ module Products
             name: value['presentation'],
             image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
             display_price: Spree::Money.new(value['price'], currency: product_making_options.first.currency, no_cents: true),
-            position: value['position'],
+            position: value['position']
           })
         end
       end
