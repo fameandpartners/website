@@ -48,6 +48,7 @@ module Skus
     end
 
     def height
+      @height = @height.present? ? @height : LineItemPersonalization::DEFAULT_HEIGHT
       "H#{@height.to_s.first}#{@height.to_s.last}"
     end
 
