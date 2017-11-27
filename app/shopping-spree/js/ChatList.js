@@ -132,6 +132,9 @@ export default class ChatList extends FirebaseComponent {
 
     this.databaseRef("chats")
       .on("child_added", this.addChatMessage, this.printChatError);
+
+    this.databaseRef("members")
+      .on("child_added", this.addMember, this.printMemberError);
   }
 
   stopListeningToFirebase() {
@@ -190,12 +193,45 @@ export default class ChatList extends FirebaseComponent {
               onClick={this.props.showShareModal}
               role="button"
             >
-              Add more friends!
+              Add Friends!
             </span>
           </div>
         </div>
         <div className="row">
           <div className="chat-content">
+            <div className="ChatIntroduction__wrapper">
+              <h4 className="ChatIntroduction__heading">
+                How it works
+              </h4>
+              <ol className="ChatIntroduction__steps">
+                <li>
+                  <span
+                    className="link"
+                    onClick={this.props.showShareModal}
+                    role="button"
+                  >
+                    Invite
+                  </span>
+                  &nbsp;your friends to shop with you
+                </li>
+                <li>
+                  Share dresses to your group chat form any product page
+                </li>
+                <li>
+                  Shop and get up to 25% off when you check out together
+                </li>
+              </ol>
+              <p className="ChatIntroduction__footer-message">
+                To leave The Social Experience and shop solo, just click&nbsp;
+                <span
+                  className="link"
+                  onClick={this.showExitModal}
+                  role="button"
+                >
+                  exit.
+                </span>
+              </p>
+            </div>
             <ul>{this.state.messages}</ul>
             <div
               style={{ float: "left", clear: "both" }}

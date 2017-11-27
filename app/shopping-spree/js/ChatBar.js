@@ -88,6 +88,9 @@ export default class ChatBar extends FirebaseComponent {
   }
 
   updateLocalStateStep(data) {
+    // bad
+    this.showBanner();
+
     let step = data.val();
     console.log(`updateLocalStateStep(${step})...`);
 

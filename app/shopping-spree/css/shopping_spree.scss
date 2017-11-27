@@ -2,6 +2,8 @@
 @import "shopping_spree_joined_message";
 @import "shopping_spree_dress_message";
 @import "shopping_spree_step_message";
+@import "shopping_spree_chat_intro";
+@import "shopping_spree_onboarding";
 @import "shopping_spree_cart";
 @import "shopping_spree_modal";
 @import "shopping_spree_share_modal";
@@ -99,6 +101,7 @@ $chat_bar_header_height: 22px;
 
   &.open {
     background: white;
+    box-shadow: 2px 0 8px 10px rgba(0, 0, 0, 0.1);
   }
 
   .shopping-spree-container {
@@ -143,6 +146,11 @@ $chat_bar_header_height: 22px;
 
     .icon-inline {
       margin-left: 8px;
+    }
+
+    .CartIcon__wrapper {
+      position: absolute;
+      right: 30px;
     }
 
     .toggle-btn {

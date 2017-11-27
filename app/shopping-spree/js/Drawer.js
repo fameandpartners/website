@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ChatList from "./ChatList";
 import ChatBar from "./ChatBar";
 import Cart from "./Cart";
-// import Toast from "./Toast";
+import CartIcon from './CartIcon';
 
 export default class Drawer extends React.Component {
   constructor(props) {
@@ -97,14 +97,16 @@ export default class Drawer extends React.Component {
                   onClick={this.handleToggle}
                 >
                   <div className="col-xs-12 text-center">
-                    Clique&nbsp;
+                    The Social Experience&nbsp;
                     {currentDiscount
                       ? `to Buy at ${currentDiscount}% off`
                       : null}
                     <span
                       onClick={this.transitionToCart}
-                      className="icon icon-bag icon-inline"
-                    />
+                      className="CartIcon__wrapper"
+                    >
+                      <CartIcon />
+                    </span>
                   </div>
                 </div>
               </div>
@@ -123,14 +125,16 @@ export default class Drawer extends React.Component {
                     />
                   </div>
                   <div className="col-xs-8 text-center Clique__header-text">
-                    Clique&nbsp;
+                    The Social Experience&nbsp;
                     {currentDiscount ? `to Buy at ${currentDiscount}%` : null}
                   </div>
                   <div className="col-xs-2">
                     <span
                       onClick={this.transitionToCart}
-                      className="icon icon-bag"
-                    />
+                      className="CartIcon__wrapper CartIcon--light"
+                    >
+                      <CartIcon dark/>
+                    </span>
                   </div>
                 </div>
               </div>
