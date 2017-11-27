@@ -11,8 +11,14 @@ import '../libs/default-csrf';
 
 const returnNode = window.document.getElementById('returnsApp');
 if (returnNode) {
-  /* eslint-disable no-underscore-dangle */
-  const store = AppStore({ user: window.__user__ }); // shared
+  const user = (window.ApplicationStateData && window.ApplicationStateData.UserData)
+    ? window.ApplicationStateData.UserData.user
+    : {};
+  const store = AppStore({ user: {
+    id: user.id,
+    email: user.email,
+    user_signed_in: !!user.email,
+  } }); // shared
   ReactDOM.render(
     <Provider store={store}>
       <Router history={hashHistory}>

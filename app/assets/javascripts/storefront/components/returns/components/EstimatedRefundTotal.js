@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 
-const propTypes = {
-  refundCashTotal: PropTypes.number.isRequired,
-  storeCreditTotal: PropTypes.number.isRequired,
-};
+// const propTypes = {
+//   refundCashTotal: PropTypes.number.isRequired,
+//   storeCreditTotal: PropTypes.number.isRequired,
+// };
 
 const EstimatedRefundTotal = ({ refundCashTotal, storeCreditTotal }) => (
   <div className="EstimatedRefundTotal">
@@ -59,6 +60,6 @@ const EstimatedRefundTotal = ({ refundCashTotal, storeCreditTotal }) => (
   </div>
 );
 
-EstimatedRefundTotal.propTypes = propTypes;
+// EstimatedRefundTotal.propTypes = propTypes;
 
 export default EstimatedRefundTotal;

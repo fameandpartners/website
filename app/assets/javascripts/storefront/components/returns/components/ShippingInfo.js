@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import autoBind from 'auto-bind';
 import classnames from 'classnames';
 
-class ShippingInfo extends Component {
+class ShippingInfo extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -66,11 +67,11 @@ class ShippingInfo extends Component {
   }
 }
 
-ShippingInfo.propTypes = {
-  copy: PropTypes.node,
-  listLinks: PropTypes.node,
-  grayBackground: PropTypes.bool,
-};
+// ShippingInfo.propTypes = {
+//   copy: PropTypes.node,
+//   listLinks: PropTypes.node,
+//   grayBackground: PropTypes.bool,
+// };
 ShippingInfo.defaultProps = {
   copy: null,
   grayBackground: false,

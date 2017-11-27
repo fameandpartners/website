@@ -1,0 +1,16 @@
+.__react_root__ {
+  font-size: 14px;
+  text-align: center;
+}
+
+.u-center {
+  // Not proud, but I need this
+  margin: 0 auto !important;
+}
+
+#react-menu,
+#react-cart {
+  top: 0;
+  position: fixed;
+  z-index: 3;
+}
