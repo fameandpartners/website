@@ -16,14 +16,14 @@ export default class ChatBar extends FirebaseComponent {
     win.addToShoppingSpree = this.addProductToFirebase;
     this.detectEnterKey = this.detectEnterKey.bind(this);
     this.sendStepMessage = this.sendStepMessage.bind(this);
-    this.setMasterUserEmail = this.setMasterUserEmail.bind(this);
+    // this.setMasterUserEmail = this.setMasterUserEmail.bind(this);
     this.addItem = this.addItem.bind(this);
     this.updateLocalStateStep = this.updateLocalStateStep.bind(this);
-    this.addMember = this.addMember.bind(this);
+    // this.addMember = this.addMember.bind(this);
 
     this.state = {
-      members: [],
-      masterUserEmail: null,
+      // members: [],
+      // masterUserEmail: null,
       step: 0,
       cliqueCart: [],
     };
@@ -54,20 +54,31 @@ export default class ChatBar extends FirebaseComponent {
       color,
       customizations,
     );
-    this.addItem(data);
+    this.addItem(productName);
     this.props.transitionToChat();
   }
 
-  printMemberError(error) {
-    console.log('Member List error!');
-    console.log(error);
+  // printMemberError(error) {
+  //   console.log('Member List error!');
+  //   console.log(error);
+  // }
+
+  sendStepMessage() {
+    const {
+      cliqueCart,
+      step,
+    } = this.state;
+
+    if ((step == 2) && (cliqueCart.length > 0)) {
+      this.createStepMessage(3);
+      this.updateStepInDB(3);
+    }
   }
 
-  addItem(data) {
-    const item = data.val().value;
-    console.log(`Adding ${item.name} to Clique Cart...`);
+  addItem(product) {
+    console.log(`Adding ${product} to Clique Cart...`);
 
-    let updatedCart = [...this.state.cliqueCart, item];
+    let updatedCart = [...this.state.cliqueCart, product];
 
     this.setState({
       cliqueCart: updatedCart,
@@ -76,81 +87,91 @@ export default class ChatBar extends FirebaseComponent {
     });
   }
 
-  addMember(data) {
-    const member = data.val();
-    console.log(`${member.from.name} joined Shopping Spree...`);
+  // addItem(data) {
+  //   const item = data.val().value;
+  //   console.log(`Adding ${item.name} to Clique Cart...`);
 
-    this.setState(prevState => ({
-      members: [...prevState.members, member.from],
-    }));
+  //   let updatedCart = [...this.state.cliqueCart, item];
 
-    this.setMasterUserEmail();
-  }
+  //   this.setState({
+  //     cliqueCart: updatedCart,
+  //   }, function() {
+  //     this.sendStepMessage();
+  //   });
+  // }
+
+  // addMember(data) {
+  //   const member = data.val();
+  //   console.log(`${member.from.name} joined Shopping Spree...`);
+
+  //   this.setState(prevState => ({
+  //     members: [...prevState.members, member.from],
+  //   }));
+
+  //   this.setMasterUserEmail();
+  // }
 
   updateLocalStateStep(data) {
-    // bad
-    this.showBanner();
-
     let step = data.val();
     console.log(`updateLocalStateStep(${step})...`);
 
     this.setState({ step });
   }
 
-  setMasterUserEmail() {
-    this.databaseRef("members")
-      .orderByKey()
-      .limitToLast(1)
-      .once("value")
-      .then((snapshot) => {
-        let key = Object.keys(snapshot.val())[0];
-        this.setState({
-          masterUserEmail: snapshot.val()[key].from.email,
-        });
-        this.sendStepMessage();
-      });
-  }
+  // setMasterUserEmail() {
+  //   this.databaseRef("members")
+  //     .orderByKey()
+  //     .limitToLast(1)
+  //     .once("value")
+  //     .then((snapshot) => {
+  //       let key = Object.keys(snapshot.val())[0];
+  //       this.setState({
+  //         masterUserEmail: snapshot.val()[key].from.email,
+  //       });
+  //       this.sendStepMessage();
+  //     });
+  // }
 
-  sendStepMessage() {
-    const {
-      email,
-    } = this.props;
-    const {
-      cliqueCart,
-      masterUserEmail,
-      members,
-      step,
-    } = this.state;
+  // sendStepMessage() {
+  //   const {
+  //     email,
+  //   } = this.props;
+  //   const {
+  //     cliqueCart,
+  //     masterUserEmail,
+  //     members,
+  //     step,
+  //   } = this.state;
 
-    console.group('sendStepMessage()...');
-    console.log(`Props Email: ${email}`);
-    console.log(`Master Email: ${masterUserEmail}`);
-    console.log(`Step: ${step}`);
-    console.log('--- Members ---');
-    console.log(members);
-    console.log('--- Clique Cart ---');
-    console.log(cliqueCart);
-    console.groupEnd();
+  //   console.group('sendStepMessage()...');
+  //   console.log(`Props Email: ${email}`);
+  //   console.log(`Master Email: ${masterUserEmail}`);
+  //   console.log(`Step: ${step}`);
+  //   console.log('--- Members ---');
+  //   console.log(members);
+  //   console.log('--- Clique Cart ---');
+  //   console.log(cliqueCart);
+  //   console.groupEnd();
 
-    if ((step == 2) && (cliqueCart.length > 0)) {
-      this.createStepMessage(3);
-      this.updateStepInDB(3);
-    }
+  //   if ((step == 2) && (cliqueCart.length > 0)) {
+  //     this.createStepMessage(3);
+  //     this.updateStepInDB(3);
+  //   }
 
-    const masterUser = (email == masterUserEmail);
+  //   const masterUser = (email == masterUserEmail);
 
-    if (masterUser) {
-      if ((step == 0) && (members.length == 1)) {
-        this.createStepMessage(1);
-        this.updateStepInDB(1);
-      } else if ((step == 1) && (members.length == 2)) {
-        this.createStepMessage(2);
-        this.updateStepInDB(2);
-      }
-    } else {
-      return;
-    }
-  }
+  //   if (masterUser) {
+  //     if ((step == 0) && (members.length == 1)) {
+  //       this.createStepMessage(1);
+  //       this.updateStepInDB(1);
+  //     } else if ((step == 1) && (members.length == 2)) {
+  //       this.createStepMessage(2);
+  //       this.updateStepInDB(2);
+  //     }
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   componentDidMount() {
     this.initializeFirebase();
@@ -166,8 +187,8 @@ export default class ChatBar extends FirebaseComponent {
       .database()
       .ref(this.props.firebaseNodeId + "/chats");
 
-    this.databaseRef("members")
-      .on("child_added", this.addMember, this.printMemberError);
+    // this.databaseRef("members")
+    //   .on("child_added", this.addMember, this.printMemberError);
   }
 
   sendMessage() {
