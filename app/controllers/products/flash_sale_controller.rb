@@ -1,7 +1,7 @@
 class Products::FlashSaleController < Products::BaseController
   include Marketing::Gtm::Controller::Collection
 
-  layout 'redesign/application'
+  layout 'custom_experience/application'
   attr_reader :page, :banner
   helper_method :page, :banner
 
@@ -11,7 +11,7 @@ class Products::FlashSaleController < Products::BaseController
   def index
     line_items = Spree::LineItem.where(stock: true)
 
-    items = @line_items.map do |li|
+    items = line_items.map do |li|
       product = li.product
       OpenStruct.new({
         id: li.id,
@@ -27,7 +27,7 @@ class Products::FlashSaleController < Products::BaseController
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       }).marshall_dump
     end
-    
+
     respond_to do |format|
       format.html { }
       format.json do
@@ -52,7 +52,7 @@ class Products::FlashSaleController < Products::BaseController
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       })
-    
+
     respond_to do |format|
       format.html { }
       format.json do
