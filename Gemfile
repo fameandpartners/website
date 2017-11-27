@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.3.4'
 
 gem 'rails', '~> 3.2.22.5'
 gem 'test-unit' # test-unit is required by Rails 3, and Ruby 2.3 is harsher on dependency requirements
@@ -123,6 +123,7 @@ gem 'mailchimp-api', require: 'mailchimp'
 # Contentful
 gem 'contentful'
 
+gem 'rdoc' , '3.12.2'
 
 
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
@@ -171,7 +172,6 @@ end
 group :production do
   # gem 'unicorn'
   gem 'aws-sdk'
-  gem 'rdoc' , '3.12.2'
 end
 
 
