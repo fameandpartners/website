@@ -39,8 +39,7 @@ class Products::FlashSaleController < Products::BaseController
   def show
     li = Spree::LineItem.find(params[:id])
 
-    item = 
-      OpenStruct.new({
+    item = OpenStruct.new({
         id: li.id,
         sku:  product.sku,
         name: product.name,
@@ -53,7 +52,6 @@ class Products::FlashSaleController < Products::BaseController
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       })
-    end
     
     respond_to do |format|
       format.html { }
