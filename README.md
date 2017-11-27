@@ -51,7 +51,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ gem install foreman`
 * `$ git clone git@github.com:fameandpartners/website.git && cd website && npm install`
 * `$ cp config/database.yml.example config/database.yml`
-*  Get a copy of `database.yml` from a neighbor. 
+*  Get a copy of `database.yml` from a neighbor.
 * `$ bundle install`
 * `$ brew services start postgresql`
 * `$ psql -d postgres` (enter the psql console)
@@ -70,7 +70,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ brew services start redis`
 * `$ run bundle exec rails s` (this will start the build process)
 * `$ yarn start` (If there are issues make sure packages.json matches another a devs)
-* Check http://0.0.0.0:3000 
+* Check http://0.0.0.0:3000
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
@@ -319,4 +319,5 @@ Make sure you are running all processes described at the `Procfile`, otherwise, 
 
 Cheers,
 Fame & Partners and Unicorns!
+
 
