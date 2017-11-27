@@ -10,6 +10,9 @@ class Products::FlashSaleController < Products::BaseController
 
   def index
     line_items = Spree::LineItem.where(stock: true).page(params[:page])
+    line_items = line_items.where(color: params[:color]) if params[:color]
+    line_items = line_items.where(size: params[:size]) if params[:size]
+    line_items = line_items.where(length: params[:length]) if params[:length]
 
     items = line_items.map do |li|
       product = li.product
