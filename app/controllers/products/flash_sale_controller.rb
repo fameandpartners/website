@@ -31,7 +31,7 @@ class Products::FlashSaleController < Products::BaseController
     respond_to do |format|
       format.html { }
       format.json do
-        render json: items
+        render json: items.marshall_dump
       end
     end
   end
@@ -58,7 +58,7 @@ class Products::FlashSaleController < Products::BaseController
     respond_to do |format|
       format.html { }
       format.json do
-        render json: item
+        render json: item.marshall_dump
       end
     end
   end
