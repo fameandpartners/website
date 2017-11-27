@@ -27,6 +27,10 @@ module Spree
         attempt_cart_add(variant_id, quantity)
       end if from_hash[:variants]
 
+      from_hash[:line_item].each do |line_item_id|
+        attempt_direct_cart_add(line_item_id)
+      end if from_hash[:line_item]
+
       valid?
     end
 
@@ -50,6 +54,15 @@ module Spree
           @order.restart_checkout_flow
         end
       end
+    end
+
+    def attempt_direct_cart_add(line_item_id)
+      line_item - Spree::LineItem.find(line_item_id)
+      line_item.order = @order
+      line_item.stock = false
+      line_item.save
+      @order.save
+      @order.restart_checkout_flow
     end
 
     def check_stock_levels(variant, quantity)

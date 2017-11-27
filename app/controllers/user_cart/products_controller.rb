@@ -90,6 +90,35 @@ class UserCart::ProductsController < UserCart::BaseController
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
+  def move_to_cart
+    @item = Spree::LineItem(params[:id])
+
+    if @item.stock
+      populator = Spree::OrderPopulator.new(current_order(true), current_currency)
+    
+      if populator.populate(line_item: params[:id]).to_i)
+        fire_event('spree.cart.add')
+        fire_event('spree.order.contents_changed')
+    
+        current_order.reload
+      end
+      
+      respond_with(@user_cart) do |format|
+        format.json   {
+          render json: data, status: :ok
+        }
+      end
+    else
+       NewRelic::Agent.notify('AddToCartFailed',
+                               message: 'Out of Stock',
+                               order_number: current_order.number,
+                               site_version: current_site_version.code)
+        respond_with({}) do |format|
+          format.json   {
+            render json: { error: true, message: 'Out of Stock' }, status: 422
+          }
+    end
+
   private
 
     def cart_product_service
