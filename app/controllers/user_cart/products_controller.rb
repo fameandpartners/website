@@ -96,7 +96,7 @@ class UserCart::ProductsController < UserCart::BaseController
     if @item.stock
       populator = Spree::OrderPopulator.new(current_order(true), current_currency)
     
-      if populator.populate(line_item: params[:id]).to_i)
+      if populator.populate(line_item: params[:id].to_i)
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
     
@@ -109,15 +109,17 @@ class UserCart::ProductsController < UserCart::BaseController
         }
       end
     else
-       NewRelic::Agent.notify('AddToCartFailed',
-                               message: 'Out of Stock',
-                               order_number: current_order.number,
-                               site_version: current_site_version.code)
-        respond_with({}) do |format|
-          format.json   {
-            render json: { error: true, message: 'Out of Stock' }, status: 422
-          }
+      NewRelic::Agent.notify('AddToCartFailed',
+                             message: 'Out of Stock',
+                             order_number: current_order.number,
+                             site_version: current_site_version.code)
+      respond_with({}) do |format|
+        format.json   {
+          render json: { error: true, message: 'Out of Stock' }, status: 422
+        }
+      end
     end
+  end
 
   private
 
