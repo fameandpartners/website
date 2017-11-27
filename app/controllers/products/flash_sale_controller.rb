@@ -25,13 +25,13 @@ class Products::FlashSaleController < Products::BaseController
         size: li.personalization.size.presentation,
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
-      })
+      }).marshall_dump
     end
     
     respond_to do |format|
       format.html { }
       format.json do
-        render json: items.marshall_dump
+        render json: items
       end
     end
   end
