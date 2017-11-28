@@ -7,6 +7,8 @@ import ChatBar from "./ChatBar";
 import Cart from "./Cart";
 import CartIcon from './CartIcon';
 
+import win from "./windowPolyfill";
+
 export default class Drawer extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,8 @@ export default class Drawer extends React.Component {
     this.transitionToCart = this.transitionToCart.bind(this);
     this.transitionToChat = this.transitionToChat.bind(this);
     this.updateDiscountOnDrawer = this.updateDiscountOnDrawer.bind(this);
+
+    win.openShoppingSpreeCart = this.transitionToCart;
   }
 
   updateDiscountOnDrawer(newDiscount) {
