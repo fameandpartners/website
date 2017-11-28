@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -15,15 +16,15 @@ import * as AppActions from '../actions/index';
 import ReturnConstants from '../../../constants/ReturnConstants';
 import SimpleButton from '../components/SimpleButton';
 
-const propTypes = {
-  actions: PropTypes.object,
-  orderData: PropTypes.array,
-  hasRequestedOrders: PropTypes.bool,
-  returnIsLoading: PropTypes.bool,
-  params: PropTypes.object.isRequired,
-  requiresViewOrdersRefresh: PropTypes.bool,
-  userSignedIn: PropTypes.bool,
-};
+// const propTypes = {
+//   actions: PropTypes.object,
+//   orderData: PropTypes.array,
+//   hasRequestedOrders: PropTypes.bool,
+//   returnIsLoading: PropTypes.bool,
+//   params: PropTypes.object.isRequired,
+//   requiresViewOrdersRefresh: PropTypes.bool,
+//   userSignedIn: PropTypes.bool,
+// };
 
 const defaultProps = {
   actions: {},
@@ -34,7 +35,7 @@ const defaultProps = {
   userSignedIn: false,
 };
 
-class OrderContainer extends Component {
+class OrderContainer extends React.Component {
   /**
    * Generate a URL that returns back to view orders
    */
@@ -176,6 +177,6 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(AppActions, dispatch),
   };
 }
-OrderContainer.propTypes = propTypes;
+// OrderContainer.propTypes = propTypes;
 OrderContainer.defaultProps = defaultProps;
 export default connect(mapStateToProps, mapDispatchToProps)(OrderContainer);

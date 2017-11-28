@@ -5,36 +5,31 @@
 <!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
 <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
   <head data-hook="inside_head">
-
-    <%= stylesheet_link_tag 'application_custom_experience' %>
-
     <%= render 'layouts/custom_experience/head' %>
+    <%= stylesheet_link_tag 'application_custom_experience' %>
     <%= csrf_meta_tags %>
 
   </head>
   <body>
-
-    <%= render 'layouts/redesign/header' %>
-
-    <div class="app-container app-container--top-margin">
+    <div id="react-blanket" class="__react_root__"></div>
+    <div id="content-container" class="content-container">
+      <% unless disable_notices? %>
+      <%= render 'layouts/redesign/notices' %>
+      <% end %>
+    </div>
+    <div id="react-menu" class="__react_root__"></div>
+    <div id="react-header" class="__react_root__"></div>
+    <div id="react-cart" class="__react_root__"></div>
+    <div class="app-container">
       <%= yield %>
     </div>
+    <div id="react-footer" class="__react_root__"></div>
+    <%= yield :microservice_js %>
+
 
     <%= render 'google_tag_manager/base' %>
-    <%= render 'layouts/redesign/footer' %>
-    <%= render 'layouts/redesign/shopping_bag' %>
-
     <%= javascript_include_tag 'application_custom_experience' %>
     <%= render 'layouts/custom_experience/javascript' %>
 
   </body>
-  <script>
-    const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-Token': csrfToken,
-      },
-    });
-  </script>
 </html>

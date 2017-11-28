@@ -1,55 +1,6 @@
-// NOTE: THESE ARE ALL OF THE NECESSARY STYLES TO MAKE THE
-// HEADER, FOOTER, SIDE_CART, MOBILE NAVIGATION work
+@import 'custom_experience/reset';
+@import 'custom_experience/react';
 
-//= require_tree ./custom_experience/stylesheets
+// For Alerts
 @import 'redesign/vars';
-@import 'redesign/mixins';
-@import 'redesign/extras/helpers';
-@import 'media_queries';
-
-@import 'redesign/icons';
-@import 'libs/icomoon_fame_2015/variables';
-@import 'libs/icomoon_fame_2015/style';
-
-// Base
-@import 'redesign/base/base';
-@import 'redesign/base/type';
-@import 'redesign/base/links';
-@import 'redesign/base/input-groups';
-@import 'redesign/base/forms';
-@import 'redesign/base/buttons';
-@import 'redesign/base/containers';
-
-@import 'redesign/layout/general';
-@import 'redesign/header';
 @import 'redesign/alerts';
-
-// Layout
-@import 'redesign/layout/header';
-@import 'redesign/layout/footer';
-@import 'redesign/layout/nav-menu';
-@import 'redesign/layout/simplified-nav';
-
-// Components
-@import 'redesign/components/cart';
-
-// // Generic
-@import 'redesign/generic/content-order';
-@import 'redesign/generic/helpers';
-
-
-// Overwrites
-.app-container--top-margin {
-  @media (min-width: 996px) {
-    margin-top: 96px;
-  }
-}
-
-footer.main .form-control {
-  max-width: 243px;
-  display: inline;
-}
-
-footer.main .btn {
-  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
-}

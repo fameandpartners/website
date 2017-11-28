@@ -379,7 +379,11 @@ module Contentful
       site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
       # Check if the LP requests an extra spacing between top navigation and content
-      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? 'app-container--top-margin' : nil
+      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
+
+      if page_white_spacing_top
+        page_white_spacing_top_class = 'app-container--top-margin'
+      end
 
       page_url = parent_container.relative_url
       {
@@ -390,7 +394,7 @@ module Contentful
         meta_description: meta_description,
         site_version: site_version.downcase,
         site_version_url_to_redirect: site_version_url_to_redirect,
-        page_white_spacing_top: page_white_spacing_top
+        page_white_spacing_top_class: page_white_spacing_top_class
       }
     end
 

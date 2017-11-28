@@ -7,27 +7,34 @@ describe 'authentication process', type: :feature do
   describe 'login' do
     context 'with valid credentials' do
       it 'should authenticate' do
-        visit '/login'
-        within('#password-credentials') do
-          fill_in 'Email', with: user.email
-          fill_in 'Password', with: user.password
+        configatron.temp do
+          configatron.node_pdp_url = 'https://content-dev2.fameandgroups.com'
+          visit '/login'
+          within('#password-credentials') do
+            fill_in 'Email', with: user.email
+            fill_in 'Password', with: user.password
+          end
+          click_button 'Login'
+          expect(page).not_to have_content 'Invalid email or password.'
         end
-        click_button 'Login'
-        expect(page).not_to have_content 'Invalid email or password.'
       end
     end
 
     context 'with invalid credentials' do
       it 'should authenticate' do
-        visit '/login'
+        configatron.temp do
+          configatron.node_pdp_url = 'https://content-dev2.fameandgroups.com'
+        
+          visit '/login'
 
-        within('#password-credentials') do
-          fill_in 'Email', with: user.email
-          fill_in 'Password', with: 'nothing-to-see-here'
+          within('#password-credentials') do
+            fill_in 'Email', with: user.email
+            fill_in 'Password', with: 'nothing-to-see-here'
+          end
+
+          click_button 'Login'
+          expect(page).to have_text('Invalid email or password')
         end
-
-        click_button 'Login'
-        expect(page).to have_text('Invalid email or password')
       end
     end
   end
