@@ -21,7 +21,7 @@
     <div id="react-header" class="__react_root__"></div>
     <div id="react-cart" class="__react_root__"></div>
     <%= render 'layouts/redesign/shopping_spree' %>
-    <div class="app-container">
+    <div>
       <%= yield %>
     </div>
     <div id="react-footer" class="__react_root__"></div>
@@ -31,5 +31,8 @@
     <%= render 'google_tag_manager/base' %>
     <%= javascript_include_tag 'application_custom_experience' %>
     <%= render 'layouts/custom_experience/javascript' %>
+
+    <%= javascript_include_tag 'init_shopping_spree' %>
+
   </body>
 </html>
