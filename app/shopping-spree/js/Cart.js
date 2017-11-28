@@ -220,7 +220,7 @@ export default class Cart extends FirebaseComponent {
             <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10">
               <a
                 onClick={this.checkout}
-                className="center-block btn btn-black btn-lrg"
+                className="center-block btn btn-shopping-spree-blue"
               >
                 Checkout
               </a>
@@ -228,7 +228,7 @@ export default class Cart extends FirebaseComponent {
           )}
           {this.state.checkingOut && (
             <div className="no-right-gutter no-left-gutter col-xs-push-1 col-xs-10">
-              <a className="center-block btn btn-black btn-lrg">
+              <a className="center-block btn btn-shopping-spree-blue">
                 Checking Out...
               </a>
             </div>

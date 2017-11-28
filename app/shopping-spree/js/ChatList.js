@@ -312,7 +312,7 @@ export default class ChatList extends FirebaseComponent {
                   &nbsp;your friends to shop with you
                 </li>
                 <li>
-                  Share dresses to your group chat form any product page
+                  Share dresses to your group chat from any product page
                 </li>
                 <li>
                   Shop and get up to 25% off when you check out together

@@ -238,7 +238,7 @@ export default class AddToCartModal extends FirebaseComponent {
             <div className="col-xs-10 col-xs-push-1">
               <a
                 onClick={this.addToCart}
-                className="btn btn-lrg btn-black btn-block"
+                className="btn btn-shopping-spree-blue btn-block"
               >
                 Add to your cart
               </a>

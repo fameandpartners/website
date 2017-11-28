@@ -99,7 +99,7 @@ export default class Drawer extends React.Component {
                   <div className="col-xs-12 text-center">
                     The Social Experience&nbsp;
                     {currentDiscount
-                      ? `to Buy at ${currentDiscount}% off`
+                      ? `at ${currentDiscount}% off`
                       : null}
                     <span
                       onClick={this.transitionToCart}
@@ -126,7 +126,7 @@ export default class Drawer extends React.Component {
                   </div>
                   <div className="col-xs-8 text-center Clique__header-text">
                     The Social Experience&nbsp;
-                    {currentDiscount ? `to Buy at ${currentDiscount}%` : null}
+                    {currentDiscount ? `at ${currentDiscount}%` : null}
                   </div>
                   <div className="col-xs-2">
                     <span

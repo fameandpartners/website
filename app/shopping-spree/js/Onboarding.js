@@ -103,7 +103,7 @@ export default class Onboarding extends FirebaseComponent {
               </div>
 
               <div className="row top-padding-sm bottom-padding-sm">
-                <div className="col-xs-10 col-lg-4 float-none margin--center">
+                <div className="col-xs-10 col-md-4 float-none margin--center">
                   <input
                     className="form-control input-lg"
                     type="text"
@@ -117,7 +117,7 @@ export default class Onboarding extends FirebaseComponent {
               </div>
 
               <div className="row bottom-padding-sm">
-                <div className="col-xs-10 col-lg-4 float-none margin--center">
+                <div className="col-xs-10 col-md-4 float-none margin--center">
                   <input
                     className="form-control input-lg"
                     type="email"
@@ -131,7 +131,7 @@ export default class Onboarding extends FirebaseComponent {
               </div>
 
               <div className="row bottom-padding-lg">
-                <div className="col-xs-10 col-lg-4 float-none margin--center text-center">
+                <div className="col-xs-10 col-md-4 float-none margin--center text-center">
                   <button
                     type="submit"
                     role="button"
