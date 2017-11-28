@@ -56,25 +56,29 @@ export default class FirebaseComponent extends React.Component {
   }
 
   showBanner() {
-    let $existingBanner = $('#sale-banner');
-    let $spreeBanner = $('.js-shopping-spree-banner');
+    let $existingBanner = document.getElementById('sale-banner');
+    let $spreeBannerArr = document.getElementsByClassName('js-shopping-spree-banner');
 
     if ($existingBanner) {
-      $existingBanner.addClass('hidden');
+      $existingBanner.classList.add('hidden');
     }
 
-    $spreeBanner.removeClass('hidden');
+    for (var i = 0; i < $spreeBannerArr.length; i++) {
+      $spreeBannerArr[i].classList.remove('hidden');
+    }
   }
 
   hideBanner() {
-    let $existingBanner = $('#sale-banner');
-    let $spreeBanner = $('.js-shopping-spree-banner');
+    let $existingBanner = document.getElementById('sale-banner');
+    let $spreeBannerArr = document.getElementsByClassName('js-shopping-spree-banner');
 
     if ($existingBanner) {
-      $existingBanner.removeClass('hidden');
+      $existingBanner.classList.remove('hidden');
     }
 
-    $spreeBanner.addClass('hidden');
+    for (var i = 0; i < $spreeBannerArr.length; i++) {
+      $spreeBannerArr[i].classList.add('hidden');
+    }
   }
 
   createNewShoppingSpree() {
