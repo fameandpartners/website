@@ -9,11 +9,14 @@ class Products::FlashSaleController < Products::BaseController
                 :redirect_site_version
 
   def index
-    line_items = Spree::LineItem.where(stock: true)
+    line_items = Spree::LineItem.where(stock: true).page(params[:page])
+    line_items = line_items.where(color: params[:color]) if params[:color]
+    line_items = line_items.where(size: params[:size]) if params[:size]
+    line_items = line_items.where(length: params[:length]) if params[:length]
 
     items = line_items.map do |li|
       product = li.product
-      OpenStruct.new({
+      Hash.new({
         id: li.id,
         sku:  product.sku,
         name: product.name,
@@ -25,7 +28,7 @@ class Products::FlashSaleController < Products::BaseController
         size: li.personalization.size.presentation,
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
-      }).marshall_dump
+      })
     end
 
     respond_to do |format|
@@ -39,7 +42,7 @@ class Products::FlashSaleController < Products::BaseController
   def show
     li = Spree::LineItem.find(params[:id])
 
-    item = OpenStruct.new({
+    item = Hash.new({
         id: li.id,
         sku:  product.sku,
         name: product.name,
@@ -56,7 +59,7 @@ class Products::FlashSaleController < Products::BaseController
     respond_to do |format|
       format.html { }
       format.json do
-        render json: item.marshall_dump
+        render json: item
       end
     end
   end
