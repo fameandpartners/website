@@ -148,7 +148,10 @@ module Spree
       end
 
       def after_ship
-        inventory_units.each &:ship!
+        inventory_units.each do |iu|
+          iu.state = 'sold'
+          iu.ship!
+        end
         send_shipped_email
         touch :shipped_at
       end
