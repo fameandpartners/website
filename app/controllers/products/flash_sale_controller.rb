@@ -9,6 +9,7 @@ class Products::FlashSaleController < Products::BaseController
                 :redirect_site_version
 
   def index
+    @filter = Products::CollectionFilter.read
     line_items = Spree::LineItem.where(stock: true).page(params[:page])
     line_items = line_items.where(color: params[:color]) if params[:color]
     line_items = line_items.where(size: params[:size]) if params[:size]

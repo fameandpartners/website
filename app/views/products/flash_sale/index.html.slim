@@ -2,11 +2,10 @@ ruby:
   url_params    = params.except(:controller, :action, :product_slug)
   @current_site_version = current_site_version
 
-
+= render :partial => '/data/collection_filter_sort'
 link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['flashCssBundle']}"
 
 div#flash-list-root.__FlashSaleList__wrapper
-
 
 = content_for :microservice_js do
   script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['flashJsBundle']}"
