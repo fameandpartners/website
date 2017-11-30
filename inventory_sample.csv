@@ -2614,11 +2614,11 @@
 48961,1310029CL,navy,US2/AU6,Tempest,1,0,tall,1310029CL US2/AU6,Maxi
 47432,1310029CL,navy,US4/AU8,Tempest,1,0,petite,1310029CL US4/AU8,Maxi
 50318,c161026b,ivory,US0/AU4,Teresa,1,0,standard,c161026b US0/AU4,Mini
-58131,fp2352,black,US12/AU16,The Aleali Dress,1,make-ankle-length,length4,fp2352 US12/AU16,Maxi
-62390,fp2212s1f0,pale-blue,US0/AU4,The Allison,1,make-petti-length,length3,fp2212s1f0 US0/AU4,Midi
-58195,fprv1012,white,US4/AU8,The Amelia Dress,1,0,length2,fprv1012 US4/AU8,Mini
-58469,fprv1012,navy,US6/AU10,The Amelia Dress,1,0,length3,fprv1012 US6/AU10,Mini
-60151,fprv1012,white,US8/AU12,The Amelia Dress,1,0,length2,fprv1012 US8/AU12,Mini
+58131,fp2352,black,US12/AU16,The Aleali Dress,1,make-ankle-length,standard,fp2352 US12/AU16,Maxi
+62390,fp2212s1f0,pale-blue,US0/AU4,The Allison,1,make-petti-length,standard,fp2212s1f0 US0/AU4,Midi
+58195,fprv1012,white,US4/AU8,The Amelia Dress,1,0,petite,fprv1012 US4/AU8,Mini
+58469,fprv1012,navy,US6/AU10,The Amelia Dress,1,0,standard,fprv1012 US6/AU10,Mini
+60151,fprv1012,white,US8/AU12,The Amelia Dress,1,0,petite,fprv1012 US8/AU12,Mini
 52640,fp2273,silver,US10/AU14,The Andromeda,1,change-to-wide--adjustable-straps,tall,fp2273 US10/AU14,Maxi
 51323,fp2273,warm-tan,US4/AU8,The Andromeda,5,0,standard,fp2273 US4/AU8,Maxi
 53270,fp2273,warm-tan,US2/AU6,The Andromeda,2,0,standard,fp2273 US2/AU6,Maxi
@@ -2645,10 +2645,10 @@
 61591,fp2273,charcoal,US0/AU4,The Andromeda,1,0,standard,fp2273 US0/AU4,Maxi
 61640,fp2273,gold,US6/AU10,The Andromeda,1,add-front-split,tall,fp2273 US6/AU10,Maxi
 61790,fp2273,silver,US0/AU4,The Andromeda,1,0,petite,fp2273 US0/AU4,Maxi
-58163,fp2331,navy,US2/AU6,The Anka Dress,1,0,length2,fp2331 US2/AU6,Midi
-61631,fp2331,navy,US4/AU8,The Anka Dress,1,0,length3,fp2331 US4/AU8,Midi
+58163,fp2331,navy,US2/AU6,The Anka Dress,1,0,petite,fp2331 US2/AU6,Midi
+61631,fp2331,navy,US4/AU8,The Anka Dress,1,0,standard,fp2331 US4/AU8,Midi
 52512,fp2301,ivory,US0/AU4,The Annie,1,0,petite,fp2301 US0/AU4,Maxi
-59020,fp2219s4f0,black,US4/AU8,The Annika,1,0,length2,fp2219s4f0 US4/AU8,Maxi
+59020,fp2219s4f0,black,US4/AU8,The Annika,1,0,petite,fp2219s4f0 US4/AU8,Maxi
 52199,fp2262,red,US16/AU20,The Antares,1,0,standard,fp2262 US16/AU20,Maxi
 51598,fp2262,red,US0/AU4,The Antares,1,0,standard,fp2262 US0/AU4,Maxi
 55166,fp2262,red,US0/AU4,The Antares,1,close-front-cut-out,petite,fp2262 US0/AU4,Maxi
@@ -2775,7 +2775,7 @@
 57940,fp2298,coral,US6/AU10,The Axis,1,0,tall,fp2298 US6/AU10,Maxi
 57836,fp2298,cobalt-blue,US8/AU12,The Axis,1,0,petite,fp2298 US8/AU12,Maxi
 56489,fp2298,candy-pink,US2/AU6,The Axis,1,0,standard,fp2298 US2/AU6,Maxi
-57608,fp2298,pale-blue,US6/AU10,The Axis,1,0,length2,fp2298 US6/AU10,Maxi
+57608,fp2298,pale-blue,US6/AU10,The Axis,1,0,petite,fp2298 US6/AU10,Maxi
 57712,fp2298,pretty-pink,US8/AU12,The Axis,1,0,petite,fp2298 US8/AU12,Maxi
 56943,fp2298,black,US6/AU10,The Axis,1,0,petite,fp2298 US6/AU10,Maxi
 58150,fp2298,light-pink,US6/AU10,The Axis,1,0,standard,fp2298 US6/AU10,Maxi
@@ -2791,11 +2791,11 @@
 54874,fp2437,red,US2/AU6,The Backless Haven,1,make-maxi-length,standard,fp2437 US2/AU6,Maxi
 57650,fp2437,ivory,US10/AU14,The Backless Haven,1,0,standard,fp2437 US10/AU14,Maxi
 59848,fp2437,pale-grey,US12/AU16,The Backless Haven,1,make-maxi-length,tall,fp2437 US12/AU16,Maxi
-59470,fp2220s1f1,pale-grey,US16/AU20,The Becca,1,0,length3,fp2220s1f1 US16/AU20,Midi
-63800,fp2220s1f1,bright-turquoise,US16/AU20,The Becca,1,0,length3,fp2220s1f1 US16/AU20,Midi
-58065,fprv1010,red,US0/AU4,The Berenson Dress,1,0,length4,fprv1010 US0/AU4,Mini
-61615,fp2567,pale-blue,US0/AU4,The Bisset Jumpsuit,1,0,length1,fp2567 US0/AU4,Maxi
-58959,fp2466,light-romance,US4/AU8,The Blossom Dress,1,0,length3,fp2466 US4/AU8,Maxi
+59470,fp2220s1f1,pale-grey,US16/AU20,The Becca,1,0,standard,fp2220s1f1 US16/AU20,Midi
+63800,fp2220s1f1,bright-turquoise,US16/AU20,The Becca,1,0,standard,fp2220s1f1 US16/AU20,Midi
+58065,fprv1010,red,US0/AU4,The Berenson Dress,1,0,standard,fprv1010 US0/AU4,Mini
+61615,fp2567,pale-blue,US0/AU4,The Bisset Jumpsuit,1,0,petite,fp2567 US0/AU4,Maxi
+58959,fp2466,light-romance,US4/AU8,The Blossom Dress,1,0,standard,fp2466 US4/AU8,Maxi
 59840,fp2466,light-romance,US12/AU16,The Blossom Dress,1,0,standard,fp2466 US12/AU16,Maxi
 51308,fp2304,navy,US4/AU8,The Blue Moon,1,0,standard,fp2304 US4/AU8,Maxi
 55731,fp2434,red,US12/AU16,The Bluebell,1,0,petite,fp2434 US12/AU16,Maxi
@@ -2815,12 +2815,12 @@
 59850,fpmc230,pale-grey,US12/AU16,The Borealis,1,close-split,tall,fpmc230 US12/AU16,Maxi
 53531,fpmc230,dark-tan,US6/AU10,The Borealis,2,0,standard,fpmc230 US6/AU10,Maxi
 63708,fpmc230,black,US4/AU8,The Borealis,1,0,standard,fpmc230 US4/AU8,Maxi
-59438,fp2212s4f2,navy,US10/AU14,The Brenda ,1,0,length4,fp2212s4f2 US10/AU14,Midi
-58472,fp2220s2f5,peach,US22/AU26,The Brighton,1,0,length3,fp2220s2f5 US22/AU26,Maxi
-58466,fp2220s2f5,champagne,US2/AU6,The Brighton,1,0,length3,fp2220s2f5 US2/AU6,Maxi
-59245,fp2220s2f5,champagne,US4/AU8,The Brighton,1,make-midi-length,length3,fp2220s2f5 US4/AU8,Maxi
-62271,fp2220s2f5,peach,US2/AU6,The Brighton,1,0,length3,fp2220s2f5 US2/AU6,Maxi
-62488,fp2220s2f5,burgundy,US6/AU10,The Brighton,1,0,length3,fp2220s2f5 US6/AU10,Maxi
+59438,fp2212s4f2,navy,US10/AU14,The Brenda ,1,0,standard,fp2212s4f2 US10/AU14,Midi
+58472,fp2220s2f5,peach,US22/AU26,The Brighton,1,0,standard,fp2220s2f5 US22/AU26,Maxi
+58466,fp2220s2f5,champagne,US2/AU6,The Brighton,1,0,standard,fp2220s2f5 US2/AU6,Maxi
+59245,fp2220s2f5,champagne,US4/AU8,The Brighton,1,make-midi-length,standard,fp2220s2f5 US4/AU8,Maxi
+62271,fp2220s2f5,peach,US2/AU6,The Brighton,1,0,standard,fp2220s2f5 US2/AU6,Maxi
+62488,fp2220s2f5,burgundy,US6/AU10,The Brighton,1,0,standard,fp2220s2f5 US6/AU10,Maxi
 51162,fp2308,navy,US4/AU8,The Capricorn,2,0,petite,fp2308 US4/AU8,Maxi
 52369,fp2308,navy,US0/AU4,The Capricorn,2,0,petite,fp2308 US0/AU4,Maxi
 52522,fp2308,navy,US10/AU14,The Capricorn,2,0,standard,fp2308 US10/AU14,Maxi
@@ -2869,27 +2869,27 @@
 62219,fp2307,black,US4/AU8,The Celestine,1,0,petite,fp2307 US4/AU8,Maxi
 63048,fp2307,navy,US0/AU4,The Celestine,1,0,standard,fp2307 US0/AU4,Maxi
 62118,fp2307,black,US0/AU4,The Celestine,1,0,petite,fp2307 US0/AU4,Maxi
-59153,fp2419,red,US18/AU22,The Celine Dress,1,0,length3,fp2419 US18/AU22,Midi
-62251,fp2348,black,US18/AU22,The Christensen Dress,1,raise-neckline;make-knee-length,length2,fp2348 US18/AU22,Knee
-59001,fp2356,black-and-white-spot,US12/AU16,The Chung Skirt,1,add-split,length2,fp2356 US12/AU16,Maxi
-57482,fp2220s5f0,pale-pink,US4/AU8,The Cindy,1,0,length3,fp2220s5f0 US4/AU8,Ankle
+59153,fp2419,red,US18/AU22,The Celine Dress,1,0,standard,fp2419 US18/AU22,Midi
+62251,fp2348,black,US18/AU22,The Christensen Dress,1,raise-neckline;make-knee-length,petite,fp2348 US18/AU22,Knee
+59001,fp2356,black-and-white-spot,US12/AU16,The Chung Skirt,1,add-split,petite,fp2356 US12/AU16,Maxi
+57482,fp2220s5f0,pale-pink,US4/AU8,The Cindy,1,0,standard,fp2220s5f0 US4/AU8,Ankle
 50905,fp2223,ivory,US6/AU10,The Clara,1,0,petite,fp2223 US6/AU10,Maxi
 52714,fp2223,ivory,US8/AU12,The Clara,1,0,standard,fp2223 US8/AU12,Maxi
 59226,fp2223,ivory,US4/AU8,The Clara,1,0,petite,fp2223 US4/AU8,Maxi
 55746,fp2300,pink-and-white-gingham,US6/AU10,The Claudie,1,0,tall,fp2300 US6/AU10,Maxi
 59709,usp1047,black,US8/AU12,THE COLE DRESS,1,0,standard,usp1047 US8/AU12,Ankle
-63799,fp2215s2f0,royal-blue,US16/AU20,The Cora,1,0,length3,fp2215s2f0 US16/AU20,Ankle
-60285,fp2219s2f3,mint,US4/AU8,The Dakota,1,0,length3,fp2219s2f3 US4/AU8,Maxi
-58473,fp2216s4f2,peach,US22/AU26,The Dawn,1,0,length3,fp2216s4f2 US22/AU26,Maxi
-63595,fp2216s4f2,red,US12/AU16,The Dawn,1,remove-arm-ties,length2,fp2216s4f2 US12/AU16,Maxi
+63799,fp2215s2f0,royal-blue,US16/AU20,The Cora,1,0,standard,fp2215s2f0 US16/AU20,Ankle
+60285,fp2219s2f3,mint,US4/AU8,The Dakota,1,0,standard,fp2219s2f3 US4/AU8,Maxi
+58473,fp2216s4f2,peach,US22/AU26,The Dawn,1,0,standard,fp2216s4f2 US22/AU26,Maxi
+63595,fp2216s4f2,red,US12/AU16,The Dawn,1,remove-arm-ties,petite,fp2216s4f2 US12/AU16,Maxi
 55716,fp2287,dusty-rose,US4/AU8,The Delphine,1,0,petite,fp2287 US4/AU8,Maxi
-58072,fp2425,navy,US0/AU4,The Demas Dress,1,0,length2,fp2425 US0/AU4,Knee
-58189,fp2425,navy,US18/AU22,The Demas Dress,1,add-back-strap;make-ankle-length,length5,fp2425 US18/AU22,Knee
-59570,fp2425,white,US0/AU4,The Demas Dress,1,0,length1,fp2425 US0/AU4,Knee
-61629,fp2425,navy,US4/AU8,The Demas Dress,1,0,length1,fp2425 US4/AU8,Knee
-61633,fp2425,navy,US2/AU6,The Demas Dress,1,0,length1,fp2425 US2/AU6,Knee
-62048,fp2425,navy,US6/AU10,The Demas Dress,1,0,length1,fp2425 US6/AU10,Knee
-58423,fp2349,navy,US10/AU14,The Demi Dress,1,0,length4,fp2349 US10/AU14,Mini
+58072,fp2425,navy,US0/AU4,The Demas Dress,1,0,petite,fp2425 US0/AU4,Knee
+58189,fp2425,navy,US18/AU22,The Demas Dress,1,add-back-strap;make-ankle-length,tall,fp2425 US18/AU22,Knee
+59570,fp2425,white,US0/AU4,The Demas Dress,1,0,petite,fp2425 US0/AU4,Knee
+61629,fp2425,navy,US4/AU8,The Demas Dress,1,0,petite,fp2425 US4/AU8,Knee
+61633,fp2425,navy,US2/AU6,The Demas Dress,1,0,petite,fp2425 US2/AU6,Knee
+62048,fp2425,navy,US6/AU10,The Demas Dress,1,0,petite,fp2425 US6/AU10,Knee
+58423,fp2349,navy,US10/AU14,The Demi Dress,1,0,standard,fp2349 US10/AU14,Mini
 50588,fpmc117,ivory,US14/AU18,The Deneuve,1,0,tall,fpmc117 US14/AU18,Maxi
 50442,fpmc117,ivory,US2/AU6,The Deneuve,1,0,petite,fpmc117 US2/AU6,Maxi
 50689,fpmc117,ivory,US2/AU6,The Deneuve,1,0,standard,fpmc117 US2/AU6,Maxi
@@ -2903,12 +2903,12 @@
 53893,fp2324,black,US8/AU12,The Dipper,1,0,standard,fp2324 US8/AU12,Maxi
 55237,fp2324,black,US2/AU6,The Dipper,1,0,petite,fp2324 US2/AU6,Maxi
 55343,fp2439,red-and-navy,US2/AU6,The Dita,1,0,petite,fp2439 US2/AU6,Midi
-58908,fp2478,garden-at-dusk-floral,US4/AU8,The Dusk Jumpsuit,1,0,length3,fp2478 US4/AU8,Maxi
-60456,fp2465,betsey-floral,US0/AU4,The Echo Dress,1,0,length2,fp2465 US0/AU4,Maxi
-62891,fp2465,betsey-floral,US6/AU10,The Echo Dress,1,0,length3,fp2465 US6/AU10,Maxi
-62939,fp2465,betsey-floral,US12/AU16,The Echo Dress,1,0,length3,fp2465 US12/AU16,Maxi
-63960,fp2465,betsey-floral,US0/AU4,The Echo Dress,1,make-neckline-wider;add-hem-ruffle,length2,fp2465 US0/AU4,Maxi
-62679,fp2465,betsey-floral,US2/AU6,The Echo Dress,1,0,length4,fp2465 US2/AU6,Maxi
+58908,fp2478,garden-at-dusk-floral,US4/AU8,The Dusk Jumpsuit,1,0,standard,fp2478 US4/AU8,Maxi
+60456,fp2465,betsey-floral,US0/AU4,The Echo Dress,1,0,petite,fp2465 US0/AU4,Maxi
+62891,fp2465,betsey-floral,US6/AU10,The Echo Dress,1,0,standard,fp2465 US6/AU10,Maxi
+62939,fp2465,betsey-floral,US12/AU16,The Echo Dress,1,0,standard,fp2465 US12/AU16,Maxi
+63960,fp2465,betsey-floral,US0/AU4,The Echo Dress,1,make-neckline-wider;add-hem-ruffle,petite,fp2465 US0/AU4,Maxi
+62679,fp2465,betsey-floral,US2/AU6,The Echo Dress,1,0,standard,fp2465 US2/AU6,Maxi
 51215,fp2254b,black-and-white,US14/AU18,The Eclipse,1,0,standard,fp2254b US14/AU18,Maxi
 51310,fp2254b,black,US4/AU8,The Eclipse,1,0,standard,fp2254b US4/AU8,Maxi
 51412,fp2254b,black-and-white,US0/AU4,The Eclipse,1,0,petite,fp2254b US0/AU4,Maxi
@@ -2918,11 +2918,11 @@
 52140,fp2254b,black-and-white,US2/AU6,The Eclipse,2,0,standard,fp2254b US2/AU6,Maxi
 52554,fp2254b,black-and-white,US4/AU8,The Eclipse,1,0,standard,fp2254b US4/AU8,Maxi
 55802,fp2254b,black-and-white,US10/AU14,The Eclipse,1,0,petite,fp2254b US10/AU14,Maxi
-57600,fp2355p,black-and-white-gingham,US10/AU14,The Elinor Skirt,1,0,length5,fp2355p US10/AU14,Maxi
-59159,fp2355p,black-and-white-gingham,US4/AU8,The Elinor Skirt,1,0,length2,fp2355p US4/AU8,Maxi
-61967,fp2355p,black-and-white-gingham,US6/AU10,The Elinor Skirt,1,0,length3,fp2355p US6/AU10,Maxi
-62510,fp2355p,black-and-white-gingham,US14/AU18,The Elinor Skirt,1,0,length5,fp2355p US14/AU18,Maxi
-58507,fp2213s1f0,champagne,US22/AU26,The Ella,1,make-maxi-with-front-princess-splits,length6,fp2213s1f0 US22/AU26,Maxi
+57600,fp2355p,black-and-white-gingham,US10/AU14,The Elinor Skirt,1,0,tall,fp2355p US10/AU14,Maxi
+59159,fp2355p,black-and-white-gingham,US4/AU8,The Elinor Skirt,1,0,petite,fp2355p US4/AU8,Maxi
+61967,fp2355p,black-and-white-gingham,US6/AU10,The Elinor Skirt,1,0,standard,fp2355p US6/AU10,Maxi
+62510,fp2355p,black-and-white-gingham,US14/AU18,The Elinor Skirt,1,0,tall,fp2355p US14/AU18,Maxi
+58507,fp2213s1f0,champagne,US22/AU26,The Ella,1,make-maxi-with-front-princess-splits,tall,fp2213s1f0 US22/AU26,Maxi
 51502,fpmc214,black,US6/AU10,The Equinox,2,0,standard,fpmc214 US6/AU10,Maxi
 52040,fpmc214,black,US0/AU4,The Equinox,1,0,petite,fpmc214 US0/AU4,Maxi
 51567,fpmc214,black,US4/AU8,The Equinox,1,0,petite,fpmc214 US4/AU8,Maxi
@@ -2943,10 +2943,10 @@
 62541,fp2441,red,US0/AU4,The Esmerelda,1,remove-train,petite,fp2441 US0/AU4,Maxi
 62811,fp2441,red,US0/AU4,The Esmerelda,1,0,petite,fp2441 US0/AU4,Maxi
 64384,fp2441,dark-tan,US2/AU6,THE ESMERELDA,1,0,standard,fp2441 US2/AU6,Maxi
-56493,fp2218s0f2,red,US0/AU4,The Eve ,1,0,length2,fp2218s0f2 US0/AU4,Ankle
-56637,fp2218s0f2,navy,US2/AU6,The Eve ,1,0,length4,fp2218s0f2 US2/AU6,Ankle
-60284,fp2218s0f2,mint,US4/AU8,The Eve ,1,0,length3,fp2218s0f2 US4/AU8,Ankle
-62022,fp2468,love-in-bloom,US6/AU10,The Feather Dress,1,0,length3,fp2468 US6/AU10,Ankle
+56493,fp2218s0f2,red,US0/AU4,The Eve ,1,0,petite,fp2218s0f2 US0/AU4,Ankle
+56637,fp2218s0f2,navy,US2/AU6,The Eve ,1,0,standard,fp2218s0f2 US2/AU6,Ankle
+60284,fp2218s0f2,mint,US4/AU8,The Eve ,1,0,standard,fp2218s0f2 US4/AU8,Ankle
+62022,fp2468,love-in-bloom,US6/AU10,The Feather Dress,1,0,standard,fp2468 US6/AU10,Ankle
 52050,fp2284,red,US20/AU24,The Galactic,1,0,standard,fp2284 US20/AU24,Maxi
 52022,fp2284,red,US10/AU14,The Galactic,1,0,standard,fp2284 US10/AU14,Maxi
 51986,fp2284,red,US2/AU6,The Galactic,3,0,petite,fp2284 US2/AU6,Maxi
@@ -2966,67 +2966,67 @@
 63388,fp2284,red,US4/AU8,The Galactic,1,make-midi-length,petite,fp2284 US4/AU8,Maxi
 53905,fp2359,black,US6/AU10,The Gibbous,1,0,standard,fp2359 US6/AU10,Maxi
 56158,fp2359,black,US4/AU8,The Gibbous,1,0,standard,fp2359 US4/AU8,Maxi
-59004,fp2357,pale-pink,US8/AU12,The Gilda Dress,1,0,length2,fp2357 US8/AU12,Maxi
-58657,fprv1032,navy-and-white-gingham,US4/AU8,The Giovana Dress,1,0,length4,fprv1032 US4/AU8,Mini
-57901,fp2329p,oasis-floral,US0/AU4,The Goldenberg Dress,1,make-ankle-length,length2,fp2329p US0/AU4,Maxi
-58142,fp2427,black-and-white-spot,US6/AU10,The Grey Dress,2,0,length3,fp2427 US6/AU10,Knee
-58494,fp2427,black-and-white-spot,US10/AU14,The Grey Dress,1,0,length4,fp2427 US10/AU14,Knee
-57992,fp2427,black-and-white-spot,US14/AU18,The Grey Dress,1,0,length4,fp2427 US14/AU18,Knee
-59778,fp2427,black-and-white-spot,US0/AU4,The Grey Dress,1,0,length3,fp2427 US0/AU4,Knee
-65020,fp2427,black-and-white-spot,US12/AU16,The Grey Dress,1,0,length4,fp2427 US12/AU16,Knee
-60247,fp2427,black-and-white-spot,US4/AU8,The Grey Dress,1,0,length2,fp2427 US4/AU8,Knee
-58024,fp2212s0f1,black,US4/AU8,The Gwen ,1,0,length3,fp2212s0f1 US4/AU8,Ankle
-58981,fp2212s0f1,black,US8/AU12,The Gwen ,1,0,length2,fp2212s0f1 US8/AU12,Ankle
+59004,fp2357,pale-pink,US8/AU12,The Gilda Dress,1,0,petite,fp2357 US8/AU12,Maxi
+58657,fprv1032,navy-and-white-gingham,US4/AU8,The Giovana Dress,1,0,standard,fprv1032 US4/AU8,Mini
+57901,fp2329p,oasis-floral,US0/AU4,The Goldenberg Dress,1,make-ankle-length,petite,fp2329p US0/AU4,Maxi
+58142,fp2427,black-and-white-spot,US6/AU10,The Grey Dress,2,0,standard,fp2427 US6/AU10,Knee
+58494,fp2427,black-and-white-spot,US10/AU14,The Grey Dress,1,0,standard,fp2427 US10/AU14,Knee
+57992,fp2427,black-and-white-spot,US14/AU18,The Grey Dress,1,0,standard,fp2427 US14/AU18,Knee
+59778,fp2427,black-and-white-spot,US0/AU4,The Grey Dress,1,0,standard,fp2427 US0/AU4,Knee
+65020,fp2427,black-and-white-spot,US12/AU16,The Grey Dress,1,0,standard,fp2427 US12/AU16,Knee
+60247,fp2427,black-and-white-spot,US4/AU8,The Grey Dress,1,0,petite,fp2427 US4/AU8,Knee
+58024,fp2212s0f1,black,US4/AU8,The Gwen ,1,0,standard,fp2212s0f1 US4/AU8,Ankle
+58981,fp2212s0f1,black,US8/AU12,The Gwen ,1,0,petite,fp2212s0f1 US8/AU12,Ankle
 56335,fp2436,white-and-red-stripe,US4/AU8,The Gwynnie,1,0,standard,fp2436 US4/AU8,Ankle
-59608,fp2469,young-love-floral,US4/AU8,The Gypset Dress,1,0,length3,fp2469 US4/AU8,Maxi
-60133,fp2215s3f0,black,US2/AU6,The Gypsy,1,0,length2,fp2215s3f0 US2/AU6,Ankle
-61582,fp2215s3f0,champagne,US6/AU10,The Gypsy,1,0,length3,fp2215s3f0 US6/AU10,Ankle
-57991,fp2371,pale-pink,US12/AU16,The Hanne Dress,1,close-shoulder-cut-outs,length4,fp2371 US12/AU16,Midi
-60190,fp2371,white,US10/AU14,The Hanne Dress,1,0,length4,fp2371 US10/AU14,Midi
+59608,fp2469,young-love-floral,US4/AU8,The Gypset Dress,1,0,standard,fp2469 US4/AU8,Maxi
+60133,fp2215s3f0,black,US2/AU6,The Gypsy,1,0,petite,fp2215s3f0 US2/AU6,Ankle
+61582,fp2215s3f0,champagne,US6/AU10,The Gypsy,1,0,standard,fp2215s3f0 US6/AU10,Ankle
+57991,fp2371,pale-pink,US12/AU16,The Hanne Dress,1,close-shoulder-cut-outs,standard,fp2371 US12/AU16,Midi
+60190,fp2371,white,US10/AU14,The Hanne Dress,1,0,standard,fp2371 US10/AU14,Midi
 52814,fp2293,silver,US4/AU8,The Hydra,1,0,standard,fp2293 US4/AU8,Maxi
 51998,fp2293,silver,US0/AU4,The Hydra,2,0,petite,fp2293 US0/AU4,Maxi
 59422,fp2293,silver,US4/AU8,The Hydra,1,0,petite,fp2293 US4/AU8,Maxi
 62634,fp2293,silver,US6/AU10,The Hydra,1,0,petite,fp2293 US6/AU10,Maxi
 62635,fp2293,silver,US4/AU8,The Hydra,1,0,petite,fp2293 US4/AU8,Maxi
-62005,fp2319,red,US6/AU10,The Irina Dress,1,0,length3,fp2319 US6/AU10,Mini
-58465,fprv1011,red,US8/AU12,The Issa Dress,1,0,length3,fprv1011 US8/AU12,Mini
-59240,fprv1011,pale-blue,US10/AU14,The Issa Dress,1,make-knee-length,length3,fprv1011 US10/AU14,Knee
-58232,fprv1011,white,US6/AU10,The Issa Dress,1,0,length2,fprv1011 US6/AU10,Mini
-59911,fprv1011,pretty-pink,US6/AU10,The Issa Dress,3,0,length3,fprv1011 US6/AU10,Mini
+62005,fp2319,red,US6/AU10,The Irina Dress,1,0,standard,fp2319 US6/AU10,Mini
+58465,fprv1011,red,US8/AU12,The Issa Dress,1,0,standard,fprv1011 US8/AU12,Mini
+59240,fprv1011,pale-blue,US10/AU14,The Issa Dress,1,make-knee-length,standard,fprv1011 US10/AU14,Knee
+58232,fprv1011,white,US6/AU10,The Issa Dress,1,0,petite,fprv1011 US6/AU10,Mini
+59911,fprv1011,pretty-pink,US6/AU10,The Issa Dress,3,0,standard,fprv1011 US6/AU10,Mini
 63394,fp2231,ivory,US8/AU12,The Jagger,1,remove-train-from-all-layers,standard,fp2231 US8/AU12,Maxi
-60114,fp2556,red,US4/AU8,The Janette Dress,1,0,length3,fp2556 US4/AU8,Mini
-60999,fp2555,white,US4/AU8,The Jenna Dress,1,0,length2,fp2555 US4/AU8,Midi
-56628,fp2212s2f3,royal-blue,US18/AU22,The Jennifer,1,0,length3,fp2212s2f3 US18/AU22,Maxi
-58245,fp2212s2f3,bright-turquoise,US4/AU8,The Jennifer,1,0,length4,fp2212s2f3 US4/AU8,Maxi
-58943,fp2212s2f3,navy,US18/AU22,The Jennifer,1,0,length3,fp2212s2f3 US18/AU22,Maxi
-58847,fp2212s2f3,berry,US14/AU18,The Jennifer,1,add-narrow-adjustable-straps,length4,fp2212s2f3 US14/AU18,Maxi
-58710,fp2212s2f3,pale-grey,US4/AU8,The Jennifer,1,0,length3,fp2212s2f3 US4/AU8,Maxi
-60652,fp2212s2f3,champagne,US8/AU12,The Jennifer,1,0,length3,fp2212s2f3 US8/AU12,Maxi
-61580,fp2212s2f3,champagne,US8/AU12,The Jennifer,1,0,length3,fp2212s2f3 US8/AU12,Maxi
-61650,fp2212s2f3,champagne,US2/AU6,The Jennifer,1,0,length2,fp2212s2f3 US2/AU6,Maxi
-61656,fp2212s2f3,champagne,US12/AU16,The Jennifer,1,0,length3,fp2212s2f3 US12/AU16,Maxi
-61690,fp2212s2f3,black,US6/AU10,The Jennifer,1,0,length4,fp2212s2f3 US6/AU10,Maxi
+60114,fp2556,red,US4/AU8,The Janette Dress,1,0,standard,fp2556 US4/AU8,Mini
+60999,fp2555,white,US4/AU8,The Jenna Dress,1,0,petite,fp2555 US4/AU8,Midi
+56628,fp2212s2f3,royal-blue,US18/AU22,The Jennifer,1,0,standard,fp2212s2f3 US18/AU22,Maxi
+58245,fp2212s2f3,bright-turquoise,US4/AU8,The Jennifer,1,0,standard,fp2212s2f3 US4/AU8,Maxi
+58943,fp2212s2f3,navy,US18/AU22,The Jennifer,1,0,standard,fp2212s2f3 US18/AU22,Maxi
+58847,fp2212s2f3,berry,US14/AU18,The Jennifer,1,add-narrow-adjustable-straps,standard,fp2212s2f3 US14/AU18,Maxi
+58710,fp2212s2f3,pale-grey,US4/AU8,The Jennifer,1,0,standard,fp2212s2f3 US4/AU8,Maxi
+60652,fp2212s2f3,champagne,US8/AU12,The Jennifer,1,0,standard,fp2212s2f3 US8/AU12,Maxi
+61580,fp2212s2f3,champagne,US8/AU12,The Jennifer,1,0,standard,fp2212s2f3 US8/AU12,Maxi
+61650,fp2212s2f3,champagne,US2/AU6,The Jennifer,1,0,petite,fp2212s2f3 US2/AU6,Maxi
+61656,fp2212s2f3,champagne,US12/AU16,The Jennifer,1,0,standard,fp2212s2f3 US12/AU16,Maxi
+61690,fp2212s2f3,black,US6/AU10,The Jennifer,1,0,standard,fp2212s2f3 US6/AU10,Maxi
 56026,fp2440,red-and-pretty-pink,US2/AU6,The Jo,1,0,standard,fp2440 US2/AU6,Maxi
-57441,fp2212s2f5,royal-blue,US22/AU26,The Julianne,1,0,length2,fp2212s2f5 US22/AU26,Maxi
-59012,fp2212s2f5,royal-blue,US8/AU12,The Julianne,1,0,length3,fp2212s2f5 US8/AU12,Maxi
-59598,fp2212s2f5,navy,US18/AU22,The Julianne,1,0,length4,fp2212s2f5 US18/AU22,Maxi
-59513,fp2212s2f5,royal-blue,US14/AU18,The Julianne,1,add-narrow-adjustable-straps,length2,fp2212s2f5 US14/AU18,Maxi
-59514,fp2212s2f5,royal-blue,US16/AU20,The Julianne,1,0,length2,fp2212s2f5 US16/AU20,Maxi
-59741,fp2212s2f5,pale-blue,US6/AU10,The Julianne,1,0,length3,fp2212s2f5 US6/AU10,Maxi
-60165,fp2212s2f5,pale-blue,US14/AU18,The Julianne,1,0,length2,fp2212s2f5 US14/AU18,Maxi
-57994,fp2212s2f5,black,US8/AU12,The Julianne,1,0,length3,fp2212s2f5 US8/AU12,Maxi
-61651,fp2212s2f5,champagne,US2/AU6,The Julianne,1,0,length2,fp2212s2f5 US2/AU6,Maxi
-62263,fp2212s2f5,champagne,US6/AU10,The Julianne,1,0,length2,fp2212s2f5 US6/AU10,Maxi
-62267,fp2212s2f5,champagne,US4/AU8,The Julianne,1,0,length2,fp2212s2f5 US4/AU8,Maxi
-58900,fp2470,garden-at-dusk-floral,US2/AU6,The Juniper Dress ,1,0,length3,fp2470 US2/AU6,Maxi
-61670,fp2470,garden-at-dusk-floral,US0/AU4,The Juniper Dress ,1,add-arm-band-to-left-side;add-wide-strap,length2,fp2470 US0/AU4,Maxi
-56650,fp2220s0f5,red,US4/AU8,The Karisa,1,0,length2,fp2220s0f5 US4/AU8,Maxi
-58032,fp2220s0f5,champagne,US4/AU8,The Karisa,1,0,length3,fp2220s0f5 US4/AU8,Maxi
-56899,fp2220s0f5,pale-pink,US10/AU14,The Karisa,1,0,length3,fp2220s0f5 US10/AU14,Maxi
-57438,fp2220s0f5,champagne,US2/AU6,The Karisa,1,0,length2,fp2220s0f5 US2/AU6,Maxi
-61562,fp2220s0f5,champagne,US6/AU10,The Karisa,1,0,length3,fp2220s0f5 US6/AU10,Maxi
-61590,fp2220s0f5,pale-grey,US2/AU6,The Karisa,1,0,length4,fp2220s0f5 US2/AU6,Maxi
-61647,fp2220s0f5,peach,US6/AU10,The Karisa,1,0,length2,fp2220s0f5 US6/AU10,Maxi
+57441,fp2212s2f5,royal-blue,US22/AU26,The Julianne,1,0,petite,fp2212s2f5 US22/AU26,Maxi
+59012,fp2212s2f5,royal-blue,US8/AU12,The Julianne,1,0,standard,fp2212s2f5 US8/AU12,Maxi
+59598,fp2212s2f5,navy,US18/AU22,The Julianne,1,0,standard,fp2212s2f5 US18/AU22,Maxi
+59513,fp2212s2f5,royal-blue,US14/AU18,The Julianne,1,add-narrow-adjustable-straps,petite,fp2212s2f5 US14/AU18,Maxi
+59514,fp2212s2f5,royal-blue,US16/AU20,The Julianne,1,0,petite,fp2212s2f5 US16/AU20,Maxi
+59741,fp2212s2f5,pale-blue,US6/AU10,The Julianne,1,0,standard,fp2212s2f5 US6/AU10,Maxi
+60165,fp2212s2f5,pale-blue,US14/AU18,The Julianne,1,0,petite,fp2212s2f5 US14/AU18,Maxi
+57994,fp2212s2f5,black,US8/AU12,The Julianne,1,0,standard,fp2212s2f5 US8/AU12,Maxi
+61651,fp2212s2f5,champagne,US2/AU6,The Julianne,1,0,petite,fp2212s2f5 US2/AU6,Maxi
+62263,fp2212s2f5,champagne,US6/AU10,The Julianne,1,0,petite,fp2212s2f5 US6/AU10,Maxi
+62267,fp2212s2f5,champagne,US4/AU8,The Julianne,1,0,petite,fp2212s2f5 US4/AU8,Maxi
+58900,fp2470,garden-at-dusk-floral,US2/AU6,The Juniper Dress ,1,0,standard,fp2470 US2/AU6,Maxi
+61670,fp2470,garden-at-dusk-floral,US0/AU4,The Juniper Dress ,1,add-arm-band-to-left-side;add-wide-strap,petite,fp2470 US0/AU4,Maxi
+56650,fp2220s0f5,red,US4/AU8,The Karisa,1,0,petite,fp2220s0f5 US4/AU8,Maxi
+58032,fp2220s0f5,champagne,US4/AU8,The Karisa,1,0,standard,fp2220s0f5 US4/AU8,Maxi
+56899,fp2220s0f5,pale-pink,US10/AU14,The Karisa,1,0,standard,fp2220s0f5 US10/AU14,Maxi
+57438,fp2220s0f5,champagne,US2/AU6,The Karisa,1,0,petite,fp2220s0f5 US2/AU6,Maxi
+61562,fp2220s0f5,champagne,US6/AU10,The Karisa,1,0,standard,fp2220s0f5 US6/AU10,Maxi
+61590,fp2220s0f5,pale-grey,US2/AU6,The Karisa,1,0,standard,fp2220s0f5 US2/AU6,Maxi
+61647,fp2220s0f5,peach,US6/AU10,The Karisa,1,0,petite,fp2220s0f5 US6/AU10,Maxi
 50842,fp2301,ivory,US4/AU8,The Katharine,1,0,petite,fp2301 US4/AU8,Maxi
 51833,fp2301,ivory,US6/AU10,The Katharine,1,0,tall,fp2301 US6/AU10,Maxi
 52342,fp2301,ivory,US10/AU14,The Katharine,1,0,petite,fp2301 US10/AU14,Maxi
@@ -3037,18 +3037,18 @@
 59221,fp2302,ivory,US10/AU14,The Katharine,1,0,tall,fp2302 US10/AU14,Maxi
 51226,fp2228,ivory,US4/AU8,The Kensie,1,0,tall,fp2228 US4/AU8,Maxi
 52268,fp2228,ivory,US2/AU6,The Kensie,1,0,standard,fp2228 US2/AU6,Maxi
-63861,fp2562,white,US4/AU8,The Kimmie Dress,1,0,length4,fp2562 US4/AU8,Knee
+63861,fp2562,white,US4/AU8,The Kimmie Dress,1,0,standard,fp2562 US4/AU8,Knee
 58671,fp2255p,midnight-daisy,US6/AU10,The Kismet,1,0,standard,fp2255p US6/AU10,Maxi
-59995,fp2212s3f5,champagne,US18/AU22,The Lacey,1,0,length3,fp2212s3f5 US18/AU22,Maxi
-63862,fp2450,white-and-black-spot,US6/AU10,The Larchmont Dress,1,0,length4,fp2450 US6/AU10,Knee
-60028,fprv1060,white,US0/AU4,The Laurel Dress,1,0,length2,fprv1060 US0/AU4,Mini
-64010,fprv1060,navy,US10/AU14,The Laurel Dress,1,0,length3,fprv1060 US10/AU14,Mini
-61001,fprv1060,black,US8/AU12,The Laurel Dress,1,0,length3,fprv1060 US8/AU12,Mini
-62019,fprv1060,white,US6/AU10,The Laurel Dress,1,0,length3,fprv1060 US6/AU10,Mini
-63035,fprv1060,white,US0/AU4,The Laurel Dress,1,0,length1,fprv1060 US0/AU4,Mini
-61003,fp2216s2f0,champagne,US16/AU20,The Lenore,1,0,length5,fp2216s2f0 US16/AU20,Maxi
-59210,fp2471,sweet-romance-floral,US4/AU8,The Liberty Dress,1,0,length2,fp2471 US4/AU8,Maxi
-58828,fp2471,sweet-romance-floral,US2/AU6,The Liberty Dress,1,0,length3,fp2471 US2/AU6,Maxi
+59995,fp2212s3f5,champagne,US18/AU22,The Lacey,1,0,standard,fp2212s3f5 US18/AU22,Maxi
+63862,fp2450,white-and-black-spot,US6/AU10,The Larchmont Dress,1,0,standard,fp2450 US6/AU10,Knee
+60028,fprv1060,white,US0/AU4,The Laurel Dress,1,0,petite,fprv1060 US0/AU4,Mini
+64010,fprv1060,navy,US10/AU14,The Laurel Dress,1,0,standard,fprv1060 US10/AU14,Mini
+61001,fprv1060,black,US8/AU12,The Laurel Dress,1,0,standard,fprv1060 US8/AU12,Mini
+62019,fprv1060,white,US6/AU10,The Laurel Dress,1,0,standard,fprv1060 US6/AU10,Mini
+63035,fprv1060,white,US0/AU4,The Laurel Dress,1,0,petite,fprv1060 US0/AU4,Mini
+61003,fp2216s2f0,champagne,US16/AU20,The Lenore,1,0,tall,fp2216s2f0 US16/AU20,Maxi
+59210,fp2471,sweet-romance-floral,US4/AU8,The Liberty Dress,1,0,petite,fp2471 US4/AU8,Maxi
+58828,fp2471,sweet-romance-floral,US2/AU6,The Liberty Dress,1,0,standard,fp2471 US2/AU6,Maxi
 52280,fp2282,champagne,US6/AU10,The Libra,1,0,petite,fp2282 US6/AU10,Maxi
 51293,fp2282,dark-tan,US2/AU6,The Libra,2,0,petite,fp2282 US2/AU6,Maxi
 52539,fp2282,dark-tan,US4/AU8,The Libra,2,0,petite,fp2282 US4/AU8,Maxi
@@ -3076,29 +3076,29 @@
 62546,fp2282,dark-burgundy,US10/AU14,The Libra,1,0,petite,fp2282 US10/AU14,Maxi
 61899,fp2282,burgundy,US4/AU8,The Libra,1,0,petite,fp2282 US4/AU8,Maxi
 63887,fp2282,black,US4/AU8,The Libra,1,0,standard,fp2282 US4/AU8,Maxi
-58311,fp2220s2f0,navy,US6/AU10,The Lily,1,0,length3,fp2220s2f0 US6/AU10,Maxi
-58597,fp2220s2f0,navy,US12/AU16,The Lily,1,0,length4,fp2220s2f0 US12/AU16,Maxi
-62487,fp2220s2f0,burgundy,US6/AU10,The Lily,1,0,length3,fp2220s2f0 US6/AU10,Maxi
-60199,fp2573p,black-and-tan-spot,US4/AU8,The Lipton Dress,1,raise-front-neckline,length4,fp2573p US4/AU8,Mini
-61571,fp2573p,midnight-bloom,US4/AU8,The Lipton Dress,1,0,length2,fp2573p US4/AU8,Mini
-63858,fp2573p,black-and-tan-spot,US6/AU10,The Lipton Dress,1,0,length4,fp2573p US6/AU10,Mini
-57427,fp2215s5f4,pale-grey,US6/AU10,The Lorelai,1,0,length4,fp2215s5f4 US6/AU10,Midi
-57428,fp2215s5f4,pale-grey,US8/AU12,The Lorelai,1,0,length4,fp2215s5f4 US8/AU12,Midi
-59742,fp2215s5f4,pale-blue,US6/AU10,The Lorelai,1,make-maxi-length,length3,fp2215s5f4 US6/AU10,Maxi
+58311,fp2220s2f0,navy,US6/AU10,The Lily,1,0,standard,fp2220s2f0 US6/AU10,Maxi
+58597,fp2220s2f0,navy,US12/AU16,The Lily,1,0,standard,fp2220s2f0 US12/AU16,Maxi
+62487,fp2220s2f0,burgundy,US6/AU10,The Lily,1,0,standard,fp2220s2f0 US6/AU10,Maxi
+60199,fp2573p,black-and-tan-spot,US4/AU8,The Lipton Dress,1,raise-front-neckline,standard,fp2573p US4/AU8,Mini
+61571,fp2573p,midnight-bloom,US4/AU8,The Lipton Dress,1,0,petite,fp2573p US4/AU8,Mini
+63858,fp2573p,black-and-tan-spot,US6/AU10,The Lipton Dress,1,0,standard,fp2573p US6/AU10,Mini
+57427,fp2215s5f4,pale-grey,US6/AU10,The Lorelai,1,0,standard,fp2215s5f4 US6/AU10,Midi
+57428,fp2215s5f4,pale-grey,US8/AU12,The Lorelai,1,0,standard,fp2215s5f4 US8/AU12,Midi
+59742,fp2215s5f4,pale-blue,US6/AU10,The Lorelai,1,make-maxi-length,standard,fp2215s5f4 US6/AU10,Maxi
 60419,fp2218s5f0,champagne,US0/AU4,The Lorraine,1,0,standard,fp2218s5f0 US0/AU4,Maxi
-61663,fp2218s5f0,mint,US4/AU8,The Lorraine,1,0,length2,fp2218s5f0 US4/AU8,Maxi
-59116,fp2462,white,US8/AU12,The Los Feliz Jumpsuit,1,0,length4,fp2462 US8/AU12,Maxi
-62543,fp2462,white,US0/AU4,The Los Feliz Jumpsuit,1,close-cut-out-on-front-bodice,length2,fp2462 US0/AU4,Maxi
-57539,fp2309,black,US6/AU10,The Lourdes Dress,1,0,length3,fp2309 US6/AU10,Mini
+61663,fp2218s5f0,mint,US4/AU8,The Lorraine,1,0,petite,fp2218s5f0 US4/AU8,Maxi
+59116,fp2462,white,US8/AU12,The Los Feliz Jumpsuit,1,0,standard,fp2462 US8/AU12,Maxi
+62543,fp2462,white,US0/AU4,The Los Feliz Jumpsuit,1,close-cut-out-on-front-bodice,petite,fp2462 US0/AU4,Maxi
+57539,fp2309,black,US6/AU10,The Lourdes Dress,1,0,standard,fp2309 US6/AU10,Mini
 53440,fp2287p,candy-floral,US2/AU6,The Lucid,2,0,petite,fp2287p US2/AU6,Maxi
 55607,fp2287p,candy-floral,US8/AU12,The Lucid,1,0,standard,fp2287p US8/AU12,Maxi
 51349,fp2287p,candy-floral,US2/AU6,The Lucid,1,0,standard,fp2287p US2/AU6,Maxi
 58355,fp2287p,candy-floral,US4/AU8,The Lucid,1,0,standard,fp2287p US4/AU8,Maxi
 58838,fp2287p,candy-floral,US6/AU10,The Lucid,1,0,petite,fp2287p US6/AU10,Maxi
-59813,fprv1024p,oasis-floral,US6/AU10,The Lucille Dress,1,0,length4,fprv1024p US6/AU10,Maxi
-60164,fp2563,navy,US4/AU8,The Lynn Dress,1,0,length2,fp2563 US4/AU8,Knee
-59900,fp2563,burgundy,US4/AU8,The Lynn Dress,1,0,length2,fp2563 US4/AU8,Knee
-61779,fp2563,navy,US0/AU4,The Lynn Dress,1,0,length1,fp2563 US0/AU4,Knee
+59813,fprv1024p,oasis-floral,US6/AU10,The Lucille Dress,1,0,standard,fprv1024p US6/AU10,Maxi
+60164,fp2563,navy,US4/AU8,The Lynn Dress,1,0,petite,fp2563 US4/AU8,Knee
+59900,fp2563,burgundy,US4/AU8,The Lynn Dress,1,0,petite,fp2563 US4/AU8,Knee
+61779,fp2563,navy,US0/AU4,The Lynn Dress,1,0,petite,fp2563 US0/AU4,Knee
 51892,fp2320,navy,US8/AU12,The Lyra,2,0,petite,fp2320 US8/AU12,Maxi
 51126,fp2320,navy,US6/AU10,The Lyra,2,0,standard,fp2320 US6/AU10,Maxi
 51506,fp2320,navy,US4/AU8,The Lyra,1,0,petite,fp2320 US4/AU8,Maxi
@@ -3113,21 +3113,21 @@
 54371,fp2320,navy,US8/AU12,The Lyra,1,0,standard,fp2320 US8/AU12,Maxi
 61794,fp2320,navy,US0/AU4,The Lyra,2,0,petite,fp2320 US0/AU4,Maxi
 62865,fp2320,navy,US2/AU6,The Lyra,1,0,petite,fp2320 US2/AU6,Maxi
-56323,fp2212s5f5,pale-blue,US6/AU10,The Mae,1,0,length4,fp2212s5f5 US6/AU10,Maxi
-56402,fp2212s5f5,navy,US2/AU6,The Mae,1,add-wide-tie-belt,length4,fp2212s5f5 US2/AU6,Maxi
-57877,fp2212s5f5,pale-blue,US2/AU6,The Mae,1,0,length2,fp2212s5f5 US2/AU6,Maxi
+56323,fp2212s5f5,pale-blue,US6/AU10,The Mae,1,0,standard,fp2212s5f5 US6/AU10,Maxi
+56402,fp2212s5f5,navy,US2/AU6,The Mae,1,add-wide-tie-belt,standard,fp2212s5f5 US2/AU6,Maxi
+57877,fp2212s5f5,pale-blue,US2/AU6,The Mae,1,0,petite,fp2212s5f5 US2/AU6,Maxi
 60959,fp2212s5f5,pale-blue,US6/AU10,The Mae,1,0,standard,fp2212s5f5 US6/AU10,Maxi
-61845,fp2212s5f5,pale-grey,US2/AU6,The Mae,1,0,length1,fp2212s5f5 US2/AU6,Maxi
-62486,fp2212s5f5,burgundy,US6/AU10,The Mae,1,0,length3,fp2212s5f5 US6/AU10,Maxi
-58708,fp2351,white,US10/AU14,The Manfield Dress,1,0,length6,fp2351 US10/AU14,Maxi
-61581,fp2351,white,US14/AU18,The Manfield Dress,1,0,length4,fp2351 US14/AU18,Maxi
-60149,fp2571,black,US6/AU10,The Margaux Dress,1,0,length2,fp2571 US6/AU10,Mini
-60146,fp2571,candy-blue,US22/AU26,The Margaux Dress,1,raise-back-neckline,length1,fp2571 US22/AU26,Mini
-59812,fprv1026,cherry-red,US0/AU4,The Marisa Dress,1,add-split-at-center-front,length2,fprv1026 US0/AU4,Maxi
-61848,fprv1026,navy,US6/AU10,The Marisa Dress,1,0,length4,fprv1026 US6/AU10,Maxi
-63859,fp2449,black,US6/AU10,The Melrose Dress,1,0,length4,fp2449 US6/AU10,Mini
-57967,fp2355,silver,US14/AU18,The Meni Skirt,1,0,length3,fp2355 US14/AU18,Maxi
-59572,fp2355,silver,US2/AU6,The Meni Skirt,1,0,length3,fp2355 US2/AU6,Maxi
+61845,fp2212s5f5,pale-grey,US2/AU6,The Mae,1,0,petite,fp2212s5f5 US2/AU6,Maxi
+62486,fp2212s5f5,burgundy,US6/AU10,The Mae,1,0,standard,fp2212s5f5 US6/AU10,Maxi
+58708,fp2351,white,US10/AU14,The Manfield Dress,1,0,tall,fp2351 US10/AU14,Maxi
+61581,fp2351,white,US14/AU18,The Manfield Dress,1,0,standard,fp2351 US14/AU18,Maxi
+60149,fp2571,black,US6/AU10,The Margaux Dress,1,0,petite,fp2571 US6/AU10,Mini
+60146,fp2571,candy-blue,US22/AU26,The Margaux Dress,1,raise-back-neckline,petite,fp2571 US22/AU26,Mini
+59812,fprv1026,cherry-red,US0/AU4,The Marisa Dress,1,add-split-at-center-front,petite,fprv1026 US0/AU4,Maxi
+61848,fprv1026,navy,US6/AU10,The Marisa Dress,1,0,standard,fprv1026 US6/AU10,Maxi
+63859,fp2449,black,US6/AU10,The Melrose Dress,1,0,standard,fp2449 US6/AU10,Mini
+57967,fp2355,silver,US14/AU18,The Meni Skirt,1,0,standard,fp2355 US14/AU18,Maxi
+59572,fp2355,silver,US2/AU6,The Meni Skirt,1,0,standard,fp2355 US2/AU6,Maxi
 51315,fp2296b,black,US4/AU8,The Meridian,2,0,standard,fp2296b US4/AU8,Maxi
 52423,fp2296b,black,US0/AU4,The Meridian,1,0,standard,fp2296b US0/AU4,Maxi
 52977,fp2296b,black,US6/AU10,The Meridian,1,0,petite,fp2296b US6/AU10,Maxi
@@ -3168,13 +3168,13 @@
 58601,fp2297,cobalt-blue,US8/AU12,The Midheaven ,1,0,standard,fp2297 US8/AU12,Maxi
 62282,fp2297,burgundy,US0/AU4,The Midheaven ,1,0,petite,fp2297 US0/AU4,Maxi
 63482,fp2297,black,US8/AU12,The Midheaven ,1,0,tall,fp2297 US8/AU12,Maxi
-57792,fp2216s0f1,champagne,US8/AU12,The Mimi,1,0,length3,fp2216s0f1 US8/AU12,Maxi
-58692,fp2216s0f1,navy,US4/AU8,The Mimi,1,0,length3,fp2216s0f1 US4/AU8,Maxi
-58666,fp2216s0f1,navy,US8/AU12,The Mimi,1,0,length3,fp2216s0f1 US8/AU12,Maxi
-58945,fp2216s0f1,red,US12/AU16,The Mimi,1,0,length4,fp2216s0f1 US12/AU16,Maxi
-60283,fp2216s0f1,mint,US4/AU8,The Mimi,1,0,length3,fp2216s0f1 US4/AU8,Maxi
-59021,fp2219s0f1,black,US6/AU10,The Moana,1,0,length3,fp2219s0f1 US6/AU10,Ankle
-59913,fp2219s0f1,navy,US0/AU4,The Moana,1,make-maxi-length,length1,fp2219s0f1 US0/AU4,Maxi
+57792,fp2216s0f1,champagne,US8/AU12,The Mimi,1,0,standard,fp2216s0f1 US8/AU12,Maxi
+58692,fp2216s0f1,navy,US4/AU8,The Mimi,1,0,standard,fp2216s0f1 US4/AU8,Maxi
+58666,fp2216s0f1,navy,US8/AU12,The Mimi,1,0,standard,fp2216s0f1 US8/AU12,Maxi
+58945,fp2216s0f1,red,US12/AU16,The Mimi,1,0,standard,fp2216s0f1 US12/AU16,Maxi
+60283,fp2216s0f1,mint,US4/AU8,The Mimi,1,0,standard,fp2216s0f1 US4/AU8,Maxi
+59021,fp2219s0f1,black,US6/AU10,The Moana,1,0,standard,fp2219s0f1 US6/AU10,Ankle
+59913,fp2219s0f1,navy,US0/AU4,The Moana,1,make-maxi-length,petite,fp2219s0f1 US0/AU4,Maxi
 55119,fp2433,red,US2/AU6,The Monroe,1,0,petite,fp2433 US2/AU6,Ankle
 56172,fp2433,red,US14/AU18,The Monroe,1,0,petite,fp2433 US14/AU18,Ankle
 56171,fp2433,red,US16/AU20,The Monroe,1,0,petite,fp2433 US16/AU20,Ankle
@@ -3185,14 +3185,14 @@
 58048,fp2433,black,US4/AU8,The Monroe,1,0,petite,fp2433 US4/AU8,Ankle
 58350,fp2433,burgundy,US6/AU10,The Monroe,1,0,standard,fp2433 US6/AU10,Ankle
 64047,fp2433,navy,US2/AU6,The Monroe,1,0,standard,fp2433 US2/AU6,Ankle
-57562,fp2219s0f5,navy,US6/AU10,The Nave,1,0,length4,fp2219s0f5 US6/AU10,Ankle
-56651,fp2219s0f5,red,US4/AU8,The Nave,1,0,length2,fp2219s0f5 US4/AU8,Ankle
-58073,fp2219s0f5,navy,US0/AU4,The Nave,1,0,length2,fp2219s0f5 US0/AU4,Ankle
-60414,fp2219s0f5,pale-pink,US8/AU12,The Nave,1,0,length2,fp2219s0f5 US8/AU12,Ankle
-63226,fp2219s0f5,black,US0/AU4,The Nave,1,0,length1,fp2219s0f5 US0/AU4,Ankle
-63185,fp2219s0f5,bright-blush,US6/AU10,The Nave,1,0,length4,fp2219s0f5 US6/AU10,Ankle
-61669,fp2219s0f5,pale-grey,US0/AU4,The Nave,2,make-petti-length,length2,fp2219s0f5 US0/AU4,Midi
-61909,fp2219s0f5,burgundy,US2/AU6,The Nave,1,0,length2,fp2219s0f5 US2/AU6,Ankle
+57562,fp2219s0f5,navy,US6/AU10,The Nave,1,0,standard,fp2219s0f5 US6/AU10,Ankle
+56651,fp2219s0f5,red,US4/AU8,The Nave,1,0,petite,fp2219s0f5 US4/AU8,Ankle
+58073,fp2219s0f5,navy,US0/AU4,The Nave,1,0,petite,fp2219s0f5 US0/AU4,Ankle
+60414,fp2219s0f5,pale-pink,US8/AU12,The Nave,1,0,petite,fp2219s0f5 US8/AU12,Ankle
+63226,fp2219s0f5,black,US0/AU4,The Nave,1,0,petite,fp2219s0f5 US0/AU4,Ankle
+63185,fp2219s0f5,bright-blush,US6/AU10,The Nave,1,0,standard,fp2219s0f5 US6/AU10,Ankle
+61669,fp2219s0f5,pale-grey,US0/AU4,The Nave,2,make-petti-length,petite,fp2219s0f5 US0/AU4,Midi
+61909,fp2219s0f5,burgundy,US2/AU6,The Nave,1,0,petite,fp2219s0f5 US2/AU6,Ankle
 51266,fp2252,dark-tan,US2/AU6,The Nebula,1,0,petite,fp2252 US2/AU6,Maxi
 52166,fp2252,dark-tan,US4/AU8,The Nebula,3,0,petite,fp2252 US4/AU8,Maxi
 54582,fp2252,dark-tan,US4/AU8,The Nebula,1,0,standard,fp2252 US4/AU8,Maxi
@@ -3214,8 +3214,8 @@
 55344,fp2258,black,US2/AU6,The Nova,1,0,tall,fp2258 US2/AU6,Maxi
 58683,fp2258,black,US4/AU8,The Nova,1,remove-overlay-panel-on-skirt,petite,fp2258 US4/AU8,Maxi
 63556,fp2258,ivory,US10/AU14,The Nova,1,make-skirt-ankle-length,petite,fp2258 US10/AU14,Maxi
-57704,fp2329,black-and-white-spot,US22/AU26,The Novembre Dress,1,0,length5,fp2329 US22/AU26,Maxi
-61835,fp2569,black-and-white-stripe,US2/AU6,The Onassis Two Piece,1,make-midi-length,length2,fp2569 US2/AU6,Maxi
+57704,fp2329,black-and-white-spot,US22/AU26,The Novembre Dress,1,0,tall,fp2329 US22/AU26,Maxi
+61835,fp2569,black-and-white-stripe,US2/AU6,The Onassis Two Piece,1,make-midi-length,petite,fp2569 US2/AU6,Maxi
 53778,fp2253,white,US8/AU12,The Orion,1,0,tall,fp2253 US8/AU12,Maxi
 55698,fp2253,black,US2/AU6,The Orion,1,0,petite,fp2253 US2/AU6,Maxi
 52715,fp2253,white,US8/AU12,The Orion,1,raise-front-neckline,standard,fp2253 US8/AU12,Maxi
@@ -3224,8 +3224,8 @@
 51274,fp2253,black,US4/AU8,The Orion,1,0,standard,fp2253 US4/AU8,Maxi
 51977,fp2253,black,US0/AU4,The Orion,2,0,petite,fp2253 US0/AU4,Maxi
 61786,fp2253,black,US0/AU4,The Orion,1,0,petite,fp2253 US0/AU4,Maxi
-60189,fp2422,black,US10/AU14,The Paulina Dress,1,0,length4,fp2422 US10/AU14,Mini
-61554,fp2422,black,US12/AU16,The Paulina Dress,1,0,length4,fp2422 US12/AU16,Mini
+60189,fp2422,black,US10/AU14,The Paulina Dress,1,0,standard,fp2422 US10/AU14,Mini
+61554,fp2422,black,US12/AU16,The Paulina Dress,1,0,standard,fp2422 US12/AU16,Mini
 51566,fp2260,pale-blue,US6/AU10,The Pegasus,2,0,standard,fp2260 US6/AU10,Maxi
 51930,fp2260,navy,US0/AU4,The Pegasus,2,0,standard,fp2260 US0/AU4,Maxi
 52694,fp2260,cream,US4/AU8,The Pegasus,1,close-side-cut-outs,standard,fp2260 US4/AU8,Maxi
@@ -3279,7 +3279,7 @@
 59082,fp2283,lemon,US4/AU8,The Quasar,1,0,petite,fp2283 US4/AU8,Maxi
 59493,fp2283,coral,US6/AU10,The Quasar,1,0,petite,fp2283 US6/AU10,Maxi
 59657,fp2283,mint,US10/AU14,The Quasar,1,0,standard,fp2283 US10/AU14,Maxi
-61627,fp2564,white,US2/AU6,The Rae Jumpsuit,1,0,length3,fp2564 US2/AU6,Maxi
+61627,fp2564,white,US2/AU6,The Rae Jumpsuit,1,0,standard,fp2564 US2/AU6,Maxi
 52185,fp2295,pretty-pink,US4/AU8,The Retrograde ,1,0,standard,fp2295 US4/AU8,Maxi
 52998,fp2295,black,US2/AU6,The Retrograde ,1,0,standard,fp2295 US2/AU6,Maxi
 53919,fp2295,pretty-pink,US6/AU10,The Retrograde ,1,0,petite,fp2295 US6/AU10,Maxi
@@ -3295,12 +3295,12 @@
 59280,fp2295,dark-nude,US4/AU8,The Retrograde ,1,0,petite,fp2295 US4/AU8,Maxi
 56449,fp2295,ivory,US6/AU10,The Retrograde ,1,0,petite,fp2295 US6/AU10,Maxi
 61847,fp2295,lemon,US6/AU10,The Retrograde ,1,0,standard,fp2295 US6/AU10,Maxi
-57453,fp2389,pretty-pink,US12/AU16,The Reynolds Coat,1,add-side-welt-pockets;lengthen-front-hem,length4,fp2389 US12/AU16,Maxi
-63227,fp2448,white,US8/AU12,The Rodeo Dress,1,0,length3,fp2448 US8/AU12,Mini
-61558,fp2448,lilac,US4/AU8,The Rodeo Dress,1,lower-back-neckline,length3,fp2448 US4/AU8,Mini
-61661,fp2565,black,US2/AU6,The Ronnie Dress,1,0,length1,fp2565 US2/AU6,Mini
-60150,fprv1036,navy-and-white-gingham,US6/AU10,The Russo Dress,1,0,length2,fprv1036 US6/AU10,Mini
-61804,fprv1036,navy-and-white-gingham,US16/AU20,The Russo Dress,2,0,length3,fprv1036 US16/AU20,Mini
+57453,fp2389,pretty-pink,US12/AU16,The Reynolds Coat,1,add-side-welt-pockets;lengthen-front-hem,standard,fp2389 US12/AU16,Maxi
+63227,fp2448,white,US8/AU12,The Rodeo Dress,1,0,standard,fp2448 US8/AU12,Mini
+61558,fp2448,lilac,US4/AU8,The Rodeo Dress,1,lower-back-neckline,standard,fp2448 US4/AU8,Mini
+61661,fp2565,black,US2/AU6,The Ronnie Dress,1,0,petite,fp2565 US2/AU6,Mini
+60150,fprv1036,navy-and-white-gingham,US6/AU10,The Russo Dress,1,0,petite,fprv1036 US6/AU10,Mini
+61804,fprv1036,navy-and-white-gingham,US16/AU20,The Russo Dress,2,0,standard,fprv1036 US16/AU20,Mini
 51900,fp2281,navy,US2/AU6,The Saggitarius,1,0,standard,fp2281 US2/AU6,Maxi
 53543,fp2281,navy,US2/AU6,The Saggitarius,1,0,petite,fp2281 US2/AU6,Maxi
 53391,fp2281,dark-tan,US4/AU8,The Saggitarius,1,0,standard,fp2281 US4/AU8,Maxi
@@ -3315,9 +3315,9 @@
 58619,fp2281,mushroom,US8/AU12,The Saggitarius,1,0,standard,fp2281 US8/AU12,Maxi
 61785,fp2281,dark-tan,US0/AU4,The Saggitarius,1,0,petite,fp2281 US0/AU4,Maxi
 56815,fprv1037,white,US8/AU12,The Sandrine Dress,1,0,standard,fprv1037 US8/AU12,Maxi
-59798,fp2396,faded-floral,US10/AU14,The Santo Dress,1,0,length3,fp2396 US10/AU14,Maxi
-59797,fp2396,faded-floral,US4/AU8,The Santo Dress,1,0,length1,fp2396 US4/AU8,Maxi
-59799,fp2396,faded-floral,US18/AU22,The Santo Dress,1,0,length4,fp2396 US18/AU22,Maxi
+59798,fp2396,faded-floral,US10/AU14,The Santo Dress,1,0,standard,fp2396 US10/AU14,Maxi
+59797,fp2396,faded-floral,US4/AU8,The Santo Dress,1,0,petite,fp2396 US4/AU8,Maxi
+59799,fp2396,faded-floral,US18/AU22,The Santo Dress,1,0,standard,fp2396 US18/AU22,Maxi
 51195,fpmc266,red,US22/AU26,The Satellite,1,0,tall,fpmc266 US22/AU26,Maxi
 52318,fpmc266,pale-pink,US8/AU12,The Satellite,1,0,standard,fpmc266 US8/AU12,Maxi
 53288,fpmc266,pale-pink,US6/AU10,The Satellite,2,0,petite,fpmc266 US6/AU10,Maxi
@@ -3345,7 +3345,7 @@
 53202,fp2263,black,US10/AU14,The Scorpius,2,0,tall,fp2263 US10/AU14,Maxi
 54640,fp2263,black,US6/AU10,The Scorpius,1,0,standard,fp2263 US6/AU10,Maxi
 58548,fp2263,black,US4/AU8,The Scorpius,1,0,petite,fp2263 US4/AU8,Maxi
-59740,fp2463,black-and-tan-spot,US4/AU8,The Silverlake Jumpsuit,1,0,length3,fp2463 US4/AU8,Maxi
+59740,fp2463,black-and-tan-spot,US4/AU8,The Silverlake Jumpsuit,1,0,standard,fp2463 US4/AU8,Maxi
 51640,fpmc107,ivory,US2/AU6,The Sirene,1,0,tall,fpmc107 US2/AU6,Maxi
 53961,fpmc107,ivory,US8/AU12,The Sirene,1,0,standard,fpmc107 US8/AU12,Maxi
 53885,fpmc107,ivory,US8/AU12,The Sirene,3,0,petite,fpmc107 US8/AU12,Maxi
@@ -3368,9 +3368,9 @@
 57762,fp2251,ivory,US2/AU6,The Sirius,1,0,tall,fp2251 US2/AU6,Maxi
 52346,fp2251,navy,US2/AU6,The Sirius,1,0,standard,fp2251 US2/AU6,Maxi
 61570,fp2251,cream,US0/AU4,The Sirius,1,lower-back-neckline,petite,fp2251 US0/AU4,Maxi
-57580,fp2368,dark-burgundy,US4/AU8,The Solange Jumpsuit,1,0,length2,fp2368 US4/AU8,Maxi
-59503,fp2368,pale-pink,US6/AU10,The Solange Jumpsuit,1,0,length4,fp2368 US6/AU10,Maxi
-56833,fp2368,pale-pink,US0/AU4,The Solange Jumpsuit,1,0,length1,fp2368 US0/AU4,Maxi
+57580,fp2368,dark-burgundy,US4/AU8,The Solange Jumpsuit,1,0,petite,fp2368 US4/AU8,Maxi
+59503,fp2368,pale-pink,US6/AU10,The Solange Jumpsuit,1,0,standard,fp2368 US6/AU10,Maxi
+56833,fp2368,pale-pink,US0/AU4,The Solange Jumpsuit,1,0,petite,fp2368 US0/AU4,Maxi
 52350,fp2276,warm-tan,US6/AU10,The Solstice,1,0,standard,fp2276 US6/AU10,Maxi
 53957,fp2276,warm-tan,US4/AU8,The Solstice,1,0,petite,fp2276 US4/AU8,Maxi
 53368,fp2276,warm-tan,US6/AU10,The Solstice,1,0,petite,fp2276 US6/AU10,Maxi
@@ -3380,10 +3380,10 @@
 51585,fp2276,blush,US2/AU6,The Solstice,1,0,petite,fp2276 US2/AU6,Maxi
 59475,fp2276,dark-burgundy,US4/AU8,The Solstice,1,0,standard,fp2276 US4/AU8,Maxi
 61789,fp2276,warm-tan,US0/AU4,The Solstice,1,0,petite,fp2276 US0/AU4,Maxi
-57713,fp2213s3f0,pale-pink,US10/AU14,The Sophie,1,0,length3,fp2213s3f0 US10/AU14,Midi
-64738,fp2213s3f0,pale-pink,US8/AU12,The Sophie,1,0,length3,fp2213s3f0 US8/AU12,Midi
-60108,fp2403,white,US0/AU4,The Sora Tunic,1,0,length1,fp2403 US0/AU4,Knee
-60426,fp2403,white,US4/AU8,The Sora Tunic,1,0,length3,fp2403 US4/AU8,Knee
+57713,fp2213s3f0,pale-pink,US10/AU14,The Sophie,1,0,standard,fp2213s3f0 US10/AU14,Midi
+64738,fp2213s3f0,pale-pink,US8/AU12,The Sophie,1,0,standard,fp2213s3f0 US8/AU12,Midi
+60108,fp2403,white,US0/AU4,The Sora Tunic,1,0,petite,fp2403 US0/AU4,Knee
+60426,fp2403,white,US4/AU8,The Sora Tunic,1,0,standard,fp2403 US4/AU8,Knee
 51324,fp2273m,silver,US2/AU6,The Supernova,1,0,standard,fp2273m US2/AU6,Maxi
 52909,fp2273m,silver,US2/AU6,The Supernova,2,0,tall,fp2273m US2/AU6,Maxi
 53228,fp2273m,silver,US0/AU4,The Supernova,1,change-to-wide--adjustable-straps,petite,fp2273m US0/AU4,Maxi
@@ -3392,7 +3392,7 @@
 62636,fp2273m,silver,US6/AU10,The Supernova,1,0,petite,fp2273m US6/AU10,Maxi
 51760,fpmc124,ivory,US8/AU12,The Sylvie,1,0,standard,fpmc124 US8/AU12,Maxi
 51366,fpmc124,ivory,US12/AU16,The Sylvie,1,0,petite,fpmc124 US12/AU16,Maxi
-58237,fp2353,pale-pink,US20/AU24,The Tamu Coat,1,0,length4,fp2353 US20/AU24,Maxi
+58237,fp2353,pale-pink,US20/AU24,The Tamu Coat,1,0,standard,fp2353 US20/AU24,Maxi
 53004,fp2256,pale-pink,US4/AU8,The Taurus,1,0,petite,fp2256 US4/AU8,Maxi
 52687,fp2256,pale-pink,US10/AU14,The Taurus,2,0,standard,fp2256 US10/AU14,Maxi
 53371,fp2256,navy,US8/AU12,The Taurus,2,0,standard,fp2256 US8/AU12,Maxi
@@ -3414,14 +3414,14 @@
 61612,fp2256,chartreuse,US0/AU4,The Taurus,1,0,petite,fp2256 US0/AU4,Maxi
 61619,fp2256,pale-grey,US0/AU4,The Taurus,1,0,petite,fp2256 US0/AU4,Maxi
 61791,fp2256,pale-pink,US0/AU4,The Taurus,1,0,petite,fp2256 US0/AU4,Maxi
-58436,fp2417,white,US6/AU10,The Teddy Skirt,1,0,length4,fp2417 US6/AU10,Midi
-59265,fp2417,white,US4/AU8,The Teddy Skirt,1,0,length4,fp2417 US4/AU8,Midi
-61863,fp2557,white,US4/AU8,The Tessa Jumpsuit,1,0,length4,fp2557 US4/AU8,Maxi
-56469,fp2219s0f4,pale-pink,US6/AU10,The Tolly,1,0,length1,fp2219s0f4 US6/AU10,Maxi
-57714,fp2219s0f4,burgundy,US10/AU14,The Tolly,1,0,length3,fp2219s0f4 US10/AU14,Maxi
-57953,fp2214s5f3,navy,US2/AU6,The Toni,2,0,length3,fp2214s5f3 US2/AU6,Midi
-59071,fp2214s5f3,mint,US6/AU10,The Toni,2,0,length2,fp2214s5f3 US6/AU10,Midi
-59250,fp2214s5f3,navy,US6/AU10,The Toni,1,0,length2,fp2214s5f3 US6/AU10,Midi
+58436,fp2417,white,US6/AU10,The Teddy Skirt,1,0,standard,fp2417 US6/AU10,Midi
+59265,fp2417,white,US4/AU8,The Teddy Skirt,1,0,standard,fp2417 US4/AU8,Midi
+61863,fp2557,white,US4/AU8,The Tessa Jumpsuit,1,0,standard,fp2557 US4/AU8,Maxi
+56469,fp2219s0f4,pale-pink,US6/AU10,The Tolly,1,0,petite,fp2219s0f4 US6/AU10,Maxi
+57714,fp2219s0f4,burgundy,US10/AU14,The Tolly,1,0,standard,fp2219s0f4 US10/AU14,Maxi
+57953,fp2214s5f3,navy,US2/AU6,The Toni,2,0,standard,fp2214s5f3 US2/AU6,Midi
+59071,fp2214s5f3,mint,US6/AU10,The Toni,2,0,petite,fp2214s5f3 US6/AU10,Midi
+59250,fp2214s5f3,navy,US6/AU10,The Toni,1,0,petite,fp2214s5f3 US6/AU10,Midi
 51763,fp2278,navy,US6/AU10,The Trine,1,0,standard,fp2278 US6/AU10,Maxi
 54827,fp2278,dusty-rose,US4/AU8,The Trine,1,0,petite,fp2278 US4/AU8,Maxi
 54828,fp2278,dusty-rose,US6/AU10,The Trine,1,0,petite,fp2278 US6/AU10,Maxi
@@ -3449,13 +3449,13 @@
 53627,fp2298p,candy-floral,US2/AU6,The Valentina ,1,0,standard,fp2298p US2/AU6,Maxi
 53384,fp2298p,candy-floral,US6/AU10,The Valentina ,1,0,standard,fp2298p US6/AU10,Maxi
 55913,fp2298p,candy-floral,US2/AU6,The Valentina ,1,0,petite,fp2298p US2/AU6,Maxi
-56715,fp2220s4f2,navy,US0/AU4,The Valley,1,0,length2,fp2220s4f2 US0/AU4,Maxi
-57393,fp2220s4f2,pale-blue,US0/AU4,The Valley,1,0,length2,fp2220s4f2 US0/AU4,Maxi
-58743,fp2220s4f2,champagne,US8/AU12,The Valley,1,0,length2,fp2220s4f2 US8/AU12,Maxi
-59659,fp2220s4f2,burgundy,US2/AU6,The Valley,1,0,length3,fp2220s4f2 US2/AU6,Maxi
-63146,fp2220s4f2,plum,US6/AU10,The Valley,1,0,length3,fp2220s4f2 US6/AU10,Maxi
-61626,fp2220s4f2,burgundy,US4/AU8,The Valley,1,0,length3,fp2220s4f2 US4/AU8,Maxi
-61974,fp2220s4f2,black,US0/AU4,The Valley,1,0,length3,fp2220s4f2 US0/AU4,Maxi
+56715,fp2220s4f2,navy,US0/AU4,The Valley,1,0,petite,fp2220s4f2 US0/AU4,Maxi
+57393,fp2220s4f2,pale-blue,US0/AU4,The Valley,1,0,petite,fp2220s4f2 US0/AU4,Maxi
+58743,fp2220s4f2,champagne,US8/AU12,The Valley,1,0,petite,fp2220s4f2 US8/AU12,Maxi
+59659,fp2220s4f2,burgundy,US2/AU6,The Valley,1,0,standard,fp2220s4f2 US2/AU6,Maxi
+63146,fp2220s4f2,plum,US6/AU10,The Valley,1,0,standard,fp2220s4f2 US6/AU10,Maxi
+61626,fp2220s4f2,burgundy,US4/AU8,The Valley,1,0,standard,fp2220s4f2 US4/AU8,Maxi
+61974,fp2220s4f2,black,US0/AU4,The Valley,1,0,standard,fp2220s4f2 US0/AU4,Maxi
 51699,fp2254,pretty-pink,US0/AU4,The Vega,1,0,standard,fp2254 US0/AU4,Maxi
 54101,fp2254,pretty-pink,US4/AU8,The Vega,1,0,petite,fp2254 US4/AU8,Maxi
 52371,fp2254,pretty-pink,US8/AU12,The Vega,1,0,standard,fp2254 US8/AU12,Maxi
@@ -3468,37 +3468,37 @@
 53715,fp2287b,silver,US4/AU8,The Vela,1,0,petite,fp2287b US4/AU8,Maxi
 54481,fp2287b,silver,US20/AU24,The Vela,1,0,standard,fp2287b US20/AU24,Maxi
 55124,fp2287b,silver,US0/AU4,The Vela,1,0,petite,fp2287b US0/AU4,Maxi
-58904,fp2457,white,US4/AU8,The Venice Dress,2,0,length3,fp2457 US4/AU8,Knee
-59611,fp2457,white,US2/AU6,The Venice Dress,1,0,length3,fp2457 US2/AU6,Knee
-59560,fp2457,white,US6/AU10,The Venice Dress,4,0,length2,fp2457 US6/AU10,Knee
-59131,fp2457,white,US0/AU4,The Venice Dress,1,0,length2,fp2457 US0/AU4,Knee
-59141,fp2457,black,US8/AU12,The Venice Dress,1,0,length3,fp2457 US8/AU12,Knee
-61550,fp2457,black,US8/AU12,The Venice Dress,1,0,length2,fp2457 US8/AU12,Knee
-61620,fp2457,black,US6/AU10,The Venice Dress,1,0,length2,fp2457 US6/AU10,Knee
-61977,fp2457,white,US6/AU10,The Venice Dress,1,0,length2,fp2457 US6/AU10,Knee
-63857,fp2457,black,US6/AU10,The Venice Dress,1,0,length4,fp2457 US6/AU10,Knee
-62857,fp2457,white,US2/AU6,The Venice Dress,1,fill-in-cut-outs,length2,fp2457 US2/AU6,Knee
-62921,fp2457,white,US8/AU12,The Venice Dress,1,0,length2,fp2457 US8/AU12,Knee
-59443,fp2375,white,US12/AU16,The Veronika Dress,2,0,length4,fp2375 US12/AU16,Knee
-61607,fp2375,white,US12/AU16,The Veronika Dress,1,add-belt,length4,fp2375 US12/AU16,Knee
-61658,fp2375,cherry-red,US4/AU8,The Veronika Dress,1,remove-sleeves;make-skirt-midi-length,length3,fp2375 US4/AU8,Knee
+58904,fp2457,white,US4/AU8,The Venice Dress,2,0,standard,fp2457 US4/AU8,Knee
+59611,fp2457,white,US2/AU6,The Venice Dress,1,0,standard,fp2457 US2/AU6,Knee
+59560,fp2457,white,US6/AU10,The Venice Dress,4,0,petite,fp2457 US6/AU10,Knee
+59131,fp2457,white,US0/AU4,The Venice Dress,1,0,petite,fp2457 US0/AU4,Knee
+59141,fp2457,black,US8/AU12,The Venice Dress,1,0,standard,fp2457 US8/AU12,Knee
+61550,fp2457,black,US8/AU12,The Venice Dress,1,0,petite,fp2457 US8/AU12,Knee
+61620,fp2457,black,US6/AU10,The Venice Dress,1,0,petite,fp2457 US6/AU10,Knee
+61977,fp2457,white,US6/AU10,The Venice Dress,1,0,petite,fp2457 US6/AU10,Knee
+63857,fp2457,black,US6/AU10,The Venice Dress,1,0,standard,fp2457 US6/AU10,Knee
+62857,fp2457,white,US2/AU6,The Venice Dress,1,fill-in-cut-outs,petite,fp2457 US2/AU6,Knee
+62921,fp2457,white,US8/AU12,The Venice Dress,1,0,petite,fp2457 US8/AU12,Knee
+59443,fp2375,white,US12/AU16,The Veronika Dress,2,0,standard,fp2375 US12/AU16,Knee
+61607,fp2375,white,US12/AU16,The Veronika Dress,1,add-belt,standard,fp2375 US12/AU16,Knee
+61658,fp2375,cherry-red,US4/AU8,The Veronika Dress,1,remove-sleeves;make-skirt-midi-length,standard,fp2375 US4/AU8,Knee
 54113,fp2305,ivory,US0/AU4,The Victoria,1,0,standard,fp2305 US0/AU4,Maxi
 50646,fp2305,ivory,US4/AU8,The Victoria,1,0,standard,fp2305 US4/AU8,Maxi
 53771,fp2305,ivory,US0/AU4,The Victoria,1,make-asymetrical-yoke-straight,standard,fp2305 US0/AU4,Maxi
 55948,fp2305,ivory,US0/AU4,The Victoria,1,remove-train-from-all-layers,standard,fp2305 US0/AU4,Maxi
-64713,fp2454,lilac,US0/AU4,THE VINE DRESS,1,0,length3,fp2454 US0/AU4,Midi
+64713,fp2454,lilac,US0/AU4,THE VINE DRESS,1,0,standard,fp2454 US0/AU4,Midi
 53247,fp2294,dark-tan,US2/AU6,The Virgo,1,0,petite,fp2294 US2/AU6,Maxi
 51409,fp2294,dark-tan,US8/AU12,The Virgo,1,0,tall,fp2294 US8/AU12,Maxi
 55483,fp2294,dark-tan,US6/AU10,The Virgo,2,0,petite,fp2294 US6/AU10,Maxi
-57461,fp2216s5f0,pale-pink,US10/AU14,The Winnie,2,0,length3,fp2216s5f0 US10/AU14,Maxi
-56624,fp2216s5f0,pale-pink,US16/AU20,The Winnie,1,0,length3,fp2216s5f0 US16/AU20,Maxi
-58387,fp2216s5f0,champagne,US14/AU18,The Winnie,1,0,length4,fp2216s5f0 US14/AU18,Maxi
-59067,fp2216s5f0,pale-pink,US4/AU8,The Winnie,2,0,length3,fp2216s5f0 US4/AU8,Maxi
-61551,fp2216s5f0,black,US22/AU26,The Winnie,1,0,length4,fp2216s5f0 US22/AU26,Maxi
-61649,fprv1010,pretty-pink,US2/AU6,The Xavier Dress,1,0,length2,fprv1010 US2/AU6,Mini
-62304,fprv1010,red,US6/AU10,The Xavier Dress,1,0,length3,fprv1010 US6/AU10,Mini
-62575,fprv1010,red,US6/AU10,The Xavier Dress,1,0,length2,fprv1010 US6/AU10,Mini
-59243,fp2219s1f0,mint,US12/AU16,The Yvette,1,make-maxi-length,length4,fp2219s1f0 US12/AU16,Maxi
+57461,fp2216s5f0,pale-pink,US10/AU14,The Winnie,2,0,standard,fp2216s5f0 US10/AU14,Maxi
+56624,fp2216s5f0,pale-pink,US16/AU20,The Winnie,1,0,standard,fp2216s5f0 US16/AU20,Maxi
+58387,fp2216s5f0,champagne,US14/AU18,The Winnie,1,0,standard,fp2216s5f0 US14/AU18,Maxi
+59067,fp2216s5f0,pale-pink,US4/AU8,The Winnie,2,0,standard,fp2216s5f0 US4/AU8,Maxi
+61551,fp2216s5f0,black,US22/AU26,The Winnie,1,0,standard,fp2216s5f0 US22/AU26,Maxi
+61649,fprv1010,pretty-pink,US2/AU6,The Xavier Dress,1,0,petite,fprv1010 US2/AU6,Mini
+62304,fprv1010,red,US6/AU10,The Xavier Dress,1,0,standard,fprv1010 US6/AU10,Mini
+62575,fprv1010,red,US6/AU10,The Xavier Dress,1,0,petite,fprv1010 US6/AU10,Mini
+59243,fp2219s1f0,mint,US12/AU16,The Yvette,1,make-maxi-length,standard,fp2219s1f0 US12/AU16,Maxi
 50906,fp2221,ivory,US6/AU10,The Zelda,1,0,petite,fp2221 US6/AU10,Maxi
 45233,4b569d,lemon,US14/AU18,Think Twice Playsuit,1,0,tall,4b569d US14/AU18,Mini
 47435,fp2006,emerald-green,US2/AU6,Tilbury,1,remove-side-split,petite,fp2006 US2/AU6,Maxi
