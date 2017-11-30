@@ -95,8 +95,7 @@ namespace :data do
 				end
 			end
 			puts $.
-
-			customization_ids = li_customization_values.map {|cv| cv.id}.empty? ? '---' :  "---\\n#{li_customization_values.map {|cv| cv.id}.join('-\n')}"
+			customization_ids = li_customization_values.map {|cv| cv.id}.empty? ? '---' :  "---\n- #{li_customization_values.map {|cv| cv.id}.join('\n- ')}"
 			lip_insert_statements<<"(#{variant.product.id},#{li_size.id},#{line_item_ids[counter]},'#{customization_ids}','#{li_color.id}','#{height}','#{Time.now}','#{Time.now}')"
 			counter = counter + 1
 
