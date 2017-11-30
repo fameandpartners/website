@@ -148,7 +148,13 @@ module Spree
       end
 
       def after_ship
-        inventory_units.each &:ship!
+        inventory_units.each do |iu|
+          # special manual order case
+          if order.number.downcase.starts_with? 'm'
+            iu.state = 'sold'
+          end
+          iu.ship!
+        end
         send_shipped_email
         touch :shipped_at
       end
