@@ -22,7 +22,8 @@ describe 'deploy hook script:' do
     stubbed_env.stub_command('ln')
     stubbed_env.stub_command('git')
     stubbed_env.stub_command('awk')
-
+    stubbed_env.stub_command('npm')
+    
     yarn_stub = stubbed_env.stub_command('yarn')
     yarn_stub.with_args('install')
     yarn_stub.with_args('run', 'prod')

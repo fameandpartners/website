@@ -8,166 +8,186 @@ import { MODAL_STYLE } from './utils';
 import Modal from 'react-modal';
 import { trackEvent } from '../../libs/gaTracking'
 import { addToBagEvent } from '../../libs/gaEventObjects'
+import Cookies from 'universal-cookie';
+
 class AddToBag extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+    constructor(props, context) {
+        super(props, context);
+        let cookies = new Cookies();
 
-    this.state = {
-      sending: false,
-      modalIsOpen: false,
-    };
+        this.state = {
+            sending: false,
+            modalIsOpen: false,
+            shopping_spree_enabled: cookies.get('shopping_spree_id') != null
+        };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.buildCustomizationIds = this.buildCustomizationIds.bind(this);
-    this.calculateCustomizationTotal = this.calculateCustomizationTotal.bind(this);
-    this.addToBag = this.addToBag.bind(this);
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  buildCustomizationIds() {
-    const { addons, customize } = this.props;
-    if (isEmpty(addons)) {
-      return customize.customization.id ?
-        [parseInt(customize.customization.id, 10)] :
-        [''];
-    }
-    // Filter active addonOptions
-    return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
-  }
-
-  addToBag() {
-    const { customize, actions, product } = this.props;
-    let productPrice = product.price.price.amount
-    let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
-    console.log(priceWithoutDecimals)
-    addToBagEvent.value = priceWithoutDecimals
-    trackEvent(addToBagEvent)
-    // TODO: redo this
-    // this is just EXTREMELY hacky way to connect this with shopping cart
-    if (customize.size.id
-      && customize.color.id
-      && customize.height.heightValue) {
-      // disable "ADD TO BAG" button and show spinner
-      this.setState({ sending: true });
-      document.getElementById('pdpCartSizeId').value = customize.size.id;
-      document.getElementById('pdpCartColorId').value = customize.color.id;
-      document.getElementById('pdpCartCustomId').value = this.buildCustomizationIds();
-      document.getElementById('pdpCartDressVariantId').value = customize.dressVariantId;
-      document.getElementById('pdpCartHeight').value = customize.height.heightValue;
-      document.getElementById('pdpCartHeightUnit').value = customize.height.heightUnit;
-      document.getElementById('pdpCartVariantId').value = product.master_id;
-      document.getElementById('pdpCartMakingId').value = customize.makingOption.id;
-      $('#pdpDataForCheckout').submit();
-    } else {
-      // force size profile
-      actions.addToBagPending(true);
-      actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
-    }
-  }
-
-  calculateCustomizationTotal() {
-    const { addons, customize } = this.props;
-    if (isEmpty(addons)) {
-      return customize.customization.price;
-    }
-    return addons.addonOptions.reduce((accum, addon) => {
-      if (addon.active) { return accum + (addon.price.money.fractional / 100); }
-      return accum;
-    }, 0);
-  }
-
-  render() {
-    const prices = this.props.product.prices;
-
-    const parsedPrice = parseFloat(prices.original_amount) || 0;
-    const parsedSale = parseFloat(prices.sale_amount) || 0;
-
-    const calculatePrice = (price) => {
-      const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
-      const parsedCustomPrice = parseFloat(this.calculateCustomizationTotal()) || 0;
-      const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
-
-      const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
-      return PRICE;
-    };
-
-    const calculatedPrice = {
-      original: calculatePrice(parsedPrice),
-    };
-
-    if (parsedSale) {
-      calculatedPrice.sale = calculatePrice(parsedSale);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.buildCustomizationIds = this.buildCustomizationIds.bind(this);
+        this.calculateCustomizationTotal = this.calculateCustomizationTotal.bind(this);
+        this.addToBag = this.addToBag.bind(this);
+        this.addToShoppingSpree = this.addToShoppingSpree.bind(this);
     }
 
-    let deliveryPeriod = this.props.product.delivery_period;
-    if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
-      deliveryPeriod = this.props.product.fast_making_delivery_period;
+    openModal() {
+        this.setState({ modalIsOpen: true });
     }
 
-    const isAfterpayEnabled = this.props.siteVersion === 'Australia' && this.props.flags.afterpay;
-    const afterpayPrice = ((calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2);
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    }
 
-    return (
-      <div className="btn-wrap">
-        {(() => {
-          let priceHtml;
+    buildCustomizationIds() {
+        const { addons, customize } = this.props;
+        if (isEmpty(addons)) {
+            return customize.customization.id ?
+                [parseInt(customize.customization.id, 10)] :
+                [''];
+        }
+        // Filter active addonOptions
+        return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
+    }
 
-          if (parsedSale) {
-            priceHtml = (<div className="price">
-              <span className="price-original">${calculatedPrice.original.toFixed(2)} </span>
-              <span className="price-sale">${calculatedPrice.sale.toFixed(2)} </span>
-              <span className="price-discount">SAVE {prices.discount_string} </span>
-            </div>);
-          } else {
-            priceHtml = <div className="price">${calculatedPrice.original}</div>;
-          }
+    addToShoppingSpree() {
+        const { customize, actions, product } = this.props;
+        let productPrice = product.price.price.amount
+        let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
 
-          return (
-            priceHtml
-          );
-        })()}
-        {(() => {
-          if (isAfterpayEnabled) {
-            return (
-              <div className="afterpay-message">
-                <span>or 4 easy payments of ${afterpayPrice} with</span>
-                <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                <a onClick={this.openModal}>info</a>
-              </div>
-            );
-          }
-          return null;
-        })()}
-        {(() => {
-          if (this.state.sending) {
-            return (
-              <a className="btn btn-black btn-loading btn-lrg">
-                <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
-              </a>
-            );
-          }
-          return (
-            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
-          );
-        })()}
-        <ul className="est-delivery">
-          <li className="shipping">Free Shipping</li>
-          <li>Estimated delivery, {deliveryPeriod}</li>
-        </ul>
-        {(() => {
-          if (this.props.product.cny_delivery_delays) {
-            return (
-              <div className="deliveryNote">We're experiencing a high order volume right now,
+        window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].table.product, window.location.href , customize.color, customize.customization);
+    }
+
+    addToBag() {
+        const { customize, actions, product } = this.props;
+        let productPrice = product.price.price.amount
+        let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
+        addToBagEvent.value = priceWithoutDecimals
+        trackEvent(addToBagEvent)
+        // TODO: redo this
+        // this is just EXTREMELY hacky way to connect this with shopping cart
+        if (customize.size.id
+            && customize.color.id
+            && customize.height.heightValue) {
+            // disable "ADD TO BAG" button and show spinner
+            this.setState({ sending: true });
+            document.getElementById('pdpCartSizeId').value = customize.size.id;
+            document.getElementById('pdpCartColorId').value = customize.color.id;
+            document.getElementById('pdpCartCustomId').value = this.buildCustomizationIds();
+            document.getElementById('pdpCartDressVariantId').value = customize.dressVariantId;
+            document.getElementById('pdpCartHeight').value = customize.height.heightValue;
+            document.getElementById('pdpCartHeightUnit').value = customize.height.heightUnit;
+            document.getElementById('pdpCartVariantId').value = product.master_id;
+            document.getElementById('pdpCartMakingId').value = customize.makingOption.id;
+            $('#pdpDataForCheckout').submit();
+        } else {
+            // force size profile
+            actions.addToBagPending(true);
+            actions.toggleDrawer(PDPConstants.DRAWERS.SIZE_PROFILE);
+        }
+    }
+
+    calculateCustomizationTotal() {
+        const { addons, customize } = this.props;
+        if (isEmpty(addons)) {
+            return customize.customization.price;
+        }
+        return addons.addonOptions.reduce((accum, addon) => {
+            if (addon.active) { return accum + (addon.price.money.fractional / 100); }
+            return accum;
+        }, 0);
+    }
+
+    render() {
+        const prices = this.props.product.prices;
+
+        const parsedPrice = parseFloat(prices.original_amount) || 0;
+        const parsedSale = parseFloat(prices.sale_amount) || 0;
+
+        const calculatePrice = (price) => {
+            const parsedColorPrice = parseFloat(this.props.customize.color.price) || 0;
+            const parsedCustomPrice = parseFloat(this.calculateCustomizationTotal()) || 0;
+            const parsedOptionPrice = parseFloat(this.props.customize.makingOption.price) || 0;
+
+            const PRICE = price + parsedColorPrice + parsedCustomPrice + parsedOptionPrice;
+            return PRICE;
+        };
+
+        const calculatedPrice = {
+            original: calculatePrice(parsedPrice),
+        };
+
+        if (parsedSale) {
+            calculatedPrice.sale = calculatePrice(parsedSale);
+        }
+
+        let deliveryPeriod = this.props.product.delivery_period;
+        if (this.props.customize.makingOption.id && !this.props.product.cny_delivery_delays) {
+            deliveryPeriod = this.props.product.fast_making_delivery_period;
+        }
+
+        const isAfterpayEnabled = this.props.siteVersion === 'Australia' && this.props.flags.afterpay;
+        const afterpayPrice = ((calculatedPrice.sale || calculatedPrice.original) / 4).toFixed(2);
+
+        return (
+                <div className="btn-wrap">
+                {(() => {
+                    let priceHtml;
+
+                    if (parsedSale) {
+                        priceHtml = (<div className="price">
+                                     <span className="price-original">${calculatedPrice.original.toFixed(2)} </span>
+                                     <span className="price-sale">${calculatedPrice.sale.toFixed(2)} </span>
+                                     <span className="price-discount">SAVE {prices.discount_string} </span>
+                                     </div>);
+                    } else {
+                        priceHtml = <div className="price">${calculatedPrice.original}</div>;
+                    }
+
+                    return (
+                        priceHtml
+                    );
+                })()}
+            {(() => {
+                if (isAfterpayEnabled) {
+                    return (
+                            <div className="afterpay-message">
+                            <span>or 4 easy payments of ${afterpayPrice} with</span>
+                            <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
+                            <a onClick={this.openModal}>info</a>
+                            </div>
+                    );
+                }
+                return null;
+            })()}
+            {(() => {
+                if (this.state.sending) {
+                    return (
+                            <a className="btn btn-black btn-loading btn-lrg">
+                            <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
+                            </a>
+                    );
+                }
+                if( this.state.shopping_spree_enabled ) {
+                    return (
+                            <a href="javascript:;" onClick={this.addToShoppingSpree} className="btn btn-black btn-lrg">ADD TO CLIQUE</a>
+                    );
+
+                } else {
+
+                    return (
+                            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
+                    );
+                }
+            })()}
+                <ul className="est-delivery">
+                <li className="shipping">Free Shipping</li>
+                <li>Estimated delivery, {deliveryPeriod}</li>
+                </ul>
+                {(() => {
+                    if (this.props.product.cny_delivery_delays) {
+                        return (
+                                <div className="deliveryNote">We're experiencing a high order volume right now,
               so it's taking longer than usual to handcraft each made-to-order garment.
-              We'll be back to our normal timeline of 7-10 days soon.
+                                We'll be back to our normal timeline of 7-10 days soon.
               </div>
             );
           }

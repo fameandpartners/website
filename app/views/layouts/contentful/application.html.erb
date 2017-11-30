@@ -17,6 +17,7 @@
     <div id="react-blanket" class="__react_root__"></div>
     <div id="react-menu" class="__react_root__"></div>
     <div id="react-cart" class="__react_root__"></div>
+    <%= render 'layouts/redesign/shopping_spree' %>
 
     <div>
       <% unless disable_notices? %>
@@ -34,7 +35,10 @@
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
+    <%= javascript_include_tag 'shopping_spree_bundle' %>
     <%= javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}" %>
+
+    <%= javascript_include_tag 'init_shopping_spree' %>
 
   </body>
 </html>

@@ -63,7 +63,6 @@ class SidePanelFastMaking extends React.Component {
   }
 
   render() {
-    console.log('props', this.props);
     if (this.props.flags.fastMaking && this.props.product.fast_making) {
       return (
         <div className={this.sidePanelClass()}>

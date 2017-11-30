@@ -14,7 +14,7 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
-
+    = render 'layouts/redesign/shopping_spree'
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
     #react-blanket.__react_root__
@@ -23,7 +23,7 @@ doctype html
     #content-container.content-container
       - unless disable_notices?
       = render 'layouts/redesign/notices'
-    
+
     #react-header.__react_root__
     = yield
 
@@ -34,5 +34,9 @@ doctype html
       = render '/shared/marketing'
 
     = javascript_include_tag 'storefront'
+    = javascript_include_tag 'shopping_spree_bundle'
+
     = render 'layouts/redesign/javascript'
     = javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
+
+    = javascript_include_tag 'init_shopping_spree'
