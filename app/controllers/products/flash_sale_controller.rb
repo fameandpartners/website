@@ -1,5 +1,6 @@
 class Products::FlashSaleController < Products::BaseController
   include Marketing::Gtm::Controller::Collection
+  respond_to :html
 
   layout 'custom_experience/application'
   attr_reader :page, :banner
@@ -23,7 +24,7 @@ class Products::FlashSaleController < Products::BaseController
 
     @items = line_items.map do |li|
       product = li.product
-      Hash.new({
+      {
         id: li.id,
         sku:  product.sku,
         name: product.name,
@@ -35,14 +36,11 @@ class Products::FlashSaleController < Products::BaseController
         size: li.personalization.size.presentation,
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
-      })
+      }
     end
 
-    respond_to do |format|
-      format.html { }
-      format.json do
-        render json: @items
-      end
+    respond_with @items do |format|
+      format.html
     end
   end
 
@@ -50,25 +48,22 @@ class Products::FlashSaleController < Products::BaseController
     li = Spree::LineItem.find(params[:id])
     product = li.product
 
-    @item = Hash.new({
-        id: li.id,
-        sku:  product.sku,
-        name: product.name,
-        permalink: product.permalink,
-        description: product.description,
-        images: product_images(product),
-        original_price: li.old_price,
-        current_price: li.price,
-        size: li.personalization.size.presentation,
-        color:li.personalization.color.presentation,
-        customisations: li.personalization.customization_values.map {|cust| cust.presentation}
-      })
+    @item = {
+      id: li.id,
+      sku:  product.sku,
+      name: product.name,
+      permalink: product.permalink,
+      description: product.description,
+      images: product_images(product),
+      original_price: li.old_price,
+      current_price: li.price,
+      size: li.personalization.size.presentation,
+      color:li.personalization.color.presentation,
+      customisations: li.personalization.customization_values.map {|cust| cust.presentation}
+    }
 
-    respond_to do |format|
-      format.html { }
-      format.json do
-        render json: @item
-      end
+    respond_with @item do |format|
+      format.html
     end
   end
 
