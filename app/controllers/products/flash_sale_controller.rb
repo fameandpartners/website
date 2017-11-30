@@ -36,7 +36,7 @@ class Products::FlashSaleController < Products::BaseController
           images: product_images(product),
           original_price: li.old_price,
           current_price: li.price,
-          size: li.personalization.size.presentation,
+          size: li.personalization.size.presentation.split('/').first,
           color:li.personalization.color.presentation,
           customisations: li.personalization.customization_values.map {|cust| cust.presentation}
         }
@@ -64,7 +64,7 @@ class Products::FlashSaleController < Products::BaseController
         images: product_images(product),
         original_price: li.old_price,
         current_price: li.price,
-        size: li.personalization.size.presentation,
+        size: li.personalization.size.presentation.split('/').first,
         color:li.personalization.color.presentation,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       }
