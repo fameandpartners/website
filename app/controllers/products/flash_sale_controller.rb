@@ -13,9 +13,9 @@ class Products::FlashSaleController < Products::BaseController
     @filter = Products::CollectionFilter.read
 
     if params[:sort]
-      line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}").page(params[:page])
+      line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}").page(params[:page]).per(100)
     else
-      line_items = Spree::LineItem.where(stock: true).order(:price).page(params[:page])
+      line_items = Spree::LineItem.where(stock: true).order(:price).page(params[:page]).per(100)
     end
 
     line_items = line_items.where(color: params[:color]) if params[:color]
