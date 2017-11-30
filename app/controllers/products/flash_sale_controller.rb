@@ -9,7 +9,11 @@ class Products::FlashSaleController < Products::BaseController
                 :redirect_site_version
 
   def index
-    line_items = Spree::LineItem.where(stock: true).page(params[:page])
+    if params[:sort]
+      line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}").page(params[:page])
+    else
+      line_items = Spree::LineItem.where(stock: true).order(:price).page(params[:page])
+    end
     line_items = line_items.where(color: params[:color]) if params[:color]
     line_items = line_items.where(size: params[:size]) if params[:size]
     line_items = line_items.where(length: params[:length]) if params[:length]
