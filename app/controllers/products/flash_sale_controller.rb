@@ -16,12 +16,12 @@ class Products::FlashSaleController < Products::BaseController
     else
       line_items = Spree::LineItem.where(stock: true).order(:price).page(params[:page])
     end
-    
+
     line_items = line_items.where(color: params[:color]) if params[:color]
     line_items = line_items.where(size: params[:size]) if params[:size]
     line_items = line_items.where(length: params[:length]) if params[:length]
 
-    items = line_items.map do |li|
+    @items = line_items.map do |li|
       product = li.product
       Hash.new({
         id: li.id,
@@ -41,15 +41,16 @@ class Products::FlashSaleController < Products::BaseController
     respond_to do |format|
       format.html { }
       format.json do
-        render json: items
+        render json: @items
       end
     end
   end
 
   def show
     li = Spree::LineItem.find(params[:id])
+    product = li.product
 
-    item = Hash.new({
+    @item = Hash.new({
         id: li.id,
         sku:  product.sku,
         name: product.name,
@@ -66,7 +67,7 @@ class Products::FlashSaleController < Products::BaseController
     respond_to do |format|
       format.html { }
       format.json do
-        render json: item
+        render json: @item
       end
     end
   end
