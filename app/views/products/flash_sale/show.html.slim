@@ -3,17 +3,10 @@ ruby:
   @current_site_version = current_site_version
 
 
-
-
-div
+= render :partial => '/data/flash_sale'
 link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['flashCssBundle']}"
 
 div#flash-product-root.__FlashSaleList__wrapper
 
 = content_for :microservice_js do
   script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['flashJsBundle']}"
-
-javascript:
-  window.fake = {
-    lineItem: '#{raw @item.to_json}'
-  };
