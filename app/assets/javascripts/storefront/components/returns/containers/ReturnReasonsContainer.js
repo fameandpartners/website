@@ -1,5 +1,6 @@
+/* eslint-disable */
 /* global window */
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -18,20 +19,20 @@ import ProductContainer from './ProductContainer';
 import * as ReturnActions from '../actions/index';
 
 
-const propTypes = {
-  orderData: PropTypes.array,
-  returnArray: PropTypes.array.isRequired,
-  returnIsLoading: PropTypes.bool.isRequired,
-  returnResponseErrors: PropTypes.object.isRequired,
-  returnRequestErrors: PropTypes.object.isRequired,
-  returnSubtotal: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  params: PropTypes.object,
-  actions: PropTypes.object,
-  guestEmail: PropTypes.string,
-};
+// const propTypes = {
+//   orderData: PropTypes.array,
+//   returnArray: PropTypes.array.isRequired,
+//   returnIsLoading: PropTypes.bool.isRequired,
+//   returnResponseErrors: PropTypes.object.isRequired,
+//   returnRequestErrors: PropTypes.object.isRequired,
+//   returnSubtotal: PropTypes.oneOfType([
+//     PropTypes.string,
+//     PropTypes.number,
+//   ]),
+//   params: PropTypes.object,
+//   actions: PropTypes.object,
+//   guestEmail: PropTypes.string,
+// };
 
 const defaultProps = {
   orderData: [],
@@ -43,7 +44,7 @@ const defaultProps = {
 
 const scrollElement = scrollDoc();
 
-class ReturnReasonsContainer extends Component {
+class ReturnReasonsContainer extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -263,8 +264,9 @@ class ReturnReasonsContainer extends Component {
   }
 }
 
-ReturnReasonsContainer.propTypes = propTypes;
+// ReturnReasonsContainer.propTypes = propTypes;
 ReturnReasonsContainer.defaultProps = defaultProps;
+
 function mapStateToProps(state) {
   return {
     returnArray: state.returnsData.returnArray,

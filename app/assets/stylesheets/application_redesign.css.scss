@@ -59,7 +59,6 @@ z-index levels
 *    99 = .sg-btn--select.is-active:hover:before
 
 *    99 = .mega-menu--main
-*    99 = .page-title--details
 *    99 = .select2-close-mask
 
 *   100 = .nav-menu
@@ -131,7 +130,8 @@ z-index levels
 @import 'redesign/extras/tabs';
 
 @import 'redesign/icons';
-@import 'libs/icomoon_fame_2015/icons';
+@import 'libs/icomoon_fame_2015/variables';
+@import 'libs/icomoon_fame_2015/style';
 
 // Base
 @import 'redesign/base/base';
@@ -215,10 +215,10 @@ z-index levels
 @import 'redesign/components/panels/content-collapse-expand';
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
-@import 'redesign/components/carousel-dot-nav';
 @import 'redesign/components/cards/cards';
 @import 'redesign/components/legacy/legacy-carousel';
 @import 'redesign/components/overlay';
+@import 'redesign/components/slick-carousel';
 
 // Modals
 @import 'redesign/modals/vex';
@@ -257,6 +257,9 @@ z-index levels
 @import 'redesign/pages/landing_page_invite';
 @import 'redesign/pages/wholesale';
 @import 'redesign/pages/landing_page_contest';
+
+// Custom Experience
+@import 'custom_experience/react';
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';

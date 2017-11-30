@@ -1,12 +1,13 @@
-import React, {Component, PropTypes,} from 'react';
-import {connect,} from 'react-redux';
-import {bindActionCreators,} from 'redux';
+/* eslint-disable */
+import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import {assign, find,} from 'lodash';
-import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
-import {hasLegacyInstance,} from '../utilities/CollectionFilterSortUtilities';
+import {assign, find} from 'lodash';
+import {cleanCapitalizeWord} from '../helpers/TextFormatting';
+import {hasLegacyInstance} from '../utilities/CollectionFilterSortUtilities';
 import pluralize from 'pluralize';
 
 //Libraries
@@ -55,7 +56,7 @@ function stateToProps(state, props) {
 function dispatchToProps(dispatch){ return bindActionCreators(CollectionFilterSortActions, dispatch); }
 
 
-class CollectionFilterSort extends Component {
+class CollectionFilterSort extends React.Component {
     constructor(props) {
         super(props);
         autobind(this);
@@ -549,26 +550,26 @@ class CollectionFilterSort extends Component {
     }
 }
 
-CollectionFilterSort.propTypes = {
-    breakpoint: PropTypes.string,
-    isDrawerLayout: PropTypes.bool,
-    dispatch: PropTypes.func,
-    $$colors: PropTypes.object,
-    $$bodyShapes: PropTypes.object,
-    $$bodyStyles: PropTypes.object,
-    filters: PropTypes.object,
-    temporaryFilters: PropTypes.object,
-
-    // Redux Actions
-    applyTemporaryFilters: PropTypes.func,
-    clearAllCollectionFilters: PropTypes.func,
-    setFastMaking: PropTypes.func,
-    setSelectedColors: PropTypes.func,
-    setSelectedPrices: PropTypes.func,
-    setSelectedShapes: PropTypes.func,
-    setSelectedStyles: PropTypes.func,
-    setTemporaryFilters: PropTypes.func,
-    updateExternalLegacyFilters: PropTypes.func,
-};
+// CollectionFilterSort.propTypes = {
+//     breakpoint: PropTypes.string,
+//     isDrawerLayout: PropTypes.bool,
+//     dispatch: PropTypes.func,
+//     $$colors: PropTypes.object,
+//     $$bodyShapes: PropTypes.object,
+//     $$bodyStyles: PropTypes.object,
+//     filters: PropTypes.object,
+//     temporaryFilters: PropTypes.object,
+//
+//     // Redux Actions
+//     applyTemporaryFilters: PropTypes.func,
+//     clearAllCollectionFilters: PropTypes.func,
+//     setFastMaking: PropTypes.func,
+//     setSelectedColors: PropTypes.func,
+//     setSelectedPrices: PropTypes.func,
+//     setSelectedShapes: PropTypes.func,
+//     setSelectedStyles: PropTypes.func,
+//     setTemporaryFilters: PropTypes.func,
+//     updateExternalLegacyFilters: PropTypes.func,
+// };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

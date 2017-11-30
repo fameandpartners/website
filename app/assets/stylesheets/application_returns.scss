@@ -7,7 +7,8 @@
 @import 'returns/type';
 
 @import 'redesign/icons';
-@import 'libs/icomoon_fame_2015/icons';
+@import 'libs/icomoon_fame_2015/variables';
+@import 'libs/icomoon_fame_2015/style';
 
 // Base
 @import 'redesign/base/base';
@@ -49,3 +50,11 @@
 @import 'returns/ReturnReasons';
 @import 'returns/SimpleButton';
 @import 'returns/GuestReturn';
+
+
+// New header, footer, and pdp comps
+@import 'custom_experience/react';
+
+// For Alerts
+@import 'redesign/vars';
+@import 'redesign/alerts';

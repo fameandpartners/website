@@ -7,6 +7,7 @@
   <head data-hook="inside_head">
 
     <%= stylesheet_link_tag 'application_returns' %>
+    <%= stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}" %>
 
     <%= render 'layouts/redesign/head' %>
 
@@ -50,16 +51,20 @@
   <body>
 
 
-    <%= render 'layouts/returns/header' %>
+    <div id="react-blanket" class="__react_root__"></div>
+    <div id="react-menu" class="__react_root__"></div>
+    <div id="react-cart" class="__react_root__"></div>
 
     <div class="app-container">
+      <div id="react-header" class="__react_root__"></div>
       <%= yield %>
     </div>
-    <%= render 'layouts/redesign/footer' %>
-    <%= render 'layouts/redesign/shopping_bag' %>
-    <%= render 'layouts/returns/user' %>
+
+    <div id="react-footer" class="__react_root__"></div>
+
     <%= javascript_include_tag 'application_returns' %>
     <%= render 'layouts/contentful/javascript' %>
+    <%= javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}" %>
 
   </body>
 </html>

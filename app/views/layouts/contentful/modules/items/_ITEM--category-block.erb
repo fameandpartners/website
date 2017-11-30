@@ -1,0 +1,11 @@
+<article class="tile is-child">
+  <a href="<%= @lg_contents[:tile_url] %>">
+    <picture>
+      <source media="(max-width: 768px)" srcset="<%= @lg_contents[:mobile_image] %>">
+      <source media="(min-width: 769px)" srcset="<%= @lg_contents[:image] %>">
+      <img class="Editorial__image" src="<%= @lg_contents[:image] %>" srcset="
+      <%= @lg_contents[:mobile_image] %> 768w,
+      <%= @lg_contents[:image] %> 769w">
+    </picture>
+  </a>
+</article>
