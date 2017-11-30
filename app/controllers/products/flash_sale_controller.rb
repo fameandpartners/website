@@ -41,7 +41,6 @@ class Products::FlashSaleController < Products::BaseController
           customisations: li.personalization.customization_values.map {|cust| cust.presentation}
         }
       end
-
       respond_with @items do |format|
         format.html
       end
@@ -60,12 +59,12 @@ class Products::FlashSaleController < Products::BaseController
         sku:  product.sku,
         name: product.name,
         permalink: product.permalink,
-        description: product.description,
-        images: product_images(product),
+        description: product.description.gsub('<p>', '').gsub('</p>', ''),
+        images: product.images.map {|image| product_images(image)},
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
-        color:li.personalization.color.presentation,
+        color:li.personalization.color,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       }
 
@@ -77,8 +76,8 @@ class Products::FlashSaleController < Products::BaseController
 
   private
 
-  def product_images(product)
-    @product_images ||= Repositories::ProductImages.new(product: product)
+  def product_images(image)
+    image.attachment.url
   end
 
   def redirect_site_version
