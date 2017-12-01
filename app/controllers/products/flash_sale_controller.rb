@@ -34,7 +34,7 @@ class Products::FlashSaleController < Products::BaseController
           name: product.name,
           permalink: product.permalink,
           description: product.description,
-          images: product.images.map {|image| product_images(image)},
+          images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:product]},
           original_price: li.old_price,
           current_price: li.price,
           size: li.personalization.size.presentation.split('/').first,
@@ -71,7 +71,7 @@ class Products::FlashSaleController < Products::BaseController
         name: product.name,
         permalink: product.permalink,
         description: product.description.gsub('<p>', '').gsub('</p>', ''),
-        images: product.images.map {|image| product_images(image)},
+        images:  product.images.map {|image| image_data(image)[:original]},
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
@@ -87,8 +87,26 @@ class Products::FlashSaleController < Products::BaseController
 
   private
 
-  def product_images(image)
-    image.attachment.url
+    # helper method
+  def image_data(image)
+    {
+      id: image.id,
+      position: image.position,
+      original: image.attachment.url(:original),
+      product: image.attachment.url(:product),
+      large: image.attachment.url(:large),
+      xlarge: image.attachment.url(:xlarge),
+      small: image.attachment.url(:small)
+    }
+  end
+
+  def get_cropped_image(images)
+     cropped_images = images.select{ |i| i[:large].to_s.downcase.include?('crop') }
+
+     if cropped_images.blank?
+       cropped_images = images.select { |i| i[:large].to_s.downcase.include?('front') }
+     end
+     cropped_images
   end
 
   def redirect_site_version
