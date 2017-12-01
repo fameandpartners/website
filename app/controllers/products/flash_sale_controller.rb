@@ -14,7 +14,7 @@ class Products::FlashSaleController < Products::BaseController
       redirect_to '/'
     else
       @filter = Products::CollectionFilter.read
-
+      binding.pry
       if params[:sort]
         line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}").page(params[:page]).per(100)
       else

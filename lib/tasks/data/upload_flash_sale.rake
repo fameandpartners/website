@@ -34,7 +34,7 @@ namespace :data do
 
 			length = row[9]
 
-			size = row[3]
+			size = row[3].split('/').first
 
 			new_price= ((((variant.product.price * 0.6)/ (10)).ceil*(10.00))-1).to_f
 			height = row[7]
