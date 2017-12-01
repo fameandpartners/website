@@ -102,6 +102,9 @@ class UserCart::ProductsController < UserCart::BaseController
 
         current_order.reload
       end
+      @user_cart = user_cart_resource.read
+      data = add_analytics_labels(@user_cart.serialize)
+     
 
       respond_with(@user_cart) do |format|
         format.json   {

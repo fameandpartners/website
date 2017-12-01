@@ -78,7 +78,6 @@ class Products::FlashSaleController < Products::BaseController
         color_value: color_value,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       }
-      binding.pry
       respond_with @item do |format|
         format.html
       end
