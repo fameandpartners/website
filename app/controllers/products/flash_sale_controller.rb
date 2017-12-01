@@ -33,7 +33,7 @@ class Products::FlashSaleController < Products::BaseController
           name: product.name,
           permalink: product.permalink,
           description: product.description,
-          images: product_images(product),
+          images: product.images.map {|image| product_images(image)},
           original_price: li.old_price,
           current_price: li.price,
           size: li.personalization.size.presentation.split('/').first,
@@ -95,7 +95,7 @@ class Products::FlashSaleController < Products::BaseController
     end
   end
 
-  private 
+  private
 
   def current_site_version
       @current_site_version ||= begin

@@ -3,6 +3,7 @@ ruby:
   @current_site_version = current_site_version
 
 = render :partial => '/data/collection_filter_sort'
+= render :partial => '/data/flash_sale_list'
 link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['flashCssBundle']}"
 
 div#flash-list-root.__FlashSaleList__wrapper
