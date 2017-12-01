@@ -10,7 +10,7 @@ RSpec.describe CustomItemSku do
   let(:customization_ids) { [customisation_value.id] }
   let(:chosen_height) { 'standard' }
   let(:style_number)  { 'FB1000' }
-  
+
   let(:dress)         { create :dress_with_magenta_size_10, sku: style_number, customisation_value_ids: customization_ids }
   let(:master)        { dress.master }
   let(:variant)       { dress.variants.first }
@@ -126,8 +126,8 @@ RSpec.describe CustomItemSku do
       expect(sku).to eq line_item.variant.sku
     end
 
-    it 'wont mark customs with X' do
-      expect(sku).to_not include("X")
+    it 'mark customs with X' do
+      expect(sku).to include("X")
     end
   end
 end
