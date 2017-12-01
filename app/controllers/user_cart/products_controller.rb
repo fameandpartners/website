@@ -96,12 +96,15 @@ class UserCart::ProductsController < UserCart::BaseController
     if @item.stock
       populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
-      if populator.populate(line_item: params[:id].to_i)
+      if populator.populate(line_item: [params[:id].to_i])
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
 
         current_order.reload
       end
+      @user_cart = user_cart_resource.read
+      data = add_analytics_labels(@user_cart.serialize)
+     
 
       respond_with(@user_cart) do |format|
         format.json   {

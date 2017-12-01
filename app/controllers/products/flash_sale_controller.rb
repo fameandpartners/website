@@ -37,10 +37,11 @@ class Products::FlashSaleController < Products::BaseController
           original_price: li.old_price,
           current_price: li.price,
           size: li.personalization.size.presentation.split('/').first,
-          color:li.personalization.color.presentation,
+          color: li.personalization.color.presentation,
           customisations: li.personalization.customization_values.map {|cust| cust.presentation}
         }
       end
+
       respond_with @items do |format|
         format.html
       end
@@ -53,6 +54,15 @@ class Products::FlashSaleController < Products::BaseController
     else
       li = Spree::LineItem.find(params[:id])
       product = li.product
+      color_value_array =  li.personalization.color
+
+      color_value = li.personalization.color.value
+      if color_value.split.count('#') > 2
+         color_value[0] = ''
+         color_value_array = color_value.split('#')
+         color_value = "linear-gradient(45deg, #{color_value_array[0]} 0%, #{color_value_array[0]} 50%, #{color_value_array[1]} 51%, #{color_value_array[1]} 100%)"
+      end
+
 
       @item = {
         id: li.id,
@@ -64,10 +74,10 @@ class Products::FlashSaleController < Products::BaseController
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
-        color:li.personalization.color,
+        color_presentation: li.personalization.color.presentation,
+        color_value: color_value,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
       }
-
       respond_with @item do |format|
         format.html
       end

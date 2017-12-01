@@ -3,6 +3,9 @@ ruby:
   @current_site_version = current_site_version
 
 
+/ Application State Data for new header (e.g. Cart)...
+= render :partial => '/layouts/custom_experience/application_state_data/application_state_data'
+
 = render :partial => '/data/flash_sale'
 link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['flashCssBundle']}"
 
