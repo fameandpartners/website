@@ -22,9 +22,9 @@ module Skus
     def call
       base_sku = [style_number, size, color]
 
-      if has_personalization?
-        base_sku << [custom, height]
-      end
+      # if has_personalization?
+      base_sku << [custom, height]
+      # end
 
       base_sku.join.delete(' ').upcase
     end
