@@ -34,9 +34,9 @@ namespace :data do
 
 			length = row[9]
 
-			size = row[3]
+			size = row[3].split('/').first
 
-			new_price= (((variant.product.price * 0.6).to_i * (-10)).ceil.to_f/(-10.00) - 1).to_f
+			new_price= ((((variant.product.price * 0.6)/ (10)).ceil*(10.00))-1).to_f
 			height = row[7]
 
 			line_item_insert_statements<<"(#{order.id},#{variant.id},#{variant.product.price},#{new_price},'#{size}',#{1},#{true},'#{length}', '#{color_group}','#{Time.now}','#{Time.now}')"
@@ -82,7 +82,7 @@ namespace :data do
 
 			size = row[3]
 
-			new_price= ((((variant.product.price * 0.6).to_i * (-10)).ceil.to_f/(-10.00) )-1).to_f
+			new_price= ((((variant.product.price * 0.6)/ (10)).ceil*(10.00))-1).to_f
 			height = row[7]
 
 			li_size = Spree::OptionValue.find_by_name(size) # find size
@@ -95,7 +95,7 @@ namespace :data do
 				end
 			end
 			puts $.
-			customization_ids = li_customization_values.map {|cv| cv.id}.empty? ? '---' :  "---\n- #{li_customization_values.map {|cv| cv.id}.join('\n- ')}"
+			customization_ids = li_customization_values.map {|cv| cv.id}.empty? ? '---' :  "---\n- #{li_customization_values.map {|cv| cv.id}.join(" \n- ")}"
 			lip_insert_statements<<"(#{variant.product.id},#{li_size.id},#{line_item_ids[counter]},'#{customization_ids}','#{li_color.id}','#{height}','#{Time.now}','#{Time.now}')"
 			counter = counter + 1
 
