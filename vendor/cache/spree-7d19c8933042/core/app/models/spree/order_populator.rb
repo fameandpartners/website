@@ -57,7 +57,8 @@ module Spree
     end
 
     def attempt_direct_cart_add(line_item_id)
-      line_item - Spree::LineItem.find(line_item_id)
+
+      line_item = Spree::LineItem.find(line_item_id)
       line_item.order = @order
       line_item.stock = false
       line_item.save
