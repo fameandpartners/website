@@ -50,6 +50,7 @@ class CustomItemSku
   end
 
   def height
-    personalization.present? ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+    line_item.personalization.height
+    # personalization.present? ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
   end
 end
