@@ -82,7 +82,7 @@ namespace :data do
 
 			size = row[3]
 
-			new_price= ((((variant.product.price * 0.6).to_i * (-10)).ceil.to_f/(-10.00) )-1).to_f
+			new_price= ((((variant.product.price * 0.6)/ (10)).ceil*(10.00))-1).to_f
 			height = row[7]
 
 			li_size = Spree::OptionValue.find_by_name(size) # find size
