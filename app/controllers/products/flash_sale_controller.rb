@@ -14,16 +14,17 @@ class Products::FlashSaleController < Products::BaseController
       redirect_to '/'
     else
       @filter = Products::CollectionFilter.read
-      binding.pry
       if params[:sort]
-        line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}").page(params[:page]).per(100)
+        line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}")
       else
-        line_items = Spree::LineItem.where(stock: true).order(:price).page(params[:page]).per(100)
+        line_items = Spree::LineItem.where(stock: true).order(:price)
       end
 
       line_items = line_items.where(color: params[:color]) if params[:color]
       line_items = line_items.where(size: params[:size]) if params[:size]
       line_items = line_items.where(length: params[:length]) if params[:length]
+
+      line_items = line_items.page(params[:page]).per(100)
 
       @items = line_items.map do |li|
         product = li.product
