@@ -69,8 +69,7 @@ module Orders
             line.return_details,
             line.price,
             line.currency,
-            line.product_number,
-            li.stock
+            line.product_number
           ]
         end
       end
@@ -110,8 +109,7 @@ module Orders
         :return_details,
         :price,
         :currency,
-        :upc,
-        :flash_item
+        :upc
       ]
     end
 
