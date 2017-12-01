@@ -39,7 +39,15 @@ class UserCart::CartProduct
 
   def destroy
     if line_item.present?
-      line_item.destroy
+      if !line_item.stock.nil? && line_item.stock == false
+        ord = Spree::Order.new()
+        ord.save
+        line_item.stock = true
+        line_item.order = ord
+        line_item.save
+      else
+        line_item.destroy
+      end
       update_order
     end
   end
