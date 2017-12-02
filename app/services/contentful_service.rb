@@ -63,9 +63,22 @@ module Contentful
       }
 
       category_tiles = parent_container.category_tiles_container.map do |item|
+
+        # Edits CTA
+        tile_cta_array = item.title_overlay.split('||')
+
+        if tile_cta_array.size < 2
+          tile_cta_first = nil
+          tile_cta_last = tile_cta_array[0]
+        else
+          tile_cta_first = tile_cta_array[0]
+          tile_cta_last = tile_cta_array[1]
+        end
+
         {
           link: item.link,
-          title: item.title_overlay,
+          tile_cta_first: tile_cta_first,
+          tile_cta_last: tile_cta_last,
           image: item.image.image_url
         }
       end
