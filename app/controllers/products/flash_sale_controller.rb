@@ -22,7 +22,10 @@ class Products::FlashSaleController < Products::BaseController
 
       line_items = line_items.where(color: params[:color]) if params[:color]
       line_items = line_items.where(size: params[:size]) if params[:size]
-      line_items = line_items.where(length: params[:length]) if params[:length]
+      if params[:length]
+        leng = params[:length].map{|x| x.capitalize}
+        line_items = line_items.where(length: leng) 
+      end
 
       line_items = line_items.page(params[:page]).per(100)
 
