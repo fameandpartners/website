@@ -37,6 +37,7 @@ class Products::FlashSaleController < Products::BaseController
           images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:product]},
           original_price: li.old_price,
           current_price: li.price,
+          height: li.personalization.height.capitalize,
           size: li.personalization.size.presentation.split('/').first,
           color: li.personalization.color.presentation,
           customisations: li.personalization.customization_values.map {|cust| cust.presentation}
@@ -75,6 +76,7 @@ class Products::FlashSaleController < Products::BaseController
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
+        height: li.personalization.height.capitalize,
         color_presentation: li.personalization.color.presentation,
         color_value: color_value,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
