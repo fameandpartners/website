@@ -12,7 +12,7 @@ class ProductionOrderEmailService
   end
 
   def trigger_email(order, factory, items)
-    FactoryPurchaseOrderEmail.new(order, factory, items).deliver
+    FactoryPurchaseOrderEmail.new(order, factory, items.select{|item| item.stock.nil?}).deliver
   end
 
   class FactoryPurchaseOrderEmail
