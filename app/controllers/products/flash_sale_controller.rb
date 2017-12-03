@@ -22,7 +22,10 @@ class Products::FlashSaleController < Products::BaseController
 
       line_items = line_items.where(color: params[:color]) if params[:color]
       line_items = line_items.where(size: params[:size]) if params[:size]
-      line_items = line_items.where(length: params[:length]) if params[:length]
+      if params[:length]
+        leng = params[:length].map{|x| x.capitalize}
+        line_items = line_items.where(length: leng) 
+      end
 
       line_items = line_items.page(params[:page]).per(100)
 
@@ -37,6 +40,7 @@ class Products::FlashSaleController < Products::BaseController
           images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:product]},
           original_price: li.old_price,
           current_price: li.price,
+          height: li.personalization.height.capitalize,
           size: li.personalization.size.presentation.split('/').first,
           color: li.personalization.color.presentation,
           customisations: li.personalization.customization_values.map {|cust| cust.presentation}
@@ -75,6 +79,7 @@ class Products::FlashSaleController < Products::BaseController
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
+        height: li.personalization.height.capitalize,
         color_presentation: li.personalization.color.presentation,
         color_value: color_value,
         customisations: li.personalization.customization_values.map {|cust| cust.presentation}
