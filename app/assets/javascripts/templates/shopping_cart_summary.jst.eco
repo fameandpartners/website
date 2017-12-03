@@ -32,7 +32,12 @@
         <div class="heading">
           <span class="cart-item-title"><%= product.name %></span>
         </div>
-        <div class="cart-item-price"><%= product.price.display_price %></div>
+
+        <div class="cart-item-price">
+        <% if product.old_price: %>
+         <del><%= product.old_price %> </del>
+        <%end%>
+        <%= product.price.display_price %></div>
         <dl class="cart-item-description">
           <% if product.size != null : %>
           <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
@@ -68,7 +73,13 @@
         </dl>
       </div>
     </div>
+    
     <% end %>
+    <%if product.message : %>
+      <div class="row cart-item">
+         <%= product.message %>
+      </div>
+    <%end%>
   <% end %>
 </div>
 <% else: %>

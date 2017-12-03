@@ -35,9 +35,11 @@ class Repositories::CartProduct
         line_item_sku: line_item_sku,
         product_type: product_type.to_sym,
         quantity: line_item.quantity,
+        old_price: line_item_old_price,
         price: line_item_price,
         discount: product.discount.try(:amount),
         image: product_image,
+        message: line_item.stock.nil? ? nil : 'All sale items are final sale. Offer only available for shipping within the US',
         standard_days_for_making: product.standard_days_for_making,
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
@@ -159,6 +161,14 @@ class Repositories::CartProduct
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil
       )
+    end
+
+     def line_item_old_price
+      if line_item.old_price
+        return Spree::Price.new(amount: line_item.old_price).display_price.to_s
+      else
+        return nil
+      end
     end
 
     def line_item_sku
