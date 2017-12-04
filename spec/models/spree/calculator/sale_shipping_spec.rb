@@ -4,7 +4,7 @@ describe Spree::Calculator::SaleShipping, type: :model do
   let(:order) { build(:spree_order) }
 
   subject(:calculator) { Spree::Calculator::SaleShipping.new(
-    preferred_sale_products_shipping_amount:    15.5,
+    preferred_sale_products_shipping_amount:   0,
     preferred_normal_products_shipping_amount:  9.9,
     preferred_international_shipping_fee:       30.0
   )}
