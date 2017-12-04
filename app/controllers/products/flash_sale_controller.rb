@@ -37,7 +37,7 @@ class Products::FlashSaleController < Products::BaseController
           name: product.name,
           permalink: product.permalink,
           description: product.description,
-          images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:product]},
+          images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:large]},
           original_price: li.old_price,
           current_price: li.price,
           height: li.personalization.height.capitalize,
