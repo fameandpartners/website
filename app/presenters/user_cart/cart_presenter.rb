@@ -4,7 +4,7 @@ class UserCart::CartPresenter < OpenStruct
     {
       products: products.map do |product|
         result = product.serialize
-        result[:path] = ApplicationController.helpers.collection_product_path(product)
+        result[:path] =  Spree::LineItem.find(product.line_item_id).stock.nil? ? ApplicationController.helpers.collection_product_path(product) : ApplicationController.helpers.line_item_path(product.line_item_id)
         result
       end,
       site_version: site_version,
