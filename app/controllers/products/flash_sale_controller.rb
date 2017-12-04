@@ -58,6 +58,9 @@ class Products::FlashSaleController < Products::BaseController
       redirect_to '/'
     else
       li = Spree::LineItem.find(params[:id])
+      if li.stock.nil?
+        redirect_to '/'
+      end
       product = li.product
       color_value_array =  li.personalization.color
 
