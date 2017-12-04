@@ -77,7 +77,7 @@ class Products::FlashSaleController < Products::BaseController
         sku:  product.sku,
         name: product.name,
         permalink: product.permalink,
-        description: product.description.gsub('<p>', '').gsub('</p>', ''),
+        description: product.description.gsub('<p>', '').gsub('</p>', '').gsub('<br>', '').gsub('</br>', ''),
         images:  product.images.map {|image| image_data(image)[:original]},
         original_price: li.old_price,
         current_price: li.price,
