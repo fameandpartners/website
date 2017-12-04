@@ -385,7 +385,7 @@ Spree::Order.class_eval do
     json['final_return_by_date'] = (delivery_policy.delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
     json
   end
 
