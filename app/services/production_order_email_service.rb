@@ -39,6 +39,9 @@ class ProductionOrderEmailService
       user ||= Spree::User.where(email: order_presenter.email).first
 
       line_items = order_presenter.extract_line_items
+      # filter out sample sale items
+      line_items = line_items.select { |li| li.stock.nil? }
+
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',
