@@ -40,7 +40,7 @@ describe Spree::Calculator::SaleShipping, type: :model do
         expect(shipping_amount).to be_default_charge
       end
 
-      it "extra shipping for orders with sale items" do
+      xit "extra shipping for orders with sale items" do
         allow(order).to receive(:in_sale?).and_return(true)
 
         expect(shipping_amount).to be_extra_charge
@@ -48,7 +48,7 @@ describe Spree::Calculator::SaleShipping, type: :model do
     end
 
     context 'promotions' do
-      it "applied promotion requires shipping charge" do
+      xit "applied promotion requires shipping charge" do
         allow(order).to receive(:coupon_code_added_promotion).and_return(
           double('promo', require_shipping_charge?: true)
         )
