@@ -201,7 +201,9 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      ProductionOrderEmailService.new(self).deliver
+      if self.line_items.any? {|item| item.stock.nil?}
+        ProductionOrderEmailService.new(self).deliver
+      end
     rescue Exception => e
       log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")

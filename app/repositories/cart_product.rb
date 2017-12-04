@@ -44,7 +44,7 @@ class Repositories::CartProduct
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: product.delivery_period, #line_item.delivery_period_policy.delivery_period,
+        delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
       )
@@ -120,7 +120,7 @@ class Repositories::CartProduct
     end
 
     def making_options
-      line_item.making_options.includes(:product_making_option).map do |option|
+      line_item.making_options.includes(:product_making_option).map do |option| 
         OpenStruct.new(
           id: option.id,
           option_type: option.product_making_option.option_type,
@@ -136,15 +136,17 @@ class Repositories::CartProduct
     # provide the available making_options to front end
     def available_making_options
       product.making_options.map do |mo|
-        OpenStruct.new(
-          id: mo.id,
-          option_type: mo.option_type,
-          name: mo.name,
-          display_discount: mo.display_discount,
-          description: mo.description,
-          delivery_period: mo.display_delivery_period,
-          active: mo.active
-        )
+        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type = 'fast_making') 
+          OpenStruct.new(
+            id: mo.id,
+            option_type: mo.option_type,
+            name: mo.name,
+            display_discount: mo.display_discount,
+            description: mo.description,
+            delivery_period: mo.display_delivery_period,
+            active: mo.active
+          )
+        end
       end
     end
 
