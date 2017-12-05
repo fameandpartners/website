@@ -29,6 +29,6 @@
             | Quantity: <span class="value">#{line_item.quantity}</span>
           li
             | Estimated Delivery: <span class="value">#{line_item.delivery_period}</span>
-          -if !line_item.item.stock.nil?
-            li style="padding-top: 15px"
-              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">All sample sale items are final sale.<br /> Offer valid for shipments to US only.</span>
+        -if !line_item.item.stock.nil?
+          li style="padding-top: 15px"
+            | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">All sample sale items are final sale.<br /> Offer valid for shipments to US only.</span>
