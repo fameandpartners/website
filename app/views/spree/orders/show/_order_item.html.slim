@@ -12,7 +12,7 @@
       .item-details.col-md-12
         ul
           li
-          
+
           | #{height_title(line_item.personalization)}: <span class="value">#{display_height(line_item.personalization&.height_value, line_item.personalization&.height_unit, line_item.personalization&.height)}</span>
           li
             - if line_item.personalization.try(:basic_color?)
