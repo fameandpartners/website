@@ -10,7 +10,7 @@ module Orders
                                   number: 'R123123123',
                                   state: 'complete',
       ) }
-      let(:presenter) { described_class.new(order) }
+      let(:presenter) { described_class.new(order, []) }
 
       it { expect(presenter.completed_at).to eq(DateTime.parse('10/10/2015 10:10:10 UTC')) }
       it { expect(presenter.email).to eq('loroteiro@silvestre.com') }
@@ -20,8 +20,8 @@ module Orders
     end
 
     describe '#projected_delivery_date' do
-      let(:order)         { instance_spy('Spree::Order', :completed? => completed)  }
-      subject(:presenter) { described_class.new(order)  }
+      let(:order)         { instance_spy('Spree::Order', :completed? => completed, :line_items =>[])  }
+      subject(:presenter) { described_class.new(order, [])  }
 
       context 'incomplete orders' do
         let(:completed) { false }
