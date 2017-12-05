@@ -78,7 +78,7 @@ class Products::FlashSaleController < Products::BaseController
         name: product.name,
         permalink: product.permalink,
         description: product.description.gsub('<p>', '').gsub('</p>', '').gsub('<br>', '').gsub('</br>', '').gsub('<br />', '').gsub('<br/>', ''),
-        images:  product.images.map {|image| image_data(image)[:original]},
+        images:  get_pdp_images(product.images.map {|image| image_data(image)[:large]}),
         original_price: li.old_price,
         current_price: li.price,
         size: li.personalization.size.presentation.split('/').first,
@@ -115,6 +115,14 @@ class Products::FlashSaleController < Products::BaseController
        cropped_images = images.select { |i| i[:large].to_s.downcase.include?('front') }
      end
      cropped_images
+
+ end
+  
+
+  def get_pdp_images(images)
+    pdp_images = images.select {|x| x.include?('crop.jpg')}
+
+    pdp_images
   end
 
   def redirect_site_version
