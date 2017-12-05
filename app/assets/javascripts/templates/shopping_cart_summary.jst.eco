@@ -79,8 +79,12 @@
     
     <% end %>
     <%if product.message : %>
-      <div class="row cart-item">
-         <%= product.message %>
+      <div class="SampleSaleMessage__content col-xs-12">
+        <div class="col-xs-12">
+          <p class="SampleSale__copy font-sans-serif">
+           <%= product.message %>.
+          </p>
+        </div>
       </div>
     <%end%>
   <% end %>
