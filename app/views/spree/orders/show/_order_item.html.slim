@@ -12,7 +12,7 @@
       .item-details.col-md-12
         ul
           li
-          
+
           | #{height_title(line_item.personalization)}: <span class="value">#{display_height(line_item.personalization&.height_value, line_item.personalization&.height_unit, line_item.personalization&.height)}</span>
           li
             - if line_item.personalization.try(:basic_color?)
@@ -29,6 +29,6 @@
             | Quantity: <span class="value">#{line_item.quantity}</span>
           li
             | Estimated Delivery: <span class="value">#{line_item.delivery_period}</span>
-          -if !line_item.item.stock.nil?
-            li style="padding-top: 15px"
-              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">All sample sale items are final sale.<br /> Offer valid for shipments to US only.</span>
+        -if !line_item.item.stock.nil?
+          li style="padding-top: 15px"
+            | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">All sample sale items are final sale.<br /> Offer valid for shipments to US only.</span>
