@@ -347,7 +347,7 @@ class ProductListItem extends React.Component {
             null
         }
         {
-          SHOW_RETURN_BUTTON ?
+          SHOW_RETURN_BUTTON && saleItem !== false ?
             <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
