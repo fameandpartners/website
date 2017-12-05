@@ -104,11 +104,11 @@ class StaticsController < ApplicationController
     render 'getitquick_unavailable', status: :not_found
   end
 
-  def wedding_atelier_app
-    if spree_current_user
-      redirect_to wedding_atelier.events_path
-    end
-  end
+  # def wedding_atelier_app
+  #   if spree_current_user
+  #     redirect_to wedding_atelier.events_path
+  #   end
+  # end
 
 # =======================================================================
 # OLD PAGES

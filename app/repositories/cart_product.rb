@@ -43,7 +43,7 @@ class Repositories::CartProduct
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: product.delivery_period, #line_item.delivery_period_policy.delivery_period,
-        from_wedding_atelier: wedding_atelier_product?,
+        from_wedding_atelier: false,#wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
@@ -69,9 +69,9 @@ class Repositories::CartProduct
       end
     end
 
-    def wedding_atelier_product?
-      Spree::Taxonomy.where(id: product.taxons.map(&:taxonomy_id), name: 'Wedding Atelier').any?
-    end
+    # def wedding_atelier_product?
+    #   Spree::Taxonomy.where(id: product.taxons.map(&:taxonomy_id), name: 'Wedding Atelier').any?
+    # end
 
     def cache_key
       line_item.cache_key

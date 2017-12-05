@@ -314,9 +314,9 @@ FameAndPartners::Application.routes.draw do
     get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
     # Wedding Atelier App - Landing page
-    get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
+    # get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
-    get '/weddings-atelier', to: redirect('/wedding-atelier')
+    # get '/weddings-atelier', to: redirect('/wedding-atelier')
 
 
     # Casual Summer Styles Collection Page
@@ -441,7 +441,6 @@ FameAndPartners::Application.routes.draw do
     get '/growth-plan', to: redirect("/about")
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
-    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
 
     get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
 
@@ -732,7 +731,7 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
-  mount WeddingAtelier::Engine, at: '/wedding-atelier'
+  # mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
 end
 
