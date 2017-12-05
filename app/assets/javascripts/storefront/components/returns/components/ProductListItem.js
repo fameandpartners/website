@@ -217,7 +217,7 @@ class ProductListItem extends React.Component {
           />
           <div className="u-line-height-medium">
             {
-              storeCreditOnly && returnEligible ?
+              (storeCreditOnly && returnEligible && !saleItem) ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     RETURNABLE FOR STORE CREDIT&nbsp;ONLY
@@ -227,7 +227,7 @@ class ProductListItem extends React.Component {
               null
             }
             {
-              saleItem===false ?
+              saleItem === false ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     ITEM NOT ELIGIBLE FOR&nbsp;REFUND
