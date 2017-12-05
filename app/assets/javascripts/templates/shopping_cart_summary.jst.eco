@@ -65,7 +65,10 @@
             <dd>
               <span class="line-item-description-heading">Customizations:</span><br />
               <% for customization in product.customizations: %>
-                <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+                <span><%= customization.name %></span> 
+                <% unless product.old_price: %>
+                  <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+                <%end%>
               <% end %>
             </dd>
           <% end %>

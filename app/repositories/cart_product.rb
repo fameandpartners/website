@@ -136,7 +136,7 @@ class Repositories::CartProduct
     # provide the available making_options to front end
     def available_making_options
       product.making_options.map do |mo|
-        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type = 'fast_making') 
+        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type != 'fast_making') 
           OpenStruct.new(
             id: mo.id,
             option_type: mo.option_type,
