@@ -124,6 +124,11 @@ gem 'contentful'
 
 gem 'rdoc' , '3.12.2'
 
+# needs some pretty printing
+gem 'awesome_print', require: "ap"
+
+# not sure why puma is needed to run rails c on servers
+gem 'puma'
 
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
@@ -142,7 +147,6 @@ group :development do
   gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'awesome_print', require: "ap"
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
   gem 'bullet'
