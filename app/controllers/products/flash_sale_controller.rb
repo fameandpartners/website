@@ -26,7 +26,7 @@ class Products::FlashSaleController < Products::BaseController
         leng = params[:length].map{|x| x.capitalize}
         line_items = line_items.where(length: leng) 
       end
-
+      total_pages = (line_items.count.to_f/96.0).ceil
       line_items = line_items.page(params[:page]).per(96)
       @items = line_items.map do |li|
         product = li.product
@@ -42,7 +42,8 @@ class Products::FlashSaleController < Products::BaseController
           height: li.personalization.height.capitalize,
           size: li.personalization.size.presentation.split('/').first,
           color: li.personalization.color.presentation,
-          customisations: li.personalization.customization_values.map {|cust| cust.presentation}
+          customisations: li.personalization.customization_values.map {|cust| cust.presentation},
+          total_pages: total_pages
         }
       end
 
