@@ -61,10 +61,10 @@ namespace :data do
 			'icing-pink-and-red' => ['pink','red'],
 			'red-and-pretty-pink' => ['pink','red'],
 			'black-and-purple' => ['black','purple'],
-			'pale-nude' => ['pastel','tan-nude'],
+			'pale-nude' => ['pastel','nude-tan'],
 			'chartreuse' => ['green'],
 			'dusty-rose' => ['pink']
-		}
+			}
 		color_hash.each_key do |key|
 			link_color_to_group(key, color_hash[key])
 		end

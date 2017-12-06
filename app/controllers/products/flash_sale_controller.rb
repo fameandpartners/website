@@ -27,8 +27,7 @@ class Products::FlashSaleController < Products::BaseController
         line_items = line_items.where(length: leng) 
       end
 
-      line_items = line_items.page(params[:page]).per(100)
-
+      line_items = line_items.page(params[:page]).per(96)
       @items = line_items.map do |li|
         product = li.product
         {
@@ -37,7 +36,7 @@ class Products::FlashSaleController < Products::BaseController
           name: product.name,
           permalink: product.permalink,
           description: product.description,
-          images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:large]},
+          images:  get_cropped_image(product.images.map {|image| image_data(image)}).map {|x| x[:large]}.sort_by{|x| x.index('front')}.reverse,
           original_price: li.old_price,
           current_price: li.price,
           height: li.personalization.height.capitalize,

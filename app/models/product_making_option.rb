@@ -52,17 +52,17 @@ class ProductMakingOption < ActiveRecord::Base
 
   def name
     if fast_making?
-      'Deliver Express'
+      'Express'
     else
-      'Deliver Later'
+      'Later'
     end
   end
 
   def description
     if fast_making?
-      'Delivered in 4 - 6 business days'
+      'Estimated Delivery in 4 - 6 business days'
     else
-      'Delivered in 6 weeks'
+      'Estimated Delivery in 6 weeks'
     end
   end
 
