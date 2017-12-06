@@ -217,7 +217,7 @@ class ProductListItem extends React.Component {
           />
           <div className="u-line-height-medium">
             {
-              (storeCreditOnly && returnEligible && saleItem) ?
+              (storeCreditOnly && returnEligible && saleItem !== false) ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     RETURNABLE FOR STORE CREDIT&nbsp;ONLY
