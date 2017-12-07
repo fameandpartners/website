@@ -120,7 +120,11 @@ class Products::FlashSaleController < Products::BaseController
   
 
   def get_pdp_images(images)
-    pdp_images = images.select {|x| x.include?('crop.jpg')}
+    pdp_images = images.select {|x| x.downcase.include?('crop.jpg')}
+
+    if pdp_images.empty?
+      pdp_images = images.select {|x| x.downcase.include?('front.jpg')}
+    end
 
     pdp_images
   end
