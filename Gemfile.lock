@@ -589,9 +589,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailchimp-api (2.0.6)
-      excon (>= 0.16.0)
-      json (>= 1.7.7)
     mastercard_api (0.0.1)
     mastercard_masterpass_api (0.0.1)
     method_source (0.8.2)
@@ -958,7 +955,6 @@ DEPENDENCIES
   json
   koala
   letter_opener (~> 1.4.1)
-  mailchimp-api
   mailchimp_client!
   manual_order!
   newrelic_rpm

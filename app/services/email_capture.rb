@@ -25,10 +25,6 @@ class EmailCapture
     @form_name          = form_name
   end
 
-  def mailchimp
-    @mailchimp ||= Mailchimp::API.new(configatron.mailchimp.api_key)
-  end
-
   def capture
     begin
       resultpe = Bronto::SubscribeUsersService.perform(ENV.fetch('BRONTO_SUBSCRIPTION_LIST'), [user_data])
@@ -55,21 +51,6 @@ class EmailCapture
         newsletter:       newsletter
       }
     }
-  end
-
-  def update_list(get_email, current_email, first_name, last_name)
-    subscriber = mailchimp.lists.members(configatron.mailchimp.list_id)['data'].select { |subscriber| subscriber['email'] == get_email }
-    if subscriber.length > 0
-      mailchimp.lists.update_member(set_list_id, {"leid" => subscriber[0]['leid']},
-                                    { email: current_email,
-                                      fname: first_name,
-                                      lname: last_name})
-    end
-  end
-
-  def subscribe_list(current_email, merge_variables)
-    mailchimp.lists.subscribe(set_list_id, {"email" => current_email},
-                                merge_variables, 'html', false, true, true, false)
   end
 
   def email_changed?
@@ -140,11 +121,6 @@ class EmailCapture
 
   def set_list_id
     configatron.mailchimp.list_id
-  end
-
-  def unsubscribed?(email)
-    mailchimp.lists.member_info(set_list_id, [email: email])
-      .try(:[], 'data').try(:[], 0).try(:[], 'status') == 'unsubscribed'
   end
 
 end

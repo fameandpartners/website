@@ -117,7 +117,7 @@ gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
-gem 'mailchimp-api', require: 'mailchimp'
+# gem 'mailchimp-api', require: 'mailchimp'
 
 # Contentful
 gem 'contentful'
