@@ -191,9 +191,7 @@
 
   // When a filter is expanded...
   &--is-active .ExpandablePanel__name:before {
-    @include transform(rotate(90deg));
-    top: 4px;
-    left: -4px;
+    @include transform(rotate(-90deg));
   }
 
   // Filter is expanded => Show its options
@@ -268,13 +266,19 @@
 
   // Display the arrow icon
   &:before {
-    font-family: 'icomoon_fame_2015';
-    font-size: 1rem;
-    color: $c-neutral-6;
-    content: "\e624";
-    padding-right: 8px;
-    display: inline-block;
+    content: '';
     position: relative;
+    display: inline-block;
+    width: 15px;
+    height: 8px;
+    right: 4px;
+    background: url(/assets/react_components/caret.svg) center center no-repeat;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 10px;
+    transition: transform 0.17s;
+    transform-origin: top;
+    margin-right: 5px;
   }
 
 }
