@@ -152,9 +152,6 @@ PATH
     inspinia-rails (2.1.0)
       font-awesome-rails (~> 4.3.0.0)
       rails
-    mailchimp_client (0.0.1)
-      gibbon (~> 2.2.4)
-      sidekiq
     manual_order (0.0.1)
       chosen-rails (~> 1.5.1)
       datagrid (~> 1.4.0)
@@ -523,9 +520,6 @@ GEM
     geoip (1.5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    gibbon (2.2.4)
-      faraday (>= 0.9.1)
-      multi_json (>= 1.11.0)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
       autoparse (>= 0.3.3)
@@ -955,7 +949,6 @@ DEPENDENCIES
   json
   koala
   letter_opener (~> 1.4.1)
-  mailchimp_client!
   manual_order!
   newrelic_rpm
   next_logistics!
