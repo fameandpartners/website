@@ -6,8 +6,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  # database: fame_website_development
-  database: fandp_dev7
+  database: fame_website_development
+  # database: fandp_dev7
 test:
   <<: *defaults
   database: fame_website_test
@@ -26,4 +26,3 @@ production:
   username: <%= ENV['DBUSER'] %>
   password: <%= ENV['DBPASSWORD'] %>
   host: <%= ENV['DBHOST'] %>
-
