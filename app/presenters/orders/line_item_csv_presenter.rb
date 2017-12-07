@@ -104,7 +104,7 @@ module Orders
       end
 
       def product_number
-        global_sku&.id
+        Spree::LineItem.find_by_id(line['line_item_id'].to_i)&.upc || global_sku&.id
       end
 
       def sku
