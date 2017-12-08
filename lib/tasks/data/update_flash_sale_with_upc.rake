@@ -38,7 +38,8 @@ namespace :data do
 				new_price= ((((variant.product.price * 0.6)/ (10)).ceil*(10.00))-1).to_f
 				height = row[7]
 
-				li = Spree::LineItem.where("stock is not null AND size = '#{size}' AND length = '#{length}' AND variant_id = #{variant.id} AND  color = '#{color_group}' AND upc is null").first
+				lis = Spree::LineItem.where("stock is not null AND size = '#{size}' AND length = '#{length}' AND variant_id = #{variant.id} AND  color = '#{color_group}' AND upc is null")
+                li = lis.select { |x| x.personalization.height == height }.first
 				if li
 					li.update_column('upc', row[0]) 
 					li_size = Spree::OptionValue.find_by_name(size) # find size
