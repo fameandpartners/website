@@ -178,5 +178,3 @@ group :production do
   # gem 'unicorn'
   gem 'aws-sdk'
 end
-
-
