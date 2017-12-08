@@ -58,6 +58,7 @@ namespace :data do
 							li.personalization.save(validate: false)
 						end
 					end
+					li.update_column('price', new_price) 
 				end
 				puts $.
 			end
