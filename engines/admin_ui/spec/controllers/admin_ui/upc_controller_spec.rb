@@ -32,8 +32,7 @@ module AdminUi
         let(:dress) { FactoryGirl.create(:dress, name: 'Bianca Dress', sku: 'ABC123') }
 
         let(:valid_params) {{
-          style_number: dress.sku,
-          style_name: dress.name,
+          product_id: dress.id,
           height: 'standard',
           color_name: color_option_type.name,
           color_presentation_name: color_option_type.name,

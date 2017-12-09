@@ -6,7 +6,7 @@
 #   product   - obsoleted! support legacy only
 #
 class Products::DetailsResource
-  RECOMMENDED_PRODUCTS_LIMIT = 4
+  RECOMMENDED_PRODUCTS_LIMIT = 2
   RELATED_OUTERWEAR_LIMIT = 4
 
   attr_reader :site_version, :product
@@ -59,6 +59,7 @@ class Products::DetailsResource
       taxons:               product_taxons,
       # page#show specific details
       recommended_products: recommended_products,
+      complementary_products: complementary_products,
       variants:             product.variants,
       related_outerwear:    related_outerwear,
       available_options:    product_selection_options,
@@ -127,6 +128,12 @@ class Products::DetailsResource
     def recommended_products
       Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
         Products::Related.new(product: recommended_product, site_version: site_version)
+      end
+    end
+
+    def complementary_products
+      Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
+        Products::Complementary.new(product: recommended_product, site_version: site_version)
       end
     end
 

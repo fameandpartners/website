@@ -1,9 +1,10 @@
-import React, {Component, PropTypes,} from 'react';
-import {connect,} from 'react-redux';
-import {bindActionCreators,} from 'redux';
+/* eslint-disable */
+import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import {hasLegacyInstance,} from '../utilities/CollectionFilterSortUtilities';
+import {hasLegacyInstance} from '../utilities/CollectionFilterSortUtilities';
 
 function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
@@ -17,7 +18,7 @@ function dispatchToProps(dispatch) {
     return bindActionCreators(CollectionFilterSortActions, dispatch);
 }
 
-class CollectionSortMobile extends Component {
+class CollectionSortMobile extends React.Component {
     constructor(props) {
         super(props);
         this.handleSelection = this.handleSelection.bind(this);
@@ -83,10 +84,10 @@ class CollectionSortMobile extends Component {
     }
 }
 
-CollectionSortMobile.propTypes = {
-    order: PropTypes.string,
-    orderProductsBy: PropTypes.func,
-    updateExternalLegacyFilters: PropTypes.func,
-};
+// CollectionSortMobile.propTypes = {
+//     order: PropTypes.string,
+//     orderProductsBy: PropTypes.func,
+//     updateExternalLegacyFilters: PropTypes.func,
+// };
 
 export default connect(stateToProps, dispatchToProps)(CollectionSortMobile);

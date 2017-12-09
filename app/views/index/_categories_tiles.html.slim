@@ -39,15 +39,17 @@ section.section-box.container.section-style-icon
               .img-wrap
                 img.img-responsive*{src: tile[:image] }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile[:title]
+              - if tile[:tile_cta_first] || tile[:tile_cta_last]
+                .content-wrap
+                  .container-cta
+                    .row-cta
+                      .col-md-12
+                        .copy-wrap
+                          span.cta-link-white-bg.cta-link-center-padding
+                            span.cta-link
+                              = tile[:tile_cta_first]
+                            span.copy-highlight
+                              = tile[:tile_cta_last]
 
     .row.bottom-category-tiles-row
       - category_tiles[2..3].each do |tile|
@@ -57,12 +59,14 @@ section.section-box.container.section-style-icon
               .img-wrap
                 img.img-responsive*{src: tile[:image] }
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link Shop
-                          span.copy-highlight
-                            = tile[:title]
+              - if tile[:tile_cta_first] || tile[:tile_cta_last]
+                .content-wrap
+                  .container-cta
+                    .row-cta
+                      .col-md-12
+                        .copy-wrap
+                          span.cta-link-white-bg.cta-link-center-padding
+                            span.cta-link
+                              = tile[:tile_cta_first]
+                            span.copy-highlight
+                              = tile[:tile_cta_last]

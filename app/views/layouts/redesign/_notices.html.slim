@@ -9,15 +9,15 @@
 
 // If cny_delivery_delays feature flag is OFF: we can show other banners.
 - else
-  // TEMPORARY: Sale banner for the "BUY 2, GET 1" campaign
-  - if custom_sale_banner_active?
-    #sale-banner.alert-sale.custom-sale-banner-top role="alert"
+  // Sample sale campaign
+  - if custom_sale_banner_active? && current_site_version.is_usa?
+    #sale-banner.alert-sale.custom-sale-banner-top role="alert" style="background-color: #fe4e75; color: #ffffff"
       .outer-wrap
           .inner-wrap
             .title-wrap
               .title
-                = link_to dresses_path
-                  | FINAL DAY: BUY TWO, GET ONE FREE WITH CODE JULY342. <span class="alert-sale-cta">SHOP NOW.</span>
+                = link_to "/sample-sale"
+                  | SHOP THE 1ST ANNUAL FAME AND PARTNERS SAMPLE SALE - UP TO 40% OFF - sizes 0-22!
 
   // Temporary: Price Drop (AU-only) campaign
   - if price_drop_au_active?

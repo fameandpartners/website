@@ -81,14 +81,13 @@ ruby:
                 span.icon.icon-bag
                 span.count.js-cart-item-count 0
 
-    - unless disable_notices?
-      = render 'layouts/redesign/notices'
     = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
   = render 'layouts/redesign/new_this_week'
 
   #sideMenu
     = render 'layouts/redesign/header/simplified_side_nav'
+
 javascript:
   function sendToGA(eventObject) {
       if(typeof window === 'object' && !!window.ga) {

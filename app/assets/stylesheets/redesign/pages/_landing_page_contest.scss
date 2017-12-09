@@ -137,12 +137,39 @@
     margin-top: 30px;
   }
 
+  .FinalistItem {
+    margin: 0 15px 75px;
+  }
+
+  .FinalistItem__text {
+    text-align: left;
+  }
+
+  .FinalistItem__fullEntryTrigger {
+    display: inline-block;
+    background: url('landingpages/it-girl-contest/bg-fade-overlay.png') repeat-x;
+    color: $c-neutral-12;
+    border-bottom: 1px solid $c-neutral-8;
+    width: 100%;
+    padding: 45px 5px 5px;
+    margin-top: -30px;
+  }
+
   .u-section-border--bottom {
     border-bottom: 1px solid $c-neutral-black;
   }
 
   .u-section-border--top {
     border-top: 1px solid $c-neutral-black;
+  }
+
+  .u-content-collapse {
+    height: 150px;
+    overflow: hidden;
+  }
+
+  .u-content-expand {
+    height: auto;
   }
 
   @media (min-width: $bootstrap-md-width) {

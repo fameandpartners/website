@@ -356,12 +356,17 @@ FameAndPartners::Application.routes.draw do
 
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
+
+      post 'line_items/:id' => 'products#move_to_cart'
     end
 
     ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
+    get '/sample-sale' => 'products/flashSale#index'
+
+    get '/sample-sale/:id' => 'products/flashSale#show'
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
@@ -472,6 +477,9 @@ FameAndPartners::Application.routes.draw do
     get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
     resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+
+    get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
+    resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
 
     get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
     resource 'micro-influencer', as: 'micro_influencer', only: [:create]
@@ -624,6 +632,10 @@ FameAndPartners::Application.routes.draw do
       get 'orders' => 'returns_processes#index'
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
+
+      scope '/user_cart' do
+        post 'products' => 'products#create'
+      end
 
       # user profile
       get 'profile' => 'profiles#show'

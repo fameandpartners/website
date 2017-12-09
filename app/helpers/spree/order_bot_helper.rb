@@ -8,9 +8,12 @@ module Spree
     end
 
     def create_new_order_by_factory(order)
-      factory_line_items = separate_line_items_by_factory(order.line_items)
-      making_time_line_items = separate_line_items_by_make_time(factory_line_items)
-      making_time_line_items.each_key { |key| create_new_order(order, making_time_line_items[key])}
+      non_sale_order_line_items = order.line_items.select{|x| x.stock.nil?}
+      unless non_sale_order_line_items.empty?
+        factory_line_items = separate_line_items_by_factory(non_sale_order_line_items)
+        making_time_line_items = separate_line_items_by_make_time(factory_line_items)
+        making_time_line_items.each_key { |key| create_new_order(order, making_time_line_items[key])}
+      end
     end
 
     def separate_line_items_by_make_time(line_items_hash)

@@ -50,7 +50,12 @@ module Orders
       end
 
       def price
-        line['price'].to_f + line['personalization_price'].to_f + line['making_options_price'].to_f
+        li = Spree::LineItem.find(line['line_item_id'].to_i)
+        if !li&.stock.nil?
+          return line['price'].to_f + line['making_options_price'].to_f
+        else
+          return line['price'].to_f + line['personalization_price'].to_f + line['making_options_price'].to_f
+        end
       end
 
       def color
@@ -104,7 +109,7 @@ module Orders
       end
 
       def product_number
-        global_sku.id
+        Spree::LineItem.find_by_id(line['line_item_id'].to_i)&.upc || global_sku&.id
       end
 
       def sku
@@ -122,8 +127,14 @@ module Orders
       end
 
       def global_sku
-        lip = Orders::LineItemPresenter.new(Spree::LineItem.find(line['line_item_id']))
-        GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
+        li = Spree::LineItem.find_by_id(line['line_item_id'].to_i)
+        lip = nil
+        if li
+          lip = Orders::LineItemPresenter.new(li)
+          GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
+        else
+          nil
+        end
       end
 
       def variant_sku

@@ -125,11 +125,6 @@
 // campaigns
 //= require partials/fitgau_reminder
 
-//--------------------------------
-// Header
-//--------------------------------
-//= require partials/header
-//= require partials/simplified_nav
 
 //--------------------------------
 // Hero Tile Carousel

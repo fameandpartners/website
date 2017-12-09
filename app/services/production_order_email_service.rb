@@ -12,7 +12,7 @@ class ProductionOrderEmailService
   end
 
   def trigger_email(order, factory, items)
-    FactoryPurchaseOrderEmail.new(order, factory, items).deliver
+    FactoryPurchaseOrderEmail.new(order, factory, items.select{|item| item.stock.nil?}).deliver #filter out sample sale items
   end
 
   class FactoryPurchaseOrderEmail
@@ -39,6 +39,7 @@ class ProductionOrderEmailService
       user ||= Spree::User.where(email: order_presenter.email).first
 
       line_items = order_presenter.extract_line_items
+
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',

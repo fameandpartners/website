@@ -77,6 +77,7 @@ module Guest
                              }, :without_protection => true)
       order.next
       if order.complete?
+        OrderBotWorker.perform_async(order.id)
         flash.notice = Spree.t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
         session[:successfully_ordered] = true

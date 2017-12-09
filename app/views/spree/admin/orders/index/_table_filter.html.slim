@@ -87,9 +87,14 @@
           = t(:show_only_unfulfilled_orders)
       .checkbox
         label
+          = f.check_box :sample_sale_only, {:checked => @sample_only}, '1', ''
+          '
+          = 'Show Only Sample Sale Items'
+      .checkbox
+        label
           = f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', ''
           '
-          = t(:show_only_complete_orders)
+          = t(:show_only_complete_orders)    
       .checkbox
         label
           = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''
