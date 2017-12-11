@@ -133,8 +133,8 @@ gem 'puma'
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
-  gem 'sass', '~> 3.4.9'
-  gem 'sass-rails', '~> 3.2.6'
+  gem 'sass', '3.1.21'
+  gem 'sass-rails', '3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
