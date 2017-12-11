@@ -70,6 +70,10 @@ module Orders
         Repositories::LineItemImages.new(line_item: item).read(color_id: personalization&.color_id)
       end
 
+      def sample_sale?
+         !item.stock.nil?
+      end
+
       def personalizations?
         personalization.present?
       end

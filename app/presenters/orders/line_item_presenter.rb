@@ -67,7 +67,7 @@ module Orders
     end
 
     def product_number
-      global_sku.id
+      item.upc || global_sku.id
     end
 
     # this badly named method refers to ship_by_date for use by our product manufacturing

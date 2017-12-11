@@ -39,9 +39,6 @@
           <% if @cart.delivery_delay: %>
             <p>We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</p>
           <% end %>
-          <p>
-            <span class="link-underline-lighter">Easy returns</span> within 30 days
-          </p>
         </div>
       </div>
     </div>

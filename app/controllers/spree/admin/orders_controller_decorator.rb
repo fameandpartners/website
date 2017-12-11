@@ -42,16 +42,19 @@ module Spree
           params[:q][:created_at_lt] = Time.zone.parse(params[:q][:created_at_lt]).end_of_day rescue ""
         end
 
+        @sample_only = params[:q][:sample_sale_only].present?
+        params[:q].delete(:sample_sale_only)
+
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
-
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
         ##################### End Original Spree ##############################
 
         if params[:format] != 'csv'
+
           @orders = @search.result(distinct: true).includes(
             :user => [],
             :shipments => {:inventory_units => :variant},
@@ -63,6 +66,16 @@ module Spree
         else
           @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
         end
+
+        if  @sample_only
+          @orders = @orders.select {|order| order.contains_sample_sale_item?}
+          @orders = Kaminari::PaginatableArray.new(@orders,
+                          {
+                          :limit => 50,
+                          :offset => 0,
+                          :total_count => @orders.count
+                    })
+        end 
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt

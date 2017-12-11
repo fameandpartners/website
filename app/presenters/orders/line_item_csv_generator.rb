@@ -40,6 +40,7 @@ module Orders
           csv << [
             line.order_state,
             line.order_number,
+            lip.sample_sale?,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
@@ -80,6 +81,7 @@ module Orders
       [
         :order_state,
         :order_number,
+        :sample_sale_item,
         :line_item,
         :total_items,
         :completed_at,
