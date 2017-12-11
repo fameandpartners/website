@@ -18,6 +18,7 @@ const defaultProps = {
   wrapperClassName: '',
   checkboxStatus: false,
   showForm: false,
+  disable: false,
 };
 
 class Checkbox extends React.Component {
@@ -36,6 +37,7 @@ class Checkbox extends React.Component {
       wrapperClassName,
       checkboxStatus,
       showForm,
+      disable,
     } = this.props;
     return (
       <div>
@@ -51,6 +53,7 @@ class Checkbox extends React.Component {
                 className={checkboxStatus ? 'Checkbox Checkbox--active' : 'Checkbox'}
                 id={id}
                 onClick={this.handleChange}
+                disabled={disable ? 'disabled' : null}
               />
               <label htmlFor={id} />
             </div>

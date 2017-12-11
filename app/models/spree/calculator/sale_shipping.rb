@@ -4,7 +4,7 @@ require_dependency 'spree/sale'
 module Spree
   class Calculator::SaleShipping < Calculator
 
-    preference :sale_products_shipping_amount,    :decimal, :default => 11.70
+    preference :sale_products_shipping_amount,    :decimal, :default => 0
     preference :normal_products_shipping_amount,  :decimal, :default => 0
     preference :international_shipping_fee,       :decimal, :default => 30.0
 
@@ -17,7 +17,7 @@ module Spree
 
     def compute(object)
       shipping_amount = if has_items_in_sale?(object) || promotion_require_shipping_charge?(object)
-                          self.preferred_sale_products_shipping_amount
+                          0
                         else
                           self.preferred_normal_products_shipping_amount
                         end

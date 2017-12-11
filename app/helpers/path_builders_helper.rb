@@ -53,6 +53,13 @@ module PathBuildersHelper
   # product should be Tire::Results::Item ( color variant )
   # or respond to
   #  name - id
+  def line_item_path(line_item_id, options = {})
+    site_version_prefix = self.url_options[:site_version]
+    
+    "#{site_version_prefix}/sample-sale/#{line_item_id}"
+
+  end
+
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version] ? self.url_options[:site_version] : ''
     product_type        = options.delete(:product_type) || 'dress'
