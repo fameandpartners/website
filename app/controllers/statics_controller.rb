@@ -17,6 +17,7 @@ class StaticsController < ApplicationController
 
   def faqs
     @optimizely_opt_in = true
+    @vwo_in = true
   end
 
   def bridesmaid_lp

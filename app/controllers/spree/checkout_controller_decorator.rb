@@ -24,7 +24,7 @@ Spree::CheckoutController.class_eval do
   }
 
   def edit
-    @optimizely_opt_in = true
+    @vwo_opt_in = true
     prepare_order
     find_payment_methods
     update_line_item_delivery
@@ -157,7 +157,7 @@ Spree::CheckoutController.class_eval do
         end
 
         OrderBotWorker.perform_async(@order.id)
-       
+
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }

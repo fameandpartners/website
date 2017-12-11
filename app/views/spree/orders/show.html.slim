@@ -16,49 +16,6 @@ ruby:
     '$-' + order.delivery_discount[1..-1]
   end
 
-javascript:
-  $(function() {
-    // Optimizely stuff
-
-    var hasReturnDiscount = #{ raw has_return_discount? };
-    var hasReturnInsurance = #{ raw has_return_insurance? };
-
-    window.optimizelyAssist = window.optimizelyAssist || {};
-
-    window.optimizelyAssist.trackingCall = function() {
-      var returnType = $('#return_type').val();
-
-      // ensures the optimizely object is defined globally
-      window['optimizely'] = window['optimizely'] || [];
-
-      if (returnType == 'A') {
-        if (hasReturnDiscount) {
-          window.optimizely.push(["trackEvent", "customer_added__return_discount"]);
-        } else {
-          window.optimizely.push(["trackEvent", "customer_no__return_discount"]);
-        }
-      } else if (returnType == 'B') {
-        if (hasReturnInsurance) {
-          window.optimizely.push(["trackEvent", "customer_added__return_insurance"]);
-        } else {
-          window.optimizely.push(["trackEvent", "customer_no__return_insurance"]);
-        }
-      } else {
-        window.optimizely.push(["trackEvent", "customer__control_option"]);
-      }
-    }
-
-    window.optimizelyAssist.bestSellersConversionCall = function(variant) {
-      if (sessionStorage.getItem('bestSellersVisited')) {
-        if (variant == 'control') {
-          window.optimizely.push(["trackEvent", "conversion_bs__control"]);
-        } else if (variant == 'test') {
-          window.optimizely.push(["trackEvent", "conversion_bs__test"]);
-        }
-      }
-    }
-  });
-
 section.order-details
   .page-title.default.order
     .container
