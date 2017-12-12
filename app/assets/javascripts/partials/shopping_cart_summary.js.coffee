@@ -76,7 +76,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   optInReminderModal: () ->
     if (!sessionStorage.getItem('returnModalShown'))
-      new window.page.ReturnsOptimizelyModal(@whichReturnType())
+      new window.page.FlexibleReturnsModal(@whichReturnType())
       $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
       sessionStorage.setItem('returnModalShown', true)
 
@@ -111,7 +111,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   openLearnMoreHandler: (e) ->
     e.preventDefault()
-    new window.page.ReturnsOptimizelyModal(e.currentTarget.id)
+    new window.page.FlexibleReturnsModal(e.currentTarget.id)
     $buttonClassToHide = '.vex-dialog-button-primary'
     $($buttonClassToHide).hide()
 

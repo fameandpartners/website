@@ -35,9 +35,7 @@ section.order-details
             .order-content
               .row
                 .order-items
-                  - order.line_items.each do |line_item|
-                    - unless line_item.style_name == 'RETURN_INSURANCE'
-                      = render 'spree/orders/show/order_item', line_item: line_item
+
               .row
                 .order-total.col-md-9.col-md-offset-3
 
@@ -46,15 +44,10 @@ section.order-details
                     / TODO: If price is integer remove decimals
                     .amount.col-md-6 #{order.shipment.display_amount}
 
-                  - if has_return_insurance?
-                    .row.discount-info
-                      .label.col-md-6 Returns Deposit
-                      .amount.col-md-6 $25.00
+                  .row.discount-info
+                    .label.col-md-6 Returns Deposit
+                    .amount.col-md-6 $25.00
 
-                  - if has_return_discount?
-                    .row.discount-info
-                      .label.col-md-6 Returns Savings (10%)
-                      .amount.col-md-6 #{formatted_delivery_discount}
 
                   .row.discount-info
                     .label.col-md-6 Discount
@@ -159,7 +152,7 @@ section.order-details
                   | Our return policy
                   i.link-icon.fa.fa-chevron-right
 
-= hidden_field_tag :return_type, 'C'
+= hidden_field_tag :return_type, 'B'
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
