@@ -216,15 +216,37 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   completeShoppingSpree() {
-    this.cookies.remove("shopping_spree_name");
-    this.cookies.remove("shopping_spree_email");
-    this.cookies.remove("shopping_spree_id");
+    this.cookies.remove("shopping_spree_name",
+      {
+        path: '/',
+        secure: false
+      }
+    );
+    this.cookies.remove("shopping_spree_email",
+      {
+        path: '/',
+        secure: false
+      }
+    );
+    this.cookies.remove("shopping_spree_id",
+      {
+        path: '/',
+        secure: false
+      }
+    );
+    this.cookies.remove("shopping_spree_icon",
+      {
+        path: '/',
+        secure: false
+      }
+    );
 
     this.setState({
       display: "none",
       showExitModal: false,
     });
     this.hideBanner();
+    win.location.reload();
   }
 
   doneShoppingSpree() {
@@ -248,6 +270,10 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   doneSharing() {
+    const {
+      isPDP,
+    } = this.props;
+
     let bodyEl = document.getElementsByTagName("body")[0];
     bodyEl.style.overflow = 'auto';
 
@@ -255,6 +281,10 @@ export default class ShoppingSpree extends FirebaseComponent {
       display: "chat",
       minimize: false,
     });
+
+    if (isPDP) {
+      win.location.reload();
+    }
   }
 
   changeDisplayStatus(display) {
@@ -406,6 +436,7 @@ export default class ShoppingSpree extends FirebaseComponent {
 ShoppingSpree.propTypes = {
   firebaseAPI: PropTypes.string.isRequired,
   firebaseDatabase: PropTypes.string.isRequired,
+  isPDP: PropTypes.bool.isRequired,
 };
 
 ShoppingSpree.defaultProps = {
@@ -413,4 +444,5 @@ ShoppingSpree.defaultProps = {
   icon: 0,
   email: null,
   firebaseId: null,
+  isPDP: false,
 };
