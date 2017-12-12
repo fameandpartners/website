@@ -248,6 +248,9 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   doneSharing() {
+    let bodyEl = document.getElementsByTagName("body")[0];
+    bodyEl.style.overflow = 'auto';
+
     this.setState({
       display: "chat",
       minimize: false,

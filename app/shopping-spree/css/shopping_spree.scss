@@ -1,3 +1,4 @@
+@import "shopping_spree_icons";
 @import "shopping_spree_text_message";
 @import "shopping_spree_joined_message";
 @import "shopping_spree_dress_message";
@@ -389,7 +390,7 @@ $chat_bar_header_height: 22px;
 @media (min-width: 767px) {
   .shopping-spree-wrapper {
     &.collapsed {
-      width: 250px;
+      width: 320px;
       min-width: inherit;
       bottom: 10px;
       right: 10px;

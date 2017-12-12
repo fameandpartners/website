@@ -122,9 +122,8 @@ export default class Drawer extends React.Component {
                   onClick={this.handleToggle}
                 >
                   <div className="col-xs-2">
-                    <span>Minimize</span>
                     <i
-                      className="toggle-btn down-caret"
+                      className="toggle-btn CaretIcon--down"
                       onClick={this.handleToggle}
                     />
                   </div>

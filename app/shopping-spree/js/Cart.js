@@ -184,7 +184,7 @@ export default class Cart extends FirebaseComponent {
             >
               <div className="left-caret" />
               <div className="back-to-spree-text shopping-spree-headline">
-                Back to The Social Experience
+                Back
               </div>
             </div>
             <div className="col-xs-4 col-md-4 text-center">Your Bag</div>
