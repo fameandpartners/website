@@ -63,10 +63,30 @@ module Contentful
       }
 
       category_tiles = parent_container.category_tiles_container.map do |item|
+
+        # Edits CTA
+        tile_cta_link = (item.respond_to? :link) ? item.link : nil
+        tile_cta_image_url = (item.image.respond_to? :image_url) ? item.image.image_url : nil
+        tile_cta_array = (item.respond_to? :title_overlay) ? item.title_overlay.split('||') : nil
+
+        if tile_cta_array.nil?
+          tile_cta_first = nil
+          tile_cta_last = nil
+        else
+          if tile_cta_array.size < 2
+            tile_cta_first = nil
+            tile_cta_last = tile_cta_array[0]
+          else
+            tile_cta_first = tile_cta_array[0]
+            tile_cta_last = tile_cta_array[1]
+          end
+        end
+
         {
-          link: item.link,
-          title: item.title_overlay,
-          image: item.image.image_url
+          link: tile_cta_link,
+          tile_cta_first: tile_cta_first,
+          tile_cta_last: tile_cta_last,
+          image: tile_cta_image_url
         }
       end
 
@@ -174,6 +194,14 @@ module Contentful
           mobile_image: mobile_image,
           tile_url: tile_url,
           tile_link_target: tile_link_target
+        }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--category-block')
+        tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          tile_url: tile_url,
         }
       end
     end
@@ -310,10 +338,12 @@ module Contentful
 
       row_tiles = parent_container.rows_container.map do |item|
 
+        item_id = item.content_type.id
         lg_item = (item.respond_to? :editorial_container) ? jsonify_large_lp_container(item.editorial_container) : nil
         lg_items = (item.respond_to? :editorials_container) ? map_editorials(item.editorials_container) : nil
         md_item = (item.respond_to? :header_container) ? jsonify_medium_lp_container(item.header_container) : nil
         sm_items = (item.respond_to? :pids) ? item.pids : nil
+        content_tiles = (item.respond_to? :content_tiles) ? map_editorials(item.content_tiles) : nil
         email_text = (item.respond_to? :email_header_text) ? item.email_header_text : nil
         button_label = (item.respond_to? :button_label) ? item.button_label : nil
         relative_url = (item.respond_to? :relative_url) ? item.relative_url : nil
@@ -337,11 +367,15 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Add extra padding between rows
+        padding_class = (item.respond_to? :padding_extra) ? ("u-padding-top--" + item.padding_extra) : nil
+
         {
-          id: item.content_type.id,
+          id: item_id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
+          content_tiles: content_tiles,
           email_text: email_text,
           button_label: button_label,
           relative_url: relative_url,
@@ -352,7 +386,8 @@ module Contentful
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
-          mobile_image: mobile_image
+          mobile_image: mobile_image,
+          padding_class: padding_class
         }
       end
 
@@ -366,6 +401,10 @@ module Contentful
       # Check if the LP requests an extra spacing between top navigation and content
       page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
 
+      if page_white_spacing_top
+        page_white_spacing_top_class = 'app-container--top-margin'
+      end
+
       page_url = parent_container.relative_url
       {
         page_url: page_url,
@@ -375,7 +414,7 @@ module Contentful
         meta_description: meta_description,
         site_version: site_version.downcase,
         site_version_url_to_redirect: site_version_url_to_redirect,
-        page_white_spacing_top: page_white_spacing_top
+        page_white_spacing_top_class: page_white_spacing_top_class
       }
     end
 

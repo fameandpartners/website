@@ -104,7 +104,7 @@ module OrderBot
 
 		def per_item_shipping_adjustment(line_items, order)
 			shipping = order&.adjustments&.shipping&.inject(0){|sum, item| sum + item.amount.abs}
-			shipping/line_items.count
+			(shipping/order.line_items.count) *line_items.count
 		end
 
 		def per_item_adjustment(line_items, order)

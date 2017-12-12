@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   include Concerns::AutomaticDiscount
   include Concerns::Moodboards
   include Concerns::Errors
+  include Concerns::Webpack
 
   # Marketing related concerns
   include Marketing::Gtm::Controller::Container
@@ -40,7 +41,8 @@ class ApplicationController < ActionController::Base
                 :get_user_type,
                 :serialize_user,
                 :serialized_current_user,
-                :landing_page
+                :landing_page,
+                :webpack_assets
 
   def count_competition_participants
     cpt = params[:cpt]

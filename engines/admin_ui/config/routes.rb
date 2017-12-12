@@ -81,7 +81,11 @@ AdminUi::Engine.routes.draw do
   end
 
   namespace :customisation do
-    resources :customisation_values
+    resources :customisation_values do
+      collection do
+        get 'option_values/:product_id' => 'customisation_values#option_values'
+      end
+    end
     resources :variants
     resources :render3d_images do
       collection do

@@ -124,7 +124,6 @@
     }
 
     .btn-toggle {
-      @extend .icon-arrow-right;
       @include transform(rotate(-90deg));
       float: right;
       top: 25px;

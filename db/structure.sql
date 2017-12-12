@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1326,7 +1326,6 @@ CREATE TABLE item_return_labels (
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    shipped boolean,
     barcode character varying(255)
 );
 
@@ -2632,28 +2631,6 @@ ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
 
 
 --
--- Name: relbloat; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW relbloat AS
- SELECT pg_namespace.nspname,
-    pg_class.relname,
-    pg_class.reltuples,
-    pg_class.relpages,
-    rowwidths.avgwidth,
-    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
-    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
-    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
-   FROM ((( SELECT pg_statistic.starelid,
-            sum(pg_statistic.stawidth) AS avgwidth
-           FROM pg_statistic
-          GROUP BY pg_statistic.starelid) rowwidths
-     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
-     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
-  WHERE (pg_class.relpages > 1);
-
-
---
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3395,7 +3372,12 @@ CREATE TABLE spree_line_items (
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
     old_price numeric(8,2),
-    delivery_date character varying(255)
+    delivery_date character varying(255),
+    stock boolean,
+    color character varying(255),
+    size character varying(255),
+    length character varying(255),
+    upc character varying(255)
 );
 
 
@@ -3651,7 +3633,7 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean DEFAULT false NOT NULL,
+    orderbot_synced boolean,
     return_type character varying(255),
     autorefundable boolean
 );
@@ -9767,8 +9749,12 @@ INSERT INTO schema_migrations (version) VALUES ('20171013172806');
 
 INSERT INTO schema_migrations (version) VALUES ('20171016230612');
 
-INSERT INTO schema_migrations (version) VALUES ('20171016232403');
-
 INSERT INTO schema_migrations (version) VALUES ('20171101200751');
 
 INSERT INTO schema_migrations (version) VALUES ('20171114001834');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127052028');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127212333');
+
+INSERT INTO schema_migrations (version) VALUES ('20171207195245');

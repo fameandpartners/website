@@ -31,15 +31,21 @@ module Orders
         orders.map do |order|
           line.set_line order.attributes
 
-          lip = Orders::LineItemPresenter.new(Spree::LineItem.find(order.attributes["line_item_id"].to_i))
+          li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
+          lip = nil
+          if li
+            lip = Orders::LineItemPresenter.new(li)
+          end
+
           csv << [
             line.order_state,
             line.order_number,
+            lip.sample_sale?,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
             line.fast_making,
-            lip.projected_delivery_date.to_date,
+            lip&.projected_delivery_date&.to_date,
             # line.delivery_date,
             line.tracking_number,
             line.shipment_date,
@@ -75,6 +81,7 @@ module Orders
       [
         :order_state,
         :order_number,
+        :sample_sale_item,
         :line_item,
         :total_items,
         :completed_at,

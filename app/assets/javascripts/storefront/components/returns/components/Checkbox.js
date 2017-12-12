@@ -1,25 +1,27 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  wrapperClassName: PropTypes.string,
-  checkboxStatus: PropTypes.bool,
-  showForm: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-};
+// const propTypes = {
+//   id: PropTypes.oneOfType([
+//     PropTypes.string,
+//     PropTypes.number,
+//   ]),
+//   wrapperClassName: PropTypes.string,
+//   checkboxStatus: PropTypes.bool,
+//   showForm: PropTypes.bool,
+//   onChange: PropTypes.func.isRequired,
+// };
 
 const defaultProps = {
   id: '',
   wrapperClassName: '',
   checkboxStatus: false,
   showForm: false,
+  disable: false,
 };
 
-class Checkbox extends Component {
+class Checkbox extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -35,6 +37,7 @@ class Checkbox extends Component {
       wrapperClassName,
       checkboxStatus,
       showForm,
+      disable,
     } = this.props;
     return (
       <div>
@@ -50,6 +53,7 @@ class Checkbox extends Component {
                 className={checkboxStatus ? 'Checkbox Checkbox--active' : 'Checkbox'}
                 id={id}
                 onClick={this.handleChange}
+                disabled={disable ? 'disabled' : null}
               />
               <label htmlFor={id} />
             </div>
@@ -61,6 +65,6 @@ class Checkbox extends Component {
   }
 }
 
-Checkbox.propTypes = propTypes;
+// Checkbox.propTypes = propTypes;
 Checkbox.defaultProps = defaultProps;
 export default Checkbox;

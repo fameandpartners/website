@@ -201,7 +201,9 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      ProductionOrderEmailService.new(self).deliver
+      if self.line_items.any? {|item| item.stock.nil?}
+        ProductionOrderEmailService.new(self).deliver
+      end
     rescue Exception => e
       log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")
@@ -365,6 +367,10 @@ Spree::Order.class_eval do
     end
   end
 
+  def contains_sample_sale_item?
+    return self.line_items.any? {|item| !item.stock.nil?}
+  end
+
   def return_eligible_AC?
     self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
   end
@@ -376,10 +382,10 @@ Spree::Order.class_eval do
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
-    json['final_return_by_date'] = (delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
+    json['final_return_by_date'] = (delivery_policy.delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.return_eligible_B? || self.return_eligible_AC?
+    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
     json
   end
 

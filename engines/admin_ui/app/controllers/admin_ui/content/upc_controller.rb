@@ -16,6 +16,9 @@ module AdminUi
         @sizes_empty = true if params[:sku_upc][:sizes].blank?
         if @form.validate( params[:sku_upc] ) && params[:sku_upc][:sizes].present?
           @results = {}
+          product = @form.selected_product
+          customizations = @form.selected_customizations
+          # Save form to access
           @form.save do |hash|
             ensure_color_exists(
               hash[:color_name].parameterize,
@@ -23,14 +26,16 @@ module AdminUi
             )
             # gather upc numbers for each size combo
             hash[:sizes].each do |size|
-              upc = find_or_create_sku(
-                hash[:style_number].downcase,
-                hash[:style_name].upcase,
+              sku = find_or_create_sku(
+                product.sku.squish.downcase,
+                product.name.squish.upcase,
                 hash[:height].upcase,
                 hash[:color_name].parameterize,
-                size
-              ).upc
-              @results[size] = upc
+                size,
+                customizations
+              )
+              # collect all the upc codes per size
+              @results[size] = sku.upc
             end
           end
         end
@@ -45,13 +50,13 @@ module AdminUi
         option_type.option_values.where( {name: color_name} ).first_or_create( {presentation: presentation_name} )
       end
 
-      def find_or_create_sku( style_number, style_name, height, color_name, size )
+      def find_or_create_sku( style_number, style_name, height, color_name, size, customizations )
         sku_value = Skus::Generator.new(
           style_number: style_number,
           size: size,
           color_id: Spree::OptionValue.where(name: color_name).first.id,
           height: height,
-          customization_value_ids: []
+          customization_value_ids: customizations.collect(&:id)
         ).call
         sku = GlobalSku.find_by_sku( sku_value )
         # Create sku if not found
@@ -62,7 +67,7 @@ module AdminUi
             size: size,
             color_name: color_name,
             height: height,
-            customizations: []
+            customizations: customizations
           ).call
         end
 

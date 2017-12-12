@@ -48,7 +48,7 @@ Spree::LineItem.class_eval do
       total_price += making_options_price_adjustment
     end
 
-    if personalization.present?
+    if personalization.present? && self.stock.nil?
       total_price += personalization.price
     end
 

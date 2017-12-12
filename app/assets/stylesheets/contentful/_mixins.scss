@@ -7,6 +7,10 @@
     @media (max-width: $desktop-bootstrap-min - 1px) { @content; }
   }
 
+  @else if $class == desktop-bootstrap-min {
+    @media (min-width: $desktop-bootstrap-min) { @content; }
+  }
+
   @else if $class == desktop {
     @media (min-width: $desktop) { @content; }
   }
@@ -24,7 +28,7 @@
   }
 
   @else {
-    @warn "Breakpoint mixin supports: tablet, tablet-bootstrap-max, desktop, widescreen, fullhd, mobile-max";
+    @warn "Breakpoint mixin supports: tablet, tablet-bootstrap-max, desktop-bootstrap-min, desktop, widescreen, fullhd, mobile-max";
   }
 
 }
