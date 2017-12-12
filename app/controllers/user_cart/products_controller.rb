@@ -109,7 +109,7 @@ class UserCart::ProductsController < UserCart::BaseController
       end
       @user_cart = user_cart_resource.read
       data = add_analytics_labels(@user_cart.serialize)
-     
+
 
       respond_with(@user_cart) do |format|
         format.json   {
@@ -157,12 +157,24 @@ class UserCart::ProductsController < UserCart::BaseController
       )
       promotion_service.reapply
     end
+    if current_promotion.present? && current_promotion.code.include?('shopping_spree')
+      order = current_order
+      code = current_promotion.code
+      info = code.split('_')
+
+      updated_count = info[2].to_i - 1
+      guid = info[1].split(' ')[1]
+
+      create_coupon_if_from_shopping_spree(order, current_order.total, updated_count, guid)
+    end
   end
 
 
-  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count )
-    guid = SecureRandom.uuid.to_s
-    promotion_service = UserCart::PromotionsService.new( order: order, code:  "SHOPPING_SPREE #{guid}" )
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, existing_guid )
+    guid = existing_guid || SecureRandom.uuid.to_s
+
+    # Recreating Shopping Spree GUID to reflect total
+    promotion_service = UserCart::PromotionsService.new( order: order, code:  "shopping_spree #{guid}_#{shopping_spree_item_count}" )
     promotion_service.apply_shopping_spree_discount( shopping_spree_total, shopping_spree_item_count )
   end
 
