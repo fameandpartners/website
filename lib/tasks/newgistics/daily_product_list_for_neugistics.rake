@@ -12,6 +12,7 @@ namespace :newgistics do
       scheduler.name = 'daily_products'
       scheduler.save
     end
+    current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
     line_items = Spree::LineItem.where('updated_at >= ?', scheduler.last_successful_run)
                                 .select { |li| li.order.state = 'complete' } # get line Items for completed orders since last run
@@ -41,7 +42,7 @@ namespace :newgistics do
     Net::SFTP.start(configatron.newgistics.ftp_uri,
                     configatron.newgistics.ftp_user,
                     password: configatron.newgistics.ftp_password) do |sftp|
-      sftp.upload!(temp_file, "\\FameandPartners\\input\\products\\#{Date.today}.csv")
+      sftp.upload!(temp_file, "FameandPartners/input/products/#{Date.today}.csv")
     end
   end
 end

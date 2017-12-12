@@ -12,7 +12,8 @@ namespace :newgistics do
       scheduler.name = 'daily_orders'
       scheduler.save
     end
-
+    current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    
     orders = Spree::Order.where("completed_at >= ? AND state = 'complete'", scheduler.last_successful_run) # get complete orders
 
     generate_csv(orders)
@@ -39,7 +40,7 @@ namespace :newgistics do
     Net::SFTP.start(configatron.newgistics.ftp_uri,
                     configatron.newgistics.ftp_user,
                     password: configatron.newgistics.ftp_password) do |sftp|
-      sftp.upload!(temp_file, "\\FameandPartners\\input\\shipments\\#{Date.today.to_s}.csv")
+      sftp.upload!(temp_file, "FameandPartners/input/shipments/#{Date.today.to_s}.csv")
     end
   end
 

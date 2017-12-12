@@ -92,7 +92,8 @@ namespace :newgistics do
       scheduler.name = 'daily_returns'
       scheduler.save
     end
-
+    current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    
     return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
 
     generate_csv(return_request_items)
@@ -121,7 +122,7 @@ namespace :newgistics do
     Net::SFTP.start(configatron.newgistics.ftp_uri,
                     configatron.newgistics.ftp_user,
                     password: configatron.newgistics.ftp_password) do |sftp|
-    sftp.upload!(temp_file, "\\FameandPartners\\input\\external shipments\\#{Date.today.to_s}.csv")
+    sftp.upload!(temp_file, "FameandPartners/input/external shipments/#{Date.today.to_s}.csv")
     end
   end
 end
