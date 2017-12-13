@@ -1,31 +1,32 @@
+/* eslint-disable */
 //* ****
 // ** Select is an abstract component for Fame and Partners dropdowns
 // ** It requires an array to iterate over and build the options for the dropdown
 // ** Format [{id: 0, name: 'Option One', active: false}, {id: 1, name: 'Option Two', active: false}, ... etc]
 //* ****
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import autobind from 'auto-bind';
 import keys from '../../constants/keys';
 import { trackEvent } from '../../libs/gaTracking';
 import { openHeightSelectEvent } from '../../libs/gaEventObjects';
 
-const propTypes = {
-  id: PropTypes.string,
-  label: PropTypes.string,
-  formId: PropTypes.string,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  focusOnError: PropTypes.bool,
-  error: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    name: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    displayText: PropTypes.string,
-    meta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    active: PropTypes.bool,
-  })),
-};
+// const propTypes = {
+//   id: PropTypes.string,
+//   label: PropTypes.string,
+//   formId: PropTypes.string,
+//   onChange: PropTypes.func,
+//   className: PropTypes.string,
+//   focusOnError: PropTypes.bool,
+//   error: PropTypes.bool,
+//   options: PropTypes.arrayOf(PropTypes.shape({
+//     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//     name: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//     displayText: PropTypes.string,
+//     meta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//     active: PropTypes.bool,
+//   })),
+// };
 
 const defaultProps = {
   focusOnError: false,
@@ -33,7 +34,7 @@ const defaultProps = {
   options: [],
 };
 
-class Select extends Component {
+class Select extends React.Component {
 
   constructor(props) {
     super(props);
@@ -192,7 +193,7 @@ class Select extends Component {
   }
 }
 
-Select.propTypes = propTypes;
+// Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
 export default Select;

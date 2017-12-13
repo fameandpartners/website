@@ -7,28 +7,34 @@
   <head data-hook="inside_head">
 
     <%= stylesheet_link_tag 'application_contentful' %>
+    <%= stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}" %>
 
     <%= render 'layouts/contentful/head' %>
 
   </head>
   <body>
 
-    <%= render 'layouts/redesign/header' %>
+    <div id="react-blanket" class="__react_root__"></div>
+    <div id="react-menu" class="__react_root__"></div>
+    <div id="react-cart" class="__react_root__"></div>
 
-    <% add_spacing_top_content_class = (@landing_page_container[:page_white_spacing_top]) ? 'app-container--top-margin' : nil %>
-    <div class="app-container <%= add_spacing_top_content_class %>">
+    <div>
       <% unless disable_notices? %>
         <%= render 'layouts/redesign/notices' %>
       <% end %>
+
+      <div id="react-header" class="__react_root__"></div>
       <%= yield %>
     </div>
 
+    <div id="react-footer" class="__react_root__"></div>
+
+
     <%= render 'google_tag_manager/base' %>
-    <%= render 'layouts/redesign/footer' %>
-    <%= render 'layouts/redesign/shopping_bag' %>
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
+    <%= javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}" %>
 
   </body>
 </html>

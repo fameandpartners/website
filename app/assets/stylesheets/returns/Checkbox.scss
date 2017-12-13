@@ -56,3 +56,7 @@
 .Checkbox:checked + label:before, .Checkbox--active + label:before {
   background: $c-black;
 }
+.Checkbox:disabled + label:before {
+  background: $c-light-gray;
+}
+

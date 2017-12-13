@@ -72,8 +72,8 @@
   }
 
   .section-style-icon .cta-link-center-padding {
-    display: block;
-    max-width: 50%;
+    display: table;
+    min-width: 50%;
     margin: 0 auto;
     text-align: center;
   }

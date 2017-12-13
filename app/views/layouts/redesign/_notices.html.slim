@@ -9,15 +9,15 @@
 
 // If cny_delivery_delays feature flag is OFF: we can show other banners.
 - else
-  // TEMPORARY: Sale banner for the "BUY 2, GET 1" campaign
-  - if custom_sale_banner_active?
-    #sale-banner.alert-sale.custom-sale-banner-top.custom-sale-banner-top--salmon role="alert"
+  // Sample sale campaign
+  - if custom_sale_banner_active? && current_site_version.is_usa?
+    #sale-banner.alert-sale.custom-sale-banner-top role="alert" style="background-color: #fe4e75; color: #ffffff"
       .outer-wrap
           .inner-wrap
             .title-wrap
               .title
-                = link_to "/holiday-party-survival-kit"
-                  | Create your Holiday Party Survival Kit - Buy 2, Get 1 Free. Use code KIT342
+                = link_to "/sample-sale"
+                  | SHOP THE 1ST ANNUAL FAME AND PARTNERS SAMPLE SALE - UP TO 40% OFF - sizes 0-22!
 
   // Temporary: Price Drop (AU-only) campaign
   - if price_drop_au_active?

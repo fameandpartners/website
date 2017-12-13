@@ -37,11 +37,11 @@
                   >
                     <label for="delivery_time_normal_<%= i %>">
                       <div class="delivery-time-label-desktop visible-lg visible-md visible-sm">
-                        Deliver Standard: <span class="delivered-in-wrapper">Delivered in <%= product.delivery_period %></span>
+                        Standard: <span class="delivered-in-wrapper">Estimated Delivery in <%= product.delivery_period %></span>
                       </div>
                       <div class="delivery-time-label-mobile visible-xs">
-                        Deliver Standard: <span class="price-wrapper">FREE</span>
-                        <div class="delivered-in-wrapper">- Delivered in <%= product.delivery_period %></div>
+                        Standard: <span class="price-wrapper">FREE</span>
+                        <div class="delivered-in-wrapper">- Estimated Delivery in <%= product.delivery_period %></div>
                       </div>
                     </label>
                     <div class="price-wrapper hidden-xs">FREE</div>
