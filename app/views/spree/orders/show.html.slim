@@ -35,7 +35,9 @@ section.order-details
             .order-content
               .row
                 .order-items
-
+                  - order.line_items.each do |line_item|
+                    - unless line_item.style_name == 'RETURN_INSURANCE'
+                      = render 'spree/orders/show/order_item', line_item: line_item
               .row
                 .order-total.col-md-9.col-md-offset-3
 
