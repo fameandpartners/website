@@ -24,7 +24,6 @@ Spree::CheckoutController.class_eval do
   }
 
   def edit
-    @vwo_opt_in = false
     prepare_order
     find_payment_methods
     update_line_item_delivery
