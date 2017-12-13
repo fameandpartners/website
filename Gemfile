@@ -134,7 +134,7 @@ gem 'puma'
 
 group :assets do
   gem 'sprockets', '2.2.2'
-  gem 'sass', '3.2.6'
+  gem 'sass', '3.2.19'
   gem 'sass-rails', '3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'coffee-script-source', '~> 1.8.0'
