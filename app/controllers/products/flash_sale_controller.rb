@@ -14,7 +14,7 @@ class Products::FlashSaleController < Products::BaseController
       redirect_to '/'
     else
       @filter = Products::CollectionFilter.read
-      sql_clause = "(Select *, ROW_NUMBER() OVER ( PARTITION BY spree_line_items.color, spree_line_items.size, spree_line_items.variant_id, spree_line_items.length) as rowNum
+      sql_clause = "(Select *, ROW_NUMBER() OVER ( PARTITION BY spree_line_items.color, spree_line_items.size, spree_line_items.variant_id, spree_line_items.length, spree_line_items.length) as rowNum
         FROM spree_line_items
         WHERE stock = true) a"
       if params[:sort]
