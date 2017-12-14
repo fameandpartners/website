@@ -14,17 +14,20 @@ class Products::FlashSaleController < Products::BaseController
       redirect_to '/'
     else
       @filter = Products::CollectionFilter.read
+      sql_clause = "(Select *, ROW_NUMBER() OVER ( PARTITION BY spree_line_items.color, spree_line_items.size, spree_line_items.variant_id, spree_line_items.length) as rowNum
+        FROM spree_line_items
+        WHERE stock = true) a"
       if params[:sort]
-        line_items = Spree::LineItem.where(stock: true).order("price #{params[:sort]}")
+        line_items = Spree::LineItem.select("*").from(Arel.sql(sql_clause)).where("rowNum = 1").order("price #{params[:sort]}")
       else
-        line_items = Spree::LineItem.where(stock: true).order(:price)
+        line_items = Spree::LineItem.select("*").from(Arel.sql(sql_clause)).where("rowNum = 1").order(:price)
       end
-
-      line_items = line_items.where(color: params[:color]) if params[:color]
-      line_items = line_items.where(size: params[:size]) if params[:size]
+    
+      line_items = line_items.where("a.color in ('#{params[:color].join('\',\'')}')") if params[:color]
+      line_items = line_items.where("a.size in ('#{params[:size].join('\',\'')}')") if params[:size]
       if params[:length]
-        leng = params[:length].map{|x| x.capitalize}
-        line_items = line_items.where(length: leng) 
+        leng = params[:length].map{|x| x.capitalize}.join("','")
+        line_items = line_items.where("a.length in ('#{leng}')") 
       end
       total_pages = (line_items.count.to_f/96.0).ceil
       line_items = line_items.page(params[:page]).per(96)
