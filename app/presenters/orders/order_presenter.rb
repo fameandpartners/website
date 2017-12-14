@@ -42,6 +42,7 @@ module Orders
     def initialize(order, items = nil)
       @spree_order = order
       @items = items || order.line_items
+      @items = @items&.sort { |x,y| x.stock.to_s <=> y.stock.to_s }
     end
 
     alias_method :customer_notes?, :customer_notes

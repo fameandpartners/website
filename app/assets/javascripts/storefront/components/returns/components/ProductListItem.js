@@ -169,6 +169,7 @@ class ProductListItem extends React.Component {
       id,
       openEndedReturnReason,
       store_credit_only: storeCreditOnly,
+      stock: saleItem,
       products_meta: productMeta,
       returns_meta: returnsMeta = {},
       price,
@@ -200,13 +201,14 @@ class ProductListItem extends React.Component {
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
         <div className="col-8_md-10_sm-6_xs-12 Product__listItem">
-          <Checkbox
-            id={`${id}-checkbox`}
-            wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
-            onChange={this.handleUpdate()}
-            checkboxStatus={checkboxStatus}
-            showForm={showForm}
-          />
+              <Checkbox
+                id={`${id}-checkbox`}
+                wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
+                onChange={this.handleUpdate()}
+                checkboxStatus={checkboxStatus}
+                showForm={showForm}
+                disable={saleItem === false}
+               />
           <img
             onClick={this.handleUpdate()}
             src={image}
@@ -215,10 +217,20 @@ class ProductListItem extends React.Component {
           />
           <div className="u-line-height-medium">
             {
-              storeCreditOnly && returnEligible ?
+              (storeCreditOnly && returnEligible && saleItem !== false) ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     RETURNABLE FOR STORE CREDIT&nbsp;ONLY
+                  </span> <br />
+                </div>
+              :
+              null
+            }
+            {
+              saleItem === false ?
+                <div className="ProductlistItem__meta-container">
+                  <span className="ProductlistItem__meta-container-text font-sans-serif">
+                    ITEM NOT ELIGIBLE FOR&nbsp;REFUND
                   </span> <br />
                 </div>
               :
@@ -299,7 +311,7 @@ class ProductListItem extends React.Component {
             null
         }
         {
-          NOT_RETURNABLE ?
+          NOT_RETURNABLE && saleItem !== false ?
             <div className="col-4_md-9_xs-9">
               <div className="grid-right-spaceAround">
                 <ShippingInfo
@@ -315,8 +327,27 @@ class ProductListItem extends React.Component {
             :
             null
         }
+
         {
-          SHOW_RETURN_BUTTON ?
+          saleItem === false ?
+            <div className="col-4_md-9_xs-9">
+              <div className="grid-right-spaceAround">
+                <ShippingInfo
+                  grayBackground
+                  copy={(
+                    <span>
+                      Sale items are final sale.<br/>
+                      This item is not eligible for a refund.
+                    </span>
+                  )}
+                />
+              </div>
+            </div>
+            :
+            null
+        }
+        {
+          SHOW_RETURN_BUTTON && saleItem !== false ?
             <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton

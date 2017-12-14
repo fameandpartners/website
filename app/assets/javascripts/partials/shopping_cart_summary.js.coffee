@@ -36,9 +36,9 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     currencySymbol + displayTotal
 
   makingOptionDescriptionTag: (makingOptions) ->
-    if (makingOptions[0].name.toLowerCase() == 'deliver later')
+    if (makingOptions[0].name.toLowerCase() == 'later')
       return '(' + makingOptions[0].display_discount + ')'
-    else if (makingOptions[0].name.toLowerCase() == 'deliver express')
+    else if (makingOptions[0].name.toLowerCase() == 'express')
       return '(+' + makingOptions[0].display_discount + ')'
 
   makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
@@ -76,7 +76,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   optInReminderModal: () ->
     if (!sessionStorage.getItem('returnModalShown'))
-      new window.page.ReturnsOptimizelyModal(@whichReturnType())
+      new window.page.FlexibleReturnsModal(@whichReturnType())
       $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
       sessionStorage.setItem('returnModalShown', true)
 
@@ -111,7 +111,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   openLearnMoreHandler: (e) ->
     e.preventDefault()
-    new window.page.ReturnsOptimizelyModal(e.currentTarget.id)
+    new window.page.FlexibleReturnsModal(e.currentTarget.id)
     $buttonClassToHide = '.vex-dialog-button-primary'
     $($buttonClassToHide).hide()
 
