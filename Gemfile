@@ -133,8 +133,8 @@ gem 'puma'
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
-  gem 'sprockets', '2.2.2'
-  gem 'sass', '3.2.19'
+  # gem 'sprockets', '2.2.2'
+  gem 'sass', '3.4.2'
   gem 'sass-rails', '3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'coffee-script-source', '~> 1.8.0'
@@ -145,7 +145,6 @@ end
 
 group :development do
   gem 'foreman', require: false
-  gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener', '~> 1.4.1'
