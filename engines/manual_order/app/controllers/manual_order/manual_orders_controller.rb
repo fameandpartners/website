@@ -25,10 +25,11 @@ module ManualOrder
     end
 
     def create
+      binding.pry
      if manual_order_form.validate(params[:forms_manual_order])
        order = manual_order_form.save { |hash| manual_order_form.save_order(hash) }
-
-       OrderBotWorker.perform_async(order.id)
+binding.pry
+       # OrderBotWorker.perform_async(order.id)
 
        flash[:success] = "Order " \
                           "#{view_context.link_to order.number, spree.admin_order_path(order.number)} " \
