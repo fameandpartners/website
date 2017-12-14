@@ -1,28 +1,30 @@
 = render partial: 'pages/robots'
+- form_source = '/it-girl'
+- form_name = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+- service = ENV.fetch('SUBSCRIPTION_SERVICE')
 
 .Page__contest.page-it-girl.page-it-girl-contest.page-content
 
   .container-fluid
     section.section-box.SectionIntro
 
-      .row.hidden-md.hidden-lg
-        .col-xs-12.mobile-no-padding
-          .ContentCopy.text-center
-            h1.h2.Heading Win a paid internship and other prizes worth up to $20,000!
-
-            p Fame and Partners wants you to help shape the <br class="visible-lg visible-sm">next generation of the fashion industry.
+      .row
+        .col-xs-12.text-center
+          h1.Heading.no-margin Congratulations to our Winner!
+          h2.h1.Heading Meg Schwieterman
 
       .row.contentBox__verticalMiddle
+        .col-lg-6.col-md-5.vertical-align
+          .item-wrap
+            = image_tag "landingpages/it-girl-contest/finalists/winner.jpg", class: "img-responsive", alt: "Meg Schwieterman - Winner"
 
-          .col-md-7.vertical-align
-            .item-wrap
-              = image_tag 'landingpages/internship/hero.jpg', class: "img-responsive"
+        .col-lg-6.col-md-7.vertical-align
+          .ContentCopy.text-left
+            h2 Here's what our judges had to say:
 
-          .col-md-5.vertical-align.hidden-sm.hidden-xs
-            .ContentCopy
-              h1.title Win a paid internship and other prizes worth up to $20,000!
+            p "I love that she has a blog that she posts to consistently and has an Instagram page with great creative content. I feel like her passage spoke outloud to me because I knew how it once felt like to be judged by others and fear it."<br><em>— Emily Luciano, Blogger, Lovely Luciano</em>
 
-              p Fame and Partners wants you to help shape the <br class="visible-lg visible-sm">next generation of the fashion industry.
+            p "I was reminded of her entry throughout the run of the contest when Meg posted to social media to get votes for her entry, tagging @fameandpartners, and I have nothing but respect for her drive and hustle. I look forward to mentoring M during her internship at Fame and Partners."<br><em>— Nyree Corby, Founder and CEO, Fame and Partners</em>
 
   .container
     section.section-box.SectionWhatToDo
@@ -92,10 +94,11 @@
       .row
         .col-xs-12
           .ContentCopy__extraSpacingBottom
-            h2.h1.Heading--mobile.Heading__Enter.text-center Congratulations to our Top 11 Finalists
+            h2.h1.Heading--mobile.Heading__Enter.text-center Congratulations to our Top 10 Finalists
+            - # [TO-DO: REMOVE WINNER FROM THE LIST BELOW]
 
       .row
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/1.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -105,7 +108,7 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/2.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -115,7 +118,9 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .row.visible-sm
+
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/3.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -125,7 +130,7 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/4.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -135,7 +140,9 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .row.visible-md.visible-sm
+
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/5.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -147,7 +154,9 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .row.visible-lg
+
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/6.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -157,25 +166,9 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
-          .FinalistItem
-            .FinalistItem__img
-              = image_tag "landingpages/it-girl-contest/finalists/7.jpg", class: "img-responsive", alt: "Top 11 Finalists"
-            .FinalistItem__text.text-left.u-content-collapse
-              p M. Schwieterman<br>A skinny model strutting down a runway. Exclusivity, rules, restrictions, or frivolity. For some people, these are the ideas the word “fashion” evokes. But for me? Fashion means passion, creativity, and self-confidence. I view fashion for its true purpose: serving as an outward reflection and celebration of one’s unique self. Fashion is for everyone—it is not a set of rules based on skin color, body type, socioeconomic status, or gender identity. Rather, it is a freeing, unconditional tool chest and a chance to portray one’s true self. As I entered high school, I was discouraged that girls around me did not feel the same way. The pressure to gain others’ approval took precedence over individuality and trying to fit a certain mold robbed girls of their creativity and joy. I was compelled to change this.
+        .row.visible-sm
 
-              p Putting my individuality in the open is how I began. For years, I had been pouring my heart into a fashion blog that had gained an impressive following. However, I let the fear of what others would think stop me from sharing it at school. My closest friends followed it, but I blocked everyone else who tried. Eventually, I came to realize that if I was proud and passionate about something, there was no reason to hide it just because it was different from what others were doing. In fact, that was all the more reason to promote it -- and so I did. Sharing what makes me unique through the fashion and blogging industry helped me gain confidence I never knew I could have. I became disentangled from the worry of being judged by my peers and began the pursuit of my authentic life.
-
-              p Exhibiting my passions through writing and fashion gave me the gumption to encourage others to do the same. My best friend and I teamed up to start a fashion club at school. We felt a unique form of self-discovery in clothing, and we wanted to share it -- we wanted to fuel a fire. As the club became the largest in the school, we realized there was much more to it than fashion. Once people expressed individuality at the surface level, clothing, it empowered them to share their passions, vulnerabilities, and creativity too. The group united to use fashion as a platform to explore and display our differences. Our club became an inclusive, powerful community that celebrates diversity and recognizes fashion as an unmatched gateway to confidence and expression.
-
-              p This alternative approach to the “traditional” standards of fashion inspired bravery in me and the women around me. I began to embellish and design my own clothing, like the winking eye shirt and “girl gang” jacket featured in my collage. Girls in fashion club started to treat getting dressed not as an effort to conform or impress others, but rather as a daily celebration of themselves. Together we began to walk courageously in the direction of the best, most authentic versions of ourselves—using clothing as our most powerful catalyst.
-
-              p Blog: <a href="http://www.megschwieterman.com" target="_blank">http://www.megschwieterman.com</a><br>My TED Talk: <a href="https://www.youtube.com/watch?v=oDGn7cqozFc" target="_blank">https://www.youtube.com/watch?v=oDGn7cqozFc</a>
-
-            a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
-              | See full entry
-
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/8.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -185,7 +178,7 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/9.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -195,7 +188,9 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .row.visible-md.visible-sm
+
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/10.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -205,7 +200,7 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        .col-xs-12.col-sm-6.col-md-3.col-lg-5ths
           .FinalistItem
             .FinalistItem__img
               = image_tag "landingpages/it-girl-contest/finalists/11.jpg", class: "img-responsive", alt: "Top 11 Finalists"
@@ -221,10 +216,35 @@
             a.FinalistItem__fullEntryTrigger.js-finalist-expand href="javascript:;"
               | See full entry
 
-        .row
-          .col-xs-12
-            h4 Entries will be judged by our panel of fierce female entrepreneurs based on creativity, originality, and embodiment of the It Girl concept.
-            h3.text-center Winner will be announced here on or around December 15
+
+      .row
+        .col-xs-12.text-center
+          h3 Sign up to hear about next year's Fashion IT Girl program
+
+      .row
+        .col-xs-12.col-md-4.col-md-offset-4
+          .newsletter-signup-form
+            form class=(form_name)
+              input name='url' type='hidden' value=(subscribe_campaigns_email_capture_path)
+              input name='form_name' type='hidden' value=(form_source)
+              .input-group
+                input type='hidden' name='service' value=(service)
+                .js-it-girl-click-track data-action='Email Field Press'
+                  input.form-control.input-lg.js-en-field-email (name="email" type="email" placeholder="Enter your email" required="required")
+                span.input-group-btn
+                  .js-it-girl-click-track data-action='Email Signup Button Press'
+                    button.btn.btn-black.btn-xs.text-transform-none type="submit" Sign Up
+
+          .js-email-success-message.email-module-message.hide
+            h2 Thanks
+            h5 Thanks for signing up. You'll be the first to know what's new.
+
+          .js-email-error-message.email-module-message.hide
+            h2 Sorry
+            h5.js-email-error-message-body There was an error saving your email.
+
+            = content_for :inline_javascript do
+              |  new window.page.NewsletterSubscriberOnPage({form: '#{form_name}', source: '#{form_source}'});
 
   .container
     section.section-box.SectionAbout
@@ -368,9 +388,102 @@
 - content_for :body_end do
 
   javascript:
+
     $('.FinalistItem').find('.js-finalist-expand').on('click', function (e) {
         e.preventDefault();
         this.expand = !this.expand;
         $(this).text( this.expand ? "Click to collapse" : "See full entry" );
         $(this).closest('.FinalistItem').find('.u-content-collapse, .u-content-expand').toggleClass('u-content-collapse u-content-expand');
     });
+
+    (function(window) {
+
+      // Event Tracking Listener
+      $('.js-it-girl-click-track').on('click', function(){
+        window.track.internshipTrack(this.dataset.action, this.dataset.label);
+      });
+
+      // Newsletter subscription
+      var NewsletterSubscriberOnPage,
+        bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+      window.page || (window.page = {});
+
+      window.page.NewsletterSubscriberOnPage = NewsletterSubscriberOnPage = (function() {
+        function NewsletterSubscriberOnPage(opts) {
+          if (opts == null) {
+            opts = {};
+          }
+          this.success = bind(this.success, this);
+          this.failure = bind(this.failure, this);
+          this.handler = bind(this.handler, this);
+          this.submit = bind(this.submit, this);
+          this.url = bind(this.url, this);
+          this.campaign = opts.campaign || 'home';
+          this.$form = $('.' + opts.form);
+          this.$form.on('submit', this.submit);
+          this.source = opts.source || 'Contentful Email Module'
+        }
+
+        NewsletterSubscriberOnPage.prototype.url = function() {
+          return this.$form.attr('action') + "?callback=?";
+        };
+
+        NewsletterSubscriberOnPage.prototype.submit = function(e) {
+          var $this, email, url, form_name, service;
+          e.preventDefault();
+          $this = $(e.target);
+          url = $('input[name="url"]', $this).val();
+          form_name = $('input[name="form_name"]', $this).val();
+          email = $('input[name="email"]', $this).val();
+          service = $('input[name="service"]', $this).val();
+          return $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            url: url,
+            async: true,
+            data: {
+              email: email,
+              service: service,
+              form_name: form_name,
+              source: this.source
+            },
+            success: this.handler,
+            error: function () {
+                this.signupFailure
+            }
+          });
+        };
+
+        NewsletterSubscriberOnPage.prototype.handler = function(data) {
+          if (data.status === 'done') {
+            return this.success(data);
+          } else {
+            return this.failure(data);
+          }
+        };
+
+        NewsletterSubscriberOnPage.prototype.failure = function() {
+          var message = 'Please enter a valid email.';
+
+          $('.js-email-error-message-body').text(message);
+          $('.js-email-error-message').removeClass('hide');
+        };
+
+        NewsletterSubscriberOnPage.prototype.signupFailure = function() {
+          var message = 'We had an issue saving your email.';
+
+          $('.js-email-error-message-body').text(message);
+          $('.js-email-error-message').removeClass('hide');
+        };
+
+        NewsletterSubscriberOnPage.prototype.success = function() {
+          $('.js-email-error-message').addClass('hide');
+          $('.newsletter-signup-form, .js-email-success-message').toggleClass('hide');
+        };
+
+        return NewsletterSubscriberOnPage;
+
+      })();
+
+    })(window)
