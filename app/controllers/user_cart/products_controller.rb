@@ -170,8 +170,8 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
 
-  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, existing_guid )
-    guid = existing_guid || SecureRandom.uuid.to_s
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, *existing_guid )
+    guid = existing_guid[0] || SecureRandom.uuid.to_s
 
     # Recreating Shopping Spree GUID to reflect total
     promotion_service = UserCart::PromotionsService.new( order: order, code:  "shopping_spree #{guid}_#{shopping_spree_item_count}" )
