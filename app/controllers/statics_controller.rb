@@ -16,7 +16,6 @@ class StaticsController < ApplicationController
   end
 
   def faqs
-    @vwo_opt_in = false
   end
 
   def bridesmaid_lp
