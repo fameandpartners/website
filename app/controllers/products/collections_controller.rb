@@ -45,7 +45,7 @@ class Products::CollectionsController < Products::BaseController
     # for Best Sellers A/B testing...
     @facebook_ranking_opt_in = true
 
-    @optimizely_opt_in = true
+    @vwo_opt_in = false
     @zopim_opt_out = true
     @filter = Products::CollectionFilter.read
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion && current_promotion.code.downcase != 'deliverydisc'

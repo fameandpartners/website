@@ -121,37 +121,7 @@ $('.js-trigger-empty-cart-modal').modal({
 <% end %>
 
 <div class="cart-footer">
-<div class="row js-returns-abc-option-A hidden">
-  <div class="ReturnOption__wrapper">
-    <div class="ReturnOption__content col-xs-12">
-      <div class="col-xs-1">
-        <div class="Checkbox__wrapper">
-          <input
-            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-A"
-            type="checkbox"
-            value="A"
-            id="returns_option_a"
-          />
-          <label for="returns_option_a" class="Checkbox__label"></label>
-        </div>
-      </div>
-      <div class="col-xs-7">
-        <p class="ReturnOption__copy font-sans-serif">
-          Take <strong><%= @cart.delivery_discount %> off</strong>
-          of your order total when you opt out of returns
-        </p>
-      </div>
-      <div class="col-xs-4">
-        <p class="ReturnOption__copy font-sans-serif">
-          <a href="javascript:;" id="A-info" class="js-returns-learn-more ReturnOption__copy--link">
-            Learn more
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row js-returns-abc-option-B hidden">
+<div class="row js-returns-abc-option-B">
   <div class="ReturnOption__wrapper">
     <div class="ReturnOption__content col-xs-12">
       <div class="col-xs-1">
@@ -172,7 +142,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <p class="ReturnOption__copy font-sans-serif">
+        <p class="ReturnOption__copy ReturnOption__copy--right font-sans-serif">
           <a href="javascript:;" id="B-info" class="js-returns-learn-more ReturnOption__copy--link">
             Learn more
           </a>
