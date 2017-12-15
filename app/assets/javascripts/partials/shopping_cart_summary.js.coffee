@@ -106,7 +106,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     # ... to remove the line item
     if (!@shouldShowReturnOption(@cart.data.products))
       returnInsuranceLineItem = @findReturnInsuranceLineItem()
-      if (returnInsuranceLineItem)
+      if (returnInsuranceLineItem && returnInsuranceLineItem[0])
         @cart.removeProduct(returnInsuranceLineItem[0].line_item_id)
 
   hasReturnInsurance: () ->
