@@ -1,0 +1,16 @@
+javascript:
+  // VWO will hook into the below...
+  window.__vwoTest = window.__vwoTest || {};
+
+  window.__vwoTest.activateBestSellers = function(variationId) {
+    // Activation Logic for Best Sellers
+  }
+  
+  window.__vwoTest.convertBestSellers = function(variationId) {
+    // Conversion Logic for Best Sellers
+  }
+
+  window.__vwoTest.trackBestSellersVisit = function(variant) {
+    console.log('tracking best sellers variant ----', variant);
+    //sessionStorage.setItem('bestSellersVisited', true);
+  }
