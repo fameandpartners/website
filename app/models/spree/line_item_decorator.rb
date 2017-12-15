@@ -31,10 +31,11 @@ Spree::LineItem.class_eval do
     if self.delivery_date.nil? && self.order.state != 'complete'
       self.delivery_date = delivery_period_policy.delivery_period
       self.save!
+    elsif self.delivery_date && (self.order.state == 'complete' || self.order.state == 'resumed')
+      return self.delivery_date
     else
       return delivery_period_policy.delivery_period
     end
-    return self.delivery_date
   end
 
   def delivery_period_policy
@@ -173,7 +174,7 @@ Spree::LineItem.class_eval do
   end
 
   def window_closed?
-    created_at <= DateTime.now - 60
+    60.days.ago >= period_in_business_days(self.delivery_date).business_days.after(self.order.completed_at)
   end
 
   def as_json(options = { })
@@ -202,4 +203,27 @@ Spree::LineItem.class_eval do
     end
     json
   end
+
+  private
+
+  def period_in_business_days(period)
+      value = major_value_from_period(period)
+      period_units(period) == 'weeks' ? value * 5 : value
+  end 
+
+  # returns days/weeks from string
+  def period_units(period)
+    period.match(/(?<=\d\s)[\w\s]+$/).to_s
+  end
+
+  # returns the larger number from the range in given string
+  def major_value_from_period(period)
+    period.match(/\d+(?=\s+\w+|$)/).to_s.to_i
+  end
+
+  # returns small number
+  def minor_value_from_period(period)
+    period.match(/\d+/).to_s.to_i
+  end
+
 end
