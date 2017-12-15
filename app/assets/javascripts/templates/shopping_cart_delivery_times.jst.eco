@@ -2,8 +2,8 @@
 <p class="minor-callout">Choose when you want to receive your order.</p>
 <% i = -1 %>
 <% for product in @cart.products: %>
+  <% i += 1 %>
   <% if product.name != "RETURN_INSURANCE" : %>
-    <% i += 1 %>
       <div class="cart-item js-delivery-times-wrapper" data-index=<%= i %>>
         <section class="product-delivery-adjustment">
           <div class="cart-item-description clearfix">
