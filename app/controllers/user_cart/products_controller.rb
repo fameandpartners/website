@@ -80,18 +80,21 @@ class UserCart::ProductsController < UserCart::BaseController
   def destroy
     cart_product_service.destroy
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_customization
     cart_product_service.destroy_customization(params[:customization_id])
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_making_option
     cart_product_service.destroy_making_option(params[:making_option_id])
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
@@ -148,15 +151,7 @@ class UserCart::ProductsController < UserCart::BaseController
     )
   end
 
-
-  def reapply_delivery_promo
-    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
-      promotion_service = UserCart::PromotionsService.new(
-        order: current_order,
-        code:  'DELIVERYDISC'
-      )
-      promotion_service.reapply
-    end
+  def reapply_shopping_spree_promo
     if current_promotion.present? && current_promotion.code.include?('shopping_spree')
       order = current_order
       code = current_promotion.code
@@ -170,8 +165,19 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
 
-  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, existing_guid )
-    guid = existing_guid || SecureRandom.uuid.to_s
+  def reapply_delivery_promo
+    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
+      promotion_service = UserCart::PromotionsService.new(
+        order: current_order,
+        code:  'DELIVERYDISC'
+      )
+      promotion_service.reapply
+    end
+  end
+
+
+  def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, *existing_guid )
+    guid = existing_guid[0] || SecureRandom.uuid.to_s
 
     # Recreating Shopping Spree GUID to reflect total
     promotion_service = UserCart::PromotionsService.new( order: order, code:  "shopping_spree #{guid}_#{shopping_spree_item_count}" )

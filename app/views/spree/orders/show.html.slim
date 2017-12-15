@@ -46,9 +46,10 @@ section.order-details
                     / TODO: If price is integer remove decimals
                     .amount.col-md-6 #{order.shipment.display_amount}
 
-                  .row.discount-info
-                    .label.col-md-6 Returns Deposit
-                    .amount.col-md-6 $25.00
+                  - if has_return_insurance?
+                    .row.discount-info
+                      .label.col-md-6 Returns Deposit
+                      .amount.col-md-6 $25.00
 
 
                   .row.discount-info
