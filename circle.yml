@@ -57,5 +57,5 @@ deployment:
       - zip -r -q deploy.zip . -x \*node_modules\* -x \*.git\* -x \*doc\* -x \*rspec\*
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deployebs.zip
       - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_BUILD_NUM.devo2 --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/deployebs.zip --region us-east-1
-      - aws elasticbeanstalk update-environment --environment-name devo2 --version-label $CIRCLE_BUILD_NUM --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name devo2 --version-label $CIRCLE_BUILD_NUM.devo2 --region us-east-1
 
