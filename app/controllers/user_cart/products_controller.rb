@@ -80,18 +80,21 @@ class UserCart::ProductsController < UserCart::BaseController
   def destroy
     cart_product_service.destroy
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_customization
     cart_product_service.destroy_customization(params[:customization_id])
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
   def destroy_making_option
     cart_product_service.destroy_making_option(params[:making_option_id])
     reapply_delivery_promo
+    reapply_shopping_spree_promo
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
@@ -148,15 +151,7 @@ class UserCart::ProductsController < UserCart::BaseController
     )
   end
 
-
-  def reapply_delivery_promo
-    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
-      promotion_service = UserCart::PromotionsService.new(
-        order: current_order,
-        code:  'DELIVERYDISC'
-      )
-      promotion_service.reapply
-    end
+  def reapply_shopping_spree_promo
     if current_promotion.present? && current_promotion.code.include?('shopping_spree')
       order = current_order
       code = current_promotion.code
@@ -166,6 +161,17 @@ class UserCart::ProductsController < UserCart::BaseController
       guid = info[1].split(' ')[1]
 
       create_coupon_if_from_shopping_spree(order, current_order.total, updated_count, guid)
+    end
+  end
+
+
+  def reapply_delivery_promo
+    if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
+      promotion_service = UserCart::PromotionsService.new(
+        order: current_order,
+        code:  'DELIVERYDISC'
+      )
+      promotion_service.reapply
     end
   end
 
