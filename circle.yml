@@ -42,7 +42,7 @@ test:
     #     parallel: true
 
 deployment:
-  development:
+  devo1:
     branch: elb-deploy
     commands:
       - cp config/database.yml.deploy config/database.yml
@@ -50,7 +50,7 @@ deployment:
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deployebs.zip
       - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_BUILD_NUM.devo1 --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/deployebs.zip --region us-east-1
       - aws elasticbeanstalk update-environment --environment-name devo1 --version-label $CIRCLE_BUILD_NUM.devo1 --region us-east-1
-  development2:
+  devo2:
     branch: elb-deploy2
     commands:
       - cp config/database.yml.deploy config/database.yml
@@ -58,4 +58,12 @@ deployment:
       - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deployebs.zip
       - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_BUILD_NUM.devo2 --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/deployebs.zip --region us-east-1
       - aws elasticbeanstalk update-environment --environment-name devo2 --version-label $CIRCLE_BUILD_NUM.devo2 --region us-east-1
+  devo3:
+    branch: elb-deploy3
+    commands:
+      - cp config/database.yml.deploy config/database.yml
+      - zip -r -q deploy.zip . -x \*node_modules\* -x \*.git\* -x \*doc\* -x \*rspec\*
+      - aws s3 cp deploy.zip s3://dev-fameandpartners-website/deploy/deployebs.zip
+      - aws elasticbeanstalk create-application-version --application-name fameosity --version-label $CIRCLE_BUILD_NUM.devo3 --source-bundle S3Bucket=dev-fameandpartners-website,S3Key=deploy/deployebs.zip --region us-east-1
+      - aws elasticbeanstalk update-environment --environment-name devo3 --version-label $CIRCLE_BUILD_NUM.devo3 --region us-east-1
 
