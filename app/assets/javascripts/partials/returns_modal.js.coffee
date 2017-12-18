@@ -27,7 +27,21 @@ window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutMo
                '<div class="checkout-content font-sans-serif">' +
                  modalBody +
                '</div>' +
-               modalCheckbox,
+               '<div class="ReturnOption__wrapper">' +
+                 '<div class="ReturnOption__content col-xs-12">' +
+                   '<div class="col-xs-1">' +
+                     '<div class="Checkbox__wrapper">' +
+                       '<input class="Checkbox js-returns-abc-option-trigger js-returns-trigger-B" type="checkbox" value="B" id="returns_option_b">' +
+                       '<label for="returns_option_b" class="Checkbox__label"></label>' +
+                     '</div>' +
+                   '</div>' +
+                 '<div class="col-xs-10">' +
+                   '<p class="ReturnOption__copy text-right font-sans-serif">' +
+                   'Add <strong>$25</strong>' +
+                   ' for fully flexible returns' +
+                   '</p>' +
+                 '</div>' +
+               '</div>',
       className: 'vex vex-theme-plain checkout-modal vex-dialog-bottom vex-text ReturnModal',
       popup: true,
       afterOpen: @updateHtml,

@@ -3,7 +3,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   constructor: (options = {}) ->
     @template   = JST['templates/shopping_cart_summary']
     @cart       = options.cart # window.shopping_cart
-    @$container = $(options.container || '#cart')
+    @$container = $(options.container || '#checkout')
+    @$modalContainer = $('#top')
     @value_proposition = options.value_proposition
     @shipping_message = options.shipping_message
 
@@ -25,6 +26,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+    @$modalContainer.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
     @$container.on('click', '.js-returns-learn-more', @openLearnMoreHandler)
     @cart.on('change', @render)
     @render()
@@ -112,8 +114,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   openLearnMoreHandler: (e) ->
     e.preventDefault()
     new window.page.FlexibleReturnsModal(e.currentTarget.id)
-    $buttonClassToHide = '.vex-dialog-button-primary'
-    $($buttonClassToHide).hide()
 
   removeProductHandler: (e) ->
     e.preventDefault()
