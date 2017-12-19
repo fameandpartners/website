@@ -6,7 +6,6 @@ class UserCart::ProductsController < UserCart::BaseController
 
   def create
     ensure_size_id_is_set( params )
-    ensure_height_is_set( params )
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
@@ -190,13 +189,5 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-  def ensure_height_is_set( params )
-    if( params[:height].nil? && params[:height_value] && params[:variant_id])
-      variant = Spree::Variant.find( params[:variant_id] )
-      product_height_range_group = ProductHeightRangeGroup.find_both_for_variant_or_use_default( variant ).find { |phrg| phrg.unit == params[:height_unit] }
-      params[:height] = product_height_range_group.map_height_to_name( params[:height_value] )
-    end
-
-  end
 
 end
