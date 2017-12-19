@@ -35,7 +35,8 @@ module Orders
                    :order_return_requested?,
                    :returnable?,
                    :item_count,
-                   :return_type
+                   :return_type,
+                   :vwo_type
 
     attr_reader :spree_order, :items
 
