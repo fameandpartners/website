@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { Link } from 'react-router';
 import { maxBy } from 'lodash';
 import autoBind from 'auto-bind';
@@ -6,21 +7,21 @@ import ProductContainer from '../containers/ProductContainer';
 import SimpleButton from './SimpleButton';
 import win from '../../../polyfills/windowPolyfill';
 
-const propTypes = {
-  orderData: PropTypes.array.isRequired,
-  logisticsData: PropTypes.shape({
-    final_return_by_date: PropTypes.string,
-    line_item_id: PropTypes.number,
-    item_return_label: PropTypes.shape({
-      carrier: PropTypes.string,
-      id: PropTypes.number,
-      label_image_url: PropTypes.string,
-      label_pdf_url: PropTypes.string,
-      label_url: PropTypes.string,
-      updated_at: PropTypes.string,
-    }),
-  }).isRequired,
-};
+// const propTypes = {
+//   orderData: PropTypes.array.isRequired,
+//   logisticsData: PropTypes.shape({
+//     final_return_by_date: PropTypes.string,
+//     line_item_id: PropTypes.number,
+//     item_return_label: PropTypes.shape({
+//       carrier: PropTypes.string,
+//       id: PropTypes.number,
+//       label_image_url: PropTypes.string,
+//       label_pdf_url: PropTypes.string,
+//       label_url: PropTypes.string,
+//       updated_at: PropTypes.string,
+//     }),
+//   }).isRequired,
+// };
 
 
 function extractLineItemFromOrders(orders, lineItemId) {
@@ -48,7 +49,7 @@ function findOrderFromLineItem(orders, lineItemId) {
 }
 
 /* eslint-disable react/prefer-stateless-function */
-class Confirmation extends PureComponent {
+class Confirmation extends React.PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -252,6 +253,6 @@ class Confirmation extends PureComponent {
   }
 }
 
-Confirmation.propTypes = propTypes;
+// Confirmation.propTypes = propTypes;
 
 export default Confirmation;

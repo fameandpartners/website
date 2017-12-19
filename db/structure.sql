@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -228,6 +228,7 @@ CREATE TABLE categories (
 --
 
 CREATE SEQUENCE categories_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -403,6 +404,7 @@ CREATE TABLE contentful_routes (
 --
 
 CREATE SEQUENCE contentful_routes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -437,6 +439,7 @@ CREATE TABLE contentful_versions (
 --
 
 CREATE SEQUENCE contentful_versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -886,6 +889,7 @@ CREATE TABLE facebook_accounts (
 --
 
 CREATE SEQUENCE facebook_accounts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -919,6 +923,7 @@ CREATE TABLE facebook_ad_creatives (
 --
 
 CREATE SEQUENCE facebook_ad_creatives_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -969,6 +974,7 @@ CREATE TABLE facebook_ad_insights (
 --
 
 CREATE SEQUENCE facebook_ad_insights_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1007,6 +1013,7 @@ CREATE TABLE facebook_ads (
 --
 
 CREATE SEQUENCE facebook_ads_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1051,6 +1058,7 @@ CREATE TABLE facebook_adsets (
 --
 
 CREATE SEQUENCE facebook_adsets_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1090,6 +1098,7 @@ CREATE TABLE facebook_campaigns (
 --
 
 CREATE SEQUENCE facebook_campaigns_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1336,6 +1345,7 @@ CREATE TABLE item_return_labels (
 --
 
 CREATE SEQUENCE item_return_labels_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3396,6 +3406,11 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    stock boolean,
+    color character varying(255),
+    size character varying(255),
+    length character varying(255),
+    upc character varying(255),
     customizations json
 );
 
@@ -9778,3 +9793,9 @@ INSERT INTO schema_migrations (version) VALUES ('20171114001834');
 INSERT INTO schema_migrations (version) VALUES ('20171115172748');
 
 INSERT INTO schema_migrations (version) VALUES ('20171116214623');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127052028');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127212333');
+
+INSERT INTO schema_migrations (version) VALUES ('20171207195245');

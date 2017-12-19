@@ -125,11 +125,12 @@
 // campaigns
 //= require partials/fitgau_reminder
 
-//--------------------------------
-// Header
-//--------------------------------
-//= require partials/header
-//= require partials/simplified_nav
+
+//-------------------------------
+//      SHOPPING SPREE INIT     |
+//-------------------------------
+//= require partials/init_shopping_spree
+
 
 //--------------------------------
 // Hero Tile Carousel

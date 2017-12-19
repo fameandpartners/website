@@ -39,14 +39,22 @@ if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; t
   # Slack accepts only 4000 characters per message
   char_limit=1800
 
-gifs[0]='http://68.media.tumblr.com/tumblr_lgb02mCfLm1qe0eclo1_r5_500.gif'
-gifs[1]='https://media.giphy.com/media/IzVwOO8xZsfks/giphy.gif'
-gifs[2]='https://media.giphy.com/media/1FT20zgiDr8Bi/giphy.gif'
-gifs[3]='https://media.giphy.com/media/E5Y1XC79e6Btm/giphy.gif'
-gifs[4]='http://i.imgur.com/LZsRtcX.gif'
-gifs[5]='https://s3-us-west-2.amazonaws.com/giffy-prod/e84eada496534922b22cb39cdbe566a4.gif'
-
-rand_gif_number=$[ $RANDOM % 6 ]
+  gifs[0]='https://media0.giphy.com/media/b1coB1RqQGRUI/giphy.gif'
+  gifs[1]='https://i.imgur.com/m31b3r0.gif'
+  gifs[2]='https://media1.giphy.com/media/13I7q3kMjxtW9y/giphy.gif'
+  gifs[3]='https://lh3.googleusercontent.com/WVfcsIpjtRCfnXmJQQ8ZTdcNFJ1hxlTH2A6eMCzT3cFEzRrWzG99Zmco5Wn3t8o6lMQM1dxv=w3360-h1700'
+  gifs[4]='https://lh5.googleusercontent.com/OC1eXTMO-m6HZGZhgP-A8MzW9zZe8nyezBW07_ceddlm9f4k64-LNsyaEAdfi3YWIpkcXT2U=w3360-h1700'
+  gifs[5]='https://lh6.googleusercontent.com/UP_wCgL627TT0L8thvu3FTQlBI34MGbe55kZEXLfyX8OtA272fr6TtvoK22OlncL5Q087pfM=w3360-h1700'
+  gifs[6]='https://lh4.googleusercontent.com/7a3YAcVbmUYsLrMyqBDoaHdQYlq02_Iyrc-IyCTr8JPEUS3CAIZ8KXNYAxTXf62OyIzQjFIT=w3360-h1700'
+  gifs[7]='https://lh3.googleusercontent.com/E0o5rcrEDEKU4TJVs4i9MoccpgqrZLPhskPxfMraN2c4RzgQFVlKXoGV7Z9BNhranI1kNasB=w3360-h1700'
+  gifs[8]='https://lh6.googleusercontent.com/9NY59bjmeXDaugZJOHwxrsSXh3ZoVp6Fu1WJqPBj6GL2xs6UbQPNToHMaLonWvKChybhEbkn=w3360-h1700'
+  gifs[9]='https://lh3.googleusercontent.com/fWnNEqtQPjhZ4YwmPF2JxeEKU-OY5LWab2gebAYyKw-SzJVF-L_75euAL5IQgud9TxCm6YxL=w3360-h1700'
+  gifs[10]='https://s3-us-west-2.amazonaws.com/giffy-prod/95f886093e7d414f8b5a5d3b956e09ff.gif'
+  gifs[11]='https://s3-us-west-2.amazonaws.com/giffy-prod/b95ccdcf03504c9ea6d241178d6e5353.gif'
+  gifs[12]='https://s3-us-west-2.amazonaws.com/giffy-prod/80fb439877ae43cfaf25441e0a3e6ea8.gif'
+  
+  
+rand_gif_number=$[ $RANDOM % 13 ]
 echo ${gifs[$rand_gif_number]}
 
 json_message=$(cat <<EOJ

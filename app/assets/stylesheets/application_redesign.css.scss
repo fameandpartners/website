@@ -59,7 +59,6 @@ z-index levels
 *    99 = .sg-btn--select.is-active:hover:before
 
 *    99 = .mega-menu--main
-*    99 = .page-title--details
 *    99 = .select2-close-mask
 
 *   100 = .nav-menu
@@ -258,6 +257,9 @@ z-index levels
 @import 'redesign/pages/wholesale';
 @import 'redesign/pages/landing_page_contest';
 
+// Custom Experience
+@import 'custom_experience/react';
+
 // React Components
 @import 'redesign/react_components/_MarketingPage';
 @import 'redesign/react_components/FilterSort';
@@ -276,6 +278,7 @@ z-index levels
 // Generic
 @import 'redesign/generic/content-order';
 @import 'redesign/generic/helpers';
+@import 'shopping_spree/shopping_spree';
 
 .standard-form {
   height: 60px;

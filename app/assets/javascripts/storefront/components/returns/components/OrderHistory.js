@@ -1,15 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import ProductContainer from '../containers/ProductContainer';
 
-const propTypes = {
-  orderData: PropTypes.object,
-};
+// const propTypes = {
+//   orderData: PropTypes.object,
+// };
 
 const defaultProps = {
   orderData: {},
 };
 
-class OrderHistory extends Component {
+class OrderHistory extends React.Component {
   constructor(props) {
     super(props);
     const { orderData } = this.props;
@@ -104,7 +105,7 @@ class OrderHistory extends Component {
   }
 }
 
-OrderHistory.propTypes = propTypes;
+// OrderHistory.propTypes = propTypes;
 OrderHistory.defaultProps = defaultProps;
 
 export default OrderHistory;

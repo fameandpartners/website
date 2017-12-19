@@ -158,6 +158,8 @@
 // Contentful
 @import 'contentful/contentful';
 
+// Shopping Spree
+@import 'shopping_spree/shopping_spree';
 //
 // .standard-form {
 //   height: 60px;
@@ -244,3 +246,9 @@
 //     outline:none;
 //   }
 // }
+
+@import 'custom_experience/react';
+
+// For Alerts
+@import 'redesign/vars';
+@import 'redesign/alerts';

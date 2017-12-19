@@ -7,28 +7,34 @@ doctype html
 
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'application_redesign'
+    = stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
+
     = csrf_meta_tags
 
     = render 'layouts/redesign/head'
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
-
+    = render 'layouts/redesign/shopping_spree'
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
-
-    = render 'layouts/redesign/header'
-
+    #react-blanket.__react_root__
+    #react-menu.__react_root__
+    #react-cart.__react_root__
     #content-container.content-container
       - unless disable_notices?
-        = render 'layouts/redesign/notices'
+      = render 'layouts/redesign/notices'
 
-      = yield
+    #react-header.__react_root__
+    = yield
 
-    = render 'layouts/redesign/footer'
-    = render 'layouts/redesign/shopping_bag'
+
+    #react-footer.__react_root__
 
     - if Features.active?(:marketing_modals)
       = render '/shared/marketing'
 
     = javascript_include_tag 'storefront'
+    = javascript_include_tag 'shopping_spree_bundle'
+
     = render 'layouts/redesign/javascript'
+    = javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"

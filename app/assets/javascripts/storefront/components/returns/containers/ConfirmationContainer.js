@@ -1,5 +1,6 @@
+/* eslint-disable */
 /* global window */
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import autobind from 'auto-bind';
 import scroll from 'scroll';
@@ -8,12 +9,12 @@ import Confirmation from '../components/Confirmation';
 
 const scrollElement = scrollDoc();
 
-const propTypes = {
-  orderData: PropTypes.array.isRequired,
-  logisticsData: PropTypes.object.isRequired,
-};
+// const propTypes = {
+//   orderData: PropTypes.array.isRequired,
+//   logisticsData: PropTypes.object.isRequired,
+// };
 
-class ConfirmationContainer extends Component {
+class ConfirmationContainer extends React.Component {
   constructor(props) {
     super(props);
     autobind(this);
@@ -51,6 +52,6 @@ function mapStateToProps(state) {
   };
 }
 
-ConfirmationContainer.propTypes = propTypes;
+// ConfirmationContainer.propTypes = propTypes;
 
 export default connect(mapStateToProps)(ConfirmationContainer);

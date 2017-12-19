@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import autoBind from 'auto-bind';
 import classnames from 'classnames';
 
@@ -15,25 +16,25 @@ import Select from '../../shared/Select';
 import SimpleButton from '../components/SimpleButton';
 import ShippingInfo from './ShippingInfo';
 
-const propTypes = {
-  activeTextBox: PropTypes.number,
-  canUpdateReturnArray: PropTypes.bool,
-  confirmationPage: PropTypes.bool,
-  checkboxStatus: PropTypes.bool,
-  hasError: PropTypes.bool,
-  internationalCustomer: PropTypes.bool,
-  orderIndex: PropTypes.number,
-  orderNumber: PropTypes.string,
-  product: PropTypes.object.isRequired,
-  returnArray: PropTypes.array.isRequired,
-  returnEligible: PropTypes.bool.isRequired,
-  showForm: PropTypes.bool,
-  returnRequested: PropTypes.bool,
-  handlePopulateLogistics: PropTypes.func,
-  updateReturnArray: PropTypes.func,
-  updatePrimaryReturnReason: PropTypes.func,
-  updateOpenEndedReturnReason: PropTypes.func,
-};
+// const propTypes = {
+//   activeTextBox: PropTypes.number,
+//   canUpdateReturnArray: PropTypes.bool,
+//   confirmationPage: PropTypes.bool,
+//   checkboxStatus: PropTypes.bool,
+//   hasError: PropTypes.bool,
+//   internationalCustomer: PropTypes.bool,
+//   orderIndex: PropTypes.number,
+//   orderNumber: PropTypes.string,
+//   product: PropTypes.object.isRequired,
+//   returnArray: PropTypes.array.isRequired,
+//   returnEligible: PropTypes.bool.isRequired,
+//   showForm: PropTypes.bool,
+//   returnRequested: PropTypes.bool,
+//   handlePopulateLogistics: PropTypes.func,
+//   updateReturnArray: PropTypes.func,
+//   updatePrimaryReturnReason: PropTypes.func,
+//   updateOpenEndedReturnReason: PropTypes.func,
+// };
 
 const defaultProps = {
   activeTextBox: null,
@@ -53,7 +54,7 @@ const defaultProps = {
   updateReturnArray: noop,
 };
 
-class ProductListItem extends Component {
+class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -168,6 +169,7 @@ class ProductListItem extends Component {
       id,
       openEndedReturnReason,
       store_credit_only: storeCreditOnly,
+      stock: saleItem,
       products_meta: productMeta,
       returns_meta: returnsMeta = {},
       price,
@@ -199,13 +201,14 @@ class ProductListItem extends Component {
         className={confirmationPage ? 'grid-noGutter' : 'grid-noGutter-spaceAround u-background-white'}
       >
         <div className="col-8_md-10_sm-6_xs-12 Product__listItem">
-          <Checkbox
-            id={`${id}-checkbox`}
-            wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
-            onChange={this.handleUpdate()}
-            checkboxStatus={checkboxStatus}
-            showForm={showForm}
-          />
+              <Checkbox
+                id={`${id}-checkbox`}
+                wrapperClassName={returnEligible ? 'Modal__content--med-margin-bottom' : 'u-no-opacity'}
+                onChange={this.handleUpdate()}
+                checkboxStatus={checkboxStatus}
+                showForm={showForm}
+                disable={saleItem === false}
+               />
           <img
             onClick={this.handleUpdate()}
             src={image}
@@ -214,10 +217,20 @@ class ProductListItem extends Component {
           />
           <div className="u-line-height-medium">
             {
-              storeCreditOnly && returnEligible ?
+              (storeCreditOnly && returnEligible && saleItem !== false) ?
                 <div className="ProductlistItem__meta-container">
                   <span className="ProductlistItem__meta-container-text font-sans-serif">
                     RETURNABLE FOR STORE CREDIT&nbsp;ONLY
+                  </span> <br />
+                </div>
+              :
+              null
+            }
+            {
+              saleItem === false ?
+                <div className="ProductlistItem__meta-container">
+                  <span className="ProductlistItem__meta-container-text font-sans-serif">
+                    ITEM NOT ELIGIBLE FOR&nbsp;REFUND
                   </span> <br />
                 </div>
               :
@@ -298,7 +311,7 @@ class ProductListItem extends Component {
             null
         }
         {
-          NOT_RETURNABLE ?
+          NOT_RETURNABLE && saleItem !== false ?
             <div className="col-4_md-9_xs-9">
               <div className="grid-right-spaceAround">
                 <ShippingInfo
@@ -314,8 +327,27 @@ class ProductListItem extends Component {
             :
             null
         }
+
         {
-          SHOW_RETURN_BUTTON ?
+          saleItem === false ?
+            <div className="col-4_md-9_xs-9">
+              <div className="grid-right-spaceAround">
+                <ShippingInfo
+                  grayBackground
+                  copy={(
+                    <span>
+                      Sale items are final sale.<br/>
+                      This item is not eligible for a refund.
+                    </span>
+                  )}
+                />
+              </div>
+            </div>
+            :
+            null
+        }
+        {
+          SHOW_RETURN_BUTTON && saleItem !== false ?
             <div className="col-4_md-9_xs-12 returnButton__container grid-spaceAround">
               <div className="col-12_md-5_sm-12">
                 <SimpleButton
@@ -376,7 +408,7 @@ class ProductListItem extends Component {
     );
   }
 }
-ProductListItem.propTypes = propTypes;
+// ProductListItem.propTypes = propTypes;
 ProductListItem.defaultProps = defaultProps;
 
 export default ProductListItem;

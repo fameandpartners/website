@@ -1,4 +1,48 @@
 // TODO: Remove legacy styling from here.
+%cfix {
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+}
+
+.icon-cross {
+  display: inline-block;
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  cursor: pointer;
+
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #000;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  &:before {
+    width: 200%;
+    height: 1px;
+    margin-top: -1px;
+    margin-left: -100%;
+  }
+
+  &:after {
+    height: 200%;
+    width: 1px;
+    margin-top: -106%;
+  }
+
+}
 
 .sticky-header .alert-sale {
   position: absolute;
@@ -29,8 +73,9 @@
     }
 
     .title {
+      font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
       max-width: 100%;
-      font-size: 1.25rem;
+      font-size: 14px;
       font-weight: 500;
     }
 
@@ -248,3 +293,9 @@
 .auto-discount-applied {
   padding: 10px 0;
 }
+
+// BEGIN: SHOPPING SPREE SPECIFIC STYLES
+.custom-sale-banner-top.ShoppingSpreeBanner__wrapper {
+  background-color: $c-clique-blue;
+}
+// END: SHOPPING SPREE SPECIFIC STYLES

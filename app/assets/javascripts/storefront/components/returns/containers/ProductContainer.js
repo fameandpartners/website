@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
@@ -7,30 +8,30 @@ import * as AppActions from '../actions/index';
 import ProductListItem from '../components/ProductListItem';
 import noop from '../../../libs/noop';
 
-const propTypes = {
-  activeTextBox: PropTypes.number,
-  canUpdateReturnArray: PropTypes.bool,
-  confirmationPage: PropTypes.bool,
-  product: PropTypes.object.isRequired,
-  hasError: PropTypes.bool,
-  internationalCustomer: PropTypes.bool,
-  lastChild: PropTypes.bool,
-  orderData: PropTypes.object,
-  orderNumber: PropTypes.string,
-  orderIndex: PropTypes.number,
-  returnArray: PropTypes.array.isRequired,
-  returnSubtotal: PropTypes.number,
-  returnEligible: PropTypes.bool.isRequired,
-  returnRequested: PropTypes.bool,
-  showForm: PropTypes.bool,
-  // Functions
-  removeProductFromReturnArray: PropTypes.func,
-  updatePrimaryReturnReason: PropTypes.func,
-  updateOpenEndedReturnReason: PropTypes.func,
-  addProductToReturnArray: PropTypes.func,
-  // Redux Functions
-  populateLogisticsData: PropTypes.func.isRequired,
-};
+// const propTypes = {
+//   activeTextBox: PropTypes.number,
+//   canUpdateReturnArray: PropTypes.bool,
+//   confirmationPage: PropTypes.bool,
+//   product: PropTypes.object.isRequired,
+//   hasError: PropTypes.bool,
+//   internationalCustomer: PropTypes.bool,
+//   lastChild: PropTypes.bool,
+//   orderData: PropTypes.object,
+//   orderNumber: PropTypes.string,
+//   orderIndex: PropTypes.number,
+//   returnArray: PropTypes.array.isRequired,
+//   returnSubtotal: PropTypes.number,
+//   returnEligible: PropTypes.bool.isRequired,
+//   returnRequested: PropTypes.bool,
+//   showForm: PropTypes.bool,
+//   // Functions
+//   removeProductFromReturnArray: PropTypes.func,
+//   updatePrimaryReturnReason: PropTypes.func,
+//   updateOpenEndedReturnReason: PropTypes.func,
+//   addProductToReturnArray: PropTypes.func,
+//   // Redux Functions
+//   populateLogisticsData: PropTypes.func.isRequired,
+// };
 
 const defaultProps = {
   activeTextBox: null,
@@ -53,7 +54,7 @@ const defaultProps = {
 };
 
 
-class ProductContainer extends Component {
+class ProductContainer extends React.Component {
   constructor() {
     super();
     autoBind(this);
@@ -160,7 +161,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(AppActions, dispatch);
 }
 
-ProductContainer.propTypes = propTypes;
+// ProductContainer.propTypes = propTypes;
 ProductContainer.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer);

@@ -63,10 +63,30 @@ module Contentful
       }
 
       category_tiles = parent_container.category_tiles_container.map do |item|
+
+        # Edits CTA
+        tile_cta_link = (item.respond_to? :link) ? item.link : nil
+        tile_cta_image_url = (item.image.respond_to? :image_url) ? item.image.image_url : nil
+        tile_cta_array = (item.respond_to? :title_overlay) ? item.title_overlay.split('||') : nil
+
+        if tile_cta_array.nil?
+          tile_cta_first = nil
+          tile_cta_last = nil
+        else
+          if tile_cta_array.size < 2
+            tile_cta_first = nil
+            tile_cta_last = tile_cta_array[0]
+          else
+            tile_cta_first = tile_cta_array[0]
+            tile_cta_last = tile_cta_array[1]
+          end
+        end
+
         {
-          link: item.link,
-          title: item.title_overlay,
-          image: item.image.image_url
+          link: tile_cta_link,
+          tile_cta_first: tile_cta_first,
+          tile_cta_last: tile_cta_last,
+          image: tile_cta_image_url
         }
       end
 
@@ -379,7 +399,11 @@ module Contentful
       site_version_url_to_redirect = (parent_container.respond_to? :site_version_url_to_redirect) ? parent_container.site_version_url_to_redirect : :best_sellers
 
       # Check if the LP requests an extra spacing between top navigation and content
-      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? 'app-container--top-margin' : nil
+      page_white_spacing_top = (parent_container.respond_to? :page_white_spacing_top) ? parent_container.page_white_spacing_top : nil
+
+      if page_white_spacing_top
+        page_white_spacing_top_class = 'app-container--top-margin'
+      end
 
       page_url = parent_container.relative_url
       {
@@ -390,7 +414,7 @@ module Contentful
         meta_description: meta_description,
         site_version: site_version.downcase,
         site_version_url_to_redirect: site_version_url_to_redirect,
-        page_white_spacing_top: page_white_spacing_top
+        page_white_spacing_top_class: page_white_spacing_top_class
       }
     end
 

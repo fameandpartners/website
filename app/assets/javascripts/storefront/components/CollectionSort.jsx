@@ -1,4 +1,5 @@
-import React, {Component, PropTypes,} from 'react';
+/* eslint-disable */
+import React from 'react';
 import {connect,} from 'react-redux';
 import {bindActionCreators,} from 'redux';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
@@ -26,7 +27,7 @@ function dispatchToProps(dispatch) {
     return bindActionCreators(CollectionFilterSortActions, dispatch);
 }
 
-class CollectionSort extends Component {
+class CollectionSort extends React.Component {
     constructor(props) {
         super(props);
         autobind(this);
@@ -69,12 +70,12 @@ class CollectionSort extends Component {
     }
 }
 
-CollectionSort.propTypes = {
-    order: PropTypes.string,
-
-    // Redux Actions
-    orderProductsBy: PropTypes.func,
-    updateExternalLegacyFilters: PropTypes.func,
-};
+// CollectionSort.propTypes = {
+//     order: PropTypes.string,
+//
+//     // Redux Actions
+//     orderProductsBy: PropTypes.func,
+//     updateExternalLegacyFilters: PropTypes.func,
+// };
 
 export default connect(stateToProps, dispatchToProps)(CollectionSort);

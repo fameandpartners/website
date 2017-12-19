@@ -35,14 +35,16 @@ class Repositories::CartProduct
         line_item_sku: line_item_sku,
         product_type: product_type.to_sym,
         quantity: line_item.quantity,
+        old_price: line_item_old_price,
         price: line_item_price,
         discount: product.discount.try(:amount),
         image: product_image,
+        message: line_item.stock.nil? ? nil : 'All sample sale items are final sale. Offer valid for shipments to US only',
         standard_days_for_making: product.standard_days_for_making,
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
-        delivery_period: product.delivery_period, #line_item.delivery_period_policy.delivery_period,
+        delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
       )
@@ -61,7 +63,7 @@ class Repositories::CartProduct
   private
 
     def price_drop_au_product?
-      if product.currency == "AUD" && Features.active?(:price_drop_au)
+      if line_item.currency == "AUD" && Features.active?(:price_drop_au)
         current_item_sku = product.sku.downcase
         price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
         price_drop_au_items_array.map!(&:downcase)
@@ -118,7 +120,7 @@ class Repositories::CartProduct
     end
 
     def making_options
-      line_item.making_options.includes(:product_making_option).map do |option|
+      line_item.making_options.includes(:product_making_option).map do |option| 
         OpenStruct.new(
           id: option.id,
           option_type: option.product_making_option.option_type,
@@ -134,15 +136,17 @@ class Repositories::CartProduct
     # provide the available making_options to front end
     def available_making_options
       product.making_options.map do |mo|
-        OpenStruct.new(
-          id: mo.id,
-          option_type: mo.option_type,
-          name: mo.name,
-          display_discount: mo.display_discount,
-          description: mo.description,
-          delivery_period: mo.display_delivery_period,
-          active: mo.active
-        )
+        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type != 'fast_making') 
+          OpenStruct.new(
+            id: mo.id,
+            option_type: mo.option_type,
+            name: mo.name,
+            display_discount: mo.display_discount,
+            description: mo.description,
+            delivery_period: mo.display_delivery_period,
+            active: mo.active
+          )
+        end
       end
     end
 
@@ -159,6 +163,14 @@ class Repositories::CartProduct
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil
       )
+    end
+
+     def line_item_old_price
+      if line_item.old_price
+        return Spree::Price.new(amount: line_item.old_price).display_price.to_s
+      else
+        return nil
+      end
     end
 
     def line_item_sku
