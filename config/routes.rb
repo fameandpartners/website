@@ -413,12 +413,12 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
-    
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    
+
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
@@ -473,8 +473,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/style-consultation', to: redirect("/styling-session")
 
-    get '/styling-session'  => 'style_sessions#new', as: :styling_session
-    resource 'style-session', as: 'style_session', only: [:create]
+    get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
 
     get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
