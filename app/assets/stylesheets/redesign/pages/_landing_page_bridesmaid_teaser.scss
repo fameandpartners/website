@@ -1,5 +1,8 @@
 /* [Bridesmaid teaser page]
 -------------------------------------------------------*/
+// We've got new colors here but they are only used here on this page.
+// If they are reused anywhere else then they should become SCSS variables.
+
 .Page__bridesmaidTeaser {
   text-align: center;
 
@@ -8,16 +11,8 @@
     font-size: 1.2rem;
   }
 
-  .Section__dressesArea {
-    padding: 55px 0;
-    background: $c-neutral-4;
-  }
-
-  .DressBlock__description {
-    font-family: $font-family-secondary;
-    margin-top: 30px;
-    font-size: 2.2rem;
-    font-weight: 500;
+  .Heading {
+    margin-top: 0;
   }
 
   .CtaBtn {
@@ -29,31 +24,19 @@
     margin-bottom: 80px;
   }
 
-  .Section__intro .ContentCopy {
-    margin-top: 100px;
-  }
-
   .Section__customCollectionsCta {
     background: $c-neutral-2;
-
-    @include column-vertical-align();
   }
 
   .Section__formArea {
-    background: $c-neutral-5;
+    background: #f9ddd8;
     padding: 100px 0;
   }
 
   .NewsletterFormRow {
-    margin-top: 30px;
-
-    .BtnCtaThick--pink {
-      font-size: 1.7rem;
-      padding: 8px 35px;
-    }
+    margin-top: 50px;
 
     input {
-      background: #bbcfea;
       border: none;
       font-size: 1.9rem;
       font-weight: 500;
@@ -73,50 +56,40 @@
       color: $c-neutral-black;
     }
 
-  }
-
-  .Section__footer {
-    margin-bottom: 30px;
-
-    .ContentCopy {
-      margin-top: 50px;
-    }
-
-    .CtaLink {
+    button {
+      background: #313679;
+      color: $c-neutral-white;
       font-family: $font-heading;
       font-size: 2rem;
-      border-bottom: 1px solid $c-neutral-black;
+      font-weight: 300;
+      text-transform: none;
+      padding: 8px 35px;
+      margin-top: 25px;
     }
 
+  }
+
+  .btn_ctaThickBorder {
+    margin-top: 25px;
+    padding: 7px 40px;
+    font-size: 2.1rem;
+    font-family: $font-heading;
+    font-weight: 400;
+    color: #3d4379;
+    background: $c-neutral-white;
+    border: 3px solid #3d4379;
   }
 
   .CtaLink__Footer {
-    font-family: $font-heading;
-    font-size: 1.9rem;
-
-    .icon {
-      padding-left: 5px;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
+    display: inline-block;
   }
 
-  .CtaLink--underline {
-    border-bottom: 1px solid $c-neutral-black;
+  .Section__footer,
+  .Section__customCollectionsCta {
+    @include column-vertical-align();
   }
 
-  .BtnCtaThick--pink {
-    margin-top: 25px;
-    padding: 6px 35px;
-    font-size: 2.1rem;
-    // These new colors are only used here on this page. If they are reused anywhere else then they should become SCSS variables.
-    color: #3d4379;
-    background: #f9ddd8;
-    border: 4px solid #3d4379;
-  }
-
-  // Utils
+  // Helpers
 
   .u-overlay-area {
     position: relative;
@@ -169,9 +142,56 @@
       margin-bottom: 30px;
     }
 
+    .Section__intro .ContentCopy {
+      margin-top: 100px;
+    }
+
+    .Section__introWrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .u-full-width--desktop {
+      @include real-full-width;
+      overflow: hidden;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    .u-full-width--mobile {
+      @include real-full-width;
+      overflow: hidden;
+    }
+
+    .Section__introWrapper {
+      bottom: 0;
+    }
+
+    .Section__footer,
+    .Section__customCollectionsCta {
+
+      .ContentCopy {
+        padding: 100px 0;
+      }
+
+    }
+
+    .Section__formArea {
+
+      .Heading {
+        font-size: 3.5rem;
+      }
+
+      .Subheading {
+        font-size: 2rem;
+      }
+
+    }
+
   }
 
 }
