@@ -140,6 +140,13 @@ export default class Onboarding extends FirebaseComponent {
                     Get up to 25% off now
                   </button>
                 </div>
+                <div className="Onboarding__termsOfServiceWrapper col-xs-12 text-center">
+                  <a
+                    className="Onboarding__termsOfServiceLink"
+                    href="/terms">
+                    Terms of Service
+                  </a>
+                </div>
               </div>
             </form>
           </div>

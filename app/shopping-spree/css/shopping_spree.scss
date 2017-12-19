@@ -1170,3 +1170,16 @@ $chat_bar_header_height: 22px;
 .ToastAlert__container--discount .toastify-content {
   background: black;
 }
+
+.Onboarding__termsOfServiceWrapper {
+  padding: 20px;
+}
+
+.Onboarding__termsOfServiceLink {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: #979797;
+  }
+}
