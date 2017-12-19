@@ -70,7 +70,7 @@ include Newgistics::NewgisticsHelper
           "PrimaryEmailAddress" => @email
         }.merge(make_address_map),
         "deliveryMethod" => "SelfService",
-        "dispositionRuleSetId" => newgistics_conf['rule_set']
+        "dispositionRuleSetId" => newgistics_conf['rule_set'],
         "labelCount" => 1,
         "merchantID" => newgistics_conf['merchant_id']
       }.merge(make_return_id_map)
