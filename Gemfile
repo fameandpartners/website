@@ -31,6 +31,7 @@ gem 'elasticsearch-persistence'
 gem 'newrelic_rpm'
 gem 'sentry-raven'
 gem 'customerio', '~> 1.0.0'
+gem 'firebase', '~> 0.2.6'
 
 # Engines
 path 'engines' do
@@ -133,7 +134,6 @@ group :development do
   gem 'foreman', require: false
   gem 'puma'
   gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'awesome_print', require: "ap"
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'

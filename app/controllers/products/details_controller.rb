@@ -5,6 +5,7 @@ class Products::DetailsController < Products::BaseController
 
   def show
     @zopim_opt_out = true
+    @optimizely_opt_in = true
     @product = setup_product(params)
     @user = spree_current_user || {}
 
@@ -29,7 +30,7 @@ class Products::DetailsController < Products::BaseController
 
     # only admins can view deleted products
     if product.is_deleted && !spree_current_user.try(:has_spree_role?, "admin")
-      raise Errors::ProductInactive
+    raise Errors::ProductInactive
     end
 
     # set preselected images colors
