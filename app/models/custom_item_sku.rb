@@ -8,7 +8,7 @@ class CustomItemSku
 
   def call
     # return line_item.variant.sku unless line_item.personalization.present?
-    if line_item.personalization.sku.nil?
+    if line_item.personalization&.sku.nil?
       line_item.personalization.sku = Skus::Generator.new(
         style_number:            style_number,
         size:                    size,
