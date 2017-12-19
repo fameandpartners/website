@@ -74,7 +74,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     paymentStep.length > 0
 
   noReturnTypeSelected: () ->
-    !@hasReturnDiscount() && !@hasReturnInsurance()
+    !@hasReturnInsurance()
 
   optInReminderModal: () ->
     if (!sessionStorage.getItem('returnModalShown'))
@@ -88,13 +88,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       $(classToShow).toggleClass('hidden')
 
   initializeReturnTypeCheckbox: () ->
-    # is there already a returnType in the cart?
-    if (@hasReturnDiscount())
-      $('.js-returns-trigger-A').prop('checked', true)
-      $('.js-returns-abc-option-message-A').toggleClass('hidden')
-    else if (@hasReturnInsurance())
-      $('.js-returns-trigger-B').prop('checked', true)
-      $('.js-returns-abc-option-message-B').toggleClass('hidden')
+    if (@hasReturnInsurance())
+      $('.js-returns-trigger').prop('checked', true)
 
   removeInsuranceIfCartEmpty: () ->
     if (@cart.data.products.length == 1 && @cart.data.products[0].name == 'RETURN_INSURANCE')
@@ -104,16 +99,13 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
     returnInsurance.length
 
-  hasReturnDiscount: () ->
-    if (@cart.data.promocode)
-      @cart.data.promocode.indexOf('DELIVERYDISC') > -1
-
   whichReturnType: () ->
     $('#return_type').val()
 
   openLearnMoreHandler: (e) ->
     e.preventDefault()
     new window.page.FlexibleReturnsModal(e.currentTarget.id)
+    @initializeReturnTypeCheckbox()
 
   removeProductHandler: (e) ->
     e.preventDefault()
@@ -129,20 +121,14 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     else
       @removeReturnType(returnOption)
 
-  addReturnType: (option) ->
-    if (option == 'A')
-      @cart.applyReturnTypePromoCode('DELIVERYDISC')
-    else if (option == 'B')
-      @cart.applyReturnTypePromoCode('DELIVERYINS')
+  addReturnType: () ->
+    @cart.applyReturnTypePromoCode('DELIVERYINS')
 
   removeReturnType: (option) ->
-    if (option == 'A')
-      @cart.applyReturnTypePromoCode('DELIVERYDISC')
-    else if (option == 'B')
-      returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
-      lineItemId = returnInsurance[0].line_item_id
-      $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
-      @cart.removeProduct(lineItemId)
+    returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+    lineItemId = returnInsurance[0].line_item_id
+    $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
+    @cart.removeProduct(lineItemId)
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()

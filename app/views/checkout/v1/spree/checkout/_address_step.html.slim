@@ -17,7 +17,8 @@ ruby:
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
 
     = hidden_field_tag :create_account, :value => true
-    /# We are defaulting here to (B) Insurance, we need to make this thec control
+    /# We are defaulting here to (B) Insurance, we need to make this the control
+    /# Test (A)lteration credit would be changed via VWO.
     = hidden_field_tag :return_type, 'B'
 
     .row

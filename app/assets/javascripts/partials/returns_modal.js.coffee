@@ -31,7 +31,7 @@ window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutMo
                  '<div class="ReturnOption__content col-xs-12">' +
                    '<div class="col-xs-1">' +
                      '<div class="Checkbox__wrapper">' +
-                       '<input class="Checkbox js-returns-abc-option-trigger js-returns-trigger-B" type="checkbox" value="B" id="returns_option_b">' +
+                       '<input class="Checkbox js-returns-abc-option-trigger js-returns-trigger" type="checkbox" value="B" id="returns_option_b">' +
                        '<label for="returns_option_b" class="Checkbox__label"></label>' +
                      '</div>' +
                    '</div>' +

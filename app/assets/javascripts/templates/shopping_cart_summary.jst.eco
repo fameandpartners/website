@@ -127,7 +127,7 @@ $('.js-trigger-empty-cart-modal').modal({
       <div class="col-xs-1">
         <div class="Checkbox__wrapper">
           <input
-            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-B"
+            class="Checkbox js-returns-abc-option-trigger js-returns-trigger"
             type="checkbox"
             value="B"
             id="returns_option_b"
@@ -166,10 +166,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <p>
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
-        <p class="js-returns-abc-option-message-A hidden">
-          Returns Savings (10%)<span class="pull-right">-<%= @cart.delivery_discount %></span>
-        </p>
-        <p class="js-returns-abc-option-message-B hidden">
+        <p class="js-returns-abc-option-message hidden">
           Returns Deposit<span class="pull-right">$25.00</span>
         </p>
         <p>
