@@ -1,0 +1,22 @@
+.shopping-spree-container .chat-content .StepMessage__invite-button {
+  color: #fff;
+  background-color: $c-clique-blue;
+  width: 80%;
+  padding: 4px;
+  border-radius: 2px;
+}
+
+.shopping-spree-container .chat-content .StepMessage__container {
+  color: #222;
+  background-color: #f5f5f5;
+  border: 1px solid #E5E5E5;
+  text-align: center;
+  margin: 16px 0;
+  padding: 24px 0;
+}
+
+.shopping-spree-container .chat-content .StepMessage__container p.StepMessage__content {
+  font-family: $font-family-secondary;
+  padding: 0 32px;
+  margin-bottom: 8px;
+}

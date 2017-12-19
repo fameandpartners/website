@@ -16,5 +16,9 @@ class ProductHeightRangeGroup < ActiveRecord::Base
     style_number  = variant&.product&.sku
     with_style_number(style_number).presence || ProductHeightRangeGroup.defaults
   end
+
+  def map_height_to_name( height_value )
+    product_height_ranges.where( '? >= min and ? <= max', height_value, height_value ).first.map_to
+  end
   
 end

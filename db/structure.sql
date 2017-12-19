@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -228,6 +228,7 @@ CREATE TABLE categories (
 --
 
 CREATE SEQUENCE categories_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -403,6 +404,7 @@ CREATE TABLE contentful_routes (
 --
 
 CREATE SEQUENCE contentful_routes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -437,6 +439,7 @@ CREATE TABLE contentful_versions (
 --
 
 CREATE SEQUENCE contentful_versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -886,6 +889,7 @@ CREATE TABLE facebook_accounts (
 --
 
 CREATE SEQUENCE facebook_accounts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -919,6 +923,7 @@ CREATE TABLE facebook_ad_creatives (
 --
 
 CREATE SEQUENCE facebook_ad_creatives_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -969,6 +974,7 @@ CREATE TABLE facebook_ad_insights (
 --
 
 CREATE SEQUENCE facebook_ad_insights_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1007,6 +1013,7 @@ CREATE TABLE facebook_ads (
 --
 
 CREATE SEQUENCE facebook_ads_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1051,6 +1058,7 @@ CREATE TABLE facebook_adsets (
 --
 
 CREATE SEQUENCE facebook_adsets_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1090,6 +1098,7 @@ CREATE TABLE facebook_campaigns (
 --
 
 CREATE SEQUENCE facebook_campaigns_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1335,6 +1344,7 @@ CREATE TABLE item_return_labels (
 --
 
 CREATE SEQUENCE item_return_labels_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2008,38 +2018,6 @@ CREATE SEQUENCE moodboards_id_seq
 --
 
 ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
-
-
---
--- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE newgistics_schedulers (
-    id integer NOT NULL,
-    last_successful_run character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    name character varying(255)
-);
-
-
---
--- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE newgistics_schedulers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
 
 
 --
@@ -4892,7 +4870,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text NOT NULL
+    user_data text DEFAULT '{}'::text
 );
 
 
@@ -5841,13 +5819,6 @@ ALTER TABLE ONLY moodboard_items ALTER COLUMN id SET DEFAULT nextval('moodboard_
 --
 
 ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_seq'::regclass);
-
-
---
--- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
 
 
 --
@@ -6900,14 +6871,6 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
-
-
---
--- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY newgistics_schedulers
-    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
