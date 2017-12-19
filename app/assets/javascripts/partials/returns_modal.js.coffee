@@ -47,5 +47,11 @@ window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutMo
       afterOpen: @updateHtml,
       timeout: 0,
     }, opts)
+
+    elem = document.body
+    event = document.createEvent('Event')
+    event.initEvent('modal', true, true);
+    elem.dispatchEvent(event);
+
     $('.vex-dialog-button-primary').text('continue')
     $('.vex-dialog-button-secondary').html('&times;')
