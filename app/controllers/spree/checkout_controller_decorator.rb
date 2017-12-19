@@ -144,7 +144,7 @@ Spree::CheckoutController.class_eval do
 
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
-        @order.vwo_type = params[:return_type]
+        @order.vwo_type = params[:return_type] #return type is being hooked into to pass vwo type
         @order.save!
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
