@@ -48,7 +48,7 @@ Spree::PaypalController.class_eval do
         :PaymentDetails => [payment_details(items)]
       }})
 
-    current_order.return_type = params['return_type']
+    current_order.vwo_type = params['return_type'] #return type is being hooked into to pass vwo type
     current_order.save
 
     begin
