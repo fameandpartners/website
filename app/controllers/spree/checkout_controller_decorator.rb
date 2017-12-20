@@ -51,7 +51,6 @@ Spree::CheckoutController.class_eval do
     find_payment_methods
     move_order_from_cart_state(@order)
     @order.return_type = 'B'
-    @order.save!
 
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
