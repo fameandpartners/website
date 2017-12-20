@@ -63,7 +63,7 @@ class Repositories::CartProduct
   private
 
     def price_drop_au_product?
-      if product.currency == "AUD" && Features.active?(:price_drop_au)
+      if line_item.currency == "AUD" && Features.active?(:price_drop_au)
         current_item_sku = product.sku.downcase
         price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
         price_drop_au_items_array.map!(&:downcase)

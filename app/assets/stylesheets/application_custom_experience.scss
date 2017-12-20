@@ -1,6 +1,19 @@
-@import 'custom_experience/reset';
-@import 'custom_experience/react';
+// LEGACY
+//= require_tree ./redesign/stylesheets
 
-// For Alerts
 @import 'redesign/vars';
+@import 'redesign/mixins';
+@import 'redesign/extras/helpers';
+@import 'media_queries';
+@import 'redesign/base/base';
+@import 'redesign/base/type';
+@import 'redesign/base/links';
+@import 'redesign/base/input-groups';
+@import 'redesign/base/forms';
+@import 'redesign/base/buttons';
 @import 'redesign/alerts';
+@import 'redesign/generic/helpers';
+
+// CURRENT
+@import 'custom_experience/react';
+@import 'shopping_spree/shopping_spree';
