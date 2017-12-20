@@ -273,7 +273,7 @@ FameAndPartners::Application.routes.draw do
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
