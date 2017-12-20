@@ -44,14 +44,3 @@
         .row.size-guide-row
           .col-md-12
             = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2016_v2 , size_col_span: 2}
-
-    .row.advice-fit
-      .col-md-12
-        h2.h3.text-center Want advice on fit and style ?
-        .col-md-10.col-md-offset-1.text-center
-          p Let Fame style you--for free. Our wardrobe stylist Amber Bond is available to advise on fit, customization, and styling options via chat, phone, or video call. It's that easy.
-
-        .col-md-12.text-center
-          = link_to styling_session_path
-            span.btn-xs.btn-featured
-              | Book Your Session
