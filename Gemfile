@@ -109,6 +109,9 @@ gem 'addressable'
 
 gem 'rollout'
 
+# healthcheck
+gem 'okcomputer'
+
 # masterpass gateway
 gem 'spree_masterpass', :path => './spree_masterpass'
 

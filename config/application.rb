@@ -13,9 +13,6 @@ require_relative '../app/middleware/webpack_proxy'
 
 module FameAndPartners
   class Application < Rails::Application
-    # config.skylight.environments += ['staging']
-    # config.skylight.alert_log_file = true
-
     # sidekiq needs lib in eager paths
     config.eager_load_paths += %W( #{config.root}/lib/facebook)
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
