@@ -475,9 +475,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
 
-    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
-    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+    get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
 
     get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
     resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
