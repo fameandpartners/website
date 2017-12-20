@@ -1,0 +1,183 @@
+= render partial: 'pages/robots'
+- form_source = '/coming-soon-custom-bridesmaid-dresses'
+- form_name = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+- service = ENV.fetch('SUBSCRIPTION_SERVICE')
+
+.Page__bridesmaidTeaser.js-smooth-scroll
+
+  section.Section__intro
+    .u-overlay-area
+      video.u-overlay-area__media(muted="true" autoplay="true" loop="true" name="Evening Hours Colleciton" src="https://www.w3schools.com/html/mov_bbb.mp4" aria-hidden="false")
+      / img.u-overlay-area__media.hidden-xs.hidden-sm src="http://fakeimg.pl/1440x600/eee/000?text=desktop video"
+      / img.u-overlay-area__media.hidden-md.hidden-lg src="http://fakeimg.pl/500x600/eee/000?text=mobile video"
+
+      .u-overlay-area__overlay
+        .u-overlay-area__caption.Section__introWrapper
+          .container
+            .row
+              .col-xs-12
+                .ContentCopy
+                  a.btn.btn_ctaThickBorder.text-transform-none href="#register" Sign up to get 20% off
+
+  section.Section__customCollectionsCta
+    .container-fluid.u-full-width--desktop
+      .row
+        .vertical-align
+          .col-md-4.col-md-offset-1
+            .ContentCopy
+              h2.h1.Heading Custom collections,<br>made for your maids.
+              h4.Subheading Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi laborum obcaecati eveniet odit cumque autem soluta earum facilis.
+
+              a.btn.btn_ctaThickBorder.text-transform-none href="#register" Sign up to get 20% off
+
+          .col-md-6.col-md-offset-1
+            .u-full-width--mobile
+              img.img-responsive src="http://fakeimg.pl/880x1060/fff/000?text=video"
+
+  section.Section__formArea#register
+    .container-fluid
+      .row
+        .vertical-align
+          .col-md-6.col-md-offset-3
+            .ContentCopy
+              h2.h1.Heading 500,000,000 options.
+              h3.Subheading Sign up for early access — and 20% off.
+
+              .row.NewsletterFormRow
+                .col-md-8.col-md-offset-2
+                  .newsletter-signup-form
+                    form class=(form_name)
+                      input name='url' type='hidden' value=(subscribe_campaigns_email_capture_path)
+                      input name='form_name' type='hidden' value=(form_source)
+                      input type='hidden' name='service' value=(service)
+
+                      .js-bridesmaid-teaser-click-track data-action='Email Field Press'
+                        input.form-control.input-lg.js-en-field-email (name="email" type="email" placeholder="Enter your email address" required="required")
+
+                      .js-bridesmaid-teaser-click-track data-action='Email Signup Button Press'
+                        button.btn type="submit" Sign Up
+
+              .js-email-success-message.email-module-message.hide
+                h2 Thanks
+                h5 Thanks for signing up. You'll be the first to know what's new.
+
+              .js-email-error-message.email-module-message.hide
+                h2 Sorry
+                h5.js-email-error-message-body There was an error saving your email.
+
+                = content_for :inline_javascript do
+                  |  new window.page.NewsletterSubscriberOnPage({form: '#{form_name}', source: '#{form_source}'});
+
+
+  section.Section__footer
+    .container-fluid.u-full-width--desktop.u-full-width--mobile
+      .row
+        .vertical-align
+          .col-md-6.col-md-push-6
+             .ContentCopy
+              h2.h1.Heading Can't Wait?
+              a.btn_ctaThickBorder.CtaLink__Footer href="#{modern_bridesmaid_collection_path}"
+                | Shop the Current Collection
+
+
+          .col-md-6.col-md-pull-6
+            .u-full-width--mobile
+              - current_tile_image = image_path("landingpages/bridesmaid-teaser/tile-03.jpg")
+              - current_tile_mobile_image = image_path("landingpages/bridesmaid-teaser/tile-03-mob.jpg")
+              picture
+                source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
+                source media="(min-width: 992px)" srcset="#{current_tile_image}"
+                img.img-responsive src="#{current_tile_image}" srcset="
+                  #{current_tile_mobile_image} 991w,
+                  #{current_tile_image} 992w"
+
+- content_for :body_end do
+  javascript:
+
+    (function(window) {
+
+      // Event Tracking Listener
+      $('.js-bridesmaid-teaser-click-track').on('click', function(){
+        window.track.bridesmaidTeaserTrack(this.dataset.action, this.dataset.label);
+      });
+
+      // Newsletter subscription
+      var NewsletterSubscriberOnPage,
+        bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+      window.page || (window.page = {});
+
+      window.page.NewsletterSubscriberOnPage = NewsletterSubscriberOnPage = (function() {
+        function NewsletterSubscriberOnPage(opts) {
+          if (opts == null) {
+            opts = {};
+          }
+          this.success = bind(this.success, this);
+          this.failure = bind(this.failure, this);
+          this.handler = bind(this.handler, this);
+          this.submit = bind(this.submit, this);
+          this.url = bind(this.url, this);
+          this.campaign = opts.campaign || 'home';
+          this.$form = $('.' + opts.form);
+          this.$form.on('submit', this.submit);
+          this.source = opts.source || 'Contentful Email Module'
+        }
+
+        NewsletterSubscriberOnPage.prototype.url = function() {
+          return this.$form.attr('action') + "?callback=?";
+        };
+
+        NewsletterSubscriberOnPage.prototype.submit = function(e) {
+          var $this, email, url, form_name, service;
+          e.preventDefault();
+          $this = $(e.target);
+          url = $('input[name="url"]', $this).val();
+          form_name = $('input[name="form_name"]', $this).val();
+          email = $('input[name="email"]', $this).val();
+          service = $('input[name="service"]', $this).val();
+          return $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            url: url,
+            async: true,
+            data: {
+              email: email,
+              service: service,
+              form_name: form_name,
+              source: this.source
+            },
+            success: this.handler,
+            error: function () {
+                this.signupFailure
+            }
+          });
+        };
+
+        NewsletterSubscriberOnPage.prototype.handler = function(data) {
+          if (data.status === 'done') {
+            return this.success(data);
+          } else {
+            return this.failure(data);
+          }
+        };
+
+        NewsletterSubscriberOnPage.prototype.failure = function() {
+          var message = 'Please enter a valid email.';
+          $('.js-email-error-message-body').text(message);
+          $('.js-email-error-message').removeClass('hide');
+        };
+
+        NewsletterSubscriberOnPage.prototype.signupFailure = function() {
+          var message = 'We had an issue saving your email.';
+          $('.js-email-error-message-body').text(message);
+          $('.js-email-error-message').removeClass('hide');
+        };
+
+        NewsletterSubscriberOnPage.prototype.success = function() {
+          $('.js-email-error-message').addClass('hide');
+          $('.newsletter-signup-form, .js-email-success-message').toggleClass('hide');
+        };
+        return NewsletterSubscriberOnPage;
+      })();
+
+    })(window)

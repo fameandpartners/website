@@ -128,6 +128,9 @@ FameAndPartners::Application.routes.draw do
     # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
     get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
+    # Bridesmaid teaser landing page
+    get '/coming-soon-custom-bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid-teaser-page', :as => :bridesmaid_teaser_landing_page
+
     ###########
     # Lookbooks
     ###########
