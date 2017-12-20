@@ -4,9 +4,9 @@ class CreateBridesmaidTeaserPage < ActiveRecord::Migration
     {
       path:                 '/coming-soon-custom-bridesmaid-dresses',
       template_path:        '/statics/landing_page_bridesmaid_teaser',
-      heading:              'Bridesmaid teaser page',
-      title:                '[TODO] Bridesmaid teaser page title',
-      meta_description:     '[TODO] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto et illum hic quidem id, tempora aut ipsa voluptatum quod rem aliquid, itaque quo temporibus iure eius recusandae consequatur? Quos, animi.',
+      heading:              'Custom Bridesmaid Dresses',
+      title:                'Custom Bridesmaid Dresses',
+      meta_description:     'Coming Soon: Custom and Color Like No Other, with 500,000,000 ways to customize your bridesmaid dresses.',
       lookbook:             'true'
     }
   end
