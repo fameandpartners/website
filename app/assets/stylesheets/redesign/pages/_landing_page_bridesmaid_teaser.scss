@@ -5,6 +5,7 @@
 
 .Page__bridesmaidTeaser {
   text-align: center;
+  margin-top: -60px;
 
   .ContentCopy {
     padding: 0 20px;
@@ -61,7 +62,7 @@
       color: $c-neutral-white;
       font-family: $font-heading;
       font-size: 2rem;
-      font-weight: 300;
+      font-weight: 400;
       text-transform: none;
       padding: 8px 35px;
       margin-top: 25px;
@@ -89,8 +90,7 @@
     @include column-vertical-align();
   }
 
-  // Helpers
-
+  // Helpers - if these are used in other pages we can move them to a separate stylesheet
   .u-overlay-area {
     position: relative;
     display: block;
@@ -138,6 +138,10 @@
 
   @media (min-width: $bootstrap-md-width) {
 
+    .FloatingCta__wrapper {
+      display: none;
+    }
+
     .Heading {
       margin-bottom: 30px;
     }
@@ -162,8 +166,24 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    .FloatingCta__wrapper {
+      background: $c-neutral-black;
+      position: fixed;
+      width: 100%;
+      bottom: 30px;
+      left: 0;
+      padding: 15px;
+      font-size: 2.4rem;
+      z-index: 1;
+
+      a {
+        color: $c-neutral-white;
+      }
+
+    }
+
     .u-full-width--mobile {
-      @include real-full-width;
+      padding: 0;
       overflow: hidden;
     }
 
@@ -194,4 +214,10 @@
 
   }
 
+}
+
+// !important is *ugly* but it's needed to override our fixed header styling :(
+.js-header-navigation-transparent {
+  border: 0 !important;
+  box-shadow: none !important;
 }
