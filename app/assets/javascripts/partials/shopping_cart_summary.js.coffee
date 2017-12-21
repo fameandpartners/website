@@ -26,7 +26,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
-    @$modalContainer.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+    # @$modalContainer.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
     @$container.on('click', '.js-returns-learn-more', @openLearnMoreHandler)
     @cart.on('change', @render)
     @render()
@@ -97,6 +97,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   initializeReturnTypeCheckbox: () ->
     if (@hasReturnInsurance())
       $('.js-returns-trigger').prop('checked', true)
+      $('.js-returns-abc-option-message').removeClass('hidden');
 
   findReturnInsuranceLineItem: () ->
     @cart.data.products.filter((p) -> return p.name == 'RETURN_INSURANCE')
@@ -142,6 +143,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
     lineItemId = returnInsurance[0].line_item_id
     $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
+    $('.js-returns-abc-option-message').addClass('hidden');
     @cart.removeProduct(lineItemId)
 
   removeProductCustomizationHandler: (e) ->
