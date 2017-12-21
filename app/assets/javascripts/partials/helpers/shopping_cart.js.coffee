@@ -204,6 +204,7 @@ window.helpers.ShoppingCart = class ShoppingCart
         @trigger('complete', data)
       else
         @updateData(data)
+        @toggleReturnsDepositMessage()
         @trigger('success', data)
         @trigger('complete', data)
     ).error( () =>
@@ -213,6 +214,13 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  toggleReturnsDepositMessage: () ->
+    returnInsurance = @data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+
+    if (returnInsurance.length)
+      $('.js-returns-abc-option-message').removeClass('hidden');
+    else
+      $('.js-returns-abc-option-message').addClass('hidden');
 
   # analytics
   trackAddToCart: (product) ->
