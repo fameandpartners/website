@@ -7,7 +7,7 @@ namespace :data do
       gw.active = false
       gw.save
     end
-binding.pry
+
     afterpay_payment                    = Spree::Gateway::AfterpayPayment.new
     afterpay_payment.name               = 'Afterpay Australia TEST'
     afterpay_payment.preferred_username = '32935' # Sandbox API Keys
