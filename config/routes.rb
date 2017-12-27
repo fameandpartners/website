@@ -128,6 +128,9 @@ FameAndPartners::Application.routes.draw do
     # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
     get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
+    # Bridesmaid teaser landing page
+    get '/coming-soon-custom-bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid-teaser-page', :as => :bridesmaid_teaser_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -314,10 +317,9 @@ FameAndPartners::Application.routes.draw do
     get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
     # Wedding Atelier App - Landing page
-    get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
+    get '/wedding-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses'), as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
-    get '/weddings-atelier', to: redirect('/wedding-atelier')
-
+    get '/weddings-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses')
 
     # Casual Summer Styles Collection Page
     get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page

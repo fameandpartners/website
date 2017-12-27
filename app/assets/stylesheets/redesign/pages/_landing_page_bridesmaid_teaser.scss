@@ -1,0 +1,235 @@
+/* [Bridesmaid teaser page]
+-------------------------------------------------------*/
+// We've got new colors here but they are only used here on this page.
+// If they are reused anywhere else then they should become SCSS variables.
+
+.Page__bridesmaidTeaser {
+  text-align: center;
+
+
+  p {
+    font-size: 2.1rem;
+  }
+
+  .ContentCopy {
+    padding: 0 20px;
+    font-size: 1.2rem;
+  }
+
+  .Heading {
+    margin-top: 0;
+  }
+
+  .CtaBtn {
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  .ContentCopy__extraSpacingBottom {
+    margin-bottom: 80px;
+  }
+
+  .Section__customCollectionsCta {
+    background: $c-neutral-2;
+  }
+
+  .Section__formArea {
+    background: #f9ddd8;
+    padding: 100px 0;
+  }
+
+  .NewsletterFormRow {
+    margin-top: 50px;
+
+    input {
+      border: none;
+      font-size: 1.9rem;
+      font-weight: 500;
+      padding: 27px 20px;
+    }
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: $c-neutral-black;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $c-neutral-black;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: $c-neutral-black;
+    }
+
+    button {
+      background: #313679;
+      color: $c-neutral-white;
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-transform: none;
+      padding: 12px 35px;
+    }
+
+  }
+
+  .btn_ctaSlimBorder {
+    margin-top: 25px;
+    padding: 7px 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3d4379;
+    background: $c-neutral-white;
+    border: 1px solid #3d4379;
+    text-transform: uppercase;
+  }
+
+  .CtaLink__Footer {
+    display: inline-block;
+  }
+
+  .Section__footer,
+  .Section__customCollectionsCta {
+    @include column-vertical-align();
+  }
+
+  // Helpers - if these are used in other pages we can move them to a separate stylesheet
+  .u-overlay-area {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .u-overlay-area__media {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .u-overlay-area__overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .u-overlay-area__caption {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    width: 100%;
+  }
+
+  .u-overlay-area__caption--top {
+    top: 0;
+  }
+
+  .u-overlay-area__caption--center {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .u-overlay-area__caption--bottom {
+    bottom: 0;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .FloatingCta__wrapper {
+      display: none;
+    }
+
+    .Heading {
+      margin-bottom: 30px;
+    }
+
+    .Section__customCollectionsCta {
+      padding: 50px 0;
+    }
+
+    .Section__intro .ContentCopy {
+      margin-top: 100px;
+    }
+
+    .Section__intro .btn_ctaSlimBorder {
+      margin-top: 100px;
+    }
+
+    .Section__introWrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .u-full-width--desktop {
+      @include real-full-width;
+      overflow: hidden;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .FloatingCta__wrapper {
+      background: $c-neutral-black;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      padding: 15px;
+      font-size: 2.4rem;
+      z-index: 1;
+
+      a {
+        color: $c-neutral-white;
+      }
+
+    }
+
+    .u-full-width--mobile {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .Section__introWrapper {
+      bottom: 0;
+    }
+
+    .Section__footer,
+    .Section__customCollectionsCta {
+
+      .ContentCopy {
+        padding: 100px 0;
+      }
+
+    }
+
+    .Section__formArea {
+
+      .Heading {
+        font-size: 3.5rem;
+      }
+
+      .Subheading {
+        font-size: 2rem;
+      }
+
+      .input-group {
+        display: block;
+      }
+
+      button {
+        margin-top: 25px;
+      }
+
+    }
+
+  }
+
+}
