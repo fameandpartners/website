@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -3340,6 +3340,7 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    customizations json,
     stock boolean,
     color character varying(255),
     size character varying(255),
@@ -3600,8 +3601,10 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean,
-    return_type character varying(255)
+    orderbot_synced boolean DEFAULT false NOT NULL,
+    return_type character varying(255),
+    autorefundable boolean,
+    vwo_type character varying(255)
 );
 
 
@@ -9715,3 +9718,5 @@ INSERT INTO schema_migrations (version) VALUES ('20171127212333');
 INSERT INTO schema_migrations (version) VALUES ('20171207195245');
 
 INSERT INTO schema_migrations (version) VALUES ('20171216185833');
+
+INSERT INTO schema_migrations (version) VALUES ('20171219203151');

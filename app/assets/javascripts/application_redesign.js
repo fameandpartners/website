@@ -126,6 +126,12 @@
 //= require partials/fitgau_reminder
 
 
+//-------------------------------
+//      SHOPPING SPREE INIT     |
+//-------------------------------
+//= require partials/init_shopping_spree
+
+
 //--------------------------------
 // Hero Tile Carousel
 //--------------------------------

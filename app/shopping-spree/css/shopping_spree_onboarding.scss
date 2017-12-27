@@ -1,0 +1,56 @@
+.OnboardingHero__wrapper {
+  background: url(image-path("shopping_spree/onboarding/hero_mobile.jpg")) no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  height: 360px;
+}
+
+.OnboardingScreenshot__wrapper img {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .OnboardingHero__wrapper {
+    background: url(image-path("shopping_spree/onboarding/hero.jpg")) no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
+    height: 540px;
+  }
+}
+
+.OnboardingHero__desktop-text,
+.OnboardingHero__mobile-text {
+  padding: 16px 32px 16px 16px;
+}
+
+.OnboardingHero__desktop-text p,
+.OnboardingHero__mobile-text p {
+  padding: 0 32px;
+  margin: 12px 0;
+  font-size: 1.08em;
+}
+
+.OnboardingHero__desktop-text .OnboardingHero__heading {
+  font-size: 3.2em;
+}
+
+.OnboardingHero__mobile-text .OnboardingHero__heading {
+  font-size: 2.8em;
+}
+
+.OnboardingHero__desktop-text .OnboardingHero__heading em,
+.OnboardingHero__mobile-text .OnboardingHero__heading em {
+  font-weight: 400;
+}
+
+.OnboardingHero__desktop-text .OnboardingHero__subheading,
+.OnboardingHero__mobile-text .OnboardingHero__subheading {
+  margin-top: 32px;
+  padding: 8px 0;
+  font-size: 1.4em;
+  text-decoration: underline;
+}
+
+.OnboardingHero__mobile-text .OnboardingHero__subheading {
+  margin-top: 24px;
+}
