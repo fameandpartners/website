@@ -6,6 +6,11 @@
 .Page__bridesmaidTeaser {
   text-align: center;
 
+
+  p {
+    font-size: 2.1rem;
+  }
+
   .ContentCopy {
     padding: 0 20px;
     font-size: 1.2rem;
@@ -59,25 +64,23 @@
     button {
       background: #313679;
       color: $c-neutral-white;
-      font-family: $font-heading;
-      font-size: 2rem;
-      font-weight: 400;
+      font-size: 1.8rem;
+      font-weight: 500;
       text-transform: none;
-      padding: 8px 35px;
-      margin-top: 25px;
+      padding: 12px 35px;
     }
 
   }
 
-  .btn_ctaThickBorder {
+  .btn_ctaSlimBorder {
     margin-top: 25px;
-    padding: 7px 40px;
-    font-size: 2.1rem;
-    font-family: $font-heading;
-    font-weight: 400;
+    padding: 7px 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
     color: #3d4379;
     background: $c-neutral-white;
-    border: 3px solid #3d4379;
+    border: 1px solid #3d4379;
+    text-transform: uppercase;
   }
 
   .CtaLink__Footer {
@@ -153,7 +156,7 @@
       margin-top: 100px;
     }
 
-    .Section__intro .btn_ctaThickBorder {
+    .Section__intro .btn_ctaSlimBorder {
       margin-top: 100px;
     }
 
