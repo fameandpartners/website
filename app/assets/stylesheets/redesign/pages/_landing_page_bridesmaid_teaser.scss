@@ -5,7 +5,6 @@
 
 .Page__bridesmaidTeaser {
   text-align: center;
-  margin-top: -60px;
 
   .ContentCopy {
     padding: 0 20px;
@@ -222,10 +221,4 @@
 
   }
 
-}
-
-// !important is *ugly* but it's needed to override our fixed header styling :(
-.js-header-navigation-transparent {
-  border: 0 !important;
-  box-shadow: none !important;
 }

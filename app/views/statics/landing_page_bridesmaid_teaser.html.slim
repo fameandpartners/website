@@ -101,30 +101,14 @@
     (function(window) {
 
       $(function(){
+
         // Float CTA - Mobile
-        var headerSelector = "header.Header, .HeaderMobile",
-            headerHiderSelector = ".HeaderHider",
-            headerNavigationTransparentClass = 'js-header-navigation-transparent';
-
-        $(headerSelector).addClass(headerNavigationTransparentClass);
-        $(headerHiderSelector).css('background', 'none');
-
         $(document).delay(100).on("scroll", function() {
 
-          var introSectionSelector = '.js-section-intro',
-              introSectionArea = $(introSectionSelector).offset().top + $(introSectionSelector).outerHeight(),
-              formSectionSelector = '.js-section-signup-form',
+          var formSectionSelector = '.js-section-signup-form',
               floatCtaSelector = $('.js-floating-cta'),
               formSectionSafeMargin = 0.5,
               formSectionTop = $(formSectionSelector).offset().top * formSectionSafeMargin;
-
-            if ( $(this).scrollTop() < introSectionArea ) {
-              $(headerSelector).addClass(headerNavigationTransparentClass);
-              $(headerHiderSelector).css('background', 'none');
-            } else {
-              $(headerSelector).removeClass(headerNavigationTransparentClass);
-              $(headerHiderSelector).css('background', '#ffffff');
-            }
 
             if ( $(this).scrollTop() < (formSectionTop) ) {
               $(floatCtaSelector).fadeIn();
