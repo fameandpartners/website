@@ -95,12 +95,6 @@
                   #{current_tile_mobile_image} 991w,
                   #{current_tile_image} 992w"
 
-  .FloatingCta__wrapper.js-floating-cta
-    .FloatingCta__content
-      a href="#register"
-        | Sign Up For <strong>20% Off</strong>
-
-
 - content_for :body_end do
 
   // Load ScrollReveal for fading effects on scroll event
@@ -115,22 +109,6 @@
         // Scroll & Fade
         window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 600 });
         sr.reveal('.js-scroll-fade-in');
-
-        // Float CTA - Mobile
-        $(document).delay(100).on("scroll", function() {
-
-          var formSectionSelector = '.js-section-signup-form',
-              floatCtaSelector = $('.js-floating-cta'),
-              formSectionSafeMargin = 0.5,
-              formSectionTop = $(formSectionSelector).offset().top * formSectionSafeMargin;
-
-            if ( $(this).scrollTop() < (formSectionTop) ) {
-              $(floatCtaSelector).fadeIn();
-            } else {
-              $(floatCtaSelector).fadeOut();
-            }
-
-        });
 
       });
 
