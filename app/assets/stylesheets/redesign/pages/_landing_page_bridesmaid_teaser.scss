@@ -92,6 +92,10 @@
     @include column-vertical-align();
   }
 
+  .Column__contentCopy {
+    z-index: 1;
+  }
+
   // Helpers - if these are used in other pages we can move them to a separate stylesheet
   .u-overlay-area {
     position: relative;
