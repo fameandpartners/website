@@ -8,7 +8,7 @@
   section.Section__intro.js-section-intro
     .u-overlay-area
       video.u-overlay-area__media.hidden-xs.hidden-sm(muted playsinline webkit-playsinline autoplay="true" loop="true" aria-hidden="false" src="//d1h7wjzwtdym94.cloudfront.net/marketing/01--desktop.mp4"  poster="//d1h7wjzwtdym94.cloudfront.net/marketing/01--desktop--poster.png")
-      video.u-overlay-area__media.hidden-md.hidden-lg(muted playsinline webkit-playsinline autoplay="true" loop="true" aria-hidden="false" src="//d1h7wjzwtdym94.cloudfront.net/marketing/01--mobile.mp4" poster="//d1h7wjzwtdym94.cloudfront.net/marketing/01--mobile--poster.png") 
+      video.u-overlay-area__media.hidden-md.hidden-lg(muted playsinline webkit-playsinline autoplay="true" loop="true" aria-hidden="false" src="//d1h7wjzwtdym94.cloudfront.net/marketing/01--mobile.mp4" poster="//d1h7wjzwtdym94.cloudfront.net/marketing/01--mobile--poster.png")
 
 
       .u-overlay-area__overlay
@@ -23,14 +23,14 @@
     .container-fluid.u-full-width--desktop.u-full-width--mobile
       .row
         .vertical-align
-          .col-xs-offset-1.col-xs-10.col-md-5.col-md-offset-1
+          .col-xs-offset-1.col-xs-10.col-md-5.col-md-offset-1.Column__contentCopy
             .ContentCopy.js-scroll-fade-in
               h2.h1.Heading Custom Dress Collections, <br class="visible-lg visible-sm">Made for Your ‘Maids.
               p.Subheading Introducing the world’s first fully customizable bridesmaid dress collection. Curate custom collections tailored specifically to your wedding colors, theme, and each bridesmaids’ individual needs.
               p.Subheading Coming January 29th
 
               a.btn.btn_ctaSlimBorder href="#register" Sign Up Now for 20% Off
- 
+
           .col-md-6
             video.u-overlay-area__media.hidden-xs.hidden-sm(muted playsinline webkit-playsinline autoplay="true" loop="true" aria-hidden="false" src="//d1h7wjzwtdym94.cloudfront.net/marketing/02--desktop.mp4" poster="//d1h7wjzwtdym94.cloudfront.net/marketing/02--desktop--poster.png")
             video.u-overlay-area__media.hidden-md.hidden-lg(muted playsinline webkit-playsinline autoplay="true" loop="true" aria-hidden="false" src="//d1h7wjzwtdym94.cloudfront.net/marketing/02--mobile.mp4" poster="//d1h7wjzwtdym94.cloudfront.net/marketing/02--mobile--poster.png")
@@ -95,12 +95,6 @@
                   #{current_tile_mobile_image} 991w,
                   #{current_tile_image} 992w"
 
-  .FloatingCta__wrapper.js-floating-cta
-    .FloatingCta__content
-      a href="#register"
-        | Sign Up For <strong>20% Off</strong>
-
-
 - content_for :body_end do
 
   // Load ScrollReveal for fading effects on scroll event
@@ -115,22 +109,6 @@
         // Scroll & Fade
         window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 600 });
         sr.reveal('.js-scroll-fade-in');
-
-        // Float CTA - Mobile
-        $(document).delay(100).on("scroll", function() {
-
-          var formSectionSelector = '.js-section-signup-form',
-              floatCtaSelector = $('.js-floating-cta'),
-              formSectionSafeMargin = 0.5,
-              formSectionTop = $(formSectionSelector).offset().top * formSectionSafeMargin;
-
-            if ( $(this).scrollTop() < (formSectionTop) ) {
-              $(floatCtaSelector).fadeIn();
-            } else {
-              $(floatCtaSelector).fadeOut();
-            }
-
-        });
 
       });
 
