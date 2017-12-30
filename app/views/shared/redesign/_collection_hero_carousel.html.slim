@@ -67,15 +67,26 @@ ruby:
   - current_tile_site_version = tile[:hero_tile_site_version]
 
   - if current_tile_site_version.nil? || current_tile_site_version == current_site_version[:permalink].downcase || current_tile_site_version == "all"
-    - current_tile_image = tile[:image]
-    - current_tile_mobile_image = tile[:mobile_image]
     = link_to tile[:link], hero_text_color(tile[:text_color]), data: { description: tile[:description] }
-      picture.media-wrap
-        source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
-        source media="(min-width: 992px)" srcset="#{current_tile_image}"
-        img src="#{current_tile_image}" srcset="
-          #{current_tile_mobile_image} 991w,
-          #{current_tile_image} 992w"
+
+      - current_tile_image = tile[:image]
+      - current_tile_mobile_image = tile[:mobile_image]
+
+      - if tile[:video]
+        - current_tile_video = tile[:video]
+        - current_tile_mobile_video = tile[:mobile_video]
+
+        video.media-wrap.hidden-xs.hidden-sm(muted playsinline webkit-playsinline autoplay loop aria-hidden="false" src="#{current_tile_video}" poster="#{current_tile_image}")
+        video.media-wrap.hidden-md.hidden-lg(muted playsinline webkit-playsinline autoplay loop aria-hidden="false" src="#{current_tile_mobile_video}" poster="#{current_tile_mobile_image}")
+
+      - else
+
+        picture.media-wrap
+          source media="(max-width: 991px)" srcset="#{current_tile_mobile_image}"
+          source media="(min-width: 992px)" srcset="#{current_tile_image}"
+          img src="#{current_tile_image}" srcset="
+            #{current_tile_mobile_image} 991w,
+            #{current_tile_image} 992w"
 
       .content-wrap
         .container-fluid
@@ -104,6 +115,7 @@ ruby:
             .copy-wrap.text-center
               h2.heading.mobile-heading
                 span.sub-heading
-                  - tile[:mobile_text].each do |mobile_text|
-                    == mobile_text
-                    br
+                  - if tile[:mobile_text]
+                    - tile[:mobile_text].each do |mobile_text|
+                      == mobile_text
+                      br
