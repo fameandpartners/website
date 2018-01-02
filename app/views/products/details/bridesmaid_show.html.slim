@@ -32,9 +32,8 @@ ruby:
     = tag :meta, name: "crop_image_#{index}", content: image.original
 
 
-link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
-
-div#root.PDP__wrapper
+link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['bridesmaidCssBundle']}"
+div#bridesmaid-root.PDP__wrapper
 
 javascript:
   window.__untransformedData = window.PdpDataFull
@@ -42,4 +41,4 @@ javascript:
 = render partial: 'micro_data'
 
 = content_for :microservice_js do
-  script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
+  script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['bridesmaidJSBundle']}"
