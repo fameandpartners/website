@@ -19,6 +19,21 @@ class Products::DetailsController < Products::BaseController
     render :show, status: pdp_status
   end
 
+  def bridesmaid_show
+    @zopim_opt_out = true
+    @product = setup_product(params)
+    @user = spree_current_user || {}
+
+    # Set SEO properties
+    # Drop anything after the first period(.) and newline
+    title(@product.meta_title, default_seo_title)
+    description(@product.meta_description)
+
+    append_gtm_product(product_presenter: @product)
+
+    render :bridesmaid_show, status: pdp_status
+  end
+
   private
 
   def setup_product(params)
