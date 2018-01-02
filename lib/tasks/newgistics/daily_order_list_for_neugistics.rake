@@ -32,9 +32,9 @@ namespace :newgistics do
       orders.each do |order|
         address = order.ship_address
         csv << [order.number, order.completed_at, address.firstname, address.lastname, '', address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso2,
-                address.email, address.phone, '', 'UPSGR', order.line_items.map {|li| CustomItemSku.new(li).call}.join(','),
-                order.total, order.line_items.map { |li|li.product.name}.join(','), 'CN', '', '', '']
+        address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
+        address.email, address.phone, '', 'UPSGR', order.line_items.map {|li| CustomItemSku.new(li).call}.join(','),
+        order.total, order.line_items.map { |li|li.product.name}.join(','), 'CN', '', '', '']
       end
     end
     Net::SFTP.start(configatron.newgistics.ftp_uri,
