@@ -275,8 +275,8 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
-    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/weddings-and-parties', to: redirect('/?utm_source=legacy-weddings-and-parties'), :as => :weddings_parties_page
+    get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
@@ -415,12 +415,12 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
-    
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    
+
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
@@ -475,12 +475,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/style-consultation', to: redirect("/styling-session")
 
-    get '/styling-session'  => 'style_sessions#new', as: :styling_session
-    resource 'style-session', as: 'style_session', only: [:create]
+    get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
 
-    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
-    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+    get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
 
     get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
     resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]

@@ -141,23 +141,6 @@
     }
   }
 
-  .advice-fit {
-
-    h2 {
-      margin-top: 40px;
-    }
-
-    p {
-      font-family: $font-heading;
-      font-size: 1.8rem;
-      font-weight: 300;
-      line-height: 2.3rem;
-      margin-top: 15px;
-      margin-bottom: 5px;
-    }
-
-  }
-
   @media (min-width: $bootstrap-md-width) {
 
     .modal .inner-wrap {
