@@ -174,7 +174,7 @@ Spree::LineItem.class_eval do
   end
 
   def window_closed?
-    self.style_name.downcase == 'return_insurance' || 60.days.ago >= period_in_business_days(self.delivery_date).business_days.after(self.order.completed_at)
+    60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
   end
 
   def as_json(options = { })
