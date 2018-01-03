@@ -7,11 +7,10 @@
 
 .page-lookbook.container-fluid.no-padding.no-scroll
 
-  .hero-tile-carousel.js-hero-tile-carousel
-    - (1..5).each do |tile_index|
+  .hero-tile-carousel
       .main-hero-wrap.hero-wrap
         picture.media-wrap
-          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/lookbook/modern-bridesmaid-dresses/#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive'
+          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/lookbook/modern-bridesmaid-dresses/modern-bridesmaid-banner.jpg", alt: "#{page.heading}", class: 'img-responsive'
   .row
     .container
       .page-content.products-collections.category
@@ -20,8 +19,3 @@
 
         .relative.products-collection
           = render partial: 'products_without_content'
-
-  .row.section-last
-    .container
-      .col-md-12
-        = render partial: 'shared/redesign/more_dresses'
