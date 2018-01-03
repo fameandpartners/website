@@ -15,7 +15,7 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
     line_items = Spree::LineItem.where('updated_at >= ?', scheduler.last_successful_run)
-                                .select { |li| li.order.state = 'complete' && li.order.completed_at >=  scheduler.last_successful_run} # get line Items for completed orders since last run
+                                .select { |li| li.order.state == 'complete' && li.order.completed_at >=  scheduler.last_successful_run} # get line Items for completed orders since last run
     unique_items = line_items&.uniq { |li| CustomItemSku.new(li).call } # only care about unique skus
 
     generate_csv_products(unique_items)
