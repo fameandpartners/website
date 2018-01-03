@@ -51,11 +51,12 @@ module Orders
     end
 
     def sku
-      if personalizations?
-        CustomItemSku.new(item).call
-      else
-        variant.sku
-      end
+      # thanh says unecessary
+      # if personalizations?
+      CustomItemSku.new(item).call
+      # else
+        # variant.sku
+      # end
     end
 
     def global_sku

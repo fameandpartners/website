@@ -7,9 +7,8 @@ class CustomItemSku
   end
 
   def call
-    return line_item.variant.sku unless line_item.personalization.present?
-    
-    if line_item.personalization.sku.nil?
+    # return line_item.variant.sku unless line_item.personalization.present?
+    if line_item.personalization&.sku.nil?
       line_item.personalization.sku = Skus::Generator.new(
         style_number:            style_number,
         size:                    size,
@@ -50,6 +49,6 @@ class CustomItemSku
   end
 
   def height
-    line_item.personalization.height
+    line_item.personalization.present? ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
   end
 end
