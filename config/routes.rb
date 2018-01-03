@@ -363,12 +363,20 @@ FameAndPartners::Application.routes.draw do
     end
 
     ########################
+    # Sample Sale
+    ########################
+    if Features.active?(:sample_sale)
+        get '/sample-sale' => 'products/flashSale#index'
+        get '/sample-sale/:id' => 'products/flashSale#show'
+    else
+        get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
+        get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
+    end
+
+    ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-    get '/sample-sale' => 'products/flashSale#index'
-
-    get '/sample-sale/:id' => 'products/flashSale#show'
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
@@ -415,12 +423,12 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
-    
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    
+
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
