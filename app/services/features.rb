@@ -26,6 +26,7 @@ module Features
     redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
     redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
     sales:                         nil,
+    sample_sale:                   'Enable/Disable Sample Sale content sitewide.',
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,
