@@ -16,12 +16,12 @@ namespace :newgistics do
     
     orders = Spree::Order.where("completed_at >= ? AND state = 'complete'", scheduler.last_successful_run) # get complete orders
 
-    generate_csv(orders)
+    generate_csv_for_orders(orders)
     scheduler.last_successful_run = current_time.to_s
     scheduler.save
   end
 
-  def generate_csv(orders)
+  def generate_csv_for_orders(orders)
     csv_headers = ['Order Id', 'Order Date', 'First Name', 'Last Name','Company', 'Address Line 1',
                    'Address Line 2', 'City', 'State','Zip Code', 'Country', 'Customer Email', 'Customer Phone',
                    'Customer Fax', 'Ship Method Code', 'Pack Slip Info Line', 'Contents List (SKU, Qty)',

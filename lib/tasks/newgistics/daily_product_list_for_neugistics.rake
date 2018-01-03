@@ -18,12 +18,12 @@ namespace :newgistics do
                                 .select { |li| li.order.state = 'complete' && li.order.completed_at >=  scheduler.last_successful_run} # get line Items for completed orders since last run
     unique_items = line_items&.uniq { |li| CustomItemSku.new(li).call } # only care about unique skus
 
-    generate_csv(unique_items)
+    generate_csv_products(unique_items)
     scheduler.last_successful_run = current_time.to_s
     scheduler.save
   end
 
-  def generate_csv(line_items)
+  def generate_csv_products(line_items)
     csv_headers = ['SKU', 'Description', 'WeightInOunces','Height', 'Width', 'Depth', 'Value',
                    'RetailValue','UPC', 'Category', 'Supplier', 'Notes',
                    'SupplierCode', 'Image URL', 'HarmonizationCode', 'ProductCountryOfOrigin']
