@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.1
--- Dumped by pg_dump version 10.1
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -228,7 +228,6 @@ CREATE TABLE categories (
 --
 
 CREATE SEQUENCE categories_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -404,7 +403,6 @@ CREATE TABLE contentful_routes (
 --
 
 CREATE SEQUENCE contentful_routes_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -439,7 +437,6 @@ CREATE TABLE contentful_versions (
 --
 
 CREATE SEQUENCE contentful_versions_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -565,6 +562,41 @@ CREATE SEQUENCE customisation_values_id_seq
 --
 
 ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
+
+
+--
+-- Name: customization_visualizations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customization_visualizations (
+    id integer NOT NULL,
+    customization_ids character varying(255),
+    incompatible_ids character varying(255),
+    render_urls json,
+    product_id integer,
+    length character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customization_visualizations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customization_visualizations_id_seq OWNED BY customization_visualizations.id;
 
 
 --
@@ -889,7 +921,6 @@ CREATE TABLE facebook_accounts (
 --
 
 CREATE SEQUENCE facebook_accounts_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -923,7 +954,6 @@ CREATE TABLE facebook_ad_creatives (
 --
 
 CREATE SEQUENCE facebook_ad_creatives_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -974,7 +1004,6 @@ CREATE TABLE facebook_ad_insights (
 --
 
 CREATE SEQUENCE facebook_ad_insights_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1013,7 +1042,6 @@ CREATE TABLE facebook_ads (
 --
 
 CREATE SEQUENCE facebook_ads_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1058,7 +1086,6 @@ CREATE TABLE facebook_adsets (
 --
 
 CREATE SEQUENCE facebook_adsets_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1098,7 +1125,6 @@ CREATE TABLE facebook_campaigns (
 --
 
 CREATE SEQUENCE facebook_campaigns_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1345,7 +1371,6 @@ CREATE TABLE item_return_labels (
 --
 
 CREATE SEQUENCE item_return_labels_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3411,7 +3436,7 @@ CREATE TABLE spree_line_items (
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    customizations json
+    customizations jsonb
 );
 
 
@@ -3669,7 +3694,8 @@ CREATE TABLE spree_orders (
     site_version text,
     orderbot_synced boolean DEFAULT false NOT NULL,
     return_type character varying(255),
-    autorefundable boolean
+    autorefundable boolean,
+    vwo_type character varying(255)
 );
 
 
@@ -5634,6 +5660,13 @@ ALTER TABLE ONLY customisation_values ALTER COLUMN id SET DEFAULT nextval('custo
 
 
 --
+-- Name: customization_visualizations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations ALTER COLUMN id SET DEFAULT nextval('customization_visualizations_id_seq'::regclass);
+
+
+--
 -- Name: discounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6655,6 +6688,14 @@ ALTER TABLE ONLY custom_dresses
 
 ALTER TABLE ONLY customisation_values
     ADD CONSTRAINT customisation_values_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customization_visualizations customization_visualizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations
+    ADD CONSTRAINT customization_visualizations_pkey PRIMARY KEY (id);
 
 
 --
@@ -9799,3 +9840,9 @@ INSERT INTO schema_migrations (version) VALUES ('20171127052028');
 INSERT INTO schema_migrations (version) VALUES ('20171127212333');
 
 INSERT INTO schema_migrations (version) VALUES ('20171207195245');
+
+INSERT INTO schema_migrations (version) VALUES ('20171219203151');
+
+INSERT INTO schema_migrations (version) VALUES ('20180102175041');
+
+INSERT INTO schema_migrations (version) VALUES ('20180103184321');
