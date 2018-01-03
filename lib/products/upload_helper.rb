@@ -1,7 +1,6 @@
 
 module Products
   module UploadHelper
-    require 'pry-byebug'
 
     def create_or_update_products(product_json)
       #info "Creating or Update Products"
