@@ -82,6 +82,8 @@ class Populator
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
+        line_item.customizations = product_customizations.to_json
+        line_item.save
         personalization.line_item = line_item
         line_item.personalization = personalization
         personalization.save
@@ -104,7 +106,6 @@ class Populator
         item['size']  = product_size.value
         item.color_id = product_color.color_id
         item['color'] = product_color.color_name
-        item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
 
         if product_attributes[:height].present?
@@ -191,7 +192,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = product.customisation_values.detect { |customisation_value| customisation_value.id == id.to_i }
+          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'] == id.to_i }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else

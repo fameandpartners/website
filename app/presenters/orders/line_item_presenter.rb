@@ -97,8 +97,8 @@ module Orders
     def customisations
       if personalizations?
         customs = Array.wrap(
-            personalization.customization_values.collect { |custom|
-              [custom.presentation, custom.image]
+            JSON.parse(item.customizations).collect { |custom|
+              [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
             }
         )
 
@@ -118,12 +118,12 @@ module Orders
 
     def customisation_ids
       return [] unless personalizations?
-      Array.wrap(personalization.customization_values.collect(&:id))
+      Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['id']})
     end
 
     def customisation_names
       return [] unless personalizations?
-      Array.wrap(personalization.customization_values.collect(&:presentation))
+      Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['presentation']})
     end
 
     def return_action

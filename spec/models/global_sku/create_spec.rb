@@ -93,7 +93,7 @@ describe GlobalSku::Create do
             size:         'US0/AU4',
             color_name:   'Magma Red',
             height:       'Petite',
-            customizations: [customization_fabric, customization_fit]
+            customizations: JSON.parse([customization_fabric, customization_fit].to_json)
           )
         }
 
@@ -144,7 +144,7 @@ describe GlobalSku::Create do
             size:         'US0/AU4',
             color_name:   'Magma Red',
             height:       'Petite',
-            customizations: [customization_fabric, customization_fit]
+            customizations: JSON.parse([customization_fabric, customization_fit].to_json)
           )
         }
 
