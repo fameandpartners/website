@@ -3431,7 +3431,6 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
-    customizations json,
     stock boolean,
     color character varying(255),
     size character varying(255),
