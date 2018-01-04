@@ -6,7 +6,6 @@ module Products
       #info "Creating or Update Products"
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
-        prod = prod.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}#symbolize everything
         begin
           product = create_or_update_product(prod)
 
@@ -73,7 +72,6 @@ module Products
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-
       if product.persisted?
         attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id) #WTF does this do
       end
