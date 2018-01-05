@@ -213,7 +213,7 @@ module ApplicationHelper
 
   def custom_sale_banner_active?
     date_start = DateTime.parse('Nov 30 2017 12:01am -8:00')
-    date_end  = DateTime.parse('Jan 4 2018 11:59pm -8:00')
+    date_end  = DateTime.parse('Jan 3 2018 11:59pm -8:00')
     Time.zone.now.between?(date_start, date_end)
   end
 
