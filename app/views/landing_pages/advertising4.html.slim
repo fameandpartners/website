@@ -54,9 +54,6 @@
       = link_to dresses_path + '/dress-roxette-809?color=blue-fallen-leaves', class: 'media-wrap'
         = image_tag 'landingpages/advertising/ad4-pic3.jpg', alt:'SHOP THIS LOOK'
 
-  .row
-    = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/advertising/ad4-tile-footer.jpg"}
-
 coffee:
   $(window).load ->
     $('.ad-carousel').slick({

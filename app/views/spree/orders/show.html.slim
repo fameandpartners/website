@@ -155,7 +155,7 @@ section.order-details
                   | Our return policy
                   i.link-icon.fa.fa-chevron-right
 
-= hidden_field_tag :return_type, 'B'
+= hidden_field_tag :return_type, 'DeliveryIns-25Control'
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
