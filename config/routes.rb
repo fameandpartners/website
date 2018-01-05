@@ -358,8 +358,6 @@ FameAndPartners::Application.routes.draw do
 
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
-
-      post 'line_items/:id' => 'products#move_to_cart'
     end
 
     ########################
