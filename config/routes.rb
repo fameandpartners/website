@@ -358,17 +358,18 @@ FameAndPartners::Application.routes.draw do
 
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
-
-      post 'line_items/:id' => 'products#move_to_cart'
     end
+
+    ########################
+    # Sample Sale
+    ########################
+    get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
+    get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
 
     ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-    get '/sample-sale' => 'products/flashSale#index'
-
-    get '/sample-sale/:id' => 'products/flashSale#show'
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
