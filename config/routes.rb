@@ -413,12 +413,12 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
-    
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
     end
-    
+
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
@@ -623,6 +623,16 @@ FameAndPartners::Application.routes.draw do
     resource  :sku_generation,     :only => [:show, :create]
     resources :dress_colours,      :only => :index
   end
+
+
+  # ----------
+  # Dress Filter LP
+  # ----------
+
+  scope '/bridesmaids' do
+    get '/' => 'products/bridesmaids#index'
+  end
+
 
   # ----------
   # API Routes
