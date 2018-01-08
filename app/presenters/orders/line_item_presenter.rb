@@ -96,11 +96,19 @@ module Orders
 
     def customisations
       if personalizations?
-        customs = Array.wrap(
-            JSON.parse(item.customizations).collect { |custom|
-              [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
-            }
-        )
+        if item.customizations
+          customs = Array.wrap(
+              JSON.parse(item.customizations).collect { |custom|
+                [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
+              }
+          )
+        else
+          customs = Array.wrap(
+              personalization.customization_values.collect { |custom|
+              [custom.presentation, custom.image]
+              }
+          )
+        end
 
         unless standard_variant_for_custom_color.present?
           customs << ["Custom Color: #{colour_name}"]
@@ -117,13 +125,21 @@ module Orders
     end
 
     def customisation_ids
-      return [] unless personalizations?
-      Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['id']})
+      return [] unless personalizations? || item.customizations
+      if item.customizations.nil?
+        Array.wrap(personalization.customization_values.collect(&:id))
+      else
+        Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['id']})
+      end
     end
 
     def customisation_names
-      return [] unless personalizations?
-      Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['presentation']})
+      return [] unless personalizations? || item.customizations
+      if item.customizations.nil?
+        Array.wrap(personalization.customization_values.collect(&:presentation))
+      else
+        Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['presentation']})
+      end
     end
 
     def return_action

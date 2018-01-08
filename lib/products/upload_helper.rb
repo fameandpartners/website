@@ -6,7 +6,6 @@ module Products
       #info "Creating or Update Products"
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
-        prod = prod.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}#symbolize everything
         begin
           product = create_or_update_product(prod)
 
@@ -25,11 +24,10 @@ module Products
           add_product_variants(product, sizes, details[:colors] || [], details[:price_aud].to_f, details[:price_usd].to_f)
 
           #add_product_style_profile(product, args[:style_profile].symbolize_keys) TODO: Add stuff to json here as well
-          add_product_customizations(product, prod[:customizations] || [])
+          add_product_customizations(product, prod[:customization_list] || [])
 
           update_or_add_customization_visualizations(product, prod[:customization_visualization_list])
           #add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i ) TODO: I DONT THINK WE NEED THIS ANYMORE
-
           product
         end
       end.compact
@@ -73,7 +71,6 @@ module Products
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-
       if product.persisted?
         attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id) #WTF does this do
       end
@@ -228,10 +225,10 @@ module Products
 
       custs.each do |customization|
         new_customization = {
-                              id: customization[:id], 
-                              name: customization[:presentation].downcase.gsub(' ', '-'), 
+                              id: customization[:customization_id], 
+                              name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
                               price: customization[:price], #TODO: add this to the json being sent
-                              presentation: customization[:presentation],
+                              presentation: customization[:customization_presentation],
                               required_by: customization[:required_by]
                             }
         customizations << { customisation_value: new_customization }
