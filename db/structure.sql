@@ -570,9 +570,9 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
-    customization_ids character varying(255),
+    customization_ids character varying(1024),
     incompatible_ids character varying(255),
-    render_urls json,
+    render_urls jsonb,
     product_id integer,
     length character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -9846,3 +9846,5 @@ INSERT INTO schema_migrations (version) VALUES ('20171219203151');
 INSERT INTO schema_migrations (version) VALUES ('20180102175041');
 
 INSERT INTO schema_migrations (version) VALUES ('20180103184321');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105234451');
