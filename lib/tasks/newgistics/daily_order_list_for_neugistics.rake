@@ -4,6 +4,7 @@
 require 'csv'
 require 'tempfile'
 require 'net/sftp'
+
 namespace :newgistics do
   task upload_order_list: :environment do
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('daily_orders')).nil?
@@ -13,7 +14,7 @@ namespace :newgistics do
       scheduler.save
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
-    
+
     orders = Spree::Order.where("completed_at >= ? AND state = 'complete'", scheduler.last_successful_run) # get complete orders
 
     generate_csv_for_orders(orders)
@@ -31,9 +32,11 @@ namespace :newgistics do
       csv << csv_headers # set headers for csv
       orders.each do |order|
         address = order.ship_address
+        usr_email = address.email.length  > 50 ? 'cs@fameandpartners.com' : address.email #max character length is 50 for newgistics
+        
         csv << [order.number, order.completed_at, address.firstname, address.lastname, '', address.address1,
         address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
-        address.email, address.phone, '', 'UPSGR', order.line_items.map {|li| CustomItemSku.new(li).call}.join(','),
+        usr_email, address.phone,'', '', 'UPSGR', order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map {|li| "#{CustomItemSku.new(li).call},1"}.join(','),
         order.total, order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map { |li|li.product.name}.join(','), 'CN', '', '', '']
       end
     end

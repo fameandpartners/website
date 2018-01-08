@@ -33,7 +33,7 @@ namespace :newgistics do
       csv << csv_headers # set headers
       line_items.each do |li|
         product = li.product
-        csv << [CustomItemSku.new(li).call, product.description, '', '', '',
+        csv << [CustomItemSku.new(li).call, product.name, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
                 GlobalSku.find_by_product_id(product.id).upc, product.category.category, product.factory.name, '',
                 CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
