@@ -6,6 +6,8 @@ class CustomizationVisualization < ActiveRecord::Base
 	              :product_id,
 	              :incompatible_ids,
 	              :render_urls,
-	              :length
+	              :length,
+	              :neckline,
+	              :silhouette
 
 end

@@ -576,7 +576,9 @@ CREATE TABLE customization_visualizations (
     product_id integer,
     length character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    silhouette character varying(255),
+    neckline character varying(255)
 );
 
 
@@ -9848,3 +9850,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180102175041');
 INSERT INTO schema_migrations (version) VALUES ('20180103184321');
 
 INSERT INTO schema_migrations (version) VALUES ('20180105234451');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105235603');

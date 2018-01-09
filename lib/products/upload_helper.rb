@@ -7,6 +7,8 @@ module Products
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
         begin
+         binding.pry
+
           product = create_or_update_product(prod)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
@@ -26,7 +28,7 @@ module Products
           #add_product_style_profile(product, args[:style_profile].symbolize_keys) TODO: Add stuff to json here as well
           add_product_customizations(product, prod[:customization_list] || [])
 
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list])
+          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline])
           #add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i ) TODO: I DONT THINK WE NEED THIS ANYMORE
           product
         end
@@ -238,12 +240,14 @@ module Products
       product.customizations
     end
 
-    def update_or_add_customization_visualizations(product, customization_list)
+    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
       customization_list.each do |cust|
         id = cust[:customization_ids].sort.join('_')
-        cust[:lengths].each do |length|
-          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name])
-                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name])
+        silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
+        neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
+        cust[:lengths].each do |length|         
+          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
+                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
         
           cv.render_urls = length[:render_urls].to_json
           cv.incompatible_ids = length[:incompatability_list].join(',') #never manipulated so just put it in as ta string and split on return
