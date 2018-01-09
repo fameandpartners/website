@@ -651,6 +651,10 @@ FameAndPartners::Application.routes.draw do
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
+      get '/bridesmaids/:id' => 'bridesmaid#show'
+      get '/bridesmaids' => 'bridesmaid#index'
+      get '/bridesmaids/:id/incompatabilities' => 'bridesmaid#incompatabilities'
+
       delete '/rails_cache' => 'systems#clear_cache'
     end
   end
