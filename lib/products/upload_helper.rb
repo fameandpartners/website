@@ -7,7 +7,6 @@ module Products
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
         begin
-         binding.pry
 
           product = create_or_update_product(prod)
 
@@ -27,6 +26,8 @@ module Products
 
           #add_product_style_profile(product, args[:style_profile].symbolize_keys) TODO: Add stuff to json here as well
           add_product_customizations(product, prod[:customization_list] || [])
+
+          #update_or_create_base_visualization(details[:colors])
 
           update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline])
           #add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i ) TODO: I DONT THINK WE NEED THIS ANYMORE
@@ -238,6 +239,7 @@ module Products
       product.customizations = customizations.to_json
 
       product.customizations
+      product.save
     end
 
     def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
@@ -254,6 +256,10 @@ module Products
           cv.save!
         end
       end
+    end
+
+    def update_or_create_base_visualization(product, product_details)
+
     end
 
   end
