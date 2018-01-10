@@ -59,19 +59,15 @@ module Api
 
       def setup_collection(customized_products, color)
         collection = []
-        binding.pry
         customized_products.each do |cp|
-          binding.pry
           product = cp.product
           collection << { product_name: product.name, 
                     color_count: product.colors.count, 
                     customization_count: JSON.parse(product.customizations).count,
                     price: product.site_price_for(site_version || SiteVersion.default) ,
-                    currency: current_currency,
                     image_urls: JSON.parse(cp.render_urls).select {|x| x['color'] == color}
                   }
         end
-
         collection
       end
 
