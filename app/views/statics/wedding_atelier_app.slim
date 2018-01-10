@@ -108,17 +108,7 @@
 
     .row
       .same-height-cols
-        .col-md-4
-          .item.bordered
-            .item-copy
-              - current_tile_link_path = styling_session_path
-              h3 <em>Ask</em> a stylist.
-              p.summary Invite our wedding expert to join your chat and style the group. <a href="#{current_tile_link_path}" class="ctaLink">Meet Amber</a>.
-
-            = link_to current_tile_link_path
-              = image_tag 'landingpages/wedding-atelier-app/tile-ask-stylist.jpg', class: 'img-responsive', alt: 'Ask a stylist'
-
-        .col-md-4
+        .col-md-4.col-md-offset-2
           .item.bordered
             .item-copy
               / TODO: add route path

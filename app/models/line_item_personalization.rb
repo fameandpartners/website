@@ -34,26 +34,27 @@ class LineItemPersonalization < ActiveRecord::Base
       unless customization_value_ids.all?{ |id| product.customisation_value_ids.include?(id.to_i) }
         errors.add(:base, 'Some customisation options can not be selected')
       end
-
-      customization_values.includes(:incompatibles).each_with_index do |customization_value, index|
-        unless customization_values.to_a.from(index + 1).all?{ |cv| cv.is_compatible_with?(customization_value) }
-          errors.add(:base, 'Some customisation options can not be selected')
-        end
-      end
+      # customization_values.each_with_index do |customization_value, index|
+      #   binding.pry
+      #   unless customization_values.to_a.from(index + 1).all?{ |cv| cv.is_compatible_with?(customization_value) }
+      #     errors.add(:base, 'Some customisation options can not be selected')
+      #   end
+      # end
+      #TODO: Update this code when we actually imploment incompatibilities
     end
   end
 
   def customization_values
-    @customization_values ||= CustomisationValue.where(id: customization_value_ids)
+    @customization_values ||=  self.line_item.customizations.nil? ? CustomisationValue.where(id: customization_value_ids) : JSON.parse(self.line_item.customizations)
   end
 
   def options_hash
     values = {}
     values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
-
-    customization_values.each do |value|
-      values[value.presentation] = nil
+    customization_values.each do |customization_value|
+      value = customization_value['customisation_value']
+      values[value['presentation']] = nil
     end
 
     values
@@ -80,7 +81,7 @@ class LineItemPersonalization < ActiveRecord::Base
   def customizations_cost
     result = BigDecimal.new(0)
     customization_values.each do |customization_value|
-      result += calculate_customization_value_cost(customization_value)
+      result += calculate_customization_value_cost(customization_value['customisation_value'])
     end
     result
   end
@@ -129,11 +130,11 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # customization value cost
   def calculate_customization_value_cost(customization_value)
-    discount = customization_value.discount
+    discount = customization_value['discount']
     if discount.present?
-      Spree::Price.new(amount: customization_value.price).apply(discount).price
+      Spree::Price.new(amount: customization_value['price'].to_f).apply(discount.to_f).price #TODO: This is probably broken
     else
-      customization_value.price
+      customization_value['price'].to_f
     end
   end
 

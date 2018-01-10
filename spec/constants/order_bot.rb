@@ -52,9 +52,9 @@ module OrderBot
       }
     ]'
 
-  	MEASURE_TYPE_URI = 'apitestfp%40test.com:Testing2000@api.orderbot.com/admin/units_of_measurement_types.json/'
+  	MEASURE_TYPE_URI = 'LiveTest%40API.com:Testing2000@https://api.orderbot.com/admin/units_of_measurement_types.json/'
 
-  	PRODUCT_URI = 'apitestfp%40test.com:Testing2000@api.orderbot.com/admin/products.json/'
+  	PRODUCT_URI = 'LiveTest%40API.com:Testing2000@https://api.orderbot.com/admin/products.json/'
 
 
 end

@@ -275,8 +275,8 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
-    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/weddings-and-parties', to: redirect('/?utm_source=legacy-weddings-and-parties'), :as => :weddings_parties_page
+    get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
@@ -481,12 +481,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/style-consultation', to: redirect("/styling-session")
 
-    get '/styling-session'  => 'style_sessions#new', as: :styling_session
-    resource 'style-session', as: 'style_session', only: [:create]
+    get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
 
-    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
-    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+    get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
 
     get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
     resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
@@ -632,6 +629,16 @@ FameAndPartners::Application.routes.draw do
     resources :dress_colours,      :only => :index
   end
 
+
+  # ----------
+  # Dress Filter LP
+  # ----------
+
+  scope '/bridesmaids' do
+    get '/' => 'products/bridesmaids#index'
+  end
+
+
   # ----------
   # API Routes
   # ----------
@@ -650,11 +657,18 @@ FameAndPartners::Application.routes.draw do
       # user profile
       get 'profile' => 'profiles#show'
 
+      #upload products
+        put '/product_upload' => 'product_upload#upload'
+
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
+
+      get '/bridesmaids/:id' => 'bridesmaid#show'
+      get '/bridesmaids' => 'bridesmaid#index'
+      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
 
       delete '/rails_cache' => 'systems#clear_cache'
     end
@@ -714,6 +728,9 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
+
+
+
 
       get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
 

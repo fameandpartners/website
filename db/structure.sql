@@ -565,6 +565,44 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 
 
 --
+-- Name: customization_visualizations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customization_visualizations (
+    id integer NOT NULL,
+    customization_ids character varying(1024),
+    incompatible_ids character varying(1024),
+    render_urls jsonb,
+    product_id integer,
+    length character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    silhouette character varying(255),
+    neckline character varying(255)
+);
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customization_visualizations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customization_visualizations_id_seq OWNED BY customization_visualizations.id;
+
+
+--
 -- Name: data_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1325,7 +1363,9 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    shipped boolean,
+    barcode character varying(255)
 );
 
 
@@ -2010,6 +2050,38 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE newgistics_schedulers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
+
+
+--
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2595,6 +2667,28 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
+
+
+--
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -3340,7 +3434,7 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
-    customizations json,
+    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
@@ -3959,7 +4053,8 @@ CREATE TABLE spree_products (
     factory_id integer,
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
     fabric_card_id integer,
-    category_id integer
+    category_id integer,
+    customizations jsonb
 );
 
 
@@ -4861,7 +4956,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
@@ -5568,6 +5663,13 @@ ALTER TABLE ONLY customisation_values ALTER COLUMN id SET DEFAULT nextval('custo
 
 
 --
+-- Name: customization_visualizations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations ALTER COLUMN id SET DEFAULT nextval('customization_visualizations_id_seq'::regclass);
+
+
+--
 -- Name: discounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5810,6 +5912,13 @@ ALTER TABLE ONLY moodboard_items ALTER COLUMN id SET DEFAULT nextval('moodboard_
 --
 
 ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_seq'::regclass);
+
+
+--
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
 
 
 --
@@ -6585,6 +6694,14 @@ ALTER TABLE ONLY customisation_values
 
 
 --
+-- Name: customization_visualizations customization_visualizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations
+    ADD CONSTRAINT customization_visualizations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: discounts discounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6862,6 +6979,14 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
@@ -9433,10 +9558,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9673,15 +9794,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9701,8 +9816,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
-
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
 INSERT INTO schema_migrations (version) VALUES ('20170914013707');
@@ -9710,6 +9823,20 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016232403');
+
+INSERT INTO schema_migrations (version) VALUES ('20171101200751');
+
+INSERT INTO schema_migrations (version) VALUES ('20171114001834');
+
+INSERT INTO schema_migrations (version) VALUES ('20171115172748');
+
+INSERT INTO schema_migrations (version) VALUES ('20171116214623');
 
 INSERT INTO schema_migrations (version) VALUES ('20171127052028');
 
@@ -9720,3 +9847,11 @@ INSERT INTO schema_migrations (version) VALUES ('20171207195245');
 INSERT INTO schema_migrations (version) VALUES ('20171216185833');
 
 INSERT INTO schema_migrations (version) VALUES ('20171219203151');
+
+INSERT INTO schema_migrations (version) VALUES ('20180102175041');
+
+INSERT INTO schema_migrations (version) VALUES ('20180103184321');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105234451');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105235603');

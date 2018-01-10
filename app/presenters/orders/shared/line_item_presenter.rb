@@ -48,8 +48,8 @@ module Orders
       end
 
       def customisation_text
-        if personalizations?
-          personalization.customization_values.collect(&:presentation).join(' / ')
+        if item.customizations.present?
+          JSON.parse(item.customizations).collect{|x| x['customisation_value.']['presentation']}.join(' / ')
         end
       end
       alias_method :customization_text, :customisation_text

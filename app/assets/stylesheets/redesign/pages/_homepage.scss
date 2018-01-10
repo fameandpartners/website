@@ -45,30 +45,12 @@
 
   }
 
-  .section-styling {
-    padding-bottom: $box-padding-top;
-
-    .cta-link-alt {
-      margin-bottom: $box-padding-top;
-    }
-
-    .styling-session .item-copy {
-      padding: 0 15px 0 0;
-
-      p {
-        padding-right: 15px;
-      }
-
-    }
-
-    .itemCopy {
-      margin: 20px 0;
-    }
-
-  }
-
   .section-social {
     padding-top: $box-padding-top;
+  }
+
+  .section-style-icon {
+    margin-bottom: 50px;
   }
 
   .section-style-icon .cta-link-center-padding {
@@ -94,11 +76,6 @@
 
     .btn-featured {
       margin-top: 15px;
-    }
-
-    .section-styling .styling-session {
-      margin-top: 30px;
-      padding-left: 15px;
     }
 
     .copy-align--top {
@@ -195,25 +172,6 @@
 
     }
 
-    .styling-session {
-      text-align: center;
-    }
-
-    .section-styling {
-      margin-top: 0;
-
-      .styling-session {
-        margin-top: $section-spacing-margin-top;
-
-        p,
-        .item-copy {
-          padding-right: 0;
-        }
-
-      }
-
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
@@ -228,22 +186,6 @@
 
     .copy-align--top {
       margin-top: 50px;
-    }
-
-  }
-
-  @media (min-width: $bootstrap-sm-width) {
-
-    .section-styling .inline-btn:not(:nth-of-type(1)) {
-      margin-left: 15px;
-    }
-
-  }
-
-  @media (max-width: $bootstrap-sm-width - 1px) {
-
-    .section-styling .inline-btn {
-      display: block;
     }
 
   }
