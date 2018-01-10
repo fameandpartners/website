@@ -28,8 +28,8 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neckline = ?", 
-                                                               params[:customization_ids].sort, params[:length], params[:silhouette], params[:neckline]).first
+        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neckline = ? AND product_id = ?", 
+                                                               params[:customization_ids].sort.join(','), params[:length], params[:silhouette], params[:neckline], params[:product_id]).first
 
         customizations = JSON.parse(customized_product.product.customizations)        
         incompatible_lengths =[] 
