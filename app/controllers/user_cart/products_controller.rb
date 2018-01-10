@@ -139,7 +139,6 @@ class UserCart::ProductsController < UserCart::BaseController
     data[:products].each do |product|
       product[:analytics_label] = analytics_label(:user_cart_product, product)
     end
-
     data
   end
 

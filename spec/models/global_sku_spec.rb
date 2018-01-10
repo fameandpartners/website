@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry-byebug'
 
 RSpec.describe GlobalSku, type: :model do
   it { is_expected.to belong_to(:product).class_name('Spree::Product') }
@@ -39,6 +40,13 @@ RSpec.describe GlobalSku, type: :model do
                                                             customization_value_ids: [cut_customisation_value.id, fit_customisation_value.id]
       ) }
 
+      let(:style_number)  { 'FB1000' }
+      let(:customization_ids) { [cut_customisation_value.id, fit_customisation_value.id] }
+      let(:dress)         { create :dress_with_magenta_size_10, sku: style_number, customisation_value_ids: customization_ids }
+      let(:master)        { dress.master }
+      let(:variant)       { dress.variants.first }
+      let(:item) { build :line_item, variant: variant, customizations: [cut_customisation_value, fit_customisation_value].to_json }
+
       let(:line_item) {
         instance_spy('Orders::LineItemPresenter',
                      sku:             'I Do Not Exist',
@@ -47,7 +55,9 @@ RSpec.describe GlobalSku, type: :model do
                      size:            'US0/AU4',
                      colour_name:     'Charpinkle',
                      height:          'Petite',
-                     personalization: line_item_personalization
+                     personalization: line_item_personalization,
+                     item:            item
+                     
         )
       }
 

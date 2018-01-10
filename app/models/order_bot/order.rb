@@ -68,8 +68,8 @@ module OrderBot
 						end
 					end
 
-					line_item.personalization.customization_values.each do |customization| #customizations
-						item_description_array << "Customization: #{customization.presentation}"
+					JSON.parse(line_item.customizations).each do |customization| #customizations
+						item_description_array << "Customization: #{customization['customisation_value']['presentation']}"
 					end
 
 					item_description_array << "Height: #{line_item.personalization.height}"
