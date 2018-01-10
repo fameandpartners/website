@@ -64,7 +64,7 @@ module Api
           collection << { product_name: product.name, 
                     color_count: product.colors.count, 
                     customization_count: JSON.parse(product.customizations).count,
-                    price: product.site_price_for(site_version || SiteVersion.default) ,
+                    price: product.master.price_in(current_currency),
                     image_urls: JSON.parse(cp.render_urls).select {|x| x['color'] == color}
                   }
         end
