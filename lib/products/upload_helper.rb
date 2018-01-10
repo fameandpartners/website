@@ -144,7 +144,7 @@ module Products
                  ]
 
       
-      allowed.each {|property_name| product.set_property(property_name, details[property_name])
+      allowed.each {|property_name| product.set_property(property_name, details[property_name])}
 
       product.set_property('care_instructions',"Professional dry-clean only.\nSee label for further details.") #always this value
       

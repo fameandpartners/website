@@ -19,7 +19,7 @@ module Api
       end
 
       def index
-        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neck_line in ? AND render_urls @> ?", 
+        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ?", 
                                                                params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
 
         res = setup_collection(customized_products, params[:selectedColor])
@@ -28,7 +28,7 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neck_line = ?", 
+        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neckline = ?", 
                                                                params[:customization_ids].sort, params[:length], params[:silhouette], params[:neckline]).first
 
         customizations = JSON.parse(customized_product.product.customizations)        
@@ -59,8 +59,9 @@ module Api
 
       def setup_collection(customized_products, color)
         collection = []
-
+        binding.pry
         customized_products.each do |cp|
+          binding.pry
           product = cp.product
           collection << { product_name: product.name, 
                     color_count: product.colors.count, 
@@ -78,6 +79,15 @@ module Api
         @current_currency ||= (site_version.try(:currency).to_s.downcase || 'usd')
       end
 
+      def site_version
+          @current_site_version ||= begin
+            ::FindUsersSiteVersion.new(
+                user:         current_spree_user,
+                url_param:    request.env['site_version_code'],
+                cookie_param: session[:site_version]
+            ).get
+          end
+      end
       def setup_product(prod)
         product = Products::DetailsResource.new(
           site_version: current_site_version,
