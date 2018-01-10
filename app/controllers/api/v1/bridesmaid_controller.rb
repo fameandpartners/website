@@ -12,7 +12,9 @@ module Api
         res[:product] = setup_product(base_product)
         res[:incompatible_ids] = customized_product.incompatible_ids.split(',')
         res[:image_urls] = JSON.parse(customized_product.render_urls).select {|x| x['color'] == params[:color]}
-        res.to_json
+        res
+
+        respond_with res
 
       end
 
@@ -21,6 +23,8 @@ module Api
                                                                params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
 
         res = setup_collection(customized_products, params[:selectedColor])
+
+        respond_with res
       end
 
       def incompatabilities
@@ -47,7 +51,7 @@ module Api
         res[:incompatible_lengths] = incompatible_lengths
         res[:incompatible_ids] = customized_product.incompatible_ids.split(',')
 
-        res.to_json
+        respond_with res
 
       end
 
