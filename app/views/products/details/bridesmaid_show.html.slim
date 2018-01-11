@@ -1,13 +1,13 @@
 ruby:
   url_params    = params.except(:controller, :action, :product_slug)
-  product_paths = { default: collection_product_path(@product, url_params) }
+  product_paths = { default: collection_product_path(@bridesmaid_data[:product], url_params) }
 
-  @product.default_color_options.each do |color|
-    product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
+  @bridesmaid_data[:product].default_color_options.each do |color|  
+    product_paths[color.id] = collection_product_path(@bridesmaid_data[:product], url_params.merge(color: color.name))
   end
 
   @current_site_version = current_site_version
-  discount  = @product.discount || { table: { amount: 0 } }
+  discount  = @bridesmaid_data[:product].discount || { table: { amount: 0 } }
   @product_discount = discount.to_json
 
 / NOTE: this JS block is loaded into the head, this should contain page data only
@@ -18,17 +18,15 @@ ruby:
 = content_for :head do
   javascript:
     window.PdpDataFull = {
-      paths: #{raw product_paths.to_json},
-      product: #{raw @product.to_json},
+      product: #{raw @bridesmaid_data[:product].to_json},
       discount: #{raw @product_discount},
-      images: #{raw @product.all_images.to_json},
-      sizeChart: #{raw @product.size_chart_data.to_json},
-      siteVersion: #{raw @current_site_version.name.to_json},
-      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
+      images: #{raw @bridesmaid_data[:product].all_images.to_json},
+      sizeChart: #{raw @bridesmaid_data[:product].size_chart_data.to_json},
+      siteVersion: #{raw @current_site_version.name.to_json}
     };
 
 = content_for :head
-  - @product.cropped_images.each_with_index do |image, index|
+  - @bridesmaid_data[:product].cropped_images.each_with_index do |image, index|
     = tag :meta, name: "crop_image_#{index}", content: image.original
 
 
