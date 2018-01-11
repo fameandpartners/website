@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -570,13 +570,15 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
-    customization_ids character varying(255),
-    incompatible_ids character varying(255),
-    render_urls json,
+    customization_ids character varying(1024),
+    incompatible_ids character varying(1024),
+    render_urls jsonb,
     product_id integer,
     length character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    silhouette character varying(255),
+    neckline character varying(255)
 );
 
 
@@ -585,6 +587,7 @@ CREATE TABLE customization_visualizations (
 --
 
 CREATE SEQUENCE customization_visualizations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3431,12 +3434,12 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
-    upc character varying(255),
-    customizations jsonb
+    upc character varying(255)
 );
 
 
@@ -9555,10 +9558,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9795,15 +9794,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9822,8 +9815,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
-
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
@@ -9860,3 +9851,7 @@ INSERT INTO schema_migrations (version) VALUES ('20171219203151');
 INSERT INTO schema_migrations (version) VALUES ('20180102175041');
 
 INSERT INTO schema_migrations (version) VALUES ('20180103184321');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105234451');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105235603');

@@ -1,0 +1,403 @@
+- cache ['views/data/_bridesmaids_filter'] do
+javascript:
+  window.BridesmaidsFilterData = {
+    /**
+      NOTE:
+        The mockup uses a grid of 18, are these hardcoded?
+        'colors' data structure below is copied from current
+        PDP: Escala (Teal), with 'extra' appended to 'default',
+        and anything beyond 18 total items dropped.
+    */
+    colors: {
+      table: {
+        default: [
+          {
+            option_value: {
+              created_at: "2013-08-06T19:15:45.519-07:00",
+              id: 25,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "black",
+              option_type_id: 8,
+              position: 0,
+              presentation: "Black",
+              updated_at: "2015-03-25T18:32:56.780-07:00",
+              use_in_customisation: true,
+              value: "#000000",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2014-02-17T03:58:14.777-08:00",
+              id: 89,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "burgundy",
+              option_type_id: 8,
+              position: 42,
+              presentation: "Burgundy",
+              updated_at: "2017-01-30T00:55:43.769-08:00",
+              use_in_customisation: true,
+              value: "#77202F",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-11-17T21:02:01.024-08:00",
+              id: 283,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "dark-tan",
+              option_type_id: 8,
+              position: 146,
+              presentation: "Dark Tan",
+              updated_at: "2017-09-25T16:32:47.467-07:00",
+              use_in_customisation: false,
+              value: "#8c7362",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:25:45.588-07:00",
+              id: 65,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "ivory",
+              option_type_id: 8,
+              position: 25,
+              presentation: "Ivory",
+              updated_at: "2015-03-25T19:03:30.046-07:00",
+              use_in_customisation: true,
+              value: "#FFFFF0",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-03-25T18:28:32.745-07:00",
+              id: 222,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "teal",
+              option_type_id: 8,
+              position: 95,
+              presentation: "Teal",
+              updated_at: "2015-03-25T18:32:56.786-07:00",
+              use_in_customisation: true,
+              value: "#41a9ab",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-06-04T22:37:57.906-07:00",
+              id: 244,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "aqua",
+              option_type_id: 8,
+              position: 115,
+              presentation: "Aqua",
+              updated_at: "2017-09-25T16:32:47.536-07:00",
+              use_in_customisation: false,
+              value: "#4aa5d8",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:26:58.203-07:00",
+              id: 71,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "bronze",
+              option_type_id: 8,
+              position: 29,
+              presentation: "Bronze",
+              updated_at: "2013-12-17T04:24:59.968-08:00",
+              use_in_customisation: false,
+              value: "#9D6A4B",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-09T03:04:09.649-07:00",
+              id: 82,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "champagne",
+              option_type_id: 8,
+              position: 36,
+              presentation: "Champagne",
+              updated_at: "2017-01-30T00:55:43.601-08:00",
+              use_in_customisation: true,
+              value: "#EFE4DC",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:25:45.592-07:00",
+              id: 66,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "charcoal",
+              option_type_id: 8,
+              position: 26,
+              presentation: "Charcoal",
+              updated_at: "2015-03-25T19:07:29.939-07:00",
+              use_in_customisation: true,
+              value: "#3c3c3c",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-10-08T22:36:58.259-07:00",
+              id: 273,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "chartreuse",
+              option_type_id: 8,
+              position: 140,
+              presentation: "Chartreuse",
+              updated_at: "2017-09-25T16:32:47.450-07:00",
+              use_in_customisation: false,
+              value: "#96943c",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:02:47.931-07:00",
+              id: 42,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "cherry-red",
+              option_type_id: 8,
+              position: 9,
+              presentation: "Cherry Red",
+              updated_at: "2014-03-04T12:40:15.481-08:00",
+              use_in_customisation: true,
+              value: "#B91B29",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:50:04.396-07:00",
+              id: 73,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "cobalt-blue",
+              option_type_id: 8,
+              position: 31,
+              presentation: "Cobalt Blue",
+              updated_at: "2014-03-04T12:40:15.506-08:00",
+              use_in_customisation: true,
+              value: "#012D60",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2016-01-28T22:14:22.713-08:00",
+              id: 297,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "dark-chocolate",
+              option_type_id: 8,
+              position: 160,
+              presentation: "Dark Chocolate",
+              updated_at: "2017-09-25T16:32:47.529-07:00",
+              use_in_customisation: false,
+              value: "#4c1f0b",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-11-10T22:16:34.372-08:00",
+              id: 282,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "dark-lavender",
+              option_type_id: 8,
+              position: 145,
+              presentation: "Dark Lavender",
+              updated_at: "2015-11-11T16:14:47.158-08:00",
+              use_in_customisation: false,
+              value: "#aa8ee1",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:54:03.616-07:00",
+              id: 77,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "emerald-green",
+              option_type_id: 8,
+              position: 34,
+              presentation: "Emerald Green",
+              updated_at: "2014-03-04T12:40:15.510-08:00",
+              use_in_customisation: true,
+              value: "#009875",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-09T03:37:57.894-07:00",
+              id: 83,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "gold",
+              option_type_id: 8,
+              position: 37,
+              presentation: "Gold",
+              updated_at: "2013-12-17T04:25:00.073-08:00",
+              use_in_customisation: false,
+              value: "#D6AE28",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2013-08-08T04:18:51.344-07:00",
+              id: 58,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "hot-pink",
+              option_type_id: 8,
+              position: 19,
+              presentation: "Hot Pink",
+              updated_at: "2014-03-04T12:40:15.496-08:00",
+              use_in_customisation: true,
+              value: "#F14873",
+            },
+          },
+          {
+            option_value: {
+              created_at: "2015-03-25T02:46:22.386-07:00",
+              id: 203,
+              image_content_type: null,
+              image_file_name: null,
+              image_file_size: null,
+              name: "indigo",
+              option_type_id: 8,
+              position: 84,
+              presentation: "Indigo",
+              updated_at: "2015-03-25T19:18:37.683-07:00",
+              use_in_customisation: false,
+              value: "#3366cc",
+            },
+          },
+        ],
+      },
+    },
+    // TODO: get actual silhouette data
+    silhouettes: {
+      options: [
+        {
+          id: 1,
+          name: 'Fit and Flare',
+          description: "Fitted through the waist and flaring at the hips",
+          image: "http://via.placeholder.com/175x400"
+        },
+        {
+          id: 2,
+          name: 'Column',
+          description: "Slim-fitting with a straight narrow shape",
+          image: "http://via.placeholder.com/175x400"
+        },
+        {
+          id: 3,
+          name: 'A-line',
+          description: "Slowly widens towards the hem",
+          image: "http://via.placeholder.com/175x400"
+        }
+      ]
+    },
+    // TODO: get actual length data
+    lengths: {
+      options: [
+        {
+          id: 1,
+          name: 'Micro-Mini',
+          image: "http://via.placeholder.com/125x300"
+        },
+        {
+          id: 2,
+          name: 'Mini',
+          image: "http://via.placeholder.com/125x300"
+        },
+        {
+          id: 3,
+          name: 'Knee',
+          image: "http://via.placeholder.com/125x300"
+        },
+        {
+          id: 4,
+          name: 'Midi',
+          image: "http://via.placeholder.com/125x300"
+        },
+        {
+          id: 5,
+          name: 'Ankle',
+          image: "http://via.placeholder.com/125x300"
+        },
+        {
+          id: 6,
+          name: 'Maxi',
+          image: "http://via.placeholder.com/125x300"
+        }
+      ]
+    },
+    // TODO: get actual top details data
+    top_details: {
+      options: [
+        {
+          id: 1,
+          name: 'Strapless',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 2,
+          name: 'Strappy',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 3,
+          name: 'Open Neckline',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 4,
+          name: 'Shoulder Coverage',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 5,
+          name: 'Arm Coverage',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 6,
+          name: 'Covered Neckline',
+          image: "http://via.placeholder.com/150x200"
+        },
+        {
+          id: 7,
+          name: 'Backless',
+          image: "http://via.placeholder.com/150x200"
+        }
+      ]
+    }
+  };

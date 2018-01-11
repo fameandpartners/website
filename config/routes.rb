@@ -397,6 +397,8 @@ FameAndPartners::Application.routes.draw do
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end
 
+
+
     # Custom Dresses
     get '/custom-dresses(/*whatever)', to: redirect('/dresses')
 
@@ -623,6 +625,21 @@ FameAndPartners::Application.routes.draw do
     resources :dress_colours,      :only => :index
   end
 
+
+  # ----------
+  # Dress Filter LP
+  # ----------
+
+  scope '/bridesmaids' do
+    get '/' => 'products/bridesmaids#index'
+  end
+
+  scope '/bridesmaid-dresses' do
+    # Colors should behave like query strings, and not paths
+    get '/:id' => 'products/details#bridesmaid_show'
+  end
+
+
   # ----------
   # API Routes
   # ----------
@@ -649,6 +666,10 @@ FameAndPartners::Application.routes.draw do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
+
+      get '/bridesmaids/:id' => 'bridesmaid#show'
+      get '/bridesmaids' => 'bridesmaid#index'
+      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
 
       delete '/rails_cache' => 'systems#clear_cache'
     end

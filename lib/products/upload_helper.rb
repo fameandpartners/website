@@ -7,6 +7,7 @@ module Products
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
         begin
+
           product = create_or_update_product(prod)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
@@ -17,17 +18,19 @@ module Products
 
           details = prod[:details]
 
-          #add_product_properties(product, args[:properties].symbolize_keys) TODO: Great deal of stuff needs to be added
+          add_product_properties(product, details)
 
           add_product_color_options(product, details[:colors])
 
           add_product_variants(product, sizes, details[:colors] || [], details[:price_aud].to_f, details[:price_usd].to_f)
 
-          #add_product_style_profile(product, args[:style_profile].symbolize_keys) TODO: Add stuff to json here as well
           add_product_customizations(product, prod[:customization_list] || [])
 
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list])
-          #add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i ) TODO: I DONT THINK WE NEED THIS ANYMORE
+          #update_or_create_base_visualization(details[:colors])
+
+          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline])
+          add_product_height_ranges( product )
+
           product
         end
       end.compact
@@ -132,37 +135,20 @@ module Products
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_ids).destroy_all
     end
 
-    def add_product_properties(product, args)
+    def add_product_properties(product, details)
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      allowed = [:style_notes,
-                 :care_instructions,
-                 :size,
-                 :fit,
-                 :fabric,
-                 :product_type,
-                 :product_category,
-                 :factory_id,
-                 :factory_name,
-                 :product_coding,
-                 :shipping,
-                 :stylist_quote_short,
-                 :stylist_quote_long,
-                 :product_details,
-                 :revenue,
-                 :cogs,
-                 :video_id,
-                 :color_customization,
-                 :standard_days_for_making,
-                 :customised_days_for_making,
-                 :short_description]
+      allowed = ['style_notes',
+                 'fit',
+                 'fabric',
+                 'factory_name'
+                 ]
 
-      properties = args.slice(*allowed).select{ |name, value| value.present? }
+      
+      allowed.each {|property_name| product.set_property(property_name, details[property_name])}
 
-      properties.each do |name, value|
-        product.set_property(name, value)
-      end
-
-      if factory = Factory.find_by_name(args[:factory_name].try(:capitalize))
+      product.set_property('care_instructions',"Professional dry-clean only.\nSee label for further details.") #always this value
+      
+      if factory = Factory.find_by_name(details[:factory_name].try(:capitalize))
         product.factory = factory
       end
 
@@ -220,7 +206,6 @@ module Products
     end
 
     def add_product_customizations(product, custs)
-      #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       customizations = []
 
       custs.each do |customization|
@@ -234,22 +219,41 @@ module Products
         customizations << { customisation_value: new_customization }
       end
       product.customizations = customizations.to_json
+      product.save
 
       product.customizations
     end
 
-    def update_or_add_customization_visualizations(product, customization_list)
+    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
       customization_list.each do |cust|
         id = cust[:customization_ids].sort.join('_')
-        cust[:lengths].each do |length|
-          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name])
-                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name])
+        silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
+        neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
+        cust[:lengths].each do |length|         
+          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
+                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
         
           cv.render_urls = length[:render_urls].to_json
           cv.incompatible_ids = length[:incompatability_list].join(',') #never manipulated so just put it in as ta string and split on return
           cv.save!
         end
       end
+    end
+
+    def add_product_height_ranges( product )
+      master_variant = product.master
+
+      master_variant.style_to_product_height_range_groups = []
+      
+      product_height_groups = ProductHeightRangeGroup.default_six
+
+      product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }
+
+      master_variant.save
+    end
+
+    def update_or_create_base_visualization(product, product_details)
+
     end
 
   end
