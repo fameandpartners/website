@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.1
--- Dumped by pg_dump version 10.1
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -571,7 +571,7 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
     customization_ids character varying(1024),
-    incompatible_ids character varying(1024),
+    incompatible_ids character varying(255),
     render_urls jsonb,
     product_id integer,
     length character varying(255),
@@ -587,7 +587,6 @@ CREATE TABLE customization_visualizations (
 --
 
 CREATE SEQUENCE customization_visualizations_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3434,12 +3433,12 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
-    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
-    upc character varying(255)
+    upc character varying(255),
+    customizations jsonb
 );
 
 
@@ -7726,6 +7725,13 @@ ALTER TABLE ONLY wishlist_items
 
 
 --
+-- Name: dress_features; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX dress_features ON customization_visualizations USING btree (length, silhouette, neckline);
+
+
+--
 -- Name: email_idx_unique; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9855,3 +9861,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180103184321');
 INSERT INTO schema_migrations (version) VALUES ('20180105234451');
 
 INSERT INTO schema_migrations (version) VALUES ('20180105235603');
+
+INSERT INTO schema_migrations (version) VALUES ('20180111190922');
