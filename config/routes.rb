@@ -630,6 +630,7 @@ FameAndPartners::Application.routes.draw do
 
   scope '/bridesmaids' do
     get '/' => 'products/bridesmaids#index'
+    get '/dresses' => 'products/bridesmaids#show'
   end
 
 
