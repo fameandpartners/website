@@ -397,11 +397,7 @@ FameAndPartners::Application.routes.draw do
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end
 
-    scope '/bridesmaid-dresses' do
-      # Colors should behave like query strings, and not paths
-      get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
-      get '/dress-:product_slug' => 'products/details#bridesmaid_show'
-    end
+
 
     # Custom Dresses
     get '/custom-dresses(/*whatever)', to: redirect('/dresses')
@@ -636,7 +632,11 @@ FameAndPartners::Application.routes.draw do
 
   scope '/bridesmaids' do
     get '/' => 'products/bridesmaids#index'
-    get '/dresses' => 'products/bridesmaids#show'
+  end
+
+  scope '/bridesmaid-dresses' do
+    # Colors should behave like query strings, and not paths
+    get '/:id' => 'products/details#bridesmaid_show'
   end
 
 
