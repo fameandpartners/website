@@ -219,9 +219,9 @@ module Products
         customizations << { customisation_value: new_customization }
       end
       product.customizations = customizations.to_json
+      product.save
 
       product.customizations
-      product.save
     end
 
     def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
