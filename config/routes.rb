@@ -647,6 +647,9 @@ FameAndPartners::Application.routes.draw do
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
+      #fabric swatches
+      get 'fabric_swatches' => 'fabric_swatches#index'
+
       delete '/rails_cache' => 'systems#clear_cache'
     end
   end
