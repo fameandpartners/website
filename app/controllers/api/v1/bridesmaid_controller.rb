@@ -19,7 +19,7 @@ module Api
       end
 
       def index
-        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ?", 
+        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ?",
                                                                params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
 
         res = setup_collection(customized_products, params[:selectedColor])
@@ -28,14 +28,14 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neckline = ?", 
+        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND silhouette =? AND neckline = ?",
                                                                params[:customization_ids].sort, params[:length], params[:silhouette], params[:neckline]).first
 
-        customizations = JSON.parse(customized_product.product.customizations)        
-        incompatible_lengths =[] 
+        customizations = JSON.parse(customized_product.product.customizations)
+        incompatible_lengths =[]
 
         required_lengths = customizations.select {|x| !x['customisation_value']['required_by']['lengths'].empty?} #check to see if any of the lengths have a requirement
-        
+
         if required_lengths
           required_customization_ids = required_lengths.map {|x| x['customisation_value']['id']}
 
@@ -44,7 +44,7 @@ module Api
               incompatible_lengths = incompatible_lengths | required_length['customisation_value']['required_by']['lengths']
             end
           end
-          
+
         end
 
         res = {}
@@ -59,12 +59,10 @@ module Api
 
       def setup_collection(customized_products, color)
         collection = []
-        binding.pry
         customized_products.each do |cp|
-          binding.pry
           product = cp.product
-          collection << { product_name: product.name, 
-                    color_count: product.colors.count, 
+          collection << { product_name: product.name,
+                    color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
                     price: product.site_price_for(site_version || SiteVersion.default) ,
                     currency: current_currency,
@@ -133,6 +131,6 @@ module Api
         return product
       end
 
-    end 
+    end
   end
 end
