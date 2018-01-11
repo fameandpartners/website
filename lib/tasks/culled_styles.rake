@@ -287,7 +287,7 @@ desc 'Hide styles in spree'
     'FP2157'
     ]
 
-    culled_styles = [
+    culled_styles_november2017 = [
     'FP2475',
     'FPRV1024',
     'FP2424',
@@ -340,6 +340,32 @@ desc 'Hide styles in spree'
     'FP2472',
     '4B157',
     'C161019'
+    ]
+
+    culled_styles = [
+    'FP2335',
+    'USP1073',
+    'FP2048',
+    'FP2319',
+    'FP2203',
+    '4B094',
+    'FP2564',
+    'FP2186',
+    'FP2265',
+    'FP2417',
+    'FP2570P',
+    'FP2560',
+    'FP2568P',
+    'FP2566P',
+    'FP2561',
+    'FP2562',
+    'FP2418',
+    'FP2399',
+    'FP2420',
+    'FP2408',
+    '4B506B',
+    'FP2582',
+    'FP2572'
     ]
 
     puts "Prepare to kill #{culled_styles.count.to_s}"
