@@ -36,20 +36,19 @@ module Products
       end.compact
     end
 
-    def get_or_create_master(sku)
-      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+    def add_product_prices(product, price, us_price = nil)
+      product.price = price
+      product.save
 
-      if master.nil?
-        master = Spree::Variant.create(is_master: true, sku: sku)
-      end
+      master_variant = product.master
 
-      master
+      usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
+      usd.amount = us_price if us_price.present?
+      usd.save!
     end
 
     def create_or_update_product(prod)
       sku = prod[:style_number].to_s.downcase.strip
-      #section_heading = get_section_heading(sku: args[:sku], name: args[:name])
-      #info "#Building #{sku}"
 
       raise 'SKU should be present!' unless sku.present?
 
@@ -115,9 +114,9 @@ module Products
 
       #trying without this
 
-      # if prod[:details][:price_aud].present? || prod[:details][:price_usd].present?
-      #   add_product_prices(product, prod[:details][:price_aud], prod[:details][:price_usd])
-      # end
+      if prod[:details][:price_aud].present? || prod[:details][:price_usd].present?
+         add_product_prices(product, prod[:details][:price_aud].to_f, prod[:details][:price_usd].to_f)
+       end
      # info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end

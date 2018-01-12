@@ -1,16 +1,17 @@
 module Api
   module V1
     class BridesmaidController < ApplicationController
-      include Products::UploadHelper
 
       respond_to :json
 
       def index
-        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ?",
+        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ? ",
                                                                params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
+                                                        .order('Length(customization_ids)')  #gets base most customization 
+        
+        customized_products = customized_products.uniq_by{ |x| x.product_id.to_s + x.neckline } #only present one of each product and neckline combo
 
         res = setup_collection(customized_products, params[:selectedColor])
-
         respond_with res
       end
 
@@ -48,10 +49,12 @@ module Api
         collection = []
         customized_products.each do |cp|
           product = cp.product
-          collection << { product_name: product.name,
+          collection << { 
+                    id: cp.id,
+                    product_name: product.name,
                     color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
-                    price: product.master.price_in(current_currency),
+                    price: product.master.price_in(current_currency.upcase).attributes,
                     image_urls: JSON.parse(cp.render_urls).select {|x| x['color'] == color}
                   }
         end

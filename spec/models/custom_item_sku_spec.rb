@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry-byebug'
 # 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
 
 RSpec.describe CustomItemSku do
@@ -9,7 +9,7 @@ RSpec.describe CustomItemSku do
   let(:customization_ids) { [customisation_value.id] }
   let(:chosen_height) { 'standard' }
   let(:style_number)  { 'FB1000' }
-  
+
   let(:dress)         { create :dress_with_magenta_size_10, sku: style_number, customisation_value_ids: customization_ids }
   let(:master)        { dress.master }
   let(:variant)       { dress.variants.first }
@@ -32,7 +32,7 @@ RSpec.describe CustomItemSku do
 
 
   describe 'custom items' do
-   
+
     it 'generates a custom SKU' do
       line_item.personalization = personalization
       generator.call
@@ -83,7 +83,7 @@ RSpec.describe CustomItemSku do
 
         it 'are each marked with X and the ID' do
           line_item.personalization = personalization
-          line_item.customizations = [customisation_value, customisation_value2].to_json 
+          line_item.customizations = [customisation_value, customisation_value2].to_json
           expect(sku).to include("X#{customisation_value.id.to_s}X#{customisation_value2.id.to_s}")
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe CustomItemSku do
         let(:chosen_height) { 'standard' }
         it do
           line_item.personalization = personalization
-          expect(sku).to end_with("HSD") 
+          expect(sku).to end_with("HSD")
         end
       end
 
@@ -102,7 +102,7 @@ RSpec.describe CustomItemSku do
         let(:chosen_height) { 'petite' }
         it do
          line_item.personalization = personalization
-         expect(sku).to end_with("HPE") 
+         expect(sku).to end_with("HPE")
         end
       end
 
@@ -110,7 +110,7 @@ RSpec.describe CustomItemSku do
         let(:chosen_height) { 'tall' }
         it do
          line_item.personalization = personalization
-         expect(sku).to end_with("HTL") 
+         expect(sku).to end_with("HTL")
         end
       end
 
@@ -148,8 +148,8 @@ RSpec.describe CustomItemSku do
       expect(sku).to eq line_item.variant.sku
     end
 
-    it 'wont mark customs with X' do
-      expect(sku).to_not include("X")
+    it 'mark customs with X' do
+      expect(sku).to include("X")
     end
   end
 end
