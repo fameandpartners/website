@@ -200,8 +200,5 @@
         = link_to dresses_path + '/dress-petra-723?color=nude', class: 'media-wrap'
           = image_tag 'landingpages/dance-hall-days/tile-look-4.jpg'
 
-    .row  
-      = render partial: 'pick_products_without_content', locals: {rangeFrom: 34, customWrapper: 'col-md-3 col-xs-6'}
-
     .row
-      = render partial: 'shared/redesign/more_dresses'
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 34, customWrapper: 'col-md-3 col-xs-6'}

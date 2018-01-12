@@ -11,7 +11,9 @@ import '../libs/default-csrf';
 
 const returnNode = window.document.getElementById('returnsApp');
 if (returnNode) {
-  const user = window.ApplicationStateData ? window.ApplicationStateData.UserData.user : {};
+  const user = (window.ApplicationStateData && window.ApplicationStateData.UserData)
+    ? window.ApplicationStateData.UserData.user
+    : {};
   const store = AppStore({ user: {
     id: user.id,
     email: user.email,

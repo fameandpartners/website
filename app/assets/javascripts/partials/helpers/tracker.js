@@ -113,4 +113,8 @@ window.track = {
   internshipTrack: function (action, label) {
     this.event('Internship', action, label, false);
   },
+
+  bridesmaidTeaserTrack: function (action, label) {
+    this.event('BridesmaidTeaser', action, label, false);
+  },
 };

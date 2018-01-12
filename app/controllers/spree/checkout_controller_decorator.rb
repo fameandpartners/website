@@ -24,7 +24,6 @@ Spree::CheckoutController.class_eval do
   }
 
   def edit
-    @optimizely_opt_in = true
     prepare_order
     find_payment_methods
     update_line_item_delivery
@@ -51,6 +50,7 @@ Spree::CheckoutController.class_eval do
     set_order_site_version
     find_payment_methods
     move_order_from_cart_state(@order)
+    @order.return_type = 'B'
 
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
@@ -143,7 +143,7 @@ Spree::CheckoutController.class_eval do
 
       if @order.state == 'complete' || @order.completed?
         GuestCheckoutAssociation.call(spree_order: @order)
-        @order.return_type = params[:return_type]
+        @order.vwo_type = params[:return_type] #return type is being hooked into to pass vwo type
         @order.save!
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special' # necessary for GA conversion tracking
@@ -157,7 +157,7 @@ Spree::CheckoutController.class_eval do
         end
 
         OrderBotWorker.perform_async(@order.id)
-       
+
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }

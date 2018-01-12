@@ -35,13 +35,15 @@ module Orders
                    :order_return_requested?,
                    :returnable?,
                    :item_count,
-                   :return_type
+                   :return_type,
+                   :vwo_type
 
     attr_reader :spree_order, :items
 
     def initialize(order, items = nil)
       @spree_order = order
       @items = items || order.line_items
+      @items = @items&.sort { |x,y| x.stock.to_s <=> y.stock.to_s }
     end
 
     alias_method :customer_notes?, :customer_notes

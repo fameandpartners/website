@@ -20,12 +20,12 @@
     <div id="react-menu" class="__react_root__"></div>
     <div id="react-header" class="__react_root__"></div>
     <div id="react-cart" class="__react_root__"></div>
-    <div class="app-container">
+    <%= render 'layouts/redesign/shopping_spree' %>
+    <div>
       <%= yield %>
     </div>
     <div id="react-footer" class="__react_root__"></div>
     <%= yield :microservice_js %>
-
 
     <%= render 'google_tag_manager/base' %>
     <%= javascript_include_tag 'application_custom_experience' %>

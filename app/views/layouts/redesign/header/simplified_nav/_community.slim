@@ -3,4 +3,6 @@
   li.normal-item = link_to 'Read The Fame Files', 'http://blog.fameandpartners.com/', class: 'text', target: '_blank'
   li.normal-item = link_to 'Join The Fame Society', fame_society_application_landing_page_path, class: 'text'
   li.normal-item = link_to 'Meet the CEO', from_our_ceo_path, class: 'text'
-  li.normal-item = link_to 'Get $25 Off', invite_a_friend_landing_page_path + '?nav', class: 'text'
+  li.normal-item = link_to 'Get $25 Off', invite_a_friend_landing_page_path, class: 'text'
+  li.normal-item.js-shop-with-friends
+    a onClick='window.startShoppingSpree()' Shop with Friends

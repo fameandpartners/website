@@ -19,7 +19,7 @@ namespace :data do
 
     stripe_payment = Spree::Gateway::FameStripe.new
     stripe_payment.name = "Stripe - US Test"
-    stripe_payment.preferences[:currency] = 'USD'
+    stripe_payment.preferred_currency = 'USD'
     stripe_payment.preferred_api_key = 'sk_test_yW9SNQf6P6xCqkNgBs36jPGr'
     stripe_payment.preferred_publishable_key = 'pk_test_W2TXpgZbnoebFKeDzNW74xhB'
     stripe_payment.preferred_server = 'test'
@@ -30,7 +30,7 @@ namespace :data do
 
     stripe_payment = Spree::Gateway::FameStripe.new
     stripe_payment.name = "Stripe - AU Test"
-    stripe_payment.preferences[:currency] = 'AUD'
+    stripe_payment.preferred_currency = 'AUD'
     stripe_payment.preferred_api_key = 'sk_test_CfDYdUzw8Sv6suQyd08HG9Lo'
     stripe_payment.preferred_publishable_key = 'pk_test_ic3pWUfqR66brmOJ01TrE5Lf'
     stripe_payment.preferred_server = 'test'
@@ -41,7 +41,7 @@ namespace :data do
 
     paypal_payment = Spree::Gateway::PayPalExpress.new
     paypal_payment.name = "PayPalExpress - USD Test"
-    paypal_payment.preferences[:currency] = 'USD'
+    paypal_payment.preferred_currency = 'USD'
     paypal_payment.preferred_server = 'sandbox'
     paypal_payment.environment = Rails.env
     paypal_payment.preferences[:login] = 'finance-facilitator_api1.fameandpartners.com'

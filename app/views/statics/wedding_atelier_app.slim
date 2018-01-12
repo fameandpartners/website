@@ -1,193 +1,183 @@
-/ = render partial: 'pages/robots'
+= render partial: 'pages/robots'
 
-/ - wedding_atelier_app_signup_link_path = wedding_atelier.signup_path
-/ - wedding_atelier_app_signin_link_path = wedding_atelier.sign_in_path
+- wedding_atelier_app_signup_link_path = wedding_atelier.signup_path
+- wedding_atelier_app_signin_link_path = wedding_atelier.sign_in_path
 
-/ .page-wedding-atelier-app.page-content
+.page-wedding-atelier-app.page-content
 
-/   // Hero tile
-/   .main-hero-wrap.hero-wrap.copy-left
-/     - hero_tile_image_path = image_path("landingpages/wedding-atelier-app/hero-tile-wedding-app.jpg")
-/     - hero_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/hero-tile-wedding-app-mob.jpg")
-/     picture.media-wrap.keep-ratio.img-as-block.hidden-sm.hidden-xs
-/       .inner-wrap
-/         img src="#{hero_tile_image_path}"
+  // Hero tile
+  .main-hero-wrap.hero-wrap.copy-left
+    - hero_tile_image_path = image_path("landingpages/wedding-atelier-app/hero-tile-wedding-app.jpg")
+    - hero_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/hero-tile-wedding-app-mob.jpg")
+    picture.media-wrap.keep-ratio.img-as-block.hidden-sm.hidden-xs
+      .inner-wrap
+        img src="#{hero_tile_image_path}"
 
-/     .content-wrap
-/       .container-fluid.no-padding.no-scroll
-/         .row.hidden-md.hidden-lg
-/           .col-xs-12.no-padding
-/             img.img-responsive src="#{hero_tile_image_mob_path}"
+    .content-wrap
+      .container-fluid.no-padding.no-scroll
+        .row.hidden-md.hidden-lg
+          .col-xs-12.no-padding
+            img.img-responsive src="#{hero_tile_image_mob_path}"
 
-/         .row.introCopyRow
-/           .col-lg-6.col-lg-offset-6.col-md-5.col-md-offset-7.col-sm-6.col-sm-offset-3.col-xs-12
-/             .copy-wrap.section-intro
-/               .introWrapper.copyContent
-/                 p And convenient. <br>And affordable. <br>And effing gorgeous.
-/                 p Introducing the <em>Atelier App Beta</em>: <br>design your own bridesmaid dress, group chat with your wedding party, and vote & decide on the final looks together.
+        .row.introCopyRow
+          .col-lg-6.col-lg-offset-6.col-md-5.col-md-offset-7.col-sm-6.col-sm-offset-3.col-xs-12
+            .copy-wrap.section-intro
+              .introWrapper.copyContent
+                p And convenient. <br>And affordable. <br>And effing gorgeous.
+                p Introducing the <em>Atelier App Beta</em>: <br>design your own bridesmaid dress, group chat with your wedding party, and vote & decide on the final looks together.
 
-/                 .ctaButtonWrapper
-/                   a.btn-sm.btnCtaBlackBgUppercase href="#{wedding_atelier_app_signup_link_path}"
-/                     | Sign up
-/                   a.btn-sm.btnCtaOutlineBorderUppercase href="#{wedding_atelier_app_signin_link_path}"
-/                     | Log in
+                .ctaButtonWrapper
+                  a.btn-sm.btnCtaBlackBgUppercase href="#{wedding_atelier_app_signup_link_path}"
+                    | Sign up
+                  a.btn-sm.btnCtaOutlineBorderUppercase href="#{wedding_atelier_app_signin_link_path}"
+                    | Log in
 
-/   .container-fluid
+  .container-fluid
 
-/     / Section: Side by side content (copy + images)
-/     - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-custom-experience.jpg")
-/     - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-custom-experience-mob.jpg")
-/     .row.vertical-align-row.sectionInfo
-/       .vertical-align
-/         .col-lg-3.col-lg-offset-1.col-md-4
-/           .heading-overlay-wrapper
-/             .heading-overlay A custom experience
+    / Section: Side by side content (copy + images)
+    - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-custom-experience.jpg")
+    - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-custom-experience-mob.jpg")
+    .row.vertical-align-row.sectionInfo
+      .vertical-align
+        .col-lg-3.col-lg-offset-1.col-md-4
+          .heading-overlay-wrapper
+            .heading-overlay A custom experience
 
-/           .copyContent
-/             h2 <em>Create</em> the dress you want to wear.
-/             p In the Atelier App Beta, you can customize nearly everything about your dress: fabric, color, fit, and design details. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. The best part? The bridesmaid dresses start at just $200.
+          .copyContent
+            h2 <em>Create</em> the dress you want to wear.
+            p In the Atelier App Beta, you can customize nearly everything about your dress: fabric, color, fit, and design details. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. The best part? The bridesmaid dresses start at just $200.
 
-/             .image-section.hidden-md.hidden-lg
-/               a href="#{wedding_atelier_app_signup_link_path}"
-/                 img src="#{current_tile_image_mob_path}"
+            .image-section.hidden-md.hidden-lg
+              a href="#{wedding_atelier_app_signup_link_path}"
+                img src="#{current_tile_image_mob_path}"
 
-/         .col-lg-7.col-lg-offset-1.col-md-8.hidden-sm.hidden-xs
-/           .image-section.sectionBox__noPaddingRight
-/             a href="#{wedding_atelier_app_signup_link_path}"
-/               img src="#{current_tile_image_path}"
+        .col-lg-7.col-lg-offset-1.col-md-8.hidden-sm.hidden-xs
+          .image-section.sectionBox__noPaddingRight
+            a href="#{wedding_atelier_app_signup_link_path}"
+              img src="#{current_tile_image_path}"
 
-/     - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-chat-app.jpg")
-/     - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-chat-app-mob.jpg")
-/     .row.vertical-align-row.sectionInfo
-/       .vertical-align
+    - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-chat-app.jpg")
+    - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-chat-app-mob.jpg")
+    .row.vertical-align-row.sectionInfo
+      .vertical-align
 
-/         .col-lg-7.col-md-8.hidden-sm.hidden-xs
-/           .image-section.sectionBox__noPaddingLeft
-/             a href="#{wedding_atelier_app_signup_link_path}"
-/               img src="#{current_tile_image_path}"
+        .col-lg-7.col-md-8.hidden-sm.hidden-xs
+          .image-section.sectionBox__noPaddingLeft
+            a href="#{wedding_atelier_app_signup_link_path}"
+              img src="#{current_tile_image_path}"
 
-/         .col-lg-4.col-md-5
-/           .heading-overlay-wrapper
-/             .heading-overlay Let's talk about it
+        .col-lg-4.col-md-5
+          .heading-overlay-wrapper
+            .heading-overlay Let's talk about it
 
-/           .copyContent
-/             h2 Get the <em>whole</em> bridal <br class="visible-lg visible-md">party involved.
-/             p You know your usual process of screenshotting, texting your friends, and waiting for feedback before clicking, “Add To Cart”? There’s a better way. Use the Atelier App Beta to group chat with the entire bridal party–you can even invite a stylist to help create each look. It’s a communal space to upload inspiration images, create endless versions of your dream dresses, and vote on your favorites.
+          .copyContent
+            h2 Get the <em>whole</em> bridal <br class="visible-lg visible-md">party involved.
+            p You know your usual process of screenshotting, texting your friends, and waiting for feedback before clicking, “Add To Cart”? There’s a better way. Use the Atelier App Beta to group chat with the entire bridal party–you can even invite a stylist to help create each look. It’s a communal space to upload inspiration images, create endless versions of your dream dresses, and vote on your favorites.
 
-/             .image-section.hidden-md.hidden-lg
-/               a href="#{wedding_atelier_app_signup_link_path}"
-/                 img src="#{current_tile_image_mob_path}"
+            .image-section.hidden-md.hidden-lg
+              a href="#{wedding_atelier_app_signup_link_path}"
+                img src="#{current_tile_image_mob_path}"
 
-/     - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-group-discount.jpg")
-/     - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-group-discount-mob.jpg")
-/     .row.vertical-align-row.sectionInfo
-/       .vertical-align
-/         .col-lg-3.col-lg-offset-1.col-md-4
-/           .heading-overlay-wrapper
-/             .heading-overlay Save more together
+    - current_tile_image_path = image_path("landingpages/wedding-atelier-app/tile-group-discount.jpg")
+    - current_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/tile-group-discount-mob.jpg")
+    .row.vertical-align-row.sectionInfo
+      .vertical-align
+        .col-lg-3.col-lg-offset-1.col-md-4
+          .heading-overlay-wrapper
+            .heading-overlay Save more together
 
-/           .copyContent
-/             h2 Say it with us: <em>group discount.</em>
-/             p When the bridal party buys together, the bridal party saves together with group discounting. The group’s bespoke, made-to-order, flawless-fitting dresses will arrive in 2 weeks, and the money you save can go towards an extra round at the bachelorette party, on us.
+          .copyContent
+            h2 Say it with us: <em>group discount.</em>
+            p When the bridal party buys together, the bridal party saves together with group discounting. The group’s bespoke, made-to-order, flawless-fitting dresses will arrive in 2 weeks, and the money you save can go towards an extra round at the bachelorette party, on us.
 
-/             .image-section.hidden-md.hidden-lg
-/               a href="#{wedding_atelier_app_signup_link_path}"
-/                 img src="#{current_tile_image_mob_path}"
+            .image-section.hidden-md.hidden-lg
+              a href="#{wedding_atelier_app_signup_link_path}"
+                img src="#{current_tile_image_mob_path}"
 
-/         .col-lg-7.col-lg-offset-1.col-md-8.hidden-sm.hidden-xs
-/           .image-section.sectionBox__noPaddingRight
-/             a href="#{wedding_atelier_app_signup_link_path}"
-/               img src="#{current_tile_image_path}"
+        .col-lg-7.col-lg-offset-1.col-md-8.hidden-sm.hidden-xs
+          .image-section.sectionBox__noPaddingRight
+            a href="#{wedding_atelier_app_signup_link_path}"
+              img src="#{current_tile_image_path}"
 
 
-/   // Section: Benefits
-/   .container.section-box.sectionBenefits
-/     .row
-/       .col-md-12.heading-overlay-wrapper
-/         h1.heading-overlay There's more
+  // Section: Benefits
+  .container.section-box.sectionBenefits
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h1.heading-overlay There's more
 
-/     .row
-/       .same-height-cols
-/         .col-md-4
-/           .item.bordered
-/             .item-copy
-/               - current_tile_link_path = styling_session_path
-/               h3 <em>Ask</em> a stylist.
-/               p.summary Invite our wedding expert to join your chat and style the group. <a href="#{current_tile_link_path}" class="ctaLink">Meet Amber</a>.
+    .row
+      .same-height-cols
+        .col-md-4.col-md-offset-2
+          .item.bordered
+            .item-copy
+              / TODO: add route path
+              - current_tile_link_path = "/get-the-look"
+              h3 Get the <em>look</em>.
+              p.summary Bohemian, rebellious, modern or classic? <br><a href="#{current_tile_link_path}" class="ctaLink">Find your bridal style</a>.
+            = link_to current_tile_link_path
+              = image_tag 'landingpages/wedding-atelier-app/tile-get-the-look.jpg', class: 'img-responsive', alt: 'Get the look'
 
-/             = link_to current_tile_link_path
-/               = image_tag 'landingpages/wedding-atelier-app/tile-ask-stylist.jpg', class: 'img-responsive', alt: 'Ask a stylist'
+        .col-md-4
+          .item.bordered
+            .item-copy
+              - current_tile_link_path = '/bespoke-bridal-collection'
+              h3 <em>Shop</em> bridal dresses.
+              p.summary You found The One. Now find The Dress. <br><a href="#{current_tile_link_path}" class="ctaLink">Start searching</a>.
+            = link_to current_tile_link_path
+              = image_tag 'landingpages/wedding-atelier-app/tile-shop-bridal-dresses.jpg', class: 'img-responsive', alt: 'Shop bridal dresses'
 
-/         .col-md-4
-/           .item.bordered
-/             .item-copy
-/               / TODO: add route path
-/               - current_tile_link_path = "/get-the-look"
-/               h3 Get the <em>look</em>.
-/               p.summary Bohemian, rebellious, modern or classic? <br><a href="#{current_tile_link_path}" class="ctaLink">Find your bridal style</a>.
-/             = link_to current_tile_link_path
-/               = image_tag 'landingpages/wedding-atelier-app/tile-get-the-look.jpg', class: 'img-responsive', alt: 'Get the look'
+  / Section: Welcome line + CTA
+  .container.sectionWelcome
+    .row
+      .col-xs-12
+        h1.h2.title <em>Welcome</em> to The Atelier App Beta–the new way to wedding.
+        .ctaButtonWrapper
+          a.btn-sm.btnCtaBlackBgUppercase href="#{wedding_atelier_app_signup_link_path}"
+            | Sign up
+          a.btn-sm.btnCtaOutlineBorderUppercase href="#{wedding_atelier_app_signin_link_path}"
+            | Log in
 
-/         .col-md-4
-/           .item.bordered
-/             .item-copy
-/               - current_tile_link_path = '/bespoke-bridal-collection'
-/               h3 <em>Shop</em> bridal dresses.
-/               p.summary You found The One. Now find The Dress. <br><a href="#{current_tile_link_path}" class="ctaLink">Start searching</a>.
-/             = link_to current_tile_link_path
-/               = image_tag 'landingpages/wedding-atelier-app/tile-shop-bridal-dresses.jpg', class: 'img-responsive', alt: 'Shop bridal dresses'
+  // Section: IRL Carousel
+  .container
+    .sectionCarouselIrl
+      .row.sectionInfo
+        .col-md-7
+          .heading-overlay-wrapper.hidden-md.hidden-lg
+            .heading-overlay The Atelier App IRL
+          .carouselIrlWrapper
+            .js-carouselControledByNavTrigger
+              - for i in (1..5)
+                - carousel_tile_image_path = image_path("landingpages/wedding-atelier-app/carousel-irl-#{i}.jpg")
+                - carousel_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/carousel-irl-#{i}-mob.jpg")
+                picture
+                  source media="(max-width: 991px)" srcset="#{carousel_tile_image_mob_path}"
+                  source media="(min-width: 992px)" srcset="#{carousel_tile_image_path}"
+                  img src="#{carousel_tile_image_path}" srcset="
+                    #{carousel_tile_image_mob_path} 991w,
+                    #{carousel_tile_image_path} 992w"
 
-/   / Section: Welcome line + CTA
-/   .container.sectionWelcome
-/     .row
-/       .col-xs-12
-/         h1.h2.title <em>Welcome</em> to The Atelier App Beta–the new way to wedding.
-/         .ctaButtonWrapper
-/           a.btn-sm.btnCtaBlackBgUppercase href="#{wedding_atelier_app_signup_link_path}"
-/             | Sign up
-/           a.btn-sm.btnCtaOutlineBorderUppercase href="#{wedding_atelier_app_signin_link_path}"
-/             | Log in
+            .carouselControls.hidden-md.hidden-lg
+              .ctaWrapper
+                span.controlPrevious
+                  a.ctaLink.js-carouselControledByNavTrigger__previous href="javascript:;"
+                    | Previous
+                span.controlNext
+                  a.ctaLink.js-carouselControledByNavTrigger__next href="javascript:;"
+                    | Next
 
-/   // Section: IRL Carousel
-/   .container
-/     .sectionCarouselIrl
-/       .row.sectionInfo
-/         .col-md-7
-/           .heading-overlay-wrapper.hidden-md.hidden-lg
-/             .heading-overlay The Atelier App IRL
-/           .carouselIrlWrapper
-/             .js-carouselControledByNavTrigger
-/               - for i in (1..5)
-/                 - carousel_tile_image_path = image_path("landingpages/wedding-atelier-app/carousel-irl-#{i}.jpg")
-/                 - carousel_tile_image_mob_path = image_path("landingpages/wedding-atelier-app/carousel-irl-#{i}-mob.jpg")
-/                 picture
-/                   source media="(max-width: 991px)" srcset="#{carousel_tile_image_mob_path}"
-/                   source media="(min-width: 992px)" srcset="#{carousel_tile_image_path}"
-/                   img src="#{carousel_tile_image_path}" srcset="
-/                     #{carousel_tile_image_mob_path} 991w,
-/                     #{carousel_tile_image_path} 992w"
+        .col-md-4
+          .heading-overlay-wrapper.hidden-xs.hidden-sm
+            .heading-overlay The Atelier App IRL
 
-/             .carouselControls.hidden-md.hidden-lg
-/               .ctaWrapper
-/                 span.controlPrevious
-/                   a.ctaLink.js-carouselControledByNavTrigger__previous href="javascript:;"
-/                     | Previous
-/                 span.controlNext
-/                   a.ctaLink.js-carouselControledByNavTrigger__next href="javascript:;"
-/                     | Next
+          .copyContent
+            h2 These <em>gorgeous</em> brides and bridesmaids all planned their to-die-for wedding looks with our atelier service. Need we say more?
 
-/         .col-md-4
-/           .heading-overlay-wrapper.hidden-xs.hidden-sm
-/             .heading-overlay The Atelier App IRL
-
-/           .copyContent
-/             h2 These <em>gorgeous</em> brides and bridesmaids all planned their to-die-for wedding looks with our atelier service. Need we say more?
-
-/             .carouselControls.hidden-xs.hidden-sm
-/               .ctaWrapper
-/                 span.controlPrevious
-/                   a.ctaLink.js-carouselControledByNavTrigger__previous href="javascript:;"
-/                     | Previous
-/                 span.controlNext
-/                   a.ctaLink.js-carouselControledByNavTrigger__next href="javascript:;"
-/                     | Next
+            .carouselControls.hidden-xs.hidden-sm
+              .ctaWrapper
+                span.controlPrevious
+                  a.ctaLink.js-carouselControledByNavTrigger__previous href="javascript:;"
+                    | Previous
+                span.controlNext
+                  a.ctaLink.js-carouselControledByNavTrigger__next href="javascript:;"
+                    | Next

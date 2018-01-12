@@ -128,6 +128,9 @@ FameAndPartners::Application.routes.draw do
     # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
     get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
 
+    # Bridesmaid teaser landing page
+    get '/coming-soon-custom-bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid-teaser-page', :as => :bridesmaid_teaser_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -272,8 +275,8 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
-    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/weddings-and-parties', to: redirect('/?utm_source=legacy-weddings-and-parties'), :as => :weddings_parties_page
+    get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
@@ -314,10 +317,9 @@ FameAndPartners::Application.routes.draw do
     get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
     # Wedding Atelier App - Landing page
-    # get '/wedding-atelier' => 'statics#wedding_atelier_app', as: :wedding_atelier_app_landing_page
+    get '/wedding-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses'), as: :wedding_atelier_app_landing_page
     # Redirection in case of misspelling
-    # get '/weddings-atelier', to: redirect('/wedding-atelier')
-
+    get '/weddings-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses')
 
     # Casual Summer Styles Collection Page
     get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
@@ -357,6 +359,12 @@ FameAndPartners::Application.routes.draw do
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
+
+    ########################
+    # Sample Sale
+    ########################
+    get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
+    get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
 
     ########################
     # Dresses (and products)
@@ -407,6 +415,8 @@ FameAndPartners::Application.routes.draw do
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
+    get '/shopping_sprees/:shopping_spree_id/join' => 'shopping_sprees#join'
+
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
       put 'update_image', on: :member
@@ -441,6 +451,7 @@ FameAndPartners::Application.routes.draw do
     get '/growth-plan', to: redirect("/about")
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
     get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
+    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
 
     get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
 
@@ -465,12 +476,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/style-consultation', to: redirect("/styling-session")
 
-    get '/styling-session'  => 'style_sessions#new', as: :styling_session
-    resource 'style-session', as: 'style_session', only: [:create]
+    get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
 
-    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
-    resource 'wedding-planning', as: 'wedding_planning', only: [:create]
+    get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
 
     get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
     resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
@@ -731,7 +739,7 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
-  # mount WeddingAtelier::Engine, at: '/wedding-atelier'
+  mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
 end
 

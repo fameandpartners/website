@@ -9,6 +9,8 @@ $c-light-gray: #ddd;
 $c-background-gray: #f5f5f5;
 $c-border-gray: #d8d8d8;
 $z-max: 9999;
+$c-backgrount-red: #F7E3E4;
+$c-border-red: #F2A8AB;
 
 
 .ReturnOption__wrapper {
@@ -22,6 +24,18 @@ $z-max: 9999;
   background: $c-background-gray;
   border: 1px solid $c-border-gray;
   padding: 15px 0 0 0;
+}
+
+.SampleSaleMessage__content {
+  background: $c-backgrount-red;
+  border: 1px solid $c-border-red;
+  padding: 15px 0 0 0;
+}
+
+.SampleSaleOrderMessage__content {
+  background: $c-backgrount-red;
+  border: 1px solid $c-border-red;
+  padding: 15px 0 15px 0;
 }
 
 .ReturnOption__content--headline {
@@ -117,7 +131,14 @@ $z-max: 9999;
 }
 
 .ReturnOption__copy {
-  text-align: left;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.ReturnOption__copy--right {
+  text-align: right;
+}
+.SampleSale__copy {
+  text-align: center;
   font-size: 14px;
   margin-bottom: 15px;
 }

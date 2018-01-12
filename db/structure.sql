@@ -228,7 +228,6 @@ CREATE TABLE categories (
 --
 
 CREATE SEQUENCE categories_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -404,7 +403,6 @@ CREATE TABLE contentful_routes (
 --
 
 CREATE SEQUENCE contentful_routes_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -439,7 +437,6 @@ CREATE TABLE contentful_versions (
 --
 
 CREATE SEQUENCE contentful_versions_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -889,7 +886,6 @@ CREATE TABLE facebook_accounts (
 --
 
 CREATE SEQUENCE facebook_accounts_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -923,7 +919,6 @@ CREATE TABLE facebook_ad_creatives (
 --
 
 CREATE SEQUENCE facebook_ad_creatives_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -974,7 +969,6 @@ CREATE TABLE facebook_ad_insights (
 --
 
 CREATE SEQUENCE facebook_ad_insights_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1013,7 +1007,6 @@ CREATE TABLE facebook_ads (
 --
 
 CREATE SEQUENCE facebook_ads_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1058,7 +1051,6 @@ CREATE TABLE facebook_adsets (
 --
 
 CREATE SEQUENCE facebook_adsets_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1098,7 +1090,6 @@ CREATE TABLE facebook_campaigns (
 --
 
 CREATE SEQUENCE facebook_campaigns_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1343,7 +1334,6 @@ CREATE TABLE item_return_labels (
 --
 
 CREATE SEQUENCE item_return_labels_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3349,7 +3339,13 @@ CREATE TABLE spree_line_items (
     updated_at timestamp without time zone NOT NULL,
     currency character varying(255),
     old_price numeric(8,2),
-    delivery_date character varying(255)
+    delivery_date character varying(255),
+    customizations json,
+    stock boolean,
+    color character varying(255),
+    size character varying(255),
+    length character varying(255),
+    upc character varying(255)
 );
 
 
@@ -3605,8 +3601,10 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean,
-    return_type character varying(255)
+    orderbot_synced boolean DEFAULT false NOT NULL,
+    return_type character varying(255),
+    autorefundable boolean,
+    vwo_type character varying(255)
 );
 
 
@@ -9435,6 +9433,10 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
+INSERT INTO schema_migrations (version) VALUES ('20160729072602');
+
+INSERT INTO schema_migrations (version) VALUES ('20160801183214');
+
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9671,9 +9673,15 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
+INSERT INTO schema_migrations (version) VALUES ('20170720185835');
+
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
+
+INSERT INTO schema_migrations (version) VALUES ('20170729151224');
+
+INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9693,6 +9701,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
+INSERT INTO schema_migrations (version) VALUES ('20170908020932');
+
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
 INSERT INTO schema_migrations (version) VALUES ('20170914013707');
@@ -9700,3 +9710,13 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127052028');
+
+INSERT INTO schema_migrations (version) VALUES ('20171127212333');
+
+INSERT INTO schema_migrations (version) VALUES ('20171207195245');
+
+INSERT INTO schema_migrations (version) VALUES ('20171216185833');
+
+INSERT INTO schema_migrations (version) VALUES ('20171219203151');

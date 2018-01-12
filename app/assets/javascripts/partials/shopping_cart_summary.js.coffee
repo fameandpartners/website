@@ -3,7 +3,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   constructor: (options = {}) ->
     @template   = JST['templates/shopping_cart_summary']
     @cart       = options.cart # window.shopping_cart
-    @$container = $(options.container || '#cart')
+    @$container = $(options.container || '#checkout')
+    @$modalContainer = $('#top')
     @value_proposition = options.value_proposition
     @shipping_message = options.shipping_message
 
@@ -25,6 +26,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
+    # @$modalContainer.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
     @$container.on('click', '.js-returns-learn-more', @openLearnMoreHandler)
     @cart.on('change', @render)
     @render()
@@ -35,10 +37,16 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     displayTotal = parseInt(displayPriceObj.money.fractional, 10) / displayPriceObj.money.currency.subunit_to_unit
     currencySymbol + displayTotal
 
+  isRegularSaleItem: (product) ->
+    !product.message && product.name != 'RETURN_INSURANCE'
+
+  shouldShowReturnOption: (products) ->
+    products.some(@isRegularSaleItem)
+
   makingOptionDescriptionTag: (makingOptions) ->
-    if (makingOptions[0].name.toLowerCase() == 'deliver later')
+    if (makingOptions[0].name.toLowerCase() == 'later')
       return '(' + makingOptions[0].display_discount + ')'
-    else if (makingOptions[0].name.toLowerCase() == 'deliver express')
+    else if (makingOptions[0].name.toLowerCase() == 'express')
       return '(+' + makingOptions[0].display_discount + ')'
 
   makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
@@ -55,6 +63,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       makingOptionsDeliveryPeriod: @makingOptionsDeliveryPeriod,
       value_proposition: @value_proposition,
       shipping_message: @shipping_message
+      shouldShowReturnOption: @shouldShowReturnOption(@cart.data.products)
     ))
 
     console.log('Return Type: ' + @whichReturnType())
@@ -62,7 +71,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       @optInReminderModal()
     @showReturnCheckbox()
     @initializeReturnTypeCheckbox()
-    @removeInsuranceIfCartEmpty()
+    @removeInsuranceIfInsuranceNotAllowed()
 
   isPaymentStep: () ->
     parser = document.createElement('a')
@@ -72,11 +81,11 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     paymentStep.length > 0
 
   noReturnTypeSelected: () ->
-    !@hasReturnDiscount() && !@hasReturnInsurance()
+    !@hasReturnInsurance()
 
   optInReminderModal: () ->
     if (!sessionStorage.getItem('returnModalShown'))
-      new window.page.ReturnsOptimizelyModal(@whichReturnType())
+      new window.page.FlexibleReturnsModal(@whichReturnType())
       $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
       sessionStorage.setItem('returnModalShown', true)
 
@@ -86,34 +95,32 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       $(classToShow).toggleClass('hidden')
 
   initializeReturnTypeCheckbox: () ->
-    # is there already a returnType in the cart?
-    if (@hasReturnDiscount())
-      $('.js-returns-trigger-A').prop('checked', true)
-      $('.js-returns-abc-option-message-A').toggleClass('hidden')
-    else if (@hasReturnInsurance())
-      $('.js-returns-trigger-B').prop('checked', true)
-      $('.js-returns-abc-option-message-B').toggleClass('hidden')
+    if (@hasReturnInsurance())
+      $('.js-returns-trigger').prop('checked', true)
+      $('.js-returns-abc-option-message').removeClass('hidden');
 
-  removeInsuranceIfCartEmpty: () ->
-    if (@cart.data.products.length == 1 && @cart.data.products[0].name == 'RETURN_INSURANCE')
-      @cart.removeProduct(@cart.data.products[0].line_item_id)
+  findReturnInsuranceLineItem: () ->
+    @cart.data.products.filter((p) -> return p.name == 'RETURN_INSURANCE')
+
+  removeInsuranceIfInsuranceNotAllowed: () ->
+    # If there is no longer a need to show Return's insurance, we need to make a DELETE
+    # ... to remove the line item
+    if (!@shouldShowReturnOption(@cart.data.products))
+      returnInsuranceLineItem = @findReturnInsuranceLineItem()
+      if (returnInsuranceLineItem && returnInsuranceLineItem[0])
+        @cart.removeProduct(returnInsuranceLineItem[0].line_item_id)
 
   hasReturnInsurance: () ->
     returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
     returnInsurance.length
-
-  hasReturnDiscount: () ->
-    if (@cart.data.promocode)
-      @cart.data.promocode.indexOf('DELIVERYDISC') > -1
 
   whichReturnType: () ->
     $('#return_type').val()
 
   openLearnMoreHandler: (e) ->
     e.preventDefault()
-    new window.page.ReturnsOptimizelyModal(e.currentTarget.id)
-    $buttonClassToHide = '.vex-dialog-button-primary'
-    $($buttonClassToHide).hide()
+    new window.page.FlexibleReturnsModal(e.currentTarget.id)
+    @initializeReturnTypeCheckbox()
 
   removeProductHandler: (e) ->
     e.preventDefault()
@@ -129,20 +136,15 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     else
       @removeReturnType(returnOption)
 
-  addReturnType: (option) ->
-    if (option == 'A')
-      @cart.applyReturnTypePromoCode('DELIVERYDISC')
-    else if (option == 'B')
-      @cart.applyReturnTypePromoCode('DELIVERYINS')
+  addReturnType: () ->
+    @cart.applyReturnTypePromoCode('DELIVERYINS')
 
   removeReturnType: (option) ->
-    if (option == 'A')
-      @cart.applyReturnTypePromoCode('DELIVERYDISC')
-    else if (option == 'B')
-      returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
-      lineItemId = returnInsurance[0].line_item_id
-      $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
-      @cart.removeProduct(lineItemId)
+    returnInsurance = @cart.data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+    lineItemId = returnInsurance[0].line_item_id
+    $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
+    $('.js-returns-abc-option-message').addClass('hidden');
+    @cart.removeProduct(lineItemId)
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()

@@ -22,4 +22,5 @@ describe 'Static Pages', type: :request do
       end
     end
   end
+
 end

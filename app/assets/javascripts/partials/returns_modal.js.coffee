@@ -12,28 +12,11 @@ window.page.CheckoutModal = class CheckoutModal
       input: @$container.html()
       message: @message()
 
-window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends CheckoutModal
+window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutModal
   constructor: (opts = '') ->
-    if (opts == 'A')
-      modalHeading = 'Don’t miss out on 10% savings!'
-      modalBody = 'The cost of returns is factored into the price of any online purchase. If you opt out of returning your made-to-order garment, we save money–and we want to pass that 10% savings onto you. If you do choose to opt out of returns and save 10%, all items will still be eligible for store credit.'
-      modalCheckbox = '<div class="row js-returns-abc-option-A">' +
-                        $('.js-returns-abc-option-A').html() +
-                      '</div>'
-    else if (opts == 'B')
-      modalHeading = 'Don’t miss out on flexible returns.'
-      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer store credit. To experience our made-to-service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for store credit.'
-      modalCheckbox = '<div class="row js-returns-abc-option-B">' +
-                        $('.js-returns-abc-option-B').html() +
-                      '</div>'
-    else if (opts == 'A-info')
-      modalHeading = 'Want to save 10%?'
-      modalBody = 'The cost of returns is factored into the price of any online purchase. If you opt out of returning your made-to-order garment, we save money–and we want to pass that 10%  savings onto you. If you do choose to opt out of returns and save 10%, all items will still be eligible for store credit.'
-      modalCheckbox = ''
-    else if (opts == 'B-info')
-      modalHeading = 'Want fully flexible returns?'
-      modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer store credit. To experience our made-to-service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for store credit.'
-      modalCheckbox = ''
+    modalHeading = 'Want fully flexible returns?'
+    modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we only offer store credit. To experience our made-to-service risk free, you can add the option to return every item in your order for $25. If you keep your items, that $25 can be used as a credit against your next purchase. If you opt out of the $25 Returns Deposit, your order will still be eligible for store credit.'
+    modalCheckbox = ''
 
     vex.dialog.buttons.NO.text = 'X'
 
@@ -44,11 +27,31 @@ window.page.ReturnsOptimizelyModal = class ReturnsOptimizelyModal extends Checko
                '<div class="checkout-content font-sans-serif">' +
                  modalBody +
                '</div>' +
-               modalCheckbox,
+               '<div class="ReturnOption__wrapper">' +
+                 '<div class="ReturnOption__content col-xs-12">' +
+                   '<div class="col-xs-1">' +
+                     '<div class="Checkbox__wrapper">' +
+                       '<input class="Checkbox js-returns-abc-option-trigger js-returns-trigger" type="checkbox" value="B" id="returns_option_b">' +
+                       '<label for="returns_option_b" class="Checkbox__label"></label>' +
+                     '</div>' +
+                   '</div>' +
+                 '<div class="col-xs-10">' +
+                   '<p class="ReturnOption__copy text-right font-sans-serif">' +
+                   'Add <strong>$25</strong>' +
+                   ' for fully flexible returns' +
+                   '</p>' +
+                 '</div>' +
+               '</div>',
       className: 'vex vex-theme-plain checkout-modal vex-dialog-bottom vex-text ReturnModal',
       popup: true,
       afterOpen: @updateHtml,
       timeout: 0,
     }, opts)
+
+    elem = document.body
+    event = document.createEvent('Event')
+    event.initEvent('modal', true, true);
+    elem.dispatchEvent(event);
+
     $('.vex-dialog-button-primary').text('continue')
     $('.vex-dialog-button-secondary').html('&times;')

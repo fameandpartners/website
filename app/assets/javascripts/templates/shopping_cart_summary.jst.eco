@@ -18,7 +18,7 @@
           <% else if product.making_options.length: %>
             <div class="ribbon-wrapper express-making">
               <div class="ribbon-txt">
-                <%= product.making_options[0].name %>
+                Deliver <%= product.making_options[0].name %>
               </div>
             </div>
           <% end %>
@@ -32,7 +32,12 @@
         <div class="heading">
           <span class="cart-item-title"><%= product.name %></span>
         </div>
-        <div class="cart-item-price"><%= product.price.display_price %></div>
+
+        <div class="cart-item-price">
+        <% if product.old_price: %>
+         <del><%= product.old_price %> </del>
+        <%end%>
+        <%= product.price.display_price %></div>
         <dl class="cart-item-description">
           <% if product.size != null : %>
           <dd><span class="line-item-description-heading">Size: </span><%= product.size.presentation %></span></dd>
@@ -60,15 +65,31 @@
             <dd>
               <span class="line-item-description-heading">Customizations:</span><br />
               <% for customization in product.customizations: %>
-                <span><%= customization.name %></span> <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+                <span><%= customization.name %></span>
+                <% unless product.old_price: %>
+                  <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
+                <%end%>
               <% end %>
             </dd>
           <% end %>
 
         </dl>
       </div>
+
+      <%if product.message : %>
+        <div class="SampleSaleMessage__content col-xs-12">
+          <div class="col-xs-12">
+            <p class="SampleSale__copy font-sans-serif">
+            <%= product.message %>.
+            </p>
+          </div>
+        </div>
+      <%end%>
+
     </div>
+
     <% end %>
+
   <% end %>
 </div>
 <% else: %>
@@ -100,43 +121,13 @@ $('.js-trigger-empty-cart-modal').modal({
 <% end %>
 
 <div class="cart-footer">
-<div class="row js-returns-abc-option-A hidden">
+<div class="row js-returns-abc-option-B">
   <div class="ReturnOption__wrapper">
     <div class="ReturnOption__content col-xs-12">
       <div class="col-xs-1">
         <div class="Checkbox__wrapper">
           <input
-            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-A"
-            type="checkbox"
-            value="A"
-            id="returns_option_a"
-          />
-          <label for="returns_option_a" class="Checkbox__label"></label>
-        </div>
-      </div>
-      <div class="col-xs-7">
-        <p class="ReturnOption__copy font-sans-serif">
-          Take <strong><%= @cart.delivery_discount %> off</strong>
-          of your order total when you opt out of returns
-        </p>
-      </div>
-      <div class="col-xs-4">
-        <p class="ReturnOption__copy font-sans-serif">
-          <a href="javascript:;" id="A-info" class="js-returns-learn-more ReturnOption__copy--link">
-            Learn more
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row js-returns-abc-option-B hidden">
-  <div class="ReturnOption__wrapper">
-    <div class="ReturnOption__content col-xs-12">
-      <div class="col-xs-1">
-        <div class="Checkbox__wrapper">
-          <input
-            class="Checkbox js-returns-abc-option-trigger js-returns-trigger-B"
+            class="Checkbox js-returns-abc-option-trigger js-returns-trigger"
             type="checkbox"
             value="B"
             id="returns_option_b"
@@ -151,7 +142,7 @@ $('.js-trigger-empty-cart-modal').modal({
         </p>
       </div>
       <div class="col-xs-4">
-        <p class="ReturnOption__copy font-sans-serif">
+        <p class="ReturnOption__copy ReturnOption__copy--right font-sans-serif">
           <a href="javascript:;" id="B-info" class="js-returns-learn-more ReturnOption__copy--link">
             Learn more
           </a>
@@ -175,10 +166,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <p>
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
-        <p class="js-returns-abc-option-message-A hidden">
-          Returns Savings (10%)<span class="pull-right">-<%= @cart.delivery_discount %></span>
-        </p>
-        <p class="js-returns-abc-option-message-B hidden">
+        <p class="js-returns-abc-option-message hidden">
           Returns Deposit<span class="pull-right">$25.00</span>
         </p>
         <p>
@@ -214,9 +202,6 @@ $('.js-trigger-empty-cart-modal').modal({
         <% else: %>
           to USA, Canada and the UK
         <% end %>
-      </p>
-      <p>
-        <span class="link-underline-lighter">Easy returns</span> within 30 days
       </p>
     </div>
   </div>

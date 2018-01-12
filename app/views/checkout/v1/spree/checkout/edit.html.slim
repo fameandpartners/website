@@ -14,7 +14,7 @@
   - header_return_cta = "Continue shopping"
   - breadcrumb_step1_active = "active"
 
-.checkout.page-checkout.page-content
+#checkout.checkout.page-checkout.page-content
   .container
     .row
       .col-md-12
@@ -63,7 +63,7 @@
           .toggle-shopping-bag data-toggle="collapse" data-target="#collapse-shopping-bag" aria-expanded="true" aria-controls="collapse-shopping-bag"
             h2.checkout-section-title
               | Your bag
-            span.icon.btn-toggle
+            span.icon.btn-toggle.icon-arrow-right
       #collapse-shopping-bag.collapse.in
         = render 'spree/checkout/order_summary', cart: cart, run_setup_script: true
 
