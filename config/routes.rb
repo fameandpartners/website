@@ -739,7 +739,7 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
-  mount WeddingAtelier::Engine, at: '/wedding-atelier'
+  # mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
 end
 
