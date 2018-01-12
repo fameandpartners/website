@@ -27,10 +27,10 @@ module Repositories
       images = WeddingAtelier::EventDress.new({
         product_id: line_item.product.id,
         color_id:   line_item&.personalization&.color_id,
-        fit_id:     customization_values&.by_type(:fit)&.first&.id,
-        style_id:   customization_values&.by_type(:style)&.first&.id,
-        fabric_id:  customization_values&.by_type(:fabric)&.first&.id,
-        length_id:  customization_values&.by_type(:length)&.first&.id
+        fit_id:     customization_values&.select{ |x| x['customisation_value']['customisation_type'] == 'fit' }.first&.dig('customisation_value','id'),
+        style_id:   customization_values&.select{ |x| x['customisation_value']['customisation_type'] == 'style' }.first&.dig('customisation_value','id'),
+        fabric_id:  customization_values&.select{ |x| x['customisation_value']['customisation_type'] == 'fabric' }.first&.dig('customisation_value','id'),
+        length_id:  customization_values&.select{ |x| x['customisation_value']['customisation_type'] == 'length' }.first&.dig('customisation_value','id')
       }).images
 
       {
