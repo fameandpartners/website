@@ -25,3 +25,12 @@ ruby:
 
 - if @iec_order.present?
   = render  'iequalchange/post_message', spree_order: @iec_order
+
+
+javascript:
+  $(function(){
+    var countHeroTileVideo = $(".js-hero-tile-video").size();
+    for(i = 0; i < countHeroTileVideo; i++) {
+      $(".js-hero-tile-video").get(i).play();
+    }
+  });
