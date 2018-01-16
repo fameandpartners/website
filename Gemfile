@@ -132,7 +132,7 @@ gem 'rdoc' , '3.12.2'
 gem 'awesome_print', require: "ap"
 
 # not sure why puma is needed to run rails c on servers
-gem 'puma'
+# gem 'puma'
 
 # gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
