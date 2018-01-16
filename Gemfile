@@ -155,6 +155,7 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'pry-byebug'
+  gem 'puma'
 end
 
 group :test do
@@ -179,6 +180,6 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn'
+  gem 'puma'
   gem 'aws-sdk'
 end
