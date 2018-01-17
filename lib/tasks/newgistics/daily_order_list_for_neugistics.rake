@@ -36,7 +36,7 @@ namespace :newgistics do
         
         csv << [order.number, order.completed_at, address.firstname, address.lastname, '', address.address1,
         address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
-        usr_email, address.phone,'', '', 'UPSGR', order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map {|li| "#{CustomItemSku.new(li).call},1"}.join(','),
+        usr_email, address.phone,'', '', 'NPS', order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map {|li| "#{CustomItemSku.new(li).call},1"}.join(','),
         order.total, order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.map { |li|li.product.name}.join(','), 'CN', '', '', '']
       end
     end
