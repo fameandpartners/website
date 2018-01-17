@@ -30,6 +30,10 @@ module Contentful
         cta = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
         image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : image
+        video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : video
+        path_link = (item.respond_to? :path_link) ? item.path_link : nil
+
         hero_tile_site_version_array = (item.respond_to? :hero_tile_site_version) ? item.hero_tile_site_version.sort.join(',').downcase : nil
 
         if hero_tile_site_version_array == "au" || hero_tile_site_version_array == "us"
@@ -44,7 +48,9 @@ module Contentful
           mobile_text: mobile_text,
           image: image,
           mobile_image: mobile_image,
-          link: item.path_link,
+          video: video,
+          mobile_video: mobile_video,
+          link: path_link,
           text_align: item.text_alignment,
           text_position: item.text_position,
           text_color: item.text_color,
@@ -98,11 +104,47 @@ module Contentful
         }
       end
 
+      social_media_tiles = parent_container.social_media_tiles_container.map do |item|
+
+        social_media_tile_link = (item.respond_to? :tile_url) ? item.tile_url : nil
+        social_media_tile_link_target = (item.respond_to? :tile_link_target) ? item.tile_link_target : nil
+        social_media_tile_link_target = social_media_tile_link_target ? '_blank' : '_self'
+        social_media_tile_image_url = (item.image.respond_to? :image_url) ? item.image.image_url : nil
+        social_media_tile_copy = (item.respond_to? :tile_copy) ? item.tile_copy : nil
+        social_media_tile_cta_array = (item.respond_to? :tile_cta) ? item.tile_cta.split('||') : nil
+
+        # Split CTA copy in 2 parts
+        if social_media_tile_cta_array.nil?
+          social_media_tile_cta_first = nil
+          social_media_tile_cta_last = nil
+        else
+          if social_media_tile_cta_array.size < 2
+            social_media_tile_cta_first = nil
+            social_media_tile_cta_last = social_media_tile_cta_array[0]
+          else
+            social_media_tile_cta_first = social_media_tile_cta_array[0]
+            social_media_tile_cta_last = social_media_tile_cta_array[1]
+          end
+        end
+
+        {
+          link: social_media_tile_link,
+          tile_url: social_media_tile_link,
+          tile_link_target: social_media_tile_link_target,
+          image: social_media_tile_image_url,
+          tile_copy: social_media_tile_copy,
+          tile_cta_first: social_media_tile_cta_first,
+          tile_cta_last: social_media_tile_cta_last
+        }
+
+      end
+
       @main_container = {
         hero_tiles: hero_tiles,
         secondary_header: second_hero,
         category_tiles: category_tiles,
-        instagram_tiles: ig_tiles
+        instagram_tiles: ig_tiles,
+        social_media_tiles: social_media_tiles
       }
 
     end

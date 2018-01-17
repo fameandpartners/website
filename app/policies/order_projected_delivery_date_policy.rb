@@ -34,7 +34,11 @@ module Policies
     # eq 3 - 4 weeks, 12 - 14 business days etc
     # this should only be called for manual orders which can only contain 1 line item
     def delivery_period
-      order.line_items.first.delivery_period
+      if order.line_items.any? { |x| x.stock.nil? }
+        return  order.line_items.first.delivery_period
+      else
+        return '5 - 7 business days'
+      end
     end
 
     private

@@ -92,6 +92,10 @@
     @include column-vertical-align();
   }
 
+  .Column__contentCopy {
+    z-index: 1;
+  }
+
   // Helpers - if these are used in other pages we can move them to a separate stylesheet
   .u-overlay-area {
     position: relative;
@@ -140,10 +144,6 @@
 
   @media (min-width: $bootstrap-md-width) {
 
-    .FloatingCta__wrapper {
-      display: none;
-    }
-
     .Heading {
       margin-bottom: 30px;
     }
@@ -175,22 +175,6 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
-
-    .FloatingCta__wrapper {
-      background: $c-neutral-black;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      left: 0;
-      padding: 15px;
-      font-size: 2.4rem;
-      z-index: 1;
-
-      a {
-        color: $c-neutral-white;
-      }
-
-    }
 
     .u-full-width--mobile {
       padding: 0;
