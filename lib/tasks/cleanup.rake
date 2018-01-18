@@ -3,7 +3,7 @@ namespace :data do
   task :clean => :environment do
     sql = {
       :old_carts =>
-        "FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{14.days.ago}'",
+        "FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{60.days.ago}'",
       :old_checkouts =>
         "FROM spree_orders WHERE completed_at IS NULL AND state = 'address' AND created_at < '#{60.days.ago}'",
       :orphan_line_items =>
@@ -13,8 +13,10 @@ namespace :data do
       :old_activities =>
         "FROM activities WHERE created_at < '#{6.months.ago}'",
       :old_permissions =>
-        "FROM spree_tokenized_permissions WHERE created_at < '#{7.days.ago}'"
+        "FROM spree_tokenized_permissions WHERE created_at < '#{14.days.ago}'"
     }
+
+    tables = ['spree_orders', 'spree_line_items', 'line_item_personalizations', 'activities', 'spree_tokenized_permissions']
 
     actions = { :count => 'SELECT count(*) ',
                 :delete => 'DELETE ' }
@@ -27,6 +29,11 @@ namespace :data do
         puts result.values.flatten if action == :count
         puts result.cmd_status if action == :delete
       end
+    end
+
+    puts 'REINDEXING TABLES'
+    tables.each do |name|
+      ActiveRecord::Base.connection.execute("REINDEX TABLE #{name}")
     end
     puts 'VACUUM ANALYZE'
     ActiveRecord::Base.connection.execute('VACUUM ANALYZE')

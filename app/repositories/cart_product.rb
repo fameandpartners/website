@@ -45,7 +45,6 @@ class Repositories::CartProduct
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
-        from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
       )
       result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
