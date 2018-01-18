@@ -8,7 +8,9 @@ module Products
       upload.map do |prod|
         begin
 
-          product = create_or_update_product(prod)
+          min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
+
+          product = create_or_update_product(prod, min_length)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
           sizes = %w(
@@ -20,11 +22,13 @@ module Products
 
           color_map = details[:colors].map{ |x| { color: x } }
 
+          
+
           add_product_properties(product, details)
 
           add_product_color_options(product, details[:colors])
 
-          add_product_variants(product, sizes, details[:colors] || [], details[:price_aud].to_f, details[:price_usd].to_f)
+          add_product_variants(product, sizes, details[:colors] || [], min_length[:price_aud].to_f, min_length[:price_usd].to_f)
 
           add_product_customizations(product, prod[:customization_list] || [], details[:lengths])
 
@@ -33,6 +37,10 @@ module Products
           update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline], color_map)
 
           add_product_height_ranges( product )
+
+          product.hidden = false #MIGHT MOVE THIS
+
+          product.save!
 
           product
         end
@@ -50,7 +58,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod)
+    def create_or_update_product(prod, min_length)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -69,7 +77,7 @@ module Products
 
       attributes = {
         name: prod[:details][:name],
-        price: prod[:details][:price_aud].to_f,
+        price: min_length[:price_aud].to_f,
         description: prod[:details][:description],
         taxon_ids: taxon_ids,
         available_on: @available_on || product.available_on #NEED TO ADD THIS TO JSON
@@ -117,8 +125,8 @@ module Products
 
       #trying without this
 
-      if prod[:details][:price_aud].present? || prod[:details][:price_usd].present?
-         add_product_prices(product, prod[:details][:price_aud].to_f, prod[:details][:price_usd].to_f)
+      if min_length[:price_aud].present? || min_length[:price_usd].present?
+         add_product_prices(product, min_length[:price_aud].to_f, min_length[:price_usd].to_f)
        end
      # info "#{section_heading} #{new_product} id=#{product.id}"
       product
