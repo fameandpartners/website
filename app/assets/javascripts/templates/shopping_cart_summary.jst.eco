@@ -203,6 +203,9 @@ $('.js-trigger-empty-cart-modal').modal({
           to USA, Canada and the UK
         <% end %>
       </p>
+      <p>
+        <span class="link-underline-lighter">Easy returns</span> within 30 days
+      </p>
     </div>
   </div>
 </div>
