@@ -18,17 +18,20 @@ module Products
 
           details = prod[:details]
 
+          color_map = details[:colors].map{ |x| { color: x } }
+
           add_product_properties(product, details)
 
           add_product_color_options(product, details[:colors])
 
           add_product_variants(product, sizes, details[:colors] || [], details[:price_aud].to_f, details[:price_usd].to_f)
 
-          add_product_customizations(product, prod[:customization_list] || [])
+          add_product_customizations(product, prod[:customization_list] || [], details[:lengths])
 
-          #update_or_create_base_visualization(details[:colors])
+          update_or_create_base_visualization(product, details, details[:silhouette], details[:neckline], color_map)
 
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline])
+          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline], color_map)
+
           add_product_height_ranges( product )
 
           product
@@ -204,7 +207,7 @@ module Products
       product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
 
-    def add_product_customizations(product, custs)
+    def add_product_customizations(product, custs, lengths)
       customizations = []
 
       custs.each do |customization|
@@ -213,26 +216,30 @@ module Products
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
                               price: customization[:price], #TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
-                              required_by: customization[:required_by]
+                              required_by: customization[:required_by],
+                              group: customization[:group_name]
                             }
         customizations << { customisation_value: new_customization }
       end
+      product.lengths = { available_lengths: lengths }.to_json
       product.customizations = customizations.to_json
       product.save
 
       product.customizations
     end
 
-    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
+    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline, color_map)
+      render_urls = { render_urls: color_map }.to_json
       customization_list.each do |cust|
-        id = cust[:customization_ids].sort.join('_')
+        id = cust[:customization_codes].sort.join('_')
         silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
         neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
+        render_urls = color_map.to_json
         cust[:lengths].each do |length|         
           cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
                                          .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
         
-          cv.render_urls = length[:render_urls].to_json
+          cv.render_urls = render_urls
           cv.incompatible_ids = length[:incompatability_list].join(',') #never manipulated so just put it in as ta string and split on return
           cv.save!
         end
@@ -251,7 +258,17 @@ module Products
       master_variant.save
     end
 
-    def update_or_create_base_visualization(product, product_details)
+    def update_or_create_base_visualization(product, product_details, silhouette, neckline, color_map)
+      id = ''
+      render_urls = { render_urls: color_map }.to_json
+      product_details[:lengths].each do |length|
+         cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
+                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
+        
+          cv.render_urls = render_urls
+          cv.incompatible_ids = "" #never manipulated so just put it in as ta string and split on return
+          cv.save!
+      end
 
     end
 

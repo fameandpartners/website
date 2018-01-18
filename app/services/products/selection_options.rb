@@ -14,7 +14,6 @@ module Products
     def read
       #put the layers in order for processing
       @product.layer_cads&.sort!{|layer| layer.position}.reverse!
-
       os =
         OpenStruct.new({
           variants: product_variants,
@@ -135,7 +134,8 @@ module Products
             name: value['presentation'],
             image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
             display_price: Spree::Money.new(value['price'], currency: product_making_options.first.currency, no_cents: true),
-            position: value['position']
+            position: value['position'],
+            group: value['group']
           })
         end
       end
