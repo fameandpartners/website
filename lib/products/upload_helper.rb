@@ -212,9 +212,9 @@ module Products
 
       custs.each do |customization|
         new_customization = {
-                              id: customization[:customization_id], 
+                              id: customization[:code], 
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
-                              price: customization[:price], #TODO: add this to the json being sent
+                              price: customization[:price_usd], #TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
                               required_by: customization[:required_by],
                               group: customization[:group_name]
