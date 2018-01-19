@@ -668,9 +668,9 @@ FameAndPartners::Application.routes.draw do
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
+      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
       get '/bridesmaids/:id' => 'bridesmaid#show'
       get '/bridesmaids' => 'bridesmaid#index'
-      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
 
       #fabric swatches
       get 'fabric_swatches' => 'fabric_swatches#index'

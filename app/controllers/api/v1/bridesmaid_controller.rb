@@ -5,8 +5,8 @@ module Api
       respond_to :json
 
       def index
-        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ? ",
-                                                               params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
+        customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND lower(render_urls)c @> ? ",
+                                                               params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].downcase, [{color:  params[:selectedColor].downcase}].to_json)
                                                         .order('Length(customization_ids)')  #gets base most customization 
         
         customized_products = customized_products.uniq_by{ |x| x.product_id.to_s + x.neckline } #only present one of each product and neckline combo
@@ -16,8 +16,8 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND product_id = ?",
-                                                               params[:customization_ids].sort.join('_'), params[:length], params[:product_id]).first
+        customized_product = CustomizationVisualization.where("customization_ids = ? AND lower(length) = ? AND product_id = ?",
+                                                               params[:customization_ids].sort.join('_'), params[:length].downcase, params[:product_id].downcase).first
 
         customizations = JSON.parse(customized_product.product.customizations)
         incompatible_lengths =[]
