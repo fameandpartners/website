@@ -26,6 +26,7 @@ class Products::DetailsController < Products::BaseController
       product: setup_bridesmaid_product(base_product),
       incompatible_ids: customized_product.incompatible_ids.split(','),
       image_urls: JSON.parse(customized_product.render_urls).select {|x| x['color'] == params[:color]},
+      selected_customizations: customized_product.customization_ids.split('_')
       # available_lengths: JSON.parse(base_product.lengths)['available_lengths']
     }
     @product = @bridesmaid_data[:product]
