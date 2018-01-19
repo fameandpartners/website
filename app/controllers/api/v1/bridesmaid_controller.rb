@@ -19,7 +19,7 @@ module Api
         customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
                                                                params[:customization_ids].sort.join('_'), params[:product_id])
         
-        customized_product = customized_products.select{|x| x.length.downcase ==  params[:length].downcase }.first
+        customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
 
         product_length_custs = JSON.parse(customized_product.product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
         
@@ -29,8 +29,9 @@ module Api
         
 
         res = {}
+        res[:id] = customized_product.id
         res[:compatible_lengths] = compatible_lengths.map{ |x| x['customisation_value']['id']}
-        res[:incompatible_ids] = customized_product.incompatible_ids.split(',').reject { |x| res[:compatible_lengths].include?(x)}
+        res[:incompatible_ids] = customized_product.incompatible_ids.split(',').reject { |x| res[:compatible_lengths].include?(x) }
 
         respond_with res
 
@@ -44,11 +45,11 @@ module Api
           product = cp.product
           collection << { 
                     id: cp.id,
-                    product_name: product.name,
+                    product_name: product.name, #TODO: Need to do this per dorothy's suggestion
                     color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
                     price: product.master.price_in(current_currency.upcase).attributes,
-                    image_urls: JSON.parse(cp.render_urls).select {|x| x['color'] == color}
+                    image_urls: JSON.parse(cp.render_urls).select { |x| x['color'] == color }
                   }
         end
         collection
