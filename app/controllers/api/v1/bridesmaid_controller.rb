@@ -5,7 +5,7 @@ module Api
       respond_to :json
 
       def index
-        customized_products = CustomizationVisualization.where("length = ? AND silhouette = ? AND neckline in (?) AND render_urls @> ? ",
+        customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND lower(render_urls)c @> ? ",
                                                                params[:selectedLength], params[:selectedSilhouette], params[:selectedTopDetails], [{color:  params[:selectedColor]}].to_json)
                                                         .order('Length(customization_ids)')  #gets base most customization 
         
@@ -16,7 +16,7 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND length = ? AND product_id = ?",
+        customized_product = CustomizationVisualization.where("customization_ids = ? AND lower(length) = ? AND product_id = ?",
                                                                params[:customization_ids].sort.join('_'), params[:length], params[:product_id]).first
 
         customizations = JSON.parse(customized_product.product.customizations)
