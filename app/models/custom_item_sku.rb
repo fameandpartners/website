@@ -7,20 +7,24 @@ class CustomItemSku
   end
 
   def call
-    return line_item.variant.sku unless line_item.personalization.present?
-    
-    if line_item.personalization.sku.nil?
-      line_item.personalization.sku = Skus::Generator.new(
+    # return line_item.variant.sku unless line_item.personalization.present?
+    if line_item.personalization&.sku.nil?
+      csku = Skus::Generator.new(
         style_number:            style_number,
         size:                    size,
         color_id:                color_id,
         height:                  height,
         customization_value_ids: customization_value_ids
       ).call
-      line_item.personalization.save!
-    end
 
-    line_item.personalization.sku
+      if line_item.personalization
+        line_item.personalization.sku = csku
+        line_item.personalization.save!
+      end
+      csku
+    else
+      line_item.personalization.sku
+    end
 
   rescue StandardError => e
     Raven.capture_exception(e)
@@ -38,18 +42,18 @@ class CustomItemSku
   end
 
   def color_id
-    line_item.personalization.color.id
+    line_item.personalization ? line_item.personalization.color.id : line_item.variant&.dress_color&.id
   end
 
   def size
-    line_item.personalization.size.name
+    line_item.personalization ? line_item.personalization.size.name : line_item.variant&.dress_size&.name
   end
 
   def customization_value_ids
-    line_item.personalization.customization_value_ids&.sort
+    line_item&.personalization&.customization_value_ids&.sort
   end
 
   def height
-    line_item.personalization.height
+    line_item.personalization ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
   end
 end

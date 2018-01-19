@@ -28,11 +28,8 @@ class Populator
 
   def populate
     validate!
-    if personalized_product?
-      add_personalized_product
-    else
-      add_product_to_cart
-    end
+
+    add_personalized_product
 
     order.update!
     order.reload
@@ -115,10 +112,6 @@ class Populator
           item.height = StyleToProductHeightRangeGroup.map_height_values_to_height_name( product_variant, product_attributes[:height_value], product_attributes[:height_unit] )
         end
       end
-    end
-
-    def personalized_product?
-      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
     end
 
     def custom_height?
