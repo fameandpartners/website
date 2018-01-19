@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -571,7 +571,7 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
     customization_ids character varying(1024),
-    incompatible_ids character varying(255),
+    incompatible_ids character varying(1024),
     render_urls jsonb,
     product_id integer,
     length character varying(255),
@@ -1362,9 +1362,7 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    shipped boolean,
-    barcode character varying(255)
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -2049,38 +2047,6 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
--- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE newgistics_schedulers (
-    id integer NOT NULL,
-    last_successful_run character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    name character varying(255)
-);
-
-
---
--- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE newgistics_schedulers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
-
-
---
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2666,28 +2632,6 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
-
-
---
--- Name: relbloat; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW relbloat AS
- SELECT pg_namespace.nspname,
-    pg_class.relname,
-    pg_class.reltuples,
-    pg_class.relpages,
-    rowwidths.avgwidth,
-    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
-    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
-    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
-   FROM ((( SELECT pg_statistic.starelid,
-            sum(pg_statistic.stawidth) AS avgwidth
-           FROM pg_statistic
-          GROUP BY pg_statistic.starelid) rowwidths
-     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
-     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
-  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -3694,9 +3638,8 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean DEFAULT false NOT NULL,
+    orderbot_synced boolean,
     return_type character varying(255),
-    autorefundable boolean,
     vwo_type character varying(255)
 );
 
@@ -5915,13 +5858,6 @@ ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_s
 
 
 --
--- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
-
-
---
 -- Name: next_logistics_return_request_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6979,14 +6915,6 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
-
-
---
--- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY newgistics_schedulers
-    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
@@ -9830,16 +9758,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
-
-INSERT INTO schema_migrations (version) VALUES ('20171013172806');
-
-INSERT INTO schema_migrations (version) VALUES ('20171016230612');
-
-INSERT INTO schema_migrations (version) VALUES ('20171016232403');
-
-INSERT INTO schema_migrations (version) VALUES ('20171101200751');
-
-INSERT INTO schema_migrations (version) VALUES ('20171114001834');
 
 INSERT INTO schema_migrations (version) VALUES ('20171115172748');
 
