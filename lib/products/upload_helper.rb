@@ -220,7 +220,8 @@ module Products
         new_customization = {
                               id: customization[:code].downcase, 
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
-                              price: customization[:price_usd], #TODO: add this to the json being sent
+                              price: customization[:price_usd],
+                              price_aud: customization[:price_aud],#TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
                               required_by: customization[:required_by],
                               group: customization[:group_name]

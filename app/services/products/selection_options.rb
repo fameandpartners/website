@@ -129,11 +129,12 @@ module Products
       def available_product_customisations
         product_customisation_values.map do |value|
           value = value['customisation_value']
+          price = site_version.currency == 'AUD' && value['price_aud']  ? value['price_aud'] : value['price']
           OpenStruct.new({
             id: value['id'],
             name: value['presentation'],
             image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
-            display_price: Spree::Money.new(value['price'], currency: product_making_options.first.currency, no_cents: true),
+            display_price: Spree::Money.new(price, currency: product_making_options.first.currency, no_cents: true),
             position: value['position'],
             group: value['group']
           })
