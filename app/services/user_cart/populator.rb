@@ -80,7 +80,6 @@ class Populator
 
     def add_personalized_product
       personalization = build_personalization
-      binding.pry
       if personalization.valid?
         add_product_to_cart
         line_item.customizations = product_customizations.to_json
@@ -192,7 +191,6 @@ class Populator
       @product_customizations ||= begin
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
-          binding.pry
           next if id.blank?
           customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'] == id }
           if customization.blank?
