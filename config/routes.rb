@@ -672,6 +672,9 @@ FameAndPartners::Application.routes.draw do
       get '/bridesmaids' => 'bridesmaid#index'
       get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
 
+      #fabric swatches
+      get 'fabric_swatches' => 'fabric_swatches#index'
+
       delete '/rails_cache' => 'systems#clear_cache'
     end
   end
