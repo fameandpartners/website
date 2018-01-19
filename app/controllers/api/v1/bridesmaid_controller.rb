@@ -16,28 +16,21 @@ module Api
       end
 
       def incompatabilities
-        customized_product = CustomizationVisualization.where("customization_ids = ? AND lower(length) = ? AND product_id = ?",
-                                                               params[:customization_ids].sort.join('_'), params[:length].downcase, params[:product_id].downcase).first
+        customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
+                                                               params[:customization_ids].sort.join('_'), params[:product_id])
+        
+        customized_product = customized_products.select{|x| x.length.downcase ==  params[:length].downcase }.first
 
-        customizations = JSON.parse(customized_product.product.customizations)
-        incompatible_lengths =[]
-
-        required_lengths = customizations.select {|x| !x['customisation_value']['required_by']['lengths'].empty?} #check to see if any of the lengths have a requirement
-
-        if required_lengths
-          required_customization_ids = required_lengths.map {|x| x['customisation_value']['id']}
-
-          required_lengths.each do |required_length|
-            unless params[:customization_ids].include?(required_length['customisation_value']['id'])
-              incompatible_lengths = incompatible_lengths | required_length['customisation_value']['required_by']['lengths']
-            end
-          end
-
-        end
+        product_length_custs = JSON.parse(customized_product.product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+        
+        lengths = customized_products.map { |x| "change-to-#{x.length.downcase}" }
+        
+        compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }
+        
 
         res = {}
-        res[:incompatible_lengths] = incompatible_lengths
-        res[:incompatible_ids] = customized_product.incompatible_ids.split(',')
+        res[:compatible_lengths] = compatible_lengths.map{ |x| x['customisation_value']['id']}
+        res[:incompatible_ids] = customized_product.incompatible_ids.split(',').reject { |x| res[:compatible_lengths].include?(x)}
 
         respond_with res
 
