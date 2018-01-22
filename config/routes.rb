@@ -370,6 +370,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/sample-sale/:id' => 'products/flashSale#show'
 
+    get '/products/fabric-swatches' => 'products/fabric_swatches#index'
+
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
