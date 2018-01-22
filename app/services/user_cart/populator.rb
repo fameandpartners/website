@@ -228,7 +228,7 @@ class Populator
                 'id' => customization['id'],
                     'name' => customization['name'],
                    'group' => customization['group'],
-                   'price' => customization['price_aud'] &&currency == 'AUD' ? customization['price_aud'] : customization['price'],
+                   'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
              'required_by' => customization['required_by'],
             'presentation' => customization['presentation']
               }
