@@ -78,7 +78,7 @@ module Api
           product = cp.product
           collection << { 
                     id: cp.id,
-                    product_name: "#{cp.length} Length #{cp.silhouette} Dress with #{cp.neckline} #{cp.neckline.include?('Neckline') ? '' : Neckline}", # product.name, #TODO: Need to do this per dorothy's suggestion
+                    product_name: "#{cp.length} Length #{cp.silhouette} Dress with #{cp.neckline} #{cp.neckline.include?('Neckline') ? '' : 'Neckline'}", # product.name, #TODO: Need to do this per dorothy's suggestion
                     color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
                     price: product.master.price_in(current_currency.upcase).attributes,
