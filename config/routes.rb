@@ -370,6 +370,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/sample-sale/:id' => 'products/flashSale#show'
 
+    get '/products/fabric-swatches' => 'products/fabric_swatches#index'
+
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -659,18 +661,22 @@ FameAndPartners::Application.routes.draw do
       # user profile
       get 'profile' => 'profiles#show'
 
-      #upload products
+      #upload products.*\.ccf$
+      constraints DomainConstraint.new(/.*\.fameandgroups.com\/$/) do
         put '/product_upload' => 'product_upload#upload'
-
+      end
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
+      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
       get '/bridesmaids/:id' => 'bridesmaid#show'
       get '/bridesmaids' => 'bridesmaid#index'
-      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
+
+      #fabric swatches
+      get 'fabric_swatches' => 'fabric_swatches#index'
 
       delete '/rails_cache' => 'systems#clear_cache'
     end

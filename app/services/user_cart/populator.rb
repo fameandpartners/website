@@ -57,7 +57,7 @@ class Populator
   end
 
   private
-
+    # thanh is flagging this method for destruction: confirms with the tanias about custom colors
     def validate!
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
@@ -82,7 +82,7 @@ class Populator
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
-        line_item.customizations = product_customizations.to_json
+        line_item.customizations =  price_customization_by_currency(product_customizations).to_json
         line_item.save
         personalization.line_item = line_item
         line_item.personalization = personalization
@@ -192,7 +192,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'] == id.to_i }
+          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'] == id }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else
@@ -218,5 +218,26 @@ class Populator
     def fire_event(name, extra_payload = {})
       ActiveSupport::Notifications.instrument(name, { order: order })
     end
+
+    def price_customization_by_currency(customizations_json)
+      customization_arry = customizations_json.map do |customization|
+          customization = customization['customisation_value']
+          
+          {
+            'customisation_value' => {
+                'id' => customization['id'],
+                    'name' => customization['name'],
+                   'group' => customization['group'],
+                   'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
+             'required_by' => customization['required_by'],
+            'presentation' => customization['presentation']
+              }
+          }
+
+      end
+
+      customization_arry
+    end
+
 end
 end

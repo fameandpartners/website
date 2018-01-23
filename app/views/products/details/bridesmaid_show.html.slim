@@ -21,6 +21,7 @@ ruby:
       product: #{raw @bridesmaid_data[:product].to_json},
       discount: #{raw @product_discount},
       images: #{raw @bridesmaid_data[:product].all_images.to_json},
+      selectedCustomizations: #{raw @bridesmaid_data[:selected_customizations].to_json},
       sizeChart: #{raw @bridesmaid_data[:product].size_chart_data.to_json},
       siteVersion: #{raw @current_site_version.name.to_json}
     };
@@ -37,6 +38,7 @@ javascript:
   window.__untransformedData = window.PdpDataFull
 
 = render partial: 'micro_data'
+= render :partial => '/data/bridesmaids_filter'
 
 = content_for :microservice_js do
   script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['bridesmaidJSBundle']}"

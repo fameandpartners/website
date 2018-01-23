@@ -8,7 +8,9 @@ module Products
       upload.map do |prod|
         begin
 
-          product = create_or_update_product(prod)
+          min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
+
+          product = create_or_update_product(prod, min_length)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
           sizes = %w(
@@ -18,18 +20,25 @@ module Products
 
           details = prod[:details]
 
+          color_map = details[:colors].map{ |x| { color: x } }
+
           add_product_properties(product, details)
 
           add_product_color_options(product, details[:colors])
 
-          add_product_variants(product, sizes, details[:colors] || [], details[:price_aud].to_f, details[:price_usd].to_f)
+          add_product_variants(product, sizes, details[:colors] || [], 0.0, 0.0)
 
-          add_product_customizations(product, prod[:customization_list] || [])
+          add_product_customizations(product, prod[:customization_list] || [], details[:lengths])
 
-          #update_or_create_base_visualization(details[:colors])
+          #update_or_create_base_visualization(product, details, details[:silhouette], details[:neckline], color_map)
 
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline])
+          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline], color_map,  prod[:customization_list])
+
           add_product_height_ranges( product )
+
+          product.hidden = false #MIGHT MOVE THIS
+
+          product.save!
 
           product
         end
@@ -47,7 +56,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod)
+    def create_or_update_product(prod, min_length)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -66,7 +75,7 @@ module Products
 
       attributes = {
         name: prod[:details][:name],
-        price: prod[:details][:price_aud].to_f,
+        price: 0.0.to_f,
         description: prod[:details][:description],
         taxon_ids: taxon_ids,
         available_on: @available_on || product.available_on #NEED TO ADD THIS TO JSON
@@ -114,9 +123,9 @@ module Products
 
       #trying without this
 
-      if prod[:details][:price_aud].present? || prod[:details][:price_usd].present?
-         add_product_prices(product, prod[:details][:price_aud].to_f, prod[:details][:price_usd].to_f)
-       end
+     #if min_length[:price_aud].present? || min_length[:price_usd].present?
+         add_product_prices(product, 0.0, 0.0)
+       #end
      # info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end
@@ -204,36 +213,41 @@ module Products
       product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
 
-    def add_product_customizations(product, custs)
+    def add_product_customizations(product, custs, lengths)
       customizations = []
 
       custs.each do |customization|
         new_customization = {
-                              id: customization[:customization_id], 
+                              id: customization[:code].downcase, 
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
-                              price: customization[:price], #TODO: add this to the json being sent
+                              price: customization[:price_usd],
+                              price_aud: customization[:price_aud],#TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
-                              required_by: customization[:required_by]
+                              required_by: customization[:required_by],
+                              group: customization[:group_name]
                             }
         customizations << { customisation_value: new_customization }
       end
+      product.lengths = { available_lengths: lengths }.to_json
       product.customizations = customizations.to_json
       product.save
 
       product.customizations
     end
 
-    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline)
+    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline, color_map, customizations)
+      render_urls = { render_urls: color_map }.to_json
       customization_list.each do |cust|
-        id = cust[:customization_ids].sort.join('_')
+        id = cust[:customization_codes].sort.join('_')
         silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
         neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
+        render_urls = color_map.to_json
         cust[:lengths].each do |length|         
           cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
                                          .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
         
-          cv.render_urls = length[:render_urls].to_json
-          cv.incompatible_ids = length[:incompatability_list].join(',') #never manipulated so just put it in as ta string and split on return
+          cv.render_urls = render_urls
+          cv.incompatible_ids = length[:incompatability_list].map{ |x| customizations.select{|y| y[:customization_id] == x}.first[:code].downcase }.join(',') #never manipulated so just put it in as ta string and split on return
           cv.save!
         end
       end
@@ -251,9 +265,19 @@ module Products
       master_variant.save
     end
 
-    def update_or_create_base_visualization(product, product_details)
+    # def update_or_create_base_visualization(product, product_details, silhouette, neckline, color_map)
+    #   id = ''
+    #   render_urls = { render_urls: color_map }.to_json
+    #   product_details[:lengths].each do |length|
+    #      cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
+    #                                      .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
+        
+    #       cv.render_urls = render_urls
+    #       cv.incompatible_ids = "" #never manipulated so just put it in as ta string and split on return
+    #       cv.save!
+    #   end
 
-    end
+    # end
 
   end
 end

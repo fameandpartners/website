@@ -1,5 +1,6 @@
 class Products::BridesmaidsController < Products::BaseController
   include Marketing::Gtm::Controller::Collection
+  include ProductsHelper
   respond_to :html
 
   layout 'custom_experience/application'
@@ -11,9 +12,12 @@ class Products::BridesmaidsController < Products::BaseController
 
   # DRESS FILTER PAGE
   def index # only used to render slim
+    @swatch_colors = fabric_swatch_colors.to_json
   end
 
   def show # only used to render slim
+    @swatch_colors = fabric_swatch_colors.to_json
+
   end
 
   private
