@@ -26,14 +26,16 @@ class Products::DetailsController < Products::BaseController
     base_product = customized_product.product
     length_name = "change-to-#{customized_product.length.downcase}"
 
-    length_cust = JSON.parse(base_product.customizations).select{ |x| x['customisation_value']['name'] == length_name}
+    length_customizations = JSON.parse(base_product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+
+    length_cust = length_customizations.select{ |x| x['customisation_value']['name'] == length_name }
 
     @bridesmaid_data = {
       product: setup_bridesmaid_product(base_product),
       incompatible_ids: customized_product.incompatible_ids.split(','),
       image_urls: JSON.parse(customized_product.render_urls).select {|x| x['color'] == params[:color]},
-      selected_customizations: customized_product.customization_ids.split('_') | length_cust.map{ |x| x['customisation_value']['id'] }
-      # available_lengths: JSON.parse(base_product.lengths)['available_lengths']
+      selected_customizations: customized_product.customization_ids.split('_') | length_cust.map{ |x| x['customisation_value']['id'] },
+      available_lengths: length_customizations.map {|x| {x['customisation_value']['id'] => x['customisation_value']['presentation'].split(' ')&.last}}
     }
 
     @product = @bridesmaid_data[:product]
