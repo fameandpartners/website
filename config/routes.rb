@@ -359,12 +359,13 @@ FameAndPartners::Application.routes.draw do
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
 
-      post 'line_items/:id' => 'products#move_to_cart'
     end
 
     ########################
     # Dresses (and products)
     ########################
+    get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
+
     get '/products/fabric-swatches' => 'products/fabric_swatches#index'
 
     scope '/dresses' do
