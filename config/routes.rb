@@ -365,11 +365,6 @@ FameAndPartners::Application.routes.draw do
     ########################
     # Dresses (and products)
     ########################
-    get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-    get '/sample-sale' => 'products/flashSale#index'
-
-    get '/sample-sale/:id' => 'products/flashSale#show'
-
     get '/products/fabric-swatches' => 'products/fabric_swatches#index'
 
     scope '/dresses' do
