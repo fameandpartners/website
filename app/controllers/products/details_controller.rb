@@ -1,6 +1,6 @@
 class Products::DetailsController < Products::BaseController
   include Marketing::Gtm::Controller::Product
-
+  include ProductsHelper
   layout 'custom_experience/application'
 
   def show
@@ -21,6 +21,7 @@ class Products::DetailsController < Products::BaseController
 
   def bridesmaid_show
     customized_product = CustomizationVisualization.find(params[:id])
+    @swatch_colors = fabric_swatch_colors.to_json
     base_product = customized_product.product
     length_name = "change-to-#{customized_product.length.downcase}"
 
