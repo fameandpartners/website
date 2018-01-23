@@ -140,6 +140,7 @@ group :development do
   gem 'bullet'
   gem 'pry-byebug'
   gem 'quiet_assets'
+  gem 'binding_of_caller'
 end
 
 group :test do

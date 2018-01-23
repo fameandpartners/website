@@ -44,10 +44,10 @@ module ProductsHelper
   def fabric_swatch_colors
     Rails.cache.fetch('fabric_swatches_heavy') do
       prd = Spree::Product.find_by_name('Fabric Swatch - Heavy Georgette')
-
       prd.variants.map do |swatch_variant|
         {
           variant_id: swatch_variant.id,
+          product_name: prd.name,
           product_id: swatch_variant.product.id,
           sku: swatch_variant.sku,
           color_name: swatch_variant.dress_color.presentation,

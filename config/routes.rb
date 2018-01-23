@@ -359,16 +359,14 @@ FameAndPartners::Application.routes.draw do
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
 
-      post 'line_items/:id' => 'products#move_to_cart'
     end
 
     ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-    get '/sample-sale' => 'products/flashSale#index'
 
-    get '/sample-sale/:id' => 'products/flashSale#show'
+    get '/products/fabric-swatches' => 'products/fabric_swatches#index'
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
@@ -659,9 +657,10 @@ FameAndPartners::Application.routes.draw do
       # user profile
       get 'profile' => 'profiles#show'
 
-      #upload products
+      #upload products.*\.ccf$
+      constraints DomainConstraint.new(/.*\.fameandgroups.com\/$/) do
         put '/product_upload' => 'product_upload#upload'
-
+      end
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'

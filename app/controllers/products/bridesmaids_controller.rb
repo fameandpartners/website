@@ -16,6 +16,7 @@ class Products::BridesmaidsController < Products::BaseController
   end
 
   def show # only used to render slim
+    @swatch_colors = fabric_swatch_colors.to_json
   end
 
   private

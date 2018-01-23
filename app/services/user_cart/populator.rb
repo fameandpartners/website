@@ -82,7 +82,7 @@ class Populator
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
-        line_item.customizations = product_customizations.to_json
+        line_item.customizations =  price_customization_by_currency(product_customizations).to_json
         line_item.save
         personalization.line_item = line_item
         line_item.personalization = personalization
@@ -218,5 +218,26 @@ class Populator
     def fire_event(name, extra_payload = {})
       ActiveSupport::Notifications.instrument(name, { order: order })
     end
+
+    def price_customization_by_currency(customizations_json)
+      customization_arry = customizations_json.map do |customization|
+          customization = customization['customisation_value']
+          
+          {
+            'customisation_value' => {
+                'id' => customization['id'],
+                    'name' => customization['name'],
+                   'group' => customization['group'],
+                   'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
+             'required_by' => customization['required_by'],
+            'presentation' => customization['presentation']
+              }
+          }
+
+      end
+
+      customization_arry
+    end
+
 end
 end
