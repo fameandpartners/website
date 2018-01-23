@@ -362,6 +362,12 @@ FameAndPartners::Application.routes.draw do
     end
 
     ########################
+    # Sample Sale
+    ########################
+    get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
+    get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
+
+    ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
