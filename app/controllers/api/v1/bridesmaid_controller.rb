@@ -5,7 +5,6 @@ module Api
       respond_to :json
 
       def index
-        binding.pry
         if !validate_params([:selectedColor, :selectedTopDetails, :selectedLength, :selectedSilhouette], params)
           respond_with nil, status: :not_acceptable
         else
