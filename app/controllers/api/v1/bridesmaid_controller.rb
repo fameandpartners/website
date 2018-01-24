@@ -26,14 +26,22 @@ module Api
       end
 
       def incompatabilities
-        if !validate_params([:customization_ids, :product_id, :length], params)
+        if !validate_params([:product_id, :length], params)
           respond_with nil, status: :not_acceptable
         else
 
-          customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
+            product = Spree::Product.find(params[:product_id])
+            product_length_custs = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+          if !params[:customization_ids] # Corner case when only base of a dress is selected
+            length_id = product_length_custs.select{ |x| x['customisation_value']['name'].downcase == "change-to-#{params[:length].downcase}"}.first['customisation_value']['id']
+
+            customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
+                                                                 length_id, params[:product_id])
+          else
+            
+            customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
                                                                  params[:customization_ids].sort.join('_'), params[:product_id])
-
-
+          end
           if params[:length].downcase == 'micro-mini'
             customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase  ||  x.length.downcase == 'cheeky' }.first
 
@@ -45,13 +53,10 @@ module Api
             respond_with nil, status: :not_found
 
           else
-
-            product_length_custs = JSON.parse(customized_product.product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
             
             lengths = customized_products.map { |x| "change-to-#{x.length.downcase}" }
             
-            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }
-            
+            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }   
 
             res = {}
             res[:id] = customized_product.id
