@@ -1,11 +1,11 @@
 // If cny_delivery_delays feature flag is active: we show a banner to let our customers know about delays.
 - if Features.active?(:cny_delivery_delays)
-  #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
+  #sale-banner.alert-sale.custom-sale-banner-top.CustomBannerTop--black role="alert"
     .outer-wrap
         .inner-wrap
           .title-wrap
             .title.text-uppercase
-              | Due to high order volume, please allow additional time for delivery.
+              | Due to increased order volume, please allow 4 - 6 weeks for delivery.
 
 // If cny_delivery_delays feature flag is OFF: we can show other banners.
 - else
