@@ -88,6 +88,11 @@
 
   }
 
+  &.CustomBannerTop--black {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+  }
+
   &.custom-sale-banner-top.PriceDropBanner {
     background: $c-price-drop-bg;
     color: $c-neutral-white;
