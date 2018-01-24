@@ -34,7 +34,7 @@ class Products::DetailsController < Products::BaseController
       incompatible_ids: customized_product.incompatible_ids.split(','),
       image_urls: JSON.parse(customized_product.render_urls).select {|x| x['color'] == params[:color]},
       selected_customizations: customized_product.customization_ids.split('_') | length_cust.map{ |x| x['customisation_value']['id'] },
-      available_lengths: length_customizations.map {|x| {x['customisation_value']['id'] => x['customisation_value']['presentation'].split(' ')&.last}}.reduce(Hash.new, :merge)
+      available_lengths: length_customizations.map { |x| { x['customisation_value']['id'] => x['customisation_value']['presentation'].split(' ')&.last } }.reduce(Hash.new, :merge)
     }
 
     @product = @bridesmaid_data[:product]
