@@ -8,11 +8,15 @@
         <section class="product-delivery-adjustment">
           <div class="cart-item-description clearfix">
             <div class="image-wrapper">
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+              <% if (product.color.image_file_name): %>
+                 <img class="img-responsive cart-item-image" src="<%= product.color.image_file_name %>" />
+              <% else: %>
+                <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+              <% end %>
             </div>
             <div class="description-wrapper">
               <h3 class="product-name"><%= product.name %></h3>
-              <% if (product.size.presentation): %>
+              <% if (product.size && product.size.presentation): %>
                 <dd><span class="line-item-description-heading">Size:</span> <%= product.size.presentation %></dd>
               <% end %>
               <dd><span class="line-item-description-heading">Color:</span> <%= product.color.name %></dd>

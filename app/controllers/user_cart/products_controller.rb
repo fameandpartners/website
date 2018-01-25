@@ -186,6 +186,10 @@ class UserCart::ProductsController < UserCart::BaseController
     if( params[:size_id].nil? && !params[:size].nil? )
       params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
     end
+    #need a size set for fabric swatches
+    if (params[:product_name] == 'Fabric Swatch - Heavy Georgette')
+      params[:size_id] = Spree::OptionValue.find_by_name('US0/AU4').id
+    end
   end
 
 

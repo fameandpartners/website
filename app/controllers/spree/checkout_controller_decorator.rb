@@ -38,7 +38,6 @@ Spree::CheckoutController.class_eval do
     end
 
     current_order.updater.update_totals
-
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
       format.html { render 'edit' }

@@ -48,7 +48,7 @@ class Repositories::CartProduct
         from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
       )
-      result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
+      result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       # result.making_options = product_making_options
@@ -112,15 +112,27 @@ class Repositories::CartProduct
     end
 
     def height
-      if customized_product?
+      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+        nil
+      elsif customized_product?
         line_item.personalization.height.presence.to_s.titleize
       else
         LineItemPersonalization::DEFAULT_HEIGHT.titleize
       end
     end
 
+    def size
+      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+        nil
+      elsif size_id.present?
+        Repositories::ProductSize.read(size_id)
+      else
+        nil
+      end
+    end
+
     def making_options
-      line_item.making_options.includes(:product_making_option).map do |option| 
+      line_item.making_options.includes(:product_making_option).map do |option|
         OpenStruct.new(
           id: option.id,
           option_type: option.product_making_option.option_type,
@@ -136,7 +148,7 @@ class Repositories::CartProduct
     # provide the available making_options to front end
     def available_making_options
       product.making_options.map do |mo|
-        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type != 'fast_making') 
+        if line_item.stock.nil? || (mo.option_type != 'slow_making' && mo.option_type != 'fast_making')
           OpenStruct.new(
             id: mo.id,
             option_type: mo.option_type,
