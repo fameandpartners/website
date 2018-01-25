@@ -21,42 +21,25 @@ section.section-box.container.section-style-icon
   // Category Tiles - via Contentful CMS
   - category_tiles = @home_page_container[:category_tiles]
 
-  .row.top-category-tiles-row
-    - category_tiles[0..1].each do |tile|
-      .col-md-6.cta-item
-        = link_to tile[:link]
-          .section-img-wrap.copy-center.category-tile
-            .img-wrap
-              img.img-responsive*{src: tile[:image] }
+  - if category_tiles.any?
 
-            - if tile[:tile_cta_first] || tile[:tile_cta_last]
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link
-                            = tile[:tile_cta_first]
-                          span.copy-highlight
-                            = tile[:tile_cta_last]
+    .row.CategoryTilesRow
 
-  .row.bottom-category-tiles-row
-    - category_tiles[2..3].each do |tile|
-      .col-md-6.cta-item
-        = link_to tile[:link]
-          .section-img-wrap.copy-center.category-tile
-            .img-wrap
-              img.img-responsive*{src: tile[:image] }
+      - category_tiles.each do |tile|
+        .col-md-6.cta-item
+          = link_to tile[:link]
+            .section-img-wrap.copy-center.category-tile
+              .img-wrap
+                img.img-responsive*{src: tile[:image] }
 
-            - if tile[:tile_cta_first] || tile[:tile_cta_last]
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap
-                        span.cta-link-white-bg.cta-link-center-padding
-                          span.cta-link
-                            = tile[:tile_cta_first]
-                          span.copy-highlight
-                            = tile[:tile_cta_last]
+              - if tile[:tile_cta_first] || tile[:tile_cta_last]
+                .content-wrap
+                  .container-cta
+                    .row-cta
+                      .col-md-12
+                        .copy-wrap
+                          span.cta-link-white-bg.cta-link-center-padding
+                            span.cta-link
+                              = tile[:tile_cta_first]
+                            span.copy-highlight
+                              = tile[:tile_cta_last]

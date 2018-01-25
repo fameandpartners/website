@@ -378,38 +378,18 @@ $top-overlay-margin-top: 37px;
 }
 
 // Categories tiles
-.category-tile {
-  border: 2px solid #fff;
-}
+.CategoryTilesRow {
 
-.top-category-tiles-row {
-
-  // Top Left Tile
-  .cta-item:first-of-type .category-tile {
-    border-left: none;
-    border-top: 4px solid #fff;
+  .category-tile {
+    border-top: 4px solid $c-neutral-white;
   }
 
-  // Top Right Tile
-  .cta-item:last-of-type .category-tile {
-    border-top: 4px solid #fff;
-    border-right: none;
+  .cta-item:nth-child(odd) .category-tile {
+    border-right: 2px solid $c-neutral-white;
   }
 
-}
-
-.bottom-category-tiles-row {
-
-  // Bottom Left Tile
-  .cta-item:first-of-type .category-tile {
-    border-left: none;
-    border-bottom: none;
-  }
-
-  // Bottom Right Tile
-  .cta-item:last-of-type .category-tile {
-    border-right: none;
-    border-bottom: none;
+  .cta-item:nth-child(even) .category-tile {
+    border-left: 2px solid $c-neutral-white;
   }
 
 }
