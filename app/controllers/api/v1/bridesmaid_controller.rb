@@ -8,10 +8,16 @@ module Api
         if !validate_params([:selectedColor, :selectedTopDetails, :selectedLength, :selectedSilhouette], params)
           respond_with nil, status: :not_acceptable
         else
-          customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND lower(render_urls)c @> ? ",
-                                                                 params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].downcase, [{color:  params[:selectedColor].downcase}].to_json)
+
+          if (params[:selectedLength].downcase != 'micro-mini')
+            customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
+                                                                params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
                                                           .order('Length(customization_ids)')  #gets base most customization 
-          
+          else
+            customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
+                                                                params[:selectedLength].downcase, 'cheeky', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
+                                                          .order('Length(customization_ids)')  #gets base most customization 
+          end
           customized_products = customized_products.uniq_by{ |x| x.product_id.to_s + x.neckline } #only present one of each product and neckline combo
 
           res = setup_collection(customized_products, params[:selectedColor])
@@ -20,26 +26,37 @@ module Api
       end
 
       def incompatabilities
-        if !validate_params([:customization_ids, :product_id, :length], params)
+        if !validate_params([:product_id, :length], params)
           respond_with nil, status: :not_acceptable
         else
 
-          customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
+            product = Spree::Product.find(params[:product_id])
+            product_length_custs = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+          if !params[:customization_ids] # Corner case when only base of a dress is selected
+            length_id = product_length_custs.select{ |x| x['customisation_value']['name'].downcase == "change-to-#{params[:length].downcase}"}.first['customisation_value']['id']
+
+            customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
+                                                                 length_id, params[:product_id])
+          else
+            
+            customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
                                                                  params[:customization_ids].sort.join('_'), params[:product_id])
-          
-          customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
+          end
+          if params[:length].downcase == 'micro-mini'
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase  ||  x.length.downcase == 'cheeky' }.first
+
+          else
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
+          end
 
           if customized_product.nil?
             respond_with nil, status: :not_found
 
           else
-
-            product_length_custs = JSON.parse(customized_product.product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
             
             lengths = customized_products.map { |x| "change-to-#{x.length.downcase}" }
             
-            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }
-            
+            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }   
 
             res = {}
             res[:id] = customized_product.id
@@ -47,7 +64,7 @@ module Api
             res[:incompatible_ids] = customized_product.incompatible_ids.split(',').reject { |x| res[:compatible_lengths].include?(x) }
 
             respond_with res
-            
+
           end
         end
 
@@ -70,7 +87,7 @@ module Api
           product = cp.product
           collection << { 
                     id: cp.id,
-                    product_name: product.name, #TODO: Need to do this per dorothy's suggestion
+                    product_name: "#{cp.length} Length #{cp.silhouette} Dress with #{cp.neckline} #{cp.neckline.include?('Neckline') ? '' : 'Neckline'}", # product.name, #TODO: Need to do this per dorothy's suggestion
                     color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
                     price: product.master.price_in(current_currency.upcase).attributes,
