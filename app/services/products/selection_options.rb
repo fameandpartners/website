@@ -35,7 +35,6 @@ module Products
               currency: site_version.currency
             )
           }),
-
           customizations: OpenStruct.new({
             all: available_product_customisations,
             incompatibilities: customisations_incompatibility_map,
@@ -119,7 +118,9 @@ module Products
 
       # customizations
       def product_customisation_values
-        if customisations_available?
+        if product.category&.category == "Sample"
+          []
+        elsif customisations_available?
           @product_customisation_values ||= JSON.parse(product.customizations)
         else
           []

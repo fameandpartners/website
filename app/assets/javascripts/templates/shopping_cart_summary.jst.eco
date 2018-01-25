@@ -6,9 +6,12 @@
       <div class="cart-item-image-holder col-xs-5">
         <a href="<%= product.path %>">
           <% if product.name != "Gift" : %>
-          <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+            <% if product.color.image_file_name: %>
+              <img class="img-responsive cart-item-image" src="<%= product.color.image_file_name %>" />
+            <% else: %>
+              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+            <% end %>
           <% end %>
-
           <% if product.price_drop_au_product: %>
             <div class="ribbon-wrapper PriceDrop">
               <div class="ribbon-txt">
@@ -51,7 +54,9 @@
             <% if product.display_height: %>
               <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
             <% else: %>
-              <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
+              <% if product.height: %>
+                <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
+              <% end %>
             <% end %>
           <% end %>
           <dd>

@@ -53,6 +53,7 @@ module ProductsHelper
           color_name: swatch_variant.dress_color.presentation,
           color_id: swatch_variant.dress_color.id,
           color_hex: swatch_variant.dress_color.value,
+          color_image_url: "#{configatron.asset_host}/assets/product-color-images/#{swatch_variant.dress_color.image_file_name}",
           price: swatch_variant.prices.first.amount
         }
       end
