@@ -377,87 +377,42 @@ $top-overlay-margin-top: 37px;
 
 }
 
-// Side tags
-.tag-info-section {
-  position: relative;
+// Categories tiles
+.category-tile {
+  border: 2px solid #fff;
+}
 
-  .tag-info-wrapper {
-    display: block;
-    margin-left: -70px;
-    letter-spacing: 0.1rem;
-    font-size: 1.3rem;
+.top-category-tiles-row {
 
-    .tag-info {
-      position: absolute;
-      top: 48%;
-      z-index: 0;
-    }
-
-    .diagonal-line {
-      @include transform (rotate(45deg));
-      border-top: 1px solid $c-neutral-8;
-      width: 30px;
-      margin-left: 55px;
-    }
-
-    .vertical-text {
-      @include transform (rotate(-90deg));
-      text-align: center;
-      margin-right: -11px;
-      margin-left: -4px;
-
-      &.extra-margin-left {
-        margin-left: -15px;
-      }
-
-    }
-
+  // Top Left Tile
+  .cta-item:first-of-type .category-tile {
+    border-left: none;
+    border-top: 4px solid #fff;
   }
 
-  .category-tile {
-    border: 2px solid #fff;
-  }
-
-  .top-category-tiles-row {
-    // Top Left Tile
-    .cta-item:first-of-type .category-tile {
-      border-left: none;
-      border-top: 4px solid #fff;
-    }
-    // Top Right Tile
-    .cta-item:last-of-type .category-tile {
-      border-top: 4px solid #fff;
-      border-right: none;
-    }
-  }
-
-  .bottom-category-tiles-row {
-    // Bottom Left Tile
-    .cta-item:first-of-type .category-tile {
-      border-left: none;
-      border-bottom: none;
-    }
-    // Bottom Right Tile
-    .cta-item:last-of-type .category-tile {
-      border-right: none;
-      border-bottom: none;
-    }
+  // Top Right Tile
+  .cta-item:last-of-type .category-tile {
+    border-top: 4px solid #fff;
+    border-right: none;
   }
 
 }
 
-  @media (max-width: $bootstrap-md-width) {
+.bottom-category-tiles-row {
 
-    .tag-info-section {
-      .category-tile {
-        border-top: 2px solid #fff !important;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-      }
-    }
-
+  // Bottom Left Tile
+  .cta-item:first-of-type .category-tile {
+    border-left: none;
+    border-bottom: none;
   }
+
+  // Bottom Right Tile
+  .cta-item:last-of-type .category-tile {
+    border-right: none;
+    border-bottom: none;
+  }
+
+}
 
 // An alternative styling for section boxes
 // Sample usage: landing_pages/bespoke_bridal_collection.html.slim

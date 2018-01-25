@@ -18,51 +18,45 @@ section.section-box.container.section-style-icon
                 #{secondary_hero_mobile_image} 991w,
                 #{secondary_hero_image} 992w"
 
-  .tag-info-section
-    .tag-info-wrapper.visible-lg-block
-      .tag-info
-        .section-name.vertical-text Our Edits
-        .diagonal-line
+  // Category Tiles - via Contentful CMS
+  - category_tiles = @home_page_container[:category_tiles]
 
-    // Category Tiles - via Contentful CMS
-    - category_tiles = @home_page_container[:category_tiles]
+  .row.top-category-tiles-row
+    - category_tiles[0..1].each do |tile|
+      .col-md-6.cta-item
+        = link_to tile[:link]
+          .section-img-wrap.copy-center.category-tile
+            .img-wrap
+              img.img-responsive*{src: tile[:image] }
 
-    .row.top-category-tiles-row
-      - category_tiles[0..1].each do |tile|
-        .col-md-6.cta-item
-          = link_to tile[:link]
-            .section-img-wrap.copy-center.category-tile
-              .img-wrap
-                img.img-responsive*{src: tile[:image] }
+            - if tile[:tile_cta_first] || tile[:tile_cta_last]
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link
+                            = tile[:tile_cta_first]
+                          span.copy-highlight
+                            = tile[:tile_cta_last]
 
-              - if tile[:tile_cta_first] || tile[:tile_cta_last]
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      .col-md-12
-                        .copy-wrap
-                          span.cta-link-white-bg.cta-link-center-padding
-                            span.cta-link
-                              = tile[:tile_cta_first]
-                            span.copy-highlight
-                              = tile[:tile_cta_last]
+  .row.bottom-category-tiles-row
+    - category_tiles[2..3].each do |tile|
+      .col-md-6.cta-item
+        = link_to tile[:link]
+          .section-img-wrap.copy-center.category-tile
+            .img-wrap
+              img.img-responsive*{src: tile[:image] }
 
-    .row.bottom-category-tiles-row
-      - category_tiles[2..3].each do |tile|
-        .col-md-6.cta-item
-          = link_to tile[:link]
-            .section-img-wrap.copy-center.category-tile
-              .img-wrap
-                img.img-responsive*{src: tile[:image] }
-
-              - if tile[:tile_cta_first] || tile[:tile_cta_last]
-                .content-wrap
-                  .container-cta
-                    .row-cta
-                      .col-md-12
-                        .copy-wrap
-                          span.cta-link-white-bg.cta-link-center-padding
-                            span.cta-link
-                              = tile[:tile_cta_first]
-                            span.copy-highlight
-                              = tile[:tile_cta_last]
+            - if tile[:tile_cta_first] || tile[:tile_cta_last]
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap
+                        span.cta-link-white-bg.cta-link-center-padding
+                          span.cta-link
+                            = tile[:tile_cta_first]
+                          span.copy-highlight
+                            = tile[:tile_cta_last]
