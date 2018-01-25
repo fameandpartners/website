@@ -22,10 +22,10 @@ module Policies
 
     }
 
-    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "4 - 5 weeks",
-                          "12 - 15 business days" => "4 - 5 weeks",
-                          "3 - 4 weeks" => "5 - 6 weeks",
-                          "4 - 6 weeks" => "6 - 8 weeks"
+    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
+                          "12 - 15 business days" => "6 weeks",
+                          "3 - 4 weeks" => "6 weeks",
+                          "4 - 6 weeks" => "6 weeks"
                        }
 
     FACTORY_CLOSURE_MAP = { "7 - 10 business days" => "10 - 15 business days",
@@ -34,10 +34,10 @@ module Policies
                             "4 - 6 weeks" => "6 weeks"
                           }
 
-    CNY_DELIVERY_TIMES = [  "4 - 5 weeks",
-                          "4 - 5 weeks",
-                          "5 - 6 weeks",
-                          "6 - 8 weeks"
+    CNY_DELIVERY_TIMES = [  "6 weeks",
+                          "6 weeks",
+                          "6 weeks",
+                          "6 weeks"
                         ]
 
     FACTORY_DELIVERY_TIMES = [  "10 - 15 business days",
