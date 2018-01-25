@@ -499,7 +499,7 @@ $top-overlay-margin-top: 37px;
 }
 
 .section-instagram {
-  padding-bottom: 40px;
+  padding: 21px 0 33px;
 
   &.section-box {
     margin-top: 0;
@@ -571,6 +571,14 @@ $top-overlay-margin-top: 37px;
 
 }
 
+.SocialCta {
+  margin-top: -14px;
+  display: block;
+}
+
+.SectionWrapperSocial {
+  margin-top: 76px;
+}
 
 @media (min-width: $bootstrap-md-width) {
 

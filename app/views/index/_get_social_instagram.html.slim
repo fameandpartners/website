@@ -4,7 +4,7 @@ ruby:
   end
 
 // Section: Instagram
-.section-wrapper
+.section-wrapper.SectionWrapperSocial
   .section-box.section-instagram.sectionBox--with-bg
     .container
       .row
@@ -25,6 +25,6 @@ ruby:
 
       .row
         .col-md-12.text-center
-          = link_to shop_social_path + "?hp"
-              span.btn-xs.btn-featured
-                | Shop <span class="copy-highlight">Instagram</span>
+          = link_to shop_social_path + "?hp", class: "SocialCta"
+            span.btn-xs.btn-featured
+              | Shop <span class="copy-highlight">Instagram</span>
