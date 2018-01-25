@@ -10,7 +10,7 @@ module Repositories
 
     # @return [Repositories::Images::Template]
     def read(color_id: nil, cropped: true)
-      if product_from_wedding_atelier? 
+      if product_from_wedding_atelier?
         wedding_attrs = image_for_wedding_atelier
         Images::Template.new(wedding_attrs)
       else

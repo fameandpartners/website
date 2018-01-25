@@ -57,7 +57,6 @@ class Populator
   end
 
   private
-    # thanh is flagging this method for destruction: confirms with the tanias about custom colors
     def validate!
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
@@ -222,7 +221,7 @@ class Populator
     def price_customization_by_currency(customizations_json)
       customization_arry = customizations_json.map do |customization|
           customization = customization['customisation_value']
-          
+
           {
             'customisation_value' => {
                 'id' => customization['id'],

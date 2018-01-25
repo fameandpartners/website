@@ -36,4 +36,9 @@ Spree::OptionValue.class_eval do
     return @discount if instance_variable_defined?('@discount')
     @discount = Repositories::Discount.read(self.class, self.id)
   end
+
+  # some good ole hackery for swatches
+  def image_file_name_for_swatches
+    image_file_name ? "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}" : nil
+  end
 end
