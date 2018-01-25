@@ -35,20 +35,6 @@
 
   }
 
-  .section-fame-story {
-
-    .item .cta-link-arrow-right {
-      font-size: 1rem;
-      display: block;
-      margin: 20px 0;
-    }
-
-  }
-
-  .section-social {
-    padding-top: $box-padding-top;
-  }
-
   .section-style-icon {
     margin-bottom: 50px;
   }
@@ -129,56 +115,9 @@
       padding-bottom: 10px;
     }
 
-    .section-fame-story {
-      margin-top: 15px;
-
-      .same-height-cols {
-        padding-top: 30px;
-        text-align: center;
-        border: solid $c-neutral-6 1px;
-
-        > .row {
-          margin: 0;
-        }
-
-        img {
-          @include filter(grayscale(100%));
-        }
-
-      }
-
-      .item {
-        padding: 0;
-        margin-bottom: 30px;
-
-        &.bordered {
-          border: none;
-        }
-
-        a {
-          pointer-events: none;
-          cursor: default;
-        }
-
-      }
-
-      .item-copy a {
-        display: none;
-      }
-
-      .btn-wrap {
-        margin-bottom: 50px;
-      }
-
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
-
-    .section-fame-story .item .item-copy {
-      min-height: 200px;
-    }
 
     .hero-wrap .heading .title--large {
       font-size: 6rem;
