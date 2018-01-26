@@ -11,6 +11,10 @@ class SuperCollections::DressesController < ApplicationController
                 :redirect_site_version
 
   def show
+
+    title('Custom Bridesmaid Dress Collections', default_seo_title)
+    description('Fully customizable bridesmaid dresses, tailored to your wedding theme, colors, and each bridesmaids\' individual needs.')
+
     @super_collection = {
       header: {
         img: "#{image_path('super_collections/1440_pineapple.jpg')}"
