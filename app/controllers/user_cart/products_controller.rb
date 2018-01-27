@@ -14,6 +14,7 @@ class UserCart::ProductsController < UserCart::BaseController
         variant_id: params[:variant_id],
         size_id: params[:size_id],
         color_id: params[:color_id],
+        stock: params[:stock],
         customizations_ids: params[:customizations_ids],
         making_options_ids: params[:making_options_ids],
         height:             params[:height],
@@ -162,7 +163,6 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-
   def reapply_delivery_promo
     if current_promotion.present? && current_promotion.code.include?('DELIVERYDISC')
       promotion_service = UserCart::PromotionsService.new(
@@ -172,7 +172,6 @@ class UserCart::ProductsController < UserCart::BaseController
       promotion_service.reapply
     end
   end
-
 
   def create_coupon_if_from_shopping_spree( order, shopping_spree_total, shopping_spree_item_count, *existing_guid )
     guid = existing_guid[0] || SecureRandom.uuid.to_s

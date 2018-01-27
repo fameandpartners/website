@@ -98,6 +98,9 @@ Spree::LineItem.class_eval do
   end
 
   def options_text
+    if self.product.category.category == "Sample"
+      return "Color: #{variant.option_values.colors.first.presentation}"
+    end
     if personalization.blank?
       variant.options_text
     else
@@ -209,7 +212,7 @@ Spree::LineItem.class_eval do
   def period_in_business_days(period)
       value = major_value_from_period(period)
       period_units(period) == 'weeks' ? value * 5 : value
-  end 
+  end
 
   # returns days/weeks from string
   def period_units(period)

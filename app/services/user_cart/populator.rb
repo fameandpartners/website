@@ -65,7 +65,6 @@ class Populator
 
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
-
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
         add_making_options
 
