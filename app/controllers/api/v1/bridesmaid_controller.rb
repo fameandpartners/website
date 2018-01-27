@@ -85,11 +85,15 @@ module Api
         collection = []
         customized_products.each do |cp|
           product = cp.product
+          length_customizations = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }.map {|y| y['customisation_value']['id']}
           collection << { 
                     id: cp.id,
                     product_name: "#{cp.length} Length #{cp.silhouette} Dress with #{cp.neckline} #{cp.neckline.include?('Neckline') ? '' : 'Neckline'}", # product.name, #TODO: Need to do this per dorothy's suggestion
                     color_count: product.colors.count,
                     customization_count: JSON.parse(product.customizations).count,
+                    style_number: product.sku,
+                    customization_ids: cp.customization_ids.split('_').reject {|x| length_customizations.include?(x)},
+                    length: cp.length,
                     price: product.master.price_in(current_currency.upcase).attributes,
                     image_urls: JSON.parse(cp.render_urls).select { |x| x['color'] == color }
                   }

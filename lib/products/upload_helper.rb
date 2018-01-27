@@ -37,6 +37,7 @@ module Products
           add_product_height_ranges( product )
 
           product.hidden = false #MIGHT MOVE THIS
+          product.available_on = product.created_at
 
           product.save!
 
