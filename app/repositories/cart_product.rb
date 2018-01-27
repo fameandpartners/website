@@ -17,7 +17,9 @@ class Repositories::CartProduct
   end
 
   def read
+    binding.pry
     @cart_product ||= begin
+      length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         color: Repositories::ProductColors.read(color_id, product.id),
@@ -47,13 +49,15 @@ class Repositories::CartProduct
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?
-      )
+        )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       # result.making_options = product_making_options
       result.available_making_options = available_making_options
       result.height         = height
+      result.brides_maid = product.price < 1
+      result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
 
       result
     end
