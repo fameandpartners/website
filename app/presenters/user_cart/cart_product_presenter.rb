@@ -35,9 +35,6 @@ module UserCart
           display_discount: option.display_discount,
           delivery_period: option.delivery_period
         }
-
-        result[:brides_maid]= product.price < 1,
-        result[:length] = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last
       end
 
       #filter out fastmaking option if non recommended color is chosen by user

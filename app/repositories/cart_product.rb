@@ -17,7 +17,6 @@ class Repositories::CartProduct
   end
 
   def read
-    binding.pry
     @cart_product ||= begin
       length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
       result = ::UserCart::CartProductPresenter.new(
