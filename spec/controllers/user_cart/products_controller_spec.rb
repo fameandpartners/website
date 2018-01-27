@@ -26,7 +26,7 @@ module UserCart
                                                       )
       end
 
-      it 'add one line item to order per add to cart request' do
+      xit 'add one line item to order per add to cart request' do
         expect(order.line_items.size).to eq(0)
 
         xhr :post, :create, { variant_id: variant.id, quantity: 1 }
