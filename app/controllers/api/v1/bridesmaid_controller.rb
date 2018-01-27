@@ -93,6 +93,7 @@ module Api
                     customization_count: JSON.parse(product.customizations).count,
                     style_number: product.sku,
                     customization_ids: cp.customization_ids.split('_').reject {|x| length_customizations.include?(x)},
+                    length: cp.length,
                     price: product.master.price_in(current_currency.upcase).attributes,
                     image_urls: JSON.parse(cp.render_urls).select { |x| x['color'] == color }
                   }
