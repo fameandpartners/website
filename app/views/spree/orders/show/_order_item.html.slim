@@ -11,24 +11,24 @@
     .row
       .item-details.col-md-12
         ul
-          li
-
-          | #{height_title(line_item.personalization)}: <span class="value">#{display_height(line_item.personalization&.height_value, line_item.personalization&.height_unit, line_item.personalization&.height)}</span>
+          - if !line_item.fabric_swatch?
+            li
+              | #{height_title(line_item.personalization)}: <span class="value">#{display_height(line_item.personalization&.height_value, line_item.personalization&.height_unit, line_item.personalization&.height)}</span>
           li
             - if line_item.personalization.try(:basic_color?)
               | Color:
             - else
-              | Customized color:
-            span.value= line_item.colour_name
+              | Customized color: <span class="value">#{line_item.colour_name}</span>
           - if line_item.customisation_text.present?
             li
               | Customized cut: <span class="value">#{line_item.customisation_text}</span>
-          li
-            | Size: <span class="value">#{line_item.size_name}</span>
+          - if !line_item.fabric_swatch?
+            li
+              | Size: <span class="value">#{line_item.size_name}</span>
           li
             | Quantity: <span class="value">#{line_item.quantity}</span>
           li
             | Estimated Delivery: <span class="value">#{line_item.delivery_period}</span>
-          -if !line_item.item.stock.nil?
+          - if !line_item.item.stock.nil?
             li style="padding-top: 15px"
-              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">All sample sale items are final sale.<br /> Offer valid for shipments to US only.</span>
+              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">Fabric swatches are final sale.<br /> US shipping only.</span>

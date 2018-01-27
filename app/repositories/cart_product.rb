@@ -41,7 +41,7 @@ class Repositories::CartProduct
         price: line_item_price,
         discount: product.discount.try(:amount),
         image: product_image,
-        message: line_item.stock.nil? ? nil : 'All sample sale items are final sale. Offer valid for shipments to US only',
+        message: line_item.stock.nil? ? nil : 'Fabric swatches are final sale. US shipping only',
         standard_days_for_making: product.standard_days_for_making,
         customised_days_for_making: product.customised_days_for_making,
         default_standard_days_for_making: product.default_standard_days_for_making,

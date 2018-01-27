@@ -45,11 +45,11 @@ namespace :data do
     master_variant = prd.master
     # make usd pricing variant
     usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
-    usd.amount = 5.0
+    usd.amount = 1.0
     usd.save!
     # make aus pricing variant
     aud = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'AUD')
-    aud.amount = 5.0
+    aud.amount = 1.0
     aud.save!
 
 
@@ -81,11 +81,11 @@ namespace :data do
       variant.save!
 
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-      usd.amount = 5.0
+      usd.amount = 1.0
       usd.save!
 
       aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-      aud.amount = 5.0
+      aud.amount = 1.0
       aud.save!
 
       gs = GlobalSku.create!(

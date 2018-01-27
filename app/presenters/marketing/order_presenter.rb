@@ -86,11 +86,16 @@ module Marketing
       }
     end
 
+    def all_fabric_swatches?
+      (line_items.select{ |li| li.product.category.category != "Sample"}).count > 0
+    end
+
     def build_line_items
       line_items.collect do |item|
         {
           sku:                    item.sku,
           name:                   item.product_name,
+          fabric_swatch:          item.product.category.category == 'Sample',
           making_options_text:    item.making_options_text,
           options_text:           item.options_text,
           quantity:               item.quantity,

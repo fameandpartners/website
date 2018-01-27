@@ -74,6 +74,10 @@ module Orders
          !item.stock.nil?
       end
 
+      def fabric_swatch?
+        item.product.category.category == 'Sample'
+      end
+
       def personalizations?
         personalization.present?
       end

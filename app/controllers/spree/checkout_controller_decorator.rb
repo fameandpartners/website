@@ -91,7 +91,6 @@ Spree::CheckoutController.class_eval do
         return
       end
 
-
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
 
         if @order.line_items.length < 1
