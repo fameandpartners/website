@@ -38,7 +38,7 @@ Spree::OptionValue.class_eval do
   end
 
   # some good ole hackery for swatches
-  def image_file_name_for_swatches
+  def image_file_name_for_swatch
     image_file_name ? "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}" : nil
   end
 end

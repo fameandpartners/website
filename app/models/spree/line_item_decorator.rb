@@ -153,7 +153,11 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    cart_item.try(:image).try(:large) || ''
+    if self.product.category.category == 'Sample'
+      self.variant.option_values.colors.first.image_file_name_for_swatch
+    else
+      cart_item.try(:image).try(:large) || ''
+    end
   end
 
   def size_name
