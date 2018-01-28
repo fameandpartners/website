@@ -117,7 +117,7 @@ class Repositories::CartProduct
     end
 
     def height
-      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+      if line_item.product.category.category == 'Sample'
         nil
       elsif customized_product?
         line_item.personalization.height.presence.to_s.titleize
