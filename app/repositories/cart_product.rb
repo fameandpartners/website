@@ -18,7 +18,9 @@ class Repositories::CartProduct
 
   def read
     @cart_product ||= begin
-      length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
+      if line_item.customizations
+        length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
+      end
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         color: Repositories::ProductColors.read(color_id, product.id),
