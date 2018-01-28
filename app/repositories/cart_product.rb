@@ -58,6 +58,7 @@ class Repositories::CartProduct
       result.available_making_options = available_making_options
       result.height         = height
       result.brides_maid = product.price < 1
+      result.swatch = product.category.category == 'Sample'
       result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
 
       result
@@ -117,7 +118,7 @@ class Repositories::CartProduct
     end
 
     def height
-      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+      if line_item.product.category.category == 'Sample'
         nil
       elsif customized_product?
         line_item.personalization.height.presence.to_s.titleize

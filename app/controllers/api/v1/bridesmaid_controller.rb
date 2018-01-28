@@ -9,14 +9,22 @@ module Api
           respond_with nil, status: :not_acceptable
         else
 
-          if (params[:selectedLength].downcase != 'micro-mini')
-            customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
-                                                                params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
-                                                          .order('Length(customization_ids)')  #gets base most customization 
-          else
+          if (params[:selectedLength].downcase == 'micro-mini')
             customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
                                                                 params[:selectedLength].downcase, 'cheeky', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
                                                           .order('Length(customization_ids)')  #gets base most customization 
+          elsif (params[:selectedLength].downcase == 'mini')
+            customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
+                                                                params[:selectedLength].downcase, 'short', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
+                                                          .order('Length(customization_ids)')  #gets base most customization 
+          elsif (params[:selectedLength].downcase == 'maxi')
+            customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
+                                                                params[:selectedLength].downcase, 'full', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
+                                                          .order('Length(customization_ids)')  #gets base most customization                                                 
+          else
+            customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
+                                                                params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
+                                                          .order('Length(customization_ids)')
           end
           customized_products = customized_products.uniq_by{ |x| x.product_id.to_s + x.neckline } #only present one of each product and neckline combo
 
@@ -45,8 +53,12 @@ module Api
           if params[:length].downcase == 'micro-mini'
             customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase  ||  x.length.downcase == 'cheeky' }.first
 
+          elsif params[:length].downcase == 'mini'
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase ||  x.length.downcase == 'short' }.first
+          elsif params[:length].downcase == 'maxi'
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase ||  x.length.downcase == 'full' }.first
           else
-            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }
           end
 
           if customized_product.nil?

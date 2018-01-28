@@ -24,7 +24,7 @@ describe 'Order Payment Step', type: :feature do
     context 'on the USA site version' do
       let(:site_version) { FactoryGirl.create(:site_version, :us) }
 
-      it 'renders USD button' do
+      xit 'renders USD button' do
         visit spree.checkout_state_path('payment')
 
         expect(page).to have_link('paypal_button', href: '/paypal?payment_method_id=123')
@@ -34,7 +34,7 @@ describe 'Order Payment Step', type: :feature do
     context 'on the Australian site version' do
       let(:site_version) { FactoryGirl.create(:site_version, :au) }
 
-      it 'renders AUD button' do
+      xit 'renders AUD button' do
         visit spree.checkout_state_path('payment')
 
         expect(page).to have_link('paypal_button', href: '/paypal?payment_method_id=456')
