@@ -45,8 +45,12 @@ module Api
           if params[:length].downcase == 'micro-mini'
             customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase  ||  x.length.downcase == 'cheeky' }.first
 
+          elsif params[:length].downcase == 'mini'
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase ||  x.length.downcase == 'short' }.first
+          elsif params[:length].downcase == 'maxi'
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase ||  x.length.downcase == 'full' }.first
           else
-            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }
           end
 
           if customized_product.nil?
