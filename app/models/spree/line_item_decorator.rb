@@ -31,6 +31,7 @@ Spree::LineItem.class_eval do
     if self.delivery_date.nil? && self.order.state != 'complete'
       self.delivery_date = delivery_period_policy.delivery_period
       self.save!
+      return self.delivery_date
     elsif self.delivery_date && (self.order.state == 'complete' || self.order.state == 'resumed')
       return self.delivery_date
     else
