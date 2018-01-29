@@ -98,7 +98,7 @@ Spree::LineItem.class_eval do
   end
 
   def options_text
-    if self.product.category.category == "Sample"
+    if self.product&.category&.category == "Sample"
       return "Color: #{variant.option_values.colors.first.presentation}"
     end
     if personalization.blank?
@@ -153,7 +153,7 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    if self.product.category.category == 'Sample'
+    if self.product&.category&.category == 'Sample'
       self.variant.option_values.colors.first.image_file_name_for_swatch
     else
       cart_item.try(:image).try(:large) || ''

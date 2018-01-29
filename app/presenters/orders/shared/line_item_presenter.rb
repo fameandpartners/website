@@ -75,7 +75,7 @@ module Orders
       end
 
       def fabric_swatch?
-        item.product.category.category == 'Sample'
+        item.product&.category&.category == 'Sample'
       end
 
       def personalizations?

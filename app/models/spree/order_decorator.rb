@@ -233,7 +233,7 @@ Spree::Order.class_eval do
     end
 
     # hack for swatches
-    if variant.product.category.category == "Sample"
+    if variant.product&.category&.category == "Sample"
       current_item.stock = false
       current_item.old_price = current_item.price
     end
