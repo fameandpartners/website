@@ -58,7 +58,7 @@ module Api
           elsif params[:length].downcase == 'maxi'
             customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase ||  x.length.downcase == 'full' }.first
           else
-            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }
+            customized_product = customized_products.select{ |x| x.length.downcase ==  params[:length].downcase }.first
           end
 
           if customized_product.nil?
