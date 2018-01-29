@@ -153,7 +153,7 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    if self.product&.category&.category == 'Sample'
+    if fabric_swatch?
       self.variant.option_values.colors.first.image_file_name_for_swatch
     else
       cart_item.try(:image).try(:large) || ''
@@ -166,6 +166,10 @@ Spree::LineItem.class_eval do
 
   def style_name
     variant.try(:product).try(:name) || 'Missing Variant'
+  end
+
+  def fabric_swatch?
+    self.product&.category&.category == 'Sample'
   end
 
   def store_credit_only_return?
