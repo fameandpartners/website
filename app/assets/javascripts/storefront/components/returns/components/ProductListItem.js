@@ -336,7 +336,6 @@ class ProductListItem extends React.Component {
                   grayBackground
                   copy={(
                     <span>
-                      Sale items are final sale.<br/>
                       This item is not eligible for a refund.
                     </span>
                   )}
