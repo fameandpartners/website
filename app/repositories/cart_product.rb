@@ -58,7 +58,7 @@ class Repositories::CartProduct
       result.available_making_options = available_making_options
       result.height         = height
       result.brides_maid = product.price < 1
-      # result.swatch = product&.category&.category == 'Sample'
+      result.swatch = product&.category&.category == 'Sample'
       result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
 
       result
