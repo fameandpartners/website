@@ -28,6 +28,11 @@ class SuperCollections::DressesController < ApplicationController
         { type: 'shop_by', title: 'Theme', grid_class: 'grid-2_sm-1_xs-1',
           sections: [
 
+          { name: "Bohemian",
+            img: "#{image_path('super_collections/themes/bohemian.jpg')}",
+            img_mobile: "#{image_path('super_collections/themes/bohemian-mobile.jpg')}",
+            url: "/bohemian-wedding-bridesmaid-dresses" },
+
           { name: "Rustic",
             img: "#{image_path('super_collections/themes/rustic.jpg')}",
             img_mobile: "#{image_path('super_collections/themes/rustic-mobile.jpg')}",
@@ -38,25 +43,21 @@ class SuperCollections::DressesController < ApplicationController
             img_mobile: "#{image_path('super_collections/themes/garden-party-mobile.jpg')}",
             url: "/garden-wedding-bridesmaid-dresses" },
 
-          { name: "Black Tie",
-            img: "#{image_path('super_collections/themes/black-tie.jpg')}",
-            img_mobile: "#{image_path('super_collections/themes/black-tie-mobile.jpg')}",
-            url: "/black-tie-wedding-bridesmaid-dresses" },
+          { name: "Resort",
+            img: "#{image_path('super_collections/themes/resort.jpg')}",
+            img_mobile: "#{image_path('super_collections/themes/resort-mobile.jpg')}",
+            url: "/resort-beach-wedding-bridesmaid-dresses" },
 
           { name: "Cocktail",
             img: "#{image_path('super_collections/themes/cocktail.jpg')}",
             img_mobile: "#{image_path('super_collections/themes/cocktail-mobile.jpg')}",
             url: "/cocktail-wedding-bridesmaid-dresses" },
 
-          { name: "Resort",
-            img: "#{image_path('super_collections/themes/resort.jpg')}",
-            img_mobile: "#{image_path('super_collections/themes/resort-mobile.jpg')}",
-            url: "/resort-beach-wedding-bridesmaid-dresses" },
+          { name: "Black Tie",
+            img: "#{image_path('super_collections/themes/black-tie.jpg')}",
+            img_mobile: "#{image_path('super_collections/themes/black-tie-mobile.jpg')}",
+            url: "/black-tie-wedding-bridesmaid-dresses" },
 
-          { name: "Bohemian",
-            img: "#{image_path('super_collections/themes/bohemian.jpg')}",
-            img_mobile: "#{image_path('super_collections/themes/bohemian-mobile.jpg')}",
-            url: "/bohemian-wedding-bridesmaid-dresses" },
         ] },
 
         { type: 'shop_by', title: 'Silhouette', grid_class: 'grid-2_sm-1_xs-1',
@@ -96,25 +97,26 @@ class SuperCollections::DressesController < ApplicationController
         { type: 'shop_by', title: 'Season', grid_class: 'grid-2_sm-1_xs-1',
           sections: [
 
+          { name: "Spring",
+            img: "#{image_path('super_collections/seasons/spring.jpg')}",
+            img_mobile: "#{image_path('super_collections/seasons/spring-mobile.jpg')}",
+            url: "/spring-wedding-bridesmaid-dresses" },
+
           { name: "Summer",
             img: "#{image_path('super_collections/seasons/summer.jpg')}",
             img_mobile: "#{image_path('super_collections/seasons/summer-mobile.jpg')}",
             url: "/summer-wedding-bridesmaid-dresses" },
+
+          { name: "Fall",
+            img: "#{image_path('super_collections/seasons/fall.jpg')}",
+            img_mobile: "#{image_path('super_collections/seasons/fall-mobile.jpg')}",
+            url: "/fall-wedding-bridesmaid-dresses" },
 
           { name: "Winter",
             img: "#{image_path('super_collections/seasons/winter.jpg')}",
             img_mobile: "#{image_path('super_collections/seasons/winter-mobile.jpg')}",
             url: "/winter-wedding-bridesmaid-dresses" },
 
-          { name: "Spring",
-            img: "#{image_path('super_collections/seasons/spring.jpg')}",
-            img_mobile: "#{image_path('super_collections/seasons/spring-mobile.jpg')}",
-            url: "/spring-wedding-bridesmaid-dresses" },
-
-          { name: "Fall",
-            img: "#{image_path('super_collections/seasons/fall.jpg')}",
-            img_mobile: "#{image_path('super_collections/seasons/fall-mobile.jpg')}",
-            url: "/fall-wedding-bridesmaid-dresses" },
         ] },
 
         { type: 'shop_by', title: 'Color', grid_class: 'grid-6_sm-3_xs-3',
