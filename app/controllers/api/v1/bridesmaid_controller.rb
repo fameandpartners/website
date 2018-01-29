@@ -121,14 +121,14 @@ module Api
         prod_price = product.master.price_in(current_currency.upcase).attributes
         custs = JSON.parse(product.customizations).select{ |customization| customization == length_cust || customizations.include?(customization['customisation_value']['id']) }
         t = custs.inject(prod_price['amount'].to_f) do |total, cust|
-          total = current_currency.downcase == 'aud' ? cust['customisation_value']['price_aud'].to_f : cust['customisation_value']['price'].to_f
+          total = current_currency.upcase == 'AUD' ? cust['customisation_value']['price_aud'].to_f : cust['customisation_value']['price'].to_f
         end
         prod_price['amount'] = t.to_s
         prod_price
       end
 
       def current_currency
-        @current_currency ||= (site_version.try(:currency).to_s.downcase || 'usd')
+        @current_currency ||= (site_version.try(:currency).to_s.upcase || 'USD')
       end
 
       def site_version
