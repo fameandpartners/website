@@ -118,7 +118,7 @@ module Products
 
       # customizations
       def product_customisation_values
-        if product.category&.category == "Sample"
+        if product&.category&.category == "Sample"
           []
         elsif customisations_available?
           @product_customisation_values ||= JSON.parse(product.customizations)
