@@ -4,7 +4,7 @@
     <% if product.name != "RETURN_INSURANCE" : %>
     <div class="row cart-item" data-id="<%= product.line_item_id %>">
       <div class="cart-item-image-holder col-xs-5">
-        <% if !product.color.image_file_name: %>
+        <% if !product.swatch: %>
           <a href="<%= product.path %>">
         <% end %>
           <% if product.name != "Gift" : %>
