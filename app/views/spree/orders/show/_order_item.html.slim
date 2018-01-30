@@ -18,7 +18,8 @@
             - if line_item.personalization.try(:basic_color?)
               | Color:
             - else
-              | Customized color: <span class="value">#{line_item.colour_name}</span>
+              | Customized color:
+            <span class="value"> #{line_item.colour_name}</span>
           - if line_item.customisation_text.present?
             li
               | Customized cut: <span class="value">#{line_item.customisation_text}</span>
