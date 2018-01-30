@@ -499,15 +499,12 @@ $top-overlay-margin-top: 37px;
 }
 
 .section-instagram {
-  padding: 21px 0 33px;
 
   &.section-box {
     margin-top: 0;
   }
 
   .instagram-widget {
-    padding: $box-padding-top 0;
-    display: inline-block;
 
     .item {
       padding: 5px;
@@ -571,11 +568,6 @@ $top-overlay-margin-top: 37px;
 
 }
 
-.SocialCta {
-  margin-top: -14px;
-  display: block;
-}
-
 .SectionWrapperSocial {
   margin-top: 76px;
 }
@@ -619,6 +611,10 @@ $top-overlay-margin-top: 37px;
 
   .contentBox__verticalMiddle {
     @include column-vertical-align();
+  }
+
+  .instagram-widget {
+    padding: 0 10px;
   }
 
 }
