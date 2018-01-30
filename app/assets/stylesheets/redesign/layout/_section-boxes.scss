@@ -394,6 +394,27 @@ $top-overlay-margin-top: 37px;
 
 }
 
+// CTA over tiles
+.ctaOverlay__container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.ctaOverlay__copy--top-left {
+  padding: 20px 10px;
+  display: block;
+  max-width: 48%;
+}
+
+.ctaOverlay__copyTitle {
+
+}
+
+.ctaOverlay__copyLink {
+  display: table;
+}
+
 // An alternative styling for section boxes
 // Sample usage: landing_pages/bespoke_bridal_collection.html.slim
 

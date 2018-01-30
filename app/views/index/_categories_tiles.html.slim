@@ -34,12 +34,11 @@ section.section-box.container.section-style-icon
 
               - if tile[:tile_cta_first] || tile[:tile_cta_last]
                 .content-wrap
-                  .container-cta
-                    .row-cta
-                      .col-md-12
-                        .copy-wrap
-                          span.cta-link-white-bg.cta-link-center-padding
-                            span.cta-link
-                              = tile[:tile_cta_first]
-                            span.copy-highlight
-                              = tile[:tile_cta_last]
+                  .ctaOverlayContainer
+                    .col-md-12
+                      .copy-wrap
+                        span.ctaOverlay__copy--top-left
+                          span.ctaOverlay__copyTitle
+                            = tile[:tile_cta_last]
+                          span.ctaOverlay__copyLink
+                            = tile[:tile_cta_first]
