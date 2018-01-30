@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.1
--- Dumped by pg_dump version 10.1
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -562,6 +562,43 @@ CREATE SEQUENCE customisation_values_id_seq
 --
 
 ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
+
+
+--
+-- Name: customization_visualizations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customization_visualizations (
+    id integer NOT NULL,
+    customization_ids character varying(1024),
+    incompatible_ids character varying(1024),
+    render_urls jsonb,
+    product_id integer,
+    length character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    silhouette character varying(255),
+    neckline character varying(255)
+);
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customization_visualizations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customization_visualizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customization_visualizations_id_seq OWNED BY customization_visualizations.id;
 
 
 --
@@ -3340,12 +3377,12 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
-    customizations json,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
-    upc character varying(255)
+    upc character varying(255),
+    customizations jsonb
 );
 
 
@@ -3601,9 +3638,8 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean DEFAULT false NOT NULL,
+    orderbot_synced boolean,
     return_type character varying(255),
-    autorefundable boolean,
     vwo_type character varying(255)
 );
 
@@ -3959,7 +3995,9 @@ CREATE TABLE spree_products (
     factory_id integer,
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
     fabric_card_id integer,
-    category_id integer
+    category_id integer,
+    customizations jsonb,
+    lengths jsonb
 );
 
 
@@ -4861,7 +4899,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text
+    user_data text DEFAULT '{}'::text NOT NULL
 );
 
 
@@ -5565,6 +5603,13 @@ ALTER TABLE ONLY custom_dresses ALTER COLUMN id SET DEFAULT nextval('custom_dres
 --
 
 ALTER TABLE ONLY customisation_values ALTER COLUMN id SET DEFAULT nextval('customisation_values_id_seq'::regclass);
+
+
+--
+-- Name: customization_visualizations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations ALTER COLUMN id SET DEFAULT nextval('customization_visualizations_id_seq'::regclass);
 
 
 --
@@ -6585,6 +6630,14 @@ ALTER TABLE ONLY customisation_values
 
 
 --
+-- Name: customization_visualizations customization_visualizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customization_visualizations
+    ADD CONSTRAINT customization_visualizations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: discounts discounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7598,6 +7651,13 @@ ALTER TABLE ONLY wedding_plannings
 
 ALTER TABLE ONLY wishlist_items
     ADD CONSTRAINT wishlist_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dress_features; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX dress_features ON customization_visualizations USING btree (length, silhouette, neckline);
 
 
 --
@@ -9433,10 +9493,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9671,15 +9727,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9699,8 +9749,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
-
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
 INSERT INTO schema_migrations (version) VALUES ('20170914013707');
@@ -9708,6 +9756,10 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171115172748');
+
+INSERT INTO schema_migrations (version) VALUES ('20171116214623');
 
 INSERT INTO schema_migrations (version) VALUES ('20171127052028');
 
@@ -9718,3 +9770,15 @@ INSERT INTO schema_migrations (version) VALUES ('20171207195245');
 INSERT INTO schema_migrations (version) VALUES ('20171216185833');
 
 INSERT INTO schema_migrations (version) VALUES ('20171219203151');
+
+INSERT INTO schema_migrations (version) VALUES ('20180102175041');
+
+INSERT INTO schema_migrations (version) VALUES ('20180103184321');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105234451');
+
+INSERT INTO schema_migrations (version) VALUES ('20180105235603');
+
+INSERT INTO schema_migrations (version) VALUES ('20180111190922');
+
+INSERT INTO schema_migrations (version) VALUES ('20180118062620');

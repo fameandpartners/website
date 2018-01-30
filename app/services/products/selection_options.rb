@@ -14,7 +14,6 @@ module Products
     def read
       #put the layers in order for processing
       @product.layer_cads&.sort!{|layer| layer.position}.reverse!
-
       os =
         OpenStruct.new({
           variants: product_variants,
@@ -36,7 +35,6 @@ module Products
               currency: site_version.currency
             )
           }),
-
           customizations: OpenStruct.new({
             all: available_product_customisations,
             incompatibilities: customisations_incompatibility_map,
@@ -120,8 +118,10 @@ module Products
 
       # customizations
       def product_customisation_values
-        if customisations_available?
-          @product_customisation_values ||= product.customisation_values.by_type(:cut).includes(:incompatibilities)
+        if product&.category&.category == "Sample"
+          []
+        elsif customisations_available?
+          @product_customisation_values ||= JSON.parse(product.customizations)
         else
           []
         end
@@ -129,12 +129,15 @@ module Products
 
       def available_product_customisations
         product_customisation_values.map do |value|
+          value = value['customisation_value']
+          price = site_version.currency == 'AUD' && value['price_aud']  ? value['price_aud'] : value['price']
           OpenStruct.new({
-            id: value.id,
-            name: value.presentation,
-            image: value.image.present? ? value.image.url : 'logo_empty.png',
-            display_price: value.display_price,
-            position: value.position,
+            id: value['id'],
+            name: value['presentation'],
+            image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
+            display_price: Spree::Money.new(price, currency: product_making_options.first.currency, no_cents: true),
+            position: value['position'],
+            group: value['group']
           })
         end
       end
@@ -157,7 +160,7 @@ module Products
 
       def customisations_incompatibility_map
         product_customisation_values.inject({}) do |hash, value|
-          hash[value.id] = value.incompatibilities.map(&:incompatible_id)
+          hash[value['customisation_value']['id']] = value['customisation_value']['incompatibilities']&.map(&:incompatible_id)
           hash
         end
       end

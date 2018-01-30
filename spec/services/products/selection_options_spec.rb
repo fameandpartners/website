@@ -42,19 +42,5 @@ module Products
       end
     end
 
-    describe 'customizations options' do
-      context 'given a product with customization options' do
-        let!(:product) { FactoryGirl.create(:dress) }
-        let!(:fabric_customization) { FactoryGirl.create(:customisation_value, :fabric, product: product) }
-        let!(:cut_customization) { FactoryGirl.create(:customisation_value, :cut, product: product) }
-
-        let!(:customizations) { selection_options.read.customizations }
-
-        it 'only returns the cut type customizations' do
-          customization_ids = customizations.all.map(&:id)
-          expect(customization_ids).to contain_exactly(cut_customization.id)
-        end
-      end
-    end
   end
 end

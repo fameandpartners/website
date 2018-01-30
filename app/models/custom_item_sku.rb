@@ -50,10 +50,11 @@ class CustomItemSku
   end
 
   def customization_value_ids
-    line_item&.personalization&.customization_value_ids&.sort
+    line_item.customizations ? JSON.parse(line_item&.customizations)&.map{ |cust| cust['customisation_value']['id'] }&.sort : []
   end
 
   def height
     line_item.personalization ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
   end
+
 end

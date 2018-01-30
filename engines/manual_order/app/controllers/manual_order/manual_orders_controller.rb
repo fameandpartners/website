@@ -27,6 +27,7 @@ module ManualOrder
     def create
      if manual_order_form.validate(params[:forms_manual_order])
        order = manual_order_form.save { |hash| manual_order_form.save_order(hash) }
+
        OrderBotWorker.perform_async(order.id)
 
        flash[:success] = "Order " \
