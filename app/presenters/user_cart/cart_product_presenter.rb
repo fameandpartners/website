@@ -13,7 +13,7 @@ module UserCart
       result[:display_height] = display_height(height_value, height_unit, height)
       result[:customizations] = (customizations || []).map do |item|
         t = item['customisation_value']
-        display_price = t['price'].to_f > 0 ? Spree::Money.new(t['price'].to_f) : ''
+        display_price = t['price'].to_f > 0 ? Spree::Money.new(t['price'].to_f) : Spree::Money.new(0)
         cart_summary = if from_wedding_atelier
           "#{t['customisation_type']}: #{t['presentation']} #{display_price} "
         else
