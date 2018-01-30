@@ -105,7 +105,7 @@ module Orders
         else
           customs = Array.wrap(
               personalization.customization_values.collect { |custom|
-              [custom.presentation, custom.image]
+              [custom['presentation'], custom['image']]
               }
           )
         end
