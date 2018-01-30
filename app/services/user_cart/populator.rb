@@ -190,7 +190,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'] == id }
+          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'].to_s == id.to_s }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else
