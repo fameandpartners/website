@@ -24,7 +24,7 @@ namespace :data do
     stripe_payment.preferred_publishable_key = 'pk_test_W2TXpgZbnoebFKeDzNW74xhB'
     stripe_payment.preferred_server = 'test'
     stripe_payment.environment = Rails.env
-    stripe_payment.preferences[:test_mode] = true
+    stripe_payment.preferred_test_mode = true
     stripe_payment.active = true
     stripe_payment.save
 
@@ -35,7 +35,7 @@ namespace :data do
     stripe_payment.preferred_publishable_key = 'pk_test_ic3pWUfqR66brmOJ01TrE5Lf'
     stripe_payment.preferred_server = 'test'
     stripe_payment.environment = Rails.env
-    stripe_payment.preferences[:test_mode] = true
+    stripe_payment.preferred_test_mode = true
     stripe_payment.active = true
     stripe_payment.save
 
@@ -44,10 +44,10 @@ namespace :data do
     paypal_payment.preferred_currency = 'USD'
     paypal_payment.preferred_server = 'sandbox'
     paypal_payment.environment = Rails.env
-    paypal_payment.preferences[:login] = 'finance-facilitator_api1.fameandpartners.com'
-    paypal_payment.preferences[:password] = '7BJKSRVLMFNAL544'
-    paypal_payment.preferences[:signature] = 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aa'
-    paypal_payment.preferences[:test_mode] = true
+    paypal_payment.preferred_login = 'finance-facilitator_api1.fameandpartners.com'
+    paypal_payment.preferred_password = '7BJKSRVLMFNAL544'
+    paypal_payment.preferred_signature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aa'
+    paypal_payment.preferred_test_mode = true
     paypal_payment.active = true
     paypal_payment.save
 

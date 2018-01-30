@@ -366,6 +366,7 @@ FameAndPartners::Application.routes.draw do
 
       post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
+
     end
 
     ########################
@@ -378,6 +379,8 @@ FameAndPartners::Application.routes.draw do
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
+
+    get '/products/fabric-swatches' => 'products/fabric_swatches#index'
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
@@ -405,6 +408,8 @@ FameAndPartners::Application.routes.draw do
       get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end
+
+
 
     # Custom Dresses
     get '/custom-dresses(/*whatever)', to: redirect('/dresses')
@@ -632,6 +637,22 @@ FameAndPartners::Application.routes.draw do
     resources :dress_colours,      :only => :index
   end
 
+
+  # ----------
+  # Dress Filter LP
+  # ----------
+
+  scope '/bridesmaids' do
+    get '/' => 'products/bridesmaids#index'
+    get '/dresses' => 'products/bridesmaids#show'
+  end
+
+  scope '/bridesmaid-dresses' do
+    # Colors should behave like query strings, and not paths
+    get '/:id' => 'products/details#bridesmaid_show'
+  end
+
+
   # ----------
   # API Routes
   # ----------
@@ -650,11 +671,22 @@ FameAndPartners::Application.routes.draw do
       # user profile
       get 'profile' => 'profiles#show'
 
+      #upload products.*\.ccf$
+      constraints DomainConstraint.new(/.*\.fameandgroups.com\/$/) do
+        put '/product_upload' => 'product_upload#upload'
+      end
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
+
+      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
+      get '/bridesmaids/:id' => 'bridesmaid#show'
+      get '/bridesmaids' => 'bridesmaid#index'
+
+      #fabric swatches
+      get 'fabric_swatches' => 'fabric_swatches#index'
 
       delete '/rails_cache' => 'systems#clear_cache'
     end
@@ -714,6 +746,9 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
+
+
+
 
       get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
 

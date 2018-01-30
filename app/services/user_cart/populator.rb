@@ -28,8 +28,11 @@ class Populator
 
   def populate
     validate!
-
-    add_personalized_product
+    if personalized_product?
+      add_personalized_product
+    else
+      add_product_to_cart
+    end
 
     order.update!
     order.reload
@@ -54,7 +57,6 @@ class Populator
   end
 
   private
-
     def validate!
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
@@ -63,7 +65,6 @@ class Populator
 
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
-
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
         add_making_options
 
@@ -79,6 +80,8 @@ class Populator
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
+        line_item.customizations =  price_customization_by_currency(product_customizations).to_json
+        line_item.save
         personalization.line_item = line_item
         line_item.personalization = personalization
         personalization.save
@@ -101,7 +104,6 @@ class Populator
         item['size']  = product_size.value
         item.color_id = product_color.color_id
         item['color'] = product_color.color_name
-        item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
 
         if product_attributes[:height].present?
@@ -112,6 +114,10 @@ class Populator
           item.height = StyleToProductHeightRangeGroup.map_height_values_to_height_name( product_variant, product_attributes[:height_value], product_attributes[:height_unit] )
         end
       end
+    end
+
+    def personalized_product?
+      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
     end
 
     def custom_height?
@@ -184,7 +190,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = product.customisation_values.detect { |customisation_value| customisation_value.id == id.to_i }
+          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'].to_s == id.to_s }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else
@@ -210,5 +216,26 @@ class Populator
     def fire_event(name, extra_payload = {})
       ActiveSupport::Notifications.instrument(name, { order: order })
     end
+
+    def price_customization_by_currency(customizations_json)
+      customization_arry = customizations_json.map do |customization|
+          customization = customization['customisation_value']
+
+          {
+            'customisation_value' => {
+                'id' => customization['id'],
+                    'name' => customization['name'],
+                   'group' => customization['group'],
+                   'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
+             'required_by' => customization['required_by'],
+            'presentation' => customization['presentation']
+              }
+          }
+
+      end
+
+      customization_arry
+    end
+
 end
 end

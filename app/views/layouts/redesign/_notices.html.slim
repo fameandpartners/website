@@ -1,32 +1,21 @@
-// If cny_delivery_delays feature flag is active: we show a banner to let our customers know about delays.
-- if Features.active?(:cny_delivery_delays)
+// Sample sale campaign
+- if custom_sale_banner_active? && current_site_version.is_usa?
+  #sale-banner.alert-sale.custom-sale-banner-top role="alert" style="background-color: #fe4e75; color: #ffffff"
+    .outer-wrap
+        .inner-wrap
+          .title-wrap
+            .title
+              = link_to "/sample-sale"
+                | SHOP THE 1ST ANNUAL FAME AND PARTNERS SAMPLE SALE - UP TO 40% OFF - sizes 0-22!
+
+// Temporary: Price Drop (AU-only) campaign
+- if price_drop_au_active?
   #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
     .outer-wrap
         .inner-wrap
           .title-wrap
-            .title.text-uppercase
-              | Due to high order volume, please allow additional time for delivery.
-
-// If cny_delivery_delays feature flag is OFF: we can show other banners.
-- else
-  // Sample sale campaign
-  - if custom_sale_banner_active? && current_site_version.is_usa?
-    #sale-banner.alert-sale.custom-sale-banner-top role="alert" style="background-color: #fe4e75; color: #ffffff"
-      .outer-wrap
-          .inner-wrap
-            .title-wrap
-              .title
-                = link_to "/sample-sale"
-                  | SHOP THE 1ST ANNUAL FAME AND PARTNERS SAMPLE SALE - UP TO 40% OFF - sizes 0-22!
-
-  // Temporary: Price Drop (AU-only) campaign
-  - if price_drop_au_active?
-    #sale-banner.alert-sale.custom-sale-banner-top.PriceDropBanner role="alert"
-      .outer-wrap
-          .inner-wrap
-            .title-wrap
-              .title
-                | WE'RE CELEBRATING AUSTRALIA BY DROPPING OUR PRICES! SHOP NOW.
+            .title
+              | WE'RE CELEBRATING AUSTRALIA BY DROPPING OUR PRICES! SHOP NOW.
 
 // REGULAR SALE BANNER IS TEMPORARILY HIDDEN
 / - else
@@ -41,11 +30,11 @@
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)
-  - if automatic_discount_code.present? && session[:email_reminder_promo] != 'scheduled_for_delivery'
-    .auto-discount-applied
-      .text-center
-        p WANT TO SHOP LATER?
-        = link_to 'Email your promo code', fb_auth_path(email_reminder_promo: automatic_discount_code), class: 'btn btn-facebook btn-md'
+- if automatic_discount_code.present? && session[:email_reminder_promo] != 'scheduled_for_delivery'
+  .auto-discount-applied
+    .text-center
+      p WANT TO SHOP LATER?
+      = link_to 'Email your promo code', fb_auth_path(email_reminder_promo: automatic_discount_code), class: 'btn btn-facebook btn-md'
 
 .js-shopping-spree-banner.alert-sale.custom-sale-banner-top.ShoppingSpreeBanner__wrapper.hidden role="alert"
   .outer-wrap

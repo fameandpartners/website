@@ -1,0 +1,5 @@
+- cache ['views/data/_fabric_swatches'] do
+javascript:
+    window.FabricSwatchData = {
+      swatches: #{raw @swatches.to_json}
+    };

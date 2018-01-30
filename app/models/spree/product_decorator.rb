@@ -15,6 +15,9 @@ Spree::Product.class_eval do
 
   has_many  :customisation_values,
             order: 'customisation_values.position ASC'
+  
+  has_many :customization_visualizations
+
   has_many :layer_cads,
            order: 'layer_cads.position ASC'
   has_many :product_color_values,
@@ -274,7 +277,7 @@ Spree::Product.class_eval do
   end
 
   def can_be_customized?
-    customisation_values.present?
+    customizations.present?
   end
 
   # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
