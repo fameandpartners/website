@@ -250,14 +250,19 @@ class ProductListItem extends React.Component {
                 ${Number(price).toFixed(2)}
               </span>
             </div>
-            <div>
-              <span className="meta--key">
-                Size:
-              </span>
-              <span className="meta--value">
-                {size}
-              </span>
-            </div>
+            {
+              size ? (
+                <div>
+                  <span className="meta--key">
+                    Size:
+                  </span>
+                  <span className="meta--value">
+                    {size}
+                  </span>
+                </div>)
+                :
+                null
+            }
             <div>
               <span className="meta--key">
                 Color:
@@ -266,14 +271,19 @@ class ProductListItem extends React.Component {
                 {color}
               </span>
             </div>
-            <div>
-              <span className="meta--key">
-                Height:
-              </span>
-              <span className="meta--value">
-                {displayHeight(heightValue, heightUnit)}
-              </span>
-            </div>
+            {
+              size ? (
+                <div>
+                  <span className="meta--key">
+                    Height:
+                  </span>
+                  <span className="meta--value">
+                    {displayHeight(heightValue, heightUnit)}
+                  </span>
+                </div>)
+                :
+                null
+            }
           </div>
         </div>
         {

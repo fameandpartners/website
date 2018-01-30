@@ -99,7 +99,7 @@ Spree::LineItem.class_eval do
   end
 
   def options_text
-    if self.product&.category&.category == "Sample"
+    if fabric_swatch?
       return "Color: #{variant.option_values.colors.first.presentation}"
     end
     if personalization.blank?
@@ -193,16 +193,25 @@ Spree::LineItem.class_eval do
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
     json['line_item']['window_closed'] = self.window_closed?
-    json['line_item']['products_meta'] = {
-      "name": self.style_name,
-      "price": self.price,
-      "size": self.size_name,
-      "color": self.color_name,
-      "height": self.height_name,
-      "height_unit": self.height_unit,
-      "height_value": self.height_value,
-      "image": self.image_url
-    }
+    if self.fabric_swatch?
+      json['line_item']['products_meta'] = {
+        "name": self.style_name,
+        "price": self.price,
+        "color": self.color_name,
+        "image": self.image_url
+      }
+    else
+      json['line_item']['products_meta'] = {
+        "name": self.style_name,
+        "price": self.price,
+        "size": self.size_name,
+        "color": self.color_name,
+        "height": self.height_name,
+        "height_unit": self.height_unit,
+        "height_value": self.height_value,
+        "image": self.image_url
+      }
+    end
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "created_at_iso_mdy": self.item_return.created_at.strftime("%m/%d/%y"),
