@@ -11,6 +11,11 @@ class SuperCollections::DressesController < ApplicationController
   before_filter :redirect_undefined,
                 :redirect_site_version
 
+  def index
+    title('Custom Bridesmaid Dress Collection Page', default_seo_title)
+    description('Fully customizable bridesmaid dresses, tailored to your wedding theme, colors, and each bridesmaids\' individual needs.')
+  end
+
   def show
 
     title('Custom Bridesmaid Dress Collections', default_seo_title)
