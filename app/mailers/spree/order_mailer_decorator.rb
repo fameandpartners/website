@@ -42,7 +42,8 @@ Spree::OrderMailer.class_eval do
         billing_address:             order_presenter.billing_address,
         shipping_address:            order_presenter.shipping_address,
         cny_delivery_delay:          Features.active?(:cny_delivery_delays),
-        order_delivery_period:       order_presenter.delivery_period
+        order_delivery_period:       order_presenter.delivery_period,
+        all_fabric_swatches:         order_presenter.all_fabric_swatches?
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

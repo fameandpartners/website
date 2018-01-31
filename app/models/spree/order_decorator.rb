@@ -232,6 +232,12 @@ Spree::Order.class_eval do
       current_item.price = prices_amount[:original_amount]
     end
 
+    # hack for swatches
+    if variant.product&.category&.category == "Sample"
+      current_item.stock = false
+      current_item.old_price = current_item.price
+    end
+
     self.line_items << current_item
     self.reload
     current_item

@@ -38,7 +38,7 @@ describe Skus::Generator do
     context 'product does not have personalizations' do
       let(:attributes) { { style_number: 'WithoutCustomizations', size: 'US4/AU8', color_id: '525' } }
 
-      it 'generates SKUs with X marker' do
+      it 'generates SKUs X marker' do
         generator = described_class.new(attributes)
         expect(generator.call).to eq('WITHOUTCUSTOMIZATIONSUS4AU8C525XHSD')
       end

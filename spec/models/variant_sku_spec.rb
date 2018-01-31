@@ -51,7 +51,7 @@ RSpec.describe VariantSku do
       end
 
       it 'includes the colour id' do
-        expect(sku).to include("C#{colour_id}")
+        expect(sku).to end_with("C#{colour_id}XHSD")
       end
 
       it "includes the size name, without separating '/'" do
