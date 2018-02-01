@@ -131,6 +131,9 @@ FameAndPartners::Application.routes.draw do
     # Bridesmaid teaser landing page
     get '/coming-soon-custom-bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid-teaser-page', :as => :bridesmaid_teaser_landing_page
 
+    # Prom Red And Black Category page
+    get '/prom-red-and-black' => 'products/collections#show', :permalink => 'prom-red-and-black', :as => :prom_red_and_black_landing_page
+
     ###########
     # Lookbooks
     ###########
