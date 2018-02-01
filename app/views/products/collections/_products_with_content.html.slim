@@ -1,5 +1,6 @@
 ruby:
   is_info_box_hidden   = page.try(:get, 'show-collection-info-box') != 'true'
+  is_info_box_hidden   = page.try(:get, :'show-collection-info-box') != 'true'
 
 - products = @collection.products.first(2)
 /! [][][content]
