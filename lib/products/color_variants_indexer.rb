@@ -41,6 +41,10 @@ module Products
 
       @variants = []
       product_scope.find_each do |product|
+        if product.price == 0 || product.category.category == 'Sample'
+          next
+        end
+
         product_price_in_us = product.price_in(us_site_version.currency)
         product_price_in_au = product.price_in(au_site_version.currency)
         #total_sales         = total_sales_for_sku(product.sku)
