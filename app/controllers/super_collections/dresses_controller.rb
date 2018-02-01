@@ -208,6 +208,11 @@ class SuperCollections::DressesController < ApplicationController
     }
   end
 
+  def theme
+    @theme = Theme.find_by_name(params[:theme])
+    @result = JSON.parse(@theme)
+  end
+
   private
 
   def image_path(image)
@@ -228,4 +233,21 @@ class SuperCollections::DressesController < ApplicationController
       redirect_to '/undefined', status: :moved_permanently
     end
   end
+
+
+  def current_currency
+    @current_currency ||= (site_version.try(:currency).to_s.upcase || 'USD')
+  end
+
+  def site_version
+      @current_site_version ||= begin
+        ::FindUsersSiteVersion.new(
+            user:         current_spree_user,
+            url_param:    request.env['site_version_code'],
+            cookie_param: session[:site_version]
+        ).get
+      end
+  end
+
+
 end

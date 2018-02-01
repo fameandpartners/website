@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -571,7 +571,7 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
     customization_ids character varying(1024),
-    incompatible_ids character varying(1024),
+    incompatible_ids character varying(255),
     render_urls jsonb,
     product_id integer,
     length character varying(255),
@@ -1362,7 +1362,9 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    shipped boolean,
+    barcode character varying(255)
 );
 
 
@@ -2047,6 +2049,38 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE newgistics_schedulers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
+
+
+--
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2632,6 +2666,28 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
+
+
+--
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -3638,8 +3694,9 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean,
+    orderbot_synced boolean DEFAULT false NOT NULL,
     return_type character varying(255),
+    autorefundable boolean,
     vwo_type character varying(255)
 );
 
@@ -5098,6 +5155,38 @@ ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
 
 
 --
+-- Name: themes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE themes (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    color jsonb,
+    collection jsonb
+);
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE themes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE themes_id_seq OWNED BY themes.id;
+
+
+--
 -- Name: user_style_profile_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5858,6 +5947,13 @@ ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_s
 
 
 --
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
+
+
+--
 -- Name: next_logistics_return_request_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6425,6 +6521,13 @@ ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::reg
 
 
 --
+-- Name: themes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes ALTER COLUMN id SET DEFAULT nextval('themes_id_seq'::regclass);
+
+
+--
 -- Name: user_style_profile_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6915,6 +7018,14 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
@@ -7571,6 +7682,14 @@ ALTER TABLE ONLY style_to_product_height_range_groups
 
 ALTER TABLE ONLY styles
     ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: themes themes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes
+    ADD CONSTRAINT themes_pkey PRIMARY KEY (id);
 
 
 --
@@ -9759,6 +9878,16 @@ INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
 
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016232403');
+
+INSERT INTO schema_migrations (version) VALUES ('20171101200751');
+
+INSERT INTO schema_migrations (version) VALUES ('20171114001834');
+
 INSERT INTO schema_migrations (version) VALUES ('20171115172748');
 
 INSERT INTO schema_migrations (version) VALUES ('20171116214623');
@@ -9784,3 +9913,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180105235603');
 INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
+
+INSERT INTO schema_migrations (version) VALUES ('20180131211009');
