@@ -18,7 +18,8 @@ class  UserCart::UserCartResource
       display_total: order.display_total,
       taxes: serialize_taxes,
       site_version: site_version,
-      order_number: order.number
+      order_number: order.number,
+      all_fabric_swatches: Marketing::OrderPresenter.new(order).all_fabric_swatches?
     )
   end
 

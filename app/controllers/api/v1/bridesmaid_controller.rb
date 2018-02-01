@@ -12,15 +12,15 @@ module Api
           if (params[:selectedLength].downcase == 'micro-mini')
             customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
                                                                 params[:selectedLength].downcase, 'cheeky', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
-                                                          .order('Length(customization_ids)')  #gets base most customization 
+                                                          .order('Length(customization_ids)')  #gets base most customization
           elsif (params[:selectedLength].downcase == 'mini')
             customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
                                                                 params[:selectedLength].downcase, 'short', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
-                                                          .order('Length(customization_ids)')  #gets base most customization 
+                                                          .order('Length(customization_ids)')  #gets base most customization
           elsif (params[:selectedLength].downcase == 'maxi')
             customized_products = CustomizationVisualization.where("(lower(length) = ? OR lower(length) = ?) AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
                                                                 params[:selectedLength].downcase, 'full', params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
-                                                          .order('Length(customization_ids)')  #gets base most customization                                                 
+                                                          .order('Length(customization_ids)')  #gets base most customization
           else
             customized_products = CustomizationVisualization.where("lower(length) = ? AND lower(silhouette) = ? AND lower(neckline) in (?) AND render_urls @> ? ",
                                                                 params[:selectedLength].downcase, params[:selectedSilhouette].downcase, params[:selectedTopDetails].map { |x| x.downcase }, [{color:  params[:selectedColor]}].to_json)
@@ -46,7 +46,7 @@ module Api
             customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
                                                                  length_id, params[:product_id])
           else
-            
+
             customized_products = CustomizationVisualization.where("customization_ids = ? AND product_id = ?",
                                                                  params[:customization_ids].sort.join('_'), params[:product_id])
           end
@@ -65,10 +65,10 @@ module Api
             respond_with nil, status: :not_found
 
           else
-            
+
             lengths = customized_products.map { |x| "change-to-#{x.length.downcase}" }
-            
-            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }   
+
+            compatible_lengths = product_length_custs.select{ |x| lengths.include?(x['customisation_value']['name']) }
 
             res = {}
             res[:id] = customized_product.id
@@ -101,7 +101,7 @@ module Api
           selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(cp.length.downcase) }.first
           length_customization_ids = length_customizations.map {|y| y['customisation_value']['id']}
           customization_ids = cp.customization_ids.split('_').reject {|x| length_customization_ids.include?(x)}
-          collection << { 
+          collection << {
                     id: cp.id,
                     product_name: "#{cp.length} Length #{cp.silhouette} Dress with #{cp.neckline} #{cp.neckline.include?('Neckline') ? '' : 'Neckline'}", # product.name, #TODO: Need to do this per dorothy's suggestion
                     color_count: product.colors.count,
@@ -121,7 +121,7 @@ module Api
         prod_price = product.master.price_in(current_currency.upcase).attributes
         custs = JSON.parse(product.customizations).select{ |customization| customization == length_cust || customizations.include?(customization['customisation_value']['id']) }
         t = custs.inject(prod_price['amount'].to_f) do |total, cust|
-          total = current_currency.upcase == 'AUD' ? cust['customisation_value']['price_aud'].to_f : cust['customisation_value']['price'].to_f
+          total + current_currency.upcase == 'AUD' ? cust['customisation_value']['price_aud'].to_f : cust['customisation_value']['price'].to_f
         end
         prod_price['amount'] = t.to_s
         prod_price

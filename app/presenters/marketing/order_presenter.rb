@@ -87,7 +87,7 @@ module Marketing
     end
 
     def all_fabric_swatches?
-      (line_items.select{ |li| li.product&.category&.category != "Sample"}).count > 0
+      !line_items.any?{ |li| li.product&.category&.category != "Sample"}
     end
 
     def build_line_items
