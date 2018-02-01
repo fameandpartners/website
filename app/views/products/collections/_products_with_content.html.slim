@@ -1,46 +1,10 @@
-ruby:
-  # Check if current page has any custom CTA box (set via fame_admin)
-  is_info_box_hidden   = page.try(:get, :'show-collection-info-box') != 'true'
-
 // Pick the 2 first products and then insert a CTA box
 - products = @collection.products.first(2)
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
 
 // CTA BOX AREA
-// Scenario 1: i=Change flag is *ENABLED* & the "show-collection-info-box" returns *FALSE*
-- if Features.active?(:i_equal_change) && is_info_box_hidden
-
-  // Scenario 1A: "refer_a_friend_cta_box" feature flag is *ENABLED*
-  // Result: Randomize "i=Change" and "Refer a friend" CTA boxes
-  - if Features.active?(:refer_a_friend_cta_box)
-
-    // Randomize CTA boxes
-    - random_tile = Random.rand(2)
-    - if random_tile == 0
-      = render partial: '/marketing/refer_a_friend_box'
-    - else
-      = render partial: '/marketing/i_equal_change_box'
-
-  // Scenario 1B: "refer_a_friend_cta_box" feature flag is *DISABLED*
-  // Result: Show "i=Change" CTA box
-  - else
-    = render partial: '/marketing/i_equal_change_box'
-
-// Scenario 2: either the i=Change flag is *DISABLED* or the "show-collection-info-box" variable returns *TRUE*
-- else
-
-  // Scenario 2A: "refer_a_friend_cta_box" feature flag is *ENABLED*
-  // Result: "Refer a Friend" CTA box is shown.
-  - if Features.active?(:refer_a_friend_cta_box)
-    = render partial: '/marketing/refer_a_friend_box'
-
-  // Scenario 2B: "refer_a_friend_cta_box" feature flag is *DISABLED*
-  // Result: default CTA box is shown.
-  - else
-    // Custom info box (for each page)
-    = render partial: '/products/collections/info_box_subheading'
-
+= render partial: '/marketing/cta-blocks/cta_blocks'
 
 // Continue with the list of products
 - @collection.products.drop(2).each_slice(col) do |products|
