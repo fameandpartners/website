@@ -68,7 +68,7 @@ class SuperCollections::DressesController < ApplicationController
         { type: 'shop_by', title: 'Silhouette', grid_class: 'grid-2_sm-1_xs-1',
           sections: [
 
-          { name: "The Strapless Column",
+          { name: "The Column",
             img: "#{image_path('super_collections/silhouettes/strapless-column.jpg')}",
             img_mobile: "#{image_path('super_collections/silhouettes/strapless-column-mobile.jpg')}",
             url: "/slip-bridesmaid-dress" },
