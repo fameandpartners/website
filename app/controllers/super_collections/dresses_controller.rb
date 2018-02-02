@@ -25,7 +25,6 @@ class SuperCollections::DressesController < ApplicationController
       footer: {
         img: "#{image_path('super_collections/bottom.jpg')}",
         img_tablet: "#{image_path('super_collections/bottom-tablet.jpg')}",
-        img_mobile: "#{image_path('super_collections/bottom-mobile.jpg')}",
         url: "/find-your-bridesmaid-dress",
       },
       sections: [
