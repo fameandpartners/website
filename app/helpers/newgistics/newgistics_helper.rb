@@ -1,8 +1,8 @@
 module Newgistics
 	module NewgisticsHelper
 
-    KENTUCKY_CONST = {'merchant_id' => configatron.newgistics.kentucky_merchant_id, 'rule_set' => configatron.newgistics.kentucky_rule_set}
-		CALIFORNIA_CONST = {'merchant_id' => configatron.newgistics.california_merchant_id, 'rule_set' => configatron.newgistics.california_rule_set}
+    	KENTUCKY_CONST = 'KENTUCKY'
+		CALIFORNIA_CONST = 'CALIFORNIA'
 
 		STATE_LOCATION_HASH = { 
 			"Maine" => KENTUCKY_CONST,
@@ -138,10 +138,10 @@ module Newgistics
 		# TODO: Not Currently used but once we have a european location this saves time figuring out th europe list
     
 		def get_facitily_by_location(address)
-			if address.country_id != 49 # is international
-				facility = KENTUCKY_CONST
+			if address.country_id != 49  ||  STATE_LOCATION_HASH[address.state.name] == KENTUCKY_CONST
+				facility =  {'merchant_id' => configatron.newgistics.kentucky_merchant_id, 'rule_set' => configatron.newgistics.kentucky_rule_set}
 			else
-				facility = STATE_LOCATION_HASH[address.state.name]
+				facility = {'merchant_id' => configatron.newgistics.california_merchant_id, 'rule_set' => configatron.newgistics.california_rule_set}
 			end
 			facility
 		end
