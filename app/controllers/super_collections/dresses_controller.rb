@@ -210,7 +210,11 @@ class SuperCollections::DressesController < ApplicationController
 
   def theme
     @theme = Theme.find_by_name(params[:theme])
-    @result = JSON.parse(@theme)
+    if @theme
+      @result = JSON.parse(@theme.collection)
+    else
+      render :status => 404
+    end
   end
 
   private
