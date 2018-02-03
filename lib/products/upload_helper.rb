@@ -281,12 +281,12 @@ module Products
         product[:customization_ids].each do |cust_id| #Doesnt handle combinations
           if prd.name.downcase != 'jumpsuit'
             cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: theme_json[:length].capitalize).first #need to handle Jumpsuit BS
-            theme_json[:colors].each do |color|           
+            theme_json[:colors].each do |color|  
                 theme_result << create_themes_object(prd,cv, color)
             end
           else
             cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: JUMPSUIT_LENGTH_MAP[theme_json[:length].capitalize]).first #need to handle Jumpsuit BS
-            theme_json[:colors].each do |color|           
+            theme_json[:colors].each do |color|      
                 theme_result << create_themes_object(prd,cv, color)
             end
             theme_result << create_themes_object_for_jumpsuit(prd,cv, color)
@@ -295,6 +295,7 @@ module Products
       end
 
       theme.collection = theme_result.to_json
+      theme.save!
       theme
     end
 

@@ -180,23 +180,7 @@ class CADCustomize extends Component {
   generateAddonOptions() {
     const { addonOptions } = this.props;
 
-    return addonOptions.map((a) => {
-      const displayPrice = parseFloat((
-        a.price.money.fractional /
-        a.price.money.currency.subunit_to_unit
-      ));
-
-      return (
-        <li
-          role="button"
-          key={`addon-option-${a.id}`}
-          className={`clearfix noselect CAD--addon-list-item ${a.active ? 'is-selected' : ''}`}
-          onClick={this.handleAddonSelection(a)}
-        >
-          <span className="price pull-right noselect"> + ${displayPrice}</span>
-          <span className="name noselect">{a.name}</span>
-        </li>
-      );
+    
     });
   }
 

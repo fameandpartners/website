@@ -209,6 +209,7 @@ class SuperCollections::DressesController < ApplicationController
   end
 
   def theme
+    binding.pry
     @theme = Theme.find_by_name(params[:theme_name])
     if @theme
       @result = JSON.parse(@theme.collection)
