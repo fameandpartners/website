@@ -134,7 +134,7 @@ module Products
           OpenStruct.new({
             id: value['id'],
             name: value['presentation'],
-            image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
+            image: value['image_file_name'].present? ? get_customisation_value(value['id'])&.image&.url : 'logo_empty.png',
             display_price: Spree::Money.new(price, currency: product_making_options.first.currency, no_cents: true),
             position: value['position'],
             group: value['group']
@@ -156,6 +156,10 @@ module Products
           end
         end
         result.compact
+      end
+
+      def get_customisation_value(customisation_value_id)
+        cv = CustomisationValue.find(customisation_value_id)
       end
 
       def customisations_incompatibility_map
