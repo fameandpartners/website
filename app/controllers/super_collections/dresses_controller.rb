@@ -11,6 +11,11 @@ class SuperCollections::DressesController < ApplicationController
   before_filter :redirect_undefined,
                 :redirect_site_version
 
+  def index
+    title('Custom Bridesmaid Dress Collection Page', default_seo_title)
+    description('Fully customizable bridesmaid dresses, tailored to your wedding theme, colors, and each bridesmaids\' individual needs.')
+  end
+
   def show
 
     title('Custom Bridesmaid Dress Collections', default_seo_title)
@@ -202,6 +207,16 @@ class SuperCollections::DressesController < ApplicationController
     }
   end
 
+  def theme
+    binding.pry
+    @theme = Theme.find_by_name(params[:theme_name])
+    if @theme
+      @result = JSON.parse(@theme.collection)
+    else
+      render :status => 404
+    end
+  end
+
   private
 
   def image_path(image)
@@ -222,4 +237,21 @@ class SuperCollections::DressesController < ApplicationController
       redirect_to '/undefined', status: :moved_permanently
     end
   end
+
+
+  def current_currency
+    @current_currency ||= (site_version.try(:currency).to_s.upcase || 'USD')
+  end
+
+  def site_version
+      @current_site_version ||= begin
+        ::FindUsersSiteVersion.new(
+            user:         current_spree_user,
+            url_param:    request.env['site_version_code'],
+            cookie_param: session[:site_version]
+        ).get
+      end
+  end
+
+
 end

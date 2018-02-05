@@ -1,0 +1,5 @@
+- cache ['views/data/_theme'] do
+javascript:
+  window.__themeData__ = {
+    data: #{raw @theme.to_json}
+  };

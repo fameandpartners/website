@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
+-- Dumped from database version 9.6.6
 -- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
@@ -2485,6 +2485,38 @@ ALTER SEQUENCE product_style_profiles_id_seq OWNED BY product_style_profiles.id;
 
 
 --
+-- Name: product_to_orderbot_product_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE product_to_orderbot_product_groups (
+    id integer NOT NULL,
+    product_id integer,
+    orderbot_product_group_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE product_to_orderbot_product_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: product_to_orderbot_product_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE product_to_orderbot_product_groups_id_seq OWNED BY product_to_orderbot_product_groups.id;
+
+
+--
 -- Name: questions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3381,8 +3413,8 @@ CREATE TABLE spree_line_items (
     color character varying(255),
     size character varying(255),
     length character varying(255),
-    upc character varying(255),
-    customizations jsonb
+    customizations jsonb,
+    upc character varying(255)
 );
 
 
@@ -4899,7 +4931,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text NOT NULL
+    user_data text DEFAULT '{}'::text
 );
 
 
@@ -5095,6 +5127,38 @@ CREATE SEQUENCE styles_id_seq
 --
 
 ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
+
+
+--
+-- Name: themes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE themes (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    color jsonb,
+    collection jsonb
+);
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE themes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE themes_id_seq OWNED BY themes.id;
 
 
 --
@@ -5935,6 +5999,13 @@ ALTER TABLE ONLY product_style_profiles ALTER COLUMN id SET DEFAULT nextval('pro
 
 
 --
+-- Name: product_to_orderbot_product_groups id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_to_orderbot_product_groups ALTER COLUMN id SET DEFAULT nextval('product_to_orderbot_product_groups_id_seq'::regclass);
+
+
+--
 -- Name: questions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6422,6 +6493,13 @@ ALTER TABLE ONLY style_to_product_height_range_groups ALTER COLUMN id SET DEFAUL
 --
 
 ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::regclass);
+
+
+--
+-- Name: themes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes ALTER COLUMN id SET DEFAULT nextval('themes_id_seq'::regclass);
 
 
 --
@@ -7022,6 +7100,14 @@ ALTER TABLE ONLY product_style_profiles
 
 
 --
+-- Name: product_to_orderbot_product_groups product_to_orderbot_product_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_to_orderbot_product_groups
+    ADD CONSTRAINT product_to_orderbot_product_groups_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: questions questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7571,6 +7657,14 @@ ALTER TABLE ONLY style_to_product_height_range_groups
 
 ALTER TABLE ONLY styles
     ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: themes themes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes
+    ADD CONSTRAINT themes_pkey PRIMARY KEY (id);
 
 
 --
@@ -9493,10 +9587,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9719,6 +9809,10 @@ INSERT INTO schema_migrations (version) VALUES ('20170607040735');
 
 INSERT INTO schema_migrations (version) VALUES ('20170607184815');
 
+INSERT INTO schema_migrations (version) VALUES ('20170608005536');
+
+INSERT INTO schema_migrations (version) VALUES ('20170608044047');
+
 INSERT INTO schema_migrations (version) VALUES ('20170608215959');
 
 INSERT INTO schema_migrations (version) VALUES ('20170609001931');
@@ -9733,15 +9827,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9760,8 +9848,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
-
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
@@ -9797,4 +9883,6 @@ INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
 
-INSERT INTO schema_migrations (version) VALUES ('20180131220110');
+INSERT INTO schema_migrations (version) VALUES ('20180131211009');
+
+INSERT INTO schema_migrations (version) VALUES ('20180607184815');
