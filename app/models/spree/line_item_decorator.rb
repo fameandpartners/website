@@ -39,6 +39,11 @@ Spree::LineItem.class_eval do
     end
   end
 
+  def customizations
+    super ||
+    CustomisationValue.where(id: self.personalization&.customization_value_ids || []).to_json
+  end
+
   def delivery_period_policy
     @delivery_period_policy ||= Policies::LineItemDeliveryPolicy.new(self)
   end
