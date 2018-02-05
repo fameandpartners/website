@@ -279,17 +279,22 @@ module Products
       theme_json[:products].each do |product|
         prd = Spree::Variant.find_by_sku(product[:style_number]).product
         product[:customization_ids].each do |cust_id| #Doesnt handle combinations
+          length_customizations = JSON.parse(prd.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
           if prd.name.downcase != 'jumpsuit'
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(theme_json[:length].downcase) }.first
+            cust_id = cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_')
             cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: theme_json[:length].capitalize).first #need to handle Jumpsuit BS
             theme_json[:colors].each do |color|  
-                theme_result << create_themes_object(prd,cv, color)
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
             end
           else
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(JUMPSUIT_LENGTH_MAP[theme_json[:length].capitalize].downcase) }.first
+            cust_id = cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_')
             cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: JUMPSUIT_LENGTH_MAP[theme_json[:length].capitalize]).first #need to handle Jumpsuit BS
             theme_json[:colors].each do |color|      
-                theme_result << create_themes_object(prd,cv, color)
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
             end
-            theme_result << create_themes_object_for_jumpsuit(prd,cv, color)
+            #theme_result << create_themes_object_for_jumpsuit(prd,cv, color, selected_length_cust)
           end
         end
       end
@@ -300,10 +305,7 @@ module Products
     end
 
 
-    def create_themes_object(product, cust_viz, color)
-      length_customizations = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
-      selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(cust_viz.length.downcase) }.first
-      length_customization_ids = length_customizations.map {|y| y['customisation_value']['id']}
+    def create_themes_object(product, cust_viz, color, selected_length_cust)
       theme_object = {}
       theme_object[:product_name] = "#{cust_viz.length} Length #{cust_viz.silhouette} Dress with #{cust_viz.neckline} #{cust_viz.neckline.include?('Neckline') ? '' : 'Neckline'}"
       theme_object[:id] = cust_viz.id
@@ -318,10 +320,9 @@ module Products
       theme_object
     end
 
-    def create_themes_object_for_jumpsuit(product, cust_viz, color)
+    def create_themes_object_for_jumpsuit(product, cust_viz, color, selected_length_cust)
       length_customizations = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
       selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(cust_viz.length.downcase) }.first
-      length_customization_ids = length_customizations.map {|y| y['customisation_value']['id']}
       theme_object = {}
       theme_object[:product_name] = "#{cust_viz.length} Length #{cust_viz.silhouette} Dress with #{cust_viz.neckline} #{cust_viz.neckline.include?('Neckline') ? '' : 'Neckline'}"
       theme_object[:id] = cust_viz.id
