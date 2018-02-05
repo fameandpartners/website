@@ -2,11 +2,33 @@ module UserCart
   class CartProductPresenter < OpenStruct
     include ApplicationHelper
 
-    def serialize
+
+    COLOR_MAP = {
+      'Bright Turquoise' => '0000',
+      'Pale Blue' => '0001',
+      'Blush' =>'0002',
+      'Guava' => '0003',
+      'Burgundy' => '0004',
+      'Champagne' => '0005',
+      'Ivory' => '0006',
+      'Lilac' => '0007',
+      'Mint' => '0008',
+      'Pale Grey' => '0009',
+      'Pale Pink' => '0010',
+      'Peach' => '0011',
+      'Red' => '0012',
+      'Royal Blue' => '0013',
+      'Black' => '0014',
+      'Sage Green' => '0015',
+      'Berry'=> '0016',
+      'Navy' => '0017',
+    }
+
+    def  serialize
       result = self.marshal_dump.clone
       result[:price] = price.marshal_dump
       result[:discount] = discount if discount.present?
-      result[:image] = image.marshal_dump if image.present?
+      result[:image] = generate_image
       result[:size] = size.marshal_dump if size.present?
       result[:color] = color if color.present?
       result[:from_wedding_atelier] = from_wedding_atelier
@@ -51,6 +73,25 @@ module UserCart
       result[:available_making_options] = avo.compact
 
       result
+    end
+
+    private
+
+    def generate_image
+      if brides_maid
+        customization_ids = customizations.reject{|y| y['customisation_value']['id'][0].downcase == 'l'}.map{|x| x['customisation_value']['id']}.sort.join('-')
+        customization_ids = customization_ids.blank? ? 'default' : customization_ids
+        return {
+                :id => 0,
+          :position => 0,
+          :original => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
+             :large => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
+            :xlarge => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/800x800/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
+             :small => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png" 
+        }
+      else
+        return image.marshal_dump if image.present?
+      end
     end
   end
 end
