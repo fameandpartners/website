@@ -345,10 +345,10 @@ FameAndPartners::Application.routes.draw do
     ###########
     # Super Collections
     ###########
-
-    scope '/custom_dresses', module: :super_collections do
-      get '/bridesmaid' => 'dresses#show'
+    scope '/custom-bridesmaid-dress-collections', module: :super_collections do
+      root to: 'dresses#show', :as => :custom_bridesmaid_dress_collections_page
     end
+
 
     ###########
     # User Cart
