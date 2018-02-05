@@ -1,0 +1,5 @@
+- cache ['views/data/_super_collection'] do
+javascript:
+    window.SuperCollectionData = {
+      data: #{raw @super_collection.to_json}
+    };
