@@ -1,22 +1,25 @@
-
 module Products
   module UploadHelper
 
     def create_or_update_products(product_json)
       #info "Creating or Update Products"
-      upload = JSON.parse(product_json, :symbolize_names => true) 
+
+      # Not quite - Spree::OptionType.size.option_values.collect(&:name)
+      sizes = %w(
+        US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
+        US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
+      )
+
+      catty_dress = Category.where(category: 'Bridesmaids', subcategory: 'Dresses').first_or_create({ category: 'Bridesmaids', subcategory: 'Dresses' })
+      catty_jump = Category.where(category: 'Bridesmaids', subcategory: 'Jumpsuits').first_or_create({ category: 'Bridesmaids', subcategory: 'Jumpsuits' })
+
+      upload = JSON.parse(product_json, :symbolize_names => true)
       upload.map do |prod|
         begin
 
           min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
 
           product = create_or_update_product(prod, min_length)
-
-          # Not quite - Spree::OptionType.size.option_values.collect(&:name)
-          sizes = %w(
-            US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
-            US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
-          )
 
           details = prod[:details]
 
@@ -38,6 +41,8 @@ module Products
 
           product.hidden = false #MIGHT MOVE THIS
           product.available_on = product.created_at
+
+          product.category = product.name.include?('Dress') ? catty_dress : catty_jump
 
           product.save!
 
@@ -152,11 +157,11 @@ module Products
                  'factory_name'
                  ]
 
-      
+
       allowed.each {|property_name| product.set_property(property_name, details[property_name])}
 
       product.set_property('care_instructions',"Professional dry-clean only.\nSee label for further details.") #always this value
-      
+
       if factory = Factory.find_by_name(details[:factory_name].try(:capitalize))
         product.factory = factory
       end
@@ -219,8 +224,8 @@ module Products
 
       custs.each do |customization|
         new_customization = {
-                              id: customization[:code].downcase, 
-                              name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
+                              id: customization[:code].downcase,
+                              name: customization[:customization_presentation].downcase.gsub(' ', '-'),
                               price: customization[:price_usd],
                               price_aud: customization[:price_aud],#TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
@@ -243,10 +248,10 @@ module Products
         silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
         neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
         render_urls = color_map.to_json
-        cust[:lengths].each do |length|         
+        cust[:lengths].each do |length|
           cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
                                          .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
+
           cv.render_urls = render_urls
           cv.incompatible_ids = length[:incompatability_list].map{ |x| customizations.select{|y| y[:customization_id] == x}.first[:code].downcase }.join(',') #never manipulated so just put it in as ta string and split on return
           cv.save!
@@ -258,7 +263,7 @@ module Products
       master_variant = product.master
 
       master_variant.style_to_product_height_range_groups = []
-      
+
       product_height_groups = ProductHeightRangeGroup.default_six
 
       product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }
@@ -272,7 +277,7 @@ module Products
     #   product_details[:lengths].each do |length|
     #      cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
     #                                      .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
+
     #       cv.render_urls = render_urls
     #       cv.incompatible_ids = "" #never manipulated so just put it in as ta string and split on return
     #       cv.save!
