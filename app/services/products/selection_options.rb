@@ -128,6 +128,7 @@ module Products
       end
 
       def available_product_customisations
+        display_currency = product_making_options.first.try(:currency) || site_version.currency
         product_customisation_values.map do |value|
           value = value['customisation_value']
           price = site_version.currency == 'AUD' && value['price_aud']  ? value['price_aud'] : value['price']
@@ -135,7 +136,7 @@ module Products
             id: value['id'],
             name: value['presentation'],
             image: value['image_file_name'].present? ? get_customisation_value(value['id'])&.image&.url : 'logo_empty.png',
-            display_price: Spree::Money.new(price, currency: product_making_options.first.currency, no_cents: true),
+            display_price: Spree::Money.new(price, currency: display_currency, no_cents: true),
             position: value['position'],
             group: value['group']
           })
