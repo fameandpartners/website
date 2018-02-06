@@ -34,4 +34,23 @@ module BridesmaidHelper
 	    }
     end
 
+    def get_or_create_global_sku(style_number, product_name, size, color_name, height, selected_customizations)
+    	customizations = Array.wrap(selected_customizations)
+
+    	sku = GlobalSku.where(style_number: style_number, product_name: product_name, size: size, color_name: color_name, height: height, customizations: customizations).first
+	    
+	    unless sku
+		    sku = GlobalSku::Create.new(
+		      style_number:   style_number,
+		      product_name:   style_name,
+		      size:           size,
+		      color_name:     colour_name,
+		      height:         height,
+		      customizations: customizations
+		    ).call
+		end
+
+		sku
+  	end
+
 end
