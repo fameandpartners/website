@@ -1,6 +1,6 @@
 @import 'redesign/mixins';
 
-.page-content.index {
+.page-homepage {
 
   .hero-wrap {
     margin-bottom: 0;
@@ -36,7 +36,11 @@
   }
 
   .section-style-icon {
-    margin-bottom: 50px;
+    margin-bottom: 35px;
+  }
+
+  .section-instagram {
+    margin-bottom: 40px;
   }
 
   .section-style-icon .cta-link-center-padding {
@@ -44,6 +48,11 @@
     min-width: 50%;
     margin: 0 auto;
     text-align: center;
+  }
+
+  .SocialCta {
+    margin-top: 20px;
+    display: block;
   }
 
   @media (min-width: $bootstrap-md-width) {

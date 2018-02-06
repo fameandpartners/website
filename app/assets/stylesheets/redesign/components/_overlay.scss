@@ -68,6 +68,35 @@
 
 }
 
+// CTA over promo tiles
+.ctaOverlay__container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+// CTA Alignment: Top - Left
+.ctaOverlay__copy--top-left {
+  display: block;
+  max-width: 42%;
+}
+
+.ctaOverlay__copyLink {
+  border-bottom: 1px solid $c-neutral-4;
+}
+
+@media (min-width: $bootstrap-lg-width) {
+
+  .ctaOverlay__copy--top-left {
+    padding: 40px 30px;
+  }
+
+  .ctaOverlay__copyLink {
+    margin-left: 10px;
+  }
+
+}
+
 @media (min-width: $bootstrap-md-width) {
 
   .cta-hover {
@@ -89,6 +118,18 @@
       display: none;
     }
 
+  }
+
+}
+
+@media (max-width: $bootstrap-lg-width - 1px) {
+
+  .ctaOverlay__copy--top-left {
+    padding: 30px 20px;
+  }
+
+  .ctaOverlay__copyLink {
+    display: table;
   }
 
 }

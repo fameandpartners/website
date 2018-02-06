@@ -17,7 +17,7 @@ class SuperCollections::DressesController < ApplicationController
   end
 
   def show
-
+    @swatch_colors = fabric_swatch_colors.to_json
     title('Custom Bridesmaid Dress Collections', default_seo_title)
     description('Fully customizable bridesmaid dresses, tailored to your wedding theme, colors, and each bridesmaids\' individual needs.')
 
@@ -30,7 +30,6 @@ class SuperCollections::DressesController < ApplicationController
       footer: {
         img: "#{image_path('super_collections/bottom.jpg')}",
         img_tablet: "#{image_path('super_collections/bottom-tablet.jpg')}",
-        img_mobile: "#{image_path('super_collections/bottom-mobile.jpg')}",
         url: "/find-your-bridesmaid-dress",
       },
       sections: [
@@ -73,7 +72,7 @@ class SuperCollections::DressesController < ApplicationController
         { type: 'shop_by', title: 'Silhouette', grid_class: 'grid-2_sm-1_xs-1',
           sections: [
 
-          { name: "The Strapless Column",
+          { name: "The Column",
             img: "#{image_path('super_collections/silhouettes/strapless-column.jpg')}",
             img_mobile: "#{image_path('super_collections/silhouettes/strapless-column-mobile.jpg')}",
             url: "/slip-bridesmaid-dress" },
@@ -208,6 +207,16 @@ class SuperCollections::DressesController < ApplicationController
     }
   end
 
+  def theme
+    @swatch_colors = fabric_swatch_colors.to_json
+    @theme = Theme.find_by_name(params[:theme_name])
+    if @theme
+      @result = JSON.parse(@theme.collection)
+    else
+      render :status => 404
+    end
+  end
+
   private
 
   def image_path(image)
@@ -228,4 +237,21 @@ class SuperCollections::DressesController < ApplicationController
       redirect_to '/undefined', status: :moved_permanently
     end
   end
+
+
+  def current_currency
+    @current_currency ||= (site_version.try(:currency).to_s.upcase || 'USD')
+  end
+
+  def site_version
+      @current_site_version ||= begin
+        ::FindUsersSiteVersion.new(
+            user:         current_spree_user,
+            url_param:    request.env['site_version_code'],
+            cookie_param: session[:site_version]
+        ).get
+      end
+  end
+
+
 end
