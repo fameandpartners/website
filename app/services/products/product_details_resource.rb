@@ -255,18 +255,19 @@ class Products::ProductDetailsResource
     end
 
     def product_customisation_values
-      product.customisation_values.includes(:incompatibilities, :discounts => :sale)
+      JSON.parse(product.customizations) #customisation_values.includes(:incompatibilities, :discounts => :sale)
     end
 
     def available_product_customisations
       product_customisation_values.map do |value|
+        value = value['customisation_value']
         OpenStruct.new({
-          id: value.id,
-          name: value.presentation,
-          image: value.image.present? ? value.image.url : 'logo_empty.png',
-          price: value.price,
-          display_price: value.display_price,
-          discount: value.discounts.detect{ |discount| discount.sale.blank? || discount.sale.active? }
+          id: value['id'],
+          name: value['presentation'],
+          image: value['image'].present? ? value['image']['url'] : 'logo_empty.png',
+          price: value['price'],
+          display_price: Spree::Money.new(value['price'], currency: product.making_options.first.currency, no_cents: true),
+          discount: value['discounts'].detect{ |discount| discount['sale'].blank? || discount['sale'].active? } #TODO: Check on this discount crud.
         })
       end
     end
@@ -274,7 +275,7 @@ class Products::ProductDetailsResource
     def customisations_incompatibility_map
       result = {}
       product_customisation_values.each do |value|
-        result[value.id] = value.incompatibilities.map(&:incompatible_id)
+        result[value['customisation_value']['id'].to_i] = value['customisation_value']['incompatibilities'].map(&:incompatible_id)
       end
       result
     end

@@ -1,6 +1,6 @@
 @import 'redesign/mixins';
 
-.page-content.index {
+.page-homepage {
 
   .hero-wrap {
     margin-bottom: 0;
@@ -35,40 +35,12 @@
 
   }
 
-  .section-fame-story {
-
-    .item .cta-link-arrow-right {
-      font-size: 1rem;
-      display: block;
-      margin: 20px 0;
-    }
-
+  .section-style-icon {
+    margin-bottom: 35px;
   }
 
-  .section-styling {
-    padding-bottom: $box-padding-top;
-
-    .cta-link-alt {
-      margin-bottom: $box-padding-top;
-    }
-
-    .styling-session .item-copy {
-      padding: 0 15px 0 0;
-
-      p {
-        padding-right: 15px;
-      }
-
-    }
-
-    .itemCopy {
-      margin: 20px 0;
-    }
-
-  }
-
-  .section-social {
-    padding-top: $box-padding-top;
+  .section-instagram {
+    margin-bottom: 40px;
   }
 
   .section-style-icon .cta-link-center-padding {
@@ -76,6 +48,11 @@
     min-width: 50%;
     margin: 0 auto;
     text-align: center;
+  }
+
+  .SocialCta {
+    margin-top: 20px;
+    display: block;
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -94,11 +71,6 @@
 
     .btn-featured {
       margin-top: 15px;
-    }
-
-    .section-styling .styling-session {
-      margin-top: 30px;
-      padding-left: 15px;
     }
 
     .copy-align--top {
@@ -152,75 +124,9 @@
       padding-bottom: 10px;
     }
 
-    .section-fame-story {
-      margin-top: 15px;
-
-      .same-height-cols {
-        padding-top: 30px;
-        text-align: center;
-        border: solid $c-neutral-6 1px;
-
-        > .row {
-          margin: 0;
-        }
-
-        img {
-          @include filter(grayscale(100%));
-        }
-
-      }
-
-      .item {
-        padding: 0;
-        margin-bottom: 30px;
-
-        &.bordered {
-          border: none;
-        }
-
-        a {
-          pointer-events: none;
-          cursor: default;
-        }
-
-      }
-
-      .item-copy a {
-        display: none;
-      }
-
-      .btn-wrap {
-        margin-bottom: 50px;
-      }
-
-    }
-
-    .styling-session {
-      text-align: center;
-    }
-
-    .section-styling {
-      margin-top: 0;
-
-      .styling-session {
-        margin-top: $section-spacing-margin-top;
-
-        p,
-        .item-copy {
-          padding-right: 0;
-        }
-
-      }
-
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
-
-    .section-fame-story .item .item-copy {
-      min-height: 200px;
-    }
 
     .hero-wrap .heading .title--large {
       font-size: 6rem;
@@ -228,22 +134,6 @@
 
     .copy-align--top {
       margin-top: 50px;
-    }
-
-  }
-
-  @media (min-width: $bootstrap-sm-width) {
-
-    .section-styling .inline-btn:not(:nth-of-type(1)) {
-      margin-left: 15px;
-    }
-
-  }
-
-  @media (max-width: $bootstrap-sm-width - 1px) {
-
-    .section-styling .inline-btn {
-      display: block;
     }
 
   }

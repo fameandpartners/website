@@ -20,7 +20,9 @@ module Repositories
                 presentation: option_value.presentation,
                 value: option_value.value,
                 use_in_customisation: option_value.use_in_customisation,
-                image: option_value.image? ? option_value.image.url(:small_square) : nil
+                image: option_value.image? ? option_value.image.url(:small_square) : nil,
+                image_file_name: option_value.image_file_name_for_swatch
+
               }
               result
             end

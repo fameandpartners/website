@@ -43,7 +43,7 @@ RSpec.describe VariantSku do
       let(:colour_id) { Spree::OptionValue.where(:name => 'magenta').first.id.to_s }
 
       it 'contains a complete SKU' do
-        expect(sku).to eq "OMGWTFBBQUS10AU14C#{colour_id}"
+        expect(sku).to eq "OMGWTFBBQUS10AU14C#{colour_id}XHSD"
       end
 
       it 'includes the style number' do
@@ -51,7 +51,7 @@ RSpec.describe VariantSku do
       end
 
       it 'includes the colour id' do
-        expect(sku).to end_with("C#{colour_id}")
+        expect(sku).to end_with("C#{colour_id}XHSD")
       end
 
       it "includes the size name, without separating '/'" do

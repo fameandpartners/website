@@ -30,6 +30,10 @@ module Contentful
         cta = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
         image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : image
+        video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : video
+        path_link = (item.respond_to? :path_link) ? item.path_link : nil
+
         hero_tile_site_version_array = (item.respond_to? :hero_tile_site_version) ? item.hero_tile_site_version.sort.join(',').downcase : nil
 
         if hero_tile_site_version_array == "au" || hero_tile_site_version_array == "us"
@@ -44,7 +48,9 @@ module Contentful
           mobile_text: mobile_text,
           image: image,
           mobile_image: mobile_image,
-          link: item.path_link,
+          video: video,
+          mobile_video: mobile_video,
+          link: path_link,
           text_align: item.text_alignment,
           text_position: item.text_position,
           text_color: item.text_color,

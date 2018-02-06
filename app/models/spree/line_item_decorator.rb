@@ -31,10 +31,17 @@ Spree::LineItem.class_eval do
     if self.delivery_date.nil? && self.order.state != 'complete'
       self.delivery_date = delivery_period_policy.delivery_period
       self.save!
+      return self.delivery_date
+    elsif self.delivery_date && (self.order.state == 'complete' || self.order.state == 'resumed')
+      return self.delivery_date
     else
       return delivery_period_policy.delivery_period
     end
-    return self.delivery_date
+  end
+
+  def customizations
+    super ||
+    CustomisationValue.where(id: self.personalization&.customization_value_ids || []).to_json
   end
 
   def delivery_period_policy
@@ -97,6 +104,9 @@ Spree::LineItem.class_eval do
   end
 
   def options_text
+    if fabric_swatch?
+      return "Color: #{variant.option_values.colors.first.presentation}"
+    end
     if personalization.blank?
       variant.options_text
     else
@@ -149,7 +159,11 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    cart_item.try(:image).try(:large) || ''
+    if fabric_swatch?
+      self.variant.option_values.colors.first.image_file_name_for_swatch
+    else
+      cart_item.try(:image).try(:large) || ''
+    end
   end
 
   def size_name
@@ -158,6 +172,10 @@ Spree::LineItem.class_eval do
 
   def style_name
     variant.try(:product).try(:name) || 'Missing Variant'
+  end
+
+  def fabric_swatch?
+    self.product&.category&.category == 'Sample'
   end
 
   def store_credit_only_return?
@@ -173,23 +191,32 @@ Spree::LineItem.class_eval do
   end
 
   def window_closed?
-    created_at <= DateTime.now - 60
+    60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
   end
 
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
     json['line_item']['window_closed'] = self.window_closed?
-    json['line_item']['products_meta'] = {
-      "name": self.style_name,
-      "price": self.price,
-      "size": self.size_name,
-      "color": self.color_name,
-      "height": self.height_name,
-      "height_unit": self.height_unit,
-      "height_value": self.height_value,
-      "image": self.image_url
-    }
+    if self.fabric_swatch?
+      json['line_item']['products_meta'] = {
+        "name": self.style_name,
+        "price": self.price,
+        "color": self.color_name,
+        "image": self.image_url
+      }
+    else
+      json['line_item']['products_meta'] = {
+        "name": self.style_name,
+        "price": self.price,
+        "size": self.size_name,
+        "color": self.color_name,
+        "height": self.height_name,
+        "height_unit": self.height_unit,
+        "height_value": self.height_value,
+        "image": self.image_url
+      }
+    end
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
         "created_at_iso_mdy": self.item_return.created_at.strftime("%m/%d/%y"),
@@ -202,4 +229,27 @@ Spree::LineItem.class_eval do
     end
     json
   end
+
+  private
+
+  def period_in_business_days(period)
+      value = major_value_from_period(period)
+      period_units(period) == 'weeks' ? value * 5 : value
+  end
+
+  # returns days/weeks from string
+  def period_units(period)
+    period.match(/(?<=\d\s)[\w\s]+$/).to_s
+  end
+
+  # returns the larger number from the range in given string
+  def major_value_from_period(period)
+    period.match(/\d+(?=\s+\w+|$)/).to_s.to_i
+  end
+
+  # returns small number
+  def minor_value_from_period(period)
+    period.match(/\d+/).to_s.to_i
+  end
+
 end

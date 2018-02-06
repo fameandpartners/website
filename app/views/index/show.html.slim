@@ -3,7 +3,7 @@
 ruby:
   link_to_dresses = build_taxon_path('dresses')
 
-.page-content.index
+.page-homepage
 
   // Featured section
   .homepage-carousel.js-hero-tile-carousel
@@ -11,20 +11,20 @@ ruby:
   .homepage-carousel.js-shopping-spree-carousel.hidden
     = render 'shared/redesign/shopping_hero_carousel'
 
-  // Section: F&P Story boxes
-  = render 'fp_story_boxes'
-
   // Section: Categories tiles
   = render 'categories_tiles'
-
-  // Section: Styling
-  = render 'styling_info'
 
   // Section: Get Social - Instagram
   = render "get_social_instagram"
 
-  // Section: Social media
-  = render "social_media"
-
 - if @iec_order.present?
   = render  'iequalchange/post_message', spree_order: @iec_order
+
+
+javascript:
+  $(function(){
+    var countHeroTileVideo = $(".js-hero-tile-video").size();
+    for(i = 0; i < countHeroTileVideo; i++) {
+      $(".js-hero-tile-video").get(i).play();
+    }
+  });

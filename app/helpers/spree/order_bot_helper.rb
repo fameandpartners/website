@@ -80,8 +80,8 @@ module Spree
           end
         end
         
-        line_item.personalization.customization_values.each do |customization| #customizations
-          tag = get_or_create_tag("customization", customization.presentation)
+        JSON.parse(line_item.customizations).each do |customization| #customizations
+          tag = get_or_create_tag("customization", customization['customisation_value']['presentation'])
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
       
