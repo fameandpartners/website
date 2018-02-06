@@ -379,11 +379,7 @@ FameAndPartners::Application.routes.draw do
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-<<<<<<< HEAD
-=======
-
     get '/products/fabric-swatches' => 'products/fabric_swatches#index'
->>>>>>> master
 
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
