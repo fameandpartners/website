@@ -350,7 +350,6 @@ FameAndPartners::Application.routes.draw do
     ###########
 
     scope '/custom_dresses', module: :super_collections do
-      get '/bridesmaid' => 'dresses#show'
       get '/theme' => 'dresses#index'
       get '/theme/:theme_name' => 'dresses#theme'
     end
