@@ -319,10 +319,8 @@ FameAndPartners::Application.routes.draw do
     # Gingham & Stripes Category page
     get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
-    # Wedding Atelier App - Landing page
-    get '/wedding-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses'), as: :wedding_atelier_app_landing_page
-    # Redirection in case of misspelling
-    get '/weddings-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses')
+    # [LEGACY] Wedding Atelier App - Landing page
+    get '/wedding-atelier(/*anything)' => redirect('/coming-soon-custom-bridesmaid-dresses?utm_source=legacy-wedding-atelier'), as: :wedding_atelier_app_landing_page
 
     # Casual Summer Styles Collection Page
     get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
@@ -790,7 +788,6 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
-  mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
 end
 

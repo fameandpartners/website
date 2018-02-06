@@ -1,6 +1,6 @@
 - sub_heading = (params[:lps] || page.try(:sub_heading))
 - description = page.try(:description)
-- section_box_class_name = page.try(:get, 'section-box-class-name')
+- section_box_class_name = page.try(:get, :'section-box-class-name')
 
 - if sub_heading.blank? && description.blank?
   - sub_heading = 'MADE FOR YOU.'
