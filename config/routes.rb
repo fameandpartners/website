@@ -349,6 +349,11 @@ FameAndPartners::Application.routes.draw do
       root to: 'dresses#show', :as => :custom_bridesmaid_dress_collections_page
     end
 
+    scope '/custom_dresses', module: :super_collections do
+      get '/theme' => 'dresses#index'
+      get '/theme/:theme_name' => 'dresses#theme'
+    end
+
 
     ###########
     # User Cart
