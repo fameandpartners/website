@@ -98,7 +98,7 @@ module Api
         customized_products.each do |cp|
           product = cp.product
           length_customizations = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
-          selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(cp.length.downcase) }.first
+          selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?("to-#{cp.length.downcase}") }.first
           length_customization_ids = length_customizations.map {|y| y['customisation_value']['id']}
           customization_ids = cp.customization_ids.split('_').reject {|x| length_customization_ids.include?(x)}
           collection << {
