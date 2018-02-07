@@ -1,33 +1,14 @@
 module Feeds
   class Bridesmaids
+    include ProductsHelper
 
     SIZES = %w(
       US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
       US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
     )
 
-    COLORS = [
-      "Ivory",
-      "Pale Grey",
-      "Black",
-      "Champagne",
-      "Pale Pink",
-      "Blush",
-      "Peach",
-      "Guava",
-      "Red",
-      "Burgundy",
-      "Berry",
-      "Lilac",
-      "Navy",
-      "Royal Blue",
-      "Pale Blue",
-      "Mint",
-      "Bright Turquoise",
-      "Sage Green"
-    ].join(',')
-
     def generate_xml
+      colors = fabric_swatch_colors.map{|swatch| swatch[:color_name]}.join(', ')
       categories = Category.where(category: 'Bridesmaids').pluck(:id)
       products = Spree::Product.where(category_id: categories)
 
@@ -46,6 +27,7 @@ module Feeds
             xml.link 'https://www.fameandpartners.com'
 
             product.customization_visualizations.find_each do |cv|
+              calculate_price(cv)
             # product.customization_visualizations.take(1).each do |cv|
               # SIZES.each do |size|
                 # JSON.parse(cv.render_urls).each do |color_hash|
@@ -74,7 +56,7 @@ module Feeds
                     xml.tag! "product_type", "not-a-dress"
                     xml.tag! "g:gender", "Female"
                     xml.tag! "g:age_group", "Adult"
-                    xml.tag! "g:color", COLORS
+                    xml.tag! "g:color", colors
                     xml.tag! "g:size", ''
 
                     xml.tag! "g:item_group_id", '283'
@@ -113,6 +95,15 @@ module Feeds
         @lookup_customization[prd.name] = cust_hash
         @lookup_price[prd.name] = len_hash
       end
+      binding.pry
+    end
+
+    def calculate_price(cv)
+      binding.pry
+      cids_arr = cv.customization_ids.split('_')
+      base_price = @lookup_price[cv.product.name][cv.length]['price_usd'].to_i
+      add_ons_price = cids_arr.reduce {|total, id| total += @lookup_customization[cv.product.name][id]['price'].to_i}
+      sprintf('%.2f', (base_price + add_ons_price).to_f)
     end
 
     def get_rendered_image(cv, prd, color)
