@@ -1,7 +1,9 @@
 module UserCart
   class CartProductPresenter < OpenStruct
     include ApplicationHelper
+    include BridesmaidHelper  
 
+<<<<<<< HEAD
 
     COLOR_MAP = {
       'Bright Turquoise' => '0000',
@@ -24,6 +26,8 @@ module UserCart
       'Navy' => '0017',
     }
 
+=======
+>>>>>>> origin/swatch-bugs
     def  serialize
       result = self.marshal_dump.clone
       result[:price] = price.marshal_dump
@@ -79,6 +83,7 @@ module UserCart
 
     def generate_image
       if brides_maid
+<<<<<<< HEAD
         customization_ids = customizations.reject{|y| y['customisation_value']['id'][0].downcase == 'l'}.map{|x| x['customisation_value']['id']}.sort.join('-')
         customization_ids = customization_ids.blank? ? 'default' : customization_ids
         return {
@@ -89,6 +94,9 @@ module UserCart
             :xlarge => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/800x800/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
              :small => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{sku.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png" 
         }
+=======
+        return BridesmaidHelper.generate_image(customizations, length, sku, color)
+>>>>>>> origin/swatch-bugs
       else
         return image.marshal_dump if image.present?
       end
