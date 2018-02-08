@@ -276,28 +276,26 @@ module Products
     def setup_collection(theme_json_array)
       theme = Theme.where(name: theme_json_array.first[:url].gsub('/', '')).first_or_create(name: theme_json_array.first[:url].gsub('/', ''), presentation: theme_json_array.first[:title], color:theme_json_array.first[:colors].to_json)
       theme_result = []
-      theme_json_array.each do |theme_json|
-        theme_json[:products].each do |product|
-          prd = Spree::Variant.find_by_sku(product[:style_number]).product
-          product[:customization_ids].each do |cust_id| #Doesnt handle combinations
-            length_customizations = JSON.parse(prd.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
-            length = theme_json[:length].split('_').map{|x| x.capitalize}.join('-')
-            if prd.name.downcase != 'jumpsuit'
-              selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?("to-#{length.downcase}") }.first
-              cust_id =(cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_'))
-              cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: length).first #need to handle Jumpsuit BS
-              theme_json[:colors].each do |color|  
-                  theme_result << create_themes_object(prd,cv, color, selected_length_cust)
-              end
-            else
-              selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(JUMPSUIT_LENGTH_MAP[length].downcase) }.first
-              cust_id = cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_')
-              cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: JUMPSUIT_LENGTH_MAP[length]).first #need to handle Jumpsuit BS
-              theme_json[:colors].each do |color|      
-                  theme_result << create_themes_object(prd,cv, color, selected_length_cust)
-              end
-              #theme_result << create_themes_object_for_jumpsuit(prd,cv, color, selected_length_cust)
+      theme_json[:products].each do |product|
+        prd = Spree::Variant.find_by_sku(product[:style_number]).product
+        product[:customization_ids].each do |cust_id| #Doesnt handle combinations
+          length_customizations = JSON.parse(prd.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+          length = theme_json[:length].split('_').map{|x| x.capitalize}.join('-')
+          if prd.name.downcase != 'jumpsuit'
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?("to-#{length.downcase}") }.first
+            cust_id =(cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_'))
+            cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: length).first #need to handle Jumpsuit BS
+            theme_json[:colors].each do |color|  
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
             end
+          else
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(JUMPSUIT_LENGTH_MAP[length].downcase) }.first
+            cust_id = cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_')
+            cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: JUMPSUIT_LENGTH_MAP[length]).first #need to handle Jumpsuit BS
+            theme_json[:colors].each do |color|      
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
+            end
+            #theme_result << create_themes_object_for_jumpsuit(prd,cv, color, selected_length_cust)
           end
         end
       end
