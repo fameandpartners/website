@@ -226,7 +226,7 @@ class SuperCollections::DressesController < ApplicationController
   def redirect_site_version
     redirect_path = params.dig(:redirect, current_site_version.permalink.to_sym)
     if redirect_path.present?
-      redirect_to url_fo/custom-dressesr(redirect_path)
+      redirect_to url_for(redirect_path)
     end
   rescue NoMethodError => e
     # :noop:
@@ -247,7 +247,7 @@ class SuperCollections::DressesController < ApplicationController
       @current_site_version ||= begin
         ::FindUsersSiteVersion.new(
             user:         current_spree_user,
-            url_pa/custom-dressesram:    request.env['site_version_code'],
+            url_param:    request.env['site_version_code'],
             cookie_param: session[:site_version]
         ).get
       end
