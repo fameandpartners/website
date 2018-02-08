@@ -30,15 +30,15 @@ module BridesmaidHelper
 	      :original => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{style_number.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
 	         :large => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{style_number.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
 	        :xlarge => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{style_number.downcase}/800x800/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png",
-	         :small => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{style_number.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png" 
+	         :small => "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{style_number.downcase}/142x142/#{customization_ids}-#{length.downcase}-front-#{COLOR_MAP[color[:presentation]]}.png"
 	    }
     end
 
-    def get_or_create_global_sku(style_number, product_name, size, color_name, height, selected_customizations)
+    def self.get_or_create_global_sku(style_number, product_name, size, color_name, height, selected_customizations)
     	customizations = Array.wrap(selected_customizations)
 
-    	sku = GlobalSku.where(style_number: style_number, product_name: product_name, size: size, color_name: color_name, height: height, customizations: customizations&.map {|x| x['customisation_value']['id']}.sort.join(';').presence).first
-	    
+    	sku = GlobalSku.where(style_number: style_number, product_name: product_name, size: size, color_name: color_name, height_value: height, customizations: customizations&.map {|x| x['customisation_value']['id']}.sort.join(';').presence).first
+
 	    unless sku
 		    sku = GlobalSku::Create.new(
 		      style_number:   style_number,
