@@ -52,6 +52,10 @@ class PromotionsService
       promo.eligible_to_custom_order = true
       promo.eligible_to_sale_order   = false
       promo.save!
+
+      rule = Spree::Promotion::Rules::ItemTotal.new
+      rule.activator_id = promo.id
+      rule.save
       
       delete_old_promotions
       
@@ -145,6 +149,10 @@ class PromotionsService
       promo.eligible_to_custom_order = true
       promo.eligible_to_sale_order   = false
       promo.save!
+
+      rule = Spree::Promotion::Rules::ItemTotal.new
+      rule.activator_id = promo.id
+      rule.save
 
       calculator  = Spree::Calculator::FlatRate.create
       calculator.preferred_amount   = promo_amount1 + promo_amount2

@@ -11,7 +11,11 @@ class Products::FabricSwatchesController < Products::BaseController
                 :redirect_site_version
 
   def index
-    @swatches = fabric_swatch_colors
+    if current_site_version.code != 'us'
+      redirect_to '/'
+    else
+      @swatches = fabric_swatch_colors
+    end
   end
 
   private
