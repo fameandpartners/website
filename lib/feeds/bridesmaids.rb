@@ -7,8 +7,29 @@ module Feeds
       US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
     )
 
+    COLOR_MAP = {
+      'Bright Turquoise' => '0000',
+      'Pale Blue' => '0001',
+      'Blush' =>'0002',
+      'Guava' => '0003',
+      'Burgundy' => '0004',
+      'Champagne' => '0005',
+      'Ivory' => '0006',
+      'Lilac' => '0007',
+      'Mint' => '0008',
+      'Pale Grey' => '0009',
+      'Pale Pink' => '0010',
+      'Peach' => '0011',
+      'Red' => '0012',
+      'Royal Blue' => '0013',
+      'Black' => '0014',
+      'Sage Green' => '0015',
+      'Berry'=> '0016',
+      'Navy' => '0017',
+    }
+
     def generate_xml
-      colors = fabric_swatch_colors.map{|swatch| swatch[:color_name]}.join(', ')
+      colors = fabric_swatch_colors.map{|swatch| swatch[:color_name]}
       categories = Category.where(category: 'Bridesmaids').pluck(:id)
       products = Spree::Product.where(category_id: categories)
 
@@ -18,7 +39,6 @@ module Feeds
         xml = Builder::XmlMarkup.new
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
         file_path = Rails.root.join('public/feeds/us/products/', "bridesmaids-#{index}.xml")
-        binding.pry
         f = File.new(file_path , 'w')
 
         xml.rss "version" => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
@@ -29,36 +49,40 @@ module Feeds
 
             product.customization_visualizations.find_each do |cv|
               calculate_price(cv)
+
               customizations = cv_ids_to_customizations_json(cv, product.name)
-              xml.item do
-                xml.title "#{product.name}-#{cv.length} Length #{cv.silhouette} Dress with #{cv.neckline} #{cv.neckline.include?('Neckline') ? '' : 'Neckline'}"
-                xml.link "https://www.fameandpartners.com/bridesmaid-dresses/#{cv.id}?color=Ivory"
-                xml.description product.description
+              customization_ids = customizations.reject{|y| y['customisation_value']['id'][0].downcase == 'l'}.map{|x| x['customisation_value']['id']}.sort.join('-')
+              customization_ids = customization_ids.blank? ? 'default' : customization_ids
 
-                xml.tag! "events", 'Bridesmaids'
-                xml.tag! "styles", 'Long,Halter,Backless,Evening-Shop-Gown,Evening-Shop-Plunging,Dress'
-                xml.tag! "lookbooks", ''
+              colors.each do |color|
+                xml.item do
+                  xml.title "#{product.name}-#{cv.length} Length #{cv.silhouette} Dress with #{cv.neckline} #{cv.neckline.include?('Neckline') ? '' : 'Neckline'}"
+                  xml.link "https://www.fameandpartners.com/bridesmaid-dresses/#{cv.id}?color=#{color}&length=#{cv.length}"
+                  xml.description product.description
 
-                xml.tag! "g:id", cv.id.to_s
-                xml.tag! "g:condition", "new"
-                xml.tag! "g:price", calculate_price(cv)
-                xml.tag! "g:sale_price", ""
-                xml.tag! "g:availability", "in stock"
-                xml.tag! "g:image_link", BridesmaidHelper.generate_image(customizations, cv.length, product.master.sku, {presentation: 'Ivory'})[:xlarge]
-                xml.tag! "g:shipping_weight", ""
+                  xml.tag! "events", 'Bridesmaids'
+                  xml.tag! "styles", ''
+                  xml.tag! "lookbooks", ''
 
-                xml.tag! "g:google_product_category", "Bridal & Bridesmaids"
-                xml.tag! "product_type", "not-a-dress"
-                xml.tag! "g:gender", "Female"
-                xml.tag! "g:age_group", "Adult"
-                xml.tag! "g:color", colors
-                xml.tag! "g:size", ''
+                  xml.tag! "g:id", cv.id.to_s
+                  xml.tag! "g:condition", "new"
+                  xml.tag! "g:price", calculate_price(cv)
+                  xml.tag! "g:sale_price", ""
+                  xml.tag! "g:availability", "in stock"
+                  xml.tag! "g:image_link", "http://d1h7wjzwtdym94.cloudfront.net/renders/composites/#{product.master.sku.downcase}/142x142/#{customization_ids}-#{cv.length.downcase}-front-#{COLOR_MAP[color]}.png"
+                  xml.tag! "g:shipping_weight", ""
 
-                xml.tag! "g:item_group_id", '283'
+                  xml.tag! "g:google_product_category", "Bridal & Bridesmaids"
+                  xml.tag! "product_type", "not-a-dress"
+                  xml.tag! "g:gender", "Female"
+                  xml.tag! "g:age_group", "Adult"
+                  xml.tag! "g:color", color
+                  xml.tag! "g:size", ''
 
-                xml.tag! "g:mpn", ''
-
-                xml.tag! "g:brand", "Fame&Partners"
+                  xml.tag! "g:item_group_id", ''
+                  xml.tag! "g:mpn", ''
+                  xml.tag! "g:brand", "Fame&Partners"
+                end
               end
             end
           end
