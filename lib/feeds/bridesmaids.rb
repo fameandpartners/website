@@ -30,16 +30,22 @@ module Feeds
 
     def generate_xml
       colors = fabric_swatch_colors.map{|swatch| swatch[:color_name]}
-      categories = Category.where(category: 'Bridesmaids').pluck(:id)
+      categories = Category.where(subcategory: 'Bridesmaid Dresses').pluck(:id)
       products = Spree::Product.where(category_id: categories)
 
       memoize_values(products)
 
       products.each_with_index do |product, index|
+        file_dir = Rails.root.join('public/feeds/us/products/')
+        unless File.directory?(file_dir)
+          FileUtils.mkdir_p(file_dir)
+        end
+
+        file_path = "#{file_dir}bridesmaids-#{index}.xml"
+        f = File.new(file_path , 'w')
+
         xml = Builder::XmlMarkup.new
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
-        file_path = Rails.root.join('public/feeds/us/products/', "bridesmaids-#{index}.xml")
-        f = File.new(file_path , 'w')
 
         xml.rss "version" => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
           xml.channel do
