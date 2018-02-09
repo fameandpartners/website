@@ -35,10 +35,6 @@ class Products::DetailsController < Products::BaseController
       image_urls: JSON.parse(customized_product.render_urls).select {|x| x['color'] == params[:color]},
       selected_customizations: customized_product.customization_ids.split('_') | length_cust.map{ |x| x['customisation_value']['id'] },
       available_lengths: length_customizations.map { |x| { x['customisation_value']['id'] => x['customisation_value']['presentation'].split(' ')&.last } }.reduce(Hash.new, :merge),
-      # customization_incompatabilities: custs.map do |cust|
-      #   cvs = CustomizationVisualization.where(customization_ids: cust['customisation_value']['id'], product_id: base_product.id)
-        # {cust['customisation_value']['id'] => cvs.map {|cv| {cv.length => cv.incompatible_ids.split(',')} }}
-      # end,
       customization_incompatabilities: custs.map do |cust|
         cvs = CustomizationVisualization.where(customization_ids: cust['customisation_value']['id'], product_id: base_product.id)
           {
