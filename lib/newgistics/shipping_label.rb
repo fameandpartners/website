@@ -80,7 +80,7 @@ include Newgistics::NewgisticsHelper
       if Rails.env == 'production'
         {"returnId" => @return_id}
       else
-        {"returnId" => "123456789A"}
+        {"returnId" => "1234"}
       end
     end
 

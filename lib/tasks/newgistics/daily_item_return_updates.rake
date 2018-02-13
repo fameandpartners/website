@@ -19,7 +19,7 @@ namespace :newgistics do
       Raven.capture_exception(res['response'].to_s)
     else
       res['response']['Returns'].each do |item_return|
-        order = Spree::Order.find_by_number(item_return['RmaNumber'])
+        order = Spree::Order.find_by_id(item_return['RmaNumber'])
         unless order.autorefundable
           autorefund_items(item_return['Items'])
         end
