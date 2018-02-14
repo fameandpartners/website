@@ -1,3 +1,5 @@
+require 'fog'
+
 module Feeds
   class Bridesmaids
     include ProductsHelper
@@ -37,12 +39,12 @@ module Feeds
 
       products.each_with_index do |product, index|
         file_dir = Rails.root.join('public/feeds/us/products/')
-        unless File.directory?(file_dir)
-          FileUtils.mkdir_p(file_dir)
-        end
+        # unless File.directory?(file_dir)
+        #   FileUtils.mkdir_p(file_dir)
+        # end
 
         file_path = "#{file_dir}bridesmaids-#{index}.xml"
-        f = File.new(file_path , 'w')
+        # f = File.new(file_path , 'w')
 
         xml = Builder::XmlMarkup.new
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
@@ -151,6 +153,33 @@ module Feeds
       customizations_arr
     end
 
+    def save(xml, file_path)
+      Fog::Storage.new(storage_credentials).
+        directories.
+        get(ENV['AWS_S3_BUCKET']).
+        files.
+        create(
+          key:    file_path,
+          body:   xml,
+          public: true
+        )
+    end
+
+    def storage_credentials
+      storage_credentials = {
+        provider:        'AWS',
+        region:          ENV['AWS_S3_REGION'],
+        use_iam_profile: true
+      }
+
+      storage_credentials.tap do |credentials|
+        credentials.merge!({
+                             aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
+                             aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+                             use_iam_profile:       false
+                           }) if Rails.env.development?
+      end
+    end
 
   end
 end
