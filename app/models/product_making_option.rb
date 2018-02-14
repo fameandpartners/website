@@ -62,7 +62,7 @@ class ProductMakingOption < ActiveRecord::Base
     if fast_making?
       'Estimated Delivery in 2 weeks'
     else
-      'Estimated Delivery in 6 weeks'
+      'Estimated Delivery in 6 weeks + 2 weeks'
     end
   end
 
@@ -71,7 +71,7 @@ class ProductMakingOption < ActiveRecord::Base
     if fast_making?
       '2 weeks'
     else
-      '6 weeks'
+      'Estimated Delivery in 6 weeks + 2 weeks'
     end
   end
 

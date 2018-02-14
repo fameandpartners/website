@@ -4,10 +4,12 @@ module Policies
     DAYS_IN_FLIGHT_FAST = 3 # number of days for express delivery
 
     CNY_DELIVERY_PERIOD = '2 weeks'
-    FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
-    SLOW_MAKING_DELIVERY_PERIOD = "6 weeks"
+    FAST_MAKING_DELIVERY_PERIOD = '2 weeks'
+    SLOW_MAKING_DELIVERY_PERIOD = "8 weeks"
     SLOW_MAKING_DELIVERY_PERIOD_CNY = "6 weeks + 2 weeks"
     FLASH_SALE_MAKING_PERIOD = '5 - 7 business days'
+    OLD_SLOW_MAKING_DELIVERY_PERIOD = '6 weeks'
+    OLD_FAST_MAKING_DELIVERY_PERIOD = '4 - 6 business days'
     # SLOW_MAKING_DELIVERY_MAP = {  "7 - 10 business days" => "5 weeks",
     #                               "12 - 15 business days" => "5 weeks",
     #                               "3 - 4 weeks" => "5 weeks"
@@ -91,6 +93,14 @@ module Policies
       end
 
       if delivery_period == SLOW_MAKING_DELIVERY_PERIOD_CNY
+        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
+      end
+
+      if delivery_period == OLD_SLOW_MAKING_DELIVERY_PERIOD
+        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
+      end
+
+      if delivery_period == OLD_FAST_MAKING_DELIVERY_PERIOD
         return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
