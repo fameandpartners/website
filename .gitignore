@@ -100,3 +100,7 @@ Procfile.*
 
 * Ingore elb
 .elasticbeanstalk/
+public/feeds/us/products/bridesmaids-0.xml
+public/feeds/us/products/bridesmaids-1.xml
+public/feeds/us/products/bridesmaids-2.xml
+public/feeds/us/products/bridesmaids-3.xml
