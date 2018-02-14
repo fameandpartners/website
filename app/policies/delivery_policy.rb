@@ -14,8 +14,10 @@ module Policies
     #                               "12 - 15 business days" => "5 weeks",
     #                               "3 - 4 weeks" => "5 weeks"
     #                            }
-    FAST_MAKING_MAKE_TIME = "2 business days"
-    SLOW_MAKING_MAKE_TIME = "5 weeks"
+    OLD_FAST_MAKING_MAKE_TIME = "2 business days"
+    OLD_SLOW_MAKING_MAKE_TIME = '5 weeks' 
+    FAST_MAKING_MAKE_TIME = "12 business days"
+    SLOW_MAKING_MAKE_TIME = "7 weeks"
     STANDARD_MAKE_TIME_MAP = {
       "7 - 10 business days" => "5 business days",
       "12 - 15 business days" => "9 business days",
@@ -97,11 +99,11 @@ module Policies
       end
 
       if delivery_period == OLD_SLOW_MAKING_DELIVERY_PERIOD
-        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
+        return period_in_business_days(OLD_SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
       if delivery_period == OLD_FAST_MAKING_DELIVERY_PERIOD
-        return period_in_business_days(SLOW_MAKING_MAKE_TIME).business_days.after(order_completed_at)
+        return period_in_business_days(OLD_FAST_MAKING_MAKE_TIME).business_days.after(order_completed_at)
       end
 
       if delivery_period == FLASH_SALE_MAKING_PERIOD
