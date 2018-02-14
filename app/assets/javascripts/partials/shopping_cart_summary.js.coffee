@@ -84,7 +84,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     !@hasReturnInsurance()
 
   optInReminderModal: () ->
-    if (!sessionStorage.getItem('returnModalShown'))
+    if ( @containsNonSwatchItems() && !sessionStorage.getItem('returnModalShown'))
       new window.page.FlexibleReturnsModal(@whichReturnType())
       $(".ReturnModal").on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
       sessionStorage.setItem('returnModalShown', true)
@@ -98,6 +98,10 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     if (@hasReturnInsurance())
       $('.js-returns-trigger').prop('checked', true)
       $('.js-returns-abc-option-message').removeClass('hidden');
+
+  containsNonSwatchItems: () ->
+    lineItems = @cart.data.products.filter (i) -> i.swatch == false
+    lineItems.length > 0
 
   findReturnInsuranceLineItem: () ->
     @cart.data.products.filter((p) -> return p.name == 'RETURN_INSURANCE')

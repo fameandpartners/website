@@ -1,12 +1,13 @@
 module UserCart
   class CartProductPresenter < OpenStruct
     include ApplicationHelper
+    include BridesmaidHelper  
 
-    def serialize
+    def  serialize
       result = self.marshal_dump.clone
       result[:price] = price.marshal_dump
       result[:discount] = discount if discount.present?
-      result[:image] = image.marshal_dump if image.present?
+      result[:image] = generate_image
       result[:size] = size.marshal_dump if size.present?
       result[:color] = color if color.present?
       result[:from_wedding_atelier] = from_wedding_atelier
@@ -51,6 +52,16 @@ module UserCart
       result[:available_making_options] = avo.compact
 
       result
+    end
+
+    private
+
+    def generate_image
+      if brides_maid
+        return BridesmaidHelper.generate_image(customizations, length, sku, color)
+      else
+        return image.marshal_dump if image.present?
+      end
     end
   end
 end

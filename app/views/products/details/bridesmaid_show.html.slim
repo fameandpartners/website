@@ -20,9 +20,11 @@ ruby:
     window.PdpDataFull = {
       product: #{raw @bridesmaid_data[:product].to_json},
       discount: #{raw @product_discount},
+      incompatibleIds: #{raw @bridesmaid_data[:incompatible_ids]},
       images: #{raw @bridesmaid_data[:product].all_images.to_json},
       selectedCustomizations: #{raw @bridesmaid_data[:selected_customizations].to_json},
       availableLengths: #{raw @bridesmaid_data[:available_lengths].to_json},
+      singleCustomizationIncompatabilities: #{raw @bridesmaid_data[:customization_incompatabilities].to_json},
       sizeChart: #{raw @bridesmaid_data[:product].size_chart_data.to_json},
       siteVersion: #{raw @current_site_version.name.to_json}
     };

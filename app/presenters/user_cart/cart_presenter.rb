@@ -18,6 +18,7 @@ class UserCart::CartPresenter < OpenStruct
       taxes: taxes,
       masterpass_available: masterpass_available?,
       masterpass_is_production: masterpass_is_production?,
+      all_fabric_swatches: all_fabric_swatches,
       delivery_delay: Features.active?(:cny_delivery_delays),
       delivery_discount: "$#{('%.2f' %(display_item_total.money.fractional.to_f/1000).round(2)).to_s}"
     }

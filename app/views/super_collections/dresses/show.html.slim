@@ -1,0 +1,15 @@
+ruby:
+  url_params    = params.except(:controller, :action, :product_slug)
+  @current_site_version = current_site_version
+
+/ Application State Data for new header (e.g. Cart)...
+= render :partial => '/layouts/custom_experience/application_state_data/application_state_data'
+= render :partial => '/data/super_collection'
+= render :partial => '/data/bridesmaids_filter'
+
+link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['superCollectionCssBundle']}"
+
+div#super-collection-root.__SuperCollections__wrapper
+
+= content_for :microservice_js do
+  script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['superCollectionJsBundle']}"

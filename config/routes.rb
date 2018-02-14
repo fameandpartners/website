@@ -344,6 +344,18 @@ FameAndPartners::Application.routes.draw do
     post '/shared/facebook' => 'competition/events#share'
 
     ###########
+    # Super Collections
+    ###########
+    scope '/custom-bridesmaid-dress-collections', module: :super_collections do
+      root to: 'dresses#show', :as => :custom_bridesmaid_dress_collections_page
+    end
+    
+    scope '/custom-dresses', module: :super_collections do
+      get '/:theme_name' => 'dresses#theme'
+    end
+
+
+    ###########
     # User Cart
     ###########
     scope '/user_cart', module: 'user_cart' do

@@ -1,6 +1,13 @@
 
 module Products
   module UploadHelper
+    JUMPSUIT_LENGTH_MAP = {
+      "Micro-Mini" => "Cheeky",
+      "Mini" => "Short",
+      "Maxi" => "Full",
+      "Midi" => "Midi",
+      "Ankle" => "Ankle",
+    }
 
     def create_or_update_products(product_json)
       #info "Creating or Update Products"
@@ -221,8 +228,8 @@ module Products
         new_customization = {
                               id: customization[:code].downcase, 
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
-                              price: customization[:price_usd],
-                              price_aud: customization[:price_aud],#TODO: add this to the json being sent
+                              price: customization[:price_usd] || "0",
+                              price_aud: customization[:price_aud] || "0",#TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],
                               required_by: customization[:required_by],
                               group: customization[:group_name]
@@ -265,6 +272,101 @@ module Products
 
       master_variant.save
     end
+
+    def setup_collection(theme_json_array)
+      theme = Theme.where(name: theme_json_array.first[:url].gsub('/', '')).first_or_create(name: theme_json_array.first[:url].gsub('/', ''), presentation: theme_json_array.first[:title], color:theme_json_array.first[:colors].to_json)
+      theme_result = []
+      theme_json[:products].each do |product|
+        prd = Spree::Variant.find_by_sku(product[:style_number]).product
+        product[:customization_ids].each do |cust_id| #Doesnt handle combinations
+          length_customizations = JSON.parse(prd.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+          length = theme_json[:length].split('_').map{|x| x.capitalize}.join('-')
+          if prd.name.downcase != 'jumpsuit'
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?("to-#{length.downcase}") }.first
+            cust_id =(cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_'))
+            cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: length).first #need to handle Jumpsuit BS
+            theme_json[:colors].each do |color|  
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
+            end
+          else
+            selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(JUMPSUIT_LENGTH_MAP[length].downcase) }.first
+            cust_id = cust_id == 'default' ? selected_length_cust['customisation_value']['id'] : cust_id.gsub('-','_')
+            cv = CustomizationVisualization.where(product_id: prd.id, customization_ids: cust_id, length: JUMPSUIT_LENGTH_MAP[length]).first #need to handle Jumpsuit BS
+            theme_json[:colors].each do |color|      
+                theme_result << create_themes_object(prd,cv, color, selected_length_cust)
+            end
+            #theme_result << create_themes_object_for_jumpsuit(prd,cv, color, selected_length_cust)
+          end
+        end
+      end
+
+      theme.collection = theme_result.to_json
+      theme.save!
+      theme
+    end
+
+
+    def create_themes_object(product, cust_viz, color, selected_length_cust)
+      theme_object = {}
+      theme_object[:product_name] = "#{cust_viz.length} Length #{cust_viz.silhouette} Dress with #{cust_viz.neckline} #{cust_viz.neckline.include?('Neckline') ? '' : 'Neckline'}"
+      theme_object[:id] = cust_viz.id
+      theme_object[:length] = cust_viz.length.capitalize
+      # theme_object[:neckline] = cust_viz.neckline
+      # theme_object[:silhouette] = cust_viz.silhouette
+      theme_object[:customization_ids] = cust_viz.customization_ids.split('_')
+      theme_object[:color] = color
+      theme_object[:style_number] = product.sku
+      theme_object[:prices] =  get_price_with_customizations(product, cust_viz.customization_ids, selected_length_cust)
+      
+      theme_object
+    end
+
+    def create_themes_object_for_jumpsuit(product, cust_viz, color, selected_length_cust)
+      length_customizations = JSON.parse(product.customizations).select{ |x| x['customisation_value']['group'] == 'Lengths' }
+      selected_length_cust = length_customizations.select{ |x| x['customisation_value']['name'].downcase.include?(cust_viz.length.downcase) }.first
+      theme_object = {}
+      theme_object[:product_name] = "#{cust_viz.length} Length #{cust_viz.silhouette} Dress with #{cust_viz.neckline} #{cust_viz.neckline.include?('Neckline') ? '' : 'Neckline'}"
+      theme_object[:id] = cust_viz.id
+      theme_object[:length] = cust_viz.length.capitalize
+      # theme_object[:neckline] = cust_viz.neckline
+      # theme_object[:silhouette] = cust_viz.silhouette
+      theme_object[:customization_ids] = cust_viz.customization_ids.split('_')
+      theme_object[:color] = color
+      theme_object[:style_number] = product.sku
+      theme_object[:prices] =  get_price_with_customizations(product, cust_viz.customization_ids, selected_length_cust)
+      
+      theme_object
+    end
+
+    def get_price_with_customizations(product, customizations, length_cust)
+      aud_prod_price = product.master.price_in('AUD').attributes
+      usd_prod_price = product.master.price_in('USD').attributes
+      custs = JSON.parse(product.customizations).select{ |customization| customization == length_cust || customizations.include?(customization['customisation_value']['id']) }
+      
+      t = custs.inject(aud_prod_price['amount'].to_f) do |total, cust|
+        total + cust['customisation_value']['price_aud'].to_f
+      end
+
+      aud_prod_price['amount'] = t.to_s
+
+      u = custs.inject(usd_prod_price['amount'].to_f) do |total, cust|
+        total +  cust['customisation_value']['price'].to_f
+      end
+
+      usd_prod_price['amount'] = u.to_s
+
+      {
+        aud_price: aud_prod_price,
+        usd_price: usd_prod_price
+      }
+    end
+
+ # {title: 'Black & White',
+ #  url: '/black-and-white',
+ #  colors: ['0000', '0001'],
+ #  length: 'maxi',
+ #  products: [{style_number:‘fp-dr1006-102’, customization_ids:[ ‘t1’, ‘t2’, ‘a4’]}, {style_number:'fp-dr1001', customization_ids:['t3', 'b4']}]
+ #  }
 
     # def update_or_create_base_visualization(product, product_details, silhouette, neckline, color_map)
     #   id = ''
