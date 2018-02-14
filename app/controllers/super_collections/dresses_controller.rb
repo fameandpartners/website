@@ -75,7 +75,7 @@ class SuperCollections::DressesController < ApplicationController
           { name: "The Column",
             img: "#{image_path('super_collections/silhouettes/strapless-column.jpg')}",
             img_mobile: "#{image_path('super_collections/silhouettes/strapless-column-mobile.jpg')}",
-            url: "/custom-dresses/slip-bridesmaid-dress" },
+            url: "/custom-dresses/column-bridesmaid-dress" },
 
           { name: "The Jumpsuit",
             img: "#{image_path('super_collections/silhouettes/jumpsuit.jpg')}",
