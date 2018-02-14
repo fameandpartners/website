@@ -75,12 +75,12 @@ class SuperCollections::DressesController < ApplicationController
           { name: "The Column",
             img: "#{image_path('super_collections/silhouettes/strapless-column.jpg')}",
             img_mobile: "#{image_path('super_collections/silhouettes/strapless-column-mobile.jpg')}",
-            url: "/custom-dresses/slip-bridesmaid-dress" },
+            url: "/custom-dresses/column-bridesmaid-dress" },
 
           { name: "The Jumpsuit",
             img: "#{image_path('super_collections/silhouettes/jumpsuit.jpg')}",
             img_mobile: "#{image_path('super_collections/silhouettes/jumpsuit-mobile.jpg')}",
-            url: "/custom-dresses/jumpsuit-bridesmaid-dress" },
+            url: "/custom-dresses/bridesmaid-jumpsuit" },
 
           { name: "The Slip",
             img: "#{image_path('super_collections/silhouettes/slip.jpg')}",
