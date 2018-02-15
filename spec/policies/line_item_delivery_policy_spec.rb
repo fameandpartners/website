@@ -30,7 +30,13 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
     it "returns fast making delivery period if line_item is fast making" do
       expect(line_item).to receive(:fast_making?).and_return(true)
 
-      expect(subject.delivery_period).to eq('4 - 6 business days')
+      expect(subject.delivery_period).to eq('2 weeks')
+    end
+
+    it "returns fast making delivery period if line_item is fast making" do
+      expect(line_item).to receive(:slow_making?).and_return(true)
+
+      expect(subject.delivery_period).to eq('8 weeks')
     end
 
     it "returns cny delivery period if cny flag enabled" do
