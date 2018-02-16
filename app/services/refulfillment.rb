@@ -1,40 +1,64 @@
 class Refulfiller
 
   def self.check_line_items_in_inventory(line_items)
-    line_items.each do |li|
-      check_line_item_in_inventory(li)
-    end
-  end
+    # remove this
+    start_date = Time.now - 2.months
+    line_items = get_n_days_of_line_items(start_date, 5)
 
+    count = 0
+    line_items.each do |li|
+      if check_line_item_in_inventory(li)
+        count += 1
+      end
+    end
+    count
+  end
 
   # check to see if line item exists in the inventories
   # if it does mark the 3pl on the line_item
   def self.check_line_item_in_inventory(line_item)
-    counter = 0
-
+    found = false
     upc = Orders::LineItemPresenter.new(line_item).global_sku&.id
-    if ReturnInventoryItem.find_by_upc(upc)
+    if rii = ReturnInventoryItem.find_by_upc(upc)
       if line_item.order.shipping_address.country.name == 'United States'
+        decrement_or_destroy_return_inventory_item(rii)
         line_item.refulfill = 'bergen'
-        counter += 1
+        found = true
       elsif line_item.order.shipping_address.country.name == 'Australia'
+        decrement_or_destroy_return_inventory_item(rii)
         line_item.refulfill = 'next'
-        counter += 1
+        found = true
       end
       line_item.save
     end
-    counter
+    found
   end
 
+  # if only 1 available remove item from table, otherwise decrement available count by 1
+  def self.decrement_or_destroy_return_inventory_item(rii)
+    if rii.available == 1
+      rii.delete
+    else
+      rii.available -= 1
+      rii.save
+    end
+  end
+
+  def self.check_last_n_minutes(n_minutes)
+    start_time = Time.now - n_minutes
+    get_line_items_between(start_time, Time.now)
+  end
+
+  # temporarily stuff in default values for testing
   def self.get_n_days_of_line_items(start_date, n_days)
     end_date = start_date.beginning_of_day + n_days.days
     orders = Spree::Order.where(completed_at: start_date..end_date)
     lis = orders.map {|ord| ord.line_items}.flatten
   end
 
-  def self.get_line_items_between(start_date, end_date)
-
-
+  def self.get_line_items_between(start_time, end_time)
+    orders = Spree::Order.where(completed_at: start_time..end_time)
+    lis = orders.map {|ord| ord.line_items}.flatten
   end
 
 end

@@ -5,7 +5,7 @@ module Importers
 
     end
 
-    def
+
 
     def self.ingest_bergen(file)
       file = Rails.root.join('lib/importers/Inventory_1518119212121.csv').to_s
