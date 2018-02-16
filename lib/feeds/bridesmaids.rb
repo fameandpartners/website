@@ -38,13 +38,7 @@ module Feeds
       memoize_values(products)
 
       products.each_with_index do |product, index|
-        file_dir = Rails.root.join('public/feeds/us/products/')
-        # unless File.directory?(file_dir)
-        #   FileUtils.mkdir_p(file_dir)
-        # end
-
-        file_path = "#{file_dir}bridesmaids-#{index}.xml"
-        # f = File.new(file_path , 'w')
+        file_path = "public/feeds/us/products/bridesmaids-#{index}.xml"
 
         xml = Builder::XmlMarkup.new
         xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
@@ -95,8 +89,7 @@ module Feeds
             end
           end
         end
-        f.write(xml.target!)
-        f.close
+        save(xml.target!, file_path)
       end
     end
 
