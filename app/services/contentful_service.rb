@@ -295,6 +295,7 @@ module Contentful
         overlay_pids = (main_header_container.respond_to? :overlay_pids) ? main_header_container.overlay_pids : nil
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
+        live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -310,7 +311,8 @@ module Contentful
           full_width_content_class: full_width_content_class,
           image: desktop_image,
           mobile_image: mobile_image,
-          overlay_pids: overlay_pids
+          overlay_pids: overlay_pids,
+          live_text: live_text,
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
         carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil

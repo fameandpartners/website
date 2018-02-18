@@ -78,3 +78,49 @@
 .u-padding-top--125px {
   padding-top: 125px;
 }
+
+// Live text over media (image or video)
+.u-overlay-area {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.u-overlay-area__media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.u-overlay-area__overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.u-overlay-area__caption {
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+}
+
+.u-overlay-area__caption--top {
+  top: 0;
+}
+
+.u-overlay-area__caption--center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.u-overlay-area__caption--bottom {
+  bottom: 0;
+}
