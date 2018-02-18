@@ -295,6 +295,8 @@ module Contentful
         overlay_pids = (main_header_container.respond_to? :overlay_pids) ? main_header_container.overlay_pids : nil
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
+        desktop_video = (main_header_container.respond_to? :video_desktop) ? main_header_container.video_desktop.url : nil
+        mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : desktop_video
         live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
         bottom_caption = (main_header_container.respond_to? :caption) ? main_header_container.caption : nil
         bottom_caption_url = (main_header_container.respond_to? :caption_url) ? main_header_container.caption_url : nil
@@ -313,6 +315,8 @@ module Contentful
           full_width_content_class: full_width_content_class,
           image: desktop_image,
           mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
           overlay_pids: overlay_pids,
           live_text: live_text,
           bottom_caption: bottom_caption,
@@ -370,6 +374,8 @@ module Contentful
         desktop_image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+        desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
         bottom_caption = (item.respond_to? :caption) ? item.caption : nil
         bottom_caption_url = (item.respond_to? :caption_url) ? item.caption_url : nil
 
@@ -401,6 +407,8 @@ module Contentful
           overlay_pids: overlay_pids,
           image: desktop_image,
           mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
           bottom_caption: bottom_caption,
           bottom_caption_url: bottom_caption_url,
           padding_class: padding_class
