@@ -370,6 +370,8 @@ module Contentful
         desktop_image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+        bottom_caption = (item.respond_to? :caption) ? item.caption : nil
+        bottom_caption_url = (item.respond_to? :caption_url) ? item.caption_url : nil
 
         if full_width_content == 'desktop,mobile'
           full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
@@ -399,6 +401,8 @@ module Contentful
           overlay_pids: overlay_pids,
           image: desktop_image,
           mobile_image: mobile_image,
+          bottom_caption: bottom_caption,
+          bottom_caption_url: bottom_caption_url,
           padding_class: padding_class
         }
       end
