@@ -18,20 +18,7 @@
       <% else %>
         <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
       <% end %>
-
-    <% if contents[:bottom_caption] && contents[:bottom_caption_url] %>
-      <% caption_array = contents[:bottom_caption].split('/') %>
-      <div class="Editorial__bottomCaption">
-        <% if caption_array.size > 1 %>
-          <a href="<%= contents[:bottom_caption_url] %>">
-            <span class="Editorial__bottomCaptionBlocks"><%= caption_array[0] %></span> / <span class="Editorial__bottomCaptionBlocks link-underline"><%= caption_array[1] %></span>
-          </a>
-        <% else %>
-        <%= link_to contents[:bottom_caption], contents[:bottom_caption_url], class: "link-underline" %>
-        <% end %>
-      </div>
-    <% end %>
-
+      <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: {contents: contents} %>
     </div>
   </div>
 </div>
