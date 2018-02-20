@@ -35,6 +35,11 @@
 
 }
 
+.CtaNarrow__Link {
+  font-family: $secondary-font-family;
+  font-size: 1.9rem;
+}
+
 // custom offset (bulma doesn't have this margin-right version)
 .is-offset-6-right {
   @include breakpoint(tablet) {
@@ -77,6 +82,55 @@
 
 .u-padding-top--125px {
   padding-top: 125px;
+}
+
+.u-padding-left-right--15px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.u-padding-left-right--30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.u-padding-left-right--45px {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.u-padding-left-right--60px {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+// Text alignment for mobile and desktop
+@include breakpoint(tablet) {
+  .u-text-align-desktop--left {
+    text-align: left;
+  }
+
+  .u-text-align-desktop--right {
+    text-align: right;
+  }
+
+  .u-text-align-desktop--center {
+    text-align: center;
+  }
+}
+
+@include breakpoint(mobile-max) {
+  .u-text-align-mobile--left {
+    text-align: left;
+  }
+
+  .u-text-align-mobile--right {
+    text-align: right;
+  }
+
+  .u-text-align-mobile--center {
+    text-align: center;
+  }
 }
 
 // Live text over media (image or video)

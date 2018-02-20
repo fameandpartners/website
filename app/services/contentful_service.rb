@@ -387,8 +387,31 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Text alignment
+        text_alignment_desktop = (item.respond_to? :text_alignment) ? item.text_alignment.downcase : nil
+        text_alignment_mobile = (item.respond_to? :text_alignment_mobile) ? item.text_alignment_mobile.downcase : nil
+
+        if text_alignment_desktop == 'left'
+          text_alignment_desktop_class = 'u-text-align-desktop--left'
+        elsif text_alignment_desktop == 'right'
+          text_alignment_desktop_class = 'u-text-align-desktop--right'
+        else
+          text_alignment_desktop_class = 'u-text-align-desktop--center'
+        end
+
+        if text_alignment_mobile == 'left'
+          text_alignment_mobile_class = 'u-text-align-mobile--left'
+        elsif text_alignment_mobile == 'right'
+          text_alignment_mobile_class = 'u-text-align-mobile--right'
+        else
+          text_alignment_mobile_class = 'u-text-align-mobile--center'
+        end
+
         # Add extra padding between rows
         padding_class = (item.respond_to? :padding_extra) ? ("u-padding-top--" + item.padding_extra) : nil
+
+        # Add side paddings
+        side_padding_class = (item.respond_to? :side_padding) ? ("u-padding-left-right--" + item.side_padding) : nil
 
         {
           id: item_id,
@@ -411,7 +434,10 @@ module Contentful
           mobile_video: mobile_video,
           bottom_caption: bottom_caption,
           bottom_caption_url: bottom_caption_url,
-          padding_class: padding_class
+          text_alignment_desktop_class: text_alignment_desktop_class,
+          text_alignment_mobile_class: text_alignment_mobile_class,
+          padding_class: padding_class,
+          side_padding_class: side_padding_class
         }
       end
 
