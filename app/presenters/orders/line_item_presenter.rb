@@ -54,7 +54,7 @@ module Orders
       if personalizations?
         CustomItemSku.new(item).call
       else
-        variant.sku
+        variant&.sku
       end
     end
 

@@ -11,7 +11,8 @@ table.line_items
       th Order Number
       th Return Type
       th VWO Type
-      th Sample Sale Item
+      th Swatch Item
+      th Refulfill Item
       th Line ID
       th Style #
       th SKU
@@ -47,6 +48,7 @@ table.line_items
           td = order.return_type
           td = order.vwo_type
           td = line_item.sample_sale?
+          td = line_item.refulfill
           td = line_item.id
           td = line_item.style_number
           td = line_item.sku

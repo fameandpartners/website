@@ -25,7 +25,6 @@ module Spree
         params[:q][:completed_at_not_null] ||= '1' if Spree::Config[:show_only_complete_orders_by_default]
         @show_only_completed = params[:q][:completed_at_not_null].present?
         params[:q][:s] ||= @show_only_completed ? 'completed_at desc' : 'created_at desc'
-
         # As date params are deleted if @show_only_completed, store
         # the original date so we can restore them into the params
         # after the search
@@ -44,6 +43,9 @@ module Spree
 
         @sample_only = params[:q][:sample_sale_only].present?
         params[:q].delete(:sample_sale_only)
+
+        @refulfill_only = params[:q][:refulfill_only].present?
+        params[:q].delete(:refulfill_only)
 
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
@@ -67,7 +69,7 @@ module Spree
           @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
         end
 
-        if  @sample_only
+        if @sample_only
           @orders = @orders.select {|order| order.contains_sample_sale_item?}
           @orders = Kaminari::PaginatableArray.new(@orders,
                           {
@@ -75,7 +77,17 @@ module Spree
                           :offset => 0,
                           :total_count => @orders.count
                     })
-        end 
+        end
+
+        if @refulfill_only
+          @orders = @orders.select {|order| order.contains_refulfill_item?}
+          @orders = Kaminari::PaginatableArray.new(@orders,
+                          {
+                          :limit => 50,
+                          :offset => 0,
+                          :total_count => @orders.count
+                    })
+        end
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt

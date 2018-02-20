@@ -49,10 +49,9 @@ class Refulfiller
     get_line_items_between(start_time, Time.now)
   end
 
-  # temporarily stuff in default values for testing
   def self.get_n_days_of_line_items(start_date, n_days)
     end_date = start_date.beginning_of_day + n_days.days
-    orders = Spree::Order.where(completed_at: start_date..end_date)
+    orders = Spree::Order.where(completed_at: start_date..end_date, shipment_state: nil)
     lis = orders.map {|ord| ord.line_items}.flatten
   end
 
