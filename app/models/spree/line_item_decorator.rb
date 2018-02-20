@@ -72,7 +72,12 @@ Spree::LineItem.class_eval do
       end
       # slow_making price will be percentage based
       if mo.product_making_option.slow_making?
-        total_adjustment = total_adjustment + self.attributes["price"]*mo.price
+        if product.category.subcategory.downcase.include?('bridesmaid')
+          length_cust = JSON.parse(self.customizations).detect {|x| x['customisation_value']['group'].downcase == ('lengths')}
+          total_adjustment = total_adjustment + length_cust['customisation_value']['price'].to_f * mo.price
+        else
+          total_adjustment = total_adjustment + self.attributes["price"]*mo.price
+        end
       end
     end
 
