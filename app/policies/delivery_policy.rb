@@ -4,7 +4,7 @@ module Policies
     DAYS_IN_FLIGHT_FAST = 3 # number of days for express delivery
 
     CNY_DELIVERY_PERIOD = '2 weeks'
-    FAST_MAKING_DELIVERY_PERIOD = '2 - 3 weeks'
+    FAST_MAKING_DELIVERY_PERIOD = '2-3 weeks'
     SLOW_MAKING_DELIVERY_PERIOD = "8 weeks"
     SLOW_MAKING_DELIVERY_PERIOD_CNY = "6 weeks + 2 weeks"
     FLASH_SALE_MAKING_PERIOD = '5 - 7 business days'
@@ -28,8 +28,10 @@ module Policies
 
     CNY_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
                           "12 - 15 business days" => "6 weeks",
+
                           "3 - 4 weeks" => "6 weeks",
-                          "4 - 6 weeks" => "6 weeks"
+                          "4 - 6 weeks" => "6 weeks",
+                          "6 weeks" => "6 weeks"
                        }
 
     FACTORY_CLOSURE_MAP = { "7 - 10 business days" => "10 - 15 business days",

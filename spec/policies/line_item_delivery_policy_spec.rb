@@ -30,7 +30,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
     it "returns fast making delivery period if line_item is fast making" do
       expect(line_item).to receive(:fast_making?).and_return(true)
 
-      expect(subject.delivery_period).to eq('2 - 3 weeks')
+      expect(subject.delivery_period).to eq('2-3 weeks')
     end
 
     it "returns fast making delivery period if line_item is fast making" do
