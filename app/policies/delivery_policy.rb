@@ -4,7 +4,7 @@ module Policies
     DAYS_IN_FLIGHT_FAST = 3 # number of days for express delivery
 
     CNY_DELIVERY_PERIOD = '2 weeks'
-    FAST_MAKING_DELIVERY_PERIOD = '2 weeks'
+    FAST_MAKING_DELIVERY_PERIOD = '2 - 3 weeks'
     SLOW_MAKING_DELIVERY_PERIOD = "8 weeks"
     SLOW_MAKING_DELIVERY_PERIOD_CNY = "6 weeks + 2 weeks"
     FLASH_SALE_MAKING_PERIOD = '5 - 7 business days'
