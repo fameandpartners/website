@@ -368,6 +368,7 @@ module Contentful
         # CTA Tiles
         tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
         tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
+        tile_cta_alignment = (item.respond_to? :tile_cta_alignment) ? item.tile_cta_alignment : 'left'
 
         # Hero tiles content
         overlay_pids = (item.respond_to? :overlay_pids) ? item.overlay_pids : nil
@@ -426,6 +427,7 @@ module Contentful
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
           tile_cta_position: tile_cta_position,
+          tile_cta_alignment: tile_cta_alignment,
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
