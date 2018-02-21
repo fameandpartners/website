@@ -10,6 +10,9 @@ Spree::LineItem.class_eval do
 
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
+  has_many :batch_collection_line_items
+  has_many :batch_collections, :through => :batch_collection_line_items, dependent: :destroy
+
   scope :fast_making, -> do
     joins(making_options: :product_making_option).
       where(product_making_options: { option_type: 'fast_making' })

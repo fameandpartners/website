@@ -146,6 +146,69 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
+-- Name: batch_collection_line_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE batch_collection_line_items (
+    id integer NOT NULL,
+    batch_collection_id integer,
+    line_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: batch_collection_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE batch_collection_line_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: batch_collection_line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE batch_collection_line_items_id_seq OWNED BY batch_collection_line_items.id;
+
+
+--
+-- Name: batch_collections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE batch_collections (
+    id integer NOT NULL,
+    style character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: batch_collections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE batch_collections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: batch_collections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE batch_collections_id_seq OWNED BY batch_collections.id;
+
+
+--
 -- Name: bergen_return_item_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3411,12 +3474,12 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    customizations jsonb,
     refulfill character varying(255) DEFAULT NULL::character varying
 );
 
@@ -5557,6 +5620,20 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 
 
 --
+-- Name: batch_collection_line_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collection_line_items ALTER COLUMN id SET DEFAULT nextval('batch_collection_line_items_id_seq'::regclass);
+
+
+--
+-- Name: batch_collections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collections ALTER COLUMN id SET DEFAULT nextval('batch_collections_id_seq'::regclass);
+
+
+--
 -- Name: bergen_return_item_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6573,6 +6650,22 @@ ALTER TABLE ONLY answers
 
 ALTER TABLE ONLY spree_banner_boxes
     ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: batch_collection_line_items batch_collection_line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collection_line_items
+    ADD CONSTRAINT batch_collection_line_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: batch_collections batch_collections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collections
+    ADD CONSTRAINT batch_collections_pkey PRIMARY KEY (id);
 
 
 --
@@ -7785,6 +7878,13 @@ CREATE INDEX index_assets_on_viewable_id ON spree_assets USING btree (viewable_i
 --
 
 CREATE INDEX index_assets_on_viewable_type_and_type ON spree_assets USING btree (viewable_type, type);
+
+
+--
+-- Name: index_batch_collections_on_style; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_batch_collections_on_style ON batch_collections USING btree (style);
 
 
 --
@@ -9863,3 +9963,7 @@ INSERT INTO schema_migrations (version) VALUES ('20180212070230');
 INSERT INTO schema_migrations (version) VALUES ('20180212213652');
 
 INSERT INTO schema_migrations (version) VALUES ('20180213212256');
+
+INSERT INTO schema_migrations (version) VALUES ('20180220231314');
+
+INSERT INTO schema_migrations (version) VALUES ('20180221014607');

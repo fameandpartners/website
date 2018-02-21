@@ -34,6 +34,14 @@ class Refulfiller
     found
   end
 
+  # unmark a lineitem for refulfillment, chose not to increment the inventory count
+  # due possibility that inventory was refreshed, better to err on side of less inventory
+  def self.unrefulfill_line_item(line_item_id)
+    li = Spree::LineItem.find(line_item_id)
+    li.refulfill = nil
+    li.save
+  end
+
   # if only 1 available remove item from table, otherwise decrement available count by 1
   def self.decrement_or_destroy_return_inventory_item(rii)
     if rii.available == 1
@@ -56,7 +64,7 @@ class Refulfiller
   end
 
   def self.get_line_items_between(start_time, end_time)
-    orders = Spree::Order.where(completed_at: start_time..end_time)
+    orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: nil)
     lis = orders.map {|ord| ord.line_items}.flatten
   end
 
