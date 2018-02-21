@@ -77,7 +77,7 @@ class Populator
     end
 
     def add_fabric_to_line_item
-      line_item.fabric = @fabric
+      line_item.fabric = product_fabric
       line_item.save
     end
 
