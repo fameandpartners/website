@@ -1,11 +1,51 @@
-<% # Currenly using Bulma's responsive width %>
-<picture class="">
-  <source media="(max-width: 768px)" srcset="<%= @lg_contents[:mobile_image] %>">
-  <source media="(min-width: 769px)" srcset="<%= @lg_contents[:image] %>">
-  <img class="Editorial__image" src="<%= @lg_contents[:image] %>" srcset="
-    <%= @lg_contents[:mobile_image] %> 768w,
-    <%= @lg_contents[:image] %> 769w">
-</picture>
+<% item_image = @lg_contents[:image] %>
+<% item_mobile_image = @lg_contents[:mobile_image] %>
+
+<% if @lg_contents[:bottom_caption_url] %>
+  <a href="<%= @lg_contents[:bottom_caption_url] %>">
+<% end %>
+  <% # Load video if available %>
+  <% if @lg_contents[:video] %>
+    <% item_video = @lg_contents[:video] %>
+    <% item_mobile_video = @lg_contents[:mobile_video] %>
+    <video src="<%= item_video %>"
+      class="js-autoload-video Editorial__video hidden-xs hidden-sm"
+      muted
+      playsinline
+      webkit-playsinline
+      preload
+      autoplay
+      loop
+      aria-hidden="false"
+      poster="<%= item_image %>">
+    </video>
+    <video src="<%= item_mobile_video %>"
+      class="js-autoload-video Editorial__video hidden-md hidden-lg"
+      muted
+      playsinline
+      webkit-playsinline
+      preload
+      autoplay
+      loop
+      aria-hidden="false"
+      poster="<%= item_mobile_image %>">
+    </video>
+
+  <% # Load image if no video is available %>
+  <% else %>
+    <% # Currenly using Bulma's responsive width %>
+    <picture>
+      <source media="(max-width: 768px)" srcset="<%= item_mobile_image %>">
+      <source media="(min-width: 769px)" srcset="<%= item_image %>">
+      <img class="Editorial__image" src="<%= item_image %>" srcset="
+        <%= item_mobile_image %> 768w,
+        <%= item_image %> 769w">
+    </picture>
+
+  <% end %>
+<% if @lg_contents[:bottom_caption_url] %>
+  </a>
+<% end %>
 
 <%
 products = []

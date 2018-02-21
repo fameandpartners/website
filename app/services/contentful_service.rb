@@ -295,6 +295,11 @@ module Contentful
         overlay_pids = (main_header_container.respond_to? :overlay_pids) ? main_header_container.overlay_pids : nil
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
+        desktop_video = (main_header_container.respond_to? :video_desktop) ? main_header_container.video_desktop.url : nil
+        mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : desktop_video
+        live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
+        bottom_caption = (main_header_container.respond_to? :caption) ? main_header_container.caption : nil
+        bottom_caption_url = (main_header_container.respond_to? :caption_url) ? main_header_container.caption_url : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -310,7 +315,12 @@ module Contentful
           full_width_content_class: full_width_content_class,
           image: desktop_image,
           mobile_image: mobile_image,
-          overlay_pids: overlay_pids
+          video: desktop_video,
+          mobile_video: mobile_video,
+          overlay_pids: overlay_pids,
+          live_text: live_text,
+          bottom_caption: bottom_caption,
+          bottom_caption_url: bottom_caption_url
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
         carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
@@ -358,12 +368,17 @@ module Contentful
         # CTA Tiles
         tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
         tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
+        tile_cta_alignment = (item.respond_to? :tile_cta_alignment) ? item.tile_cta_alignment : 'left'
 
         # Hero tiles content
         overlay_pids = (item.respond_to? :overlay_pids) ? item.overlay_pids : nil
         desktop_image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+        desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
+        bottom_caption = (item.respond_to? :caption) ? item.caption : nil
+        bottom_caption_url = (item.respond_to? :caption_url) ? item.caption_url : nil
 
         if full_width_content == 'desktop,mobile'
           full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
@@ -373,8 +388,37 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Text alignment
+        text_alignment_desktop = (item.respond_to? :text_alignment) ? item.text_alignment.downcase : nil
+        text_alignment_mobile = (item.respond_to? :text_alignment_mobile) ? item.text_alignment_mobile.downcase : nil
+
+        if text_alignment_desktop == 'left'
+          text_alignment_desktop_class = 'u-text-align-desktop--left'
+        elsif text_alignment_desktop == 'right'
+          text_alignment_desktop_class = 'u-text-align-desktop--right'
+        else
+          text_alignment_desktop_class = 'u-text-align-desktop--center'
+        end
+
+        if text_alignment_mobile == 'left'
+          text_alignment_mobile_class = 'u-text-align-mobile--left'
+        elsif text_alignment_mobile == 'right'
+          text_alignment_mobile_class = 'u-text-align-mobile--right'
+        else
+          text_alignment_mobile_class = 'u-text-align-mobile--center'
+        end
+
         # Add extra padding between rows
         padding_class = (item.respond_to? :padding_extra) ? ("u-padding-top--" + item.padding_extra) : nil
+
+        # Add side paddings
+        side_padding_class = (item.respond_to? :side_padding) ? ("u-padding-left-right--" + item.side_padding) : nil
+
+        # PIDs Image replacement
+        image_replacement_1 = (item.respond_to? :image_replacement_1) ? item.image_replacement_1.url : nil
+        image_replacement_2 = (item.respond_to? :image_replacement_2) ? item.image_replacement_2.url : nil
+        image_replacement_3 = (item.respond_to? :image_replacement_3) ? item.image_replacement_3.url : nil
+        image_replacement_4 = (item.respond_to? :image_replacement_4) ? item.image_replacement_4.url : nil
 
         {
           id: item_id,
@@ -389,11 +433,23 @@ module Contentful
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
           tile_cta_position: tile_cta_position,
+          tile_cta_alignment: tile_cta_alignment,
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
           mobile_image: mobile_image,
-          padding_class: padding_class
+          video: desktop_video,
+          mobile_video: mobile_video,
+          bottom_caption: bottom_caption,
+          bottom_caption_url: bottom_caption_url,
+          text_alignment_desktop_class: text_alignment_desktop_class,
+          text_alignment_mobile_class: text_alignment_mobile_class,
+          padding_class: padding_class,
+          side_padding_class: side_padding_class,
+          image_replacement_1: image_replacement_1,
+          image_replacement_2: image_replacement_2,
+          image_replacement_3: image_replacement_3,
+          image_replacement_4: image_replacement_4
         }
       end
 

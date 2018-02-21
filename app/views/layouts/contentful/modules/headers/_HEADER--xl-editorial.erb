@@ -2,7 +2,23 @@
 <div class="section-row columns">
   <div class="column is-full">
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
-      <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      <% if contents[:live_text] %>
+        <div class="u-overlay-area">
+          <div class="u-overlay-area__media">
+            <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+          </div>
+          <div class="u-overlay-area__overlay">
+            <div class="u-overlay-area__caption u-overlay-area__caption--center">
+              <div class="Editorial__liveText">
+                <%= contents[:live_text] %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+      <% end %>
+      <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: {contents: contents} %>
     </div>
   </div>
 </div>
