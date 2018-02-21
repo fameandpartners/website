@@ -7,7 +7,7 @@
       <% contents[:sm_items].each_with_index do |item, i| %>
         <% @pid = item %>
         <%= content_tag(:div, :class => (contents[:sm_items].count == 3 && i == 0) ? "column is-6 is-offset-6 product-top-margin" : "column is-6 product-top-margin") do %>
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm", locals: {contents: contents, pid_index: (i.to_i + 1)} %>
         <% end %>
       <% end %>
       </div>
@@ -33,7 +33,7 @@
       <% contents[:sm_items].each_with_index do |item, i| %>
         <% @pid = item %>
         <%= content_tag(:div, :class => (contents[:sm_items].count == 3 && i == 0) ? "column is-6 is-offset-6" : "column is-6") do %>
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm", locals: {contents: contents, pid_index: (i.to_i + 1)} %>
         <% end %>
       <% end %>
       </div>

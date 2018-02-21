@@ -414,6 +414,12 @@ module Contentful
         # Add side paddings
         side_padding_class = (item.respond_to? :side_padding) ? ("u-padding-left-right--" + item.side_padding) : nil
 
+        # PIDs Image replacement
+        image_replacement_1 = (item.respond_to? :image_replacement_1) ? item.image_replacement_1.url : nil
+        image_replacement_2 = (item.respond_to? :image_replacement_2) ? item.image_replacement_2.url : nil
+        image_replacement_3 = (item.respond_to? :image_replacement_3) ? item.image_replacement_3.url : nil
+        image_replacement_4 = (item.respond_to? :image_replacement_4) ? item.image_replacement_4.url : nil
+
         {
           id: item_id,
           lg_item: lg_item,
@@ -439,7 +445,11 @@ module Contentful
           text_alignment_desktop_class: text_alignment_desktop_class,
           text_alignment_mobile_class: text_alignment_mobile_class,
           padding_class: padding_class,
-          side_padding_class: side_padding_class
+          side_padding_class: side_padding_class,
+          image_replacement_1: image_replacement_1,
+          image_replacement_2: image_replacement_2,
+          image_replacement_3: image_replacement_3,
+          image_replacement_4: image_replacement_4
         }
       end
 
