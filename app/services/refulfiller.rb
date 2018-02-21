@@ -24,12 +24,13 @@ class Refulfiller
         decrement_or_destroy_return_inventory_item(rii)
         line_item.refulfill = 'bergen'
         found = true
+        line_item.save
       elsif line_item.order.shipping_address.country.name == 'Australia'
         decrement_or_destroy_return_inventory_item(rii)
         line_item.refulfill = 'next'
         found = true
+        line_item.save
       end
-      line_item.save
     end
     found
   end
