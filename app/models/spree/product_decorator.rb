@@ -37,6 +37,8 @@ Spree::Product.class_eval do
                           foreign_key: :product_id,
                           join_table: :spree_product_related_outerwear
 
+  has_and_belongs_to_many :fabrics
+
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
                   :factory_id,
@@ -44,8 +46,9 @@ Spree::Product.class_eval do
                   :featured,
                   :hidden,
                   :size_chart,
-                  :related_outerwear_ids
-                  :category
+                  :related_outerwear_ids,
+                  :category,
+                  :fabric_id
 
   attr_reader :name_with_sku
 

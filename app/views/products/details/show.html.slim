@@ -19,7 +19,7 @@ ruby:
   javascript:
     window.PdpDataFull = {
       paths: #{raw product_paths.to_json},
-      product: #{raw @product.to_json},
+      product: #{raw @product.to_json(:include=> {:fabrics=> {:include=> :option_value } })},
       discount: #{raw @product_discount},
       images: #{raw @product.all_images.to_json},
       sizeChart: #{raw @product.size_chart_data.to_json},

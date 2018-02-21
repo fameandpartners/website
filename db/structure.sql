@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -571,7 +571,7 @@ ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
 CREATE TABLE customization_visualizations (
     id integer NOT NULL,
     customization_ids character varying(1024),
-    incompatible_ids character varying(1024),
+    incompatible_ids character varying(255),
     render_urls jsonb,
     product_id integer,
     length character varying(255),
@@ -899,6 +899,73 @@ CREATE SEQUENCE fabrications_id_seq
 --
 
 ALTER SEQUENCE fabrications_id_seq OWNED BY fabrications.id;
+
+
+--
+-- Name: fabrics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE fabrics (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    price_aud character varying(255),
+    price_usd character varying(255),
+    material character varying(255),
+    image_url character varying(255),
+    option_value_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: fabrics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE fabrics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fabrics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE fabrics_id_seq OWNED BY fabrics.id;
+
+
+--
+-- Name: fabrics_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE fabrics_products (
+    id integer NOT NULL,
+    fabric_id integer,
+    product_id integer
+);
+
+
+--
+-- Name: fabrics_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE fabrics_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fabrics_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE fabrics_products_id_seq OWNED BY fabrics_products.id;
 
 
 --
@@ -1362,7 +1429,9 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    shipped boolean,
+    barcode character varying(255)
 );
 
 
@@ -2047,6 +2116,38 @@ ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
 
 
 --
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE newgistics_schedulers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE newgistics_schedulers_id_seq OWNED BY newgistics_schedulers.id;
+
+
+--
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2632,6 +2733,28 @@ CREATE SEQUENCE refund_requests_id_seq
 --
 
 ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
+
+
+--
+-- Name: relbloat; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW relbloat AS
+ SELECT pg_namespace.nspname,
+    pg_class.relname,
+    pg_class.reltuples,
+    pg_class.relpages,
+    rowwidths.avgwidth,
+    ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision)) AS expectedpages,
+    ((pg_class.relpages)::double precision / ceil(((pg_class.reltuples * (rowwidths.avgwidth)::double precision) / (current_setting('block_size'::text))::double precision))) AS bloat,
+    ceil(((((pg_class.relpages)::double precision * (current_setting('block_size'::text))::double precision) - ceil((pg_class.reltuples * (rowwidths.avgwidth)::double precision))) / (1024)::double precision)) AS wastedspace
+   FROM ((( SELECT pg_statistic.starelid,
+            sum(pg_statistic.stawidth) AS avgwidth
+           FROM pg_statistic
+          GROUP BY pg_statistic.starelid) rowwidths
+     JOIN pg_class ON ((rowwidths.starelid = pg_class.oid)))
+     JOIN pg_namespace ON ((pg_namespace.oid = pg_class.relnamespace)))
+  WHERE (pg_class.relpages > 1);
 
 
 --
@@ -3382,7 +3505,8 @@ CREATE TABLE spree_line_items (
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    customizations jsonb
+    customizations jsonb,
+    fabric_id integer
 );
 
 
@@ -3638,8 +3762,9 @@ CREATE TABLE spree_orders (
     customer_notes text,
     projected_delivery_date timestamp without time zone,
     site_version text,
-    orderbot_synced boolean,
+    orderbot_synced boolean DEFAULT false NOT NULL,
     return_type character varying(255),
+    autorefundable boolean,
     vwo_type character varying(255)
 );
 
@@ -5098,6 +5223,38 @@ ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
 
 
 --
+-- Name: themes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE themes (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    color jsonb,
+    collection jsonb
+);
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE themes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: themes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE themes_id_seq OWNED BY themes.id;
+
+
+--
 -- Name: user_style_profile_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5662,6 +5819,20 @@ ALTER TABLE ONLY fabrications ALTER COLUMN id SET DEFAULT nextval('fabrications_
 
 
 --
+-- Name: fabrics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics ALTER COLUMN id SET DEFAULT nextval('fabrics_id_seq'::regclass);
+
+
+--
+-- Name: fabrics_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics_products ALTER COLUMN id SET DEFAULT nextval('fabrics_products_id_seq'::regclass);
+
+
+--
 -- Name: facebook_accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5855,6 +6026,13 @@ ALTER TABLE ONLY moodboard_items ALTER COLUMN id SET DEFAULT nextval('moodboard_
 --
 
 ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_seq'::regclass);
+
+
+--
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('newgistics_schedulers_id_seq'::regclass);
 
 
 --
@@ -6425,6 +6603,13 @@ ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::reg
 
 
 --
+-- Name: themes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes ALTER COLUMN id SET DEFAULT nextval('themes_id_seq'::regclass);
+
+
+--
 -- Name: user_style_profile_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6694,6 +6879,22 @@ ALTER TABLE ONLY fabrications
 
 
 --
+-- Name: fabrics fabrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics
+    ADD CONSTRAINT fabrics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fabrics_products fabrics_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics_products
+    ADD CONSTRAINT fabrics_products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: facebook_accounts facebook_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6915,6 +7116,14 @@ ALTER TABLE ONLY moodboard_items
 
 ALTER TABLE ONLY moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
@@ -7574,6 +7783,14 @@ ALTER TABLE ONLY styles
 
 
 --
+-- Name: themes themes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY themes
+    ADD CONSTRAINT themes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: user_style_profile_taxons user_style_profile_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7822,6 +8039,13 @@ CREATE UNIQUE INDEX index_fabrications_on_uuid ON fabrications USING btree (uuid
 
 
 --
+-- Name: index_fabrics_on_option_value_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_on_option_value_id ON fabrics USING btree (option_value_id);
+
+
+--
 -- Name: index_facebook_data_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7931,6 +8155,13 @@ CREATE UNIQUE INDEX index_item_returns_on_uuid ON item_returns USING btree (uuid
 --
 
 CREATE INDEX index_line_item_making_options_on_line_item ON line_item_making_options USING btree (line_item_id);
+
+
+--
+-- Name: index_line_item_on_fabric_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_line_item_on_fabric_id ON spree_line_items USING btree (fabric_id);
 
 
 --
@@ -9493,10 +9724,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9733,15 +9960,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9761,8 +9982,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
 
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
-
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
 INSERT INTO schema_migrations (version) VALUES ('20170914013707');
@@ -9770,6 +9989,16 @@ INSERT INTO schema_migrations (version) VALUES ('20170914013707');
 INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
+
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016232403');
+
+INSERT INTO schema_migrations (version) VALUES ('20171101200751');
+
+INSERT INTO schema_migrations (version) VALUES ('20171114001834');
 
 INSERT INTO schema_migrations (version) VALUES ('20171115172748');
 
@@ -9797,4 +10026,8 @@ INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
 
+INSERT INTO schema_migrations (version) VALUES ('20180131211009');
+
 INSERT INTO schema_migrations (version) VALUES ('20180131220110');
+
+INSERT INTO schema_migrations (version) VALUES ('20180220010932');

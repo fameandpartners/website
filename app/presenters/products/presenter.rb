@@ -10,7 +10,7 @@ module Products
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable, :fast_delivery, :render3d_images
+                  :height_customisable, :fast_delivery, :render3d_images, :fabrics, :has_fabrics
 
     attr_reader   :product_type
 
@@ -55,6 +55,10 @@ module Products
 
     def custom_size_price
       sizes.default_extra_price.display_price
+    end
+
+    def has_fabrics?
+      !fabrics.empty?
     end
 
     def sizes

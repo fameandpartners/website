@@ -4,6 +4,8 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
+  belongs_to :fabric
+
   has_one :item_return, inverse_of: :line_item
 
   has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
