@@ -220,12 +220,28 @@ module Contentful
       if (fetched_md_container.content_type.id == 'ITEM--md-text')
         text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
         text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? fetched_md_container.text_size : nil
 
         {
-          id: 'ITEM--md-text',
+          id: fetched_md_container.content_type.id,
           text: text_desktop,
           text_mobile: text_mobile,
-          text_size: fetched_md_container.text_size
+          text_size: text_size
+        }
+      elsif (fetched_md_container.content_type.id == 'ITEM--md-text--heading-with-custom-color')
+        text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
+        text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? "--#{fetched_md_container.text_size}" : nil
+        copy_block_heading = (fetched_md_container.respond_to? :copy_block_heading) ? fetched_md_container.copy_block_heading : nil
+        copy_block_heading_color = (fetched_md_container.respond_to? :copy_block_heading_color) ? fetched_md_container.copy_block_heading_color : '#000'
+
+        {
+          id: fetched_md_container.content_type.id,
+          text: text_desktop,
+          text_mobile: text_mobile,
+          text_size: text_size,
+          copy_block_heading: copy_block_heading,
+          copy_block_heading_color: copy_block_heading_color
         }
       else
         # 'ITEM--md-email'

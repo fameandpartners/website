@@ -16,6 +16,10 @@
   font-family: $secondary-font-family;
 }
 
+.CopyHeader__content--noMaxWidth {
+  max-width: 100%;
+}
+
 .CopyHeader__content p {
   margin-bottom: 0;
 }
@@ -52,6 +56,10 @@
 
   }
 
+}
+
+.CopyHeader--small .CopyHeader__content p {
+  font-size: 1.8rem;
 }
 
 .CopyHeader--large .CopyHeader__content p {
