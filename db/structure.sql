@@ -146,6 +146,69 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
+-- Name: batch_collection_line_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE batch_collection_line_items (
+    id integer NOT NULL,
+    batch_collection_id integer,
+    line_item_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: batch_collection_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE batch_collection_line_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: batch_collection_line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE batch_collection_line_items_id_seq OWNED BY batch_collection_line_items.id;
+
+
+--
+-- Name: batch_collections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE batch_collections (
+    id integer NOT NULL,
+    style character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: batch_collections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE batch_collections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: batch_collections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE batch_collections_id_seq OWNED BY batch_collections.id;
+
+
+--
 -- Name: bergen_return_item_processes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2672,6 +2735,40 @@ ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
 
 
 --
+-- Name: return_inventory_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE return_inventory_items (
+    id integer NOT NULL,
+    upc integer NOT NULL,
+    style_number character varying(255),
+    available integer NOT NULL,
+    vendor character varying(255) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: return_inventory_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE return_inventory_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: return_inventory_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE return_inventory_items_id_seq OWNED BY return_inventory_items.id;
+
+
+--
 -- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3377,12 +3474,13 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    customizations jsonb
+    refulfill character varying(255) DEFAULT NULL::character varying
 );
 
 
@@ -5522,6 +5620,20 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 
 
 --
+-- Name: batch_collection_line_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collection_line_items ALTER COLUMN id SET DEFAULT nextval('batch_collection_line_items_id_seq'::regclass);
+
+
+--
+-- Name: batch_collections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collections ALTER COLUMN id SET DEFAULT nextval('batch_collections_id_seq'::regclass);
+
+
+--
 -- Name: bergen_return_item_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5967,6 +6079,13 @@ ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_req
 --
 
 ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
+
+
+--
+-- Name: return_inventory_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_inventory_items ALTER COLUMN id SET DEFAULT nextval('return_inventory_items_id_seq'::regclass);
 
 
 --
@@ -6534,6 +6653,22 @@ ALTER TABLE ONLY spree_banner_boxes
 
 
 --
+-- Name: batch_collection_line_items batch_collection_line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collection_line_items
+    ADD CONSTRAINT batch_collection_line_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: batch_collections batch_collections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY batch_collections
+    ADD CONSTRAINT batch_collections_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: bergen_return_item_processes bergen_return_item_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7059,6 +7194,14 @@ ALTER TABLE ONLY refund_requests
 
 ALTER TABLE ONLY render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: return_inventory_items return_inventory_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY return_inventory_items
+    ADD CONSTRAINT return_inventory_items_pkey PRIMARY KEY (id);
 
 
 --
@@ -7738,6 +7881,13 @@ CREATE INDEX index_assets_on_viewable_type_and_type ON spree_assets USING btree 
 
 
 --
+-- Name: index_batch_collections_on_style; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_batch_collections_on_style ON batch_collections USING btree (style);
+
+
+--
 -- Name: index_celebrity_inspirations_on_spree_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7749,6 +7899,13 @@ CREATE INDEX index_celebrity_inspirations_on_spree_product_id ON celebrity_inspi
 --
 
 CREATE INDEX index_customisation_values_on_product_id ON customisation_values USING btree (product_id);
+
+
+--
+-- Name: index_customization_visualizations_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_customization_visualizations_on_product_id ON customization_visualizations USING btree (product_id);
 
 
 --
@@ -8218,6 +8375,20 @@ CREATE INDEX index_questions_on_position ON questions USING btree ("position");
 --
 
 CREATE INDEX index_questions_on_quiz_id ON questions USING btree (quiz_id);
+
+
+--
+-- Name: index_return_inventory_items_on_style_number; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_return_inventory_items_on_style_number ON return_inventory_items USING btree (style_number);
+
+
+--
+-- Name: index_return_inventory_items_on_upc; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_return_inventory_items_on_upc ON return_inventory_items USING btree (upc);
 
 
 --
@@ -9493,10 +9664,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
 
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
-
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802183524');
@@ -9733,15 +9900,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9760,8 +9921,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
-
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
@@ -9798,3 +9957,13 @@ INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
 
 INSERT INTO schema_migrations (version) VALUES ('20180131220110');
+
+INSERT INTO schema_migrations (version) VALUES ('20180212070230');
+
+INSERT INTO schema_migrations (version) VALUES ('20180212213652');
+
+INSERT INTO schema_migrations (version) VALUES ('20180213212256');
+
+INSERT INTO schema_migrations (version) VALUES ('20180220231314');
+
+INSERT INTO schema_migrations (version) VALUES ('20180221014607');
