@@ -1,6 +1,7 @@
-class Refulfiller
+module Refulfiller
+  module_function
 
-  def self.check_line_items_in_inventory(line_items)
+  def check_line_items_in_inventory(line_items)
     # remove this
     start_date = Time.now - 2.months
     line_items = get_n_days_of_line_items(start_date, 5)
@@ -16,7 +17,7 @@ class Refulfiller
 
   # check to see if line item exists in the inventories
   # if it does mark the 3pl on the line_item
-  def self.check_line_item_in_inventory(line_item)
+  def check_line_item_in_inventory(line_item)
     found = false
     upc = Orders::LineItemPresenter.new(line_item).global_sku&.id
     if rii = ReturnInventoryItem.find_by_upc(upc)
@@ -37,14 +38,14 @@ class Refulfiller
 
   # unmark a lineitem for refulfillment, chose not to increment the inventory count
   # due possibility that inventory was refreshed, better to err on side of less inventory
-  def self.unrefulfill_line_item(line_item_id)
+  def unrefulfill_line_item(line_item_id)
     li = Spree::LineItem.find(line_item_id)
     li.refulfill = nil
     li.save
   end
 
   # if only 1 available remove item from table, otherwise decrement available count by 1
-  def self.decrement_or_destroy_return_inventory_item(rii)
+  def decrement_or_destroy_return_inventory_item(rii)
     if rii.available == 1
       rii.delete
     else
@@ -53,18 +54,18 @@ class Refulfiller
     end
   end
 
-  def self.check_last_n_minutes(n_minutes)
+  def check_last_n_minutes(n_minutes)
     start_time = Time.now - n_minutes
     get_line_items_between(start_time, Time.now)
   end
 
-  def self.get_n_days_of_line_items(start_date, n_days)
+  def get_n_days_of_line_items(start_date, n_days)
     end_date = start_date.beginning_of_day + n_days.days
     orders = Spree::Order.where(completed_at: start_date..end_date, shipment_state: 'ready')
     lis = orders.map {|ord| ord.line_items}.flatten
   end
 
-  def self.get_line_items_between(start_time, end_time)
+  def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
     lis = orders.map {|ord| ord.line_items}.flatten
   end
