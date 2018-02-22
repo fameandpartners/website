@@ -49,7 +49,8 @@ class Repositories::CartProduct
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         from_wedding_atelier: wedding_atelier_product?,
-        price_drop_au_product: price_drop_au_product?
+        price_drop_au_product: price_drop_au_product?,
+        fabric: line_item_fabric
         )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
@@ -60,7 +61,6 @@ class Repositories::CartProduct
       result.brides_maid = product.price < 1
       result.swatch = product&.category&.category == 'Sample'
       result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
-
       result
     end
   end
@@ -188,6 +188,23 @@ class Repositories::CartProduct
         return Spree::Price.new(amount: line_item.old_price).display_price.to_s
       else
         return nil
+      end
+    end
+
+    def line_item_fabric
+      if line_item.fabric
+        if line_item.recommended_fabric?
+          fabric_price = 0.0
+        else
+          fabric_price = line_item.fabric.price_in(line_item.currency)
+        end
+
+        {
+        display_price: Spree::Price.new(amount: fabric_price, currency: line_item.currency).display_price,
+        amount: fabric_price,
+        currency: line_item.currency,
+        name: line_item.fabric.presentation
+        }
       end
     end
 
