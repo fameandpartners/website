@@ -22,7 +22,6 @@ module Skus
 
     def call
       base_sku = [style_number, size, color]
-      binding.pry
       # if has_personalization?
       base_sku << [custom, height, fabric]
       # end

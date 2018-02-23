@@ -146,7 +146,6 @@ class Populator
     end
 
     def product_fabric
-      binding.pry
       @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and fabrics.id = ?',product.id,product_attributes[:fabric_id]).first
     end
 
