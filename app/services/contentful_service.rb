@@ -209,6 +209,20 @@ module Contentful
           mobile_image: mobile_image,
           tile_url: tile_url,
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
+        relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
+        background_color = (fetched_lg_container.respond_to? :background_color) ? fetched_lg_container.background_color : 'transparent'
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : 'black.jpg'
+        border_color = (fetched_lg_container.respond_to? :border_color) ? fetched_lg_container.border_color : 'transparent'
+        button_label = (fetched_lg_container.respond_to? :button_label) ? fetched_lg_container.button_label : nil
+
+        {
+          relative_url: relative_url,
+          background_color: background_color,
+          text_color: text_color,
+          border_color: border_color,
+          button_label: button_label
+        }
       end
     end
 
@@ -220,12 +234,28 @@ module Contentful
       if (fetched_md_container.content_type.id == 'ITEM--md-text')
         text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
         text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? fetched_md_container.text_size : nil
 
         {
           id: 'ITEM--md-text',
           text: text_desktop,
           text_mobile: text_mobile,
-          text_size: fetched_md_container.text_size
+          text_size: text_size
+        }
+      elsif (fetched_md_container.content_type.id == 'ITEM--md-text--heading-with-custom-color')
+        text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
+        text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? "--#{fetched_md_container.text_size}" : nil
+        copy_block_heading = (fetched_md_container.respond_to? :copy_block_heading) ? fetched_md_container.copy_block_heading : nil
+        copy_block_heading_color = (fetched_md_container.respond_to? :copy_block_heading_color) ? fetched_md_container.copy_block_heading_color : '#000'
+
+        {
+          id: 'ITEM--md-text--heading-with-custom-color',
+          text: text_desktop,
+          text_mobile: text_mobile,
+          text_size: text_size,
+          copy_block_heading: copy_block_heading,
+          copy_block_heading_color: copy_block_heading_color
         }
       else
         # 'ITEM--md-email'
@@ -298,6 +328,7 @@ module Contentful
         desktop_video = (main_header_container.respond_to? :video_desktop) ? main_header_container.video_desktop.url : nil
         mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : desktop_video
         live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
+        live_text_color = (main_header_container.respond_to? :live_text_color) ? main_header_container.live_text_color : '#fff'
         bottom_caption = (main_header_container.respond_to? :caption) ? main_header_container.caption : nil
         bottom_caption_url = (main_header_container.respond_to? :caption_url) ? main_header_container.caption_url : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
@@ -319,6 +350,7 @@ module Contentful
           mobile_video: mobile_video,
           overlay_pids: overlay_pids,
           live_text: live_text,
+          live_text_color: live_text_color,
           bottom_caption: bottom_caption,
           bottom_caption_url: bottom_caption_url
         }

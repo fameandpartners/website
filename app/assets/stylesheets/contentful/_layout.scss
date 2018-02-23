@@ -35,11 +35,6 @@
 
 }
 
-.CtaNarrow__Link {
-  font-family: $secondary-font-family;
-  font-size: 1.9rem;
-}
-
 // custom offset (bulma doesn't have this margin-right version)
 .is-offset-6-right {
   @include breakpoint(tablet) {
