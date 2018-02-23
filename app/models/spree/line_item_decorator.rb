@@ -4,6 +4,8 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
+  belongs_to :fabric
+
   has_one :item_return, inverse_of: :line_item
 
   has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
@@ -57,6 +59,10 @@ Spree::LineItem.class_eval do
 
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
+    end
+
+    if fabric.present? && !recommended_fabric?
+      total_price += fabric.price_in(self.currency)
     end
 
     total_price
@@ -228,6 +234,11 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def recommended_fabric?
+      fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
+      fp.recommended
   end
 
   private
