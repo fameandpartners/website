@@ -2,3 +2,22 @@
   text-align: center;
   margin: 25px 0;
 }
+
+.CtaButton--sideBySide .CtaButton__content {
+  display: table;
+  width: 60%;
+  margin: 25px auto;
+
+  @include breakpoint(tablet) {
+    display: inline-block;
+    width: auto;
+    margin: 25px 10px;
+  }
+}
+
+.CtaButton__content--thickCopy {
+  padding: 10px 40px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}

@@ -209,6 +209,20 @@ module Contentful
           mobile_image: mobile_image,
           tile_url: tile_url,
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
+        relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
+        background_color = (fetched_lg_container.respond_to? :background_color) ? fetched_lg_container.background_color : 'transparent'
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : 'black.jpg'
+        border_color = (fetched_lg_container.respond_to? :border_color) ? fetched_lg_container.border_color : 'transparent'
+        button_label = (fetched_lg_container.respond_to? :button_label) ? fetched_lg_container.button_label : nil
+
+        {
+          relative_url: relative_url,
+          background_color: background_color,
+          text_color: text_color,
+          border_color: border_color,
+          button_label: button_label
+        }
       end
     end
 
@@ -223,7 +237,7 @@ module Contentful
         text_size = (fetched_md_container.respond_to? :text_size) ? fetched_md_container.text_size : nil
 
         {
-          id: fetched_md_container.content_type.id,
+          id: 'ITEM--md-text',
           text: text_desktop,
           text_mobile: text_mobile,
           text_size: text_size
@@ -236,7 +250,7 @@ module Contentful
         copy_block_heading_color = (fetched_md_container.respond_to? :copy_block_heading_color) ? fetched_md_container.copy_block_heading_color : '#000'
 
         {
-          id: fetched_md_container.content_type.id,
+          id: 'ITEM--md-text--heading-with-custom-color',
           text: text_desktop,
           text_mobile: text_mobile,
           text_size: text_size,
