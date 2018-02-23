@@ -10,6 +10,8 @@ class GlobalSku < ActiveRecord::Base
                   :size,
                   :color_id,
                   :color_name,
+                  :fabric_name,
+                  :fabric_id,
                   :customisation_id,
                   :customisation_name,
                   :height_value,
