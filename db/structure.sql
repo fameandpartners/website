@@ -153,6 +153,7 @@ CREATE TABLE batch_collection_line_items (
     id integer NOT NULL,
     batch_collection_id integer,
     line_item_id integer,
+    projected_delivery_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -183,7 +184,8 @@ ALTER SEQUENCE batch_collection_line_items_id_seq OWNED BY batch_collection_line
 
 CREATE TABLE batch_collections (
     id integer NOT NULL,
-    style character varying(255),
+    batch_key character varying(255),
+    status character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -7881,10 +7883,10 @@ CREATE INDEX index_assets_on_viewable_type_and_type ON spree_assets USING btree 
 
 
 --
--- Name: index_batch_collections_on_style; Type: INDEX; Schema: public; Owner: -
+-- Name: index_batch_collections_on_batch_key; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_batch_collections_on_style ON batch_collections USING btree (style);
+CREATE INDEX index_batch_collections_on_batch_key ON batch_collections USING btree (batch_key);
 
 
 --

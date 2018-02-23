@@ -197,6 +197,10 @@ Spree::LineItem.class_eval do
     60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
   end
 
+  def in_batch?
+    !self.batch_collections.empty?
+  end
+
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
