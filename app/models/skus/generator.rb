@@ -23,9 +23,11 @@ module Skus
     def call
       base_sku = [style_number, size, color]
       # if has_personalization?
-      base_sku << [custom, height, fabric]
+      base_sku << [custom, height]
       # end
-
+      if !@fabric_id.blank?
+        base_sku << [fabric]
+      end
       base_sku.join.delete(' ').upcase
     end
 
@@ -42,6 +44,7 @@ module Skus
     end
 
     def fabric
+
       "F#{@fabric_id}"
     end
 
