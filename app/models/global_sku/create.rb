@@ -24,7 +24,7 @@ class GlobalSku
     # @param [String] color_name. Example: "Emerald Green"
     # @param [String] height. Example: "Petite"
     # @param [Array<CustomisationValue>] customizations
-    def initialize(style_number:, product_name:, size:, color_name:, fabric_name:, height:, customizations: [])
+    def initialize(style_number:, product_name:, size:, color_name:,  height:, fabric_name:'', customizations: [])
       @style_number   = style_number
       @product_name   = product_name
       @size           = size
