@@ -1,0 +1,38 @@
+[
+  {
+  "color": "green",
+  "fabrics":
+    [
+      {
+        "name": "green-silk",
+        "price_aud": "12.00",
+        "price_usd": "12.00",
+        "material": "Silk",
+        "image_url": "http://Cloudfront.somewhere",
+        "presentation": "Green Silk"  
+      },
+      {
+        "name": "green-heavy-georgette",
+        "price_aud": "12.00",
+        "price_usd": "12.00",
+        "material": "Heavy Georgette",
+        "image_url": "http://Cloudfront.somewhere",
+        "presentation": "Green Heavy Georgette"  
+      }
+    ]
+  },
+  {
+  "color": "black",
+  "fabrics":
+    [
+      {
+        "name": "black-silk",
+        "price_aud": "12.00",
+        "price_usd": "12.00",
+        "material": "Silk",
+        "image_url": "http://Cloudfront.somewhere",
+        "presentation": "Black Silk"  
+      }
+    ]
+  }
+]

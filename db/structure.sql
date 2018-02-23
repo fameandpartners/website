@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -645,62 +645,6 @@ ALTER SEQUENCE discounts_id_seq OWNED BY discounts.id;
 
 
 --
--- Name: spree_option_types; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE spree_option_types (
-    id integer NOT NULL,
-    name character varying(100),
-    presentation character varying(100),
-    "position" integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: spree_option_values; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE spree_option_values (
-    id integer NOT NULL,
-    "position" integer,
-    name character varying(255),
-    presentation character varying(255),
-    option_type_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    value character varying(255),
-    image_file_name character varying(255),
-    image_content_type character varying(255),
-    image_file_size integer,
-    use_in_customisation boolean DEFAULT false
-);
-
-
---
--- Name: dress_colours; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW dress_colours AS
- SELECT v.id,
-    v."position",
-    v.name,
-    v.presentation,
-    v.option_type_id,
-    v.created_at,
-    v.updated_at,
-    v.value,
-    v.image_file_name,
-    v.image_content_type,
-    v.image_file_size,
-    v.use_in_customisation
-   FROM (spree_option_values v
-     JOIN spree_option_types t ON ((t.id = v.option_type_id)))
-  WHERE ((t.name)::text = 'dress-color'::text);
-
-
---
 -- Name: email_notifications; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -902,6 +846,75 @@ ALTER SEQUENCE fabrications_id_seq OWNED BY fabrications.id;
 
 
 --
+-- Name: fabrics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE fabrics (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    price_aud character varying(255),
+    price_usd character varying(255),
+    material character varying(255),
+    image_url character varying(255),
+    option_value_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: fabrics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE fabrics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fabrics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE fabrics_id_seq OWNED BY fabrics.id;
+
+
+--
+-- Name: fabrics_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE fabrics_products (
+    id integer NOT NULL,
+    fabric_id integer,
+    product_id integer,
+    recommended boolean,
+    description character varying(255)
+);
+
+
+--
+-- Name: fabrics_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE fabrics_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fabrics_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE fabrics_products_id_seq OWNED BY fabrics_products.id;
+
+
+--
 -- Name: facebook_accounts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -968,177 +981,6 @@ CREATE SEQUENCE facebook_ad_creatives_id_seq
 --
 
 ALTER SEQUENCE facebook_ad_creatives_id_seq OWNED BY facebook_ad_creatives.id;
-
-
---
--- Name: facebook_ad_insights; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE facebook_ad_insights (
-    id integer NOT NULL,
-    facebook_ad_id integer,
-    clicks integer,
-    cost_per_action_type integer,
-    cpc double precision,
-    cpm double precision,
-    cpp double precision,
-    ctr double precision,
-    date_start timestamp without time zone,
-    date_stop timestamp without time zone,
-    frequency double precision,
-    reach double precision,
-    relevance_score json,
-    social_impressions json,
-    spend double precision,
-    total_actions double precision,
-    total_unique_actions double precision,
-    website_ctr json,
-    website_clicks integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    actions json,
-    action_values json
-);
-
-
---
--- Name: facebook_ad_insights_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE facebook_ad_insights_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: facebook_ad_insights_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE facebook_ad_insights_id_seq OWNED BY facebook_ad_insights.id;
-
-
---
--- Name: facebook_ads; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE facebook_ads (
-    id integer NOT NULL,
-    facebook_id character varying(255),
-    facebook_adset_id character varying(255),
-    name character varying(255),
-    created_time timestamp without time zone,
-    updated_time timestamp without time zone,
-    bid_amount double precision,
-    status character varying(255),
-    recommendations json,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: facebook_ads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE facebook_ads_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: facebook_ads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE facebook_ads_id_seq OWNED BY facebook_ads.id;
-
-
---
--- Name: facebook_adsets; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE facebook_adsets (
-    id integer NOT NULL,
-    facebook_campaign_id character varying(255),
-    facebook_id character varying(255),
-    name character varying(255),
-    adlabels json,
-    adset_schedule json,
-    bid_amount double precision,
-    daily_budget double precision,
-    created_time timestamp without time zone,
-    updated_time timestamp without time zone,
-    start_time timestamp without time zone,
-    end_time timestamp without time zone,
-    optimization_goal character varying(255),
-    status character varying(255),
-    targeting json,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: facebook_adsets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE facebook_adsets_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: facebook_adsets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE facebook_adsets_id_seq OWNED BY facebook_adsets.id;
-
-
---
--- Name: facebook_campaigns; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE facebook_campaigns (
-    id integer NOT NULL,
-    facebook_id character varying(255),
-    name character varying(255),
-    created_time timestamp without time zone,
-    start_time timestamp without time zone,
-    stop_time timestamp without time zone,
-    updated_time timestamp without time zone,
-    status character varying(255),
-    recommendations json,
-    facebook_account_id character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: facebook_campaigns_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE facebook_campaigns_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: facebook_campaigns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE facebook_campaigns_id_seq OWNED BY facebook_campaigns.id;
 
 
 --
@@ -1223,7 +1065,9 @@ CREATE TABLE global_skus (
     product_id integer,
     variant_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    fabric_id integer,
+    fabric_name character varying(255)
 );
 
 
@@ -1232,7 +1076,7 @@ CREATE TABLE global_skus (
 --
 
 CREATE SEQUENCE global_skus_id_seq
-    START WITH 10000
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -2878,7 +2722,7 @@ CREATE TABLE site_versions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     exchange_rate_timestamp date,
-    exchange_rate numeric DEFAULT 1,
+    exchange_rate numeric DEFAULT 1.0,
     domain character varying(255) DEFAULT ''::character varying NOT NULL
 );
 
@@ -3377,12 +3221,13 @@ CREATE TABLE spree_line_items (
     currency character varying(255),
     old_price numeric(8,2),
     delivery_date character varying(255),
+    customizations jsonb,
     stock boolean,
     color character varying(255),
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    customizations jsonb
+    fabric_id integer
 );
 
 
@@ -3516,6 +3361,20 @@ ALTER SEQUENCE spree_masterpass_checkouts_id_seq OWNED BY spree_masterpass_check
 
 
 --
+-- Name: spree_option_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE spree_option_types (
+    id integer NOT NULL,
+    name character varying(100),
+    presentation character varying(100),
+    "position" integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: spree_option_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3541,6 +3400,26 @@ ALTER SEQUENCE spree_option_types_id_seq OWNED BY spree_option_types.id;
 CREATE TABLE spree_option_types_prototypes (
     prototype_id integer,
     option_type_id integer
+);
+
+
+--
+-- Name: spree_option_values; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE spree_option_values (
+    id integer NOT NULL,
+    "position" integer,
+    name character varying(255),
+    presentation character varying(255),
+    option_type_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    value character varying(255),
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    use_in_customisation boolean DEFAULT false
 );
 
 
@@ -4035,9 +3914,9 @@ CREATE TABLE spree_products_promotion_rules (
 --
 
 CREATE TABLE spree_products_taxons (
+    id integer NOT NULL,
     product_id integer,
-    taxon_id integer,
-    id integer NOT NULL
+    taxon_id integer
 );
 
 
@@ -4899,7 +4778,7 @@ CREATE TABLE spree_users (
     automagically_registered boolean DEFAULT false,
     active_moodboard_id integer,
     wedding_atelier_signup_step character varying(255) DEFAULT 'size'::character varying,
-    user_data text DEFAULT '{}'::text NOT NULL
+    user_data text DEFAULT '{}'::text
 );
 
 
@@ -5662,6 +5541,20 @@ ALTER TABLE ONLY fabrications ALTER COLUMN id SET DEFAULT nextval('fabrications_
 
 
 --
+-- Name: fabrics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics ALTER COLUMN id SET DEFAULT nextval('fabrics_id_seq'::regclass);
+
+
+--
+-- Name: fabrics_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics_products ALTER COLUMN id SET DEFAULT nextval('fabrics_products_id_seq'::regclass);
+
+
+--
 -- Name: facebook_accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5673,34 +5566,6 @@ ALTER TABLE ONLY facebook_accounts ALTER COLUMN id SET DEFAULT nextval('facebook
 --
 
 ALTER TABLE ONLY facebook_ad_creatives ALTER COLUMN id SET DEFAULT nextval('facebook_ad_creatives_id_seq'::regclass);
-
-
---
--- Name: facebook_ad_insights id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_ad_insights ALTER COLUMN id SET DEFAULT nextval('facebook_ad_insights_id_seq'::regclass);
-
-
---
--- Name: facebook_ads id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_ads ALTER COLUMN id SET DEFAULT nextval('facebook_ads_id_seq'::regclass);
-
-
---
--- Name: facebook_adsets id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_adsets ALTER COLUMN id SET DEFAULT nextval('facebook_adsets_id_seq'::regclass);
-
-
---
--- Name: facebook_campaigns id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_campaigns ALTER COLUMN id SET DEFAULT nextval('facebook_campaigns_id_seq'::regclass);
 
 
 --
@@ -6526,14 +6391,6 @@ ALTER TABLE ONLY answers
 
 
 --
--- Name: spree_banner_boxes banners_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY spree_banner_boxes
-    ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
-
-
---
 -- Name: bergen_return_item_processes bergen_return_item_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6694,6 +6551,22 @@ ALTER TABLE ONLY fabrications
 
 
 --
+-- Name: fabrics fabrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics
+    ADD CONSTRAINT fabrics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fabrics_products fabrics_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY fabrics_products
+    ADD CONSTRAINT fabrics_products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: facebook_accounts facebook_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6707,38 +6580,6 @@ ALTER TABLE ONLY facebook_accounts
 
 ALTER TABLE ONLY facebook_ad_creatives
     ADD CONSTRAINT facebook_ad_creatives_pkey PRIMARY KEY (id);
-
-
---
--- Name: facebook_ad_insights facebook_ad_insights_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_ad_insights
-    ADD CONSTRAINT facebook_ad_insights_pkey PRIMARY KEY (id);
-
-
---
--- Name: facebook_ads facebook_ads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_ads
-    ADD CONSTRAINT facebook_ads_pkey PRIMARY KEY (id);
-
-
---
--- Name: facebook_adsets facebook_adsets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_adsets
-    ADD CONSTRAINT facebook_adsets_pkey PRIMARY KEY (id);
-
-
---
--- Name: facebook_campaigns facebook_campaigns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY facebook_campaigns
-    ADD CONSTRAINT facebook_campaigns_pkey PRIMARY KEY (id);
 
 
 --
@@ -6771,6 +6612,14 @@ ALTER TABLE ONLY global_skus
 
 ALTER TABLE ONLY incompatibilities
     ADD CONSTRAINT incompatibilities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: inspirations inspirations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY inspirations
+    ADD CONSTRAINT inspirations_pkey PRIMARY KEY (id);
 
 
 --
@@ -6878,11 +6727,11 @@ ALTER TABLE ONLY moodboard_collaborators
 
 
 --
--- Name: moodboard_item_comments moodboard_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: moodboard_item_comments moodboard_item_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY moodboard_item_comments
-    ADD CONSTRAINT moodboard_comments_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT moodboard_item_comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -6894,19 +6743,11 @@ ALTER TABLE ONLY moodboard_item_events
 
 
 --
--- Name: inspirations moodboard_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY inspirations
-    ADD CONSTRAINT moodboard_items_pkey PRIMARY KEY (id);
-
-
---
--- Name: moodboard_items moodboard_items_pkey1; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: moodboard_items moodboard_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY moodboard_items
-    ADD CONSTRAINT moodboard_items_pkey1 PRIMARY KEY (id);
+    ADD CONSTRAINT moodboard_items_pkey PRIMARY KEY (id);
 
 
 --
@@ -6934,27 +6775,11 @@ ALTER TABLE ONLY order_return_requests
 
 
 --
--- Name: order_shipments_factories_concrete order_shipments_factories_concrete_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY order_shipments_factories_concrete
-    ADD CONSTRAINT order_shipments_factories_concrete_pkey PRIMARY KEY (id);
-
-
---
 -- Name: payment_requests payment_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY payment_requests
     ADD CONSTRAINT payment_requests_pkey PRIMARY KEY (id);
-
-
---
--- Name: spree_paypal_accounts paypal_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY spree_paypal_accounts
-    ADD CONSTRAINT paypal_accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -7150,6 +6975,14 @@ ALTER TABLE ONLY spree_authentication_methods
 
 
 --
+-- Name: spree_banner_boxes spree_banner_boxes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spree_banner_boxes
+    ADD CONSTRAINT spree_banner_boxes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: spree_calculators spree_calculators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7275,6 +7108,14 @@ ALTER TABLE ONLY spree_payment_methods
 
 ALTER TABLE ONLY spree_payments
     ADD CONSTRAINT spree_payments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spree_paypal_accounts spree_paypal_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY spree_paypal_accounts
+    ADD CONSTRAINT spree_paypal_accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -7550,14 +7391,6 @@ ALTER TABLE ONLY spree_zones
 
 
 --
--- Name: user_style_profiles style_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY user_style_profiles
-    ADD CONSTRAINT style_reports_pkey PRIMARY KEY (id);
-
-
---
 -- Name: style_to_product_height_range_groups style_to_product_height_range_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7579,6 +7412,14 @@ ALTER TABLE ONLY styles
 
 ALTER TABLE ONLY user_style_profile_taxons
     ADD CONSTRAINT user_style_profile_taxons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_style_profiles user_style_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_style_profiles
+    ADD CONSTRAINT user_style_profiles_pkey PRIMARY KEY (id);
 
 
 --
@@ -7822,6 +7663,13 @@ CREATE UNIQUE INDEX index_fabrications_on_uuid ON fabrications USING btree (uuid
 
 
 --
+-- Name: index_fabrics_on_option_value_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_on_option_value_id ON fabrics USING btree (option_value_id);
+
+
+--
 -- Name: index_facebook_data_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7931,6 +7779,13 @@ CREATE UNIQUE INDEX index_item_returns_on_uuid ON item_returns USING btree (uuid
 --
 
 CREATE INDEX index_line_item_making_options_on_line_item ON line_item_making_options USING btree (line_item_id);
+
+
+--
+-- Name: index_line_item_on_fabric_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_line_item_on_fabric_id ON spree_line_items USING btree (fabric_id);
 
 
 --
@@ -9423,8 +9278,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160310225707');
 
 INSERT INTO schema_migrations (version) VALUES ('20160311161727');
 
-INSERT INTO schema_migrations (version) VALUES ('20160316044236');
-
 INSERT INTO schema_migrations (version) VALUES ('20160316045448');
 
 INSERT INTO schema_migrations (version) VALUES ('20160321002728');
@@ -9492,10 +9345,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160718185835');
 INSERT INTO schema_migrations (version) VALUES ('20160720124018');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727014602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160729072602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160801183214');
 
 INSERT INTO schema_migrations (version) VALUES ('20160802150056');
 
@@ -9733,15 +9582,9 @@ INSERT INTO schema_migrations (version) VALUES ('20170620220113');
 
 INSERT INTO schema_migrations (version) VALUES ('20170623185316');
 
-INSERT INTO schema_migrations (version) VALUES ('20170720185835');
-
 INSERT INTO schema_migrations (version) VALUES ('20170721184956');
 
 INSERT INTO schema_migrations (version) VALUES ('20170724213118');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729151224');
-
-INSERT INTO schema_migrations (version) VALUES ('20170729215619');
 
 INSERT INTO schema_migrations (version) VALUES ('20170809211839');
 
@@ -9760,8 +9603,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906001235');
 INSERT INTO schema_migrations (version) VALUES ('20170906170913');
 
 INSERT INTO schema_migrations (version) VALUES ('20170907211051');
-
-INSERT INTO schema_migrations (version) VALUES ('20170908020932');
 
 INSERT INTO schema_migrations (version) VALUES ('20170908182740');
 
@@ -9798,3 +9639,9 @@ INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
 
 INSERT INTO schema_migrations (version) VALUES ('20180131220110');
+
+INSERT INTO schema_migrations (version) VALUES ('20180220010932');
+
+INSERT INTO schema_migrations (version) VALUES ('20180222192328');
+
+INSERT INTO schema_migrations (version) VALUES ('20180223185047');
