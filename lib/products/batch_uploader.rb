@@ -180,6 +180,7 @@ module Products
       raw[:fabric]                     = book.cell(row_num, columns[:fabric])
       raw[:product_type]               = book.cell(row_num, columns[:product_type])
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
+      raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
       raw[:factory_id]                 = book.cell(row_num, columns[:factory_id])
       raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
       raw[:product_coding]             = book.cell(row_num, columns[:product_coding])
@@ -304,6 +305,9 @@ module Products
         description:    processed[:description] || raw[:description],
         colors:         processed[:colors],
         taxon_ids:      processed[:taxon_ids],
+        category: raw[:product_category],
+        sub_category: raw[:product_sub_category],
+        
         style_profile:  {
           glam:           raw[:glam],
           girly:          raw[:girly],
@@ -328,7 +332,6 @@ module Products
           fit:                        raw[:fit],
           fabric:                     raw[:fabric],
           product_type:               raw[:product_type],
-          product_category:           raw[:product_category],
           factory_id:                 raw[:factory_id],
           factory_name:               raw[:factory_name],
           product_coding:             raw[:product_coding],
@@ -393,6 +396,7 @@ module Products
           fabric:                     /fabric/i,
           product_type:               /product type/i,
           product_category:           /product category/i,
+          product_sub_category:       /product sub-category/i,
           factory_id:                 /factory id/i,
           factory_name:               /factory$/i,
           color_customization:        /colour customisation/i,
@@ -406,6 +410,7 @@ module Products
           standard_days_for_making:   /standard days for making/i,
           customised_days_for_making: /customised days for making/i,
           height_mapping_count: /height mapping count/i
+
       }
 
       conformities.each do |key, regex|
@@ -530,16 +535,22 @@ module Products
         taxon_ids = taxon_ids | product.taxons.collect(&:id)
       end
 
+      category = Category.find_by_category_and_subcategory( args[:category], args[:sub_category] )
+      if( category.nil? )
+        raise "No category matching #{args[:category]} / #{args[:sub_category]}"
+      end
+      
       attributes = {
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
         taxon_ids: taxon_ids,
+        category_id: category.id,
         available_on: @available_on || product.available_on
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-
+      
       if product.persisted?
         attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id)
       end
