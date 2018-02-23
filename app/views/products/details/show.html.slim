@@ -30,7 +30,8 @@ ruby:
       flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} },
     };
 
-= content_for :head
+
+= content_for :head do
   - @product.cropped_images.each_with_index do |image, index|
     = tag :meta, name: "crop_image_#{index}", content: image.original
 
