@@ -6,6 +6,7 @@ ruby:
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
   end
 
+
   @current_site_version = current_site_version
   discount  = @product.discount || { table: { amount: 0 } }
   @product_discount = discount.to_json
@@ -17,6 +18,7 @@ ruby:
 / TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
 = content_for :head do
   javascript:
+
     window.PdpDataFull = {
       colorGroups: #{raw Repositories::ProductColors.color_groups.to_json},
       paths: #{raw product_paths.to_json},

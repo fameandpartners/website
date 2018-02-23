@@ -945,7 +945,9 @@ ALTER SEQUENCE fabrics_id_seq OWNED BY fabrics.id;
 CREATE TABLE fabrics_products (
     id integer NOT NULL,
     fabric_id integer,
-    product_id integer
+    product_id integer,
+    recommended boolean,
+    description character varying(255)
 );
 
 
@@ -10031,3 +10033,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180131211009');
 INSERT INTO schema_migrations (version) VALUES ('20180131220110');
 
 INSERT INTO schema_migrations (version) VALUES ('20180220010932');
+
+INSERT INTO schema_migrations (version) VALUES ('20180222192328');

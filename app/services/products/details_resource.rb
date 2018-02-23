@@ -32,7 +32,6 @@ class Products::DetailsResource
         permalink:                          product.permalink,
         is_active:                          product.is_active?,
         is_deleted:                         product.deleted?,
-        has_fabrics:                        !product.fabrics.empty?, 
         height_customisable:                product.height_customisable?,
         # page#show specific details
         fabric:                             product.property('fabric'),
@@ -66,7 +65,6 @@ class Products::DetailsResource
       available_options:    product_selection_options,
       moodboard:            product_moodboard,
       render3d_images:      product_render3d_images,
-      fabrics:              product.fabrics,     
     }
 
     Products::Presenter.new(non_primitive_options.merge(primitive_options))

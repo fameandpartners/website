@@ -61,7 +61,7 @@ Spree::LineItem.class_eval do
       total_price += personalization.price
     end
 
-    if fabric.present?
+    if fabric.present? && !recommended_fabric?
       total_price += fabric.price_in(self.currency)
     end
 
@@ -234,6 +234,11 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def recommended_fabric?
+      fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
+      fp.recommended
   end
 
   private

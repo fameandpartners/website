@@ -23,6 +23,10 @@ Spree::Product.class_eval do
   has_many :product_color_values,
            dependent: :destroy, inverse_of: :product
 
+  has_many :fabric_products,
+           class_name: 'FabricsProduct',
+           dependent: :destroy
+
   has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
 
@@ -166,10 +170,31 @@ Spree::Product.class_eval do
       .recommended
       .pluck(:option_value_id)
   end
+
+  def basic_fabric_ids
+    fabric_products
+      .recommended
+      .pluck(:fabric_id)
+  end
+
+  def custom_fabric_ids
+    fabric_products
+      .custom
+      .pluck(:fabric_id)
+  end
+
   alias_method :color_ids, :basic_color_ids
 
   def basic_colors
     Spree::OptionValue.where(id: basic_color_ids)
+  end
+
+  def basic_fabrics
+    Fabric.where(id: basic_fabric_ids)
+  end
+
+  def custom_fabrics
+    Fabric.where(id: custom_fabric_ids)
   end
 
   def color_names
