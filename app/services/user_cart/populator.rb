@@ -78,7 +78,7 @@ class Populator
 
     def add_fabric_to_line_item
       line_item.fabric = product_fabric
-      line_item.save
+      line_item.save!
     end
 
     def add_personalized_product
@@ -108,8 +108,14 @@ class Populator
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
         item['size']  = product_size.value
-        item.color_id = product_color.color_id
-        item['color'] = product_color.color_name
+        binding.pry
+        if product_fabric
+          item.color_id = product_fabric.option_value_id
+          item['color'] = product_fabric.option_value.name
+        else
+          item.color_id = product_color.color_id
+          item['color'] = product_color.color_name
+        end
         item.product_id = product.id
 
         if product_attributes[:height].present?
@@ -123,7 +129,7 @@ class Populator
     end
 
     def personalized_product?
-      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
+      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height? || product_fabric
     end
 
     def custom_height?
@@ -140,7 +146,8 @@ class Populator
     end
 
     def product_fabric
-      @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and fabrics.id = ?',1424,product_attributes[:fabric_id]).first
+      binding.pry
+      @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and fabrics.id = ?',product.id,product_attributes[:fabric_id]).first
     end
 
     def line_item

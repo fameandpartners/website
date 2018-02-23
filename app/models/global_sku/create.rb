@@ -9,6 +9,7 @@ class GlobalSku
                 :product_name,
                 :size,
                 :color_name,
+                :fabric_name,
                 :height,
                 :customizations
 
@@ -23,13 +24,15 @@ class GlobalSku
     # @param [String] color_name. Example: "Emerald Green"
     # @param [String] height. Example: "Petite"
     # @param [Array<CustomisationValue>] customizations
-    def initialize(style_number:, product_name:, size:, color_name:, height:, customizations: [])
+    def initialize(style_number:, product_name:, size:, color_name:, fabric_name:, height:, customizations: [])
       @style_number   = style_number
       @product_name   = product_name
       @size           = size
       @color_name     = color_name
+      @fabric_name    = fabric_name
       @height         = height
       @customizations = customizations
+
 
       normalize_parameters
     end
@@ -44,6 +47,8 @@ class GlobalSku
           size:               size,
           color_id:           color.id,
           color_name:         color.name,
+          color_id:           fabric&.id,
+          color_name:         fabric&.name,
           height_value:       height,
           customisation_id:   customization_value_ids,
           customisation_name: customization_value_names,
@@ -66,6 +71,7 @@ class GlobalSku
         style_number:            style_number,
         size:                    size,
         color_id:                color&.id,
+        fabric_id:               fabric&.id,
         height:                  height,
         customization_value_ids: customizations&.map { |x| x['customisation_value']['id'] }.sort
       ).call
@@ -97,6 +103,10 @@ class GlobalSku
 
     def color
       Spree::OptionValue.where(name: color_name).first
+    end
+
+    def fabric
+      Fabric.where(name: fabric_name).first
     end
 
     def customization_value_ids
