@@ -205,6 +205,8 @@ class Repositories::CartProduct
         currency: line_item.currency,
         name: line_item.fabric.presentation
         }
+      else
+        nil
       end
     end
 
