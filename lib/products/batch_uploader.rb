@@ -3,6 +3,8 @@
 require 'roo'
 require 'ostruct'
 require 'log_formatter'
+require 'logger'
+require 'forwardable'
 
 # TODO - MORE REFACTORING
 # This class contains multiple responsibilities inside it.
@@ -23,12 +25,12 @@ module Products
 
     attr_reader :parsed_data, :keep_taxons, :available_on
 
-    include ActionView::Helpers::TextHelper # for truncate
+#    include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on, mark_new_this_week = false, logdev: $stdout)
       @logger = Logger.new(logdev)
       @logger.level = Logger::INFO
-      @logger.formatter = LogFormatter.terminal_formatter
+#      @logger.formatter = LogFormatter.terminal_formatter
 
       @available_on = available_on
       @keep_taxons = true
@@ -87,11 +89,32 @@ module Products
         processed = process_raw_row_data(raw)
         item_hash = build_item_hash(processed, raw)
       end
+      add_color_data( book, @parsed_data ) if color_data_present?( book )      
       add_cad_data( book, @parsed_data ) if cad_data_present?( book )
-
       info "Parse Complete"
     end
 
+    def add_color_data( book, parsed_data )
+
+      fabric_types = []
+      color_data = {}
+      book.row( 1, "Fabric & Color" ).each_slice(3) do |slice|
+        fabric_types.push( slice.first.strip! )
+      end
+
+      total_rows = book.last_row("Fabric & Color")
+      (2..total_rows).each do |i|
+        book.row( i, "Fabric & Color" ).each_slice(3).to_a.each_with_index do |slice, index|
+          color_data[slice[1]] = { code: slice[1], color_name: slice[0], fabric_name: fabric_types[index] }
+        end
+      end
+      parsed_data['color_data'] = color_data
+    end
+    
+    def color_data_present?( book )
+      !book.sheets.index( "Fabric & Color" ).nil?      
+    end
+    
     def add_cad_data( book, parsed_data )
       total_rows = book.last_row("CADs")
       columns = {}
@@ -143,63 +166,21 @@ module Products
       !book.sheets.index( "CADs" ).nil?
     end
 
-
     private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
-      # Basic
+      # Valid
       raw[:sku]                        = book.cell(row_num, columns[:sku])
       raw[:name]                       = book.cell(row_num, columns[:name])
       raw[:description]                = book.cell(row_num, columns[:description])
       raw[:price_in_aud]               = book.cell(row_num, columns[:price_in_aud])
       raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
       raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-      raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-
-      # Style
-      raw[:glam]                       = book.cell(row_num, columns[:glam])
-      raw[:girly]                      = book.cell(row_num, columns[:girly])
-      raw[:classic]                    = book.cell(row_num, columns[:classic])
-      raw[:edgy]                       = book.cell(row_num, columns[:edgy])
-      raw[:bohemian]                   = book.cell(row_num, columns[:bohemian])
-      raw[:sexiness]                   = book.cell(row_num, columns[:sexiness])
-      raw[:fashionability]             = book.cell(row_num, columns[:fashionability])
-      raw[:apple]                      = book.cell(row_num, columns[:apple])
-      raw[:pear]                       = book.cell(row_num, columns[:pear])
-      raw[:strawberry]                 = book.cell(row_num, columns[:strawberry])
-      raw[:hour_glass]                 = book.cell(row_num, columns[:hour_glass])
-      raw[:column]                     = book.cell(row_num, columns[:column])
-      raw[:athletic]                   = book.cell(row_num, columns[:athletic])
-      raw[:petite]                     = book.cell(row_num, columns[:petite])
-      # Properties
-      raw[:style_notes]                = book.cell(row_num, columns[:style_notes])
-      raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
       raw[:fit]                        = book.cell(row_num, columns[:fit])
-      raw[:size]                       = book.cell(row_num, columns[:size])
-      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT
-      raw[:fabric]                     = book.cell(row_num, columns[:fabric])
-      raw[:product_type]               = book.cell(row_num, columns[:product_type])
-      raw[:product_category]           = book.cell(row_num, columns[:product_category])
-      raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
-      raw[:factory_id]                 = book.cell(row_num, columns[:factory_id])
-      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
-      raw[:product_coding]             = book.cell(row_num, columns[:product_coding])
-      raw[:shipping]                   = book.cell(row_num, columns[:shipping])
-      raw[:stylist_quote_short]        = book.cell(row_num, columns[:stylist_quote_short])
-      raw[:stylist_quote_long]         = book.cell(row_num, columns[:stylist_quote_long])
-      raw[:product_details]            = book.cell(row_num, columns[:product_details])
-      raw[:revenue]                    = book.cell(row_num, columns[:revenue])
-      raw[:cogs]                       = book.cell(row_num, columns[:cogs])
-      raw[:color_customization]        = book.cell(row_num, columns[:color_customization])
-      raw[:available_colors]           = book.cell(row_num, columns[:available_colors])
-      raw[:standard_days_for_making]   = book.cell(row_num, columns[:standard_days_for_making])
-      raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
-      raw[:short_description]          = book.cell(row_num, columns[:short_description])
-
-      # Additional
-      raw[:song_link]                  = book.cell(row_num, columns[:song_link])
-      raw[:song_name]                  = book.cell(row_num, columns[:song_name])
-
+      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT      
+      raw[:recommended_fabric_colors]  = book.cell(row_num, columns[:recommended_fabric_colors])
+      raw[:fabric_information]         = Array.wrap(columns[:fabric_information]).map { |i| book.cell(row_num, i) }
+      raw[:custom_fabric_colors]       = Array.wrap(columns[:custom_fabric_colors]).map { |i| book.cell(row_num, i) }
       raw[:customizations] = []
       columns[:customizations].each_with_index do |customization, index|
         raw[:customizations] << {
@@ -208,6 +189,10 @@ module Products
           position: index + 1
         }
       end
+      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])      
+      raw[:product_category]           = book.cell(row_num, columns[:product_category])
+      raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
+
       info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
       raw
     end
@@ -237,10 +222,6 @@ module Products
         processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
       end
 
-      if raw[:short_description].present?
-        processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
-      end
-
       range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
 
       processed[:taxon_ids] = []
@@ -257,6 +238,8 @@ module Products
       # :colors is the legacy recommended colors.
       # :recommended_colors will each have a variant built from them
       # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
+
+
       processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
       recommended_colors             = get_color_options(raw[:colors])
       available_colors               = get_color_options(raw[:available_colors].to_s.split(','))
@@ -308,48 +291,11 @@ module Products
         category: raw[:product_category],
         sub_category: raw[:product_sub_category],
         
-        style_profile:  {
-          glam:           raw[:glam],
-          girly:          raw[:girly],
-          classic:        raw[:classic],
-          edgy:           raw[:edgy],
-          bohemian:       raw[:bohemian],
-          sexiness:       raw[:sexiness],
-          fashionability: raw[:fashionability],
-          apple:          raw[:apple],
-          pear:           raw[:pear],
-          strawberry:     raw[:strawberry],
-          hour_glass:     raw[:hour_glass],
-          column:         raw[:column],
-          athletic:       raw[:athletic],
-          petite:         raw[:petite]
-        },
         properties:     {
-          style_notes:                raw[:style_notes],
-          care_instructions:          raw[:care_instructions],
-          size:                       raw[:size],
           height_mapping_count:       raw[:height_mapping_count],
           fit:                        raw[:fit],
-          fabric:                     raw[:fabric],
-          product_type:               raw[:product_type],
-          factory_id:                 raw[:factory_id],
           factory_name:               raw[:factory_name],
-          product_coding:             raw[:product_coding],
-          shipping:                   raw[:shipping],
-          stylist_quote_short:        raw[:stylist_quote_short],
-          stylist_quote_long:         raw[:stylist_quote_long],
           product_details:            processed[:product_details],
-          revenue:                    raw[:revenue],
-          cogs:                       raw[:cogs],
-          video_id:                   processed[:video_id],
-          color_customization:        raw[:color_customization],
-          short_description:          raw[:short_description],
-          standard_days_for_making:   raw[:standard_days_for_making] || 5,
-          customised_days_for_making: raw[:customised_days_for_making] || 10
-        },
-        song:           {
-          link: raw[:song_link],
-          name: raw[:song_name],
         },
         customizations:     processed[:customizations],
         recommended_colors: processed[:recommended_colors],
@@ -371,46 +317,13 @@ module Products
           # price_in_aud: /rrp/i,
           price_in_usd:               /price usd/i,
           taxons:                     /taxons?? \d+/i,
-          colors:                     /(color|colour) \d+$/i,
-
-          # Style Profile
-          glam:                       /glam$/i,
-          girly:                      /girly$/i,
-          classic:                    /classic$/i,
-          edgy:                       /edgy$/i,
-          bohemian:                   /boho$/i,
-          sexiness:                   /sexy/i,
-          fashionability:             /fashion/i,
-          apple:                      /apple/i,
-          pear:                       /pear/i,
-          strawberry:                 /strawberry/i,
-          hour_glass:                 /hourglass|hourgalss/i,
-          column:                     /column/i,
-          athletic:                   /athletic/i,
-          petite:                     /petite/i,
-          # Properties
-          style_notes:                /styling notes/i,
-          care_instructions:          /care instructions/i,
-          fit:                        /fit/i,
-          size:                       /size/i,
-          fabric:                     /fabric/i,
-          product_type:               /product type/i,
+          recommended_fabric_colors:  /recommended fabric & color$/i,
+          fabric_information:         /fabric information \d+/i
+          custom_fabric_colors:       /custom fabric & color \d+/i
+          factory_name:               /factory$/i,
           product_category:           /product category/i,
           product_sub_category:       /product sub-category/i,
-          factory_id:                 /factory id/i,
-          factory_name:               /factory$/i,
-          color_customization:        /colour customisation/i,
-          available_colors:           /available colou?rs/i,
-          #product_coding: /product coding/i,
-          shipping:                   /shipping/i,
-          stylist_quote_short:        /stylist inspiration quote/i,
-          #stylist_quote_long: /expanded stylist quote/i,
-          product_details:            /product details/i,
-          short_description:          /short description/i,
-          standard_days_for_making:   /standard days for making/i,
-          customised_days_for_making: /customised days for making/i,
-          height_mapping_count: /height mapping count/i
-
+          
       }
 
       conformities.each do |key, regex|
@@ -448,19 +361,6 @@ module Products
           }
       end
 
-      book.row(main_column_heading_row).each_with_index do |title, index|
-        next unless title =~ /Music Track Link/i
-        @codes[:song_link]      = index + 1
-        @codes[:song_name]      = index + 2
-      end
-
-
-      @codes[:revenue]        = 135
-      @codes[:cogs]           = 136
-      @codes[:product_coding] = 137
-      @codes[:video_id]       = 139 # 138 139 with
-      @codes[:short_description] = 140
-
       info "Found #{@codes.keys.count} keyed columns."
       @codes
     end
@@ -484,6 +384,7 @@ module Products
         args = attrs.symbolize_keys
 
         begin
+          # Makes the basic product andi it's variant
           product = create_or_update_product(args)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
@@ -607,6 +508,7 @@ module Products
 
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
+      
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
