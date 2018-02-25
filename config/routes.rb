@@ -334,6 +334,11 @@ FameAndPartners::Application.routes.draw do
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
+    #############################
+    # PROM LPs - Interview pages
+    #############################
+    # Prom LP - Larsen Thompson Interview page
+    get '/larsen-thompson-interview' => 'products/collections#show', as: :larsen_thompson_prom_interview_page
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
