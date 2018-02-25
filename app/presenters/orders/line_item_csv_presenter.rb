@@ -64,11 +64,18 @@ module Orders
 
       def customization_values #TODO: Need to address this situation
         if personalization.present?
-          customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
+          customs = JSON.parse(item.customizations).map {|x| x['customisation_value']['presentation']}
+          if customs.empty?
+            customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
+          end
           customs.join('|')
         else
           'N/A'
         end
+      end
+
+      def item
+        Spree::LineItem.find(line['line_item_id'])
       end
 
       def custom_color
