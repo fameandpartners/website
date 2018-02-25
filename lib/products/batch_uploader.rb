@@ -303,6 +303,7 @@ module Products
         customizations:     processed[:customizations],
         recommended_fabric_colors: processed[:recommended_fabric_colors],
         custom_fabric_colors: processed[:custom_fabric_colors],
+        fabric_information: raw[:fabric_information],
         color_data: color_data
       }
     end
@@ -398,6 +399,7 @@ module Products
 
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
+          add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_customizations(product, args[:customizations] || [])
           add_product_layered_cads( product, args[:cads] || [] )
@@ -410,6 +412,46 @@ module Products
 
     private
 
+    def add_product_color_fabrics( product, recommendend_fabric_colors, custom_fabric_colors, fabric_descriptions )
+      associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true ) 
+    end
+
+    private def find_or_create_fabric( fabric_name, color_option )
+      to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
+      if( to_return.nil? )
+        to_return = Fabric.create do |object|
+          object.material = fabric_name
+          object.option_value_id = color_option.id
+          object.presentation = "#{color_option.presentation} #{fabric_name}"
+          object.name = object.presentation.parameterize
+        end
+      end
+      to_return
+    end
+
+    private def find_or_create_fabrics_product( fabric, product, fabric_descriptions, recommended )
+      to_return = FabricsProduct.find_by_fabric_id_and_product_id( fabric.id, product.id )
+      to_return = FabricsProduct.create do |object|
+        object.fabric_id = fabric.id
+        object.product_id = product.id
+      end
+      
+      to_return.recommended = recommended
+      to_return.description = fabric_descriptions
+      to_return.save
+      to_return
+    end
+    
+    private def associate_fabrics_with_product( product, fabric_colors, fabric_description, recommended )
+      # How am I going to clean this up?
+      fabric_colors.each do |fabric_color|
+        color_option = get_color_options( [fabric_color[:color_name]] ).first
+        fabric_name = fabric_color[:fabric_name]
+        fabric  = find_or_create_fabric( fabric_name, color_option )
+        fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
+      end
+    end
+    
     def get_section_heading(sku:, name:)
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
@@ -567,7 +609,6 @@ module Products
     def add_product_color_options(product, colors )
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
 
-      puts colors
       color_names = (colors.compact.collect {|color_map| color_map[:color_name] }).uniq
       color_options = get_color_options( color_names)
       color_options.map do |recommended|
