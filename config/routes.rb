@@ -342,6 +342,9 @@ FameAndPartners::Application.routes.draw do
 
     # Prom LP - Delilah Belle Hamlin Interview page
     get '/delilah-belle-hamlin-interview' => 'products/collections#show', as: :delilah_belle_hamlin_prom_interview_page
+
+    # Prom LP - Diana Veras Interview page
+    get '/diana-veras-interview' => 'products/collections#show', as: :diana_veras_prom_interview_page
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
