@@ -167,19 +167,9 @@
       align-items: center;
     }
 
-    .u-full-width--desktop {
-      @include real-full-width;
-      overflow: hidden;
-    }
-
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
-
-    .u-full-width--mobile {
-      padding: 0;
-      overflow: hidden;
-    }
 
     .Section__introWrapper {
       bottom: 0;
