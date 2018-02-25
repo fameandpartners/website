@@ -84,17 +84,18 @@ module Products
 
       info "Parsing Data into Hash"
 
+      color_data = build_color_data( book )
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
-        processed = process_raw_row_data(raw)
-        item_hash = build_item_hash(processed, raw)
+        processed = process_raw_row_data(raw, color_data)
+        item_hash = build_item_hash(processed, raw, color_data)
+        item_hash
       end
-      add_color_data( book, @parsed_data ) if color_data_present?( book )      
       add_cad_data( book, @parsed_data ) if cad_data_present?( book )
       info "Parse Complete"
     end
 
-    def add_color_data( book, parsed_data )
+    def build_color_data( book )
 
       fabric_types = []
       color_data = {}
@@ -105,10 +106,10 @@ module Products
       total_rows = book.last_row("Fabric & Color")
       (2..total_rows).each do |i|
         book.row( i, "Fabric & Color" ).each_slice(3).to_a.each_with_index do |slice, index|
-          color_data[slice[1]] = { code: slice[1], color_name: slice[0], fabric_name: fabric_types[index] }
+          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index] } if slice[0].present?
         end
       end
-      parsed_data['color_data'] = color_data
+      color_data
     end
     
     def color_data_present?( book )
@@ -197,7 +198,7 @@ module Products
       raw
     end
 
-    private def process_raw_row_data(raw)
+    private def process_raw_row_data(raw, color_data)
       processed = {}
 
       if raw[:sku].present?
@@ -235,16 +236,15 @@ module Products
 
       processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
-      # :colors is the legacy recommended colors.
-      # :recommended_colors will each have a variant built from them
-      # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
-
-
-      processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
-      recommended_colors             = get_color_options(raw[:colors])
-      available_colors               = get_color_options(raw[:available_colors].to_s.split(','))
-      processed[:recommended_colors] = recommended_colors
-      processed[:available_colors]   = Set.new(available_colors + recommended_colors).to_a
+      # Turn the different color codes into the their color maps
+      processed[:recommended_fabric_colors] = raw[:recommended_fabric_colors].split( ',' ).map  {|color_code| lookup_color_code( color_code, color_data ) }
+      processed[:custom_fabric_colors] = raw[:custom_fabric_colors].map do |custom_fabric_color|
+        if( custom_fabric_color )
+          custom_fabric_color.split( ',' ).map {|color_code| lookup_color_code( color_code, color_data ) }
+        else
+          nil
+        end
+      end
 
       processed[:customizations] = []
       raw[:customizations].each do |customization|
@@ -252,10 +252,13 @@ module Products
           processed[:customizations] << customization
         end
       end
-
       processed
     end
 
+    private def lookup_color_code( color_code, color_data )
+      color_data[color_code.strip]
+    end
+    
     private def get_color_options(color_names)
       Array.wrap(color_names).map(&:strip).map do |human_color_name|
         find_or_create_color_option(presentation: human_color_name)
@@ -278,7 +281,7 @@ module Products
       ColorOptionValue.new(color.id, color.name, color.presentation)
     end
 
-    private def build_item_hash(processed, raw)
+    private def build_item_hash(processed, raw, color_data)
       {
         # Basic
         sku:            processed[:sku] || raw[:sku],
@@ -298,8 +301,9 @@ module Products
           product_details:            processed[:product_details],
         },
         customizations:     processed[:customizations],
-        recommended_colors: processed[:recommended_colors],
-        available_colors:   processed[:available_colors],
+        recommended_fabric_colors: processed[:recommended_fabric_colors],
+        custom_fabric_colors: processed[:custom_fabric_colors],
+        color_data: color_data
       }
     end
 
@@ -317,9 +321,9 @@ module Products
           # price_in_aud: /rrp/i,
           price_in_usd:               /price usd/i,
           taxons:                     /taxons?? \d+/i,
-          recommended_fabric_colors:  /recommended fabric & color$/i,
-          fabric_information:         /fabric information \d+/i
-          custom_fabric_colors:       /custom fabric & color \d+/i
+          recommended_fabric_colors:  /recommended.*fabric.*/im,
+          fabric_information:         /fabric information \d+/i,
+          custom_fabric_colors:       /custom fabric & color \d+/i,
           factory_name:               /factory$/i,
           product_category:           /product category/i,
           product_sub_category:       /product sub-category/i,
@@ -331,7 +335,6 @@ module Products
 
         book.row(main_column_heading_row).each_with_index do |title, index|
           next unless title.present?
-
           if title.strip =~ regex
             indexes << (index + 1)
           end
@@ -394,11 +397,9 @@ module Products
           )
 
           add_product_properties(product, args[:properties].symbolize_keys)
-          add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
+          add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
-          add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
-          add_product_song(product, args[:song].symbolize_keys || {})
           add_product_layered_cads( product, args[:cads] || [] )
           add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
 
@@ -563,21 +564,18 @@ module Products
     end
 
 
-    def add_product_color_options(product, recommended_colors:, available_colors:)
+    def add_product_color_options(product, colors )
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      custom_colors = available_colors - recommended_colors
 
-      custom_colors.map do |custom|
-        c = product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
-        c.active = true
-        c.save!
-      end
-
-      recommended_colors.map do |recommended|
+      puts colors
+      color_names = (colors.compact.collect {|color_map| color_map[:color_name] }).uniq
+      color_options = get_color_options( color_names)
+      color_options.map do |recommended|
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
 
-      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', recommended_colors.map(&:id)).destroy_all
+      # cleanup old color options
+      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_options.map(&:id)).destroy_all
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
@@ -665,60 +663,6 @@ module Products
       end
 
       customizations
-    end
-
-    def add_product_style_profile(product, args)
-      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      attributes = args.slice(:glam,
-                              :girly,
-                              :classic,
-                              :edgy,
-                              :bohemian,
-                              :sexiness,
-                              :fashionability,
-                              :apple,
-                              :pear,
-                              :strawberry,
-                              :hour_glass,
-                              :column,
-                              :athletic,
-                              :petite).select{ |name, value| value.present? }
-
-      attributes.each do |key, value|
-        attributes[key] = value.to_s.to_i
-      end
-
-      basic_style_names = [:glam, :girly, :classic, :edgy, :bohemian]
-      total = 0
-      factor = attributes.slice(*basic_style_names).values.sum / 10.0
-
-      unless factor.eql?(0.0)
-        basic_style_names.each do |style_name|
-          points = (attributes[style_name].to_i / factor).round
-
-          if total >= 10
-            points = 0
-          elsif (points + total) > 10
-            points = 10 - total
-          elsif basic_style_names.last.eql?(style_name) && (total + points) < 10
-            points = 10 - total
-          end
-
-          attributes[style_name] = points
-          total += points
-        end
-      end
-
-      product.style_profile.update_attributes(attributes)
-    end
-
-    def add_product_song(product, raw_attrs)
-      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      if raw_attrs[:link].present?
-        song = product.inspirations.song.first || product.inspirations.song.build
-
-        song.update_attributes(content: raw_attrs[:link], name: raw_attrs[:name])
-      end
     end
 
     def add_product_prices(product, price, us_price = nil)
