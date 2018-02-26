@@ -4,9 +4,9 @@ class CreateDianaVerasInterviewPage < ActiveRecord::Migration
     {
       path:                 '/diana-veras-interview',
       template_path:        '/landing_pages/prom_diana_veras_interview',
-      heading:              'Diana Veras Interview',
-      title:                'Diana Veras Interview',
-      meta_description:     '[TO-DO] Add real meta description',
+      heading:              'An Interview with Diana Veras',
+      title:                'An Interview with Diana Veras',
+      meta_description:     'Diana Veras on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
       # TO-DO: enter real PIDs
       pids:                 %w(684-black 709-black 942-black 1082-white).join(',')

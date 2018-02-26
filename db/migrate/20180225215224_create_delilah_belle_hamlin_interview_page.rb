@@ -4,9 +4,9 @@ class CreateDelilahBelleHamlinInterviewPage < ActiveRecord::Migration
     {
       path:                 '/delilah-belle-hamlin-interview',
       template_path:        '/landing_pages/prom_delilah_belle_hamlin_interview',
-      heading:              'Delilah Belle Hamlin Interview',
-      title:                'Delilah Belle Hamlin Interview',
-      meta_description:     '[TO-DO] Add real meta description',
+      heading:              'An Interview with Delilah Belle Hamlin',
+      title:                'An Interview with Delilah Belle Hamlin',
+      meta_description:     'Delilah Belle Hamlin on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
       # TO-DO: enter real PIDs
       pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
