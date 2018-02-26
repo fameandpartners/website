@@ -108,7 +108,7 @@ class Populator
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
         item['size']  = product_size.value
-        binding.pry
+        
         if product_fabric
           item.color_id = product_fabric.option_value_id
           item['color'] = product_fabric.option_value.name

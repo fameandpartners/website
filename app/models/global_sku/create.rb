@@ -24,7 +24,7 @@ class GlobalSku
     # @param [String] color_name. Example: "Emerald Green"
     # @param [String] height. Example: "Petite"
     # @param [Array<CustomisationValue>] customizations
-    def initialize(style_number:, product_name:, size:, color_name:, fabric_name:, height:, customizations: [])
+    def initialize(style_number:, product_name:, size:, color_name:,  height:, fabric_name:'', customizations: [])
       @style_number   = style_number
       @product_name   = product_name
       @size           = size
@@ -40,21 +40,21 @@ class GlobalSku
     # @return [GlobalSku, NilClass]
     def call
       if valid?
-        GlobalSku.create!(
-          sku:                generate_sku,
-          style_number:       style_number,
-          product_name:       product_name,
-          size:               size,
-          color_id:           color.id,
-          color_name:         color.name,
-          color_id:           fabric&.id,
-          color_name:         fabric&.name,
-          height_value:       height,
-          customisation_id:   customization_value_ids,
-          customisation_name: customization_value_names,
-          product_id:         product_id,
-          data:               { 'extended-style-number' => extended_style_number }
-        )
+      GlobalSku.create!(
+        sku:                generate_sku,
+        style_number:       style_number,
+        product_name:       product_name,
+        size:               size,
+        color_id:           color.id,
+        color_name:         color.name,
+        fabric_id:          fabric&.id,
+        fabric_name:        fabric&.name,
+        height_value:       height,
+        customisation_id:   customization_value_ids,
+        customisation_name: customization_value_names,
+        product_id:         product_id,
+        data:               { 'extended-style-number' => extended_style_number }
+      )
       end
     end
 
@@ -87,6 +87,7 @@ class GlobalSku
 
     def normalize_parameters
       @color_name     = @color_name.to_s.parameterize
+      @fabric_name    = @fabric_name.to_s.parameterize
       @height         = @height.to_s.downcase
       @customizations = Array.wrap(@customizations).compact
     end
