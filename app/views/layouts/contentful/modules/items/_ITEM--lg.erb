@@ -1,10 +1,49 @@
-<% item_image = @lg_contents[:image] %>
-<% item_mobile_image = @lg_contents[:mobile_image] %>
+<%
+# Check if we need to render PID info (under the editorial tile)
+if @lg_contents[:editorial_tile_pid]
 
-<% if @lg_contents[:bottom_caption_url] %>
-  <a href="<%= @lg_contents[:bottom_caption_url] %>">
+  split_editorial_tile_pid = @lg_contents[:editorial_tile_pid].split('-', 2)
+
+  editorial_tile_pid = @collection.products.select do |item|
+    if item.color.present?
+      item.id == split_editorial_tile_pid[0].to_i && item.color.name == split_editorial_tile_pid[1]
+    else
+      nil
+    end
+  end
+
+  if editorial_tile_pid
+    editorial_tile_name = editorial_tile_pid[0].name
+    editorial_tile_price = product_price_with_discount(editorial_tile_pid[0])
+    editorial_tile_url = collection_product_path(editorial_tile_pid[0], color: editorial_tile_pid[0].color.try(:name))
+  else
+    editorial_tile_name = nil
+    editorial_tile_price = nil
+    if @lg_contents[:bottom_caption] && @lg_contents[:bottom_caption_url]
+      editorial_tile_url = @lg_contents[:bottom_caption_url]
+    else
+      editorial_tile_url = nil
+    end
+  end
+
+else
+
+  if @lg_contents[:bottom_caption] && @lg_contents[:bottom_caption_url]
+    editorial_tile_url = @lg_contents[:bottom_caption_url]
+  else
+    editorial_tile_url = nil
+  end
+
+end
+
+# Get images for this editorial tile
+item_image = @lg_contents[:image]
+item_mobile_image = @lg_contents[:mobile_image]
+
+if editorial_tile_url.present? %>
+  <a href="<%= editorial_tile_url %>">
 <% end %>
-  <% # Load video if available %>
+  <% # Load video if available, instead of images %>
   <% if @lg_contents[:video] %>
     <% item_video = @lg_contents[:video] %>
     <% item_mobile_video = @lg_contents[:mobile_video] %>
@@ -43,7 +82,7 @@
     </picture>
 
   <% end %>
-<% if @lg_contents[:bottom_caption_url] %>
+<% if editorial_tile_url.present? %>
   </a>
 <% end %>
 
@@ -95,4 +134,12 @@ end
   <div class="Editorial__overlayBottomCaption">
     <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: (@lg_contents[:image_caption_color] == 'black') ? "Editorial__overlayBottomCaptionTitle Editorial__overlayBottomCaptionTitle--dark" : "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
   </div>
+<% end %>
+
+<% # Display PID info (URL, price and name) %>
+<% if editorial_tile_name && editorial_tile_price %>
+  <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: {editorial_tile_name: editorial_tile_name, editorial_tile_price: editorial_tile_price, editorial_tile_url: editorial_tile_url} %>
+<% else %>
+  <% # Display Bottom CTA (only if no valid PID is provided for this editorial tile) %>
+  <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: {contents: @lg_contents} %>
 <% end %>
