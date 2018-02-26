@@ -182,7 +182,7 @@ class Populator
       @product_color ||= begin
 
         if product_fabric
-          color_id = fabric.option_value_id
+          color_id = product_fabric.option_value_id
         else
           color_id = product_attributes[:color_id].to_i
         end
