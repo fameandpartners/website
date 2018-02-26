@@ -172,6 +172,8 @@ module Contentful
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
       desktop_image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
       mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : desktop_image
+      desktop_video = (fetched_lg_container.respond_to? :video_desktop) ? fetched_lg_container.video_desktop.url : nil
+      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : desktop_video
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
         overlay_pids = (fetched_lg_container.respond_to? :overlay_pids) ? fetched_lg_container.overlay_pids : nil
@@ -186,6 +188,8 @@ module Contentful
         {
           image: desktop_image,
           mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
           overlay_pids: overlay_pids,
           image_caption: image_caption,
           image_caption_color: image_caption_color,
@@ -204,6 +208,8 @@ module Contentful
           mobile_image: mobile_image,
           tile_url: tile_url,
           tile_link_target: tile_link_target,
+          video: desktop_video,
+          mobile_video: mobile_video,
           bottom_caption: bottom_caption,
           bottom_caption_url: bottom_caption_url
         }
@@ -214,6 +220,8 @@ module Contentful
           image: desktop_image,
           mobile_image: mobile_image,
           tile_url: tile_url,
+          video: desktop_video,
+          mobile_video: mobile_video
         }
       elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
         relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
