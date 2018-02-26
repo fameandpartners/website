@@ -18,7 +18,6 @@ module Operations
         fill_order_details
         order.save!
         finalize_order
-        binding.pry
         create_inventory_units
         adjust_price
         create_global_skus
