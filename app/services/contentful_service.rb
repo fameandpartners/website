@@ -176,6 +176,7 @@ module Contentful
       mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : desktop_video
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
+        editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
         overlay_pids = (fetched_lg_container.respond_to? :overlay_pids) ? fetched_lg_container.overlay_pids : nil
         image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
         image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
@@ -190,6 +191,7 @@ module Contentful
           mobile_image: mobile_image,
           video: desktop_video,
           mobile_video: mobile_video,
+          editorial_tile_pid: editorial_tile_pid,
           overlay_pids: overlay_pids,
           image_caption: image_caption,
           image_caption_color: image_caption_color,
