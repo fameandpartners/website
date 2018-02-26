@@ -61,3 +61,23 @@
   // };
 
 </script>
+
+<% # Check if current landing page's settings allow fade-in/out effects while users scroll %>
+<% lp_fade_scroll = @landing_page_container[:fade_scroll] %>
+<% if lp_fade_scroll %>
+  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+  <script>
+    (function(window) {
+      $(function(){
+
+        // Add trigger dynamically
+        $('.LandingPage__RowsContainer .section-row').addClass('js-scroll-fade-in');
+
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+
+      });
+    })(window)
+  </script>
+<% end %>

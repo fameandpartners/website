@@ -500,6 +500,10 @@ module Contentful
       end
 
       page_url = parent_container.relative_url
+
+      # Fade-in/out during scroll
+      fade_scroll = (parent_container.respond_to? :fade_scroll) ? parent_container.fade_scroll : false
+
       {
         page_url: page_url,
         header: main_header_tile,
@@ -508,7 +512,8 @@ module Contentful
         meta_description: meta_description,
         site_version: site_version.downcase,
         site_version_url_to_redirect: site_version_url_to_redirect,
-        page_white_spacing_top_class: page_white_spacing_top_class
+        page_white_spacing_top_class: page_white_spacing_top_class,
+        fade_scroll: fade_scroll
       }
     end
 
