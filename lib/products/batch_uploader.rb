@@ -2,10 +2,6 @@
 
 require 'roo'
 require 'ostruct'
-require 'log_formatter'
-require 'logger'
-require 'forwardable'
-
 # TODO - MORE REFACTORING
 # This class contains multiple responsibilities inside it.
 # i.e.

@@ -2,14 +2,7 @@ require 'batch_upload/images_uploader'
 
 module BatchUpload
   class ProductImagesUploader < ImagesUploader
-    FIFTY_SHADES_OF_SHIT = {
-        'hot-pink-and-red' => 'pink-red',
-        'blue-azalea-front' => 'blue-azalea-floral',
-        'palepink' => 'pale-pink',
-        'paleblue' => 'pale-blue'
-    }
-
-    def process!
+    def process!( color_data )
       each_product do |product, path|
         get_list_of_files(path).each do |file_path|
           begin
@@ -25,7 +18,8 @@ module BatchUpload
             # 4B190-BURGUNDY-FRONT-CROP.jpg
             # 4B190-NAVY-FRONT.jpg
             # 4B190-Black-4.jpg
-            color_name = parts[color_idx].strip.downcase.underscore.dasherize.gsub(' ', '-')
+            fabric_color_code = parts[color_idx].strip
+            sku = parts[sku_idx].strip
             position = parts[position_idx]
             extension = parts[extension_idx]
 
@@ -44,22 +38,21 @@ module BatchUpload
               error "File name is invalid: #{file_name}"
               next
             end
+            fabrics_product = nil
+            if fabric_color_code.present?
+              debug "Looking up fabric color name"
+              fabric_color_data = color_data[fabric_color_code.upcase]
+              error "Unknown fabric color code #{fabric_color_code}"
+              fabrics_product = find_fabrics_product( sku, fabric_color_data )
 
-            if color_name.present?
-              color_name = munge_color_name(color_name)
-              debug "Search color by name"
-              color = color_for_name(color_name)
-
-              if color.blank?
-                error "Color not found (#{color_name}) #{file_name}"
+              if fabrics_product.blank?
+                error "Fabric Product not found (#{fabric_color_code}) #{file_name}"
                 next
               end
             end
-
-            if color_name.present? && color.present?
-              viewable = ProductColorValue.
-                where(product_id: product.id).
-                where(option_value_id: color.id).first_or_create
+            
+            if fabrics_product.present?
+              viewable = fabrics_product
             else
               viewable = product.master
             end
@@ -67,7 +60,7 @@ module BatchUpload
             next if test_run?
 
             if @_strategy.eql?(:delete)
-              if viewable.is_a?(ProductColorValue)
+              if viewable.is_a?(FabricsProduct)
                 debug "Process existing images for color"
               elsif viewable.is_a?(Spree::Variant)
                 debug "Process existing images for product"
@@ -111,6 +104,7 @@ module BatchUpload
             abort("SIGINT")
           rescue StandardError => message
             error "#{message.inspect}"
+            puts message.backtrace
           end
         end
         # TODO - GB 2015.03.22 - Find out if this is needed here, or if we can push it off until the very end.
@@ -125,17 +119,13 @@ module BatchUpload
       Paperclip::Geometry.from_file(file_path)
     end
 
-    def color_for_name(color_name)
-      Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
+    def find_fabrics_product( sku, fabric_color )
+      color_option = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', fabric_color[:color_name].downcase).first
+      fabric = Fabric.find_by_material_and_option_value_id( fabric_color[:fabric_name], color_option.id )
+     master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+      product = master.product
+      FabricsProduct.find_by_fabric_id_and_product_id( fabric.id, product.id )
     end
 
-    def munge_color_name(color_name)
-      new_color_name = FIFTY_SHADES_OF_SHIT.fetch(color_name) { color_name }
-
-      if color_name != new_color_name
-        warn "Color name (#{color_name}) converted to (#{new_color_name})"
-      end
-      new_color_name
-    end
   end
 end

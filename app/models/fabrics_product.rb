@@ -6,6 +6,8 @@ class FabricsProduct < ActiveRecord::Base
   belongs_to :fabric, class_name: 'Fabric'
 
 
+  has_many :images, as: :viewable, order: :position, dependent: :destroy, class_name: "Spree::Image"
+  
   validates :product_id, :fabric_id, presence: true
 
   def recommended?

@@ -181,7 +181,11 @@ class Populator
     def product_color
       @product_color ||= begin
 
-        color_id = product_attributes[:color_id].to_i
+        if product_fabric
+          color_id = product_fabric.option_value_id
+        else
+          color_id = product_attributes[:color_id].to_i
+        end
 
         # TODO - Replace all conditionals with just the first `product.product_color_values.active` lookup
         # Once all products are migrated to use explicitly defined ProductColorValues the Fallback else clause can go.
