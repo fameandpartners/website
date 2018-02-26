@@ -4,9 +4,9 @@ class CreateLarsenThompsonInterviewPage < ActiveRecord::Migration
     {
       path:                 '/larsen-thompson-interview',
       template_path:        '/landing_pages/prom_larsen_thompson_interview',
-      heading:              'Larsen Thompson Interview',
-      title:                'Larsen Thompson Interview',
-      meta_description:     '[TO-DO] Add real meta description',
+      heading:              'An Interview with Larsen Thompson',
+      title:                'An Interview with Larsen Thompson',
+      meta_description:     'Larsen Thompson on dance, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
       # TO-DO: enter real PIDs
       pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
