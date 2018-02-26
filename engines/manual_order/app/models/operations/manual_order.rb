@@ -32,7 +32,13 @@ module Operations
 
     def populate_products
       params[:products].map do |_, product|
-        variant = get_variant(product[:style_name], product[:size], product[:color])
+        color = product[:color]
+        
+        if !product[:fabric].blank?
+          fabric = Fabric.find(product[:fabric])
+          color = fabric.option_value_id
+        end
+        variant = get_variant(product[:style_name], product[:size], color) 
 
         UserCart::Populator.new(
           order: order,
@@ -41,7 +47,8 @@ module Operations
           product: {
             variant_id: variant.id,
             size_id: product[:size],
-            color_id: product[:color],
+            color_id: color,
+            fabric_id: product[:fabric],
             customizations_ids: product[:customisations],
             height: product[:height],
             quantity: 1
@@ -91,7 +98,13 @@ module Operations
 
     def create_inventory_units
       params[:products].each do |_, product|
-        variant = get_variant(product[:style_name], product[:size], product[:color])
+        color = product[:color]
+        
+        if !product[:fabric].blank?
+          fabric = Fabric.find(product[:fabric])
+          color = fabric.option_value_id
+        end
+        variant = get_variant(product[:style_name], product[:size], color) 
 
         unit = order.shipments.first.inventory_units.build
         unit.variant_id = variant.id

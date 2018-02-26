@@ -17,6 +17,9 @@ script#product_template type='text/template'
         label.col-sm-2.control-label Skirt Length
         .col-sm-10 = collection_select :products, :height, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
       .form-group
+        label.col-sm-2.control-label Fabric
+        .col-sm-10 = collection_select :products, :fabric, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
+      .form-group
         label.col-sm-2.control-label Color
         .col-sm-10 = collection_select :products, :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
       .form-group
