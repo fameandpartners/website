@@ -81,7 +81,7 @@ module Spree
         end
 
         if line_item.fabric
-          tag = get_or_create_tag('height', "#{line_item.fabric.presentation}") #fabric
+          tag = get_or_create_tag('fabric', "#{line_item.fabric.presentation}") #height
           client.link_product_to_tag(order_bot_product_id, tag['tag_id'])
         end
         
