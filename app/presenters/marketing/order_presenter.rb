@@ -103,6 +103,7 @@ module Marketing
           display_amount:         item.display_amount,
           size:                   item.size_name,
           color:                  item.colour_name,
+          fabric:,                item.fabric ? item.fabric.material : nil,
           height:                 item.height,
           display_height:         convert_height_units(item.personalization&.height_value, item.personalization&.height_unit),
           customisation:          item.customisation_text,
