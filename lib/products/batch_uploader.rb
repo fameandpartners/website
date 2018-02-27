@@ -96,7 +96,7 @@ module Products
       fabric_types = []
       color_data = {}
       book.row( 1, "Fabric & Color" ).each_slice(3) do |slice|
-        fabric_types.push( slice.first.strip! )
+        fabric_types.push( slice.first.strip )
       end
 
       total_rows = book.last_row("Fabric & Color")
