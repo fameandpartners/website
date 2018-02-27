@@ -395,8 +395,8 @@ module Products
 
           add_product_properties(product, args[:properties].symbolize_keys)
           add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
-          add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
-          add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
+          fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
+          add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
           add_product_customizations(product, args[:customizations] || [])
           add_product_layered_cads( product, args[:cads] || [] )
           add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
@@ -409,11 +409,13 @@ module Products
     private
 
     def add_product_color_fabrics( product, recommendend_fabric_colors, custom_fabric_colors, fabric_descriptions )
-      associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
+      to_return = associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
       custom_fabric_colors.each_with_index do |fabric_color, index|
         # You can't just compact because it screws up the indexing with the fabric descriptions
-        associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
+        to_return += associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
       end
+
+      to_return
     end
 
     private def find_or_create_fabric( fabric_name, color_option )
@@ -443,13 +445,17 @@ module Products
     end
     
     private def associate_fabrics_with_product( product, fabric_colors, fabric_description, recommended )
+      to_return = []
       # How am I going to clean this up?
       fabric_colors.each do |fabric_color|
         color_option = get_color_options( [fabric_color[:color_name]] ).first
         fabric_name = fabric_color[:fabric_name]
         fabric  = find_or_create_fabric( fabric_name, color_option )
         fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
+        to_return << fabric_product
       end
+
+      to_return
     end
     
     def get_section_heading(sku:, name:)
@@ -619,33 +625,30 @@ module Products
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_options.map(&:id)).destroy_all
     end
 
-    def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+    def add_product_variants(product, fabric_products, colors, price_in_aud, price_in_usd)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
-      color_option = Spree::OptionType.color
-
       product.option_types = [size_option, color_option]
       product.save
 
       product.reload
 
       sizes.each do |size_name|
-        colors.each do |color_name|
+        fabric_products.each do |fabrics_product|
           size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
-
-          next if size_value.blank? || color_value.blank?
+          fabric_color = fabrics_product.fabric
+          next if size_value.blank? || fabric_color.blank?
 
           variant = product.variants.detect do |variant|
-            [size_value.id, color_value.id].all? do |id|
+            [size_value.id, fabric_color.id].all? do |id|
               variant.option_value_ids.include?(id)
             end
           end
 
           unless variant.present?
             variant = product.variants.build
-            variant.option_values = [size_value, color_value]
+            variant.option_values = [size_value, fabric_color]
           end
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
