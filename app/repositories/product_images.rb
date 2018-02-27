@@ -109,7 +109,7 @@ class ProductImages
       results = []
 
       product.fabric_products.includes(:images, :fabric).each do |product_fabric_value|
-        product_color_value.images.each do |image|
+        product_fabric_value.images.each do |image|
           result = OpenStruct.new(
             image_data(image).merge({
               fabric:    product_fabric_value.fabric.try(:name),
