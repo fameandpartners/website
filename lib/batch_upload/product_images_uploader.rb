@@ -94,7 +94,7 @@ module BatchUpload
             end
 
             if image.persisted?
-              success "ProductImage", id: image.id, color: color_name, position: position, file: file_name
+              success "ProductImage", id: image.id, color: fabric_color_codecolor_name, position: position, file: file_name
             else
               error "Image can not created #{image.errors.full_messages.map(&:downcase).to_sentence}"
             end
