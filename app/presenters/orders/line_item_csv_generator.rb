@@ -24,11 +24,14 @@ module Orders
     end
 
     def to_csv
+      if query_params[:refulfill_only]
+        @refulfill_only = true
+      end
       line = Orders::LineItemCSVPresenter
 
       CSV.generate(headers: true) do |csv|
         csv << headers
-        orders.map do |order|
+        @orders.map do |order|
           line.set_line order.attributes
 
           li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
@@ -37,10 +40,17 @@ module Orders
             lip = Orders::LineItemPresenter.new(li)
           end
 
+          if @refulfill_only
+            if li.refulfill_status.nil?
+              next
+            end
+          end
+
           csv << [
             line.order_state,
             line.order_number,
             lip.sample_sale?,
+            li.refulfill_status,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
@@ -82,6 +92,7 @@ module Orders
         :order_state,
         :order_number,
         :sample_sale_item,
+        :refulfill,
         :line_item,
         :total_items,
         :completed_at,

@@ -15,7 +15,7 @@ module Policies
     #                               "3 - 4 weeks" => "5 weeks"
     #                            }
     OLD_FAST_MAKING_MAKE_TIME = "2 business days"
-    OLD_SLOW_MAKING_MAKE_TIME = '5 weeks' 
+    OLD_SLOW_MAKING_MAKE_TIME = '5 weeks'
     FAST_MAKING_MAKE_TIME = "12 business days"
     SLOW_MAKING_MAKE_TIME = "7 weeks"
     STANDARD_MAKE_TIME_MAP = {
@@ -72,7 +72,7 @@ module Policies
 
     def fast_making_delivery_period
       FAST_MAKING_DELIVERY_PERIOD
-    end 
+    end
 
     def slow_making_delivery_period
       SLOW_MAKING_DELIVERY_PERIOD

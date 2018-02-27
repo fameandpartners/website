@@ -26,7 +26,11 @@ module Batcher
       return false
     end
 
-    if (Orders::LineItemPresenter.new(line_item).projected_delivery_date > (Time.now+14.days))
+    # if line_item.product&.factory&.name != 'Milly'
+    #   return false
+    # end
+
+    if (Orders::LineItemPresenter.new(line_item).projected_delivery_date > (Time.now+DELIVERY_DAYS_THRESHOLD.days))
 
       #check to see if there's a batch_collection for this
       if bc = BatchCollection.where(batch_key: line_item.product.master.sku.downcase, status: 'open').first
@@ -53,7 +57,7 @@ module Batcher
   def groom_batch_collection(batch_collection)
     if batch_collection.status == 'open'
       batch_collection.batch_collection_line_items.each do |bcli|
-        if (Time.now+DELIVERY_DAYS_THRESHOLD.days) < bcli.projected_delivery_date
+        if (Time.now+DELIVERY_DAYS_THRESHOLD.days) > bcli.projected_delivery_date
           # this thing is within N days...release it to be made
           bcli.delete
         end
@@ -63,15 +67,16 @@ module Batcher
 
   def check_last_n_minutes(n_minutes)
     start_time = Time.now - n_minutes
-    get_line_items_between(start_time, Time.now)
-    batch_line_item
+    lis = get_line_items_between(start_time, Time.now)
+    batch_line_items(lis)
   end
 
   def get_line_items_between(start_time, end_time)
+    binding.pry
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
     lis = orders.map {|ord| ord.line_items}.flatten
     #if we ever do something crazy like a li being able to be in more than 1 batch_collection..change this code below
-    lis.select {|li| li.batch_collection.empty?}
+    lis.select {|li| li.batch_collections.empty? && li.refulfill_status.nil?}
   end
 
 end

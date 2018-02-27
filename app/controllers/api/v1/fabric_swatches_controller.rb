@@ -15,8 +15,10 @@ module Api
         # ReturnInventoryItem.truncate!
         # Importers::InventoryIngestor.ingest_bergen('bla')
         # Importers::InventoryIngestor.ingest_next('bla')
-        # Refulfiller.check_line_items_in_inventory('bla')
-        Batcher.batch_line_items(Batcher.get_line_items_between('2018-02-01', Time.now))
+        # balls = Refulfiller.get_line_items_between('2018-01-31', Time.now)
+        # Refulfiller.check_line_items_in_inventory(balls)
+        # Batcher.get_line_items_between('2018-01-31', Time.now)
+        Batcher.batch_line_items(Batcher.get_line_items_between('2018-01-31', Time.now))
         colors = fabric_swatch_colors
         respond_with colors.to_json
       end

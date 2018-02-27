@@ -8,6 +8,7 @@ module Importers
 
 
     def self.ingest_bergen(file)
+      ReturnInventoryItem.deactivate_all_records!('bergen')
       file = Rails.root.join('lib/importers/Inventory_1518119212121.csv').to_s
 
       file_stream = File.open(file, 'r')
@@ -15,12 +16,13 @@ module Importers
 
       csv.each do |row|
         if row[:upccode].strip.length < 8 && row[:upccode].strip.scan(/\D/).empty?
-          ReturnInventoryItem.create!(upc: row[:upccode], style_number: row[:style], available: row[:available], vendor: 'bergen')
+          ReturnInventoryItem.create!(upc: row[:upccode].strip, style_number: row[:style].strip, available: row[:available], vendor: 'bergen')
         end
       end
     end
 
     def self.ingest_next(file)
+      ReturnInventoryItem.deactivate_all_records!('next')
       file = Rails.root.join('lib/importers/next inventory.csv').to_s
 
       file_stream = File.open(file, 'r')

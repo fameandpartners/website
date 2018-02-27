@@ -2747,7 +2747,8 @@ CREATE TABLE return_inventory_items (
     available integer NOT NULL,
     vendor character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    active boolean DEFAULT true
 );
 
 
@@ -3482,7 +3483,8 @@ CREATE TABLE spree_line_items (
     size character varying(255),
     length character varying(255),
     upc character varying(255),
-    refulfill character varying(255) DEFAULT NULL::character varying
+    return_inventory_item_id integer,
+    refulfill_status character varying(255)
 );
 
 
@@ -8380,6 +8382,13 @@ CREATE INDEX index_questions_on_quiz_id ON questions USING btree (quiz_id);
 
 
 --
+-- Name: index_return_inventory_items_on_active_and_available; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_return_inventory_items_on_active_and_available ON return_inventory_items USING btree (active, available);
+
+
+--
 -- Name: index_return_inventory_items_on_style_number; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9969,3 +9978,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180213212256');
 INSERT INTO schema_migrations (version) VALUES ('20180220231314');
 
 INSERT INTO schema_migrations (version) VALUES ('20180221014607');
+
+INSERT INTO schema_migrations (version) VALUES ('20180225073927');

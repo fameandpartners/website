@@ -378,7 +378,8 @@ Spree::Order.class_eval do
   end
 
   def contains_refulfill_item?
-    return self.line_items.any? {|item| !item.refulfill.nil?}
+    return true
+    # return self.line_items.any? {|item| item.refulfill_status == 'new'}
   end
 
   def return_eligible_AC?

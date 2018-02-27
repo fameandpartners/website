@@ -79,13 +79,13 @@ module Orders
          !item.stock.nil?
       end
 
-      def refulfill_item?
-        !item.refulfill.nil?
-      end
+      # def refulfill_item?
+      #   !item.refulfill.nil?
+      # end
 
-      def refulfill
-        item.refulfill
-      end
+      # def refulfill_status
+      #   item.refulfill_status
+      # end
 
       def fabric_swatch?
         item.product&.category&.category == 'Sample'

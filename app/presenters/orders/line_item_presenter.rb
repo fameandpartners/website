@@ -177,5 +177,9 @@ module Orders
       end
     end
 
+    def refulfill_status
+      item.refulfill_status
+    end
+
   end
 end

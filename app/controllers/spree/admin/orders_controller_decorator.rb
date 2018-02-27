@@ -54,7 +54,6 @@ module Spree
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
         ##################### End Original Spree ##############################
-
         if params[:format] != 'csv'
 
           @orders = @search.result(distinct: true).includes(
@@ -79,15 +78,15 @@ module Spree
                     })
         end
 
-        if @refulfill_only
-          @orders = @orders.select {|order| order.contains_refulfill_item?}
-          @orders = Kaminari::PaginatableArray.new(@orders,
-                          {
-                          :limit => 50,
-                          :offset => 0,
-                          :total_count => @orders.count
-                    })
-        end
+        # if @refulfill_only
+        #   @orders = @orders.select {|order| order.contains_refulfill_item?}
+        #   @orders = Kaminari::PaginatableArray.new(@orders,
+        #                   {
+        #                   :limit => 50,
+        #                   :offset => 0,
+        #                   :total_count => @orders.count
+        #             })
+        # end
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
@@ -96,6 +95,10 @@ module Spree
         respond_with(@orders) do |format|
           format.html
           format.csv {
+            binding.pry
+            if @refulfill_only
+              params[:q][:refulfill_only] = true
+            end
             presenter = ::Orders::LineItemCsvGenerator.new(@orders, params[:q])
             headers['Content-Disposition'] = "attachment; filename=#{presenter.filename}"
             render :text => presenter.to_csv
