@@ -102,7 +102,7 @@ module Products
       total_rows = book.last_row("Fabric & Color")
       (2..total_rows).each do |i|
         book.row( i, "Fabric & Color" ).each_slice(3).to_a.each_with_index do |slice, index|
-          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index] } if slice[0].present?
+          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index].split( '(' ).first.strip } if slice[0].present?
         end
       end
       color_data
