@@ -102,7 +102,7 @@ module Spree
               params[:q][:refulfill_only] = true
             end
             if @batch_only
-              param[:q][:batch_only] = true
+              params[:q][:batch_only] = true
             end
             presenter = ::Orders::LineItemCsvGenerator.new(@orders, params[:q])
             headers['Content-Disposition'] = "attachment; filename=#{presenter.filename}"

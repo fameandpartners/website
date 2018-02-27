@@ -27,6 +27,11 @@ module Orders
       if query_params[:refulfill_only]
         @refulfill_only = true
       end
+
+      if query_params[:batch_only]
+        @batch_only = true
+      end
+
       line = Orders::LineItemCSVPresenter
 
       CSV.generate(headers: true) do |csv|
@@ -42,6 +47,12 @@ module Orders
 
           if @refulfill_only
             if li.refulfill_status.nil?
+              next
+            end
+          end
+
+          if @batch_only
+            if li.batch_collections.empty?
               next
             end
           end
@@ -79,13 +90,21 @@ module Orders
             line.return_details,
             line.price,
             line.currency,
-            line.product_number
+            resolve_refulfill_upc(li, line)
           ]
         end
       end
     end
 
   private
+    # we do this cause upcs are screwed from back in the da day
+    def resolve_refulfill_upc(li, line)
+      if @refulfill_only
+        return "#{li.return_inventory_item.vendor}: #{li.return_inventory_item.upc}"
+      else
+        return line.product_number
+      end
+    end
 
     def en_headers
       [
