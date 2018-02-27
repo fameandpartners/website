@@ -5,8 +5,17 @@ module Orders
     attr_reader :orders, :query_params
 
     def initialize(orders, query_params = {})
-      @orders = orders
+      # @orders = orders
+      @lis = orders.map {|ord| ord.line_items}.flatten
       @query_params = query_params
+
+      if query_params[:refulfill_only]
+        @refulfill_only = true
+      end
+
+      if query_params[:batch_only]
+        @batch_only = true
+      end
     end
 
     def filename
@@ -24,22 +33,16 @@ module Orders
     end
 
     def to_csv
-      if query_params[:refulfill_only]
-        @refulfill_only = true
-      end
 
-      if query_params[:batch_only]
-        @batch_only = true
-      end
-
+binding.pry
       line = Orders::LineItemCSVPresenter
 
       CSV.generate(headers: true) do |csv|
         csv << headers
-        @orders.map do |order|
-          line.set_line order.attributes
+        @lis.each do |li|
+          line.set_line li.order.attributes
 
-          li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
+          # li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
           lip = nil
           if li
             lip = Orders::LineItemPresenter.new(li)
@@ -47,12 +50,6 @@ module Orders
 
           if @refulfill_only
             if li.refulfill_status.nil?
-              next
-            end
-          end
-
-          if @batch_only
-            if li.batch_collections.empty?
               next
             end
           end
