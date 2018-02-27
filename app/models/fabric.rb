@@ -3,6 +3,9 @@ class Fabric < ActiveRecord::Base
  	belongs_to :option_value,
  			class_name: 'Spree::OptionValue'
 
+	belongs_to :option_fabric_color_value,
+ 			class_name: 'Spree::OptionValue'
+
  	has_many :line_items,
 			 class_name: 'Spree::LineItem'
   	has_and_belongs_to_many :products,
