@@ -121,7 +121,7 @@ Spree::LineItem.class_eval do
 
       values.each do |type, value|
         if type == 'Color' && self.fabric
-          "Fabric and Color: #{fabric.presentation}" 
+          array << "Fabric and Color: #{fabric.presentation}" 
         else 
           array << (value.present? ? "#{type}: #{value}" : type.to_s)
         end
