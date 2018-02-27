@@ -412,7 +412,7 @@ module Products
       associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
       custom_fabric_colors.each_with_index do |fabric_color, index|
         # You can't just compact because it screws up the indexing with the fabric descriptions
-        associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index+1], false ) unless fabric_color.nil?
+        associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
       end
     end
 
