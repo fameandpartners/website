@@ -47,6 +47,9 @@ module Spree
         @refulfill_only = params[:q][:refulfill_only].present?
         params[:q].delete(:refulfill_only)
 
+        @batch_only = params[:q][:batch_only].present?
+        params[:q].delete(:batch_only)
+
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
@@ -95,9 +98,11 @@ module Spree
         respond_with(@orders) do |format|
           format.html
           format.csv {
-            binding.pry
             if @refulfill_only
               params[:q][:refulfill_only] = true
+            end
+            if @batch_only
+              param[:q][:batch_only] = true
             end
             presenter = ::Orders::LineItemCsvGenerator.new(@orders, params[:q])
             headers['Content-Disposition'] = "attachment; filename=#{presenter.filename}"
