@@ -1,145 +1,27 @@
-<%
-# Check if we need to render PID info (under the editorial tile)
-if @lg_contents[:editorial_tile_pid]
+<% # Define the URL for the Editorial tile %>
+<% item_url = contentful_get_editorial_tile_link(@lg_contents) %>
+<% ############################################################################################# %>
 
-  split_editorial_tile_pid = @lg_contents[:editorial_tile_pid].split('-', 2)
+<% # Define if this tile should display an image or a video %>
+<%= render partial: "layouts/contentful/modules/shared/display_image_or_video", locals: { item_url: item_url, item_image: @lg_contents[:image], item_image_mobile: @lg_contents[:mobile_image], item_video: @lg_contents[:video], item_video_mobile: @lg_contents[:mobile_video] } %>
+<% ############################################################################################# %>
 
-  editorial_tile_pid = @collection.products.select do |item|
-    if item.color.present?
-      item.id == split_editorial_tile_pid[0].to_i && item.color.name == split_editorial_tile_pid[1]
-    else
-      nil
-    end
-  end
+<% # Caption over image with PIDs info ("Shop the look" > PID info) %>
+<%= render partial: "layouts/contentful/modules/components/COMPONENT--overlay-pids", locals: { overlay_pids: @lg_contents[:overlay_pids] } %>
+<% ############################################################################################# %>
 
-  if editorial_tile_pid
-    editorial_tile_name = editorial_tile_pid[0].name
-    editorial_tile_price = product_price_with_discount(editorial_tile_pid[0])
-    editorial_tile_url = collection_product_path(editorial_tile_pid[0], color: editorial_tile_pid[0].color.try(:name))
-  else
-    editorial_tile_name = nil
-    editorial_tile_price = nil
-    if @lg_contents[:bottom_caption] && @lg_contents[:bottom_caption_url]
-      editorial_tile_url = @lg_contents[:bottom_caption_url]
-    else
-      editorial_tile_url = nil
-    end
-  end
+<% # Bottom caption over image with custom copy (Example: @instagram_username) %>
+<%= render partial: "layouts/contentful/modules/shared/caption_custom_copy_over_image_bottom", locals: { image_caption: @lg_contents[:image_caption], image_caption_url: @lg_contents[:image_caption_url], image_caption_color: @lg_contents[:image_caption_color], image_caption_link_target: @lg_contents[:image_caption_link_target] } %>
+<% ############################################################################################# %>
 
-else
-
-  if @lg_contents[:bottom_caption] && @lg_contents[:bottom_caption_url]
-    editorial_tile_url = @lg_contents[:bottom_caption_url]
-  else
-    editorial_tile_url = nil
-  end
-
-end
-
-# Get images for this editorial tile
-item_image = @lg_contents[:image]
-item_mobile_image = @lg_contents[:mobile_image]
-
-if editorial_tile_url.present? %>
-  <a href="<%= editorial_tile_url %>">
-<% end %>
-  <% # Load video if available, instead of images %>
-  <% if @lg_contents[:video] %>
-    <% item_video = @lg_contents[:video] %>
-    <% item_mobile_video = @lg_contents[:mobile_video] %>
-    <video src="<%= item_video %>"
-      class="js-autoload-video Editorial__video hidden-xs hidden-sm"
-      muted
-      playsinline
-      webkit-playsinline
-      preload
-      autoplay
-      loop
-      aria-hidden="false"
-      poster="<%= item_image %>">
-    </video>
-    <video src="<%= item_mobile_video %>"
-      class="js-autoload-video Editorial__video hidden-md hidden-lg"
-      muted
-      playsinline
-      webkit-playsinline
-      preload
-      autoplay
-      loop
-      aria-hidden="false"
-      poster="<%= item_mobile_image %>">
-    </video>
-
-  <% # Load image if no video is available %>
-  <% else %>
-    <% # Currenly using Bulma's responsive width %>
-    <picture>
-      <source media="(max-width: 768px)" srcset="<%= item_mobile_image %>">
-      <source media="(min-width: 769px)" srcset="<%= item_image %>">
-      <img class="Editorial__image" src="<%= item_image %>" srcset="
-        <%= item_mobile_image %> 768w,
-        <%= item_image %> 769w">
-    </picture>
-
-  <% end %>
-<% if editorial_tile_url.present? %>
-  </a>
-<% end %>
-
-<%
-products = []
-
-if @lg_contents[:overlay_pids]
-
-  @lg_contents[:overlay_pids].each do |pid|
-    split_pid = pid.split('-', 2)
-    current_id = split_pid[0].to_i
-    current_color = split_pid[1]
-
-    present_product = @collection.products.select do |item|
-      if item.color.present?
-        item.id == current_id && item.color.name == current_color
-      else
-        nil
-      end
-    end
-
-    if present_product.present?
-      products.push(present_product[0])
-    end
-  end
-
-end
+<% # Display either PID info or a custom CTA under the editorial tile %>
+<% # Step 1: Check if PID is valid and display its info (URL, price and name) %>
+<% if @lg_contents[:editorial_tile_pid].present?
+  editorial_tile_pid = contentful_get_products_array_via_pids_array(@lg_contents[:editorial_tile_pid])[0]
 %>
-
-<% if products.count > 0 %>
-<div class="Editorial__overlay">
-  <h4 class="Editorial__overlayTitle">Shop the Look</h4>
-  <ul>
-  <% products.each do |item|
-    name = item.name
-    path = collection_product_path(item, color: item.color.try(:name))
-  %>
-    <li>
-      <a href="<%= path %>">
-        <%= name %>
-      </a>
-    </li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
-
-<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
-  <div class="Editorial__overlayBottomCaption">
-    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: (@lg_contents[:image_caption_color] == 'black') ? "Editorial__overlayBottomCaptionTitle Editorial__overlayBottomCaptionTitle--dark" : "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
-  </div>
-<% end %>
-
-<% # Display PID info (URL, price and name) %>
-<% if editorial_tile_name && editorial_tile_price %>
-  <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: {editorial_tile_name: editorial_tile_name, editorial_tile_price: editorial_tile_price, editorial_tile_url: editorial_tile_url} %>
+  <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
 <% else %>
-  <% # Display Bottom CTA (only if no valid PID is provided for this editorial tile) %>
-  <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: {contents: @lg_contents} %>
+  <% # Step 2: If no valid PID is provided then display a custom CTA %>
+  <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: { bottom_caption: @lg_contents[:bottom_caption], bottom_caption_url: @lg_contents[:bottom_caption_url] } %>
 <% end %>
+<% ############################################################################################# %>
