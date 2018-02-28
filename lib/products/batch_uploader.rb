@@ -263,6 +263,18 @@ module Products
 
     class ColorOptionValue < Struct.new(:id, :name, :presentation); end
 
+    private def find_or_create_fabric_color_option(presentation)
+      fabric_color = Spree::OptionType.fabric_color.option_values.where('LOWER(presentation) = ?', presentation).first
+      
+      if( fabric_color.blank? )
+        fabric_color = Spree::OptionType.fabric_color.option_values.create do |object|
+          object.name         = presentation.downcase.gsub(' ', '-')
+          object.presentation = presentation
+        end
+      end
+      fabric_color
+    end
+    
     private def find_or_create_color_option(presentation:)
       color = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
 
@@ -420,27 +432,40 @@ module Products
 
     private def find_or_create_fabric( fabric_name, color_option )
       to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
+      presentation = "#{color_option.presentation} #{fabric_name}"
+      
+      fabric_color_option = find_or_create_fabric_color_option( presentation )
       if( to_return.nil? )
         to_return = Fabric.create do |object|
           object.material = fabric_name
           object.option_value_id = color_option.id
-          object.presentation = "#{color_option.presentation} #{fabric_name}"
+          object.presentation = presentation
           object.name = object.presentation.parameterize
+          object.option_fabric_color_value = fabric_color_option
         end
       end
+
+      # Clean up legacy fabrics
+      if( to_return.option_fabric_color_value.nil? )
+        to_return.option_fabric_color_value = fabric_color_option
+        to_return.save
+      end
+      
       to_return
     end
 
     private def find_or_create_fabrics_product( fabric, product, fabric_descriptions, recommended )
       to_return = FabricsProduct.find_by_fabric_id_and_product_id( fabric.id, product.id )
-      to_return = FabricsProduct.create do |object|
-        object.fabric_id = fabric.id
-        object.product_id = product.id
+      unless( to_return.present? )
+        to_return = FabricsProduct.create do |object|
+          object.fabric_id = fabric.id
+          object.product_id = product.id
+        end
+        
+        to_return.recommended = recommended
+        to_return.description = fabric_descriptions
+        to_return.save
       end
-      
-      to_return.recommended = recommended
-      to_return.description = fabric_descriptions
-      to_return.save
       to_return
     end
     
@@ -625,11 +650,12 @@ module Products
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_options.map(&:id)).destroy_all
     end
 
-    def add_product_variants(product, fabric_products, colors, price_in_aud, price_in_usd)
+    def add_product_variants(product, sizes, fabric_products, price_in_aud, price_in_usd)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
-      product.option_types = [size_option, color_option]
+      fabric_option = Spree::OptionType.fabric_color
+      product.option_types = [size_option, fabric_option]
       product.save
 
       product.reload
@@ -637,7 +663,8 @@ module Products
       sizes.each do |size_name|
         fabric_products.each do |fabrics_product|
           size_value  = size_option.option_values.where(name: size_name).first
-          fabric_color = fabrics_product.fabric
+          fabric_color = fabrics_product.fabric.option_fabric_color_value
+          
           next if size_value.blank? || fabric_color.blank?
 
           variant = product.variants.detect do |variant|
@@ -659,13 +686,13 @@ module Products
 
           if price_in_aud.present?
             aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-            aud.amount = price_in_aud
+            aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
             aud.save!
           end
 
           if price_in_usd.present?
             usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-            usd.amount = price_in_usd
+            usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
             usd.save!
           end
 
