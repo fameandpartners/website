@@ -193,13 +193,34 @@ Spree::Product.class_eval do
     Fabric.where(id: basic_fabric_ids)
   end
 
+  def basic_fabrics_with_description
+    fabrics_arry = []
+    fabric_products.recommended.each do |fp|
+        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true) 
+        fabric_hsh[:fabric][:description] = fp.description
+        fabrics_arry << fabric_hsh
+    end
+    fabrics_arry
+  end
+
   def custom_fabrics
     Fabric.where(id: custom_fabric_ids)
+  end
+
+  def custom_fabrics_with_description
+    fabrics_arry = []
+    fabric_products.custom.each do |fp|
+        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true) 
+        fabric_hsh[:fabric][:description] = fp.description
+        fabrics_arry << fabric_hsh
+    end
+    fabrics_arry
   end
 
   def color_names
     basic_colors.pluck(:name)
   end
+
   alias_method :colors, :color_names
 
   # TODO: Alexey Bobyrev - 04/Oct/2016
