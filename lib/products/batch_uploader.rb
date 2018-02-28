@@ -473,11 +473,13 @@ module Products
       to_return = []
       # How am I going to clean this up?
       fabric_colors.each do |fabric_color|
-        color_option = get_color_options( [fabric_color[:color_name]] ).first
-        fabric_name = fabric_color[:fabric_name]
-        fabric  = find_or_create_fabric( fabric_name, color_option )
-        fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
-        to_return << fabric_product
+        unless fabric_color.nil? || fabric_color.empty?
+          color_option = get_color_options( [fabric_color[:color_name]] ).first
+          fabric_name = fabric_color[:fabric_name]
+          fabric  = find_or_create_fabric( fabric_name, color_option )
+          fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
+          to_return << fabric_product
+        end
       end
 
       to_return
