@@ -613,6 +613,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
+    log_formatter (0.8.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -999,6 +1000,7 @@ DEPENDENCIES
   json
   koala
   letter_opener (~> 1.4.1)
+  log_formatter
   mailchimp-api
   mailchimp_client!
   manual_order!
@@ -1066,4 +1068,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
