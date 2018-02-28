@@ -106,11 +106,11 @@ module Products
       end
 
       def default_product_fabrics
-        @default_product_fabrics ||= product.basic_fabrics
+        @default_product_fabrics ||= product.basic_fabrics_with_description
       end
 
       def extra_product_fabrics
-        @extra_product_fabrics ||= product.custom_fabrics
+        @extra_product_fabrics ||= product.custom_fabrics_with_description
       end
 
       private def defined_custom_colors
