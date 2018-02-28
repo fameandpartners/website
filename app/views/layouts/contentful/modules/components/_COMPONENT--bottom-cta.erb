@@ -1,13 +1,13 @@
-<% if contents[:bottom_caption] %>
-  <% caption_array = contents[:bottom_caption].split('/') %>
+<% if bottom_caption %>
+  <% caption_array = bottom_caption.split('/') %>
   <div class="Editorial__bottomCaption">
 
     <% # Check if this CTA should be split in 2 parts %>
     <% if caption_array.size > 1 %>
 
       <% # Check if this CTA should be a link or not %>
-      <% if contents[:bottom_caption_url] %>
-        <a href="<%= contents[:bottom_caption_url] %>">
+      <% if bottom_caption_url %>
+        <a href="<%= bottom_caption_url %>">
           <span class="Editorial__bottomCaptionBlocks"><%= caption_array[0] %></span> / <span class="Editorial__bottomCaptionBlocks link-underline"><%= caption_array[1] %></span>
         </a>
       <% else %>
@@ -17,10 +17,10 @@
     <% else %>
 
       <% # Check if this CTA should be a link or not %>
-      <% if contents[:bottom_caption_url] %>
-        <%= link_to contents[:bottom_caption], contents[:bottom_caption_url], class: "link-underline" %>
+      <% if bottom_caption_url %>
+        <%= link_to bottom_caption, bottom_caption_url, class: "link-underline" %>
       <% else %>
-        <span class="Editorial__bottomCaptionBlocks link-underline"><%= contents[:bottom_caption] %></span>
+        <span class="Editorial__bottomCaptionBlocks link-underline"><%= bottom_caption %></span>
       <% end %>
 
     <% end %>
