@@ -66,13 +66,12 @@ module Batcher
   end
 
   def check_last_n_minutes(n_minutes)
-    start_time = Time.now - n_minutes
+    start_time = Time.now - n_minutes.minutes
     lis = get_line_items_between(start_time, Time.now)
     batch_line_items(lis)
   end
 
   def get_line_items_between(start_time, end_time)
-    binding.pry
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
     lis = orders.map {|ord| ord.line_items}.flatten
     #if we ever do something crazy like a li being able to be in more than 1 batch_collection..change this code below

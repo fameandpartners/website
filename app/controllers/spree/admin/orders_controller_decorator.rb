@@ -68,18 +68,28 @@ module Spree
             :ship_address => [:state, :country]
           ).page(page).per(per_page)
         else
-          @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
+          if @refulfill_only
+            query = " li.refulfill_status is not null ORDER BY o.\"completed_at\" DESC"
+            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
+          elsif @batch_only
+            order_ids = BatchCollection.all.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
+            oids = order_ids.join(',')
+            query = " o.id in (#{oids}) order by sp.\"name\" DESC"
+            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
+          else
+            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
+          end
         end
 
-        if @sample_only
-          @orders = @orders.select {|order| order.contains_sample_sale_item?}
-          @orders = Kaminari::PaginatableArray.new(@orders,
-                          {
-                          :limit => 50,
-                          :offset => 0,
-                          :total_count => @orders.count
-                    })
-        end
+        # if @sample_only
+        #   @orders = @orders.select {|order| order.contains_sample_sale_item?}
+        #   @orders = Kaminari::PaginatableArray.new(@orders,
+        #                   {
+        #                   :limit => 50,
+        #                   :offset => 0,
+        #                   :total_count => @orders.count
+        #             })
+        # end
 
         # if @refulfill_only
         #   @orders = @orders.select {|order| order.contains_refulfill_item?}

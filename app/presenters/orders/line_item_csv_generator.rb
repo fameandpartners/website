@@ -5,8 +5,8 @@ module Orders
     attr_reader :orders, :query_params
 
     def initialize(orders, query_params = {})
-      # @orders = orders
-      @lis = orders.map {|ord| ord.line_items}.flatten
+      @orders = orders
+      @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
       @query_params = query_params
 
       if query_params[:refulfill_only]
@@ -33,31 +33,46 @@ module Orders
     end
 
     def to_csv
-
-binding.pry
       line = Orders::LineItemCSVPresenter
 
       CSV.generate(headers: true) do |csv|
-        csv << headers
-        @lis.each do |li|
-          line.set_line li.order.attributes
+        if @batch_only
+          bcs_sorted = BatchCollection.all.sort {|x, y| y.line_items.count <=> x.line_items.count}
+          csv << (bcs_sorted.map {|bc| "#{bc.batch_key}: #{bc.line_items.count}"})
+        end
 
+        csv << headers
+        @lis.each_with_index do |li, index|
+          line.set_line @orders[index].attributes
           # li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
           lip = nil
           if li
             lip = Orders::LineItemPresenter.new(li)
           end
 
-          if @refulfill_only
-            if li.refulfill_status.nil?
-              next
-            end
+          if line.style_name == 'RETURN_INSURANCE'
+            next
+          end
+
+          if @refulfill_only && li.refulfill_status.nil?
+            next
+          end
+          if !@refulfill_only && !li.refulfill_status.nil?
+            next
+          end
+
+          if @batch_only && li.batch_collections.empty?
+            next
+          end
+
+          if !@batch_only && !li.batch_collections.empty?
+            next
           end
 
           csv << [
             line.order_state,
             line.order_number,
-            lip.sample_sale?,
+            # lip.sample_sale?,
             li.refulfill_status,
             line.line_item_id,
             line.total_items,
@@ -107,7 +122,7 @@ binding.pry
       [
         :order_state,
         :order_number,
-        :sample_sale_item,
+        # :sample_sale_item,
         :refulfill,
         :line_item,
         :total_items,
