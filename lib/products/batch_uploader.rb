@@ -233,10 +233,13 @@ module Products
       processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
       # Turn the different color codes into the their color maps
-      processed[:recommended_fabric_colors] = raw[:recommended_fabric_colors].split( ',' ).map  {|color_code| lookup_color_code( color_code, color_data ) }
+      recommended_fabric_color_codes = raw[:recommended_fabric_colors].split( ',' ).collect(&:strip)
+      processed[:recommended_fabric_colors] = recommended_fabric_color_codes.map  {|color_code| lookup_color_code( color_code, color_data ) }
       processed[:custom_fabric_colors] = raw[:custom_fabric_colors].map do |custom_fabric_color|
         if( custom_fabric_color )
-          custom_fabric_color.split( ',' ).map {|color_code| lookup_color_code( color_code, color_data ) }
+          custom_fabric_color_codes = custom_fabric_color.split( ',' ).collect(&:strip)
+          custom_fabric_color_codes = custom_fabric_color_codes - recommended_fabric_color_codes
+          custom_fabric_color_codes.map {|color_code| lookup_color_code( color_code, color_data ) }
         else
           nil
         end
