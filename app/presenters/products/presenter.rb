@@ -94,7 +94,7 @@ module Products
 
     def collected_featured_images
       featured_images.collect do |img|
-        { id: img.id, url: img.original, url_product: img.product, color_id: img.color_id, alt: name }
+        { id: img.id, url: img.original, url_product: img.product, color_id: img.color_id, alt: name, fabric_id: img.fabric_id }
       end
     end
 
