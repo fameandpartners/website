@@ -1,6 +1,8 @@
-<div class="Product">
-  <a href="<%= editorial_tile_url %>">
-    <p class="Product__name"><%= editorial_tile_name %></p>
-    <p class="Product__price"><%= editorial_tile_price %></p>
-  </a>
-</div>
+<% if pid_name.present? && pid_price.present? && pid_url.present? %>
+  <div class="Product">
+    <a href="<%= pid_url %>">
+      <p class="Product__name"><%= pid_name %></p>
+      <p class="Product__price"><%= pid_price %></p>
+    </a>
+  </div>
+<% end %>

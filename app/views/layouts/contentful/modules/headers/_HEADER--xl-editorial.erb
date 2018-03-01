@@ -1,12 +1,13 @@
 <% @lg_contents = contents %>
+<% @lg_contents[:mobile_video].nil? && @lg_contents[:mobile_image].nil? ? noMobileMediaClass = 'u-overlay-area--noMobileMedia' : noMobileMediaClass = nil %>
 <div class="section-row columns">
   <div class="column is-full">
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
-      <% if contents[:live_text] %>
-        <div class="u-overlay-area">
-          <div class="u-overlay-area__media">
-            <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
-          </div>
+      <div class="u-overlay-area <%= noMobileMediaClass %>">
+        <div class="u-overlay-area__media">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+        </div>
+        <% if contents[:live_text] %>
           <div class="u-overlay-area__overlay">
             <div class="u-overlay-area__caption u-overlay-area__caption--center">
               <div class="Editorial__liveText" style="color: <%= contents[:live_text_color] %>">
@@ -14,10 +15,8 @@
               </div>
             </div>
           </div>
-        </div>
-      <% else %>
-        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
