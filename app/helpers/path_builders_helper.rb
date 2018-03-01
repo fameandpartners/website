@@ -66,7 +66,6 @@ module PathBuildersHelper
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
-    binding.pry
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "#{product_type}-#{product[:urls][locale]}"
     else
