@@ -9796,3 +9796,11 @@ INSERT INTO schema_migrations (version) VALUES ('20180111190922');
 INSERT INTO schema_migrations (version) VALUES ('20180118062620');
 
 INSERT INTO schema_migrations (version) VALUES ('20180131220110');
+
+INSERT INTO schema_migrations (version) VALUES ('20180225165655');
+
+INSERT INTO schema_migrations (version) VALUES ('20180225215224');
+
+INSERT INTO schema_migrations (version) VALUES ('20180225220958');
+
+INSERT INTO schema_migrations (version) VALUES ('20180227181112');
