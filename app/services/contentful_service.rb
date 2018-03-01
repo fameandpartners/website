@@ -342,7 +342,7 @@ module Contentful
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
         desktop_video = (main_header_container.respond_to? :video_desktop) ? main_header_container.video_desktop.url : nil
-        mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : desktop_video
+        mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : nil
         live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
         live_text_color = (main_header_container.respond_to? :live_text_color) ? main_header_container.live_text_color : '#fff'
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil

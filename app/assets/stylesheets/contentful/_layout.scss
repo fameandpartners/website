@@ -173,3 +173,30 @@
 .u-overlay-area__caption--bottom {
   bottom: 0;
 }
+
+@include breakpoint(mobile-max) {
+
+  .u-overlay-area--noMobileMedia {
+    max-height: calc(75vh);
+    height: 150vw;
+    position: relative;
+    overflow: hidden;
+
+    .u-overlay-area__media video,
+    .u-overlay-area__media img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      max-width: 180vh;
+      max-height: 55vw;
+    }
+
+  }
+
+}

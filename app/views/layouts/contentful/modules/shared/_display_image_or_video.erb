@@ -1,8 +1,8 @@
 <%= link_to_if_with_block item_url.present?, item_url do %>
   <% # Load video if available, instead of images %>
-  <% if item_video %>
+  <% if item_video.present? %>
     <video src="<%= item_video %>"
-      class="js-autoload-video Editorial__video hidden-xs hidden-sm"
+      class="js-autoload-video Editorial__video <% item_video_mobile.present? ? 'hidden-xs hidden-sm' : nil %>"
       muted
       playsinline
       webkit-playsinline
@@ -12,17 +12,19 @@
       aria-hidden="false"
       poster="<%= item_image %>">
     </video>
-    <video src="<%= item_video_mobile %>"
-      class="js-autoload-video Editorial__video hidden-md hidden-lg"
-      muted
-      playsinline
-      webkit-playsinline
-      preload
-      autoplay
-      loop
-      aria-hidden="false"
-      poster="<%= item_image_mobile %>">
-    </video>
+    <% if item_video_mobile.present? %>
+      <video src="<%= item_video_mobile %>"
+        class="js-autoload-video Editorial__video hidden-md hidden-lg"
+        muted
+        playsinline
+        webkit-playsinline
+        preload
+        autoplay
+        loop
+        aria-hidden="false"
+        poster="<%= item_image_mobile %>">
+      </video>
+    <% end %>
 
   <% # Load image if no video is available %>
   <% else %>
