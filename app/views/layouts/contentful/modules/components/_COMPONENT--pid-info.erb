@@ -1,4 +1,4 @@
-<% if pid_name && pid_price && pid_url %>
+<% if pid_name.present? && pid_price.present? && pid_url.present? %>
   <div class="Product">
     <a href="<%= pid_url %>">
       <p class="Product__name"><%= pid_name %></p>

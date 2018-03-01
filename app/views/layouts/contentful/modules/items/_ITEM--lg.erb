@@ -16,10 +16,13 @@
 
 <% # Display either PID info or a custom CTA under the editorial tile %>
 <% # Step 1: Check if PID is valid and display its info (URL, price and name) %>
-<% if @lg_contents[:editorial_tile_pid].present?
+<%
+if @lg_contents[:editorial_tile_pid].present?
   editorial_tile_pid = contentful_get_products_array_via_pids_array(@lg_contents[:editorial_tile_pid])[0]
-%>
-  <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
+
+  if editorial_tile_pid.present? %>
+    <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
+  <% end %>
 <% else %>
   <% # Step 2: If no valid PID is provided then display a custom CTA %>
   <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: { bottom_caption: @lg_contents[:bottom_caption], bottom_caption_url: @lg_contents[:bottom_caption_url] } %>
