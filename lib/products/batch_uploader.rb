@@ -102,7 +102,7 @@ module Products
       total_rows = book.last_row("Fabric & Color")
       (2..total_rows).each do |i|
         book.row( i, "Fabric & Color" ).each_slice(3).to_a.each_with_index do |slice, index|
-          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index].split( '(' ).first.strip } if slice[0].present?
+          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index].split( '(' ).first.strip, fabric_price: slice[2].present? ?  slice[2] : nil } if slice[0].present?
         end
       end
       color_data
@@ -433,7 +433,8 @@ module Products
       to_return
     end
 
-    private def find_or_create_fabric( fabric_name, color_option )
+    private def find_or_create_fabric( fabric_name, color_option, price )
+      puts "Color: #{fabric_name} for #{price}"
       to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
       presentation = "#{color_option.presentation} #{fabric_name}"
       
@@ -445,13 +446,21 @@ module Products
           object.presentation = presentation
           object.name = object.presentation.parameterize
           object.option_fabric_color_value = fabric_color_option
+          object.price_aud = price
+          object.price_usd = price
         end
-      end
+      else
+        # Clean up legacy fabrics
+        if( to_return.option_fabric_color_value.nil? )
+          to_return.option_fabric_color_value = fabric_color_option
+          to_return.save
+        end
 
-      # Clean up legacy fabrics
-      if( to_return.option_fabric_color_value.nil? )
-        to_return.option_fabric_color_value = fabric_color_option
-        to_return.save
+        if( price.present? )
+          to_return.price_aud = price
+          to_return.price_usd = price
+          to_return.save
+        end
       end
       
       to_return
@@ -479,7 +488,8 @@ module Products
         unless fabric_color.nil? || fabric_color.empty?
           color_option = get_color_options( [fabric_color[:color_name]] ).first
           fabric_name = fabric_color[:fabric_name]
-          fabric  = find_or_create_fabric( fabric_name, color_option )
+          fabric_price = fabric_color[:fabric_price].present? ? fabric_color[:fabric_price].to_i : nil
+          fabric  = find_or_create_fabric( fabric_name, color_option, fabric_price )
           fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
           to_return << fabric_product
         end
