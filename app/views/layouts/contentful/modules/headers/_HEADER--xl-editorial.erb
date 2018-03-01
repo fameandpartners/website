@@ -1,5 +1,5 @@
 <% @lg_contents = contents %>
-<% @lg_contents[:mobile_video].nil? ? noMobileMediaClass = 'u-overlay-area--noMobileMedia' : noMobileMediaClass = nil %>
+<% @lg_contents[:mobile_video].nil? && @lg_contents[:mobile_image].nil? ? noMobileMediaClass = 'u-overlay-area--noMobileMedia' : noMobileMediaClass = nil %>
 <div class="section-row columns">
   <div class="column is-full">
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
