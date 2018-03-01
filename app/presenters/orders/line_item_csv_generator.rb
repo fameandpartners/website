@@ -9,6 +9,10 @@ module Orders
       @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
       @query_params = query_params
 
+      if query_params[:show_only_completed]
+        @show_only_completed = true
+      end
+
       if query_params[:refulfill_only]
         @refulfill_only = true
       end
@@ -16,13 +20,29 @@ module Orders
       if query_params[:batch_only]
         @batch_only = true
       end
+
+      if query_params[:making_only]
+        @making_only = true
+      end
     end
 
     def filename
       parts = ['fp_orders']
-      parts << Date.parse(query_params[:created_at_gt]).strftime('from_%Y-%m-%d') if query_params[:created_at_gt].present?
-      parts << Date.parse(query_params[:created_at_lt]).strftime('to_%Y-%m-%d')   if query_params[:created_at_lt].present?
-      parts << (query_params.fetch(:completed_at_not_null) { false } == '1' ? 'only_complete' : 'all_states')
+      if @show_only_completed || @making_only
+        parts << Date.parse(query_params[:created_at_gt]).strftime('from_%Y-%m-%d') if query_params[:created_at_gt].present?
+        parts << Date.parse(query_params[:created_at_lt]).strftime('to_%Y-%m-%d')   if query_params[:created_at_lt].present?
+        parts << (query_params.fetch(:completed_at_not_null) { false } == '1' ? 'only_complete' : 'all_states')
+      end
+      if @refulfill_only
+        parts << 'refulfill_only'
+      end
+      if @batch_only
+        parts << 'batch_only'
+      end
+      if @making_only
+        parts << 'items_ready_for_production'
+      end
+
       parts << 'generated_at'
       parts << DateTime.now.to_s(:file_timestamp)
       parts.join('_') << '.csv'
@@ -39,6 +59,7 @@ module Orders
         if @batch_only
           bcs_sorted = BatchCollection.all.sort {|x, y| y.line_items.count <=> x.line_items.count}
           csv << (bcs_sorted.map {|bc| "#{bc.batch_key}: #{bc.line_items.count}"})
+          csv << []
         end
 
         csv << headers
@@ -57,16 +78,18 @@ module Orders
           if @refulfill_only && li.refulfill_status.nil?
             next
           end
-          if !@refulfill_only && !li.refulfill_status.nil?
-            next
-          end
 
           if @batch_only && li.batch_collections.empty?
             next
           end
 
-          if !@batch_only && !li.batch_collections.empty?
-            next
+          if @making_only
+            if !@refulfill_only && !li.refulfill_status.nil?
+              next
+            end
+            if !@batch_only && !li.batch_collections.empty?
+              next
+            end
           end
 
           csv << [

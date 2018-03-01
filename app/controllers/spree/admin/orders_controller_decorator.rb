@@ -23,6 +23,13 @@ module Spree
         ##################### Original Spree ##############################
         params[:q] ||= {}
         params[:q][:completed_at_not_null] ||= '1' if Spree::Config[:show_only_complete_orders_by_default]
+
+        if params[:q][:making_only].present?
+          @making_only = true
+          params[:q][:completed_at_not_null] = '1'
+        end
+        params[:q].delete(:making_only)
+
         @show_only_completed = params[:q][:completed_at_not_null].present?
         params[:q][:s] ||= @show_only_completed ? 'completed_at desc' : 'created_at desc'
         # As date params are deleted if @show_only_completed, store
@@ -54,6 +61,7 @@ module Spree
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
+
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
         ##################### End Original Spree ##############################
@@ -108,11 +116,17 @@ module Spree
         respond_with(@orders) do |format|
           format.html
           format.csv {
+            if @show_only_completed
+              params[:q][:show_only_completed]
+            end
             if @refulfill_only
               params[:q][:refulfill_only] = true
             end
             if @batch_only
               params[:q][:batch_only] = true
+            end
+            if @making_only
+              params[:q][:making_only] = true
             end
             presenter = ::Orders::LineItemCsvGenerator.new(@orders, params[:q])
             headers['Content-Disposition'] = "attachment; filename=#{presenter.filename}"
