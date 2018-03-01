@@ -681,16 +681,19 @@ module Products
           fabric_color = fabrics_product.fabric.option_fabric_color_value
           
           next if size_value.blank? || fabric_color.blank?
-
-          variant = product.variants.detect do |variant|
+          variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
             [size_value.id, fabric_color.id].all? do |id|
-              variant.option_value_ids.include?(id)
+              variant.reload.option_value_ids.include?(id)
             end
           end
-
+          
+          variant = variant.reload unless variant.nil?
           unless variant.present?
+            puts "Creating new variant for #{size_value.id} and #{fabric_color.id}"
             variant = product.variants.build
             variant.option_values = [size_value, fabric_color]
+          else
+            puts "Found variant for #{size_value.id} and #{fabric_color.id}"
           end
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
