@@ -197,6 +197,8 @@ Spree::Product.class_eval do
     fabrics_arry = []
     fabric_products.recommended.each do |fp|
         fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true) 
+        fabric_hsh[:fabric][:price_usd] = '0' 
+        fabric_hsh[:fabric][:price_aud] = '0' 
         fabric_hsh[:fabric][:description] = fp.description
         fabrics_arry << fabric_hsh
     end
