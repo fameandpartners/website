@@ -699,8 +699,11 @@ module Products
           # Avoids errors with Spree hooks updating lots and lots of orders.
           # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
           variant.send :write_attribute, :on_demand, true
-
-          variant.save
+          Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+          Spree::Variant.skip_callback( :save, :after, :process_backorders )
+          Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
+          variant.save( :validate => false )
+          
 
           if price_in_aud.present?
             aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
