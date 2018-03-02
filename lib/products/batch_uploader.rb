@@ -407,15 +407,15 @@ module Products
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
-
-          add_product_properties(product, args[:properties].symbolize_keys)
-          add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
-          fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
-          add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
-          add_product_customizations(product, args[:customizations] || [])
-          add_product_layered_cads( product, args[:cads] || [] )
-          add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
-
+          ActiveRecord::Base.transaction do
+            add_product_properties(product, args[:properties].symbolize_keys)
+            add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
+            fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
+            add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
+            add_product_customizations(product, args[:customizations] || [])
+            add_product_layered_cads( product, args[:cads] || [] )
+            add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
+          end
           product
         end
       end.compact
@@ -689,11 +689,8 @@ module Products
           
           variant = variant.reload unless variant.nil?
           unless variant.present?
-            puts "Creating new variant for #{size_value.id} and #{fabric_color.id}"
             variant = product.variants.build
             variant.option_values = [size_value, fabric_color]
-          else
-            puts "Found variant for #{size_value.id} and #{fabric_color.id}"
           end
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
@@ -723,7 +720,7 @@ module Products
 
       variants
 
-      product.variants.where('id NOT IN (?)').update_all(deleted_at: Time.now)
+      product.variants.where('id NOT IN (?)', variants).update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, array_of_attributes)
