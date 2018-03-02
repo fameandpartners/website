@@ -714,13 +714,13 @@ module Products
             usd.save!
           end
 
-          variants.push(variant) if variant.persisted?
+          variants.push(variant.id) if variant.persisted?
         end
       end
 
       variants
 
-      product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
+      product.variants.where('id NOT IN (?)').update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, array_of_attributes)
