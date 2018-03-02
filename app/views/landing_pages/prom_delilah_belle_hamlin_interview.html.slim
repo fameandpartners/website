@@ -1,15 +1,17 @@
 = render partial: 'pages/robots'
 
+- interviewed_edits_relative_url = '/evening-collection-delilah-belle-hamlin'
 - interviewed_full_name = 'Delilah Belle Hamlin'
 - interviewed_name = 'Delilah'
-- interviewed_edits_relative_url = '/evening-collection-delilah-belle-hamlin'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
 
-.Page__promInterview.js-smooth-scroll
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
 
   .PromInterview__header
     .u-overlay-area
-      img.u-overlay-area__media.hidden-xs.hidden-sm src="#{image_path('landingpages/prom-campaign/header-delilah.jpg')}"
-      img.u-overlay-area__media.hidden-md.hidden-lg src="#{image_path('landingpages/prom-campaign/header-delilah-mobile.jpg')}"
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
 
   section.PromInterview__introCopy
     .container.js-scroll-fade-in
@@ -22,25 +24,25 @@
         .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
           .PromInterview__introCopyContent
             p If you’re one of her 553k followers on Instagram, you might think you know Delilah Belle Hamlin. But you’d be wrong. There’s so much more to the 19-year-old model than selfies and Snap stories.
-            p True, you’re most likely to see the born-and-bred California girl in the pages of your favorite magazine or stalking the runway and Fashion Week–but Delilah’s also an NYU student who’s equally as interested in criminal psychology as she is in planning her daily outfits, and an activist using her platform to raise awareness for breast cancer.
+            p True, you’re most likely to see the born-and-bred California girl in the pages of your favorite magazine or stalking the runway at Fashion Week–but Delilah’s also an NYU student who’s equally as interested in criminal psychology as she is in planning her daily outfits, and an activist using her platform to raise awareness for breast cancer.
 
   section.PromInterview__pidTile
     .container
       .row.js-scroll-fade-in
-        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: 'http://fakeimg.pl/500x700/?text=Tile+1', pidImageReplacementMobile: 'http://fakeimg.pl/500x900/?text=Tile+1', customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
 
   section.PromInterview__copyInTwoColumns
     .container
       .row.js-scroll-fade-in
         .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
           .PromInterview__copy.Copy__column1
-            p FAME: <em>How do you express yourself?</em>
-            p #{interviewed_name}: I kind of use fashion, style, just the way that I dress myself from day to day to express myself. It’s usually the same vibe, it depends on where I’m going. But I definitely show my personality through what I wear.
+            p <em>How do you express yourself?</em>
+            p I kind of use fashion, style, just the way that I dress myself from day to day to express myself. It’s usually the same vibe, it depends on where I’m going. But I definitely show my personality through what I wear.
 
         .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
           .PromInterview__copy.Copy__column2
-            p FAME: <em>Our collection plays with the idea of movement–both as a way to express yourself, and as a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
-            p #{interviewed_name}: I’ve worked with a lot of charities. When I was younger, I sold jewelry and used those funds for a breast cancer charity since my grandma and my aunt both had it. Actually, both my grandmas had it, so [my movement] is definitely breast cancer. But also, this past fashion week and in general this year in 2018, fashion has been so much about giving back, and charities, and awareness, which I think is so special. I think that’s so important.
+            p <em>Our collection plays with the idea of movement–both as a way to express yourself, and as a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
+            p I’ve worked with a lot of charities. When I was younger, I sold jewelry and used those funds for a breast cancer charity since my grandma and my aunt both had it. Actually, both my grandmas had it, so [my movement] is definitely breast cancer. But also, this past fashion week and in general this year in 2018, fashion has been so much about giving back, and charities, and awareness, which I think is so special. I think that’s so important.
 
   section.PromInterview__pullQuote
     .container
@@ -53,22 +55,22 @@
       .row.js-scroll-fade-in.vertical-align-row
         .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
           .PromInterview__copy.Copy__column1
-            p FAME: <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
-            p #{interviewed_name}: It was for prom. I was homeschooling and I had a stylist for work and stuff. And so I asked my stylist, “Would you mind dressing me for prom?” She was like, “I’ve never dressed anyone for prom before, are you sure?” It was so amazing, I loved my dress, it was so beautiful. For my first red carpet evening event, I actually had a dress made for me for the CFDAs–I got to pick my color and everything. These [Fame and Partners] dresses actually look really similar to the one that I wore and I loved it–so simple and sleek!
+            p <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
+            p It was for prom. I was homeschooling and I had a stylist for work and stuff. And so I asked my stylist, “Would you mind dressing me for prom?” She was like, “I’ve never dressed anyone for prom before, are you sure?” It was so amazing, I loved my dress, it was so beautiful. For my first red carpet evening event, I actually had a dress made for me for the CFDAs–I got to pick my color and everything. These [Fame and Partners] dresses actually look really similar to the one that I wore and I loved it–so simple and sleek!
 
             .row.js-scroll-fade-in
               .PromInterview__tile
-                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: 'http://fakeimg.pl/700x900/?text=Tile+2', pidImageReplacementMobile: 'http://fakeimg.pl/500x900/?text=Tile+2', customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
 
         .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
           .PromInterview__pidTile.Copy__column2
             .row.js-scroll-fade-in
-              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: 'http://fakeimg.pl/1500x1700/?text=Tile+3', pidImageReplacementMobile: 'http://fakeimg.pl/500x900/?text=Tile+3', showMoodboard: 'false', customWrapper: 'col-xs-12' }
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
 
   section.PromInterview__pidTile
     .container
       .row.js-scroll-fade-in
-        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: 'http://fakeimg.pl/1500x900/?text=Tile+4', pidImageReplacementMobile: 'http://fakeimg.pl/500x900/?text=Tile+4', customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
 
   .PromInterview__cta
     .container

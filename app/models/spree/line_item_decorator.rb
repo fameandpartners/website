@@ -4,6 +4,8 @@ Spree::LineItem.class_eval do
 
   has_one :fabrication
 
+  belongs_to :fabric
+
   has_one :item_return, inverse_of: :line_item
 
   has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
@@ -57,6 +59,10 @@ Spree::LineItem.class_eval do
 
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
+    end
+
+    if fabric.present? && !recommended_fabric?
+      total_price += fabric.price_in(self.currency)
     end
 
     total_price
@@ -114,7 +120,11 @@ Spree::LineItem.class_eval do
       array = []
 
       values.each do |type, value|
-        array << (value.present? ? "#{type}: #{value}" : type.to_s)
+        if type == 'Color' && self.fabric
+          array << "Fabric and Color: #{fabric.presentation}" 
+        else 
+          array << (value.present? ? "#{type}: #{value}" : type.to_s)
+        end
       end
 
       array.to_sentence({ :words_connector => ", ", :two_words_connector => ", " })
@@ -211,6 +221,7 @@ Spree::LineItem.class_eval do
         "price": self.price,
         "size": self.size_name,
         "color": self.color_name,
+        "fabric": self&.fabric&.presentation,
         "height": self.height_name,
         "height_unit": self.height_unit,
         "height_value": self.height_value,
@@ -228,6 +239,11 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def recommended_fabric?
+      fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
+      fp.recommended
   end
 
   private

@@ -1,5 +1,6 @@
 require 'forwardable'
 require 'term/ansicolor'
+require_relative '../log_formatter'
 
 module BatchUpload
   class ImagesUploader

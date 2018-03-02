@@ -100,10 +100,12 @@
     this.index = $('.product').index(this.$product);
 
     this.$optColors = $('<optgroup>', { label: 'Colors' });
+    this.$optFabrics = $('<optgroup>', { label: 'Fabrics' });
     this.$optCustomColors = $('<optgroup>', { label: 'Custom Colors + $16.00' });
 
     this.$styleSelect = $('#products_style_name', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][style_name]');
     this.$colorSelect = $('#products_color', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][color]');
+    this.$fabricSelect = $('#products_fabric', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][fabric]');
     this.$sizeSelect = $('#products_size', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][size]');
     this.$heightSelect = $('#products_height', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][height]');
     this.$customisationSelect = $('#products_customisations', this.$product).attr('name', 'forms_manual_order[products][' + this.index + '][customisations][]');
@@ -111,6 +113,7 @@
     this.clearFields = function() {
       this.$colorSelect.html('<option></option>');
       this.$optColors.html('');
+      this.$optFabrics.html('');
       this.$optCustomColors.html('');
       this.$sizeSelect.html('<option></option>');
       this.$heightSelect.html('<option></option>');
@@ -141,22 +144,55 @@
 
       if (this.$styleSelect.val()) {
         $.getJSON(url, function(data) {
-          this.$optColors.appendTo(this.$colorSelect);
-          this.$optCustomColors.appendTo(this.$colorSelect);
+          if (data["manual_orders"].length < 1) {
+            $("#products_color_chosen").hide();
+          }
+          else {
+            $("#products_color_chosen").show();
+            this.$optColors.appendTo(this.$colorSelect);
+            this.$optCustomColors.appendTo(this.$colorSelect);
 
-          $.each(data['manual_orders'], function(index, el) {
-            var $option = $('<option>', { value: el.id, text: el.name });
-            if (el.type === 'color') {
-              $option.appendTo(this.$optColors);
-            } else {
-              $option.appendTo(this.$optCustomColors);
-            }
-          }.bind(this));
+            $.each(data['manual_orders'], function(index, el) {
+              var $option = $('<option>', { value: el.id, text: el.name });
+              if (el.type === 'color') {
+                $option.appendTo(this.$optColors);
+              } else {
+                $option.appendTo(this.$optCustomColors);
+              }
+            }.bind(this));
 
-          this.$colorSelect.trigger("chosen:updated");
+            this.$colorSelect.trigger("chosen:updated");
+          }
         }.bind(this));
       } else {
         this.$colorSelect.trigger("chosen:updated");
+      }
+    };
+
+    this.updateFabrics = function() {
+      var url = this.urls.fabric.replace(/:product_id/, this.$styleSelect.val());
+
+      url += '?currency=' + $('#forms_manual_order_currency').val();
+
+      if (this.$styleSelect.val()) {
+        $.getJSON(url, function(data) {
+          if (data["manual_orders"].length < 1) {
+            $("#products_fabric_chosen").hide();
+          }
+          else {
+            $("#products_fabric_chosen").show();
+            this.$optFabrics.appendTo(this.$fabricSelect);
+
+            $.each(data['manual_orders'], function(index, el) {
+              var $option = $('<option>', { value: el.id, text: el.name });
+                $option.appendTo(this.$optFabrics);
+            }.bind(this));
+
+            this.$fabricSelect.trigger("chosen:updated");
+          }
+        }.bind(this));
+      } else {
+        this.$fabricSelect.trigger("chosen:updated");
       }
     };
 
@@ -194,9 +230,11 @@
       }
     };
 
+
     this.remove = function() {
       this.$styleSelect.off('change');
       this.$colorSelect.off('change');
+      this.$fabricSelect.off('change');
       this.$product.remove();
 
       this.adjust.updateImages();
@@ -210,6 +248,7 @@
     this.$styleSelect.on('change', function() {
       this.clearFields();
       this.updateColors();
+      this.updateFabrics();
       this.updateSizes();
       this.updateHeights();
       this.updateCustomisations();
@@ -222,12 +261,20 @@
       }
     }.bind(this));
 
+    this.$fabricSelect.on('change', function() {
+      if (this.$fabricSelect.val()) {
+        this.adjust.updateImages();
+        this.adjust.updatePrice();
+      }
+    }.bind(this));
+
     $('.close', this.$product).on('click', this.remove.bind(this));
   }
 
   $(document).ready(function() {
     var urls = {
       color: '/fame_admin/manual_orders/colors/:product_id',
+      fabric: '/fame_admin/manual_orders/fabrics/:product_id',
       size: '/fame_admin/manual_orders/sizes/:product_id',
       height: '/fame_admin/manual_orders/heights/:product_id',
       image: '/fame_admin/manual_orders/images',
