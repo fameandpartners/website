@@ -124,6 +124,7 @@ module BatchUpload
 
     def find_fabrics_product( sku, fabric_color )
       color_option = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', fabric_color[:color_name].downcase).first
+      puts "Unknown fabric color: #{fabric_color}" if color_option.nil?
       fabric = Fabric.find_by_material_and_option_value_id( fabric_color[:fabric_name], color_option.id )
       master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
       product = master.product

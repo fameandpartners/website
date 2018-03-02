@@ -395,7 +395,7 @@ module Products
     # create product with restored data
     def create_or_update_products(products_attrs)
       info "Creating or Update Products"
-      products_attrs.map do |attrs|
+      products_attrs.reverse.map do |attrs|
         args = attrs.symbolize_keys
 
         begin
@@ -678,7 +678,7 @@ module Products
       sizes_to_process = sizes.clone
       
       threads = []
-      number_of_threads = 4
+      number_of_threads = 6
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|
@@ -692,49 +692,59 @@ module Products
                 size_name = nil
               end
             end
-            puts "Thread # #{thread_num} processing #{size_name}"
-            fabric_products.each do |fabrics_product|
+            unless size_name.nil?
+              puts "Thread # #{thread_num} processing #{size_name}"              
+              fabric_products.each do |fabrics_product|
 
-              size_value  = size_option.option_values.where(name: size_name).first
-              fabric_color = fabrics_product.fabric.option_fabric_color_value
-              
-              next if size_value.blank? || fabric_color.blank?
+                size_value  = size_option.option_values.where(name: size_name).first
+                fabric_color = fabrics_product.fabric.option_fabric_color_value
+                
+                next if size_value.blank? || fabric_color.blank?
 
-              variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
-                [size_value.id, fabric_color.id].all? do |id|
-                  variant.reload.option_value_ids.include?(id)
+                variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
+                  [size_value.id, fabric_color.id].all? do |id|
+                    variant.reload.option_value_ids.include?(id)
+                  end
                 end
-              end
-              
+                
 
-              variant = variant.reload unless variant.nil?
-              unless variant.present?
-                variant = product.variants.build
-                variant.option_values = [size_value, fabric_color]
-              end
+                variant = variant.reload unless variant.nil?
+                unless variant.present?
+                  variant = product.variants.build
+                  variant.option_values = [size_value, fabric_color]
+                end
 
-              # Avoids errors with Spree hooks updating lots and lots of orders.
-              # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-              variant.send :write_attribute, :on_demand, true
-              Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
-              Spree::Variant.skip_callback( :save, :after, :process_backorders )
-              Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
-              variant.save( :validate => false )
-              
-              if price_in_aud.present?
-                aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-                aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
-                aud.save!
-              end
+                # Avoids errors with Spree hooks updating lots and lots of orders.
+                # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+                variant.send :write_attribute, :on_demand, true
+                Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+                Spree::Variant.skip_callback( :save, :after, :process_backorders )
+                Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
+                
+                begin
+                  variant.save( :validate => false )
+                rescue Exception => e
+                  puts "Got exception "
+                  puts e
+                  variant.save(:validate => false )
+                end
+                  
+                
+                if price_in_aud.present?
+                  aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+                  aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
+                  aud.save!
+                end
 
-              if price_in_usd.present?
-                usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-                usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
-                usd.save!
-              end
+                if price_in_usd.present?
+                  usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+                  usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
+                  usd.save!
+                end
 
-              semaphore.synchronize do
-                variants.push(variant.id) if variant.persisted?
+                semaphore.synchronize do
+                  variants.push(variant.id) if variant.persisted?
+                end
               end
             end
           end
