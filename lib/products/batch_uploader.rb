@@ -781,7 +781,7 @@ module Products
         end
 
         customization.update_attributes(attrs, without_protection: true)
-
+        customization.save( validate: false )
         customizations.push(customization)
       end
 
