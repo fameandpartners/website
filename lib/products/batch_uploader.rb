@@ -407,15 +407,14 @@ module Products
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
-          ActiveRecord::Base.transaction do
-            add_product_properties(product, args[:properties].symbolize_keys)
-            add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
-            fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
-            add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
-            add_product_customizations(product, args[:customizations] || [])
-            add_product_layered_cads( product, args[:cads] || [] )
-            add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
-          end
+
+          add_product_properties(product, args[:properties].symbolize_keys)
+          add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
+          fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
+          add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
+          add_product_customizations(product, args[:customizations] || [])
+          add_product_layered_cads( product, args[:cads] || [] )
+          add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
           product
         end
       end.compact
@@ -427,6 +426,7 @@ module Products
       to_return = associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
       custom_fabric_colors.each_with_index do |fabric_color, index|
         # You can't just compact because it screws up the indexing with the fabric descriptions
+        puts "custom fabrics"
         to_return += associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
       end
 
@@ -485,11 +485,12 @@ module Products
       to_return = []
       # How am I going to clean this up?
       fabric_colors.each do |fabric_color|
-        fabric  = find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, fabric_price )        
+        
         unless fabric_color.nil? || fabric_color.empty?
-          color_option = get_color_options( [fabric_color[:color_name]] ).first
           fabric_name = fabric_color[:fabric_name]
           fabric_price = fabric_color[:fabric_price].present? ? fabric_color[:fabric_price].to_i : nil
+          color_option = get_color_options( [fabric_color[:color_name]] ).first        
+          fabric  = find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, fabric_price )
           fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
           to_return << fabric_product
         end
@@ -674,52 +675,75 @@ module Products
       product.save
 
       product.reload
+      sizes_to_process = sizes.clone
+      
+      threads = []
+      number_of_threads = 4
+      semaphore = Mutex.new
 
-      sizes.each do |size_name|
-        fabric_products.each do |fabrics_product|
-          size_value  = size_option.option_values.where(name: size_name).first
-          fabric_color = fabrics_product.fabric.option_fabric_color_value
-          
-          next if size_value.blank? || fabric_color.blank?
-          variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
-            [size_value.id, fabric_color.id].all? do |id|
-              variant.reload.option_value_ids.include?(id)
+      (1..number_of_threads).each do |thread_num|
+        threads << Thread.new do
+          size_name = "start"
+          while( size_name != nil ) do
+            semaphore.synchronize do
+              unless( sizes_to_process.empty? )
+                size_name = sizes_to_process.pop
+              else
+                size_name = nil
+              end
+            end
+            puts "Thread # #{thread_num} processing #{size_name}"
+            fabric_products.each do |fabrics_product|
+
+              size_value  = size_option.option_values.where(name: size_name).first
+              fabric_color = fabrics_product.fabric.option_fabric_color_value
+              
+              next if size_value.blank? || fabric_color.blank?
+
+              variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
+                [size_value.id, fabric_color.id].all? do |id|
+                  variant.reload.option_value_ids.include?(id)
+                end
+              end
+              
+
+              variant = variant.reload unless variant.nil?
+              unless variant.present?
+                variant = product.variants.build
+                variant.option_values = [size_value, fabric_color]
+              end
+
+              # Avoids errors with Spree hooks updating lots and lots of orders.
+              # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+              variant.send :write_attribute, :on_demand, true
+              Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+              Spree::Variant.skip_callback( :save, :after, :process_backorders )
+              Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
+              variant.save( :validate => false )
+              
+              if price_in_aud.present?
+                aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+                aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
+                aud.save!
+              end
+
+              if price_in_usd.present?
+                usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+                usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
+                usd.save!
+              end
+
+              semaphore.synchronize do
+                variants.push(variant.id) if variant.persisted?
+              end
             end
           end
-          
-          variant = variant.reload unless variant.nil?
-          unless variant.present?
-            variant = product.variants.build
-            variant.option_values = [size_value, fabric_color]
-          end
-
-          # Avoids errors with Spree hooks updating lots and lots of orders.
-          # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-          variant.send :write_attribute, :on_demand, true
-          Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
-          Spree::Variant.skip_callback( :save, :after, :process_backorders )
-          Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
-          variant.save( :validate => false )
-          
-
-          if price_in_aud.present?
-            aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-            aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
-            aud.save!
-          end
-
-          if price_in_usd.present?
-            usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-            usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
-            usd.save!
-          end
-
-          variants.push(variant.id) if variant.persisted?
         end
       end
-
+      threads.each do |thread|
+        thread.join
+      end
       variants
-
       product.variants.where('id NOT IN (?)', variants).update_all(deleted_at: Time.now)
     end
 
