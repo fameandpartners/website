@@ -433,7 +433,7 @@ module Products
       to_return
     end
 
-    private def find_or_create_fabric( fabric_name, color_option, price )
+    private def find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, price )
       puts "Color: #{fabric_name} for #{price}"
       to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
       presentation = "#{color_option.presentation} #{fabric_name}"
@@ -485,11 +485,11 @@ module Products
       to_return = []
       # How am I going to clean this up?
       fabric_colors.each do |fabric_color|
+        fabric  = find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, fabric_price )        
         unless fabric_color.nil? || fabric_color.empty?
           color_option = get_color_options( [fabric_color[:color_name]] ).first
           fabric_name = fabric_color[:fabric_name]
           fabric_price = fabric_color[:fabric_price].present? ? fabric_color[:fabric_price].to_i : nil
-          fabric  = find_or_create_fabric( fabric_name, color_option, fabric_price )
           fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
           to_return << fabric_product
         end
