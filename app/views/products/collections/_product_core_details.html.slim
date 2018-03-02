@@ -1,5 +1,5 @@
 ruby:
-  product_link = -> (product) { collection_product_path(product, color: product.color.try(:name)) }
+  product_link = -> (product) { collection_product_path(product, color: product.fabric ? product.fabric.try(:name) : product.color.try(:name)) }
 
 = link_to product_link.call(product), :class => 'media-wrap' do
 

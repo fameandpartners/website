@@ -41,8 +41,17 @@ module ManualOrder
       render json: manual_order_filter.size_options
     end
 
+    def fabric_options
+      render json: manual_order_filter.fabric_options | manual_order_filter.custom_fabrics(params[:currency])
+    end
+
     def colors_options
-      render json: manual_order_filter.color_options | manual_order_filter.custom_colors
+      if  manual_order_filter.fabric_options.empty?
+        render json: manual_order_filter.color_options | manual_order_filter.custom_colors
+      else
+        render json: []
+      end
+
     end
 
     def heights_options

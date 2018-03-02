@@ -35,6 +35,10 @@ module Products
               currency: site_version.currency
             )
           }),
+          fabrics: OpenStruct.new({
+            default: default_product_fabrics,
+            extra: extra_product_fabrics,
+          }),
           customizations: OpenStruct.new({
             all: available_product_customisations,
             incompatibilities: customisations_incompatibility_map,
@@ -99,6 +103,14 @@ module Products
         else
           []
         end
+      end
+
+      def default_product_fabrics
+        @default_product_fabrics ||= product.basic_fabrics_with_description
+      end
+
+      def extra_product_fabrics
+        @extra_product_fabrics ||= product.custom_fabrics_with_description
       end
 
       private def defined_custom_colors

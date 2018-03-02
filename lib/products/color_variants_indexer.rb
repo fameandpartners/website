@@ -47,89 +47,177 @@ module Products
 
         color_customizable = product.color_customization
         discount           = product.discount&.amount.to_i
-        product.product_color_values.recommended.active.each do |product_color_value|
-          color = product_color_value.option_value
-          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
-          if !product_color_value.images.present?
-            logger.error "id  -  | #{log_prefix} No Images!"
-            next
-          end
+        if product.fabric_products.empty?
+          product.product_color_values.recommended.active.each do |product_color_value|
+            color = product_color_value.option_value
+            log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
-          logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
+            if !product_color_value.images.present? 
+              logger.error "id  -  | #{log_prefix} No Images!"
+              next
+            end
 
-          @variants << {
-            create: {
-              _index: index_name,
-              _type: 'document',
-              _id: color_variant_id,
-              data: {
-                id: color_variant_id,
-                product: {
-                  id:           product.id,
-                  name:         product.name,
-                  sku:          product.sku,
-                  description:  product.description,
-                  created_at:   product.created_at,
-                  available_on: product.available_on,
-                  is_deleted:   product.deleted_at.present?,
-                  is_hidden:    product.hidden?,
-                  position:     product.permalink,
-                  permalink:    product.permalink,
-                  master_id:    product.master.id,
-                  variant_skus: product.variant_skus,
-                  in_stock:     product.has_stock?,
-                  discount:     discount,
-                  urls: {
-                    en_au: helpers.descriptive_url(product, :"en-AU"),
-                    en_us: helpers.descriptive_url(product, :"en-US")
+            logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
+
+            @variants << {
+              create: {
+                _index: index_name,
+                _type: 'document',
+                _id: color_variant_id,
+                data: {
+                  id: color_variant_id,
+                  product: {
+                    id:           product.id,
+                    name:         product.name,
+                    sku:          product.sku,
+                    description:  product.description,
+                    created_at:   product.created_at,
+                    available_on: product.available_on,
+                    is_deleted:   product.deleted_at.present?,
+                    is_hidden:    product.hidden?,
+                    position:     product.permalink,
+                    permalink:    product.permalink,
+                    master_id:    product.master.id,
+                    variant_skus: product.variant_skus,
+                    in_stock:     product.has_stock?,
+                    discount:     discount,
+                    urls: {
+                      en_au: helpers.descriptive_url(product, :"en-AU"),
+                      en_us: helpers.descriptive_url(product, :"en-US")
+                    },
+
+                    can_be_customized:  product.can_be_customized?,
+                    fast_delivery:      product.fast_delivery,
+                    fast_making:        product.fast_making?,
+                    taxon_ids:          product.taxons.map(&:id),
+                    taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
+                    taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
+                    price:              product.price.to_f,
+
+                    is_outerwear:     Spree::Product.outerwear.exists?(product.id),
+
+                    # bodyshape sorting
+                    apple:              product.style_profile&.apple,
+                    pear:               product.style_profile&.pear,
+                    athletic:           product.style_profile&.athletic,
+                    strawberry:         product.style_profile&.strawberry,
+                    hour_glass:         product.style_profile&.hour_glass,
+                    column:             product.style_profile&.column,
+                    petite:             product.style_profile&.petite,
+                    color:              color_customizable
+
                   },
+                  color:  {
+                    id:             color.id,
+                    name:           color.name,
+                    presentation:   color.presentation
+                  },
+                  images: product_color_value.images.map do |image|
+                    {
+                      large: image.attachment.url(:large)
+                    }
+                  end,
+                  cropped_images: cropped_images_for(product_color_value),
 
-                  can_be_customized:  product.can_be_customized?,
-                  fast_delivery:      product.fast_delivery,
-                  fast_making:        product.fast_making?,
-                  taxon_ids:          product.taxons.map(&:id),
-                  taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
-                  taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
-                  price:              product.price.to_f,
-
-                  is_outerwear:     Spree::Product.outerwear.exists?(product.id),
-
-                  # bodyshape sorting
-                  apple:              product.style_profile&.apple,
-                  pear:               product.style_profile&.pear,
-                  athletic:           product.style_profile&.athletic,
-                  strawberry:         product.style_profile&.strawberry,
-                  hour_glass:         product.style_profile&.hour_glass,
-                  column:             product.style_profile&.column,
-                  petite:             product.style_profile&.petite,
-                  color:              color_customizable
-
-                },
-                color:  {
-                  id:             color.id,
-                  name:           color.name,
-                  presentation:   color.presentation
-                },
-                images: product_color_value.images.map do |image|
-                  {
-                    large: image.attachment.url(:large)
+                  prices: {
+                    aud:  product_price_in_au.amount.to_f,
+                    usd:  product_price_in_us.amount.to_f
+                  },
+                  sale_prices:  {
+                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
                   }
-                end,
-                cropped_images: cropped_images_for(product_color_value),
-
-                prices: {
-                  aud:  product_price_in_au.amount.to_f,
-                  usd:  product_price_in_us.amount.to_f
-                },
-                sale_prices:  {
-                  aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
-                  usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
                 }
               }
             }
-          }
-          color_variant_id += 1
+            color_variant_id += 1
+          end
+        else
+            product.fabric_products.recommended.each do |product_fabric_value|
+            color = product_fabric_value.fabric.option_value
+            log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
+
+            if !product_fabric_value.images.present? 
+              logger.error "id  -  | #{log_prefix} No Images!"
+              next
+            end
+
+            logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
+
+            @variants << {
+              create: {
+                _index: index_name,
+                _type: 'document',
+                _id: color_variant_id,
+                data: {
+                  id: color_variant_id,
+                  product: {
+                    id:           product.id,
+                    name:         product.name,
+                    sku:          product.sku,
+                    description:  product.description,
+                    created_at:   product.created_at,
+                    available_on: product.available_on,
+                    is_deleted:   product.deleted_at.present?,
+                    is_hidden:    product.hidden?,
+                    position:     product.permalink,
+                    permalink:    product.permalink,
+                    master_id:    product.master.id,
+                    variant_skus: product.variant_skus,
+                    in_stock:     product.has_stock?,
+                    discount:     discount,
+                    urls: {
+                      en_au: helpers.descriptive_url(product, :"en-AU"),
+                      en_us: helpers.descriptive_url(product, :"en-US")
+                    },
+
+                    can_be_customized:  product.can_be_customized?,
+                    fast_delivery:      product.fast_delivery,
+                    fast_making:        product.fast_making?,
+                    taxon_ids:          product.taxons.map(&:id),
+                    taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
+                    taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
+                    price:              product.price.to_f,
+
+                    is_outerwear:     Spree::Product.outerwear.exists?(product.id),
+
+                    # bodyshape sorting
+                    apple:              product.style_profile&.apple,
+                    pear:               product.style_profile&.pear,
+                    athletic:           product.style_profile&.athletic,
+                    strawberry:         product.style_profile&.strawberry,
+                    hour_glass:         product.style_profile&.hour_glass,
+                    column:             product.style_profile&.column,
+                    petite:             product.style_profile&.petite,
+                    color:              color_customizable
+
+                  },
+                  color:  {
+                    id:             color.id,
+                    name:           color.name,
+                    presentation:   color.presentation
+                  },
+                  images: product_fabric_value.images.map do |image|
+                    {
+                      large: image.attachment.url(:large)
+                    }
+                  end,
+                  cropped_images: cropped_images_for(product_fabric_value),
+
+                  prices: {
+                    aud:  product_price_in_au.amount.to_f,
+                    usd:  product_price_in_us.amount.to_f
+                  },
+                  sale_prices:  {
+                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
+                  }
+                }
+              }
+            }
+            color_variant_id += 1
+          end
         end
         product_index += 1
       end
