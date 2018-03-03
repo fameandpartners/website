@@ -58,10 +58,30 @@
 
 }
 
+.CopyHeader--small .CopyHeader__title {
+  font-size: 3.8rem;
+}
+
 .CopyHeader--small .CopyHeader__content p {
   font-size: 1.8rem;
 }
 
 .CopyHeader--large .CopyHeader__content p {
   font-size: 3.5rem;
+}
+
+@include breakpoint(mobile-max) {
+
+  .CopyHeader {
+    padding: 0;
+  }
+
+  .CopyHeader--small .CopyHeader__title {
+    font-size: 3rem;
+  }
+
+  .CopyHeader--small .CopyHeader__content p {
+    font-size: 1.7rem;
+  }
+
 }
