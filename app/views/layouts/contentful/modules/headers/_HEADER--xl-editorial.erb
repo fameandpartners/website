@@ -1,9 +1,9 @@
 <% @lg_contents = contents %>
-<% @lg_contents[:mobile_video].nil? && @lg_contents[:mobile_image].nil? ? noMobileMediaClass = 'u-overlay-area--noMobileMedia' : noMobileMediaClass = nil %>
+<% (@lg_contents[:video].present? && @lg_contents[:mobile_video].nil?) ? no_mobile_video_class = 'u-overlay-area--noMobileMedia' : no_mobile_video_class = nil %>
 <div class="section-row columns">
   <div class="column is-full">
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
-      <div class="u-overlay-area <%= noMobileMediaClass %>">
+      <div class="u-overlay-area <%= no_mobile_video_class %>">
         <div class="u-overlay-area__media">
           <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
         </div>
