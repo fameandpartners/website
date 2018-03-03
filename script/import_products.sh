@@ -77,7 +77,7 @@ function main
   import_spreadsheets
   import_images
   convert_json
-  reindex_products
+  # reindex_products
   expire_caches
   info "See log for details: $logfile"
 }
