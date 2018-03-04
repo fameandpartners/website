@@ -27,7 +27,14 @@
 <% if product.present? %>
 <div class="Product">
   <a href="<%= path %>">
-    <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+
+    <% # PID image replacement %>
+    <% if contents[:"image_replacement_#{pid_index}"] %>
+      <%= image_tag(contents[:"image_replacement_#{pid_index}"], class: 'js-product-image Product__image' ) %>
+    <% else %>
+      <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+    <% end %>
+
     <p class="Product__name"><%= name %></p>
     <p class="Product__price"><%= price %></p>
   </a>

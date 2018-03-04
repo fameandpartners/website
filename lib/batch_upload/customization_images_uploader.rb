@@ -16,7 +16,7 @@ module BatchUpload
               matches = /^(?<position>\d+)\S+/.match(file_name)
 
               if matches.blank?
-                error "File name requires a position!"
+                error "File name #{file_name} requires a position!"
                 next
               else
                 position = matches[:position]

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry-byebug'
 
 describe GlobalSku::Create do
   let(:creator) {
@@ -7,6 +8,7 @@ describe GlobalSku::Create do
       product_name: 'Bianca Dress',
       size:         'US0/AU4',
       color_name:   'Magma Red',
+      fabric_name:  'Invalid Fabric', 
       height:       'Petite'
     )
   }
@@ -30,6 +32,7 @@ describe GlobalSku::Create do
           product_name: 'Bianca Dress',
           size:         'US123/AU456',
           color_name:   'Shiny Bright Gold',
+          fabric_name:  'Invalid Fabric', 
           height:       'Humongous!'
         )
       }
@@ -55,6 +58,7 @@ describe GlobalSku::Create do
           product_name: 'Bianca Dress',
           size:         'Invalid Size',
           color_name:   'Invalid Color',
+          fabric_name:  'Invalid Fabric',
           height:       'Invalid Height'
         )
       }
@@ -74,6 +78,7 @@ describe GlobalSku::Create do
             size:               'US0/AU4',
             color_id:           color_red.id,
             color_name:         'magma-red',
+            fabric_id:          nil, 
             customisation_id:   nil,
             customisation_name: nil,
             height_value:       'petite',
@@ -93,6 +98,7 @@ describe GlobalSku::Create do
             size:         'US0/AU4',
             color_name:   'Magma Red',
             height:       'Petite',
+            fabric_name:  'Invalid Fabric',
             customizations: JSON.parse([customization_fabric, customization_fit].to_json)
           )
         }
@@ -126,6 +132,7 @@ describe GlobalSku::Create do
             style_number:            'ABC123',
             size:                    'US0/AU4',
             color_id:                color_red.id,
+            fabric_id:                nil, 
             height:                  'petite',
             customization_value_ids: []
           ).and_call_original
@@ -144,6 +151,7 @@ describe GlobalSku::Create do
             size:         'US0/AU4',
             color_name:   'Magma Red',
             height:       'Petite',
+            fabric_name:  'Invalid Fabric',
             customizations: JSON.parse([customization_fabric, customization_fit].to_json)
           )
         }
@@ -153,6 +161,7 @@ describe GlobalSku::Create do
             style_number:            'ABC123',
             size:                    'US0/AU4',
             color_id:                color_red.id,
+            fabric_id:                nil, 
             height:                  'petite',
             customization_value_ids: [customization_fabric.id, customization_fit.id]
           ).and_call_original

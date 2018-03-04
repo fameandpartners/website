@@ -17,7 +17,11 @@ class ProductImages
   def read_all(options = {})
     @product_images ||= begin
       Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
-        images_from_product_color_values.flatten.compact.sort_by {|image| image.position.to_i }
+        if product.fabrics.empty?
+          images_from_product_color_values.flatten.compact.sort_by {|image| image.position.to_i }
+        else
+          images_from_product_fabric_values.flatten.compact.sort_by {|image| image.position.to_i }
+        end
       end
     end
 
@@ -101,7 +105,26 @@ class ProductImages
       return configatron.cache.expire.long
     end
 
-    def images_from_product_color_values
+    def images_from_product_fabric_values
+      results = []
+
+      product.fabric_products.includes(:images, :fabric).each do |product_fabric_value|
+        product_fabric_value.images.each do |image|
+          result = OpenStruct.new(
+            image_data(image).merge({
+              fabric:    product_fabric_value.fabric.try(:name),
+              fabric_id: product_fabric_value.fabric.try(:id),
+              size:     nil,
+              size_id:  nil
+            })
+          )
+          results.push(result)
+        end
+      end
+      results
+    end
+
+     def images_from_product_color_values
       results = []
 
       product.product_color_values.includes(:images, :option_value).each do |product_color_value|
@@ -119,6 +142,7 @@ class ProductImages
       end
       results
     end
+
 
     # helper method
     def image_data(image)

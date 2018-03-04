@@ -13,10 +13,12 @@ Spree::Variant.class_eval do
 
   before_save :push_prices_to_variants
 
-  after_save do
-    product.update_index
-  end
+  after_save :update_index_on_save 
 
+  def update_index_on_save
+    product.update_index    
+  end
+  
   def discount
     self.product.try(:discount)
   end

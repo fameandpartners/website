@@ -1,58 +1,30 @@
-<% # Currenly using Bulma's responsive width %>
-<picture class="">
-  <source media="(max-width: 768px)" srcset="<%= @lg_contents[:mobile_image] %>">
-  <source media="(min-width: 769px)" srcset="<%= @lg_contents[:image] %>">
-  <img class="Editorial__image" src="<%= @lg_contents[:image] %>" srcset="
-    <%= @lg_contents[:mobile_image] %> 768w,
-    <%= @lg_contents[:image] %> 769w">
-</picture>
+<% # Define the URL for the Editorial tile %>
+<% item_url = contentful_get_editorial_tile_link(@lg_contents) %>
+<% ############################################################################################# %>
 
+<% # Define if this tile should display an image or a video %>
+<%= render partial: "layouts/contentful/modules/shared/display_image_or_video", locals: { item_url: item_url, item_image: @lg_contents[:image], item_image_mobile: @lg_contents[:mobile_image], item_video: @lg_contents[:video], item_video_mobile: @lg_contents[:mobile_video] } %>
+<% ############################################################################################# %>
+
+<% # Caption over image with PIDs info ("Shop the look" > PID info) %>
+<%= render partial: "layouts/contentful/modules/components/COMPONENT--overlay-pids", locals: { overlay_pids: @lg_contents[:overlay_pids] } %>
+<% ############################################################################################# %>
+
+<% # Bottom caption over image with custom copy (Example: @instagram_username) %>
+<%= render partial: "layouts/contentful/modules/shared/caption_custom_copy_over_image_bottom", locals: { image_caption: @lg_contents[:image_caption], image_caption_url: @lg_contents[:image_caption_url], image_caption_color: @lg_contents[:image_caption_color], image_caption_link_target: @lg_contents[:image_caption_link_target] } %>
+<% ############################################################################################# %>
+
+<% # Display either PID info or a custom CTA under the editorial tile %>
+<% # Step 1: Check if PID is valid and display its info (URL, price and name) %>
 <%
-products = []
+if @lg_contents[:editorial_tile_pid].present?
+  editorial_tile_pid = contentful_get_products_array_via_pids_array(@lg_contents[:editorial_tile_pid])[0]
 
-if @lg_contents[:overlay_pids]
-
-  @lg_contents[:overlay_pids].each do |pid|
-    split_pid = pid.split('-', 2)
-    current_id = split_pid[0].to_i
-    current_color = split_pid[1]
-
-    present_product = @collection.products.select do |item|
-      if item.color.present?
-        item.id == current_id && item.color.name == current_color
-      else
-        nil
-      end
-    end
-
-    if present_product.present?
-      products.push(present_product[0])
-    end
-  end
-
-end
-%>
-
-<% if products.count > 0 %>
-<div class="Editorial__overlay">
-  <h4 class="Editorial__overlayTitle">Shop the Look</h4>
-  <ul>
-  <% products.each do |item|
-    name = item.name
-    path = collection_product_path(item, color: item.color.try(:name))
-  %>
-    <li>
-      <a href="<%= path %>">
-        <%= name %>
-      </a>
-    </li>
+  if editorial_tile_pid.present? %>
+    <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
   <% end %>
-  </ul>
-</div>
+<% else %>
+  <% # Step 2: If no valid PID is provided then display a custom CTA %>
+  <%= render partial: "layouts/contentful/modules/components/COMPONENT--bottom-cta", locals: { bottom_caption: @lg_contents[:bottom_caption], bottom_caption_url: @lg_contents[:bottom_caption_url] } %>
 <% end %>
-
-<% if (@lg_contents[:image_caption]) && (@lg_contents[:image_caption_url]) %>
-  <div class="Editorial__overlayBottomCaption">
-    <%= link_to @lg_contents[:image_caption], @lg_contents[:image_caption_url], class: (@lg_contents[:image_caption_color] == 'black') ? "Editorial__overlayBottomCaptionTitle Editorial__overlayBottomCaptionTitle--dark" : "Editorial__overlayBottomCaptionTitle", target: @lg_contents[:image_caption_link_target] %>
-  </div>
-<% end %>
+<% ############################################################################################# %>
