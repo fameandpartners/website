@@ -1,0 +1,16 @@
+/* [Full Width Elements]
+-------------------------------------------------------*/
+@media (min-width: $bootstrap-md-width) {
+  .u-full-width--desktop {
+    @include real-full-width;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+  .u-full-width--mobile {
+    @include real-full-width;
+    padding: 0;
+    overflow: hidden;
+  }
+}
