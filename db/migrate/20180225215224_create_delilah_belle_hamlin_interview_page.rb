@@ -8,8 +8,7 @@ class CreateDelilahBelleHamlinInterviewPage < ActiveRecord::Migration
       title:                'An Interview with Delilah Belle Hamlin',
       meta_description:     'Delilah Belle Hamlin on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
-      # TO-DO: enter real PIDs
-      pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
+      pids:                 %w(1659-navy-heavy-georgette 1676-light-nude-soft-tulle 1679-red-light-georgette 1678-pale-blue-heavy-georgette).join(',')
     }
   end
 
