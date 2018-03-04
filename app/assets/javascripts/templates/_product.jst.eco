@@ -2,13 +2,6 @@
 <div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-6 category--item">
   <a href="<%= @product.collection_path %>" class="media-wrap">
     <img class="img-product" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>' data-original='<%= @product.images[0] %>' ></>
-    <% if @product.fast_making: %>
-      <div class="ribbon-wrapper express-making">
-        <div class="ribbon-txt">
-          Make it express
-        </div>
-      </div>
-    <% end %>
   </a>
   <div class="details text-center">
     <a href="<%= @product.collection_path %>" class="media-wrap product-name">
