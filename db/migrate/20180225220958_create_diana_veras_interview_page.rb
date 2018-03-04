@@ -8,8 +8,7 @@ class CreateDianaVerasInterviewPage < ActiveRecord::Migration
       title:                'An Interview with Diana Veras',
       meta_description:     'Diana Veras on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
-      # TO-DO: enter real PIDs
-      pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
+      pids:                 %w(1685-lilac-heavy-georgette 1198-navy-heavy-georgette 1652-navy-stretch-silk-charmeuse 1663-light-pink-duchess-satin).join(',')
     }
   end
 

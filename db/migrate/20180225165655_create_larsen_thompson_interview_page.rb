@@ -8,8 +8,7 @@ class CreateLarsenThompsonInterviewPage < ActiveRecord::Migration
       title:                'An Interview with Larsen Thompson',
       meta_description:     'Larsen Thompson on dance, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
-      # TO-DO: enter real PIDs
-      pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
+      pids:                 %w(1675-black-matte-satin 905-pale-blue-heavy-georgette 1664-teal-heavy-silk-charmeuse 1288-red-pearl-chiffon).join(',')
     }
   end
 
