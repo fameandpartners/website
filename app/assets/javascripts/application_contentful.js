@@ -17,6 +17,8 @@
 
 // require modernizr-custom
 
+//= require libs/scrollreveal.min
+
 //--------------
 // Bootstrap JS
 //--------------

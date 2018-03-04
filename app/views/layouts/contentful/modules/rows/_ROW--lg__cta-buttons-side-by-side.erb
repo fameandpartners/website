@@ -1,0 +1,11 @@
+<div class="section-row columns">
+  <div class="column">
+    <div class="CtaButton CtaButton--sideBySide">
+      <% contents[:lg_items].each do |item| %>
+        <% if item[:button_label] %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--lg__cta-button", locals: {contents: item} %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
