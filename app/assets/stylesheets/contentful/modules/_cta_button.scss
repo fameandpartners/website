@@ -2,3 +2,19 @@
   text-align: center;
   margin: 25px 0;
 }
+
+.CtaButton--sideBySide .CtaButton__content {
+  display: table;
+  width: 60%;
+  margin: 25px auto;
+
+  @include breakpoint(tablet) {
+    display: inline-block;
+    width: auto;
+    margin: 0 10px;
+  }
+}
+
+.CtaButton__content {
+  margin-top: 0;
+}

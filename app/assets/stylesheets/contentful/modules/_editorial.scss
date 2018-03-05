@@ -96,3 +96,31 @@
   font-size: 2rem;
   margin-top: 0;
 }
+
+.Editorial__video {
+  width: 100%;
+  height: auto;
+}
+
+.Editorial__liveText {
+  color: $c-white;
+  text-align: center;
+  line-height: 100%;
+  font-family: $secondary-font-family;
+  font-size: 3.8em;
+  font-weight: 300;
+  width: 85%;
+}
+
+.Editorial__bottomCaption {
+  margin: 15px 0 45px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.Editorial__bottomCaptionBlocks {
+  margin: 0 2px;
+}
