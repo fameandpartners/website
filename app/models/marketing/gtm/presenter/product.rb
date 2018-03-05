@@ -19,7 +19,7 @@ module Marketing
         end
 
         def variants
-          product.variants.map { |variant| Variant.new(spree_variant: variant).body }
+          product.variants.first.map { |variant| Variant.new(spree_variant: variant).body }
         end
 
         def price_with_discount
