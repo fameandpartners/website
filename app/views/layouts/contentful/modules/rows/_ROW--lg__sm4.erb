@@ -1,8 +1,8 @@
-<div class="section-row tile is-ancestor">
+<div class="section-row tile columns">
 
-  <div class="tile is-parent is-6">
+  <div class="column is-6">
 
-    <article class="tile is-child">
+    <article class="tile">
       <div class="Editorial">
         <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
       </div>
@@ -11,15 +11,13 @@
   </div>
 
   <div class="tile is-parent is-vertical is-6">
-    <div class="tile">
-      <div class="columns is-multiline is-mobile">
+    <div class="columns is-multiline is-mobile">
       <% contents[:sm_items].each_with_index do |item, i| %>
         <% @pid = item %>
-        <%= content_tag(:div, :class => (contents[:sm_items].count == 3 && i == 0) ? "column is-6 is-offset-6-right product-top-margin" : "column is-6 product-top-margin") do %>
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+        <%= content_tag(:div, :class => (contents[:sm_items].count == 3 && i == 0) ? "column is-6 is-offset-6-right" : "column is-6") do %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm", locals: {contents: contents, pid_index: (i.to_i + 1)} %>
         <% end %>
       <% end %>
-      </div>
     </div>
 
   </div>

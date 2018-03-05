@@ -237,6 +237,7 @@ module Products
       index_name = configatron.elasticsearch.indices.color_variants
       logger.info("INDEX #{index_name}")
       client = Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200')
+
       if client.indices.exists?(index: index_name)
         client.indices.delete index: index_name
       end

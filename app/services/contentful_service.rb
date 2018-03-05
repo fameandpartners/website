@@ -172,23 +172,33 @@ module Contentful
       fetched_lg_container = @contentful_client.entries('sys.id' => id)[0]
       desktop_image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
       mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : desktop_image
+      desktop_video = (fetched_lg_container.respond_to? :video_desktop) ? fetched_lg_container.video_desktop.url : nil
+      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : desktop_video
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
+        editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
         overlay_pids = (fetched_lg_container.respond_to? :overlay_pids) ? fetched_lg_container.overlay_pids : nil
         image_caption = (fetched_lg_container.respond_to? :image_caption) ? fetched_lg_container.image_caption : nil
         image_caption_color = (fetched_lg_container.respond_to? :image_caption_color) ? fetched_lg_container.image_caption_color : 'white'
         image_caption_url = (fetched_lg_container.respond_to? :image_caption_url) ? fetched_lg_container.image_caption_url : nil
         image_caption_link_target = (fetched_lg_container.respond_to? :image_caption_link_target) ? fetched_lg_container.image_caption_link_target : nil
         image_caption_link_target = image_caption_link_target ? '_blank' : '_self'
+        bottom_caption = (fetched_lg_container.respond_to? :bottom_caption) ? fetched_lg_container.bottom_caption : nil
+        bottom_caption_url = (fetched_lg_container.respond_to? :bottom_caption_url) ? fetched_lg_container.bottom_caption_url : nil
 
         {
           image: desktop_image,
           mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
+          editorial_tile_pid: editorial_tile_pid,
           overlay_pids: overlay_pids,
           image_caption: image_caption,
           image_caption_color: image_caption_color,
           image_caption_url: image_caption_url,
-          image_caption_link_target: image_caption_link_target
+          image_caption_link_target: image_caption_link_target,
+          bottom_caption: bottom_caption,
+          bottom_caption_url: bottom_caption_url
         }
       elsif (fetched_lg_container.content_type.id == 'ITEM--lg__carousel')
         tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
@@ -199,7 +209,11 @@ module Contentful
           image: desktop_image,
           mobile_image: mobile_image,
           tile_url: tile_url,
-          tile_link_target: tile_link_target
+          tile_link_target: tile_link_target,
+          video: desktop_video,
+          mobile_video: mobile_video,
+          bottom_caption: bottom_caption,
+          bottom_caption_url: bottom_caption_url
         }
       elsif (fetched_lg_container.content_type.id == 'ITEM--category-block')
         tile_url = (fetched_lg_container.respond_to? :tile_url) ? fetched_lg_container.tile_url : nil
@@ -208,6 +222,22 @@ module Contentful
           image: desktop_image,
           mobile_image: mobile_image,
           tile_url: tile_url,
+          video: desktop_video,
+          mobile_video: mobile_video
+        }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
+        relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
+        background_color = (fetched_lg_container.respond_to? :background_color) ? fetched_lg_container.background_color : 'transparent'
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : 'black.jpg'
+        border_color = (fetched_lg_container.respond_to? :border_color) ? fetched_lg_container.border_color : 'transparent'
+        button_label = (fetched_lg_container.respond_to? :button_label) ? fetched_lg_container.button_label : nil
+
+        {
+          relative_url: relative_url,
+          background_color: background_color,
+          text_color: text_color,
+          border_color: border_color,
+          button_label: button_label
         }
       end
     end
@@ -220,12 +250,28 @@ module Contentful
       if (fetched_md_container.content_type.id == 'ITEM--md-text')
         text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
         text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? fetched_md_container.text_size : nil
 
         {
           id: 'ITEM--md-text',
           text: text_desktop,
           text_mobile: text_mobile,
-          text_size: fetched_md_container.text_size
+          text_size: text_size
+        }
+      elsif (fetched_md_container.content_type.id == 'ITEM--md-text--heading-with-custom-color')
+        text_desktop = (fetched_md_container.respond_to? :content) ? fetched_md_container.content.split("\n") : nil
+        text_mobile = (fetched_md_container.respond_to? :content_mobile) ? fetched_md_container.content_mobile.split("\n") : text_desktop
+        text_size = (fetched_md_container.respond_to? :text_size) ? "--#{fetched_md_container.text_size}" : nil
+        copy_block_heading = (fetched_md_container.respond_to? :copy_block_heading) ? fetched_md_container.copy_block_heading : nil
+        copy_block_heading_color = (fetched_md_container.respond_to? :copy_block_heading_color) ? fetched_md_container.copy_block_heading_color : '#000'
+
+        {
+          id: 'ITEM--md-text--heading-with-custom-color',
+          text: text_desktop,
+          text_mobile: text_mobile,
+          text_size: text_size,
+          copy_block_heading: copy_block_heading,
+          copy_block_heading_color: copy_block_heading_color
         }
       else
         # 'ITEM--md-email'
@@ -295,6 +341,10 @@ module Contentful
         overlay_pids = (main_header_container.respond_to? :overlay_pids) ? main_header_container.overlay_pids : nil
         desktop_image = (main_header_container.respond_to? :image) ? main_header_container.image.url : nil
         mobile_image = (main_header_container.respond_to? :mobile_image) ? main_header_container.mobile_image.url : desktop_image
+        desktop_video = (main_header_container.respond_to? :video_desktop) ? main_header_container.video_desktop.url : nil
+        mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : nil
+        live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
+        live_text_color = (main_header_container.respond_to? :live_text_color) ? main_header_container.live_text_color : '#fff'
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -310,7 +360,11 @@ module Contentful
           full_width_content_class: full_width_content_class,
           image: desktop_image,
           mobile_image: mobile_image,
-          overlay_pids: overlay_pids
+          video: desktop_video,
+          mobile_video: mobile_video,
+          overlay_pids: overlay_pids,
+          live_text: live_text,
+          live_text_color: live_text_color
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
         carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
@@ -358,12 +412,15 @@ module Contentful
         # CTA Tiles
         tile_cta = (item.respond_to? :tile_cta_container) ? jsonify_small_lp_container(item.tile_cta_container) : nil
         tile_cta_position = (item.respond_to? :tile_cta_position) ? item.tile_cta_position : 4
+        tile_cta_alignment = (item.respond_to? :tile_cta_alignment) ? item.tile_cta_alignment : 'left'
 
         # Hero tiles content
         overlay_pids = (item.respond_to? :overlay_pids) ? item.overlay_pids : nil
         desktop_image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
+        desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
 
         if full_width_content == 'desktop,mobile'
           full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
@@ -373,8 +430,37 @@ module Contentful
           full_width_content_class = 'u-forced-full-width-wrapper'
         end
 
+        # Text alignment
+        text_alignment_desktop = (item.respond_to? :text_alignment) ? item.text_alignment.downcase : nil
+        text_alignment_mobile = (item.respond_to? :text_alignment_mobile) ? item.text_alignment_mobile.downcase : nil
+
+        if text_alignment_desktop == 'left'
+          text_alignment_desktop_class = 'u-text-align-desktop--left'
+        elsif text_alignment_desktop == 'right'
+          text_alignment_desktop_class = 'u-text-align-desktop--right'
+        else
+          text_alignment_desktop_class = 'u-text-align-desktop--center'
+        end
+
+        if text_alignment_mobile == 'left'
+          text_alignment_mobile_class = 'u-text-align-mobile--left'
+        elsif text_alignment_mobile == 'right'
+          text_alignment_mobile_class = 'u-text-align-mobile--right'
+        else
+          text_alignment_mobile_class = 'u-text-align-mobile--center'
+        end
+
         # Add extra padding between rows
         padding_class = (item.respond_to? :padding_extra) ? ("u-padding-top--" + item.padding_extra) : nil
+
+        # Add side paddings
+        side_padding_class = (item.respond_to? :side_padding) ? ("u-padding-left-right--" + item.side_padding) : nil
+
+        # PIDs Image replacement
+        image_replacement_1 = (item.respond_to? :image_replacement_1) ? item.image_replacement_1.url : nil
+        image_replacement_2 = (item.respond_to? :image_replacement_2) ? item.image_replacement_2.url : nil
+        image_replacement_3 = (item.respond_to? :image_replacement_3) ? item.image_replacement_3.url : nil
+        image_replacement_4 = (item.respond_to? :image_replacement_4) ? item.image_replacement_4.url : nil
 
         {
           id: item_id,
@@ -389,11 +475,21 @@ module Contentful
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
           tile_cta_position: tile_cta_position,
+          tile_cta_alignment: tile_cta_alignment,
           full_width_content_class: full_width_content_class,
           overlay_pids: overlay_pids,
           image: desktop_image,
           mobile_image: mobile_image,
-          padding_class: padding_class
+          video: desktop_video,
+          mobile_video: mobile_video,
+          text_alignment_desktop_class: text_alignment_desktop_class,
+          text_alignment_mobile_class: text_alignment_mobile_class,
+          padding_class: padding_class,
+          side_padding_class: side_padding_class,
+          image_replacement_1: image_replacement_1,
+          image_replacement_2: image_replacement_2,
+          image_replacement_3: image_replacement_3,
+          image_replacement_4: image_replacement_4
         }
       end
 
@@ -412,6 +508,10 @@ module Contentful
       end
 
       page_url = parent_container.relative_url
+
+      # Fade-in/out during scroll
+      fade_scroll = (parent_container.respond_to? :fade_scroll) ? parent_container.fade_scroll : false
+
       {
         page_url: page_url,
         header: main_header_tile,
@@ -420,7 +520,8 @@ module Contentful
         meta_description: meta_description,
         site_version: site_version.downcase,
         site_version_url_to_redirect: site_version_url_to_redirect,
-        page_white_spacing_top_class: page_white_spacing_top_class
+        page_white_spacing_top_class: page_white_spacing_top_class,
+        fade_scroll: fade_scroll
       }
     end
 
