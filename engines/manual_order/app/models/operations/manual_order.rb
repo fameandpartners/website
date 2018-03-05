@@ -8,6 +8,7 @@ module Operations
     end
 
     def create
+      Rails.logger.info(params.inspect)
       if populate_products.all? { |cart| cart[:success] }
         if params[:existing_customer].present?
           assign_customer
