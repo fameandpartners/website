@@ -9,10 +9,6 @@
     - if price_drop_au_item_check(product.sku)
       = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
 
-    // Express Making ribbon if this product is not a "Price Drop (AU)" item
-    - if product.fast_making? && !price_drop_au_item_check(product.sku)
-      = render 'shared/redesign/ribbon_fast_making'
-
   .details.text-center
     span.name = product.name
     span.price = product_price_with_discount(product)

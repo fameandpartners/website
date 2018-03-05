@@ -8,8 +8,7 @@ class CreateAshleyMooreInterviewPage < ActiveRecord::Migration
       title:                'An Interview with Ashley Moore',
       meta_description:     'Ashley Moore on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
-      # TO-DO: enter real PIDs
-      pids:                 %w(684-black 709-black 942-black 1082-white).join(',')
+      pids:                 %w(630-ivory-matte-stretch-woven 1655-pretty-pink-heavy-georgette 1652-butterscotch-light-silk-charmeuse 1360-pale-pink-matte-satin).join(',')
     }
   end
 

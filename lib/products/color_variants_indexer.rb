@@ -136,6 +136,7 @@ module Products
         else
             product.fabric_products.recommended.each do |product_fabric_value|
             color = product_fabric_value.fabric.option_value
+            fabric = product_fabric_value.fabric
             log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
             if !product_fabric_value.images.present? 
@@ -198,6 +199,11 @@ module Products
                     name:           color.name,
                     presentation:   color.presentation
                   },
+                  fabric:       {
+                    id:             fabric.id,
+                    name:           fabric.name,
+                    presentation:   fabric.presentation
+                  },
                   images: product_fabric_value.images.map do |image|
                     {
                       large: image.attachment.url(:large)
@@ -231,6 +237,7 @@ module Products
       index_name = configatron.elasticsearch.indices.color_variants
       logger.info("INDEX #{index_name}")
       client = Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200')
+
       if client.indices.exists?(index: index_name)
         client.indices.delete index: index_name
       end
