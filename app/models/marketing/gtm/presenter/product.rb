@@ -19,8 +19,11 @@ module Marketing
         end
 
         def variants
-          [Variant.new(spree_variant: product.variants.first).body]
-          # product.variants.first.map { |variant| Variant.new(spree_variant: variant).body }
+          if product.variants.first
+            [Variant.new(spree_variant: product.variants.first)&.body]
+          end
+          []
+          # product.variants.map { |variant| Variant.new(spree_variant: variant).body }
         end
 
         def price_with_discount
