@@ -18,10 +18,10 @@ namespace :newgistics do
       NewRelic::Agent.notice_error(res['response'].to_s)
       Raven.capture_exception(res['response'].to_s)
     else
-      res['response']['Returns'].each do |item_return|
-        order = Spree::Order.find_by_id(item_return['RmaNumber'])
+      res['response']['Returns']['Return'].each do |item_return|
+        order = Spree::Order.find_by_number(item_return['orderID'])
         unless order.autorefundable
-          autorefund_items(item_return['Items'])
+          autorefund_items(order, item_return['Items'])
         end
         
         failed_items = order.line_items.select do |li|
@@ -62,7 +62,7 @@ namespace :newgistics do
   end
 end
 
-def autorefund_items(items)
+def autorefund_items(order, items)
   items&.each do |item|
       line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
                         .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
