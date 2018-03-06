@@ -30,14 +30,14 @@ module Forms
 
     def fabric_options
       product_options[:fabrics][:default].map do |p|
-        { id: p.id, name: p.presentation, type: 'fabric' }
+        { id: p[:fabric][:id], name: p[:fabric][:presentation], type: 'fabric' }
       end
     end
 
     def custom_fabrics(currency)
       product_options[:fabrics][:extra].map do |p|
-        price = currency.downcase == 'usd' ?  p.price_usd : p.price_aud
-        { id: p.id, name: "#{p.presentation} (+ $#{price})", type: 'custom' }
+        price = currency.downcase == 'usd' ?  p[:fabric][:price_usd] : p[:fabric][:price_aud]
+        { id: p[:fabric][:id], name: "#{p[:fabric][:presentation]} (+ $#{price})", type: 'custom' }
       end
     end
 
