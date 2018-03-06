@@ -1,13 +1,13 @@
 class VariantSku
   attr_reader :variant
+  require 'pry-byebug'
 
   def initialize(variant)
     @variant = variant
   end
 
   def call
-    return variant.sku.to_s.upcase if variant.is_master
-
+    return variant.sku.to_s.upcase if variant&.is_master
     Skus::Generator.new(
       style_number: style_number,
       size:         size,
