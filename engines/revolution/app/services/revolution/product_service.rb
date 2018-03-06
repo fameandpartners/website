@@ -56,7 +56,6 @@ module Revolution
           else
             color = fabric.option_value
           end
-          binding.pry
 
           Products::Presenter.new(
             :id           => p.id,
