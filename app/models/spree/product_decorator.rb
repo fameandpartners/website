@@ -104,9 +104,7 @@ Spree::Product.class_eval do
       prod_images = Spree::Image.where(
         "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
           OR
-        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))
-          OR
-        (#{table_name}.viewable_type = 'FabricsProduct' AND #{table_name}.viewable_id IN (?))",
+        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
         product_color_value_ids, variants_including_master_ids
       ).order('position asc')
     else

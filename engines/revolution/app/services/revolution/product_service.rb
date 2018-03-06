@@ -46,14 +46,13 @@ module Revolution
 
         if p.present? && !p.hidden
           colour_name = colours[params[:offset].to_i + i]
-
           price = p.site_price_for(site_version)
           fabric = Fabric.where(:name => colour_name).first
-          if fabric.nil?
-            color = Spree::OptionValue.where(:name => colour_name).first
+          if fabric
+            color = fabric.option_value
             images = collection_images_by_fabric(p, fabric)
           else
-            color = fabric.option_value
+            color = Spree::OptionValue.where(:name => colour_name).first
             images = collection_images(p, colour_name)
           end
 
