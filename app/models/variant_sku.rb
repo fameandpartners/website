@@ -1,6 +1,5 @@
 class VariantSku
   attr_reader :variant
-  require 'pry-byebug'
 
   def initialize(variant)
     @variant = variant
