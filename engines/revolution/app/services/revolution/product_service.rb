@@ -50,7 +50,13 @@ module Revolution
           images = collection_images(p, colour_name)
 
           price = p.site_price_for(site_version)
-          color = Spree::OptionValue.where(:name => colour_name).first
+          fabric = Fabric.where(:name => colour_name).first
+          if fabric.nil?
+            color = Spree::OptionValue.where(:name => colour_name).first
+          else
+            color = fabric.option_value
+          end
+          binding.pry
 
           Products::Presenter.new(
             :id           => p.id,
@@ -60,7 +66,8 @@ module Revolution
             :price        => price,
             :discount     => p.discount,
             :images       => images,
-            :color        => color
+            :color        => color,
+            :fabric       => fabric
           )
         end
       end.compact
