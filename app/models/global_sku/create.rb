@@ -40,21 +40,24 @@ class GlobalSku
     # @return [GlobalSku, NilClass]
     def call
       if valid?
-      GlobalSku.create!(
-        sku:                generate_sku,
-        style_number:       style_number,
-        product_name:       product_name,
-        size:               size,
-        color_id:           color.id,
-        color_name:         color.name,
-        fabric_id:          fabric&.id,
-        fabric_name:        fabric&.name,
-        height_value:       height,
-        customisation_id:   customization_value_ids,
-        customisation_name: customization_value_names,
-        product_id:         product_id,
-        data:               { 'extended-style-number' => extended_style_number }
-      )
+        GlobalSku.create!(
+          sku:                generate_sku,
+          style_number:       style_number,
+          product_name:       product_name,
+          size:               size,
+          color_id:           color.id,
+          color_name:         color.name,
+          fabric_id:          fabric&.id,
+          fabric_name:        fabric&.name,
+          height_value:       height,
+          customisation_id:   customization_value_ids,
+          customisation_name: customization_value_names,
+          product_id:         product_id,
+          data:               { 'extended-style-number' => extended_style_number }
+        )
+      else
+        #this case seems to be caused by old old skus that don't have height
+        GlobalSku.find_by_sku(generate_sku)
       end
     end
 
