@@ -46,11 +46,15 @@ module Revolution
 
         if p.present? && !p.hidden
           colour_name = colours[params[:offset].to_i + i]
-
-          images = collection_images(p, colour_name)
-
           price = p.site_price_for(site_version)
-          color = Spree::OptionValue.where(:name => colour_name).first
+          fabric = Fabric.where(:name => colour_name).first
+          if fabric
+            color = fabric.option_value
+            images = collection_images_by_fabric(p, fabric)
+          else
+            color = Spree::OptionValue.where(:name => colour_name).first
+            images = collection_images(p, colour_name)
+          end
 
           Products::Presenter.new(
             :id           => p.id,
@@ -60,7 +64,8 @@ module Revolution
             :price        => price,
             :discount     => p.discount,
             :images       => images,
-            :color        => color
+            :color        => color,
+            :fabric       => fabric
           )
         end
       end.compact
@@ -68,6 +73,13 @@ module Revolution
 
     def collection_images(product, colour_name)
       images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
+
+      images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
+    end
+
+    def collection_images_by_fabric(product, fabric)
+      fabric_product = product.fabric_products.detect {|x| x.fabric_id == fabric.id}
+      images = product.images.find_all { |i| i.viewable_id == fabric_product.id && i.attachment_file_name.downcase.include?('crop') }
 
       images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
     end

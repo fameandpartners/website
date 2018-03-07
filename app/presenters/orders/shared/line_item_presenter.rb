@@ -51,6 +51,10 @@ module Orders
         fabric.try(:name) || 'Unknown Fabric'
       end
 
+      def fabric_material
+        fabric.try(:material) || 'Unknown Fabric'
+      end
+
       def height
         personalizations? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
       end
