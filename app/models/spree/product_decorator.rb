@@ -100,12 +100,22 @@ Spree::Product.class_eval do
   def images
     table_name = Spree::Image.quoted_table_name
 
-    Spree::Image.where(
-      "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
-        OR
-      (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-      product_color_value_ids, variants_including_master_ids
-    ).order('position asc')
+    if self.fabrics.empty?
+      prod_images = Spree::Image.where(
+        "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
+          OR
+        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
+        product_color_value_ids, variants_including_master_ids
+      ).order('position asc')
+    else
+      prod_images = Spree::Image.where(
+        "(#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))
+          OR
+        (#{table_name}.viewable_type = 'FabricsProduct' AND #{table_name}.viewable_id IN (?))",
+        variants_including_master_ids, fabric_product_ids
+      ).order('position asc')
+    end
+    prod_images
   end
 
   def images_for_colors(colors)
