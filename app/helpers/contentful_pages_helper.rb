@@ -1,8 +1,11 @@
 module ContentfulPagesHelper
 
   def contentful_get_editorial_tile_link(contents)
+    # Check if we have a direct URL to link this item
+    if contents[:tile_url].present?
+      contents[:tile_url]
     # Check if we need to render PID info (under the editorial tile)
-    if contents[:editorial_tile_pid].present?
+    elsif contents[:editorial_tile_pid].present?
       pid_item = contents[:editorial_tile_pid][0]
       split_pid = pid_item.split('-', 2)
       pid_info = @collection.products.select do |item|
