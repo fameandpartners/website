@@ -39,7 +39,6 @@ module UserCart
       end
 
       #filter out fastmaking option if non recommended color is chosen by user
-      binding.pry
       avo = (available_making_options.select {|x| !x.nil?} || []).map do |mo|
         if (mo.option_type == 'slow_making' && Features.active?(:delayed_delivery)) ||
             (mo.active && mo.option_type == 'fast_making' && color.present? && !color[:custom_color])
