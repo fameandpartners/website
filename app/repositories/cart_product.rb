@@ -203,7 +203,8 @@ class Repositories::CartProduct
         display_price: Spree::Price.new(amount: fabric_price, currency: line_item.currency).display_price,
         amount: fabric_price,
         currency: line_item.currency,
-        name: line_item.fabric.presentation
+        name: line_item.fabric.presentation,
+        custom_fabric: !line_item.recommended_fabric?
         }
       else
         nil
