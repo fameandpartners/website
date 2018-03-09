@@ -38,8 +38,10 @@ module Operations
         if !product[:fabric].blank?
           fabric = Fabric.find(product[:fabric])
           color = fabric.option_value_id
+          variant = get_variant(product[:style_name], product[:size], fabric.option_fabric_color_value_id) 
+        else
+          variant = get_variant(product[:style_name], product[:size], color) 
         end
-        variant = get_variant(product[:style_name], product[:size], color) 
 
         UserCart::Populator.new(
           order: order,
