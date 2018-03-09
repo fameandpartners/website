@@ -8,7 +8,7 @@ class CreateYorelisApolinarioInterviewPage < ActiveRecord::Migration
       title:                'An Interview with Yorelis Apolinario',
       meta_description:     'Yorelis Apolinario on fashion, women’s empowerment, and her favorite evening gowns from Fame and Partners.',
       lookbook:             'true',
-      pids:                 %w(1662-red-matte-satin 1111-black-stretch-crepe 1685-butterscotch-light-silk-charmeuse 1292-kelly-green-silk-strech-charmeuse).join(',')
+      pids:                 %w(1662-red-matte-satin 1111-black-stretch-crepe 1685-butterscotch-light-silk-charmeuse 1292-emerald-green-heavy-georgette).join(',')
     }
   end
 
