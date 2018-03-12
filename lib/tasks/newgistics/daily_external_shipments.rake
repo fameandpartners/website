@@ -87,10 +87,10 @@ namespace :newgistics do
                      "Saint-Martin"
     ]
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('daily_returns')).nil?
-      scheduler = Newgistics::NewgisticsScheduler.new
-      scheduler.last_successful_run = 5.day.ago.utc.to_datetime.to_s
-      scheduler.name = 'daily_returns'
-      scheduler.save
+        scheduler = Newgistics::NewgisticsScheduler.new
+        scheduler.last_successful_run = 5.day.ago.utc.to_datetime.to_s
+        scheduler.name = 'daily_returns'
+        scheduler.save
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     
@@ -108,14 +108,14 @@ namespace :newgistics do
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
-        order = order_return.order
-        li = order_return.line_item
+        order = return_request.order
+        li = return_request.line_item
         address = order.ship_address
 
         if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
         csv << [order.number, address.firstname, address.lastname, address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso2,
-                return_request.item_return.item_return_label.barcode, CustomItemSku.new(li).call, '1']
+                address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
+                "\"#{return_request.item_return.item_return_label.barcode}\"", CustomItemSku.new(li).call, '1']
         end
       end
     end
