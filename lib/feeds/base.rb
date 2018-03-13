@@ -1,7 +1,6 @@
 module Feeds
   class Base
-    # FEEDS =  %w(Google Shopstyle)
-FEEDS =  %w(Google)
+    FEEDS =  %w(Google Shopstyle)
     attr_reader :config, :current_site_version, :logger
 
     def initialize(version_permalink, logger: default_logger)
