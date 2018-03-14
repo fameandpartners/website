@@ -13,7 +13,6 @@ module Feeds
       # @override
       def export
         xml = generate
-        binding.pry
         save(xml)
       end
 
