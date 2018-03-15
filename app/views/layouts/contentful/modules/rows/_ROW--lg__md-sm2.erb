@@ -9,7 +9,7 @@
   <div class="tile is-parent is-6">
     <article class="tile is-child">
       <div class="Editorial">
-        <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+        <%= render partial: "layouts/contentful/modules/items/ITEM--lg", locals: {contents: contents} %>
       </div>
     </article>
   </div>
@@ -24,10 +24,10 @@
 
     <div class="tile is-parent">
       <div class="columns is-mobile">
-      <% contents[:sm_items].each do |item| %>
+      <% contents[:sm_items].each_with_index do |item,index| %>
         <% @pid = item %>
         <div class="column product-top-margin no-margin-bottom">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--sm" %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--sm", locals: {contents: contents, pid_index: (index.to_i + 1)} %>
         </div>
       <% end %>
       </div>
