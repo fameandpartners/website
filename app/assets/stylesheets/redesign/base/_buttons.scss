@@ -395,3 +395,21 @@
   height: 46px;
   font-weight: normal;
 }
+
+// CTA with custom border color
+.Btn__ctaSlimBorder {
+  margin-top: 25px;
+  padding: 7px 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $c-neutral-black;
+  background: $c-neutral-white;
+  border: 1px solid $c-neutral-black;
+  text-transform: uppercase;
+}
+
+.Btn__ctaSlimBorder--pink,
+.Btn__ctaSlimBorder--pink:hover {
+  color: $c-brand-pink;
+  border-color: $c-brand-pink;
+}

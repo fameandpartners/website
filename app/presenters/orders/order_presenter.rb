@@ -164,6 +164,7 @@ module Orders
           size:                  item.size,
           adjusted_size:         item.country_size,
           color:                 item.colour_name,
+          fabric:                item.fabric ? item.fabric.material : nil,
           height:                item.height,
           quantity:              item.quantity,
           factory:               item.factory.name,

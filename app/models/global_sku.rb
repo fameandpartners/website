@@ -10,6 +10,8 @@ class GlobalSku < ActiveRecord::Base
                   :size,
                   :color_id,
                   :color_name,
+                  :fabric_name,
+                  :fabric_id,
                   :customisation_id,
                   :customisation_name,
                   :height_value,
@@ -34,6 +36,7 @@ class GlobalSku < ActiveRecord::Base
       product_name:   line_item_presenter.style_name,
       size:           line_item_presenter.size,
       color_name:     line_item_presenter.colour_name,
+      fabric_name:    line_item_presenter.fabric_name,
       height:         line_item_presenter.height,
       customizations: customizations
     ).call

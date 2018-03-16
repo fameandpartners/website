@@ -15,10 +15,6 @@ ruby:
         = link_to collection_product_path(recommended_product), :class => 'media-wrap' do
           = image_tag recommended_product.image.try(:large), :class => 'img-product'
 
-          // Express making ribbon
-          - if product.fast_making?
-            = render 'shared/redesign/ribbon_fast_making'
-
         .details.text-center onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Similar Style Press', eventLabel: null, nonInteraction: false })"
           = link_to collection_product_path(recommended_product), :class => 'media-wrap product-name' do
             span.name = recommended_product.name

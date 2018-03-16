@@ -5,6 +5,10 @@
   min-height: auto;
 }
 
+.u-remove-product-hover-fade .category--item:hover .media-wrap {
+  opacity: 1;
+}
+
 .category--item {
   position: relative;
   min-height: 420px;

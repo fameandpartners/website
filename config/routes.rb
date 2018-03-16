@@ -334,6 +334,24 @@ FameAndPartners::Application.routes.draw do
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
+    #############################
+    # PROM LPs - Interview pages
+    #############################
+    # Prom LP - Larsen Thompson Interview page
+    get '/larsen-thompson-interview' => 'products/collections#show', as: :larsen_thompson_prom_interview_page
+
+    # Prom LP - Delilah Belle Hamlin Interview page
+    get '/delilah-belle-hamlin-interview' => 'products/collections#show', as: :delilah_belle_hamlin_prom_interview_page
+
+    # Prom LP - Diana Veras Interview page
+    get '/diana-veras-interview' => 'products/collections#show', as: :diana_veras_prom_interview_page
+
+    # Prom LP - Ashley Moore Interview page
+    get '/ashley-moore-interview' => 'products/collections#show', as: :ashley_moore_prom_interview_page
+
+    # Prom LP - Yorelis Apolinario Interview page
+    get '/yorelis-apolinario-interview' => 'products/collections#show', as: :yorelis_apolinario_prom_interview_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses

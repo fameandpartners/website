@@ -11,21 +11,23 @@ module Skus
     # @param [String, Integer] color_id. Example: "12", 12
     # @param [String] height. Example: "Standard"
     # @param [Array<Integer>] customization_value_ids
-    def initialize(style_number:, size:, color_id:, height: '', customization_value_ids: [])
+    def initialize(style_number:, size:, color_id:, fabric_id:'', height: '', customization_value_ids: [])
       @style_number            = style_number
       @size                    = size
       @color_id                = color_id
+      @fabric_id               = fabric_id
       @height                  = height
       @customization_value_ids = customization_value_ids&.sort
     end
 
     def call
       base_sku = [style_number, size, color]
-
       # if has_personalization?
       base_sku << [custom, height]
       # end
-
+      if !@fabric_id.blank?
+        base_sku << [fabric]
+      end
       base_sku.join.delete(' ').upcase
     end
 
@@ -39,6 +41,11 @@ module Skus
 
     def color
       "C#{@color_id}"
+    end
+
+    def fabric
+
+      "F#{@fabric_id}"
     end
 
     def custom

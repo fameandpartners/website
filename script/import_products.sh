@@ -76,7 +76,8 @@ function main
   fix_image_directories
   import_spreadsheets
   import_images
-  reindex_products
+  convert_json
+  # reindex_products
   expire_caches
   info "See log for details: $logfile"
 }
@@ -162,6 +163,15 @@ function import_product_spreadsheet()
   if [ $dryrun ]; then return; fi
   bundle exec rake import:data || error "FAILED!"
 }
+
+function convert_json
+{
+  info "Convert to JSON"
+  if [ $dryrun ]; then return; fi
+  bundle exec rake data:convert_customizations_to_json || error "FAILED!"
+}
+
+
 
 # Configure the MARK_NEW_THIS_WEEK Environment variable.
 function _ensure_spreadsheet_env_setup

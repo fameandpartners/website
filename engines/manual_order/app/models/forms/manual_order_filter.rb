@@ -28,6 +28,19 @@ module Forms
       end
     end
 
+    def fabric_options
+      product_options[:fabrics][:default].map do |p|
+        { id: p[:fabric][:id], name: p[:fabric][:presentation], type: 'fabric' }
+      end
+    end
+
+    def custom_fabrics(currency)
+      product_options[:fabrics][:extra].map do |p|
+        price = currency.downcase == 'usd' ?  p[:fabric][:price_usd] : p[:fabric][:price_aud]
+        { id: p[:fabric][:id], name: "#{p[:fabric][:presentation]} (+ $#{price})", type: 'custom' }
+      end
+    end
+
     def heights_options
       if product_heights_range_groups.first.blank? || product_heights_range_groups.first.name =~ /three_size/
         skirt_length_options[0..2]

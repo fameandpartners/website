@@ -1,0 +1,103 @@
+= render partial: 'pages/robots'
+
+- interviewed_edits_relative_url = '/evening-collection-ashley-moore'
+- interviewed_full_name = 'Ashley Moore'
+- interviewed_name = 'Ashley'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
+
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromInterview__header
+    .u-overlay-area
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
+
+  section.PromInterview__introCopy
+    .container.js-scroll-fade-in
+      .row
+        .col-xs-10.col-xs-offset-1
+          h2.PromInterview__introCopyTitle
+            | <em>#{interviewed_full_name}:</em><br class="visible-xs" /> The Fame Interview
+
+      .row
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .PromInterview__introCopyContent
+            p Meet Ashley Moore. No, not Instagram’s <a href="https://www.instagram.com/ashley_moore_" target="_blank" class="link-underline">@ashley_moore_</a> (although the model is refreshingly candid on social media). We’re talking about the real Ashley Moore: The woman who uses social media not to promote herself, but to connect with others. The woman who wants to use her platform to help end human trafficking. The woman who slips into a ball gown and steps in front of the camera, and feels like she can take over the world.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  section.PromInterview__copyInTwoColumns
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p There’s no doubt that Ashley’s beauty is captivating–after all, her flawless skin, almond-shaped eyes, and mass of brunette curls are what catapulted her into superstardom. But what really draws you into Ashley’s world is her openness. Her energy is inviting and playful, her ever-present iPhone is constantly capturing snippets of her life to share with her 800,000 Instagram followers, her voice is strong and loud and full of conviction.
+            p Ashley Moore has something to say.
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>How do you express yourself?</em>
+            p One way I express myself is through social media. It’s a way for me to connect with people from all over the world, and express who I am as an individual. You’ll often find  me quoting songs, movies, etc. depending on how I’m feeling at the moment. That is my way of expressing myself.
+
+  section.PromInterview__pullQuote
+    .container
+      .row.js-scroll-fade-in
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          h2.PromInterview__pullQuoteCopy “Social media is a way for me to connect with people from all over the world and express who I am as an individual.”
+
+  section.PromInterview__copyWithPidTile
+    .container
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__copy.Copy__column1
+            p <em>Our collection plays with the idea of movement–both as a way to express yourself, and as a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
+            p A movement I am really passionate about would have to be human trafficking.
+
+            .row.js-scroll-fade-in
+              .PromInterview__tile
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__pidTile.Copy__column2
+            .row.js-scroll-fade-in
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
+
+  section.PromInterview__copy
+    .container
+      .row.js-scroll-fade-in
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          p <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
+          p I went to prom my sophomore year. I didn’t attend my school’s prom–I went to a private school and prom for them was basically a HUGE dinner. There was no dancing allowed! So I decided to attend a friend’s prom at a public school and had the time of my life. I wore a beautiful dress that made me feel so beautiful. Being in a gown, you feel like someone completely different.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  .PromInterview__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to interviewed_edits_relative_url, class: 'Btn__ctaSlimBorder Btn__ctaSlimBorder--pink'
+              | Shop #{interviewed_name}'s Edit
+
+- content_for :body_end do
+
+  // Load ScrollReveal for fading effects on scroll event
+  script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

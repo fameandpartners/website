@@ -10,7 +10,7 @@ module Products
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable, :fast_delivery, :render3d_images
+                  :height_customisable, :fast_delivery, :render3d_images, :has_fabrics
 
     attr_reader   :product_type
 
@@ -53,8 +53,23 @@ module Products
       @colors = available_options.colors
     end
 
+    def fabrics
+      @fabrics = available_options&.fabrics
+    end
+
+    def as_json(options={})
+      result_json = super options
+      result_json[:fabrics] = self.fabrics
+      result_json
+    end
+ 
+
     def custom_size_price
       sizes.default_extra_price.display_price
+    end
+
+    def has_fabrics?
+      !fabrics.empty?
     end
 
     def sizes
@@ -79,7 +94,7 @@ module Products
 
     def collected_featured_images
       featured_images.collect do |img|
-        { id: img.id, url: img.original, url_product: img.product, color_id: img.color_id, alt: name }
+        { id: img.id, url: img.original, url_product: img.product, color_id: img.color_id, alt: name, fabric_id: img.fabric_id }
       end
     end
 
@@ -233,6 +248,7 @@ module Products
     def product_category
       @product_type.presence || 'Apparel & Accessories > Clothing > Dresses'
     end
+
 
     private
 

@@ -16,6 +16,7 @@
 //= require libs/jquery.zoom.min
 
 //= require modernizr-custom
+//= require libs/scrollreveal.min
 
 //--------------
 // Bootstrap JS

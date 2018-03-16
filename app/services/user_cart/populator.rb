@@ -76,11 +76,17 @@ class Populator
       end
     end
 
+    def add_fabric_to_line_item
+      line_item.fabric = product_fabric
+      line_item.save!
+    end
+
     def add_personalized_product
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
+        add_fabric_to_line_item
         line_item.save
         personalization.line_item = line_item
         line_item.personalization = personalization
@@ -102,8 +108,14 @@ class Populator
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
         item['size']  = product_size.value
-        item.color_id = product_color.color_id
-        item['color'] = product_color.color_name
+        
+        if product_fabric
+          item.color_id = product_fabric.option_value_id
+          item['color'] = product_fabric.option_value.name
+        else
+          item.color_id = product_color.color_id
+          item['color'] = product_color.color_name
+        end
         item.product_id = product.id
 
         if product_attributes[:height].present?
@@ -117,7 +129,7 @@ class Populator
     end
 
     def personalized_product?
-      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
+      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height? || product_fabric
     end
 
     def custom_height?
@@ -131,6 +143,14 @@ class Populator
 
     def product_variant
       @variant ||= Spree::Variant.where(id: product_attributes[:variant_id]).first
+    end
+
+    def product_fabric
+      if !product_attributes[:fabric_id].blank?
+        @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and fabrics.id = ?', product.id, product_attributes[:fabric_id]).first
+      else
+        nil
+      end
     end
 
     def line_item
@@ -161,7 +181,11 @@ class Populator
     def product_color
       @product_color ||= begin
 
-        color_id = product_attributes[:color_id].to_i
+        if product_fabric
+          color_id = product_fabric.option_value_id
+        else
+          color_id = product_attributes[:color_id].to_i
+        end
 
         # TODO - Replace all conditionals with just the first `product.product_color_values.active` lookup
         # Once all products are migrated to use explicitly defined ProductColorValues the Fallback else clause can go.

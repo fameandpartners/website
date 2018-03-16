@@ -13,6 +13,7 @@ class CustomItemSku
         style_number:            style_number,
         size:                    size,
         color_id:                color_id,
+        fabric_id:               fabric_id,
         height:                  height,
         customization_value_ids: customization_value_ids
       ).call
@@ -55,6 +56,10 @@ class CustomItemSku
 
   def height
     line_item.personalization ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+  end
+
+  def fabric_id
+    line_item.fabric ? line_item.fabric.id : ''
   end
 
 end
