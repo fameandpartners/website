@@ -34,15 +34,20 @@
               - if current_site_version.is_australia? && Features.active?(:afterpay)
                 = render 'shared/redesign/faqs/afterpay'
               = render 'shared/redesign/faqs/free_shipping'
+              = render 'shared/redesign/faqs/info_phone_number'
+
         #panel-products.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
               = render 'shared/redesign/faqs/faulty_items'
               = render 'shared/redesign/faqs/custom_colours'
+
         #panel-order.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
               = render 'shared/redesign/faqs/cancel_order'
+              = render 'shared/redesign/faqs/info_phone_number'
+
         #panel-delivery.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
@@ -52,6 +57,7 @@
               = render 'shared/redesign/faqs/delivery_sign'
               = render 'shared/redesign/faqs/delivery_POBOX'
               = render 'shared/redesign/faqs/free_shipping'
+
         #panel-returns.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'

@@ -421,6 +421,7 @@ module Contentful
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
         desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
         mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
+        tile_url = (item.respond_to? :tile_url) ? item.tile_url : nil
 
         if full_width_content == 'desktop,mobile'
           full_width_content_class = 'u-forced-full-width-wrapper u-forced-full-width-wrapper--mobile'
@@ -482,6 +483,7 @@ module Contentful
           mobile_image: mobile_image,
           video: desktop_video,
           mobile_video: mobile_video,
+          tile_url: tile_url,
           text_alignment_desktop_class: text_alignment_desktop_class,
           text_alignment_mobile_class: text_alignment_mobile_class,
           padding_class: padding_class,
