@@ -63,7 +63,8 @@ namespace :newgistics do
 end
 
 def autorefund_items(order, items)
-  items&.each do |item|
+  item = items['Item']
+  if item
       line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
                         .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
       line_items.each do |li| # iterate over line_items and and move them along event progression.
