@@ -33,9 +33,10 @@ namespace :newgistics do
       csv << csv_headers # set headers
       line_items.each do |li|
         product = li.product
+        lip = Orders::LineItemPresenter.new(li)
         csv << [CustomItemSku.new(li).call, product.name, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
-                GlobalSku.find_by_product_id(product.id).upc, product.category.category, product.factory.name, '',
+                GlobalSku.find_or_create_by_line_item(line_item_presenter: lip).upc, product.category.category, product.factory.name, '',
                 CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
