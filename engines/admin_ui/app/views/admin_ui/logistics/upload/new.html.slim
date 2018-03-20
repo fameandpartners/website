@@ -1,0 +1,36 @@
+- content_for :page_title do
+  | Uploads Inventory
+
+.upc.wrapper.wrapper-content
+  .ibox-float-e-margins
+    .ibox-title
+      h5 Recent Upload Date:
+
+      .ibox-content
+        .form-group
+          label.col-sm-2.control-label = "Bergen last upload date: #{@bergen_stamp}"
+          label.col-sm-2.control-label = "Next last upload date: #{@next_stamp}"
+
+.upc.wrapper.wrapper-content
+  = form_tag logistics_upload_create_bergen_path, multipart: true do |f|
+    .ibox.float-e-margins
+      .ibox-title
+        h5 Upload Bergen
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Bergen file:
+            .col-sm-10 = file_field_tag 'upload_bergen'
+            .col-sm-10.col-sm-offset-2 = submit_tag "Upload", formaction: logistics_upload_create_bergen_path, :class => 'btn btn-primary save'
+
+  = form_tag logistics_upload_create_next_path, multipart: true do |f|
+    .ibox.float-e-margins
+      .ibox-title
+        h5 Upload Next(AU Only)
+
+        .ibox-content
+          .form-group
+            label.col-sm-2.control-label Next file:
+            .col-sm-10 = file_field_tag 'upload_next'
+            .col-sm-10.col-sm-offset-2 = submit_tag "Uploads", formaction: logistics_upload_create_next_path, :class => 'btn btn-primary save'
+
