@@ -10,7 +10,8 @@
   .hero-tile-carousel
       .main-hero-wrap.hero-wrap
         picture.media-wrap
-          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/lookbook/modern-bridesmaid-dresses/modern-bridesmaid-banner.jpg", alt: "#{page.heading}", class: 'img-responsive'
+          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/lookbook/modern-bridesmaid-dresses/modern-bridesmaid-banner.jpg", alt: "#{page.heading}", class: 'img-responsive hidden-sm hidden-xs'
+          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/lookbook/modern-bridesmaid-dresses/modern-bridesmaid-banner-mobile.jpg", alt: "#{page.heading}", class: 'img-responsive hidden-lg hidden-md'
   .row
     .container
       .page-content.products-collections.category
