@@ -339,7 +339,7 @@ module Products
           factory_name:               /factory$/i,
           product_category:           /product category/i,
           product_sub_category:       /product sub-category/i,
-          
+          height_mapping_count: /height mapping count/i          
       }
 
       conformities.each do |key, regex|
