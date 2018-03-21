@@ -41,3 +41,7 @@ every(30.minutes) { rake 'next:workers:asn_file_upload' }
 
 # Order bot Scheduled tasks
 every(6.hours) { rake 'reports:order_bot_failure_check' }
+
+# Refulfillment
+every(1.minutes) {runner 'Refulfiller.check_last_n_minutes(25)'}
+every(5.minutes) {runner 'Batcher.check_last_n_minutes(10)'}

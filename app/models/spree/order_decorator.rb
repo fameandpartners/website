@@ -377,6 +377,11 @@ Spree::Order.class_eval do
     return self.line_items.any? {|item| !item.stock.nil?}
   end
 
+  def contains_refulfill_item?
+    return true
+    # return self.line_items.any? {|item| item.refulfill_status == 'new'}
+  end
+
   def return_eligible_AC?
     self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
   end

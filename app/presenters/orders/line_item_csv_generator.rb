@@ -6,14 +6,43 @@ module Orders
 
     def initialize(orders, query_params = {})
       @orders = orders
+      @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
       @query_params = query_params
+
+      if query_params[:show_only_completed]
+        @show_only_completed = true
+      end
+
+      if query_params[:refulfill_only]
+        @refulfill_only = true
+      end
+
+      if query_params[:batch_only]
+        @batch_only = true
+      end
+
+      if query_params[:making_only]
+        @making_only = true
+      end
     end
 
     def filename
       parts = ['fp_orders']
-      parts << Date.parse(query_params[:created_at_gt]).strftime('from_%Y-%m-%d') if query_params[:created_at_gt].present?
-      parts << Date.parse(query_params[:created_at_lt]).strftime('to_%Y-%m-%d')   if query_params[:created_at_lt].present?
-      parts << (query_params.fetch(:completed_at_not_null) { false } == '1' ? 'only_complete' : 'all_states')
+      if @show_only_completed || @making_only
+        parts << Date.parse(query_params[:created_at_gt]).strftime('from_%Y-%m-%d') if query_params[:created_at_gt].present?
+        parts << Date.parse(query_params[:created_at_lt]).strftime('to_%Y-%m-%d')   if query_params[:created_at_lt].present?
+        parts << (query_params.fetch(:completed_at_not_null) { false } == '1' ? 'only_complete' : 'all_states')
+      end
+      if @refulfill_only
+        parts << 'refulfill_only'
+      end
+      if @batch_only
+        parts << 'batch_only'
+      end
+      if @making_only
+        parts << 'items_ready_for_production'
+      end
+
       parts << 'generated_at'
       parts << DateTime.now.to_s(:file_timestamp)
       parts.join('_') << '.csv'
@@ -27,20 +56,47 @@ module Orders
       line = Orders::LineItemCSVPresenter
 
       CSV.generate(headers: true) do |csv|
-        csv << headers
-        orders.map do |order|
-          line.set_line order.attributes
+        if @batch_only
+          bcs_sorted = BatchCollection.all.sort {|x, y| y.line_items.count <=> x.line_items.count}
+          csv << (bcs_sorted.map {|bc| "#{bc.batch_key}: #{bc.line_items.count}"})
+          csv << []
+        end
 
-          li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
+        csv << headers
+        @lis.each_with_index do |li, index|
+          line.set_line @orders[index].attributes
+          # li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
           lip = nil
           if li
             lip = Orders::LineItemPresenter.new(li)
           end
 
+          if line.style_name == 'RETURN_INSURANCE'
+            next
+          end
+
+          if @refulfill_only && li.refulfill_status.nil?
+            next
+          end
+
+          if @batch_only && li.batch_collections.empty?
+            next
+          end
+
+          if @making_only
+            if !@refulfill_only && !li.refulfill_status.nil?
+              next
+            end
+            if !@batch_only && !li.batch_collections.empty?
+              next
+            end
+          end
+
           csv << [
             line.order_state,
             line.order_number,
-            lip.sample_sale?,
+            # lip.sample_sale?,
+            li.refulfill_status,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
@@ -70,19 +126,28 @@ module Orders
             line.return_details,
             line.price,
             line.currency,
-            line.product_number
+            resolve_refulfill_upc(li, line)
           ]
         end
       end
     end
 
   private
+    # we do this cause upcs are screwed from back in the da day
+    def resolve_refulfill_upc(li, line)
+      if @refulfill_only
+        return "#{li.return_inventory_item.vendor}: #{li.return_inventory_item.upc}"
+      else
+        return line.product_number
+      end
+    end
 
     def en_headers
       [
         :order_state,
         :order_number,
-        :sample_sale_item,
+        # :sample_sale_item,
+        :refulfill,
         :line_item,
         :total_items,
         :completed_at,
