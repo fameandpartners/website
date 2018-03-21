@@ -14,6 +14,10 @@ module Refulfiller
   # check to see if line item exists in the inventories
   # if it does mark the 3pl on the line_item
   def check_line_item_in_inventory(line_item)
+    # feature flipper
+    if Features.inactive?(:refulfill)
+      return true
+    end
     found = false
 
     if rii = find_match_and_decrement_available(line_item)
@@ -81,7 +85,11 @@ module Refulfiller
 
   def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
+    orders = order.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
+
     lis = orders.map {|ord| ord.line_items}.flatten
+    # filter out all line_items that have been previously processed by batcher or refulfiller or shipped
+    lis.select {|li| li.batch_collections.empty? && li.refulfill_status.nil? && li.line_item_update&.tracking_number.nil?}
   end
 
 end

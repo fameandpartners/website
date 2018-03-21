@@ -85,7 +85,14 @@ module Spree
             query = " o.id in (#{oids}) order by sp.\"name\" DESC"
             @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
           else
-            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
+            # must set date ranges or thing explodes
+            if created_at_gt.blank? || created_at_lt.blank?
+              flash[:error] = "Please set a date range."
+              # todo: make this thing properly explode. ideally frontend validator
+              return
+            else
+              @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
+            end
           end
         end
 

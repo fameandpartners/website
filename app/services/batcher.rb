@@ -21,6 +21,10 @@ module Batcher
   end
 
   def batch_line_item(line_item)
+    # feature flipper
+    if Features.inactive?(:batching)
+      return
+    end
     # check to see if it's a valid product
     if PRODUCTS_TO_IGNORE.include?(line_item.product.name)
       return false
@@ -41,6 +45,7 @@ module Batcher
           bc.save
           if bc.line_items.count == BATCH_ITEMS_THRESHOLD
             bc.status = 'closed'
+            bc.save
           end
 
           return true
@@ -73,9 +78,12 @@ module Batcher
 
   def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
+    orders = orders.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
+
     lis = orders.map {|ord| ord.line_items}.flatten
     #if we ever do something crazy like a li being able to be in more than 1 batch_collection..change this code below
-    lis.select {|li| li.batch_collections.empty? && li.refulfill_status.nil?}
+    # filter out all line_items that have been previously processed by batcher or refulfiller or shipped
+    lis.select {|li| li.batch_collections.empty? && li.refulfill_status.nil? && li.line_item_update&.tracking_number.nil?}
   end
 
 end

@@ -3,6 +3,7 @@ Spree::LineItem.class_eval do
           class_name: 'LineItemPersonalization'
 
   has_one :fabrication
+  has_one :line_item_update, class_name: 'Admin::LineItemUpdate'
 
   belongs_to :fabric
 
@@ -125,8 +126,8 @@ Spree::LineItem.class_eval do
 
       values.each do |type, value|
         if type == 'Color' && self.fabric
-          array << "Fabric and Color: #{fabric.presentation}" 
-        else 
+          array << "Fabric and Color: #{fabric.presentation}"
+        else
           array << (value.present? ? "#{type}: #{value}" : type.to_s)
         end
       end

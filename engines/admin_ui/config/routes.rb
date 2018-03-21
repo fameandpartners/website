@@ -78,8 +78,7 @@ AdminUi::Engine.routes.draw do
     end
 
     resources :upload
-    post 'upload/create_bergen' => 'upload#create_bergen'
-    post 'upload/create_next' => 'upload#create_next'
+    post 'upload/create_upload' => 'upload#create_upload'
   end
 
   namespace :customisation do
