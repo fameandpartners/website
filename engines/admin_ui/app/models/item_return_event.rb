@@ -116,14 +116,14 @@ class ItemReturnEvent < ActiveRecord::Base
                                 item_tax = (((event.item_return.line_item.price*100).to_i * tax_rate) / 100.0).round(2)
 
 
-                                tax_total = order.line_items.inject(0) do |total, li|
+                                tax_total = order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.inject(0) do |total, li|
                                   total + ((((li.price*100).to_i * tax_rate) / 100.0))
                                 end
                                 tax_total = tax_total.round(2)
                               end
 
                               # deal with all other adjustments
-                              splittable_adjustment = ((order.adjustment_total - tax_total) / [order.line_items.count, 1].max )
+                              splittable_adjustment = ((order.adjustment_total - tax_total) / [order.line_items.reject{|x| x.product.name.downcase == 'return_insurance'}.count, 1].max )
 
                               (event.item_return.line_item.price + item_tax + splittable_adjustment).round(2)
                             else
