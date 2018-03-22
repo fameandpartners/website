@@ -72,7 +72,7 @@ def autorefund_items(order, items)
 
         accept_return(order, li)
 
-        refund_return(order, line_item)
+        refund_return(order, li)
 
         NewgisticsRefundMailer.email(order, li)
       end
@@ -89,7 +89,7 @@ def accept_return(order, line_item)
                    .events
                    .send('approve').build
   form = ::Forms::ApproveForm.new(event)
-  form.validate(form_data) && form.save!
+  form.validate(form_data) && form.save
 end
 
 def receive_return(order, line_item)
@@ -102,7 +102,7 @@ def receive_return(order, line_item)
                    .events
                    .send('receive_item').build
   form = ::Forms::ReceiveItemForm.new(event)
-  form.validate(form_data) && form.save!
+  form.validate(form_data) && form.save
 end
 
 def refund_return(order, line_item)
