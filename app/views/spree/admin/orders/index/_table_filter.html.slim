@@ -82,11 +82,6 @@
     .four.columns.alpha
       .checkbox
         label
-          = f.check_box :inventory_units_shipment_id_null, {}, '1', '0'
-          '
-          = t(:show_only_unfulfilled_orders)
-      .checkbox
-        label
           = f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', ''
           '
           = t(:show_only_complete_orders)
