@@ -85,7 +85,7 @@ module Refulfiller
 
   def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
-    orders = order.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
+    orders = orders.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
 
     lis = orders.map {|ord| ord.line_items}.flatten
     # filter out all line_items that have been previously processed by batcher or refulfiller or shipped

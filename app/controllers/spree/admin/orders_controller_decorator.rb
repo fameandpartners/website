@@ -57,13 +57,15 @@ module Spree
         @batch_only = params[:q][:batch_only].present?
         params[:q].delete(:batch_only)
 
+        @ready_batches = params[:q][:ready_batches].present?
+        params[:q].delete(:ready_batches)
+
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
-
         ##################### End Original Spree ##############################
         if params[:format] != 'csv'
 
@@ -80,7 +82,14 @@ module Spree
             query = " li.refulfill_status is not null ORDER BY o.\"completed_at\" DESC"
             @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
           elsif @batch_only
-            order_ids = BatchCollection.all.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
+            order_bc = BatchCollection.select{|bc| bc.status == 'open'}
+            order_ids = order_bc.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
+            oids = order_ids.join(',')
+            query = " o.id in (#{oids}) order by sp.\"name\" DESC"
+            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
+          elsif @ready_batches
+            order_bc = BatchCollection.select{|bc| bc.status == 'closed'}
+            order_ids = order_bc.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
             oids = order_ids.join(',')
             query = " o.id in (#{oids}) order by sp.\"name\" DESC"
             @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
@@ -95,26 +104,6 @@ module Spree
             end
           end
         end
-
-        # if @sample_only
-        #   @orders = @orders.select {|order| order.contains_sample_sale_item?}
-        #   @orders = Kaminari::PaginatableArray.new(@orders,
-        #                   {
-        #                   :limit => 50,
-        #                   :offset => 0,
-        #                   :total_count => @orders.count
-        #             })
-        # end
-
-        # if @refulfill_only
-        #   @orders = @orders.select {|order| order.contains_refulfill_item?}
-        #   @orders = Kaminari::PaginatableArray.new(@orders,
-        #                   {
-        #                   :limit => 50,
-        #                   :offset => 0,
-        #                   :total_count => @orders.count
-        #             })
-        # end
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
@@ -131,6 +120,9 @@ module Spree
             end
             if @batch_only
               params[:q][:batch_only] = true
+            end
+            if @ready_batches
+              params[:q][:ready_batches] = true
             end
             if @making_only
               params[:q][:making_only] = true

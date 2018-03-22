@@ -30,11 +30,9 @@ module Batcher
       return false
     end
 
-    # if line_item.product&.factory&.name != 'Milly'
-    #   return false
-    # end
+    delivery_date = Orders::LineItemPresenter.new(line_item).projected_delivery_date
 
-    if (Orders::LineItemPresenter.new(line_item).projected_delivery_date > (Time.now+DELIVERY_DAYS_THRESHOLD.days))
+    if (delivery_date > (Time.now+DELIVERY_DAYS_THRESHOLD.days))
 
       #check to see if there's a batch_collection for this
       if bc = BatchCollection.where(batch_key: line_item.product.master.sku.downcase, status: 'open').first
@@ -43,6 +41,7 @@ module Batcher
         if bc.line_items.count < BATCH_ITEMS_THRESHOLD
           bc.line_items << line_item
           bc.save
+
           if bc.line_items.count == BATCH_ITEMS_THRESHOLD
             bc.status = 'closed'
             bc.save
@@ -56,6 +55,12 @@ module Batcher
       end
     end
     return false
+  end
+
+  def groom_all_batch_collections
+    BatchCollection.where(status: 'open').each do |bc|
+      groom_batch_collection(bc)
+    end
   end
 
   # kick out line_items that are within 2 weeks of due-ness

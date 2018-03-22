@@ -4,6 +4,11 @@ module Orders
   class LineItemCsvGenerator
     attr_reader :orders, :query_params
 
+    PRODUCTS_TO_IGNORE = [
+      'return_insurance',
+      'fabric swatch - heavy georgette'
+    ]
+
     def initialize(orders, query_params = {})
       @orders = orders
       @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
@@ -19,6 +24,10 @@ module Orders
 
       if query_params[:batch_only]
         @batch_only = true
+      end
+
+      if query_params[:ready_batches]
+        @ready_batches = true
       end
 
       if query_params[:making_only]
@@ -39,6 +48,9 @@ module Orders
       if @batch_only
         parts << 'batch_only'
       end
+      if @ready_batches
+        parts << 'ready_batches'
+      end
       if @making_only
         parts << 'items_ready_for_production'
       end
@@ -58,6 +70,7 @@ module Orders
       CSV.generate(headers: true) do |csv|
         if @batch_only
           bcs_sorted = BatchCollection.all.sort {|x, y| y.line_items.count <=> x.line_items.count}
+
           csv << (bcs_sorted.map {|bc| "#{bc.batch_key}: #{bc.line_items.count}"})
           csv << []
         end
@@ -65,25 +78,33 @@ module Orders
         csv << headers
         @lis.each_with_index do |li, index|
           line.set_line @orders[index].attributes
-          # li = Spree::LineItem.find_by_id(order.attributes["line_item_id"].to_i)
+
           lip = nil
           if li
             lip = Orders::LineItemPresenter.new(li)
           end
 
-          if line.style_name == 'RETURN_INSURANCE'
+          if PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
             next
           end
 
+          # only show
           if @refulfill_only && li.refulfill_status.nil?
             next
           end
 
-          if @batch_only && li.batch_collections.empty?
+          # filter out non batched
+          if @batch_only && (li.batch_collections.empty? || li.batch_collections&.first&.status == 'closed')
+            next
+          end
+
+          # filter out non ready batches
+          if @ready_batches && (li.batch_collections.empty? || li.batch_collections&.first&.status == 'open')
             next
           end
 
           if @making_only
+            # filter out refulfill and batched items
             if !@refulfill_only && !li.refulfill_status.nil?
               next
             end

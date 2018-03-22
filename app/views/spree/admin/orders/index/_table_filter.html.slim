@@ -95,22 +95,27 @@
           = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''
           '
           = t(:hide_line_items)
-    .four.columns
+    .eight.columns
       .checkbox
         label
           = f.check_box :refulfill_only, {:checked => @refulfill_only}, '1', ''
           '
-          = 'Export Only Refulfill Items'
+          = 'Export Refulfill Items'
       .checkbox
         label
           = f.check_box :batch_only, {:checked => @batch_only}, '1', ''
           '
-          = 'Export Only Batch Items'
+          = 'Export Upcoming Batch Items'
+      .checkbox
+        label
+          = f.check_box :ready_batches, {:checked => @ready_batches}, '1', ''
+          '
+          = 'Export Batches Ready for production'
       .checkbox
         label
           = f.check_box :making_only, {:checked => @making_only}, '1', ''
           '
-          = 'Export Only Items Ready for Production'
+          = 'Export Items Ready for Production'
 
     .clearfix
     .actions.filter-actions
