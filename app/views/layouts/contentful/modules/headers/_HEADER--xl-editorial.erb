@@ -5,7 +5,7 @@
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
       <div class="u-overlay-area <%= no_mobile_video_class %>">
         <div class="u-overlay-area__media">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--lg", locals: {contents: contents}  %>
         </div>
         <% if contents[:live_text] %>
           <div class="u-overlay-area__overlay">
