@@ -705,6 +705,8 @@ FameAndPartners::Application.routes.draw do
       #fabric swatches
       get 'fabric_swatches' => 'fabric_swatches#index'
 
+      get '/products/:id' => 'products#show'
+
       delete '/rails_cache' => 'systems#clear_cache'
     end
   end
