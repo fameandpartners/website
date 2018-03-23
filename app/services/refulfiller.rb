@@ -21,12 +21,12 @@ module Refulfiller
     found = false
 
     if rii = find_match_and_decrement_available(line_item)
-      if line_item.order.shipping_address.country.name == 'United States'
+      if line_item.order.shipping_address.country.name == 'United States' && rii.vendor == 'bergen'
         line_item.return_inventory_item = rii
         line_item.refulfill_status = 'new'
         found = true
         line_item.save
-      elsif line_item.order.shipping_address.country.name == 'Australia'
+      elsif line_item.order.shipping_address.country.name == 'Australia' && rii.vendor == 'next'
         line_item.return_inventory_item = rii
         line_item.refulfill_status = 'new'
         found = true
