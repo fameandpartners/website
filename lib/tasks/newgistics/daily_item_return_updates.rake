@@ -25,7 +25,7 @@ namespace :newgistics do
         end
         
         failed_items = order.line_items.select do |li|
-          (CustomItemSku.new(li).call == item['SKU']) && (li.item_return.status != 'Complete') # get items that were returned and invalid
+          (CustomItemSku.new(li).call == item_return['Items']['Item']['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
         end
 
         failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
@@ -107,9 +107,9 @@ end
 
 def refund_return(order, line_item)
   form_data = {
-    user: order.email,
-    refund_amount: line_item.item_return.item_price_adjusted.to_f / 100,
-    comment: 'Returned to Newgistics'
+    'user' => order.email,
+    'refund_amount' => line_item.item_return.item_price_adjusted.to_f / 100,
+    'comment' => 'Returned to Newgistics'
   }
 
   RefundService.new(item_return_id: line_item.item_return.id,
