@@ -61,14 +61,14 @@ module Api
             # description: '',
             perma_link: product.permalink
           },
-          # price: 123,
+          price: (product.price_in(current_site_version.currency).amount * 100).to_i,
           payment_methods: {
             after_pay: current_site_version.is_australia?
           },
           size: {
             min_height_cm: MIN_CM,
             max_height_cm: MAX_CM,
-            inch_selection: INCH_SIZES.map { |i| i[:totalInches] },
+            inch_selection: INCH_SIZES.map {|i| i[:totalInches]},
             size_chart: product.size_chart,
           },
           components: [
@@ -80,7 +80,9 @@ module Api
                 sort_order: c.option_value.position,
                 hex: c.option_value.value,
                 img: c.option_value.image_file_name,
-                incompatibilities: c.custom ? ['express_making'] : []
+                incompatibilities: c.custom ? ['express_making'] : [],
+                is_recommended: !c.custom,
+                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE*100).to_i : 0
               }
             },
 
@@ -92,7 +94,8 @@ module Api
                 sort_order: c.option_value.position,
                 hex: c.option_value.value,
                 img: c.option_value.image_file_name,
-                incompatibilities: c.custom ? ['express_making'] : []
+                incompatibilities: c.custom ? ['express_making'] : [],
+                is_recommended: !c.custom
               }
             },
 
@@ -102,6 +105,7 @@ module Api
                 name: c.presentation,
                 type: :size,
                 sort_order: c.position,
+                # price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE*100).to_i : 0,
                 incompatibilities: []
               }
             },
@@ -113,7 +117,8 @@ module Api
                 type: :customisation,
                 sort_order: c['customisation_value']['position'],
                 img: c['customisation_value']['image_file_name'],
-                incompatibilities: ['express_making']
+                incompatibilities: ['express_making'],
+                price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i
               }
             },
             [
@@ -129,21 +134,25 @@ module Api
           groups: [
             sizes.length > 0 && {
               name: 'Size',
+              change_button_text: "Select",
               components: sizes.map(&:name)
             } || nil,
 
             colors.length > 0 && {
               name: 'Color',
+              change_button_text: "Change",
               components: colors.map {|c| c.option_value.name}
             } || nil,
 
             fabrics.length > 0 && {
               name: 'Fabric',
+              change_button_text: "Change",
               components: fabrics.map {|f| f.option_value.name}
             } || nil,
 
             customisations.length > 0 && {
               name: 'Customize',
+              change_button_text: "Change",
               components: customisations.map {|f| f['customisation_value']['name']}
             } || nil
           ].compact,
@@ -151,20 +160,25 @@ module Api
             {
               type: :photo,
               src: PRODUCT_IMAGE_SIZES.map {|image_size|
+                geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
+
                 {
                   name: image_size,
-                  # width: image.attachment_width,
-                  # height: image.attachment_height,
+                  width: image_size == :original ? image.attachment_width : geometry.width,
+                  height: image_size == :original ? image.attachment_height : geometry.height,
                   url: image.attachment.url(image_size),
                 }
               },
               sort_order: image.position,
-              type: image.attachment_content_type,
-            options: [
+              content_type: image.attachment_content_type,
+              options: [
                 image&.viewable&.option_value&.name
               ]
             }
-          }
+          },
+          default_selections: [
+            product.master
+          ]
         }
         respond_with produt_viewmodel.to_json
       end
