@@ -16,7 +16,7 @@ module Features
     delayed_delivery:              "Show delayed delivery option for end users in Checkout page.",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
-    i_equal_change:                'Toggles i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout).',
+    i_equal_change:                'Toggles i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout). See also: "refer_a_friend_cta_box" below',
     maintenance:                   "Maintennance Mode - Puts site offline",
     marketing_modals:              "Onsite Marketing Popups & Modals",
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
@@ -25,12 +25,15 @@ module Features
     price_drop_au:                 "(AU only) Quick & dirty toggle to shown/hide the 'price drop' ribbon on selected items.",
     redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
     redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
+    refer_a_friend_cta_box:        'Enables a CTA box to promote the "Refer a Friend" campaign on all category/search pages. If "i_equal_change" is enabled they will be randomized.',
     sales:                         nil,
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
-    wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding-atelier` URL. Needs to restart server on feature toggle.'
+    wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding-atelier` URL. Needs to restart server on feature toggle.',
+    refulfill:                     "Check new orders coming in against inventory.",
+    batching:                      "Batch line items into styles for production."
   }
 
   class << self

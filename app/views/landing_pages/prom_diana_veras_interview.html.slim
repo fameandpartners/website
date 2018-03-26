@@ -1,0 +1,101 @@
+= render partial: 'pages/robots'
+
+- interviewed_edits_relative_url = '/evening-collection-diana-veras'
+- interviewed_full_name = 'Diana Veras'
+- interviewed_name = 'Diana'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
+
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromInterview__header
+    .u-overlay-area
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
+
+  section.PromInterview__introCopy
+    .container.js-scroll-fade-in
+      .row
+        .col-xs-10.col-xs-offset-1
+          h2.PromInterview__introCopyTitle
+            | <em>#{interviewed_full_name}:</em><br class="visible-xs" /> The Fame Interview
+
+      .row
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .PromInterview__introCopyContent
+            p Diana Veras is a woman full of contradictions–just the way we like ‘em.
+            p She’s a body-positive model working to change the way the world defines beauty through flaunting (and loving) her curves; at the same time, she prefers to wear baggy, tomboyish clothing. She’s a proud Afro-Latina woman known for her full, bouncy curls; but she spent years denying her roots and straightening her hair. She’s a social media star with over 200k followers on Instagram, but she knows the importance of logging out of social media and checking in with herself.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  section.PromInterview__copyInTwoColumns
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p Diana has always used her platform to raise awareness for the causes she cares about. Now, after years of championing size inclusivity in the fashion industry, she’s shifting gears to focus on women’s equality–and for Diana, the term “women’s equality” includes all women. She’s passionate about empowering trans women and women of color because, as she puts it, <em>“Part of being a feminist is using my voice to empower those whose voices are usually ignored.”</em>
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>How do you express yourself?</em>
+            p I express myself through my work. It’s cool to play different characters all the time.
+
+  section.PromInterview__pullQuote
+    .container
+      .row.js-scroll-fade-in
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          h2.PromInterview__pullQuoteCopy “Right now I’m really passionate about equality–not just with men and women, but with women as well. Part of being a feminist, to me, is using my voice to empower those whose voices are usually ignored.”
+
+  section.PromInterview__copyWithPidTile
+    .container
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__copy.Copy__column1
+            p <em>Our collection plays with the idea of movement–both as a way to express yourself, and as a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
+            p I feel like right now I’m really passionate about helping and advocating for everyone–all kinds of people, especially groups that are marginalized. I feel like part of being a feminist is to advocate for those whose voices are usually ignored in our society. Especially those of of women of color and trans women.
+            p Right now is the time to be allies and to stand united. The <em>#metoo</em> movement is something I’m also very passionate about right now. It’s amazing to see so many women come together to tackle a problem that affects us all on a daily basis, and not just in the entertainment industry, but worldwide.
+
+            .row.js-scroll-fade-in
+              .PromInterview__tile
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__pidTile.Copy__column2
+            .row.js-scroll-fade-in
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
+
+  section.PromInterview__copy
+    .container
+      .row.js-scroll-fade-in
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          p <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
+          p Prom. I loved prom so much. My mom got a custom dress for me from her friend who was a seamstress. It was a long red gown with a huge slit and super lowcut V-neckline. I felt like JLO at prom. I felt like a princess!
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  .PromInterview__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to interviewed_edits_relative_url, class: 'Btn__ctaSlimBorder Btn__ctaSlimBorder--pink'
+              | Shop #{interviewed_name}'s Edit
+
+- content_for :body_end do
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

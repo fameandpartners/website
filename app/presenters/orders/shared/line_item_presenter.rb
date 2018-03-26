@@ -11,6 +11,7 @@ module Orders
       def_delegators :@item,
                      :variant,
                      :personalization
+                     :refulfill
 
       def initialize(item, wrapped_order = item.order)
         @item = item
@@ -41,6 +42,18 @@ module Orders
 
       def colour_name
         colour.try(:name) || 'Unknown Color'
+      end
+
+      def fabric
+        item.fabric
+      end
+
+      def fabric_name
+        fabric.try(:name) || 'Unknown Fabric'
+      end
+
+      def fabric_material
+        fabric.try(:material) || 'Unknown Fabric'
       end
 
       def height
@@ -77,6 +90,14 @@ module Orders
       def sample_sale?
          !item.stock.nil?
       end
+
+      # def refulfill_item?
+      #   !item.refulfill.nil?
+      # end
+
+      # def refulfill_status
+      #   item.refulfill_status
+      # end
 
       def fabric_swatch?
         item.product&.category&.category == 'Sample'

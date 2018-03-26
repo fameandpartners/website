@@ -210,6 +210,7 @@ class Products::CollectionResource
         variant_skus:   cvar["product"]["variant_skus"],
         name:           cvar["product"]["name"],
         color:          OpenStruct.new(cvar["color"]),
+        fabric:         OpenStruct.new(cvar["fabric"]),
         images:         cropped_images(cvar),
         price:          price,
         discount:       discount,

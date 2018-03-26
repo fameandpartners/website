@@ -1,5 +1,6 @@
 require 'forwardable'
 require 'term/ansicolor'
+require_relative '../log_formatter'
 
 module BatchUpload
   class ImagesUploader
@@ -13,7 +14,7 @@ module BatchUpload
 
     def initialize(location, strategy = :update)
       @_strategies = [:update, :delete]
-      @_expiration = 6.hours
+      @_expiration = 2.minutes
 
       @_location = location
       unless @_strategies.include?(strategy)

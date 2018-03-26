@@ -15,13 +15,17 @@ Spree::Product.class_eval do
 
   has_many  :customisation_values,
             order: 'customisation_values.position ASC'
-  
+
   has_many :customization_visualizations
 
   has_many :layer_cads,
            order: 'layer_cads.position ASC'
   has_many :product_color_values,
            dependent: :destroy, inverse_of: :product
+
+  has_many :fabric_products,
+           class_name: 'FabricsProduct',
+           dependent: :destroy
 
   has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
@@ -37,6 +41,8 @@ Spree::Product.class_eval do
                           foreign_key: :product_id,
                           join_table: :spree_product_related_outerwear
 
+  has_and_belongs_to_many :fabrics
+
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
                   :factory_id,
@@ -44,8 +50,9 @@ Spree::Product.class_eval do
                   :featured,
                   :hidden,
                   :size_chart,
-                  :related_outerwear_ids
-                  :category
+                  :related_outerwear_ids,
+                  :category,
+                  :fabric_id
 
   attr_reader :name_with_sku
 
@@ -93,12 +100,22 @@ Spree::Product.class_eval do
   def images
     table_name = Spree::Image.quoted_table_name
 
-    Spree::Image.where(
-      "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
-        OR
-      (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-      product_color_value_ids, variants_including_master_ids
-    ).order('position asc')
+     if self.fabrics.empty?
+      prod_images = Spree::Image.where(
+        "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
+          OR
+        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
+        product_color_value_ids, variants_including_master_ids
+      ).order('position asc')
+     else
+      prod_images = Spree::Image.where(
+        "(#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))
+          OR
+        (#{table_name}.viewable_type = 'FabricsProduct' AND #{table_name}.viewable_id IN (?))",
+        variants_including_master_ids, fabric_product_ids
+      ).order('position asc')
+    end
+    prod_images
   end
 
   def images_for_colors(colors)
@@ -122,14 +139,24 @@ Spree::Product.class_eval do
   end
 
   def images_for_variant(variant)
-    table_name = Spree::Image.quoted_table_name
+    if variant.product.fabrics.empty?
+      #old way
+      table_name = Spree::Image.quoted_table_name
 
-    Spree::Image.where(
-      "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
-        OR
-      (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-      product_color_values.where(option_value_id: variant.option_value_ids).map(&:id), variant.id
-    ).order('position ASC')
+      Spree::Image.where(
+        "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
+          OR
+        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
+        product_color_values.where(option_value_id: variant.option_value_ids).map(&:id), variant.id
+      ).order('position ASC')
+    else
+      #new dumb fabrics
+      ot_fabric = Spree::OptionType.find_by_name("dress-fabric-color")
+      ov_fabric = variant.option_values.detect { |ov| ov.option_type_id == ot_fabric.id}
+
+      fabric = Fabric.find_by_option_fabric_color_value_id(ov_fabric.id)
+      (variant.product.fabric_products.detect {|fp| fp.fabric_id == fabric.id}).images
+    end
   end
 
   def remove_property(name)
@@ -163,15 +190,59 @@ Spree::Product.class_eval do
       .recommended
       .pluck(:option_value_id)
   end
+
+  def basic_fabric_ids
+    fabric_products
+      .recommended
+      .pluck(:fabric_id)
+  end
+
+  def custom_fabric_ids
+    fabric_products
+      .custom
+      .pluck(:fabric_id)
+  end
+
   alias_method :color_ids, :basic_color_ids
 
   def basic_colors
     Spree::OptionValue.where(id: basic_color_ids)
   end
 
+  def basic_fabrics
+    Fabric.where(id: basic_fabric_ids)
+  end
+
+  def basic_fabrics_with_description
+    fabrics_arry = []
+    fabric_products.recommended.each do |fp|
+        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true)
+        fabric_hsh[:fabric][:price_usd] = '0'
+        fabric_hsh[:fabric][:price_aud] = '0'
+        fabric_hsh[:fabric][:description] = fp.description
+        fabrics_arry << fabric_hsh
+    end
+    fabrics_arry
+  end
+
+  def custom_fabrics
+    Fabric.where(id: custom_fabric_ids)
+  end
+
+  def custom_fabrics_with_description
+    fabrics_arry = []
+    fabric_products.custom.each do |fp|
+        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true)
+        fabric_hsh[:fabric][:description] = fp.description
+        fabrics_arry << fabric_hsh
+    end
+    fabrics_arry
+  end
+
   def color_names
     basic_colors.pluck(:name)
   end
+
   alias_method :colors, :color_names
 
   # TODO: Alexey Bobyrev - 04/Oct/2016

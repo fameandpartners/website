@@ -3,12 +3,19 @@ Spree::LineItem.class_eval do
           class_name: 'LineItemPersonalization'
 
   has_one :fabrication
+  has_one :line_item_update, class_name: 'Admin::LineItemUpdate'
+
+  belongs_to :fabric
 
   has_one :item_return, inverse_of: :line_item
+  belongs_to :return_inventory_item
 
   has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
 
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
+
+  has_many :batch_collection_line_items
+  has_many :batch_collections, :through => :batch_collection_line_items, dependent: :destroy
 
   scope :fast_making, -> do
     joins(making_options: :product_making_option).
@@ -39,6 +46,11 @@ Spree::LineItem.class_eval do
     end
   end
 
+  def customizations
+    super ||
+    CustomisationValue.where(id: self.personalization&.customization_value_ids || []).to_json
+  end
+
   def delivery_period_policy
     @delivery_period_policy ||= Policies::LineItemDeliveryPolicy.new(self)
   end
@@ -52,6 +64,10 @@ Spree::LineItem.class_eval do
 
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
+    end
+
+    if fabric.present? && !recommended_fabric?
+      total_price += fabric.price_in(self.currency)
     end
 
     total_price
@@ -109,7 +125,11 @@ Spree::LineItem.class_eval do
       array = []
 
       values.each do |type, value|
-        array << (value.present? ? "#{type}: #{value}" : type.to_s)
+        if type == 'Color' && self.fabric
+          array << "Fabric and Color: #{fabric.presentation}"
+        else
+          array << (value.present? ? "#{type}: #{value}" : type.to_s)
+        end
       end
 
       array.to_sentence({ :words_connector => ", ", :two_words_connector => ", " })
@@ -189,6 +209,10 @@ Spree::LineItem.class_eval do
     60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
   end
 
+  def in_batch?
+    !self.batch_collections.empty?
+  end
+
   def as_json(options = { })
     json = super(options)
     json['line_item']['store_credit_only'] = self.store_credit_only_return?
@@ -206,6 +230,7 @@ Spree::LineItem.class_eval do
         "price": self.price,
         "size": self.size_name,
         "color": self.color_name,
+        "fabric": self&.fabric&.presentation,
         "height": self.height_name,
         "height_unit": self.height_unit,
         "height_value": self.height_value,
@@ -223,6 +248,11 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def recommended_fabric?
+      fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
+      fp.recommended
   end
 
   private

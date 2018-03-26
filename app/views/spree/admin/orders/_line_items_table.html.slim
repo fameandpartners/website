@@ -11,7 +11,8 @@ table.line_items
       th Order Number
       th Return Type
       th VWO Type
-      th Sample Sale Item
+      / th Swatch Item
+      th Refulfill Item
       th Line ID
       th Style #
       th SKU
@@ -19,6 +20,7 @@ table.line_items
       th Size
       th Height
       th Colour
+      th Fabric
       th Customisations
       th Factory
       th Customer
@@ -46,7 +48,8 @@ table.line_items
           td = link_to order.number, admin_order_path(order)
           td = order.return_type
           td = order.vwo_type
-          td = line_item.sample_sale?
+          / td = line_item.sample_sale?
+          td = line_item.refulfill_status
           td = line_item.id
           td = line_item.style_number
           td = line_item.sku
@@ -54,6 +57,7 @@ table.line_items
           td = line_item.size
           td = line_item.height
           td = line_item.colour_name
+          td = line_item.fabric_material
           td = line_item.customisations.collect(&:first).join("<br>").html_safe
           td = line_item.factory
           - if position.zero?

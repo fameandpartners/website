@@ -183,6 +183,7 @@ class ProductListItem extends React.Component {
       size,
       color,
       image,
+      fabric,
     } = productMeta;
     const {
       created_at_iso_mdy: returnCreatedAtMdy,
@@ -263,14 +264,26 @@ class ProductListItem extends React.Component {
                 :
                 null
             }
-            <div>
-              <span className="meta--key">
-                Color:
-              </span>
-              <span className="meta--value">
-                {color}
-              </span>
-            </div>
+            {
+              fabric ?
+                <div>
+                  <span className="meta--key">
+                    Fabric and Color:
+                  </span>
+                  <span className="meta--value">
+                    {fabric}
+                  </span>
+                </div>
+                :
+                <div>
+                  <span className="meta--key">
+                    Color:
+                  </span>
+                  <span className="meta--value">
+                    {color}
+                  </span>
+                </div>
+            }
             {
               size ? (
                 <div>

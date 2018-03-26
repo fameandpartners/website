@@ -1,0 +1,103 @@
+= render partial: 'pages/robots'
+
+- interviewed_edits_relative_url = '/evening-collection-nia-parker'
+- interviewed_full_name = 'Nia Parker'
+- interviewed_name = 'Nia'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
+
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromInterview__header
+    .u-overlay-area
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
+
+  section.PromInterview__introCopy
+    .container.js-scroll-fade-in
+      .row
+        .col-xs-10.col-xs-offset-1
+          h2.PromInterview__introCopyTitle
+            | <em>#{interviewed_full_name}:</em><br class="visible-xs" /> The Fame Interview
+
+      .row
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .PromInterview__introCopyContent
+            p You might not be familiar with Nia Parker’s name, but if you’re at all interested in dance or fashion, you’ve likely seen her performing with her dance troupe, the Hiplet Ballerinas.
+            p That’s pronounced <em>hip-lay</em>–a cross between hip hop and ballet–and Nia learned the practice at Chicago’s Multi-Cultural Dance Center, where her mom is an instructor. She, along with her dance troupe, helped the style go viral after posting a video of a hiplet routine to Jason Derulo’s “If It Ain’t Love” on social media. Since that mega-moment, Nia and the Hiplets have been featured on Buzzfeed, in fashion campaigns for Versace and Swarovski, and on the runways of New York Fashion Week. Now, with a platform to stand (and dance) on, Nia is using her voice to advocate for young artists and show young women of color that they can be ballerinas, too.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  section.PromInterview__copyInTwoColumns
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p <em>When did you discover dance, and how did you decide that you wanted to make a career out of it?</em>
+            p I first started dancing officially in class when I was three years old. My mom’s a teacher, so right after I was born, I was just sitting in the studio watching her teach dance. My whole life has been based around dance.
+            p What really made me realize that this was the career option for me was after my dance studio went viral, and all these opportunities came up. I kind of discovered a whole new world of dance. I’m used to being in the theater, doing more concert style. Then I discovered this more commercial world and it was like, <em>This fits me better</em>. It’s good that I know how to do concert, but I like this side better. So I’ve just been pursuing that and trying to become as versatile of an artist as possible–’cause these days, you kinda have to do everything.
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>How do you use dance as a form of self-expression?</em>
+            p Dancing just gives me a freedom to express myself, whatever the mood is. It allows me to connect with people easier. I’m not always good with my words, so I’ll just show you with movement. It’s a good way to channel your issues into something, too.
+
+  section.PromInterview__pullQuote
+    .container
+      .row.js-scroll-fade-in
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          h2.PromInterview__pullQuoteCopy “Dancing allows me to connect with people. I’m not always good with my words, so I’ll show you with my movement.”
+
+  section.PromInterview__copyWithPidTile
+    .container
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__copy.Copy__column1
+            p <em>We love the idea of movement as both a way to express yourself, and a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
+            p My personal movement right now is basically representation. There are a lot of black girls who don’t see themselves in pointe shoes these days–and it’s 2018! My experience is a little different, though, because my studio is predominantly black. I saw black ballerinas every day of every week. But especially as I gain more public attention, I realize that there is a gap and that there are people missing.
+            p Another passion of mine is giving more artistic kids a voice. In this society, we’re very focused on math and science–which I don’t mind, I adore science, let’s figure out the origin of the Universe, I’m here for it. But I experienced this first-hand in high school: If you’re not good at math and science but you’re good at art, there’s a shaming, like “Oh, you’re just lazy.” But if the math and science kid isn’t good at art it’s like, “OK, go do what you do.” In the school system, there’s no support for the arts at all. It’s honestly heartbreaking. My sophomore year of high school was the last drama class to be taught in high school, and I was fortunate to be in that class for two years. There’s a place for it, clearly, because that class fills up first before all the other classes! But the funding is going towards sports and now science–which is good, they’re bringing more women into STEM, which I think is great because we need our perspective there, too. But I think there needs to be more support for artists, because we’re the ones that kind of tell society what’s going on.
+
+            .row.js-scroll-fade-in
+              .PromInterview__tile
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__pidTile.Copy__column2
+            .row.js-scroll-fade-in
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
+
+  section.PromInterview__copy
+    .container
+      .row.js-scroll-fade-in
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          p <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
+          p I went to prom. I left high school my junior year, and I kind of scrapped the idea of me going to prom–I wasn’t into it. I had done some extra work on TV shows in Chicago where I had worn big gowns so I was like, <em>I already had that experience</em>. But I had a friend who took me to prom with him. Our color was pink. I had blonde hair and his hair was blond at the ends, so it was really cute. I almost didn’t make it–I was stuck in New York, and there was a flight delay, and it was snowing, and there was rain. But I’m glad I went!
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  .PromInterview__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to interviewed_edits_relative_url, class: 'Btn__ctaSlimBorder Btn__ctaSlimBorder--pink'
+              | Shop #{interviewed_name}' Edit
+
+- content_for :body_end do
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

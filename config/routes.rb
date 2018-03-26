@@ -131,6 +131,9 @@ FameAndPartners::Application.routes.draw do
     # Bridesmaid teaser landing page
     get '/coming-soon-custom-bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid-teaser-page', :as => :bridesmaid_teaser_landing_page
 
+    # Prom Red And Black Category page
+    get '/prom-red-and-black' => 'products/collections#show', :permalink => 'prom-red-and-black', :as => :prom_red_and_black_landing_page
+
     ###########
     # Lookbooks
     ###########
@@ -267,6 +270,9 @@ FameAndPartners::Application.routes.draw do
     get '/everybody-dance', to: redirect('/dresses/prom')
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
+    # temporary patch. this dress link is bad so redirect it
+    get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -316,10 +322,8 @@ FameAndPartners::Application.routes.draw do
     # Gingham & Stripes Category page
     get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
 
-    # Wedding Atelier App - Landing page
-    get '/wedding-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses'), as: :wedding_atelier_app_landing_page
-    # Redirection in case of misspelling
-    get '/weddings-atelier', to: redirect('/coming-soon-custom-bridesmaid-dresses')
+    # [LEGACY] Wedding Atelier App - Landing page
+    get '/wedding-atelier(/*anything)' => redirect('/coming-soon-custom-bridesmaid-dresses?utm_source=legacy-wedding-atelier'), as: :wedding_atelier_app_landing_page
 
     # Casual Summer Styles Collection Page
     get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
@@ -332,6 +336,27 @@ FameAndPartners::Application.routes.draw do
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
+
+    #############################
+    # PROM LPs - Interview pages
+    #############################
+    # Prom LP - Larsen Thompson Interview page
+    get '/larsen-thompson-interview' => 'products/collections#show', as: :larsen_thompson_prom_interview_page
+
+    # Prom LP - Delilah Belle Hamlin Interview page
+    get '/delilah-belle-hamlin-interview' => 'products/collections#show', as: :delilah_belle_hamlin_prom_interview_page
+
+    # Prom LP - Diana Veras Interview page
+    get '/diana-veras-interview' => 'products/collections#show', as: :diana_veras_prom_interview_page
+
+    # Prom LP - Ashley Moore Interview page
+    get '/ashley-moore-interview' => 'products/collections#show', as: :ashley_moore_prom_interview_page
+
+    # Prom LP - Yorelis Apolinario Interview page
+    get '/yorelis-apolinario-interview' => 'products/collections#show', as: :yorelis_apolinario_prom_interview_page
+
+    # Prom LP - Nia Parker Interview page
+    get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -774,7 +799,6 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
-  mount WeddingAtelier::Engine, at: '/wedding-atelier'
 
 end
 

@@ -64,11 +64,18 @@ module Orders
 
       def customization_values #TODO: Need to address this situation
         if personalization.present?
-          customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
+          customs = JSON.parse(item.customizations).map {|x| x['customisation_value']['presentation']}
+          if customs.empty?
+            customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
+          end
           customs.join('|')
         else
           'N/A'
         end
+      end
+
+      def item
+        Spree::LineItem.find(line['line_item_id'])
       end
 
       def custom_color
@@ -147,7 +154,7 @@ module Orders
 
       def personalization_sku
         # TODO: this is duplicated logic from the `CustomItemSku` generator!
-
+        li = Spree::LineItem.find_by_id(line['line_item_id'].to_i)
         style_number = if (line['variant_master'] == 'TRUE' || line['variant_master'] == 't')
                          line['variant_sku']
                        else
@@ -155,9 +162,10 @@ module Orders
                        end.upcase
         size = line['size'].gsub('/', '')
         color = "C#{line['color_id']}"
+        fabric = li&.fabric ? "F#{li.fabric.id}" : ''
         custom = customization_value_ids.map {|vid| "X#{vid}"}.join('').presence || 'X'
         height = "H#{line['height'].to_s.upcase.first}#{line['height'].to_s.upcase.last}"
-        "#{style_number}#{size}#{color}#{custom}#{height}"
+        "#{style_number}#{size}#{color}#{custom}#{height}#{fabric}"
       end
 
       def customization_value_ids

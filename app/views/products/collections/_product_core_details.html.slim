@@ -1,16 +1,18 @@
 ruby:
-  product_link = -> (product) { collection_product_path(product, color: product.color.try(:name)) }
+  product_link = -> (product) { collection_product_path(product, color: product.fabric ? product.fabric.try(:name) : product.color.try(:name)) }
 
 = link_to product_link.call(product), :class => 'media-wrap' do
-  = image_tag product.images.first, :alt => product.name, :class => "img-product", 'data-hover' => product.images.last, 'data-original' => product.images.first
+
+  - if pidImageReplacementDesktop
+    = image_tag pidImageReplacementDesktop, alt: product.name, class: "img-product hidden-xs hidden-sm"
+    = image_tag pidImageReplacementMobile, alt: product.name, class: "img-product hidden-lg hidden-md"
+
+  - else
+    = image_tag product.images.first, :alt => product.name, :class => "img-product", 'data-hover' => product.images.last, 'data-original' => product.images.first
 
   // Price Drop AU ribbon
   - if price_drop_au_item_check(product.sku)
     = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
-
-  // Express Making ribbon if this product is not a "Price Drop (AU)" item
-  - if product.fast_making? && !price_drop_au_item_check(product.sku)
-    = render 'shared/redesign/ribbon_fast_making'
 
 .details.text-center
   = link_to product_link.call(product), :class => 'media-wrap product-name' do
@@ -18,7 +20,7 @@ ruby:
       = product.name
   span.price = product_price_with_discount(product)
 
-  - if Features.active?(:moodboard)
+  - if Features.active?(:moodboard) && showMoodboard != 'false'
     .dropdown
       a.js-trigger-add-to-moodboard href='javascript:;' data-toggle='dropdown'
         sup +

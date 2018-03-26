@@ -29,8 +29,9 @@ module OrderBot
     end
 
     def get_tag_by_name(name)
-      res = make_get_request("admin/tags.json/?name=#{name}")
-      JSON.parse(res.body)
+      res = make_get_request("admin/tags.json/")
+      res_json = JSON.parse(res.body)
+      res_json.select{|x| x['name'] == name}
     end
 
     def create_new_tag(tag)

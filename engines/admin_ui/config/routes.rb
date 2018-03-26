@@ -78,6 +78,9 @@ AdminUi::Engine.routes.draw do
         get 'retry'
       end
     end
+
+    resources :upload
+    post 'upload/create_upload' => 'upload#create_upload'
   end
 
   namespace :customisation do

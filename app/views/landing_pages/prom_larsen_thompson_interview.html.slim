@@ -1,0 +1,105 @@
+= render partial: 'pages/robots'
+
+- interviewed_edits_relative_url = '/evening-collection-larsen-thompson'
+- interviewed_full_name = 'Larsen Thompson'
+- interviewed_name = 'Larsen'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
+
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromInterview__header
+    .u-overlay-area
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
+
+  section.PromInterview__introCopy
+    .container.js-scroll-fade-in
+      .row
+        .col-xs-10.col-xs-offset-1
+          h2.PromInterview__introCopyTitle
+            | <em>#{interviewed_full_name}:</em><br class="visible-xs" /> The Fame Interview
+
+      .row
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .PromInterview__introCopyContent
+            p You may recognize Larsen Thompson’s face–or her dance moves–from her younger days on Nickelodeon or her more recent turn as a backup dancer in music videos for everyone from Janet Jackson to Katy Perry.
+            p But after spending just a few minutes watching Larsen dance on set, it’s clear: this girl is not meant to be in the background. The dancer and model (not to mention aspiring actress and singer) is ready for the spotlight–and ready for the social justice platform that comes along with it.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  section.PromInterview__copyInTwoColumns
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p <em>When did you discover dance, and how did you decide that you wanted to make a career out of it?</em>
+            p So I started dancing at the age of four, just from my parents putting me into dance classes. At the age of nine I went into hip hop dance, and that’s been my favorite so far. Then I started working in the dance industry at 12 years old–I started working with a bunch of artists like Katy Perry and P!nk and did live television shows and I was just like, “Oh my god! This is what I want to do!”
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>How do you use dance as a form of self-expression?</em>
+            p I think dance is a way to express yourself through movement, and it has been for me since I started dancing. Whether I’m feeling down one day or high another day, I can express myself through my movement and dance and I think that’s so cool. I’m so passionate about it, and it means the whole world to me. Like, no matter how much I don’t dance, movement is stuck in my blood. I can pull out moves whenever I want–it’s just embedded in me. I love how dance is a form of expression through your movement, and movement is so important.
+
+  section.PromInterview__pullQuote
+    .container
+      .row.js-scroll-fade-in
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          h2.PromInterview__pullQuoteCopy “Movement is stuck in my blood. I can pull out moves whenever I want–it’s just embedded in me. I love how dance is a form of expression.”
+
+  section.PromInterview__copyWithPidTile
+    .container
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__copy.Copy__column1
+            p <em>We love that idea of movement–both as a way to express yourself, but also the idea of a movement as a cornerstone of activism. The movement we’re passionate about is women’s empowerment–what’s yours?</em>
+            p I’m very passionate about women’s empowerment, equal pay, equal rights and I always have been. I’m so happy about what’s coming out with the #MeToo campaign. I feel like all these years it’s been lost and nobody talks about it. I’m so happy people are bringing awareness to it, because that’s what needs to happen.
+
+            p But a cause I’m really drawn to is helping kids in sex trafficking. To see all these kids, four years old, getting put into it makes me heart melt. My friend actually goes out and she helps all these kids that have been rescued from sex trafficking, and I’m going to start going with her to help these kids.
+
+            p I just really want to get into a cause that I can share through my platform on Instagram. If I have a platform that I can share positive things on and help people get through things, I might as well. We need change. I’m super passionate about that.
+
+            .row.js-scroll-fade-in
+              .PromInterview__tile
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__pidTile.Copy__column2
+            .row.js-scroll-fade-in
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
+
+  section.PromInterview__copy
+    .container
+      .row.js-scroll-fade-in
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          p <em>Do you remember your first experience wearing an evening gown? Where did you go, and how did it make you feel?</em>
+          p I think my first outfit was this...oh, I remember, it was this emerald green long dress. I just love green–it makes me feel so elegant, but like Poison Ivy at the same time! I just remember being in this long gown, and it was the first time I ever wore heels, and it just came so naturally to me because of dance–just from being on my toes all the time. I was wearing these sparkly earrings, and oh, my God it was like the coolest night of my life. I was like, “I’m a woman!” I was like 12 years old, but I felt so cool.
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  .PromInterview__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to interviewed_edits_relative_url, class: 'Btn__ctaSlimBorder Btn__ctaSlimBorder--pink'
+              | Shop #{interviewed_name}'s Edit
+
+- content_for :body_end do
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

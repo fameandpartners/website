@@ -2,8 +2,6 @@
 
 require 'roo'
 require 'ostruct'
-require 'log_formatter'
-
 # TODO - MORE REFACTORING
 # This class contains multiple responsibilities inside it.
 # i.e.
@@ -23,12 +21,12 @@ module Products
 
     attr_reader :parsed_data, :keep_taxons, :available_on
 
-    include ActionView::Helpers::TextHelper # for truncate
+#    include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on, mark_new_this_week = false, logdev: $stdout)
       @logger = Logger.new(logdev)
       @logger.level = Logger::INFO
-      @logger.formatter = LogFormatter.terminal_formatter
+#      @logger.formatter = LogFormatter.terminal_formatter
 
       @available_on = available_on
       @keep_taxons = true
@@ -82,16 +80,38 @@ module Products
 
       info "Parsing Data into Hash"
 
+      color_data = build_color_data( book )
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
-        processed = process_raw_row_data(raw)
-        item_hash = build_item_hash(processed, raw)
+        processed = process_raw_row_data(raw, color_data)
+        item_hash = build_item_hash(processed, raw, color_data)
+        item_hash
       end
       add_cad_data( book, @parsed_data ) if cad_data_present?( book )
-
       info "Parse Complete"
     end
 
+    def build_color_data( book )
+
+      fabric_types = []
+      color_data = {}
+      book.row( 1, "Fabric & Color" ).each_slice(3) do |slice|
+        fabric_types.push( slice.first.strip )
+      end
+
+      total_rows = book.last_row("Fabric & Color")
+      (2..total_rows).each do |i|
+        book.row( i, "Fabric & Color" ).each_slice(3).to_a.each_with_index do |slice, index|
+          color_data[slice[1].strip] = { code: slice[1].strip, color_name: slice[0].strip, fabric_name: fabric_types[index].split( '(' ).first.strip, fabric_price: slice[2].present? ?  slice[2] : nil } if slice[0].present?
+        end
+      end
+      color_data
+    end
+    
+    def color_data_present?( book )
+      !book.sheets.index( "Fabric & Color" ).nil?      
+    end
+    
     def add_cad_data( book, parsed_data )
       total_rows = book.last_row("CADs")
       columns = {}
@@ -143,62 +163,21 @@ module Products
       !book.sheets.index( "CADs" ).nil?
     end
 
-
     private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
-      # Basic
+      # Valid
       raw[:sku]                        = book.cell(row_num, columns[:sku])
       raw[:name]                       = book.cell(row_num, columns[:name])
       raw[:description]                = book.cell(row_num, columns[:description])
       raw[:price_in_aud]               = book.cell(row_num, columns[:price_in_aud])
       raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
       raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-      raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-
-      # Style
-      raw[:glam]                       = book.cell(row_num, columns[:glam])
-      raw[:girly]                      = book.cell(row_num, columns[:girly])
-      raw[:classic]                    = book.cell(row_num, columns[:classic])
-      raw[:edgy]                       = book.cell(row_num, columns[:edgy])
-      raw[:bohemian]                   = book.cell(row_num, columns[:bohemian])
-      raw[:sexiness]                   = book.cell(row_num, columns[:sexiness])
-      raw[:fashionability]             = book.cell(row_num, columns[:fashionability])
-      raw[:apple]                      = book.cell(row_num, columns[:apple])
-      raw[:pear]                       = book.cell(row_num, columns[:pear])
-      raw[:strawberry]                 = book.cell(row_num, columns[:strawberry])
-      raw[:hour_glass]                 = book.cell(row_num, columns[:hour_glass])
-      raw[:column]                     = book.cell(row_num, columns[:column])
-      raw[:athletic]                   = book.cell(row_num, columns[:athletic])
-      raw[:petite]                     = book.cell(row_num, columns[:petite])
-      # Properties
-      raw[:style_notes]                = book.cell(row_num, columns[:style_notes])
-      raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
       raw[:fit]                        = book.cell(row_num, columns[:fit])
-      raw[:size]                       = book.cell(row_num, columns[:size])
-      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT
-      raw[:fabric]                     = book.cell(row_num, columns[:fabric])
-      raw[:product_type]               = book.cell(row_num, columns[:product_type])
-      raw[:product_category]           = book.cell(row_num, columns[:product_category])
-      raw[:factory_id]                 = book.cell(row_num, columns[:factory_id])
-      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
-      raw[:product_coding]             = book.cell(row_num, columns[:product_coding])
-      raw[:shipping]                   = book.cell(row_num, columns[:shipping])
-      raw[:stylist_quote_short]        = book.cell(row_num, columns[:stylist_quote_short])
-      raw[:stylist_quote_long]         = book.cell(row_num, columns[:stylist_quote_long])
-      raw[:product_details]            = book.cell(row_num, columns[:product_details])
-      raw[:revenue]                    = book.cell(row_num, columns[:revenue])
-      raw[:cogs]                       = book.cell(row_num, columns[:cogs])
-      raw[:color_customization]        = book.cell(row_num, columns[:color_customization])
-      raw[:available_colors]           = book.cell(row_num, columns[:available_colors])
-      raw[:standard_days_for_making]   = book.cell(row_num, columns[:standard_days_for_making])
-      raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
-      raw[:short_description]          = book.cell(row_num, columns[:short_description])
-
-      # Additional
-      raw[:song_link]                  = book.cell(row_num, columns[:song_link])
-      raw[:song_name]                  = book.cell(row_num, columns[:song_name])
-
+      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT      
+      raw[:recommended_fabric_colors]  = book.cell(row_num, columns[:recommended_fabric_colors])
+      raw[:fabric_information]         = Array.wrap(columns[:fabric_information]).map { |i| book.cell(row_num, i) }
+      raw[:custom_fabric_colors]       = Array.wrap(columns[:custom_fabric_colors]).map { |i| book.cell(row_num, i) }
       raw[:customizations] = []
       columns[:customizations].each_with_index do |customization, index|
         raw[:customizations] << {
@@ -207,11 +186,15 @@ module Products
           position: index + 1
         }
       end
+      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])      
+      raw[:product_category]           = book.cell(row_num, columns[:product_category])
+      raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
+
       info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
       raw
     end
 
-    private def process_raw_row_data(raw)
+    private def process_raw_row_data(raw, color_data)
       processed = {}
 
       if raw[:sku].present?
@@ -236,10 +219,6 @@ module Products
         processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
       end
 
-      if raw[:short_description].present?
-        processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
-      end
-
       range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
 
       processed[:taxon_ids] = []
@@ -253,14 +232,18 @@ module Products
 
       processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
-      # :colors is the legacy recommended colors.
-      # :recommended_colors will each have a variant built from them
-      # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
-      processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
-      recommended_colors             = get_color_options(raw[:colors])
-      available_colors               = get_color_options(raw[:available_colors].to_s.split(','))
-      processed[:recommended_colors] = recommended_colors
-      processed[:available_colors]   = Set.new(available_colors + recommended_colors).to_a
+      # Turn the different color codes into the their color maps
+      recommended_fabric_color_codes = raw[:recommended_fabric_colors].split( ',' ).collect(&:strip)
+      processed[:recommended_fabric_colors] = recommended_fabric_color_codes.map  {|color_code| lookup_color_code( color_code, color_data ) }
+      processed[:custom_fabric_colors] = raw[:custom_fabric_colors].map do |custom_fabric_color|
+        if( custom_fabric_color )
+          custom_fabric_color_codes = custom_fabric_color.split( ',' ).collect(&:strip)
+          custom_fabric_color_codes = custom_fabric_color_codes - recommended_fabric_color_codes
+          custom_fabric_color_codes.map {|color_code| lookup_color_code( color_code, color_data ) }
+        else
+          nil
+        end
+      end
 
       processed[:customizations] = []
       raw[:customizations].each do |customization|
@@ -268,10 +251,13 @@ module Products
           processed[:customizations] << customization
         end
       end
-
       processed
     end
 
+    private def lookup_color_code( color_code, color_data )
+      color_data[color_code.strip]
+    end
+    
     private def get_color_options(color_names)
       Array.wrap(color_names).map(&:strip).map do |human_color_name|
         find_or_create_color_option(presentation: human_color_name)
@@ -280,6 +266,18 @@ module Products
 
     class ColorOptionValue < Struct.new(:id, :name, :presentation); end
 
+    private def find_or_create_fabric_color_option(presentation)
+      fabric_color = Spree::OptionType.fabric_color.option_values.where('LOWER(presentation) = ?', presentation).first
+      
+      if( fabric_color.blank? )
+        fabric_color = Spree::OptionType.fabric_color.option_values.create do |object|
+          object.name         = presentation.downcase.gsub(' ', '-')
+          object.presentation = presentation
+        end
+      end
+      fabric_color
+    end
+    
     private def find_or_create_color_option(presentation:)
       color = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
 
@@ -294,7 +292,7 @@ module Products
       ColorOptionValue.new(color.id, color.name, color.presentation)
     end
 
-    private def build_item_hash(processed, raw)
+    private def build_item_hash(processed, raw, color_data)
       {
         # Basic
         sku:            processed[:sku] || raw[:sku],
@@ -304,53 +302,20 @@ module Products
         description:    processed[:description] || raw[:description],
         colors:         processed[:colors],
         taxon_ids:      processed[:taxon_ids],
-        style_profile:  {
-          glam:           raw[:glam],
-          girly:          raw[:girly],
-          classic:        raw[:classic],
-          edgy:           raw[:edgy],
-          bohemian:       raw[:bohemian],
-          sexiness:       raw[:sexiness],
-          fashionability: raw[:fashionability],
-          apple:          raw[:apple],
-          pear:           raw[:pear],
-          strawberry:     raw[:strawberry],
-          hour_glass:     raw[:hour_glass],
-          column:         raw[:column],
-          athletic:       raw[:athletic],
-          petite:         raw[:petite]
-        },
+        category: raw[:product_category],
+        sub_category: raw[:product_sub_category],
+        
         properties:     {
-          style_notes:                raw[:style_notes],
-          care_instructions:          raw[:care_instructions],
-          size:                       raw[:size],
           height_mapping_count:       raw[:height_mapping_count],
           fit:                        raw[:fit],
-          fabric:                     raw[:fabric],
-          product_type:               raw[:product_type],
-          product_category:           raw[:product_category],
-          factory_id:                 raw[:factory_id],
           factory_name:               raw[:factory_name],
-          product_coding:             raw[:product_coding],
-          shipping:                   raw[:shipping],
-          stylist_quote_short:        raw[:stylist_quote_short],
-          stylist_quote_long:         raw[:stylist_quote_long],
           product_details:            processed[:product_details],
-          revenue:                    raw[:revenue],
-          cogs:                       raw[:cogs],
-          video_id:                   processed[:video_id],
-          color_customization:        raw[:color_customization],
-          short_description:          raw[:short_description],
-          standard_days_for_making:   raw[:standard_days_for_making] || 5,
-          customised_days_for_making: raw[:customised_days_for_making] || 10
-        },
-        song:           {
-          link: raw[:song_link],
-          name: raw[:song_name],
         },
         customizations:     processed[:customizations],
-        recommended_colors: processed[:recommended_colors],
-        available_colors:   processed[:available_colors],
+        recommended_fabric_colors: processed[:recommended_fabric_colors],
+        custom_fabric_colors: processed[:custom_fabric_colors],
+        fabric_information: raw[:fabric_information],
+        color_data: color_data
       }
     end
 
@@ -368,44 +333,13 @@ module Products
           # price_in_aud: /rrp/i,
           price_in_usd:               /price usd/i,
           taxons:                     /taxons?? \d+/i,
-          colors:                     /(color|colour) \d+$/i,
-
-          # Style Profile
-          glam:                       /glam$/i,
-          girly:                      /girly$/i,
-          classic:                    /classic$/i,
-          edgy:                       /edgy$/i,
-          bohemian:                   /boho$/i,
-          sexiness:                   /sexy/i,
-          fashionability:             /fashion/i,
-          apple:                      /apple/i,
-          pear:                       /pear/i,
-          strawberry:                 /strawberry/i,
-          hour_glass:                 /hourglass|hourgalss/i,
-          column:                     /column/i,
-          athletic:                   /athletic/i,
-          petite:                     /petite/i,
-          # Properties
-          style_notes:                /styling notes/i,
-          care_instructions:          /care instructions/i,
-          fit:                        /fit/i,
-          size:                       /size/i,
-          fabric:                     /fabric/i,
-          product_type:               /product type/i,
-          product_category:           /product category/i,
-          factory_id:                 /factory id/i,
+          recommended_fabric_colors:  /recommended.*fabric.*/im,
+          fabric_information:         /fabric information \d+/i,
+          custom_fabric_colors:       /custom fabric & color \d+/i,
           factory_name:               /factory$/i,
-          color_customization:        /colour customisation/i,
-          available_colors:           /available colou?rs/i,
-          #product_coding: /product coding/i,
-          shipping:                   /shipping/i,
-          stylist_quote_short:        /stylist inspiration quote/i,
-          #stylist_quote_long: /expanded stylist quote/i,
-          product_details:            /product details/i,
-          short_description:          /short description/i,
-          standard_days_for_making:   /standard days for making/i,
-          customised_days_for_making: /customised days for making/i,
-          height_mapping_count: /height mapping count/i
+          product_category:           /product category/i,
+          product_sub_category:       /product sub-category/i,
+          height_mapping_count: /height mapping count/i          
       }
 
       conformities.each do |key, regex|
@@ -413,7 +347,6 @@ module Products
 
         book.row(main_column_heading_row).each_with_index do |title, index|
           next unless title.present?
-
           if title.strip =~ regex
             indexes << (index + 1)
           end
@@ -443,19 +376,6 @@ module Products
           }
       end
 
-      book.row(main_column_heading_row).each_with_index do |title, index|
-        next unless title =~ /Music Track Link/i
-        @codes[:song_link]      = index + 1
-        @codes[:song_name]      = index + 2
-      end
-
-
-      @codes[:revenue]        = 135
-      @codes[:cogs]           = 136
-      @codes[:product_coding] = 137
-      @codes[:video_id]       = 139 # 138 139 with
-      @codes[:short_description] = 140
-
       info "Found #{@codes.keys.count} keyed columns."
       @codes
     end
@@ -475,10 +395,11 @@ module Products
     # create product with restored data
     def create_or_update_products(products_attrs)
       info "Creating or Update Products"
-      products_attrs.map do |attrs|
+      products_attrs.reverse.map do |attrs|
         args = attrs.symbolize_keys
 
         begin
+          # Makes the basic product andi it's variant
           product = create_or_update_product(args)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
@@ -488,14 +409,12 @@ module Products
           )
 
           add_product_properties(product, args[:properties].symbolize_keys)
-          add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
-          add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
-          add_product_style_profile(product, args[:style_profile].symbolize_keys)
+          add_product_color_options(product, [args[:recommended_fabric_colors], *args[:custom_fabric_colors]].flatten)
+          fabric_products = add_product_color_fabrics( product, args[:recommended_fabric_colors], args[:custom_fabric_colors], args[:fabric_information] )
+          add_product_variants(product, sizes, fabric_products, args[:price_in_aud], args[:price_in_usd])
           add_product_customizations(product, args[:customizations] || [])
-          add_product_song(product, args[:song].symbolize_keys || {})
           add_product_layered_cads( product, args[:cads] || [] )
           add_product_height_ranges( product, args[:properties][:height_mapping_count].to_i )
-
           product
         end
       end.compact
@@ -503,6 +422,83 @@ module Products
 
     private
 
+    def add_product_color_fabrics( product, recommendend_fabric_colors, custom_fabric_colors, fabric_descriptions )
+      to_return = associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
+      custom_fabric_colors.each_with_index do |fabric_color, index|
+        # You can't just compact because it screws up the indexing with the fabric descriptions
+        puts "custom fabrics"
+        to_return += associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
+      end
+
+      to_return
+    end
+
+    private def find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, price )
+      puts "Color: #{fabric_name} for #{price}"
+      to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
+      presentation = "#{color_option.presentation} #{fabric_name}"
+      
+      fabric_color_option = find_or_create_fabric_color_option( presentation )
+      if( to_return.nil? )
+        to_return = Fabric.create do |object|
+          object.material = fabric_name
+          object.option_value_id = color_option.id
+          object.presentation = presentation
+          object.name = object.presentation.parameterize
+          object.option_fabric_color_value = fabric_color_option
+          object.price_aud = price
+          object.price_usd = price
+        end
+      else
+        # Clean up legacy fabrics
+        if( to_return.option_fabric_color_value.nil? )
+          to_return.option_fabric_color_value = fabric_color_option
+          to_return.save
+        end
+
+        if( price.present? )
+          to_return.price_aud = price
+          to_return.price_usd = price
+          to_return.save
+        end
+      end
+      
+      to_return
+    end
+
+    private def find_or_create_fabrics_product( fabric, product, fabric_descriptions, recommended )
+      to_return = FabricsProduct.find_by_fabric_id_and_product_id( fabric.id, product.id )
+      unless( to_return.present? )
+        to_return = FabricsProduct.create do |object|
+          object.fabric_id = fabric.id
+          object.product_id = product.id
+        end
+        
+        to_return.recommended = recommended
+        to_return.description = fabric_descriptions
+        to_return.save
+      end
+      to_return
+    end
+    
+    private def associate_fabrics_with_product( product, fabric_colors, fabric_description, recommended )
+      to_return = []
+      # How am I going to clean this up?
+      fabric_colors.each do |fabric_color|
+        
+        unless fabric_color.nil? || fabric_color.empty?
+          fabric_name = fabric_color[:fabric_name]
+          fabric_price = fabric_color[:fabric_price].present? ? fabric_color[:fabric_price].to_i : nil
+          color_option = get_color_options( [fabric_color[:color_name]] ).first        
+          fabric  = find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, fabric_price )
+          fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
+          to_return << fabric_product
+        end
+      end
+
+      to_return
+    end
+    
     def get_section_heading(sku:, name:)
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
@@ -530,16 +526,22 @@ module Products
         taxon_ids = taxon_ids | product.taxons.collect(&:id)
       end
 
+      category = Category.find_by_category_and_subcategory( args[:category], args[:sub_category] )
+      if( category.nil? )
+        raise "No category matching #{args[:category]} / #{args[:sub_category]}"
+      end
+      
       attributes = {
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
         taxon_ids: taxon_ids,
+        category_id: category.id,
         available_on: @available_on || product.available_on
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-
+      
       if product.persisted?
         attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id)
       end
@@ -596,6 +598,7 @@ module Products
 
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
+      
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
@@ -650,77 +653,108 @@ module Products
     end
 
 
-    def add_product_color_options(product, recommended_colors:, available_colors:)
+    def add_product_color_options(product, colors )
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      custom_colors = available_colors - recommended_colors
 
-      custom_colors.map do |custom|
-        c = product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
-        c.active = true
-        c.save!
-      end
-
-      recommended_colors.map do |recommended|
+      color_names = (colors.compact.collect {|color_map| color_map[:color_name] }).uniq
+      color_options = get_color_options( color_names)
+      color_options.map do |recommended|
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
 
-      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', recommended_colors.map(&:id)).destroy_all
+      # cleanup old color options
+      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_options.map(&:id)).destroy_all
     end
 
-    def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+    def add_product_variants(product, sizes, fabric_products, price_in_aud, price_in_usd)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
-      color_option = Spree::OptionType.color
-
-      product.option_types = [size_option, color_option]
+      fabric_option = Spree::OptionType.fabric_color
+      product.option_types = [size_option, fabric_option]
       product.save
 
       product.reload
+      sizes_to_process = sizes.clone
+      
+      threads = []
+      number_of_threads = 6
+      semaphore = Mutex.new
 
-      sizes.each do |size_name|
-        colors.each do |color_name|
-          size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
+      (1..number_of_threads).each do |thread_num|
+        threads << Thread.new do
+          size_name = "start"
+          while( size_name != nil ) do
+            semaphore.synchronize do
+              unless( sizes_to_process.empty? )
+                size_name = sizes_to_process.pop
+              else
+                size_name = nil
+              end
+            end
+            unless size_name.nil?
+              puts "Thread # #{thread_num} processing #{size_name}"              
+              fabric_products.each do |fabrics_product|
 
-          next if size_value.blank? || color_value.blank?
+                size_value  = size_option.option_values.where(name: size_name).first
+                fabric_color = fabrics_product.fabric.option_fabric_color_value
+                
+                next if size_value.blank? || fabric_color.blank?
 
-          variant = product.variants.detect do |variant|
-            [size_value.id, color_value.id].all? do |id|
-              variant.option_value_ids.include?(id)
+                variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
+                  [size_value.id, fabric_color.id].all? do |id|
+                    variant.reload.option_value_ids.include?(id)
+                  end
+                end
+                
+
+                variant = variant.reload unless variant.nil?
+                unless variant.present?
+                  variant = product.variants.build
+                  variant.option_values = [size_value, fabric_color]
+                end
+
+                # Avoids errors with Spree hooks updating lots and lots of orders.
+                # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+                variant.send :write_attribute, :on_demand, true
+                Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+                Spree::Variant.skip_callback( :save, :after, :process_backorders )
+                Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
+                
+                begin
+                  variant.save( :validate => false )
+                rescue Exception => e
+                  puts "Got exception "
+                  puts e
+                  variant.save(:validate => false )
+                end
+                  
+                
+                if price_in_aud.present?
+                  aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+                  aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
+                  aud.save!
+                end
+
+                if price_in_usd.present?
+                  usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+                  usd.amount = price_in_usd+ fabrics_product.fabric.price_usd.to_f
+                  usd.save!
+                end
+
+                semaphore.synchronize do
+                  variants.push(variant.id) if variant.persisted?
+                end
+              end
             end
           end
-
-          unless variant.present?
-            variant = product.variants.build
-            variant.option_values = [size_value, color_value]
-          end
-
-          # Avoids errors with Spree hooks updating lots and lots of orders.
-          # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-          variant.send :write_attribute, :on_demand, true
-
-          variant.save
-
-          if price_in_aud.present?
-            aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-            aud.amount = price_in_aud
-            aud.save!
-          end
-
-          if price_in_usd.present?
-            usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-            usd.amount = price_in_usd
-            usd.save!
-          end
-
-          variants.push(variant) if variant.persisted?
         end
       end
-
+      threads.each do |thread|
+        thread.join
+      end
       variants
-
-      product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
+      product.variants.where('id NOT IN (?)', variants).update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, array_of_attributes)
@@ -747,65 +781,11 @@ module Products
         end
 
         customization.update_attributes(attrs, without_protection: true)
-
+        customization.save( validate: false )
         customizations.push(customization)
       end
 
       customizations
-    end
-
-    def add_product_style_profile(product, args)
-      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      attributes = args.slice(:glam,
-                              :girly,
-                              :classic,
-                              :edgy,
-                              :bohemian,
-                              :sexiness,
-                              :fashionability,
-                              :apple,
-                              :pear,
-                              :strawberry,
-                              :hour_glass,
-                              :column,
-                              :athletic,
-                              :petite).select{ |name, value| value.present? }
-
-      attributes.each do |key, value|
-        attributes[key] = value.to_s.to_i
-      end
-
-      basic_style_names = [:glam, :girly, :classic, :edgy, :bohemian]
-      total = 0
-      factor = attributes.slice(*basic_style_names).values.sum / 10.0
-
-      unless factor.eql?(0.0)
-        basic_style_names.each do |style_name|
-          points = (attributes[style_name].to_i / factor).round
-
-          if total >= 10
-            points = 0
-          elsif (points + total) > 10
-            points = 10 - total
-          elsif basic_style_names.last.eql?(style_name) && (total + points) < 10
-            points = 10 - total
-          end
-
-          attributes[style_name] = points
-          total += points
-        end
-      end
-
-      product.style_profile.update_attributes(attributes)
-    end
-
-    def add_product_song(product, raw_attrs)
-      debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      if raw_attrs[:link].present?
-        song = product.inspirations.song.first || product.inspirations.song.build
-
-        song.update_attributes(content: raw_attrs[:link], name: raw_attrs[:name])
-      end
     end
 
     def add_product_prices(product, price, us_price = nil)
