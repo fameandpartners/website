@@ -35,7 +35,7 @@ module Api
         product = Spree::Product.find(params[:id])
 
         colors = product.product_color_values.active
-        fabrics = product.fabrics.active
+        fabrics = product.fabrics
         sizes = product.option_types.find_by_name('dress-size').option_values
         customisations = JSON.parse!(product.customizations)
 
