@@ -345,6 +345,7 @@ module Contentful
         mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : nil
         live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
         live_text_color = (main_header_container.respond_to? :live_text_color) ? main_header_container.live_text_color : '#fff'
+        tile_crop_edges_on_resize = (main_header_container.respond_to? :tile_crop_edges_on_resize) ? main_header_container.tile_crop_edges_on_resize.sort.join(',').downcase : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -364,10 +365,12 @@ module Contentful
           mobile_video: mobile_video,
           overlay_pids: overlay_pids,
           live_text: live_text,
-          live_text_color: live_text_color
+          live_text_color: live_text_color,
+          tile_crop_edges_on_resize: tile_crop_edges_on_resize
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
         carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
+        tile_crop_edges_on_resize = (main_header_container.respond_to? :tile_crop_edges_on_resize) ? main_header_container.tile_crop_edges_on_resize.sort.join(',').downcase : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -381,7 +384,8 @@ module Contentful
         {
           id: main_header_container.content_type.id,
           full_width_content_class: full_width_content_class,
-          carousel_items: carousel_items
+          carousel_items: carousel_items,
+          tile_crop_edges_on_resize: tile_crop_edges_on_resize
         }
       end
     end
