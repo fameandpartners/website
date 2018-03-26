@@ -34,14 +34,15 @@ module Api
       def show
         product = Spree::Product.find(params[:id])
 
-        colors = product.product_color_values
-        fabrics = product.fabrics
+        colors = product.product_color_values.active
+        fabrics = product.fabrics.active
         sizes = product.option_types.find_by_name('dress-size').option_values
         customisations = JSON.parse!(product.customizations)
 
 
         produt_viewmodel = {
           id: product.id,
+          masterVariantId: product.master.id,
           sku: product.master.sku,
           name: product.name,
           description: product.description,
@@ -81,51 +82,62 @@ module Api
           components: [
             colors.map {|c|
               {
+                id: c.option_value.id,
                 code: c.option_value.name,
                 name: c.option_value.presentation,
                 type: :color,
-                sort_order: c.option_value.position,
+                sortOrder: c.option_value.position,
                 hex: c.option_value.value,
-                img: c.option_value.image_file_name,
+                img: color_image(c.option_value.image_file_name),
                 incompatibilities: c.custom ? ['express_making'] : [],
-                is_recommended: !c.custom,
-                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE*100).to_i : 0
+                isRecommended: !c.custom,
+                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE*100).to_i : 0,
+
+                selectionType: "requiredOne"
               }
             },
 
             fabrics.map {|c|
               {
+                id: c.option_value.id,
                 code: c.option_value.name,
                 name: c.option_value.presentation,
                 type: :fabric,
-                sort_order: c.option_value.position,
+                sortOrder: c.option_value.position,
                 hex: c.option_value.value,
                 img: c.option_value.image_file_name,
                 incompatibilities: c.custom ? ['express_making'] : [],
-                is_recommended: !c.custom
+                isRecommended: !c.custom,
+
+                selectionType: "requiredOne"
               }
             },
 
             sizes.map {|c|
               {
+                id: c.id,
                 code: c.name,
                 name: c.presentation,
                 type: :size,
-                sort_order: c.position,
+                sortOrder: c.position,
                 # price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE*100).to_i : 0,
-                incompatibilities: []
+                incompatibilities: [],
+
+                selectionType: "requiredOne"
               }
             },
 
             customisations.map {|c|
               {
+                id: c['customisation_value']['id'],
                 code: c['customisation_value']['name'],
                 name: c['customisation_value']['presentation'],
                 type: :customisation,
-                sort_order: c['customisation_value']['position'],
+                sortOrder: c['customisation_value']['position'],
                 img: c['customisation_value']['image_file_name'],
                 incompatibilities: ['express_making'],
-                price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i
+                price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
+                selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple'
               }
             },
             [
@@ -134,7 +146,15 @@ module Api
                 name: "Express Making",
                 delivery_time: '2 weeks',
                 type: :making,
-                sort_order: 1,
+                sortOrder: 1,
+              },
+
+              {
+                code: 'free_returns',
+                name: "Free returns",
+                return_policy: "Returns blah blah",
+                type: :returns,
+                sortOrder: 1,
               }
             ]
           ].flatten,
@@ -176,14 +196,14 @@ module Api
                   url: image.attachment.url(image_size),
                 }
               },
-              sort_order: image.position,
-              content_type: image.attachment_content_type,
+              sortOrder: image.position,
+              contentType: image.attachment_content_type,
               options: [
                 image&.viewable&.option_value&.name
               ]
             }
           },
-          default_selections: [
+          defaultSelections: [
             product.master
           ]
         }
@@ -193,6 +213,13 @@ module Api
       private
       def find_product_property(product, property_name)
         product.product_properties.find {|pp| pp.property.name == property_name}&.value
+      end
+
+
+      def color_image(image_file_name)
+        return nil unless image_file_name
+
+        "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}"
       end
 
     end
