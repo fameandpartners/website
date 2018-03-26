@@ -87,6 +87,8 @@ module Feeds
             end
           end
 
+          variant_w_images.reject! {|var| var.nil?}
+
           variant_w_images.each do |variant|
             item = get_item_properties(product, variant)
 
@@ -112,6 +114,7 @@ module Feeds
 
     def variant_size_data(spree_product:, spree_variant:)
       size_presentation = nil
+
       price             = spree_variant.site_price_for(current_site_version)
 
       # if (size = spree_variant.dress_size)
