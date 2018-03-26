@@ -45,31 +45,38 @@ module Api
           sku: product.master.sku,
           name: product.name,
           description: product.description,
-          garment_care_description: "
+          garmentCareDescription: "
             <p>Professional dry-clean only. <br />
             See label for further details.</p>
           ",
-          style_description: find_product_property(product, 'style_notes'),
-          fabric_description: find_product_property(product, 'fabric'),
-          fit_description: find_product_property(product, 'fit'),
-          product_details_description: find_product_property(product, 'product_details'),
-          size_description: find_product_property(product, 'size'),
+          styleDescription: find_product_property(product, 'style_notes'),
+          fabricDescription: find_product_property(product, 'fabric'),
+          fitDescription: find_product_property(product, 'fit'),
+          productDetailsDescription: find_product_property(product, 'product_details'),
+          sizeDescription: find_product_property(product, 'size'),
+
+          returnDescription: "Shipping is free on your customized item. <a href="">Learn more</a>",
+          deliveryTimeDescription: "Estimated delivery 6 weeks.",
+
+
+          #deliveryTime: "Estimated delivery 2-3 weeks.",
+          #returnPolicy: "Shipping and returns are free.  <a href="">Learn more</a>",
 
 
           meta: {
             keywords: product.meta_keywords,
             # description: '',
-            perma_link: product.permalink
+            permaLink: product.permalink
           },
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
-          payment_methods: {
-            after_pay: current_site_version.is_australia?
+          paymentMethods: {
+            afterPay: current_site_version.is_australia?
           },
           size: {
-            min_height_cm: MIN_CM,
-            max_height_cm: MAX_CM,
-            inch_selection: INCH_SIZES.map {|i| i[:totalInches]},
-            size_chart: product.size_chart,
+            minHeightCm: MIN_CM,
+            maxHeightCm: MAX_CM,
+            inchSelection: INCH_SIZES.map {|i| i[:totalInches]},
+            sizeChart: product.size_chart,
           },
           components: [
             colors.map {|c|
