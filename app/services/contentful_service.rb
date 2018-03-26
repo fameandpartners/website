@@ -173,7 +173,7 @@ module Contentful
       desktop_image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
       mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : desktop_image
       desktop_video = (fetched_lg_container.respond_to? :video_desktop) ? fetched_lg_container.video_desktop.url : nil
-      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : desktop_video
+      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : nil
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
         editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
@@ -424,7 +424,7 @@ module Contentful
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
         desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
-        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : nil
         tile_url = (item.respond_to? :tile_url) ? item.tile_url : nil
 
         if full_width_content == 'desktop,mobile'
