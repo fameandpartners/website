@@ -128,7 +128,7 @@ module Api
                 name: c['customisation_value']['presentation'],
                 type: :customisation,
                 sortOrder: c['customisation_value']['position'],
-                img: c['customisation_value']['image_file_name'],
+                img: customization_image(c['customisation_value']),
                 incompatibilities: ['express_making'],
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
               }
@@ -200,9 +200,24 @@ module Api
               ]
             }
           },
-          defaultSelections: [
-            product.master
-          ]
+
+          layerCads: product.layer_cads.map { |lc|
+            {
+              url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
+              width: lc.width,
+              height: lc.height,
+              sortOrder: lc.position,
+              type:  lc.base_image_name ? :base : :layer,
+              components: lc.customizations_enabled_for.map.with_index { |active, index|
+                active ? customisations[index]['customisation_value']['name'] : nil
+              }.compact
+            }
+          },
+
+
+          #defaultSelections: [
+          #  product.master
+          #]
         }
         respond_with produt_viewmodel.to_json
       end
@@ -217,6 +232,12 @@ module Api
         return nil unless image_file_name
 
         "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}"
+      end
+
+      def customization_image(customization)
+        return nil unless customization['image_file_name']
+
+        "#{configatron.asset_host}/system/images/#{customization['id']}/original/#{customization['image_file_name']}"
       end
 
     end
