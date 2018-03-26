@@ -43,6 +43,6 @@ every(30.minutes) { rake 'next:workers:asn_file_upload' }
 every(6.hours) { rake 'reports:order_bot_failure_check' }
 
 # Refulfillment and batching
-every(1.minutes) {runner 'Refulfiller.check_last_n_minutes(25)'}
+every(15.minutes) {runner 'Refulfiller.check_last_n_minutes(25)'}
 every(5.minutes) {runner 'Batcher.check_last_n_minutes(10)'}
-every(12.hours) {runner 'Batch.groom_all_batch_collections'}
+every(1.hours) {runner 'Batch.groom_all_batch_collections'}
