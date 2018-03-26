@@ -24,13 +24,14 @@ namespace :newgistics do
           autorefund_items(order, item_return['Items'])
         end
         
+        order.reload
         failed_items = order.line_items.select do |li|
           (CustomItemSku.new(li).call == item_return['Items']['Item']['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
         end
 
         failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
 
-        unless failed_items.empty?
+        unless failed_items.nil? || failed_items.empty?
 
           newgistics_order_id = item_return['orderID']
           inventory_response = client.get_inventory_details(scheduler.last_successful_run)
@@ -47,11 +48,11 @@ namespace :newgistics do
           end
         end
 
-        unless damaged_inventory_items.empty?
+        unless damaged_inventory_items.nil? || damaged_inventory_items.empty?
           DamagedReturnsMailer.email(order, damaged_inventory_items)
         end
 
-        unless quarantined_inventory_items.empty?
+        unless quarantined_inventory_items.nil? || quarantined_inventory_items.empty?
           QuarantinedReturnsMailer.email(order, damaged_inventory_items)
         end
 
@@ -68,7 +69,7 @@ def autorefund_items(order, items)
       line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
                         .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
       line_items.each do |li| # iterate over line_items and and move them along event progression.
-        receive_return(order, li)
+        #receive_return(order, li)
 
         accept_return(order, li)
 
@@ -85,9 +86,7 @@ def accept_return(order, line_item)
     comment: 'Returned to Newgistics'
   }
 
-  event = line_item.item_return(item_return_id: line_item.item_return.id)
-                   .events
-                   .send('approve').build
+  event = line_item.item_return(item_return_id: line_item.item_return.id).events.send('approve').build
   form = ::Forms::ApproveForm.new(event)
   form.validate(form_data) && form.save
 end
@@ -95,7 +94,7 @@ end
 def receive_return(order, line_item)
   form_data = {
     user: order.email,
-    comment: ''
+    comment: 'Recieved'
   }
 
   event = line_item.item_return(item_return_id: line_item.item_return.id)
