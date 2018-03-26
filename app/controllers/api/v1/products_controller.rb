@@ -92,8 +92,6 @@ module Api
                 incompatibilities: c.custom ? ['express_making'] : [],
                 isRecommended: !c.custom,
                 price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE*100).to_i : 0,
-
-                selectionType: "requiredOne"
               }
             },
 
@@ -108,8 +106,6 @@ module Api
                 img: c.option_value.image_file_name,
                 incompatibilities: c.custom ? ['express_making'] : [],
                 isRecommended: !c.custom,
-
-                selectionType: "requiredOne"
               }
             },
 
@@ -122,8 +118,6 @@ module Api
                 sortOrder: c.position,
                 # price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE*100).to_i : 0,
                 incompatibilities: [],
-
-                selectionType: "requiredOne"
               }
             },
 
@@ -137,7 +131,6 @@ module Api
                 img: c['customisation_value']['image_file_name'],
                 incompatibilities: ['express_making'],
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
-                selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple'
               }
             },
             [
@@ -161,26 +154,30 @@ module Api
           groups: [
             sizes.length > 0 && {
               name: 'Size',
-              change_button_text: "Select",
+              changeButtonText: "Select",
+              selectionType: "requiredOne",
               components: sizes.map(&:name)
             } || nil,
 
             colors.length > 0 && {
               name: 'Color',
-              change_button_text: "Change",
+              changeButtonText: "Change",
+              selectionType: "requiredOne",
               components: colors.map {|c| c.option_value.name}
             } || nil,
 
             fabrics.length > 0 && {
               name: 'Fabric',
-              change_button_text: "Change",
+              changeButtonText: "Change",
+              selectionType: "requiredOne",
               components: fabrics.map {|f| f.option_value.name}
             } || nil,
 
             customisations.length > 0 && {
               name: 'Customize',
-              change_button_text: "Change",
-              components: customisations.map {|f| f['customisation_value']['name']}
+              changeButtonText: "Change",
+              components: customisations.map {|f| f['customisation_value']['name']},
+              selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple'
             } || nil
           ].compact,
           media: product.images.map {|image|
