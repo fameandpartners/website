@@ -248,6 +248,9 @@ module Api
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
               }
             },
+
+            product.id == 1009 ? FAKE_COMPONENTS : nil,
+
             [
               {
                 code: 'express_making',
@@ -335,7 +338,9 @@ module Api
                   ]
                 }
               ]
-            } || nil
+            } || nil,
+
+            product.id == 1009 ? FAKE_GROUPS : nil,
           ].compact,
           media: product.images.map {|image|
             {
