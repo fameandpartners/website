@@ -89,7 +89,7 @@ module Orders
           end
 
           #filter out any items that have shipping info
-          if (@refulfill_only || @batch_only || @making_only) && li.line_item_update
+          if (@refulfill_only || @ready_batches || @batch_only || @making_only) && li.line_item_update
             next
           end
 
