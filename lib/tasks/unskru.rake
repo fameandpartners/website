@@ -84,7 +84,6 @@ namespace :data do
 
     fark = Time.parse('18-9-2017')
     upcs = GlobalSku.where("created_at > ?", fark)
-    binding.pry
 
     upc_dups = GlobalSku.where("created_at > ?", fark).map do |upc|
       gsku = GlobalSku.find upc
@@ -108,6 +107,5 @@ namespace :data do
     #   duper.last[0].map(&:sku)
     # end
 
-    binding.pry
   end
 end

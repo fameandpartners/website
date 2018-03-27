@@ -11,6 +11,7 @@ module Orders
       def_delegators :@item,
                      :variant,
                      :personalization
+                     :refulfill
 
       def initialize(item, wrapped_order = item.order)
         @item = item
@@ -89,6 +90,14 @@ module Orders
       def sample_sale?
          !item.stock.nil?
       end
+
+      # def refulfill_item?
+      #   !item.refulfill.nil?
+      # end
+
+      # def refulfill_status
+      #   item.refulfill_status
+      # end
 
       def fabric_swatch?
         item.product&.category&.category == 'Sample'

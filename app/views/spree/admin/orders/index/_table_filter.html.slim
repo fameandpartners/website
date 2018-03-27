@@ -82,24 +82,35 @@
     .four.columns.alpha
       .checkbox
         label
-          = f.check_box :inventory_units_shipment_id_null, {}, '1', '0'
-          '
-          = t(:show_only_unfulfilled_orders)
-      .checkbox
-        label
-          = f.check_box :sample_sale_only, {:checked => @sample_only}, '1', ''
-          '
-          = 'Show Only Sample Sale Items'
-      .checkbox
-        label
           = f.check_box :completed_at_not_null, {:checked => @show_only_completed}, '1', ''
           '
-          = t(:show_only_complete_orders)    
+          = t(:show_only_complete_orders)
       .checkbox
         label
           = f.check_box :hide_line_items, {:checked => hide_line_items }, 'true', ''
           '
           = t(:hide_line_items)
+    .eight.columns
+      .checkbox
+        label
+          = f.check_box :refulfill_only, {:checked => @refulfill_only}, '1', ''
+          '
+          = 'Export Refulfill Items'
+      .checkbox
+        label
+          = f.check_box :batch_only, {:checked => @batch_only}, '1', ''
+          '
+          = 'Export Upcoming Batch Items'
+      .checkbox
+        label
+          = f.check_box :ready_batches, {:checked => @ready_batches}, '1', ''
+          '
+          = 'Export Batches Ready for production'
+      .checkbox
+        label
+          = f.check_box :making_only, {:checked => @making_only}, '1', ''
+          '
+          = 'Export Items Ready for Production'
 
     .clearfix
     .actions.filter-actions

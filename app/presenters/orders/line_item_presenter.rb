@@ -54,7 +54,7 @@ module Orders
       if personalizations?
         CustomItemSku.new(item).call
       else
-        variant.sku
+        variant&.sku
       end
     end
 
@@ -175,6 +175,10 @@ module Orders
       (available_making_options || []).map do |mo|
         { id: mo.id, name: mo.name, display_discount: mo.display_discount }
       end
+    end
+
+    def refulfill_status
+      item.refulfill_status
     end
 
   end
