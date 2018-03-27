@@ -88,8 +88,8 @@ module Orders
             next
           end
 
-          # only show
-          if @refulfill_only && li.refulfill_status.nil?
+          # filter for refulfill items that have no shipping info
+          if @refulfill_only && (li.refulfill_status.nil? || li.line_item_update)
             next
           end
 
