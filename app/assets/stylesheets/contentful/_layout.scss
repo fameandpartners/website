@@ -184,9 +184,3 @@ body {
     @include crop-media-edges-on-resize;
   }
 }
-
-@include breakpoint(tablet) {
-  .u-crop-media-edges-on-resize--desktop {
-    @include crop-media-edges-on-resize;
-  }
-}
