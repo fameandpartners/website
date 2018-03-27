@@ -286,6 +286,7 @@ module Api
             colors.length > 0 && {
               title: 'Color',
               changeButtonText: "Change",
+              type: :color,
               sectionGroups: [
                 {
                   title: "Color",
@@ -302,6 +303,7 @@ module Api
             fabrics.length > 0 && {
               title: 'Fabric',
               changeButtonText: "Change",
+              type: :fabric,
               sectionGroups: [
                 {
                   title: "Color & Fabric",
@@ -319,7 +321,8 @@ module Api
             customisations.length > 0 && {
               title: 'Customize',
               changeButtonText: "Change",
-              selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple',
+              type: :customisation,
+
               sectionGroups: [
                 {
                   title: "Customize",
@@ -327,6 +330,7 @@ module Api
                     {
                       title: "Select your customizations",
                       options: customisations.map {|f| f['customisation_value']['name']},
+                      selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple',
                     }
                   ]
                 }
