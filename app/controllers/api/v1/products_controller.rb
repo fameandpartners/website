@@ -23,8 +23,120 @@ INCH_SIZES = [
 ]
 MIN_CM = 147
 MAX_CM = 193
+MIN_INCH = 58
+MAX_INCH = 76
 
 PRODUCT_IMAGE_SIZES = [:original, :product]
+
+
+FAKE_COMPONENTS = [
+  {code: 'BC1', name: 'Strapless'},
+  {code: 'BC2', name: 'Strappy'},
+  {code: 'BC3', name: 'Classic'},
+  {code: 'BC4', name: 'Relaxex'},
+  {code: 'BC5', name: 'One-Shoulder'},
+  {code: 'BC6', name: 'Tri-Cup'},
+  {code: 'BC7', name: 'Draped'},
+  {code: 'T76', name: 'Subtle Sweetheart Neckline'},
+  {code: 'T2', name: 'Curved Neckline'},
+  {code: 'T3', name: 'Sweetheart Neckline'},
+  {code: 'T4', name: 'Straight Neckline'},
+  {code: 'T1', name: 'Strapless With Straight Neckline'},
+  {code: 'T11', name: 'V-Back Neckline'},
+  {code: 'T15', name: 'Plunging V-Back Neckline'},
+  {code: 'T2', name: 'Curved Back Neckline'},
+  {code: 'WB1', name: 'Standard'},
+  {code: 'WB2', name: 'Wide'},
+  {code: 'T51', name: 'Off-Sholder Sleeves'},
+  {code: 'T31', name: 'Off-Shoulder Panel'},
+  {code: 'T52', name: 'Wide Arm Ties'},
+  {code: 'T22', name: 'Fixed Spaghetti Straight Straps'},
+  {code: 'T26', name: 'Fixed Spaghetti Cross Back Straps'},
+  {code: 'T71', name: 'Narrow Adjustable Straight Straps'},
+  {code: 'T85', name: 'Narrow Adjustable Cross Back Straps'},
+  {code: 'T30', name: 'Wide Fixed Straight Straps'},
+  {code: 'T25', name: 'Wide Fixed Cross Back Straps'},
+  {code: 'T33', name: 'Wide Tie Straps'},
+  {code: 'T60', name: 'Side Cut-Outs'},
+  {code: 'T58', name: 'Bow'},
+  {code: 'A5', name: 'Cape'},
+  {code: 'T52', name: 'Wide Arm Ties'},
+]
+
+FAKE_GROUPS = [
+  {
+    title: "Silhouette",
+    sectionGroups: [
+      {
+        title: "Style",
+        sections: [
+          {
+            title: "Select your style",
+            components: [
+              'BC1', 'BC2', 'BC3', 'BC4', 'BC5', 'BC6', 'BC7'
+            ]
+          }
+        ]
+      },
+      {
+        title: "Length",
+        sections: [
+          {
+            title: "Select your length",
+            components: [
+              'extra-mini', 'mini', 'midi', 'maxi', 'knee'
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Customization",
+    sectionGroups: [
+      {
+        title: "Front & Back",
+        sections: [
+          {
+            title: "Select your front",
+            components: ["T76", "T2", "T3", "T4"]
+          },
+          {
+            title: "Select your back",
+            components: ["T1", "T11", "T15", "T2"]
+          },
+          {
+            title: "Select your waistband",
+            components: ["WB1", "WB2"]
+          }
+        ]
+      },
+      {
+        title: "Straps & Sleeves",
+        sections: [
+          {
+            title: "Select your straps & sleeves",
+            components: [
+              "T22", "T26", "T71", "T30", "T30", "T33", "T34", "T68", "T51", "T31", "T52", "T25", "T85", "T71"
+            ]
+          }
+        ]
+      },
+      {
+        title: "Extras",
+        sections: [
+          {
+            title: "Select your extras",
+            components: [
+              "T60", "T58", "A5", "T52"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+
 
 module Api
   module V1
@@ -56,7 +168,7 @@ module Api
           productDetailsDescription: find_product_property(product, 'product_details'),
           sizeDescription: find_product_property(product, 'size'),
 
-          returnDescription: "Shipping is free on your customized item. <a href="">Learn more</a>",
+          returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
 
 
@@ -76,7 +188,8 @@ module Api
           size: {
             minHeightCm: MIN_CM,
             maxHeightCm: MAX_CM,
-            inchSelection: INCH_SIZES.map {|i| i[:totalInches]},
+            minHeightInch: MIN_INCH,
+            maxHeightInch: MAX_INCH,
             sizeChart: product.size_chart,
           },
           components: [
@@ -91,7 +204,7 @@ module Api
                 img: color_image(c.option_value.image_file_name),
                 incompatibilities: c.custom ? ['express_making'] : [],
                 isRecommended: !c.custom,
-                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE*100).to_i : 0,
+                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
               }
             },
 
@@ -114,6 +227,8 @@ module Api
                 id: c.id,
                 code: c.name,
                 name: c.presentation,
+                name_us: c.name.split("/")[0],
+                name_au: c.name.split("/")[1],
                 type: :size,
                 sortOrder: c.position,
                 # price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE*100).to_i : 0,
@@ -153,31 +268,69 @@ module Api
           ].flatten,
           groups: [
             sizes.length > 0 && {
-              name: 'Size',
+              title: 'Size',
               changeButtonText: "Select",
-              selectionType: "requiredOne",
-              components: sizes.map(&:name)
+              type: :size,
+              sectionGroups: [
+                {
+                  title: "Size",
+                  sections: [
+                    {
+                      title: "Select your height and size",
+                      selectionType: "requiredOne",
+                      options: sizes.map(&:name)
+                    }]
+                }]
             } || nil,
 
             colors.length > 0 && {
-              name: 'Color',
+              title: 'Color',
               changeButtonText: "Change",
-              selectionType: "requiredOne",
-              components: colors.map {|c| c.option_value.name}
+              sectionGroups: [
+                {
+                  title: "Color",
+                  sections: [
+                    {
+                      title: "Select your color",
+                      options: colors.map {|c| c.option_value.name},
+                      selectionType: "requiredOne",
+                    }]
+                }
+              ]
             } || nil,
 
             fabrics.length > 0 && {
-              name: 'Fabric',
+              title: 'Fabric',
               changeButtonText: "Change",
-              selectionType: "requiredOne",
-              components: fabrics.map {|f| f.option_value.name}
+              sectionGroups: [
+                {
+                  title: "Color & Fabric",
+                  sections: [
+                    {
+                      title: "Select your color & fabric",
+                      options: fabrics.map {|f| f.option_value.name},
+                      selectionType: "requiredOne",
+
+                    }]
+                }
+              ]
             } || nil,
 
             customisations.length > 0 && {
-              name: 'Customize',
+              title: 'Customize',
               changeButtonText: "Change",
-              components: customisations.map {|f| f['customisation_value']['name']},
-              selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple'
+              selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple',
+              sectionGroups: [
+                {
+                  title: "Customize",
+                  section: [
+                    {
+                      title: "Select your customizations",
+                      options: customisations.map {|f| f['customisation_value']['name']},
+                    }
+                  ]
+                }
+              ]
             } || nil
           ].compact,
           media: product.images.map {|image|
@@ -201,14 +354,14 @@ module Api
             }
           },
 
-          layerCads: product.layer_cads.map { |lc|
+          layerCads: product.layer_cads.map {|lc|
             {
               url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
               width: lc.width,
               height: lc.height,
               sortOrder: lc.position,
-              type:  lc.base_image_name ? :base : :layer,
-              components: lc.customizations_enabled_for.map.with_index { |active, index|
+              type: lc.base_image_name ? :base : :layer,
+              components: lc.customizations_enabled_for.map.with_index {|active, index|
                 active ? customisations[index]['customisation_value']['name'] : nil
               }.compact
             }
