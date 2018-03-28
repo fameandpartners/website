@@ -22,8 +22,10 @@ namespace :data do
 		lips = LineItemPersonalization.where(product_id: prod.id)
 
 		lips.each do |lip|
-			lip.sku = lip.sku.sub('FP2652','FP3126')
-			lip.save
+			if lip.line_item 
+				lip.sku = lip.sku.sub('FP2652','FP3126')
+				lip.save
+			end
 		end
 	end
 end
