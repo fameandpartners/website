@@ -30,37 +30,37 @@ PRODUCT_IMAGE_SIZES = [:original, :product]
 
 
 FAKE_COMPONENTS = [
-  {code: 'BC1', name: 'Strapless'},
-  {code: 'BC2', name: 'Strappy'},
-  {code: 'BC3', name: 'Classic'},
-  {code: 'BC4', name: 'Relaxex'},
-  {code: 'BC5', name: 'One-Shoulder'},
-  {code: 'BC6', name: 'Tri-Cup'},
-  {code: 'BC7', name: 'Draped'},
-  {code: 'T76', name: 'Subtle Sweetheart Neckline'},
-  {code: 'T2', name: 'Curved Neckline'},
-  {code: 'T3', name: 'Sweetheart Neckline'},
-  {code: 'T4', name: 'Straight Neckline'},
-  {code: 'T1', name: 'Strapless With Straight Neckline'},
-  {code: 'T11', name: 'V-Back Neckline'},
-  {code: 'T15', name: 'Plunging V-Back Neckline'},
-  {code: 'T2', name: 'Curved Back Neckline'},
-  {code: 'WB1', name: 'Standard'},
-  {code: 'WB2', name: 'Wide'},
-  {code: 'T51', name: 'Off-Sholder Sleeves'},
-  {code: 'T31', name: 'Off-Shoulder Panel'},
-  {code: 'T52', name: 'Wide Arm Ties'},
-  {code: 'T22', name: 'Fixed Spaghetti Straight Straps'},
-  {code: 'T26', name: 'Fixed Spaghetti Cross Back Straps'},
-  {code: 'T71', name: 'Narrow Adjustable Straight Straps'},
-  {code: 'T85', name: 'Narrow Adjustable Cross Back Straps'},
-  {code: 'T30', name: 'Wide Fixed Straight Straps'},
-  {code: 'T25', name: 'Wide Fixed Cross Back Straps'},
-  {code: 'T33', name: 'Wide Tie Straps'},
-  {code: 'T60', name: 'Side Cut-Outs'},
-  {code: 'T58', name: 'Bow'},
-  {code: 'A5', name: 'Cape'},
-  {code: 'T52', name: 'Wide Arm Ties'},
+  {code: 'BC1', name: 'Strapless', incompatibilities: []},
+  {code: 'BC2', name: 'Strappy', incompatibilities: []},
+  {code: 'BC3', name: 'Classic', incompatibilities: []},
+  {code: 'BC4', name: 'Relaxex', incompatibilities: []},
+  {code: 'BC5', name: 'One-Shoulder', incompatibilities: []},
+  {code: 'BC6', name: 'Tri-Cup', incompatibilities: []},
+  {code: 'BC7', name: 'Draped', incompatibilities: []},
+  {code: 'T76', name: 'Subtle Sweetheart Neckline', incompatibilities: []},
+  {code: 'T2', name: 'Curved Neckline', incompatibilities: []},
+  {code: 'T3', name: 'Sweetheart Neckline', incompatibilities: []},
+  {code: 'T4', name: 'Straight Neckline', incompatibilities: []},
+  {code: 'T1', name: 'Strapless With Straight Neckline', incompatibilities: []},
+  {code: 'T11', name: 'V-Back Neckline', incompatibilities: []},
+  {code: 'T15', name: 'Plunging V-Back Neckline', incompatibilities: []},
+  {code: 'T2', name: 'Curved Back Neckline', incompatibilities: []},
+  {code: 'WB1', name: 'Standard', incompatibilities: []},
+  {code: 'WB2', name: 'Wide', incompatibilities: []},
+  {code: 'T51', name: 'Off-Sholder Sleeves', incompatibilities: []},
+  {code: 'T31', name: 'Off-Shoulder Panel', incompatibilities: []},
+  {code: 'T52', name: 'Wide Arm Ties', incompatibilities: []},
+  {code: 'T22', name: 'Fixed Spaghetti Straight Straps', incompatibilities: []},
+  {code: 'T26', name: 'Fixed Spaghetti Cross Back Straps', incompatibilities: []},
+  {code: 'T71', name: 'Narrow Adjustable Straight Straps', incompatibilities: []},
+  {code: 'T85', name: 'Narrow Adjustable Cross Back Straps', incompatibilities: []},
+  {code: 'T30', name: 'Wide Fixed Straight Straps', incompatibilities: []},
+  {code: 'T25', name: 'Wide Fixed Cross Back Straps', incompatibilities: []},
+  {code: 'T33', name: 'Wide Tie Straps', incompatibilities: []},
+  {code: 'T60', name: 'Side Cut-Outs', incompatibilities: []},
+  {code: 'T58', name: 'Bow', incompatibilities: []},
+  {code: 'A5', name: 'Cape', incompatibilities: []},
+  {code: 'T52', name: 'Wide Arm Ties', incompatibilities: []},
 ]
 
 FAKE_GROUPS = [
@@ -72,7 +72,7 @@ FAKE_GROUPS = [
         sections: [
           {
             title: "Select your style",
-            components: [
+            options: [
               'BC1', 'BC2', 'BC3', 'BC4', 'BC5', 'BC6', 'BC7'
             ]
           }
@@ -83,7 +83,7 @@ FAKE_GROUPS = [
         sections: [
           {
             title: "Select your length",
-            components: [
+            options: [
               'extra-mini', 'mini', 'midi', 'maxi', 'knee'
             ]
           }
@@ -99,15 +99,15 @@ FAKE_GROUPS = [
         sections: [
           {
             title: "Select your front",
-            components: ["T76", "T2", "T3", "T4"]
+            options: ["T76", "T2", "T3", "T4"]
           },
           {
             title: "Select your back",
-            components: ["T1", "T11", "T15", "T2"]
+            options: ["T1", "T11", "T15", "T2"]
           },
           {
             title: "Select your waistband",
-            components: ["WB1", "WB2"]
+            options: ["WB1", "WB2"]
           }
         ]
       },
@@ -116,8 +116,8 @@ FAKE_GROUPS = [
         sections: [
           {
             title: "Select your straps & sleeves",
-            components: [
-              "T22", "T26", "T71", "T30", "T30", "T33", "T34", "T68", "T51", "T31", "T52", "T25", "T85", "T71"
+            options: [
+              "T22", "T26", "T71", "T30", "T33", "T34", "T68", "T51", "T31", "T52", "T25", "T85"
             ]
           }
         ]
@@ -127,7 +127,7 @@ FAKE_GROUPS = [
         sections: [
           {
             title: "Select your extras",
-            components: [
+            options: [
               "T60", "T58", "A5", "T52"
             ]
           }
@@ -329,7 +329,7 @@ module Api
               sectionGroups: [
                 {
                   title: "Customize",
-                  section: [
+                  sections: [
                     {
                       title: "Select your customizations",
                       options: customisations.map {|f| f['customisation_value']['name']},
@@ -341,7 +341,7 @@ module Api
             } || nil,
 
             product.id == 1009 ? FAKE_GROUPS : nil,
-          ].compact,
+          ].flatten.compact,
           media: product.images.map {|image|
             {
               type: :photo,
