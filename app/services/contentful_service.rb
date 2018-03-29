@@ -173,7 +173,7 @@ module Contentful
       desktop_image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
       mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : desktop_image
       desktop_video = (fetched_lg_container.respond_to? :video_desktop) ? fetched_lg_container.video_desktop.url : nil
-      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : desktop_video
+      mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : nil
 
       if (fetched_lg_container.content_type.id == 'ITEM--lg')
         editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
@@ -345,6 +345,7 @@ module Contentful
         mobile_video = (main_header_container.respond_to? :video_mobile) ? main_header_container.video_mobile.url : nil
         live_text = (main_header_container.respond_to? :live_text) ? main_header_container.live_text : nil
         live_text_color = (main_header_container.respond_to? :live_text_color) ? main_header_container.live_text_color : '#fff'
+        tile_crop_edges_on_resize = (main_header_container.respond_to? :tile_crop_edges_on_resize) ? main_header_container.tile_crop_edges_on_resize.sort.join(',').downcase : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -364,10 +365,12 @@ module Contentful
           mobile_video: mobile_video,
           overlay_pids: overlay_pids,
           live_text: live_text,
-          live_text_color: live_text_color
+          live_text_color: live_text_color,
+          tile_crop_edges_on_resize: tile_crop_edges_on_resize
         }
       elsif (main_header_container.content_type.id == 'HEADER--xl-editorial-carousel')
         carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
+        tile_crop_edges_on_resize = (main_header_container.respond_to? :tile_crop_edges_on_resize) ? main_header_container.tile_crop_edges_on_resize.sort.join(',').downcase : nil
         full_width_content = (main_header_container.respond_to? :full_width_content) ? main_header_container.full_width_content.sort.join(',').downcase : nil
 
         if full_width_content == 'desktop,mobile'
@@ -381,7 +384,8 @@ module Contentful
         {
           id: main_header_container.content_type.id,
           full_width_content_class: full_width_content_class,
-          carousel_items: carousel_items
+          carousel_items: carousel_items,
+          tile_crop_edges_on_resize: tile_crop_edges_on_resize
         }
       end
     end
@@ -420,7 +424,7 @@ module Contentful
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : desktop_image
         full_width_content = (item.respond_to? :full_width_content) ? item.full_width_content.sort.join(',').downcase : nil
         desktop_video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
-        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : desktop_video
+        mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : nil
         tile_url = (item.respond_to? :tile_url) ? item.tile_url : nil
 
         if full_width_content == 'desktop,mobile'

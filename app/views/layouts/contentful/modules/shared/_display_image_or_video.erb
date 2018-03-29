@@ -1,8 +1,9 @@
 <%= link_to_if_with_block item_url.present?, item_url do %>
-  <% # Load video if available, instead of images %>
+
+  <% # Desktop media %>
   <% if item_video.present? %>
     <video src="<%= item_video %>"
-      class="js-autoload-video Editorial__video <% item_video_mobile.present? ? 'hidden-xs hidden-sm' : nil %>"
+      class="js-autoload-video Editorial__video <%= item_video_mobile.present? || item_image_mobile.present? ? 'is-hidden-mobile' : nil %>"
       muted
       playsinline
       webkit-playsinline
@@ -12,29 +13,25 @@
       aria-hidden="false"
       poster="<%= item_image %>">
     </video>
-    <% if item_video_mobile.present? %>
-      <video src="<%= item_video_mobile %>"
-        class="js-autoload-video Editorial__video hidden-md hidden-lg"
-        muted
-        playsinline
-        webkit-playsinline
-        preload
-        autoplay
-        loop
-        aria-hidden="false"
-        poster="<%= item_image_mobile %>">
-      </video>
-    <% end %>
-
-  <% # Load image if no video is available %>
   <% else %>
-    <% # Currenly using Bulma's responsive width %>
-    <picture>
-      <source media="(max-width: 768px)" srcset="<%= item_image_mobile %>">
-      <source media="(min-width: 769px)" srcset="<%= item_image %>">
-      <img class="Editorial__image" src="<%= item_image %>" srcset="
-        <%= item_image_mobile %> 768w,
-        <%= item_image %> 769w">
-    </picture>
+    <img src="<%= item_image %>" class="Editorial__image is-hidden-mobile">
   <% end %>
+
+  <% # Mobile media %>
+  <% if item_video_mobile.present? %>
+    <video src="<%= item_video_mobile %>"
+      class="js-autoload-video Editorial__video <%= item_video.present? || item_image.present? ? 'is-hidden-tablet' : nil %>"
+      muted
+      playsinline
+      webkit-playsinline
+      preload
+      autoplay
+      loop
+      aria-hidden="false"
+      poster="<%= item_image_mobile %>">
+    </video>
+  <% else %>
+    <img src="<%= item_image_mobile %>" class="Editorial__image is-hidden-tablet">
+  <% end %>
+
 <% end %>
