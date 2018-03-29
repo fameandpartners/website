@@ -245,7 +245,7 @@ module Contentful
       elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
         relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
         background_color = (fetched_lg_container.respond_to? :background_color) ? fetched_lg_container.background_color : 'transparent'
-        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : 'black.jpg'
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : '#000'
         border_color = (fetched_lg_container.respond_to? :border_color) ? fetched_lg_container.border_color : 'transparent'
         button_label = (fetched_lg_container.respond_to? :button_label) ? fetched_lg_container.button_label : nil
 
