@@ -86,6 +86,10 @@ configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 
+configatron.node_pdp2_url = ENV['NODE2_CONTENT_URL']
+configatron.node_pdp2_regex = /dresses-new|dresses\/.*-[0-9]*/
+
+
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']
 configatron.order_bot_client_pass = ENV['ORDERBOT_PASS']
 
