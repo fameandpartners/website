@@ -8,41 +8,41 @@ PRODUCT_IMAGE_SIZES = [:original, :product]
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
 FAKE_COMPONENTS = [
-  {code: 'BC1', name: 'Strapless', incompatibilities: [], price: 100},
-  {code: 'BC2', name: 'Strappy', incompatibilities: [], price: 100},
-  {code: 'BC3', name: 'Classic', incompatibilities: [], price: 100},
-  {code: 'BC4', name: 'Relaxed', incompatibilities: [], price: 100},
-  {code: 'BC5', name: 'One-Shoulder', incompatibilities: [], price: 100},
-  {code: 'BC6', name: 'Tri-Cup', incompatibilities: [], price: 100},
-  {code: 'BC7', name: 'Draped', incompatibilities: [], price: 100},
-  {code: 'T76', name: 'Subtle Sweetheart Neckline', incompatibilities: [], price: 100},
-  {code: 'T2', name: 'Curved Neckline', incompatibilities: [], price: 100},
-  {code: 'T3', name: 'Sweetheart Neckline', incompatibilities: [], price: 100},
-  {code: 'T4', name: 'Straight Neckline', incompatibilities: [], price: 100},
-  {code: 'T1', name: 'Strapless With Straight Neckline', incompatibilities: [], price: 100},
-  {code: 'T11', name: 'V-Back Neckline', incompatibilities: [], price: 100},
-  {code: 'T15', name: 'Plunging V-Back Neckline', incompatibilities: [], price: 100},
-  {code: 'T2', name: 'Curved Back Neckline', incompatibilities: [], price: 100},
-  {code: 'WB1', name: 'Standard', incompatibilities: [], price: 100},
-  {code: 'WB2', name: 'Wide', incompatibilities: [], price: 100},
-  {code: 'T51', name: 'Off-Sholder Sleeves', incompatibilities: [], price: 100},
-  {code: 'T31', name: 'Off-Shoulder Panel', incompatibilities: [], price: 100},
-  {code: 'T52', name: 'Wide Arm Ties', incompatibilities: [], price: 100},
-  {code: 'T22', name: 'Fixed Spaghetti Straight Straps', incompatibilities: [], price: 100},
-  {code: 'T26', name: 'Fixed Spaghetti Cross Back Straps', incompatibilities: [], price: 100},
-  {code: 'T71', name: 'Narrow Adjustable Straight Straps', incompatibilities: [], price: 100},
-  {code: 'T85', name: 'Narrow Adjustable Cross Back Straps', incompatibilities: [], price: 100},
-  {code: 'T30', name: 'Wide Fixed Straight Straps', incompatibilities: [], price: 100},
-  {code: 'T25', name: 'Wide Fixed Cross Back Straps', incompatibilities: [], price: 100},
-  {code: 'T33', name: 'Wide Tie Straps', incompatibilities: [], price: 100},
-  {code: 'T60', name: 'Side Cut-Outs', incompatibilities: [], price: 100},
-  {code: 'T58', name: 'Bow', incompatibilities: [], price: 100},
-  {code: 'A5', name: 'Cape', incompatibilities: [], price: 100},
-  {code: 'extra-mini', name: 'Extra Mini', incompatibilities: [], price: 100},
-  {code: 'mini', name: 'Mini', incompatibilities: [], price: 100},
-  {code: 'midi', name: 'Midi', incompatibilities: [], price: 100},
-  {code: 'maxi', name: 'Maxi', incompatibilities: [], price: 100},
-  {code: 'knee', name: 'Knee', incompatibilities: [], price: 100},
+  {code: 'BC1', title: 'Strapless', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC2', title: 'Strappy', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC3', title: 'Classic', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC4', title: 'Relaxed', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC5', title: 'One-Shoulder', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC6', title: 'Tri-Cup', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'BC7', title: 'Draped', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T76', title: 'Subtle Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T2', title: 'Curved Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T3', title: 'Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T4', title: 'Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T1', title: 'Strapless With Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T11', title: 'V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T15', title: 'Plunging V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T2', title: 'Curved Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'WB1', title: 'Standard', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'WB2', title: 'Wide', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T31', title: 'Off-Shoulder Panel', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T52', title: 'Wide Arm Ties', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T22', title: 'Fixed Spaghetti Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T26', title: 'Fixed Spaghetti Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T71', title: 'Narrow Adjustable Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T85', title: 'Narrow Adjustable Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T30', title: 'Wide Fixed Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T25', title: 'Wide Fixed Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T33', title: 'Wide Tie Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T60', title: 'Side Cut-Outs', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T58', title: 'Bow', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'A5', title: 'Cape', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'extra-mini', title: 'Extra Mini', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'mini', title: 'Mini', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'midi', title: 'Midi', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'maxi', title: 'Maxi', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'knee', title: 'Knee', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
 ]
 
 FAKE_GROUPS = [
@@ -143,7 +143,7 @@ module Api
           returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
 
-          meta: {
+          curationMeta: {
             name: product.name,
             description: product.description,
             keywords: product.meta_keywords,
@@ -176,7 +176,7 @@ module Api
                 "meta": {
                   hex: c.option_value.value,
                   image: {
-                    src: color_image(c.option_value.image_file_name),
+                    url: color_image(c.option_value.image_file_name),
                     width: 0,
                     height: 0,
                   },
@@ -203,7 +203,7 @@ module Api
                 meta: {
                   # hex: c.option_value.value,
                   image: {
-                    src: c.image_url,
+                    url: c.image_url,
                     width: 0,
                     height: 0,
                   },
@@ -248,7 +248,7 @@ module Api
                 type: :customisation,
                 meta: {
                   image: {
-                    src: customization_image(c['customisation_value']),
+                    url: customization_image(c['customisation_value']),
                     width: -1,
                     height: -1
                   }
