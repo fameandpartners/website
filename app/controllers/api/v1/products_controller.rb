@@ -144,7 +144,7 @@ module Api
       respond_to :json
 
       def show
-        product = Spree::Product.find(params[:id])
+        product = Spree::Product.active.find(params[:id])
 
         colors = product.product_color_values.active
         fabrics = product.fabrics
@@ -170,11 +170,6 @@ module Api
 
           returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
-
-
-          #deliveryTime: "Estimated delivery 2-3 weeks.",
-          #returnPolicy: "Shipping and returns are free.  <a href="">Learn more</a>",
-
 
           meta: {
             keywords: product.meta_keywords,
@@ -210,15 +205,16 @@ module Api
 
             fabrics.map {|c|
               {
-                id: c.option_value.id,
-                code: c.option_value.name,
-                name: c.option_value.presentation,
+                id: c.id,
+                code: c.name,
+                name: c.presentation,
                 type: :fabric,
-                sortOrder: c.option_value.position,
-                hex: c.option_value.value,
-                img: c.option_value.image_file_name,
-                incompatibilities: c.custom ? ['express_making'] : [],
-                isRecommended: !c.custom,
+                # sortOrder: c.option_value.position,
+                # hex: c.option_value.value,
+                img: c.image_url,
+                incompatibilities: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
+                isRecommended: !c.price_in(current_site_version.currency)  == 0,
+                price: c.price_in(current_site_version.currency)
               }
             },
 
@@ -313,7 +309,7 @@ module Api
                   sections: [
                     {
                       title: "Select your color & fabric",
-                      options: fabrics.map {|f| f.option_value.name},
+                      options: fabrics.map {|f| f.name},
                       selectionType: "requiredOne",
 
                     }]
@@ -358,7 +354,8 @@ module Api
               sortOrder: image.position,
               contentType: image.attachment_content_type,
               options: [
-                image&.viewable&.option_value&.name
+                image&.viewable_type == "FabricsProduct" ? image&.viewable&.fabric&.name  : image&.viewable&.option_value&.name
+
               ]
             }
           },
