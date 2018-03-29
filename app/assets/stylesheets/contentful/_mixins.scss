@@ -40,3 +40,23 @@
   margin-left: calc(-50vw + 50%);
   padding: 0;
 }
+
+@mixin crop-media-edges-on-resize {
+  max-height: 100vh;
+  height: 150vw;
+  position: relative;
+  overflow: hidden;
+
+  video,
+  img {
+    position: absolute;
+    left: 50vw;
+    top: 49vh;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    max-width: 200vh;
+  }
+}

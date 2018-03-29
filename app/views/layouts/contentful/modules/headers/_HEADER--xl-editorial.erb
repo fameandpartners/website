@@ -1,11 +1,11 @@
 <% @lg_contents = contents %>
-<% (@lg_contents[:video].present? && @lg_contents[:mobile_video].nil?) ? no_mobile_video_class = 'u-overlay-area--noMobileMedia' : no_mobile_video_class = nil %>
+<% @lg_contents[:tile_crop_edges_on_resize].present? ? crop_edges_on_resize_class = contentful_get_tile_crop_edges_on_resize_class(@lg_contents[:tile_crop_edges_on_resize]) : crop_edges_on_resize_class = nil %>
 <div class="section-row columns">
   <div class="column is-full">
     <div class="Editorial Editorial--featured <%= contents[:full_width_content_class] %>">
-      <div class="u-overlay-area <%= no_mobile_video_class %>">
+      <div class="u-overlay-area <%= crop_edges_on_resize_class %>">
         <div class="u-overlay-area__media">
-          <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--lg", locals: {contents: contents}  %>
         </div>
         <% if contents[:live_text] %>
           <div class="u-overlay-area__overlay">
