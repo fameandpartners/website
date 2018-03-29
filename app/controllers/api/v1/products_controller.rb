@@ -1,26 +1,3 @@
-AU_SIZES = [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-US_SIZES = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
-INCH_SIZES = [
-  {id: 0, ft: 4, inch: 10, totalInches: 58},
-  {id: 1, ft: 4, inch: 11, totalInches: 59},
-  {id: 2, ft: 5, inch: 0, totalInches: 60},
-  {id: 3, ft: 5, inch: 1, totalInches: 61},
-  {id: 4, ft: 5, inch: 2, totalInches: 62},
-  {id: 5, ft: 5, inch: 3, totalInches: 63},
-  {id: 6, ft: 5, inch: 4, totalInches: 64},
-  {id: 7, ft: 5, inch: 5, totalInches: 65},
-  {id: 8, ft: 5, inch: 6, totalInches: 66},
-  {id: 9, ft: 5, inch: 7, totalInches: 67},
-  {id: 10, ft: 5, inch: 8, totalInches: 68},
-  {id: 11, ft: 5, inch: 9, totalInches: 69},
-  {id: 12, ft: 5, inch: 10, totalInches: 70},
-  {id: 13, ft: 5, inch: 11, totalInches: 71},
-  {id: 14, ft: 6, inch: 0, totalInches: 72},
-  {id: 15, ft: 6, inch: 1, totalInches: 73},
-  {id: 16, ft: 6, inch: 2, totalInches: 74},
-  {id: 17, ft: 6, inch: 3, totalInches: 75},
-  {id: 18, ft: 6, inch: 4, totalInches: 76}
-]
 MIN_CM = 147
 MAX_CM = 193
 MIN_INCH = 58
@@ -28,6 +5,7 @@ MAX_INCH = 76
 
 PRODUCT_IMAGE_SIZES = [:original, :product]
 
+CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
 FAKE_COMPONENTS = [
   {code: 'BC1', name: 'Strapless', incompatibilities: []},
@@ -160,26 +138,17 @@ module Api
 
         produt_viewmodel = {
           id: product.id,
-          masterVariantId: product.master.id,
-          sku: product.master.sku,
-          name: product.name,
-          description: product.description,
-          garmentCareDescription: "
-            <p>Professional dry-clean only. <br />
-            See label for further details.</p>
-          ",
-          styleDescription: find_product_property(product, 'style_notes'),
-          fabricDescription: find_product_property(product, 'fabric'),
-          fitDescription: find_product_property(product, 'fit'),
-          productDetailsDescription: find_product_property(product, 'product_details'),
-          sizeDescription: find_product_property(product, 'size'),
+          cartId: product.master.id,
+          previewType: product.id == 1009 ? :render : :illustration,
 
           returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
 
           meta: {
+            name: product.name,
+            description: product.description,
             keywords: product.meta_keywords,
-            # description: '',
+            styleDescription: find_product_property(product, 'style_notes'),
             permaLink: product.permalink
           },
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
@@ -196,58 +165,97 @@ module Api
           components: [
             colors.map {|c|
               {
-                id: c.option_value.id,
+                cartId: c.option_value.id,
                 code: c.option_value.name,
-                name: c.option_value.presentation,
-                type: :color,
-                sortOrder: c.option_value.position,
-                hex: c.option_value.value,
-                img: color_image(c.option_value.image_file_name),
-                incompatibilities: c.custom ? ['express_making'] : [],
+                isDefault: false,
                 isRecommended: !c.custom,
+                sortOrder: c.option_value.position,
+                title: c.option_value.presentation,
                 price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+                "isProductCode": true,
+                type: :color,
+                "meta": {
+                  hex: c.option_value.value,
+                  image: {
+                    src: color_image(c.option_value.image_file_name),
+                    width: 0,
+                    height: 0,
+                  },
+
+                  careDescription: CARE_DESCRIPTION,
+                  fabricDescription: find_product_property(product, 'fabric'),
+                },
+                incompatibleWith: c.custom ? ['express_making'] : [],
+                compatibleWith: [],
               }
             },
 
             fabrics.map {|c|
               {
-                id: c.id,
+                cartId: c.id,
                 code: c.name,
-                name: c.presentation,
-                type: :fabric,
-                # sortOrder: c.option_value.position,
-                # hex: c.option_value.value,
-                img: c.image_url,
-                incompatibilities: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
+                isDefault: false,
                 isRecommended: !c.price_in(current_site_version.currency)  == 0,
-                price: c.price_in(current_site_version.currency)
+                sortOrder: -1, #TODO
+                title: c.presentation,
+                price: c.price_in(current_site_version.currency),
+                "isProductCode": true,
+                type: :fabric,
+                meta: {
+                  # hex: c.option_value.value,
+                  image: {
+                    src: c.image_url,
+                    width: 0,
+                    height: 0,
+                  },
+
+                  care: CARE_DESCRIPTION,
+                  fabric: fabric.description || find_product_property(product, 'fabric'),
+                },
+                img: c.image_url,
+                incompatibleWith: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
+                compatibleWith: [],
               }
             },
 
             sizes.map {|c|
               {
-                id: c.id,
+                cartId: c.id,
                 code: c.name,
-                name: c.presentation,
-                name_us: c.name.split("/")[0],
-                name_au: c.name.split("/")[1],
-                type: :size,
+                isDefault: false,
                 sortOrder: c.position,
-                # price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE*100).to_i : 0,
-                incompatibilities: [],
+                title: c.presentation,
+                price: 0,
+                isProductCode: false,
+                type: :size,
+                meta: {
+                  sizeUs: c.name.split("/")[0],
+                  sizeAu: c.name.split("/")[1],
+                },
+                compatibleWith: [],
+                incompatibleWith: [],
               }
             },
 
             customisations.map {|c|
               {
-                id: c['customisation_value']['id'],
+                cartId: c['customisation_value']['id'],
                 code: c['customisation_value']['name'],
-                name: c['customisation_value']['presentation'],
-                type: :customisation,
+                isDefault: false,
                 sortOrder: c['customisation_value']['position'],
-                img: customization_image(c['customisation_value']),
-                incompatibilities: ['express_making'],
+                title: c['customisation_value']['presentation'],
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
+                isProductCode: true,
+                type: :customisation,
+                meta: {
+                  image: {
+                    src: customization_image(c['customisation_value']),
+                    width: -1,
+                    height: -1
+                  }
+                },
+                compatibleWith: [],
+                incompatibleWith: ['express_making'],
               }
             },
 
@@ -255,29 +263,41 @@ module Api
 
             [
               {
+                cartId: :todo,
                 code: 'express_making',
-                name: "Express Making",
-                delivery_time: '2 weeks',
-                type: :making,
+                isDefault: false,
                 sortOrder: 1,
-                incompatibilities: [],
+                title: "Express Making",
                 price: 1800,
+                isProductCode: false,
+                type: :making,
+                meta: {
+                  deliveryTimeDescription: '2 weeks',
+                },
+                compatibleWith: [],
+                incompatibleWith: [],
               },
-
               {
+                cartId: :todo,
                 code: 'free_returns',
-                name: "Free returns",
-                return_policy: "Returns blah blah",
-                type: :returns,
+                isDefault: false,
                 sortOrder: 1,
-                incompatibilities: [],
+                title: "Free returns",
                 price: 0,
+                isProductCode: :false,
+                type: :return,
+                meta: {
+                  returnPolicy: "Returns blah blah"
+                },
+                compatibleWith: [],
+                incompatibleWith: [],
               }
             ]
           ].flatten.compact,
           groups: [
             sizes.length > 0 && {
               title: 'Size',
+              sortOrder: 1,
               changeButtonText: "Select",
               type: :size,
               sectionGroups: [
@@ -351,6 +371,8 @@ module Api
           media: product.images.map {|image|
             {
               type: :photo,
+              fitDescription: find_product_property(product, 'fit'),
+              sizeDescription: find_product_property(product, 'size'),
               src: PRODUCT_IMAGE_SIZES.map {|image_size|
                 geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
 
@@ -362,7 +384,6 @@ module Api
                 }
               },
               sortOrder: image.position,
-              contentType: image.attachment_content_type,
               options: [
                 image&.viewable_type == "FabricsProduct" ? image&.viewable&.fabric&.name  : image&.viewable&.option_value&.name
 
@@ -382,11 +403,6 @@ module Api
               }.compact
             }
           },
-
-
-          #defaultSelections: [
-          #  product.master
-          #]
         }
         respond_with produt_viewmodel.to_json
       end
