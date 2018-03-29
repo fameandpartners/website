@@ -84,7 +84,7 @@ module Orders
             lip = Orders::LineItemPresenter.new(li)
           end
 
-          if PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
+          if (@refulfill_only || @batch_only || @ready_batches || @making_only) && PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
             next
           end
 
