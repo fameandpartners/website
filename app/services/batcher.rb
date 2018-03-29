@@ -6,7 +6,9 @@ module Batcher
 
   PRODUCTS_TO_IGNORE = [
     'RETURN_INSURANCE',
-    'Fabric Swatch - Heavy Georgette'
+    'Fabric Swatch - Heavy Georgette',
+    'Nova',
+    'Queen Of The Night Dress'
   ]
 
   def batch_line_items(line_items)
@@ -82,8 +84,8 @@ module Batcher
   end
 
   def get_line_items_between(start_time, end_time)
-    orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready')
-    orders = orders.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
+    orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready', state: 'complete')
+    orders = orders.select {|ord| ord.shipment&.shipped_at.blank? && ord.shipment&.tracking.blank? && (!ord.number.downcase.starts_with?('m') || !ord.number.downcase.starts_with?('e')) }
 
     lis = orders.map {|ord| ord.line_items}.flatten
     #if we ever do something crazy like a li being able to be in more than 1 batch_collection..change this code below
