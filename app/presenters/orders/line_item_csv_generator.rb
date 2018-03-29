@@ -117,7 +117,7 @@ module Orders
             line.order_state,
             line.order_number,
             # lip.sample_sale?,
-            li.refulfill_status,
+            li&.refulfill_status,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
