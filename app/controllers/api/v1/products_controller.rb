@@ -264,7 +264,7 @@ module Api
                 sortOrder: 1,
               }
             ]
-          ].flatten,
+          ].flatten.compact,
           groups: [
             sizes.length > 0 && {
               title: 'Size',
