@@ -88,7 +88,12 @@ module Orders
             next
           end
 
-          # only show
+          #filter out any items that have shipping info
+          if (@refulfill_only || @ready_batches || @batch_only || @making_only) && li.line_item_update
+            next
+          end
+
+          # filter for refulfill items that have no shipping info
           if @refulfill_only && li.refulfill_status.nil?
             next
           end
