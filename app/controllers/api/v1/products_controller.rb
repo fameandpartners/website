@@ -61,6 +61,11 @@ FAKE_COMPONENTS = [
   {code: 'T58', name: 'Bow', incompatibilities: []},
   {code: 'A5', name: 'Cape', incompatibilities: []},
   {code: 'T52', name: 'Wide Arm Ties', incompatibilities: []},
+  {code: 'extra-mini', name: 'Extra Mini', incompatibilities: []},
+  {code: 'mini', name: 'Mini', incompatibilities: []},
+  {code: 'midi', name: 'Midi', incompatibilities: []},
+  {code: 'maxi', name: 'Maxi', incompatibilities: []},
+  {code: 'knee', name: 'Knee', incompatibilities: []},
 ]
 
 FAKE_GROUPS = [
@@ -103,7 +108,7 @@ FAKE_GROUPS = [
           },
           {
             title: "Select your back",
-            options: ["T1", "T11", "T15", "T2"]
+            options: ["T1", "T11", "T15"]
           },
           {
             title: "Select your waistband",
@@ -129,7 +134,8 @@ FAKE_GROUPS = [
             title: "Select your extras",
             options: [
               "T60", "T58", "A5", "T52"
-            ]
+            ],
+            selectionType: "optionalMultiple"
           }
         ]
       }
@@ -254,6 +260,8 @@ module Api
                 delivery_time: '2 weeks',
                 type: :making,
                 sortOrder: 1,
+                incompatibilities: [],
+                price: 1800,
               },
 
               {
@@ -262,6 +270,8 @@ module Api
                 return_policy: "Returns blah blah",
                 type: :returns,
                 sortOrder: 1,
+                incompatibilities: [],
+                price: 0,
               }
             ]
           ].flatten.compact,
