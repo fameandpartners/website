@@ -408,6 +408,29 @@
   text-transform: uppercase;
 }
 
+.Btn__ctaHeroTile {
+  font-size: 1.6rem;
+  font-weight: 500;
+  width: fit-content;
+  margin: 40px auto 0;
+  padding: 8px 20px;
+  color: $c-neutral-white;
+  background: transparent;
+  border: 1px solid $c-neutral-white;
+}
+
+.Btn__ctaFade {
+  opacity: 1;
+  transition: opacity .5s ease;
+  -moz-transition: opacity .5s ease;
+  -webkit-transition: opacity .5s ease;
+  -o-transition: opacity .5s ease;
+}
+
+.Btn__ctaFade:hover {
+  opacity: .7;
+}
+
 .Btn__ctaSlimBorder--pink,
 .Btn__ctaSlimBorder--pink:hover {
   color: $c-brand-pink;

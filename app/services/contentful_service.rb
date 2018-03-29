@@ -25,14 +25,26 @@ module Contentful
 
         # Check Optional Fields
         heading = (item.respond_to? :heading) ? item.heading : nil
-        mobile_text = (item.respond_to? :mobile_text) ? item.mobile_text : nil
         sub_heading = (item.respond_to? :sub_heading) ? item.sub_heading : nil
-        cta = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
+        heading_mobile = (item.respond_to? :mobile_text) ? item.mobile_text : nil
+        subheading_mobile = (item.respond_to? :subheading_mobile) ? item.subheading_mobile : nil
+        mobile_text = (item.respond_to? :mobile_text) ? item.mobile_text : nil
+        cta_button_text = (item.respond_to? :cta_button_text) ? item.cta_button_text : nil
+        cta_button_background_color = (item.respond_to? :cta_button_background_color) ? item.cta_button_background_color : 'transparent'
+        cta_button_text_color = (item.respond_to? :cta_button_text_color) ? item.cta_button_text_color : '#fff'
+        cta_button_border_color = (item.respond_to? :cta_button_border_color) ? item.cta_button_border_color : '#fff'
         image = (item.respond_to? :image) ? item.image.url : nil
         mobile_image = (item.respond_to? :mobile_image) ? item.mobile_image.url : image
         video = (item.respond_to? :video_desktop) ? item.video_desktop.url : nil
         mobile_video = (item.respond_to? :video_mobile) ? item.video_mobile.url : video
         path_link = (item.respond_to? :path_link) ? item.path_link : nil
+        text_vertical_position = (item.respond_to? :vertical_position) ? item.vertical_position.downcase : nil
+        text_vertical_position_mobile = (item.respond_to? :vertical_position_mobile) ? item.vertical_position_mobile.downcase : nil
+        text_position = (item.respond_to? :text_position) ? item.text_position.downcase : nil
+        text_color = (item.respond_to? :text_color) ? item.text_color.downcase : nil
+        text_size = (item.respond_to? :text_size) ? item.text_size : nil
+        extra_padding_top = (item.respond_to? :extra_padding_top) ? item.extra_padding_top : '0px'
+        extra_padding_top_mobile = (item.respond_to? :extra_padding_top_mobile) ? item.extra_padding_top_mobile : '0px'
 
         hero_tile_site_version_array = (item.respond_to? :hero_tile_site_version) ? item.hero_tile_site_version.sort.join(',').downcase : nil
 
@@ -45,19 +57,24 @@ module Contentful
         {
           heading: heading,
           sub_heading: sub_heading,
-          mobile_text: mobile_text,
+          heading_mobile: heading_mobile,
+          subheading_mobile: subheading_mobile,
           image: image,
           mobile_image: mobile_image,
           video: video,
           mobile_video: mobile_video,
           link: path_link,
-          text_align: item.text_alignment,
-          text_position: item.text_position,
-          text_color: item.text_color,
-          text_size: item.text_size,
-          text_padding: item.text_padding,
-          cta_button_text: cta,
-          description: item.description,
+          text_vertical_position: text_vertical_position,
+          text_vertical_position_mobile: text_vertical_position_mobile,
+          text_position: text_position,
+          text_color: text_color,
+          text_size: text_size,
+          extra_padding_top: extra_padding_top,
+          extra_padding_top_mobile: extra_padding_top_mobile,
+          cta_button_text: cta_button_text,
+          cta_button_background_color: cta_button_background_color,
+          cta_button_text_color: cta_button_text_color,
+          cta_button_border_color: cta_button_border_color,
           hero_tile_site_version: hero_tile_site_version
         }
       end
@@ -228,7 +245,7 @@ module Contentful
       elsif (fetched_lg_container.content_type.id == 'ITEM--lg__cta-button')
         relative_url = (fetched_lg_container.respond_to? :relative_url) ? fetched_lg_container.relative_url : nil
         background_color = (fetched_lg_container.respond_to? :background_color) ? fetched_lg_container.background_color : 'transparent'
-        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : 'black.jpg'
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color : '#000'
         border_color = (fetched_lg_container.respond_to? :border_color) ? fetched_lg_container.border_color : 'transparent'
         button_label = (fetched_lg_container.respond_to? :button_label) ? fetched_lg_container.button_label : nil
 
