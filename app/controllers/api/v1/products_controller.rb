@@ -3,9 +3,12 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
+
 PRODUCT_IMAGE_SIZES = [:original, :product]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
+
+FAKE_PRODUCT_ID = 1619
 
 FAKE_COMPONENTS = [
   {code: 'BC1', title: 'Strapless', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
@@ -138,7 +141,7 @@ module Api
         produt_viewmodel = {
           id: product.id,
           cartId: product.master.id,
-          previewType: product.id == 1009 ? :render : :illustration,
+          previewType: product.id == FAKE_PRODUCT_ID ? :render : :illustration,
 
           returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
@@ -209,7 +212,7 @@ module Api
                   },
 
                   care: CARE_DESCRIPTION,
-                  fabric: fabric.description || find_product_property(product, 'fabric'),
+                  fabric: find_product_property(product, 'fabric'),
                 },
                 img: c.image_url,
                 incompatibleWith: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
@@ -258,7 +261,7 @@ module Api
               }
             },
 
-            product.id == 1623 ? FAKE_COMPONENTS : nil,
+            product.id == FAKE_PRODUCT_ID ? FAKE_COMPONENTS : nil,
 
             [
               {
@@ -271,7 +274,7 @@ module Api
                 isProductCode: false,
                 type: :making,
                 meta: {
-                  deliveryTimeDescription: '2 weeks',
+                  deliveryTimeDescription: 'Estimated delivery 2 weeks.',
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
@@ -283,7 +286,7 @@ module Api
                 sortOrder: 1,
                 title: "Free returns",
                 price: 0,
-                isProductCode: :false,
+                isProductCode: false,
                 type: :return,
                 meta: {
                   returnPolicy: "Returns blah blah"
@@ -365,7 +368,7 @@ module Api
               ]
             } || nil,
 
-            product.id == 1623 ? FAKE_GROUPS : nil,
+            product.id == FAKE_PRODUCT_ID ? FAKE_GROUPS : nil,
           ].flatten.compact,
           media: product.images.map {|image|
             {
