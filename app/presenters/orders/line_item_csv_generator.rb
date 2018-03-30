@@ -84,8 +84,15 @@ module Orders
             lip = Orders::LineItemPresenter.new(li)
           end
 
-          if (@refulfill_only || @batch_only || @ready_batches || @making_only) && PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
-            next
+          if (@refulfill_only || @batch_only || @ready_batches || @making_only)
+            # ignore certain products
+            if PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
+              next
+            end
+            # dont' show canceled orders
+            if li.order.state == 'canceled'
+              next
+            end
           end
 
           # only show
