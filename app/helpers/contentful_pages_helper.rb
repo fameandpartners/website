@@ -63,4 +63,15 @@ module ContentfulPagesHelper
 
   end
 
+  def contentful_get_tile_crop_edges_on_resize_class(tile_crop_edges)
+
+    if tile_crop_edges.present?
+      if tile_crop_edges == 'mobile'
+        'u-crop-media-edges-on-resize--mobile'
+      else
+        nil
+      end
+    end
+  end
+
 end

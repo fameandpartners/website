@@ -49,10 +49,12 @@ module Reports
 
         self.each do |r|
           line.set_line r
+
           csv << [
             line.order_number,
             line.site_version,
             line.total_items,
+            line.completed_at_date,
             line.promo_codes,
             line.price,
             line.currency,
@@ -94,6 +96,7 @@ module Reports
         :order_number,
         :site_version,
         :total_items,
+        :order_date,
         :promo_codes,
         :payment_total,
         :currency,
