@@ -358,6 +358,9 @@ FameAndPartners::Application.routes.draw do
     # Prom LP - Nia Parker Interview page
     get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
 
+    # Prom LP - Say Lou Lou Interview page
+    get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
