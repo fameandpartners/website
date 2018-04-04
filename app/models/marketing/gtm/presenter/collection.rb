@@ -13,11 +13,16 @@ module Marketing
         end
 
         def body
+          position = -1
           collection.products.map { |product|
+            position += 1
             {
               sku:          product.sku,
               variant_skus: product.variant_skus,
-              name:         product.name
+              name:         product.name,
+              price:        product.price.amount,
+              category:     product.type,
+              position:     position
             }
           }
         end
