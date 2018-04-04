@@ -17,6 +17,7 @@ module Marketing
           collection.products.map { |product|
             position += 1
             {
+              id:           product.id,
               sku:          product.sku,
               variant_skus: product.variant_skus,
               name:         product.name,
