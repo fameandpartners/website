@@ -16,6 +16,10 @@ module Marketing
           @base_url = base_url
         end
 
+        def order_id
+          order.id
+        end
+
         def coupon_code
           order.promocode
         end
@@ -59,6 +63,7 @@ module Marketing
 
         def body
           {
+              id:                     order_id,
               coupon_code:            coupon_code,
               number:                 number,
               email:                  email,
