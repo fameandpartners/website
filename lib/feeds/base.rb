@@ -87,6 +87,8 @@ module Feeds
             end
           end
 
+          variant_w_images.reject! {|var| var.nil?}
+
           variant_w_images.each do |variant|
             item = get_item_properties(product, variant)
 
@@ -106,35 +108,13 @@ module Feeds
             end
           end
         end
-
-        # product.variants.each do |variant|
-        #   begin
-        #     binding.pry
-        #     # need to weed out inactive color variants
-        #     if (variant.dress_color.present? && ProductColorValue.where("product_id = ? and option_value_id = ?", product.id, variant.dress_color.id).first&.active)
-        #       item = get_item_properties(product, variant)
-
-        #       has_images = item['image'].present?
-        #       has_size   = item['size'].present?
-        #       items.push(item) if has_images && has_size
-        #     end
-        #     if !product.fabrics.empty?
-        #       item = get_item_properties(product, variant)
-
-        #       has_images = item['image'].present?
-        #       has_size   = item['size'].present?
-        #       items.push(item) if has_images && has_size
-        #     end
-        #   rescue StandardError => ex
-        #     puts ex
-        #   end
-        # end
       end
       items
     end
 
     def variant_size_data(spree_product:, spree_variant:)
       size_presentation = nil
+
       price             = spree_variant.site_price_for(current_site_version)
 
       # if (size = spree_variant.dress_size)

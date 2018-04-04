@@ -14,7 +14,7 @@ module BatchUpload
 
     def initialize(location, strategy = :update)
       @_strategies = [:update, :delete]
-      @_expiration = 6.hours
+      @_expiration = 2.minutes
 
       @_location = location
       unless @_strategies.include?(strategy)

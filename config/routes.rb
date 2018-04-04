@@ -270,6 +270,9 @@ FameAndPartners::Application.routes.draw do
     get '/everybody-dance', to: redirect('/dresses/prom')
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
+    # temporary patch. this dress link is bad so redirect it
+    get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -354,6 +357,9 @@ FameAndPartners::Application.routes.draw do
 
     # Prom LP - Nia Parker Interview page
     get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
+
+    # Prom LP - Say Lou Lou Interview page
+    get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

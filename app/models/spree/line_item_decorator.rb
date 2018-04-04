@@ -3,14 +3,19 @@ Spree::LineItem.class_eval do
           class_name: 'LineItemPersonalization'
 
   has_one :fabrication
+  has_one :line_item_update, class_name: 'Admin::LineItemUpdate'
 
   belongs_to :fabric
 
   has_one :item_return, inverse_of: :line_item
+  belongs_to :return_inventory_item
 
   has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
 
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
+
+  has_many :batch_collection_line_items
+  has_many :batch_collections, :through => :batch_collection_line_items, dependent: :destroy
 
   scope :fast_making, -> do
     joins(making_options: :product_making_option).
@@ -121,8 +126,8 @@ Spree::LineItem.class_eval do
 
       values.each do |type, value|
         if type == 'Color' && self.fabric
-          array << "Fabric and Color: #{fabric.presentation}" 
-        else 
+          array << "Fabric and Color: #{fabric.presentation}"
+        else
           array << (value.present? ? "#{type}: #{value}" : type.to_s)
         end
       end
@@ -202,6 +207,10 @@ Spree::LineItem.class_eval do
 
   def window_closed?
     60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
+  end
+
+  def in_batch?
+    !self.batch_collections.empty?
   end
 
   def as_json(options = { })
