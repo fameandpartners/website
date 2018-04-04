@@ -1,0 +1,91 @@
+/* [PROM Edit pages]
+-------------------------------------------------------*/
+
+.Page__promEdit {
+  margin-bottom: 120px;
+
+  .Btn__ctaHeroTile,
+  .Btn__ctaSlimBorder {
+    padding: 5px 45px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  .Btn__ctaHeroTile:hover {
+    color: $c-neutral-white;
+  }
+
+}
+
+.PromEdit__introWrapper {
+  color: $c-neutral-white;
+}
+
+.PromEdit__largeTile {
+  padding: 0;
+}
+
+.PromEdit__pidInfo {
+  display: block;
+  font-family: $font-heading;
+
+  .category--item {
+    min-height: auto;
+  }
+
+  .details {
+    margin: 0 5px;
+  }
+
+  .name {
+    text-decoration: underline;
+  }
+
+  .category--item,
+  .name,
+  .price {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: none;
+    padding: 0;
+  }
+
+  .price {
+    padding: 0 5px;
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .PromEdit__introWrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .PromEdit__pidInfoOverlay {
+    padding: 30px;
+  }
+
+  .PromEdit__pidInfoOverlay,
+  .PromEdit__pidInfoOverlay a {
+    color: $c-neutral-white;
+  }
+
+  .PromEdit__pidInfoRightSide {
+    float: right;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .PromEdit__introWrapper {
+    bottom: 0;
+  }
+
+}
