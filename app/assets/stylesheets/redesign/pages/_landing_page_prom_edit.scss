@@ -19,6 +19,10 @@
 }
 
 .PromEdit__introWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: $c-neutral-white;
 }
 
@@ -60,13 +64,6 @@
 
 @media (min-width: $bootstrap-md-width) {
 
-  .PromEdit__introWrapper {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .PromEdit__pidInfoOverlay {
     padding: 30px;
   }
@@ -84,8 +81,26 @@
 
 @media (max-width: $bootstrap-md-width - 1px) {
 
+  .Page__promEdit {
+    text-align: center;
+  }
+
   .PromEdit__introWrapper {
     bottom: 0;
+  }
+
+  .PromEdit__tile {
+
+    .u-overlay-area,
+    .u-overlay-area__overlay,
+    .u-overlay-area__caption {
+      position: relative;
+    }
+
+    .u-overlay-area__overlay {
+      margin-top: 30px;
+    }
+
   }
 
 }
