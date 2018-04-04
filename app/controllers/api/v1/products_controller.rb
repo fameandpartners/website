@@ -8,7 +8,7 @@ PRODUCT_IMAGE_SIZES = [:original, :product]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
-FAKE_PRODUCT_ID = 1619
+FAKE_PRODUCT_ID = 1633
 
 FAKE_COMPONENTS = [
   {code: 'BC1', title: 'Strapless', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
@@ -167,16 +167,17 @@ module Api
           components: [
             colors.map {|c|
               {
+                sectionId: :color,
                 cartId: c.option_value.id,
                 code: c.option_value.name,
                 isDefault: false,
                 isRecommended: !c.custom,
-                sortOrder: c.option_value.position,
                 title: c.option_value.presentation,
                 price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
                 "isProductCode": true,
                 type: :color,
                 "meta": {
+                  sortOrder: c.option_value.position,
                   hex: c.option_value.value,
                   image: {
                     url: color_image(c.option_value.image_file_name),
@@ -186,6 +187,7 @@ module Api
 
                   careDescription: CARE_DESCRIPTION,
                   fabricDescription: find_product_property(product, 'fabric'),
+                  deliveryTimeDescription: ''
                 },
                 incompatibleWith: c.custom ? ['express_making'] : [],
                 compatibleWith: [],
@@ -194,25 +196,28 @@ module Api
 
             fabrics.map {|c|
               {
+                sectionId: :fabric,
                 cartId: c.id,
                 code: c.name,
                 isDefault: false,
                 isRecommended: !c.price_in(current_site_version.currency)  == 0,
-                sortOrder: -1, #TODO
                 title: c.presentation,
                 price: c.price_in(current_site_version.currency),
                 "isProductCode": true,
                 type: :fabric,
                 meta: {
+                  sortOrder: -1, #TODO
                   # hex: c.option_value.value,
+                  hex: nil,
                   image: {
                     url: c.image_url,
                     width: 0,
                     height: 0,
                   },
 
-                  care: CARE_DESCRIPTION,
-                  fabric: find_product_property(product, 'fabric'),
+                  careDescription: CARE_DESCRIPTION,
+                  fabricDescription: find_product_property(product, 'fabric'),
+                  deliveryTimeDescription: ''
                 },
                 img: c.image_url,
                 incompatibleWith: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
@@ -222,17 +227,22 @@ module Api
 
             sizes.map {|c|
               {
+                sectionId: :size,
                 cartId: c.id,
                 code: c.name,
                 isDefault: false,
-                sortOrder: c.position,
                 title: c.presentation,
                 price: 0,
                 isProductCode: false,
                 type: :size,
                 meta: {
+                  sortOrder: c.position,
                   sizeUs: c.name.split("/")[0],
                   sizeAu: c.name.split("/")[1],
+
+                  careDescription: CARE_DESCRIPTION,
+                  fabricDescription: find_product_property(product, 'fabric'),
+                  deliveryTimeDescription: ''
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
@@ -241,15 +251,16 @@ module Api
 
             customisations.map {|c|
               {
+                sectionId: :customisation,
                 cartId: c['customisation_value']['id'],
                 code: c['customisation_value']['name'],
                 isDefault: false,
-                sortOrder: c['customisation_value']['position'],
                 title: c['customisation_value']['presentation'],
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
                 isProductCode: true,
                 type: :customisation,
                 meta: {
+                  sortOrder: c['customisation_value']['position'],
                   image: {
                     url: customization_image(c['customisation_value']),
                     width: -1,
@@ -265,30 +276,32 @@ module Api
 
             [
               {
-                cartId: :todo,
+                sectionId: :todo,
+                cartId: 0,
                 code: 'express_making',
                 isDefault: false,
-                sortOrder: 1,
                 title: "Express Making",
                 price: 1800,
                 isProductCode: false,
                 type: :making,
                 meta: {
+                  sortOrder: 1,
                   deliveryTimeDescription: 'Estimated delivery 2 weeks.',
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
               },
               {
-                cartId: :todo,
+                sectionId: :todo,
+                cartId: 0,
                 code: 'free_returns',
                 isDefault: false,
-                sortOrder: 1,
                 title: "Free returns",
                 price: 0,
                 isProductCode: false,
                 type: :return,
                 meta: {
+                  sortOrder: 1,
                   returnPolicy: "Returns blah blah"
                 },
                 compatibleWith: [],
@@ -299,8 +312,8 @@ module Api
           groups: [
             sizes.length > 0 && {
               title: 'Size',
-              sortOrder: 1,
               changeButtonText: "Select",
+              sortOrder: 1,
               type: :size,
               sectionGroups: [
                 {

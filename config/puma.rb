@@ -1,6 +1,7 @@
-workers 4
+workers 2
 worker_timeout 600
-threads 1, 2
+threads 1, 1
+queue_requests false
 preload_app!
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do
