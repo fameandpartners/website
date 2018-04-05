@@ -122,7 +122,7 @@ namespace :newgistics do
     Net::SFTP.start(configatron.newgistics.ftp_uri,
                     configatron.newgistics.ftp_user,
                     password: configatron.newgistics.ftp_password) do |sftp|
-    sftp.upload!(temp_file, "input/External Shipments (inbound returns)/#{Date.today.to_s}.csv")
+    sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
     end
   end
 end
