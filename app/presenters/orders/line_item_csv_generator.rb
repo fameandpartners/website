@@ -93,6 +93,10 @@ module Orders
             if li.order.state == 'canceled'
               next
             end
+            # dont' show anything that has shipped or canceled
+            if li.order&.shipment&.shipped_at.present? || li.order&.shipment&.tracking.present? || li.line_item.order.state == 'canceled'
+              next
+            end
           end
 
           # only show

@@ -70,6 +70,22 @@ module Refulfiller
     li.save
   end
 
+  def groom_all
+    lis = Spree::LineItem.where("refulfill_status IS NOT NULL")
+
+    lis.each do |li|
+      if li.order&.shipment.shipped_at.present? || li.order&.shipment&.tracking.present? || li.line_item_update&.tracking_number.present?
+        li.refulfill_status = 'shipped'
+        li.save
+      end
+
+      if li.order.state == 'canceled'
+        li.refulfill_status = 'canceled'
+        li.save
+      end
+    end
+  end
+
   def check_last_n_minutes(n_minutes)
     start_time = Time.now - n_minutes.minutes
     lis = get_line_items_between(start_time, Time.now)
@@ -85,7 +101,7 @@ module Refulfiller
 
   def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready', state: 'complete')
-    orders = orders.select {|ord| ord.shipment&.shipped_at.nil? && ord.shipment&.tracking.nil?}
+    orders = orders.select {|ord| ord.shipment&.shipped_at.nil? || ord.shipment&.tracking.nil?}
 
     lis = orders.map {|ord| ord.line_items}.flatten
     # filter out all line_items that have been previously processed by batcher or refulfiller or shipped

@@ -40,11 +40,11 @@ module Batcher
       if bc = BatchCollection.where(batch_key: line_item.product.master.sku.downcase, status: 'open').first
         groom_batch_collection(bc)
 
-        if bc.line_items.count < BATCH_ITEMS_THRESHOLD
+        if bc.batch_collection_line_items.active.count < BATCH_ITEMS_THRESHOLD
           bc.line_items << line_item
           bc.save
 
-          if bc.line_items.count == BATCH_ITEMS_THRESHOLD
+          if bc.batch_collection_line_items.active.count == BATCH_ITEMS_THRESHOLD
             bc.status = 'closed'
             bc.save
           end
@@ -60,15 +60,20 @@ module Batcher
   end
 
   def groom_all_batch_collections
-    BatchCollection.where(status: 'open').each do |bc|
+    BatchCollection.all.each do |bc|
       groom_batch_collection(bc)
     end
   end
 
   # kick out line_items that are within 2 weeks of due-ness
   def groom_batch_collection(batch_collection)
-    if batch_collection.status == 'open'
-      batch_collection.batch_collection_line_items.each do |bcli|
+    batch_collection.batch_collection_line_items.active.each do |bcli|
+      # if item is shipped or cancelled kick it out
+      if bcli.line_item.order&.shipment&.shipped_at.present? || bcli.line_item.order&.shipment&.tracking.present? || bcli.line_item.order.state == 'canceled'
+        bcli.line_item.delete
+      end
+
+      if batch_collection.status == 'open'
         if (Time.now+DELIVERY_DAYS_THRESHOLD.days) > bcli.projected_delivery_date
           # this thing is within N days...release it to be made
           bcli.delete
@@ -85,7 +90,7 @@ module Batcher
 
   def get_line_items_between(start_time, end_time)
     orders = Spree::Order.where(completed_at: start_time..end_time, shipment_state: 'ready', state: 'complete')
-    orders = orders.select {|ord| ord.shipment&.shipped_at.blank? && ord.shipment&.tracking.blank? && (!ord.number.downcase.starts_with?('m') || !ord.number.downcase.starts_with?('e')) }
+    orders = orders.select {|ord| (ord.shipment&.shipped_at.blank? || ord.shipment&.tracking.blank?) && (!ord.number.downcase.starts_with?('m') || !ord.number.downcase.starts_with?('e')) }
 
     lis = orders.map {|ord| ord.line_items}.flatten
     #if we ever do something crazy like a li being able to be in more than 1 batch_collection..change this code below
