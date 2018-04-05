@@ -180,9 +180,9 @@ module Api
                 type: :color,
                 "meta": {
                   sortOrder: c.option_value.position,
-                  hex: c.option_value.value,
+                  hex: c.option_value.value.include?('#') ? c.option_value.value : nil,
                   image: {
-                    url: color_image(c.option_value.image_file_name),
+                    url: c.option_value.value.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
                     width: 0,
                     height: 0,
                   },
