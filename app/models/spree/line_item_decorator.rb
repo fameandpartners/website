@@ -66,7 +66,7 @@ Spree::LineItem.class_eval do
       total_price += personalization.price
     end
 
-    if fabric.present? && !recommended_fabric?
+    if fabric.present? && !recommended_fabric? 
       total_price += fabric.price_in(self.currency)
     end
 
