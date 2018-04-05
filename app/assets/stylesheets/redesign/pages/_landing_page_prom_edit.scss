@@ -1,0 +1,136 @@
+/* [PROM Edit pages]
+-------------------------------------------------------*/
+
+.Page__promEdit {
+  margin-bottom: 120px;
+
+  .Btn__ctaHeroTile,
+  .Btn__ctaSlimBorder {
+    padding: 5px 45px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  .Btn__ctaHeroTile:hover,
+  .Btn__ctaHeroTile:focus {
+    color: $c-neutral-white;
+  }
+
+}
+
+.PromEdit__introWrapper .PromEdit__introHeader {
+  color: $c-neutral-white;
+  margin-bottom: 8%;
+}
+
+.PromEdit__largeTile {
+  padding: 0;
+}
+
+.PromEdit__pidInfo {
+  display: block;
+  font-family: $font-heading;
+
+  .category--item {
+    min-height: auto;
+  }
+
+  .details {
+    margin: 0 5px;
+  }
+
+  .name {
+    text-decoration: underline;
+  }
+
+  .category--item,
+  .name,
+  .price {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: none;
+    padding: 0;
+  }
+
+  .price {
+    padding: 0 5px;
+  }
+
+}
+
+.PromEdit__sideBySidePidTiles {
+  text-align: center;
+
+  .PromEdit__pidInfo:first-of-type {
+    margin-top: 30px;
+  }
+
+}
+
+
+@media (min-width: $bootstrap-md-width) {
+
+  .PromEdit__pidInfoOverlay {
+    padding: 30px;
+  }
+
+  .PromEdit__pidInfoOverlay,
+  .PromEdit__pidInfoOverlay a {
+    color: $c-neutral-white;
+  }
+
+  .PromEdit__pidInfoRightSide {
+    float: right;
+  }
+
+  .PromEdit__smallTile {
+    padding: 0 40px;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .Page__promEdit {
+    text-align: center;
+
+    section {
+      margin: 0;
+    }
+
+  }
+
+  .PromEdit__introWrapper {
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .PromEdit__tile {
+
+    .u-overlay-area,
+    .u-overlay-area__overlay,
+    .u-overlay-area__caption {
+      position: relative;
+    }
+
+    .u-overlay-area__overlay {
+      margin-top: 30px;
+    }
+
+  }
+
+  .PromEdit__pidInfo:last-of-type {
+    margin-bottom: 60px;
+  }
+
+  .Btn__ctaBottom {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+  }
+
+}
