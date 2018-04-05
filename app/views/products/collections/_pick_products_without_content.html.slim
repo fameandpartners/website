@@ -3,9 +3,10 @@
 - pidImageReplacementDesktop = pidImageReplacementDesktop.present? ? pidImageReplacementDesktop : nil
 - pidImageReplacementMobile = pidImageReplacementMobile.present? ? pidImageReplacementMobile : pidImageReplacementDesktop
 - showMoodboard = showMoodboard.present? ? showMoodboard : true
+- hidePidImage = hidePidImage == true ? true : nil
 
 - if defined?(rangeTo)
-  = render partial: '/products/collections/product', collection: @collection.products[rangeFrom..rangeTo], as: :product, locals: {customWrapper: customWrapper, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile}
+  = render partial: '/products/collections/product', collection: @collection.products[rangeFrom..rangeTo], as: :product, locals: {customWrapper: customWrapper, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile, hidePidImage: hidePidImage}
 - else
   - @collection.products.drop(rangeFrom).each_slice(1) do |products|
-    = render partial: '/products/collections/product', collection: products, as: :product, locals: {customWrapper: customWrapper, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile}
+    = render partial: '/products/collections/product', collection: products, as: :product, locals: {customWrapper: customWrapper, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile, hidePidImage: hidePidImage}

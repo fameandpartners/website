@@ -2,10 +2,11 @@
 - pidImageReplacementDesktop = local_assigns[:pidImageReplacementDesktop]
 - pidImageReplacementMobile = local_assigns[:pidImageReplacementMobile]
 - showMoodboard = local_assigns[:showMoodboard]
+- hidePidImage = local_assigns[:hidePidImage]
 
 - if defined?(customWrapper)
   .category--item data-id=(product.try(:id)) data-color-id=(product.color.try(:id)) class=customWrapper
-    = render partial: '/products/collections/product_core_details', locals: {product: product, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile}
+    = render partial: '/products/collections/product_core_details', locals: {product: product, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile, hidePidImage: hidePidImage}
 - else
   .col-xs-6.col-xxs-6.category--item data-id=(product.try(:id)) data-color-id=(product.color.try(:id)) class=grid_class
-    = render partial: '/products/collections/product_core_details', locals: {product: product, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile}
+    = render partial: '/products/collections/product_core_details', locals: {product: product, showMoodboard: showMoodboard, pidImageReplacementDesktop: pidImageReplacementDesktop, pidImageReplacementMobile: pidImageReplacementMobile, hidePidImage: hidePidImage}
