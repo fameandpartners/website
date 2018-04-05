@@ -8,7 +8,7 @@ PRODUCT_IMAGE_SIZES = [:original, :product]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
-FAKE_PRODUCT_ID = 1633
+FAKE_PRODUCT_ID = 1619
 
 FAKE_COMPONENTS = [
   {code: 'BC1', title: 'Strapless', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
@@ -19,7 +19,7 @@ FAKE_COMPONENTS = [
   {code: 'BC6', title: 'Tri-Cup', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'BC7', title: 'Draped', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'T76', title: 'Subtle Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T2', title: 'Curved Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T2', title: 'Curved Neckline', incompatibleWith: ['T51'], price: 100, meta: { image: { url: nil }}},
   {code: 'T3', title: 'Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'T4', title: 'Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'T1', title: 'Strapless With Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
@@ -28,7 +28,7 @@ FAKE_COMPONENTS = [
   {code: 'T2', title: 'Curved Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'WB1', title: 'Standard', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'WB2', title: 'Wide', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: ['T2'], price: 100, meta: { image: { url: nil }}},
   {code: 'T31', title: 'Off-Shoulder Panel', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'T52', title: 'Wide Arm Ties', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
   {code: 'T22', title: 'Fixed Spaghetti Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
@@ -51,6 +51,7 @@ FAKE_COMPONENTS = [
 FAKE_GROUPS = [
   {
     title: "Silhouette",
+    type: :customisation,
     sectionGroups: [
       {
         title: "Style",
@@ -78,6 +79,7 @@ FAKE_GROUPS = [
   },
   {
     title: "Customization",
+    type: :customisation,
     sectionGroups: [
       {
         title: "Front & Back",
@@ -208,7 +210,7 @@ module Api
                 meta: {
                   sortOrder: -1, #TODO
                   # hex: c.option_value.value,
-                  hex: nil,
+                  
                   image: {
                     url: c.image_url,
                     width: 0,
@@ -251,14 +253,14 @@ module Api
 
             customisations.map {|c|
               {
-                sectionId: :customisation,
+                sectionId: :legacyCustomization,
                 cartId: c['customisation_value']['id'],
                 code: c['customisation_value']['name'],
                 isDefault: false,
                 title: c['customisation_value']['presentation'],
                 price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
                 isProductCode: true,
-                type: :customisation,
+                type: :legacyCustomization,
                 meta: {
                   sortOrder: c['customisation_value']['position'],
                   image: {
@@ -365,7 +367,7 @@ module Api
             customisations.length > 0 && {
               title: 'Customize',
               changeButtonText: "Change",
-              type: :customisation,
+              type: :legacyCustomization,
 
               sectionGroups: [
                 {
