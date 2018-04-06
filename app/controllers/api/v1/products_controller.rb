@@ -385,7 +385,9 @@ module Api
 
             product.id == FAKE_PRODUCT_ID ? FAKE_GROUPS : nil,
           ].flatten.compact,
-          media: product.images.map {|image|
+          media: product.images
+            .reject { |i| i.attachment_file_name.downcase.include?('crop') }
+            .map {|image|
             {
               type: :photo,
               fitDescription: find_product_property(product, 'fit'),
@@ -407,7 +409,6 @@ module Api
               ]
             }
           },
-
           layerCads: product.layer_cads.map {|lc|
             {
               url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
