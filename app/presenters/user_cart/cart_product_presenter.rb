@@ -23,6 +23,7 @@ module UserCart
         {
           id: t['id'],
           name: t['name'],
+          presentation: t['presentation'],
           display_price: display_price,
           cart_summary: cart_summary
         }
