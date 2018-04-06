@@ -1,5 +1,4 @@
-workers 2
-worker_timeout 600
+workers 4
 threads 1, 1
 queue_requests false
 preload_app!
