@@ -134,7 +134,7 @@ module Products
             color_variant_id += 1
           end
         else
-            product.fabric_products.recommended.each do |product_fabric_value|
+            product.fabric_products.each do |product_fabric_value|
             color = product_fabric_value.fabric.option_value
             fabric = product_fabric_value.fabric
             log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
