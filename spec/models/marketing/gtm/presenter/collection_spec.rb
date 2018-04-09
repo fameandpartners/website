@@ -5,10 +5,15 @@ module Marketing
     module Presenter
       describe Collection, type: :presenter do
         # Fake Products::CollectionResource data
+        # Variant
         let(:first_variant) { build_stubbed(:dress_variant, sku: 'SKU123') }
         let(:second_variant) { build_stubbed(:dress_variant, sku: 'SKU345') }
-        let(:super_dress) { build_stubbed(:dress, id: 123, sku: 'SUPERSKU', variants: [first_variant], name: 'Super Dress', price: {amount: 31.30}) }
-        let(:jedi_cosplay) { build_stubbed(:dress, id: 456, sku: 'JEDISKU', variants: [second_variant], name: 'Jedi Cosplay', price: {amount: 31.31})  }
+        # Price
+        let(:first_price) { build_stubbed(:price, amount: 30.31) }
+        let(:second_price) { build_stubbed(:price, amount: 30.31) }
+        # Dress
+        let(:super_dress) { build_stubbed(:dress, id: 123, sku: 'SUPERSKU', variants: [first_variant], name: 'Super Dress', price: first_price) }
+        let(:jedi_cosplay) { build_stubbed(:dress, id: 456, sku: 'JEDISKU', variants: [second_variant], name: 'Jedi Cosplay', price: second_price)  }
         let(:product_collection) { OpenStruct.new(products: [super_dress, jedi_cosplay]) }
 
         subject(:presenter) { described_class.new(collection_presenter: product_collection) }
