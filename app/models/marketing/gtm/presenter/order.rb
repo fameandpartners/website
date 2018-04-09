@@ -33,7 +33,11 @@ module Marketing
 
           products_with_prices.map do |sku, price|
             qty = order.line_items.select { |li| li.variant.product.sku == sku && li.total == price }.size
-            { id: sku, price: number_with_precision_wrapper(price), qty: qty }
+            {
+              id: sku,
+              price: number_with_precision_wrapper(price),
+              qty: qty
+            }
           end
         end
 
