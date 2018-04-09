@@ -140,7 +140,6 @@ module Products
             log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
             if !product_fabric_value.images.present? 
-              logger.error "id  -  | #{log_prefix} No Images!"
               next
             end
 
