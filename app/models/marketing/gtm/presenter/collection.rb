@@ -21,7 +21,7 @@ module Marketing
               sku:          product.sku,
               variant_skus: product.variant_skus,
               name:         product.name,
-              price:        product.price.amount,
+              price:        product.price&.amount,
               category:     product.type,
               position:     position
             }
