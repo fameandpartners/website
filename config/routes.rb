@@ -335,6 +335,7 @@ FameAndPartners::Application.routes.draw do
 
     # Weddings and Parties Collection Page
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
+    get '/dresses/wedding-guests', to: redirect('/weddings-and-parties')
 
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
