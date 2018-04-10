@@ -168,7 +168,7 @@ module Products
 
     def super_fast_making
       return false if fast_making_disabled?      
-      true
+      @super_fast_making
     end
     
     alias_method :fast_making?, :fast_making
