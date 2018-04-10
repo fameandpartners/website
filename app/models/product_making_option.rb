@@ -56,7 +56,7 @@ class ProductMakingOption < ActiveRecord::Base
     if fast_making?
       'Express'
     elsif super_fast_making?
-      'Really Express'
+      'Super Express'
     else
       'Later'
     end
@@ -66,7 +66,7 @@ class ProductMakingOption < ActiveRecord::Base
     if fast_making?
       'Estimated Delivery in 2-3 weeks'
     elsif super_fast_making?
-      'Estimated Delivery in 1-2 weeks'
+      'Estimated Delivery in 10 days'
     else
       'Estimated Delivery in 8 weeks'
     end
@@ -77,7 +77,7 @@ class ProductMakingOption < ActiveRecord::Base
     if fast_making?
       '2-3 weeks'
     elsif super_fast_making?
-      '1-2 weeks'
+      '10 days'
     else
       'Estimated Delivery in 8 weeks'
     end
