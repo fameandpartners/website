@@ -56,9 +56,8 @@ module Policies
 
     def super_fast_making?
       return false if @making_options == "standard"
-      return true if @product.try(:super_fast_making)
       if @product.making_options.present?
-        return true if @product.try(:making_options).any?{|mo| mo.name == "Really Express Making"}
+        return true if @product.try(:making_options).any?{|mo| mo.name == "Super Express Making"}
       end
       return false
     end

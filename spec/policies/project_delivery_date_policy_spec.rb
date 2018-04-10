@@ -50,7 +50,7 @@ describe Policies::ProjectDeliveryDatePolicy do
 
     it "return correct delivery date for a fast making dress" do
       allow(service).to receive(:fast_making?).and_return(true)
-      expect(service.delivery_date).to eq({:days_for_making => 5, :days_for_delivery => 4})
+      expect(service.delivery_date).to eq({:days_for_making => 10, :days_for_delivery => 4})
     end
   end
 
