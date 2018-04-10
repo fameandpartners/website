@@ -165,6 +165,12 @@ module Products
       return false if fast_making_disabled?
       @fast_making
     end
+
+    def super_fast_making
+      return false if fast_making_disabled?      
+      true
+    end
+    
     alias_method :fast_making?, :fast_making
 
     def default_color

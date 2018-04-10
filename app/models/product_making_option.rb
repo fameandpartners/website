@@ -10,7 +10,7 @@ class ProductMakingOption < ActiveRecord::Base
   DEFAULT_OPTION_PRICE = 30
   DEFAULT_CURRENCY     = 'USD'.freeze
   ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase).freeze
-  OPTION_TYPES         = ['fast_making', 'slow_making', 'free_fast_making']  #[DEFAULT_OPTION_TYPE].freeze
+  OPTION_TYPES         = ['fast_making', 'slow_making', 'super_fast_making', 'free_fast_making']  #[DEFAULT_OPTION_TYPE].freeze
 
   # NOTE: `#option_type` is not related to Spree::OptionType at all!
   attr_accessible :option_type, :currency, :price, :active
@@ -24,6 +24,7 @@ class ProductMakingOption < ActiveRecord::Base
 
   validates :currency, inclusion: ALL_CURRENCIES
 
+  scope :super_fast_making, -> { where(option_type: 'super_fast_making') }
   scope :fast_making, -> { where(option_type: 'fast_making') }
   scope :slow_making, -> { where(option_type: 'slow_making') }
   scope :free_fast_making, -> { where(option_type: 'free_fast_making') }
@@ -42,7 +43,7 @@ class ProductMakingOption < ActiveRecord::Base
   end
 
   def display_discount
-    if self.fast_making?
+    if self.fast_making? || self.super_fast_making?
       self.display_price.to_s
     elsif self.slow_making?
       (self.price*100*(-1)).round.to_s + '% OFF'
@@ -54,6 +55,8 @@ class ProductMakingOption < ActiveRecord::Base
   def name
     if fast_making?
       'Express'
+    elsif super_fast_making?
+      'Really Express'
     else
       'Later'
     end
@@ -62,6 +65,8 @@ class ProductMakingOption < ActiveRecord::Base
   def description
     if fast_making?
       'Estimated Delivery in 2-3 weeks'
+    elsif super_fast_making?
+      'Estimated Delivery in 1-2 weeks'
     else
       'Estimated Delivery in 8 weeks'
     end
@@ -71,11 +76,17 @@ class ProductMakingOption < ActiveRecord::Base
   def display_delivery_period
     if fast_making?
       '2-3 weeks'
+    elsif super_fast_making?
+      '1-2 weeks'
     else
       'Estimated Delivery in 8 weeks'
     end
   end
 
+  def super_fast_making?
+    option_type == 'super_fast_making' 
+  end
+  
   def fast_making?
     option_type == 'fast_making' || option_type == 'free_fast_making'
   end
