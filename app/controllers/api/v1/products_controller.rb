@@ -51,10 +51,11 @@ FAKE_COMPONENTS = [
 FAKE_GROUPS = [
   {
     title: "Silhouette",
-    type: :customisation,
+    slug: 'silhouette',
     sectionGroups: [
       {
         title: "Style",
+        slug: 'style',
         sections: [
           {
             title: "Select your style",
@@ -66,6 +67,7 @@ FAKE_GROUPS = [
       },
       {
         title: "Length",
+        slug: 'length',
         sections: [
           {
             title: "Select your length",
@@ -79,10 +81,11 @@ FAKE_GROUPS = [
   },
   {
     title: "Customization",
-    type: :customisation,
+    slug: 'customization',
     sectionGroups: [
       {
         title: "Front & Back",
+        slug: 'front-and-back',
         sections: [
           {
             title: "Select your front",
@@ -100,6 +103,7 @@ FAKE_GROUPS = [
       },
       {
         title: "Straps & Sleeves",
+        slug: 'straps-and-sleeves',
         sections: [
           {
             title: "Select your straps & sleeves",
@@ -111,6 +115,7 @@ FAKE_GROUPS = [
       },
       {
         title: "Extras",
+        slug: 'extras',
         sections: [
           {
             title: "Select your extras",
@@ -145,7 +150,7 @@ module Api
           cartId: product.master.id,
           previewType: product.id == FAKE_PRODUCT_ID ? :render : :illustration,
 
-          returnDescription: "Shipping is free on your customized item. <a href=" ">Learn more</a>",
+          returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
 
           curationMeta: {
@@ -180,9 +185,9 @@ module Api
                 type: :color,
                 "meta": {
                   sortOrder: c.option_value.position,
-                  hex: c.option_value.value.include?('#') ? c.option_value.value : nil,
+                  hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
                   image: {
-                    url: c.option_value.value.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
+                    url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
                     width: 0,
                     height: 0,
                   },
@@ -251,7 +256,7 @@ module Api
               }
             },
 
-            customisations.map {|c|
+            product.id == FAKE_PRODUCT_ID ? [] : customisations.map {|c|
               {
                 sectionId: :legacyCustomization,
                 cartId: c['customisation_value']['id'],
@@ -270,7 +275,7 @@ module Api
                   }
                 },
                 compatibleWith: [],
-                incompatibleWith: ['express_making'],
+                incompatibleWith: [],
               }
             },
 
@@ -288,7 +293,7 @@ module Api
                 type: :making,
                 meta: {
                   sortOrder: 1,
-                  deliveryTimeDescription: 'Estimated delivery 2 weeks.',
+                  deliveryTimeDescription: 'Estimated delivery 2-3 weeks.',
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
@@ -304,7 +309,7 @@ module Api
                 type: :return,
                 meta: {
                   sortOrder: 1,
-                  returnPolicy: "Returns blah blah"
+                  returnDescription: 'Shipping and returns are free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
@@ -312,30 +317,14 @@ module Api
             ]
           ].flatten.compact,
           groups: [
-            sizes.length > 0 && {
-              title: 'Size',
-              changeButtonText: "Select",
-              sortOrder: 1,
-              type: :size,
-              sectionGroups: [
-                {
-                  title: "Size",
-                  sections: [
-                    {
-                      title: "Select your height and size",
-                      selectionType: "requiredOne",
-                      options: sizes.map(&:name)
-                    }]
-                }]
-            } || nil,
-
             colors.length > 0 && {
               title: 'Color',
               changeButtonText: "Change",
-              type: :color,
+              slug: 'color',
               sectionGroups: [
                 {
                   title: "Color",
+                  slug: 'color',
                   sections: [
                     {
                       title: "Select your color",
@@ -349,10 +338,11 @@ module Api
             fabrics.length > 0 && {
               title: 'Fabric',
               changeButtonText: "Change",
-              type: :fabric,
+              slug: 'fabric',
               sectionGroups: [
                 {
                   title: "Color & Fabric",
+                  slug: 'fabric',
                   sections: [
                     {
                       title: "Select your color & fabric",
@@ -364,14 +354,14 @@ module Api
               ]
             } || nil,
 
-            customisations.length > 0 && {
+            product.id != FAKE_PRODUCT_ID && customisations.length > 0 && {
               title: 'Customize',
               changeButtonText: "Change",
-              type: :legacyCustomization,
-
+              slug: 'customize',
               sectionGroups: [
                 {
                   title: "Customize",
+                  slug: 'customize',
                   sections: [
                     {
                       title: "Select your customizations",
@@ -384,6 +374,24 @@ module Api
             } || nil,
 
             product.id == FAKE_PRODUCT_ID ? FAKE_GROUPS : nil,
+
+            sizes.length > 0 && {
+              title: 'Size',
+              changeButtonText: "Select",
+              sortOrder: 9,
+              slug: 'size',
+              sectionGroups: [
+                {
+                  title: "Size",
+                  slug: 'size',
+                  sections: [
+                    {
+                      title: "Select your height and size",
+                      selectionType: "requiredOne",
+                      options: sizes.map(&:name)
+                    }]
+                }]
+            } || nil,
           ].flatten.compact,
           media: product.images
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
