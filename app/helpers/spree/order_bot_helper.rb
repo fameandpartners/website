@@ -8,7 +8,7 @@ module Spree
     end
 
     def create_new_order_by_factory(order)
-      non_sale_order_line_items = order.line_items.select{|x| x.stock.nil?}
+      non_sale_order_line_items = order.line_items.select{|x| x.stock.nil? && x.product.name.downcase != 'return_insurance'}
       unless non_sale_order_line_items.empty?
         factory_line_items = separate_line_items_by_factory(non_sale_order_line_items)
         making_time_line_items = separate_line_items_by_make_time(factory_line_items)
