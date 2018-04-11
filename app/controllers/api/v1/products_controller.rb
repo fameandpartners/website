@@ -3,6 +3,13 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
+# {
+#   code: '',
+#   title: '',
+#   incompatibleWith: [],
+#   price: 0,
+#   meta: { image: { url: '' }},
+# },
 
 PRODUCT_IMAGE_SIZES = [:original, :product]
 
@@ -11,49 +18,75 @@ CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further 
 FAKE_PRODUCT_ID = 1619
 
 FAKE_COMPONENTS = [
-  {code: 'BC1', title: 'Strapless', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC2', title: 'Strappy', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC3', title: 'Classic', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC4', title: 'Relaxed', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC5', title: 'One-Shoulder', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC6', title: 'Tri-Cup', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'BC7', title: 'Draped', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T76', title: 'Subtle Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T2', title: 'Curved Neckline', incompatibleWith: ['T51'], price: 100, meta: { image: { url: nil }}},
-  {code: 'T3', title: 'Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T4', title: 'Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T1', title: 'Strapless With Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T11', title: 'V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T15', title: 'Plunging V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T2', title: 'Curved Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'WB1', title: 'Standard', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'WB2', title: 'Wide', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: ['T2'], price: 100, meta: { image: { url: nil }}},
-  {code: 'T31', title: 'Off-Shoulder Panel', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T52', title: 'Wide Arm Ties', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T22', title: 'Fixed Spaghetti Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T26', title: 'Fixed Spaghetti Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T71', title: 'Narrow Adjustable Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T85', title: 'Narrow Adjustable Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T30', title: 'Wide Fixed Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T25', title: 'Wide Fixed Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T33', title: 'Wide Tie Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T60', title: 'Side Cut-Outs', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'T58', title: 'Bow', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'A5', title: 'Cape', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'extra-mini', title: 'Extra Mini', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'mini', title: 'Mini', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'midi', title: 'Midi', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'maxi', title: 'Maxi', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
-  {code: 'knee', title: 'Knee', incompatibleWith: [], price: 100, meta: { image: { url: nil }}},
+  #  Silhouette
+  #  Style
+  {code: 'BC1', title: 'Strapless', incompatibleWith: ['T2', 'T31', 'T76'], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/top_strapless_200.jpg' } }},
+  {code: 'BC2', title: 'Strappy', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/top_strappy_200.jpg' } }},
+  {code: 'BC3', title: 'Classic', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'BC4', title: 'Relaxed', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'BC5', title: 'One-Shoulder', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'BC6', title: 'Tri-Cup', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'BC7', title: 'Draped', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+
+  # Length
+  {code: 'extra-mini', title: 'Extra Mini', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_micro_148.jpg' } }},
+  {code: 'mini', title: 'Mini', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_mini_148.jpg' } }},
+  {code: 'knee', title: 'Knee', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_knee_148.jpg' } }},
+  {code: 'midi', title: 'Midi', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_midi_148.jpg' } }},
+  {code: 'ankle', title: 'Ankle', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_ankle_148.jpg' } }},
+  {code: 'maxi', title: 'Maxi', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_maxi_148.jpg' } }},
+
+  # Front
+  {code: 'T76', title: 'Subtle Sweetheart Neckline', incompatibleWith: ['BC1'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T2', title: 'Curved Neckline', incompatibleWith: ['BC1', 'T51'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T3', title: 'Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T4', title: 'Straight Neckline', incompatibleWith: ['T75'], price: 100, meta: { image: { url: nil } }},
+
+  # Back
+  {code: 'T1', title: 'Strapless With Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T11', title: 'V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T15', title: 'Plunging V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T2', title: 'Curved Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+
+  # Bodice
+  {
+    code: 'T7',
+    title: 'Change to Halter Neckline with Back Ties',
+    incompatibleWith: [],
+    price: 10,
+    meta: { image: { url: '' }},
+  },
+
+  # Waistband
+  {code: 'WB1', title: 'Standard', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'WB2', title: 'Wide', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+
+  # Straps and Sleeves
+  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: ['T2'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T31', title: 'Off-Shoulder Panel', incompatibleWith: ['BC1'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T52', title: 'Wide Arm Ties', incompatibleWith: ['T71'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T22', title: 'Fixed Spaghetti Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T26', title: 'Fixed Spaghetti Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T71', title: 'Narrow Adjustable Straight Straps', incompatibleWith: ['T52'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T85', title: 'Narrow Adjustable Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T30', title: 'Wide Fixed Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T25', title: 'Wide Fixed Cross Back Straps', incompatibleWith: ['T4'], price: 100, meta: { image: { url: nil } }},
+  {code: 'T33', title: 'Wide Tie Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+
+  # Extras
+  {code: 'T60', title: 'Side Cut-Outs', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'T58', title: 'Bow', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
+  {code: 'A5', title: 'Cape', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
 ]
 
 FAKE_GROUPS = [
   {
+    id: 1,
     title: "Silhouette",
     slug: 'silhouette',
     sectionGroups: [
       {
+        id: 1,
         title: "Style",
         slug: 'style',
         sections: [
@@ -66,6 +99,7 @@ FAKE_GROUPS = [
         ]
       },
       {
+        id: 2,
         title: "Length",
         slug: 'length',
         sections: [
@@ -80,10 +114,12 @@ FAKE_GROUPS = [
     ]
   },
   {
+    id: 2,
     title: "Customization",
     slug: 'customization',
     sectionGroups: [
       {
+        id: 3,
         title: "Front & Back",
         slug: 'front-and-back',
         sections: [
@@ -102,6 +138,7 @@ FAKE_GROUPS = [
         ]
       },
       {
+        id: 4,
         title: "Straps & Sleeves",
         slug: 'straps-and-sleeves',
         sections: [
@@ -114,6 +151,7 @@ FAKE_GROUPS = [
         ]
       },
       {
+        id: 5,
         title: "Extras",
         slug: 'extras',
         sections: [
@@ -358,6 +396,7 @@ module Api
               title: 'Customize',
               changeButtonText: "Change",
               slug: 'customize',
+              id: 122,
               sectionGroups: [
                 {
                   title: "Customize",
