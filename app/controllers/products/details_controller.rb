@@ -84,6 +84,7 @@ class Products::DetailsController < Products::BaseController
     # todo: thanh 4/3/17- why would we want to default this following line
     # make express delivery as default option
     product.making_option_id = product.making_options.detect{|x| x.option_type == 'fast_making'}.try(:id)
+    product.super_fast_making_option_id = product.making_options.detect{|x| x.option_type == 'super_fast_making'}.try(:id)
 
     product.use_auto_discount!(current_promotion.discount) if current_promotion
 
