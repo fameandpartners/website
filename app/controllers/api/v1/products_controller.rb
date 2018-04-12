@@ -210,12 +210,12 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            colors.map {|c|
+            colors.map.with_index {|c, index|
               {
                 sectionId: :color,
                 cartId: c.option_value.id,
                 code: c.option_value.name,
-                isDefault: false,
+                isDefault: index == 0,
                 isRecommended: !c.custom,
                 title: c.option_value.presentation,
                 price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
@@ -456,18 +456,30 @@ module Api
               ]
             }
           },
-          layerCads: product.layer_cads.map {|lc|
-            {
-              url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
-              width: lc.width,
-              height: lc.height,
-              sortOrder: lc.position,
-              type: lc.base_image_name ? :base : :layer,
-              components: lc.customizations_enabled_for.map.with_index {|active, index|
-                active ? customisations[index]['customisation_value']['name'] : nil
-              }.compact
+          layerCads: [
+            product.layer_cads.map {|lc|
+              {
+                url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
+                width: lc.width,
+                height: lc.height,
+                sortOrder: lc.position,
+                type: lc.base_image_name ? :base : :layer,
+                components: lc.customizations_enabled_for.map.with_index {|active, index|
+                  active ? customisations[index]['customisation_value']['name'] : nil
+                }.compact
+              }
+            },
+            customisations.map {|c|
+              {
+                url: customization_image(c['customisation_value']),
+                width: -1,
+                height: -1,
+                sortOrder: c['customisation_value']['position'],
+                type: :layer,
+                components: [c['customisation_value']['name']]
+              }
             }
-          },
+          ].flatten.compact,
         }
         respond_with produt_viewmodel.to_json
       end
