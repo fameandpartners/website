@@ -40,19 +40,12 @@ module UserCart
 
       #filter out fastmaking option if non recommended color is chosen by user
       avo = (available_making_options.select {|x| !x.nil?} || []).map do |mo|
-        if (mo.option_type == 'slow_making' && Features.active?(:delayed_delivery)) ||
-           (mo.active && mo.option_type == 'fast_making' && color.present? && !color[:custom_color]) ||
-           (mo.active && mo.option_type == 'super_fast_making')
-              if (mo.option_type == 'fast_making' && fabric.present? && fabric[:custom_fabric])
-                nil
-              else
-               { id: mo.id, name: mo.name, display_discount: mo.display_discount, description: mo.description}
-             end
+        if (mo.option_type == 'slow_making' && Features.active?(:delayed_delivery)) || (mo.active && mo.option_type == 'fast_making' ) || (mo.active && mo.option_type == 'super_fast_making')
+          { id: mo.id, name: mo.name, display_discount: mo.display_discount, description: mo.description}
         else
           nil
         end
       end
-      puts "***************************** #{avo.compact}"
       result[:available_making_options] = avo.compact
 
       result
