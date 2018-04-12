@@ -36,7 +36,7 @@ namespace :newgistics do
           newgistics_order_id = item_return['orderID']
           inventory_response = client.get_inventory_details(scheduler.last_successful_run)
 
-          inventories = inventory_response['inventories'].select do |inventory|
+          inventory_response['response']['inventories']['inventory'].select do |inventory|
             inventory['order_id'] == newgistics_order_id
           end
 
