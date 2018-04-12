@@ -371,6 +371,7 @@ Spree::Product.class_eval do
   def fast_making
     @fast_making ||= self.making_options.fast_making.active.exists?
   end
+  
   def super_fast_making
     @super_fast_making ||= self.making_options.super_fast_making.active.exists?
   end
