@@ -281,7 +281,6 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
-    get '/weddings-and-parties', to: redirect('/?utm_source=legacy-weddings-and-parties'), :as => :weddings_parties_page
     get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
@@ -334,6 +333,10 @@ FameAndPartners::Application.routes.draw do
     # Fall Weddings Collection Page
     get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
 
+    # Weddings and Parties Collection Page
+    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
+    get '/dresses/wedding-guests', to: redirect('/weddings-and-parties')
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
@@ -357,6 +360,16 @@ FameAndPartners::Application.routes.draw do
 
     # Prom LP - Nia Parker Interview page
     get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
+
+    # Prom LP - Say Lou Lou Interview page
+    get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
+
+    #############################
+    # PROM LPs - Edit pages
+    #############################
+    # Prom LP - Say Lou Lou Edit page
+    get '/evening-collection-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

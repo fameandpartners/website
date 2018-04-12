@@ -33,7 +33,7 @@
       <div class="column <%= hero_column_left_class %>">
         <article>
           <div class="Editorial Editorial--featured">
-            <%= render partial: "layouts/contentful/modules/items/ITEM--lg" %>
+            <%= render partial: "layouts/contentful/modules/items/ITEM--lg", locals: {contents: contents} %>
           </div>
         </article>
       </div>

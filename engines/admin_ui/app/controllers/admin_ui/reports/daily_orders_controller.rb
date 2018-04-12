@@ -23,7 +23,7 @@ module AdminUi
       end
 
       def from_date
-        date(params[:from], default: 6.weeks.ago)
+        date(params[:from], default: 3.days.ago)
       end
 
       def to_date
