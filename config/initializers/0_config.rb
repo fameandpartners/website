@@ -87,7 +87,7 @@ configatron.micro_influencer_email_address='qa@fameandpartners.com'
 configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
-configatron.fame_webclient_regex = /(dresses-new|dresses)\/(custom-dress|dress-.*-[0-9]*)/
+configatron.fame_webclient_regex = /^(\/static|\/dresses-new|\/dresses\/(custom-dress|dress-.*-[0-9]*))/
 
 
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']
