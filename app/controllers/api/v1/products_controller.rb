@@ -185,10 +185,10 @@ module Api
         colors = product.product_color_values.active
         fabrics = product.fabric_products
         sizes = product.option_types.find_by_name('dress-size').option_values
-        customisations = JSON.parse!(product.customizations)
+        customizations = JSON.parse!(product.customizations)
 
 
-        produt_viewmodel = {
+        product_viewmodel = {
           id: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
@@ -297,7 +297,7 @@ module Api
               }
             },
 
-            product.id == FAKE_PRODUCT_ID ? [] : customisations.map {|c|
+            product.id == FAKE_PRODUCT_ID ? [] : customizations.map {|c|
               {
                 sectionId: :legacyCustomization,
                 cartId: c['customisation_value']['id'],
@@ -397,7 +397,7 @@ module Api
               ]
             } || nil,
 
-            product.id != FAKE_PRODUCT_ID && customisations.length > 0 && {
+            product.id != FAKE_PRODUCT_ID && customizations.length > 0 && {
               title: 'Customize',
               changeButtonText: "Change",
               slug: 'customize',
@@ -410,8 +410,8 @@ module Api
                   sections: [
                     {
                       title: "Select your customizations",
-                      options: customisations.map {|f| f['customisation_value']['name']},
-                      selectionType: customisations.length === 3 ? "optionalOne" : 'optionalMultiple',
+                      options: customizations.map {|f| f['customisation_value']['name']},
+                      selectionType: customizations.length === 3 ? "optionalOne" : 'optionalMultiple',
                     }
                   ]
                 }
@@ -439,6 +439,7 @@ module Api
                 }]
             } || nil,
           ].flatten.compact,
+
           media: product.images
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
             .map {|image|
@@ -463,6 +464,7 @@ module Api
               ]
             }
           },
+
           layerCads: [
             product.layer_cads.map {|lc|
               {
@@ -472,11 +474,12 @@ module Api
                 sortOrder: lc.position,
                 type: lc.base_image_name ? :base : :layer,
                 components: lc.customizations_enabled_for.map.with_index {|active, index|
-                  active ? customisations[index]['customisation_value']['name'] : nil
+                  active ? customizations[index]['customisation_value']['name'] : nil
                 }.compact
               }
             },
-            customisations.map {|c|
+            
+            customizations.map {|c|
               {
                 url: customization_image(c['customisation_value']),
                 width: -1,
@@ -488,7 +491,7 @@ module Api
             }
           ].flatten.compact,
         }
-        respond_with produt_viewmodel.to_json
+        respond_with product_viewmodel.to_json
       end
 
       private
