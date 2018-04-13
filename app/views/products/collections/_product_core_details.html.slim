@@ -21,6 +21,10 @@ ruby:
     - if price_drop_au_item_check(product.sku)
       = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
 
+    // Super Express shipping ribbon
+    - if super_fast_making_item_check(product) && !price_drop_au_item_check(product.sku)
+      = render 'shared/redesign/ribbon_super_express_shipping'
+
   .details.text-center
     = link_to product_link.call(product), :class => 'media-wrap product-name' do
       span.name
