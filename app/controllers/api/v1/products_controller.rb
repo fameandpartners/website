@@ -358,7 +358,7 @@ module Api
             ]
           ].flatten.compact,
           groups: [
-            colors.length > 0 && {
+            colors.length > 0  && fabrics.empty? && {
               title: 'Color',
               changeButtonText: "Change",
               slug: 'color',
