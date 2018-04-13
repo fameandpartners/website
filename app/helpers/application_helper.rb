@@ -244,4 +244,10 @@ module ApplicationHelper
     Features.active?(:super_fast_making)
   end
 
+  def super_fast_making_item_check(product)
+    if product.super_fast_making? && super_fast_making_active?
+     true
+    end
+  end
+
 end
