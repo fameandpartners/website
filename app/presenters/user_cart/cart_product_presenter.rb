@@ -9,6 +9,7 @@ module UserCart
       result[:image] = image.marshal_dump if image.present?
       result[:size] = size.marshal_dump if size.present?
       result[:color] = color if color.present?
+      result[:color_price_cents] = color[:custom_color] ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0 if color.present?
       result[:fabric] = fabric if fabric.present?
       result[:from_wedding_atelier] = from_wedding_atelier
       result[:display_height] = display_height(height_value, height_unit, height)

@@ -89,6 +89,7 @@ FAKE_GROUPS = [
         id: 1,
         title: "Style",
         slug: 'style',
+        previewType: :render,
         sections: [
           {
             title: "Select your style",
@@ -102,6 +103,7 @@ FAKE_GROUPS = [
         id: 2,
         title: "Length",
         slug: 'length',
+        previewType: :render,
         sections: [
           {
             title: "Select your length",
@@ -122,6 +124,7 @@ FAKE_GROUPS = [
         id: 3,
         title: "Front & Back",
         slug: 'front-and-back',
+        previewType: :render,
         sections: [
           {
             title: "Select your front",
@@ -141,6 +144,7 @@ FAKE_GROUPS = [
         id: 4,
         title: "Straps & Sleeves",
         slug: 'straps-and-sleeves',
+        previewType: :render,
         sections: [
           {
             title: "Select your straps & sleeves",
@@ -154,6 +158,7 @@ FAKE_GROUPS = [
         id: 5,
         title: "Extras",
         slug: 'extras',
+        previewType: :render,
         sections: [
           {
             title: "Select your extras",
@@ -186,8 +191,6 @@ module Api
         produt_viewmodel = {
           id: product.id,
           cartId: product.master.id,
-          previewType: product.id == FAKE_PRODUCT_ID ? :render : :illustration,
-
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: "Estimated delivery 6 weeks.",
 
@@ -210,7 +213,7 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            colors.map.with_index {|c, index|
+            fabrics.empty? ? colors.map.with_index {|c, index|
               {
                 sectionId: :color,
                 cartId: c.option_value.id,
@@ -237,7 +240,7 @@ module Api
                 incompatibleWith: c.custom ? ['express_making'] : [],
                 compatibleWith: [],
               }
-            },
+            } : [],
 
             fabrics.map {|c|
               {
@@ -247,7 +250,7 @@ module Api
                 isDefault: false,
                 isRecommended: !c.price_in(current_site_version.currency)  == 0,
                 title: c.presentation,
-                price: c.price_in(current_site_version.currency),
+                price: (c.price_in(current_site_version.currency).amount * 100).to_i,
                 "isProductCode": true,
                 type: :fabric,
                 meta: {
@@ -363,6 +366,7 @@ module Api
                 {
                   title: "Color",
                   slug: 'color',
+                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
                   sections: [
                     {
                       title: "Select your color",
@@ -381,6 +385,7 @@ module Api
                 {
                   title: "Color & Fabric",
                   slug: 'fabric',
+                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
                   sections: [
                     {
                       title: "Select your color & fabric",
@@ -401,6 +406,7 @@ module Api
                 {
                   title: "Customize",
                   slug: 'customize',
+                  previewType: :cad,
                   sections: [
                     {
                       title: "Select your customizations",
@@ -423,6 +429,7 @@ module Api
                 {
                   title: "Size",
                   slug: 'size',
+                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
                   sections: [
                     {
                       title: "Select your height and size",
