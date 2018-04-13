@@ -78,7 +78,25 @@
 
 .ribbon-wrapper.PriceDrop .ribbon-txt {
   background-color: rgba($c-price-drop-bg, 0.4);
- }
+}
+
+.Ribbon__SuperExpress {
+  top: 48%;
+  width: 100%;
+  right: -39px;
+
+  .ribbon-txt {
+    position: absolute;
+    background: $c-neutral-white;
+    color: $c-super-express-ribbon-txt;
+    font-weight: 600;
+    font-size: 0.55em;
+    padding: 4px 15px 2px;
+    right: 0;
+    @include transform(rotate(-90deg));
+  }
+
+}
 
 
 .category-text-box {
