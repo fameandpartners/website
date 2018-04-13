@@ -9,7 +9,8 @@ module Policies
 
     DAYS_FOR_DELIVERY = 4
     EXPRESS_MAKING    = {:days_for_making => 2, :days_for_delivery => DAYS_FOR_DELIVERY}
-    FAST_MAKING       = {:days_for_making => 5, :days_for_delivery => DAYS_FOR_DELIVERY}
+    FAST_MAKING       = {:days_for_making => 10, :days_for_delivery => DAYS_FOR_DELIVERY}
+    SUPER_FAST_MAKING = {:days_for_making => 5, :days_for_delivery => DAYS_FOR_DELIVERY}
     SPECIAL_ORDER     = {:days_for_making => 10, :days_for_delivery => DAYS_FOR_DELIVERY}
 
     PRINTED_MATCH   = /Print|Animal|Aztec|Baroque|Brocade|Check|Checkered|Conversational|Digital|Floral|Geometric|Gingham|Ikat|Leopard|Monochrome|Ombre|Paisley|Patchwork|Photographic|Plaid|Polka Dot|Psychedelic|Scarf|Spots|Stripes|Tie Dye|Tribal|Tropical|Victorian|Watercolour|Zebra/i
@@ -53,8 +54,17 @@ module Policies
       return false
     end
 
+    def super_fast_making?
+      return false if @making_options == "standard"
+      if @product.making_options.present?
+        return true if @product.try(:making_options).any?{|mo| mo.name == "Super Express Making"}
+      end
+      return false
+    end
+    
     def delivery_date
       return FAST_MAKING if fast_making?
+      return SUPER_FAST_MAKING if super_fast_making?
       if @product.standard_days_for_making.present? && @product.customised_days_for_making.present?
         return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
         return {days_for_making: @product.customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
