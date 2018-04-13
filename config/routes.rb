@@ -368,7 +368,7 @@ FameAndPartners::Application.routes.draw do
     # PROM LPs - Edit pages
     #############################
     # Prom LP - Say Lou Lou Edit page
-    get '/evening-collection-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+    get '/evening-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
 
 
     # A long tradition of hacking shit in.
