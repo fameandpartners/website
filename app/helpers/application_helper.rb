@@ -240,4 +240,8 @@ module ApplicationHelper
     end
   end
 
+  def super_fast_making_active?
+    Features.active?(:super_fast_making)
+  end
+
 end
