@@ -123,6 +123,8 @@ gem 'ruby-progressbar', :require => false
 
 gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
+gem 'unicorn'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', '~> 1.8.0'
@@ -133,7 +135,6 @@ end
 
 group :development do
   gem 'foreman', require: false
-  gem 'puma'
   gem 'better_errors'
   gem 'awesome_print', require: "ap"
   gem 'letter_opener', '~> 1.4.1'
@@ -142,6 +143,7 @@ group :development do
   gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'binding_of_caller'
+  gem 'rack-handlers'
 end
 
 group :test do
@@ -166,7 +168,6 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn'
   gem 'aws-sdk'
 end
 
