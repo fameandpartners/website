@@ -183,7 +183,7 @@ module Api
         product = Spree::Product.active.find(params[:id])
 
         colors = product.product_color_values.active
-        fabrics = product.fabrics
+        fabrics = product.fabric_products
         sizes = product.option_types.find_by_name('dress-size').option_values
         customisations = JSON.parse!(product.customizations)
 
@@ -242,15 +242,15 @@ module Api
               }
             } : [],
 
-            fabrics.map {|c|
+            fabrics.map {|f|
               {
                 sectionId: :fabric,
-                cartId: c.id,
-                code: c.name,
+                cartId: f.fabric.id,
+                code: f.fabric.name,
                 isDefault: false,
-                isRecommended: !c.price_in(current_site_version.currency)  == 0,
-                title: c.presentation,
-                price: (c.price_in(current_site_version.currency).amount * 100).to_i,
+                isRecommended: f.recommended,
+                title: f.fabric.presentation,
+                price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
                 "isProductCode": true,
                 type: :fabric,
                 meta: {
@@ -258,17 +258,17 @@ module Api
                   # hex: c.option_value.value,
                   
                   image: {
-                    url: c.image_url,
+                    url: f.fabric.image_url,
                     width: 0,
                     height: 0,
                   },
 
                   careDescription: CARE_DESCRIPTION,
-                  fabricDescription: find_product_property(product, 'fabric'),
+                  fabricDescription: f.description,
                   deliveryTimeDescription: ''
                 },
-                img: c.image_url,
-                incompatibleWith: c.price_in(current_site_version.currency)  > 0 ? ['express_making'] : [],
+                img: f.fabric.image_url,
+                incompatibleWith: f.recommended ? [] : ['express_making'],
                 compatibleWith: [],
               }
             },
@@ -389,7 +389,7 @@ module Api
                   sections: [
                     {
                       title: "Select your color & fabric",
-                      options: fabrics.map {|f| f.name},
+                      options: fabrics.map {|f| f.fabric.name},
                       selectionType: "requiredOne",
 
                     }]
