@@ -124,3 +124,74 @@
 .Editorial__bottomCaptionBlocks {
   margin: 0 2px;
 }
+
+// Hero tile
+.HeroTile__video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.HeroTileCaptionHeading {
+  font-size: 5rem;
+  line-height: 100%;
+  padding-bottom: 10px;
+}
+
+.HeroTileCaptionHeading--large {
+  font-size: 7rem;
+}
+
+.HeroTileCaptionHeading--small {
+  font-size: 3.5rem;
+  line-height: 120%;
+}
+
+.HeroTileCaptionSubheading {
+  border: 0;
+  font-style: normal;
+  font-size: 2.1rem;
+  line-height: 130%;
+  padding: 25px 0;
+  display: block;
+}
+
+.HeroTileCaption__verticalPositionTop {
+  margin-top: 130px;
+}
+
+.HeroTileCaption__verticalPositionBottom {
+  margin-bottom: 130px;
+}
+
+.HeroTileCaption__alignmentLeft,
+.HeroTileCaption__alignmentRight {
+  padding-right: 90px;
+  padding-left: 90px;
+}
+
+.HeroTileCaption--white {
+  color: $c-white;
+}
+
+@include breakpoint(tablet) {
+
+  .HeroTileCaption__alignmentLeft {
+    justify-content: flex-start;
+  }
+
+  .HeroTileCaption__alignmentRight {
+    justify-content: flex-end;
+  }
+
+}
+
+@include breakpoint(mobile-max) {
+
+  .HeroTileCaption {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+}

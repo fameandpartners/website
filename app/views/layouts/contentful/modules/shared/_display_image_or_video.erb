@@ -1,3 +1,4 @@
+<% item_url = remove_link_media == false ? item_url : nil  %>
 <%= link_to_if_with_block item_url.present?, item_url do %>
 
   <% # Desktop media %>
