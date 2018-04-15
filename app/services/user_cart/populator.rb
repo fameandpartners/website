@@ -58,9 +58,6 @@ class Populator
 
   private
     def validate!
-      if product_color.custom && product_making_options.present?
-        raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
-      end
     end
 
     def add_product_to_cart

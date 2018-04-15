@@ -5,7 +5,7 @@ module Marketing
     module Presenter
       describe Order, type: :presenter do
         let(:line_item) { build(:dress_item, quantity: 2, price: 12.34) }
-        let(:order) { build(:complete_order, email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
+        let(:order) { build(:complete_order, id: '123456789', email: 'something@intheway.com', number: 'R123456', currency: 'AUD', line_items: [line_item]) }
 
         subject(:presenter) { described_class.new(spree_order: order) }
 
@@ -21,6 +21,7 @@ module Marketing
             it 'returns hash order details' do
               expect(order).to receive(:promotions).and_return([double('promo', code: 'C336V398', event_name: "spree.checkout.coupon_code_added")])
               expect(subject.body).to eq({
+                                             id:                     123456789,
                                              coupon_code:            'C336V398',
                                              currency:               'AUD',
                                              email:                  'something@intheway.com',
