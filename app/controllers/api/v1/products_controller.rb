@@ -235,7 +235,6 @@ module Api
 
                   careDescription: CARE_DESCRIPTION,
                   fabricDescription: find_product_property(product, 'fabric'),
-                  deliveryTimeDescription: ''
                 },
                 incompatibleWith: c.custom ? ['express_making'] : [],
                 compatibleWith: [],
@@ -265,7 +264,6 @@ module Api
 
                   careDescription: CARE_DESCRIPTION,
                   fabricDescription: f.description,
-                  deliveryTimeDescription: ''
                 },
                 img: f.fabric.image_url,
                 incompatibleWith: f.recommended ? [] : ['express_making'],
@@ -290,7 +288,6 @@ module Api
 
                   careDescription: CARE_DESCRIPTION,
                   fabricDescription: find_product_property(product, 'fabric'),
-                  deliveryTimeDescription: ''
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
@@ -335,6 +332,7 @@ module Api
                 meta: {
                   sortOrder: 1,
                   deliveryTimeDescription: 'Estimated delivery 2-3 weeks.',
+                  deliveryTimeRange: "2 - 3 weeks"
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
