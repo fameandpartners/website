@@ -79,11 +79,18 @@ module Contentful
         }
       end
 
-      second_hero = {
-        image: parent_container.secondary_header_container.secondary_header_image.url,
-        mobile_image: parent_container.secondary_header_container.secondary_header_mobile_image.url,
-        path_link: parent_container.secondary_header_container.secondary_header_link
-      }
+      secondary_hero_tiles = parent_container.secondary_header_container.map do |item|
+
+        desktop_image = (item.respond_to? :secondary_header_image) ? item.secondary_header_image.url : nil
+        mobile_image = (item.respond_to? :secondary_header_mobile_image) ? item.secondary_header_mobile_image.url : nil
+        path_link = (item.respond_to? :secondary_header_link) ? item.secondary_header_link : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          path_link: path_link
+        }
+      end
 
       category_tiles = parent_container.category_tiles_container.map do |item|
 
@@ -123,7 +130,7 @@ module Contentful
 
       @main_container = {
         hero_tiles: hero_tiles,
-        secondary_header: second_hero,
+        secondary_header: secondary_hero_tiles,
         category_tiles: category_tiles,
         instagram_tiles: ig_tiles
       }

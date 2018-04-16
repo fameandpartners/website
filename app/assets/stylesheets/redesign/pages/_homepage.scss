@@ -141,6 +141,15 @@
   color: $c-neutral-white;
 }
 
+// Secondary Hero Tiles
+.SecondaryHeroTile {
+  margin-top: 4px;
+}
+
+.SecondaryHeroTile:first-child {
+  margin-top: 0;
+}
+
 @media (max-width: $bootstrap-lg-width - 1px) {
 
   .HeroTileCaption__alignmentLeft,
