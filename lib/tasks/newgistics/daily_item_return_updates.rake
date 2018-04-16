@@ -31,30 +31,39 @@ namespace :newgistics do
 
         failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
 
-        unless failed_items.nil? || failed_items.empty?
 
-          newgistics_order_id = item_return['orderID']
-          inventory_response = client.get_inventory_details(scheduler.last_successful_run)
+        if item_return['Items']['Item']['ReturnReason'].downcase.include?('quarantine')
+          QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
 
-          inventory_response['response']['inventories']['inventory'].select do |inventory|
-            inventory['order_id'] == newgistics_order_id
-          end
-
-          damaged_inventory_items = inventories.select do |item|
-            item['reasonCode']['id'].to_i < 4 && failed_item_skus.include?(item['SKU']) # codes 1,2,3 represent damage in some form
-          end
-          quarantined_inventory_items = inventories.select do |item|
-            item['reasonCode']['id'].to_i == 10 && failed_item_skus.include?(item['SKU']) # codes 10 represent quarantined
-          end
+        elsif item_return['Items']['Item']['ReturnReason']
+          DamagedReturnsMailer.email(order, item_return['Items']['Item'])
         end
 
-        unless damaged_inventory_items.nil? || damaged_inventory_items.empty?
-          DamagedReturnsMailer.email(order, damaged_inventory_items)
-        end
 
-        unless quarantined_inventory_items.nil? || quarantined_inventory_items.empty?
-          QuarantinedReturnsMailer.email(order, damaged_inventory_items)
-        end
+        # unless failed_items.nil? || failed_items.empty?
+
+        #   newgistics_order_id = item_return['orderID']
+        #   inventory_response = client.get_inventory_details(scheduler.last_successful_run)
+
+        #   inventory_response['response']['inventories']['inventory'].select do |inventory|
+        #     inventory['order_id'] == newgistics_order_id
+        #   end
+
+        #   damaged_inventory_items = inventories.select do |item|
+        #     item['reasonCode']['id'].to_i < 4 && failed_item_skus.include?(item['SKU']) # codes 1,2,3 represent damage in some form
+        #   end
+        #   quarantined_inventory_items = inventories.select do |item|
+        #     item['reasonCode']['id'].to_i == 10 && failed_item_skus.include?(item['SKU']) # codes 10 represent quarantined
+        #   end
+        # end
+
+        # unless damaged_inventory_items.nil? || damaged_inventory_items.empty?
+        #   DamagedReturnsMailer.email(order, damaged_inventory_items)
+        # end
+
+        # unless quarantined_inventory_items.nil? || quarantined_inventory_items.empty?
+        #   QuarantinedReturnsMailer.email(order, damaged_inventory_items)
+        # end
 
       end
     end
@@ -66,7 +75,7 @@ end
 def autorefund_items(order, items)
   item = items['Item']
   if item
-      line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] } # will return variant sku or personalization as needed to compare with sku
+      line_items = order.line_items.select { |li| CustomItemSku.new(li).call == item['SKU'] }# will return variant sku or personalization as needed to compare with sku
                         .take(item['QtyReturnedToStock'].to_i) # in case of multiple line items with matching skus only select the acceptable ones
       line_items.each do |li| # iterate over line_items and and move them along event progression.
         #receive_return(order, li)
