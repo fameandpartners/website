@@ -187,18 +187,20 @@ module Api
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
 
+        slow_making_option = product.making_options.find(&:slow_making?)
+
 
         product_viewmodel = {
           id: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
-          deliveryTimeDescription: "Estimated delivery 6 weeks.",
+          deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
 
           curationMeta: {
             name: product.name,
             description: product.description,
             keywords: product.meta_keywords,
-            styleDescription: find_product_property(product, 'style_notes'),
+            styleDescription: product.property('style_notes'),
             permaLink: product.permalink
           },
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
@@ -213,134 +215,15 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            fabrics.empty? ? colors.map.with_index {|c, index|
-              {
-                sectionId: :color,
-                cartId: c.option_value.id,
-                code: c.option_value.name,
-                isDefault: index == 0,
-                isRecommended: !c.custom,
-                title: c.option_value.presentation,
-                price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
-                "isProductCode": true,
-                type: :color,
-                "meta": {
-                  sortOrder: c.option_value.position,
-                  hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-                  image: {
-                    url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
-                    width: 0,
-                    height: 0,
-                  },
+            fabrics.empty?  ? colors.map {|c| map_color(c, product) }  : fabrics.map { |f| map_fabric(f) },
 
-                  careDescription: CARE_DESCRIPTION,
-                  fabricDescription: find_product_property(product, 'fabric'),
-                },
-                incompatibleWith: c.custom ? ['fast_making'] : [],
-                compatibleWith: [],
-              }
-            } : [],
+            sizes.map {|s| map_size(s) },
 
-            fabrics.map {|f|
-              {
-                sectionId: :fabric,
-                cartId: f.fabric.id,
-                code: f.fabric.name,
-                isDefault: false,
-                isRecommended: f.recommended,
-                title: f.fabric.presentation,
-                price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
-                "isProductCode": true,
-                type: :fabric,
-                meta: {
-                  sortOrder: -1, #TODO
-                  # hex: c.option_value.value,
-                  
-                  image: {
-                    url: f.fabric.image_url,
-                    width: 0,
-                    height: 0,
-                  },
-
-                  careDescription: CARE_DESCRIPTION,
-                  fabricDescription: f.description,
-                },
-                img: f.fabric.image_url,
-                incompatibleWith: f.recommended ? [] : ['fast_making'],
-                compatibleWith: [],
-              }
-            },
-
-            sizes.map {|c|
-              {
-                sectionId: :size,
-                cartId: c.id,
-                code: c.name,
-                isDefault: false,
-                title: c.presentation,
-                price: 0,
-                isProductCode: false,
-                type: :size,
-                meta: {
-                  sortOrder: c.position,
-                  sizeUs: c.name.split("/")[0],
-                  sizeAu: c.name.split("/")[1],
-
-                  careDescription: CARE_DESCRIPTION,
-                  fabricDescription: find_product_property(product, 'fabric'),
-                },
-                compatibleWith: [],
-                incompatibleWith: [],
-              }
-            },
-
-            product.id == FAKE_PRODUCT_ID ? [] : customizations.map {|c|
-              {
-                sectionId: :legacyCustomization,
-                cartId: c['customisation_value']['id'],
-                code: c['customisation_value']['name'],
-                isDefault: false,
-                title: c['customisation_value']['presentation'],
-                price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
-                isProductCode: true,
-                type: :legacyCustomization,
-                meta: {
-                  sortOrder: c['customisation_value']['position'],
-                  image: {
-                    url: customization_image(c['customisation_value']),
-                    width: -1,
-                    height: -1
-                  }
-                },
-                compatibleWith: [],
-                incompatibleWith: [],
-              }
-            },
-
-            product.id == FAKE_PRODUCT_ID ? FAKE_COMPONENTS : nil,
-
+            product.id == FAKE_PRODUCT_ID ? FAKE_COMPONENTS : customizations.map {|c| map_customization(c) },
 
             product.making_options
               .reject { |making| making.slow_making? }
-              .map { |making|
-              {
-                sectionId: :making,
-                cartId: making.id,
-                code: making.option_type,
-                isDefault: false,
-                title: making.name,
-                price: (making.price*100).to_i,
-                isProductCode: false,
-                type: :making,
-                meta: {
-                  sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
-                  deliveryTimeDescription: making.description,
-                  deliveryTimeRange: making.display_delivery_period
-                },
-                compatibleWith: [],
-                incompatibleWith: [],
-              }
-            },
+              .map { |making| map_making(making) },
 
             [
               {
@@ -361,6 +244,7 @@ module Api
               }
             ]
           ].flatten.compact,
+
           groups: [
             colors.length > 0  && fabrics.empty? && {
               title: 'Color',
@@ -395,7 +279,6 @@ module Api
                       title: "Select your color & fabric",
                       options: fabrics.map {|f| f.fabric.name},
                       selectionType: "requiredOne",
-
                     }]
                 }
               ]
@@ -446,63 +329,185 @@ module Api
 
           media: product.images
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
-            .map {|image|
-            {
-              type: :photo,
-              fitDescription: find_product_property(product, 'fit'),
-              sizeDescription: find_product_property(product, 'size'),
-              src: PRODUCT_IMAGE_SIZES.map {|image_size|
-                geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
-
-                {
-                  name: image_size,
-                  width: image_size == :original ? image.attachment_width : geometry.width,
-                  height: image_size == :original ? image.attachment_height : geometry.height,
-                  url: image.attachment.url(image_size),
-                }
-              },
-              sortOrder: image.position,
-              options: [
-                image&.viewable_type == "FabricsProduct" ? image&.viewable&.fabric&.name  : image&.viewable&.option_value&.name
-
-              ]
-            }
-          },
+            .map {|image| map_image(image, product) },
 
           layerCads: [
-            product.layer_cads.map {|lc|
-              {
-                url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
-                width: lc.width,
-                height: lc.height,
-                sortOrder: lc.position,
-                type: lc.base_image_name ? :base : :layer,
-                components: lc.customizations_enabled_for.map.with_index {|active, index|
-                  active ? customizations[index]['customisation_value']['name'] : nil
-                }.compact
-              }
-            },
-            
-            customizations.map {|c|
-              {
-                url: customization_image(c['customisation_value']),
-                width: -1,
-                height: -1,
-                sortOrder: c['customisation_value']['position'],
-                type: :layer,
-                components: [c['customisation_value']['name']]
-              }
-            }
+            product.layer_cads.map {|lc| map_layer_cad(lc, customizations) },
+            customizations.map {|c| map_cad_from_customization(c)}
           ].flatten.compact,
         }
         respond_with product_viewmodel.to_json
       end
 
       private
-      def find_product_property(product, property_name)
-        product.product_properties.find {|pp| pp.property.name == property_name}&.value
+
+      def map_cad_from_customization(c)
+        {
+          url: customization_image(c['customisation_value']),
+          width: -1,
+          height: -1,
+          sortOrder: c['customisation_value']['position'],
+          type: :layer,
+          components: [c['customisation_value']['name']]
+        }
       end
 
+      def map_layer_cad(lc, customizations)
+        {
+          url: lc.base_image_name ? lc.base_image.url : lc.layer_image.url,
+          width: lc.width,
+          height: lc.height,
+          sortOrder: lc.position,
+          type: lc.base_image_name ? :base : :layer,
+          components: lc.customizations_enabled_for.map.with_index {|active, index|
+            active ? customizations[index]['customisation_value']['name'] : nil
+          }.compact
+        }
+      end
+
+      def map_image(image, product) 
+        {
+          type: :photo,
+          fitDescription: product.property('fit'),
+          sizeDescription: product.property('size'),
+          src: PRODUCT_IMAGE_SIZES.map {|image_size|
+            geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
+
+            {
+              name: image_size,
+              width: image_size == :original ? image.attachment_width : geometry.width,
+              height: image_size == :original ? image.attachment_height : geometry.height,
+              url: image.attachment.url(image_size),
+            }
+          },
+          sortOrder: image.position,
+          options: [
+            image&.viewable_type == "FabricsProduct" ? image&.viewable&.fabric&.name  : image&.viewable&.option_value&.name
+
+          ]
+        }
+      end
+
+      def map_customization(c)
+        {
+          sectionId: :legacyCustomization,
+          cartId: c['customisation_value']['id'],
+          code: c['customisation_value']['name'],
+          isDefault: false,
+          title: c['customisation_value']['presentation'],
+          price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
+          isProductCode: true,
+          type: :legacyCustomization,
+          meta: {
+            sortOrder: c['customisation_value']['position'],
+            image: {
+              url: customization_image(c['customisation_value']),
+              width: -1,
+              height: -1
+            }
+          },
+          compatibleWith: [],
+          incompatibleWith: [],
+        }
+      end
+      
+      def map_making(making)
+        {
+          sectionId: :making,
+          cartId: making.id,
+          code: making.option_type,
+          isDefault: false,
+          title: making.name,
+          price: (making.price*100).to_i,
+          isProductCode: false,
+          type: :making,
+          meta: {
+            sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
+            deliveryTimeDescription: making.description,
+            deliveryTimeRange: making.display_delivery_period
+          },
+          compatibleWith: [],
+          incompatibleWith: [],
+        }
+      end
+
+      def map_fabric(f)
+        {
+          sectionId: :fabric,
+          cartId: f.fabric.id,
+          code: f.fabric.name,
+          isDefault: false,
+          isRecommended: f.recommended,
+          title: f.fabric.presentation,
+          price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
+          isProductCode: true,
+          type: :fabric,
+          meta: {
+            sortOrder: -1, #TODO
+            # hex: c.option_value.value,
+            
+            image: {
+              url: f.fabric.image_url,
+              width: 0,
+              height: 0,
+            },
+
+            careDescription: CARE_DESCRIPTION,
+            fabricDescription: f.description,
+          },
+          img: f.fabric.image_url,
+          incompatibleWith: f.recommended ? [] : ['fast_making'],
+          compatibleWith: [],
+        }
+      end
+
+      def map_color(c, product)
+        {
+          sectionId: :color,
+          cartId: c.option_value.id,
+          code: c.option_value.name,
+          isDefault: false,
+          isRecommended: !c.custom,
+          title: c.option_value.presentation,
+          price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+          isProductCode: true,
+          type: :color,
+          meta: {
+            sortOrder: c.option_value.position,
+            hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
+            image: {
+              url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
+              width: 0,
+              height: 0,
+            },
+
+            careDescription: CARE_DESCRIPTION,
+            fabricDescription: product.property('fabric'),
+          },
+          incompatibleWith: c.custom ? ['fast_making'] : [],
+          compatibleWith: [],
+        }
+      end
+
+      def map_size(s)
+        {
+          sectionId: :size,
+          cartId: s.id,
+          code: s.name,
+          isDefault: false,
+          title: s.presentation,
+          price: 0,
+          isProductCode: false,
+          type: :size,
+          meta: {
+            sortOrder: s.position,
+            sizeUs: s.name.split("/")[0],
+            sizeAu: s.name.split("/")[1],
+          },
+          compatibleWith: [],
+          incompatibleWith: [],
+        }
+      end
 
       def color_image(image_file_name)
         return nil unless image_file_name
@@ -518,6 +523,4 @@ module Api
 
     end
   end
-
-
 end
