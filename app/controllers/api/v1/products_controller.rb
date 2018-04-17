@@ -319,24 +319,30 @@ module Api
 
             product.id == FAKE_PRODUCT_ID ? FAKE_COMPONENTS : nil,
 
-            [
+
+            product.making_options
+              .reject { |making| making.slow_making? }
+              .map { |making|
               {
-                sectionId: :todo,
-                cartId: 0,
-                code: 'express_making',
+                sectionId: :making,
+                cartId: making.id,
+                code: making.option_type,
                 isDefault: false,
-                title: "Express Making",
-                price: 1800,
+                title: making.name,
+                price: (making.price*100).to_i,
                 isProductCode: false,
                 type: :making,
                 meta: {
-                  sortOrder: 1,
-                  deliveryTimeDescription: 'Estimated delivery 2-3 weeks.',
-                  deliveryTimeRange: "2 - 3 weeks"
+                  sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
+                  deliveryTimeDescription: making.description,
+                  deliveryTimeRange: making.display_delivery_period
                 },
                 compatibleWith: [],
                 incompatibleWith: [],
-              },
+              }
+            },
+
+            [
               {
                 sectionId: :todo,
                 cartId: 0,
