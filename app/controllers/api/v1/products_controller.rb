@@ -236,7 +236,7 @@ module Api
                   careDescription: CARE_DESCRIPTION,
                   fabricDescription: find_product_property(product, 'fabric'),
                 },
-                incompatibleWith: c.custom ? ['express_making'] : [],
+                incompatibleWith: c.custom ? ['fast_making'] : [],
                 compatibleWith: [],
               }
             } : [],
@@ -266,7 +266,7 @@ module Api
                   fabricDescription: f.description,
                 },
                 img: f.fabric.image_url,
-                incompatibleWith: f.recommended ? [] : ['express_making'],
+                incompatibleWith: f.recommended ? [] : ['fast_making'],
                 compatibleWith: [],
               }
             },
