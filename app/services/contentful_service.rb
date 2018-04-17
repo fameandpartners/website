@@ -310,6 +310,22 @@ module Contentful
           cta_button_border_color: cta_button_border_color,
           hero_tile_site_version: hero_tile_site_version
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--editorial-tile-copy-pid')
+        editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
+        bottom_caption = (fetched_lg_container.respond_to? :bottom_caption) ? fetched_lg_container.bottom_caption : nil
+        text = (fetched_lg_container.respond_to? :text) ? fetched_lg_container.text : nil
+        text_alignment = (fetched_lg_container.respond_to? :text_alignment) ? fetched_lg_container.text_alignment : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
+          editorial_tile_pid: editorial_tile_pid,
+          bottom_caption: bottom_caption,
+          text: text,
+          text_alignment: text_alignment
+        }
       end
     end
 
@@ -549,6 +565,12 @@ module Contentful
         image_replacement_3 = (item.respond_to? :image_replacement_3) ? item.image_replacement_3.url : nil
         image_replacement_4 = (item.respond_to? :image_replacement_4) ? item.image_replacement_4.url : nil
 
+        # Featured hero tile (get only the number from something like "1st Tile")
+        tile_featured = (item.respond_to? :tile_featured) ? (item.tile_featured.chr.to_i - 1) : nil
+
+        # Hero tile text
+        text = (item.respond_to? :text) ? item.text : nil
+
         {
           id: item_id,
           lg_item: lg_item,
@@ -577,7 +599,9 @@ module Contentful
           image_replacement_1: image_replacement_1,
           image_replacement_2: image_replacement_2,
           image_replacement_3: image_replacement_3,
-          image_replacement_4: image_replacement_4
+          image_replacement_4: image_replacement_4,
+          tile_featured: tile_featured,
+          text: text
         }
       end
 
