@@ -7,7 +7,7 @@ class WebpackProxy < Rack::Proxy
       env['HTTP_HOST'] = configatron.node_pdp_url
       env['REQUEST_PATH'] = request.fullpath
       super(env)
-    elsif request.path =~ configatron.fame_webclient_regex
+    elsif Features.active?(:new_pdp) && request.path =~ configatron.fame_webclient_regex
       backend = URI(configatron.fame_webclient_url)
 
       env['HTTP_HOST'] = "#{backend.host}:#{backend.port}"
