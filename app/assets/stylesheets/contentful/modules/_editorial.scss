@@ -175,6 +175,50 @@
   color: $c-white;
 }
 
+.HeroTile--sideBySide .column {
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+.HeroTile__caption {
+  padding: 20px 0;
+}
+
+.HeroTile__secondaryTileCopy,
+.HeroTile__infoCopy,
+.HeroTile__ctaCopyWrapper {
+  font-family: $secondary-font-family;
+  font-size: 1.7rem;
+}
+
+.HeroTile--sideBySide .HeroTile__infoCopy {
+  margin-top: 10px;
+}
+
+.HeroTile__ctaCopy {
+  font-style: italic;
+  font-size: 1.6rem;
+  padding-right: 3px;
+}
+
+.HeroTile__productInfo .Product {
+  padding-bottom: 0;
+}
+
+.HeroTile__productInfo .Product__name {
+  border-bottom: 1px solid #ccc;
+  margin-top: 0;
+  text-transform: none;
+}
+
+.HeroTile__ctaCopyWrapper .Product__name,
+.HeroTile__ctaCopyWrapper .Product__price {
+  font-family: $secondary-font-family;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
+}
+
 @include breakpoint(tablet) {
 
   .HeroTileCaption__alignmentLeft {
@@ -185,13 +229,79 @@
     justify-content: flex-end;
   }
 
+  .HeroTile__secondaryTile {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  .HeroTile .column:first-of-type {
+
+    .HeroTile__secondaryTile {
+      margin: 0 6rem 0 2rem;
+    }
+
+    .HeroTile__featuredTile,
+    .HeroTile__secondaryTile .HeroTile__ctaCopyWrapper {
+      text-align: right;
+    }
+
+  }
+
+  .HeroTile .column:last-of-type .HeroTile__secondaryTile {
+    margin: 0 2rem 0 6rem;
+  }
+
+  .HeroTile__secondaryTileCopy {
+    padding: 0 65px 60px;
+  }
+
+  .HeroTile__singleTile {
+
+    .HeroTile__ctaCopyWrapper {
+      text-align: right;
+    }
+
+  }
+
+}
+
+@include tablet-only {
+
+  .HeroTile .column:last-of-type,
+  .HeroTile .column:first-of-type {
+
+    .HeroTile__secondaryTile {
+      margin: 0;
+    }
+
+  }
+
+  .HeroTile__secondaryTileCopy {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
 }
 
 @include breakpoint(mobile-max) {
 
-  .HeroTileCaption {
+  .HeroTileCaption,
+  .HeroTile__caption {
     padding-left: 5%;
     padding-right: 5%;
   }
+
+  .HeroTile__secondaryTileCopy {
+    padding: 10% 5%;
+  }
+
+  .HeroTile__caption {
+    text-align: center;
+  }
+
+  .HeroTile__infoCopy {
+    margin-top: 10px;
+  }
+
 
 }
