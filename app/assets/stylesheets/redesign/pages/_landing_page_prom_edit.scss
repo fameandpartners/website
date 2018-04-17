@@ -14,7 +14,8 @@
 
   .Btn__ctaHeroTile:hover,
   .Btn__ctaHeroTile:focus {
-    color: $c-neutral-white;
+    background: $c-neutral-white;
+    color: $c-neutral-black;
   }
 
 }
