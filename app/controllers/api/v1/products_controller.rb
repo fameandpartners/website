@@ -15,7 +15,7 @@ PRODUCT_IMAGE_SIZES = [:original, :product]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
-FAKE_PRODUCT_ID = 1619
+FAKE_PRODUCT_ID = 1625
 
 FAKE_COMPONENTS = [
   #  Silhouette
@@ -90,6 +90,7 @@ FAKE_GROUPS = [
         title: "Style",
         slug: 'style',
         previewType: :render,
+        zoom: "none",
         sections: [
           {
             sectionId: "style",
@@ -98,7 +99,7 @@ FAKE_GROUPS = [
               'BC1', 'BC2', 'BC3', 'BC4', 'BC5', 'BC6', 'BC7'
             ],
             selectionType: "requiredOne",
-            zoom: "none",
+            orientation: "front",
           }
         ]
       },
@@ -107,6 +108,7 @@ FAKE_GROUPS = [
         title: "Length",
         slug: 'length',
         previewType: :render,
+        zoom: "bottom",
         sections: [
           {
             sectionId: "length",
@@ -115,7 +117,7 @@ FAKE_GROUPS = [
               'extra-mini', 'mini', 'midi', 'maxi', 'knee'
             ],
             selectionType: "requiredOne",
-            zoom: "bottom",
+            orientation: "front",
           }
         ]
       }
@@ -131,32 +133,31 @@ FAKE_GROUPS = [
         title: "Front & Back",
         slug: 'front-and-back',
         previewType: :render,
+        zoom: "top",
         sections: [
           {
             sectionId: 'front',
             title: "Select your front",
             options: ["T76", "T2", "T3", "T4"],
             relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            zoom: "top",
-            orientation: "front",
             selectionType: "requiredOne",
+            orientation: "front",
           },
           {
             sectionId: 'back',
             title: "Select your back",
             options: ["T1", "T11", "T15"],
             relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            zoom: "top",
-            orientation: "back",
             selectionType: "requiredOne",
+            orientation: "back",
           },
           {
             sectionId: 'waistband',
             title: "Select your waistband",
             options: ["WB1", "WB2"],
             relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            zoom: "none",
             selectionType: "optionalOne",
+            orientation: "front",
           }
         ]
       },
@@ -165,6 +166,7 @@ FAKE_GROUPS = [
         title: "Straps & Sleeves",
         slug: 'straps-and-sleeves',
         previewType: :render,
+        zoom: "top",
         sections: [
           {
             sectionId: 'strapsAndSleeves',
@@ -174,7 +176,7 @@ FAKE_GROUPS = [
             ],
             relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
             selectionType: "requiredOne",
-            zoom: "top",
+            orientation: "front",
           }
         ]
       },
@@ -184,13 +186,15 @@ FAKE_GROUPS = [
         slug: 'extras',
         previewType: :render,
         consolidateSections: true,
+        zoom: "none",
         sections: [
           {
             title: "Select your extras",
             options: [
               "T60", "T58", "A5", "T52"
             ],
-            selectionType: "optionalMultiple"
+            selectionType: "optionalMultiple",
+            orientation: "front",
           }
         ]
       }
@@ -357,9 +361,9 @@ module Api
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
             .map {|image| map_image(image, product) },
 
-          layerCads: [
+          layerCads: product.id != FAKE_PRODUCT_ID ? [
             product.layer_cads.empty? ? customizations.map {|c| map_cad_from_customization(c)} : product.layer_cads.map {|lc| map_layer_cad(lc, customizations) }
-          ].flatten.compact,
+          ].flatten.compact : [],
         }
         respond_with product_viewmodel.to_json
       end
