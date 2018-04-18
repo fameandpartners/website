@@ -92,10 +92,13 @@ FAKE_GROUPS = [
         previewType: :render,
         sections: [
           {
+            sectionId: "style",
             title: "Select your style",
             options: [
               'BC1', 'BC2', 'BC3', 'BC4', 'BC5', 'BC6', 'BC7'
-            ]
+            ],
+            selectionType: "requiredOne",
+            zoom: "none",
           }
         ]
       },
@@ -106,10 +109,13 @@ FAKE_GROUPS = [
         previewType: :render,
         sections: [
           {
+            sectionId: "length",
             title: "Select your length",
             options: [
               'extra-mini', 'mini', 'midi', 'maxi', 'knee'
-            ]
+            ],
+            selectionType: "requiredOne",
+            zoom: "bottom",
           }
         ]
       }
@@ -127,16 +133,30 @@ FAKE_GROUPS = [
         previewType: :render,
         sections: [
           {
+            sectionId: 'front',
             title: "Select your front",
-            options: ["T76", "T2", "T3", "T4"]
+            options: ["T76", "T2", "T3", "T4"],
+            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
+            zoom: "top",
+            orientation: "front",
+            selectionType: "requiredOne",
           },
           {
+            sectionId: 'back',
             title: "Select your back",
-            options: ["T1", "T11", "T15"]
+            options: ["T1", "T11", "T15"],
+            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
+            zoom: "top",
+            orientation: "back",
+            selectionType: "requiredOne",
           },
           {
+            sectionId: 'waistband',
             title: "Select your waistband",
-            options: ["WB1", "WB2"]
+            options: ["WB1", "WB2"],
+            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
+            zoom: "none",
+            selectionType: "optionalOne",
           }
         ]
       },
@@ -147,10 +167,14 @@ FAKE_GROUPS = [
         previewType: :render,
         sections: [
           {
+            sectionId: 'strapsAndSleeves',
             title: "Select your straps & sleeves",
             options: [
               "T22", "T26", "T71", "T30", "T33", "T34", "T68", "T51", "T31", "T52", "T25", "T85"
-            ]
+            ],
+            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
+            selectionType: "requiredOne",
+            zoom: "top",
           }
         ]
       },
@@ -159,6 +183,7 @@ FAKE_GROUPS = [
         title: "Extras",
         slug: 'extras',
         previewType: :render,
+        consolidateSections: true,
         sections: [
           {
             title: "Select your extras",
@@ -191,7 +216,8 @@ module Api
 
 
         product_viewmodel = {
-          id: product.id,
+          id: 'gp1', # TODO: Get real group from somewhere
+          productId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
