@@ -16,6 +16,7 @@
     price = product_price_with_discount(product[0])
     image = product[0].images.first
     image_hover = product[0].images.last
+    is_super_fast_making = product[0].super_fast_making
 
     if product[0].fabric.present?
       path = collection_product_path(product[0], color: product[0].fabric.try(:name))
@@ -41,8 +42,9 @@
       <% else %>
         <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
       <% end %>
-      <% # TO-DO: enter real logic here to display the Super Express ribbon %>
-      <%= render 'shared/redesign/ribbon_super_express_shipping' %>
+      <% if is_super_fast_making.present? %>
+        <%= render 'shared/redesign/ribbon_super_express_shipping' %>
+      <% end %>
     </div>
 
     <p class="Product__name"><%= name %></p>
