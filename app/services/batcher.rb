@@ -69,7 +69,7 @@ module Batcher
   def groom_batch_collection(batch_collection)
     batch_collection.batch_collection_line_items.active.each do |bcli|
       # if item is shipped or cancelled kick it out
-      if bcli.line_item.order&.shipment&.shipped_at.present? || bcli.line_item.order&.shipment&.tracking.present? || bcli.line_item.order.state == 'canceled'
+      if bcli.line_item&.order&.shipment&.shipped_at.present? || bcli.line_item&.order&.shipment&.tracking.present? || bcli.line_item&.order.state == 'canceled'
         bcli.line_item.delete
       end
 
