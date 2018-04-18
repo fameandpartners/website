@@ -205,7 +205,7 @@ module Api
       respond_to :json
 
       def show
-        product = Spree::Product.active.find(params[:id])
+        product = Spree::Product.not_deleted.find(params[:id])
 
         colors = product.product_color_values.active
         fabrics = product.fabric_products
@@ -227,8 +227,9 @@ module Api
             description: product.description,
             keywords: product.meta_keywords,
             styleDescription: product.property('style_notes'),
-            permaLink: product.permalink
+            permaLink: product.name.parameterize
           },
+          isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
           paymentMethods: {
             afterPay: current_site_version.is_australia?
