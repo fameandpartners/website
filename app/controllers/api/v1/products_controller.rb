@@ -209,15 +209,30 @@ module Api
       respond_to :json
 
       def show
-        product = Spree::Product.not_deleted.find(params[:id])
+        product = Spree::Product
+          .not_deleted
+          .includes(:product_properties)
+          .find(params[:id])
 
-        colors = product.product_color_values.active
-        fabrics = product.fabric_products
+        colors = product.product_color_values
+          .includes(:option_value)
+          .active
+
+        fabrics = product
+          .fabric_products
+          .includes(:fabric)
+
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
 
         slow_making_option = product.making_options.find(&:slow_making?)
+        product_fabric = product.property('fabric')
+        product_fit = product.property('fit')
+        product_size = product.property('size')
 
+        images = product
+          .images
+          .includes(:viewable)
 
         product_viewmodel = {
           id: product.id, # TODO: Get real group from somewhere
@@ -245,7 +260,7 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            fabrics.empty?  ? colors.map {|c| map_color(c, product) }  : fabrics.map { |f| map_fabric(f) },
+            fabrics.empty?  ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(f) },
 
             sizes.map {|s| map_size(s) },
 
@@ -357,9 +372,9 @@ module Api
             } || nil,
           ].flatten.compact,
 
-          media: product.images
+          media: images
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
-            .map {|image| map_image(image, product) },
+            .map {|image| map_image(image, fabrics, colors, product_fit, product_size) },
 
           layerCads: product.id != FAKE_PRODUCT_ID ? [
             product.layer_cads.empty? ? customizations.map {|c| map_cad_from_customization(c)} : product.layer_cads.map {|lc| map_layer_cad(lc, customizations) }
@@ -394,11 +409,21 @@ module Api
         }
       end
 
-      def map_image(image, product) 
+      def map_image(image, fabrics, colors, product_fit, product_size) 
+        option = nil
+
+        if image.viewable_type == "FabricsProduct"
+          fabric = fabrics.find { |f| f.id == image.viewable_id}
+          option = fabric&.fabric&.name
+        elsif image.viewable_type == "ProductColorValue"
+          color = colors.find { |f| f.id == image.viewable_id}
+          option = color&.option_value&.name
+        end
+
         {
           type: :photo,
-          fitDescription: product.property('fit'),
-          sizeDescription: product.property('size'),
+          fitDescription: product_fit,
+          sizeDescription: product_size,
           src: PRODUCT_IMAGE_SIZES.map {|image_size|
             geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
 
@@ -411,9 +436,8 @@ module Api
           },
           sortOrder: image.position,
           options: [
-            image&.viewable_type == "FabricsProduct" ? image&.viewable&.fabric&.name  : image&.viewable&.option_value&.name
-
-          ]
+            option
+          ].compact
         }
       end
 
@@ -490,7 +514,7 @@ module Api
         }
       end
 
-      def map_color(c, product)
+      def map_color(c, product_fabric)
         {
           sectionId: :color,
           cartId: c.option_value.id,
@@ -511,7 +535,7 @@ module Api
             },
 
             careDescription: CARE_DESCRIPTION,
-            fabricDescription: product.property('fabric'),
+            fabricDescription: product_fabric,
           },
           incompatibleWith: c.custom ? ['fast_making'] : [],
           compatibleWith: [],
