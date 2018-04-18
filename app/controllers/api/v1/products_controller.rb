@@ -358,8 +358,7 @@ module Api
             .map {|image| map_image(image, product) },
 
           layerCads: [
-            product.layer_cads.map {|lc| map_layer_cad(lc, customizations) },
-            customizations.map {|c| map_cad_from_customization(c)}
+            product.layer_cads ? product.layer_cads.map {|lc| map_layer_cad(lc, customizations) } : customizations.map {|c| map_cad_from_customization(c)}
           ].flatten.compact,
         }
         respond_with product_viewmodel.to_json
