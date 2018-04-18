@@ -13,11 +13,12 @@ ruby:
     - related.recommended.each do |recommended_product|
       .category--item.col-md-3.col-xs-6 data-id=(recommended_product.id)
         = link_to collection_product_path(recommended_product), :class => 'media-wrap' do
-          = image_tag recommended_product.image.try(:large), :class => 'img-product'
+          .ProductImageWrapper
+            = image_tag recommended_product.image.try(:large), :class => 'img-product'
 
-          // Super Express shipping ribbon
-          - if super_fast_making_item_check(recommended_product) && !price_drop_au_item_check(recommended_product.sku)
-            = render 'shared/redesign/ribbon_super_express_shipping'
+            // Super Express shipping ribbon
+            - if super_fast_making_item_check(recommended_product) && !price_drop_au_item_check(recommended_product.sku)
+              = render 'shared/redesign/ribbon_super_express_shipping'
 
         .details.text-center onclick="window.ga('send', 'event', { eventCategory: 'PDP', eventAction: 'Similar Style Press', eventLabel: null, nonInteraction: false })"
           = link_to collection_product_path(recommended_product), :class => 'media-wrap product-name' do

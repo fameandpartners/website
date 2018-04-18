@@ -34,13 +34,16 @@
 <% if product.present? %>
 <div class="Product">
   <a href="<%= path %>">
-
-    <% # PID image replacement %>
-    <% if contents[:"image_replacement_#{pid_index}"] %>
-      <%= image_tag(contents[:"image_replacement_#{pid_index}"], class: 'js-product-image Product__image' ) %>
-    <% else %>
-      <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
-    <% end %>
+    <div class="ProductImageWrapper">
+      <% # PID image replacement %>
+      <% if contents[:"image_replacement_#{pid_index}"] %>
+        <%= image_tag(contents[:"image_replacement_#{pid_index}"], class: 'js-product-image Product__image' ) %>
+      <% else %>
+        <%= image_tag(image, class: 'js-product-image Product__image', 'data-hover': image_hover, 'data-original': image ) %>
+      <% end %>
+      <% # TO-DO: enter real logic here to display the Super Express ribbon %>
+      <%= render 'shared/redesign/ribbon_super_express_shipping' %>
+    </div>
 
     <p class="Product__name"><%= name %></p>
     <p class="Product__price"><%= price %></p>
