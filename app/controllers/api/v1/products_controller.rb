@@ -216,8 +216,7 @@ module Api
 
 
         product_viewmodel = {
-          id: 'gp1', # TODO: Get real group from somewhere
-          productId: product.id,
+          id: product.id, # TODO: Get real group from somewhere
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
