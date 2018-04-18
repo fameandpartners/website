@@ -124,3 +124,126 @@
 .Editorial__bottomCaptionBlocks {
   margin: 0 2px;
 }
+
+// Editorial Tiles
+.EditorialTile--sideBySide .column {
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+.EditorialTile__caption {
+  padding: 20px 0;
+}
+
+.EditorialTile__secondaryTileCopy,
+.EditorialTile__infoCopy,
+.EditorialTile__ctaCopyWrapper {
+  font-family: $secondary-font-family;
+  font-size: 1.7rem;
+}
+
+.EditorialTile--sideBySide .EditorialTile__infoCopy {
+  margin-top: 10px;
+}
+
+.EditorialTile__ctaCopy {
+  font-style: italic;
+  font-size: 1.6rem;
+  padding-right: 3px;
+}
+
+.EditorialTile__productInfo .Product {
+  padding-bottom: 0;
+}
+
+.EditorialTile__productInfo .Product__name {
+  border-bottom: 1px solid #ccc;
+  margin-top: 0;
+  text-transform: none;
+}
+
+.EditorialTile__ctaCopyWrapper .Product__name,
+.EditorialTile__ctaCopyWrapper .Product__price {
+  font-family: $secondary-font-family;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
+}
+
+@include breakpoint(tablet) {
+
+  .EditorialTile__secondaryTile {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  .EditorialTile .column:first-of-type {
+
+    .EditorialTile__secondaryTile {
+      margin: 0 6rem 0 2rem;
+    }
+
+    .EditorialTile__featuredTile,
+    .EditorialTile__secondaryTile .EditorialTile__ctaCopyWrapper {
+      text-align: right;
+    }
+
+  }
+
+  .EditorialTile .column:last-of-type .EditorialTile__secondaryTile {
+    margin: 0 2rem 0 6rem;
+  }
+
+  .EditorialTile__secondaryTileCopy {
+    padding: 0 65px 60px;
+  }
+
+  .EditorialTile__singleTile {
+
+    .EditorialTile__ctaCopyWrapper {
+      text-align: right;
+    }
+
+  }
+
+}
+
+@include tablet-only {
+
+  .EditorialTile .column:last-of-type,
+  .EditorialTile .column:first-of-type {
+
+    .EditorialTile__secondaryTile {
+      margin: 0;
+    }
+
+  }
+
+  .EditorialTile__secondaryTileCopy {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+@include breakpoint(mobile-max) {
+
+  .EditorialTile__caption {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .EditorialTile__secondaryTileCopy {
+    padding: 10% 5%;
+  }
+
+  .EditorialTile__caption {
+    text-align: center;
+  }
+
+  .EditorialTile__infoCopy {
+    margin-top: 10px;
+  }
+
+
+}

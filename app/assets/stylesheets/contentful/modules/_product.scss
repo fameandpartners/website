@@ -24,6 +24,18 @@
   margin-top: 6px;
 }
 
+.ProductInfo--inline {
+  display: inline-block;
+
+  .Product__image,
+  .Product__name,
+  .Product__price {
+    width: auto;
+    display: inline-block;
+  }
+
+}
+
 .email-module-message {
   text-align: center;
 }
