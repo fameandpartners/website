@@ -233,7 +233,7 @@ module Products
       processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
       # Turn the different color codes into the their color maps
-      recommended_fabric_color_codes = raw[:recommended_fabric_colors].split( ',' ).collect(&:strip)
+      recommended_fabric_color_codes = raw[:recommended_fabric_color_codes] ? raw[:recommended_fabric_colors].split( ',' ).collect(&:strip) : []
       processed[:recommended_fabric_colors] = recommended_fabric_color_codes.map  {|color_code| lookup_color_code( color_code, color_data ) }
       processed[:custom_fabric_colors] = raw[:custom_fabric_colors].map do |custom_fabric_color|
         if( custom_fabric_color )
@@ -426,7 +426,6 @@ module Products
       to_return = associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
       custom_fabric_colors.each_with_index do |fabric_color, index|
         # You can't just compact because it screws up the indexing with the fabric descriptions
-        puts "custom fabrics"
         to_return += associate_fabrics_with_product( product, fabric_color, fabric_descriptions[index], false ) unless fabric_color.nil?
       end
 
@@ -434,7 +433,6 @@ module Products
     end
 
     private def find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, price )
-      puts "Color: #{fabric_name} for #{price}"
       to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
       presentation = "#{color_option.presentation} #{fabric_name}"
       
@@ -678,7 +676,7 @@ module Products
       sizes_to_process = sizes.clone
       
       threads = []
-      number_of_threads = 6
+      number_of_threads = 2
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|
