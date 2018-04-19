@@ -1,0 +1,87 @@
+<%
+def featured_tile_class(tile_featured, tile_index)
+  if tile_featured.present?
+    if tile_index == tile_featured
+      'EditorialTile__featuredTile'
+    else
+      'EditorialTile__secondaryTile'
+    end
+  end
+end
+
+def editorial_tile_pid_info(pid)
+  if pid.present?
+    contentful_get_products_array_via_pids_array(pid)[0]
+  end
+end
+%>
+<div class="u-forced-full-width-wrapper--mobile">
+<div class="section-row">
+  <% if contents[:lg_items].size > 1 %>
+    <div class="u-forced-full-width-wrapper u-forced-full-width-wrapper--mobilex">
+      <div class="EditorialTile EditorialTile--sideBySide columns is-vcentered">
+        <% contents[:lg_items].each_with_index do |item, index| %>
+          <% editorial_tile_pid = editorial_tile_pid_info(item[:editorial_tile_pid]) %>
+          <div class="column">
+            <div class="<%= featured_tile_class(contents[:tile_featured], index.to_i) %>">
+              <% if index.to_i != contents[:tile_featured] && contents[:text].present? %>
+                <p class="EditorialTile__secondaryTileCopy text-center">
+                  <%= contents[:text] %>
+                </p>
+              <% end %>
+              <%= render partial: "layouts/contentful/modules/items/ITEM--editorial-tile-copy-pid", locals: {contents: item} %>
+              <div class="EditorialTile__caption">
+                <div class="EditorialTile__ctaCopyWrapper">
+                  <span class="EditorialTile__ctaCopy">
+                    <%= item[:bottom_caption] %>
+                  </span>
+                  <% if editorial_tile_pid.present? %>
+                    <span class="EditorialTile__productInfo ProductInfo--inline">
+                      <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
+                    </span>
+                  <% end %>
+                  <p class="EditorialTile__infoCopy">
+                    <%= item[:text] %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="EditorialTile columns">
+      <% contents[:lg_items].each_with_index do |item, index| %>
+        <div class="column">
+          <div class="EditorialTile__singleTile">
+          <%= render partial: "layouts/contentful/modules/items/ITEM--editorial-tile-copy-pid", locals: {contents: item} %>
+            <div class="EditorialTile__caption">
+              <div class="columns is-gapless u-reverse-column-order--mobile">
+                <div class="column is-8-desktop is-6-tablet is-full-mobile">
+                  <p class="EditorialTile__infoCopy">
+                    <%= item[:text] %>
+                  </p>
+                </div>
+                <div class="column is-4-desktop is-6-tablet is-full-mobile">
+                  <div class="EditorialTile__ctaCopyWrapper">
+                    <span class="EditorialTile__ctaCopy">
+                      <%= item[:bottom_caption] %>
+                    </span>
+                    <% editorial_tile_pid = editorial_tile_pid_info(item[:editorial_tile_pid]) %>
+                    <% if editorial_tile_pid.present? %>
+                      <span class="EditorialTile__productInfo ProductInfo--inline">
+                        <%= render partial: "layouts/contentful/modules/components/COMPONENT--pid-info", locals: { pid_name: editorial_tile_pid.name, pid_price: product_price_with_discount(editorial_tile_pid), pid_url: collection_product_path(editorial_tile_pid, color: editorial_tile_pid.color.try(:name)) } %>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>

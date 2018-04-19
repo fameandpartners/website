@@ -155,7 +155,8 @@ CREATE TABLE batch_collection_line_items (
     line_item_id integer,
     projected_delivery_date timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -7988,6 +7989,13 @@ CREATE INDEX index_assets_on_viewable_type_and_type ON spree_assets USING btree 
 
 
 --
+-- Name: index_batch_collection_line_items_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_batch_collection_line_items_on_deleted_at ON batch_collection_line_items USING btree (deleted_at);
+
+
+--
 -- Name: index_batch_collections_on_batch_key; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -10139,3 +10147,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180403192310');
 INSERT INTO schema_migrations (version) VALUES ('20180404121555');
 
 INSERT INTO schema_migrations (version) VALUES ('20180419180056');
+
+INSERT INTO schema_migrations (version) VALUES ('20180403210453');

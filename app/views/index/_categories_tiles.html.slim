@@ -1,22 +1,25 @@
 // Section: Categories tiles
 section.section-box.container.section-style-icon
-  .row
-    // Secondary Hero - via Contentful CMS
-    - secondary_hero = @home_page_container[:secondary_header]
+  // Secondary Hero - via Contentful CMS
+  - secondary_hero_tiles = @home_page_container[:secondary_header]
 
-    .col-md-12.cta-item-huge
-      - secondary_hero_image = secondary_hero[:image];
-      - secondary_hero_mobile_image = secondary_hero[:mobile_image];
+  - if secondary_hero_tiles.present?
+    - secondary_hero_tiles.each do |tile|
+      .SecondaryHeroTile
+        .row
+          .col-md-12.cta-item-huge
+            - secondary_hero_image = tile[:image];
+            - secondary_hero_mobile_image = tile[:mobile_image];
 
-      = link_to secondary_hero[:path_link]
-        .section-img-wrap.copy-center
-          .img-wrap
-            picture
-              source media="(max-width: 991px)" srcset="#{secondary_hero_mobile_image}"
-              source media="(min-width: 992px)" srcset="#{secondary_hero_image}"
-              img src="#{secondary_hero_image}" srcset="
-                #{secondary_hero_mobile_image} 991w,
-                #{secondary_hero_image} 992w"
+            = link_to tile[:path_link]
+              .section-img-wrap.copy-center
+                .img-wrap
+                  picture
+                    source media="(max-width: 991px)" srcset="#{secondary_hero_mobile_image}"
+                    source media="(min-width: 992px)" srcset="#{secondary_hero_image}"
+                    img.img-responsive src="#{secondary_hero_image}" srcset="
+                      #{secondary_hero_mobile_image} 991w,
+                      #{secondary_hero_image} 992w"
 
   // Category Tiles - via Contentful CMS
   - category_tiles = @home_page_container[:category_tiles]

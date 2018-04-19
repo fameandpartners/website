@@ -50,36 +50,9 @@
 
 }
 
-.ribbon-wrapper {
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
-
-  .ribbon-txt {
-    font-size: 0.7em;
-    word-spacing: 0.1em;
-    padding: 3px 50px;
-    background-color: rgba($c-neutral-black, 0.4);
-    color: $c-neutral-white;
-    @include transform(rotate(-45deg));
-  }
-
-  &.express-making {
-    left: -56px;
-    top: 30px;
-  }
-
+.ProductImageWrapper {
+  position: relative;
 }
-
-.ribbon-wrapper.PriceDrop {
-  left: -55px;
-  top: 35px;
-}
-
-.ribbon-wrapper.PriceDrop .ribbon-txt {
-  background-color: rgba($c-price-drop-bg, 0.4);
- }
-
 
 .category-text-box {
 

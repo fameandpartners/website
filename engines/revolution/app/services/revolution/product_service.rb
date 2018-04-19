@@ -40,7 +40,6 @@ module Revolution
 
     def collect_products(revolution_ids, params)
       return [] if revolution_ids[0].nil?
-
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
 
@@ -55,7 +54,6 @@ module Revolution
             color = Spree::OptionValue.where(:name => colour_name).first
             images = collection_images(p, colour_name)
           end
-
           Products::Presenter.new(
             :id           => p.id,
             :sku          => p.sku,
@@ -65,7 +63,9 @@ module Revolution
             :discount     => p.discount,
             :images       => images,
             :color        => color,
-            :fabric       => fabric
+            :fabric       => fabric,
+            :fast_making => p.fast_making,
+            :super_fast_making => p.super_fast_making
           )
         end
       end.compact
