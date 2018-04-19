@@ -46,7 +46,7 @@
       <div class="HeroTile js-hero-tile-carousel">
         <% contents[:carousel_items].each do |carousel_item| %>
           <a href="<%= carousel_item[:tile_url] %>">
-            <div class="u-overlay-area">
+            <div class="u-overlay-area u-crop-media-edges-on-resize--mobile">
               <div class="Hero__media u-overlay-area__media">
                 <% @lg_contents = carousel_item %>
                 <%= render partial: "layouts/contentful/modules/items/ITEM--editorial-tile-copy-cta-button-overlay" %>
