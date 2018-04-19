@@ -204,6 +204,7 @@ class Products::CollectionResource
       color    = Repositories::ProductColors.read(cvar["color"]["id"])
       price    = Spree::Price.new(amount: cvar["prices"][current_currency], currency: current_currency)
 
+      puts cvar["product"]
       Products::Presenter.new(
         id:             cvar["product"]["id"],
         sku:            cvar["product"]["sku"],
@@ -215,7 +216,9 @@ class Products::CollectionResource
         price:          price,
         discount:       discount,
         fast_delivery:  cvar["product"]["fast_delivery"],
-        fast_making:    cvar["product"]["fast_making"]
+        fast_making:    cvar["product"]["fast_making"],
+        super_fast_making:    cvar["product"]["super_fast_making"],
+        
       )
     end
 

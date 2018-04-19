@@ -30,6 +30,7 @@ module Features
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,
+    super_fast_making:             "Toggles the 'Super Express' ribbon in category pages. Selected items are managed via Spree.",
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
     wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding-atelier` URL. Needs to restart server on feature toggle.',
     refulfill:                     "Check new orders coming in against inventory.",
