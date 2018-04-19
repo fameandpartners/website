@@ -370,6 +370,15 @@ FameAndPartners::Application.routes.draw do
     get '/weddings-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
     get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
 
+    # Category pages used in the new Navigation bar (2018-04-19)
+    get '/navigation-under-200' => 'products/collections#show', permalink: 'navigation-under-200', as: :navigation_under_200_page
+    get '/navigation-all-separates' => 'products/collections#show', permalink: 'navigation-all-separates', as: :navigation_all_separates_page
+    get '/navigation-work' => 'products/collections#show', permalink: 'navigation-work', as: :navigation_work_page
+    get '/navigation-night-out' => 'products/collections#show', permalink: 'navigation-night-out', as: :navigation_night_out_page
+    get '/navigation-day' => 'products/collections#show', permalink: 'navigation-day', as: :navigation_day_page
+    get '/navigation-bridal' => 'products/collections#show', permalink: 'navigation-bridal', as: :navigation_bridal_page
+    get '/navigation-vacation' => 'products/collections#show', permalink: 'navigation-vacation', as: :navigation_vacation_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
