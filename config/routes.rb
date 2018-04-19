@@ -365,11 +365,10 @@ FameAndPartners::Application.routes.draw do
     get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
 
     #############################
-    # PROM LPs - Edit pages
+    # Weddings & Parties - Say Lou Lou Edit page
     #############################
-    # Prom LP - Say Lou Lou Edit page
-    get '/evening-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
-    get '/evening-collection-say-lou-lou', to: redirect("/evening-parties-say-lou-lou")
+    get '/weddings-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+    get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
