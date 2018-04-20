@@ -214,7 +214,7 @@ module Api
 
         fabrics = product
           .fabric_products
-          .includes(:fabric)
+          .includes(fabric: [:option_fabric_color_value, :option_value])
 
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
@@ -375,6 +375,7 @@ module Api
                     {
                       sectionId: 'heightAndSize',
                       title: "Select your height and size",
+                      componentTypeCategory: 'size',
                       selectionType: "requiredOne",
                       options: sizes.map(&:name),
                       relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
@@ -433,7 +434,7 @@ module Api
 
         {
           type: :photo,
-          fitDescription: product_fit,
+          fitDescription: fixup_fit(product_fit),
           sizeDescription: product_size,
           src: PRODUCT_IMAGE_SIZES.map {|image_size|
             geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
@@ -509,7 +510,7 @@ module Api
           isRecommended: f.recommended,
           type: :fabric,
           meta: {
-            sortOrder: -1, #TODO
+            sortOrder: f.fabric.option_fabric_color_value.position, #TODO
             # hex: c.option_value.value,
             
             image: {
@@ -517,6 +518,9 @@ module Api
               width: 0,
               height: 0,
             },
+
+            colorId: f.fabric.option_value.id,
+            colorCode: f.fabric.option_value.name,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
@@ -588,6 +592,15 @@ module Api
         "#{configatron.asset_host}/system/images/#{customization['id']}/original/#{customization['image_file_name']}"
       end
 
+      def fixup_fit(fit)
+        fit
+          .gsub(/:(?=[^\s])/, ": ")
+          .gsub(/ +,/, ', ')
+          .gsub(/cm(?=[^\s])/, 'cm, ')
+          .gsub(/in(?=[^\s])/, 'in, ')
+          .gsub(/inch(?=[^\s])/, 'inch, ')
+          .gsub(/are:(?=[^\n])/, "are: \n")
+      end
     end
   end
 end
