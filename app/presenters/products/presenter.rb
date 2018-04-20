@@ -62,7 +62,7 @@ module Products
       result_json[:fabrics] = self.fabrics
       result_json
     end
- 
+
 
     def custom_size_price
       sizes.default_extra_price.display_price
@@ -167,11 +167,12 @@ module Products
     end
 
     def super_fast_making
-      return false if fast_making_disabled?      
+      return false if fast_making_disabled?
       @super_fast_making
     end
-    
+
     alias_method :fast_making?, :fast_making
+    alias_method :super_fast_making?, :super_fast_making
 
     def default_color
       default_color_options.first&.name
