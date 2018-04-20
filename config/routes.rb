@@ -379,6 +379,9 @@ FameAndPartners::Application.routes.draw do
     get '/navigation-bridal' => 'products/collections#show', permalink: 'navigation-bridal', as: :navigation_bridal_page
     get '/navigation-vacation' => 'products/collections#show', permalink: 'navigation-vacation', as: :navigation_vacation_page
 
+    # Summer collection category page
+    get '/shop-summer-collection' => 'products/collections#show', permalink: 'shop-summer-collection', as: :summer_collection_category_page
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
