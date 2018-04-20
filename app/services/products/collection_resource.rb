@@ -217,8 +217,8 @@ class Products::CollectionResource
         discount:       discount,
         fast_delivery:  cvar["product"]["fast_delivery"],
         fast_making:    cvar["product"]["fast_making"],
-        super_fast_making:    cvar["product"]["super_fast_making"],
-        
+        super_fast_making:    cvar["product"]["super_fast_making"]
+
       )
     end
 
