@@ -321,6 +321,9 @@ module Api
             colorId: f.fabric.option_value.id,
             colorCode: f.fabric.option_value.name,
 
+            materialTitle: f.fabric.material,
+            colorTitle: f.fabric.option_value.presentation,
+
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
           },
@@ -389,6 +392,8 @@ module Api
       end
 
       def fixup_fit(fit)
+        return nil if fit.blank?
+
         fit
           .gsub(/:(?=[^\s])/, ": ")
           .gsub(/ +,/, ', ')
