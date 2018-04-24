@@ -40,6 +40,7 @@ module Api
 
         product_viewmodel = {
           id: product.id,
+          productId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
@@ -79,7 +80,8 @@ module Api
                 cartId: 0,
                 code: 'free_returns',
                 title: "Free returns",
-                componentTypeId: :todo,
+                componentTypeId: :Return,
+                componentTypeCategory: :Return,
                 price: 0,
                 isProductCode: false,
                 isRecommended: false,
@@ -106,11 +108,11 @@ module Api
                   previewType: :image,
                   sections: [
                     {
-                      componentTypeId: :color,
-                      componentTypeCategory: :color,
+                      componentTypeId: :Colour,
+                      componentTypeCategory: :Colour,
                       title: "Select your color",
                       options: colors.map {|c| { code: c.option_value.name, isDefault: false, parentOptionId: nil } },
-                      selectionType: "requiredOne",
+                      selectionType: :RequiredOne,
                     }]
                 }
               ]
@@ -128,11 +130,10 @@ module Api
                   previewType: :image,
                   sections: [
                     {
-                      componentTypeId: :fabric,
-                      componentTypeCategory: :fabric,
+                      componentTypeId: :Fabric,
+                      componentTypeCategory: :Fabric,
                       title: "Select your color & fabric",
-                      options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
-                      selectionType: "requiredOne",
+                      selectionType: :RequiredOne,
                     }]
                 }
               ]
@@ -150,11 +151,11 @@ module Api
                   previewType: :cad,
                   sections: [
                     {
-                      componentTypeId: :customizations,
-                      componentTypeCategory: :customizations,
+                      componentTypeId: :Customisations,
+                      componentTypeCategory: :Customisations,
                       title: "Select your customizations",
                       options: customizations.map {|f| { code: f['customisation_value']['name'], isDefault: false, parentOptionId: nil } },
-                      selectionType: customizations.length === 3 ? "optionalOne" : 'optionalMultiple',
+                      selectionType: customizations.length === 3 ? :OptionalOne : :OptionalMultiple,
                     }
                   ]
                 }
@@ -175,10 +176,9 @@ module Api
                   sections: [
                     {
                       componentTypeId: 'heightAndSize',
-                      componentTypeCategory: :size,
+                      componentTypeCategory: :Size,
                       title: "Select your height and size",
-                      componentTypeCategory: 'size',
-                      selectionType: "requiredOne",
+                      selectionType: :RequiredOne,
                       options: sizes.map {|s| { code: s.name, isDefault: false, parentOptionId: nil } },
                     }]
                 }]
@@ -260,11 +260,12 @@ module Api
           code: c['customisation_value']['name'],
           isDefault: false,
           title: c['customisation_value']['presentation'],
-          componentTypeId: :legacyCustomization,
+          componentTypeId: :LegacyCustomisation,
+          componentTypeCategory: :LegacyCustomisation,
           price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
           isProductCode: true,
           isRecommended: false,
-          type: :legacyCustomization,
+          type: :LegacyCustomisation,
           meta: {
             sortOrder: c['customisation_value']['position'],
             image: {
@@ -283,11 +284,12 @@ module Api
           code: making.option_type,
           isDefault: false,
           title: making.name,
-          componentTypeId: :making,
+          componentTypeId: :Making,
+          componentTypeCategory: :Making,
           price: (making.price*100).to_i,
           isProductCode: false,
           isRecommended: false,
-          type: :making,
+          type: :Making,
           meta: {
             sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
             deliveryTimeDescription: making.description,
@@ -303,11 +305,12 @@ module Api
           code: f.fabric.name,
           isDefault: false,
           title: f.fabric.presentation,
-          componentTypeId: :fabric,
+          componentTypeId: :Fabric,
+          componentTypeCategory: :Fabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
           isRecommended: f.recommended,
-          type: :fabric,
+          type: :Fabric,
           meta: {
             sortOrder: f.fabric.option_fabric_color_value.position, #TODO
             # hex: c.option_value.value,
@@ -325,7 +328,7 @@ module Api
             fabricDescription: f.description,
           },
           img: f.fabric.image_url,
-          incompatibleWith: f.recommended ? [] : ['fast_making'],
+          incompatibleWith: f.recommended ? {} : { allOptions: ['fast_making'] },
         }
       end
 
@@ -335,11 +338,12 @@ module Api
           code: c.option_value.name,
           isDefault: false,
           title: c.option_value.presentation,
-          componentTypeId: :color,
+          componentTypeId: :Colour,
+          componentTypeCategory: :Colour,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           isProductCode: true,
           isRecommended: !c.custom,
-          type: :color,
+          type: :Colour,
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
@@ -362,11 +366,12 @@ module Api
           code: s.name,
           isDefault: false,
           title: s.presentation,
-          componentTypeId: :size,
+          componentTypeId: :Size,
+          componentTypeCategory: :Size,
           price: 0,
           isProductCode: false,
           isRecommended: false,
-          type: :size,
+          type: :Size,
           meta: {
             sortOrder: s.position,
             sizeUs: s.name.split("/")[0],
@@ -389,6 +394,7 @@ module Api
       end
 
       def fixup_fit(fit)
+        return nil unless fit
         fit
           .gsub(/:(?=[^\s])/, ": ")
           .gsub(/ +,/, ', ')
