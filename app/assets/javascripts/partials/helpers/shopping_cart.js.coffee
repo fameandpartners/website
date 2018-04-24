@@ -95,7 +95,35 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  findProduct: (line_item_id) ->
+    found_product;
+    for product in @data.products
+      if (product.line_item_id == line_item_id)
+        found_product = product
+
+    return found_product
+
+
   removeProduct: (line_item_id) ->
+    found_product = @findProduct(line_item_id)
+
+    return if !found_product || !window.dataLayer
+
+    window.dataLayer.push({
+      event: 'removeFromCart',
+      ecommerce: {
+        remove: {
+          products: [{
+            id: found_product.id,
+            name: found_product.name,
+            price: found_product.price.amount,
+            category: 'Dress',
+            variant: found_product.variant_id,
+            quantity: 1,
+          }],
+        },
+      },
+    });
     $.ajax(
       url: "/user_cart/products/#{line_item_id}"
       type: "DELETE"
