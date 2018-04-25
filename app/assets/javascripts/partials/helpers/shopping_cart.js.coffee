@@ -123,7 +123,7 @@ window.helpers.ShoppingCart = class ShoppingCart
           }],
         },
       },
-    });
+    }); 
     $.ajax(
       url: "/user_cart/products/#{line_item_id}"
       type: "DELETE"
