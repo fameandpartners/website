@@ -13,7 +13,7 @@ module Forms
 
     def available_products
       product_ids = Spree::Variant.where(deleted_at: nil).uniq(:product_id).pluck(:product_id)
-      Spree::Product.where(id: product_ids)
+      Spree::Product.active.where(id: product_ids)
     end
 
     def available_heights
