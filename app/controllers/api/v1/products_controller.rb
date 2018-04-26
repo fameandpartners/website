@@ -134,6 +134,7 @@ module Api
                       componentTypeCategory: :Fabric,
                       title: "Select your color & fabric",
                       selectionType: :RequiredOne,
+                      options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
                 }
               ]
