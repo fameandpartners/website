@@ -61,13 +61,14 @@ module AdminUi
         sku = GlobalSku.find_by_sku( sku_value )
         # Create sku if not found
         if sku.nil?
+          c_ids = customizations.map {|x| {'customisation_value' => {'id' => x.id} }}
           sku = GlobalSku::Create.new(
             style_number: style_number,
             product_name: style_name,
             size: size,
             color_name: color_name,
             height: height,
-            customizations: customizations
+            customizations: c_ids
           ).call
         end
 
