@@ -6,16 +6,24 @@
 
   .Btn__ctaHeroTile,
   .Btn__ctaSlimBorder {
-    padding: 5px 45px;
-    font-size: 1.5rem;
+    padding: 3px 35px;
+    font-size: 1.4rem;
     font-weight: 400;
     text-transform: none;
+    letter-spacing: 0.03rem;
+  }
+
+  .Btn__ctaHeroTile {
+    background: $c-neutral-white;
+    color: $c-neutral-black;
+    border-color: $c-neutral-white;
   }
 
   .Btn__ctaHeroTile:hover,
   .Btn__ctaHeroTile:focus {
-    background: $c-neutral-white;
-    color: $c-neutral-black;
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+    color: $c-neutral-white;
   }
 
 }
@@ -30,7 +38,8 @@
 
 .PromEdit__introWrapper .PromEdit__introHeader {
   color: $c-neutral-white;
-  margin-top: 120px;
+  display: inline-block;
+  float: left;
 }
 
 .PromEdit__subheading,
@@ -90,7 +99,7 @@
 
 .Btn__ctaBottom:hover,
 .Btn__ctaBottom:focus {
-  background: transparent;
+  background: $c-neutral-white;
   color: $c-neutral-black;
   border: 1px solid $c-neutral-black;
 }
@@ -103,7 +112,7 @@
 
   .PromEdit__pidInfoOverlay,
   .PromEdit__pidInfoOverlay a {
-    color: $c-neutral-white;
+    color: $c-neutral-black;
   }
 
   .PromEdit__pidInfoRightSide {
@@ -112,6 +121,10 @@
 
   .PromEdit__smallTile {
     padding: 0 40px;
+  }
+
+  .PromEdit__cta a {
+    margin: 0 30px;
   }
 
 }
@@ -129,6 +142,8 @@
 
   .PromEdit__introWrapper .PromEdit__introHeader {
     margin-top: 180px;
+    display: block;
+    float: none;
   }
 
   .PromEdit__tile {
@@ -147,6 +162,12 @@
 
   .PromEdit__pidInfo:last-of-type {
     margin-bottom: 60px;
+  }
+
+  .PromEdit__cta a {
+    display: block;
+    width: 280px;
+    margin: 30px auto;
   }
 
 }
