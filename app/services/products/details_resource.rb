@@ -40,6 +40,7 @@ class Products::DetailsResource
         style_notes:                        product.property('style_notes'),
         size_chart:                         product.size_chart,
         fast_making:                        product.fast_making?,
+        super_fast_making:                  product.super_fast_making?,
         standard_days_for_making:           product.standard_days_for_making,
         customised_days_for_making:         product.customised_days_for_making,
         default_standard_days_for_making:   product.default_standard_days_for_making,

@@ -79,11 +79,18 @@ module Contentful
         }
       end
 
-      second_hero = {
-        image: parent_container.secondary_header_container.secondary_header_image.url,
-        mobile_image: parent_container.secondary_header_container.secondary_header_mobile_image.url,
-        path_link: parent_container.secondary_header_container.secondary_header_link
-      }
+      secondary_hero_tiles = parent_container.secondary_header_container.map do |item|
+
+        desktop_image = (item.respond_to? :secondary_header_image) ? item.secondary_header_image.url : nil
+        mobile_image = (item.respond_to? :secondary_header_mobile_image) ? item.secondary_header_mobile_image.url : nil
+        path_link = (item.respond_to? :secondary_header_link) ? item.secondary_header_link : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          path_link: path_link
+        }
+      end
 
       category_tiles = parent_container.category_tiles_container.map do |item|
 
@@ -123,7 +130,7 @@ module Contentful
 
       @main_container = {
         hero_tiles: hero_tiles,
-        secondary_header: second_hero,
+        secondary_header: secondary_hero_tiles,
         category_tiles: category_tiles,
         instagram_tiles: ig_tiles
       }
@@ -255,6 +262,76 @@ module Contentful
           text_color: text_color,
           border_color: border_color,
           button_label: button_label
+        }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--editorial-tile-copy-cta-button-overlay')
+        heading = (fetched_lg_container.respond_to? :heading) ? fetched_lg_container.heading : nil
+        sub_heading = (fetched_lg_container.respond_to? :sub_heading) ? fetched_lg_container.sub_heading : nil
+        heading_mobile = (fetched_lg_container.respond_to? :mobile_text) ? fetched_lg_container.mobile_text : nil
+        subheading_mobile = (fetched_lg_container.respond_to? :subheading_mobile) ? fetched_lg_container.subheading_mobile : nil
+        mobile_text = (fetched_lg_container.respond_to? :mobile_text) ? fetched_lg_container.mobile_text : nil
+        cta_button_text = (fetched_lg_container.respond_to? :cta_button_text) ? fetched_lg_container.cta_button_text : nil
+        cta_button_background_color = (fetched_lg_container.respond_to? :cta_button_background_color) ? fetched_lg_container.cta_button_background_color : 'transparent'
+        cta_button_text_color = (fetched_lg_container.respond_to? :cta_button_text_color) ? fetched_lg_container.cta_button_text_color : '#fff'
+        cta_button_border_color = (fetched_lg_container.respond_to? :cta_button_border_color) ? fetched_lg_container.cta_button_border_color : '#fff'
+        image = (fetched_lg_container.respond_to? :image) ? fetched_lg_container.image.url : nil
+        mobile_image = (fetched_lg_container.respond_to? :mobile_image) ? fetched_lg_container.mobile_image.url : image
+        video = (fetched_lg_container.respond_to? :video_desktop) ? fetched_lg_container.video_desktop.url : nil
+        mobile_video = (fetched_lg_container.respond_to? :video_mobile) ? fetched_lg_container.video_mobile.url : video
+        path_link = (fetched_lg_container.respond_to? :path_link) ? fetched_lg_container.path_link : nil
+        text_vertical_position = (fetched_lg_container.respond_to? :vertical_position) ? fetched_lg_container.vertical_position.downcase : nil
+        text_vertical_position_mobile = (fetched_lg_container.respond_to? :vertical_position_mobile) ? fetched_lg_container.vertical_position_mobile.downcase : nil
+        text_position = (fetched_lg_container.respond_to? :text_position) ? fetched_lg_container.text_position.downcase : nil
+        text_color = (fetched_lg_container.respond_to? :text_color) ? fetched_lg_container.text_color.downcase : nil
+        text_size = (fetched_lg_container.respond_to? :text_size) ? fetched_lg_container.text_size : nil
+        extra_padding_top = (fetched_lg_container.respond_to? :extra_padding_top) ? fetched_lg_container.extra_padding_top : '0px'
+        extra_padding_top_mobile = (fetched_lg_container.respond_to? :extra_padding_top_mobile) ? fetched_lg_container.extra_padding_top_mobile : '0px'
+
+        hero_tile_site_version_array = (fetched_lg_container.respond_to? :hero_tile_site_version) ? fetched_lg_container.hero_tile_site_version.sort.join(',').downcase : nil
+
+        if hero_tile_site_version_array == "au" || hero_tile_site_version_array == "us"
+          hero_tile_site_version = hero_tile_site_version_array
+        else
+          hero_tile_site_version = "all"
+        end
+
+        {
+          heading: heading,
+          sub_heading: sub_heading,
+          heading_mobile: heading_mobile,
+          subheading_mobile: subheading_mobile,
+          image: image,
+          mobile_image: mobile_image,
+          video: video,
+          mobile_video: mobile_video,
+          tile_url: path_link,
+          text_vertical_position: text_vertical_position,
+          text_vertical_position_mobile: text_vertical_position_mobile,
+          text_position: text_position,
+          text_color: text_color,
+          text_size: text_size,
+          extra_padding_top: extra_padding_top,
+          extra_padding_top_mobile: extra_padding_top_mobile,
+          cta_button_text: cta_button_text,
+          cta_button_background_color: cta_button_background_color,
+          cta_button_text_color: cta_button_text_color,
+          cta_button_border_color: cta_button_border_color,
+          hero_tile_site_version: hero_tile_site_version
+        }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--editorial-tile-copy-pid')
+        editorial_tile_pid = (fetched_lg_container.respond_to? :editorial_tile_pid) ? fetched_lg_container.editorial_tile_pid : nil
+        bottom_caption = (fetched_lg_container.respond_to? :bottom_caption) ? fetched_lg_container.bottom_caption : nil
+        text = (fetched_lg_container.respond_to? :text) ? fetched_lg_container.text : nil
+        text_alignment = (fetched_lg_container.respond_to? :text_alignment) ? fetched_lg_container.text_alignment : nil
+
+        {
+          image: desktop_image,
+          mobile_image: mobile_image,
+          video: desktop_video,
+          mobile_video: mobile_video,
+          editorial_tile_pid: editorial_tile_pid,
+          bottom_caption: bottom_caption,
+          text: text,
+          text_alignment: text_alignment
         }
       end
     end
@@ -406,6 +483,15 @@ module Contentful
           carousel_items: carousel_items,
           tile_crop_edges_on_resize: tile_crop_edges_on_resize
         }
+      elsif (main_header_container.content_type.id == 'HEADER--editorial-tile-overlay')
+        carousel_items = (main_header_container.respond_to? :carousel_tiles) ? map_editorials(main_header_container.carousel_tiles) : nil
+        tile_crop_edges_on_resize = (main_header_container.respond_to? :tile_crop_edges_on_resize) ? main_header_container.tile_crop_edges_on_resize.sort.join(',').downcase : nil
+
+        {
+          id: main_header_container.content_type.id,
+          carousel_items: carousel_items,
+          tile_crop_edges_on_resize: tile_crop_edges_on_resize
+        }
       end
     end
 
@@ -486,6 +572,12 @@ module Contentful
         image_replacement_3 = (item.respond_to? :image_replacement_3) ? item.image_replacement_3.url : nil
         image_replacement_4 = (item.respond_to? :image_replacement_4) ? item.image_replacement_4.url : nil
 
+        # Featured hero tile (get only the number from something like "1st Tile")
+        tile_featured = (item.respond_to? :tile_featured) ? (item.tile_featured.chr.to_i - 1) : nil
+
+        # Hero tile text
+        text = (item.respond_to? :text) ? item.text : nil
+
         {
           id: item_id,
           lg_item: lg_item,
@@ -514,7 +606,9 @@ module Contentful
           image_replacement_1: image_replacement_1,
           image_replacement_2: image_replacement_2,
           image_replacement_3: image_replacement_3,
-          image_replacement_4: image_replacement_4
+          image_replacement_4: image_replacement_4,
+          tile_featured: tile_featured,
+          text: text
         }
       end
 

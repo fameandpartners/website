@@ -271,7 +271,7 @@ FameAndPartners::Application.routes.draw do
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
     # temporary patch. this dress link is bad so redirect it
-    get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
+    # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -281,7 +281,6 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
-    get '/weddings-and-parties', to: redirect('/?utm_source=legacy-weddings-and-parties'), :as => :weddings_parties_page
     get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
     get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
@@ -334,6 +333,10 @@ FameAndPartners::Application.routes.draw do
     # Fall Weddings Collection Page
     get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
 
+    # Weddings and Parties Collection Page
+    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
+    get '/dresses/wedding-guests', to: redirect('/weddings-and-parties')
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
@@ -357,6 +360,27 @@ FameAndPartners::Application.routes.draw do
 
     # Prom LP - Nia Parker Interview page
     get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
+
+    # Prom LP - Say Lou Lou Interview page
+    get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
+
+    #############################
+    # Weddings & Parties - Say Lou Lou Edit page
+    #############################
+    get '/weddings-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+    get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
+
+    # Category pages used in the new Navigation bar (2018-04-19)
+    get '/navigation-under-200' => 'products/collections#show', permalink: 'navigation-under-200', as: :navigation_under_200_page
+    get '/navigation-all-separates' => 'products/collections#show', permalink: 'navigation-all-separates', as: :navigation_all_separates_page
+    get '/navigation-work' => 'products/collections#show', permalink: 'navigation-work', as: :navigation_work_page
+    get '/navigation-night-out' => 'products/collections#show', permalink: 'navigation-night-out', as: :navigation_night_out_page
+    get '/navigation-day' => 'products/collections#show', permalink: 'navigation-day', as: :navigation_day_page
+    get '/navigation-bridal' => 'products/collections#show', permalink: 'navigation-bridal', as: :navigation_bridal_page
+    get '/navigation-vacation' => 'products/collections#show', permalink: 'navigation-vacation', as: :navigation_vacation_page
+
+    # Summer collection category page
+    get '/shop-summer-collection' => 'products/collections#show', permalink: 'shop-summer-collection', as: :summer_collection_category_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

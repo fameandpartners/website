@@ -44,6 +44,14 @@
     });
   });
 
+  // Autoplay videos (for Chrome and other browsers)
+  $(document).ready(function () {
+    var countVideosOnPage = $(".js-autoload-video").size();
+    for(i = 0; i < countVideosOnPage; i++) {
+      $(".js-autoload-video").get(i).play();
+    }
+  });
+
   // window.clickAddMoodboard = function(target, event) {
   //   event.stopPropagation();
   //   var $target, item, user_moodboards;

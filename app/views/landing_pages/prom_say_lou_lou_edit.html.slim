@@ -1,0 +1,145 @@
+= render partial: 'pages/robots'
+
+- influencer_slug = 'say-lou-lou'
+- tiles_image_path = "https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign/edits/#{influencer_slug}"
+
+.Page__promEdit.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromEdit__header.text-center
+    .u-overlay-area
+      img.img-responsive.u-overlay-area__media.hidden-xs.hidden-sm src="#{tiles_image_path}-header.jpg"
+      img.img-responsive.u-overlay-area__media.hidden-md.hidden-lg src="#{tiles_image_path}-header-mobile.jpg"
+
+      .u-overlay-area__overlay
+        .u-overlay-area__caption.u-overlay-area__caption--bottom.PromEdit__introWrapper
+          .container
+            .row
+              .col-xs-12
+                .PromEdit__introHeader.js-scroll-fade-in
+                  h1.h2.PromEdit__heading The Weddings<br class="hidden-lg hidden-md"> &amp Parties Collection
+                  h4.PromEdit__subheading Fame & Partners x Say Lou Lou
+                  a.btn.Btn__ctaHeroTile href="#{weddings_parties_page_path}" Shop the Collection
+
+  section.PromEdit__tile
+    .container-fluid
+      .row.js-scroll-fade-in
+        .col-xs-12.col-md-10.col-md-offset-1.u-full-width--mobile
+          .u-overlay-area
+            img.img-responsive.u-overlay-area__media.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-01.jpg"
+            img.img-responsive.u-overlay-area__media.hidden-md.hidden-lg src="#{tiles_image_path}-tile-01-mobile.jpg"
+
+            .u-overlay-area__overlay
+              .u-overlay-area__caption.u-overlay-area__caption--bottom.PromEdit__pidInfoOverlay
+                .PromEdit__pidInfoRightSide
+                  .PromEdit__pidInfo
+                    | Left:
+                    = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, showMoodboard: 'false', hidePidImage: true }
+                  .PromEdit__pidInfo
+                    | Right:
+                    = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, showMoodboard: 'false', hidePidImage: true }
+
+  section.PromEdit__sideBySidePidTiles
+    .container-fluid.no-spacing-cols-desktop
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-xs-12.col-md-4.col-md-offset-1.vertical-align.PromEdit__smallTile.u-full-width--mobile
+          .PromEdit__tile
+            img.img-responsive.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-02.jpg"
+            img.img-responsive.hidden-md.hidden-lg src="#{tiles_image_path}-tile-02-mobile.jpg"
+            .PromEdit__pidInfo
+              | Left:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, showMoodboard: 'false', hidePidImage: true }
+            .PromEdit__pidInfo
+              | Right:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, showMoodboard: 'false', hidePidImage: true }
+
+        .col-xs-12.col-md-6.col-md-offset-1.vertical-align.PromEdit__largeTile.u-full-width--mobile
+          .PromEdit__tile
+            img.img-responsive.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-03.jpg"
+            img.img-responsive.hidden-md.hidden-lg src="#{tiles_image_path}-tile-03-mobile.jpg"
+            .PromEdit__pidInfo
+              | Left:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 4, showMoodboard: 'false', hidePidImage: true }
+            .PromEdit__pidInfo
+              | Right:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 5, rangeTo: 5, showMoodboard: 'false', hidePidImage: true }
+
+  section.PromEdit__tile
+    .container-fluid
+      .row.js-scroll-fade-in
+        .col-xs-12.col-md-10.col-md-offset-1.u-full-width--mobile
+          .u-overlay-area
+            img.img-responsive.u-overlay-area__media.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-04.jpg"
+            img.img-responsive.u-overlay-area__media.hidden-md.hidden-lg src="#{tiles_image_path}-tile-04-mobile.jpg"
+
+            .u-overlay-area__overlay
+              .u-overlay-area__caption.u-overlay-area__caption--bottom.PromEdit__pidInfoOverlay
+                .PromEdit__pidInfoRightSide
+                  .PromEdit__pidInfo
+                    | Left:
+                    = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 6, rangeTo: 6, showMoodboard: 'false', hidePidImage: true }
+                  .PromEdit__pidInfo
+                    | Right:
+                    = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 7, rangeTo: 7, showMoodboard: 'false', hidePidImage: true }
+
+  section.PromEdit__sideBySidePidTiles
+    .container-fluid.no-spacing-cols-desktop
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-xs-12.col-md-6.vertical-align.PromEdit__largeTile.u-full-width--mobile
+          .PromEdit__tile
+            img.img-responsive.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-05.jpg"
+            img.img-responsive.hidden-md.hidden-lg src="#{tiles_image_path}-tile-05-mobile.jpg"
+            .PromEdit__pidInfo
+              | Left:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 8, showMoodboard: 'false', hidePidImage: true }
+            .PromEdit__pidInfo
+              | Right:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 9, rangeTo: 9, showMoodboard: 'false', hidePidImage: true }
+
+        .col-xs-12.col-md-4.col-md-offset-1.vertical-align.PromEdit__smallTile.u-full-width--mobile
+          .PromEdit__tile
+            img.img-responsive.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-06.jpg"
+            img.img-responsive.hidden-md.hidden-lg src="#{tiles_image_path}-tile-06-mobile.jpg"
+            .PromEdit__pidInfo
+              | Left:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 10, showMoodboard: 'false', hidePidImage: true }
+            .PromEdit__pidInfo
+              | Right:
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 11, rangeTo: 11, showMoodboard: 'false', hidePidImage: true }
+
+  section.PromEdit__tile
+    .container-fluid
+      .row.js-scroll-fade-in
+        .col-xs-12.col-md-10.col-md-offset-1.u-full-width--mobile
+          .u-overlay-area
+            img.img-responsive.u-overlay-area__media.hidden-xs.hidden-sm src="#{tiles_image_path}-tile-07.jpg"
+            img.img-responsive.u-overlay-area__media.hidden-md.hidden-lg src="#{tiles_image_path}-tile-07-mobile.jpg"
+
+            .u-overlay-area__overlay
+              .u-overlay-area__caption.u-overlay-area__caption--top.PromEdit__pidInfoOverlay
+                .PromEdit__pidInfo
+                  | Left:
+                  = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 12, showMoodboard: 'false', hidePidImage: true }
+                .PromEdit__pidInfo
+                  | Right:
+                  = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 13, rangeTo: 13, showMoodboard: 'false', hidePidImage: true }
+
+  .PromEdit__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to weddings_parties_page_path, class: 'Btn__ctaSlimBorder Btn__ctaBottom'
+              | Shop the Full Collection
+
+- content_for :body_end do
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

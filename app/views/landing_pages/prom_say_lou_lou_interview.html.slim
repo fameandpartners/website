@@ -1,0 +1,118 @@
+= render partial: 'pages/robots'
+
+- interviewed_edits_relative_url = '/weddings-parties-say-lou-lou'
+- interviewed_full_name = 'Say Lou Lou'
+- interviewed_name = 'say-lou-lou'
+- interviewed_slug = interviewed_name.downcase
+- tiles_image_path = 'https://s3.amazonaws.com/fandp-web-production-marketing/pages/prom-evening-collection-campaign'
+
+.Page__promInterview.u-remove-product-hover-fade.js-smooth-scroll
+
+  .PromInterview__header
+    .u-overlay-area
+      img.u-overlay-area__media.hidden-xs.hidden-sm src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header.jpg")}'
+      img.u-overlay-area__media.hidden-md.hidden-lg src='#{image_path("#{tiles_image_path}/#{interviewed_slug}-header-mobile.jpg")}'
+
+  section.PromInterview__introCopy
+    .container.js-scroll-fade-in
+      .row
+        .col-xs-10.col-xs-offset-1
+          h2.PromInterview__introCopyTitle
+            | <em>#{interviewed_full_name}:</em><br class="visible-xs" /> The Fame Interview
+
+      .row
+        .col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .PromInterview__introCopyContent
+            p When we set out to release a collection of easy-to-wear social dresses and jumpsuits for SS18, we knew exactly who we wanted to collaborate with: Say Lou Lou, the German indie musicians quickly become known all over their world for their electro-pop ear candy–and their minimalist, vintage-inspired style
+            p The group is made up of twin sisters Elektra and Miranda Kilbey, who see fashion as a natural extension of music. As they put it, <em>“It’s important that what we wear alludes to the same world as our music. The silhouettes need to speak the same language as the mood of the songs.”</em>
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 0, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-01-mobile.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  section.PromInterview__copyInTwoColumns
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p The resulting collaboration–Fame and Partners x Say Lou Lou: The Summer Party Collection–includes pieces inspired by the sound of their new album (<em>“1960s film scores and sparse 90s samples”</em>) that are versatile enough to work for every party on your summer calendar, from weekend to wedding and beyond.
+
+            p Read on to discover how Elektra and Miranda use music and fashion as outlets for self-expression, the inside scoop on their new album, and their favorite pieces in the Summer Party Collection.
+
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>How did you discover music, and how did it become a career path for you?</em>
+            p Our parents are both musicians, so music was always around. We always loved listening and singing and digesting music, and it was a big part of our lives. It wasn’t like we found music; it was always there. It wasn’t until we were in our late teens that we started doing it ourselves–before then it felt like we were rejecting it a little bit because our parents were always doing it. We wanted something of our own.
+            p Then, one thing led to another and we made a few demos, and things took off really quickly. There wasn’t really a moment that was like, “Oh, we’re gonna do it!” It was like, we made a few demos and all of a sudden we had a band and all of a sudden we were touring and everything unraveled really fast and without us having too much time to think about it.
+
+  section.PromInterview__pullQuote
+    .container
+      .row.js-scroll-fade-in
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          h2.PromInterview__pullQuoteCopy “It’s important that what we wear alludes to the same world as our music. The silhouettes need to speak the same language as the mood of the songs!”
+
+  section.PromInterview__copyWithPidTile
+    .container
+      .row.js-scroll-fade-in.vertical-align-row
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__copy.Copy__column1
+            p <em>How do you see music as a form of self-expression?</em>
+            p I think music allows us to delve into different realms. Expressing ourselves, creating a different world...both through the music and the production and lyrics, but also the visual parts and components that we make, the live shows, the accents...and I think that is where expressing ourselves and showing who we are comes in, through all those elements. Just singing or playing or writing or creating is very self-therapeutic and meditative. But then there’s the other part that’s like outward expression.
+
+            .row.js-scroll-fade-in
+              .PromInterview__tile
+                = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 1, rangeTo: 1, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-02.jpg"), customWrapper: 'col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1.vertical-align
+          .PromInterview__pidTile.Copy__column2
+            .row.js-scroll-fade-in
+              = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 2, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-03-mobile.jpg"), showMoodboard: 'false', customWrapper: 'col-xs-12' }
+
+  section.PromInterview__copy
+    .container
+      .row.js-scroll-fade-in
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column1
+            p <em>Can you talk a little bit about your new album and the inspiration behind it?</em>
+            p We were inspired by 1960s film scores and dramatic string arrangements a la cinema noir, mixed with sparse 90s sample based productions. We wanted to create a cinema-like experience for the listener, and the lyrics are based on narratives we invented.
+
+            p <em>How does music influence what you wear?</em>
+            p It’s important that what we wear alludes to the same world as our music. The silhouettes need to speak the same language as the mood of the songs!
+
+        .col-md-6.col-md-offset-0.col-xs-10.col-xs-offset-1
+          .PromInterview__copy.Copy__column2
+            p <em>What three words would you use to describe your personal style?</em>
+            p Nostalgic, relaxed, and suited.
+
+            p <em>What were your favorite pieces from the Fame and Partners x Say Lou Lou collection? </em>
+            p The 90’s white and pink silk dresses!
+
+
+
+  section.PromInterview__pidTile
+    .container
+      .row.js-scroll-fade-in
+        = render partial: '/products/collections/pick_products_without_content', locals: {rangeFrom: 3, rangeTo: 3, pidImageReplacementDesktop: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04.jpg"), pidImageReplacementMobile: image_path("#{tiles_image_path}/#{interviewed_slug}-editorial-tile-04-mobile.jpg"), customWrapper: 'col-xs-12 u-full-width--mobile', showMoodboard: 'false' }
+
+  .PromInterview__cta
+    .container
+      .row.js-scroll-fade-in
+        .col-xs-12.text-center
+            = link_to interviewed_edits_relative_url, class: 'Btn__ctaSlimBorder Btn__ctaSlimBorder--pink'
+              | Shop #{interviewed_full_name}'s Edit
+
+- content_for :body_end do
+
+  javascript:
+
+    (function(window) {
+
+      $(function(){
+        // Scroll & Fade
+        window.sr = ScrollReveal({ reset: true, easing: 'linear', scale: 1, distance: 0, duration: 500, viewFactor: 0.05 });
+        sr.reveal('.js-scroll-fade-in');
+      });
+
+    })(window)

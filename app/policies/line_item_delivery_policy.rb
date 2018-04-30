@@ -17,6 +17,8 @@ module Policies
         return fast_making_delivery_period
       elsif @line_item.slow_making? #how slow can you go
         period = slow_making_delivery_period
+      elsif @line_item.super_fast_making?
+        period = super_fast_making_delivery_period
       else
         period = maximum_delivery_period
       end

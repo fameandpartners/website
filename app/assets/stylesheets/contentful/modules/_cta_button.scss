@@ -5,7 +5,6 @@
 
 .CtaButton--sideBySide .CtaButton__content {
   display: table;
-  width: 60%;
   margin: 25px auto;
 
   @include breakpoint(tablet) {

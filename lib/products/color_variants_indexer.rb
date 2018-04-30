@@ -90,6 +90,7 @@ module Products
                     can_be_customized:  product.can_be_customized?,
                     fast_delivery:      product.fast_delivery,
                     fast_making:        product.fast_making?,
+                    super_fast_making:  product.super_fast_making?,
                     taxon_ids:          product.taxons.map(&:id),
                     taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
                     taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
@@ -134,13 +135,12 @@ module Products
             color_variant_id += 1
           end
         else
-            product.fabric_products.recommended.each do |product_fabric_value|
+            product.fabric_products.each do |product_fabric_value|
             color = product_fabric_value.fabric.option_value
             fabric = product_fabric_value.fabric
             log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
             if !product_fabric_value.images.present? 
-              logger.error "id  -  | #{log_prefix} No Images!"
               next
             end
 

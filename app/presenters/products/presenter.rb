@@ -8,7 +8,7 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
+                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable, :fast_delivery, :render3d_images, :has_fabrics
 
@@ -62,7 +62,7 @@ module Products
       result_json[:fabrics] = self.fabrics
       result_json
     end
- 
+
 
     def custom_size_price
       sizes.default_extra_price.display_price
@@ -165,7 +165,14 @@ module Products
       return false if fast_making_disabled?
       @fast_making
     end
+
+    def super_fast_making
+      return false if fast_making_disabled?
+      @super_fast_making
+    end
+
     alias_method :fast_making?, :fast_making
+    alias_method :super_fast_making?, :super_fast_making
 
     def default_color
       default_color_options.first&.name

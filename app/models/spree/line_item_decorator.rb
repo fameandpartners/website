@@ -22,6 +22,11 @@ Spree::LineItem.class_eval do
       where(product_making_options: { option_type: 'fast_making' })
   end
 
+  scope :super_fast_making, -> do
+    joins(making_options: :product_making_option).
+      where(product_making_options: { option_type: 'super_fast_making' })
+  end
+  
   scope :slow_making, -> do
     joins(making_options: :product_making_option).
       where(product_making_options: { option_type: 'slow_making' })
@@ -66,7 +71,7 @@ Spree::LineItem.class_eval do
       total_price += personalization.price
     end
 
-    if fabric.present? && !recommended_fabric?
+    if fabric.present? && !recommended_fabric? 
       total_price += fabric.price_in(self.currency)
     end
 
@@ -78,7 +83,7 @@ Spree::LineItem.class_eval do
     total_adjustment = 0
 
     making_options.each do |mo|
-      if mo.product_making_option.fast_making? and mo.price
+      if (mo.product_making_option.fast_making? || mo.product_making_option.super_fast_making? ) and mo.price
         total_adjustment += mo.price
       end
       # slow_making price will be percentage based
@@ -92,6 +97,10 @@ Spree::LineItem.class_eval do
 
   def fast_making?
     making_options.any? {|mo| mo.product_making_option.fast_making? }
+  end
+
+  def super_fast_making?
+    making_options.any? {|mo| mo.product_making_option.super_fast_making? }
   end
 
   def slow_making?
