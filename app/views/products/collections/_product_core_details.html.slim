@@ -5,7 +5,7 @@ ruby:
   = link_to product_link.call(product) do
     .details
       span.name = product.name
-      span.price = product_price_with_discount(number_with_precision(product, precision: 2, strip_insignificant_zeros: true))
+      span.price = product_price_with_discount(product).gsub('.00','')
 
 - else
   = link_to product_link.call(product), :class => 'media-wrap' do
