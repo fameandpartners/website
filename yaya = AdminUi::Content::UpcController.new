@@ -1,0 +1,68 @@
+yaya = AdminUi::Content::UpcController.new
+
+find_or_create_sku('FP3044P', 'The Nora Dress', 'standard', 'alessandra-sky-floral', 'US14/AU18', [])
+
+find_or_create_sku('FP2902-102P', 'The Orianna Dress', 'standard', 'sky-blossom-floral', 'US14/AU18', [])
+
+find_or_create_sku('FP2902-102P', 'The Orianna Dress', 'standard', 'black', 'US0/AU4', [])
+
+balls = Refulfiller.get_line_items_between('2018-04-10', Time.now)
+
+Refulfiller.check_line_items_in_inventory(balls)
+
+
+src="https://d3t8z8anmshf26.cloudfront.net/spree/products/42235/original/fp2683-hg29-front.jpg?1521756890"
+
+url("https://d1r5y0omrzif1b.cloudfront.net/spree/products/47619/original/fp2683-sh13-1.jpg?1522884474");
+
+
+#<Category id: 37, category: "Jumpsuits", subcategory: "Ankle">,
+#<Category id: 38, category: "Skirt", subcategory: "Ankle">,
+#<Category id: 39, category: "Jumpsuits", subcategory: "Cheeky">,
+#<Category id: 40, category: "Jumpsuits", subcategory: "Full">,
+#<Category id: 41, category: "Dresses", subcategory: "Micro Mini"
+
+
+fark = [['Jumpsuits', 'Ankle'],
+        ['Skirt', 'Ankle'],
+        ['Jumpsuits', 'Cheeky'],
+        ['Jumpsuits', 'Full'],
+        ['Dresses', 'Micro Mini']
+]
+
+fark.each do |x|
+  cat = Category.new
+  cat.category = x.first
+  cat.subcategory = x.last
+  cat.save
+end
+
+
+rm -rf ~/import
+script/prepare_import.sh https://www.dropbox.com/sh/t5uit8r27n2vajz/AAAlrv3wNhuwklRd3gI8DDMca?dl=1
+
+script/import_products.sh
+
+be rake data:six_week_delivery
+be rake data:add_fastmaking_to_all_products
+be rake data:make_fast_making_18_dollars
+be rake data:fabric_bla_bla
+be rake elasticsearch:reindex
+
+Spree::Product.active.each do |prd|
+  if prd.fabric_products.present?
+    puts prd.id
+    prd.fabric_products.recommended.each do |pfv|
+      color = pfv.fabric.option_value
+    end
+  end
+end
+
+
+BatchCollection.all.each do |bc|
+  bc.batch_collection_line_items.active.each do |bcli|
+    puts bcli.id
+    bcli.line_item.order
+  end
+
+end
