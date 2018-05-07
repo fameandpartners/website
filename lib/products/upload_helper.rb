@@ -9,8 +9,7 @@ module Products
         begin
 
           #min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
-
-          product = create_or_update_product(prod, min_length)
+          product = create_or_update_product(prod)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
           sizes = %w(
@@ -21,15 +20,11 @@ module Products
           details = prod[:details]
 
           #color_map = details[:colors].map{ |x| { color: x } }
-
           add_product_properties(product, details)
+          fabric_products = add_product_color_options(product, details[:fabrics]) 
 
-          add_product_color_options(product, details[:fabrics]) 
-
-          #TRY WITHOUT THIS WE MIGHT NOT NEED IT add_product_variants(product, sizes, details[:colors] || [], 0.0, 0.0) 
-
+          add_product_variants(product, sizes, fabric_products, 0.0, 0.0) 
           add_product_customizations(product, prod[:customization_list] || [], nil)
-
           add_product_height_ranges( product )
 
           product.hidden = false #MIGHT MOVE THIS
@@ -53,7 +48,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod, min_length)
+    def create_or_update_product(prod)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -119,7 +114,10 @@ module Products
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       color_ids = []
       fabrics.map do |fabric|
-        fab = Fabric.find_by_presentation(fabric)
+        fab = Fabric.find_by_name(fabric[:code])
+        fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
+        fabric_product.recommended = true
+        fabric_product.save!
         color = fab.option_value
         color_ids << color.id
         #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
@@ -127,6 +125,8 @@ module Products
       end
 
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_ids).destroy_all
+
+      product.fabric_products
     end
 
     def add_product_properties(product, details)
@@ -149,7 +149,7 @@ module Products
       product
     end
 
-    def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+    def add_product_variants(product, sizes, fabrics_products, price_in_aud, price_in_usd)
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -160,20 +160,20 @@ module Products
       product.reload
 
       sizes.each do |size_name|
-        colors.each do |color_name|
+        fabrics_products.each do |fabrics_product|
           size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
+          fabric_color = fabrics_product.fabric.option_fabric_color_value
 
-          next if size_value.blank? || color_value.blank?
+          next if size_value.blank? || fabric_color.blank?
 
           variant = product.variants.detect do |variant|
-            [size_value.id, color_value.id].all? do |id|
+            [size_value.id, fabric_color.id].all? do |id|
               variant.option_value_ids.include?(id)
             end
           end
           unless variant.present?
             variant = product.variants.build
-            variant.option_values = [size_value, color_value]
+            variant.option_values = [size_value, fabric_color]
           end
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
@@ -202,10 +202,10 @@ module Products
     def add_product_customizations(product, custs, lengths)
       customizations = []
 
-      custs.reject{|x| x[:type].downcase == 'size' ||  x[:type].downcase == 'fabric'}.each do |customization|
+      custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each do |customization|
         new_customization = {
                               id: customization[:code].downcase, 
-                              name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
+                              name: customization[:code], 
                               price: customization[:price_usd],
                               price_aud: customization[:price_aud],#TODO: add this to the json being sent
                               presentation: customization[:customization_presentation],

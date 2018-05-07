@@ -139,12 +139,20 @@ class Populator
     end
 
     def product_variant
-      @variant ||= Spree::Variant.where(id: product_attributes[:variant_id]).first
+      @variant ||= begin
+        variant = Spree::Variant.where(id: product_attributes[:variant_id]).first
+
+        unless variant
+          variant = Spree::Variant.find_by_sku(product_attributes[:variant_id].downcase)
+        end
+
+        variant
+      end
     end
 
     def product_fabric
       if !product_attributes[:fabric_id].blank?
-        @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and fabrics.id = ?', product.id, product_attributes[:fabric_id]).first
+        @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and (fabrics.id = ? or fabrics.name = ?)', product.id, product_attributes[:fabric_id].to_i, product_attributes[:fabric_id]).first
       else
         nil
       end
@@ -161,10 +169,10 @@ class Populator
 
     def product_size
       @product_size ||= begin
-        product_size_id = product_attributes[:size_id].to_i
-        if (size = product_options.sizes.default.detect{|size| size.id == product_size_id}).present?
+        product_size_id = product_attributes[:size_id]
+        if (size = product_options.sizes.default.detect{|size| size.id == product_size_id.to_i || size.name == product_size_id}).present?
           size.custom = false
-        elsif (size = product_options.sizes.extra.detect{|size| size.id == product_size_id}).present?
+        elsif (size = product_options.sizes.extra.detect{|size| size.id == product_size_id.to_i || size.name == product_size_id}).present?
           size.custom = true
         else
           raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")
@@ -211,7 +219,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'].to_s == id.to_s }
+          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'].to_s == id.to_s || customisation_value['customisation_value']['name'].to_s == id }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else

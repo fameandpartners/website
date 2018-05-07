@@ -3,11 +3,12 @@ module Api
     class ProductUploadController < ApplicationController
       include Products::UploadHelper
 
+      skip_before_filter :verify_authenticity_token
       respond_to :json
 
       def upload
-        product = create_or_update_products(request.body.string)
-        respond_with product.to_json
+        product = create_or_update_products(request.body.read)
+        respond_with product
       end
 
     end 
