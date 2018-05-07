@@ -5,21 +5,26 @@ ruby:
   = link_to product_link.call(product) do
     .details
       span.name = product.name
-      span.price = product_price_with_discount(number_with_precision(product, precision: 2, strip_insignificant_zeros: true))
+      span.price = product_price_with_discount(product).gsub('.00','')
 
 - else
   = link_to product_link.call(product), :class => 'media-wrap' do
 
-    - if pidImageReplacementDesktop
-      = image_tag pidImageReplacementDesktop, alt: product.name, class: "img-product hidden-xs hidden-sm"
-      = image_tag pidImageReplacementMobile, alt: product.name, class: "img-product hidden-lg hidden-md"
+    .ProductImageWrapper
+      - if pidImageReplacementDesktop
+        = image_tag pidImageReplacementDesktop, alt: product.name, class: "img-product hidden-xs hidden-sm"
+        = image_tag pidImageReplacementMobile, alt: product.name, class: "img-product hidden-lg hidden-md"
 
-    - else
-      = image_tag product.images.first, :alt => product.name, :class => "img-product", 'data-hover' => product.images.last, 'data-original' => product.images.first
+      - else
+        = image_tag product.images.first, :alt => product.name, :class => "img-product", 'data-hover' => product.images.last, 'data-original' => product.images.first
 
-    // Price Drop AU ribbon
-    - if price_drop_au_item_check(product.sku)
-      = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
+      // Price Drop AU ribbon
+      - if price_drop_au_item_check(product.sku)
+        = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
+
+      // Super Express shipping ribbon
+      - if super_fast_making_item_check(product) && !price_drop_au_item_check(product.sku)
+        = render 'shared/redesign/ribbon_super_express_shipping'
 
   .details.text-center
     = link_to product_link.call(product), :class => 'media-wrap product-name' do

@@ -15,7 +15,7 @@ Spree::LineItem.class_eval do
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
   has_many :batch_collection_line_items
-  has_many :batch_collections, :through => :batch_collection_line_items, dependent: :destroy
+  has_many :batch_collections, :through => :batch_collection_line_items
 
   scope :fast_making, -> do
     joins(making_options: :product_making_option).
@@ -26,7 +26,7 @@ Spree::LineItem.class_eval do
     joins(making_options: :product_making_option).
       where(product_making_options: { option_type: 'super_fast_making' })
   end
-  
+
   scope :slow_making, -> do
     joins(making_options: :product_making_option).
       where(product_making_options: { option_type: 'slow_making' })
@@ -71,7 +71,7 @@ Spree::LineItem.class_eval do
       total_price += personalization.price
     end
 
-    if fabric.present? && !recommended_fabric? 
+    if fabric.present? && !recommended_fabric?
       total_price += fabric.price_in(self.currency)
     end
 

@@ -178,9 +178,19 @@ body {
   bottom: 0;
 }
 
+.u-reverse-column-order {
+  flex-direction: column-reverse;
+  display: flex;
+}
+
 // Crop media edges on resize
 @include breakpoint(mobile-max) {
   .u-crop-media-edges-on-resize--mobile {
     @include crop-media-edges-on-resize;
+  }
+
+  .u-reverse-column-order--mobile {
+    flex-direction: column-reverse;
+    display: flex;
   }
 }

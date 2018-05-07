@@ -271,7 +271,7 @@ FameAndPartners::Application.routes.draw do
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
     # temporary patch. this dress link is bad so redirect it
-    get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
+    # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -365,11 +365,22 @@ FameAndPartners::Application.routes.draw do
     get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
 
     #############################
-    # PROM LPs - Edit pages
+    # Weddings & Parties - Say Lou Lou Edit page
     #############################
-    # Prom LP - Say Lou Lou Edit page
-    get '/evening-collection-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+    get '/weddings-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
+    get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
 
+    # Category pages used in the new Navigation bar (2018-04-19)
+    get '/navigation-under-200' => 'products/collections#show', permalink: 'navigation-under-200', as: :navigation_under_200_page
+    get '/navigation-all-separates' => 'products/collections#show', permalink: 'navigation-all-separates', as: :navigation_all_separates_page
+    get '/navigation-work' => 'products/collections#show', permalink: 'navigation-work', as: :navigation_work_page
+    get '/navigation-night-out' => 'products/collections#show', permalink: 'navigation-night-out', as: :navigation_night_out_page
+    get '/navigation-day' => 'products/collections#show', permalink: 'navigation-day', as: :navigation_day_page
+    get '/navigation-bridal' => 'products/collections#show', permalink: 'navigation-bridal', as: :navigation_bridal_page
+    get '/navigation-vacation' => 'products/collections#show', permalink: 'navigation-vacation', as: :navigation_vacation_page
+
+    # Summer collection category page
+    get '/shop-summer-collection' => 'products/collections#show', permalink: 'shop-summer-collection', as: :summer_collection_category_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
