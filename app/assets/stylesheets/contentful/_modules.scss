@@ -1,4 +1,5 @@
 // _ITEM--lg.erb
+// _ROW--editorial-tile-copy-pid
 @import 'modules/editorial';
 
 // _ITEM--md-text.erb
@@ -21,3 +22,6 @@
 
 // _COMPONENT--email.erb
 @import 'modules/newsletter_form';
+
+// _HEADER--editorial-tile-overlay
+@import 'modules/hero_tile';

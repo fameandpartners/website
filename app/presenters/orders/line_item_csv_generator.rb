@@ -84,8 +84,19 @@ module Orders
             lip = Orders::LineItemPresenter.new(li)
           end
 
-          if (@refulfill_only || @batch_only || @ready_batches || @making_only) && PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
-            next
+          if (@refulfill_only || @batch_only || @ready_batches || @making_only)
+            # ignore certain products
+            if PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
+              next
+            end
+            # dont' show canceled orders
+            if li.order.state == 'canceled'
+              next
+            end
+            # dont' show anything that has shipped or canceled
+            if li.order&.shipment&.shipped_at.present? || li.order&.shipment&.tracking.present? || li.order.state == 'canceled'
+              next
+            end
           end
 
           #filter out any items that have shipping info
@@ -122,7 +133,7 @@ module Orders
             line.order_state,
             line.order_number,
             # lip.sample_sale?,
-            li.refulfill_status,
+            li&.refulfill_status,
             line.line_item_id,
             line.total_items,
             line.completed_at_date,

@@ -2,6 +2,10 @@
   padding-bottom: 36px;
 }
 
+.ProductImageWrapper {
+  position: relative;
+}
+
 .Product__image,
 .Product__name,
 .Product__price {
@@ -22,6 +26,18 @@
   letter-spacing: 0.1rem;
   font-weight: bold;
   margin-top: 6px;
+}
+
+.ProductInfo--inline {
+  display: inline-block;
+
+  .Product__image,
+  .Product__name,
+  .Product__price {
+    width: auto;
+    display: inline-block;
+  }
+
 }
 
 .email-module-message {

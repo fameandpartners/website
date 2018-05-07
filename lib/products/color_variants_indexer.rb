@@ -90,6 +90,7 @@ module Products
                     can_be_customized:  product.can_be_customized?,
                     fast_delivery:      product.fast_delivery,
                     fast_making:        product.fast_making?,
+                    super_fast_making:  product.super_fast_making?,
                     taxon_ids:          product.taxons.map(&:id),
                     taxon_names:        product.taxons.map{ |tx| tx.name }.flatten,
                     taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
