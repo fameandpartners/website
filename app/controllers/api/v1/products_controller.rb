@@ -307,7 +307,7 @@ module Api
           isDefault: false,
           title: f.fabric.presentation,
           componentTypeId: :Fabric,
-          componentTypeCategory: :Fabric,
+          componentTypeCategory: 'ColorAndFabric',
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
           isRecommended: f.recommended,
