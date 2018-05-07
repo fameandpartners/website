@@ -8,7 +8,7 @@ module Products
       upload.map do |prod|
         begin
 
-          min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
+          #min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
 
           product = create_or_update_product(prod, min_length)
 
@@ -20,19 +20,15 @@ module Products
 
           details = prod[:details]
 
-          color_map = details[:colors].map{ |x| { color: x } }
+          #color_map = details[:colors].map{ |x| { color: x } }
 
           add_product_properties(product, details)
 
-          add_product_color_options(product, details[:colors])
+          add_product_color_options(product, details[:fabrics]) 
 
-          add_product_variants(product, sizes, details[:colors] || [], 0.0, 0.0)
+          #TRY WITHOUT THIS WE MIGHT NOT NEED IT add_product_variants(product, sizes, details[:colors] || [], 0.0, 0.0) 
 
-          add_product_customizations(product, prod[:customization_list] || [], details[:lengths])
-
-          #update_or_create_base_visualization(product, details, details[:silhouette], details[:neckline], color_map)
-
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline], color_map,  prod[:customization_list])
+          add_product_customizations(product, prod[:customization_list] || [], nil)
 
           add_product_height_ranges( product )
 
@@ -106,18 +102,6 @@ module Products
       product.save!
 
       #add slow making
-      prdmo = ProductMakingOption.new(  { product_id: product.id,
-                                        active: true,
-                                        option_type: 'slow_making',
-                                        price: -0.1,
-                                        currency: 'USD' },
-                                        without_protection: true
-                                      )
-      # only connect the 2 if not already done before
-      if prdmo.save
-        product.making_options << prdmo
-      end
-
       new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
@@ -125,17 +109,18 @@ module Products
       #trying without this
 
      #if min_length[:price_aud].present? || min_length[:price_usd].present?
-         add_product_prices(product, 0.0, 0.0)
+        add_product_prices(product, 0.0, 0.0)
        #end
      # info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end
 
-    def add_product_color_options(product, available_colors)
+    def add_product_color_options(product, fabrics)
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       color_ids = []
-      available_colors.map do |available_color|
-        color = Spree::OptionValue.find_by_presentation(available_color)
+      fabrics.map do |fabric|
+        fab = Fabric.find_by_presentation(fabric)
+        color = fab.option_value
         color_ids << color.id
         #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
         product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
@@ -217,7 +202,7 @@ module Products
     def add_product_customizations(product, custs, lengths)
       customizations = []
 
-      custs.each do |customization|
+      custs.reject{|x| x[:type].downcase == 'size' ||  x[:type].downcase == 'fabric'}.each do |customization|
         new_customization = {
                               id: customization[:code].downcase, 
                               name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
@@ -229,7 +214,7 @@ module Products
                             }
         customizations << { customisation_value: new_customization }
       end
-      product.lengths = { available_lengths: lengths }.to_json
+      #product.lengths = { available_lengths: lengths }.to_json # Dont think I need this anymore
       product.customizations = customizations.to_json
       product.save
 
