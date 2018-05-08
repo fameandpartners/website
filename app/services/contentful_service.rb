@@ -333,6 +333,13 @@ module Contentful
           text: text,
           text_alignment: text_alignment
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--collapsible-entry')
+        title = (fetched_lg_container.respond_to? :title) ? fetched_lg_container.title : nil
+        text = (fetched_lg_container.respond_to? :text) ? fetched_lg_container.text : nil
+        {
+          title: title,
+          text: text
+        }
       end
     end
 
@@ -578,16 +585,20 @@ module Contentful
         # Hero tile text
         text = (item.respond_to? :text) ? item.text : nil
 
+        # Collapsible entries
+        collapsible_entries = (item.respond_to? :collapsible_entries_container) ? map_editorials(item.collapsible_entries_container) : nil
+
         {
           id: item_id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
           content_tiles: content_tiles,
+          lg_items: lg_items,
+          collapsible_entries: collapsible_entries,
           email_text: email_text,
           button_label: button_label,
           relative_url: relative_url,
-          lg_items: lg_items,
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
           tile_cta_position: tile_cta_position,
