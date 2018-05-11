@@ -27,7 +27,7 @@ module Products
           add_product_customizations(product, prod[:customization_list] || [], nil)
           add_product_height_ranges( product )
 
-          product.hidden = false #MIGHT MOVE THIS
+          product.hidden = true #MIGHT MOVE THIS
           product.available_on = product.created_at
 
           product.save!
@@ -62,6 +62,7 @@ module Products
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
       end
 
+      ActiveRecord::Associations::Preloader.new(product, variants: [:option_values]).run
 
       taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_name(x)&.id }
 

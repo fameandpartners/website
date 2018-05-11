@@ -429,6 +429,25 @@ Spree::Product.class_eval do
     @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
   end
 
+  def has_render?
+    self.class.has_render?(self)
+  end
+
+  def self.has_render?(product)
+    product.master.sku.starts_with?("fg10")
+  end
+
+  def self.use_new_pdp?(product_or_line_item)
+    product_or_line_item.sku.starts_with?("fg10")
+  end
+
+  def self.format_new_pid(fabric, customizations)
+    components = [
+      fabric,
+      customizations.map{|c| c['customisation_value']['name']}
+    ].flatten.compact.sort.join("~")
+  end
+
   private
 
   def build_variants_from_option_values_hash
