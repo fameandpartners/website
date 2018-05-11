@@ -7,5 +7,10 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   <label class="Panel__label" for="collapse-<%= contents[:title].parameterize %>"><%== contents[:title] %></label>
   <div class="Panel__content">
     <%== markdown.render(contents[:text]) %>
+    <% if show_back_to_top_link == true %>
+      <div class="Panel__backToTop">
+        <a href="#react-header">Back to top</a>
+      </div>
+    <% end %>
   </div>
 </div>

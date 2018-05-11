@@ -588,6 +588,7 @@ module Contentful
         # Collapsible entries
         collapsible_entries = (item.respond_to? :collapsible_entries_container) ? map_editorials(item.collapsible_entries_container) : nil
         custom_css_class = (item.respond_to? :custom_css_class) ? item.custom_css_class : nil
+        first_entry_expanded = (item.respond_to? :first_entry_expanded) ? item.first_entry_expanded : false
 
         {
           id: item_id,
@@ -621,7 +622,8 @@ module Contentful
           image_replacement_4: image_replacement_4,
           tile_featured: tile_featured,
           text: text,
-          custom_css_class: custom_css_class
+          custom_css_class: custom_css_class,
+          first_entry_expanded: first_entry_expanded
         }
       end
 

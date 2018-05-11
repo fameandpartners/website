@@ -1,13 +1,18 @@
+<%
+if contents[:first_entry_expanded].present?
+  first_entry_expanded_class = 'js-collapsible-panel--expand-first-entry'
+  show_back_to_top_link = true
+else
+  first_entry_expanded_class = nil
+  show_back_to_top_link = false
+end
+%>
 <div class="section-row columns">
   <div class="column <%= contents[:custom_css_class] %>">
-    <div class="page-content content-collapse-expand">
-      <div id="panel-articles" class="tab-pane active" role='tabpanel'>
-        <div class="panel-group" roll='tablist' aria-multiselectable='true'>
-          <% contents[:collapsible_entries].each do |item| %>
-            <%= render partial: "layouts/contentful/modules/items/ITEM--collapsible-entry", locals: {contents: item} %>
-          <% end %>
-        </div>
-      </div>
+    <div class="js-collapsible-panel <%= first_entry_expanded_class %>">
+      <% contents[:collapsible_entries].each do |item| %>
+          <%= render partial: "layouts/contentful/modules/items/ITEM--collapsible-entry", locals: {contents: item, show_back_to_top_link: show_back_to_top_link} %>
+      <% end %>
     </div>
   </div>
 </div>
