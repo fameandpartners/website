@@ -25,10 +25,9 @@
 
 .Panel__content {
   max-height: 0;
+  display: none;
+  margin-bottom: 25px;
   overflow: hidden;
-  -webkit-transition: all .2s;
-  -o-transition: all .2s;
-  transition: all .2s;
 
   p {
     font-family: $primary-font-family;
@@ -39,7 +38,12 @@
   }
 
   a {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid $c-neutral-6;
+    margin: 0 1px;
+  }
+
+  strong {
+    font-weight: 400;
   }
 
 }
@@ -47,6 +51,7 @@
 /* :checked */
 .Panel__input:checked ~ .Panel__content {
   max-height: 100%;
+  display: block;
 }
 
 /* Icon */
@@ -73,4 +78,29 @@
   top: -9px;
   font-size: 3.4em;
   color: $c-neutral-8;
+}
+
+.Panel__backToTop {
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 1.3rem;
+  position: relative;
+  display: block;
+  padding-right: 25px;
+}
+
+.Panel__backToTop a {
+  color: $c-neutral-10;
+  border-bottom: 0;
+}
+
+.Panel__backToTop a:hover {
+  color: $c-black;
+}
+
+.Panel__backToTop a:after {
+  display: inline-block;
+  top: -3px;
+  right: 4px;
+  @extend .icon-arrow-up;
 }
