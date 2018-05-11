@@ -52,6 +52,30 @@
     }
   });
 
+  // Collapsible panel
+  $(document).ready(function(){
+    if ($(".js-collapsible-panel").length) {
+
+      // Get current URL hash
+      var hash = document.location.hash;
+
+      // Check if URL matches an existing entry to make it expand on page load
+      if ($(hash).length) {
+        // Expand the desired anchor entry
+        $(hash).prop("checked", true);
+      } else {
+        // Expand first entry if this is a desired option
+        $(".js-collapsible-panel--expand-first-entry .Panel:first-of-type input").prop("checked", true);
+      }
+
+      // Update URL as user clicks on collapsible panels
+      $(".js-collapsible-panel .Panel__label").on("click", function(e) {
+        history.pushState({}, '', "#"+$(this).attr('for')+"");
+      });
+
+    }
+  });
+
   // window.clickAddMoodboard = function(target, event) {
   //   event.stopPropagation();
   //   var $target, item, user_moodboards;
