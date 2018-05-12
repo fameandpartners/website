@@ -228,7 +228,6 @@ module Products
 
     def meta_title
       [
-        color_name.to_s.titleize,
         name,
         type
       ].join(' ')
