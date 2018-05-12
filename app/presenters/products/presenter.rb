@@ -228,7 +228,7 @@ module Products
 
     def meta_title
       [
-        name,
+        name.sub('Dress',''),
         type
       ].join(' ')
     end
