@@ -152,7 +152,7 @@ class Populator
 
     def product_fabric
       if !product_attributes[:fabric_id].blank?
-        @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and (fabrics.id = ? or fabrics.name = ?)', product.id, product_attributes[:fabric_id].to_i, product_attributes[:fabric_id]).first
+        @fabric ||= Fabric.joins(:products).where('spree_products.id = ? and (fabrics.id = ? or fabrics.name = ?)', product.id, product_attributes[:fabric_id].to_i, product_attributes[:fabric_id].to_s).first
       else
         nil
       end
