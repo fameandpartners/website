@@ -31,14 +31,28 @@ namespace :data do
 
 	def create_bridesmaids_fabric(fabric_name, color_name, material)
 		color = Spree::OptionValue.find_by_name(color_name) 
-		
+		fabric_color_option = find_or_create_fabric_color_option(fabric_name, "#{color.presentation} #{material}")
+
 		fab = Fabric.find_or_create_by_name(fabric_name)
 		fab.presentation = "#{color.presentation} #{material}"
 		fab.price_aud = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE
 		fab.price_usd = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE
+		fab.option_fabric_color_value = fabric_color_option
 		#fab.image_url = fabric[:image_url]
 		fab.material = material
 		fab.option_value = color
 		fab.save!
+	end
+
+	private def find_or_create_fabric_color_option(name, presentation)
+		fabric_color = Spree::OptionType.fabric_color.option_values.where('LOWER(name) = ?', name).first
+		
+		if( fabric_color.blank? )
+		  fabric_color = Spree::OptionType.fabric_color.option_values.create do |object|
+			object.name         = name
+			object.presentation = presentation
+		  end
+		end
+		fabric_color
 	end
 end

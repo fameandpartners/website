@@ -98,7 +98,6 @@ module Products
       product.save!
 
       #add slow making
-      #add slow making
       prdmo = ProductMakingOption.new(  {product_id: product.id,
                                         active: true,
                                         option_type: 'slow_making',
