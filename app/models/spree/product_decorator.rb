@@ -193,12 +193,14 @@ Spree::Product.class_eval do
 
   def basic_fabric_ids
     fabric_products
+      .active
       .recommended
       .pluck(:fabric_id)
   end
 
   def custom_fabric_ids
     fabric_products
+      .active
       .custom
       .pluck(:fabric_id)
   end
