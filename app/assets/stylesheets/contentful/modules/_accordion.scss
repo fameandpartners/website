@@ -1,0 +1,106 @@
+/* Acordeon styles */
+.Panel {
+  border-bottom: 1px solid $c-neutral-9;
+  margin-bottom: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.Panel__input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.Panel__label {
+  position: relative;
+  display: block;
+  padding: 15px 10px 15px 0;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.Panel__content {
+  max-height: 0;
+  display: none;
+  margin-bottom: 25px;
+  overflow: hidden;
+
+  p {
+    font-family: $primary-font-family;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  a {
+    border-bottom: 1px solid $c-neutral-6;
+    margin: 0 1px;
+  }
+
+  strong {
+    font-weight: 400;
+  }
+
+}
+
+/* :checked */
+.Panel__input:checked ~ .Panel__content {
+  max-height: 100%;
+  display: block;
+}
+
+/* Icon */
+.Panel__label::after {
+  font-size: 2.4em;
+  font-weight: 100;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  display: block;
+  text-align: center;
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.Panel__input[type=checkbox] + .Panel__label::after {
+  content: "+";
+}
+
+.Panel__input[type=checkbox]:checked + .Panel__label::after {
+  transform: rotate(45deg);
+  right: 12px;
+  top: -9px;
+  font-size: 3.4em;
+  color: $c-neutral-8;
+}
+
+.Panel__backToTop {
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 1.3rem;
+  position: relative;
+  display: block;
+  padding-right: 25px;
+}
+
+.Panel__backToTop a {
+  color: $c-neutral-10;
+  border-bottom: 0;
+}
+
+.Panel__backToTop a:hover {
+  color: $c-black;
+}
+
+.Panel__backToTop a:after {
+  display: inline-block;
+  top: -3px;
+  right: 4px;
+  @extend .icon-arrow-up;
+}

@@ -5,6 +5,7 @@ body {
 .app-container {
   width: 100%;
   margin-bottom: $mega-menu-desktop-height;
+  font-weight: 300;
 
   @include breakpoint(desktop-bootstrap-min) {
     margin-top: $mega-menu-desktop-height;
