@@ -713,9 +713,8 @@ FameAndPartners::Application.routes.draw do
       get 'profile' => 'profiles#show'
 
       #upload products.*\.ccf$
-      constraints DomainConstraint.new(/.*\.fameandgroups.com\/$/) do
-        put '/product_upload' => 'product_upload#upload'
-      end
+      put '/product_upload' => 'product_upload#upload'
+      
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'

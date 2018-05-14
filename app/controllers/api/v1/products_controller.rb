@@ -3,205 +3,9 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
-# {
-#   code: '',
-#   title: '',
-#   incompatibleWith: [],
-#   price: 0,
-#   meta: { image: { url: '' }},
-# },
-
 PRODUCT_IMAGE_SIZES = [:original, :product]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
-
-FAKE_PRODUCT_ID = 1625
-
-FAKE_COMPONENTS = [
-  #  Silhouette
-  #  Style
-  {code: 'BC1', title: 'Strapless', incompatibleWith: ['T2', 'T31', 'T76'], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/top_strapless_200.jpg' } }},
-  {code: 'BC2', title: 'Strappy', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/top_strappy_200.jpg' } }},
-  {code: 'BC3', title: 'Classic', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'BC4', title: 'Relaxed', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'BC5', title: 'One-Shoulder', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'BC6', title: 'Tri-Cup', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'BC7', title: 'Draped', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-
-  # Length
-  {code: 'extra-mini', title: 'Extra Mini', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_micro_148.jpg' } }},
-  {code: 'mini', title: 'Mini', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_mini_148.jpg' } }},
-  {code: 'knee', title: 'Knee', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_knee_148.jpg' } }},
-  {code: 'midi', title: 'Midi', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_midi_148.jpg' } }},
-  {code: 'ankle', title: 'Ankle', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_ankle_148.jpg' } }},
-  {code: 'maxi', title: 'Maxi', incompatibleWith: [], price: 100, meta: { image: { url: 'https://www.fameandpartners.com/images/bridesmaids_builder/length_column_maxi_148.jpg' } }},
-
-  # Front
-  {code: 'T76', title: 'Subtle Sweetheart Neckline', incompatibleWith: ['BC1'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T2', title: 'Curved Neckline', incompatibleWith: ['BC1', 'T51'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T3', title: 'Sweetheart Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T4', title: 'Straight Neckline', incompatibleWith: ['T75'], price: 100, meta: { image: { url: nil } }},
-
-  # Back
-  {code: 'T1', title: 'Strapless With Straight Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T11', title: 'V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T15', title: 'Plunging V-Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T2', title: 'Curved Back Neckline', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-
-  # Bodice
-  {
-    code: 'T7',
-    title: 'Change to Halter Neckline with Back Ties',
-    incompatibleWith: [],
-    price: 10,
-    meta: { image: { url: '' }},
-  },
-
-  # Waistband
-  {code: 'WB1', title: 'Standard', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'WB2', title: 'Wide', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-
-  # Straps and Sleeves
-  {code: 'T51', title: 'Off-Sholder Sleeves', incompatibleWith: ['T2'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T31', title: 'Off-Shoulder Panel', incompatibleWith: ['BC1'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T52', title: 'Wide Arm Ties', incompatibleWith: ['T71'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T22', title: 'Fixed Spaghetti Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T26', title: 'Fixed Spaghetti Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T71', title: 'Narrow Adjustable Straight Straps', incompatibleWith: ['T52'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T85', title: 'Narrow Adjustable Cross Back Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T30', title: 'Wide Fixed Straight Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T25', title: 'Wide Fixed Cross Back Straps', incompatibleWith: ['T4'], price: 100, meta: { image: { url: nil } }},
-  {code: 'T33', title: 'Wide Tie Straps', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-
-  # Extras
-  {code: 'T60', title: 'Side Cut-Outs', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'T58', title: 'Bow', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-  {code: 'A5', title: 'Cape', incompatibleWith: [], price: 100, meta: { image: { url: nil } }},
-]
-
-FAKE_GROUPS = [
-  {
-    id: 1,
-    title: "Silhouette",
-    slug: 'silhouette',
-    sectionGroups: [
-      {
-        id: 1,
-        title: "Style",
-        slug: 'style',
-        previewType: :render,
-        zoom: "none",
-        sections: [
-          {
-            sectionId: "style",
-            title: "Select your style",
-            options: [
-              'BC1', 'BC2', 'BC3', 'BC4', 'BC5', 'BC6', 'BC7'
-            ],
-            selectionType: "requiredOne",
-            orientation: "front",
-          }
-        ]
-      },
-      {
-        id: 2,
-        title: "Length",
-        slug: 'length',
-        previewType: :render,
-        zoom: "bottom",
-        sections: [
-          {
-            sectionId: "length",
-            title: "Select your length",
-            options: [
-              'extra-mini', 'mini', 'midi', 'maxi', 'knee'
-            ],
-            selectionType: "requiredOne",
-            orientation: "front",
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Customization",
-    slug: 'customization',
-    sectionGroups: [
-      {
-        id: 3,
-        title: "Front & Back",
-        slug: 'front-and-back',
-        previewType: :render,
-        zoom: "top",
-        sections: [
-          {
-            sectionId: 'front',
-            title: "Select your front",
-            options: ["T76", "T2", "T3", "T4"],
-            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            selectionType: "requiredOne",
-            orientation: "front",
-          },
-          {
-            sectionId: 'back',
-            title: "Select your back",
-            options: ["T1", "T11", "T15"],
-            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            selectionType: "requiredOne",
-            orientation: "back",
-          },
-          {
-            sectionId: 'waistband',
-            title: "Select your waistband",
-            options: ["WB1", "WB2"],
-            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            selectionType: "optionalOne",
-            orientation: "front",
-          }
-        ]
-      },
-      {
-        id: 4,
-        title: "Straps & Sleeves",
-        slug: 'straps-and-sleeves',
-        previewType: :render,
-        zoom: "top",
-        sections: [
-          {
-            sectionId: 'strapsAndSleeves',
-            title: "Select your straps & sleeves",
-            options: [
-              "T22", "T26", "T71", "T30", "T33", "T34", "T68", "T51", "T31", "T52", "T25", "T85"
-            ],
-            relatedRenderSections: ["color", "front", "back", "waistband", "strapsAndSleeves"],
-            selectionType: "requiredOne",
-            orientation: "front",
-          }
-        ]
-      },
-      {
-        id: 5,
-        title: "Extras",
-        slug: 'extras',
-        previewType: :render,
-        consolidateSections: true,
-        zoom: "none",
-        sections: [
-          {
-            title: "Select your extras",
-            options: [
-              "T60", "T58", "A5", "T52"
-            ],
-            selectionType: "optionalMultiple",
-            orientation: "front",
-          }
-        ]
-      }
-    ]
-  }
-]
-
 
 module Api
   module V1
@@ -220,7 +24,7 @@ module Api
 
         fabrics = product
           .fabric_products
-          .includes(:fabric)
+          .includes(fabric: [:option_fabric_color_value, :option_value])
 
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
@@ -235,7 +39,8 @@ module Api
           .includes(:viewable)
 
         product_viewmodel = {
-          id: product.id, # TODO: Get real group from somewhere
+          id: product.id,
+          productId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
@@ -260,11 +65,11 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            fabrics.empty?  ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(f) },
+            fabrics.empty? ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(f) },
 
             sizes.map {|s| map_size(s) },
 
-            product.id == FAKE_PRODUCT_ID ? FAKE_COMPONENTS : customizations.map {|c| map_customization(c) },
+            customizations.map {|c| map_customization(c) },
 
             product.making_options
               .reject { |making| making.slow_making? }
@@ -272,45 +77,49 @@ module Api
 
             [
               {
-                sectionId: :todo,
                 cartId: 0,
                 code: 'free_returns',
-                isDefault: false,
                 title: "Free returns",
+                componentTypeId: :Return,
+                componentTypeCategory: :Return,
                 price: 0,
                 isProductCode: false,
+                isRecommended: false,
                 type: :return,
                 meta: {
                   sortOrder: 1,
                   returnDescription: 'Shipping and returns are free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
                 },
-                compatibleWith: [],
-                incompatibleWith: [],
+                incompatibleWith: { allOptions: [] },
               }
             ]
           ].flatten.compact,
 
           groups: [
-            colors.length > 0  && fabrics.empty? && {
+            colors.length > 0 && fabrics.empty? && {
+              id: 120,
               title: 'Color',
               changeButtonText: "Change",
               slug: 'color',
               sectionGroups: [
                 {
-                  title: "Color",
+                  title: 'Color',
                   slug: 'color',
-                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
+                  previewType: :image,
                   sections: [
                     {
+                      componentTypeId: :Colour,
+                      componentTypeCategory: :Colour,
                       title: "Select your color",
-                      options: colors.map {|c| c.option_value.name},
-                      selectionType: "requiredOne",
+                      options: colors.map {|c| { code: c.option_value.name, isDefault: false, parentOptionId: nil } },
+                      selectionType: :RequiredOne,
                     }]
                 }
               ]
             } || nil,
 
             fabrics.length > 0 && {
+              id: 121,
               title: 'Fabric',
               changeButtonText: "Change",
               slug: 'fabric',
@@ -318,22 +127,24 @@ module Api
                 {
                   title: "Color & Fabric",
                   slug: 'fabric',
-                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
+                  previewType: :image,
                   sections: [
                     {
+                      componentTypeId: :Fabric,
+                      componentTypeCategory: :Fabric,
                       title: "Select your color & fabric",
-                      options: fabrics.map {|f| f.fabric.name},
-                      selectionType: "requiredOne",
+                      selectionType: :RequiredOne,
+                      options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
                 }
               ]
             } || nil,
 
-            product.id != FAKE_PRODUCT_ID && customizations.length > 0 && {
+            customizations.length > 0 && {
+              id: 122,
               title: 'Customize',
               changeButtonText: "Change",
               slug: 'customize',
-              id: 122,
               sectionGroups: [
                 {
                   title: "Customize",
@@ -341,18 +152,19 @@ module Api
                   previewType: :cad,
                   sections: [
                     {
+                      componentTypeId: :Customisations,
+                      componentTypeCategory: :Customisations,
                       title: "Select your customizations",
-                      options: customizations.map {|f| f['customisation_value']['name']},
-                      selectionType: customizations.length === 3 ? "optionalOne" : 'optionalMultiple',
+                      options: customizations.map {|f| { code: f['customisation_value']['name'], isDefault: false, parentOptionId: nil } },
+                      selectionType: customizations.length === 3 ? :OptionalOne : :OptionalMultiple,
                     }
                   ]
                 }
               ]
             } || nil,
 
-            product.id == FAKE_PRODUCT_ID ? FAKE_GROUPS : nil,
-
             sizes.length > 0 && {
+              id: 123,
               title: 'Size',
               changeButtonText: "Select",
               sortOrder: 9,
@@ -361,12 +173,14 @@ module Api
                 {
                   title: "Size",
                   slug: 'size',
-                  previewType: product.id == FAKE_PRODUCT_ID ? :render : :image,
+                  previewType: :image,
                   sections: [
                     {
+                      componentTypeId: 'heightAndSize',
+                      componentTypeCategory: :Size,
                       title: "Select your height and size",
-                      selectionType: "requiredOne",
-                      options: sizes.map(&:name)
+                      selectionType: :RequiredOne,
+                      options: sizes.map {|s| { code: s.name, isDefault: false, parentOptionId: nil } },
                     }]
                 }]
             } || nil,
@@ -376,9 +190,9 @@ module Api
             .reject { |i| i.attachment_file_name.downcase.include?('crop') }
             .map {|image| map_image(image, fabrics, colors, product_fit, product_size) },
 
-          layerCads: product.id != FAKE_PRODUCT_ID ? [
+          layerCads: [
             product.layer_cads.empty? ? customizations.map {|c| map_cad_from_customization(c)} : product.layer_cads.map {|lc| map_layer_cad(lc, customizations) }
-          ].flatten.compact : [],
+          ].flatten.compact,
         }
         respond_with product_viewmodel.to_json
       end
@@ -422,7 +236,7 @@ module Api
 
         {
           type: :photo,
-          fitDescription: product_fit,
+          fitDescription: fixup_fit(product_fit),
           sizeDescription: product_size,
           src: PRODUCT_IMAGE_SIZES.map {|image_size|
             geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
@@ -443,14 +257,16 @@ module Api
 
       def map_customization(c)
         {
-          sectionId: :legacyCustomization,
           cartId: c['customisation_value']['id'],
           code: c['customisation_value']['name'],
           isDefault: false,
           title: c['customisation_value']['presentation'],
+          componentTypeId: :LegacyCustomisation,
+          componentTypeCategory: :LegacyCustomisation,
           price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
           isProductCode: true,
-          type: :legacyCustomization,
+          isRecommended: false,
+          type: :LegacyCustomisation,
           meta: {
             sortOrder: c['customisation_value']['position'],
             image: {
@@ -459,44 +275,45 @@ module Api
               height: -1
             }
           },
-          compatibleWith: [],
-          incompatibleWith: [],
+          incompatibleWith: { allOptions: [] },
         }
       end
       
       def map_making(making)
         {
-          sectionId: :making,
           cartId: making.id,
           code: making.option_type,
           isDefault: false,
           title: making.name,
+          componentTypeId: :Making,
+          componentTypeCategory: :Making,
           price: (making.price*100).to_i,
           isProductCode: false,
-          type: :making,
+          isRecommended: false,
+          type: :Making,
           meta: {
             sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
             deliveryTimeDescription: making.description,
             deliveryTimeRange: making.display_delivery_period
           },
-          compatibleWith: [],
-          incompatibleWith: [],
+          incompatibleWith: { allOptions: [] },
         }
       end
 
       def map_fabric(f)
         {
-          sectionId: :fabric,
           cartId: f.fabric.id,
           code: f.fabric.name,
           isDefault: false,
-          isRecommended: f.recommended,
           title: f.fabric.presentation,
+          componentTypeId: :Fabric,
+          componentTypeCategory: 'ColourAndFabric',
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
-          type: :fabric,
+          isRecommended: f.recommended,
+          type: :Fabric,
           meta: {
-            sortOrder: -1, #TODO
+            sortOrder: f.fabric.option_fabric_color_value.position, #TODO
             # hex: c.option_value.value,
             
             image: {
@@ -505,26 +322,32 @@ module Api
               height: 0,
             },
 
+            colorId: f.fabric.option_value.id,
+            colorCode: f.fabric.option_value.name,
+
+            materialTitle: f.fabric.material,
+            colorTitle: f.fabric.option_value.presentation,
+
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
           },
           img: f.fabric.image_url,
-          incompatibleWith: f.recommended ? [] : ['fast_making'],
-          compatibleWith: [],
+          incompatibleWith: f.recommended ? {} : { allOptions: ['fast_making'] },
         }
       end
 
       def map_color(c, product_fabric)
         {
-          sectionId: :color,
           cartId: c.option_value.id,
           code: c.option_value.name,
           isDefault: false,
-          isRecommended: !c.custom,
           title: c.option_value.presentation,
+          componentTypeId: :Colour,
+          componentTypeCategory: :Colour,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           isProductCode: true,
-          type: :color,
+          isRecommended: !c.custom,
+          type: :Colour,
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
@@ -537,28 +360,28 @@ module Api
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
           },
-          incompatibleWith: c.custom ? ['fast_making'] : [],
-          compatibleWith: [],
+          incompatibleWith: c.custom ? { 'allOptions': ['fast_making'] } : { allOptions: [] },
         }
       end
 
       def map_size(s)
         {
-          sectionId: :size,
           cartId: s.id,
           code: s.name,
           isDefault: false,
           title: s.presentation,
+          componentTypeId: :Size,
+          componentTypeCategory: :Size,
           price: 0,
           isProductCode: false,
-          type: :size,
+          isRecommended: false,
+          type: :Size,
           meta: {
             sortOrder: s.position,
             sizeUs: s.name.split("/")[0],
             sizeAu: s.name.split("/")[1],
           },
-          compatibleWith: [],
-          incompatibleWith: [],
+          incompatibleWith: { allOptions: [] },
         }
       end
 
@@ -572,6 +395,25 @@ module Api
         return nil unless customization['image_file_name']
 
         "#{configatron.asset_host}/system/images/#{customization['id']}/original/#{customization['image_file_name']}"
+      end
+
+      def fixup_fit(fit)
+        return nil if fit.blank?
+
+        fit
+          .gsub(/:(?=[^\s])/, ": ")
+          .gsub(/ +,/, ', ')
+          .gsub(/cm(?=[^\s])/, 'cm, ')
+          .gsub(/in(?=[^\s])/, 'in, ')
+          .gsub(/inch(?=[^\s])/, 'inch, ')
+          .gsub(/are:(?=[^\n])/, "are: \n")
+      end
+      def map_option(c)
+        {
+          code: c.name,
+          isDefault: false,
+          parentOptionId: nil
+        }
       end
 
     end

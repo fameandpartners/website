@@ -9,12 +9,17 @@ module Repositories
     end
 
     # @return [Repositories::Images::Template]
-    def read(color_id: nil, cropped: true)
+    def read(color_id: nil, cropped: true, product_customizations: [], fabric: nil)
       if product_from_wedding_atelier?
         wedding_attrs = image_for_wedding_atelier
         Images::Template.new(wedding_attrs)
       else
-        image_ostruct = Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: cropped)
+        image_ostruct = Repositories::ProductImages.new(product: product).read(
+          color_id: color_id,
+          cropped: cropped,
+          product_customizations: product_customizations,
+          fabric: fabric
+        )
         Images::Template.new(image_ostruct)
       end
     end

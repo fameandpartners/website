@@ -106,7 +106,7 @@ class Repositories::CartProduct
     end
 
     def product_image
-      Repositories::LineItemImages.new(line_item: line_item).read(color_id: color_id, cropped: true)
+      Repositories::LineItemImages.new(line_item: line_item).read(color_id: color_id, cropped: true, product_customizations: product_customizations, fabric: line_item.fabric)
     end
 
     def product_customizations
@@ -207,6 +207,7 @@ class Repositories::CartProduct
         amount: fabric_price,
         currency: line_item.currency,
         name: line_item.fabric.presentation,
+        fabric_name: line_item.fabric.name,
         custom_fabric: !line_item.recommended_fabric?
         }
       else
