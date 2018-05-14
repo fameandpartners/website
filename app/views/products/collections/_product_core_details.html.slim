@@ -31,17 +31,3 @@ ruby:
       span.name
         = product.name
     span.price = product_price_with_discount(product)
-
-    - if Features.active?(:moodboard) && showMoodboard != 'false'
-      .dropdown
-        a.js-trigger-add-to-moodboard href='javascript:;' data-toggle='dropdown'
-          sup +
-          span.link-underline Moodboard
-        .dropdown-menu
-          - user_moodboards.moodboards.each do |m|
-            a href='javascript:;' data-moodboard-id="#{m.id}" data-product-id="#{product.id}" data-color-id="#{product.color.id}" onclick="window.clickAddMoodboard(this, event);"
-              - if m.items.any?{|i| i.product_id == product.id && i.active?}
-                i.fa.fa-check
-              - else
-                i.fa.fa-plus
-              = m.name
