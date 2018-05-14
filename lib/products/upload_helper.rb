@@ -98,6 +98,18 @@ module Products
       product.save!
 
       #add slow making
+      #add slow making
+      prdmo = ProductMakingOption.new(  {product_id: product.id,
+                                        active: true,
+                                        option_type: 'slow_making',
+                                        price: -0.1,
+                                        currency: 'USD'},
+                                        without_protection: true
+                                      )
+      # only connect the 2 if not already done before
+      if prdmo.save
+        product.making_options << prdmo
+      end
       new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
