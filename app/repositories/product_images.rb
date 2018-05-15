@@ -93,7 +93,7 @@ class ProductImages
       sku = product.master.sku.upcase
       fabric = options[:fabric].name
 
-      image_url = "http://localhost:5001/ImagePreview/#{sku}/FrontNone/512/#{Spree::Product.format_new_pid(fabric, options[:product_customizations])}.jpg"
+      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/512/#{Spree::Product.format_new_pid(fabric, options[:product_customizations])}.jpg"
       default_image(image_url)
     else
       filter(options).first || read_all(options).first || default_image
