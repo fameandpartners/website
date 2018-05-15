@@ -44,14 +44,14 @@ javascript:
     .btn-toolbar
       -if @item_return.line_item.order.autorefundable.nil? || @item_return.line_item.order.autorefundable
         .btn-group
-          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Enable
+          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
         .btn-group
-          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Disable
+          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
       -else
         .btn-group
-          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Enable
+          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
         .btn-group
-          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Disable
+          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
 
 .ibox
   .ibox-title
