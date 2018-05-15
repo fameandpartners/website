@@ -60,6 +60,10 @@ module Batcher
   end
 
   def groom_all_batch_collections
+    # feature flipper
+    if Features.inactive?(:batching)
+      return
+    end
     BatchCollection.all.each do |bc|
       groom_batch_collection(bc)
     end
@@ -67,10 +71,14 @@ module Batcher
 
   # kick out line_items that are within 2 weeks of due-ness
   def groom_batch_collection(batch_collection)
+    # feature flipper
+    if Features.inactive?(:batching)
+      return
+    end
     batch_collection.batch_collection_line_items.active.each do |bcli|
       # if item is shipped or cancelled kick it out
-      if bcli.line_item.order&.shipment&.shipped_at.present? || bcli.line_item.order&.shipment&.tracking.present? || bcli.line_item.order.state == 'canceled'
-        bcli.line_item.delete
+      if bcli.line_item.order&.shipment&.shipped_at.present? || bcli.line_item.order&.shipment&.tracking.present? || bcli.line_item&.order.state == 'canceled'
+        bcli.delete
       end
 
       if batch_collection.status == 'open'
