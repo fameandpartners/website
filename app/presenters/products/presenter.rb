@@ -228,8 +228,7 @@ module Products
 
     def meta_title
       [
-        color_name.to_s.titleize,
-        name,
+        name.sub('Dress',''),
         type
       ].join(' ')
     end
