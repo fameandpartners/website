@@ -1,17 +1,23 @@
 puts "\n"*3
 
 items = [
-  #{ :name => 'The Lou Dress', :fabric => 'butterscotch' },
-  #{ :name => 'The Cameron Dress', :fabric => 'cobalt' },
-  #{ :name => 'The Cameron Dress', :fabric => 'pale-blue' },
-  #{ :name => 'The Fairfax Dress', :fabric => 'black' },
-  #{ :name => 'Alija',             :fabric => 'pale-blue' },
-  #{ :name => 'Tilbury Dress',     :fabric => 'pale-blue' },
-  #{ :name => 'Tilbury Dress',     :fabric => 'champagne' },
-  #{ :name => 'Tilbury Dress',      :fabric => 'spring-posey' },
-  #{ :name => 'The Callais Dress',   :fabric => 'burgundy' },
-  #{ :name => 'Paradise Dream',   :fabric => 'burgundy' },
-  { :name => '',   :fabric => 'burgundy' },
+  { :name => 'The Lou Dress', :fabric => 'butterscotch' },
+  { :name => 'The Cameron Dress', :fabric => 'cobalt' },
+  { :name => 'The Cameron Dress', :fabric => 'pale-blue' },
+  { :name => 'The Fairfax Dress', :fabric => 'black' },
+  { :name => 'Alija',             :fabric => 'pale-blue' },
+  { :name => 'Tilbury Dress',     :fabric => 'pale-blue' },
+  { :name => 'Tilbury Dress',     :fabric => 'champagne' },
+  { :name => 'Tilbury Dress',      :fabric => 'spring-posey' },
+  { :name => 'The Callais Dress',   :fabric => 'burgundy' },
+  { :name => 'Paradise Dream',   :fabric => 'burgundy' },
+  { :name => 'Allegra',   :fabric => 'navy' },
+  { :name => 'Stella',   :fabric => 'peach' },
+  { :name => 'Stella',   :fabric => 'pale-gray' },
+  { :name => 'Allegra',   :fabric => 'sand' },
+  { :name => 'Allegra',   :fabric => 'pale-pink' },
+  { :name => 'Allegra',   :fabric => 'pale-gray' },
+  { :name => 'Larissa',   :fabric => 'forest-green' },
 
   # Older dresses
   #{ :name => 'The Sawyer Dress', :fabric => 'BLACK_AND_TAN_SPOT' },
@@ -67,6 +73,7 @@ items.each do |item|
 
   images.each { |x| puts "  #{x.position} #{x.attachment_file_name}" }
   front_crop_image = images.select { |img| img.attachment_file_name=~/-front-[cd]rop.jpg/i }.first
+  binding.pry if !front_crop_image
   front_crop_image_position = front_crop_image.position
   crop_image = images.select { |img| img.attachment_file_name=~/[^t]-crop.jpg/i }.first
   crop_image_position = crop_image.position
