@@ -1,13 +1,19 @@
-<%= content_tag(:div, :class => (@md_contents[:text_size] == 'large') ? "CopyHeader CopyHeader--large" : "CopyHeader") do %>
-  <div class="CopyHeader__separator"></div>
+<%= content_tag(:div, :class => (@md_contents[:text_size].present? ? "CopyHeader CopyHeader--#{@md_contents[:text_size].downcase}" : "CopyHeader")) do %>
+
+  <% unless local_assigns[:hide_separator] %>
+    <div class="CopyHeader__separator"></div>
+  <% end %>
+
   <div class="CopyHeader__content is-hidden-mobile">
     <% @md_contents[:text].each do |line| %>
       <p><%== line %></p>
     <% end %>
   </div>
+
   <div class="CopyHeader__content is-hidden-tablet">
     <% @md_contents[:text_mobile].each do |line| %>
       <p><%== line %></p>
     <% end %>
   </div>
+
 <% end %>
