@@ -53,3 +53,20 @@ LayerCad.find(3566).update_column(:product_id, 1342)
 LayerCad.find(3567).update_column(:product_id, 1342)
 LayerCad.find(3568).update_column(:product_id, 1342)
 LayerCad.find(3569).update_column(:product_id, 1342)
+
+# Similar issue/fix for Midheaven
+# Orphan some rows
+raise unless LayerCad.where(product_id: 1363).pluck(:id).sort.to_s == "[4565, 4566, 4567, 4568, 4569, 4570]"
+LayerCad.find(4565).update_column(:product_id, nil)
+LayerCad.find(4566).update_column(:product_id, nil)
+LayerCad.find(4567).update_column(:product_id, nil)
+LayerCad.find(4568).update_column(:product_id, nil)
+LayerCad.find(4569).update_column(:product_id, nil)
+LayerCad.find(4570).update_column(:product_id, nil)
+# Correct mappings
+LayerCad.find(3451).update_column(:product_id, 1363)
+LayerCad.find(3452).update_column(:product_id, 1363)
+LayerCad.find(3453).update_column(:product_id, 1363)
+LayerCad.find(3454).update_column(:product_id, 1363)
+LayerCad.find(3455).update_column(:product_id, 1363)
+LayerCad.find(3456).update_column(:product_id, 1363)
