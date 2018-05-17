@@ -1,5 +1,6 @@
 
-# The Olsen Dress
+puts 'The Olsen Dress'
+gets
 # The cads are in s3 in folders named
 #   3524..3539
 # So alter layer_cads table to point to those folders,
@@ -20,7 +21,8 @@ LayerCad.find(3537).update_column(:product_id, 1106)
 LayerCad.find(3538).update_column(:product_id, 1106)
 LayerCad.find(3539).update_column(:product_id, 1106)
 
-# Similar issue/fix for Westside dress
+puts 'Westside dress'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1118).pluck(:id).sort.to_s == "[4619, 4620, 4621, 4622, 4623, 4624]"
 LayerCad.find(4619).update_column(:product_id, nil)
@@ -37,7 +39,8 @@ LayerCad.find(3507).update_column(:product_id, 1118)
 LayerCad.find(3508).update_column(:product_id, 1118)
 LayerCad.find(3509).update_column(:product_id, 1118)
 
-# Similar issue/fix for Andromeda
+puts 'Andromeda'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1342).pluck(:id).sort.to_s == "[4679, 4680, 4681, 4682, 4683, 4684]"
 LayerCad.find(4679).update_column(:product_id, nil)
@@ -54,7 +57,8 @@ LayerCad.find(3567).update_column(:product_id, 1342)
 LayerCad.find(3568).update_column(:product_id, 1342)
 LayerCad.find(3569).update_column(:product_id, 1342)
 
-# Similar issue/fix for Allegra
+puts 'Allegra'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 680).pluck(:id).sort.to_s == "[4769, 4770, 4771, 4772, 4773, 4774]"
 LayerCad.find(4769).update_column(:product_id, nil)
@@ -71,7 +75,8 @@ LayerCad.find(3657).update_column(:product_id, 680)
 LayerCad.find(3658).update_column(:product_id, 680)
 LayerCad.find(3659).update_column(:product_id, 680)
 
-# Similar issue/fix for Surreal Dreamer
+puts 'Surreal Dreamer'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1292).pluck(:id).sort.to_s == "[4811, 4812, 4813, 4814, 4815, 4816]"
 LayerCad.find(4811).update_column(:product_id, nil)
@@ -88,7 +93,8 @@ LayerCad.find(3699).update_column(:product_id, 1292)
 LayerCad.find(3700).update_column(:product_id, 1292)
 LayerCad.find(3701).update_column(:product_id, 1292)
 
-# Similar issue/fix for Antares
+puts 'Antares'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1339).pluck(:id).sort.to_s == "[4559, 4560, 4561, 4562, 4563, 4564]"
 LayerCad.find(4559).update_column(:product_id, nil)
@@ -105,7 +111,8 @@ LayerCad.find(3448).update_column(:product_id, 1339)
 LayerCad.find(3449).update_column(:product_id, 1339)
 LayerCad.find(3450).update_column(:product_id, 1339)
 
-# Similar issue/fix for Zenith
+puts 'Zenith'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1338).pluck(:id).sort.to_s == "[4596, 4597, 4598, 4599, 4600]"
 LayerCad.find(4596).update_column(:product_id, nil)
@@ -120,7 +127,8 @@ LayerCad.find(3483).update_column(:product_id, 1338)
 LayerCad.find(3484).update_column(:product_id, 1338)
 LayerCad.find(3485).update_column(:product_id, 1338)
 
-# Similar issue/fix for Midheaven
+puts 'Midheaven'
+gets
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1363).pluck(:id).sort.to_s == "[4565, 4566, 4567, 4568, 4569, 4570]"
 LayerCad.find(4565).update_column(:product_id, nil)
