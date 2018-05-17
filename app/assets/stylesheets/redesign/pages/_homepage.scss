@@ -135,6 +135,7 @@
 .HeroTileCaption__alignmentRight {
   padding-right: 90px;
   padding-left: 90px;
+  display: flex;
 }
 
 .HeroTileCaption--white .heading {
@@ -148,6 +149,18 @@
 
 .SecondaryHeroTile:first-child {
   margin-top: 0;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .HeroTileCaption__alignmentLeft {
+    justify-content: flex-start;
+  }
+
+  .HeroTileCaption__alignmentRight {
+    justify-content: flex-end;
+  }
+
 }
 
 @media (max-width: $bootstrap-lg-width - 1px) {
