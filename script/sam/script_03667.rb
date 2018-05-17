@@ -54,6 +54,23 @@ LayerCad.find(3567).update_column(:product_id, 1342)
 LayerCad.find(3568).update_column(:product_id, 1342)
 LayerCad.find(3569).update_column(:product_id, 1342)
 
+# Similar issue/fix for Antares
+# Orphan some rows
+raise unless LayerCad.where(product_id: 1339).pluck(:id).sort.to_s == "[4559, 4560, 4561, 4562, 4563, 4564]"
+LayerCad.find(4559).update_column(:product_id, nil)
+LayerCad.find(4560).update_column(:product_id, nil)
+LayerCad.find(4561).update_column(:product_id, nil)
+LayerCad.find(4562).update_column(:product_id, nil)
+LayerCad.find(4563).update_column(:product_id, nil)
+LayerCad.find(4564).update_column(:product_id, nil)
+# Correct mappings
+LayerCad.find(3445).update_column(:product_id, 1339)
+LayerCad.find(3446).update_column(:product_id, 1339)
+LayerCad.find(3447).update_column(:product_id, 1339)
+LayerCad.find(3448).update_column(:product_id, 1339)
+LayerCad.find(3449).update_column(:product_id, 1339)
+LayerCad.find(3450).update_column(:product_id, 1339)
+
 # Similar issue/fix for Zenith
 # Orphan some rows
 raise unless LayerCad.where(product_id: 1338).pluck(:id).sort.to_s == "[4596, 4597, 4598, 4599, 4600]"
