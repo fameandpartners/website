@@ -1,11 +1,6 @@
 <div class="section-row columns">
   <div class="column">
-    <div class="CopyHeader CopyHeader--featured">
-      <div class="CopyHeader__content">
-        <% contents[:text].each do |line| %>
-          <p><%= line %></p>
-        <% end %>
-      </div>
-    </div>
+    <% @md_contents = contents[:header_container] %>
+    <%= render partial: "layouts/contentful/modules/items/ITEM--md-text", locals: {hide_separator: true}  %>
   </div>
 </div>
