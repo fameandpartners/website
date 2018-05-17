@@ -19,3 +19,20 @@ LayerCad.find(3536).update_column(:product_id, 1106)
 LayerCad.find(3537).update_column(:product_id, 1106)
 LayerCad.find(3538).update_column(:product_id, 1106)
 LayerCad.find(3539).update_column(:product_id, 1106)
+
+# Similar issue/fix for Westside dress
+# Orphan some rows
+raise unless LayerCad.where(product_id: 1118).pluck(:id).sort.to_s == "[4619, 4620, 4621, 4622, 4623, 4624]"
+LayerCad.find(4619).update_column(:product_id, nil)
+LayerCad.find(4620).update_column(:product_id, nil)
+LayerCad.find(4621).update_column(:product_id, nil)
+LayerCad.find(4622).update_column(:product_id, nil)
+LayerCad.find(4623).update_column(:product_id, nil)
+LayerCad.find(4624).update_column(:product_id, nil)
+# Correct mappings
+LayerCad.find(3504).update_column(:product_id, 1118)
+LayerCad.find(3505).update_column(:product_id, 1118)
+LayerCad.find(3506).update_column(:product_id, 1118)
+LayerCad.find(3507).update_column(:product_id, 1118)
+LayerCad.find(3508).update_column(:product_id, 1118)
+LayerCad.find(3509).update_column(:product_id, 1118)
