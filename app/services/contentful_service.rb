@@ -413,12 +413,11 @@ module Contentful
 
     def self.jsonify_header_container(main_header_container)
       if (main_header_container.content_type.id == 'HEADER--xl-text')
-        id = main_header_container.header_container.id
-        subcontainer = @contentful_client.entries('sys.id' => id)[0]
+        header_container = (main_header_container.respond_to? :header_container) ? jsonify_medium_lp_container(main_header_container.header_container) : nil
 
         {
           id: main_header_container.content_type.id,
-          text: subcontainer.content.split("\n"),
+          header_container: header_container
         }
       elsif (main_header_container.content_type.id == 'HEADER--lg__md-sm2')
         header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
