@@ -36,3 +36,20 @@ LayerCad.find(3506).update_column(:product_id, 1118)
 LayerCad.find(3507).update_column(:product_id, 1118)
 LayerCad.find(3508).update_column(:product_id, 1118)
 LayerCad.find(3509).update_column(:product_id, 1118)
+
+# Similar issue/fix for Andromeda
+# Orphan some rows
+raise unless LayerCad.where(product_id: 1342).pluck(:id).sort.to_s == "[4679, 4680, 4681, 4682, 4683, 4684]"
+LayerCad.find(4679).update_column(:product_id, nil)
+LayerCad.find(4680).update_column(:product_id, nil)
+LayerCad.find(4681).update_column(:product_id, nil)
+LayerCad.find(4682).update_column(:product_id, nil)
+LayerCad.find(4683).update_column(:product_id, nil)
+LayerCad.find(4684).update_column(:product_id, nil)
+# Correct mappings
+LayerCad.find(3564).update_column(:product_id, 1342)
+LayerCad.find(3565).update_column(:product_id, 1342)
+LayerCad.find(3566).update_column(:product_id, 1342)
+LayerCad.find(3567).update_column(:product_id, 1342)
+LayerCad.find(3568).update_column(:product_id, 1342)
+LayerCad.find(3569).update_column(:product_id, 1342)
