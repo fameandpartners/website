@@ -333,6 +333,13 @@ module Contentful
           text: text,
           text_alignment: text_alignment
         }
+      elsif (fetched_lg_container.content_type.id == 'ITEM--collapsible-entry')
+        title = (fetched_lg_container.respond_to? :title) ? fetched_lg_container.title : nil
+        text = (fetched_lg_container.respond_to? :text) ? fetched_lg_container.text : nil
+        {
+          title: title,
+          text: text
+        }
       end
     end
 
@@ -406,12 +413,11 @@ module Contentful
 
     def self.jsonify_header_container(main_header_container)
       if (main_header_container.content_type.id == 'HEADER--xl-text')
-        id = main_header_container.header_container.id
-        subcontainer = @contentful_client.entries('sys.id' => id)[0]
+        header_container = (main_header_container.respond_to? :header_container) ? jsonify_medium_lp_container(main_header_container.header_container) : nil
 
         {
           id: main_header_container.content_type.id,
-          text: subcontainer.content.split("\n"),
+          header_container: header_container
         }
       elsif (main_header_container.content_type.id == 'HEADER--lg__md-sm2')
         header_lg_item = (main_header_container.respond_to? :editorial_container) ? jsonify_large_lp_container(main_header_container.editorial_container) : nil
@@ -578,16 +584,22 @@ module Contentful
         # Hero tile text
         text = (item.respond_to? :text) ? item.text : nil
 
+        # Collapsible entries
+        collapsible_entries = (item.respond_to? :collapsible_entries_container) ? map_editorials(item.collapsible_entries_container) : nil
+        custom_css_class = (item.respond_to? :custom_css_class) ? item.custom_css_class : nil
+        first_entry_expanded = (item.respond_to? :first_entry_expanded) ? item.first_entry_expanded : false
+
         {
           id: item_id,
           lg_item: lg_item,
           md_item: md_item,
           sm_items: sm_items,
           content_tiles: content_tiles,
+          lg_items: lg_items,
+          collapsible_entries: collapsible_entries,
           email_text: email_text,
           button_label: button_label,
           relative_url: relative_url,
-          lg_items: lg_items,
           floating_email_scroll_percentage: floating_email_scroll_percentage,
           tile_cta: tile_cta,
           tile_cta_position: tile_cta_position,
@@ -608,7 +620,9 @@ module Contentful
           image_replacement_3: image_replacement_3,
           image_replacement_4: image_replacement_4,
           tile_featured: tile_featured,
-          text: text
+          text: text,
+          custom_css_class: custom_css_class,
+          first_entry_expanded: first_entry_expanded
         }
       end
 

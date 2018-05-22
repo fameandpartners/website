@@ -56,13 +56,13 @@ module Products
       let(:spree_price) { Spree::Price.new(amount: 12.34, currency: 'AUD') }
 
       subject(:product) do
-        described_class.new price: spree_price, color_name: 'Golden', name: 'Devan', fabric: '100% polyester light georgette. With Super long description'*10
+        described_class.new price: spree_price, name: 'Devan', fabric: '100% polyester light georgette. With Super long description'*10
       end
 
       context 'when product meta description is not present' do
         it 'returns truncated version of its meta title, price with currency and fabric description' do
           result = product.meta_description
-          expect(result).to eq('Golden Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% po...')
+          expect(result).to eq('Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% polyester...')
           expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
         end
       end
