@@ -128,7 +128,7 @@
             </p>
             <% if @hasReturnInsurance() : %>
             <p>
-              Returns Deposit <span class="value">$25.00</span>
+              Returns Deposit <span class="value">$19.00</span>
             </p>
             <% end %>
             <% if @hasReturnDiscount() : %>
