@@ -120,19 +120,19 @@ module Api
 
             fabrics.length > 0 && {
               id: 121,
-              title: 'Fabric',
+              title: 'Fabric & Color',
               changeButtonText: "Change",
               slug: 'fabric',
               sectionGroups: [
                 {
-                  title: "Color & Fabric",
+                  title: "Fabric & Color",
                   slug: 'fabric',
                   previewType: :image,
                   sections: [
                     {
                       componentTypeId: :Fabric,
                       componentTypeCategory: :Fabric,
-                      title: "Select your color & fabric",
+                      title: "Select your fabric & color",
                       selectionType: :RequiredOne,
                       options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]

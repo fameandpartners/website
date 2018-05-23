@@ -4,7 +4,7 @@ ruby:
     when "left"
       {class: 'HeroTileCaption__alignmentLeft'}
     when "right"
-      {class: 'HeroTileCaption__alignmentRight pull-right'}
+      {class: 'HeroTileCaption__alignmentRight'}
     else
       # Defaults to 'Center'...
       {class: 'CopyWrap__position--center'}
@@ -40,7 +40,7 @@ ruby:
       {class: 'HeroTileCaption__verticalPositionBottom u-overlay-area__caption--bottom'}
     else
       # Defaults to 'center'...
-      {class: 'u-overlay-area__caption--center'}
+      {class: 'HeroTileCaption__verticalPositionCenter u-overlay-area__caption--center'}
     end
   end
 
@@ -75,46 +75,41 @@ ruby:
           .u-overlay-area__overlay
             // Desktop
             - if tile[:heading].present? || tile[:sub_heading].present? || tile[:cta_button_text].present?
-              .Hero__caption.u-overlay-area__caption.hidden-xs.hidden-sm*hero_vertical_position(tile[:text_vertical_position]) *hero_text_color(tile[:text_color]) style="padding-top: #{tile[:extra_padding_top]}"
-                .container-fluid
-                  .row
-                    *hero_text_position(tile[:text_position])
-                      .copy-wrap.text-center.main-hero-wrap.hero-wrap
-                        h2.heading.no-margin-md
-                          - if tile[:heading].present?
-                            span*hero_text_size(tile[:text_size])
-                              - tile[:heading].each do |heading|
-                                == heading
-                                br
-                          - if tile[:sub_heading].present?
-                            span.sub-heading--small
-                              - tile[:sub_heading].each do |sub_heading|
-                                == sub_heading
-                                br
+              .Hero__caption.u-overlay-area__caption.hidden-xs.hidden-sm*hero_vertical_position(tile[:text_vertical_position]) *hero_text_color(tile[:text_color]) *hero_text_position(tile[:text_position]) style="padding-top: #{tile[:extra_padding_top]}"
+                .copy-wrap.text-center.main-hero-wrap.hero-wrap
+                  h2.heading.no-margin-md
+                    - if tile[:heading].present?
+                      span*hero_text_size(tile[:text_size])
+                        - tile[:heading].each do |heading|
+                          == heading
+                          br
+                    - if tile[:sub_heading].present?
+                      span.sub-heading--small
+                        - tile[:sub_heading].each do |sub_heading|
+                          == sub_heading
+                          br
 
-                        - if tile[:cta_button_text].present?
-                          .CtaButton__content.Btn__ctaHeroTile.Btn__ctaFade style="background: #{tile[:cta_button_background_color]}; color: #{tile[:cta_button_text_color]}; border: 1px solid #{tile[:cta_button_border_color]}"
-                              = tile[:cta_button_text]
+                  - if tile[:cta_button_text].present?
+                    .CtaButton__content.Btn__ctaHeroTile.Btn__ctaFade style="background: #{tile[:cta_button_background_color]}; color: #{tile[:cta_button_text_color]}; border: 1px solid #{tile[:cta_button_border_color]}"
+                        = tile[:cta_button_text]
 
               // Mobile
               - if tile[:heading_mobile].present? || tile[:sub_heading_mobile].present? || tile[:cta_button_text].present?
               .Hero__caption.u-overlay-area__caption.hidden-lg.hidden-md*hero_vertical_position(tile[:text_vertical_position_mobile]) *hero_text_color(tile[:text_color]) style="padding-top: #{tile[:extra_padding_top_mobile]}"
-                .container-fluid
-                  .row
-                    .CopyWrap__position--center
-                      .copy-wrap.text-center.main-hero-wrap.hero-wrap
-                        h2.heading.no-margin-md
-                          - if tile[:heading_mobile]
-                            span
-                              - tile[:heading_mobile].each do |heading_mobile|
-                                == heading_mobile
-                                br
-                          - if tile[:subheading_mobile].present?
-                            span.sub-heading--small
-                              - tile[:subheading_mobile].each do |subheading_mobile|
-                                == subheading_mobile
-                                br
+                .CopyWrap__position--center
+                  .copy-wrap.text-center.main-hero-wrap.hero-wrap
+                    h2.heading.no-margin-md
+                      - if tile[:heading_mobile]
+                        span
+                          - tile[:heading_mobile].each do |heading_mobile|
+                            == heading_mobile
+                            br
+                      - if tile[:subheading_mobile].present?
+                        span.sub-heading--small
+                          - tile[:subheading_mobile].each do |subheading_mobile|
+                            == subheading_mobile
+                            br
 
-                        - if tile[:cta_button_text].present?
-                          .CtaButton__content.Btn__ctaHeroTile.Btn__ctaFade style="background: #{tile[:cta_button_background_color]}; color: #{tile[:cta_button_text_color]}; border: 1px solid #{tile[:cta_button_border_color]}"
-                              = tile[:cta_button_text]
+                    - if tile[:cta_button_text].present?
+                      .CtaButton__content.Btn__ctaHeroTile.Btn__ctaFade style="background: #{tile[:cta_button_background_color]}; color: #{tile[:cta_button_text_color]}; border: 1px solid #{tile[:cta_button_border_color]}"
+                          = tile[:cta_button_text]

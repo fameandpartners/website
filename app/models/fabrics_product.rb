@@ -29,4 +29,12 @@ class FabricsProduct < ActiveRecord::Base
   def self.custom
     where(recommended: false)
   end
+
+  def self.active
+    where(active: true)
+  end
+
+  def self.inactive
+    where(active: false)
+  end
 end

@@ -91,9 +91,10 @@ class ProductImages
   def read(options = {})
     if product.has_render?
       sku = product.master.sku.upcase
-      fabric = options[:fabric].name
+      fabric = options[:fabric]&.name
+      cust = options[:product_customizations] || []
 
-      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/512/#{Spree::Product.format_new_pid(fabric, options[:product_customizations])}.jpg"
+      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/704x704/#{Spree::Product.format_new_pid(fabric, cust)}.jpg"
       default_image(image_url)
     else
       filter(options).first || read_all(options).first || default_image

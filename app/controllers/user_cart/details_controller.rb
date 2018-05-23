@@ -17,7 +17,7 @@ class UserCart::DetailsController < UserCart::BaseController
         render json:
         {
           cart: @user_cart.serialize,
-          user: spree_user_signed_in? && current_order.user
+          user: spree_user_signed_in? && current_spree_user
         },
        status: :ok
       }

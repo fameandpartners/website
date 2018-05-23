@@ -71,7 +71,10 @@ module PathBuildersHelper
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "#{product_type}-#{product[:urls][locale]}"
     elsif product.is_a?(UserCart::CartProductPresenter) && is_new_product
-      path_parts << "custom-#{product_type}-#{product.sku.upcase}~#{Spree::Product.format_new_pid(product.fabric[:fabric_name], product.customizations)}"
+      fabric = product.fabric.try(:[], :fabric_name)
+      cust = product.customizations || [];
+
+      path_parts << "custom-#{product_type}-#{product.sku.upcase}~#{Spree::Product.format_new_pid(fabric, cust)}"
     else
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
