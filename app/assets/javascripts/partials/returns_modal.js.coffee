@@ -37,7 +37,7 @@ window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutMo
                    '</div>' +
                  '<div class="col-xs-10">' +
                    '<p class="ReturnOption__copy text-right font-sans-serif">' +
-                   'Add <strong>$25</strong>' +
+                   'Add <strong>$19</strong>' +
                    ' for fully flexible returns' +
                    '</p>' +
                  '</div>' +
