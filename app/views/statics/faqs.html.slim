@@ -1,82 +1,39 @@
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+- contentful_faqs_rows = @faqs_page_container[:rows]
+
 .faq-page.page-content.js-smooth-scroll
   .container
     .row
-
       .col-md-12
         h1 Frequently Asked Questions
 
       .col-md-12
         ul.nav.nav-pill.nav-justified role='tablist'
-          li.active role='presentation'
-            a href='#panel-popular' data-toggle='tab' aria-controls='panel-popular' role='tab' Popular
-          li role='presentation'
-            a href='#panel-products' data-toggle='tab' aria-controls='panel-popular' role='tab' Products
-          li role='presentation'
-            a href='#panel-order' data-toggle='tab' aria-controls='panel-popular' role='tab' Order
-          li role='presentation'
-            a href='#panel-delivery' data-toggle='tab' aria-controls='panel-delivery' role='tab' Delivery
-          li role='presentation'
-            a href='#panel-returns' data-toggle='tab' aria-controls='panel-returns' role='tab' Returns
-          li role='presentation'
-            a href='#panel-exchanges' data-toggle='tab' aria-controls='panel-credit' role='tab' Exchanges
+          - if contentful_faqs_rows.present?
+            - contentful_faqs_rows.each_with_index do |faq_section, faq_section_index|
+              - faq_section_active_class = faq_section_index == 0 ? "active" : nil
+              li role='presentation' class="#{faq_section_active_class}"
+                a href="#panel-#{faq_section[:name].downcase.gsub("row: faqs","").parameterize}" data-toggle="tab" aria-controls="panel-#{faq_section[:name].parameterize}" role="tab"
+                  | #{faq_section[:name].downcase.gsub("row: faqs","").strip}
 
       .col-md-8.tab-content
-        #panel-popular.tab-pane.active role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/delivery_how_long'
-              = render 'shared/redesign/faqs/delivery_international'
-              = render 'shared/redesign/faqs/returns_policy'
-              = render 'shared/redesign/faqs/returns_steps'
-              = render 'shared/redesign/faqs/faulty_items'
-              = render 'shared/redesign/faqs/cancel_order'
-              = render 'shared/redesign/faqs/how_store_credit'
-              - if current_site_version.is_australia? && Features.active?(:afterpay)
-                = render 'shared/redesign/faqs/afterpay'
-              = render 'shared/redesign/faqs/free_shipping'
-              = render 'shared/redesign/faqs/info_phone_number'
+        - if contentful_faqs_rows.present?
+          - contentful_faqs_rows.each_with_index do |faq_panel,faq_panel_index|
+            - faq_panel_active_class = faq_panel_index == 0 ? "active" : nil
+            .tab-pane role="tabpanel" id="panel-#{faq_panel[:name].downcase.gsub("row: faqs","").parameterize}" class="#{faq_panel_active_class}"
+              .faq.faq-wrap
+                .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+                  - faq_panel[:collapsible_entries].each do |faq_panel_entry|
+                    - faq_parameterized_title = faq_panel_entry[:title].gsub("row: faqs","").parameterize
+                    .panel.content-collapse-expand.panel-default id="collapse-#{faq_parameterized_title}"
+                      .panel-heading role="tab"
+                        a.panel-title.faq-title.collapsed href="#collapse-#{faq_parameterized_title}" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+                          | #{faq_panel_entry[:title]}
+                          span.btn-open-close
 
-        #panel-products.tab-pane role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/faulty_items'
-              = render 'shared/redesign/faqs/custom_colours'
-
-        #panel-order.tab-pane role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/cancel_order'
-              = render 'shared/redesign/faqs/info_phone_number'
-
-        #panel-delivery.tab-pane role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/delivery_how_long'
-              = render 'shared/redesign/faqs/delivery_track'
-              = render 'shared/redesign/faqs/delivery_international'
-              = render 'shared/redesign/faqs/delivery_sign'
-              = render 'shared/redesign/faqs/delivery_POBOX'
-              = render 'shared/redesign/faqs/free_shipping'
-
-        #panel-returns.tab-pane role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/returns_policy'
-              = render 'shared/redesign/faqs/returns_steps'
-              = render 'shared/redesign/faqs/track_return'
-              = render 'shared/redesign/faqs/excluded_items'
-              = render 'shared/redesign/faqs/faulty_items'
-              = render 'shared/redesign/faqs/how_store_credit'
-              = render 'shared/redesign/faqs/when_refunded'
-              - if current_site_version.is_australia?
-                = render 'shared/redesign/faqs/pay_ship_return'
-
-        #panel-exchanges.tab-pane role='tabpanel'
-          .faq.faq-wrap
-            .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/exchange_item'
-              - if current_site_version.is_australia?
-                = render 'shared/redesign/faqs/pay_ship_return'
+                      .panel-collapse.collapse role="tabpanel"
+                        .panel-body
+                          == markdown.render(faq_panel_entry[:text])
 
       .col-md-4
         aside
