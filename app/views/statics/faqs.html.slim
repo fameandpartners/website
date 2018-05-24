@@ -5,7 +5,12 @@
   .container
     .row
       .col-md-12
-        h1 Frequently Asked Questions
+        h1
+          span.hidden-xs.hidden-sm
+            = @faqs_page_container[:header][:header_container][:text][0]
+          span.hidden-md.hidden-lg
+            = @faqs_page_container[:header][:header_container][:text_mobile][0]
+
 
       .col-md-12
         ul.nav.nav-pill.nav-justified role='tablist'
