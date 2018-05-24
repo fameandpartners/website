@@ -16,6 +16,10 @@ class StaticsController < ApplicationController
   end
 
   def faqs
+    current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
+    @faqs_page_container = current_contently["/faqs"]
+    title(@faqs_page_container[:meta_title], default_seo_title)
+    description(@faqs_page_container[:meta_description])
   end
 
   def bridesmaid_lp
