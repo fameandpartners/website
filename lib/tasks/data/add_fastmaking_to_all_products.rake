@@ -10,7 +10,7 @@ namespace :data do
 				pmo = ProductMakingOption.new
 				pmo.product_id = product.id
 				pmo.active = true
-				pmo.price = 18
+				pmo.price = 4 #lowered the price as of 5/24 from $18 to $4
 				pmo.currency = 'USD'
 				pmo.option_type = 'fast_making'
 				pmo.save!
