@@ -447,7 +447,7 @@ Spree::Product.class_eval do
     components = [
       fabric,
       customizations.map{|c| c['customisation_value']['name']}
-    ].flatten.compact.sort.join("~")
+    ].flatten.compact.sort(&:casecmp).join("~")
   end
 
   private
