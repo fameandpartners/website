@@ -86,8 +86,8 @@ module Api
                 isProductCode: false,
                 isRecommended: false,
                 type: :return,
+                sortOrder: 1,
                 meta: {
-                  sortOrder: 1,
                   returnDescription: 'Shipping and returns are free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
                 },
                 incompatibleWith: { allOptions: [] },
@@ -106,6 +106,7 @@ module Api
                   title: 'Color',
                   slug: 'color',
                   previewType: :image,
+                  selectionTitle: "Select your color",
                   sections: [
                     {
                       componentTypeId: :Colour,
@@ -126,6 +127,7 @@ module Api
               sectionGroups: [
                 {
                   title: "Fabric & Color",
+                  selectionTitle: "Select your fabric & color",
                   slug: 'fabric',
                   previewType: :image,
                   sections: [
@@ -142,12 +144,13 @@ module Api
 
             customizations.length > 0 && {
               id: 122,
-              title: 'Customize',
+              title: 'Customizations',
               changeButtonText: "Change",
               slug: 'customize',
               sectionGroups: [
                 {
-                  title: "Customize",
+                  title: "Customizations",
+                  selectionTitle: "Customize your dress",
                   slug: 'customize',
                   previewType: :cad,
                   sections: [
@@ -172,6 +175,7 @@ module Api
               sectionGroups: [
                 {
                   title: "Size",
+                  selectionTitle: "Tell us your height and size",
                   slug: 'size',
                   previewType: :image,
                   sections: [
@@ -267,8 +271,8 @@ module Api
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomisation,
+          sortOrder: c['customisation_value']['position'],
           meta: {
-            sortOrder: c['customisation_value']['position'],
             image: {
               url: customization_image(c['customisation_value']),
               width: -1,
@@ -291,8 +295,8 @@ module Api
           isProductCode: false,
           isRecommended: false,
           type: :Making,
+          sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
           meta: {
-            sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
             deliveryTimeDescription: making.description,
             deliveryTimeRange: making.display_delivery_period
           },
@@ -312,8 +316,8 @@ module Api
           isProductCode: true,
           isRecommended: f.recommended,
           type: :Fabric,
+          sortOrder: f.fabric.option_fabric_color_value.position, #TODO
           meta: {
-            sortOrder: f.fabric.option_fabric_color_value.position, #TODO
             # hex: c.option_value.value,
             
             image: {
@@ -325,8 +329,8 @@ module Api
             colorId: f.fabric.option_value.id,
             colorCode: f.fabric.option_value.name,
 
-            materialTitle: f.fabric.material,
-            colorTitle: f.fabric.option_value.presentation,
+            subCategoryTitle: f.fabric.material,
+            subCategoryName: f.fabric.option_value.presentation,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
@@ -376,8 +380,8 @@ module Api
           isProductCode: false,
           isRecommended: false,
           type: :Size,
+          sortOrder: s.position,
           meta: {
-            sortOrder: s.position,
             sizeUs: s.name.split("/")[0],
             sizeAu: s.name.split("/")[1],
           },
