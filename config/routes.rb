@@ -398,6 +398,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
     get '/fashionitgirl2015-competition', to: redirect('/it-girl')
     get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+    get '/legal', to: redirect("/terms?utm_source=legacy-legal")
 
     ###########
     # User Cart
@@ -502,7 +503,6 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
-    get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
     get '/how-it-works', to: redirect("/why-us")
