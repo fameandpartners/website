@@ -194,7 +194,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
-    get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
     get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
     get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
 
@@ -390,6 +389,11 @@ FameAndPartners::Application.routes.draw do
     end
 
     post '/shared/facebook' => 'competition/events#share'
+
+    ########################
+    # Redirect legacy pages
+    ########################
+    get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
 
     ###########
     # User Cart
