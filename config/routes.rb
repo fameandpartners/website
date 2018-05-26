@@ -397,6 +397,7 @@ FameAndPartners::Application.routes.draw do
     get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
     get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
     get '/express-delivery', to: redirect("/?utm_source=legacy-express-delivery"), as: 'express_delivery'
+    get '/fame-chain', to: redirect("/?utm_source=legacy-fame-chain"), as: :fame_chain
 
     ###########
     # User Cart
@@ -527,9 +528,6 @@ FameAndPartners::Application.routes.draw do
         end
       end
     end
-
-    get '/fame-chain' => 'fame_chains#new', as: :fame_chain
-    resource 'fame-chain', as: 'fame_chain', only: [:create]
 
     get '/style-consultation', to: redirect("/styling-session")
 
