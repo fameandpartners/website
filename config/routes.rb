@@ -395,6 +395,7 @@ FameAndPartners::Application.routes.draw do
     get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
     get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
     get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
+    get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
 
     ###########
     # User Cart
@@ -516,7 +517,6 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014', to: redirect("/it-girl")
     get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
     get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
-    get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
     namespace 'campaigns' do
