@@ -69,14 +69,6 @@ FameAndPartners::Application.routes.draw do
     # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
     # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
-
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
-    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
-
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
@@ -397,6 +389,15 @@ FameAndPartners::Application.routes.draw do
     get '/fameweddings/bridesmaid', to: redirect("/?utm_source=legacy-fameweddings-bridesmaid"), as: :bridesmaid_landing_page
     get '/fameweddings/bride', to: redirect("/?utm_source=legacy-fameweddings-bride"), as: :brides_landing_page
     get '/fameweddings/guest', to: redirect("/?utm_source=legacy-fameweddings-guest"), as: :guest_bride_page
+    get '/fashionista2014', to: redirect("/it-girl")
+    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
+    get '/fashionitgirl2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
 
     ###########
     # User Cart
@@ -515,9 +516,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
-    get '/fashionista2014', to: redirect("/it-girl")
-    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
-    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
     namespace 'campaigns' do
