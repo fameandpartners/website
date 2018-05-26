@@ -188,7 +188,6 @@ FameAndPartners::Application.routes.draw do
     get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
     get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
 
-    get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
     get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
     get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
@@ -399,6 +398,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionitgirl2015-competition', to: redirect('/it-girl')
     get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
     get '/legal', to: redirect("/terms?utm_source=legacy-legal")
+    get '/lets-party', to: redirect("/?utm_source=legacy-lets-party"), as: :lets_party_collection
 
     ###########
     # User Cart
