@@ -167,7 +167,6 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
-    get '/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_landing_page
     get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
     get '/lookbook/this-modern-romance' => 'products/collections#show', :permalink => 'this-modern-romance', :as => :this_modern_romance_collection
 
@@ -395,6 +394,7 @@ FameAndPartners::Application.routes.draw do
     ########################
     get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
     get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
+    get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
 
     ###########
     # User Cart
