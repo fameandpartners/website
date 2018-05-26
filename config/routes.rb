@@ -394,6 +394,7 @@ FameAndPartners::Application.routes.draw do
     # Redirect legacy pages
     ########################
     get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
+    get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
 
     ###########
     # User Cart
