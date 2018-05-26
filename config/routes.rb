@@ -396,6 +396,7 @@ FameAndPartners::Application.routes.draw do
     get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
     get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
     get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
+    get '/express-delivery', to: redirect("/?utm_source=legacy-express-delivery"), as: 'express_delivery'
 
     ###########
     # User Cart
@@ -590,8 +591,6 @@ FameAndPartners::Application.routes.draw do
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
       get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
     end
-
-    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
