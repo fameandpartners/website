@@ -80,8 +80,6 @@ FameAndPartners::Application.routes.draw do
     # Monday March 23 2015 TTL: 6 months
     get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
 
-    get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
-
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
@@ -185,18 +183,6 @@ FameAndPartners::Application.routes.draw do
 
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
-
-    # Lookbook pages redirects (due to legal issues)
-    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
-    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
-    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
-    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
-    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
-
-    # Redirect Every BODY Dance LPs due to legal issues
-    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
-    get '/everybody-dance', to: redirect('/dresses/prom')
-    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
     # temporary patch. this dress link is bad so redirect it
     # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
@@ -360,10 +346,19 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/race-day', to: redirect('/?utm_source=legacy-lookbook-race-day'), as: :formal_night_landing_page
     get '/lookbook/the-luxe-collection', to: redirect('/?utm_source=legacy-lookbook-the-luxe-collection'), as: :luxe_collection
     get '/lookbook/this-modern-romance', to: redirect('/?utm_source=legacy-lookbook-this-modern-romance'), as: :this_modern_romance_collection
+    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
     get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
     get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
     get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
     get '/macys', to: redirect('/?utm_source=legacy-macys'), as: :macys
+    get '/mystyle', to: redirect('/?utm_source=legacy-mystyle'), as: :mystyle_landing_page
+    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
+    get '/everybody-dance', to: redirect('/dresses/prom')
+    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
 
     ###########
     # User Cart
