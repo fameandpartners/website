@@ -202,7 +202,6 @@ FameAndPartners::Application.routes.draw do
     # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
 
     # Landing pages
-    get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
@@ -364,6 +363,7 @@ FameAndPartners::Application.routes.draw do
     get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
     get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
     get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
+    get '/macys', to: redirect('/?utm_source=legacy-macys'), as: :macys
 
     ###########
     # User Cart
