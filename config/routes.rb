@@ -126,28 +126,6 @@ FameAndPartners::Application.routes.draw do
     ###########
     # Lookbooks
     ###########
-
-    get '/lp/1512/1' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_1, :pids => ["339-burgundy", "431-cherry-red", "713-red", "191-burgundy" ,"439-red", "371-cherry-red", "546-burgundy", "619-cherry-red", "539-red", "355-burgundy"]
-    get '/lp/1512/1/p1' => redirect("/lp/1512/1?text=Did%20Justin%20Bieber%20get%20back%20with%20Selena%20because%20of%20THIS%20dress?")
-    get '/lp/1512/1/p2' => redirect("/lp/1512/1?text=Selena%27s%20Sexy%20New%20Look%20that%20got%20Bieber%20Back")
-    get '/lp/1512/1/p3' => redirect("/lp/1512/1?text=Selena%20shocks%20us%20with%20her%20Latest%20look")
-    get '/lp/1512/1/p4' => redirect("/lp/1512/1?text=Selena%20Gomez's%20Sexy%20New%20Look,%20Internet%20goes%20mad")
-    get '/lp/1512/2' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_2, :pids => ["680-forest-green", "648-black", "682-gunmetal", "191-black", "539-magenta", "99-black", "431-black", "428-navy", "630-white", "471-burgundy"]
-    get '/lp/1512/2/p1' => redirect("/lp/1512/2?text=The%20New,%20Celebrity-approved%20Way%20to%20show%20some%20Skin")
-    get '/lp/1512/2/p2' => redirect("/lp/1512/2?text=The%20J-Law%20Endorsed,%20Must%20try%20Trend%20for%202016")
-    get '/lp/1512/2/p3' => redirect("/lp/1512/2?text=Why%20are%20these%20Celebrities%20baring%20so%20much%20Skin?")
-    get '/lp/1512/2/p4' => redirect("/lp/1512/2?text=These%20IT-Girls%20know%20the%20Perfect%20Party%20Dress")
-    get '/lp/1512/3' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_3, :pids => ["191-burgundy", "499-black", "582-white", "544-silver","514-black", "497-hot-pink", "612-gypsy-queen", "501-navy","620-white", "680-light-pink"]
-    get '/lp/1512/3/p1' => redirect("/lp/1512/3?text=The%20Must-do%20Celebrity%20Trend%20for%20NYE")
-    get '/lp/1512/3/p2' => redirect("/lp/1512/3?text=IT'S%20CONFIRMED:%20Angelina%20Jolie%20splits...%20with%20the%20dress")
-    get '/lp/1512/3/p3' => redirect("/lp/1512/3?text=The%20craziest%20red%20carpet%20trend%20of%202015")
-    get '/lp/1512/3/p4' => redirect("/lp/1512/3?text=Kendall%20Bares%20all!%20With%20the%20Skirt%20Split.")
-    get '/lp/1512/4' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_4, :pids => ["802-ice-grey", "809-blue-fallen-leaves", "800-pale-blue", "813-navy", "811-sage-fallen-leaves", "823-pale-pink", "793-ice-grey", "795-coral", "799-ice-blue", "804-mint"]
-    get '/lp/1512/4/p1' => redirect("/lp/1512/4?text=8%20of%20the%20Most%20Awkward%20Bridesmaids%20photos%20of%20All%20Time")
-    get '/lp/1512/4/p2' => redirect("/lp/1512/4?text=You%20won't%20Believe%20these%20Bridesmaids%20Photos!")
-    get '/lp/1512/4/p3' => redirect("/lp/1512/4?text=What%20were%20they%20Thinking?!%20The%208%20Craziest%20Bridesmaids%20Photos.")
-    get '/lp/1512/4/p4' => redirect("/lp/1512/4?text=Real-Life%20Bridesmaid%20that%20went%20that%20Step%20too%20Far")
-
     get '/dresses/best-sellers' => 'products/collections#show', :as => :best_sellers
 
     get '/sale-dresses' => redirect('/dresses/sale')
