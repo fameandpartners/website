@@ -77,9 +77,6 @@ FameAndPartners::Application.routes.draw do
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
 
-    # Monday March 23 2015 TTL: 6 months
-    get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
-
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
@@ -359,6 +356,7 @@ FameAndPartners::Application.routes.draw do
     get '/everybody-dance', to: redirect('/dresses/prom')
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
     get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
+    get '/unidays', to: redirect('/?utm_source=legacy-unidays'), as: :unidays_lp
 
     ###########
     # User Cart
