@@ -192,7 +192,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
-    get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
     get '/the-evening-shop/gowns' => 'products/collections#show', :permalink => 'evening-shop-gown', :as => :evening_shop_gown_page
     get '/the-evening-shop/slips' => 'products/collections#show', :permalink => 'evening-shop-slips', :as => :evening_shop_slips_page
@@ -359,6 +358,7 @@ FameAndPartners::Application.routes.draw do
     get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
     get '/everybody-dance', to: redirect('/dresses/prom')
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
+    get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
 
     ###########
     # User Cart
