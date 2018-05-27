@@ -82,9 +82,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
-    # Partners In Crime Sweepstakes Official Rules March 2016
-    get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
-
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
@@ -151,32 +148,7 @@ FameAndPartners::Application.routes.draw do
     get '/lp/1512/4/p3' => redirect("/lp/1512/4?text=What%20were%20they%20Thinking?!%20The%208%20Craziest%20Bridesmaids%20Photos.")
     get '/lp/1512/4/p4' => redirect("/lp/1512/4?text=Real-Life%20Bridesmaid%20that%20went%20that%20Step%20too%20Far")
 
-    # Redirect Lookbook page to homepage (due to legal issues)
-    get '/lookbook', to: redirect('/'), :as => :lookbook
-
-    get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
-    get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
-    get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
-    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
-
-    get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
-    get '/lookbook/this-modern-romance' => 'products/collections#show', :permalink => 'this-modern-romance', :as => :this_modern_romance_collection
-
-    get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
-    get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
-    get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
-
-    get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
-
-    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
-    get '/sarah-ellen' => 'products/collections#show', :permalink => 'dance-hall', :as => :sarah_ellen_landing_page
     get '/dresses/best-sellers' => 'products/collections#show', :as => :best_sellers
-    get '/lookbook/formal-night' => 'products/collections#show', :permalink => 'formal-night', :as => :formal_night_landing_page
-    get '/lookbook/race-day' => 'products/collections#show', :permalink => 'race-day', :as => :formal_night_landing_page
-
-    get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
-    get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
-    get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -185,21 +157,10 @@ FameAndPartners::Application.routes.draw do
 
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
-    get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
     get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
-
-    get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
-    get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
-    get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
-    get '/lookbook/la-belle-epoque' => redirect('/lookbook')
-
-    get '/all-size' => redirect('/lookbook/all-size')
-    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
-
-    get '/lookbook/bohemian-summer' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_collection
 
     get '/amfam' => redirect('/wicked-game-collection')
     get '/amfam-dresses' => redirect('/wicked-game-collection')
@@ -399,6 +360,32 @@ FameAndPartners::Application.routes.draw do
     get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
     get '/legal', to: redirect("/terms?utm_source=legacy-legal")
     get '/lets-party', to: redirect("/?utm_source=legacy-lets-party"), as: :lets_party_collection
+    get '/all-size', to: redirect('/lookbook/all-size')
+    get '/new-years-eve-dresses', to: redirect('/lookbook/break-hearts')
+    get '/break-hearts-collection', to: redirect('/lookbook/break-hearts')
+    get '/here-comes-the-sun-collection', to: redirect('/lookbook/here-comes-the-sun')
+    get '/lookbook', to: redirect('/?utm_source=legacy-lookbook'), as: :lookbook
+    get '/lookbook/all-size', to: redirect("/?utm_source=legacy-lookbook-all-size"), as: :all_size_collection
+    get '/lookbook/bohemian-summer', to: redirect('/?utm_source=legacy-lookbook-bohemian-summer'), as: :bohemian_summer_collection
+    get '/lookbook/break-hearts', to: redirect('/?utm_source=legacy-lookbook-break-hearts'), as: :break_hearts_collection
+    get '/lookbook/bring-on-the-night', to: redirect('/?utm_source=legacy-lookbook-bring-on-the-night'), as: :bring_on_the_night_collection
+    get '/lookbook/dance-hall-days', to: redirect('/?utm_source=legacy-lookbook-dance-hall-days'), as: :dance_hall_days_collection
+    get '/lookbook/formal-night', to: redirect('/?utm_source=legacy-lookbook-formal-night'), as: :formal_night_landing_page
+    get '/lookbook/garden-wedding', to: redirect('/?utm_source=legacy-lookbook-garden-wedding'), as: :garden_wedding_collection
+    get '/lookbook/here-comes-the-sun', to: redirect('/?utm_source=legacy-lookbook-here-comes-the-sun'), as: :here_comes_the_sun_collection
+    get '/lookbook/jedi-cosplay', to: redirect('/lookbook/make-a-statement')
+    get '/lookbook/just-the-girls', to: redirect('/?utm_source=legacy-lookbook-just-the-girls'), as: :just_the_girls_collection
+    get '/lookbook/la-belle-epoque', to: redirect('/?utm_source=legacy-lookbook-la-belle-epoque')
+    get '/lookbook/love-lace-collection', to: redirect('/?utm_source=legacy-lookbook-love-lace-collection'), as: :love_lace_collection
+    get '/lookbook/make-a-statement', to: redirect('/?utm_source=legacy-lookbook-make-a-statement'), as: :make_a_statement_collection
+    get '/lookbook/partners-in-crime', to: redirect('/?utm_source=legacy-lookbook-partners-in-crime'), as: :partners_in_crime_collection
+    get '/lookbook/photo-finish', to: redirect('/?utm_source=legacy-lookbook-photo-finish'), as: :photo_finish_collection
+    get '/lookbook/race-day', to: redirect('/?utm_source=legacy-lookbook-race-day'), as: :formal_night_landing_page
+    get '/lookbook/the-luxe-collection', to: redirect('/?utm_source=legacy-lookbook-the-luxe-collection'), as: :luxe_collection
+    get '/lookbook/this-modern-romance', to: redirect('/?utm_source=legacy-lookbook-this-modern-romance'), as: :this_modern_romance_collection
+    get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
+    get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
+    get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
 
     ###########
     # User Cart
