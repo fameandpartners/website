@@ -135,10 +135,6 @@ FameAndPartners::Application.routes.draw do
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
 
-    get '/amfam' => redirect('/wicked-game-collection')
-    get '/amfam-dresses' => redirect('/wicked-game-collection')
-    get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
-
     get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
     get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
@@ -357,6 +353,9 @@ FameAndPartners::Application.routes.draw do
     get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
     get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
     get '/unidays', to: redirect('/?utm_source=legacy-unidays'), as: :unidays_lp
+    get '/amfam' => redirect('/wicked-game-collection')
+    get '/amfam-dresses' => redirect('/wicked-game-collection')
+    get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
 
     ###########
     # User Cart
