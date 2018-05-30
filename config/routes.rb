@@ -69,14 +69,6 @@ FameAndPartners::Application.routes.draw do
     # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
     # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
-
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
-    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
-
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
@@ -84,14 +76,6 @@ FameAndPartners::Application.routes.draw do
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
-
-    # Monday March 23 2015 TTL: 6 months
-    get '/unidays' => 'statics#unidays_lp', :as => :unidays_lp
-
-    get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
-
-    # Partners In Crime Sweepstakes Official Rules March 2016
-    get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
 
     # i=change landing page
     get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
@@ -137,55 +121,7 @@ FameAndPartners::Application.routes.draw do
     ###########
     # Lookbooks
     ###########
-
-    get '/lp/1512/1' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_1, :pids => ["339-burgundy", "431-cherry-red", "713-red", "191-burgundy" ,"439-red", "371-cherry-red", "546-burgundy", "619-cherry-red", "539-red", "355-burgundy"]
-    get '/lp/1512/1/p1' => redirect("/lp/1512/1?text=Did%20Justin%20Bieber%20get%20back%20with%20Selena%20because%20of%20THIS%20dress?")
-    get '/lp/1512/1/p2' => redirect("/lp/1512/1?text=Selena%27s%20Sexy%20New%20Look%20that%20got%20Bieber%20Back")
-    get '/lp/1512/1/p3' => redirect("/lp/1512/1?text=Selena%20shocks%20us%20with%20her%20Latest%20look")
-    get '/lp/1512/1/p4' => redirect("/lp/1512/1?text=Selena%20Gomez's%20Sexy%20New%20Look,%20Internet%20goes%20mad")
-    get '/lp/1512/2' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_2, :pids => ["680-forest-green", "648-black", "682-gunmetal", "191-black", "539-magenta", "99-black", "431-black", "428-navy", "630-white", "471-burgundy"]
-    get '/lp/1512/2/p1' => redirect("/lp/1512/2?text=The%20New,%20Celebrity-approved%20Way%20to%20show%20some%20Skin")
-    get '/lp/1512/2/p2' => redirect("/lp/1512/2?text=The%20J-Law%20Endorsed,%20Must%20try%20Trend%20for%202016")
-    get '/lp/1512/2/p3' => redirect("/lp/1512/2?text=Why%20are%20these%20Celebrities%20baring%20so%20much%20Skin?")
-    get '/lp/1512/2/p4' => redirect("/lp/1512/2?text=These%20IT-Girls%20know%20the%20Perfect%20Party%20Dress")
-    get '/lp/1512/3' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_3, :pids => ["191-burgundy", "499-black", "582-white", "544-silver","514-black", "497-hot-pink", "612-gypsy-queen", "501-navy","620-white", "680-light-pink"]
-    get '/lp/1512/3/p1' => redirect("/lp/1512/3?text=The%20Must-do%20Celebrity%20Trend%20for%20NYE")
-    get '/lp/1512/3/p2' => redirect("/lp/1512/3?text=IT'S%20CONFIRMED:%20Angelina%20Jolie%20splits...%20with%20the%20dress")
-    get '/lp/1512/3/p3' => redirect("/lp/1512/3?text=The%20craziest%20red%20carpet%20trend%20of%202015")
-    get '/lp/1512/3/p4' => redirect("/lp/1512/3?text=Kendall%20Bares%20all!%20With%20the%20Skirt%20Split.")
-    get '/lp/1512/4' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_4, :pids => ["802-ice-grey", "809-blue-fallen-leaves", "800-pale-blue", "813-navy", "811-sage-fallen-leaves", "823-pale-pink", "793-ice-grey", "795-coral", "799-ice-blue", "804-mint"]
-    get '/lp/1512/4/p1' => redirect("/lp/1512/4?text=8%20of%20the%20Most%20Awkward%20Bridesmaids%20photos%20of%20All%20Time")
-    get '/lp/1512/4/p2' => redirect("/lp/1512/4?text=You%20won't%20Believe%20these%20Bridesmaids%20Photos!")
-    get '/lp/1512/4/p3' => redirect("/lp/1512/4?text=What%20were%20they%20Thinking?!%20The%208%20Craziest%20Bridesmaids%20Photos.")
-    get '/lp/1512/4/p4' => redirect("/lp/1512/4?text=Real-Life%20Bridesmaid%20that%20went%20that%20Step%20too%20Far")
-
-    # Redirect Lookbook page to homepage (due to legal issues)
-    get '/lookbook', to: redirect('/'), :as => :lookbook
-
-    get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
-    get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
-    get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
-    get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
-
-    get '/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_landing_page
-    get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
-    get '/lookbook/this-modern-romance' => 'products/collections#show', :permalink => 'this-modern-romance', :as => :this_modern_romance_collection
-
-    get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
-    get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
-    get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
-
-    get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
-
-    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
-    get '/sarah-ellen' => 'products/collections#show', :permalink => 'dance-hall', :as => :sarah_ellen_landing_page
     get '/dresses/best-sellers' => 'products/collections#show', :as => :best_sellers
-    get '/lookbook/formal-night' => 'products/collections#show', :permalink => 'formal-night', :as => :formal_night_landing_page
-    get '/lookbook/race-day' => 'products/collections#show', :permalink => 'race-day', :as => :formal_night_landing_page
-
-    get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
-    get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
-    get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -194,27 +130,10 @@ FameAndPartners::Application.routes.draw do
 
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
-    get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
-    get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
     get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
-
-    get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
-    get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
-    get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
-    get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
-    get '/lookbook/la-belle-epoque' => redirect('/lookbook')
-
-    get '/all-size' => redirect('/lookbook/all-size')
-    get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 
     get '/prom-collection' => redirect('/lookbook/prom')
     get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
-
-    get '/lookbook/bohemian-summer' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_collection
-
-    get '/amfam' => redirect('/wicked-game-collection')
-    get '/amfam-dresses' => redirect('/wicked-game-collection')
-    get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
     get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
     get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
@@ -258,32 +177,14 @@ FameAndPartners::Application.routes.draw do
     # Bespoke Bridal Sweepstakes - Landing page
     get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
 
-    # Lookbook pages redirects (due to legal issues)
-    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
-    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
-    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
-    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
-    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
-
-    # Redirect Every BODY Dance LPs due to legal issues
-    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
-    get '/everybody-dance', to: redirect('/dresses/prom')
-    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
-
     # temporary patch. this dress link is bad so redirect it
     # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
 
     # Landing pages
-    get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
-    get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
-    get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
-
-    get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
-    get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
     get '/the-evening-shop/gowns' => 'products/collections#show', :permalink => 'evening-shop-gown', :as => :evening_shop_gown_page
     get '/the-evening-shop/slips' => 'products/collections#show', :permalink => 'evening-shop-slips', :as => :evening_shop_slips_page
@@ -391,6 +292,71 @@ FameAndPartners::Application.routes.draw do
 
     post '/shared/facebook' => 'competition/events#share'
 
+    ########################
+    # Redirect legacy pages
+    ########################
+    get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
+    get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
+    get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
+    get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
+    get '/express-delivery', to: redirect("/?utm_source=legacy-express-delivery"), as: 'express_delivery'
+    get '/fame-chain', to: redirect("/?utm_source=legacy-fame-chain"), as: :fame_chain
+    get '/fameweddings/bridesmaid', to: redirect("/?utm_source=legacy-fameweddings-bridesmaid"), as: :bridesmaid_landing_page
+    get '/fameweddings/bride', to: redirect("/?utm_source=legacy-fameweddings-bride"), as: :brides_landing_page
+    get '/fameweddings/guest', to: redirect("/?utm_source=legacy-fameweddings-guest"), as: :guest_bride_page
+    get '/fashionista2014', to: redirect("/it-girl")
+    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
+    get '/fashionitgirl2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015', to: redirect('/it-girl')
+    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+    get '/legal', to: redirect("/terms?utm_source=legacy-legal")
+    get '/lets-party', to: redirect("/?utm_source=legacy-lets-party"), as: :lets_party_collection
+    get '/all-size', to: redirect('/lookbook/all-size')
+    get '/new-years-eve-dresses', to: redirect('/lookbook/break-hearts')
+    get '/break-hearts-collection', to: redirect('/lookbook/break-hearts')
+    get '/here-comes-the-sun-collection', to: redirect('/lookbook/here-comes-the-sun')
+    get '/lookbook', to: redirect('/?utm_source=legacy-lookbook'), as: :lookbook
+    get '/lookbook/all-size', to: redirect("/?utm_source=legacy-lookbook-all-size"), as: :all_size_collection
+    get '/lookbook/bohemian-summer', to: redirect('/?utm_source=legacy-lookbook-bohemian-summer'), as: :bohemian_summer_collection
+    get '/lookbook/break-hearts', to: redirect('/?utm_source=legacy-lookbook-break-hearts'), as: :break_hearts_collection
+    get '/lookbook/bring-on-the-night', to: redirect('/?utm_source=legacy-lookbook-bring-on-the-night'), as: :bring_on_the_night_collection
+    get '/lookbook/dance-hall-days', to: redirect('/?utm_source=legacy-lookbook-dance-hall-days'), as: :dance_hall_days_collection
+    get '/lookbook/formal-night', to: redirect('/?utm_source=legacy-lookbook-formal-night'), as: :formal_night_landing_page
+    get '/lookbook/garden-wedding', to: redirect('/?utm_source=legacy-lookbook-garden-wedding'), as: :garden_wedding_collection
+    get '/lookbook/here-comes-the-sun', to: redirect('/?utm_source=legacy-lookbook-here-comes-the-sun'), as: :here_comes_the_sun_collection
+    get '/lookbook/jedi-cosplay', to: redirect('/lookbook/make-a-statement')
+    get '/lookbook/just-the-girls', to: redirect('/?utm_source=legacy-lookbook-just-the-girls'), as: :just_the_girls_collection
+    get '/lookbook/la-belle-epoque', to: redirect('/?utm_source=legacy-lookbook-la-belle-epoque')
+    get '/lookbook/love-lace-collection', to: redirect('/?utm_source=legacy-lookbook-love-lace-collection'), as: :love_lace_collection
+    get '/lookbook/make-a-statement', to: redirect('/?utm_source=legacy-lookbook-make-a-statement'), as: :make_a_statement_collection
+    get '/lookbook/partners-in-crime', to: redirect('/?utm_source=legacy-lookbook-partners-in-crime'), as: :partners_in_crime_collection
+    get '/lookbook/photo-finish', to: redirect('/?utm_source=legacy-lookbook-photo-finish'), as: :photo_finish_collection
+    get '/lookbook/race-day', to: redirect('/?utm_source=legacy-lookbook-race-day'), as: :formal_night_landing_page
+    get '/lookbook/the-luxe-collection', to: redirect('/?utm_source=legacy-lookbook-the-luxe-collection'), as: :luxe_collection
+    get '/lookbook/this-modern-romance', to: redirect('/?utm_source=legacy-lookbook-this-modern-romance'), as: :this_modern_romance_collection
+    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
+    get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
+    get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
+    get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
+    get '/macys', to: redirect('/?utm_source=legacy-macys'), as: :macys
+    get '/mystyle', to: redirect('/?utm_source=legacy-mystyle'), as: :mystyle_landing_page
+    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
+    get '/everybody-dance', to: redirect('/dresses/prom')
+    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
+    get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
+    get '/unidays', to: redirect('/?utm_source=legacy-unidays'), as: :unidays_lp
+    get '/amfam' => redirect('/wicked-game-collection')
+    get '/amfam-dresses' => redirect('/wicked-game-collection')
+    get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
+
     ###########
     # User Cart
     ###########
@@ -494,7 +460,6 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
-    get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
     get '/how-it-works', to: redirect("/why-us")
@@ -508,10 +473,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
 
-    get '/fashionista2014', to: redirect("/it-girl")
-    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
-    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
-    get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
     namespace 'campaigns' do
@@ -521,9 +482,6 @@ FameAndPartners::Application.routes.draw do
         end
       end
     end
-
-    get '/fame-chain' => 'fame_chains#new', as: :fame_chain
-    resource 'fame-chain', as: 'fame_chain', only: [:create]
 
     get '/style-consultation', to: redirect("/styling-session")
 
@@ -585,8 +543,6 @@ FameAndPartners::Application.routes.draw do
       get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
       get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
     end
-
-    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
 
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')

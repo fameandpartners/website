@@ -10154,3 +10154,21 @@ INSERT INTO schema_migrations (version) VALUES ('20180419180056');
 INSERT INTO schema_migrations (version) VALUES ('20180430235008');
 
 INSERT INTO schema_migrations (version) VALUES ('20180514050920');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526215302');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526220118');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526225425');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526232527');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526232944');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527002231');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527003945');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527004343');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527004738');
