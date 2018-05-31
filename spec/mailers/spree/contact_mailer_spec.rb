@@ -22,7 +22,7 @@ describe ContactMailer do
     end
 
     it 'checks the receiver email' do
-      expect(mail.to).to eq(['team@fameandpartners.com'])
+      expect(mail.to).to eq(['customerservice@fameandpartners.com'])
     end
   end
 

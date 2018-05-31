@@ -143,7 +143,7 @@ module Marketing
           if order.line_items.any? {|x| x.product.name.downcase == 'return_insurance'}
             disp << {
               label:          'Returns Deposit',
-              display_amount: '$25.00'
+              display_amount: '$19.00'
             }
           end
 

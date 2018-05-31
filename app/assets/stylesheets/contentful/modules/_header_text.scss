@@ -70,6 +70,10 @@
   font-size: 3.5rem;
 }
 
+.CopyHeader--extralarge .CopyHeader__content p {
+  font-size: 4.2rem;
+}
+
 @include breakpoint(mobile-max) {
 
   .CopyHeader {

@@ -423,6 +423,10 @@ module Products
     private
 
     def add_product_color_fabrics( product, recommendend_fabric_colors, custom_fabric_colors, fabric_descriptions )
+      product.fabric_products.each do |fp|
+        fp.active = false
+        fp.save
+      end
       to_return = associate_fabrics_with_product( product, recommendend_fabric_colors, fabric_descriptions.first, true )
       custom_fabric_colors.each_with_index do |fabric_color, index|
         # You can't just compact because it screws up the indexing with the fabric descriptions
@@ -472,6 +476,7 @@ module Products
         to_return = FabricsProduct.create do |object|
           object.fabric_id = fabric.id
           object.product_id = product.id
+          object.active = true
         end
         
         to_return.recommended = recommended

@@ -145,20 +145,6 @@ dress_request = CustomDressRequest.new(
 )
 CustomDressesMailer.request_custom_dress(dress_request).deliver
 
-## FameChain
-
-app/views/fame_chain_mailer/fame_chain.text.erb
-
-fame_chain = FameChain.new(
-  name: 'myname',
-  email: 'mail@example.com',
-  blog: 'myblog',
-  blog_size: 'great',
-  pinterest: 'pin',
-  pinterest_size: 'small'
-)
-FameChainMailer.fame_chain(fame_chain).deliver
-
 ## Shipping
 
 shipment = Spree::Shipment.last
