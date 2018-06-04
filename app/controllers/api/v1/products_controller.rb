@@ -99,6 +99,7 @@ module Api
             colors.length > 0 && fabrics.empty? && {
               id: 120,
               title: 'Color',
+              selectionTitle: 'Select your Color',
               changeButtonText: "Change",
               slug: 'color',
               sectionGroups: [
@@ -106,7 +107,6 @@ module Api
                   title: 'Color',
                   slug: 'color',
                   previewType: :image,
-                  selectionTitle: "Select your color",
                   sections: [
                     {
                       componentTypeId: :Colour,
@@ -122,19 +122,18 @@ module Api
             fabrics.length > 0 && {
               id: 121,
               title: 'Fabric & Color',
+              selectionTitle: "Select your Fabric & Color",
               changeButtonText: "Change",
               slug: 'fabric',
               sectionGroups: [
                 {
                   title: "Fabric & Color",
-                  selectionTitle: "Select your fabric & color",
                   slug: 'fabric',
                   previewType: :image,
                   sections: [
                     {
                       componentTypeId: :Fabric,
                       componentTypeCategory: :Fabric,
-                      title: "Select your fabric & color",
                       selectionType: :RequiredOne,
                       options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
@@ -145,12 +144,12 @@ module Api
             customizations.length > 0 && {
               id: 122,
               title: 'Customizations',
+              selectionTitle: "Customize your dress",
               changeButtonText: "Change",
               slug: 'customize',
               sectionGroups: [
                 {
                   title: "Customizations",
-                  selectionTitle: "Customize your dress",
                   slug: 'customize',
                   previewType: :cad,
                   sections: [
@@ -169,13 +168,13 @@ module Api
             sizes.length > 0 && {
               id: 123,
               title: 'Size',
+              selectionTitle: "Tell us your height and size",
               changeButtonText: "Select",
               sortOrder: 9,
               slug: 'size',
               sectionGroups: [
                 {
                   title: "Size",
-                  selectionTitle: "Tell us your height and size",
                   slug: 'size',
                   previewType: :image,
                   sections: [
@@ -309,7 +308,7 @@ module Api
           cartId: f.fabric.id,
           code: f.fabric.name,
           isDefault: false,
-          title: f.fabric.presentation,
+          title: f.fabric.option_value.presentation,
           componentTypeId: :Fabric,
           componentTypeCategory: 'ColourAndFabric',
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
@@ -329,8 +328,8 @@ module Api
             colorId: f.fabric.option_value.id,
             colorCode: f.fabric.option_value.name,
 
-            subCategoryTitle: f.fabric.material,
-            subCategoryName: f.fabric.option_value.presentation,
+            subCategoryName: f.fabric.material,
+            subCategoryTitle: f.fabric.option_value.presentation,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
