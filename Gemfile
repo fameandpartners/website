@@ -24,7 +24,7 @@ gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
 gem 'elasticsearch-ruby'
 gem 'elasticsearch-persistence'
-
+gem 'net-ssh'
 # gem 'elasticsearch-model'
 # gem 'elasticsearch-rails'
 
@@ -109,6 +109,7 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 # utils
 
 gem 'json'
+gem 'net-sftp'
 # replacement for standard library.
 gem 'addressable'
 

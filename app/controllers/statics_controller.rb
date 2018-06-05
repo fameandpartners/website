@@ -11,11 +11,15 @@ class StaticsController < ApplicationController
 
   def about
     title('About Us', default_seo_title)
-    description('We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista\'s based in Sydney and NYC')
+    description('Custom clothing, made-to-order. No mass production. Less waste. Customize color, fabric and fit.')
     @contact = Contact.new(site_version: current_site_version.code)
   end
 
   def faqs
+    current_contently = Contentful::Version.fetch_payload(params['developer'] == 'preview')
+    @faqs_page_container = current_contently["/faqs"]
+    title(@faqs_page_container[:meta_title], default_seo_title)
+    description(@faqs_page_container[:meta_description])
   end
 
   def bridesmaid_lp

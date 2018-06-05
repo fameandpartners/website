@@ -147,7 +147,7 @@ $('.js-trigger-empty-cart-modal').modal({
       </div>
       <div class="col-xs-7">
         <p class="ReturnOption__copy font-sans-serif">
-          Add <strong>$25</strong>
+          Add <strong>$19</strong>
           for fully flexible returns
         </p>
       </div>
@@ -177,7 +177,7 @@ $('.js-trigger-empty-cart-modal').modal({
           Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
         </p>
         <p class="js-returns-abc-option-message hidden">
-          Returns Deposit<span class="pull-right">$25.00</span>
+          Returns Deposit<span class="pull-right">$19.00</span>
         </p>
         <p>
           Shipping <span class="value"><%= @cart.display_shipment_total %></span>
