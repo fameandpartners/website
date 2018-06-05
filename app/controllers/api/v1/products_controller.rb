@@ -133,7 +133,7 @@ module Api
                   sections: [
                     {
                       componentTypeId: :Fabric,
-                      componentTypeCategory: :Fabric,
+                      componentTypeCategory: :ColourAndFabric,
                       selectionType: :RequiredOne,
                       options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
@@ -310,7 +310,7 @@ module Api
           isDefault: false,
           title: f.fabric.option_value.presentation,
           componentTypeId: :Fabric,
-          componentTypeCategory: 'ColourAndFabric',
+          componentTypeCategory: :ColourAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
           isRecommended: f.recommended,
