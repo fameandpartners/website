@@ -16,7 +16,10 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
     orders = Spree::Order.where("completed_at >= ? AND state = 'complete'", scheduler.last_successful_run) # get complete orders
-
+    puts "DB8 orders.size was #{orders.size}"
+    # Filter US orders
+    orders.select! { |x| x.shipping_address.country_id==49 }
+    puts "DB8 orders.size was #{orders.size}"
     generate_csv_for_orders(orders)
     scheduler.last_successful_run = current_time.to_s
     scheduler.save
