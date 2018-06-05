@@ -47,3 +47,8 @@ every(15.minutes) { rake 'data:refulfill_items' }
 every(5.minutes) { rake 'data:batch_items' }
 every(1.hour) { rake 'data:groom_batches'}
 
+# Newgistics scheduled tasks
+every(1.week) { rake 'newgistics:upload_product_list' } #Master file
+#every(1.week) { rake 'newgistics:upload_order_list' }#Order file that needs to be shipped out by Newgistics; not needed yet
+every(1.day) { rake 'newgistics:upload_return_list' } #External Orders file
+#every(1.day)    { rake 'newgistics:update_item_returns' } #Refunds; not ready yet
