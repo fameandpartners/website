@@ -51,4 +51,4 @@ every(1.hour) { rake 'data:groom_batches'}
 every(1.week) { rake 'newgistics:upload_product_list' } #Master file
 #every(1.week) { rake 'newgistics:upload_order_list' }#Order file that needs to be shipped out by Newgistics; not needed yet
 every(1.day) { rake 'newgistics:upload_return_list' } #External Orders file
-#every(1.day)    { rake 'newgistics:update_item_returns' } #Refunds; not ready yet
+every(1.day) { rake 'newgistics:update_item_returns' } #API for Inbound Returns
