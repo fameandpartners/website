@@ -631,6 +631,9 @@ GEM
     multipart-post (2.0.0)
     mumboe-soap4r (1.5.8.7)
       httpclient (>= 2.1.1)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.1.0)
     netrc (0.10.3)
     newrelic_rpm (3.16.3.323)
     nokogiri (1.5.11)
@@ -1003,6 +1006,8 @@ DEPENDENCIES
   mailchimp-api
   mailchimp_client!
   manual_order!
+  net-sftp
+  net-ssh
   newrelic_rpm
   next_logistics!
   ops_care!

@@ -6,7 +6,7 @@ class ContactMailer < ActionMailer::Base
     @contact = contact
 
     mail(
-      to: 'team@fameandpartners.com',
+      to: 'customerservice@fameandpartners.com',
       from: @contact.email,
       subject: "[#{@contact.site_version.upcase}] #{@contact.subject}",
       layout: false

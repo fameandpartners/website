@@ -1,9 +1,12 @@
-module Newgistics
+include Newgistics::NewgisticsHelper
+
+ module Newgistics
   class ShippingLabel
     attr_accessor :label_url,
                   :carrier,
                   :label_image_url,
-                  :label_pdf_url
+                  :label_pdf_url,
+                  :barcode
 
     def initialize(first_name, last_name, address, email, return_id)
       @first_name = first_name
@@ -12,10 +15,11 @@ module Newgistics
       @address_1 = address.address1
       @address_2 = address.address2
       @city = address.city
-      @state = address.state.abbr
+      @state = address.state&.abbr
       @country = address.country.iso
       @zip = address.zipcode
       @return_id = return_id
+      @address = address
     end
 
     def fetch_shipping_label_from_api
@@ -57,6 +61,7 @@ module Newgistics
     end
 
     def make_request_map
+      newgistics_conf = get_facitily_by_location(@address)
       {
         "clientServiceFlag" => "Standard",
         "consumer" => {
@@ -65,9 +70,9 @@ module Newgistics
           "PrimaryEmailAddress" => @email
         }.merge(make_address_map),
         "deliveryMethod" => "SelfService",
-        "dispositionRuleSetId" => configatron.newgistics.disposition_rule_set,
+        "dispositionRuleSetId" => newgistics_conf['rule_set'],
         "labelCount" => 1,
-        "merchantID" => configatron.newgistics.merchant_id
+        "merchantID" => newgistics_conf['merchant_id']
       }.merge(make_return_id_map)
     end
 
@@ -75,13 +80,14 @@ module Newgistics
       if Rails.env == 'production'
         {"returnId" => @return_id}
       else
-        {"returnId" => "123456789A"}        
+        {"returnId" => @return_id}
       end
     end
 
     def convert_json_to_instance_variables(json)
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
+      @barcode = json['transporter']['Barcode'] # is actually the tracking number
 
       json['links'].each do |link|
         if link['rel'] == 'label/image'

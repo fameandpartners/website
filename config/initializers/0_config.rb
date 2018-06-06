@@ -69,9 +69,16 @@ end
 
 configatron.newgistics do |newgistics|
   newgistics.api_key = ENV['NEWGISTICS_API_KEY']
-  newgistics.merchant_id = ENV['NEWGISTICS_MERCHANT_ID']
-  newgistics.disposition_rule_set = ENV['NEWGISTICS_DISPOSITION_RULE_SET'].to_i
+  newgistics.california_merchant_id = ENV['NEWGISTICS_CALIFORNIA_MERCHANT_ID']
+  newgistics.california_rule_set = ENV['NEWGISTICS_CALIFORNIA_DISPOSITION_RULE_SET'].to_i
+  newgistics.kentucky_merchant_id = ENV['NEWGISTICS_KENTUCKY_MERCHANT_ID']
+  newgistics.kentucky_rule_set = ENV['NEWGISTICS_KENTUCKY_DISPOSITION_RULE_SET'].to_i
   newgistics.uri = 'https://api.newgistics.com/WebAPI/Shipment/'
+  newgistics.returns_uri = ENV['NEWGISTICS_RETURNS_API']
+  newgistics.returns_api_key = ENV['NEWGISTICS_RETURNS_API_KEY']
+  newgistics.ftp_user = ENV['NEWGISTICS_FTP_USER']
+  newgistics.ftp_password= ENV['NEWGISTICS_FTP_PASS']
+  newgistics.ftp_uri= ENV['NEWGISTICS_FTP_URI']
 end
 
 configatron.contentful do |contentful|

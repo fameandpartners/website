@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1014,7 +1014,8 @@ CREATE TABLE fabrics_products (
     fabric_id integer,
     product_id integer,
     recommended boolean,
-    description character varying(255)
+    description character varying(255),
+    active boolean DEFAULT true
 );
 
 
@@ -10142,10 +10143,30 @@ INSERT INTO schema_migrations (version) VALUES ('20180315032843');
 
 INSERT INTO schema_migrations (version) VALUES ('20180403192310');
 
+INSERT INTO schema_migrations (version) VALUES ('20180403210453');
+
 INSERT INTO schema_migrations (version) VALUES ('20180404121555');
 
 INSERT INTO schema_migrations (version) VALUES ('20180419180056');
 
-INSERT INTO schema_migrations (version) VALUES ('20180403210453');
-
 INSERT INTO schema_migrations (version) VALUES ('20180430235008');
+
+INSERT INTO schema_migrations (version) VALUES ('20180514050920');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526215302');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526220118');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526225425');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526232527');
+
+INSERT INTO schema_migrations (version) VALUES ('20180526232944');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527002231');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527003945');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527004343');
+
+INSERT INTO schema_migrations (version) VALUES ('20180527004738');

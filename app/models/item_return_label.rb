@@ -1,4 +1,4 @@
 class ItemReturnLabel < ActiveRecord::Base
-  attr_accessible :carrier, :label_image_url, :label_pdf_url, :label_url
+  attr_accessible :carrier, :label_image_url, :label_pdf_url, :label_url, :barcode
   has_many :item_return
 end
