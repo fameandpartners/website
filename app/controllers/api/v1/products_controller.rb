@@ -308,7 +308,7 @@ module Api
           cartId: f.fabric.id,
           code: f.fabric.name,
           isDefault: false,
-          title: f.fabric.option_value.presentation,
+          title: f.fabric.presentation,
           componentTypeId: :Fabric,
           componentTypeCategory: :ColourAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
@@ -329,7 +329,7 @@ module Api
             colorCode: f.fabric.option_value.name,
 
             subCategoryName: f.fabric.material,
-            subCategoryTitle: f.fabric.option_value.presentation,
+            colorTitle: f.fabric.option_value.presentation,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
