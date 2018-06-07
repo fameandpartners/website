@@ -86,8 +86,8 @@ module Api
                 isProductCode: false,
                 isRecommended: false,
                 type: :return,
+                sortOrder: 1,
                 meta: {
-                  sortOrder: 1,
                   returnDescription: 'Shipping and returns are free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
                 },
                 incompatibleWith: { allOptions: [] },
@@ -99,6 +99,7 @@ module Api
             colors.length > 0 && fabrics.empty? && {
               id: 120,
               title: 'Color',
+              selectionTitle: 'Select your Color',
               changeButtonText: "Change",
               slug: 'color',
               sectionGroups: [
@@ -121,6 +122,7 @@ module Api
             fabrics.length > 0 && {
               id: 121,
               title: 'Fabric & Color',
+              selectionTitle: "Select your Fabric & Color",
               changeButtonText: "Change",
               slug: 'fabric',
               sectionGroups: [
@@ -131,8 +133,7 @@ module Api
                   sections: [
                     {
                       componentTypeId: :Fabric,
-                      componentTypeCategory: :Fabric,
-                      title: "Select your fabric & color",
+                      componentTypeCategory: :ColourAndFabric,
                       selectionType: :RequiredOne,
                       options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
@@ -142,12 +143,13 @@ module Api
 
             customizations.length > 0 && {
               id: 122,
-              title: 'Customize',
+              title: 'Customizations',
+              selectionTitle: "Customize your dress",
               changeButtonText: "Change",
               slug: 'customize',
               sectionGroups: [
                 {
-                  title: "Customize",
+                  title: "Customizations",
                   slug: 'customize',
                   previewType: :cad,
                   sections: [
@@ -166,6 +168,7 @@ module Api
             sizes.length > 0 && {
               id: 123,
               title: 'Size',
+              selectionTitle: "Tell us your height and size",
               changeButtonText: "Select",
               sortOrder: 9,
               slug: 'size',
@@ -267,8 +270,8 @@ module Api
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomisation,
+          sortOrder: c['customisation_value']['position'],
           meta: {
-            sortOrder: c['customisation_value']['position'],
             image: {
               url: customization_image(c['customisation_value']),
               width: -1,
@@ -291,8 +294,8 @@ module Api
           isProductCode: false,
           isRecommended: false,
           type: :Making,
+          sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
           meta: {
-            sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
             deliveryTimeDescription: making.description,
             deliveryTimeRange: making.display_delivery_period
           },
@@ -307,13 +310,13 @@ module Api
           isDefault: false,
           title: f.fabric.presentation,
           componentTypeId: :Fabric,
-          componentTypeCategory: 'ColourAndFabric',
+          componentTypeCategory: :ColourAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
           isRecommended: f.recommended,
           type: :Fabric,
+          sortOrder: f.fabric.option_fabric_color_value.position, #TODO
           meta: {
-            sortOrder: f.fabric.option_fabric_color_value.position, #TODO
             # hex: c.option_value.value,
             
             image: {
@@ -325,7 +328,7 @@ module Api
             colorId: f.fabric.option_value.id,
             colorCode: f.fabric.option_value.name,
 
-            materialTitle: f.fabric.material,
+            subCategoryName: f.fabric.material,
             colorTitle: f.fabric.option_value.presentation,
 
             careDescription: CARE_DESCRIPTION,
@@ -376,8 +379,8 @@ module Api
           isProductCode: false,
           isRecommended: false,
           type: :Size,
+          sortOrder: s.position,
           meta: {
-            sortOrder: s.position,
             sizeUs: s.name.split("/")[0],
             sizeAu: s.name.split("/")[1],
           },

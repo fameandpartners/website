@@ -6,6 +6,8 @@ AdminUi::Engine.routes.draw do
     collection do
       get :weekly_refund, action: :index, scope: :refund_queue
       get ':item_return_id/label', action: :generate_new_return_label
+      get ':item_return_id/autorefund/enable', action: :enable_autorefund
+      get ':item_return_id/autorefund/disable', action: :disable_autorefund
       post :bulk_refund_process
     end
   end

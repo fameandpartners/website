@@ -113,18 +113,18 @@ module ReturnsProcessesControllerHelper
       order.user_last_name,
       order.shipping_address,
       order.email,
-      order.number
+      order.id
     )
 
-    if(label.fetch_shipping_label_from_api().nil?)
-       return nil
+    if(label.fetch_shipping_label_from_api.nil?)
+      return nil
     end
-
     item_return_label = ItemReturnLabel.new(
       :label_image_url => label.label_image_url,
       :label_pdf_url => label.label_pdf_url,
       :label_url => label.label_url,
-      :carrier => label.carrier
+      :carrier => label.carrier,
+      :barcode => label.barcode
       )
   end
 

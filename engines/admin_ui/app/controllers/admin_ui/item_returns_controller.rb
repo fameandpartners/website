@@ -40,6 +40,22 @@ module AdminUi
       end
     end
 
+    def enable_autorefund
+      @item_return = ItemReturn.find(params[:item_return_id])
+      order = @item_return.line_item.order
+      order.autorefundable = true
+      order.save!
+      redirect_to item_return_path(@item_return)
+    end
+
+    def disable_autorefund
+      @item_return = ItemReturn.find(params[:item_return_id])
+      order = @item_return.line_item.order
+      order.autorefundable = false
+      order.save!
+      redirect_to item_return_path(@item_return)
+    end
+
     def generate_new_return_label
       item_return = ItemReturn.find(params[:item_return_id])
       order = Spree::Order.find_by_number(item_return.order_number)

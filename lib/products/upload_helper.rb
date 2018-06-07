@@ -161,7 +161,7 @@ module Products
       product
     end
 
-    def add_product_variants(product, sizes, fabrics_products, price_in_aud, price_in_usd)
+    def add_product_variants(product, sizes, fabrics_products, price_in_aud, price_in_usd)  
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -172,17 +172,16 @@ module Products
       product.reload
 
       sizes.each do |size_name|
+        size_value  = size_option.option_values.where(name: size_name).first
+        size_variants = product.variants.select { |variant| variant.option_value_ids.include?(size_value.id)}
+
         fabrics_products.each do |fabrics_product|
-          size_value  = size_option.option_values.where(name: size_name).first
           fabric_color = fabrics_product.fabric.option_fabric_color_value
 
           next if size_value.blank? || fabric_color.blank?
 
-          variant = product.variants.detect do |variant|
-            [size_value.id, fabric_color.id].all? do |id|
-              variant.option_value_ids.include?(id)
-            end
-          end
+          variant = size_variants.detect {|variant| variant.option_value_ids.include?(fabric_color.id) }
+          
           unless variant.present?
             variant = product.variants.build
             variant.option_values = [size_value, fabric_color]
@@ -190,15 +189,18 @@ module Products
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
           # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-          # variant.send :write_attribute, :on_demand, true. #TODO: Address this shit why do i need it? Cant I just wrap the save in the same unless?
+          variant.send :write_attribute, :on_demand, true
+          Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+          Spree::Variant.skip_callback( :save, :after, :process_backorders )
+          Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
 
-          variant.save
+          variant.save!
 
-          aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+          aud = variant.prices.where(currency: "AUD").first_or_create
           aud.amount = price_in_aud
           aud.save!
 
-          usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+          usd = variant.prices.where(currency: "USD").first_or_create
           usd.amount = price_in_usd
           usd.save!
 
