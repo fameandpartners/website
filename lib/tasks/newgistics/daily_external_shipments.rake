@@ -93,7 +93,7 @@ namespace :newgistics do
         scheduler.save
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
-    
+
     return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
 
     generate_csv(return_request_items)
@@ -109,6 +109,11 @@ namespace :newgistics do
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
         order = return_request.order
+        barcode_exists = return_request.item_return.item_return_label.barcode rescue nil
+          unless barcode_exists
+            puts "DB8 Skipping Order due to no barcode #{order.id} #{order.created_at}"
+            next
+          end
         li = return_request.line_item
         address = order.ship_address
 
