@@ -8,14 +8,25 @@ module Products
       upload.map do |prod|
         begin
 
-          #min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
-          product = create_or_update_product(prod)
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
+          if (prod[:type] === "swatch")
+            sizes = %w(US0/AU4)
+            prod[:name] = "Fabric Swatch - Heavy Georgette"
+            category = Category.where(category: 'Sample').first_or_create( { category: "Sample", subcategory: "Fabric" })
+            taxon = nil
+            # taxon = taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
+          else
           sizes = %w(
             US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
             US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
           )
+            category = nil
+            taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
+          end
+
+          product = create_or_update_product(prod, category, taxon)
+
 
           details = prod[:details]
 
@@ -48,7 +59,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod)
+    def create_or_update_product(prod, category, taxon)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -58,20 +69,21 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
       end
 
-      ActiveRecord::Associations::Preloader.new(product, variants: [:option_values]).run
+      ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
 
       taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_name(x)&.id }
+      taxon_ids << taxon.id if taxon
 
       attributes = {
         name: prod[:details][:name],
         price: 0.0.to_f,
         description: prod[:details][:description],
         taxon_ids: taxon_ids,
-        available_on: @available_on || product.available_on #NEED TO ADD THIS TO JSON
+        available_on: @available_on || product.available_on, #NEED TO ADD THIS TO JSON
+        category: category
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
@@ -173,6 +185,7 @@ module Products
 
       sizes.each do |size_name|
         size_value  = size_option.option_values.where(name: size_name).first
+        product.variants
         size_variants = product.variants.select { |variant| variant.option_value_ids.include?(size_value.id)}
 
         fabrics_products.each do |fabrics_product|
@@ -181,7 +194,6 @@ module Products
           next if size_value.blank? || fabric_color.blank?
 
           variant = size_variants.detect {|variant| variant.option_value_ids.include?(fabric_color.id) }
-          
           unless variant.present?
             variant = product.variants.build
             variant.option_values = [size_value, fabric_color]
@@ -207,8 +219,6 @@ module Products
           variants.push(variant) if variant.persisted?
         end
       end
-
-      variants
 
       product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
