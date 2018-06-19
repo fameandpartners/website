@@ -387,8 +387,6 @@ FameAndPartners::Application.routes.draw do
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
 
-    get '/products/fabric-swatches' => 'products/fabric_swatches#index'
-
     scope '/dresses' do
       root to: 'products/collections#show', :permalink => 'dress', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -633,21 +631,6 @@ FameAndPartners::Application.routes.draw do
 
 
   # ----------
-  # Dress Filter LP
-  # ----------
-
-  scope '/bridesmaids' do
-    get '/' => 'products/bridesmaids#index'
-    get '/dresses' => 'products/bridesmaids#show'
-  end
-
-  scope '/bridesmaid-dresses' do
-    # Colors should behave like query strings, and not paths
-    get '/:id' => 'products/details#bridesmaid_show'
-  end
-
-
-  # ----------
   # API Routes
   # ----------
 
@@ -673,13 +656,6 @@ FameAndPartners::Application.routes.draw do
         post 'user/login' => 'user_sessions#create'
         delete 'user/logout' => 'user_sessions#destroy'
       end
-
-      get '/bridesmaids/incompatabilities' => 'bridesmaid#incompatabilities'
-      get '/bridesmaids/:id' => 'bridesmaid#show'
-      get '/bridesmaids' => 'bridesmaid#index'
-
-      #fabric swatches
-      get 'fabric_swatches' => 'fabric_swatches#index'
 
       get '/products/:id' => 'products#show'
 
