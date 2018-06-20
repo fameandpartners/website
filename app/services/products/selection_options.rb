@@ -110,7 +110,7 @@ module Products
       end
 
       def extra_product_fabrics
-        @extra_product_fabrics ||= product.custom_fabrics_with_description
+        @extra_product_fabrics ||= product.custom_fabrics_with_description.reject { |x| x[:fabric][:name]=="forest-green-heavy-georgette" }
       end
 
       private def defined_custom_colors

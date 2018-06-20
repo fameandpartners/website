@@ -15,6 +15,12 @@ class ProductImages
   end
 
   def read_all(options = {})
+    if product.has_render?
+      @product_images ||= [
+        get_render_image(options)
+      ]
+    end
+
     @product_images ||= begin
       Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
         if product.fabrics.empty?
@@ -25,7 +31,7 @@ class ProductImages
       end
     end
 
-    if options.has_key?(:cropped)
+    if options.has_key?(:cropped) && !product.has_render?
       if options[:cropped]
         @product_images = @product_images.select{|image| image.large.to_s.downcase.include?('crop') }
       else # options[:cropped] => false
@@ -90,12 +96,7 @@ class ProductImages
   # @return [OpenStruct]
   def read(options = {})
     if product.has_render?
-      sku = product.master.sku.upcase
-      fabric = options[:fabric]&.name
-      cust = options[:product_customizations] || []
-
-      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/704x704/#{Spree::Product.format_new_pid(fabric, cust)}.jpg"
-      default_image(image_url)
+      get_render_image(options)
     else
       filter(options).first || read_all(options).first || default_image
     end
@@ -103,6 +104,15 @@ class ProductImages
   alias_method :default, :read
 
   private
+
+    def get_render_image(options)      
+      sku = product.master.sku.upcase
+      fabric = options[:fabric]&.name
+      cust = options[:product_customizations] || []
+
+      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/704x704/#{Spree::Product.format_new_pid(fabric, cust)}.jpg"
+      default_image(image_url)
+    end
 
     def cache_key
       "product-images-#{ product.permalink }"
