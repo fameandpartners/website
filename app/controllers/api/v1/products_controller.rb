@@ -381,8 +381,8 @@ module Api
           type: :Size,
           sortOrder: s.position,
           meta: {
-            sizeUs: s.name.split("/")[0],
-            sizeAu: s.name.split("/")[1],
+            sizeUs: s.name.split("/")[0].sub("US", ""),
+            sizeAu: s.name.split("/")[1].sub("AU", "")
           },
           incompatibleWith: { allOptions: [] },
         }
