@@ -185,9 +185,8 @@ class UserCart::ProductsController < UserCart::BaseController
   def ensure_size_id_is_set( params )
     if( params[:size_id].nil? && !params[:size].nil? )
       params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
-    end
-    #need a size set for fabric swatches
-    if (params[:variant_id].starts_with?('SW'))
+    elsif (params[:variant_id].to_s.starts_with?('SW'))
+      #need a size set for fabric swatches
       params[:size_id] = Spree::OptionValue.find_by_name('US0/AU4').id
     end
   end
