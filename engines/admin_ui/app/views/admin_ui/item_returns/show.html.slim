@@ -41,17 +41,21 @@ javascript:
   .ibox-title
     h3 Autocredit Refund
   .ibox-content
-    .btn-toolbar
-      -if @item_return.line_item.order.autorefundable.nil? || @item_return.line_item.order.autorefundable
-        .btn-group
-          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
-        .btn-group
-          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
-      -else
-        .btn-group
-          a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
-        .btn-group
-          a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
+    - if @item_return.line_item.nil?
+      p DEBUG: LineItem #{@item_return.line_item_id} was not found
+    - else
+      p DEBUG: LineItem #{@item_return.line_item_id}
+      .btn-toolbar
+        -if @item_return.line_item.order.autorefundable.nil? || @item_return.line_item.order.autorefundable
+          .btn-group
+            a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
+          .btn-group
+            a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
+        -else
+          .btn-group
+            a.btn.btn-primary data-toggle="modal" href="#{@item_return.id}/autorefund/enable" Disable
+          .btn-group
+            a.btn.btn-red data-toggle="modal" href="#{@item_return.id}/autorefund/disable" Enable
 
 .ibox
   .ibox-title
