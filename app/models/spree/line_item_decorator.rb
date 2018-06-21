@@ -125,7 +125,7 @@ Spree::LineItem.class_eval do
 
   def options_text
     if fabric_swatch?
-      return "Color: #{variant.option_values.colors.first.presentation}"
+      return "Fabric and Color: #{fabric.presentation}"
     end
     if personalization.blank?
       variant.options_text
@@ -183,11 +183,7 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    if fabric_swatch?
-      self.variant.option_values.colors.first.image_file_name_for_swatch
-    else
-      cart_item.try(:image).try(:large) || ''
-    end
+    cart_item.try(:image).try(:large) || ''
   end
 
   def size_name

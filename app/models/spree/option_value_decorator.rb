@@ -19,6 +19,7 @@ Spree::OptionValue.class_eval do
 
   scope :none,    -> { where(id: nil) }
   scope :colors,  -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.color.try(:id)) }
+  scope :fabrics,  -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.fabric_color.try(:id)) }
   scope :sizes,   -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.size.try(:id)) }
 
   attr_accessible :image, :value, :use_in_customisation

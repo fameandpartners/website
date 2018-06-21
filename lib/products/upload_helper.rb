@@ -7,28 +7,28 @@ module Products
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
         begin
-
+          details = prod[:details]
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
-          if (prod[:type] === "swatch")
+          if (details[:type] === "swatch")
             sizes = %w(US0/AU4)
-            prod[:name] = "Fabric Swatch - Heavy Georgette"
             category = Category.where(category: 'Sample').first_or_create( { category: "Sample", subcategory: "Fabric" })
             taxon = nil
+            on_demand = false
             # taxon = taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
           else
-          sizes = %w(
-            US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
-            US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
-          )
+            sizes = %w(
+              US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
+              US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
+            )
             category = nil
             taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
+            on_demand = true
           end
 
-          product = create_or_update_product(prod, category, taxon)
+          product = create_or_update_product(prod, category, on_demand, taxon)
 
 
-          details = prod[:details]
 
           #color_map = details[:colors].map{ |x| { color: x } }
           add_product_properties(product, details)
@@ -59,7 +59,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod, category, taxon)
+    def create_or_update_product(prod, category, on_demand, taxon)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -69,7 +69,7 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: on_demand, available_on: @available_on)
       end
 
       ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
