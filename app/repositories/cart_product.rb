@@ -128,7 +128,7 @@ class Repositories::CartProduct
     end
 
     def size
-      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+      if line_item.product&.category&.category == 'Sample'
         nil
       elsif size_id.present?
         Repositories::ProductSize.read(size_id)

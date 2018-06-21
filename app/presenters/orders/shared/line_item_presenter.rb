@@ -74,11 +74,7 @@ module Orders
       deprecate image?: '#image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance'
 
       def image_url
-        if fabric_swatch?
-          item.variant.option_values.colors.first.image_file_name_for_swatch
-        else
-          image.large
-        end
+        image.large
       end
 
       # Note: a line item personalization can be nil
