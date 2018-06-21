@@ -12,6 +12,7 @@ table.table
   tbody
     - if order_return_request.present?
       - order_return_request.return_request_items.each do |item|
+        - next unless item.line_item
         - line_item = Orders::LineItemPresenter.new(item.line_item, item.line_item.order)
         tr
           td
