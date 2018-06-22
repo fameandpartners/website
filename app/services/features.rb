@@ -27,6 +27,7 @@ module Features
     redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
     refer_a_friend_cta_box:        'Enables a CTA box to promote the "Refer a Friend" campaign on all category/search pages. If "i_equal_change" is enabled they will be randomized.',
     sales:                         nil,
+    sample_sale:                   'Enable/Disable Sample Sale content sitewide.',
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,

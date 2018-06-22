@@ -379,14 +379,18 @@ FameAndPartners::Application.routes.draw do
     ########################
     # Sample Sale
     ########################
-    get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
-    get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
+    if Features.active?(:sample_sale)
+        get '/sample-sale' => 'products/flashSale#index'
+        get '/sample-sale/:id' => 'products/flashSale#show'
+    else
+        get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
+        get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
+    end
 
     ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-
     get '/products/fabric-swatches' => 'products/fabric_swatches#index'
 
     scope '/dresses' do
