@@ -6,6 +6,7 @@ require 'tempfile'
 require 'net/sftp'
 namespace :newgistics do
   task upload_product_list: :environment do
+    Rails.logger.debug "DB8 Test"
     # TODO REMOVE ME
     ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
                             to: "samw@fameandpartners.com",
