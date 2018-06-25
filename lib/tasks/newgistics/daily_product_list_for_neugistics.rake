@@ -41,10 +41,12 @@ namespace :newgistics do
       end
     end
 
-    Net::SFTP.start(configatron.newgistics.ftp_uri,
-                    configatron.newgistics.ftp_user,
-                    password: configatron.newgistics.ftp_password) do |sftp|
-      sftp.upload!(temp_file, "input/products/#{Date.today}.csv")
+    if Rails.env.production?
+      Net::SFTP.start(configatron.newgistics.ftp_uri,
+                      configatron.newgistics.ftp_user,
+                      password: configatron.newgistics.ftp_password) do |sftp|
+        sftp.upload!(temp_file, "input/products/#{Date.today}.csv")
+      end
     end
   end
 end
