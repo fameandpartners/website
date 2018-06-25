@@ -10,6 +10,7 @@ namespace :newgistics do
     # TODO REMOVE ME
     ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
                             to: "samw@fameandpartners.com",
+                            cc: "catherinef@fameandpartners.com",
                             subject: "rake newgistics:upload_product_list begin",
                             body: "About to run bundle exec rake newgistics:upload_product_list").deliver
     sleep 0.5
@@ -51,6 +52,7 @@ namespace :newgistics do
     # TODO REMOVE ME
     ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
                             to: "samw@fameandpartners.com",
+                            cc: "catherinef@fameandpartners.com",
                             subject: "rake newgistics:upload_product_list",
                             body: temp_file.read).deliver
     sleep 0.5
