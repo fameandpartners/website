@@ -6,6 +6,13 @@ require 'tempfile'
 require 'net/sftp'
 namespace :newgistics do
   task upload_product_list: :environment do
+    # TODO REMOVE ME
+    ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                            to: "samw@fameandpartners.com",
+                            subject: "rake newgistics:upload_product_list begin",
+                            body: "About to run bundle exec rake newgistics:upload_product_list").deliver
+    sleep 0.5
+
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('daily_products')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
@@ -40,6 +47,12 @@ namespace :newgistics do
                 CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
+    # TODO REMOVE ME
+    ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                            to: "samw@fameandpartners.com",
+                            subject: "rake newgistics:upload_product_list",
+                            body: temp_file.read).deliver
+    sleep 0.5
 
     if Rails.env.production?
       Net::SFTP.start(configatron.newgistics.ftp_uri,
