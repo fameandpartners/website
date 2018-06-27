@@ -11,13 +11,20 @@ class UserCart::DetailsController < UserCart::BaseController
 
     #title('Your Shopping Cart', default_seo_title)
 
+    if spree_user_signed_in?
+      user = current_spree_user.clone 
+      user[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
+    else
+      user = {}
+    end
+    
     respond_with(@user_cart) do |format|
       format.html   {}
       format.json   {
         render json:
         {
           cart: @user_cart.serialize,
-          user: spree_user_signed_in? && current_spree_user
+          user: spree_user_signed_in? && user
         },
        status: :ok
       }
