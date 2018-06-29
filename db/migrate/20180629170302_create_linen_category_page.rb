@@ -14,6 +14,10 @@ class CreateLinenCategoryPage < ActiveRecord::Migration
   end
 
   def up
+
+    # Remove any legacy page with this same URL to avoid conflicts
+    Revolution::Page.where(path: landing_page_properties[:path]).delete_all
+
     page = Revolution::Page.create!(
       path:          landing_page_properties[:path],
       template_path: landing_page_properties[:template_path],
