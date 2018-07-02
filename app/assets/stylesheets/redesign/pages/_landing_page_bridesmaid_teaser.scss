@@ -98,6 +98,10 @@
 
   @media (min-width: $bootstrap-md-width) {
 
+    section {
+      margin: 0;
+    }
+
     .Heading {
       margin-bottom: 30px;
     }
