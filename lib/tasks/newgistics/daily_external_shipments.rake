@@ -129,14 +129,10 @@ namespace :newgistics do
       end
     end
 
-    if ENV['DRY_RUN']=='1'
-      puts `cat #{temp_file.path}`
-    else
-      Net::SFTP.start(configatron.newgistics.ftp_uri,
-                      configatron.newgistics.ftp_user,
-                      password: configatron.newgistics.ftp_password) do |sftp|
+    Net::SFTP.start(configatron.newgistics.ftp_uri,
+                    configatron.newgistics.ftp_user,
+                    password: configatron.newgistics.ftp_password) do |sftp|
       sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
-      end
     end
   end
 end
