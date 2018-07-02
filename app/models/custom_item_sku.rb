@@ -14,6 +14,7 @@ class CustomItemSku
         size:                    size,
         color_id:                color_id,
         fabric_id:               fabric_id,
+        fabric:                  line_item.fabric,
         height:                  height,
         customization_value_ids: customization_value_ids
       ).call

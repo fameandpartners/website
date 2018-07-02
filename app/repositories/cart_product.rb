@@ -18,9 +18,6 @@ class Repositories::CartProduct
 
   def read
     @cart_product ||= begin
-      if line_item.customizations
-        length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
-      end
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         color: Repositories::ProductColors.read(color_id, product.id),
@@ -60,7 +57,6 @@ class Repositories::CartProduct
       result.height         = height
       result.brides_maid = product.price < 1
       result.swatch = product&.category&.category == 'Sample'
-      result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
       result
     end
   end

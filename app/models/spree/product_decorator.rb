@@ -436,11 +436,15 @@ Spree::Product.class_eval do
   end
 
   def self.has_render?(product)
-    product.master.sku.starts_with?("fg10") || product.master.sku.starts_with?("fpg10") || product.master.sku.starts_with?("sw")
+    is_new_product?(product.master.sku)
   end
 
   def self.use_new_pdp?(product_or_line_item)
-    product_or_line_item.sku.starts_with?("fg10") || product_or_line_item.sku.starts_with?("fpg10") || product_or_line_item.sku.starts_with?("sw")
+    is_new_product?(product_or_line_item.sku)
+  end
+
+  def self.is_new_product?(product_id)
+    product_id.downcase.starts_with?("fg10") || product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
   end
 
   def self.format_new_pid(fabric, customizations)
