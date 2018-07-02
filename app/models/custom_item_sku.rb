@@ -14,6 +14,7 @@ class CustomItemSku
         size:                    size,
         color_id:                color_id,
         fabric_id:               fabric_id,
+        fabric:                  line_item.fabric,
         height:                  height,
         customization_value_ids: customization_value_ids
       ).call
@@ -26,12 +27,6 @@ class CustomItemSku
     else
       line_item.personalization.sku
     end
-
-  rescue StandardError => e
-    Raven.capture_exception(e)
-    NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
-
-    "#{line_item.variant.sku}#{Skus::Generator::CUSTOM_MARKER}"
   end
 
   def style_number
