@@ -27,6 +27,12 @@ class CustomItemSku
     else
       line_item.personalization.sku
     end
+
+  rescue StandardError => e
+    Raven.capture_exception(e)
+    NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
+
+    "#{line_item.variant.sku}#{Skus::Generator::CUSTOM_MARKER}"
   end
 
   def style_number
