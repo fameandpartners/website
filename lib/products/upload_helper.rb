@@ -232,9 +232,8 @@ module Products
                               name: customization[:code], 
                               price: customization[:price_usd],
                               price_aud: customization[:price_aud],#TODO: add this to the json being sent
-                              presentation: customization[:customization_presentation],
-                              required_by: customization[:required_by],
-                              group: customization[:group_name]
+                              presentation: customization[:presentation],
+                              manifacturing_sort_order: customization[:manifacturing_sort_order]
                             }
         customizations << { customisation_value: new_customization }
       end

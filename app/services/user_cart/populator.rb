@@ -252,13 +252,12 @@ class Populator
 
           {
             'customisation_value' => {
-                'id' => customization['id'],
-                    'name' => customization['name'],
-                   'group' => customization['group'],
-                   'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
-             'required_by' => customization['required_by'],
-            'presentation' => customization['presentation']
-              }
+              'id' => customization['id'],
+              'name' => customization['name'],
+              'manifacturing_sort_order' => customization['manifacturing_sort_order'],
+              'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
+              'presentation' => customization['presentation']
+            }
           }
 
       end
