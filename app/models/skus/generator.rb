@@ -36,7 +36,7 @@ module Skus
           .sort
           .join("~")
 
-        "#{style_number}~#{sorted_components}"
+        "#{style_number}~#{sorted_components}".upcase
       else
         base_sku = [style_number, size, color]
         # if has_personalization?
