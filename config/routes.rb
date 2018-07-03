@@ -658,6 +658,7 @@ FameAndPartners::Application.routes.draw do
       end
 
       get '/products/:id' => 'products#show'
+      get '/products' => 'products#index'
 
       delete '/rails_cache' => 'systems#clear_cache'
     end
