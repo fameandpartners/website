@@ -12,6 +12,84 @@ module Api
     class ProductsController < ApplicationController
       respond_to :json
 
+      def index
+        pids = params[:pids] || []
+
+        skus = pids.collect { |pid| pid.split("~").first }
+
+        spree_products = Spree::Product
+          .not_deleted
+          .includes(:master)
+          .where(spree_variants: {sku: skus})
+
+        products = pids.collect do |pid|
+          components = pid.split("~")
+          sku = components.shift
+          spree_product = spree_products.find { |p| p.master.sku == sku }
+
+          next unless spree_product
+
+          all_customizations = JSON.parse!(spree_product.customizations)
+
+          pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
+          fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
+          # customization = all_customizations.find { |c|  components.include?(c["customisation_value"]["name"]) }
+
+
+          all_images = spree_product.images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
+          if all_images.blank?
+            all_images = spree_product.images.select { |i| i.attachment_file_name.to_s.downcase.include?('front') }
+          end
+          if all_images.blank?
+            all_images = spree_product.images
+          end
+
+          images = all_images.select do |i| 
+             (i.viewable_type == 'FabricsProduct' && i.viewable_id == fabric_product&.id) || (i.viewable_type == 'ProductColorValue' && i.viewable_id == pcv&.id)
+          end
+          if images.blank?
+            viewable_id = all_images.first&.viewable_id
+            images = all_images.select {|i| i.viewable_id == viewable_id }
+          end
+
+
+          price = spree_product.price_in(current_site_version.currency).amount + 
+            ((fabric_product && !fabric_product.recommended) ? fabric_product.fabric.price_in(current_site_version.currency) : 0) +
+            (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
+
+          {
+            pid: pid,
+            name: spree_product.name,
+            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pvc&.color&.name),
+            media: images
+              .sort_by(&:position)
+              .take(2)
+              .collect do |image| 
+              {
+                type: :photo,
+                src: PRODUCT_IMAGE_SIZES.map {|image_size|
+                  geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
+      
+                  {
+                    name: image_size,
+                    width: image_size == :original ? image.attachment_width : geometry.width,
+                    height: image_size == :original ? image.attachment_height : geometry.height,
+                    url: image.attachment.url(image_size),
+                  }
+                },
+                sortOrder: image.position
+              }
+            end,
+            price: (price*100).to_i
+          }
+        end
+        .compact
+        
+        respond_with products
+      end
+
+
+
       def show
         product = Spree::Product
           .not_deleted
