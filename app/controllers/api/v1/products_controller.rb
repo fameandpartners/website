@@ -187,8 +187,8 @@ module Api
                   previewType: :image,
                   sections: [
                     {
-                      componentTypeId: :Colour,
-                      componentTypeCategory: :Colour,
+                      componentTypeId: :color,
+                      componentTypeCategory: :ColourAndFabric,
                       title: "Select your color",
                       options: colors.map {|c| { code: c.option_value.name, isDefault: false, parentOptionId: nil } },
                       selectionType: :RequiredOne,
@@ -406,14 +406,13 @@ module Api
             colorId: f.fabric.option_value.id,
             colorCode: f.fabric.option_value.name,
 
-            subCategoryName: f.fabric.material,
             colorTitle: f.fabric.option_value.presentation,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
           },
           img: f.fabric.image_url,
-          incompatibleWith: f.recommended ? {} : { allOptions: ['fast_making'] },
+          incompatibleWith: f.recommended ? {} : { allOptions: [ ['fast_making'] ] },
         }
       end
 
@@ -423,8 +422,8 @@ module Api
           code: c.option_value.name,
           isDefault: false,
           title: c.option_value.presentation,
-          componentTypeId: :Colour,
-          componentTypeCategory: :Colour,
+          componentTypeId: :color,
+          componentTypeCategory: :ColourAndFabric,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           isProductCode: true,
           isRecommended: !c.custom,
@@ -441,7 +440,7 @@ module Api
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
           },
-          incompatibleWith: c.custom ? { 'allOptions': ['fast_making'] } : { allOptions: [] },
+          incompatibleWith: c.custom ? { allOptions: [ ['fast_making'] ] } : { allOptions: [] },
         }
       end
 
