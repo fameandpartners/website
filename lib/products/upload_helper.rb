@@ -244,24 +244,6 @@ module Products
       product.customizations
     end
 
-    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline, color_map, customizations)
-      render_urls = { render_urls: color_map }.to_json
-      customization_list.each do |cust|
-        id = cust[:customization_codes].sort.join('_')
-        silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
-        neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
-        render_urls = color_map.to_json
-        cust[:lengths].each do |length|         
-          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
-                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
-          cv.render_urls = render_urls
-          cv.incompatible_ids = length[:incompatability_list].map{ |x| customizations.select{|y| y[:customization_id] == x}.first[:code].downcase }.join(',') #never manipulated so just put it in as ta string and split on return
-          cv.save!
-        end
-      end
-    end
-
     def add_product_height_ranges( product )
       master_variant = product.master
 
@@ -273,20 +255,5 @@ module Products
 
       master_variant.save
     end
-
-    # def update_or_create_base_visualization(product, product_details, silhouette, neckline, color_map)
-    #   id = ''
-    #   render_urls = { render_urls: color_map }.to_json
-    #   product_details[:lengths].each do |length|
-    #      cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
-    #                                      .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
-    #       cv.render_urls = render_urls
-    #       cv.incompatible_ids = "" #never manipulated so just put it in as ta string and split on return
-    #       cv.save!
-    #   end
-
-    # end
-
   end
 end
