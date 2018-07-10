@@ -32,7 +32,7 @@ module Products
 
           #color_map = details[:colors].map{ |x| { color: x } }
           add_product_properties(product, details)
-          fabric_products = add_product_color_options(product, details[:fabrics]) 
+          fabric_products = add_product_color_options(product, details[:fabrics], details[:colors]) 
 
           add_product_variants(product, sizes, fabric_products, 0.0, 0.0) 
           add_product_customizations(product, prod[:customization_list] || [], nil)
@@ -134,23 +134,56 @@ module Products
       product
     end
 
-    def add_product_color_options(product, fabrics)
+    def add_product_color_options(product, fabrics, colors)
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       color_ids = []
-      fabrics.map do |fabric|
-        fab = Fabric.find_by_name(fabric[:code])
-        fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
-        fabric_product.recommended = true
-        fabric_product.save!
-        color = fab.option_value
-        color_ids << color.id
-        #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
-        product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
+      fabrics.each do |fabric|
+        colors.each do |color|
+          fabric_code = "#{fabric[:code]}-#{color[:code]}"
+          fabric_presentation = "#{color[:presentation]} #{fabric[:presentation]}";
+
+          fabric_color_option = find_or_create_fabric_color_option(fabric_code, fabric_presentation)
+          color = find_or_create_color_option(color[:code], color[:presentation])
+
+          fab = Fabric.find_or_create_by_name(fabric_code)
+          fab.presentation = fabric_presentation
+          fab.price_aud = color[:price_aud].to_f + fabric[:price_aud].to_f
+          fab.price_usd = color[:price_usd].to_f + fabric[:price_usd].to_f
+          fab.material = fabric[:presentation]
+          fab.option_fabric_color_value = fabric_color_option
+          fab.option_value = color
+          fab.save!
+
+
+          fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
+          fabric_product.recommended = true
+          fabric_product.save!
+
+          color_ids << color.id
+          #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
+          product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
+        end
       end
 
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_ids).destroy_all
 
       product.fabric_products
+    end
+
+    private def find_or_create_fabric_color_option(name, presentation)
+      fabric_color = Spree::OptionType.fabric_color.option_values.find_or_create_by_name(name)
+      fabric_color.presentation = presentation
+      fabric_color.save!
+      
+      fabric_color
+    end
+
+    private def find_or_create_color_option(name, presentation)
+      color = Spree::OptionType.color.option_values.find_or_create_by_name(name)
+      color.presentation = presentation
+      color.save!
+      
+      color
     end
 
     def add_product_properties(product, details)

@@ -187,8 +187,8 @@ module Api
                   previewType: :image,
                   sections: [
                     {
-                      componentTypeId: :color,
-                      componentTypeCategory: :ColourAndFabric,
+                      componentTypeId: :Color,
+                      componentTypeCategory: :Color,
                       title: "Select your color",
                       options: colors.map {|c| { code: c.option_value.name, isDefault: false, parentOptionId: nil } },
                       selectionType: :RequiredOne,
@@ -210,8 +210,8 @@ module Api
                   previewType: :image,
                   sections: [
                     {
-                      componentTypeId: :Fabric,
-                      componentTypeCategory: :ColourAndFabric,
+                      componentTypeId: :ColorAndFabric,
+                      componentTypeCategory: :ColorAndFabric,
                       selectionType: :RequiredOne,
                       options: fabrics.map {|f| { code: f.fabric.name, isDefault: false, parentOptionId: nil } },
                     }]
@@ -232,8 +232,8 @@ module Api
                   previewType: :cad,
                   sections: [
                     {
-                      componentTypeId: :Customisations,
-                      componentTypeCategory: :Customisations,
+                      componentTypeId: :Customization,
+                      componentTypeCategory: :Customization,
                       title: "Select your customizations",
                       options: customizations.map {|f| { code: f['customisation_value']['name'], isDefault: false, parentOptionId: nil } },
                       selectionType: customizations.length === 3 ? :OptionalOne : :OptionalMultiple,
@@ -342,12 +342,12 @@ module Api
           code: c['customisation_value']['name'],
           isDefault: false,
           title: c['customisation_value']['presentation'],
-          componentTypeId: :LegacyCustomisation,
-          componentTypeCategory: :LegacyCustomisation,
+          componentTypeId: :LegacyCustomization,
+          componentTypeCategory: :LegacyCustomization,
           price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
           isProductCode: true,
           isRecommended: false,
-          type: :LegacyCustomisation,
+          type: :LegacyCustomization,
           sortOrder: c['customisation_value']['position'],
           meta: {
             image: {
@@ -387,8 +387,8 @@ module Api
           code: f.fabric.name,
           isDefault: false,
           title: f.fabric.presentation,
-          componentTypeId: :Fabric,
-          componentTypeCategory: :ColourAndFabric,
+          componentTypeId: :ColorAndFabric,
+          componentTypeCategory: :ColorAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           isProductCode: true,
           isRecommended: f.recommended,
@@ -422,12 +422,12 @@ module Api
           code: c.option_value.name,
           isDefault: false,
           title: c.option_value.presentation,
-          componentTypeId: :color,
-          componentTypeCategory: :ColourAndFabric,
+          componentTypeId: :Color,
+          componentTypeCategory: :Color,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           isProductCode: true,
           isRecommended: !c.custom,
-          type: :Colour,
+          type: :Color,
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
