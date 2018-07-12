@@ -134,7 +134,7 @@ const bundle = function(args) {
   }
 
   return {
-    create: createBundle,
+    create: () => new Promise(createBundle),
   };
 };
 
