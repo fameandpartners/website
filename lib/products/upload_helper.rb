@@ -142,8 +142,8 @@ module Products
           fabric_code = "#{fabric[:code]}-#{color[:code]}"
           fabric_presentation = "#{color[:presentation]} #{fabric[:presentation]}";
 
-          fabric_color_option = find_or_create_fabric_color_option(fabric_code, fabric_presentation)
-          color = find_or_create_color_option(color[:code], color[:presentation])
+          fabric_color_option = find_or_create_fabric_color_option(fabric_code, fabric_presentation, color[:hex])
+          color = find_or_create_color_option(color[:code], color[:presentation], color[:hex])
 
           fab = Fabric.find_or_create_by_name(fabric_code)
           fab.presentation = fabric_presentation
@@ -170,17 +170,19 @@ module Products
       product.fabric_products
     end
 
-    private def find_or_create_fabric_color_option(name, presentation)
+    private def find_or_create_fabric_color_option(name, presentation, hex)
       fabric_color = Spree::OptionType.fabric_color.option_values.find_or_create_by_name(name)
       fabric_color.presentation = presentation
+      fabric_color.value = hex;
       fabric_color.save!
       
       fabric_color
     end
 
-    private def find_or_create_color_option(name, presentation)
+    private def find_or_create_color_option(name, presentation, hex)
       color = Spree::OptionType.color.option_values.find_or_create_by_name(name)
       color.presentation = presentation
+      color.value = hex;
       color.save!
       
       color

@@ -204,6 +204,7 @@ class Repositories::CartProduct
         currency: line_item.currency,
         name: line_item.fabric.presentation,
         fabric_name: line_item.fabric.name,
+        value: line_item.fabric.option_fabric_color_value.value,
         custom_fabric: !line_item.recommended_fabric?
         }
       else
