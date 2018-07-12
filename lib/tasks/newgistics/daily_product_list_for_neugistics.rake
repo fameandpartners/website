@@ -54,6 +54,7 @@ namespace :newgistics do
     end
 
     if Rails.env.production?
+      temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
                       password: configatron.newgistics.ftp_password) do |sftp|
