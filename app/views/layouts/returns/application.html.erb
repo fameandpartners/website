@@ -57,14 +57,15 @@
 
 
     <div id="react-blanket" class="__react_root__"></div>
-    <div id="react-cart" class="__react_root_relaunch__"></div>
+    <div id="react-menu" class="__react_root__"></div>
+    <div id="react-cart" class="__react_root__ __react_root_relaunch__"></div>
 
     <div class="app-container">
-      <div id="react-header" class="__react_root_relaunch__"></div>
+      <div id="react-header" class="__react_root__ __react_root_relaunch__"></div>
       <%= yield %>
     </div>
 
-    <div id="react-footer" class="__react_root_relaunch__"></div>
+    <div id="react-footer" class="__react_root__ __react_root_relaunch__"></div>
 
     <%= javascript_include_tag 'application_returns' %>
     <%= render 'layouts/contentful/javascript' %>
