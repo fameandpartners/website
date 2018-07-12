@@ -140,7 +140,6 @@ const bundle = function(args) {
 
 gulp.task('clean-scripts', () => {
   return gulp.src(config.paths.dist + 'application_bundle.js', {read: false,})
-    .pipe( gulp.src(config.paths.dist + 'shopping_pree_bundle.js', {read: false,}) )
     .pipe(clean());
 });
 
