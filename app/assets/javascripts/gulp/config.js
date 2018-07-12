@@ -16,9 +16,6 @@ module.exports = {
         ReturnsApp: './app/assets/javascripts/storefront/startup/ReturnsApp.jsx',
 
       },
-      shoppingSpreeJS: {
-        ShoppingSpreeApp: './app/assets/javascripts/shopping_spree/App.js',            
-      },
     },
     src: `${baseDir}/*.jsx`,
     dest: baseDir,

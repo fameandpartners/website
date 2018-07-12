@@ -87,7 +87,6 @@ OpsCare.yml
 
 # Ignore JS bundle
 app/assets/javascripts/application_bundle.js
-app/assets/javascripts/shopping_spree_bundle.js
 
 * Ignore local assets
 /spree

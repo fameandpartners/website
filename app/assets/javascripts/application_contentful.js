@@ -138,8 +138,3 @@
 //= require partials/contentful/alert
 //= require partials/contentful/email_subscribe
 //= require partials/contentful/email_subscribe--floating
-
-//-------------------------------
-//      SHOPPING SPREE INIT     |
-//-------------------------------
-//= require partials/init_shopping_spree
