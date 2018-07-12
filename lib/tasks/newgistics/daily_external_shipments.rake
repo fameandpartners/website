@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # uploads all order returns initiated since last scheduled run
@@ -6,6 +7,15 @@ require 'tempfile'
 require 'net/ftp'
 namespace :newgistics do
   task upload_return_list: :environment do
+    # TODO REMOVE ME
+    if Rails.env.production?
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:upload_return_list begin",
+                              body: "About to run bundle exec rake newgistics:upload_return_list").deliver
+    end
+
     COUNTRY_ARRAY = ["Canada",
                      "Mexico",
                      "Albania",
@@ -90,15 +100,17 @@ namespace :newgistics do
         scheduler = Newgistics::NewgisticsScheduler.new
         scheduler.last_successful_run = 5.day.ago.utc.to_datetime.to_s
         scheduler.name = 'daily_returns'
-        scheduler.save
+        scheduler.save unless ENV['DRY_RUN']=='1'
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
     return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
+    return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
+
 
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
-    scheduler.save
+    scheduler.save unless ENV['DRY_RUN']=='1'
   end
 
   def generate_csv(return_request_items)
@@ -120,14 +132,27 @@ namespace :newgistics do
         if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
         csv << [order.number, address.firstname, address.lastname, address.address1,
                 address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
-                "\"#{return_request.item_return.item_return_label.barcode}\"", CustomItemSku.new(li).call, '1']
+                (return_request.item_return.item_return_label.barcode.to_s rescue ""),
+                CustomItemSku.new(li).call, '1']
         end
       end
     end
-    Net::SFTP.start(configatron.newgistics.ftp_uri,
-                    configatron.newgistics.ftp_user,
-                    password: configatron.newgistics.ftp_password) do |sftp|
-    sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+
+    if Rails.env.production?
+      # TODO REMOVE ME
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:upload_return_list",
+                              body: temp_file.read).deliver
+    end
+
+    if Rails.env.production?
+      Net::SFTP.start(configatron.newgistics.ftp_uri,
+                      configatron.newgistics.ftp_user,
+                      password: configatron.newgistics.ftp_password) do |sftp|
+        sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+      end
     end
   end
 end

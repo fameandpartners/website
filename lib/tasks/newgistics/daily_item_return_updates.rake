@@ -2,6 +2,15 @@
 namespace :newgistics do
   task update_item_returns: :environment do
 
+    # TODO REMOVE ME
+    if Rails.env.production?
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:update_item_returns",
+                              body: "About to run bundle exec rake newgistics:update_item_returns").deliver
+    end
+
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('item_return')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
@@ -11,6 +20,16 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     client = Newgistics::NewgisticsClient.new
     res = client.get_returns(scheduler.last_successful_run, current_time)
+
+    # TODO REMOVE ME
+    if Rails.env.production?
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:update_item_returns",
+                              body: res.inspect).deliver
+    end
+
     if res['response'].nil?
       NewRelic::Agent.notice_error(res.to_s)
       Raven.capture_exception(res.to_s)
