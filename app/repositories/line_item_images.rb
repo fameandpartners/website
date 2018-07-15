@@ -14,7 +14,12 @@ module Repositories
         wedding_attrs = image_for_wedding_atelier
         Images::Template.new(wedding_attrs)
       else
-        image_ostruct = Repositories::ProductImages.new(product: product).read(color_id: color_id, cropped: cropped)
+        image_ostruct = Repositories::ProductImages.new(product: product).read(
+          color_id: color_id,
+          cropped: cropped,
+          product_customizations: line_item.personalization&.customization_values,
+          fabric: line_item.fabric
+        )
         Images::Template.new(image_ostruct)
       end
     end

@@ -18,9 +18,6 @@ class Repositories::CartProduct
 
   def read
     @cart_product ||= begin
-      if line_item.customizations
-        length_hash = JSON.parse(line_item.customizations).select{|x| x['customisation_value']['group'] == 'Lengths'}.first
-      end
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
         color: Repositories::ProductColors.read(color_id, product.id),
@@ -60,7 +57,6 @@ class Repositories::CartProduct
       result.height         = height
       result.brides_maid = product.price < 1
       result.swatch = product&.category&.category == 'Sample'
-      result.length = length_hash ? length_hash['customisation_value']['presentation'].split(' ').last : nil
       result
     end
   end
@@ -128,7 +124,7 @@ class Repositories::CartProduct
     end
 
     def size
-      if line_item.product.name == 'Fabric Swatch - Heavy Georgette'
+      if line_item.product&.category&.category == 'Sample'
         nil
       elsif size_id.present?
         Repositories::ProductSize.read(size_id)
@@ -207,6 +203,8 @@ class Repositories::CartProduct
         amount: fabric_price,
         currency: line_item.currency,
         name: line_item.fabric.presentation,
+        fabric_name: line_item.fabric.name,
+        value: line_item.fabric.option_fabric_color_value.value,
         custom_fabric: !line_item.recommended_fabric?
         }
       else

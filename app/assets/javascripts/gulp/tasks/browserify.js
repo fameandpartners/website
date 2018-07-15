@@ -133,37 +133,13 @@ const bundle = function(args) {
       });
   }
 
-  function createShoppingSpree(resolve) {
-    gutil.log('building shopping spree')
-    return generateEntries(_.values(config.paths.shoppingSpreeJS))
-      .then(entries => {
-        const pluginList = isLiveReloadActive ? [ lrload, ] : [];
-
-        const bundler = browserify({
-          entries: entries,
-          cache: {},
-          plugin: pluginList,
-          packageCache: {},
-          transform: config.settings.transform,
-        });
-
-        isWatch && attachBundleUpdate(bundler);
-
-        doBundle(bundler, 'shopping_spree_bundle.js', false);
-        resolve();
-      });
-  }
-  
   return {
-    create: () => {
-      return (new Promise(createShoppingSpree)).then( () => { new Promise(createBundle) } );
-    },
+    create: () => new Promise(createBundle),
   };
 };
 
 gulp.task('clean-scripts', () => {
   return gulp.src(config.paths.dist + 'application_bundle.js', {read: false,})
-    .pipe( gulp.src(config.paths.dist + 'shopping_pree_bundle.js', {read: false,}) )
     .pipe(clean());
 });
 

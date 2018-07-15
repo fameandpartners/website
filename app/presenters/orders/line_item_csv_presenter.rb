@@ -64,7 +64,9 @@ module Orders
 
       def customization_values #TODO: Need to address this situation
         if personalization.present?
-          customs = JSON.parse(item.customizations).map {|x| x['customisation_value']['presentation']}
+          customs = JSON.parse(item.customizations)
+            .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
+            .map {|x| x['customisation_value']['presentation']}
           if customs.empty?
             customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
           end

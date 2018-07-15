@@ -47,7 +47,7 @@ FameAndPartners::Application.configure do
   config.action_controller.asset_host = ENV['RAILS_ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( storefront.js shopping_spree_bundle.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css quiz.css quiz.js application_contentful.css application_contentful.js application_returns.js application_returns.css application_custom_experience.js application_custom_experience.css)
+  config.assets.precompile += %w( storefront.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css quiz.css quiz.js application_contentful.css application_contentful.js application_returns.js application_returns.css application_custom_experience.js application_custom_experience.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true

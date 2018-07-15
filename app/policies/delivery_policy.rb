@@ -26,38 +26,43 @@ module Policies
       "12 - 15 business days" => "9 business days",
       "3 - 4 weeks" => "15 business days",
       "4 - 6 weeks" => "25 business days",
-
+      "6 - 10 weeks" => "40 business days"
     }
 
     CNY_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
                           "12 - 15 business days" => "6 weeks",
                           "3 - 4 weeks" => "6 weeks",
                           "4 - 6 weeks" => "6 weeks",
-                          "6 weeks" => "6 weeks"
+                          "6 weeks" => "6 weeks",
+                          '6 - 10 weeks' => "10 weeks"
                        }
 
     FACTORY_CLOSURE_MAP = { "7 - 10 business days" => "10 - 15 business days",
                             "12 - 15 business days" => "15 - 20 business days",
                             "3 - 4 weeks" => "5 - 6 weeks",
-                            "4 - 6 weeks" => "6 weeks"
+                            "4 - 6 weeks" => "6 weeks",
+                            '6 - 10 weeks' => "10 weeks"
                           }
 
     CNY_DELIVERY_TIMES = [  "6 weeks",
                           "6 weeks",
                           "6 weeks",
-                          "6 weeks"
+                          "6 weeks",
+                          "10 weeks"
                         ]
 
     FACTORY_DELIVERY_TIMES = [  "10 - 15 business days",
                           "15 - 20 business days",
                           "5 - 6 weeks",
-                          "6"
+                          "6",
+                          "10"
                         ]
 
     CNY_CLOSURE_DELIVERY_MAP = {  "7 - 10 business days" => "12 - 15 business days",
                           "12 - 15 business days" => "3 - 4 weeks",
                           "3 - 4 weeks" => "3 - 4 weeks",
-                          "4 - 6 weeks" => "4 - 6 weeks"
+                          "4 - 6 weeks" => "4 - 6 weeks",
+                          '6 - 10 weeks' => '6 - 10 weeks'
                         }
 
     # Max delivery period got from taxons

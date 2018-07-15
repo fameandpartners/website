@@ -63,7 +63,12 @@ class CartItem
     end
 
     def product_images
-      @product_images ||= Repositories::ProductImages.new(product: product).read_all
+      @product_images ||= Repositories::ProductImages.new(product: product).read_all(
+        color_id: line_item_color.id,
+        cropped: true,
+        product_customizations: line_item.personalization&.customization_values,
+        fabric: line_item.fabric
+      )
     end
 
     def line_item_image

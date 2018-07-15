@@ -129,38 +129,10 @@
 
 }
 
-// *** BEGIN: SHOPPING SPREE SPECIFIC STYLES ***
-.btn-shopping-spree-blue {
-  background: $c-clique-blue;
-  color: $c-neutral-white;
-
-  &:hover,
-  &:focus,
-  &:active,
-  &.active {
-    background: darken($c-clique-blue, 10%);
-    color: $c-neutral-white;
-  }
-
-  &.btn-loading {
-
-    &,
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      background: darken($c-clique-blue, 10%);
-    }
-
-  }
-
-}
-
 .btn-tiny {
   padding: 5px;
   text-transform: none;
 }
-// *** END: SHOPPING SPREE SPECIFIC STYLES ***
 
 .btn-close {
   display: inline-block;

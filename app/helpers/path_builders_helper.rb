@@ -66,8 +66,15 @@ module PathBuildersHelper
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
+    is_new_product =  Spree::Product.use_new_pdp?(product)
+
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
       path_parts << "#{product_type}-#{product[:urls][locale]}"
+    elsif product.is_a?(UserCart::CartProductPresenter) && is_new_product
+      fabric = product.fabric.try(:[], :fabric_name)
+      cust = product.customizations || [];
+
+      path_parts << "custom-#{product_type}-#{product.sku.upcase}~#{Spree::Product.format_new_pid(fabric, cust)}"
     else
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
@@ -77,7 +84,7 @@ module PathBuildersHelper
     # But this method also called with ordinar spree product
     color_name = product.respond_to?(:color) && (product.color || {})[:name]
 
-    if options[:color].nil? && color_name.present?
+    if options[:color].nil? && color_name.present? && !is_new_product
       options.merge!({ color: color_name })
     end
 

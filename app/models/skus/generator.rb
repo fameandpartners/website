@@ -11,26 +11,45 @@ module Skus
     # @param [String, Integer] color_id. Example: "12", 12
     # @param [String] height. Example: "Standard"
     # @param [Array<Integer>] customization_value_ids
-    def initialize(style_number:, size:, color_id:, fabric_id:'', height: '', customization_value_ids: [])
+    def initialize(style_number:, size:, color_id: nil, fabric_id:'', fabric: nil, height: '', customization_value_ids: [])
       @style_number            = style_number
       @size                    = size
       @color_id                = color_id
       @fabric_id               = fabric_id
+      @fabric                  = fabric
       @height                  = height
       @customization_value_ids = customization_value_ids&.sort
     end
 
     def call
-      base_sku = [style_number, size, color]
-      # if has_personalization?
-      base_sku << [custom, height]
-      # end
-      if !@fabric_id.blank?
-        base_sku << [fabric]
+      if Spree::Product.is_new_product?(style_number)
+        components = []
+        components << size
+        components << @fabric&.name&.split('-')
+        components << "H#{@height.last}" unless @height.blank?
+        components << @customization_value_ids
+
+        sorted_components = components 
+          .flatten
+          .compact
+          .map(&:to_s)
+          .sort
+          .join("~")
+
+        "#{style_number}~#{sorted_components}".upcase
+      else
+        base_sku = [style_number, size, color]
+        # if has_personalization?
+        base_sku << [custom, height]
+        # end
+        if !@fabric_id.blank?
+          base_sku << [fabric]
+        end
+        base_sku.join.delete(' ').upcase
       end
-      base_sku.join.delete(' ').upcase
     end
 
+    private
     def style_number
       @style_number.to_s
     end
@@ -60,7 +79,7 @@ module Skus
     end
 
     # Height is also considered a customization
-    private def has_personalization?
+    def has_personalization?
       @height.present? || @customization_value_ids.present?
     end
   end

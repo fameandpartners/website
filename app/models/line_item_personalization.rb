@@ -47,10 +47,12 @@ class LineItemPersonalization < ActiveRecord::Base
     values = {}
     values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
-    customization_values.each do |customization_value|
-      value = customization_value['customisation_value']
-      values[value['presentation']] = nil
-    end
+    customization_values
+      .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
+      .each do |customization_value|
+        value = customization_value['customisation_value']
+        values[value['presentation']] = nil
+      end
 
     values
   end

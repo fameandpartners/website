@@ -65,7 +65,7 @@
             <% end %>
           <% end %>
           <dd>
-            <span class="line-item-description-heading">Estimated delivery:</span><br /><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
+            <span class="line-item-description-heading">Estimated delivery:</span><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
             <% if product.making_options && product.making_options.length > 0: %>
               <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
             <% end %>
@@ -73,9 +73,9 @@
 
           <% if product.customizations && product.customizations.length > 0: %>
             <dd>
-              <span class="line-item-description-heading">Customizations:</span><br />
+              <span class="line-item-description-heading">Customizations:</span>
               <% for customization in product.customizations: %>
-                <span><%= customization.name %></span>
+                <span><%= customization.presentation || customization.name %></span>
                 <% unless product.old_price: %>
                   <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
                 <%end%>
