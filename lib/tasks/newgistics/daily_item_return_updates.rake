@@ -2,15 +2,6 @@
 namespace :newgistics do
   task update_item_returns: :environment do
 
-    # TODO REMOVE ME
-    if Rails.env.production?
-      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "samw@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
-                              subject: "rake newgistics:update_item_returns",
-                              body: "About to run bundle exec rake newgistics:update_item_returns").deliver
-    end
-
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('item_return')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
