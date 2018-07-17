@@ -360,6 +360,7 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
     get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
+    get '/larsen-thompson-interview', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
 
     ###########
     # User Cart
