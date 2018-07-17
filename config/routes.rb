@@ -359,6 +359,7 @@ FameAndPartners::Application.routes.draw do
     get '/amfam' => redirect('/wicked-game-collection')
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
+    get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
 
     ###########
     # User Cart
@@ -651,7 +652,7 @@ FameAndPartners::Application.routes.draw do
 
       #upload products.*\.ccf$
       put '/product_upload' => 'product_upload#upload'
-      
+
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
