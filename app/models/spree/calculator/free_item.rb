@@ -9,7 +9,7 @@ module Spree
     # as object we always get line items, as calculable we have Coupon, ShippingMethod
     def compute(object)
       if object.is_a?(Spree::Order)
-        quantity = object.legit_line_items.sum(:quantity)
+        quantity = object.legit_line_items.sum(&:quantity)
 
         promotion = calculable.respond_to?(:promotion) ? calculable.promotion : nil
 
