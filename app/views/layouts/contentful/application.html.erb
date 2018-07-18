@@ -16,26 +16,24 @@
 
     <div id="react-blanket" class="__react_root__"></div>
     <div id="react-menu" class="__react_root__"></div>
-    <div id="react-cart" class="__react_root__"></div>
-    <%= render 'layouts/redesign/shopping_spree' %>
+    <div id="react-cart" class="__react_root__ __react_root_relaunch__"></div>
 
     <div>
       <% unless disable_notices? %>
         <%= render 'layouts/redesign/notices' %>
       <% end %>
 
-      <div id="react-header" class="__react_root__"></div>
+      <div id="react-header" class="__react_root__ __react_root_relaunch__"></div>
       <%= yield %>
     </div>
 
-    <div id="react-footer" class="__react_root__"></div>
+    <div id="react-footer" class="__react_root__ __react_root_relaunch__"></div>
 
 
     <%= render 'google_tag_manager/base' %>
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
-    <%= javascript_include_tag 'shopping_spree_bundle' %>
     <%= javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}" %>
 
   </body>

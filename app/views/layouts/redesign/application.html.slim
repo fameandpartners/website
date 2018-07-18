@@ -14,27 +14,25 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
-    = render 'layouts/redesign/shopping_spree'
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
     #react-blanket.__react_root__
     #react-menu.__react_root__
-    #react-cart.__react_root__
+    #react-cart.__react_root_relaunch__.__react_root__
     #content-container.content-container
       - unless disable_notices?
       = render 'layouts/redesign/notices'
 
-    #react-header.__react_root__
+    #react-header.__react_root_relaunch__.__react_root__
     = yield
 
 
-    #react-footer.__react_root__
+    #react-footer.__react_root_relaunch__.__react_root__
 
     - if Features.active?(:marketing_modals)
       = render '/shared/marketing'
 
     = javascript_include_tag 'storefront'
-    = javascript_include_tag 'shopping_spree_bundle'
 
     = render 'layouts/redesign/javascript'
     = javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"

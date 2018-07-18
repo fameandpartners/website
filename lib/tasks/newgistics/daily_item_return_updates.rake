@@ -11,6 +11,16 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     client = Newgistics::NewgisticsClient.new
     res = client.get_returns(scheduler.last_successful_run, current_time)
+
+    # TODO REMOVE ME
+    if Rails.env.production?
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:update_item_returns",
+                              body: res.inspect).deliver
+    end
+
     if res['response'].nil?
       NewRelic::Agent.notice_error(res.to_s)
       Raven.capture_exception(res.to_s)

@@ -7,36 +7,38 @@ module Products
       upload = JSON.parse(product_json, :symbolize_names => true) 
       upload.map do |prod|
         begin
-
-          min_length = prod[:details][:lengths].min_by {|x| x[:price_aud]}
-
-          product = create_or_update_product(prod, min_length)
-
-          # Not quite - Spree::OptionType.size.option_values.collect(&:name)
-          sizes = %w(
-            US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
-            US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
-          )
-
           details = prod[:details]
 
-          color_map = details[:colors].map{ |x| { color: x } }
+          # Not quite - Spree::OptionType.size.option_values.collect(&:name)
+          if (details[:type] === "swatch")
+            sizes = %w(US0/AU4)
+            category = Category.where(category: 'Sample').first_or_create( { category: "Sample", subcategory: "Fabric" })
+            taxon = nil
+            on_demand = false
+            # taxon = taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
+          else
+            sizes = %w(
+              US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
+              US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
+            )
+            category = nil
+            taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
+            on_demand = true
+          end
 
+          product = create_or_update_product(prod, category, on_demand, taxon)
+
+
+
+          #color_map = details[:colors].map{ |x| { color: x } }
           add_product_properties(product, details)
+          fabric_products = add_product_color_options(product, details[:fabrics], details[:colors]) 
 
-          add_product_color_options(product, details[:colors])
-
-          add_product_variants(product, sizes, details[:colors] || [], 0.0, 0.0)
-
-          add_product_customizations(product, prod[:customization_list] || [], details[:lengths])
-
-          #update_or_create_base_visualization(product, details, details[:silhouette], details[:neckline], color_map)
-
-          update_or_add_customization_visualizations(product, prod[:customization_visualization_list], details[:silhouette], details[:neckline], color_map,  prod[:customization_list])
-
+          add_product_variants(product, sizes, fabric_products, 0.0, 0.0) 
+          add_product_customizations(product, prod[:customization_list] || [], nil)
           add_product_height_ranges( product )
 
-          product.hidden = false #MIGHT MOVE THIS
+          product.hidden = true #MIGHT MOVE THIS
           product.available_on = product.created_at
 
           product.save!
@@ -57,7 +59,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod, min_length)
+    def create_or_update_product(prod, category, on_demand, taxon)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -67,19 +69,21 @@ module Products
       product = master.try(:product)
 
       if product.blank?
-
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
+        product = Spree::Product.new(sku: sku, featured: false, on_demand: on_demand, available_on: @available_on)
       end
 
+      ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
 
       taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_name(x)&.id }
+      taxon_ids << taxon.id if taxon
 
       attributes = {
         name: prod[:details][:name],
         price: 0.0.to_f,
         description: prod[:details][:description],
         taxon_ids: taxon_ids,
-        available_on: @available_on || product.available_on #NEED TO ADD THIS TO JSON
+        available_on: @available_on || product.available_on, #NEED TO ADD THIS TO JSON
+        category: category
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
@@ -106,18 +110,17 @@ module Products
       product.save!
 
       #add slow making
-      prdmo = ProductMakingOption.new(  { product_id: product.id,
+      prdmo = ProductMakingOption.new(  {product_id: product.id,
                                         active: true,
                                         option_type: 'slow_making',
                                         price: -0.1,
-                                        currency: 'USD' },
+                                        currency: 'USD'},
                                         without_protection: true
                                       )
       # only connect the 2 if not already done before
       if prdmo.save
         product.making_options << prdmo
       end
-
       new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
@@ -125,23 +128,64 @@ module Products
       #trying without this
 
      #if min_length[:price_aud].present? || min_length[:price_usd].present?
-         add_product_prices(product, 0.0, 0.0)
+        add_product_prices(product, 0.0, 0.0)
        #end
      # info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end
 
-    def add_product_color_options(product, available_colors)
+    def add_product_color_options(product, fabrics, colors)
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
       color_ids = []
-      available_colors.map do |available_color|
-        color = Spree::OptionValue.find_by_presentation(available_color)
-        color_ids << color.id
-        #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
-        product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
+      fabrics.each do |fabric|
+        colors.each do |color|
+          fabric_code = "#{fabric[:code]}-#{color[:code]}"
+          fabric_presentation = "#{color[:presentation]} #{fabric[:presentation]}";
+
+          fabric_color_option = find_or_create_fabric_color_option(fabric_code, fabric_presentation, color[:hex])
+          color = find_or_create_color_option(color[:code], color[:presentation], color[:hex])
+
+          fab = Fabric.find_or_create_by_name(fabric_code)
+          fab.presentation = fabric_presentation
+          fab.price_aud = color[:price_aud].to_f + fabric[:price_aud].to_f
+          fab.price_usd = color[:price_usd].to_f + fabric[:price_usd].to_f
+          fab.material = fabric[:presentation]
+          fab.option_fabric_color_value = fabric_color_option
+          fab.option_value = color
+          fab.save!
+
+
+          fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
+          fabric_product.recommended = true
+          fabric_product.save!
+
+          color_ids << color.id
+          #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
+          product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
+        end
       end
 
       product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', color_ids).destroy_all
+
+      product.fabric_products
+    end
+
+    private def find_or_create_fabric_color_option(name, presentation, hex)
+      fabric_color = Spree::OptionType.fabric_color.option_values.find_or_create_by_name(name)
+      fabric_color.presentation = presentation
+      fabric_color.value = hex;
+      fabric_color.save!
+      
+      fabric_color
+    end
+
+    private def find_or_create_color_option(name, presentation, hex)
+      color = Spree::OptionType.color.option_values.find_or_create_by_name(name)
+      color.presentation = presentation
+      color.value = hex;
+      color.save!
+      
+      color
     end
 
     def add_product_properties(product, details)
@@ -164,7 +208,7 @@ module Products
       product
     end
 
-    def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+    def add_product_variants(product, sizes, fabrics_products, price_in_aud, price_in_usd)  
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -175,33 +219,35 @@ module Products
       product.reload
 
       sizes.each do |size_name|
-        colors.each do |color_name|
-          size_value  = size_option.option_values.where(name: size_name).first
-          color_value = color_option.option_values.where('LOWER(name) = ?', color_name.downcase).first
+        size_value  = size_option.option_values.where(name: size_name).first
+        product.variants
+        size_variants = product.variants.select { |variant| variant.option_value_ids.include?(size_value.id)}
 
-          next if size_value.blank? || color_value.blank?
+        fabrics_products.each do |fabrics_product|
+          fabric_color = fabrics_product.fabric.option_fabric_color_value
 
-          variant = product.variants.detect do |variant|
-            [size_value.id, color_value.id].all? do |id|
-              variant.option_value_ids.include?(id)
-            end
-          end
+          next if size_value.blank? || fabric_color.blank?
+
+          variant = size_variants.detect {|variant| variant.option_value_ids.include?(fabric_color.id) }
           unless variant.present?
             variant = product.variants.build
-            variant.option_values = [size_value, color_value]
+            variant.option_values = [size_value, fabric_color]
           end
 
           # Avoids errors with Spree hooks updating lots and lots of orders.
           # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-          # variant.send :write_attribute, :on_demand, true. #TODO: Address this shit why do i need it? Cant I just wrap the save in the same unless?
+          variant.send :write_attribute, :on_demand, true
+          Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+          Spree::Variant.skip_callback( :save, :after, :process_backorders )
+          Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
 
-          variant.save
+          variant.save!
 
-          aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+          aud = variant.prices.where(currency: "AUD").first_or_create
           aud.amount = price_in_aud
           aud.save!
 
-          usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+          usd = variant.prices.where(currency: "USD").first_or_create
           usd.amount = price_in_usd
           usd.save!
 
@@ -209,49 +255,28 @@ module Products
         end
       end
 
-      variants
-
       product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, custs, lengths)
       customizations = []
 
-      custs.each do |customization|
+      custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each do |customization|
         new_customization = {
                               id: customization[:code].downcase, 
-                              name: customization[:customization_presentation].downcase.gsub(' ', '-'), 
+                              name: customization[:code], 
                               price: customization[:price_usd],
                               price_aud: customization[:price_aud],#TODO: add this to the json being sent
-                              presentation: customization[:customization_presentation],
-                              required_by: customization[:required_by],
-                              group: customization[:group_name]
+                              presentation: customization[:presentation],
+                              manifacturing_sort_order: customization[:manifacturing_sort_order]
                             }
         customizations << { customisation_value: new_customization }
       end
-      product.lengths = { available_lengths: lengths }.to_json
+      #product.lengths = { available_lengths: lengths }.to_json # Dont think I need this anymore
       product.customizations = customizations.to_json
       product.save
 
       product.customizations
-    end
-
-    def update_or_add_customization_visualizations(product, customization_list, default_silhouette, default_neckline, color_map, customizations)
-      render_urls = { render_urls: color_map }.to_json
-      customization_list.each do |cust|
-        id = cust[:customization_codes].sort.join('_')
-        silhouette = cust[:silhouette].blank? ? default_silhouette : cust[:silhouette]
-        neckline = cust[:neckline].blank? ? default_neckline : cust[:neckline]
-        render_urls = color_map.to_json
-        cust[:lengths].each do |length|         
-          cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
-                                         .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
-          cv.render_urls = render_urls
-          cv.incompatible_ids = length[:incompatability_list].map{ |x| customizations.select{|y| y[:customization_id] == x}.first[:code].downcase }.join(',') #never manipulated so just put it in as ta string and split on return
-          cv.save!
-        end
-      end
     end
 
     def add_product_height_ranges( product )
@@ -265,20 +290,5 @@ module Products
 
       master_variant.save
     end
-
-    # def update_or_create_base_visualization(product, product_details, silhouette, neckline, color_map)
-    #   id = ''
-    #   render_urls = { render_urls: color_map }.to_json
-    #   product_details[:lengths].each do |length|
-    #      cv = CustomizationVisualization.where(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline: neckline)
-    #                                      .first_or_create(customization_ids: id, product_id: product.id, length: length[:name], silhouette: silhouette, neckline:neckline)
-        
-    #       cv.render_urls = render_urls
-    #       cv.incompatible_ids = "" #never manipulated so just put it in as ta string and split on return
-    #       cv.save!
-    #   end
-
-    # end
-
   end
 end

@@ -75,6 +75,7 @@ class GlobalSku
         size:                    size,
         color_id:                color&.id,
         fabric_id:               fabric&.id,
+        fabric:                  fabric,
         height:                  height,
         customization_value_ids: customizations&.map { |x| x['customisation_value']['id'] }.sort
       ).call

@@ -151,7 +151,7 @@ module FameAndPartners
       config.middleware.insert_before 0, "Rack::Cors" do
         allow do
           origins '*'
-          resource '*', :headers => :any, :methods => [:get, :post, :put, :options]
+          resource '*', :headers => :any, :methods => [:get, :post, :put, :options, :delete]
         end
       end
     end
@@ -159,6 +159,6 @@ module FameAndPartners
     # Add middleware to proxy requests to react app
     config.paths.add File.join('app', 'middleware'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'middleware', '*')]
-    config.middleware.use WebpackProxy, {ssl_verify_none: true}
+    config.middleware.insert_before 0, WebpackProxy, {ssl_verify_none: true}
   end
 end

@@ -98,7 +98,9 @@ module Orders
       if personalizations?
         if item.customizations
           customs = Array.wrap(
-              JSON.parse(item.customizations).collect { |custom|
+              JSON.parse(item.customizations)
+              .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
+              .collect { |custom|
                 [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
               }
           )
@@ -128,7 +130,9 @@ module Orders
       if item.customizations.nil?
         Array.wrap(personalization.customization_values.collect{|x| x['customisation_value']['id']})
       else
-        Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['id']})
+        JSON.parse(item.customizations)
+          .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
+          .collect{|x| x['customisation_value']['id']}
       end
     end
 
@@ -137,7 +141,9 @@ module Orders
       if item.customizations.nil?
         Array.wrap(personalization.customization_values.collect{|x| x['customisation_value']['presentation']})
       else
-        Array.wrap(JSON.parse(item.customizations).collect{|x| x['customisation_value']['presentation']})
+        JSON.parse(item.customizations)
+          .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
+          .collect{|x| x['customisation_value']['presentation']}
       end
     end
 

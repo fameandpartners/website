@@ -132,7 +132,8 @@ describe GlobalSku::Create do
             style_number:            'ABC123',
             size:                    'US0/AU4',
             color_id:                color_red.id,
-            fabric_id:                nil, 
+            fabric_id:                nil,
+            fabric:                   nil,
             height:                  'petite',
             customization_value_ids: []
           ).and_call_original
@@ -162,6 +163,7 @@ describe GlobalSku::Create do
             size:                    'US0/AU4',
             color_id:                color_red.id,
             fabric_id:                nil, 
+            fabric:                   nil,
             height:                  'petite',
             customization_value_ids: [customization_fabric.id, customization_fit.id]
           ).and_call_original

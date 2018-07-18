@@ -16,8 +16,6 @@ Spree::Product.class_eval do
   has_many  :customisation_values,
             order: 'customisation_values.position ASC'
 
-  has_many :customization_visualizations
-
   has_many :layer_cads,
            order: 'layer_cads.position ASC'
   has_many :product_color_values,
@@ -429,6 +427,29 @@ Spree::Product.class_eval do
 
   def delivery_period_policy
     @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
+  end
+
+  def has_render?
+    self.class.has_render?(self)
+  end
+
+  def self.has_render?(product)
+    is_new_product?(product.master.sku)
+  end
+
+  def self.use_new_pdp?(product_or_line_item)
+    is_new_product?(product_or_line_item.sku)
+  end
+
+  def self.is_new_product?(product_id)
+    product_id.downcase.starts_with?("fg10") || product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
+  end
+
+  def self.format_new_pid(fabric, customizations)
+    components = [
+      fabric.split('-'),
+      customizations.map{|c| c['customisation_value']['name']}
+    ].flatten.compact.sort(&:casecmp).join("~")
   end
 
   private

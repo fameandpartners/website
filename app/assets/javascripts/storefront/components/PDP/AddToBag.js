@@ -18,7 +18,6 @@ class AddToBag extends React.Component {
         this.state = {
             sending: false,
             modalIsOpen: false,
-            shopping_spree_enabled: cookies.get('shopping_spree_id') != null
         };
 
         this.openModal = this.openModal.bind(this);
@@ -26,7 +25,6 @@ class AddToBag extends React.Component {
         this.buildCustomizationIds = this.buildCustomizationIds.bind(this);
         this.calculateCustomizationTotal = this.calculateCustomizationTotal.bind(this);
         this.addToBag = this.addToBag.bind(this);
-        this.addToShoppingSpree = this.addToShoppingSpree.bind(this);
     }
 
     openModal() {
@@ -46,14 +44,6 @@ class AddToBag extends React.Component {
         }
         // Filter active addonOptions
         return addons.addonOptions.filter(a => a.active).map(a => parseInt(a.id, 10));
-    }
-
-    addToShoppingSpree() {
-        const { customize, actions, product } = this.props;
-        let productPrice = product.price.price.amount
-        let priceWithoutDecimals = productPrice.substring(0, productPrice.indexOf('.'));
-
-        window.addToShoppingSpree( product.id, product.name, product.description, priceWithoutDecimals, product.images[0].table.product, window.location.href , customize.color, customize.customization);
     }
 
     addToBag() {
@@ -166,17 +156,11 @@ class AddToBag extends React.Component {
                             </a>
                     );
                 }
-                if( this.state.shopping_spree_enabled ) {
-                    return (
-                            <a href="javascript:;" onClick={this.addToShoppingSpree} className="btn btn-black btn-lrg">ADD TO CLIQUE</a>
-                    );
-
-                } else {
-
-                    return (
-                            <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
-                    );
-                }
+                
+                return (
+                        <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
+                );
+                
             })()}
                 <ul className="est-delivery">
                 <li className="shipping">Free Shipping</li>

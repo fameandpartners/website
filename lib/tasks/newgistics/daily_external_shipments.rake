@@ -7,6 +7,7 @@ require 'tempfile'
 require 'net/ftp'
 namespace :newgistics do
   task upload_return_list: :environment do
+
     COUNTRY_ARRAY = ["Canada",
                      "Mexico",
                      "Albania",
@@ -129,13 +130,21 @@ namespace :newgistics do
       end
     end
 
-    if ENV['DRY_RUN']=='1'
-      puts `cat #{temp_file.path}`
-    else
+    if Rails.env.production?
+      # TODO REMOVE ME
+      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                              to: "samw@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com",
+                              subject: "rake newgistics:upload_return_list",
+                              body: temp_file.read).deliver
+    end
+
+    if Rails.env.production?
+      temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
                       password: configatron.newgistics.ftp_password) do |sftp|
-      sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+        sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
       end
     end
   end

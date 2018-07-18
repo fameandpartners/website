@@ -57,8 +57,8 @@ end
 configatron.es_url = ENV['ES_URL2']
 
 configatron.elasticsearch.indices do |index|
-  index.spree_products = :spree_products
-  index.color_variants = :color_variants
+  index.spree_products = ENV['ES_INDEX_SPREE_PRODUCTS'] || :spree_products
+  index.color_variants = ENV['ES_INDEX_COLOR_VARIANTS'] || :color_variants
 end
 
 configatron.bergen do |bergen|
@@ -92,6 +92,11 @@ configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
+
+configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
+configatron.fame_webclient_regex = /^((\/bridesmaids-search(\/){0,1}[\w?&=]*)|\/static|\/dresses-new|\/dresses\/(custom-dress|dress-.*-[0-9]*))/
+configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
+
 
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']
 configatron.order_bot_client_pass = ENV['ORDERBOT_PASS']

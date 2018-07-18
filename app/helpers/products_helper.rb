@@ -41,25 +41,6 @@ module ProductsHelper
     color_option.present? ? color_option.option_values : []
   end
 
-  def fabric_swatch_colors
-    Rails.cache.fetch('fabric_swatches_heavy') do
-      prd = Spree::Product.find_by_name('Fabric Swatch - Heavy Georgette')
-      prd.variants.map do |swatch_variant|
-        {
-          variant_id: swatch_variant.id,
-          product_name: prd.name,
-          product_id: swatch_variant.product.id,
-          sku: swatch_variant.sku,
-          color_name: swatch_variant.dress_color.presentation,
-          color_id: swatch_variant.dress_color.id,
-          color_hex: swatch_variant.dress_color.value,
-          color_image_url: "#{configatron.asset_host}/assets/product-color-images/#{swatch_variant.dress_color.image_file_name}",
-          price: swatch_variant.prices.first.amount
-        }
-      end
-    end
-  end
-
   # Temporarily allow order of otherwise unavailable garments
   def custom_order?
     params[:custom_order] == '2015-09' || params[:custom_order] == '2015-10'
