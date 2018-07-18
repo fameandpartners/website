@@ -412,4 +412,9 @@ Spree::Order.class_eval do
     end
   end
 
+  def legit_line_items
+    self.line_items.reject { |x|
+      x.product.name.downcase == 'return_insurance' rescue false
+    }
+  end
 end

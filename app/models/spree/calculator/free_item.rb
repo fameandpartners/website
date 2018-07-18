@@ -19,7 +19,7 @@ module Spree
 
           count = (quantity / (rule_items_count + 1))
 
-          prices = object.line_items.map{ |item| [item.price] * item.quantity }.flatten.sort
+          prices = object.legit_line_items.map{ |item| [item.price] * item.quantity }.flatten.sort
 
           amounts = prices.first(count)
 
