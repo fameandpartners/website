@@ -7,7 +7,6 @@ require 'tempfile'
 require 'net/ftp'
 namespace :newgistics do
   task upload_return_list: :environment do
-
     COUNTRY_ARRAY = ["Canada",
                      "Mexico",
                      "Albania",
@@ -92,17 +91,21 @@ namespace :newgistics do
         scheduler = Newgistics::NewgisticsScheduler.new
         scheduler.last_successful_run = 5.day.ago.utc.to_datetime.to_s
         scheduler.name = 'daily_returns'
-        scheduler.save unless ENV['DRY_RUN']=='1'
+        #scheduler.save unless ENV['DRY_RUN']=='1'
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
-    return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
+    yesterday = (Date.parse(ENV["SPECIFIC_DATE"])-1.day).to_s
+    scheduler.last_successful_run = "#{yesterday}T07:00:00+00:00"
+    current_time = "#{ENV['SPECIFIC_DATE']}T07:00:00+00:00"
 
+    return_request_items = ReturnRequestItem.where('created_at >= ? AND created_at <= ?', scheduler.last_successful_run, current_time) # get returns initiated since last run
+    #return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
+    #return_request_items = ReturnRequestItem.last(50)
 
     generate_csv(return_request_items)
-    scheduler.last_successful_run = current_time.to_s
-    scheduler.save unless ENV['DRY_RUN']=='1'
+    #scheduler.last_successful_run = current_time.to_s
+    #scheduler.save unless ENV['DRY_RUN']=='1'
   end
 
   def generate_csv(return_request_items)
@@ -130,22 +133,23 @@ namespace :newgistics do
       end
     end
 
-    if Rails.env.production?
-      # TODO REMOVE ME
-      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "samw@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
-                              subject: "rake newgistics:upload_return_list",
-                              body: temp_file.read).deliver
-    end
+    `cp #{temp_file.path} "/Users/user/Desktop/sftp/input/External Shipments/#{ENV["SPECIFIC_DATE"][0..9]}.csv"`
+    #if Rails.env.production?
+    #  # TODO REMOVE ME
+    #  ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+    #                          to: "samw@fameandpartners.com",
+    #                          cc: "catherinef@fameandpartners.com",
+    #                          subject: "rake newgistics:upload_return_list",
+    #                          body: temp_file.read).deliver
+    #end
 
-    if Rails.env.production?
-      temp_file.rewind
-      Net::SFTP.start(configatron.newgistics.ftp_uri,
-                      configatron.newgistics.ftp_user,
-                      password: configatron.newgistics.ftp_password) do |sftp|
-        sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
-      end
-    end
+    #if Rails.env.production?
+    #  temp_file.rewind
+    #  Net::SFTP.start(configatron.newgistics.ftp_uri,
+    #                  configatron.newgistics.ftp_user,
+    #                  password: configatron.newgistics.ftp_password) do |sftp|
+    #    sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+    #  end
+    #end
   end
 end
