@@ -651,6 +651,8 @@ FameAndPartners::Application.routes.draw do
 
       #upload products.*\.ccf$
       put '/product_upload' => 'product_upload#upload'
+
+      get 'track' => 'tracking#track'
       
       # user session
       devise_scope :spree_user do

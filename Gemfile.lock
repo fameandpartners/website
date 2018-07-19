@@ -372,10 +372,10 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
-    elasticsearch (6.0.1)
-      elasticsearch-api (= 6.0.1)
-      elasticsearch-transport (= 6.0.1)
-    elasticsearch-api (6.0.1)
+    elasticsearch (6.1.0)
+      elasticsearch-api (= 6.1.0)
+      elasticsearch-transport (= 6.1.0)
+    elasticsearch-api (6.1.0)
       multi_json
     elasticsearch-dsl (0.1.5)
     elasticsearch-model (5.0.0)
@@ -392,7 +392,7 @@ GEM
     elasticsearch-ruby (0.0.4)
       activesupport (>= 3.0.0)
       thrift
-    elasticsearch-transport (6.0.1)
+    elasticsearch-transport (6.1.0)
       faraday
       multi_json
     equalizer (0.0.11)
@@ -412,9 +412,6 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffaker (1.15.0)
     ffi (1.9.14)
-    firebase (0.2.6)
-      httpclient
-      json
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.38.0)
@@ -571,7 +568,7 @@ GEM
       oauth2 (>= 0.5.0)
     gyoku (0.4.6)
       builder (>= 2.1.2)
-    hashie (3.5.5)
+    hashie (3.5.7)
     hashr (0.0.22)
     highline (1.6.18)
     hike (1.2.3)
@@ -635,7 +632,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     netrc (0.10.3)
-    newrelic_rpm (3.16.3.323)
+    newrelic_rpm (5.2.0.345)
     nokogiri (1.5.11)
     nori (1.1.5)
     oa-core (0.3.2)
@@ -882,7 +879,7 @@ GEM
     test-unit (3.1.5)
       power_assert
     thor (0.19.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     thrift (0.11.0.0)
     tilt (1.4.1)
     timecop (0.8.0)
@@ -989,7 +986,6 @@ DEPENDENCIES
   execjs (~> 2)
   factory_girl_rails (= 4.2.1)
   fame_favicon!
-  firebase (~> 0.2.6)
   fog (~> 1.38.0)
   fog-aws (~> 1.2.0)
   foreman

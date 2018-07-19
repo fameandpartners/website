@@ -32,7 +32,6 @@ gem 'net-ssh'
 gem 'newrelic_rpm'
 gem 'sentry-raven'
 gem 'customerio', '~> 1.0.0'
-gem 'firebase', '~> 0.2.6'
 
 # Engines
 path 'engines' do

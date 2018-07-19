@@ -86,7 +86,7 @@
               <% if product.size != null : %>
               <dd><span class="line-item-description-heading">Size:</span> <span><%= product.size.presentation %></span></dd>
               <% end %>
-              <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.name %></span></dd>
+              <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.presentation %></span></dd>
 
               <% if product.from_wedding_atelier: %>
                 <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
