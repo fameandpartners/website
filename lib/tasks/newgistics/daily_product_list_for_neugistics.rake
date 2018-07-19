@@ -6,24 +6,28 @@ require 'tempfile'
 require 'net/sftp'
 namespace :newgistics do
   task upload_product_list: :environment do
+
     Rails.logger.debug "DB8 Test" # sadly this doesn't appear in logs anywhere
 
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('daily_products')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
       scheduler.name = 'daily_products'
-      scheduler.save
+      #scheduler.save
     end
+    yesterday = (Date.parse(ENV["SPECIFIC_DATE"])-1.day).to_s
+    scheduler.last_successful_run = "#{yesterday}T07:00:00+00:00"
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    current_time = "#{ENV['SPECIFIC_DATE']}T07:00:00+00:00"
 
-    line_items = Spree::LineItem.where('updated_at >= ?', scheduler.last_successful_run)
+    line_items = Spree::LineItem.where('updated_at >= ? AND updated_at < ?', scheduler.last_successful_run, current_time)
                                 .reject{|x| x.product.name.downcase == 'return_insurance'}
-                                .select { |li| li.order.state == 'complete' && li.order.completed_at >=  scheduler.last_successful_run} # get line Items for completed orders since last run
+                                .select { |li| li.order.state == 'complete' && li.order.completed_at >=  scheduler.last_successful_run && li.order.completed_at < current_time } # get line Items for completed orders since last run
     unique_items = line_items&.uniq { |li| CustomItemSku.new(li).call } # only care about unique skus
 
     generate_csv_products(unique_items)
     scheduler.last_successful_run = current_time.to_s
-    scheduler.save
+    #scheduler.save
   end
 
   def generate_csv_products(line_items)
@@ -43,23 +47,24 @@ namespace :newgistics do
       end
     end
 
-    if Rails.env.production?
-      # TODO REMOVE ME
-      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "samw@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
-                              subject: "rake newgistics:upload_product_list",
-                              body: temp_file.read).deliver
-      sleep 0.5
-    end
+    `cp #{temp_file.path} "/Users/user/Desktop/sftp/input/products/#{ENV["SPECIFIC_DATE"][0..9]}.csv"`
+    #if Rails.env.production?
+    #  # TODO REMOVE ME
+    #  ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+    #                          to: "samw@fameandpartners.com",
+    #                          cc: "catherinef@fameandpartners.com",
+    #                          subject: "rake newgistics:upload_product_list",
+    #                          body: temp_file.read).deliver
+    #  sleep 0.5
+    #end
 
-    if Rails.env.production?
-      temp_file.rewind
-      Net::SFTP.start(configatron.newgistics.ftp_uri,
-                      configatron.newgistics.ftp_user,
-                      password: configatron.newgistics.ftp_password) do |sftp|
-        sftp.upload!(temp_file, "input/products/#{Date.today}.csv")
-      end
-    end
+    #if Rails.env.production?
+    #  temp_file.rewind
+    #  Net::SFTP.start(configatron.newgistics.ftp_uri,
+    #                  configatron.newgistics.ftp_user,
+    #                  password: configatron.newgistics.ftp_password) do |sftp|
+    #    sftp.upload!(temp_file, "input/products/#{Date.today}.csv")
+    #  end
+    #end
   end
 end
