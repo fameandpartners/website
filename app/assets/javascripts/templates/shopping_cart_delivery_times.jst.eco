@@ -19,7 +19,7 @@
               <% if (product.size && product.size.presentation): %>
                 <dd><span class="line-item-description-heading">Size:</span> <%= product.size.presentation %></dd>
               <% end %>
-              <dd><span class="line-item-description-heading">Color:</span> <%= product.color.name %></dd>
+              <dd><span class="line-item-description-heading">Color:</span> <%= product.color.presentation %></dd>
             </div>
             <div class="price-wrapper main"><%= product.price.display_price %></div>
           </div>
