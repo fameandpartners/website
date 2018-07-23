@@ -83,16 +83,6 @@ namespace :import do
     end
     
   end
-  
-  namespace :render3d do
-    desc 'Import images for songs (specify directory location w/ LOCATION=/path/to/directory)'
-    task :images => :environment do
-      validate_location!
-
-      uploader = BatchUpload::Render3dImagesUploader.new(location)
-      uploader.process!
-    end
-  end
 end
 
 def validate_location!

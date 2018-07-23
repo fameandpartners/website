@@ -22,13 +22,6 @@ The folder structure of the images should be the following (in S3)
 
 ** Be careful with folder names, they should be all lowercase and filenames are all uppercase **
 
-### 3D Renders
-
-  `"#{bucket_name}/wedding_atelier/dresses/180x260/grey/"`
-  `"#{bucket_name}/wedding_atelier/dresses/180x260/white/"`
-  `"#{bucket_name}/wedding_atelier/dresses/280x404/"`
-  `"#{bucket_name}/wedding_atelier/dresses/900x1300/"`
-  `"#{bucket_name}/wedding_atelier/dresses/1800x2600/"`
 
 ### Real images (with models)
 

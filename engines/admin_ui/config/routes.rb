@@ -90,11 +90,6 @@ AdminUi::Engine.routes.draw do
       end
     end
     resources :variants
-    resources :render3d_images do
-      collection do
-        get 'option_values/:product_id' => 'render3d_images#option_values', as: 'option_values'
-      end
-    end
 
     resources :product_colors do
       collection do
