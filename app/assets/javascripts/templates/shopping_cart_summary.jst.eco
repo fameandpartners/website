@@ -8,11 +8,7 @@
           <a href="<%= product.path %>">
         <% end %>
           <% if product.name != "Gift" : %>
-            <% if product.swatch: %>
-              <img class="img-responsive cart-item-image" src="<%= product.color.image_file_name %>" />
-            <% else: %>
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
-            <% end %>
+            <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
           <% end %>
           <% if product.price_drop_au_product: %>
             <div class="ribbon-wrapper PriceDrop">
