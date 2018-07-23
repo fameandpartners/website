@@ -113,8 +113,9 @@ class Confirmation extends React.PureComponent {
                    :
                     <p className="font-sans-serif">
                       Fame and Partners – Returns <br />
-                      15905 Commerce Way <br />
-                      Cerritos, CA, 90703
+                      C/O - Newgistics <br />
+                      1200 Worldwide Boulevard <br />
+                      Hebron, KY 41048
                     </p>
                  }
                 </div>
