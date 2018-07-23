@@ -231,7 +231,7 @@ Spree::Product.class_eval do
 
   def custom_fabrics_with_description
     fabrics_arry = []
-    fabric_products.custom.each do |fp|
+    fabric_products.active.custom.each do |fp|
         fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true)
         fabric_hsh[:fabric][:description] = fp.description
         fabrics_arry << fabric_hsh
