@@ -32,7 +32,6 @@ class UserCart::DetailsController < UserCart::BaseController
   end
 
   def set_user_cart
-    current_order.updater.update_totals
     @user_cart = user_cart_resource.read
   end
 end
