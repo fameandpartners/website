@@ -1,6 +1,10 @@
 module Orders
   class LineItemCSVPresenter
     class << self
+      PRODUCTS_TO_IGNORE = [
+        'return_insurance',
+        'sw'
+      ]
 
       attr_reader :line
 
@@ -127,6 +131,9 @@ module Orders
         else
           variant_sku
         end
+
+      def ignore_line?
+        PRODUCTS_TO_IGNORE.include?(style.downcase)
       end
 
       private

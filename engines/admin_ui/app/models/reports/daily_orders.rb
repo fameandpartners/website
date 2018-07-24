@@ -50,6 +50,10 @@ module Reports
         self.each do |r|
           line.set_line r
 
+          if line.ignore_line?
+            next
+          end
+
           csv << [
             line.order_number,
             line.site_version,

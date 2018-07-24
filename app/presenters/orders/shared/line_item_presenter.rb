@@ -98,7 +98,11 @@ module Orders
       # end
 
       def fabric_swatch?
-        item.product&.category&.category == 'Sample'
+        item.fabric_swatch?
+      end
+
+      def return_insurance?
+        item.return_insurance?
       end
 
       def personalizations?
