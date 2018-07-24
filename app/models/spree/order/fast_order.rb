@@ -196,8 +196,8 @@ module Spree
 
         def color
           "CASE WHEN lip.id > 0
-              THEN (SELECT name FROM spree_option_values WHERE id = lip.color_id)
-              ELSE (SELECT spree_option_values.name FROM spree_option_values
+              THEN (SELECT presentation FROM spree_option_values WHERE id = lip.color_id)
+              ELSE (SELECT spree_option_values.presentation FROM spree_option_values
                 INNER JOIN spree_option_values_variants ON spree_option_values.id = spree_option_values_variants.option_value_id
                 INNER JOIN spree_option_types ON spree_option_types.id = spree_option_values.option_type_id
                 WHERE spree_option_types.name = 'dress-color' AND spree_option_values_variants.variant_id = sv.id)

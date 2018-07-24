@@ -41,7 +41,7 @@ module Orders
       end
 
       def colour_name
-        colour.try(:name) || 'Unknown Color'
+        colour.try(:presentation) || 'Unknown Color'
       end
 
       def fabric
