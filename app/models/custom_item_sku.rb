@@ -1,4 +1,3 @@
-# TODO: 24th November 2016 - Watch `Orders::LineItemCSVPresenter#personalization_sku` method, since this generator logic duplicated.
 class CustomItemSku
   attr_reader :line_item
 
