@@ -30,11 +30,7 @@
         dd Estimated delivery: #{product.delivery_period}
         - if product.customizations.present?
           - product.customizations.each do |customization|
-            - if product.from_wedding_atelier
-              - customization_name = "#{customization.customisation_type}: #{customization.presentation}"
-            - else
-              - customization_name = customization.name
-            dd #{ customization_name } #{ customization.display_price if customization.price > 0 }
+            dd #{ customization.name } #{ customization.display_price if customization.price > 0 }
         - if product.making_options.present?
           - product.making_options.each do |option|
             dd
