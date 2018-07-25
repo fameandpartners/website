@@ -111,7 +111,18 @@ module Spree
         end
 
         def total_items
-          '( SELECT count(*) FROM spree_line_items sli WHERE sli.order_id = o.id) as total_items'
+          "(
+              SELECT count(*) 
+              FROM spree_line_items sli
+              WHERE
+                sli.order_id = o.id
+                  AND
+                sli.variant_id NOT IN (
+                                        SELECT id 
+                                        FROM spree_variants
+                                        WHERE sku ilike 'return_insurance'
+                                      )
+          ) as total_items"
         end
 
         def completed_at
