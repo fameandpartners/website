@@ -57,6 +57,7 @@ module Spree
             #{customer_notes},
             #{address},
             #{price},
+            #{material},
             #{currency}
             #{select}
 
@@ -73,6 +74,7 @@ module Spree
             LEFT OUTER JOIN "spree_countries" ssa_c ON ssa_c."id" = ssa."country_id"
             LEFT OUTER JOIN "fabrications" f ON f."line_item_id" = li."id"
             LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
+            LEFT OUTER JOIN "fabrics" fabric ON fabric."id" = li."fabric_id"
             #{from}
 
             WHERE #{where}
@@ -154,6 +156,10 @@ module Spree
 
         def height
           'lip.height as height'
+        end
+
+        def material
+          'fabric.material as material' 
         end
 
         def customization_value_ids

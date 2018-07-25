@@ -71,7 +71,7 @@ module Orders
         if personalization.present?
           customs = JSON.parse(item.customizations)
             .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
-            .map {|x| x['customisation_value']['presentation']}
+            .map {|x| format_customisation(customization: x, include_codes: true)}
           if customs.empty?
             customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
           end
@@ -87,6 +87,10 @@ module Orders
 
       def custom_color
         color if personalization.present? && !line['custom_color'].present?
+      end
+
+      def material
+        line['material']
       end
 
       def delivery_date
@@ -128,7 +132,7 @@ module Orders
 
       def sku
         global_sku&.sku
-        end
+      end
 
       def ignore_line?
         PRODUCTS_TO_IGNORE.include?(style.downcase)
@@ -157,6 +161,14 @@ module Orders
         YAML.load(line['customization_value_ids']) if line['customization_value_ids'].present?
       end
 
+      def format_customisation(customization:, include_codes: false)
+        if include_codes && Spree::Product.is_new_product?(style)
+          "#{customization['customisation_value']['name']} #{customization['customisation_value']['presentation']}"
+        else
+          customization['customisation_value']['presentation']
+        end
+      end
+      
     end
   end
 end

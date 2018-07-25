@@ -60,14 +60,13 @@ module Orders
         personalizations? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
       end
 
-      def customisation_text
+      def customization_text
         if item.customizations.present?
           JSON.parse(item.customizations)
             .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
             .collect{|x| x['customisation_value']['presentation']}.join(' / ')
         end
       end
-      alias_method :customization_text, :customisation_text
 
       # @deprecated #image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance
       def image?
@@ -112,11 +111,15 @@ module Orders
       private
 
       def standard_variant_for_custom_color
-        return unless personalizations?
-
-        @standard_variant_for_custom_color ||= variant.product.variants.includes(:option_values).detect { |v|
-          v.option_values.include?(personalization.color)
-        }
+        if fabric
+          @standard_variant_for_custom_color ||= variant.product.variants.joins(:option_values).where(spree_option_values_variants: { option_value_id: fabric.option_fabric_color_value_id }).first
+        end
+      
+        if personalization && personalization.color
+          @standard_variant_for_custom_color ||= variant.product.variants.joins(:option_values).where(spree_option_values_variants: { option_value_id: personalization.color.id }).first
+        end
+      
+        @standard_variant_for_custom_color
       end
     end
   end

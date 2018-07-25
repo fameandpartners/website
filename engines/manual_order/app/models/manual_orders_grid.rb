@@ -37,7 +37,7 @@ class ManualOrdersGrid
   column(:size, header: 'Size') {|model| model.size}
   column(:height, header: 'Height') {|model| model.height}
   column(:color, header: 'Color') {|model| model.colour_name}
-  column(:customisations, header: 'Customisations') {|model| model.customisation_text}
+  column(:customisations, header: 'Customisations') {|model| model.customization_text}
   column(:factory, header: 'Factory') {|model| model.factory.name}
   column(:return_or_exchange, header: 'Return or Exchange', html: true) do |model|
     if model.order.returnable?
