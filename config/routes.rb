@@ -346,12 +346,18 @@ FameAndPartners::Application.routes.draw do
     get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
     get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
     get '/larsen-thompson-interview', to: redirect('/dresses/evening?utm_source=legacy-larsen-thompson-interview')
-    get '/evening-collection-larsen-thompson', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-larsen-thompson')
     get '/delilah-belle-hamlin-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin-interview')
     get '/diana-veras-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-diana-veras-interview')
     get '/ashley-moore-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-ashley-moore-interview')
     get '/yorelis-apolinario-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario-interview')
     get '/nia-parker-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker-interview')
+    get '/evening-collection-larsen-thompson', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-larsen-thompson')
+    get '/evening-collection-diana-veras' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-diana-veras')
+    get '/evening-collection-ashley-moore' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-ashley-moore')
+    get '/evening-collection-delilah-belle-hamlin' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin')
+    get '/evening-collection-yorelis-apolinario' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario')
+    get '/evening-collection-nia-parker' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker')
+    get '/shop-evening-collection' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-shop-evening-collection')
 
     ###########
     # User Cart
