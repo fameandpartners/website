@@ -60,12 +60,13 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_marketing_campaigns
-    cookies[:referrer] = request.referrer if cookies[:referrer].blank?
+    referrer = params[:referrer] || request.referrer
+    cookies[:referrer] = referrer if cookies[:referrer].blank?
 
     # TODO - TTL 2016.01.30 - Shopstyle missing promocode
     # Handle inbound shopstyle campaigns with a missing auto apply promo code.
     # Apply the missing code
-    if !request.url.include?('faadc') && (request.referer && request.referer.include?('shopstyle.com'))
+    if !request.url.include?('faadc') && (referrer && referrer.include?('shopstyle.com'))
       uri = Addressable::URI.parse(request.url)
       uri.query_values = (uri.query_values || {}).merge(:faadc => 'BOXINGDAY25')
       redirect_to uri.to_s
@@ -83,6 +84,8 @@ class ApplicationController < ActionController::Base
   end
 
   def capture_user_utm_params
+    referrer = params[:referrer] || request.referrer
+
     utm_params = {
       utm_campaign:   params[:utm_campaign],
       utm_source:     params[:utm_source],
@@ -94,7 +97,7 @@ class ApplicationController < ActionController::Base
     service = Marketing::CaptureUtmParams.new(
       current_spree_user,
       cookies['utm_guest_token'],
-      utm_params.merge(referrer: request.referrer)
+      utm_params.merge(referrer: referrer)
     )
     service.record_visit!
     session[:utm_params] = utm_params

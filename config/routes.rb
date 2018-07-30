@@ -241,6 +241,9 @@ FameAndPartners::Application.routes.draw do
     # Linen category page
     get '/shop-linen' => 'products/collections#show', :permalink => 'shop-linen', :as => :linen_category_page
 
+    # Micro Floral category page
+    get '/shop-micro-floral' => 'products/collections#show', :permalink => 'shop-micro-floral', :as => :micro_floral_category_page
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
@@ -659,6 +662,8 @@ FameAndPartners::Application.routes.draw do
 
       #upload products.*\.ccf$
       put '/product_upload' => 'product_upload#upload'
+
+      get 'track' => 'tracking#track'
       
       # user session
       devise_scope :spree_user do

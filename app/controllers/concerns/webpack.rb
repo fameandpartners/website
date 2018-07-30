@@ -8,7 +8,7 @@ module Concerns
         resp = RestClient.get "#{configatron.node_pdp_url}/webpack/asset-manifest"
         JSON.parse(resp)
       rescue Exception => e
-        Raven.capture_exception(e, response: resp)
+        Raven.capture_exception(e, extra: { response: resp })
         NewRelic::Agent.notice_error(e, response: resp)
         throw e
       end

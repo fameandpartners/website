@@ -8,6 +8,9 @@ module Products
       upload.map do |prod|
         begin
           details = prod[:details]
+          price_in_aud = details[:price_aud]
+          price_in_usd = details[:price_usd]
+
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
           if (details[:type] === "swatch")
@@ -26,15 +29,15 @@ module Products
             on_demand = true
           end
 
-          product = create_or_update_product(prod, category, on_demand, taxon)
 
 
+          product = create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
 
           #color_map = details[:colors].map{ |x| { color: x } }
           add_product_properties(product, details)
           fabric_products = add_product_color_options(product, details[:fabrics], details[:colors]) 
 
-          add_product_variants(product, sizes, fabric_products, 0.0, 0.0) 
+          add_product_variants(product, sizes, fabric_products, price_in_aud, price_in_usd) 
           add_product_customizations(product, prod[:customization_list] || [], nil)
           add_product_height_ranges( product )
 
@@ -48,18 +51,19 @@ module Products
       end.compact
     end
 
-    def add_product_prices(product, price, us_price = nil)
-      product.price = price
-      product.save
-
+    def add_product_prices(product, price_in_aud, price_in_usd)
       master_variant = product.master
 
-      usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
-      usd.amount = us_price if us_price.present?
+      aud = master_variant.prices.where(currency: "AUD").first_or_create
+      aud.amount = price_in_aud
+      aud.save!
+
+      usd = master_variant.prices.where(currency: "USD").first_or_create
+      usd.amount = price_in_usd
       usd.save!
     end
 
-    def create_or_update_product(prod, category, on_demand, taxon)
+    def create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
       sku = prod[:style_number].to_s.downcase.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -121,16 +125,10 @@ module Products
       if prdmo.save
         product.making_options << prdmo
       end
-      new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
 
-      #trying without this
-
-     #if min_length[:price_aud].present? || min_length[:price_usd].present?
-        add_product_prices(product, 0.0, 0.0)
-       #end
-     # info "#{section_heading} #{new_product} id=#{product.id}"
+      add_product_prices(product, price_in_aud, price_in_usd)
       product
     end
 
