@@ -250,24 +250,6 @@ FameAndPartners::Application.routes.draw do
     #############################
     # PROM LPs - Interview pages
     #############################
-    # Prom LP - Larsen Thompson Interview page
-    get '/larsen-thompson-interview' => 'products/collections#show', as: :larsen_thompson_prom_interview_page
-
-    # Prom LP - Delilah Belle Hamlin Interview page
-    get '/delilah-belle-hamlin-interview' => 'products/collections#show', as: :delilah_belle_hamlin_prom_interview_page
-
-    # Prom LP - Diana Veras Interview page
-    get '/diana-veras-interview' => 'products/collections#show', as: :diana_veras_prom_interview_page
-
-    # Prom LP - Ashley Moore Interview page
-    get '/ashley-moore-interview' => 'products/collections#show', as: :ashley_moore_prom_interview_page
-
-    # Prom LP - Yorelis Apolinario Interview page
-    get '/yorelis-apolinario-interview' => 'products/collections#show', as: :yorelis_apolinario_prom_interview_page
-
-    # Prom LP - Nia Parker Interview page
-    get '/nia-parker-interview' => 'products/collections#show', as: :nia_parker_prom_interview_page
-
     # Prom LP - Say Lou Lou Interview page
     get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
 
@@ -362,6 +344,20 @@ FameAndPartners::Application.routes.draw do
     get '/amfam' => redirect('/wicked-game-collection')
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
+    get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
+    get '/larsen-thompson-interview', to: redirect('/dresses/evening?utm_source=legacy-larsen-thompson-interview')
+    get '/delilah-belle-hamlin-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin-interview')
+    get '/diana-veras-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-diana-veras-interview')
+    get '/ashley-moore-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-ashley-moore-interview')
+    get '/yorelis-apolinario-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario-interview')
+    get '/nia-parker-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker-interview')
+    get '/evening-collection-larsen-thompson', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-larsen-thompson')
+    get '/evening-collection-diana-veras' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-diana-veras')
+    get '/evening-collection-ashley-moore' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-ashley-moore')
+    get '/evening-collection-delilah-belle-hamlin' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin')
+    get '/evening-collection-yorelis-apolinario' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario')
+    get '/evening-collection-nia-parker' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker')
+    get '/shop-evening-collection' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-shop-evening-collection')
 
     ###########
     # Super Collections
