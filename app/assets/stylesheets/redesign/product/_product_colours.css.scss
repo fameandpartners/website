@@ -194,6 +194,7 @@ $product-color-white-ivory-border: #DDDDDD;
 $product-color-wine:            #831c2e;
 $product-color-winter-grey:     #dadadc;
 $product-color-warm-tan:        #d2a788;
+$product-color-yellow:          #e9de0a;
 $product-color-dusty-rose:      #deaaba;
 $product-color-pretty-pink:     #f7dbe9;
 
@@ -437,6 +438,7 @@ $product-color-pretty-pink:     #f7dbe9;
 .color-white-ivory             { background-color: white; border: 1px solid $product-color-white-ivory-border; }
 .color-wine                    { background-color: $product-color-wine; }
 .color-winter-grey             { background-color: $product-color-winter-grey; }
+.color-yellow                  { background-color: $product-color-yellow; }
 .color-young-love-floral        { @include image-color-selector('YoungLoveFloral.png'); }
 
 .color-white,
