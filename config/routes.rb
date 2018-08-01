@@ -101,9 +101,6 @@ FameAndPartners::Application.routes.draw do
     # Fame Society Invitation
     get '/fame-society-invitation', to: redirect('/dresses'), as: :fame_society_invitation_landing_page
 
-    # "Invite a friend" landing page
-    get '/invite' => 'statics#landing_page_invite', :permalink => 'fame-invite', :as => :invite_a_friend_landing_page
-
     # Internship landing page
     get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
@@ -358,6 +355,7 @@ FameAndPartners::Application.routes.draw do
     get '/evening-collection-yorelis-apolinario' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario')
     get '/evening-collection-nia-parker' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker')
     get '/shop-evening-collection' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-shop-evening-collection')
+    get '/invite', to: redirect('/dresses/best-sellers?utm_source=legacy-invite'), :as => :invite_a_friend_landing_page
 
     ###########
     # User Cart
