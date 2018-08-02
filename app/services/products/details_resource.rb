@@ -65,7 +65,6 @@ class Products::DetailsResource
       related_outerwear:    related_outerwear,
       available_options:    product_selection_options,
       moodboard:            product_moodboard,
-      render3d_images:      product_render3d_images,
     }
 
     Products::Presenter.new(non_primitive_options.merge(primitive_options))
@@ -98,20 +97,6 @@ class Products::DetailsResource
     # images
     def product_images
       @product_images ||= Repositories::ProductImages.new(product: product)
-    end
-
-    def product_render3d_images
-      @product_render3d_images ||= \
-        if product_render_3d?
-          Render3d::Image.where(product_id: product.id)
-        else
-          []
-        end
-    end
-
-    # properties part
-    def product_render_3d?
-      Rails.cache.fetch([product, 'product-property', 'render-3d']) { product.property('render-3d') == 'true' }
     end
 
     def product_price

@@ -19,7 +19,7 @@ Express Making ( 快速决策 ): <%= item.making_options.map{|option| option.nam
 <% end %>
 
 Customizations:
-<% item.customisations.each do |name, image_url| %>
+<% item.customisations(include_code: true).each do |name, image_url| %>
   - <%= name %>
   <% if image_url.present? %>
   - <%= image_url %>

@@ -94,20 +94,26 @@ module Orders
       Spree::Price.new(amount: price).display_price.to_s
     end
 
-    def customisations
+    def customisations(include_codes: false)
       if personalizations?
         if item.customizations
           customs = Array.wrap(
               JSON.parse(item.customizations)
               .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
               .collect { |custom|
-                [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
+                [
+                  format_customisation(customization: custom, include_codes: include_codes),
+                  custom['customisation_value']['image']
+                ]
               }
           )
         else
           customs = Array.wrap(
               personalization.customization_values.collect { |custom|
-              [custom['customisation_value']['presentation'], custom['customisation_value']['image']]
+                [
+                  format_customisation(customization: custom, include_codes: include_codes),
+                  custom['customisation_value']['image']
+                ]
               }
           )
         end
@@ -121,30 +127,8 @@ module Orders
       end
     end
 
-    def customisations_without_images
-      customisations.collect &:first
-    end
-
-    def customisation_ids
-      return [] unless personalizations? || item.customizations
-      if item.customizations.nil?
-        Array.wrap(personalization.customization_values.collect{|x| x['customisation_value']['id']})
-      else
-        JSON.parse(item.customizations)
-          .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
-          .collect{|x| x['customisation_value']['id']}
-      end
-    end
-
-    def customisation_names
-      return [] unless personalizations? || item.customizations
-      if item.customizations.nil?
-        Array.wrap(personalization.customization_values.collect{|x| x['customisation_value']['presentation']})
-      else
-        JSON.parse(item.customizations)
-          .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
-          .collect{|x| x['customisation_value']['presentation']}
-      end
+    def customisations_presentations(include_codes: false)
+      customisations(include_codes: include_codes).collect &:first
     end
 
     def return_action
@@ -185,6 +169,14 @@ module Orders
 
     def refulfill_status
       item.refulfill_status
+    end
+
+    def format_customisation(customization:, include_codes: false)
+      if include_codes && Spree::Product.is_new_product?(style_number)
+        "#{customization['customisation_value']['name']} #{customization['customisation_value']['presentation']}"
+      else
+        customization['customisation_value']['presentation']
+      end
     end
 
   end

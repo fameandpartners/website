@@ -24,9 +24,9 @@
               - else
                 | Customized color:
               <span class="value"> #{line_item.colour_name}</span>
-          - if line_item.customisation_text.present?
+          - if line_item.customization_text.present?
             li
-              | Customized cut: <span class="value">#{line_item.customisation_text}</span>
+              | Customized cut: <span class="value">#{line_item.customization_text}</span>
           - if !line_item.fabric_swatch?
             li
               | Size: <span class="value">#{line_item.size_name}</span>

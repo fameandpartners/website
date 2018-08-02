@@ -66,7 +66,6 @@ LOCATION="/home/app_user/import/content/extract" nohup bundle exec rake import:p
 LOCATION="/home/app_user/import/content/extract" nohup bundle exec rake import:customization:images > log/customizations_import.log &
 LOCATION="/home/app_user/import/content/extract" nohup bundle exec rake import:moodboard:images > log/moodboards_import.log &
 LOCATION="/home/app_user/import/content/extract" nohup bundle exec rake import:song:images > log/songs_import.log &
-LOCATION="/home/app_user/import/content/extract" nohup bundle exec rake import:render3d:images > log/render3d_import.log &
 
 # Or `screen`
 
@@ -74,7 +73,6 @@ screen -d -m bash -c 'LOCATION="/home/app_user/import/content/extract" bundle ex
 screen -d -m bash -c 'LOCATION="/home/app_user/import/content/extract" bundle exec rake import:customization:images'
 screen -d -m bash -c 'LOCATION="/home/app_user/import/content/extract" bundle exec rake import:moodboard:images'
 screen -d -m bash -c 'LOCATION="/home/app_user/import/content/extract" bundle exec rake import:song:images'
-screen -d -m bash -c 'LOCATION="/home/app_user/import/content/extract" bundle exec rake import:render3d:images'
 ```
 
 These commands will execute Rake tasks in parallel while having their outputs registered on the `log/` folder

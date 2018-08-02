@@ -166,7 +166,7 @@ module Api
                 type: :return,
                 sortOrder: 1,
                 meta: {
-                  returnDescription: 'Shipping and returns are free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
+                  returnDescription: 'All orders ship free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
                 },
                 incompatibleWith: { allOptions: [] },
               }
@@ -412,7 +412,7 @@ module Api
             fabricDescription: f.description,
           },
           img: f.fabric.image_url,
-          incompatibleWith: f.recommended ? {} : { allOptions: [ ['fast_making'] ] },
+          incompatibleWith: {},
         }
       end
 
@@ -440,7 +440,7 @@ module Api
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
           },
-          incompatibleWith: c.custom ? { allOptions: [ ['fast_making'] ] } : { allOptions: [] },
+          incompatibleWith: {},
         }
       end
 

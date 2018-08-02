@@ -106,7 +106,7 @@ module Marketing
           fabric:                 item.fabric ? item.fabric.material : nil,
           height:                 item.height,
           display_height:         convert_height_units(item.personalization&.height_value, item.personalization&.height_unit),
-          customisation:          item.customisation_text,
+          customisation:          item.customization_text,
           image_url:              item.image_url,
           delivery_period:        item.item.delivery_period
         }

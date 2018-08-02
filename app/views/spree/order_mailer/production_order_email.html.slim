@@ -62,7 +62,7 @@ table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="
                     td
                       table
                         tbody
-                          - item.customisations.each do |name, image_url|
+                          - item.customisations(include_code: true).each do |name, image_url|
                             tr
                               th = name
                             - if image_url.present?
