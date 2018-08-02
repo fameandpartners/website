@@ -48,7 +48,7 @@ class Products::CollectionResource
     @edits                           = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event                           = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape                       = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
-    @color_group                     = collect_color_groups( options[:color_group] )
+    @color_group                     = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color_groups                    = collect_color_groups( options[:color_groups] )
     @color                           = Repositories::ProductColors.get_by_name(options[:color])
     @discount                        = prepare_discount(options[:discount])
