@@ -23,8 +23,12 @@ module ReturnsProcessesControllerHelper
   }
 
   def get_user
-    if params['email'].present?
+    if params['email'].present? && Spree::User.where('lower(email) = ?', params['email'].downcase).present?
       Spree::User.where('lower(email) = ?', params['email'].downcase).first
+    elsif Spree::Order.where(email: params['email'], id: params['order_id']).present?
+      # i noticed when a user changed his email address,
+      # we had a mismatch between postgres orders.email and users.email
+      Spree::Order.where(email: params['email'], id: params['order_id']).last.user
     else
       spree_current_user
     end

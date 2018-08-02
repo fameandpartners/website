@@ -66,7 +66,7 @@ class CartItem
       @product_images ||= Repositories::ProductImages.new(product: product).read_all(
         color_id: line_item_color&.id,
         cropped: true,
-        product_customizations: line_item.personalization&.customization_values,
+        product_customizations: line_item&.personalization&.customization_values,
         fabric: line_item.fabric
       )
     end
