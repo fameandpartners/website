@@ -4,11 +4,6 @@ module Orders
   class LineItemCsvGenerator
     attr_reader :orders, :query_params
 
-    PRODUCTS_TO_IGNORE = [
-      'return_insurance',
-      'fabric swatch - heavy georgette'
-    ]
-
     def initialize(orders, query_params = {})
       @orders = orders
       @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
@@ -86,9 +81,10 @@ module Orders
 
           if (@refulfill_only || @batch_only || @ready_batches || @making_only)
             # ignore certain products
-            if PRODUCTS_TO_IGNORE.include?(line.style_name.downcase)
+            if line.ignore_line?
               next
             end
+
             # dont' show canceled orders
             if li.order.state == 'canceled'
               next
@@ -143,6 +139,7 @@ module Orders
             line.tracking_number,
             line.shipment_date,
             line.fabrication_state,
+            line.sku,
             line.style,
             line.style_name,
             line.factory,
@@ -193,6 +190,7 @@ module Orders
         :tracking_number,
         :shipment_date,
         :fabrication_state,
+        :sku,
         :style,
         :style_name,
         :factory,

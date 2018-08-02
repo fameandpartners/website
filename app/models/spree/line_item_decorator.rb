@@ -198,6 +198,10 @@ Spree::LineItem.class_eval do
     self.product&.category&.category == 'Sample'
   end
 
+  def return_insurance?
+    product.name.downcase.include? "return_insurance"
+  end
+
   def store_credit_only_return?
     !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
   end
@@ -207,7 +211,7 @@ Spree::LineItem.class_eval do
   end
 
   def return_eligible_B?
-    self.order.return_type == 'B' && self.order.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"}
+    self.order.return_type == 'B' && self.order.line_items.any?(&:return_insurance?)
   end
 
   def window_closed?

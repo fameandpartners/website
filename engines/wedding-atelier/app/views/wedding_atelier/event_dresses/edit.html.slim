@@ -1,9 +1,0 @@
-= react_component 'CustomizationExperience',
-                  siteVersion: current_site_version.permalink,
-                  eventId: @event.id,
-                  customizationsUrl: event_customizations_url(@event),
-                  initialDress: WeddingAtelier::EventDressSerializer.new(@dress, scope: self),
-                  edit: true,
-                  event_name: @event.name,
-                  event_path: wedding_atelier.event_path(id: @event.id, slug: @event.slug),
-                  currentUser: WeddingAtelier::UserSerializer.new(spree_current_user)

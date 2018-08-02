@@ -45,7 +45,6 @@ class Repositories::CartProduct
         default_standard_days_for_making: product.default_standard_days_for_making,
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
-        from_wedding_atelier: wedding_atelier_product?,
         price_drop_au_product: price_drop_au_product?,
         fabric: line_item_fabric
         )
@@ -71,10 +70,6 @@ class Repositories::CartProduct
         price_drop_au_items_array.map!(&:downcase)
         price_drop_au_items_array.include?(current_item_sku)
       end
-    end
-
-    def wedding_atelier_product?
-      Spree::Taxonomy.where(id: product.taxons.map(&:taxonomy_id), name: 'Wedding Atelier').any?
     end
 
     def cache_key

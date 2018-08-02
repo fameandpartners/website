@@ -8,11 +8,7 @@
         <section class="product-delivery-adjustment">
           <div class="cart-item-description clearfix">
             <div class="image-wrapper">
-              <% if (product.swatch): %>
-                 <img class="img-responsive cart-item-image" src="<%= product.color.image_file_name %>" />
-              <% else: %>
-                <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
-              <% end %>
+              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
             </div>
             <div class="description-wrapper">
               <h3 class="product-name"><%= product.name %></h3>

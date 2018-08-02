@@ -62,13 +62,12 @@ content_directory="${CONTENT_DIRECTORY_TARGET}/content"
 
 spreadsheets=$(find ${content_directory} -name '*.xls*' |grep -v "~")
 image_directories=$(find "${content_directory}"  -maxdepth 1  -mindepth 1 -type d | grep -vi spreadsheet)
-image_types=(cads product customization moodboard song render3d)
+image_types=(cads product customization moodboard song)
 # rake import:accessory:images                      # Import images for accessories (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:customization:images                  # Import images for customizations (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:moodboard:images                      # Import images for moodboards (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:product:images                        # Import images for products (specify directory location w/ LOCATION=/path/to/directory)
 # rake import:song:images
-# rake import:render3d:images                       # Import render3d images for products (specify directory location w/ LOCATION=/path/to/directory)
 
 # Executed at EOF
 function main

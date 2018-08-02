@@ -8,11 +8,7 @@
           <a href="<%= product.path %>">
         <% end %>
           <% if product.name != "Gift" : %>
-            <% if product.swatch: %>
-              <img class="img-responsive cart-item-image" src="<%= product.color.image_file_name %>" />
-            <% else: %>
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
-            <% end %>
+            <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
           <% end %>
           <% if product.price_drop_au_product: %>
             <div class="ribbon-wrapper PriceDrop">
@@ -53,15 +49,11 @@
           <% if product.fabric != null : %>
           <dd><span class="line-item-description-heading">Fabric and Color:</span> <span class="color"> <%= product.fabric.name %></span>  <span class='line-item-customization--mini'>(<%= @customizationPrice(product.fabric.display_price) %>)</span></dd>
           <% end %>
-          <% if product.from_wedding_atelier: %>
-            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
+          <% if product.display_height: %>
+            <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
           <% else: %>
-            <% if product.display_height: %>
-              <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
-            <% else: %>
-              <% if product.height: %>
-                <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
-              <% end %>
+            <% if product.height: %>
+              <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
             <% end %>
           <% end %>
           <dd>

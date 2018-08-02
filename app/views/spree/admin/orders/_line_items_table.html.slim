@@ -58,7 +58,7 @@ table.line_items
           td = line_item.height
           td = line_item.colour_name
           td = line_item.fabric_material
-          td = line_item.customisations.collect(&:first).join("<br>").html_safe
+          td = line_item.customisations_presentations(include_codes: true).join("<br>").html_safe
           td = line_item.factory
           - if position.zero?
             td rowspan=total_items

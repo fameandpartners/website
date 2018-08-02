@@ -50,6 +50,10 @@ module Reports
         self.each do |r|
           line.set_line r
 
+          if line.ignore_line?
+            next
+          end
+
           csv << [
             line.order_number,
             line.site_version,
@@ -59,6 +63,7 @@ module Reports
             line.price,
             line.currency,
             line.style,
+            line.style_name,
             line.line_item_id,
             line.product_number,
             line.size,
@@ -69,8 +74,10 @@ module Reports
             line.factory,
             line.delivery_date,
             line.fast_making,
+            line.sku,
             line.customization_values,
             line.custom_color,
+            line.material,
             line.customer_notes,
             line.customer_name,
             line.customer_phone_number,
@@ -101,6 +108,7 @@ module Reports
         :payment_total,
         :currency,
         :style,
+        :style_name,
         :line_item_id,
         :product_number,
         :size,
@@ -111,8 +119,10 @@ module Reports
         :factory,
         :projected_delivery_date,
         :express_making,
+        :sku,
         :customisations,
         :custom_color,
+        :fabric,
         :customer_notes,
         :customer_name,
         :customer_phone_number,

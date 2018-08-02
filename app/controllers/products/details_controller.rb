@@ -68,57 +68,7 @@ class Products::DetailsController < Products::BaseController
     return product
   end
 
-  def setup_bridesmaid_product(prod)
-    product = Products::DetailsResource.new(
-      site_version: current_site_version,
-      permalink:    prod.permalink
-    ).read
-
-    # only admins can view deleted products
-    if product.is_deleted && !spree_current_user.try(:has_spree_role?, "admin")
-    raise Errors::ProductInactive
-    end
-
-    # set preselected images colors
-    color_hash = \
-      if params[:color]
-        Repositories::ProductColors.get_by_name(params[:color]) || {}
-      else
-        # select images of one/default color
-        color = product.available_options.colors.default.first
-
-        {
-          id:   color&.id,
-          name: color&.name
-        }
-      end
-
-    product.color_id   = color_hash[:id]
-    product.color_name = color_hash[:name]
-
-    # todo: thanh 4/3/17- why would we want to default this following line
-    # make express delivery as default option
-    product.making_option_id = product.making_options.detect{|x| x.option_type == 'fast_making'}.try(:id)
-
-    product.use_auto_discount!(current_promotion.discount) if current_promotion
-
-    if product.fit
-      product.fit = product.fit.gsub(" Height", "Height")
-      product.fit = product.fit.gsub("Height", ", Height")
-      product.fit = product.fit.gsub(" Hips", "Hips")
-      product.fit = product.fit.gsub("Hips", ", Hips")
-      product.fit = product.fit.gsub(" Waist","Waist")
-      product.fit = product.fit.gsub("Waist",", Waist")
-    end
-    return product
-  end
-
-
   def pdp_status
     @product.is_active ? :ok : :not_found
-  end
-
-  def bridesmaid_pdp_status
-    @bridesmaid_data[:product].is_active ? :ok : :not_found
   end
 end

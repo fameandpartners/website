@@ -180,15 +180,6 @@ PATH
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
-    wedding-atelier (0.0.1)
-      active_model_serializers
-      bootstrap-sass (~> 3.3.4.1)
-      kaminari
-      rails (~> 3.2.22.5)
-      react-rails
-      rolify
-      slim
-      twilio-ruby
 
 PATH
   remote: spree_masterpass
@@ -285,9 +276,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.4.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
     bugsnag (6.6.4)
       concurrent-ruby (~> 1.0)
     builder (3.0.4)
@@ -760,7 +748,6 @@ GEM
       netrc (~> 0.7)
     retriable (2.0.2)
     rmagick (2.15.4)
-    rolify (5.1.0)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -900,10 +887,6 @@ GEM
     turnip (1.3.1)
       gherkin (>= 2.5)
       rspec (>= 2.14.0, < 4.0)
-    twilio-ruby (4.13.0)
-      builder (>= 2.1.2)
-      jwt (~> 1.0)
-      multi_json (>= 1.3.0)
     tzinfo (0.3.52)
     uber (0.0.15)
     uglifier (1.3.0)
@@ -1062,7 +1045,6 @@ DEPENDENCIES
   unicorn
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
-  wedding-atelier!
   whenever
 
 RUBY VERSION

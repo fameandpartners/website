@@ -12,7 +12,10 @@ class ProductionOrderEmailService
   end
 
   def trigger_email(order, factory, items)
-    FactoryPurchaseOrderEmail.new(order, factory, items.select{|item| item.stock.nil?}).deliver #filter out sample sale items
+    items = items.select{|item| item.stock.nil? && !item.fabric_swatch? && !item.return_insurance?}
+    if items.any?
+      FactoryPurchaseOrderEmail.new(order, factory, items).deliver
+    end
   end
 
   class FactoryPurchaseOrderEmail
