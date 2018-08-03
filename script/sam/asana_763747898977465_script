@@ -1,7 +1,8 @@
 echo here
 # Lux
 rm -rf ~/import || true
-rm -rf ~/leahs/spree/website/spree/products/* || true
+rm -rf ~/leahs/spree/website/spree || true
+rm -rf ~/leahs/spree/website/public/spree || true
 ./script/prepare_import.sh https://www.dropbox.com/sh/2jpnew54tdmet7r/AABXyYk7Q3jAQhdwmSn5IaSXa?dl=1
 if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then ~/bin/leahs_db 30; fi;
 MARK_NEW_THIS_WEEK=true ./script/import_products.sh
@@ -11,3 +12,4 @@ bundle exec rake data:make_fast_making_18_dollars
 bundle exec rake data:fabric_bla_bla
 bundle exec rake elasticsearch:reindex
 bundle exec rails runner 'Rails.cache.clear'
+cp -r ~/leahs/website/spree ~/leahs/website/public/
