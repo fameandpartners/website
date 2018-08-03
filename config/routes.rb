@@ -244,6 +244,9 @@ FameAndPartners::Application.routes.draw do
     # Micro Floral category page
     get '/shop-micro-floral' => 'products/collections#show', :permalink => 'shop-micro-floral', :as => :micro_floral_category_page
 
+    # Polka Dot category page
+    get '/shop-polka-dot' => 'products/collections#show', :permalink => 'shop-polka-dot', :as => :polka_dot_category_page
+
     # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
     # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
 
