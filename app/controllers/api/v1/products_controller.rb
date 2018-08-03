@@ -133,7 +133,7 @@ module Api
           isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
           paymentMethods: {
-            afterPay: current_site_version.is_australia?
+            AfterPay: current_site_version.is_australia?
           },
           size: {
             minHeightCm: MIN_CM,
