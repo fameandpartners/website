@@ -1,6 +1,7 @@
 echo here
+rm -rf ~/import || true
 if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
-  rm -rf ~/import || true
+
   rm -rf ~/leahs/spree/website/spree || true
   rm -rf ~/leahs/spree/website/public/spree || true
   ~/bin/leahs_db 30
