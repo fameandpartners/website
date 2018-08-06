@@ -7,6 +7,11 @@ if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
 fi
 ./script/prepare_import.sh https://www.dropbox.com/sh/2jpnew54tdmet7r/AABXyYk7Q3jAQhdwmSn5IaSXa?dl=1
 MARK_NEW_THIS_WEEK=true ./script/import_products.sh
+# make dusty-lavender part of purple group
+purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id
+dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender")
+ActiveRecord::Base.connection.execute("SELECT count(*) from option_values_option_values_groups where option_value_id=#{dusty_lavender_option_value_id} AND option_values_group_id=#{purple_option_value_group_id}")
+
 bundle exec rake data:six_week_delivery
 bundle exec rake data:add_fastmaking_to_all_products
 bundle exec rake data:make_fast_making_18_dollars
@@ -16,3 +21,9 @@ bundle exec rails runner 'Rails.cache.clear'
 if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
   cp -r ~/leahs/website/spree ~/leahs/website/public/;
 fi
+
+purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id
+dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender").id
+puts "\n"*10
+puts "IF PURPLE NEEDS FIXING, DO THIS:"
+puts "  INSERT INTO option_values_option_values_groups (option_value_id,option_values_group_id) VALUES (#{dusty_lavender_option_value_id},#{purple_option_value_group_id});"
