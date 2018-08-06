@@ -133,7 +133,7 @@ module Api
           isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
           paymentMethods: {
-            AfterPay: current_site_version.is_australia?
+            afterPay: current_site_version.is_australia?
           },
           size: {
             minHeightCm: MIN_CM,
@@ -407,11 +407,11 @@ module Api
             colorCode: f.fabric.option_value.name,
 
             colorTitle: f.fabric.option_value.presentation,
+            materialTitle: f.fabric.material,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
           },
-          img: f.fabric.image_url,
           incompatibleWith: {},
         }
       end
