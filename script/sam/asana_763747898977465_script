@@ -19,3 +19,6 @@ if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
 fi
 
 bundle exec rails runner 'purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id; dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender").id; puts "INSERT INTO option_values_option_values_groups (option_value_id,option_values_group_id) VALUES (#{dusty_lavender_option_value_id},#{purple_option_value_group_id});"'
+if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
+  bundle exec rails runner 'purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id; dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender").id; aaa="INSERT INTO option_values_option_values_groups (option_value_id,option_values_group_id) VALUES (#{dusty_lavender_option_value_id},#{purple_option_value_group_id});"; ActiveRecord::Base.connection.execute(aaa);'
+fi
