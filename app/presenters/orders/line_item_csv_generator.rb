@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'csv'
 
 module Orders
@@ -57,6 +58,25 @@ module Orders
 
     def headers
       en_headers.collect { |k| "#{k} #{cn_headers[k]}" }
+    end
+
+    # https://app.asana.com/0/423269087196963/550425321843318
+    # Spree Admin > Return Insurance data in exported csv file always has an
+    # AUD currency even if the item was purchased in USD
+    #
+    # When given a line item as a Orders::LineItemCSVPresenter object,
+    # when the line item is a "RETURN_INSURANCE"
+    # this method returns the "correct" currency, which is the orders currency
+    # One of these days we have to repair the database corruption going on where
+    # all return ins. line items have a currency of "AUD"
+    def corrected_currency(line)
+      if line.sku=="RETURN_INSURANCE"
+        Spree::Order.find_by_number(line.order_number).currency
+      else
+        line.currency
+      end
+    rescue
+      "USD"
     end
 
     def to_csv
@@ -159,7 +179,7 @@ module Orders
             line.return_action,
             line.return_details,
             line.price,
-            line.currency,
+            corrected_currency(line),
             resolve_refulfill_upc(li, line)
           ]
         end
