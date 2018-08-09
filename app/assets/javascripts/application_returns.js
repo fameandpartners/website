@@ -9,12 +9,8 @@
 //= require partials/product_collection_image_hover.js.coffee
 
 //= require partials/helpers/shopping_cart
-//= require partials/shopping_bag
 //= require partials/email_newsletter_subscriber
 
 
 // Header
-//= require partials/header
-//= require partials/simplified_nav
-//= require partials/side_menu
 //= require application_bundle

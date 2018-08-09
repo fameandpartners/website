@@ -300,46 +300,6 @@ module ProductsHelper
   end
 =end
 
-=begin
-  # 'product reservation' link or 'twin alert'
-  def product_twin_alert_link(product)
-    return '' if product.blank?
-
-    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
-      raw("<div class='reserved'><i class='icon icon-tick-circle'></i> #{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.</div>")
-    else
-      data_attrs = { id: product.id }
-      if signed_in? && previous_reservation = spree_current_user.reservations.last
-        data_attrs.update(
-          school_name: previous_reservation.school_name,
-          formal_name: previous_reservation.formal_name,
-          school_year: previous_reservation.school_year
-        )
-      end
-      content_tag(:div, class: 'twin-alert') do
-        link_to("Twin Alert", '#', class: 'twin-alert-link btn', data: data_attrs) +
-        content_tag(:div, t('views.pages.products.show.notices.twin_alert').html_safe, class: 'hint')
-      end
-    end
-  end
-=end
-
-  def product_twin_alert_link(product)
-    return '' if product.blank?
-
-    if signed_in? && (reservation = spree_current_user.reservation_for(product)).present?
-      content_tag(:div, class: 'twin-alert') do
-        raw("<div class='reserved btn' title='#{spree_current_user.first_name}, you have reserved this dress in #{reservation.color}.'><i class='icon icon-tick-circle'></i> Reserved</div>")
-      end
-    else
-      data_attrs = { product_id: product.id }
-
-      content_tag(:div, class: 'twin-alert') do
-        link_to("Reserve this Dress", '#', class: 'twin-alert-link btn', title: 'Reserve this dress for your event. Select a color first.', data: data_attrs)
-      end
-    end
-  end
-
   def color_options_for_select(color_names, selected_color_name)
     color_option_values = Spree::OptionValue.colors.where(name: color_names)
     color_options_for_select_from_options_values(color_option_values, selected_color_name)

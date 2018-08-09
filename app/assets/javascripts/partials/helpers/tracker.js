@@ -29,11 +29,6 @@ window.track = {
     this.event('Wishlist', 'AddedToWishlist', label);
   },
 
-  addedToCart: function (label, product) {
-    this.event('Products', 'AddedToCart', label);
-    this.pageView('/cart/add');
-  },
-
   quizOpened: function (label) {
     this.event('Style Quiz', 'Opened', label);
   },
@@ -46,30 +41,6 @@ window.track = {
     this.event('Style Quiz', 'Finished', label);
   },
 
-  search: function (label) {
-    this.event('Searches', 'Searched', label);
-  },
-
-  openedSendToFriend: function (label) {
-    this.event('SendToFriend', 'Opened', label);
-  },
-
-  sentSendToFriend: function (label) {
-    this.event('SendToFriend', 'Sent', label);
-  },
-
-  twinAlertClick: function (label) {
-    this.event('Products', 'TwinAlertClick', label);
-  },
-
-  twinAlertOpen: function (label) {
-    this.event('Products', 'TwinAlertOpen', label);
-  },
-
-  twinAlertRegister: function (label) {
-    this.event('Products', 'TwinAlertRegister', label);
-  },
-
   inviteToPayOpened: function () {
     this.event('InviteToPay', 'Opened');
   },
@@ -78,21 +49,6 @@ window.track = {
     this.event('InviteToPay', 'Sent');
   },
 
-  openedProductInfo: function (label) {
-    this.event('Product', 'ProductInfoOpened', label);
-  },
-
-  selectedCustomisation: function (label) {
-    this.event('Product', 'CustomisatioSelected', label);
-  },
-
-  followedStyleProductLink: function (label) {
-    this.event('Product', 'StyleItLinkClicked', label);
-  },
-
-  clickedBookFreeStylingSession: function (label) {
-    this.event('Product', 'BookFreeStylingSessionClicked', label);
-  },
 
   AddPromocodeSuccess: function (label) {
     this.event('AddPromocode', 'Success', label);

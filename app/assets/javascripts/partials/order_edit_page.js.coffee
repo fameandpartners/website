@@ -1,8 +1,5 @@
 $(".spree_orders.edit").ready ->
   # common
-  page.enableShoppingCart()
-
-  # common
   orderEditForm = {
     emptyCartTemplate: JST['templates/cart_is_empty']
     container: $('#content')

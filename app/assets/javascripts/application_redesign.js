@@ -73,7 +73,6 @@
 //= require helpers
 //= require partials/helpers/site_version
 //= require partials/helpers/alert
-//= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
@@ -97,10 +96,7 @@
 //-----------------------------
 // Product details with related
 //-----------------------------
-//= require partials/product_details.js
 //= require partials/inputs/new.js.coffee
-//= require partials/inputs/product_option_selectors.js.coffee
-//= require partials/helpers/product_images_slider.js.coffee
 //= require partials/product_collection_image_hover.js.coffee
 
 //--------------------------------
@@ -109,10 +105,8 @@
 //= require partials/helpers/shopping_cart
 //= require partials/helpers/user_moodboard
 //= require partials/product_collection_moodboard_links
-//= require partials/shopping_bag
 //= require partials/shopping_cart_summary
 //= require partials/shopping_cart_delivery_times
-//= require partials/side_menu
 
 //= require partials/user_order_returner
 
