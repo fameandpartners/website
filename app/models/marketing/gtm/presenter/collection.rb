@@ -19,7 +19,6 @@ module Marketing
             {
               id:           product.id,
               sku:          product.sku,
-              variant_skus: product.variant_skus,
               name:         product.name,
               price:        product.price.amount,
               category:     product.type,

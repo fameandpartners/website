@@ -79,7 +79,6 @@ module Products
                     position:     product.permalink,
                     permalink:    product.permalink,
                     master_id:    product.master.id,
-                    variant_skus: product.variant_skus,
                     in_stock:     product.has_stock?,
                     discount:     discount,
                     urls: {
@@ -165,7 +164,6 @@ module Products
                     position:     product.permalink,
                     permalink:    product.permalink,
                     master_id:    product.master.id,
-                    variant_skus: product.variant_skus,
                     in_stock:     product.has_stock?,
                     discount:     discount,
                     urls: {

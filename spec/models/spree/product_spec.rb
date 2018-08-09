@@ -143,16 +143,6 @@ describe Spree::Product, :type => :model do
     end
   end
 
-  describe '#variant_skus' do
-    let(:first_variant) { build(:dress_variant, sku: 'SKU123') }
-    let(:second_variant) { build(:dress_variant, sku: 'SKU456') }
-    let(:product) { build(:dress, variants: [first_variant, second_variant]) }
-
-    it 'return all variant SKUs' do
-      expect(product.variant_skus).to match_array(['SKU123', 'SKU456'])
-    end
-  end
-
   describe 'set_default_values' do
     it 'sets latest size_chart' do
       subject.send(:set_default_values)

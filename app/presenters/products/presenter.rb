@@ -4,7 +4,7 @@ module Products
     SCHEMA_ORG_DISCONTINUED   = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
-    attr_accessor :id, :master_id, :sku, :variant_skus, :name, :description,
+    attr_accessor :id, :master_id, :sku, :name, :description,
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,

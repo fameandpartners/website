@@ -25,12 +25,10 @@ module Marketing
             expect(subject.body).to eq([
                                          {
                                            sku:  'SUPERSKU',
-                                           variant_skus: ['SKU123'],
                                            name: 'Super Dress'
                                          },
                                          {
                                            sku:  'JEDISKU',
-                                           variant_skus: ['SKU345'],
                                            name: 'Jedi Cosplay'
                                          },
                                        ])
