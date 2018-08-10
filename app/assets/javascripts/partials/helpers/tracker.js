@@ -5,14 +5,14 @@ window.track = {
   pageView: function (url) {
     window.dataLayer.push({
       event: 'Page Loaded',
-      eventDetail: { url },
+      eventDetail: { url: url },
     });
   },
 
   event: function (category, action, label) {
     window.dataLayer.push({
       event: action,
-      eventDetail: { category, label },
+      eventDetail: { category: category, label: label },
     });
   },
 
