@@ -56,7 +56,6 @@ module Marketing
               description:       'Super Dress Long Description',
               permalink:         'super-dress-permalink',
               is_active:         true,
-              images:            product_images,
               default_image:     fake_image,
               price:             product_price,
               discount:          discount,
@@ -73,7 +72,6 @@ module Marketing
               style_notes:       'Product Style Notes',
               size_chart:        '2015',
               fast_making:       true,
-              variants:          []
           )
         end
 
@@ -92,7 +90,6 @@ module Marketing
               discountPercent:   30,
               expressMaking:     true,
               image:             { original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' },
-              images:            [{ original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' }],
               id:                123,
               name:              'Super Dress',
               price:             12.34,
@@ -101,7 +98,6 @@ module Marketing
               sizes:             ['US 2'],
               sku:               'ABC123',
               type:              'dresses',
-              variants:          []
             })
           end
         end

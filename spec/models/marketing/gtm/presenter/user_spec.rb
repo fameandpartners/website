@@ -11,16 +11,15 @@ module Marketing
             email: 'loroteiro@silvestre.com'
           )
         end
-        let(:request_ip) { '179.218.87.233' }
 
-        subject(:presenter) { described_class.new(spree_user: user, request_ip: request_ip) }
+        subject(:presenter) { described_class.new(spree_user: user) }
 
         it_behaves_like 'a Marketing::Gtm::Presenter::Base'
 
         describe '#body' do
           context 'given a spree user and his/her IP' do
             context 'user is not logged in' do
-              subject(:presenter) { described_class.new(spree_user: nil, request_ip: request_ip) }
+              subject(:presenter) { described_class.new(spree_user: nil) }
 
               it 'returns hash with unknown user info' do
                 expect(subject.body).to include({
