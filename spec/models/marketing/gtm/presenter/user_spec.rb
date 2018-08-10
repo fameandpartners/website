@@ -29,7 +29,6 @@ module Marketing
                   facebook: false,
                   gender:   'unknown',
                   loggedIn: false,
-                  country:  'Brazil',
                   ip: '179.218.87.233'
                 })
               end
@@ -39,11 +38,12 @@ module Marketing
               it 'returns hash with user info' do
                 expect(subject.body).to include({
                   name:     'Loroteiro Silvestre',
+                  firstName: "Loroteiro",
+                  lastName: "Silvestre",
                   email:    'loroteiro@silvestre.com',
                   facebook: false,
                   gender:   'unknown',
                   loggedIn: true,
-                  country:  'Brazil',
                   ip: '179.218.87.233'
                 })
               end
@@ -54,11 +54,12 @@ module Marketing
                 it 'returns hash with user gender and a truthy facebook key' do
                   expect(subject.body).to include({
                     name:     'Loroteiro Silvestre',
+                    firstName: "Loroteiro",
+                    lastName: "Silvestre",
                     gender:   'male',
                     email:    'loroteiro@silvestre.com',
                     loggedIn: true,
                     facebook: true,
-                    country:  'Brazil',
                     ip: '179.218.87.233'
                   })
                 end

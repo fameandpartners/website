@@ -87,7 +87,6 @@
 //= require partials/product_collection.js
 //require partials/product_customisation.js
 
-//= require partials/email_newsletter_subscriber
 //= require partials/email_capture_modal
 //= require partials/returns_modal
 //= require partials/helpers/tracker.js

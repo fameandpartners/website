@@ -9,7 +9,6 @@
 //= require partials/product_collection_image_hover.js.coffee
 
 //= require partials/helpers/shopping_cart
-//= require partials/email_newsletter_subscriber
 
 
 // Header

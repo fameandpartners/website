@@ -18,14 +18,6 @@ module Marketing
           product.price&.amount.to_f.round(2)
         end
 
-        def variants
-          if product.variants.first
-            [Variant.new(spree_variant: product.variants.first)&.body]
-          end
-          []
-          # product.variants.map { |variant| Variant.new(spree_variant: variant).body }
-        end
-
         def price_with_discount
           product.price_amount.to_f.round(2)
         end
@@ -77,17 +69,6 @@ module Marketing
           end
         end
 
-        def all_images
-          product.images.map do |image|
-            {
-                original: image.original,
-                xlarge:   image.xlarge,
-                large:    image.large,
-                small:    image.small,
-            }
-          end
-        end
-
         def body
           {
               id:                product.id,
@@ -103,11 +84,9 @@ module Marketing
               selectedColor:     selected_color,
               categories:        categories,
               image:             featured_image_urls,
-              images:            all_images,
               description:       description,
               expressMaking:     product.fast_making,
               sizes:             sizes,
-              variants:          variants
           }
         end
       end

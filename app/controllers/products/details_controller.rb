@@ -4,8 +4,6 @@ class Products::DetailsController < Products::BaseController
   layout 'custom_experience/application'
 
   def show
-    @zopim_opt_out = true
-    @optimizely_opt_in = true
     @product = setup_product(params)
     @user = spree_current_user || {}
 

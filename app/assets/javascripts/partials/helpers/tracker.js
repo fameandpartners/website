@@ -2,27 +2,18 @@ window.track = {
   dataLayer: window.dataLayer || [],
   ga: window.ga || function () {},
 
-  pageView: function (page_url) {
-    this.ga('send', 'pageview', page_url);
+  pageView: function (url) {
+    window.dataLayer.push({
+      event: 'Page Loaded',
+      eventDetail: { url },
+    });
   },
 
-  event: function (category, action, label, value, nonInteraction) {
-    var event_params = {
-      hitType: 'event',
-      eventCategory: category,
-      eventAction: action,
-      nonInteraction: nonInteraction,
-    };
-
-    if (label != null) {
-      event_params.eventLabel = label;
-    }
-
-    if (value != null) {
-      event_params.eventValue = value;
-    }
-
-    this.ga('send', event_params);
+  event: function (category, action, label) {
+    window.dataLayer.push({
+      event: action,
+      eventDetail: { category, label },
+    });
   },
 
   addedToWishlist: function (label) {
@@ -59,18 +50,18 @@ window.track = {
   },
 
   antiFastTrack: function (action, label) {
-    this.event('Collection', action, label, false);
+    this.event('Collection', action, label);
   },
 
   wholesaleTrack: function (action, label) {
-    this.event('Wholesale', action, label, false);
+    this.event('Wholesale', action, label);
   },
 
   internshipTrack: function (action, label) {
-    this.event('Internship', action, label, false);
+    this.event('Internship', action, label);
   },
 
   bridesmaidTeaserTrack: function (action, label) {
-    this.event('BridesmaidTeaser', action, label, false);
+    this.event('BridesmaidTeaser', action, label);
   },
 };
