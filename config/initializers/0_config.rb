@@ -95,7 +95,8 @@ configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
 configatron.fame_webclient_always_regex = /^(\/static|\/dresses-new|\/_webclient|\/dress-system|\/dresses\/custom-dress-FPG|\/dresses\/dress-FPG)/
-configatron.fame_webclient_regex = /^(\/size-guide|\/dresses\/(custom-dress|dress-.*-[0-9]*))/
+configatron.fame_webclient_pdp_regex = /^(\/dresses\/(custom-dress|dress-.*-[0-9]*))/
+configatron.fame_webclient_content_regex = /^(\/size-guide|\/about|\/$)/
 configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
 
 

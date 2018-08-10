@@ -33,7 +33,8 @@ module Features
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
     refulfill:                     "Check new orders coming in against inventory.",
     batching:                      "Batch line items into styles for production.",
-    new_pdp:                       "Enables new PDP page that was introduced by the bridesmaids project"
+    new_pdp:                       "Enables new PDP page that was introduced by the bridesmaids project",
+    new_content:                   "Enables new content pages that were introduced by the bridesmaids project"
   }
 
   class << self
