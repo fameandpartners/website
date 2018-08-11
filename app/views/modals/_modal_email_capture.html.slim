@@ -8,7 +8,7 @@
 /    4.2 response pops a thanks modal on the same page.
 / 5. After X days, if this same user (not logged in) comes back, this modal window is shown again
 
-- if cookies[:modal_email_capture_promocode_displayed] != "true"
+- if cookies[:modal_email_capture_promocode_displayed] != "true" && !spree_user_signed_in?
 
   - promocode = 'FAME123'
   - cookie_days_to_expire = 180
