@@ -45,23 +45,15 @@
 //---------------------------
 // Spree have this by default
 //---------------------------
-// require libs/snap.svg-min.js
 // require libs/vex.combined.min.js
 // require libs/jquery.cookie
 // require libs/jquery.chosen.min
-// require libs/jquery.hoverable.js
-// require libs/superslides.js
-// require libs/responsiveslides.min.js
-// require libs/jquery.skippr.js
 
 //----------------
 // Styleguide code
 //----------------
 // require "styleguide/js/functions.js"
 // require js/main.js
-
-//  require js/superslides.js # copied to libs/superslides for easier monkey-patching
-// require functions_redesign.js
 
 //----------------
 // Masterpass libs
@@ -114,9 +106,6 @@
 
 // Profile/Account Settings
 // require partials/account_settings_page
-
-// campaigns
-// require partials/fitgau_reminder
 
 //--------------------------------
 // Contentful
