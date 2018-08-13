@@ -74,7 +74,7 @@ module Marketing
             total_amount: total_amount,
             sku:          sku,
             variant_sku:  variant_sku,
-            variant_price:  variant_price,
+            variant_price:variant_price,
             product_sku:  product_sku,
             description:  product_description,
             image_url:    image_url,

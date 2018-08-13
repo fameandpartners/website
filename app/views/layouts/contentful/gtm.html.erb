@@ -11,6 +11,7 @@
 
 <script>
   dataLayer.push(<%= @gtm_container.to_json %>);
+  dataLayer.push({event: "Page Loaded"});
 </script>
 
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<%= @gtm_id %>"

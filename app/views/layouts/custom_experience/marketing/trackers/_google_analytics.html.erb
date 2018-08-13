@@ -1,7 +1,5 @@
 <% if tracker = Spree::Tracker.current %>
   <%= javascript_tag do %>
-    dataLayer.push({event: "Page Loaded"});
-
     <% if flash[:signed_up_just_now] %>
         dataLayer.push({event: "User Signed Up", eventDetail: {category: "User"}});
     <% end %>

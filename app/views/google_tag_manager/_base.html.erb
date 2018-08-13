@@ -11,6 +11,7 @@
 
 <script>
   dataLayer.push(<%= @gtm_container.to_json %>);
+  dataLayer.push({event: "Page Loaded"});
 </script>
 
 <% if Rails.env.production? || Features.active?(:test_analytics) %>

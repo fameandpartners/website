@@ -19,6 +19,7 @@ module Marketing
             {
               id:           product.id,
               sku:          product.sku,
+              productSku:   product.sku,
               name:         product.name,
               price:        product.price.amount,
               type:         product.type,
