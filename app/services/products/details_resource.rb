@@ -67,7 +67,12 @@ class Products::DetailsResource
       moodboard:            product_moodboard,
     }
 
-    Products::Presenter.new(non_primitive_options.merge(primitive_options))
+    presenter = Products::Presenter.new(non_primitive_options.merge(primitive_options))
+    # hacky: call methods to force lazy loaded values to be computed
+    presenter.sizes
+    presenter.featured_image
+    presenter.prices
+    presenter
   end
 
   private

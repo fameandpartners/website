@@ -25,10 +25,7 @@ module Marketing
                 expect(subject.body).to include({
                   name:     'unknown',
                   email:    'unknown',
-                  facebook: false,
-                  gender:   'unknown',
                   loggedIn: false,
-                  ip: '179.218.87.233'
                 })
               end
             end
@@ -40,28 +37,8 @@ module Marketing
                   firstName: "Loroteiro",
                   lastName: "Silvestre",
                   email:    'loroteiro@silvestre.com',
-                  facebook: false,
-                  gender:   'unknown',
                   loggedIn: true,
-                  ip: '179.218.87.233'
                 })
-              end
-
-              context 'user comes from facebook' do
-                before(:each) { user.facebook_data_value[:gender] = 'male' }
-
-                it 'returns hash with user gender and a truthy facebook key' do
-                  expect(subject.body).to include({
-                    name:     'Loroteiro Silvestre',
-                    firstName: "Loroteiro",
-                    lastName: "Silvestre",
-                    gender:   'male',
-                    email:    'loroteiro@silvestre.com',
-                    loggedIn: true,
-                    facebook: true,
-                    ip: '179.218.87.233'
-                  })
-                end
               end
             end
           end
