@@ -73,20 +73,9 @@ module Marketing
           {
               id:                product.id,
               name:              product.name,
-              brand:             'Fame & Partners', # Hardcoded for the moment
               sku:               product.sku,
               price:             price.to_f,
-              priceWithDiscount: price_with_discount,
-              discountPercent:   discount_percent,
               type:              'dresses', # Hardcoded for the moment
-              currency:          currency,
-              colors:            colors,
-              selectedColor:     selected_color,
-              categories:        categories,
-              image:             featured_image_urls,
-              description:       description,
-              expressMaking:     product.fast_making,
-              sizes:             sizes,
           }
         end
       end

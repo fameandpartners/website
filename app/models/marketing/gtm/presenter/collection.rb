@@ -21,8 +21,7 @@ module Marketing
               sku:          product.sku,
               name:         product.name,
               price:        product.price.amount,
-              category:     product.type,
-              position:     position
+              type:         product.type,
             }
           }
         end
