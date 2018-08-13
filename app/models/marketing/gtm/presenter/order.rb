@@ -45,7 +45,7 @@ module Marketing
         end
 
         def discount_amount
-          order.adjustments.discount.sum(:amount).to_f
+          order.display_promotion_total&.money&.amount&.to_f
         end
 
         def transaction_amount
@@ -66,7 +66,7 @@ module Marketing
               total_amount:           total_amount,
               taxes_amount:           taxes_amount,
               shipping_amount:        shipping_amount,
-              discount_amount:        order.discount&.amount || 0,
+              discount_amount:        discount_amount || 0,
               line_items:             line_items,
               humanized_total_amount: humanized_total_amount
           }
