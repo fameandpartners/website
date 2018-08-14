@@ -13,9 +13,7 @@ module Marketing
         end
 
         def body
-          position = -1
           collection.products.map { |product|
-            position += 1
             {
               id:           product.id,
               sku:          product.sku,

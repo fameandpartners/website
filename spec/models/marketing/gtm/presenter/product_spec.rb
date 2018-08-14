@@ -65,8 +65,9 @@ module Marketing
               id:                123,
               name:              'Super Dress',
               price:             12.34,
+              productSku:        "ABC123",
               sku:               'ABC123',
-              type:              'dresses',
+              type:              'Dress',
             })
           end
         end
