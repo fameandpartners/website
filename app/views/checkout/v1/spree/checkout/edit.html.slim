@@ -2,7 +2,6 @@
   | page.initCheckoutEditPage();
 
 - support_telephone = {'us' => '866 527 7797', 'au' => '1300 924 860'}[current_site_version.code]
-= render 'marketing/trackers/zopim'
 - cart = UserCart::UserCartResource.new(order: current_order).read
 
 - if current_step.eql?('payment')

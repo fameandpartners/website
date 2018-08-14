@@ -249,21 +249,3 @@ window.helpers.ShoppingCart = class ShoppingCart
       $('.js-returns-abc-option-message').removeClass('hidden');
     else
       $('.js-returns-abc-option-message').addClass('hidden');
-
-  # analytics
-  trackAddToCart: (product) ->
-    try
-      if @track
-        window.track.addedToCart(product.analytics_label, product)
-
-        if _cio
-          _cio.track("addedToCart", {
-            sku: product.sku,
-            name: product.name,
-            color: product.color.name,
-            size: product.size?.presentation,
-            value: product.price.amount,
-            currency: product.price.currency
-          });
-    catch
-      # do nothing

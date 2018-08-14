@@ -1,9 +1,0 @@
-.category-catalog.products-list
-	.row
-		- if @taxons.present?
-			- @taxons.each do |taxon|
-				div class="grid-3 taxon_tile"
-					= render 'taxon_tile', taxon: taxon
-
-		- else
-			.not-found Sorry, no dresses match your criteria

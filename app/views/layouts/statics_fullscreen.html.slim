@@ -6,7 +6,6 @@ doctype html
     = render 'layouts/head'
     = csrf_meta_tags
     = render 'marketing/trackers/google_analytics'
-    = render 'marketing/trackers/zopim'
   body class=(controller_action_class)
     #fb-root
     - if facebook_application.present?

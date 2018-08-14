@@ -8,7 +8,9 @@ class WebpackProxy < Rack::Proxy
       env['HTTP_HOST'] = "#{backend.host}:#{backend.port}"
       env['REQUEST_PATH'] = request.fullpath
       super(env)
-    elsif request.path =~ configatron.fame_webclient_always_regex || (request.path =~ configatron.fame_webclient_regex && Features.active?(:new_pdp))
+    elsif (request.path =~ configatron.fame_webclient_always_regex ||
+        (request.path =~ configatron.fame_webclient_pdp_regex && Features.active?(:new_pdp)) ||
+        (request.path =~ configatron.fame_webclient_content_regex && Features.active?(:new_content)))
       backend = URI(configatron.fame_webclient_url)
       env['HTTP_X_FAME_FORWARDED_HOST'] = env['HTTP_X_FORWARDED_HOST'] || env['HTTP_HOST']
       env['HTTP_X_FAME_FORWARDED_PROTO'] = env['HTTP_X_FORWARDED_PROTO'] || env['rack.url_scheme']

@@ -1,8 +1,0 @@
-div class=(element_class ||= 'grid-4')
-  .picture
-    = link_to collection_product_path(product) do
-      = hoverable_product_image_tag(product, colors: @current_colors, itemprop: 'image', alt: product.name)
-    .popup.striped
-      .fright.like = add_to_wishlist_link(product)
-  h6 = product.name
-  .price = product_price_with_discount(product)

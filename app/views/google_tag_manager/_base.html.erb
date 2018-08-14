@@ -3,7 +3,7 @@
 <%# - dataLayer must be declared above tag manager JS import %>
 <%# - Always use `#push()` with dataLayer array %>
 <%# http://www.simoahava.com/gtm-tips/datalayer-declaration-vs-push/ %>
-<% @gtm_id = Rails.env.production? ? 'GTM-KV54GB' : 'GTM-TPZ8PZK' %>
+<% @gtm_id = 'GTM-KV54GB' %>
 
 <script>window.dataLayer = window.dataLayer || [];</script>
 
@@ -11,6 +11,7 @@
 
 <script>
   dataLayer.push(<%= @gtm_container.to_json %>);
+  dataLayer.push({event: "Page Loaded"});
 </script>
 
 <% if Rails.env.production? || Features.active?(:test_analytics) %>

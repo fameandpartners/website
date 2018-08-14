@@ -14,7 +14,7 @@ module Marketing
         describe '#body' do
           before(:each) do
             order.save
-            expect(order).to receive(:line_items).twice.and_return([]) # LineItem GTM has its own specs
+            expect(order).to receive(:line_items).and_return([]) # LineItem GTM has its own specs
           end
 
           context 'given a spree order' do
@@ -26,7 +26,7 @@ module Marketing
                                              currency:               'AUD',
                                              email:                  'something@intheway.com',
                                              line_items:             [],
-                                             line_items_summary:     [],
+                                             discount_amount:        0.0,
                                              number:                 'R123456',
                                              shipping_amount:        0.0,
                                              taxes_amount:           0.0,
