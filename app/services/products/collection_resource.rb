@@ -199,11 +199,6 @@ class Products::CollectionResource
   def products
     results_ary = results["hits"]["hits"]
 
-    # excluding penelope for now
-    results_ary = results_ary.reject { |x|
-      x["_source"]["product"]["id"]==1728 rescue nil
-    }
-
     result = results_ary.map do |cvar|
       cvar = cvar['_source']
       discount = Repositories::Discount.get_product_discount(cvar["product"]["id"])
