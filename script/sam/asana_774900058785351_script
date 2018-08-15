@@ -12,7 +12,7 @@ elif [[ $1 == "penelope" ]]; then
   ./script/prepare_import.sh https://www.dropbox.com/sh/lvh52sx7ovk1h2b/AABMJ3L6TPoneiSgQ8qNluoja?dl=1
 elif [[ $1 == "tillie" ]]; then
   ./script/prepare_import.sh https://www.dropbox.com/sh/lcnslpkx9k82fnq/AAAYhjDMAYr07tYzBq6D5hpHa?dl=1
-end
+fi
 
 MARK_NEW_THIS_WEEK=true ./script/import_products.sh
 bundle exec rake data:six_week_delivery
