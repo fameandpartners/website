@@ -154,4 +154,4 @@ prepare $zip_file_url $import_directory
 # unzip -x -LL import/content/import.zip -d 'import/content/import'
 # rm -R import/content/import/__macosx/
 # rm -R import/content/import/cancelled-*
-rm ~/import/content/extract/fp2683/fp2683-sh*
+rm ~/import/content/extract/fp2683/fp2683-sh* || true
