@@ -410,10 +410,6 @@ Spree::Product.class_eval do
     ! jumpsuit?
   end
 
-  def variant_skus
-    variants.collect(&:sku)
-  end
-
   def presenter_as_details_resource(site_version = nil)
     @product ||= Products::DetailsResource.new(
       site_version: site_version,

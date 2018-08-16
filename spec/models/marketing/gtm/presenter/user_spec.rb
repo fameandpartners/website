@@ -11,26 +11,21 @@ module Marketing
             email: 'loroteiro@silvestre.com'
           )
         end
-        let(:request_ip) { '179.218.87.233' }
 
-        subject(:presenter) { described_class.new(spree_user: user, request_ip: request_ip) }
+        subject(:presenter) { described_class.new(spree_user: user) }
 
         it_behaves_like 'a Marketing::Gtm::Presenter::Base'
 
         describe '#body' do
           context 'given a spree user and his/her IP' do
             context 'user is not logged in' do
-              subject(:presenter) { described_class.new(spree_user: nil, request_ip: request_ip) }
+              subject(:presenter) { described_class.new(spree_user: nil) }
 
               it 'returns hash with unknown user info' do
                 expect(subject.body).to include({
                   name:     'unknown',
                   email:    'unknown',
-                  facebook: false,
-                  gender:   'unknown',
                   loggedIn: false,
-                  country:  'Brazil',
-                  ip: '179.218.87.233'
                 })
               end
             end
@@ -39,29 +34,11 @@ module Marketing
               it 'returns hash with user info' do
                 expect(subject.body).to include({
                   name:     'Loroteiro Silvestre',
+                  firstName: "Loroteiro",
+                  lastName: "Silvestre",
                   email:    'loroteiro@silvestre.com',
-                  facebook: false,
-                  gender:   'unknown',
                   loggedIn: true,
-                  country:  'Brazil',
-                  ip: '179.218.87.233'
                 })
-              end
-
-              context 'user comes from facebook' do
-                before(:each) { user.facebook_data_value[:gender] = 'male' }
-
-                it 'returns hash with user gender and a truthy facebook key' do
-                  expect(subject.body).to include({
-                    name:     'Loroteiro Silvestre',
-                    gender:   'male',
-                    email:    'loroteiro@silvestre.com',
-                    loggedIn: true,
-                    facebook: true,
-                    country:  'Brazil',
-                    ip: '179.218.87.233'
-                  })
-                end
               end
             end
           end

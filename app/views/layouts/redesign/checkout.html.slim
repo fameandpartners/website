@@ -18,9 +18,6 @@ doctype html
     = yield
 
     = render 'layouts/redesign/footer_alt'
-
-    = render 'layouts/redesign/shopping_bag'
-
     - if Features.active?(:marketing_modals)
       = render '/shared/marketing'
 

@@ -198,6 +198,7 @@ class Products::CollectionResource
 
   def products
     results_ary = results["hits"]["hits"]
+
     result = results_ary.map do |cvar|
       cvar = cvar['_source']
       discount = Repositories::Discount.get_product_discount(cvar["product"]["id"])
@@ -208,7 +209,6 @@ class Products::CollectionResource
       Products::Presenter.new(
         id:             cvar["product"]["id"],
         sku:            cvar["product"]["sku"],
-        variant_skus:   cvar["product"]["variant_skus"],
         name:           cvar["product"]["name"],
         color:          OpenStruct.new(cvar["color"]),
         fabric:         OpenStruct.new(cvar["fabric"]),

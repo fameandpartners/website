@@ -45,23 +45,15 @@
 //---------------------------
 // Spree have this by default
 //---------------------------
-// require libs/snap.svg-min.js
 // require libs/vex.combined.min.js
 // require libs/jquery.cookie
 // require libs/jquery.chosen.min
-// require libs/jquery.hoverable.js
-// require libs/superslides.js
-// require libs/responsiveslides.min.js
-// require libs/jquery.skippr.js
 
 //----------------
 // Styleguide code
 //----------------
 // require "styleguide/js/functions.js"
 // require js/main.js
-
-//  require js/superslides.js # copied to libs/superslides for easier monkey-patching
-// require functions_redesign.js
 
 //----------------
 // Masterpass libs
@@ -75,7 +67,6 @@
 //= require partials/helpers/site_version
 //= require partials/hero-tile-carousel
 // require partials/helpers/alert
-// require partials/helpers/product_side_selector_panel
 // require partials/helpers/modal
 // require partials/helpers/bs-tabs
 // require partials/helpers/collapse_toggle
@@ -90,7 +81,6 @@
 // require partials/product_collection.js
 //require partials/product_customisation.js
 
-//= require partials/email_newsletter_subscriber
 // require partials/email_capture_modal
 // require partials/helpers/tracker.js
 // require partials/helpers/error_messages.js.coffee
@@ -98,10 +88,7 @@
 //-----------------------------
 // Product details with related
 //-----------------------------
-// require partials/product_details.js
 // require partials/inputs/new.js.coffee
-// require partials/inputs/product_option_selectors.js.coffee
-// require partials/helpers/product_images_slider.js.coffee
 // require partials/product_collection_image_hover.js.coffee
 //= require partials/product_collection_image_hover.js
 
@@ -109,11 +96,8 @@
 // Shopping cart & bag & moodboard
 //--------------------------------
 //= require partials/helpers/shopping_cart
-// require partials/helpers/user_moodboard
 // require partials/product_collection_moodboard_links
-//= require partials/shopping_bag
 // require partials/shopping_cart_summary
-//= require partials/side_menu
 
 // require partials/user_order_returner
 
@@ -122,15 +106,6 @@
 
 // Profile/Account Settings
 // require partials/account_settings_page
-
-// campaigns
-// require partials/fitgau_reminder
-
-//--------------------------------
-// Header
-//--------------------------------
-//= require partials/header
-//= require partials/simplified_nav
 
 //--------------------------------
 // Contentful

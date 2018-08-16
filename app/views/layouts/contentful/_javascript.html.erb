@@ -1,11 +1,3 @@
-
-<% if Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>
-  <%= render 'marketing/trackers/customerio' %>
-<% end %>
-
-<%= render 'marketing/trackers/zopim' unless @zopim_opt_out %>
-
-
 <!-- Body End is for Javascript that needs to be loaded after markup -->
 <%= yield :body_end %>
 
@@ -75,23 +67,6 @@
 
     }
   });
-
-  // window.clickAddMoodboard = function(target, event) {
-  //   event.stopPropagation();
-  //   var $target, item, user_moodboards;
-  //   $target = $(target);
-  //   user_moodboards = window.app.user_moodboards;
-  //   item = {
-  //     moodboard_id: $target.data("moodboard-id"),
-  //     product_id: $target.data("product-id"),
-  //     color_id: $target.data("color-id")
-  //   };
-  //   user_moodboards.addItem(item);
-  //   return user_moodboards.on("change", function() {
-  //     return $("i", $target).removeClass("fa-plus").addClass("fa-check");
-  //   });
-  // };
-
 </script>
 
 <% # Check if current landing page's settings allow fade-in/out effects while users scroll %>

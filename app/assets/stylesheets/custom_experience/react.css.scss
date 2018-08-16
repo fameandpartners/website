@@ -14,3 +14,26 @@
   position: fixed;
   z-index: 400;
 }
+
+.__react_root_relaunch__ {
+  font-family: "brandon-grotesque",brandon-grotesque,sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  color: #333333;
+  text-align: left;
+
+  p {
+    font-family: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+  }
+
+  .copyright-site-version {
+    select {
+      background-image: none;
+      padding: 0;
+    }
+  }
+}

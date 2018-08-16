@@ -57,7 +57,6 @@ module Revolution
           Products::Presenter.new(
             :id           => p.id,
             :sku          => p.sku,
-            :variant_skus => p.variant_skus,
             :name         => p.name,
             :price        => price,
             :discount     => p.discount,
