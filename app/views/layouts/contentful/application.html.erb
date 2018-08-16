@@ -28,7 +28,11 @@
     </div>
 
     <div id="react-footer" class="__react_root__ __react_root_relaunch__"></div>
+    <div id="portal-root"></div>
 
+    <% if Features.active?(:marketing_modals) %>
+      <%= render '/shared/marketing' %>
+    <% end %>
 
     <%= render 'google_tag_manager/base' %>
 

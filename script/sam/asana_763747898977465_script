@@ -1,0 +1,24 @@
+echo here
+rm -rf ~/import || true
+if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
+  rm -rf ~/leahs/spree/website/spree || true
+  rm -rf ~/leahs/spree/website/public/spree || true
+  ~/bin/leahs_db 30
+fi
+./script/prepare_import.sh https://www.dropbox.com/sh/2jpnew54tdmet7r/AABXyYk7Q3jAQhdwmSn5IaSXa?dl=1
+MARK_NEW_THIS_WEEK=true ./script/import_products.sh
+
+bundle exec rake data:six_week_delivery
+bundle exec rake data:add_fastmaking_to_all_products
+bundle exec rake data:make_fast_making_18_dollars
+bundle exec rake data:fabric_bla_bla
+bundle exec rake elasticsearch:reindex
+bundle exec rails runner 'Rails.cache.clear'
+if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
+  cp -r ~/leahs/website/spree ~/leahs/website/public/;
+fi
+
+bundle exec rails runner 'purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id; dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender").id; puts "INSERT INTO option_values_option_values_groups (option_value_id,option_values_group_id) VALUES (#{dusty_lavender_option_value_id},#{purple_option_value_group_id});"'
+if [ `hostname` = "Fulls-MacBook-Pro-2.local" ]; then
+  bundle exec rails runner 'purple_option_value_group_id = Spree::OptionValuesGroup.find_by_name("purple").id; dusty_lavender_option_value_id = Spree::OptionValue.find_by_name("dusty-lavender").id; aaa="INSERT INTO option_values_option_values_groups (option_value_id,option_values_group_id) VALUES (#{dusty_lavender_option_value_id},#{purple_option_value_group_id});"; ActiveRecord::Base.connection.execute(aaa);'
+fi

@@ -88,14 +88,10 @@
               <% end %>
               <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.presentation %></span></dd>
 
-              <% if product.from_wedding_atelier: %>
-                <dd><span class="line-item-description-heading">Height:</span> <span><%= product.height %></span></dd>
+              <% if product.display_height: %>
+                <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
               <% else: %>
-                <% if product.display_height: %>
-                  <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
-                <% else: %>
-                  <dd><span>Skirt Length:</span> <span><%= product.height %></span></dd>
-                <% end %>
+                <dd><span>Skirt Length:</span> <span><%= product.height %></span></dd>
               <% end %>
 
               <dd>

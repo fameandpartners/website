@@ -10,7 +10,6 @@ module Features
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
     express_making:                '[DEPRECATED] same as the "getitquick_unavailable" flag. Not used anywhere.',
-    fameweddings:                  'Weddings "Shop"',
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",
     delayed_delivery:              "Show delayed delivery option for end users in Checkout page.",
@@ -32,7 +31,6 @@ module Features
     style_quiz:                    nil,
     super_fast_making:             "Toggles the 'Super Express' ribbon in category pages. Selected items are managed via Spree.",
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
-    wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding-atelier` URL. Needs to restart server on feature toggle.',
     refulfill:                     "Check new orders coming in against inventory.",
     batching:                      "Batch line items into styles for production.",
     new_pdp:                       "Enables new PDP page that was introduced by the bridesmaids project"

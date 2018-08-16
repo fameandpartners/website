@@ -1,11 +1,16 @@
 module Orders
   class LineItemCSVPresenter
     class << self
+      PRODUCTS_TO_IGNORE = [
+        'return_insurance',
+        'sw'
+      ]
 
       attr_reader :line
 
       def set_line(line)
         @line = line
+        @item = nil
       end
 
       %w(
@@ -66,7 +71,7 @@ module Orders
         if personalization.present?
           customs = JSON.parse(item.customizations)
             .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
-            .map {|x| x['customisation_value']['presentation']}
+            .map {|x| format_customisation(customization: x, include_codes: true)}
           if customs.empty?
             customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
           end
@@ -77,11 +82,15 @@ module Orders
       end
 
       def item
-        Spree::LineItem.find(line['line_item_id'])
+        @item ||= Spree::LineItem.find(line['line_item_id'])
       end
 
       def custom_color
         color if personalization.present? && !line['custom_color'].present?
+      end
+
+      def material
+        line['material']
       end
 
       def delivery_date
@@ -122,11 +131,11 @@ module Orders
       end
 
       def sku
-        if personalization.present?
-          color_id.nil? ? error_sku : personalization_sku
-        else
-          variant_sku
-        end
+        global_sku&.sku
+      end
+
+      def ignore_line?
+        PRODUCTS_TO_IGNORE.include?(style.downcase)
       end
 
       private
@@ -136,10 +145,8 @@ module Orders
       end
 
       def global_sku
-        li = Spree::LineItem.find_by_id(line['line_item_id'].to_i)
-        lip = nil
-        if li
-          lip = Orders::LineItemPresenter.new(li)
+        if item
+          lip = Orders::LineItemPresenter.new(item)
           GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
         else
           nil
@@ -150,30 +157,18 @@ module Orders
         line['variant_sku']
       end
 
-      def error_sku
-        "#{line['variant_sku']}X"
-      end
-
-      def personalization_sku
-        # TODO: this is duplicated logic from the `CustomItemSku` generator!
-        li = Spree::LineItem.find_by_id(line['line_item_id'].to_i)
-        style_number = if (line['variant_master'] == 'TRUE' || line['variant_master'] == 't')
-                         line['variant_sku']
-                       else
-                         line['style']
-                       end.upcase
-        size = line['size'].gsub('/', '')
-        color = "C#{line['color_id']}"
-        fabric = li&.fabric ? "F#{li.fabric.id}" : ''
-        custom = customization_value_ids.map {|vid| "X#{vid}"}.join('').presence || 'X'
-        height = "H#{line['height'].to_s.upcase.first}#{line['height'].to_s.upcase.last}"
-        "#{style_number}#{size}#{color}#{custom}#{height}#{fabric}"
-      end
-
       def customization_value_ids
         YAML.load(line['customization_value_ids']) if line['customization_value_ids'].present?
       end
 
+      def format_customisation(customization:, include_codes: false)
+        if include_codes && Spree::Product.is_new_product?(style)
+          "#{customization['customisation_value']['name']} #{customization['customisation_value']['presentation']}"
+        else
+          customization['customisation_value']['presentation']
+        end
+      end
+      
     end
   end
 end

@@ -45,7 +45,6 @@ path 'engines' do
   gem 'afterpay'
   gem 'next_logistics'
   gem 'iequalchange'
-  gem 'wedding-atelier'
   gem 'bronto'
 end
 

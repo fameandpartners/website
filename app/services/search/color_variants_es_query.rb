@@ -3,7 +3,7 @@ module Search
     require 'elasticsearch/dsl'
     include Elasticsearch::DSL
 
-    def self.build(options = {})
+    def self.build(options = {})      
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
@@ -112,7 +112,6 @@ module Search
                 end
               end
             end
-
             if colors.present?
               filter do
                 bool do
@@ -125,11 +124,12 @@ module Search
               end
             end
 
-          end
-
-          if query_string.present?
-            query_string do
-              query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+            if query_string.present?
+              must do
+                query_string do
+                  query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+                end
+              end
             end
           end
         end

@@ -21,20 +21,5 @@ describe Repositories::LineItemImages do
         expect(result).to be_an_instance_of(Repositories::Images::Template)
       end
     end
-
-    context 'given a line item from the wedding atelier app' do
-      # Image formation for wedding atelier dresses should be tested elsewhere, thus stubbing it
-      # TODO: write specs for wedding atelier image formation given a line item without mocking it
-
-      let!(:wedding_taxonomy) { FactoryGirl.create(:taxonomy, name: 'Wedding Atelier') }
-      let!(:wedding_taxon) { wedding_taxonomy.root }
-
-      before(:each) { product.taxons = [wedding_taxon] }
-
-      it 'returns' do
-        expect(repository).to receive(:image_for_wedding_atelier).and_return({})
-        expect(repository.read).to be_an_instance_of(Repositories::Images::Template)
-      end
-    end
   end
 end
