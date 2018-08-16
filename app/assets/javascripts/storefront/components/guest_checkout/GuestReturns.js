@@ -57,9 +57,9 @@ class GuestReturnApp extends Component {
       <div className="grid-center-noGutter GuestReturn__Container">
         <div className="col-4_md-5_sm-10">
           <p className="headline">Let’s get started.</p>
-          <p className="subheader">Want to return? No problem. Orders placed
-           with the Returns Deposit may be returned within 30 days of the
-           delivery date.</p>
+          <p className="subheader">Want to return? No problem.<br /> Orders
+           placed with the Returns Deposit may be returned within 30 days of
+           the delivery date for a refund (excluding the returns deposit).</p>
           <div className={lookupError ? 'error-box' : 'u-hide'}>
             <p>Sorry, the order number or email address you entered is incorrect.
               Please check your information and try again.</p>
