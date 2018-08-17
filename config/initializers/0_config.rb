@@ -30,7 +30,7 @@ end
 configatron.customerio.site_id    = ENV['CUSTOMERIO_SITE_ID']
 configatron.customerio.secret_key = ENV['CUSTOMERIO_SECRET_KEY']
 
-configatron.order_production_emails = ['production@fameandpartners.dev']
+configatron.order_production_emails = 'production@fameandpartners.dev'
 
 configatron.email_marketing.delay_time do |delay_time|
   delay_time.abandoned_cart                   = 4.hours
@@ -124,7 +124,7 @@ when :staging
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
 
-  configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
+  configatron.order_production_emails = 'orders@fameandpartners.com.cn'
   configatron.micro_influencer_email_address='influencerapplications@fameandpartners.com'
 when :test
   configatron.site_version_detector_strategy = :subdomain
