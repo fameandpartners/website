@@ -2,6 +2,11 @@ namespace :data do
   	task :add_fastmaking_to_all_products => :environment do
 	products = Spree::Product.all
 		products.each do |product|
+			if Spree::Product.is_new_product?(product.master.sku)
+				puts "Ignoring product - #{product.master.sku}"
+				next
+			end
+
 			if product.making_options.any? {|mo| mo.option_type == 'fast_making'}
 				pmo = product.making_options.detect {|mo| mo.option_type == 'fast_making'}
 				pmo.active = true
