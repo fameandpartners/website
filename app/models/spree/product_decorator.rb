@@ -442,8 +442,10 @@ Spree::Product.class_eval do
   end
 
   def self.format_new_pid(fabric, customizations)
+    should_split = fabric && /^\d+-\d+$/ =~ fabric
+
     components = [
-      fabric.split('-'),
+      should_split ? fabric.split('-') : fabric,
       customizations.map{|c| c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
   end

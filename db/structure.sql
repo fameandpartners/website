@@ -2,14 +2,15 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 10.4
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
@@ -28,8 +29,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -38,7 +37,7 @@ SET default_with_oids = false;
 -- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE activities (
+CREATE TABLE public.activities (
     id integer NOT NULL,
     action character varying(255),
     number integer,
@@ -59,7 +58,7 @@ CREATE TABLE activities (
 -- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE activities_id_seq
+CREATE SEQUENCE public.activities_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -71,14 +70,14 @@ CREATE SEQUENCE activities_id_seq
 -- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+ALTER SEQUENCE public.activities_id_seq OWNED BY public.activities.id;
 
 
 --
 -- Name: answer_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE answer_taxons (
+CREATE TABLE public.answer_taxons (
     id integer NOT NULL,
     answer_id integer,
     taxon_id integer,
@@ -91,7 +90,7 @@ CREATE TABLE answer_taxons (
 -- Name: answer_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE answer_taxons_id_seq
+CREATE SEQUENCE public.answer_taxons_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -103,14 +102,14 @@ CREATE SEQUENCE answer_taxons_id_seq
 -- Name: answer_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE answer_taxons_id_seq OWNED BY answer_taxons.id;
+ALTER SEQUENCE public.answer_taxons_id_seq OWNED BY public.answer_taxons.id;
 
 
 --
 -- Name: answers; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE answers (
+CREATE TABLE public.answers (
     id integer NOT NULL,
     question_id integer,
     code character varying(255),
@@ -130,7 +129,7 @@ CREATE TABLE answers (
 -- Name: answers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE answers_id_seq
+CREATE SEQUENCE public.answers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -142,14 +141,14 @@ CREATE SEQUENCE answers_id_seq
 -- Name: answers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
+ALTER SEQUENCE public.answers_id_seq OWNED BY public.answers.id;
 
 
 --
 -- Name: batch_collection_line_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE batch_collection_line_items (
+CREATE TABLE public.batch_collection_line_items (
     id integer NOT NULL,
     batch_collection_id integer,
     line_item_id integer,
@@ -164,7 +163,7 @@ CREATE TABLE batch_collection_line_items (
 -- Name: batch_collection_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE batch_collection_line_items_id_seq
+CREATE SEQUENCE public.batch_collection_line_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -176,14 +175,14 @@ CREATE SEQUENCE batch_collection_line_items_id_seq
 -- Name: batch_collection_line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE batch_collection_line_items_id_seq OWNED BY batch_collection_line_items.id;
+ALTER SEQUENCE public.batch_collection_line_items_id_seq OWNED BY public.batch_collection_line_items.id;
 
 
 --
 -- Name: batch_collections; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE batch_collections (
+CREATE TABLE public.batch_collections (
     id integer NOT NULL,
     batch_key character varying(255),
     status character varying(255),
@@ -196,7 +195,7 @@ CREATE TABLE batch_collections (
 -- Name: batch_collections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE batch_collections_id_seq
+CREATE SEQUENCE public.batch_collections_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -208,14 +207,14 @@ CREATE SEQUENCE batch_collections_id_seq
 -- Name: batch_collections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE batch_collections_id_seq OWNED BY batch_collections.id;
+ALTER SEQUENCE public.batch_collections_id_seq OWNED BY public.batch_collections.id;
 
 
 --
 -- Name: bergen_return_item_processes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE bergen_return_item_processes (
+CREATE TABLE public.bergen_return_item_processes (
     id integer NOT NULL,
     aasm_state character varying(255),
     return_request_item_id integer,
@@ -230,7 +229,7 @@ CREATE TABLE bergen_return_item_processes (
 -- Name: bergen_return_item_processes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE bergen_return_item_processes_id_seq
+CREATE SEQUENCE public.bergen_return_item_processes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -242,14 +241,14 @@ CREATE SEQUENCE bergen_return_item_processes_id_seq
 -- Name: bergen_return_item_processes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE bergen_return_item_processes_id_seq OWNED BY bergen_return_item_processes.id;
+ALTER SEQUENCE public.bergen_return_item_processes_id_seq OWNED BY public.bergen_return_item_processes.id;
 
 
 --
 -- Name: bulk_order_updates; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE bulk_order_updates (
+CREATE TABLE public.bulk_order_updates (
     id integer NOT NULL,
     "user" text,
     filename text,
@@ -263,7 +262,7 @@ CREATE TABLE bulk_order_updates (
 -- Name: bulk_order_updates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE bulk_order_updates_id_seq
+CREATE SEQUENCE public.bulk_order_updates_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -275,14 +274,14 @@ CREATE SEQUENCE bulk_order_updates_id_seq
 -- Name: bulk_order_updates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE bulk_order_updates_id_seq OWNED BY bulk_order_updates.id;
+ALTER SEQUENCE public.bulk_order_updates_id_seq OWNED BY public.bulk_order_updates.id;
 
 
 --
 -- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE categories (
+CREATE TABLE public.categories (
     id integer NOT NULL,
     category character varying(255),
     subcategory character varying(255)
@@ -293,7 +292,7 @@ CREATE TABLE categories (
 -- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE categories_id_seq
+CREATE SEQUENCE public.categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -305,14 +304,14 @@ CREATE SEQUENCE categories_id_seq
 -- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
 -- Name: celebrity_inspirations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE celebrity_inspirations (
+CREATE TABLE public.celebrity_inspirations (
     id integer NOT NULL,
     spree_product_id integer,
     celebrity_name character varying(255),
@@ -330,7 +329,7 @@ CREATE TABLE celebrity_inspirations (
 -- Name: celebrity_inspirations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE celebrity_inspirations_id_seq
+CREATE SEQUENCE public.celebrity_inspirations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -342,14 +341,14 @@ CREATE SEQUENCE celebrity_inspirations_id_seq
 -- Name: celebrity_inspirations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE celebrity_inspirations_id_seq OWNED BY celebrity_inspirations.id;
+ALTER SEQUENCE public.celebrity_inspirations_id_seq OWNED BY public.celebrity_inspirations.id;
 
 
 --
 -- Name: competition_entries; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE competition_entries (
+CREATE TABLE public.competition_entries (
     id integer NOT NULL,
     user_id integer,
     inviter_id integer,
@@ -365,7 +364,7 @@ CREATE TABLE competition_entries (
 -- Name: competition_entries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE competition_entries_id_seq
+CREATE SEQUENCE public.competition_entries_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -377,14 +376,14 @@ CREATE SEQUENCE competition_entries_id_seq
 -- Name: competition_entries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE competition_entries_id_seq OWNED BY competition_entries.id;
+ALTER SEQUENCE public.competition_entries_id_seq OWNED BY public.competition_entries.id;
 
 
 --
 -- Name: competition_invitations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE competition_invitations (
+CREATE TABLE public.competition_invitations (
     id integer NOT NULL,
     user_id integer,
     token character varying(50),
@@ -401,7 +400,7 @@ CREATE TABLE competition_invitations (
 -- Name: competition_invitations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE competition_invitations_id_seq
+CREATE SEQUENCE public.competition_invitations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -413,14 +412,14 @@ CREATE SEQUENCE competition_invitations_id_seq
 -- Name: competition_invitations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE competition_invitations_id_seq OWNED BY competition_invitations.id;
+ALTER SEQUENCE public.competition_invitations_id_seq OWNED BY public.competition_invitations.id;
 
 
 --
 -- Name: competition_participations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE competition_participations (
+CREATE TABLE public.competition_participations (
     id integer NOT NULL,
     spree_user_id integer,
     token character varying(255),
@@ -435,7 +434,7 @@ CREATE TABLE competition_participations (
 -- Name: competition_participations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE competition_participations_id_seq
+CREATE SEQUENCE public.competition_participations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -447,14 +446,14 @@ CREATE SEQUENCE competition_participations_id_seq
 -- Name: competition_participations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE competition_participations_id_seq OWNED BY competition_participations.id;
+ALTER SEQUENCE public.competition_participations_id_seq OWNED BY public.competition_participations.id;
 
 
 --
 -- Name: contentful_routes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE contentful_routes (
+CREATE TABLE public.contentful_routes (
     id integer NOT NULL,
     route_name character varying(255),
     controller character varying(255),
@@ -468,7 +467,7 @@ CREATE TABLE contentful_routes (
 -- Name: contentful_routes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE contentful_routes_id_seq
+CREATE SEQUENCE public.contentful_routes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -480,14 +479,14 @@ CREATE SEQUENCE contentful_routes_id_seq
 -- Name: contentful_routes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE contentful_routes_id_seq OWNED BY contentful_routes.id;
+ALTER SEQUENCE public.contentful_routes_id_seq OWNED BY public.contentful_routes.id;
 
 
 --
 -- Name: contentful_versions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE contentful_versions (
+CREATE TABLE public.contentful_versions (
     id integer NOT NULL,
     change_message character varying(255),
     payload text,
@@ -502,7 +501,7 @@ CREATE TABLE contentful_versions (
 -- Name: contentful_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE contentful_versions_id_seq
+CREATE SEQUENCE public.contentful_versions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -514,14 +513,14 @@ CREATE SEQUENCE contentful_versions_id_seq
 -- Name: contentful_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE contentful_versions_id_seq OWNED BY contentful_versions.id;
+ALTER SEQUENCE public.contentful_versions_id_seq OWNED BY public.contentful_versions.id;
 
 
 --
 -- Name: custom_dress_images; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE custom_dress_images (
+CREATE TABLE public.custom_dress_images (
     id integer NOT NULL,
     custom_dress_id integer,
     file_file_name character varying(255),
@@ -537,7 +536,7 @@ CREATE TABLE custom_dress_images (
 -- Name: custom_dress_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE custom_dress_images_id_seq
+CREATE SEQUENCE public.custom_dress_images_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -549,14 +548,14 @@ CREATE SEQUENCE custom_dress_images_id_seq
 -- Name: custom_dress_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE custom_dress_images_id_seq OWNED BY custom_dress_images.id;
+ALTER SEQUENCE public.custom_dress_images_id_seq OWNED BY public.custom_dress_images.id;
 
 
 --
 -- Name: custom_dresses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE custom_dresses (
+CREATE TABLE public.custom_dresses (
     id integer NOT NULL,
     description text,
     color character varying(255),
@@ -575,7 +574,7 @@ CREATE TABLE custom_dresses (
 -- Name: custom_dresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE custom_dresses_id_seq
+CREATE SEQUENCE public.custom_dresses_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -587,14 +586,14 @@ CREATE SEQUENCE custom_dresses_id_seq
 -- Name: custom_dresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE custom_dresses_id_seq OWNED BY custom_dresses.id;
+ALTER SEQUENCE public.custom_dresses_id_seq OWNED BY public.custom_dresses.id;
 
 
 --
 -- Name: customisation_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE customisation_values (
+CREATE TABLE public.customisation_values (
     id integer NOT NULL,
     "position" integer,
     name character varying(255),
@@ -615,7 +614,7 @@ CREATE TABLE customisation_values (
 -- Name: customisation_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE customisation_values_id_seq
+CREATE SEQUENCE public.customisation_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -627,14 +626,14 @@ CREATE SEQUENCE customisation_values_id_seq
 -- Name: customisation_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE customisation_values_id_seq OWNED BY customisation_values.id;
+ALTER SEQUENCE public.customisation_values_id_seq OWNED BY public.customisation_values.id;
 
 
 --
 -- Name: customization_visualizations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE customization_visualizations (
+CREATE TABLE public.customization_visualizations (
     id integer NOT NULL,
     customization_ids character varying(1024),
     incompatible_ids character varying(1024),
@@ -652,7 +651,7 @@ CREATE TABLE customization_visualizations (
 -- Name: customization_visualizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE customization_visualizations_id_seq
+CREATE SEQUENCE public.customization_visualizations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -664,14 +663,14 @@ CREATE SEQUENCE customization_visualizations_id_seq
 -- Name: customization_visualizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE customization_visualizations_id_seq OWNED BY customization_visualizations.id;
+ALTER SEQUENCE public.customization_visualizations_id_seq OWNED BY public.customization_visualizations.id;
 
 
 --
 -- Name: data_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE data_migrations (
+CREATE TABLE public.data_migrations (
     version character varying(255) NOT NULL
 );
 
@@ -680,7 +679,7 @@ CREATE TABLE data_migrations (
 -- Name: discounts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE discounts (
+CREATE TABLE public.discounts (
     id integer NOT NULL,
     amount integer,
     created_at timestamp without time zone NOT NULL,
@@ -695,7 +694,7 @@ CREATE TABLE discounts (
 -- Name: discounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE discounts_id_seq
+CREATE SEQUENCE public.discounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -707,14 +706,14 @@ CREATE SEQUENCE discounts_id_seq
 -- Name: discounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE discounts_id_seq OWNED BY discounts.id;
+ALTER SEQUENCE public.discounts_id_seq OWNED BY public.discounts.id;
 
 
 --
 -- Name: spree_option_types; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_option_types (
+CREATE TABLE public.spree_option_types (
     id integer NOT NULL,
     name character varying(100),
     presentation character varying(100),
@@ -728,7 +727,7 @@ CREATE TABLE spree_option_types (
 -- Name: spree_option_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_option_values (
+CREATE TABLE public.spree_option_values (
     id integer NOT NULL,
     "position" integer,
     name character varying(255),
@@ -748,7 +747,7 @@ CREATE TABLE spree_option_values (
 -- Name: dress_colours; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW dress_colours AS
+CREATE VIEW public.dress_colours AS
  SELECT v.id,
     v."position",
     v.name,
@@ -761,8 +760,8 @@ CREATE VIEW dress_colours AS
     v.image_content_type,
     v.image_file_size,
     v.use_in_customisation
-   FROM (spree_option_values v
-     JOIN spree_option_types t ON ((t.id = v.option_type_id)))
+   FROM (public.spree_option_values v
+     JOIN public.spree_option_types t ON ((t.id = v.option_type_id)))
   WHERE ((t.name)::text = 'dress-color'::text);
 
 
@@ -770,7 +769,7 @@ CREATE VIEW dress_colours AS
 -- Name: email_notifications; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE email_notifications (
+CREATE TABLE public.email_notifications (
     id integer NOT NULL,
     spree_user_id integer,
     code character varying(255),
@@ -783,7 +782,7 @@ CREATE TABLE email_notifications (
 -- Name: email_notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE email_notifications_id_seq
+CREATE SEQUENCE public.email_notifications_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -795,14 +794,14 @@ CREATE SEQUENCE email_notifications_id_seq
 -- Name: email_notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE email_notifications_id_seq OWNED BY email_notifications.id;
+ALTER SEQUENCE public.email_notifications_id_seq OWNED BY public.email_notifications.id;
 
 
 --
 -- Name: fabric_card_colours; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabric_card_colours (
+CREATE TABLE public.fabric_card_colours (
     id integer NOT NULL,
     "position" text,
     code text,
@@ -817,7 +816,7 @@ CREATE TABLE fabric_card_colours (
 -- Name: fabric_card_colours_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabric_card_colours_id_seq
+CREATE SEQUENCE public.fabric_card_colours_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -829,14 +828,14 @@ CREATE SEQUENCE fabric_card_colours_id_seq
 -- Name: fabric_card_colours_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabric_card_colours_id_seq OWNED BY fabric_card_colours.id;
+ALTER SEQUENCE public.fabric_card_colours_id_seq OWNED BY public.fabric_card_colours.id;
 
 
 --
 -- Name: fabric_cards; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabric_cards (
+CREATE TABLE public.fabric_cards (
     id integer NOT NULL,
     name text NOT NULL,
     code text,
@@ -851,7 +850,7 @@ CREATE TABLE fabric_cards (
 -- Name: fabric_cards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabric_cards_id_seq
+CREATE SEQUENCE public.fabric_cards_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -863,14 +862,14 @@ CREATE SEQUENCE fabric_cards_id_seq
 -- Name: fabric_cards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabric_cards_id_seq OWNED BY fabric_cards.id;
+ALTER SEQUENCE public.fabric_cards_id_seq OWNED BY public.fabric_cards.id;
 
 
 --
 -- Name: fabric_colours; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabric_colours (
+CREATE TABLE public.fabric_colours (
     id integer NOT NULL,
     name text,
     dress_colour_id integer,
@@ -883,7 +882,7 @@ CREATE TABLE fabric_colours (
 -- Name: fabric_colours_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabric_colours_id_seq
+CREATE SEQUENCE public.fabric_colours_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -895,14 +894,14 @@ CREATE SEQUENCE fabric_colours_id_seq
 -- Name: fabric_colours_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabric_colours_id_seq OWNED BY fabric_colours.id;
+ALTER SEQUENCE public.fabric_colours_id_seq OWNED BY public.fabric_colours.id;
 
 
 --
 -- Name: fabrication_events; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabrication_events (
+CREATE TABLE public.fabrication_events (
     id integer NOT NULL,
     fabrication_uuid character varying(255),
     event_type character varying(255),
@@ -916,7 +915,7 @@ CREATE TABLE fabrication_events (
 -- Name: fabrication_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabrication_events_id_seq
+CREATE SEQUENCE public.fabrication_events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -928,14 +927,14 @@ CREATE SEQUENCE fabrication_events_id_seq
 -- Name: fabrication_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabrication_events_id_seq OWNED BY fabrication_events.id;
+ALTER SEQUENCE public.fabrication_events_id_seq OWNED BY public.fabrication_events.id;
 
 
 --
 -- Name: fabrications; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabrications (
+CREATE TABLE public.fabrications (
     id integer NOT NULL,
     line_item_id integer,
     purchase_order_number character varying(255),
@@ -952,7 +951,7 @@ CREATE TABLE fabrications (
 -- Name: fabrications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabrications_id_seq
+CREATE SEQUENCE public.fabrications_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -964,14 +963,14 @@ CREATE SEQUENCE fabrications_id_seq
 -- Name: fabrications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabrications_id_seq OWNED BY fabrications.id;
+ALTER SEQUENCE public.fabrications_id_seq OWNED BY public.fabrications.id;
 
 
 --
 -- Name: fabrics; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabrics (
+CREATE TABLE public.fabrics (
     id integer NOT NULL,
     name character varying(255),
     presentation character varying(255),
@@ -990,7 +989,7 @@ CREATE TABLE fabrics (
 -- Name: fabrics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabrics_id_seq
+CREATE SEQUENCE public.fabrics_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1002,14 +1001,14 @@ CREATE SEQUENCE fabrics_id_seq
 -- Name: fabrics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabrics_id_seq OWNED BY fabrics.id;
+ALTER SEQUENCE public.fabrics_id_seq OWNED BY public.fabrics.id;
 
 
 --
 -- Name: fabrics_products; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE fabrics_products (
+CREATE TABLE public.fabrics_products (
     id integer NOT NULL,
     fabric_id integer,
     product_id integer,
@@ -1023,7 +1022,7 @@ CREATE TABLE fabrics_products (
 -- Name: fabrics_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fabrics_products_id_seq
+CREATE SEQUENCE public.fabrics_products_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1035,14 +1034,14 @@ CREATE SEQUENCE fabrics_products_id_seq
 -- Name: fabrics_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE fabrics_products_id_seq OWNED BY fabrics_products.id;
+ALTER SEQUENCE public.fabrics_products_id_seq OWNED BY public.fabrics_products.id;
 
 
 --
 -- Name: facebook_accounts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_accounts (
+CREATE TABLE public.facebook_accounts (
     id integer NOT NULL,
     facebook_id character varying(255),
     name character varying(255),
@@ -1059,7 +1058,7 @@ CREATE TABLE facebook_accounts (
 -- Name: facebook_accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_accounts_id_seq
+CREATE SEQUENCE public.facebook_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1071,14 +1070,14 @@ CREATE SEQUENCE facebook_accounts_id_seq
 -- Name: facebook_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_accounts_id_seq OWNED BY facebook_accounts.id;
+ALTER SEQUENCE public.facebook_accounts_id_seq OWNED BY public.facebook_accounts.id;
 
 
 --
 -- Name: facebook_ad_creatives; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_ad_creatives (
+CREATE TABLE public.facebook_ad_creatives (
     id integer NOT NULL,
     facebook_id character varying(255),
     facebook_ad_id integer,
@@ -1092,7 +1091,7 @@ CREATE TABLE facebook_ad_creatives (
 -- Name: facebook_ad_creatives_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_ad_creatives_id_seq
+CREATE SEQUENCE public.facebook_ad_creatives_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1104,14 +1103,14 @@ CREATE SEQUENCE facebook_ad_creatives_id_seq
 -- Name: facebook_ad_creatives_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_ad_creatives_id_seq OWNED BY facebook_ad_creatives.id;
+ALTER SEQUENCE public.facebook_ad_creatives_id_seq OWNED BY public.facebook_ad_creatives.id;
 
 
 --
 -- Name: facebook_ad_insights; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_ad_insights (
+CREATE TABLE public.facebook_ad_insights (
     id integer NOT NULL,
     facebook_ad_id integer,
     clicks integer,
@@ -1142,7 +1141,7 @@ CREATE TABLE facebook_ad_insights (
 -- Name: facebook_ad_insights_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_ad_insights_id_seq
+CREATE SEQUENCE public.facebook_ad_insights_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1154,14 +1153,14 @@ CREATE SEQUENCE facebook_ad_insights_id_seq
 -- Name: facebook_ad_insights_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_ad_insights_id_seq OWNED BY facebook_ad_insights.id;
+ALTER SEQUENCE public.facebook_ad_insights_id_seq OWNED BY public.facebook_ad_insights.id;
 
 
 --
 -- Name: facebook_ads; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_ads (
+CREATE TABLE public.facebook_ads (
     id integer NOT NULL,
     facebook_id character varying(255),
     facebook_adset_id character varying(255),
@@ -1180,7 +1179,7 @@ CREATE TABLE facebook_ads (
 -- Name: facebook_ads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_ads_id_seq
+CREATE SEQUENCE public.facebook_ads_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1192,14 +1191,14 @@ CREATE SEQUENCE facebook_ads_id_seq
 -- Name: facebook_ads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_ads_id_seq OWNED BY facebook_ads.id;
+ALTER SEQUENCE public.facebook_ads_id_seq OWNED BY public.facebook_ads.id;
 
 
 --
 -- Name: facebook_adsets; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_adsets (
+CREATE TABLE public.facebook_adsets (
     id integer NOT NULL,
     facebook_campaign_id character varying(255),
     facebook_id character varying(255),
@@ -1224,7 +1223,7 @@ CREATE TABLE facebook_adsets (
 -- Name: facebook_adsets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_adsets_id_seq
+CREATE SEQUENCE public.facebook_adsets_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1236,14 +1235,14 @@ CREATE SEQUENCE facebook_adsets_id_seq
 -- Name: facebook_adsets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_adsets_id_seq OWNED BY facebook_adsets.id;
+ALTER SEQUENCE public.facebook_adsets_id_seq OWNED BY public.facebook_adsets.id;
 
 
 --
 -- Name: facebook_campaigns; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_campaigns (
+CREATE TABLE public.facebook_campaigns (
     id integer NOT NULL,
     facebook_id character varying(255),
     name character varying(255),
@@ -1263,7 +1262,7 @@ CREATE TABLE facebook_campaigns (
 -- Name: facebook_campaigns_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_campaigns_id_seq
+CREATE SEQUENCE public.facebook_campaigns_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1275,14 +1274,14 @@ CREATE SEQUENCE facebook_campaigns_id_seq
 -- Name: facebook_campaigns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_campaigns_id_seq OWNED BY facebook_campaigns.id;
+ALTER SEQUENCE public.facebook_campaigns_id_seq OWNED BY public.facebook_campaigns.id;
 
 
 --
 -- Name: facebook_data; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE facebook_data (
+CREATE TABLE public.facebook_data (
     id integer NOT NULL,
     spree_user_id integer,
     value text,
@@ -1295,7 +1294,7 @@ CREATE TABLE facebook_data (
 -- Name: facebook_data_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE facebook_data_id_seq
+CREATE SEQUENCE public.facebook_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1307,18 +1306,19 @@ CREATE SEQUENCE facebook_data_id_seq
 -- Name: facebook_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE facebook_data_id_seq OWNED BY facebook_data.id;
+ALTER SEQUENCE public.facebook_data_id_seq OWNED BY public.facebook_data.id;
 
 
 --
 -- Name: factories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE factories (
+CREATE TABLE public.factories (
     id integer NOT NULL,
     name text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    production_email text
 );
 
 
@@ -1326,7 +1326,7 @@ CREATE TABLE factories (
 -- Name: factories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE factories_id_seq
+CREATE SEQUENCE public.factories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1338,14 +1338,14 @@ CREATE SEQUENCE factories_id_seq
 -- Name: factories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE factories_id_seq OWNED BY factories.id;
+ALTER SEQUENCE public.factories_id_seq OWNED BY public.factories.id;
 
 
 --
 -- Name: global_skus; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE global_skus (
+CREATE TABLE public.global_skus (
     id integer NOT NULL,
     sku character varying(255),
     style_number character varying(255),
@@ -1370,7 +1370,7 @@ CREATE TABLE global_skus (
 -- Name: global_skus_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE global_skus_id_seq
+CREATE SEQUENCE public.global_skus_id_seq
     START WITH 10000
     INCREMENT BY 1
     NO MINVALUE
@@ -1382,14 +1382,14 @@ CREATE SEQUENCE global_skus_id_seq
 -- Name: global_skus_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE global_skus_id_seq OWNED BY global_skus.id;
+ALTER SEQUENCE public.global_skus_id_seq OWNED BY public.global_skus.id;
 
 
 --
 -- Name: incompatibilities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE incompatibilities (
+CREATE TABLE public.incompatibilities (
     id integer NOT NULL,
     original_id integer,
     incompatible_id integer
@@ -1400,7 +1400,7 @@ CREATE TABLE incompatibilities (
 -- Name: incompatibilities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE incompatibilities_id_seq
+CREATE SEQUENCE public.incompatibilities_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1412,14 +1412,14 @@ CREATE SEQUENCE incompatibilities_id_seq
 -- Name: incompatibilities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE incompatibilities_id_seq OWNED BY incompatibilities.id;
+ALTER SEQUENCE public.incompatibilities_id_seq OWNED BY public.incompatibilities.id;
 
 
 --
 -- Name: inspirations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE inspirations (
+CREATE TABLE public.inspirations (
     id integer NOT NULL,
     spree_product_id integer,
     active boolean DEFAULT true,
@@ -1441,7 +1441,7 @@ CREATE TABLE inspirations (
 -- Name: inspirations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE inspirations_id_seq
+CREATE SEQUENCE public.inspirations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1453,14 +1453,14 @@ CREATE SEQUENCE inspirations_id_seq
 -- Name: inspirations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE inspirations_id_seq OWNED BY inspirations.id;
+ALTER SEQUENCE public.inspirations_id_seq OWNED BY public.inspirations.id;
 
 
 --
 -- Name: item_return_events; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE item_return_events (
+CREATE TABLE public.item_return_events (
     id integer NOT NULL,
     item_return_uuid character varying(255),
     event_type character varying(255),
@@ -1474,7 +1474,7 @@ CREATE TABLE item_return_events (
 -- Name: item_return_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE item_return_events_id_seq
+CREATE SEQUENCE public.item_return_events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1486,14 +1486,14 @@ CREATE SEQUENCE item_return_events_id_seq
 -- Name: item_return_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE item_return_events_id_seq OWNED BY item_return_events.id;
+ALTER SEQUENCE public.item_return_events_id_seq OWNED BY public.item_return_events.id;
 
 
 --
 -- Name: item_return_labels; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE item_return_labels (
+CREATE TABLE public.item_return_labels (
     id integer NOT NULL,
     label_url character varying(255),
     carrier character varying(255),
@@ -1501,7 +1501,8 @@ CREATE TABLE item_return_labels (
     label_pdf_url character varying(255),
     item_return_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    barcode character varying(255)
 );
 
 
@@ -1509,7 +1510,7 @@ CREATE TABLE item_return_labels (
 -- Name: item_return_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE item_return_labels_id_seq
+CREATE SEQUENCE public.item_return_labels_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1521,14 +1522,14 @@ CREATE SEQUENCE item_return_labels_id_seq
 -- Name: item_return_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE item_return_labels_id_seq OWNED BY item_return_labels.id;
+ALTER SEQUENCE public.item_return_labels_id_seq OWNED BY public.item_return_labels.id;
 
 
 --
 -- Name: item_returns; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE item_returns (
+CREATE TABLE public.item_returns (
     id integer NOT NULL,
     order_number character varying(255),
     line_item_id integer,
@@ -1580,7 +1581,7 @@ CREATE TABLE item_returns (
 -- Name: item_returns_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE item_returns_id_seq
+CREATE SEQUENCE public.item_returns_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1592,14 +1593,14 @@ CREATE SEQUENCE item_returns_id_seq
 -- Name: item_returns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE item_returns_id_seq OWNED BY item_returns.id;
+ALTER SEQUENCE public.item_returns_id_seq OWNED BY public.item_returns.id;
 
 
 --
 -- Name: layer_cads; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE layer_cads (
+CREATE TABLE public.layer_cads (
     id integer NOT NULL,
     product_id integer,
     "position" integer,
@@ -1626,7 +1627,7 @@ CREATE TABLE layer_cads (
 -- Name: layer_cads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE layer_cads_id_seq
+CREATE SEQUENCE public.layer_cads_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1638,14 +1639,14 @@ CREATE SEQUENCE layer_cads_id_seq
 -- Name: layer_cads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE layer_cads_id_seq OWNED BY layer_cads.id;
+ALTER SEQUENCE public.layer_cads_id_seq OWNED BY public.layer_cads.id;
 
 
 --
 -- Name: line_item_making_options; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE line_item_making_options (
+CREATE TABLE public.line_item_making_options (
     id integer NOT NULL,
     product_id integer,
     variant_id integer,
@@ -1662,7 +1663,7 @@ CREATE TABLE line_item_making_options (
 -- Name: line_item_making_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE line_item_making_options_id_seq
+CREATE SEQUENCE public.line_item_making_options_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1674,14 +1675,14 @@ CREATE SEQUENCE line_item_making_options_id_seq
 -- Name: line_item_making_options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE line_item_making_options_id_seq OWNED BY line_item_making_options.id;
+ALTER SEQUENCE public.line_item_making_options_id_seq OWNED BY public.line_item_making_options.id;
 
 
 --
 -- Name: line_item_personalizations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE line_item_personalizations (
+CREATE TABLE public.line_item_personalizations (
     id integer NOT NULL,
     line_item_id integer,
     product_id integer,
@@ -1704,7 +1705,7 @@ CREATE TABLE line_item_personalizations (
 -- Name: line_item_personalizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE line_item_personalizations_id_seq
+CREATE SEQUENCE public.line_item_personalizations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1716,14 +1717,14 @@ CREATE SEQUENCE line_item_personalizations_id_seq
 -- Name: line_item_personalizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE line_item_personalizations_id_seq OWNED BY line_item_personalizations.id;
+ALTER SEQUENCE public.line_item_personalizations_id_seq OWNED BY public.line_item_personalizations.id;
 
 
 --
 -- Name: line_item_size_normalisations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE line_item_size_normalisations (
+CREATE TABLE public.line_item_size_normalisations (
     id integer NOT NULL,
     line_item_id integer,
     line_item_personalization_id integer,
@@ -1749,7 +1750,7 @@ CREATE TABLE line_item_size_normalisations (
 -- Name: line_item_size_normalisations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE line_item_size_normalisations_id_seq
+CREATE SEQUENCE public.line_item_size_normalisations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1761,14 +1762,14 @@ CREATE SEQUENCE line_item_size_normalisations_id_seq
 -- Name: line_item_size_normalisations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE line_item_size_normalisations_id_seq OWNED BY line_item_size_normalisations.id;
+ALTER SEQUENCE public.line_item_size_normalisations_id_seq OWNED BY public.line_item_size_normalisations.id;
 
 
 --
 -- Name: line_item_updates; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE line_item_updates (
+CREATE TABLE public.line_item_updates (
     id integer NOT NULL,
     row_number integer,
     order_date text,
@@ -1801,7 +1802,7 @@ CREATE TABLE line_item_updates (
 -- Name: line_item_updates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE line_item_updates_id_seq
+CREATE SEQUENCE public.line_item_updates_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1813,14 +1814,14 @@ CREATE SEQUENCE line_item_updates_id_seq
 -- Name: line_item_updates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE line_item_updates_id_seq OWNED BY line_item_updates.id;
+ALTER SEQUENCE public.line_item_updates_id_seq OWNED BY public.line_item_updates.id;
 
 
 --
 -- Name: manually_managed_returns; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE manually_managed_returns (
+CREATE TABLE public.manually_managed_returns (
     id integer NOT NULL,
     item_return_id integer,
     item_return_event_id integer,
@@ -1873,7 +1874,7 @@ CREATE TABLE manually_managed_returns (
 -- Name: manually_managed_returns_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE manually_managed_returns_id_seq
+CREATE SEQUENCE public.manually_managed_returns_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1885,14 +1886,14 @@ CREATE SEQUENCE manually_managed_returns_id_seq
 -- Name: manually_managed_returns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE manually_managed_returns_id_seq OWNED BY manually_managed_returns.id;
+ALTER SEQUENCE public.manually_managed_returns_id_seq OWNED BY public.manually_managed_returns.id;
 
 
 --
 -- Name: marketing_body_calculator_measures; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE marketing_body_calculator_measures (
+CREATE TABLE public.marketing_body_calculator_measures (
     id integer NOT NULL,
     email character varying(255),
     shape character varying(255),
@@ -1911,7 +1912,7 @@ CREATE TABLE marketing_body_calculator_measures (
 -- Name: marketing_body_calculator_measures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE marketing_body_calculator_measures_id_seq
+CREATE SEQUENCE public.marketing_body_calculator_measures_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1923,14 +1924,14 @@ CREATE SEQUENCE marketing_body_calculator_measures_id_seq
 -- Name: marketing_body_calculator_measures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE marketing_body_calculator_measures_id_seq OWNED BY marketing_body_calculator_measures.id;
+ALTER SEQUENCE public.marketing_body_calculator_measures_id_seq OWNED BY public.marketing_body_calculator_measures.id;
 
 
 --
 -- Name: marketing_order_traffic_parameters; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE marketing_order_traffic_parameters (
+CREATE TABLE public.marketing_order_traffic_parameters (
     id integer NOT NULL,
     order_id integer,
     utm_campaign character varying(255),
@@ -1945,7 +1946,7 @@ CREATE TABLE marketing_order_traffic_parameters (
 -- Name: marketing_order_traffic_parameters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE marketing_order_traffic_parameters_id_seq
+CREATE SEQUENCE public.marketing_order_traffic_parameters_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1957,14 +1958,14 @@ CREATE SEQUENCE marketing_order_traffic_parameters_id_seq
 -- Name: marketing_order_traffic_parameters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE marketing_order_traffic_parameters_id_seq OWNED BY marketing_order_traffic_parameters.id;
+ALTER SEQUENCE public.marketing_order_traffic_parameters_id_seq OWNED BY public.marketing_order_traffic_parameters.id;
 
 
 --
 -- Name: marketing_user_visits; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE marketing_user_visits (
+CREATE TABLE public.marketing_user_visits (
     id integer NOT NULL,
     spree_user_id integer,
     user_token character varying(64),
@@ -1985,7 +1986,7 @@ CREATE TABLE marketing_user_visits (
 -- Name: marketing_user_visits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE marketing_user_visits_id_seq
+CREATE SEQUENCE public.marketing_user_visits_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1997,14 +1998,14 @@ CREATE SEQUENCE marketing_user_visits_id_seq
 -- Name: marketing_user_visits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE marketing_user_visits_id_seq OWNED BY marketing_user_visits.id;
+ALTER SEQUENCE public.marketing_user_visits_id_seq OWNED BY public.marketing_user_visits.id;
 
 
 --
 -- Name: moodboard_collaborators; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE moodboard_collaborators (
+CREATE TABLE public.moodboard_collaborators (
     id integer NOT NULL,
     moodboard_id integer,
     user_id integer,
@@ -2023,7 +2024,7 @@ CREATE TABLE moodboard_collaborators (
 -- Name: moodboard_collaborators_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE moodboard_collaborators_id_seq
+CREATE SEQUENCE public.moodboard_collaborators_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2035,14 +2036,14 @@ CREATE SEQUENCE moodboard_collaborators_id_seq
 -- Name: moodboard_collaborators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE moodboard_collaborators_id_seq OWNED BY moodboard_collaborators.id;
+ALTER SEQUENCE public.moodboard_collaborators_id_seq OWNED BY public.moodboard_collaborators.id;
 
 
 --
 -- Name: moodboard_item_comments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE moodboard_item_comments (
+CREATE TABLE public.moodboard_item_comments (
     id integer NOT NULL,
     moodboard_item_id integer,
     user_id integer,
@@ -2056,7 +2057,7 @@ CREATE TABLE moodboard_item_comments (
 -- Name: moodboard_item_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE moodboard_item_comments_id_seq
+CREATE SEQUENCE public.moodboard_item_comments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2068,14 +2069,14 @@ CREATE SEQUENCE moodboard_item_comments_id_seq
 -- Name: moodboard_item_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE moodboard_item_comments_id_seq OWNED BY moodboard_item_comments.id;
+ALTER SEQUENCE public.moodboard_item_comments_id_seq OWNED BY public.moodboard_item_comments.id;
 
 
 --
 -- Name: moodboard_item_events; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE moodboard_item_events (
+CREATE TABLE public.moodboard_item_events (
     id integer NOT NULL,
     moodboard_item_uuid character varying(255),
     event_type character varying(255),
@@ -2089,7 +2090,7 @@ CREATE TABLE moodboard_item_events (
 -- Name: moodboard_item_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE moodboard_item_events_id_seq
+CREATE SEQUENCE public.moodboard_item_events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2101,14 +2102,14 @@ CREATE SEQUENCE moodboard_item_events_id_seq
 -- Name: moodboard_item_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE moodboard_item_events_id_seq OWNED BY moodboard_item_events.id;
+ALTER SEQUENCE public.moodboard_item_events_id_seq OWNED BY public.moodboard_item_events.id;
 
 
 --
 -- Name: moodboard_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE moodboard_items (
+CREATE TABLE public.moodboard_items (
     id integer NOT NULL,
     uuid character varying(255),
     moodboard_id integer,
@@ -2130,7 +2131,7 @@ CREATE TABLE moodboard_items (
 -- Name: moodboard_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE moodboard_items_id_seq
+CREATE SEQUENCE public.moodboard_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2142,14 +2143,14 @@ CREATE SEQUENCE moodboard_items_id_seq
 -- Name: moodboard_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE moodboard_items_id_seq OWNED BY moodboard_items.id;
+ALTER SEQUENCE public.moodboard_items_id_seq OWNED BY public.moodboard_items.id;
 
 
 --
 -- Name: moodboards; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE moodboards (
+CREATE TABLE public.moodboards (
     id integer NOT NULL,
     user_id integer,
     name character varying(255),
@@ -2170,7 +2171,7 @@ CREATE TABLE moodboards (
 -- Name: moodboards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE moodboards_id_seq
+CREATE SEQUENCE public.moodboards_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2182,14 +2183,47 @@ CREATE SEQUENCE moodboards_id_seq
 -- Name: moodboards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE moodboards_id_seq OWNED BY moodboards.id;
+ALTER SEQUENCE public.moodboards_id_seq OWNED BY public.moodboards.id;
+
+
+--
+-- Name: newgistics_schedulers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.newgistics_schedulers (
+    id integer NOT NULL,
+    last_successful_run character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.newgistics_schedulers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: newgistics_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.newgistics_schedulers_id_seq OWNED BY public.newgistics_schedulers.id;
 
 
 --
 -- Name: next_logistics_return_request_processes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE next_logistics_return_request_processes (
+CREATE TABLE public.next_logistics_return_request_processes (
     id integer NOT NULL,
     order_return_request_id integer,
     aasm_state character varying(255),
@@ -2204,7 +2238,7 @@ CREATE TABLE next_logistics_return_request_processes (
 -- Name: next_logistics_return_request_processes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE next_logistics_return_request_processes_id_seq
+CREATE SEQUENCE public.next_logistics_return_request_processes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2216,14 +2250,14 @@ CREATE SEQUENCE next_logistics_return_request_processes_id_seq
 -- Name: next_logistics_return_request_processes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE next_logistics_return_request_processes_id_seq OWNED BY next_logistics_return_request_processes.id;
+ALTER SEQUENCE public.next_logistics_return_request_processes_id_seq OWNED BY public.next_logistics_return_request_processes.id;
 
 
 --
 -- Name: option_values_option_values_groups; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE option_values_option_values_groups (
+CREATE TABLE public.option_values_option_values_groups (
     option_value_id integer,
     option_values_group_id integer
 );
@@ -2233,7 +2267,7 @@ CREATE TABLE option_values_option_values_groups (
 -- Name: order_return_requests; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE order_return_requests (
+CREATE TABLE public.order_return_requests (
     id integer NOT NULL,
     order_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -2245,7 +2279,7 @@ CREATE TABLE order_return_requests (
 -- Name: order_return_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE order_return_requests_id_seq
+CREATE SEQUENCE public.order_return_requests_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2257,14 +2291,14 @@ CREATE SEQUENCE order_return_requests_id_seq
 -- Name: order_return_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE order_return_requests_id_seq OWNED BY order_return_requests.id;
+ALTER SEQUENCE public.order_return_requests_id_seq OWNED BY public.order_return_requests.id;
 
 
 --
 -- Name: order_shipments_factories_concrete; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE order_shipments_factories_concrete (
+CREATE TABLE public.order_shipments_factories_concrete (
     id integer NOT NULL,
     number character varying(15),
     state character varying(255),
@@ -2284,7 +2318,7 @@ CREATE TABLE order_shipments_factories_concrete (
 -- Name: payment_requests; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE payment_requests (
+CREATE TABLE public.payment_requests (
     id integer NOT NULL,
     order_id integer,
     recipient_full_name character varying(255),
@@ -2300,7 +2334,7 @@ CREATE TABLE payment_requests (
 -- Name: payment_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE payment_requests_id_seq
+CREATE SEQUENCE public.payment_requests_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2312,14 +2346,14 @@ CREATE SEQUENCE payment_requests_id_seq
 -- Name: payment_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE payment_requests_id_seq OWNED BY payment_requests.id;
+ALTER SEQUENCE public.payment_requests_id_seq OWNED BY public.payment_requests.id;
 
 
 --
 -- Name: product_accessories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_accessories (
+CREATE TABLE public.product_accessories (
     id integer NOT NULL,
     style_id integer,
     spree_product_id integer,
@@ -2343,7 +2377,7 @@ CREATE TABLE product_accessories (
 -- Name: product_accessories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_accessories_id_seq
+CREATE SEQUENCE public.product_accessories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2355,14 +2389,14 @@ CREATE SEQUENCE product_accessories_id_seq
 -- Name: product_accessories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_accessories_id_seq OWNED BY product_accessories.id;
+ALTER SEQUENCE public.product_accessories_id_seq OWNED BY public.product_accessories.id;
 
 
 --
 -- Name: product_color_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_color_values (
+CREATE TABLE public.product_color_values (
     id integer NOT NULL,
     product_id integer,
     option_value_id integer,
@@ -2375,7 +2409,7 @@ CREATE TABLE product_color_values (
 -- Name: product_color_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_color_values_id_seq
+CREATE SEQUENCE public.product_color_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2387,14 +2421,14 @@ CREATE SEQUENCE product_color_values_id_seq
 -- Name: product_color_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_color_values_id_seq OWNED BY product_color_values.id;
+ALTER SEQUENCE public.product_color_values_id_seq OWNED BY public.product_color_values.id;
 
 
 --
 -- Name: product_height_range_groups; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_height_range_groups (
+CREATE TABLE public.product_height_range_groups (
     id integer NOT NULL,
     unit character varying(255),
     name character varying(255),
@@ -2407,7 +2441,7 @@ CREATE TABLE product_height_range_groups (
 -- Name: product_height_range_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_height_range_groups_id_seq
+CREATE SEQUENCE public.product_height_range_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2419,14 +2453,14 @@ CREATE SEQUENCE product_height_range_groups_id_seq
 -- Name: product_height_range_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_height_range_groups_id_seq OWNED BY product_height_range_groups.id;
+ALTER SEQUENCE public.product_height_range_groups_id_seq OWNED BY public.product_height_range_groups.id;
 
 
 --
 -- Name: product_height_ranges; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_height_ranges (
+CREATE TABLE public.product_height_ranges (
     id integer NOT NULL,
     min integer,
     max integer,
@@ -2442,7 +2476,7 @@ CREATE TABLE product_height_ranges (
 -- Name: product_height_ranges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_height_ranges_id_seq
+CREATE SEQUENCE public.product_height_ranges_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2454,14 +2488,14 @@ CREATE SEQUENCE product_height_ranges_id_seq
 -- Name: product_height_ranges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_height_ranges_id_seq OWNED BY product_height_ranges.id;
+ALTER SEQUENCE public.product_height_ranges_id_seq OWNED BY public.product_height_ranges.id;
 
 
 --
 -- Name: product_making_options; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_making_options (
+CREATE TABLE public.product_making_options (
     id integer NOT NULL,
     product_id integer,
     variant_id integer,
@@ -2476,7 +2510,7 @@ CREATE TABLE product_making_options (
 -- Name: product_making_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_making_options_id_seq
+CREATE SEQUENCE public.product_making_options_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2488,14 +2522,14 @@ CREATE SEQUENCE product_making_options_id_seq
 -- Name: product_making_options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_making_options_id_seq OWNED BY product_making_options.id;
+ALTER SEQUENCE public.product_making_options_id_seq OWNED BY public.product_making_options.id;
 
 
 --
 -- Name: product_personalizations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_personalizations (
+CREATE TABLE public.product_personalizations (
     id integer NOT NULL,
     variant_id integer,
     line_item_id integer,
@@ -2519,7 +2553,7 @@ CREATE TABLE product_personalizations (
 -- Name: product_personalizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_personalizations_id_seq
+CREATE SEQUENCE public.product_personalizations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2531,14 +2565,14 @@ CREATE SEQUENCE product_personalizations_id_seq
 -- Name: product_personalizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_personalizations_id_seq OWNED BY product_personalizations.id;
+ALTER SEQUENCE public.product_personalizations_id_seq OWNED BY public.product_personalizations.id;
 
 
 --
 -- Name: product_reservations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_reservations (
+CREATE TABLE public.product_reservations (
     id integer NOT NULL,
     user_id integer,
     product_id integer,
@@ -2555,7 +2589,7 @@ CREATE TABLE product_reservations (
 -- Name: product_reservations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_reservations_id_seq
+CREATE SEQUENCE public.product_reservations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2567,14 +2601,14 @@ CREATE SEQUENCE product_reservations_id_seq
 -- Name: product_reservations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_reservations_id_seq OWNED BY product_reservations.id;
+ALTER SEQUENCE public.product_reservations_id_seq OWNED BY public.product_reservations.id;
 
 
 --
 -- Name: product_style_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE product_style_profiles (
+CREATE TABLE public.product_style_profiles (
     id integer NOT NULL,
     product_id integer,
     glam integer,
@@ -2608,7 +2642,7 @@ CREATE TABLE product_style_profiles (
 -- Name: product_style_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE product_style_profiles_id_seq
+CREATE SEQUENCE public.product_style_profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2620,14 +2654,14 @@ CREATE SEQUENCE product_style_profiles_id_seq
 -- Name: product_style_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE product_style_profiles_id_seq OWNED BY product_style_profiles.id;
+ALTER SEQUENCE public.product_style_profiles_id_seq OWNED BY public.product_style_profiles.id;
 
 
 --
 -- Name: questions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE questions (
+CREATE TABLE public.questions (
     id integer NOT NULL,
     quiz_id integer,
     text character varying(255),
@@ -2645,7 +2679,7 @@ CREATE TABLE questions (
 -- Name: questions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE questions_id_seq
+CREATE SEQUENCE public.questions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2657,14 +2691,14 @@ CREATE SEQUENCE questions_id_seq
 -- Name: questions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+ALTER SEQUENCE public.questions_id_seq OWNED BY public.questions.id;
 
 
 --
 -- Name: quizzes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE quizzes (
+CREATE TABLE public.quizzes (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -2676,7 +2710,7 @@ CREATE TABLE quizzes (
 -- Name: quizzes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE quizzes_id_seq
+CREATE SEQUENCE public.quizzes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2688,14 +2722,14 @@ CREATE SEQUENCE quizzes_id_seq
 -- Name: quizzes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE quizzes_id_seq OWNED BY quizzes.id;
+ALTER SEQUENCE public.quizzes_id_seq OWNED BY public.quizzes.id;
 
 
 --
 -- Name: redirected_search_terms; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE redirected_search_terms (
+CREATE TABLE public.redirected_search_terms (
     id integer NOT NULL,
     term character varying(255),
     redirect_to character varying(255),
@@ -2708,7 +2742,7 @@ CREATE TABLE redirected_search_terms (
 -- Name: redirected_search_terms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE redirected_search_terms_id_seq
+CREATE SEQUENCE public.redirected_search_terms_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2720,14 +2754,14 @@ CREATE SEQUENCE redirected_search_terms_id_seq
 -- Name: redirected_search_terms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE redirected_search_terms_id_seq OWNED BY redirected_search_terms.id;
+ALTER SEQUENCE public.redirected_search_terms_id_seq OWNED BY public.redirected_search_terms.id;
 
 
 --
 -- Name: refund_requests; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE refund_requests (
+CREATE TABLE public.refund_requests (
     id integer NOT NULL,
     order_id integer,
     payment_id integer,
@@ -2758,7 +2792,7 @@ CREATE TABLE refund_requests (
 -- Name: refund_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE refund_requests_id_seq
+CREATE SEQUENCE public.refund_requests_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2770,14 +2804,14 @@ CREATE SEQUENCE refund_requests_id_seq
 -- Name: refund_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE refund_requests_id_seq OWNED BY refund_requests.id;
+ALTER SEQUENCE public.refund_requests_id_seq OWNED BY public.refund_requests.id;
 
 
 --
 -- Name: render3d_images; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE render3d_images (
+CREATE TABLE public.render3d_images (
     id integer NOT NULL,
     attachment_file_name character varying(255),
     attachment_content_type character varying(255),
@@ -2795,7 +2829,7 @@ CREATE TABLE render3d_images (
 -- Name: render3d_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE render3d_images_id_seq
+CREATE SEQUENCE public.render3d_images_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2807,14 +2841,14 @@ CREATE SEQUENCE render3d_images_id_seq
 -- Name: render3d_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE render3d_images_id_seq OWNED BY render3d_images.id;
+ALTER SEQUENCE public.render3d_images_id_seq OWNED BY public.render3d_images.id;
 
 
 --
 -- Name: return_inventory_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE return_inventory_items (
+CREATE TABLE public.return_inventory_items (
     id integer NOT NULL,
     upc integer NOT NULL,
     style_number character varying(255),
@@ -2830,7 +2864,7 @@ CREATE TABLE return_inventory_items (
 -- Name: return_inventory_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE return_inventory_items_id_seq
+CREATE SEQUENCE public.return_inventory_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2842,14 +2876,14 @@ CREATE SEQUENCE return_inventory_items_id_seq
 -- Name: return_inventory_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE return_inventory_items_id_seq OWNED BY return_inventory_items.id;
+ALTER SEQUENCE public.return_inventory_items_id_seq OWNED BY public.return_inventory_items.id;
 
 
 --
 -- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE return_request_items (
+CREATE TABLE public.return_request_items (
     id integer NOT NULL,
     order_return_request_id integer,
     line_item_id integer,
@@ -2866,7 +2900,7 @@ CREATE TABLE return_request_items (
 -- Name: return_request_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE return_request_items_id_seq
+CREATE SEQUENCE public.return_request_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2878,14 +2912,14 @@ CREATE SEQUENCE return_request_items_id_seq
 -- Name: return_request_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE return_request_items_id_seq OWNED BY return_request_items.id;
+ALTER SEQUENCE public.return_request_items_id_seq OWNED BY public.return_request_items.id;
 
 
 --
 -- Name: revolution_pages; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE revolution_pages (
+CREATE TABLE public.revolution_pages (
     id integer NOT NULL,
     template_id integer,
     path text,
@@ -2912,7 +2946,7 @@ CREATE TABLE revolution_pages (
 -- Name: revolution_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE revolution_pages_id_seq
+CREATE SEQUENCE public.revolution_pages_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2924,14 +2958,14 @@ CREATE SEQUENCE revolution_pages_id_seq
 -- Name: revolution_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE revolution_pages_id_seq OWNED BY revolution_pages.id;
+ALTER SEQUENCE public.revolution_pages_id_seq OWNED BY public.revolution_pages.id;
 
 
 --
 -- Name: revolution_translations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE revolution_translations (
+CREATE TABLE public.revolution_translations (
     id integer NOT NULL,
     page_id integer,
     locale text,
@@ -2949,7 +2983,7 @@ CREATE TABLE revolution_translations (
 -- Name: revolution_translations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE revolution_translations_id_seq
+CREATE SEQUENCE public.revolution_translations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2961,14 +2995,14 @@ CREATE SEQUENCE revolution_translations_id_seq
 -- Name: revolution_translations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE revolution_translations_id_seq OWNED BY revolution_translations.id;
+ALTER SEQUENCE public.revolution_translations_id_seq OWNED BY public.revolution_translations.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying(255) NOT NULL
 );
 
@@ -2977,7 +3011,7 @@ CREATE TABLE schema_migrations (
 -- Name: similarities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE similarities (
+CREATE TABLE public.similarities (
     id integer NOT NULL,
     original_id integer,
     similar_id integer,
@@ -2989,7 +3023,7 @@ CREATE TABLE similarities (
 -- Name: similarities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE similarities_id_seq
+CREATE SEQUENCE public.similarities_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3001,14 +3035,14 @@ CREATE SEQUENCE similarities_id_seq
 -- Name: similarities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE similarities_id_seq OWNED BY similarities.id;
+ALTER SEQUENCE public.similarities_id_seq OWNED BY public.similarities.id;
 
 
 --
 -- Name: simple_key_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE simple_key_values (
+CREATE TABLE public.simple_key_values (
     id integer NOT NULL,
     key character varying(255) NOT NULL,
     data text,
@@ -3021,7 +3055,7 @@ CREATE TABLE simple_key_values (
 -- Name: simple_key_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE simple_key_values_id_seq
+CREATE SEQUENCE public.simple_key_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3033,14 +3067,14 @@ CREATE SEQUENCE simple_key_values_id_seq
 -- Name: simple_key_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE simple_key_values_id_seq OWNED BY simple_key_values.id;
+ALTER SEQUENCE public.simple_key_values_id_seq OWNED BY public.simple_key_values.id;
 
 
 --
 -- Name: site_versions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE site_versions (
+CREATE TABLE public.site_versions (
     id integer NOT NULL,
     zone_id integer,
     name character varying(255),
@@ -3061,7 +3095,7 @@ CREATE TABLE site_versions (
 -- Name: site_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE site_versions_id_seq
+CREATE SEQUENCE public.site_versions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3073,14 +3107,14 @@ CREATE SEQUENCE site_versions_id_seq
 -- Name: site_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE site_versions_id_seq OWNED BY site_versions.id;
+ALTER SEQUENCE public.site_versions_id_seq OWNED BY public.site_versions.id;
 
 
 --
 -- Name: spree_activators; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_activators (
+CREATE TABLE public.spree_activators (
     id integer NOT NULL,
     description character varying(255),
     expires_at timestamp without time zone,
@@ -3105,7 +3139,7 @@ CREATE TABLE spree_activators (
 -- Name: spree_activators_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_activators_id_seq
+CREATE SEQUENCE public.spree_activators_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3117,14 +3151,14 @@ CREATE SEQUENCE spree_activators_id_seq
 -- Name: spree_activators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_activators_id_seq OWNED BY spree_activators.id;
+ALTER SEQUENCE public.spree_activators_id_seq OWNED BY public.spree_activators.id;
 
 
 --
 -- Name: spree_addresses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_addresses (
+CREATE TABLE public.spree_addresses (
     id integer NOT NULL,
     firstname character varying(255),
     lastname character varying(255),
@@ -3148,7 +3182,7 @@ CREATE TABLE spree_addresses (
 -- Name: spree_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_addresses_id_seq
+CREATE SEQUENCE public.spree_addresses_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3160,14 +3194,14 @@ CREATE SEQUENCE spree_addresses_id_seq
 -- Name: spree_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_addresses_id_seq OWNED BY spree_addresses.id;
+ALTER SEQUENCE public.spree_addresses_id_seq OWNED BY public.spree_addresses.id;
 
 
 --
 -- Name: spree_adjustments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_adjustments (
+CREATE TABLE public.spree_adjustments (
     id integer NOT NULL,
     source_id integer,
     source_type character varying(255),
@@ -3189,7 +3223,7 @@ CREATE TABLE spree_adjustments (
 -- Name: spree_adjustments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_adjustments_id_seq
+CREATE SEQUENCE public.spree_adjustments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3201,14 +3235,14 @@ CREATE SEQUENCE spree_adjustments_id_seq
 -- Name: spree_adjustments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_adjustments_id_seq OWNED BY spree_adjustments.id;
+ALTER SEQUENCE public.spree_adjustments_id_seq OWNED BY public.spree_adjustments.id;
 
 
 --
 -- Name: spree_assets; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_assets (
+CREATE TABLE public.spree_assets (
     id integer NOT NULL,
     viewable_id integer,
     viewable_type character varying(255),
@@ -3228,7 +3262,7 @@ CREATE TABLE spree_assets (
 -- Name: spree_assets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_assets_id_seq
+CREATE SEQUENCE public.spree_assets_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3240,14 +3274,14 @@ CREATE SEQUENCE spree_assets_id_seq
 -- Name: spree_assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_assets_id_seq OWNED BY spree_assets.id;
+ALTER SEQUENCE public.spree_assets_id_seq OWNED BY public.spree_assets.id;
 
 
 --
 -- Name: spree_authentication_methods; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_authentication_methods (
+CREATE TABLE public.spree_authentication_methods (
     id integer NOT NULL,
     environment character varying(255),
     provider character varying(255),
@@ -3263,7 +3297,7 @@ CREATE TABLE spree_authentication_methods (
 -- Name: spree_authentication_methods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_authentication_methods_id_seq
+CREATE SEQUENCE public.spree_authentication_methods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3275,14 +3309,14 @@ CREATE SEQUENCE spree_authentication_methods_id_seq
 -- Name: spree_authentication_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_authentication_methods_id_seq OWNED BY spree_authentication_methods.id;
+ALTER SEQUENCE public.spree_authentication_methods_id_seq OWNED BY public.spree_authentication_methods.id;
 
 
 --
 -- Name: spree_banner_boxes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_banner_boxes (
+CREATE TABLE public.spree_banner_boxes (
     id integer NOT NULL,
     presentation character varying(255),
     url character varying(255),
@@ -3307,7 +3341,7 @@ CREATE TABLE spree_banner_boxes (
 -- Name: spree_banner_boxes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_banner_boxes_id_seq
+CREATE SEQUENCE public.spree_banner_boxes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3319,14 +3353,14 @@ CREATE SEQUENCE spree_banner_boxes_id_seq
 -- Name: spree_banner_boxes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_banner_boxes_id_seq OWNED BY spree_banner_boxes.id;
+ALTER SEQUENCE public.spree_banner_boxes_id_seq OWNED BY public.spree_banner_boxes.id;
 
 
 --
 -- Name: spree_calculators; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_calculators (
+CREATE TABLE public.spree_calculators (
     id integer NOT NULL,
     type character varying(255),
     calculable_id integer,
@@ -3340,7 +3374,7 @@ CREATE TABLE spree_calculators (
 -- Name: spree_calculators_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_calculators_id_seq
+CREATE SEQUENCE public.spree_calculators_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3352,14 +3386,14 @@ CREATE SEQUENCE spree_calculators_id_seq
 -- Name: spree_calculators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_calculators_id_seq OWNED BY spree_calculators.id;
+ALTER SEQUENCE public.spree_calculators_id_seq OWNED BY public.spree_calculators.id;
 
 
 --
 -- Name: spree_configurations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_configurations (
+CREATE TABLE public.spree_configurations (
     id integer NOT NULL,
     name character varying(255),
     type character varying(50),
@@ -3372,7 +3406,7 @@ CREATE TABLE spree_configurations (
 -- Name: spree_configurations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_configurations_id_seq
+CREATE SEQUENCE public.spree_configurations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3384,14 +3418,14 @@ CREATE SEQUENCE spree_configurations_id_seq
 -- Name: spree_configurations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_configurations_id_seq OWNED BY spree_configurations.id;
+ALTER SEQUENCE public.spree_configurations_id_seq OWNED BY public.spree_configurations.id;
 
 
 --
 -- Name: spree_countries; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_countries (
+CREATE TABLE public.spree_countries (
     id integer NOT NULL,
     iso_name character varying(255),
     iso character varying(255),
@@ -3406,7 +3440,7 @@ CREATE TABLE spree_countries (
 -- Name: spree_countries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_countries_id_seq
+CREATE SEQUENCE public.spree_countries_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3418,14 +3452,14 @@ CREATE SEQUENCE spree_countries_id_seq
 -- Name: spree_countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_countries_id_seq OWNED BY spree_countries.id;
+ALTER SEQUENCE public.spree_countries_id_seq OWNED BY public.spree_countries.id;
 
 
 --
 -- Name: spree_credit_cards; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_credit_cards (
+CREATE TABLE public.spree_credit_cards (
     id integer NOT NULL,
     month character varying(255),
     year character varying(255),
@@ -3448,7 +3482,7 @@ CREATE TABLE spree_credit_cards (
 -- Name: spree_credit_cards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_credit_cards_id_seq
+CREATE SEQUENCE public.spree_credit_cards_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3460,14 +3494,14 @@ CREATE SEQUENCE spree_credit_cards_id_seq
 -- Name: spree_credit_cards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_credit_cards_id_seq OWNED BY spree_credit_cards.id;
+ALTER SEQUENCE public.spree_credit_cards_id_seq OWNED BY public.spree_credit_cards.id;
 
 
 --
 -- Name: spree_gateways; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_gateways (
+CREATE TABLE public.spree_gateways (
     id integer NOT NULL,
     type character varying(255),
     name character varying(255),
@@ -3485,7 +3519,7 @@ CREATE TABLE spree_gateways (
 -- Name: spree_gateways_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_gateways_id_seq
+CREATE SEQUENCE public.spree_gateways_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3497,14 +3531,14 @@ CREATE SEQUENCE spree_gateways_id_seq
 -- Name: spree_gateways_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_gateways_id_seq OWNED BY spree_gateways.id;
+ALTER SEQUENCE public.spree_gateways_id_seq OWNED BY public.spree_gateways.id;
 
 
 --
 -- Name: spree_inventory_units; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_inventory_units (
+CREATE TABLE public.spree_inventory_units (
     id integer NOT NULL,
     lock_version integer DEFAULT 0,
     state character varying(255),
@@ -3521,7 +3555,7 @@ CREATE TABLE spree_inventory_units (
 -- Name: spree_inventory_units_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_inventory_units_id_seq
+CREATE SEQUENCE public.spree_inventory_units_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3533,14 +3567,14 @@ CREATE SEQUENCE spree_inventory_units_id_seq
 -- Name: spree_inventory_units_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_inventory_units_id_seq OWNED BY spree_inventory_units.id;
+ALTER SEQUENCE public.spree_inventory_units_id_seq OWNED BY public.spree_inventory_units.id;
 
 
 --
 -- Name: spree_line_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_line_items (
+CREATE TABLE public.spree_line_items (
     id integer NOT NULL,
     variant_id integer,
     order_id integer,
@@ -3567,7 +3601,7 @@ CREATE TABLE spree_line_items (
 -- Name: spree_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_line_items_id_seq
+CREATE SEQUENCE public.spree_line_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3579,14 +3613,14 @@ CREATE SEQUENCE spree_line_items_id_seq
 -- Name: spree_line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_line_items_id_seq OWNED BY spree_line_items.id;
+ALTER SEQUENCE public.spree_line_items_id_seq OWNED BY public.spree_line_items.id;
 
 
 --
 -- Name: spree_log_entries; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_log_entries (
+CREATE TABLE public.spree_log_entries (
     id integer NOT NULL,
     source_id integer,
     source_type character varying(255),
@@ -3600,7 +3634,7 @@ CREATE TABLE spree_log_entries (
 -- Name: spree_log_entries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_log_entries_id_seq
+CREATE SEQUENCE public.spree_log_entries_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3612,14 +3646,14 @@ CREATE SEQUENCE spree_log_entries_id_seq
 -- Name: spree_log_entries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_log_entries_id_seq OWNED BY spree_log_entries.id;
+ALTER SEQUENCE public.spree_log_entries_id_seq OWNED BY public.spree_log_entries.id;
 
 
 --
 -- Name: spree_mail_methods; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_mail_methods (
+CREATE TABLE public.spree_mail_methods (
     id integer NOT NULL,
     environment character varying(255),
     active boolean DEFAULT true,
@@ -3632,7 +3666,7 @@ CREATE TABLE spree_mail_methods (
 -- Name: spree_mail_methods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_mail_methods_id_seq
+CREATE SEQUENCE public.spree_mail_methods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3644,14 +3678,14 @@ CREATE SEQUENCE spree_mail_methods_id_seq
 -- Name: spree_mail_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_mail_methods_id_seq OWNED BY spree_mail_methods.id;
+ALTER SEQUENCE public.spree_mail_methods_id_seq OWNED BY public.spree_mail_methods.id;
 
 
 --
 -- Name: spree_masterpass_checkouts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_masterpass_checkouts (
+CREATE TABLE public.spree_masterpass_checkouts (
     id integer NOT NULL,
     access_token character varying(255),
     transaction_id character varying(255),
@@ -3677,7 +3711,7 @@ CREATE TABLE spree_masterpass_checkouts (
 -- Name: spree_masterpass_checkouts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_masterpass_checkouts_id_seq
+CREATE SEQUENCE public.spree_masterpass_checkouts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3689,14 +3723,14 @@ CREATE SEQUENCE spree_masterpass_checkouts_id_seq
 -- Name: spree_masterpass_checkouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_masterpass_checkouts_id_seq OWNED BY spree_masterpass_checkouts.id;
+ALTER SEQUENCE public.spree_masterpass_checkouts_id_seq OWNED BY public.spree_masterpass_checkouts.id;
 
 
 --
 -- Name: spree_option_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_option_types_id_seq
+CREATE SEQUENCE public.spree_option_types_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3708,14 +3742,14 @@ CREATE SEQUENCE spree_option_types_id_seq
 -- Name: spree_option_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_option_types_id_seq OWNED BY spree_option_types.id;
+ALTER SEQUENCE public.spree_option_types_id_seq OWNED BY public.spree_option_types.id;
 
 
 --
 -- Name: spree_option_types_prototypes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_option_types_prototypes (
+CREATE TABLE public.spree_option_types_prototypes (
     prototype_id integer,
     option_type_id integer
 );
@@ -3725,7 +3759,7 @@ CREATE TABLE spree_option_types_prototypes (
 -- Name: spree_option_values_groups; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_option_values_groups (
+CREATE TABLE public.spree_option_values_groups (
     id integer NOT NULL,
     option_type_id integer,
     name character varying(255),
@@ -3740,7 +3774,7 @@ CREATE TABLE spree_option_values_groups (
 -- Name: spree_option_values_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_option_values_groups_id_seq
+CREATE SEQUENCE public.spree_option_values_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3752,14 +3786,14 @@ CREATE SEQUENCE spree_option_values_groups_id_seq
 -- Name: spree_option_values_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_option_values_groups_id_seq OWNED BY spree_option_values_groups.id;
+ALTER SEQUENCE public.spree_option_values_groups_id_seq OWNED BY public.spree_option_values_groups.id;
 
 
 --
 -- Name: spree_option_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_option_values_id_seq
+CREATE SEQUENCE public.spree_option_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3771,14 +3805,14 @@ CREATE SEQUENCE spree_option_values_id_seq
 -- Name: spree_option_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_option_values_id_seq OWNED BY spree_option_values.id;
+ALTER SEQUENCE public.spree_option_values_id_seq OWNED BY public.spree_option_values.id;
 
 
 --
 -- Name: spree_option_values_variants; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_option_values_variants (
+CREATE TABLE public.spree_option_values_variants (
     variant_id integer,
     option_value_id integer
 );
@@ -3788,7 +3822,7 @@ CREATE TABLE spree_option_values_variants (
 -- Name: spree_orders; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_orders (
+CREATE TABLE public.spree_orders (
     id integer NOT NULL,
     number character varying(15),
     item_total numeric(10,2) DEFAULT 0.0 NOT NULL,
@@ -3817,7 +3851,8 @@ CREATE TABLE spree_orders (
     site_version text,
     orderbot_synced boolean,
     return_type character varying(255),
-    vwo_type character varying(255)
+    vwo_type character varying(255),
+    autorefundable boolean
 );
 
 
@@ -3825,7 +3860,7 @@ CREATE TABLE spree_orders (
 -- Name: spree_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_orders_id_seq
+CREATE SEQUENCE public.spree_orders_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3837,14 +3872,14 @@ CREATE SEQUENCE spree_orders_id_seq
 -- Name: spree_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_orders_id_seq OWNED BY spree_orders.id;
+ALTER SEQUENCE public.spree_orders_id_seq OWNED BY public.spree_orders.id;
 
 
 --
 -- Name: spree_payment_methods; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_payment_methods (
+CREATE TABLE public.spree_payment_methods (
     id integer NOT NULL,
     type character varying(255),
     name character varying(255),
@@ -3862,7 +3897,7 @@ CREATE TABLE spree_payment_methods (
 -- Name: spree_payment_methods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_payment_methods_id_seq
+CREATE SEQUENCE public.spree_payment_methods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3874,14 +3909,14 @@ CREATE SEQUENCE spree_payment_methods_id_seq
 -- Name: spree_payment_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_payment_methods_id_seq OWNED BY spree_payment_methods.id;
+ALTER SEQUENCE public.spree_payment_methods_id_seq OWNED BY public.spree_payment_methods.id;
 
 
 --
 -- Name: spree_payments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_payments (
+CREATE TABLE public.spree_payments (
     id integer NOT NULL,
     amount numeric(10,2) DEFAULT 0.0 NOT NULL,
     order_id integer,
@@ -3903,7 +3938,7 @@ CREATE TABLE spree_payments (
 -- Name: spree_payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_payments_id_seq
+CREATE SEQUENCE public.spree_payments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3915,14 +3950,14 @@ CREATE SEQUENCE spree_payments_id_seq
 -- Name: spree_payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_payments_id_seq OWNED BY spree_payments.id;
+ALTER SEQUENCE public.spree_payments_id_seq OWNED BY public.spree_payments.id;
 
 
 --
 -- Name: spree_paypal_accounts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_paypal_accounts (
+CREATE TABLE public.spree_paypal_accounts (
     id integer NOT NULL,
     email character varying(255),
     payer_id character varying(255),
@@ -3935,7 +3970,7 @@ CREATE TABLE spree_paypal_accounts (
 -- Name: spree_paypal_accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_paypal_accounts_id_seq
+CREATE SEQUENCE public.spree_paypal_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3947,14 +3982,14 @@ CREATE SEQUENCE spree_paypal_accounts_id_seq
 -- Name: spree_paypal_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_paypal_accounts_id_seq OWNED BY spree_paypal_accounts.id;
+ALTER SEQUENCE public.spree_paypal_accounts_id_seq OWNED BY public.spree_paypal_accounts.id;
 
 
 --
 -- Name: spree_paypal_express_checkouts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_paypal_express_checkouts (
+CREATE TABLE public.spree_paypal_express_checkouts (
     id integer NOT NULL,
     token character varying(255),
     payer_id character varying(255),
@@ -3971,7 +4006,7 @@ CREATE TABLE spree_paypal_express_checkouts (
 -- Name: spree_paypal_express_checkouts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_paypal_express_checkouts_id_seq
+CREATE SEQUENCE public.spree_paypal_express_checkouts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3983,14 +4018,14 @@ CREATE SEQUENCE spree_paypal_express_checkouts_id_seq
 -- Name: spree_paypal_express_checkouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_paypal_express_checkouts_id_seq OWNED BY spree_paypal_express_checkouts.id;
+ALTER SEQUENCE public.spree_paypal_express_checkouts_id_seq OWNED BY public.spree_paypal_express_checkouts.id;
 
 
 --
 -- Name: spree_preferences; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_preferences (
+CREATE TABLE public.spree_preferences (
     id integer NOT NULL,
     value text,
     key character varying(255),
@@ -4004,7 +4039,7 @@ CREATE TABLE spree_preferences (
 -- Name: spree_preferences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_preferences_id_seq
+CREATE SEQUENCE public.spree_preferences_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4016,14 +4051,14 @@ CREATE SEQUENCE spree_preferences_id_seq
 -- Name: spree_preferences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_preferences_id_seq OWNED BY spree_preferences.id;
+ALTER SEQUENCE public.spree_preferences_id_seq OWNED BY public.spree_preferences.id;
 
 
 --
 -- Name: spree_prices; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_prices (
+CREATE TABLE public.spree_prices (
     id integer NOT NULL,
     variant_id integer NOT NULL,
     amount numeric(8,2),
@@ -4035,7 +4070,7 @@ CREATE TABLE spree_prices (
 -- Name: spree_prices_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_prices_id_seq
+CREATE SEQUENCE public.spree_prices_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4047,14 +4082,14 @@ CREATE SEQUENCE spree_prices_id_seq
 -- Name: spree_prices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_prices_id_seq OWNED BY spree_prices.id;
+ALTER SEQUENCE public.spree_prices_id_seq OWNED BY public.spree_prices.id;
 
 
 --
 -- Name: spree_product_option_types; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_product_option_types (
+CREATE TABLE public.spree_product_option_types (
     id integer NOT NULL,
     "position" integer,
     product_id integer,
@@ -4068,7 +4103,7 @@ CREATE TABLE spree_product_option_types (
 -- Name: spree_product_option_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_product_option_types_id_seq
+CREATE SEQUENCE public.spree_product_option_types_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4080,14 +4115,14 @@ CREATE SEQUENCE spree_product_option_types_id_seq
 -- Name: spree_product_option_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_product_option_types_id_seq OWNED BY spree_product_option_types.id;
+ALTER SEQUENCE public.spree_product_option_types_id_seq OWNED BY public.spree_product_option_types.id;
 
 
 --
 -- Name: spree_product_properties; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_product_properties (
+CREATE TABLE public.spree_product_properties (
     id integer NOT NULL,
     value character varying(512),
     product_id integer,
@@ -4102,7 +4137,7 @@ CREATE TABLE spree_product_properties (
 -- Name: spree_product_properties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_product_properties_id_seq
+CREATE SEQUENCE public.spree_product_properties_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4114,14 +4149,14 @@ CREATE SEQUENCE spree_product_properties_id_seq
 -- Name: spree_product_properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_product_properties_id_seq OWNED BY spree_product_properties.id;
+ALTER SEQUENCE public.spree_product_properties_id_seq OWNED BY public.spree_product_properties.id;
 
 
 --
 -- Name: spree_product_related_outerwear; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_product_related_outerwear (
+CREATE TABLE public.spree_product_related_outerwear (
     id integer NOT NULL,
     outerwear_id integer,
     product_id integer
@@ -4132,7 +4167,7 @@ CREATE TABLE spree_product_related_outerwear (
 -- Name: spree_product_related_outerwear_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_product_related_outerwear_id_seq
+CREATE SEQUENCE public.spree_product_related_outerwear_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4144,14 +4179,14 @@ CREATE SEQUENCE spree_product_related_outerwear_id_seq
 -- Name: spree_product_related_outerwear_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_product_related_outerwear_id_seq OWNED BY spree_product_related_outerwear.id;
+ALTER SEQUENCE public.spree_product_related_outerwear_id_seq OWNED BY public.spree_product_related_outerwear.id;
 
 
 --
 -- Name: spree_products; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_products (
+CREATE TABLE public.spree_products (
     id integer NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL,
     description text,
@@ -4182,7 +4217,7 @@ CREATE TABLE spree_products (
 -- Name: spree_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_products_id_seq
+CREATE SEQUENCE public.spree_products_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4194,14 +4229,14 @@ CREATE SEQUENCE spree_products_id_seq
 -- Name: spree_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_products_id_seq OWNED BY spree_products.id;
+ALTER SEQUENCE public.spree_products_id_seq OWNED BY public.spree_products.id;
 
 
 --
 -- Name: spree_products_promotion_rules; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_products_promotion_rules (
+CREATE TABLE public.spree_products_promotion_rules (
     product_id integer,
     promotion_rule_id integer
 );
@@ -4211,7 +4246,7 @@ CREATE TABLE spree_products_promotion_rules (
 -- Name: spree_products_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_products_taxons (
+CREATE TABLE public.spree_products_taxons (
     product_id integer,
     taxon_id integer,
     id integer NOT NULL
@@ -4222,7 +4257,7 @@ CREATE TABLE spree_products_taxons (
 -- Name: spree_products_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_products_taxons_id_seq
+CREATE SEQUENCE public.spree_products_taxons_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4234,14 +4269,14 @@ CREATE SEQUENCE spree_products_taxons_id_seq
 -- Name: spree_products_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_products_taxons_id_seq OWNED BY spree_products_taxons.id;
+ALTER SEQUENCE public.spree_products_taxons_id_seq OWNED BY public.spree_products_taxons.id;
 
 
 --
 -- Name: spree_promotion_action_line_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_promotion_action_line_items (
+CREATE TABLE public.spree_promotion_action_line_items (
     id integer NOT NULL,
     promotion_action_id integer,
     variant_id integer,
@@ -4253,7 +4288,7 @@ CREATE TABLE spree_promotion_action_line_items (
 -- Name: spree_promotion_action_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_promotion_action_line_items_id_seq
+CREATE SEQUENCE public.spree_promotion_action_line_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4265,14 +4300,14 @@ CREATE SEQUENCE spree_promotion_action_line_items_id_seq
 -- Name: spree_promotion_action_line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_promotion_action_line_items_id_seq OWNED BY spree_promotion_action_line_items.id;
+ALTER SEQUENCE public.spree_promotion_action_line_items_id_seq OWNED BY public.spree_promotion_action_line_items.id;
 
 
 --
 -- Name: spree_promotion_actions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_promotion_actions (
+CREATE TABLE public.spree_promotion_actions (
     id integer NOT NULL,
     activator_id integer,
     "position" integer,
@@ -4284,7 +4319,7 @@ CREATE TABLE spree_promotion_actions (
 -- Name: spree_promotion_actions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_promotion_actions_id_seq
+CREATE SEQUENCE public.spree_promotion_actions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4296,14 +4331,14 @@ CREATE SEQUENCE spree_promotion_actions_id_seq
 -- Name: spree_promotion_actions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_promotion_actions_id_seq OWNED BY spree_promotion_actions.id;
+ALTER SEQUENCE public.spree_promotion_actions_id_seq OWNED BY public.spree_promotion_actions.id;
 
 
 --
 -- Name: spree_promotion_rules; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_promotion_rules (
+CREATE TABLE public.spree_promotion_rules (
     id integer NOT NULL,
     activator_id integer,
     user_id integer,
@@ -4318,7 +4353,7 @@ CREATE TABLE spree_promotion_rules (
 -- Name: spree_promotion_rules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_promotion_rules_id_seq
+CREATE SEQUENCE public.spree_promotion_rules_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4330,14 +4365,14 @@ CREATE SEQUENCE spree_promotion_rules_id_seq
 -- Name: spree_promotion_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_promotion_rules_id_seq OWNED BY spree_promotion_rules.id;
+ALTER SEQUENCE public.spree_promotion_rules_id_seq OWNED BY public.spree_promotion_rules.id;
 
 
 --
 -- Name: spree_promotion_rules_users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_promotion_rules_users (
+CREATE TABLE public.spree_promotion_rules_users (
     user_id integer,
     promotion_rule_id integer
 );
@@ -4347,7 +4382,7 @@ CREATE TABLE spree_promotion_rules_users (
 -- Name: spree_properties; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_properties (
+CREATE TABLE public.spree_properties (
     id integer NOT NULL,
     name character varying(255),
     presentation character varying(255) NOT NULL,
@@ -4360,7 +4395,7 @@ CREATE TABLE spree_properties (
 -- Name: spree_properties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_properties_id_seq
+CREATE SEQUENCE public.spree_properties_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4372,14 +4407,14 @@ CREATE SEQUENCE spree_properties_id_seq
 -- Name: spree_properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_properties_id_seq OWNED BY spree_properties.id;
+ALTER SEQUENCE public.spree_properties_id_seq OWNED BY public.spree_properties.id;
 
 
 --
 -- Name: spree_properties_prototypes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_properties_prototypes (
+CREATE TABLE public.spree_properties_prototypes (
     prototype_id integer,
     property_id integer
 );
@@ -4389,7 +4424,7 @@ CREATE TABLE spree_properties_prototypes (
 -- Name: spree_prototypes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_prototypes (
+CREATE TABLE public.spree_prototypes (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -4401,7 +4436,7 @@ CREATE TABLE spree_prototypes (
 -- Name: spree_prototypes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_prototypes_id_seq
+CREATE SEQUENCE public.spree_prototypes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4413,14 +4448,14 @@ CREATE SEQUENCE spree_prototypes_id_seq
 -- Name: spree_prototypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_prototypes_id_seq OWNED BY spree_prototypes.id;
+ALTER SEQUENCE public.spree_prototypes_id_seq OWNED BY public.spree_prototypes.id;
 
 
 --
 -- Name: spree_return_authorizations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_return_authorizations (
+CREATE TABLE public.spree_return_authorizations (
     id integer NOT NULL,
     number character varying(255),
     state character varying(255),
@@ -4436,7 +4471,7 @@ CREATE TABLE spree_return_authorizations (
 -- Name: spree_return_authorizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_return_authorizations_id_seq
+CREATE SEQUENCE public.spree_return_authorizations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4448,14 +4483,14 @@ CREATE SEQUENCE spree_return_authorizations_id_seq
 -- Name: spree_return_authorizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_return_authorizations_id_seq OWNED BY spree_return_authorizations.id;
+ALTER SEQUENCE public.spree_return_authorizations_id_seq OWNED BY public.spree_return_authorizations.id;
 
 
 --
 -- Name: spree_roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_roles (
+CREATE TABLE public.spree_roles (
     id integer NOT NULL,
     name character varying(255)
 );
@@ -4465,7 +4500,7 @@ CREATE TABLE spree_roles (
 -- Name: spree_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_roles_id_seq
+CREATE SEQUENCE public.spree_roles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4477,14 +4512,14 @@ CREATE SEQUENCE spree_roles_id_seq
 -- Name: spree_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_roles_id_seq OWNED BY spree_roles.id;
+ALTER SEQUENCE public.spree_roles_id_seq OWNED BY public.spree_roles.id;
 
 
 --
 -- Name: spree_roles_users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_roles_users (
+CREATE TABLE public.spree_roles_users (
     role_id integer,
     user_id integer
 );
@@ -4494,7 +4529,7 @@ CREATE TABLE spree_roles_users (
 -- Name: spree_sales; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_sales (
+CREATE TABLE public.spree_sales (
     id integer NOT NULL,
     is_active boolean,
     discount_size numeric,
@@ -4513,7 +4548,7 @@ CREATE TABLE spree_sales (
 -- Name: spree_sales_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_sales_id_seq
+CREATE SEQUENCE public.spree_sales_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4525,14 +4560,14 @@ CREATE SEQUENCE spree_sales_id_seq
 -- Name: spree_sales_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_sales_id_seq OWNED BY spree_sales.id;
+ALTER SEQUENCE public.spree_sales_id_seq OWNED BY public.spree_sales.id;
 
 
 --
 -- Name: spree_shipments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_shipments (
+CREATE TABLE public.spree_shipments (
     id integer NOT NULL,
     tracking character varying(255),
     number character varying(255),
@@ -4551,7 +4586,7 @@ CREATE TABLE spree_shipments (
 -- Name: spree_shipments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_shipments_id_seq
+CREATE SEQUENCE public.spree_shipments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4563,14 +4598,14 @@ CREATE SEQUENCE spree_shipments_id_seq
 -- Name: spree_shipments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_shipments_id_seq OWNED BY spree_shipments.id;
+ALTER SEQUENCE public.spree_shipments_id_seq OWNED BY public.spree_shipments.id;
 
 
 --
 -- Name: spree_shipping_categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_shipping_categories (
+CREATE TABLE public.spree_shipping_categories (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -4582,7 +4617,7 @@ CREATE TABLE spree_shipping_categories (
 -- Name: spree_shipping_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_shipping_categories_id_seq
+CREATE SEQUENCE public.spree_shipping_categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4594,14 +4629,14 @@ CREATE SEQUENCE spree_shipping_categories_id_seq
 -- Name: spree_shipping_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_shipping_categories_id_seq OWNED BY spree_shipping_categories.id;
+ALTER SEQUENCE public.spree_shipping_categories_id_seq OWNED BY public.spree_shipping_categories.id;
 
 
 --
 -- Name: spree_shipping_methods; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_shipping_methods (
+CREATE TABLE public.spree_shipping_methods (
     id integer NOT NULL,
     name character varying(255),
     zone_id integer,
@@ -4621,7 +4656,7 @@ CREATE TABLE spree_shipping_methods (
 -- Name: spree_shipping_methods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_shipping_methods_id_seq
+CREATE SEQUENCE public.spree_shipping_methods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4633,14 +4668,14 @@ CREATE SEQUENCE spree_shipping_methods_id_seq
 -- Name: spree_shipping_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_shipping_methods_id_seq OWNED BY spree_shipping_methods.id;
+ALTER SEQUENCE public.spree_shipping_methods_id_seq OWNED BY public.spree_shipping_methods.id;
 
 
 --
 -- Name: spree_skrill_transactions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_skrill_transactions (
+CREATE TABLE public.spree_skrill_transactions (
     id integer NOT NULL,
     email character varying(255),
     amount double precision,
@@ -4657,7 +4692,7 @@ CREATE TABLE spree_skrill_transactions (
 -- Name: spree_skrill_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_skrill_transactions_id_seq
+CREATE SEQUENCE public.spree_skrill_transactions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4669,14 +4704,14 @@ CREATE SEQUENCE spree_skrill_transactions_id_seq
 -- Name: spree_skrill_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_skrill_transactions_id_seq OWNED BY spree_skrill_transactions.id;
+ALTER SEQUENCE public.spree_skrill_transactions_id_seq OWNED BY public.spree_skrill_transactions.id;
 
 
 --
 -- Name: spree_state_changes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_state_changes (
+CREATE TABLE public.spree_state_changes (
     id integer NOT NULL,
     name character varying(255),
     previous_state character varying(255),
@@ -4693,7 +4728,7 @@ CREATE TABLE spree_state_changes (
 -- Name: spree_state_changes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_state_changes_id_seq
+CREATE SEQUENCE public.spree_state_changes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4705,14 +4740,14 @@ CREATE SEQUENCE spree_state_changes_id_seq
 -- Name: spree_state_changes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_state_changes_id_seq OWNED BY spree_state_changes.id;
+ALTER SEQUENCE public.spree_state_changes_id_seq OWNED BY public.spree_state_changes.id;
 
 
 --
 -- Name: spree_states; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_states (
+CREATE TABLE public.spree_states (
     id integer NOT NULL,
     name character varying(255),
     abbr character varying(255),
@@ -4724,7 +4759,7 @@ CREATE TABLE spree_states (
 -- Name: spree_states_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_states_id_seq
+CREATE SEQUENCE public.spree_states_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4736,14 +4771,14 @@ CREATE SEQUENCE spree_states_id_seq
 -- Name: spree_states_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_states_id_seq OWNED BY spree_states.id;
+ALTER SEQUENCE public.spree_states_id_seq OWNED BY public.spree_states.id;
 
 
 --
 -- Name: spree_tax_categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_tax_categories (
+CREATE TABLE public.spree_tax_categories (
     id integer NOT NULL,
     name character varying(255),
     description character varying(255),
@@ -4758,7 +4793,7 @@ CREATE TABLE spree_tax_categories (
 -- Name: spree_tax_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_tax_categories_id_seq
+CREATE SEQUENCE public.spree_tax_categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4770,14 +4805,14 @@ CREATE SEQUENCE spree_tax_categories_id_seq
 -- Name: spree_tax_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_tax_categories_id_seq OWNED BY spree_tax_categories.id;
+ALTER SEQUENCE public.spree_tax_categories_id_seq OWNED BY public.spree_tax_categories.id;
 
 
 --
 -- Name: spree_tax_rates; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_tax_rates (
+CREATE TABLE public.spree_tax_rates (
     id integer NOT NULL,
     amount numeric(8,5),
     zone_id integer,
@@ -4794,7 +4829,7 @@ CREATE TABLE spree_tax_rates (
 -- Name: spree_tax_rates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_tax_rates_id_seq
+CREATE SEQUENCE public.spree_tax_rates_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4806,14 +4841,14 @@ CREATE SEQUENCE spree_tax_rates_id_seq
 -- Name: spree_tax_rates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_tax_rates_id_seq OWNED BY spree_tax_rates.id;
+ALTER SEQUENCE public.spree_tax_rates_id_seq OWNED BY public.spree_tax_rates.id;
 
 
 --
 -- Name: spree_taxon_banners; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_taxon_banners (
+CREATE TABLE public.spree_taxon_banners (
     id integer NOT NULL,
     spree_taxon_id integer,
     title character varying(255),
@@ -4831,7 +4866,7 @@ CREATE TABLE spree_taxon_banners (
 -- Name: spree_taxon_banners_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_taxon_banners_id_seq
+CREATE SEQUENCE public.spree_taxon_banners_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4843,14 +4878,14 @@ CREATE SEQUENCE spree_taxon_banners_id_seq
 -- Name: spree_taxon_banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_taxon_banners_id_seq OWNED BY spree_taxon_banners.id;
+ALTER SEQUENCE public.spree_taxon_banners_id_seq OWNED BY public.spree_taxon_banners.id;
 
 
 --
 -- Name: spree_taxonomies; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_taxonomies (
+CREATE TABLE public.spree_taxonomies (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -4863,7 +4898,7 @@ CREATE TABLE spree_taxonomies (
 -- Name: spree_taxonomies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_taxonomies_id_seq
+CREATE SEQUENCE public.spree_taxonomies_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4875,14 +4910,14 @@ CREATE SEQUENCE spree_taxonomies_id_seq
 -- Name: spree_taxonomies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_taxonomies_id_seq OWNED BY spree_taxonomies.id;
+ALTER SEQUENCE public.spree_taxonomies_id_seq OWNED BY public.spree_taxonomies.id;
 
 
 --
 -- Name: spree_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_taxons (
+CREATE TABLE public.spree_taxons (
     id integer NOT NULL,
     parent_id integer,
     "position" integer DEFAULT 0,
@@ -4911,7 +4946,7 @@ CREATE TABLE spree_taxons (
 -- Name: spree_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_taxons_id_seq
+CREATE SEQUENCE public.spree_taxons_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4923,14 +4958,14 @@ CREATE SEQUENCE spree_taxons_id_seq
 -- Name: spree_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_taxons_id_seq OWNED BY spree_taxons.id;
+ALTER SEQUENCE public.spree_taxons_id_seq OWNED BY public.spree_taxons.id;
 
 
 --
 -- Name: spree_tokenized_permissions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_tokenized_permissions (
+CREATE TABLE public.spree_tokenized_permissions (
     id integer NOT NULL,
     permissable_id integer,
     permissable_type character varying(255),
@@ -4944,7 +4979,7 @@ CREATE TABLE spree_tokenized_permissions (
 -- Name: spree_tokenized_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_tokenized_permissions_id_seq
+CREATE SEQUENCE public.spree_tokenized_permissions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4956,14 +4991,14 @@ CREATE SEQUENCE spree_tokenized_permissions_id_seq
 -- Name: spree_tokenized_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_tokenized_permissions_id_seq OWNED BY spree_tokenized_permissions.id;
+ALTER SEQUENCE public.spree_tokenized_permissions_id_seq OWNED BY public.spree_tokenized_permissions.id;
 
 
 --
 -- Name: spree_trackers; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_trackers (
+CREATE TABLE public.spree_trackers (
     id integer NOT NULL,
     environment character varying(255),
     analytics_id character varying(255),
@@ -4977,7 +5012,7 @@ CREATE TABLE spree_trackers (
 -- Name: spree_trackers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_trackers_id_seq
+CREATE SEQUENCE public.spree_trackers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4989,14 +5024,14 @@ CREATE SEQUENCE spree_trackers_id_seq
 -- Name: spree_trackers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_trackers_id_seq OWNED BY spree_trackers.id;
+ALTER SEQUENCE public.spree_trackers_id_seq OWNED BY public.spree_trackers.id;
 
 
 --
 -- Name: spree_user_authentications; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_user_authentications (
+CREATE TABLE public.spree_user_authentications (
     id integer NOT NULL,
     user_id integer,
     provider character varying(255),
@@ -5010,7 +5045,7 @@ CREATE TABLE spree_user_authentications (
 -- Name: spree_user_authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_user_authentications_id_seq
+CREATE SEQUENCE public.spree_user_authentications_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5022,14 +5057,14 @@ CREATE SEQUENCE spree_user_authentications_id_seq
 -- Name: spree_user_authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_user_authentications_id_seq OWNED BY spree_user_authentications.id;
+ALTER SEQUENCE public.spree_user_authentications_id_seq OWNED BY public.spree_user_authentications.id;
 
 
 --
 -- Name: spree_users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_users (
+CREATE TABLE public.spree_users (
     id integer NOT NULL,
     encrypted_password character varying(128),
     password_salt character varying(128),
@@ -5084,7 +5119,7 @@ CREATE TABLE spree_users (
 -- Name: spree_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_users_id_seq
+CREATE SEQUENCE public.spree_users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5096,14 +5131,14 @@ CREATE SEQUENCE spree_users_id_seq
 -- Name: spree_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_users_id_seq OWNED BY spree_users.id;
+ALTER SEQUENCE public.spree_users_id_seq OWNED BY public.spree_users.id;
 
 
 --
 -- Name: spree_variants; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_variants (
+CREATE TABLE public.spree_variants (
     id integer NOT NULL,
     sku character varying(255) DEFAULT ''::character varying NOT NULL,
     weight numeric(8,2),
@@ -5126,7 +5161,7 @@ CREATE TABLE spree_variants (
 -- Name: spree_variants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_variants_id_seq
+CREATE SEQUENCE public.spree_variants_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5138,14 +5173,14 @@ CREATE SEQUENCE spree_variants_id_seq
 -- Name: spree_variants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_variants_id_seq OWNED BY spree_variants.id;
+ALTER SEQUENCE public.spree_variants_id_seq OWNED BY public.spree_variants.id;
 
 
 --
 -- Name: spree_zone_members; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_zone_members (
+CREATE TABLE public.spree_zone_members (
     id integer NOT NULL,
     zoneable_id integer,
     zoneable_type character varying(255),
@@ -5161,7 +5196,7 @@ CREATE TABLE spree_zone_members (
 -- Name: spree_zone_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_zone_members_id_seq
+CREATE SEQUENCE public.spree_zone_members_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5173,14 +5208,14 @@ CREATE SEQUENCE spree_zone_members_id_seq
 -- Name: spree_zone_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_zone_members_id_seq OWNED BY spree_zone_members.id;
+ALTER SEQUENCE public.spree_zone_members_id_seq OWNED BY public.spree_zone_members.id;
 
 
 --
 -- Name: spree_zones; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE spree_zones (
+CREATE TABLE public.spree_zones (
     id integer NOT NULL,
     name character varying(255),
     description character varying(255),
@@ -5195,7 +5230,7 @@ CREATE TABLE spree_zones (
 -- Name: spree_zones_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE spree_zones_id_seq
+CREATE SEQUENCE public.spree_zones_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5207,14 +5242,14 @@ CREATE SEQUENCE spree_zones_id_seq
 -- Name: spree_zones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE spree_zones_id_seq OWNED BY spree_zones.id;
+ALTER SEQUENCE public.spree_zones_id_seq OWNED BY public.spree_zones.id;
 
 
 --
 -- Name: style_to_product_height_range_groups; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE style_to_product_height_range_groups (
+CREATE TABLE public.style_to_product_height_range_groups (
     id integer NOT NULL,
     style_number character varying(255),
     product_height_range_group_id integer,
@@ -5227,7 +5262,7 @@ CREATE TABLE style_to_product_height_range_groups (
 -- Name: style_to_product_height_range_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE style_to_product_height_range_groups_id_seq
+CREATE SEQUENCE public.style_to_product_height_range_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5239,14 +5274,14 @@ CREATE SEQUENCE style_to_product_height_range_groups_id_seq
 -- Name: style_to_product_height_range_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE style_to_product_height_range_groups_id_seq OWNED BY style_to_product_height_range_groups.id;
+ALTER SEQUENCE public.style_to_product_height_range_groups_id_seq OWNED BY public.style_to_product_height_range_groups.id;
 
 
 --
 -- Name: styles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE styles (
+CREATE TABLE public.styles (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone NOT NULL,
@@ -5259,7 +5294,7 @@ CREATE TABLE styles (
 -- Name: styles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE styles_id_seq
+CREATE SEQUENCE public.styles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5271,14 +5306,14 @@ CREATE SEQUENCE styles_id_seq
 -- Name: styles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE styles_id_seq OWNED BY styles.id;
+ALTER SEQUENCE public.styles_id_seq OWNED BY public.styles.id;
 
 
 --
 -- Name: user_style_profile_taxons; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE user_style_profile_taxons (
+CREATE TABLE public.user_style_profile_taxons (
     id integer NOT NULL,
     user_style_profile_id integer,
     taxon_id integer,
@@ -5290,7 +5325,7 @@ CREATE TABLE user_style_profile_taxons (
 -- Name: user_style_profile_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE user_style_profile_taxons_id_seq
+CREATE SEQUENCE public.user_style_profile_taxons_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5302,14 +5337,14 @@ CREATE SEQUENCE user_style_profile_taxons_id_seq
 -- Name: user_style_profile_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE user_style_profile_taxons_id_seq OWNED BY user_style_profile_taxons.id;
+ALTER SEQUENCE public.user_style_profile_taxons_id_seq OWNED BY public.user_style_profile_taxons.id;
 
 
 --
 -- Name: user_style_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE user_style_profiles (
+CREATE TABLE public.user_style_profiles (
     id integer NOT NULL,
     user_id integer,
     glam double precision,
@@ -5338,7 +5373,7 @@ CREATE TABLE user_style_profiles (
 -- Name: user_style_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE user_style_profiles_id_seq
+CREATE SEQUENCE public.user_style_profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5350,14 +5385,14 @@ CREATE SEQUENCE user_style_profiles_id_seq
 -- Name: user_style_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE user_style_profiles_id_seq OWNED BY user_style_profiles.id;
+ALTER SEQUENCE public.user_style_profiles_id_seq OWNED BY public.user_style_profiles.id;
 
 
 --
 -- Name: wedding_atelier_event_assistants; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_event_assistants (
+CREATE TABLE public.wedding_atelier_event_assistants (
     id integer NOT NULL,
     user_id integer,
     event_id integer,
@@ -5370,7 +5405,7 @@ CREATE TABLE wedding_atelier_event_assistants (
 -- Name: wedding_atelier_event_assistants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_event_assistants_id_seq
+CREATE SEQUENCE public.wedding_atelier_event_assistants_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5382,14 +5417,14 @@ CREATE SEQUENCE wedding_atelier_event_assistants_id_seq
 -- Name: wedding_atelier_event_assistants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_event_assistants_id_seq OWNED BY wedding_atelier_event_assistants.id;
+ALTER SEQUENCE public.wedding_atelier_event_assistants_id_seq OWNED BY public.wedding_atelier_event_assistants.id;
 
 
 --
 -- Name: wedding_atelier_event_dresses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_event_dresses (
+CREATE TABLE public.wedding_atelier_event_dresses (
     id integer NOT NULL,
     product_id integer,
     event_id integer,
@@ -5411,7 +5446,7 @@ CREATE TABLE wedding_atelier_event_dresses (
 -- Name: wedding_atelier_event_dresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_event_dresses_id_seq
+CREATE SEQUENCE public.wedding_atelier_event_dresses_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5423,14 +5458,14 @@ CREATE SEQUENCE wedding_atelier_event_dresses_id_seq
 -- Name: wedding_atelier_event_dresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_event_dresses_id_seq OWNED BY wedding_atelier_event_dresses.id;
+ALTER SEQUENCE public.wedding_atelier_event_dresses_id_seq OWNED BY public.wedding_atelier_event_dresses.id;
 
 
 --
 -- Name: wedding_atelier_event_roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_event_roles (
+CREATE TABLE public.wedding_atelier_event_roles (
     id integer NOT NULL,
     name character varying(255),
     resource_id integer,
@@ -5444,7 +5479,7 @@ CREATE TABLE wedding_atelier_event_roles (
 -- Name: wedding_atelier_event_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_event_roles_id_seq
+CREATE SEQUENCE public.wedding_atelier_event_roles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5456,14 +5491,14 @@ CREATE SEQUENCE wedding_atelier_event_roles_id_seq
 -- Name: wedding_atelier_event_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_event_roles_id_seq OWNED BY wedding_atelier_event_roles.id;
+ALTER SEQUENCE public.wedding_atelier_event_roles_id_seq OWNED BY public.wedding_atelier_event_roles.id;
 
 
 --
 -- Name: wedding_atelier_events; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_events (
+CREATE TABLE public.wedding_atelier_events (
     id integer NOT NULL,
     event_type character varying(255),
     number_of_assistants integer,
@@ -5480,7 +5515,7 @@ CREATE TABLE wedding_atelier_events (
 -- Name: wedding_atelier_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_events_id_seq
+CREATE SEQUENCE public.wedding_atelier_events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5492,14 +5527,14 @@ CREATE SEQUENCE wedding_atelier_events_id_seq
 -- Name: wedding_atelier_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_events_id_seq OWNED BY wedding_atelier_events.id;
+ALTER SEQUENCE public.wedding_atelier_events_id_seq OWNED BY public.wedding_atelier_events.id;
 
 
 --
 -- Name: wedding_atelier_invitations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_invitations (
+CREATE TABLE public.wedding_atelier_invitations (
     id integer NOT NULL,
     user_email character varying(255),
     event_slug character varying(255),
@@ -5513,7 +5548,7 @@ CREATE TABLE wedding_atelier_invitations (
 -- Name: wedding_atelier_invitations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_invitations_id_seq
+CREATE SEQUENCE public.wedding_atelier_invitations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5525,14 +5560,14 @@ CREATE SEQUENCE wedding_atelier_invitations_id_seq
 -- Name: wedding_atelier_invitations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_invitations_id_seq OWNED BY wedding_atelier_invitations.id;
+ALTER SEQUENCE public.wedding_atelier_invitations_id_seq OWNED BY public.wedding_atelier_invitations.id;
 
 
 --
 -- Name: wedding_atelier_likes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_likes (
+CREATE TABLE public.wedding_atelier_likes (
     id integer NOT NULL,
     user_id integer,
     event_dress_id integer,
@@ -5545,7 +5580,7 @@ CREATE TABLE wedding_atelier_likes (
 -- Name: wedding_atelier_likes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_likes_id_seq
+CREATE SEQUENCE public.wedding_atelier_likes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5557,14 +5592,14 @@ CREATE SEQUENCE wedding_atelier_likes_id_seq
 -- Name: wedding_atelier_likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_likes_id_seq OWNED BY wedding_atelier_likes.id;
+ALTER SEQUENCE public.wedding_atelier_likes_id_seq OWNED BY public.wedding_atelier_likes.id;
 
 
 --
 -- Name: wedding_atelier_user_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_user_profiles (
+CREATE TABLE public.wedding_atelier_user_profiles (
     id integer NOT NULL,
     spree_user_id integer,
     height character varying(255),
@@ -5577,7 +5612,7 @@ CREATE TABLE wedding_atelier_user_profiles (
 -- Name: wedding_atelier_user_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_atelier_user_profiles_id_seq
+CREATE SEQUENCE public.wedding_atelier_user_profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5589,14 +5624,14 @@ CREATE SEQUENCE wedding_atelier_user_profiles_id_seq
 -- Name: wedding_atelier_user_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_atelier_user_profiles_id_seq OWNED BY wedding_atelier_user_profiles.id;
+ALTER SEQUENCE public.wedding_atelier_user_profiles_id_seq OWNED BY public.wedding_atelier_user_profiles.id;
 
 
 --
 -- Name: wedding_atelier_users_event_roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_atelier_users_event_roles (
+CREATE TABLE public.wedding_atelier_users_event_roles (
     user_id integer,
     event_role_id integer
 );
@@ -5606,7 +5641,7 @@ CREATE TABLE wedding_atelier_users_event_roles (
 -- Name: wedding_plannings; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wedding_plannings (
+CREATE TABLE public.wedding_plannings (
     id integer NOT NULL,
     first_name character varying(255),
     last_name character varying(255),
@@ -5627,7 +5662,7 @@ CREATE TABLE wedding_plannings (
 -- Name: wedding_plannings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wedding_plannings_id_seq
+CREATE SEQUENCE public.wedding_plannings_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5639,14 +5674,14 @@ CREATE SEQUENCE wedding_plannings_id_seq
 -- Name: wedding_plannings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wedding_plannings_id_seq OWNED BY wedding_plannings.id;
+ALTER SEQUENCE public.wedding_plannings_id_seq OWNED BY public.wedding_plannings.id;
 
 
 --
 -- Name: wishlist_items; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE wishlist_items (
+CREATE TABLE public.wishlist_items (
     id integer NOT NULL,
     spree_user_id integer,
     spree_variant_id integer,
@@ -5662,7 +5697,7 @@ CREATE TABLE wishlist_items (
 -- Name: wishlist_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wishlist_items_id_seq
+CREATE SEQUENCE public.wishlist_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5674,1050 +5709,1057 @@ CREATE SEQUENCE wishlist_items_id_seq
 -- Name: wishlist_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wishlist_items_id_seq OWNED BY wishlist_items.id;
+ALTER SEQUENCE public.wishlist_items_id_seq OWNED BY public.wishlist_items.id;
 
 
 --
 -- Name: activities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
+ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.activities_id_seq'::regclass);
 
 
 --
 -- Name: answer_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY answer_taxons ALTER COLUMN id SET DEFAULT nextval('answer_taxons_id_seq'::regclass);
+ALTER TABLE ONLY public.answer_taxons ALTER COLUMN id SET DEFAULT nextval('public.answer_taxons_id_seq'::regclass);
 
 
 --
 -- Name: answers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::regclass);
+ALTER TABLE ONLY public.answers ALTER COLUMN id SET DEFAULT nextval('public.answers_id_seq'::regclass);
 
 
 --
 -- Name: batch_collection_line_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY batch_collection_line_items ALTER COLUMN id SET DEFAULT nextval('batch_collection_line_items_id_seq'::regclass);
+ALTER TABLE ONLY public.batch_collection_line_items ALTER COLUMN id SET DEFAULT nextval('public.batch_collection_line_items_id_seq'::regclass);
 
 
 --
 -- Name: batch_collections id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY batch_collections ALTER COLUMN id SET DEFAULT nextval('batch_collections_id_seq'::regclass);
+ALTER TABLE ONLY public.batch_collections ALTER COLUMN id SET DEFAULT nextval('public.batch_collections_id_seq'::regclass);
 
 
 --
 -- Name: bergen_return_item_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bergen_return_item_processes ALTER COLUMN id SET DEFAULT nextval('bergen_return_item_processes_id_seq'::regclass);
+ALTER TABLE ONLY public.bergen_return_item_processes ALTER COLUMN id SET DEFAULT nextval('public.bergen_return_item_processes_id_seq'::regclass);
 
 
 --
 -- Name: bulk_order_updates id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bulk_order_updates ALTER COLUMN id SET DEFAULT nextval('bulk_order_updates_id_seq'::regclass);
+ALTER TABLE ONLY public.bulk_order_updates ALTER COLUMN id SET DEFAULT nextval('public.bulk_order_updates_id_seq'::regclass);
 
 
 --
 -- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
 
 
 --
 -- Name: celebrity_inspirations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY celebrity_inspirations ALTER COLUMN id SET DEFAULT nextval('celebrity_inspirations_id_seq'::regclass);
+ALTER TABLE ONLY public.celebrity_inspirations ALTER COLUMN id SET DEFAULT nextval('public.celebrity_inspirations_id_seq'::regclass);
 
 
 --
 -- Name: competition_entries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_entries ALTER COLUMN id SET DEFAULT nextval('competition_entries_id_seq'::regclass);
+ALTER TABLE ONLY public.competition_entries ALTER COLUMN id SET DEFAULT nextval('public.competition_entries_id_seq'::regclass);
 
 
 --
 -- Name: competition_invitations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_invitations ALTER COLUMN id SET DEFAULT nextval('competition_invitations_id_seq'::regclass);
+ALTER TABLE ONLY public.competition_invitations ALTER COLUMN id SET DEFAULT nextval('public.competition_invitations_id_seq'::regclass);
 
 
 --
 -- Name: competition_participations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_participations ALTER COLUMN id SET DEFAULT nextval('competition_participations_id_seq'::regclass);
+ALTER TABLE ONLY public.competition_participations ALTER COLUMN id SET DEFAULT nextval('public.competition_participations_id_seq'::regclass);
 
 
 --
 -- Name: contentful_routes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contentful_routes ALTER COLUMN id SET DEFAULT nextval('contentful_routes_id_seq'::regclass);
+ALTER TABLE ONLY public.contentful_routes ALTER COLUMN id SET DEFAULT nextval('public.contentful_routes_id_seq'::regclass);
 
 
 --
 -- Name: contentful_versions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contentful_versions ALTER COLUMN id SET DEFAULT nextval('contentful_versions_id_seq'::regclass);
+ALTER TABLE ONLY public.contentful_versions ALTER COLUMN id SET DEFAULT nextval('public.contentful_versions_id_seq'::regclass);
 
 
 --
 -- Name: custom_dress_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY custom_dress_images ALTER COLUMN id SET DEFAULT nextval('custom_dress_images_id_seq'::regclass);
+ALTER TABLE ONLY public.custom_dress_images ALTER COLUMN id SET DEFAULT nextval('public.custom_dress_images_id_seq'::regclass);
 
 
 --
 -- Name: custom_dresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY custom_dresses ALTER COLUMN id SET DEFAULT nextval('custom_dresses_id_seq'::regclass);
+ALTER TABLE ONLY public.custom_dresses ALTER COLUMN id SET DEFAULT nextval('public.custom_dresses_id_seq'::regclass);
 
 
 --
 -- Name: customisation_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customisation_values ALTER COLUMN id SET DEFAULT nextval('customisation_values_id_seq'::regclass);
+ALTER TABLE ONLY public.customisation_values ALTER COLUMN id SET DEFAULT nextval('public.customisation_values_id_seq'::regclass);
 
 
 --
 -- Name: customization_visualizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customization_visualizations ALTER COLUMN id SET DEFAULT nextval('customization_visualizations_id_seq'::regclass);
+ALTER TABLE ONLY public.customization_visualizations ALTER COLUMN id SET DEFAULT nextval('public.customization_visualizations_id_seq'::regclass);
 
 
 --
 -- Name: discounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY discounts ALTER COLUMN id SET DEFAULT nextval('discounts_id_seq'::regclass);
+ALTER TABLE ONLY public.discounts ALTER COLUMN id SET DEFAULT nextval('public.discounts_id_seq'::regclass);
 
 
 --
 -- Name: email_notifications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY email_notifications ALTER COLUMN id SET DEFAULT nextval('email_notifications_id_seq'::regclass);
+ALTER TABLE ONLY public.email_notifications ALTER COLUMN id SET DEFAULT nextval('public.email_notifications_id_seq'::regclass);
 
 
 --
 -- Name: fabric_card_colours id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_card_colours ALTER COLUMN id SET DEFAULT nextval('fabric_card_colours_id_seq'::regclass);
+ALTER TABLE ONLY public.fabric_card_colours ALTER COLUMN id SET DEFAULT nextval('public.fabric_card_colours_id_seq'::regclass);
 
 
 --
 -- Name: fabric_cards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_cards ALTER COLUMN id SET DEFAULT nextval('fabric_cards_id_seq'::regclass);
+ALTER TABLE ONLY public.fabric_cards ALTER COLUMN id SET DEFAULT nextval('public.fabric_cards_id_seq'::regclass);
 
 
 --
 -- Name: fabric_colours id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_colours ALTER COLUMN id SET DEFAULT nextval('fabric_colours_id_seq'::regclass);
+ALTER TABLE ONLY public.fabric_colours ALTER COLUMN id SET DEFAULT nextval('public.fabric_colours_id_seq'::regclass);
 
 
 --
 -- Name: fabrication_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrication_events ALTER COLUMN id SET DEFAULT nextval('fabrication_events_id_seq'::regclass);
+ALTER TABLE ONLY public.fabrication_events ALTER COLUMN id SET DEFAULT nextval('public.fabrication_events_id_seq'::regclass);
 
 
 --
 -- Name: fabrications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrications ALTER COLUMN id SET DEFAULT nextval('fabrications_id_seq'::regclass);
+ALTER TABLE ONLY public.fabrications ALTER COLUMN id SET DEFAULT nextval('public.fabrications_id_seq'::regclass);
 
 
 --
 -- Name: fabrics id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrics ALTER COLUMN id SET DEFAULT nextval('fabrics_id_seq'::regclass);
+ALTER TABLE ONLY public.fabrics ALTER COLUMN id SET DEFAULT nextval('public.fabrics_id_seq'::regclass);
 
 
 --
 -- Name: fabrics_products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrics_products ALTER COLUMN id SET DEFAULT nextval('fabrics_products_id_seq'::regclass);
+ALTER TABLE ONLY public.fabrics_products ALTER COLUMN id SET DEFAULT nextval('public.fabrics_products_id_seq'::regclass);
 
 
 --
 -- Name: facebook_accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_accounts ALTER COLUMN id SET DEFAULT nextval('facebook_accounts_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_accounts ALTER COLUMN id SET DEFAULT nextval('public.facebook_accounts_id_seq'::regclass);
 
 
 --
 -- Name: facebook_ad_creatives id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ad_creatives ALTER COLUMN id SET DEFAULT nextval('facebook_ad_creatives_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_ad_creatives ALTER COLUMN id SET DEFAULT nextval('public.facebook_ad_creatives_id_seq'::regclass);
 
 
 --
 -- Name: facebook_ad_insights id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ad_insights ALTER COLUMN id SET DEFAULT nextval('facebook_ad_insights_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_ad_insights ALTER COLUMN id SET DEFAULT nextval('public.facebook_ad_insights_id_seq'::regclass);
 
 
 --
 -- Name: facebook_ads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ads ALTER COLUMN id SET DEFAULT nextval('facebook_ads_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_ads ALTER COLUMN id SET DEFAULT nextval('public.facebook_ads_id_seq'::regclass);
 
 
 --
 -- Name: facebook_adsets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_adsets ALTER COLUMN id SET DEFAULT nextval('facebook_adsets_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_adsets ALTER COLUMN id SET DEFAULT nextval('public.facebook_adsets_id_seq'::regclass);
 
 
 --
 -- Name: facebook_campaigns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_campaigns ALTER COLUMN id SET DEFAULT nextval('facebook_campaigns_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_campaigns ALTER COLUMN id SET DEFAULT nextval('public.facebook_campaigns_id_seq'::regclass);
 
 
 --
 -- Name: facebook_data id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_data ALTER COLUMN id SET DEFAULT nextval('facebook_data_id_seq'::regclass);
+ALTER TABLE ONLY public.facebook_data ALTER COLUMN id SET DEFAULT nextval('public.facebook_data_id_seq'::regclass);
 
 
 --
 -- Name: factories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY factories ALTER COLUMN id SET DEFAULT nextval('factories_id_seq'::regclass);
+ALTER TABLE ONLY public.factories ALTER COLUMN id SET DEFAULT nextval('public.factories_id_seq'::regclass);
 
 
 --
 -- Name: global_skus id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY global_skus ALTER COLUMN id SET DEFAULT nextval('global_skus_id_seq'::regclass);
+ALTER TABLE ONLY public.global_skus ALTER COLUMN id SET DEFAULT nextval('public.global_skus_id_seq'::regclass);
 
 
 --
 -- Name: incompatibilities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY incompatibilities ALTER COLUMN id SET DEFAULT nextval('incompatibilities_id_seq'::regclass);
+ALTER TABLE ONLY public.incompatibilities ALTER COLUMN id SET DEFAULT nextval('public.incompatibilities_id_seq'::regclass);
 
 
 --
 -- Name: inspirations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY inspirations ALTER COLUMN id SET DEFAULT nextval('inspirations_id_seq'::regclass);
+ALTER TABLE ONLY public.inspirations ALTER COLUMN id SET DEFAULT nextval('public.inspirations_id_seq'::regclass);
 
 
 --
 -- Name: item_return_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_return_events ALTER COLUMN id SET DEFAULT nextval('item_return_events_id_seq'::regclass);
+ALTER TABLE ONLY public.item_return_events ALTER COLUMN id SET DEFAULT nextval('public.item_return_events_id_seq'::regclass);
 
 
 --
 -- Name: item_return_labels id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_return_labels ALTER COLUMN id SET DEFAULT nextval('item_return_labels_id_seq'::regclass);
+ALTER TABLE ONLY public.item_return_labels ALTER COLUMN id SET DEFAULT nextval('public.item_return_labels_id_seq'::regclass);
 
 
 --
 -- Name: item_returns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_returns ALTER COLUMN id SET DEFAULT nextval('item_returns_id_seq'::regclass);
+ALTER TABLE ONLY public.item_returns ALTER COLUMN id SET DEFAULT nextval('public.item_returns_id_seq'::regclass);
 
 
 --
 -- Name: layer_cads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY layer_cads ALTER COLUMN id SET DEFAULT nextval('layer_cads_id_seq'::regclass);
+ALTER TABLE ONLY public.layer_cads ALTER COLUMN id SET DEFAULT nextval('public.layer_cads_id_seq'::regclass);
 
 
 --
 -- Name: line_item_making_options id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_making_options ALTER COLUMN id SET DEFAULT nextval('line_item_making_options_id_seq'::regclass);
+ALTER TABLE ONLY public.line_item_making_options ALTER COLUMN id SET DEFAULT nextval('public.line_item_making_options_id_seq'::regclass);
 
 
 --
 -- Name: line_item_personalizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_personalizations ALTER COLUMN id SET DEFAULT nextval('line_item_personalizations_id_seq'::regclass);
+ALTER TABLE ONLY public.line_item_personalizations ALTER COLUMN id SET DEFAULT nextval('public.line_item_personalizations_id_seq'::regclass);
 
 
 --
 -- Name: line_item_size_normalisations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_size_normalisations ALTER COLUMN id SET DEFAULT nextval('line_item_size_normalisations_id_seq'::regclass);
+ALTER TABLE ONLY public.line_item_size_normalisations ALTER COLUMN id SET DEFAULT nextval('public.line_item_size_normalisations_id_seq'::regclass);
 
 
 --
 -- Name: line_item_updates id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_updates ALTER COLUMN id SET DEFAULT nextval('line_item_updates_id_seq'::regclass);
+ALTER TABLE ONLY public.line_item_updates ALTER COLUMN id SET DEFAULT nextval('public.line_item_updates_id_seq'::regclass);
 
 
 --
 -- Name: manually_managed_returns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY manually_managed_returns ALTER COLUMN id SET DEFAULT nextval('manually_managed_returns_id_seq'::regclass);
+ALTER TABLE ONLY public.manually_managed_returns ALTER COLUMN id SET DEFAULT nextval('public.manually_managed_returns_id_seq'::regclass);
 
 
 --
 -- Name: marketing_body_calculator_measures id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_body_calculator_measures ALTER COLUMN id SET DEFAULT nextval('marketing_body_calculator_measures_id_seq'::regclass);
+ALTER TABLE ONLY public.marketing_body_calculator_measures ALTER COLUMN id SET DEFAULT nextval('public.marketing_body_calculator_measures_id_seq'::regclass);
 
 
 --
 -- Name: marketing_order_traffic_parameters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_order_traffic_parameters ALTER COLUMN id SET DEFAULT nextval('marketing_order_traffic_parameters_id_seq'::regclass);
+ALTER TABLE ONLY public.marketing_order_traffic_parameters ALTER COLUMN id SET DEFAULT nextval('public.marketing_order_traffic_parameters_id_seq'::regclass);
 
 
 --
 -- Name: marketing_user_visits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_user_visits ALTER COLUMN id SET DEFAULT nextval('marketing_user_visits_id_seq'::regclass);
+ALTER TABLE ONLY public.marketing_user_visits ALTER COLUMN id SET DEFAULT nextval('public.marketing_user_visits_id_seq'::regclass);
 
 
 --
 -- Name: moodboard_collaborators id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_collaborators ALTER COLUMN id SET DEFAULT nextval('moodboard_collaborators_id_seq'::regclass);
+ALTER TABLE ONLY public.moodboard_collaborators ALTER COLUMN id SET DEFAULT nextval('public.moodboard_collaborators_id_seq'::regclass);
 
 
 --
 -- Name: moodboard_item_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_item_comments ALTER COLUMN id SET DEFAULT nextval('moodboard_item_comments_id_seq'::regclass);
+ALTER TABLE ONLY public.moodboard_item_comments ALTER COLUMN id SET DEFAULT nextval('public.moodboard_item_comments_id_seq'::regclass);
 
 
 --
 -- Name: moodboard_item_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_item_events ALTER COLUMN id SET DEFAULT nextval('moodboard_item_events_id_seq'::regclass);
+ALTER TABLE ONLY public.moodboard_item_events ALTER COLUMN id SET DEFAULT nextval('public.moodboard_item_events_id_seq'::regclass);
 
 
 --
 -- Name: moodboard_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_items ALTER COLUMN id SET DEFAULT nextval('moodboard_items_id_seq'::regclass);
+ALTER TABLE ONLY public.moodboard_items ALTER COLUMN id SET DEFAULT nextval('public.moodboard_items_id_seq'::regclass);
 
 
 --
 -- Name: moodboards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboards ALTER COLUMN id SET DEFAULT nextval('moodboards_id_seq'::regclass);
+ALTER TABLE ONLY public.moodboards ALTER COLUMN id SET DEFAULT nextval('public.moodboards_id_seq'::regclass);
+
+
+--
+-- Name: newgistics_schedulers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.newgistics_schedulers ALTER COLUMN id SET DEFAULT nextval('public.newgistics_schedulers_id_seq'::regclass);
 
 
 --
 -- Name: next_logistics_return_request_processes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY next_logistics_return_request_processes ALTER COLUMN id SET DEFAULT nextval('next_logistics_return_request_processes_id_seq'::regclass);
+ALTER TABLE ONLY public.next_logistics_return_request_processes ALTER COLUMN id SET DEFAULT nextval('public.next_logistics_return_request_processes_id_seq'::regclass);
 
 
 --
 -- Name: order_return_requests id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY order_return_requests ALTER COLUMN id SET DEFAULT nextval('order_return_requests_id_seq'::regclass);
+ALTER TABLE ONLY public.order_return_requests ALTER COLUMN id SET DEFAULT nextval('public.order_return_requests_id_seq'::regclass);
 
 
 --
 -- Name: payment_requests id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY payment_requests ALTER COLUMN id SET DEFAULT nextval('payment_requests_id_seq'::regclass);
+ALTER TABLE ONLY public.payment_requests ALTER COLUMN id SET DEFAULT nextval('public.payment_requests_id_seq'::regclass);
 
 
 --
 -- Name: product_accessories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_accessories ALTER COLUMN id SET DEFAULT nextval('product_accessories_id_seq'::regclass);
+ALTER TABLE ONLY public.product_accessories ALTER COLUMN id SET DEFAULT nextval('public.product_accessories_id_seq'::regclass);
 
 
 --
 -- Name: product_color_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_color_values ALTER COLUMN id SET DEFAULT nextval('product_color_values_id_seq'::regclass);
+ALTER TABLE ONLY public.product_color_values ALTER COLUMN id SET DEFAULT nextval('public.product_color_values_id_seq'::regclass);
 
 
 --
 -- Name: product_height_range_groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_height_range_groups ALTER COLUMN id SET DEFAULT nextval('product_height_range_groups_id_seq'::regclass);
+ALTER TABLE ONLY public.product_height_range_groups ALTER COLUMN id SET DEFAULT nextval('public.product_height_range_groups_id_seq'::regclass);
 
 
 --
 -- Name: product_height_ranges id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_height_ranges ALTER COLUMN id SET DEFAULT nextval('product_height_ranges_id_seq'::regclass);
+ALTER TABLE ONLY public.product_height_ranges ALTER COLUMN id SET DEFAULT nextval('public.product_height_ranges_id_seq'::regclass);
 
 
 --
 -- Name: product_making_options id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_making_options ALTER COLUMN id SET DEFAULT nextval('product_making_options_id_seq'::regclass);
+ALTER TABLE ONLY public.product_making_options ALTER COLUMN id SET DEFAULT nextval('public.product_making_options_id_seq'::regclass);
 
 
 --
 -- Name: product_personalizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_personalizations ALTER COLUMN id SET DEFAULT nextval('product_personalizations_id_seq'::regclass);
+ALTER TABLE ONLY public.product_personalizations ALTER COLUMN id SET DEFAULT nextval('public.product_personalizations_id_seq'::regclass);
 
 
 --
 -- Name: product_reservations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_reservations ALTER COLUMN id SET DEFAULT nextval('product_reservations_id_seq'::regclass);
+ALTER TABLE ONLY public.product_reservations ALTER COLUMN id SET DEFAULT nextval('public.product_reservations_id_seq'::regclass);
 
 
 --
 -- Name: product_style_profiles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_style_profiles ALTER COLUMN id SET DEFAULT nextval('product_style_profiles_id_seq'::regclass);
+ALTER TABLE ONLY public.product_style_profiles ALTER COLUMN id SET DEFAULT nextval('public.product_style_profiles_id_seq'::regclass);
 
 
 --
 -- Name: questions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
+ALTER TABLE ONLY public.questions ALTER COLUMN id SET DEFAULT nextval('public.questions_id_seq'::regclass);
 
 
 --
 -- Name: quizzes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
+ALTER TABLE ONLY public.quizzes ALTER COLUMN id SET DEFAULT nextval('public.quizzes_id_seq'::regclass);
 
 
 --
 -- Name: redirected_search_terms id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY redirected_search_terms ALTER COLUMN id SET DEFAULT nextval('redirected_search_terms_id_seq'::regclass);
+ALTER TABLE ONLY public.redirected_search_terms ALTER COLUMN id SET DEFAULT nextval('public.redirected_search_terms_id_seq'::regclass);
 
 
 --
 -- Name: refund_requests id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY refund_requests ALTER COLUMN id SET DEFAULT nextval('refund_requests_id_seq'::regclass);
+ALTER TABLE ONLY public.refund_requests ALTER COLUMN id SET DEFAULT nextval('public.refund_requests_id_seq'::regclass);
 
 
 --
 -- Name: render3d_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY render3d_images ALTER COLUMN id SET DEFAULT nextval('render3d_images_id_seq'::regclass);
+ALTER TABLE ONLY public.render3d_images ALTER COLUMN id SET DEFAULT nextval('public.render3d_images_id_seq'::regclass);
 
 
 --
 -- Name: return_inventory_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY return_inventory_items ALTER COLUMN id SET DEFAULT nextval('return_inventory_items_id_seq'::regclass);
+ALTER TABLE ONLY public.return_inventory_items ALTER COLUMN id SET DEFAULT nextval('public.return_inventory_items_id_seq'::regclass);
 
 
 --
 -- Name: return_request_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY return_request_items ALTER COLUMN id SET DEFAULT nextval('return_request_items_id_seq'::regclass);
+ALTER TABLE ONLY public.return_request_items ALTER COLUMN id SET DEFAULT nextval('public.return_request_items_id_seq'::regclass);
 
 
 --
 -- Name: revolution_pages id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY revolution_pages ALTER COLUMN id SET DEFAULT nextval('revolution_pages_id_seq'::regclass);
+ALTER TABLE ONLY public.revolution_pages ALTER COLUMN id SET DEFAULT nextval('public.revolution_pages_id_seq'::regclass);
 
 
 --
 -- Name: revolution_translations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY revolution_translations ALTER COLUMN id SET DEFAULT nextval('revolution_translations_id_seq'::regclass);
+ALTER TABLE ONLY public.revolution_translations ALTER COLUMN id SET DEFAULT nextval('public.revolution_translations_id_seq'::regclass);
 
 
 --
 -- Name: similarities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY similarities ALTER COLUMN id SET DEFAULT nextval('similarities_id_seq'::regclass);
+ALTER TABLE ONLY public.similarities ALTER COLUMN id SET DEFAULT nextval('public.similarities_id_seq'::regclass);
 
 
 --
 -- Name: simple_key_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY simple_key_values ALTER COLUMN id SET DEFAULT nextval('simple_key_values_id_seq'::regclass);
+ALTER TABLE ONLY public.simple_key_values ALTER COLUMN id SET DEFAULT nextval('public.simple_key_values_id_seq'::regclass);
 
 
 --
 -- Name: site_versions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY site_versions ALTER COLUMN id SET DEFAULT nextval('site_versions_id_seq'::regclass);
+ALTER TABLE ONLY public.site_versions ALTER COLUMN id SET DEFAULT nextval('public.site_versions_id_seq'::regclass);
 
 
 --
 -- Name: spree_activators id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_activators ALTER COLUMN id SET DEFAULT nextval('spree_activators_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_activators ALTER COLUMN id SET DEFAULT nextval('public.spree_activators_id_seq'::regclass);
 
 
 --
 -- Name: spree_addresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_addresses ALTER COLUMN id SET DEFAULT nextval('spree_addresses_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_addresses ALTER COLUMN id SET DEFAULT nextval('public.spree_addresses_id_seq'::regclass);
 
 
 --
 -- Name: spree_adjustments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_adjustments ALTER COLUMN id SET DEFAULT nextval('spree_adjustments_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_adjustments ALTER COLUMN id SET DEFAULT nextval('public.spree_adjustments_id_seq'::regclass);
 
 
 --
 -- Name: spree_assets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_assets ALTER COLUMN id SET DEFAULT nextval('spree_assets_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_assets ALTER COLUMN id SET DEFAULT nextval('public.spree_assets_id_seq'::regclass);
 
 
 --
 -- Name: spree_authentication_methods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_authentication_methods ALTER COLUMN id SET DEFAULT nextval('spree_authentication_methods_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_authentication_methods ALTER COLUMN id SET DEFAULT nextval('public.spree_authentication_methods_id_seq'::regclass);
 
 
 --
 -- Name: spree_banner_boxes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_banner_boxes ALTER COLUMN id SET DEFAULT nextval('spree_banner_boxes_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_banner_boxes ALTER COLUMN id SET DEFAULT nextval('public.spree_banner_boxes_id_seq'::regclass);
 
 
 --
 -- Name: spree_calculators id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_calculators ALTER COLUMN id SET DEFAULT nextval('spree_calculators_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_calculators ALTER COLUMN id SET DEFAULT nextval('public.spree_calculators_id_seq'::regclass);
 
 
 --
 -- Name: spree_configurations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_configurations ALTER COLUMN id SET DEFAULT nextval('spree_configurations_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_configurations ALTER COLUMN id SET DEFAULT nextval('public.spree_configurations_id_seq'::regclass);
 
 
 --
 -- Name: spree_countries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_countries ALTER COLUMN id SET DEFAULT nextval('spree_countries_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_countries ALTER COLUMN id SET DEFAULT nextval('public.spree_countries_id_seq'::regclass);
 
 
 --
 -- Name: spree_credit_cards id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_credit_cards ALTER COLUMN id SET DEFAULT nextval('spree_credit_cards_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_credit_cards ALTER COLUMN id SET DEFAULT nextval('public.spree_credit_cards_id_seq'::regclass);
 
 
 --
 -- Name: spree_gateways id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_gateways ALTER COLUMN id SET DEFAULT nextval('spree_gateways_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_gateways ALTER COLUMN id SET DEFAULT nextval('public.spree_gateways_id_seq'::regclass);
 
 
 --
 -- Name: spree_inventory_units id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_inventory_units ALTER COLUMN id SET DEFAULT nextval('spree_inventory_units_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_inventory_units ALTER COLUMN id SET DEFAULT nextval('public.spree_inventory_units_id_seq'::regclass);
 
 
 --
 -- Name: spree_line_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_line_items ALTER COLUMN id SET DEFAULT nextval('spree_line_items_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_line_items ALTER COLUMN id SET DEFAULT nextval('public.spree_line_items_id_seq'::regclass);
 
 
 --
 -- Name: spree_log_entries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_log_entries ALTER COLUMN id SET DEFAULT nextval('spree_log_entries_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_log_entries ALTER COLUMN id SET DEFAULT nextval('public.spree_log_entries_id_seq'::regclass);
 
 
 --
 -- Name: spree_mail_methods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_mail_methods ALTER COLUMN id SET DEFAULT nextval('spree_mail_methods_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_mail_methods ALTER COLUMN id SET DEFAULT nextval('public.spree_mail_methods_id_seq'::regclass);
 
 
 --
 -- Name: spree_masterpass_checkouts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_masterpass_checkouts ALTER COLUMN id SET DEFAULT nextval('spree_masterpass_checkouts_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_masterpass_checkouts ALTER COLUMN id SET DEFAULT nextval('public.spree_masterpass_checkouts_id_seq'::regclass);
 
 
 --
 -- Name: spree_option_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_types ALTER COLUMN id SET DEFAULT nextval('spree_option_types_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_option_types ALTER COLUMN id SET DEFAULT nextval('public.spree_option_types_id_seq'::regclass);
 
 
 --
 -- Name: spree_option_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_values ALTER COLUMN id SET DEFAULT nextval('spree_option_values_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_option_values ALTER COLUMN id SET DEFAULT nextval('public.spree_option_values_id_seq'::regclass);
 
 
 --
 -- Name: spree_option_values_groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_values_groups ALTER COLUMN id SET DEFAULT nextval('spree_option_values_groups_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_option_values_groups ALTER COLUMN id SET DEFAULT nextval('public.spree_option_values_groups_id_seq'::regclass);
 
 
 --
 -- Name: spree_orders id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_orders ALTER COLUMN id SET DEFAULT nextval('spree_orders_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_orders ALTER COLUMN id SET DEFAULT nextval('public.spree_orders_id_seq'::regclass);
 
 
 --
 -- Name: spree_payment_methods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_payment_methods ALTER COLUMN id SET DEFAULT nextval('spree_payment_methods_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_payment_methods ALTER COLUMN id SET DEFAULT nextval('public.spree_payment_methods_id_seq'::regclass);
 
 
 --
 -- Name: spree_payments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_payments ALTER COLUMN id SET DEFAULT nextval('spree_payments_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_payments ALTER COLUMN id SET DEFAULT nextval('public.spree_payments_id_seq'::regclass);
 
 
 --
 -- Name: spree_paypal_accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_paypal_accounts ALTER COLUMN id SET DEFAULT nextval('spree_paypal_accounts_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_paypal_accounts ALTER COLUMN id SET DEFAULT nextval('public.spree_paypal_accounts_id_seq'::regclass);
 
 
 --
 -- Name: spree_paypal_express_checkouts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_paypal_express_checkouts ALTER COLUMN id SET DEFAULT nextval('spree_paypal_express_checkouts_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_paypal_express_checkouts ALTER COLUMN id SET DEFAULT nextval('public.spree_paypal_express_checkouts_id_seq'::regclass);
 
 
 --
 -- Name: spree_preferences id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_preferences ALTER COLUMN id SET DEFAULT nextval('spree_preferences_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_preferences ALTER COLUMN id SET DEFAULT nextval('public.spree_preferences_id_seq'::regclass);
 
 
 --
 -- Name: spree_prices id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_prices ALTER COLUMN id SET DEFAULT nextval('spree_prices_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_prices ALTER COLUMN id SET DEFAULT nextval('public.spree_prices_id_seq'::regclass);
 
 
 --
 -- Name: spree_product_option_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_option_types ALTER COLUMN id SET DEFAULT nextval('spree_product_option_types_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_product_option_types ALTER COLUMN id SET DEFAULT nextval('public.spree_product_option_types_id_seq'::regclass);
 
 
 --
 -- Name: spree_product_properties id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_properties ALTER COLUMN id SET DEFAULT nextval('spree_product_properties_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_product_properties ALTER COLUMN id SET DEFAULT nextval('public.spree_product_properties_id_seq'::regclass);
 
 
 --
 -- Name: spree_product_related_outerwear id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_related_outerwear ALTER COLUMN id SET DEFAULT nextval('spree_product_related_outerwear_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_product_related_outerwear ALTER COLUMN id SET DEFAULT nextval('public.spree_product_related_outerwear_id_seq'::regclass);
 
 
 --
 -- Name: spree_products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_products ALTER COLUMN id SET DEFAULT nextval('spree_products_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_products ALTER COLUMN id SET DEFAULT nextval('public.spree_products_id_seq'::regclass);
 
 
 --
 -- Name: spree_products_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_products_taxons ALTER COLUMN id SET DEFAULT nextval('spree_products_taxons_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_products_taxons ALTER COLUMN id SET DEFAULT nextval('public.spree_products_taxons_id_seq'::regclass);
 
 
 --
 -- Name: spree_promotion_action_line_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_action_line_items ALTER COLUMN id SET DEFAULT nextval('spree_promotion_action_line_items_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_promotion_action_line_items ALTER COLUMN id SET DEFAULT nextval('public.spree_promotion_action_line_items_id_seq'::regclass);
 
 
 --
 -- Name: spree_promotion_actions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_actions ALTER COLUMN id SET DEFAULT nextval('spree_promotion_actions_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_promotion_actions ALTER COLUMN id SET DEFAULT nextval('public.spree_promotion_actions_id_seq'::regclass);
 
 
 --
 -- Name: spree_promotion_rules id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_rules ALTER COLUMN id SET DEFAULT nextval('spree_promotion_rules_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_promotion_rules ALTER COLUMN id SET DEFAULT nextval('public.spree_promotion_rules_id_seq'::regclass);
 
 
 --
 -- Name: spree_properties id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_properties ALTER COLUMN id SET DEFAULT nextval('spree_properties_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_properties ALTER COLUMN id SET DEFAULT nextval('public.spree_properties_id_seq'::regclass);
 
 
 --
 -- Name: spree_prototypes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_prototypes ALTER COLUMN id SET DEFAULT nextval('spree_prototypes_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_prototypes ALTER COLUMN id SET DEFAULT nextval('public.spree_prototypes_id_seq'::regclass);
 
 
 --
 -- Name: spree_return_authorizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_return_authorizations ALTER COLUMN id SET DEFAULT nextval('spree_return_authorizations_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_return_authorizations ALTER COLUMN id SET DEFAULT nextval('public.spree_return_authorizations_id_seq'::regclass);
 
 
 --
 -- Name: spree_roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_roles ALTER COLUMN id SET DEFAULT nextval('spree_roles_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_roles ALTER COLUMN id SET DEFAULT nextval('public.spree_roles_id_seq'::regclass);
 
 
 --
 -- Name: spree_sales id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_sales ALTER COLUMN id SET DEFAULT nextval('spree_sales_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_sales ALTER COLUMN id SET DEFAULT nextval('public.spree_sales_id_seq'::regclass);
 
 
 --
 -- Name: spree_shipments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipments ALTER COLUMN id SET DEFAULT nextval('spree_shipments_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_shipments ALTER COLUMN id SET DEFAULT nextval('public.spree_shipments_id_seq'::regclass);
 
 
 --
 -- Name: spree_shipping_categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipping_categories ALTER COLUMN id SET DEFAULT nextval('spree_shipping_categories_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_shipping_categories ALTER COLUMN id SET DEFAULT nextval('public.spree_shipping_categories_id_seq'::regclass);
 
 
 --
 -- Name: spree_shipping_methods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipping_methods ALTER COLUMN id SET DEFAULT nextval('spree_shipping_methods_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_shipping_methods ALTER COLUMN id SET DEFAULT nextval('public.spree_shipping_methods_id_seq'::regclass);
 
 
 --
 -- Name: spree_skrill_transactions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_skrill_transactions ALTER COLUMN id SET DEFAULT nextval('spree_skrill_transactions_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_skrill_transactions ALTER COLUMN id SET DEFAULT nextval('public.spree_skrill_transactions_id_seq'::regclass);
 
 
 --
 -- Name: spree_state_changes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_state_changes ALTER COLUMN id SET DEFAULT nextval('spree_state_changes_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_state_changes ALTER COLUMN id SET DEFAULT nextval('public.spree_state_changes_id_seq'::regclass);
 
 
 --
 -- Name: spree_states id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_states ALTER COLUMN id SET DEFAULT nextval('spree_states_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_states ALTER COLUMN id SET DEFAULT nextval('public.spree_states_id_seq'::regclass);
 
 
 --
 -- Name: spree_tax_categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tax_categories ALTER COLUMN id SET DEFAULT nextval('spree_tax_categories_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_tax_categories ALTER COLUMN id SET DEFAULT nextval('public.spree_tax_categories_id_seq'::regclass);
 
 
 --
 -- Name: spree_tax_rates id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tax_rates ALTER COLUMN id SET DEFAULT nextval('spree_tax_rates_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_tax_rates ALTER COLUMN id SET DEFAULT nextval('public.spree_tax_rates_id_seq'::regclass);
 
 
 --
 -- Name: spree_taxon_banners id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxon_banners ALTER COLUMN id SET DEFAULT nextval('spree_taxon_banners_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_taxon_banners ALTER COLUMN id SET DEFAULT nextval('public.spree_taxon_banners_id_seq'::regclass);
 
 
 --
 -- Name: spree_taxonomies id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxonomies ALTER COLUMN id SET DEFAULT nextval('spree_taxonomies_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_taxonomies ALTER COLUMN id SET DEFAULT nextval('public.spree_taxonomies_id_seq'::regclass);
 
 
 --
 -- Name: spree_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxons ALTER COLUMN id SET DEFAULT nextval('spree_taxons_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_taxons ALTER COLUMN id SET DEFAULT nextval('public.spree_taxons_id_seq'::regclass);
 
 
 --
 -- Name: spree_tokenized_permissions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tokenized_permissions ALTER COLUMN id SET DEFAULT nextval('spree_tokenized_permissions_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_tokenized_permissions ALTER COLUMN id SET DEFAULT nextval('public.spree_tokenized_permissions_id_seq'::regclass);
 
 
 --
 -- Name: spree_trackers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_trackers ALTER COLUMN id SET DEFAULT nextval('spree_trackers_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_trackers ALTER COLUMN id SET DEFAULT nextval('public.spree_trackers_id_seq'::regclass);
 
 
 --
 -- Name: spree_user_authentications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_user_authentications ALTER COLUMN id SET DEFAULT nextval('spree_user_authentications_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_user_authentications ALTER COLUMN id SET DEFAULT nextval('public.spree_user_authentications_id_seq'::regclass);
 
 
 --
 -- Name: spree_users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_users ALTER COLUMN id SET DEFAULT nextval('spree_users_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_users ALTER COLUMN id SET DEFAULT nextval('public.spree_users_id_seq'::regclass);
 
 
 --
 -- Name: spree_variants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_variants ALTER COLUMN id SET DEFAULT nextval('spree_variants_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_variants ALTER COLUMN id SET DEFAULT nextval('public.spree_variants_id_seq'::regclass);
 
 
 --
 -- Name: spree_zone_members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_zone_members ALTER COLUMN id SET DEFAULT nextval('spree_zone_members_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_zone_members ALTER COLUMN id SET DEFAULT nextval('public.spree_zone_members_id_seq'::regclass);
 
 
 --
 -- Name: spree_zones id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_zones ALTER COLUMN id SET DEFAULT nextval('spree_zones_id_seq'::regclass);
+ALTER TABLE ONLY public.spree_zones ALTER COLUMN id SET DEFAULT nextval('public.spree_zones_id_seq'::regclass);
 
 
 --
 -- Name: style_to_product_height_range_groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY style_to_product_height_range_groups ALTER COLUMN id SET DEFAULT nextval('style_to_product_height_range_groups_id_seq'::regclass);
+ALTER TABLE ONLY public.style_to_product_height_range_groups ALTER COLUMN id SET DEFAULT nextval('public.style_to_product_height_range_groups_id_seq'::regclass);
 
 
 --
 -- Name: styles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY styles ALTER COLUMN id SET DEFAULT nextval('styles_id_seq'::regclass);
+ALTER TABLE ONLY public.styles ALTER COLUMN id SET DEFAULT nextval('public.styles_id_seq'::regclass);
 
 
 --
 -- Name: user_style_profile_taxons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_style_profile_taxons ALTER COLUMN id SET DEFAULT nextval('user_style_profile_taxons_id_seq'::regclass);
+ALTER TABLE ONLY public.user_style_profile_taxons ALTER COLUMN id SET DEFAULT nextval('public.user_style_profile_taxons_id_seq'::regclass);
 
 
 --
 -- Name: user_style_profiles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_style_profiles ALTER COLUMN id SET DEFAULT nextval('user_style_profiles_id_seq'::regclass);
+ALTER TABLE ONLY public.user_style_profiles ALTER COLUMN id SET DEFAULT nextval('public.user_style_profiles_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_event_assistants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_assistants ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_event_assistants_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_event_assistants ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_event_assistants_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_event_dresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_dresses ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_event_dresses_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_event_dresses ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_event_dresses_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_event_roles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_roles ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_event_roles_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_event_roles ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_event_roles_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_events ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_events_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_events ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_events_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_invitations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_invitations ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_invitations_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_invitations ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_invitations_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_likes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_likes ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_likes_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_likes ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_likes_id_seq'::regclass);
 
 
 --
 -- Name: wedding_atelier_user_profiles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_user_profiles ALTER COLUMN id SET DEFAULT nextval('wedding_atelier_user_profiles_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_atelier_user_profiles ALTER COLUMN id SET DEFAULT nextval('public.wedding_atelier_user_profiles_id_seq'::regclass);
 
 
 --
 -- Name: wedding_plannings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_plannings ALTER COLUMN id SET DEFAULT nextval('wedding_plannings_id_seq'::regclass);
+ALTER TABLE ONLY public.wedding_plannings ALTER COLUMN id SET DEFAULT nextval('public.wedding_plannings_id_seq'::regclass);
 
 
 --
 -- Name: wishlist_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wishlist_items ALTER COLUMN id SET DEFAULT nextval('wishlist_items_id_seq'::regclass);
+ALTER TABLE ONLY public.wishlist_items ALTER COLUMN id SET DEFAULT nextval('public.wishlist_items_id_seq'::regclass);
 
 
 --
 -- Name: activities activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY activities
+ALTER TABLE ONLY public.activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 
@@ -6725,7 +6767,7 @@ ALTER TABLE ONLY activities
 -- Name: answer_taxons answer_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY answer_taxons
+ALTER TABLE ONLY public.answer_taxons
     ADD CONSTRAINT answer_taxons_pkey PRIMARY KEY (id);
 
 
@@ -6733,7 +6775,7 @@ ALTER TABLE ONLY answer_taxons
 -- Name: answers answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY answers
+ALTER TABLE ONLY public.answers
     ADD CONSTRAINT answers_pkey PRIMARY KEY (id);
 
 
@@ -6741,7 +6783,7 @@ ALTER TABLE ONLY answers
 -- Name: spree_banner_boxes banners_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_banner_boxes
+ALTER TABLE ONLY public.spree_banner_boxes
     ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
 
 
@@ -6749,7 +6791,7 @@ ALTER TABLE ONLY spree_banner_boxes
 -- Name: batch_collection_line_items batch_collection_line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY batch_collection_line_items
+ALTER TABLE ONLY public.batch_collection_line_items
     ADD CONSTRAINT batch_collection_line_items_pkey PRIMARY KEY (id);
 
 
@@ -6757,7 +6799,7 @@ ALTER TABLE ONLY batch_collection_line_items
 -- Name: batch_collections batch_collections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY batch_collections
+ALTER TABLE ONLY public.batch_collections
     ADD CONSTRAINT batch_collections_pkey PRIMARY KEY (id);
 
 
@@ -6765,7 +6807,7 @@ ALTER TABLE ONLY batch_collections
 -- Name: bergen_return_item_processes bergen_return_item_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bergen_return_item_processes
+ALTER TABLE ONLY public.bergen_return_item_processes
     ADD CONSTRAINT bergen_return_item_processes_pkey PRIMARY KEY (id);
 
 
@@ -6773,7 +6815,7 @@ ALTER TABLE ONLY bergen_return_item_processes
 -- Name: bulk_order_updates bulk_order_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY bulk_order_updates
+ALTER TABLE ONLY public.bulk_order_updates
     ADD CONSTRAINT bulk_order_updates_pkey PRIMARY KEY (id);
 
 
@@ -6781,7 +6823,7 @@ ALTER TABLE ONLY bulk_order_updates
 -- Name: celebrity_inspirations celebrity_inspirations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY celebrity_inspirations
+ALTER TABLE ONLY public.celebrity_inspirations
     ADD CONSTRAINT celebrity_inspirations_pkey PRIMARY KEY (id);
 
 
@@ -6789,7 +6831,7 @@ ALTER TABLE ONLY celebrity_inspirations
 -- Name: categories classifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY categories
+ALTER TABLE ONLY public.categories
     ADD CONSTRAINT classifications_pkey PRIMARY KEY (id);
 
 
@@ -6797,7 +6839,7 @@ ALTER TABLE ONLY categories
 -- Name: competition_entries competition_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_entries
+ALTER TABLE ONLY public.competition_entries
     ADD CONSTRAINT competition_entries_pkey PRIMARY KEY (id);
 
 
@@ -6805,7 +6847,7 @@ ALTER TABLE ONLY competition_entries
 -- Name: competition_invitations competition_invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_invitations
+ALTER TABLE ONLY public.competition_invitations
     ADD CONSTRAINT competition_invitations_pkey PRIMARY KEY (id);
 
 
@@ -6813,7 +6855,7 @@ ALTER TABLE ONLY competition_invitations
 -- Name: competition_participations competition_participations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY competition_participations
+ALTER TABLE ONLY public.competition_participations
     ADD CONSTRAINT competition_participations_pkey PRIMARY KEY (id);
 
 
@@ -6821,7 +6863,7 @@ ALTER TABLE ONLY competition_participations
 -- Name: contentful_routes contentful_routes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contentful_routes
+ALTER TABLE ONLY public.contentful_routes
     ADD CONSTRAINT contentful_routes_pkey PRIMARY KEY (id);
 
 
@@ -6829,7 +6871,7 @@ ALTER TABLE ONLY contentful_routes
 -- Name: contentful_versions contentful_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY contentful_versions
+ALTER TABLE ONLY public.contentful_versions
     ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
 
 
@@ -6837,7 +6879,7 @@ ALTER TABLE ONLY contentful_versions
 -- Name: custom_dress_images custom_dress_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY custom_dress_images
+ALTER TABLE ONLY public.custom_dress_images
     ADD CONSTRAINT custom_dress_images_pkey PRIMARY KEY (id);
 
 
@@ -6845,7 +6887,7 @@ ALTER TABLE ONLY custom_dress_images
 -- Name: custom_dresses custom_dresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY custom_dresses
+ALTER TABLE ONLY public.custom_dresses
     ADD CONSTRAINT custom_dresses_pkey PRIMARY KEY (id);
 
 
@@ -6853,7 +6895,7 @@ ALTER TABLE ONLY custom_dresses
 -- Name: customisation_values customisation_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customisation_values
+ALTER TABLE ONLY public.customisation_values
     ADD CONSTRAINT customisation_values_pkey PRIMARY KEY (id);
 
 
@@ -6861,7 +6903,7 @@ ALTER TABLE ONLY customisation_values
 -- Name: customization_visualizations customization_visualizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customization_visualizations
+ALTER TABLE ONLY public.customization_visualizations
     ADD CONSTRAINT customization_visualizations_pkey PRIMARY KEY (id);
 
 
@@ -6869,7 +6911,7 @@ ALTER TABLE ONLY customization_visualizations
 -- Name: discounts discounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY discounts
+ALTER TABLE ONLY public.discounts
     ADD CONSTRAINT discounts_pkey PRIMARY KEY (id);
 
 
@@ -6877,7 +6919,7 @@ ALTER TABLE ONLY discounts
 -- Name: email_notifications email_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY email_notifications
+ALTER TABLE ONLY public.email_notifications
     ADD CONSTRAINT email_notifications_pkey PRIMARY KEY (id);
 
 
@@ -6885,7 +6927,7 @@ ALTER TABLE ONLY email_notifications
 -- Name: fabric_card_colours fabric_card_colours_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_card_colours
+ALTER TABLE ONLY public.fabric_card_colours
     ADD CONSTRAINT fabric_card_colours_pkey PRIMARY KEY (id);
 
 
@@ -6893,7 +6935,7 @@ ALTER TABLE ONLY fabric_card_colours
 -- Name: fabric_cards fabric_cards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_cards
+ALTER TABLE ONLY public.fabric_cards
     ADD CONSTRAINT fabric_cards_pkey PRIMARY KEY (id);
 
 
@@ -6901,7 +6943,7 @@ ALTER TABLE ONLY fabric_cards
 -- Name: fabric_colours fabric_colours_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabric_colours
+ALTER TABLE ONLY public.fabric_colours
     ADD CONSTRAINT fabric_colours_pkey PRIMARY KEY (id);
 
 
@@ -6909,7 +6951,7 @@ ALTER TABLE ONLY fabric_colours
 -- Name: fabrication_events fabrication_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrication_events
+ALTER TABLE ONLY public.fabrication_events
     ADD CONSTRAINT fabrication_events_pkey PRIMARY KEY (id);
 
 
@@ -6917,7 +6959,7 @@ ALTER TABLE ONLY fabrication_events
 -- Name: fabrications fabrications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrications
+ALTER TABLE ONLY public.fabrications
     ADD CONSTRAINT fabrications_pkey PRIMARY KEY (id);
 
 
@@ -6925,7 +6967,7 @@ ALTER TABLE ONLY fabrications
 -- Name: fabrics fabrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrics
+ALTER TABLE ONLY public.fabrics
     ADD CONSTRAINT fabrics_pkey PRIMARY KEY (id);
 
 
@@ -6933,7 +6975,7 @@ ALTER TABLE ONLY fabrics
 -- Name: fabrics_products fabrics_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY fabrics_products
+ALTER TABLE ONLY public.fabrics_products
     ADD CONSTRAINT fabrics_products_pkey PRIMARY KEY (id);
 
 
@@ -6941,7 +6983,7 @@ ALTER TABLE ONLY fabrics_products
 -- Name: facebook_accounts facebook_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_accounts
+ALTER TABLE ONLY public.facebook_accounts
     ADD CONSTRAINT facebook_accounts_pkey PRIMARY KEY (id);
 
 
@@ -6949,7 +6991,7 @@ ALTER TABLE ONLY facebook_accounts
 -- Name: facebook_ad_creatives facebook_ad_creatives_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ad_creatives
+ALTER TABLE ONLY public.facebook_ad_creatives
     ADD CONSTRAINT facebook_ad_creatives_pkey PRIMARY KEY (id);
 
 
@@ -6957,7 +6999,7 @@ ALTER TABLE ONLY facebook_ad_creatives
 -- Name: facebook_ad_insights facebook_ad_insights_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ad_insights
+ALTER TABLE ONLY public.facebook_ad_insights
     ADD CONSTRAINT facebook_ad_insights_pkey PRIMARY KEY (id);
 
 
@@ -6965,7 +7007,7 @@ ALTER TABLE ONLY facebook_ad_insights
 -- Name: facebook_ads facebook_ads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_ads
+ALTER TABLE ONLY public.facebook_ads
     ADD CONSTRAINT facebook_ads_pkey PRIMARY KEY (id);
 
 
@@ -6973,7 +7015,7 @@ ALTER TABLE ONLY facebook_ads
 -- Name: facebook_adsets facebook_adsets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_adsets
+ALTER TABLE ONLY public.facebook_adsets
     ADD CONSTRAINT facebook_adsets_pkey PRIMARY KEY (id);
 
 
@@ -6981,7 +7023,7 @@ ALTER TABLE ONLY facebook_adsets
 -- Name: facebook_campaigns facebook_campaigns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_campaigns
+ALTER TABLE ONLY public.facebook_campaigns
     ADD CONSTRAINT facebook_campaigns_pkey PRIMARY KEY (id);
 
 
@@ -6989,7 +7031,7 @@ ALTER TABLE ONLY facebook_campaigns
 -- Name: facebook_data facebook_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY facebook_data
+ALTER TABLE ONLY public.facebook_data
     ADD CONSTRAINT facebook_data_pkey PRIMARY KEY (id);
 
 
@@ -6997,7 +7039,7 @@ ALTER TABLE ONLY facebook_data
 -- Name: factories factories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY factories
+ALTER TABLE ONLY public.factories
     ADD CONSTRAINT factories_pkey PRIMARY KEY (id);
 
 
@@ -7005,7 +7047,7 @@ ALTER TABLE ONLY factories
 -- Name: global_skus global_skus_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY global_skus
+ALTER TABLE ONLY public.global_skus
     ADD CONSTRAINT global_skus_pkey PRIMARY KEY (id);
 
 
@@ -7013,7 +7055,7 @@ ALTER TABLE ONLY global_skus
 -- Name: incompatibilities incompatibilities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY incompatibilities
+ALTER TABLE ONLY public.incompatibilities
     ADD CONSTRAINT incompatibilities_pkey PRIMARY KEY (id);
 
 
@@ -7021,7 +7063,7 @@ ALTER TABLE ONLY incompatibilities
 -- Name: item_return_events item_return_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_return_events
+ALTER TABLE ONLY public.item_return_events
     ADD CONSTRAINT item_return_events_pkey PRIMARY KEY (id);
 
 
@@ -7029,7 +7071,7 @@ ALTER TABLE ONLY item_return_events
 -- Name: item_return_labels item_return_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_return_labels
+ALTER TABLE ONLY public.item_return_labels
     ADD CONSTRAINT item_return_labels_pkey PRIMARY KEY (id);
 
 
@@ -7037,7 +7079,7 @@ ALTER TABLE ONLY item_return_labels
 -- Name: item_returns item_returns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY item_returns
+ALTER TABLE ONLY public.item_returns
     ADD CONSTRAINT item_returns_pkey PRIMARY KEY (id);
 
 
@@ -7045,7 +7087,7 @@ ALTER TABLE ONLY item_returns
 -- Name: layer_cads layer_cads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY layer_cads
+ALTER TABLE ONLY public.layer_cads
     ADD CONSTRAINT layer_cads_pkey PRIMARY KEY (id);
 
 
@@ -7053,7 +7095,7 @@ ALTER TABLE ONLY layer_cads
 -- Name: line_item_making_options line_item_making_options_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_making_options
+ALTER TABLE ONLY public.line_item_making_options
     ADD CONSTRAINT line_item_making_options_pkey PRIMARY KEY (id);
 
 
@@ -7061,7 +7103,7 @@ ALTER TABLE ONLY line_item_making_options
 -- Name: line_item_personalizations line_item_personalizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_personalizations
+ALTER TABLE ONLY public.line_item_personalizations
     ADD CONSTRAINT line_item_personalizations_pkey PRIMARY KEY (id);
 
 
@@ -7069,7 +7111,7 @@ ALTER TABLE ONLY line_item_personalizations
 -- Name: line_item_size_normalisations line_item_size_normalisations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_size_normalisations
+ALTER TABLE ONLY public.line_item_size_normalisations
     ADD CONSTRAINT line_item_size_normalisations_pkey PRIMARY KEY (id);
 
 
@@ -7077,7 +7119,7 @@ ALTER TABLE ONLY line_item_size_normalisations
 -- Name: line_item_updates line_item_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY line_item_updates
+ALTER TABLE ONLY public.line_item_updates
     ADD CONSTRAINT line_item_updates_pkey PRIMARY KEY (id);
 
 
@@ -7085,7 +7127,7 @@ ALTER TABLE ONLY line_item_updates
 -- Name: manually_managed_returns manually_managed_returns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY manually_managed_returns
+ALTER TABLE ONLY public.manually_managed_returns
     ADD CONSTRAINT manually_managed_returns_pkey PRIMARY KEY (id);
 
 
@@ -7093,7 +7135,7 @@ ALTER TABLE ONLY manually_managed_returns
 -- Name: marketing_body_calculator_measures marketing_body_calculator_measures_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_body_calculator_measures
+ALTER TABLE ONLY public.marketing_body_calculator_measures
     ADD CONSTRAINT marketing_body_calculator_measures_pkey PRIMARY KEY (id);
 
 
@@ -7101,7 +7143,7 @@ ALTER TABLE ONLY marketing_body_calculator_measures
 -- Name: marketing_order_traffic_parameters marketing_order_traffic_parameters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_order_traffic_parameters
+ALTER TABLE ONLY public.marketing_order_traffic_parameters
     ADD CONSTRAINT marketing_order_traffic_parameters_pkey PRIMARY KEY (id);
 
 
@@ -7109,7 +7151,7 @@ ALTER TABLE ONLY marketing_order_traffic_parameters
 -- Name: marketing_user_visits marketing_user_visits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY marketing_user_visits
+ALTER TABLE ONLY public.marketing_user_visits
     ADD CONSTRAINT marketing_user_visits_pkey PRIMARY KEY (id);
 
 
@@ -7117,7 +7159,7 @@ ALTER TABLE ONLY marketing_user_visits
 -- Name: moodboard_collaborators moodboard_collaborators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_collaborators
+ALTER TABLE ONLY public.moodboard_collaborators
     ADD CONSTRAINT moodboard_collaborators_pkey PRIMARY KEY (id);
 
 
@@ -7125,7 +7167,7 @@ ALTER TABLE ONLY moodboard_collaborators
 -- Name: moodboard_item_comments moodboard_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_item_comments
+ALTER TABLE ONLY public.moodboard_item_comments
     ADD CONSTRAINT moodboard_comments_pkey PRIMARY KEY (id);
 
 
@@ -7133,7 +7175,7 @@ ALTER TABLE ONLY moodboard_item_comments
 -- Name: moodboard_item_events moodboard_item_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_item_events
+ALTER TABLE ONLY public.moodboard_item_events
     ADD CONSTRAINT moodboard_item_events_pkey PRIMARY KEY (id);
 
 
@@ -7141,7 +7183,7 @@ ALTER TABLE ONLY moodboard_item_events
 -- Name: inspirations moodboard_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY inspirations
+ALTER TABLE ONLY public.inspirations
     ADD CONSTRAINT moodboard_items_pkey PRIMARY KEY (id);
 
 
@@ -7149,7 +7191,7 @@ ALTER TABLE ONLY inspirations
 -- Name: moodboard_items moodboard_items_pkey1; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboard_items
+ALTER TABLE ONLY public.moodboard_items
     ADD CONSTRAINT moodboard_items_pkey1 PRIMARY KEY (id);
 
 
@@ -7157,15 +7199,23 @@ ALTER TABLE ONLY moodboard_items
 -- Name: moodboards moodboards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY moodboards
+ALTER TABLE ONLY public.moodboards
     ADD CONSTRAINT moodboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: newgistics_schedulers newgistics_schedulers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.newgistics_schedulers
+    ADD CONSTRAINT newgistics_schedulers_pkey PRIMARY KEY (id);
 
 
 --
 -- Name: next_logistics_return_request_processes next_logistics_return_request_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY next_logistics_return_request_processes
+ALTER TABLE ONLY public.next_logistics_return_request_processes
     ADD CONSTRAINT next_logistics_return_request_processes_pkey PRIMARY KEY (id);
 
 
@@ -7173,7 +7223,7 @@ ALTER TABLE ONLY next_logistics_return_request_processes
 -- Name: order_return_requests order_return_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY order_return_requests
+ALTER TABLE ONLY public.order_return_requests
     ADD CONSTRAINT order_return_requests_pkey PRIMARY KEY (id);
 
 
@@ -7181,7 +7231,7 @@ ALTER TABLE ONLY order_return_requests
 -- Name: order_shipments_factories_concrete order_shipments_factories_concrete_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY order_shipments_factories_concrete
+ALTER TABLE ONLY public.order_shipments_factories_concrete
     ADD CONSTRAINT order_shipments_factories_concrete_pkey PRIMARY KEY (id);
 
 
@@ -7189,7 +7239,7 @@ ALTER TABLE ONLY order_shipments_factories_concrete
 -- Name: payment_requests payment_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY payment_requests
+ALTER TABLE ONLY public.payment_requests
     ADD CONSTRAINT payment_requests_pkey PRIMARY KEY (id);
 
 
@@ -7197,7 +7247,7 @@ ALTER TABLE ONLY payment_requests
 -- Name: spree_paypal_accounts paypal_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_paypal_accounts
+ALTER TABLE ONLY public.spree_paypal_accounts
     ADD CONSTRAINT paypal_accounts_pkey PRIMARY KEY (id);
 
 
@@ -7205,7 +7255,7 @@ ALTER TABLE ONLY spree_paypal_accounts
 -- Name: product_accessories product_accessories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_accessories
+ALTER TABLE ONLY public.product_accessories
     ADD CONSTRAINT product_accessories_pkey PRIMARY KEY (id);
 
 
@@ -7213,7 +7263,7 @@ ALTER TABLE ONLY product_accessories
 -- Name: product_color_values product_color_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_color_values
+ALTER TABLE ONLY public.product_color_values
     ADD CONSTRAINT product_color_values_pkey PRIMARY KEY (id);
 
 
@@ -7221,7 +7271,7 @@ ALTER TABLE ONLY product_color_values
 -- Name: product_height_range_groups product_height_range_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_height_range_groups
+ALTER TABLE ONLY public.product_height_range_groups
     ADD CONSTRAINT product_height_range_groups_pkey PRIMARY KEY (id);
 
 
@@ -7229,7 +7279,7 @@ ALTER TABLE ONLY product_height_range_groups
 -- Name: product_height_ranges product_height_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_height_ranges
+ALTER TABLE ONLY public.product_height_ranges
     ADD CONSTRAINT product_height_ranges_pkey PRIMARY KEY (id);
 
 
@@ -7237,7 +7287,7 @@ ALTER TABLE ONLY product_height_ranges
 -- Name: product_making_options product_making_options_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_making_options
+ALTER TABLE ONLY public.product_making_options
     ADD CONSTRAINT product_making_options_pkey PRIMARY KEY (id);
 
 
@@ -7245,7 +7295,7 @@ ALTER TABLE ONLY product_making_options
 -- Name: product_personalizations product_personalizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_personalizations
+ALTER TABLE ONLY public.product_personalizations
     ADD CONSTRAINT product_personalizations_pkey PRIMARY KEY (id);
 
 
@@ -7253,7 +7303,7 @@ ALTER TABLE ONLY product_personalizations
 -- Name: product_reservations product_reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_reservations
+ALTER TABLE ONLY public.product_reservations
     ADD CONSTRAINT product_reservations_pkey PRIMARY KEY (id);
 
 
@@ -7261,7 +7311,7 @@ ALTER TABLE ONLY product_reservations
 -- Name: product_style_profiles product_style_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY product_style_profiles
+ALTER TABLE ONLY public.product_style_profiles
     ADD CONSTRAINT product_style_profiles_pkey PRIMARY KEY (id);
 
 
@@ -7269,7 +7319,7 @@ ALTER TABLE ONLY product_style_profiles
 -- Name: questions questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY questions
+ALTER TABLE ONLY public.questions
     ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
 
 
@@ -7277,7 +7327,7 @@ ALTER TABLE ONLY questions
 -- Name: quizzes quizzes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY quizzes
+ALTER TABLE ONLY public.quizzes
     ADD CONSTRAINT quizzes_pkey PRIMARY KEY (id);
 
 
@@ -7285,7 +7335,7 @@ ALTER TABLE ONLY quizzes
 -- Name: redirected_search_terms redirected_search_terms_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY redirected_search_terms
+ALTER TABLE ONLY public.redirected_search_terms
     ADD CONSTRAINT redirected_search_terms_pkey PRIMARY KEY (id);
 
 
@@ -7293,7 +7343,7 @@ ALTER TABLE ONLY redirected_search_terms
 -- Name: refund_requests refund_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY refund_requests
+ALTER TABLE ONLY public.refund_requests
     ADD CONSTRAINT refund_requests_pkey PRIMARY KEY (id);
 
 
@@ -7301,7 +7351,7 @@ ALTER TABLE ONLY refund_requests
 -- Name: render3d_images render3d_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY render3d_images
+ALTER TABLE ONLY public.render3d_images
     ADD CONSTRAINT render3d_images_pkey PRIMARY KEY (id);
 
 
@@ -7309,7 +7359,7 @@ ALTER TABLE ONLY render3d_images
 -- Name: return_inventory_items return_inventory_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY return_inventory_items
+ALTER TABLE ONLY public.return_inventory_items
     ADD CONSTRAINT return_inventory_items_pkey PRIMARY KEY (id);
 
 
@@ -7317,7 +7367,7 @@ ALTER TABLE ONLY return_inventory_items
 -- Name: return_request_items return_request_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY return_request_items
+ALTER TABLE ONLY public.return_request_items
     ADD CONSTRAINT return_request_items_pkey PRIMARY KEY (id);
 
 
@@ -7325,7 +7375,7 @@ ALTER TABLE ONLY return_request_items
 -- Name: revolution_pages revolution_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY revolution_pages
+ALTER TABLE ONLY public.revolution_pages
     ADD CONSTRAINT revolution_pages_pkey PRIMARY KEY (id);
 
 
@@ -7333,7 +7383,7 @@ ALTER TABLE ONLY revolution_pages
 -- Name: revolution_translations revolution_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY revolution_translations
+ALTER TABLE ONLY public.revolution_translations
     ADD CONSTRAINT revolution_translations_pkey PRIMARY KEY (id);
 
 
@@ -7341,7 +7391,7 @@ ALTER TABLE ONLY revolution_translations
 -- Name: similarities similarities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY similarities
+ALTER TABLE ONLY public.similarities
     ADD CONSTRAINT similarities_pkey PRIMARY KEY (id);
 
 
@@ -7349,7 +7399,7 @@ ALTER TABLE ONLY similarities
 -- Name: simple_key_values simple_key_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY simple_key_values
+ALTER TABLE ONLY public.simple_key_values
     ADD CONSTRAINT simple_key_values_pkey PRIMARY KEY (id);
 
 
@@ -7357,7 +7407,7 @@ ALTER TABLE ONLY simple_key_values
 -- Name: site_versions site_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY site_versions
+ALTER TABLE ONLY public.site_versions
     ADD CONSTRAINT site_versions_pkey PRIMARY KEY (id);
 
 
@@ -7365,7 +7415,7 @@ ALTER TABLE ONLY site_versions
 -- Name: spree_activators spree_activators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_activators
+ALTER TABLE ONLY public.spree_activators
     ADD CONSTRAINT spree_activators_pkey PRIMARY KEY (id);
 
 
@@ -7373,7 +7423,7 @@ ALTER TABLE ONLY spree_activators
 -- Name: spree_addresses spree_addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_addresses
+ALTER TABLE ONLY public.spree_addresses
     ADD CONSTRAINT spree_addresses_pkey PRIMARY KEY (id);
 
 
@@ -7381,7 +7431,7 @@ ALTER TABLE ONLY spree_addresses
 -- Name: spree_adjustments spree_adjustments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_adjustments
+ALTER TABLE ONLY public.spree_adjustments
     ADD CONSTRAINT spree_adjustments_pkey PRIMARY KEY (id);
 
 
@@ -7389,7 +7439,7 @@ ALTER TABLE ONLY spree_adjustments
 -- Name: spree_assets spree_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_assets
+ALTER TABLE ONLY public.spree_assets
     ADD CONSTRAINT spree_assets_pkey PRIMARY KEY (id);
 
 
@@ -7397,7 +7447,7 @@ ALTER TABLE ONLY spree_assets
 -- Name: spree_authentication_methods spree_authentication_methods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_authentication_methods
+ALTER TABLE ONLY public.spree_authentication_methods
     ADD CONSTRAINT spree_authentication_methods_pkey PRIMARY KEY (id);
 
 
@@ -7405,7 +7455,7 @@ ALTER TABLE ONLY spree_authentication_methods
 -- Name: spree_calculators spree_calculators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_calculators
+ALTER TABLE ONLY public.spree_calculators
     ADD CONSTRAINT spree_calculators_pkey PRIMARY KEY (id);
 
 
@@ -7413,7 +7463,7 @@ ALTER TABLE ONLY spree_calculators
 -- Name: spree_configurations spree_configurations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_configurations
+ALTER TABLE ONLY public.spree_configurations
     ADD CONSTRAINT spree_configurations_pkey PRIMARY KEY (id);
 
 
@@ -7421,7 +7471,7 @@ ALTER TABLE ONLY spree_configurations
 -- Name: spree_countries spree_countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_countries
+ALTER TABLE ONLY public.spree_countries
     ADD CONSTRAINT spree_countries_pkey PRIMARY KEY (id);
 
 
@@ -7429,7 +7479,7 @@ ALTER TABLE ONLY spree_countries
 -- Name: spree_credit_cards spree_credit_cards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_credit_cards
+ALTER TABLE ONLY public.spree_credit_cards
     ADD CONSTRAINT spree_credit_cards_pkey PRIMARY KEY (id);
 
 
@@ -7437,7 +7487,7 @@ ALTER TABLE ONLY spree_credit_cards
 -- Name: spree_gateways spree_gateways_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_gateways
+ALTER TABLE ONLY public.spree_gateways
     ADD CONSTRAINT spree_gateways_pkey PRIMARY KEY (id);
 
 
@@ -7445,7 +7495,7 @@ ALTER TABLE ONLY spree_gateways
 -- Name: spree_inventory_units spree_inventory_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_inventory_units
+ALTER TABLE ONLY public.spree_inventory_units
     ADD CONSTRAINT spree_inventory_units_pkey PRIMARY KEY (id);
 
 
@@ -7453,7 +7503,7 @@ ALTER TABLE ONLY spree_inventory_units
 -- Name: spree_line_items spree_line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_line_items
+ALTER TABLE ONLY public.spree_line_items
     ADD CONSTRAINT spree_line_items_pkey PRIMARY KEY (id);
 
 
@@ -7461,7 +7511,7 @@ ALTER TABLE ONLY spree_line_items
 -- Name: spree_log_entries spree_log_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_log_entries
+ALTER TABLE ONLY public.spree_log_entries
     ADD CONSTRAINT spree_log_entries_pkey PRIMARY KEY (id);
 
 
@@ -7469,7 +7519,7 @@ ALTER TABLE ONLY spree_log_entries
 -- Name: spree_mail_methods spree_mail_methods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_mail_methods
+ALTER TABLE ONLY public.spree_mail_methods
     ADD CONSTRAINT spree_mail_methods_pkey PRIMARY KEY (id);
 
 
@@ -7477,7 +7527,7 @@ ALTER TABLE ONLY spree_mail_methods
 -- Name: spree_masterpass_checkouts spree_masterpass_checkouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_masterpass_checkouts
+ALTER TABLE ONLY public.spree_masterpass_checkouts
     ADD CONSTRAINT spree_masterpass_checkouts_pkey PRIMARY KEY (id);
 
 
@@ -7485,7 +7535,7 @@ ALTER TABLE ONLY spree_masterpass_checkouts
 -- Name: spree_option_types spree_option_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_types
+ALTER TABLE ONLY public.spree_option_types
     ADD CONSTRAINT spree_option_types_pkey PRIMARY KEY (id);
 
 
@@ -7493,7 +7543,7 @@ ALTER TABLE ONLY spree_option_types
 -- Name: spree_option_values_groups spree_option_values_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_values_groups
+ALTER TABLE ONLY public.spree_option_values_groups
     ADD CONSTRAINT spree_option_values_groups_pkey PRIMARY KEY (id);
 
 
@@ -7501,7 +7551,7 @@ ALTER TABLE ONLY spree_option_values_groups
 -- Name: spree_option_values spree_option_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_option_values
+ALTER TABLE ONLY public.spree_option_values
     ADD CONSTRAINT spree_option_values_pkey PRIMARY KEY (id);
 
 
@@ -7509,7 +7559,7 @@ ALTER TABLE ONLY spree_option_values
 -- Name: spree_orders spree_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_orders
+ALTER TABLE ONLY public.spree_orders
     ADD CONSTRAINT spree_orders_pkey PRIMARY KEY (id);
 
 
@@ -7517,7 +7567,7 @@ ALTER TABLE ONLY spree_orders
 -- Name: spree_payment_methods spree_payment_methods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_payment_methods
+ALTER TABLE ONLY public.spree_payment_methods
     ADD CONSTRAINT spree_payment_methods_pkey PRIMARY KEY (id);
 
 
@@ -7525,7 +7575,7 @@ ALTER TABLE ONLY spree_payment_methods
 -- Name: spree_payments spree_payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_payments
+ALTER TABLE ONLY public.spree_payments
     ADD CONSTRAINT spree_payments_pkey PRIMARY KEY (id);
 
 
@@ -7533,7 +7583,7 @@ ALTER TABLE ONLY spree_payments
 -- Name: spree_paypal_express_checkouts spree_paypal_express_checkouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_paypal_express_checkouts
+ALTER TABLE ONLY public.spree_paypal_express_checkouts
     ADD CONSTRAINT spree_paypal_express_checkouts_pkey PRIMARY KEY (id);
 
 
@@ -7541,7 +7591,7 @@ ALTER TABLE ONLY spree_paypal_express_checkouts
 -- Name: spree_preferences spree_preferences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_preferences
+ALTER TABLE ONLY public.spree_preferences
     ADD CONSTRAINT spree_preferences_pkey PRIMARY KEY (id);
 
 
@@ -7549,7 +7599,7 @@ ALTER TABLE ONLY spree_preferences
 -- Name: spree_prices spree_prices_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_prices
+ALTER TABLE ONLY public.spree_prices
     ADD CONSTRAINT spree_prices_pkey PRIMARY KEY (id);
 
 
@@ -7557,7 +7607,7 @@ ALTER TABLE ONLY spree_prices
 -- Name: spree_product_option_types spree_product_option_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_option_types
+ALTER TABLE ONLY public.spree_product_option_types
     ADD CONSTRAINT spree_product_option_types_pkey PRIMARY KEY (id);
 
 
@@ -7565,7 +7615,7 @@ ALTER TABLE ONLY spree_product_option_types
 -- Name: spree_product_properties spree_product_properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_properties
+ALTER TABLE ONLY public.spree_product_properties
     ADD CONSTRAINT spree_product_properties_pkey PRIMARY KEY (id);
 
 
@@ -7573,7 +7623,7 @@ ALTER TABLE ONLY spree_product_properties
 -- Name: spree_product_related_outerwear spree_product_related_outerwear_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_product_related_outerwear
+ALTER TABLE ONLY public.spree_product_related_outerwear
     ADD CONSTRAINT spree_product_related_outerwear_pkey PRIMARY KEY (id);
 
 
@@ -7581,7 +7631,7 @@ ALTER TABLE ONLY spree_product_related_outerwear
 -- Name: spree_products spree_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_products
+ALTER TABLE ONLY public.spree_products
     ADD CONSTRAINT spree_products_pkey PRIMARY KEY (id);
 
 
@@ -7589,7 +7639,7 @@ ALTER TABLE ONLY spree_products
 -- Name: spree_products_taxons spree_products_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_products_taxons
+ALTER TABLE ONLY public.spree_products_taxons
     ADD CONSTRAINT spree_products_taxons_pkey PRIMARY KEY (id);
 
 
@@ -7597,7 +7647,7 @@ ALTER TABLE ONLY spree_products_taxons
 -- Name: spree_promotion_action_line_items spree_promotion_action_line_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_action_line_items
+ALTER TABLE ONLY public.spree_promotion_action_line_items
     ADD CONSTRAINT spree_promotion_action_line_items_pkey PRIMARY KEY (id);
 
 
@@ -7605,7 +7655,7 @@ ALTER TABLE ONLY spree_promotion_action_line_items
 -- Name: spree_promotion_actions spree_promotion_actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_actions
+ALTER TABLE ONLY public.spree_promotion_actions
     ADD CONSTRAINT spree_promotion_actions_pkey PRIMARY KEY (id);
 
 
@@ -7613,7 +7663,7 @@ ALTER TABLE ONLY spree_promotion_actions
 -- Name: spree_promotion_rules spree_promotion_rules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_promotion_rules
+ALTER TABLE ONLY public.spree_promotion_rules
     ADD CONSTRAINT spree_promotion_rules_pkey PRIMARY KEY (id);
 
 
@@ -7621,7 +7671,7 @@ ALTER TABLE ONLY spree_promotion_rules
 -- Name: spree_properties spree_properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_properties
+ALTER TABLE ONLY public.spree_properties
     ADD CONSTRAINT spree_properties_pkey PRIMARY KEY (id);
 
 
@@ -7629,7 +7679,7 @@ ALTER TABLE ONLY spree_properties
 -- Name: spree_prototypes spree_prototypes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_prototypes
+ALTER TABLE ONLY public.spree_prototypes
     ADD CONSTRAINT spree_prototypes_pkey PRIMARY KEY (id);
 
 
@@ -7637,7 +7687,7 @@ ALTER TABLE ONLY spree_prototypes
 -- Name: spree_return_authorizations spree_return_authorizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_return_authorizations
+ALTER TABLE ONLY public.spree_return_authorizations
     ADD CONSTRAINT spree_return_authorizations_pkey PRIMARY KEY (id);
 
 
@@ -7645,7 +7695,7 @@ ALTER TABLE ONLY spree_return_authorizations
 -- Name: spree_roles spree_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_roles
+ALTER TABLE ONLY public.spree_roles
     ADD CONSTRAINT spree_roles_pkey PRIMARY KEY (id);
 
 
@@ -7653,7 +7703,7 @@ ALTER TABLE ONLY spree_roles
 -- Name: spree_sales spree_sales_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_sales
+ALTER TABLE ONLY public.spree_sales
     ADD CONSTRAINT spree_sales_pkey PRIMARY KEY (id);
 
 
@@ -7661,7 +7711,7 @@ ALTER TABLE ONLY spree_sales
 -- Name: spree_shipments spree_shipments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipments
+ALTER TABLE ONLY public.spree_shipments
     ADD CONSTRAINT spree_shipments_pkey PRIMARY KEY (id);
 
 
@@ -7669,7 +7719,7 @@ ALTER TABLE ONLY spree_shipments
 -- Name: spree_shipping_categories spree_shipping_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipping_categories
+ALTER TABLE ONLY public.spree_shipping_categories
     ADD CONSTRAINT spree_shipping_categories_pkey PRIMARY KEY (id);
 
 
@@ -7677,7 +7727,7 @@ ALTER TABLE ONLY spree_shipping_categories
 -- Name: spree_shipping_methods spree_shipping_methods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_shipping_methods
+ALTER TABLE ONLY public.spree_shipping_methods
     ADD CONSTRAINT spree_shipping_methods_pkey PRIMARY KEY (id);
 
 
@@ -7685,7 +7735,7 @@ ALTER TABLE ONLY spree_shipping_methods
 -- Name: spree_skrill_transactions spree_skrill_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_skrill_transactions
+ALTER TABLE ONLY public.spree_skrill_transactions
     ADD CONSTRAINT spree_skrill_transactions_pkey PRIMARY KEY (id);
 
 
@@ -7693,7 +7743,7 @@ ALTER TABLE ONLY spree_skrill_transactions
 -- Name: spree_state_changes spree_state_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_state_changes
+ALTER TABLE ONLY public.spree_state_changes
     ADD CONSTRAINT spree_state_changes_pkey PRIMARY KEY (id);
 
 
@@ -7701,7 +7751,7 @@ ALTER TABLE ONLY spree_state_changes
 -- Name: spree_states spree_states_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_states
+ALTER TABLE ONLY public.spree_states
     ADD CONSTRAINT spree_states_pkey PRIMARY KEY (id);
 
 
@@ -7709,7 +7759,7 @@ ALTER TABLE ONLY spree_states
 -- Name: spree_tax_categories spree_tax_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tax_categories
+ALTER TABLE ONLY public.spree_tax_categories
     ADD CONSTRAINT spree_tax_categories_pkey PRIMARY KEY (id);
 
 
@@ -7717,7 +7767,7 @@ ALTER TABLE ONLY spree_tax_categories
 -- Name: spree_tax_rates spree_tax_rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tax_rates
+ALTER TABLE ONLY public.spree_tax_rates
     ADD CONSTRAINT spree_tax_rates_pkey PRIMARY KEY (id);
 
 
@@ -7725,7 +7775,7 @@ ALTER TABLE ONLY spree_tax_rates
 -- Name: spree_taxon_banners spree_taxon_banners_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxon_banners
+ALTER TABLE ONLY public.spree_taxon_banners
     ADD CONSTRAINT spree_taxon_banners_pkey PRIMARY KEY (id);
 
 
@@ -7733,7 +7783,7 @@ ALTER TABLE ONLY spree_taxon_banners
 -- Name: spree_taxonomies spree_taxonomies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxonomies
+ALTER TABLE ONLY public.spree_taxonomies
     ADD CONSTRAINT spree_taxonomies_pkey PRIMARY KEY (id);
 
 
@@ -7741,7 +7791,7 @@ ALTER TABLE ONLY spree_taxonomies
 -- Name: spree_taxons spree_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_taxons
+ALTER TABLE ONLY public.spree_taxons
     ADD CONSTRAINT spree_taxons_pkey PRIMARY KEY (id);
 
 
@@ -7749,7 +7799,7 @@ ALTER TABLE ONLY spree_taxons
 -- Name: spree_tokenized_permissions spree_tokenized_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_tokenized_permissions
+ALTER TABLE ONLY public.spree_tokenized_permissions
     ADD CONSTRAINT spree_tokenized_permissions_pkey PRIMARY KEY (id);
 
 
@@ -7757,7 +7807,7 @@ ALTER TABLE ONLY spree_tokenized_permissions
 -- Name: spree_trackers spree_trackers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_trackers
+ALTER TABLE ONLY public.spree_trackers
     ADD CONSTRAINT spree_trackers_pkey PRIMARY KEY (id);
 
 
@@ -7765,7 +7815,7 @@ ALTER TABLE ONLY spree_trackers
 -- Name: spree_user_authentications spree_user_authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_user_authentications
+ALTER TABLE ONLY public.spree_user_authentications
     ADD CONSTRAINT spree_user_authentications_pkey PRIMARY KEY (id);
 
 
@@ -7773,7 +7823,7 @@ ALTER TABLE ONLY spree_user_authentications
 -- Name: spree_users spree_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_users
+ALTER TABLE ONLY public.spree_users
     ADD CONSTRAINT spree_users_pkey PRIMARY KEY (id);
 
 
@@ -7781,7 +7831,7 @@ ALTER TABLE ONLY spree_users
 -- Name: spree_variants spree_variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_variants
+ALTER TABLE ONLY public.spree_variants
     ADD CONSTRAINT spree_variants_pkey PRIMARY KEY (id);
 
 
@@ -7789,7 +7839,7 @@ ALTER TABLE ONLY spree_variants
 -- Name: spree_zone_members spree_zone_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_zone_members
+ALTER TABLE ONLY public.spree_zone_members
     ADD CONSTRAINT spree_zone_members_pkey PRIMARY KEY (id);
 
 
@@ -7797,7 +7847,7 @@ ALTER TABLE ONLY spree_zone_members
 -- Name: spree_zones spree_zones_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY spree_zones
+ALTER TABLE ONLY public.spree_zones
     ADD CONSTRAINT spree_zones_pkey PRIMARY KEY (id);
 
 
@@ -7805,7 +7855,7 @@ ALTER TABLE ONLY spree_zones
 -- Name: user_style_profiles style_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_style_profiles
+ALTER TABLE ONLY public.user_style_profiles
     ADD CONSTRAINT style_reports_pkey PRIMARY KEY (id);
 
 
@@ -7813,7 +7863,7 @@ ALTER TABLE ONLY user_style_profiles
 -- Name: style_to_product_height_range_groups style_to_product_height_range_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY style_to_product_height_range_groups
+ALTER TABLE ONLY public.style_to_product_height_range_groups
     ADD CONSTRAINT style_to_product_height_range_groups_pkey PRIMARY KEY (id);
 
 
@@ -7821,7 +7871,7 @@ ALTER TABLE ONLY style_to_product_height_range_groups
 -- Name: styles styles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY styles
+ALTER TABLE ONLY public.styles
     ADD CONSTRAINT styles_pkey PRIMARY KEY (id);
 
 
@@ -7829,7 +7879,7 @@ ALTER TABLE ONLY styles
 -- Name: user_style_profile_taxons user_style_profile_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_style_profile_taxons
+ALTER TABLE ONLY public.user_style_profile_taxons
     ADD CONSTRAINT user_style_profile_taxons_pkey PRIMARY KEY (id);
 
 
@@ -7837,7 +7887,7 @@ ALTER TABLE ONLY user_style_profile_taxons
 -- Name: wedding_atelier_event_assistants wedding_atelier_event_assistants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_assistants
+ALTER TABLE ONLY public.wedding_atelier_event_assistants
     ADD CONSTRAINT wedding_atelier_event_assistants_pkey PRIMARY KEY (id);
 
 
@@ -7845,7 +7895,7 @@ ALTER TABLE ONLY wedding_atelier_event_assistants
 -- Name: wedding_atelier_event_dresses wedding_atelier_event_dresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_dresses
+ALTER TABLE ONLY public.wedding_atelier_event_dresses
     ADD CONSTRAINT wedding_atelier_event_dresses_pkey PRIMARY KEY (id);
 
 
@@ -7853,7 +7903,7 @@ ALTER TABLE ONLY wedding_atelier_event_dresses
 -- Name: wedding_atelier_event_roles wedding_atelier_event_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_event_roles
+ALTER TABLE ONLY public.wedding_atelier_event_roles
     ADD CONSTRAINT wedding_atelier_event_roles_pkey PRIMARY KEY (id);
 
 
@@ -7861,7 +7911,7 @@ ALTER TABLE ONLY wedding_atelier_event_roles
 -- Name: wedding_atelier_events wedding_atelier_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_events
+ALTER TABLE ONLY public.wedding_atelier_events
     ADD CONSTRAINT wedding_atelier_events_pkey PRIMARY KEY (id);
 
 
@@ -7869,7 +7919,7 @@ ALTER TABLE ONLY wedding_atelier_events
 -- Name: wedding_atelier_invitations wedding_atelier_invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_invitations
+ALTER TABLE ONLY public.wedding_atelier_invitations
     ADD CONSTRAINT wedding_atelier_invitations_pkey PRIMARY KEY (id);
 
 
@@ -7877,7 +7927,7 @@ ALTER TABLE ONLY wedding_atelier_invitations
 -- Name: wedding_atelier_likes wedding_atelier_likes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_likes
+ALTER TABLE ONLY public.wedding_atelier_likes
     ADD CONSTRAINT wedding_atelier_likes_pkey PRIMARY KEY (id);
 
 
@@ -7885,7 +7935,7 @@ ALTER TABLE ONLY wedding_atelier_likes
 -- Name: wedding_atelier_user_profiles wedding_atelier_user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_atelier_user_profiles
+ALTER TABLE ONLY public.wedding_atelier_user_profiles
     ADD CONSTRAINT wedding_atelier_user_profiles_pkey PRIMARY KEY (id);
 
 
@@ -7893,7 +7943,7 @@ ALTER TABLE ONLY wedding_atelier_user_profiles
 -- Name: wedding_plannings wedding_plannings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wedding_plannings
+ALTER TABLE ONLY public.wedding_plannings
     ADD CONSTRAINT wedding_plannings_pkey PRIMARY KEY (id);
 
 
@@ -7901,7 +7951,7 @@ ALTER TABLE ONLY wedding_plannings
 -- Name: wishlist_items wishlist_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wishlist_items
+ALTER TABLE ONLY public.wishlist_items
     ADD CONSTRAINT wishlist_items_pkey PRIMARY KEY (id);
 
 
@@ -7909,1022 +7959,1022 @@ ALTER TABLE ONLY wishlist_items
 -- Name: dress_features; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX dress_features ON customization_visualizations USING btree (length, silhouette, neckline);
+CREATE INDEX dress_features ON public.customization_visualizations USING btree (length, silhouette, neckline);
 
 
 --
 -- Name: email_idx_unique; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX email_idx_unique ON spree_users USING btree (email);
+CREATE UNIQUE INDEX email_idx_unique ON public.spree_users USING btree (email);
 
 
 --
 -- Name: index_activities_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_action ON activities USING btree (action);
+CREATE INDEX index_activities_on_action ON public.activities USING btree (action);
 
 
 --
 -- Name: index_activities_on_action_and_owner_type_and_owner_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_action_and_owner_type_and_owner_id ON activities USING btree (action, owner_type, owner_id);
+CREATE INDEX index_activities_on_action_and_owner_type_and_owner_id ON public.activities USING btree (action, owner_type, owner_id);
 
 
 --
 -- Name: index_activities_on_owner_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_activities_on_owner_type ON activities USING btree (owner_type);
+CREATE INDEX index_activities_on_owner_type ON public.activities USING btree (owner_type);
 
 
 --
 -- Name: index_addresses_on_firstname; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_addresses_on_firstname ON spree_addresses USING btree (firstname);
+CREATE INDEX index_addresses_on_firstname ON public.spree_addresses USING btree (firstname);
 
 
 --
 -- Name: index_addresses_on_lastname; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_addresses_on_lastname ON spree_addresses USING btree (lastname);
+CREATE INDEX index_addresses_on_lastname ON public.spree_addresses USING btree (lastname);
 
 
 --
 -- Name: index_adjustments_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_adjustments_on_order_id ON spree_adjustments USING btree (adjustable_id);
+CREATE INDEX index_adjustments_on_order_id ON public.spree_adjustments USING btree (adjustable_id);
 
 
 --
 -- Name: index_answer_taxons_on_taxon_id_and_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_answer_taxons_on_taxon_id_and_answer_id ON answer_taxons USING btree (taxon_id, answer_id);
+CREATE INDEX index_answer_taxons_on_taxon_id_and_answer_id ON public.answer_taxons USING btree (taxon_id, answer_id);
 
 
 --
 -- Name: index_answers_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_answers_on_question_id ON answers USING btree (question_id);
+CREATE INDEX index_answers_on_question_id ON public.answers USING btree (question_id);
 
 
 --
 -- Name: index_assets_on_viewable_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_assets_on_viewable_id ON spree_assets USING btree (viewable_id);
+CREATE INDEX index_assets_on_viewable_id ON public.spree_assets USING btree (viewable_id);
 
 
 --
 -- Name: index_assets_on_viewable_type_and_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_assets_on_viewable_type_and_type ON spree_assets USING btree (viewable_type, type);
+CREATE INDEX index_assets_on_viewable_type_and_type ON public.spree_assets USING btree (viewable_type, type);
 
 
 --
 -- Name: index_batch_collection_line_items_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_batch_collection_line_items_on_deleted_at ON batch_collection_line_items USING btree (deleted_at);
+CREATE INDEX index_batch_collection_line_items_on_deleted_at ON public.batch_collection_line_items USING btree (deleted_at);
 
 
 --
 -- Name: index_batch_collections_on_batch_key; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_batch_collections_on_batch_key ON batch_collections USING btree (batch_key);
+CREATE INDEX index_batch_collections_on_batch_key ON public.batch_collections USING btree (batch_key);
 
 
 --
 -- Name: index_celebrity_inspirations_on_spree_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_celebrity_inspirations_on_spree_product_id ON celebrity_inspirations USING btree (spree_product_id);
+CREATE INDEX index_celebrity_inspirations_on_spree_product_id ON public.celebrity_inspirations USING btree (spree_product_id);
 
 
 --
 -- Name: index_customisation_values_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_customisation_values_on_product_id ON customisation_values USING btree (product_id);
+CREATE INDEX index_customisation_values_on_product_id ON public.customisation_values USING btree (product_id);
 
 
 --
 -- Name: index_customization_visualizations_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_customization_visualizations_on_product_id ON customization_visualizations USING btree (product_id);
+CREATE INDEX index_customization_visualizations_on_product_id ON public.customization_visualizations USING btree (product_id);
 
 
 --
 -- Name: index_discounts_on_discountable_and_sale_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_discounts_on_discountable_and_sale_id ON discounts USING btree (discountable_type, discountable_id, sale_id);
+CREATE UNIQUE INDEX index_discounts_on_discountable_and_sale_id ON public.discounts USING btree (discountable_type, discountable_id, sale_id);
 
 
 --
 -- Name: index_discounts_on_discountable_id_and_discountable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_discounts_on_discountable_id_and_discountable_type ON discounts USING btree (discountable_id, discountable_type);
+CREATE INDEX index_discounts_on_discountable_id_and_discountable_type ON public.discounts USING btree (discountable_id, discountable_type);
 
 
 --
 -- Name: index_discounts_on_sale_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_discounts_on_sale_id ON discounts USING btree (sale_id);
+CREATE INDEX index_discounts_on_sale_id ON public.discounts USING btree (sale_id);
 
 
 --
 -- Name: index_email_notifications_on_spree_user_id_and_code; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_email_notifications_on_spree_user_id_and_code ON email_notifications USING btree (spree_user_id, code);
+CREATE INDEX index_email_notifications_on_spree_user_id_and_code ON public.email_notifications USING btree (spree_user_id, code);
 
 
 --
 -- Name: index_fabric_card_colours_on_fabric_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fabric_card_colours_on_fabric_card_id ON fabric_card_colours USING btree (fabric_card_id);
+CREATE INDEX index_fabric_card_colours_on_fabric_card_id ON public.fabric_card_colours USING btree (fabric_card_id);
 
 
 --
 -- Name: index_fabric_card_colours_on_fabric_colour_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fabric_card_colours_on_fabric_colour_id ON fabric_card_colours USING btree (fabric_colour_id);
+CREATE INDEX index_fabric_card_colours_on_fabric_colour_id ON public.fabric_card_colours USING btree (fabric_colour_id);
 
 
 --
 -- Name: index_fabrication_events_on_fabrication_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fabrication_events_on_fabrication_uuid ON fabrication_events USING btree (fabrication_uuid);
+CREATE INDEX index_fabrication_events_on_fabrication_uuid ON public.fabrication_events USING btree (fabrication_uuid);
 
 
 --
 -- Name: index_fabrications_on_line_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_fabrications_on_line_item_id ON fabrications USING btree (line_item_id);
+CREATE UNIQUE INDEX index_fabrications_on_line_item_id ON public.fabrications USING btree (line_item_id);
 
 
 --
 -- Name: index_fabrications_on_purchase_order_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fabrications_on_purchase_order_number ON fabrications USING btree (purchase_order_number);
+CREATE INDEX index_fabrications_on_purchase_order_number ON public.fabrications USING btree (purchase_order_number);
 
 
 --
 -- Name: index_fabrications_on_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_fabrications_on_uuid ON fabrications USING btree (uuid);
+CREATE UNIQUE INDEX index_fabrications_on_uuid ON public.fabrications USING btree (uuid);
 
 
 --
 -- Name: index_fabrics_on_option_value_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_fabrics_on_option_value_id ON fabrics USING btree (option_value_id);
+CREATE INDEX index_fabrics_on_option_value_id ON public.fabrics USING btree (option_value_id);
 
 
 --
 -- Name: index_facebook_data_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_facebook_data_on_spree_user_id ON facebook_data USING btree (spree_user_id);
+CREATE UNIQUE INDEX index_facebook_data_on_spree_user_id ON public.facebook_data USING btree (spree_user_id);
 
 
 --
 -- Name: index_global_skus_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_global_skus_on_product_id ON global_skus USING btree (product_id);
+CREATE INDEX index_global_skus_on_product_id ON public.global_skus USING btree (product_id);
 
 
 --
 -- Name: index_global_skus_on_sku; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_global_skus_on_sku ON global_skus USING btree (sku);
+CREATE UNIQUE INDEX index_global_skus_on_sku ON public.global_skus USING btree (sku);
 
 
 --
 -- Name: index_global_skus_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_global_skus_on_variant_id ON global_skus USING btree (variant_id);
+CREATE INDEX index_global_skus_on_variant_id ON public.global_skus USING btree (variant_id);
 
 
 --
 -- Name: index_incompatibilities_on_incompatible_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_incompatibilities_on_incompatible_id ON incompatibilities USING btree (incompatible_id);
+CREATE INDEX index_incompatibilities_on_incompatible_id ON public.incompatibilities USING btree (incompatible_id);
 
 
 --
 -- Name: index_incompatibilities_on_original_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_incompatibilities_on_original_id ON incompatibilities USING btree (original_id);
+CREATE INDEX index_incompatibilities_on_original_id ON public.incompatibilities USING btree (original_id);
 
 
 --
 -- Name: index_inspirations_on_spree_product_id_and_active; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_inspirations_on_spree_product_id_and_active ON inspirations USING btree (spree_product_id, active);
+CREATE INDEX index_inspirations_on_spree_product_id_and_active ON public.inspirations USING btree (spree_product_id, active);
 
 
 --
 -- Name: index_inventory_units_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_inventory_units_on_order_id ON spree_inventory_units USING btree (order_id);
+CREATE INDEX index_inventory_units_on_order_id ON public.spree_inventory_units USING btree (order_id);
 
 
 --
 -- Name: index_inventory_units_on_shipment_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_inventory_units_on_shipment_id ON spree_inventory_units USING btree (shipment_id);
+CREATE INDEX index_inventory_units_on_shipment_id ON public.spree_inventory_units USING btree (shipment_id);
 
 
 --
 -- Name: index_inventory_units_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_inventory_units_on_variant_id ON spree_inventory_units USING btree (variant_id);
+CREATE INDEX index_inventory_units_on_variant_id ON public.spree_inventory_units USING btree (variant_id);
 
 
 --
 -- Name: index_item_return_events_on_item_return_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_item_return_events_on_item_return_uuid ON item_return_events USING btree (item_return_uuid);
+CREATE INDEX index_item_return_events_on_item_return_uuid ON public.item_return_events USING btree (item_return_uuid);
 
 
 --
 -- Name: index_item_returns_on_item_return_label_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_item_returns_on_item_return_label_id ON item_returns USING btree (item_return_label_id);
+CREATE INDEX index_item_returns_on_item_return_label_id ON public.item_returns USING btree (item_return_label_id);
 
 
 --
 -- Name: index_item_returns_on_line_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_item_returns_on_line_item_id ON item_returns USING btree (line_item_id);
+CREATE UNIQUE INDEX index_item_returns_on_line_item_id ON public.item_returns USING btree (line_item_id);
 
 
 --
 -- Name: index_item_returns_on_order_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_item_returns_on_order_number ON item_returns USING btree (order_number);
+CREATE INDEX index_item_returns_on_order_number ON public.item_returns USING btree (order_number);
 
 
 --
 -- Name: index_item_returns_on_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_item_returns_on_uuid ON item_returns USING btree (uuid);
+CREATE UNIQUE INDEX index_item_returns_on_uuid ON public.item_returns USING btree (uuid);
 
 
 --
 -- Name: index_line_item_making_options_on_line_item; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_making_options_on_line_item ON line_item_making_options USING btree (line_item_id);
+CREATE INDEX index_line_item_making_options_on_line_item ON public.line_item_making_options USING btree (line_item_id);
 
 
 --
 -- Name: index_line_item_on_fabric_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_on_fabric_id ON spree_line_items USING btree (fabric_id);
+CREATE INDEX index_line_item_on_fabric_id ON public.spree_line_items USING btree (fabric_id);
 
 
 --
 -- Name: index_line_item_personalizations_on_line_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_personalizations_on_line_item_id ON line_item_personalizations USING btree (line_item_id);
+CREATE INDEX index_line_item_personalizations_on_line_item_id ON public.line_item_personalizations USING btree (line_item_id);
 
 
 --
 -- Name: index_line_item_size_normalisations_on_line_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_size_normalisations_on_line_item_id ON line_item_size_normalisations USING btree (line_item_id);
+CREATE INDEX index_line_item_size_normalisations_on_line_item_id ON public.line_item_size_normalisations USING btree (line_item_id);
 
 
 --
 -- Name: index_line_item_size_normalisations_on_new_size_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_size_normalisations_on_new_size_id ON line_item_size_normalisations USING btree (new_size_id);
+CREATE INDEX index_line_item_size_normalisations_on_new_size_id ON public.line_item_size_normalisations USING btree (new_size_id);
 
 
 --
 -- Name: index_line_item_size_normalisations_on_new_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_size_normalisations_on_new_variant_id ON line_item_size_normalisations USING btree (new_variant_id);
+CREATE INDEX index_line_item_size_normalisations_on_new_variant_id ON public.line_item_size_normalisations USING btree (new_variant_id);
 
 
 --
 -- Name: index_line_item_size_normalisations_on_old_size_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_size_normalisations_on_old_size_id ON line_item_size_normalisations USING btree (old_size_id);
+CREATE INDEX index_line_item_size_normalisations_on_old_size_id ON public.line_item_size_normalisations USING btree (old_size_id);
 
 
 --
 -- Name: index_line_item_size_normalisations_on_old_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_size_normalisations_on_old_variant_id ON line_item_size_normalisations USING btree (old_variant_id);
+CREATE INDEX index_line_item_size_normalisations_on_old_variant_id ON public.line_item_size_normalisations USING btree (old_variant_id);
 
 
 --
 -- Name: index_line_item_updates_on_bulk_order_update_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_line_item_updates_on_bulk_order_update_id ON line_item_updates USING btree (bulk_order_update_id);
+CREATE INDEX index_line_item_updates_on_bulk_order_update_id ON public.line_item_updates USING btree (bulk_order_update_id);
 
 
 --
 -- Name: index_marketing_order_traffic_parameters_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_marketing_order_traffic_parameters_on_order_id ON marketing_order_traffic_parameters USING btree (order_id);
+CREATE INDEX index_marketing_order_traffic_parameters_on_order_id ON public.marketing_order_traffic_parameters USING btree (order_id);
 
 
 --
 -- Name: index_marketing_user_visits_on_spree_user_id_and_utm_campaign; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_marketing_user_visits_on_spree_user_id_and_utm_campaign ON marketing_user_visits USING btree (spree_user_id, utm_campaign);
+CREATE INDEX index_marketing_user_visits_on_spree_user_id_and_utm_campaign ON public.marketing_user_visits USING btree (spree_user_id, utm_campaign);
 
 
 --
 -- Name: index_marketing_user_visits_on_user_token_and_utm_campaign; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_marketing_user_visits_on_user_token_and_utm_campaign ON marketing_user_visits USING btree (user_token, utm_campaign);
+CREATE INDEX index_marketing_user_visits_on_user_token_and_utm_campaign ON public.marketing_user_visits USING btree (user_token, utm_campaign);
 
 
 --
 -- Name: index_moodboard_collaborators_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_collaborators_on_email ON moodboard_collaborators USING btree (email);
+CREATE INDEX index_moodboard_collaborators_on_email ON public.moodboard_collaborators USING btree (email);
 
 
 --
 -- Name: index_moodboard_collaborators_on_moodboard_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_collaborators_on_moodboard_id ON moodboard_collaborators USING btree (moodboard_id);
+CREATE INDEX index_moodboard_collaborators_on_moodboard_id ON public.moodboard_collaborators USING btree (moodboard_id);
 
 
 --
 -- Name: index_moodboard_collaborators_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_collaborators_on_user_id ON moodboard_collaborators USING btree (user_id);
+CREATE INDEX index_moodboard_collaborators_on_user_id ON public.moodboard_collaborators USING btree (user_id);
 
 
 --
 -- Name: index_moodboard_comments_on_moodboard_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_comments_on_moodboard_item_id ON moodboard_item_comments USING btree (moodboard_item_id);
+CREATE INDEX index_moodboard_comments_on_moodboard_item_id ON public.moodboard_item_comments USING btree (moodboard_item_id);
 
 
 --
 -- Name: index_moodboard_item_events_on_moodboard_item_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_item_events_on_moodboard_item_uuid ON moodboard_item_events USING btree (moodboard_item_uuid);
+CREATE INDEX index_moodboard_item_events_on_moodboard_item_uuid ON public.moodboard_item_events USING btree (moodboard_item_uuid);
 
 
 --
 -- Name: index_moodboard_items_on_color_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_color_id ON moodboard_items USING btree (color_id);
+CREATE INDEX index_moodboard_items_on_color_id ON public.moodboard_items USING btree (color_id);
 
 
 --
 -- Name: index_moodboard_items_on_moodboard_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_moodboard_id ON moodboard_items USING btree (moodboard_id);
+CREATE INDEX index_moodboard_items_on_moodboard_id ON public.moodboard_items USING btree (moodboard_id);
 
 
 --
 -- Name: index_moodboard_items_on_product_color_value_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_product_color_value_id ON moodboard_items USING btree (product_color_value_id);
+CREATE INDEX index_moodboard_items_on_product_color_value_id ON public.moodboard_items USING btree (product_color_value_id);
 
 
 --
 -- Name: index_moodboard_items_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_product_id ON moodboard_items USING btree (product_id);
+CREATE INDEX index_moodboard_items_on_product_id ON public.moodboard_items USING btree (product_id);
 
 
 --
 -- Name: index_moodboard_items_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_user_id ON moodboard_items USING btree (user_id);
+CREATE INDEX index_moodboard_items_on_user_id ON public.moodboard_items USING btree (user_id);
 
 
 --
 -- Name: index_moodboard_items_on_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_uuid ON moodboard_items USING btree (uuid);
+CREATE INDEX index_moodboard_items_on_uuid ON public.moodboard_items USING btree (uuid);
 
 
 --
 -- Name: index_moodboard_items_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboard_items_on_variant_id ON moodboard_items USING btree (variant_id);
+CREATE INDEX index_moodboard_items_on_variant_id ON public.moodboard_items USING btree (variant_id);
 
 
 --
 -- Name: index_moodboards_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_moodboards_on_user_id ON moodboards USING btree (user_id);
+CREATE INDEX index_moodboards_on_user_id ON public.moodboards USING btree (user_id);
 
 
 --
 -- Name: index_option_values_variants_on_variant_id_and_option_value_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_option_values_variants_on_variant_id_and_option_value_id ON spree_option_values_variants USING btree (variant_id, option_value_id);
+CREATE INDEX index_option_values_variants_on_variant_id_and_option_value_id ON public.spree_option_values_variants USING btree (variant_id, option_value_id);
 
 
 --
 -- Name: index_payment_requests_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_payment_requests_on_order_id ON payment_requests USING btree (order_id);
+CREATE INDEX index_payment_requests_on_order_id ON public.payment_requests USING btree (order_id);
 
 
 --
 -- Name: index_payment_requests_on_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_payment_requests_on_token ON payment_requests USING btree (token);
+CREATE INDEX index_payment_requests_on_token ON public.payment_requests USING btree (token);
 
 
 --
 -- Name: index_product_accessories_on_spree_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_accessories_on_spree_product_id ON product_accessories USING btree (spree_product_id);
+CREATE INDEX index_product_accessories_on_spree_product_id ON public.product_accessories USING btree (spree_product_id);
 
 
 --
 -- Name: index_product_accessories_on_style_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_accessories_on_style_id ON product_accessories USING btree (style_id);
+CREATE INDEX index_product_accessories_on_style_id ON public.product_accessories USING btree (style_id);
 
 
 --
 -- Name: index_product_color_values_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_color_values_on_product_id ON product_color_values USING btree (product_id);
+CREATE INDEX index_product_color_values_on_product_id ON public.product_color_values USING btree (product_id);
 
 
 --
 -- Name: index_product_making_options_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_making_options_on_product_id ON product_making_options USING btree (product_id, active, option_type);
+CREATE INDEX index_product_making_options_on_product_id ON public.product_making_options USING btree (product_id, active, option_type);
 
 
 --
 -- Name: index_product_properties_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_properties_on_product_id ON spree_product_properties USING btree (product_id);
+CREATE INDEX index_product_properties_on_product_id ON public.spree_product_properties USING btree (product_id);
 
 
 --
 -- Name: index_product_reservations_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_reservations_on_user_id ON product_reservations USING btree (user_id);
+CREATE INDEX index_product_reservations_on_user_id ON public.product_reservations USING btree (user_id);
 
 
 --
 -- Name: index_product_style_profiles_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_style_profiles_on_product_id ON product_style_profiles USING btree (product_id);
+CREATE INDEX index_product_style_profiles_on_product_id ON public.product_style_profiles USING btree (product_id);
 
 
 --
 -- Name: index_products_promotion_rules_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_products_promotion_rules_on_product_id ON spree_products_promotion_rules USING btree (product_id);
+CREATE INDEX index_products_promotion_rules_on_product_id ON public.spree_products_promotion_rules USING btree (product_id);
 
 
 --
 -- Name: index_products_promotion_rules_on_promotion_rule_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_products_promotion_rules_on_promotion_rule_id ON spree_products_promotion_rules USING btree (promotion_rule_id);
+CREATE INDEX index_products_promotion_rules_on_promotion_rule_id ON public.spree_products_promotion_rules USING btree (promotion_rule_id);
 
 
 --
 -- Name: index_promotion_rules_on_product_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_promotion_rules_on_product_group_id ON spree_promotion_rules USING btree (product_group_id);
+CREATE INDEX index_promotion_rules_on_product_group_id ON public.spree_promotion_rules USING btree (product_group_id);
 
 
 --
 -- Name: index_promotion_rules_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_promotion_rules_on_user_id ON spree_promotion_rules USING btree (user_id);
+CREATE INDEX index_promotion_rules_on_user_id ON public.spree_promotion_rules USING btree (user_id);
 
 
 --
 -- Name: index_promotion_rules_users_on_promotion_rule_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_promotion_rules_users_on_promotion_rule_id ON spree_promotion_rules_users USING btree (promotion_rule_id);
+CREATE INDEX index_promotion_rules_users_on_promotion_rule_id ON public.spree_promotion_rules_users USING btree (promotion_rule_id);
 
 
 --
 -- Name: index_promotion_rules_users_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_promotion_rules_users_on_user_id ON spree_promotion_rules_users USING btree (user_id);
+CREATE INDEX index_promotion_rules_users_on_user_id ON public.spree_promotion_rules_users USING btree (user_id);
 
 
 --
 -- Name: index_questions_on_position; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_questions_on_position ON questions USING btree ("position");
+CREATE INDEX index_questions_on_position ON public.questions USING btree ("position");
 
 
 --
 -- Name: index_questions_on_quiz_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_questions_on_quiz_id ON questions USING btree (quiz_id);
+CREATE INDEX index_questions_on_quiz_id ON public.questions USING btree (quiz_id);
 
 
 --
 -- Name: index_return_inventory_items_on_active_and_available; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_return_inventory_items_on_active_and_available ON return_inventory_items USING btree (active, available);
+CREATE INDEX index_return_inventory_items_on_active_and_available ON public.return_inventory_items USING btree (active, available);
 
 
 --
 -- Name: index_return_inventory_items_on_style_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_return_inventory_items_on_style_number ON return_inventory_items USING btree (style_number);
+CREATE INDEX index_return_inventory_items_on_style_number ON public.return_inventory_items USING btree (style_number);
 
 
 --
 -- Name: index_return_inventory_items_on_upc; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_return_inventory_items_on_upc ON return_inventory_items USING btree (upc);
+CREATE INDEX index_return_inventory_items_on_upc ON public.return_inventory_items USING btree (upc);
 
 
 --
 -- Name: index_revolution_pages_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_revolution_pages_on_parent_id ON revolution_pages USING btree (parent_id);
+CREATE INDEX index_revolution_pages_on_parent_id ON public.revolution_pages USING btree (parent_id);
 
 
 --
 -- Name: index_revolution_pages_on_path; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_revolution_pages_on_path ON revolution_pages USING btree (path);
+CREATE UNIQUE INDEX index_revolution_pages_on_path ON public.revolution_pages USING btree (path);
 
 
 --
 -- Name: index_revolution_pages_on_publish_from_and_publish_to; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_revolution_pages_on_publish_from_and_publish_to ON revolution_pages USING btree (publish_from, publish_to);
+CREATE INDEX index_revolution_pages_on_publish_from_and_publish_to ON public.revolution_pages USING btree (publish_from, publish_to);
 
 
 --
 -- Name: index_revolution_pages_on_rgt; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_revolution_pages_on_rgt ON revolution_pages USING btree (rgt);
+CREATE INDEX index_revolution_pages_on_rgt ON public.revolution_pages USING btree (rgt);
 
 
 --
 -- Name: index_revolution_translations_on_locale; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_revolution_translations_on_locale ON revolution_translations USING btree (locale);
+CREATE INDEX index_revolution_translations_on_locale ON public.revolution_translations USING btree (locale);
 
 
 --
 -- Name: index_revolution_translations_on_page_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_revolution_translations_on_page_id ON revolution_translations USING btree (page_id);
+CREATE INDEX index_revolution_translations_on_page_id ON public.revolution_translations USING btree (page_id);
 
 
 --
 -- Name: index_shipments_on_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_shipments_on_number ON spree_shipments USING btree (number);
+CREATE INDEX index_shipments_on_number ON public.spree_shipments USING btree (number);
 
 
 --
 -- Name: index_similarities_on_original_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_similarities_on_original_id ON similarities USING btree (original_id);
+CREATE INDEX index_similarities_on_original_id ON public.similarities USING btree (original_id);
 
 
 --
 -- Name: index_similarities_on_similar_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_similarities_on_similar_id ON similarities USING btree (similar_id);
+CREATE INDEX index_similarities_on_similar_id ON public.similarities USING btree (similar_id);
 
 
 --
 -- Name: index_simple_key_values_on_key; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_simple_key_values_on_key ON simple_key_values USING btree (key);
+CREATE UNIQUE INDEX index_simple_key_values_on_key ON public.simple_key_values USING btree (key);
 
 
 --
 -- Name: index_site_versions_on_zone_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_site_versions_on_zone_id ON site_versions USING btree (zone_id);
+CREATE INDEX index_site_versions_on_zone_id ON public.site_versions USING btree (zone_id);
 
 
 --
 -- Name: index_spree_configurations_on_name_and_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_configurations_on_name_and_type ON spree_configurations USING btree (name, type);
+CREATE INDEX index_spree_configurations_on_name_and_type ON public.spree_configurations USING btree (name, type);
 
 
 --
 -- Name: index_spree_line_items_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_line_items_on_order_id ON spree_line_items USING btree (order_id);
+CREATE INDEX index_spree_line_items_on_order_id ON public.spree_line_items USING btree (order_id);
 
 
 --
 -- Name: index_spree_line_items_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_line_items_on_variant_id ON spree_line_items USING btree (variant_id);
+CREATE INDEX index_spree_line_items_on_variant_id ON public.spree_line_items USING btree (variant_id);
 
 
 --
 -- Name: index_spree_option_values_groups_on_option_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_option_values_groups_on_option_type_id ON spree_option_values_groups USING btree (option_type_id);
+CREATE INDEX index_spree_option_values_groups_on_option_type_id ON public.spree_option_values_groups USING btree (option_type_id);
 
 
 --
 -- Name: index_spree_option_values_on_option_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_option_values_on_option_type_id ON spree_option_values USING btree (option_type_id);
+CREATE INDEX index_spree_option_values_on_option_type_id ON public.spree_option_values USING btree (option_type_id);
 
 
 --
 -- Name: index_spree_option_values_on_presentation; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_option_values_on_presentation ON spree_option_values USING btree (presentation);
+CREATE INDEX index_spree_option_values_on_presentation ON public.spree_option_values USING btree (presentation);
 
 
 --
 -- Name: index_spree_option_values_variants_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_option_values_variants_on_variant_id ON spree_option_values_variants USING btree (variant_id);
+CREATE INDEX index_spree_option_values_variants_on_variant_id ON public.spree_option_values_variants USING btree (variant_id);
 
 
 --
 -- Name: index_spree_orders_on_completed_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_completed_at ON spree_orders USING btree (completed_at);
+CREATE INDEX index_spree_orders_on_completed_at ON public.spree_orders USING btree (completed_at);
 
 
 --
 -- Name: index_spree_orders_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_created_at ON spree_orders USING btree (created_at);
+CREATE INDEX index_spree_orders_on_created_at ON public.spree_orders USING btree (created_at);
 
 
 --
 -- Name: index_spree_orders_on_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_number ON spree_orders USING btree (number);
+CREATE INDEX index_spree_orders_on_number ON public.spree_orders USING btree (number);
 
 
 --
 -- Name: index_spree_orders_on_shipment_state; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_shipment_state ON spree_orders USING btree (shipment_state);
+CREATE INDEX index_spree_orders_on_shipment_state ON public.spree_orders USING btree (shipment_state);
 
 
 --
 -- Name: index_spree_orders_on_state; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_state ON spree_orders USING btree (state);
+CREATE INDEX index_spree_orders_on_state ON public.spree_orders USING btree (state);
 
 
 --
 -- Name: index_spree_orders_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_orders_on_user_id ON spree_orders USING btree (user_id);
+CREATE INDEX index_spree_orders_on_user_id ON public.spree_orders USING btree (user_id);
 
 
 --
 -- Name: index_spree_payments_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_payments_on_order_id ON spree_payments USING btree (order_id);
+CREATE INDEX index_spree_payments_on_order_id ON public.spree_payments USING btree (order_id);
 
 
 --
 -- Name: index_spree_paypal_express_checkouts_on_transaction_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_paypal_express_checkouts_on_transaction_id ON spree_paypal_express_checkouts USING btree (transaction_id);
+CREATE INDEX index_spree_paypal_express_checkouts_on_transaction_id ON public.spree_paypal_express_checkouts USING btree (transaction_id);
 
 
 --
 -- Name: index_spree_preferences_on_key; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_spree_preferences_on_key ON spree_preferences USING btree (key);
+CREATE UNIQUE INDEX index_spree_preferences_on_key ON public.spree_preferences USING btree (key);
 
 
 --
 -- Name: index_spree_prices_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_prices_on_variant_id ON spree_prices USING btree (variant_id);
+CREATE INDEX index_spree_prices_on_variant_id ON public.spree_prices USING btree (variant_id);
 
 
 --
 -- Name: index_spree_product_option_types_on_option_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_product_option_types_on_option_type_id ON spree_product_option_types USING btree (option_type_id);
+CREATE INDEX index_spree_product_option_types_on_option_type_id ON public.spree_product_option_types USING btree (option_type_id);
 
 
 --
 -- Name: index_spree_product_option_types_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_product_option_types_on_product_id ON spree_product_option_types USING btree (product_id);
+CREATE INDEX index_spree_product_option_types_on_product_id ON public.spree_product_option_types USING btree (product_id);
 
 
 --
 -- Name: index_spree_product_related_outerwear_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_product_related_outerwear_on_product_id ON spree_product_related_outerwear USING btree (product_id);
+CREATE INDEX index_spree_product_related_outerwear_on_product_id ON public.spree_product_related_outerwear USING btree (product_id);
 
 
 --
 -- Name: index_spree_products_on_available_on; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_on_available_on ON spree_products USING btree (available_on);
+CREATE INDEX index_spree_products_on_available_on ON public.spree_products USING btree (available_on);
 
 
 --
 -- Name: index_spree_products_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_on_deleted_at ON spree_products USING btree (deleted_at);
+CREATE INDEX index_spree_products_on_deleted_at ON public.spree_products USING btree (deleted_at);
 
 
 --
 -- Name: index_spree_products_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_on_name ON spree_products USING btree (name);
+CREATE INDEX index_spree_products_on_name ON public.spree_products USING btree (name);
 
 
 --
 -- Name: index_spree_products_on_permalink; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_on_permalink ON spree_products USING btree (permalink);
+CREATE INDEX index_spree_products_on_permalink ON public.spree_products USING btree (permalink);
 
 
 --
 -- Name: index_spree_products_taxons_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_taxons_on_product_id ON spree_products_taxons USING btree (product_id);
+CREATE INDEX index_spree_products_taxons_on_product_id ON public.spree_products_taxons USING btree (product_id);
 
 
 --
 -- Name: index_spree_products_taxons_on_taxon_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_products_taxons_on_taxon_id ON spree_products_taxons USING btree (taxon_id);
+CREATE INDEX index_spree_products_taxons_on_taxon_id ON public.spree_products_taxons USING btree (taxon_id);
 
 
 --
 -- Name: index_spree_roles_users_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_roles_users_on_role_id ON spree_roles_users USING btree (role_id);
+CREATE INDEX index_spree_roles_users_on_role_id ON public.spree_roles_users USING btree (role_id);
 
 
 --
 -- Name: index_spree_roles_users_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_roles_users_on_user_id ON spree_roles_users USING btree (user_id);
+CREATE INDEX index_spree_roles_users_on_user_id ON public.spree_roles_users USING btree (user_id);
 
 
 --
 -- Name: index_spree_shipments_on_order_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_shipments_on_order_id ON spree_shipments USING btree (order_id);
+CREATE INDEX index_spree_shipments_on_order_id ON public.spree_shipments USING btree (order_id);
 
 
 --
 -- Name: index_spree_taxon_banners_on_spree_taxon_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_taxon_banners_on_spree_taxon_id ON spree_taxon_banners USING btree (spree_taxon_id);
+CREATE INDEX index_spree_taxon_banners_on_spree_taxon_id ON public.spree_taxon_banners USING btree (spree_taxon_id);
 
 
 --
 -- Name: index_spree_variants_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_spree_variants_on_product_id ON spree_variants USING btree (product_id);
+CREATE INDEX index_spree_variants_on_product_id ON public.spree_variants USING btree (product_id);
 
 
 --
 -- Name: index_style_reports_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_style_reports_on_spree_user_id ON user_style_profiles USING btree (user_id);
+CREATE INDEX index_style_reports_on_spree_user_id ON public.user_style_profiles USING btree (user_id);
 
 
 --
 -- Name: index_taxons_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_taxons_on_parent_id ON spree_taxons USING btree (parent_id);
+CREATE INDEX index_taxons_on_parent_id ON public.spree_taxons USING btree (parent_id);
 
 
 --
 -- Name: index_taxons_on_permalink; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_taxons_on_permalink ON spree_taxons USING btree (permalink);
+CREATE INDEX index_taxons_on_permalink ON public.spree_taxons USING btree (permalink);
 
 
 --
 -- Name: index_taxons_on_taxonomy_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_taxons_on_taxonomy_id ON spree_taxons USING btree (taxonomy_id);
+CREATE INDEX index_taxons_on_taxonomy_id ON public.spree_taxons USING btree (taxonomy_id);
 
 
 --
 -- Name: index_tokenized_name_and_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_tokenized_name_and_type ON spree_tokenized_permissions USING btree (permissable_id, permissable_type);
+CREATE INDEX index_tokenized_name_and_type ON public.spree_tokenized_permissions USING btree (permissable_id, permissable_type);
 
 
 --
 -- Name: index_wedding_atelier_likes_on_user_id_and_event_dress_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_wedding_atelier_likes_on_user_id_and_event_dress_id ON wedding_atelier_likes USING btree (user_id, event_dress_id);
+CREATE UNIQUE INDEX index_wedding_atelier_likes_on_user_id_and_event_dress_id ON public.wedding_atelier_likes USING btree (user_id, event_dress_id);
 
 
 --
 -- Name: index_wishlist_items_on_spree_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_wishlist_items_on_spree_product_id ON wishlist_items USING btree (spree_product_id);
+CREATE INDEX index_wishlist_items_on_spree_product_id ON public.wishlist_items USING btree (spree_product_id);
 
 
 --
 -- Name: index_wishlist_items_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_wishlist_items_on_spree_user_id ON wishlist_items USING btree (spree_user_id);
+CREATE INDEX index_wishlist_items_on_spree_user_id ON public.wishlist_items USING btree (spree_user_id);
 
 
 --
 -- Name: ix_fabrics_on_fabric_color_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX ix_fabrics_on_fabric_color_id ON fabrics USING btree (option_value_id);
+CREATE INDEX ix_fabrics_on_fabric_color_id ON public.fabrics USING btree (option_value_id);
 
 
 --
 -- Name: opovg_option_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX opovg_option_group_id ON option_values_option_values_groups USING btree (option_values_group_id);
+CREATE INDEX opovg_option_group_id ON public.option_values_option_values_groups USING btree (option_values_group_id);
 
 
 --
 -- Name: opovg_option_value_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX opovg_option_value_id ON option_values_option_values_groups USING btree (option_value_id);
+CREATE INDEX opovg_option_value_id ON public.option_values_option_values_groups USING btree (option_value_id);
 
 
 --
 -- Name: permalink_idx_unique; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX permalink_idx_unique ON spree_products USING btree (permalink);
+CREATE UNIQUE INDEX permalink_idx_unique ON public.spree_products USING btree (permalink);
 
 
 --
 -- Name: spree_product_related_outerwear_unique_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX spree_product_related_outerwear_unique_index ON spree_product_related_outerwear USING btree (outerwear_id, product_id);
+CREATE UNIQUE INDEX spree_product_related_outerwear_unique_index ON public.spree_product_related_outerwear USING btree (outerwear_id, product_id);
 
 
 --
 -- Name: unique_data_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_data_migrations ON data_migrations USING btree (version);
+CREATE UNIQUE INDEX unique_data_migrations ON public.data_migrations USING btree (version);
 
 
 --
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
@@ -10081,6 +10131,14 @@ INSERT INTO schema_migrations (version) VALUES ('20170927181851');
 
 INSERT INTO schema_migrations (version) VALUES ('20170928202521');
 
+INSERT INTO schema_migrations (version) VALUES ('20171013172806');
+
+INSERT INTO schema_migrations (version) VALUES ('20171016230612');
+
+INSERT INTO schema_migrations (version) VALUES ('20171101200751');
+
+INSERT INTO schema_migrations (version) VALUES ('20171114001834');
+
 INSERT INTO schema_migrations (version) VALUES ('20171115172748');
 
 INSERT INTO schema_migrations (version) VALUES ('20171116214623');
@@ -10178,3 +10236,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180629170302');
 INSERT INTO schema_migrations (version) VALUES ('20180717203709');
 
 INSERT INTO schema_migrations (version) VALUES ('20180803233733');
+
+INSERT INTO schema_migrations (version) VALUES ('20180815070122');

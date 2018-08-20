@@ -52,6 +52,7 @@ module Marketing
               sku:               'ABC123',
               name:              'Super Dress',
               price:             product_price,
+              color_name:       'COLOR'
           )
         end
 
@@ -66,7 +67,7 @@ module Marketing
               name:              'Super Dress',
               price:             12.34,
               productSku:        "ABC123",
-              sku:               'ABC123',
+              sku:               'ABC123~COLOR',
               type:              'Dress',
             })
           end

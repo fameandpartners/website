@@ -21,13 +21,17 @@ module Marketing
         def price_with_discount
           product.price_amount.to_f.round(2)
         end
+
+        def sku
+          "#{product.sku}~#{product.color_name}"
+        end
      
         def body
           {
               id:                product.id,
               productSku:        product.sku,
               name:              product.name,
-              sku:               product.sku,
+              sku:               sku,
               price:             price.to_f,
               type:              product.type,
           }

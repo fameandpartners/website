@@ -12,11 +12,17 @@ module Marketing
           'collection'.freeze
         end
 
+        def sku(product)
+          color_or_fabric = product.fabric&.name || product.color&.name
+
+          "#{product.sku}~#{color_or_fabric}"
+        end
+
         def body
           collection.products.map { |product|
             {
               id:           product.id,
-              sku:          product.sku,
+              sku:          sku(product),
               productSku:   product.sku,
               name:         product.name,
               price:        product.price.amount,

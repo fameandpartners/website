@@ -1,5 +1,5 @@
 class Factory < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :production_email
 
   validates_presence_of :name
 

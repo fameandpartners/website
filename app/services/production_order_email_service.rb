@@ -12,7 +12,7 @@ class ProductionOrderEmailService
   end
 
   def trigger_email(order, factory, items)
-    items = items.select{|item| item.stock.nil? && !item.fabric_swatch? && !item.return_insurance?}
+    items = items.select{|item| (item.stock.nil? || item.fabric_swatch?) && !item.return_insurance?}
     if items.any?
       FactoryPurchaseOrderEmail.new(order, factory, items).deliver
     end
@@ -31,7 +31,7 @@ class ProductionOrderEmailService
       @order_presenter ||= Orders::OrderPresenter.new(raw_order, factory_items)
     end
 
-    def delivery_email
+    def default_delivery_email
       configatron.order_production_emails
     end
 
@@ -46,7 +46,7 @@ class ProductionOrderEmailService
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',
-        email_to:           delivery_email,
+        email_to:           factory.production_email || default_delivery_email,
         subject:            subject,
         number:             order_presenter.number,
         site:               order_presenter.site_version,

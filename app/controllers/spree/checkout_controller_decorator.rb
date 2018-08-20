@@ -222,6 +222,8 @@ Spree::CheckoutController.class_eval do
       @order.state = params[:state]
     end
     state_callback(:before)
+
+    append_gtm_order
   end
 
   # current_ability.authorize!(*args)
@@ -392,6 +394,10 @@ Spree::CheckoutController.class_eval do
     'checkout'
   end
 
+  def append_gtm_order
+    gtm_order = Marketing::Gtm::Presenter::Order.new(spree_order: @order, base_url: root_url)
+    @gtm_container.append(gtm_order)
+  end
 
   def update_line_item_delivery
     if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs

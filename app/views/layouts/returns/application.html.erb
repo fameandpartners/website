@@ -13,6 +13,10 @@
 
     <%= csrf_meta_tags %>
 
+    <% if Features.active?(:google_tag_manager) %>
+      <%= render 'google_tag_manager/base' %>
+    <% end %>
+
     <style>
        @media print {
          .main,
