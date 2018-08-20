@@ -34,7 +34,17 @@ class Products::DetailsController < Products::BaseController
     # set preselected images colors
     color_hash = \
       if params[:color]
-        Repositories::ProductColors.get_by_name(params[:color]) || {}
+        if product.fabrics&.default&.blank?
+          Repositories::ProductColors.get_by_name(params[:color]) || {}
+        else
+          Fabric.find_by_name(params[:color]) || {}
+        end
+      elsif params[:clr]
+        if product.fabrics&.default&.blank?
+          Repositories::ProductColors.read(params[:clr]) || {}
+        else
+          Fabric.find_by_id(params[:clr]) || {}
+        end
       else
         # select images of one/default color
         color = product.available_options.colors.default.first

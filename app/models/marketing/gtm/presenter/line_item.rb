@@ -22,14 +22,15 @@ module Marketing
         end
 
         def sku
-          CustomItemSku.new(line_item).call
+          cust = Spree::Product.format_new_pid(
+            line_item.fabric&.name || line_item.color,
+            JSON.parse(line_item.customizations)
+          )
+
+          "#{product_sku}~#{cust}"
         end
 
-        def variant_sku
-          VariantSku.new(variant).call
-        end
-
-        def variant_price
+        def price
           line_item.variant.price.to_f
         end
 
@@ -73,8 +74,7 @@ module Marketing
             quantity:     quantity,
             total_amount: total_amount,
             sku:          sku,
-            variant_sku:  variant_sku,
-            variant_price:variant_price,
+            price:        price,
             product_sku:  product_sku,
             description:  product_description,
             image_url:    image_url,
