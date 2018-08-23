@@ -15,7 +15,7 @@ window.page.CheckoutModal = class CheckoutModal
 window.page.FlexibleReturnsModal = class FlexibleReturnsModal extends CheckoutModal
   constructor: (opts = '') ->
     modalHeading = 'Want fully flexible returns?'
-    modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we do not accept returns. To experience our made-to-service risk free, you can add the option to return every item in your order for $19. If you keep your items, that $19 can be used as a credit against your next purchase.'
+    modalBody = 'Since every Fame and Partners piece is tailor-made to fit your specific body and personal style, we do not accept returns. To experience our made-to-service risk free, you can add the option to return every item in your order for $19.'
     modalCheckbox = ''
 
     vex.dialog.buttons.NO.text = 'X'
