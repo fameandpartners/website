@@ -6,7 +6,7 @@ if [ `uname` = "Darwin" ]; then
   cp -r ~/oversize_leahs/spree ~/leahs/website/public/
   ~/bin/leahs_db 13
 fi
-./script/prepare_import.sh https://www.dropbox.com/sh/x53gayekd2iocgk/AABjyzE2We12wpf5wyv4L6tna?dl=0
+./script/prepare_import.sh https://www.dropbox.com/sh/x53gayekd2iocgk/AABjyzE2We12wpf5wyv4L6tna?dl=1
 MARK_NEW_THIS_WEEK=false ./script/import_products.sh
 bundle exec rake data:six_week_delivery
 bundle exec rake data:add_fastmaking_to_all_products
