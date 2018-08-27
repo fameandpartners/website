@@ -95,10 +95,12 @@ module Products
     describe '#price_amount' do
       let(:currency) { 'AUD' }
       let(:price)   { Spree::Price.new(amount: 15.0, currency: currency) }
-      let(:product) { described_class.new price: price, discount: discount }
+      let(:product) { described_class.new price: price }
 
       context 'product has discount' do
-        let(:discount) { OpenStruct.new(amount: 10, size: 10) }
+        before :each do
+          allow(Spree::Sale).to receive(:last_sitewide_for).and_return(double(Spree::Sale, apply: new_price, discount_size: 10, discount_string: "10%"))
+        end
         let(:new_price) { Spree::Price.new(amount: 13.5, currency: currency) }
 
         it 'returns the amount of the product price with the discount' do
@@ -107,16 +109,6 @@ module Products
       end
 
       context 'product does not have a discount' do
-        let(:discount) { nil }
-
-        it 'returns the full amount of the product price' do
-          expect(product.price_amount).to eq(price.amount)
-        end
-      end
-
-      context 'product has a discount with 0 amount' do
-        let(:discount) { OpenStruct.new(amount: 0, size: 0) }
-
         it 'returns the full amount of the product price' do
           expect(product.price_amount).to eq(price.amount)
         end
@@ -199,7 +191,7 @@ module Products
       let(:product)        { build(:dress, variants: [first_variant, second_variant], price: 100) }
       let(:presenter)      { described_class.new(product: product, price: product.site_price_for(site_version), discount: discount) }
 
-      context 'without discount' do
+      context 'without sale' do
         let(:discount) { nil }
 
         it 'returns only original price' do
@@ -214,10 +206,15 @@ module Products
         end
       end
 
-      context 'with discount' do
-        let(:discount) { OpenStruct.new(amount: 10, size: 10) }
+      context 'with sale' do
+        let(:discount) { nil }
+        let(:new_price) { Spree::Price.new(amount: 90) }
 
-        it 'returns price with discount' do
+        before :each do
+          allow(Spree::Sale).to receive(:last_sitewide_for).and_return(double(Spree::Sale, apply: new_price, discount_size: 10, discount_string: "10%"))
+        end
+
+        it 'returns price with sale' do
           expect(presenter.prices).to include({
             original_amount: 100.0,
                 sale_amount: 90.0,

@@ -172,12 +172,7 @@ module Products
     def prices
       @prices ||= \
         if price.present?
-          if discount&.amount.to_i > 0
-            sale_price      = price.apply(discount)
-            discount_amount = discount.amount
-            discount_string = "#{discount.amount}%"
-
-          elsif sale = Spree::Sale.last_sitewide_for(currency: price.currency).presence
+          if sale = Spree::Sale.last_sitewide_for(currency: price.currency).presence
             sale_price      = sale.apply(price)
             discount_amount = sale.discount_size
             discount_string = sale.discount_string
