@@ -2,13 +2,10 @@ module Marketing
   module Gtm
     module Presenter
       class Page < Base
-        attr_reader :type, :meta_description, :title, :url
+        attr_reader :type
 
-        def initialize(type:, meta_description:, title:, url:)
+        def initialize(type:)
           @type             = type
-          @meta_description = meta_description
-          @title            = title
-          @url              = url
         end
 
         def key
@@ -18,10 +15,6 @@ module Marketing
         def body
           {
               type:            type,
-              title:           title,
-              url:             url,
-              metaDescription: meta_description
-              # adDescription: 'This is going to be the adDescription for remarketing', # Not going into V1
           }
         end
       end

@@ -48,7 +48,7 @@ class Products::CollectionResource
     @edits                           = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
     @event                           = Repositories::Taxonomy.get_taxon_by_name(options[:event])
     @bodyshape                       = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
-    @color_group                     = collect_color_groups( options[:color_group] )
+    @color_group                     = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color_groups                    = collect_color_groups( options[:color_groups] )
     @color                           = Repositories::ProductColors.get_by_name(options[:color])
     @discount                        = prepare_discount(options[:discount])
@@ -198,6 +198,7 @@ class Products::CollectionResource
 
   def products
     results_ary = results["hits"]["hits"]
+
     result = results_ary.map do |cvar|
       cvar = cvar['_source']
       discount = Repositories::Discount.get_product_discount(cvar["product"]["id"])
@@ -208,7 +209,6 @@ class Products::CollectionResource
       Products::Presenter.new(
         id:             cvar["product"]["id"],
         sku:            cvar["product"]["sku"],
-        variant_skus:   cvar["product"]["variant_skus"],
         name:           cvar["product"]["name"],
         color:          OpenStruct.new(cvar["color"]),
         fabric:         OpenStruct.new(cvar["fabric"]),

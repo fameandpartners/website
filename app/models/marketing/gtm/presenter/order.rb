@@ -28,19 +28,6 @@ module Marketing
           order.line_items.map { |item| LineItem.new(spree_line_item: item, base_url: base_url).body }
         end
 
-        def line_items_summary
-          products_with_prices = order.line_items.map { |li| [li.variant.product.sku, li.total] }.uniq
-
-          products_with_prices.map do |sku, price|
-            qty = order.line_items.select { |li| li.variant.product.sku == sku && li.total == price }.size
-            {
-              id: sku,
-              price: number_with_precision_wrapper(price),
-              qty: qty
-            }
-          end
-        end
-
         def total_amount
           order.total.to_f
         end
@@ -55,6 +42,10 @@ module Marketing
 
         def shipping_amount
           order.adjustments.shipping.sum(:amount).to_f
+        end
+
+        def discount_amount
+          order.display_promotion_total&.money&.amount&.to_f
         end
 
         def transaction_amount
@@ -75,8 +66,8 @@ module Marketing
               total_amount:           total_amount,
               taxes_amount:           taxes_amount,
               shipping_amount:        shipping_amount,
+              discount_amount:        discount_amount || 0,
               line_items:             line_items,
-              line_items_summary:     line_items_summary,
               humanized_total_amount: humanized_total_amount
           }
         end

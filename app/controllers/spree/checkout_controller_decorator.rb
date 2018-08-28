@@ -1,8 +1,4 @@
 Spree::CheckoutController.class_eval do
-  include Marketing::Gtm::Controller::Order
-  include Marketing::Gtm::Controller::Product
-  include Marketing::Gtm::Controller::Variant
-  include Marketing::Gtm::Controller::Event
 
   before_filter :before_masterpass
   skip_before_filter :check_registration
@@ -27,7 +23,6 @@ Spree::CheckoutController.class_eval do
     prepare_order
     find_payment_methods
     update_line_item_delivery
-    data_layer_add_to_cart_event
 
     unless signed_in?
       @user = Spree::User.new(
@@ -227,6 +222,8 @@ Spree::CheckoutController.class_eval do
       @order.state = params[:state]
     end
     state_callback(:before)
+
+    append_gtm_order
   end
 
   # current_ability.authorize!(*args)
@@ -393,22 +390,14 @@ Spree::CheckoutController.class_eval do
 
   # Marketing + GTM
 
-  def data_layer_add_to_cart_event
-    if (variant_id = flash[:variant_id_added_to_cart])
-      variant           = Spree::Variant.find(variant_id)
-      product_presenter = variant.product.presenter_as_details_resource(current_site_version)
-
-      append_gtm_event(event_name: 'addToCart')
-      append_gtm_product(product_presenter: product_presenter)
-      append_gtm_variant(spree_variant: variant)
-      append_gtm_order(spree_order: current_order, base_url: root_url)
-    end
-  end
-
   def gtm_page_type
     'checkout'
   end
 
+  def append_gtm_order
+    gtm_order = Marketing::Gtm::Presenter::Order.new(spree_order: @order, base_url: root_url)
+    @gtm_container.append(gtm_order)
+  end
 
   def update_line_item_delivery
     if @order.updated_at < 12.hours.ago #refresh delivery dates every 12 hours in case the china flag is flipped in the last 12 hrs

@@ -261,7 +261,7 @@ Spree::LineItem.class_eval do
 
   def recommended_fabric?
       fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
-      fp.recommended
+      fp&.recommended
   end
 
   private

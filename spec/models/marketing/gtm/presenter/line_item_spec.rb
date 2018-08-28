@@ -6,6 +6,7 @@ module Marketing
       describe LineItem, type: :presenter do
         let(:taxon) { create(:taxon, name: 'Jeans') }
         let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
+        let(:fabric) { double(:fabric, name: 'FABRICNAME', price_in: 5) }
         let(:variant) { create(:dress_variant, product: product) }
         let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11) }
 
@@ -15,8 +16,7 @@ module Marketing
 
         describe '#body' do
           before(:each) do
-            expect(VariantSku).to receive(:new).with(variant).and_return(-> { 'VariantSKU' })
-            expect(CustomItemSku).to receive(:new).with(line_item).and_return(-> { 'LineItemSKU' })
+            allow(line_item).to receive(:fabric).and_return(fabric)
           end
 
           context 'given a spree line item' do
@@ -25,10 +25,9 @@ module Marketing
                 category:     'Jeans',
                 name:         'Super Dress',
                 quantity:     3,
-                total_amount: 33.33,
-                sku:          'LineItemSKU',
-                variant_sku:  'VariantSKU',
-                variant_price: 198.37,
+                total_amount: 48.33,
+                sku:          'ProductSKU~FABRICNAME',
+                price:        198.37,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',
                 image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.

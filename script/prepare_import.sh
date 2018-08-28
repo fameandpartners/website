@@ -85,7 +85,9 @@ function prepare
   echo "Downloading From: $(blue)${SOURCE_FILE}$(normal)"
   echo "To Directory:     $(green)${working_path}$(normal)"
   echo
-  read -p "Press $(green)Enter$(normal) to continue, or $(red)Ctrl-C$(normal) to cancel!"
+  echo "Press $(green)Enter$(normal) to continue, or $(red)Ctrl-C$(normal) to cancel!"
+  echo not waiting for stdin
+  sleep 2
 
   _mkdir_p "${working_path}"
   _mkdir_p "${content_path}"
@@ -152,3 +154,4 @@ prepare $zip_file_url $import_directory
 # unzip -x -LL import/content/import.zip -d 'import/content/import'
 # rm -R import/content/import/__macosx/
 # rm -R import/content/import/cancelled-*
+rm ~/import/content/extract/fp2683/fp2683-sh* || true

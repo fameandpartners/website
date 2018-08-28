@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Graphik-Light';
+  src: font-url('Graphik-Light-Web.eot');
+  src: font-url('Graphik-Light-Web.woff') format('woff'),
+    font-url('Graphik-Light-Web.woff2') format('woff2'),
+    font-url('Graphik-Light-Web.eot') format('embedded-opentype');
+}
+
 .__react_root__ {
   font-size: 14px;
   text-align: center;
@@ -13,4 +21,27 @@
   top: 0;
   position: fixed;
   z-index: 400;
+}
+
+.__react_root_relaunch__ {
+  font-family: "brandon-grotesque",brandon-grotesque,sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  color: #333333;
+  text-align: left;
+
+  p {
+    font-family: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+  }
+
+  .copyright-site-version {
+    select {
+      background-image: none;
+      padding: 0;
+    }
+  }
 }

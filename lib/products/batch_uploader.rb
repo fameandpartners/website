@@ -684,6 +684,7 @@ module Products
       
       threads = []
       number_of_threads = 6
+      number_of_threads = 3 if `hostname`=="Fulls-MacBook-Pro-2.local\n"
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|

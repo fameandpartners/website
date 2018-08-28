@@ -210,6 +210,6 @@ if [ "${dryrun}" = "dryrun" ]; then
 else
   echo "$(red)WARNING -- Live Run -- WARNING$(normal)"
 fi
-read -p "Enter to continue, or Ctrl-C to cancel!"
-
+echo "Enter to continue, or Ctrl-C to cancel!"
+echo not waiting for stdin
 time main | tee $logfile

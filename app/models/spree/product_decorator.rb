@@ -410,10 +410,6 @@ Spree::Product.class_eval do
     ! jumpsuit?
   end
 
-  def variant_skus
-    variants.collect(&:sku)
-  end
-
   def presenter_as_details_resource(site_version = nil)
     @product ||= Products::DetailsResource.new(
       site_version: site_version,
@@ -446,8 +442,10 @@ Spree::Product.class_eval do
   end
 
   def self.format_new_pid(fabric, customizations)
+    should_split = fabric && /^\d+-\d+$/ =~ fabric
+
     components = [
-      fabric.split('-'),
+      should_split ? fabric.split('-') : fabric,
       customizations.map{|c| c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
   end

@@ -4,13 +4,13 @@ module Products
     SCHEMA_ORG_DISCONTINUED   = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
-    attr_accessor :id, :master_id, :sku, :variant_skus, :name, :description,
+    attr_accessor :id, :master_id, :sku, :name, :description,
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable, :fast_delivery, :has_fabrics
+                  :height_customisable, :fast_delivery
 
     attr_reader   :product_type
 
@@ -66,10 +66,6 @@ module Products
 
     def custom_size_price
       sizes.default_extra_price.display_price
-    end
-
-    def has_fabrics?
-      !fabrics.empty?
     end
 
     def sizes
@@ -176,12 +172,7 @@ module Products
     def prices
       @prices ||= \
         if price.present?
-          if discount&.amount.to_i > 0
-            sale_price      = price.apply(discount)
-            discount_amount = discount.amount
-            discount_string = "#{discount.amount}%"
-
-          elsif sale = Spree::Sale.last_sitewide_for(currency: price.currency).presence
+          if sale = Spree::Sale.last_sitewide_for(currency: price.currency).presence
             sale_price      = sale.apply(price)
             discount_amount = sale.discount_size
             discount_string = sale.discount_string

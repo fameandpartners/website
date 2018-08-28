@@ -30,7 +30,7 @@ end
 configatron.customerio.site_id    = ENV['CUSTOMERIO_SITE_ID']
 configatron.customerio.secret_key = ENV['CUSTOMERIO_SECRET_KEY']
 
-configatron.order_production_emails = ['production@fameandpartners.dev']
+configatron.order_production_emails = 'production@fameandpartners.dev'
 
 configatron.email_marketing.delay_time do |delay_time|
   delay_time.abandoned_cart                   = 4.hours
@@ -94,8 +94,9 @@ configatron.micro_influencer_email_address='qa@fameandpartners.com'
 configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
-configatron.fame_webclient_always_regex = /^(\/static|\/dresses-new|\/_webclient)/
-configatron.fame_webclient_regex = /^(\/size-guide|\/bridesmaids-swatches|\/bridesmaids-search|\/dresses\/(custom-dress|dress-.*-[0-9]*))/
+configatron.fame_webclient_always_regex = /^(\/static|\/dresses-new|\/_webclient|\/custom-clothes|\/dress-system|\/dresses\/custom-dress-FPG|\/dresses\/dress-FPG)/
+configatron.fame_webclient_pdp_regex = /^(\/dresses\/(custom-dress|dress-.*-[0-9]*))/
+configatron.fame_webclient_content_regex = /^(\/size-guide|\/about|\/$)/
 configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
 
 
@@ -123,7 +124,7 @@ when :staging
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
 
-  configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
+  configatron.order_production_emails = 'orders@fameandpartners.com.cn'
   configatron.micro_influencer_email_address='influencerapplications@fameandpartners.com'
 when :test
   configatron.site_version_detector_strategy = :subdomain

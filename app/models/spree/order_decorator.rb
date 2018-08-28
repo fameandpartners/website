@@ -201,9 +201,7 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      if self.line_items.any? {|item| item.stock.nil?}
-        ProductionOrderEmailService.new(self).deliver
-      end
+      ProductionOrderEmailService.new(self).deliver
     rescue Exception => e
       log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")
@@ -392,6 +390,11 @@ Spree::Order.class_eval do
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
     json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+
+    # TODO remove me later
+    # make order R823608780 return eligible per request from CS
+    json['return_eligible']=true if self.number == "R823608780"
+
     json
   end
 
@@ -412,4 +415,11 @@ Spree::Order.class_eval do
     end
   end
 
+  def legit_line_items
+    self.line_items.reject { |x|
+      x.product.name.downcase == 'return_insurance'
+    }
+  rescue
+    self.line_items
+  end
 end

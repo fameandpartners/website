@@ -9,7 +9,7 @@ module Spree
     # as object we always get line items, as calculable we have Coupon, ShippingMethod
     def compute(object)
       if object.is_a?(Spree::Order)
-        quantity = object.line_items.sum(:quantity)
+        quantity = object.legit_line_items.sum(&:quantity)
 
         promotion = calculable.respond_to?(:promotion) ? calculable.promotion : nil
 
@@ -19,7 +19,7 @@ module Spree
 
           count = (quantity / (rule_items_count + 1))
 
-          prices = object.line_items.map{ |item| [item.price] * item.quantity }.flatten.sort
+          prices = object.legit_line_items.map{ |item| [item.price] * item.quantity }.flatten.sort
 
           amounts = prices.first(count)
 
