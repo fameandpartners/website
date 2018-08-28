@@ -3,7 +3,7 @@ namespace :data do
   task :convert_customizations_to_json => :environment do
     counter = 0
     Spree::Product.find_each do |product|
-      if product.customisation_values
+      if product.customisation_values && product.customisation_values.any?
         product.update_column('customizations', product.customisation_values.to_json)
         counter += 1
       end

@@ -15,6 +15,11 @@ namespace :data do
 	products = Spree::Product.all
 
 	products.each do |product|
+		if Spree::Product.is_new_product?(product.master.sku)
+			puts "Ignoring product - #{product.master.sku}"
+			next
+		end
+		
 		unless product.taxons.include?(taxon)
 			product.taxons << taxon
 		end
