@@ -407,11 +407,11 @@ module Api
             colorCode: f.fabric.option_value.name,
 
             colorTitle: f.fabric.option_value.presentation,
+            materialTitle: f.fabric.material,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: f.description,
           },
-          img: f.fabric.image_url,
           incompatibleWith: {},
         }
       end
