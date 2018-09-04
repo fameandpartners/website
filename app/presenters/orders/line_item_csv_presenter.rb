@@ -23,7 +23,7 @@ module Orders
       end
 
       def style_name
-        line['style_name'] || 'Missing Variant'
+        line['curation_name'] || line['style_name'] || 'Missing Variant'
       end
 
       def factory

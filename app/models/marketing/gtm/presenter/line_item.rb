@@ -38,7 +38,7 @@ module Marketing
         end
 
         def product_name
-          product.name
+          line_item.style_name
         end
 
         def product_description

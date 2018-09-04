@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170609001931) do
+ActiveRecord::Schema.define(:version => 20180904045723) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -57,6 +57,26 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
+  create_table "batch_collection_line_items", :force => true do |t|
+    t.integer  "batch_collection_id"
+    t.integer  "line_item_id"
+    t.datetime "projected_delivery_date"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.datetime "deleted_at"
+  end
+
+  add_index "batch_collection_line_items", ["deleted_at"], :name => "index_batch_collection_line_items_on_deleted_at"
+
+  create_table "batch_collections", :force => true do |t|
+    t.string   "batch_key"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "batch_collections", ["batch_key"], :name => "index_batch_collections_on_batch_key"
+
   create_table "bergen_return_item_processes", :force => true do |t|
     t.string   "aasm_state"
     t.integer  "return_request_item_id"
@@ -72,6 +92,11 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.datetime "processed_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string "category"
+    t.string "subcategory"
   end
 
   create_table "celebrity_inspirations", :force => true do |t|
@@ -116,6 +141,14 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "views_count",   :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "contentful_routes", :force => true do |t|
+    t.string   "route_name"
+    t.string   "controller"
+    t.string   "action"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "contentful_versions", :force => true do |t|
@@ -166,6 +199,21 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
+
+  create_table "customization_visualizations", :force => true do |t|
+    t.string   "customization_ids", :limit => 1024
+    t.string   "incompatible_ids",  :limit => 1024
+    t.jsonb    "render_urls"
+    t.integer  "product_id"
+    t.string   "length"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "silhouette"
+    t.string   "neckline"
+  end
+
+  add_index "customization_visualizations", ["length", "silhouette", "neckline"], :name => "dress_features"
+  add_index "customization_visualizations", ["product_id"], :name => "index_customization_visualizations_on_product_id"
 
   create_table "data_migrations", :id => false, :force => true do |t|
     t.string "version", :null => false
@@ -248,6 +296,30 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   add_index "fabrications", ["purchase_order_number"], :name => "index_fabrications_on_purchase_order_number"
   add_index "fabrications", ["uuid"], :name => "index_fabrications_on_uuid", :unique => true
 
+  create_table "fabrics", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "price_aud"
+    t.string   "price_usd"
+    t.string   "material"
+    t.string   "image_url"
+    t.integer  "option_value_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "option_fabric_color_value_id"
+  end
+
+  add_index "fabrics", ["option_value_id"], :name => "index_fabrics_on_option_value_id"
+  add_index "fabrics", ["option_value_id"], :name => "ix_fabrics_on_fabric_color_id"
+
+  create_table "fabrics_products", :force => true do |t|
+    t.integer "fabric_id"
+    t.integer "product_id"
+    t.boolean "recommended"
+    t.string  "description"
+    t.boolean "active",      :default => true
+  end
+
   create_table "facebook_accounts", :force => true do |t|
     t.string   "facebook_id"
     t.string   "name"
@@ -267,17 +339,76 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.datetime "updated_at",     :null => false
   end
 
-# Could not dump table "facebook_ad_insights" because of following StandardError
-#   Unknown type 'json' for column 'relevance_score'
+  create_table "facebook_ad_insights", :force => true do |t|
+    t.integer  "facebook_ad_id"
+    t.integer  "clicks"
+    t.integer  "cost_per_action_type"
+    t.float    "cpc"
+    t.float    "cpm"
+    t.float    "cpp"
+    t.float    "ctr"
+    t.datetime "date_start"
+    t.datetime "date_stop"
+    t.float    "frequency"
+    t.float    "reach"
+    t.json     "relevance_score"
+    t.json     "social_impressions"
+    t.float    "spend"
+    t.float    "total_actions"
+    t.float    "total_unique_actions"
+    t.json     "website_ctr"
+    t.integer  "website_clicks"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.json     "actions"
+    t.json     "action_values"
+  end
 
-# Could not dump table "facebook_ads" because of following StandardError
-#   Unknown type 'json' for column 'recommendations'
+  create_table "facebook_ads", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "facebook_adset_id"
+    t.string   "name"
+    t.datetime "created_time"
+    t.datetime "updated_time"
+    t.float    "bid_amount"
+    t.string   "status"
+    t.json     "recommendations"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
-# Could not dump table "facebook_adsets" because of following StandardError
-#   Unknown type 'json' for column 'adlabels'
+  create_table "facebook_adsets", :force => true do |t|
+    t.string   "facebook_campaign_id"
+    t.string   "facebook_id"
+    t.string   "name"
+    t.json     "adlabels"
+    t.json     "adset_schedule"
+    t.float    "bid_amount"
+    t.float    "daily_budget"
+    t.datetime "created_time"
+    t.datetime "updated_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "optimization_goal"
+    t.string   "status"
+    t.json     "targeting"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
-# Could not dump table "facebook_campaigns" because of following StandardError
-#   Unknown type 'json' for column 'recommendations'
+  create_table "facebook_campaigns", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "name"
+    t.datetime "created_time"
+    t.datetime "start_time"
+    t.datetime "stop_time"
+    t.datetime "updated_time"
+    t.string   "status"
+    t.json     "recommendations"
+    t.string   "facebook_account_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "facebook_data", :force => true do |t|
     t.integer  "spree_user_id"
@@ -290,8 +421,9 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
 
   create_table "factories", :force => true do |t|
     t.text     "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.text     "production_email"
   end
 
   create_table "global_skus", :force => true do |t|
@@ -309,6 +441,8 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "variant_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "fabric_id"
+    t.string   "fabric_name"
   end
 
   add_index "global_skus", ["product_id"], :name => "index_global_skus_on_product_id"
@@ -350,6 +484,17 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   end
 
   add_index "item_return_events", ["item_return_uuid"], :name => "index_item_return_events_on_item_return_uuid"
+
+  create_table "item_return_labels", :force => true do |t|
+    t.string   "label_url"
+    t.string   "carrier"
+    t.string   "label_image_url"
+    t.string   "label_pdf_url"
+    t.integer  "item_return_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "barcode"
+  end
 
   create_table "item_returns", :force => true do |t|
     t.string   "order_number"
@@ -394,8 +539,10 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "bergen_damaged_quantity"
     t.string   "shippo_tracking_number"
     t.string   "shippo_label_url"
+    t.integer  "item_return_label_id"
   end
 
+  add_index "item_returns", ["item_return_label_id"], :name => "index_item_returns_on_item_return_label_id"
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
   add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
   add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
@@ -438,15 +585,16 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "product_id"
     t.string   "size"
     t.string   "customization_value_ids"
-    t.datetime "created_at",                                                                    :null => false
-    t.datetime "updated_at",                                                                    :null => false
+    t.datetime "created_at",                                                                                   :null => false
+    t.datetime "updated_at",                                                                                   :null => false
     t.string   "color"
     t.integer  "color_id"
-    t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "price",                                  :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
-    t.string   "height",                                                :default => "standard"
+    t.string   "height",                                                               :default => "standard"
     t.string   "height_value"
     t.string   "height_unit"
+    t.string   "sku",                     :limit => 128
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
@@ -672,6 +820,13 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   end
 
   add_index "moodboards", ["user_id"], :name => "index_moodboards_on_user_id"
+
+  create_table "newgistics_schedulers", :force => true do |t|
+    t.string   "last_successful_run"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "name"
+  end
 
   create_table "next_logistics_return_request_processes", :force => true do |t|
     t.integer  "order_return_request_id"
@@ -907,6 +1062,20 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
+
+  create_table "return_inventory_items", :force => true do |t|
+    t.integer  "upc",                            :null => false
+    t.string   "style_number"
+    t.integer  "available",                      :null => false
+    t.string   "vendor",                         :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "active",       :default => true
+  end
+
+  add_index "return_inventory_items", ["active", "available"], :name => "index_return_inventory_items_on_active_and_available"
+  add_index "return_inventory_items", ["style_number"], :name => "index_return_inventory_items_on_style_number"
+  add_index "return_inventory_items", ["upc"], :name => "index_return_inventory_items_on_upc"
 
   create_table "return_request_items", :force => true do |t|
     t.integer  "order_return_request_id"
@@ -1172,14 +1341,26 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   create_table "spree_line_items", :force => true do |t|
     t.integer  "variant_id"
     t.integer  "order_id"
-    t.integer  "quantity",                                 :null => false
-    t.decimal  "price",      :precision => 8, :scale => 2, :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "quantity",                                               :null => false
+    t.decimal  "price",                    :precision => 8, :scale => 2, :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "currency"
-    t.decimal  "old_price",  :precision => 8, :scale => 2
+    t.decimal  "old_price",                :precision => 8, :scale => 2
+    t.string   "delivery_date"
+    t.jsonb    "customizations"
+    t.boolean  "stock"
+    t.string   "color"
+    t.string   "size"
+    t.string   "length"
+    t.string   "upc"
+    t.integer  "fabric_id"
+    t.integer  "return_inventory_item_id"
+    t.string   "refulfill_status"
+    t.text     "curation_name"
   end
 
+  add_index "spree_line_items", ["fabric_id"], :name => "index_line_item_on_fabric_id"
   add_index "spree_line_items", ["order_id"], :name => "index_spree_line_items_on_order_id"
   add_index "spree_line_items", ["variant_id"], :name => "index_spree_line_items_on_variant_id"
 
@@ -1246,6 +1427,7 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   end
 
   add_index "spree_option_values", ["option_type_id"], :name => "index_spree_option_values_on_option_type_id"
+  add_index "spree_option_values", ["presentation"], :name => "index_spree_option_values_on_presentation"
 
   create_table "spree_option_values_groups", :force => true do |t|
     t.integer  "option_type_id"
@@ -1292,6 +1474,10 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.text     "customer_notes"
     t.datetime "projected_delivery_date"
     t.text     "site_version"
+    t.boolean  "orderbot_synced"
+    t.string   "return_type"
+    t.string   "vwo_type"
+    t.boolean  "autorefundable"
   end
 
   add_index "spree_orders", ["completed_at"], :name => "index_spree_orders_on_completed_at"
@@ -1419,6 +1605,9 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
     t.integer  "fabric_card_id"
+    t.integer  "category_id"
+    t.jsonb    "customizations"
+    t.jsonb    "lengths"
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -1636,7 +1825,7 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                                             :null => false
+    t.string   "name",                                                  :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -1646,14 +1835,14 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
-    t.string   "delivery_period",   :default => "7 business days"
+    t.string   "delivery_period",   :default => "7 - 10 business days"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
@@ -1732,7 +1921,7 @@ ActiveRecord::Schema.define(:version => 20170609001931) do
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
     t.string   "wedding_atelier_signup_step",                             :default => "size"
-    t.text     "user_data",                                               :default => "{}"
+    t.text     "user_data",                                               :default => "{}",   :null => false
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true

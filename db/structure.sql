@@ -3593,7 +3593,8 @@ CREATE TABLE public.spree_line_items (
     upc character varying(255),
     fabric_id integer,
     return_inventory_item_id integer,
-    refulfill_status character varying(255)
+    refulfill_status character varying(255),
+    curation_name text
 );
 
 
@@ -10238,3 +10239,5 @@ INSERT INTO schema_migrations (version) VALUES ('20180717203709');
 INSERT INTO schema_migrations (version) VALUES ('20180803233733');
 
 INSERT INTO schema_migrations (version) VALUES ('20180815070122');
+
+INSERT INTO schema_migrations (version) VALUES ('20180904045723');

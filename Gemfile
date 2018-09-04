@@ -25,6 +25,7 @@ gem 'elasticsearch-dsl'
 gem 'elasticsearch-ruby'
 gem 'elasticsearch-persistence'
 gem 'net-ssh'
+gem 'activerecord-postgres-json'
 # gem 'elasticsearch-model'
 # gem 'elasticsearch-rails'
 

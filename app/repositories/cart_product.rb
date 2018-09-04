@@ -26,7 +26,7 @@ class Repositories::CartProduct
         height: height,
         height_value: line_item.personalization&.height_value,
         height_unit: line_item.personalization&.height_unit,
-        name: product.name,
+        name: line_item.style_name,
         sku: product.sku,
         permalink: product.permalink,
         description: line_item_description,
