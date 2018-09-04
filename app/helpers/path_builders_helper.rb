@@ -74,7 +74,7 @@ module PathBuildersHelper
       fabric = product.fabric.try(:[], :fabric_name)
       cust = product.customizations || [];
 
-      path_parts << "custom-#{product_type}-#{product.sku.upcase}~#{Spree::Product.format_new_pid(fabric, cust)}"
+      path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.sku, fabric, cust)}"
     else
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end

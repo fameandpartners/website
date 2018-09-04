@@ -180,7 +180,9 @@ module Orders
             line.return_details,
             line.price,
             corrected_currency(line),
-            resolve_refulfill_upc(li, line)
+            resolve_refulfill_upc(li, line),
+            line.image,
+            line.production_sheet_url
           ]
         end
       end
@@ -231,7 +233,9 @@ module Orders
         :return_details,
         :price,
         :currency,
-        :upc
+        :upc,
+        :image,
+        :prouction_sheet
       ]
     end
 

@@ -55,8 +55,7 @@ module Orders
       end
 
       def price
-        li = Spree::LineItem.find(line['line_item_id'].to_i)
-        if !li&.stock.nil?
+        if !item&.stock.nil?
           return line['price'].to_f + line['making_options_price'].to_f
         else
           return line['price'].to_f + line['personalization_price'].to_f + line['making_options_price'].to_f
@@ -111,6 +110,10 @@ module Orders
       end
 
       def image
+        if Spree::Product.is_new_product?(style)
+          return Spree::Product.format_render_url(style, item.fabric&.name || item.color, JSON.parse(item.customizations))
+        end
+
         image = line['variant_image']
 
         # Customised dresses use the master variant, find the closest
@@ -127,7 +130,7 @@ module Orders
       end
 
       def product_number
-        Spree::LineItem.find_by_id(line['line_item_id'].to_i)&.upc || global_sku&.id
+        item&.upc || global_sku&.id
       end
 
       def sku
@@ -136,6 +139,18 @@ module Orders
 
       def ignore_line?
         PRODUCTS_TO_IGNORE.include?(style.downcase)
+      end
+
+      def production_sheet_url
+        if Spree::Product.is_new_product?(style)
+          pid = Spree::Product.format_new_pid(
+            style,
+            item.fabric&.name || item.color,
+            JSON.parse(item.customizations)
+          )
+
+          "#{configatron.product_catalog_url}/admin/productionsheet/#{pid}"
+        end
       end
 
       private
@@ -168,7 +183,7 @@ module Orders
           customization['customisation_value']['presentation']
         end
       end
-      
+
     end
   end
 end

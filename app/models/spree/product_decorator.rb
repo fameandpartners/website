@@ -441,13 +441,21 @@ Spree::Product.class_eval do
     product_id.downcase.starts_with?("fg10") || product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
   end
 
-  def self.format_new_pid(fabric, customizations)
+  def self.format_new_pid(sku, fabric, customizations)
+    "#{sku.upcase}~#{self.format_new_pid_components(fabric, customizations)}"
+  end
+
+  def self.format_new_pid_components(fabric, customizations)
     should_split = fabric && /^\d+-\d+$/ =~ fabric
 
     components = [
       should_split ? fabric.split('-') : fabric,
       customizations.map{|c| c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
+  end
+
+  def self.format_render_url(sku, fabric, customizations)
+    "#{configatron.product_render_url}/#{sku.upcase}/FrontNone/704x704/#{Spree::Product.format_new_pid_components(fabric, customizations)}.png"
   end
 
   private

@@ -110,7 +110,7 @@ class ProductImages
       fabric = options[:fabric]&.name
       cust = options[:product_customizations] || []
 
-      image_url = "#{configatron.product_render_url}/#{sku}/FrontNone/704x704/#{Spree::Product.format_new_pid(fabric, cust)}.png"
+      image_url = Spree::Product.format_render_url(sku, fabric, cust)
       default_image(image_url)
     end
 
