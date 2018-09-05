@@ -41,6 +41,12 @@
         = label_tag nil, t(:sku)
         = f.text_field :line_items_variant_sku_cont, placeholder: 'SKU'
 
+    .four.columns.alpha
+      .field
+        = label_tag nil, 'Adjustment Name (such as Discount Name)'
+        = f.text_field :adjustments_label_cont, :size => 25
+    .clearfix
+
     .sixteen.columns
       /! Bash in a spacer row, sigh
 

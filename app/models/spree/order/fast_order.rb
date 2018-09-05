@@ -75,6 +75,7 @@ module Spree
             LEFT OUTER JOIN "fabrications" f ON f."line_item_id" = li."id"
             LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
             LEFT OUTER JOIN "fabrics" fabric ON fabric."id" = li."fabric_id"
+            LEFT OUTER JOIN "spree_adjustments" spree_adjustments ON (spree_adjustments.adjustable_id = o.id AND spree_adjustments.adjustable_type = 'Spree::Order')
             #{from}
 
             WHERE #{where}

@@ -22,12 +22,11 @@ module Marketing
         end
 
         def sku
-          cust = Spree::Product.format_new_pid(
+          Spree::Product.format_new_pid(
+            product_sku,
             line_item.fabric&.name || line_item.color,
             JSON.parse(line_item.customizations)
           )
-
-          "#{product_sku}~#{cust}"
         end
 
         def price
@@ -39,7 +38,7 @@ module Marketing
         end
 
         def product_name
-          product.name
+          line_item.style_name
         end
 
         def product_description

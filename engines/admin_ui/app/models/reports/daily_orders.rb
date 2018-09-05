@@ -88,7 +88,8 @@ module Reports
             line.state,
             line.zipcode,
             line.country,
-            line.image
+            line.image,
+            line.production_sheet_url
           ]
         end
       end
@@ -133,7 +134,8 @@ module Reports
         :state,
         :zipcode,
         :country,
-        :image
+        :image,
+        :production_sheet_url
       ]
     end
 

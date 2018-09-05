@@ -191,7 +191,7 @@ Spree::LineItem.class_eval do
   end
 
   def style_name
-    variant.try(:product).try(:name) || 'Missing Variant'
+    curation_name || variant.try(:product).try(:name) || 'Missing Variant'
   end
 
   def fabric_swatch?

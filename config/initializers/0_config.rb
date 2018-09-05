@@ -98,6 +98,8 @@ configatron.fame_webclient_always_regex = /^(\/static|\/dresses-new|\/_webclient
 configatron.fame_webclient_pdp_regex = /^(\/dresses\/(custom-dress|dress-.*-[0-9]*))/
 configatron.fame_webclient_content_regex = /^(\/size-guide|\/about|\/$)/
 configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
+configatron.product_catalog_url = ENV['PRODUCT_CATALOG_URL']
+
 
 
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']

@@ -227,6 +227,9 @@ GEM
       tzinfo (~> 0.3.29)
     activerecord-immutable (0.0.3)
       activerecord (>= 3.2)
+    activerecord-postgres-json (0.2.1)
+      activerecord (>= 3.2, < 4)
+      multi_json
     activeresource (3.2.22.5)
       activemodel (= 3.2.22.5)
       activesupport (= 3.2.22.5)
@@ -935,6 +938,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   active_model_serializers
+  activerecord-postgres-json
   addressable
   admin_ui!
   afterpay!
