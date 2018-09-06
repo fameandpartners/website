@@ -647,6 +647,7 @@ FameAndPartners::Application.routes.draw do
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
+        post 'user/signup' => 'user_sessions#signup'
         delete 'user/logout' => 'user_sessions#destroy'
       end
 

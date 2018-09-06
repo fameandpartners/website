@@ -7,7 +7,7 @@ module Api
       # include Spree::Core::ControllerHelpers::Common
       # include Spree::Core::ControllerHelpers::Order
 
-      ssl_required :new, :create, :destroy
+      ssl_required :new, :create, :destroy, :signup
 
       respond_to :json
       skip_before_filter :verify_authenticity_token
@@ -28,6 +28,31 @@ module Api
         invalid_login_attempt
       end
 
+      def signup
+        ensure_user_params_exist
+        @user = Spree::User.find_by_email(params[:spree_user][:email])
+
+        if @user.present?
+          binding.pry
+          render "spree/api/users/user_exists", :status => 401 and return
+        end
+
+        
+        print('Creating user...')
+
+        @user = Spree::User.new(params[:spree_user])
+        if !@user.save
+          binding.pry
+          unauthorized
+          return
+        end
+
+        @user.generate_spree_api_key!
+        sign_in("spree_user", @user)
+        respond_with @user
+
+      end
+
       def destroy
         session.clear
         render :json => {:success=>true}, status: 200
@@ -45,8 +70,18 @@ module Api
         render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
       end
 
+      def ensure_user_params_exist
+        return unless 
+          params[:spree_user].blank? or 
+          params[:spree_user][:email].blank? or 
+          params[:spree_user][:password].blank? or 
+          params[:spree_user][:password_confirmation].blank? or
+          params[:spree_user][:first_name].blank? or
+          params[:spree_user][:last_name].blank?
+
+        render :json=>{:success=>false, :message=>"missing parameters"}, :status=>422
+      end
+
     end
-
-
   end
 end
