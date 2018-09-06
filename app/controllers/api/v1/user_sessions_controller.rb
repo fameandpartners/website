@@ -21,6 +21,7 @@ module Api
 
         if resource.valid_password?(params["spree_user"]["password"])
           sign_in("spree_user", resource)
+          resource[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
           respond_with resource
           return
         end
@@ -49,6 +50,7 @@ module Api
 
         @user.generate_spree_api_key!
         sign_in("spree_user", @user)
+        @user[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
         respond_with @user
 
       end
