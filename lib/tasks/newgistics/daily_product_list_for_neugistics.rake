@@ -16,9 +16,9 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    line_items = Spree::LineItem.where('updated_at >= ?', scheduler.last_successful_run)
+    line_items = Spree::LineItem.where('updated_at >= ?',  30.days.ago.utc.to_datetime.to_s)
                                 .reject{|x| x.product.name.downcase == 'return_insurance'}
-                                .select { |li| li.order.state == 'complete' && li.order.completed_at >=  scheduler.last_successful_run} # get line Items for completed orders since last run
+                                .select { |li| li.order.state == 'complete' && li.order.completed_at >=  30.days.ago.utc.to_datetime.to_s} # get line Items for completed orders since last run
     unique_items = line_items&.uniq { |li| CustomItemSku.new(li).call } # only care about unique skus
 
     generate_csv_products(unique_items)
@@ -36,13 +36,21 @@ namespace :newgistics do
       line_items.each do |li|
         product = li.product
         lip = Orders::LineItemPresenter.new(li)
-        csv << [CustomItemSku.new(li).call, product.name, '', '', '',
+        sku = CustomItemSku.new(li).call
+
+        # https://app.asana.com/0/791202471134961/802917601473069
+        # Newgistics can't handle sku's over 60 chars in length
+        next if sku.size > 59
+
+        csv << [sku, product.name, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
                 GlobalSku.find_or_create_by_line_item(line_item_presenter: lip).upc, product.category&.category, product.factory.name, '',
                 CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
 
+    puts "DB8"
+    puts temp_file.read
     if Rails.env.production?
       # TODO REMOVE ME
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
