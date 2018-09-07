@@ -29,28 +29,28 @@ module Api
         invalid_login_attempt
       end
 
+      # TODO: Move to Registrations controller or use the one already there
+      # Extend user_registrations#create to respond to json?
       def signup
         ensure_user_params_exist
         @user = Spree::User.find_by_email(params[:spree_user][:email])
 
         if @user.present?
           binding.pry
-          render "spree/api/users/user_exists", :status => 401 and return
+          render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
         end
-
-        
-        print('Creating user...')
 
         @user = Spree::User.new(params[:spree_user])
         if !@user.save
-          binding.pry
           unauthorized
           return
         end
 
+        binding.pry
         @user.generate_spree_api_key!
         sign_in("spree_user", @user)
         @user[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
+        # TODO: Respond only with the required fields not everything
         respond_with @user
 
       end
