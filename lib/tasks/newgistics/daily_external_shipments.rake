@@ -147,5 +147,16 @@ namespace :newgistics do
         sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
       end
     end
+
+    # TODO remove me
+    if ENV['FILEOUTPUT']
+      #FileUtils.remove_dir("/tmp/newgistics") rescue nil
+      FileUtils.mkdir_p '/tmp/newgistics/input/External Shipments'
+      temp_file.rewind
+      File.open("/tmp/newgistics/input/External Shipments/#{(Time.zone.parse(ENV['TARGETDATE'])+1.day).strftime("%Y-%m-%d")}.csv", 'w') { |file|
+        file.write(temp_file.read)
+      }
+    end
+
   end
 end
