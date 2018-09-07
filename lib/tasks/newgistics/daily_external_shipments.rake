@@ -99,6 +99,11 @@ namespace :newgistics do
     return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
     return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
 
+    # TODO remove me
+    if ENV['TARGETDATE']
+      return_request_items = ReturnRequestItem.where('created_at >= ? AND created_at < ?', Time.zone.parse(ENV['TARGETDATE']).utc.to_datetime.to_s, Time.zone.parse("#{ENV['TARGETDATE']} 17:05:00").utc.to_datetime.to_s)
+      $stderr.puts return_request_items.size
+    end
 
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
