@@ -118,7 +118,7 @@ namespace :newgistics do
 
         if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
         csv << [order.number, address.firstname, address.lastname, address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
+                address.address2, address.city, address.state&.name, address.zipcode, address.country.iso,
                 (return_request.item_return.item_return_label.barcode.to_s rescue ""),
                 CustomItemSku.new(li).call, '1']
         end
