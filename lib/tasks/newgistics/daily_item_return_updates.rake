@@ -18,7 +18,7 @@ namespace :newgistics do
                               to: "samw@fameandpartners.com",
                               cc: "catherinef@fameandpartners.com",
                               subject: "rake newgistics:update_item_returns",
-                              body: res.inspect).deliver
+                              body: res.to_yaml).deliver
     end
 
     if res['response'].nil?
