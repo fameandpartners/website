@@ -30,6 +30,7 @@ namespace :newgistics do
     else
       res['response']['Returns']['Return'].each do |item_return|
         order = Spree::Order.find_by_number(item_return['orderID'])
+        next unless order
         if item_return['Items']['Item'].kind_of?(Array)
           item_return['Items']['Item'].each do |item|
             puts "HELLOOO I AM HEEEEEERRREEE"
