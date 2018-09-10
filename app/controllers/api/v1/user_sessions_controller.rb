@@ -30,7 +30,11 @@ module Api
       end
 
       def signup
-        ensure_user_params_exist
+        if !ensure_user_params_exist
+          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
+          return
+        end
+
         @user = Spree::User.find_by_email(params[:spree_user][:email])
 
         if @user.present?
@@ -71,15 +75,12 @@ module Api
       end
 
       def ensure_user_params_exist
-        return unless 
-          params[:spree_user].blank? or 
-          params[:spree_user][:email].blank? or 
-          params[:spree_user][:password].blank? or 
-          params[:spree_user][:password_confirmation].blank? or
-          params[:spree_user][:first_name].blank? or
-          params[:spree_user][:last_name].blank?
-
-        render :json=>{:success=>false, :message=>"missing parameters"}, :status=>422
+          params[:spree_user].present? and 
+          params[:spree_user][:email].present? and 
+          params[:spree_user][:password].present? and 
+          params[:spree_user][:password_confirmation].present? and 
+          params[:spree_user][:first_name].present? and 
+          params[:spree_user][:last_name].present?
       end
 
     end
