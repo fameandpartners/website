@@ -36,7 +36,6 @@ module Api
         @user = Spree::User.find_by_email(params[:spree_user][:email])
 
         if @user.present?
-          binding.pry
           render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
         end
 
@@ -46,7 +45,6 @@ module Api
           return
         end
 
-        binding.pry
         @user.generate_spree_api_key!
         sign_in("spree_user", @user)
         @user[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
