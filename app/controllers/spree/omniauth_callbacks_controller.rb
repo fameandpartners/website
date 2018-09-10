@@ -66,7 +66,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       mark_and_track_promo_redemption(authentication.user.email)
       return_to_mb_page if session[:nonlogin_go_to_mb_page]
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
-
     elsif spree_current_user
       spree_current_user.apply_omniauth(auth_hash)
       spree_current_user.save
@@ -111,6 +110,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     user ||= (spree_current_user || authentication.try(:user))
+    user.generate_spree_api_key!
 
     EmailCapture.new({},
                      email: user.email,

@@ -308,6 +308,10 @@ class ApplicationController < ActionController::Base
     session[:spree_user_return_to] = location
   end
 
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || session[:user_return_to] || root_path
+  end
+
   def set_session_country
     session[:country_code] ||= FindCountryFromIP.new(request.remote_ip).country_code
   end
