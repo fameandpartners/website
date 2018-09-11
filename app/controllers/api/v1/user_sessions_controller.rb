@@ -57,6 +57,23 @@ module Api
 
       end
 
+      def reset_password
+        if !params[:email].present?
+          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
+          return
+        end
+
+        @user = Spree::User.find_by_email(params[:email])
+
+        if @user.present?
+          @user.send_reset_password_instructions
+          render :json=>{:success=>true, :message=>"Email sent"}, :status=>200
+          return
+        end
+
+        render :json=>{:success=>false, :message=>"Email not found"}, :status=>404
+      end
+
       def destroy
         session.clear
         render :json => {:success=>true}, status: 200
