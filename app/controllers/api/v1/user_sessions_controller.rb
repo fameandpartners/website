@@ -16,12 +16,17 @@ module Api
         ensure_params_exist
         # authenticate_spree_user!
 
-        @user = Spree::User.find_for_database_authentication(:login => params["spree_user"]["email"])
+        @user = Spree::User.find_for_database_authentication(:login => params[:spree_user][:email])
         return invalid_login_attempt unless @user
 
-        if @user.valid_password?(params["spree_user"]["password"])
+        if @user.valid_password?(params[:spree_user][:password])
           sign_in("spree_user", @user)
           @user[:is_admin] = @user.admin?
+
+          if params[:spree_user][:remember_me].present? and params[:spree_user][:remember_me]
+            @user.remember_me!
+          end
+
           respond_with @user
           return
         end
@@ -50,6 +55,7 @@ module Api
         end
 
         @user.generate_spree_api_key!
+        
         sign_in("spree_user", @user)
         @user[:is_admin] = @user.admin?
 
