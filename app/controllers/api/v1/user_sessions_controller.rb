@@ -7,7 +7,7 @@ module Api
       # include Spree::Core::ControllerHelpers::Common
       # include Spree::Core::ControllerHelpers::Order
 
-      ssl_required :new, :create, :destroy, :signup, :reset_password
+      ssl_required :new, :create, :destroy, :signup, :reset_password, :send_reset_password_email
 
       respond_to :json
       skip_before_filter :verify_authenticity_token
