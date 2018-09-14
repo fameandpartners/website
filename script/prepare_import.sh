@@ -106,7 +106,7 @@ function prepare
 
   info "Extracting $(blue)${zip_file_path}$(yellow) to $(green)${extract_path}"
   # -LL Converts all filenames to lowercase, needed for cross platform created zip files.
-  unzip -x -LL "${zip_file_path}" -d "${extract_path}" | grep 'creating:'
+  unzip -x -LL "${zip_file_path}" -d "${extract_path}" 2>/dev/null
 
   _clean_from_path '__macosx' "${extract_path}"
   _clean_from_path '*cancelled*' "${extract_path}"
