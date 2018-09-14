@@ -204,7 +204,7 @@ module Products
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
       raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
 
-      info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
+      #info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
       raw
     end
 
@@ -608,7 +608,7 @@ module Products
     end
 
     def add_product_layered_cads( product, cads )
-      info "Processing Cads #{cads}"
+      info "Processing Cads"
       product.layer_cads = []
       cads.each_with_index do |cad, index|
         product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
