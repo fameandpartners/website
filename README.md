@@ -186,22 +186,6 @@ $ rails console
 Utility::Reindexer.reindex
 ```
 
-For dresses list pages (show product with different colours as different)
-
-```ruby
-Products::ColorVariantsIndexer.index!
-```
-
-For search page (show product only once)
-
-```ruby
-Tire.index(configatron.elasticsearch.indices.spree_products) do
-  delete
-  import Spree::Product.all
-end
-Tire.index(configatron.elasticsearch.indices.spree_products).refresh
-```
-
 #### Caches
 
 You can wipe cache by running

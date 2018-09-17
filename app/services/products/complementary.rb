@@ -28,11 +28,7 @@ module Products
       path_parts          = ['dresses']
       locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
-      if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
-        path_parts << "#{product_type}-#{product[:urls][locale]}"
-      else
-        path_parts << "#{product_type}-#{descriptive_url(product)}"
-      end
+      path_parts << "#{product_type}-#{descriptive_url(product)}"
 
       color_name = product.respond_to?(:color) && (product.color || {})[:name]
 

@@ -430,8 +430,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/lp/collection(/:collection)', to: redirect('/dresses')
 
-    post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
-
     get 'my-boutique' => 'boutique#show', :as => :my_boutique
     get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
     get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
@@ -650,6 +648,7 @@ FameAndPartners::Application.routes.draw do
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
+      get '/products/search' => 'products#search'
       get '/products/:id' => 'products#show'
       get '/products' => 'products#index'
 

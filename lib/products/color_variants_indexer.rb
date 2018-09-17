@@ -95,7 +95,8 @@ module Products
                     taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
                     price:              product.price.to_f,
 
-                    is_outerwear:     Spree::Product.outerwear.exists?(product.id),
+                    is_outerwear:       Spree::Product.outerwear.exists?(product.id),
+                    body_shape_ids:     ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4}.map{|bs| ProductStyleProfile::BODY_SHAPES.find_index(bs) },
 
                     # bodyshape sorting
                     apple:              product.style_profile&.apple,
@@ -125,8 +126,8 @@ module Products
                     usd:  product_price_in_us.amount.to_f
                   },
                   sale_prices:  {
-                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
-                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
+                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f : product_price_in_au.amount.to_f,
+                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f : product_price_in_us.amount.to_f
                   }
                 }
               }
@@ -189,6 +190,8 @@ module Products
                     hour_glass:         product.style_profile&.hour_glass,
                     column:             product.style_profile&.column,
                     petite:             product.style_profile&.petite,
+
+                    body_shape_ids:     ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4}.map{|bs| ProductStyleProfile::BODY_SHAPES.find_index(bs) },
                     color:              color_customizable
 
                   },
@@ -214,8 +217,8 @@ module Products
                     usd:  product_price_in_us.amount.to_f
                   },
                   sale_prices:  {
-                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
-                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
+                    aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f : product_price_in_au.amount.to_f,
+                    usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f : product_price_in_us.amount.to_f
                   }
                 }
               }
@@ -234,15 +237,14 @@ module Products
       logger.info('Pushing to ElasticSearch')
       index_name = configatron.elasticsearch.indices.color_variants
       logger.info("INDEX #{index_name}")
-      client = Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200')
-
+      client = Elasticsearch::Client.new(host: configatron.es_url)
       if client.indices.exists?(index: index_name)
         client.indices.delete index: index_name
       end
 
       logger.info('Bulk Upload')
       # Create index w/ defined types for specific fields
-      client.bulk(index: index_name,body: @variants)
+      client.bulk(index: index_name, body: @variants)
     end
 
     def product_scope
