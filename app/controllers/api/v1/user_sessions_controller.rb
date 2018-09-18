@@ -14,14 +14,12 @@ module Api
 
       def create
         ensure_params_exist
-        # authenticate_spree_user!
 
         @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
         return invalid_login_attempt unless @user
 
         if @user.valid_password?(params[:spree_user][:password])
           sign_in("spree_user", @user)
-          @user[:is_admin] = @user.admin?
 
           if params[:spree_user][:remember_me].present? and params[:spree_user][:remember_me]
             @user.remember_me!
@@ -35,21 +33,9 @@ module Api
       end
 
       def signup
-        if !ensure_user_params_exist
-          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
-          return
-        end
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email]) || Spree::User.new(params[:spree_user])
 
-        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
-
-        if @user.present?
-          render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
-          return
-        end
-
-        @user = Spree::User.new(params[:spree_user])
-        
-        if !@user.save
+        if !@user.new_record? or !@user.save
           render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
           return
         end
@@ -57,7 +43,6 @@ module Api
         @user.generate_spree_api_key!
         
         sign_in("spree_user", @user)
-        @user[:is_admin] = @user.admin?
 
         respond_with @user
 
@@ -69,7 +54,7 @@ module Api
           return
         end
 
-        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
+        @user = Spree::User.find_for_authentication(:email => params[:email])
 
         if @user.present?
           @user.send_reset_password_instructions
@@ -87,12 +72,9 @@ module Api
         end
 
         @user = Spree::User.find_for_database_authentication(:reset_password_token => params[:token])
-        # @user = Spree::User.find_for_database_authentication(:login => params[:email])
         if @user.present? and @user.reset_password_period_valid?
-        # if @user.present?
           if @user.reset_password!(params[:password], params[:password])
             sign_in("spree_user", @user)
-            @user[:is_admin] = @user.admin?
             respond_with @user
             return
           end
@@ -116,15 +98,6 @@ module Api
       def invalid_login_attempt
         warden.custom_failure!
         render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
-      end
-
-      def ensure_user_params_exist
-          params[:spree_user].present? and 
-          params[:spree_user][:email].present? and 
-          params[:spree_user][:password].present? and 
-          params[:spree_user][:password_confirmation].present? and 
-          params[:spree_user][:first_name].present? and 
-          params[:spree_user][:last_name].present?
       end
 
     end
