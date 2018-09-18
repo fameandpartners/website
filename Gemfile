@@ -162,6 +162,7 @@ group :test do
   gem 'webmock', '~> 1.21.0'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'rspec-shell-expectations'
+  gem 'pry-byebug'
 end
 
 group :production do
