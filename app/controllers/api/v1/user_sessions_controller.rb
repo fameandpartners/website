@@ -16,7 +16,7 @@ module Api
         ensure_params_exist
         # authenticate_spree_user!
 
-        @user = Spree::User.find_for_database_authentication(:login => params[:spree_user][:email])
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
         return invalid_login_attempt unless @user
 
         if @user.valid_password?(params[:spree_user][:password])
@@ -40,7 +40,7 @@ module Api
           return
         end
 
-        @user = Spree::User.find_by_email(params[:spree_user][:email])
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
 
         if @user.present?
           render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
@@ -69,7 +69,7 @@ module Api
           return
         end
 
-        @user = Spree::User.find_by_email(params[:email])
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
 
         if @user.present?
           @user.send_reset_password_instructions
