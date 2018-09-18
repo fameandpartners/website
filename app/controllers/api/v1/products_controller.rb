@@ -215,6 +215,7 @@ module Api
                 "en-AU": r['_source']['prices']['aud'] * 100,
                 "en-US": r['_source']['prices']['usd'] * 100
               },
+              url: r['_source']['product']['url'],
               images: r['_source']['cropped_images'].map do |src|
                 {
                   src: [{

@@ -3,6 +3,10 @@ module Products
     class Helpers
       include ApplicationHelper
       include PathBuildersHelper
+
+      def url_options
+        {}
+      end
     end
 
     include ColorVariantImageDetector
@@ -85,6 +89,7 @@ module Products
                       en_au: helpers.descriptive_url(product, :"en-AU"),
                       en_us: helpers.descriptive_url(product, :"en-US")
                     },
+                    url: helpers.collection_product_path(product, color: color.name),
 
                     can_be_customized:  product.can_be_customized?,
                     fast_delivery:      product.fast_delivery,
@@ -171,6 +176,7 @@ module Products
                       en_au: helpers.descriptive_url(product, :"en-AU"),
                       en_us: helpers.descriptive_url(product, :"en-US")
                     },
+                    url: helpers.collection_product_path(product, color: fabric.name),
 
                     can_be_customized:  product.can_be_customized?,
                     fast_delivery:      product.fast_delivery,
