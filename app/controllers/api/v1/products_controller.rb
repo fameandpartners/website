@@ -11,9 +11,9 @@ module Api
   module V1
     class ProductsController < ApplicationController
       respond_to :json
-      caches_action :show, expires_in: configatron.cache.expire.long
-      caches_action :index, expires_in: configatron.cache.expire.long
-      caches_action :search, expires_in: configatron.cache.expire.long
+      caches_action :show, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
+      caches_action :index, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
+      caches_action :search, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
 
       def index
         pids = params[:pids] || []
