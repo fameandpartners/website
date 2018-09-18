@@ -35,7 +35,8 @@ module Features
     batching:                      "Batch line items into styles for production.",
     new_pdp:                       "Enables new PDP page that was introduced by the bridesmaids project",
     new_content:                   "Enables new content pages that were introduced by the bridesmaids project",
-    new_navigation:                "Enables new navigation that was introduced by the bridesmaids project"
+    new_navigation:                "Enables new navigation that was introduced by the bridesmaids project",
+    new_account:                   "Enables new account pages for login, signup and forgot password."
   }
 
   class << self
