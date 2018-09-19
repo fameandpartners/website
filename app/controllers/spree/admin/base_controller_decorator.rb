@@ -15,8 +15,4 @@ Spree::Admin::BaseController.class_eval do
     Features.active?(:new_account)  ? '/account/login' : spree.login_path
   end
 
-  def spree_logout_path
-    Features.active?(:new_account) ? '/account/logout' : spree.logout_path
-  end
-
 end
