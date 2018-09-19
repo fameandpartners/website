@@ -83,11 +83,11 @@ Spree::LineItem.class_eval do
     total_adjustment = 0
 
     making_options.each do |mo|
-      if (mo.product_making_option.fast_making? || mo.product_making_option.super_fast_making? ) and mo.price
+      if (mo.product_making_option&.fast_making? || mo.product_making_option&.super_fast_making? ) and mo.price
         total_adjustment += mo.price
       end
       # slow_making price will be percentage based
-      if mo.product_making_option.slow_making?
+      if mo.product_making_option&.slow_making?
         total_adjustment = total_adjustment + self.attributes["price"]*mo.price
       end
     end
@@ -147,7 +147,7 @@ Spree::LineItem.class_eval do
 
   def making_options_text
     return '' if making_options.blank?
-    making_options.map{|option| option.name.upcase }.join(', ')
+    making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
   end
 
   def cart_item
