@@ -118,7 +118,7 @@ class ReturnReasonsContainer extends React.Component {
         reason: r.openEndedReturnReason,
       })),
     };
-    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail });
+    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail, lineItems: returnArray });
   }
 
   calculateCashCredit() {

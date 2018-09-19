@@ -13,7 +13,7 @@ class Products::CollectionFilter
         Repositories::Taxonomy.read_events,
         ProductStyleProfile::BODY_SHAPES.sort,
         Repositories::ProductColors.read_all,
-        Products::ProductsFilter.available_sort_orders
+        Search::ProductOrdering.product_orderings
       )
     end
   end

@@ -187,7 +187,7 @@ class Products::CollectionResource
   end
 
   def results
-    @results ||= Elasticsearch::Client.new(host: configatron.es_url || 'localhost:9200').search(
+    @results ||= Elasticsearch::Client.new(host: configatron.es_url).search(
         index: configatron.elasticsearch.indices.color_variants,
         body: query,
         size: @size || 10,

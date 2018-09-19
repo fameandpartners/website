@@ -68,9 +68,7 @@ module PathBuildersHelper
 
     is_new_product =  Spree::Product.use_new_pdp?(product)
 
-    if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
-      path_parts << "#{product_type}-#{product[:urls][locale]}"
-    elsif product.is_a?(UserCart::CartProductPresenter) && is_new_product
+    if product.is_a?(UserCart::CartProductPresenter) && is_new_product
       fabric = product.fabric.try(:[], :fabric_name)
       cust = product.customizations || [];
 

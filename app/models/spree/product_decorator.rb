@@ -292,7 +292,6 @@ Spree::Product.class_eval do
   def delete
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)
-    update_index
   end
 
   def set_default_prototype

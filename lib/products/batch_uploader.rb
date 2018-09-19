@@ -725,7 +725,6 @@ module Products
                 variant.send :write_attribute, :on_demand, true
                 Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
                 Spree::Variant.skip_callback( :save, :after, :process_backorders )
-                Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
                 
                 begin
                   variant.save( :validate => false )

@@ -12,12 +12,6 @@ Spree::Variant.class_eval do
   before_validation :set_default_sku
 
   before_save :push_prices_to_variants
-
-  after_save :update_index_on_save 
-
-  def update_index_on_save
-    product.update_index    
-  end
   
   def discount
     self.product.try(:discount)
@@ -132,6 +126,8 @@ Spree::Variant.class_eval do
   # Used as a callback, so must return a truthy value to avoid breaking the save
   def push_prices_to_variants
     return :not_master unless is_master
+    return :price_not_changed unless prices.any?(&:changed?)
+
     master_price_data = extract_price_data
 
     product.variants.each do |v|

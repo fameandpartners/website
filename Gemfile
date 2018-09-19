@@ -17,17 +17,14 @@ gem 'rack-cors'
 gem 'business_time'
 gem 'rmagick'
 gem 'default_value_for'
-gem 'tire'
 gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
-gem 'elasticsearch-ruby'
-gem 'elasticsearch-persistence'
+gem 'elasticsearch'
 gem 'net-ssh'
 gem 'activerecord-postgres-json'
-# gem 'elasticsearch-model'
-# gem 'elasticsearch-rails'
+gem 'rake', '< 12.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -165,6 +162,7 @@ group :test do
   gem 'webmock', '~> 1.21.0'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'rspec-shell-expectations'
+  gem 'pry-byebug'
 end
 
 group :production do

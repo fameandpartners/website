@@ -35,10 +35,6 @@ class ProductStyleProfile < ActiveRecord::Base
   belongs_to :product,
              :class_name => 'Spree::Product'
 
-  after_update do
-    product.try(:update_index)
-  end
-
   def suitable_shapes
     ProductStyleProfile::BODY_SHAPES.select do |shape|
       attributes[shape].to_i > 0

@@ -169,16 +169,7 @@ module ApplicationHelper
   def personalised_store_available?
     spree_user_signed_in? && current_spree_user.style_profile.try(:active?)
   end
-
-  def get_products_from_edit(edit, currency, user, count=9)
-    searcher = Products::ProductsFilter.new(:edits => edit, per_page: count)
-    searcher.current_user = user
-    searcher.current_currency = currency
-
-    # This is faster than doing all the N+1 query stuff that happens in the views.
-    Spree::Product.hydrated_from_ids(searcher.products.collect(&:id))
-  end
-
+  
   def current_sale
     @current_sale ||= Spree::Sale.last_sitewide_for(currency: current_site_version.currency)
   end

@@ -243,7 +243,9 @@ Spree::LineItem.class_eval do
         "height": self.height_name,
         "height_unit": self.height_unit,
         "height_value": self.height_value,
-        "image": self.image_url
+        "image": self.image_url,
+        "sku": "",
+        "productSku": "",
       }
     end
     if self.item_return.present?
