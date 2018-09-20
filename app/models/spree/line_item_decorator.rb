@@ -244,8 +244,8 @@ Spree::LineItem.class_eval do
         "height_unit": self.height_unit,
         "height_value": self.height_value,
         "image": self.image_url,
-        "sku": "",
-        "productSku": "",
+        "sku": self.new_sku,
+        "productSku": self.product_sku,
       }
     end
     if self.item_return.present?
@@ -259,6 +259,18 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def new_sku
+    Spree::Product.format_new_pid(
+      self.product_sku,
+      self.fabric&.name || self.personalization&.color&.name|| self.color,
+      JSON.parse(self.customizations)
+    )
+  end
+
+  def product_sku
+    self.variant.product.sku
   end
 
   def recommended_fabric?

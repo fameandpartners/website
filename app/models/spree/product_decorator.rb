@@ -441,7 +441,12 @@ Spree::Product.class_eval do
   end
 
   def self.format_new_pid(sku, fabric, customizations)
-    "#{sku.upcase}~#{self.format_new_pid_components(fabric, customizations)}"
+    pid_components = self.format_new_pid_components(fabric, customizations);
+    product_sku = sku.upcase
+
+    return product_sku if pid_components.blank?
+    
+    "#{product_sku}~#{pid_components}"
   end
 
   def self.format_new_pid_components(fabric, customizations)

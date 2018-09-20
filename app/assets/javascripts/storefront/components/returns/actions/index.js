@@ -159,8 +159,8 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail, lineItems }
         label: returnsObj.line_items.map(li => li.returnReason).join(', '),
         orderNumber: order.number,
         products: lineItems.map(lineItem => ({
-          id: lineItem.productMeta.productSku,
-          sku: lineItem.productMeta.sku,
+          id: lineItem.products_meta.productSku,
+          sku: lineItem.products_meta.sku,
           quantity: lineItem.quantity,
           price: lineItem.price,
         })),
