@@ -39,8 +39,8 @@ every(3.hours)    { rake 'bergen:workers:receive_asns' }
 
 every(30.minutes) { rake 'next:workers:asn_file_upload' }
 
-# Order bot Scheduled tasks
-every(6.hours) { rake 'reports:order_bot_failure_check' }
+## Order bot Scheduled tasks
+#every(6.hours) { rake 'reports:order_bot_failure_check' }
 
 # Refulfillment and batching
 every(15.minutes) { rake 'data:refulfill_items' }
