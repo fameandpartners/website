@@ -41,7 +41,23 @@ FameAndPartners::Application.routes.draw do
     ##############################
     # Devise & User authentication
     ##############################
-    devise_for :spree_user,
+    if Features.active?(:new_account)
+        devise_for :spree_user,
+                    class_name:  'Spree::User',
+                    controllers: { sessions:           'spree/user_sessions',
+                                  registrations:      'spree/user_registrations',
+                                  passwords:          'spree/user_passwords',
+                                  confirmations:      'spree/user_confirmations',
+                                  omniauth_callbacks: 'spree/omniauth_callbacks'
+                    },
+                    skip:        [:unlocks, :omniauth_callbacks],
+                    path_names:  { sign_out: 'logout', sign_in: 'login' }
+
+        devise_scope :spree_user do
+          get '/spree_user/sign_in', to: redirect('/account/login'), :as => :login
+        end
+      else
+        devise_for :spree_user,
                class_name:  'Spree::User',
                controllers: { sessions:           'spree/user_sessions',
                               registrations:      'spree/user_registrations',
@@ -51,6 +67,8 @@ FameAndPartners::Application.routes.draw do
                },
                skip:        [:unlocks, :omniauth_callbacks],
                path_names:  { sign_out: 'logout' }
+    end
+    
 
     devise_scope :spree_user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
