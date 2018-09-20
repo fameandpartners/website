@@ -7,25 +7,80 @@ module Api
       # include Spree::Core::ControllerHelpers::Common
       # include Spree::Core::ControllerHelpers::Order
 
-      ssl_required :new, :create, :destroy
+      ssl_required :new, :create, :destroy, :signup, :reset_password, :send_reset_password_email
 
       respond_to :json
       skip_before_filter :verify_authenticity_token
 
       def create
         ensure_params_exist
-        # authenticate_spree_user!
 
-        resource = Spree::User.find_for_database_authentication(:login => params["spree_user"]["email"])
-        return invalid_login_attempt unless resource
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
+        return invalid_login_attempt unless @user
 
-        if resource.valid_password?(params["spree_user"]["password"])
-          sign_in("spree_user", resource)
-          respond_with resource
+        if @user.valid_password?(params[:spree_user][:password])
+          sign_in("spree_user", @user)
+
+          if params[:spree_user][:remember_me].present? and params[:spree_user][:remember_me]
+            @user.remember_me!
+          end
+
+          respond_with @user
           return
         end
 
         invalid_login_attempt
+      end
+
+      def signup
+        @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email]) || Spree::User.new(params[:spree_user])
+
+        if !@user.new_record? or !@user.save
+          render :json=>{:success=>false, :message=>"User already exists"}, :status=>401
+          return
+        end
+
+        @user.generate_spree_api_key!
+        
+        sign_in("spree_user", @user)
+
+        respond_with @user
+
+      end
+
+      def send_reset_password_email
+        if !params[:email].present?
+          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
+          return
+        end
+
+        @user = Spree::User.find_for_authentication(:email => params[:email])
+
+        if @user.present?
+          @user.send_reset_password_instructions
+          render :json=>{:success=>true, :message=>"Email sent"}, :status=>200
+          return
+        end
+
+        render :json=>{:success=>false, :message=>"Email not found"}, :status=>404
+      end
+
+      def reset_password
+        if !params[:token].present? or !params[:password].present? or params[:password].blank?
+          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
+          return
+        end
+
+        @user = Spree::User.find_for_database_authentication(:reset_password_token => params[:token])
+        if @user.present? and @user.reset_password_period_valid?
+          if @user.reset_password!(params[:password], params[:password])
+            sign_in("spree_user", @user)
+            respond_with @user
+            return
+          end
+        end
+
+        render :json=>{:success=>false, :message=>"Invalid arguments"}, :status=>401
       end
 
       def destroy
@@ -46,7 +101,5 @@ module Api
       end
 
     end
-
-
   end
 end

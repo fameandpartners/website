@@ -22,11 +22,13 @@ class Spree::UserMailer < ActionMailer::Base
   end
 
   def reset_password_instructions(user)
-    @resource = user
-    @user = user
-
-    mail(:to => user.email,
-         :subject => Spree::Config[:site_name] + ' ' + I18n.t(:password_reset_instructions))
+    @edit_password_reset_url = "#{configatron.fame_webclient_url}/account/forgot-password/token/#{user.reset_password_token}"
+    
+    Marketing::CustomerIOEventTracker.new.track(
+      user,
+      'account_password_reset',
+      password_reset_link: @edit_password_reset_url
+    )
   end
 
   def confirmation_instructions(user, opts={})

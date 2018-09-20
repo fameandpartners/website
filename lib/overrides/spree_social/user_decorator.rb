@@ -7,7 +7,7 @@ Spree::User.class_eval do
       raise 'No authentication token' unless token
 
       graph = Koala::Facebook::API.new(token)
-      facebook_user = graph.get_object 'me'
+      facebook_user = graph.get_object('me?fields=email,first_name,last_name')
 
       self.email      = facebook_user['email'] if email.blank?
       self.first_name = facebook_user['first_name'] if first_name.blank?
