@@ -40,6 +40,19 @@ module Api
           return
         end
 
+        @user.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
+        @user.sign_up_reason = params[:spree_user][:sign_up_reason]
+
+        EmailCapture.new({},
+          email: @user.email,
+          first_name: @user.first_name,
+          last_name: @user.last_name,
+          current_sign_in_ip: request.remote_ip,
+          landing_page: session[:landing_page],
+          utm_params: session[:utm_params],
+          site_version: current_site_version.name,
+          form_name: 'create_account').capture
+
         @user.generate_spree_api_key!
         
         sign_in("spree_user", @user)
