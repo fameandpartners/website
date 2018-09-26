@@ -3,6 +3,7 @@ class OrderBotWorker
   include Sidekiq::Worker
 
   def perform(order_id)
+    return if Features.inactive?(:orderbot)
    	order = Spree::Order.find(order_id)
     create_new_order_by_factory(order)
     order.orderbot_synced = true
