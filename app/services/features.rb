@@ -37,7 +37,8 @@ module Features
     new_category_page:             "Enables new category and search page",
     new_content:                   "Enables new content pages that were introduced by the bridesmaids project",
     new_navigation:                "Enables new navigation that was introduced by the bridesmaids project",
-    new_account:                   "Enables new account pages for login, signup and forgot password."
+    new_account:                   "Enables new account pages for login, signup and forgot password.",
+    orderbot:                      "Enables Integration with OrderBot"
   }
 
   class << self
