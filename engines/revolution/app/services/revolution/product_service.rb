@@ -78,6 +78,7 @@ module Revolution
 
     def collection_images_by_fabric(product, fabric)
       fabric_product = product.fabric_products.detect {|x| x.fabric_id == fabric.id}
+      return [] if fabric_product == nil
       images = product.images.find_all { |i| i.viewable_id == fabric_product.id && i.attachment_file_name.downcase.include?('crop') }
 
       images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
