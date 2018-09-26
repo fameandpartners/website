@@ -46,7 +46,7 @@ module Afterpay
 
       if current_order.complete?
         GuestCheckoutAssociation.call(spree_order: current_order)
-        #OrderBotWorker.perform_async(current_order.id)
+        OrderBotWorker.perform_async(current_order.id)
         flash.notice              = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
         session[:order_id]        = nil
