@@ -93,7 +93,7 @@ module Api
 
       def search
         color_mapping = {
-          "print": '',
+          "print": "",
           "white-ivory": '#f5f4f3',
           "nude-tan": '#E6D4C0',
           "pastel": '#CBF6EB',
@@ -107,6 +107,9 @@ module Api
           "purple": '#48217f',
           "blue": '#0000ff',
           "black": '#050505',
+        }
+        image_mapping = {
+          "print": 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images/BlackAndWhiteGingham.jpg',
         }
 
         filter = Array.wrap(params[:facets])
@@ -258,7 +261,8 @@ module Api
                   "order": color_mapping.keys.find_index(group[:name].to_sym),
                   "docCount": group[:color_ids].map {|i| aggregation_colors[i] || 0}.sum,
                   "facetMeta": {
-                    "hex": color_mapping[group[:name].to_sym]
+                    "hex": color_mapping[group[:name].to_sym],
+                    "image": image_mapping[group[:name].to_sym]
                   }
                 }
               end.sort_by{ |f| f[:order] }.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
