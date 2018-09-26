@@ -117,7 +117,10 @@ module Api
 
         body_shapes = ProductStyleProfile::BODY_SHAPES & filter
 
+        # there is am overlap between color group names & taxons, so we make color groups win
+        color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
         taxon_ids = Repositories::Taxonomy.taxons
+          .reject { |t| color_group_names.include?(t.permalink) }
           .select {|t| filter.include?(t.permalink) }
           .map(&:id)
 
@@ -389,7 +392,7 @@ module Api
           .includes(:viewable)
 
         product_viewmodel = {
-          productId: product.sku,
+          productId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
