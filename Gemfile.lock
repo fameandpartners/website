@@ -668,7 +668,7 @@ GEM
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
     rack (1.4.7)
-    rack-cache (1.8.0)
+    rack-cache (1.6.1)
       rack (>= 0.4)
     rack-cors (0.4.0)
     rack-handlers (0.7.3)
