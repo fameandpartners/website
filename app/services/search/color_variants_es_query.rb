@@ -54,7 +54,7 @@ module Search
 
             if taxon_ids.present?
               taxon_terms = taxon_ids.map do |tid|
-                must {term 'product.taxon_ids' => tid}
+                must {terms 'product.taxon_ids' => Array.wrap(tid) }
               end
             end
 

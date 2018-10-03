@@ -122,11 +122,11 @@ module Api
 
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
-        taxon_ids = Repositories::Taxonomy.taxons
-          .reject { |t| color_group_names.include?(t.permalink) }
-          .select {|t| filter.include?(t.permalink) }
-          .map(&:id)
-
+        taxons = Repositories::Taxonomy.taxons
+        taxon_ids = filter
+          .reject { |f| color_group_names.include?(f) }
+          .map {|f| taxons.select { |t| t.permalink.ends_with?(f)}.map(&:id) }
+          .compact
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
