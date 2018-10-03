@@ -329,11 +329,11 @@ module Api
             }
           },
           sortOptions: [
-            {
-              name: "Sorted by most relevant",
-              sortField: "native",
-              sortOrder: ""
-            },
+            # {
+            #   name: "Sorted by most relevant",
+            #   sortField: "native",
+            #   sortOrder: ""
+            # },
             # {
             #   name: "Sorted by best sellers",
             #   sortField: "best_sellers",
@@ -398,7 +398,7 @@ module Api
         product_viewmodel = {
           productId: product.id,
           cartId: product.master.id,
-          returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
+          returnDescription: 'Shipping is free on your customized item. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
 
           curationMeta: {
@@ -444,7 +444,7 @@ module Api
                 type: :return,
                 sortOrder: 1,
                 meta: {
-                  returnDescription: 'All orders ship free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
+                  returnDescription: 'All orders ship free. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>'
                 },
                 incompatibleWith: { allOptions: [] },
               }
