@@ -27,7 +27,6 @@
         dd Size: #{product.size.presentation},
         dd Color: #{product.color[:name]}
         dd #{height_title(product)}: #{display_height(product.height_value, product.height_unit, product.height)}
-        dd Estimated delivery: #{product.delivery_period}
         - if product.customizations.present?
           - product.customizations.each do |customization|
             dd #{ customization.name } #{ customization.display_price if customization.price > 0 }
