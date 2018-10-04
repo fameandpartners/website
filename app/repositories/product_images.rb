@@ -85,7 +85,9 @@ class ProductImages
   #   cropped
   def filter(options = {})
     scope = read_all(options)
-    if options[:color_id]
+    if options[:fabric_id]
+      scope = scope.select{|image| image.fabric_id == options[:fabric_id]}
+    elsif options[:color_id]
       scope = scope.select{|image| image.color_id == options[:color_id]}
     end
     scope

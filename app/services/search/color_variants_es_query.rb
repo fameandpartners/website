@@ -192,13 +192,5 @@ module Search
 
       definition
     end
-
-    def self.build_pricing_comparison(min_prices, max_prices, currency)
-      Filter.new do
-        min_prices.zip(max_prices).map do |min, max|
-          should { Range.new "sale_prices.#{currency}" => {gte: min, lte: max} }
-        end
-      end
-    end
   end
 end
