@@ -139,7 +139,7 @@ class Populator
         variant = Spree::Variant.where(id: product_attributes[:variant_id]).first
 
         unless variant
-          variant = Spree::Variant.find_by_sku(product_attributes[:variant_id].downcase)
+          variant = Spree::Variant.find_by_sku(product_attributes[:variant_id])
         end
 
         variant

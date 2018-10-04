@@ -64,7 +64,7 @@ module Products
     end
 
     def create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
-      sku = prod[:style_number].to_s.downcase.strip
+      sku = prod[:style_number].to_s.strip
 
       raise 'SKU should be present!' unless sku.present?
 
