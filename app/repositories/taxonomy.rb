@@ -11,7 +11,7 @@
 module Repositories; end
 class Repositories::Taxonomy
   class << self
-    FILTER_TAXON_PERMALINKS = ["backless",  "halter", "strapless", "off-shoulder", "long-sleeve","split", "lace", "sequin", "a-line", "bodycon", "fit-and-flare",  "wrap"]
+    FILTER_TAXON_PERMALINKS = ["halter", "strapless", "off-shoulder", "split", "sequin", "a-line", "bodycon", "fit-and-flare"]
     
     def get_taxon_by_name(taxon_name)
       result = Array.wrap(taxon_name).compact.map do |tn|

@@ -118,7 +118,7 @@ module Api
           .select {|cg| filter.include?(cg[:name]) }
           .flat_map {|cg| cg[:color_ids]}
 
-        body_shapes = ProductStyleProfile::BODY_SHAPES & filter
+        # body_shapes = ProductStyleProfile::BODY_SHAPES & filter
 
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
@@ -127,6 +127,7 @@ module Api
           .reject { |f| color_group_names.include?(f) }
           .map {|f| taxons.select { |t| t.permalink.ends_with?(f)}.map(&:id) }
           .compact
+          .reject(&:empty?)
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
@@ -157,7 +158,7 @@ module Api
 
         query_params = { 
           taxon_ids: taxon_ids,
-          body_shapes: body_shapes,
+          # body_shapes: body_shapes,
           color_ids: color_ids,
           order: params[:sortField],
           price_min: price_min,
@@ -187,13 +188,13 @@ module Api
         aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_ids"]["buckets"].map(&:values).flatten]
 
 
-        aggregation_body_shapes_result = Elasticsearch::Client.new(host: configatron.es_url).search(
-          index: configatron.elasticsearch.indices.color_variants,
-          body: Search::ColorVariantsESQuery.build(query_params.merge(body_shapes: nil, include_aggregation_bodyshapes: true)),
-          size: 0,
-          from: 0
-        )
-        aggregation_body_shapes = Hash[*aggregation_body_shapes_result["aggregations"]["body_shape_ids"]["buckets"].map(&:values).flatten]
+        # aggregation_body_shapes_result = Elasticsearch::Client.new(host: configatron.es_url).search(
+        #   index: configatron.elasticsearch.indices.color_variants,
+        #   body: Search::ColorVariantsESQuery.build(query_params.merge(body_shapes: nil, include_aggregation_bodyshapes: true)),
+        #   size: 0,
+        #   from: 0
+        # )
+        # aggregation_body_shapes = Hash[*aggregation_body_shapes_result["aggregations"]["body_shape_ids"]["buckets"].map(&:values).flatten]
 
         aggregation_prices_result = Elasticsearch::Client.new(host: configatron.es_url).search(
           index: configatron.elasticsearch.indices.color_variants,
@@ -225,8 +226,8 @@ module Api
               images: r['_source']['cropped_images'].map do |src|
                 {
                   src: [{
-                    width: 300,
-                    height: 400,
+                    width: 411,
+                    height: 590,
                     url: src,
                   }]
                 }
@@ -243,7 +244,7 @@ module Api
                 "facetGroupIds": [
                   "color",
                   "style",
-                  "bodyshape",
+                  # "bodyshape",
                   "price"
                 ]
               }
@@ -282,19 +283,19 @@ module Api
               end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             },
 
-            bodyshape: {
-              groupId: "bodyshape",
-              name: "Bodyshape",
-              multiselect: true,
-              facets: ProductStyleProfile::BODY_SHAPES.sort.each_with_index.map do |shape, i|
-                {
-                  "facetId": shape,
-                  "title": shape.humanize,
-                  "order": i,
-                  "docCount": aggregation_body_shapes[i] || 0,
-                }
-              end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
-            },
+            # bodyshape: {
+            #   groupId: "bodyshape",
+            #   name: "Bodyshape",
+            #   multiselect: true,
+            #   facets: ProductStyleProfile::BODY_SHAPES.sort.each_with_index.map do |shape, i|
+            #     {
+            #       "facetId": shape,
+            #       "title": shape.humanize,
+            #       "order": i,
+            #       "docCount": aggregation_body_shapes[i] || 0,
+            #     }
+            #   end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            # },
 
             price: {
               groupId: "price",
