@@ -397,7 +397,8 @@ module Api
           .includes(:viewable)
 
         product_viewmodel = {
-          productId: product.id,
+          productId: product.sku,
+          urlProductId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
