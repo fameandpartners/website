@@ -63,7 +63,7 @@ module Api
           {
             pid: pid,
             name: spree_product.name,
-            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pvc&.color&.name),
+            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.color&.name),
             media: images
               .sort_by(&:position)
               .take(2)
