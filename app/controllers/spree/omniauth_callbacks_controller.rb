@@ -110,18 +110,21 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     user ||= (spree_current_user || authentication.try(:user))
-    user.generate_spree_api_key!
 
-    EmailCapture.new({},
-                     email: user.email,
-                     newsletter: user.newsletter,
-                     first_name: user.first_name,
-                     last_name: user.last_name,
-                     current_sign_in_ip: request.remote_ip,
-                     landing_page: session[:landing_page],
-                     utm_params: session[:utm_params],
-                     site_version: current_site_version.name,
-                     form_name: 'create_account').capture
+    # If for some reason we can't extract info from the users facebook then ditch it.
+    if user.present?
+      user.generate_spree_api_key!
+
+      EmailCapture.new({},
+                      email: user.email,
+                      newsletter: user.newsletter,
+                      first_name: user.first_name,
+                      last_name: user.last_name,
+                      current_sign_in_ip: request.remote_ip,
+                      landing_page: session[:landing_page],
+                      utm_params: session[:utm_params],
+                      site_version: current_site_version.name,
+                      form_name: 'create_account').capture
     
     if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
       tracker = Marketing::CustomerIOEventTracker.new
