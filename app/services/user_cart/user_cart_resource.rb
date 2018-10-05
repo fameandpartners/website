@@ -25,8 +25,9 @@ class  UserCart::UserCartResource
   private
 
     def serialize_taxes
-      order_presenter = Orders::OrderPresenter.new(order)
-      order_presenter.taxes.map(&:to_h)
+      order.adjustments.eligible.tax
+        .map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
+        .map(&:to_h)
     end
 
     def order_display_shipment_total
@@ -41,7 +42,7 @@ class  UserCart::UserCartResource
 
     def cart_products
       @cart_products ||= begin
-        Spree::LineItem.includes(:personalization, :making_options, :variant => :product).where(order_id: order.id).map do |line_item|
+        order.line_items.includes(:personalization, :making_options, :fabric, :variant => { product: [:category, :making_options]}).map do |line_item|
           Repositories::CartProduct.new(line_item: line_item).read
         end
       end

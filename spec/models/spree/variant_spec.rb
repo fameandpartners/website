@@ -37,24 +37,6 @@ describe Spree::Variant, :type => :model do
     end
   end
 
-  describe '#plus_size defers to product' do
-    subject(:variant) do
-      Spree::Variant.new.tap { |v|
-        allow(v).to receive_message_chain('product.plus_size?').and_return(is_plus_size)
-      }
-    end
-
-    context do
-      let(:is_plus_size) { false }
-      it { expect(variant.product_plus_size).to be_falsey }
-    end
-
-    context do
-      let(:is_plus_size) { true }
-      it { expect(variant.product_plus_size).to be_truthy }
-    end
-  end
-
   context "before save" do
 
     # if master variant update it's prices, then all default (inherited from master) prices

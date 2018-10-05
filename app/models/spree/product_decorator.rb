@@ -389,26 +389,6 @@ Spree::Product.class_eval do
     @discount ||= Repositories::Discount.get_product_discount(self.id)
   end
 
-  def plus_size?
-    # NOTE: Alexey Bobyrev 31 Mar 2017
-    # We need explicit check on nil value for memoization of false value
-    if @plus_size.nil?
-      @plus_size = taxons.where(name: 'Plus Size').exists?
-    end
-  end
-
-  def jumpsuit?
-    # NOTE: Alexey Bobyrev 31 Mar 2017
-    # We need explicit check on nil value for memoization of false value
-    if @jumpsuit.nil?
-      @jumpsuit = taxons.where(name: 'Jumpsuit').exists?
-    end
-  end
-
-  def height_customisable?
-    ! jumpsuit?
-  end
-
   def presenter_as_details_resource(site_version = nil)
     @product ||= Products::DetailsResource.new(
       site_version: site_version,

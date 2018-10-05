@@ -32,7 +32,6 @@ class Products::DetailsResource
         permalink:                          product.permalink,
         is_active:                          product.is_active?,
         is_deleted:                         product.deleted?,
-        height_customisable:                product.height_customisable?,
         # page#show specific details
         fabric:                             product.property('fabric'),
         fit:                                product.property('fit'),

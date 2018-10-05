@@ -98,7 +98,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def add_plus_size_cost?
     # Ideally we could just ask the size for this information, one day, refactor away the "Repository"
-    product_size = Repositories::ProductSize.new( product: product ).read(size_id)
+    product_size = Repositories::ProductSize.read(size_id)
     !! product_size.extra_price
   end
 

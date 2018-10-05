@@ -46,7 +46,8 @@ class Repositories::CartProduct
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         price_drop_au_product: price_drop_au_product?,
-        fabric: line_item_fabric
+        fabric: line_item_fabric,
+        path: line_item.stock.nil? ? ApplicationController.helpers.collection_product_path(product) : ApplicationController.helpers.line_item_path(line_item.id)
         )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
@@ -54,7 +55,6 @@ class Repositories::CartProduct
       # result.making_options = product_making_options
       result.available_making_options = available_making_options
       result.height         = height
-      result.brides_maid = product.price < 1
       result.swatch = product&.category&.category == 'Sample'
       result
     end
@@ -85,7 +85,7 @@ class Repositories::CartProduct
     end
 
     def variant
-      @variant ||= Repositories::ProductVariants.read(@line_item.variant_id)
+      @variant ||= Repositories::ProductVariants.read(@line_item.variant)
     end
 
     def color_id
