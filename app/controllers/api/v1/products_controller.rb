@@ -9,7 +9,9 @@ CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further 
 
 module Api
   module V1
-    class ProductsController < ApplicationController
+    class ProductsController < Api::ApiBaseController
+      include PathBuildersHelper
+
       respond_to :json
       caches_action :show, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
       caches_action :index, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
