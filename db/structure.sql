@@ -8146,6 +8146,13 @@ CREATE UNIQUE INDEX index_fabrications_on_uuid ON public.fabrications USING btre
 
 
 --
+-- Name: index_fabrics_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_on_name ON public.fabrics USING btree (name);
+
+
+--
 -- Name: index_fabrics_on_option_value_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -8867,10 +8874,24 @@ CREATE INDEX index_spree_taxon_banners_on_spree_taxon_id ON public.spree_taxon_b
 
 
 --
+-- Name: index_spree_users_on_authentication_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spree_users_on_authentication_token ON public.spree_users USING btree (authentication_token);
+
+
+--
 -- Name: index_spree_variants_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_spree_variants_on_product_id ON public.spree_variants USING btree (product_id);
+
+
+--
+-- Name: index_spree_variants_on_sku; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spree_variants_on_sku ON public.spree_variants USING btree (sku);
 
 
 --
@@ -10241,3 +10262,9 @@ INSERT INTO schema_migrations (version) VALUES ('20180803233733');
 INSERT INTO schema_migrations (version) VALUES ('20180815070122');
 
 INSERT INTO schema_migrations (version) VALUES ('20180904045723');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005032844');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005033718');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005033839');
