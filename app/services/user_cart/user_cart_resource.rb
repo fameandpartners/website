@@ -26,7 +26,7 @@ class  UserCart::UserCartResource
 
     def serialize_taxes
       order.adjustments.eligible.tax
-        .map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
+        .map { |tax| Orders::TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
         .map(&:to_h)
     end
 
