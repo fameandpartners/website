@@ -96,7 +96,7 @@ Spree::LineItem.class_eval do
   end
 
   def fast_making?
-    making_options.any? {|mo| mo.product_making_option.fast_making? }
+    making_options.any? {|mo| mo.product_making_option&.fast_making? }
   end
 
   def super_fast_making?
