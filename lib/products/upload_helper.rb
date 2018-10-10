@@ -68,7 +68,7 @@ module Products
 
       raise 'SKU should be present!' unless sku.present?
 
-      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('sku = ?', sku).order('id DESC').first
 
       product = master.try(:product)
 
