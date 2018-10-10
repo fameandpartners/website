@@ -30,8 +30,11 @@ module Api
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
-          spree_product = spree_products.find { |p| p.master.sku == sku }
-
+          spree_product = spree_products 
+            .sort_by(&:created_at) # make sure we select the latest product
+            .reverse
+            .find { |p| p.master.sku == sku }
+          
           next unless spree_product
 
           all_customizations = JSON.parse!(spree_product.customizations)
@@ -370,7 +373,7 @@ module Api
       def show
         product_id = params[:id]
 
-        variant = Spree::Variant.find_by_sku(params[:id])
+        variant = Spree::Variant.order('id DESC').find_by_sku(params[:id])
         product_id = variant.product_id if variant
 
         product = Spree::Product
