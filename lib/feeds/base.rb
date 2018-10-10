@@ -53,7 +53,7 @@ module Feeds
     end
 
     def product_scope
-      Spree::Product.active.includes(:variants)#.last(5)
+      Spree::Product.active
     end
 
     def get_items
@@ -71,85 +71,42 @@ module Feeds
         logger_product_count = "[#{index}/#{total}]"
         logger.info "#{logger_product_count.ljust(10)} | #{logger_product_name}"
 
-        if !product.fabrics.empty?
-          #whittle down the variants to unique color-fabrics
-          variants = product.variants.uniq_by do |var|
-            var.option_values.detect {|ov| ov.option_type_id == ot_fabric.id}.name
-          end
+        if !product.fabric_products.empty?
+          product.fabric_products.each do |product_fabric_value|
+            color = product_fabric_value.fabric.option_value
+            fabric = product_fabric_value.fabric
 
-          fab_prd_images = product.fabric_products.select{ |fp| fp.images.present? }
-
-          # only choose variants with images
-          variant_w_images = fab_prd_images.map do |fp_image|
-            variants.detect do |var|
-              ov = var.option_values.detect {|ov| ov.option_type_id == ot_fabric.id }
-              fp_image.fabric.option_fabric_color_value_id == ov.id
+            if !product_fabric_value.images.present? 
+              logger.error "id  -  | No Images!"
+              next
             end
-          end
 
-          variant_w_images.reject! {|var| var.nil?}
-
-          variant_w_images.each do |variant|
-            item = get_item_properties(product, variant)
-
-            has_images = item['image'].present?
-            has_size   = item['size'].present?
-            items.push(item) if has_images && has_size
+            item = get_item_properties(product, color, fabric, product_fabric_value.images)
+            items.push(item)
           end
         else
-          product.variants.each do |variant|
-            # need to weed out inactive color variants
-            if (variant.dress_color.present? && ProductColorValue.where("product_id = ? and option_value_id = ?", product.id, variant.dress_color.id).first&.active)
-              item = get_item_properties(product, variant)
+          product.product_color_values.active.each do |product_color_value|
+            color = product_color_value.option_value
 
-              has_images = item['image'].present?
-              has_size   = item['size'].present?
-              items.push(item) if has_images && has_size
+            if !product_color_value.images.present? 
+              logger.error "id  -  | No Images!"
+              next
             end
+          
+            item = get_item_properties(product, color, nil, product_color_value.images)
+            items.push(item)
           end
         end
       end
       items
     end
 
-    def variant_size_data(spree_product:, spree_variant:)
-      size_presentation = nil
-
-      price             = spree_variant.site_price_for(current_site_version)
-
-      # if (size = spree_variant.dress_size)
-      #   product_size = Repositories::ProductSize.new(site_version: current_site_version, product: spree_product).read(size.id)
-
-      #   size_presentation = product_size.presentation
-      # end
-
-      if current_site_version.name == "USA"
-        size_presentation = 'US 0-20'
-      else
-        size_presentation = 'AU 4-26'
-      end
-
-      { size_presentation: size_presentation, price: price }
-    end
-
-    def get_color(variant)
-      if variant.dress_color.present?
-        variant.dress_color
-      else
-        ot_fabric = Spree::OptionType.find_by_name("dress-fabric-color")
-        ov_fabric = variant.option_values.detect { |ov| ov.option_type_id == ot_fabric.id}
-
-        fabric = Fabric.find_by_option_fabric_color_value_id(ov_fabric.id)
-        fabric.option_value
-      end
-    end
 
     # TODO: Feed item is so important, that should be extracted to a separate class...
-    def get_item_properties(product, variant)
-      variant_data = variant_size_data(spree_product: product, spree_variant: variant)
-      color_presentation = get_color(variant).try(:presentation)
-      size_presentation  = variant_data[:size_presentation]
-      price              = variant_data[:price]
+    def get_item_properties(product, color, fabric, images)
+      color_presentation = color.presentation
+      size_presentation  = current_site_version.name == "USA" ? 'US 0-20' : 'AU 4-26'
+      price              = product.site_price_for(current_site_version)
 
       # are we ever on sale?
       original_price = price.display_price.to_html(symbol: false) #.display_price_without_discount
@@ -160,9 +117,12 @@ module Feeds
         sale_price = sale_price.display_price.to_html(symbol: false)
       end
 
+      pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
+
       item = HashWithIndifferentAccess.new(
-        variant:                 variant,
-        variant_sku:             VariantSku.new(variant).call,
+        # variant:                 variant,
+        path:                    helpers.collection_product_path(product, color: (fabric&.name || color.name)),
+        variant_sku:             pid,
         product:                 product,
         product_name:            product.name,
         product_sku:             product.sku,
@@ -172,19 +132,19 @@ module Feeds
         price:                   original_price,
         sale_price:              sale_price,
         google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',
-        id:                      "#{product.id.to_s}-#{variant.id.to_s}",
-        group_id:                product.id.to_s,
+        id:                      pid,
+        group_id:                product.sku,
         color:                   color_presentation,
         size:                    size_presentation,
         weight:                  '',#get_weight(product, variant),
-        fabric:                  get_fabric(product, variant)
+        fabric:                  fabric&.material || product.property('fabric')
       )
 
       # Event, Style and Lookbook
       item.update get_taxons(product)
 
       # Images
-      item.update get_images(product, variant)
+      item.update get_images(images)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
@@ -193,24 +153,8 @@ module Feeds
       'in stock'
     end
 
-    def get_fabric(product, variant)
-      if product.property('fabric')
-        product.property('fabric')
-      else
-        if ov = variant.option_values.detect {|ov| ov.option_type.presentation == 'Fabric'}
-          Fabric.find_by_option_fabric_color_value_id(ov.id)&.material
-        else
-          '' #bad
-        end
-      end
-    end
-
     # return image, additional images
-    def get_images(product, variant)
-      ot_fabric = Spree::OptionType.find_by_presentation('Fabric')
-
-      images = product.images_for_variant(variant).to_a
-
+    def get_images(images)
       if images.present?
         images = images.select {|img| img.position.present?}
         images.sort_by!{ |i| i.position }

@@ -31,13 +31,14 @@ module Feeds
             @items.each do |item|
               xml.item do
                 xml.title title(item)
-                xml.link "#{@config[:domain]}#{helpers.collection_product_path(item[:product], color: item[:color].parameterize)}"
+                xml.link "#{@config[:domain]}#{item[:path]}"
                 xml.description product_description(item)
 
                 # Event, Style and Lookbook
                 xml.tag! "events"   , item[:events].join(',')
                 xml.tag! "styles"   , item[:styles].join(',')
                 xml.tag! "lookbooks", item[:lookbooks].join(',')
+                xml.tag! "taxons", item[:taxons].join(',')
 
                 xml.tag! "g:id", item[:id]
                 xml.tag! "g:condition", "new"
@@ -52,6 +53,7 @@ module Feeds
                 xml.tag! "g:gender", "Female"
                 xml.tag! "g:age_group", "Adult"
                 xml.tag! "g:color", item[:color]
+                xml.tag! "g:material", item[:fabric]
                 xml.tag! "g:size", item[:size]
 
                 xml.tag! "g:item_group_id", item[:group_id]
