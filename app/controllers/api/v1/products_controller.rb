@@ -625,7 +625,7 @@ module Api
           title: c['customisation_value']['presentation'],
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
-          price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
+          price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomization,
