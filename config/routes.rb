@@ -398,12 +398,6 @@ FameAndPartners::Application.routes.draw do
     end
 
     ########################
-    # Sample Sale
-    ########################
-    get '/sample-sale', to: redirect('/?utm_source=sample-sale-redirect')
-    get '/sample-sale/:id', to: redirect('/?utm_source=sample-sale-redirect')
-
-    ########################
     # Dresses (and products)
     ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
@@ -448,9 +442,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/lp/collection(/:collection)', to: redirect('/dresses')
 
-    get 'my-boutique' => 'boutique#show', :as => :my_boutique
-    get 'my-boutique/:user_id' => 'boutique#show', :as => :user_boutique
-    get 'my-boutique/:user_id/:competition_id' => 'boutique#show', :as => :user_competition_boutique
 
     # account settings
     resource :profile, only: [:show, :update], controller: 'users/profiles' do
@@ -458,13 +449,6 @@ FameAndPartners::Application.routes.draw do
     end
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
-
-    get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
-
-    get 'reviews' => 'users/reviews#index', as: 'reviews'
-    # eo account settings
-
-    resources :product_reservations, only: [:create]
 
     # Old Blog Redirection (30/06/2015)
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
@@ -525,12 +509,6 @@ FameAndPartners::Application.routes.draw do
 
     root :to => 'index#show'
 
-    # style quiz
-    get '/style_quiz' => redirect('/style-quiz'), as: :old_style_quiz_redirection
-    resource :style_quiz, only: [:show, :update], controller: 'style_quiz', path: 'style-quiz'
-
-    resource :style_profile, only: [:show], controller: 'style_profiles'
-
     scope '/users/:user_id', :as => :user do
       get '/style-report' => 'user_style_profiles#show', :as => :style_profile
       get '/style-report-debug' => 'user_style_profiles#debug'
@@ -553,50 +531,12 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
   end
 
-
-  resource :wedding_moodboard, controller: 'moodboards/weddings', only: [:edit, :update] do
-    collection do
-      get 'guests'
-    end
-  end
-
-  resources :moodboards, except: [:destroy] do
-    resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy] do
-      member do
-        get :like_or_unlike
-      end
-    end
-    resources :collaborators, controller: 'moodboard_collaborators', only: [:create, :index]
-  end
-
-  get 'moodboard', to: 'moodboards#index'
-  get 'wishlist',  to: 'moodboards#index'
-
-  resources :wishlists_items, only: [:create], controller: 'users/wishlists_items' do
-    get 'move_to_cart', on: :member
-  end
-
-  resources :moodboard_item_comments, exclude: [:index, :show]
-
   post 'shipments_update', to: 'shippo/shipments#update'
 
   ##################
   # Robots and Feeds
   ##################
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
-
-  ######
-  # Prom
-  ######
-
-  get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
-  get '/prom', :to => redirect { |params, request|
-    if request.params.any?
-      "http://prom.fameandpartners.com?#{request.params.to_query}"
-    else
-      'http://prom.fameandpartners.com'
-    end
-  }
 
   ################
   # User Campaigns
@@ -605,20 +545,6 @@ FameAndPartners::Application.routes.draw do
     collection do
       get  :check_state
     end
-  end
-
-  #########
-  # Widgets
-  #########
-
-  namespace :widgets do
-    get 'main_nav' => 'site_navigations#main_nav'
-    get 'footer'   => 'site_navigations#footer'
-  end
-
-  scope '/body-shape-calculator' do
-    get '/' => 'marketing/body_shape_calculator#show'
-    post '/store-measures' => 'marketing/body_shape_calculator#store_measures'
   end
 
   ##############
