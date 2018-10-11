@@ -417,7 +417,7 @@ Spree::Product.class_eval do
   end
 
   def self.is_new_product?(product_id)
-    product_id.downcase.starts_with?("fg10") || product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
+    product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
   end
 
   def self.format_new_pid(sku, fabric, customizations)

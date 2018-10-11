@@ -47,7 +47,6 @@ class Repositories::CartProduct
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         price_drop_au_product: price_drop_au_product?,
         fabric: line_item_fabric,
-        path: line_item.stock.nil? ? ApplicationController.helpers.collection_product_path(product) : ApplicationController.helpers.line_item_path(line_item.id)
         )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
@@ -56,6 +55,7 @@ class Repositories::CartProduct
       result.available_making_options = available_making_options
       result.height         = height
       result.swatch = product&.category&.category == 'Sample'
+      result.path = line_item.stock.nil? ? ApplicationController.helpers.collection_product_path(result) : ApplicationController.helpers.line_item_path(line_item.id)
       result
     end
   end
