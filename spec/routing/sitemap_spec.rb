@@ -10,5 +10,4 @@ describe 'Sitemap', type: :request do
 
   it_will :redirect, 'http://us.fameandpartners.test/sitemap.xml', "#{@asset_host}/sitemap/us.xml.gz"
   it_will :redirect, 'http://au.fameandpartners.test/sitemap.xml', "#{@asset_host}/sitemap/au.xml.gz"
-  it_will :redirect, '/sitemap_index.xml.gz', "#{@asset_host}/sitemap/sitemap.xml.gz"
 end
