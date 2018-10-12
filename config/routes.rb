@@ -35,8 +35,7 @@ FameAndPartners::Application.routes.draw do
     ##########
     # Sitemaps
     ##########
-    get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
-    get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
+    get 'sitemap', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
 
     ##############################
     # Devise & User authentication

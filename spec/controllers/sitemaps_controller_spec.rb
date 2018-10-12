@@ -8,18 +8,9 @@ describe SitemapsController, type: :controller do
     create :site_version, :au
   end
 
-  describe 'GET /sitemap_index.xml' do
-    subject { get :index, site_version: 'au', format: 'xml' }
-
-    it 'redirects the user to the sitemap index URL' do
-      expect(subject).to redirect_to("#{asset_host}/sitemap/sitemap.xml.gz")
-      expect(subject).to have_http_status(:moved_permanently)
-    end
-  end
-
   describe 'GET /sitemap.xml' do
     context 'request has a site version' do
-      subject { get :show, format: 'xml' }
+      subject { get :index, format: 'xml' }
 
       before(:each) { request.env['site_version_code'] = 'au' }
 
@@ -30,7 +21,7 @@ describe SitemapsController, type: :controller do
     end
 
     context 'request does not have a site version' do
-      subject { get :show, format: 'xml' }
+      subject { get :index, format: 'xml' }
 
       it 'redirects to the default sitemap version' do
         expect(subject).to redirect_to("#{asset_host}/sitemap/us.xml.gz")

@@ -29,69 +29,33 @@ SitemapGenerator::Interpreter.class_eval do
   end
 end
 
-sitemap_options = {
-    compress:      Rails.env.production?,
-    default_host:  ENV['APP_HOST'],
-    sitemaps_host: ENV['RAILS_ASSET_HOST'],
-    include_root:  false,
-    sitemaps_path: 'sitemap'
-}
-
-# XML Priorities:
-# => 1.0 for root (generator's `#include_root` default)
-# => 0.9 for categories
-# => 0.8 for products
-# => 0.7 for pages
-SitemapGenerator::Sitemap.create(sitemap_options) do
-  # Records scopes
-  active_products    = Spree::Product.active
-  events_taxons      = Spree::Taxon.published.from_event_taxonomy
-  collections_taxons = Spree::Taxon.published.from_range_taxonomy
-  styles_taxons      = Spree::Taxon.published.from_style_taxonomy
-  colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
-  statics_pages      = %w(/about /why-us /privacy /bridesmaid-dresses /unidays)
-
-  # Common pages
-  add '/assets/returnform.pdf', priority: 0.7
-
-  # Creating sitemaps for each site version
-  SiteVersion.all.each do |site_version|
-    sitemap_group_options = {
-      include_root: true,
-      default_host: site_version_default_host(site_version),
-      filename: site_version.permalink
+SiteVersion.all.each do |site_version|
+    sitemap_options = {
+      compress:      Rails.env.production?,
+      default_host:  site_version_default_host(site_version),
+      sitemaps_host: ENV['RAILS_ASSET_HOST'],
+      filename: site_version.permalink,
+      sitemaps_path: "sitemap"
     }
 
-    group(sitemap_group_options) do
-      # Products pages
-      active_products.find_each do |product|
-        product_images = Repositories::ProductImages.new(product: product).read_all
-        product_images = product_images.map { |image| { loc: image.original, title: [product.name, image.color].join(' ') } }
-
-        add collection_product_path(product), images: product_images, priority: 0.8
-      end
-
-      # Events, Styles and Collections (Ranges)
-      (events_taxons + collections_taxons + styles_taxons).each do |taxon|
-        add build_taxon_path(taxon.name), priority: 0.9
-      end
-
-      # Color Groups
-      colors_taxons.each do |color_group|
-        add colour_path(color_group.name), priority: 0.9
-      end
-
-      # Static pages
-      statics_pages.each do |page_path|
-        add page_path, priority: 0.7
-      end
+  SitemapGenerator::Sitemap.create(sitemap_options) do
+    add_to_index("/_webclient/sitemap/plp.xml", host: site_version_default_host(site_version))
+    add_to_index("/_webclient/sitemap/pdp.xml", host: site_version_default_host(site_version))
+    add_to_index("/_webclient/sitemap/cms.xml", host: site_version_default_host(site_version))
+ 
+    add '/assets/returnform.pdf', priority: 0.7
+    statics_pages      = %w(/why-us /privacy /terms)
+    statics_pages.each do |page_path|
+      add page_path, priority: 0.7
     end
   end
-end
 
-if Rails.env.production?
-  SitemapGenerator::Sitemap.ping_search_engines("#{sitemap_options[:sitemaps_host]}/#{sitemap_options[:sitemaps_path]}/sitemap.xml.gz")
+  if Rails.env.production?
+    SiteVersion.all.each do |site_version|
+      SitemapGenerator::Sitemap.ping_search_engines("#{sitemap_options[:sitemaps_host]}/#{sitemap_options[:sitemaps_path]}/#{sitemap_options[:filename]}.xml.gz")
+    end
 
-  # Delete local Sitemap files. They all were uploaded to S3
-  FileUtils.rm_rf File.join(SitemapGenerator::Sitemap.public_path, SitemapGenerator::Sitemap.sitemaps_path)
+    # Delete local Sitemap files. They all were uploaded to S3
+    FileUtils.rm_rf File.join(SitemapGenerator::Sitemap.public_path, SitemapGenerator::Sitemap.sitemaps_path)
+  end
 end

@@ -23,5 +23,7 @@ Disallow: /profile
 Disallow: /spree_user/sign_in
 Disallow: /user/auth/facebook
 Disallow: /user_orders
+Disallow: /product
+Disallow: /t
 
-Sitemap: https://www.fameandpartners.com/sitemap_index.xml
+Sitemap: <%= sitemap_url(format: 'xml.gz') %>
