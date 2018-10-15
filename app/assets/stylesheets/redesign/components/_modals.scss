@@ -116,3 +116,56 @@
   }
 
 }
+
+// Modal for Email Capture form
+.modalEmailCapture__overlay {
+  position: fixed;
+  background: rgba($c-neutral-black,.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 9999;
+}
+
+.modalEmailCapture__closeArea {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modalEmailCapture__content {
+  margin-top: 50px;
+  background: #f5f6f1;
+  border: 15px solid $c-neutral-white;
+  padding: 15px 30px 60px;
+}
+
+.modalContent__title {
+  margin: 40px 0;
+  line-height: 130%;
+}
+
+.modalEmailCapture__code {
+  padding: 0 10px;
+}
+
+.modalContent__emailInput input {
+  height: 44px;
+}
+
+.modalContent__messageError {
+  color: $c-brand-red;
+}
+
+@media (max-width: $iphone6p-width - 1px) {
+
+  .modalEmailCapture__submitButton {
+    display: grid;
+    width: 100%;
+  }
+
+  .modalEmailCapture__inputGroup {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,171 @@
+/ Modal for Email Capture
+/ Workflow
+/ 1. User (not logged in) hits any page
+/ 2. Modal window is shown
+/ 3. Cookie is set as "promocode modal has been shown to user" and expires after "X" days
+/ 4. User signs up via email address
+/    4.1 on submit we grab the email address
+/    4.2 response pops a thanks modal on the same page.
+/ 5. After X days, if this same user (not logged in) comes back, this modal window is shown again
+
+- if cookies[:modal_email_capture_promocode_displayed] != "true" && !spree_user_signed_in?
+
+  - promocode = 'NEWGIRL25'
+  - cookie_days_to_expire = 180
+  - modal_delay_milliseconds = 6000
+  - form_source = 'email_pop_up'
+  - form_newsletter = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+  - service = ENV.fetch('SUBSCRIPTION_SERVICE')
+
+  .modalEmailCapture__overlay.js-modal-email-capture-overlay.hidden
+    .modalEmailCapture__closeArea.js-close-email-capture-modal
+    .container
+      .row
+        .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
+          .modalEmailCapture__content
+            a.close.btn-close.js-close-email-capture-modal type='button' data-dismiss='modal' aria-label="Close"
+            .modalContent__step1.js-modal-email-capture-step-1
+              h2.modalContent__title.text-center
+                | Take <em>$25 off your<br class="hidden-xs hidden-sm"> first order</em><br class="visible-sm"> when you join<br class="hidden-xs hidden-sm"> our mailing list.
+              .modalContent__emailInput
+
+                .js-email-error-message.modalContent__messageError.hidden
+                  h4.js-email-error-message-body
+                    | There was an error saving your email.
+
+                .newsletter-signup-form
+                  .NewsletterForm__container
+                    form.form_newsletter class=(form_newsletter)
+                      input name="url" type="hidden" value=(subscribe_campaigns_email_capture_path)
+                      input name="form_name" type="hidden" value=(form_source)
+                      .input-group.modalEmailCapture__inputGroup
+                        input name="service" type="hidden" value=(service)
+                        input.form-control.input-lg.js-en-field-email data-emailcapturepoint="All" name="email" placeholder=("Email Address") required="required" type="email"
+                        br.hidden-md.hidden-lg
+                        span.input-group-btn.modalEmailCapture__submitButton
+                          button.btn.btn-black.btn-sm type="submit"
+                            | Get $25 OFF
+
+            .modalContent__step2.js-modal-email-capture-step-2.text-center.hidden
+              h2.modalContent__title
+                | Enter the atelier <br class="hidden-lg">and use code<br> <span class="modalEmailCapture__code">#{promocode}</span> <br class="hidden-lg">for <em>$25 off</em>.
+              a.btn.btn-black.btn-xs.text-uppercase.js-close-email-capture-modal href="#{dresses_path}"
+                | Start Browsing
+
+
+  - content_for :body_end do
+
+    javascript:
+      $(function() {
+        let $modalEmailCaptureOverlay = $(".js-modal-email-capture-overlay"),
+            $modalEmailCaptureClose = $(".js-close-email-capture-modal"),
+            $modalEmailCaptureDelay = #{modal_delay_milliseconds};
+
+        // Show modal window after a few seconds
+        $(window).ready(function() {
+          setTimeout(function() {
+            $modalEmailCaptureOverlay.removeClass("hidden");
+
+            // Set cookie to avoid displaying this same modal window for a while
+            $.cookie('modal_email_capture_promocode_displayed', 'true', { expires: #{cookie_days_to_expire}, path: '/' });
+
+          }, $modalEmailCaptureDelay);
+        });
+
+
+        // Close the modal window if users click outside or on the "X" icon
+        $modalEmailCaptureClose.click(function(){
+          $modalEmailCaptureOverlay.fadeOut();
+        });
+
+        // Submit the form
+        new window.page.NewsletterSubscriberOnPage({form: "#{form_newsletter}", source: "#{form_source}"});
+
+      });
+
+      (function(window) {
+
+        // Newsletter subscription
+        var NewsletterSubscriberOnPage,
+          bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+        window.page || (window.page = {});
+
+        window.page.NewsletterSubscriberOnPage = NewsletterSubscriberOnPage = (function() {
+          function NewsletterSubscriberOnPage(opts) {
+            if (opts == null) {
+              opts = {};
+            }
+            this.success = bind(this.success, this);
+            this.failure = bind(this.failure, this);
+            this.handler = bind(this.handler, this);
+            this.submit = bind(this.submit, this);
+            this.url = bind(this.url, this);
+            this.campaign = opts.campaign || 'home';
+            this.$form = $('.' + opts.form);
+            this.$form.on('submit', this.submit);
+            this.source = opts.source
+          }
+
+          NewsletterSubscriberOnPage.prototype.url = function() {
+            return this.$form.attr('action') + "?callback=?";
+          };
+
+          NewsletterSubscriberOnPage.prototype.submit = function(e) {
+            var $this, email, url, form_name, service;
+            e.preventDefault();
+            $this = $(e.target);
+            url = $('input[name="url"]', $this).val();
+            form_name = $('input[name="form_name"]', $this).val();
+            email = $('input[name="email"]', $this).val();
+            service = $('input[name="service"]', $this).val();
+            return $.ajax({
+              method: 'POST',
+              dataType: 'json',
+              url: url,
+              async: true,
+              data: {
+                email: email,
+                service: service,
+                form_name: form_name,
+                source: this.source
+              },
+              success: this.handler,
+              error: function () {
+                  this.signupFailure
+              }
+            });
+          };
+
+          NewsletterSubscriberOnPage.prototype.handler = function(data) {
+            if (data.status === 'done') {
+              return this.success(data);
+            } else {
+              return this.failure(data);
+            }
+          };
+
+          NewsletterSubscriberOnPage.prototype.failure = function() {
+            var message = 'Please enter a valid email.';
+
+            $('.js-email-error-message-body').text(message);
+            $('.js-email-error-message').removeClass('hidden');
+          };
+
+          NewsletterSubscriberOnPage.prototype.signupFailure = function() {
+            var message = 'We had an issue saving your email.';
+
+            $('.js-email-error-message-body').text(message);
+            $('.js-email-error-message').removeClass('hidden');
+          };
+
+          NewsletterSubscriberOnPage.prototype.success = function() {
+            $('.js-email-error-message').addClass('hidden');
+            $('.js-modal-email-capture-step-1, .js-modal-email-capture-step-2').toggleClass('hidden');
+          };
+
+          return NewsletterSubscriberOnPage;
+
+        })();
+
+      })(window)
