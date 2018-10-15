@@ -170,7 +170,8 @@ module Api
           price_max: price_max, 
           currency: current_currency.downcase,
           query_string: params[:query],
-          include_aggregation_taxons: true
+          include_aggregation_taxons: true,
+          boost_pids: Array.wrap(params[:boostPids])
         }
         query = Search::ColorVariantsESQuery.build(query_params)
         result = Elasticsearch::Client.new(host: configatron.es_url).search(
@@ -211,16 +212,9 @@ module Api
         
         response = {
           results: result['hits']['hits'].map do |r|
-            pid = r['_source']['product']['sku']
-
-            if r['_source']['fabric']
-              pid = "#{r['_source']['product']['sku']}~#{r['_source']['fabric']['name']}"
-            elsif r['_source']['color']
-              pid = "#{r['_source']['product']['sku']}~#{r['_source']['color']['name']}"
-            end
-
             {
-              pid: pid,
+              _score: r['_score'],
+              pid: r['_source']['product']['pid'],
               productId: r['_source']['product']['sku'],
               name: r['_source']['product']['name'],
               price: r['_source']['prices'] && {
