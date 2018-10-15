@@ -669,6 +669,7 @@ FameAndPartners::Application.routes.draw do
         post 'user/reset_password' => 'user_sessions#reset_password'
         post 'user/send_reset_password_email' => 'user_sessions#send_reset_password_email'
         post 'user/change_password' => 'user_sessions#change_password'
+        post 'profile/update' => 'profiles#update'
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
