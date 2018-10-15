@@ -1,37 +1,32 @@
-class UserCart::DetailsController < UserCart::BaseController
+class UserCart::DetailsController < Api::ApiBaseController
+  include Spree::Core::ControllerHelpers::Auth
+      # include Spree::Core::ControllerHelpers::Common
+  include Spree::Core::ControllerHelpers::Order
+
   respond_to :json
-  before_filter :set_user_cart
 
   def order_delivery_date
     render json: Policies::ProjectDeliveryDatePolicy.order_delivery_date(@user_cart)
   end
 
-  def show
-    check_authorization
-
-    #title('Your Shopping Cart', default_seo_title)
-
-    if spree_user_signed_in?
-      user = current_spree_user.clone 
-      user[:is_admin] = current_spree_user.try(:has_spree_role?, "admin")
-    else
-      user = {}
-    end
-    
+  def show    
     respond_with(@user_cart) do |format|
       format.html   {}
       format.json   {
         render json:
         {
-          cart: @user_cart.serialize,
-          user: spree_user_signed_in? && user
+          cart: user_cart_resource.read.serialize,
+          user: spree_user_signed_in? && UserSerializer.new(current_spree_user)
         },
        status: :ok
       }
     end
   end
 
-  def set_user_cart
-    @user_cart = user_cart_resource.read
+  def user_cart_resource
+    @cart_resource ||= UserCart::UserCartResource.new(
+      order: current_order,
+      site_version: current_site_version
+    )
   end
 end
