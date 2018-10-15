@@ -96,6 +96,23 @@ module Api
         render :json=>{:success=>false, :message=>"Invalid arguments"}, :status=>401
       end
 
+      def change_password
+        if !params[:old_password].present? or params[:old_password].blank? or !params[:password].present? or params[:password].blank? or !params[:email].present?
+          render :json=>{:success=>false, :message=>"Missing arguments"}, :status=>422
+          return
+        end
+
+        @user = Spree::User.find_for_database_authentication(:email => params[:email])
+        if @user.present? and @user.valid_password?(params[:old_password])
+          if @user.reset_password!(params[:password], params[:password])
+            respond_with @user
+            return
+          end
+        end
+
+        render :json=>{:success=>false, :message=>"Invalid arguments"}, :status=>401
+      end
+
       def destroy
         session.clear
         render :json => {:success=>true}, status: 200
