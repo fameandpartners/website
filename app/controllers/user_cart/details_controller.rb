@@ -1,8 +1,4 @@
 class UserCart::DetailsController < Api::ApiBaseController
-  if Features.active?(:force_sitewide_ssl)
-    ssl_required
-  end
-
   respond_to :json
 
   def order_delivery_date
