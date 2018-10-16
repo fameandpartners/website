@@ -1,7 +1,10 @@
 class UserCart::DetailsController < Api::ApiBaseController
   include Spree::Core::ControllerHelpers::Auth
-      # include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
+
+  if Features.active?(:force_sitewide_ssl)
+    ssl_required
+  end
 
   respond_to :json
 
