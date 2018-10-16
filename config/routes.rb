@@ -51,10 +51,11 @@ FameAndPartners::Application.routes.draw do
                                   omniauth_callbacks: 'spree/omniauth_callbacks'
                     },
                     skip:        [:unlocks, :omniauth_callbacks],
-                    path_names:  { sign_out: 'logout', sign_in: 'login' }
+                    path_names:  { sign_out: 'logout', sign_in: 'login', profile_path: 'profile_path' }
 
         devise_scope :spree_user do
           get '/spree_user/sign_in', to: redirect('/account/login'), :as => :login
+          get '/profile', to: redirect('/account/profile'), :as => :profile_path
         end
       else
         devise_for :spree_user,
@@ -638,7 +639,6 @@ FameAndPartners::Application.routes.draw do
     resources :dress_colours,      :only => :index
   end
 
-
   # ----------
   # API Routes
   # ----------
@@ -653,9 +653,6 @@ FameAndPartners::Application.routes.draw do
       scope '/user_cart' do
         post 'products' => 'products#create'
       end
-
-      # user profile
-      get 'profile' => 'profiles#show'
 
       #upload products.*\.ccf$
       put '/product_upload' => 'product_upload#upload'
