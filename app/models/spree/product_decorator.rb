@@ -408,6 +408,10 @@ Spree::Product.class_eval do
     self.class.has_render?(self)
   end
 
+  def is_new_product?
+    self.class.is_new_product?(master.sku)
+  end
+
   def self.has_render?(product)
     is_new_product?(product.master.sku)
   end

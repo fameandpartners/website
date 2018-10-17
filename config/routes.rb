@@ -596,6 +596,7 @@ FameAndPartners::Application.routes.draw do
       end
 
       get '/products/search' => 'products#search'
+      get '/products/import_summary' => 'products#import_summary'
       get '/products/:id' => 'products#show'
       get '/products' => 'products#index'
 
