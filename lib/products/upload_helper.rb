@@ -64,11 +64,11 @@ module Products
     end
 
     def create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
-      sku = prod[:style_number].to_s.downcase.strip
+      sku = prod[:style_number].to_s.strip
 
       raise 'SKU should be present!' unless sku.present?
 
-      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
+      master = Spree::Variant.where(deleted_at: nil, is_master: true).where('sku = ?', sku).order('id DESC').first
 
       product = master.try(:product)
 
@@ -237,7 +237,6 @@ module Products
           variant.send :write_attribute, :on_demand, true
           Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
           Spree::Variant.skip_callback( :save, :after, :process_backorders )
-          Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
 
           variant.save!
 

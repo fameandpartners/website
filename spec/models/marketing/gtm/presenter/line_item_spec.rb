@@ -26,7 +26,7 @@ module Marketing
                 name:         'Super Dress',
                 quantity:     3,
                 total_amount: 48.33,
-                sku:          'ProductSKU~FABRICNAME',
+                sku:          'PRODUCTSKU~FABRICNAME',
                 price:        198.37,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',

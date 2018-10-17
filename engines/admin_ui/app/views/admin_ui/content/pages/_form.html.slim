@@ -15,7 +15,7 @@
     .form-group
       label.col-sm-2.control-label Product Ordering
       .col-sm-10
-        = f.select :product_order, options_for_select(Search::ColorVariantsQuery::ProductOrdering.new.all_as_collection, f.object.product_order), {include_blank: true},  :class => 'form-control'
+        = f.select :product_order, options_for_select(Search::ProductOrdering.new.all_as_collection, f.object.product_order), {include_blank: true},  :class => 'form-control'
         p
           ' Order products on the page using this criteria.
           br

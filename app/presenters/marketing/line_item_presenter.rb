@@ -11,7 +11,7 @@ module Marketing
     end
 
     def product_name
-      product.name
+      item.style_name
     end
 
     def category_name

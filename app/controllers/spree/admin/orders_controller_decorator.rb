@@ -75,7 +75,8 @@ module Spree
             :payments => [],
             :line_items => {:variant => :product, :fabrication => [], :making_options => []},
             :bill_address => [:state, :country],
-            :ship_address => [:state, :country]
+            :ship_address => [:state, :country],
+            :adjustments => []
           ).page(page).per(per_page)
         else
           if @refulfill_only

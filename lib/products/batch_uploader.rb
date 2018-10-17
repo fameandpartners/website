@@ -83,10 +83,17 @@ module Products
       color_data = build_color_data( book )
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
-        processed = process_raw_row_data(raw, color_data)
-        item_hash = build_item_hash(processed, raw, color_data)
-        item_hash
+        if raw[:sku] == ENV['PARAM1']
+          puts "Master Product Sheet TAKE #{raw[:sku]} #{raw[:name]}"
+          processed = process_raw_row_data(raw, color_data)
+          item_hash = build_item_hash(processed, raw, color_data)
+          item_hash
+        else
+          puts "Master Product Sheet SKIP #{raw[:sku]} #{raw[:name]}"
+          nil
+        end
       end
+      @parsed_data.reject! { |x| x.nil? }
       add_cad_data( book, @parsed_data ) if cad_data_present?( book )
       info "Parse Complete"
     end
@@ -124,6 +131,13 @@ module Products
       (2..total_rows).each do |i|
         current_row = book.row( i, "CADs" )
         current_style_number = current_row[columns["style"] - 1].strip
+        if current_style_number == ENV['PARAM1']
+          puts "CADs Sheet           TAKE #{current_style_number}"
+        else
+          puts "CADs Sheet           SKIP #{current_style_number}"
+          next
+        end
+
         style_data[current_style_number] = [] if style_data[current_style_number].nil?
         style_array = style_data[current_style_number]
         customizations_enabled_for = [map_to_true_or_false( current_row[columns["customisation_1"] - 1] ),
@@ -190,7 +204,7 @@ module Products
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
       raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
 
-      info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
+      #info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
       raw
     end
 
@@ -594,7 +608,7 @@ module Products
     end
 
     def add_product_layered_cads( product, cads )
-      info "Processing Cads #{cads}"
+      info "Processing Cads"
       product.layer_cads = []
       cads.each_with_index do |cad, index|
         product.layer_cads << LayerCad.new( {position: index + 1}.merge( cad ) )
@@ -725,7 +739,6 @@ module Products
                 variant.send :write_attribute, :on_demand, true
                 Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
                 Spree::Variant.skip_callback( :save, :after, :process_backorders )
-                Spree::Variant.skip_callback( :save, :after, :update_index_on_save )
                 
                 begin
                   variant.save( :validate => false )

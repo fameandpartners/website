@@ -7,7 +7,20 @@ class  UserCart::UserCartResource
     @order        = options[:order]
   end
 
-  def read
+  def read    
+    return UserCart::CartPresenter.new(
+      products: [],
+      item_count: 0,
+      promocode: nil,
+      display_item_total: nil,
+      display_shipment_total: nil,
+      display_promotion_total: nil,
+      display_total: nil,
+      taxes: [],
+      site_version: site_version,
+      order_number: nil
+    ) if @order.nil?
+
     UserCart::CartPresenter.new(
       products: cart_products,
       item_count: cart_products.reject{|p| p.name == 'RETURN_INSURANCE'}.sum{|product| product.quantity},
@@ -25,8 +38,9 @@ class  UserCart::UserCartResource
   private
 
     def serialize_taxes
-      order_presenter = Orders::OrderPresenter.new(order)
-      order_presenter.taxes.map(&:to_h)
+      order.adjustments.eligible.tax
+        .map { |tax| Orders::TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
+        .map(&:to_h)
     end
 
     def order_display_shipment_total
@@ -41,7 +55,7 @@ class  UserCart::UserCartResource
 
     def cart_products
       @cart_products ||= begin
-        Spree::LineItem.includes(:personalization, :making_options, :variant => :product).where(order_id: order.id).map do |line_item|
+        order.line_items.includes(:personalization, :making_options, :fabric, :variant => { product: [:category, :making_options]}).map do |line_item|
           Repositories::CartProduct.new(line_item: line_item).read
         end
       end

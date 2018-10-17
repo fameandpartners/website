@@ -7,6 +7,7 @@ module Search
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
+      boost_pids        = options[:boost_pids] #
       colors            = options[:color_ids] #
       body_shapes       = options[:body_shapes] #
       taxon_ids         = options[:taxon_ids] #
@@ -23,7 +24,13 @@ module Search
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
 
-      product_orderings = self.product_orderings(currency: currency)
+      product_orderings = ProductOrdering.product_orderings(currency: currency)
+
+      include_aggregation_prices      = options[:include_aggregation_prices]
+      include_aggregation_taxons      = options[:include_aggregation_taxons]
+      include_aggregation_bodyshapes  = options[:include_aggregation_bodyshapes]
+      include_aggregation_color_ids   = options[:include_aggregation_color_ids]
+
 
       product_ordering = product_orderings.fetch(order) do
         if query_string.present?
@@ -37,18 +44,18 @@ module Search
       definition = Elasticsearch::DSL::Search.search do
         query do
           bool do
-            must {term 'product.is_deleted' => false}
-            must {term 'product.is_hidden' => false}
-            must {term 'product.is_outerwear' => show_outerwear}
-            must {term 'product.in_stock' => true}
+            filter {term 'product.is_deleted' => false}
+            filter {term 'product.is_hidden' => false}
+            filter {term 'product.is_outerwear' => show_outerwear}
+            filter {term 'product.in_stock' => true}
 
             if fast_making.present?
-              must {term 'product.fast_making' => fast_making}
+              filter {term 'product.fast_making' => fast_making}
             end
 
             if taxon_ids.present?
               taxon_terms = taxon_ids.map do |tid|
-                must {term 'product.taxon_ids' => tid}
+                filter {terms 'product.taxon_ids' => Array.wrap(tid) }
               end
             end
 
@@ -74,15 +81,11 @@ module Search
             end
 
             if body_shapes.present?
-              if body_shapes.size.eql?(1)
-                must {range "product.#{body_shapes.first}" => {gte: 4}}
-              else
-                filter do
-                  bool do
-                    body_shapes.map do |bs|
-                      should do
-                        range "product.#{bs}" => {gte: 4}
-                      end
+              filter do
+                bool do
+                  body_shapes.map do |bs|
+                    should do
+                      range "product.#{bs}" => {gte: 4}
                     end
                   end
                 end
@@ -127,78 +130,75 @@ module Search
             if query_string.present?
               must do
                 query_string do
-                  query "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+                  query "product.name:(#{query_string})^4 OR color.presentation:(#{query_string})^2 OR fabric.presentation:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+                end
+              end
+            end
+
+            if boost_pids && !boost_pids.empty?
+              boost_pids.map.with_index do |bp, index|
+                should do
+                  term 'product.pid.keyword': { value: bp, boost: 100-index }
                 end
               end
             end
           end
         end
 
-        sort do
-          if body_shapes.present?
-            body_shapes.each {|bs| by "product.#{bs}", order: 'desc'}
+        if include_aggregation_color_ids
+          aggregation :color_ids do
+            terms do
+              field "color.id"
+              size 9999
+            end
           end
+        end
 
+        if include_aggregation_taxons
+          aggregation :taxon_ids do
+            terms do
+              field "product.taxon_ids"
+              size 9999
+            end
+          end
+        end
+
+        if include_aggregation_prices
+          aggregation :prices do
+            range do
+              field "sale_prices.#{currency}"
+              key   '0-199', from: 0, to: 199
+              key   '200-299', from: 200, to: 299
+              key   '300-399', from: 300, to: 399
+              key   '400', from: 400
+            end
+          end
+        end
+
+        if include_aggregation_bodyshapes
+          aggregation :body_shape_ids do
+            terms do
+              field "product.body_shape_ids"
+              size 9999
+            end
+          end
+        end
+
+        sort do         
+          by "_score", order: 'desc'
+ 
           if colors.present?
-            by "color.id", order: 'asc'
+           by "color.id", order: 'asc'
           end
 
           if product_ordering[:behaviour].present?
             by product_ordering[:behaviour].first, product_ordering[:behaviour].last
           end
+
         end
       end
 
       definition
-    end
-
-    def self.build_pricing_comparison(min_prices, max_prices, currency)
-      Filter.new do
-        min_prices.zip(max_prices).map do |min, max|
-          should { Range.new "sale_prices.#{currency}" => {gte: min, lte: max} }
-        end
-      end
-    end
-
-    def self.product_orderings(currency: nil)
-      ProductOrdering.new(currency: currency).all
-    end
-
-    class ProductOrdering
-      attr_accessor :all, :currency
-
-      def initialize(currency: nil)
-        self.currency = currency
-        self.all = {}
-        add_orders
-      end
-
-      def add(name, description, behaviour)
-        all.update(name => {
-          description: description,
-          behaviour: behaviour
-        })
-      end
-
-      def all_as_collection
-        all.map { |key, value| [value[:description], key]  }
-      end
-
-      private
-
-      def add_orders
-        price_behaviour_field = currency.present? ? "prices.#{currency}" : 'product.price'
-
-        add('price_high',     "Price: High to Low",            [price_behaviour_field, 'desc'])
-        add('price_low',      "Price: Low to High",            [price_behaviour_field, 'asc'])
-        add('newest',         "Newest First",                  ['product.created_at', 'desc'])
-        add('oldest',         "Oldest First",                  ['product.created_at', 'asc'])
-        add('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc'])
-        add('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc'])
-        add('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc'])
-        add('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc'])
-        add('native',         "Do Not Apply Ordering",         nil)
-      end
     end
   end
 end

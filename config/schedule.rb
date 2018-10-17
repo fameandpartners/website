@@ -44,8 +44,8 @@ every(6.hours) { rake 'reports:order_bot_failure_check' }
 
 # Refulfillment and batching
 every(15.minutes) { rake 'data:refulfill_items' }
-every(5.minutes) { rake 'data:batch_items' }
-every(1.hour) { rake 'data:groom_batches'}
+#every(5.minutes) { rake 'data:batch_items' }
+#every(1.hour) { rake 'data:groom_batches'}
 
 # Newgistics scheduled tasks
 every(1.day) {

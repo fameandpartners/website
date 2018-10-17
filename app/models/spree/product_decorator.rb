@@ -292,7 +292,6 @@ Spree::Product.class_eval do
   def delete
     self.update_column(:deleted_at, Time.now)
     variants_including_master.update_all(:deleted_at => Time.now)
-    update_index
   end
 
   def set_default_prototype
@@ -390,26 +389,6 @@ Spree::Product.class_eval do
     @discount ||= Repositories::Discount.get_product_discount(self.id)
   end
 
-  def plus_size?
-    # NOTE: Alexey Bobyrev 31 Mar 2017
-    # We need explicit check on nil value for memoization of false value
-    if @plus_size.nil?
-      @plus_size = taxons.where(name: 'Plus Size').exists?
-    end
-  end
-
-  def jumpsuit?
-    # NOTE: Alexey Bobyrev 31 Mar 2017
-    # We need explicit check on nil value for memoization of false value
-    if @jumpsuit.nil?
-      @jumpsuit = taxons.where(name: 'Jumpsuit').exists?
-    end
-  end
-
-  def height_customisable?
-    ! jumpsuit?
-  end
-
   def presenter_as_details_resource(site_version = nil)
     @product ||= Products::DetailsResource.new(
       site_version: site_version,
@@ -429,6 +408,10 @@ Spree::Product.class_eval do
     self.class.has_render?(self)
   end
 
+  def is_new_product?
+    self.class.is_new_product?(master.sku)
+  end
+
   def self.has_render?(product)
     is_new_product?(product.master.sku)
   end
@@ -438,16 +421,29 @@ Spree::Product.class_eval do
   end
 
   def self.is_new_product?(product_id)
-    product_id.downcase.starts_with?("fg10") || product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
+    product_id.downcase.starts_with?("fpg10") || product_id.downcase.starts_with?("sw")
   end
 
-  def self.format_new_pid(fabric, customizations)
+  def self.format_new_pid(sku, fabric, customizations)
+    pid_components = self.format_new_pid_components(fabric, customizations);
+    product_sku = sku.upcase
+
+    return product_sku if pid_components.blank?
+    
+    "#{product_sku}~#{pid_components}"
+  end
+
+  def self.format_new_pid_components(fabric, customizations)
     should_split = fabric && /^\d+-\d+$/ =~ fabric
 
     components = [
       should_split ? fabric.split('-') : fabric,
       customizations.map{|c| c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
+  end
+
+  def self.format_render_url(sku, fabric, customizations)
+    "#{configatron.product_render_url}/#{sku.upcase}/FrontNone/704x704/#{Spree::Product.format_new_pid_components(fabric, customizations)}.png"
   end
 
   private

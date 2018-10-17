@@ -26,7 +26,7 @@ class Repositories::CartProduct
         height: height,
         height_value: line_item.personalization&.height_value,
         height_unit: line_item.personalization&.height_unit,
-        name: product.name,
+        name: line_item.style_name,
         sku: product.sku,
         permalink: product.permalink,
         description: line_item_description,
@@ -46,7 +46,7 @@ class Repositories::CartProduct
         default_customised_days_for_making: product.default_customised_days_for_making,
         delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
         price_drop_au_product: price_drop_au_product?,
-        fabric: line_item_fabric
+        fabric: line_item_fabric,
         )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
@@ -54,8 +54,8 @@ class Repositories::CartProduct
       # result.making_options = product_making_options
       result.available_making_options = available_making_options
       result.height         = height
-      result.brides_maid = product.price < 1
       result.swatch = product&.category&.category == 'Sample'
+      result.path = line_item.stock.nil? ? ApplicationController.helpers.collection_product_path(result) : ApplicationController.helpers.line_item_path(line_item.id)
       result
     end
   end
@@ -85,7 +85,7 @@ class Repositories::CartProduct
     end
 
     def variant
-      @variant ||= Repositories::ProductVariants.read(@line_item.variant_id)
+      @variant ||= Repositories::ProductVariants.read(@line_item.variant)
     end
 
     def color_id
@@ -97,7 +97,7 @@ class Repositories::CartProduct
     end
 
     def product_image
-      Repositories::LineItemImages.new(line_item: line_item).read(color_id: color_id, cropped: true)
+      Repositories::LineItemImages.new(line_item: line_item).read(color_id: color_id, fabric_id: line_item.fabric&.id, fabric: line_item.fabric, cropped: true)
     end
 
     def product_customizations

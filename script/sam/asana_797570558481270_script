@@ -1,0 +1,18 @@
+rm -rf ~/import || true
+if [ `uname` = "Darwin" ]; then
+  rm -rf ~/leahs/website/spree || true
+  rm -rf ~/leahs/website/public/spree || true
+  cp -r ~/oversize_leahs/spree ~/leahs/website/public/
+  ~/bin/leahs_db 20180910
+fi
+./script/prepare_import.sh https://www.dropbox.com/sh/mccyiyp3b1zs9ij/AACLDBMpOPVmWFbtZM2WZcX2a?dl=1
+MARK_NEW_THIS_WEEK=false ./script/import_products.sh
+bundle exec rake data:six_week_delivery
+bundle exec rake data:add_fastmaking_to_all_products
+bundle exec rake data:make_fast_making_18_dollars
+bundle exec rake data:fabric_bla_bla
+bundle exec rake elasticsearch:reindex
+bundle exec rails runner 'Rails.cache.clear'
+if [ `uname` = "Darwin" ]; then
+  cp -r ~/leahs/website/spree ~/leahs/website/public/;
+fi

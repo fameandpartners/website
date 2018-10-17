@@ -73,21 +73,17 @@ class Populator
       end
     end
 
-    def add_fabric_to_line_item
-      line_item.fabric = product_fabric
-      line_item.save!
-    end
-
     def add_personalized_product
       personalization = build_personalization
       if personalization.valid?
         add_product_to_cart
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
-        add_fabric_to_line_item
-        line_item.save
+        line_item.fabric = product_fabric
+        line_item.curation_name = product_attributes[:curation_name]
+        line_item.save!
         personalization.line_item = line_item
         line_item.personalization = personalization
-        personalization.save
+        personalization.save!
       end
 
       true
@@ -143,7 +139,7 @@ class Populator
         variant = Spree::Variant.where(id: product_attributes[:variant_id]).first
 
         unless variant
-          variant = Spree::Variant.find_by_sku(product_attributes[:variant_id].downcase)
+          variant = Spree::Variant.find_by_sku(product_attributes[:variant_id])
         end
 
         variant

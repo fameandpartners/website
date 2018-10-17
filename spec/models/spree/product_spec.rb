@@ -123,26 +123,6 @@ describe Spree::Product, :type => :model do
     end
   end
 
-  describe '#height_customisable?' do
-    subject(:product) do
-      FactoryGirl.build(:dress).tap { |product|
-        allow(product).to receive(:jumpsuit?).and_return(is_jumpsuit)
-      }
-    end
-
-    context 'everything else is customisable' do
-      let(:is_jumpsuit) { false }
-
-      it { expect(product).to be_height_customisable }
-    end
-
-    context 'jumpsuits are not customisable' do
-      let(:is_jumpsuit) { true }
-
-      it { expect(product).to_not be_height_customisable }
-    end
-  end
-
   describe 'set_default_values' do
     it 'sets latest size_chart' do
       subject.send(:set_default_values)

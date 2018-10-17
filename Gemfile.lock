@@ -227,6 +227,9 @@ GEM
       tzinfo (~> 0.3.29)
     activerecord-immutable (0.0.3)
       activerecord (>= 3.2)
+    activerecord-postgres-json (0.2.1)
+      activerecord (>= 3.2, < 4)
+      multi_json
     activeresource (3.2.22.5)
       activemodel (= 3.2.22.5)
       activesupport (= 3.2.22.5)
@@ -238,7 +241,6 @@ GEM
     akami (1.2.2)
       gyoku (>= 0.4.0)
       nokogiri
-    ansi (1.5.0)
     arel (3.0.3)
     asset_sync (2.0.0)
       activemodel
@@ -259,10 +261,6 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -349,11 +347,11 @@ GEM
       warden (~> 1.2.1)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
-    diff-lcs (1.2.5)
+    diff-lcs (1.3)
     disposable (0.1.15)
       representable (>= 2.2.3, < 2.4.0)
       uber
-    domain_name (0.5.24)
+    domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     eco (1.0.0)
       coffee-script
@@ -365,25 +363,10 @@ GEM
       elasticsearch-transport (= 6.1.0)
     elasticsearch-api (6.1.0)
       multi_json
-    elasticsearch-dsl (0.1.5)
-    elasticsearch-model (5.0.0)
-      activesupport (> 3)
-      elasticsearch (> 1)
-      hashie
-    elasticsearch-persistence (0.1.9)
-      activemodel (> 3)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      elasticsearch-model (>= 0.1)
-      hashie
-      virtus
-    elasticsearch-ruby (0.0.4)
-      activesupport (>= 3.0.0)
-      thrift
+    elasticsearch-dsl (0.1.6)
     elasticsearch-transport (6.1.0)
       faraday
       multi_json
-    equalizer (0.0.11)
     erubis (2.7.0)
     event_sourced_record (0.2.2)
       activemodel
@@ -557,7 +540,6 @@ GEM
     gyoku (0.4.6)
       builder (>= 2.1.2)
     hashie (3.5.7)
-    hashr (0.0.22)
     highline (1.6.18)
     hike (1.2.3)
     http (2.2.2)
@@ -565,7 +547,7 @@ GEM
       http-cookie (~> 1.0)
       http-form_data (~> 1.0.1)
       http_parser.rb (~> 0.6.0)
-    http-cookie (1.0.2)
+    http-cookie (1.0.3)
       domain_name (~> 0.5)
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
@@ -573,7 +555,6 @@ GEM
     httpi (1.1.1)
       rack
     i18n (0.6.11)
-    ice_nine (0.11.2)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     journey (1.0.4)
@@ -585,7 +566,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.3)
+    json (1.8.6)
     jwt (1.5.6)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -619,7 +600,7 @@ GEM
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
-    netrc (0.10.3)
+    netrc (0.11.0)
     newrelic_rpm (5.2.0.345)
     nokogiri (1.5.11)
     nori (1.1.5)
@@ -771,7 +752,7 @@ GEM
     rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-rails (3.2.1)
+    rspec-rails (3.2.3)
       actionpack (>= 3.0, < 4.3)
       activesupport (>= 3.0, < 4.3)
       railties (>= 3.0, < 4.3)
@@ -865,20 +846,11 @@ GEM
       tins (~> 1.0)
     test-unit (3.1.5)
       power_assert
-    thor (0.19.1)
+    thor (0.19.4)
     thread_safe (0.3.6)
-    thrift (0.11.0.0)
     tilt (1.4.1)
     timecop (0.8.0)
     tins (1.5.1)
-    tire (0.6.2)
-      activemodel (>= 3.0)
-      activesupport
-      ansi
-      hashr (~> 0.0.19)
-      multi_json (~> 1.3)
-      rake
-      rest-client (~> 1.6)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -894,7 +866,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.1)
+    unf_ext (0.0.7.5)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -906,11 +878,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-    virtus (1.0.5)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
     wasabi (2.5.1)
@@ -935,6 +902,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   active_model_serializers
+  activerecord-postgres-json
   addressable
   admin_ui!
   afterpay!
@@ -962,9 +930,8 @@ DEPENDENCIES
   default_value_for
   device_detector (~> 0.8.1)
   eco
+  elasticsearch
   elasticsearch-dsl
-  elasticsearch-persistence
-  elasticsearch-ruby
   event_sourced_record
   execjs (~> 2)
   factory_girl_rails (= 4.2.1)
@@ -1002,6 +969,7 @@ DEPENDENCIES
   rack-handlers
   rack-proxy
   rails (~> 3.2.22.5)
+  rake (< 12.0)
   react-rails (~> 1.6)
   redcarpet (~> 2.3.0)
   reform (~> 2.0.5)
@@ -1039,7 +1007,6 @@ DEPENDENCIES
   term-ansicolor
   test-unit
   timecop
-  tire
   turnip (~> 1.3.1)
   uglifier (= 1.3.0)
   unicorn

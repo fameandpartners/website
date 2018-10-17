@@ -21,6 +21,7 @@ class UserCart::ProductsController < UserCart::BaseController
         height:             params[:height],
         height_value:       params[:height_value],
         height_unit:        params[:height_unit],
+        curation_name:      params[:curation_name],
         quantity: 1
       }
     )

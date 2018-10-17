@@ -68,13 +68,11 @@ module PathBuildersHelper
 
     is_new_product =  Spree::Product.use_new_pdp?(product)
 
-    if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
-      path_parts << "#{product_type}-#{product[:urls][locale]}"
-    elsif product.is_a?(UserCart::CartProductPresenter) && is_new_product
+    if product.is_a?(UserCart::CartProductPresenter) && is_new_product
       fabric = product.fabric.try(:[], :fabric_name)
       cust = product.customizations || [];
 
-      path_parts << "custom-#{product_type}-#{product.sku.upcase}~#{Spree::Product.format_new_pid(fabric, cust)}"
+      path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.sku, fabric, cust)}"
     else
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end

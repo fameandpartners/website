@@ -36,10 +36,16 @@ namespace :newgistics do
       line_items.each do |li|
         product = li.product
         lip = Orders::LineItemPresenter.new(li)
-        csv << [CustomItemSku.new(li).call, product.name, '', '', '',
+        sku = CustomItemSku.new(li).call
+
+        # https://app.asana.com/0/791202471134961/802917601473069
+        # Newgistics can't handle sku's over 60 chars in length
+        next if sku.size > 59
+
+        csv << [sku, product.name, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
                 GlobalSku.find_or_create_by_line_item(line_item_presenter: lip).upc, product.category&.category, product.factory.name, '',
-                CustomItemSku.new(li).call, product.images&.first&.attachment&.url, '', 'CN']
+                sku, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
 

@@ -12,6 +12,7 @@ class WebpackProxy < Rack::Proxy
         request.path =~ configatron.fame_webclient_always_regex ||
         (request.path =~ configatron.fame_webclient_pdp_regex && Features.active?(:new_pdp)) ||
         (request.path =~ configatron.fame_webclient_content_regex && Features.active?(:new_content)) ||
+        (request.path =~ configatron.fame_webclient_category_regex && Features.active?(:new_category_page)) ||
         (request.path =~ configatron.fame_webclient_account_regex && Features.active?(:new_account))
       )
       backend = URI(configatron.fame_webclient_url)

@@ -3593,7 +3593,8 @@ CREATE TABLE public.spree_line_items (
     upc character varying(255),
     fabric_id integer,
     return_inventory_item_id integer,
-    refulfill_status character varying(255)
+    refulfill_status character varying(255),
+    curation_name text
 );
 
 
@@ -5389,6 +5390,40 @@ ALTER SEQUENCE public.user_style_profiles_id_seq OWNED BY public.user_style_prof
 
 
 --
+-- Name: variant_taxons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.variant_taxons (
+    id integer NOT NULL,
+    taxon_id integer,
+    product_id integer,
+    fabric_or_color character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: variant_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.variant_taxons_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: variant_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.variant_taxons_id_seq OWNED BY public.variant_taxons.id;
+
+
+--
 -- Name: wedding_atelier_event_assistants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6693,6 +6728,13 @@ ALTER TABLE ONLY public.user_style_profiles ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: variant_taxons id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.variant_taxons ALTER COLUMN id SET DEFAULT nextval('public.variant_taxons_id_seq'::regclass);
+
+
+--
 -- Name: wedding_atelier_event_assistants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7884,6 +7926,14 @@ ALTER TABLE ONLY public.user_style_profile_taxons
 
 
 --
+-- Name: variant_taxons variant_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.variant_taxons
+    ADD CONSTRAINT variant_taxons_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: wedding_atelier_event_assistants wedding_atelier_event_assistants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8142,6 +8192,13 @@ CREATE INDEX index_fabrications_on_purchase_order_number ON public.fabrications 
 --
 
 CREATE UNIQUE INDEX index_fabrications_on_uuid ON public.fabrications USING btree (uuid);
+
+
+--
+-- Name: index_fabrics_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_on_name ON public.fabrics USING btree (name);
 
 
 --
@@ -8866,10 +8923,24 @@ CREATE INDEX index_spree_taxon_banners_on_spree_taxon_id ON public.spree_taxon_b
 
 
 --
+-- Name: index_spree_users_on_authentication_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spree_users_on_authentication_token ON public.spree_users USING btree (authentication_token);
+
+
+--
 -- Name: index_spree_variants_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_spree_variants_on_product_id ON public.spree_variants USING btree (product_id);
+
+
+--
+-- Name: index_spree_variants_on_sku; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spree_variants_on_sku ON public.spree_variants USING btree (sku);
 
 
 --
@@ -10238,3 +10309,13 @@ INSERT INTO schema_migrations (version) VALUES ('20180717203709');
 INSERT INTO schema_migrations (version) VALUES ('20180803233733');
 
 INSERT INTO schema_migrations (version) VALUES ('20180815070122');
+
+INSERT INTO schema_migrations (version) VALUES ('20180904045723');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005032844');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005033718');
+
+INSERT INTO schema_migrations (version) VALUES ('20181005033839');
+
+INSERT INTO schema_migrations (version) VALUES ('20181008013910');

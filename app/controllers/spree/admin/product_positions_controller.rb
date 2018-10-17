@@ -22,11 +22,7 @@ module Spree
 
       # update changes
       def update
-        Tire.index(configatron.elasticsearch.indices.spree_products) do
-          delete
-          import ::Spree::Product.active
-        end
-        Tire.index(configatron.elasticsearch.indices.spree_products).refresh
+        Utility::Reindexer.reindex
 
         render nothing: true
       end

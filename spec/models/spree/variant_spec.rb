@@ -37,24 +37,6 @@ describe Spree::Variant, :type => :model do
     end
   end
 
-  describe '#plus_size defers to product' do
-    subject(:variant) do
-      Spree::Variant.new.tap { |v|
-        allow(v).to receive_message_chain('product.plus_size?').and_return(is_plus_size)
-      }
-    end
-
-    context do
-      let(:is_plus_size) { false }
-      it { expect(variant.product_plus_size).to be_falsey }
-    end
-
-    context do
-      let(:is_plus_size) { true }
-      it { expect(variant.product_plus_size).to be_truthy }
-    end
-  end
-
   context "before save" do
 
     # if master variant update it's prices, then all default (inherited from master) prices
@@ -95,11 +77,12 @@ describe Spree::Variant, :type => :model do
 
       it 'creates new variant prices' do
         variant.prices.map(&:destroy)
+        master.product.reload
 
-        aud_master_price.update_attributes(amount: new_aud_amount)
-        usd_master_price.update_attributes(amount: new_usd_amount)
+        aud_master_price.amount = new_aud_amount
+        usd_master_price.amount = new_usd_amount
 
-        master.reload
+        
         master.save
         variant.reload
 
@@ -109,11 +92,11 @@ describe Spree::Variant, :type => :model do
 
       it 'normalises incorrect variant prices' do
         variant.prices.each { |price| price.update_attributes(amount: 0) }
+        master.product.reload
 
-        aud_master_price.update_attributes(amount: new_aud_amount)
-        usd_master_price.update_attributes(amount: new_usd_amount)
+        aud_master_price.amount = new_aud_amount
+        usd_master_price.amount = new_usd_amount
 
-        master.reload
         master.save
         variant.reload
 
@@ -122,7 +105,7 @@ describe Spree::Variant, :type => :model do
       end
 
       it 'saving non master variants does not touch master prices' do
-        variant.prices.each { |price| price.update_attributes(amount: 555) }
+        variant.prices.each { |price| price.amount = 555 }
         variant.save
 
         expect(master.prices).to include_price('AUD', original_amount)

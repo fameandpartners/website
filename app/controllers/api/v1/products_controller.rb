@@ -9,8 +9,25 @@ CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further 
 
 module Api
   module V1
-    class ProductsController < ApplicationController
+    class ProductsController < Api::ApiBaseController
+      include PathBuildersHelper
+
       respond_to :json
+      caches_action :show, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
+      caches_action :index, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
+      caches_action :search, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
+
+
+      def import_summary
+        spree_products = Spree::Product
+          .not_deleted
+          .includes(:master)
+          .reject(&:is_new_product?)
+
+        respond_with ({
+          products: spree_products.map{|p| { id: p.id, sku: p.sku, name: p.name, updated_at: p.updated_at, created_at: p.created_at  } }
+        })
+      end
 
       def index
         pids = params[:pids] || []
@@ -25,8 +42,11 @@ module Api
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
-          spree_product = spree_products.find { |p| p.master.sku == sku }
-
+          spree_product = spree_products 
+            .sort_by(&:created_at) # make sure we select the latest product
+            .reverse
+            .find { |p| p.master.sku == sku }
+          
           next unless spree_product
 
           all_customizations = JSON.parse!(spree_product.customizations)
@@ -60,7 +80,7 @@ module Api
           {
             pid: pid,
             name: spree_product.name,
-            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pvc&.color&.name),
+            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.option_value.name),
             media: images
               .sort_by(&:position)
               .take(2)
@@ -88,13 +108,284 @@ module Api
         respond_with products
       end
 
+      def search
+        color_mapping = {
+          "print": "",
+          "white-ivory": '#f5f4f3',
+          "nude-tan": '#E6D4C0',
+          "pastel": '#CBF6EB',
+          "metallic": '#ACA8A2',
+          "grey": '#7e7e7f',
+          "yellow": '#e9de0a',
+          "orange": '#ea5d32',
+          "pink": '#f458a6',
+          "red": '#e01b1b',
+          "green": '#10a522',
+          "purple": '#48217f',
+          "blue": '#0000ff',
+          "black": '#050505',
+        }
+        image_mapping = {
+          "print": 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images/BlackAndWhiteGingham.jpg',
+        }
+
+        filter = Array.wrap(params[:facets])
+
+        color_ids = Repositories::ProductColors.color_groups
+          .select {|cg| filter.include?(cg[:name]) }
+          .flat_map {|cg| cg[:color_ids]}
+
+        # body_shapes = ProductStyleProfile::BODY_SHAPES & filter
+
+        # there is am overlap between color group names & taxons, so we make color groups win
+        color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
+        taxons = Repositories::Taxonomy.taxons
+        taxon_ids = filter
+          .reject { |f| color_group_names.include?(f) }
+          .map {|f| taxons.select { |t| t.permalink.ends_with?(f)}.map(&:id) }
+          .compact
+          .reject(&:empty?)
+
+        offset = params[:lastIndex].to_i  || 0
+        page_size = params[:pageSize].to_i || 36
+
+        price_min = nil;
+        price_max = nil;
+
+        if filter.include?('0-199') 
+          price_min = 0
+        elsif filter.include?('200-299')
+          price_min = 200
+        elsif filter.include?('300-399')
+          price_min = 300
+        elsif filter.include?('400')
+          price_min = 400
+        end
+
+        if filter.include?('400') 
+          price_max = nil
+        elsif filter.include?('300-399')
+          price_max = 399
+        elsif filter.include?('200-299')
+          price_max = 299
+        elsif filter.include?('0-199')
+          price_max = 199
+        end
+
+
+        query_params = { 
+          taxon_ids: taxon_ids,
+          # body_shapes: body_shapes,
+          color_ids: color_ids,
+          order: params[:sortField],
+          price_min: price_min,
+          price_max: price_max, 
+          currency: current_currency.downcase,
+          query_string: params[:query],
+          include_aggregation_taxons: true,
+          boost_pids: Array.wrap(params[:boostPids])
+        }
+        query = Search::ColorVariantsESQuery.build(query_params)
+        result = Elasticsearch::Client.new(host: configatron.es_url).search(
+          index: configatron.elasticsearch.indices.color_variants,
+          body: query,
+          size: page_size,
+          from: offset,
+        )
+
+        #taxons are additive
+        aggregation_taxons = Hash[*result["aggregations"]["taxon_ids"]["buckets"].map(&:values).flatten]
+
+
+        aggregation_colors_result = Elasticsearch::Client.new(host: configatron.es_url).search(
+          index: configatron.elasticsearch.indices.color_variants,
+          body: Search::ColorVariantsESQuery.build(query_params.merge(color_ids: nil, include_aggregation_color_ids: true)),
+          size: 0,
+          from: 0
+        )
+        aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_ids"]["buckets"].map(&:values).flatten]
+
+
+        # aggregation_body_shapes_result = Elasticsearch::Client.new(host: configatron.es_url).search(
+        #   index: configatron.elasticsearch.indices.color_variants,
+        #   body: Search::ColorVariantsESQuery.build(query_params.merge(body_shapes: nil, include_aggregation_bodyshapes: true)),
+        #   size: 0,
+        #   from: 0
+        # )
+        # aggregation_body_shapes = Hash[*aggregation_body_shapes_result["aggregations"]["body_shape_ids"]["buckets"].map(&:values).flatten]
+
+        aggregation_prices_result = Elasticsearch::Client.new(host: configatron.es_url).search(
+          index: configatron.elasticsearch.indices.color_variants,
+          body: Search::ColorVariantsESQuery.build(query_params.merge(price_min: nil, price_max: nil, include_aggregation_prices: true)),
+          size: 0,
+          from: 0
+        )
+        aggregation_prices = Hash[*aggregation_prices_result["aggregations"]["prices"]["buckets"].map{|key, value| [key, value["doc_count"]]}.flatten]
+        
+        response = {
+          results: result['hits']['hits'].map do |r|
+            {
+              _score: r['_score'],
+              pid: r['_source']['product']['pid'],
+              productId: r['_source']['product']['sku'],
+              name: r['_source']['product']['name'],
+              price: r['_source']['prices'] && {
+                "en-AU": r['_source']['prices']['aud'] * 100,
+                "en-US": r['_source']['prices']['usd'] * 100
+              },
+              url: r['_source']['product']['url'],
+              images: r['_source']['cropped_images'].map do |src|
+                {
+                  src: [{
+                    width: 411,
+                    height: 590,
+                    url: src,
+                  }]
+                }
+              end,
+              productVersionId: 0,
+            }
+          end,
+          
+          "facetConfigurations": {
+            "search": [
+              {
+                "name": "Filter by",
+                "hideHeader": false,
+                "facetGroupIds": [
+                  "color",
+                  "style",
+                  # "bodyshape",
+                  "price"
+                ]
+              }
+            ],
+          },
+          facetGroups: {
+            "color": {
+              groupId: "color",
+              name: "Color",
+              multiselect: true,
+              facets: Repositories::ProductColors.color_groups.each_with_index.map do |group, i| 
+                {
+                  "facetId": group[:name],
+                  "title": group[:presentation],
+                  "order": color_mapping.keys.find_index(group[:name].to_sym),
+                  "docCount": group[:color_ids].map {|i| aggregation_colors[i] || 0}.sum,
+                  "facetMeta": {
+                    "hex": color_mapping[group[:name].to_sym],
+                    "image": image_mapping[group[:name].to_sym]
+                  }
+                }
+              end.sort_by{ |f| f[:order] }.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            },
+            
+            "style": {
+              groupId: "style",
+              name: "Style",
+              multiselect: true,
+              facets: Repositories::Taxonomy.collect_filterable_taxons.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
+                {
+                  "facetId": taxon.permalink,
+                  "title": taxon.name,
+                  "order": i,
+                  "docCount": aggregation_taxons[taxon.id]  || 0,
+                }
+              end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            },
+
+            # bodyshape: {
+            #   groupId: "bodyshape",
+            #   name: "Bodyshape",
+            #   multiselect: true,
+            #   facets: ProductStyleProfile::BODY_SHAPES.sort.each_with_index.map do |shape, i|
+            #     {
+            #       "facetId": shape,
+            #       "title": shape.humanize,
+            #       "order": i,
+            #       "docCount": aggregation_body_shapes[i] || 0,
+            #     }
+            #   end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            # },
+
+            price: {
+              groupId: "price",
+              name: "Price",
+              multiselect: true,
+              facets: [
+                {
+                  facetId: '0-199',
+                  title: '$0 - $199',
+                  order: 0,
+                  "docCount": aggregation_prices['0-199'],
+                },
+                {
+                  facetId: '200-299',
+                  title: '$200 - $299',
+                  order: 1,
+                  "docCount": aggregation_prices['200-299'],
+                },
+                {
+                  facetId: '300-399',
+                  title: '$300 - $399',
+                  order: 2,
+                  "docCount": aggregation_prices['300-399'],
+                },
+                {
+                  facetId: '400',
+                  title: '$400+',
+                  order: 3,
+                  "docCount": aggregation_prices['400'],
+                }
+              ].select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            }
+          },
+          sortOptions: [
+            # {
+            #   name: "Sorted by most relevant",
+            #   sortField: "native",
+            #   sortOrder: ""
+            # },
+            # {
+            #   name: "Sorted by best sellers",
+            #   sortField: "best_sellers",
+            #   sortOrder: ""
+            # },
+            {
+              name: "Sorted by newest",
+              sortField: "newest",
+              sortOrder: ""
+            },
+            {
+              name: "Sorted by price high to low",
+              sortField: "price_high",
+              sortOrder: ""
+            },
+            {
+              name: "Sorted by price low to high",
+              sortField: "price_low",
+              sortOrder: ""
+            }
+          ],
+          lastIndex: page_size + offset,
+          lastValue: nil,
+          hasMore: result['hits']['hits'].count == page_size,
+        }
+
+        respond_with response.to_json
+      end
 
 
       def show
+        product_id = params[:id]
+
+        variant = Spree::Variant.order('id DESC').find_by_sku(params[:id])
+        product_id = variant.product_id if variant
+
         product = Spree::Product
           .not_deleted
           .includes(:product_properties)
-          .find(params[:id])
+          .find(product_id)
 
         colors = product.product_color_values
           .includes(:option_value)
@@ -117,10 +408,10 @@ module Api
           .includes(:viewable)
 
         product_viewmodel = {
-          id: product.id,
-          productId: product.id,
+          productId: product.sku,
+          urlProductId: product.id,
           cartId: product.master.id,
-          returnDescription: 'Shipping is free on your customized item. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>',
+          returnDescription: 'Shipping is free on your customized item. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>',
           deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
 
           curationMeta: {
@@ -132,6 +423,10 @@ module Api
           },
           isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
+          prices: {
+            'en-AU' => (product.price_in('AUD').amount * 100).to_i,
+            'en-US' => (product.price_in('USD').amount * 100).to_i,
+          },
           paymentMethods: {
             afterPay: current_site_version.is_australia?
           },
@@ -166,7 +461,7 @@ module Api
                 type: :return,
                 sortOrder: 1,
                 meta: {
-                  returnDescription: 'All orders ship free. <a href="/faqs#collapse-returns-policy" target="_blank">Learn more</a>'
+                  returnDescription: 'All orders ship free. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>'
                 },
                 incompatibleWith: { allOptions: [] },
               }
@@ -323,7 +618,6 @@ module Api
             geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
 
             {
-              name: image_size,
               width: image_size == :original ? image.attachment_width : geometry.width,
               height: image_size == :original ? image.attachment_height : geometry.height,
               url: image.attachment.url(image_size),
@@ -344,7 +638,11 @@ module Api
           title: c['customisation_value']['presentation'],
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
-          price: (BigDecimal.new(c['customisation_value']['price']) * 100).to_i,
+          price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+          prices: {
+            'en-AU' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+            'en-US' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i
+          },
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomization,
@@ -390,6 +688,10 @@ module Api
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
+          prices: {
+            'en-AU' => f.recommended ? 0 : (f.fabric.price_in('AUD') * 100).to_i,
+            'en-US' => f.recommended ? 0 : (f.fabric.price_in('USD') * 100).to_i,
+          },
           isProductCode: true,
           isRecommended: f.recommended,
           type: :Fabric,
@@ -425,17 +727,21 @@ module Api
           componentTypeId: :Color,
           componentTypeCategory: :Color,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+          prices: {
+            'en-AU' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+            'en-US' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0
+          },
           isProductCode: true,
           isRecommended: !c.custom,
           type: :Color,
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-            image: {
+            image: (!c.option_value.value&.include?('#') || !c.option_value.image_file_name.blank?) ? {
               url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
               width: 0,
               height: 0,
-            },
+            } : nil,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
@@ -453,6 +759,10 @@ module Api
           componentTypeId: :Size,
           componentTypeCategory: :Size,
           price: 0,
+          prices: {
+            'en-AU' => 0,
+            'en-US' =>  0
+          },
           isProductCode: false,
           isRecommended: false,
           type: :Size,

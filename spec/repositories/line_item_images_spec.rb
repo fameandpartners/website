@@ -13,7 +13,7 @@ describe Repositories::LineItemImages do
 
       before(:each) do
         expect(Repositories::ProductImages).to receive(:new).with(product: product).and_return(product_image_repository_double)
-        expect(product_image_repository_double).to receive(:read).with(color_id: 123, cropped: true, product_customizations: nil, fabric: nil).and_return({})
+        expect(product_image_repository_double).to receive(:read).with(color_id: 123, cropped: true, product_customizations: nil, fabric_id: nil, fabric: nil).and_return({})
       end
 
       it 'returns its product image' do

@@ -10,7 +10,6 @@ class ClearCacheWorker
   def perform(silent: false)
     @silent = !! silent
     update_color_variants_elastic_index
-    update_products_elastic_index
     reset_cache
     update_repositories
   end
@@ -20,16 +19,6 @@ class ClearCacheWorker
   end
 
   private
-
-    def update_products_elastic_index
-      Tire.index(configatron.elasticsearch.indices.spree_products) do
-        delete
-        import ::Spree::Product.all
-      end
-
-      Tire.index(configatron.elasticsearch.indices.spree_products).refresh
-    end
-
     def update_color_variants_elastic_index
       ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
     end

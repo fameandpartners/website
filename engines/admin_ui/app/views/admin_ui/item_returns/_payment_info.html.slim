@@ -3,9 +3,10 @@ h3 = @item_return.order_payment_method
   p = link_to "#{Money.new(@item_return.order_paid_amount).format} #{@item_return.order_payment_ref}", "https://dashboard.pin.net.au/charges/#{@item_return.order_payment_ref}"
 - elsif @item_return.order_payment_method == 'AfterPay'
   p
-    = link_to main_app.afterpay_merchant_panel_refund_path(@item_return.order_payment_ref), target: :blank
-      = Money.new(@item_return.order_paid_amount).format
-      =<> @item_return.order_payment_ref
+    - if @item_return.order_payment_ref
+      = link_to main_app.afterpay_merchant_panel_refund_path(@item_return.order_payment_ref), target: :blank
+        = Money.new(@item_return.order_paid_amount).format
+        =<> @item_return.order_payment_ref
 
 - elsif  @item_return.order_payment_method == 'PayPal'
   p

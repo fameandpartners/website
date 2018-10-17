@@ -36,6 +36,12 @@ module BatchUpload
       total_directories = directories.size
       parent = File.basename @_location
       directories.each_with_index do |path, idx|
+        if File.basename(path)=~/#{ENV['PARAM1']}/i
+          puts "Images Folder TAKE #{path}"
+        else
+          puts "Images Folder SKIP #{path}"
+          next
+        end
         info '-' * 25
         name = File.basename path
 

@@ -37,7 +37,7 @@ class ReturnMailer < ActionMailer::Base
       
       formatted_return_items = return_items.map do |item|
         {
-          name: item.line_item&.product&.name,
+          name: item.line_item&.style_name,
           size: item.line_item&.cart_item&.size&.presentation,
           color: item.line_item&.cart_item&.color&.presentation,
           image: item.line_item&.cart_item&.image&.large,

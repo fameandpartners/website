@@ -83,11 +83,11 @@ Spree::LineItem.class_eval do
     total_adjustment = 0
 
     making_options.each do |mo|
-      if (mo.product_making_option.fast_making? || mo.product_making_option.super_fast_making? ) and mo.price
+      if (mo.product_making_option&.fast_making? || mo.product_making_option&.super_fast_making? ) and mo.price
         total_adjustment += mo.price
       end
       # slow_making price will be percentage based
-      if mo.product_making_option.slow_making?
+      if mo.product_making_option&.slow_making?
         total_adjustment = total_adjustment + self.attributes["price"]*mo.price
       end
     end
@@ -96,7 +96,7 @@ Spree::LineItem.class_eval do
   end
 
   def fast_making?
-    making_options.any? {|mo| mo.product_making_option.fast_making? }
+    making_options.any? {|mo| mo.product_making_option&.fast_making? }
   end
 
   def super_fast_making?
@@ -147,7 +147,7 @@ Spree::LineItem.class_eval do
 
   def making_options_text
     return '' if making_options.blank?
-    making_options.map{|option| option.name.upcase }.join(', ')
+    making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
   end
 
   def cart_item
@@ -191,7 +191,7 @@ Spree::LineItem.class_eval do
   end
 
   def style_name
-    variant.try(:product).try(:name) || 'Missing Variant'
+    curation_name || variant.try(:product).try(:name) || 'Missing Variant'
   end
 
   def fabric_swatch?
@@ -243,7 +243,9 @@ Spree::LineItem.class_eval do
         "height": self.height_name,
         "height_unit": self.height_unit,
         "height_value": self.height_value,
-        "image": self.image_url
+        "image": self.image_url,
+        "sku": self.new_sku,
+        "productSku": self.product_sku,
       }
     end
     if self.item_return.present?
@@ -257,6 +259,18 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def new_sku
+    Spree::Product.format_new_pid(
+      self.product_sku,
+      self.fabric&.name || self.personalization&.color&.name|| self.color,
+      JSON.parse(self.customizations)
+    )
+  end
+
+  def product_sku
+    self.variant.product.sku
   end
 
   def recommended_fabric?

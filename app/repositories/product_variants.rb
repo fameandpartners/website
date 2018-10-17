@@ -41,11 +41,8 @@ class Repositories::ProductVariants
     read_all.detect{|v| v.id  == variant_id }
   end
 
-  def self.read(variant_id)
-    Rails.cache.fetch("product-variant-#{ variant_id}",  Repositories::CachingSystem.cache_fetch_params) do
-      variant = Spree::Variant.where(id: variant_id).first
-      variant.blank? ? OpenStruct.new({}) : format_variant(variant)
-    end
+  def self.read(variant)
+    variant.blank? ? OpenStruct.new({}) : format_variant(variant)
   end
 
   private

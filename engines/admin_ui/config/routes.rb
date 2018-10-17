@@ -24,7 +24,7 @@ AdminUi::Engine.routes.draw do
       delete :expire, :on => :collection
     end
 
-    resources :product_indexes, only: [:index, :show] do
+    resources :product_indexes, only: [:index] do
       delete :clear, :on => :collection
     end
 

@@ -65,7 +65,7 @@ class UserMoodboard::Populator
     end
 
     def add_variant(variant)
-      product_variant = Repositories::ProductVariants.new(product_id: variant.product_id).read(variant.id)
+      product_variant = Repositories::ProductVariants.new(product_id: variant.product_id).read(variant)
       NewRelic::Agent.notice_error('UNEXPECTED USE OF UserMoodboard::Populator#add_variant')
 
       item = user.wishlist_items.where(

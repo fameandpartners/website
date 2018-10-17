@@ -56,12 +56,6 @@
               <dd><span class="line-item-description-heading">Skirt Length:</span> <span><%= product.height %></span></dd>
             <% end %>
           <% end %>
-          <dd>
-            <span class="line-item-description-heading">Estimated delivery:</span><span><%= @makingOptionsDeliveryPeriod(product.making_options, product.delivery_period) %></span>
-            <% if product.making_options && product.making_options.length > 0: %>
-              <span class='line-item-customization--mini'><%= @makingOptionDescriptionTag(product.making_options) %></span>
-            <% end %>
-          </dd>
 
           <% if product.customizations && product.customizations.length > 0: %>
             <dd>

@@ -21,25 +21,12 @@ module Marketing
           'line_item'.freeze
         end
 
-        def sku
-          cust = Spree::Product.format_new_pid(
-            line_item.fabric&.name || line_item.color,
-            JSON.parse(line_item.customizations)
-          )
-
-          "#{product_sku}~#{cust}"
-        end
-
         def price
           line_item.variant.price.to_f
         end
 
-        def product_sku
-          product.sku
-        end
-
         def product_name
-          product.name
+          line_item.style_name
         end
 
         def product_description
@@ -73,9 +60,9 @@ module Marketing
             name:         product_name,
             quantity:     quantity,
             total_amount: total_amount,
-            sku:          sku,
+            sku:          line_item.new_sku,
             price:        price,
-            product_sku:  product_sku,
+            product_sku:  line_item.product_sku,
             description:  product_description,
             image_url:    image_url,
             product_path: product_path,

@@ -1,6 +1,6 @@
 import { assign } from 'lodash';
 
-/* global $, document */
+/* global $, document, window */
 const csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
 const contentType = 'application/json';
 
@@ -137,8 +137,7 @@ export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   }
 };
 
-
-export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispatch) => {
+export const submitReturnRequest = ({ order, returnsObj, guestEmail, lineItems }) => (dispatch) => {
   const updatedReturnsObj = assign({}, returnsObj, {
     email: guestEmail,
   });
@@ -153,6 +152,21 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail }) => (dispa
     data: updatedReturnsObj,
   })
   .done((res) => {
+    window.dataLayer.push({
+      event: 'Return - Submitted',
+      eventDetail: {
+        category: 'Return',
+        label: returnsObj.line_items.map(li => li.returnReason).join(', '),
+        orderNumber: order.number,
+        products: lineItems.map(lineItem => ({
+          id: lineItem.products_meta.productSku,
+          sku: lineItem.products_meta.sku,
+          quantity: lineItem.quantity,
+          price: lineItem.price,
+        })),
+      },
+    });
+
     dispatch(setReturnLoadingState({ isLoading: false }));
     dispatch({ type: 'POPULATE_LOGISTICS_DATA',
       payload: {
