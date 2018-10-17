@@ -55,6 +55,7 @@ FameAndPartners::Application.routes.draw do
 
         devise_scope :spree_user do
           get '/spree_user/sign_in', to: redirect('/account/login'), :as => :login
+          get '/login', to: redirect('/account/login'), :as => :login
           get '/profile', to: redirect('/account/profile'), :as => :profile_path
         end
       else
