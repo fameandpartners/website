@@ -136,9 +136,9 @@ module Search
             end
 
             if boost_pids && !boost_pids.empty?
-              should do
-                boost_pids.map do |bp|
-                  term 'product.pid.keyword': { value: bp, boost: 42 }
+              boost_pids.map.with_index do |bp, index|
+                should do
+                  term 'product.pid.keyword': { value: bp, boost: 100-index }
                 end
               end
             end
