@@ -737,11 +737,11 @@ module Api
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-            image: {
+            image: (!c.option_value.value&.include?('#') || !c.option_value.image_file_name.blank?) ? {
               url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
               width: 0,
               height: 0,
-            },
+            } : nil,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
