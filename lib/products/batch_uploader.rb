@@ -83,14 +83,14 @@ module Products
       color_data = build_color_data( book )
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
-        if raw[:sku] == ENV['PARAM1']
+        if ENV['PARAM1'].present? && raw[:sku] != ENV['PARAM1']
+          puts "Master Product Sheet SKIP #{raw[:sku]} #{raw[:name]}"
+          nil
+        else
           puts "Master Product Sheet TAKE #{raw[:sku]} #{raw[:name]}"
           processed = process_raw_row_data(raw, color_data)
           item_hash = build_item_hash(processed, raw, color_data)
           item_hash
-        else
-          puts "Master Product Sheet SKIP #{raw[:sku]} #{raw[:name]}"
-          nil
         end
       end
       @parsed_data.reject! { |x| x.nil? }
