@@ -12,6 +12,8 @@ fi
 bundle exec rails runner 'c = Category.new(); c.category = "Outerwear"; c.subcategory = "Coat"; c.save!'
 bundle exec rails runner 'c = Category.new(); c.category = "Outerwear"; c.subcategory = "Blazer"; c.save!'
 bundle exec rails runner 'c = Category.new(); c.category = "Tops"; c.subcategory = "Long Sleeve Top"; c.save!'
+bundle exec rails runner 'c = Category.new(); c.category = "Dresses"; c.subcategory = "Long Sleeve Top"; c.save!'
+bundle exec rails runner 'c = Category.new(); c.category = "Tops"; c.subcategory = "Crop Top"; c.save!'
 
 MARK_NEW_THIS_WEEK=true ./script/import_products.sh
 #bundle exec rake data:six_week_delivery
