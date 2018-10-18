@@ -131,11 +131,11 @@ module Products
       (2..total_rows).each do |i|
         current_row = book.row( i, "CADs" )
         current_style_number = current_row[columns["style"] - 1].strip
-        if current_style_number == ENV['PARAM1']
-          puts "CADs Sheet           TAKE #{current_style_number}"
-        else
+        if ENV['PARAM1'].present? && current_style_number != ENV['PARAM1']
           puts "CADs Sheet           SKIP #{current_style_number}"
           next
+        else
+          puts "CADs Sheet           TAKE #{current_style_number}"
         end
 
         style_data[current_style_number] = [] if style_data[current_style_number].nil?
