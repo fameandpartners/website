@@ -697,8 +697,7 @@ module Products
       sizes_to_process = sizes.clone
       
       threads = []
-      number_of_threads = 6
-      number_of_threads = 3 if `hostname`=="Fulls-MacBook-Pro-2.local\n"
+      number_of_threads = 1
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|
