@@ -1,5 +1,8 @@
-rm -rf ~/import || true
-./script/prepare_import.sh https://www.dropbox.com/sh/ttohwg3m2yjo88u/AABo4LGdV_2_8Ng0hoFMWW-Na?dl=1
+if [ -z "$REUSE_DROPBOX_DOWNLOAD" ]; then 
+  echo "var is blank";
+  rm -rf ~/import || true
+  ./script/prepare_import.sh https://www.dropbox.com/sh/ttohwg3m2yjo88u/AABo4LGdV_2_8Ng0hoFMWW-Na?dl=1
+fi
 
 if [ `uname` = "Darwin" ]; then
   rm -rf ~/leahs/website/spree || true
