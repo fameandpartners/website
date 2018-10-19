@@ -7,9 +7,8 @@ ruby:
 
 = render :partial => '/data/collection_filter_sort'
 = render :partial => '/data/flash_sale_list'
-link rel="stylesheet" href="#{configatron.node_pdp_url}/#{webpack_assets['flashCssBundle']}"
 
 div#flash-list-root.__FlashSaleList__wrapper
 
 = content_for :microservice_js do
-  script type="text/javascript" src="#{configatron.node_pdp_url}/#{webpack_assets['flashJsBundle']}"
+  script type="text/javascript" src="#{configatron.fame_webclient_url}/_webclient/widgetGlobalElements.js"

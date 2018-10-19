@@ -91,10 +91,8 @@ end
 configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
-configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
-
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
-configatron.fame_webclient_always_regex = /^(\/static|\/dresses-new|\/_webclient|\/custom-clothes|\/dress-system|\/dresses\/custom-dress-FPG|\/dresses\/dress-FPG)/
+configatron.fame_webclient_always_regex = /^(\/static|\/collection|\/dresses-new|\/_webclient|\/custom-clothes|\/dress-system|\/dresses\/custom-dress-FPG|\/dresses\/dress-FPG)/
 configatron.fame_webclient_pdp_regex = /^(\/dresses\/(custom-dress|dress-.*))/
 configatron.fame_webclient_content_regex = /^(\/size-guide|\/bride|\/about|\/$)/
 configatron.fame_webclient_category_regex = /^(\/search|\/dresses(?!.*dress-))/
@@ -137,6 +135,4 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
-
-  configatron.node_pdp_url = ENV['NODE_CONTENT_URL']
 end
