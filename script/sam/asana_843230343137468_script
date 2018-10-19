@@ -1,5 +1,4 @@
 if [ -z "$REUSE_DROPBOX_DOWNLOAD" ]; then 
-  echo "var is blank";
   rm -rf ~/import || true
   ./script/prepare_import.sh https://www.dropbox.com/sh/ttohwg3m2yjo88u/AABo4LGdV_2_8Ng0hoFMWW-Na?dl=1
 fi
@@ -8,7 +7,7 @@ if [ `uname` = "Darwin" ]; then
   rm -rf ~/leahs/website/spree || true
   rm -rf ~/leahs/website/public/spree || true
   cp -nr ~/oversize_leahs/spree ~/leahs/website/public/ || true
-  ~/bin/leahs_db 20181016
+  ~/bin/leahs_db 20181018
   sleep 1
 fi
 
