@@ -32,6 +32,7 @@
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
+    <%= javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/vendor.chunk.js" %>
     <%= javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/widgetGlobalElements.js" %>
 
   </body>
