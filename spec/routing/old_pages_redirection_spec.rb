@@ -30,17 +30,6 @@ describe 'Old Pages Redirection', type: :request do
     it_will :redirect, '/featured-bloggers/cool-blogger', '/dresses'
   end
 
-  context 'old collection landing pages' do
-    it_will :redirect, '/lp/collection/random_dresses', '/dresses'
-    it_will :redirect, '/lp/collection/',               '/dresses'
-    it_will :redirect, '/lp/collection',                '/dresses'
-
-    it_will :redirect, '/au/collection'               , '/au/dresses'
-    it_will :redirect, '/au/collection/anything/else' , '/au/dresses'
-    it_will :redirect, '/collection'                  , '/dresses'
-    it_will :redirect, '/collection/anything/else'    , '/dresses'
-  end
-
   context 'dresses' do
     it_will :redirect, '/dresses/dress-my-dress-slug/blank', '/dresses/dress-my-dress-slug?color=blank'
     it_will :redirect, '/dresses/dress-my-dress-slug/blank?utm_source=platform&query_string=other', '/dresses/dress-my-dress-slug?color=blank&query_string=other&utm_source=platform'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'authentication process', type: :feature do
+xdescribe 'authentication process', type: :feature do
   let!(:site_version) { create(:site_version, :us, :default) }
   let!(:user) { create(:spree_user, skip_welcome_email: true) }
 

@@ -5390,6 +5390,40 @@ ALTER SEQUENCE public.user_style_profiles_id_seq OWNED BY public.user_style_prof
 
 
 --
+-- Name: variant_taxons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.variant_taxons (
+    id integer NOT NULL,
+    taxon_id integer,
+    product_id integer,
+    fabric_or_color character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: variant_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.variant_taxons_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: variant_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.variant_taxons_id_seq OWNED BY public.variant_taxons.id;
+
+
+--
 -- Name: wedding_atelier_event_assistants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6694,6 +6728,13 @@ ALTER TABLE ONLY public.user_style_profiles ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: variant_taxons id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.variant_taxons ALTER COLUMN id SET DEFAULT nextval('public.variant_taxons_id_seq'::regclass);
+
+
+--
 -- Name: wedding_atelier_event_assistants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7882,6 +7923,14 @@ ALTER TABLE ONLY public.styles
 
 ALTER TABLE ONLY public.user_style_profile_taxons
     ADD CONSTRAINT user_style_profile_taxons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: variant_taxons variant_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.variant_taxons
+    ADD CONSTRAINT variant_taxons_pkey PRIMARY KEY (id);
 
 
 --
@@ -10268,3 +10317,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181005032844');
 INSERT INTO schema_migrations (version) VALUES ('20181005033718');
 
 INSERT INTO schema_migrations (version) VALUES ('20181005033839');
+
+INSERT INTO schema_migrations (version) VALUES ('20181008013910');
