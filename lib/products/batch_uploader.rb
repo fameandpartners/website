@@ -114,11 +114,11 @@ module Products
       end
       color_data
     end
-    
+
     def color_data_present?( book )
-      !book.sheets.index( "Fabric & Color" ).nil?      
+      !book.sheets.index( "Fabric & Color" ).nil?
     end
-    
+
     def add_cad_data( book, parsed_data )
       total_rows = book.last_row("CADs")
       columns = {}
@@ -188,7 +188,7 @@ module Products
       raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
       raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
       raw[:fit]                        = book.cell(row_num, columns[:fit])
-      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT      
+      raw[:height_mapping_count]       = book.cell(row_num, columns[:height_mapping_count]) || DEFAULT_HEIGHT_MAPPING_COUNT
       raw[:recommended_fabric_colors]  = book.cell(row_num, columns[:recommended_fabric_colors])
       raw[:fabric_information]         = Array.wrap(columns[:fabric_information]).map { |i| book.cell(row_num, i) }
       raw[:custom_fabric_colors]       = Array.wrap(columns[:custom_fabric_colors]).map { |i| book.cell(row_num, i) }
@@ -200,7 +200,7 @@ module Products
           position: index + 1
         }
       end
-      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])      
+      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
       raw[:product_category]           = book.cell(row_num, columns[:product_category])
       raw[:product_sub_category]       = book.cell(row_num, columns[:product_sub_category])
 
@@ -271,7 +271,7 @@ module Products
     private def lookup_color_code( color_code, color_data )
       color_data[color_code.strip]
     end
-    
+
     private def get_color_options(color_names)
       Array.wrap(color_names).map(&:strip).map do |human_color_name|
         find_or_create_color_option(presentation: human_color_name)
@@ -282,7 +282,7 @@ module Products
 
     private def find_or_create_fabric_color_option(presentation)
       fabric_color = Spree::OptionType.fabric_color.option_values.where('LOWER(presentation) = ?', presentation).first
-      
+
       if( fabric_color.blank? )
         fabric_color = Spree::OptionType.fabric_color.option_values.create do |object|
           object.name         = presentation.downcase.gsub(' ', '-')
@@ -291,7 +291,7 @@ module Products
       end
       fabric_color
     end
-    
+
     private def find_or_create_color_option(presentation:)
       color = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
 
@@ -318,7 +318,7 @@ module Products
         taxon_ids:      processed[:taxon_ids],
         category: raw[:product_category],
         sub_category: raw[:product_sub_category],
-        
+
         properties:     {
           height_mapping_count:       raw[:height_mapping_count],
           fit:                        raw[:fit],
@@ -353,7 +353,7 @@ module Products
           factory_name:               /factory$/i,
           product_category:           /product category/i,
           product_sub_category:       /product sub-category/i,
-          height_mapping_count: /height mapping count/i          
+          height_mapping_count: /height mapping count/i
       }
 
       conformities.each do |key, regex|
@@ -455,7 +455,7 @@ module Products
       puts "Color: #{fabric_name} for #{price}"
       to_return = Fabric.find_by_material_and_option_value_id( fabric_name, color_option.id )
       presentation = "#{color_option.presentation} #{fabric_name}"
-      
+
       fabric_color_option = find_or_create_fabric_color_option( presentation )
       if( to_return.nil? )
         to_return = Fabric.create do |object|
@@ -480,7 +480,7 @@ module Products
           to_return.save
         end
       end
-      
+
       to_return
     end
 
@@ -492,23 +492,23 @@ module Products
           object.product_id = product.id
           object.active = true
         end
-        
+
         to_return.recommended = recommended
         to_return.description = fabric_descriptions
         to_return.save
       end
       to_return
     end
-    
+
     private def associate_fabrics_with_product( product, fabric_colors, fabric_description, recommended )
       to_return = []
       # How am I going to clean this up?
       fabric_colors.each do |fabric_color|
-        
+
         unless fabric_color.nil? || fabric_color.empty?
           fabric_name = fabric_color[:fabric_name]
           fabric_price = fabric_color[:fabric_price].present? ? fabric_color[:fabric_price].to_i : nil
-          color_option = get_color_options( [fabric_color[:color_name]] ).first        
+          color_option = get_color_options( [fabric_color[:color_name]] ).first
           fabric  = find_or_create_fabric_and_update_fabric_prices( fabric_name, color_option, fabric_price )
           fabric_product = find_or_create_fabrics_product( fabric, product, fabric_description, recommended )
           to_return << fabric_product
@@ -517,7 +517,7 @@ module Products
 
       to_return
     end
-    
+
     def get_section_heading(sku:, name:)
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
@@ -549,7 +549,7 @@ module Products
       if( category.nil? )
         raise "No category matching #{args[:category]} / #{args[:sub_category]}"
       end
-      
+
       attributes = {
         name: args[:name],
         price: args[:price_in_aud],
@@ -560,7 +560,7 @@ module Products
       }
 
       edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-      
+
       if product.persisted?
         attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id)
       end
@@ -617,7 +617,7 @@ module Products
 
     def add_product_properties(product, args)
       debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      
+
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
@@ -695,9 +695,9 @@ module Products
 
       product.reload
       sizes_to_process = sizes.clone
-      
+
       threads = []
-      number_of_threads = 1
+      number_of_threads = 4
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|
@@ -712,12 +712,12 @@ module Products
               end
             end
             unless size_name.nil?
-              puts "Thread # #{thread_num} processing #{size_name}"              
+              puts "Thread # #{thread_num} processing #{size_name}"
               fabric_products.each do |fabrics_product|
 
                 size_value  = size_option.option_values.where(name: size_name).first
                 fabric_color = fabrics_product.fabric.option_fabric_color_value
-                
+
                 next if size_value.blank? || fabric_color.blank?
 
                 variant =  product.variants.includes( :option_values ).where( 'spree_option_values.id' =>  fabric_color.id).detect do |variant|
@@ -725,7 +725,7 @@ module Products
                     variant.reload.option_value_ids.include?(id)
                   end
                 end
-                
+
 
                 variant = variant.reload unless variant.nil?
                 unless variant.present?
@@ -738,7 +738,7 @@ module Products
                 variant.send :write_attribute, :on_demand, true
                 Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
                 Spree::Variant.skip_callback( :save, :after, :process_backorders )
-                
+
                 begin
                   variant.save( :validate => false )
                 rescue Exception => e
@@ -746,8 +746,8 @@ module Products
                   puts e
                   variant.save(:validate => false )
                 end
-                  
-                
+
+
                 if price_in_aud.present?
                   aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
                   aud.amount = price_in_aud + fabrics_product.fabric.price_aud.to_f
