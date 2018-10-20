@@ -1,7 +1,14 @@
-if [ -z "$REUSE_DROPBOX_DOWNLOAD" ]; then 
+if [ -z "$REUSE_DROPBOX_DOWNLOAD" ]; then
   rm -rf ~/import || true
   ./script/prepare_import.sh https://www.dropbox.com/sh/ttohwg3m2yjo88u/AABo4LGdV_2_8Ng0hoFMWW-Na?dl=1
+
 fi
+
+rm -rf ~/import/extract/__MACOSX || true
+rm -rf ~/import/content/extract/__MACOSX || true
+mv ~/import/content/extract/fp3180-the\ iver\ dress/cads/* ~/import/content/extract/fp3180-the\ iver\ dress/Cads/ || true
+rm -rf ~/import/content/extract/fp3180-the\ iver\ dress/cads || true
+mv ~/import/content/extract/fp3150-the\ portia\ dress/cads ~/import/content/extract/fp3150-the\ portia\ dress/Cads || true
 
 if [ `uname` = "Darwin" ]; then
   rm -rf ~/leahs/website/spree || true
