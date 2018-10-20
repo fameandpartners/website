@@ -109,6 +109,7 @@ function prepare
   unzip -x -LL "${zip_file_path}" -d "${extract_path}" 2>/dev/null
 
   _clean_from_path '__macosx' "${extract_path}"
+  _clean_from_path '__MACOSX' "${extract_path}"
   _clean_from_path '*cancelled*' "${extract_path}"
 }
 
