@@ -7,6 +7,7 @@ module Search
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
+      boost_pids        = options[:boost_pids] #
       colors            = options[:color_ids] #
       body_shapes       = options[:body_shapes] #
       taxon_ids         = options[:taxon_ids] #
@@ -43,18 +44,18 @@ module Search
       definition = Elasticsearch::DSL::Search.search do
         query do
           bool do
-            must {term 'product.is_deleted' => false}
-            must {term 'product.is_hidden' => false}
-            must {term 'product.is_outerwear' => show_outerwear}
-            must {term 'product.in_stock' => true}
+            filter {term 'product.is_deleted' => false}
+            filter {term 'product.is_hidden' => false}
+            filter {term 'product.is_outerwear' => show_outerwear}
+            filter {term 'product.in_stock' => true}
 
             if fast_making.present?
-              must {term 'product.fast_making' => fast_making}
+              filter {term 'product.fast_making' => fast_making}
             end
 
             if taxon_ids.present?
               taxon_terms = taxon_ids.map do |tid|
-                must {terms 'product.taxon_ids' => Array.wrap(tid) }
+                filter {terms 'product.taxon_ids' => Array.wrap(tid) }
               end
             end
 
@@ -133,6 +134,14 @@ module Search
                 end
               end
             end
+
+            if boost_pids && !boost_pids.empty?
+              boost_pids.map.with_index do |bp, index|
+                should do
+                  term 'product.pid.keyword': { value: bp, boost: 100-index }
+                end
+              end
+            end
           end
         end
 
@@ -175,11 +184,9 @@ module Search
           end
         end
 
-        sort do
-          if body_shapes.present?
-           body_shapes.each {|bs| by "product.#{bs}", order: 'desc'}
-          end
-
+        sort do         
+          by "_score", order: 'desc'
+ 
           if colors.present?
            by "color.id", order: 'asc'
           end
@@ -187,6 +194,7 @@ module Search
           if product_ordering[:behaviour].present?
             by product_ordering[:behaviour].first, product_ordering[:behaviour].last
           end
+
         end
       end
 

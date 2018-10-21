@@ -48,9 +48,19 @@ Spree::User.class_eval do
   end
 
   def update_profile(args = {})
-    if args[:password].blank?
-      args.delete(:password)
-      args.delete(:password_confirmation)
+    if Features.active?(:new_account)
+      if args[:password].blank?
+        args.delete(:password)
+        args.delete(:password_confirmation)
+      end
+
+      args.delete(:old_password)
+      args.delete(:old_email)
+    else
+      if args[:password].blank?
+        args.delete(:password)
+        args.delete(:password_confirmation)
+      end
     end
 
     update_attributes(args)

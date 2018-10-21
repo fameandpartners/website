@@ -17,6 +17,18 @@ module Api
       caches_action :index, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
       caches_action :search, expires_in: configatron.cache.expire.long, :cache_path => Proc.new {|c| c.request.url }
 
+
+      def import_summary
+        spree_products = Spree::Product
+          .not_deleted
+          .includes(:master)
+          .reject(&:is_new_product?)
+
+        respond_with ({
+          products: spree_products.map{|p| { id: p.id, sku: p.sku, name: p.name, updated_at: p.updated_at, created_at: p.created_at  } }
+        })
+      end
+
       def index
         pids = params[:pids] || []
 
@@ -170,7 +182,8 @@ module Api
           price_max: price_max, 
           currency: current_currency.downcase,
           query_string: params[:query],
-          include_aggregation_taxons: true
+          include_aggregation_taxons: true,
+          boost_pids: Array.wrap(params[:boostPids])
         }
         query = Search::ColorVariantsESQuery.build(query_params)
         result = Elasticsearch::Client.new(host: configatron.es_url).search(
@@ -211,16 +224,9 @@ module Api
         
         response = {
           results: result['hits']['hits'].map do |r|
-            pid = r['_source']['product']['sku']
-
-            if r['_source']['fabric']
-              pid = "#{r['_source']['product']['sku']}~#{r['_source']['fabric']['name']}"
-            elsif r['_source']['color']
-              pid = "#{r['_source']['product']['sku']}~#{r['_source']['color']['name']}"
-            end
-
             {
-              pid: pid,
+              _score: r['_score'],
+              pid: r['_source']['product']['pid'],
               productId: r['_source']['product']['sku'],
               name: r['_source']['product']['name'],
               price: r['_source']['prices'] && {
@@ -417,6 +423,10 @@ module Api
           },
           isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).amount * 100).to_i,
+          prices: {
+            'en-AU' => (product.price_in('AUD').amount * 100).to_i,
+            'en-US' => (product.price_in('USD').amount * 100).to_i,
+          },
           paymentMethods: {
             afterPay: current_site_version.is_australia?
           },
@@ -629,6 +639,10 @@ module Api
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
           price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+          prices: {
+            'en-AU' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+            'en-US' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i
+          },
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomization,
@@ -674,6 +688,10 @@ module Api
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
+          prices: {
+            'en-AU' => f.recommended ? 0 : (f.fabric.price_in('AUD') * 100).to_i,
+            'en-US' => f.recommended ? 0 : (f.fabric.price_in('USD') * 100).to_i,
+          },
           isProductCode: true,
           isRecommended: f.recommended,
           type: :Fabric,
@@ -709,17 +727,21 @@ module Api
           componentTypeId: :Color,
           componentTypeCategory: :Color,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+          prices: {
+            'en-AU' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+            'en-US' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0
+          },
           isProductCode: true,
           isRecommended: !c.custom,
           type: :Color,
           meta: {
             sortOrder: c.option_value.position,
             hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-            image: {
+            image: (!c.option_value.value&.include?('#') || !c.option_value.image_file_name.blank?) ? {
               url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
               width: 0,
               height: 0,
-            },
+            } : nil,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
@@ -737,6 +759,10 @@ module Api
           componentTypeId: :Size,
           componentTypeCategory: :Size,
           price: 0,
+          prices: {
+            'en-AU' => 0,
+            'en-US' =>  0
+          },
           isProductCode: false,
           isRecommended: false,
           type: :Size,

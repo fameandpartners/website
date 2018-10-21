@@ -99,3 +99,6 @@ Procfile.*
 
 * Ingore elb
 .elasticbeanstalk/
+
+*.pgdump
+*.part

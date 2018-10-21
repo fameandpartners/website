@@ -7,15 +7,12 @@
   <head data-hook="inside_head">
 
     <%= stylesheet_link_tag 'application_contentful' %>
-    <%= stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}" %>
 
     <%= render 'layouts/contentful/head' %>
 
   </head>
   <body>
 
-    <div id="react-blanket" class="__react_root__"></div>
-    <div id="react-menu" class="__react_root__"></div>
     <div id="react-cart" class="__react_root_relaunch__"></div>
 
     <div>
@@ -28,14 +25,15 @@
     </div>
 
     <div id="react-footer" class="__react_root_relaunch__"></div>
-    <div id="portal-root"></div>
+    <div id="portal-root" class="__react_root_relaunch__"></div>
 
 
     <%= render 'google_tag_manager/base' %>
 
     <%= javascript_include_tag 'application_contentful' %>
     <%= render 'layouts/contentful/javascript' %>
-    <%= javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}" %>
+    <%= javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/vendor.chunk.js" %>
+    <%= javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/widgetGlobalElements.js" %>
 
   </body>
 </html>

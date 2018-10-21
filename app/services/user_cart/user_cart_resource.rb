@@ -7,7 +7,20 @@ class  UserCart::UserCartResource
     @order        = options[:order]
   end
 
-  def read
+  def read    
+    return UserCart::CartPresenter.new(
+      products: [],
+      item_count: 0,
+      promocode: nil,
+      display_item_total: nil,
+      display_shipment_total: nil,
+      display_promotion_total: nil,
+      display_total: nil,
+      taxes: [],
+      site_version: site_version,
+      order_number: nil
+    ) if @order.nil?
+
     UserCart::CartPresenter.new(
       products: cart_products,
       item_count: cart_products.reject{|p| p.name == 'RETURN_INSURANCE'}.sum{|product| product.quantity},

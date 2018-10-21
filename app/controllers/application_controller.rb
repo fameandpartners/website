@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
                 :serialize_user,
                 :serialized_current_user,
                 :landing_page,
-                :webpack_assets
+                :contentful_global_page_config
 
   def count_competition_participants
     cpt = params[:cpt]
