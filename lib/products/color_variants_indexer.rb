@@ -95,6 +95,20 @@ module Products
       product_price_in_us = product.price_in(@us_site_version.currency)
       product_price_in_au = product.price_in(@au_site_version.currency)
 
+      fabric_price_in_us = 0
+      fabric_price_in_au = 0
+
+      if product_fabric_value
+        fabric_price_in_us = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@us_site_version.currency) : 0
+        fabric_price_in_au = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@au_site_version.currency) : 0
+      elsif product_color_value
+        fabric_price_in_us = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+        fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+      end
+
+      price_us = Spree::Price.new(amount: product_price_in_us.amount.to_f + fabric_price_in_us, currency: @us_site_version.currency)
+      price_au = Spree::Price.new(amount: product_price_in_au.amount.to_f + fabric_price_in_au, currency: @au_site_version.currency)
+
       all_variant_taxons = VariantTaxon.includes(:taxon).all
       variant_taxons = all_variant_taxons
         .select {|f| f.product_id == product.id && ((fabric && f.fabric_or_color == fabric.name) || (color && f.fabric_or_color == color.name)) }
@@ -170,12 +184,12 @@ module Products
           cropped_images: cropped_images_for(product_fabric_value || product_color_value),
 
           prices: {
-            aud:  product_price_in_au.amount.to_f,
-            usd:  product_price_in_us.amount.to_f
+            aud:  price_au.amount.to_f,
+            usd:  price_us.amount.to_f
           },
           sale_prices:  {
-            aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f : product_price_in_au.amount.to_f,
-            usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f : product_price_in_us.amount.to_f
+            aud:  discount > 0 ? price_au.apply(product.discount).amount.to_f.round(2) : price_au,
+            usd:  discount > 0 ? price_us.apply(product.discount).amount.to_f.round(2) : price_us
           }
         }
       }
