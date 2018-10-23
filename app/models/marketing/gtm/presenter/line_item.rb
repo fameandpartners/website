@@ -56,6 +56,7 @@ module Marketing
 
         def body
           {
+            other:        line_item.id,
             category:     category,
             name:         product_name,
             quantity:     quantity,
