@@ -592,8 +592,10 @@ FameAndPartners::Application.routes.draw do
         post 'user/change_password' => 'user_sessions#change_password'
         post 'profile/update' => 'profiles#update'
         delete 'user/logout' => 'user_sessions#destroy'
-      end
 
+        
+      end
+      post 'cart/restore' => 'cart#restore'
       get '/products/search' => 'products#search'
       get '/products/import_summary' => 'products#import_summary'
       get '/products/:id' => 'products#show'
