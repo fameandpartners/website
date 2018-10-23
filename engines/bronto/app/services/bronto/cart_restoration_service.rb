@@ -52,7 +52,7 @@ module Bronto
                 end
             end
 
-            def restore(cart_id)
+            def get_abandoned_cart(cart_id)
                 JSON.parse(make_get_request("#{configatron.bronto.rest_api_endpoint}/carts/customerCartId/#{cart_id}"))
             end
         end

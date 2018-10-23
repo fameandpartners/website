@@ -117,7 +117,7 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
   def restore
-    abandoned_cart = Bronto::CartRestorationService.restore(params[:cart_id])
+    abandoned_cart = Bronto::CartRestorationService.get_abandoned_cart(params[:cart_id])
 
     restore_cart(abandoned_cart['lineItems'].map { |item| item['other'] })
 
