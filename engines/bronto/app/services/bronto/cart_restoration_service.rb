@@ -39,21 +39,23 @@ module Bronto
             def make_get_request(url)
                 begin
                     return RestClient.get("#{url}", content_type: 'application/json', authorization: "Bearer #{access_token}")
-                rescue => e
-                    NewRelic::Agent.notice_error("Bronto get error: #{e} for #{url}")
+                rescue RestClient::ExceptionWithResponse => e
+                    # e,resoibse,cide
+                    binding.pry
+                    NewRelic::Agent.notice_error("Bronto get error: #{e.response} for #{url}")
                 end
             end
 
             def make_post_request(url, body)
                 begin
                     return RestClient.post(url, body)
-                rescue => e
-                    NewRelic::Agent.notice_error("Bronto post error: #{e} for #{url}")
+                rescue RestClient::ExceptionWithResponse => e
+                    NewRelic::Agent.notice_error("Bronto post error: #{e.response} for #{url}")
                 end
             end
 
             def get_abandoned_cart(cart_id)
-                JSON.parse(make_get_request("#{configatron.bronto.rest_api_endpoint}/carts/customerCartId/#{cart_id}"))
+                JSON.parse(make_get_request("#{configatron.bronto.rest_api_endpoint}/carts/#{cart_id}"))
             end
         end
     end
