@@ -103,8 +103,8 @@ configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
 configatron.product_catalog_url = ENV['PRODUCT_CATALOG_URL']
 
 configatron.bronto do |bronto|
-  bronto.rest_api_endpoint = ENV['BRONTO_REST_API_ENDPOINT']
-  bronto.rest_api_auth_endpoint = ENV['BRONTO_REST_API_AUTH_ENDPOINT']
+  bronto.rest_api_endpoint = 'https://rest.bronto.com'
+  bronto.rest_api_auth_endpoint = 'https://auth.bronto.com/oauth2/token'
   bronto.rest_client_id = ENV['BRONTO_REST_CLIENT_ID']
   bronto.rest_client_secret = ENV['BRONTO_REST_CLIENT_SECRET']
 end
