@@ -77,6 +77,12 @@ FameAndPartners::Application.routes.draw do
    
   post '/shared/facebook' => 'competition/events#share'
 
+  ##############
+  # Fake routes
+  ##############
+  get '/dresses' => 'noop#noop', as: :dresses
+  get '/dresses' => 'noop#noop', as: :collection
+
   ########################
   # Redirect legacy pages
   ########################

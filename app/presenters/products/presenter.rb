@@ -8,7 +8,7 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size
+                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size,
                   :fast_delivery
 
     attr_reader   :product_type
