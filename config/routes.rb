@@ -209,12 +209,12 @@ FameAndPartners::Application.routes.draw do
   get '/shop-linen', to: redirect('/clothing/linen')
   get '/shop-polka-dot', to: redirect('/dresses/polka-dot')
   get '/navigation-work', to: redirect('/dresses/fw18')
-  get '/navigation-night-out', to: redirect('TODO')
-  get '/navigation-vacation', to: redirect('TODO')
-  get '/weddings-and-parties', to: redirect('TODO')
-  get '/weddings-parties-say-lou-lou', to: redirect('TODO')
-  get '/daywear', to: redirect('TODO')
-  get '/navigation-day', to: redirect('TODO')
+  get '/navigation-night-out', to: redirect('/dresses/evening')
+  get '/navigation-vacation', to: redirect('/dresses/vacation')
+  get '/weddings-and-parties', to: redirect('/dresses/wedding-guests')
+  get '/weddings-parties-say-lou-lou', to: redirect('/dresses/wedding-guests')
+  get '/daywear', to: redirect('/dresses/daywear')
+  get '/navigation-day', to: redirect('/dresses/daywear')
 
   ###########
   # User Cart
