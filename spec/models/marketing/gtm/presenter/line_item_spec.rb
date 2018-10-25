@@ -6,7 +6,7 @@ module Marketing
       describe LineItem, type: :presenter do
         let(:taxon) { create(:taxon, name: 'Jeans') }
         let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
-        let(:fabric) { double(:fabric, name: 'FABRICNAME', price_in: 5) }
+        let(:fabric) { double(:fabric, name: 'FABRICNAME', price_in: 5, id: 1) }
         let(:variant) { create(:dress_variant, product: product) }
         let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11) }
 

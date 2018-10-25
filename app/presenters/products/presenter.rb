@@ -8,8 +8,7 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
-                  :default_standard_days_for_making, :default_customised_days_for_making,
+                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size,
                   :fast_delivery
 
     attr_reader   :product_type
@@ -209,20 +208,6 @@ module Products
 
     def meta_description
       (@meta_description.presence || fallback_meta_description).truncate(META_DESCRIPTION_MAX_SIZE)
-    end
-
-    def delivery_date
-      delivery_date_obj_default               = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
-      delivery_date_obj_no_customize_standard = Policies::ProjectDeliveryDatePolicy.new(self,false,"standard").delivery_date
-      delivery_date_obj_no_customize_express  = Policies::ProjectDeliveryDatePolicy.new(self,false,"fast").delivery_date
-      delivery_date_obj_customize_standard    = Policies::ProjectDeliveryDatePolicy.new(self,true,"standard").delivery_date
-      delivery_date_obj_customize_express     = Policies::ProjectDeliveryDatePolicy.new(self,true,"fast").delivery_date
-      text_default                            = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_default)
-      text_no_customize_standard              = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_no_customize_standard)
-      text_no_customize_express               = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_no_customize_express)
-      text_customize_standard                 = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_standard)
-      text_customize_express                  = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_express)
-      {text_default: text_default,text_no_customize_standard: text_no_customize_standard, text_no_customize_express: text_no_customize_express, text_customize_standard: text_customize_standard, text_customize_express: text_customize_express}
     end
 
     def product_category

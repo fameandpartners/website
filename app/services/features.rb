@@ -33,10 +33,6 @@ module Features
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
     refulfill:                     "Check new orders coming in against inventory.",
     batching:                      "Batch line items into styles for production.",
-    new_pdp:                       "Enables new PDP page that was introduced by the bridesmaids project",
-    new_category_page:             "Enables new category and search page",
-    new_content:                   "Enables new content pages that were introduced by the bridesmaids project",
-    new_navigation:                "Enables new navigation that was introduced by the bridesmaids project",
     new_account:                   "Enables new account pages for login, signup and forgot password.",
     orderbot:                      "Enables Integration with OrderBot"
   }

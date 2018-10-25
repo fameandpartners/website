@@ -41,7 +41,6 @@ module Products
           }),
           customizations: OpenStruct.new({
             all: available_product_customisations,
-            incompatibilities: customisations_incompatibility_map,
             is_free: Spree::Config[:free_customisations]
           }),
 
@@ -120,17 +119,6 @@ module Products
         product.product_color_values.active.custom.map(&:option_value).compact.sort_by(&:presentation)
       end
 
-      # TODO Alexey Bobyrev 27 Feb 2017
-      # Remove this method as it's not used anymore
-      private def legacy_fallback_custom_colors
-        basic_product_color_ids = product_variants.map(&:color_id).uniq
-
-        Repositories::ProductColors.read_all.select do |color|
-          color.use_in_customisation && !basic_product_color_ids.include?(color.id)
-        end.compact.sort_by(&:presentation)
-      end
-      # eo colors part
-
       # customizations
       def product_customisation_values
         if product&.category&.category == "Sample"
@@ -175,13 +163,6 @@ module Products
 
       def get_customisation_value(customisation_value_id)
         cv = CustomisationValue.find(customisation_value_id)
-      end
-
-      def customisations_incompatibility_map
-        product_customisation_values.inject({}) do |hash, value|
-          hash[value['customisation_value']['id']] = value['customisation_value']['incompatibilities']&.map(&:incompatible_id)
-          hash
-        end
       end
 
       # making options

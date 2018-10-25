@@ -41,8 +41,16 @@ module Marketing
           line_item.total.to_f
         end
 
+        def colour
+          if line_item.personalization.present?
+            line_item.personalization.color
+          else
+            line_item.variant.try(:dress_color)
+          end
+        end
+
         def image_url
-          repository_image_template = Repositories::LineItemImages.new(line_item: line_item).read
+          repository_image_template = Repositories::LineItemImages.new(line_item: line_item).read(color_id: colour&.id, fabric_id: line_item.fabric&.id, fabric: line_item.fabric)
           repository_image_template.original
         end
 

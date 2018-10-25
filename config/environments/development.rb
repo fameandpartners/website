@@ -45,7 +45,7 @@ FameAndPartners::Application.configure do
   config.assets.debug = ENV.fetch('DEVELOPMENT_ASSETS_DEBUG', 'true') == 'true'
 
   # Use S3 for storing attachments
-  config.use_s3 = false
+  config.use_s3 = true
 
   Slim::Engine.set_options :pretty => true, :sort_attrs => false
 

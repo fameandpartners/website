@@ -23,7 +23,6 @@ module Products
         let(:defined_custom_colors)  { double(:defined_custom_colors) }
         let(:fallback_custom_colors) { double(:fallback_custom_colors) }
         before do
-          allow(selection_options).to receive(:legacy_fallback_custom_colors).and_return(fallback_custom_colors)
           allow(selection_options).to receive(:defined_custom_colors).and_return(defined_custom_colors)
         end
 

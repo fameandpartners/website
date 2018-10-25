@@ -4,26 +4,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers, { initialStates } from '../reducers_immutable';
 
 export default (props) => {
-  const { $$collectionFilterSortState, $$userState } = initialStates;
-
-  const injectedCollectionFilterStoreState = {
-    $$bodyShapes: props.bodyShapes,
-    $$bodyStyles: props.bodyStyles,
-    $$colors: props.colors,
-    fastMaking: props.fastMaking,
-    order: props.order,
-    selectedColors: props.selectedColors,
-    selectedPrices: props.selectedPrices,
-    selectedShapes: props.selectedShapes,
-    selectedStyles: props.selectedStyles,
-  };
+  const { $$userState } = initialStates;
 
   // Merging of initial state with injected state
   const hydratedState = {
-    $$collectionFilterSortStore: $$collectionFilterSortState.mergeWith(
-      (initialVal, newVal) => ((newVal === null || newVal === undefined)
-        ? initialVal
-        : newVal), injectedCollectionFilterStoreState),
     $$userStore: $$userState.merge(props.user),
   };
 

@@ -131,20 +131,14 @@ module Api
 
         filter = Array.wrap(params[:facets])
 
-        color_ids = Repositories::ProductColors.color_groups
-          .select {|cg| filter.include?(cg[:name]) }
-          .flat_map {|cg| cg[:color_ids]}
-
-        # body_shapes = ProductStyleProfile::BODY_SHAPES & filter
-
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
         taxons = Repositories::Taxonomy.taxons
-        taxon_ids = filter
+        color_names = filter
+          .select { |f| color_group_names.include?(f) }
+        taxon_names = filter
           .reject { |f| color_group_names.include?(f) }
-          .map {|f| taxons.select { |t| t.permalink.ends_with?(f)}.map(&:id) }
-          .compact
-          .reject(&:empty?)
+          .reject { |f| ['0-199', '200-299', '300-399', '400'].include?(f) }
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
@@ -174,16 +168,17 @@ module Api
 
 
         query_params = { 
-          taxon_ids: taxon_ids,
-          # body_shapes: body_shapes,
-          color_ids: color_ids,
+          taxon_names: taxon_names,
+          color_group_names: color_names,
           order: params[:sortField],
           price_min: price_min,
           price_max: price_max, 
           currency: current_currency.downcase,
           query_string: params[:query],
           include_aggregation_taxons: true,
-          boost_pids: Array.wrap(params[:boostPids])
+          boost_pids: Array.wrap(params[:boostPids]),
+          boost_facets: Array.wrap(params[:boostFacets]),
+          exclude_taxon_names: Array.wrap(params[:excludeFacets])
         }
         query = Search::ColorVariantsESQuery.build(query_params)
         result = Elasticsearch::Client.new(host: configatron.es_url).search(
@@ -194,25 +189,16 @@ module Api
         )
 
         #taxons are additive
-        aggregation_taxons = Hash[*result["aggregations"]["taxon_ids"]["buckets"].map(&:values).flatten]
+        aggregation_taxons = Hash[*result["aggregations"]["taxons"]["buckets"].map(&:values).flatten]
 
 
         aggregation_colors_result = Elasticsearch::Client.new(host: configatron.es_url).search(
           index: configatron.elasticsearch.indices.color_variants,
-          body: Search::ColorVariantsESQuery.build(query_params.merge(color_ids: nil, include_aggregation_color_ids: true)),
+          body: Search::ColorVariantsESQuery.build(query_params.merge(color_group_names: nil, include_aggregation_color_group_names: true)),
           size: 0,
           from: 0
         )
-        aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_ids"]["buckets"].map(&:values).flatten]
-
-
-        # aggregation_body_shapes_result = Elasticsearch::Client.new(host: configatron.es_url).search(
-        #   index: configatron.elasticsearch.indices.color_variants,
-        #   body: Search::ColorVariantsESQuery.build(query_params.merge(body_shapes: nil, include_aggregation_bodyshapes: true)),
-        #   size: 0,
-        #   from: 0
-        # )
-        # aggregation_body_shapes = Hash[*aggregation_body_shapes_result["aggregations"]["body_shape_ids"]["buckets"].map(&:values).flatten]
+        aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_group_names"]["buckets"].map(&:values).flatten]
 
         aggregation_prices_result = Elasticsearch::Client.new(host: configatron.es_url).search(
           index: configatron.elasticsearch.indices.color_variants,
@@ -232,6 +218,10 @@ module Api
               price: r['_source']['prices'] && {
                 "en-AU": r['_source']['prices']['aud'] * 100,
                 "en-US": r['_source']['prices']['usd'] * 100
+              },
+              salePrice: r['_source']['sale_prices'] && {
+                "en-AU": r['_source']['sale_prices']['aud'] * 100,
+                "en-US": r['_source']['sale_prices']['usd'] * 100
               },
               url: r['_source']['product']['url'],
               images: r['_source']['cropped_images'].map do |src|
@@ -271,7 +261,7 @@ module Api
                   "facetId": group[:name],
                   "title": group[:presentation],
                   "order": color_mapping.keys.find_index(group[:name].to_sym),
-                  "docCount": group[:color_ids].map {|i| aggregation_colors[i] || 0}.sum,
+                  "docCount": aggregation_colors[group[:name]] || 0,
                   "facetMeta": {
                     "hex": color_mapping[group[:name].to_sym],
                     "image": image_mapping[group[:name].to_sym]
@@ -289,7 +279,7 @@ module Api
                   "facetId": taxon.permalink,
                   "title": taxon.name,
                   "order": i,
-                  "docCount": aggregation_taxons[taxon.id]  || 0,
+                  "docCount": aggregation_taxons[taxon.permalink.split("/").last]  || 0,
                 }
               end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             },

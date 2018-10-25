@@ -183,10 +183,10 @@ module Feeds
     end
 
     def get_taxons(product)
-      product_taxons    = Spree::Taxon.order('spree_taxons.position')
-      product_events    = product_taxons.published.from_event_taxonomy.where(id: product.taxon_ids)
-      product_styles    = product_taxons.published.from_style_taxonomy.where(id: product.taxon_ids)
-      product_lookbooks = product_taxons.from_edits_taxonomy.where(id: product.taxon_ids)
+      product_taxons    = Spree::Taxon.order('spree_taxons.position').where(id: product.taxon_ids)
+      product_events    = product_taxons.published.from_event_taxonomy
+      product_styles    = product_taxons.published.from_style_taxonomy
+      product_lookbooks = product_taxons.from_edits_taxonomy
 
       {
         taxons:    product_taxons.map(&:name),

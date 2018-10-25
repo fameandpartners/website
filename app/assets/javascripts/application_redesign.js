@@ -77,7 +77,6 @@
 //-----------------------------------
 // require partials/style/popup
 
-//= require partials/product_collection.js
 //require partials/product_customisation.js
 
 //= require partials/email_capture_modal
@@ -95,8 +94,6 @@
 // Shopping cart & bag & moodboard
 //--------------------------------
 //= require partials/helpers/shopping_cart
-//= require partials/helpers/user_moodboard
-//= require partials/product_collection_moodboard_links
 //= require partials/shopping_cart_summary
 //= require partials/shopping_cart_delivery_times
 
