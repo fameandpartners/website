@@ -200,8 +200,8 @@ module Products
             usd:  price_us.amount.to_f
           },
           sale_prices:  {
-            aud:  discount > 0 ? price_au.apply(product.discount).amount.to_f.round(2) : price_au,
-            usd:  discount > 0 ? price_us.apply(product.discount).amount.to_f.round(2) : price_us
+            aud:  discount > 0 ? price_au.apply(product.discount).amount.to_f.round(2) : price_au.amount.to_f,
+            usd:  discount > 0 ? price_us.apply(product.discount).amount.to_f.round(2) : price_us.amount.to_f
           }
         }
       }
