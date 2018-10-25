@@ -5,7 +5,7 @@ export const $$initialState = Immutable.fromJS({
   user_signed_in: null,
 });
 
-export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {
+export default function UserReducer($$state = $$initialState, action = null) {
   switch (action.type) {
     default: {
       return $$state;

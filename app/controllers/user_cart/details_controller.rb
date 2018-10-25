@@ -1,10 +1,6 @@
 class UserCart::DetailsController < Api::ApiBaseController
   respond_to :json
 
-  def order_delivery_date
-    render json: Policies::ProjectDeliveryDatePolicy.order_delivery_date(@user_cart)
-  end
-
   def show    
     respond_with(@user_cart) do |format|
       format.html   {}
