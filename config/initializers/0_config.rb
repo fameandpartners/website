@@ -92,10 +92,7 @@ configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
-configatron.fame_webclient_always_regex = /^(\/static|\/collection|\/dresses-new|\/_webclient|\/custom-clothes|\/dress-system|\/dresses\/custom-dress-FPG|\/dresses\/dress-FPG)/
-configatron.fame_webclient_pdp_regex = /^(\/dresses\/(custom-dress|dress-.*))/
-configatron.fame_webclient_content_regex = /^(\/size-guide|\/bride|\/about|\/$)/
-configatron.fame_webclient_category_regex = /^(\/search|\/dresses(?!.*dress-))/
+configatron.fame_webclient_always_regex = /^(\/static|\/collection|\/dresses|\/_webclient|\/custom-clothes|\/dress-system|\/search|\/pants|\/jackets|\/outerwear|\/gowns|\/skirts|\/tops|\/size-guide|\/bride|\/about|\/$)/
 configatron.fame_webclient_account_regex = /^(\/account|\/logout|\/unauthorized)/
 configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
 configatron.product_catalog_url = ENV['PRODUCT_CATALOG_URL']
