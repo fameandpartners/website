@@ -180,6 +180,7 @@ FameAndPartners::Application.routes.draw do
   get '/how-it-works', to: redirect("/why-us")
   get '/team', to: redirect("http://www.fameandpartners.com/about")
   get '/plus-size',  to: redirect('/dresses/plus-size')
+  get '/plus-size-styles',  to: redirect('/dresses/plus-size')
   get '/style-consultation', to: redirect("/styling-session")
   get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
   get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
@@ -194,6 +195,7 @@ FameAndPartners::Application.routes.draw do
   get '/the-modern-evening-collection', to: redirect('/dresses/evening')
   get '/the-evening-shop', to: redirect('/dresses/evening')
   get '/the-evening-shop(/*anything)', to: redirect('/dresses/evening')
+  get '/the-anti-fast-fashion-shop', to: redirect('/dresses')
   get '/trends-white', to: redirect('/dresses/white-ivory')
   get '/shop-summer-collection', to: redirect('/dresses/spring')
   get '/casual-summer-styles', to: redirect('/dresses/spring')
@@ -206,6 +208,7 @@ FameAndPartners::Application.routes.draw do
   get '/spring-racing-collection', to: redirect('/dresses/spring')
   get '/navigation-all-separates', to: redirect('/separates')
   get '/getitquick', to: redirect('/clothing/get-it-quick')
+  get '/super-express-2018', to: redirect('/clothing/super-express')
   get '/shop-linen', to: redirect('/clothing/linen')
   get '/shop-polka-dot', to: redirect('/dresses/polka-dot')
   get '/navigation-work', to: redirect('/dresses/fw18')
@@ -215,7 +218,15 @@ FameAndPartners::Application.routes.draw do
   get '/weddings-parties-say-lou-lou', to: redirect('/dresses/wedding-guests')
   get '/daywear', to: redirect('/dresses/daywear')
   get '/navigation-day', to: redirect('/dresses/daywear')
-
+  get '/from-our-ceo', to: redirect('/about')
+  get '/why-us', to: redirect('/about')
+  get '/bespoke-bridal-collection', to: redirect('/dressses/bridal')
+  get '/the-formal-collection', to: redirect('/dressses/prom')
+  get '/snapchat-prom-offer', to: redirect('/dressses/prom')
+  get '/holiday-party-survival-kit', to: redirect('/dressses/evening')
+  get '/fresh-for-summer-collection', to: redirect('/collection/fresh-for-summer-collection')
+  
+  
   ###########
   # User Cart
   ###########
