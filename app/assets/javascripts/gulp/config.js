@@ -11,10 +11,8 @@ module.exports = {
       js: './app/assets/javascripts/storefront/**/*.js',
       dist: './app/assets/javascripts/',
       mainJS: {
-        CollectionFilterSortApp: './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx',
         GuestReturnsApp: './app/assets/javascripts/storefront/startup/GuestReturnsApp.jsx',
         ReturnsApp: './app/assets/javascripts/storefront/startup/ReturnsApp.jsx',
-
       },
     },
     src: `${baseDir}/*.jsx`,
