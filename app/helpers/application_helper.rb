@@ -239,4 +239,8 @@ module ApplicationHelper
     product.super_fast_making? && super_fast_making_active?
   end
 
+  def collection_url
+    '/dresses'
+  end
+
 end
