@@ -8,6 +8,7 @@ module Search
 
       # some kind of documentation
       boost_pids        = options[:boost_pids] #
+      boost_facets        = options[:boost_facets] #
       colors            = options[:color_ids] #
       color_group_names = options[:color_group_names] #
       taxon_names       = options[:taxon_names] #
@@ -165,7 +166,15 @@ module Search
             if boost_pids && !boost_pids.empty?
               boost_pids.map.with_index do |bp, index|
                 should do
-                  term 'product.pid.keyword': { value: bp, boost: 100-index }
+                  term 'product.pid.keyword': { value: bp, boost: 200-index }
+                end
+              end
+            end
+
+            if boost_facets && !boost_facets.empty?
+              boost_facets.map.with_index do |bf, index|
+                should do
+                  term 'product.taxons.keyword': { value: bf, boost: 100-index }
                 end
               end
             end

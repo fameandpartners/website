@@ -177,6 +177,7 @@ module Api
           query_string: params[:query],
           include_aggregation_taxons: true,
           boost_pids: Array.wrap(params[:boostPids]),
+          boost_facets: Array.wrap(params[:boostFacets]),
           exclude_taxon_names: Array.wrap(params[:excludeFacets])
         }
         query = Search::ColorVariantsESQuery.build(query_params)
