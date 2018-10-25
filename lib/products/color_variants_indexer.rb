@@ -121,6 +121,19 @@ module Products
 
       pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
 
+      taxon_names = [
+        taxons.map(&:permalink).map {|f| f.split('/').last },
+        product.category.category,
+        product.category.subcategory,
+        product.fast_making? ? 'fast_making': nil,
+        product.super_fast_making? ? 'super_fast_making' : nil,
+        ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
+        color.name,
+        fabric&.name,
+        fabric&.material,
+        color.option_values_groups.map(&:name),
+      ].flatten.compact #.map(&:parameterize).map(&:underscore)
+
       {
         _index: index_name,
         _type: 'document',
@@ -153,8 +166,7 @@ module Products
             fast_making:        product.fast_making?,
             super_fast_making:  product.super_fast_making?,
             taxon_ids:          taxons.map(&:id),
-            taxon_names:        taxons.map{ |tx| tx.name }.flatten,
-            taxons:             taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
+            taxons:             taxon_names,
             price:              product.price.to_f,
 
             is_outerwear:     Spree::Product.outerwear.exists?(product.id),

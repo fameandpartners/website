@@ -19,519 +19,291 @@ FameAndPartners::Application.routes.draw do
   ########################
   get '/us/*whatevs', to: redirect(path: "/%{whatevs}")
   get '/us' => redirect('/')
+  get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
+  get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
 
-  #######################################################
-  # Temporary redirection to fix wrong path sent to users
-  #######################################################
+  ##########
+  # Sitemaps
+  ##########
+  get 'sitemap', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
 
-  # TODO: (May 26 2016) Every redirection on this block should live in the HTTP server and not in the application!
-  if Features.active?(:redirect_to_com_au_domain)
-    get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
-    get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
+  ##############################
+  # Devise & User authentication
+  ##############################
+  if Features.active?(:new_account)
+      devise_for :spree_user,
+                  class_name:  'Spree::User',
+                  controllers: { sessions:           'spree/user_sessions',
+                                registrations:      'spree/user_registrations',
+                                passwords:          'spree/user_passwords',
+                                confirmations:      'spree/user_confirmations',
+                                omniauth_callbacks: 'spree/omniauth_callbacks'
+                  },
+                  skip:        [:unlocks, :omniauth_callbacks],
+                  path_names:  { sign_out: 'logout', sign_in: 'login', profile_path: 'profile_path' }
+
+      devise_scope :spree_user do
+        get '/spree_user/sign_in', to: redirect('/account/login'), :as => :login
+        get '/signup', to: redirect('/account/signup'), :as => :sign_up
+        get '/login', to: redirect('/account/login'), :as => :login
+        get '/profile', to: redirect('/account/profile'), :as => :profile_path
+      end
+    else
+      devise_for :spree_user,
+              class_name:  'Spree::User',
+              controllers: { sessions:           'spree/user_sessions',
+                            registrations:      'spree/user_registrations',
+                            passwords:          'spree/user_passwords',
+                            confirmations:      'spree/user_confirmations',
+                            omniauth_callbacks: 'spree/omniauth_callbacks'
+              },
+              skip:        [:unlocks, :omniauth_callbacks],
+              path_names:  { sign_out: 'logout' }
+  end
+  
+
+  devise_scope :spree_user do
+    get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
+    get '/spree_user/thanks' => 'spree/user_registrations#thanks'
+    get '/account_settings' => 'spree/user_registrations#edit'
   end
 
-  # TODO: After .com.au migration, this scope can simply go away.
-  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
-    ##########
-    # Sitemaps
-    ##########
-    get 'sitemap', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
-
-    ##############################
-    # Devise & User authentication
-    ##############################
-    if Features.active?(:new_account)
-        devise_for :spree_user,
-                    class_name:  'Spree::User',
-                    controllers: { sessions:           'spree/user_sessions',
-                                  registrations:      'spree/user_registrations',
-                                  passwords:          'spree/user_passwords',
-                                  confirmations:      'spree/user_confirmations',
-                                  omniauth_callbacks: 'spree/omniauth_callbacks'
-                    },
-                    skip:        [:unlocks, :omniauth_callbacks],
-                    path_names:  { sign_out: 'logout', sign_in: 'login', profile_path: 'profile_path' }
-
-        devise_scope :spree_user do
-          get '/spree_user/sign_in', to: redirect('/account/login'), :as => :login
-          get '/signup', to: redirect('/account/signup'), :as => :sign_up
-          get '/login', to: redirect('/account/login'), :as => :login
-          get '/profile', to: redirect('/account/profile'), :as => :profile_path
-        end
-      else
-        devise_for :spree_user,
-               class_name:  'Spree::User',
-               controllers: { sessions:           'spree/user_sessions',
-                              registrations:      'spree/user_registrations',
-                              passwords:          'spree/user_passwords',
-                              confirmations:      'spree/user_confirmations',
-                              omniauth_callbacks: 'spree/omniauth_callbacks'
-               },
-               skip:        [:unlocks, :omniauth_callbacks],
-               path_names:  { sign_out: 'logout' }
-    end
-    
-
-    devise_scope :spree_user do
-      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
-      get '/spree_user/thanks' => 'spree/user_registrations#thanks'
-      get '/account_settings' => 'spree/user_registrations#edit'
-    end
-
-    # MonkeyPatch for store params & redirect to custom page
-    get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
-
-    ##############
-    # Static Pages
-    ##############
-    # Legacy marketing campaign
-    # get '/instagram/1' => 'statics#landing_page_mobile', variant: '1'
-    # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
-    # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
-
-    get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
-    get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
-    get '/fame2015', to: redirect('/')
-    get '/slayitforward', to: redirect('https://www.instagram.com/explore/tags/slayitforward/'), :as => :slay_it_forward
-
-    # Redirecting collections (08/06/2015)
-    get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
-
-    # i=change landing page
-    get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
-
-    # The Evening Shop landing page
-    get '/the-evening-shop' => 'statics#landing_page_evening_shop', :permalink => 'the-evening-shop', :as => :the_evening_shop_landing_page
-
-    # Bridesmaids Thank you landing page
-    get '/thanks-bridesmaid' => 'statics#landing_page_thanks_bridesmaid', :permalink => 'thanks-bridesmaid', :as => :thanks_bridesmaid_landing_page
-
-    # Thank You landing page
-    get '/thanks-for-shopping' => 'statics#landing_page_regular_thank_you', :permalink => 'thank-you-for-shopping', :as => :thank_you_for_shopping_landing_page
-
-    # VIP landing page
-    get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
-
-    # Thanks Bride landing page
-    get '/thanks-bride' => 'statics#landing_page_thanks_bride', :permalink => 'thanks-bride', :as => :thanks_bride_landing_page
-
-    # Micro Influencer landing page
-    get '/fame-society-application' => 'statics#landing_page_fame_society', :permalink => 'fame-society-application', :as => :fame_society_application_landing_page
-
-    # Fame Society Invitation
-    get '/fame-society-invitation', to: redirect('/dresses'), as: :fame_society_invitation_landing_page
-
-    # Internship landing page
-    get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
-
-    # IT Girl Internship Competition landing page
-    get '/it-girl' => 'products/collections#show', :permalink => 'fame-it-girl', :as => :it_girl_landing_page
-    # Redirect /IT-GIRL to /it-girl as many users are typing the first URL and seeing a 404 error page
-    get '/IT-GIRL', to: redirect('/it-girl'), :as => :it_girl_page
-
-    # Bridesmaid teaser landing page
-    get '/coming-soon-custom-bridesmaid-dresses', to: redirect("/custom-clothes/the-custom-clothing-studio?utm_source=coming-soon-custom-bridesmaid-dresses"), :as => :bridesmaid_teaser_landing_page
-
-    # Prom Red And Black Category page
-    get '/prom-red-and-black' => 'products/collections#show', :permalink => 'prom-red-and-black', :as => :prom_red_and_black_landing_page
-
-    ###########
-    # Lookbooks
-    ###########
-    get '/dresses/best-sellers' => 'products/collections#show', :as => :best_sellers
-
-    get '/sale-dresses' => redirect('/dresses/sale')
-    get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
-
-    get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
-
-    get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
-    get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
-    get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
-
-    get '/prom-collection' => redirect('/lookbook/prom')
-    get '/lookbook/prom' => 'products/collections#show', :permalink => 'PROM2015', :as => :prom_collection
-
-    get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
-    get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
-    get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
-    get '/festival' => 'products/collections#show', :permalink => 'festival', :as => :festival_page
-
-    # High Contrast Collection
-    get '/high-contrast' => 'products/collections#show', :permalink => 'high-contrast', :as => :high_contrast_collection
-
-    # Modern Bridesmaid Collection
-    get '/modern-bridesmaid-dresses' => 'products/collections#show', :permalink => 'modern-bridesmaid-dresses', :as => :modern_bridesmaid_collection
-    get '/bridesmaid-dresses', to: redirect('/modern-bridesmaid-dresses'), :as => :bridesmaid_collection
-
-    # Best of Fame Collection
-    get '/best-of-fame' => 'products/collections#show', :permalink => 'best-of-fame', :as => :best_of_fame_collection
-
-    # Lookbook v2.0 landing pages
-    get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
-
-    # Cocktail Collection - Landing page
-    get '/cocktail-collection' => 'products/collections#show', :permalink => 'cocktail-collection', :as => :cocktail_collection_landing_page
-
-    # Spring Racing Collection - Landing page
-    get '/spring-racing-collection' => 'products/collections#show', :permalink => 'spring-racing-collection', :as => :spring_racing_collection_landing_page
-
-    # The Evening Hours Collection - Redirection
-    get '/the-evening-hours-collection' => redirect("/dresses/evening"), :as => :evening_hours_collection_landing_page
-
-    # Relaxed Evening Collection page (Inside/Out)- Landing page
-    get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
-
-    # Pre-Prom/Pre-Season Evening Collection - Landing page
-    get '/pre-season-evening-collection' => 'products/collections#show', :permalink => 'pre-season-evening-collection', :as => :pre_season_evening_collection_landing_page
-
-    # Modern Evening Collection - Landing page
-    get '/the-modern-evening-collection' => 'products/collections#show', :permalink => 'modern-evening-collection', :as => :modern_collection_landing_page
-
-    # Redirect with querystring for GA tracking (Marketing campaign)
-    get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
-
-    # Bespoke Bridal Sweepstakes - Landing page
-    get '/bespoke-bridal-sweepstakes'   => 'products/collections#show', :permalink => 'bespoke-bridal-sweepstakes', :as => :bespoke_bridal_sweepstakes_landing_page
-
-    # temporary patch. this dress link is bad so redirect it
-    # get '/dresses/dress-the-millie-dress-1666', to: redirect('/dresses/prom')
-
-    # Landing pages
-    get '/shop-social' => 'products/collections#show', :as => :shop_social
-
-    get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
-    get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
-
-    get '/the-evening-shop/gowns' => 'products/collections#show', :permalink => 'evening-shop-gown', :as => :evening_shop_gown_page
-    get '/the-evening-shop/slips' => 'products/collections#show', :permalink => 'evening-shop-slips', :as => :evening_shop_slips_page
-    get '/the-evening-shop/fitted' => 'products/collections#show', :permalink => 'evening-shop-fitted', :as => :evening_shop_fitted_page
-    get '/the-evening-shop/lace' => 'products/collections#show', :permalink => 'evening-shop-lace', :as => :evening_shop_lace_page
-    get '/the-evening-shop/wraps' => 'products/collections#show', :permalink => 'evening-shop-wraps', :as => :evening_shop_wraps_page
-    get '/the-evening-shop/cold-shoulder' => 'products/collections#show', :permalink => 'evening-shop-cold-shoulder', :as => :evening_shop_cold_shoulder_page
-    get '/the-evening-shop/plunging' => 'products/collections#show', :permalink => 'evening-shop-plunging', :as => :evening_shop_plunging_page
-    get '/the-evening-shop/embellished' => 'products/collections#show', :permalink => 'evening-shop-embellished', :as => :evening_shop_embellished_page
-    get '/the-evening-shop/under-200' => 'products/collections#show', :permalink => 'evening-shop-200', :as => :evening_shop_under_200_page, :redirect => { :au => :evening_shop_under_249_page }
-    get '/the-evening-shop/under-249', to: redirect('/the-evening-shop/under-300'), as: :evening_shop_under_249_page
-    get '/the-evening-shop/under-300' => 'products/collections#show', :permalink => 'evening-shop-300', :as => :evening_shop_under_300_page, :redirect => { :us => :evening_shop_under_200_page }
-
-    # Daywear Category Page
-    get '/daywear' => 'products/collections#show', :permalink => 'daywear', :as => :daywear_page
-
-    # Evening Category Page
-    get '/dresses/evening' => 'products/collections#show', :permalink => 'evening', :as => :evening_page
-
-    # Casual Category Page
-    get '/dresses/casual' => 'products/collections#show', :permalink => 'casual', :as => :casual_page
-
-    # Summer Weddings Collection Page
-    get '/dresses/summer-weddings' => 'products/collections#show', :permalink => 'summer-weddings', :as => :summer_weddings_collection_page
-
-    # Redirect old Spring Weddings to Summer Weddings Collection Page
-    get '/dresses/spring-weddings', to: redirect('/dresses/summer-weddings'), as: :spring_weddings_collection_page
-
-    # Burgundy Collection Page
-    get '/dresses/burgundy' => 'products/collections#show', :permalink => 'burgundy', :as => :burgundy_collection_page
-
-    # White Trend Page
-    get '/trends-white' => 'products/collections#show', :permalink => 'white-trend', :as => :white_trend_page
-
-    # Gingham & Stripes Category page
-    get '/trends-gingham-stripe' => 'products/collections#show', :permalink => 'gingham-stripe-trend', :as => :gingham_stripe_trend_page
-
-    # [LEGACY] Wedding Atelier App - Landing page
-    get '/wedding-atelier(/*anything)' => redirect('/custom-clothes/the-custom-clothing-studio?utm_source=legacy-wedding-atelier'), as: :wedding_atelier_app_landing_page
-
-    # Casual Summer Styles Collection Page
-    get '/casual-summer-styles' => 'products/collections#show', :permalink => 'casual-summer-styles', :as => :casual_summer_styles_page
-
-    # Florals Collection Page
-    get '/dresses/floral' => 'products/collections#show', :permalink => 'floral', :as => :florals_page
-
-    # Fall Weddings Collection Page
-    get '/dresses/fall-weddings' => 'products/collections#show', :permalink => 'fall-weddings', :as => :fall_weddings_page
-
-    # Weddings and Parties Collection Page
-    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dresses/wedding-guests', to: redirect('/weddings-and-parties')
-
-    # Linen category page
-    get '/shop-linen' => 'products/collections#show', :permalink => 'shop-linen', :as => :linen_category_page
-
-    # Micro Floral category page
-    get '/shop-micro-floral' => 'products/collections#show', :permalink => 'shop-micro-floral', :as => :micro_floral_category_page
-
-    # Polka Dot category page
-    get '/shop-polka-dot' => 'products/collections#show', :permalink => 'shop-polka-dot', :as => :polka_dot_category_page
-
-    # The Anti-Fast Fashion Shop (2.0 Collection) Landing page
-    # get '/the-anti-fast-fashion-shop'   => 'products/collections#show', :permalink => 'the-anti-fast-fashion-shop', :as => :the_anti_fast_fashion_shop_landing_page
-
-    #############################
-    # PROM LPs - Interview pages
-    #############################
-    # Prom LP - Say Lou Lou Interview page
-    get '/say-lou-lou-interview' => 'products/collections#show', as: :say_lou_lou_prom_interview_page
-
-    #############################
-    # Weddings & Parties - Say Lou Lou Edit page
-    #############################
-    get '/weddings-parties-say-lou-lou' => 'products/collections#show', as: :say_lou_lou_prom_edit_page
-    get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
-
-    # Category pages used in the new Navigation bar (2018-04-19)
-    get '/navigation-under-200' => 'products/collections#show', permalink: 'navigation-under-200', as: :navigation_under_200_page
-    get '/navigation-all-separates' => 'products/collections#show', permalink: 'navigation-all-separates', as: :navigation_all_separates_page
-    get '/navigation-work' => 'products/collections#show', permalink: 'navigation-work', as: :navigation_work_page
-    get '/navigation-night-out' => 'products/collections#show', permalink: 'navigation-night-out', as: :navigation_night_out_page
-    get '/navigation-day' => 'products/collections#show', permalink: 'navigation-day', as: :navigation_day_page
-    get '/navigation-bridal' => 'products/collections#show', permalink: 'navigation-bridal', as: :navigation_bridal_page
-    get '/navigation-vacation' => 'products/collections#show', permalink: 'navigation-vacation', as: :navigation_vacation_page
-
-    # Summer collection category page
-    get '/shop-summer-collection' => 'products/collections#show', permalink: 'shop-summer-collection', as: :summer_collection_category_page
-
-    # A long tradition of hacking shit in.
-    if Features.active?(:getitquick_unavailable)
-      get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
-    else
-      get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: :fast_making_dresses
-    end
-
-    post '/shared/facebook' => 'competition/events#share'
-
-    ########################
-    # Redirect legacy pages
-    ########################
-    get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
-    get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
-    get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
-    get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
-    get '/express-delivery', to: redirect("/?utm_source=legacy-express-delivery"), as: 'express_delivery'
-    get '/fame-chain', to: redirect("/?utm_source=legacy-fame-chain"), as: :fame_chain
-    get '/fameweddings/bridesmaid', to: redirect("/?utm_source=legacy-fameweddings-bridesmaid"), as: :bridesmaid_landing_page
-    get '/fameweddings/bride', to: redirect("/?utm_source=legacy-fameweddings-bride"), as: :brides_landing_page
-    get '/fameweddings/guest', to: redirect("/?utm_source=legacy-fameweddings-guest"), as: :guest_bride_page
-    get '/fashionista2014', to: redirect("/it-girl")
-    get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
-    get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
-    get '/fashionitgirl2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015', to: redirect('/it-girl')
-    get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
-    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
-    get '/fashionitgirl2015-competition', to: redirect('/it-girl')
-    get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
-    get '/legal', to: redirect("/terms?utm_source=legacy-legal")
-    get '/lets-party', to: redirect("/?utm_source=legacy-lets-party"), as: :lets_party_collection
-    get '/all-size', to: redirect('/lookbook/all-size')
-    get '/new-years-eve-dresses', to: redirect('/lookbook/break-hearts')
-    get '/break-hearts-collection', to: redirect('/lookbook/break-hearts')
-    get '/here-comes-the-sun-collection', to: redirect('/lookbook/here-comes-the-sun')
-    get '/lookbook', to: redirect('/?utm_source=legacy-lookbook'), as: :lookbook
-    get '/lookbook/all-size', to: redirect("/?utm_source=legacy-lookbook-all-size"), as: :all_size_collection
-    get '/lookbook/bohemian-summer', to: redirect('/?utm_source=legacy-lookbook-bohemian-summer'), as: :bohemian_summer_collection
-    get '/lookbook/break-hearts', to: redirect('/?utm_source=legacy-lookbook-break-hearts'), as: :break_hearts_collection
-    get '/lookbook/bring-on-the-night', to: redirect('/?utm_source=legacy-lookbook-bring-on-the-night'), as: :bring_on_the_night_collection
-    get '/lookbook/dance-hall-days', to: redirect('/?utm_source=legacy-lookbook-dance-hall-days'), as: :dance_hall_days_collection
-    get '/lookbook/formal-night', to: redirect('/?utm_source=legacy-lookbook-formal-night'), as: :formal_night_landing_page
-    get '/lookbook/garden-wedding', to: redirect('/?utm_source=legacy-lookbook-garden-wedding'), as: :garden_wedding_collection
-    get '/lookbook/here-comes-the-sun', to: redirect('/?utm_source=legacy-lookbook-here-comes-the-sun'), as: :here_comes_the_sun_collection
-    get '/lookbook/jedi-cosplay', to: redirect('/lookbook/make-a-statement')
-    get '/lookbook/just-the-girls', to: redirect('/?utm_source=legacy-lookbook-just-the-girls'), as: :just_the_girls_collection
-    get '/lookbook/la-belle-epoque', to: redirect('/?utm_source=legacy-lookbook-la-belle-epoque')
-    get '/lookbook/love-lace-collection', to: redirect('/?utm_source=legacy-lookbook-love-lace-collection'), as: :love_lace_collection
-    get '/lookbook/make-a-statement', to: redirect('/?utm_source=legacy-lookbook-make-a-statement'), as: :make_a_statement_collection
-    get '/lookbook/partners-in-crime', to: redirect('/?utm_source=legacy-lookbook-partners-in-crime'), as: :partners_in_crime_collection
-    get '/lookbook/photo-finish', to: redirect('/?utm_source=legacy-lookbook-photo-finish'), as: :photo_finish_collection
-    get '/lookbook/race-day', to: redirect('/?utm_source=legacy-lookbook-race-day'), as: :formal_night_landing_page
-    get '/lookbook/the-luxe-collection', to: redirect('/?utm_source=legacy-lookbook-the-luxe-collection'), as: :luxe_collection
-    get '/lookbook/this-modern-romance', to: redirect('/?utm_source=legacy-lookbook-this-modern-romance'), as: :this_modern_romance_collection
-    get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
-    get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
-    get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
-    get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
-    get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
-    get '/macys', to: redirect('/?utm_source=legacy-macys'), as: :macys
-    get '/mystyle', to: redirect('/?utm_source=legacy-mystyle'), as: :mystyle_landing_page
-    get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
-    get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
-    get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
-    get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
-    get '/everybody-dance', to: redirect('/dresses/prom')
-    get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
-    get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
-    get '/unidays', to: redirect('/?utm_source=legacy-unidays'), as: :unidays_lp
-    get '/amfam' => redirect('/wicked-game-collection')
-    get '/amfam-dresses' => redirect('/wicked-game-collection')
-    get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
-    get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
-    get '/larsen-thompson-interview', to: redirect('/dresses/evening?utm_source=legacy-larsen-thompson-interview')
-    get '/delilah-belle-hamlin-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin-interview')
-    get '/diana-veras-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-diana-veras-interview')
-    get '/ashley-moore-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-ashley-moore-interview')
-    get '/yorelis-apolinario-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario-interview')
-    get '/nia-parker-interview' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker-interview')
-    get '/evening-collection-larsen-thompson', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-larsen-thompson')
-    get '/evening-collection-diana-veras' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-diana-veras')
-    get '/evening-collection-ashley-moore' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-ashley-moore')
-    get '/evening-collection-delilah-belle-hamlin' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin')
-    get '/evening-collection-yorelis-apolinario' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario')
-    get '/evening-collection-nia-parker' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-nia-parker')
-    get '/shop-evening-collection' => 'products/collections#show', to: redirect('/dresses/evening?utm_source=legacy-shop-evening-collection')
-    get '/invite', to: redirect('/dresses/best-sellers?utm_source=legacy-invite'), :as => :invite_a_friend_landing_page
-
-    ###########
-    # User Cart
-    ###########
-    scope '/user_cart', module: 'user_cart' do
-      root to: 'details#show', as: :user_cart_details
-
-      get '/details'      => 'details#show'
-      get '/order_delivery_date' => 'details#order_delivery_date'
-      post '/promotion'   => 'promotions#create'
-
-      post 'products' => 'products#create'
-      delete 'products/:line_item_id' => 'products#destroy'
-      delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
-
-      post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
-      delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
-
-    end
-
-    ########################
-    # Dresses (and products)
-    ########################
-    get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
-
-    scope '/dresses' do
-      root to: 'products/collections#show', :permalink => 'dress', as: :dresses
-      get '/', to: 'products/collections#show', as: :collection
-
-      # Colors should behave like query strings, and not paths
-      get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
-      get '/dress-:product_slug' => 'products/details#show'
-
-      get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
-
-      # Legacy routes and its redirections
-      get '/style', to: redirect('/dresses')
-      get '/style/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/event', to: redirect('/dresses')
-      get '/event/:taxon', to: redirect('/dresses/%{taxon}')
-
-      get '/wedding', to: redirect('/dresses/bridal')
-      get '/short', to: redirect('/dresses/mini')
-
-      get '/blue', to: redirect('/dresses/blue-purple')
-      get '/white', to: redirect('/dresses/white-ivory')
-
-      # Current collections
-      get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
-      get '/*permalink' => 'products/collections#show', as: 'taxon'
-    end
-
-
-
-    # Custom Dresses
-    get '/custom-dresses(/*whatever)', to: redirect('/dresses')
-
-    get '/celebrities', to: redirect('/dresses')
-    get '/celebrities/(:id)', to: redirect('/dresses')
-    get '/featured-bloggers/:id', to: redirect('/dresses')
-
-    resource :product_variants, only: [:show]
-
-    get '/lp/collection(/:collection)', to: redirect('/dresses')
-
-
-    # account settings
-    resource :profile, only: [:show, :update], controller: 'users/profiles' do
-      put 'update_image', on: :member
-    end
-
-    resource 'users/returns', as: 'user_returns', only: [:new, :create]
-
-    # Old Blog Redirection (30/06/2015)
-    get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
-
-    #######################
-    # (Others) Static pages
-    #######################
-    get '/about'   => 'statics#about', :as => :about_us
-    get '/why-us'  => 'statics#why_us', :as => :why_us
-    get '/team', to: redirect("http://www.fameandpartners.com/about")
-    get '/faqs'   => 'statics#faqs'
-    get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
-    get '/how-it-works', to: redirect("/why-us")
-    get '/size-guide'  => 'statics#size_guide', :as => :size_guide
-    get '/growth-plan', to: redirect("/about")
-    get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
-    get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
-    get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
-
-    get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
-
-    get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
-
-    get '/plus-size',  to: redirect('/dresses/plus-size')
-
-    namespace 'campaigns' do
-      resource :email_capture, only: [:create], controller: :email_capture do
-        collection do
-          post :subscribe
-        end
+  # MonkeyPatch for store params & redirect to custom page
+  get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
+
+  ##############
+  # Static Pages
+  ##############
+   
+  post '/shared/facebook' => 'competition/events#share'
+
+  ########################
+  # Redirect legacy pages
+  ########################
+  get '/wedding-atelier(/*anything)' => redirect('/custom-clothes/the-custom-clothing-studio?utm_source=legacy-wedding-atelier'), as: :wedding_atelier_app_landing_page
+  get '/sale-dresses' => redirect('/dresses/sale')
+  get '/slayitforward', to: redirect('https://www.instagram.com/explore/tags/slayitforward/'), :as => :slay_it_forward
+  get '/coming-soon-custom-bridesmaid-dresses', to: redirect("/custom-clothes/the-custom-clothing-studio?utm_source=coming-soon-custom-bridesmaid-dresses"), :as => :bridesmaid_teaser_landing_page
+  get '/the-evening-hours-collection' => redirect("/dresses/evening"), :as => :evening_hours_collection_landing_page
+  get '/bespoke-bridal', to: redirect('/bespoke-bridal-collection?utm_source=theknot')
+  get '/prom-ad' => redirect('/dresses/prom'), as: :prom_ad_collection
+  get '/prom-collection' => redirect('/lookbook/prom')
+  get '/bridesmaid-dresses', to: redirect('/modern-bridesmaid-dresses'), :as => :bridesmaid_collection
+  get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
+  get '/evening-collection-say-lou-lou', to: redirect("/weddings-parties-say-lou-lou")
+  get '/dress-for-wedding', to: redirect('/?utm_source=legacy-dress-for-wedding'), :as => :dress_for_wedding_page
+  get '/ad-plus-size', to: redirect("/?utm_source=legacy-ad-plus-size"), as: :ad_plus_size_collection
+  get '/bridal-dresses', to: redirect("/?utm_source=legacy-bridal-dresses"), as: :bridal_collection
+  get '/bring-on-the-night', to: redirect("/?utm_source=legacy-bring-on-the-night"), as: :bring_on_the_night_landing_page
+  get '/compterms', to: redirect("/?utm_source=legacy-compterms"), as: :competition_terms
+  get '/express-delivery', to: redirect("/?utm_source=legacy-express-delivery"), as: 'express_delivery'
+  get '/fame-chain', to: redirect("/?utm_source=legacy-fame-chain"), as: :fame_chain
+  get '/fameweddings/bridesmaid', to: redirect("/?utm_source=legacy-fameweddings-bridesmaid"), as: :bridesmaid_landing_page
+  get '/fameweddings/bride', to: redirect("/?utm_source=legacy-fameweddings-bride"), as: :brides_landing_page
+  get '/fameweddings/guest', to: redirect("/?utm_source=legacy-fameweddings-guest"), as: :guest_bride_page
+  get '/fashionista2014', to: redirect("/it-girl")
+  get '/fashionista2014/info', to: redirect("/it-girl"), as: :fashionista_info
+  get '/fashionista2014-winners', to: redirect("/it-girl"), as: :fashionista_winner
+  get '/fashionitgirl2015', to: redirect('/it-girl')
+  get '/fashionitgirlau2015', to: redirect('/it-girl')
+  get '/fashionitgirlau2015/terms-and-conditions', to: redirect('/it-girl')
+  get '/fashionitgirl2015-terms-and-conditions', to: redirect('/it-girl')
+  get '/fashionitgirl2015-competition', to: redirect('/it-girl')
+  get '/nyfw-comp-terms-and-conditions', to: redirect('/it-girl')
+  get '/legal', to: redirect("/terms?utm_source=legacy-legal")
+  get '/lets-party', to: redirect("/?utm_source=legacy-lets-party"), as: :lets_party_collection
+  get '/all-size', to: redirect('/lookbook/all-size')
+  get '/new-years-eve-dresses', to: redirect('/lookbook/break-hearts')
+  get '/break-hearts-collection', to: redirect('/lookbook/break-hearts')
+  get '/here-comes-the-sun-collection', to: redirect('/lookbook/here-comes-the-sun')
+  get '/lookbook', to: redirect('/?utm_source=legacy-lookbook'), as: :lookbook
+  get '/lookbook/all-size', to: redirect("/?utm_source=legacy-lookbook-all-size"), as: :all_size_collection
+  get '/lookbook/bohemian-summer', to: redirect('/?utm_source=legacy-lookbook-bohemian-summer'), as: :bohemian_summer_collection
+  get '/lookbook/break-hearts', to: redirect('/?utm_source=legacy-lookbook-break-hearts'), as: :break_hearts_collection
+  get '/lookbook/bring-on-the-night', to: redirect('/?utm_source=legacy-lookbook-bring-on-the-night'), as: :bring_on_the_night_collection
+  get '/lookbook/dance-hall-days', to: redirect('/?utm_source=legacy-lookbook-dance-hall-days'), as: :dance_hall_days_collection
+  get '/lookbook/formal-night', to: redirect('/?utm_source=legacy-lookbook-formal-night'), as: :formal_night_landing_page
+  get '/lookbook/garden-wedding', to: redirect('/?utm_source=legacy-lookbook-garden-wedding'), as: :garden_wedding_collection
+  get '/lookbook/here-comes-the-sun', to: redirect('/?utm_source=legacy-lookbook-here-comes-the-sun'), as: :here_comes_the_sun_collection
+  get '/lookbook/jedi-cosplay', to: redirect('/lookbook/make-a-statement')
+  get '/lookbook/just-the-girls', to: redirect('/?utm_source=legacy-lookbook-just-the-girls'), as: :just_the_girls_collection
+  get '/lookbook/la-belle-epoque', to: redirect('/?utm_source=legacy-lookbook-la-belle-epoque')
+  get '/lookbook/love-lace-collection', to: redirect('/?utm_source=legacy-lookbook-love-lace-collection'), as: :love_lace_collection
+  get '/lookbook/make-a-statement', to: redirect('/?utm_source=legacy-lookbook-make-a-statement'), as: :make_a_statement_collection
+  get '/lookbook/partners-in-crime', to: redirect('/?utm_source=legacy-lookbook-partners-in-crime'), as: :partners_in_crime_collection
+  get '/lookbook/photo-finish', to: redirect('/?utm_source=legacy-lookbook-photo-finish'), as: :photo_finish_collection
+  get '/lookbook/race-day', to: redirect('/?utm_source=legacy-lookbook-race-day'), as: :formal_night_landing_page
+  get '/lookbook/the-luxe-collection', to: redirect('/?utm_source=legacy-lookbook-the-luxe-collection'), as: :luxe_collection
+  get '/lookbook/this-modern-romance', to: redirect('/?utm_source=legacy-lookbook-this-modern-romance'), as: :this_modern_romance_collection
+  get '/lookbook/the-freshly-picked-collection', to: redirect('/dresses/cotton-dresses'), as: :the_freshly_picked_collection
+  get '/lookbook/the-ruffled-up-collection', to: redirect('/dresses/ruffle'), as: :the_ruffled_up_collection
+  get '/sarah-ellen', to: redirect('/?utm_source=legacy-lookbook-sarah-ellen'), as: :sarah_ellen_landing_page
+  get '/partners-in-crime-terms', to: redirect('/?utm_source=legacy-partners-in-crime-terms'), as: :partners_in_crime_terms
+  get '/partners-in-crime', to: redirect('/?utm_source=legacy-partners-in-crime'), as: :partners_in_crime_competition
+  get '/macys', to: redirect('/?utm_source=legacy-macys'), as: :macys
+  get '/mystyle', to: redirect('/?utm_source=legacy-mystyle'), as: :mystyle_landing_page
+  get '/skirts-collection', to: redirect('/skirts'), as: :skirts_collection_landing_page
+  get '/gown-collection', to: redirect('/the-evening-shop/gowns'), as: :gown_collection_landing_page
+  get '/dress-for-parties', to: redirect('/dresses/cocktail'), as: :dress_for_parties_page
+  get '/every-body-dance', to: redirect('/dresses/prom'), :as => :every_body_dance_collection
+  get '/everybody-dance', to: redirect('/dresses/prom')
+  get '/shop-every-body-dance', to: redirect('/dresses/prom'), :as => :shop_every_body_dance_collection
+  get '/the-holiday-edit', to: redirect('/?utm_source=legacy-the-holiday-edit'), as: :holiday_edit_page
+  get '/unidays', to: redirect('/?utm_source=legacy-unidays'), as: :unidays_lp
+  get '/amfam' => redirect('/wicked-game-collection')
+  get '/amfam-dresses' => redirect('/wicked-game-collection')
+  get '/wicked-game-collection', to: redirect('/?utm_source=legacy-the-wicked-game'), as: :wicked_game_collection
+  get '/evening-collection-campaign', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-campaign')
+  get '/larsen-thompson-interview', to: redirect('/dresses/evening?utm_source=legacy-larsen-thompson-interview')
+  get '/delilah-belle-hamlin-interview', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin-interview')
+  get '/diana-veras-interview', to: redirect('/dresses/evening?utm_source=legacy-diana-veras-interview')
+  get '/ashley-moore-interview', to: redirect('/dresses/evening?utm_source=legacy-ashley-moore-interview')
+  get '/yorelis-apolinario-interview', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario-interview')
+  get '/nia-parker-interview', to: redirect('/dresses/evening?utm_source=legacy-nia-parker-interview')
+  get '/evening-collection-larsen-thompson', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-larsen-thompson')
+  get '/evening-collection-diana-veras', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-diana-veras')
+  get '/evening-collection-ashley-moore', to: redirect('/dresses/evening?utm_source=legacy-evening-collection-ashley-moore')
+  get '/evening-collection-delilah-belle-hamlin', to: redirect('/dresses/evening?utm_source=legacy-delilah-belle-hamlin')
+  get '/evening-collection-yorelis-apolinario', to: redirect('/dresses/evening?utm_source=legacy-yorelis-apolinario')
+  get '/evening-collection-nia-parker', to: redirect('/dresses/evening?utm_source=legacy-nia-parker')
+  get '/shop-evening-collection', to: redirect('/dresses/evening?utm_source=legacy-shop-evening-collection')
+  get '/invite', to: redirect('/dresses/best-sellers?utm_source=legacy-invite'), :as => :invite_a_friend_landing_page
+  get '/celebrities', to: redirect('/dresses')
+  get '/celebrities/(:id)', to: redirect('/dresses')
+  get '/featured-bloggers/:id', to: redirect('/dresses')
+  get '/lp/collection(/:collection)', to: redirect('/dresses')
+  get '/pre-register-bridal', to: redirect('/bespoke-bridal-collection'), as: :pre_register_bridal
+  get '/pre-register-bridesmaid', to: redirect('/wedding-atelier'), as: :pre_register_bridesmaid_sweepstakes
+  get '/get-the-look', to: redirect('http://blog.fameandpartners.com/step-by-step-guide-bridal-style/'), :as => :get_the_look
+  get '/growth-plan', to: redirect("/about")
+  get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
+  get '/how-it-works', to: redirect("/why-us")
+  get '/team', to: redirect("http://www.fameandpartners.com/about")
+  get '/plus-size',  to: redirect('/dresses/plus-size')
+  get '/style-consultation', to: redirect("/styling-session")
+  get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
+  get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
+  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+  get '/contact/new', to: redirect('/contact'), as: :old_contact_page
+
+
+  get '/bridal-dresses', to: redirect('/dressses/bridal')
+  get '/prom-red-and-black', to: redirect('/dresses/prom')
+  get '/pre-season-evening-collection', to: redirect('/dresses/evening')
+  get '/best-of-fame', to: redirect('/dresses/best-sellers')
+  get '/the-modern-evening-collection', to: redirect('/dresses/evening')
+  get '/the-evening-shop', to: redirect('/dresses/evening')
+  get '/the-evening-shop(/*anything)', to: redirect('/dresses/evening')
+  get '/trends-white', to: redirect('/dresses/white-ivory')
+  get '/shop-summer-collection', to: redirect('/dresses/spring')
+  get '/casual-summer-styles', to: redirect('/dresses/spring')
+  get '/shop-micro-floral', to: redirect('/dresses/floral')
+  get '/navigation-bridal', to: redirect('/dresses/bridal')
+  get '/bespoke-bridal-sweepstakes', to: redirect('/dresses/bridal')
+  get '/modern-bridesmaid-dresses', to: redirect('/custom-clothes/pre-customized-styles')
+  get '/navigation-under-200', to: redirect('/dresses/0-199')
+  get '/cocktail-collection', to: redirect('/dresses/cocktail')
+  get '/spring-racing-collection', to: redirect('/dresses/spring')
+  get '/navigation-all-separates', to: redirect('/separates')
+  get '/getitquick', to: redirect('/clothing/get-it-quick')
+  get '/shop-linen', to: redirect('/clothing/linen')
+  get '/shop-polka-dot', to: redirect('/dresses/polka-dot')
+  get '/navigation-work', to: redirect('/dresses/fw18')
+  get '/navigation-night-out', to: redirect('TODO')
+  get '/navigation-vacation', to: redirect('TODO')
+  get '/weddings-and-parties', to: redirect('TODO')
+  get '/weddings-parties-say-lou-lou', to: redirect('TODO')
+  get '/daywear', to: redirect('TODO')
+  get '/navigation-day', to: redirect('TODO')
+
+  ###########
+  # User Cart
+  ###########
+  scope '/user_cart', module: 'user_cart' do
+    root to: 'details#show', as: :user_cart_details
+
+    get '/details'      => 'details#show'
+    post '/promotion'   => 'promotions#create'
+
+    post 'products' => 'products#create'
+    delete 'products/:line_item_id' => 'products#destroy'
+    delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
+
+    post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
+    delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
+
+  end
+
+  ########################
+  # Dresses (and products)
+  ########################
+
+
+  # account settings
+  resource :profile, only: [:show, :update], controller: 'users/profiles' do
+    put 'update_image', on: :member
+  end
+
+  resource 'users/returns', as: 'user_returns', only: [:new, :create]
+
+  #######################
+  # (Others) Static pages
+  #######################
+  get '/about'   => 'statics#about', :as => :about_us
+  get '/why-us'  => 'statics#why_us', :as => :why_us
+  get '/faqs'   => 'statics#faqs'
+  get '/size-guide'  => 'statics#size_guide', :as => :size_guide
+  get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
+  get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
+  get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
+  get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
+
+  namespace 'campaigns' do
+    resource :email_capture, only: [:create], controller: :email_capture do
+      collection do
+        post :subscribe
       end
     end
-
-    get '/style-consultation', to: redirect("/styling-session")
-
-    get '/styling-session', to: redirect("/?utm_source=legacy-styling-session-page"), as: :styling_session
-
-    get '/wedding-consultation', to: redirect("/?utm_source=legacy-wedding-consultation-page"), as: :wedding_consultation
-
-    get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
-    resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
-
-    get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
-    resource 'micro-influencer', as: 'micro_influencer', only: [:create]
-
-    get '/contact/new', to: redirect('/contact'), as: :old_contact_page
-    resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
-      get 'success'
-    end
-    post '/about' => 'contacts#join_team', as: :join_team
-
-    # return form
-    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
-    get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
-
-    # External URLs
-    get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
-
-    root :to => 'index#show'
-
-    scope '/users/:user_id', :as => :user do
-      get '/style-report' => 'user_style_profiles#show', :as => :style_profile
-      get '/style-report-debug' => 'user_style_profiles#debug'
-      get '/recomendations' => 'user_style_profiles#recomendations'
-    end
-
-    mount Spree::Core::Engine, at: '/'
-
-    ############################################
-    # Storefront (Search, Checkout and Payments)
-    ############################################
-    get 'search' => 'products/base#search'
-
-    post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
-
-    # Guest checkout routes
-    resources :payment_requests, only: [:new, :create]
-
-    # Redirecting all bridesmaid party URLs
-    get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
   end
+
+  
+
+  get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
+  resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
+
+  get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
+  resource 'micro-influencer', as: 'micro_influencer', only: [:create]
+
+  resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
+    get 'success'
+  end
+  post '/about' => 'contacts#join_team', as: :join_team
+
+  # return form
+  get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
+  get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
+
+  # External URLs
+  get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
+
+  root :to => 'index#show'
+
+  scope '/users/:user_id', :as => :user do
+    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
+    get '/style-report-debug' => 'user_style_profiles#debug'
+    get '/recomendations' => 'user_style_profiles#recomendations'
+  end
+
+  mount Spree::Core::Engine, at: '/'
+
+  ############################################
+  # Storefront (Search, Checkout and Payments)
+  ############################################
+
+  post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
+
+  # Guest checkout routes
+  resources :payment_requests, only: [:new, :create]
 
   post 'shipments_update', to: 'shippo/shipments#update'
 
