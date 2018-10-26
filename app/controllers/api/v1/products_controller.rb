@@ -3,7 +3,8 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
-PRODUCT_IMAGE_SIZES = [:original, :product]
+PRODUCT_IMAGE_SIZES = [:original, :xxxlarge, :xxlarge, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
+LIST_PRODUCT_IMAGE_SIZES = [:original, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
@@ -87,16 +88,23 @@ module Api
               .collect do |image| 
               {
                 type: :photo,
-                src: PRODUCT_IMAGE_SIZES.map {|image_size|
-                  geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
+                src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
+                  if image_size == :original
+                    width = image.attachment_width
+                    height = image.attachment_height
+                  else
+                    geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+                    width = geometry.width
+                    height = geometry.height
+                  end
       
                   {
                     name: image_size,
-                    width: image_size == :original ? image.attachment_width : geometry.width,
-                    height: image_size == :original ? image.attachment_height : geometry.height,
+                    width: width,
+                    height: height,
                     url: image.attachment.url(image_size),
                   }
-                },
+                }.select { |i| i[:width] <= image.attachment_width},
                 sortOrder: image.position
               }
             end,
@@ -224,15 +232,7 @@ module Api
                 "en-US": r['_source']['sale_prices']['usd'] * 100
               },
               url: r['_source']['product']['url'],
-              images: r['_source']['cropped_images'].map do |src|
-                {
-                  src: [{
-                    width: 411,
-                    height: 590,
-                    url: src,
-                  }]
-                }
-              end,
+              images: r['_source']['media'],
               productVersionId: 0,
             }
           end,
@@ -605,14 +605,20 @@ module Api
           fitDescription: fixup_fit(product_fit),
           sizeDescription: product_size,
           src: PRODUCT_IMAGE_SIZES.map {|image_size|
-            geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
-
+            if image_size == :original
+              width = image.attachment_width
+              height = image.attachment_height
+            else
+              geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+              width = geometry.width
+              height = geometry.height
+            end
             {
-              width: image_size == :original ? image.attachment_width : geometry.width,
-              height: image_size == :original ? image.attachment_height : geometry.height,
+              width: width,
+              height: height,
               url: image.attachment.url(image_size),
             }
-          },
+          }.select {|i| i[:width] <= image.attachment_width},
           sortOrder: image.position,
           options: [
             option

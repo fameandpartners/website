@@ -13,6 +13,8 @@ module Products
 
     attr_reader :logger, :variants
 
+    LIST_PRODUCT_IMAGE_SIZES = [:original, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
+
     def initialize(logdev = $stdout)
       @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
@@ -123,6 +125,8 @@ module Products
 
       taxon_names = [
         taxons.map(&:permalink).map {|f| f.split('/').last },
+        product.sku,
+        pid,
         product.category.category,
         product.category.subcategory,
         product.fast_making? ? 'fast_making': nil,
@@ -133,6 +137,8 @@ module Products
         fabric&.material,
         color.option_values_groups.map(&:name),
       ].flatten.compact #.map(&:parameterize).map(&:underscore)
+
+      images = cropped_images_for(product_fabric_value || product_color_value)
 
       {
         _index: index_name,
@@ -193,7 +199,34 @@ module Products
             presentation:   fabric.presentation
           },
          
-          cropped_images: cropped_images_for(product_fabric_value || product_color_value),
+          cropped_images: images.collect { |i| i.attachment.url(:large) },
+
+          media: images
+            .sort_by(&:position)
+            .take(2)
+            .collect do |image| 
+            {
+              type: :photo,
+              src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
+                if image_size == :original
+                  width = image.attachment_width
+                  height = image.attachment_height
+                else
+                  geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+                  width = geometry.width
+                  height = geometry.height
+                end
+    
+                {
+                  name: image_size,
+                  width: width,
+                  height: height,
+                  url: image.attachment.url(image_size),
+                }
+              }.select { |i| i[:width] <= image.attachment_width},
+              sortOrder: image.position
+            }
+          end,
 
           prices: {
             aud:  price_au.amount.to_f,

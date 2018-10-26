@@ -259,13 +259,6 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
   end
 
-  # todo: remove this method from global scope
-  def get_recommended_products(product, options = {})
-    Products::RecommendedProducts.new(product: product, limit: options[:limit]).read
-  rescue
-    Spree::Product.active.limit(3)
-  end
-
   def website_on_maintenance
     render 'index/maintenance', layout: 'redesign/maintenance'
   end
