@@ -40,8 +40,7 @@ module Bronto
                 begin
                     return RestClient.get("#{url}", content_type: 'application/json', authorization: "Bearer #{access_token}")
                 rescue RestClient::ExceptionWithResponse => e
-                    # e,resoibse,cide
-                    binding.pry
+                    # e,response.code
                     NewRelic::Agent.notice_error("Bronto get error: #{e.response} for #{url}")
                 end
             end

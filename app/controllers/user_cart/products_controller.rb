@@ -87,7 +87,6 @@ class UserCart::ProductsController < UserCart::BaseController
     if @item.stock
       populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
-      binding.pry
       if populator.populate(line_item: [params[:id].to_i])
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
