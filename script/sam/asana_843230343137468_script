@@ -1,0 +1,23 @@
+
+
+
+if [ `uname` = "Darwin" ]; then
+  rm -rf ~/leahs/website/spree || true
+  rm -rf ~/leahs/website/public/spree || true
+  cp -nr ~/oversize_leahs/spree ~/leahs/website/public/ || true
+  ~/bin/leahs_db 20181018
+  sleep 1
+fi
+
+bundle exec rails runner 'c = Category.new(); c.category = "Outerwear"; c.subcategory = "Coat"; c.save!; c = Category.new(); c.category = "Outerwear"; c.subcategory = "Blazer"; c.save!; c = Category.new(); c.category = "Tops"; c.subcategory = "Long Sleeve Top"; c.save!; c = Category.new(); c.category = "Dresses"; c.subcategory = "Long Sleeve Top"; c.save!; c = Category.new(); c.category = "Tops"; c.subcategory = "Crop Top"; c.save!'
+
+MARK_NEW_THIS_WEEK=true ./script/import_products.sh
+#bundle exec rake data:six_week_delivery
+#bundle exec rake data:add_fastmaking_to_all_products
+#bundle exec rake data:make_fast_making_18_dollars
+bundle exec rake data:fabric_bla_bla
+bundle exec rake elasticsearch:reindex
+bundle exec rails runner 'Rails.cache.clear'
+if [ `uname` = "Darwin" ]; then
+  cp -nr ~/leahs/website/spree ~/leahs/website/public/ || true
+fi

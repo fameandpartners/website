@@ -19,7 +19,7 @@ class MarketingMailer < ActionMailer::Base
     product      = order.line_items.first.product
     site_version = order.get_site_version
     base_price   = product.site_price_for(site_version)
-    image_urls   = Products::ColorVariantImageDetector.cropped_images_for(product)
+    image_urls   = Products::ColorVariantImageDetector.cropped_images_for(product).collect { |i| i.attachment.url(:large) }
 
     # Template Scope
     @resume_shop_url   = root_url(site_version: site_version.to_param)

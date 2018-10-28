@@ -3,13 +3,13 @@ require 'spec_helper'
 describe 'Captures UTM data from the URL (for each order)', type: :feature do
   context 'no UTM params on the URL' do
     it do
-      expect { visit('/') }.not_to change { Marketing::OrderTrafficParameters.count }
+      expect { visit('/contact') }.not_to change { Marketing::OrderTrafficParameters.count }
     end
   end
 
   context 'there are UTM params' do
     before(:each) do
-      visit '/?utm_campaign=utm_campaign&utm_source=utm_source&utm_medium=utm_medium'
+      visit '/contact?utm_campaign=utm_campaign&utm_source=utm_source&utm_medium=utm_medium'
     end
 
     it 'captures UTM params on user visit' do
@@ -21,7 +21,7 @@ describe 'Captures UTM data from the URL (for each order)', type: :feature do
 
     describe 'user visits website with other UTM params' do
       before(:each) do
-        visit '/?utm_campaign=other&utm_source=different&utm_medium=medium'
+        visit '/contact?utm_campaign=other&utm_source=different&utm_medium=medium'
       end
 
       #fails because no contentful versions

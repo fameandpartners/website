@@ -8,10 +8,12 @@ module Search
 
       # some kind of documentation
       boost_pids        = options[:boost_pids] #
+      boost_facets        = options[:boost_facets] #
       colors            = options[:color_ids] #
+      color_group_names = options[:color_group_names] #
+      taxon_names       = options[:taxon_names] #
       body_shapes       = options[:body_shapes] #
       taxon_ids         = options[:taxon_ids] #
-      exclude_products  = options[:exclude_products]  #no!
       discount          = options[:discount]  #
       query_string      = options[:query_string]
       order             = options[:order]
@@ -23,14 +25,14 @@ module Search
       currency          = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
+      exclude_taxon_names = options[:exclude_taxon_names]
 
       product_orderings = ProductOrdering.product_orderings(currency: currency)
 
-      include_aggregation_prices      = options[:include_aggregation_prices]
-      include_aggregation_taxons      = options[:include_aggregation_taxons]
-      include_aggregation_bodyshapes  = options[:include_aggregation_bodyshapes]
-      include_aggregation_color_ids   = options[:include_aggregation_color_ids]
-
+      include_aggregation_prices            = options[:include_aggregation_prices]
+      include_aggregation_taxons            = options[:include_aggregation_taxons]
+      include_aggregation_bodyshapes        = options[:include_aggregation_bodyshapes]
+      include_aggregation_color_group_names = options[:include_aggregation_color_group_names]
 
       product_ordering = product_orderings.fetch(order) do
         if query_string.present?
@@ -59,12 +61,6 @@ module Search
               end
             end
 
-            # exclude products found
-            if exclude_products.present?
-              must_not do
-                term id: exclude_products
-              end
-            end
 
             # exclude items marked not-a-dress
 
@@ -72,6 +68,14 @@ module Search
               exclude_taxon_ids.each do |id|
                 must_not do
                   term 'product.taxon_ids' => id
+                end
+              end
+            end
+
+            if exclude_taxon_names.present?
+              exclude_taxon_names.each do |name|
+                must_not do
+                  term 'product.taxons.keyword' => name
                 end
               end
             end
@@ -127,6 +131,30 @@ module Search
               end
             end
 
+            if color_group_names.present?
+              must do
+                bool do
+                  color_group_names.map do |color|
+                    should do
+                      term 'product.taxons.keyword': { value: color, boost: 1 }
+                    end
+                  end
+                end
+              end
+            end
+
+            if taxon_names.present?
+              filter do
+                bool do
+                  taxon_names.map do |taxon|
+                    must do
+                      term 'product.taxons.keyword' => taxon
+                    end
+                  end
+                end
+              end
+            end
+
             if query_string.present?
               must do
                 query_string do
@@ -138,26 +166,34 @@ module Search
             if boost_pids && !boost_pids.empty?
               boost_pids.map.with_index do |bp, index|
                 should do
-                  term 'product.pid.keyword': { value: bp, boost: 100-index }
+                  term 'product.pid.keyword': { value: bp, boost: 200-index }
+                end
+              end
+            end
+
+            if boost_facets && !boost_facets.empty?
+              boost_facets.map.with_index do |bf, index|
+                should do
+                  term 'product.taxons.keyword': { value: bf, boost: 100-index }
                 end
               end
             end
           end
         end
 
-        if include_aggregation_color_ids
-          aggregation :color_ids do
+        if include_aggregation_color_group_names
+          aggregation :color_group_names do
             terms do
-              field "color.id"
+              field "product.taxons.keyword"
               size 9999
             end
           end
         end
 
         if include_aggregation_taxons
-          aggregation :taxon_ids do
+          aggregation :taxons do
             terms do
-              field "product.taxon_ids"
+              field "product.taxons.keyword"
               size 9999
             end
           end

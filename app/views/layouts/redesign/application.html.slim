@@ -7,7 +7,6 @@ doctype html
 
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
     = stylesheet_link_tag 'application_redesign'
-    = stylesheet_link_tag "#{configatron.node_pdp_url}/#{webpack_assets['cssBundle']}"
 
     = csrf_meta_tags
 
@@ -16,8 +15,6 @@ doctype html
   body#top class=('locale-warning-active' if @locale_warning.show?)
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
-    #react-blanket.__react_root__
-    #react-menu.__react_root__
     #react-cart.__react_root_relaunch__
     #content-container.content-container
       - unless disable_notices?
@@ -28,7 +25,7 @@ doctype html
 
 
     #react-footer.__react_root_relaunch__
-    #portal-root
+    #portal-root.__react_root_relaunch__
 
     - if Features.active?(:marketing_modals)
       = render '/shared/marketing'
@@ -36,4 +33,5 @@ doctype html
     = javascript_include_tag 'storefront'
 
     = render 'layouts/redesign/javascript'
-    = javascript_include_tag "#{configatron.node_pdp_url}/#{webpack_assets['jsBundle']}"
+    = javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/vendor.chunk.js"
+    = javascript_include_tag "#{configatron.fame_webclient_url}/_webclient/widgetGlobalElements.js"

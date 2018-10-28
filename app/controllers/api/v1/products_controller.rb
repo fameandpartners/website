@@ -3,7 +3,8 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
-PRODUCT_IMAGE_SIZES = [:original, :product]
+PRODUCT_IMAGE_SIZES = [:original, :xxxlarge, :xxlarge, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
+LIST_PRODUCT_IMAGE_SIZES = [:original, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
@@ -87,16 +88,23 @@ module Api
               .collect do |image| 
               {
                 type: :photo,
-                src: PRODUCT_IMAGE_SIZES.map {|image_size|
-                  geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
+                src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
+                  if image_size == :original
+                    width = image.attachment_width
+                    height = image.attachment_height
+                  else
+                    geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+                    width = geometry.width
+                    height = geometry.height
+                  end
       
                   {
                     name: image_size,
-                    width: image_size == :original ? image.attachment_width : geometry.width,
-                    height: image_size == :original ? image.attachment_height : geometry.height,
+                    width: width,
+                    height: height,
                     url: image.attachment.url(image_size),
                   }
-                },
+                }.select { |i| i[:width] <= image.attachment_width},
                 sortOrder: image.position
               }
             end,
@@ -131,20 +139,14 @@ module Api
 
         filter = Array.wrap(params[:facets])
 
-        color_ids = Repositories::ProductColors.color_groups
-          .select {|cg| filter.include?(cg[:name]) }
-          .flat_map {|cg| cg[:color_ids]}
-
-        # body_shapes = ProductStyleProfile::BODY_SHAPES & filter
-
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
         taxons = Repositories::Taxonomy.taxons
-        taxon_ids = filter
+        color_names = filter
+          .select { |f| color_group_names.include?(f) }
+        taxon_names = filter
           .reject { |f| color_group_names.include?(f) }
-          .map {|f| taxons.select { |t| t.permalink.ends_with?(f)}.map(&:id) }
-          .compact
-          .reject(&:empty?)
+          .reject { |f| ['0-199', '200-299', '300-399', '400'].include?(f) }
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
@@ -174,16 +176,17 @@ module Api
 
 
         query_params = { 
-          taxon_ids: taxon_ids,
-          # body_shapes: body_shapes,
-          color_ids: color_ids,
+          taxon_names: taxon_names,
+          color_group_names: color_names,
           order: params[:sortField],
           price_min: price_min,
           price_max: price_max, 
           currency: current_currency.downcase,
           query_string: params[:query],
           include_aggregation_taxons: true,
-          boost_pids: Array.wrap(params[:boostPids])
+          boost_pids: Array.wrap(params[:boostPids]),
+          boost_facets: Array.wrap(params[:boostFacets]),
+          exclude_taxon_names: Array.wrap(params[:excludeFacets])
         }
         query = Search::ColorVariantsESQuery.build(query_params)
         result = Elasticsearch::Client.new(host: configatron.es_url).search(
@@ -194,25 +197,16 @@ module Api
         )
 
         #taxons are additive
-        aggregation_taxons = Hash[*result["aggregations"]["taxon_ids"]["buckets"].map(&:values).flatten]
+        aggregation_taxons = Hash[*result["aggregations"]["taxons"]["buckets"].map(&:values).flatten]
 
 
         aggregation_colors_result = Elasticsearch::Client.new(host: configatron.es_url).search(
           index: configatron.elasticsearch.indices.color_variants,
-          body: Search::ColorVariantsESQuery.build(query_params.merge(color_ids: nil, include_aggregation_color_ids: true)),
+          body: Search::ColorVariantsESQuery.build(query_params.merge(color_group_names: nil, include_aggregation_color_group_names: true)),
           size: 0,
           from: 0
         )
-        aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_ids"]["buckets"].map(&:values).flatten]
-
-
-        # aggregation_body_shapes_result = Elasticsearch::Client.new(host: configatron.es_url).search(
-        #   index: configatron.elasticsearch.indices.color_variants,
-        #   body: Search::ColorVariantsESQuery.build(query_params.merge(body_shapes: nil, include_aggregation_bodyshapes: true)),
-        #   size: 0,
-        #   from: 0
-        # )
-        # aggregation_body_shapes = Hash[*aggregation_body_shapes_result["aggregations"]["body_shape_ids"]["buckets"].map(&:values).flatten]
+        aggregation_colors = Hash[*aggregation_colors_result["aggregations"]["color_group_names"]["buckets"].map(&:values).flatten]
 
         aggregation_prices_result = Elasticsearch::Client.new(host: configatron.es_url).search(
           index: configatron.elasticsearch.indices.color_variants,
@@ -233,16 +227,12 @@ module Api
                 "en-AU": r['_source']['prices']['aud'] * 100,
                 "en-US": r['_source']['prices']['usd'] * 100
               },
+              salePrice: r['_source']['sale_prices'] && {
+                "en-AU": r['_source']['sale_prices']['aud'] * 100,
+                "en-US": r['_source']['sale_prices']['usd'] * 100
+              },
               url: r['_source']['product']['url'],
-              images: r['_source']['cropped_images'].map do |src|
-                {
-                  src: [{
-                    width: 411,
-                    height: 590,
-                    url: src,
-                  }]
-                }
-              end,
+              images: r['_source']['media'],
               productVersionId: 0,
             }
           end,
@@ -271,7 +261,7 @@ module Api
                   "facetId": group[:name],
                   "title": group[:presentation],
                   "order": color_mapping.keys.find_index(group[:name].to_sym),
-                  "docCount": group[:color_ids].map {|i| aggregation_colors[i] || 0}.sum,
+                  "docCount": aggregation_colors[group[:name]] || 0,
                   "facetMeta": {
                     "hex": color_mapping[group[:name].to_sym],
                     "image": image_mapping[group[:name].to_sym]
@@ -289,7 +279,7 @@ module Api
                   "facetId": taxon.permalink,
                   "title": taxon.name,
                   "order": i,
-                  "docCount": aggregation_taxons[taxon.id]  || 0,
+                  "docCount": aggregation_taxons[taxon.permalink.split("/").last]  || 0,
                 }
               end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             },
@@ -615,14 +605,20 @@ module Api
           fitDescription: fixup_fit(product_fit),
           sizeDescription: product_size,
           src: PRODUCT_IMAGE_SIZES.map {|image_size|
-            geometry = Paperclip::Geometry.parse(image.attachment.styles['product'].geometry)
-
+            if image_size == :original
+              width = image.attachment_width
+              height = image.attachment_height
+            else
+              geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+              width = geometry.width
+              height = geometry.height
+            end
             {
-              width: image_size == :original ? image.attachment_width : geometry.width,
-              height: image_size == :original ? image.attachment_height : geometry.height,
+              width: width,
+              height: height,
               url: image.attachment.url(image_size),
             }
-          },
+          }.select {|i| i[:width] <= image.attachment_width},
           sortOrder: image.position,
           options: [
             option

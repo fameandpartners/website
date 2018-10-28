@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
                 :serialize_user,
                 :serialized_current_user,
                 :landing_page,
-                :webpack_assets
+                :contentful_global_page_config
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -257,13 +257,6 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
-  end
-
-  # todo: remove this method from global scope
-  def get_recommended_products(product, options = {})
-    Products::RecommendedProducts.new(product: product, limit: options[:limit]).read
-  rescue
-    Spree::Product.active.limit(3)
   end
 
   def website_on_maintenance

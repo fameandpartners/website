@@ -13,6 +13,8 @@ module Products
 
     attr_reader :logger, :variants
 
+    LIST_PRODUCT_IMAGE_SIZES = [:original, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
+
     def initialize(logdev = $stdout)
       @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
@@ -95,6 +97,20 @@ module Products
       product_price_in_us = product.price_in(@us_site_version.currency)
       product_price_in_au = product.price_in(@au_site_version.currency)
 
+      fabric_price_in_us = 0
+      fabric_price_in_au = 0
+
+      if product_fabric_value
+        fabric_price_in_us = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@us_site_version.currency) : 0
+        fabric_price_in_au = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@au_site_version.currency) : 0
+      elsif product_color_value
+        fabric_price_in_us = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+        fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+      end
+
+      price_us = Spree::Price.new(amount: product_price_in_us.amount.to_f + fabric_price_in_us, currency: @us_site_version.currency)
+      price_au = Spree::Price.new(amount: product_price_in_au.amount.to_f + fabric_price_in_au, currency: @au_site_version.currency)
+
       all_variant_taxons = VariantTaxon.includes(:taxon).all
       variant_taxons = all_variant_taxons
         .select {|f| f.product_id == product.id && ((fabric && f.fabric_or_color == fabric.name) || (color && f.fabric_or_color == color.name)) }
@@ -106,6 +122,23 @@ module Products
       ].flatten.uniq
 
       pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
+
+      taxon_names = [
+        taxons.map(&:permalink).map {|f| f.split('/').last },
+        product.sku,
+        pid,
+        product.category.category,
+        product.category.subcategory,
+        product.fast_making? ? 'fast_making': nil,
+        product.super_fast_making? ? 'super_fast_making' : nil,
+        ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
+        color.name,
+        fabric&.name,
+        fabric&.material,
+        color.option_values_groups.map(&:name),
+      ].flatten.compact #.map(&:parameterize).map(&:underscore)
+
+      images = cropped_images_for(product_fabric_value || product_color_value)
 
       {
         _index: index_name,
@@ -139,8 +172,7 @@ module Products
             fast_making:        product.fast_making?,
             super_fast_making:  product.super_fast_making?,
             taxon_ids:          taxons.map(&:id),
-            taxon_names:        taxons.map{ |tx| tx.name }.flatten,
-            taxons:             taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
+            taxons:             taxon_names,
             price:              product.price.to_f,
 
             is_outerwear:     Spree::Product.outerwear.exists?(product.id),
@@ -167,15 +199,42 @@ module Products
             presentation:   fabric.presentation
           },
          
-          cropped_images: cropped_images_for(product_fabric_value || product_color_value),
+          cropped_images: images.collect { |i| i.attachment.url(:large) },
+
+          media: images
+            .sort_by(&:position)
+            .take(2)
+            .collect do |image| 
+            {
+              type: :photo,
+              src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
+                if image_size == :original
+                  width = image.attachment_width
+                  height = image.attachment_height
+                else
+                  geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+                  width = geometry.width
+                  height = geometry.height
+                end
+    
+                {
+                  name: image_size,
+                  width: width,
+                  height: height,
+                  url: image.attachment.url(image_size),
+                }
+              }.select { |i| i[:width] <= image.attachment_width},
+              sortOrder: image.position
+            }
+          end,
 
           prices: {
-            aud:  product_price_in_au.amount.to_f,
-            usd:  product_price_in_us.amount.to_f
+            aud:  price_au.amount.to_f,
+            usd:  price_us.amount.to_f
           },
           sale_prices:  {
-            aud:  discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f : product_price_in_au.amount.to_f,
-            usd:  discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f : product_price_in_us.amount.to_f
+            aud:  discount > 0 ? price_au.apply(product.discount).amount.to_f.round(2) : price_au.amount.to_f,
+            usd:  discount > 0 ? price_us.apply(product.discount).amount.to_f.round(2) : price_us.amount.to_f
           }
         }
       }

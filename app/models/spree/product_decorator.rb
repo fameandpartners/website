@@ -302,30 +302,6 @@ Spree::Product.class_eval do
     Spree::Prototype.find_by_name('Dress')
   end
 
-  # NOTE: potentially dead code
-  def images_json
-    ::NewRelic::Agent.record_custom_event('spree_product_deprecated_images_json_method_called', product_id: self.id)
-
-    images.map do |image|
-      size = color = nil
-      case image.viewable_type
-      when 'Spree::Variant'
-        color = image.viewable.dress_color.try(:name)
-        size  = image.viewable.dress_size.try(:name)
-      when 'ProductColorValue'
-        color = image.viewable.option_value.name
-      end
-      {
-        original: image.attachment.url(:original),
-        large: image.attachment.url(:large),
-        xlarge: image.attachment.url(:xlarge),
-        small: image.attachment.url(:small),
-        color: color,
-        size: size
-      }
-    end
-  end
-
   def site_price_for(site_version = nil)
     self.master.site_price_for(site_version)
   end
@@ -389,13 +365,6 @@ Spree::Product.class_eval do
     @discount ||= Repositories::Discount.get_product_discount(self.id)
   end
 
-  def presenter_as_details_resource(site_version = nil)
-    @product ||= Products::DetailsResource.new(
-      site_version: site_version,
-      product: self
-    ).read
-  end
-
   def delivery_period
     delivery_period_policy.delivery_period
   end
@@ -447,25 +416,6 @@ Spree::Product.class_eval do
   end
 
   private
-
-  def build_variants_from_option_values_hash
-    ensure_option_types_exist_for_values_hash
-    if prototype_id && prototype = Spree::Prototype.find_by_id(prototype_id)
-      return unless sizes = prototype.option_types.find_by_name('dress-size').try(:option_values)
-
-      colors = option_values_hash.values.first
-      values = colors.product(sizes.map(&:id))
-
-      values.each do |ids|
-        variant = variants.create({
-          :option_value_ids => ids,
-          :price => master.price,
-          :on_demand => true
-        }, :without_protection => true)
-      end
-      save
-    end
-  end
 
   def set_default_values
     if self.new_record?

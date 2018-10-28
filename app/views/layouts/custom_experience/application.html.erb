@@ -11,20 +11,18 @@
 
   </head>
   <body>
-    <div id="react-blanket" class="__react_root__"></div>
     <div id="content-container" class="content-container">
       <% unless disable_notices? %>
       <%= render 'layouts/redesign/notices' %>
       <% end %>
     </div>
-    <div id="react-menu" class="__react_root__"></div>
     <div id="react-header" class="__react_root_relaunch__"></div>
     <div id="react-cart" class="__react_root_relaunch__"></div>
     <div>
       <%= yield %>
     </div>
     <div id="react-footer" class="__react_root_relaunch__"></div>
-    <div id="portal-root"></div>
+    <div id="portal-root" class="__react_root_relaunch__"></div>
     <%= yield :microservice_js %>
 
     <%= render 'google_tag_manager/base' %>
