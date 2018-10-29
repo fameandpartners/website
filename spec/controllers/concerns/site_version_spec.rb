@@ -14,57 +14,6 @@ describe Concerns::SiteVersion, type: :controller do
   end
 
   describe 'before filters' do
-    describe '#guarantee_session_site_version' do
-      let(:au_site_version) { build_stubbed(:site_version, permalink: 'au') }
-
-      before(:each) do
-        allow(controller).to receive(:current_site_version).and_return(au_site_version)
-      end
-
-      it 'sets site version session variable to current site version code' do
-        expect(session[:site_version]).to be_nil
-        get :index
-        expect(session[:site_version]).to eq 'au'
-      end
-    end
-
-    describe '#enforce_param_site_version' do
-      let(:australian_site_version) { create(:site_version, permalink: 'au') }
-      let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
-
-      context 'site version param is different than current site version code' do
-        before(:each) { controller.instance_variable_set(:@current_site_version, brazilian_site_version) }
-
-        it 'sets the requested version as the current site version' do
-          request.env['site_version_code'] = australian_site_version.code
-          get :index
-
-          current_site_version = controller.instance_variable_get(:@current_site_version)
-          expect(current_site_version).to eq(australian_site_version)
-        end
-
-        describe 'does not change the current site version' do
-          after(:each) do
-            current_site_version = controller.instance_variable_get(:@current_site_version)
-            expect(current_site_version).to eq(brazilian_site_version)
-          end
-
-          it 'when it is a non GET request' do
-            post :create, { site_version: australian_site_version }
-          end
-
-          it 'when it is a AJAX request' do
-            xhr :post, :create, { site_version: australian_site_version }
-          end
-
-          it 'when it is a request to /checkout path' do
-            allow(request).to receive(:path).and_return('/checkout')
-            get :index, { site_version: australian_site_version }
-          end
-        end
-      end
-    end
-
     describe '#add_site_version_to_mailer' do
       let(:default_url_options) { { default: :hash } }
 
@@ -76,20 +25,6 @@ describe Concerns::SiteVersion, type: :controller do
         expect(ActionMailer::Base).to receive_message_chain(:default_url_options, :merge!).with(default_url_options)
         get :index
       end
-    end
-  end
-
-  describe '#current_site_version' do
-    let(:au_site_version) { build_stubbed(:site_version, permalink: 'au') }
-    let(:finder_double) { double('FindUsersSiteVersion instance', get: au_site_version) }
-
-    it 'calls FindUsersSiteVersion service object' do
-      expect(FindUsersSiteVersion).to receive(:new).with(user: nil, url_param: 'au', cookie_param: 'us').and_return(finder_double)
-
-      request.env['site_version_code']  = 'au'
-      controller.session[:site_version] = 'us'
-
-      expect(controller.current_site_version).to eq(au_site_version)
     end
   end
 
@@ -110,30 +45,6 @@ describe Concerns::SiteVersion, type: :controller do
       it 'returns the default site version code' do
         expect(controller.site_version_param).to eq('au')
       end
-    end
-  end
-
-  describe '#set_site_version' do
-    it 'raises ArgumentError if no param is passed' do
-      expect { controller.set_site_version }.to raise_error(ArgumentError)
-    end
-
-    context 'given a new site version' do
-      let(:user)            { create(:spree_user) }
-      let(:order)           { build(:spree_order) }
-      let(:au_site_version) { build(:site_version, id: 101, permalink: 'au') }
-
-      subject(:subject_method) { controller.set_site_version(au_site_version) }
-
-      before(:each) do
-        expect(order).to receive(:use_prices_from).with(au_site_version)
-        allow(controller).to receive_messages(current_spree_user: user, session_order: order)
-        subject_method
-      end
-
-      it { expect(controller.instance_variable_get(:@current_site_version)).to eq au_site_version }
-      it { expect(session[:site_version]).to eq 'au' }
-      it { expect(user.site_version_id).to eq 101 }
     end
   end
 
