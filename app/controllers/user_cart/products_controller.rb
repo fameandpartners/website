@@ -1,6 +1,6 @@
 class UserCart::ProductsController < UserCart::BaseController
   respond_to :json
-  protect_from_forgery except: [:create, :destroy, :restore]
+  protect_from_forgery except: [:create, :destroy]
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
 
