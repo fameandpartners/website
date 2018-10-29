@@ -41,7 +41,7 @@ module Bronto
                     return RestClient.get("#{url}", content_type: 'application/json', authorization: "Bearer #{access_token}")
                 rescue RestClient::ExceptionWithResponse => e
                     # e,response.code
-                    NewRelic::Agent.notice_error("Bronto get error: #{e.response} for #{url}")
+                    Raven.capture_exception(e, extra: { url: url })
                 end
             end
 
@@ -49,7 +49,7 @@ module Bronto
                 begin
                     return RestClient.post(url, body)
                 rescue RestClient::ExceptionWithResponse => e
-                    NewRelic::Agent.notice_error("Bronto post error: #{e.response} for #{url}")
+                    Raven.capture_exception(e, extra: { url: url })
                 end
             end
 
