@@ -24,7 +24,7 @@ module Marketing
               expect(subject.body).to eq({
                 category:     'Jeans',
                 name:         'Super Dress',
-                other:        1,
+                id:           1,
                 quantity:     3,
                 total_amount: 48.33,
                 sku:          'PRODUCTSKU~FABRICNAME',

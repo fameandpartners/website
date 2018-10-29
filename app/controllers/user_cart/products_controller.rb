@@ -1,6 +1,6 @@
 class UserCart::ProductsController < UserCart::BaseController
   respond_to :json
-  protect_from_forgery except: [:create, :destroy]
+  protect_from_forgery except: [:create, :destroy, :restore]
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
 
 
@@ -117,6 +117,10 @@ class UserCart::ProductsController < UserCart::BaseController
 
   def restore
     abandoned_cart = Bronto::CartRestorationService.get_abandoned_cart(params[:cart_id])
+
+    if abandoned_cart.nil?
+      render :json => {:success=>false}, status: 404
+    end
 
     restore_cart(abandoned_cart['lineItems'].map { |item| item['other'] })
 

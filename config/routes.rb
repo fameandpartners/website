@@ -385,7 +385,6 @@ FameAndPartners::Application.routes.draw do
         delete 'user/logout' => 'user_sessions#destroy'
       end
 
-      post 'cart/restore' => 'cart#restore'
       get '/products/search' => 'products#search'
       get '/products/import_summary' => 'products#import_summary'
       get '/products/:id' => 'products#show'

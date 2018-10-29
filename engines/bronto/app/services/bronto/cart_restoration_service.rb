@@ -54,7 +54,13 @@ module Bronto
             end
 
             def get_abandoned_cart(cart_id)
-                JSON.parse(make_get_request("#{configatron.bronto.rest_api_endpoint}/carts/#{cart_id}"))
+                cart = make_get_request("#{configatron.bronto.rest_api_endpoint}/carts/#{cart_id}")
+
+                unless cart.nil?
+                    JSON.parse(cart)
+                else
+                    cart
+                end
             end
         end
     end
