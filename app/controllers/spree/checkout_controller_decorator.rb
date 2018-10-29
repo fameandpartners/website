@@ -402,7 +402,7 @@ Spree::CheckoutController.class_eval do
 
   def append_gtm_cart_event
     unless @order.state == 'complete'
-      gtm_event = Marketing::Gtm::Presenter::Event.new(event_name: 'in_progress_order')
+      gtm_event = Marketing::Gtm::Presenter::Event.new(event_name: 'order_in_progress')
       @gtm_container.append(gtm_event)  
     end
   end
