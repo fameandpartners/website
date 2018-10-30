@@ -224,7 +224,6 @@ Spree::CheckoutController.class_eval do
     state_callback(:before)
 
     append_gtm_order
-    append_gtm_cart_event
   end
 
   # current_ability.authorize!(*args)
@@ -398,13 +397,6 @@ Spree::CheckoutController.class_eval do
   def append_gtm_order
     gtm_order = Marketing::Gtm::Presenter::Order.new(spree_order: @order, base_url: root_url)
     @gtm_container.append(gtm_order)
-  end
-
-  def append_gtm_cart_event
-    unless @order.state == 'complete'
-      gtm_event = Marketing::Gtm::Presenter::Event.new(event_name: 'order_in_progress')
-      @gtm_container.append(gtm_event)  
-    end
   end
 
   def update_line_item_delivery
