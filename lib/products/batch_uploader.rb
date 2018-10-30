@@ -697,7 +697,7 @@ module Products
       sizes_to_process = sizes.clone
 
       threads = []
-      number_of_threads = 4
+      number_of_threads = 1
       semaphore = Mutex.new
 
       (1..number_of_threads).each do |thread_num|
