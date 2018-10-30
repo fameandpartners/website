@@ -61,8 +61,7 @@ CONTENT_DIRECTORY_TARGET="${CONTENT_DIRECTORY_TARGET:-$import_base_directory}"
 content_directory="${CONTENT_DIRECTORY_TARGET}/content"
 
 #spreadsheets=$(find ${content_directory} -name '*.xls*' |grep -v "~")
-spreadsheets="${content_directory}/extract/2018_mastercontentsheet.xlsx"
-spreadsheets="${content_directory}/extract/mastercontent_fw2018.xlsx"
+spreadsheets="${content_directory}/extract/MasterContent_Gowns02.xlsx"
 image_directories=$(find "${content_directory}"  -maxdepth 1  -mindepth 1 -type d | grep -vi spreadsheet)
 image_types=(cads product customization)
 # rake import:accessory:images                      # Import images for accessories (specify directory location w/ LOCATION=/path/to/directory)
