@@ -395,7 +395,7 @@ Spree::Product.class_eval do
 
   def self.format_new_pid(sku, fabric, customizations)
     pid_components = self.format_new_pid_components(fabric, customizations);
-    product_sku = sku.upcase
+    product_sku = sku
 
     return product_sku if pid_components.blank?
     
@@ -412,7 +412,7 @@ Spree::Product.class_eval do
   end
 
   def self.format_render_url(sku, fabric, customizations)
-    "#{configatron.product_render_url}/#{sku.upcase}/FrontNone/704x704/#{Spree::Product.format_new_pid_components(fabric, customizations)}.png"
+    "#{configatron.product_render_url}/#{sku}/FrontNone/704x704/#{Spree::Product.format_new_pid_components(fabric, customizations)}.png"
   end
 
   private

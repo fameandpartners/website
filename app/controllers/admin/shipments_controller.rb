@@ -1,8 +1,6 @@
 module Admin
   class ShipmentsController < Spree::Admin::BaseController
 
-    include Concerns::GlobalController
-
     respond_to :json
 
     def update
