@@ -115,6 +115,24 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
+  def restore
+    abandoned_cart = Bronto::CartRestorationService.get_abandoned_cart(params[:cart_id])
+
+    if abandoned_cart.nil?
+      render :json => {:success=>false}, status: 404
+    end
+
+    restore_cart(abandoned_cart['lineItems'].map { |item| item['other'] })
+
+    cart = @user_cart.serialize
+
+    unless cart.nil?
+      render :json => {:success=>true, :cart=>cart, :abandoned_cart=>abandoned_cart}, status: 200
+    else
+      render :json => {:success=>false}, status: 400
+    end
+  end
+
   private
 
   def add_analytics_labels(data)
@@ -143,13 +161,31 @@ class UserCart::ProductsController < UserCart::BaseController
     end
   end
 
-   def ensure_size_id_is_set( params )
+  def ensure_size_id_is_set( params )
     if( params[:size_id].nil? && !params[:size].nil? )
       params[:size_id]=Spree::OptionValue.where( 'option_type_id=? and name=?', Spree::OptionType.where( 'name = ?', "dress-size" ).first.id, params[:size] ).first.id
     elsif (params[:variant_id].to_s.starts_with?('SW'))
       #need a size set for fabric swatches
       params[:size_id] = Spree::OptionValue.find_by_name('US0/AU4').id
     end
+  end
+
+  def restore_cart(line_item_ids)
+    populator = Spree::OrderPopulator.new(current_order(true), current_currency)
+
+    line_item_ids.each do |line_item_id|
+      if populator.populate(line_item: [line_item_id.to_i])
+        fire_event('spree.cart.add')
+        fire_event('spree.order.contents_changed')
+
+        current_order.reload
+      end
+      
+    end
+    
+    @user_cart = user_cart_resource.read
+    data = add_analytics_labels(@user_cart.serialize)
+
   end
 
 end

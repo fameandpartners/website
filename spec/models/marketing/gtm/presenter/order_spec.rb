@@ -31,7 +31,8 @@ module Marketing
                                              shipping_amount:        0.0,
                                              taxes_amount:           0.0,
                                              total_amount:           24.68,
-                                             humanized_total_amount: '24.68'
+                                             humanized_total_amount: '24.68',
+                                             phase:                  'SHOPPING'
                                          })
             end
           end

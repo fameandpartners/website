@@ -92,11 +92,17 @@ configatron.site_version_detector_strategy = :path
 configatron.micro_influencer_email_address='qa@fameandpartners.com'
 
 configatron.fame_webclient_url = ENV['FAME_WEBCLIENT_URL']
-configatron.fame_webclient_always_regex = /^(\/static|\/collection|\/dresses|\/_webclient|\/custom-clothes|\/dress-system|\/search|\/pants|\/jackets|\/outerwear|\/jumpsuits|\/gowns|\/skirts|\/tops|\/size-guide|\/bride|\/about|\/privacy|\/terms|\/wholesale|\/clothing|\/$)/
+configatron.fame_webclient_always_regex = /^(\/static|\/collection|\/dresses|\/_webclient|\/custom-clothes|\/dress-system|\/search|\/pants|\/jackets|\/outerwear|\/jumpsuits|\/gowns|\/skirts|\/tops|\/size-guide|\/bride|\/about|\/privacy|\/terms|\/wholesale|\/clothing|\/cart|\/$)/
 configatron.fame_webclient_account_regex = /^(\/account|\/logout|\/unauthorized)/
 configatron.product_render_url = ENV['PRODUCT_RENDER_URL']
 configatron.product_catalog_url = ENV['PRODUCT_CATALOG_URL']
 
+configatron.bronto do |bronto|
+  bronto.rest_api_endpoint = 'https://rest.bronto.com'
+  bronto.rest_api_auth_endpoint = 'https://auth.bronto.com/oauth2/token'
+  bronto.rest_client_id = ENV['BRONTO_REST_CLIENT_ID']
+  bronto.rest_client_secret = ENV['BRONTO_REST_CLIENT_SECRET']
+end
 
 
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']

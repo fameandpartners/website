@@ -8,7 +8,7 @@ module Marketing
         let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
         let(:fabric) { double(:fabric, name: 'FABRICNAME', price_in: 5, id: 1) }
         let(:variant) { create(:dress_variant, product: product) }
-        let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11) }
+        let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11, id: 1) }
 
         subject(:presenter) { described_class.new(spree_line_item: line_item) }
 
@@ -24,6 +24,7 @@ module Marketing
               expect(subject.body).to eq({
                 category:     'Jeans',
                 name:         'Super Dress',
+                line_item_id: 1,
                 quantity:     3,
                 total_amount: 48.33,
                 sku:          'ProductSKU~FABRICNAME',

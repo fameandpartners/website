@@ -52,6 +52,28 @@ module Marketing
           number_with_precision_wrapper(transaction.try(:amount).to_f)
         end
 
+        def phase
+          if (order.state == 'cart')
+            return 'SHOPPING';
+          end
+      
+          if (order.state == 'address')
+            return 'SHIPPING_INFO';
+          end
+      
+          if (order.state == 'payment')
+            return 'PAYMENT';
+          end
+      
+          if (order.state == 'confirm')
+            return 'ORDER_REVIEW';
+          end
+      
+          if (order.state ==='complete')
+            return 'ORDER_COMPLETE';
+          end
+        end
+
         def key
           'order'.freeze
         end
@@ -68,7 +90,8 @@ module Marketing
               shipping_amount:        shipping_amount,
               discount_amount:        discount_amount || 0,
               line_items:             line_items,
-              humanized_total_amount: humanized_total_amount
+              humanized_total_amount: humanized_total_amount,
+              phase:                  phase,
           }
         end
 
