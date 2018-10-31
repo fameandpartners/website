@@ -17,14 +17,14 @@ Spree::Image.class_eval do
 
     product: '704x704>',
 
-    webp_xxxlarge: ['4048x4048>', :webp],
-    webp_xxlarge: ['2816x2816>', :webp], 
-    webp_xlarge: ['2024x2024>', :webp],
-    webp_large: ['1408x1408>', :webp],
-    webp_medium: ['1056x1056>', :webp], 
-    webp_small: ['704x704>', :webp],
-    webp_xsmall: ['528x528>', :webp],
-    webp_xxsmall: ['352x352>', :webp],
+    # webp_xxxlarge: ['4048x4048>', :webp],
+    # webp_xxlarge: ['2816x2816>', :webp], 
+    # webp_xlarge: ['2024x2024>', :webp],
+    # webp_large: ['1408x1408>', :webp],
+    # webp_medium: ['1056x1056>', :webp], 
+    # webp_small: ['704x704>', :webp],
+    # webp_xsmall: ['528x528>', :webp],
+    # webp_xxsmall: ['352x352>', :webp],
   }
 
   self.attachment_definitions[:attachment][:convert_options] = {
