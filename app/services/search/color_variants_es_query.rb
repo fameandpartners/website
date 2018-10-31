@@ -157,8 +157,10 @@ module Search
 
             if query_string.present?
               must do
-                query_string do
-                  query "product.name:(#{query_string})^4 OR color.presentation:(#{query_string})^2 OR fabric.presentation:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
+                multi_match do
+                  query query_string
+                  type :phrase
+                  fields ['product.name^4', 'color.presentation^2', 'fabric.presentation^2', 'product.sku^4', 'product.taxon_names^2', 'product.description']
                 end
               end
             end

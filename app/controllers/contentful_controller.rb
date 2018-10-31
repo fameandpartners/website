@@ -19,7 +19,6 @@ class ContentfulController < ApplicationController
 
       # Check if the domain is either AU or US and compare with the flag
       if (landing_page_specific_site_version == 'all' || current_site_version[:permalink] == landing_page_specific_site_version)
-        load_page
         render 'layouts/contentful/main'
       else
         # When the page is specific to a site version redirect user to a different URL (example: AU site vs. US visitor)
