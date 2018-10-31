@@ -27,7 +27,7 @@ module Marketing
                 line_item_id: 1,
                 quantity:     3,
                 total_amount: 48.33,
-                sku:          'PRODUCTSKU~FABRICNAME',
+                sku:          'ProductSKU~FABRICNAME',
                 price:        198.37,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',

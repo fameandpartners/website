@@ -1,8 +1,6 @@
 module Admin
   class FabricCardsController < Spree::Admin::BaseController
 
-    skip_before_filter :enforce_param_site_version
-
     attr_reader :collection, :fabric_card
     helper_method :collection, :fabric_card
 

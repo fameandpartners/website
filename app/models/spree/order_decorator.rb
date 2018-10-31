@@ -125,7 +125,7 @@ Spree::Order.class_eval do
   end
 
   def display_promotion_total
-    if self.adjustments.credit.eligible.any? {|x| x.originator.promotion.code.include?('DELIVERYDISC')}
+    if self.adjustments.credit.eligible.any? {|x| x.originator_type == 'Spree::PromotionAction' && x.originator.promotion.code.include?('DELIVERYDISC')}
       promotion_total = self.adjustments.credit.eligible.sum(:amount) + (self.item_total * 0.1)
     else
       promotion_total = self.adjustments.credit.eligible.sum(:amount)

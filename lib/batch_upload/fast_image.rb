@@ -12,9 +12,6 @@ module BatchUpload
 
     has_attached_file :attachment
 
-    self.attachment_definitions[:attachment]                 = Paperclip::Attachment.default_options
-    self.attachment_definitions[:attachment][:path]          = 'spree/products/:id/:style/:basename.:extension'
-    self.attachment_definitions[:attachment][:styles]        = Spree::Image.attachment_definitions[:attachment][:styles]
-    self.attachment_definitions[:attachment][:default_style] = :product
+    self.attachment_definitions[:attachment]                 = Spree::Image.attachment_definitions[:attachment]
   end
 end

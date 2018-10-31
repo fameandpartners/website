@@ -1,5 +1,4 @@
 Spree::Admin::BaseController.class_eval do
-  include Concerns::GlobalController
   include ::Spree::Admin::SkipSpreeCommerceAlerts
 
   def url_options

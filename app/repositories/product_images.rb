@@ -108,7 +108,7 @@ class ProductImages
   private
 
     def get_render_image(options)      
-      sku = product.master.sku.upcase
+      sku = product.master.sku
       fabric = options[:fabric]&.name
       cust = options[:product_customizations] || []
 

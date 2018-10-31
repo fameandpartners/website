@@ -10,10 +10,6 @@ class FabricsProduct < ActiveRecord::Base
   
   validates :product_id, :fabric_id, presence: true
 
-  def recommended?
-    ! recommended?
-  end
-
   def color_name
     fabric.option_value.name
   end
