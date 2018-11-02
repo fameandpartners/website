@@ -22,6 +22,8 @@ module Policies
 
     SLOW_MAKING_MAKE_TIME = "7 weeks"
     STANDARD_MAKE_TIME_MAP = {
+      "5 business days" => "2 business days",
+      "1 week" => "3 business days",
       "7 - 10 business days" => "5 business days",
       "12 - 15 business days" => "9 business days",
       "3 - 4 weeks" => "15 business days",
@@ -29,7 +31,9 @@ module Policies
       "6 - 10 weeks" => "40 business days"
     }
 
-    CNY_DELIVERY_MAP = {  "7 - 10 business days" => "6 weeks",
+    CNY_DELIVERY_MAP = {  "5 business days" => "6 weeks",
+                          "1 week" => "6 weeks",
+                          "7 - 10 business days" => "6 weeks",
                           "12 - 15 business days" => "6 weeks",
                           "3 - 4 weeks" => "6 weeks",
                           "4 - 6 weeks" => "6 weeks",
@@ -37,7 +41,9 @@ module Policies
                           '6 - 10 weeks' => "10 weeks"
                        }
 
-    FACTORY_CLOSURE_MAP = { "7 - 10 business days" => "10 - 15 business days",
+    FACTORY_CLOSURE_MAP = { "5 business days" => "10 business days",
+                            "1 week" => "12 business days",
+                            "7 - 10 business days" => "10 - 15 business days",
                             "12 - 15 business days" => "15 - 20 business days",
                             "3 - 4 weeks" => "5 - 6 weeks",
                             "4 - 6 weeks" => "6 weeks",
@@ -58,7 +64,9 @@ module Policies
                           "10"
                         ]
 
-    CNY_CLOSURE_DELIVERY_MAP = {  "7 - 10 business days" => "12 - 15 business days",
+    CNY_CLOSURE_DELIVERY_MAP = {  "5 business days" => "10 business days",
+                          "1 week" => "12 business days",
+                          "7 - 10 business days" => "12 - 15 business days",
                           "12 - 15 business days" => "3 - 4 weeks",
                           "3 - 4 weeks" => "3 - 4 weeks",
                           "4 - 6 weeks" => "4 - 6 weeks",
