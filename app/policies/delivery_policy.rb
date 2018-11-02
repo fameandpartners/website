@@ -22,30 +22,34 @@ module Policies
 
     SLOW_MAKING_MAKE_TIME = "7 weeks"
     STANDARD_MAKE_TIME_MAP = {
-      "5 business days" => "2 business days",
-      "1 week" => "3 business days",
+      "5 - 7 business days" => "2 business days",
       "7 - 10 business days" => "5 business days",
       "12 - 15 business days" => "9 business days",
+      "2 - 3 weeks" => "10 business days",
       "3 - 4 weeks" => "15 business days",
+      "3 - 6 weeks" => "10 business days",
       "4 - 6 weeks" => "25 business days",
+      "6 weeks"     => "30 business days",
       "6 - 10 weeks" => "40 business days"
     }
 
-    CNY_DELIVERY_MAP = {  "5 business days" => "6 weeks",
-                          "1 week" => "6 weeks",
+    CNY_DELIVERY_MAP = {  "5 - 7 business days" => "6 weeks",
                           "7 - 10 business days" => "6 weeks",
                           "12 - 15 business days" => "6 weeks",
+                          "2 - 3 weeks" => "6 weeks",
                           "3 - 4 weeks" => "6 weeks",
+                          "3 - 6 weeks" => "6 weeks",
                           "4 - 6 weeks" => "6 weeks",
                           "6 weeks" => "6 weeks",
                           '6 - 10 weeks' => "10 weeks"
                        }
 
-    FACTORY_CLOSURE_MAP = { "5 business days" => "10 business days",
-                            "1 week" => "12 business days",
+    FACTORY_CLOSURE_MAP = { "5 - 7 business days" => "8 - 10 business days",
                             "7 - 10 business days" => "10 - 15 business days",
                             "12 - 15 business days" => "15 - 20 business days",
+                            "2 - 3 weeks" => "4 - 5 weeks",
                             "3 - 4 weeks" => "5 - 6 weeks",
+                            "3 - 6 weeks" => "5 - 6 weeks",
                             "4 - 6 weeks" => "6 weeks",
                             '6 - 10 weeks' => "10 weeks"
                           }
@@ -64,18 +68,19 @@ module Policies
                           "10"
                         ]
 
-    CNY_CLOSURE_DELIVERY_MAP = {  "5 business days" => "10 business days",
-                          "1 week" => "12 business days",
+    CNY_CLOSURE_DELIVERY_MAP = {  "5 - 7 business days" => "8 - 10 business days",
                           "7 - 10 business days" => "12 - 15 business days",
                           "12 - 15 business days" => "3 - 4 weeks",
+                          "2 - 3 weeks" => "3 - 4 weeks",
                           "3 - 4 weeks" => "3 - 4 weeks",
+                          "3 - 6 weeks" => "3 - 6 weeks",
                           "4 - 6 weeks" => "4 - 6 weeks",
                           '6 - 10 weeks' => '6 - 10 weeks'
                         }
 
     # Max delivery period got from taxons
     def maximum_delivery_period
-      return Spree::Taxon::DELIVERY_PERIODS.first unless @product.taxons.any?
+      return '7 - 10 business days' unless @product.taxons.any?
 
       @product.taxons.inject(@product.taxons.first.delivery_period) do |max_period, taxon|
         current_major_value = period_in_business_days(taxon.delivery_period)
