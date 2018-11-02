@@ -127,7 +127,7 @@ module Feeds
         product_name:            product.name,
         product_sku:             product.sku,
         availability:            availability,
-        title:                   "#{color_presentation} #{product.name} Dress",
+        title:                   "#{color_presentation} #{product.name}",
         description:             helpers.strip_tags(product.description),
         price:                   original_price,
         sale_price:              sale_price,
