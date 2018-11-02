@@ -252,6 +252,14 @@ module Products
 
       logger.info('Bulk Upload')
       # Create index w/ defined types for specific fields
+      client.indices.create index: index_name,
+        body:  {
+            settings: {
+                index: {
+                    number_of_shards: 1,
+                }
+            },
+        }
       client.bulk(index: index_name, body: @variants)
     end
 
