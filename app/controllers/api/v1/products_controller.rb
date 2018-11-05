@@ -384,6 +384,7 @@ module Api
         fabrics = product
           .fabric_products
           .includes(fabric: [:option_fabric_color_value, :option_value])
+          .active
 
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
