@@ -30,7 +30,7 @@ module Policies
       "3 - 6 weeks" => "10 business days",
       "4 - 6 weeks" => "25 business days",
       "6 weeks"     => "30 business days",
-      "6 - 10 weeks" => "40 business days"
+      "6 - 10 weeks" => "45 business days"
     }
 
     CNY_DELIVERY_MAP = {  "5 - 7 business days" => "6 weeks",
