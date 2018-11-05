@@ -697,7 +697,7 @@ module Api
             # hex: c.option_value.value,
             
             image: {
-              url: f.fabric.image&.url(:small),
+              url: f.fabric.image&.url(:medium),
               width: 0,
               height: 0,
             },
