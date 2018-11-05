@@ -34,8 +34,10 @@ class ItemReturnsGrid
   end
 
   column :order_number,           header: 'Order Number'  
+  column :order_payment_date,     header: 'Order date'
   column :acceptance_status,      header: 'Status'
   column :customer_name
+  column :contact_email
   column :order_number,           header: 'Order', order: 'item_returns.order_number', html: true do |item_return|
     link_to item_return.order_number, spree.admin_order_path(id: item_return.order_number)
   end
@@ -48,6 +50,9 @@ class ItemReturnsGrid
       content_tag(:i, '', class: 'fa fa-scissors  fa-lg text-warning' ) if is_custom
     end
   end
+
+  column :item_price_adjusted,           header: 'Amount'
+  column :order_paid_currency,           header: 'Currency'
 
   column :requested_at do |ir|
     ir.requested_at.try :to_date
