@@ -72,7 +72,7 @@ module Feeds
         logger.info "#{logger_product_count.ljust(10)} | #{logger_product_name}"
 
         if !product.fabric_products.empty?
-          product.fabric_products.each do |product_fabric_value|
+          product.fabric_products.active.each do |product_fabric_value|
             color = product_fabric_value.fabric.option_value
             fabric = product_fabric_value.fabric
 
