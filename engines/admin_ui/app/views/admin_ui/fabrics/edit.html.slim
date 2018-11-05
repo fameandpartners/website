@@ -1,0 +1,8 @@
+.pages.wrapper.wrapper-content
+  .col-lg-6
+    .ibox
+      .ibox-content
+        = render 'form', url: fabric_path(@form.model), submit_text: 'Update'
+        alert.alert-warning
+          | Warning: updating fabrics require product reindexing. To do it, proceed to the &nbsp;
+          = link_to 'Update', backend_product_indexes_path

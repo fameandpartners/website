@@ -39,19 +39,6 @@ Spree.config do |config|
   config.checkout_zone = 'Australia'
 
   config.emails_sent_from = 'Fame And Partners<noreply@fameandpartners.com>'
-
-  if Rails.application.config.use_s3
-    config.use_s3 = true
-    config.s3_bucket = ENV['AWS_S3_BUCKET']
-
-    config.attachment_url = ":s3_alias_url"
-    config.attachment_path = '/spree/products/:id/:style/:basename.:extension'
-  else
-    config.use_s3 = false
-
-    config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
-    config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
-  end
 end
 
 Devise::RegistrationsController.layout "redesign/application"
@@ -59,8 +46,3 @@ Devise::RegistrationsController.layout "redesign/application"
 Spree.user_class = "Spree::User"
 
 Spree::SocialConfig[:path_prefix] = 'user'
-
-if Spree::Config.use_s3
-  # filesystem storage uses path pattern, but s3 storage requires smt like s3_alias_url here
-  Spree::Image.attachment_definitions[:attachment][:url] = Paperclip::Attachment.default_options[:url]
-end

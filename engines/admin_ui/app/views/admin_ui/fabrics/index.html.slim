@@ -1,0 +1,7 @@
+- content_for :page_title do
+  | Fabrics
+
+= render 'admin_ui/grid/grid_collection_filters', collection_url: fabrics_path
+.row : .col-lg-12
+  = link_to 'Add new fabric', new_fabric_path, class: 'btn btn-primary'
+= render 'admin_ui/grid/paginated_collection_grid'

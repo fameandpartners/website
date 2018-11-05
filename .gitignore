@@ -100,5 +100,6 @@ Procfile.*
 * Ingore elb
 .elasticbeanstalk/
 
+.byebug_history
 *.pgdump
 *.part

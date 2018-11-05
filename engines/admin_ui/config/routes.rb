@@ -83,6 +83,8 @@ AdminUi::Engine.routes.draw do
     post 'upload/create_upload' => 'upload#create_upload'
   end
 
+  resources :fabrics
+
   namespace :customisation do
     resources :customisation_values do
       collection do

@@ -58,6 +58,7 @@ module Spree
             #{address},
             #{price},
             #{material},
+            #{fabric_production_code},
             #{currency}
             #{select}
 
@@ -172,6 +173,10 @@ module Spree
 
         def material
           'fabric.material as material' 
+        end
+
+        def fabric_production_code
+          'fabric.production_code as fabric_production_code' 
         end
 
         def customization_value_ids

@@ -981,7 +981,12 @@ CREATE TABLE public.fabrics (
     option_value_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    option_fabric_color_value_id integer
+    option_fabric_color_value_id integer,
+    production_code character varying(255),
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    image_updated_at timestamp without time zone
 );
 
 
@@ -10319,3 +10324,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181005033718');
 INSERT INTO schema_migrations (version) VALUES ('20181005033839');
 
 INSERT INTO schema_migrations (version) VALUES ('20181008013910');
+
+INSERT INTO schema_migrations (version) VALUES ('20181105000355');

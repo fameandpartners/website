@@ -1,9 +1,5 @@
 Spree::Image.class_eval do
-  # NOTE: this change affects Paperclip global configuration
-  if Rails.application.config.use_s3
-    self.attachment_definitions[:attachment][:storage] = :fog
     self.attachment_definitions[:attachment][:path]    = 'spree/products/:id/:style/:basename.:extension'
-  end
 
   self.attachment_definitions[:attachment][:styles] = {
     xxxlarge: '4048x4048>', 
@@ -48,9 +44,5 @@ Spree::Image.class_eval do
     :webp_small => '-define webp:lossless=true -strip',
     :webp_xsmall => '-define webp:lossless=true -strip',
     :webp_xxsmall => '-define webp:lossless=true -strip',
-  }
-
-  self.attachment_definitions[:attachment][:fog_file] = {
-    cache_control: 'public, max-age=31536000'
   }
 end

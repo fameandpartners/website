@@ -1,0 +1,19 @@
+= form_for(@form, url: url,  html: { multipart: true }) do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :presentation
+    = f.text_field :presentation, class: 'form-control'
+  .form-group
+    = f.label :material
+    = f.text_field :material, class: 'form-control'
+  .form-group
+    = f.label :production_code
+    = f.text_field :production_code, class: 'form-control'
+  .form-group
+    = f.label :image
+    = f.file_field :image
+    = image_tag(@form.model.image.url, width: 150, height: 150) if @form.model.image.present?
+  .form-group
+    = f.submit submit_text, class: 'btn btn-primary'
