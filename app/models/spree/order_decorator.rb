@@ -54,6 +54,10 @@ Spree::Order.class_eval do
     !(order_return_requested? || has_unshipped_line_item)
   end
 
+  def return_eligible?
+    self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+  end
+
   def has_unshipped_line_item
     line_items.any? { |li| !Fabrication.for(li).shipped? }
   end

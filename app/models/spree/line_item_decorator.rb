@@ -170,6 +170,10 @@ Spree::LineItem.class_eval do
     cart_item.try(:color).try(:presentation) || ''
   end
 
+  def color_code
+    cart_item.try(:color).try(:name) || ''
+  end
+
   def height_name
     personalization.try(:height) || ''
   end
@@ -246,6 +250,8 @@ Spree::LineItem.class_eval do
         "image": self.image_url,
         "sku": self.new_sku,
         "productSku": self.product_sku,
+        "colorCode": self.color_code,
+        "fabricCode": self&.fabric&.name
       }
     end
     if self.item_return.present?
