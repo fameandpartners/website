@@ -16,25 +16,28 @@ class OrderSerializer < ActiveModel::Serializer
               :currency
 
   has_one     :ship_address, serializer: AddressSerializer
+  has_one     :billing_address, serializer: AddressSerializer
 
-  attributes  :address,
-              :tracking_number,
-              :returns
-
-  def address
-    object.ship_address
-  end
+  attributes  :returns,
+              #:billing_address,
+              #:shipping_address,
+              #:tracking_number,
+              :shipments,
 
   #def promocode
     #object.promocode
   #end
 
- # def shipping_method
-    #object.shipping_method
+  #def shipping_method
+  #  object.shipping_method
   #end
 
-  def tracking_number
-    object.shipment.number
+  def billing_address
+    object.billing_address
+  end
+
+  def shipping_address
+    object.ship_address
   end
 
   def returns
@@ -48,6 +51,10 @@ class OrderSerializer < ActiveModel::Serializer
       created_at: return_request.created_at,
       returned: object.returned?
     }
+  end
+
+  def shipments
+    object.shipments
   end
 
 end

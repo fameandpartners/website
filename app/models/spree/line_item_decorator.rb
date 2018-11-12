@@ -253,6 +253,7 @@ Spree::LineItem.class_eval do
         "colorCode": self.color_code,
         "fabricCode": self&.fabric&.name
       }
+      json['line_item']['fabrication'] = self&.fabrication
     end
     if self.item_return.present?
       json['line_item']['returns_meta'] = {

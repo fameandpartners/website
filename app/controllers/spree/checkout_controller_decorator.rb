@@ -149,7 +149,7 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
-        OrderBotWorker.perform_async(@order.id)
+        # OrderBotWorker.perform_async(@order.id)
 
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
@@ -403,7 +403,7 @@ Spree::CheckoutController.class_eval do
   def append_gtm_cart_event
     unless @order.state == 'complete'
       gtm_event = Marketing::Gtm::Presenter::Event.new(event_name: 'order_in_progress')
-      @gtm_container.append(gtm_event)  
+      @gtm_container.append(gtm_event)
     end
   end
 
