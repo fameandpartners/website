@@ -174,6 +174,10 @@ Spree::LineItem.class_eval do
     cart_item.try(:color).try(:name) || ''
   end
 
+	def color_hex
+		cart_item.try(:color).try(:value).include?("#") ? cart_item.try(:color).try(:value) : nil
+	end
+
   def height_name
     personalization.try(:height) || ''
   end
@@ -251,7 +255,8 @@ Spree::LineItem.class_eval do
         "sku": self.new_sku,
         "productSku": self.product_sku,
         "colorCode": self.color_code,
-        "fabricCode": self&.fabric&.name
+				"colorHex": self.color_hex,
+        "fabricCode": self&.fabric&.name,
       }
       json['line_item']['fabrication'] = self&.fabrication
     end
