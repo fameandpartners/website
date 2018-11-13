@@ -175,7 +175,7 @@ Spree::LineItem.class_eval do
   end
 
 	def color_hex
-		cart_item.try(:color).try(:value).include?("#") ? cart_item.try(:color).try(:value) : nil
+		cart_item&.try(:color)&.try(:value)&.include?("#") ? cart_item.try(:color).try(:value) : nil
 	end
 
   def height_name
