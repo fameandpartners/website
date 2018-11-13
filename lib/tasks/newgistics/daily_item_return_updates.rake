@@ -21,6 +21,7 @@ namespace :newgistics do
                               body: res.inspect).deliver
     end
 
+    response_returns = res['response']['Returns']['Return'] rescue []
     if res['response'].nil?
       NewRelic::Agent.notice_error(res.to_s)
       Raven.capture_exception(res.to_s)
@@ -28,7 +29,7 @@ namespace :newgistics do
       NewRelic::Agent.notice_error(res['response'].to_s)
       Raven.capture_exception(res['response'].to_s)
     else
-      res['response']['Returns']['Return'].each do |item_return|
+      response_returns.each do |item_return|
         order = Spree::Order.find_by_number(item_return['orderID'])
         if item_return['Items']['Item'].kind_of?(Array)
           item_return['Items']['Item'].each do |item|

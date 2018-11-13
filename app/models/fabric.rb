@@ -24,7 +24,7 @@ class Fabric < ActiveRecord::Base
       webp_large: ['512x512#', :webp],
     },
     convert_options: {
-      all: '-sampling-factor 4:2:0 -strip -quality 95 -interlace JPEG -colorspace sRGB'
+      all: '-sampling-factor 4:2:0 -strip -quality 90 -interlace JPEG -colorspace sRGB'
     },
     path: 'spree/swatches/:id/:style/:basename.:extension'
 
