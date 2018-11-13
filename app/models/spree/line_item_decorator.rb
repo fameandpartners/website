@@ -262,7 +262,8 @@ Spree::LineItem.class_eval do
         "item_return_id": self.item_return.id,
         "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',
         "label_image_url": self.item_return&.item_return_label&.label_image_url || '',
-        "label_url": self.item_return&.item_return_label&.label_url || ''
+        "label_url": self.item_return&.item_return_label&.label_url || '',
+				"item_return": self.item_return
       }
     end
     json

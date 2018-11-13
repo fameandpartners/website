@@ -18,11 +18,10 @@ class OrderSerializer < ActiveModel::Serializer
   has_one     :ship_address, serializer: AddressSerializer
   has_one     :billing_address, serializer: AddressSerializer
 
-  attributes  :returns,
-              #:billing_address,
+  attributes  :shipments,
+							#:billing_address,
               #:shipping_address,
               #:tracking_number,
-              :shipments,
 
   #def promocode
     #object.promocode
@@ -38,19 +37,6 @@ class OrderSerializer < ActiveModel::Serializer
 
   def shipping_address
     object.ship_address
-  end
-
-  def returns
-    return_request = OrderReturnRequest.find_by_order_id(object.id)
-
-    if return_request.nil?
-      return
-    end
-
-    {
-      created_at: return_request.created_at,
-      returned: object.returned?
-    }
   end
 
   def shipments

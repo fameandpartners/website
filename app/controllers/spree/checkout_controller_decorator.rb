@@ -86,7 +86,7 @@ Spree::CheckoutController.class_eval do
         return
       end
 
-      if @credit_card_gateway&.type == "Spree::Gateway::Pin"
+      if @credit_card_gateway.type == "Spree::Gateway::Pin"
 
         if @order.line_items.length < 1
             render status: 402, json: {
@@ -149,7 +149,7 @@ Spree::CheckoutController.class_eval do
           flash[:commerce_tracking] = 'masterpass_ordered'
         end
 
-        # OrderBotWorker.perform_async(@order.id)
+        OrderBotWorker.perform_async(@order.id)
 
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
