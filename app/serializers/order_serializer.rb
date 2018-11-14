@@ -3,6 +3,7 @@ class OrderSerializer < ActiveModel::Serializer
               :number,
               :created_at,
               :completed_at,
+              :updated_at,
               :payment_state,
               :payment_total,
               :projected_delivery_date,
@@ -19,6 +20,7 @@ class OrderSerializer < ActiveModel::Serializer
   has_one     :billing_address, serializer: AddressSerializer
 
   attributes  :shipments,
+              :final_return_by_date,
 							#:billing_address,
               #:shipping_address,
               #:tracking_number,
@@ -41,6 +43,10 @@ class OrderSerializer < ActiveModel::Serializer
 
   def shipments
     object.shipments
+  end
+
+  def final_return_by_date
+    (object.delivery_policy.delivery_date + 60).to_time.iso8601
   end
 
 end
