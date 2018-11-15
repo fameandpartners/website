@@ -40,6 +40,9 @@ const defaultProps = {
   actions: {},
   returnSubtotal: '0.00',
   guestEmail: null,
+  hasRequestedOrders: false,
+  returnIsLoading: false,
+  requiresViewOrdersRefresh: false,
 };
 
 const scrollElement = scrollDoc();
@@ -118,7 +121,7 @@ class ReturnReasonsContainer extends React.Component {
         reason: r.openEndedReturnReason,
       })),
     };
-    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail, lineItems: returnArray });
+    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail: guestEmail || spree_order.email, lineItems: returnArray });
   }
 
   calculateCashCredit() {
@@ -150,18 +153,35 @@ class ReturnReasonsContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { orderData } = this.props;
-    if (!orderData || orderData.length === 0) {
-      browserHistory.push('/view-orders');
-      window.location.reload();
+    const { email, orderID } = this.props.params;
+    const { actions, hasRequestedOrders } = this.props;
+
+    if (!hasRequestedOrders) {
+      actions.setHasRequestedOrders({ hasRequestedOrders: true });
+      actions.setReturnLoadingState({ isLoading: true });
+      if (email && orderID) {
+        actions.getProductData(true, email, orderID);
+      } else {
+        actions.getProductData();
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.returnIsLoading) return;
+
+    if (!nextProps.orderData || nextProps.orderData.length === 0) {
+      // window.location.href = '/orders';
+      console.log('cwrp')
     } else {
-      const activeOrder = this.props.orderData.filter(o =>
+      const activeOrder = nextProps.orderData.filter(o =>
         o.spree_order.number === this.props.params.orderID)[0];
       const { items } = activeOrder;
       const cleanItems = [];
       items.map(i => cleanItems.push(i.line_item));
       // TODO: Figure out consistency between steps for order object
       // Pass in with props instead of state
+      console.log('we got something')
       this.state = {
         order: activeOrder,
         orderArray: cleanItems,
@@ -276,6 +296,9 @@ function mapStateToProps(state) {
     returnSubtotal: state.returnsData.returnSubtotal,
     guestEmail: state.returnsData.guestEmail,
     orderData: state.orderData.orders,
+    hasRequestedOrders: state.orderData.hasRequestedOrders,
+    returnIsLoading: state.returnsData.returnIsLoading,
+    requiresViewOrdersRefresh: state.returnsData.requiresViewOrdersRefresh,
   };
 }
 function mapDispatchToProps(dispatch) {
