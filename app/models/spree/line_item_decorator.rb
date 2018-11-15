@@ -239,7 +239,8 @@ Spree::LineItem.class_eval do
         "name": self.style_name,
         "price": self.price,
         "color": self.color_name,
-        "image": self.image_url
+        "image": self.image_url,
+        "colorHex": self.color_hex,
       }
     else
       json['line_item']['products_meta'] = {
