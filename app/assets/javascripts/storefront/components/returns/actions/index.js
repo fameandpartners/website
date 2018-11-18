@@ -168,14 +168,15 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail, lineItems }
     });
 
     dispatch(setReturnLoadingState({ isLoading: false }));
-    dispatch({ type: 'POPULATE_LOGISTICS_DATA',
-      payload: {
-        requiresViewOrdersRefresh: true,
-        order,
-        line_items: res.message,
-        guestEmail,
-      },
-    });
+    // dispatch({ type: 'POPULATE_LOGISTICS_DATA',
+    //   payload: {
+    //     requiresViewOrdersRefresh: true,
+    //     order,
+    //     line_items: res.message,
+    //     guestEmail,
+    //   },
+    // });
+    window.location.hre = `/return/${order.number}`;
   })
   .fail((err) => {
     dispatch(setReturnLoadingState({ isLoading: false }));

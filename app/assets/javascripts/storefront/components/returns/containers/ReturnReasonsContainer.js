@@ -171,8 +171,7 @@ class ReturnReasonsContainer extends React.Component {
     if (nextProps.returnIsLoading) return;
 
     if (!nextProps.orderData || nextProps.orderData.length === 0) {
-      // window.location.href = '/orders';
-      console.log('cwrp')
+      window.location.href = '/orders';
     } else {
       const activeOrder = nextProps.orderData.filter(o =>
         o.spree_order.number === this.props.params.orderID)[0];
@@ -181,7 +180,6 @@ class ReturnReasonsContainer extends React.Component {
       items.map(i => cleanItems.push(i.line_item));
       // TODO: Figure out consistency between steps for order object
       // Pass in with props instead of state
-      console.log('we got something')
       this.state = {
         order: activeOrder,
         orderArray: cleanItems,
