@@ -176,7 +176,7 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail, lineItems }
     //     guestEmail,
     //   },
     // });
-    window.location.hre = `/return/${order.number}`;
+    window.location.href = `/return/${order.number}`;
   })
   .fail((err) => {
     dispatch(setReturnLoadingState({ isLoading: false }));
