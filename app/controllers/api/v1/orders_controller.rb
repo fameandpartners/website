@@ -12,7 +12,6 @@ module Api
         if params[:order_number].blank?
 
           @orders = current_spree_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
-            #Orders::OrderPresenter.new(order, order.line_items)
             OrderSerializer.new(order).as_json.merge({ items: order.line_items })
           end
 

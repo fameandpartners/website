@@ -168,14 +168,7 @@ export const submitReturnRequest = ({ order, returnsObj, guestEmail, lineItems }
     });
 
     dispatch(setReturnLoadingState({ isLoading: false }));
-    // dispatch({ type: 'POPULATE_LOGISTICS_DATA',
-    //   payload: {
-    //     requiresViewOrdersRefresh: true,
-    //     order,
-    //     line_items: res.message,
-    //     guestEmail,
-    //   },
-    // });
+    // Redirect to the new returns page
     window.location.href = `/return/${order.number}`;
   })
   .fail((err) => {

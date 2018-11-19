@@ -20,18 +20,7 @@ class OrderSerializer < ActiveModel::Serializer
   has_one     :billing_address, serializer: AddressSerializer
 
   attributes  :shipments,
-              :final_return_by_date,
-							#:billing_address,
-              #:shipping_address,
-              #:tracking_number,
-
-  #def promocode
-    #object.promocode
-  #end
-
-  #def shipping_method
-  #  object.shipping_method
-  #end
+              :final_return_by_date
 
   def billing_address
     object.billing_address
