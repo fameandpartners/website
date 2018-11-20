@@ -399,7 +399,8 @@ FameAndPartners::Application.routes.draw do
 
   # Returns
   get '/view-orders'    => 'returns#main', as: 'user_orders'
-  get '/guest-returns'  => 'returns#guest'
+  # get '/guest-returns'  => 'returns#guest'
+  get '/guest-returns' => redirect('/return/guest')
   get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
