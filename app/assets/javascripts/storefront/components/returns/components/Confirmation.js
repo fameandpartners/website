@@ -41,7 +41,7 @@ function findOrderFromLineItem(orders, lineItemId) {
   orders.forEach((o) => {
     o.items.forEach((li) => {
       if (li.line_item.id === Number(lineItemId)) {
-        match = o.spree_order;
+        match = o.order;
       }
     });
   });

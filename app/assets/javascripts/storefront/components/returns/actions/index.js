@@ -103,7 +103,7 @@ export const updateOpenEndedReturnReason = (reason, product, returnArray) => {
 export const getProductData = (guestReturn, email, orderID) => (dispatch) => {
   if (guestReturn) {
     $.ajax({
-      url: `/api/v1/guest/order?email=${email}&order_number=${orderID}`,
+      url: `/api/v1/guest/order?email=${encodeURIComponent(email)}&order_number=${orderID}`,
       accepts: {
         'Content-Type': contentType,
       },

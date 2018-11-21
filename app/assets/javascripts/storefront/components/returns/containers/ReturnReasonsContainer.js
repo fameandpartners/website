@@ -111,9 +111,9 @@ class ReturnReasonsContainer extends React.Component {
         error: 'Please select an item you would like to return.',
       } });
     }
-    const { spree_order } = this.state.order;
+    const { order } = this.state.order;
     const returnsObj = {
-      order_id: spree_order.id,
+      order_id: order.id,
       line_items: returnArray.map(r => ({
         line_item_id: r.id,
         action: 'Return',
@@ -121,7 +121,7 @@ class ReturnReasonsContainer extends React.Component {
         reason: r.openEndedReturnReason,
       })),
     };
-    actions.submitReturnRequest({ order: spree_order, returnsObj, guestEmail: guestEmail || spree_order.email, lineItems: returnArray });
+    actions.submitReturnRequest({ order: order, returnsObj, guestEmail: guestEmail || order.email, lineItems: returnArray });
   }
 
   calculateCashCredit() {
@@ -174,7 +174,7 @@ class ReturnReasonsContainer extends React.Component {
       window.location.href = '/orders';
     } else {
       const activeOrder = nextProps.orderData.filter(o =>
-        o.spree_order.number === this.props.params.orderID)[0];
+        o.order.number === this.props.params.orderID)[0];
       const { items } = activeOrder;
       const cleanItems = [];
       items.map(i => cleanItems.push(i.line_item));

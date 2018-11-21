@@ -24,12 +24,13 @@ class OrderHistory extends React.Component {
   }
   render() {
     const { orderData, orderArray } = this.state;
-    const { spree_order: spreeOrder } = orderData;
+    const { order: spreeOrder } = orderData;
     const {
-      date_iso_mdy: dateIsoMdy,
       number,
       return_eligible: returnEligible,
     } = spreeOrder;
+
+    const dateIsoMdy = new Date(spreeOrder.created_at).toLocaleDateString();
 
     const notRequestedArray = orderArray.filter(i => !i.returns_meta);
     const returnRequestedArray = orderArray.filter(i => i.returns_meta);
@@ -49,7 +50,7 @@ class OrderHistory extends React.Component {
               <div className="Product__listItem__container u-margin-top-small">
                 {
                   returnRequestedArray.map((o, i) => {
-                    const internationalCustomer = orderData.spree_order.international_customer;
+                    const internationalCustomer = spreeOrder.ship_address.country !== 'United States';
                     const { id } = o;
                     return (
                       <div key={id}>
@@ -76,7 +77,7 @@ class OrderHistory extends React.Component {
                 }
                 {
                   notRequestedArray.map((o, i) => {
-                    const internationalCustomer = orderData.spree_order.international_customer;
+                    const internationalCustomer = spreeOrder.ship_address.country !== 'United States';
                     const { id } = o;
                     return (
                       <div key={id}>

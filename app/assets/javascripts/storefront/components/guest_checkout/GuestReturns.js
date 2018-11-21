@@ -26,11 +26,11 @@ class GuestReturnApp extends Component {
     const that = this;
     $.ajax({
       method: 'get',
-      url: `api/v1/guest/order?order_number=${guestOrderID}&email=${guestEmail}`,
+      url: `api/v1/guest/order?order_number=${guestOrderID}&email=${encodeURIComponent(guestEmail)}`,
     })
     .success((response) => {
       if (response) {
-        browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${guestEmail}`);
+        browserHistory.push(`/view-orders#/guest-return/${guestOrderID}/${encodeURIComponent(guestEmail)}`);
         window.location.reload();
       }
     })

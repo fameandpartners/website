@@ -5,9 +5,6 @@ module Api
       respond_to :json
 
       def history
-        if current_spree_user.nil?
-          return
-        end
 
         if params[:order_number].blank?
 
@@ -18,8 +15,8 @@ module Api
           respond_with @orders
 
         else
-
-          @order = current_spree_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).where(:number=>params[:order_number]).first
+          
+          @order = Spree::Order.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).where(:number=>params[:order_number]).first
           respond_with OrderSerializer.new(@order).as_json.merge({ items: @order.line_items })
 
         end

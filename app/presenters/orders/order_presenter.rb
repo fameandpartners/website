@@ -38,10 +38,11 @@ module Orders
                    :return_type,
                    :vwo_type
 
-    attr_reader :spree_order, :items
+    attr_reader :spree_order, :items, :order
 
     def initialize(order, items = nil)
       @spree_order = order
+      @order = order
       @items = items || order.line_items
       @items = @items&.sort { |x,y| x.stock.to_s <=> y.stock.to_s }
     end

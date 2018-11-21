@@ -98,11 +98,11 @@ class OrderContainer extends React.Component {
           )
           : null
         }
-        { orderData.length ?
+        { orderData && orderData.length > 0 ?
           (
             <div>
               <h1 className="u-center-text">Orders</h1>
-              {orderData.map(o => <OrderHistory key={o.spree_order.number} orderData={o} />)}
+              {orderData.map(o => <OrderHistory key={o.order.number} orderData={o} />)}
             </div>
           )
           : null
