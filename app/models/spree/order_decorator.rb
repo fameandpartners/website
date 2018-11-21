@@ -380,7 +380,8 @@ Spree::Order.class_eval do
   end
 
   def return_eligible_B?
-    self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"}
+    self.completed_at.between?( DateTime.new(2018,11,20), DateTime.new(2018,11,30) ) ||
+      ( self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"} )
   end
 
   def as_json(options = { })
