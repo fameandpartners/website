@@ -172,7 +172,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <% end %>
       </p>
       <p>
-        <span class="link-underline-lighter">Easy returns</span> within 30 days
+        <span class="link-underline-lighter">Free returns</span> worldwide
       </p>
     </div>
   </div>
