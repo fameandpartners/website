@@ -23,6 +23,7 @@ Spree::Order.class_eval do
 
   state_machine do
     after_transition :to => :complete, :do => :project_delivery_date
+    after_transition :to => :complete, :do => :allow_free_returns
   end
 
   def save_permalink(permalink_value=nil)
@@ -38,6 +39,13 @@ Spree::Order.class_eval do
     if complete?
       delivery_date = delivery_policy.delivery_date
       update_attribute(:projected_delivery_date, delivery_date)
+    end
+  end
+
+  # For Black Friday
+  def allow_free_returns
+    if Features.active?(:allow_free_returns)
+      update_attribute(:return_type, "D")
     end
   end
 
@@ -383,13 +391,17 @@ Spree::Order.class_eval do
     self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"}
   end
 
+  def return_eligible_D?
+    self.return_type == 'D'
+  end
+
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
     json['final_return_by_date'] = (delivery_policy.delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC? || self.return_eligible_D?) && 60.days.ago <= delivery_policy.delivery_date
 
     # TODO remove me later
     # make order R823608780 return eligible per request from CS
