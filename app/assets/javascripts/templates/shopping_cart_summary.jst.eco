@@ -118,34 +118,6 @@ $('.js-trigger-empty-cart-modal').modal({
 
 <div class="cart-footer">
 <div class="row js-returns-abc-option-B">
-  <div class="ReturnOption__wrapper">
-    <div class="ReturnOption__content col-xs-12">
-      <div class="col-xs-1">
-        <div class="Checkbox__wrapper">
-          <input
-            class="Checkbox js-returns-abc-option-trigger js-returns-trigger"
-            type="checkbox"
-            value="B"
-            id="returns_option_b"
-          />
-          <label for="returns_option_b" class="Checkbox__label"></label>
-        </div>
-      </div>
-      <div class="col-xs-7">
-        <p class="ReturnOption__copy font-sans-serif">
-          Add <strong>$19</strong>
-          for fully flexible returns
-        </p>
-      </div>
-      <div class="col-xs-4">
-        <p class="ReturnOption__copy ReturnOption__copy--right font-sans-serif">
-          <a href="javascript:;" id="B-info" class="js-returns-learn-more ReturnOption__copy--link">
-            Learn more
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
@@ -200,7 +172,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <% end %>
       </p>
       <p>
-        <span class="link-underline-lighter">Easy returns</span> within 30 days
+        <span class="link-underline-lighter">Free returns</span> worldwide
       </p>
     </div>
   </div>

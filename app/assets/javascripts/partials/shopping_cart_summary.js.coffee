@@ -67,8 +67,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     ))
 
     console.log('Return Type: ' + @whichReturnType())
-    if (@isPaymentStep() && @noReturnTypeSelected() && (@whichReturnType() != 'C'))
-      @optInReminderModal()
+
     @showReturnCheckbox()
     @initializeReturnTypeCheckbox()
     @removeInsuranceIfInsuranceNotAllowed()
