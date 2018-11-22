@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -514,6 +514,51 @@ CREATE SEQUENCE public.contentful_versions_id_seq
 --
 
 ALTER SEQUENCE public.contentful_versions_id_seq OWNED BY public.contentful_versions.id;
+
+
+--
+-- Name: curations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.curations (
+    id integer NOT NULL,
+    name character varying(255),
+    pid character varying(255),
+    product_id integer,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: curations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.curations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: curations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.curations_id_seq OWNED BY public.curations.id;
+
+
+--
+-- Name: curations_taxons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.curations_taxons (
+    curation_id integer,
+    taxon_id integer
+);
 
 
 --
@@ -1654,13 +1699,14 @@ ALTER SEQUENCE public.layer_cads_id_seq OWNED BY public.layer_cads.id;
 CREATE TABLE public.line_item_making_options (
     id integer NOT NULL,
     product_id integer,
-    variant_id integer,
+    old_variant_id integer,
     line_item_id integer,
     making_option_id integer,
-    price numeric(10,2),
+    flat_price numeric(10,2),
     currency character varying(10),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    percent_price numeric(8,2)
 );
 
 
@@ -1820,6 +1866,49 @@ CREATE SEQUENCE public.line_item_updates_id_seq
 --
 
 ALTER SEQUENCE public.line_item_updates_id_seq OWNED BY public.line_item_updates.id;
+
+
+--
+-- Name: making_options; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.making_options (
+    id integer NOT NULL,
+    code character varying(255),
+    name character varying(255),
+    description character varying(255),
+    delivery_period character varying(255),
+    cny_delivery_period character varying(255),
+    making_time_business_days integer,
+    cny_making_time_business_days integer,
+    flat_price_usd numeric(8,2),
+    flat_price_aud numeric(8,2),
+    percent_price_usd numeric(8,2),
+    percent_price_aud numeric(8,2),
+    "position" integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: making_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.making_options_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: making_options_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.making_options_id_seq OWNED BY public.making_options.id;
 
 
 --
@@ -2209,7 +2298,6 @@ CREATE TABLE public.newgistics_schedulers (
 --
 
 CREATE SEQUENCE public.newgistics_schedulers_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2256,6 +2344,39 @@ CREATE SEQUENCE public.next_logistics_return_request_processes_id_seq
 --
 
 ALTER SEQUENCE public.next_logistics_return_request_processes_id_seq OWNED BY public.next_logistics_return_request_processes.id;
+
+
+--
+-- Name: old_variant_taxons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.old_variant_taxons (
+    id integer NOT NULL,
+    taxon_id integer,
+    product_id integer,
+    fabric_or_color character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: old_variant_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.old_variant_taxons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: old_variant_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.old_variant_taxons_id_seq OWNED BY public.old_variant_taxons.id;
 
 
 --
@@ -2503,11 +2624,13 @@ ALTER SEQUENCE public.product_height_ranges_id_seq OWNED BY public.product_heigh
 CREATE TABLE public.product_making_options (
     id integer NOT NULL,
     product_id integer,
-    variant_id integer,
+    old_variant_id integer,
     active boolean DEFAULT false,
-    option_type character varying(255),
-    price numeric(10,2),
-    currency character varying(10)
+    old_option_type character varying(255),
+    old_price numeric(10,2),
+    old_currency character varying(10),
+    making_option_id integer,
+    "default" boolean
 );
 
 
@@ -4944,7 +5067,7 @@ CREATE TABLE public.spree_taxons (
     meta_keywords character varying(255),
     title character varying(255),
     published_at timestamp without time zone,
-    delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying
+    old_delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying
 );
 
 
@@ -5395,40 +5518,6 @@ ALTER SEQUENCE public.user_style_profiles_id_seq OWNED BY public.user_style_prof
 
 
 --
--- Name: variant_taxons; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.variant_taxons (
-    id integer NOT NULL,
-    taxon_id integer,
-    product_id integer,
-    fabric_or_color character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: variant_taxons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.variant_taxons_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: variant_taxons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.variant_taxons_id_seq OWNED BY public.variant_taxons.id;
-
-
---
 -- Name: wedding_atelier_event_assistants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5851,6 +5940,13 @@ ALTER TABLE ONLY public.contentful_versions ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: curations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.curations ALTER COLUMN id SET DEFAULT nextval('public.curations_id_seq'::regclass);
+
+
+--
 -- Name: custom_dress_images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6075,6 +6171,13 @@ ALTER TABLE ONLY public.line_item_updates ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: making_options id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.making_options ALTER COLUMN id SET DEFAULT nextval('public.making_options_id_seq'::regclass);
+
+
+--
 -- Name: manually_managed_returns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6149,6 +6252,13 @@ ALTER TABLE ONLY public.newgistics_schedulers ALTER COLUMN id SET DEFAULT nextva
 --
 
 ALTER TABLE ONLY public.next_logistics_return_request_processes ALTER COLUMN id SET DEFAULT nextval('public.next_logistics_return_request_processes_id_seq'::regclass);
+
+
+--
+-- Name: old_variant_taxons id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.old_variant_taxons ALTER COLUMN id SET DEFAULT nextval('public.old_variant_taxons_id_seq'::regclass);
 
 
 --
@@ -6733,13 +6843,6 @@ ALTER TABLE ONLY public.user_style_profiles ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
--- Name: variant_taxons id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.variant_taxons ALTER COLUMN id SET DEFAULT nextval('public.variant_taxons_id_seq'::regclass);
-
-
---
 -- Name: wedding_atelier_event_assistants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6920,6 +7023,14 @@ ALTER TABLE ONLY public.contentful_routes
 
 ALTER TABLE ONLY public.contentful_versions
     ADD CONSTRAINT contentful_versions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: curations curations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.curations
+    ADD CONSTRAINT curations_pkey PRIMARY KEY (id);
 
 
 --
@@ -7168,6 +7279,14 @@ ALTER TABLE ONLY public.line_item_size_normalisations
 
 ALTER TABLE ONLY public.line_item_updates
     ADD CONSTRAINT line_item_updates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: making_options making_options_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.making_options
+    ADD CONSTRAINT making_options_pkey PRIMARY KEY (id);
 
 
 --
@@ -7931,10 +8050,10 @@ ALTER TABLE ONLY public.user_style_profile_taxons
 
 
 --
--- Name: variant_taxons variant_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: old_variant_taxons variant_taxons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.variant_taxons
+ALTER TABLE ONLY public.old_variant_taxons
     ADD CONSTRAINT variant_taxons_pkey PRIMARY KEY (id);
 
 
@@ -8113,6 +8232,27 @@ CREATE INDEX index_batch_collections_on_batch_key ON public.batch_collections US
 --
 
 CREATE INDEX index_celebrity_inspirations_on_spree_product_id ON public.celebrity_inspirations USING btree (spree_product_id);
+
+
+--
+-- Name: index_curations_on_pid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_curations_on_pid ON public.curations USING btree (pid);
+
+
+--
+-- Name: index_curations_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_curations_on_product_id ON public.curations USING btree (product_id);
+
+
+--
+-- Name: index_curations_taxons_on_curation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_curations_taxons_on_curation_id ON public.curations_taxons USING btree (curation_id);
 
 
 --
@@ -8539,7 +8679,7 @@ CREATE INDEX index_product_color_values_on_product_id ON public.product_color_va
 -- Name: index_product_making_options_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_product_making_options_on_product_id ON public.product_making_options USING btree (product_id, active, option_type);
+CREATE INDEX index_product_making_options_on_product_id ON public.product_making_options USING btree (product_id, active, old_option_type);
 
 
 --
@@ -10326,3 +10466,9 @@ INSERT INTO schema_migrations (version) VALUES ('20181005033839');
 INSERT INTO schema_migrations (version) VALUES ('20181008013910');
 
 INSERT INTO schema_migrations (version) VALUES ('20181105000355');
+
+INSERT INTO schema_migrations (version) VALUES ('20181120231445');
+
+INSERT INTO schema_migrations (version) VALUES ('20181121020632');
+
+INSERT INTO schema_migrations (version) VALUES ('20181121225145');

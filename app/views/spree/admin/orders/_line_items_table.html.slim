@@ -37,10 +37,8 @@ table.line_items
           td = maybe_date(order.completed_at)
           td = maybe_date(line_item.projected_delivery_date)
           td style="text-align: center"
-            - if line_item.fast_making? || order.fast_making_promo?
+            - if (line_item.making_options.first&.product_making_option&.making_option&.making_time_business_days || 0) < 20
               h3 style="color: red;" !
-            - if order.fast_making_promo?
-              h3 🎂
           td
             - ship_state = ShippingStatePresenter.new(line_item)
             abbr title=ship_state.delivery_state class="state-#{ship_state.delivery_state}"

@@ -7,8 +7,10 @@ module Api
       respond_to :json
 
       def upload
-        product = create_or_update_products(request.body.read)
-        respond_with product
+        ActiveRecord::Base.transaction do
+          product = create_or_update_products(request.body.read)
+          respond_with product
+        end
       end
 
     end 

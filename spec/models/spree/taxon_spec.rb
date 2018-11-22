@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Spree::Taxon, :type => :model do
-  it { is_expected.to validate_inclusion_of(:delivery_period).in_array(described_class::DELIVERY_PERIODS) }
   it_behaves_like 'publishable class', :taxon
 
   describe 'scopes' do

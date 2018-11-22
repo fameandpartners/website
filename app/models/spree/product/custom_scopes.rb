@@ -14,10 +14,6 @@ module Spree
       def with_making_options
         joins(:making_options)
       end
-
-      def with_fast_making
-        with_making_options.where("product_making_options.option_type = 'fast_making'")
-      end
     end
   end
 end

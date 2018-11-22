@@ -57,7 +57,6 @@ class Repositories::ProductVariants
                        size_id:       variant.option_values.find { |ov| ov.option_type == size_option_type }.try(:id),
                        color_id:      variant.option_values.find { |ov| ov.option_type == color_option_type }.try(:id),
                        count_on_hand: variant.count_on_hand,
-                       fast_delivery: variant.fast_delivery,
                        available:     variant.available?
                      })
     end

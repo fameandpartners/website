@@ -42,17 +42,13 @@ class Populator
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
-  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
-    begin
-      err_attrs = {
-        :order              => @order.to_h,
-        :site_version       => @site_version.to_h,
-        :product_attributes => @product_attributes
-      }
-      NewRelic::Agent.notice_error(e, err_attrs)
-    rescue StandardError
-      #turtles
-    end
+  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
+    err_attrs = {
+      :order              => @order.to_h,
+      :site_version       => @site_version.to_h,
+      :product_attributes => @product_attributes
+    }
+  
     OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
   end
 
@@ -92,7 +88,7 @@ class Populator
     def add_making_options
       return if line_item.blank? || product_making_options.blank?
       line_item.making_options = product_making_options.collect do |making_option|
-        LineItemMakingOption.build_option(ProductMakingOption.find(making_option.id))
+        LineItemMakingOption.build_option(making_option, currency)
       end
       line_item
     end
@@ -159,17 +155,16 @@ class Populator
       @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).order('created_at desc').first
     end
 
-    def product_options
-      @product_options = Products::SelectionOptions.new(site_version: site_version, product: product).read
-    end
-
     def product_size
+
       @product_size ||= begin
+        sizes = product.option_types.find_by_name('dress-size').option_values
+        size = sizes.first {|size| size.id == product_size_id.to_i || size.name == product_size_id}
+
+
         product_size_id = product_attributes[:size_id]
-        if (size = product_options.sizes.default.detect{|size| size.id == product_size_id.to_i || size.name == product_size_id}).present?
-          size.custom = false
-        elsif (size = product_options.sizes.extra.detect{|size| size.id == product_size_id.to_i || size.name == product_size_id}).present?
-          size.custom = true
+        if size.present?
+          # nothing
         else
           raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")
         end
@@ -192,15 +187,6 @@ class Populator
         # Once all products are migrated to use explicitly defined ProductColorValues the Fallback else clause can go.
         if (color = product.product_color_values.active.detect { |pcv| color_id == pcv.color_id  })
           # NOOP Handles Database stored recommended and custom colors ProductColorValue
-        elsif (color_struct = product_options.colors.extra.detect{ |x| x.id == color_id })
-          # Fallback - Handles non-specified Custom colors
-          # If a customised colors are available for a product, but no colors are
-          # defined as a ProductColorValue, create one on the fly.
-          color = ProductColorValue.new.tap do |pcv|
-            pcv.product         = product
-            pcv.option_value_id = color_struct.id
-            pcv.custom          = true
-          end
         else
           raise Errors::ProductOptionNotAvailable.new("product color ##{ color_id } not available")
         end
@@ -229,7 +215,10 @@ class Populator
 
     def product_making_options
       @product_making_options ||= begin
-        product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+        pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+        pmo = product.making_options.where(default: true).to_a if pmo.empty?
+
+        pmo
       end
     end
 

@@ -96,7 +96,6 @@ module Operations
     def finalize_order
       order.touch :completed_at
       order.update_column :state, 'complete'
-      order.project_delivery_date
     end
 
     def create_inventory_units

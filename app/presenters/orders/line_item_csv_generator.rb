@@ -153,7 +153,7 @@ module Orders
             line.line_item_id,
             line.total_items,
             line.completed_at_date,
-            line.fast_making,
+            line.making_option,
             lip&.projected_delivery_date&.to_date,
             # line.delivery_date,
             line.tracking_number,

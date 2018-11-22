@@ -21,12 +21,6 @@ Spree::Variant.class_eval do
     discount.present?
   end
 
-  def fast_delivery
-    return false if self.on_demand?
-    self.count_on_hand > 0
-  end
-  alias_method :fast_delivery?, :fast_delivery
-
   def options_hash
     values = self.option_values.joins(:option_type).order("#{Spree::OptionType.table_name}.position asc")
 

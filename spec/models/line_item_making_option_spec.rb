@@ -10,7 +10,7 @@ describe LineItemMakingOption do
 
     it "accepts product option and works" do
       expect(
-        LineItemMakingOption.build_option(product_option)
+        LineItemMakingOption.build_option(product_option, 'AUD')
       ).not_to be_blank
     end
 
@@ -19,7 +19,7 @@ describe LineItemMakingOption do
         price: BigDecimal.new(rand(100)),
         currency: "CUR"
       }, { without_protection: true })
-      option = LineItemMakingOption.build_option(product_option)
+      option = LineItemMakingOption.build_option(product_option, 'AUD')
 
       expect(option.price).to     eq(product_option.price)
       expect(option.currency).to  eq(product_option.currency)

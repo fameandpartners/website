@@ -49,8 +49,8 @@ module Orders
         line['height'] || LineItemPersonalization::DEFAULT_HEIGHT
       end
 
-      def fast_making
-        line['fast_making'].present? ? "TRUE" : ''
+      def making_option
+        line['making_option'] || ''
       end
 
       def customer_name
@@ -105,7 +105,7 @@ module Orders
 
       def delivery_date
         return unless line['completed_at_date'].present?
-        Policies::LineItemProjectedDeliveryDatePolicy.new(line['completed_at_date'].to_date, line['fast_making']).delivery_date
+        line.delivery_period_policy.ship_by_date
       end
 
       def return_request

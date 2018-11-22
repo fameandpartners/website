@@ -28,6 +28,8 @@ Spree::Product.class_eval do
   has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
 
+  has_many :curations, class_name: 'Curation', foreign_key: :product_id
+
   has_many :making_options, foreign_key: :product_id, class_name: 'ProductMakingOption'
 
   belongs_to :factory
@@ -116,72 +118,6 @@ Spree::Product.class_eval do
     prod_images
   end
 
-  def images_for_colors(colors)
-    table_name = Spree::Image.quoted_table_name
-    color_ids = colors.map(&:id)
-    viewables = product_color_values.where(option_value_id: color_ids)
-
-    if viewables.present?
-      whens = viewables.map do |viewable|
-        "WHEN #{table_name}.viewable_id = #{viewable.id} THEN #{color_ids.index(viewable.option_value_id)}"
-      end
-
-      ordering_sql = "CASE #{whens.join(' ')} END ASC, position ASC"
-    else
-      ordering_sql = 'position ASC'
-    end
-
-    Spree::Image.
-      where("#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?)", viewables.map(&:id)).
-      order(ordering_sql)
-  end
-
-  def images_for_variant(variant)
-    if variant.product.fabrics.empty?
-      #old way
-      table_name = Spree::Image.quoted_table_name
-
-      Spree::Image.where(
-        "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
-          OR
-        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-        product_color_values.where(option_value_id: variant.option_value_ids).map(&:id), variant.id
-      ).order('position ASC')
-    else
-      #new dumb fabrics
-      ot_fabric = Spree::OptionType.find_by_name("dress-fabric-color")
-      ov_fabric = variant.option_values.detect { |ov| ov.option_type_id == ot_fabric.id}
-
-      fabric = Fabric.find_by_option_fabric_color_value_id(ov_fabric.id)
-      (variant.product.fabric_products.detect {|fp| fp.fabric_id == fabric.id}).images
-    end
-  end
-
-  def remove_property(name)
-    ActiveRecord::Base.transaction do
-      property = Spree::Property.where(name: name).first
-      return false if property.blank?
-
-      Spree::ProductProperty.where(:product_id => self.id, :property_id => property.id).delete_all
-      if Spree::ProductProperty.where(:property_id => property.id).count == 0
-        property.destroy
-      end
-      true
-    end
-  end
-
-  def viewable_color_ids
-    product_color_values.joins(:images).map(&:option_value_id)
-  end
-
-  # for case, when we trying to update indexes with no price [ in creating process]
-  # TODO: it should be check in update index
-  def price_for_search
-    price.to_f
-  rescue
-    0.00
-  end
-
   def basic_color_ids
     product_color_values
       .active
@@ -257,10 +193,6 @@ Spree::Product.class_eval do
         .uniq
   end
 
-  def customisation_colors
-    custom_colors.where(use_in_customisation: true)
-  end
-
   def description
     read_attribute(:description) || ''
   end
@@ -269,16 +201,8 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
-  def default_standard_days_for_making
-    5
-  end
-
   def standard_days_for_making
     property("standard_days_for_making")
-  end
-
-  def default_customised_days_for_making
-    10
   end
 
   def customised_days_for_making
@@ -322,38 +246,6 @@ Spree::Product.class_eval do
     price.save
   end
 
-  def can_be_customized?
-    customizations.present?
-  end
-
-  # Someday, a time of magic and sorcery, move this one and some another methods to decorator/presenter
-  def delivery_time_as_string(format = :short)
-    if fast_delivery
-      I18n.t(format, scope: [:delivery_time, :fast])
-    else
-      I18n.t(format, scope: [:delivery_time, :standard])
-    end
-  end
-
-  # TODO: this should be presenter logic, not model
-  # at least single size-color can be fast delivered
-  def fast_delivery
-    @fast_delivery ||= self.variants.any?{|variant| variant.fast_delivery}
-  end
-  alias_method :fast_delivery?, :fast_delivery
-
-  # TODO: this should be presenter logic, not model
-  def fast_making
-    @fast_making ||= self.making_options.fast_making.active.exists?
-  end
-  
-  def super_fast_making
-    @super_fast_making ||= self.making_options.super_fast_making.active.exists?
-  end
-  
-  alias_method :fast_making?, :fast_making
-  alias_method :super_fast_making?, :super_fast_making
-
   def active?
     ! deleted? && ! hidden? && available?
   end
@@ -363,14 +255,6 @@ Spree::Product.class_eval do
 
   def discount
     @discount ||= Repositories::Discount.get_product_discount(self.id)
-  end
-
-  def delivery_period
-    delivery_period_policy.delivery_period
-  end
-
-  def delivery_period_policy
-    @delivery_period_policy ||= Policies::ProductDeliveryPeriodPolicy.new(self)
   end
 
   def has_render?

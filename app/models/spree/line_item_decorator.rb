@@ -17,27 +17,6 @@ Spree::LineItem.class_eval do
   has_many :batch_collection_line_items
   has_many :batch_collections, :through => :batch_collection_line_items
 
-  scope :fast_making, -> do
-    joins(making_options: :product_making_option).
-      where(product_making_options: { option_type: 'fast_making' })
-  end
-
-  scope :super_fast_making, -> do
-    joins(making_options: :product_making_option).
-      where(product_making_options: { option_type: 'super_fast_making' })
-  end
-
-  scope :slow_making, -> do
-    joins(making_options: :product_making_option).
-      where(product_making_options: { option_type: 'slow_making' })
-  end
-
-  scope :standard_making, -> do
-    joins('LEFT JOIN line_item_making_options limo ON limo.line_item_id = spree_line_items.id').
-      joins('LEFT JOIN product_making_options pmo ON limo.making_option_id = pmo.id').
-      where('pmo.id IS NULL')
-  end
-
   # Note: it seems we need to store this value in DB.
   def delivery_period
     if self.delivery_date.nil? && self.order.state != 'complete'
@@ -83,30 +62,13 @@ Spree::LineItem.class_eval do
     total_adjustment = 0
 
     making_options.each do |mo|
-      if (mo.product_making_option&.fast_making? || mo.product_making_option&.super_fast_making? ) and mo.price
-        total_adjustment += mo.price
-      end
-      # slow_making price will be percentage based
-      if mo.product_making_option&.slow_making?
-        total_adjustment = total_adjustment + self.attributes["price"]*mo.price
-      end
+      total_adjustment += mo.flat_price if mo.flat_price
+      total_adjustment += self.attributes["price"]*mo.percent_price if mo.percent_price
     end
 
     total_adjustment
   end
-
-  def fast_making?
-    making_options.any? {|mo| mo.product_making_option&.fast_making? }
-  end
-
-  def super_fast_making?
-    making_options.any? {|mo| mo.product_making_option.super_fast_making? }
-  end
-
-  def slow_making?
-    making_options.any? {|mo| mo.product_making_option.slow_making? }
-  end
-
+  
   def making_options_price
     making_options.sum(&:price)
   end

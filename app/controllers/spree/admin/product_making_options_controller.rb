@@ -11,7 +11,6 @@ module Spree
         load_product
 
         @making_option = @product.making_options.new
-        @making_option.assign_default_attributes
       end
 
       def create

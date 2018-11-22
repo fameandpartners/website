@@ -8,13 +8,6 @@
           span.range-divider
             i.icon-arrow-right
           = f.text_field :created_at_lt, :class => 'datepicker datepicker-to', :value => params[:q][:created_at_lt], :placeholder => t(:stop)
-      .field.date-range-filter
-        = label_tag nil, t(:delivery_due_range)
-        .date-range-fields
-          = f.text_field :projected_delivery_date_gt, :class => 'datepicker datepicker-from', :placeholder => t(:start)
-          span.range-divider
-            i.icon-arrow-right
-          = f.text_field :projected_delivery_date_lt, :class => 'datepicker datepicker-to', :placeholder => t(:stop)
 
 
 

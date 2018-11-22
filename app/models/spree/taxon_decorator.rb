@@ -2,28 +2,11 @@ require_dependency 'spree/taxonomy_decorator'
 
 Spree::Taxon.class_eval do
   include Concerns::Publishable
-
-  DELIVERY_PERIODS =
-    [
-      '5 - 7 business days',
-      '7 - 10 business days',
-      '12 - 15 business days',
-      '2 - 3 weeks',
-      '3 - 4 weeks',
-      '3 - 6 weeks',
-      '4 - 6 weeks',
-      '6 weeks',
-      '6 - 10 weeks'
-    ]
-
-  attr_accessible :delivery_period
-
+  
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
     foreign_key: :spree_taxon_id
-
-  validates_inclusion_of :delivery_period, in: DELIVERY_PERIODS
 
   accepts_nested_attributes_for :banner
 

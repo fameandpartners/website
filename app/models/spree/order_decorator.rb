@@ -2,7 +2,7 @@ Spree::Order.class_eval do
   include Spree::Order::CloneShipAddress
   extend Spree::Order::Scopes
 
-  attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id, :autorefundable
+  attr_accessible :required_to, :email, :customer_notes, :user_id, :autorefundable
   self.include_root_in_json = false
 
   has_one :traffic_parameters, class_name: Marketing::OrderTrafficParameters
@@ -21,33 +21,11 @@ Spree::Order.class_eval do
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
   end
 
-  state_machine do
-    after_transition :to => :complete, :do => :project_delivery_date
-  end
-
   def save_permalink(permalink_value=nil)
     # noop
     # :number is already unique, and already the permalink value
     # The default spree implementation here does a LIKE '?%',
     # which on order number, is very very slow.
-  end
-
-  # called from manual_order and a state transition in checkout, value is derived from delivery_period
-  # don't think anybody actually consumes except for the manual order thingy
-  def project_delivery_date
-    if complete?
-      delivery_date = delivery_policy.delivery_date
-      update_attribute(:projected_delivery_date, delivery_date)
-    end
-  end
-
-  # thanh 4/3/17- did not find any references to this method
-  def delivery_period
-    delivery_policy.delivery_period
-  end
-
-  def delivery_policy
-    @delivery_policy ||= Policies::OrderProjectedDeliveryDatePolicy.new(self)
   end
 
   def returnable?
@@ -94,14 +72,6 @@ Spree::Order.class_eval do
     line_items.any?(&:in_sale?)
   end
   alias :in_sale? :has_items_on_sale?
-
-  def has_fast_making_items?
-    line_items.includes(making_options: :product_making_option).any?(&:fast_making?)
-  end
-
-  def has_slow_making_items?
-    line_items.includes(making_options: :product_making_option).any?(&:slow_making?)
-  end
 
   def update!
     if self.shipping_method.blank?

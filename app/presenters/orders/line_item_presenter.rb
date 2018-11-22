@@ -30,7 +30,7 @@ module Orders
     def_delegators :@item,
                    :id,
                    :making_options,
-                   :fast_making?,
+                   :making_option,
                    :factory,
                    :fabrication,
                    :price,
@@ -70,12 +70,9 @@ module Orders
       item.upc || global_sku.id
     end
 
-    # this badly named method refers to ship_by_date for use by our product manufacturing
     def projected_delivery_date
       return unless order.completed?
-      # @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(
-      #   order.completed_at, @item.delivery_period).try(:to_date)
-      @projected_delivery_date ||= @item.delivery_period_policy.ship_by_date(order.completed_at, @item.delivery_period)
+      @projected_delivery_date ||= @item.delivery_period_policy.ship_by_date
     end
 
     def fabrication_status
@@ -160,13 +157,7 @@ module Orders
     def colour_id
       colour.try(:id)
     end
-
-    def available_making_options
-      (available_making_options || []).map do |mo|
-        { id: mo.id, name: mo.name, display_discount: mo.display_discount }
-      end
-    end
-
+    
     def refulfill_status
       item.refulfill_status
     end

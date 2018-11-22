@@ -223,13 +223,16 @@ module Api
               pid: r['_source']['product']['pid'],
               productId: r['_source']['product']['sku'],
               name: r['_source']['product']['name'],
-              price: r['_source']['prices'] && {
+              strikeThoughPrice: r['_source']['prices'] && {
                 "en-AU": r['_source']['prices']['aud'] * 100,
                 "en-US": r['_source']['prices']['usd'] * 100
               },
-              salePrice: r['_source']['sale_prices'] && {
+              price: r['_source']['sale_prices'] && {
                 "en-AU": r['_source']['sale_prices']['aud'] * 100,
                 "en-US": r['_source']['sale_prices']['usd'] * 100
+              } || r['_source']['prices'] && {
+                "en-AU": r['_source']['prices']['aud'] * 100,
+                "en-US": r['_source']['prices']['usd'] * 100
               },
               url: r['_source']['product']['url'],
               images: r['_source']['media'],
@@ -389,7 +392,6 @@ module Api
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = JSON.parse!(product.customizations)
 
-        slow_making_option = product.making_options.find(&:slow_making?)
         product_fabric = product.property('fabric')
         product_fit = product.property('fit')
         product_size = product.property('size')
@@ -403,7 +405,7 @@ module Api
           urlProductId: product.id,
           cartId: product.master.id,
           returnDescription: 'Shipping is free on your customized item. <a href="/faqs#panel-delivery" target="_blank">Learn more</a>',
-          deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
+          # deliveryTimeDescription: slow_making_option.try(:display_delivery_period),
 
           curationMeta: {
             name: product.name,
@@ -413,7 +415,8 @@ module Api
             permaLink: product.name.parameterize
           },
           isAvailable: product.is_active?,
-          price: (product.price_in(current_site_version.currency).amount * 100).to_i,
+          price: (product.price_in(current_site_version.currency).apply(product.discount).amount * 100).to_i,
+          strikeThoughPrice: (product.price_in(current_site_version.currency).amount * 100).to_i,
           prices: {
             'en-AU' => (product.price_in('AUD').amount * 100).to_i,
             'en-US' => (product.price_in('USD').amount * 100).to_i,
@@ -429,15 +432,14 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            fabrics.empty? ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(f) },
+            fabrics.empty? ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(product, f) },
 
             sizes.map {|s| map_size(s) },
 
-            customizations.map {|c| map_customization(c) },
+            customizations.map {|c| map_customization(product, c) },
 
             product.making_options
-              .reject { |making| making.slow_making? }
-              .map { |making| map_making(making) },
+              .map { |making| map_making(product, making) },
 
             [
               {
@@ -447,6 +449,7 @@ module Api
                 componentTypeId: :Return,
                 componentTypeCategory: :Return,
                 price: 0,
+                strikeThoughPrice: 0,
                 isProductCode: false,
                 isRecommended: false,
                 type: :return,
@@ -627,7 +630,7 @@ module Api
         }
       end
 
-      def map_customization(c)
+      def map_customization(product, c)
         {
           cartId: c['customisation_value']['id'],
           code: c['customisation_value']['name'],
@@ -636,6 +639,7 @@ module Api
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
           price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+          strikeThoughPrice: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
           prices: {
             'en-AU' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
             'en-US' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i
@@ -655,19 +659,20 @@ module Api
         }
       end
       
-      def map_making(making)
+      def map_making(product, making)
         {
           cartId: making.id,
-          code: making.option_type,
+          code: making.making_option.code,
           isDefault: false,
           title: making.name,
           componentTypeId: :Making,
           componentTypeCategory: :Making,
-          price: (making.price*100).to_i,
+          price: (making.making_option.flat_price_in(current_site_version.currency)*100).to_i,
+          strikeThoughPrice: (making.making_option.flat_price_in(current_site_version.currency)*100).to_i,
           isProductCode: false,
           isRecommended: false,
           type: :Making,
-          sortOrder: making.super_fast_making? ? 1 : making.fast_making? ? 2 : 3,
+          sortOrder: making.making_option.position,
           meta: {
             deliveryTimeDescription: making.description,
             deliveryTimeRange: making.display_delivery_period
@@ -676,7 +681,7 @@ module Api
         }
       end
 
-      def map_fabric(f)
+      def map_fabric(product, f)
         {
           cartId: f.fabric.id,
           code: f.fabric.name,
@@ -685,6 +690,7 @@ module Api
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
           price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
+          strikeThoughPrice: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
           prices: {
             'en-AU' => f.recommended ? 0 : (f.fabric.price_in('AUD') * 100).to_i,
             'en-US' => f.recommended ? 0 : (f.fabric.price_in('USD') * 100).to_i,
@@ -715,7 +721,7 @@ module Api
         }
       end
 
-      def map_color(c, product_fabric)
+      def map_color(product, c, product_fabric)
         {
           cartId: c.option_value.id,
           code: c.option_value.name,
@@ -724,6 +730,7 @@ module Api
           componentTypeId: :Color,
           componentTypeCategory: :Color,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+          strikeThoughPrice: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           prices: {
             'en-AU' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
             'en-US' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0
@@ -756,6 +763,7 @@ module Api
           componentTypeId: :Size,
           componentTypeCategory: :Size,
           price: 0,
+          strikeThoughPrice: 0,
           prices: {
             'en-AU' => 0,
             'en-US' =>  0
