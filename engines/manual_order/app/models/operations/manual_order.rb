@@ -34,13 +34,12 @@ module Operations
     def populate_products
       params[:products].map do |_, product|
         color = product[:color]
+        variant = get_variant(product[:style_name]) 
+
         
         if !product[:fabric].blank?
           fabric = Fabric.find(product[:fabric])
           color = fabric.option_value_id
-          variant = get_variant(product[:style_name], product[:size], fabric.option_fabric_color_value_id) 
-        else
-          variant = get_variant(product[:style_name], product[:size], color) 
         end
 
         UserCart::Populator.new(
@@ -106,7 +105,7 @@ module Operations
           fabric = Fabric.find(product[:fabric])
           color = fabric.option_value_id
         end
-        variant = get_variant(product[:style_name], product[:size], color) 
+        variant = get_variant(product[:style_name]) 
 
         unit = order.shipments.first.inventory_units.build
         unit.variant_id = variant.id
@@ -166,31 +165,8 @@ module Operations
       (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
-    def get_variant(product_id, size, color)
-      size_variants  = get_variant_ids(product_id, size)
-      color_variants = get_variant_ids(product_id, color)
-
-      variant_ids = \
-        if size_variants.present? && color_variants.present?
-          size_variants & color_variants
-        elsif color_variants.present?
-          color_variants
-        else
-          size_variants
-        end
-
-      Spree::Variant.where(id: variant_ids).first!
+    def get_variant(product_id)
+      Spree::Variant.where(product_id: product_id, is_master: true).first
     end
-
-    def get_variant_ids(product_id, option_value_id)
-      Spree::Variant
-        .joins(:option_values)
-        .joins(:prices)
-        .where('spree_option_values.id = ?', option_value_id)
-        .where(product_id: product_id, is_master: false)
-        .where('spree_prices.currency = ? AND spree_prices.amount IS NOT NULL', params[:currency] || 'USD')
-        .pluck(:id)
-    end
-
   end
 end
