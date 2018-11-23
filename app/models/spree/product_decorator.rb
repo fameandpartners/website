@@ -266,7 +266,7 @@ Spree::Product.class_eval do
   end
 
   def self.has_render?(product)
-    render_skus = ['fpg1001', 'fpg1002', 'fpg1003', 'fpg1004', 'fpg1005', 'fpg1006', 'sw']
+    render_skus = ['FPG1001', 'FPG1002', 'FPG1003', 'FPG1004', 'FPG1005', 'FPG1006', 'SW']
     render_skus.include?(product.master.sku)
   end
 
