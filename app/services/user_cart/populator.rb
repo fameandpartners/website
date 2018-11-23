@@ -156,13 +156,13 @@ class Populator
     end
 
     def product_size
-
       @product_size ||= begin
-        sizes = product.option_types.find_by_name('dress-size').option_values
-        size = sizes.first {|size| size.id == product_size_id.to_i || size.name == product_size_id}
-
-
         product_size_id = product_attributes[:size_id]
+
+        sizes = product.option_types.find_by_name('dress-size').option_values
+        size = sizes.find {|size| size.id == product_size_id.to_i || size.name == product_size_id}
+
+
         if size.present?
           # nothing
         else
