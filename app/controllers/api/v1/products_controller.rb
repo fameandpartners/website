@@ -56,6 +56,10 @@ module Api
           fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
           # customization = all_customizations.find { |c|  components.include?(c["customisation_value"]["name"]) }
 
+          if !pcv && !fabric_product
+            return nil
+          end
+
 
           all_images = spree_product.images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
           if all_images.blank?
@@ -79,7 +83,7 @@ module Api
 
           if sale = Spree::Sale.last_sitewide_for(currency: spree_product.currency).presence
               sale_price = sale.apply(spree_product.price_in(current_site_version.currency)).amount + 
-              ((fabric_product && !fabric_product.recommended) ? sale.apply(fabric_product.fabric.price_in(current_site_version.currency)) : 0) +
+              ((fabric_product && !fabric_product.recommended) ? fabric_product.fabric.price_in(current_site_version.currency) : 0) +
               (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
           end
 
