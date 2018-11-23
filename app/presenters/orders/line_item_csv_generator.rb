@@ -154,7 +154,7 @@ module Orders
             line.total_items,
             line.completed_at_date,
             line.making_option,
-            lip&.projected_delivery_date&.to_date,
+            lip&.ship_by_date&.to_date,
             # line.delivery_date,
             line.tracking_number,
             line.shipment_date,
