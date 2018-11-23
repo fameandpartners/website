@@ -45,6 +45,9 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     @cart.data.products.forEach(@initCheckbox)
 
   initCheckbox: (p, i) ->
+    if p.making_options.length == 0
+      return
+    
     $selection = $("#delivery_time_" + i + '_' + p.making_options[0].id)
     $selection.attr('checked', true)
     $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
