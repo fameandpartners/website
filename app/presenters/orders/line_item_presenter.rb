@@ -72,7 +72,7 @@ module Orders
 
     def projected_delivery_date
       return unless order.completed?
-      @projected_delivery_date ||= @item.delivery_period_policy.ship_by_date
+      @projected_delivery_date ||= @item.delivery_period_policy.delivery_date
     end
 
     def fabrication_status

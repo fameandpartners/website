@@ -1887,7 +1887,9 @@ CREATE TABLE public.making_options (
     percent_price_aud numeric(8,2),
     "position" integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    delivery_time_days integer,
+    cny_delivery_time_days integer
 );
 
 
@@ -10472,3 +10474,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181120231445');
 INSERT INTO schema_migrations (version) VALUES ('20181121020632');
 
 INSERT INTO schema_migrations (version) VALUES ('20181121225145');
+
+INSERT INTO schema_migrations (version) VALUES ('20181123002244');
