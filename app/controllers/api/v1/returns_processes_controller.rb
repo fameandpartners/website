@@ -46,6 +46,7 @@ module Api
 
         if @user.nil?
           error_response(:RETRY, :USER_NOT_FOUND)
+          return
         end
 
         if has_incorrect_params?
@@ -54,8 +55,8 @@ module Api
         end
 
         request_object = {
-          "order_id": params['order_id']&.to_i,
-          "line_items": params['line_items'].values
+          "order_id": params[:order_id]&.to_i,
+          "line_items": params[:line_items]
         }
 
         if has_invalid_order_id?(request_object[:order_id])

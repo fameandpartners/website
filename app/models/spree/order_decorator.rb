@@ -54,10 +54,6 @@ Spree::Order.class_eval do
     !(order_return_requested? || has_unshipped_line_item)
   end
 
-  def return_eligible?
-    self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
-  end
-
   def has_unshipped_line_item
     line_items.any? { |li| !Fabrication.for(li).shipped? }
   end
@@ -388,13 +384,17 @@ Spree::Order.class_eval do
       ( self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"} )
   end
 
+  def return_eligible?
+    self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+  end
+
   def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
     json['final_return_by_date'] = (delivery_policy.delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+    json['return_eligible'] = self.return_eligible?
 
     # TODO remove me later
     # make order R823608780 return eligible per request from CS
