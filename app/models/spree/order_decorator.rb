@@ -355,12 +355,14 @@ Spree::Order.class_eval do
   end
 
   def as_json(options = { })
+    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).max
+
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
-    json['final_return_by_date'] = (delivery_policy.delivery_date + 60).strftime("%m/%d/%y")
+    json['final_return_by_date'] = (max_delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= delivery_policy.delivery_date
+    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date
 
     # TODO remove me later
     # make order R823608780 return eligible per request from CS

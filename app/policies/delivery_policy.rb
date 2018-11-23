@@ -15,9 +15,9 @@ module Policies
       return nil unless making_option
 
       if Features.active?(:cny_delivery_delays)
-        making_option.cny_delivery_time_days.days.after(from_date)
+        from_date + making_option.cny_delivery_time_days.days
       else
-        making_option.delivery_time_days.days.after(from_date)
+        from_date + making_option.delivery_time_days.days
       end
     end
 
