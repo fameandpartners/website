@@ -126,7 +126,7 @@ module Products
         pid,
         product.category.category,
         product.category.subcategory,
-        product.making_options.map(&:making_option).map(&:code),
+        product.making_options.active.map(&:making_option).map(&:code),
         ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
         color.name,
         fabric&.name,

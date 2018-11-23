@@ -432,7 +432,7 @@ module Api
             sizeChart: product.size_chart,
           },
           components: [
-            fabrics.empty? ? colors.map {|c| map_color(c, product_fabric) }  : fabrics.map { |f| map_fabric(product, f) },
+            fabrics.empty? ? colors.map {|c| map_color(product, c, product_fabric) }  : fabrics.map { |f| map_fabric(product, f) },
 
             sizes.map {|s| map_size(s) },
 
