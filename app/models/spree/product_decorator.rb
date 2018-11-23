@@ -266,7 +266,8 @@ Spree::Product.class_eval do
   end
 
   def self.has_render?(product)
-    is_new_product?(product.master.sku)
+    render_skus = ['fpg1001', 'fpg1002', 'fpg1003', 'fpg1004', 'fpg1005', 'fpg1006', 'sw']
+    render_skus.include?(product.master.sku)
   end
 
   def self.use_new_pdp?(product_or_line_item)
