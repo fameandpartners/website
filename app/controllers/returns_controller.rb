@@ -1,14 +1,5 @@
 class ReturnsController < ApplicationController
   respond_to :json
-  layout 'returns/application'
-
-  def main
-    render 'layouts/returns/main'
-  end
-
-  def guest
-    render 'layouts/returns/guest'
-  end
 
   def lookup
   	id = params[:id]
