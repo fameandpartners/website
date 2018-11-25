@@ -398,8 +398,9 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Returns
-  get '/view-orders'    => 'returns#main', as: 'user_orders'
+  # get '/view-orders'    => 'returns#main', as: 'user_orders'
   # get '/guest-returns'  => 'returns#guest'
+  get '/view-orders' => redirect('/orders')
   get '/guest-returns' => redirect('/return/guest')
   get '/order-lookup/'  => 'returns#lookup'
 
