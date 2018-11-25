@@ -11,7 +11,6 @@ module Products
     :sale,
     :query_string,
     :order,
-    :fast_making,
     :details,
     :site_version) do
 

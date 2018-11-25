@@ -44,7 +44,7 @@ class ShippingStatePresenter
   private
 
   def expected_delivery_date
-    shippable_item.projected_delivery_date.to_date
+    shippable_item.ship_by_date.to_date
   end
 
   def actual_delivery_date_or_now

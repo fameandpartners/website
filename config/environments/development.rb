@@ -11,7 +11,7 @@ FameAndPartners::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false

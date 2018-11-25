@@ -24,7 +24,6 @@ module Orders
                    :site_version,
                    :state,
                    :to_param,
-                   :has_fast_making_items?,
                    :display_promotion_total,
                    :shipment,
                    :completed?,
@@ -63,24 +62,8 @@ module Orders
       items.map(&decorate)
     end
 
-    def fast_making_line_items
-      fast_making_items.map(&decorate)
-    end
-
-    def standard_making_line_items
-      standard_making_items.map(&decorate)
-    end
-
     private def decorate
       -> (line_item) { LineItemPresenter.new(line_item, self) }
-    end
-
-    def fast_making_items
-      @fast_making_items ||= items.fast_making
-    end
-
-    def standard_making_items
-      @standard_making_items ||= items.standard_making
     end
 
     def one_item?
@@ -94,18 +77,7 @@ module Orders
     def country_code
       spree_order.shipping_address.country.iso
     end
-
-    def projected_delivery_date
-      if  spree_order.completed?
-        spree_order.projected_delivery_date.try(:to_date) || \
-          Policies::OrderProjectedDeliveryDatePolicy.new(spree_order).delivery_date.try(:to_date)
-      end
-    end
-
-    def expected_delivery_date
-      projected_delivery_date.try(:strftime, '%a, %d %b %Y')
-    end
-
+    
     def promo_codes
       @promo_codes ||= \
         spree_order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect do |adj|
@@ -115,10 +87,6 @@ module Orders
 
     def taxes
       spree_order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
-    end
-
-    def fast_making_promo?
-      promo_codes.any?{ |code| code.downcase.include?('birthdaygirl') }
     end
 
     def promotion?

@@ -68,10 +68,6 @@ module Marketing
       order.try(:billing_address).try(:phone).present?
     end
 
-    def projected_delivery_date
-      order.projected_delivery_date.try(:strftime, '%a, %d %b %Y')
-    end
-
     def promotion?
       promo_codes.any?
     end

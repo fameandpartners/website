@@ -1,21 +1,18 @@
-= f.hidden_field :currency, value: ProductMakingOption::DEFAULT_CURRENCY
-
 .new-product-step
-  = f.field_container :option_type do
-    = f.label :option_type, t(:option_type)
+  = f.field_container :making_option do
+    = f.label :making_option, t(:making_option)
     br
-    = f.select :option_type, options_from_collection_for_select(ProductMakingOption::OPTION_TYPES, :to_s, :humanize)
-    = f.error_message_on :option_type
+    = f.collection_select(:making_option_id, MakingOption.all, :id, :code, {}, disabled: @product_making_option.present?)
+    = f.error_message_on :making_option
+
+  = f.field_container :default, class: ['checkbox'] do
+    = f.label :default do
+      = t(:default)
+    = f.check_box :default, class: 'checkbox'
+    = f.error_message_on :default
 
   = f.field_container :active, class: ['checkbox'] do
     = f.label :active do
       = t(:active)
     = f.check_box :active, class: 'checkbox'
     = f.error_message_on :active
-
-  = f.field_container :price do
-    = f.label :price do
-      = t(:price)
-    br
-    = f.text_field :price, class: 'price'
-    = f.error_message_on :price

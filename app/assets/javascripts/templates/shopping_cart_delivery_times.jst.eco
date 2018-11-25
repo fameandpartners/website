@@ -26,48 +26,26 @@
               data-line-item-id="<%= product.line_item_id %>"
               data-line-item-index="<%= i %>"
             >
-
-              <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
-                <div class="Radio">
-                  <input
-                    type="radio"
-                    id="delivery_time_normal_<%= i %>"
-                    class="js-remove-making-option"
-                    name="delivery_time_<%=i%>"
-                  >
-                    <label for="delivery_time_normal_<%= i %>">
-                      <div class="delivery-time-label-desktop visible-lg visible-md visible-sm">
-                        Standard: <span class="delivered-in-wrapper">Estimated Delivery in <%= product.delivery_period %></span>
-                      </div>
-                      <div class="delivery-time-label-mobile visible-xs">
-                        Standard: <span class="price-wrapper">FREE</span>
-                        <div class="delivered-in-wrapper">- Estimated Delivery in <%= product.delivery_period %></div>
-                      </div>
-                    </label>
-                    <div class="price-wrapper hidden-xs">FREE</div>
-                </div>
-              </div>
-
               <% for mo in product.available_making_options: %>
                 <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
                   <div class="Radio">
                     <input
                       type="radio"
-                      id="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%= i %>"
+                      id="delivery_time_<%=i%>_<%= mo.id %>"
                       class="js-create-making-option"
                       name="delivery_time_<%=i%>"
                       value="<%=mo.id%>"
                     >
-                      <label for="delivery_time_<%= mo.name.toLowerCase().replace(" ", "") %>_<%=i%>">
+                      <label for="delivery_time_<%=i%>_<%= mo.id %>">
                         <div class="delivery-time-label-desktop visible-lg visible-md visible-sm">
                           <%= mo.name %>: <span class="delivered-in-wrapper"><%= mo.description %></span>
                         </div>
                         <div class="delivery-time-label-mobile visible-xs">
-                          <%= mo.name %>: <span class="price-wrapper"><%= mo.display_discount %></span>
+                          <%= mo.name %>: <span class="price-wrapper"><%= mo.display_price %></span>
                           <div class="delivered-in-wrapper">- <%= mo.description %></div>
                         </div>
                       </label>
-                      <div class="price-wrapper hidden-xs"><%= mo.display_discount %></div>
+                      <div class="price-wrapper hidden-xs"><%= mo.display_price %></div>
                   </div>
                 </div>
               <% end %>

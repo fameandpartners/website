@@ -15,17 +15,7 @@
 
 = form_for @product_making_option, url: admin_product_making_option_path(@product, @product_making_option) do |f|
   fieldset.no-border-top
-    .row
-      .four.columns
-        .field
-          = f.label :price, 'Price'
-          = f.text_field :price
-
-      .four.columns
-        .field.checkbox
-          label
-            = f.check_box :active
-            '  Active
+    = render :partial => 'form', :locals => { :f => f }
 
     .clear
 

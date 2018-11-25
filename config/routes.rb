@@ -488,18 +488,4 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-  mount Revolution::Engine => '/'
-
-end
-
-# NOTE: Alexey Bobyrev 14 Feb 2017
-# Method append used here to handle all request directly right after defined ones (including engines)
-FameAndPartners::Application.routes.append do
-  # NOTE: Alexey Bobyrev 14 Jan 2017
-  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-
-  # Added in something to explicity exclude devise routes from going to contentful
-  match '*path', to: 'contentful#main', constraints: lambda { |request| (request.path !~ /auth/) }
-
-  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

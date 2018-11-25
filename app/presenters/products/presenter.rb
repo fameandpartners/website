@@ -8,12 +8,11 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :super_fast_making_option_id, :making_option_id, :fit, :size,
-                  :fast_delivery
+                  :size_chart, :making_option_id, :fit, :size
 
     attr_reader   :product_type
 
-    attr_writer :fast_making, :meta_description
+    attr_writer :meta_description
 
     def initialize(opts)
       opts.each do |k, v|
@@ -24,7 +23,7 @@ module Products
     module CollectionDressPresenter
       # Provide compatibility for old OpenStruct based presenters
       def to_h
-        [:id, :name, :color, :images, :price, :discount, :fast_making, :fast_delivery].map { |key|
+        [:id, :name, :color, :images, :price, :discount].map { |key|
           [key , send(key)]
         }.to_h
       end
@@ -128,29 +127,8 @@ module Products
     end
 
     def making_options
-      if fast_making_disabled?
-        available_options.making_options.reject {|mo| mo.option_type.to_s.inquiry.fast_making? }
-      else
-        available_options.making_options
-      end
+      available_options.making_options
     end
-
-    def fast_making_disabled?
-      Features.active?(:getitquick_unavailable)
-    end
-
-    def fast_making
-      return false if fast_making_disabled?
-      @fast_making
-    end
-
-    def super_fast_making
-      return false if fast_making_disabled?
-      @super_fast_making
-    end
-
-    alias_method :fast_making?, :fast_making
-    alias_method :super_fast_making?, :super_fast_making
 
     def default_color
       default_color_options.first&.name

@@ -134,17 +134,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
-  deleteMakingOption: (line_item_id, making_option_id) ->
-    @trigger('requestProcessing')
-    $.ajax(
-      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
-      type: "DELETE"
-      dataType: "json"
-    ).success(
-      @updateData
-    ).error( () =>
-      @trigger('error')
-    )
 
   createMakingOption: (line_item_id, making_option_id) ->
     @trigger('requestProcessing')
@@ -164,28 +153,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       type: "PUT"
       dataType: "json",
       data: data
-    ).success(
-      @updateData
-    ).error( () =>
-      @trigger('error')
-    )
-
-  removeProductCustomization: (line_item_id, customization_id) ->
-    $.ajax(
-      url: "/user_cart/products/#{line_item_id}/customizations/#{customization_id}"
-      type: "DELETE"
-      dataType: "json"
-    ).success(
-      @updateData
-    ).error( () =>
-      @trigger('error')
-    )
-
-  removeProductMakingOption: (line_item_id, making_option_id) ->
-    $.ajax(
-      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
-      type: "DELETE"
-      dataType: "json"
     ).success(
       @updateData
     ).error( () =>

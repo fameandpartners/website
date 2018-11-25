@@ -99,6 +99,8 @@ class ProductImages
   def read(options = {})
     if product.has_render?
       get_render_image(options)
+    elsif product.is_new_product?
+      default_image('/assets/noimage/customdress.png')
     else
       filter(options).first || read_all(options).first || default_image
     end
