@@ -33,7 +33,6 @@ gem 'customerio', '~> 1.0.0'
 
 # Engines
 path 'engines' do
-  gem 'revolution'
   gem 'admin_ui'
   gem 'fame_favicon'
   gem 'inspinia-rails'
@@ -171,6 +170,3 @@ end
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
 gem 'mailchimp-api', require: 'mailchimp'
-
-# Contentful
-gem 'contentful'
