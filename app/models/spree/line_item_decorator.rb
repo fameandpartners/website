@@ -185,7 +185,9 @@ Spree::LineItem.class_eval do
   end
 
   def window_closed?
-    60.days.ago >= period_in_business_days(self.delivery_period).business_days.after(self.order.completed_at)
+    delivery_date = self.delivery_period_policy.delivery_date
+
+    !delivery_date || 60.days.ago >= delivery_date
   end
 
   def in_batch?
@@ -252,28 +254,6 @@ Spree::LineItem.class_eval do
   def recommended_fabric?
       fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
       fp&.recommended
-  end
-
-  private
-
-  def period_in_business_days(period)
-      value = major_value_from_period(period)
-      period_units(period) == 'weeks' ? value * 5 : value
-  end
-
-  # returns days/weeks from string
-  def period_units(period)
-    period.match(/(?<=\d\s)[\w\s]+$/).to_s
-  end
-
-  # returns the larger number from the range in given string
-  def major_value_from_period(period)
-    period.match(/\d+(?=\s+\w+|$)/).to_s.to_i
-  end
-
-  # returns small number
-  def minor_value_from_period(period)
-    period.match(/\d+/).to_s.to_i
   end
 
 end
