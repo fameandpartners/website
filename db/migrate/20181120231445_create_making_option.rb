@@ -42,12 +42,12 @@ class CreateMakingOption < ActiveRecord::Migration
     end
 
 
-    Spree::Taxon.find_by_permalink("6-10-week-delivery").products.each do |p|
+    Spree::Taxon.find_by_permalink("6-10-week-delivery")&.products.each do |p|
       default_pmo = p.making_options.where(default: true).first
       default_pmo.making_option = MakingOption.find_or_create_by_code('M10W')
       default_pmo.save!
     end
-    
+
 
     rename_column :product_making_options, :option_type, :old_option_type
     rename_column :product_making_options, :price, :old_price
@@ -56,4 +56,3 @@ class CreateMakingOption < ActiveRecord::Migration
     rename_column :spree_taxons, :delivery_period, :old_delivery_period
   end
 end
- 
