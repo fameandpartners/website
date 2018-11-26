@@ -105,7 +105,7 @@ module Orders
 
       def delivery_date
         return unless line['completed_at_date'].present?
-        line.delivery_period_policy.ship_by_date
+        item.delivery_period_policy.ship_by_date
       end
 
       def return_request
