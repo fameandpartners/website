@@ -176,11 +176,8 @@ class Repositories::CartProduct
 
     def line_item_fabric
       if line_item.fabric
-        if line_item.recommended_fabric?
-          fabric_price = 0.0
-        else
-          fabric_price = line_item.fabric.price_in(line_item.currency)
-        end
+        fp = FabricsProduct.where(fabric_id: line_item.fabric.id, product_id: self.product.id).first
+        fabric_price =  fp.price_in(line_item.currency)
 
         {
         display_price: Spree::Price.new(amount: fabric_price, currency: line_item.currency).display_price,
@@ -189,7 +186,6 @@ class Repositories::CartProduct
         name: line_item.fabric.presentation,
         fabric_name: line_item.fabric.name,
         value: line_item.fabric.option_fabric_color_value.value,
-        custom_fabric: !line_item.recommended_fabric?
         }
       else
         nil

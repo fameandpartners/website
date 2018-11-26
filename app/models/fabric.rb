@@ -1,5 +1,5 @@
 class Fabric < ActiveRecord::Base
-  attr_accessible :name, :presentation, :price_aud, :price_usd, :production_code, :image
+  attr_accessible :name, :presentation, :production_code, :image
   belongs_to :option_value,
  	     class_name: 'Spree::OptionValue'
 
@@ -27,14 +27,6 @@ class Fabric < ActiveRecord::Base
       all: '-sampling-factor 4:2:0 -strip -quality 90 -interlace JPEG -colorspace sRGB'
     },
     path: 'spree/swatches/:id/:style/:basename.:extension'
-
-  def price_in(currency)
-    if currency.downcase == 'aud'
-      return self.price_aud.to_f
-    else
-      return self.price_usd.to_f
-    end
-  end
 
   def color_groups
     @color_groups = self.option_value.option_values_groups.pluck(:presentation)

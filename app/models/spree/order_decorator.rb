@@ -231,8 +231,11 @@ Spree::Order.class_eval do
 
   def get_prices_amount(variant, currency)
     price  = variant.price_in(currency)
-    prices = Products::Presenter.new(product: variant.product, price: price).prices
-    prices.slice(:sale_amount, :original_amount)
+
+    {
+      sale_amount: price.amount,
+      original_amount: price.apply(variant.product.discount).amount
+    }
   end
 
   def log_confirm_email_error(error = nil)

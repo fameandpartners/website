@@ -1019,8 +1019,8 @@ CREATE TABLE public.fabrics (
     id integer NOT NULL,
     name character varying(255),
     presentation character varying(255),
-    price_aud character varying(255),
-    price_usd character varying(255),
+    old_price_aud character varying(255),
+    old_price_usd character varying(255),
     material character varying(255),
     image_url character varying(255),
     option_value_id integer,
@@ -1064,7 +1064,9 @@ CREATE TABLE public.fabrics_products (
     product_id integer,
     recommended boolean,
     description character varying(255),
-    active boolean DEFAULT true
+    active boolean DEFAULT true,
+    price_aud numeric(8,2),
+    price_usd numeric(8,2)
 );
 
 
@@ -10476,3 +10478,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181121020632');
 INSERT INTO schema_migrations (version) VALUES ('20181121225145');
 
 INSERT INTO schema_migrations (version) VALUES ('20181123002244');
+
+INSERT INTO schema_migrations (version) VALUES ('20181126001414');
