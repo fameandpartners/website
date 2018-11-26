@@ -4,12 +4,8 @@
       = link_to collection_product_path(product) do
         = image_tag product.image.large, class: 'cart-item-image img-responsive', alt: product.name
 
-        // Price Drop AU ribbon
-        - if price_drop_au_item_check(product.sku)
-          = render partial: 'shared/redesign/ribbon_price_drop', locals: {product: product}
-
         // Express Making ribbon if this product is not a "Price Drop (AU)" item
-        - if product.making_options.present? && !price_drop_au_item_check(product.sku)
+        - if product.making_options.present?
           = render 'shared/redesign/ribbon_fast_making'
 
   .cart-item-info.col-xs-7

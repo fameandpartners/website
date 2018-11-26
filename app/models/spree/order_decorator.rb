@@ -195,15 +195,9 @@ Spree::Order.class_eval do
 
     if prices_amount[:sale_amount].present?
       current_item.price = prices_amount[:sale_amount]
-      # current_item.old_price = prices_amount[:original_amount]
+      current_item.old_price = prices_amount[:original_amount]
     else
       current_item.price = prices_amount[:original_amount]
-    end
-
-    # hack for swatches
-    if variant.product&.category&.category == "Sample"
-      current_item.stock = false
-      current_item.old_price = current_item.price
     end
 
     self.line_items << current_item
@@ -220,7 +214,7 @@ Spree::Order.class_eval do
 
     if prices_amount[:sale_amount].present?
       current_item.price = prices_amount[:sale_amount]
-      # current_item.old_price = prices_amount[:original_amount]
+      current_item.old_price = prices_amount[:original_amount]
     else
       current_item.price = prices_amount[:original_amount]
     end
@@ -233,8 +227,8 @@ Spree::Order.class_eval do
     price  = variant.price_in(currency)
 
     {
-      sale_amount: price.amount,
-      original_amount: price.apply(variant.product.discount).amount
+      sale_amount: price.apply(variant.product.discount).amount,
+      original_amount: price.amount
     }
   end
 
@@ -362,7 +356,7 @@ Spree::Order.class_eval do
 
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
-    json['final_return_by_date'] = (max_delivery_date + 60).strftime("%m/%d/%y")
+    json['final_return_by_date'] = max_delivery_date && (max_delivery_date + 60).strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
     json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date

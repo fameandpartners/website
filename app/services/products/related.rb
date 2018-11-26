@@ -13,7 +13,7 @@ module Products
     end
 
     def discount
-      Repositories::Discount.get_product_discount(product.id)
+      product.discount
     end
 
     def price

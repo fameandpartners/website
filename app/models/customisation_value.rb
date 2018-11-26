@@ -82,7 +82,6 @@ class CustomisationValue < ActiveRecord::Base
   end
 
   def discount
-    return @discount if instance_variable_defined?('@discount')
-    @discount = Repositories::Discount.read(self.class, self.id)
+    @discount ||= discounts.active.first
   end
 end
