@@ -29,6 +29,5 @@ class ClearCacheWorker
 
     def update_repositories
       Repositories::Taxonomy.read_all(force: true).size
-      Repositories::Discount.discounts(force: true).size
     end
 end

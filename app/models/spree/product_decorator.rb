@@ -254,7 +254,7 @@ Spree::Product.class_eval do
   alias_method :is_active?, :active?
 
   def discount
-    @discount ||= Repositories::Discount.get_product_discount(self.id)
+    @discount ||= discounts.active.first
   end
 
   def has_render?

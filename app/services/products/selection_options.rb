@@ -61,7 +61,7 @@ module Products
     private
 
       def customisations_available?
-        product.discount.blank? || product.discount.customisation_allowed
+        product.discount.blank? || product.discount.sale&.customisation_allowed
       end
       alias_method :extra_sizes_available?, :customisations_available?
 

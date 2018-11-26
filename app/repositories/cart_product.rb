@@ -43,7 +43,6 @@ class Repositories::CartProduct
         image: product_image,
         message: line_item.stock.nil? ? nil : 'Fabric swatches are final sale. US shipping only',
         delivery_period: line_item.delivery_period_policy.delivery_period, #,
-        price_drop_au_product: price_drop_au_product?,
         fabric: line_item_fabric,
         )
       result.size  = size
@@ -58,15 +57,6 @@ class Repositories::CartProduct
   # cache_results :read
 
   private
-
-    def price_drop_au_product?
-      if line_item.currency == "AUD" && Features.active?(:price_drop_au)
-        current_item_sku = product.sku.downcase
-        price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
-        price_drop_au_items_array.map!(&:downcase)
-        price_drop_au_items_array.include?(current_item_sku)
-      end
-    end
 
     def cache_key
       line_item.cache_key
@@ -176,11 +166,8 @@ class Repositories::CartProduct
 
     def line_item_fabric
       if line_item.fabric
-        if line_item.recommended_fabric?
-          fabric_price = 0.0
-        else
-          fabric_price = line_item.fabric.price_in(line_item.currency)
-        end
+        fp = FabricsProduct.where(fabric_id: line_item.fabric.id, product_id: self.product.id).first
+        fabric_price =  fp.price_in(line_item.currency)
 
         {
         display_price: Spree::Price.new(amount: fabric_price, currency: line_item.currency).display_price,
@@ -189,7 +176,6 @@ class Repositories::CartProduct
         name: line_item.fabric.presentation,
         fabric_name: line_item.fabric.name,
         value: line_item.fabric.option_fabric_color_value.value,
-        custom_fabric: !line_item.recommended_fabric?
         }
       else
         nil

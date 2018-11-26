@@ -103,8 +103,8 @@ module Products
       fabric_price_in_au = 0
 
       if product_fabric_value
-        fabric_price_in_us = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@us_site_version.currency) : 0
-        fabric_price_in_au = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@au_site_version.currency) : 0
+        fabric_price_in_us = product_fabric_value.price_in(@us_site_version.currency)
+        fabric_price_in_au = product_fabric_value.price_in(@au_site_version.currency)
       elsif product_color_value
         fabric_price_in_us = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0

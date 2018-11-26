@@ -36,8 +36,7 @@ Spree::OptionValue.class_eval do
 
   # discount
   def discount
-    return @discount if instance_variable_defined?('@discount')
-    @discount = Repositories::Discount.read(self.class, self.id)
+    @discount ||= discounts.active.first
   end
 
   # some good ole hackery for swatches

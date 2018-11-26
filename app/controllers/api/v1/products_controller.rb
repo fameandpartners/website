@@ -78,12 +78,12 @@ module Api
           end
 
           price = spree_product.price_in(current_site_version.currency).amount + 
-            ((fabric_product && !fabric_product.recommended) ? fabric_product.fabric.price_in(current_site_version.currency) : 0) +
+            (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
             (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
 
-          if sale = Spree::Sale.last_sitewide_for(currency: spree_product.currency).presence
-              sale_price = sale.apply(spree_product.price_in(current_site_version.currency)).amount + 
-              ((fabric_product && !fabric_product.recommended) ? fabric_product.fabric.price_in(current_site_version.currency) : 0) +
+          if spree_product.discount
+              sale_price = spree_product.price_in(current_site_version.currency).apply(spree_product.discount).amount + 
+              (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
               (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
           end
 
@@ -699,11 +699,11 @@ module Api
           title: f.fabric.presentation,
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
-          price: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
-          strikeThroughPrice: f.recommended ? 0 : (f.fabric.price_in(current_site_version.currency) * 100).to_i,
+          price: (f.price_in(current_site_version.currency) * 100).to_i,
+          strikeThroughPrice: (f.price_in(current_site_version.currency) * 100).to_i,
           prices: {
-            'en-AU' => f.recommended ? 0 : (f.fabric.price_in('AUD') * 100).to_i,
-            'en-US' => f.recommended ? 0 : (f.fabric.price_in('USD') * 100).to_i,
+            'en-AU' => (f.price_in('AUD') * 100).to_i,
+            'en-US' => (f.price_in('USD') * 100).to_i,
           },
           isProductCode: true,
           isRecommended: f.recommended,
