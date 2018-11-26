@@ -36,13 +36,13 @@ class CreateMakingOption < ActiveRecord::Migration
     ProductMakingOption.where(option_type: 'super_fast_making').update_all(making_option_id: MakingOption.find_by_code('M10D').id)
 
     grouped = ProductMakingOption.where(active: true).group_by{|pmo| [pmo.product_id, pmo.making_option_id] }
-    grouped.values.each do |duplicates|
+    grouped&.values&.each& do |duplicates|
       duplicates.shift
       duplicates.each{|double| double.destroy}
     end
 
 
-    Spree::Taxon.find_by_permalink("6-10-week-delivery")&.products.each do |p|
+    Spree::Taxon.find_by_permalink("6-10-week-delivery")&.products&.each& do |p|
       default_pmo = p.making_options.where(default: true).first
       default_pmo.making_option = MakingOption.find_or_create_by_code('M10W')
       default_pmo.save!
