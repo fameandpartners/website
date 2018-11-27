@@ -79,7 +79,9 @@ FameAndPartners::Application.routes.draw do
   get '/dresses' => 'noop#noop', as: :dresses
   get '/dresses' => 'noop#noop', as: :collection
   get '/faqs' => 'noop#noop', as: :faqs
-  get '/about' => 'noop#noop', as: :why_us
+  get '/why-us' => 'noop#noop', as: :why_us
+  get '/about' => 'noop#noop', as: :about_us
+
 
 
 

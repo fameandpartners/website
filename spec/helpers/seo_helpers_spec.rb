@@ -41,7 +41,7 @@ describe 'Seo Helpers', type: :helper do
     end
 
     context 'product canonical' do
-      let(:product) { instance_double(Products::Presenter, name: 'fancy-dress') }
+      let(:product) { instance_double(Spree::Product, name: 'fancy-dress') }
 
       before do
         helper.instance_variable_set(:@product, product)

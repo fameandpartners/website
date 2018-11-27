@@ -6,7 +6,8 @@ module Marketing
       describe LineItem, type: :presenter do
         let(:taxon) { create(:taxon, name: 'Jeans') }
         let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
-        let(:fabric) { double(:fabric, name: 'FABRICNAME', price_in: 5, id: 1) }
+        let(:fabric) { double(:fabric, name: 'FABRICNAME', id: 1) }
+        let(:fabric_product) { double(:fabric_product, fabric: fabric, price_in: 5) }
         let(:variant) { create(:dress_variant, product: product) }
         let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11, id: 1) }
 
@@ -17,6 +18,7 @@ module Marketing
         describe '#body' do
           before(:each) do
             allow(line_item).to receive(:fabric).and_return(fabric)
+            allow(FabricsProduct).to receive(:find_by_fabric_id_and_product_id).and_return(fabric_product)
           end
 
           context 'given a spree line item' do
@@ -28,7 +30,7 @@ module Marketing
                 quantity:     3,
                 total_amount: 48.33,
                 sku:          'ProductSKU~FABRICNAME',
-                price:        198.37,
+                price:        16.11,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',
                 image_url:    'noimage/product.png', # Repositories::LineItemImages responsibility. Default fallback result.

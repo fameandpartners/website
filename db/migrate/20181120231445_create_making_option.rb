@@ -42,7 +42,7 @@ class CreateMakingOption < ActiveRecord::Migration
     end
 
 
-    Spree::Taxon.find_by_permalink("6-10-week-delivery").products.each do |p|
+    Spree::Taxon.find_by_permalink("6-10-week-delivery")&.products&.each do |p|
       default_pmo = p.making_options.where(default: true).first
       default_pmo.making_option = MakingOption.find_or_create_by_code('M10W')
       default_pmo.save!

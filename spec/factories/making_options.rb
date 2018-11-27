@@ -1,14 +1,15 @@
 
 FactoryGirl.define do
+  factory :making_option, class: MakingOption do
+    flat_price_usd 10
+    flat_price_aud 15
+  end
+
   factory :product_making_option, class: ProductMakingOption do
-    price 10
-    currency 'USD'
-    option_type 'fast_making'
+    making_option
   end
 
   factory :line_item_making_option, class: LineItemMakingOption do |f|
-    product_making_option do
-      ProductMakingOption.where(option_type: 'fast_making').first || FactoryGirl.create(:product_making_option, option_type: 'fast_making')
-    end
+    product_making_option
   end
 end

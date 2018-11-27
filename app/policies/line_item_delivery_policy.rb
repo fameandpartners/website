@@ -17,6 +17,10 @@ module Policies
       ship_by_date_for_making_option(@line_item.order.completed_at || Time.now, @making_option)
     end
 
+    def code
+      @making_option.code
+    end
+
     def delivery_date
       # line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days'
 

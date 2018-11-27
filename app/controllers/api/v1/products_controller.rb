@@ -151,7 +151,6 @@ module Api
 
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
-        taxons = Repositories::Taxonomy.taxons
         color_names = filter
           .select { |f| color_group_names.include?(f) }
         taxon_names = filter
@@ -287,7 +286,7 @@ module Api
               groupId: "style",
               name: "Style",
               multiselect: true,
-              facets: Repositories::Taxonomy.collect_filterable_taxons.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
+              facets: Spree::Taxon.filterable.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
                 {
                   "facetId": taxon.permalink,
                   "title": taxon.name,
