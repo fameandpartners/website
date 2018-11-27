@@ -22,7 +22,7 @@ module Marketing
         end
 
         def price
-          line_item.variant.price.to_f
+          line_item.price.to_f
         end
 
         def product_name

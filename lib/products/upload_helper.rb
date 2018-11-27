@@ -101,7 +101,7 @@ module Products
 
       product.assign_attributes(attributes, without_protection: true)
 
-      product.hidden = true #MIGHT MOVE THIS
+      product.hidden = !prod[:details][:active]
       product.available_on = product.created_at
 
       product.save!

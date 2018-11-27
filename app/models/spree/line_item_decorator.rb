@@ -51,7 +51,7 @@ Spree::LineItem.class_eval do
     end
 
     if fabric.present?
-      fp = FabricsProduct.where(fabric_id: self.fabric_id, product_id: self.product.id).first
+      fp = FabricsProduct.find_by_fabric_id_and_product_id(self.fabric_id, self.product.id)
       total_price += fp.price_in(self.currency)
     end
 

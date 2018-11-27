@@ -2302,6 +2302,7 @@ CREATE TABLE public.newgistics_schedulers (
 --
 
 CREATE SEQUENCE public.newgistics_schedulers_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2369,6 +2370,7 @@ CREATE TABLE public.old_variant_taxons (
 --
 
 CREATE SEQUENCE public.old_variant_taxons_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE

@@ -11,7 +11,6 @@ class ClearCacheWorker
     @silent = !! silent
     update_color_variants_elastic_index
     reset_cache
-    update_repositories
   end
 
   def silent?
@@ -25,9 +24,5 @@ class ClearCacheWorker
 
     def reset_cache
       Rails.cache.clear
-    end
-
-    def update_repositories
-      Repositories::Taxonomy.read_all(force: true).size
     end
 end
