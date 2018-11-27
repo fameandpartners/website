@@ -352,7 +352,7 @@ Spree::Order.class_eval do
   end
 
   def return_eligible?
-    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).max
+    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
 
     self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date
   end
