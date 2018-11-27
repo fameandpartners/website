@@ -227,7 +227,8 @@ Spree::Order.class_eval do
     price  = variant.price_in(currency)
 
     {
-      sale_amount: price.apply(variant.product.discount).amount,
+      # sale_amount: price.apply(variant.product.discount).amount,
+      # TODO fix correct pricing (this doesn't include fabric etc)
       original_amount: price.amount
     }
   end

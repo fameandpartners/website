@@ -48,7 +48,6 @@ module Search
           bool do
             filter {term 'product.is_deleted' => false}
             filter {term 'product.is_hidden' => false}
-            filter {term 'product.is_outerwear' => show_outerwear}
             filter {term 'product.in_stock' => true}
 
             if fast_making.present?
@@ -96,24 +95,12 @@ module Search
               end
             end
 
-            if discount.present?
-              if discount == :all?
-                should do
-                  term range 'product.discount' => { :gt => 0 }
-                end
-              else
-                must do
-                  term 'product.discount' => discount.to_i
-                end
-              end
-            end
-
             if price_mins.present? || price_maxs.present?
               filter do
                 bool do
                   price_mins.zip(price_maxs).map do |min, max|
                     should do
-                      range "sale_prices.#{currency}" => {gte: min, lte: max}
+                      range "prices.#{currency}" => {gte: min, lte: max}
                     end
                   end
                 end
@@ -204,7 +191,7 @@ module Search
         if include_aggregation_prices
           aggregation :prices do
             range do
-              field "sale_prices.#{currency}"
+              field "prices.#{currency}"
               key   '0-199', from: 0, to: 199
               key   '200-299', from: 200, to: 299
               key   '300-399', from: 300, to: 399

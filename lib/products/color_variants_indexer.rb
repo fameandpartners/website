@@ -220,11 +220,11 @@ module Products
             }
           end,
 
-          prices: {
+          non_sale_prices: discount > 0 ? {
             aud:  product_price_in_au.amount.to_f + fabric_price_in_au,
             usd:  product_price_in_us.amount.to_f + fabric_price_in_us
-          },
-          sale_prices:  {
+          } : nil,
+          prices:  {
             aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au,
             usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us
           }
