@@ -35,7 +35,7 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def final_return_by_date
-    (object.final_return_by_date&).to_time.iso8601
+    (object.final_return_by_date).to_time.iso8601
   end
 
 end
