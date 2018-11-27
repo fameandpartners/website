@@ -195,7 +195,7 @@ Spree::Order.class_eval do
 
     if prices_amount[:sale_amount].present?
       current_item.price = prices_amount[:sale_amount]
-      current_item.old_price = prices_amount[:original_amount]
+      # current_item.old_price = prices_amount[:original_amount] disabled because it doesnt include customisations
     else
       current_item.price = prices_amount[:original_amount]
     end
@@ -214,7 +214,7 @@ Spree::Order.class_eval do
 
     if prices_amount[:sale_amount].present?
       current_item.price = prices_amount[:sale_amount]
-      current_item.old_price = prices_amount[:original_amount]
+      # current_item.old_price = prices_amount[:original_amount] disabled because it doesnt include customisations
     else
       current_item.price = prices_amount[:original_amount]
     end
@@ -227,8 +227,7 @@ Spree::Order.class_eval do
     price  = variant.price_in(currency)
 
     {
-      # sale_amount: price.apply(variant.product.discount).amount,
-      # TODO fix correct pricing (this doesn't include fabric etc)
+      sale_amount: price.apply(variant.product.discount).amount,
       original_amount: price.amount
     }
   end
