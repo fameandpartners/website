@@ -232,14 +232,11 @@ module Api
               pid: r['_source']['product']['pid'],
               productId: r['_source']['product']['sku'],
               name: r['_source']['product']['name'],
-              strikeThroughPrice: r['_source']['prices'] && {
-                "en-AU": r['_source']['prices']['aud'] * 100,
-                "en-US": r['_source']['prices']['usd'] * 100
-              },
-              price: r['_source']['sale_prices'] && {
-                "en-AU": r['_source']['sale_prices']['aud'] * 100,
-                "en-US": r['_source']['sale_prices']['usd'] * 100
-              } || r['_source']['prices'] && {
+              strikeThroughPrice: r['_source']['non_sale_prices'] ? {
+                "en-AU": r['_source']['non_sale_prices']['aud'] * 100,
+                "en-US": r['_source']['non_sale_prices']['usd'] * 100
+              } : nil,
+              price: {
                 "en-AU": r['_source']['prices']['aud'] * 100,
                 "en-US": r['_source']['prices']['usd'] * 100
               },
@@ -425,7 +422,7 @@ module Api
           },
           isAvailable: product.is_active?,
           price: (product.price_in(current_site_version.currency).apply(product.discount).amount * 100).to_i,
-          strikeThroughPrice: (product.price_in(current_site_version.currency).amount * 100).to_i,
+          strikeThroughPrice: product.discount ? (product.price_in(current_site_version.currency).amount * 100).to_i : nil,
           prices: {
             'en-AU' => (product.price_in('AUD').amount * 100).to_i,
             'en-US' => (product.price_in('USD').amount * 100).to_i,
@@ -648,7 +645,7 @@ module Api
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
           price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
-          strikeThroughPrice: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
+          strikeThroughPrice: product.discount ? (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i : nil,
           prices: {
             'en-AU' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
             'en-US' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i
@@ -677,7 +674,7 @@ module Api
           componentTypeId: :Making,
           componentTypeCategory: :Making,
           price: (making.making_option.flat_price_in(current_site_version.currency)*100).to_i,
-          strikeThroughPrice: (making.making_option.flat_price_in(current_site_version.currency)*100).to_i,
+          strikeThroughPrice: product.discount ? (making.making_option.flat_price_in(current_site_version.currency)*100).to_i : nil,
           isProductCode: false,
           isRecommended: false,
           type: :Making,
@@ -699,7 +696,7 @@ module Api
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
           price: (f.price_in(current_site_version.currency) * 100).to_i,
-          strikeThroughPrice: (f.price_in(current_site_version.currency) * 100).to_i,
+          strikeThroughPrice: product.discount ? (f.price_in(current_site_version.currency) * 100).to_i : nil,
           prices: {
             'en-AU' => (f.price_in('AUD') * 100).to_i,
             'en-US' => (f.price_in('USD') * 100).to_i,
@@ -739,7 +736,7 @@ module Api
           componentTypeId: :Color,
           componentTypeCategory: :Color,
           price: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
-          strikeThroughPrice: c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
+          strikeThroughPrice: c.custom && product.discount ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
           prices: {
             'en-AU' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0,
             'en-US' => c.custom ? (LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE * 100).to_i : 0
