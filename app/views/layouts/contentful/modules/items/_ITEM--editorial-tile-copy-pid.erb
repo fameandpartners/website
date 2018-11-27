@@ -1,7 +1,0 @@
-<% # Define the URL for the Editorial tile %>
-<% item_url = contentful_get_editorial_tile_link(contents) %>
-<% ############################################################################################# %>
-
-<% # Define if this tile should display an image or a video %>
-<%= render partial: "layouts/contentful/modules/shared/display_image_or_video", locals: { item_url: item_url, item_image: contents[:image], item_image_mobile: contents[:mobile_image], item_video: contents[:video], item_video_mobile: contents[:mobile_video] } %>
-<% ############################################################################################# %>

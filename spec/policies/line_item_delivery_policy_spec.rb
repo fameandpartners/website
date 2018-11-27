@@ -1,48 +1,31 @@
 require 'spec_helper'
 
 describe Policies::LineItemDeliveryPolicy, type: :policy do
-  let(:line_item) { FactoryGirl.build(:dress_item) }
-  let(:product) { line_item.product }
+  let(:making_option) { FactoryGirl.build(:making_option, delivery_period: '1 week', making_time_business_days: 3, delivery_time_days: 7) }
+  let(:product_making_option) { FactoryGirl.build(:product_making_option, making_option: making_option) }
+  let(:line_making_option) { FactoryGirl.build(:line_item_making_option, product_making_option: product_making_option) }
+
+  let(:product) { FactoryGirl.build(:dress, making_options: [product_making_option]) }
+  let(:order) { FactoryGirl.create(:spree_order, completed_at: Time.new(2018, 01, 01, 0, 0, 0, "-08:00")) }
+  let(:line_item) { FactoryGirl.build(:dress_item, product: product, making_options: [line_making_option], order: order) }
   subject { described_class.new(line_item) }
 
-  describe '#maximum_delivery_period' do
-    it "returns minimal delivery period if line_item has no taxons" do
-      expect(subject.maximum_delivery_period).to eq('7 - 10 business days')
-    end
-
-    it "returns maximum delivery period from taxons" do
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
-      expect(subject.maximum_delivery_period).to eq('12 - 15 business days')
-
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '3 - 4 weeks')
-      expect(subject.maximum_delivery_period).to eq('3 - 4 weeks')
-
-      product.taxons << FactoryGirl.create(:taxon, delivery_period: '12 - 15 business days')
-      expect(subject.maximum_delivery_period).to eq('3 - 4 weeks')
-    end
-  end
-
   describe '#delivery_period' do
-    it "returns minimum delivery period by default" do
-      expect(subject.delivery_period).to eq('7 - 10 business days')
-    end
-
-    it "returns fast making delivery period if line_item is fast making" do
-      expect(line_item).to receive(:fast_making?).and_return(true)
-
-      expect(subject.delivery_period).to eq('2-3 weeks')
-    end
-
-    it "returns fast making delivery period if line_item is fast making" do
-      expect(line_item).to receive(:slow_making?).and_return(true)
-
-      expect(subject.delivery_period).to eq('8 weeks')
-    end
-
-    it "returns cny delivery period if cny flag enabled" do
-      Features.activate(:cny_delivery_delays)
-
-      expect(subject.delivery_period).to eq('6 weeks')
+    it "returns delivery period" do
+      expect(subject.delivery_period).to eq('1 week')
     end
   end
+
+  describe '#delivery_date' do
+    it "returns delivery period" do
+      expect(subject.delivery_date).to eq(Date.new(2018, 01, 8))
+    end
+  end
+
+  describe '#ship_by_date' do
+    it "returns delivery period" do
+      expect(subject.ship_by_date).to eq(Date.new(2018, 01, 04))
+    end
+  end
+  
 end

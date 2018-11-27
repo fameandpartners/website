@@ -1,0 +1,29 @@
+ruby:
+  cart = UserCart::UserCartResource.new(order: current_order).read
+  auSite = current_site_version&.name != 'USA'
+  cartData = raw cart.serialize.to_json
+  newNav = Features.active?(:new_navigation)
+
+javascript:
+  window.__FAME_CONFIG__ = {
+    "NEWSLETTER_SIGNUP_URL":"http://hello.fameandpartners.com/public/",
+    "FLAGS":{"NEW_NAVIGATION": #{ raw newNav }},
+    "URLS":{
+        "en-US":{
+            "api":"",
+            "frontend":""
+        },
+        "en-AU":{
+            "api":"",
+            "frontend":""
+        }
+    }
+  };
+
+  window.ApplicationStateData = {
+    auSite: #{ raw auSite },
+    currentSiteVersion: "#{current_site_version&.name}",
+    CartData: #{ raw cartData },
+    UserData: #{ raw spree_current_user.to_json },
+    cmsGlobalPageConfig: #{ raw contentful_global_page_config.to_json }
+  };

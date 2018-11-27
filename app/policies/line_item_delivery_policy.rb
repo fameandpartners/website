@@ -8,27 +8,29 @@ module Policies
     def initialize(line_item)
       @line_item = line_item
       @product = @line_item.product
+
+      @making_option = @line_item.making_options.first&.product_making_option&.making_option
+      @making_option ||= @product.making_options.active.where(default: true).first&.making_option
+    end
+
+    def ship_by_date
+      ship_by_date_for_making_option(@line_item.order.completed_at || Time.now, @making_option)
+    end
+
+    def code
+      @making_option.code
+    end
+
+    def delivery_date
+      # line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days'
+
+      delivery_date_for_making_option(@line_item.order.completed_at || Time.now, @making_option)
     end
 
     def delivery_period
-      period = ''
+      # line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days'
 
-      if @line_item.fast_making? #fast_making wins
-        return fast_making_delivery_period
-      elsif @line_item.slow_making? #how slow can you go
-        period = slow_making_delivery_period
-      elsif @line_item.super_fast_making?
-        period = super_fast_making_delivery_period
-      else
-        period = maximum_delivery_period
-      end
-
-      # make adjustment for chinese new year
-      if Features.active?(:cny_delivery_delays)
-        period = adjust_for_cny(period)
-      end
-
-      period
+      display_period_for_making_option(@making_option)
     end
   end
 end

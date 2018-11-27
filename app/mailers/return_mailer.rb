@@ -9,7 +9,7 @@ class ReturnMailer < ActionMailer::Base
       user_data: user_returns_object
     )
   rescue StandardError => e
-    NewRelic::Agent.notice_error(e)
+    Rails.logger.warn e
     Raven.capture_exception(e)
   end
 
@@ -32,7 +32,7 @@ class ReturnMailer < ActionMailer::Base
       billing_address = order.billing_address
       label_print_link = return_items.first.item_return&.item_return_label&.label_url
       #todo: need to revisit this next line when we get final delivery date approval
-      send_by_date = (return_request.order.delivery_policy.delivery_date + 45).strftime("%m/%d/%y")
+      send_by_date = (return_items.map {|rri| rri.line_item.delivery_period_policy.delivery_date }.max + 45.days).strftime("%m/%d/%y")
       international_user = order.shipping_address&.country_id != 49
       
       formatted_return_items = return_items.map do |item|

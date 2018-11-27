@@ -126,7 +126,7 @@ module PathBuildersHelper
       self.url_options[:site_version],
       'dresses'
     ]
-    taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
+    taxon = Spree::Taxon.find_by_name(taxon_name)
     path_parts.push(taxon.permalink.parameterize) if taxon.present?
 
     build_url(path_parts, options)

@@ -39,8 +39,15 @@ module Api
         render :json=>{:success=>false, :message=>"Invalid arguments"}, :status=>401
       end
 
+      private
+
+      def update_user_orders
+        @user.orders.each do |order|
+          order.email = @user.email
+          order.save
+        end
+      end
+
     end
-
-
   end
 end

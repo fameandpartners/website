@@ -10,20 +10,13 @@
           <% if product.name != "Gift" : %>
             <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
           <% end %>
-          <% if product.price_drop_au_product: %>
-            <div class="ribbon-wrapper PriceDrop">
-              <div class="ribbon-txt">
-                New Lower Price
-              </div>
-            </div>
-          <% else if product.making_options.length: %>
+          <% if product.making_options.length: %>
             <div class="ribbon-wrapper express-making">
               <div class="ribbon-txt">
-                Deliver <%= product.making_options[0].name %>
+                <%= product.making_options[0].name %>
               </div>
             </div>
           <% end %>
-
         </a>
       </div>
       <div class="cart-item-info col-xs-7">
@@ -35,7 +28,7 @@
         </div>
 
         <div class="cart-item-price">
-        <% if product.old_price && !product.swatch: %>
+        <% if product.old_price: %>
          <del><%= product.old_price %> </del>
         <%end%>
         <%= product.price.display_price %></div>
@@ -62,9 +55,6 @@
               <span class="line-item-description-heading">Customizations:</span>
               <% for customization in product.customizations: %>
                 <span><%= customization.presentation || customization.name %></span>
-                <% unless product.old_price: %>
-                  <span class='line-item-customization--mini'>(<%= @customizationPrice(customization.display_price) %>)</span><br />
-                <%end%>
               <% end %>
             </dd>
           <% end %>

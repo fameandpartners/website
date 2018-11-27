@@ -18,22 +18,3 @@
     <%= button t(:update), 'icon-refresh' %> <%= t(:or) %> <%= button_link_to t(:cancel), edit_admin_taxonomy_url(@taxonomy), :icon => "icon-remove" %>
   </div>
 <% end %>
-
-<hr />
-<% if @taxon.have_banner_info? %>
-  <h3>Edit banner on products page</h3>
-
-  <% @banner = @taxon.banner || @taxon.build_banner(title: @taxon.name) %>
-
-  <%= form_for @banner, :as => :banner,
-        :url => admin_update_taxon_banner_path(@taxonomy.id, @taxon.id),
-        :method => :put,
-        :html => { :class => 'form', multipart: true } do |banner_form| %>
-    <%= render 'banner_form', banner_form: banner_form %>
-
-    <div class="form-buttons" data-hook="buttons">
-      <%= banner_form.submit t(:update) %>
-      <%= t(:or) %> <%= button_link_to t(:cancel), edit_admin_taxonomy_url(@taxonomy), :icon => "icon-remove" %>
-    </div>
-  <% end %>
-<% end %>

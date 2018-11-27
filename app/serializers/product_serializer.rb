@@ -25,8 +25,4 @@ class ProductSerializer < ActiveModel::Serializer
       I18n.t(:product_has_no_description)
     end
   end
-
-  def delivery_time
-    object.delivery_time_as_string(:long)
-  end
 end

@@ -9,7 +9,6 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
       'render',
       'determineChecked',
       'bindEventHandlers',
-      'handleRemoveDeliveryTime',
       'handleAddDeliveryTime',
       'handleCartChange',
       'handleRequestProcessing'
@@ -25,7 +24,6 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     @
 
   bindEventHandlers: () ->
-    $('.js-remove-making-option').on('click', @handleRemoveDeliveryTime)
     $('.js-create-making-option').on('click', @handleAddDeliveryTime)
 
   handleAddDeliveryTime: (evt) ->
@@ -35,16 +33,6 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     lineItemId = $fieldset.data().lineItemId
     @processingIndex = $fieldset.data().lineItemIndex
     window.app.shopping_cart.createMakingOption(lineItemId, $input.val())
-
-  handleRemoveDeliveryTime: (evt) ->
-    FIELDSET_CLASS = '.js-delivery-times-fieldset'
-    $fieldset = $(evt.target).closest(FIELDSET_CLASS)
-    @processingIndex = parseInt($fieldset.data().lineItemIndex, 10)
-    lineItem = @cart.data.products[@processingIndex]
-    makingOption = if lineItem.making_options && lineItem.making_options.length > 0 then lineItem.making_options[0].id else undefined
-
-    if makingOption
-      window.app.shopping_cart.deleteMakingOption(lineItem.line_item_id, makingOption)
 
   handleRequestProcessing: () ->
     $('.js-delivery-times-wrapper[data-index=' + @processingIndex + ']').addClass('is-loading')
@@ -57,14 +45,10 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
     @cart.data.products.forEach(@initCheckbox)
 
   initCheckbox: (p, i) ->
-    isDefaultChosen = p.making_options.length == 0
-
-    if isDefaultChosen
-      $selection = $("#delivery_time_normal_" + i)
-    else
-      # find element by name and index
-      $selection = $("#delivery_time_" + p.making_options[0].name.toLowerCase().replace(" ", "") + '_' + i)
-
+    if p.making_options.length == 0
+      return
+    
+    $selection = $("#delivery_time_" + i + '_' + p.making_options[0].id)
     $selection.attr('checked', true)
     $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
 

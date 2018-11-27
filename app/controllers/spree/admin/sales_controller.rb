@@ -5,7 +5,6 @@ class Spree::Admin::SalesController < Spree::Admin::ResourceController
 
       invoke_callbacks(:update, :after)
       flash[:success] = flash_message_for(@object, :successfully_updated)
-      Repositories::Discount.expire_cache!(true)
       respond_with(@object) do |format|
         format.html { redirect_to location_after_save }
         format.js   { render :layout => false }

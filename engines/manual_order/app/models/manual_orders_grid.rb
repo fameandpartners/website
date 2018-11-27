@@ -25,7 +25,7 @@ class ManualOrdersGrid
     model.order.completed_at.strftime("%m/%d/%y")
   end
   column(:delivery_due, header: 'Delivery due') do |model|
-    model.projected_delivery_date.strftime("%m/%d/%y")
+    model.projected_delivery_date&.strftime("%m/%d/%y")
   end
   column(:order_number, header: 'Order number', order: 'spree_orders.number', :html => true) do |model|
     link_to model.order.number, spree.admin_order_path(id: model.order.number)

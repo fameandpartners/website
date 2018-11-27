@@ -1,6 +1,0 @@
-.col-md-3.col-xs-6.col-xxs-12.category--item
-  = link_to collection_product_path(product) do
-    = cropped_product_hoverable_image_tag(product)
-  .details.text-center
-    span.name = product.name
-    span.price = product_price_with_discount(product)

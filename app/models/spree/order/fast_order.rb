@@ -37,7 +37,7 @@ module Spree
             #{site_version},
             #{line_item_id},
             #{quantity},
-            #{fast_making},
+            #{making_option},
             #{tracking_number},
             #{completed_at},
             #{completed_at_date},
@@ -210,7 +210,7 @@ module Spree
         def price
           'li.price,
           lip.price as personalization_price,
-          ( SELECT SUM(price) FROM line_item_making_options WHERE line_item_id = li.id ) as making_options_price'
+          ( SELECT SUM(flat_price) FROM line_item_making_options WHERE line_item_id = li.id ) as making_options_price'
         end
 
         def currency
@@ -246,10 +246,11 @@ module Spree
             GROUP BY sadj.adjustable_id ) as promo_codes"
         end
 
-        def fast_making
-          "( SELECT pmo.id FROM line_item_making_options ilmo
+        def making_option
+          "( SELECT mo.code FROM line_item_making_options ilmo
               INNER JOIN product_making_options pmo ON ilmo.making_option_id = pmo.id
-              WHERE ilmo.line_item_id = li.id AND pmo.option_type = 'fast_making' ) as fast_making"
+              INNER JOIN making_options mo ON pmo.making_option_id = mo.id
+              WHERE ilmo.line_item_id = li.id ) as making_option"
         end
 
         def custom_color

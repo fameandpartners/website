@@ -20,13 +20,7 @@ module Spree
       h = Hash.new { |hash, key| hash[key] = []}
       line_items_hash.each_pair do |key, line_items|
         line_items.each do |line_item|
-          if line_item.fast_making?
-            h["#{key} #{line_item.delivery_period} fast_making"] << line_item
-          elsif line_item.slow_making?
-            h["#{key} #{line_item.delivery_period} slow_making"] << line_item
-          else
-            h["#{key} #{line_item.delivery_period} regular_making"] << line_item
-          end
+          h["#{key} #{line_item.delivery_period} #{line_item.making_options.first&.making_option&.code}"] << line_item
         end
       end
       h

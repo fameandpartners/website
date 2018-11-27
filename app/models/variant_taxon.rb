@@ -1,3 +1,4 @@
+# TODO REMOVE THIS
 class VariantTaxon < ActiveRecord::Base
   attr_accessible :product, :taxon, :fabric_or_color
 

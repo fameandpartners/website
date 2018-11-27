@@ -22,6 +22,10 @@ class Discount < ActiveRecord::Base
 
   scope :for_products, where(discountable_type: "Spree::Product")
 
+  scope :active, -> {
+    joins(:sale).where(spree_sales: {is_active: true})
+  }
+
   def size
     (amount.presence || sale&.discount_size.presence).to_f
   end

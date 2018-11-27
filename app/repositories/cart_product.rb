@@ -17,12 +17,14 @@ class Repositories::CartProduct
   end
 
   def read
+
     @cart_product ||= begin
       result = ::UserCart::CartProductPresenter.new(
         id: product.id,
-        color: Repositories::ProductColors.read(color_id, product.id),
+        color: color_id && Repositories::ProductColors.read(color_id, product.id),
         customizations: product_customizations.to_a,
         making_options: making_options,
+        available_making_options: available_making_options,
         height: height,
         height_value: line_item.personalization&.height_value,
         height_unit: line_item.personalization&.height_unit,
@@ -40,15 +42,12 @@ class Repositories::CartProduct
         discount: product.discount.try(:amount),
         image: product_image,
         message: line_item.stock.nil? ? nil : 'Fabric swatches are final sale. US shipping only',
-        delivery_period: line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days', #line_item.delivery_period_policy.delivery_period,
-        price_drop_au_product: price_drop_au_product?,
+        delivery_period: line_item.delivery_period_policy.delivery_period, #,
         fabric: line_item_fabric,
         )
       result.size  = size
       # result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
-      # result.making_options = product_making_options
-      result.available_making_options = available_making_options
       result.height         = height
       result.swatch = product&.category&.category == 'Sample'
       result.path = line_item.stock.nil? ? ApplicationController.helpers.collection_product_path(result) : ApplicationController.helpers.line_item_path(line_item.id)
@@ -58,15 +57,6 @@ class Repositories::CartProduct
   # cache_results :read
 
   private
-
-    def price_drop_au_product?
-      if line_item.currency == "AUD" && Features.active?(:price_drop_au)
-        current_item_sku = product.sku.downcase
-        price_drop_au_items_array = ["FP2062", "USP1068", "FP2006", "FP2014", "4B587", "4B398", "FP2057", "USP1006", "FP2246", "FP2144", "FP2298"]
-        price_drop_au_items_array.map!(&:downcase)
-        price_drop_au_items_array.include?(current_item_sku)
-      end
-    end
 
     def cache_key
       line_item.cache_key
@@ -126,35 +116,28 @@ class Repositories::CartProduct
 
     def making_options
       line_item.making_options.includes(:product_making_option).map do |option|
-        OpenStruct.new(
-          id: option.id,
-          option_type: option.product_making_option.option_type,
+        {
+          id: option.product_making_option.id,
           name: option.product_making_option.name,
           display_price: option.display_price,
-          display_discount: option.display_discount,
           description: option.description,
           delivery_period: option.display_delivery_period
-        )
+        }
       end
     end
 
     # provide the available making_options to front end
     def available_making_options
-      to_return = product.making_options.map do |mo|
-        if line_item.stock.nil? || (mo.option_type != 'slow_making' && !mo.option_type.include?('fast_making'))
-          OpenStruct.new(
-            id: mo.id,
-            option_type: mo.option_type,
-            name: mo.name,
-            display_discount: mo.display_discount,
-            description: mo.description,
-            delivery_period: mo.display_delivery_period,
-            active: mo.active
-          )
-        end
+      to_return = product.making_options.active.sort_by{|mo| mo.making_option.position}.map do |mo|
+        {
+          id: mo.id,
+          name: mo.name,
+          display_price: mo.display_price(line_item.currency),
+          description: mo.description,
+          delivery_period: mo.display_delivery_period,
+        }
       end
 
-      puts to_return
       to_return
     end
 
@@ -183,11 +166,8 @@ class Repositories::CartProduct
 
     def line_item_fabric
       if line_item.fabric
-        if line_item.recommended_fabric?
-          fabric_price = 0.0
-        else
-          fabric_price = line_item.fabric.price_in(line_item.currency)
-        end
+        fp = FabricsProduct.where(fabric_id: line_item.fabric.id, product_id: self.product.id).first
+        fabric_price =  fp.price_in(line_item.currency)
 
         {
         display_price: Spree::Price.new(amount: fabric_price, currency: line_item.currency).display_price,
@@ -196,7 +176,6 @@ class Repositories::CartProduct
         name: line_item.fabric.presentation,
         fabric_name: line_item.fabric.name,
         value: line_item.fabric.option_fabric_color_value.value,
-        custom_fabric: !line_item.recommended_fabric?
         }
       else
         nil

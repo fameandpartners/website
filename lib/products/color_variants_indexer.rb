@@ -93,6 +93,8 @@ module Products
 
 
     def map_product(index_name, id, product, fabric, color, product_fabric_value, product_color_value)
+      pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
+
       discount = product.discount&.amount.to_i
       product_price_in_us = product.price_in(@us_site_version.currency)
       product_price_in_au = product.price_in(@au_site_version.currency)
@@ -101,27 +103,22 @@ module Products
       fabric_price_in_au = 0
 
       if product_fabric_value
-        fabric_price_in_us = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@us_site_version.currency) : 0
-        fabric_price_in_au = !product_fabric_value.recommended ? product_fabric_value.fabric.price_in(@au_site_version.currency) : 0
+        fabric_price_in_us = product_fabric_value.price_in(@us_site_version.currency)
+        fabric_price_in_au = product_fabric_value.price_in(@au_site_version.currency)
       elsif product_color_value
         fabric_price_in_us = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
       end
 
-      price_us = Spree::Price.new(amount: product_price_in_us.amount.to_f + fabric_price_in_us, currency: @us_site_version.currency)
-      price_au = Spree::Price.new(amount: product_price_in_au.amount.to_f + fabric_price_in_au, currency: @au_site_version.currency)
-
-      all_variant_taxons = VariantTaxon.includes(:taxon).all
-      variant_taxons = all_variant_taxons
-        .select {|f| f.product_id == product.id && ((fabric && f.fabric_or_color == fabric.name) || (color && f.fabric_or_color == color.name)) }
-        .map { |f| f.taxon }
+      curations = Curation.includes(:taxons).all
+      curation = curations
+        .first {|c| c.pid == pid }
 
       taxons = [
-        variant_taxons,
+        curation&.taxons || [],
         product.taxons
       ].flatten.uniq
 
-      pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
 
       taxon_names = [
         taxons.map(&:permalink).map {|f| f.split('/').last },
@@ -129,8 +126,7 @@ module Products
         pid,
         product.category.category,
         product.category.subcategory,
-        product.fast_making? ? 'fast_making': nil,
-        product.super_fast_making? ? 'super_fast_making' : nil,
+        product.making_options.active.map(&:making_option).map(&:code),
         ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
         color.name,
         fabric&.name,
@@ -167,10 +163,6 @@ module Products
             },
             url: @helpers.collection_product_path(product, color: (fabric&.name || color&.name)),
 
-            can_be_customized:  product.can_be_customized?,
-            fast_delivery:      product.fast_delivery,
-            fast_making:        product.fast_making?,
-            super_fast_making:  product.super_fast_making?,
             taxon_ids:          taxons.map(&:id),
             taxons:             taxon_names,
             price:              product.price.to_f,
@@ -228,13 +220,13 @@ module Products
             }
           end,
 
-          prices: {
-            aud:  price_au.amount.to_f,
-            usd:  price_us.amount.to_f
-          },
-          sale_prices:  {
-            aud:  discount > 0 ? price_au.apply(product.discount).amount.to_f.round(2) : price_au.amount.to_f,
-            usd:  discount > 0 ? price_us.apply(product.discount).amount.to_f.round(2) : price_us.amount.to_f
+          non_sale_prices: discount > 0 ? {
+            aud:  product_price_in_au.amount.to_f + fabric_price_in_au,
+            usd:  product_price_in_us.amount.to_f + fabric_price_in_us
+          } : nil,
+          prices:  {
+            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au,
+            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us
           }
         }
       }

@@ -1,5 +1,5 @@
 class FabricsProduct < ActiveRecord::Base
-  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description
+  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description, :price_aud, :price_usd
 
   belongs_to :product, class_name: 'Spree::Product'
 
@@ -32,5 +32,13 @@ class FabricsProduct < ActiveRecord::Base
 
   def self.inactive
     where(active: false)
+  end
+
+  def price_in(currency)
+    if currency.downcase == 'aud'
+      return self.price_aud.to_f
+    else
+      return self.price_usd.to_f
+    end
   end
 end

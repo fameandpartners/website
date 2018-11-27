@@ -70,10 +70,6 @@ FameAndPartners::Application.routes.draw do
 
   # MonkeyPatch for store params & redirect to custom page
   get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
-
-  ##############
-  # Static Pages
-  ##############
    
   post '/shared/facebook' => 'competition/events#share'
 
@@ -82,6 +78,12 @@ FameAndPartners::Application.routes.draw do
   ##############
   get '/dresses' => 'noop#noop', as: :dresses
   get '/dresses' => 'noop#noop', as: :collection
+  get '/faqs' => 'noop#noop', as: :faqs
+  get '/why-us' => 'noop#noop', as: :why_us
+  get '/about' => 'noop#noop', as: :about_us
+
+
+
 
   ########################
   # Redirect legacy pages
@@ -263,18 +265,6 @@ FameAndPartners::Application.routes.draw do
   end
 
   resource 'users/returns', as: 'user_returns', only: [:new, :create]
-
-  #######################
-  # (Others) Static pages
-  #######################
-  get '/about'   => 'statics#about', :as => :about_us
-  get '/why-us'  => 'statics#why_us', :as => :why_us
-  get '/faqs'   => 'statics#faqs'
-  get '/size-guide'  => 'statics#size_guide', :as => :size_guide
-  get '/wholesale'   => 'statics#landing_page_wholesale', :permalink => 'wholesale', :as => :wholesale_page
-  get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
-  get '/the-fame-experience' => 'statics#landing_page_fame_experience', :permalink => 'the-fame-experience', :as => :the_fame_experience_landing_page
-  get '/internship' => 'statics#landing_page_internship', :permalink => 'fame-internship', :as => :internship_landing_page
 
   namespace 'campaigns' do
     resource :email_capture, only: [:create], controller: :email_capture do
@@ -483,18 +473,4 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-  mount Revolution::Engine => '/'
-
-end
-
-# NOTE: Alexey Bobyrev 14 Feb 2017
-# Method append used here to handle all request directly right after defined ones (including engines)
-FameAndPartners::Application.routes.append do
-  # NOTE: Alexey Bobyrev 14 Jan 2017
-  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController#rescue_action)
-
-  # Added in something to explicity exclude devise routes from going to contentful
-  match '*path', to: 'contentful#main', constraints: lambda { |request| (request.path !~ /auth/) }
-
-  # match '*path', to: 'application#non_matching_request', as: 'routing_error'
 end

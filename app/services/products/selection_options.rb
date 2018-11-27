@@ -61,7 +61,7 @@ module Products
     private
 
       def customisations_available?
-        product.discount.blank? || product.discount.customisation_allowed
+        product.discount.blank? || product.discount.sale&.customisation_allowed
       end
       alias_method :extra_sizes_available?, :customisations_available?
 
@@ -85,6 +85,7 @@ module Products
       end
 
       def default_product_sizes
+        byebug
         product_sizes
       end
 
@@ -138,7 +139,7 @@ module Products
             id: value['id'],
             name: value['presentation'],
             image: value['image_file_name'].present? ? get_customisation_value(value['id'])&.image&.url : 'logo_empty.png',
-            display_price: Spree::Money.new(price, currency: product_making_options.first.currency, no_cents: true),
+            display_price: Spree::Money.new(price, currency: site_version.currency, no_cents: true),
             position: value['position'],
             group: value['group']
           })

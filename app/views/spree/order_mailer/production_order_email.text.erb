@@ -13,7 +13,8 @@ Size (码数):           <%= item.country_size %>
 Color（颜色):          <%= item.colour_name %>
 Quantity:              <%= item.quantity%>
 Factory:               <%= item.factory %>
-Delivery Date:         <%= order.projected_delivery_date %>
+Ship by Date:         <%= item.ship_by_date %>
+Delivery Date:         <%= item.projected_delivery_date %>
 <% if item.making_options.present? %>
 Express Making ( 快速决策 ): <%= item.making_options.map{|option| option.name.upcase }.join(', ') %>
 <% end %>

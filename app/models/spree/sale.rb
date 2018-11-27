@@ -61,32 +61,6 @@ class Spree::Sale < ActiveRecord::Base
     Discount.new(amount: discount_size.to_i)
   end
 
-  def apply(price)
-    amount = price.amount
-
-    new_amount = \
-      if fixed?
-        discount_size < amount ? amount - discount_size : BigDecimal.new(0)
-      elsif percentage?
-        amount * (1 - discount_size.to_f / 100)
-      else
-        amount
-      end
-
-    Spree::Price.new(amount: new_amount, currency: price.currency)
-  end
-
-  def mega_menu_image_url
-    "#{ENV['RAILS_ASSET_HOST']}/sale/#{name.downcase}.jpg"
-  end
-
-  def banner_images
-    {
-      full:  'tile-sale-full.gif',
-      small: 'tile-sale-sml.gif'
-    }
-  end
-
   def explanation
     "Sale - Up to #{discount_string} Off"
   end
@@ -101,10 +75,6 @@ class Spree::Sale < ActiveRecord::Base
 
   def sitewide_message
     super.to_s.gsub(/{discount}/, discount_string)
-  end
-
-  def self.active_sales_ids
-    Spree::Sale.active.pluck(:id)
   end
 
   def self.last_sitewide_for(currency: currency)

@@ -13,16 +13,12 @@ window.ShoppingCartSummary = class ShoppingCartSummary
       'makingOptionDescriptionTag',
       'render',
       'removeProductHandler',
-      'removeProductCustomizationHandler',
-      'removeProductMakingOptionHandler',
       'couponFormSubmitHandler',
       'returnsAbcHandler',
       'openLearnMoreHandler'
     )
 
     @$container.on('click', '.remove-product', @removeProductHandler)
-    @$container.on('click', '.customization-remove', @removeProductCustomizationHandler)
-    @$container.on('click', '.making-option-remove', @removeProductMakingOptionHandler)
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @$container.on('change', '.js-returns-abc-option-trigger', @returnsAbcHandler)
@@ -44,10 +40,8 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     products.some(@isRegularSaleItem)
 
   makingOptionDescriptionTag: (makingOptions) ->
-    if (makingOptions[0].name.toLowerCase() == 'later')
-      return '(' + makingOptions[0].display_discount + ')'
-    else if (makingOptions[0].name.toLowerCase() == 'express')
-      return '(+' + makingOptions[0].display_discount + ')'
+    if (makingOptions[0].display_price)
+      return '(' + makingOptions[0].display_price + ')'
 
   makingOptionsDeliveryPeriod: (makingOptions, deliveryPeriod) ->
     if (makingOptions[0])
@@ -144,18 +138,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
     $('.js-returns-abc-option-message').addClass('hidden');
     @cart.removeProduct(lineItemId)
-
-  removeProductCustomizationHandler: (e) ->
-    e.preventDefault()
-    line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
-    customization_id = $(e.currentTarget).data('id')
-    @cart.removeProductCustomization(line_item_id, customization_id)
-
-  removeProductMakingOptionHandler: (e) ->
-    e.preventDefault()
-    line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
-    making_option_id = $(e.currentTarget).data('id')
-    @cart.removeProductMakingOption(line_item_id, making_option_id)
 
   couponFormSubmitHandler: (e) ->
     e.preventDefault() if e

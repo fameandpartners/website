@@ -60,7 +60,7 @@ class UserCart::CartProduct
     line_item.making_options.each(&:destroy)
     line_item.making_options.clear
 
-    line_item.making_options << LineItemMakingOption.build_option(ProductMakingOption.find(id))
+    line_item.making_options << LineItemMakingOption.build_option(ProductMakingOption.find(id), line_item.currency)
     update_order
 
     true

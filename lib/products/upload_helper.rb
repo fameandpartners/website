@@ -18,37 +18,46 @@ module Products
             category = Category.where(category: 'Sample').first_or_create( { category: "Sample", subcategory: "Fabric" })
             taxon = nil
             on_demand = false
-            # taxon = taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
           else
             sizes = %w(
               US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
               US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
             )
             category = nil
-            taxon = Spree::Taxon.find_by_permalink('6-10-week-delivery');
             on_demand = true
           end
 
 
 
-          product = create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
+          product = create_or_update_product(prod, category, on_demand)
 
           #color_map = details[:colors].map{ |x| { color: x } }
-          add_product_properties(product, details)
-          fabric_products = add_product_color_options(product, details[:fabrics], details[:colors]) 
-
-          add_product_variants(product, sizes, fabric_products, price_in_aud, price_in_usd) 
+          # add_product_properties(product, details)
+          add_product_prices(product, price_in_aud, price_in_usd)
+          add_product_color_options(product, details[:fabrics], details[:colors]) 
+          add_product_variants(product, sizes, price_in_aud, price_in_usd) 
           add_product_customizations(product, prod[:customization_list] || [], nil)
           add_product_height_ranges( product )
-
-          product.hidden = true #MIGHT MOVE THIS
-          product.available_on = product.created_at
+          add_making_options(product, prod[:making_options])
+          add_curations(product, prod[:curations])
 
           product.save!
 
           product
         end
       end.compact
+    end
+
+    def add_curations(product, curations)
+      Curation.where(product_id: product.id).update_all(active: false)
+
+      curations.each do |c|
+        curation = product.curations.find {|x| x.pid == c[:pid] } || Curation.new(product_id: product.id, pid: c[:pid])
+        curation.active = true
+        curation.name = c[:name]
+        curation.taxons = c[:taxons].map {|t| Spree::Taxon.find_by_name(t)}
+        curation.save!
+      end
     end
 
     def add_product_prices(product, price_in_aud, price_in_usd)
@@ -63,7 +72,7 @@ module Products
       usd.save!
     end
 
-    def create_or_update_product(prod, category, on_demand, taxon, price_in_aud, price_in_usd)
+    def create_or_update_product(prod, category, on_demand)
       sku = prod[:style_number].to_s.strip
 
       raise 'SKU should be present!' unless sku.present?
@@ -79,7 +88,6 @@ module Products
       ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
 
       taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_name(x)&.id }
-      taxon_ids << taxon.id if taxon
 
       attributes = {
         name: prod[:details][:name],
@@ -87,49 +95,33 @@ module Products
         description: prod[:details][:description],
         taxon_ids: taxon_ids,
         available_on: @available_on || product.available_on, #NEED TO ADD THIS TO JSON
-        category: category
+        category: category,
+        permalink: prod[:details][:name].downcase.gsub(/\s/, '_')
       }
-
-      edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-      if product.persisted?
-        attributes[:taxon_ids] += product.taxons.where(taxonomy_id: edits.try(:id)).map(&:id) #WTF does this do
-      end
-
-      #attributes.select!{ |name, value| value.present? }  remove this see what happens
 
       product.assign_attributes(attributes, without_protection: true)
 
-      if attributes[:name].present?
-        if product.persisted?
-          if product.valid? && product.name_was.downcase != attributes[:name].downcase  #Think i can get rid of this
-            product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
-            product.assign_attributes(attributes, without_protection: true)
-          end
-        else
-          product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
-        end
-      end
-
-      # need to save first to get a product_id since product_making_option requires it
-      product.save!
-
-      #add slow making
-      prdmo = ProductMakingOption.new(  {product_id: product.id,
-                                        active: true,
-                                        option_type: 'slow_making',
-                                        price: -0.1,
-                                        currency: 'USD'},
-                                        without_protection: true
-                                      )
-      # only connect the 2 if not already done before
-      if prdmo.save
-        product.making_options << prdmo
-      end
+      product.hidden = !prod[:details][:active]
+      product.available_on = product.created_at
 
       product.save!
 
-      add_product_prices(product, price_in_aud, price_in_usd)
       product
+    end
+
+
+    def add_making_options(product, making_options)
+      product.making_options.each do |pmo|
+        pmo.active = false;
+        pmo.save!
+      end
+
+      making_options.each do |pmo|
+        mo = MakingOption.find_by_code(pmo[:code])
+        pmo = product.making_options.find {|x| x.making_option_id == mo.id } || ProductMakingOption.new(product_id: product.id, making_option_id: mo.id)
+        pmo.active = true
+        pmo.save!
+      end
     end
 
     def add_product_color_options(product, fabrics, colors)
@@ -145,8 +137,7 @@ module Products
 
           fab = Fabric.find_or_create_by_name(fabric_code)
           fab.presentation = fabric_presentation
-          fab.price_aud = color[:price_aud].to_f + fabric[:price_aud].to_f
-          fab.price_usd = color[:price_usd].to_f + fabric[:price_usd].to_f
+          fab.production_code = fabric[:code]
           fab.material = fabric[:presentation]
           fab.option_fabric_color_value = fabric_color_option
           fab.option_value = color
@@ -155,10 +146,11 @@ module Products
 
           fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
           fabric_product.recommended = true
+          fabric_product.price_aud = color[:price_aud].to_f + fabric[:price_aud].to_f
+          fabric_product.price_aud = color[:price_usd].to_f + fabric[:price_usd].to_f
           fabric_product.save!
 
           color_ids << color.id
-          #TODO: Do we want a check here to see if the color exists? What do we do when it doesnt exist
           product.product_color_values.where(option_value_id: color.id, custom: false).first_or_create
         end
       end
@@ -206,50 +198,42 @@ module Products
       product
     end
 
-    def add_product_variants(product, sizes, fabrics_products, price_in_aud, price_in_usd)  
+    def add_product_variants(product, sizes, price_in_aud, price_in_usd)  
       variants = []
       size_option = Spree::OptionType.size
-      color_option = Spree::OptionType.color
+      #color_option = Spree::OptionType.color
 
-      product.option_types = [size_option, color_option]
+      product.option_types = [size_option]
       product.save
 
       product.reload
 
       sizes.each do |size_name|
         size_value  = size_option.option_values.where(name: size_name).first
-        product.variants
-        size_variants = product.variants.select { |variant| variant.option_value_ids.include?(size_value.id)}
+        variant = product.variants.first { |variant| variant.option_value_ids.include?(size_value.id)}
 
-        fabrics_products.each do |fabrics_product|
-          fabric_color = fabrics_product.fabric.option_fabric_color_value
-
-          next if size_value.blank? || fabric_color.blank?
-
-          variant = size_variants.detect {|variant| variant.option_value_ids.include?(fabric_color.id) }
-          unless variant.present?
-            variant = product.variants.build
-            variant.option_values = [size_value, fabric_color]
-          end
-
-          # Avoids errors with Spree hooks updating lots and lots of orders.
-          # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-          variant.send :write_attribute, :on_demand, true
-          Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
-          Spree::Variant.skip_callback( :save, :after, :process_backorders )
-
-          variant.save!
-
-          aud = variant.prices.where(currency: "AUD").first_or_create
-          aud.amount = price_in_aud
-          aud.save!
-
-          usd = variant.prices.where(currency: "USD").first_or_create
-          usd.amount = price_in_usd
-          usd.save!
-
-          variants.push(variant) if variant.persisted?
+        unless variant.present?
+          variant = product.variants.build
+          variant.option_values = [size_value]
         end
+
+        # Avoids errors with Spree hooks updating lots and lots of orders.
+        # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+        variant.send :write_attribute, :on_demand, true
+        Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
+        Spree::Variant.skip_callback( :save, :after, :process_backorders )
+
+        variant.save!
+
+        aud = variant.prices.where(currency: "AUD").first_or_create
+        aud.amount = price_in_aud
+        aud.save!
+
+        usd = variant.prices.where(currency: "USD").first_or_create
+        usd.amount = price_in_usd
+        usd.save!
+
+        variants.push(variant)
       end
 
       product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)

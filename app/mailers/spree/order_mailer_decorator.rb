@@ -36,17 +36,15 @@ Spree::OrderMailer.class_eval do
         auto_account:                user && user.automagically_registered?,
         today:                       Time.zone.today.strftime('%d.%m.%y'),
         phone:                       order_presenter.phone,
-        delivery_date:               order_presenter.projected_delivery_date,
         billing_address_attributes:  order_presenter.billing_address_attributes.to_h,
         shipping_address_attributes: order_presenter.shipping_address_attributes.to_h,
         billing_address:             order_presenter.billing_address,
         shipping_address:            order_presenter.shipping_address,
         cny_delivery_delay:          Features.active?(:cny_delivery_delays),
-        order_delivery_period:       order_presenter.delivery_period,
         all_fabric_swatches:         order_presenter.all_fabric_swatches?
       )
     rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
+      Rails.logger.error e
       Raven.capture_exception(e)
     end
   end
@@ -81,7 +79,7 @@ Spree::OrderMailer.class_eval do
         cny_delivery_delay:             Features.active?(:cny_delivery_delays)
       )
     rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
+      Rails.logger.error e
       Raven.capture_exception(e)
     end
   end
