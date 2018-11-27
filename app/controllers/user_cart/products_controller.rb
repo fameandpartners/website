@@ -174,11 +174,34 @@ class UserCart::ProductsController < UserCart::BaseController
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
     line_item_ids.each do |line_item_id|
-      if populator.populate(line_item: [line_item_id.to_i])
-        fire_event('spree.cart.add')
-        fire_event('spree.order.contents_changed')
+      # copy line_item so we don't destroy orders
+      cloned_line_item = Spree::LineItem.where(:id=>line_item_id.to_i)&.first&.clone
 
-        current_order.reload
+      unless cloned_line_item.nil?
+        
+        line_item = Spree::LineItem.new({ 
+          :variant_id => cloned_line_item.variant_id,
+          :quantity => cloned_line_item.quantity,
+        })
+        
+        line_item[:price] = cloned_line_item.price
+        line_item[:old_price] = cloned_line_item.old_price
+        line_item[:currency] = cloned_line_item.currency
+        line_item[:customizations] = cloned_line_item.customizations
+        line_item[:color] = cloned_line_item.color
+        line_item[:size] = cloned_line_item.size
+        line_item[:length] = cloned_line_item.length
+        line_item[:fabric_id] = cloned_line_item.fabric_id
+        line_item[:order_id] = current_order.id
+
+        line_item.save!
+
+        if populator.populate(line_item: [line_item.id])
+          fire_event('spree.cart.add')
+          fire_event('spree.order.contents_changed')
+
+          current_order.reload
+        end
       end
       
     end
