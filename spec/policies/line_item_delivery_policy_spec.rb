@@ -6,7 +6,7 @@ describe Policies::LineItemDeliveryPolicy, type: :policy do
   let(:line_making_option) { FactoryGirl.build(:line_item_making_option, product_making_option: product_making_option) }
 
   let(:product) { FactoryGirl.build(:dress, making_options: [product_making_option]) }
-  let(:order) { FactoryGirl.build(:spree_order, completed_at: Time.new(2018, 01, 01)) }
+  let(:order) { FactoryGirl.build(:spree_order, completed_at: Time.utc(2018, 01, 01)) }
   let(:line_item) { FactoryGirl.build(:dress_item, product: product, making_options: [line_making_option], order: order) }
   subject { described_class.new(line_item) }
 
