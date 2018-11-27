@@ -85,7 +85,6 @@ module Products
       end
 
       def default_product_sizes
-        byebug
         product_sizes
       end
 
