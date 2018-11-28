@@ -13,4 +13,4 @@ mkdir -p ${shared_modules_path}
 ln -s ${shared_modules_path} ${this_release_dir}/node_modules
 
 cd ${this_release_dir}
-yarn install && yarn run prod
+yarn install
