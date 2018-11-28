@@ -216,7 +216,7 @@ class Populator
     def product_making_options
       @product_making_options ||= begin
         pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
-        pmo = product.making_options.where(default: true).to_a if pmo.empty?
+        pmo = product.making_options.where(default: true, active: true).to_a if pmo.empty?
 
         pmo
       end
