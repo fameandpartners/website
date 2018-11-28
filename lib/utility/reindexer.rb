@@ -5,6 +5,7 @@ module Utility
 
     def self.reindex
       Products::ColorVariantsIndexer.index!
+      Rails.cache.clear
     end
   end
 end
