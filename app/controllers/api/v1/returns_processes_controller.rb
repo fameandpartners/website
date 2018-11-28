@@ -32,7 +32,7 @@ module Api
         fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
-          respond_with OrderSerializer.new(fetched_order).as_json.merge({ items: fetched_order.line_items })
+          respond_with OrderSerializer.new(fetched_order).as_json
         else
           error_response(:GUEST_ORDER_NOT_FOUND)
           return

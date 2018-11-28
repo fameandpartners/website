@@ -39,8 +39,6 @@ class Populator
 
     return OpenStruct.new({
       success: true,
-      product: product,
-      cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
     err_attrs = {

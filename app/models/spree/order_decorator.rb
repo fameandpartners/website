@@ -343,10 +343,13 @@ Spree::Order.class_eval do
   end
 
   def return_eligible_AC?
+    return false unless completed?
     self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
   end
 
   def return_eligible_B?
+    return false unless completed?
+    
     self.completed_at.between?( DateTime.new(2018,11,20), DateTime.new(2018,11,30) ) ||
       ( self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"} )
   end

@@ -113,14 +113,6 @@ Spree::LineItem.class_eval do
     making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
   end
 
-  def cart_item
-    @cart_item ||= Repositories::CartItem.new(line_item: self).read
-  end
-
-  def image
-    cart_item.image.present? ? Spree::Image.find(cart_item.image.id) : nil
-  end
-
   def factory
     Factory.for_product(product)
   end
@@ -238,6 +230,13 @@ Spree::LineItem.class_eval do
       }
     end
     json
+  end
+
+  def image(cropped: )
+    images(cropped: cropped).first
+  end
+  def images(cropped: )
+    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, [], cropped)
   end
 
   def new_sku

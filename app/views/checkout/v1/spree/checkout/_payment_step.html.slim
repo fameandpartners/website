@@ -21,10 +21,7 @@ javascript:
     h2.checkout-section-title Payment method
     / TODO - Rewrite as react component with new button layout and behaviour
     p How would you like to pay?
-
-    - if delivery_date_messaging_enabled?
-      = react_component('Delivery')
-
+    
     ul.payment-option-grid.nav.nav-tabs.nav-justified.no-stack-mobile role="tablist"
       - if @credit_card_gateway
         li.payment-option.active

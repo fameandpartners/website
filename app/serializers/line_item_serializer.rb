@@ -28,15 +28,15 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def image_small
-    image.present? ? image.attachment(:small) : '/assets/noimage/product.png'
+    image.attachment.url(:small)
   end
 
   def product_image
-    image.present? ? image.attachment(:product) : '/assets/noimage/product.png'
+    image.attachment.url(:product)
   end
 
   def image
-    @image ||= object.image
+    @image ||= object.image(cropped: true)
   end
 
   def money

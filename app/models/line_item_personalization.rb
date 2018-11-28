@@ -85,21 +85,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # Size Pricing
   def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    if add_plus_size_cost?
-      if (discount = size.discount).present?
-        Spree::Price.new(amount: default_extra_size_cost).apply(discount).price
-      else
-        default_extra_size_cost
-      end
-    else
-      BigDecimal.new(0)
-    end
-  end
-
-  def add_plus_size_cost?
-    # Ideally we could just ask the size for this information, one day, refactor away the "Repository"
-    product_size = Repositories::ProductSize.read(size_id)
-    !! product_size.extra_price
+    BigDecimal.new(0)
   end
 
   # Color pricing

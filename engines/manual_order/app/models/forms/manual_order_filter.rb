@@ -67,6 +67,7 @@ module Forms
     end
 
     def images
+      raise 'TODO ANDREAS'
       params.fetch(:product_colors, []).map do |_, param|
         p = Spree::Product.find(param.fetch(:product_id))
         image = Repositories::ProductImages.new(product: p).filter(color_id: param.fetch(:color_id).to_i).first

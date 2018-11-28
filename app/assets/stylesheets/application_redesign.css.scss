@@ -118,6 +118,8 @@ z-index levels
 //= require_tree ./libs/vex
 //= require_tree ./redesign/stylesheets
 
+@import 'redesign/stylesheets/bootstrap';
+
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
@@ -162,30 +164,17 @@ z-index levels
 @import 'redesign/tables';
 @import 'redesign/pages';
 @import 'redesign/error';
-@import 'redesign/pages/terms';
 
 // Checkout
 @import 'redesign/pages/page-checkout';
 @import 'redesign/pages/page-checkout-returns-abc';
 
-// Time specific content
-@import 'transient_content';
 
 // Plugins
-@import '../vendor/bower_components/slick-carousel/slick/slick';
-@import 'redesign/vendor/slick-carousel';
 // Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,
 // but I chose to duplicate the file, rather than rewrite any of the current usages.
 @import 'libs/jquery-ui-1.10.4.custom';
 @import 'redesign/vendor/jquery-ui';
-
-// Layout
-@import 'redesign/layout/header';
-@import 'redesign/layout/footer';
-@import 'redesign/layout/nav-menu';
-@import 'redesign/layout/simplified-nav';
-@import 'redesign/layout/menu-new-this-week';
-@import 'redesign/layout/section-boxes';
 
 // Components
 @import 'redesign/components/lists';
@@ -199,7 +188,6 @@ z-index levels
 @import 'redesign/components/hero';
 @import 'redesign/components/blog-posts';
 @import 'redesign/components/seo-content';
-@import 'redesign/components/carousel-strap';
 @import 'redesign/components/how-it-works';
 @import 'redesign/components/logo-image-wrap';
 @import 'redesign/components/styling-tips';
@@ -214,44 +202,14 @@ z-index levels
 @import 'redesign/components/cards/cards';
 @import 'redesign/components/legacy/legacy-carousel';
 @import 'redesign/components/overlay';
-@import 'redesign/components/slick-carousel';
 @import 'redesign/components/full-width';
 
 // Modals
 @import 'redesign/modals/vex';
 @import 'redesign/vendor/react-modal';
 
-// Pages
-@import 'redesign/pages/contact';
-@import 'redesign/pages/faq';
-@import 'redesign/pages/moodboard';
-@import 'redesign/pages/moodboard-edit';
-@import 'redesign/pages/landing-page-v2';
-@import 'redesign/pages/landing-styling-session';
-@import 'redesign/pages/landing-micro-influencer';
-@import 'redesign/pages/pdp/pdp';
-@import 'redesign/pages/why-us';
-@import 'redesign/pages/style-quiz';
-@import 'redesign/pages/shop-social';
-@import 'redesign/pages/homepage';
-@import 'redesign/pages/lookbook-v2';
-@import 'redesign/pages/inside-out';
-@import 'redesign/pages/inside-out-sweepstakes';
-@import 'redesign/pages/slay-it-forward';
-@import 'redesign/pages/wedding-sweepstakes';
-@import 'redesign/pages/bespoke-bridal-collection';
-@import 'redesign/pages/get-the-look';
-@import 'redesign/pages/evening-shop';
-@import 'redesign/pages/gratitude-page';
-@import 'redesign/pages/the-anti-fast-fashion-shop-page';
-@import 'redesign/pages/wholesale';
-@import 'redesign/pages/landing_page_contest';
-@import 'redesign/pages/landing_page_prom_interviews';
-@import 'redesign/pages/landing_page_prom_edit';
 
 // React Components
-@import 'redesign/react_components/_MarketingPage';
-@import 'redesign/react_components/FilterSort';
 @import 'redesign/react_components/Select';
 @import 'redesign/react_components/Radio';
 @import 'redesign/react_components/RadioToggle';
@@ -259,10 +217,6 @@ z-index levels
 
 //Orders
 @import 'redesign/orders/order-details';
-
-//My Account
-@import 'redesign/pages/my-account/common';
-@import 'redesign/pages/returns';
 
 // Generic
 @import 'redesign/generic/content-order';

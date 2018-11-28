@@ -18,6 +18,8 @@ class OrderSerializer < ActiveModel::Serializer
 
   has_one     :ship_address, serializer: AddressSerializer
   has_one     :billing_address, serializer: AddressSerializer
+  has_many    :line_items,  serializer: LineItemSerializer
+
 
   attributes  :shipments,
               :final_return_by_date

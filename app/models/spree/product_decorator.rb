@@ -93,29 +93,45 @@ Spree::Product.class_eval do
     "#{name} (SKU: #{sku})"
   end
 
-  def cache_key
-    "products/#{id}-#{updated_at.to_s(:number)}"
+  def images
+    curations.flat_map(&images)
   end
 
-  def images
-    table_name = Spree::Image.quoted_table_name
+  def images_for_customisation(color_name, fabric_name, customisations, cropped)    
+    if has_render?
+      sku = master.sku
+      fabric = options[:fabric]&.name
+      cust = options[:product_customizations] || []
 
-     if self.fabrics.empty?
-      prod_images = Spree::Image.where(
-        "(#{table_name}.viewable_type = 'ProductColorValue' AND #{table_name}.viewable_id IN (?))
-          OR
-        (#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))",
-        product_color_value_ids, variants_including_master_ids
-      ).order('position asc')
-     else
-      prod_images = Spree::Image.where(
-        "(#{table_name}.viewable_type = 'Spree::Variant' AND #{table_name}.viewable_id IN (?))
-          OR
-        (#{table_name}.viewable_type = 'FabricsProduct' AND #{table_name}.viewable_id IN (?))",
-        variants_including_master_ids, fabric_product_ids
-      ).order('position asc')
+      image_url = Spree::Product.format_render_url(sku, fabric, cust)
+
+      return [
+        get_render_image(options)
+      ]
     end
-    prod_images
+
+    if is_new_product?
+      return [
+        default_image('/assets/noimage/customdress.png')
+      ]
+    end
+
+    curation = curations.where(active: true, pid: "#{}~#{}").first || curations.where(active: true, pid: "#{}~#{}").first || curations.first
+
+    all_images = curation.images
+    if cropped
+      images = all_images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
+      if images.blank?
+        images = all_images.select { |i| i.attachment_file_name.to_s.downcase.include?('front') }
+      end
+      if images.blank?
+        images = all_images
+      end
+    else
+      images = all_images
+    end
+
+    images
   end
 
   def basic_color_ids
@@ -199,14 +215,6 @@ Spree::Product.class_eval do
 
   def short_description
     property('short_description') || ''
-  end
-
-  def standard_days_for_making
-    property("standard_days_for_making")
-  end
-
-  def customised_days_for_making
-    property("customised_days_for_making")
   end
 
   def color_customization

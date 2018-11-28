@@ -1,9 +1,0 @@
-<% if @col!=3 then @col=4 %>
-<% products = @collection.products %>
-<% rows = Math.ceil(products.length / @col) %>
-<% for i in [0...rows]: %>
-  <% for product in _.first(products, @col): %>
-    <%- JST['templates/_product'](product: product, col: @col) %>
-  <% end %>
-  <% products = _.rest(products, @col) %>
-<% end %>

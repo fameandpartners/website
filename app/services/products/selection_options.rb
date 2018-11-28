@@ -16,8 +16,6 @@ module Products
       @product.layer_cads&.sort!{|layer| layer.position}.reverse!
       os =
         OpenStruct.new({
-          variants: product_variants,
-
           sizes: OpenStruct.new({
             default: default_product_sizes,
             extra: extra_product_sizes,
@@ -69,17 +67,12 @@ module Products
         customisations_available? && product.color_customization
       end
 
-      def product_variants
-        @product_variants ||= Repositories::ProductVariants.new(product_id: product.id).read_all
-      end
-
       # sizes part
       def product_sizes
         @product_sizes ||= begin
           Repositories::ProductSize.new(
             site_version: site_version,
             product: product,
-            product_variants: product_variants
           ).read_all
         end
       end

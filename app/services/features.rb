@@ -7,7 +7,6 @@ module Features
     bergen_usa_returns:            '[DEPRECATED] Enable Bergen 3PL return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
     cny_delivery_delays:           "Delivery delays on China New Year's period",
-    delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",

@@ -4,19 +4,13 @@
 //= require libs/typekit.min
 //= require jquery_ujs
 //= require jquery-ui/datepicker
-//= require jquery-fileupload/vendor/jquery.ui.widget
-//= require jquery-fileupload/jquery.iframe-transport
-//= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
 //= require libs/validator.min
 
-//= require libs/jquery.mlens.min
-//= require libs/jquery.sticky
 //= require libs/jquery.zoom.min
 
 //= require modernizr-custom
-//= require libs/scrollreveal.min
 
 //--------------
 // Bootstrap JS
@@ -30,16 +24,6 @@
 //= require bootstrap/affix
 //= require bootstrap/scrollspy
 
-//-------
-// React
-//-------
-
-//= require react
-//= require react_ujs
-//= require components
-
-// npm modules
-//= require slick-carousel/slick/slick.min.js
 
 //---------------------------
 // Spree have this by default
@@ -47,13 +31,7 @@
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
-//= require libs/responsiveslides.min.js
 
-//----------------
-// Styleguide code
-//----------------
-//= require "styleguide/js/functions.js"
-// require js/main.js
 
 //----------------
 // Masterpass libs
@@ -70,16 +48,10 @@
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
-//= require partials/helpers/anchor_navigation
 
-//-----------------------------------
-// Show old quiz in popup with iframe
-//-----------------------------------
-// require partials/style/popup
 
 //require partials/product_customisation.js
 
-//= require partials/email_capture_modal
 //= require partials/returns_modal
 //= require partials/helpers/tracker.js
 //= require partials/helpers/error_messages.js.coffee
@@ -88,7 +60,6 @@
 // Product details with related
 //-----------------------------
 //= require partials/inputs/new.js.coffee
-//= require partials/product_collection_image_hover.js.coffee
 
 //--------------------------------
 // Shopping cart & bag & moodboard
@@ -103,31 +74,6 @@
 //= require partials/checkout_page__stripe
 //= require partials/extra_fees_alert
 
-// Profile/Account Settings
-//= require partials/account_settings_page
-
-//--------------------------------
-// Hero Tile Carousel
-//--------------------------------
-//= require partials/hero-tile-carousel
-
 jQuery(document).ready(function($){
   $('body').addClass('ready');
-
-  $('#forgot-password').on('click', function(e) {
-    e.preventDefault();
-    email = $('#spree_user_email').val();
-    window.location = $(this).attr('href') + '?email=' + email;
-  });
-
-	//home page slider
-	$(function() {
-		$(".rslides").responsiveSlides({
-			auto: false,             // Boolean: Animate automatically, true or false
-	 		pager: true,           // Boolean: Show pager, true or false
-			speed: 3000,            // Integer: Speed of the transition, in milliseconds
-	  		timeout: 6000          // Integer: Time between slide transitions, in milliseconds
-    	});
-	});
-
 });

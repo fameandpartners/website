@@ -6,7 +6,7 @@ app_dir = File.expand_path("../..", __FILE__)
 working_directory app_dir
 
 # Set unicorn options
-worker_processes 3
+worker_processes 1
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
   GC.copy_on_write_friendly = true

@@ -8,7 +8,6 @@
 *= require_self
 *= require_tree .
 *= require store/spree_social
-*= require jquery.fileupload-ui
 *= require jquery-ui/tabs
  *= require store/spree_masterpass
 */

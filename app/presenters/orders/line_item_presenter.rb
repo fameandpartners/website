@@ -120,9 +120,6 @@ module Orders
           )
         end
 
-        unless standard_variant_for_custom_color.present?
-          customs << ["Custom Color: #{colour_name}"]
-        end
         customs
       else
         [['N/A']]

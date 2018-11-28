@@ -35,7 +35,9 @@ module Orders
                    :returnable?,
                    :item_count,
                    :return_type,
-                   :vwo_type
+                   :vwo_type,
+                   :promocode,
+                   :display_item_total
 
     attr_reader :spree_order, :items, :order
 
@@ -121,6 +123,14 @@ module Orders
       url.include?('missing.png') ? nil : url
     end
 
+    def display_shipment_total
+      if spree_order.shipment.present? && spree_order.shipment.amount.to_i > 0
+        spree_order.shipment.display_amount.to_s
+      else
+        'Free Shipping' # JST will set FREE
+      end
+    end
+
     def extract_line_items
       self.line_items.collect do |item|
         {
@@ -139,7 +149,7 @@ module Orders
           factory:               item.factory.name,
           deliver_date:          item.projected_delivery_date.to_s,
           express_making:        item.making_options.present? ? item.making_options.map { |option| option.name.upcase }.join(', ') : "",
-          image_url:             item.image? ? item.image_url : '',
+          image_url:             item.image_url,
           total_price:           item.price.to_s,
           discount:              item.item.product.discount.to_s
         }.merge(

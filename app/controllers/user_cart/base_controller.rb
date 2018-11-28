@@ -4,13 +4,6 @@ class UserCart::BaseController < ApplicationController
 
   private
 
-    def user_cart_resource
-      @cart_resource ||= UserCart::UserCartResource.new(
-        order: current_order,
-        site_version: current_site_version
-      )
-    end
-
     def check_authorization
       access_token = params[:token] || session[:access_token]
 

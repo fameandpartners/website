@@ -35,13 +35,9 @@ class UserCart::ProductsController < UserCart::BaseController
 
       reapply_delivery_promo
 
-      @user_cart = user_cart_resource.read
-
-      data = add_analytics_labels(@user_cart.serialize)
-
-      respond_with(@user_cart) do |format|
+      respond_with(current_order) do |format|
         format.json   {
-          render json: data, status: :ok
+          render json: current_order, status: :ok
         }
       end
     else # not success
@@ -81,40 +77,6 @@ class UserCart::ProductsController < UserCart::BaseController
     render json: user_cart_resource.read.serialize, status: :ok
   end
 
-  def move_to_cart
-    @item = Spree::LineItem.find_by_id(params[:id])
-
-    if @item.stock
-      populator = Spree::OrderPopulator.new(current_order(true), current_currency)
-
-      if populator.populate(line_item: [params[:id].to_i])
-        fire_event('spree.cart.add')
-        fire_event('spree.order.contents_changed')
-
-        current_order.reload
-      end
-      @user_cart = user_cart_resource.read
-      data = add_analytics_labels(@user_cart.serialize)
-
-
-      respond_with(@user_cart) do |format|
-        format.json   {
-          render json: data, status: :ok
-        }
-      end
-    else
-      NewRelic::Agent.notify('AddToCartFailed',
-                             message: 'Out of Stock',
-                             order_number: current_order.number,
-                             site_version: current_site_version.code)
-      respond_with({}) do |format|
-        format.json   {
-          render json: { error: true, message: 'Out of Stock' }, status: 422
-        }
-      end
-    end
-  end
-
   def restore
     abandoned_cart = Bronto::CartRestorationService.get_abandoned_cart(params[:cart_id])
 
@@ -134,15 +96,6 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
   private
-
-  def add_analytics_labels(data)
-    data = @user_cart.serialize
-
-    data[:products].each do |product|
-      product[:analytics_label] = analytics_label(:user_cart_product, product)
-    end
-    data
-  end
 
   def cart_product_service
     @cart_product_service ||= UserCart::CartProduct.new(
@@ -182,10 +135,6 @@ class UserCart::ProductsController < UserCart::BaseController
       end
       
     end
-    
-    @user_cart = user_cart_resource.read
-    data = add_analytics_labels(@user_cart.serialize)
-
   end
 
 end
