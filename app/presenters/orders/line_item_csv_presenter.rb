@@ -155,7 +155,7 @@ module Orders
       def production_sheet_url
         if Spree::Product.is_new_product?(style)
           pid = Spree::Product.format_new_pid(
-            style,
+            line['style'],
             item.fabric&.name || item.color,
             JSON.parse(item.customizations)
           )
