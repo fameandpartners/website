@@ -60,7 +60,7 @@ module AdminUi
       item_return = ItemReturn.find(params[:item_return_id])
       order = Spree::Order.find_by_number(item_return.order_number)
       label = ReturnsProcessesControllerHelper.create_label(order.id)
-      redirect_to label.label_pdf_url
+      redirect_to label&.label_pdf_url
     end
 
     def bulk_refund_process

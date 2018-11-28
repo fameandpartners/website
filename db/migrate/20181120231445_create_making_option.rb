@@ -36,7 +36,7 @@ class CreateMakingOption < ActiveRecord::Migration
     ProductMakingOption.where(option_type: 'super_fast_making').update_all(making_option_id: MakingOption.find_by_code('M10D').id)
 
     grouped = ProductMakingOption.where(active: true).group_by{|pmo| [pmo.product_id, pmo.making_option_id] }
-    grouped.values.each do |duplicates|
+    grouped&.values&.each do |duplicates|
       duplicates.shift
       duplicates.each{|double| double.destroy}
     end
@@ -47,7 +47,7 @@ class CreateMakingOption < ActiveRecord::Migration
       default_pmo.making_option = MakingOption.find_or_create_by_code('M10W')
       default_pmo.save!
     end
-    
+
 
     rename_column :product_making_options, :option_type, :old_option_type
     rename_column :product_making_options, :price, :old_price
@@ -56,4 +56,3 @@ class CreateMakingOption < ActiveRecord::Migration
     rename_column :spree_taxons, :delivery_period, :old_delivery_period
   end
 end
- 

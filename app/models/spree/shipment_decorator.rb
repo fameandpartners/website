@@ -21,8 +21,17 @@ Spree::Shipment.class_eval do
     end
   end
 
+  def as_json(options={})
+    result_json = super options
+
+    result_json['line_item_ids'] = self.line_items.map(&:id)
+    result_json['shipment']['url'] = self.tracking_url
+    result_json
+  end
+
   private
   def shipping_method?(matcher)
     !! (shipping_method.name =~ matcher)
   end
-end
+
+ end

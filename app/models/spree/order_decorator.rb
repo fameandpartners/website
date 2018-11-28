@@ -351,15 +351,24 @@ Spree::Order.class_eval do
       ( self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"} )
   end
 
-  def as_json(options = { })
+  def return_eligible?
     max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
 
+    self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date
+  end
+
+  def final_return_by_date
+    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
+    (max_delivery_date + 60)
+  end
+
+  def as_json(options = { })
     json = super(options)
     json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
-    json['final_return_by_date'] = max_delivery_date && (max_delivery_date + 60).strftime("%m/%d/%y")
+    json['final_return_by_date'] = self.final_return_by_date&.strftime("%m/%d/%y")
     json['international_customer'] = self.shipping_address&.country_id != 49 || false
     json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date
+    json['return_eligible'] = self.return_eligible?
 
     json
   end

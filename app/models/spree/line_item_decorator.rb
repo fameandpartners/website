@@ -133,6 +133,14 @@ Spree::LineItem.class_eval do
     cart_item.try(:color).try(:presentation) || ''
   end
 
+  def color_code
+    cart_item.try(:color).try(:name) || ''
+  end
+
+	def color_hex
+		cart_item&.try(:color)&.try(:value)&.include?("#") ? cart_item.try(:color).try(:value) : nil
+	end
+
   def height_name
     personalization.try(:height) || ''
   end
@@ -196,7 +204,8 @@ Spree::LineItem.class_eval do
         "name": self.style_name,
         "price": self.price,
         "color": self.color_name,
-        "image": self.image_url
+        "image": self.image_url,
+        "colorHex": self.color_hex,
       }
     else
       json['line_item']['products_meta'] = {
@@ -211,7 +220,11 @@ Spree::LineItem.class_eval do
         "image": self.image_url,
         "sku": self.new_sku,
         "productSku": self.product_sku,
+        "colorCode": self.color_code,
+				"colorHex": self.color_hex,
+        "fabricCode": self&.fabric&.name,
       }
+      json['line_item']['fabrication'] = self&.fabrication
     end
     if self.item_return.present?
       json['line_item']['returns_meta'] = {
@@ -220,7 +233,8 @@ Spree::LineItem.class_eval do
         "item_return_id": self.item_return.id,
         "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',
         "label_image_url": self.item_return&.item_return_label&.label_image_url || '',
-        "label_url": self.item_return&.item_return_label&.label_url || ''
+        "label_url": self.item_return&.item_return_label&.label_url || '',
+				"item_return": self.item_return
       }
     end
     json

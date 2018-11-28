@@ -60,7 +60,7 @@ FameAndPartners::Application.routes.draw do
               skip:        [:unlocks, :omniauth_callbacks],
               path_names:  { sign_out: 'logout' }
   end
-  
+
 
   devise_scope :spree_user do
     get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
@@ -233,8 +233,8 @@ FameAndPartners::Application.routes.draw do
   get '/snapchat-prom-offer', to: redirect('/dressses/prom')
   get '/holiday-party-survival-kit', to: redirect('/dressses/evening')
   get '/fresh-for-summer-collection', to: redirect('/collection/fresh-for-summer-collection')
-  
-  
+
+
   ###########
   # User Cart
   ###########
@@ -274,7 +274,7 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  
+
 
   get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
   resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
@@ -355,6 +355,9 @@ FameAndPartners::Application.routes.draw do
       get 'guest/order' => 'returns_processes#guest'
       post 'submit_return' => 'returns_processes#create'
 
+      # order history
+      get 'order_history' => 'orders#history'
+
       scope '/user_cart' do
         post 'products' => 'products#create'
       end
@@ -363,7 +366,7 @@ FameAndPartners::Application.routes.draw do
       put '/product_upload' => 'product_upload#upload'
 
       get 'track' => 'tracking#track'
-      
+
       # user session
       devise_scope :spree_user do
         post 'user/login' => 'user_sessions#create'
@@ -385,8 +388,10 @@ FameAndPartners::Application.routes.draw do
   end
 
   # Returns
-  get '/view-orders'    => 'returns#main', as: 'user_orders'
-  get '/guest-returns'  => 'returns#guest'
+  # get '/view-orders'    => 'returns#main', as: 'user_orders'
+  # get '/guest-returns'  => 'returns#guest'
+  get '/view-orders' => redirect('/orders')
+  get '/guest-returns' => redirect('/return/guest')
   get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do

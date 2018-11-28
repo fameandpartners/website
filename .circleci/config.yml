@@ -83,10 +83,6 @@ jobs:
             bundle exec rake db:create db:schema:load db:migrate --trace
 
       - run:
-          name: Build frontend
-          command: yarn run prod
-
-      - run:
           name: Run rspec in parallel
           command: |
             bundle exec rspec --profile 10 \

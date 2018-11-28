@@ -32,7 +32,7 @@ module Api
         fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
-          respond_with Orders::OrderPresenter.new(fetched_order)
+          respond_with OrderSerializer.new(fetched_order).as_json.merge({ items: fetched_order.line_items })
         else
           error_response(:GUEST_ORDER_NOT_FOUND)
           return
@@ -46,6 +46,7 @@ module Api
 
         if @user.nil?
           error_response(:RETRY, :USER_NOT_FOUND)
+          return
         end
 
         if has_incorrect_params?
@@ -54,8 +55,8 @@ module Api
         end
 
         request_object = {
-          "order_id": params['order_id']&.to_i,
-          "line_items": params['line_items'].values
+          "order_id": params[:order_id]&.to_i,
+          "line_items": params[:line_items]
         }
 
         if has_invalid_order_id?(request_object[:order_id])
