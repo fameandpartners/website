@@ -37,7 +37,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
       respond_with(current_order) do |format|
         format.json   {
-          render json: current_order, status: :ok
+          render json: OrderSerializer.new(current_order).as_json(root: false), status: :ok
         }
       end
     else # not success

@@ -94,7 +94,7 @@ Spree::Product.class_eval do
   end
 
   def images
-    curations.flat_map(&images)
+    curations.flat_map(&:images)
   end
 
   def images_for_customisation(color_name, fabric_name, customisations, cropped)    

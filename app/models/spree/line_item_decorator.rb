@@ -117,20 +117,20 @@ Spree::LineItem.class_eval do
     Factory.for_product(product)
   end
 
-  def promotional_gift?
-    product.try(:name) == "Gift"
+  def color
+    personalization.try(:color)
   end
 
   def color_name
-    cart_item.try(:color).try(:presentation) || ''
+    color.try(:presentation) || ''
   end
 
   def color_code
-    cart_item.try(:color).try(:name) || ''
+    color.try(:name) || ''
   end
 
 	def color_hex
-		cart_item&.try(:color)&.try(:value)&.include?("#") ? cart_item.try(:color).try(:value) : nil
+		color.try(:value)&.include?("#") ? color.try(:value) : nil
 	end
 
   def height_name
@@ -149,8 +149,12 @@ Spree::LineItem.class_eval do
     cart_item.try(:image).try(:large) || ''
   end
 
+  def size
+    personalization.size
+  end
+
   def size_name
-    cart_item.try(:size).try(:presentation) || ''
+    size&.presentation
   end
 
   def style_name
@@ -163,10 +167,6 @@ Spree::LineItem.class_eval do
 
   def return_insurance?
     product.name.downcase.include? "return_insurance"
-  end
-
-  def store_credit_only_return?
-    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
   end
 
   def return_eligible_AC?
@@ -186,52 +186,7 @@ Spree::LineItem.class_eval do
   def in_batch?
     !self.batch_collections.empty?
   end
-
-  def as_json(options = { })
-    json = super(options)
-    json['line_item']['store_credit_only'] = self.store_credit_only_return?
-    json['line_item']['window_closed'] = self.window_closed?
-    if self.fabric_swatch?
-      json['line_item']['products_meta'] = {
-        "name": self.style_name,
-        "price": self.price,
-        "color": self.color_name,
-        "image": self.image_url,
-        "colorHex": self.color_hex,
-      }
-    else
-      json['line_item']['products_meta'] = {
-        "name": self.style_name,
-        "price": self.price,
-        "size": self.size_name,
-        "color": self.color_name,
-        "fabric": self&.fabric&.presentation,
-        "height": self.height_name,
-        "height_unit": self.height_unit,
-        "height_value": self.height_value,
-        "image": self.image_url,
-        "sku": self.new_sku,
-        "productSku": self.product_sku,
-        "colorCode": self.color_code,
-				"colorHex": self.color_hex,
-        "fabricCode": self&.fabric&.name,
-      }
-      json['line_item']['fabrication'] = self&.fabrication
-    end
-    if self.item_return.present?
-      json['line_item']['returns_meta'] = {
-        "created_at_iso_mdy": self.item_return.created_at.strftime("%m/%d/%y"),
-        "return_item_state": self.item_return.acceptance_status,
-        "item_return_id": self.item_return.id,
-        "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',
-        "label_image_url": self.item_return&.item_return_label&.label_image_url || '',
-        "label_url": self.item_return&.item_return_label&.label_url || '',
-				"item_return": self.item_return
-      }
-    end
-    json
-  end
-
+  
   def image(cropped: )
     images(cropped: cropped).first
   end

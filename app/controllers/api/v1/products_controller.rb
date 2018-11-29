@@ -383,7 +383,6 @@ module Api
 
         images = product
           .images
-          .includes(:viewable)
 
         product_viewmodel = {
           productId: product.sku,

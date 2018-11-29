@@ -10,7 +10,7 @@
           <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
             <div class="pull-right">
               <span class="cart-checkout">
-              <% if @cart.products.length: %>
+              <% if @cart.line_items.length: %>
                 <button type="submit" class="cta-icon-text btn btn-black">CHECKOUT <i class="icon icon-arrow-right"></i></button>
               <% else: %>
                 <button type="submit" class="cta-icon-text btn btn-black" disabled="disabled">CHECKOUT <i class="icon icon-arrow-right"></i></button>
@@ -43,9 +43,9 @@
       </div>
     </div>
 
-    <% if @cart.products.length: %>
+    <% if @cart.line_items.length: %>
     <div class="cart-items">
-      <% for product in @cart.products: %>
+      <% for product in @cart.line_Items: %>
         <% if product.name != "RETURN_INSURANCE" : %>
         <div class="row cart-item" data-id="<%= product.line_item_id %>">
           <div class="cart-item-image-holder col-xs-5">
@@ -140,7 +140,7 @@
           <div class="cart--call-to-actions">
             <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
               <div>
-                <% if @cart.products.length: %>
+                <% if @cart.line_items.length: %>
                   <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
                 <% else: %>
                   <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block"  disabled="disabled">

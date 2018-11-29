@@ -3,7 +3,7 @@
   h3.text-center Summary
   br
   ul.cart-items
-    - (cart.products || []).each do |product|
+    - (cart.line_items || []).each do |product|
       li
         = image_tag product.image.large, class: 'img-responsive pull-left cart-item-image'
         .cart-item--details.pull-left

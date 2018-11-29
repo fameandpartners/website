@@ -6,8 +6,8 @@ class UserCart::DetailsController < Api::ApiBaseController
       format.json   {
         render json:
         {
-          cart: OrderSerializer.new(current_order).as_json,
-          user: spree_user_signed_in? && UserSerializer.new(current_spree_user)
+          cart: current_order ? OrderSerializer.new(current_order).as_json(root: false) : nil,
+          user: spree_user_signed_in? ? UserSerializer.new(current_spree_user).as_json(root: false) : nil
         },
        status: :ok
       }

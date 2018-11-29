@@ -1,28 +1,27 @@
 class OrderSerializer < ActiveModel::Serializer
   attributes  :id,
-              :number,
-              :created_at,
-              :completed_at,
-              :updated_at,
-              :payment_state,
-              :payment_total,
-              :projected_delivery_date,
-              :return_type,
-              :shipment_state,
-              :state,
-              :return_eligible?,
-              :adjustment_total,
-              :promocode,
-              :item_total,
-              :currency
+              :number
 
-  has_one     :ship_address, serializer: AddressSerializer
-  has_one     :billing_address, serializer: AddressSerializer
+              # :created_at,
+              # :completed_at,
+              # :updated_at,
+              # :payment_state,
+              # :payment_total,
+              # :projected_delivery_date,
+              # :return_type,
+              # :shipment_state,
+              # :state,
+              # :return_eligible?,
+              # :adjustment_total,
+              # :promocode,
+              # :item_total,
+              # :currency,
+              # :final_return_by_date
+
+  # has_one     :ship_address, serializer: AddressSerializer
+  # has_one     :billing_address, serializer: AddressSerializer
   has_many    :line_items,  serializer: LineItemSerializer
-
-
-  attributes  :shipments,
-              :final_return_by_date
+  # has_many    :shipments,  serializer: ShipmentSerializer
 
   def billing_address
     object.billing_address
@@ -33,11 +32,12 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def shipments
-    object.shipments
+    object.completed? ? object.shipments : []
   end
 
   def final_return_by_date
-    (object.final_return_by_date).to_time.iso8601
+    object.completed? ? (object.final_return_by_date).to_time.iso8601 : nil
+    
   end
 
 end

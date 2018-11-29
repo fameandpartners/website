@@ -3,78 +3,60 @@ class LineItemSerializer < ActiveModel::Serializer
   include ActionView::Helpers::TextHelper
   include Spree::ProductsHelper
 
-  attributes :quantity, :currency, :id, :variant_id
-
-  attributes :count_on_hand,
-    :image_small,
-    :product_image,
-    :money,
-    :money_without_discount,
+  attributes :id,
+    :color,
+    :height_value,
+    :height_unit,
+    :name,
+    :sku,
+    :pid,
     :price,
-    :product_name,
-    :product_permalink,
-    :product_description,
-    :product_color,
-    :product_size
+    :strikethrough_price,
+    :size,
+    :url,
+    :image
 
-  has_one :personalization, serializer: LineItemPersonalizationSerializer
+  has_many :making_options, serializer: MakingOptionSerializer
+  has_one  :fabric, serializer: FabricSerializer
+  has_one  :color, serializer: ColorSerializer
+  has_one  :size, serializer: SizeSerializer
+  has_many :customizations, serializer: CustomizationSerializer
+
+
+
+  def name
+    object.style_name
+  end
+
+  def sku
+    object.product_sku
+  end
+
+  def pid
+    object.new_sku
+  end
+
+  def strikethrough_price
+    object.old_price ? object.old_price * 100 : nil
+  end
 
   def price
-    object.price.to_s
+    object.price * 100
   end
 
-  def product_name
-    object.variant.product.name
-  end
-
-  def image_small
-    image.attachment.url(:small)
-  end
-
-  def product_image
-    image.attachment.url(:product)
+  def url
+    'TODO'
   end
 
   def image
-    @image ||= object.image(cropped: true)
+    'TODO'
   end
 
-  def money
-    object.money.to_s
+  def customizations
+    JSON.parse(object.customizations)
   end
 
-  def money_without_discount
-    object.in_sale? ? object.money_without_discount.to_s : nil
-  end
-
-  def count_on_hand
-    object.variant.count_on_hand
-  end
-
-  def product_permalink
-    object.variant.product.permalink
-  end
-
-  # copy pasted code from spree line_item_description
-  # due to problems with t method
-  def product_description
-    description = object.variant.product.description
-    if description.present?
-      truncate(strip_tags(description.gsub('&nbsp;', ' ')), :length => 100)
-    else
-      I18n.t(:product_has_no_description)
-    end
-  end
-
-  def product_color
-    if (personalization = object.personalization).present?
-      return personalization.color.try(:value) || ''
-    else
-      object.variant.dress_color.try(:presentation) || ''
-    end
-  end
-
-  def product_size
-    object.variant.dress_size.try(:name) || ''
+  def making_options
+    object.making_options.map(&:product_making_option).map(&:making_option)
   end
 end

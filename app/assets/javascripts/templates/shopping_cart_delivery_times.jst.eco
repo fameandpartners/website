@@ -1,7 +1,7 @@
 <h2 class="checkout-section-title">Shipping Methods</h2>
 <p class="minor-callout">Choose when you want to receive your order.</p>
 <% i = -1 %>
-<% for product in @cart.products: %>
+<% for product in @cart.line_items: %>
   <% i += 1 %>
   <% if product.name != "RETURN_INSURANCE" : %>
       <div class="cart-item js-delivery-times-wrapper" data-index=<%= i %>>

@@ -1,6 +1,6 @@
-<% if @cart.products.length: %>
+<% if @cart.line_items.length: %>
 <div class="cart-items">
-  <% for product in @cart.products: %>
+  <% for product in @cart.line_Items: %>
     <% if product.name != "RETURN_INSURANCE" : %>
     <div class="row cart-item" data-id="<%= product.line_item_id %>">
       <div class="cart-item-image-holder col-xs-5">
