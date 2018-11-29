@@ -81,7 +81,7 @@ FameAndPartners::Application.routes.draw do
   get '/faqs' => 'noop#noop', as: :faqs
   get '/why-us' => 'noop#noop', as: :why_us
   get '/about' => 'noop#noop', as: :about_us
-
+  get '/orders' => 'noop#noop', as: :user_orders
 
 
 
