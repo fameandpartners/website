@@ -10,7 +10,7 @@ module Policies
       @product = @line_item.product
 
       @making_option = @line_item.making_options.first&.product_making_option&.making_option
-      @making_option ||= @product.making_options.active.where(default: true).first&.making_option
+      @making_option ||= @product.making_options.active.where(default: true, active: true).first&.making_option
     end
 
     def ship_by_date
