@@ -1,0 +1,29 @@
+<style>
+.ecab6a0 {
+    display: inline-block;
+    background-color: #ddd;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+</style>
+
+<%= render(partial: 'heading') %>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title wrapper-d386566">
+          <%= render(partial: 'toolbar') %>
+        </div>
+        <div class="ibox-content wrapper-dc38f9f">
+          <%= render(partial: 'table') %>
+        </div>
+      </div>
+    </div>
+  </div><!-- row -->
+</div>
+
+<%= render(partial: 'scripts') %>

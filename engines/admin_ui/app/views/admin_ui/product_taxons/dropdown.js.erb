@@ -1,0 +1,6 @@
+if ( $('.wrapper-fd9d361').hasClass('open') ) {
+    $('.wrapper-fd9d361').removeClass('open');
+} else {
+    $(".wrapper-d386566").html("<%= j render(partial: 'toolbar') %>");
+    $('.wrapper-fd9d361').addClass('open');
+}

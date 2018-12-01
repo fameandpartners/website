@@ -1,0 +1,47 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product </th>
+        <th>Taxons</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @products.each do |product| %>
+        <% state = @table_state.select { |x| x["product_id"] == product.id.to_s }&.first
+           is_checked = ( (@table_state.any? { |x| x["is_checked"]=="1" && x["product_id"]==product.id.to_s}) ? "1" : "0" ) %>
+
+        <tr class="rows-b80f8d6" data-is-checked=<%=is_checked%> data-product-id=<%= product.id %> >
+          <td class="col-xs-3" style=" white-space: nowrap; max-width: 400px; overflow: hidden;">
+            <input type="checkbox" value="" <%= 'checked' if is_checked=="1" %> >&nbsp;&nbsp;
+            <span style="
+              <%= 'text-decoration: line-through;' if product.deleted_at || product.hidden %>
+              ">
+            <% if product.deleted_at %>
+              <%= product.id %>.<%= product.master.sku.upcase %> &nbsp;DELETED PRPODUCT
+            <% elsif product.hidden %>
+              <%= product.id %>.<%= product.master.sku.upcase %> &nbsp;HIDDEN PRODUCT
+            <% else %>
+              <%= product.id %> <%= product.name %> (<%= product.master.sku.upcase %>)
+            <% end %>
+          </td>
+          <td class="col-xs-9" >
+            <%= "None" if product.taxons.size == 0 %>
+            <% product.taxons.each do |taxon| %>
+            <div style="
+                   display: inline-block;
+                   background-color: #ddd;
+                   border-radius: 5px;
+                   border: 1px solid white;
+                   padding-left: 3px;
+                   padding-right: 3px;">
+              <%= taxon.name %>
+            </div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

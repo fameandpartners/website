@@ -1,0 +1,49 @@
+<div class="ibox-tools wrapper-fd9d361">
+  <a class="collapse-link">
+    <i class="fa fa-chevron-up"></i>
+  </a>
+
+  <%= link_to '/fame_admin/product_taxons/dropdown',
+      class: "dropdown-button-ae27033",
+      style: "text-align: center",
+      data: {
+        method: :post,
+        disable_with: "<i class='fa fa-spinner invisible'></i>&nbsp;&nbsp;<span class='caret'></span>&nbsp; <i class='fa fa-spinner fa-spin'></i>".html_safe,
+        remote: true } do %>
+      <i class='fa fa-spinner invisible'></i>&nbsp;&nbsp;<span class="caret"></span>&nbsp;&nbsp;<i class='fa fa-spinner invisible'></i>
+  <% end %>
+
+
+  <ul class="dropdown-menu dropdown-user" style="height: auto; max-height: 50vh; overflow-x: hidden;">
+
+    <li class="wrapper-e9e4f8f invisible">
+      <%= link_to '<span>Apply &nbsp;<i class="fa fa-spinner invisible"></i></span>'.html_safe,
+          '/fame_admin/product_taxons/apply',
+          class: "apply-button-c515cd5",
+          style: "text-align: center",
+          data: {
+            method: :post,
+            remote: true,
+            disable_with: '<span class="" style="">Apply &nbsp;<i class="fa fa-spinner fa-spin"></i></span>'.html_safe,
+          } %>
+
+    </li>
+    <li role="separator" class="divider"></li>
+
+    <% @all_taxons.each do |taxon| %>
+      <li class="dropdown-items-c7f057a"
+          data-taxon-id='<%=taxon[:taxon_id]%>'
+          data-original-state='<%=taxon[:state]%>'
+          data-current-state='<%=taxon[:state]%>'
+          data-toggleable-states='<%=taxon[:toggleable_states]%>'>
+        <a class="dropdown-item" href="javascript:;">
+          <i style='line-height: 25px; vertical-align: middle;' class="fa <%= taxon[:state] %> fa-3x"></i>
+          <%= taxon[:name] %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <a class="close-link">
+    <i class="fa fa-times"></i>
+  </a>
+</div>

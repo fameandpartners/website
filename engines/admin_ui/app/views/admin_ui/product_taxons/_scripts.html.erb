@@ -1,0 +1,92 @@
+<script>
+
+// toggles icon like gmails labeling tool does
+function toggle_f8fcac5(wrapping_element) {
+    var element = $(wrapping_element).find("i").first();
+    var toggleable_states = $(wrapping_element).data('toggleable-states').split(',');
+    var current_state_index = toggleable_states.indexOf( $(wrapping_element).data("current-state") );
+    var next_state_index = current_state_index+1;
+    if (next_state_index == toggleable_states.length) {
+        next_state_index = 0;
+    }
+    $(wrapping_element).data("current-state",toggleable_states[next_state_index]);
+    $(element).removeClass('fa-square-o fa-minus-square fa-check-square').addClass(toggleable_states[next_state_index]);
+}
+
+// when the user hasn't requested any chance, the apply button is not shown
+function hide_apply_button_dbef189() {
+    num_dropdown_items = $(".dropdown-items-c7f057a").length;
+    var untouched_dropdown_items = $(".dropdown-items-c7f057a").filter( function(index) {
+        return ( $(this).data("original-state") == $(this).data("current-state") )
+    }).length;
+    if ( num_dropdown_items == untouched_dropdown_items ) {
+        $(".wrapper-e9e4f8f").addClass('invisible');
+    }
+    else {
+        $(".wrapper-e9e4f8f").removeClass('invisible');
+    }
+
+}
+
+// prevent table-checkboxes meddling when dropdown is open
+$("body").on("click", ".rows-b80f8d6 input[type='checkbox']", function(event) {
+    if ( $('.wrapper-fd9d361').hasClass('open') ) {                                                                                         return false;
+    }
+});
+
+// toggles icon
+$("body").on("click", ".dropdown-items-c7f057a", function() {
+    //event.preventDefault();
+    event.stopPropagation();
+    toggle_f8fcac5(this);
+    hide_apply_button_dbef189();
+})
+
+// appends view state to the ujs/ajax http request
+$("body").on("ajax:before", ".apply-button-c515cd5, .dropdown-button-ae27033", function() {
+    var a = $.param(
+                     {
+                         "table_state": table_state_b5512e0(),
+                         "toolbar_state": toolbar_state_c6eeceb()
+                     });
+    $(this).data('params', a);
+
+});
+
+
+// updates data attribute when check boxes are checked
+$("body").on("change", ".rows-b80f8d6 input[type='checkbox']", function(event) {
+    if($(this).is(':checked')) {
+        $(this).closest("tr").data('is-checked', '1');
+    } else {
+        $(this).closest("tr").data('is-checked', '0');
+    }
+});
+
+// returns the state of the _toolbar partial
+// as a json structure
+function toolbar_state_c6eeceb() {
+    return $(".dropdown-items-c7f057a").map(
+        function(index,elem) {
+            return {
+                "original_state": $(elem).data("original-state"),
+                "current_state": $(elem).data("current-state"),
+                "taxon_id": $(elem).data("taxon-id"),
+            }
+        }
+    ).get()
+}
+
+// returns the state of the _table partial
+// as a json structure
+function table_state_b5512e0() {
+    return $("tr.rows-b80f8d6").map(
+                             function(index, elem) {
+                                return {
+                                    "is_checked": $(elem).data("is-checked"),
+                                    "product_id": $(elem).data("product-id")
+                                }
+                              }
+    ).get()
+}
+</script>

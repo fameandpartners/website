@@ -83,6 +83,13 @@ AdminUi::Engine.routes.draw do
 
   resources :fabrics
 
+  resources :product_taxons do
+    collection do
+      post 'apply'
+      post 'dropdown'
+    end
+  end
+
   namespace :customisation do
     resources :customisation_values do
       collection do
