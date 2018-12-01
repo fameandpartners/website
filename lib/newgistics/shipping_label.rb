@@ -77,11 +77,7 @@ include Newgistics::NewgisticsHelper
     end
 
     def make_return_id_map
-      if Rails.env == 'production'
-        {"returnId" => @return_id}
-      else
-        {"returnId" => @return_id}
-      end
+      { "returnId" => Spree::Order.find(@return_id).number }
     end
 
     def convert_json_to_instance_variables(json)
