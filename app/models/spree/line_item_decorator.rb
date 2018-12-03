@@ -155,6 +155,10 @@ Spree::LineItem.class_eval do
     self.product&.category&.category == 'Sample'
   end
 
+  def fabrics_product
+    fabric ? product.fabric_products.where(fabric_id: fabric.id).first : nil
+  end
+
   def sample_sale?
     self.stock.nil?
   end

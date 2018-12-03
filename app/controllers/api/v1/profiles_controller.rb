@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProfilesController < Users::BaseController
+    class ProfilesController < ApiBaseController
       include SslRequirement
       helper 'spree/users', 'spree/base'
       include Spree::Core::ControllerHelpers::Auth

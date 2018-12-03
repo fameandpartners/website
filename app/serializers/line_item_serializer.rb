@@ -24,7 +24,7 @@ class LineItemSerializer < ActiveModel::Serializer
 
   has_many :making_options, serializer: MakingOptionSerializer
   has_many :available_making_options, serializer: MakingOptionSerializer
-  has_one  :fabric, serializer: FabricSerializer
+  has_one  :fabric, serializer: FabricsProductSerializer
   has_one  :color, serializer: ColorSerializer
   has_one  :size, serializer: SizeSerializer
   has_one  :shipment,  serializer: ShipmentSerializer
@@ -58,7 +58,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def display_price
-    object.price * 100 #TODO
+    666
   end
 
   def url
@@ -87,5 +87,9 @@ class LineItemSerializer < ActiveModel::Serializer
   
   def return
     object&.item_return
+  end
+
+  def fabric
+    object.fabrics_product
   end
 end

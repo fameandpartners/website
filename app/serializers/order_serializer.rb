@@ -58,7 +58,7 @@ class OrderSerializer < ActiveModel::Serializer
 
 #TODO
   def display_total
-    total
+    666
   end
   def display_shipment_total
     shipment_total

@@ -49,41 +49,20 @@ module Products
       product_scope.find_each do |product|
         #total_sales         = total_sales_for_sku(product.sku)
 
-        if product.fabric_products.empty?
-          product.product_color_values.active.each do |product_color_value|
-            color = product_color_value.option_value
-            log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
+        product.curations.active.each do |curation|
+          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{curation.pid.ljust(20)} |"
 
-            if !product_color_value.images.present? 
-              logger.error "id  -  | #{log_prefix} No Images!"
-              next
-            end
-
-            logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
-
-            @variants << {
-              create: map_product(index_name, color_variant_id, product, nil, color, nil, product_color_value)
-            }
-            color_variant_id += 1
+          if !curation.images.present? 
+            logger.error "id  -  | #{log_prefix} No Images!"
+            next
           end
-        else
-          product.fabric_products.active.each do |product_fabric_value|
-            color = product_fabric_value.fabric.option_value
-            fabric = product_fabric_value.fabric
-            log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
-            if !product_fabric_value.images.present? 
-              logger.error "id  -  | #{log_prefix} No Images!"
-              next
-            end
+          logger.info("id #{curation.id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
-            logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
-
-            @variants << {
-              create: map_product(index_name, color_variant_id, product, fabric, color, product_fabric_value, nil)
-            }
-            color_variant_id += 1
-          end
+          @variants << {
+            create: map_product(index_name, color_variant_id, product, nil, color, nil, product_color_value)
+          }
+          color_variant_id += 1
         end
         product_index += 1
       end
@@ -92,7 +71,7 @@ module Products
     end
 
 
-    def map_product(index_name, id, product, fabric, color, product_fabric_value, product_color_value)
+    def map_product(index_name, id, product, curation)
       pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
 
       discount = product.discount&.amount.to_i
@@ -110,15 +89,10 @@ module Products
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
       end
 
-      curations = Curation.includes(:taxons).all
-      curation = curations
-        .first {|c| c.pid == pid }
-
       taxons = [
         curation&.taxons || [],
         product.taxons
       ].flatten.uniq
-
 
       taxon_names = [
         taxons.map(&:permalink).map {|f| f.split('/').last },
