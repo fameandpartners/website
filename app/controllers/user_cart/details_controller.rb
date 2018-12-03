@@ -2,6 +2,8 @@ class UserCart::DetailsController < Api::ApiBaseController
   respond_to :json
 
   def show    
+    current_order&.hydrate
+
     respond_with do |format|
       format.json   {
         render json:

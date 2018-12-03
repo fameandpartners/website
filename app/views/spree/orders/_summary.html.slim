@@ -5,7 +5,7 @@
   ul.cart-items
     - (cart.line_items || []).each do |product|
       li
-        = image_tag product.image.large, class: 'img-responsive pull-left cart-item-image'
+        = image_tag product.image, class: 'img-responsive pull-left cart-item-image'
         .cart-item--details.pull-left
           span.qty = "#{ product.quantity}x"
           = product.name

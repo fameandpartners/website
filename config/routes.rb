@@ -246,10 +246,8 @@ FameAndPartners::Application.routes.draw do
 
     post 'products' => 'products#create'
     delete 'products/:line_item_id' => 'products#destroy'
-    delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
 
     post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
-    delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
 
     post '/restore' => 'products#restore'
   end

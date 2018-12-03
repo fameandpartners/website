@@ -24,10 +24,7 @@ doctype html
 
     #react-footer.__react_root_relaunch__
     #portal-root.__react_root_relaunch__
-
-    - if Features.active?(:marketing_modals)
-      = render '/shared/marketing'
-
+    
     = javascript_include_tag 'application_redesign'
 
     = render 'layouts/redesign/javascript'

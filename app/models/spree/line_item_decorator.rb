@@ -42,9 +42,7 @@ Spree::LineItem.class_eval do
   def price
     total_price = super
 
-    if making_options.exists?
-      total_price += making_options_price_adjustment
-    end
+    total_price += making_options_price_adjustment
 
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
@@ -68,10 +66,6 @@ Spree::LineItem.class_eval do
     end
 
     total_adjustment
-  end
-  
-  def making_options_price
-    making_options.sum(&:price)
   end
 
   def in_sale?
@@ -129,10 +123,6 @@ Spree::LineItem.class_eval do
     color.try(:name) || ''
   end
 
-	def color_hex
-		color.try(:value)&.include?("#") ? color.try(:value) : nil
-	end
-
   def height_name
     personalization.try(:height) || ''
   end
@@ -146,11 +136,11 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    cart_item.try(:image).try(:large) || ''
+    image(cropped: true)&.attachment&.url(:large)
   end
 
   def size
-    personalization.size
+    personalization&.size
   end
 
   def size_name
@@ -165,17 +155,36 @@ Spree::LineItem.class_eval do
     self.product&.category&.category == 'Sample'
   end
 
+  def sample_sale?
+    self.stock.nil?
+  end
+
   def return_insurance?
     product.name.downcase.include? "return_insurance"
   end
 
-  def return_eligible_AC?
-    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  def is_returnable_item?
+    !fabric_swatch? && !return_insurance? && !sample_sale?
   end
 
-  def return_eligible_B?
-    self.order.return_type == 'B' && self.order.line_items.any?(&:return_insurance?)
+  def is_returnable_order?
+    return false unless order.completed?
+
+    order.completed_at.after?(DateTime.new(2018,11,20))  || order.line_items.any?(:return_insurance?)
   end
+
+  def return_window_open?
+    return false unless order.completed?
+    
+    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
+
+    60.days.ago <= max_delivery_date
+  end
+
+  def return_eligible?
+    is_returnable_item? && is_returnable_order? && return_window_open? 
+  end
+
 
   def window_closed?
     delivery_date = self.delivery_period_policy.delivery_date
@@ -204,5 +213,19 @@ Spree::LineItem.class_eval do
 
   def product_sku
     self.variant.product.sku
+  end
+
+  def projected_delivery_date
+    return unless order.completed?
+    delivery_period_policy.delivery_date
+  end
+
+  def ship_by_date
+    return unless order.completed?
+    delivery_period_policy.ship_by_date
+  end
+
+  def shipment
+    order.shipments.detect { |ship| ship.line_items.include?(@item) }
   end
 end

@@ -69,7 +69,7 @@ module Orders
       end
 
       def image_url
-        image&.url(:large)
+        image&.attachment&.url(:large)
       end
 
       # Note: a line item personalization can be nil

@@ -4,6 +4,8 @@ class Curation < ActiveRecord::Base
     belongs_to :product, class_name: 'Spree::Product'
     has_many :images, as: :viewable, order: :position, class_name: "Spree::Image"
     has_and_belongs_to_many :taxons, class_name: "Spree::Taxon"
+
+    default_scope include: [:images]
   
     validates :product,
               :presence => true

@@ -2,6 +2,8 @@ Spree::Order.class_eval do
   include Spree::Order::CloneShipAddress
   extend Spree::Order::Scopes
 
+  HYDRATED_INCLUDES = { line_items: { product: { master: [], category: [], making_options: [:making_option] }, order: [], variant: [:product], personalization: [:color, :size], fabric: [], adjustments: [], making_options: [product_making_option: [:making_option]], fabrication: [], item_return: [] }, bill_address: [:country, :state], ship_address: [:country, :state], shipments: [inventory_units: []] }
+
   attr_accessible :required_to, :email, :customer_notes, :user_id, :autorefundable
   self.include_root_in_json = false
 
@@ -19,6 +21,12 @@ Spree::Order.class_eval do
     }
     go_to_state :confirm, :if => lambda { |order| order.confirmation_required? }
     go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
+  end
+
+  scope :hydrated, -> { includes(HYDRATED_INCLUDES) }
+
+  def hydrate
+    ActiveRecord::Associations::Preloader.new(self, HYDRATED_INCLUDES).run
   end
 
   def save_permalink(permalink_value=nil)
@@ -94,12 +102,21 @@ Spree::Order.class_eval do
     end
   end
 
-  def display_promotion_total
+  def taxes
+    adjustments.eligible.tax
+  end
+
+  def promotion_total
     if self.adjustments.credit.eligible.any? {|x| x.originator_type == 'Spree::PromotionAction' && x.originator.promotion.code.include?('DELIVERYDISC')}
       promotion_total = self.adjustments.credit.eligible.sum(:amount) + (self.item_total * 0.1)
     else
       promotion_total = self.adjustments.credit.eligible.sum(:amount)
     end
+
+    promotion_total
+  end
+
+  def display_promotion_total
     Spree::Money.new(promotion_total, { currency: currency })
   end
 
@@ -338,42 +355,13 @@ Spree::Order.class_eval do
     end
   end
 
-  def contains_sample_sale_item?
-    return self.line_items.any? {|item| !item.stock.nil?}
-  end
-
-  def return_eligible_AC?
-    return false unless completed?
-    self.return_type.blank? || self.return_type == 'C'|| (self.return_type == 'A' && !self.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
-  end
-
-  def return_eligible_B?
-    return false unless completed?
-    
-    self.completed_at.between?( DateTime.new(2018,11,20), DateTime.new(2018,11,30) ) ||
-      ( self.return_type == 'B' && self.line_items.any? {|x| x.product.name.downcase.include? "return_insurance"} )
-  end
-
-  def return_eligible?
-    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
-
-    self.line_items.any?{|x| x.stock.nil?} && (self.return_eligible_B? || self.return_eligible_AC?) && 60.days.ago <= max_delivery_date
-  end
-
   def final_return_by_date
     max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
     (max_delivery_date + 60)
   end
 
-  def as_json(options = { })
-    json = super(options)
-    json['date_iso_mdy'] = self.created_at.strftime("%m/%d/%y")
-    json['final_return_by_date'] = self.final_return_by_date&.strftime("%m/%d/%y")
-    json['international_customer'] = self.shipping_address&.country_id != 49 || false
-    json['is_australian'] = self.shipping_address&.country_id === 109 || false
-    json['return_eligible'] = self.return_eligible?
-
-    json
+  def shipment_total
+    shipment&.amount
   end
 
   #hijack method, original merge logic was faulty cause variant_id is not unique enough

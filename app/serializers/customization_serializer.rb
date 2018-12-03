@@ -10,6 +10,6 @@ class CustomizationSerializer < ActiveModel::Serializer
     end
 
     def price
-        object['customisation_value']['price'] * 100
+        BigDecimal.new(object['customisation_value']['price'] || 0) * 100 #TODO
     end
 end

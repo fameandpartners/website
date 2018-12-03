@@ -99,11 +99,7 @@ Spree::Product.class_eval do
 
   def images_for_customisation(color_name, fabric_name, customisations, cropped)    
     if has_render?
-      sku = master.sku
-      fabric = options[:fabric]&.name
-      cust = options[:product_customizations] || []
-
-      image_url = Spree::Product.format_render_url(sku, fabric, cust)
+      image_url = Spree::Product.format_render_url(sku, fabric_name, customisations)
 
       return [
         get_render_image(options)
@@ -115,10 +111,10 @@ Spree::Product.class_eval do
         default_image('/assets/noimage/customdress.png')
       ]
     end
+        
+    curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first || curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first || curations.first
 
-    curation = curations.where(active: true, pid: "#{}~#{}").first || curations.where(active: true, pid: "#{}~#{}").first || curations.first
-
-    all_images = curation.images
+    all_images = curation&.images || []
     if cropped
       images = all_images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
       if images.blank?

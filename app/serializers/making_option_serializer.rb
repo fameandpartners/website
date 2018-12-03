@@ -1,5 +1,5 @@
 class MakingOptionSerializer < ActiveModel::Serializer
-    attributes :presentation, :name, :delivery_period
+    attributes :id, :presentation, :name, :delivery_period, :description, :display_price
 
     def presentation
         object.name
@@ -7,5 +7,9 @@ class MakingOptionSerializer < ActiveModel::Serializer
 
     def name
         object.code
+    end
+
+    def display_price
+        object.display_price(@scope[:currency])
     end
 end

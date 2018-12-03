@@ -27,12 +27,7 @@ class Populator
   end
 
   def populate
-    validate!
-    if personalized_product?
-      add_personalized_product
-    else
-      add_product_to_cart
-    end
+    add_personalized_product
 
     order.update!
     order.reload
@@ -51,13 +46,9 @@ class Populator
   end
 
   private
-    def validate!
-    end
-
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
-        add_making_options
 
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
@@ -68,27 +59,22 @@ class Populator
     end
 
     def add_personalized_product
-      personalization = build_personalization
-      if personalization.valid?
+      ActiveRecord::Base.transaction do
         add_product_to_cart
+        add_making_options
+
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
         line_item.fabric = product_fabric
         line_item.curation_name = product_attributes[:curation_name]
+        line_item.personalization = build_personalization
         line_item.save!
-        personalization.line_item = line_item
-        line_item.personalization = personalization
-        personalization.save!
       end
-
-      true
     end
 
     def add_making_options
-      return if line_item.blank? || product_making_options.blank?
       line_item.making_options = product_making_options.collect do |making_option|
         LineItemMakingOption.build_option(making_option, currency)
       end
-      line_item
     end
 
     def build_personalization
@@ -115,14 +101,6 @@ class Populator
       end
     end
 
-    def personalized_product?
-      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height? || product_fabric
-    end
-
-    def custom_height?
-      height = product_attributes[:height].to_s
-      height.present? && height != LineItemPersonalization::DEFAULT_HEIGHT
-    end
 
     def product
       @product ||= product_variant.product

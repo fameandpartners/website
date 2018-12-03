@@ -36,14 +36,16 @@ module Orders
                    :price,
                    :currency,
                    :quantity,
-                   :style_name
+                   :style_name,
+                   :projected_delivery_date,
+                   :ship_by_date
 
     def delivery_period
       @item.delivery_period
     end
 
     def shipment
-      @shipment ||= order.shipments.detect { |ship| ship.line_items.include?(@item) } || NoShipment.new
+      @item.shipment || NoShipment.new
     end
 
     def style_number
@@ -68,16 +70,6 @@ module Orders
 
     def product_number
       item.upc || global_sku.id
-    end
-
-    def projected_delivery_date
-      return unless order.completed?
-      @projected_delivery_date ||= @item.delivery_period_policy.delivery_date
-    end
-
-    def ship_by_date
-      return unless order.completed?
-      @projected_delivery_date ||= @item.delivery_period_policy.ship_by_date
     end
 
     def fabrication_status

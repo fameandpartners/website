@@ -24,23 +24,20 @@ Spree::OptionValue.class_eval do
 
   attr_accessible :image, :value, :use_in_customisation
 
-  def rgb_values
-    # Color::HEX.new(value.to_s).to_lab
-    @rgb_values ||= value.to_s.scan(/[0-9a-zA-Z]{2}/).map{|v| v.to_i(16)}
+  def color_hex
+		value&.include?("#") ? value : nil
   end
+  
+  def color_image
+    file_name = image_file_name || value
+    return nil if file_name.starts_with?('#')
 
-  # hsv representation
-  def hsv_value
-    @hsv_value ||= (rgb_values.present? ? rgb_values.max : 1)
+
+    "#{configatron.asset_host}/assets/product-color-images/#{file_name}"
   end
 
   # discount
   def discount
     @discount ||= discounts.active.first
-  end
-
-  # some good ole hackery for swatches
-  def image_file_name_for_swatch
-    image_file_name ? "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}" : nil
   end
 end

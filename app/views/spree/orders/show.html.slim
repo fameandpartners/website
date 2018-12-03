@@ -158,5 +158,4 @@ section.order-details
 = hidden_field_tag :return_type, 'DeliveryIns-25Control'
 
 - if successfully_ordered || params[:force_tracking]
-  = render 'shared/sales_conversion_pixels', locals: { order: @order }
   = render 'shared/tracking/masterpass_analytics'

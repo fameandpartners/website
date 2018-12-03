@@ -578,15 +578,8 @@ module Api
       end
 
       def map_image(image, fabrics, colors, product_fit, product_size) 
-        option = nil
-
-        if image.viewable_type == "FabricsProduct"
-          fabric = fabrics.find { |f| f.id == image.viewable_id}
-          option = fabric&.fabric&.name
-        elsif image.viewable_type == "ProductColorValue"
-          color = colors.find { |f| f.id == image.viewable_id}
-          option = color&.option_value&.name
-        end
+        options = image.viewable.pid&.split('~') || []
+        options.shift # remove sku
 
         {
           type: :photo,
@@ -608,9 +601,7 @@ module Api
             }
           }.select {|i| i[:width] <= image.attachment_width},
           sortOrder: image.position,
-          options: [
-            option
-          ].compact
+          options: options
         }
       end
 
@@ -724,12 +715,8 @@ module Api
           type: :Color,
           meta: {
             sortOrder: c.option_value.position,
-            hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-            image: (!c.option_value.value&.include?('#') || !c.option_value.image_file_name.blank?) ? {
-              url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
-              width: 0,
-              height: 0,
-            } : nil,
+            hex: c.option_value.color_hex,
+            image: c.option_value.color_image,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
@@ -762,12 +749,6 @@ module Api
           },
           incompatibleWith: { allOptions: [] },
         }
-      end
-
-      def color_image(image_file_name)
-        return nil unless image_file_name
-
-        "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}"
       end
 
       def customization_image(customization)

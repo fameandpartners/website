@@ -1,20 +1,15 @@
-# if (type === ComponentType.Color && !component.value.startsWith('#')) {
-#     image = {
-#         url: `https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images/${component.value}`
-#     };
-# } else if (component.image) {
-#     image = {
-#         url: component.image
-#     };
-# }
 class ColorSerializer < ActiveModel::Serializer
-    attributes :presentation, :name, :price, :hex
+    attributes :presentation, :name, :price, :hex, :image
 
     def price
-        66666
+        66666 #TODO
     end
 
     def hex
-        '#66666'
+        object.color_hex
+    end
+
+    def image
+        object.color_image
     end
 end

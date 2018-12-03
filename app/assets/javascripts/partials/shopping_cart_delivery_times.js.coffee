@@ -42,7 +42,7 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
 
 
   determineChecked: () ->
-    @cart.data.products.forEach(@initCheckbox)
+    @cart.data.line_items.forEach(@initCheckbox)
 
   initCheckbox: (p, i) ->
     if p.making_options.length == 0

@@ -3,12 +3,9 @@
 //---------
 //= require libs/typekit.min
 //= require jquery_ujs
-//= require jquery-ui/datepicker
 
 //= require libs/underscore-min
 //= require libs/validator.min
-
-//= require libs/jquery.zoom.min
 
 //= require modernizr-custom
 
@@ -47,10 +44,7 @@
 //= require partials/helpers/modal
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
-//= require partials/helpers/form_submit_ajax_validation
 
-
-//require partials/product_customisation.js
 
 //= require partials/returns_modal
 //= require partials/helpers/tracker.js
@@ -67,8 +61,6 @@
 //= require partials/helpers/shopping_cart
 //= require partials/shopping_cart_summary
 //= require partials/shopping_cart_delivery_times
-
-//= require partials/user_order_returner
 
 //= require partials/checkout_page
 //= require partials/checkout_page__stripe

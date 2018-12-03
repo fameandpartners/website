@@ -88,7 +88,7 @@ module Orders
     end
 
     def taxes
-      spree_order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
+      spree_order.taxes.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
     end
 
     def promotion?
@@ -124,8 +124,8 @@ module Orders
     end
 
     def display_shipment_total
-      if spree_order.shipment.present? && spree_order.shipment.amount.to_i > 0
-        spree_order.shipment.display_amount.to_s
+      if spree_order.shipment_total.to_i > 0
+        spree_order.shipment_total.to_s
       else
         'Free Shipping' # JST will set FREE
       end

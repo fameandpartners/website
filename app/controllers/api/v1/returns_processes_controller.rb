@@ -15,8 +15,8 @@ module Api
           return
         end
 
-        @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
-          Orders::OrderPresenter.new(order, order.line_items)
+        @orders = spree_current_user.orders.hydrated.complete.map do |order|
+          OrderSerializer.new(order)
         end
 
         respond_with @orders
