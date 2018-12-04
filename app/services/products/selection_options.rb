@@ -69,12 +69,7 @@ module Products
 
       # sizes part
       def product_sizes
-        @product_sizes ||= begin
-          Repositories::ProductSize.new(
-            site_version: site_version,
-            product: product,
-          ).read_all
-        end
+        @product_sizes ||= product.option_types.find_by_name('dress-size')&.option_values || []
       end
 
       def default_product_sizes
