@@ -5,7 +5,6 @@ class OrderSerializer < ActiveModel::Serializer
               :updated_at,
               :payment_state,
               :state,
-              # :adjustment_total,
               :currency,
               :final_return_by_date,
               :total,
@@ -56,18 +55,17 @@ class OrderSerializer < ActiveModel::Serializer
     (object.shipment_total || 0) * 100
   end
 
-#TODO
   def display_total
-    666
+    object.display_total.to_s
   end
   def display_shipment_total
-    shipment_total
+    object.display_shipment_total.to_s
   end
   def display_promotion_total
-    promotion_total
+    object.display_promotion_total.to_s
   end
   def display_item_total
-    item_total
+    object.display_item_total.to_s
   end
 
 end

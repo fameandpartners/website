@@ -162,7 +162,7 @@ module Shipping
         end
 
         # Gifts shouldn't stop the marking of a shipment as shipped.
-        shipment_item_count = shipment.line_items.reject(&:promotional_gift?).count
+        shipment_item_count = shipment.line_items.count
 
         if shipment_item_count == 1 && possible_to_ship
           shipper = Admin::ReallyShipTheShipment.new(shipment, shipment.tracking)

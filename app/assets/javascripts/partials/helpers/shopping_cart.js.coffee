@@ -62,7 +62,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       dataType: "json"
       data: product_data
     ).success((data) =>
-      added_product = _.find((data.products || []), (product) ->
+      added_product = _.find((data.line_items || []), (product) ->
         product.variant_id == product_data.variant_id
       )
       @trackAddToCart(added_product)
@@ -73,8 +73,8 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   findProduct: (line_item_id) ->
     found_product;
-    for product in @data.products
-      if (product.line_item_id == line_item_id)
+    for product in @data.line_items
+      if (product.id == line_item_id)
         found_product = product
 
     return found_product
@@ -186,7 +186,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   toggleReturnsDepositMessage: () ->
-    returnInsurance = @data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+    returnInsurance = @data.line_items.filter (i) -> i.name == 'RETURN_INSURANCE'
 
     if (returnInsurance.length)
       $('.js-returns-abc-option-message').removeClass('hidden');

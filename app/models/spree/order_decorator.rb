@@ -120,6 +120,14 @@ Spree::Order.class_eval do
     Spree::Money.new(promotion_total, { currency: currency })
   end
 
+  def display_shipment_total
+    if shipment_total.to_i > 0
+      shipment_total.to_s
+    else
+      'Free Shipping' # JST will set FREE
+    end
+  end
+
   def promotions
     applied_promotions | eligible_pending_promotions
   end

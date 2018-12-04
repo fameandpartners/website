@@ -2,10 +2,10 @@
 <div class="cart-items">
   <% for product in @cart.line_items: %>
     <% if product.name != "RETURN_INSURANCE" : %>
-    <div class="row cart-item" data-id="<%= product.line_item_id %>">
+    <div class="row cart-item" data-id="<%= product.id %>">
       <div class="cart-item-image-holder col-xs-5">
         <% if !product.swatch: %>
-          <a href="<%= product.path %>">
+          <a href="<%= product.url %>">
         <% end %>
           <% if product.name != "Gift" : %>
             <img class="img-responsive cart-item-image" src="<%= product.image_url %>" />

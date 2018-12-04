@@ -25,6 +25,7 @@ module Orders
                    :state,
                    :to_param,
                    :display_promotion_total,
+                   :display_shipment_total,
                    :shipment,
                    :completed?,
                    :updated_at,
@@ -121,14 +122,6 @@ module Orders
 
     def missing_image_to_nil(url)
       url.include?('missing.png') ? nil : url
-    end
-
-    def display_shipment_total
-      if spree_order.shipment_total.to_i > 0
-        spree_order.shipment_total.to_s
-      else
-        'Free Shipping' # JST will set FREE
-      end
     end
 
     def extract_line_items

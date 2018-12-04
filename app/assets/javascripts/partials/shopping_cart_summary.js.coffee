@@ -99,7 +99,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   removeReturnType: (option) ->
     returnInsurance = @cart.data.line_items.filter (i) -> i.name == 'RETURN_INSURANCE'
-    lineItemId = returnInsurance[0].line_item_id
+    lineItemId = returnInsurance[0].id
     $('.js-returns-trigger-' + option).toggleClass('AJAX__in-process')
     $('.js-returns-abc-option-message').addClass('hidden');
     @cart.removeProduct(lineItemId)
