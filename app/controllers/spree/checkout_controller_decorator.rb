@@ -415,7 +415,7 @@ Spree::CheckoutController.class_eval do
       end
     end
   end
-  # TODO: if we're going to remove mailchimp at all we should use Bronto::SubscribeUsersWorker instead
+
   def subscribe(user)
     EmailCapture.new({},
                      email: user.email,

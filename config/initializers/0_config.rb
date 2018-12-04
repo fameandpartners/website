@@ -49,11 +49,6 @@ configatron.mailgun.mailbox do |mailgun|
   mailgun.password = ENV['SMTP_PASSWORD']
 end
 
-configatron.mailchimp do |mailchimp|
-  mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
-  mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
-end
-
 configatron.es_url = ENV['ES_URL2']
 
 configatron.elasticsearch.indices do |index|

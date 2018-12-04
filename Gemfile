@@ -37,10 +37,8 @@ path 'engines' do
   gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
-  gem 'mailchimp_client'
   gem 'afterpay'
   gem 'next_logistics'
-  gem 'iequalchange'
   gem 'bronto'
 end
 
@@ -160,6 +158,3 @@ end
 group :development, :test do
   gem 'pry-byebug'
 end
-
-# TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
-gem 'mailchimp-api', require: 'mailchimp'
