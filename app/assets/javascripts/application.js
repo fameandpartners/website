@@ -8,5 +8,4 @@
 
 //= require helpers
 //= require_tree ./partials
-//= require_tree ./popups
 //= require_tree ./templates
