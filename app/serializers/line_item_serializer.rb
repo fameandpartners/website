@@ -58,7 +58,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def display_price
-    666
+    '$' + object.price.to_s
   end
 
   def url

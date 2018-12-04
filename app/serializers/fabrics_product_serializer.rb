@@ -17,6 +17,6 @@ class FabricsProductSerializer < ActiveModel::Serializer
     end
 
     def display_price
-        6666
+        '$' + '%.2f' %  object.price_in(scope[:currency])
     end
 end

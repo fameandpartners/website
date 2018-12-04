@@ -19,7 +19,6 @@ gem 'rmagick'
 gem 'default_value_for'
 gem 'dalli'
 gem 'autoprefixer-rails'
-gem 'redcarpet', '~> 2.3.0'
 gem 'elasticsearch-dsl'
 gem 'elasticsearch'
 gem 'net-ssh'
@@ -74,12 +73,10 @@ gem 'koala'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'
-gem 'fog', '~> 1.38.0'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
-gem 'spree_banner', '~> 1.3.0'
 
 #payments
 gem 'pin_payment'
@@ -135,8 +132,6 @@ group :development do
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
   gem 'bullet'
-  gem 'pry-byebug'
-  gem 'quiet_assets'
   gem 'binding_of_caller'
   gem 'rack-handlers'
 end
@@ -160,11 +155,10 @@ group :test do
   gem 'webmock', '~> 1.21.0'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'rspec-shell-expectations'
-  gem 'pry-byebug'
 end
 
-group :production do
-  gem 'aws-sdk'
+group :development, :test do
+  gem 'pry-byebug'
 end
 
 # TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine

@@ -18,7 +18,7 @@ class LineItemPersonalization < ActiveRecord::Base
                   :color_id,
                   :sku
 
-  validates :size, :color,  presence: true
+  validates :color,  presence: true
 
   DEFAULT_HEIGHT = 'standard'
   HEIGHTS = %w(petite standard tall length1 length2 length3 length4 length5 length6) #Make sure first letter+ last letter of Heights is unique otherwise skus will not be generated correctly

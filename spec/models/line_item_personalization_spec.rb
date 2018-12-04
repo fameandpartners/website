@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry-byebug'
 
 describe LineItemPersonalization, type: :model do
   context "price" do

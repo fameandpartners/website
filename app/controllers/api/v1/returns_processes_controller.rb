@@ -16,7 +16,7 @@ module Api
         end
 
         @orders = spree_current_user.orders.hydrated.complete.map do |order|
-          OrderSerializer.new(order)
+          OrderSerializer.new(order).as_json(root: false)
         end
 
         respond_with @orders
@@ -32,7 +32,7 @@ module Api
         fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
-          respond_with OrderSerializer.new(fetched_order).as_json
+          respond_with OrderSerializer.new(fetched_order).as_json(root: false)
         else
           error_response(:GUEST_ORDER_NOT_FOUND)
           return

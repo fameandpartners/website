@@ -1,6 +1,16 @@
 Spree::Product.class_eval do
   extend Spree::Product::CustomScopes
 
+  class FakeImage
+    def initialize(url)
+      @url = url
+    end
+
+    def url(arg)
+      @url
+    end
+  end
+
   has_one :celebrity_inspiration,
     dependent: :destroy,
     class_name: 'CelebrityInspiration',
@@ -97,18 +107,22 @@ Spree::Product.class_eval do
     curations.flat_map(&:images)
   end
 
+  def fake_image(url)
+    OpenStruct.new({ attachment:  FakeImage.new(url)})
+  end
+
   def images_for_customisation(color_name, fabric_name, customisations, cropped)    
     if has_render?
       image_url = Spree::Product.format_render_url(sku, fabric_name, customisations)
 
       return [
-        get_render_image(options)
+        fake_image(image_url)
       ]
     end
 
     if is_new_product?
       return [
-        default_image('/assets/noimage/customdress.png')
+        fake_image("#{configatron.asset_host}/assets/noimage/customdress.png")
       ]
     end
         

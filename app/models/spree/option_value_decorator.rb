@@ -30,6 +30,7 @@ Spree::OptionValue.class_eval do
   
   def color_image
     file_name = image_file_name || value
+    return nil if file_name.nil?
     return nil if file_name.starts_with?('#')
 
 

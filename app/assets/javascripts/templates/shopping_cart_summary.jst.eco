@@ -40,7 +40,7 @@
           <dd><span class="line-item-description-heading">Color:</span> <span class="color"><%= product.color.presentation %></span></dd>
           <% end %>
           <% if product.fabric != null : %>
-          <dd><span class="line-item-description-heading">Fabric and Color:</span> <span class="color"> <%= product.fabric.name %></span>  <span class='line-item-customization--mini'>(<%= product.fabric.display_price %>)</span></dd>
+          <dd><span class="line-item-description-heading">Fabric and Color:</span> <span class="color"> <%= product.fabric.presentation %></span>  <span class='line-item-customization--mini'>(<%= product.fabric.display_price %>)</span></dd>
           <% end %>
           <% if product.display_height: %>
             <dd><span class="line-item-description-heading">Height:</span> <span><%= product.display_height %></span></dd>
@@ -139,7 +139,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <% for tax in @cart.taxes: %>
           <p>
             <%= tax.label %>
-            <span class="value"><%= tax.display_tax_total %></span>
+            <span class="value"><%= tax.display_total %></span>
           </p>
         <% end %>
         <p class="order-total">

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry-byebug'
 
 describe GlobalSku::Create do
   let(:creator) {

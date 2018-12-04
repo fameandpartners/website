@@ -160,7 +160,7 @@ Spree::LineItem.class_eval do
   end
 
   def sample_sale?
-    self.stock.nil?
+    !self.stock.nil?
   end
 
   def return_insurance?
@@ -174,13 +174,13 @@ Spree::LineItem.class_eval do
   def is_returnable_order?
     return false unless order.completed?
 
-    order.completed_at.after?(DateTime.new(2018,11,20))  || order.line_items.any?(:return_insurance?)
+    order.completed_at > DateTime.new(2018,11,20)  || order.line_items.any?(&:return_insurance?)
   end
 
   def return_window_open?
     return false unless order.completed?
     
-    max_delivery_date = line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
+    max_delivery_date = order.line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
 
     60.days.ago <= max_delivery_date
   end
@@ -204,7 +204,8 @@ Spree::LineItem.class_eval do
     images(cropped: cropped).first
   end
   def images(cropped: )
-    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, [], cropped)
+    cust =  JSON.parse(self.customizations)
+    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, cust, cropped)
   end
 
   def new_sku

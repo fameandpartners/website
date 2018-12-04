@@ -50,7 +50,7 @@ module Marketing
         end
 
         def image_url
-          item.image(cropped: true).image_url
+          line_item.image_url
         end
 
         def product_path

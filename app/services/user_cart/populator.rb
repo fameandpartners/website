@@ -36,13 +36,7 @@ class Populator
       success: true,
     })
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
-    err_attrs = {
-      :order              => @order.to_h,
-      :site_version       => @site_version.to_h,
-      :product_attributes => @product_attributes
-    }
-  
-    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
+    OpenStruct.new({ success: false, message: e.message })
   end
 
   private
@@ -66,7 +60,7 @@ class Populator
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
         line_item.fabric = product_fabric
         line_item.curation_name = product_attributes[:curation_name]
-        line_item.personalization = build_personalization
+        line_item.personalization = build_personalization(line_item)
         line_item.save!
       end
     end
@@ -77,10 +71,10 @@ class Populator
       end
     end
 
-    def build_personalization
+    def build_personalization(line_item)
       LineItemPersonalization.new.tap do |item|
-        item.size_id  = product_size.id
-        item['size']  = product_size.value
+        item.size_id  = product_size&.id
+        item['size']  = product_size&.value
         
         if product_fabric
           item.color_id = product_fabric.option_value_id
@@ -90,6 +84,7 @@ class Populator
           item['color'] = product_color.color_name
         end
         item.product_id = product.id
+        item.line_item = line_item
 
         if product_attributes[:height].present?
           item.height = product_attributes[:height]
@@ -135,11 +130,13 @@ class Populator
       @product_size ||= begin
         product_size_id = product_attributes[:size_id]
 
-        sizes = product.option_types.find_by_name('dress-size').option_values
+        sizes = product.option_types.find_by_name('dress-size')&.option_values || []
         size = sizes.find {|size| size.id == product_size_id.to_i || size.name == product_size_id}
 
 
         if size.present?
+          # nothing
+        elsif sizes.empty?
           # nothing
         else
           raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")

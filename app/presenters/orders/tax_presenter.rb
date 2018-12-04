@@ -12,12 +12,12 @@ module Orders
       @order = spree_order
     end
 
-    def display_tax_total
+    def display_total
       Spree::Money.new(tax.amount, { currency: order.currency }).to_s
     end
 
     def to_h
-      { label: label, display_tax_total: display_tax_total }
+      { label: label, display_total: display_total }
     end
   end
 end

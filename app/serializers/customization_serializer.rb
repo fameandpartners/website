@@ -14,6 +14,6 @@ class CustomizationSerializer < ActiveModel::Serializer
     end
 
     def display_price
-        666
+        '$' + scope[:currency] == "AUD" ? BigDecimal.new(object['customisation_value']['price_aud'] || 0)  : BigDecimal.new(object['customisation_value']['price'] || 0)
     end
 end

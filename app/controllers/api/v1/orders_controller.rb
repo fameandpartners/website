@@ -9,7 +9,7 @@ module Api
         if params[:order_number].blank?
 
           @orders = current_spree_user.orders.hydrated.complete.map do |order|
-            OrderSerializer.new(order).as_json
+            OrderSerializer.new(order).as_json(root: false)
           end
 
           respond_with @orders
@@ -17,7 +17,7 @@ module Api
         else
           
           @order = Spree::Order.hydrated.where(:number=>params[:order_number]).first
-          respond_with OrderSerializer.new(@order).as_json
+          respond_with OrderSerializer.new(@order).as_json(root: false)
 
         end
       end

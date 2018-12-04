@@ -2,7 +2,7 @@ class ColorSerializer < ActiveModel::Serializer
     attributes :presentation, :name, :price, :hex, :image
 
     def price
-        66666 #TODO
+        0
     end
 
     def hex

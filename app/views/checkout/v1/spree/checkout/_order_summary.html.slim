@@ -68,8 +68,8 @@ ruby:
 
             - order_presenter.taxes.each do |tax|
               p
-                = tax[:label]
-                span.value = tax[:display_tax_total]
+                = tax.label
+                span.value = tax.display_total
 
             p.order-total
               | Order Total

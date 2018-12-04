@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry-byebug'
 # 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
 
 RSpec.describe CustomItemSku do
