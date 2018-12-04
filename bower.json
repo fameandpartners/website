@@ -1,9 +1,0 @@
-{
-  "name": "fameandpartners",
-  "version": "1.0.0",
-  "homepage": "https://github.com/fameandpartners/website",
-  "license": "MIT",
-  "dependencies": {
-    "slick-carousel": "~1.5.8"
-  }
-}
