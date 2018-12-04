@@ -4,9 +4,6 @@ class CampaignsFactory
       case campaign_uuid
       when AutoApplyPromoCampaign::UUID, AutoApplyPromoCampaign::ENCODED_UUID
         AutoApplyPromoCampaign
-      when BridesmaidsConsultationFormCampaign::UUID, BridesmaidsConsultationFormCampaign::ENCODED_UUID
-        BridesmaidsConsultationFormCampaign
-      end
     end
 
     def getExpirableCampaignClasses
@@ -15,7 +12,7 @@ class CampaignsFactory
 
     def getAllCampaignClasses
       [
-        AutoApplyPromoCampaign, BridesmaidsConsultationFormCampaign
+        AutoApplyPromoCampaign
       ]
     end
   end

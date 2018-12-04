@@ -35,7 +35,6 @@ Spree::User.class_eval do
               if: :validate_presence_of_phone
             }
 
-  after_create :send_welcome_email,           unless: Proc.new { |a| a.skip_welcome_email }
   after_create :create_marketing_subscriber,  if: :newsletter?
   after_update :update_marketing_subsriber,   if: :newsletter?
 
@@ -139,10 +138,6 @@ Spree::User.class_eval do
 
   def to_s
     "#{full_name} - #{email}"
-  end
-
-  def send_welcome_email
-    SendWelcomeEmailWorker.perform_async(self.id)
   end
 
   def facebook_data_value
