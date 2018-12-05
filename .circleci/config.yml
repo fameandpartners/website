@@ -104,11 +104,11 @@ jobs:
       - run:
           name: Install docker client
           command: |
-              set -x
-              VER="17.09.0-ce"
-              curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x64_64/docker-$VER.tgz
-              tar -x -C /tmp -f /tmp/docker-$VER.tgz
-              sudo mv /tmp/docker/* /usr/bin
+            set -x
+            VER="17.09.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -x -C /tmp -f /tmp/docker-$VER.tgz
+            sudo mv /tmp/docker/* /usr/bin
 
       - run: |
           VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
