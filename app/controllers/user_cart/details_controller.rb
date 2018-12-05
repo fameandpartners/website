@@ -8,8 +8,8 @@ class UserCart::DetailsController < Api::ApiBaseController
       format.json   {
         render json:
         {
-          cart: current_order ? OrderSerializer.new(current_order).as_json(root: false) : nil,
-          user: spree_user_signed_in? ? UserSerializer.new(current_spree_user).as_json(root: false) : nil
+          cart: current_order ? OrderSerializer.new(current_order, default_serializer_options).as_json : nil,
+          user: spree_user_signed_in? ? UserSerializer.new(current_spree_user, default_serializer_options).as_json : nil
         },
        status: :ok
       }

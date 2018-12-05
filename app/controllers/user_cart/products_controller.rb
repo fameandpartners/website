@@ -36,7 +36,7 @@ class UserCart::ProductsController < UserCart::BaseController
       
       respond_with(current_order) do |format|
         format.json   {
-          render json: OrderSerializer.new(current_order).as_json(root: false), status: :ok
+          render json: current_order, serializer: OrderSerializer, status: :ok
         }
       end
     else # not success
@@ -63,7 +63,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
     current_order.reload
     current_order.hydrate
-    render json: OrderSerializer.new(current_order).as_json(root: false), status: :ok
+    render json: current_order, serializer: OrderSerializer, status: :ok
   end
 
   def destroy
@@ -71,7 +71,7 @@ class UserCart::ProductsController < UserCart::BaseController
     line_item&.destroy
 
     current_order.hydrate
-    render json: OrderSerializer.new(current_order).as_json(root: false), status: :ok
+    render json: current_order, serializer: OrderSerializer, status: :ok
   end
 
   def restore

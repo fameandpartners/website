@@ -185,7 +185,10 @@ Spree::LineItem.class_eval do
     60.days.ago <= max_delivery_date
   end
 
-  def return_eligible?
+  def return_eligible?(current_user)
+    return false unless order.completed?
+    return true if current_user&.admin?
+
     is_returnable_item? && is_returnable_order? && return_window_open? 
   end
 

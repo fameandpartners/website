@@ -1,6 +1,4 @@
-class UserCart::BaseController < ApplicationController
-  include SslRequirement
-  ssl_allowed
+class UserCart::BaseController < Api::ApiBaseController
 
   private
 

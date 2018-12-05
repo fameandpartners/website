@@ -33,7 +33,7 @@ class LineItemSerializer < ActiveModel::Serializer
   has_one :return, serializer: ItemReturnSerializer
 
   def initialize(object, options={})
-    super(object, options.merge(scope: { currency: object.currency }))
+    super(object, options.merge(scope: options[:scope].merge(currency: object.currency )))
   end
 
 
@@ -70,7 +70,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def return_eligible
-    object.return_eligible?
+    object.return_eligible?(scope[:current_user])
   end
 
   def customizations
