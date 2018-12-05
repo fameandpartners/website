@@ -31,11 +31,11 @@ sed -i='' "s/<NAME>/$NAME/" Dockerrun.aws.json
 sed -i='' "s/<TAG>/$VERSION/" Dockerrun.aws.json
 
 # Zip up the Dockerrun file (feel free to zip up an .ebextensions directory with it)
-zip -r $ZIP Dockerrun.aws.json .ebextensions
+zip -r $ZIP Dockerrun.aws.json
 
 aws s3 cp $ZIP s3://$EB_BUCKET/$NAME/$ZIP
 
 # Create a new application version with the zipped up Dockerrun file
-aws elasticbeanstalk create-application-version --application-name "Spree \
+aws elasticbeanstalk create-application-version --application-name "Spree" \
     --version-label $VERSION --source-bundle S3Bucket=$EB_BUCKET,S3Key=$NAME/$ZIP
 
