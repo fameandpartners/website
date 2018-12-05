@@ -73,12 +73,12 @@ jobs:
       - run:
           name: Database setup
           command: |
-            echo 'test:
+            echo "test:
              adapter: postgresql
              database: circle-test_test
              username: root
              host: localhost
-            ' > config/database.yml
+            " > config/database.yml
 
             bundle exec rake db:create db:schema:load db:migrate --trace
 
@@ -94,23 +94,17 @@ jobs:
       - store_test_results:
           path: test_results
 
-      - run:
-          name: Install Docker client and AWS CLI
-          command: |
-            set -x
-            VER="17.09.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-
-            apt-get update -qq
-            apt-get install -qq python python-pip zip
-            pip install awscli
       - setup_remote_docker:
           docker_layer_caching: true
           version: 17.09.0-ce
+
       - run: |
           VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
+
+          sudo apt-get update -qq
+          sudo apt-get install -qq python python-pip libpython-dev
+          sudo pip install awscli
+
           ./.circleci/build-docker.sh $VERSION
 
           if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
