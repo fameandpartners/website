@@ -17,9 +17,6 @@ aws configure set default.region us-east-1
 # Authenticate against our Docker registry
 eval $(aws ecr get-login --no-include-email)
 
-# Inject a database conf
-cp config/database.yml.exmaple config/database.yml
-
 # Build and push the image
 docker build --build-arg  --build-arg CIRCLE_BUILD_NUM=$CIRCLE_BUILD_NUM --build-arg CIRCLE_BRANCH=$CIRCLE_BRANCH --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 -t $NAME:$VERSION .
 docker tag $NAME:$VERSION $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
