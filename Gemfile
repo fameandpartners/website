@@ -117,7 +117,7 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
+gem 'ops_care', :github => 'reinteractive/OpsCare', :branch => 'master'
 
 gem 'unicorn'
 
@@ -137,7 +137,6 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'pry-byebug'
-  gem 'quiet_assets'
   gem 'binding_of_caller'
   gem 'rack-handlers'
 end

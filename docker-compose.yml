@@ -1,6 +1,20 @@
 version: "3"
 services:
-    elasticsearch:  
+    website:
+        build: .
+        ports:
+            - 3001:3001
+        depends_on:
+            - redis
+            - postgres
+            - memcached
+            - elasticsearch
+        environment:
+            - REDIS_URL=redis://redis:6379
+            - ES_URL2=http://elasticsearch:9200
+            - DATABASE_URL=postgresql://danny:changeme@postgres:5432/fame_website_development
+
+    elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
         environment:
             - discovery.type=single-node
@@ -19,11 +33,21 @@ services:
         image: redis:4.0-alpine
         ports:
             - "6379:6379"
+
     memcached:
         image: memcached:1.5-alpine
         ports:
             - "11211:11211"
         command: memcached -m 64
+
+    postgres:
+        image: postgres:9.4.19
+        environment:
+            - POSTGRES_USER=danny
+            - POSTGRES_PASSWORD=changeme
+        ports:
+            - 5432:5432
+
 volumes:
         elasticsearch-data:
             driver: local

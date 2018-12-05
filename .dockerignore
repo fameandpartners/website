@@ -1,0 +1,11 @@
+.dockerignore
+.git
+logs
+doc
+deprecated
+node_modules
+tmp
+.DS_Store
+.env.example
+.env.test
+.gitignore
