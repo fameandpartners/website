@@ -6,7 +6,12 @@ if [ -f /app/tmp/pids/unicorn.pid ]; then
 fi
 
 if [ ! -f /app/config/database.yml ]; then
+	echo "Cannot find database.yml"
+
 	if [ -z "${DATABASE_URL}" ]; then
+
+		echo "Cannot find database.yml and database url"
+
 		# no db and no env var
  		echo "$RAILS_ENV:
              adapter: postgresql
@@ -16,6 +21,7 @@ if [ ! -f /app/config/database.yml ]; then
              host: $DBHOST
             " > /app/config/database.yml
 	else
+		echo 'Found a database url'
 		exit 1
 	fi
 fi
