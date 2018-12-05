@@ -18,7 +18,7 @@ aws configure set default.region us-east-1
 eval $(aws ecr get-login --no-include-email)
 
 # Build and push the image
-docker build --build-arg  --build-arg CIRCLE_BUILD_NUM=$CIRCLE_BUILD_NUM --build-arg CIRCLE_BRANCH=$CIRCLE_BRANCH --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 -t $NAME:$VERSION .
+docker build --build-arg CIRCLE_BUILD_NUM=$CIRCLE_BUILD_NUM --build-arg CIRCLE_BRANCH=$CIRCLE_BRANCH --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 -t $NAME:$VERSION .
 docker tag $NAME:$VERSION $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$NAME:$VERSION
 
