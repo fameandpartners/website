@@ -4,6 +4,7 @@ class CampaignsFactory
       case campaign_uuid
       when AutoApplyPromoCampaign::UUID, AutoApplyPromoCampaign::ENCODED_UUID
         AutoApplyPromoCampaign
+      end
     end
 
     def getExpirableCampaignClasses
