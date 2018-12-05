@@ -41,7 +41,7 @@ class ManualOrdersGrid
   column(:factory, header: 'Factory') {|model| model.factory.name}
   column(:return_or_exchange, header: 'Return or Exchange', html: true) do |model|
     if model.order.returnable?
-      link_to 'Return or Exchange', main_app.new_user_returns_path(order_number: model.order.number)
+      link_to 'Return or Exchange', main_app.new_user_returns_path(order_number: model.order.number, email: model.order.email)
     elsif model.order.order_return_requested?
       'Return Requested'
     else

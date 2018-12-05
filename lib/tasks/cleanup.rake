@@ -1,6 +1,8 @@
 namespace :data do
   desc 'Cleans old and redundant information from the database'
   task :clean => :environment do
+    # Spree::TokenizedPermission.delete_all("permissable_id in (select id  from spree_orders where state = 'cart' and total = 0 and updated_at < (now() - interval '2 month'))")
+
     sql = {
       :old_carts =>
         "FROM spree_orders WHERE completed_at IS NULL AND state = 'cart' AND created_at < '#{14.days.ago}'",

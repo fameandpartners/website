@@ -82,6 +82,7 @@ FameAndPartners::Application.routes.draw do
   get '/orders' => 'noop#noop', as: :user_orders
   get '/user' => 'noop#noop', as: :user
   get '/contact' => 'noop#noop', as: :contact
+  get '/return/reason/:order_number/:email' => 'noop#noop', as: :new_user_returns
 
 
 
@@ -262,8 +263,6 @@ FameAndPartners::Application.routes.draw do
     put 'update_image', on: :member
   end
 
-  resource 'users/returns', as: 'user_returns', only: [:new, :create]
-
   # return form
   get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
   get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
@@ -364,7 +363,6 @@ FameAndPartners::Application.routes.draw do
   # get '/guest-returns'  => 'returns#guest'
   get '/view-orders' => redirect('/orders')
   get '/guest-returns' => redirect('/return/guest')
-  get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do
