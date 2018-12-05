@@ -13,7 +13,7 @@ ruby:
   "
   preload_cart_data = "
     (function(){
-      cart_data  = #{ raw OrderSerializer.new(order).to_json(root: nil) };
+      cart_data  = #{ raw OrderSerializer.new(order, {scope: {}}).to_json(root: nil) };
       window.app.shopping_cart.updateData(cart_data);
     })();
   "
