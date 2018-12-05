@@ -156,9 +156,6 @@ PATH
       sidekiq
     fame_favicon (0.0.1)
       rails
-    inspinia-rails (2.1.0)
-      font-awesome-rails (~> 4.3.0.0)
-      rails
     manual_order (0.0.1)
       chosen-rails (~> 1.5.1)
       datagrid (~> 1.4.0)
@@ -778,7 +775,6 @@ DEPENDENCIES
   foreman
   geoip
   google_drive (= 1.0.0)
-  inspinia-rails!
   ipaddress
   jquery-fileupload-rails (= 0.4.1)
   jquery-rails
