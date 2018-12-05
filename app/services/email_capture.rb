@@ -43,7 +43,6 @@ class EmailCapture
         firstname:        first_name,
         facebook_UID:     facebook_uid,
         ip_address:       current_sign_in_ip,
-        site_add_source:  site_version,
         landing_page:     landing_page,
         utm_term:         utm_params,
         site_add_source:  form_name,
