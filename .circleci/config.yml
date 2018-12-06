@@ -85,6 +85,8 @@ jobs:
 
             bundle exec rake db:create db:schema:load db:migrate --trace
 
+            rm config/database.yml
+
       - run:
           name: Run rspec in parallel
           command: |

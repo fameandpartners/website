@@ -14,12 +14,11 @@ if [ ! -f /app/config/database.yml ]; then
 
 		# no db and no env var
  		echo "$RAILS_ENV:
-             adapter: postgresql
-             database: $DBNAME
-             username: $DBUSER
-		 	 password: $DBPASSWORD
-             host: $DBHOST
-            " > /app/config/database.yml
+		   adapter: postgresql
+		   database: $DBNAME
+		   username: $DBUSER
+		   password: $DBPASSWORD
+		   host: $DBHOST" > /app/config/database.yml
 	else
 		echo 'Found a database url'
 		exit 1

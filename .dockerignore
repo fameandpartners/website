@@ -9,3 +9,5 @@ tmp
 .env.example
 .env.test
 .gitignore
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
