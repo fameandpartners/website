@@ -5,7 +5,8 @@ class ManualOrdersGrid
 
   scope do
     Spree::LineItem.joins(:order)
-      .where("spree_orders.completed_at is NOT NULL and (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%')")
+      .where("spree_orders.completed_at is NOT NULL and (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%' or spree_orders.number ILIKE 'D%')")
+      .includes(product: [:master])
       .order('spree_orders.completed_at DESC')
   end
 
@@ -16,7 +17,7 @@ class ManualOrdersGrid
   end
 
   filter(:order_type, :enum,
-         select: -> { { 'Manual' => 'M' , 'Exchange' => 'E' } },
+         select: -> { { 'Manual' => 'M', 'Exchange' => 'E', 'Dropship' => 'D' } },
          :include_blank => true) do |value|
     where(Spree::Order.arel_table[:number].matches("#{value}%"))
   end

@@ -48,7 +48,7 @@ script#product_template type='text/template'
                   .col-sm-10 = f.text_area :notes, class: 'manual-textarea'
                 .form-group
                   label.col-sm-2.control-label This order is
-                  .col-sm-10 = f.collection_radio_buttons :status, [['new', 'A new order'], ['exchange', 'An Exchange']], :first, :last, { checked: 'new' }, { class: 'manual-radio'}
+                  .col-sm-10 = f.collection_radio_buttons :status, [['new', 'A new order'], ['exchange', 'An Exchange'], ['dropship', 'A Dropship Order']], :first, :last, { checked: 'new' }, { class: 'manual-radio'}
             .panel.panel-default
               .panel-heading Customer details
               .panel-body
