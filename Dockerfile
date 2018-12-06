@@ -29,7 +29,7 @@ RUN bundle install --local
 COPY . .
 
 # Remove git folder because docker ignore doesn't work when doing COPY
-RUN rm .git
+# RUN rm -rf .git
 
 # Install new packages / git packages not in vendor cache
 RUN bundle install
