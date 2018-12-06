@@ -22,5 +22,19 @@ class Curation < ActiveRecord::Base
     def product_color_value
         product.product_color_values.find { |pcv| pid.include?(pcv.option_value.name) }
     end
+
+    def cropped_images
+        cropped_images = images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
+    
+        if images.blank?
+        cropped_images = images.select { |i| i.attachment_file_name.to_s.downcase.include?('front') }
+        end
+    
+        if images.blank?
+            cropped_images = images
+        end
+
+        cropped_images
+    end
   end
   

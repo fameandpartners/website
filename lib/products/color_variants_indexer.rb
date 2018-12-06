@@ -74,7 +74,7 @@ module Products
     def map_product(index_name, curation)
       product = curation.product
       pid = curation.pid
-      images = curation.images
+      images = curation.cropped_images
 
       product_fabric_value = curation.fabric_product
       fabric = product_fabric_value&.fabric

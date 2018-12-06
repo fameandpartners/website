@@ -128,17 +128,10 @@ Spree::Product.class_eval do
         
     curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first || curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first || curations.first
 
-    all_images = curation&.images || []
     if cropped
-      images = all_images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
-      if images.blank?
-        images = all_images.select { |i| i.attachment_file_name.to_s.downcase.include?('front') }
-      end
-      if images.blank?
-        images = all_images
-      end
+      images = curation&.cropped_images || []
     else
-      images = all_images
+      images = curation&.images || []
     end
 
     images
