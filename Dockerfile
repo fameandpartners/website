@@ -1,6 +1,6 @@
 FROM ruby:2.3.3-slim
 
-RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client-9.4 git libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev imagemagick libmagickwand-dev --fix-missing --no-install-recommends
+RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client-9.6 git libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev imagemagick libmagickwand-dev --fix-missing --no-install-recommends
 
 ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
