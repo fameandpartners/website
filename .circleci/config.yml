@@ -95,9 +95,8 @@ jobs:
                               $(circleci tests glob "spec/**/*_spec.rb engines/*/spec/**/*_spec.rb spec/**/*.feature engines/*/spec/**/*.feature" | circleci tests split --split-by=timings)
 
       - run:
-        name: Remove database yml
-        command: |
-          rm config/database.yml
+          name: Remove database yml
+          command: rm config/database.yml
 
       - store_test_results:
           path: test_results
