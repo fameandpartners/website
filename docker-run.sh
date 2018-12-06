@@ -6,10 +6,19 @@ if [ -f /app/tmp/pids/unicorn.pid ]; then
 fi
 
 if [ -z "${DATABASE_URL}" ]; then
-	echo 'Found a database url, re-write database.yml'
+	echo 'Did not find a database url'
+else
+	echo 'Found a database url'
+fi
 
-	if [ -f /app/config/database.yml ]; then
+if [ ! -z "${DBNAME}" ]; then
+	echo 're-write database.yml'
+
+	if [ ! -f /app/config/database.yml ]; then
+		touch /app/config/database.yml
+	else
 		rm /app/config/database.yml
+		touch /app/config/database.yml
 	fi
 
 	echo "$RAILS_ENV:
@@ -24,4 +33,3 @@ fi
 bundle exec rake db:exists && bundle exec rake db:migrate || bundle exec rake db:create db:schema:load db:migrate --trace
 
 exec bundle exec "$@"
-
