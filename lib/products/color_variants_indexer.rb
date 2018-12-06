@@ -39,7 +39,6 @@ module Products
     def build_variants
       index_name = configatron.elasticsearch.indices.color_variants
 
-      color_variant_id = 1
       product_index = 1
 
       product_count = product_scope.count
@@ -59,10 +58,11 @@ module Products
 
           logger.info("id #{curation.id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
+          mapped = map_product(index_name, curation)
+
           @variants << {
-            create: map_product(index_name, curation)
-          }
-          color_variant_id += 1
+            create: mapped
+          } if mapped
         end
         product_index += 1
       end
@@ -81,6 +81,10 @@ module Products
       product_color_value = curation.product_color_value
       color = product_color_value&.option_value || fabric&.option_value
       customisations = []
+
+      return nil if product_fabric_value && !product_fabric_value.active
+      return nil if product_color_value && !product_color_value.active
+
  
 
       discount = product.discount&.amount.to_i

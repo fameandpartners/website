@@ -26,10 +26,12 @@ namespace :data do
 
       curation = Curation.find_or_create_by_pid_and_product_id(pid, product.id)
       curation.active = true
-      curation.save
+      curation.save!
 
       image.viewable = curation
-      image.save
+      image.save!
     end
+
+    Curation.all.select {|c| c.fabric_product.nil? && !c.product.fabric_products.empty?}.each { |c| c.active = false; c.save! }
   end
 end
