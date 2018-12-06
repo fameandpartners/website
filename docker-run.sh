@@ -6,22 +6,22 @@ if [ -f /app/tmp/pids/unicorn.pid ]; then
 fi
 
 if [ -z "${DATABASE_URL}" ]; then
-	echo 'Did not find a database url'
+  echo 'Did not find a database url'
 else
-	echo 'Found a database url'
+  echo 'Found a database url'
 fi
 
 if [ ! -z "${DBNAME}" ]; then
-	echo 're-write database.yml'
+  echo 're-write database.yml'
 
-	if [ ! -f /app/config/database.yml ]; then
-		touch /app/config/database.yml
-	else
-		rm /app/config/database.yml
-		touch /app/config/database.yml
-	fi
-	
-	# Generate the file
+  if [ ! -f /app/config/database.yml ]; then
+    touch /app/config/database.yml
+  else
+    rm /app/config/database.yml
+    touch /app/config/database.yml
+  fi
+  
+  # Generate the file
     cat > /app/config/database.yml <<EOL
 ${RAILS_ENV}:
   adapter: postgresql
