@@ -6,11 +6,21 @@ class Curation < ActiveRecord::Base
     has_and_belongs_to_many :taxons, class_name: "Spree::Taxon"
 
     default_scope include: [:images]
+    scope :active, where(active: true)
   
     validates :product,
               :presence => true
   
     validates :pid,
               :presence => true
+
+
+    def fabric_product
+        product.fabric_products.find { |fp| pid.include?(fp.fabric.name) }
+    end
+
+    def product_color_value
+        product.product_color_values.find { |pcv| pid.include?(pcv.option_value.name) }
+    end
   end
   

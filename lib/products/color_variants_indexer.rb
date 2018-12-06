@@ -60,7 +60,7 @@ module Products
           logger.info("id #{curation.id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
           @variants << {
-            create: map_product(index_name, color_variant_id, product, nil, color, nil, product_color_value)
+            create: map_product(index_name, curation)
           }
           color_variant_id += 1
         end
@@ -71,8 +71,17 @@ module Products
     end
 
 
-    def map_product(index_name, id, product, curation)
-      pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
+    def map_product(index_name, curation)
+      product = curation.product
+      pid = curation.pid
+      images = curation.images
+
+      product_fabric_value = curation.fabric_product
+      fabric = product_fabric_value&.fabric
+      product_color_value = curation.product_color_value
+      color = product_color_value&.option_value || fabric&.option_value
+      customisations = []
+ 
 
       discount = product.discount&.amount.to_i
       product_price_in_us = product.price_in(@us_site_version.currency)
@@ -89,26 +98,27 @@ module Products
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
       end
 
+      customisations_price_in_us = 0
+      customisations_price_in_au = 0
+
       taxons = [
-        curation&.taxons || [],
+        curation.taxons || [],
         product.taxons
       ].flatten.uniq
 
       taxon_names = [
         taxons.map(&:permalink).map {|f| f.split('/').last },
         product.sku,
-        pid,
+        curation.pid,
         product.category.category,
         product.category.subcategory,
         product.making_options.active.map(&:making_option).map(&:code),
         ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
-        color.name,
+        color&.name,
         fabric&.name,
         fabric&.material,
-        color.option_values_groups.map(&:name),
+        color&.option_values_groups&.map(&:name),
       ].flatten.compact #.map(&:parameterize).map(&:underscore)
-
-      images = cropped_images_for(product_fabric_value || product_color_value)
 
       {
         _index: index_name,
@@ -119,7 +129,7 @@ module Products
           product: {
             id:           product.id,
             name:         product.name,
-            pid:          Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, []),
+            pid:          pid,
             sku:          product.sku,
             description:  product.description,
             created_at:   product.created_at,
@@ -154,7 +164,7 @@ module Products
 
             body_shape_ids:     ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4}.map{|bs| ProductStyleProfile::BODY_SHAPES.find_index(bs) },
           },
-          color:  {
+          color:  color && {
             id:             color.id,
             name:           color.name,
             presentation:   color.presentation
@@ -195,12 +205,12 @@ module Products
           end,
 
           non_sale_prices: discount > 0 ? {
-            aud:  product_price_in_au.amount.to_f + fabric_price_in_au,
-            usd:  product_price_in_us.amount.to_f + fabric_price_in_us
+            aud:  product_price_in_au.amount.to_f + fabric_price_in_au + customisations_price_in_au,
+            usd:  product_price_in_us.amount.to_f + fabric_price_in_us + customisations_price_in_us
           } : nil,
           prices:  {
-            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au,
-            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us
+            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au + customisations_price_in_au,
+            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us + customisations_price_in_us
           }
         }
       }
