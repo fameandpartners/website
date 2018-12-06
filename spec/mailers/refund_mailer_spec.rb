@@ -11,9 +11,9 @@ describe RefundMailer, type: :mailer do
   let(:product_data) {
     {
       name: line_item&.product&.name,
-      size: line_item&.cart_item&.size&.presentation,
-      color: line_item&.cart_item&.color&.presentation,
-      image: line_item&.cart_item&.image&.large,
+      size: line_item&.size&.presentation,
+      color: line_item&.color&.presentation,
+      image: line_item&.image_url,
       price: line_item&.price,
       height_copy: nil
     }
