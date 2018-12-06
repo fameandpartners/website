@@ -85,8 +85,6 @@ jobs:
 
             bundle exec rake db:create db:schema:load db:migrate --trace
 
-            rm config/database.yml
-
       - run:
           name: Run rspec in parallel
           command: |
@@ -95,6 +93,11 @@ jobs:
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb engines/*/spec/**/*_spec.rb spec/**/*.feature engines/*/spec/**/*.feature" | circleci tests split --split-by=timings)
+
+      - run:
+        name: Remove database yml
+        command: |
+          rm config/database.yml
 
       - store_test_results:
           path: test_results
