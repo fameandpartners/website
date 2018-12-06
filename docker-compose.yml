@@ -13,11 +13,14 @@ services:
             - REDIS_URL=redis://redis:6379
             - ES_URL2=http://elasticsearch:9200
             - DATABASE_URL=postgresql://danny:changeme@postgres:5432/fame_website_development
+            - MEMCACHE_SERVERS=memcached
 
     webclient:
         build: ../fame-wc/.
         ports:
             - 3002:3002
+        environment:
+            - FAME_API_URL_US=http://spree:3001
 
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1

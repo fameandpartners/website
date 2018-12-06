@@ -27,7 +27,7 @@ if [ ! -f /app/config/database.yml ]; then
 fi
 
 # Run db commands
-bundle exec rake db:create db:schema:load db:migrate --trace
+bundle exec rake db:migrate 2>/dev/null || rake db:create db:schema:load db:migrate --trace
 
 exec bundle exec "$@"
 
