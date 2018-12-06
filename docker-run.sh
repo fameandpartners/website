@@ -20,13 +20,16 @@ if [ ! -z "${DBNAME}" ]; then
 		rm /app/config/database.yml
 		touch /app/config/database.yml
 	fi
-
-	echo "$RAILS_ENV:
-		adapter: postgresql
-		database: $DBNAME
-		username: $DBUSER
-		password: $DBPASSWORD
-		host: $DBHOST" > /app/config/database.yml
+	
+	# Generate the file
+    cat > /app/config/database.yml <<EOL
+${RAILS_ENV}:
+  adapter: postgresql
+  database: ${DBNAME}
+  username: ${DBUSER}
+  password: ${DBPASSWORD}
+  host: ${DBHOST}
+EOL
 fi
 
 # Run db commands
