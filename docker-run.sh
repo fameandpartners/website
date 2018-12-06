@@ -10,7 +10,7 @@ if [ -z "${DATABASE_URL}" ]; then
 
 	if [ -f /app/config/database.yml ]; then
 		rm /app/config/database.yml
-	end
+	fi
 
 	echo "$RAILS_ENV:
 		adapter: postgresql
