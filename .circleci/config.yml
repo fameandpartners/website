@@ -133,6 +133,7 @@ jobs:
           elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
           fi
+
       - run:
           name: Send Success Slack Notification
           command: |
@@ -143,6 +144,19 @@ jobs:
               curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
             fi
           when: on_success
+
+      - run:
+          name: Send Sentry Notification
+          command: |
+            if [ ${CIRCLE_BRANCH}" == "master" ] ; then
+              # Alert Sentry about deploy
+              sentry_endpoint='https://app.getsentry.com/api/hooks'
+              curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
+              -X POST \
+              -H "Content-Type: application/json" \
+              -d "{\"version\": \"${CIRCLE_SHA1}\"}"
+            fi
+
       - run:
           name: Send Success Slack Notification
           command: |
