@@ -14,13 +14,9 @@ services:
             - ES_URL2=http://elasticsearch:9200
             - DATABASE_URL=postgresql://danny:changeme@postgres:5432/fame_website_development
             - MEMCACHE_SERVERS=memcached
-
-    webclient:
-        build: ../fame-wc/.
-        ports:
-            - 3002:3002
-        environment:
-            - FAME_API_URL_US=http://spree:3001
+            - FAME_WEBCLIENT_URL=http://webclient-qa4.fameandgroups.com
+            - DEVELOPMENT_ASSET_HOST=http://127.0.0.1:3001
+            - RAILS_ENV=development
 
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1

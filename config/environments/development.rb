@@ -22,8 +22,8 @@ FameAndPartners::Application.configure do
   app_host_without_protocol = ENV['APP_HOST'].to_s.gsub('https://', '').gsub('http://', '')
   config.action_mailer.default_url_options = { host: app_host_without_protocol }
 
-  config.action_mailer.asset_host = 'http://localhost:3000'
-  config.action_controller.asset_host = 'http://localhost:3000'
+  config.action_mailer.asset_host = ENV.fetch('DEVELOPMENT_ASSET_HOST', 'http://localhost:3000')
+  config.action_controller.asset_host = ENV.fetch('DEVELOPMENT_ASSET_HOST', 'http://localhost:3000')
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

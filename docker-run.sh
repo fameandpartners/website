@@ -51,4 +51,4 @@ fi
 # fi
 
 #  Now run
-exec bundle exec "$@"
+exec bundle exec "$@" -e $RAILS_ENV
