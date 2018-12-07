@@ -49,7 +49,7 @@ services:
         command: memcached -m 64
 
     postgres:
-        image: postgres:9.4.19
+        image: postgres:9.6.6
         environment:
             - POSTGRES_USER=danny
             - POSTGRES_PASSWORD=changeme

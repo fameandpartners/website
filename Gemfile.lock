@@ -129,7 +129,7 @@ PATH
       kaminari (~> 0.14.1)
       manual_order
       money
-      rails (~> 3.2.21)
+      rails (~> 3.2.22.5)
       reform
       sidekiq
       simple_form

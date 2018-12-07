@@ -20,7 +20,7 @@ if [ ! -z "${DBNAME}" ]; then
     rm /app/config/database.yml
     touch /app/config/database.yml
   fi
-  
+
   # Generate the file
     cat > /app/config/database.yml <<EOL
 ${RAILS_ENV}:
@@ -32,7 +32,21 @@ ${RAILS_ENV}:
 EOL
 fi
 
-# Run db commands
-bundle exec rake db:exists && bundle exec rake db:migrate || bundle exec rake db:create db:schema:load db:migrate --trace
+export PGPASSWORD=$DBPASSWORD
 
+# Run db commands
+if psql -U $DBUSER -h $DBHOST -lqt | cut -d \| -f 1 | grep -qw $DBNAME; then
+    # database exists
+    # $? is 0
+	bundle exec rake db:migrate
+else
+    # ruh-roh
+    # $? is 1
+	bundle exec rake db:create db:schema:load db:migrate --trace
+fi
+
+# Test for redis
+(printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
+
+#  Now run
 exec bundle exec "$@"
