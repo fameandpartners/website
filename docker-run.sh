@@ -46,7 +46,9 @@ else
 fi
 
 # Test for redis
-(printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
+# if [ -z "${REDIS_IP}" ]; then
+#   (printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
+# fi
 
 #  Now run
 exec bundle exec "$@"
