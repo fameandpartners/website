@@ -42,7 +42,6 @@ COPY . .
 # Make runnable
 RUN chmod +x docker-run.sh
 
-# Exponse on 3001 as we are binding global ip to this port
 EXPOSE 3000
 
 ENTRYPOINT ["/app/docker-run.sh"]
