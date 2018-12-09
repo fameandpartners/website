@@ -45,4 +45,4 @@ RUN chmod +x docker-run.sh
 EXPOSE 3000
 
 ENTRYPOINT ["/app/docker-run.sh"]
-CMD ["/app/bin/unicorn", "-c", "/app/config/unicorn.rb", "-E", "echo ${RAILS_ENV}"]
+CMD ["/app/bin/unicorn", "-c", "/app/config/unicorn.rb"]

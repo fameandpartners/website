@@ -56,4 +56,4 @@ fi
 #  Now run
 bundle exec rake cache:clear
 
-exec bundle exec "$@"
+exec bundle exec "$@" -E $RAILS_ENV
