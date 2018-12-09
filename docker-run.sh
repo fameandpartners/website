@@ -17,6 +17,12 @@ if [ -f /app/tmp/pids/server.pid ]; then
   rm /app/tmp/pids/server.pid
 fi
 
+if [ ! -d "/app/tmp/logs" ]; then
+  mkdir /app/tmp/logs
+else
+  rm -rf /app/tmp/logs/*
+fi
+
 # Copy over the production unicorn config if not already so
 if [ -f /app/config/unicorn_production.rb ]; then
   if [ -f /app/config/unicorn.rb ]; then

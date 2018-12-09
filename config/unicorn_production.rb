@@ -8,8 +8,8 @@ timeout 60
 
 pid "/app/tmp/unicorn.pid"
 
-stderr_path "/app/logs/unicorn.stderr.log"
-stdout_path "/app/logs/unicorn.stdout.log"
+stderr_path "/app/tmp/logs/unicorn.stderr.log"
+stdout_path "/app/tmp/logs/unicorn.stdout.log"
 
 run_path = "/app/"
 
