@@ -43,7 +43,7 @@ COPY . .
 RUN chmod +x docker-run.sh
 
 # Exponse on 3001 as we are binding global ip to this port
-EXPOSE 3001
+EXPOSE 3000
 
 ENTRYPOINT ["/app/docker-run.sh"]
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3001"]
+CMD ["/app/bin/unicorn", "-c", "/app/config/unicorn.rb", "-E", "echo ${RAILS_ENV}"]

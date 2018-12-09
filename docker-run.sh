@@ -2,34 +2,37 @@
 set -e
 
 if [ -f /app/tmp/pids/unicorn.pid ]; then
-    rm /app/tmp/pids/unicorn.pid
+  rm /app/tmp/pids/unicorn.pid
 fi
 
-if [ -z "${DATABASE_URL}" ]; then
-  echo 'Did not find a database url'
-else
-  echo 'Found a database url'
+if [ -f /app/tmp/unicorn.pid ]; then
+  rm /app/tmp/unicorn.pid
 fi
 
-if [ ! -z "${DBNAME}" ]; then
-  echo 're-write database.yml'
+# if [ -f /app/tmp/unicorn.sock ]; then
+#   rm /app/tmp/unicorn.sock
+# fi
 
-  if [ ! -f /app/config/database.yml ]; then
-    touch /app/config/database.yml
-  else
-    rm /app/config/database.yml
-    touch /app/config/database.yml
+if [ -f /app/tmp/pids/server.pid ]; then
+  rm /app/tmp/pids/server.pid
+fi
+
+# Copy over the production unicorn config if not already so
+if [ -f /app/config/unicorn_production.rb ]; then
+  if [ -f /app/config/unicorn.rb ]; then
+    rm /app/config/unicorn.rb
   fi
 
-  # Generate the file
-    cat > /app/config/database.yml <<EOL
-${RAILS_ENV}:
-  adapter: postgresql
-  database: ${DBNAME}
-  username: ${DBUSER}
-  password: ${DBPASSWORD}
-  host: ${DBHOST}
-EOL
+  mv /app/config/unicorn_production.rb /app/config/unicorn.rb
+fi
+
+# Copy over the production database config if not already so
+if [ -f /app/config/database_production.yml ]; then
+  if [ -f /app/config/database.yml ]; then
+    rm /app/config/database.yml
+  fi
+
+  mv /app/config/database_production.yml /app/config/database.yml
 fi
 
 export PGPASSWORD=$DBPASSWORD
@@ -53,4 +56,4 @@ fi
 #  Now run
 bundle exec rake cache:clear
 
-exec bundle exec "$@" -e $RAILS_ENV
+exec bundle exec "$@"
