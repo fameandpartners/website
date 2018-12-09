@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+if [ ! -d "/app/tmp" ]; then
+  mkdir /app/tmp
+fi
+
 if [ -f /app/tmp/pids/unicorn.pid ]; then
   rm /app/tmp/pids/unicorn.pid
 fi
