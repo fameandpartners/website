@@ -148,7 +148,7 @@ jobs:
       - run:
           name: Send Sentry Notification
           command: |
-            if [ ${CIRCLE_BRANCH}" == "master" ] ; then
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               # Alert Sentry about deploy
               sentry_endpoint='https://app.getsentry.com/api/hooks'
               curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
