@@ -118,6 +118,7 @@ gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
 gem 'unicorn'
+gem 'aws-healthcheck'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

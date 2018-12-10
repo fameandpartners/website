@@ -244,6 +244,8 @@ GEM
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
     awesome_print (1.6.1)
+    aws-healthcheck (1.0.1)
+      rails (>= 3.0)
     aws-sdk (1.11.2)
       json (~> 1.4)
       nokogiri (< 1.6.0)
@@ -881,6 +883,7 @@ DEPENDENCIES
   asset_sync (~> 2.0)
   autoprefixer-rails
   awesome_print
+  aws-healthcheck
   aws-sdk
   bergen!
   better_errors
