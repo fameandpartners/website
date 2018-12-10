@@ -43,10 +43,9 @@ configatron.email_marketing.delay_time do |delay_time|
 end
 configatron.email_marketing.store_information = 1.month
 
-configatron.mailgun.mailbox do |mailgun|
-  mailgun.domain   = ENV['SMTP_DOMAIN']
-  mailgun.username = ENV['SMTP_USERNAME']
-  mailgun.password = ENV['SMTP_PASSWORD']
+configatron.mailbox do |mb|
+  mb.username = ENV['SMTP_USERNAME']
+  mb.password = ENV['SMTP_PASSWORD']
 end
 
 configatron.mailchimp do |mailchimp|
