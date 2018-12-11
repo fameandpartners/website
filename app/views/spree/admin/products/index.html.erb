@@ -6,7 +6,7 @@
   <div class="toolbar" data-hook="toolbar">
     <ul class="actions header-action-links inline-menu">
       <li id="new_product_link">
-        <%= button_link_to t(:new_product), new_object_url, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_product' } %>
+        <%= button_link_to t(:new_product), new_object_url, { :icon => 'icon-plus', :id => 'admin_new_product' } %>
       </li>
       <li id="product_batch_upload_link">
         <%= link_to "Batch upload", new_admin_product_uploads_url,

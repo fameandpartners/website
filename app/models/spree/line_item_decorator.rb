@@ -187,7 +187,7 @@ Spree::LineItem.class_eval do
     60.days.ago <= max_delivery_date
   end
 
-  def return_eligible?(current_user)
+  def return_eligible?(current_user = nil)
     return false unless order.completed?
     return true if current_user&.admin?
 
@@ -237,6 +237,9 @@ Spree::LineItem.class_eval do
   def shipment
     order.shipments.detect { |ship| ship.line_items.include?(self) }
   end
+
+  def ignore_line?
+    fabric_swatch? || return_insurance?
   end
 
   def production_sheet_url

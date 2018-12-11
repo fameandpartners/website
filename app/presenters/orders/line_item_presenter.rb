@@ -122,24 +122,6 @@ module Orders
       customisations(include_codes: include_codes).collect &:first
     end
 
-    def return_action
-      if order.return_requested? && return_item
-        return_item.action
-      end
-    end
-
-    def return_details
-      if order.return_requested? && return_item
-        if return_item.return_or_exchange?
-          "#{return_item.quantity} x #{return_item.reason_category} - #{return_item.reason}"
-        end
-      end
-    end
-
-    def return_item
-      @return_item ||= order.return_request.return_request_items.where(:line_item_id => id).first
-    end
-
     def variant_id
       variant.try(:id)
     end

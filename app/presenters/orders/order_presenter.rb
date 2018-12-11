@@ -32,8 +32,6 @@ module Orders
                    :payment_state,
                    :fabrication_status,
                    :shipped?,
-                   :order_return_requested?,
-                   :returnable?,
                    :item_count,
                    :return_type,
                    :vwo_type,

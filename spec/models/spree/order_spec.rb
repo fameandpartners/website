@@ -33,31 +33,6 @@ describe Spree::Order, :type => :model do
     end
   end
 
-  describe '#returnable?' do
-    let(:line_item) { build(:line_item, fabrication: fabrication) }
-    let(:order) { build(:spree_order, line_items: [line_item]) }
-
-    before(:each) { allow(order).to receive(:order_return_requested?).and_return(false) }
-
-    context 'given that all line items are shipped' do
-      let(:fabrication) { build(:fabrication, :shipped) }
-
-      it { expect(order.returnable?).to be_truthy }
-
-      context 'order has an opened return request' do
-        before(:each) { allow(order).to receive(:order_return_requested?).and_return(true) }
-
-        it { expect(order.returnable?).to be_falsey }
-      end
-    end
-
-    context 'a single line item is not shipped' do
-      let(:fabrication) { build(:fabrication, state: 'anything') }
-
-      it { expect(order.returnable?).to be_falsey }
-    end
-  end
-
   describe '#shipped?' do
     context 'shipped' do
       before do

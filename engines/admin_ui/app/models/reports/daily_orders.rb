@@ -37,58 +37,47 @@ module Reports
       ].join('_') << ".csv"
     end
 
-    def to_sql
-      Spree::Order::FastOrder.get_sql report: :daily_orders, from_date: from, to_date: to
+    def report_query
+      Spree::Order.hydrated.completed.where('completed_at > ? and completed_at <= ?', from, to).flat_map(&:line_items)
     end
 
     def report_csv
-      line = Orders::LineItemCSVPresenter
-
       CSV.generate(headers: true) do |csv|
         csv << report_headers
 
-        self.each do |r|
-          line.set_line r
+        self.each do |line|
 
           if line.ignore_line?
             next
           end
 
           csv << [
-            line.order_number,
-            line.site_version,
-            line.total_items,
-            line.completed_at_date,
-            line.promo_codes,
+            line.order.number,
+            line.order.site_version,
+            line.order.legit_line_items.count,
+            line.order.completed_at&.to_date,
+            line.order.promotions.map(&:name).join("|"),
             line.price,
             line.currency,
-            line.style,
-            line.style_name,
-            line.line_item_id,
-            line.product_number,
-            line.size,
-            line.adjusted_size,
-            line.height,
-            line.color,
+            line.product_sku,
+            line.product.name,
+            line.id,
+            line.size&.presentation,
+            line.personalization&.height,
+            line.color&.presentation,
             line.quantity,
             line.factory,
-            line.delivery_date,
-            line.making_option,
-            line.sku,
-            line.customization_values,
-            line.custom_color,
-            line.material,
-            line.customer_notes,
-            line.customer_name,
-            line.customer_phone_number,
-            line.email,
-            line.address1,
-            line.address2,
-            line.city,
-            line.state,
-            line.zipcode,
-            line.country,
-            line.image,
+            line&.ship_by_date&.to_date,
+            line.making_options.map(&:product_making_option).map(&:making_option ).map(&:code).join("|"),
+            line.new_sku,
+            line.personalization&.customization_values&.map { |c| c['customisation_value']['presentation']}&.join("|"),
+            line.fabric&.material,
+            line.order.customer_notes,
+            line.order.ship_address.name,
+            line.order.ship_address.phone,
+            line.order.email,
+            line.order.ship_address.to_s,
+            line.image_url,
             line.production_sheet_url
           ]
         end
@@ -111,29 +100,21 @@ module Reports
         :style,
         :style_name,
         :line_item_id,
-        :product_number,
         :size,
-        :adjusted_size,
         :height,
         :color,
         :quantity,
         :factory,
-        :projected_delivery_date,
+        :ship_by_daye,
         :making,
         :sku,
         :customisations,
-        :custom_color,
         :fabric,
         :customer_notes,
         :customer_name,
         :customer_phone_number,
         :email,
-        :address1,
-        :address2,
-        :city,
-        :state,
-        :zipcode,
-        :country,
+        :address,
         :image,
         :production_sheet_url
       ]
