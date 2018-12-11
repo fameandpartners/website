@@ -54,7 +54,7 @@ module Products
         curation = product.curations.find {|x| x.pid == c[:pid] } || Curation.new(product_id: product.id, pid: c[:pid])
         curation.active = true
         curation.name = c[:name]
-        curation.taxons = c[:taxons].map {|t| Spree::Taxon.find_by_permalink(t)}
+        curation.taxons = Spree::Taxon.where(permalink: c[:taxons])
         curation.save!
 
         c[:media].each_with_index do |(image, p)| 
@@ -98,7 +98,7 @@ module Products
 
       ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
 
-      taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_permalink(x)&.id }
+      taxon_ids = Spree::Taxon.where(permalink: prod[:details][:taxons]).pluck(:id)
 
       attributes = {
         name: prod[:details][:name],

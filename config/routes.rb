@@ -83,6 +83,7 @@ FameAndPartners::Application.routes.draw do
   get '/user' => 'noop#noop', as: :user
   get '/contact' => 'noop#noop', as: :contact
   get '/return/reason/:order_number/:email' => 'noop#noop', as: :new_user_returns
+  get '/return/:order_number' => 'noop#noop', as: :return_detail
 
 
 

@@ -17,6 +17,9 @@ Spree::LineItem.class_eval do
   has_many :batch_collection_line_items
   has_many :batch_collections, :through => :batch_collection_line_items
 
+  has_one :return_item, :class_name => 'ReturnRequestItem'
+
+
   # Note: it seems we need to store this value in DB.
   def delivery_period
     if self.delivery_date.nil? && self.order.state != 'complete'
@@ -31,8 +34,7 @@ Spree::LineItem.class_eval do
   end
 
   def customizations
-    super ||
-    CustomisationValue.where(id: self.personalization&.customization_value_ids || []).to_json
+    super ? JSON.parse(super) : []
   end
 
   def delivery_period_policy
@@ -207,15 +209,14 @@ Spree::LineItem.class_eval do
     images(cropped: cropped).first
   end
   def images(cropped: )
-    cust =  JSON.parse(self.customizations)
-    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, cust, cropped)
+    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, customizations, cropped)
   end
 
   def new_sku
     Spree::Product.format_new_pid(
       self.product_sku,
       self.fabric&.name || self.personalization&.color&.name|| self.color,
-      JSON.parse(self.customizations)
+      customizations
     )
   end
 
@@ -235,5 +236,11 @@ Spree::LineItem.class_eval do
 
   def shipment
     order.shipments.detect { |ship| ship.line_items.include?(@item) }
+  end
+
+  def production_sheet_url
+    if Spree::Product.is_new_product?(product_sku)
+      "#{configatron.product_catalog_url}/admin/productionsheet/#{new_sku}"
+    end
   end
 end

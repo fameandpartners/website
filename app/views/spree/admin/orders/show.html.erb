@@ -11,7 +11,7 @@
     <li>
       <button class="ui-state-disabled" disabled>
         <i class="icon-check"></i>
-        Order Return Requested
+        <%= button_link_to 'Order Return Requested', return_deatil_url(:order_number => @order.number), :target => 'blank' %>
       </button>
     </li>
   <% end %>

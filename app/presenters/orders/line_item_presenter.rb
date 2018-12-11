@@ -92,7 +92,7 @@ module Orders
       if personalizations?
         if item.customizations
           customs = Array.wrap(
-              JSON.parse(item.customizations)
+              item.customizations
               .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
               .collect { |custom|
                 [

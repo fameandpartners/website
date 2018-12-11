@@ -40,7 +40,7 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def customization_values
-    @customization_values ||=  self.line_item.customizations.nil? ? JSON.parse(CustomisationValue.where(id: customization_value_ids).to_json) : JSON.parse(self.line_item.customizations)
+    @customization_values ||=  self.line_item.customizations.nil? ? JSON.parse(CustomisationValue.where(id: customization_value_ids).to_json) : self.line_item.customizations
   end
 
   def options_hash
