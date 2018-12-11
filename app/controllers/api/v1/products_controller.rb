@@ -54,28 +54,7 @@ module Api
 
           pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
           fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
-          # customization = all_customizations.find { |c|  components.include?(c["customisation_value"]["name"]) }
-
-          if !pcv && !fabric_product
-            return nil
-          end
-
-
-          all_images = spree_product.images.select { |i| i.attachment_file_name.to_s.downcase.include?('crop') }
-          if all_images.blank?
-            all_images = spree_product.images.select { |i| i.attachment_file_name.to_s.downcase.include?('front') }
-          end
-          if all_images.blank?
-            all_images = spree_product.images
-          end
-
-          images = all_images.select do |i| 
-             (i.viewable_type == 'FabricsProduct' && i.viewable_id == fabric_product&.id) || (i.viewable_type == 'ProductColorValue' && i.viewable_id == pcv&.id)
-          end
-          if images.blank?
-            viewable_id = all_images.first&.viewable_id
-            images = all_images.select {|i| i.viewable_id == viewable_id }
-          end
+          customizations = all_customizations.select { |c|  components.include?(c["customisation_value"]["name"]) }.map {|c| ["customisation_value"]["name"]}
 
           price = spree_product.price_in(current_site_version.currency).amount + 
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
@@ -91,7 +70,7 @@ module Api
             pid: pid,
             name: spree_product.name,
             url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.option_value.name),
-            media: images
+            media: product.images_for_customisation(pcv.option_value.name, fabric_product.fabric.name, customizations, true)
               .sort_by(&:position)
               .take(2)
               .collect do |image| 
@@ -404,7 +383,6 @@ module Api
 
         images = product
           .images
-          .includes(:viewable)
 
         product_viewmodel = {
           productId: product.sku,
@@ -600,15 +578,8 @@ module Api
       end
 
       def map_image(image, fabrics, colors, product_fit, product_size) 
-        option = nil
-
-        if image.viewable_type == "FabricsProduct"
-          fabric = fabrics.find { |f| f.id == image.viewable_id}
-          option = fabric&.fabric&.name
-        elsif image.viewable_type == "ProductColorValue"
-          color = colors.find { |f| f.id == image.viewable_id}
-          option = color&.option_value&.name
-        end
+        options = image.viewable.pid&.split('~') || []
+        options.shift # remove sku
 
         {
           type: :photo,
@@ -630,9 +601,7 @@ module Api
             }
           }.select {|i| i[:width] <= image.attachment_width},
           sortOrder: image.position,
-          options: [
-            option
-          ].compact
+          options: options
         }
       end
 
@@ -746,12 +715,8 @@ module Api
           type: :Color,
           meta: {
             sortOrder: c.option_value.position,
-            hex: c.option_value.value&.include?('#') ? c.option_value.value : nil,
-            image: (!c.option_value.value&.include?('#') || !c.option_value.image_file_name.blank?) ? {
-              url: c.option_value.value&.include?('#') ? color_image(c.option_value.image_file_name) : color_image(c.option_value.value),
-              width: 0,
-              height: 0,
-            } : nil,
+            hex: c.option_value.color_hex,
+            image: c.option_value.color_image,
 
             careDescription: CARE_DESCRIPTION,
             fabricDescription: product_fabric,
@@ -784,12 +749,6 @@ module Api
           },
           incompatibleWith: { allOptions: [] },
         }
-      end
-
-      def color_image(image_file_name)
-        return nil unless image_file_name
-
-        "#{configatron.asset_host}/assets/product-color-images/#{image_file_name}"
       end
 
       def customization_image(customization)

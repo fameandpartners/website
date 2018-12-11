@@ -4,8 +4,7 @@ Spree::Variant.class_eval do
 
   accepts_nested_attributes_for :prices
 
-
-  attr_accessible :product_factory_name, :prices_attributes
+  attr_accessible :prices_attributes
 
   after_initialize :set_default_values
 
@@ -76,12 +75,6 @@ Spree::Variant.class_eval do
 
   def get_price_in(currency)
     prices.find { |price| price.currency == currency }
-  end
-
-  def product_factory_name
-    if product.property('factory_name').present?
-      return product.property('factory_name').downcase
-    end
   end
 
   private

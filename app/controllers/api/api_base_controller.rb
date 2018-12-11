@@ -9,5 +9,14 @@ module Api
         end
 
         skip_before_filter :set_current_order
+
+        def default_serializer_options
+            {
+                root: false,
+                scope: {
+                    current_user: current_spree_user
+                }
+            }
+        end
     end
 end

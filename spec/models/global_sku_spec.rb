@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry-byebug'
 
 RSpec.describe GlobalSku, type: :model do
   it { is_expected.to belong_to(:product).class_name('Spree::Product') }

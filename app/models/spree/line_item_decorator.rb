@@ -42,9 +42,7 @@ Spree::LineItem.class_eval do
   def price
     total_price = super
 
-    if making_options.exists?
-      total_price += making_options_price_adjustment
-    end
+    total_price += making_options_price_adjustment
 
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
@@ -68,10 +66,6 @@ Spree::LineItem.class_eval do
     end
 
     total_adjustment
-  end
-  
-  def making_options_price
-    making_options.sum(&:price)
   end
 
   def in_sale?
@@ -113,33 +107,21 @@ Spree::LineItem.class_eval do
     making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
   end
 
-  def cart_item
-    @cart_item ||= Repositories::CartItem.new(line_item: self).read
-  end
-
-  def image
-    cart_item.image.present? ? Spree::Image.find(cart_item.image.id) : nil
-  end
-
   def factory
     Factory.for_product(product)
   end
 
-  def promotional_gift?
-    product.try(:name) == "Gift"
+  def color
+    personalization.try(:color)
   end
 
   def color_name
-    cart_item.try(:color).try(:presentation) || ''
+    color.try(:presentation) || ''
   end
 
   def color_code
-    cart_item.try(:color).try(:name) || ''
+    color.try(:name) || ''
   end
-
-	def color_hex
-		cart_item&.try(:color)&.try(:value)&.include?("#") ? cart_item.try(:color).try(:value) : nil
-	end
 
   def height_name
     personalization.try(:height) || ''
@@ -154,11 +136,15 @@ Spree::LineItem.class_eval do
   end
 
   def image_url
-    cart_item.try(:image).try(:large) || ''
+    image(cropped: true)&.attachment&.url(:large)
+  end
+
+  def size
+    personalization&.size
   end
 
   def size_name
-    cart_item.try(:size).try(:presentation) || ''
+    size&.presentation
   end
 
   def style_name
@@ -169,21 +155,43 @@ Spree::LineItem.class_eval do
     self.product&.category&.category == 'Sample'
   end
 
+  def fabrics_product
+    fabric ? product.fabric_products.where(fabric_id: fabric.id).first : nil
+  end
+
+  def sample_sale?
+    !self.stock.nil?
+  end
+
   def return_insurance?
     product.name.downcase.include? "return_insurance"
   end
 
-  def store_credit_only_return?
-    !(personalization&.customization_values&.empty? && product.taxons.none? { |t| t.name == 'Bridal' }) && return_eligible_AC?
+  def is_returnable_item?
+    !fabric_swatch? && !return_insurance? && !sample_sale?
   end
 
-  def return_eligible_AC?
-    self.order.return_type.blank? || self.order.return_type == 'C'|| (self.order.return_type == 'A' && !self.order.promotions.any? {|x| x.code.downcase.include? "deliverydisc"}) #blank? handles older orders so we dont need to back fill
+  def is_returnable_order?
+    return false unless order.completed?
+
+    order.completed_at > DateTime.new(2018,11,20)  || order.line_items.any?(&:return_insurance?)
   end
 
-  def return_eligible_B?
-    self.order.return_type == 'B' && self.order.line_items.any?(&:return_insurance?)
+  def return_window_open?
+    return false unless order.completed?
+    
+    max_delivery_date = order.line_items.map(&:delivery_period_policy).map(&:delivery_date).compact.max
+
+    60.days.ago <= max_delivery_date
   end
+
+  def return_eligible?(current_user)
+    return false unless order.completed?
+    return true if current_user&.admin?
+
+    is_returnable_item? && is_returnable_order? && return_window_open? 
+  end
+
 
   def window_closed?
     delivery_date = self.delivery_period_policy.delivery_date
@@ -194,50 +202,13 @@ Spree::LineItem.class_eval do
   def in_batch?
     !self.batch_collections.empty?
   end
-
-  def as_json(options = { })
-    json = super(options)
-    json['line_item']['store_credit_only'] = self.store_credit_only_return?
-    json['line_item']['window_closed'] = self.window_closed?
-    if self.fabric_swatch?
-      json['line_item']['products_meta'] = {
-        "name": self.style_name,
-        "price": self.price,
-        "color": self.color_name,
-        "image": self.image_url,
-        "colorHex": self.color_hex,
-      }
-    else
-      json['line_item']['products_meta'] = {
-        "name": self.style_name,
-        "price": self.price,
-        "size": self.size_name,
-        "color": self.color_name,
-        "fabric": self&.fabric&.presentation,
-        "height": self.height_name,
-        "height_unit": self.height_unit,
-        "height_value": self.height_value,
-        "image": self.image_url,
-        "sku": self.new_sku,
-        "productSku": self.product_sku,
-        "colorCode": self.color_code,
-				"colorHex": self.color_hex,
-        "fabricCode": self&.fabric&.name,
-      }
-      json['line_item']['fabrication'] = self&.fabrication
-    end
-    if self.item_return.present?
-      json['line_item']['returns_meta'] = {
-        "created_at_iso_mdy": self.item_return.created_at.strftime("%m/%d/%y"),
-        "return_item_state": self.item_return.acceptance_status,
-        "item_return_id": self.item_return.id,
-        "label_pdf_url": self.item_return&.item_return_label&.label_pdf_url || '',
-        "label_image_url": self.item_return&.item_return_label&.label_image_url || '',
-        "label_url": self.item_return&.item_return_label&.label_url || '',
-				"item_return": self.item_return
-      }
-    end
-    json
+  
+  def image(cropped: )
+    images(cropped: cropped).first
+  end
+  def images(cropped: )
+    cust =  JSON.parse(self.customizations)
+    product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, cust, cropped)
   end
 
   def new_sku
@@ -250,5 +221,19 @@ Spree::LineItem.class_eval do
 
   def product_sku
     self.variant.product.sku
+  end
+
+  def projected_delivery_date
+    return unless order.completed?
+    delivery_period_policy.delivery_date
+  end
+
+  def ship_by_date
+    return unless order.completed?
+    delivery_period_policy.ship_by_date
+  end
+
+  def shipment
+    order.shipments.detect { |ship| ship.line_items.include?(@item) }
   end
 end

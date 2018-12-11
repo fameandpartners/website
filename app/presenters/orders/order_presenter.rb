@@ -25,6 +25,7 @@ module Orders
                    :state,
                    :to_param,
                    :display_promotion_total,
+                   :display_shipment_total,
                    :shipment,
                    :completed?,
                    :updated_at,
@@ -35,7 +36,9 @@ module Orders
                    :returnable?,
                    :item_count,
                    :return_type,
-                   :vwo_type
+                   :vwo_type,
+                   :promocode,
+                   :display_item_total
 
     attr_reader :spree_order, :items, :order
 
@@ -86,7 +89,7 @@ module Orders
     end
 
     def taxes
-      spree_order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
+      spree_order.taxes.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
     end
 
     def promotion?
@@ -139,7 +142,7 @@ module Orders
           factory:               item.factory.name,
           deliver_date:          item.projected_delivery_date.to_s,
           express_making:        item.making_options.present? ? item.making_options.map { |option| option.name.upcase }.join(', ') : "",
-          image_url:             item.image? ? item.image_url : '',
+          image_url:             item.image_url,
           total_price:           item.price.to_s,
           discount:              item.item.product.discount.to_s
         }.merge(

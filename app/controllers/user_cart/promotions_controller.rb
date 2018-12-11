@@ -14,10 +14,8 @@ class UserCart::PromotionsController < UserCart::BaseController
       fire_event('spree.order.contents_changed')
       fire_event('spree.checkout.coupon_code_added')
 
-      @user_cart = user_cart_resource.read
-
-      respond_with(@user_cart) do |format|
-        format.json { render json: @user_cart.serialize, status: :ok }
+      respond_with do |format|
+        format.json { render json: current_order, serializer: OrderSerializer, status: :ok }
       end
     else
       respond_with({}) do |format|

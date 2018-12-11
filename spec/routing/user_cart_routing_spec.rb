@@ -20,21 +20,4 @@ describe 'user_cart/', type: :routing do
                    action:     'destroy',
                    line_item_id: '77')
   end
-
-  it 'remove customisations' do
-    expect(delete: '/user_cart/products/88/customizations/102')
-      .to route_to(
-            controller:       'user_cart/products',
-            action:           'destroy_customization',
-            line_item_id:     '88',
-            customization_id: '102')
-  end
-
-  it 'remove making options' do
-    expect(delete: '/user_cart/products/99/making_options/545')
-      .to route_to(controller:       'user_cart/products',
-                   action:           'destroy_making_option',
-                   line_item_id:     '99',
-                   making_option_id: '545')
-  end
 end

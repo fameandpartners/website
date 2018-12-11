@@ -1,6 +1,8 @@
 ruby:
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
 
+  order_presenter = Orders::OrderPresenter.new(order)
+
   shopping_cart_summary_init = "
     window.app.shopping_cart_summary = new ShoppingCartSummary({
       cart: window.app.shopping_cart,
@@ -11,10 +13,11 @@ ruby:
   "
   preload_cart_data = "
     (function(){
-      cart_data  = #{ raw cart.serialize.to_json };
+      cart_data  = #{ raw OrderSerializer.new(order, {scope: {}}).to_json(root: nil) };
       window.app.shopping_cart.updateData(cart_data);
     })();
   "
+
 
 - if run_setup_script
   = content_for :inline_javascript do
@@ -26,7 +29,7 @@ ruby:
     .row
       .col-xs-12
 
-        - if cart.products
+        - if !order_presenter.line_items.empty?
           .cart-items
 
         - else
@@ -50,27 +53,27 @@ ruby:
           .cart-total
             p
               | Sub Total
-              span.value = cart.display_item_total.to_s
+              span.value = order_presenter.display_item_total.to_s
             p
               | Shipping
-              span.value = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+              span.value = order_presenter.display_shipment_total.present? ? order_presenter.display_shipment_total.to_s : 'Free Shipping'
             p
-              - if cart.display_promotion_total.to_s != "$0.00"
-                - if cart.promocode.present?
+              - if order_presenter.display_promotion_total.to_s != "$0.00"
+                - if order_presenter.promocode.present?
                   | Additional Savings
-                  span.value = cart.display_promotion_total
+                  span.value = order_presenter.display_promotion_total
                 - else
                   | Additional Savings
-                  span.value = cart.display_promotion_total
+                  span.value = order_presenter.display_promotion_total
 
-            - cart.taxes.each do |tax|
+            - order_presenter.taxes.each do |tax|
               p
-                = tax[:label]
-                span.value = tax[:display_tax_total]
+                = tax.label
+                span.value = tax.display_total
 
             p.order-total
               | Order Total
-              span.value = cart.display_total
+              span.value = order_presenter.display_total
               - if current_site_version.is_australia?
                 .taxes Including GST
 
@@ -88,4 +91,4 @@ ruby:
     .shopping-bag-order-number
       .row
         .col-xs-12
-          |  Your Order Number: #{cart.order_number}
+          |  Your Order Number: #{order_presenter.number}

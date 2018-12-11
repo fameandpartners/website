@@ -40,7 +40,6 @@ class ApplicationController < ActionController::Base
                 :default_seo_title,
                 :get_user_type,
                 :serialize_user,
-                :serialized_current_user,
                 :landing_page,
                 :contentful_global_page_config
 
@@ -218,14 +217,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def serialized_current_user
-    if spree_user_signed_in?
-      serialize_user(spree_current_user)
-    else
-      {}
-    end
-  end
-
   def serialize_user(user)
     {
       fullname: user.fullname,
@@ -279,10 +270,6 @@ class ApplicationController < ActionController::Base
     if (params[:utm_campaign].present? || params[:gclid].present?) && cookies[:quiz_shown].blank?
       cookies[:quiz_shown] = true
     end
-  end
-
-  def display_marketing_banner
-    @display_marketing_banner = true
   end
 
   # this logic should be placed in separate module

@@ -10,7 +10,7 @@ module Policies
       @product = @line_item.product
 
       @making_option = @line_item.making_options.first&.product_making_option&.making_option
-      @making_option ||= @product.making_options.active.where(default: true, active: true).first&.making_option
+      @making_option ||= @product.making_options.where(default: true, active: true).first&.making_option
     end
 
     def ship_by_date
@@ -22,14 +22,10 @@ module Policies
     end
 
     def delivery_date
-      # line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days'
-
       delivery_date_for_making_option(@line_item.order.completed_at || Time.now, @making_option)
     end
 
     def delivery_period
-      # line_item.stock.nil? ? product.delivery_period :  '5 - 7 business days'
-
       display_period_for_making_option(@making_option)
     end
   end

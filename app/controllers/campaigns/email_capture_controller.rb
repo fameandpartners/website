@@ -33,7 +33,7 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
-    EmailCapture.new({ service: :mailchimp }, email: params[:email], newsletter: true,
+    EmailCapture.new({}, email: params[:email], newsletter: true,
                                  current_sign_in_ip: request.remote_ip,
                                  landing_page: session[:landing_page],
                                  utm_params: session[:utm_params], site_version: current_site_version.name,

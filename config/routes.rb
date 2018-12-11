@@ -71,8 +71,6 @@ FameAndPartners::Application.routes.draw do
   # MonkeyPatch for store params & redirect to custom page
   get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
    
-  post '/shared/facebook' => 'competition/events#share'
-
   ##############
   # Fake routes
   ##############
@@ -82,6 +80,9 @@ FameAndPartners::Application.routes.draw do
   get '/why-us' => 'noop#noop', as: :why_us
   get '/about' => 'noop#noop', as: :about_us
   get '/orders' => 'noop#noop', as: :user_orders
+  get '/user' => 'noop#noop', as: :user
+  get '/contact' => 'noop#noop', as: :contact
+  get '/return/reason/:order_number/:email' => 'noop#noop', as: :new_user_returns
 
 
 
@@ -246,10 +247,8 @@ FameAndPartners::Application.routes.draw do
 
     post 'products' => 'products#create'
     delete 'products/:line_item_id' => 'products#destroy'
-    delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
 
     post 'products/:line_item_id/making_options/:product_making_option_id' => 'products#create_line_item_making_option'
-    delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
 
     post '/restore' => 'products#restore'
   end
@@ -264,29 +263,6 @@ FameAndPartners::Application.routes.draw do
     put 'update_image', on: :member
   end
 
-  resource 'users/returns', as: 'user_returns', only: [:new, :create]
-
-  namespace 'campaigns' do
-    resource :email_capture, only: [:create], controller: :email_capture do
-      collection do
-        post :subscribe
-      end
-    end
-  end
-
-
-
-  get '/myer-styling-session' => 'myer_styling_sessions#new', as: :myer_styling_session
-  resource 'myer-styling-session', as: 'myer_styling_session', only: [:create]
-
-  get '/micro-influencer' => 'micro_influencer#new', as: :micro_influencer
-  resource 'micro-influencer', as: 'micro_influencer', only: [:create]
-
-  resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
-    get 'success'
-  end
-  post '/about' => 'contacts#join_team', as: :join_team
-
   # return form
   get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
   get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
@@ -296,11 +272,6 @@ FameAndPartners::Application.routes.draw do
 
   root :to => 'index#show'
 
-  scope '/users/:user_id', :as => :user do
-    get '/style-report' => 'user_style_profiles#show', :as => :style_profile
-    get '/style-report-debug' => 'user_style_profiles#debug'
-    get '/recomendations' => 'user_style_profiles#recomendations'
-  end
 
   mount Spree::Core::Engine, at: '/'
 
@@ -392,7 +363,6 @@ FameAndPartners::Application.routes.draw do
   # get '/guest-returns'  => 'returns#guest'
   get '/view-orders' => redirect('/orders')
   get '/guest-returns' => redirect('/return/guest')
-  get '/order-lookup/'  => 'returns#lookup'
 
   Spree::Core::Engine.routes.append do
     namespace :admin do

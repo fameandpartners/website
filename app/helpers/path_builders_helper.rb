@@ -66,13 +66,21 @@ module PathBuildersHelper
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
-    is_new_product =  Spree::Product.use_new_pdp?(product)
+    if product.is_a?(Spree::LineItem)
+      fabric = product.fabric.try(:[], :name)
+      color = product.color.try(:[], :name)
+      cust = JSON.parse(product.customizations) || [];
 
-    if product.is_a?(UserCart::CartProductPresenter) && is_new_product
-      fabric = product.fabric.try(:[], :fabric_name)
-      cust = product.customizations || [];
+      is_new_product =  Spree::Product.use_new_pdp?(product.product)
 
-      path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.sku, fabric, cust)}"
+      if is_new_product
+        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
+      elsif cust.empty?
+        path_parts << "#{product_type}-#{descriptive_url(product.product)}"
+        options.merge!({ color: fabric || color })
+      else
+        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
+      end
     else
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end

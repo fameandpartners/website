@@ -50,8 +50,7 @@ module Marketing
         end
 
         def image_url
-          repository_image_template = Repositories::LineItemImages.new(line_item: line_item).read(color_id: colour&.id, fabric_id: line_item.fabric&.id, fabric: line_item.fabric)
-          repository_image_template.original
+          line_item.image_url
         end
 
         def product_path

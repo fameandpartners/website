@@ -1,4 +1,6 @@
 Spree::Image.class_eval do
+  attr_accessible :viewable, :attachment_file_name
+
   self.attachment_definitions[:attachment].merge!(Paperclip::Attachment.default_options)
 
   self.attachment_definitions[:attachment][:path] = 'spree/products/:id/:style/:basename.:extension'

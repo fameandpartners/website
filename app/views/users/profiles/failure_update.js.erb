@@ -1,7 +1,0 @@
-html = '<%= j render(:partial => 'spree/shared/error_messages', :locals => { :target => @user }) %>'
-
-if ($('#errorExplanation').length > 0){
-  $('#errorExplanation').replaceWith(html)
-} else {
-  $('#settings.tab-content form').prepend(html)
-}

@@ -31,7 +31,9 @@ class MakingOption < ActiveRecord::Base
         '+' + percent*100.round.to_s + '%'
       end
     elsif flat && flat != 0
-      '$' + flat.round(2).to_s
+      '$' + '%.2f' % flat
+    else
+      'FREE'
     end
   end
 end

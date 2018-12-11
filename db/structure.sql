@@ -2302,7 +2302,6 @@ CREATE TABLE public.newgistics_schedulers (
 --
 
 CREATE SEQUENCE public.newgistics_schedulers_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2370,7 +2369,6 @@ CREATE TABLE public.old_variant_taxons (
 --
 
 CREATE SEQUENCE public.old_variant_taxons_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -8864,6 +8862,13 @@ CREATE INDEX index_site_versions_on_zone_id ON public.site_versions USING btree 
 
 
 --
+-- Name: index_spree_adjustments_on_source_id_and_source_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_spree_adjustments_on_source_id_and_source_type ON public.spree_adjustments USING btree (source_id, source_type);
+
+
+--
 -- Name: index_spree_configurations_on_name_and_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -10482,3 +10487,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181121225145');
 INSERT INTO schema_migrations (version) VALUES ('20181123002244');
 
 INSERT INTO schema_migrations (version) VALUES ('20181126001414');
+
+INSERT INTO schema_migrations (version) VALUES ('20181203000011');

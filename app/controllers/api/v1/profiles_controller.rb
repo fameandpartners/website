@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProfilesController < Users::BaseController
+    class ProfilesController < ApiBaseController
       include SslRequirement
       helper 'spree/users', 'spree/base'
       include Spree::Core::ControllerHelpers::Auth
@@ -18,7 +18,7 @@ module Api
 
             if @user.update_profile(params[:profile])
               if old_email != @user.email
-                EmailCapture.new({ service: :mailchimp }, email: @user.email,
+                EmailCapture.new({}, email: @user.email,
                   previous_email: old_email, first_name: @user.first_name,
                   last_name: @user.last_name, current_sign_in_ip: request.remote_ip,
                   landing_page: session[:landing_page], utm_params: session[:utm_params],

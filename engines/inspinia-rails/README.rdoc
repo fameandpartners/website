@@ -1,8 +1,0 @@
-= InspiniaRails
-
-This project rocks and uses MIT-LICENSE.
-
-# INSPINA Responsive Admin Theme
-
-Version: 2.1
-Source: https://github.com/fameandpartners/inspina

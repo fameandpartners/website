@@ -49,9 +49,6 @@ ruby:
 
     = render partial: 'shipping_fee_warning'
 
-    - if delivery_date_messaging_enabled?
-      = react_component('Delivery')
-
     .row
       .col-xs-12
         #shopping-cart-delivery-times.js-shopping-cart-delivery-times

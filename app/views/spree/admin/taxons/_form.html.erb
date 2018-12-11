@@ -17,11 +17,6 @@
       <%= f.text_field :published_at, :value => datepicker_field_value(@taxon.published_at), :class => 'datepicker' %>
     <% end %>
 
-    <%= f.field_container :delivery_period do %>
-      <%= f.label :delivery_period, t(:delivery_period) %>
-      <%= f.select :delivery_period, Spree::Taxon::DELIVERY_PERIODS, {}, {class: 'select2 fullwidth'} %>
-    <% end %>
-
     <%= f.field_container :icon do %>
       <%= f.label :icon, t(:icon) %><br />
       <%= f.file_field :icon %>

@@ -1,7 +1,0 @@
-<div class="FilterSort__summary">
-  <span class="simple-border">
-    Sort By: <span class="FilterSort__summaryHighlight FilterSort__sortedBy">
-    <%= @resultsMeta.sortText %>
-    </span>
-  </span>
-</div>

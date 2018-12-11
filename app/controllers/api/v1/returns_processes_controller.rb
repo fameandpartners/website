@@ -1,7 +1,7 @@
 module Api
   module V1
     # TO-DO: Refactor into an ApiController
-    class ReturnsProcessesController < ApplicationController
+    class ReturnsProcessesController < Api::ApiBaseController
       include Spree::Core::ControllerHelpers::Auth
       include ReturnsProcessesControllerHelper
 
@@ -11,15 +11,13 @@ module Api
       # GET
       def index
 
-        if spree_current_user.nil?
+        if current_spree_user.nil?
           return
         end
 
-        @orders = spree_current_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
-          Orders::OrderPresenter.new(order, order.line_items)
-        end
+        @orders = current_spree_user.orders.hydrated.complete
 
-        respond_with @orders
+        respond_with @orders, each_serializer: OrderSerializer
       end
 
       # GET (guest)
@@ -32,7 +30,7 @@ module Api
         fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
-          respond_with OrderSerializer.new(fetched_order).as_json.merge({ items: fetched_order.line_items })
+          respond_with fetched_order, each_serializer: OrderSerializer
         else
           error_response(:GUEST_ORDER_NOT_FOUND)
           return
