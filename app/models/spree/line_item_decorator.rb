@@ -235,7 +235,8 @@ Spree::LineItem.class_eval do
   end
 
   def shipment
-    order.shipments.detect { |ship| ship.line_items.include?(@item) }
+    order.shipments.detect { |ship| ship.line_items.include?(self) }
+  end
   end
 
   def production_sheet_url
