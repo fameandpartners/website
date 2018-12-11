@@ -68,20 +68,13 @@ module Orders
         end
       end
 
-      # @deprecated #image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance
-      def image?
-        true
-      end
-      deprecate image?: '#image? is deprecated. It is always true, since #image returns a `Repositories::Images::Template` instance'
-
       def image_url
-        image.large
+        image&.attachment&.url(:large)
       end
 
       # Note: a line item personalization can be nil
-      # @return [Repositories::Images::Template]
       def image
-        Repositories::LineItemImages.new(line_item: item).read(color_id: colour&.id, fabric_id: fabric&.id, fabric: fabric)
+        item.image(cropped: true)
       end
 
       def sample_sale?
@@ -106,20 +99,6 @@ module Orders
 
       def personalizations?
         personalization.present?
-      end
-
-      private
-
-      def standard_variant_for_custom_color
-        if fabric
-          @standard_variant_for_custom_color ||= variant.product.variants.joins(:option_values).where(spree_option_values_variants: { option_value_id: fabric.option_fabric_color_value_id }).first
-        end
-      
-        if personalization && personalization.color
-          @standard_variant_for_custom_color ||= variant.product.variants.joins(:option_values).where(spree_option_values_variants: { option_value_id: personalization.color.id }).first
-        end
-      
-        @standard_variant_for_custom_color
       end
     end
   end

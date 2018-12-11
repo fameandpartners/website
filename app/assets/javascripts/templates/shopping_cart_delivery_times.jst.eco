@@ -1,14 +1,14 @@
 <h2 class="checkout-section-title">Shipping Methods</h2>
 <p class="minor-callout">Choose when you want to receive your order.</p>
 <% i = -1 %>
-<% for product in @cart.products: %>
+<% for product in @cart.line_items: %>
   <% i += 1 %>
   <% if product.name != "RETURN_INSURANCE" : %>
       <div class="cart-item js-delivery-times-wrapper" data-index=<%= i %>>
         <section class="product-delivery-adjustment">
           <div class="cart-item-description clearfix">
             <div class="image-wrapper">
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+              <img class="img-responsive cart-item-image" src="<%= product.image_url %>" />
             </div>
             <div class="description-wrapper">
               <h3 class="product-name"><%= product.name %></h3>
@@ -23,7 +23,7 @@
           <div class="cart-item-delivery-options clearfix">
             <fieldset
               class="RadioGroup delivery-options js-delivery-times-fieldset"
-              data-line-item-id="<%= product.line_item_id %>"
+              data-line-item-id="<%= product.id %>"
               data-line-item-index="<%= i %>"
             >
               <% for mo in product.available_making_options: %>
@@ -38,10 +38,10 @@
                     >
                       <label for="delivery_time_<%=i%>_<%= mo.id %>">
                         <div class="delivery-time-label-desktop visible-lg visible-md visible-sm">
-                          <%= mo.name %>: <span class="delivered-in-wrapper"><%= mo.description %></span>
+                          <%= mo.presentation %>: <span class="delivered-in-wrapper"><%= mo.description %></span>
                         </div>
                         <div class="delivery-time-label-mobile visible-xs">
-                          <%= mo.name %>: <span class="price-wrapper"><%= mo.display_price %></span>
+                          <%= mo.presentation %>: <span class="price-wrapper"><%= mo.display_price %></span>
                           <div class="delivered-in-wrapper">- <%= mo.description %></div>
                         </div>
                       </label>

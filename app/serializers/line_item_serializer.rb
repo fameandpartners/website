@@ -2,79 +2,94 @@ class LineItemSerializer < ActiveModel::Serializer
   include ActionView::Helpers::SanitizeHelper
   include ActionView::Helpers::TextHelper
   include Spree::ProductsHelper
+  include PathBuildersHelper
 
-  attributes :quantity, :currency, :id, :variant_id
-
-  attributes :count_on_hand,
-    :image_small,
-    :product_image,
-    :money,
-    :money_without_discount,
+  attributes :id,
+    :color,
+    :height_value,
+    :height_unit,
+    :name,
+    :sku,
+    :pid,
     :price,
-    :product_name,
-    :product_permalink,
-    :product_description,
-    :product_color,
-    :product_size
+    :strikethrough_price,
+    :size,
+    :url,
+    :image_url,
+    :projected_delivery_date,
+    :return_eligible,
 
-  has_one :personalization, serializer: LineItemPersonalizationSerializer
+    #for legacy checkout
+    :display_price
+
+  has_many :making_options, serializer: MakingOptionSerializer
+  has_many :available_making_options, serializer: MakingOptionSerializer
+  has_one  :fabric, serializer: FabricsProductSerializer
+  has_one  :color, serializer: ColorSerializer
+  has_one  :size, serializer: SizeSerializer
+  has_one  :shipment,  serializer: ShipmentSerializer
+  has_one  :fabrication, serializer: FabricationSerializer
+  has_many :customizations, serializer: CustomizationSerializer
+  has_one :return, serializer: ItemReturnSerializer
+
+  def initialize(object, options={})
+    super(object, options.merge(scope: options[:scope].merge(currency: object.currency )))
+  end
+
+
+  def name
+    object.style_name
+  end
+
+  def sku
+    object.product_sku
+  end
+
+  def pid
+    object.new_sku
+  end
+
+  def strikethrough_price
+    object.old_price ? object.old_price * 100 : nil
+  end
 
   def price
-    object.price.to_s
+    object.price * 100
   end
 
-  def product_name
-    object.variant.product.name
+  def display_price
+    '$' + object.price.to_s
   end
 
-  def image_small
-    image.present? ? image.attachment(:small) : '/assets/noimage/product.png'
+  def url
+    collection_product_path(object)
   end
 
-  def product_image
-    image.present? ? image.attachment(:product) : '/assets/noimage/product.png'
+  def image_url
+    object.image_url
   end
 
-  def image
-    @image ||= object.image
+  def return_eligible
+    object.return_eligible?(scope[:current_user])
   end
 
-  def money
-    object.money.to_s
+  def customizations
+    JSON.parse(object.customizations)
   end
 
-  def money_without_discount
-    object.in_sale? ? object.money_without_discount.to_s : nil
+  def making_options
+    object.making_options.map(&:product_making_option).compact.map(&:making_option).compact
   end
 
-  def count_on_hand
-    object.variant.count_on_hand
+  def available_making_options
+    object.order.completed? ? [] : object.product.making_options.map(&:making_option)
+  end
+  
+  def return
+    object&.item_return
   end
 
-  def product_permalink
-    object.variant.product.permalink
-  end
-
-  # copy pasted code from spree line_item_description
-  # due to problems with t method
-  def product_description
-    description = object.variant.product.description
-    if description.present?
-      truncate(strip_tags(description.gsub('&nbsp;', ' ')), :length => 100)
-    else
-      I18n.t(:product_has_no_description)
-    end
-  end
-
-  def product_color
-    if (personalization = object.personalization).present?
-      return personalization.color.try(:value) || ''
-    else
-      object.variant.dress_color.try(:presentation) || ''
-    end
-  end
-
-  def product_size
-    object.variant.dress_size.try(:name) || ''
+  def fabric
+    object.fabrics_product
   end
 end

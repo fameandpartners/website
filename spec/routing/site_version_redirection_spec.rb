@@ -9,16 +9,6 @@ describe 'Site Version Redirection', type: :request do
   end
 
   context 'if .com.au redirection Feature is turned on' do
-    before(:each) do
-      Features.activate(:redirect_to_com_au_domain)
-      FameAndPartners::Application.reload_routes!
-    end
-
-    after(:each) do
-      Features.deactivate(:redirect_to_com_au_domain)
-      FameAndPartners::Application.reload_routes!
-    end
-
     context 'if request has /au in its path' do
       describe 'redirects path to www.fameandpartners.com.au domain' do
         it_will :redirect, '/au/something?awesome=true', 'http://www.fameandpartners.com.au/something?awesome=true'

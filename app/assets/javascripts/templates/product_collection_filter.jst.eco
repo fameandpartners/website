@@ -1,3 +1,0 @@
-<div class="FilterSort__summary">
-  Filter <span class="FilterSort__summaryHighlight FilterSort__sortedBy"><%= @resultsMeta.filterText %></span>
-</div>

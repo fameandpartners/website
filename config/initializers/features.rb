@@ -6,23 +6,13 @@
 #     override the UI setting.
 #     To create a new Feature Flag put it in migrations!  Not here as this resets the value every time!
 
-if Rails.env.production?
-  Features.activate(:redirect_to_com_au_domain)
-end
-
-if Rails.env.preproduction?
-  Features.activate(:fameweddings)
-end
 
 if Rails.env.development?
-  Features.activate(:fameweddings)
-
   Features.deactivate(:test_analytics)
 end
 
 if Rails.env.test?
   Features.deactivate(:force_sitewide_ssl)
   Features.deactivate(:google_tag_manager)
-  Features.deactivate(:marketing_modals)
   Features.deactivate(:test_analytics)
 end

@@ -21,12 +21,12 @@ Spree::Shipment.class_eval do
     end
   end
 
-  def as_json(options={})
-    result_json = super options
-
-    result_json['line_item_ids'] = self.line_items.map(&:id)
-    result_json['shipment']['url'] = self.tracking_url
-    result_json
+  def line_items
+    if order.complete? and Spree::Config[:track_inventory_levels]
+      order.line_items.select { |li| inventory_units.map(&:variant_id).include?(li.variant_id) }
+    else
+      order.line_items
+    end
   end
 
   private

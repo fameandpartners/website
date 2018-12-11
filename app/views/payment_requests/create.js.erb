@@ -1,5 +1,0 @@
-<% if @payment_request.persisted? %>
-  paymentRequestModal.success('<%=j render('payment_requests/thanks') %>');
-<% else %>
-  paymentRequestModal.fail('<%=j render('payment_requests/form', user: @user, payment_request: @payment_request) %>');
-<% end %>

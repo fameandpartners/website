@@ -52,20 +52,6 @@ jobs:
           paths:
             - vendor/bundle
 
-      - restore_cache:
-          keys:
-            - rails-yarn-{{ checksum "yarn.lock" }}
-            - rails-yarn-
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      - save_cache:
-          key: rails-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m

@@ -41,7 +41,6 @@ page.initCheckoutEditPage = () ->
 
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
-      page.updateDatepicker()
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
 
@@ -131,7 +130,6 @@ page.initCheckoutEditPage = () ->
     refreshFormView: () ->
       page.updateShippingFormVisibility()
       page.updatePasswordFieldsVisibility()
-      page.updateDatepicker()
       page.updatePayButtonAvailability()
       page.updateAddressFormVisibility()
       #$('.selectbox').not('.chosen-container').chosen()
@@ -154,13 +152,6 @@ page.initCheckoutEditPage = () ->
       else
         container.find('input').prop('disabled', true)
         container.hide()
-
-    updateDatepicker: () ->
-      $('#order_required_to').datepicker({
-        minDate: '+1D',
-        showButtonPanel: true,
-        dateFormat: 'yy-mm-dd'
-      })
 
     doNothing: (event) ->
       event.preventDefault()

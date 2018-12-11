@@ -11,12 +11,12 @@ module Orders
       it { expect(presenter.label).to eq('Super Tax') }
     end
 
-    describe '#display_tax_total' do
-      it { expect(presenter.display_tax_total).to eq('$123.45') }
+    describe '#display_total' do
+      it { expect(presenter.display_total).to eq('$123.45') }
     end
 
     describe '#to_h' do
-      it { expect(presenter.to_h).to eq({ label: 'Super Tax', display_tax_total: '$123.45' }) }
+      it { expect(presenter.to_h).to eq({ label: 'Super Tax', display_total: '$123.45' }) }
     end
   end
 end

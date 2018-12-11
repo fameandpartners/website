@@ -1,4 +1,6 @@
 
+require 'open-uri'
+
 module Products
   module UploadHelper
 
@@ -14,9 +16,8 @@ module Products
 
           # Not quite - Spree::OptionType.size.option_values.collect(&:name)
           if (details[:type] === "swatch")
-            sizes = %w(US0/AU4)
+            sizes = []
             category = Category.where(category: 'Sample').first_or_create( { category: "Sample", subcategory: "Fabric" })
-            taxon = nil
             on_demand = false
           else
             sizes = %w(
@@ -32,10 +33,8 @@ module Products
           product = create_or_update_product(prod, category, on_demand)
 
           #color_map = details[:colors].map{ |x| { color: x } }
-          # add_product_properties(product, details)
           add_product_prices(product, price_in_aud, price_in_usd)
           add_product_color_options(product, details[:fabrics], details[:colors]) 
-          add_product_variants(product, sizes, price_in_aud, price_in_usd) 
           add_product_customizations(product, prod[:customization_list] || [], nil)
           add_product_height_ranges( product )
           add_making_options(product, prod[:making_options])
@@ -55,8 +54,20 @@ module Products
         curation = product.curations.find {|x| x.pid == c[:pid] } || Curation.new(product_id: product.id, pid: c[:pid])
         curation.active = true
         curation.name = c[:name]
-        curation.taxons = c[:taxons].map {|t| Spree::Taxon.find_by_name(t)}
+        curation.taxons = c[:taxons].map {|t| Spree::Taxon.find_by_permalink(t)}
         curation.save!
+
+        c[:media].each_with_index do |(image, p)| 
+          image_url = "https://s3.amazonaws.com/fame-on-body-images-dev/#{image}"
+          file_name = File.basename(image)
+          attachment = open(image_url)
+
+          spree_image = Spree::Image.find_or_create_by_viewable_type_and_viewable_id_and_attachment_file_name('Curation', curation.id, file_name)
+          spree_image.attachment = attachment
+          spree_image.attachment_file_name = file_name
+          spree_image.position = p
+          spree_image.save!
+        end
       end
     end
 
@@ -87,7 +98,7 @@ module Products
 
       ActiveRecord::Associations::Preloader.new(product, variants: [:option_values, :prices]).run
 
-      taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_name(x)&.id }
+      taxon_ids = prod[:details][:taxons]&.map { |x| Spree::Taxon.find_by_permalink(x)&.id }
 
       attributes = {
         name: prod[:details][:name],
@@ -100,6 +111,8 @@ module Products
       }
 
       product.assign_attributes(attributes, without_protection: true)
+
+      add_product_properties(product, prod[:details])
 
       product.hidden = !prod[:details][:active]
       product.available_on = product.created_at
@@ -180,7 +193,7 @@ module Products
 
     def add_product_properties(product, details)
       #debug "#{get_section_heading(sku: product.sku, name: product.name)} #{__method__}"
-      allowed = ['style_notes',
+      allowed = ['style_notesnotes',
                  'fit',
                  'fabric',
                  'factory_name'
@@ -190,53 +203,11 @@ module Products
       allowed.each {|property_name| product.set_property(property_name, details[property_name])}
 
       product.set_property('care_instructions',"Professional dry-clean only.\nSee label for further details.") #always this value
-      
       if factory = Factory.find_by_name(details[:factory_name].try(:capitalize))
         product.factory = factory
       end
 
       product
-    end
-
-    def add_product_variants(product, sizes, price_in_aud, price_in_usd)  
-      variants = []
-      size_option = Spree::OptionType.size
-      #color_option = Spree::OptionType.color
-
-      product.option_types = [size_option]
-      product.save
-
-      product.reload
-
-      sizes.each do |size_name|
-        size_value  = size_option.option_values.where(name: size_name).first
-        variant = product.variants.first { |variant| variant.option_value_ids.include?(size_value.id)}
-
-        unless variant.present?
-          variant = product.variants.build
-          variant.option_values = [size_value]
-        end
-
-        # Avoids errors with Spree hooks updating lots and lots of orders.
-        # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
-        variant.send :write_attribute, :on_demand, true
-        Spree::Variant.skip_callback( :save, :after, :recalculate_product_on_hand )
-        Spree::Variant.skip_callback( :save, :after, :process_backorders )
-
-        variant.save!
-
-        aud = variant.prices.where(currency: "AUD").first_or_create
-        aud.amount = price_in_aud
-        aud.save!
-
-        usd = variant.prices.where(currency: "USD").first_or_create
-        usd.amount = price_in_usd
-        usd.save!
-
-        variants.push(variant)
-      end
-
-      product.variants.where('id NOT IN (?)', variants.map(&:id)).update_all(deleted_at: Time.now)
     end
 
     def add_product_customizations(product, custs, lengths)

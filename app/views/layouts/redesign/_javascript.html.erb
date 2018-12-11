@@ -20,13 +20,6 @@
     // init here allows assigned listeners to update data
     window.app.shopping_cart.setItemCount(<%= current_order.try(:item_count).to_i %>);
   });
-
-  $(document).ready(function () {
-    initProductCollectionImageHover({
-      selector: 'body',
-      delegate: '.img-product'
-    });
-  });
 </script>
 
 

@@ -5,7 +5,7 @@
   </li>
   <% if @order.returnable? %>
     <li>
-      <%= button_link_to 'Return Order', new_user_returns_url(:order_number => @order.number), :icon => 'icon-refresh', :target => 'blank' %>
+      <%= button_link_to 'Return Order', new_user_returns_url(:order_number => @order.number, email: @order.email), :icon => 'icon-refresh', :target => 'blank' %>
     </li>
   <% elsif @order.order_return_requested? %>
     <li>

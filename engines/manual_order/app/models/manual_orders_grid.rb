@@ -5,7 +5,8 @@ class ManualOrdersGrid
 
   scope do
     Spree::LineItem.joins(:order)
-      .where("spree_orders.completed_at is NOT NULL and (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%')")
+      .where("spree_orders.completed_at is NOT NULL and (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%' or spree_orders.number ILIKE 'D%')")
+      .includes(product: [:master])
       .order('spree_orders.completed_at DESC')
   end
 
@@ -16,7 +17,7 @@ class ManualOrdersGrid
   end
 
   filter(:order_type, :enum,
-         select: -> { { 'Manual' => 'M' , 'Exchange' => 'E' } },
+         select: -> { { 'Manual' => 'M', 'Exchange' => 'E', 'Dropship' => 'D' } },
          :include_blank => true) do |value|
     where(Spree::Order.arel_table[:number].matches("#{value}%"))
   end
@@ -41,7 +42,7 @@ class ManualOrdersGrid
   column(:factory, header: 'Factory') {|model| model.factory.name}
   column(:return_or_exchange, header: 'Return or Exchange', html: true) do |model|
     if model.order.returnable?
-      link_to 'Return or Exchange', main_app.new_user_returns_path(order_number: model.order.number)
+      link_to 'Return or Exchange', main_app.new_user_returns_path(order_number: model.order.number, email: model.order.email)
     elsif model.order.order_return_requested?
       'Return Requested'
     else

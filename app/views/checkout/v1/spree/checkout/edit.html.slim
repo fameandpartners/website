@@ -2,7 +2,6 @@
   | page.initCheckoutEditPage();
 
 - support_telephone = {'us' => '866 527 7797', 'au' => '1300 924 860'}[current_site_version.code]
-- cart = UserCart::UserCartResource.new(order: current_order).read
 
 - if current_step.eql?('payment')
   - header_return_link = checkout_state_path('address')
@@ -35,8 +34,12 @@
             = link_to root_path
               = image_tag "logo/new-logo.svg", alt: "Fame and Partners", class: "img-responsive"
       .col-xs-3.text-right.live-chat
-        // TODO: add new chat icon
-        = react_component('SupportOptions', { support_telephone: support_telephone }, class: 'support-options cta-icon-text')
+        div.support-options.cta-icon-text
+          ul.list-inline
+            li.live-chat
+              a onClick="javascript: $zopim.livechat.window.show()"
+                i.icon.icon-livechat
+                span Live Chat
 
   .checkout-breadcrumbs
     .container
@@ -64,13 +67,13 @@
               | Your bag
             span.icon.btn-toggle.icon-arrow-right
       #collapse-shopping-bag.collapse.in
-        = render 'spree/checkout/order_summary', cart: cart, run_setup_script: true
+        = render 'spree/checkout/order_summary', order: current_order, run_setup_script: true
 
     .row
       .col-md-6
         - if current_step.eql?('address')
           .checkout-step data-name="address"
-            = render 'address_step', current_step: current_step, cart: cart
+            = render 'address_step', current_step: current_step
 
         - if current_step.eql?('payment')
           - content_for :inline_javascript do
@@ -84,4 +87,4 @@
             = render 'masterpass_step', current_step: current_step
 
       .col-md-5.col-md-offset-1.col-sm-12.product-form.product-form-side.hidden-xs.hidden-sm
-        = render 'spree/checkout/order_summary', cart: cart, run_setup_script: false
+        = render 'spree/checkout/order_summary', order: current_order, run_setup_script: false

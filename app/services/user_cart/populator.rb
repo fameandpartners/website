@@ -27,39 +27,22 @@ class Populator
   end
 
   def populate
-    validate!
-    if personalized_product?
-      add_personalized_product
-    else
-      add_product_to_cart
-    end
+    add_personalized_product
 
     order.update!
     order.reload
 
     return OpenStruct.new({
       success: true,
-      product: product,
-      cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
   rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
-    err_attrs = {
-      :order              => @order.to_h,
-      :site_version       => @site_version.to_h,
-      :product_attributes => @product_attributes
-    }
-  
-    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
+    OpenStruct.new({ success: false, message: e.message })
   end
 
   private
-    def validate!
-    end
-
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
-        add_making_options
 
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
@@ -70,33 +53,28 @@ class Populator
     end
 
     def add_personalized_product
-      personalization = build_personalization
-      if personalization.valid?
+      ActiveRecord::Base.transaction do
         add_product_to_cart
+        add_making_options
+
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
         line_item.fabric = product_fabric
         line_item.curation_name = product_attributes[:curation_name]
+        line_item.personalization = build_personalization(line_item)
         line_item.save!
-        personalization.line_item = line_item
-        line_item.personalization = personalization
-        personalization.save!
       end
-
-      true
     end
 
     def add_making_options
-      return if line_item.blank? || product_making_options.blank?
       line_item.making_options = product_making_options.collect do |making_option|
         LineItemMakingOption.build_option(making_option, currency)
       end
-      line_item
     end
 
-    def build_personalization
+    def build_personalization(line_item)
       LineItemPersonalization.new.tap do |item|
-        item.size_id  = product_size.id
-        item['size']  = product_size.value
+        item.size_id  = product_size&.id
+        item['size']  = product_size&.value
         
         if product_fabric
           item.color_id = product_fabric.option_value_id
@@ -106,6 +84,7 @@ class Populator
           item['color'] = product_color.color_name
         end
         item.product_id = product.id
+        item.line_item = line_item
 
         if product_attributes[:height].present?
           item.height = product_attributes[:height]
@@ -117,14 +96,6 @@ class Populator
       end
     end
 
-    def personalized_product?
-      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height? || product_fabric
-    end
-
-    def custom_height?
-      height = product_attributes[:height].to_s
-      height.present? && height != LineItemPersonalization::DEFAULT_HEIGHT
-    end
 
     def product
       @product ||= product_variant.product
@@ -159,11 +130,13 @@ class Populator
       @product_size ||= begin
         product_size_id = product_attributes[:size_id]
 
-        sizes = product.option_types.find_by_name('dress-size').option_values
+        sizes = product.option_types.find_by_name('dress-size')&.option_values || []
         size = sizes.find {|size| size.id == product_size_id.to_i || size.name == product_size_id}
 
 
         if size.present?
+          # nothing
+        elsif sizes.empty?
           # nothing
         else
           raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")
@@ -216,7 +189,7 @@ class Populator
     def product_making_options
       @product_making_options ||= begin
         pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
-        pmo = product.making_options.where(default: true).to_a if pmo.empty?
+        pmo = product.making_options.where(default: true, active: true).to_a if pmo.empty?
 
         pmo
       end

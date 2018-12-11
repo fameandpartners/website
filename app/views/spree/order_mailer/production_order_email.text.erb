@@ -27,7 +27,7 @@ Customizations:
   <% end %>
 <% end %>
 
-<% if item.image? %>
+<% if item.image_url.present? %>
 Product Image:
 <%= item.image_url %>
 <% end %>

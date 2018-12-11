@@ -25,12 +25,12 @@ module Orders
     describe '#shipment' do
       let(:shipment) do
         double('shipment',
-               line_items: [item],
                shipped?:   'am_shipped?',
                shipped_at: 'shipped_yesterday',
                tracking:   'tracking_44'
         )
       end
+      let(:item)          { double('item', shipment: shipment) }
       let(:order)         { double('order', shipments: [shipment]) }
 
       subject(:presenter) { described_class.new(item, order) }
@@ -42,7 +42,7 @@ module Orders
       end
 
       context 'when missing' do
-        let(:item)          { double('item') }
+        let(:item)          { double('item', shipment: nil) }
         let(:order)         { double('order', shipments: []) }
 
         subject(:presenter) { described_class.new(item, order) }
@@ -126,15 +126,6 @@ module Orders
         let(:fabrication) { nil }
 
         it { is_expected.to eq :processing }
-      end
-    end
-
-    describe '#image' do
-      let!(:product) { FactoryGirl.create(:spree_product) }
-      let!(:item) { FactoryGirl.build(:line_item, variant: product.master) }
-
-      it do
-        expect(subject.image).to be_an_instance_of(Repositories::Images::Template)
       end
     end
 

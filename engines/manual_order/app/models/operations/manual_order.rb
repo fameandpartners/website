@@ -162,7 +162,7 @@ module Operations
     end
 
     def update_number(_number)
-      (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
+      (params[:status] == 'exchange' ? 'E' : params[:status] == 'dropship' ? 'D' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
     def get_variant(product_id)

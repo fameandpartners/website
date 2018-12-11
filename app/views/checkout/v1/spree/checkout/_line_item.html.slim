@@ -1,4 +1,4 @@
-.row.cart-item data-id=(product.line_item_id)
+.row.cart-item data-id=(product.id)
   .cart-item-image-holder.col-xs-5
     - if product.name != "Gift"
       = link_to collection_product_path(product) do

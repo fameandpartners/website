@@ -58,7 +58,6 @@ module Api
         sign_in("spree_user", @user)
 
         respond_with @user
-
       end
 
       def send_reset_password_email

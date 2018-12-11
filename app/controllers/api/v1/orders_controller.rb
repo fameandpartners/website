@@ -8,16 +8,13 @@ module Api
 
         if params[:order_number].blank?
 
-          @orders = current_spree_user.orders.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).complete.map do |order|
-            OrderSerializer.new(order).as_json.merge({ items: order.line_items })
-          end
-
-          respond_with @orders
+          @orders = current_spree_user.orders.hydrated.complete
+          respond_with @orders, each_serializer: OrderSerializer
 
         else
           
-          @order = Spree::Order.joins(:line_items).eager_load(line_items: [:personalization, :variant, :item_return]).where(:number=>params[:order_number]).first
-          respond_with OrderSerializer.new(@order).as_json.merge({ items: @order.line_items })
+          @order = Spree::Order.hydrated.where(:number=>params[:order_number]).first
+          respond_with @order, serializer: OrderSerializer
 
         end
       end

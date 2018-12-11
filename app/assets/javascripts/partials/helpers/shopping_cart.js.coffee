@@ -50,43 +50,19 @@ window.helpers.ShoppingCart = class ShoppingCart
   data: () ->
     @data
 
-  showModal: () ->
-    if @shouldShowAddToCartModal()
-      @showAddToCartModal()
-
-  showAddToCartModal: () ->
-    if $.cookie('add-to-cart-modal-displayed') != 'true'
-      addToCartModal = new window.page.EmailCaptureModal({
-        promocode: "HALFOFF",
-        content: "",
-        container: "#modal-add-to-cart-template",
-        heading: "Love two dresses?",
-        message: "<h3><strong>Buy both and we will give you 50% off the second dress</strong/><br/>Hurry, offer ends soon.</h3><div><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">Add another dress</a/></div/>",
-        className: "new-modal welcome-modal",
-        timeout: 0,
-        timer: false,
-        force: false
-      });
-      $.cookie('add-to-cart-modal-displayed','true')
-
-  shouldShowAddToCartModal: () ->
-    $("#modal-add-to-cart-template").length != 0
-
   # options:
   #   variant_id
   #   size_id
   #   color_id
   #   customizations_ids
   addProduct: (product_data = {}) ->
-    # @showModal()
-
     $.ajax(
       url: "/user_cart/products"
       type: "POST"
       dataType: "json"
       data: product_data
     ).success((data) =>
-      added_product = _.find((data.products || []), (product) ->
+      added_product = _.find((data.line_items || []), (product) ->
         product.variant_id == product_data.variant_id
       )
       @trackAddToCart(added_product)
@@ -97,8 +73,8 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   findProduct: (line_item_id) ->
     found_product;
-    for product in @data.products
-      if (product.line_item_id == line_item_id)
+    for product in @data.line_items
+      if (product.id == line_item_id)
         found_product = product
 
     return found_product
@@ -210,7 +186,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     )
 
   toggleReturnsDepositMessage: () ->
-    returnInsurance = @data.products.filter (i) -> i.name == 'RETURN_INSURANCE'
+    returnInsurance = @data.line_items.filter (i) -> i.name == 'RETURN_INSURANCE'
 
     if (returnInsurance.length)
       $('.js-returns-abc-option-message').removeClass('hidden');
