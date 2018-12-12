@@ -8,7 +8,8 @@ Spree::Order.class_eval do
   self.include_root_in_json = false
 
   has_one :traffic_parameters, class_name: Marketing::OrderTrafficParameters
-
+  has_many :order_return_requests
+  
   checkout_flow do
     go_to_state :address
     go_to_state :payment, :if => lambda { |order|
@@ -34,18 +35,6 @@ Spree::Order.class_eval do
     # :number is already unique, and already the permalink value
     # The default spree implementation here does a LIKE '?%',
     # which on order number, is very very slow.
-  end
-
-  def returnable?
-    !(order_return_requested? || has_unshipped_line_item)
-  end
-
-  def has_unshipped_line_item
-    line_items.any? { |li| !Fabrication.for(li).shipped? }
-  end
-
-  def order_return_requested?
-    OrderReturnRequest.exists?(:order_id => id)
   end
 
   def shipped?
@@ -387,6 +376,10 @@ Spree::Order.class_eval do
       end
 
     end
+  end
+
+  def order_return_requested?
+    order_return_requests.any?
   end
 
   def legit_line_items

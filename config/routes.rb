@@ -83,6 +83,7 @@ FameAndPartners::Application.routes.draw do
   get '/user' => 'noop#noop', as: :user
   get '/contact' => 'noop#noop', as: :contact
   get '/return/reason/:order_number/:email' => 'noop#noop', as: :new_user_returns
+  get '/return/:order_number' => 'noop#noop', as: :return_detail
 
 
 
@@ -406,16 +407,6 @@ FameAndPartners::Application.routes.draw do
       resource :product_positions, only: [:show, :create, :update]
 
       resources :sales, :except => [:show]
-
-      # stock invent settings
-      get 'stock_invent'                => 'stock_invent#edit',          as: :stock_invent
-      put 'stock_invent'                => 'stock_invent#update'
-      get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
-      get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
-      get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
-
-
-
 
       get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
 

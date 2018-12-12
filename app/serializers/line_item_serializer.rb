@@ -74,7 +74,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def customizations
-    JSON.parse(object.customizations)
+    object.customizations
   end
 
   def making_options

@@ -67,44 +67,8 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
         ##################### End Original Spree ##############################
-        if params[:format] != 'csv'
 
-          @orders = @search.result(distinct: true).includes(
-            :user => [],
-            :shipments => {:inventory_units => :variant},
-            :payments => [],
-            :line_items => {:variant => :product, :fabrication => [], :making_options => []},
-            :bill_address => [:state, :country],
-            :ship_address => [:state, :country],
-            :adjustments => []
-          ).page(page).per(per_page)
-        else
-          if @refulfill_only
-            query = " li.refulfill_status is not null ORDER BY o.\"completed_at\" DESC"
-            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
-          elsif @batch_only
-            order_bc = BatchCollection.select{|bc| bc.status == 'open'}
-            order_ids = order_bc.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
-            oids = order_ids.join(',')
-            query = " o.id in (#{oids}) order by sp.\"name\" DESC"
-            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
-          elsif @ready_batches
-            order_bc = BatchCollection.select{|bc| bc.status == 'closed'}
-            order_ids = order_bc.map {|bc| bc.line_items.map {|li| li.order.id} }.flatten.uniq
-            oids = order_ids.join(',')
-            query = " o.id in (#{oids}) order by sp.\"name\" DESC"
-            @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: query)
-          else
-            # must set date ranges or thing explodes
-            if created_at_gt.blank? || created_at_lt.blank?
-              flash[:error] = "Please set a date range."
-              # todo: make this thing properly explode. ideally frontend validator
-              return
-            else
-              @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
-            end
-          end
-        end
+        @orders = @search.result(distinct: true).hydrated.page(request.format.csv? ? 0 : page).per(request.format.csv? ? 9999999 : per_page)
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
@@ -136,17 +100,6 @@ module Spree
       end
 
       private
-
-      def ransack_criteria
-        Spree::Order.ransack(params[:q])
-          .result.to_sql[/WHERE(.*)/, 1]
-          .gsub("\"spree_orders\"", "o")
-          .gsub("\"spree_addresses\"", "sa")
-          .gsub("\"spree_products\"", "sp")
-          .gsub("\"products_spree_variants\"", "sp")
-          .gsub("\"variants_spree_line_items\"", "sv")
-          .gsub("\"fabrications\"", "f")
-      end
 
       def order_shipment_states
         @order_shipment_states ||= Spree::Order.shipment_states

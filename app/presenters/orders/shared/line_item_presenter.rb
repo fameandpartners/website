@@ -62,7 +62,7 @@ module Orders
 
       def customization_text
         if item.customizations.present?
-          JSON.parse(item.customizations)
+          item.customizations
             .sort_by { |x| x['customisation_value']['manifacturing_sort_order']}
             .collect{|x| x['customisation_value']['presentation']}.join(' / ')
         end

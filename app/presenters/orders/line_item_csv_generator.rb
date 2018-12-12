@@ -7,7 +7,7 @@ module Orders
 
     def initialize(orders, query_params = {})
       @orders = orders
-      @lis = orders.map {|ord| Spree::LineItem.find_by_id(ord.attributes["line_item_id"].to_i)}
+      @lis = orders.flat_map(&:line_items)
       @query_params = query_params
 
       if query_params[:show_only_completed]
@@ -70,8 +70,8 @@ module Orders
     # One of these days we have to repair the database corruption going on where
     # all return ins. line items have a currency of "AUD"
     def corrected_currency(line)
-      if line.sku=="RETURN_INSURANCE"
-        Spree::Order.find_by_number(line.order_number).currency
+      if line.return_insurance?
+        line.order.currency
       else
         line.currency
       end
@@ -80,8 +80,6 @@ module Orders
     end
 
     def to_csv
-      line = Orders::LineItemCSVPresenter
-
       CSV.generate(headers: true) do |csv|
         if @batch_only
           bcs_sorted = BatchCollection.all.sort {|x, y| y.line_items.count <=> x.line_items.count}
@@ -91,13 +89,9 @@ module Orders
         end
 
         csv << headers
-        @lis.each_with_index do |li, index|
-          line.set_line @orders[index].attributes
+        @lis.each do |line|
 
-          lip = nil
-          if li
-            lip = Orders::LineItemPresenter.new(li)
-          end
+          lip = Orders::LineItemPresenter.new(line, line.order)
 
           if (@refulfill_only || @batch_only || @ready_batches || @making_only)
             # ignore certain products
@@ -106,82 +100,80 @@ module Orders
             end
 
             # dont' show canceled orders
-            if li.order.state == 'canceled'
+            if line.order.state == 'canceled'
               next
             end
             # dont' show anything that has shipped or canceled
-            if li.order&.shipment&.shipped_at.present? || li.order&.shipment&.tracking.present? || li.order.state == 'canceled'
+            if line.order&.shipment&.shipped_at.present? || line.order&.shipment&.tracking.present? || line.order.state == 'canceled'
               next
             end
           end
 
           #filter out any items that have shipping info
-          if (@refulfill_only || @ready_batches || @batch_only || @making_only) && li.line_item_update
+          if (@refulfill_only || @ready_batches || @batch_only || @making_only) && line.line_item_update
             next
           end
 
           # filter for refulfill items that have no shipping info
-          if @refulfill_only && li.refulfill_status.nil?
+          if @refulfill_only && line.refulfill_status.nil?
             next
           end
 
           # filter out non batched
-          if @batch_only && (li.batch_collections.empty? || li.batch_collections&.first&.status == 'closed')
+          if @batch_only && (line.batch_collections.empty? || line.batch_collections&.first&.status == 'closed')
             next
           end
 
           # filter out non ready batches
-          if @ready_batches && (li.batch_collections.empty? || li.batch_collections&.first&.status == 'open')
+          if @ready_batches && (line.batch_collections.empty? || line.batch_collections&.first&.status == 'open')
             next
           end
 
           if @making_only
             # filter out refulfill and batched items
-            if !@refulfill_only && !li.refulfill_status.nil?
+            if !@refulfill_only && !line.refulfill_status.nil?
               next
             end
-            if !@batch_only && !li.batch_collections.empty?
+            if !@batch_only && !line.batch_collections.empty?
               next
             end
           end
 
           csv << [
-            line.order_state,
-            line.order_number,
+            line.order.state,
+            line.order.number,
             # lip.sample_sale?,
-            li&.refulfill_status,
-            line.line_item_id,
-            line.total_items,
-            line.completed_at_date,
-            line.making_option,
-            lip&.ship_by_date&.to_date,
-            # line.delivery_date,
-            line.tracking_number,
-            line.shipment_date,
-            line.fabrication_state,
-            line.sku,
-            line.style,
-            line.style_name,
+            line.refulfill_status,
+            line.id,
+            line.order.legit_line_items.count,
+            line.order.completed_at&.to_date,
+            line.making_options.map(&:product_making_option).compact.map(&:making_option ).map(&:code).join("|"),
+            line&.ship_by_date&.to_date,
+            line.shipment&.tracking,
+            line.shipment&.shipped_at&.to_date,
+            line.fabrication&.state,
+            line.new_sku,
+            line.product_sku,
+            line.product.name,
             line.factory,
-            line.color,
+            line.color&.presentation,
             lip&.fabric_material,
-            line.adjusted_size,
-            line.height,
-            line.customization_values,
-            line.custom_color,
-            line.promo_codes,
-            line.email,
-            line.customer_notes,
-            line.customer_name,
-            line.customer_phone_number,
-            line.shipping_address,
-            line.return_request,
-            line.return_action,
-            line.return_details,
+            line.size&.presentation,
+            line.personalization&.height,
+            line.personalization&.customization_values&.map { |c| c['customisation_value']['presentation']}&.join("|"),
+            line.order.promotions.map(&:name).join("|"),
+            line.order.email,
+            line.order.customer_notes,
+            line.order.ship_address.name,
+            line.order.ship_address.phone,
+            line.order.ship_address.to_s,
+            line.return_item,
+            line.return_item&.action,
+            line.return_item&.reason_category,
             line.price,
             corrected_currency(line),
-            resolve_refulfill_upc(li, line),
-            line.image,
+            resolve_refulfill_upc(line),
+            line.image_url,
             line.production_sheet_url
           ]
         end
@@ -190,11 +182,11 @@ module Orders
 
   private
     # we do this cause upcs are screwed from back in the da day
-    def resolve_refulfill_upc(li, line)
-      if @refulfill_only
-        return "#{li.return_inventory_item.vendor}: #{li.return_inventory_item.upc}"
+    def resolve_refulfill_upc(line)
+      if line.return_inventory_item
+        return "#{line.return_inventory_item.vendor}: #{line.return_inventory_item.upc}"
       else
-        return line.product_number
+        return line.upc
       end
     end
 
@@ -207,7 +199,7 @@ module Orders
         :line_item,
         :total_items,
         :completed_at,
-        :express_making,
+        :making,
         :ship_by_date,
         :tracking_number,
         :shipment_date,
@@ -221,7 +213,6 @@ module Orders
         :size,
         :height,
         :customisations,
-        :custom_color,
         :promo_codes,
         :email,
         :customer_notes,

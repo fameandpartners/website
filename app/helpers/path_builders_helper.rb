@@ -66,10 +66,10 @@ module PathBuildersHelper
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
-    if product.is_a?(Spree::LineItem)
+    if product.is_a?(Spree::LineItem) || product.is_a?(Curation)
       fabric = product.fabric.try(:[], :name)
       color = product.color.try(:[], :name)
-      cust = JSON.parse(product.customizations) || [];
+      cust = product.customizations || []
 
       is_new_product =  Spree::Product.use_new_pdp?(product.product)
 

@@ -80,7 +80,7 @@ module Products
       fabric = product_fabric_value&.fabric
       product_color_value = curation.product_color_value
       color = product_color_value&.option_value || fabric&.option_value
-      customisations = []
+      customizations = curation.customizations
 
       return nil if product_fabric_value && !product_fabric_value.active
       return nil if product_color_value && !product_color_value.active
@@ -102,8 +102,8 @@ module Products
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
       end
 
-      customisations_price_in_us = 0
-      customisations_price_in_au = 0
+      customizations_price_in_us = customizations.map{ |c| c['customisation_value'['price']].to_f * 100}.sum
+      customizations_price_in_au = customizations.map{ |c| c['customisation_value'['price_aud']].to_f  * 100}.sum
 
       taxons = [
         curation.taxons || [],
@@ -114,8 +114,8 @@ module Products
         taxons.map(&:permalink).map {|f| f.split('/').last },
         product.sku,
         curation.pid,
-        product.category.category,
-        product.category.subcategory,
+        product.category&.category,
+        product.category&.subcategory,
         product.making_options.active.map(&:making_option).map(&:code),
         ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
         color&.name,
@@ -145,11 +145,7 @@ module Products
             master_id:    product.master.id,
             in_stock:     product.has_stock?,
             discount:     discount,
-            urls: {
-              en_au: @helpers.descriptive_url(product, :"en-AU"),
-              en_us: @helpers.descriptive_url(product, :"en-US")
-            },
-            url: @helpers.collection_product_path(product, color: (fabric&.name || color&.name)),
+            url: @helpers.collection_product_path(curation),
 
             taxon_ids:          taxons.map(&:id),
             taxons:             taxon_names,
@@ -209,12 +205,12 @@ module Products
           end,
 
           non_sale_prices: discount > 0 ? {
-            aud:  product_price_in_au.amount.to_f + fabric_price_in_au + customisations_price_in_au,
-            usd:  product_price_in_us.amount.to_f + fabric_price_in_us + customisations_price_in_us
+            aud:  product_price_in_au.amount.to_f + fabric_price_in_au + customizations_price_in_au,
+            usd:  product_price_in_us.amount.to_f + fabric_price_in_us + customizations_price_in_us
           } : nil,
           prices:  {
-            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au + customisations_price_in_au,
-            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us + customisations_price_in_us
+            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au + customizations_price_in_au,
+            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us + customizations_price_in_us
           }
         }
       }

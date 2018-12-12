@@ -147,7 +147,7 @@ module Search
                 multi_match do
                   query query_string
                   type :phrase
-                  fields ['product.name^4', 'color.presentation^2', 'fabric.presentation^2', 'product.sku^4', 'product.taxon_names^2', 'product.description']
+                  fields ['product.name^4', 'color.presentation^2', 'fabric.presentation^2', 'product.sku^4', 'product.taxons^2', 'product.description']
                 end
               end
             end
