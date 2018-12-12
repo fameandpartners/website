@@ -734,7 +734,6 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print
   aws-healthcheck
-  aws-sdk
   bergen!
   better_errors
   binding_of_caller
