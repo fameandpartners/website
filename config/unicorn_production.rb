@@ -8,8 +8,9 @@ timeout 120
 
 pid "/app/tmp/unicorn.pid"
 
-stderr_path "/app/tmp/logs/unicorn.stderr.log"
-stdout_path "/app/tmp/logs/unicorn.stdout.log"
+# stderr_path "/app/tmp/logs/unicorn.stderr.log"
+# stdout_path "/app/tmp/logs/unicorn.stdout.log"
+logger Logger.new($stdout)
 
 run_path = "/app/"
 
