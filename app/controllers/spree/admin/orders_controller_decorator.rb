@@ -68,7 +68,7 @@ module Spree
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
         ##################### End Original Spree ##############################
 
-        @orders = @search.result(distinct: true).hydrated.page(page).per(per_page)
+        @orders = @search.result(distinct: true).hydrated.page(request.format.csv? ? 0 : page).per(request.format.csv? ? 9999999 : per_page)
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
