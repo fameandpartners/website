@@ -43,11 +43,11 @@ module Api
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
-          spree_product = spree_products 
+          spree_product = spree_products
             .sort_by(&:created_at) # make sure we select the latest product
             .reverse
             .find { |p| p.master.sku == sku }
-          
+
           next unless spree_product
 
           all_customizations = JSON.parse!(spree_product.customizations)
@@ -56,12 +56,12 @@ module Api
           fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
           customizations = all_customizations.select { |c|  components.include?(c["customisation_value"]["name"]) }.map {|c| ["customisation_value"]["name"]}
 
-          price = spree_product.price_in(current_site_version.currency).amount + 
+          price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
             (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
 
           if spree_product.discount
-              sale_price = spree_product.price_in(current_site_version.currency).apply(spree_product.discount).amount + 
+              sale_price = spree_product.price_in(current_site_version.currency).apply(spree_product.discount).amount +
               (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
               (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
           end
@@ -73,7 +73,7 @@ module Api
             media: product.images_for_customisation(pcv.option_value.name, fabric_product.fabric.name, customizations, true)
               .sort_by(&:position)
               .take(2)
-              .collect do |image| 
+              .collect do |image|
               {
                 type: :photo,
                 src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
@@ -85,7 +85,7 @@ module Api
                     width = geometry.width
                     height = geometry.height
                   end
-      
+
                   {
                     name: image_size,
                     width: width,
@@ -101,7 +101,7 @@ module Api
           }
         end
         .compact
-        
+
         respond_with products
       end
 
@@ -123,7 +123,8 @@ module Api
           "black": '#050505',
         }
         image_mapping = {
-          "print": 'https://d1msb7dh8kb0o9.cloudfront.net/assets/product-color-images/BlackAndWhiteGingham.jpg',
+          "print": 'https://d2ta5pga3sqz6i.cloudfront.net/assets/product-color-images/BlackAndWhiteGingham.jpg',
+
         }
 
         filter = Array.wrap(params[:facets])
@@ -142,7 +143,7 @@ module Api
         price_min = nil;
         price_max = nil;
 
-        if filter.include?('0-199') 
+        if filter.include?('0-199')
           price_min = 0
         elsif filter.include?('200-299')
           price_min = 200
@@ -152,7 +153,7 @@ module Api
           price_min = 400
         end
 
-        if filter.include?('400') 
+        if filter.include?('400')
           price_max = nil
         elsif filter.include?('300-399')
           price_max = 399
@@ -163,12 +164,12 @@ module Api
         end
 
 
-        query_params = { 
+        query_params = {
           taxon_names: taxon_names,
           color_group_names: color_names,
           order: params[:sortField],
           price_min: price_min,
-          price_max: price_max, 
+          price_max: price_max,
           currency: current_currency.downcase,
           query_string: params[:query],
           include_aggregation_taxons: true,
@@ -203,7 +204,7 @@ module Api
           from: 0
         )
         aggregation_prices = Hash[*aggregation_prices_result["aggregations"]["prices"]["buckets"].map{|key, value| [key, value["doc_count"]]}.flatten]
-        
+
         response = {
           results: result['hits']['hits'].map do |r|
             {
@@ -224,7 +225,7 @@ module Api
               productVersionId: 0,
             }
           end,
-          
+
           "facetConfigurations": {
             "search": [
               {
@@ -244,7 +245,7 @@ module Api
               groupId: "color",
               name: "Color",
               multiselect: true,
-              facets: Repositories::ProductColors.color_groups.each_with_index.map do |group, i| 
+              facets: Repositories::ProductColors.color_groups.each_with_index.map do |group, i|
                 {
                   "facetId": group[:name],
                   "title": group[:presentation],
@@ -257,7 +258,7 @@ module Api
                 }
               end.sort_by{ |f| f[:order] }.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             },
-            
+
             "style": {
               groupId: "style",
               name: "Style",
@@ -577,7 +578,7 @@ module Api
         }
       end
 
-      def map_image(image, fabrics, colors, product_fit, product_size) 
+      def map_image(image, fabrics, colors, product_fit, product_size)
         options = image.viewable.pid&.split('~') || []
         options.shift # remove sku
 
@@ -633,7 +634,7 @@ module Api
           incompatibleWith: { allOptions: [] },
         }
       end
-      
+
       def map_making(product, making)
         {
           cartId: making.id,
@@ -676,7 +677,7 @@ module Api
           sortOrder: f.fabric.option_fabric_color_value.position, #TODO
           meta: {
             # hex: c.option_value.value,
-            
+
             image: {
               url: f.fabric.image&.url(:medium),
               width: 0,

@@ -4,7 +4,7 @@ working_directory "/app"
 listen "/app/tmp/unicorn.sock", :backlog => 512
 listen 3000, :tcp_nopush => true
 
-timeout 60
+timeout 120
 
 pid "/app/tmp/unicorn.pid"
 

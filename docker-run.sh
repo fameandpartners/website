@@ -5,6 +5,10 @@ if [ ! -d "/app/tmp" ]; then
   mkdir /app/tmp
 fi
 
+if [ ! -d "/app/tmp/pids" ]; then
+  mkdir /app/tmp/pids
+fi
+
 if [ -f /app/tmp/pids/unicorn.pid ]; then
   rm /app/tmp/pids/unicorn.pid
 fi
@@ -28,7 +32,7 @@ else
 fi
 
 # Copy over the production unicorn config if not already so
-if [ -f /app/config/unicorn_production.rb ]; then
+if [ -f /app/config/unicorn_production.rb ] && [ "$RAILS_ENV" != "development" ]; then
   if [ -f /app/config/unicorn.rb ]; then
     rm /app/config/unicorn.rb
   fi
