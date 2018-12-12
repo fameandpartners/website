@@ -9,5 +9,5 @@
       "ContainerPort": "3000"
     }
   ],
-  "Logging": "/var/log"
+  "Logging": "/app/log"
 }

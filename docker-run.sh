@@ -31,6 +31,12 @@ else
   rm -rf /app/tmp/logs/*
 fi
 
+if [ ! -d "/app/logs" ]; then
+  mkdir /app/logs
+else
+  rm -rf /app/logs/*
+fi
+
 # Copy over the production unicorn config if not already so
 if [ -f /app/config/unicorn_production.rb ] && [ "$RAILS_ENV" != "development" ]; then
   if [ -f /app/config/unicorn.rb ]; then
