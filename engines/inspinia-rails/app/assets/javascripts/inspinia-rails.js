@@ -10,25 +10,10 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require libs/underscore-min
-//= require inspinia-rails
-//= require jquery-ui
-//= require chosen-jquery
-//= require jquery_ujs
-
-
-//
-// Manual Orders
-//
-//= require manual_order
-
+//= require jquery/jquery-2.1.1.js
+//= require bootstrap.js
+//= require metisMenu/jquery.metisMenu.js
+//= require pace/pace.min.js
+//= require slimscroll/jquery.slimscroll.min.js
+//= require inspinia.js
 //= require_tree .
-
-$(document).ready(function(){
-  $('[data-confirm]').click(function(e){
-    var confirmation_message = $(e.target).data('confirm');
-    var confirmed = confirm(confirmation_message);
-
-    if (!confirmed) { e.preventDefault() }
-  })
-});

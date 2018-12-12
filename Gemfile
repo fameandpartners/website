@@ -34,6 +34,7 @@ gem 'customerio', '~> 1.0.0'
 path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
+  gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
   gem 'afterpay'
