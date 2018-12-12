@@ -67,7 +67,10 @@ fi
 #   (printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
 # fi
 
-#  Now run
+#  Clear cache
 bundle exec rake cache:clear
+
+# Compile assets
+bundle exec rake assets:precompile
 
 exec bundle exec "$@" -E $RAILS_ENV
