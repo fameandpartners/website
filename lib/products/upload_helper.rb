@@ -58,15 +58,7 @@ module Products
         curation.save!
 
         c[:media].each_with_index do |(image, p)| 
-          image_url = "https://s3.amazonaws.com/fame-on-body-images-dev/#{image}"
-          file_name = File.basename(image)
-          attachment = open(image_url)
-
-          spree_image = Spree::Image.find_or_create_by_viewable_type_and_viewable_id_and_attachment_file_name('Curation', curation.id, file_name)
-          spree_image.attachment = attachment
-          spree_image.attachment_file_name = file_name
-          spree_image.position = p
-          spree_image.save!
+          AddCurationImageWorker.perform_async(image, p, curation.id)
         end
       end
     end
