@@ -74,4 +74,4 @@ bundle exec rake cache:clear
 # bundle exec rake assets:precompile
 # bundle exec rake assets:sync
 
-exec bundle exec "$@" -E $RAILS_ENV
+exec bundle exec "$@" -E $RAILS_ENV -D

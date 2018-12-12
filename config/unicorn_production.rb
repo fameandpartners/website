@@ -1,4 +1,4 @@
-worker_processes 4
+worker_processes 3
 working_directory "/app"
 
 listen "/app/tmp/unicorn.sock", :backlog => 512
@@ -8,8 +8,9 @@ timeout (ENV["UNICORN_TIMEOUT"] || 120).to_i
 
 pid "/app/tmp/unicorn.pid"
 
-stderr_path "/var/log/unicorn.stderr.log"
-stdout_path "/var/log/unicorn.stdout.log"
+# stderr_path "/var/log/unicorn.stderr.log"
+# stdout_path "/var/log/unicorn.stdout.log"
+logger Logger.new($stdout)
 
 run_path = "/app/"
 
