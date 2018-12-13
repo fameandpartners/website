@@ -4,20 +4,27 @@ set -e
 # TODO:Cleanup, move things to functions
 
 function kill_pid() {
+  echo "Attempting to kill for PID: $1"
   if [ -f $1 ]; then
-    if [ -d /proc/`cat $1` ]; then
+    if [ -d "/proc/cat $1" ]; then
+      echo "Found and killing for PID: $1"
       kill -USR1 `cat $1`
     fi
+    echo "Deleting: $1"
     rm $1
   fi
 }
 
 function mv_if_exists() {
+  echo "mv_if_exists: $1 $2"
+
   if [ -f $1 ]; then
     if [ -f $2 ]; then
+      echo "Both found, removing old: $1 $2"
       rm $2
     fi
 
+    echo "Moving $1 to $2"
     mv $1 $2
   fi
 }
@@ -48,12 +55,9 @@ fi
 #   (printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
 # fi
 
-#  Clear cache
-bundle exec rake cache:clear
-
 cmd=""
 
-if [ "${RAILS_TYPE}" == "web"]; then
+if [ "${RAILS_TYPE}" == "web" ]; then
   kill_pid /app/tmp/pids/unicorn.pid
   kill_pid /app/tmp/unicorn.pid
   kill_pid /app/tmp/pids/server.pid
@@ -77,15 +81,20 @@ if [ "${RAILS_TYPE}" == "web"]; then
       # ruh-roh
       # $? is 1
     bundle exec rake db:create db:schema:load db:migrate --trace
+
+    #  Clear cache
+    bundle exec rake cache:clear
   fi
-  
+
+  echo "Running web"
   cmd="/app/bin/unicorn -c /app/config/unicorn.rb -E ${RAILS_ENV}"
 
 else
 
   kill_pid /app/tmp/pids/sidekiq.pid
 
-  cmd="/app/bin/sidekiq"
+  echo "Running sidekiq"
+  cmd="/app/bin/sidekiq -c /app/config/sidekiq.yml"
 fi
 
 exec bundle exec "$cmd"
