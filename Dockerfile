@@ -39,10 +39,12 @@ COPY . .
 # Install new packages / git packages not in vendor cache
 # RUN bundle install
 
+# RUN bundle exec rake RAILS_ENV=production DATABASE_URL=postgresql://user:pass@127.0.0.1/dbname SECRET_TOKEN=pickasecuretoken FOG_DIRECTORY="/app/public" AWS_ACCESS_KEY_ID=fake_key AWS_SECRET_ACCESS_KEY=fake_secret assets:precompile
+
 # Make runnable
 RUN chmod +x docker-run.sh
 
 EXPOSE 3000
 
 ENTRYPOINT ["/app/docker-run.sh"]
-CMD ["/app/bin/unicorn", "-c", "/app/config/unicorn.rb"]
+
