@@ -57,8 +57,10 @@ cmd=""
 if [ "${RAILS_TYPE}" == "worker" ]; then
   kill_pid /app/tmp/pids/sidekiq.pid
 
+  mv_if_exists /app/config/sidekiq_production.yml /app/config/sidekiq.yml
+
   echo "Running sidekiq"
-  cmd="/app/bin/sidekiq -c /app/config/sidekiq.yml"
+  cmd="/app/bin/sidekiq -C /app/config/sidekiq.yml -e ${RAILS_ENV}"
 
 else
 
