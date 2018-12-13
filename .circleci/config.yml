@@ -121,6 +121,23 @@ jobs:
           fi
 
       - run:
+          name: Deploy to Sidekiq if something has changed
+          command: |
+            set -e
+            workers_updated=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "_workers.rb$")
+
+            if [ -n "$workers_updated" ]l then
+              if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
+                aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
+              elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
+                aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
+              elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
+                aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
+              fi
+            fi
+
+
+      - run:
           name: Send Success Slack Notification
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
