@@ -208,8 +208,13 @@ Spree::LineItem.class_eval do
   def image(cropped: )
     images(cropped: cropped).first
   end
+
   def images(cropped: )
     product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, customizations, cropped)
+  end
+
+  def is_curation?
+    product.curations.exists?(pid: new_sku)
   end
 
   def new_sku

@@ -57,6 +57,10 @@ module Marketing
           collection_product_path(product)
         end
 
+        def is_curation?
+          line_item.is_curation?
+        end
+
         def product_url
           URI.join(base_url || ENV['APP_HOST'], product_path).to_s
         end
@@ -74,7 +78,8 @@ module Marketing
             description:  product_description,
             image_url:    image_url,
             product_path: product_path,
-            product_url:  product_url
+            product_url:  product_url,
+            is_curation:  is_curation?
           }
         end
 
