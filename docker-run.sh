@@ -52,6 +52,10 @@ fi
 #   (printf "PING\r\n"; sleep 1) | nc $REDIS_IP 6379
 # fi
 
+
+# Copy over the production database config if not already so
+mv_if_exists /app/config/database_production.yml /app/config/database.yml
+
 cmd=""
 
 if [ "${RAILS_TYPE}" == "worker" ]; then
@@ -72,9 +76,6 @@ else
   if  [ "$RAILS_ENV" != "development" ]; then
     mv_if_exists /app/config/unicorn_production.rb /app/config/unicorn.rb
   fi
-
-  # Copy over the production database config if not already so
-  mv_if_exists /app/config/database_production.yml /app/config/database.yml
 
   export PGPASSWORD=$DBPASSWORD
 
