@@ -6,10 +6,7 @@ set -e
 function kill_pid() {
   echo "Attempting to kill for PID: $1"
   if [ -f $1 ]; then
-    if [ -d "/proc/cat $1" ]; then
-      echo "Found and killing for PID: $1"
-      kill -USR1 `cat $1`
-    fi
+    kill $(cat $1)
     echo "Deleting: $1"
     rm $1
   fi
