@@ -54,7 +54,14 @@ fi
 
 cmd=""
 
-if [ "${RAILS_TYPE}" == "web" ]; then
+if [ "${RAILS_TYPE}" == "worker" ]; then
+  kill_pid /app/tmp/pids/sidekiq.pid
+
+  echo "Running sidekiq"
+  cmd="/app/bin/sidekiq -c /app/config/sidekiq.yml"
+
+else
+
   kill_pid /app/tmp/pids/unicorn.pid
   kill_pid /app/tmp/unicorn.pid
   kill_pid /app/tmp/pids/server.pid
@@ -86,12 +93,6 @@ if [ "${RAILS_TYPE}" == "web" ]; then
   echo "Running web"
   cmd="/app/bin/unicorn -c /app/config/unicorn.rb -E ${RAILS_ENV}"
 
-else
-
-  kill_pid /app/tmp/pids/sidekiq.pid
-
-  echo "Running sidekiq"
-  cmd="/app/bin/sidekiq -c /app/config/sidekiq.yml"
 fi
 
 exec bundle exec "$cmd"
