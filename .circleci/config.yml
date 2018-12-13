@@ -126,7 +126,7 @@ jobs:
             set -e
             workers_updated=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "_workers.rb$")
 
-            if [ -n "$workers_updated" ]l then
+            if [ -n "$workers_updated" ]; then
               if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
                 aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
               elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
