@@ -3,7 +3,9 @@
 COOKIE_STORE_DOMAINS = [
     '.lvh.me',
     '.fameandpartners.com.au',
-    '.fameandpartners.com'
+    '.fameandpartners.com',
+    '.fameandgroups.com',
+    '.fameandgroups.com.au'
 ]
 
 FameAndPartners::Application.config.session_store :cookie_store, {

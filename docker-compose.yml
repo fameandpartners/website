@@ -18,6 +18,7 @@ services:
             - FAME_WEBCLIENT_URL=http://webclient-qa4.fameandgroups.com
             - DEVELOPMENT_ASSET_HOST=http://127.0.0.1:3000
             - RAILS_ENV=development
+            - RAILS_TYPE=web
 
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
