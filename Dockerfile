@@ -39,7 +39,7 @@ COPY . .
 # Install new packages / git packages not in vendor cache
 # RUN bundle install
 
-RUN bundle exec rake RAILS_ENV=development DATABASE_URL=postgresql://user:pass@127.0.0.1/dbname SECRET_TOKEN=pickasecuretoken AWS_S3_BUCKET=fake_bucket AWS_S3_ACCESS_KEY_ID=fake_key AWS_S3_SECRET_ACCESS_KEY=fake_secret AWS_S3_REGION=us-east-1 assets:precompile
+RUN bundle exec rake RAILS_ENV=production DATABASE_URL=postgresql://user:pass@127.0.0.1/dbname SECRET_TOKEN=pickasecuretoken AWS_S3_BUCKET=fake_bucket AWS_S3_ACCESS_KEY_ID=fake_key AWS_S3_SECRET_ACCESS_KEY=fake_secret AWS_S3_REGION=us-east-1 assets:precompile
 
 # Setup cron jobs
 RUN /etc/init.d/cron start

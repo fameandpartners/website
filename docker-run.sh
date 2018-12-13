@@ -92,6 +92,10 @@ else
     bundle exec rake cache:clear
   fi
 
+  if [ -n "${ASSET_SYNC_ENABLE}" ]; then
+    bundle exec rake assets:sync
+  fi
+
   echo "Running web"
   cmd="/app/bin/unicorn -c /app/config/unicorn.rb -E ${RAILS_ENV}"
 
