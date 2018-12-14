@@ -120,8 +120,8 @@ jobs:
             aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
           fi
 
-          workers_updated=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "_workers.rb$")
-          scheduler_updated=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "^schedule.rb$")
+          workers_updated=$(git diff --name-only HEAD~1 HEAD | grep "_workers.rb$")
+          scheduler_updated=$(git diff --name-only HEAD~1 HEAD | grep "^schedule.rb$")
 
           if [ -n "$workers_updated" ] || [ -n "$scheduler_updated" ]; then
             if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
