@@ -108,6 +108,7 @@ jobs:
 
           if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
@@ -118,19 +119,7 @@ jobs:
             aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
-          fi
-
-          workers_updated=$(git diff --name-only HEAD~1 HEAD | grep "_workers.rb$")
-          scheduler_updated=$(git diff --name-only HEAD~1 HEAD | grep "^schedule.rb$")
-
-          if [ -n "$workers_updated" ] || [ -n "$scheduler_updated" ]; then
-            if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
-              aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
-            elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
-              aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
-            elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
-              aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
-            fi
+            aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
           fi
 
       - run:
