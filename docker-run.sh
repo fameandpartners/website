@@ -5,58 +5,56 @@ set -e
 
 ############ Output ############
 log_date_format='%Y-%m-%d %H:%M:%S'
-function info() { echo $(green)[$(date +"$log_date_format")][I]  $*$(normal); }
-
-function normal  { tput sgr0;    }
-function green   { tput setaf 2; }
+function info() { echo [$(date +"$log_date_format")][I]  $*; }
 
 function kill_pid() {
-  info "Attempting to kill for PID: $1"
+  info "kill_pid: args => $1"
   if [ -f $1 ]; then
-    kill $(cat $1)
-    info "Deleting: $1"
+    pid=$(cat $1)
+    kill $pid
+    info "kill_pid: Killed pid: $pid from $1. Now deleting."
     rm $1
   fi
 }
 
 function mv_if_exists() {
-  info "mv_if_exists: $1 $2"
+  info "mv_if_exists: args => $1 $2"
 
   if [ -f $1 ]; then
     if [ -f $2 ]; then
-      info "Both found, removing old: $1 $2"
+      info "mv_if_exists: Found both files. Deleting the old file"
       rm $2
     fi
 
-    info "Moving $1 to $2"
+    info "mv_if_exists: Moving $1 to $2"
     mv $1 $2
   fi
 }
 
 function rm_if_exists() {
-  info "rm_if_exists: $1"
+  info "rm_if_exists: args => $1"
 
   if [ -f $1 ]; then
-    info "Found: $1, now deleting"
+    info "rm_if_exists: Found: $1, now deleting"
     rm $1
   fi
 }
 
 function mkdir_if_not_exists() {
-  info "mkdir_if_not_exists: $1 $2"
+  info "mkdir_if_not_exists: args => $1 $2"
 
   if [ ! -d $1 ]; then
-    info "Dir does not exist... creating"
+    info "mkdir_if_not_exists: Creating $1"
     mkdir $1
   elif [ -n "$2" ]; then
-    info "Dir already exists... clearing"
+    info "mkdir_if_not_exists: Clearing $1 of contents"
     rm -rf $1/*
   fi
 }
 
 # Clear out and creater required folders
 mkdir_if_not_exists "/app/tmp"
-mkdir_if_not_exists "/app/tmp/pids" 
+mkdir_if_not_exists "/app/tmp/pids"
 mkdir_if_not_exists "/app/tmp/logs" y
 mkdir_if_not_exists "/app/logs" y
 
@@ -79,7 +77,7 @@ if [ "${RAILS_TYPE}" == "worker" ]; then
   # Setup cronjobs
   info "Starting cron daemon"
   /etc/init.d/cron start
-  
+
   # Setup whenever
   if [ -f "/app/bin/whenever" ]; then
     info "Starting whenever daemon"
