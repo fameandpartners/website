@@ -307,13 +307,8 @@ FameAndPartners::Application.routes.draw do
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
-    resources :fabric_cards, :only => [:index, :show] do
-      resources :products, :only => [:show], controller: 'fabric_cards/products'
-    end
     resources :fabrications,       :only => :update
     resources :shipments,          :only => :update
-    resource  :sku_generation,     :only => [:show, :create]
-    resources :dress_colours,      :only => :index
   end
 
   # ----------
@@ -373,22 +368,11 @@ FameAndPartners::Application.routes.draw do
         end
       end
 
-      resources :competition_participations, only: [:index], format: :csv
-      scope 'products/:product_id', :as => 'product' do
-        resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
-      end
-
       post 'shipping_methods/update_positions' => "shipping_methods#update_positions"
-
-      scope 'taxonomies/:taxonomy_id/taxons/:id' do
-        resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
-      end
 
       resources :site_versions, only: [:index, :edit, :update]
 
       scope 'products/:product_id', :as => 'product' do
-        resource :celebrity_inspiration, :only => [:edit, :update]
-
         resource :colors, only: [:new, :create], controller: 'product_colors'
       end
 
@@ -399,12 +383,7 @@ FameAndPartners::Application.routes.draw do
 
       match '/product_images/upload' => 'product_images#upload', as: 'upload_product_images'
 
-      get '/wishlist_items/download' => 'wishlist_items#download', as: 'wishlist_export'
-      get '/user_style_profiles/download' => 'user_style_profiles#download', as: 'user_style_profiles_export'
-
       resources :competition_entries, only: [:index, :show]
-
-      resource :product_positions, only: [:show, :create, :update]
 
       resources :sales, :except => [:show]
 
@@ -412,29 +391,17 @@ FameAndPartners::Application.routes.draw do
 
       resources :products do
         resources :customisation_values
-        resources :inspirations do
-          collection do
-            post :update_positions, as: :update_positions
-          end
-        end
-
+      
         resources :making_options, controller: 'product_making_options', except: [:destroy] do
           member do
             put :toggle
           end
         end
-
-        resources :accessories, controller: 'product_accessories' do
-          post :update_positions, on: :collection
-        end
       end
-
-      resource :styles, only: [:show, :update]
 
       get 'modals' => 'modals#index'
 
       get 'search/order_owners' => 'search#order_owners'
-      get 'search/outerwear' => 'products#search_outerwear', as: :search_outerwear
     end
   end
 

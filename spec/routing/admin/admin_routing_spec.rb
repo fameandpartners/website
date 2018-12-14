@@ -8,14 +8,4 @@ describe '/admin/', type: :routing do
                                                    id:         '333'
                                                )
   end
-
-  it 'sku_generations' do
-    expect(
-      expect(:get => "/admin/sku_generation").to route_to(
-                                                     controller: 'admin/sku_generations',
-                                                     action:     'show'
-                                                 )
-
-    )
-  end
 end

@@ -320,8 +320,12 @@ Spree::CheckoutController.class_eval do
     end
   end
 
+  def country_code_from_ip
+    FindCountryFromIP.new(request.remote_ip).country_code
+  end
+
   def build_default_address
-    address = Spree::Address.default(current_site_version, session[:country_code])
+    address = Spree::Address.default(current_site_version, country_code_from_ip)
 
     if (user = try_spree_current_user).present?
       address.firstname ||= user.first_name

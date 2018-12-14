@@ -5,8 +5,8 @@
       <%= f.file_field :attachment %>
     </div>
     <div data-hook="variant" class="field">
-      <%= f.label Spree::Variant.model_name.human %><br>
-      <%= f.select :viewable_id, @variants, {selected: viewable_type_from_image(f.object)}, {:class => 'select2 fullwidth'} %>
+      <%= f.label t(:curation) %><br>
+      <%= f.collection_select :viewable_id, @curations, :id, :pid, {}, {:class => 'select2 fullwidth'} %>
     </div>
   </div>
   <div data-hook="alt_text" class="field omega five columns">

@@ -13,7 +13,6 @@ module Features
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
     next_logistics:                'Enable Next Logistics 3PL return process, whenever an user creates an order return in Australia',
     sales:                         nil,
-    shipping_message:              nil,
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
     refulfill:                     "Check new orders coming in against inventory.",
     batching:                      "Batch line items into styles for production.",

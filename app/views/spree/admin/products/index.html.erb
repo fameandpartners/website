@@ -45,17 +45,6 @@
             </div>
           </div>
 
-          <div class="five columns">
-            <div class="field">
-              <%= f.label :fabric_card, t(:fabric_card) %>
-              <%= f.select :fabric_card_id_eq, options_from_collection_for_select(FabricCard.all, :id, :name, params[:q][:fabric_card_id_eq]), {:include_blank => true} %>
-            </div>
-            <div class="field checkbox">
-              <%= render partial: 'search_null_column', locals: { f: f, column_name: :fabric_card_id } %>
-            </div>
-          </div>
-
-
           <div class="three columns">
             <div class="field">
               <%= f.label :factory_id, t(:factory) %><br>
@@ -103,7 +92,6 @@
         <th><%= t(:sku) %></th>
         <th colspan="2"><%= sort_link @search,:name, t(:name), { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'} %></th>
         <th><%= t(:factory) %></th>
-        <th><%= t(:fabric) %></th>
         <th><%= t(:size_chart) %></th>
         <th><%= sort_link @search,:master_default_price_amount, t(:master_price), {}, {:title => 'admin_products_listing_price_title'} %></th>
         <th data-hook="admin_products_index_header_actions" class="actions"></th>
@@ -116,7 +104,6 @@
             <td class="align-center"><%= product_image(product) %></td>
             <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
             <td><%= product.factory || '-' %></td>
-            <td><%= fc = product.fabric_card; link_to(fc.name, [:admin, fc]) if fc %></td>
             <td><%= product.size_chart %></td>
             <td class="align-center"><%= product.display_price rescue '' %></td>
             <td class="actions" data-hook="admin_products_index_row_actions">

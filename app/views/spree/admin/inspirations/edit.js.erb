@@ -1,6 +1,0 @@
-form_html = '<%= escape_javascript(render "spree/admin/inspirations/form", item: item, product: product) %>';
-
-$('#new_inspiration form').hide()
-
-$('#inspirations tr.form').remove()
-$('tr#<%= spree_dom_id item %>').after("<tr class='form'><td colspan='6'>" + form_html + "</td></tr>");

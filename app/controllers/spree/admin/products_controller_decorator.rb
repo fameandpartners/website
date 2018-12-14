@@ -4,20 +4,6 @@ Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
   before_filter :split_related_outerwear_ids, :only => [:update]
 
-  def search_outerwear
-    scope = Spree::Product.outerwear
-
-    if params[:ids]
-      product_ids = params[:ids].split(',')
-      @products   = scope.where(id: product_ids)
-    else
-      search_params = { name_cont: params[:q], m: 'or' }
-      @products     = scope.ransack(search_params).result
-    end
-
-    render 'spree/admin/products/search'
-  end
-
   def export_product_taxons
     scope = Spree::Product.includes(:taxons, :variants_including_master)
 
