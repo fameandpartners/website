@@ -44,7 +44,7 @@ class ManualOrdersGrid
     if !model.return_item
       link_to 'Return or Exchange', main_app.new_user_returns_path(order_number: model.order.number, email: model.order.email)
     else
-      link_to 'Return Requested', main_app.return_detail_path(order_number: model.order.number)
+      link_to 'Return Requested', main_app.return_detail_path(order_number: model.order.number, request_id: ReturnRequestItem.find_by_id(model.item_return&.request_id)&.order_return_request_id)
     end
   end
 
