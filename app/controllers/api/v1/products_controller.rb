@@ -3,8 +3,8 @@ MAX_CM = 193
 MIN_INCH = 58
 MAX_INCH = 76
 
-PRODUCT_IMAGE_SIZES = [:original, :xxxlarge, :xxlarge, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
-LIST_PRODUCT_IMAGE_SIZES = [:original, :xlarge, :large, :medium, :small, :xsmall, :xxsmall]
+PRODUCT_IMAGE_SIZES = [[:xxxlarge, :webp_xxxlarge], [:xxlarge, :webp_xxlarge], [:xlarge, :webp_xlarge], [:large, :webp_large], [:medium, :webp_medium], [:small, :webp_small], [:xsmall, :webp_xsmall], [:xxsmall, :webp_xxsmall]]
+LIST_PRODUCT_IMAGE_SIZES = [[:xlarge, :webp_xlarge], [:large, :webp_large], [:medium, :webp_medium], [:small, :webp_small], [:xsmall, :webp_xsmall], [:xxsmall, :webp_xxsmall]]
 
 CARE_DESCRIPTION = "<p>Professional dry-clean only. <br />See label for further details.</p>"
 
@@ -76,23 +76,22 @@ module Api
               .collect do |image|
               {
                 type: :photo,
-                src: LIST_PRODUCT_IMAGE_SIZES.map {|image_size|
-                  if image_size == :original
-                    width = image.attachment_width
-                    height = image.attachment_height
-                  else
-                    geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
-                    width = geometry.width
-                    height = geometry.height
-                  end
+                src: LIST_PRODUCT_IMAGE_SIZES.map {|sizes|
+                  image_size = sizes[0]
+                  webp_image_size = sizes[1]
 
+                  geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+                  width = [geometry.width.round, image.attachment_width].min
+                  height = (image.attachment_height.to_f / image.attachment_width.to_f * width).round
+      
                   {
                     name: image_size,
                     width: width,
                     height: height,
                     url: image.attachment.url(image_size),
+                    urlWebp: image.attachment.url(webp_image_size),
                   }
-                }.select { |i| i[:width] <= image.attachment_width},
+                }.uniq {|i| i[:width] },
                 sortOrder: image.position
               }
             end,
@@ -586,21 +585,21 @@ module Api
           type: :photo,
           fitDescription: fixup_fit(product_fit),
           sizeDescription: product_size,
-          src: PRODUCT_IMAGE_SIZES.map {|image_size|
-            if image_size == :original
-              width = image.attachment_width
-              height = image.attachment_height
-            else
-              geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
-              width = geometry.width
-              height = geometry.height
-            end
+          src: PRODUCT_IMAGE_SIZES.map {|sizes|
+            image_size = sizes[0]
+            webp_image_size = sizes[1]
+
+            geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
+            width = [geometry.width.round, image.attachment_width].min
+            height = (image.attachment_height.to_f / image.attachment_width.to_f * width).round
+
             {
               width: width,
               height: height,
               url: image.attachment.url(image_size),
+              urlWebp: image.attachment.url(webp_image_size),
             }
-          }.select {|i| i[:width] <= image.attachment_width},
+          }.uniq {|i| i[:width] },
           sortOrder: image.position,
           options: options
         }
