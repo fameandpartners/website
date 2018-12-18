@@ -1,4 +1,5 @@
 class UserCart::BaseController < Api::ApiBaseController
+  include Spree::Core::ControllerHelpers::Common
 
   private
 
