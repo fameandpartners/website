@@ -1,0 +1,32 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DBNAME'] %>
+  pool: 10
+  reconnect: true
+  connect_timeout: 2
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DBNAME'] %>
+  pool: 20
+  reconnect: true
+  connect_timeout: 2
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DBNAME'] %>
+  pool: 30
+  reconnect: true
+  connect_timeout: 2
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>

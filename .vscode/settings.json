@@ -2,11 +2,5 @@
     "ruby.codeCompletion": "rcodetools",
     "ruby.format": "rubocop",
     "ruby.useBundler": true,
-    "files.exclude": {
-        "**/vendor": true
-    },
-    "search.exclude": {
-        "**/vendor": true
-    },
     "ruby.useLanguageServer": true
 }

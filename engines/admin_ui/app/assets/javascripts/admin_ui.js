@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require libs/underscore-min
+//= require inspinia-rails
 //= require jquery-ui
 //= require chosen-jquery
 //= require jquery_ujs

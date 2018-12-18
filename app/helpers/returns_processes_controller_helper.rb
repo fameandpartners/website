@@ -25,10 +25,10 @@ module ReturnsProcessesControllerHelper
   def get_user
     if params['email'].present? && Spree::User.where('lower(email) = ?', params['email'].downcase).present?
       Spree::User.where('lower(email) = ?', params['email'].downcase).first
-    elsif Spree::Order.where(email: params['email'], id: params['order_id']).present?
+    elsif Spree::Order.where(email: params['email'], number: params['order_number']).present?
       # i noticed when a user changed his email address,
       # we had a mismatch between postgres orders.email and users.email
-      Spree::Order.where(email: params['email'], id: params['order_id']).last.user
+      Spree::Order.where(email: params['email'], number: params['order_number']).last.user
     else
       spree_current_user
     end
@@ -39,15 +39,15 @@ module ReturnsProcessesControllerHelper
   end
 
   def has_incorrect_params?
-    !(params['order_id'].present? && params['line_items'].present?)
+    !(params['order_number'].present? && params['line_items'].present?)
   end
 
-  def has_invalid_order_id?(id)
-    !Spree::Order.exists?(id)
+  def has_invalid_order_number?(number)
+    !Spree::Order.exists?(:number=>number)
   end
 
-  def has_incorrect_order_id?(id)
-    !@user.orders.where(id: id).first
+  def has_incorrect_order_number?(number)
+    !@user.orders.where(:number=>number).first
   end
 
   def has_nonexistent_line_items?(arr)
@@ -56,9 +56,9 @@ module ReturnsProcessesControllerHelper
     end
   end
 
-  def has_incorrect_line_items?(arr, order)
+  def has_incorrect_line_items?(arr, order_number)
     arr.any? do |id|
-      Spree::LineItem.where(id: id).first&.order_id != order
+      Spree::LineItem.where(id: id).first&.order.number != order_number
     end
   end
 
@@ -68,14 +68,20 @@ module ReturnsProcessesControllerHelper
     end
   end
 
-  def has_us_shipping_address?(order_id)
-    Spree::Order.find(order_id).shipping_address&.country_id == 49
+  def has_us_shipping_address?(order_number)
+    Spree::Order.find_by_number(order_number).shipping_address&.country_id == 49
   end
 
   def process_returns(obj, return_label)
+		order = Spree::Order.find_by_number(obj[:order_number])
+
+		if order.nil?
+			return
+		end
+
     return_request = {
       :order_return_request => {
-        :order_id => obj[:order_id],
+        :order_id => order.id,
         :return_request_items_attributes => obj[:line_items]
       }
     }
@@ -84,7 +90,7 @@ module ReturnsProcessesControllerHelper
 
     @order_return.save
 
-    if (has_us_shipping_address?(@order_return.order_id))
+    if (has_us_shipping_address?(order.number))
       return_label.save
       @order_return.return_request_items.each do |x|
         x.item_return.item_return_label = return_label
@@ -96,21 +102,14 @@ module ReturnsProcessesControllerHelper
 
     start_bergen_return_process(@order_return)
     start_next_logistics_process(@order_return)
-
-    if (has_us_shipping_address?(@order_return.order_id))
-      return_labels = map_return_labels(obj[:line_items])
-      success_response(return_labels)
-    else
-      item_returns = map_item_returns(obj[:line_items])
-      success_response(item_returns)
-    end
+		success_response(@order_return.id)
 
     return
   end
 
 
-  def self.create_label(order_id)
-    order = Spree::Order.find(order_id)
+  def self.create_label(order_number)
+    order = Spree::Order.find_by_number(order_number)
 
     label = Newgistics::ShippingLabel.new(
       order.user_first_name,
@@ -130,25 +129,6 @@ module ReturnsProcessesControllerHelper
       :carrier => label.carrier,
       :barcode => label.barcode
       )
-  end
-
-  def map_return_labels(arr)
-    arr.map do |item|
-      {
-        "line_item_id": item['line_item_id']
-      }.merge(ItemReturn.where(line_item_id: item['line_item_id']).first&.item_return_label.as_json)
-    end
-  end
-
-  def map_item_returns(arr)
-    arr.map do |item|
-      {
-        "line_item_id": item['line_item_id'],
-        "item_return_label": {
-          "item_return_id": ItemReturn.where(line_item_id: item['line_item_id']).first&.id
-        }
-      }
-    end
   end
 
   def error_response(err, *err_code)
@@ -175,12 +155,12 @@ module ReturnsProcessesControllerHelper
     end
   end
 
-  def success_response(msg)
+  def success_response(request_id)
     payload = {
-      message: msg,
+			request_id: request_id,
       status: 200
     }
-    respond_with msg do |format|
+    respond_with request_id do |format|
       format.json do
         render :json => payload, :status => :ok
       end

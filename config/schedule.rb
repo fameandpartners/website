@@ -1,4 +1,4 @@
-set :job_template, "bash -l -c '[[ ! -f /tmp/STOP_CRONS ]] && . /etc/app_description && . $APP_LOCATION/shared/envvars && :job'"
+set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && . /etc/app_description && :job'"
 set :environment, ENV['RAILS_ENV']
 
 every 1.day, at: '5:00 am' do

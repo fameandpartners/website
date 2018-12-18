@@ -53,16 +53,16 @@ module Api
         end
 
         request_object = {
-          "order_id": params[:order_id]&.to_i,
+          "order_number": params[:order_number],
           "line_items": params[:line_items]
         }
 
-        if has_invalid_order_id?(request_object[:order_id])
+        if has_invalid_order_number?(request_object[:order_number])
           error_response(:RETRY, :INVALID_ORDER_ID)
           return
         end
 
-        if has_incorrect_order_id?(request_object[:order_id])
+        if has_incorrect_order_number?(request_object[:order_number])
           error_response(:RETRY, :INCORRECT_ORDER_ID)
           return
         end
@@ -76,7 +76,7 @@ module Api
           return
         end
 
-        if has_incorrect_line_items?(return_item_ids, request_object[:order_id])
+        if has_incorrect_line_items?(return_item_ids, request_object[:order_number])
           error_response(:RETRY, :INCORRECT_LINE_ITEMS)
           return
         end
@@ -85,8 +85,8 @@ module Api
           error_response(:RETURN_EXISTS)
           return
         end
-        if (has_us_shipping_address?(request_object[:order_id]))
-          unless(return_label = ReturnsProcessesControllerHelper.create_label(request_object[:order_id]))
+        if (has_us_shipping_address?(request_object[:order_number]))
+          unless(return_label = ReturnsProcessesControllerHelper.create_label(request_object[:order_number]))
             error_response(:RETRY, :LABEL_FAILED)
             return
           end

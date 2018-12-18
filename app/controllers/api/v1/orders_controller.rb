@@ -12,7 +12,7 @@ module Api
           respond_with @orders, each_serializer: OrderSerializer
 
         else
-          
+
           @order = Spree::Order.hydrated.where(:number=>params[:order_number]).first
           respond_with @order, serializer: OrderSerializer
 

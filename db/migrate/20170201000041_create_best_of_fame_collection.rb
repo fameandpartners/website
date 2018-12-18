@@ -11,7 +11,7 @@ class CreateBestOfFameCollection < ActiveRecord::Migration
       meta_description:       'Need it now? We\'ll handcraft and deliver these made-to-order evening styles in under five days.',
       show_info_box:          true,
       section_box_class_name: 'category-text-box--black-bg',
-      banner_image_url:       'https://d1msb7dh8kb0o9.cloudfront.net/pages/best-of-fame/banner.jpg'
+      banner_image_url:       'https://d2ta5pga3sqz6i.cloudfront.net/pages/best-of-fame/banner.jpg'
 
     }
   end

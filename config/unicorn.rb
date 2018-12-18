@@ -14,7 +14,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 timeout (ENV["UNICORN_TIMEOUT"] || 60).to_i
 
 # Set up socket location
-listen "127.0.0.1:3000", :tcp_nopush => true
+listen "0.0.0.0:3000", :tcp_nopush => true
 
 # Logging
 logger Logger.new($stdout)

@@ -59,7 +59,7 @@ module AdminUi
     def generate_new_return_label
       item_return = ItemReturn.find(params[:item_return_id])
       order = Spree::Order.find_by_number(item_return.order_number)
-      label = ReturnsProcessesControllerHelper.create_label(order.id)
+      label = ReturnsProcessesControllerHelper.create_label(order.number)
       redirect_to label&.label_pdf_url
     end
 

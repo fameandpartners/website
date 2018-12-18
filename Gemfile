@@ -34,6 +34,7 @@ gem 'customerio', '~> 1.0.0'
 path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
+  gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
   gem 'afterpay'
@@ -110,9 +111,8 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
-
 gem 'unicorn'
+gem 'aws-healthcheck'
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

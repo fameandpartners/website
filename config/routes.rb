@@ -70,7 +70,7 @@ FameAndPartners::Application.routes.draw do
 
   # MonkeyPatch for store params & redirect to custom page
   get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
-   
+
   ##############
   # Fake routes
   ##############
@@ -83,7 +83,7 @@ FameAndPartners::Application.routes.draw do
   get '/user' => 'noop#noop', as: :user
   get '/contact' => 'noop#noop', as: :contact
   get '/return/reason/:order_number/:email' => 'noop#noop', as: :new_user_returns
-  get '/return/:order_number' => 'noop#noop', as: :return_detail
+  get '/return/:order_number/(:request_id)' => 'noop#noop', as: :return_detail
 
 
 

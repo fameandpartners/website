@@ -23,5 +23,7 @@ if Rails.env.production? || Rails.env.staging?
     #
     # Fail silently.  Useful for environments such as Heroku
     # config.fail_silently = true
+
+    config.enabled = ENV['ASSET_SYNC_ENABLE'] === 'true' || false
   end
 end
