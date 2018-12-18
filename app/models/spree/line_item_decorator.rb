@@ -106,7 +106,7 @@ Spree::LineItem.class_eval do
 
   def making_options_text
     return '' if making_options.blank?
-    making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
+    making_options.map{|option| option.product_making_option.making_option.name }.join(', ')
   end
 
   def factory

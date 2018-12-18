@@ -26,7 +26,7 @@ module Policies
     end
 
     def delivery_period
-      display_period_for_making_option(@making_option)
+      display_period_for_making_option(@line_item.order.completed_at || Time.now, @making_option)
     end
   end
 end

@@ -6,7 +6,6 @@ module Features
     afterpay:                      'Enables AfterPay payment method and its notifications on PDP',
     bergen_usa_returns:            '[DEPRECATED] Enable Bergen 3PL return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
-    cny_delivery_delays:           "Delivery delays on China New Year's period",
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     maintenance:                   "Maintennance Mode - Puts site offline",

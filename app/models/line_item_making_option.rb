@@ -3,10 +3,6 @@ class LineItemMakingOption < ActiveRecord::Base
   belongs_to :line_item,  class_name: 'Spree::LineItem'
   belongs_to :product_making_option, class_name: 'ProductMakingOption', foreign_key: :making_option_id
 
-  delegate :name, to: :product_making_option, allow_nil: true
-  delegate :description, to: :product_making_option
-  delegate :display_delivery_period, to: :product_making_option
-
   def display_price
     MakingOption.display_price(flat_price, percent_price, currency)
   end

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.5
--- Dumped by pg_dump version 10.5
+-- Dumped from database version 11.1
+-- Dumped by pg_dump version 11.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14,20 +14,6 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 SET default_tablespace = '';
 
@@ -1891,7 +1877,9 @@ CREATE TABLE public.making_options (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     delivery_time_days integer,
-    cny_delivery_time_days integer
+    cny_delivery_time_days integer,
+    cny_start_date timestamp without time zone,
+    cny_end_date timestamp without time zone
 );
 
 
@@ -10489,3 +10477,5 @@ INSERT INTO schema_migrations (version) VALUES ('20181123002244');
 INSERT INTO schema_migrations (version) VALUES ('20181126001414');
 
 INSERT INTO schema_migrations (version) VALUES ('20181203000011');
+
+INSERT INTO schema_migrations (version) VALUES ('20181217045923');

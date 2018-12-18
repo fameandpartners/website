@@ -639,7 +639,7 @@ module Api
           cartId: making.id,
           code: making.making_option.code,
           isDefault: false,
-          title: making.name,
+          title: making.making_option.name,
           componentTypeId: :Making,
           componentTypeCategory: :Making,
           price: (making.making_option.flat_price_in(current_site_version.currency)*100).to_i,
@@ -649,8 +649,7 @@ module Api
           type: :Making,
           sortOrder: making.making_option.position,
           meta: {
-            deliveryTimeDescription: making.description,
-            deliveryTimeRange: making.display_delivery_period
+            deliveryTimeRange: making.making_option.display_delivery_period(Time.now)
           },
           incompatibleWith: { allOptions: [] },
         }
