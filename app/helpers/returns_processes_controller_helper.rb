@@ -109,7 +109,7 @@ module ReturnsProcessesControllerHelper
 
 
   def self.create_label(order_number)
-    order = Spree::Order.find(order_number)
+    order = Spree::Order.find_by_number(order_number)
 
     label = Newgistics::ShippingLabel.new(
       order.user_first_name,
