@@ -7,6 +7,8 @@ set -e
 log_date_format='%Y-%m-%d %H:%M:%S'
 function info() { echo [$(date +"$log_date_format")][I]  $*; }
 
+LEADER_FNAME=/tmp/flag_leader
+
 function kill_pid() {
   info "kill_pid: args => $1"
   if [ -f $1 ]; then
@@ -74,14 +76,16 @@ if [ "${RAILS_TYPE}" == "worker" ]; then
 
   mv_if_exists /app/config/sidekiq_production.yml /app/config/sidekiq.yml
 
-  # Setup cronjobs
-  info "Starting cron daemon"
-  /etc/init.d/cron start
+  # Setup CRONJOBs only on leader
+  if [ -f "$LEADER_FNAME" ]; then
+    info "Starting cron daemon"
+    /etc/init.d/cron start
 
-  # Setup whenever
-  if [ -f "/app/bin/whenever" ]; then
-    info "Starting whenever daemon"
-    /app/bin/whenever --update-crontab "fame-${RAILS_ENV}" --set "environment=${RAILS_ENV}"
+    # Setup whenever
+    if [ -f "/app/bin/whenever" ]; then
+      info "Starting whenever daemon"
+      /app/bin/whenever --update-crontab "fame-${RAILS_ENV}" --set "environment=${RAILS_ENV}"
+    fi
   fi
 
   info "Running sidekiq"
@@ -100,26 +104,28 @@ else
 
   export PGPASSWORD=$DBPASSWORD
 
-  # Run db commands
-  if psql -U $DBUSER -h $DBHOST -lqt | cut -d \| -f 1 | grep -qw $DBNAME; then
-    # database exists
-    # $? is 0
-    info "DB Already exists, running migration"
-    bundle exec rake db:migrate
-  else
-    # ruh-roh
-    # $? is 1
-    info "DB missing, running create"
-    bundle exec rake db:create db:schema:load db:migrate --trace
+  # Run db commands on leader only
+  if [ -f "$LEADER_FNAME" ]; then
+    if psql -U $DBUSER -h $DBHOST -lqt | cut -d \| -f 1 | grep -qw $DBNAME; then
+      # database exists
+      # $? is 0
+      info "DB Already exists, running migration"
+      bundle exec rake db:migrate
+    else
+      # ruh-roh
+      # $? is 1
+      info "DB missing, running create"
+      bundle exec rake db:create db:schema:load db:migrate --trace
 
-    #  Clear cache
-    info "Running cache:clear in background daemon"
-    nohup bundle exec rake cache:clear &
-  fi
+      #  Clear cache
+      info "Running cache:clear in background daemon"
+      nohup bundle exec rake cache:clear &
+    fi
 
-  if [ -n "${ASSET_SYNC_ENABLE}" ]; then
-    info "Running assets:sync in background daemon"
-    nohup bundle exec rake assets:sync &
+    if [ -n "${ASSET_SYNC_ENABLE}" ]; then
+      info "Running assets:sync in background daemon"
+      nohup bundle exec rake assets:sync &
+    fi
   fi
 
   info "Running web"

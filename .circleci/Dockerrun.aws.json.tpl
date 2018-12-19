@@ -9,5 +9,11 @@
       "ContainerPort": "3000"
     }
   ],
+  "Volumes": [
+    {
+      "HostDirectory": "/tmp",
+      "ContainerDirectory": "/tmp"
+    }
+  ]
   "Logging": "/app/log"
 }
