@@ -62,7 +62,6 @@ class ProductionOrderEmailService
         factory:            factory.name,
         display_total:      order_presenter.display_total.to_s,
         currency:           order_presenter.currency,
-        cny_delivery_delay: Features.active?(:cny_delivery_delays)
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

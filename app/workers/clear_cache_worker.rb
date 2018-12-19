@@ -11,6 +11,8 @@ class ClearCacheWorker
     @silent = !! silent
     update_color_variants_elastic_index
     reset_cache
+    Feeds::Base.export!('au')
+    Feeds::Base.export!('us')
   end
 
   def silent?

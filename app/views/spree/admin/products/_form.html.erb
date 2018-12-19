@@ -170,12 +170,6 @@
       <%= f.error_message_on :factory %>
   <% end %>
 
-  <%= f.field_container :fabric_card do %>
-      <%= f.label :fabric_card_id, t(:fabric_card) %>
-      <%= f.collection_select :fabric_card_id, FabricCard.all, :id, :name, {:include_blank => true}, {:class => 'select2'} %>
-      <%= f.error_message_on :fabric_card %>
-  <% end %>
-
   <%= f.field_container :related_outerwear do %>
       <%= f.label :related_outerwear, t(:related_outerwear) %>
       <%= f.hidden_field :related_outerwear_ids, :id => 'related_outerwear_select2', :value => @product.related_outerwear_ids.join(',') %>

@@ -106,7 +106,7 @@ Spree::LineItem.class_eval do
 
   def making_options_text
     return '' if making_options.blank?
-    making_options.map{|option| option.name&.upcase }.reject { |x| x==nil }.join(', ')
+    making_options.map{|option| option.product_making_option.making_option.name }.join(', ')
   end
 
   def factory
@@ -208,8 +208,13 @@ Spree::LineItem.class_eval do
   def image(cropped: )
     images(cropped: cropped).first
   end
+
   def images(cropped: )
     product.images_for_customisation(self.personalization&.color&.name, self.fabric&.name, customizations, cropped)
+  end
+
+  def is_curation?
+    product.curations.exists?(pid: new_sku)
   end
 
   def new_sku

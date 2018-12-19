@@ -1,5 +1,0 @@
-$('#inspirations tr.form').remove()
-
-item_html = '<%= escape_javascript(render "spree/admin/inspirations/item", item: item, product: product) %>';
-
-$('#inspirations tr#<%= spree_dom_id item %>').replaceWith(item_html);

@@ -76,25 +76,12 @@ module BatchUpload
                 end
               end
 
-              if ENV['USE_SPREE_IMAGE_CLASS']
-                image = Spree::Image.create(
-                  :attachment    => File.open(file_path),
-                  :viewable_type => viewable.class.name,
-                  :viewable_id   => viewable.id,
-                  :position      => position
-                )
-              else
-                geometry = geometry(file_path)
-                image = FastImage.create(
-                  :attachment        => File.open(file_path),
-                  :attachment_width  => geometry.width,
-                  :attachment_height => geometry.height,
-                  :viewable_type     => viewable.class.name,
-                  :viewable_id       => viewable.id,
-                  :position          => position,
-                  :type              => 'Spree::Image'
-                )
-              end
+              image = Spree::Image.create(
+                :attachment    => File.open(file_path),
+                :viewable_type => viewable.class.name,
+                :viewable_id   => viewable.id,
+                :position      => position
+              )
 
               if image.persisted?
                 success "ProductImage", id: image.id, color: fabric_color_code, position: position, file: file_name

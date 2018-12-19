@@ -1,3 +1,0 @@
-<% if item.nil? || !item.try(:persisted?) %>
-  $('table.index#inspirations tbody tr[data-id="<%= params[:id]%>"]').remove()
-<% end %>

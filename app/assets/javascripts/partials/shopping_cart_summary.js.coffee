@@ -5,8 +5,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @cart       = options.cart # window.shopping_cart
     @$container = $(options.container || '#checkout')
     @$modalContainer = $('#top')
-    @value_proposition = options.value_proposition
-    @shipping_message = options.shipping_message
 
     _.bindAll(@,
       'render',
@@ -30,8 +28,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
   render: () ->
     @$container.html(@template(
       cart: @cart.data,
-      value_proposition: @value_proposition,
-      shipping_message: @shipping_message
     ))
 
     console.log('Return Type: ' + @whichReturnType())

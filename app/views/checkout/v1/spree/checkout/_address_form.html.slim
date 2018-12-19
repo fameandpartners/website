@@ -2,7 +2,6 @@ ruby:
   address_id = address_type.chars.first
   first_name = form.object.firstname.presence || @order.try(:first_name) || @user.try(:first_name)
   last_name = form.object.lastname.presence || @order.try(:last_name) || @user.try(:last_name)
-  shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
   countries = available_countries_for_current_zone
   countries_with_fees = Hash[countries.map do |country|
     [
@@ -86,12 +85,6 @@ ruby:
     .col-xs-12
       h2.checkout-section-title
           | Delivery Address
-
-      - if Features.active?(:shipping_message)
-        p
-          = shopping_bag_texts.shipping_message
-          br
-          | We apologise for any inconvenience.
 
 .row
   .col-xs-12.form-group

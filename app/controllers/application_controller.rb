@@ -23,54 +23,19 @@ class ApplicationController < ActionController::Base
     ssl_required
   end
 
-  append_before_filter :store_marketing_params
-  append_before_filter :check_marketing_traffic
-  append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
   before_filter :website_on_maintenance, if: proc { Features.active?(:maintenance) }
-  before_filter :set_session_country
   before_filter :add_debugging_information
   before_filter :set_locale
   before_filter :set_landing_page
 
-  helper_method :analytics_label,
-                :current_wished_product_ids,
-                :default_meta_description,
-                :default_seo_title,
-                :get_user_type,
-                :serialize_user,
-                :landing_page,
+  helper_method :landing_page,
                 :contentful_global_page_config
-
-  def count_competition_participants
-    cpt = params[:cpt]
-    session[:cpts] ||= []
-
-    return if session[:cpts].include?(cpt)
-
-    participation = CompetitionParticipation.find_by_token(cpt)
-
-    return if participation.blank?
-    return if participation.spree_user.eql?(try_spree_current_user)
-
-    session[:cpts] << cpt
-    participation.increment!(:views_count)
-  end
 
   def handle_marketing_campaigns
     referrer = params[:referrer] || request.referrer
     cookies[:referrer] = referrer if cookies[:referrer].blank?
-
-    # TODO - TTL 2016.01.30 - Shopstyle missing promocode
-    # Handle inbound shopstyle campaigns with a missing auto apply promo code.
-    # Apply the missing code
-    if !request.url.include?('faadc') && (referrer && referrer.include?('shopstyle.com'))
-      uri = Addressable::URI.parse(request.url)
-      uri.query_values = (uri.query_values || {}).merge(:faadc => 'BOXINGDAY25')
-      redirect_to uri.to_s
-    end
-    # END Shopstyle missing promocode
 
     if params[:utm_campaign].present?
       capture_user_utm_params
@@ -140,6 +105,9 @@ class ApplicationController < ActionController::Base
       order_number: current_order.try(:number),
       referrer:     request.referrer
     })
+
+    Raven.user_context email: current_spree_user.try(:email), id: current_spree_user.try(:id)
+    Raven.extra_context order_id: current_order.try(:id), order_number: current_order.try(:number)
   rescue Exception => _
     true
   end
@@ -158,42 +126,6 @@ class ApplicationController < ActionController::Base
     @description = args.flatten.delete_if(&:blank?).join(' | ')
   end
 
-  def default_seo_title
-    Preferences::SEO.new(current_site_version).default_seo_title
-  end
-
-  def default_meta_description
-    Preferences::SEO.new(current_site_version).default_meta_description
-  end
-
-  def get_user_type
-    spree_user_signed_in? ? 'Member' : 'Guest'
-  end
-
-  def analytics_label(label_type, *args)
-    case label_type.to_sym
-    when :product
-      product = args.first
-      "#{product.name} - #{product.sku} - #{product.price.to_s} - #{get_user_type}"
-    when :user_cart_product
-      product = args.first
-      "#{product[:name]} - #{product[:sku]} - #{product[:price][:display_price]} - #{get_user_type}"
-    when :question
-      question = args.first
-      number = args.second
-      "#{number} - #{question.text} - #{get_user_type}"
-    when :search_query
-      query = args.first
-      "#{query} - #{get_user_type}"
-    when :user
-      get_user_type
-    else
-      args.join(' - ') || ''
-    end
-  rescue Exception => e
-    return ''
-  end
-
   def user_addition_params
     addition_params = {}
 
@@ -208,40 +140,6 @@ class ApplicationController < ActionController::Base
     addition_params
   end
 
-  def current_wished_product_ids
-    if @current_wished_product_ids
-      @current_wished_product_ids
-    else
-      user = try_spree_current_user
-      @current_wished_product_ids = user.present? ? user.wishlist_items.map(&:spree_product_id) : []
-    end
-  end
-
-  def serialize_user(user)
-    {
-      fullname: user.fullname,
-      first_name: user.first_name,
-      email: user.email,
-      wish_list: serialize_wish_list(user)
-    }
-  end
-
-  def serialize_wish_list(user)
-    user.wishlist_items.map do |item|
-      if item.spree_variant_id.present?
-        { variant_id: item.spree_variant_id }
-      else
-        { product_id: item.spree_product_id }
-      end
-    end
-  end
-
-  def set_product_show_page_title(product, info = "")
-    prefix = "#{product.short_description} #{info} #{product.name}"
-    self.title = [prefix, default_seo_title].join(' - ')
-    description([prefix, default_meta_description].join(' - '))
-  end
-
   def default_locale
     'en-US'
   end
@@ -252,24 +150,6 @@ class ApplicationController < ActionController::Base
 
   def website_on_maintenance
     render 'index/maintenance', layout: 'redesign/maintenance'
-  end
-
-  def store_marketing_params
-    # seems parameter not using anywhere else
-    #if params[:dmb].present?
-    #  cookies[:dmb] = { value: params[:dmb], expires: 1.day.from_now }
-    #  cookies[:dmb_time] = { value: Time.now.to_s, expires: 1.day.from_now }
-    #end
-    if params[:promocode].present?
-      cookies[:promocode] = { value: params[:promocode], expires: 1.day.from_now }
-    end
-  end
-
-  # if user comes via marketing then dont pop stye quiz
-  def check_marketing_traffic
-    if (params[:utm_campaign].present? || params[:gclid].present?) && cookies[:quiz_shown].blank?
-      cookies[:quiz_shown] = true
-    end
   end
 
   # this logic should be placed in separate module
@@ -290,10 +170,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
      session[:user_return_to] || session[:spree_user_return_to] || request.env['omniauth.origin'] || root_path
-  end
-
-  def set_session_country
-    session[:country_code] ||= FindCountryFromIP.new(request.remote_ip).country_code
   end
 
   def set_landing_page

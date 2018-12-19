@@ -6,7 +6,7 @@ module CommonHelper
   # override spree method
   # title method
   def get_title
-    instance_variable_defined?('@title') ? @title : default_seo_title
+    instance_variable_defined?('@title') ? @title : ''
   end
 
   def get_meta_description

@@ -33,15 +33,6 @@
       <li<%== ' class="active"' if current == 'Making Options' %>>
         <%= link_to_with_icon 'icon-th-large', t(:making_options), admin_product_making_options_url(@product) %>
       </li>
-      <li<%== ' class="active"' if current == 'Celebrity Inspiration' %>>
-        <%= link_to_with_icon 'icon-tasks', t(:celebrity_inspiration), edit_admin_product_celebrity_inspiration_url(@product) %>
-      </li>
-      <li<%== ' class="active"' if current == 'Inspirations' %>>
-        <%= link_to_with_icon 'icon-tasks', t(:inspirations), admin_product_inspirations_url(@product) %>
-      </li>
-      <li<%== ' class="active"' if current == 'Accessories' %>>
-        <%= link_to_with_icon 'icon-tasks', t(:accessories), admin_product_accessories_url(@product) %>
-      </li>
     </ul>
   </nav>
 

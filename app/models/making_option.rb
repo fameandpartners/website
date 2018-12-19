@@ -23,6 +23,20 @@ class MakingOption < ActiveRecord::Base
     MakingOption.display_price(flat_price_in(currency), percent_price_in(currency), currency)
   end
 
+  def is_cny?(date)
+    return false unless cny_start_date && cny_end_date
+
+    cny_start_date <= date && cny_end_date >= date
+  end
+
+  def display_delivery_period(date)
+    if is_cny?(date)
+      cny_delivery_period
+    else
+      delivery_period
+    end
+  end
+
   def self.display_price(flat, percent, currency)
     if percent && percent != 0
       if percent < 0 
