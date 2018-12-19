@@ -102,8 +102,8 @@ module Products
         fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
       end
 
-      customizations_price_in_us = customizations.map{ |c| c['customisation_value'['price']].to_f * 100}.sum
-      customizations_price_in_au = customizations.map{ |c| c['customisation_value'['price_aud']].to_f  * 100}.sum
+      customizations_price_in_us = customizations.map{ |c| c['customisation_value']['price'].to_f }.sum
+      customizations_price_in_au = customizations.map{ |c| c['customisation_value']['price_aud'].to_f }.sum
 
       taxons = [
         curation.taxons || [],

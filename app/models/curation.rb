@@ -16,7 +16,11 @@ class Curation < ActiveRecord::Base
 
 
   def fabric_product
-    product.fabric_products.find { |fp| pid.include?(fp.fabric.name)}
+    product.fabric_products.find do |fp| 
+      fabric_components = fp.fabric.name.split('-')
+
+      fabric_components.all? {|c| pid.include?(c) }
+    end
   end
 
   def fabric
