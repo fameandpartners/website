@@ -152,7 +152,7 @@ module Products
           fabric_product = FabricsProduct.find_or_create_by_fabric_id_and_product_id(fab.id, product.id)
           fabric_product.recommended = true
           fabric_product.price_aud = color[:price_aud].to_f + fabric[:price_aud].to_f
-          fabric_product.price_aud = color[:price_usd].to_f + fabric[:price_usd].to_f
+          fabric_product.price_usd = color[:price_usd].to_f + fabric[:price_usd].to_f
           fabric_product.save!
 
           color_ids << color.id
