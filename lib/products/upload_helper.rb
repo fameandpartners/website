@@ -57,7 +57,7 @@ module Products
         curation.taxons = Spree::Taxon.where(permalink: c[:taxons])
         curation.save!
 
-        c[:media].each_with_index do |(image, p)| 
+        c[:media].each_with_index do |image, p| 
           AddCurationImageWorker.perform_async(image, p, curation.id)
         end
       end
