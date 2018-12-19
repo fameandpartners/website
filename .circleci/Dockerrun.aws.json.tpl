@@ -14,6 +14,6 @@
       "HostDirectory": "/tmp",
       "ContainerDirectory": "/tmp"
     }
-  ]
+  ],
   "Logging": "/app/log"
 }
