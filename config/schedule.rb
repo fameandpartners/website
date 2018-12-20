@@ -1,9 +1,5 @@
-set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && . /etc/app_description && :job'"
+set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && :job'"
 set :environment, ENV['RAILS_ENV']
-
-every 1.day, at: '5:00 am' do
-  rake 'sitemap:create', output: { error: 'log/sitemap_error.log', standard: 'log/sitemap.log' }
-end
 
 every 1.day, at: '1:00 am' do
   rake 'feed:export:all'
@@ -33,9 +29,6 @@ every(3.hours)    { rake 'bergen:workers:receive_asns' }
 # Next Logistics scheduled tasks
 
 every(30.minutes) { rake 'next:workers:asn_file_upload' }
-
-# Order bot Scheduled tasks
-every(6.hours) { rake 'reports:order_bot_failure_check' }
 
 # Refulfillment and batching
 every(15.minutes) { rake 'data:refulfill_items' }
