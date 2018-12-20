@@ -229,6 +229,14 @@ Spree::LineItem.class_eval do
     self.variant.product.sku
   end
 
+  def product_sku_with_fabric_code
+    if fabric && fabric.production_code
+      "#{self.variant.product.sku}~#{fabric.production_code}"
+    else
+      self.variant.product.sku
+    end
+  end
+
   def projected_delivery_date
     return unless order.completed?
     delivery_period_policy.delivery_date
