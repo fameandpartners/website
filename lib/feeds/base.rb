@@ -61,7 +61,6 @@ module Feeds
       index = 0
       total = product_scope.count
 
-      ot_fabric = Spree::OptionType.find_by_name("dress-fabric-color")
       logger.info "Fetching Items. Total: #{total}"
 
       # product_scope.each do |product|
@@ -71,31 +70,14 @@ module Feeds
         logger_product_count = "[#{index}/#{total}]"
         logger.info "#{logger_product_count.ljust(10)} | #{logger_product_name}"
 
-        if !product.fabric_products.empty?
-          product.fabric_products.active.each do |product_fabric_value|
-            color = product_fabric_value.fabric.option_value
-            fabric = product_fabric_value.fabric
-
-            if !product_fabric_value.images.present? 
-              logger.error "id  -  | No Images!"
-              next
-            end
-
-            item = get_item_properties(product, color, fabric, product_fabric_value.images)
-            items.push(item)
+        product.curations.active.each do |curation|
+          if !curation.images.present? 
+            logger.error "id  -  | No Images!"
+            next
           end
-        else
-          product.product_color_values.active.each do |product_color_value|
-            color = product_color_value.option_value
 
-            if !product_color_value.images.present? 
-              logger.error "id  -  | No Images!"
-              next
-            end
-          
-            item = get_item_properties(product, color, nil, product_color_value.images)
-            items.push(item)
-          end
+          item = get_item_properties(product, curation)
+          items.push(item)
         end
       end
       items
@@ -103,7 +85,10 @@ module Feeds
 
 
     # TODO: Feed item is so important, that should be extracted to a separate class...
-    def get_item_properties(product, color, fabric, images)
+    def get_item_properties(product, curation)
+      fabric = curation.fabric
+      color = curation.color || fabric&.option_value
+
       color_presentation = color.presentation
       size_presentation  = current_site_version.name == "USA" ? 'US 0-20' : 'AU 4-26'
       price              = product.site_price_for(current_site_version)
@@ -117,12 +102,10 @@ module Feeds
         sale_price = sale_price.display_price.to_html(symbol: false)
       end
 
-      pid = Spree::Product.format_new_pid(product.sku, fabric&.name || color.name, [])
-
       item = HashWithIndifferentAccess.new(
         # variant:                 variant,
         path:                    helpers.collection_product_path(product, color: (fabric&.name || color.name)),
-        variant_sku:             pid,
+        variant_sku:             curation.pid,
         product:                 product,
         product_name:            product.name,
         product_sku:             product.sku,
@@ -132,7 +115,7 @@ module Feeds
         price:                   original_price,
         sale_price:              sale_price,
         google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',
-        id:                      pid,
+        id:                      curation.pid,
         group_id:                product.sku,
         color:                   color_presentation,
         size:                    size_presentation,
@@ -141,10 +124,10 @@ module Feeds
       )
 
       # Event, Style and Lookbook
-      item.update get_taxons(product)
+      item.update get_taxons(product, curation)
 
       # Images
-      item.update get_images(images)
+      item.update get_images(curation)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
@@ -154,45 +137,40 @@ module Feeds
     end
 
     # return image, additional images
-    def get_images(images)
-      if images.present?
-        images = images.select {|img| img.position.present?}
-        images.sort_by!{ |i| i.position }
-        cropped_images = images.select{ |i| i.attachment(:large).to_s.downcase.include?('crop') }
-        cropped_images.sort_by!{ |i| i.position }
+    def get_images(curation)
+      images = curation.images.select {|img| img.position.present?}
 
-        front_crop = cropped_images.shift # pull the front image
+      images.sort_by!{ |i| i.position }
+      cropped_images = images.select{ |i| i.attachment(:large).to_s.downcase.include?('crop') }
+      cropped_images.sort_by!{ |i| i.position }
 
-        other_images = (cropped_images + images).uniq # prepend the crop to remainder of images
-        other_images = other_images.map{|i| i.attachment(:large).to_s }
+      front_crop = cropped_images.shift # pull the front image
 
-        {
-          image: front_crop ? front_crop.attachment(:large) : nil,
-          images: other_images
-        }
-      else
-        {
-          image: nil,
-          images: []
-        }
-      end
+      other_images = (cropped_images + images).uniq # prepend the crop to remainder of images
+      other_images = other_images.map{|i| i.attachment(:large).to_s }
+
+      {
+        image: front_crop ? front_crop.attachment(:large) : nil,
+        images: other_images
+      }
     end
 
     def get_weight(product, variant)
       variant.weight || product.weight || product.property('weight')
     end
 
-    def get_taxons(product)
-      product_taxons    = Spree::Taxon.order('spree_taxons.position').where(id: product.taxon_ids)
-      product_events    = product_taxons.published.from_event_taxonomy
-      product_styles    = product_taxons.published.from_style_taxonomy
-      product_lookbooks = product_taxons.from_edits_taxonomy
+    def get_taxons(product, curation)
+      taxons = (product.taxons + curation.taxons).sort_by(&:position)
+
+      # product_events    = taxons.from_event_taxonomy
+      # product_styles    = taxons.from_style_taxonomy
+      # product_lookbooks = taxons.from_edits_taxonomy
 
       {
-        taxons:    product_taxons.map(&:name),
-        events:    product_events.map(&:name),
-        styles:    product_styles.map(&:name),
-        lookbooks: product_lookbooks.map(&:name)
+        taxons:    taxons.map(&:name),
+        # events:    product_events.map(&:name),
+        # styles:    product_styles.map(&:name),
+        # lookbooks: product_lookbooks.map(&:name)
       }
     end
 
