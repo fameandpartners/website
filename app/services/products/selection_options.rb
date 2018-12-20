@@ -39,7 +39,6 @@ module Products
           }),
           customizations: OpenStruct.new({
             all: available_product_customisations,
-            is_free: Spree::Config[:free_customisations]
           }),
 
           making_options: product_making_options

@@ -58,7 +58,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def display_price
-    '$' + object.price.to_s
+    '$' + '%.2f' % object.price
   end
 
   def url
@@ -82,7 +82,7 @@ class LineItemSerializer < ActiveModel::Serializer
   end
 
   def available_making_options
-    object.order.completed? ? [] : object.product.making_options.map(&:making_option)
+    object.order.completed? ? [] : object.product.making_options.active.map(&:making_option)
   end
   
   def return

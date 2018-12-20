@@ -1,5 +1,4 @@
 require_relative './base'
-require 'fog'
 
 module Feeds
   module Exporter
@@ -35,9 +34,9 @@ module Feeds
                 xml.description product_description(item)
 
                 # Event, Style and Lookbook
-                xml.tag! "events"   , item[:events].join(',')
-                xml.tag! "styles"   , item[:styles].join(',')
-                xml.tag! "lookbooks", item[:lookbooks].join(',')
+                # xml.tag! "events"   , item[:events].join(',')
+                # xml.tag! "styles"   , item[:styles].join(',')
+                # xml.tag! "lookbooks", item[:lookbooks].join(',')
                 xml.tag! "taxons", item[:taxons].join(',')
 
                 xml.tag! "g:id", item[:id]

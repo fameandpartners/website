@@ -43,11 +43,11 @@ class CustomItemSku
   end
 
   def color_id
-    line_item.personalization ? line_item.personalization.color.id : line_item.variant&.dress_color&.id
+    line_item.personalization ? line_item.personalization.color&.id : line_item.variant&.dress_color&.id
   end
 
   def size
-    line_item.personalization ? line_item.personalization.size.name : line_item.variant&.dress_size&.name
+    line_item.personalization ? line_item.personalization.size&.name : line_item.variant&.dress_size&.name
   end
 
   def customization_value_ids

@@ -35,8 +35,8 @@
       - @making_options.each do |making_option|
         tr data-id=making_option.id id=spree_dom_id(making_option)
           td = making_option.making_option.code
-          td = making_option.name
-          td = making_option.description
+          td = making_option.making_option.name
+          td = making_option.making_option.description
           td = making_option.active?
           td.actions
             =<> link_to_with_icon('icon-edit', t(:edit), edit_admin_product_making_option_path(@product, making_option), no_text: true)

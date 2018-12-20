@@ -59,7 +59,7 @@ module Reports
             line.order.promotions.map(&:name).join("|"),
             line.price,
             line.currency,
-            line.product_sku,
+            line.product_sku_with_fabric_code,
             line.product.name,
             line.id,
             line.size&.presentation,

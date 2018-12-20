@@ -153,7 +153,7 @@ module Orders
             line.shipment&.shipped_at&.to_date,
             line.fabrication&.state,
             line.new_sku,
-            line.product_sku,
+            line.product_sku_with_fabric_code,
             line.product.name,
             line.factory,
             line.color&.presentation,

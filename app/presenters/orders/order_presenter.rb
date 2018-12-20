@@ -139,7 +139,7 @@ module Orders
           quantity:              item.quantity,
           factory:               item.factory.name,
           deliver_date:          item.projected_delivery_date.to_s,
-          express_making:        item.making_options.present? ? item.making_options.map { |option| option.name.upcase }.join(', ') : "",
+          express_making:        item.making_options.present? ? item.making_options.map { |option| option.making_option.making_option.name.upcase }.join(', ') : "",
           image_url:             item.image_url,
           total_price:           item.price.to_s,
           discount:              item.item.product.discount.to_s
