@@ -3,7 +3,7 @@ class AddCurationImageWorker
 
   def perform(image_url, position, curation_id)
     Dir.mktmpdir do |dir|
-      file_name = URI(image_url).path.gsub('/', '~').gsub(/^~/, '').gsub('~', '_')
+      file_name = URI(image_url).path.gsub('/', '~').gsub(/^~/, '').gsub('~', '_').gsub('.jpeg', '.jpg')
 
       attachment_tmp = open(image_url)
       attachment = File.new(File.join(dir, file_name), 'w+')
