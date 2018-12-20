@@ -132,7 +132,7 @@ module Products
           id: pid,
           product: {
             id:           product.id,
-            name:         product.name,
+            name:         curation.name || product.name,
             pid:          pid,
             sku:          product.sku,
             description:  product.description,

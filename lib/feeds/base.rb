@@ -104,13 +104,13 @@ module Feeds
 
       item = HashWithIndifferentAccess.new(
         # variant:                 variant,
-        path:                    helpers.collection_product_path(product, color: (fabric&.name || color.name)),
+        path:                    helpers.collection_product_path(curation),
         variant_sku:             curation.pid,
         product:                 product,
         product_name:            product.name,
         product_sku:             product.sku,
         availability:            availability,
-        title:                   "#{color_presentation} #{product.name}",
+        title:                   "#{color_presentation} #{curation.name || product.name}",
         description:             helpers.strip_tags(product.description),
         price:                   original_price,
         sale_price:              sale_price,
@@ -144,13 +144,14 @@ module Feeds
       cropped_images = images.select{ |i| i.attachment(:large).to_s.downcase.include?('crop') }
       cropped_images.sort_by!{ |i| i.position }
 
-      front_crop = cropped_images.shift # pull the front image
-
       other_images = (cropped_images + images).uniq # prepend the crop to remainder of images
       other_images = other_images.map{|i| i.attachment(:large).to_s }
 
+      front_crop = other_images.shift # pull the front image
+
+
       {
-        image: front_crop ? front_crop.attachment(:large) : nil,
+        image: front_crop,
         images: other_images
       }
     end
