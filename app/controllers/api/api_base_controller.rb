@@ -2,6 +2,7 @@ module Api
     class ApiBaseController < ActionController::Base
         include Spree::Core::ControllerHelpers::Order
         include Spree::Core::ControllerHelpers::Auth
+        include Spree::AuthenticationHelpers
         include Concerns::SiteVersion
 
         if Features.active?(:force_sitewide_ssl)
