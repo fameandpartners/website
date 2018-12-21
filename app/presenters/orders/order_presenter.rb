@@ -128,7 +128,7 @@ module Orders
           style_name:            item.style_name,
           style_num:             item.style_number,
           sku:                   item.sku,
-          extended_style_number: item.extended_style_number,
+          extended_style_number: item.new_sku,
           line_item_id:          item.id,
           product_number:        item.product_number,
           size:                  item.size,

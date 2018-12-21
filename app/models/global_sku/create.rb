@@ -53,20 +53,11 @@ class GlobalSku
           customisation_id:   customization_value_ids,
           customisation_name: customization_value_names,
           product_id:         product_id,
-          data:               { 'extended-style-number' => extended_style_number }
         )
       else
         #this case seems to be caused by old old skus that don't have height
         GlobalSku.find_by_sku(generate_sku)
       end
-    end
-
-    # Extended Style Number: an easier way for humans to read what's behind customizations
-    # More at `https://fameandpartners.atlassian.net/browse/WEBSITE-1299?focusedCommentId=22330&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-22330`
-    # Example: FP2212-HG-S0-F0-AK
-    def extended_style_number
-      customizations_map = customizations.sort{|x,y| x['customisation_value']['id'] <=>  y['customisation_value']['id']}.map {|x| x['customisation_value']['name']}
-      [style_number].concat(customizations_map).join('-')
     end
 
     def generate_sku
