@@ -172,7 +172,7 @@ module Orders
             line.return_item&.reason_category,
             line.price,
             corrected_currency(line),
-            resolve_refulfill_upc(line),
+            resolve_refulfill_upc(line, lip),
             line.image_url,
             line.production_sheet_url
           ]
@@ -182,11 +182,11 @@ module Orders
 
   private
     # we do this cause upcs are screwed from back in the da day
-    def resolve_refulfill_upc(line)
+    def resolve_refulfill_upc(line, lip)
       if line.return_inventory_item
         return "#{line.return_inventory_item.vendor}: #{line.return_inventory_item.upc}"
       else
-        return line.upc
+        return lip.global_sku&.upc
       end
     end
 
