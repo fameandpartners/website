@@ -22,18 +22,6 @@ module ReturnsProcessesControllerHelper
     :LABEL_FAILED => 100
   }
 
-  def get_user
-    if params['email'].present? && Spree::User.where('lower(email) = ?', params['email'].downcase).present?
-      Spree::User.where('lower(email) = ?', params['email'].downcase).first
-    elsif Spree::Order.where(email: params['email'], number: params['order_number']).present?
-      # i noticed when a user changed his email address,
-      # we had a mismatch between postgres orders.email and users.email
-      Spree::Order.where(email: params['email'], number: params['order_number']).last.user
-    else
-      spree_current_user
-    end
-  end
-
   def has_incorrect_guest_params?
     !(params['email'].present? && params['order_number'].present?)
   end
@@ -43,11 +31,14 @@ module ReturnsProcessesControllerHelper
   end
 
   def has_invalid_order_number?(number)
-    !Spree::Order.exists?(:number=>number)
+    !Spree::Order.completed.exists?(:number=>number)
   end
 
   def has_incorrect_order_number?(number)
-    !@user.orders.where(:number=>number).first
+    order = Spree::Order.completed.find_by_number(number)
+    email = params['email'] || spree_current_user.email
+
+    order.email != email && order.user.email != email
   end
 
   def has_nonexistent_line_items?(arr)

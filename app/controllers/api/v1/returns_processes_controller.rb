@@ -27,7 +27,7 @@ module Api
           return
         end
 
-        fetched_order = Spree::Order.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
+        fetched_order = Spree::Order.completed.where('lower(email) = ? AND number = ?', params['email'].downcase, params['order_number']).first
 
         if fetched_order.present?
           respond_with fetched_order, each_serializer: OrderSerializer
@@ -40,13 +40,6 @@ module Api
 
       # POST
       def create
-        @user = get_user()
-
-        if @user.nil?
-          error_response(:RETRY, :USER_NOT_FOUND)
-          return
-        end
-
         if has_incorrect_params?
           error_response(:NO_ITEMS_SELECTED, :INCORRECT_PARAMS)
           return
