@@ -40,13 +40,13 @@ Spree::Image.class_eval do
     :product => '-sampling-factor 4:2:0 -strip -quality 95 -interlace JPEG -colorspace sRGB',
 
 
-    :webp_xxxlarge => '-define webp:lossless=true -strip',
-    :webp_xxlarge => '-define webp:lossless=true -strip',
-    :webp_xlarge => '-define webp:lossless=true -strip',
-    :webp_large => '-define webp:lossless=true -strip',
-    :webp_medium => '-define webp:lossless=true -strip',
-    :webp_small => '-define webp:lossless=true -strip',
-    :webp_xsmall => '-define webp:lossless=true -strip',
-    :webp_xxsmall => '-define webp:lossless=true -strip',
+    :webp_xxxlarge => '-define webp:lossless=false -quality 85 -strip',
+    :webp_xxlarge => '-define webp:lossless=false -quality 85 -strip',
+    :webp_xlarge => '-define webp:lossless=false -quality 85 -strip',
+    :webp_large => '-define webp:lossless=false -quality 85 -strip',
+    :webp_medium => '-define webp:lossless=false -quality 90 -strip',
+    :webp_small => '-define webp:lossless=false -quality 90 -strip',
+    :webp_xsmall => '-define webp:lossless=false -quality 90 -strip',
+    :webp_xxsmall => '-define webp:lossless=false -quality 90 -strip',
   }
 end

@@ -3,13 +3,13 @@ require 'ruby-progressbar'
 namespace "images" do
   desc "create required data changes for new design"
   task :reprocess => :environment  do
-    images = Spree::Product.not_deleted.flat_map(&:images)
+    images = Spree::Product.active.flat_map(&:images)
 
     progressbar = ProgressBar.create(:total => images.count)
 
     images.each do |image|
-      image.attachment.reprocess!
-
+      ReprocessImageWorker.perform_async(image.id)
+      
       # progressbar.format = format_bar('Image')
       progressbar.increment
     end
