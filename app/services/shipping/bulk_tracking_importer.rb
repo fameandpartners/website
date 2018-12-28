@@ -43,7 +43,7 @@ module Shipping
 
     def mapped_headers(csv)
       header_detectors.each_with_object({}) do |(name, detector), mapping|
-        next unless header = csv.headers.detect { |h| h[detector] }
+        next unless header = csv.headers.detect { |h| detector.match(h) }
         mapping[name] = header
       end
     end
