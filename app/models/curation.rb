@@ -39,7 +39,9 @@ class Curation < ActiveRecord::Base
   end
 
   def customizations
-    JSON.parse(product.customizations).select { |c| pid.include?(c['customisation_value']['name']) }
+    pid_components = pid.split('~')
+
+    JSON.parse(product.customizations).select { |c| pid_components.include?(c['customisation_value']['name']) }
   end
 
   def cropped_images
