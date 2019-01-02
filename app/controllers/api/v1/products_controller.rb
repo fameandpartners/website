@@ -263,11 +263,13 @@ module Api
               name: "Style",
               multiselect: true,
               facets: Spree::Taxon.filterable.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
+                code = taxon.permalink.split("/").last
+
                 {
-                  "facetId": taxon.permalink,
+                  "facetId": code,
                   "title": taxon.name,
                   "order": i,
-                  "docCount": aggregation_taxons[taxon.permalink.split("/").last]  || 0,
+                  "docCount": aggregation_taxons[code]  || 0,
                 }
               end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             },
