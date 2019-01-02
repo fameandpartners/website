@@ -1,5 +1,5 @@
 class FabricsProduct < ActiveRecord::Base
-  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description, :price_aud, :price_usd
+  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description, :price_aud, :price_usd, :active
 
   belongs_to :product, class_name: 'Spree::Product'
 

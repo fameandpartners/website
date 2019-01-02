@@ -31,10 +31,4 @@ class Fabric < ActiveRecord::Base
   def color_groups
     @color_groups = self.option_value.option_values_groups.pluck(:presentation)
   end
-
-  def as_json(options={})
-    result_json = super options
-    result_json[:color_groups] = self.color_groups
-    result_json
-  end
 end

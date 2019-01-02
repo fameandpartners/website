@@ -674,7 +674,7 @@ module Api
           isProductCode: true,
           isRecommended: f.recommended,
           type: :Fabric,
-          sortOrder: f.fabric.option_fabric_color_value.position, #TODO
+          sortOrder: f.fabric.option_value.position, #TODO
           meta: {
             # hex: c.option_value.value,
 

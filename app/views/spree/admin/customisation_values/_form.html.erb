@@ -23,16 +23,6 @@
     <%= f.error_message_on :position %>
   <% end %>
 
-  <%= f.field_container :incompatibles do %>
-    <% f.object.product.customisation_values.where("id != ?", f.object.id).each do |customisation| %>
-      <% label = "form-incompatibility-#{ customisation.id}" %>
-      <%= check_box_tag 'customisation_value[incompatible_ids][]', customisation.id, !f.object.is_compatible_with?(customisation), id: label %>
-      <%= label_tag label, customisation.presentation %>
-      <br />
-    <% end %>
-    <%= f.error_message_on :incompatibles %>
-  <% end %>
-
   <%= f.field_container :image do %>
     <%= f.label :image, t(:image) %>
     <%= f.error_message_on :image %>

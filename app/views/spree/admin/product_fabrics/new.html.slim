@@ -1,0 +1,16 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @fabric }
+
+= form_for [:admin, @fabric_product], url: admin_product_fabrics_url(@product), :html => { :multipart => false } do |f|
+
+  fieldset data-hook="new_product_fabric"
+    legend align="center"
+      = t(:new_product_fabric)
+
+    = render :partial => 'form', :locals => { :f => f }
+
+    div.form-buttons.filter-actions.actions data-hook="buttons"
+      = button t('actions.create'), 'icon-ok'
+      span.or = t(:or)
+      = link_to_with_icon 'icon-remove', t('actions.cancel'), admin_product_fabrics_path, :class => 'button'
