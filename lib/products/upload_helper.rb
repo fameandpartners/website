@@ -54,6 +54,7 @@ module Products
         curation = product.curations.find {|x| x.pid == c[:pid] } || Curation.new(product_id: product.id, pid: c[:pid])
         curation.active = true
         curation.name = c[:name]
+        curation.description = c[:description]
         curation.taxons = Spree::Taxon.where(permalink: c[:taxons])
         curation.save!
 

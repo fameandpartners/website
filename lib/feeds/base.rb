@@ -111,7 +111,7 @@ module Feeds
         product_sku:             product.sku,
         availability:            availability,
         title:                   "#{color_presentation} #{curation.name || product.name}",
-        description:             helpers.strip_tags(product.description),
+        description:             helpers.strip_tags(curation.description || product.description),
         price:                   original_price,
         sale_price:              sale_price,
         google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',
