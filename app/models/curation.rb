@@ -14,6 +14,38 @@ class Curation < ActiveRecord::Base
   validates :pid,
             :presence => true
 
+  def discount_price_in(currency)
+    product_price = product.discount_price_in(currency)
+
+    fabric_price = 0
+
+    if fabric_product
+      fabric_price = fabric_product.discount_price_in(currency)
+    elsif product_color_value
+      fabric_price = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+    end
+
+    customizations_price = customizations.map{ |c| c.discount_price_in(currency) }.sum
+
+    product_price.amount.to_f + fabric_price + customizations_price
+  end
+
+  def price_in(currency)
+    product_price = product.price_in(currency)
+
+    fabric_price = 0
+
+    if fabric_product
+      fabric_price = fabric_product.price_in(currency)
+    elsif product_color_value
+      fabric_price = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
+    end
+
+    customizations_price = customizations.map{ |c| c.price_in(currency) }.sum
+
+    product_price.amount.to_f+ fabric_price + customizations_price
+  end
+
 
   def fabric_product
     pid_components = pid.split('~')
@@ -31,7 +63,9 @@ class Curation < ActiveRecord::Base
   end
 
   def product_color_value
-    product.product_color_values.find { |pcv| pid.include?(pcv.option_value.name) }
+    pid_components = pid.split('~')
+
+    product.product_color_values.find { |pcv| pid_components.include?(pcv.option_value.name) }
   end
 
   def color
@@ -41,7 +75,7 @@ class Curation < ActiveRecord::Base
   def customizations
     pid_components = pid.split('~')
 
-    JSON.parse(product.customizations).select { |c| pid_components.include?(c['customisation_value']['name']) }
+    product.customisation_values.select { |c| pid_components.include?(c.name) }
   end
 
   def cropped_images

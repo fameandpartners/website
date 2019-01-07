@@ -91,15 +91,12 @@ module Feeds
 
       color_presentation = color.presentation
       size_presentation  = current_site_version.name == "USA" ? 'US 0-20' : 'AU 4-26'
-      price              = product.site_price_for(current_site_version)
 
-      # are we ever on sale?
-      original_price = price.display_price.to_html(symbol: false) #.display_price_without_discount
+      original_price = curation.price_in(current_site_version.currency)
 
       sale_price = nil
       if product.discount
-        sale_price = price.apply(product.discount)
-        sale_price = sale_price.display_price.to_html(symbol: false)
+        sale_price = curation.discount_price_in(current_site_version.currency)
       end
 
       item = HashWithIndifferentAccess.new(

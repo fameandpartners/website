@@ -201,6 +201,10 @@ Spree::Product.class_eval do
     @discount ||= discounts.active.first
   end
 
+  def discount_price_in(currency)
+   price_in(currency).apply(discount)
+  end
+
   def has_render?
     self.class.has_render?(self)
   end

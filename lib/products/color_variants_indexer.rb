@@ -85,25 +85,8 @@ module Products
       return nil if product_fabric_value && !product_fabric_value.active
       return nil if product_color_value && !product_color_value.active
 
- 
-
       discount = product.discount&.amount.to_i
-      product_price_in_us = product.price_in(@us_site_version.currency)
-      product_price_in_au = product.price_in(@au_site_version.currency)
-
-      fabric_price_in_us = 0
-      fabric_price_in_au = 0
-
-      if product_fabric_value
-        fabric_price_in_us = product_fabric_value.price_in(@us_site_version.currency)
-        fabric_price_in_au = product_fabric_value.price_in(@au_site_version.currency)
-      elsif product_color_value
-        fabric_price_in_us = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
-        fabric_price_in_au = product_color_value&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
-      end
-
-      customizations_price_in_us = customizations.map{ |c| c['customisation_value']['price'].to_f }.sum
-      customizations_price_in_au = customizations.map{ |c| c['customisation_value']['price_aud'].to_f }.sum
+    
 
       taxons = [
         curation.taxons || [],
@@ -204,12 +187,12 @@ module Products
           end,
 
           non_sale_prices: discount > 0 ? {
-            aud:  product_price_in_au.amount.to_f + fabric_price_in_au + customizations_price_in_au,
-            usd:  product_price_in_us.amount.to_f + fabric_price_in_us + customizations_price_in_us
+            aud:  curation.price_in(@au_site_version.currency).to_f,
+            usd:  curation.price_in(@us_site_version.currency).to_f
           } : nil,
           prices:  {
-            aud:  (discount > 0 ? product_price_in_au.apply(product.discount).amount.to_f.round(2) : product_price_in_au.amount.to_f) + fabric_price_in_au + customizations_price_in_au,
-            usd:  (discount > 0 ? product_price_in_us.apply(product.discount).amount.to_f.round(2) : product_price_in_us.amount.to_f) + fabric_price_in_us + customizations_price_in_us
+            aud:  curation.discount_price_in(@au_site_version.currency).to_f,
+            usd:  curation.discount_price_in(@us_site_version.currency).to_f
           }
         }
       }

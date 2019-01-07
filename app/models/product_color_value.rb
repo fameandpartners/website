@@ -1,5 +1,5 @@
 class ProductColorValue < ActiveRecord::Base
-  attr_accessible :option_value, :product_id, :option_value_id, :active, :custom
+  attr_accessible :option_value, :product, :product_id, :option_value_id, :active, :custom
 
   belongs_to :product, class_name: 'Spree::Product', inverse_of: :product_color_values
 

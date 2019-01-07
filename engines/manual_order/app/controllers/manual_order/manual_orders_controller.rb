@@ -42,12 +42,12 @@ module ManualOrder
     end
 
     def fabric_options
-      render json: manual_order_filter.fabric_options | manual_order_filter.custom_fabrics(params[:currency])
+      render json: manual_order_filter.fabric_options
     end
 
     def colors_options
       if  manual_order_filter.fabric_options.empty?
-        render json: manual_order_filter.color_options | manual_order_filter.custom_colors
+        render json: manual_order_filter.color_options
       else
         render json: []
       end

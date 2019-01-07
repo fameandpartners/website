@@ -40,7 +40,7 @@
           td 
             - if customisation_value.image.present?
               = image_tag customisation_value.image.url(:small)
-          td = customisation_value.display_price
+          td = customisation_value.price
           td
             = link_to 'Edit', edit_admin_product_customisation_value_url(@product, customisation_value)
             br

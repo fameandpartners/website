@@ -41,4 +41,13 @@ class FabricsProduct < ActiveRecord::Base
       return self.price_usd.to_f
     end
   end
+
+
+  def discount
+    product.discount
+  end
+
+  def discount_price_in(currency)
+    Spree::Price.new(amount: price_in(currency)).apply(discount).price
+  end
 end

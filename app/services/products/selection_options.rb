@@ -16,31 +16,10 @@ module Products
       @product.layer_cads&.sort!{|layer| layer.position}.reverse!
       os =
         OpenStruct.new({
-          sizes: OpenStruct.new({
-            default: default_product_sizes,
-            extra: extra_product_sizes,
-            default_extra_price: Spree::Price.new(
-              amount: LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE,
-              currency: site_version.currency
-            )
-          }),
-
-          colors: OpenStruct.new({
-            default: default_product_colors,
-            extra: extra_product_colors,
-            default_extra_price: Spree::Price.new(
-              amount: LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE,
-              currency: site_version.currency
-            )
-          }),
-          fabrics: OpenStruct.new({
-            default: default_product_fabrics,
-            extra: extra_product_fabrics,
-          }),
-          customizations: OpenStruct.new({
-            all: available_product_customisations,
-          }),
-
+          sizes: product_sizes,
+          colors: product_colors,
+          fabrics: product_fabrics,
+          customizations: available_product_customisations,
           making_options: product_making_options
         })
 
@@ -62,72 +41,29 @@ module Products
       end
       alias_method :extra_sizes_available?, :customisations_available?
 
-      def extra_colors_available?
-        customisations_available? && product.color_customization
-      end
-
       # sizes part
       def product_sizes
         @product_sizes ||= product.option_types.find_by_name('dress-size')&.option_values || []
       end
 
-      def default_product_sizes
-        product_sizes
+      def product_colors
+        product.product_color_values.active.map(&:option_value).compact.sort_by(&:presentation)
       end
 
-      def extra_product_sizes
-        []
-      end
-
-      def default_product_colors
-        @default_product_colors ||= product.basic_colors.sort_by(&:presentation)
-      end
-
-      def extra_product_colors
-        if extra_colors_available?
-          @extra_product_colors ||= defined_custom_colors
-        else
-          []
-        end
-      end
-
-      def default_product_fabrics
-        @default_product_fabrics ||= product.basic_fabrics_with_description
-      end
-
-      def extra_product_fabrics
-        @extra_product_fabrics ||= product.custom_fabrics_with_description.reject { |x|
-          x[:fabric][:name]=="forest-green-heavy-georgette" ||
-            x[:fabric][:name]=="bright-mint-corded-lace"
-        }
-      end
-
-      private def defined_custom_colors
-        product.product_color_values.active.custom.map(&:option_value).compact.sort_by(&:presentation)
+      def product_fabrics
+        product.fabrics.compact.sort_by(&:presentation)
       end
 
       # customizations
-      def product_customisation_values
-        if product&.category&.category == "Sample"
-          []
-        elsif customisations_available?
-          @product_customisation_values ||= JSON.parse(product.customizations)
-        else
-          []
-        end
-      end
-
       def available_product_customisations
-        product_customisation_values.map do |value|
-          value = value['customisation_value']
-          price = site_version.currency == 'AUD' && value['price_aud']  ? value['price_aud'] : value['price']
+        product.customisation_values.map do |value|
+          price = value.price_in(site_version.currency)
           OpenStruct.new({
-            id: value['id'],
-            name: value['presentation'],
-            image: value['image_file_name'].present? ? get_customisation_value(value['id'])&.image&.url : 'logo_empty.png',
+            id: value.id,
+            name: value.presentation,
+            image: value.image_file_name.present? ? value.image&.url : 'logo_empty.png',
             display_price: Spree::Money.new(price, currency: site_version.currency, no_cents: true),
-            position: value['position'],
-            group: value['group']
+            position: value.position,
           })
         end
       end
@@ -146,10 +82,6 @@ module Products
           end
         end
         result.compact
-      end
-
-      def get_customisation_value(customisation_value_id)
-        cv = CustomisationValue.find(customisation_value_id)
       end
 
       # making options

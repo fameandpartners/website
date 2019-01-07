@@ -635,7 +635,6 @@ module Products
                  :revenue,
                  :cogs,
                  :video_id,
-                 :color_customization,
                  :standard_days_for_making,
                  :customised_days_for_making,
                  :short_description]

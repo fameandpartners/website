@@ -111,6 +111,7 @@ namespace :migrate do
           fabric_product.product = product
           fabric_product.active = pcv.active
           fabric_product.recommended = !pcv.custom
+          fabric_product.description = product.property('fabric')
           fabric_product.price_aud = pcv.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
           fabric_product.price_usd = pcv.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
           fabric_product.save!

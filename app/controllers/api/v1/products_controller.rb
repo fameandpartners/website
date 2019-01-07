@@ -50,27 +50,29 @@ module Api
 
           next unless spree_product
 
-          all_customizations = JSON.parse!(spree_product.customizations)
+          all_customizations = spree_product.customisation_values
 
           pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
           fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
-          customizations = all_customizations.select { |c|  components.include?(c["customisation_value"]["name"]) }.map {|c| ["customisation_value"]["name"]}
+          customizations = all_customizations.select { |c|  components.include?(c.name) }
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
-            (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
+            (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0) +
+            customizations.sum { |c| c.price_in(current_site_version.currency) }
 
           if spree_product.discount
-              sale_price = spree_product.price_in(current_site_version.currency).apply(spree_product.discount).amount +
-              (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
-              (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0)
+              sale_price = spree_product.discount_price_in(current_site_version.currency).amount +
+              (fabric_product ? fabric_product.discount_price_in(current_site_version.currency) : 0) +
+              (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0) +
+              customizations.sum { |c| c.discount_price_in(current_site_version.currency) }
           end
 
           {
             pid: pid,
             name: spree_product.name,
             url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.option_value.name),
-            media: product.images_for_customisation(pcv.option_value.name, fabric_product.fabric.name, customizations, true)
+            media: spree_product.images_for_customisation(pcv&.option_value&.name, fabric_product.fabric.name, customizations.map {|c| c.name }, true)
               .sort_by(&:position)
               .take(2)
               .collect do |image|
@@ -377,7 +379,7 @@ module Api
           .active
 
         sizes = product.option_types.find_by_name('dress-size').option_values
-        customizations = JSON.parse!(product.customizations)
+        customizations = product.customisation_values
 
         product_fabric = product.property('fabric')
         product_fit = product.property('fit')
@@ -401,7 +403,7 @@ module Api
             permaLink: product.name.parameterize
           },
           isAvailable: product.is_active?,
-          price: (product.price_in(current_site_version.currency).apply(product.discount).amount * 100).to_i,
+          price: (product.discount_price_in(current_site_version.currency).amount * 100).to_i,
           strikeThroughPrice: product.discount ? (product.price_in(current_site_version.currency).amount * 100).to_i : nil,
           prices: {
             'en-AU' => (product.price_in('AUD').amount * 100).to_i,
@@ -510,7 +512,7 @@ module Api
                       componentTypeId: :Customization,
                       componentTypeCategory: :Customization,
                       title: "Select your customizations",
-                      options: customizations.map {|f| { code: f['customisation_value']['name'], isDefault: false, parentOptionId: nil } },
+                      options: customizations.map {|f| { code: f.name, isDefault: false, parentOptionId: nil } },
                       selectionType: customizations.length === 3 ? :OptionalOne : :OptionalMultiple,
                     }
                   ]
@@ -557,12 +559,12 @@ module Api
 
       def map_cad_from_customization(c)
         {
-          url: customization_image(c['customisation_value']),
+          url: customization_image(c),
           width: -1,
           height: -1,
-          sortOrder: c['customisation_value']['position'],
+          sortOrder: c.position,
           type: :layer,
-          components: [c['customisation_value']['name']]
+          components: [c.name]
         }
       end
 
@@ -574,7 +576,7 @@ module Api
           sortOrder: lc.position,
           type: lc.base_image_name ? :base : :layer,
           components: lc.customizations_enabled_for.map.with_index {|active, index|
-            active ? customizations[index]['customisation_value']['name'] : nil
+            active ? customizations[index].name : nil
           }.compact
         }
       end
@@ -609,25 +611,25 @@ module Api
 
       def map_customization(product, c)
         {
-          cartId: c['customisation_value']['id'],
-          code: c['customisation_value']['name'],
+          cartId: c.id,
+          code: c.name,
           isDefault: false,
-          title: c['customisation_value']['presentation'],
+          title: c.presentation,
           componentTypeId: :LegacyCustomization,
           componentTypeCategory: :LegacyCustomization,
-          price: (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
-          strikeThroughPrice: product.discount ? (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i : nil,
+          price: (c.discount_price_in(current_site_version.currency) * 100).to_i,
+          strikeThroughPrice: product.discount ? (c.price_in(current_site_version.currency) * 100).to_i : nil,
           prices: {
-            'en-AU' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i,
-            'en-US' => (BigDecimal.new(c['customisation_value']['price'] || 0) * 100).to_i
+            'en-AU' => (BigDecimal.new(c.price || 0) * 100).to_i,
+            'en-US' => (BigDecimal.new(c.price || 0) * 100).to_i
           },
           isProductCode: true,
           isRecommended: false,
           type: :LegacyCustomization,
-          sortOrder: c['customisation_value']['position'],
+          sortOrder: c.position,
           meta: {
             image: {
-              url: customization_image(c['customisation_value']),
+              url: customization_image(c),
               width: -1,
               height: -1
             }
@@ -665,7 +667,7 @@ module Api
           title: f.fabric.presentation,
           componentTypeId: :ColorAndFabric,
           componentTypeCategory: :ColorAndFabric,
-          price: (f.price_in(current_site_version.currency) * 100).to_i,
+          price: (f.discount_price_in(current_site_version.currency) * 100).to_i,
           strikeThroughPrice: product.discount ? (f.price_in(current_site_version.currency) * 100).to_i : nil,
           prices: {
             'en-AU' => (f.price_in('AUD') * 100).to_i,
@@ -753,9 +755,9 @@ module Api
       end
 
       def customization_image(customization)
-        return nil unless customization['image_file_name']
+        return nil unless customization.image_file_name
 
-        "#{configatron.asset_host}/system/images/#{customization['id']}/original/#{customization['image_file_name']}"
+        "#{configatron.asset_host}/system/images/#{customization.id}/original/#{customization.image_file_name}"
       end
 
       def fixup_fit(fit)

@@ -204,24 +204,17 @@ module Products
     end
 
     def add_product_customizations(product, custs, lengths)
-      customizations = []
-
-      custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each do |customization|
-        new_customization = {
-                              id: customization[:code].downcase, 
-                              name: customization[:code], 
-                              price: customization[:price_usd],
-                              price_aud: customization[:price_aud],#TODO: add this to the json being sent
-                              presentation: customization[:presentation],
-                              manifacturing_sort_order: customization[:manifacturing_sort_order]
-                            }
-        customizations << { customisation_value: new_customization }
+      custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each_with_index do |customization, index|
+        
+        new_customization = product.customisation_values.find_or_create_by_name(customization[:code])
+        new_customization.price = customization[:price_usd].presence || 0
+        new_customization.price_aud = customization[:price_aud].presence || 0
+        new_customization.presentation = customization[:presentation]
+        new_customization.manifacturing_sort_order = customization[:manifacturing_sort_order]
+        new_customization.position = index
+        
+        new_customization.save!
       end
-      #product.lengths = { available_lengths: lengths }.to_json # Dont think I need this anymore
-      product.customizations = customizations.to_json
-      product.save
-
-      product.customizations
     end
 
     def add_product_height_ranges( product )
@@ -233,7 +226,7 @@ module Products
 
       product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }
 
-      master_variant.save
+      master_variant.save!
     end
   end
 end

@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :customisation_value, class: CustomisationValue do
     price { 10 + rand(100) / 10.0 } # rails will convert to big decimal
+    price_aud { 10 + rand(100) / 10.0 } # rails will convert to big decimal
+
 
     sequence(:name) { |n| "make-skirt-ankle-length-#{n}" }
     sequence(:presentation) { |n| "Make Skirt Ankle Length #{n}" }

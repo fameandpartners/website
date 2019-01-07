@@ -37,6 +37,12 @@ class CustomisationValue < ActiveRecord::Base
             numericality: {
               greater_than_or_equal_to: 0
             }
+
+  validates :price_aud,
+            presence: true,
+            numericality: {
+              greater_than_or_equal_to: 0
+            }
   validates :position,
             presence: true,
             numericality: {
@@ -60,28 +66,23 @@ class CustomisationValue < ActiveRecord::Base
 
   def set_default_position
     return true if self.position.present? || product.blank? 
-    if product.present?
-      self.position = JSON.parse(product.customizations).maximum(:position).to_i + 1 #TODO: Test this out as well think the logic is off
-    end
+
+    self.position = product.customisation_values.maximum(:position) + 10
   end
 
-  def price
-    read_attribute('price')
-  end
-
-  def display_price
-    if discount.blank? || discount.amount.to_i == 0
-      Spree::Money.new(price)
+  def price_in(currency)
+    if currency.downcase == 'aud'
+      return self.price_aud || self.price
     else
-      Spree::Price.new(amount: self.price).apply(self.discount).display_price
+      return self.price
     end
   end
 
-  def is_compatible_with?(customisation_value)
-    !incompatible_ids.include?(customisation_value.id)
+  def discount_price_in(currency)
+    Spree::Price.new(amount: price_in(currency)).apply(discount).price
   end
 
   def discount
-    @discount ||= discounts.active.first
+    @discount ||= product.discount #discounts.active.first
   end
 end
