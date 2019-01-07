@@ -13,9 +13,9 @@ class GlobalSku
                 :height,
                 :customizations
 
-    validates_inclusion_of :height, in: LineItemPersonalization::HEIGHTS
-    validates_inclusion_of :color_name, in: lambda { |creator| Spree::OptionValue.colors.pluck(:name) }
-    validates_inclusion_of :size, in: lambda { |creator| Spree::OptionValue.sizes.pluck(:name) }
+    validates_inclusion_of :height, in: LineItemPersonalization::HEIGHTS, allow_blank: true
+    validates_inclusion_of :color_name, in: lambda { |creator| Spree::OptionValue.colors.pluck(:name) }, allow_blank: true
+    validates_inclusion_of :size, in: lambda { |creator| Spree::OptionValue.sizes.pluck(:name) }, allow_blank: true
     validate :global_sku_uniqueness
 
     # @param [String] style_number. Example: "USP1016"
