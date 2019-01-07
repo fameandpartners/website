@@ -67,7 +67,7 @@ class CustomisationValue < ActiveRecord::Base
   def set_default_position
     return true if self.position.present? || product.blank? 
 
-    self.position = product.customisation_values.maximum(:position) + 10
+    self.position = (product.customisation_values.maximum(:position) || 0) + 10
   end
 
   def price_in(currency)
