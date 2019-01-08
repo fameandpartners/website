@@ -19,10 +19,7 @@
               | Fabric and Color:
               <span class="value"> #{line_item.fabric.presentation}</span>
             -else 
-              - if line_item.personalization.try(:basic_color?)
-                | Color:
-              - else
-                | Customized color:
+              | Color:
               <span class="value"> #{line_item.colour_name}</span>
           - if line_item.customization_text.present?
             li
