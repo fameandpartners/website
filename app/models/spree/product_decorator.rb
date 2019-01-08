@@ -228,7 +228,7 @@ Spree::Product.class_eval do
 
     components = [
       should_split ? fabric.split('-') : fabric,
-      customizations.map{|c| c['customisation_value']['name']}
+      customizations.map{|c| c.respond_to?(:name) ? c.name : c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
   end
 
