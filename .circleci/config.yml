@@ -108,13 +108,14 @@ jobs:
 
           if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
-            aws elasticbeanstalk update-environment --environment-name "Spree-QA-Sidekiq" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA1-Sidekiq" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA3" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-QA4" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA4-Sidekiq" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
             aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
           elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then

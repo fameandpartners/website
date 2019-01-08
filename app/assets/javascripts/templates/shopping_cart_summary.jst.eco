@@ -162,7 +162,7 @@ $('.js-trigger-empty-cart-modal').modal({
         <% end %>
       </p>
       <p>
-        <a class="link-underline-lighter" href="/faqs">Free returns</a> for USA and Australia
+        <a class="link-underline-lighter" href="/faqs/returns" target="_blank">Easy Returns. Find out more</a>
       </p>
     </div>
   </div>
