@@ -111,9 +111,6 @@ else
       # $? is 0
       info "DB Already exists, running migration"
       bundle exec rake db:migrate
-
-      info "Creating sandbox gateways"
-      nohup bundle exec rake data:create_sandbox_gateways &
     else
       # ruh-roh
       # $? is 1
@@ -123,12 +120,18 @@ else
       #  Clear cache
       info "Running cache:clear in background daemon"
       nohup bundle exec rake cache:clear &
+
+       if  [ "$RAILS_ENV" != "production" ]; then
+        info "Creating sandbox gateways in background daemon"
+        nohup bundle exec rake data:create_sandbox_gateways &
+      fi
     fi
 
     if [ -n "${ASSET_SYNC_ENABLE}" ]; then
       info "Running assets:sync in background daemon"
       nohup bundle exec rake assets:sync &
     fi
+
   fi
 
   info "Running web"
