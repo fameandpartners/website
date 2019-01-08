@@ -111,6 +111,9 @@ else
       # $? is 0
       info "DB Already exists, running migration"
       bundle exec rake db:migrate
+
+      info "Creating sandbox gateways"
+      nohup bundle exec rake data:create_sandbox_gateways &
     else
       # ruh-roh
       # $? is 1
