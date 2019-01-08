@@ -44,10 +44,13 @@
         var $el = $(el);
         var productID = $('#products_style_name', $el).val();
         var colorID = $('#products_color', $el).val();
+        var fabricID = $('#products_fabric', $el).val();
+
 
         return {
           color_id: colorID,
-          product_id: productID
+          product_id: productID,
+          fabric_id: fabricID
         };
       });
 

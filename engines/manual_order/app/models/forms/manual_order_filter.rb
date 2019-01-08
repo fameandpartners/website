@@ -53,12 +53,14 @@ module Forms
     end
 
     def images
-      raise 'TODO ANDREAS'
       params.fetch(:product_colors, []).map do |_, param|
         p = Spree::Product.find(param.fetch(:product_id))
-        image = Repositories::ProductImages.new(product: p).filter(color_id: param.fetch(:color_id).to_i).first
+        fabric = Fabric.find(param.fetch(:fabric_id)) if param.fetch(:fabric_id).present?
+        color = Spree::OptionValue.find(param.fetch(:color_id)) if param.fetch(:color_id).present?
 
-        { url: image.present? ? image[:large] : 'null' }
+        image = p.images_for_customisation(color&.name, fabric&.name, [], true)[0]
+
+        { url: image&.attachment&.url(:large) }
       end
     end
 
