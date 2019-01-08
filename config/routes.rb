@@ -373,7 +373,7 @@ FameAndPartners::Application.routes.draw do
       resources :site_versions, only: [:index, :edit, :update]
 
       scope 'products/:product_id', :as => 'product' do
-        resource :colors, only: [:new, :create], controller: 'product_colors'
+        resources :fabrics, except: [:destroy], controller: 'product_fabrics'
       end
 
       resource :product_uploads, only: [:new, :create, :show] do

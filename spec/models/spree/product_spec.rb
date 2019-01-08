@@ -70,37 +70,6 @@ describe Spree::Product, :type => :model do
     end
   end
 
-  describe '#color_customization' do
-    yes_values = %w(Y y yes true TRUE T t 1)
-    no_values  = %w(N NO no n whatever anything)
-
-    let(:product) do
-      FactoryGirl.build(:dress).tap { |product|
-        allow(product).to receive(:property).with('color_customization').and_return(a_value)
-      }
-    end
-
-    subject(:color_customization) { product.color_customization }
-
-    describe 'allows color_customization' do
-      yes_values.map do |a_value|
-        context "when: #{a_value}" do
-          let(:a_value) { a_value }
-          it { is_expected.to be_truthy }
-        end
-      end
-    end
-
-    describe 'does not allow color_customization' do
-      no_values.map do |a_value|
-        context "when: #{a_value}" do
-          let(:a_value) { a_value }
-          it { is_expected.to be_falsey }
-        end
-      end
-    end
-  end
-
   describe 'set_default_values' do
     it 'sets latest size_chart' do
       subject.send(:set_default_values)

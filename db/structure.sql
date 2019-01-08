@@ -513,7 +513,8 @@ CREATE TABLE public.curations (
     product_id integer,
     active boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    description text
 );
 
 
@@ -637,7 +638,9 @@ CREATE TABLE public.customisation_values (
     price numeric(8,2),
     product_id integer,
     customisation_type character varying(255) DEFAULT 'cut'::character varying,
-    point_of_view character varying(255) DEFAULT 'front'::character varying
+    point_of_view character varying(255) DEFAULT 'front'::character varying,
+    manifacturing_sort_order integer,
+    price_aud numeric(8,2)
 );
 
 
@@ -2290,6 +2293,7 @@ CREATE TABLE public.newgistics_schedulers (
 --
 
 CREATE SEQUENCE public.newgistics_schedulers_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2357,6 +2361,7 @@ CREATE TABLE public.old_variant_taxons (
 --
 
 CREATE SEQUENCE public.old_variant_taxons_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3714,7 +3719,8 @@ CREATE TABLE public.spree_line_items (
     fabric_id integer,
     return_inventory_item_id integer,
     refulfill_status character varying(255),
-    curation_name text
+    curation_name text,
+    fabric_price numeric(8,2)
 );
 
 
@@ -4329,7 +4335,7 @@ CREATE TABLE public.spree_products (
     size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
     fabric_card_id integer,
     category_id integer,
-    customizations jsonb,
+    old_customizations jsonb,
     lengths jsonb
 );
 
@@ -10479,3 +10485,11 @@ INSERT INTO schema_migrations (version) VALUES ('20181126001414');
 INSERT INTO schema_migrations (version) VALUES ('20181203000011');
 
 INSERT INTO schema_migrations (version) VALUES ('20181217045923');
+
+INSERT INTO schema_migrations (version) VALUES ('20190102234645');
+
+INSERT INTO schema_migrations (version) VALUES ('20190103034800');
+
+INSERT INTO schema_migrations (version) VALUES ('20190104013853');
+
+INSERT INTO schema_migrations (version) VALUES ('20190104030656');

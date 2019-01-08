@@ -3,16 +3,6 @@
 = menu_item admin_ui.item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
 = menu_item manual_order.manual_orders_path, 'Manual Orders', icon: 'thumbs-up'
 
-li class=active_link_to_class(admin_ui.root_path, active: /customisation/)
-  a href="#"
-    i.fa.fa-cog
-    span.nav-label Customise Product
-    span.fa.arrow
-  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Variants', admin_ui.customisation_variants_path, wrap_tag: :li
-    = active_link_to 'Color Variants', admin_ui.customisation_product_colors_path, wrap_tag: :li
-    = active_link_to 'Customisation values', admin_ui.customisation_customisation_values_path, wrap_tag: :li
-
 li class=active_link_to_class(admin_ui.root_path, active: /backend/)
   a href="#"
     i.fa.fa-database

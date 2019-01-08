@@ -7,9 +7,9 @@ module Marketing
         let(:taxon) { create(:taxon, name: 'Jeans') }
         let(:product) { build(:dress, id: 123, name: 'Super Dress', sku: 'ProductSKU', taxons: [taxon], description: 'Super Product Description') }
         let(:fabric) { double(:fabric, name: 'FABRICNAME', id: 1) }
-        let(:fabric_product) { double(:fabric_product, fabric: fabric, price_in: 5) }
+        let(:fabric_product) { double(:fabric_product, fabric: fabric) }
         let(:variant) { create(:dress_variant, product: product) }
-        let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11, id: 1) }
+        let(:line_item) { build(:dress_item, variant: variant, quantity: 3, price: 11.11, fabric_price: 5, id: 1) }
 
         subject(:presenter) { described_class.new(spree_line_item: line_item) }
 

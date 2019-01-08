@@ -1,0 +1,25 @@
+- content_for :page_title do
+  = t(:edit_product_fabric)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#product_fabrics_link
+        = link_to 'Back to Making Options', admin_product_fabrics_path(@product), class: 'icon-arrow-left button'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/admin/shared/product_tabs', current: 'Making Options'
+
+= render partial: 'spree/shared/error_messages', locals: { target: @fabric_product }
+
+= form_for @fabric_product, url: admin_product_fabric_path(@product, @fabric_product) do |f|
+  fieldset.no-border-top
+    = render :partial => 'form', :locals => { :f => f }
+
+    .clear
+
+    .form-buttons.filter-actions.actions
+      = button t(:update), 'icon-refresh'
+      span.or =<> t(:or)
+      = button_link_to t(:cancel), admin_product_fabrics_path(@product), icon: 'icon-remove'

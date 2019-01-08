@@ -83,21 +83,6 @@ AdminUi::Engine.routes.draw do
 
   resources :fabrics
 
-  namespace :customisation do
-    resources :customisation_values do
-      collection do
-        get 'option_values/:product_id' => 'customisation_values#option_values'
-      end
-    end
-    resources :variants
-
-    resources :product_colors do
-      collection do
-        get 'colors_options/:product_id' => 'product_colors#colors_options_json'
-      end
-    end
-  end
-
   root to: 'dashboard#index'
 
   mount ManualOrder::Engine, at: '/'

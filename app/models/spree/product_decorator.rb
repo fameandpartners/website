@@ -137,91 +137,12 @@ Spree::Product.class_eval do
     images
   end
 
-  def basic_color_ids
-    product_color_values
-      .active
-      .recommended
-      .pluck(:option_value_id)
-  end
-
-  def basic_fabric_ids
-    fabric_products
-      .active
-      .recommended
-      .pluck(:fabric_id)
-  end
-
-  def custom_fabric_ids
-    fabric_products
-      .active
-      .custom
-      .pluck(:fabric_id)
-  end
-
-  alias_method :color_ids, :basic_color_ids
-
-  def basic_colors
-    Spree::OptionValue.where(id: basic_color_ids)
-  end
-
-  def basic_fabrics
-    Fabric.where(id: basic_fabric_ids)
-  end
-
-  def basic_fabrics_with_description
-    fabrics_arry = []
-    fabric_products.recommended.each do |fp|
-        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true)
-        fabric_hsh[:fabric][:price_usd] = '0'
-        fabric_hsh[:fabric][:price_aud] = '0'
-        fabric_hsh[:fabric][:description] = fp.description
-        fabrics_arry << fabric_hsh
-    end
-    fabrics_arry
-  end
-
-  def custom_fabrics
-    Fabric.where(id: custom_fabric_ids)
-  end
-
-  def custom_fabrics_with_description
-    fabrics_arry = []
-    fabric_products.custom.each do |fp|
-        fabric_hsh = JSON.parse(fp.fabric.to_json, :symbolize_names => true)
-        fabric_hsh[:fabric][:description] = fp.description
-        fabrics_arry << fabric_hsh
-    end
-    fabrics_arry
-  end
-
-  def color_names
-    basic_colors.pluck(:name)
-  end
-
-  alias_method :colors, :color_names
-
-  # TODO: Alexey Bobyrev - 04/Oct/2016
-  # This method is unused.
-  # We need to remove it or rewrite to use as `#active#custom` scope for
-  # option_values from color_values
-  def custom_colors
-    option_types
-      .color
-      .option_values
-        .where('spree_option_values.id NOT IN (?)', basic_color_ids)
-        .uniq
-  end
-
   def description
     read_attribute(:description) || ''
   end
 
   def short_description
     property('short_description') || ''
-  end
-
-  def color_customization
-    DataCoercion.string_to_boolean(property('color_customization'))
   end
 
   def delete
@@ -268,6 +189,10 @@ Spree::Product.class_eval do
     @discount ||= discounts.active.first
   end
 
+  def discount_price_in(currency)
+   price_in(currency).apply(discount)
+  end
+
   def has_render?
     self.class.has_render?(self)
   end
@@ -303,7 +228,7 @@ Spree::Product.class_eval do
 
     components = [
       should_split ? fabric.split('-') : fabric,
-      customizations.map{|c| c['customisation_value']['name']}
+      customizations.map{|c| c.respond_to?(:name) ? c.name : c['customisation_value']['name']}
     ].flatten.compact.sort(&:casecmp).join("~")
   end
 

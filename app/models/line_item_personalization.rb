@@ -91,7 +91,8 @@ class LineItemPersonalization < ActiveRecord::Base
   # Color pricing
   def calculate_color_cost(default_custom_color_cost = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)
     if product.present? && color.present?
-      if basic_color?
+      pcv = ProductColorValue.where(product_id: product.id, option_value_id: color.id).first
+      if !pcv || !pcv.custom
         return BigDecimal.new(0)
       else
         if color.discount.present?
@@ -103,12 +104,6 @@ class LineItemPersonalization < ActiveRecord::Base
     else
       BigDecimal.new(0)
     end
-  end
-
-  # TODO: since we get Product#basic_colors via Product#basic_color_ids probably it's better to use #basic_color_ids here
-  # Nickolay 2016-01-05
-  def basic_color?
-    product.basic_colors.where(id: color_id).exists?
   end
 
   # customization value cost

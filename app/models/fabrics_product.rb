@@ -1,5 +1,5 @@
 class FabricsProduct < ActiveRecord::Base
-  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description, :price_aud, :price_usd
+  attr_accessible :fabric, :product_id, :fabric_id, :recommended, :description, :price_aud, :price_usd, :active
 
   belongs_to :product, class_name: 'Spree::Product'
 
@@ -40,5 +40,14 @@ class FabricsProduct < ActiveRecord::Base
     else
       return self.price_usd.to_f
     end
+  end
+
+
+  def discount
+    product.discount
+  end
+
+  def discount_price_in(currency)
+    Spree::Price.new(amount: price_in(currency)).apply(discount).price
   end
 end

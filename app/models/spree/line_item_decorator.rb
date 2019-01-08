@@ -44,27 +44,26 @@ Spree::LineItem.class_eval do
   def price
     total_price = super
 
-    total_price += making_options_price_adjustment
-
     if personalization.present? && self.stock.nil?
       total_price += personalization.price
     end
 
-    if fabric.present?
-      fp = FabricsProduct.find_by_fabric_id_and_product_id(self.fabric_id, self.product.id)
-      total_price += fp.price_in(self.currency)
+    if fabric_price
+      total_price += fabric_price
     end
+
+    total_price += making_options_price_adjustment(total_price)
 
     total_price
   end
 
   # this method returns the total adjustment of all making_options adjustments
-  def making_options_price_adjustment
+  def making_options_price_adjustment(price)
     total_adjustment = 0
 
     making_options.each do |mo|
       total_adjustment += mo.flat_price if mo.flat_price
-      total_adjustment += self.attributes["price"]*mo.percent_price if mo.percent_price
+      total_adjustment += price*mo.percent_price if mo.percent_price
     end
 
     total_adjustment

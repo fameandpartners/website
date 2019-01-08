@@ -17,27 +17,20 @@ module Forms
     end
 
     def size_options
-      product_options[:sizes][:default].map do |p|
+      product_options[:sizes].map do |p|
         { id: p.id, name: p.name }
       end
     end
 
     def color_options
-      product_options[:colors][:default].map do |p|
+      product_options[:colors].map do |p|
         { id: p.id, name: p.presentation, type: 'color' }
       end
     end
 
     def fabric_options
-      product_options[:fabrics][:default].map do |p|
-        { id: p[:fabric][:id], name: p[:fabric][:presentation], type: 'fabric' }
-      end
-    end
-
-    def custom_fabrics(currency)
-      product_options[:fabrics][:extra].map do |p|
-        price = currency.downcase == 'usd' ?  p[:fabric][:price_usd] : p[:fabric][:price_aud]
-        { id: p[:fabric][:id], name: "#{p[:fabric][:presentation]} (+ $#{price})", type: 'custom' }
+      product_options[:fabrics].map do |p|
+        { id: p.id, name: p.presentation, type: 'fabric' }
       end
     end
 
@@ -53,16 +46,9 @@ module Forms
       LineItemPersonalization::HEIGHTS.map { |h| { id: h, name: HEIGHT_DISPLAY_NAMES[h] || h.humanize } }
     end
 
-    def custom_colors
-      product_options[:colors][:extra].map do |p|
-        { id: p.id, name: "#{p.presentation} (+ $#{extra_color_price})", type: 'custom' }
-      end
-    end
-
     def customisations_options
-      product_options[:customizations][:all].map do |p|
-        price = p[:display_price].money.dollars
-        { id: p.id, name: "#{p.name} (+ $#{price})" }
+      product_options[:customizations].map do |p|
+        { id: p.id, name: "#{p.name} (+#{p.display_price})" }
       end
     end
 

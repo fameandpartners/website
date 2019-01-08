@@ -1,0 +1,37 @@
+.new-product-step
+  = f.field_container :fabric,  class: ['checkbox'] do
+    = f.label :fabric, t(:fabric)
+    br
+    = f.collection_select(:fabric_id, Fabric.all, :id, :name, {}, disabled: @fabric_product.persisted?)
+    = f.error_message_on :fabric
+
+  = f.field_container :description, class: ['checkbox'] do
+    = f.label :description do
+      = t(:description)
+    = f.text_area :description, cols: 100, rows: 5
+    = f.error_message_on :description
+
+
+  = f.field_container :price_usd, class: ['checkbox'] do
+    = f.label :price_usd do
+      = t(:price_usd)
+    = f.number_field :price_usd
+    = f.error_message_on :price_usd
+
+  = f.field_container :price_aud, class: ['checkbox'] do
+    = f.label :price_aud do
+      = t(:price_aud)
+    = f.number_field :price_aud
+    = f.error_message_on :price_aud
+
+  = f.field_container :recommended, class: ['checkbox'] do
+    = f.label :recommended do
+      = t(:recommended)
+    = f.check_box :recommended, class: 'checkbox'
+    = f.error_message_on :recommended
+
+  = f.field_container :active, class: ['checkbox'] do
+    = f.label :active do
+      = t(:active)
+    = f.check_box :active, class: 'checkbox'
+    = f.error_message_on :active

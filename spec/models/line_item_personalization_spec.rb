@@ -19,33 +19,29 @@ describe LineItemPersonalization, type: :model do
     end
 
     context "#color_cost" do
-      before do
-        personalization.product = Spree::Product.new
-      end
+      let(:product) { create(:spree_product)}
+      let(:color) { create(:option_value)}
+      let(:personalization) { create(:personalization, color: color, product: product, line_item: line_item) }
 
       it "works if no data" do
         expect(subject.color_cost).to eql(BigDecimal.new(0))
       end
 
       it "returns 0 for basic color" do
-        personalization.color = Spree::OptionValue.new
-        expect(personalization).to receive(:basic_color?).and_return(true)
+        ProductColorValue.new(option_value: color, product: product, custom: false, active: true).save!
 
         expect(personalization.color_cost).to eql(BigDecimal.new(0))
       end
 
       it "adds price for custom color" do
-        personalization.color = Spree::OptionValue.new
-        expect(personalization).to receive(:basic_color?).and_return(false)
+        ProductColorValue.new(option_value: color, product: product, custom: true, active: true).save!
 
         expect(personalization.color_cost).to eql(BigDecimal.new('16.0'))
       end
 
       it "returns discounted price for custom colour" do
-        expect(personalization).to receive(:color).at_least(:once).and_return(
-          double('Spree::OptionValue', discount: discount)
-        )
-        expect(personalization).to receive(:basic_color?).and_return(false)
+        expect(color).to receive(:discount).at_least(:once).and_return(discount)
+        ProductColorValue.new(option_value: color, product: product, custom: true, active: true).save!
 
         expect(personalization.color_cost).to eql(BigDecimal.new('8.0'))
       end
@@ -64,13 +60,13 @@ describe LineItemPersonalization, type: :model do
         expect(personalization.customizations_cost).to eql(BigDecimal.new('30.0'))
       end
 
-      xit "returns sum of discounted prices" do
+      it "returns sum of discounted prices" do
         personalization.line_item = line_item
-        customization = build(:customisation_value, price: 15.0)
-        expect(customization).to receive(:discount).and_return(discount)
-        expect(personalization).to receive(:customization_values).and_return(JSON.parse([customization].to_json))
+        customization = build(:customisation_value, price: 15.0).as_json
+        customization['customisation_value']['discount'] = 50
+        expect(personalization).to receive(:customization_values).and_return([customization])
 
-        expect(personalization.customizations_cost).to eql(BigDecimal.new('7.5')) #TODO: Bring this back when its actually useful
+        expect(personalization.customizations_cost).to eql(BigDecimal.new('7.5'))
       end
     end
   end

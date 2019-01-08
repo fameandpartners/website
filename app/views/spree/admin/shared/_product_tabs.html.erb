@@ -21,14 +21,14 @@
       <li<%== ' class="active"' if current == 'Variants' %>>
         <%= link_to_with_icon 'icon-th-large', t(:variants),  admin_product_variants_url(@product) %>
       </li>
-      <li>
-        <%= link_to_with_icon 'icon-picture', t(:product_colors), admin_ui.customisation_product_colors_path(product_color_values_grid: { product_id: @product.id } ) %>
-      </li>
       <li<%== ' class="active"' if current == 'Product Properties' %>>
         <%= link_to_with_icon 'icon-tasks', t(:product_properties), admin_product_product_properties_url(@product) %>
       </li>
       <li<%== ' class="active"' if current == 'Customisations' %>>
         <%= link_to_with_icon 'icon-th-large', t(:customisations), admin_product_customisation_values_url(@product) %>
+      </li>
+      <li<%== ' class="active"' if current == 'Fabrics' %>>
+        <%= link_to_with_icon 'icon-th-large', t(:fabrics), admin_product_fabrics_url(@product) %>
       </li>
       <li<%== ' class="active"' if current == 'Making Options' %>>
         <%= link_to_with_icon 'icon-th-large', t(:making_options), admin_product_making_options_url(@product) %>

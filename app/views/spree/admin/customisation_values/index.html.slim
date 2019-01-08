@@ -27,7 +27,6 @@
       tr
         th
         th Presentation
-        th Incompatibles
         th Image
         th Price
         th Tools
@@ -38,39 +37,11 @@
             span.handle
           /td = customisation_value.name
           td = customisation_value.presentation
-          td
-            ul.incompatibles data-ids=( customisation_value.incompatibles.map{|i| spree_dom_id(i) } )
-              - customisation_value.incompatibles.each do |incompatible|
-                li.incompatible = incompatible.presentation
           td 
             - if customisation_value.image.present?
               = image_tag customisation_value.image.url(:small)
-          td = customisation_value.display_price
+          td = customisation_value.price
           td
             = link_to 'Edit', edit_admin_product_customisation_value_url(@product, customisation_value)
             br
             = link_to 'Delete', admin_product_customisation_value_url(@product, customisation_value), remote: true, method: 'delete'
-
-css:
-  ul.incompatibles {
-    list-style: none;
-    cursor: pointer;
-  }
-
-  #customisation_values tr.incompatible {
-    color: red;
-  }
-
-coffee:
-  showIncompatibles = (e) ->
-    _.each( $(e.target).closest('ul').data('ids'), (id) ->
-      $("##{id}").addClass('incompatible')
-    )
-
-  hideIncompatibles = (e) ->
-    _.each( $(e.target).closest('ul').data('ids'), (id) ->
-      $("##{id}").removeClass('incompatible')
-    )
-
-  $().ready ->
-    $('ul.incompatibles').hover(showIncompatibles, hideIncompatibles)

@@ -1,0 +1,40 @@
+- content_for :page_title do
+  = t(:listing_product_fabrics)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#new_product_fabric_link
+        = link_to 'Add Fabric', new_admin_product_fabric_path(@product), class: 'icon-plus button', id: 'admin_new_product_fabric'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/admin/shared/product_tabs', current: 'Fabrics'
+
+#new_product_fabric data-hook="new-product-making-option"
+
+
+- if @fabric_products.empty?
+  .no-objects-found = t(:no_results)
+- else
+  table.index#product_fabrics
+    colgroup
+      col style="width: 35%"
+      col style="width: 30%"
+      col style="width: 20%"
+
+    thead
+      tr
+        th Code
+        th Name
+        th Active
+        th.actions
+
+    tbody
+      - @fabric_products.each do |fabric|
+        tr data-id=fabric.id id=spree_dom_id(fabric)
+          td = fabric.fabric.name
+          td = fabric.fabric.presentation
+          td = fabric.active?
+          td.actions
+            =<> link_to_with_icon('icon-edit', t(:edit), edit_admin_product_fabric_path(@product, fabric), no_text: true)

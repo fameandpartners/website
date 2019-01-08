@@ -1,7 +1,0 @@
-- content_for :page_title do
-  | Customisation Values
-
-= render 'admin_ui/grid/grid_collection_filters', collection_url: customisation_customisation_values_path
-.row : .col-lg-12
-  = link_to 'Add new customisation value', new_customisation_customisation_value_path, class: 'btn btn-primary'
-= render 'admin_ui/grid/paginated_collection_grid'

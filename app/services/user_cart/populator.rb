@@ -58,7 +58,11 @@ class Populator
         add_making_options
 
         line_item.customizations =  price_customization_by_currency(product_customizations).to_json
-        line_item.fabric = product_fabric
+        if product_fabric
+          line_item.fabric = product_fabric
+          fp = FabricsProduct.find_by_fabric_id_and_product_id(product_fabric.id, product.id)
+          line_item.fabric_price = fp&.discount_price_in(currency) 
+        end
         line_item.curation_name = product_attributes[:curation_name]
         line_item.personalization = build_personalization(line_item)
         line_item.save!
@@ -174,7 +178,7 @@ class Populator
         customizations = []
         Array.wrap(product_attributes[:customizations_ids]).compact.each do |id|
           next if id.blank?
-          customization = JSON.parse(product.customizations).detect { |customisation_value| customisation_value['customisation_value']['id'].to_s == id.to_s || customisation_value['customisation_value']['name'].to_s == id }
+          customization = product.customisation_values.detect { |customisation_value| customisation_value.id.to_s == id.to_s || customisation_value.name.to_s == id }
           if customization.blank?
             raise Errors::ProductOptionNotAvailable.new("product customization ##{ id } not available")
           else
@@ -206,15 +210,15 @@ class Populator
 
     def price_customization_by_currency(customizations_json)
       customization_arry = customizations_json.map do |customization|
-          customization = customization['customisation_value']
 
           {
             'customisation_value' => {
-              'id' => customization['id'],
-              'name' => customization['name'],
-              'manifacturing_sort_order' => customization['manifacturing_sort_order'],
-              'price' => customization['price_aud'] && currency == 'AUD' ? customization['price_aud'] : customization['price'],
-              'presentation' => customization['presentation']
+              'id' => customization.id,
+              'name' => customization.name,
+              'manifacturing_sort_order' => customization.manifacturing_sort_order,
+              'price' => customization.price_aud && currency == 'AUD' ? customization.price_aud : customization.price,
+              'presentation' => customization.presentation,
+              'discount' => customization.discount&.amount
             }
           }
 
