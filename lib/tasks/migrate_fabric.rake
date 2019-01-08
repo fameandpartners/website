@@ -116,6 +116,9 @@ namespace :migrate do
           fabric_product.price_usd = pcv.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE : 0
           fabric_product.save!
 
+          pcv.custom = false
+          pcv.save!
+
           curation =  product.curations.where(pid: Spree::Product.format_new_pid(product.sku, pcv.option_value.name, [])).first
           if curation
             curation.pid = Spree::Product.format_new_pid(product.sku, fabric.name, [])
