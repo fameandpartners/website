@@ -622,6 +622,45 @@ ALTER SEQUENCE public.custom_dresses_id_seq OWNED BY public.custom_dresses.id;
 
 
 --
+-- Name: customisation_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.customisation_groups (
+    id integer NOT NULL,
+    name character varying(255),
+    title character varying(255),
+    slug character varying(255),
+    selection_title character varying(255),
+    change_button_text character varying(255),
+    section_title character varying(255),
+    selection_type character varying(255),
+    preview_type character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: customisation_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.customisation_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customisation_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.customisation_groups_id_seq OWNED BY public.customisation_groups.id;
+
+
+--
 -- Name: customisation_values; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -640,7 +679,8 @@ CREATE TABLE public.customisation_values (
     customisation_type character varying(255) DEFAULT 'cut'::character varying,
     point_of_view character varying(255) DEFAULT 'front'::character varying,
     manifacturing_sort_order integer,
-    price_aud numeric(8,2)
+    price_aud numeric(8,2),
+    customisation_group_id integer
 );
 
 
@@ -2293,7 +2333,6 @@ CREATE TABLE public.newgistics_schedulers (
 --
 
 CREATE SEQUENCE public.newgistics_schedulers_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2361,7 +2400,6 @@ CREATE TABLE public.old_variant_taxons (
 --
 
 CREATE SEQUENCE public.old_variant_taxons_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5959,6 +5997,13 @@ ALTER TABLE ONLY public.custom_dresses ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+-- Name: customisation_groups id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.customisation_groups ALTER COLUMN id SET DEFAULT nextval('public.customisation_groups_id_seq'::regclass);
+
+
+--
 -- Name: customisation_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7045,6 +7090,14 @@ ALTER TABLE ONLY public.custom_dress_images
 
 ALTER TABLE ONLY public.custom_dresses
     ADD CONSTRAINT custom_dresses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customisation_groups customisation_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.customisation_groups
+    ADD CONSTRAINT customisation_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -10493,3 +10546,5 @@ INSERT INTO schema_migrations (version) VALUES ('20190103034800');
 INSERT INTO schema_migrations (version) VALUES ('20190104013853');
 
 INSERT INTO schema_migrations (version) VALUES ('20190104030656');
+
+INSERT INTO schema_migrations (version) VALUES ('20190110025723');

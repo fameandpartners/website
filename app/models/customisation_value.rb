@@ -12,13 +12,17 @@ class CustomisationValue < ActiveRecord::Base
            dependent: :destroy # without this, 'after_destroy' in Incompatibility wouldn't be called :(
   has_many :discounts, as: :discountable
 
+  belongs_to :customisation_group
+
   attr_accessible :position,
                   :name,
                   :presentation,
                   :image,
                   :price,
                   :incompatible_ids,
-                  :customisation_type
+                  :customisation_type,
+                  :customisation_group_id,
+                  :price_aud
 
   validates :name,
             presence: true,

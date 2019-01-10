@@ -496,29 +496,31 @@ module Api
               ]
             } || nil,
 
-            customizations.length > 0 && {
-              id: 122,
-              title: 'Customizations',
-              selectionTitle: "Customize your dress",
-              changeButtonText: "Change",
-              slug: 'customize',
-              sectionGroups: [
-                {
-                  title: "Customizations",
-                  slug: 'customize',
-                  previewType: :cad,
-                  sections: [
-                    {
-                      componentTypeId: :Customization,
-                      componentTypeCategory: :Customization,
-                      title: "Select your customizations",
-                      options: customizations.map {|f| { code: f.name, isDefault: false, parentOptionId: nil } },
-                      selectionType: customizations.length === 3 ? :OptionalOne : :OptionalMultiple,
-                    }
-                  ]
-                }
-              ]
-            } || nil,
+            customizations.group_by(&:customisation_group).map do |group, values|
+              {
+                id: group.id,
+                title: group.title,
+                selectionTitle: group.selection_title,
+                changeButtonText: group.change_button_text,
+                slug: group.slug,
+                sectionGroups: [
+                  {
+                    title: group.title,
+                    slug: group.slug,
+                    previewType: group.preview_type,
+                    sections: [
+                      {
+                        componentTypeId: group.slug,
+                        componentTypeCategory: :Customization,
+                        title: group.selection_title,
+                        options: values.map {|f| { code: f.name, isDefault: false, parentOptionId: nil } },
+                        selectionType: group.selection_type,
+                      }
+                    ]
+                  }
+                ]
+              }
+            end,
 
             sizes.length > 0 && {
               id: 123,
@@ -615,7 +617,7 @@ module Api
           code: c.name,
           isDefault: false,
           title: c.presentation,
-          componentTypeId: :LegacyCustomization,
+          componentTypeId: c.customisation_group.slug,
           componentTypeCategory: :LegacyCustomization,
           price: (c.discount_price_in(current_site_version.currency) * 100).to_i,
           strikeThroughPrice: product.discount ? (c.price_in(current_site_version.currency) * 100).to_i : nil,

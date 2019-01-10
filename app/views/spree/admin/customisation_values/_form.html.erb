@@ -1,4 +1,11 @@
 <div class="new-customisation-value">
+  <%= f.field_container :customisation_group do %>
+    <%= f.label :customisation_group, t(:customisation_group) %>
+    <br />
+    <%= f.collection_select(:customisation_group_id, CustomisationGroup.all, :id, :name, {}) %>
+    <%= f.error_message_on :customisation_group %>
+  <% end %>
+
   <%= f.field_container :name do %>
     <%= f.label :name, t(:name) %> <span class="required">*</span><br />
     <%= f.text_field :name, :class => 'fullwidth title' %>
@@ -15,6 +22,12 @@
     <%= f.label :price, t(:price) %> <span class="required">*</span><br />
     <%= f.text_field :price, :class => 'fullwidth title' %>
     <%= f.error_message_on :price %>
+  <% end %>
+
+    <%= f.field_container :price_aud do %>
+    <%= f.label :price_aud, t(:price_aud) %> <span class="required">*</span><br />
+    <%= f.text_field :price_aud, :class => 'fullwidth title' %>
+    <%= f.error_message_on :price_aud %>
   <% end %>
 
   <%= f.field_container :position do %>
