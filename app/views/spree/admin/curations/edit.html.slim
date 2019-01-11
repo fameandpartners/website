@@ -1,0 +1,20 @@
+- content_for :page_title do
+  = t(:edit_curation)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li = button_link_to t(:back_to), session[:return_to] || admin_product_curations_url, :icon => 'icon-arrow-left'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/shared/error_messages', target: @curation
+
+#new_curation data-hook="new-product-accessory"
+
+= form_for [:admin, @product, @curation], url: admin_product_curation_path(@product, @curation), :method => :put, :html => { :multipart => true } do |f|
+  fieldset.no-border-top
+    legend align="center"
+      = t(:edit_curation)
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'

@@ -392,6 +392,9 @@ FameAndPartners::Application.routes.draw do
       resources :products do
         resources :customisation_values
       
+        resources :curations
+
+      
         resources :making_options, controller: 'product_making_options', except: [:destroy] do
           member do
             put :toggle

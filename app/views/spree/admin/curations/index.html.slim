@@ -1,0 +1,37 @@
+- content_for :page_title do
+  = t(:listing_curations)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#new_admin_curation_link
+        = link_to 'Add curation', new_admin_product_curation_path(@product), remote: true, class: 'icon-plus button', id: 'new_admin_product_curation'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/admin/shared/product_tabs', current: 'Curation'
+
+#new_curation data-hook="new-curation"
+
+- if @curations.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index.sortable#curations
+    colgroup
+      col style="width: 50%;"
+      col style="width: 45%;"
+      col style="width: 5%;"
+    thead
+      tr
+        th PID
+        th Name
+        th Active
+        th Tools
+    tbody
+      - @curations.each do |curation|
+        tr data-id="#{curation.id}" id=( spree_dom_id curation )
+          td = curation.pid
+          td = curation.name
+          td = curation.active
+          td
+            = link_to 'Edit', edit_admin_product_curation_url(@product, curation)

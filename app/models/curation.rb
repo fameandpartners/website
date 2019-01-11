@@ -1,5 +1,5 @@
 class Curation < ActiveRecord::Base
-  attr_accessible :product, :product_id, :pid, :images
+  attr_accessible :product, :product_id, :pid, :images, :name, :description, :taxon_ids, :active
 
   belongs_to :product, class_name: 'Spree::Product'
   has_many :images, as: :viewable, order: :position, class_name: "Spree::Image"

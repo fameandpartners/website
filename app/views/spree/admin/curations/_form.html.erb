@@ -1,0 +1,30 @@
+<div class="new-curation">
+  <%= f.field_container :pid do %>
+    <%= f.label :pid, t(:pid) %> <span class="required">*</span><br />
+    <%= f.text_field :pid, :class => 'fullwidth title' %>
+    <%= f.error_message_on :pid %>
+  <% end %>
+
+ <%= f.field_container :name do %>
+    <%= f.label :name, t(:name) %><br />
+    <%= f.text_field :name, :class => 'fullwidth title' %>
+    <%= f.error_message_on :name %>
+  <% end %>
+
+  <%= f.field_container :description do %>
+    <%= f.label :description, t(:description) %><br />
+    <%= f.text_field :description, :class => 'fullwidth title' %>
+    <%= f.error_message_on :description %>
+  <% end %>
+
+ <%= f.field_container :taxons do %>
+    <%= f.label :taxon_ids, t(:taxons) %><br />
+    <%= f.hidden_field :taxon_ids, :value => @curation.taxon_ids.join(','), id: 'product_taxon_ids' %>
+  <% end %>
+
+  <%= f.field_container :active do %>
+    <%= f.label :active, t(:active) %><br />
+    <%= f.check_box :active, :class => 'checkbox' %>
+    <%= f.error_message_on :active %>
+  <% end %>
+</div>

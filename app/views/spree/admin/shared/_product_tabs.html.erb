@@ -15,6 +15,9 @@
       <li<%== ' class="active"' if current == 'Product Details' %>>
         <%= link_to_with_icon 'icon-edit', t(:product_details), edit_admin_product_url(@product) %>
       </li>
+      <li<%== ' class="active"' if current == 'Curations' %>>
+        <%= link_to_with_icon 'icon-picture', t(:curation), admin_product_curations_url(@product) %>
+      </li>
       <li<%== ' class="active"' if current == 'Images' %>>
         <%= link_to_with_icon 'icon-picture', t(:images), admin_product_images_url(@product) %>
       </li>
