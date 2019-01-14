@@ -35,7 +35,7 @@ module Products
           #color_map = details[:colors].map{ |x| { color: x } }
           add_product_prices(product, price_in_aud, price_in_usd)
           add_product_color_options(product, details[:fabrics], details[:colors]) 
-          add_product_customizations(product, prod[:customization_list] || [], nil)
+          add_product_customizations(product, prod[:customization_list] || [])
           add_product_height_ranges( product )
           add_making_options(product, prod[:making_options])
           add_curations(product, prod[:curations])
@@ -203,7 +203,7 @@ module Products
       product
     end
 
-    def add_product_customizations(product, custs, lengths)
+    def add_product_customizations(product, custs)
       custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each_with_index do |customization, index|
         
         new_customization = product.customisation_values.find_or_create_by_name(customization[:code])
@@ -212,6 +212,7 @@ module Products
         new_customization.presentation = customization[:presentation]
         new_customization.manifacturing_sort_order = customization[:manifacturing_sort_order]
         new_customization.position = index
+        new_customization.customisation_group = nil
         
         new_customization.save!
       end

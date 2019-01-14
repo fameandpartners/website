@@ -15,7 +15,7 @@ class CustomItemSku
         fabric_id:               fabric_id,
         fabric:                  line_item.fabric,
         height:                  height,
-        customization_value_ids: customization_value_ids
+        customization_values: customization_values
       ).call
 
       if line_item.personalization
@@ -50,8 +50,8 @@ class CustomItemSku
     line_item.personalization ? line_item.personalization.size&.name : line_item.variant&.dress_size&.name
   end
 
-  def customization_value_ids
-    line_item.customizations ? line_item&.customizations&.map{ |cust| cust['customisation_value']['id'] }&.sort : []
+  def customization_values
+    line_item.customizations ? line_item&.customizations : []
   end
 
   def height

@@ -1,9 +1,17 @@
 require 'spec_helper'
 
 describe Skus::Generator do
+  def fake_customisation(id, name) 
+    {
+      'customisation_value' => {
+        'name' => name,
+        'id' => id
+      }
+    }
+  end
   describe '#call' do
     context 'given nil attributes' do
-      let(:attributes) { { style_number: nil, size: nil, color_id: nil, height: nil, customization_value_ids: nil } }
+      let(:attributes) { { style_number: nil, size: nil, color_id: nil, height: nil, customization_values: nil } }
 
       it 'does not raise errors' do
         generator = described_class.new(attributes)
@@ -15,11 +23,11 @@ describe Skus::Generator do
       let(:combinations) {
         [
           {
-            attributes: { style_number: 'Something', size: 'US2/AU6', color_id: 123, height: 'Petite', customization_value_ids: [42, 123] },
+            attributes: { style_number: 'Something', size: 'US2/AU6', color_id: 123, height: 'Petite', customization_values: [fake_customisation(42, 'blah'), fake_customisation(123, 'blah2')] },
             expected:   'SOMETHINGUS2AU6C123X42X123HPE'
           },
           {
-            attributes: { style_number: 'Single Customization', size: 'US2/AU6', color_id: 123, height: 'Tall', customization_value_ids: [998] },
+            attributes: { style_number: 'Single Customization', size: 'US2/AU6', color_id: 123, height: 'Tall', customization_values: [fake_customisation(998, 'blah')] },
             expected:   'SINGLECUSTOMIZATIONUS2AU6C123X998HTL'
           },
           {
@@ -51,7 +59,7 @@ describe Skus::Generator do
     let(:combinations) {
         [
           {
-            attributes: { style_number: 'FPG1001', size: 'US2/AU6', height: 'length6', customization_value_ids: ['T0', 'B12', 'C4'], fabric: mock_model(Fabric, { name: '102-2020'}) },
+            attributes: { style_number: 'FPG1001', size: 'US2/AU6', height: 'length6', customization_values: [fake_customisation(1, 'T0'), fake_customisation(2, 'B12'), fake_customisation(3, 'C4')], fabric: mock_model(Fabric, { name: '102-2020'}) },
             expected:   'FPG1001~102~2020~B12~C4~H6~T0~US2AU6'
           },
           {

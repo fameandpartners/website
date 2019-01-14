@@ -10,15 +10,15 @@ module Skus
     # @param [String] size. Example: "US0/AU4"
     # @param [String, Integer] color_id. Example: "12", 12
     # @param [String] height. Example: "Standard"
-    # @param [Array<Integer>] customization_value_ids
-    def initialize(style_number:, size:, color_id: nil, fabric_id:'', fabric: nil, height: '', customization_value_ids: [])
+    # @param [Array<Integer>] customization_values
+    def initialize(style_number:, size:, color_id: nil, fabric_id:'', fabric: nil, height: '', customization_values: [])
       @style_number            = style_number
       @size                    = size
       @color_id                = color_id
       @fabric_id               = fabric_id
       @fabric                  = fabric
       @height                  = height
-      @customization_value_ids = customization_value_ids&.sort
+      @customization_values    = customization_values
     end
 
     def call
@@ -27,7 +27,7 @@ module Skus
         components << size
         components << @fabric&.name&.split('-')
         components << "H#{@height.last}" unless @height.blank?
-        components << @customization_value_ids
+        components << @customization_values.map { |c| c['customisation_value']['name']}.sort
 
         sorted_components = components 
           .flatten
@@ -69,7 +69,8 @@ module Skus
 
     def custom
       Array
-        .wrap(@customization_value_ids)
+        .wrap(@customization_values)
+        .map { |c| c['customisation_value']['id']}.sort
         .map { |vid| "#{CUSTOM_MARKER}#{vid}" }.join.presence || CUSTOM_MARKER
     end
 
@@ -80,7 +81,7 @@ module Skus
 
     # Height is also considered a customization
     def has_personalization?
-      @height.present? || @customization_value_ids.present?
+      @height.present? || @customization_values.present?
     end
   end
 end

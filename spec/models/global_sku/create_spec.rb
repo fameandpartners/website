@@ -134,7 +134,7 @@ describe GlobalSku::Create do
             fabric_id:                nil,
             fabric:                   nil,
             height:                  'petite',
-            customization_value_ids: []
+            customization_values: []
           ).and_call_original
 
           creator.generate_sku
@@ -144,6 +144,8 @@ describe GlobalSku::Create do
       context 'with customizations' do
         let(:customization_fabric) { FactoryGirl.build(:customisation_value, id: 123, name: 'fabric') }
         let(:customization_fit) { FactoryGirl.build(:customisation_value, id: 456, name: 'fit') }
+        let(:customizations) { JSON.parse([customization_fabric, customization_fit].to_json) }
+
         let(:creator) {
           described_class.new(
             style_number: 'ABC123',
@@ -152,7 +154,7 @@ describe GlobalSku::Create do
             color_name:   'Magma Red',
             height:       'Petite',
             fabric_name:  'Invalid Fabric',
-            customizations: JSON.parse([customization_fabric, customization_fit].to_json)
+            customizations: customizations
           )
         }
 
@@ -164,7 +166,7 @@ describe GlobalSku::Create do
             fabric_id:                nil, 
             fabric:                   nil,
             height:                  'petite',
-            customization_value_ids: [customization_fabric.id, customization_fit.id]
+            customization_values:    customizations
           ).and_call_original
 
           creator.generate_sku
