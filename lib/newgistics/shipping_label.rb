@@ -72,16 +72,10 @@ include Newgistics::NewgisticsHelper
         "deliveryMethod" => "SelfService",
         "dispositionRuleSetId" => newgistics_conf['rule_set'],
         "labelCount" => 1,
-        "merchantID" => newgistics_conf['merchant_id']
-      }.merge(make_return_id_map).merge({"spreeOrderNumber": Spree::Order.find(@return_id).number})
-    end
-
-    def make_return_id_map
-      if Rails.env == 'production'
-        {"returnId" => @return_id}
-      else
-        {"returnId" => @return_id}
-      end
+        "merchantID" => newgistics_conf['merchant_id'],
+        "returnId" => @return_id,
+        "spreeOrderNumber": @return_id
+      }
     end
 
     def convert_json_to_instance_variables(json)
