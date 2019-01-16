@@ -12,15 +12,6 @@ namespace :newgistics do
     client = Newgistics::NewgisticsClient.new
     res = client.get_returns(scheduler.last_successful_run, current_time)
 
-    # TODO REMOVE ME
-    if Rails.env.production?
-      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "samw@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
-                              subject: "rake newgistics:update_item_returns",
-                              body: res.inspect).deliver
-    end
-
     response_returns = res['response']['Returns']['Return'] rescue []
     if res['response'].nil?
       NewRelic::Agent.notice_error(res.to_s)

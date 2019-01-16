@@ -1,5 +1,6 @@
 set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && :job'"
 set :environment, ENV['RAILS_ENV']
+set :output, "/app/log/cron_log.log"
 
 every 1.day, at: '1:00 am' do
   rake 'feed:export:all'

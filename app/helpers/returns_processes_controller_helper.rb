@@ -64,7 +64,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def process_returns(obj, return_label)
-		order = Spree::Order.find_by_number(obj[:order_number])
+    order = Spree::Order.completed.find_by_number(obj[:order_number])
 
 		if order.nil?
 			return
@@ -78,7 +78,6 @@ module ReturnsProcessesControllerHelper
     }
 
     @order_return = OrderReturnRequest.new(return_request[:order_return_request])
-
     @order_return.save
 
     if (has_us_shipping_address?(order.number))
@@ -93,9 +92,7 @@ module ReturnsProcessesControllerHelper
 
     start_bergen_return_process(@order_return)
     start_next_logistics_process(@order_return)
-		success_response(@order_return.id)
-
-    return
+    success_response(@order_return.id)
   end
 
 
@@ -151,6 +148,7 @@ module ReturnsProcessesControllerHelper
 			request_id: request_id,
       status: 200
     }
+
     respond_with request_id do |format|
       format.json do
         render :json => payload, :status => :ok
