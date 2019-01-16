@@ -577,9 +577,7 @@ module Api
           height: lc.height,
           sortOrder: lc.position,
           type: lc.base_image_name ? :base : :layer,
-          components: lc.customizations_enabled_for.map.with_index {|active, index|
-            active ? customizations[index].name : nil
-          }.compact
+          components: lc.customizations_enabled_for
         }
       end
 

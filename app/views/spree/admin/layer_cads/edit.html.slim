@@ -1,0 +1,20 @@
+- content_for :page_title do
+  = t(:edit_layer_cad)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li = button_link_to t(:back_to), session[:return_to] || admin_product_layer_cads_url, :icon => 'icon-arrow-left'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/shared/error_messages', target: @layer_cad
+
+#new_layer_cad data-hook="new-product-accessory"
+
+= form_for [:admin, @product, @layer_cad], url: admin_product_layer_cad_path(@product, @layer_cad), :method => :put, :html => { :multipart => true } do |f|
+  fieldset.no-border-top
+    legend align="center"
+      = t(:edit_layer_cad)
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'

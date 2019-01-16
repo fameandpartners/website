@@ -391,7 +391,7 @@ FameAndPartners::Application.routes.draw do
 
       resources :products do
         resources :customisation_values
-      
+        resources :layer_cads
         resources :curations
 
       

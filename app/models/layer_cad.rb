@@ -24,32 +24,6 @@ class LayerCad < ActiveRecord::Base
                     :url => '/spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :path => 'spree/products/:product_id/cads/:id/:style/:basename.:extension',
                     :processors => [:cropper]
-  before_save :rename_files
-
-  def rename_files
-    if( self.respond_to?(:base_image_file_name) && base_image_file_name.present? )
-      extension = File.extname(base_image_file_name).gsub(/^\.+/, '')
-      base_image.instance_write(:file_name, "base-#{customizations_on.join( "" )}.#{extension}" )
-    end
-
-    if( self.respond_to?(:layer_image_file_name) && layer_image_file_name.present? )
-      extension = File.extname(layer_image_file_name).gsub(/^\.+/, '')
-      layer_image.instance_write(:file_name, "layer-#{customizations_on.join( "" )}.#{extension}" )
-    end
-
-    true
-  end
-
-  private
-  def customizations_on
-    to_return = []
-    customizations_enabled_for.each_with_index do |customization, i|
-      if( customization )
-        to_return << i
-      end
-    end
-    to_return
-  end
 
 
 end

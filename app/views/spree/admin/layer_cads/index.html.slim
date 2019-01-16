@@ -1,0 +1,41 @@
+- content_for :page_title do
+  = t(:listing_layer_cads)
+
+- content_for :page_actions do
+  .toolbar data-hook="toolbar"
+    ul.toolbar.inline-menu
+      li#new_admin_layer_cad_link
+        = link_to 'Add cad', new_admin_product_layer_cad_path(@product), remote: true, class: 'icon-plus button', id: 'new_admin_product_layer_cad'
+
+= render 'spree/admin/shared/product_sub_menu'
+
+= render 'spree/admin/shared/product_tabs', current: 'CADs'
+
+#new_layer_cad data-hook="new-layer-cad"
+
+- if @layer_cads.blank?
+  .no-objects-found = t(:no_results) 
+- else
+  table.index#layer_cads
+    colgroup
+      col style="width: 50%;"
+      col style="width: 25%;"
+      col style="width: 25%;"
+    thead
+      tr
+        th Image
+        th Position
+        th Tools
+    tbody
+      - @layer_cads.each do |layer_cad|
+        tr data-id="#{layer_cad.id}" id=( spree_dom_id layer_cad )
+          td style="background-color: #efefef"
+            - if layer_cad.base_image.present?
+              = image_tag layer_cad.base_image.url(:original), style: "max-width: 100%"
+            - if layer_cad.layer_image.present?
+              = image_tag layer_cad.layer_image.url(:original), style: "max-width: 100%"
+          td = layer_cad.position
+          td
+            = link_to 'Edit', edit_admin_product_layer_cad_url(@product, layer_cad)
+            br
+            = link_to 'Delete', admin_product_layer_cad_url(@product, layer_cad), remote: true, method: 'delete'

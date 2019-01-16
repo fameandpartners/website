@@ -22,9 +22,8 @@ li class=active_link_to_class('', active: /content|preferences/)
     span.nav-label Content
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Pages', admin_ui.content_pages_path, wrap_tag: :li
-    = active_link_to 'Preferences', admin_ui.preferences_path, wrap_tag: :li
     = active_link_to 'Search Term Redirect', admin_ui.redirected_search_terms_path, wrap_tag: :li
+    = active_link_to 'Fabrics', admin_ui.fabrics_path, wrap_tag: :li
     = active_link_to 'Generate UPC Label', admin_ui.new_content_upc_path, wrap_tag: :li
 
 li class=active_link_to_class('', active: /bergen|next/)

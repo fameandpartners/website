@@ -22,15 +22,6 @@ module Products
           customizations: available_product_customisations,
           making_options: product_making_options
         })
-
-        # make this property conditional
-        if product.layer_cads.present?
-          os[:addons] = {
-            base_images: cad_images('base'),
-            layer_images: cad_images('layer')
-          }
-        end
-
       os
     end
 
@@ -66,22 +57,6 @@ module Products
             position: value.position,
           })
         end
-      end
-
-      def cad_images(type)
-        result = product.layer_cads.map do |cad|
-          if cad.send("#{type}_image_name")
-            {
-              name: cad.send("#{type}_image_name"),
-              url:  cad.send("#{type}_image").url,
-              position: cad.position,
-              bit_array: cad.customizations_enabled_for
-            }
-          else
-            nil
-          end
-        end
-        result.compact
       end
 
       # making options

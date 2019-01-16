@@ -1,0 +1,38 @@
+<div class="new-layer-cad">
+  <%= f.field_container :position do %>
+    <%= f.label :position, t(:position) %> <span class="required">*</span><br />
+    <%= f.text_field :position, size: '10', placeholder: 0 %>
+    <%= f.error_message_on :position %>
+  <% end %>
+
+   <%= f.field_container :customizations_enabled_for do %>
+    <%= f.label :customizations_enabled_for, t(:customizations_enabled_for) %> <span class="required">*</span><br />
+    <% f.object.product.customisation_values.each_with_index do |c, i| %>
+      <div>
+        <%= f.check_box 'customizations_enabled_for', {multiple: true}, c.name, nil %> <%= c.presentation %>
+      </div>
+    <% end %>
+    <%= f.error_message_on :customizations_enabled_for %>
+  <% end %>
+
+
+  <%= f.field_container :base_image do %>
+    <%= f.label :base_image, t(:base_image) %>
+    <%= f.error_message_on :base_image %>
+    <%= f.file_field :base_image %>
+    <% if f.object.base_image.present? %>
+      <br />
+      <%= image_tag f.object.base_image.url(:original), style: "max-width: 300px; background-color: #efefef;" %>
+    <% end %>
+  <% end %>
+
+  <%= f.field_container :layer_image do %>
+    <%= f.label :layer_image, t(:layer_image) %>
+    <%= f.error_message_on :layer_image %>
+    <%= f.file_field :layer_image %>
+    <% if f.object.layer_image.present? %>
+      <br />
+      <%= image_tag f.object.layer_image.url(:original), style: "max-width: 300px; background-color: #efefef;" %>
+    <% end %>
+  <% end %>
+</div>
