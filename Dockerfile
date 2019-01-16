@@ -1,14 +1,11 @@
-FROM ruby:2.3-slim-stretch
+FROM ruby:2.3.3-slim
 
-# Postgres install
-# RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' >> /etc/apt/sources.list.d/postgresql.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' >> /etc/apt/sources.list.d/postgresql.list
 
-RUN apt-get update && apt-get install -qq -y wget gnupg --fix-missing --no-install-recommends
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+RUN apt-get update && apt-get install -qq -y wget
+
 RUN wget --no-check-certificate -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O- | apt-key add -
-RUN apt-get update && apt-get install -qq -y postgresql-client-10 --fix-missing --no-install-recommends
-
-RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev git libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev imagemagick libmagickwand-dev netcat webp cron --fix-missing --no-install-recommends
+RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client-9.6 git libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev imagemagick libmagickwand-dev netcat webp cron --fix-missing --no-install-recommends
 
 ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
@@ -31,7 +28,7 @@ COPY vendor ./vendor
 COPY engines ./engines
 COPY spree_masterpass ./spree_masterpass
 
-RUN gem install bundler -v 1.17.3
+RUN gem install bundler
 RUN bundle install --local
 
 COPY . .
