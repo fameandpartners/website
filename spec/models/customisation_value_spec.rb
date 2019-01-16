@@ -10,7 +10,6 @@ describe CustomisationValue, :type => :model do
 
     it { is_expected.to validate_uniqueness_of(:name).scoped_to(:product_id) }
     it { is_expected.to validate_uniqueness_of(:presentation).scoped_to(:product_id) }
-    it { is_expected.to validate_uniqueness_of(:position).scoped_to(:product_id) }
 
     it { is_expected.to validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:position).only_integer }
