@@ -28,7 +28,7 @@ COPY vendor ./vendor
 COPY engines ./engines
 COPY spree_masterpass ./spree_masterpass
 
-RUN gem install bundler
+RUN gem install bundler -v 1.16.1
 RUN bundle install --local
 
 COPY . .
