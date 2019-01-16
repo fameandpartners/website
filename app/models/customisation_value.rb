@@ -51,9 +51,6 @@ class CustomisationValue < ActiveRecord::Base
             presence: true,
             numericality: {
               only_integer: true
-            },
-            uniqueness: {
-              scope: :product_id
             }
   validates :customisation_type,
             presence: true,
