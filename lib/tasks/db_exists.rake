@@ -5,8 +5,10 @@ namespace :db do
       Rake::Task['environment'].invoke
       ActiveRecord::Base.connection
     rescue
+      puts "1"
       exit 1
     else
+      puts "0"
       exit 0
     end
   end
