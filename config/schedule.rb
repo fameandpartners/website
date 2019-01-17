@@ -1,5 +1,5 @@
 set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && :job'"
-job_type :rake,    "cd :path && :environment_variable=:environment /usr/local/bundle/bin/rake :task --silent :output"
+job_type :rake, "cd :path && :environment_variable=:environment /usr/local/bundle/bin/rake :task --silent :output"
 set :environment, ENV['RAILS_ENV']
 set :output, {:standard => '/app/log/cron_log.log', :error => '/app/log/cron_error_log.log'}
 
@@ -50,7 +50,3 @@ every(1.day) {
 #every(1.week) {
 #  rake 'newgistics:upload_order_list' } #Order file that needs to be shipped out by Newgistics; not needed yet
 #}
-
-if Rails.env.staging?
-  every (1.minute) { rake 'db:exists' }
-end
