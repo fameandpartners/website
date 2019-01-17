@@ -1,9 +1,10 @@
 set :job_template, "bash -l -c '[[ ! -f /app/tmp/STOP_CRONS ]] && :job'"
+job_type :rake,    "cd :path && :environment_variable=:environment rake :task --silent :output"
 set :environment, ENV['RAILS_ENV']
 set :output, "/app/log/cron_log.log"
 
 # Fix docker env issue
-ENV.each { |k, v| env(k, v) }
+# ENV.each { |k, v| env(k, v) }
 
 every 1.day, at: '1:00 am' do
   rake 'feed:export:all'

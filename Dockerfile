@@ -11,8 +11,6 @@ ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
-ENV BUNDLE_CACHE_PATH vendor/cache
-
 ARG CIRCLE_SHA1
 ENV CIRCLE_SHA1 $CIRCLE_SHA1
 ARG CIRCLE_BRANCH
@@ -28,8 +26,9 @@ COPY vendor ./vendor
 COPY engines ./engines
 COPY spree_masterpass ./spree_masterpass
 
+RUN gem update --system 2.5.2
 RUN gem install bundler -v 1.16.1
-RUN bundle install --local
+RUN bundle install --local --path=vendor/cache
 
 COPY . .
 

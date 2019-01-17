@@ -5,10 +5,10 @@ namespace :db do
       Rake::Task['environment'].invoke
       ActiveRecord::Base.connection
     rescue
-      puts "1"
+      puts "Database does not exist"
       exit 1
     else
-      puts "0"
+      puts "Database exists"
       exit 0
     end
   end
