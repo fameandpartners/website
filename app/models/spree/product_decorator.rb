@@ -119,19 +119,22 @@ Spree::Product.class_eval do
         fake_image(image_url)
       ]
     end
-
-    if is_new_product?
-      return [
-        fake_image("#{configatron.asset_host}/assets/noimage/customdress.png")
-      ]
-    end
         
-    curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first || curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first || curations.first
+    curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, customisations)).first || 
+      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first || 
+      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first || 
+      curations.first
 
     if cropped
       images = curation&.cropped_images || []
     else
       images = curation&.images || []
+    end
+
+    if images.blank?
+      return [
+        fake_image("#{configatron.asset_host}/assets/noimage/customdress.png")
+      ]
     end
 
     images
