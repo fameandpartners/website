@@ -63,10 +63,10 @@
       </div>
 
       <%if product.message : %>
-        <div class="SampleSaleMessage__content col-xs-12">
+        <div class="SampleSaleMessage__content col-xs-12" style="margin-top: 15px">
           <div class="col-xs-12">
             <p class="SampleSale__copy font-sans-serif">
-            <%= product.message %>.
+            <%= product.message %>
             </p>
           </div>
         </div>

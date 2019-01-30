@@ -20,7 +20,8 @@ class LineItemSerializer < ActiveModel::Serializer
     :return_eligible,
 
     #for legacy checkout
-    :display_price
+    :display_price,
+    :message
 
   has_many :making_options, serializer: MakingOptionSerializer
   has_many :available_making_options, serializer: MakingOptionSerializer

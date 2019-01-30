@@ -259,4 +259,8 @@ Spree::LineItem.class_eval do
       "#{configatron.product_catalog_url}/admin/productionsheet/#{new_sku}"
     end
   end
+
+  def message
+    "Fabric swatches are final sale. US & AU shipping only." if fabric_swatch?
+  end
 end

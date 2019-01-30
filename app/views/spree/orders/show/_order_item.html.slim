@@ -29,6 +29,6 @@
               | Size: <span class="value">#{line_item.size_name}</span>
           li
             | Quantity: <span class="value">#{line_item.quantity}</span>
-          - if !line_item.item.stock.nil?
+          - if line_item.item.message
             li style="padding-top: 15px"
-              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">Fabric swatches are final sale.<br /> US shipping only.</span>
+              | <span class="SampleSaleOrderMessage__content SampleSale__copy col-xs-10">#{line_item.item.message}</span>
