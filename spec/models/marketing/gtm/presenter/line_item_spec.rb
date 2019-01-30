@@ -33,7 +33,7 @@ module Marketing
                 price:        16.11,
                 product_sku:  'ProductSKU',
                 description:  'Super Product Description',
-                image_url:    nil,
+                image_url:    "http://localhost/assets/noimage/customdress.png",
                 is_curation:  false,
                 product_path:  '/dresses/dress-super-dress-123',
                 product_url:  'http://localhost/dresses/dress-super-dress-123'
