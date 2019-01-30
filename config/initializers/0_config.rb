@@ -3,7 +3,6 @@ configatron.host                    = ENV['APP_HOST']
 configatron.noreply                 = 'Fame And Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
-configatron.sitemap_url             = "#{ENV['RAILS_ASSET_HOST']}/sitemap/sitemap.xml.gz"
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']

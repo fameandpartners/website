@@ -70,8 +70,6 @@ gem 'koala'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
-gem 'sitemap_generator'
-
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'

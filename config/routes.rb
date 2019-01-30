@@ -22,11 +22,6 @@ FameAndPartners::Application.routes.draw do
   get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
   get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
 
-  ##########
-  # Sitemaps
-  ##########
-  get 'sitemap', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
-
   ##############################
   # Devise & User authentication
   ##############################
@@ -286,11 +281,6 @@ FameAndPartners::Application.routes.draw do
   resources :payment_requests, only: [:new, :create]
 
   post 'shipments_update', to: 'shippo/shipments#update'
-
-  ##################
-  # Robots and Feeds
-  ##################
-  get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   ################
   # User Campaigns
