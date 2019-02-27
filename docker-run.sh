@@ -85,6 +85,9 @@ if [ "${RAILS_TYPE}" == "worker" ]; then
     if [ -f "/app/bin/whenever" ]; then
       info "Starting whenever daemon"
       /app/bin/whenever --update-crontab "fame-${RAILS_ENV}" --set "environment=${RAILS_ENV}"
+
+      info "Restarting cron daemon"
+      /etc/init.d/cron restart
     fi
   fi
 
