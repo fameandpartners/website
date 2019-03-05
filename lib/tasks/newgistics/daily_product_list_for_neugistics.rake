@@ -37,6 +37,10 @@ namespace :newgistics do
         product = li.product
         lip = Orders::LineItemPresenter.new(li)
         sku = CustomItemSku.new(li).call
+        gsku = GlobalSku.find_or_create_by_line_item(line_item_presenter: lip)
+
+        # TODO: Fix this bug at some point. GlobalSku not generated for some items.
+        next if gsku.nil?
 
         # https://app.asana.com/0/791202471134961/802917601473069
         # Newgistics can't handle sku's over 60 chars in length
@@ -44,7 +48,7 @@ namespace :newgistics do
 
         csv << [sku, product.name, '', '', '',
                 '', format('%.2f', li.price / 2), format('%.2f', li.price),
-                GlobalSku.find_or_create_by_line_item(line_item_presenter: lip).upc, product.category&.category, product&.factory&.name, '',
+                gsku.upc, product.category&.category, product&.factory&.name, '',
                 sku, product.images&.first&.attachment&.url, '', 'CN']
       end
     end
