@@ -1,5 +1,6 @@
 Spree::Image.class_eval do
   attr_accessible :viewable, :attachment_file_name
+  attr_accessor :delay_postprocessing
 
   self.attachment_definitions[:attachment].merge!(Paperclip::Attachment.default_options)
 
@@ -49,4 +50,19 @@ Spree::Image.class_eval do
     :webp_xsmall => '-define webp:lossless=false -quality 90 -strip',
     :webp_xxsmall => '-define webp:lossless=false -quality 90 -strip',
   }
+
+  before_post_process :hook_delay_postprocessing
+  after_save do
+    if delay_postprocessing
+      ReprocessImageWorker.perform_async(id)
+    end
+  end
+
+  def hook_delay_postprocessing
+    if delay_postprocessing
+      false
+    else
+      true
+    end
+  end
 end

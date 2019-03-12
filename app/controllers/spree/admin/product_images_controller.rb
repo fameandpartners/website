@@ -8,10 +8,12 @@ module Spree
 
       def upload
         if params[:product] && params[:product][:images]
-          viewable = Curation.find!(params[:product][:viewable_id])
+          viewable = Curation.find(params[:product][:viewable_id])
 
           images = params[:product][:images].collect do |attachment|
-            image = Spree::Image.new(attachment: attachment)
+            image = Spree::Image.new
+            image.delay_postprocessing = true
+            image.attachment = attachment
             image.viewable = viewable
             image.save!
             image

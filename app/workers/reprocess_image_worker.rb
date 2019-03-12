@@ -1,5 +1,7 @@
 class ReprocessImageWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'image_processing'
+
 
   def perform(image_id)
     image = Spree::Image.find(image_id)

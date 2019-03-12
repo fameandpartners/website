@@ -10,5 +10,6 @@ Spree::Admin::ImagesController.class_eval do
 
   def set_viewable
     @image.viewable = Curation.find(params[:image].delete(:viewable_id))
+    @image.delay_postprocessing = true
   end
 end

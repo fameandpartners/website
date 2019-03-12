@@ -1,5 +1,6 @@
 class AddCurationImageWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'image_processing'
 
   def perform(image_url, position, curation_id)
     Dir.mktmpdir do |dir|
