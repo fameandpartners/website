@@ -162,6 +162,7 @@ module Products
 
           media: images
             .sort_by(&:position)
+            .select { |x| x.attachment_content_type.present? }
             .take(2)
             .collect do |image| 
             {

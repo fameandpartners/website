@@ -94,7 +94,7 @@
        maxFileSize: 5000000,
        acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
        formData: function(form) {
-         return [{name: 'product[viewable_type]', value: $('#image_viewable_type').val()}]
+         return [{name: 'product[viewable_id]', value: $('#image_viewable_id').val()}]
        }
      }).bind('fileuploadcompleted', function (e, data) {
        if (data.context) {
