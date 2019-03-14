@@ -4,7 +4,7 @@
       .ibox-title
         h5 Create new fabric
       .ibox-content
-        = render 'form', url: fabric_path, submit_text: 'Create'
+        = render 'form', url: fabrics_path, submit_text: 'Create'
         alert.alert-warning
           | Warning: updating colors custom/active attributes require product reindexing. To do it, proceed to the &nbsp;
           = link_to 'product index section', backend_product_indexes_path

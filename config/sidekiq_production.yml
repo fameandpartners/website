@@ -7,3 +7,4 @@ production:
   :concurrency: 5
 :queues:
   - default
+  - image_processing
