@@ -107,7 +107,7 @@ module ReturnsProcessesControllerHelper
       order.user_last_name,
       order.shipping_address,
       order.email,
-      order.id
+      order.number
     )
 
     if(label.fetch_shipping_label_from_api.nil?)

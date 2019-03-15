@@ -15,7 +15,7 @@ namespace :newgistics do
     # TODO REMOVE ME
     if Rails.env.production?
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "samw@fameandpartners.com",
+                              to: "davidp@fameandpartners.com",
                               cc: "catherinef@fameandpartners.com",
                               subject: "rake newgistics:update_item_returns",
                               body: res.inspect).deliver

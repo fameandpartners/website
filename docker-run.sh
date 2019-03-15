@@ -77,16 +77,20 @@ if [ "${RAILS_TYPE}" == "worker" ]; then
   mv_if_exists /app/config/sidekiq_production.yml /app/config/sidekiq.yml
 
   # Setup CRONJOBs only on leader
-  if [ -f "$LEADER_FNAME" ]; then
-    info "Starting cron daemon"
-    /etc/init.d/cron start
+  # Disabling running on leader only because it is not reliable
+  # if [ -f "$LEADER_FNAME" ]; then
+  info "Starting cron daemon"
+  /etc/init.d/cron start
 
-    # Setup whenever
-    if [ -f "/app/bin/whenever" ]; then
-      info "Starting whenever daemon"
-      /app/bin/whenever --update-crontab "fame-${RAILS_ENV}" --set "environment=${RAILS_ENV}"
-    fi
+  # Setup whenever
+  if [ -f "/app/bin/whenever" ]; then
+    info "Starting whenever daemon"
+    /app/bin/whenever --update-crontab "fame-${RAILS_ENV}" --set "environment=${RAILS_ENV}"
+
+    info "Restarting cron daemon"
+    /etc/init.d/cron restart
   fi
+  # fi
 
   info "Running sidekiq"
   cmd="/app/bin/sidekiq -C /app/config/sidekiq.yml -e ${RAILS_ENV}"

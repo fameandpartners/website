@@ -73,7 +73,7 @@ include Newgistics::NewgisticsHelper
         "dispositionRuleSetId" => newgistics_conf['rule_set'],
         "labelCount" => 1,
         "merchantID" => newgistics_conf['merchant_id']
-      }.merge(make_return_id_map).merge({"spreeOrderNumber": Spree::Order.find(@return_id).number})
+      }.merge(make_return_id_map)
     end
 
     def make_return_id_map
