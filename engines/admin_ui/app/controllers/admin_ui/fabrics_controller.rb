@@ -27,7 +27,11 @@ module AdminUi
       def create
         @form = Forms::FabricForm.new(Fabric.new)
         if @form.validate(params[:forms_fabric])
-          @form.save
+          @form.save do |hash|
+            hash["taxon_ids"] = [] unless params["forms_fabric"]["taxon_ids"]
+            hash["image"] = nil unless params["forms_fabric"]["image"]
+            @form.model.update_attributes(hash)
+          end
           message = { success: "Fabric '#{@form.model.name}' successfully created" }
           redirect_to edit_fabric_path(@form.model), flash: message
         else
@@ -47,7 +51,11 @@ module AdminUi
         @fabric = Fabric.find(params[:id])
         @form = Forms::FabricForm.new(@fabric)
         if @form.validate(params[:forms_fabric])
-          @form.save
+          @form.save do |hash|
+            hash["taxon_ids"] = [] unless params["forms_fabric"]["taxon_ids"]
+            hash["image"] = nil unless params["forms_fabric"]["image"]
+            @form.model.update_attributes(hash)
+          end
           message = { success: "Fabric '#{@fabric.presentation}' sucessfully updated"}
           redirect_to fabrics_path, flash: message
         else
