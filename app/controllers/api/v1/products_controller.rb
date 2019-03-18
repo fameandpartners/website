@@ -107,22 +107,7 @@ module Api
       end
 
       def search
-        color_mapping = {
-          "print": "",
-          "white-ivory": '#f5f4f3',
-          "nude-tan": '#E6D4C0',
-          "pastel": '#CBF6EB',
-          "metallic": '#ACA8A2',
-          "grey": '#7e7e7f',
-          "yellow": '#e9de0a',
-          "orange": '#ea5d32',
-          "pink": '#f458a6',
-          "red": '#e01b1b',
-          "green": '#10a522',
-          "purple": '#48217f',
-          "blue": '#0000ff',
-          "black": '#050505',
-        }
+
         image_mapping = {
           "print": 'https://d2ta5pga3sqz6i.cloudfront.net/assets/product-color-images/BlackAndWhiteGingham.jpg',
 
@@ -131,7 +116,7 @@ module Api
         filter = Array.wrap(params[:facets])
 
         # there is am overlap between color group names & taxons, so we make color groups win
-        color_group_names = Repositories::ProductColors.color_groups.map {|cg| cg[:name]}
+        color_group_names = Spree::Taxon.where("permalink ilike 'color/%'").map {|t| t.permalink.split("/").last }
         color_names = filter
           .select { |f| color_group_names.include?(f) }
         taxon_names = filter
@@ -206,6 +191,35 @@ module Api
         )
         aggregation_prices = Hash[*aggregation_prices_result["aggregations"]["prices"]["buckets"].map{|key, value| [key, value["doc_count"]]}.flatten]
 
+        taxon_facet_groups = Spree::Taxon
+        .where(parent_id: nil)
+        .sort_by(&:permalink)
+        .sort_by(&:position)
+        .map do |parent|
+          {
+            groupId: parent.permalink,
+            name: parent.name,
+            multiselect: true,
+            facets: parent.children.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
+              code = taxon.permalink.split("/").last
+              is_color = taxon.permalink.starts_with?("color/")
+
+              {
+                "facetId": code,
+                "title": taxon.name,
+                "order": i,
+                "docCount": (is_color ? aggregation_taxons[code] : aggregation_taxons[code])  || 0,
+                "facetMeta": {
+                  "hex": taxon.hex,
+                  "image": image_mapping[code]
+                }
+              }
+            end
+            .select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+          }
+        end
+        .select { |x| x[:facets].count > 0 }
+
         response = {
           results: result['hits']['hits'].map do |r|
             {
@@ -233,64 +247,31 @@ module Api
                 "name": "Filter by",
                 "hideHeader": false,
                 "facetGroupIds": [
-                  "color",
-                  "style",
-                  # "bodyshape",
+                  taxon_facet_groups.map { |x| x[:groupId]},
                   "price"
-                ]
+                ].flatten
               }
             ],
           },
-          facetGroups: {
-            "color": {
-              groupId: "color",
-              name: "Color",
-              multiselect: true,
-              facets: Repositories::ProductColors.color_groups.each_with_index.map do |group, i|
-                {
-                  "facetId": group[:name],
-                  "title": group[:presentation],
-                  "order": color_mapping.keys.find_index(group[:name].to_sym),
-                  "docCount": aggregation_colors[group[:name]] || 0,
-                  "facetMeta": {
-                    "hex": color_mapping[group[:name].to_sym],
-                    "image": image_mapping[group[:name].to_sym]
-                  }
-                }
-              end.sort_by{ |f| f[:order] }.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
-            },
-
-            "style": {
-              groupId: "style",
-              name: "Style",
-              multiselect: true,
-              facets: Spree::Taxon.filterable.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
-                code = taxon.permalink.split("/").last
-
-                {
-                  "facetId": code,
-                  "title": taxon.name,
-                  "order": i,
-                  "docCount": aggregation_taxons[code]  || 0,
-                }
-              end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
-            },
-
-            # bodyshape: {
-            #   groupId: "bodyshape",
-            #   name: "Bodyshape",
+          facetGroups: [
+            # {
+            #   groupId: "color",
+            #   name: "Color",
             #   multiselect: true,
-            #   facets: ProductStyleProfile::BODY_SHAPES.sort.each_with_index.map do |shape, i|
+            #   facets: Repositories::ProductColors.color_groups.each_with_index.map do |group, i|
             #     {
-            #       "facetId": shape,
-            #       "title": shape.humanize,
-            #       "order": i,
-            #       "docCount": aggregation_body_shapes[i] || 0,
+            #       "facetId": group[:name],
+            #       "title": group[:presentation],
+            #       "order": color_mapping.keys.find_index(group[:name].to_sym),
+            #       "docCount": aggregation_colors[group[:name]] || 0,
+
             #     }
-            #   end.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            #   end.sort_by{ |f| f[:order] }.select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             # },
 
-            price: {
+            taxon_facet_groups,
+
+            {
               groupId: "price",
               name: "Price",
               multiselect: true,
@@ -321,7 +302,8 @@ module Api
                 }
               ].select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
             }
-          },
+          ].flatten.index_by {|x| x[:groupId]},
+
           sortOptions: [
             # {
             #   name: "Sorted by most relevant",
