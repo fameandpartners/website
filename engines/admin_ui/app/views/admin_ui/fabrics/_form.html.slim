@@ -16,4 +16,10 @@
     = f.file_field :image
     = image_tag(@form.model.image.url, width: 150, height: 150) if @form.model.image.present?
   .form-group
+    = f.label :taxons
+    - @color_taxons.each do |taxon|
+      .group
+        = check_box_tag('forms_fabric[taxon_ids][]', taxon.id, @form.taxon_ids.include?(taxon.id))
+        = label_tag(taxon.id, taxon.name)
+  .form-group
     = f.submit submit_text, class: 'btn btn-primary'

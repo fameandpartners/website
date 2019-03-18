@@ -90,17 +90,18 @@ module Products
 
       taxons = [
         curation.taxons || [],
-        product.taxons
+        product.taxons,
+        fabric&.taxons || []
       ].flatten.uniq
 
       taxon_names = [
         taxons.map(&:permalink).map {|f| f.split('/').last },
+        taxons.map(&:permalink),
         product.sku,
         curation.pid,
         product.category&.category,
         product.category&.subcategory,
         product.making_options.active.map(&:making_option).map(&:code),
-        ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4},
         color&.name,
         fabric&.name,
         fabric&.material,
@@ -133,19 +134,6 @@ module Products
             taxon_ids:          taxons.map(&:id),
             taxons:             taxon_names,
             price:              product.price.to_f,
-
-            is_outerwear:     Spree::Product.outerwear.exists?(product.id),
-
-            # bodyshape sorting
-            apple:              product.style_profile&.apple,
-            pear:               product.style_profile&.pear,
-            athletic:           product.style_profile&.athletic,
-            strawberry:         product.style_profile&.strawberry,
-            hour_glass:         product.style_profile&.hour_glass,
-            column:             product.style_profile&.column,
-            petite:             product.style_profile&.petite,
-
-            body_shape_ids:     ProductStyleProfile::BODY_SHAPES.select{ |shape| product.style_profile.try(shape) >= 4}.map{|bs| ProductStyleProfile::BODY_SHAPES.find_index(bs) },
           },
           color:  color && {
             id:             color.id,

@@ -200,15 +200,6 @@ module Search
           end
         end
 
-        if include_aggregation_bodyshapes
-          aggregation :body_shape_ids do
-            terms do
-              field "product.body_shape_ids"
-              size 9999
-            end
-          end
-        end
-
         sort do         
           by "_score", order: 'desc'
  

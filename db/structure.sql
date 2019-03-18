@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 11.1
--- Dumped by pg_dump version 11.1
+-- Dumped by pg_dump version 11.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1116,6 +1116,16 @@ CREATE SEQUENCE public.fabrics_products_id_seq
 --
 
 ALTER SEQUENCE public.fabrics_products_id_seq OWNED BY public.fabrics_products.id;
+
+
+--
+-- Name: fabrics_taxons; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fabrics_taxons (
+    fabric_id integer,
+    taxon_id integer
+);
 
 
 --
@@ -5103,7 +5113,8 @@ CREATE TABLE public.spree_taxons (
     meta_keywords character varying(255),
     title character varying(255),
     published_at timestamp without time zone,
-    old_delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying
+    old_delivery_period character varying(255) DEFAULT '7 - 10 business days'::character varying,
+    hex character varying(255)
 );
 
 
@@ -8405,6 +8416,20 @@ CREATE INDEX index_fabrics_on_option_value_id ON public.fabrics USING btree (opt
 
 
 --
+-- Name: index_fabrics_taxons_on_fabric_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_taxons_on_fabric_id ON public.fabrics_taxons USING btree (fabric_id);
+
+
+--
+-- Name: index_fabrics_taxons_on_fabric_id_and_taxon_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_fabrics_taxons_on_fabric_id_and_taxon_id ON public.fabrics_taxons USING btree (fabric_id, taxon_id);
+
+
+--
 -- Name: index_facebook_data_on_spree_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -10548,3 +10573,7 @@ INSERT INTO schema_migrations (version) VALUES ('20190104013853');
 INSERT INTO schema_migrations (version) VALUES ('20190104030656');
 
 INSERT INTO schema_migrations (version) VALUES ('20190110025723');
+
+INSERT INTO schema_migrations (version) VALUES ('20190313031251');
+
+INSERT INTO schema_migrations (version) VALUES ('20190318001535');

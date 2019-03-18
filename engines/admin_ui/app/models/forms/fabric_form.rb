@@ -6,6 +6,7 @@ module Forms
     property :presentation
     property :material
     property :production_code
+    property :taxon_ids, default: []
 
     property :image
 

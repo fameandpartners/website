@@ -3,6 +3,8 @@ require_dependency 'spree/taxonomy_decorator'
 Spree::Taxon.class_eval do
   include Concerns::Publishable
   
+  attr_accessible :hex
+  
   FILTER_TAXON_PERMALINKS = ["style/halter", "style/strapless", "style/off-shoulder", "style/split", "style/sequin", "style/a-line", "style/bodycon", "style/fit-and-flare"]
 
   scope :filterable, -> { where(permalink: FILTER_TAXON_PERMALINKS)}
