@@ -3,7 +3,7 @@ require 'datagrid'
 module AdminUi
     class FabricsController < AdminUi::ApplicationController
 
-      before_filter :set_color_taxons
+      before_filter :set_taxons
 
       def index
         @collection = FabricGrid.new(params[:fabric_grid])
@@ -63,8 +63,9 @@ module AdminUi
         end
       end
 
-      def set_color_taxons
+      def set_taxons
         @color_taxons = Spree::Taxon.where("permalink ilike 'color/%'")
+        @fabric_taxons = Spree::Taxon.where("permalink ilike 'material/%'")
       end
     end
 end

@@ -16,8 +16,14 @@
     = f.file_field :image
     = image_tag(@form.model.image.url, width: 150, height: 150) if @form.model.image.present?
   .form-group
-    = f.label :taxons
+    = f.label :color_taxons
     - @color_taxons.each do |taxon|
+      .group
+        = check_box_tag('forms_fabric[taxon_ids][]', taxon.id, @form.taxon_ids.include?(taxon.id))
+        = label_tag(taxon.id, taxon.name)
+  .form-group
+    = f.label :fabric_taxons
+    - @fabric_taxons.each do |taxon|
       .group
         = check_box_tag('forms_fabric[taxon_ids][]', taxon.id, @form.taxon_ids.include?(taxon.id))
         = label_tag(taxon.id, taxon.name)
