@@ -194,13 +194,14 @@ module Api
         taxon_facet_groups = Spree::Taxon
         .where(parent_id: nil)
         .sort_by(&:permalink)
+        .sort_by(&:lft)
         .sort_by(&:position)
         .map do |parent|
           {
             groupId: parent.permalink,
             name: parent.name,
             multiselect: true,
-            facets: parent.children.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
+            facets: parent.children.sort_by(&:permalink).sort_by(&:lft).sort_by(&:position).each_with_index.map do |taxon, i|
               code = taxon.permalink.split("/").last
               is_color = taxon.permalink.starts_with?("color/")
               is_price = taxon.permalink.starts_with?("price/")

@@ -104,8 +104,7 @@ module Products
         product.making_options.active.map(&:making_option).map(&:code),
         color&.name,
         fabric&.name,
-        fabric&.material,
-        color&.option_values_groups&.map(&:name),
+        fabric&.material
       ].flatten.compact #.map(&:parameterize).map(&:underscore)
 
       {

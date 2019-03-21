@@ -192,6 +192,13 @@ module Search
           aggregation :prices do
             range do
               field "prices.#{currency}"
+              key   '0-50', from: 0, to: 50
+              key   '50-149', from: 50, to: 149
+              key   '149-199', from: 149, to: 199
+              key   '199-299', from: 199, to: 299
+              key   '299-399', from: 299, to: 399
+              key   '399+', from: 399
+              
               key   '0-199', from: 0, to: 199
               key   '200-299', from: 200, to: 299
               key   '300-399', from: 300, to: 399
