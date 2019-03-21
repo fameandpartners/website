@@ -129,24 +129,48 @@ module Api
         price_min = nil;
         price_max = nil;
 
-        if filter.include?('0-199')
+        if filter.include?('0-50')
           price_min = 0
+        elsif filter.include?('0-199')
+          price_min = 0
+        elsif filter.include?('50-149')
+          price_min = 50
+        elsif filter.include?('149-199')
+          price_min = 149
+        elsif filter.include?('199-299')
+          price_min = 199
         elsif filter.include?('200-299')
           price_min = 200
+        elsif filter.include?('299-399')
+          price_min = 299
         elsif filter.include?('300-399')
           price_min = 300
+        elsif filter.include?('399+')
+          price_min = 399
         elsif filter.include?('400')
           price_min = 400
         end
 
         if filter.include?('400')
           price_max = nil
+        elsif filter.include?('399+')
+            price_max = nil  
         elsif filter.include?('300-399')
+            price_max = 399
+        elsif filter.include?('299-399')
           price_max = 399
         elsif filter.include?('200-299')
           price_max = 299
+        elsif filter.include?('199-299')
+          price_max = 299
         elsif filter.include?('0-199')
           price_max = 199
+        elsif filter.include?('149-199')
+          price_max = 199
+        elsif filter.include?('50-149')
+          price_max = 149
+        elsif filter.include?('0-50')
+          price_max = 50
         end
 
 
