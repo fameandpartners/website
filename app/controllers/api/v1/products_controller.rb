@@ -121,7 +121,7 @@ module Api
           .select { |f| color_group_names.include?(f) }
         taxon_names = filter
           .reject { |f| color_group_names.include?(f) }
-          .reject { |f| ['0-199', '200-299', '300-399', '400'].include?(f) }
+          .reject { |f| ['0-50', '50-149', '149-199', '199-299', '299-399', '399+', '0-199', '200-299', '300-399', '400'].include?(f) }
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
@@ -192,10 +192,10 @@ module Api
         aggregation_prices = Hash[*aggregation_prices_result["aggregations"]["prices"]["buckets"].map{|key, value| [key, value["doc_count"]]}.flatten]
 
         taxon_facet_groups = Spree::Taxon
-        .where(parent_id: nil)
-        .sort_by(&:permalink)
-        .sort_by(&:lft)
-        .sort_by(&:position)
+          .includes(:taxonomy)
+          .where(parent_id: nil)
+          .select {|t| t.taxonomy != nil }
+          .sort_by { |t| t.taxonomy.position }
         .map do |parent|
           {
             groupId: parent.permalink,
