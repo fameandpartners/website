@@ -203,12 +203,13 @@ module Api
             facets: parent.children.sort_by(&:permalink).sort_by(&:position).each_with_index.map do |taxon, i|
               code = taxon.permalink.split("/").last
               is_color = taxon.permalink.starts_with?("color/")
+              is_price = taxon.permalink.starts_with?("price/")
 
               {
                 "facetId": code,
                 "title": taxon.name,
                 "order": i,
-                "docCount": (is_color ? aggregation_taxons[code] : aggregation_taxons[code])  || 0,
+                "docCount": (is_color ? aggregation_colors[code] : is_price ? aggregation_prices[code] : aggregation_taxons[code])  || 0,
                 "facetMeta": {
                   "hex": taxon.hex,
                   "image": image_mapping[code]
@@ -247,8 +248,7 @@ module Api
                 "name": "Filter by",
                 "hideHeader": false,
                 "facetGroupIds": [
-                  taxon_facet_groups.map { |x| x[:groupId]},
-                  "price"
+                  taxon_facet_groups.map { |x| x[:groupId]}
                 ].flatten
               }
             ],
@@ -271,37 +271,37 @@ module Api
 
             taxon_facet_groups,
 
-            {
-              groupId: "price",
-              name: "Price",
-              multiselect: true,
-              facets: [
-                {
-                  facetId: '0-199',
-                  title: '$0 - $199',
-                  order: 0,
-                  "docCount": aggregation_prices['0-199'],
-                },
-                {
-                  facetId: '200-299',
-                  title: '$200 - $299',
-                  order: 1,
-                  "docCount": aggregation_prices['200-299'],
-                },
-                {
-                  facetId: '300-399',
-                  title: '$300 - $399',
-                  order: 2,
-                  "docCount": aggregation_prices['300-399'],
-                },
-                {
-                  facetId: '400',
-                  title: '$400+',
-                  order: 3,
-                  "docCount": aggregation_prices['400'],
-                }
-              ].select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
-            }
+            # {
+            #   groupId: "price",
+            #   name: "Price",
+            #   multiselect: true,
+            #   facets: [
+            #     {
+            #       facetId: '0-199',
+            #       title: '$0 - $199',
+            #       order: 0,
+            #       "docCount": aggregation_prices['0-199'],
+            #     },
+            #     {
+            #       facetId: '200-299',
+            #       title: '$200 - $299',
+            #       order: 1,
+            #       "docCount": aggregation_prices['200-299'],
+            #     },
+            #     {
+            #       facetId: '300-399',
+            #       title: '$300 - $399',
+            #       order: 2,
+            #       "docCount": aggregation_prices['300-399'],
+            #     },
+            #     {
+            #       facetId: '400',
+            #       title: '$400+',
+            #       order: 3,
+            #       "docCount": aggregation_prices['400'],
+            #     }
+            #   ].select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+            # }
           ].flatten.index_by {|x| x[:groupId]},
 
           sortOptions: [
