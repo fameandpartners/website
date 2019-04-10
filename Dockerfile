@@ -1,5 +1,6 @@
 FROM ruby:2.3.8-slim-stretch
 
+RUN for i in {1..8}; do mkdir -p "/usr/share/man/man$i"; done
 RUN apt-get update && apt-get install -qq -y build-essential nodejs libpq-dev postgresql-client-9.6 git libxml2 libxml2-dev libxslt1-dev sqlite3 libsqlite3-dev imagemagick libmagickwand-dev netcat webp cron --fix-missing --no-install-recommends
 
 ENV INSTALL_PATH /app
