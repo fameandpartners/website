@@ -1,4 +1,4 @@
-FROM ruby:2.3.3-slim-stretch
+FROM ruby:2.3.8-slim-stretch
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' >> /etc/apt/sources.list.d/postgresql.list
 
