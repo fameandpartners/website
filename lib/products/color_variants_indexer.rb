@@ -115,7 +115,7 @@ module Products
           id: pid,
           product: {
             id:           product.id,
-            name:         curation.name || product.name,
+            name:         curation.name.present? ? curation.name : product.name,
             pid:          pid,
             sku:          product.sku,
             description:  product.description,

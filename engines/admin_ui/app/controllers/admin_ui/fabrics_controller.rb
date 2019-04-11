@@ -53,7 +53,7 @@ module AdminUi
         if @form.validate(params[:forms_fabric])
           @form.save do |hash|
             hash["taxon_ids"] = [] unless params["forms_fabric"]["taxon_ids"]
-            hash["image"] = nil unless params["forms_fabric"]["image"]
+            hash.delete("image") unless params["forms_fabric"]["image"]
             @form.model.update_attributes(hash)
           end
           message = { success: "Fabric '#{@fabric.presentation}' sucessfully updated"}

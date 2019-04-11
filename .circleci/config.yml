@@ -3,7 +3,7 @@ jobs:
   build:
     # TODO consider memcached
     docker:
-      - image: circleci/ruby:2.3.3-node-browsers
+      - image: circleci/ruby:2.3-stretch-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3

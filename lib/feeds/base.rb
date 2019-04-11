@@ -135,7 +135,7 @@ module Feeds
 
     # return image, additional images
     def get_images(curation)
-      images = curation.images.select {|img| img.position.present?}
+      images = curation.images.select {|img| img.position.present?}.select { |x| x.attachment_content_type.present? }
 
       images.sort_by!{ |i| i.position }
       cropped_images = images.select{ |i| i.attachment(:large).to_s.downcase.include?('crop') }
