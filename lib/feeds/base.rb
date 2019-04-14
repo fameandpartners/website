@@ -89,7 +89,7 @@ module Feeds
       fabric = curation.fabric
       color = curation.color || fabric&.option_value
 
-      color_presentation = color.presentation
+      color_presentation = color&.presentation
       size_presentation  = current_site_version.name == "USA" ? 'US 0-20' : 'AU 4-26'
 
       original_price = curation.price_in(current_site_version.currency)
