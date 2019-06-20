@@ -112,10 +112,10 @@ when :development
     expire.long     = 60.seconds
   end
 
-  # configatron.elasticsearch.indices do |index|
-  #   index.spree_products = :spree_products_development
-  #   index.color_variants = :color_variants_development
-  # end
+  configatron.elasticsearch.indices do |index|
+    index.spree_products = :spree_products_development
+    index.color_variants = :color_variants_development
+  end
 when :staging
   configatron.site_version_detector_strategy = :top_level_domain
 
