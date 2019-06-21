@@ -3,8 +3,12 @@ attributes *product_attributes
 child :variants_including_master => :variants do
   attributes *variant_attributes
 
-  child :option_values => :option_values do
-    attributes *option_value_attributes
+  # child :option_values => :option_values do
+  #   attributes *option_value_attributes
+  # end
+
+  node :option_values do |u|
+    []
   end
   
   child :images => :images do
@@ -15,9 +19,13 @@ end
 child :option_types => :option_types do
   attributes *option_type_attributes
 
-  child :option_values => :option_values do
-    attributes *option_value_attributes
+  # child :option_values => :option_values do
+  #   attributes *option_value_attributes
+  # end
+  node :option_values do |u|
+    []
   end
+  
 end
 
 child :product_properties => :product_properties do
