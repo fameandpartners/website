@@ -151,6 +151,44 @@ Spree::CheckoutController.class_eval do
 
         OrderBotWorker.perform_async(@order.id)
 
+        # Klaviyo placed order
+        order_line_items = @order.line_items || []
+        @klaviyo = Klaviyo::Client.new(configatron.klaviyo_token)
+        @klaviyo.track('Placed Order',
+          email: try_spree_current_user&.email || @order.email,
+          properties: {
+            "$event_id": @order.id,
+            "$value": @order.total,
+            "ItemNames": order_line_items.map { |line_item| line_item.product.name },
+            "Items": order_line_items.map do |line_item|
+              {
+                "ProductID": line_item.product.id,
+                "SKU": line_item.product.sku,
+                "ProductName": line_item.product.name,
+                "Quantity": line_item.quantity,
+                "ItemPrice": line_item.price,
+                "RowTotal": line_item.price * line_item.quantity
+              }
+            end
+          },
+          time: Time.now
+        )
+
+        order_line_items.each do |line_item|
+          @klaviyo.track('Ordered Product',
+            email: try_spree_current_user&.email || @order.email,
+            properties: {
+              "$event_id": line_item.id,
+              "$value": line_item.price * line_item.quantity,
+              "ProductID": line_item.product.id,
+              "SKU": line_item.product.sku,
+              "ProductName": line_item.product.name,
+              "Quantity": line_item.quantity,
+            },
+            time: Time.now
+          )
+        end
+
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }

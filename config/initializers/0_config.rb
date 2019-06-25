@@ -97,6 +97,8 @@ configatron.bronto do |bronto|
   bronto.rest_client_secret = ENV['BRONTO_REST_CLIENT_SECRET']
 end
 
+configatron.klaviyo_token = ENV['KLAVIYO_API_TOKEN']
+
 
 configatron.order_bot_client_user = ENV['ORDERBOT_USER']
 configatron.order_bot_client_pass = ENV['ORDERBOT_PASS']

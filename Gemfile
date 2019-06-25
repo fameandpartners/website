@@ -29,6 +29,7 @@ gem 'rake', '< 12.0'
 gem 'newrelic_rpm'
 gem 'sentry-raven'
 gem 'customerio', '~> 1.0.0'
+gem 'klaviyo'
 
 # Engines
 path 'engines' do
