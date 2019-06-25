@@ -105,7 +105,7 @@ class UserCart::ProductsController < UserCart::BaseController
     populator = Spree::OrderPopulator.new(current_order(true), current_currency)
 
     line_item_ids.each do |line_item_id|
-      li = Spree::LineItem.find(line_item)
+      li = Spree::LineItem.find(line_item_id)
       next if li.order.completed?
       
       if populator.populate(line_item: [line_item_id.to_i])
