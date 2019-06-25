@@ -83,7 +83,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
     restore_cart(abandoned_cart['lineItems'].map { |item| item['other'] })
 
-    cart = @user_cart.serialize
+    cart = current_order.serialize
 
     unless cart.nil?
       render :json => {:success=>true, :cart=>cart, :abandoned_cart=>abandoned_cart}, status: 200
