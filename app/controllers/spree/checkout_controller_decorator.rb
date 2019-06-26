@@ -473,23 +473,16 @@ Spree::CheckoutController.class_eval do
                      form_name: 'checkout').capture
 
     # klaviyo subscribe
-    response = make_post_request("#{configatron.klaviyo_api_endpoint}/v2/lists/#{configatron.klaviyo_list}/subscribe", {
-        api_key: configatron.klaviyo_token,
-        profiles: [
-          {
-            email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name
-          }
-        ]
+    make_post_request("#{configatron.klaviyo_api_endpoint}/v2/lists/#{configatron.klaviyo_list}/subscribe", {
+      api_key: configatron.klaviyo_token,
+      profiles: [
+        {
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name
+        }
+      ]
     })
-
-    unless response.nil?
-        json_obj = JSON.parse(response)
-        
-        @access_token_expires_at = Time.now + json_obj['expires_in']
-        @access_token = json_obj['access_token']
-    end
   end
 
    def make_post_request(url, body)
