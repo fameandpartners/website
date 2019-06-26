@@ -1,3 +1,5 @@
+require 'rest-client'
+
 Spree::CheckoutController.class_eval do
 
   before_filter :before_masterpass
@@ -150,6 +152,44 @@ Spree::CheckoutController.class_eval do
         end
 
         OrderBotWorker.perform_async(@order.id)
+
+        # Klaviyo placed order
+        order_line_items = @order.line_items || []
+        @klaviyo = Klaviyo::Client.new(configatron.klaviyo_token)
+        @klaviyo.track('Placed Order',
+          email: try_spree_current_user&.email || @order.email,
+          properties: {
+            "$event_id": @order.id,
+            "$value": @order.total,
+            "ItemNames": order_line_items.map { |line_item| line_item.product.name },
+            "Items": order_line_items.map do |line_item|
+              {
+                "ProductID": line_item.product.id,
+                "SKU": line_item.product.sku,
+                "ProductName": line_item.product.name,
+                "Quantity": line_item.quantity,
+                "ItemPrice": line_item.price,
+                "RowTotal": line_item.price * line_item.quantity
+              }
+            end
+          },
+          time: Time.now
+        )
+
+        order_line_items.each do |line_item|
+          @klaviyo.track('Ordered Product',
+            email: try_spree_current_user&.email || @order.email,
+            properties: {
+              "$event_id": line_item.id,
+              "$value": line_item.price * line_item.quantity,
+              "ProductID": line_item.product.id,
+              "SKU": line_item.product.sku,
+              "ProductName": line_item.product.name,
+              "Quantity": line_item.quantity,
+            },
+            time: Time.now
+          )
+        end
 
         respond_with(@order) do |format|
           format.html{ redirect_to completion_route }
@@ -431,5 +471,25 @@ Spree::CheckoutController.class_eval do
                      utm_params: session[:utm_params],
                      site_version: current_site_version.name,
                      form_name: 'checkout').capture
+
+    # klaviyo subscribe
+    make_post_request("#{configatron.klaviyo_api_endpoint}/v2/list/#{configatron.klaviyo_list}/subscribe", {
+      api_key: configatron.klaviyo_token,
+      profiles: [
+        {
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name
+        }
+      ]
+    })
+  end
+
+   def make_post_request(url, body)
+      begin
+        return RestClient.post(url, body)
+      rescue RestClient::ExceptionWithResponse => e
+        Raven.capture_exception(e, extra: { url: url })
+      end
   end
 end
