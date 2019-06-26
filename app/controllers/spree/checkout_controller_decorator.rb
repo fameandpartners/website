@@ -1,3 +1,5 @@
+require 'rest-client'
+
 Spree::CheckoutController.class_eval do
 
   before_filter :before_masterpass
@@ -469,5 +471,32 @@ Spree::CheckoutController.class_eval do
                      utm_params: session[:utm_params],
                      site_version: current_site_version.name,
                      form_name: 'checkout').capture
+
+    # klaviyo subscribe
+    response = make_post_request("#{configatron.klaviyo_api_endpoint}/v2/lists/#{configatron.klaviyo_list}/subscribe", {
+        api_key: configatron.klaviyo_token,
+        profiles: [
+          {
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name
+          }
+        ]
+    })
+
+    unless response.nil?
+        json_obj = JSON.parse(response)
+        
+        @access_token_expires_at = Time.now + json_obj['expires_in']
+        @access_token = json_obj['access_token']
+    end
+  end
+
+   def make_post_request(url, body)
+      begin
+        return RestClient.post(url, body)
+      rescue RestClient::ExceptionWithResponse => e
+        Raven.capture_exception(e, extra: { url: url })
+      end
   end
 end
