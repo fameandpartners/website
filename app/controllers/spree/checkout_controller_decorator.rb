@@ -461,16 +461,17 @@ Spree::CheckoutController.class_eval do
   end
 
   def subscribe(user)
-    EmailCapture.new({},
-                     email: user.email,
-                     newsletter: user.newsletter,
-                     first_name: user.first_name,
-                     last_name: user.last_name,
-                     current_sign_in_ip: request.remote_ip,
-                     landing_page: session[:landing_page],
-                     utm_params: session[:utm_params],
-                     site_version: current_site_version.name,
-                     form_name: 'checkout').capture
+    # disable because we're moving to klaviyo from bronto
+    # EmailCapture.new({},
+    #                  email: user.email,
+    #                  newsletter: user.newsletter,
+    #                  first_name: user.first_name,
+    #                  last_name: user.last_name,
+    #                  current_sign_in_ip: request.remote_ip,
+    #                  landing_page: session[:landing_page],
+    #                  utm_params: session[:utm_params],
+    #                  site_version: current_site_version.name,
+    #                  form_name: 'checkout').capture
 
     # klaviyo subscribe
     make_post_request("#{configatron.klaviyo_api_endpoint}/v2/list/#{configatron.klaviyo_list}/subscribe", {
@@ -487,9 +488,9 @@ Spree::CheckoutController.class_eval do
 
    def make_post_request(url, body)
       begin
-        return RestClient.post(url, body)
+        return RestClient.post(url, body.to_json, { content_type: :json })
       rescue RestClient::ExceptionWithResponse => e
-        Raven.capture_exception(e, extra: { url: url })
+        Raven.capture_exception(e, extra: { url: url, body: body })
       end
   end
 end
