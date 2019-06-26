@@ -473,7 +473,7 @@ Spree::CheckoutController.class_eval do
                      form_name: 'checkout').capture
 
     # klaviyo subscribe
-    make_post_request("#{configatron.klaviyo_api_endpoint}/v2/lists/#{configatron.klaviyo_list}/subscribe", {
+    make_post_request("#{configatron.klaviyo_api_endpoint}/v2/list/#{configatron.klaviyo_list}/subscribe", {
       api_key: configatron.klaviyo_token,
       profiles: [
         {
