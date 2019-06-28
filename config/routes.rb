@@ -323,6 +323,7 @@ FameAndPartners::Application.routes.draw do
       put '/product_upload' => 'product_upload#upload'
 
       get 'track' => 'tracking#track'
+      post '/subscribe_newsletter' => 'tracking#subscribe_newsletter'
 
       # user session
       devise_scope :spree_user do
