@@ -108,7 +108,8 @@ namespace :newgistics do
   def generate_csv(return_request_items)
     csv_headers = ['OrderId', 'FirstName', 'LastName', 'Address1', 'Address2', 'City', 'State','PostalCode',
                    'CountryCode', 'Tracking', 'SKU', 'Quantity']
-    temp_file = Tempfile.new('foo')  # self GC temp_file
+    #temp_file = Tempfile.new('foo')  # self GC temp_file
+    temp_file = "/home/544.csv"
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
@@ -125,6 +126,8 @@ namespace :newgistics do
       end
     end
 
+    FileUtil.cp 'foo' '/app'
+
     if Rails.env.production?
       # TODO REMOVE ME
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
@@ -139,7 +142,8 @@ namespace :newgistics do
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
                       password: configatron.newgistics.ftp_password) do |sftp|
-        sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+        #sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+        sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
     end
   end
