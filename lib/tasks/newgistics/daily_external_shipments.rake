@@ -97,7 +97,7 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
     return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
-    return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
+    return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
 
 
     generate_csv(return_request_items)
@@ -135,7 +135,7 @@ namespace :newgistics do
                               body: temp_file.read).deliver
     end
 
-    if Rails.env.production?
+    #if Rails.env.production?
       temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
@@ -146,6 +146,6 @@ namespace :newgistics do
         puts ("ftp_password: " + configatron.newgistics.ftp_password)
         sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
-    end
+    #end
   end
 end
