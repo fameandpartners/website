@@ -126,8 +126,6 @@ namespace :newgistics do
       end
     end
 
-    FileUtil.cp 'foo' '/app'
-
     if Rails.env.production?
       # TODO REMOVE ME
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
@@ -143,6 +141,9 @@ namespace :newgistics do
                       configatron.newgistics.ftp_user,
                       password: configatron.newgistics.ftp_password) do |sftp|
         #sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
+        puts ("ftp_uri: " + configatron.newgistics.ftp_uri)
+        puts ("ftp_user: " + configatron.newgistics.ftp_user)
+        puts ("ftp_password: " + configatron.newgistics.ftp_password)
         sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
     end
