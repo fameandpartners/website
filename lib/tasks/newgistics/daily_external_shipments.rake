@@ -103,7 +103,7 @@ namespace :newgistics do
     puts scheduler.last_successful_run
     return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
     puts "cccc"
-    puts ReturnRequestItem.last(100).to_sql
+    puts ReturnRequestItem.last(100)
     puts "dddd"
     puts return_request_items
     puts "eeee"
