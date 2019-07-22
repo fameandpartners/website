@@ -96,8 +96,8 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
-    return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
+    return_request_items = ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s) # get returns initiated since last run
+    #return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
 
 
     generate_csv(return_request_items)
