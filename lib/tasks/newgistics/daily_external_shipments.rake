@@ -109,7 +109,7 @@ namespace :newgistics do
     csv_headers = ['OrderId', 'FirstName', 'LastName', 'Address1', 'Address2', 'City', 'State','PostalCode',
                    'CountryCode', 'Tracking', 'SKU', 'Quantity']
     #temp_file = Tempfile.new('foo')  # self GC temp_file
-    temp_file = "/home/544.csv"
+    temp_file = File.new("/home/544.csv", "w+")
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
@@ -147,5 +147,6 @@ namespace :newgistics do
         sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
     #end
-  end
+    temp_file.close
+    end
 end
