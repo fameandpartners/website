@@ -96,14 +96,14 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
+    return_request_items = ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s) # get returns initiated since last run
     puts "aaaa"
-    puts ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run).to_sql
+    puts ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s).to_sql
     puts "bbbb"
     puts scheduler.last_successful_run
-    return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
+    #return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
     puts "cccc"
-    puts ReturnRequestItem.last(100)
+    #puts ReturnRequestItem.last(100)
     puts "dddd"
     puts return_request_items
     puts "eeee"
