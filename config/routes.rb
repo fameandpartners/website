@@ -85,6 +85,7 @@ FameAndPartners::Application.routes.draw do
   ########################
   # Redirect legacy pages
   ########################
+  get '/social', to: redirect("/?utm_medium=social&utm_source=fnp-ig-profile-link&utm_campaign=us_ig-profile-link_atlanta_prospecting_all&utm_content=profile-link")
   get '/wedding-atelier(/*anything)' => redirect('/custom-clothes/the-custom-clothing-studio?utm_source=legacy-wedding-atelier'), as: :wedding_atelier_app_landing_page
   get '/sale-dresses' => redirect('/dresses/sale')
   get '/slayitforward', to: redirect('https://www.instagram.com/explore/tags/slayitforward/'), :as => :slay_it_forward
