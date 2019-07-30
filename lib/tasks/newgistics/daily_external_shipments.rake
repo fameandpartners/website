@@ -96,18 +96,12 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s) # get returns initiated since last run
-    puts "aaaa"
-    puts ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s).to_sql
-    puts "bbbb"
-    puts scheduler.last_successful_run
-    #return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
-    puts "cccc"
-    #puts ReturnRequestItem.last(100)
-    puts "dddd"
-    puts return_request_items
-    puts "eeee"
-    puts 5.day.ago.utc.to_datetime.to_s
+    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
+    return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
+
+    puts ("upload return list success")
+    puts ("last successful run: "+ scheduler.last_successful_run)
+    puts ("current successful run: "+ current_time)
 
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
@@ -125,6 +119,11 @@ namespace :newgistics do
         order = return_request.order
         li = return_request.line_item
         address = order.ship_address
+
+        if (address.state).nil?
+          puts ("error order: address.state is null: "+order.number)
+          next
+        end
 
         if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
         csv << [order.number, address.firstname, address.lastname, address.address1,
@@ -144,7 +143,7 @@ namespace :newgistics do
                               body: temp_file.read).deliver
     end
 
-    #if Rails.env.production?
+    if Rails.env.production?
       temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
@@ -155,7 +154,7 @@ namespace :newgistics do
         puts ("ftp_password: " + configatron.newgistics.ftp_password)
         sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
-    #end
+    end
     temp_file.close
     end
 end
