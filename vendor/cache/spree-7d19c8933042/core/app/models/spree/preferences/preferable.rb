@@ -38,7 +38,7 @@ module Spree::Preferences::Preferable
 
   def set_preference(name, value)
     has_preference! name
-    send self.class.preference_setter_method(name), value
+    send self.class.preference_setter_method(name), value unless ENV['USE_PRO_DB_IN_DEV'] == '1'
   end
 
   def preference_type(name)

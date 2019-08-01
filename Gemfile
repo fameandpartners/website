@@ -25,6 +25,8 @@ gem 'net-ssh'
 gem 'activerecord-postgres-json'
 gem 'rake', '< 12.0'
 
+gem 'http'
+
 # Monitoring & Events
 gem 'newrelic_rpm'
 gem 'sentry-raven'

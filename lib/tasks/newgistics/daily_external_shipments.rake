@@ -92,36 +92,65 @@ namespace :newgistics do
         scheduler = Newgistics::NewgisticsScheduler.new
         scheduler.last_successful_run = 5.day.ago.utc.to_datetime.to_s
         scheduler.name = 'daily_returns'
-        scheduler.save unless ENV['DRY_RUN']=='1'
+        if Rails.env.production?
+          scheduler.save unless ENV['DRY_RUN']=='1'
+        end
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    puts "last successfull run: " + scheduler.last_successful_run.to_s
+    last_successful_run_time = Time.parse(scheduler.last_successful_run.to_s).utc
+    one_day_after_last_successful_run_time = (last_successful_run_time + 1.day).utc
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s) # get returns initiated since last run
-
+    return_request_items = ReturnRequestItem.where('created_at >= ? and created_at <= ?',
+    last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s) # get returns initiated since last run
+	  puts ReturnRequestItem.where('created_at >= ? and created_at <= ?',
+    last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s).to_sql
 
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
-    scheduler.save unless ENV['DRY_RUN']=='1'
+    if Rails.env.production?
+      scheduler.save unless ENV['DRY_RUN']=='1'
+    end
   end
 
   def generate_csv(return_request_items)
     csv_headers = ['OrderId', 'FirstName', 'LastName', 'Address1', 'Address2', 'City', 'State','PostalCode',
                    'CountryCode', 'Tracking', 'SKU', 'Quantity']
     #temp_file = Tempfile.new('foo')  # self GC temp_file
-    temp_file = File.new("/home/544.csv", "w+")
+    temp_file = File.new("544.csv", "w+")
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
         order = return_request.order
-        li = return_request.line_item
-        address = order.ship_address
-
-        if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
-        csv << [order.number, address.firstname, address.lastname, address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
-                (return_request.item_return.item_return_label.barcode.to_s rescue ""),
-                CustomItemSku.new(li).call, '1']
+        if order.nil?
+          puts "order is nil, return request id: " + return_request.id.to_s
+          next
         end
+        li = return_request.line_item
+        if li.nil?
+          puts "line item is nil, return request id: " + return_request.id.to_s
+          next
+        end
+        address = order.ship_address
+        state_name = ''
+        if address.state.nil?
+				    puts "address no state， order id: " + order.number + ", return request id: " + return_request.id.to_s
+				    puts "address: " + address.firstname + ", " + 
+					    address.lastname + ", " + 
+					    address.address1 + ", " + 
+					    address.address2 + ", " +
+					    address.city + ", " +
+					    address.zipcode + ", " +
+					    address.country.iso
+        else
+            state_name = address.state.name
+			  end
+        if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)			    
+				  csv << [order.number, address.firstname, address.lastname, address.address1,
+						  address.address2, address.city, state_name, address.zipcode, address.country.iso,
+						  (return_request.item_return.item_return_label.barcode.to_s rescue ""),
+						  CustomItemSku.new(li).call, '1']
+		    end
       end
     end
 
@@ -134,7 +163,7 @@ namespace :newgistics do
                               body: temp_file.read).deliver
     end
 
-    #if Rails.env.production?
+    if Rails.env.production?
       temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
@@ -145,7 +174,7 @@ namespace :newgistics do
         puts ("ftp_password: " + configatron.newgistics.ftp_password)
         sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
       end
-    #end
-    temp_file.close
     end
+    temp_file.close
+   end
 end

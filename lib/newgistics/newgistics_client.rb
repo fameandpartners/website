@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rest_client'
+require 'net/http'
+require 'http'
 module Newgistics
   class NewgisticsClient
     def initialize
@@ -9,6 +11,8 @@ module Newgistics
 
     def get_returns(start_date, end_date)
       params = { key: @key, startTimestamp: start_date.to_s, endTimestamp: end_date.to_s }
+      #puts params
+      puts params.to_query
       response = make_get_request("#{configatron.newgistics.returns_uri}/returns.aspx", params)
       Hash.from_xml(response)
     end
@@ -26,7 +30,15 @@ module Newgistics
     end
 
     def make_get_request(url, params)
-      RestClient.get("#{url}/?#{params.to_query}", content_type: 'text/xml')
-    end
+      #RestClient.get("https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00", content_type: 'text/xml')
+      #RestClient.get("https://cn.bing.com", content_type: 'text/xml')
+      #uri = URI("https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00")
+      #puts Net::HTTP.get(uri)
+      url = "https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00"
+      ctx = OpenSSL::SSL::SSLContext.new
+      ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      puts HTTP.headers(:content_type => "text/xml").get(url, :ssl_context => ctx).to_s
+      HTTP.headers(:content_type => "text/xml").get(url, :ssl_context => ctx).to_s
+      end
   end
 end
