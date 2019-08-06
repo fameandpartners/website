@@ -2,6 +2,19 @@
 namespace :newgistics do
   task update_item_returns: :environment do
 
+    order1 = Spree::Order.find_by_number('r834564042')
+    if order1.nil?
+      puts "lowcase order is nil: r834564042"
+    else
+      puts "lowcase order is not nil: r834564042"
+    end
+    order2 = Spree::Order.find_by_number('R834564042')
+    if order2.nil?
+      puts "upcase order is nil: R834564042"
+    else
+      puts "upcase order is not nil: R834564042"
+    end
+
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('item_return')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
       scheduler.last_successful_run = 1.day.ago.utc.to_datetime.to_s
@@ -10,91 +23,56 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     client = Newgistics::NewgisticsClient.new
-    res = client.get_returns(scheduler.last_successful_run, current_time)
 
-    # TODO REMOVE ME
-    if Rails.env.production?
-      ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
-                              to: "davidp@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
-                              subject: "rake newgistics:update_item_returns",
-                              body: res.inspect).deliver
-    end
+    start_time = Time.parse(scheduler.last_successful_run.to_s).utc
+    end_time = (start_time + 5.day).utc
+    now_time = Time.now.utc
 
-    response_returns = res['response']['Returns']['Return'] rescue []
-    if res['response'].nil?
-      NewRelic::Agent.notice_error(res.to_s)
-      Raven.capture_exception(res.to_s)
-    elsif  !res['response'].has_key?('Returns')
-      NewRelic::Agent.notice_error(res['response'].to_s)
-      Raven.capture_exception(res['response'].to_s)
-    else
-      response_returns.each do |item_return|
-        order = Spree::Order.find_by_number(item_return['orderID'])
-        if item_return['Items']['Item'].kind_of?(Array)
-          item_return['Items']['Item'].each do |item|
-            puts "HELLOOO I AM HEEEEEERRREEE"
+    while end_time <= now_time do
+      puts "---------------------------------------------------"
+      puts "range: " + start_time.to_datetime.to_s + " --- " + end_time.to_datetime.to_s
+      res = client.get_returns(start_time.to_datetime.to_s, end_time.to_datetime.to_s)
+      puts res
 
-            unless order.autorefundable
-              puts "HELLOOO I AM HEEEEEERRREEE"
-              puts "refund #{item_return['Items']}"
-              autorefund_items(order, item)
-            end
+      # TODO REMOVE ME
+      if Rails.env.production?
+        ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                                to: "davidp@fameandpartners.com",
+                                cc: "catherinef@fameandpartners.com",
+                                subject: "rake newgistics:update_item_returns",
+                                body: res.inspect).deliver
+      end
 
-            order.reload
-
-            failed_items = order.line_items.select do |li|
-              (CustomItemSku.new(li).call == item['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
-            end
-
-            failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
-
-            puts item
-            if item['ReturnReason'].downcase.include?('quarantine')
-              puts "quarantine"
-              puts item
-              #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
-
-            elsif item['ReturnReason']
-              puts "damaged"
-              puts item
-            end
+      response_returns = res['response']['Returns']['Return'] rescue []
+      if res['response'].nil?
+        NewRelic::Agent.notice_error(res.to_s)
+        Raven.capture_exception(res.to_s)
+      elsif  !res['response'].has_key?('Returns')
+        NewRelic::Agent.notice_error(res['response'].to_s)
+        Raven.capture_exception(res['response'].to_s)
+      else
+        response_returns.each do |item_return|
+          order = Spree::Order.find_by_number(item_return['orderID'])
+          if order.nil?
+            puts "order is nil: " + item_return['orderID']
           end
-
-        else
-
-          unless order.autorefundable
-            puts "refund #{item_return['Items']}"
-            puts item_return['Items']['Item']
-            autorefund_items(order, item_return['Items']['Item'])
-          end
-
-          order.reload
-
-          puts "things"
-          puts item_return['Items']
-          failed_items = order.line_items.select do |li|
-            puts li.id
-            (CustomItemSku.new(li).call == item_return['Items']['Item']['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
-          end
-
-          failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
-
-
-          if item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason'].downcase.include?('quarantine')
-            puts "quarantine"
-            puts item_return['Items']['Item']
-            #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
-
-          elsif item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason']
-            puts "damaged"
-            puts item_return['Items']['Item']
-          end
+          next
         end
       end
+      start_time = end_time
+      if end_time >= now_time
+        break
+      end
+      end_time = (end_time + 5.day).utc
+      if end_time > now_time
+        end_time = now_time
+      end
     end
+
     scheduler.last_successful_run = current_time.to_s
-    scheduler.save
+    if Rails.env.production?
+      scheduler.save
+    end
   end
 end
 

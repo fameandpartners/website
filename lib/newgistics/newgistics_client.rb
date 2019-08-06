@@ -30,15 +30,20 @@ module Newgistics
     end
 
     def make_get_request(url, params)
+      #RestClient.get("#{url}/?#{params.to_query}", content_type: 'text/xml')
+
       #RestClient.get("https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00", content_type: 'text/xml')
       #RestClient.get("https://cn.bing.com", content_type: 'text/xml')
       #uri = URI("https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00")
       #puts Net::HTTP.get(uri)
-      url = "https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00"
+      #final_url = "https://api.newgisticsfulfillment.com/returns.aspx?key=fff5c2b8cccc470ab7e80258a3b0e07e&startTimestamp=2019-02-28T08:00:00&endTimestamp=2019-03-01T07:00:00"
+      final_url = "#{url}/?#{params.to_query}"
+      puts final_url
       ctx = OpenSSL::SSL::SSLContext.new
       ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      puts HTTP.headers(:content_type => "text/xml").get(url, :ssl_context => ctx).to_s
-      HTTP.headers(:content_type => "text/xml").get(url, :ssl_context => ctx).to_s
+      #puts HTTP.headers(:content_type => "text/xml").get(final_url, :ssl_context => ctx).to_s
+      HTTP.headers(:content_type => "text/xml").get(final_url, :ssl_context => ctx).to_s
+
       end
   end
 end
