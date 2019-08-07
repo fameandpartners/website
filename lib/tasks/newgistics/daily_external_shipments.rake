@@ -99,25 +99,30 @@ namespace :newgistics do
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     puts "last successfull run: " + scheduler.last_successful_run.to_s
     last_successful_run_time = Time.parse(scheduler.last_successful_run.to_s).utc
-    one_day_after_last_successful_run_time = (last_successful_run_time + 1.day).utc
+    while last_successful_run_time < current_time do
+      one_day_after_last_successful_run_time = (last_successful_run_time + 1.day).utc
 
-    return_request_items = ReturnRequestItem.where('created_at >= ? and created_at <= ?',
-    last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s) # get returns initiated since last run
-	  puts ReturnRequestItem.where('created_at >= ? and created_at <= ?',
-    last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s).to_sql
+      return_request_items = ReturnRequestItem.where('created_at >= ? and created_at <= ?',
+      last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s) # get returns initiated since last run
+      puts ReturnRequestItem.where('created_at >= ? and created_at <= ?',
+      last_successful_run_time.to_s, one_day_after_last_successful_run_time.to_s).to_sql
 
-    generate_csv(return_request_items)
-    scheduler.last_successful_run = current_time.to_s
+      generate_csv(return_request_items,last_successful_run_time)
+
+      scheduler.last_successful_run = one_day_after_last_successful_run_time.to_s
+      last_successful_run_time = Time.parse(scheduler.last_successful_run.to_s).utc
+    end
+
     if Rails.env.production?
       scheduler.save unless ENV['DRY_RUN']=='1'
     end
   end
 
-  def generate_csv(return_request_items)
+  def generate_csv(return_request_items,time)
     csv_headers = ['OrderId', 'FirstName', 'LastName', 'Address1', 'Address2', 'City', 'State','PostalCode',
                    'CountryCode', 'Tracking', 'SKU', 'Quantity']
     #temp_file = Tempfile.new('foo')  # self GC temp_file
-    temp_file = File.new("544.csv", "w+")
+    temp_file = File.new("export\\#{time.year}#{time.month}#{time.day}.csv", "w+")
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|

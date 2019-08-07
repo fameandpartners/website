@@ -2,18 +2,18 @@
 namespace :newgistics do
   task update_item_returns: :environment do
 
-    order1 = Spree::Order.find_by_number('r834564042')
-    if order1.nil?
-      puts "lowcase order is nil: r834564042"
-    else
-      puts "lowcase order is not nil: r834564042"
-    end
-    order2 = Spree::Order.find_by_number('R834564042')
-    if order2.nil?
-      puts "upcase order is nil: R834564042"
-    else
-      puts "upcase order is not nil: R834564042"
-    end
+    # order1 = Spree::Order.find_by_number('r834564042')
+    # if order1.nil?
+    #   puts "lowcase order is nil: r834564042"
+    # else
+    #   puts "lowcase order is not nil: r834564042"
+    # end
+    # order2 = Spree::Order.find_by_number('R834564042')
+    # if order2.nil?
+    #   puts "upcase order is nil: R834564042"
+    # else
+    #   puts "upcase order is not nil: R834564042"
+    # end
 
     if (scheduler = Newgistics::NewgisticsScheduler.find_by_name('item_return')).nil?
       scheduler = Newgistics::NewgisticsScheduler.new
