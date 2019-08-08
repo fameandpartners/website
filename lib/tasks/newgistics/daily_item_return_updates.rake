@@ -25,14 +25,14 @@ namespace :newgistics do
     client = Newgistics::NewgisticsClient.new
 
     start_time = Time.parse(scheduler.last_successful_run.to_s).utc
-    end_time = (start_time + 5.day).utc
+    end_time = (start_time + 30.day).utc
     now_time = Time.now.utc
 
     while end_time <= now_time do
       puts "---------------------------------------------------"
       puts "range: " + start_time.to_datetime.to_s + " --- " + end_time.to_datetime.to_s
       res = client.get_returns(start_time.to_datetime.to_s, end_time.to_datetime.to_s)
-      puts res
+      #puts res
 
       # TODO REMOVE ME
       if Rails.env.production?
@@ -43,27 +43,40 @@ namespace :newgistics do
                                 body: res.inspect).deliver
       end
 
-      response_returns = res['response']['Returns']['Return'] rescue []
-      if res['response'].nil?
-        NewRelic::Agent.notice_error(res.to_s)
-        Raven.capture_exception(res.to_s)
-      elsif  !res['response'].has_key?('Returns')
-        NewRelic::Agent.notice_error(res['response'].to_s)
-        Raven.capture_exception(res['response'].to_s)
-      else
-        response_returns.each do |item_return|
-          order = Spree::Order.find_by_number(item_return['orderID'])
-          if order.nil?
-            puts "order is nil: " + item_return['orderID']
+      csv_headers = ['OrderId', 'Name', 'Address1', 'City', 'State','PostalCode',
+                     'Timestamp']
+      temp_file = File.new("export\\returnorder\\#{start_time.year}#{start_time.month}#{start_time.day}.csv", "w+")
+      csv_file = CSV.open(temp_file, 'wb') do |csv|
+        csv << csv_headers # set headers for csv
+        response_returns = res['response']['Returns']['Return'] rescue []
+        if res['response'].nil?
+          NewRelic::Agent.notice_error(res.to_s)
+          Raven.capture_exception(res.to_s)
+        elsif  !res['response'].has_key?('Returns')
+          NewRelic::Agent.notice_error(res['response'].to_s)
+          Raven.capture_exception(res['response'].to_s)
+        else
+          response_returns.each do |item_return|
+            order_id = item_return['orderID'].lstrip
+            order_id = order_id.gsub(/[e]/, 'E')
+            order_id = order_id.gsub(/[r]/, 'R')
+            order_id.insert(0,'R') if order_id[0,1]=~ /[0-9]/
+            order = Spree::Order.find_by_number(order_id)
+            if order.nil?
+              puts "order is nil: " + item_return['orderID']
+              puts "order is nil after transform: " + order_id
+              csv << [item_return['orderID'], item_return['Name'], item_return['Address1'],
+                      item_return['City'], item_return['State'], item_return['PostalCode'],item_return['Timestamp']]
+            end
           end
-          next
         end
+        temp_file.close
       end
       start_time = end_time
       if end_time >= now_time
         break
       end
-      end_time = (end_time + 5.day).utc
+      end_time = (end_time + 30.day).utc
       if end_time > now_time
         end_time = now_time
       end

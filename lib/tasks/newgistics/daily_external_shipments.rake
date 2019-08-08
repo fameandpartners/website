@@ -146,7 +146,7 @@ namespace :newgistics do
 					    address.address2 + ", " +
 					    address.city + ", " +
 					    address.zipcode + ", " +
-					    address.country.iso
+					    address.country.name
         else
             state_name = address.state.name
 			  end
