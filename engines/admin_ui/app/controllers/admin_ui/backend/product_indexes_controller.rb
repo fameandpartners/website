@@ -10,6 +10,7 @@ module AdminUi
       end
 
       def clear
+        logger.info("daping start clear index")
         message = if params[:really_really] == 'REALLY'
                     ::NewRelic::Agent.record_custom_event('ClearCacheWorker_web', user: current_admin_user.email)
                     ClearCacheWorker.perform_async

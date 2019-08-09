@@ -8,6 +8,7 @@ class ClearCacheWorker
   sidekiq_options retry: false
 
   def perform(silent: false)
+    logger.info("daping start perform")
     @silent = !! silent
     update_color_variants_elastic_index
     reset_cache
@@ -20,11 +21,12 @@ class ClearCacheWorker
   end
 
   private
-    def update_color_variants_elastic_index
-      ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
-    end
+  def update_color_variants_elastic_index
+    logger.info("daping update_color_variants_elastic_index")
+    ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
+  end
 
-    def reset_cache
-      Rails.cache.clear
-    end
+  def reset_cache
+    Rails.cache.clear
+  end
 end
