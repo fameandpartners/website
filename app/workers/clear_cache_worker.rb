@@ -8,7 +8,7 @@ class ClearCacheWorker
   sidekiq_options retry: false
 
   def perform(silent: false)
-    logger.info("daping start perform")
+    puts("daping start perform")
     @silent = !! silent
     update_color_variants_elastic_index
     reset_cache
