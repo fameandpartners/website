@@ -84,7 +84,7 @@ module PathBuildersHelper
         options.merge!({ color: fabric || color })
       else
         puts("small if not")
-        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
+        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
       end
     else
       puts("big if not")
