@@ -66,31 +66,31 @@ module PathBuildersHelper
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
-    logger.info("daping ----------------------------------------")
+    puts("daping ----------------------------------------")
     if product.is_a?(Spree::LineItem) || product.is_a?(Curation)
       fabric = product.fabric.try(:[], :name)
       color = product.color.try(:[], :name)
       cust = product.customizations || []
 
       is_new_product =  Spree::Product.use_new_pdp?(product.product)
-      logger.info("product.product.id: " + product.product.id)
-      logger.info("product.product.sku: " + product.product.sku)
+      puts("product.product.id: " + product.product.id)
+      puts("product.product.sku: " + product.product.sku)
       if is_new_product
-        logger.info("is_new_product")
+        puts("is_new_product")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
       elsif cust.empty?
-        logger.info("cust.empty")
+        puts("cust.empty")
         path_parts << "#{product_type}-#{descriptive_url(product.product)}"
         options.merge!({ color: fabric || color })
       else
-        logger.info("small if not")
+        puts("small if not")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
     else
-      logger.info("big if not")
+      puts("big if not")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
-    logger.info(path_parts.to_s)
+    puts(path_parts.to_s)
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product

@@ -16,9 +16,9 @@ module Products
     LIST_PRODUCT_IMAGE_SIZES = [[:xlarge, :webp_xlarge], [:large, :webp_large], [:medium, :webp_medium], [:small, :webp_small], [:xsmall, :webp_xsmall], [:xxsmall, :webp_xxsmall]]
 
     def initialize(logdev = $stdout)
-      logger.info("daping ColorVariantsIndexer initialize")
       @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
+      puts("daping ColorVariantsIndexer initialize")
       @helpers = Helpers.new
       @au_site_version = SiteVersion.find_by_permalink('au')
       @us_site_version = SiteVersion.find_by_permalink('us')

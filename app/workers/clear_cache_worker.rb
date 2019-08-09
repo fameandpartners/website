@@ -22,7 +22,7 @@ class ClearCacheWorker
 
   private
   def update_color_variants_elastic_index
-    logger.info("daping update_color_variants_elastic_index")
+    puts("daping update_color_variants_elastic_index")
     ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
   end
 
