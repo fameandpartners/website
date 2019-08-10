@@ -66,7 +66,7 @@ module PathBuildersHelper
     product_type        = options.delete(:product_type) || 'dress'
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
-    logger = Logger.new("/daping_path.log")
+    logger = Logger.new("daping_path.log")
     logger.info("daping ----------------------------------------")
     if product.is_a?(Spree::LineItem) || product.is_a?(Curation)
       fabric = product.fabric.try(:[], :name)
