@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'logger'
 module PathBuildersHelper
   # products path generators should be placed here 
   #
@@ -65,32 +66,32 @@ module PathBuildersHelper
     product_type        = options.delete(:product_type) || 'dress'
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
-
-    puts("daping ----------------------------------------")
+    logger = Logger.new("/daping_path.log")
+    logger.info("daping ----------------------------------------")
     if product.is_a?(Spree::LineItem) || product.is_a?(Curation)
       fabric = product.fabric.try(:[], :name)
       color = product.color.try(:[], :name)
       cust = product.customizations || []
 
       is_new_product =  Spree::Product.use_new_pdp?(product.product)
-      puts("product.product.id: " + product.product.id)
-      puts("product.product.sku: " + product.product.sku)
+      logger.info("product.product.id: " + product.product.id)
+      logger.info("product.product.sku: " + product.product.sku)
       if is_new_product
-        puts("is_new_product")
+        logger.info("is_new_product")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
       elsif cust.empty?
-        puts("cust.empty")
+        logger.info("cust.empty")
         path_parts << "#{product_type}-#{descriptive_url(product.product)}"
         options.merge!({ color: fabric || color })
       else
-        puts("small if not")
-        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
+        logger.info("small if not")
+        path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
     else
-      puts("big if not")
+      logger.info("big if not")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
-    puts(path_parts.to_s)
+    logger.info(path_parts.to_s)
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product
