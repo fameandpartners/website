@@ -97,7 +97,7 @@ module PathBuildersHelper
     end
     daping_log(path_parts.to_s)
     cs = "cust"
-    if cust.empty?
+    if cust.nil? or cust.empty?
       cs = "epcust"
     end
     path_parts = ['daping', product.product.id.to_s, is_new_product.to_s, cs, product.product.sku.to_s]
