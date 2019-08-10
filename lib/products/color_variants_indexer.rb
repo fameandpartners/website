@@ -144,7 +144,7 @@ module Products
             in_stock:     product.has_stock?,
             discount:     discount,
             #url: @helpers.collection_product_path(curation),
-            url:          "daping-#{product.id.to_s}-#{product.sku.to_s}"
+            url:          "daping-#{product.id.to_s}-#{product.sku.to_s}",
 
             taxon_ids:          taxons.map(&:id),
             taxons:             taxon_names,
