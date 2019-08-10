@@ -60,38 +60,42 @@ module PathBuildersHelper
     "#{site_version_prefix}/sample-sale/#{line_item_id}"
 
   end
+  def daping_log(logs)
+    logf=File.new("/home/daping.log", "a+")
+    logf.puts(Time.now.to_s + ": daping " + logs)
+    logf.close
+  end
 
   def collection_product_path(product, options = {})
     site_version_prefix = self.url_options[:site_version] ? self.url_options[:site_version] : ''
     product_type        = options.delete(:product_type) || 'dress'
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
-    logger = Logger.new("daping_path.log")
-    logger.info("daping ----------------------------------------")
+    daping_log("----------------------------------------")
     if product.is_a?(Spree::LineItem) || product.is_a?(Curation)
       fabric = product.fabric.try(:[], :name)
       color = product.color.try(:[], :name)
       cust = product.customizations || []
 
       is_new_product =  Spree::Product.use_new_pdp?(product.product)
-      logger.info("product.product.id: " + product.product.id)
-      logger.info("product.product.sku: " + product.product.sku)
+      daping_log("product.product.id: " + product.product.id)
+      daping_log("product.product.sku: " + product.product.sku)
       if is_new_product
-        logger.info("is_new_product")
+        daping_log("is_new_product")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
       elsif cust.empty?
-        logger.info("cust.empty")
+        daping_log("cust.empty")
         path_parts << "#{product_type}-#{descriptive_url(product.product)}"
         options.merge!({ color: fabric || color })
       else
-        logger.info("small if not")
+        daping_log("small if not")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
     else
-      logger.info("big if not")
+      daping_log("big if not")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
-    logger.info(path_parts.to_s)
+    daping_log(path_parts.to_s)
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product

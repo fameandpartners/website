@@ -8,7 +8,7 @@ class ClearCacheWorker
   sidekiq_options retry: false
 
   def perform(silent: false)
-    puts("daping start perform")
+    daping_log("start perform")
     @silent = !! silent
     update_color_variants_elastic_index
     reset_cache
@@ -20,9 +20,15 @@ class ClearCacheWorker
     !! @silent
   end
 
+  def daping_log(logs)
+    logf=File.new("/home/daping.log", "a+")
+    logf.puts(Time.now.to_s + ": daping " + logs)
+    logf.close
+  end
+
   private
   def update_color_variants_elastic_index
-    puts("daping update_color_variants_elastic_index")
+    daping_log("update_color_variants_elastic_index")
     ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
   end
 

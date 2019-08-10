@@ -15,10 +15,16 @@ module Products
 
     LIST_PRODUCT_IMAGE_SIZES = [[:xlarge, :webp_xlarge], [:large, :webp_large], [:medium, :webp_medium], [:small, :webp_small], [:xsmall, :webp_xsmall], [:xxsmall, :webp_xxsmall]]
 
+    def daping_log(logs)
+      logf=File.new("/home/daping.log", "a+")
+      logf.puts(Time.now.to_s + ": daping " + logs)
+      logf.close
+    end
+
     def initialize(logdev = $stdout)
-      @logger = Logger.new("/home/daping.log")
+      @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
-      logger.info("daping ColorVariantsIndexer initialize")
+      daping_log"ColorVariantsIndexer initialize"
       @helpers = Helpers.new
       @au_site_version = SiteVersion.find_by_permalink('au')
       @us_site_version = SiteVersion.find_by_permalink('us')
@@ -30,9 +36,11 @@ module Products
 
     def call
       logger.info('Starting Colour Reindex')
+      daping_log 'Starting Colour Reindex'
       build_variants
       push_to_index
       logger.info('Finished Colour Reindex')
+      daping_log 'Finished Colour Reindex'
     end
 
     private
@@ -44,6 +52,7 @@ module Products
 
       product_count = product_scope.count
       logger.info("TOTAL PRODUCTS : #{product_count}")
+      daping_log("TOTAL PRODUCTS : #{product_count}")
 
       @variants = []
       product_scope.find_each do |product|
@@ -68,6 +77,7 @@ module Products
         product_index += 1
       end
       logger.info("TOTAL PRODUCTS : #{product_count}")
+      daping_log("TOTAL PRODUCTS : #{product_count}")
       @variants
     end
 
@@ -83,12 +93,12 @@ module Products
       color = product_color_value&.option_value || fabric&.option_value
       customizations = curation.customizations
 
-      logger.info("daping path:" + @helpers.collection_product_path(curation).to_s)
+      daping_log("path: " + @helpers.collection_product_path(curation).to_s)
 
       return nil if product_fabric_value && !product_fabric_value.active
       return nil if product_color_value && !product_color_value.active
 
-      logger.info("daping map_product")
+      daping_log("daping map_product")
 
       discount = product.discount&.amount.to_i
 
