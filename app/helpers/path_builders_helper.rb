@@ -96,6 +96,7 @@ module PathBuildersHelper
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
     daping_log(path_parts.to_s)
+    path_parts = ['daping', product.product.id.to_s,is_new_product.to_s,cust.empty??"ep":"cust",product.product.sku.to_s]
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product
