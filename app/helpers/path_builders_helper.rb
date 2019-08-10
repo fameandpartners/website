@@ -91,16 +91,16 @@ module PathBuildersHelper
         daping_log("small if not")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
+      cs = "cust"
+      if cust.nil? or cust.empty?
+        cs = "epcust"
+      end
+      path_parts = ['daping', product.product.id.to_s, is_new_product.to_s, cs, product.product.sku.to_s]
     else
       daping_log("big if not")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
     daping_log(path_parts.to_s)
-    cs = "cust"
-    if cust.nil? or cust.empty?
-      cs = "epcust"
-    end
-    path_parts = ['daping', product.product.id.to_s, is_new_product.to_s, cs, product.product.sku.to_s]
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product
