@@ -73,24 +73,24 @@ module PathBuildersHelper
       cust = product.customizations || []
 
       is_new_product =  Spree::Product.use_new_pdp?(product.product)
-      puts("product.product.id: " + product.product.id)
-      puts("product.product.sku: " + product.product.sku)
+      puts("daping product.product.id: " + product.product.id.to_s)
+      puts("daping product.product.sku: " + product.product.sku.to_s)
       if is_new_product
-        puts("is_new_product")
+        puts("daping is_new_product")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.sku, fabric || color, cust)}"
       elsif cust.empty?
-        puts("cust.empty")
+        puts("daping cust.empty")
         path_parts << "#{product_type}-#{descriptive_url(product.product)}"
         options.merge!({ color: fabric || color })
       else
-        puts("small if not")
+        puts("daping small if not")
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
     else
-      puts("big if not")
+      puts("daping big if not")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
-    puts(path_parts.to_s)
+    puts("daping " + path_parts.to_s)
     # NOTE: Alexey Bobyrev 21/12/16
     # color method only present for Tire::Results::Item
     # But this method also called with ordinar spree product
