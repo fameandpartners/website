@@ -61,7 +61,7 @@ module PathBuildersHelper
 
   end
   def daping_log(logs)
-    logf=File.new("/home/daping.log", "a+")
+    logf=File.new("daping_path.log", "a+")
     logf.puts(Time.now.to_s + ": daping " + logs)
     logf.close
   end
