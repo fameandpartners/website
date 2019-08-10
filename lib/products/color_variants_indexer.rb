@@ -143,7 +143,8 @@ module Products
             master_id:    product.master.id,
             in_stock:     product.has_stock?,
             discount:     discount,
-            url: @helpers.collection_product_path(curation),
+            #url: @helpers.collection_product_path(curation),
+            url:          "daping-#{product.product.id.to_s}-#{product.product.sku.to_s}"
 
             taxon_ids:          taxons.map(&:id),
             taxons:             taxon_names,
@@ -209,6 +210,7 @@ module Products
       client = Elasticsearch::Client.new(host: configatron.es_url)
       if client.indices.exists?(index: index_name)
         client.indices.delete index: index_name
+        return
       end
 
       logger.info('Bulk Upload')
