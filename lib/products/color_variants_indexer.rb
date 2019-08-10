@@ -16,7 +16,7 @@ module Products
     LIST_PRODUCT_IMAGE_SIZES = [[:xlarge, :webp_xlarge], [:large, :webp_large], [:medium, :webp_medium], [:small, :webp_small], [:xsmall, :webp_xsmall], [:xxsmall, :webp_xxsmall]]
 
     def initialize(logdev = $stdout)
-      @logger = Logger.new("daping.log")
+      @logger = Logger.new("/home/daping.log")
       @logger.formatter = LogFormatter.terminal_formatter
       logger.info("daping ColorVariantsIndexer initialize")
       @helpers = Helpers.new
@@ -83,8 +83,12 @@ module Products
       color = product_color_value&.option_value || fabric&.option_value
       customizations = curation.customizations
 
+      logger.info("daping path:" + @helpers.collection_product_path(curation).to_s)
+
       return nil if product_fabric_value && !product_fabric_value.active
       return nil if product_color_value && !product_color_value.active
+
+      logger.info("daping map_product")
 
       discount = product.discount&.amount.to_i
 
