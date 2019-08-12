@@ -87,7 +87,7 @@ module PathBuildersHelper
         path_parts << "custom-#{product_type}-#{Spree::Product.format_new_pid(product.product.id, fabric || color, cust)}"
       end
     else
-      puts("daping big if not")
+      puts("daping big if not ")
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
     puts("daping " + path_parts.to_s)
