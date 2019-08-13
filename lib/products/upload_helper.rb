@@ -110,6 +110,10 @@ module Products
       product.hidden = !prod[:details][:active]
       product.available_on = product.created_at
 
+      if product.available_on.nil?
+        product.available_on = Time.now
+      end
+
       product.save!
 
       product
