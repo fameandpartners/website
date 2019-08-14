@@ -29,68 +29,100 @@ namespace :newgistics do
       NewRelic::Agent.notice_error(res['response'].to_s)
       Raven.capture_exception(res['response'].to_s)
     else
-      response_returns.each do |item_return|
-        order = Spree::Order.find_by_number(item_return['orderID'])
-        if item_return['Items']['Item'].kind_of?(Array)
-          item_return['Items']['Item'].each do |item|
-            puts "HELLOOO I AM HEEEEEERRREEE"
+      flag = false
+      csv_headers = ['OrderId', 'Name', 'Address1', 'City', 'State','PostalCode',
+                     'Timestamp']
+      temp_file = Tempfile.new('foo')  # self GC temp_file
+      #temp_file = File.new("export\\returnorder\\#{start_time.year}#{start_time.month}#{start_time.day}.csv", "w+")
+      csv_file = CSV.open(temp_file, 'wb') do |csv|
+        csv << csv_headers # set headers for csv
+        response_returns.each do |item_return|
+          order_id = item_return['orderID'].lstrip
+          order_id = order_id.gsub(/[e]/, 'E')
+          order_id = order_id.gsub(/[r]/, 'R')
+          order_id = order_id.gsub(/[m]/, 'M')
+          order_id.insert(0,'R') if order_id[0,1]=~ /[0-9]/
+          order = Spree::Order.find_by_number(order_id)
+          if order.nil?
+            flag = true
+            puts "order is nil: " + item_return['orderID']
+            puts "order is nil after transform: " + order_id
+            csv << [item_return['orderID'], item_return['Name'], item_return['Address1'],
+                    item_return['City'], item_return['State'], item_return['PostalCode'],item_return['Timestamp']]
+          end
+
+          if item_return['Items']['Item'].kind_of?(Array)
+            item_return['Items']['Item'].each do |item|
+              puts "HELLOOO I AM HEEEEEERRREEE"
+
+              unless order.autorefundable
+                puts "HELLOOO I AM HEEEEEERRREEE"
+                puts "refund #{item_return['Items']}"
+                autorefund_items(order, item)
+              end
+
+              order.reload
+
+              failed_items = order.line_items.select do |li|
+                (CustomItemSku.new(li).call == item['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
+              end
+
+              failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
+
+              puts item
+              if item['ReturnReason'].downcase.include?('quarantine')
+                puts "quarantine"
+                puts item
+                #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
+
+              elsif item['ReturnReason']
+                puts "damaged"
+                puts item
+              end
+            end
+
+          else
 
             unless order.autorefundable
-              puts "HELLOOO I AM HEEEEEERRREEE"
               puts "refund #{item_return['Items']}"
-              autorefund_items(order, item)
+              puts item_return['Items']['Item']
+              autorefund_items(order, item_return['Items']['Item'])
             end
 
             order.reload
 
+            puts "things"
+            puts item_return['Items']
             failed_items = order.line_items.select do |li|
-              (CustomItemSku.new(li).call == item['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
+              puts li.id
+              (CustomItemSku.new(li).call == item_return['Items']['Item']['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
             end
 
             failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
 
-            puts item
-            if item['ReturnReason'].downcase.include?('quarantine')
+
+            if item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason'].downcase.include?('quarantine')
               puts "quarantine"
-              puts item
+              puts item_return['Items']['Item']
               #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
 
-            elsif item['ReturnReason']
+            elsif item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason']
               puts "damaged"
-              puts item
+              puts item_return['Items']['Item']
             end
           end
-
-        else
-
-          unless order.autorefundable
-            puts "refund #{item_return['Items']}"
-            puts item_return['Items']['Item']
-            autorefund_items(order, item_return['Items']['Item'])
-          end
-
-          order.reload
-
-          puts "things"
-          puts item_return['Items']
-          failed_items = order.line_items.select do |li|
-            puts li.id
-            (CustomItemSku.new(li).call == item_return['Items']['Item']['SKU']) && (li.item_return.refund_status != 'Complete') # get items that were returned and invalid
-          end
-
-          failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
-
-
-          if item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason'].downcase.include?('quarantine')
-            puts "quarantine"
-            puts item_return['Items']['Item']
-            #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
-
-          elsif item_return['Items']['Item']['ReturnReason'] && item_return['Items']['Item']['ReturnReason']
-            puts "damaged"
-            puts item_return['Items']['Item']
-          end
         end
+      end
+      if flag
+        if Rails.env.production?
+          # TODO REMOVE ME
+          ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
+                                  to: "davidp@fameandpartners.com",
+                                  cc: "jonathanv@fameandpartners.com;hzsoft@graphicchina.com",
+                                  subject: "Error list:upload_return_list",
+                                  body: temp_file.read).deliver
+        end
+        temp_file.close
       end
     end
     scheduler.last_successful_run = current_time.to_s

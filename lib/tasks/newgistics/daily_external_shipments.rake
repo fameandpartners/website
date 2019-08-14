@@ -96,19 +96,10 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
 
-    return_request_items = ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s) # get returns initiated since last run
-    puts "aaaa"
-    puts ReturnRequestItem.where('created_at >= ?', 5.day.ago.utc.to_datetime.to_s).to_sql
-    puts "bbbb"
-    puts scheduler.last_successful_run
-    #return_request_items = ReturnRequestItem.last(100) if ENV['SIMULATE']=="1"
-    puts "cccc"
-    #puts ReturnRequestItem.last(100)
-    puts "dddd"
-    puts return_request_items
-    puts "eeee"
-    puts 5.day.ago.utc.to_datetime.to_s
+    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
+    return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
 
+    puts "Daily upload return list begin: from "+scheduler.last_successful_run+" to "+ current_time.to_s
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
     scheduler.save unless ENV['DRY_RUN']=='1'
@@ -117,18 +108,41 @@ namespace :newgistics do
   def generate_csv(return_request_items)
     csv_headers = ['OrderId', 'FirstName', 'LastName', 'Address1', 'Address2', 'City', 'State','PostalCode',
                    'CountryCode', 'Tracking', 'SKU', 'Quantity']
-    #temp_file = Tempfile.new('foo')  # self GC temp_file
-    temp_file = File.new("/home/544.csv", "w+")
+    temp_file = Tempfile.new('foo')  # self GC temp_file
+    #temp_file = File.new("/home/544.csv", "w+")
     csv_file = CSV.open(temp_file, 'wb') do |csv|
       csv << csv_headers # set headers for csv
       return_request_items.each do |return_request|
         order = return_request.order
+        if order.nil?
+          puts "order is nil, return request id: " + return_request.id.to_s
+          next
+        end
+
         li = return_request.line_item
+        if li.nil?
+          puts "line item is nil, return request id: " + return_request.id.to_s
+          next
+        end
+
         address = order.ship_address
+        state_name = ''
+        if address.state.nil?
+          puts "address no state， order id: " + order.number + ", return request id: " + return_request.id.to_s
+          puts "address: " + address.firstname + ", " +
+                 address.lastname + ", " +
+                 address.address1 + ", " +
+                 address.address2 + ", " +
+                 address.city + ", " +
+                 address.zipcode + ", " +
+                 address.country.name
+        else
+          state_name = address.state.name
+        end
 
         if address.country_id == 49 ||  COUNTRY_ARRAY.include?(address.country.name)
         csv << [order.number, address.firstname, address.lastname, address.address1,
-                address.address2, address.city, address.state.name, address.zipcode, address.country.iso,
+                address.address2, address.city, state_name, address.zipcode, address.country.iso,
                 (return_request.item_return.item_return_label.barcode.to_s rescue ""),
                 CustomItemSku.new(li).call, '1']
         end
@@ -139,23 +153,19 @@ namespace :newgistics do
       # TODO REMOVE ME
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
                               to: "davidp@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
+                              cc: "jonathanv@fameandpartners.com;hzsoft@graphicchina.com",
                               subject: "rake newgistics:upload_return_list",
                               body: temp_file.read).deliver
     end
 
-    #if Rails.env.production?
+    if Rails.env.production?
       temp_file.rewind
       Net::SFTP.start(configatron.newgistics.ftp_uri,
                       configatron.newgistics.ftp_user,
                       password: configatron.newgistics.ftp_password) do |sftp|
-        #sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
-        puts ("ftp_uri: " + configatron.newgistics.ftp_uri)
-        puts ("ftp_user: " + configatron.newgistics.ftp_user)
-        puts ("ftp_password: " + configatron.newgistics.ftp_password)
-        sftp.upload!(temp_file, "input/untitled folder/#{Date.today.to_s}.csv")
+        sftp.upload!(temp_file, "input/External Shipments/#{Date.today.to_s}.csv")
       end
-    #end
     temp_file.close
     end
+  end
 end
