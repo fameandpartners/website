@@ -49,6 +49,7 @@ namespace :newgistics do
             puts "order is nil after transform: " + order_id
             csv << [item_return['orderID'], item_return['Name'], item_return['Address1'],
                     item_return['City'], item_return['State'], item_return['PostalCode'],item_return['Timestamp']]
+            next
           end
 
           if item_return['Items']['Item'].kind_of?(Array)
