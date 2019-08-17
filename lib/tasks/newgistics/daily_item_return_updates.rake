@@ -9,8 +9,9 @@ namespace :newgistics do
       scheduler.save
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
+    last_successful_run = (Date.today.beginning_of_day.utc - 1.day).to_s
     client = Newgistics::NewgisticsClient.new
-    res = client.get_returns(scheduler.last_successful_run, current_time)
+    res = client.get_returns(last_successful_run, current_time)
 
     # TODO REMOVE ME
     if Rails.env.production?

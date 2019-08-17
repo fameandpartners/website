@@ -95,11 +95,11 @@ namespace :newgistics do
         scheduler.save unless ENV['DRY_RUN']=='1'
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
-
-    return_request_items = ReturnRequestItem.where('created_at >= ?', scheduler.last_successful_run) # get returns initiated since last run
+    last_successful_run = (Date.today.beginning_of_day.utc - 1.day).to_s
+    return_request_items = ReturnRequestItem.where('created_at >= ?', last_successful_run) # get returns initiated since last run
     return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
 
-    puts "Daily upload return list begin: from "+scheduler.last_successful_run+" to "+ current_time.to_s
+    puts "Daily upload return list begin: from "+last_successful_run+" to "+ current_time.to_s
     generate_csv(return_request_items)
     scheduler.last_successful_run = current_time.to_s
     scheduler.save unless ENV['DRY_RUN']=='1'
