@@ -95,7 +95,7 @@ namespace :newgistics do
         scheduler.save unless ENV['DRY_RUN']=='1'
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
-    last_successful_run = (Date.today.beginning_of_day.utc - 1.day).to_s
+    last_successful_run = scheduler.last_successful_run
     return_request_items = ReturnRequestItem.where('created_at >= ?', last_successful_run) # get returns initiated since last run
     return_request_items = ReturnRequestItem.last(5) if ENV['SIMULATE']=="1"
 
