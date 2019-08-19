@@ -9,7 +9,7 @@ namespace :newgistics do
       scheduler.save
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
-    last_successful_run = (Date.today.beginning_of_day.utc - 1.day).to_s
+    last_successful_run = scheduler.last_successful_run
     client = Newgistics::NewgisticsClient.new
     res = client.get_returns(last_successful_run, current_time)
 
@@ -17,7 +17,7 @@ namespace :newgistics do
     if Rails.env.production?
       ActionMailer::Base.mail(from: "noreply@fameandpartners.com",
                               to: "davidp@fameandpartners.com",
-                              cc: "catherinef@fameandpartners.com",
+                              cc: "catherinef@fameandpartners.com;hzsoft@graphicchina.com",
                               subject: "rake newgistics:update_item_returns",
                               body: res.inspect).deliver
     end
