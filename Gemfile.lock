@@ -1,32 +1,18 @@
-GIT
-  remote: git://github.com/bbtfr/spree_essentials.git
-  revision: e930a71a3c5046b52498b82e8f7a1211f7644241
-  branch: 1.3.x
-  specs:
-    spree_essentials (0.7.0)
-      rdiscount (~> 1.6.8)
-      spree_core (~> 1.3.0)
-
-GIT
-  remote: git://github.com/fameandpartners/better_spree_paypal_express.git
-  revision: 478b27281f7ed806df5ae86a41f9890595f8d242
-  branch: 1-3-stable
+PATH
+  remote: vendor/cache/better_spree_paypal_express-478b27281f7e
   specs:
     spree_paypal_express (2.0.3)
       paypal-sdk-merchant (= 1.103.0)
       spree_core (~> 1.3.3)
 
-GIT
-  remote: git://github.com/jumph4x/canonical-rails.git
-  revision: 03adacb2db44f1ae1c3ebe22edd910ddc19e0fbb
+PATH
+  remote: vendor/cache/canonical-rails-03adacb2db44
   specs:
     canonical-rails (0.0.9)
       rails (>= 3.1, < 5.0)
 
-GIT
-  remote: git://github.com/spree/spree.git
-  revision: 7d19c8933042cec667634c8cffedcbe6084abf1d
-  branch: 1-3-stable
+PATH
+  remote: vendor/cache/spree-7d19c8933042
   specs:
     spree (1.3.6.beta)
       spree_api (= 1.3.6.beta)
@@ -65,11 +51,8 @@ GIT
     spree_sample (1.3.6.beta)
       spree_core (= 1.3.6.beta)
 
-GIT
-  remote: git://github.com/spree/spree_auth_devise.git
-  revision: c4466de3748618971dc401e6e30c0d87f2b9c143
-  ref: c4466de3748618971dc401e6e30c0d87f2b9c143
-  branch: 1-3-stable
+PATH
+  remote: vendor/cache/spree_auth_devise-c4466de37486
   specs:
     spree_auth_devise (1.0.0)
       cancan (~> 1.6.7)
@@ -77,19 +60,22 @@ GIT
       devise-encryptable (= 0.1.2)
       spree_core
 
-GIT
-  remote: git://github.com/spree/spree_gateway.git
-  revision: 1e07f8e5835c5772d5e5db6d5e81478af3e11987
-  branch: 1-3-stable
+PATH
+  remote: vendor/cache/spree_essentials-e930a71a3c50
+  specs:
+    spree_essentials (0.7.0)
+      rdiscount (~> 1.6.8)
+      spree_core (~> 1.3.0)
+
+PATH
+  remote: vendor/cache/spree_gateway-1e07f8e5835c
   specs:
     spree_gateway (1.2.0.rc2)
       savon (~> 1.2)
       spree_core (~> 1.0)
 
-GIT
-  remote: git://github.com/spree/spree_social.git
-  revision: e0b45b4dc9a9c1137233e33cc1323f425c76cfff
-  branch: 1-3-stable
+PATH
+  remote: vendor/cache/spree_social-e0b45b4dc9a9
   specs:
     spree_social (2.3.0)
       oa-core
@@ -100,9 +86,8 @@ GIT
       omniauth-twitter
       spree_core (~> 1.3.0)
 
-GIT
-  remote: https://github.com/stripe/stripe-ruby
-  revision: 465da7a9978c17b22ebcb378b0fe72454a57b884
+PATH
+  remote: vendor/cache/stripe-ruby-465da7a9978c
   specs:
     stripe (3.3.1)
       faraday (~> 0.9)
@@ -192,8 +177,8 @@ GEM
       actionpack
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
-    activemerchant (1.49.0)
-      activesupport (>= 3.2.14, < 5.0.0)
+    activemerchant (1.78.0)
+      activesupport (>= 3.2.14, < 6.x)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
       nokogiri (~> 1.4)
@@ -239,12 +224,14 @@ GEM
     awesome_print (1.6.1)
     aws-healthcheck (1.0.1)
       rails (>= 3.0)
-    aws-sdk (1.11.2)
+    aws-sdk (1.11.3)
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
-    bcrypt (3.1.10)
+    bcrypt (3.1.13)
     bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
+    bcrypt-ruby (3.1.5-x64-mingw32)
       bcrypt (>= 3.1.3)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -357,6 +344,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffaker (1.15.0)
     ffi (1.9.14)
+    ffi (1.9.14-x64-mingw32)
     fog-aws (1.2.0)
       fog-core (~> 1.38)
       fog-json (~> 1.0)
@@ -398,7 +386,7 @@ GEM
       oauth2 (>= 0.5.0)
     gyoku (0.4.6)
       builder (>= 2.1.2)
-    hashie (3.5.7)
+    hashie (3.6.0)
     highline (1.6.18)
     hike (1.2.3)
     http-cookie (1.0.3)
@@ -422,7 +410,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.9.3)
     klaviyo (1.0.0)
       escape
       json
@@ -467,23 +454,24 @@ GEM
     omniauth (1.4.2)
       hashie (>= 1.2, < 4)
       rack (>= 1.0, < 3)
-    omniauth-facebook (4.0.0)
+    omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
-    omniauth-github (1.1.2)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
-    omniauth-google-oauth2 (0.2.6)
-      omniauth (> 1.0)
-      omniauth-oauth2 (~> 1.1)
+    omniauth-github (1.2.2)
+      omniauth (~> 1.4.0)
+      omniauth-oauth2 (>= 1.4.0, < 2.0)
+    omniauth-google-oauth2 (0.5.4)
+      jwt (>= 1.5)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.5)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.4.0)
-      oauth2 (~> 1.0)
+    omniauth-oauth2 (1.5.0)
+      oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    omniauth-twitter (1.2.0)
-      json (~> 1.3)
+    omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
+      rack
     orm_adapter (0.5.0)
     paperclip (2.8.0)
       activerecord (>= 2.3.0)
@@ -495,7 +483,7 @@ GEM
       xml-simple
     paypal-sdk-merchant (1.103.0)
       paypal-sdk-core (~> 0.2.3)
-    pg (0.18.1)
+    pg (0.19.0-x64-mingw32)
     pin_payment (0.5.1)
     poltergeist (1.12.0)
       capybara (~> 2.1)
@@ -513,6 +501,8 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     psych (2.1.0)
+    puma (2.3.2)
+      rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rabl (0.7.2)
@@ -547,7 +537,6 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.13.0)
     rake (11.3.0)
     ransack (0.7.2)
       actionpack (~> 3.0)
@@ -563,6 +552,11 @@ GEM
     representable (2.3.0)
       uber (~> 0.0.7)
     rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    rest-client (1.8.0-x64-mingw32)
+      ffi (~> 1.9)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -697,10 +691,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicorn (4.9.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
+    unf_ext (0.0.7.5-x64-mingw32)
     uniform_notifier (1.10.0)
     uuidtools (2.1.5)
     vcr (2.9.3)
@@ -708,7 +699,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-    warden (1.2.3)
+    warden (1.2.7)
       rack (>= 1.0)
     wasabi (2.5.1)
       httpi (~> 1.0)
@@ -728,6 +719,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   active_link_to
@@ -784,11 +776,12 @@ DEPENDENCIES
   newrelic_rpm
   next_logistics!
   paperclip
-  pg
+  pg (= 0.19.0)
   pin_payment
   poltergeist (~> 1.12.0)
   pry-byebug
   psych (~> 2.1.0)
+  puma (~> 2.3.2)
   quiet_assets
   rack-cors
   rack-handlers
@@ -829,13 +822,12 @@ DEPENDENCIES
   timecop
   turnip (~> 1.3.1)
   uglifier (= 1.3.0)
-  unicorn
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
   whenever
 
 RUBY VERSION
-   ruby 2.3.8p459
+   ruby 2.3.3p222
 
 BUNDLED WITH
-   1.16.6
+   1.17.3
