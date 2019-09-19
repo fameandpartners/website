@@ -2,7 +2,7 @@ class GlobalSku < ActiveRecord::Base
   belongs_to :product, class_name: 'Spree::Product'
   belongs_to :variant, class_name: 'Spree::Variant'
 
-  alias_method :upc, :
+  alias_method :upc, :id
 
   attr_accessible :sku,
                   :style_number,
@@ -13,7 +13,7 @@ class GlobalSku < ActiveRecord::Base
                   :fabric_name,
                   :fabric_id,
                   :customisation_id,
-                  :customiidsation_name,
+                  :customisation_name,
                   :height_value,
                   :data,
                   :product,
