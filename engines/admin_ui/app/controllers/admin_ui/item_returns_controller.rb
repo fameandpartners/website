@@ -8,7 +8,7 @@ module AdminUi
         f.html do
           @collection.scope do |scope|
             scope = scope.send(params[:scope]) if params[:scope]
-            scope.page(params[:page]).per(50)
+            scope.page(params[:page]).per(20)
           end
         end
         f.csv do
@@ -22,6 +22,7 @@ module AdminUi
 
     def show
       @item_return = ItemReturn.find(params[:id])
+      a = params[:id]
       @page_title = "Return - #{@item_return.order_number} - #{@item_return.line_item_id} - #{@item_return.contact_email}"
     end
 

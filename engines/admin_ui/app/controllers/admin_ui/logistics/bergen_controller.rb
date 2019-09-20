@@ -2,6 +2,7 @@ module AdminUi
   module Logistics
     class BergenController < ::AdminUi::ApplicationController
       def index
+        puts("one time ==============================================================================================")
         @collection = ::Logistics::BergenProcessGrid.new(params[:logistics_bergen_process_grid])
         respond_to do |f|
           f.html do

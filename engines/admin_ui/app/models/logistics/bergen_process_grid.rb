@@ -44,6 +44,7 @@ module Logistics
 
     column :manage_return, header: '', html: true do |process|
       if (item_return = process.return_request_item.item_return)
+        puts('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
         link_to 'manage', admin_ui.item_return_path(item_return), class: 'btn btn-xs btn-info'
       end
     end

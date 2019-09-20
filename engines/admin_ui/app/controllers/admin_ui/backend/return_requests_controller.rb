@@ -11,6 +11,7 @@ module AdminUi
       helper_method :collection, :return_request, :wrap_line_item
 
       def return_request
+        a = params[:id]
         @return_request ||= OrderReturnRequest.includes(:order => [:line_items]).find(params[:id])
       end
 

@@ -26,6 +26,9 @@ class ItemReturnsGrid
   filter(:custom2, :dynamic)
 
   column :actions, :html => true do |item_return|
+    puts('====' * 50)
+    puts('This is link_to "manage" item_return_path(item_return) %s' % item_return_path(item_return))
+    a = item_return_path(item_return)
      link_to "manage", item_return_path(item_return), class: 'btn btn-xs btn-info'
    end
 

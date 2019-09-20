@@ -15,7 +15,7 @@ module Concerns
     end
 
     def default_per_page
-      50
+      20
     end
   end
 end

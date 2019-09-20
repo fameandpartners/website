@@ -64,6 +64,7 @@ module Logistics
     # Filters
 
     filter(:id)
+    puts(:id)
     filter(:order_number) do |order_number|
       self.where('spree_orders.number = ?', order_number)
     end
@@ -81,7 +82,7 @@ module Logistics
     # DataGrid caveat: HTML columns don't use the defined decorator
     column :manage_return, header: '', html: true do |process|
       grid_process = GridProcess.new(process)
-
+      puts("123-------------------------------------------------------------")
       grid_process.item_returns.map do |item_return|
         link_to "manage #{item_return.id}", admin_ui.item_return_path(item_return), class: 'btn btn-xs btn-info'
       end.join(content_tag(:br)).html_safe

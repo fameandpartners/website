@@ -5,6 +5,7 @@ module AdminUi
     RSpec.describe FeaturesController, type: :controller do
       render_views
       routes { AdminUi::Engine.routes }
+      puts("This is adminUi require 'spec_helper'" % AdminUi::Engine.routes)
 
       before(:each) do
         allow(controller).to receive(:current_admin_user).and_return(Spree::User.new)

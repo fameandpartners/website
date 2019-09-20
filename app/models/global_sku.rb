@@ -31,11 +31,15 @@ class GlobalSku < ActiveRecord::Base
 
   def self.create_by_line_item(line_item_presenter:)
     customizations = Array.wrap(line_item_presenter.item.customizations)
+    temp_color_name = line_item_presenter.colour_name
+    if Spree::OptionValue.where(:name => temp_color_name).first.nil?
+      temp_color_name = line_item_presenter.real_color_name
+    end
     GlobalSku::Create.new(
       style_number:   line_item_presenter.style_number,
       product_name:   line_item_presenter.style_name,
       size:           line_item_presenter.size,
-      color_name:     line_item_presenter.colour_name,
+      color_name:     temp_color_name,
       fabric_name:    line_item_presenter.fabric_name,
       height:         line_item_presenter.height,
       customizations: customizations

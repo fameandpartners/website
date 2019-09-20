@@ -8,7 +8,7 @@ require File.expand_path('../../config/boot',  __FILE__)
 
 if ENV.fetch('RAILS_ENV', 'development') == 'development'
   require 'rack/handler'
-  Rack::Handler::WEBrick = Rack::Handler.get(:unicorn)
+  Rack::Handler::WEBrick = Rack::Handler.get(:puma)
 end
 
 require 'rails/commands'
