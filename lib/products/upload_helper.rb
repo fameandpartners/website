@@ -113,6 +113,10 @@ module Products
         product.available_on = Time.now
       end
 
+      if product.available_on.nil?
+        product.available_on = Time.now
+      end
+
       product.save!
 
       product
