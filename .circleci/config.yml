@@ -48,7 +48,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle check || bundle install
+          command: bundle check || bundle update
 
       - save_cache:
           key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
