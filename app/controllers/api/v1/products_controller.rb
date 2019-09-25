@@ -50,11 +50,19 @@ module Api
 
           next unless spree_product
 
-          all_customizations = spree_product.customisation_values
+          # all_customizations = spree_product.customisation_values
 
-          pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
-          fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
-          customizations = all_customizations.select { |c|  components.include?(c.name) }
+          pcv = spree_product.product_color_values
+                  .includes(:option_value)
+                  .active
+                  &.first
+          fabric_product = spree_product
+                             .fabric_products
+                             .includes(fabric: [:option_fabric_color_value, :option_value])
+                             .active
+                             &.first
+          customizations = spree_product.customisation_values
+
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
