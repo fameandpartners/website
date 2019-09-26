@@ -50,7 +50,7 @@ module Api
 
           next unless spree_product
 
-          # all_customizations = spree_product.customisation_values
+          #all_customizations = spree_product.customisation_values
 
           pcv = spree_product.product_color_values
                   .includes(:option_value)
@@ -79,8 +79,8 @@ module Api
           {
             pid: pid,
             name: spree_product.name,
-            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.option_value.name),
-            media: spree_product.images_for_customisation(pcv&.option_value&.name, fabric_product.fabric.name, customizations.map {|c| c.name }, true)
+            url: collection_product_path(spree_product, color: fabric_product&.fabric.name || pcv&.option_value.name),
+            media: spree_product.images_for_customisation(pcv&.option_value.name, fabric_product&.fabric.name, customizations, true)
                      .sort_by(&:position)
                      .take(2)
                      .collect do |image|
@@ -101,7 +101,9 @@ module Api
                     url: image.attachment.url(image_size),
                     urlWebp: image.attachment.url(webp_image_size),
                   }
-                }.uniq {|i| i[:width] },
+                }.uniq do |i|
+                  i[:width]
+                end,
                 sortOrder: image.position
               }
             end,
@@ -110,8 +112,8 @@ module Api
           }
         end
                      .compact
-
-        respond_with products
+        puts "eeee: res" + products.to_s
+        respond_with products.to_json
       end
 
       def search
