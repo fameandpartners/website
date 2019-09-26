@@ -33,6 +33,10 @@ jobs:
       #       sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
       #       sudo chmod ugo+x /usr/local/bin/phantomjs
 
+      - add_ssh_keys:
+          fingerprints:
+            - "f4:3c:4d:18:65:f8:22:32:a7:57:f5:c4:ae:09:18:06"
+            
       - checkout
 
       - run:
@@ -124,32 +128,52 @@ jobs:
           fi
 
       - run:
-          name: Send Success Slack Notification
+          name: download test codes
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
-              COMMITUSER=`git log -1 --pretty=format:'%an'`
-              COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
-              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
-            fi
-          when: on_success
-
+            cd /home/circleci
+            git clone -b product https://github.com/fameandpartners/FPWebsiteTest.git
+            chmod 777 -R /home/circleci/FPWebsiteTest
       - run:
-          name: Send Sentry Notification
+          name: install testframework dependencies
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # Alert Sentry about deploy
-              sentry_endpoint='https://app.getsentry.com/api/hooks'
-              curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
-              -X POST \
-              -H "Content-Type: application/json" \
-              -d "{\"version\": \"${CIRCLE_SHA1}\"}"
-            fi
-
+            sudo apt-get install python3-venv
+            sudo apt-get install python3-pip
+            sudo python3 -m venv /home/circleci/FPWebsiteTest/fp-venv
+            source /home/circleci/FPWebsiteTest/fp-venv/bin/activate
+            sudo pip install -r /home/circleci/FPWebsiteTest/requirements.txt
       - run:
-          name: Send Success Slack Notification
+          name: run tests
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n Build Failed'}" https://hooks.slack.com/services/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
-            fi
-          when: on_fail
+            chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+            sudo python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+
+      # - run:
+          # name: Send Success Slack Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
+              # COMMITUSER=`git log -1 --pretty=format:'%an'`
+              # COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
+              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
+            # fi
+          # when: on_success
+
+      # - run:
+          # name: Send Sentry Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # # Alert Sentry about deploy
+              # sentry_endpoint='https://app.getsentry.com/api/hooks'
+              # curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
+              # -X POST \
+              # -H "Content-Type: application/json" \
+              # -d "{\"version\": \"${CIRCLE_SHA1}\"}"
+            # fi
+
+      # - run:
+          # name: Send Success Slack Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n Build Failed'}" https://hooks.slack.com/services/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
+            # fi
+          # when: on_fail
