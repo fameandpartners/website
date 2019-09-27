@@ -139,7 +139,8 @@ jobs:
             sudo apt-get install python3-venv
             sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
             . /home/circleci/FPWebsiteTest/venv/bin/activate
-            sudo pip install -r /home/circleci/FPWebsiteTest/requirements.txt
+            pip install -r /home/circleci/FPWebsiteTest/requirements.txt
+            pip list
             
       - save_cache:
           paths:
@@ -152,7 +153,7 @@ jobs:
             . /home/circleci/FPWebsiteTest/venv/bin/activate
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
             sudo pip list
-            sudo /home/circleci/FPWebsiteTest/venv/bin/python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
             deactivate
       # - run:
           # name: Send Success Slack Notification
