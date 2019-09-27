@@ -137,21 +137,22 @@ jobs:
           name: install testframework dependencies
           command: |
             sudo apt-get install python3-venv
-            sudo python3 -m venv /home/circleci/FPWebsiteTest/fp-venv
-            source /home/circleci/FPWebsiteTest/fp-venv/bin/activate
+            sudo python3 -m venv venv
+            . venv/bin/activate
             sudo pip install -r /home/circleci/FPWebsiteTest/requirements.txt
             
       - save_cache:
           paths:
-            - /home/circleci/FPWebsiteTest/fp-venv
+            - ./venv
           key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
           
       - run:
           name: run tests
           command: |
+           . venv/bin/activate
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            /home/circleci/FPWebsiteTest/fp-venv/bin/python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-
+            python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            deactivate
       # - run:
           # name: Send Success Slack Notification
           # command: |
