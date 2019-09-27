@@ -150,7 +150,7 @@ jobs:
           name: run tests
           command: |
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            ./FPWebsiteTest/fp-venv/bin/python ./FPWebsiteTest/testframework/TestCaseManager.py
 
       # - run:
           # name: Send Success Slack Notification
