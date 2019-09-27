@@ -17,6 +17,7 @@ jobs:
           POSTGRES_DB: circle-test_test
       - image: redis
       - image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+      - image: circleci/python:3.7.2
 
     working_directory: ~/repo
 
@@ -139,7 +140,7 @@ jobs:
             sudo apt-get install python3-venv
             sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
             . /home/circleci/FPWebsiteTest/venv/bin/activate
-            /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+            sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
             
       - save_cache:
           paths:
@@ -149,11 +150,11 @@ jobs:
       - run:
           name: run tests
           command: |
-            # . /home/circleci/FPWebsiteTest/venv/bin/activate
+            . /home/circleci/FPWebsiteTest/venv/bin/activate
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            # sudo pip list
-            python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-            # deactivate
+            sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 list
+            sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            deactivate
             
       # - run:
           # name: Send Success Slack Notification
