@@ -150,6 +150,7 @@ jobs:
           name: run tests
           command: |
            . venv/bin/activate
+           sudo pip install raven
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
             python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
             deactivate
