@@ -21,9 +21,9 @@ module Api
 
       def import_summary
         spree_products = Spree::Product
-          .not_deleted
-          .includes(:master)
-          .reject(&:is_new_product?)
+                           .not_deleted
+                           .includes(:master)
+                           .reject(&:is_new_product?)
 
         respond_with ({
           products: spree_products.map{|p| { id: p.id, sku: p.sku, name: p.name, updated_at: p.updated_at, created_at: p.created_at  } }
@@ -36,25 +36,33 @@ module Api
         skus = pids.collect { |pid| pid.split("~").first }
 
         spree_products = Spree::Product
-          .not_deleted
-          .includes(:master)
-          .where(spree_variants: {sku: skus})
+                           .not_deleted
+                           .includes(:master)
+                           .where(spree_variants: {sku: skus})
 
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
           spree_product = spree_products
-            .sort_by(&:created_at) # make sure we select the latest product
-            .reverse
-            .find { |p| p.master.sku == sku }
+                            .sort_by(&:created_at) # make sure we select the latest product
+                            .reverse
+                            .find { |p| p.master.sku == sku }
 
           next unless spree_product
 
-          all_customizations = spree_product.customisation_values
+          #all_customizations = spree_product.customisation_values
 
-          pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
-          fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
-          customizations = all_customizations.select { |c|  components.include?(c.name) }
+          pcv = spree_product.product_color_values
+                  .includes(:option_value)
+                  .active
+                  &.first
+          fabric_product = spree_product
+                             .fabric_products
+                             .includes(fabric: [:option_fabric_color_value, :option_value])
+                             .active
+                             &.first
+          customizations = spree_product.customisation_values
+
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
@@ -62,7 +70,7 @@ module Api
             customizations.sum { |c| c.price_in(current_site_version.currency) }
 
           if spree_product.discount
-              sale_price = spree_product.discount_price_in(current_site_version.currency).amount +
+            sale_price = spree_product.discount_price_in(current_site_version.currency).amount +
               (fabric_product ? fabric_product.discount_price_in(current_site_version.currency) : 0) +
               (pcv&.custom ? LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE: 0) +
               customizations.sum { |c| c.discount_price_in(current_site_version.currency) }
@@ -71,11 +79,11 @@ module Api
           {
             pid: pid,
             name: spree_product.name,
-            url: collection_product_path(spree_product, color: fabric_product&.fabric&.name || pcv&.option_value.name),
-            media: spree_product.images_for_customisation(pcv&.option_value&.name, fabric_product.fabric.name, customizations.map {|c| c.name }, true)
-              .sort_by(&:position)
-              .take(2)
-              .collect do |image|
+            url: collection_product_path(spree_product, color: fabric_product&.fabric.name || pcv&.option_value.name),
+            media: spree_product.images_for_customisation(pcv&.option_value.name, fabric_product&.fabric.name, customizations, true)
+                     .sort_by(&:position)
+                     .take(2)
+                     .collect do |image|
               {
                 type: :photo,
                 src: LIST_PRODUCT_IMAGE_SIZES.map {|sizes|
@@ -85,7 +93,7 @@ module Api
                   geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
                   width = [geometry.width.round, image.attachment_width].min
                   height = (image.attachment_height.to_f / image.attachment_width.to_f * width).round
-      
+
                   {
                     name: image_size,
                     width: width,
@@ -93,7 +101,9 @@ module Api
                     url: image.attachment.url(image_size),
                     urlWebp: image.attachment.url(webp_image_size),
                   }
-                }.uniq {|i| i[:width] },
+                }.uniq do |i|
+                  i[:width]
+                end,
                 sortOrder: image.position
               }
             end,
@@ -101,9 +111,9 @@ module Api
             strikeThroughPrice: sale_price ? (price*100).to_i : nil,
           }
         end
-        .compact
-
-        respond_with products
+                     .compact
+        puts "eeee: res" + products.to_s
+        respond_with products.to_json
       end
 
       def search
@@ -118,10 +128,10 @@ module Api
         # there is am overlap between color group names & taxons, so we make color groups win
         color_group_names = Spree::Taxon.where("permalink ilike 'color/%'").map {|t| t.permalink.split("/").last }
         color_names = filter
-          .select { |f| color_group_names.include?(f) }
+                        .select { |f| color_group_names.include?(f) }
         taxon_names = filter
-          .reject { |f| color_group_names.include?(f) }
-          .reject { |f| ['0-50', '50-149', '149-199', '199-299', '299-399', '399+', '0-199', '200-299', '300-399', '400'].include?(f) }
+                        .reject { |f| color_group_names.include?(f) }
+                        .reject { |f| ['0-50', '50-149', '149-199', '199-299', '299-399', '399+', '0-199', '200-299', '300-399', '400'].include?(f) }
 
         offset = params[:lastIndex].to_i  || 0
         page_size = params[:pageSize].to_i || 36
@@ -154,9 +164,9 @@ module Api
         if filter.include?('400')
           price_max = nil
         elsif filter.include?('399+')
-            price_max = nil  
+          price_max = nil
         elsif filter.include?('300-399')
-            price_max = 399
+          price_max = 399
         elsif filter.include?('299-399')
           price_max = 399
         elsif filter.include?('200-299')
@@ -193,7 +203,7 @@ module Api
           body: query,
           size: page_size,
           from: offset,
-        )
+          )
 
         #taxons are additive
         aggregation_taxons = Hash[*result["aggregations"]["taxons"]["buckets"].map(&:values).flatten]
@@ -216,11 +226,11 @@ module Api
         aggregation_prices = Hash[*aggregation_prices_result["aggregations"]["prices"]["buckets"].map{|key, value| [key, value["doc_count"]]}.flatten]
 
         taxon_facet_groups = Spree::Taxon
-          .includes(:taxonomy)
-          .where(parent_id: nil)
-          .select {|t| t.taxonomy != nil }
-          .sort_by { |t| t.taxonomy.position }
-        .map do |parent|
+                               .includes(:taxonomy)
+                               .where(parent_id: nil)
+                               .select {|t| t.taxonomy != nil }
+                               .sort_by { |t| t.taxonomy.position }
+                               .map do |parent|
           {
             groupId: parent.permalink,
             name: parent.name,
@@ -241,10 +251,10 @@ module Api
                 }
               }
             end
-            .select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
+                      .select { |f| f[:docCount] > 0 || filter.include?(f[:facetId]) }
           }
         end
-        .select { |x| x[:facets].count > 0 }
+                               .select { |x| x[:facets].count > 0 }
 
         response = {
           results: result['hits']['hits'].map do |r|
@@ -372,18 +382,18 @@ module Api
         product_id = variant.product_id if variant
 
         product = Spree::Product
-          .not_deleted
-          .includes(:product_properties)
-          .find(product_id)
+                    .not_deleted
+                    .includes(:product_properties)
+                    .find(product_id)
 
         colors = product.product_color_values
-          .includes(:option_value)
-          .active
+                   .includes(:option_value)
+                   .active
 
         fabrics = product
-          .fabric_products
-          .includes(fabric: [:option_fabric_color_value, :option_value])
-          .active
+                    .fabric_products
+                    .includes(fabric: [:option_fabric_color_value, :option_value])
+                    .active
 
         sizes = product.option_types.find_by_name('dress-size').option_values
         customizations = product.customisation_values
@@ -393,7 +403,7 @@ module Api
         product_size = product.property('size')
 
         images = product
-          .images
+                   .images
 
         product_viewmodel = {
           productId: product.sku,
@@ -554,8 +564,8 @@ module Api
           ].flatten.compact,
 
           media: images
-            .reject { |i| i.attachment_file_name.downcase.include?('crop') }
-            .map {|image| map_image(image, fabrics, colors, product_fit, product_size) },
+                   .reject { |i| i.attachment_file_name.downcase.include?('crop') }
+                   .map {|image| map_image(image, fabrics, colors, product_fit, product_size) },
 
           layerCads: [
             product.layer_cads.empty? ? customizations.map {|c| map_cad_from_customization(c)} : product.layer_cads.map {|lc| map_layer_cad(lc, customizations) }
