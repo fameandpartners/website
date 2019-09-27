@@ -136,10 +136,10 @@ jobs:
       - run:
           name: install testframework dependencies
           command: |
-            # sudo apt-get install python3-venv
-            # sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
-            # . /home/circleci/FPWebsiteTest/venv/bin/activate
-            sudo pip install -r /home/circleci/FPWebsiteTest/requirements.txt
+            sudo apt-get install python3-venv
+            sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+            . /home/circleci/FPWebsiteTest/venv/bin/activate
+            /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
             
       - save_cache:
           paths:
