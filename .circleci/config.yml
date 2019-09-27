@@ -126,7 +126,7 @@ jobs:
             aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
             aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
           fi
-
+          
       - run:
           name: download test codes
           command: |
