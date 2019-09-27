@@ -130,22 +130,27 @@ jobs:
       - run:
           name: download test codes
           command: |
-            cd /home/circleci
+            cd /home/circleci/
             git clone -b product https://github.com/fameandpartners/FPWebsiteTest.git
-            chmod 777 -R /home/circleci/FPWebsiteTest
+            
       - run:
           name: install testframework dependencies
           command: |
             sudo apt-get install python3-venv
-            sudo apt-get install python3-pip
             sudo python3 -m venv /home/circleci/FPWebsiteTest/fp-venv
             source /home/circleci/FPWebsiteTest/fp-venv/bin/activate
             sudo pip install -r /home/circleci/FPWebsiteTest/requirements.txt
+            
+      - save_cache:
+          paths:
+            - /home/circleci/FPWebsiteTest/fp-venv
+          key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
+          
       - run:
           name: run tests
           command: |
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            sudo python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            python /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
 
       # - run:
           # name: Send Success Slack Notification
