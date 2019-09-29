@@ -39,10 +39,11 @@ module Api
                            .not_deleted
                            .includes(:master)
                            .where(spree_variants: {sku: skus})
-
+        # puts "zzzzzzzzzzz:bb"+spree_products.to_a.to_s
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
+          # puts "qqqqqqqqqqq:aa"+components.to_s
           spree_product = spree_products
                             .sort_by(&:created_at) # make sure we select the latest product
                             .reverse
@@ -55,14 +56,32 @@ module Api
           pcv = spree_product.product_color_values
                   .includes(:option_value)
                   .active
-                  &.first
+                  &.find do |pvc| components.include?(pvc.option_value.name)
+          end
           fabric_product = spree_product
                              .fabric_products
                              .includes(fabric: [:option_fabric_color_value, :option_value])
                              .active
-                             &.first
-          customizations = spree_product.customisation_values
+                             &.find { |fp| components.include?(fp.fabric.name) }
 
+          # pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
+          # fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
+
+          if components.length <= 1 and pcv.nil?
+            pcv = spree_product.product_color_values
+                    .includes(:option_value)
+                    .active
+                    &.first
+          end
+          if fabric_product.nil?
+            fabric_product = spree_product
+                               .fabric_products
+                               .includes(fabric: [:option_fabric_color_value, :option_value])
+                               .active
+                               &.first
+          end
+
+          customizations = spree_product.customisation_values
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
@@ -112,7 +131,8 @@ module Api
           }
         end
                      .compact
-        puts "eeee: res" + products.to_s
+        # puts "eeee: res" + products.to_s
+        # puts "jjjjjjjj: res" + LIST_PRODUCT_IMAGE_SIZES.to_s
         respond_with products.to_json
       end
 
