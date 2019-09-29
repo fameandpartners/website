@@ -140,9 +140,9 @@ jobs:
           name: install testframework dependencies
           command: |
             sudo apt-get install python3-venv
-            sudo python3 -m venv venv
-            . venv/bin/activate
-            sudo /home/circleci/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+            sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+            . /home/circleci/FPWebsiteTest/venv/bin/activate
+            sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
             
       - save_cache:
           paths:
@@ -152,9 +152,9 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+            . /home/circleci/FPWebsiteTest/venv/bin/activate
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            sudo /home/circleci/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
             deactivate
             
       # - run:
