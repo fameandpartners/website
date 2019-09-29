@@ -141,7 +141,7 @@ jobs:
           command: |
             sudo apt-get install python3-venv
             sudo python3 -m venv venv
-            . /venv/bin/activate
+            . venv/bin/activate
             sudo /home/circleci/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
             
       - save_cache:
@@ -152,7 +152,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            . /venv/bin/activate
+            . venv/bin/activate
             chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
             sudo /home/circleci/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
             deactivate
