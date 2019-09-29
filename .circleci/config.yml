@@ -134,7 +134,7 @@ jobs:
           name: download test codes
           command: |   
             cd /home/circleci/
-            git clone -b product https://github.com/fameandpartners/FPWebsiteTest.git
+            git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
             
       - run:
           name: install testframework dependencies
