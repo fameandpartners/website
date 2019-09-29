@@ -25,9 +25,8 @@ jobs:
       - run:
           name: Test Python
           command: |
-            python3 -v
+            
             whereis python37
-            python37 -v
             
       # - run:
           # name: Git LFS Install
