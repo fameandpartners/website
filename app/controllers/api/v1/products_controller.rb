@@ -49,20 +49,33 @@ module Api
                             .find { |p| p.master.sku == sku }
 
           next unless spree_product
-
-          #all_customizations = spree_product.customisation_values
-
           pcv = spree_product.product_color_values
                   .includes(:option_value)
                   .active
-                  &.first
+                  &.find do |pvc| components.include?(pvc.option_value.name)
+          end
+
           fabric_product = spree_product
                              .fabric_products
                              .includes(fabric: [:option_fabric_color_value, :option_value])
                              .active
-                             &.first
-          customizations = spree_product.customisation_values
+                             &.find { |fp| components.include?(fp.fabric.name) }
+          if components.length <= 1 and pcv.nil?
+            pcv = spree_product.product_color_values
+                    .includes(:option_value)
+                    .active
+                    &.first
+          end
+          
+          if components.length <= 1 and fabric_product.nil?
+            fabric_product = spree_product
+                               .fabric_products
+                               .includes(fabric: [:option_fabric_color_value, :option_value])
+                               .active
+                               &.first
+          end
 
+          customizations = spree_product.customisation_values
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
@@ -112,7 +125,6 @@ module Api
           }
         end
                      .compact
-        puts "eeee: res" + products.to_s
         respond_with products.to_json
       end
 
