@@ -23,137 +23,144 @@ jobs:
 
     steps:
       - run:
-          name: Git LFS Install
+          name: Test Python
           command: |
-            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-            sudo apt-get install -yqq git-lfs
+            python3 -v
+            whereis python37
+            python37 -v
+            
+      # - run:
+          # name: Git LFS Install
+          # command: |
+            # curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+            # sudo apt-get install -yqq git-lfs
+
+      # # - run:
+      # #     name: Phantomjs Install
+      # #     command: |
+      # #       sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
+      # #       sudo chmod ugo+x /usr/local/bin/phantomjs
+
+      # - add_ssh_keys:
+          # fingerprints:
+            # - "f4:3c:4d:18:65:f8:22:32:a7:57:f5:c4:ae:09:18:06"
+            
+      # - checkout
 
       # - run:
-      #     name: Phantomjs Install
-      #     command: |
-      #       sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
-      #       sudo chmod ugo+x /usr/local/bin/phantomjs
+          # name: Git LFS pull
+          # command: |
+            # git lfs install
+            # git lfs pull
 
-      - add_ssh_keys:
-          fingerprints:
-            - "f4:3c:4d:18:65:f8:22:32:a7:57:f5:c4:ae:09:18:06"
-            
-      - checkout
+      # - restore_cache:
+          # keys:
+            # - rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+            # - rails-bundle-v2-
 
-      - run:
-          name: Git LFS pull
-          command: |
-            git lfs install
-            git lfs pull
+      # - run:
+          # name: Bundle Install
+          # command: bundle check || bundle install
 
-      - restore_cache:
-          keys:
-            - rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-v2-
+      # - save_cache:
+          # key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+          # paths:
+            # - vendor/bundle
 
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
+      # - run:
+          # name: Wait for DB
+          # command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - save_cache:
-          key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      # - run:
+          # name: Database setup
+          # command: |
+            # echo "test:
+             # adapter: postgresql
+             # database: circle-test_test
+             # username: root
+             # host: localhost
+            # " > config/database.yml
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+            # bundle exec rake db:create db:schema:load db:migrate --trace
 
-      - run:
-          name: Database setup
-          command: |
-            echo "test:
-             adapter: postgresql
-             database: circle-test_test
-             username: root
-             host: localhost
-            " > config/database.yml
+      # - run:
+          # name: Run rspec in parallel
+          # command: |
+            # bundle exec rspec --profile 10 \
+                              # --format RspecJunitFormatter \
+                              # --out test_results/rspec.xml \
+                              # --format progress \
+                              # $(circleci tests glob "spec/**/*_spec.rb engines/*/spec/**/*_spec.rb spec/**/*.feature engines/*/spec/**/*.feature" | circleci tests split --split-by=timings)
 
-            bundle exec rake db:create db:schema:load db:migrate --trace
+      # - store_test_results:
+          # path: test_results
 
-      - run:
-          name: Run rspec in parallel
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb engines/*/spec/**/*_spec.rb spec/**/*.feature engines/*/spec/**/*.feature" | circleci tests split --split-by=timings)
+      # - setup_remote_docker:
+          # docker_layer_caching: true
+          # version: 17.09.0-ce
 
-      - store_test_results:
-          path: test_results
+      # - run:
+          # name: Install docker client
+          # command: |
+            # set -x
+            # VER="17.09.0-ce"
+            # curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            # tar -x -C /tmp -f /tmp/docker-$VER.tgz
+            # sudo mv /tmp/docker/* /usr/bin
 
-      - setup_remote_docker:
-          docker_layer_caching: true
-          version: 17.09.0-ce
+      # # - run: |
+          # # VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
 
-      - run:
-          name: Install docker client
-          command: |
-            set -x
-            VER="17.09.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -x -C /tmp -f /tmp/docker-$VER.tgz
-            sudo mv /tmp/docker/* /usr/bin
+          # # sudo apt-get update -qq
+          # # sudo apt-get install -qq python python-pip libpython-dev
+          # # sudo pip install awscli
 
-      # - run: |
-          # VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
+          # # rm config/database.yml
+          # # ./.circleci/build-docker.sh $VERSION
 
-          # sudo apt-get update -qq
-          # sudo apt-get install -qq python python-pip libpython-dev
-          # sudo pip install awscli
-
-          # rm config/database.yml
-          # ./.circleci/build-docker.sh $VERSION
-
-          # if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA1-Sidekiq" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA3" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA4" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA4-Sidekiq" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
-          # fi
+          # # if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA1-Sidekiq" --version-label $VERSION
+          # # elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
+          # # elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA3" --version-label $VERSION
+          # # elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA4" --version-label $VERSION
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-QA4-Sidekiq" --version-label $VERSION
+          # # elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
+          # # elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
+            # # aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
+          # # fi
           
-      - run:
-          name: download test codes
-          command: |
-            cd /home/circleci/
-            git clone -b product https://github.com/fameandpartners/FPWebsiteTest.git
+      # - run:
+          # name: download test codes
+          # command: |   
+            # cd /home/circleci/
+            # git clone -b product https://github.com/fameandpartners/FPWebsiteTest.git
             
-      - run:
-          name: install testframework dependencies
-          command: |
-            sudo apt-get install python3-venv
-            sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
-            . /home/circleci/FPWebsiteTest/venv/bin/activate
-            sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+      # - run:
+          # name: install testframework dependencies
+          # command: |
+            # sudo apt-get install python3-venv
+            # sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+            # . /home/circleci/FPWebsiteTest/venv/bin/activate
+            # sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
             
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
+      # - save_cache:
+          # paths:
+            # - ./venv
+          # key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
           
-      - run:
-          name: run tests
-          command: |
-            . /home/circleci/FPWebsiteTest/venv/bin/activate
-            chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-            deactivate
+      # - run:
+          # name: run tests
+          # command: |
+            # . /home/circleci/FPWebsiteTest/venv/bin/activate
+            # chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+            # sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+            # deactivate
             
       # - run:
           # name: Send Success Slack Notification
