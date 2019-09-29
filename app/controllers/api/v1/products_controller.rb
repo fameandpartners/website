@@ -39,41 +39,35 @@ module Api
                            .not_deleted
                            .includes(:master)
                            .where(spree_variants: {sku: skus})
-        # puts "zzzzzzzzzzz:bb"+spree_products.to_a.to_s
+
         products = pids.collect do |pid|
           components = pid.split("~")
           sku = components.shift
-          # puts "qqqqqqqqqqq:aa"+components.to_s
           spree_product = spree_products
                             .sort_by(&:created_at) # make sure we select the latest product
                             .reverse
                             .find { |p| p.master.sku == sku }
 
           next unless spree_product
-
-          #all_customizations = spree_product.customisation_values
-
           pcv = spree_product.product_color_values
                   .includes(:option_value)
                   .active
                   &.find do |pvc| components.include?(pvc.option_value.name)
           end
+
           fabric_product = spree_product
                              .fabric_products
                              .includes(fabric: [:option_fabric_color_value, :option_value])
                              .active
                              &.find { |fp| components.include?(fp.fabric.name) }
-
-          # pcv = spree_product.product_color_values.find { |pvc| components.include?(pvc.option_value.name) }
-          # fabric_product = spree_product.fabric_products.find { |fp| components.include?(fp.fabric.name) }
-
           if components.length <= 1 and pcv.nil?
             pcv = spree_product.product_color_values
                     .includes(:option_value)
                     .active
                     &.first
           end
-          if fabric_product.nil?
+          
+          if components.length <= 1 and fabric_product.nil?
             fabric_product = spree_product
                                .fabric_products
                                .includes(fabric: [:option_fabric_color_value, :option_value])
@@ -131,8 +125,6 @@ module Api
           }
         end
                      .compact
-        # puts "eeee: res" + products.to_s
-        # puts "jjjjjjjj: res" + LIST_PRODUCT_IMAGE_SIZES.to_s
         respond_with products.to_json
       end
 
