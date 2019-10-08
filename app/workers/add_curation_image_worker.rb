@@ -6,7 +6,12 @@ class AddCurationImageWorker
     Dir.mktmpdir do |dir|
       file_name = URI(image_url).path.gsub('/', '~').gsub(/^~/, '').gsub('~', '_').gsub('.jpeg', '.jpg')
 
+      puts "---------------"
+      puts image_url
+      puts position
+      puts curation_id
       attachment_tmp = open(image_url)
+      puts "***************"
       attachment = File.new(File.join(dir, file_name), 'w+')
       attachment.binmode
       attachment.write attachment_tmp.read
@@ -17,6 +22,11 @@ class AddCurationImageWorker
       spree_image.attachment = attachment
       spree_image.position = position
       spree_image.save!
+
+      puts "file name:"
+      puts File.join(dir, file_name)
+      attachment.close
+      File.delete(File.join(dir, file_name))
     end
   end
 end
