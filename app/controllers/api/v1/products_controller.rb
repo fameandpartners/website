@@ -49,6 +49,9 @@ module Api
                             .find { |p| p.master.sku == sku }
 
           next unless spree_product
+
+          all_customizations = spree_product.customisation_values
+
           pcv = spree_product.product_color_values
                   .includes(:option_value)
                   .active
@@ -60,13 +63,16 @@ module Api
                              .includes(fabric: [:option_fabric_color_value, :option_value])
                              .active
                              &.find { |fp| components.include?(fp.fabric.name) }
+
+          customizations = all_customizations.select { |c|  components.include?(c.name) }
+
           if components.length <= 1 and pcv.nil?
             pcv = spree_product.product_color_values
                     .includes(:option_value)
                     .active
                     &.first
           end
-          
+
           if components.length <= 1 and fabric_product.nil?
             fabric_product = spree_product
                                .fabric_products
@@ -75,7 +81,11 @@ module Api
                                &.first
           end
 
-          customizations = spree_product.customisation_values
+          if components.length <= 1 and (customizations.nil? or customizations.length == 0)
+            customizations = all_customizations.select do |c|
+              c.name == fabric_product.fabric.name or c.name == pcv.option_value.name
+            end
+          end
 
           price = spree_product.price_in(current_site_version.currency).amount +
             (fabric_product ? fabric_product.price_in(current_site_version.currency) : 0) +
