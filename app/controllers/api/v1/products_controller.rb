@@ -85,7 +85,7 @@ module Api
                   geometry = Paperclip::Geometry.parse(image.attachment.styles[image_size].geometry)
                   width = [geometry.width.round, image.attachment_width].min
                   height = (image.attachment_height.to_f / image.attachment_width.to_f * width).round
-      
+
                   {
                     name: image_size,
                     width: width,
@@ -154,7 +154,7 @@ module Api
         if filter.include?('400')
           price_max = nil
         elsif filter.include?('399+')
-            price_max = nil  
+            price_max = nil
         elsif filter.include?('300-399')
             price_max = 399
         elsif filter.include?('299-399')
@@ -368,6 +368,7 @@ module Api
       def show
         product_id = params[:id]
 
+        # 后面没用到 variant
         variant = Spree::Variant.order('id DESC').find_by_sku(params[:id])
         product_id = variant.product_id if variant
 

@@ -17,12 +17,12 @@ describe "Afterpay Merchant", :vcr do
         email: 'dev@fameandpartners.com'
       },
       merchant: {
-        redirectConfirmUrl: 'https://192.168.1.25:3000/dresses',
-        redirectCancelUrl: 'https://192.168.1.25:3000/dresses'
+        redirectConfirmUrl: 'https://192.168.1.141:3000/dresses',
+        redirectCancelUrl: 'https://192.168.1.141:3000/dresses'
       }
     }
   }
-
+  
   context 'configuration' do
     it 'should be readable' do
       get_configuration_response = @api.configuration

@@ -49,7 +49,7 @@ module ApplicationHelper
       [
         content_tag(:span, line_item.money_without_discount, class: 'price-old'),
         line_item.money
-      ].join(r"\n").html_safe
+      ].join("\n").html_safe
     else
       line_item.money.to_s.html_safe
     end
