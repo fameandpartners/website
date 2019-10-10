@@ -1,4 +1,7 @@
 Spree::Payment.class_eval do
+
+  has_many :quad_pay_orders
+
   def gateway_options
     options = { :email    => order.email,
                 :customer => order.email,
