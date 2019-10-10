@@ -166,7 +166,7 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "pr" ]; then
               cd /home/circleci/
-              git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
+              git clone https://github.com/fameandpartners/FPWebsiteTest.git
               sudo apt-get install python3-venv
               sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
               . /home/circleci/FPWebsiteTest/venv/bin/activate
