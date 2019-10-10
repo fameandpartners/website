@@ -6,7 +6,7 @@ module Products
 
     def create_or_update_products(product_json)
       #info "Creating or Update Products"
-      upload = JSON.parse(product_json, :symbolize_names => true) 
+      upload = JSON.parse(product_json, :symbolize_names => true)
       upload.map do |prod|
         begin
           details = prod[:details]
@@ -34,7 +34,7 @@ module Products
 
           #color_map = details[:colors].map{ |x| { color: x } }
           add_product_prices(product, price_in_aud, price_in_usd)
-          add_product_color_options(product, details[:fabrics], details[:colors]) 
+          add_product_color_options(product, details[:fabrics], details[:colors])
           add_product_customizations(product, prod[:customization_list] || [])
           add_product_height_ranges( product )
           add_making_options(product, prod[:making_options])
@@ -58,7 +58,7 @@ module Products
         curation.taxons = Spree::Taxon.where(permalink: c[:taxons])
         curation.save!
 
-        c[:media].each_with_index do |image, p| 
+        c[:media].each_with_index do |image, p|
           AddCurationImageWorker.perform_async(image, p, curation.id)
         end
       end
@@ -171,7 +171,7 @@ module Products
       fabric_color.presentation = presentation
       fabric_color.value = hex;
       fabric_color.save!
-      
+
       fabric_color
     end
 
@@ -180,7 +180,7 @@ module Products
       color.presentation = presentation
       color.value = hex;
       color.save!
-      
+
       color
     end
 
@@ -192,7 +192,7 @@ module Products
                  'factory_name'
                  ]
 
-      
+
       allowed.each {|property_name| product.set_property(property_name, details[property_name])}
 
       product.set_property('care_instructions',"Professional dry-clean only.\nSee label for further details.") #always this value
@@ -205,7 +205,7 @@ module Products
 
     def add_product_customizations(product, custs)
       custs.reject{|x| x[:type]&.downcase == 'size' ||  x[:type]&.downcase == 'fabric'}.each_with_index do |customization, index|
-        
+
         new_customization = product.customisation_values.find_or_create_by_name(customization[:code])
         new_customization.price = customization[:price_usd].presence || 0
         new_customization.price_aud = customization[:price_aud].presence || 0
@@ -213,7 +213,7 @@ module Products
         new_customization.manifacturing_sort_order = customization[:manifacturing_sort_order]
         new_customization.position = index
         new_customization.customisation_group = nil
-        
+
         new_customization.save!
       end
     end
@@ -222,7 +222,7 @@ module Products
       master_variant = product.master
 
       master_variant.style_to_product_height_range_groups = []
-      
+
       product_height_groups = ProductHeightRangeGroup.default_six
 
       product_height_groups.each { |phg| master_variant.style_to_product_height_range_groups << StyleToProductHeightRangeGroup.new( product_height_range_group: phg ) }

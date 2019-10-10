@@ -17,8 +17,8 @@ describe "Afterpay Merchant", :vcr do
         email: 'dev@fameandpartners.com'
       },
       merchant: {
-        redirectConfirmUrl: 'https://localhost:3000/dresses',
-        redirectCancelUrl: 'https://localhost:3000/dresses'
+        redirectConfirmUrl: 'https://192.168.1.141:3000/dresses',
+        redirectCancelUrl: 'https://192.168.1.141:3000/dresses'
       }
     }
   }
