@@ -386,7 +386,7 @@ FameAndPartners::Application.routes.draw do
         resources :layer_cads
         resources :curations
 
-      
+
         resources :making_options, controller: 'product_making_options', except: [:destroy] do
           member do
             put :toggle
@@ -401,4 +401,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
+
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

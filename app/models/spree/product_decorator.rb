@@ -111,7 +111,7 @@ Spree::Product.class_eval do
     OpenStruct.new({ attachment:  FakeImage.new(url)})
   end
 
-  def images_for_customisation(color_name, fabric_name, customisations, cropped)    
+  def images_for_customisation(color_name, fabric_name, customisations, cropped)
     if has_render?
       image_url = Spree::Product.format_render_url(sku, fabric_name, customisations)
 
@@ -119,10 +119,10 @@ Spree::Product.class_eval do
         fake_image(image_url)
       ]
     end
-        
-    curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, customisations)).first || 
-      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first || 
-      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first || 
+
+    curation = curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, customisations)).first ||
+      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, fabric_name, [])).first ||
+      curations.where(active: true, pid: Spree::Product.format_new_pid(sku, color_name, [])).first ||
       curations.first
 
     if cropped
@@ -222,7 +222,7 @@ Spree::Product.class_eval do
     product_sku = sku
 
     return product_sku if pid_components.blank?
-    
+
     "#{product_sku}~#{pid_components}"
   end
 
