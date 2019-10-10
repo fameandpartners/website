@@ -103,87 +103,127 @@ jobs:
             tar -x -C /tmp -f /tmp/docker-$VER.tgz
             sudo mv /tmp/docker/* /usr/bin
 
-      # - run: |
-          # VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
+      - run: |
+          VERSION=${CIRCLE_BRANCH/\//-}.$CIRCLE_BUILD_NUM
 
-          # sudo apt-get update -qq
-          # sudo apt-get install -qq python python-pip libpython-dev
-          # sudo pip install awscli
+          sudo apt-get update -qq
+          sudo apt-get install -qq python python-pip libpython-dev
+          sudo pip install awscli
 
-          # rm config/database.yml
-          # ./.circleci/build-docker.sh $VERSION
+          rm config/database.yml
+          ./.circleci/build-docker.sh $VERSION
 
-          # if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA1-Sidekiq" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA3" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA4" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-QA4-Sidekiq" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
-          # elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
-            # aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
-          # fi
+          if [[ $CIRCLE_BRANCH =~ ^release1 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA1" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA1-Sidekiq" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^release2 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA2" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^release3 ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA3" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^develop$ ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA4" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-QA4-Sidekiq" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-Staging" --version-label $VERSION
+          elif [[ $CIRCLE_BRANCH =~ ^master$ ]]; then
+            aws elasticbeanstalk update-environment --environment-name "Spree-Prod" --version-label $VERSION
+            aws elasticbeanstalk update-environment --environment-name "Spree-Prod-Sidekiq" --version-label $VERSION
+          fi
           
       - run:
-          name: download test codes
-          command: |   
-            cd /home/circleci/
-            git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
-            
-      - run:
-          name: install testframework dependencies
+          name: Send Success Slack Notification
           command: |
-            sudo apt-get install python3-venv
-            sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
-            . /home/circleci/FPWebsiteTest/venv/bin/activate
-            sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
-            
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
+              COMMITUSER=`git log -1 --pretty=format:'%an'`
+              COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
+              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
+            fi
+          when: on_success
+
+      - run:
+          name: Send Sentry Notification
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Alert Sentry about deploy
+              sentry_endpoint='https://app.getsentry.com/api/hooks'
+              curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
+              -X POST \
+              -H "Content-Type: application/json" \
+              -d "{\"version\": \"${CIRCLE_SHA1}\"}"
+            fi
+
+      - run:
+          name: Send Success Slack Notification
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n Build Failed'}" https://hooks.slack.com/services/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
+            fi
+          when: on_fail
+          
+      - run:
+          name: run autotest
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              cd /home/circleci/
+              git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
+              sudo apt-get install python3-venv
+              sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+              . /home/circleci/FPWebsiteTest/venv/bin/activate
+              sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+              . /home/circleci/FPWebsiteTest/venv/bin/activate
+              chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+              sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+              deactivate
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              cd /home/circleci/
+              git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
+              sudo apt-get install python3-venv
+              sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+              . /home/circleci/FPWebsiteTest/venv/bin/activate
+              sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+              . /home/circleci/FPWebsiteTest/venv/bin/activate
+              chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+              sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+              deactivate
+            fi
+          when: on_success
+          
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
-          
+          when: on_success
+      
       - run:
-          name: run tests
+          name: Send AutoTest Success Slack Notification
           command: |
-            . /home/circleci/FPWebsiteTest/venv/bin/activate
-            chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-            sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-            deactivate
-            
-      # - run:
-          # name: Send Success Slack Notification
-          # command: |
-            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
-              # COMMITUSER=`git log -1 --pretty=format:'%an'`
-              # COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
-              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
-            # fi
-          # when: on_success
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
+              COMMITUSER=`git log -1 --pretty=format:'%an'`
+              COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
+              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
+            fi
+          when: on_success
 
-      # - run:
-          # name: Send Sentry Notification
-          # command: |
-            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # # Alert Sentry about deploy
-              # sentry_endpoint='https://app.getsentry.com/api/hooks'
-              # curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
-              # -X POST \
-              # -H "Content-Type: application/json" \
-              # -d "{\"version\": \"${CIRCLE_SHA1}\"}"
-            # fi
+      - run:
+          name: Send AutoTest Sentry Notification
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Alert Sentry about deploy
+              sentry_endpoint='https://app.getsentry.com/api/hooks'
+              curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
+              -X POST \
+              -H "Content-Type: application/json" \
+              -d "{\"version\": \"${CIRCLE_SHA1}\"}"
+            fi
 
-      # - run:
-          # name: Send Success Slack Notification
-          # command: |
-            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n Build Failed'}" https://hooks.slack.com/services/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
-            # fi
-          # when: on_fail
+      - run:
+          name: Send AutoTest Success Slack Notification
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n AutoTest Failed'}" https://hooks.slack.com/services/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
+            fi
+          when: on_fail
+
+
