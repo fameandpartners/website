@@ -1,8 +1,9 @@
 ruby:
+  #afterpay = Afterpay::Presenters::Payment.new(spree_order: spree_order, spree_payment_method: quadpay_method, rails_request: request)
   order_total_text = Spree::Money.new(spree_order.total, currency: 'USD').to_s
   single_installment_text = Spree::Money.new(spree_order.total / 4, currency: 'USD').to_s
 
-/- if Features.active?(:afterpay) && current_site_version.is_australia? && afterpay.order_eligible?
+/- if Features.active?(:afterpay) && current_site_version.is_usa? && afterpay.order_eligible?
   - content_for :head
   - if afterpay.test_mode?
     script src="https://www-sandbox.secure-afterpay.com.au/afterpay.js" async=true
@@ -53,7 +54,6 @@ h4
     .time-period Fortnightly
 p.hint Place your order and you will complete your purchase via the Quadpay pop-up.
 a.btn.btn-black.btn-md.btn-block.open-quadpay-modal.payment-cta href='javascript:void(0);'
-  /= image_tag 'loader-bg-black.gif'
-  | Pay with
-  =<> image_tag 'checkout/logo/afterpay-logo-no-icon-white.png'
+    | Pay with
+    =<> image_tag 'checkout/logo/quadpay-logo.svg'
 p.text-danger.hidden.quadpay-error Quadpay is not available at the moment. Please, try another payment method.

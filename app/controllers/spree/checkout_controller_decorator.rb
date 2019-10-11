@@ -405,11 +405,11 @@ Spree::CheckoutController.class_eval do
     @pay_pal_method = Payments::PaypalLocalizer.new(@order, current_site_version.currency).gateway
 
     @afterpay_method = @order.available_payment_methods.detect do |method|
-      method.method_type == 'afterpay' && current_site_version.currency == method.currency
+      method.method_type == 'afterpay' #&& current_site_version.currency == method.currency
     end
 
     @quadpay_method = @order.available_payment_methods.detect do |method|
-      method.method_type == 'afterpay' #&& current_site_version.currency == method.currency
+      method.method_type == 'afterpay' && current_site_version.currency == 'USD'
     end
   end
 
