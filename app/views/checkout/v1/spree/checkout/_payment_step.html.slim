@@ -33,6 +33,11 @@ javascript:
           a data-toggle="tab" href="#afterpay" aria-controls="afterpay" role="tab"
             i.icon.icon-afterpay-symbol
             | Afterpay
+      - if @quadpay_method
+        li.payment-option
+          a data-toggle="tab" href="#quadpay" aria-controls="quadpay" role="tab"
+            i.icon.icon-afterpay-symbol
+            | Quadpay
       - if @pay_pal_method
         li.payment-option
           a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
@@ -62,6 +67,10 @@ javascript:
       - if @afterpay_method
         #afterpay.panel-afterpay.text-center.payment-selected.tab-pane role="tabpanel"
           = render 'checkout/v1/spree/checkout/payment/afterpay', spree_order: @order, afterpay_method: @afterpay_method
+
+      - if @quadpay_method
+        #quadpay.panel-quadpay.text-center.payment-selected.tab-pane role="tabpanel"
+          = render 'spree/checkout/payment/quadpay', spree_order: @order, quadpay_method: @quadpay_method
 
       - if @pay_pal_method
         #paypal.text-center.payment-selected.tab-pane role="tabpanel"
