@@ -6,6 +6,7 @@ module Forms
       include ::Reform::Form::ActiveModel::ModelReflections
       property :manual_order_data
       property :order_number,         validates: { presence: true}
+      property :line_item_number,     validates: { presence: true}
       property :item_price,           type: Numeric
       property :item_price_adjusted,  type: Numeric, validates: { presence: true}
       property :qty,                  type: Numeric
@@ -31,7 +32,8 @@ module Forms
       # Set by controller
       property :user,                 validates: {presence: true}
 
-      validates :order_number,  format: {with: /\A[^Rr]/, message: 'This looks like a regular Spree Order, this form is for Manual orders only.'}
+      # validates :order_number,  format: {with: /\A[^Rr]/, message: 'This looks like a regular Spree Order, this form is for Manual orders only.'}
+      validates :order_number,  format: {with: /[A-Z][0-9]*/, message: 'This looks like a regular Spree Order, this form is for Manual orders only.'}
 
       def qty
         super || 1

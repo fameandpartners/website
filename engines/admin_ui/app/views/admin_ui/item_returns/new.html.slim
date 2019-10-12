@@ -6,6 +6,7 @@
       = f.input :manual_order_data, input_html: { onpaste: 'prefillPastedManualReturn(this, event)', placeholder: 'Paste entire row from SpecialOrders spreadsheet here' }
       .hr-line-dashed
       = f.input :order_number
+      = f.input :line_item_number
       = f.input :requested_action,    collection: ReturnRequestItem::ACTIONS.map(&:titleize).zip(ReturnRequestItem::ACTIONS)
       = f.input :reason_category,     collection: ReturnRequestItem::REASON_CATEGORIES.sort
       = f.input :reason_sub_category, label: 'Reason' do

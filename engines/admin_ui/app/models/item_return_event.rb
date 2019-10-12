@@ -263,7 +263,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
   attr_accessible :manual_order_data
   event_type :manual_order_return do
-    attributes :manual_order_data, :order_number, :item_price, :item_price_adjusted, :qty, :requested_action, :reason_category,
+    attributes :manual_order_data, :order_number, :line_item_number, :item_price, :item_price_adjusted, :qty, :requested_action, :reason_category,
                :reason_sub_category, :request_notes, :contact_email, :product_name, :product_style_number,
                :product_colour, :product_size, :product_customisations, :order_payment_method,
                :order_paid_amount, :order_payment_date, :order_payment_ref, :order_paid_currency,
