@@ -1,7 +1,7 @@
 Spree::OrdersController.class_eval do
   include Marketing::Gtm::Controller::Order
   include Marketing::Gtm::Controller::Event
-  #before_action :load_quaypay_payment, only: [:quadpay_confirm, :quadpay_cancel]
+  before_filter :load_quaypay_payment, only: [:quadpay_confirm, :quadpay_cancel]  #源代码为before_action
   layout 'redesign/application', only: :show
 
   attr_reader :order

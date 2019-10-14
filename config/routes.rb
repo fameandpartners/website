@@ -13,7 +13,6 @@ FameAndPartners::Application.routes.draw do
   # Feed files redirections. They live above any `/us` + `/au` redirection
   ###################################################################
   get '/au/feeds/products/shopstyle.xml', to: 'marketing/feeds/shopstyle#au_feed'
-
   ########################
   # US Redirection to root
   ########################
@@ -277,6 +276,7 @@ FameAndPartners::Application.routes.draw do
   ############################################
 
   post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
+  post '/quadpay', :to => "spree/checkout#confirm_quad_pay", :as => :confirm_quad_pay_checkout
 
   # Guest checkout routes
   resources :payment_requests, only: [:new, :create]
