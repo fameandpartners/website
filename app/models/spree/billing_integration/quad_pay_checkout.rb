@@ -1,7 +1,8 @@
 require 'active_merchant/billing/quad_pay_api'
-
+# 暂时不需要
 class Spree::BillingIntegration::QuadPayCheckout < Spree::BillingIntegration
   include ActionView::Helpers::NumberHelper
+
 
   def configuration
     @configuration ||= quadpay_api.send_request('get', 'configuration', {})
@@ -58,7 +59,7 @@ class Spree::BillingIntegration::QuadPayCheckout < Spree::BillingIntegration
       messages = []
       messages << Spree.t(:quadpay_payment_not_found) unless @payment
       messages << Spree.t(:quadpay_order_not_found) unless @qp_order_id
-      ActiveMerchant::Billing::Response.new(false, {}, { 'message' => messages.join(' ') })g
+      ActiveMerchant::Billing::Response.new(false, {}, { 'message' => messages.join(' ') })
     end
   end
 
@@ -154,14 +155,16 @@ class Spree::BillingIntegration::QuadPayCheckout < Spree::BillingIntegration
   def actions
     %w{credit}
   end
+#Spree::Config.quad_pay_client_id,
+#Spree::Config.quad_pay_client_secret,
+#Spree::Config.quad_pay_test_mode
 
-  private
     def quadpay_api
       @quadpay_api ||=
         ActiveMerchant::Billing::QuadPayApi.new(
-          Spree::Config.quad_pay_client_id,
-          Spree::Config.quad_pay_client_secret,
-          Spree::Config.quad_pay_test_mode
+          ENV['CLIENT_ID'],
+          ENV['CLIENT_SECRET'],
+          ENV['QUADPAY_TEST_MODE']
         )
     end
 end
