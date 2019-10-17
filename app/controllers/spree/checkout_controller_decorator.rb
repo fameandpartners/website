@@ -278,65 +278,6 @@ Spree::CheckoutController.class_eval do
 
   #add from quadpay master
 
-
-
-  def confirm_quad_pay
-
-    items = current_order.line_items.map do |item|
-      {
-        :Name => item.product.name,
-        :Quantity => item.quantity,
-        :Amount => {
-          :currencyID => current_order.currency,
-          :value => item.price
-        },
-        :ItemCategory => "Physical"
-      }
-    end
-
-    tax_adjustments = current_order.adjustments.tax
-    shipping_adjustments = current_order.adjustments.shipping
-
-    current_order.adjustments.eligible.each do |adjustment|
-      next if (tax_adjustments + shipping_adjustments).include?(adjustment)
-      items << {
-        :Name => adjustment.label,
-        :Quantity => 1,
-        :Amount => {
-          :currencyID => current_order.currency,
-          :value => adjustment.amount
-        }
-      }
-    end
-
-    # Because PayPal doesn't accept $0 items at all.
-    # See #10
-    # https://cms.paypal.com/uk/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_ECCustomizing
-    # "It can be a positive or negative value but not zero."
-    items.reject! do |item|
-      item[:Amount][:value].zero?
-    end
-
-    payment_method = Spree::PaymentMethod.find(params[:payment_method_id])
-    @order = current_order
-    if !@order.nil? && payment_method && payment_method.kind_of?(Spree::Gateway::QuadpayPayment)
-      if qp_order = payment_method.create_order(@order)
-          if payment = @order.payments.valid.first
-            payment.update(response_code: qp_order['token'])
-            payment.quad_pay_orders.create(qp_order_id: qp_order['orderId'], qp_order_token: qp_order['token'])
-          end
-          current_order.save
-          redirect_to qp_order['redirectUrl']
-      else
-        flash[:error] = "Quapay failed."
-        redirect_to checkout_state_path(:payment)
-      end
-    else
-      flash[:error] = Spree.t(:quad_pay_checkout_error)
-      redirect_to checkout_state_path(:payment)
-    end
-  end
-
   private
   def object_params
     # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
@@ -468,11 +409,8 @@ Spree::CheckoutController.class_eval do
       method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
     @quad_pay_method = @order.available_payment_methods.detect do |method|
-      puts "dddddddd"
-      puts method.method_type
       method.method_type == 'quadpay' && current_site_version.currency == method.currency
     end
-    puts @quad_pay_method.as_json.to_s
   end
 
   helper_method :completion_route

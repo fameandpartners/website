@@ -8,7 +8,7 @@ module Spree
       #                 :preferred_password
 
       # Spree Gateway methods
-
+      #
       def auto_capture?
         true
       end
@@ -48,17 +48,19 @@ module Spree
       #   # TODO
       # end
       def configuration
-        @configuration ||= quadpay_api.send_request('get', 'configuration', {})
+        @configuration ||= quadpay_api.send_request_get( 'configuration', {})
       end
 
-      def create_order(order)
-        resp = quadpay_api.send_request('post', 'order', build_order_params(order))
-        return nil unless [200, 201].include?(resp.code)
-        resp['body']
+      def create_order(order, confirm_url, cancel_url, notify_url)
+        puts "kkkkkkkk"
+        puts confirm_url
+        puts cancel_url
+        puts notify_url
+        quadpay_api.send_request_post( 'order', build_order_params(order, confirm_url, cancel_url, notify_url))
       end
 
       def find_order(token)
-        quadpay_api.send_request('get', "order?token=#{token}", {})
+        quadpay_api.send_request_get( "order?token=#{token}", {})
       end
 
       def purchased
@@ -79,8 +81,7 @@ module Spree
         if @payment && @qp_order_id
           refund_id = "Refund-#{@payment.order.number}-#{@payment.number}-#{Time.current.strftime('%Y%m%d%H%M%S')}"
           resp =
-            quadpay_api.send_request(
-              'post',
+            quadpay_api.send_request_post(
               "order/#{@qp_order_id}/refund",
               options.reverse_merge({
                                       "requestId" => refund_id,
@@ -127,7 +128,7 @@ module Spree
         true
       end
 
-      def build_order_params(order)
+      def build_order_params(order, confirm_url, cancel_url, notify_url)
         billing_address = order.billing_address
         shipping_address = order.shipping_address
 
@@ -156,8 +157,9 @@ module Spree
           },
           'items': line_item_as_json(order),
           'merchant': {
-            'redirectConfirmUrl': "www.baidu.com",
-            'redirectCancelUrl': "www.baidu.com"
+            'redirectConfirmUrl': confirm_url,
+            'redirectCancelUrl': cancel_url,
+            "statusCallbackUrl": notify_url,
           },
           'merchantReference': order.number,
           'taxAmount': 0,
@@ -175,7 +177,7 @@ module Spree
         items =
           order.line_items.map do |line_item|
             {
-              #description: line_item.variant.descriptive_name,
+              description: "liulimingtest",
               name: line_item.variant.product.name,
               sku: line_item.variant.sku,
               quantity: line_item.quantity,

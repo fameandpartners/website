@@ -1,6 +1,6 @@
 Spree::Payment.class_eval do
 
-  has_many :quad_pay_orders
+  #has_many :quad_pay_orders
 
   def gateway_options
     options = { :email    => order.email,
@@ -26,5 +26,12 @@ Spree::Payment.class_eval do
     options.merge!(:description => "Order ##{gateway_order_id}")
 
     options
+  end
+
+  def quadpay_order
+    Spree::QuadpayOrder.where(qp_order_id: response_code).first
+  end
+  def set_response_code(res_code)
+    @response_code = res_code
   end
 end
