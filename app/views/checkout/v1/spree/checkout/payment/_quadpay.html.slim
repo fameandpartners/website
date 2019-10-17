@@ -25,7 +25,7 @@ h4
     .to-pay = single_installment_text
     .time-period Fortnightly
 p.hint Place your order and you will complete your purchase via the Quadpay pop-up.
-= link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'quadpay_button', alt: 'QuadPay', class: 'js-returns-abc-quadpay payment-cta btn btn-black btn-block btn-md' do
+= link_to quadpay_express_path(payment_method_id:@quad_pay_method.id), method: :post, id: 'quadpay_button', alt: 'QuadPay', class: 'js-returns-abc-quadpay payment-cta btn btn-black btn-block btn-md' do
     | Pay with QuadPay
     /=<> image_tag 'checkout/logo/quadpay-logo.svg'
 p.text-danger.hidden.quadpay-error Quadpay is not available at the moment. Please, try another payment method.
