@@ -6,34 +6,45 @@ namespace :quad_pay_tasks do
     #if qpm = qpms.first
     pid = payment_method.id
     qpms = quadpay_payments(pid)
-    qpms.each do |payment|
-      order = payment.order
-      token = payment.quadpay_order&.qp_order_token
-      next if token.nil?
-      quadpay_order = payment_method.find_order(token)#qpm.find_order(payment.response_code)
-      next if quadpay_order.nil?
-      puts quadpay_order.to_json
-      if quadpay_order.code == 200
-        case quadpay_order.body['orderStatus']
-        when 'Created'
-          # No action
-        when 'Approved'
-          payment.update(state: 'processing')
-          payment.complete!
-          # Force complete order
-          while order.next; end
-        when 'Declined'
-          make_payment_fail(payment)
-        when 'Abandoned'
-          make_payment_fail(payment)
-        else
-          make_payment_fail(payment) if payment.created_at < 15.minute.ago
-        end
-      else
-        make_payment_fail(payment) if payment.created_at < 15.minute.ago
-      end
-    end
-    #end
+
+    if qpms.nil?   then
+      puts "qpms is nil"
+    else
+        qpms.each do |payment|
+          order = payment.order
+          token = payment.quadpay_order&.qp_order_token
+          if token.nil? then
+            puts "token is nil order is = " + order.to_s
+          else
+            quadpay_order = payment_method.find_order(token)#qpm.find_order(payment.response_code)
+            #next if quadpay_order.nil?
+            if quadpay_order.nil? then
+              puts "quard pay order is nil, order = " + order.to_s
+            else
+              puts quadpay_order.to_json.to_s
+              if quadpay_order.code == 200
+                case quadpay_order.body['orderStatus']
+                when 'Created'
+                  # No action
+                when 'Approved'
+                  payment.update(state: 'processing')
+                  payment.complete!
+                  # Force complete order
+                  while order.next; end
+                when 'Declined'
+                  make_payment_fail(payment)
+                when 'Abandoned'
+                  make_payment_fail(payment)
+                else
+                  make_payment_fail(payment) if payment.created_at < 15.minute.ago #other status 15 minute before
+                end
+              else
+                make_payment_fail(payment) if payment.created_at < 15.minute.ago #if code!=200 15 minute before
+              end
+            end#if quardpay_order.nil?
+          end #if token nil
+      end#each do
+    end#if nil
   end
 
   def make_payment_fail(payment)
