@@ -38,6 +38,10 @@ module Spree
         'quadpay'
       end
 
+      def self.payment_method
+        Spree::PaymentMethod.where(:type => "Spree::Gateway::QuadpayPayment")&.first
+      end
+
       # Payment Actions
 
       # def purchase(amount, payment_source, options = {})
@@ -52,10 +56,6 @@ module Spree
       end
 
       def create_order(order, confirm_url, cancel_url, notify_url)
-        puts "kkkkkkkk"
-        puts confirm_url
-        puts cancel_url
-        puts notify_url
         quadpay_api.send_request_post( 'order', build_order_params(order, confirm_url, cancel_url, notify_url))
       end
 
