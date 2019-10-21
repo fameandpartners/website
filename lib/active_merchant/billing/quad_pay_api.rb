@@ -47,18 +47,19 @@ module ActiveMerchant
       end
 
       def send_request_get(path = '', body = {})
+        access_token
         base_url_str = "#{base_url}/#{path}"
         #uri = URI.parse("#{base_url}/#{path}")
-
         begin
-          response = RestClient.get(base_url_str, :content_type => "application/json", authorization=> "Bearer #{access_token}")
+        response = RestClient.get(base_url_str, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
         rescue RestClient::ExceptionWithResponse => e
-          response = Raven.capture_exception(e, extra: { url: url, body: body })
+          Raven.capture_exception(e, extra: { url: url, body: body })
+          response = nil
         end
-
-        unless response.nil?
-          json_obj = JSON.parse(response)
-          OpenStruct.new(json_obj)
+        if !response.nil?
+          JSON.parse(response)
+        else
+          nil
         end
       end
 
@@ -66,9 +67,12 @@ module ActiveMerchant
         access_token
         base_url_str = "#{base_url}/#{path}"
         #uri = URI.parse("#{base_url}/#{path}")
-
-        response = RestClient.post(base_url_str, body.to_json, :content_type => "application/json",  :accept => :json,:authorization => "Bearer #{@access_token}")
-
+        begin
+          response = RestClient.post(base_url_str, body.to_json, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
+        rescue RestClient::ExceptionWithResponse => e
+          Raven.capture_exception(e, extra: { url: url, body: body })
+          response = nil
+        end
         if !response.nil?
           JSON.parse(response)
         else
@@ -98,7 +102,7 @@ module ActiveMerchant
           grant_type: 'client_credentials',
           client_id: @client_id,
           client_secret: @client_secret,
-          audience:auth_audience,
+          audience: auth_audience,
         })
 
         unless response.nil?

@@ -40,6 +40,10 @@ module Spree
         'quadpay'
       end
 
+      def self.payment_method
+        Spree::PaymentMethod.where(:type => "Spree::Gateway::QuadpayPayment")&.first
+      end
+
       # Payment Actions
 
       # def purchase(amount, payment_source, options = {})
