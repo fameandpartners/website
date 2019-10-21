@@ -16,31 +16,33 @@ module ActiveMerchant
       def auth_end_point
         @auth_end_point ||=
           if @test_mode
-            'https://quadpay-dev.auth0.com/oauth/token'
-            #ENV['QUADPAY_TOKEN_URL']
+            # 'https://quadpay-dev.auth0.com/oauth/token'
+            ENV['QUADPAY_TOKEN_URL']
           else
             #'https://quadpay.auth0.com/oauth/token'
-            ENV['QUADPAY_TOKEN_URL']
+            ENV['QUADPAY_TOKEN_URL_PRODUCT']
           end
       end
 
       def auth_audience
         @auth_audience ||=
           if @test_mode
-            'https://auth-dev.quadpay.com'
+            # 'https://auth-dev.quadpay.com'
+            ENV['QUADPAY_AUDIENCE_URL']
           else
             #'https://auth.quadpay.com'
-            ENV['QUADPAY_AUDIENCE_URL']
+            ENV['QUADPAY_AUDIENCE_URL_PRODUCT']
           end
       end
 
       def base_url
         @base_url ||=
           if @test_mode
-            'https://api-ut.quadpay.com'
+            # 'https://api-ut.quadpay.com'
+            ENV['QUADPAY_API_URL']
           else
             #'https://api.quadpay.com'
-            ENV['QUADPAY_API_URL']
+            ENV['QUADPAY_API_URL_PRODUCT']
           end
       end
 
