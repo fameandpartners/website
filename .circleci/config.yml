@@ -161,33 +161,33 @@ jobs:
             fi
           when: on_fail
           
-      - run:
-          name: run autotest
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
-              cd /home/circleci/
-              git clone https://github.com/fameandpartners/FPWebsiteTest.git
-              sudo apt-get install python3-venv
-              sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
-              . /home/circleci/FPWebsiteTest/venv/bin/activate
-              sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
-              . /home/circleci/FPWebsiteTest/venv/bin/activate
-              chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-              sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-              deactivate
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              cd /home/circleci/
-              git clone https://github.com/fameandpartners/FPWebsiteTest.git
-              sudo apt-get install python3-venv
-              sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
-              . /home/circleci/FPWebsiteTest/venv/bin/activate
-              sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
-              . /home/circleci/FPWebsiteTest/venv/bin/activate
-              chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
-              sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
-              deactivate
-            fi
-          when: on_success
+      # - run:
+          # name: run autotest
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              # cd /home/circleci/
+              # git clone https://github.com/fameandpartners/FPWebsiteTest.git
+              # sudo apt-get install python3-venv
+              # sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+              # . /home/circleci/FPWebsiteTest/venv/bin/activate
+              # sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+              # . /home/circleci/FPWebsiteTest/venv/bin/activate
+              # chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+              # sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+              # deactivate
+            # elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              # cd /home/circleci/
+              # git clone https://github.com/fameandpartners/FPWebsiteTest.git
+              # sudo apt-get install python3-venv
+              # sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
+              # . /home/circleci/FPWebsiteTest/venv/bin/activate
+              # sudo /home/circleci/FPWebsiteTest/venv/bin/pip3 install -r /home/circleci/FPWebsiteTest/requirements.txt
+              # . /home/circleci/FPWebsiteTest/venv/bin/activate
+              # chmod 777 /home/circleci/FPWebsiteTest/apps/FPwebsiteTest/src/function/phantomjs
+              # sudo /home/circleci/FPWebsiteTest/venv/bin/python3 /home/circleci/FPWebsiteTest/testframework/TestCaseManager.py
+              # deactivate
+            # fi
+          # when: on_success
           
       # - save_cache:
           # paths:
@@ -195,36 +195,36 @@ jobs:
           # key: v1-dependencies-{{ checksum "/home/circleci/FPWebsiteTest/requirements.txt" }}
           # when: on_success
       
-      - run:
-          name: Send AutoTest Success Slack Notification
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
-              COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
-              COMMITUSER=`git log -1 --pretty=format:'%an'`
-              COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
-              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
-            fi
-          when: on_success
+      # - run:
+          # name: Send AutoTest Success Slack Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              # COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
+              # COMMITUSER=`git log -1 --pretty=format:'%an'`
+              # COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
+              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n ${COMMITMESSAGE}', 'mrkdwn': true, 'unfurl_links': false, 'attachments': [ { 'fallback': 'View commit at ${COMMITURL}', 'actions': [ { 'type': 'button', 'text': 'View', 'url': '${COMMITURL}' } ] } ] }" https://hooks.slack.com/services/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
+            # fi
+          # when: on_success
 
-      - run:
-          name: Send AutoTest Sentry Notification
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
-              # Alert Sentry about deploy
-              sentry_endpoint='https://app.getsentry.com/api/hooks'
-              curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
-              -X POST \
-              -H "Content-Type: application/json" \
-              -d "{\"version\": \"${CIRCLE_SHA1}\"}"
-            fi
+      # - run:
+          # name: Send AutoTest Sentry Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              # # Alert Sentry about deploy
+              # sentry_endpoint='https://app.getsentry.com/api/hooks'
+              # curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
+              # -X POST \
+              # -H "Content-Type: application/json" \
+              # -d "{\"version\": \"${CIRCLE_SHA1}\"}"
+            # fi
 
-      - run:
-          name: Send AutoTest Success Slack Notification
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
-              curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n AutoTest Failed'}" https://hooks.slack.com/services/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
-            fi
-          when: on_fail
+      # - run:
+          # name: Send AutoTest Success Slack Notification
+          # command: |
+            # if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              # curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n AutoTest Failed'}" https://hooks.slack.com/services/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
+            # fi
+          # when: on_fail
       
       - run:
           name: Start test
