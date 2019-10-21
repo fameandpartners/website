@@ -177,7 +177,7 @@ jobs:
               deactivate
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
               cd /home/circleci/
-              git clone -b qa4 https://github.com/fameandpartners/FPWebsiteTest.git
+              git clone https://github.com/fameandpartners/FPWebsiteTest.git
               sudo apt-get install python3-venv
               sudo python3 -m venv /home/circleci/FPWebsiteTest/venv
               . /home/circleci/FPWebsiteTest/venv/bin/activate
@@ -225,5 +225,16 @@ jobs:
               curl -X POST -H 'Content-type: application/json' --data "{'text':'*Spree (${CIRCLE_BRANCH}) : ${COMMITUSER}* \n AutoTest Failed'}" https://hooks.slack.com/services/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
             fi
           when: on_fail
+      
+      - run:
+          name: Start test
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+              COMMITMESSAGE=`git log --format="%s" -n 1 $CIRCLE_SHA1`
+              COMMITUSER=`git log -1 --pretty=format:'%an'`
+              COMMITURL="https://github.com/fameandpartners/website/commit/${CIRCLE_SHA1}"
+              curl -X POST https://1880671636622620.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTest/
+            fi
+          when: on_success
 
 
