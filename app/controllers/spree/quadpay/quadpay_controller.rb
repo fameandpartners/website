@@ -78,24 +78,29 @@ module Spree
 
       def confirm
         puts "tttttttttttt"
-        puts params.to_s
-        if @quadpay_order.body['orderStatus'] == 'Approved'
-          @payment.complete!
-          # Force complete order
-          while @order.next; end
-
-          if @order.completed?
-            @current_order = nil
-            flash['order_completed'] = true
-            flash[:notice] = "#{Spree.t(:quadpay_payment_success)} #{Spree.t(:order_processed_successfully)}"
-            return go_to_order_page
-          else
-            flash[:error] = Spree.t(:quadpay_payment_fail, number: @order.number)
-            return redirect_to checkout_state_path(@order.state)
-          end
-        else
-          flash[:error] = Spree.t(:quadpay_payment_fail, number: @order.number)
-        end
+        # order = @current_order
+        # payment = Spree::Payment.find(order.payments.first)
+        # if payment.body['state'] == 'completed'
+        #
+        # end
+        #
+        # if @quadpay_order.body['orderStatus'] == 'Approved'
+        #   @payment.complete!
+        #   # Force complete order
+        #   while @order.next; end
+        #
+        #   if @order.completed?
+        #     @current_order = nil
+        #     flash['order_completed'] = true
+        #     flash[:notice] = "#{Spree.t(:quadpay_payment_success)} #{Spree.t(:order_processed_successfully)}"
+        #     return go_to_order_page
+        #   else
+        #     flash[:error] = Spree.t(:quadpay_payment_fail, number: @order.number)
+        #     return redirect_to checkout_state_path(@order.state)
+        #   end
+        # else
+        #   flash[:error] = Spree.t(:quadpay_payment_fail, number: @order.number)
+        # end
         return go_to_order_page
       end
 
