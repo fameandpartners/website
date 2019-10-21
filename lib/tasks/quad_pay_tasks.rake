@@ -6,10 +6,13 @@ namespace :quad_pay_tasks do
     #if qpm = qpms.first
     pid = payment_method.id
     qpms = quadpay_payments(pid)
+    qpms = qpms.to_a
 
     if qpms.nil?   then
       puts "qpms is nil"
     else
+       puts "qpms count = " + qpms.count.to_s
+
         qpms.each do |payment|
           order = payment.order
           token = payment.quadpay_order&.qp_order_token
@@ -59,4 +62,13 @@ namespace :quad_pay_tasks do
       where('spree_payments.state not IN (?)', %w(failed completed)).
       where('spree_payments.created_at >= ?', 10.days.ago)
   end
+
+  #def quad_pay_payments(qpms)
+  #  Spree::Payment.
+  #    where(payment_method_id: qpms.ids).
+  #    joins(:order).
+  #    where.not('spree_payments.state IN (?)', %w(failed completed)).
+  #    where('spree_payments.created_at >= ?', 15.minutes.ago)
+  #  end
+
 end
