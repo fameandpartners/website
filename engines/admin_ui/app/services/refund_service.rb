@@ -32,6 +32,8 @@ class RefundService
       response[:status] == "succeeded"
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       response.success?
+    elsif gateway.type == "Spree::Gateway::QuadpayPayment"
+      response.success?
     end
   end
 
@@ -49,6 +51,9 @@ class RefundService
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       item_return.refund_ref    = response.RefundTransactionID
       item_return.refunded_at   = Time.now
+    elsif gateway.type == "Spree::Gateway::QuadpayPayment"
+      item_return.refund_ref    = response[:message][:id]
+      item_return.refunded_at   = Time.now
     end
 
     item_return.save!
@@ -64,6 +69,8 @@ class RefundService
 
   def send_refund_request
     if gateway.type == "Spree::Gateway::PayPalExpress"
+      gateway.refund_reparam(@refund_data['refund_amount'], item_return)
+    elsif gateway.type == "Spree::Gateway::QuadpayPayment"
       gateway.refund_reparam(@refund_data['refund_amount'], item_return)
     else
       gateway.refund(refund_amount, item_return.order_payment_ref)

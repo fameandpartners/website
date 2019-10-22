@@ -75,8 +75,8 @@ module Spree
         ActiveMerchant::Billing::Response.new(true, {})
       end
 
-      def refund(money, response, options = {})
-        @payment = Spree::Payment.find_by(response_code: response)
+      def refund_reparam(money, item_return, options = {})
+        @payment = Spree::Payment.find_by_order_id(item_return.line_item.order.id)
         @qp_order_id = @payment.quad_pay_orders.last.try(:qp_order_id) if @payment
         if @payment && @qp_order_id
           refund_id = "Refund-#{@payment.order.number}-#{@payment.number}-#{Time.current.strftime('%Y%m%d%H%M%S')}"
