@@ -47,8 +47,8 @@ module Spree
     end
 
     def quadpay_widget(amount:, future_order_total:)
-      min_amount = Spree::Config.quad_pay_min_amount.to_f
-      max_amount = Spree::Config.quad_pay_max_amount.to_f
+      min_amount = 35#Spree::Config.quad_pay_min_amount.to_f
+      max_amount = 2000#Spree::Config.quad_pay_max_amount.to_f
 
       installment_amount = (amount / 4.0 * 100).to_i / 100.0
       widget_url = quadpay_widget_url
@@ -83,7 +83,8 @@ module Spree
     end
 
     def quadpay_widget_url
-      "#{QUADPAY_WIDGET_URL_BASE}/#{Spree::Config.quad_pay_merchant_name}/quadpay-widget-1.0.1.js"
+      #"#{QUADPAY_WIDGET_URL_BASE}/#{Spree::Config.quad_pay_merchant_name}/quadpay-widget-1.0.1.js"
+      "#{QUADPAY_WIDGET_URL_BASE}/fameandpartner/quadpay-widget-2.3.3.js"
     end
   end
 end

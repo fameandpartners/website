@@ -36,7 +36,7 @@ javascript:
       - if @quad_pay_method
         li.payment-option
           a data-toggle="tab" href="#quadpay" aria-controls="quadpay" role="tab"
-            i.icon.icon-afterpay-symbol
+            i.icon.icon-quadpay = image_tag 'checkout/logo/quadpay-logo.svg'
             | Quadpay
       - if @pay_pal_method
         li.payment-option
@@ -82,7 +82,7 @@ javascript:
           p.hint Place your order and you will complete your purchase via the Paypal.
           = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'js-returns-abc-paypal payment-cta btn btn-black btn-block btn-md' do
             | Pay with
-             =<> image_tag('checkout/logo/paypal-logo-white.png')
+            =<> image_tag('checkout/logo/paypal-logo-white.png')
 
       /- if @quad_pay_method
         #quadpay.text-center.payment-selected.tab-pane role="tabpanel"
