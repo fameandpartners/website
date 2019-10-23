@@ -1,6 +1,8 @@
 module Spree
   class Gateway
     class QuadpayPayment < PaymentMethod
+      include ActionView::Helpers::NumberHelper
+      # include Spree::Order
       # preference :username, :string, default: ''
       # preference :password, :string, default: ''
       #
@@ -59,8 +61,8 @@ module Spree
         quadpay_api.send_request_post( 'order', build_order_params(order, confirm_url, cancel_url, notify_url))
       end
 
-      def find_order(token)
-        quadpay_api.send_request_get( "order?token=#{token}", {})
+      def find_order(order_id)
+        quadpay_api.send_request_get( "order/#{order_id}", {})
       end
 
       def purchased
@@ -131,14 +133,15 @@ module Spree
       def build_order_params(order, confirm_url, cancel_url, notify_url)
         billing_address = order.billing_address
         shipping_address = order.shipping_address
-
-        {
+        puts "ttttttttttttttttttt   tax_total"
+        puts order.tax_total
+        qp_order_params = {
           'description': "Order ##{order.number}",
-          'amount': 1000,
+          'amount': number_to_currency(order.total.to_f, unit: ''),
           'consumer': {
             'phoneNumber': billing_address.phone,
-            'givenNames': "liuliming",
-            'surname': "liuliming",
+            'givenNames': billing_address.firstname,
+            'surname': billing_address.lastname,
             'email': order.email
           },
           'billing': {
@@ -162,9 +165,11 @@ module Spree
             "statusCallbackUrl": notify_url,
           },
           'merchantReference': order.number,
-          'taxAmount': 0,
-          'shippingAmount': 100
+          'taxAmount':  number_to_currency(order.tax_total, unit: ''),
+          'shippingAmount': number_to_currency(order.shipment_total, unit: '')
         }
+        puts "build params:" + qp_order_params.to_s
+        qp_order_params
       end
 
       def site_url
@@ -205,12 +210,18 @@ module Spree
       #Spree::Config.quad_pay_test_mode
 
       def quadpay_api
-        @quadpay_api ||=
+        if ENV['QUADPAY_TEST_MODE']
           ActiveMerchant::Billing::QuadPayApi.new(
             ENV['CLIENT_ID'],
             ENV['CLIENT_SECRET'],
-            ENV['QUADPAY_TEST_MODE']
-          )
+            ENV['QUADPAY_TEST_MODE'])
+        else
+          ActiveMerchant::Billing::QuadPayApi.new(
+            ENV['CLIENT_ID_PRODUCT'],
+            ENV['CLIENT_SECRET_PRODUCT'],
+            false)
+        end
+
       end
     end
   end

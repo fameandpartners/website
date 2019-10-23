@@ -16,31 +16,33 @@ module ActiveMerchant
       def auth_end_point
         @auth_end_point ||=
           if @test_mode
-            'https://quadpay-dev.auth0.com/oauth/token'
-            #ENV['QUADPAY_TOKEN_URL']
+            # 'https://quadpay-dev.auth0.com/oauth/token'
+            ENV['QUADPAY_TOKEN_URL']
           else
             #'https://quadpay.auth0.com/oauth/token'
-            ENV['QUADPAY_TOKEN_URL']
+            ENV['QUADPAY_TOKEN_URL_PRODUCT']
           end
       end
 
       def auth_audience
         @auth_audience ||=
           if @test_mode
-            'https://auth-dev.quadpay.com'
+            # 'https://auth-dev.quadpay.com'
+            ENV['QUADPAY_AUDIENCE_URL']
           else
             #'https://auth.quadpay.com'
-            ENV['QUADPAY_AUDIENCE_URL']
+            ENV['QUADPAY_AUDIENCE_URL_PRODUCT']
           end
       end
 
       def base_url
         @base_url ||=
           if @test_mode
-            'https://api-ut.quadpay.com'
+            # 'https://api-ut.quadpay.com'
+            ENV['QUADPAY_API_URL']
           else
             #'https://api.quadpay.com'
-            ENV['QUADPAY_API_URL']
+            ENV['QUADPAY_API_URL_PRODUCT']
           end
       end
 
@@ -51,7 +53,7 @@ module ActiveMerchant
         begin
         response = RestClient.get(base_url_str, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
         rescue RestClient::ExceptionWithResponse => e
-          Raven.capture_exception(e, extra: { url: url, body: body })
+          Raven.capture_exception(e, extra: { url: base_url_str, body: body })
           response = nil
         end
         if !response.nil?
@@ -68,7 +70,7 @@ module ActiveMerchant
         begin
           response = RestClient.post(base_url_str, body.to_json, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
         rescue RestClient::ExceptionWithResponse => e
-          Raven.capture_exception(e, extra: { url: url, body: body })
+          Raven.capture_exception(e, extra: { url: base_url_str, body: body })
           response = nil
         end
         if !response.nil?
