@@ -53,7 +53,7 @@ module ActiveMerchant
         begin
         response = RestClient.get(base_url_str, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
         rescue RestClient::ExceptionWithResponse => e
-          Raven.capture_exception(e, extra: { url: url, body: body })
+          Raven.capture_exception(e, extra: { url: base_url_str, body: body })
           response = nil
         end
         if !response.nil?
@@ -70,7 +70,7 @@ module ActiveMerchant
         begin
           response = RestClient.post(base_url_str, body.to_json, :content_type => "application/json", :accept => :json, :authorization => "Bearer #{@access_token}")
         rescue RestClient::ExceptionWithResponse => e
-          Raven.capture_exception(e, extra: { url: url, body: body })
+          Raven.capture_exception(e, extra: { url: base_url_str, body: body })
           response = nil
         end
         if !response.nil?

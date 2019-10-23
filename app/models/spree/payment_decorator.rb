@@ -30,6 +30,23 @@ Spree::Payment.class_eval do
   end
 
   def quadpay_order
-    Spree::QuadpayOrder.where(qp_order_id: response_code)&.first
+    if response_code && !response_code.blank?
+      Spree::QuadpayOrder.where(qp_order_id: response_code)&.first
+    elsif source_type == "Spree::QuadpayOrder" && source_id
+      qp_order = Spree::QuadpayOrder.find(source_id)
+      if qp_order
+        update_attributes({:response_code => qp_order.qp_order_id}, :without_protection => true)
+      end
+    else
+      nil
+    end
+  end
+  def update_qp_order_id
+    if (!response_code || response_code.blank?) && source_type == "Spree::QuadpayOrder" && source_id
+      qp_order = Spree::QuadpayOrder.find(source_id)
+      if qp_order
+        update_attributes({:response_code => qp_order.qp_order_id}, :without_protection => true)
+      end
+    end
   end
 end

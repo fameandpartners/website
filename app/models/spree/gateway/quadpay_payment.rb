@@ -62,7 +62,7 @@ module Spree
       end
 
       def find_order(order_id)
-        quadpay_api.send_request_get( "order/=#{order_id}", {})
+        quadpay_api.send_request_get( "order/#{order_id}", {})
       end
 
       def purchased
@@ -135,7 +135,7 @@ module Spree
         shipping_address = order.shipping_address
         puts "ttttttttttttttttttt   tax_total"
         puts order.tax_total
-        {
+        qp_order_params = {
           'description': "Order ##{order.number}",
           'amount': number_to_currency(order.total.to_f, unit: ''),
           'consumer': {
@@ -168,6 +168,8 @@ module Spree
           'taxAmount':  number_to_currency(order.tax_total, unit: ''),
           'shippingAmount': number_to_currency(order.shipment_total, unit: '')
         }
+        puts "build params:" + qp_order_params.to_s
+        qp_order_params
       end
 
       def site_url
