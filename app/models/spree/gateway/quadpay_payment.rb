@@ -79,9 +79,11 @@ module Spree
 
       def refund_reparam(money, item_return, options = {})
         @payment = Spree::Payment.find_by_order_id(item_return.line_item.order.id)
-        @qp_order_id = @payment.quad_pay_orders.last.try(:qp_order_id) if @payment
+        @qp_order_id = @payment&.quadpay_order.qp_order_id
         if @payment && @qp_order_id
-          refund_id = "Refund-#{@payment.order.number}-#{@payment.number}-#{Time.current.strftime('%Y%m%d%H%M%S')}"
+          refund_id = "Refund-#{@payment.order.number}-#{@payment.id}-#{Time.current.strftime('%Y%m%d%H%M%S')}"
+          puts "refund_id: " + refund_id.to_s
+
           resp =
             quadpay_api.send_request_post(
               "order/#{@qp_order_id}/refund",
@@ -91,15 +93,18 @@ module Spree
                                       "amount" => number_to_currency(money, unit: '')
                                     })
             )
+          puts "resp:" + resp.to_s
+
 
           ab_rsp =
             ActiveMerchant::Billing::Response.new(
-              resp.code == 200,
-              { message: resp['body']['msg'] },
+              true,
+              'Quadpay Gateway: success',
+              {:qp_order_id => @qp_order_id},
               authorization: refund_id
             )
-
-          @payment.log_entries.create(details: ab_rsp.to_yaml)
+          puts "resp:" + ab_rsp.to_s
+          @payment.log_entries.create({details: ab_rsp.to_yaml}, :without_protection => true)
           ab_rsp #return
         else
           messages = []
