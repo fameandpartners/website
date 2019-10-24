@@ -86,8 +86,8 @@ h4
   .payment.col-xs-12
     .to-pay = single_installment_text
     .time-period Fortnightly
-p.hint Place your order and you will complete your purchase via the Quadpay pop-up.
 = render "checkout/v1/spree/checkout/quadpay_widget"
+p.hint Place your order and you will complete your purchase via the Quadpay pop-up.
 = link_to quadpay_express_path(payment_method_id:@quad_pay_method.id), method: :post, id: 'quadpay_button', alt: 'QuadPay', class: 'js-returns-abc-quadpay payment-cta btn btn-black btn-block btn-md' do
     | Pay with
     =<> image_tag 'checkout/logo/quadpay-white-logo.svg'
