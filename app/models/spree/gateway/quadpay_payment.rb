@@ -182,7 +182,7 @@ module Spree
         items =
           order.line_items.map do |line_item|
             {
-              description: "liulimingtest",
+              description: 'test',
               name: line_item.variant.product.name,
               sku: line_item.variant.sku,
               quantity: line_item.quantity,
