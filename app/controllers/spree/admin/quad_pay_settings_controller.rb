@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class QuadPaySettingsController < Spree::Admin::BaseController
-      include Spree::Backend::Callbacks
+      #include Spree::Backend::Callbacks
 
       def edit
         @preferences_security = [
