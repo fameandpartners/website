@@ -85,5 +85,91 @@ module Spree
     def quadpay_widget_url
       "#{QUADPAY_WIDGET_URL_BASE}/#{Spree::Config.quad_pay_merchant_name}/quadpay-widget-1.0.1.js"
     end
+
+    #####################################################################################
+    def self.complete_order_and_payment(payment, order, need_update_personal_info)
+      puts "complete payment: " + (payment.id.nil? ? "" : payment.id.to_s)
+      puts "payment state: " + payment.state.to_s
+      update_order_steps(order,need_update_personal_info)
+      puts "payment:" + payment.id.to_s + " response code1:" + (payment.response_code.nil? ? "" : payment.response_code)
+      payment.update_qp_order_id
+      if payment.state != "completed"
+        payment.complete!
+      end
+      puts "payment:" + payment.id.to_s + " response code2:" + (payment.response_code.nil? ? "" : payment.response_code)
+
+      #@order.next
+      # 强制完成
+      if order.state != "complete"
+        order.completed_at = Time.now.utc.to_s
+        order.state = "complete"
+        order.save!
+      end
+      puts "payment:" + payment.id.to_s + " response code3:" + (payment.response_code.nil? ? "" : payment.response_code)
+      if order.completed?
+        OrderBotWorker.perform_async(order.id)
+        true
+      else
+        false
+      end
+    end
+
+    def self.update_order_steps(order, need_update_personal_info)
+      if need_update_personal_info # 'personal'
+        update_order_personal_info(order)
+      end
+
+      if !order.has_checkout_step?("address") || order.bill_address.blank? || order.shipping_address.blank?
+        update_order_addresses(order)
+      end
+
+      order.state = 'payment'
+      order.save
+    end
+
+    protected
+    def self.update_order_personal_info(order)
+      user = order.user
+      if user.nil?
+        build_user(order)
+      end
+
+      complete_order_step(order, 'cart')
+    end
+
+    # populate shipping/billing with paypal info, in case of 'cart checkout' / 'checkout from page'
+    def self.update_order_addresses(order)
+      if order.bill_address.blank? && !order.shipping_address.blank?
+        order.bill_address = order.shipping_address
+        complete_order_step(order, 'address')
+      end
+    end
+
+    # state machine states have
+    def self.complete_order_step(order, order_step)
+      original_state = order.state
+      order.state = order_step
+
+      if !order.next
+        order.state = original_state
+        order.save(validate: false) # store data from paypal. user will be redirect to 'personal' tab
+      end
+    end
+
+    private
+    def self.build_user(order)
+      if order
+        Spree::User.new(
+          email: order.email,
+          first_name: order.shipping_address.firstname,
+          last_name: order.shipping_address.lastname,
+          password: order.number,
+          password_confirmation: order.number
+        )
+      else
+        Spree::User.new()
+      end
+    end
+
   end
 end

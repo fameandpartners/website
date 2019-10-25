@@ -38,6 +38,7 @@ Spree::Payment.class_eval do
         update_attributes({:response_code => qp_order.qp_order_id}, :without_protection => true)
         qp_order
       end
+      qp_order
     else
       nil
     end
