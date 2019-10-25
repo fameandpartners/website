@@ -420,8 +420,7 @@ module Api
             afterPay: current_site_version.is_australia?
           },
           siteVersionInfo:{
-            is_au: current_site_version.is_australia?,
-            is_us: current_site_version.is_usa?
+            localisationCode: current_site_version.code
           },
           size: {
             minHeightCm: MIN_CM,
