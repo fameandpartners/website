@@ -186,7 +186,7 @@ module Spree
               name: line_item.variant.product.name,
               sku: line_item.variant.sku,
               quantity: line_item.quantity,
-              price: 1000
+              price: number_to_currency(line_item.price, unit: '')
             }
           end
 
